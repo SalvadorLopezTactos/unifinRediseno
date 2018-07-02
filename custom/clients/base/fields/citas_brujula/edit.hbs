@@ -1,0 +1,342 @@
+<style>
+    .popup {
+        margin-left: 0%;
+        width: 80%;
+        border-style: groove;
+        position: absolute;
+        top: auto;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-weight: bold;
+        z-index: 2;
+    }
+
+    .popuptables {
+        margin-left: 2%;
+        margin-top: 2%;
+        border-collapse: separate;
+        border-spacing: 5px;
+        width: auto;
+    }
+
+    .popUpfields{
+        margin-bottom: 0px;
+        width: 100%;
+    }
+</style>
+
+<div class="popup" style="display:{{popupdisplay}};">
+    <table class="popuptables">
+        <tr>
+            <td width="20%">Cliente</td><td width="5%">Duracion</td><td width="5%">Traslado</td><td width="3%">Hora</td><td width="1%">Referenciada</td><td width="10%">Acompañante</td><td width="10%">Objetivo</td><td width="10%">Estatus</td><td width="10%">Resultado</td>
+        </tr>
+        <tr>
+            <td>
+                <input class="popUpfields" type="text" id="search_clientes"></input>
+            </td>
+            <td>
+                <input style="width: 80%; text-align:right;" id="nuevo_duracion" placeholder="(minutos)" value="" >
+            </td>
+            <td>
+                <input style="width: 80%; text-align:right;" id="nuevo_traslado" placeholder="(minutos)" value="" >
+            </td>
+
+            <td>
+                <input type="text" class="span2" placeholder="hh:mm" id="hora_cita" rel="timepicker" style="width: 118%;">
+            </td>
+
+            <td>
+                <input style="width: 80%;" id="nuevo_referenciada" type="checkbox" value="">
+            </td>
+            <td>
+                <input class="nuevo_acompanante popUpfields" type="text" value="">
+            </td>
+            <td>
+                <select class="popUpfields" id="nuevo_objetivo" value="">
+                    {{{objetivo}}}
+                </select>
+            </td>
+            <td>
+                <select class="popUpfields" id="nuevo_estatus" value="">
+                    {{{estatus}}}
+                </select>
+            </td>
+            <td>
+                <select class="popUpfields" id="nuevo_resultado" value="">
+                    {{{resultado}}}
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="6"></td>
+            <td>
+                <a id="agregar_cita_btn" class="btn btn-success" style="width: 80px;height: 15px;" >Agregar Cita</a>
+            </td>
+
+            <td>
+                <a id="cancelar_cita_btn" class="btn btn-danger" style="width: 50px;height: 15px;" >Cancelar</a>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        $('#hora_cita').timepicker();
+
+        $(function () {
+            $(".popup").draggable();
+        });
+
+        $("#cancelar_cita_btn").on("click", function () {
+
+            $("#search_clientes").val(""),
+            $("#nuevo_duracion").val(""),
+            $("#nuevo_traslado").val(""),
+            $("#nuevo_referenciada").val(""),
+            $("#nuevo_acompanante").val(""),
+            $("#nuevo_objetivo").val(""),
+            $("#nuevo_estatus").val(""),
+            $("#nuevo_resultado").val(""),
+            $(".popup").hide("explode");
+        });
+
+        $( "#add_btn" ).on( "click", function() {
+            $("#nuevo_estatus").change();
+            $( ".popup" ).show();
+        });
+
+
+        $("#search_clientes").select2({
+            dropdownCssClass: 'select2-inherit-width',
+            dropdownAutoWidth : true,
+            width: '100%',
+            containerCssClass: 'select2-inherit-width',
+            allowClear: true,
+
+            ajax: {
+
+                transport: function(params){
+                    params.beforeSend = function(request){
+                        request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    };
+                    return $.ajax(params);
+                },
+
+                type: "GET",
+                url: function (params) {
+                    return "rest/v10/Accounts/filter?filter[0][name][$starts]=" + params;
+                },
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                results: function (data, params) {
+
+                    params.page = params.page || 1;
+
+                    var newData = [];
+                    _.each(data.records, function (item) {
+                        newData.push({
+                            id: item.id,  //id part present in data
+                            text: item.name  //string to be displayed
+                        });
+                    });
+
+                    return { results: newData };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            minimumInputLength: 1,
+        });
+
+        $(".nuevo_acompanante").select2({
+            dropdownCssClass: 'select2-inherit-width',
+            dropdownAutoWidth : true,
+            width: '100%',
+            containerCssClass: 'select2-inherit-width',
+            allowClear: true,
+
+            ajax: {
+
+                transport: function(params){
+                    params.beforeSend = function(request){
+                        request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    };
+                    return $.ajax(params);
+                },
+
+                type: "GET",
+                url: function (params) {
+                    return "rest/v10/Users/filter?filter[0][$and][0][status]" +
+                            "[$not_equals]=Inactive&filter[0][$and][1][$or][0][first_name]" +
+                            "[$starts]=" + params +
+                            "&filter[0][$and][1][$or][1][last_name]" +
+                            "[$starts]=" + params +
+                            "&fields=id,full_name&max_num=5";
+                },
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                results: function (data, params) {
+
+                    params.page = params.page || 1;
+
+                    var newData = [];
+                    _.each(data.records, function (item) {
+                        newData.push({
+                            id: item.id,  //id part present in data
+                            text: item.full_name  //string to be displayed
+                        });
+                    });
+
+                    return { results: newData };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            minimumInputLength: 1,
+        });
+
+
+        $(".edit_acompanante").select2({
+            dropdownCssClass: 'select2-inherit-width',
+            dropdownAutoWidth : true,
+            width: 'auto',
+            containerCssClass: 'select2-inherit-width',
+            allowClear: true,
+
+            ajax: {
+
+                transport: function(params){
+                    params.beforeSend = function(request){
+                        request.setRequestHeader("OAuth-Token", SUGAR.App.api.getOAuthToken());
+                    };
+                    return $.ajax(params);
+                },
+
+                type: "GET",
+                url: function (params) {
+                    return "rest/v10/Users/filter?filter[0][$and][0][status]" +
+                            "[$not_equals]=Inactive&filter[0][$and][1][$or][0][first_name]" +
+                            "[$starts]=" + params +
+                            "&filter[0][$and][1][$or][1][last_name]" +
+                            "[$starts]=" + params +
+                            "&fields=id,full_name&max_num=5";
+                },
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                results: function (data, params) {
+
+                    params.page = params.page || 1;
+
+                    var newData = [];
+                    _.each(data.records, function (item) {
+                        newData.push({
+                            id: item.id,  //id part present in data
+                            text: item.full_name  //string to be displayed
+                        });
+                    });
+
+                    return { results: newData };
+                },
+                cache: true
+            },
+            escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+            minimumInputLength: 1,
+        });
+    </script>
+</div>
+
+<table class="citas_main_table table-bordered table-striped" align="center" width="100%" style="border: solid lightblue;" cellspacing="1" cellpadding="5">
+    <tr>
+        <th colspan="9" style="background-color: #000042">
+            <span style="color: white">CITAS</span>
+        </th>
+    </tr>
+
+    <tr>
+        <th width="20%">Cliente</th>
+        <th width="15%">Duracion (minutos)</th>
+        <th width="15%">Traslado (minutos)</th>
+        <th width="10%">Referenciada</th>
+        <th width="10%">Acompañante</th>
+        <th width="10%">Objetivo</th>
+        <th width="10%">Estatus</th>
+        <th width="10%">Resultado</th>
+        <th width="1%"></th>
+    </tr>
+
+    {{#each citas}}
+    <tr id="{{this.id}}">
+        <td width="20%" >{{this.parent_name}}
+            <input type="hidden" value="{{this.parent_id}}">
+        </td>
+        <td width="15%" >
+            <input id="duration_minutes{{this.id}}" class="duration_minutes" value="{{this.duration_minutes}}" style="width: 40px; text-align:right;"/>
+        </td>
+        <td width="15%" >
+            <input id="nuevo_traslado{{this.id}}" class="traslado_edit" value="{{this.nuevo_traslado}}" style="width: 40px; text-align:right;"/>
+        </td>
+        <td width="10%" >
+            <input class="referenciada_check" id="referenciada_edit" type="checkbox" value="{{this.nuevo_referenciada}}" {{this.nuevo_referenciada}}></input>
+        </td>
+        <td width="20%" ><span class="removerUsuario icon-remove"></span>
+            <a class="edit_acompanante_link">{{this.nuevo_acompanante}}</a>
+            <input class="edit_acompanante" type="text" style="display: none;">
+            <input type="hidden" value="{{this.nuevo_acompanante_id}}">
+        </td>
+        <td width="10%" >
+            <select id="nuevo_objetivo{{this.id}}" class="objetivo_list" style="width: 134px;">
+                {{#select this.nuevo_objetivo}}
+                    {{{../../objetivo}}}
+                {{/select}}
+            </select>
+        </td>
+        <td width="10%" >
+            <select id="nuevo_estatus{{this.id}}" class="estatus_cita" style="width: 134px;">
+                {{#select this.nuevo_estatus}}
+                    {{{../../estatus}}}
+                {{/select}}
+            </select>
+        </td>
+        <td width="10%" >
+            <select class="resultado_list" id="resultado{{this.id}}">
+                {{#select this.nuevo_resultado}}
+                    {{{../../resultado}}}
+                {{/select}}
+            </select>
+        </td>
+        <td width="1%"  id="{{this.id}}">
+            <a class="btn remove_btn"><i class="fa fa-minus"></i></a>
+        </td>
+    </tr>
+    {{/each}}
+
+</table>
+<!--
+<table  align="center" width="100%" cellspacing="1" cellpadding="5">
+    <tr>
+        <td width="80%" ></td>
+        <td width="10%" >
+            <a id="add_btn" class="btn" style="width: 30px;" ><i class="fa fa-plus"></i></a>
+        </td>
+    </tr>
+</table>
+-->
+

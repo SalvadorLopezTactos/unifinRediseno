@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:c0f3d835-222f-3c35-2202-5a662a636061
+ORGANIZER;CN=Sandra Munguia Galvez:smunguia@unifin.com.mx
+DTSTART:20180123T180000Z
+DTEND:20180123T181500Z
+DTSTAMP:20180122T181700Z
+SUMMARY:Presentación Emilio Soto
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

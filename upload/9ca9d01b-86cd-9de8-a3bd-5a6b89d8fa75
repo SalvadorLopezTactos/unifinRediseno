@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:9ca9d01b-86cd-9de8-a3bd-5a6b89d8fa75
+ORGANIZER;CN=Genette Herrera Belloso:genette.herrera@unifin.com.mx
+DTSTART:20180206T170000Z
+DTEND:20180206T181500Z
+DTSTAMP:20180126T200400Z
+SUMMARY:Presentacion
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

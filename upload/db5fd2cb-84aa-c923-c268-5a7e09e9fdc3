@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:db5fd2cb-84aa-c923-c268-5a7e09e9fdc3
+ORGANIZER;CN=Ana Rocio Navarro Rojas:rnavarro@unifin.com.mx
+DTSTART:20180215T150000Z
+DTEND:20180216T000000Z
+DTSTAMP:20180209T204900Z
+SUMMARY:Visita Ocular
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

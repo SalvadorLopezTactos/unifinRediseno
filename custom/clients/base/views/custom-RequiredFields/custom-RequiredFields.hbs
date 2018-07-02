@@ -1,0 +1,40 @@
+<style>
+    .notificationsContainer{
+        padding-top: 5%;
+    }
+
+    #enviar{
+        margin-top: 10%;
+    }
+
+    #cancelarDrawer{
+        margin-top: 10%;
+    }
+    #title{
+        font-weight: bold !important;;
+    }
+</style>
+
+<div class="notificationsContainer">
+    <table align="center">
+        <tr>
+            <th>
+                <h1 id="title">Campos Requeridos para {{relatedAcctName}} en relaciones activas {{relaciones_activas}} </h1>
+            </th>
+        </tr>
+
+        {{#each camposFaltantes}}
+        <tr>
+            <td>
+                <label>{{this}}</label>
+            </td>
+        </tr>
+        {{/each}}
+        <tr>
+            <td>
+                <a id="enviar" class="btn btn-success" href="#Accounts/{{relatedAcct}}" target="_blank" >Ir a Persona Relacionada</a>
+                <input type="button" class="btn btn-danger" value="Cancelar" id="cancelarDrawer"/>
+            </td>
+        </tr>
+    </table>
+</div>

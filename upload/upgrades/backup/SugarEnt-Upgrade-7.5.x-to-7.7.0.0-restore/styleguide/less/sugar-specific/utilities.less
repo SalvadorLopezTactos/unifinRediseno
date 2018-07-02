@@ -1,0 +1,43 @@
+/* UTILITIES
+  ----------------*/
+
+// Quick floats
+.pull-right {
+    .rtlFloat(@direction,left);
+}
+.pull-left {
+    .rtlFloat(@direction,right);
+}
+
+.tcenter {
+	text-align: center !important;
+}
+.tleft {
+	text-align: left !important;
+    .rtlTextAlign(@direction,right) !important;
+}
+.tright {
+	text-align: right !important;
+    .rtlTextAlign(@direction,left) !important;
+}
+.tbold {
+	font-weight: bold;
+}
+.temph {
+	font-style: italic;
+}
+
+#log {
+	padding-left: 80px;
+}
+
+.reset-width {
+  width: auto !important;
+  min-width: 0px !important;
+}
+.padded {
+  padding: 20px;
+}
+.width-auto {
+  width: auto;
+}

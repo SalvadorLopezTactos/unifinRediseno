@@ -1,0 +1,148 @@
+<link rel="stylesheet" type="text/css" href="custom/clients/base/views/c2-dashlet/style.css">
+<div class="c2-dashlet-wrapper">
+    <div>
+        <table width="100%" class="table table-striped table-bordered table-condensed c2_box" id="c2_dashlet">
+            </tr>
+            <tr class="PromotorTotal c2_header"> <!--CABECERA-->
+                <th width="25%" align="left">
+                    Cliente -
+                    <input type="hidden" id="clienteOrden" value="{{clienteOrden}}"/><span id="ClienteSort" class="icon-sort"></span>
+                </th>
+                <th class="PipelineCol" width="5%" align="right">
+                    Monto -
+                    <input type="hidden" id="PipelineOrden" value="{{PipelineOrden}}"/><span id="PipelineSort" class="icon-sort"></span>
+                </th>
+                <th width="35%" align="center" nowrap>
+                    Estatus
+                </th>
+            </tr>
+            <tr class="PromotorTotal">
+                <td class="PromotorTotal" style="text-align: left !important">
+                        <a class="rowaction btn btn-primary" href="javascript:void(0);" id="C2expandir_button" track="click:add_button">
+                            <span class="icon-plus"></span></a>
+                        <a class="rowaction btn btn-primary" href="javascript:void(0);" id="C2colapsar_button" track="click:add_button">
+                            <span class="icon-minus"></span></a>
+                </td>
+                <td class="PipelineCol PromotorTotal" style="text-align:right;">{{customFormatNumber c2_rows.grandTotal.pipeline}}</td>
+                <td class="PromotorTotal"></td>
+            </tr>
+            <!--CUERPO DE LA TABLA SFA-->
+            <!--Operaciones-->
+            {{#each c2_rows.myOpps}}
+                {{#if Name}}
+                    <tr>
+                        <td>
+                            <a class="btn btn-invisible C2hideShowGroups" data-id="{{@key}}" href="javascript:void(0);" track="click:" rel="tooltip" data-placement="bottom" title="" name="" data-original-title="Conmutar Visibilidad">
+                                <i class="icon-minus" id="showClient" style="top: -2px;"></i>
+                            </a>
+                            <a href="#Accounts/{{@key}}" target="_blank">{{Name}}</a>
+                        </td>
+                        <td class="PipelineCol">{{customFormatNumber Totals.pipeline}}</td>
+                        <td class="personaEstatus">{{getUnifinListValue 'estatus_list' Estatus}}</td>
+                    </tr>
+                {{/if}}
+                {{#each this.Opps}}
+                    <tr class="{{AcctId}}">
+                        <td style="padding-left: 60px;"><a href="#Opportunities/{{OppId}}" target="_blank">{{name}}</a>
+                        </td>
+                        <td class="PipelineCol">{{customFormatNumber pipeline}}</td>
+                        <td class="oppEstatus">{{getUnifinListValue 'estatus_c_operacion_list' estatus_c}}</td>
+                    </tr>
+                {{/each}}
+            {{/each}}
+            <!--Subordinados-->
+            {{#each c2_rows}}
+                {{#if data}}
+                    <tr>
+                        <td style="padding-left: 10px;">
+                            <a class="btn btn-invisible C2hideShowGroups" data-id="{{@key}}" href="javascript:void(0);" track="click:" rel="tooltip" data-placement="bottom" title="" name="" data-original-title="Conmutar Visibilidad">
+                                <i class="icon-minus" id="showClient" style="top: -2px;"></i>
+                            </a>
+                            <b>{{data}}</b></td>
+                        <td class="PipelineCol subordinadoData">{{customFormatNumber Totals.pipeline}}</td>
+                        <td style="text-align:right;"></td>
+                    </tr>
+                {{/if}}
+                <!--Operaciones de Subordinado-->
+                {{#each myOpps}}
+                    <tr class="{{../metadata.id}}">
+                        <td style="padding-left: 40px;">
+                            <a class="btn btn-invisible C2hideShowGroups" data-id="{{@key}}" href="javascript:void(0);" track="click:" rel="tooltip" data-placement="bottom" title="" name="" data-original-title="Conmutar Visibilidad">
+                                <i class="icon-minus" id="showClient" style="top: -2px;"></i>
+                            </a>
+                            <a href="#Accounts/{{@key}}" target="_blank">{{Name}}</a>
+                        </td>
+                        <td class="PipelineCol">{{customFormatNumber Totals.pipeline}}</td>
+                        <td class="personaEstatus">{{getUnifinListValue 'estatus_list' Estatus}}</td>
+                    </tr>
+                    {{#each Opps}}
+                        <tr class="{{AcctId}} {{userId}}">
+                            <td style="padding-left: 80px;">
+                                <a href="#Opportunities/{{OppId}}" target="_blank">{{name}}</a></td>
+                            <td class="PipelineCol">{{customFormatNumber pipeline}}</td>
+                            <td class="oppEstatus">{{getUnifinListValue 'estatus_c_operacion_list' estatus_c}}</td>
+                        </tr>
+                    {{/each}}
+                {{/each}}
+            {{/each}}
+
+            <tr class="PromotorTotal">
+                <td class="PromotorTotal" style="text-align: left !important">
+                    <a class="rowaction btn btn-primary" href="javascript:void(0);" id="C2expandir_button2" track="click:add_button">
+                        <span class="icon-plus"></span></a>
+                    <a class="rowaction btn btn-primary" href="javascript:void(0);" id="C2colapsar_button2" track="click:add_button">
+                        <span class="icon-minus"></span></a>
+                </td>
+                <td class="PromotorTotal PipelineCol" style="text-align:right;">{{customFormatNumber c2_rows.grandTotal.pipeline}}</td>
+                <td class="PromotorTotal"></td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.C2hideShowGroups').click(function () {
+            if ($(this).find('.icon-minus').size() >= 1) {
+                $('.' + $(this).attr('data-id')).hide();
+                $(this).find('.icon-minus').addClass('icon-plus');
+                $(this).find('.icon-minus').removeClass('icon-minus');
+            } else {
+                $('.' + $(this).attr('data-id')).show();
+                $(this).find('.icon-plus').addClass('icon-minus');
+                $(this).find('.icon-plus').removeClass('icon-plus');
+            }
+        });
+
+        $('#C2colapsar_button').click(function () {
+            $('.C2hideShowGroups').each(function () {
+                if ($(this).find('.icon-minus').size() >= 1) {
+                    $('.' + $(this).attr('data-id')).hide();
+                    $(this).find('.icon-minus').addClass('icon-plus');
+                    $(this).find('.icon-minus').removeClass('icon-minus');
+                }
+            });
+        });
+
+        $('#C2colapsar_button2').click(function () {
+            $('#C2colapsar_button').click();
+        });
+
+        $('#C2expandir_button').click(function () {
+            $('.C2hideShowGroups').each(function () {
+                $('.' + $(this).attr('data-id')).show();
+                $(this).find('.icon-plus').addClass('icon-minus');
+                $(this).find('.icon-plus').removeClass('icon-plus');
+            });
+        });
+
+        $('#C2expandir_button2').click(function () {
+            $('#C2expandir_button').click();
+        });
+       //JS: Estado Inicial, si activa la linea de abajo, el dashlet se dibujara colapsado.
+       // $('#C2colapsar_button').click();
+    });
+
+
+</script>
+

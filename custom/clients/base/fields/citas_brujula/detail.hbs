@@ -1,0 +1,43 @@
+<table class="citas_main_table table-bordered table-striped" align="center" width="100%" style="border: solid lightblue;" cellspacing="1" cellpadding="5">
+    <tr>
+        <th colspan="9" style="background-color: #000042">
+            <span style="color: white">CITAS</span>
+        </th>
+    </tr>
+
+    <tr>
+        <th width="20%">Cliente</th>
+        <th width="15%">Duracion (minutos)</th>
+        <th width="15%">Traslado (minutos)</th>
+        <th width="10%">Referenciada</th>
+        <th width="10%">Acompañante</th>
+        <th width="10%">Objetivo</th>
+        <th width="10%">Estatus</th>
+        <th width="10%">Resultado</th>
+    </tr>
+
+    {{#each citas_existentes}}
+        <tr>
+            <td width="20%" >{{this.parent_name_existente}}
+            </td>
+            <td width="15%" style="text-align: right;">{{this.duration_minutes_existente}}</td>
+            <td width="15%" style="text-align: right;">{{this.traslado_existente}}</td>
+            <td width="10%" style="text-align: center;">
+                {{this.referenciada_existente}}
+            </td>
+            <td width="10%" >
+                {{this.acompanante_existente}}
+            </td>
+            <td width="10%" >
+            {{#getDDLabel this.objetivo_existente "objetivo_list"}}{{/getDDLabel}}
+            </td>
+            <td width="10%" >
+            {{#getDDLabel this.estatus_existente "estatus_cita"}}{{/getDDLabel}}
+            </td>
+            <td width="10%" >
+            {{#getDDLabel this.resultado_existente "resultado_list"}}{{/getDDLabel}}
+            </td>
+        </tr>
+    {{/each}}
+
+</table>

@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:6c5e0999-e80c-91ac-5272-5a84cf208829
+ORGANIZER;CN=Luis Roberto Ceballos Novelo:lceballos@unifin.com.mx
+DTSTART:20180215T150000Z
+DTEND:20180215T170000Z
+DTSTAMP:20180215T000600Z
+SUMMARY:ameco/ seguimiento
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

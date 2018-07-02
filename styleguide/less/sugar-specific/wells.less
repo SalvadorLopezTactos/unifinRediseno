@@ -1,0 +1,20 @@
+/* WELLS
+  ----------------*/
+
+// To be used with original twitter bootstrap well for spacing purposes, overrides removing border and back color as well as shadows
+.well-invisible {
+  background-color: transparent;
+  border-color: transparent;
+  .border-radius(@baseBorderRadius);
+  .box-shadow(None);
+}
+
+/* Remove bottom margin on example forms in wells */
+form.well {
+  padding: 14px;
+}
+
+/* Tighten up spacing */
+.well hr {
+  margin: 18px 0;
+}

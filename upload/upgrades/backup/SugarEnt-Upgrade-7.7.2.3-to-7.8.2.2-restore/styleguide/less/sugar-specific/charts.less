@@ -1,0 +1,229 @@
+/* CHARTS
+  ----------------*/
+
+//HOMEPAGE
+.dashboard {
+  .thumbnail.dashlet:not(.collapsed) {
+    //500 (max) - 34 (menubar) = 466
+    .dashlet-content > div {
+      max-height: 466px;
+    }
+    //466 (max) - 40 (block footer) = 426
+    .dashlet-content .list-view {
+      max-height: 426px;
+      overflow: auto;
+    }
+    //466 (max) - 40 (block footer) = 426
+    .dashlet-content .activitystream-list {
+      max-height: 426px;
+    }
+    //466 (max) - 16 (chart margins) = 450
+    .nv-chart {
+      height: 450px;
+      margin: 8px;
+    }
+    //450 (chart height) - 41 (dashlet options) = 409
+    .dashlet-options+.nv-chart,
+    .process-users-chart .nv-chart,
+    .opportunity-pipeline-wrapper .nv-chart,
+    .forecasts-chart-wrapper .nv-chart {
+      height: 409px;
+    }
+    .opportunity-metrics-wrapper .nv-chart {
+      height: 309px;
+    }
+    .nv-chart-cases {
+      height: 399px;
+    }
+    //466 (max) - 39 (block footer) = 427
+    .twitter-widget.scroll {
+      max-height: 427px;
+    }
+  }
+}
+
+//SIDEBAR
+.sidebar-content {
+  .thumbnail.dashlet:not(.collapsed) {
+    &.dashlet-dnb-tall {
+      max-height: 615px;
+      .dashlet-content > div {
+        max-height: 541px;
+      }
+    }
+    //400 (max) - 34 (menubar) = 366
+    .dashlet-content > div {
+      max-height: 366px;
+    }
+    //366 (max) - 40 (block footer) = 326
+    .dashlet-content .list-view {
+      max-height: 326px;
+    }
+    .dashlet-content .activitystream-list {
+      max-height: 326px;
+    }
+    //366 (max) - 16 (chart margins) = 350
+    .nv-chart {
+      height: 350px;
+      margin: 8px;
+    }
+    //350 (chart height) - 41 (dashlet options) = 309
+    .dashlet-options+.nv-chart,
+    .process-users-chart .nv-chart,
+    .opportunity-pipeline-wrapper .nv-chart,
+    .forecasts-chart-wrapper .nv-chart {
+      height: 309px;
+    }
+    //366 (max) - 67 (tabs) - 22 (chart margins) = 277
+    .opportunity-metrics-wrapper .nv-chart {
+      height: 277px;
+      margin-bottom: 14px;
+    }
+    //366 (max) - 60 (tabs) - 16 (chart margins) = 288
+    .nv-chart-cases {
+      height: 288px;
+    }
+    .saved-reports-chart .nv-chart {
+      max-height: 348px;
+    }
+    //366 (max) - 39 (block footer) = 327
+    .twitter-widget.scroll {
+      max-height: 327px;
+    }
+  }
+}
+
+//interactions
+//opportunity-metrics
+//casessummary
+span.count {
+  font-size: 16px;
+  display: block;
+  &.label {
+    font-size: 14px;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    line-height: 22px;
+    padding: 3px;
+  }
+}
+
+.rotatedLabel {
+  .rotate(-90deg);
+}
+.rotatedLabelReverse {
+  .rotate(90deg);
+}
+
+// org tree chart
+
+@-webkit-keyframes animaopacity {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-moz-keyframes animaopacity {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@-o-keyframes animaopacity {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes animaopacity {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+// for org chart demo renderer
+.nv-chart-org {
+  .nv-org-bkgd {
+    stroke: darken(@grayLighter, 15%);
+    stroke-width: 2px;
+  }
+  .nv-org-node {
+    text {
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 300;
+      font-stretch: normal;
+      font-size: 10px;
+      line-height: normal;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      &.nv-org-name {
+        font-size: 10px;
+        fill: @linkColor;
+        &.hover {
+          text-decoration: underline;
+        }
+      }
+      &.nv-org-title {
+        font-size: 8px;
+      }
+    }
+  }
+}
+
+.nv-chart.nv-chart-donut.dnb-meter {
+  min-width: 118px;
+  min-height: 50px;
+  display: inline-block;
+}
+.sidebar-content .thumbnail.dashlet:not(.collapsed) .nv-chart.nv-chart-donut.dnb-meter {
+  height: 118px;
+  .calcWidth(~"50% - 2px");
+  margin: 0;
+}
+// org chart zoom control
+.btn-slider {
+  display: inline-block;
+  padding: 5px;
+  .noUiSlider {
+    width: 50px;
+    height: 4px;
+    display: inline-block;
+    margin: 0;
+    position: relative;
+    top: -1px;
+  }
+  .noUiSliderEnds {
+    width: 50px;
+    margin: 0 30px 0 0;
+    .zoom-control {
+      position: absolute;
+      top: 1px;
+      font-size: 18px;
+      cursor: pointer;
+      &.disabled {
+        color: lighten(@grayLight,10%) !important;
+      }
+    }
+    i[data-control="zoom-out"] {
+      left: -26px;
+    }
+    i[data-control="zoom-in"] {
+      right: -26px;
+    }
+    &:before,
+    &:after {
+      top: 6px;
+      height: 4px;
+    }
+    &:before {
+      .border-radius(2px 0 0 2px);
+      left: -6px;
+    }
+    &:after {
+      .border-radius(0 2px 2px 0);
+      right: -6px;
+    }
+  }
+}
+
+.chart-icon svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  display: block;
+  padding: 3px;
+}

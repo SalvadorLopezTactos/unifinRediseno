@@ -1,0 +1,12 @@
+{
+    "opts": {
+        "destination": "./docs",
+        "tutorials": "./tutorials"
+    },
+    "source": {
+        "excludePattern": "/offline/"
+    },
+    "plugins": [
+        "plugins/markdown"
+    ]
+}

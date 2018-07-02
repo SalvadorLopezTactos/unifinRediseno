@@ -1,0 +1,84 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div class="dashboard" data-dashboard="true">
+    <div class="cols row-fluid">
+        <div>
+            <div class="preview-headerbar">
+                <div class="headerpane">
+                    <span class="record-cell">
+                        <h1><span class="detail">{{str "LBL_DNB_ACC_CRT"}}</span></h1>
+                    </span>
+                    <span class="record-cell">
+                        <h1><span class="detail"></span></h1>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <ul class="dashlets row-fluid">
+            <li class="span12">
+                <ul class="dashlet-row ui-sortable ui-sortable-disabled">
+                    <li class="row-fluid sortable" data-sortable="1">
+                        <div class="rows well well-invisible">
+                            <a data-toggle="dropdown"  class="btn btn-invisible btn-link hide">
+                                <i class="fa fa-cog"></i></a>
+                            <ul class="dropdown-menu left carettop">
+                                <div>
+                                    <li><a class="remove-row">Remove</a></li>
+                                </div>
+                            </ul>
+                            <a class="move btn btn-invisible btn-link hide">
+                                <i class="fa fa-arrows-v"></i></a>
+                            <ul class="dashlet-cell rows row-fluid">
+                                <li class="dashlet-container span12">
+                                    <div>
+                                        <div class="thumbnail dashlet">
+                                            <div data-dashlet="toolbar">
+                                                <div class="dashlet-header">
+                                                    <div class="btn-toolbar pull-right">
+                                                    </div>
+                                                    <h4 data-toggle="dashlet">{{str "LBL_DNB_CI_SRCH"}}</h4>
+                                                </div>
+                                            </div>
+                                            <div data-dashlet="dashlet" class="dashlet-content">
+                                                <div class="block show_less create-acc">
+                                                    <div class="globe-chart-wrapper">
+                                                        <div id="dnb-search-hint" class="block-footer">
+                                                            <aside>
+                                                                <em>{{str "LBL_DNB_CI_SRCH_HINT"}}</em>
+                                                            </aside>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="fa fa-download swappable-dashlet"></div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="row-fluid" data-sortable="1">
+                        <div class="rows well well-invisible">
+                            <a data-toggle="dropdown" class="btn btn-invisible btn-link hide">
+                                <i class="fa fa-cog"></i>
+                            </a>
+                            <a class="move btn btn-invisible btn-link hide">
+                                <i class="fa fa-arrows-v"></i>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

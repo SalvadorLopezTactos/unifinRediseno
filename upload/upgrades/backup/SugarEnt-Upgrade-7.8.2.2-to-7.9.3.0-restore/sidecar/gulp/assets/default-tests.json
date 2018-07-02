@@ -1,0 +1,12 @@
+[
+    "tests/suites/app/*.js",
+    "tests/suites/core/controller.js",
+    "tests/suites/core/*.js",
+    "tests/suites/data/*.js",
+    // offline folder wasn't included in jasmine runner
+    // 'tests/suites/offline/*.js', 
+    "tests/suites/sugar/*.js",
+    "tests/suites/sugarapi/*.js",
+    "tests/suites/utils/*.js",
+    "tests/suites/view/*.js"
+]

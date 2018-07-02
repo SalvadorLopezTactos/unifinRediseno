@@ -1,0 +1,37 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div id="dnb-no-duns" class="block-footer">
+    <div id="dnb-refresh-loading">
+        {{str "LBL_DNB_RFR_LOADING"}}...
+    </div>
+    <div id="dnb-refresh-details">
+        {{#if uptodate}}
+            <aside>
+                <em>{{str "LBL_DNB_UPTODATE_MSG"}}</em>
+            </aside>
+        {{else}}
+            {{#if errmsg}}
+                <aside>
+                    <em>{{errmsg}}</em>
+                </aside>
+            {{else}}
+                <aside>
+                    <em>{{str "LBL_DNB_OUTOFDATE_MSG"}}</em>
+                </aside>
+                <a id="dnb-refresh">
+                    {{str "LBL_DNB_RFR_HINT"}}
+                </a>
+            {{/if}}
+        {{/if}}
+    </div>
+</div>

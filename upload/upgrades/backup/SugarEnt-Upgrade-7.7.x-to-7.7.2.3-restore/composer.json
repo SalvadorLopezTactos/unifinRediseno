@@ -1,0 +1,80 @@
+{
+    "name" : "sugarcrm/sugarcrm",
+    "description" : "SugarCRM",
+    "type" : "project",
+    "license" : "proprietary",
+    "homepage" : "http://www.sugarcrm.com",
+    "support": {
+        "wiki" : "http://support.sugarcrm.com",
+        "forum": "https://community.sugarcrm.com/sugarcrm",
+        "irc": "irc://irc.freenode.org/sugarcrm"
+    },
+    "config" : {
+        "vendor-dir" : "vendor",
+        "prepend-autoloader" : false,
+        "autoloader-suffix" : "Sugar",
+        "notify-on-install" : false,
+        "discard-changes" : true,
+        "preferred-install" : "dist",
+        "use-include-path" : false
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Sugarcrm\\Sugarcrm\\": [
+                "src/",
+                ""
+            ],
+            "Sugarcrm\\Sugarcrm\\custom\\": [
+                "custom/src/",
+                "custom/"
+            ],
+            "Sugarcrm\\Sugarcrm\\inc\\": "include/",
+            "Sugarcrm\\Sugarcrm\\custom\\inc\\": "custom/include/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sugarcrm\\SugarcrmTests\\": [
+                "tests/src/",
+                "tests/"
+            ],
+            "Sugarcrm\\SugarcrmTests\\inc\\": "tests/include/",
+            "Sugarcrm\\SugarcrmTestsUnit\\": [
+                "testsunit/src/",
+                "testsunit/"
+            ],
+            "Sugarcrm\\SugarcrmTestsUnit\\inc\\": "testsunit/include/"
+        }
+    },
+    "require": {
+        "psr/log": "1.0.0",
+        "ruflin/elastica" : "v1.4.3.0",
+        "onelogin/php-saml" : "2.6.1",
+        "aws/aws-sdk-php": "2.7.7",
+        "phpmailer/phpmailer" : "v5.2.9",
+        "ircmaxell/password-compat": "v1.0.4",
+        "symfony/security-core": "v2.7.1",
+        "symfony/security-csrf": "v2.7.1",
+        "google/apiclient": "1.1.4",
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.3.5",
+        "composer/composer": "1.0.0-alpha9"
+    },
+    "repositories" : [
+        {
+            "type" : "git",
+            "url" : "https://github.com/sugarcrm/Elastica"
+        },
+        {
+            "type" : "git",
+            "url" : "https://github.com/sugarcrm/php-saml.git"
+        },
+        {
+            "type" : "git",
+            "url" : "https://github.com/sugarcrm/PHPMailer"
+        }
+    ]
+}

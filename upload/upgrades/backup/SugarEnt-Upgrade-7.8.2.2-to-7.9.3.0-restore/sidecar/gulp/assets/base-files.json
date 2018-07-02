@@ -1,0 +1,53 @@
+[
+    {
+        "pattern": "tests/fixtures/*.json",
+        "included": false,
+        "served": true,
+        "watched": false
+    },
+    {
+        "pattern": "lib/jasmine/jasmine.css",
+        "included": false,
+        "served": true,
+        "watched": false
+    },
+
+    "lib/backbone/underscore.min.js",
+    "lib/jquery/jquery.min.js",
+    "lib/jquery/jquery-migrate-1.2.1.min.js",
+    "lib/jquery-ui/js/jquery-ui-1.11.4.custom.min.js",
+    "lib/backbone/backbone.min.js",
+    "lib/handlebars/handlebars.min.js",
+    "lib/sugarapi/sugarapi.js",
+    "lib/sugar/sugar.searchahead.js",
+    "lib/stash/stash.min.js",
+    "lib/async/async.min.js",
+    "lib/php-js/version_compare.js",
+    "lib/momentjs/min/moment.min.js",
+    "lib/bigjs/big.js",
+
+    "lib/sinon/sinon.js",
+    "lib/jasmine-sinon/jasmine-sinon.js",
+
+    "src/app.js",
+    "src/core/events.js",
+    "src/core/controller.js",
+    "src/core/*.js",
+    "src/data/bean.js",
+    "src/data/bean-collection.js",
+    "src/data/mixed-bean-collection.js",
+    "src/data/*.js",
+    "src/utils/*.js",
+    "src/view/view-manager.js",
+    "src/view/component.js",
+    "src/view/view.js",
+    "src/view/*.js",
+
+    "lib/sugaranalytics/sugaranalytics.js",
+    "lib/sugaranalytics/googleanalyticsconnector.js",
+
+    "tests/fixtures/*.js",
+
+    "tests/config.js",
+    "tests/spec-helper.js"
+]

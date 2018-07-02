@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "devDependencies": {
+    "commander": "^2.9.0",
+    "execa": "^0.5.0",
+    "glob": "^7.0.3",
+    "gulp": "^3.9.0",
+    "gulp-filter": "~3.0.1",
+    "gulp-jscs": "~3.0.2",
+    "gulp-jshint": "^2.0.0",
+    "gulp-todo": "~4.1.0",
+    "gulp-util": "~3.0.7",
+    "jshint": "^2.9.1",
+    "karma": "^1.2.0",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.1.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-jasmine": "~0.1.5",
+    "karma-junit-reporter": "^1.1.0",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-safari-launcher": "^1.0.0",
+    "karma-sauce-launcher": "^1.0.0",
+    "lodash": "~2.4.1",
+    "rimraf": "^2.5.4",
+    "socket.io": "0.9.16",
+    "strip-json-comments": "^2.0.1"
+  }
+}

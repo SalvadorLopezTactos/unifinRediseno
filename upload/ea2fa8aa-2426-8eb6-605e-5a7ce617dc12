@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:ea2fa8aa-2426-8eb6-605e-5a7ce617dc12
+ORGANIZER;CN=Dagoberto Cordova Amador:dcordova@unifin.com.mx
+DTSTART:20180207T173000Z
+DTEND:20180207T190000Z
+DTSTAMP:20180209T000900Z
+SUMMARY:TEAR DROP
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,116 @@
+/* LOADER
+  ----------------*/
+
+.alert-top > .gate {
+  top: 0;
+  position: absolute;
+  padding-top: 8px;
+  width: 280px;
+  margin-left: -140px;
+  left: 50%;
+}
+
+#nprogress {
+  position: fixed;
+  top: 38px;
+  height: 0;
+  width: 100%;
+  z-index: 1040;
+  &> div {
+    text-align: center;
+    display: inline-block;
+  }
+}
+
+#nprogress > .gate {
+  position: absolute;
+  width: 100%;
+}
+
+
+
+.loading {
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+  color: @grayLight;
+}
+
+.loading .progress {
+  width: 100%;
+  height: 4px;
+  margin-top: 6px;
+  .bar {
+    height: 4px;
+    background: @BorderColor;
+  }
+}
+
+.loading i {
+  color: @grayLight;
+  display: inline-block;
+  font-size: 4px;
+  margin: 0 2px;
+  -moz-animation: move 1s infinite linear;
+  -webkit-animation: move 1s infinite linear;
+  animation: move 1s infinite linear;
+}
+
+.nav li .loading .icon-circle {
+  width: auto;
+}
+
+.loading .l1 {
+  -moz-animation-delay: .1s;
+  -webkit-animation-delay: .1s;
+  animation-delay: .1s;
+}
+
+.loading .l2 {
+  -moz-animation-delay: .2s;
+  -webkit-animation-delay: .2s;
+  animation-delay: .2s;
+}
+
+.loading .l3 {
+  -moz-animation-delay: .3s;
+  -webkit-animation-delay: .3s;
+  animation-delay: .3s;
+}
+
+@-moz-keyframes move{0%{opacity:1;}100%{opacity:0.1;}}
+@-webkit-keyframes move{0%{opacity:1;}100%{opacity:0.1;}}
+@keyframes move{0%{opacity:1;}100%{opacity:0.1;}}
+
+
+/**
+  * Start of nprogress.css from https://github.com/rstacruz/nprogress
+  * MIT License
+  * https://github.com/rstacruz/nprogress/blob/master/License.md
+  * Modified to match Sugar7 Color scheme
+  */
+
+/* Make clicks pass-through */
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: @BorderColor;
+  width: 100%;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px @BorderColor, 0 0 5px @BorderColor;
+  opacity: 1.0;
+
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+      -ms-transform: rotate(3deg) translate(0px, -4px);
+          transform: rotate(3deg) translate(0px, -4px);
+}

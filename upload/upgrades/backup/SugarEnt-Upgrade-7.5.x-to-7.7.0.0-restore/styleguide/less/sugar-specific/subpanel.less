@@ -1,0 +1,104 @@
+/* SUBPANEL
+  ----------------*/
+.subpanels-layout {
+  .subpanel {
+    background-color: @white;
+    &.closed {
+      background-color: @grayLighter;
+      .subpanel-list {
+        display: none;
+      }
+      i.icon-chevron-up::before {
+        content: "\f078";
+      }
+    }
+    &.empty {
+      .label {
+        border: 1px solid @gray;
+        background: transparent;
+        color: @gray;
+      }
+      h4 {
+        color: @grayLight;
+      }
+    }
+    tbody {
+      border-bottom: 1px solid darken(@grayLighter, 10%);
+    }
+    .more {
+      height: 42px;
+      border-bottom: @borderWidget !important;
+    }
+    .block-footer{
+      border-bottom: @borderWidget;
+    }
+    .list-view {
+      overflow: visible;
+    }
+  }
+
+  .subpanel-header {
+    border-bottom: @borderWidget;
+    height: 42px;
+    display: block;
+    cursor: pointer;
+    &:hover {
+      background-color: darken(@grayLighter,2%);
+    }
+    h4 {
+      line-height: 24px;
+      font-weight: normal;
+      white-space: nowrap;
+      width: 65%;
+      .calcWidth(~"100% - 180px");
+      padding-right: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 10px 0 8px;
+    }
+    .label-module {
+      margin: 9px 10px;
+    }
+    a.btn {
+      width: 28px;
+      .box-sizing(border-box);
+    }
+    .btn-toolbar {
+      margin-top: 7px;
+      padding-left: 0;
+      //needed for iPad (dont' remove)
+      &> span[class^="panel-top"]:first-child {
+        float: left;
+      }
+      //for revenue line item
+      &> span[class^="panel-top"].panel-top:first-child:last-child {
+        margin-right: 79px;
+      }
+      > .btn-group {
+        margin-left: 16px;
+        margin-right: 8px;
+        position: relative;
+        &.open {
+          z-index: 999999;
+        }
+      }
+    }
+  }
+
+  &.ui-sortable {
+    .subpanel-header {
+      cursor: move;
+    }
+  }
+}
+
+.main-content .filtered .results {
+  margin-bottom: 0;
+}
+
+.subpanel .flex-list-view .dataTable {
+  border-bottom: 0;
+  td:last-child :not(.btn-group) > span > .rowaction.btn {
+    float: right;
+  }
+}

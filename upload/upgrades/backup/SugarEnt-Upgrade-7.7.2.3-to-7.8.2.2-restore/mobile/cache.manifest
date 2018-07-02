@@ -1,0 +1,32 @@
+CACHE MANIFEST
+# Sun, 27 Aug 2017 16:51:19 GMT
+index.html
+
+# cache fonts
+font/fontawesome-webfont.ttf
+font/OpenSans-Regular.ttf
+font/OpenSans-Semibold.ttf
+
+CACHE:
+# images
+img/favicon.ico
+img/icon-pipeline.svg
+img/logo.svg
+img/logo-login.svg
+img/offline-detail.svg
+img/offline-edit.svg
+img/offline-list.svg
+img/touch-icon.png
+img/touch-icon-152.png
+img/touch-icon-196.png
+
+# javascripts
+js/lib.js
+js/nomad.js
+js/templates.js
+
+#other resources
+
+NETWORK:
+*
+

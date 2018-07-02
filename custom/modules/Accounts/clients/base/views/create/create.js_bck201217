@@ -1,0 +1,239 @@
+/**
+ * Created by Jorge on 6/16/2015.
+ */
+({
+    extendsFrom: "CreateView",
+
+    /**
+     * @author bdekoning@levementum.com
+     * @date 6/9/15
+     * @brief Override for handleCancel to ensure the account_telefonos attribute is properly reverted
+     *
+     * @override
+     */
+    handleCancel: function() {
+        var account_telefonos = this.model._previousAttributes.account_telefonos;
+        var account_direcciones = this.model._previousAttributes.account_direcciones;
+        this._super("handleCancel");
+        this.model.set("account_telefonos", account_telefonos);
+        this.model.set("account_direcciones", account_direcciones);
+        this.model._previousAttributes.account_telefonos = account_telefonos;
+        this.model._previousAttributes.account_direcciones = account_direcciones;
+    },
+
+    bindDataChange: function () {
+        this._super("bindDataChange");
+        //var self = this;
+
+        this.model.on("change:tipodepersona_c", _.bind(function () {
+
+            if(this.model._previousAttributes.tipodepersona_c == 'Persona Fisica'){
+                if(this.model.get('tipodepersona_c') == 'Persona Moral'){
+                    this.model.set('tipodepersona_c','Persona Fisica');
+                }
+            }
+            if(this.model._previousAttributes.tipodepersona_c == 'Persona Fisica con Actividad Empresarial'){
+                if(this.model.get('tipodepersona_c') == 'Persona Moral'){
+                    this.model.set('tipodepersona_c','Persona Fisica con Actividad Empresarial');
+                }
+            }
+            if(this.model._previousAttributes.tipodepersona_c == 'Persona Moral'){
+                if(this.model.get('tipodepersona_c') == 'Persona Fisica' || this.model.get('tipodepersona_c') == 'Persona Fisica con Actividad Empresarial'){
+                    this.model.set('tipodepersona_c','Persona Moral');
+                }
+            }
+        }, this));
+    },
+    _render: function(fields, errors, callback) {
+        this._super("_render");
+        if (this.model.dataFetched) {
+            this.model.on("change:tipo_registro_c", _.bind(function() {
+                // Carlos Zaragoza: Se elimina el campo por defaiult de tipo de proveedor del registro pero sies proveedor, se selecciona bienes por default
+               // if(this.model.get('tipo_registro_c') == 'Proveedor'){
+               //     this.model.set('tipo_proveedor_c', '1');
+               // }
+                app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("id") + "/link/rel_relaciones_accounts_1", null, null, {
+                    fields: name,
+                }), null, {
+                    success: _.bind(function (data) {
+
+                        if (data.records.length > 0) {
+                            var ContacFlag = false;
+                            $(data.records).each(function (index, value) {
+
+                                if($.inArray("Contacto",value.relaciones_activas) > -1){
+                                    //YES IS A CONTACT!!!!
+                                    ContacFlag = true;
+                                }
+                            });
+                            if(this.model._syncedAttributes.tipo_registro_c != 'Cliente') {
+                                if (ContacFlag == false) {
+                                    app.alert.show("Validar Relacion", {
+                                        level: "error",
+                                        title: "Debe capturar al menos un contacto.",
+                                        autoClose: false
+                                    });
+                                    
+                                    this.model.set('tipo_registro_c', 'Prospecto');
+                                    errors['account_contacts'] = errors['account_contacts'] || {};
+                                }
+                            }
+                        }
+                        if (data.records.length <= 0) {
+                            if(this.model._syncedAttributes.tipo_registro_c != 'Cliente') {
+
+                                app.alert.show("Validar Relacion", {
+                                    level: "error",
+                                    title: "Debe capturar al menos un contacto.",
+                                    autoClose: false
+                                });
+                                this.model.set('tipo_registro_c', 'Prospecto');
+								errors['account_contacts'] = errors['account_contacts'] || {};
+                            }
+                        }
+                    }, this)
+                });
+            }, this));
+
+            /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Check for an existing RFC*/
+            var fields = ["primernombre_c","segundonombre_c","apellidopaterno_c","apellidomaterno_c", 'rfc_c'];
+            this.model.on("change:rfc_c", _.bind(function() {
+                var RFC = this.model.get('rfc_c');
+                app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                    fields: fields.join(','),
+                    max_num: 5,
+                    "filter":[
+                        {
+                            "rfc_c":RFC,
+                            "id":{
+                                $not_equals:this.model.id,
+                            }
+                        }
+                    ]
+                }), null, {
+                    success: _.bind(function (data) {
+                        if (data.records.length > 0) {
+
+                            app.alert.show("DuplicateCheck", {
+                                level: "error",
+                                title: "El RFC ingresado ya Existe.",
+                                autoClose: false
+                            });
+
+                            this.model.set("rfc_c", '');
+                        }
+
+                    }, this)
+                });
+            }, this));
+
+            console.log($('.existingAddress').val());
+        }
+        callback(null, fields, errors);
+    },
+
+    initialize: function (options) {
+        self = this;
+        this._super("initialize", [options]);
+        //add validation tasks
+        this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
+        this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
+        this.model.on('change:pais_nacimiento_c',this.validaExtranjerosRFC, this);
+        //this.model.on('change:rfc_c',this.validaFechaNacimientoDesdeRFC, this);
+
+    },
+
+    /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
+    _doValidateEmailTelefono: function(fields, errors, callback) {
+
+        if(this.model.get('tipodepersona_c') == 'Persona Fisica' || this.model.get('tipodepersona_c') == 'Persona Fisica con Actividad Empresarial') {
+            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos'))) {
+                errors['email'] = errors['email'] || {};
+                errors['email'].required = true;
+            }
+
+            if (_.isEmpty(this.model.get('account_telefonos')) && _.isEmpty(this.model.get('email'))) {
+                errors['account_telefonos'] = errors['account_telefonos'] || {};
+                errors['account_telefonos'].required = true;
+            }
+        }
+        callback(null, fields, errors);
+    },
+
+    _doValidateRFC: function(fields, errors, callback) {
+        var fields = ["primernombre_c","segundonombre_c","apellidopaterno_c","apellidomaterno_c", 'rfc_c'];
+        var RFC = this.model.get('rfc_c');
+        app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+            fields: fields.join(','),
+            max_num: 5,
+            "filter":[
+                {
+                    "rfc_c":RFC,
+                    "id":{
+                        $not_equals:this.model.id,
+                    }
+                }
+            ]
+        }), null, {
+            success: _.bind(function (data) {
+                if (data.records.length > 0) {
+
+                    app.alert.show("DuplicateCheck", {
+                        level: "error",
+                        title: "El RFC ingresado ya Existe.",
+                        autoClose: false
+                    });
+
+                    this.model.set("rfc_c", '');
+
+                    errors['rfc_c'] = errors['rfc_c'] || {};
+                    errors['rfc_c'].required = true;
+
+                }
+                callback(null, fields, errors);
+            }, this)
+        });
+    },
+    validaExtranjerosRFC: function (){
+        if((this.model.get('pais_nacimiento_c')!=2 && this.model.get('pais_nacimiento_c')!="") && (this.model.get('tipo_registro_c') != 'Prospecto' && this.model.get('tipo_registro_c') != 'Persona')){
+            this.model.set('rfc_c','XXX010101XXX');
+        }
+        if(this.model.get('tipo_registro_c') == 'Prospecto' && this.model.get('estatus_c') == 'Interesado' && this.model.get('pais_nacimiento_c')!=2){
+            this.model.set('rfc_c','XXX010101XXX');
+        }
+
+    },
+    validaFechaNacimientoDesdeRFC: function () {
+        //this._doValidateRFC();
+        var RFC = this.model.get('rfc_c');
+        if (RFC != '' && RFC != null && RFC != 'XXX010101XXX') {
+            console.log(this.model.get('rfc_c'));
+            var expReg = "";
+            var tipoControl = "";
+            var fecha = "";
+            if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+                tipoControl = 'fechadenacimiento_c';
+                expReg = "[A-Z&]{4}[0-9]{6}[A-Z0-9]{3}";
+                fecha = new Date(RFC.substring(6, 8) + "-" + RFC.substring(8, 10) + "-" + RFC.substring(4, 6));
+            } else {
+                tipoControl = 'fechaconstitutiva_c';
+                expReg = "[A-Z&]{3}[0-9]{6}[A-Z0-9]{3}";
+                fecha = new Date(RFC.substring(5, 7) + "-" + RFC.substring(7, 9) + "-" + RFC.substring(3, 5));
+            }
+            if (!RFC.match(expReg)) {
+                app.alert.show("RFC incorrecto", {
+                    level: "error",
+                    title: "El RFC no tiene un formato correcto para ser evaluado",
+                    autoClose: true
+                });
+            } else {
+                var fechaFormateada = fecha.getFullYear()+"-"+(fecha.getMonth() < 10 ? "0" + (fecha.getMonth() + 1) : fecha.getMonth() + 1) + "-" + (fecha.getDate() < 10 ? "0" + fecha.getDate() : fecha.getDate());
+                this.model.set(tipoControl, fechaFormateada);
+            }
+
+
+        }
+    },
+
+
+})

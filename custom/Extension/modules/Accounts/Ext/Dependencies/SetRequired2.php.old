@@ -1,0 +1,108 @@
+<?php
+// Fideicomiso 16
+$dependencies['Accounts']['tct_fedeicomiso_c16_ddw'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tct_fedeicomiso_chk_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'tct_fedeicomiso_c16_ddw_c',
+                'label' => 'tct_fedeicomiso_c16_ddw_c_label',
+                'value' => 'equal($tct_fedeicomiso_chk_c,true)',
+            ),
+        ),
+    ),
+);
+
+// Fideicomiso 17
+$dependencies['Accounts']['tct_fedeicomiso_c17_ddw'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tct_fedeicomiso_chk_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'tct_fedeicomiso_c17_ddw_c',
+                'label' => 'tct_fedeicomiso_c17_ddw_c_label',
+                'value' => 'equal($tct_fedeicomiso_chk_c,true)',
+            ),
+        ),
+    ),
+);
+
+// Fideicomiso 18
+$dependencies['Accounts']['tct_fedeicomiso_c18_ddw'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tct_fedeicomiso_chk_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'tct_fedeicomiso_c18_ddw_c',
+                'label' => 'tct_fedeicomiso_c18_ddw_c_label',
+                'value' => 'equal($tct_fedeicomiso_chk_c,true)',
+            ),
+        ),
+    ),
+);
+
+// Fideicomiso 19
+$dependencies['Accounts']['tct_fedeicomiso_c19_txf'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tct_fedeicomiso_chk_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'tct_fedeicomiso_c19_txf_c',
+                'label' => 'tct_fedeicomiso_c19_txf_c_label',
+                'value' => 'equal($tct_fedeicomiso_chk_c,true)',
+            ),
+        ),
+    ),
+);
+
+// Fideicomiso 20
+$dependencies['Accounts']['tct_fedeicomiso_c20_msl'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tct_fedeicomiso_chk_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'tct_fedeicomiso_c20_msl_c',
+                'label' => 'tct_fedeicomiso_c20_msl_c_label',
+                'value' => 'equal($tct_fedeicomiso_chk_c,true)',
+            ),
+        ),
+    ),
+);
+
+// Fideicomiso - 21
+$dependencies['Accounts']['tct_fedeicomiso_c21_ddw'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tct_fedeicomiso_chk_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'tct_fedeicomiso_c21_ddw_c',
+                'label' => 'tct_fedeicomiso_c21_ddw_c_label',
+                'value' => 'equal($tct_fedeicomiso_chk_c,true)',
+            ),
+        ),
+    ),
+);

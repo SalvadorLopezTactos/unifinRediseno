@@ -1,0 +1,851 @@
+<style>
+    #operaciones_canceladas {
+        background-color: red;
+        color: #f5f5f5;
+        font-weight: bold;
+        width: 10%;
+    }
+
+    #operaciones_pipeline {
+        background-color: yellow;
+        font-weight: bold;
+        width: 10%;
+    }
+
+    .table th {
+        text-align: left;
+        background: #000042 !important;
+        color: #f5f5f5;
+        font-weight: bold;
+    }
+
+    .totales {
+        text-align: left;
+        background: #000042 !important;
+        color: #f5f5f5;
+        font-weight: bold;
+    }
+
+    .filtros {
+        margin-bottom: 10px !important;
+    }
+
+    .filtros_table {
+        margin-left: 1%;
+    }
+
+    .popup {
+        margin-left: 33%;
+        width: 27%;
+        border-style: groove;
+        position: absolute;
+        top: 0;
+        /*bottom: 0;*/
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        font-weight: bold;
+        /*visibility: hidden;*/
+    }
+
+    .popuptables {
+        margin-left: 2%;
+        margin-top: 2%;
+    }
+
+    .popupC2 {
+        padding-left: 2px;
+    }
+
+    .popup_footer {
+        margin-left: 66%;
+        margin-top: 5%;
+    }
+
+    .barra_de_acciones {
+        margin-bottom: 1%;
+        margin-left: 1%;
+    }
+
+    .backlogHeaderFloat {
+        position: fixed;
+        z-index: 1000;
+    }
+
+    .backlogHeaderFloat_totals {
+        position: fixed;
+        z-index: 1000;
+    }
+
+    .innerTableTd {
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .dashlet-content > div {
+        overflow-x: scroll;
+    }
+
+    .dashboard .thumbnail.dashlet:not(.collapsed) {
+        max-height: 100%;
+        height: 100%;
+    }
+</style>
+<div class="backlog-dashlet-wrapper">
+    <input type="hidden" id="access" value="{{access}}"/>
+    <div>
+        <table class="filtros_table">
+            <tr>
+                <td>Mes:</td>
+                <td>Año:</td>
+                <!--<td >Region:</td>-->
+                <td>Equipo:</td>
+            </tr>
+            <tr>
+                <td>
+                    <select id="mes_filtro" class="filtros">
+                        {{{meses_list_html}}}
+                    </select>
+                </td>
+                <td>
+                    <select id="anio_filtro" class="filtros">
+                        {{{anio_list_html}}}
+                    </select>
+                </td>
+                <!--<td >-->
+                <!--<select id="region_filtro" class="filtros">-->
+                <!--{{{region_list_html}}}-->
+                <!--</select>-->
+                <!--</td>-->
+                <td>
+                    <select id="equipo_filtro" class="filtros" disabled>
+                        {{{equipo_list_html}}}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Promotor:</td>
+                <td>Tipo de operacion:</td>
+                <td>Etapa:</td>
+                <td>Estatus:</td>
+            </tr>
+            <td>
+                <input type="text" class="filtros" value="{{currentUserName}}" readonly="true"/>
+            </td>
+            <td>
+                <select id="tipo_operacion_filtro" class="filtros">
+                    {{{tipo_operacion_list_html}}}
+                </select>
+            </td>
+            <td>
+                <select id="etapa_filtro" class="filtros">
+                    {{{etapa_list_html}}}
+                </select>
+            </td>
+            <td>
+                <select id="estatus_filtro" class="filtros">
+                    {{{estatus_list_html}}}
+                </select>
+            </td>
+            <td colspan="6">
+                <input type="button" value="Buscar" id="btn_Buscar" class="btn btn-primary filtros"/>
+                <i class="icon-spinner icon-spin loadingIcon" style="display: none"></i>
+            </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="barra_de_acciones">
+        <table>
+            <tr>
+                <td>
+                    <a class="rowaction btn btn-primary" href="javascript:void(0);" id="expandir_backlog_button">
+                        <span class="icon-plus"></span></a>
+                    <a class="rowaction btn btn-primary" href="javascript:void(0);" id="colapsar_backlog_button">
+                        <span class="icon-minus"></span></a>
+                </td>
+                <td>
+                    <span class="btn btn-success exportar">Exportar a Excel</span>
+                </td>
+                <td>
+                    <span class="btn btn-success Comprometer_mass">Comprometer Masivo</span>
+                </td>
+                <td>
+                    <a class="btn btn-primary" tabindex="-1" data-navbar-menu-item="LNK_NEW_RECORD" href="#lev_Backlog/create" data-route="#lev_Backlog/create" track="click:#lev_Backlog/create"><i class="icon-plus"></i>Crear Backlog</a>
+                </td>
+
+                <td>
+                    <span class="btn btn-primary mostrar_columnas">Mostrar Columnas</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="popup" style="display: {{popup_switch}};">
+        <table class="popuptables" style="display: {{lograda_switch}};">
+            <tr>
+                <td>
+                    Operacion:
+                </td>
+                <td class="popupC2" colspan="3">
+                    {{backlogName}}
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Monto a comprometer:
+                </td>
+                <td>
+                    <input type="text" id="monto_a_comprometer" value="{{backlogMonto}}"/>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Renta inicial a comprometer:
+                </td>
+                <td>
+                    <input type="text" id="renta_a_comprometer" value="{{backlogRentaInicial}}"/>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Mes:
+                </td>
+                <td>
+                    <select id="mes_a_comprometer_popup">
+                        {{{meses_a_comprometer_list_html}}}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Año
+                </td>
+                <td>
+                    <select class="anio_a_comprometer_popup">
+                        {{{anio_list_html}}}
+                    </select>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <input id="mes_record" type="hidden" value="{{mes_seleccionado}}"/>
+                    <input id="anio_record" type="hidden" value="{{anio_seleccionado}}"/>
+                </td>
+            </tr>
+        </table>
+
+        <table class="popuptables" style="display: {{compromiso_masivo_switch}};">
+            <tr>
+                <td>
+                    Operaciones:
+                </td>
+                <td class="popupC2" colspan="3">
+                    {{backlog_mass_count}}
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Monto:
+                </td>
+                <td>
+                    ${{customFormatNumber backlogMass_Monto}}
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Mes:
+                </td>
+                <td>
+                    <select id="mes_a_comprometer_mass_popup">
+                        {{{meses_a_comprometer_list_html}}}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Año
+                </td>
+                <td>
+                    <select id="anio_a_comprometer_mass_popup">
+                        {{{anio_list_html}}}
+                    </select>
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <input id="mes_record" type="hidden" value="{{mes_seleccionado}}"/>
+                    <input id="anio_record" type="hidden" value="{{anio_seleccionado}}"/>
+                </td>
+            </tr>
+        </table>
+
+        <table class="popuptables" style="display: {{mes_switch}};">
+            <tr>
+                <td>
+                    Operacion:
+                </td>
+                <td class="popupC2">
+                    {{backlogName}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Monto:
+                </td>
+                <td>
+                    {{backlogMonto}}
+                </td>
+            </tr>
+            <tr>
+                <table class="popuptables" style="display: {{mes_switch}};">
+                    <tr>
+                        <td>
+                            Mes
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="mes_switch_popup">
+                                {{{meses_list_popup_mover_mes}}}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Año
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select class="anio_switch_popup">
+                                {{{anio_list_html}}}
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </tr>
+        </table>
+        <table class="popuptables" style="display: {{comentarios_switch}};">
+            <tr>
+                <td width="10%">
+                    Operacion:
+                </td>
+                <td class="popupC2" colspan="4">
+                    {{backlogName}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Monto Comprometido:
+                </td>
+                <td class="popupC2">
+                    <span id="monto_comprometido_comm">{{backlogMonto}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Monto Real:
+                </td>
+                <td class="popupC2">
+                    <span id="monto_real_comm">{{backlogMonto_Real}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    Comentarios:
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <textarea rows="4" cols="80" style="width: 90%;" id="BacklogDescription" readonly>{{comentarios_existentes}}</textarea>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    Agregar Comentario:
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <textarea rows="4" cols="80" style="width: 90%;" id="newBacklogDescription"></textarea>
+                </td>
+            </tr>
+        </table>
+        <table class="popuptables" style="display: {{cancelar_switch}};">
+            <tr>
+                <td width="10%">
+                    Operacion:
+                </td>
+                <td class="popupC2" colspan="4">
+                    {{backlogName}}
+                </td>
+            </tr>
+            <tr>
+                <td width="10%">
+                    Monto:
+                </td>
+                <td class="popupC2">
+                    <span id="monto_cancelacion_popup">{{backlogMonto}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td width="10%">
+                    Renta Inicial:
+                </td>
+                <td class="popupC2">
+                    <span id="renta_cancelacion_popup">{{backlogRentaInicial}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h1>Mover a:</h1>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Mes:
+                </td>
+                <td>
+                    Año:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <select class="mes_popup">
+                        {{{meses_list_popup_html}}}
+                    </select>
+                </td>
+                <td>
+                    <select class="anio_popup">
+                        {{{anio_list_html}}}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Motivo de cancelacion:
+                </td>
+
+            </tr>
+            <tr>
+                <td>
+                    <select id="motivo_de_cancelacion_popup" required>
+                        {{{motivo_de_cancelacion_list_html}}}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    Comentarios
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <textarea rows="4" cols="80" style="width: 90%;" id="comentarios_de_cancelacion"></textarea>
+                </td>
+            </tr>
+        </table>
+        <table class="popup_footer">
+            <tr>
+                <td class="popup_footer">
+                    <div class="btn-toolbar" style="margin: 0px;">
+                        <span class="btn btn-danger popupCancel" title="Cancel">{{cancel}}</span>
+                        <span class="btn btn-success popupSave" title="Save" style="margin-left: 20px; width: 40px;">{{save}}</span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="dashlet-backlog-wrapper">
+        <table width="100%" class="table table-striped table-bordered table-condensed backlog_dashlet_box" id="backlog-dashlet">
+            <tr class="backlog_dashlet_header">
+                <th width="1%">
+                    Comprometer
+                    <input type="checkbox" id="mass_update_btn"/>
+                </th>
+                <th width="5%" class="hide_mes">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_mes"/></td>
+                            </tr><tr>
+                            <td class="innerTableTd">Mes / Año</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="1%" class="hide_equipo">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_equipo"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Equipo</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="1%" class="hide_zona">
+                    <table width="100%" >
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_zona"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Zona</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="20%" class="hide_promotor">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_promotor"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Promotor</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="20%" class="hide_cliente">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_cliente"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Cliente</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="5%" class="hide_operacion">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_operacion"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Operacion</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="30%" class="hide_tipo_bien">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_tipo_bien"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Tipo de Bien</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="20%" class="hide_tipo_operacion">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_tipo_operacion"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Tipo de Operacion</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="5%" class="hide_monto_original">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_monto_original"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Monto Original</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="7%" class="hide_monto_comprometido">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_monto_comprometido"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Monto Comprometido</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="7%" class="hide_monto_diferencia">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_monto_diferencia"/></td>
+                        </tr><tr>
+                        <td class="innerTableTd">Monto Diferencia</td>
+                    </tr>
+                    </table>
+                </th>
+                <th width="5%" class="hide_monto_real">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_monto_real"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Monto Real</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="10%" class="hide_ri_comprometida">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_ri_comprometida"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">RI Comprometida</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="10%" class="hide_ri_real">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_ri_real"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">RI Real</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="10%" class="hide_monto_cancelado">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_monto_cancelado"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Monto Cancelado</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="10%" class="hide_ri_cancelada">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_ri_cancelada"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">RI Cancelada</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="10%" class="hide_etapa_preliminar">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_etapa_preliminar"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Etapa Preliminar</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="15%" class="hide_etapa">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_etapa"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Etapa</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="15%" class="hide_progreso">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_progreso"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Progreso</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="5%" class="hide_estatus">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_estatus"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Estatus</td>
+                        </tr>
+                    </table>
+                </th>
+                <th width="5%" class="hide_acciones">
+                    <table width="100%">
+                        <tr>
+                            <td class="innerTableTd"><input type="checkbox" title="Ocultar columna" class="hide_show_col" id="hide_acciones"/></td>
+                        </tr><tr>
+                            <td class="innerTableTd">Acciones</td>
+                        </tr>
+                    </table>
+                </th>
+            </tr>
+
+            {{#each backlogs}}
+                <tr class="backlog_dashlet_header_totals">
+                    <th class="totales"></th>
+                    <th class="totales hide_mes"></th>
+                    <th class="totales hide_equipo"></th>
+                    <th class="totales hide_zona"></th>
+                    <th class="totales hide_promotor"></th>
+                    <th class="totales hide_cliente"></th>
+                    <th class="totales hide_operacion"></th>
+                    <th class="totales hide_tipo_bien"></th>
+                    <th class="totales hide_tipo_operacion"></th>
+                    <th class="totales hide_monto_original">{{customFormatNumber totales.total_monto_original}}</th>
+                    <th class="totales hide_monto_comprometido">{{customFormatNumber totales.total_monto_comprometido}}</th>
+                    <th class="totales hide_monto_diferencia">{{customFormatNumber totales.total_monto_diferencia}}</th>
+                    <th class="totales hide_monto_real">{{customFormatNumber totales.total_monto_real}}</th>
+                    <th class="totales hide_ri_comprometida">{{customFormatNumber totales.total_renta_inicial}}</th>
+                    <th class="totales hide_ri_real">{{customFormatNumber totales.total_renta_real}}</th>
+                    <th class="totales hide_monto_cancelado">{{customFormatNumber totales.total_monto_cancelado}}</th>
+                    <th class="totales hide_ri_cancelada">{{customFormatNumber totales.total_ri_cancelada}}</th>
+                    <th class="totales hide_etapa_preliminar"></th>
+                    <th class="totales hide_etapa"></th>
+                    <th class="totales hide_progreso"></th>
+                    <th class="totales hide_estatus"></th>
+                    <th class="totales hide_acciones"></th>
+                </tr>
+            {{/each}}
+
+            {{#each backlogs}}
+                {{#each this.MyBacklogs.linea}}
+                    <tr class="backlog-dashlet-row">
+                        <td>
+                            <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
+                        </td>
+                        <td class="hide_mes">{{mes}} - {{anio}}</td>
+                        <td class="hide_equipo">{{equipo}}</td>
+                        <td class="hide_zona">{{zona}}</td>
+                        <td class="hide_promotor">{{promotor}}</td>
+                        <td class="hide_cliente">
+                            <a href="#Accounts/{{clienteId}}" target="_blank">{{cliente}}</a>
+                        </td>
+                        <td class="hide_operacion">
+                            <a href="#lev_Backlog/{{@key}}" target="_blank">{{numero_de_backlog}}</a>
+                        </td>
+                        <td class="hide_tipo_bien">{{tipo_bien}}</td>
+                        <td class="hide_tipo_operacion">{{tipo_operacion}}</td>
+                        <td class="hide_monto_original">{{customFormatNumber monto_original}}</td>
+                        <td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>
+                        <td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>
+                        <td class="hide_monto_real">{{customFormatNumber monto_real}}</td>
+                        <td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>
+                        <td class="hide_ri_real">{{customFormatNumber renta_real}}</td>
+                        <td class="hide_monto_cancelado">{{customFormatNumber monto_cancelado}}</td>
+                        <td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>
+                        <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
+                        <td class="hide_etapa">{{etapa}}</td>
+                        <td class="hide_progreso">{{progreso}}</td>
+                        <td class="hide_estatus">{{estatus_de_la_operacion}}</td>
+                        <!--<td>-->
+                        <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
+                        <!--</td>-->
+                        <td class="hide_acciones">
+                            <div class="btn-toolbar" style="margin: 0px;">
+                                <div class="btn-group">
+                                    <span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}"></span>
+                                    <span class="btn MoverOperacion icon-hand-up" title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}"></span>
+                                    <span class="btn Cancelar icon-remove-sign" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_de_la_operacion}}" data-mes="{{mes_int}}" data-anio="{{anio}}"></span>
+                                    <span class="btn Comentario icon-comment-alt" title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}"></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {{/each}}
+
+                {{#each this.SubBacklogs}}
+                    {{#each this.linea}}
+                        <tr class="backlog-dashlet-row">
+                            <td>
+                                <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
+                            </td>
+                            <td class="hide_mes">{{mes}} - {{anio}}</td>
+                            <td class="hide_equipo">{{equipo}}</td>
+                            <td class="hide_zona">{{zona}}</td>
+                            <td class="hide_promotor">{{promotor}}</td>
+                            <td class="hide_cliente">
+                                <a href="#Accounts/{{clienteId}}" target="_blank">{{cliente}}</a>
+                            </td>
+                            <td class="hide_operacion">
+                                <a href="#lev_Backlog/{{@key}}" target="_blank">{{numero_de_backlog}}</a>
+                            </td>
+                            <td class="hide_tipo_bien">{{tipo_bien}}</td>
+                            <td class="hide_tipo_operacion">{{tipo_operacion}}</td>
+                            <td class="hide_monto_original">{{customFormatNumber monto_original}}</td>
+                            <td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>
+                            <td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>
+                            <td class="hide_monto_real">{{customFormatNumber monto_real}}</td>
+                            <td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>
+                            <td class="hide_ri_real">{{customFormatNumber renta_real}}</td>
+                            <td class="hide_monto_cancelado">{{customFormatNumber monto_cancelado}}</td>
+                            <td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>
+                            <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
+                            <td class="hide_etapa">{{etapa}}</td>
+                            <td class="hide_progreso">{{progreso}}</td>
+                            <td class="hide_estatus">{{estatus_de_la_operacion}}</td>
+                            <!--<td>-->
+                            <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
+                            <!--</td>-->
+                            <td class="hide_acciones">
+                                <div class="btn-toolbar" style="margin: 0px;">
+                                    <div class="btn-group">
+                                        <span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}"></span>
+                                        <span class="btn MoverOperacion icon-hand-up" title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}"></span>
+                                        <span class="btn Cancelar icon-remove-sign" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_de_la_operacion}}" data-mes="{{mes_int}}" data-anio="{{anio}}"></span>
+                                        <span class="btn Comentario icon-comment-alt" title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}"></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {{/each}}
+                {{/each}}
+
+                {{#if Children}}
+                    {{#each Children}}
+                        {{#each this}}
+                            {{#each this}}
+                                {{#each this}}
+                                    <tr class="backlog-dashlet-row">
+                                        <td>
+                                            <input type="checkbox" class="mass_update" value="{{@key}}" {{estatus_checked}} {{mass_checked}}/>
+                                        </td>
+                                        <td class="hide_mes">{{mes}} - {{anio}}</td>
+                                        <td class="hide_equipo">{{equipo}}</td>
+                                        <td class="hide_zona">{{zona}}</td>
+                                        <td class="hide_promotor">{{promotor}}</td>
+                                        <td class="hide_cliente">
+                                            <a href="#Accounts/{{clienteId}}" target="_blank">{{cliente}}</a>
+                                        </td>
+                                        <td class="hide_operacion">
+                                            <a href="#lev_Backlog/{{@key}}" target="_blank">{{numero_de_backlog}}</a>
+                                        </td>
+                                        <td class="hide_tipo_bien">{{tipo_bien}}</td>
+                                        <td class="hide_tipo_operacion">{{tipo_operacion}}</td>
+                                        <td class="hide_monto_original">{{customFormatNumber monto_original}}</td>
+                                        <td class="hide_monto_comprometido">{{customFormatNumber monto_comprometido}}</td>
+                                        <td class="hide_monto_diferencia">{{customFormatNumber monto_diferencia}}</td>
+                                        <td class="hide_monto_real">{{customFormatNumber monto_real}}</td>
+                                        <td class="hide_ri_comprometida">{{customFormatNumber ri_comprometida}}</td>
+                                        <td class="hide_ri_real">{{customFormatNumber renta_real}}</td>
+                                        <td class="hide_monto_cancelado">{{customFormatNumber monto_cancelado}}</td>
+                                        <td class="hide_ri_cancelada">{{customFormatNumber ri_cancelada}}</td>
+                                        <td class="hide_etapa_preliminar">{{etapa_preliminar}}</td>
+                                        <td class="hide_etapa">{{etapa}}</td>
+                                        <td class="hide_progreso">{{progreso}}</td>
+                                        <td class="hide_estatus">{{estatus_de_la_operacion}}</td>
+                                        <!--<td>-->
+                                        <!--<a href="#Opportunities/{{oppId}}" target="_blank">{{No_Solicitud}}</a>-->
+                                        <!--</td>-->
+                                        <td class="hide_acciones">
+                                            <div class="btn-toolbar" style="margin: 0px;">
+                                                <div class="btn-group">
+                                                    <span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}"></span>
+                                                    <span class="btn MoverOperacion icon-hand-up" title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}"></span>
+                                                    <span class="btn Cancelar icon-remove-sign" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_de_la_operacion}}" data-mes="{{mes_int}}" data-anio="{{anio}}"></span>
+                                                    <span class="btn Comentario icon-comment-alt" title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}"></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                            {{/each}}
+                        {{/each}}
+                    {{/each}}
+                {{/if}}
+            {{/each}}
+        </table>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".popup").draggable();
+    });
+</script>

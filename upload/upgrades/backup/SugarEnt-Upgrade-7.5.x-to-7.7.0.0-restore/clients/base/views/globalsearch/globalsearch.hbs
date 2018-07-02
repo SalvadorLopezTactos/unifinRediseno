@@ -1,0 +1,32 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div class="navbar-search" aria-role="search">
+    <input type="text" class="search-query" placeholder="{{str 'LBL_SEARCH'}}" data-provide="typeahead" data-items="5" aria-label="{{str 'LBL_GLOBAL_SEARCH'}}">
+    <div class="advanced">
+        <div class="btn-toolbar pull-right">
+            <div class="btn-group">
+                <button class="btn btn-link btn-invisible advanced dropdown-toggle" data-toggle="dropdown" track="click:globalsearch-dropdown" aria-label="{{str 'LBL_GLOBAL_SEARCH_MODULE_FILTER'}}"><i class="icon-caret-down"></i></button>
+                <div class="dropdown-menu pull-right globalsearch-adv-wrap scroll">
+                    <ul class="globalsearch-adv reset-width" role="menu" data-advanced="options">
+                        <li><label class="active"><input data-action="select-module" data-module="all" type="checkbox" checked="checked" tabindex="-1"> {{str 'LBL_SEARCH_ALL_MODULES'}}</label></li>
+                        {{#each searchModules}}
+                        <li><label><input data-action="select-module" data-module="{{this}}" type="checkbox" tabindex="-1"> {{str 'LBL_MODULE_NAME' this}}</label></li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <button class="btn btn-inverse" data-action="search" track="click:globalsearch" aria-label="{{str 'LBL_GLOBAL_SEARCH_RUN'}}"><i class="icon icon-search"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="typeahead-wrapper"></div>

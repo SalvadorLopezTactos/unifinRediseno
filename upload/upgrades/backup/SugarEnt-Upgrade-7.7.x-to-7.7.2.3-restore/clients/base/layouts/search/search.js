@@ -1,0 +1,17 @@
+/*
+     * Your installation or use of this SugarCRM file is subject to the applicable
+     * terms available at
+     * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+     * If you do not agree to all of the applicable terms or do not have the
+     * authority to bind the entity as an authorized representative, then do not
+     * install or use this SugarCRM file.
+     *
+     * Copyright (C) SugarCRM Inc. All rights reserved.
+     */
+({initialize:function(options){this._super('initialize',[options]);this.context.set('search',true);this.collection.query=this.context.get('searchTerm')||'';this.filteredSearch=false;this.selectedFacets={};this.context.on('search:fire:new',function(){this.search();},this);this.context.on('facet:apply',this.filter,this);this.collection.on('sync',function(collection){var isCollection=(collection instanceof App.BeanCollection);if(!isCollection){return;}
+app.utils.GlobalSearch.formatRecords(collection,true);if(!_.isEmpty(collection.xmod_aggs)){if(!this.filteredSearch){this._initializeSelectedFacets(collection.xmod_aggs);}
+this.context.set('selectedFacets',this.selectedFacets);this.context.set('facets',collection.xmod_aggs,{silent:true});this.context.trigger('facets:change',collection.xmod_aggs);}},this);this.context.on('facets:reset',this.search,this);this.collection.setOption('params',{xmod_aggs:true});},_initializeSelectedFacets:function(facets){_.each(facets,function(facet,key){if(key==='modules'){this.selectedFacets[key]=[];}else{this.selectedFacets[key]=false;}},this);},_updateSelectedFacets:function(facetId,facetCriteriaId,isSingleItem){if(isSingleItem){this.selectedFacets[facetId]=!this.selectedFacets[facetId];return;}
+var index;if(this.selectedFacets[facetId]){index=this.selectedFacets[facetId].indexOf(facetCriteriaId);}else{this.selectedFacets[facetId]=[];}
+if(_.isUndefined(index)||index===-1){this.selectedFacets[facetId].splice(0,0,facetCriteriaId);}else{this.selectedFacets[facetId].splice(index,1);if(this.selectedFacets[facetId].length===0){delete this.selectedFacets[facetId];}}},search:function(reset){if(reset&&!this.filteredSearch){return;}
+var searchTerm=this.context.get('searchTerm');var moduleList=this.context.get('module_list')||[];this.filteredSearch=false;var tagFilters=_.pluck(this.context.get('tags'),'id');this.collection.fetch({query:searchTerm,module_list:moduleList,apiOptions:{data:{tag_filters:tagFilters},fetchWithPost:true,useNewApi:true}});},filter:function(facetId,facetCriteriaId,isSingleItem){this._updateSelectedFacets(facetId,facetCriteriaId,isSingleItem);var searchTerm=this.context.get('searchTerm');var moduleList=this.context.get('module_list')||[];this.filteredSearch=true;var tagFilters=_.pluck(this.context.get('tags'),'id');this.collection.fetch({query:searchTerm,module_list:moduleList,apiOptions:{data:{agg_filters:this.selectedFacets,tag_filters:tagFilters},fetchWithPost:true,useNewApi:true}});},loadData:function(options,setFields){setFields=false;options=options||{};options.module_list=this.context.get('module_list')||[];var tagFilters=_.pluck(this.context.get('tags'),'id');if(tagFilters){options.apiOptions=options.apiOptions||{};options.apiOptions.data={tag_filters:tagFilters};options.apiOptions.fetchWithPost=true;options.apiOptions.useNewApi=true;}
+this._super('loadData',[options,setFields]);}})

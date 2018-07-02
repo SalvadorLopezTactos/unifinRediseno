@@ -1,0 +1,1797 @@
+[
+    {
+        "name": "symfony/event-dispatcher",
+        "version": "v2.8.15",
+        "version_normalized": "2.8.15.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/event-dispatcher.git",
+            "reference": "feb29bce46c815e639319bd283fa611a8476ff9e"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/symfony-event-dispatcher-v2.8.15-4458c7.tar",
+            "reference": "feb29bce46c815e639319bd283fa611a8476ff9e",
+            "shasum": "806e3f2ec40a10bbf89a22a4019baabedcf64819"
+        },
+        "require": {
+            "php": ">=5.3.9"
+        },
+        "require-dev": {
+            "psr/log": "~1.0",
+            "symfony/config": "~2.0,>=2.0.5|~3.0.0",
+            "symfony/dependency-injection": "~2.6|~3.0.0",
+            "symfony/expression-language": "~2.6|~3.0.0",
+            "symfony/stopwatch": "~2.3|~3.0.0"
+        },
+        "suggest": {
+            "symfony/dependency-injection": "",
+            "symfony/http-kernel": ""
+        },
+        "time": "2016-10-13T01:43:15+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.8-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\EventDispatcher\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony EventDispatcher Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "guzzle/guzzle",
+        "version": "v3.9.3",
+        "version_normalized": "3.9.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/guzzle/guzzle3.git",
+            "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/guzzle-guzzle-v3.9.3-ed28d5.tar",
+            "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9",
+            "shasum": "d8855478ce5a8b3b9edda7f0857c30fe2358c0dc"
+        },
+        "require": {
+            "ext-curl": "*",
+            "php": ">=5.3.3",
+            "symfony/event-dispatcher": "~2.1"
+        },
+        "replace": {
+            "guzzle/batch": "self.version",
+            "guzzle/cache": "self.version",
+            "guzzle/common": "self.version",
+            "guzzle/http": "self.version",
+            "guzzle/inflection": "self.version",
+            "guzzle/iterator": "self.version",
+            "guzzle/log": "self.version",
+            "guzzle/parser": "self.version",
+            "guzzle/plugin": "self.version",
+            "guzzle/plugin-async": "self.version",
+            "guzzle/plugin-backoff": "self.version",
+            "guzzle/plugin-cache": "self.version",
+            "guzzle/plugin-cookie": "self.version",
+            "guzzle/plugin-curlauth": "self.version",
+            "guzzle/plugin-error-response": "self.version",
+            "guzzle/plugin-history": "self.version",
+            "guzzle/plugin-log": "self.version",
+            "guzzle/plugin-md5": "self.version",
+            "guzzle/plugin-mock": "self.version",
+            "guzzle/plugin-oauth": "self.version",
+            "guzzle/service": "self.version",
+            "guzzle/stream": "self.version"
+        },
+        "require-dev": {
+            "doctrine/cache": "~1.3",
+            "monolog/monolog": "~1.0",
+            "phpunit/phpunit": "3.7.*",
+            "psr/log": "~1.0",
+            "symfony/class-loader": "~2.1",
+            "zendframework/zend-cache": "2.*,<2.3",
+            "zendframework/zend-log": "2.*,<2.3"
+        },
+        "suggest": {
+            "guzzlehttp/guzzle": "Guzzle 5 has moved to a new package name. The package you have installed, Guzzle 3, is deprecated."
+        },
+        "time": "2015-03-18T18:23:50+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "3.9-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Guzzle": "src/",
+                "Guzzle\\Tests": "tests/"
+            }
+        },
+        "scripts": {
+            "test": [
+                "phpunit"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Michael Dowling",
+                "email": "mtdowling@gmail.com",
+                "homepage": "https://github.com/mtdowling"
+            },
+            {
+                "name": "Guzzle Community",
+                "homepage": "https://github.com/guzzle/guzzle/contributors"
+            }
+        ],
+        "description": "PHP HTTP client. This library is deprecated in favor of https://packagist.org/packages/guzzlehttp/guzzle",
+        "homepage": "http://guzzlephp.org/",
+        "keywords": [
+            "HTTP client",
+            "client",
+            "curl",
+            "framework",
+            "http",
+            "rest",
+            "web service"
+        ]
+    },
+    {
+        "name": "aws/aws-sdk-php",
+        "version": "2.7.7",
+        "version_normalized": "2.7.7.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/aws/aws-sdk-php.git",
+            "reference": "c9dff84d401f0933d7e7d85aacbf6ce1b8fc9f0f"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/aws-aws-sdk-php-2.7.7-845e97.tar",
+            "reference": "c9dff84d401f0933d7e7d85aacbf6ce1b8fc9f0f",
+            "shasum": "1fc97d39c15c34e1f0270f81c85b0e9c4b20fb18"
+        },
+        "require": {
+            "guzzle/guzzle": "~3.7",
+            "php": ">=5.3.3"
+        },
+        "require-dev": {
+            "doctrine/cache": "~1.0",
+            "ext-openssl": "*",
+            "monolog/monolog": "~1.4",
+            "phpunit/phpunit": "~4.0",
+            "symfony/yaml": "~2.1"
+        },
+        "suggest": {
+            "doctrine/cache": "Adds support for caching of credentials and responses",
+            "ext-apc": "Allows service description opcode caching, request and response caching, and credentials caching",
+            "ext-openssl": "Allows working with CloudFront private distributions and verifying received SNS messages",
+            "monolog/monolog": "Adds support for logging HTTP requests and responses",
+            "symfony/yaml": "Eases the ability to write manifests for creating jobs in AWS Import/Export"
+        },
+        "time": "2014-11-26T01:13:25+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Aws": "src/"
+            }
+        },
+        "license": [
+            "Apache-2.0"
+        ],
+        "authors": [
+            {
+                "name": "Amazon Web Services",
+                "homepage": "http://aws.amazon.com"
+            }
+        ],
+        "description": "AWS SDK for PHP - Use Amazon Web Services in your PHP project",
+        "homepage": "http://aws.amazon.com/sdkforphp",
+        "keywords": [
+            "amazon",
+            "aws",
+            "cloud",
+            "dynamodb",
+            "ec2",
+            "glacier",
+            "s3",
+            "sdk"
+        ],
+        "support": {
+            "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
+            "issues": "https://github.com/aws/aws-sdk-php/issues"
+        }
+    },
+    {
+        "name": "doctrine/lexer",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/lexer.git",
+            "reference": "d1ec545810553c0f5ed11140a3b5afa74a141459"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/doctrine-lexer-v1.0.1-20cd74.tar",
+            "reference": "d1ec545810553c0f5ed11140a3b5afa74a141459",
+            "shasum": "d0c3ed2af18e48da306ed14181b1dd1e5d1d1036"
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "time": "2014-09-09T13:34:57+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Doctrine\\Common\\Lexer\\": "lib/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "lexer",
+            "parser"
+        ]
+    },
+    {
+        "name": "doctrine/annotations",
+        "version": "v1.3.1",
+        "version_normalized": "1.3.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/annotations.git",
+            "reference": "548b75c1bfef57460d7b7a17c9d730c9a9a40a19"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/doctrine-annotations-v1.3.1-ff5ce8.tar",
+            "reference": "548b75c1bfef57460d7b7a17c9d730c9a9a40a19",
+            "shasum": "e53742aa743b1c5fdad1541a339b519e55989eb4"
+        },
+        "require": {
+            "doctrine/lexer": "1.*",
+            "php": "^5.6 || ^7.0"
+        },
+        "require-dev": {
+            "doctrine/cache": "1.*",
+            "phpunit/phpunit": "^5.6.1"
+        },
+        "time": "2016-12-30T15:59:45+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.4.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Docblock Annotations Parser",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "annotations",
+            "docblock",
+            "parser"
+        ]
+    },
+    {
+        "name": "doctrine/cache",
+        "version": "v1.6.1",
+        "version_normalized": "1.6.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/cache.git",
+            "reference": "557e44fa9ee20e4f2601844d37ea25229265a72e"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/doctrine-cache-v1.6.1-ef2436.tar",
+            "reference": "557e44fa9ee20e4f2601844d37ea25229265a72e",
+            "shasum": "148ddae1315ecb1f3910d7a5e1dab40bcce602d4"
+        },
+        "require": {
+            "php": "~5.5|~7.0"
+        },
+        "conflict": {
+            "doctrine/common": ">2.2,<2.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.8|~5.0",
+            "predis/predis": "~1.0",
+            "satooshi/php-coveralls": "~0.6"
+        },
+        "time": "2016-10-29T11:16:17+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.6.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "Doctrine\\Tests\\": "tests/Doctrine/Tests"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Caching library offering an object-oriented API for many cache backends",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "cache",
+            "caching"
+        ]
+    },
+    {
+        "name": "doctrine/collections",
+        "version": "v1.3.0",
+        "version_normalized": "1.3.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/collections.git",
+            "reference": "9915a7be0d21476ed5a106f3cefd6468d220a435"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/doctrine-collections-v1.3.0-0fefe8.tar",
+            "reference": "9915a7be0d21476ed5a106f3cefd6468d220a435",
+            "shasum": "b637de0f7ad315d8bb202f1023d426064d703161"
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2015-04-14T22:21:58+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Doctrine\\Common\\Collections\\": "lib/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Collections Abstraction library",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "array",
+            "collections",
+            "iterator"
+        ]
+    },
+    {
+        "name": "doctrine/inflector",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/inflector.git",
+            "reference": "1a30ab845ec7f2650d3d1b136b915972ef53dc77"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/doctrine-inflector-v1.1.0-6c8dd6.tar",
+            "reference": "1a30ab845ec7f2650d3d1b136b915972ef53dc77",
+            "shasum": "654919ad35875fd52655ec4563ef254b78ebbe65"
+        },
+        "require": {
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*"
+        },
+        "time": "2015-11-06T14:35:42+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Doctrine\\Common\\Inflector\\": "lib/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Common String Manipulations with regard to casing and singular/plural rules.",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "inflection",
+            "pluralize",
+            "singularize",
+            "string"
+        ]
+    },
+    {
+        "name": "doctrine/common",
+        "version": "v2.6.2",
+        "version_normalized": "2.6.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/common.git",
+            "reference": "34be47a0e169fbc850f0b93cfbeb273eb6e89d06"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/doctrine-common-v2.6.2-aba0ad.tar",
+            "reference": "34be47a0e169fbc850f0b93cfbeb273eb6e89d06",
+            "shasum": "3a66cc58a1412bcc70764c6e7de27a167309afad"
+        },
+        "require": {
+            "doctrine/annotations": "1.*",
+            "doctrine/cache": "1.*",
+            "doctrine/collections": "1.*",
+            "doctrine/inflector": "1.*",
+            "doctrine/lexer": "1.*",
+            "php": "~5.5|~7.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.8|~5.0"
+        },
+        "time": "2016-11-30T16:50:46+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.7.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Doctrine\\Common\\": "lib/Doctrine/Common"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            },
+            {
+                "name": "Johannes Schmitt",
+                "email": "schmittjoh@gmail.com"
+            }
+        ],
+        "description": "Common Library for Doctrine projects",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "annotations",
+            "collections",
+            "eventmanager",
+            "persistence",
+            "spl"
+        ]
+    },
+    {
+        "name": "doctrine/dbal",
+        "version": "v2.5.12",
+        "version_normalized": "2.5.12.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/doctrine/dbal.git",
+            "reference": "220cd9971c1de05ab5d4be982cf51f15c5530b36"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/doctrine-dbal-v2.5.12-f1e0b4.tar",
+            "reference": "220cd9971c1de05ab5d4be982cf51f15c5530b36",
+            "shasum": "c4ebc36de3c5f85f8a9bb0d12eece35ff3e41344"
+        },
+        "archive": {
+            "exclude": [
+                "!vendor",
+                "tests",
+                "*phpunit.xml",
+                ".travis.yml",
+                "build.xml",
+                "build.properties",
+                "composer.phar"
+            ]
+        },
+        "require": {
+            "doctrine/common": ">=2.4,<2.8-dev",
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*",
+            "symfony/console": "2.*||^3.0"
+        },
+        "suggest": {
+            "symfony/console": "For helpful console commands such as SQL execution and import of files."
+        },
+        "time": "2017-02-08T12:53:47+00:00",
+        "bin": [
+            "bin/doctrine-dbal"
+        ],
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.5.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Doctrine\\DBAL\\": "lib/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Guilherme Blanco",
+                "email": "guilhermeblanco@gmail.com"
+            },
+            {
+                "name": "Roman Borschel",
+                "email": "roman@code-factory.org"
+            },
+            {
+                "name": "Benjamin Eberlei",
+                "email": "kontakt@beberlei.de"
+            },
+            {
+                "name": "Jonathan Wage",
+                "email": "jonwage@gmail.com"
+            }
+        ],
+        "description": "Database Abstraction Layer",
+        "homepage": "http://www.doctrine-project.org",
+        "keywords": [
+            "database",
+            "dbal",
+            "persistence",
+            "queryobject"
+        ]
+    },
+    {
+        "name": "etechnika/idna-convert",
+        "version": "1.0.3",
+        "version_normalized": "1.0.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/etechnika/idna-convert.git",
+            "reference": "85e488474269b19630ca4e711061e4aa61ac879a"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/etechnika-idna-convert-1.0.3-ae3a24.tar",
+            "reference": "85e488474269b19630ca4e711061e4aa61ac879a",
+            "shasum": "e69c7b5e4a970e05db1f6293d5143a2464ecdb60"
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "fabpot/php-cs-fixer": "dev-master",
+            "pdepend/pdepend": "1.1.*",
+            "phploc/phploc": "2.0.*",
+            "phpmd/phpmd": "1.5.*",
+            "phpunit/php-code-coverage": "1.2.*",
+            "phpunit/phpcov": "dev-master",
+            "phpunit/phpunit": "3.7.*",
+            "satooshi/php-coveralls": "dev-master",
+            "sebastian/phpcpd": "2.0.*",
+            "squizlabs/php_codesniffer": "1.4.*"
+        },
+        "time": "2014-02-15T12:42:32+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Etechnika\\IdnaConvert": "src/"
+            }
+        },
+        "license": [
+            "LGPL-2.1"
+        ],
+        "authors": [
+            {
+                "name": "Tomasz Rutkowski",
+                "email": "tomasz@etechnika.eu",
+                "homepage": "http://etechnika.eu",
+                "role": "Developer"
+            }
+        ],
+        "description": "Etechnika.eu idna-convert",
+        "homepage": "https://github.com/etechnika/idna-convert",
+        "keywords": [
+            "lib"
+        ]
+    },
+    {
+        "name": "google/apiclient",
+        "version": "1.1.4",
+        "version_normalized": "1.1.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/google/google-api-php-client.git",
+            "reference": "2adb5ba90612858d4add0342eee6b8b9aaca398d"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/google-apiclient-1.1.4-b0e5f5.tar",
+            "reference": "2adb5ba90612858d4add0342eee6b8b9aaca398d",
+            "shasum": "092550b6121aed1795ede6c6d6e354c6cb5e38df"
+        },
+        "require": {
+            "php": ">=5.2.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "3.7.*"
+        },
+        "time": "2015-05-21T19:35:32+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.1.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/"
+            ]
+        },
+        "license": [
+            "Apache-2.0"
+        ],
+        "description": "Client library for Google APIs",
+        "homepage": "http://developers.google.com/api-client-library/php",
+        "keywords": [
+            "google"
+        ]
+    },
+    {
+        "name": "ircmaxell/password-compat",
+        "version": "v1.0.4",
+        "version_normalized": "1.0.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ircmaxell/password_compat.git",
+            "reference": "5c5cde8822a69545767f7c7f3058cb15ff84614c"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/ircmaxell-password-compat-v1.0.4-2be011.tar",
+            "reference": "5c5cde8822a69545767f7c7f3058cb15ff84614c",
+            "shasum": "7a94bee2714b7443941787d128de4a5e35c3ce75"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*"
+        },
+        "time": "2014-11-20T16:49:30+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "lib/password.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Anthony Ferrara",
+                "email": "ircmaxell@php.net",
+                "homepage": "http://blog.ircmaxell.com"
+            }
+        ],
+        "description": "A compatibility library for the proposed simplified password hashing algorithm: https://wiki.php.net/rfc/password_hash",
+        "homepage": "https://github.com/ircmaxell/password_compat",
+        "keywords": [
+            "hashing",
+            "password"
+        ]
+    },
+    {
+        "name": "psr/log",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/log.git",
+            "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/psr-log-1.0.0-e71523.tar",
+            "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+            "shasum": "93e2546e57b9c28306eb0fce599fed484143c95b"
+        },
+        "time": "2012-12-21T11:40:51+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Psr\\Log\\": ""
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for logging libraries",
+        "keywords": [
+            "log",
+            "psr",
+            "psr-3"
+        ]
+    },
+    {
+        "name": "monolog/monolog",
+        "version": "1.22.0",
+        "version_normalized": "1.22.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Seldaek/monolog.git",
+            "reference": "bad29cb8d18ab0315e6c477751418a82c850d558"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/monolog-monolog-1.22.0-96ac6d.tar",
+            "reference": "bad29cb8d18ab0315e6c477751418a82c850d558",
+            "shasum": "422d61407c024453796e31100590e281140f3090"
+        },
+        "require": {
+            "php": ">=5.3.0",
+            "psr/log": "~1.0"
+        },
+        "provide": {
+            "psr/log-implementation": "1.0.0"
+        },
+        "require-dev": {
+            "aws/aws-sdk-php": "^2.4.9 || ^3.0",
+            "doctrine/couchdb": "~1.0@dev",
+            "graylog2/gelf-php": "~1.0",
+            "jakub-onderka/php-parallel-lint": "0.9",
+            "php-amqplib/php-amqplib": "~2.4",
+            "php-console/php-console": "^3.1.3",
+            "phpunit/phpunit": "~4.5",
+            "phpunit/phpunit-mock-objects": "2.3.0",
+            "ruflin/elastica": ">=0.90 <3.0",
+            "sentry/sentry": "^0.13",
+            "swiftmailer/swiftmailer": "~5.3"
+        },
+        "suggest": {
+            "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
+            "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+            "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+            "ext-mongo": "Allow sending log messages to a MongoDB server",
+            "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
+            "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
+            "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
+            "php-console/php-console": "Allow sending log messages to Google Chrome",
+            "rollbar/rollbar": "Allow sending log messages to Rollbar",
+            "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+            "sentry/sentry": "Allow sending log messages to a Sentry server"
+        },
+        "time": "2016-11-26T00:15:39+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Monolog\\": "src/Monolog"
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "Monolog\\": "tests/Monolog"
+            }
+        },
+        "scripts": {
+            "test": [
+                "parallel-lint . --exclude vendor",
+                "phpunit"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jordi Boggiano",
+                "email": "j.boggiano@seld.be",
+                "homepage": "http://seld.be"
+            }
+        ],
+        "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+        "homepage": "http://github.com/Seldaek/monolog",
+        "keywords": [
+            "log",
+            "logging",
+            "psr-3"
+        ]
+    },
+    {
+        "name": "moontoast/math",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ramsey/moontoast-math.git",
+            "reference": "df98c89b919b71180560c7f5ef266ee1504f60b9"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/moontoast-math-1.1.0-234d74.tar",
+            "reference": "df98c89b919b71180560c7f5ef266ee1504f60b9",
+            "shasum": "fd97af756a57fc3e8252378764dcc20fe28e4d40"
+        },
+        "require": {
+            "ext-bcmath": "*",
+            "php": ">=5.3.3"
+        },
+        "time": "2013-01-19T17:42:34+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "Moontoast\\Math": "src/"
+            }
+        },
+        "license": [
+            "Apache-2.0"
+        ],
+        "description": "A mathematics library, providing functionality for large numbers",
+        "homepage": "https://github.com/moontoast/math",
+        "keywords": [
+            "bcmath",
+            "math"
+        ],
+        "support": {
+            "issues": "https://github.com/moontoast/math/issues",
+            "source": "https://github.com/moontoast/math"
+        }
+    },
+    {
+        "name": "onelogin/php-saml",
+        "version": "2.10.5",
+        "version_normalized": "2.10.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/onelogin/php-saml.git",
+            "reference": "3319d7707f342e38291eee6b01a4a5f8df1b333b"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/onelogin-php-saml-2.10.5-4e6fca.tar",
+            "reference": "3319d7707f342e38291eee6b01a4a5f8df1b333b",
+            "shasum": "46b95bb73b837c2d3bdf8f1065cd52e8fb4f4631"
+        },
+        "require": {
+            "ext-dom": "*",
+            "ext-mcrypt": "*",
+            "ext-openssl": "*",
+            "php": ">=5.3.2"
+        },
+        "require-dev": {
+            "pdepend/pdepend": "1.1.0",
+            "phploc/phploc": "*",
+            "phpunit/phpunit": "4.8",
+            "satooshi/php-coveralls": "1.0.1",
+            "sebastian/phpcpd": "*",
+            "squizlabs/php_codesniffer": "*"
+        },
+        "suggest": {
+            "ext-gettext": "Install gettext and php5-gettext libs to handle translations",
+            "ext-mcrypt": "Install mcrypt and php5-mcrypt libs in order to support encryption",
+            "lib-openssl": "Install openssl lib in order to handle with x509 certs (require to support sign and encryption)"
+        },
+        "time": "2017-03-13T09:56:49+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "extlib/xmlseclibs",
+                "lib/Saml",
+                "lib/Saml2"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "OneLogin PHP SAML Toolkit",
+        "homepage": "https://onelogin.zendesk.com/hc/en-us/sections/200245634-SAML-Toolkits",
+        "keywords": [
+            "onelogin",
+            "saml",
+            "saml2"
+        ],
+        "support": {
+            "email": "sixto.garcia@onelogin.com",
+            "issues": "https://github.com/onelogin/php-saml/issues",
+            "source": "https://github.com/onelogin/php-saml/"
+        }
+    },
+    {
+        "name": "parsecsv/php-parsecsv",
+        "version": "0.4.5",
+        "version_normalized": "0.4.5.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/parsecsv/parsecsv-for-php.git",
+            "reference": "0486a4bf3ef80dfa215f38f865ed8685fbb472c7"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/parsecsv-php-parsecsv-0.4.5-c0d74d.tar",
+            "reference": "0486a4bf3ef80dfa215f38f865ed8685fbb472c7",
+            "shasum": "13ccfa6fafe0a336c615347362680c23b2dbc9d3"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.1.*"
+        },
+        "time": "2014-06-03T00:37:04+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "."
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jim Myhrberg",
+                "email": "contact@jimeh.me"
+            }
+        ],
+        "description": "CSV data parser for PHP"
+    },
+    {
+        "name": "phpmailer/phpmailer",
+        "version": "v5.2.22",
+        "version_normalized": "5.2.22.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/PHPMailer/PHPMailer",
+            "reference": "b18cb98131bd83103ccb26a888fdfe3177b8a663"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/phpmailer-phpmailer-v5.2.22-f88abd.tar",
+            "reference": "b18cb98131bd83103ccb26a888fdfe3177b8a663",
+            "shasum": "02b421185876d238c3178836cbfce5b60d9c9cff"
+        },
+        "require": {
+            "php": ">=5.0.0"
+        },
+        "require-dev": {
+            "phpdocumentor/phpdocumentor": "*",
+            "phpunit/phpunit": "4.7.*"
+        },
+        "suggest": {
+            "league/oauth2-google": "Needed for Google XOAUTH2 authentication"
+        },
+        "time": "2017-01-09T09:33:47+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "class.phpmailer.php",
+                "class.phpmaileroauth.php",
+                "class.phpmaileroauthgoogle.php",
+                "class.smtp.php",
+                "class.pop3.php",
+                "extras/EasyPeasyICS.php",
+                "extras/ntlm_sasl_client.php"
+            ]
+        },
+        "license": [
+            "LGPL-2.1"
+        ],
+        "authors": [
+            {
+                "name": "Marcus Bointon",
+                "email": "phpmailer@synchromedia.co.uk"
+            },
+            {
+                "name": "Jim Jagielski",
+                "email": "jimjag@gmail.com"
+            },
+            {
+                "name": "Andy Prevost",
+                "email": "codeworxtech@users.sourceforge.net"
+            },
+            {
+                "name": "Brent R. Matzelle"
+            }
+        ],
+        "description": "PHPMailer is a full-featured email creation and transfer class for PHP"
+    },
+    {
+        "name": "paragonie/random_compat",
+        "version": "v2.0.2",
+        "version_normalized": "2.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/paragonie/random_compat.git",
+            "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/paragonie-random_compat-v2.0.2-31ee9f.tar",
+            "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf",
+            "shasum": "e7db3de779bc1bcebf5d830762282c5038a38767"
+        },
+        "require": {
+            "php": ">=5.2.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*|5.*"
+        },
+        "suggest": {
+            "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+        },
+        "time": "2016-04-03T06:00:07+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "lib/random.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Paragon Initiative Enterprises",
+                "email": "security@paragonie.com",
+                "homepage": "https://paragonie.com"
+            }
+        ],
+        "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+        "keywords": [
+            "csprng",
+            "pseudorandom",
+            "random"
+        ],
+        "support": {
+            "issues": "https://github.com/paragonie/random_compat/issues",
+            "email": "info@paragonie.com",
+            "source": "https://github.com/paragonie/random_compat"
+        }
+    },
+    {
+        "name": "ramsey/uuid",
+        "version": "2.9.0",
+        "version_normalized": "2.9.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ramsey/uuid.git",
+            "reference": "b2ef4dd9584268d73f92f752a62bc24cd534dc9a"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/ramsey-uuid-2.9.0-0b3a5a.tar",
+            "reference": "b2ef4dd9584268d73f92f752a62bc24cd534dc9a",
+            "shasum": "fb2953922511f4b53b50540ff4516b7ed6e0fa7f"
+        },
+        "require": {
+            "paragonie/random_compat": "^1.0|^2.0",
+            "php": ">=5.3.3"
+        },
+        "replace": {
+            "rhumsaa/uuid": "self.version"
+        },
+        "require-dev": {
+            "doctrine/dbal": ">=2.3",
+            "jakub-onderka/php-parallel-lint": "^0.9.0",
+            "moontoast/math": "~1.1",
+            "phpunit/phpunit": "~4.1|~5.0",
+            "satooshi/php-coveralls": "~0.6",
+            "squizlabs/php_codesniffer": "^2.3",
+            "symfony/console": "~2.3|~3.0"
+        },
+        "suggest": {
+            "doctrine/dbal": "Allow the use of a UUID as doctrine field type.",
+            "moontoast/math": "Support for converting UUID to 128-bit integer (in string form).",
+            "symfony/console": "Support for use of the bin/uuid command line tool."
+        },
+        "time": "2016-03-22T18:20:19+00:00",
+        "bin": [
+            "bin/uuid"
+        ],
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Rhumsaa\\Uuid\\": "src/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Ben Ramsey",
+                "homepage": "http://benramsey.com"
+            },
+            {
+                "name": "Marijn Huizendveld",
+                "email": "marijn.huizendveld@gmail.com"
+            }
+        ],
+        "description": "A PHP 5.3+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
+        "homepage": "https://github.com/ramsey/uuid",
+        "keywords": [
+            "guid",
+            "identifier",
+            "uuid"
+        ],
+        "support": {
+            "issues": "https://github.com/ramsey/uuid/issues",
+            "source": "https://github.com/ramsey/uuid"
+        }
+    },
+    {
+        "name": "ruflin/elastica",
+        "version": "2.3.1",
+        "version_normalized": "2.3.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ruflin/Elastica",
+            "reference": "0df1d7b513960ba11d3075652dcd71fcab8dd37a"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/ruflin-elastica-2.3.1-c20d16.tar",
+            "reference": "0df1d7b513960ba11d3075652dcd71fcab8dd37a",
+            "shasum": "9f57c4e0f9fe266ade3696472ea0478c4fef6464"
+        },
+        "require": {
+            "php": ">=5.3.3",
+            "psr/log": "~1.0"
+        },
+        "require-dev": {
+            "guzzlehttp/guzzle": "5.3.*",
+            "munkie/elasticsearch-thrift-php": "1.4.*"
+        },
+        "suggest": {
+            "egeloen/http-adapter": "Allow using httpadapter transport",
+            "guzzlehttp/guzzle": "Allow using guzzle 5.3.x as the http transport (Requires php 5.4)",
+            "monolog/monolog": "Logging request",
+            "munkie/elasticsearch-thrift-php": "Allow using thrift transport"
+        },
+        "time": "2015-10-19T07:09:10+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Elastica\\": "lib/Elastica/"
+            }
+        },
+        "autoload-dev": {
+            "psr-4": {
+                "Elastica\\Test\\": "test/lib/Elastica/Test/"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Ruflin",
+                "homepage": "http://ruflin.com/"
+            }
+        ],
+        "description": "Elasticsearch Client",
+        "homepage": "http://elastica.io/",
+        "keywords": [
+            "client",
+            "search"
+        ]
+    },
+    {
+        "name": "symfony/console",
+        "version": "v2.7.1",
+        "version_normalized": "2.7.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/console.git",
+            "reference": "a1572ad84e6b8dc65c0f5ab18762e0f8079bee26"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/symfony-console-v2.7.1-10acc1.tar",
+            "reference": "a1572ad84e6b8dc65c0f5ab18762e0f8079bee26",
+            "shasum": "bfd62805760c428f398983f1f6c37f02d255eff5"
+        },
+        "require": {
+            "php": ">=5.3.9"
+        },
+        "require-dev": {
+            "psr/log": "~1.0",
+            "symfony/event-dispatcher": "~2.1",
+            "symfony/phpunit-bridge": "~2.7",
+            "symfony/process": "~2.1"
+        },
+        "suggest": {
+            "psr/log": "For using the console logger",
+            "symfony/event-dispatcher": "",
+            "symfony/process": ""
+        },
+        "time": "2015-06-10T15:27:02+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Console\\": ""
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Console Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "symfony/security-core",
+        "version": "v2.7.1",
+        "version_normalized": "2.7.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/security-core.git",
+            "reference": "ca16b4ed0d69d46bb1a2593ed915b3ef0e074dca"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/symfony-security-core-v2.7.1-f87b1b.tar",
+            "reference": "ca16b4ed0d69d46bb1a2593ed915b3ef0e074dca",
+            "shasum": "6108bcdb908ce83744723a68a29222be68406906"
+        },
+        "require": {
+            "php": ">=5.3.9"
+        },
+        "require-dev": {
+            "ircmaxell/password-compat": "1.0.*",
+            "psr/log": "~1.0",
+            "symfony/event-dispatcher": "~2.1",
+            "symfony/expression-language": "~2.6",
+            "symfony/http-foundation": "~2.4",
+            "symfony/phpunit-bridge": "~2.7",
+            "symfony/translation": "~2.0,>=2.0.5",
+            "symfony/validator": "~2.5,>=2.5.5"
+        },
+        "suggest": {
+            "ircmaxell/password-compat": "For using the BCrypt password encoder in PHP <5.5",
+            "symfony/event-dispatcher": "",
+            "symfony/expression-language": "For using the expression voter",
+            "symfony/http-foundation": "",
+            "symfony/validator": "For using the user password constraint"
+        },
+        "time": "2015-06-07T06:33:05+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Security\\Core\\": ""
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Security Component - Core Library",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "symfony/security-csrf",
+        "version": "v2.7.1",
+        "version_normalized": "2.7.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/security-csrf.git",
+            "reference": "53007f191304956c168741804b49f2a1d16003ac"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/symfony-security-csrf-v2.7.1-ed9ee3.tar",
+            "reference": "53007f191304956c168741804b49f2a1d16003ac",
+            "shasum": "4b3f70a32744287e5826f9c807a914f72e29f5b6"
+        },
+        "require": {
+            "php": ">=5.3.9",
+            "symfony/security-core": "~2.4"
+        },
+        "require-dev": {
+            "symfony/http-foundation": "~2.1",
+            "symfony/phpunit-bridge": "~2.7"
+        },
+        "suggest": {
+            "symfony/http-foundation": "For using the class SessionTokenStorage."
+        },
+        "time": "2015-05-13T11:34:46+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Security\\Csrf\\": ""
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Security Component - CSRF Library",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "symfony/translation",
+        "version": "v2.7.1",
+        "version_normalized": "2.7.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/Translation.git",
+            "reference": "01f540beda2c067140ca347d61a65046ff3e3831"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/symfony-translation-v2.7.1-a936b9.tar",
+            "reference": "01f540beda2c067140ca347d61a65046ff3e3831",
+            "shasum": "f87a98f48f4321eb461999eb2a6d4a0f41431eda"
+        },
+        "require": {
+            "php": ">=5.3.9"
+        },
+        "conflict": {
+            "symfony/config": "<2.7"
+        },
+        "require-dev": {
+            "psr/log": "~1.0",
+            "symfony/config": "~2.7",
+            "symfony/intl": "~2.3",
+            "symfony/phpunit-bridge": "~2.7",
+            "symfony/yaml": "~2.2"
+        },
+        "suggest": {
+            "psr/log": "To use logging capability in translator",
+            "symfony/config": "",
+            "symfony/yaml": ""
+        },
+        "time": "2015-06-11T17:26:34+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Translation\\": ""
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Translation Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "symfony/validator",
+        "version": "v2.7.1",
+        "version_normalized": "2.7.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/Validator.git",
+            "reference": "28fe2e1b64f35ac567d7e5bd8456dc5cda5ed5cd"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/symfony-validator-v2.7.1-25dfd8.tar",
+            "reference": "28fe2e1b64f35ac567d7e5bd8456dc5cda5ed5cd",
+            "shasum": "17bfad1e84195dadcad3b5e9d76dc47b3e86e077"
+        },
+        "require": {
+            "php": ">=5.3.9",
+            "symfony/translation": "~2.4"
+        },
+        "require-dev": {
+            "doctrine/annotations": "~1.0",
+            "doctrine/cache": "~1.0",
+            "egulias/email-validator": "~1.2,>=1.2.1",
+            "symfony/config": "~2.2",
+            "symfony/expression-language": "~2.4",
+            "symfony/http-foundation": "~2.1",
+            "symfony/intl": "~2.3",
+            "symfony/phpunit-bridge": "~2.7",
+            "symfony/property-access": "~2.3",
+            "symfony/yaml": "~2.0,>=2.0.5"
+        },
+        "suggest": {
+            "doctrine/annotations": "For using the annotation mapping. You will also need doctrine/cache.",
+            "doctrine/cache": "For using the default cached annotation reader and metadata cache.",
+            "egulias/email-validator": "Strict (RFC compliant) email validation",
+            "symfony/config": "",
+            "symfony/expression-language": "For using the 2.4 Expression validator",
+            "symfony/http-foundation": "",
+            "symfony/intl": "",
+            "symfony/property-access": "For using the 2.4 Validator API",
+            "symfony/yaml": ""
+        },
+        "time": "2015-06-07T06:33:05+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.7-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Validator\\": ""
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Validator Component",
+        "homepage": "https://symfony.com"
+    },
+    {
+        "name": "tedivm/jshrink",
+        "version": "v1.1.0",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/tedious/JShrink",
+            "reference": "688527a2e854d7935f24f24c7d5eb1b604742bf9"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/tedivm-jshrink-v1.1.0-06b21e.tar",
+            "reference": "688527a2e854d7935f24f24c7d5eb1b604742bf9",
+            "shasum": "f9bf44528656076247eb8ce7671ed921a2e2299f"
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "require-dev": {
+            "fabpot/php-cs-fixer": "0.4.0",
+            "phpunit/phpunit": "4.0.*",
+            "satooshi/php-coveralls": "dev-master"
+        },
+        "time": "2015-07-04T07:35:09+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "JShrink": "src/"
+            }
+        },
+        "license": [
+            "BSD-3-Clause"
+        ],
+        "authors": [
+            {
+                "name": "Robert Hafner",
+                "email": "tedivm@tedivm.com"
+            }
+        ],
+        "description": "Javascript Minifier built in PHP",
+        "homepage": "http://github.com/tedious/JShrink",
+        "keywords": [
+            "javascript",
+            "minifier"
+        ]
+    },
+    {
+        "name": "vanderlee/php-stable-sort-functions",
+        "version": "2.0.2",
+        "version_normalized": "2.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/vanderlee/PHP-stable-sort-functions",
+            "reference": "4ea200455b775f0c6613108974d3332c68156194"
+        },
+        "dist": {
+            "type": "tar",
+            "url": "https://satis.sugardev.team/dist/vanderlee-php-stable-sort-functions-2.0.2-02e082.tar",
+            "reference": "4ea200455b775f0c6613108974d3332c68156194",
+            "shasum": "09c1e9187e81210a46a7046353faedc2d2c7c0a9"
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-01-15T20:19:34+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "functions/sarsort.php",
+                "functions/sasort.php",
+                "functions/snatcasesort.php",
+                "functions/snatsort.php",
+                "functions/suasort.php",
+                "functions/suksort.php",
+                "functions/susort.php"
+            ]
+        },
+        "license": [
+            "MIT"
+        ],
+        "description": "Class of stable sort methods. Equal values remain in the original order. Only different values are sorted.",
+        "homepage": "https://github.com/vanderlee/PHP-stable-sort-functions",
+        "keywords": [
+            "array",
+            "arsort",
+            "asort",
+            "natcasesort",
+            "natsort",
+            "sort",
+            "stable",
+            "uasort",
+            "uksort",
+            "usort"
+        ],
+        "support": {
+            "issues": "https://github.com/vanderlee/PHP-stable-sort-functions/issues",
+            "source": "https://github.com/vanderlee/PHP-stable-sort-functions/"
+        }
+    }
+]

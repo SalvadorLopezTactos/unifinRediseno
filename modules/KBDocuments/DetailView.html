@@ -1,0 +1,130 @@
+<!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+-->
+<!-- BEGIN: main -->
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+	<td>
+		<form name="DetailView" method="POST" action="index.php" enctype="multipart/form-data">
+			<input type="hidden" name="module" value="KBDocuments">
+			<input type="hidden" name="record" value="{ID}">
+			<input type="hidden" name="action">
+			<input type="hidden" id="isDuplicate" name="isDuplicate" value=false>
+			<input type="hidden" name="old_id" value="{DOCUMENT_REVISION_ID}">
+			<input type="hidden" name="return_module" value="{RETURN_MODULE}">
+			<input type="hidden" name="return_id" value="{RETURN_ID}">
+			<input type="hidden" name="return_action" value="{RETURN_ACTION}">
+			<input type="hidden" name="type" value="out">
+            <input type="hidden" name="kbdoc_id" value="{ID}">
+            <input type="hidden" name="description" value="KB_BODY">
+			<input type="hidden" name="parent_type" value="KBDocuments" />            
+			<input type="hidden" name="parent_id" value="{ID}" />
+
+            {ACTION_BUTTON}
+		</form>
+	</td>
+	<td align="right">{ADMIN_EDIT}</td>
+</tr>
+</table>
+
+<table width="100%" border="0" cellspacing="{GRIDLINE}" cellpadding="0" class="detail view">
+{PAGINATION}
+	<tr>
+		<td width="15%" valign="top" scope="row"><span sugar='slot1'>{MOD.LBL_ARTICLE_TITLE}</span sugar='slot'></td>
+		<td width="50%" valign="top" colspan=2><span sugar='slot1b'>{DOCUMENT_NAME}&nbsp;</span sugar='slot'></td>		        
+		<td width="35%" align=right ><span onclick="hideShowMoreDetails('more_details_img');" id='more_details_img' name='more_details_img' ><img src='{ADVANCED_SEARCH_IMAGE}'>&nbsp;{MOD.LBL_SHOW_ARTICLE_DETAILS}</span>
+        	<span onclick="hideShowMoreDetails('less_details_img');" id='less_details_img' name='less_details_img'  style='display: none'><img src='{BASIC_SEARCH_IMAGE}'>&nbsp;{MOD.LBL_HIDE_ARTICLE_DETAILS}</span>
+        </td>  	    
+	</tr>				
+ 	<tr>
+		<td valign="top"  width="15%" scope="row"><span sugar='slot3'>{MOD.LBL_ARTICLE_AUTHOR}</span sugar='slot'></td>	
+	    <td valign="top" colspan="3" ><span sugar='slot3b'>{KBARTICLE_AUTHOR_NAME}&nbsp;</span sugar='slot'></td>	
+	</tr>
+
+<tr><td colspan='4' cellpadding="0" cellspacing="0" id="more_details_div" style="display: none" class="subdetail">	
+<div >	
+<table width="100%" cellpadding="0" cellspacing="0" >
+	<tr>
+        <td width="15%" valign="top" scope="row">
+<!-- BEGIN: ent_a -->        
+        <span sugar='slot4'>{MOD.LBL_IS_EXTERNAL_ARTICLE}</span sugar='slot'>
+<!-- END: ent_a -->        
+        &nbsp;</td>
+        <td width="35%" valign="top">
+<!-- BEGIN: ent_b -->        
+        <span sugar='slot4b'><input name="is_external" class="checkbox" type="checkbox" {IS_EXTERNAL_ARTICLE} disabled/></span sugar='slot'>
+<!-- END: ent_b -->    
+        &nbsp;</td>		
+		<td width="15%" valign="top" scope="row"><span sugar='slot5'>{MOD.LBL_DOC_STATUS}</span sugar='slot'></td>
+		<td width="35%" valign="top"><span sugar='slot5b'>{STATUS}&nbsp;</span sugar='slot'></td>	
+	</tr><tr>	
+<!-- BEGIN: pro -->			
+        <td width="15%" valign="top" scope="row"><span sugar='slot6'>{MOD.LBL_TEAM}</span sugar='slot'></td>
+		<td width="35%" valign="top"><span sugar='slot6b'>{TEAM}&nbsp;</span sugar='slot'></td>
+<!-- END: pro -->
+        <td width="15%" valign="top" scope="row"><span sugar='slot7'>{MOD.LBL_ARTICLE_APPROVED_BY}</span sugar='slot'></td>
+		<td width="35%" valign="top"><span sugar='slot7b'>{KBDOC_APPROVED_BY}&nbsp;</span sugar='slot'></td>		
+	</tr>
+	<tr>
+		<td width="15%" valign="top" scope="row"><span sugar='slot8'>{MOD.LBL_DOC_ACTIVE_DATE}</span sugar='slot'></td>
+		<td width="35%" valign="top"><span sugar='slot8b'>{ACTIVE_DATE}&nbsp;</span sugar='slot'></td>		
+        <td width="15%" valign="top" scope="row"><span sugar='slot9'>{MOD.LBL_DOC_VERSION}</span sugar='slot'></td>
+		<td width="35%" valign="top"><span sugar='slot9b'>{REVISION}&nbsp;</span sugar='slot'></td>		        		        
+	</tr>
+	<tr>
+        <td width="15%" valign="top" scope="row"><span sugar='slot10'>{MOD.LBL_DOC_EXP_DATE}</span sugar='slot'></td>
+        <td width="35%" valign="top"><span sugar='slot10b'>{EXP_DATE}&nbsp;</span sugar='slot'></td>
+        <td width="15%" valign="top" scope="row"><span>{MOD.LBL_CASE}</span></td>
+        <td width="35%" valign="top"><span><a href="index.php?module=Cases&action=DetailView&record={CASE_ID}">{CASE_NAME}</a>&nbsp;</span></td> 
+
+	</tr>
+  </table>	
+</div>	
+</td></tr>
+	<tr>
+		<td width="15%" valign="top" scope="row"><span sugar='slot11'>{MOD.LBL_DATE_ENTERED}</span sugar='slot'></td>
+		<td width="35%" valign="top"  colspan="3" ><span sugar='slot11b'>{DATE_ENTERED}&nbsp;</span sugar='slot'></td>		
+	</tr>
+
+	<tr>
+		<td  width="15%" valign="top" scope="row"><span sugar='slot12'>{MOD.LBL_KBDOC_BODY}&nbsp;</span sugar='slot'></td>	
+	    <td  width="35%" valign="top" colspan="3" ><span sugar='slot12b'>{KBDOC_BODY}</span sugar='slot'></td>	
+	</tr>	
+	<tr>
+		<td  width="15%" valign="top" scope="row"><span sugar='slot13'>{MOD.LBL_KBDOC_TAGS}</span sugar='slot'></td>
+		<td  width="35%" valign="top" colspan="3" ><span sugar='slot13b'>{KBDOC_TAGS}&nbsp;</span sugar='slot'></td>
+	</tr>
+	<tr>
+		<td  width="15%" valign="top" scope="row"><span sugar='slot15'>{MOD.LBL_DOWNNLOAD_FILE}</span sugar='slot'></td>
+		<td  width="35%" valign="top" colspan="3"><span sugar='slot15b'>{KBDOC_ATTS}</span sugar='slot'></td>				        
+	</tr> 	
+
+</table>
+
+
+{JAVASCRIPT}
+
+<script type="text/javascript"> 
+	function hideShowMoreDetails(span) {
+		if(span == 'more_details_img'){
+			document.getElementById('more_details_div').style.display = '';
+			document.getElementById('more_details_img').style.display = 'none';
+			document.getElementById('less_details_img').style.display = '';			
+
+		}else{
+			document.getElementById('more_details_div').style.display = 'none';
+			document.getElementById('more_details_img').style.display = '';
+			document.getElementById('less_details_img').style.display = 'none';							
+		}
+	}
+</script>	
+<!-- END: main -->

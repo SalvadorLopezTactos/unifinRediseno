@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:9d5caf35-c775-538e-8374-5a7df7d409e3
+ORGANIZER;CN=Gustavo Mauricio Reyes Rojas:gustavo.reyes@unifin.com.mx
+DTSTART:20180209T170000Z
+DTEND:20180209T173000Z
+DTSTAMP:20180209T193300Z
+SUMMARY:documentacion
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

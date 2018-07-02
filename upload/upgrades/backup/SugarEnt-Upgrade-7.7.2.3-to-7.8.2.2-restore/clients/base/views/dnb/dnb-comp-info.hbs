@@ -1,0 +1,49 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div id="dnb-compinfo-loading" class="block-footer">
+    {{str dnbFirmo.loading_label}}
+</div>
+<div id="dnb-compinfo-details">
+    {{#if dnbFirmo.product}}
+        <div class='dnb-show-less'>
+            <ul class="unstyled listed">
+                {{#each dnbFirmo.product}}
+                    <li>
+                        <div class='dnb-company-label'>
+                            {{#if dnbLabel}}
+                                {{{dnbLabel}}}
+                            {{else}}
+                                {{str dataLabel}}
+                            {{/if}}
+                        </div>
+                        <div class='txt import-data'>
+                            {{{dataElement}}}
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="dnb-show-more">
+            <a class="showMoreData more">{{str "LBL_DNB_SHOW_MORE"}} <i class="fa fa-chevron-down"></i></a>
+            <a class="showLessData less">{{str "LBL_DNB_SHOW_LESS"}} <i class="fa fa-chevron-up"></i></a>
+        </div>
+    {{else}}
+        <aside class='create-no-data'>
+            {{#if dnbFirmo.errmsg}}
+                <em>{{dnbFirmo.errmsg}}</em>
+            {{else}}
+                <em>{{str "LBL_DNB_NO_DATA"}}</em>
+            {{/if}}
+        </aside>
+    {{/if}}
+</div>

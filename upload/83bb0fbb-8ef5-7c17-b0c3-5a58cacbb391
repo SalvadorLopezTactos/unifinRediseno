@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:83bb0fbb-8ef5-7c17-b0c3-5a58cacbb391
+ORGANIZER;CN=Ceydi Ariette Ibarra Trillo:ceydi.ibarra@unifin.com.mx
+DTSTART:20180116T141500Z
+DTEND:20180116T151500Z
+DTSTAMP:20180112T144700Z
+SUMMARY:VIAL ASSIST / DESAYUNO
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

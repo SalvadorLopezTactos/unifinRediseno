@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:bd5e2b81-b177-58b1-bcb4-5a7de5fbb62d
+ORGANIZER;CN=Marco Antonio Noriega Escamilla:mnoriega@unifin.com.mx
+DTSTART:20180219T180000Z
+DTEND:20180219T190000Z
+DTSTAMP:20180209T181500Z
+SUMMARY:Reunión de negocios, TREOFAN.
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,30 @@
+/*
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('app-base',function(Y,NAME){var Lang=Y.Lang,YObject=Y.Object,PjaxBase=Y.PjaxBase,Router=Y.Router,View=Y.View,getClassName=Y.ClassNameManager.getClassName,win=Y.config.win,AppBase;AppBase=Y.Base.create('app',Y.Base,[View,Router,PjaxBase],{views:{},initializer:function(config){config||(config={});var views={};function mergeViewConfig(view,name){views[name]=Y.merge(views[name],view);}
+YObject.each(this.views,mergeViewConfig);YObject.each(config.views,mergeViewConfig);this.views=views;this._viewInfoMap={};this.after('activeViewChange',Y.bind('_afterActiveViewChange',this));if(!this.get('serverRouting')){this._pjaxBindUI();}},createView:function(name,config){var viewInfo=this.getViewInfo(name),type=(viewInfo&&viewInfo.type)||View,ViewConstructor,view;ViewConstructor=Lang.isString(type)?YObject.getValue(Y,type.split('.')):type;view=new ViewConstructor(config);this._viewInfoMap[Y.stamp(view,true)]=viewInfo;return view;},getViewInfo:function(view){if(Lang.isString(view)){return this.views[view];}
+return view&&this._viewInfoMap[Y.stamp(view,true)];},render:function(){var CLASS_NAMES=Y.App.CLASS_NAMES,container=this.get('container'),viewContainer=this.get('viewContainer'),activeView=this.get('activeView'),activeViewContainer=activeView&&activeView.get('container'),areSame=container.compareTo(viewContainer);container.addClass(CLASS_NAMES.app);viewContainer.addClass(CLASS_NAMES.views);if(activeView&&!viewContainer.contains(activeViewContainer)){viewContainer.appendChild(activeViewContainer);}
+if(!container.contains(viewContainer)&&!areSame){container.appendChild(viewContainer);}
+return this;},showView:function(view,config,options,callback){var viewInfo,created;options||(options={});if(callback){options=Y.merge(options,{callback:callback});}else if(Lang.isFunction(options)){options={callback:options};}
+if(Lang.isString(view)){viewInfo=this.getViewInfo(view);if(viewInfo&&viewInfo.preserve&&viewInfo.instance){view=viewInfo.instance;this._viewInfoMap[Y.stamp(view,true)]=viewInfo;}else{view=this.createView(view,config);created=true;}}
+if(options.update&&!created){view.setAttrs(config);}
+if('render'in options){if(options.render){view.render();}}else if(created){view.render();}
+return this._set('activeView',view,{options:options});},_attachView:function(view,prepend){if(!view){return;}
+var viewInfo=this.getViewInfo(view),viewContainer=this.get('viewContainer');view.addTarget(this);if(viewInfo){viewInfo.instance=view;}
+viewContainer[prepend?'prepend':'append'](view.get('container'));},_destroyContainer:function(){var CLASS_NAMES=Y.App.CLASS_NAMES,container=this.get('container'),viewContainer=this.get('viewContainer'),areSame=container.compareTo(viewContainer);if(Y.one('body').compareTo(container)){this.detachEvents();container.removeClass(CLASS_NAMES.app);if(areSame){container.removeClass(CLASS_NAMES.views);}else{viewContainer.remove(true);}
+return;}
+viewContainer.remove(true);if(!areSame){container.remove(true);}},_detachView:function(view){if(!view){return;}
+var viewInfo=this.getViewInfo(view)||{};if(viewInfo.preserve){view.remove();}else{view.destroy({remove:true});delete this._viewInfoMap[Y.stamp(view,true)];if(view===viewInfo.instance){delete viewInfo.instance;}}
+view.removeTarget(this);},_getRequest:function(){var req=Router.prototype._getRequest.apply(this,arguments);req.app=this;return req;},_getViewContainer:function(value){if(!value&&!this._viewContainer){value=this._viewContainer=this.create();this._set('viewContainer',value);}
+return value;},_initHtml5:function(){if(this.get('serverRouting')===false){return false;}
+return Router.html5;},_isChildView:function(view,parent){var viewInfo=this.getViewInfo(view),parentInfo=this.getViewInfo(parent);if(viewInfo&&parentInfo){return this.getViewInfo(viewInfo.parent)===parentInfo;}
+return false;},_isParentView:function(view,child){var viewInfo=this.getViewInfo(view),childInfo=this.getViewInfo(child);if(viewInfo&&childInfo){return this.getViewInfo(childInfo.parent)===viewInfo;}
+return false;},_navigate:function(url,options){if(!this.get('serverRouting')){options=Y.merge({force:true},options);}
+return PjaxBase.prototype._navigate.call(this,url,options);},_save:function(url,replace){var path;if(this.get('serverRouting')&&!this.get('html5')){if(!this._hasSameOrigin(url)){Y.error('Security error: The new URL must be of the same origin as the current URL.');return this;}
+if(win){path=this._joinURL(url||'');if(replace){win.location.replace(path);}else{win.location=path;}}
+return this;}
+return Router.prototype._save.apply(this,arguments);},_uiSetActiveView:function(newView,oldView,options){options||(options={});var callback=options.callback,isChild=this._isChildView(newView,oldView),isParent=!isChild&&this._isParentView(newView,oldView),prepend=!!options.prepend||isParent;if(newView===oldView){return callback&&callback.call(this,newView);}
+this._attachView(newView,prepend);this._detachView(oldView);if(callback){callback.call(this,newView);}},_afterActiveViewChange:function(e){this._uiSetActiveView(e.newVal,e.prevVal,e.options);}},{ATTRS:{activeView:{value:null,readOnly:true},container:{valueFn:function(){return Y.one('body');}},html5:{valueFn:'_initHtml5'},linkSelector:{value:'a'},serverRouting:{valueFn:function(){return Y.App.serverRouting;},writeOnce:'initOnly'},viewContainer:{getter:'_getViewContainer',setter:Y.one,writeOnce:true}},_NON_ATTRS_CFG:['views']});Y.namespace('App').Base=AppBase;Y.App=Y.mix(Y.Base.create('app',AppBase,[]),Y.App,true);Y.App.CLASS_NAMES={app:getClassName('app'),views:getClassName('app','views')};},'3.15.0',{"requires":["classnamemanager","pjax-base","router","view"]});

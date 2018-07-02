@@ -1,0 +1,20 @@
+/*
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('promise',function(Y,NAME){var Lang=Y.Lang,slice=[].slice;function Promise(fn){if(!(this instanceof Promise)){return new Promise(fn);}
+var resolver=new Promise.Resolver(this);this._resolver=resolver;fn.call(this,function(value){resolver.resolve(value);},function(reason){resolver.reject(reason);});}
+Y.mix(Promise.prototype,{then:function(callback,errback){var Constructor=this.constructor,resolver=this._resolver;return new Constructor(function(resolve,reject){resolver._addCallbacks(typeof callback==='function'?Promise._wrap(resolve,reject,callback):resolve,typeof errback==='function'?Promise._wrap(resolve,reject,errback):reject);});},'catch':function(errback){return this.then(undefined,errback);},getStatus:function(){return this._resolver.getStatus();}});Promise._wrap=function(resolve,reject,fn){return function(valueOrReason){var result;try{result=fn(valueOrReason);}catch(e){reject(e);return;}
+resolve(result);};};Promise.isPromise=function(obj){var then;try{then=obj.then;}catch(_){}
+return typeof then==='function';};Promise.resolve=function(value){return Promise.isPromise(value)&&value.constructor===this?value:new this(function(resolve){resolve(value);});};Promise.reject=function(reason){return new this(function(resolve,reject){reject(reason);});};Promise.all=function(values){var Promise=this;return new Promise(function(resolve,reject){if(!Lang.isArray(values)){reject(new TypeError('Promise.all expects an array of values or promises'));return;}
+var remaining=values.length,i=0,length=values.length,results=[];function oneDone(index){return function(value){results[index]=value;remaining--;if(!remaining){resolve(results);}};}
+if(length<1){return resolve(results);}
+for(;i<length;i++){Promise.resolve(values[i]).then(oneDone(i),reject);}});};Promise.race=function(values){var Promise=this;return new Promise(function(resolve,reject){if(!Lang.isArray(values)){reject(new TypeError('Promise.race expects an array of values or promises'));return;}
+for(var i=0,count=values.length;i<count;i++){Promise.resolve(values[i]).then(resolve,reject);}});};Y.Promise=Promise;function Resolver(promise){this._callbacks=[];this._errbacks=[];this.promise=promise;this._status='pending';this._result=null;}
+Y.mix(Resolver.prototype,{fulfill:function(value){if(this._status==='pending'){this._result=value;this._status='fulfilled';}
+if(this._status==='fulfilled'){this._notify(this._callbacks,this._result);this._callbacks=[];this._errbacks=null;}},reject:function(reason){if(this._status==='pending'){this._result=reason;this._status='rejected';}
+if(this._status==='rejected'){this._notify(this._errbacks,this._result);this._callbacks=null;this._errbacks=[];}},resolve:function(value){var self=this;if(Promise.isPromise(value)){value.then(function(value){self.resolve(value);},function(reason){self.reject(reason);});}else{this.fulfill(value);}},then:function(callback,errback){return this.promise.then(callback,errback);},_addCallbacks:function(callback,errback){var callbackList=this._callbacks,errbackList=this._errbacks,status=this._status,result=this._result;if(callbackList&&typeof callback==='function'){callbackList.push(callback);}
+if(errbackList&&typeof errback==='function'){errbackList.push(errback);}
+if(status==='fulfilled'){this.fulfill(result);}else if(status==='rejected'){this.reject(result);}},getStatus:function(){return this._status;},_notify:function(subs,result){if(subs.length){Y.soon(function(){var i,len;for(i=0,len=subs.length;i<len;++i){subs[i](result);}});}}},true);Y.Promise.Resolver=Resolver;Y.when=function(promise,callback,errback){promise=Promise.resolve(promise);return(callback||errback)?promise.then(callback,errback):promise;};Y.batch=function(){return Promise.all(slice.call(arguments));};},'3.15.0',{"requires":["timers"]});

@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:edbd43de-e22b-1062-7a5c-5a68fb6eb58e
+ORGANIZER;CN=Anne Guadalupe Echeverria Reyes:
+DTSTART:20180124T233000Z
+DTEND:20180125T010000Z
+DTSTAMP:20180124T213000Z
+SUMMARY:Firma contrato Microcart
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

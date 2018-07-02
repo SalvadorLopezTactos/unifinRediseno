@@ -1,0 +1,45 @@
+/* LOADER
+  ----------------*/
+
+.loading {
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+  color: @grayLight;
+}
+
+.loading i {
+  color: @grayLight;
+  display: inline-block;
+  font-size: 4px;
+  margin: 0 2px;
+  -moz-animation: move 1s infinite linear;
+  -webkit-animation: move 1s infinite linear;
+  animation: move 1s infinite linear;
+}
+
+.nav li .loading .fa-circle {
+  width: auto;
+}
+
+.loading .l1 {
+  -moz-animation-delay: .1s;
+  -webkit-animation-delay: .1s;
+  animation-delay: .1s;
+}
+
+.loading .l2 {
+  -moz-animation-delay: .2s;
+  -webkit-animation-delay: .2s;
+  animation-delay: .2s;
+}
+
+.loading .l3 {
+  -moz-animation-delay: .3s;
+  -webkit-animation-delay: .3s;
+  animation-delay: .3s;
+}
+
+@-moz-keyframes move{0%{opacity:1;}100%{opacity:0.1;}}
+@-webkit-keyframes move{0%{opacity:1;}100%{opacity:0.1;}}
+@keyframes move{0%{opacity:1;}100%{opacity:0.1;}}

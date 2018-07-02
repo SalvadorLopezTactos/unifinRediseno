@@ -1,0 +1,624 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div id="dnb-prem-company-detail-loading" class="block-footer">
+	{{str "LBL_DNB_PREMIUM_COMPANY_INFO_LOADING"}}
+</div>
+<div id="dnb-prem-company-details">
+    {{#if product}}
+		<div class='dnb-show-less'>
+			<ul class="unstyled listed">
+				{{#if product.SubjectHeader.OrganizationSummaryText}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_SUMMARY"}}
+						</div>
+						<div class='txt import-data'>
+							{{{this.product.SubjectHeader.OrganizationSummaryText}}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Total Inquires Count-->
+				{{#if product.SubjectHeader.TotalInquiriesCount}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_TOTAL_ENQUIERY_COUNT"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.SubjectHeader.TotalInquiriesCount}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Industry Code -->
+				{{#if product.IndustryCode.IndustryCode}}
+					{{#each product.IndustryCode.IndustryCode}}
+						<li>
+							<div class='dnb-company-label'>
+								{{this.[@TypeText]}}:{{this.IndustryCode.$}}
+								{{#if this.DisplaySequence}}
+									{{#eq this.DisplaySequence '1'}}
+										<span class="label label-success pull-right" data-placement="right">{{str "LBL_DNB_PRIMARY"}}</span>
+									{{/eq}}
+								{{/if}}
+							</div>
+							<div class='txt import-data'>
+								{{this.IndustryCodeDescription.0.$}}
+							</div>
+						</li>
+					{{/each}}
+				{{/if}}
+				<!-- Not Reachable Indicator -->
+				{{#if product.Telecommunication.TelephoneNumber.0.UnreachableIndicator}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_UNREACHABLE_INDICATOR"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Telecommunication.TelephoneNumber.0.UnreachableIndicator}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Residential Address Indicator -->
+				{{#if product.Location.PrimaryAddress.0.ResidentialAddressIndicator}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_RESIDENTIAL_ADDRESS_INDICATOR"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress.0.ResidentialAddressIndicator}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Last Update Date -->
+				{{#if product.SubjectHeader.LastUpdateDate.$}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_LAST_UPDATE_DATE"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.SubjectHeader.LastUpdateDate.$}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Street Address Line Text -->
+				{{#if product.RegisteredDetail.OrganizationIdentificationNumberDetail.0.RegistrationLocation.PrimaryAddress.0.StreetAddressLine.0.LineText}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_STREET_ADDRESS_LINE_TEXT"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.RegisteredDetail.OrganizationIdentificationNumberDetail.0.RegistrationLocation.PrimaryAddress.0.StreetAddressLine.0.LineText}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- County Official Name -->
+				{{#if product.Location.PrimaryAddress0.CountyOfficialName}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_COUNTRY_OFFICIAL_NAME"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress0.CountyOfficialName}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Territory Official Name -->
+				{{#if product.Location.PrimaryAddress.0.TerritoryOfficialName}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_TERRITORY_OFFICIAL_NAME"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress.0.TerritoryOfficialName}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Territory Abbreviated Name-->
+				{{#if product.Location.PrimaryAddress.0.TerritoryAbbreviatedName}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_TERRITORY_ABBREVATIVE_NAME"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress.0.TerritoryAbbreviatedName}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Telecommunication Number -->
+				{{#if product.Telecommunication.TelephoneNumber.0.TelecommunicationNumber}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_TELECOMMUNICATION_NUMBER"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Telecommunication.TelephoneNumber.0.TelecommunicationNumber}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- International Dialling Code -->
+				{{#if product.Telecommunication.TelephoneNumber.0.InternationalDialingCode}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_INTERNATIONAL_DIALLING_CODE"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Telecommunication.TelephoneNumber.0.InternationalDialingCode}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Incorporation Year-->
+				{{#if product.RegisteredDetail.IncorporationYear}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_INCORPORATION_YEAR"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.RegisteredDetail.IncorporationYear}}
+						</div>
+					</li>
+				{{/if}}
+				<!--  Organization Identification Number -->
+				{{#if product.RegisteredDetail.OrganizationIdentificationNumberDetail.0.OrganizationIdentificationNumber}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_ORGANIZATION_IDENTIFICATION_NUMBER"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.RegisteredDetail.OrganizationIdentificationNumberDetail.0.OrganizationIdentificationNumber}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Filling Organization Name -->
+				{{#if product.RegisteredDetail.OrganizationIdentificationNumberDetail.0.FilingOrganizationName}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_ORGANIZATION_FILLING_NAME"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.RegisteredDetail.OrganizationIdentificationNumberDetail.0.FilingOrganizationName}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Stock Exchange Ticker Name-->
+				{{#if product.RegisteredDetail.StockExchangeDetails.1.StockExchangeTickerName}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_STOCK_EXCHANGE_TICKER_NAME"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.RegisteredDetail.StockExchangeDetails.1.StockExchangeTickerName}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Line of Business Description -->
+				{{#if product.ActivitiesAndOperations.LineOfBusinessDetails.0.LineOfBusinessDescription.$}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_LINE_OF_BUSINESS_DESCRIPTION"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.ActivitiesAndOperations.LineOfBusinessDetails.0.LineOfBusinessDescription.$}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Import Indicator-->
+				{{#if product.ActivitiesAndOperations.ImportDetails.ImportIndicator}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_IMPORT_DETAILS_INDICATOR"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.ActivitiesAndOperations.ImportDetails.ImportIndicator}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Export Indicator-->
+				{{#if product.ActivitiesAndOperations.ExportDetails.ExportIndicator}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_EXPORT_DETAILS_INDICATOR"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.ActivitiesAndOperations.ExportDetails.ExportIndicator}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Agent Indicator-->
+				{{#if product.ActivitiesAndOperations.SubjectIsAgentDetails.AgentIndicator}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_SUBAGENT_INDICATOR"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.ActivitiesAndOperations.SubjectIsAgentDetails.AgentIndicator}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Total Employee Quantity-->
+				{{#if product.EmployeeFigures.IndividualEntityEmployeeDetails.TotalEmployeeQuantity}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_TOTAL_EMPLOYEE_QUANTITY"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.EmployeeFigures.IndividualEntityEmployeeDetails.TotalEmployeeQuantity}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Current Principal-->
+				{{#if product.PrincipalsAndManagement.CurrentPrincipal}}
+					{{#each product.PrincipalsAndManagement.CurrentPrincipal}}
+						<li>
+							<div class='dnb-company-label'>
+								<i class="icon-user"></i>
+								{{#if this.JobTitle.0.JobTitleText.$}}
+									{{this.JobTitle.0.JobTitleText.$}}
+								{{else}}
+									{{str "LBL_DNB_ASSOCIATE"}}
+								{{/if}}
+							</div>
+							<div class='txt import-data'>
+								{{this.PrincipalName.FullName}}
+							</div>
+						</li>
+					{{/each}}
+				{{/if}}
+				<!-- Most Senior Principal-->
+				{{#if product.PrincipalsAndManagement.MostSeniorPrincipal}}
+					<li>
+						<div class='dnb-company-label'>
+							<i class="icon-user"></i>
+							{{#if product.PrincipalsAndManagement.MostSeniorPrincipal.JobTitle.0.JobTitleText.$}}
+								{{product.PrincipalsAndManagement.MostSeniorPrincipal.JobTitle.0.JobTitleText.$}}
+							{{else}}
+								{{str "LBL_DNB_ASSOCIATE"}}
+							{{/if}}
+							<span class="label label-important pull-right" data-placement="right">{{str "LBL_DNB_SENIOR_PRINCIPAL"}}</span>
+						</div>
+						<div class='txt import-data'>
+							{{product.PrincipalsAndManagement.MostSeniorPrincipal.PrincipalName.FullName}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- Third Party Assessment-->
+				{{#if product.ThirdPartyAssessment.ThirdPartyAssessment}}
+					{{#each product.ThirdPartyAssessment.ThirdPartyAssessment}}
+						<li>
+							<div class='dnb-company-label'>
+								{{str "LBL_DNB_RATING"}}
+							</div>
+							<div class='txt import-data'>
+								{{this.AssessmentTypeValue}}&nbsp;&nbsp;:&nbsp;&nbsp;{{this.AssessmentValue}}
+							</div>
+						</li>
+					{{/each}}
+				{{/if}}
+				<!-- Small Business Indicator -->
+				{{#if product.SocioEconomicIdentification.SmallBusinessIndicator}}
+					<li>
+						<div class='dnb-company-label'>
+								{{str "LBL_DNB_SOCIO_INDICATOR"}}
+							</div>
+							<div class='txt import-data'>
+								{{str "LBL_DNB_SMALL_BUSINESS_INDICATOR"}}&nbsp;&nbsp;:&nbsp;&nbsp;{{product.SocioEconomicIdentification.SmallBusinessIndicator}}
+							</div>
+					</li>
+				{{/if}}
+				<!-- Ethnicity Type Text -->
+				{{#if product.SocioEconomicIdentification.OwnershipEthnicity.0.EthnicityTypeText.$}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_ETHNICITY_TYPE_TEXT"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.SocioEconomicIdentification.OwnershipEthnicity.0.EthnicityTypeText.$}}
+						</div>
+					</li>
+				{{/if}}
+				<!-- History Rating Text -->
+				{{#if product.Assessment.HistoryRatingText}}
+					<li>
+						<div class='dnb-company-label'>
+								{{str "LBL_DNB_ASSESMENT"}}
+							</div>
+							<div class='txt import-data'>
+								{{str "LBL_DNB_HISTORY_RATING_TEXT"}}&nbsp;&nbsp;:&nbsp;&nbsp;{{product.Assessment.HistoryRatingText.$}}
+							</div>
+					</li>
+				{{/if}}
+				{{#if product.SubjectHeader.TransferDUNSNumberRegistration.0.TransferredFromDUNSNumber}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_TRANSFERRED_FROM_DUNS_NUMBER"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.SubjectHeader.TransferDUNSNumberRegistration.0.TransferredFromDUNSNumber}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.SubjectHeader.DUNSSelfRequestIndicator}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_SELF_REQUEST_INDICATOR"}}
+						</div>
+						<div class='txt import-data'>
+							{{product.SubjectHeader.DUNSSelfRequestIndicator}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.Location.PrimaryAddress.0.PrimaryTownName}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_PRIMARY_TOWN"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress.0.PrimaryTownName}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.Location.PrimaryAddress.0.PostalCode}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_PRIMARY_ADDRESS_POSTAL_CODE"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress.0.PostalCode}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.Location.PrimaryAddress.0.UndeliverableIndicator}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_UNDELIVERABLE_INDICATOR"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress.0.UndeliverableIndicator}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.Location.PrimaryAddress.0.AddressUsageTenureDetail.0.TenureTypeText.$}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_ADDRESS_TENURE_DETAILS"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress.0.AddressUsageTenureDetail.0.TenureTypeText.$}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.Location.PrimaryAddress.0.CountryGroupName}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_COUNTRY_GROUP_NAME"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress.0.CountryGroupName}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.Location.PrimaryAddress.0.PremisesDetail.0.PremisesAreaMeasurement}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_PREMISES_AREA_MEASUREMENT"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress.0.PremisesDetail.0.PremisesAreaMeasurement}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.Location.PrimaryAddress.0.PremisesDetail.0.PremisesAreaMeasurementReliabilityText.$}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_MEASUREMENT_RELIABILITY_TEXT"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress.0.PremisesDetail.0.PremisesAreaMeasurementReliabilityText.$}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.Location.PrimaryAddress.0.PremisesDetail.0.PremisesAreaMeasurementUnitText.$}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_MEASUREMENT_UNIT_TEXT"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress.0.PremisesDetail.0.PremisesAreaMeasurementUnitText.$}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.Location.PrimaryAddress.0.LatitudeMeasurement}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_LATITUDE_MEASUREMENT"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress.0.LatitudeMeasurement}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.Location.PrimaryAddress.0.LongitudeMeasurement}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_LONGITUDE_MEASUREMENT"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Location.PrimaryAddress.0.LongitudeMeasurement}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.Telecommunication.WebPageAddress.0.TelecommunicationAddress}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_WEBPAGE_ADDRESS"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.Telecommunication.WebPageAddress.0.TelecommunicationAddress}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if productName.OrganizationPrimaryName.0.OrganizationName.$}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_ORGANIZATION_NAME"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.productName.OrganizationPrimaryName.0.OrganizationName.$}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if productName.TradeStyleName.0.OrganizationName.$}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_TRADE_STYLE_NAME"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.productName.TradeStyleName.0.OrganizationName.$}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if productDetail.FamilyTreeMemberRole.0.FamilyTreeMemberRoleText.$}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_FAMILY_TREE_MEMBER_ROLE_TEXT"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.productDetail.FamilyTreeMemberRole.0.FamilyTreeMemberRoleText.$}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if productDetail.StandaloneOrganizationIndicator}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_STAND_ALONE_ORGANIZATION_INDICATOR"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.productDetail.StandaloneOrganizationIndicator}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if productDetail.ControlOwnershipDate.$}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_CONTROL_OWNERSHIP_DATE"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.productDetail.ControlOwnershipDate.$}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if productDetail.ControlOwnershipTypeText.$}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_CONTROL_OWNERSHIP_TYPE_TEXT"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.productDetail.ControlOwnershipTypeText.$}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if productDetail.OperatingStatusText.$}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_OPERATING_STATUS_TEXT"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.productDetail.OperatingStatusText.$}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if productDetail.OrganizationStartYear}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_ORGANIZATION_START_DATE"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.productDetail.OrganizationStartYear}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.RegisteredDetail.OrganizationIdentificationNumberDetail.0.RegistrationLocation.PrimaryAddress.0.PrimaryTownName}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_PRIMARY_TOWN_NAME"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.RegisteredDetail.OrganizationIdentificationNumberDetail.0.RegistrationLocation.PrimaryAddress.0.PrimaryTownName}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.RegisteredDetail.OrganizationIdentificationNumberDetail.0.RegistrationLocation.PrimaryAddress.0.PostalCode}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_REGISTRATION_LOCATION_POSTAL_CODE"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.RegisteredDetail.OrganizationIdentificationNumberDetail.0.RegistrationLocation.PrimaryAddress.0.PostalCode}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.RegisteredDetail.OrganizationIdentificationNumberDetail.0.RegistrationIssuerName}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_REGISTRATION_ISSUER_NAME"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.RegisteredDetail.OrganizationIdentificationNumberDetail.0.RegistrationIssuerName}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.RegisteredDetail.StockExchangeDetails.1.StockExchangeName.$}}
+					<li>
+						<div class='dnb-company-label'>
+							{{str "LBL_DNB_STOCK_EXCHANGE_NAME"}}
+						</div>
+						<div class='txt import-data'>
+							{{this.product.RegisteredDetail.StockExchangeDetails.1.StockExchangeName.$}}
+						</div>
+					</li>
+				{{/if}}
+				{{#if product.SocioEconomicIdentification.MinorityOwnedIndicator}}
+					<li>
+						<div class='dnb-company-label'>
+								{{str "LBL_DNB_SOCIO_INDICATOR"}}
+							</div>
+							<div class='txt import-data'>
+								{{str "LBL_DNB_MINORITY_OWNER_INDICATOR"}}&nbsp;&nbsp;:&nbsp;&nbsp;{{product.SocioEconomicIdentification.MinorityOwnedIndicator}}
+							</div>
+					</li>
+				{{/if}}
+				{{#if product.Assessment.CommercialCreditScore}}
+					<li>
+						<div class='dnb-company-label'>
+								{{str "LBL_DNB_HISTORY_RATING_TEXT"}}
+							</div>
+							<div class='txt import-data'>
+								{{str "LBL_DNB_RISK_CLASS"}}&nbsp;&nbsp;:&nbsp;&nbsp;{{product.Assessment.CommercialCreditScore.0.MarketingRiskClassText.$}}
+							</div>
+					</li>
+				{{/if}}
+
+			</ul>
+		</div>
+		<div class="dnb-show-more">
+	        <a class="showMoreData more">{{str "LBL_DNB_SHOW_MORE"}} <i class="icon-chevron-down"></i></a>
+	        <a class="showLessData less">{{str "LBL_DNB_SHOW_LESS"}} <i class="icon-chevron-up"></i></a>
+	    </div>
+	{{else}}
+		 <aside class='create-no-data'>
+            {{#if errmsg}}
+                <em>{{errmsg}}</em>
+            {{else}}
+                <em>{{str "LBL_DNB_NO_DATA"}}</em>
+            {{/if}}
+        </aside>
+	{{/if}}
+</div>

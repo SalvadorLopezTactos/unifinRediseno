@@ -1,0 +1,473 @@
+/* SELECT2
+  ----------------*/
+
+.select2-search {
+  padding: 4px;
+  &:after {
+    .fontawesome();
+    content: "\f002";
+    position: absolute;
+    top: 10px;
+    right: 9px;
+    color: @grayLight;
+    z-index: 1;
+  }
+  input[type="text"] {
+    border: @inputBorder !important;
+    position: relative;
+    &:focus {
+      .box-shadow(none);
+      border: 1px solid @linkColor !important;
+    }
+    &.select2-active {
+      z-index: 2;
+    }
+  }
+}
+
+.select2-container {
+  .select2-single-with-drop div b {
+    background-position: 0 0;
+    background: none;
+  }
+  &.select2-dropdown-open {
+    z-index: @zindexDropdown;
+    .select2-choices {
+      .border-radius(@baseBorderRadius @baseBorderRadius 0 0);
+    }
+  }
+  &.inherit-width {
+    width: 100%;
+  }
+  &.select2-dropdown-open.select2-drop-above {
+    .select2-choices {
+      .border-radius(0 0 @baseBorderRadius @baseBorderRadius);
+    }
+  }
+  .select2-choices {
+    padding: 2px 4px 2px 0;
+    min-height: 22px;
+    border: @inputBorder;
+    background-image: none;
+    .border-radius(@baseBorderRadius);
+    &:focus {
+      border: 1px solid @linkColor !important;
+    }
+  }
+  .select2-search-field {
+    height: 20px;
+    input {
+      padding: 0 0 0 8px;
+      line-height: 19px;
+      height: 20px;
+    }
+  }
+
+  &.select2-choices-pills .select2-search-choice,
+  &.select2-container-multi.select2-choices-pills-close .select2-search-choice {
+    margin: 2px 0 2px 4px;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    .box-shadow(none);
+    line-height: 12px;
+    .border-radius(20px);
+    background: @gray;
+    color: @white;
+    padding: 2px 4px 2px 6px;
+    white-space: nowrap;
+    &.select2-search-choice-focus {
+      border-color: @linkColor !important;
+      outline: 0;
+      outline: ~"thin dotted \9";
+      .border-radius(11px);
+      .box-shadow(none);
+      background-color: @dropdownLinkBackgroundHover;
+    }
+  }
+
+  &.select2-choices-pills .select2-search-choice {
+    div {
+      padding: 2px 0;
+    }
+    span {
+      .border-radius(10px 0 0 10px);
+      background: darken(@grayLighter, 10%);
+      color: @gray;
+      padding: 2px 4px 2px 6px;
+      margin-right: 2px;
+    }
+    a, span:last-child {
+      .border-radius(0 10px 10px 0);
+      padding: 2px 6px 2px 4px;
+    }
+    span:last-child {
+      background: @grayLighter;
+    }
+    a {
+      background: #E5F4FB;
+    }
+    a:hover {
+      text-decoration: none;
+    }
+    a.select2-search-choice-close {
+      display: none;
+    }
+  }
+
+  &.select2-container-multi.select2-choices-pills-close {
+    .select2-search-choice {
+      div {
+        font-size: 11px;
+        line-height: 12px;
+        display: inline;
+      }
+      a.select2-search-choice-close {
+        font-family: FontAwesome;
+        font-size: 12px;
+        font-weight: normal;
+        text-decoration: none;
+        color: fade(@white, 70%);
+        background: none;
+        line-height: 12px;
+        position: static;
+        display: inline;
+        vertical-align: middle;
+      }
+      a.select2-search-choice-close:hover {
+        color: @white;
+      }
+      a.select2-search-choice-close::before {
+        content: "\f057";
+      }
+      &.select2-locked {
+        padding: 1px 4px !important; //overide bootstrap
+        background: @gray;
+        border: 1px solid @gray;
+        div {
+          color: @white;
+        }
+      }
+    }
+    &.attachments .select2-search-choice {
+      div {
+        background: @gray;
+        padding: 2px 6px 2px 6px;
+      }
+    }
+    //forecasts
+    &.search-filter .select2-search-choice {
+      height: 24px;
+      margin: 0 0 4px 0;
+      background: none;
+      padding: 0;
+      position: relative;
+      a.select2-search-choice-close {
+        top: 3px;
+        position: absolute;
+        right: 7px;
+        left: auto;
+        &::before {
+          line-height: 14px;
+          height: 14px;
+          vertical-align: top;
+          display: inline-block;
+          margin-top: 3px;
+          font-size: 14px;
+        }
+      }
+      div {
+        background: none;
+        padding: 2px 0 2px 0;
+      }
+    }
+    &.select2-container-disabled .select2-choices {
+      .select2-search-choice {
+        div {
+          padding-right: 6px;
+        }
+        &.select2-locked div {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+  .select2-select-legend {
+    .icon-plus {
+      margin-top: 3px;
+      line-height: 4px;
+    }
+  }
+  .select2-choice.select2-default {
+    color: @grayLight !important; //important needed here to overide select2
+  }
+  .select2-choice {
+    background: @grayLighter;
+    color: @grayLight;
+    border-color: @inputBorderColor;
+    filter: none;
+    line-height: 26px;
+    height: 26px;
+    .box-shadow(none);
+    &:focus {
+      border-color: @linkColor;
+    }
+    .select2-arrow {
+      border: none;
+      background: none;
+      filter: none;
+      .border-radius(0);
+      top: 0;
+      padding-left: 4px;
+      .box-sizing(border-box);
+      b {
+        .fontawesome();
+        position: relative;
+        top: 0;
+        &:before{
+          content: "\f0d7";
+        }
+      }
+    }
+    abbr {
+      .fontawesome();
+      position: absolute;
+      top: 6px;
+      right: 18px;
+      font-size: 12px;
+      display: none;
+      &:before{
+        content: "\f00D";
+      }
+    }
+  }
+  &.select2-container-active .select2-choice {
+    border-color: @linkColor;
+    outline: 0;
+    outline: ~"thin dotted \9"; /* IE6-9 */
+  }
+  &.required .select2-choice {
+    border-color: darken(@grayLighter, 10%);
+    &:focus {
+      border-color: @linkColor !important;
+    }
+  }
+}
+
+.selected_recipients .select2-container.select2-container-multi.select2-choices-pills-close.select2-container-disabled .select2-choices {
+ // needed for address book recipients
+ background-color: @white;
+}
+
+.select2-drop-mask {
+  z-index: @zindexSelect2mask;
+}
+
+.select2-drop {
+  color: @textColor;
+  border-color: @inputBorderColor;
+  z-index: @zindexSelect2menu;
+  &.select2-drop-active {
+    min-width: 50px;
+    border-color: @linkColor;
+    outline: 0;
+    outline: ~"thin dotted \9"; /* IE6-9 */
+    &.select2-narrow {
+      border-top: 1px solid @linkColor;
+      width: auto !important;
+      max-width: 200px;
+      &.select2-parent {
+        margin-left: -84px;
+      }
+    }
+  }
+  .select2-results:last-child {
+    .border-radius(0 0 @baseBorderRadius @baseBorderRadius);
+  }
+}
+
+.select2-drop-error {
+  border-color: @errorText;
+  .select2-results {
+  /*    li:first-child {
+      border-top: none;
+      .border-radius(@baseBorderRadius @baseBorderRadius 0 0);
+    }
+    li:last-child {
+      border-bottom: none;
+      .border-radius(0 0 @baseBorderRadius @baseBorderRadius);
+    }*/
+  }
+}
+
+.select2-container-multi .select2-choices .select2-search-field input {
+  margin:0;
+  padding: 3px 7px;
+}
+
+.select2-drop-bootstrap {
+  border: none;
+  .select2-results {
+    margin-top: 8px;
+    border: @inputBorder;
+    .result-selected {
+      display: block;
+      font-weight: bold;
+    }
+  }
+}
+
+.select2-results {
+  margin: 0;
+  padding: 0;
+  max-height: 235px;
+  .select2-result-label {
+    padding: 8px 10px;
+    white-space: nowrap;
+  }
+  li div {
+    line-height: 18px;
+  }
+  li div:hover,
+  .select2-highlighted {
+    background: @dropdownLinkBackgroundHover;
+    color: @dropdownLinkColorHover;
+  }
+  li:last-child {
+    border-bottom: none;
+    .border-radius(0 0 @baseBorderRadius @baseBorderRadius);
+  }
+}
+.select2-no-results,
+.select2-searching {
+  padding: 0 0 0 8px;
+  color: @grayLight;
+  .border-radius(0);
+}
+
+.select2-drop-above {
+  .select2-results {
+    li:first-child {
+      border-top: none;
+      .border-radius(@baseBorderRadius @baseBorderRadius 0 0);
+    }
+    li:last-child {
+      border-bottom: none;
+      .border-radius(0);
+    }
+  }
+}
+
+//for chart icon drop dropdown
+.select2-container svg,
+.select2-results svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.chart-results .select2-results {
+  max-height: 290px;
+}
+.select2-results svg {
+  display: inline;
+  vertical-align: middle;
+}
+.select2-container svg {
+  display: block;
+  padding: 3px;
+}
+
+//for module label in select2
+.select2-container .label-module-mini {
+  display: block;
+  margin-top: 5px;
+}
+
+.select2-offscreen {
+  position: absolute;
+  left: -10000px;
+  top: -1px;
+}
+
+//caret, clear and error addons
+.select2-container .select2-choice {
+  .select2-chosen {
+    margin-right: 20px;
+  }
+}
+.select2-container.select2-allowclear .select2-choice {
+  .select2-chosen {
+    margin-right: 36px;
+  }
+}
+.currency .select2-container .select2-choice {
+  .select2-chosen {
+    min-width: 8px;
+  }
+}
+.error .select2-container {
+  .select2-choice > .select2-chosen {
+    margin-right: 38px;
+  }
+  &.select2-allowclear .select2-choice {
+    .select2-chosen {
+      margin-right: 55px;
+    }
+    abbr {
+      right: 36px;
+    }
+  }
+}
+.error .currency .select2-container {
+  .select2-choice .select2-chosen {
+    margin-right: 20px;
+    min-width: 8px;
+  }
+}
+.error {
+  .select2-container + .input-append {
+    position: static;
+    font-size: inherit;
+    .add-on.error-tooltip {
+      position: absolute;
+      top: 3px;
+      right: 17px;
+      left: auto;
+      background: transparent;
+    }
+  }
+}
+
+// Added for currency field, or any field that has
+// a select2 field at end of input
+.select2-addon {
+  .input-append {
+    width: 50%;
+    .calcWidth(~"100% - 100px");
+    float: left;
+    input[type="text"] {
+      width: 95%;
+      .calcWidth(~"100% - 14px");
+      .border-radius(0 @baseBorderRadius @baseBorderRadius 0);
+    }
+  }
+  > input[type="text"] {
+    width: 50%;
+    .calcWidth(~"100% - 100px") !important;
+    .border-radius(0 2px 2px 0);
+    float: right;
+    .box-sizing(border-box);
+    height: 28px;
+  }
+  .edit {
+    float: left;
+    width: 100px;
+  }
+  .select2-container .select2-choice {
+    .border-radius(@baseBorderRadius 0 0 @baseBorderRadius);
+    border-right: none;
+  }
+}
+.error .select2-addon .select2-choice > div {
+  margin-right: 0;
+}

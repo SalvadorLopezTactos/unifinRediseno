@@ -1,0 +1,3 @@
+<?php
+//THIS FILE IS AUTO GENERATED, DO NOT MODIFY
+$mod_strings['LBL_ACCOUNT_LEASING'] = 'Vista 360º';

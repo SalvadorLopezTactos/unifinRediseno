@@ -1,0 +1,36 @@
+<style>
+    .notificationsContainer {
+        padding-top: 5%;
+        background-image: url('custom/themes/default/images/company_logo.png');
+        background-repeat: no-repeat;
+    }
+
+    #enviar {
+        margin-top: 10%;
+    }
+
+    #cancelarDrawer {
+        margin-top: 10%;
+    }
+</style>
+<div class="notificationsContainer">
+    <table align="center">
+        <tr>
+            <td><h4>{{oppName}}</h4></td>
+        </tr>
+        <tr>
+            <td><h2>Enviar Notificacion a {{oppOwner}} y {{ReportTo}}</h2></td>
+        </tr>
+        <tr>
+            <td>
+                <textarea rows="10" cols="100" id="NotificationDescription" name="description" class="input-xlarge wide tleft"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" class="btn btn-success" value="Enviar Notificacion" id="enviar"/>
+                <input type="button" class="btn btn-danger" value="Cancelar" id="cancelarDrawer"/>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,14 @@
+/*
+     * Your installation or use of this SugarCRM file is subject to the applicable
+     * terms available at
+     * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+     * If you do not agree to all of the applicable terms or do not have the
+     * authority to bind the entity as an authorized representative, then do not
+     * install or use this SugarCRM file.
+     *
+     * Copyright (C) SugarCRM Inc. All rights reserved.
+     */
+({_currentIndex:0,initialize:function(options){this._super('initialize',[options]);$(window).on('keypress.'+this.cid,_.bind(this.handleKeypress,this));},_placeComponent:function(component){if(component==this._components[this._currentIndex]){this.$el.append(component.el);}},addComponent:function(component,def){component=this._addButtonsForComponent(component);if(_.result(component,'showPage')){this._super('addComponent',[component,def]);}},_addButtonsForComponent:function(component){var buttons=[];component.meta=component.meta||{};_.each(this.meta.components,function(comp,i){if(comp.view===component.name){if(i===0){buttons.push(this.meta.buttons[1]);}else if(i===this.meta.components.length-1){buttons.push(this.meta.buttons[0]);buttons.push(this.meta.buttons[2]);}else{buttons.push(this.meta.buttons[0]);buttons.push(this.meta.buttons[1]);}}},this);component.meta.buttons=buttons;return component;},setPage:function(newIndex){if(newIndex!==this._currentIndex&&(newIndex>=0&&newIndex<this._components.length)){this._components[this._currentIndex].$el.detach();this._currentIndex=newIndex;this.$el.append(this._components[this._currentIndex].el);this.on('wizard-page:render:complete',function(){$(window).on('keypress.'+this.cid,_.bind(this.handleKeypress,this));});this._components[this._currentIndex].render();}
+return this.getProgress();},_renderHtml:function(){if(Modernizr.touch){app.$contentEl.addClass('content-overflow-visible');}
+if(this._components){this._components[this._currentIndex].render();}},getProgress:function(){return{page:this._currentIndex+1,lastPage:this._components.length};},previousPage:function(){$(window).off('keypress.'+this.cid);return this.setPage(this._currentIndex-1);},nextPage:function(){$(window).off('keypress.'+this.cid);return this.setPage(this._currentIndex+1);},finished:function(){if(Modernizr.touch){app.$contentEl.removeClass('content-overflow-visible');}
+var callbacks=this.context.get("callbacks");this.dispose();if(callbacks&&callbacks.complete){callbacks.complete();}},handleKeypress:function(e){var wizardPage=this._components[this._currentIndex];if(wizardPage){if(e.keyCode===13){document.activeElement.blur();if(wizardPage.isPageComplete()){$(window).off('keypress.'+this.cid);wizardPage.next();}}}},_dispose:function(){$(window).off('keypress.'+this.cid);this._super('_dispose');}})

@@ -1,0 +1,167 @@
+<style>
+   .columnas{
+       padding: 1%;
+   }
+
+    .primeraCol{
+        padding-left: 10%;
+    }
+</style>
+
+<div class="control-group condiciones_financieras_incremento_ratificacion">
+    <table class="dashlet condiciones_financierasdashlet" style="border: solid lightgreen;" cellspacing="1" cellpadding="5" width="100%">
+        <tr>
+            <td >
+                <div class="record-label primeraCol">
+                    Activo
+                </div>
+            </td>
+            <td class="columnas">
+                <select class="new_incremento_Activo" data-field="Activo" placeholder="Activo" style="font-size: 15px;font-weight: 500;">
+                    {{{incremento_activo_list_html}}}
+                </select>
+            </td>
+            <td >
+                <div class="record-label">
+                    Plazo
+                </div>
+            </td>
+            <td class="columnas">
+                <select class="new_incremento_Plazo" data-field="Plazo" placeholder="Plazo" style="font-size: 15px;font-weight: 500;" id="new_plazo">
+                    {{{incremento_plazo_list_html}}}
+                </select>
+            </td>
+            <td >
+                <div class="record-label">
+                    Tasa Minima
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="text" class="new_incremento_TasaMinima porcentaje" value="{{tasa_minima}}" data-max="new_incremento_TasaMaxima" id="new_tasa_minima"/>
+            </td>
+            <td >
+                <div class="record-label">
+                    Tasa Maxima
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="text" class="new_incremento_TasaMaxima porcentaje" value="{{tasa_maxima}}" data-min="new_incremento_TasaMinima" id="new_tasa_maxima"/>
+            </td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td >
+                <div class="record-label primeraCol">
+                    VRC Minimo
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="text" class="new_incremento_VRCMinimo porcentaje" value="{{vrc_minimo}}" data-max="new_incremento_VRCMaximo" id="new_vrc_minimo"/>
+            </td>
+            <td >
+                <div class="record-label">
+                    VRC Maximo
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="text" class="new_incremento_VRCMaximo porcentaje" value="{{vrc_maximo}}" data-min="new_incremento_VRCMinimo" id="new_vrc_maximo"/>
+            </td>
+            <td >
+                <div class="record-label">
+                    VRI Minimo
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="text" class="new_incremento_VRIMinimo porcentaje" value="{{vri_minimo}}" data-max="new_incremento_VRIMaximo" id="new_vri_minimo"/>
+            </td>
+            <td >
+                <div class="record-label">
+                    VRI Maximo
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="text" class="new_incremento_VRIMaximo porcentaje" value="{{vri_maximo}}" data-min="new_incremento_VRIMinimo" id="new_vri_maximo"/>
+            </td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td >
+                <div class="record-label primeraCol">
+                    Comision Minima
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="text" class="new_incremento_ComisionMinima porcentaje" value="{{comision_minima}}" data-max="new_incremento_ComisionMaxima" id="new_comision_minima"/>
+            </td>
+            <td >
+                <div class="record-label">
+                    Comision Maxima
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="text" class="new_incremento_ComisionMaxima porcentaje" value="{{comision_maxima}}" data-min="new_incremento_ComisionMinima" id="new_comision_maxima"/>
+            </td>
+            <td >
+                <div class="record-label">
+                    Renta Inicial Minima
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="text" class="new_incremento_RentaInicialMinima porcentaje" value="{{renta_inicial_minima}}" data-max="new_incremento_RentaInicialMaxima" id="new_renta_inicial_minima"/>
+            </td>
+            <td >
+                <div class="record-label">
+                    Renta Inicial Maxima
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="text" class="new_incremento_RentaInicialMaxima porcentaje" value="{{renta_inicial_maxima}}" data-min="new_incremento_RentaInicialMinima" id="new_renta_inicial_maxima"/>
+            </td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td >
+                <div class="record-label primeraCol">
+                    Deposito en Garantia
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="checkbox" class="new_incremento_Deposito" value="{{deposito_en_garantia}}" id="new_deposito_en_garantia"/>
+            </td>
+            <td >
+                <div class="record-label">
+                    Uso Particular
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="checkbox" class="new_incremento_UsoParticular" value="{{uso_particular}}"/>
+            </td>
+            <td >
+                <div class="record-label">
+                    Uso Empresarial
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="checkbox" class="new_incremento_UsoEmpresarial" value="{{uso_empresarial}}"/>
+            </td>
+            <td >
+                <div class="record-label">
+                    Activo Nuevo?
+                </div>
+            </td>
+            <td class="columnas">
+                <input type="checkbox" class="new_incremento_ActivoNuevo" value="{{activo_nuevo}}"/>
+            </td>
+            <td width="10%">
+                <div class="btn-toolbar prevent-mousedown">
+                    <div class="btn-group">
+                        <a href="javascript:void(0)" class="btn add_incremento_CondicionFinanciera" rel="tooltip" title="Add Condicion Financiera"><i class="icon-ok"></i></a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>

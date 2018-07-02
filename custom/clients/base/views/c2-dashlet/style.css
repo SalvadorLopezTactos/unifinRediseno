@@ -1,0 +1,122 @@
+#promotorClient {
+    text-align: center;
+}
+
+.Promotor {
+    cursor: pointer;
+}
+
+.table tr.PromotorTotal {
+    text-align: right;
+    background: #000042 !important;
+    color: #f5f5f5;
+    font-weight: bold;
+}
+
+.table th {
+    text-align: left;
+    background: #000042 !important;
+    color: #f5f5f5;
+    font-weight: bold;
+}
+
+.c2HeaderFloat {
+    position: fixed;
+    visibility: hidden;
+    z-index: 1000;
+    text-align: right;
+    background: #000042 !important;
+    color: #f5f5f5;
+    font-weight: bold;
+}
+
+
+.DirectorPromotorTotal {
+    text-align: left;
+    background: #000042;
+    color: #f5f5f5;
+    font-weight: bold;
+}
+
+.DirectorRow {
+    background: #0081DC;
+    color: #f5f5f5;
+}
+
+.PromotorRow {
+    text-indent: 40px;
+}
+
+.PromotorAcctRow {
+    text-indent: 70px;
+}
+
+.clienteLink {
+    margin: 15px;
+}
+
+#showOpps {
+    text-indent: 10px;
+}
+
+.cutStatus {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 20px;
+}
+
+.forecastTime {
+    color: dodgerblue;
+    font-family: monospace;
+}
+
+.table td.oppEstatus {
+    font-size: xx-small;
+}
+.table td.personaEstatus {
+    font-size: x-small;
+    font-weight: bold;
+}
+.table td.BacklogCol {
+    text-align: right;
+}
+
+.table td.PipelineCol {
+    text-align: right;
+}
+
+.table td.Col30 {
+    text-align: right;
+}
+
+.table td.Col60 {
+    text-align: right;
+}
+
+.table td.Col90 {
+    text-align: right;
+}
+
+.table td.Col90Plus {
+    text-align: right;
+}
+.table td.titleAcciones {
+    padding-left: 30px;
+}
+
+.table .Notification {
+    padding: 6px 8px 8px;
+}
+
+.table .Llamada {
+    padding: 6px 8px 8px;
+}
+
+.table .Cita {
+    padding: 6px 8px 8px;
+}
+
+.table td.subordinadoData {
+    font-weight: bolder;
+}

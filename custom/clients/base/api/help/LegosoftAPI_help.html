@@ -1,0 +1,99 @@
+<h2>Legosoft API Help</h2>
+<span class="lead">
+   API personlizada para servicios exclusivos para proyecto UNI2.
+</span>
+
+<h2>Path Variables</h2>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            :data
+        </td>
+        <td>
+            ID Account
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Input Parameters</h2>
+<span class="lead">
+    This endpoint does not accept any input parameters.
+</span>
+
+<h2>Result</h2>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            Account
+        </td>
+        <td>
+            Json
+        </td>
+        <td>
+           Json de Account con tel&eacute;fonos, correos y direcciones.
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+<h3>Output Example</h3>
+<pre class="pre-scrollable">
+{
+  "id_c": "95973f5b-de35-78ef-9c29-559fde6aa93b",
+  "tipodepersona_c": "Persona Fisica",
+  "primernombre_c": "BEATRIZ",
+  "segundonombre_c": "",
+  "apellidopaterno_c": "OLGIN",
+  "apellidomaterno_c": "CANIZO"
+    "correos": [
+    {
+      "email_address": "beatriz@email.com.mx",
+      "primary_address": "0"
+    },
+    {
+      "email_address": "bolg@lego.com",
+      "primary_address": "0"
+    },
+    {
+      "email_address": "RNEGRETE@LEGOSOFT.COM.MX",
+      "primary_address": "1"
+    }
+    }
+</pre>
+
+<h2>Change Log</h2>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Version</th>
+        <th>Change</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            v10
+        </td>
+        <td>
+            Added <code>/Legosoft/Personas/{Account ID}</code> GET endpoint.
+        </td>
+    </tr>
+    </tbody>
+</table>

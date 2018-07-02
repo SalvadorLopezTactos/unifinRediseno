@@ -1,0 +1,351 @@
+/* NAVBAR
+  ----------------*/
+
+.navbar {
+  &.navbar-fixed-top {
+    position: absolute;
+    z-index: (@zindexFixedNavbar + 2);
+  }
+
+  // General layout
+  // ==============
+  .navbar-inner {
+    border: none;
+    @shadow: 0 4px 0 @BorderColor;
+    .box-shadow(@shadow);
+    width: 100%;
+    display: table;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .nav-collapse {
+    display: table-row;
+    > div {
+      display: table-cell;
+      float: none;
+      vertical-align: top;
+      &.module-list {
+        width: 100%;
+        .nav .dropdown > .btn-group:not(.home) .dropdown-menu {
+          margin-left: -8px;
+        }
+        .dropdown-menu {
+          max-width: 240px;
+        }
+      }
+    }
+  }
+  .nav {
+    margin: 0;
+  }
+  .btn,
+  .btn-group {
+    margin: 0;
+  }
+  .fa {
+    color: @white;
+    font-size: 14px;
+  }
+
+  .btn-group:hover > .routeLink,
+  .btn-group > .routeLink:focus {
+    color: @navbarLinkColorActive !important;
+  }
+  .btn-group:hover > .btn .fa,
+  .btn-group > .btn:focus .fa {
+    color: @navbarLinkColorActive;
+  }
+  .dropdown .fa {
+    color: fade(@navbarLinkColor, 35%);
+  }
+  .dropdown.open .fa {
+    color: @navbarLinkColor;
+  }
+}
+
+
+// Nav links (both module list and other)
+// ======================================
+.megamenu {
+  > .dropdown {
+    padding: 0;
+
+    &.active {
+      .btn-group:not(.open) {
+        background-color: darken(@navbarBackground, 10%);
+        .fa-caret-down {
+          color: @white;
+        }
+        .dropdown-toggle:not(.cube) {
+          color: @navbarLinkColorActive;
+          .border-radius(~"0 !important");
+          outline: none;
+          &:focus {
+            .tab-focus-light();
+            outline-offset: 3px;
+          }
+        }
+      }
+    }
+
+    /*This is the actual content in nav item*/
+    .btn-group {
+      padding: 8px;
+      margin: 0;
+
+      /*This is the link text or image*/
+      &> .dropdown-toggle {
+        margin: 0;
+        padding: 0;
+        font-weight: normal;
+        border: none;
+        text-shadow: none;
+        .box-sizing(content-box);
+        &:hover {
+          background: none;
+          text-decoration: none;
+        }
+        &:active {
+          .box-shadow(none) !important;
+          border-color: transparent;
+          background: none;
+        }
+      }
+
+      /*This is all buttons not in the mega menu*/
+      &:not(.open) {
+        &> .btn:focus, .btn.module-name:focus {
+          .tab-focus-light();
+        }
+        &> .btn.module-name:focus {
+          outline-offset: 3px;
+        }
+        &> .btn:active, .btn:active:focus {
+          outline-width: 0px;
+        }
+      }
+
+      &.open {
+        background: darken(@navbarBackground, 15%);
+        .dropdown-toggle {
+          background: none;
+          .box-shadow(none);
+          &:hover {
+            background: none;
+            text-decoration: none;
+          }
+          &> .fa {
+            color: @white;
+          }
+        }
+      }
+    }
+
+    /*Menu position and menu carets*/
+    .dropdown-menu {
+      position: fixed;
+      top: 50px;
+      left: auto;
+      right: auto;
+      .border-radius(0 0 @baseBorderRadius @baseBorderRadius);
+      max-height: ~"-moz-calc(100% - 100px)";
+      max-height: ~"-webkit-calc(100% - 100px)";
+      max-height: ~"calc(100% - 100px)";
+      margin-top: 0;
+      padding-top: 0;
+      overflow-y: auto;
+      overflow-x: hidden;
+      background: none;
+      .box-shadow(none);
+      min-width: 160px;
+      &.pull-right {
+        left: auto;
+        right: 0;
+      }
+      &> ul {
+        background: @white;
+      }
+      &:before {
+        border-bottom-color: rgba(0,0,0,.2);
+      }
+      li.divider {
+        border-bottom: none;
+      }
+      li.divider + li a {
+        border-top: @borderWidget;
+      }
+      li.hidden {
+        display: none;
+      }
+      li a {
+        display: block;
+        padding: 8px 10px;
+        text-indent: 16px;
+        position: relative;
+        &:focus,
+        &:hover {
+          color: @dropdownLinkColorHover;
+          text-decoration: none;
+          background: @dropdownLinkBackgroundHover;
+          i.fa {
+            color: @dropdownLinkColorHover;
+          }
+        }
+        i.fa {
+          position: relative;
+          top: -1px;
+          text-indent: -12px;
+          color: @grayLight;
+          vertical-align: middle;
+        }
+        &.module-list-link {
+          text-indent: 0;
+          padding-right: 20px;
+        }
+      }
+    }
+
+    button.toggle-recents {
+      width: 100%;
+      text-align: left;
+    }
+  }
+}
+
+// Styling specific to module list
+// ======================================
+.module-list .megamenu {
+  max-height: 44px;
+  white-space: nowrap;
+  > .dropdown {
+    float: none;
+    display: inline-block;
+    &.hidden {
+      display: none;
+    }
+    &.more {
+      .btn-group {
+        padding: 8px 2px;
+      }
+      .fa {
+        color: @grayLighter !important;
+      }
+      &:focus,
+      &:hover {
+        .fa {
+          color: @white !important;
+        }
+      }
+    }
+    &.hidden.more {
+      display: inline-block; /* UIUX-1610 */
+    }
+    .btn-group {
+      padding: 8px 4px 8px 8px;
+      .dropdown-toggle {
+        padding: 5px 8px;
+        margin-left: 1px;
+      }
+      /*cube container*/
+      &.home {
+        padding: 7px 10px 7px 16px;
+        .dropdown-menu {
+          left: 0;
+          right: auto;
+        }
+        .dropdown-toggle {
+          padding: 5px 2px;
+          margin-left: 0;
+        }
+        /*img*/
+        .cube {
+          z-index: 2000;
+          padding: 3px;
+          &.hide {
+            display: none;
+          }
+          &:hover {
+            text-decoration: none;
+          }
+          img {
+            height: 22px;
+            width: 22px;
+          }
+        }
+      }
+    }
+    // module name link buttons
+    .module-name {
+      color: @grayLighter;
+      padding: 0;
+      &:focus,
+      &:hover {
+        color: @white;
+        text-decoration: none;
+      }
+    }
+    &[data-module="Forecasts"] {
+      .btn-group {
+        padding-right: 14px;
+      }
+    }
+  }
+}
+
+#userActions {
+  .dropdown-menu {
+    min-width: 0;
+    ul.dropdown-insert {
+      display: none;
+    }
+  }
+  &> .btn-group {
+    padding-right: 6px;
+  }
+  .dropdown-toggle {
+    .avatar {
+      min-width: 26px;
+    }
+    .fa-user {
+      width: 26px;
+      height: 26px;
+      line-height: 26px;
+      top: 0;
+      font-size: 16px;
+    }
+  }
+  .profileactions-profile {
+    > a {
+      > span {
+          display: inline-block;
+          width: 14px;
+          height: 0;
+        .avatar {
+          position: absolute;
+          left: 11px;
+          top: 7px;
+        }
+      }
+    }
+  }
+}
+
+#createList {
+  .fa-plus.fa-md {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    top: -1px;
+    color: @white !important;
+  }
+}
+
+@media screen and (min-width:~"0\0") { /* IE9/IE10 hack */
+  .megamenu > .dropdown .dropdown-menu { /*UIUX-1592*/
+    top: 0;
+    margin-top: 50px;
+    max-height: 70% !important;
+  }
+}
+

@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:98852383-0ecd-36a3-c7e5-5a865cfd8bcb
+ORGANIZER;CN=Myriam Nashiiely Bustos Alvarez:mbustos@unifin.com.mx
+DTSTART:20180219T223000Z
+DTEND:20180219T233000Z
+DTSTAMP:20180216T042100Z
+SUMMARY:Polimeros Nacionales
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

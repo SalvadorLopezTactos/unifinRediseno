@@ -1,0 +1,91 @@
+<style>
+    .resultados{
+        padding-top: 2%;
+        font-weight: bold;
+    }
+
+    .total{
+        font-weight: bold;
+        text-align-last: center;
+    }
+
+    .field_value{
+        text-align-last: center;
+    }
+
+    .fill_row{
+        padding-bottom: 2%;
+    }
+
+    .tiempos_header{
+        font-weight: bold;
+    }
+
+</style>
+
+<table class="mainTable" align="center" width="80%">
+    <tr>
+        <th colspan="2" style="background-color: #000042">
+            <span style="color: white">CONTACTOS / LLAMADAS</span>
+        </th>
+    </tr>
+
+    <tr>
+        <td class="fill_row" colspan="2"></td>
+    </tr>
+
+    {{#each meta.panels_1}}
+            {{#each fields}}
+                <tr>
+                    {{#unless dismiss_label}}
+                    <td>{{str this.label "uni_Brujula"}}</td>
+                    {{/unless}}
+                    <td class="field_value">
+                        {{field ../../this}}
+                    </td>
+                </tr>
+            {{/each}}
+    {{/each}}
+
+    <tr>
+        <td class="fill_row" colspan="2"></td>
+    </tr>
+</table>
+
+
+<table class="mainTable" align="center" width="80%">
+    <tr>
+        <th colspan="3" style="background-color: #000042">
+            <span style="color: white">TIEMPOS</span>
+        </th>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="tiempos_header" >Horas</td>
+        <td class="tiempos_header" >%</td>
+    </tr>
+    {{#each meta.panels}}
+        {{#unless header}}
+            {{#each fields}}
+                <tr>
+                    {{#each this.fields}}
+                        {{#unless dismiss_label}}
+                            <td>{{str this.label "uni_Brujula"}}</td>
+                        {{/unless}}
+                        <td>
+                            {{field ../../../../this}}
+                        </td>
+                    {{/each}}
+                </tr>
+            {{/each}}
+        {{/unless}}
+    {{/each}}
+
+    <tr>
+        <td class="fill_row" colspan="3"></td>
+    </tr>
+
+    <tr>
+        <td class="fill_row" colspan="3"></td>
+    </tr>
+</table>

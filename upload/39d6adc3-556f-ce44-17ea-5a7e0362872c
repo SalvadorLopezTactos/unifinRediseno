@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:39d6adc3-556f-ce44-17ea-5a7e0362872c
+ORGANIZER;CN=Ana Rocio Navarro Rojas:rnavarro@unifin.com.mx
+DTSTART:20180216T190000Z
+DTEND:20180216T200000Z
+DTSTAMP:20180209T202500Z
+SUMMARY:Presentación
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

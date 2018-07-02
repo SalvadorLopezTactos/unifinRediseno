@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:553ae148-c0f1-0733-4ad1-5a5e61e8d54f
+ORGANIZER;CN=Gerardo Campos Chavez:gcampos@unifin.com.mx
+DTSTART:20180116T223000Z
+DTEND:20180117T000000Z
+DTSTAMP:20180116T203300Z
+SUMMARY:camara de la ind electronica
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

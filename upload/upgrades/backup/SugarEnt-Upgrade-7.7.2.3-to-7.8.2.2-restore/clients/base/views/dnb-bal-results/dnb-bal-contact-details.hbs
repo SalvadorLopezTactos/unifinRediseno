@@ -1,0 +1,190 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div class="dashboard" data-dashboard="true">
+    <div class="cols row-fluid">
+        <div>
+            <div class="preview-headerbar">
+                <div class="headerpane">
+                    <span class="record-cell">
+                        <h1 class="dnb-account-create">
+                            <span class="detail">
+                                {{str "LBL_DNB_BAL_RSLT"}}
+                            </span>
+                        </h1>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <ul class="dashlets row-fluid">
+            <li class="span12">
+                <ul class="dashlet-row ui-sortable ui-sortable-disabled">
+                    <li class="row-fluid sortable" data-sortable="1">
+                        <div class="rows well well-invisible">
+                            <ul class="dashlet-cell rows row-fluid">
+                                <li class="dashlet-container span12">
+                                    <div>
+                                        <div class="thumbnail dashlet">
+                                            <div data-dashlet="toolbar">
+                                                <div class="dashlet-header">
+                                                    <div class="btn-toolbar pull-right">
+                                                    	<span sfuuid="1007" class="dashlet-toolbar">
+                                                    		<a href="javascript:void(0);" data-dashletaction="importContacts" class="btn btn-primary importContacts">
+                                                                {{str "LBL_DNB_IMPORT"}}
+                                                            </a>
+														</span>
+                                                    </div>
+                                                    <h4 data-toggle="dashlet">
+                                                        {{str "LBL_DNB_BAL_RSLT_HEADER" this.module}}
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                            <div data-dashlet="dashlet" class="dashlet-content">
+                                                <div id="dnb-contact-details-loading" class="block-footer">
+                                                    {{str "LBL_DNB_CONTACT_LOADING"}} {{cntctLoadMsg.contactName}}...
+                                                </div>
+                                                <div id="dnb-contact-details">
+                                                    {{#if dnbCntctDet.product}}
+                                                        {{#with dnbCntctDet.product}}
+                                                            <div class="dnb-show-all">
+                                                                <div>
+                                                                    <span class="pull-right" data-placement="right">
+                                                                        {{str "LBL_DNB_BAL_IMPORT_AS"}}&nbsp;&nbsp;
+                                                                       <select id="importType">
+                                                                            {{#each import_enabled_modules}}
+                                                                                <option value={{this}}>
+                                                                                    {{getModuleName this plural=true}}
+                                                                                </option>
+                                                                            {{/each}}
+                                                                        </select>
+                                                                    </span>
+                                                                </div>
+                                                                <div class="accordian" id="dnb_cntct_det_accordian">
+                                                                    <!-- Contact Profile Details -->
+                                                                    <div class="accordion-group">
+                                                                        <div class="accordion-heading">
+                                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#dnb_cntct_det_accordian" href="#prof_tab">
+                                                                                {{str "LBL_DNB_CONTACT_EMP_PROF"}}
+                                                                            </a>
+                                                                        </div>
+                                                                        <div id="prof_tab" class="accordion-body collapse in">
+                                                                            <div class="accordion-inner">
+                                                                                <ul class="unstyled listed">
+                                                                                    {{#each this.contact_profile}}
+                                                                                        {{#if this.dataLabel}}
+                                                                                            <li>
+                                                                                                <div class="dnb-company-label"> {{str this.dataLabel}} </div>
+                                                                                                <div class="txt importData"> {{this.dataElement}} </div>
+                                                                                            </li>
+                                                                                        {{/if}}
+                                                                                    {{/each}}
+                                                                                </ul>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    {{#if this.job_hist}}
+                                                                        <!-- Job History -->
+                                                                        <div class="accordion-group">
+                                                                            <div class="accordion-heading">
+                                                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#dnb_cntct_det_accordian" href="#jobhist_tab">
+                                                                                    {{str "LBL_DNB_CONTACT_JOB_HIST"}}
+                                                                                </a>
+                                                                            </div>
+                                                                            <div id="jobhist_tab" class="accordion-body collapse">
+                                                                                <div class="accordion-inner">
+                                                                                    <table class="table table-striped table-condensed">
+                                                                                        <thead>
+                                                                                        <tr>
+                                                                                            <th>{{str "LBL_DNB_CONTACT_JOBTITLE"}}</th>
+                                                                                            <th>{{str "LBL_DNB_CONTACT_FROM"}}</th>
+                                                                                            <th>{{str "LBL_DNB_CONTACT_TO"}}</th>
+                                                                                        </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                        {{#each this.job_hist}}
+                                                                                            <tr>
+                                                                                                <td>{{this.title}}</td>
+                                                                                                <td>{{this.start_date}}</td>
+                                                                                                <td>{{this.end_date}}</td>
+                                                                                            </tr>
+                                                                                        {{/each}}
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    {{/if}}
+                                                                    {{#if this.comp_hist}}
+                                                                        <!-- Compensation History -->
+                                                                        <div class="accordion-group">
+                                                                            <div class="accordion-heading">
+                                                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#dnb_cntct_det_accordian" href="#comphist_tab">
+                                                                                    {{str "LBL_DNB_CONTACT_COMP_HIST"}}
+                                                                                </a>
+                                                                            </div>
+                                                                            <div id="comphist_tab" class="accordion-body collapse">
+                                                                                <div class="accordion-inner">
+                                                                                    <table class="table table-striped table-condensed">
+                                                                                        {{#each this.comp_hist}}
+                                                                                            <tr>
+                                                                                                <td colspan="2">
+                                                                                                    <div class="txt importData">
+                                                                                                        {{str "LBL_DNB_CONTACT_COMP_HIST"}}&nbsp;&nbsp;&nbsp;({{str "LBL_DNB_IN"}}&nbsp;&nbsp;&nbsp;{{this.comp_date}})
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            {{#each this.comp_det}}
+                                                                                                <tr>
+                                                                                                    <td>{{this.comp_type}}</td>
+                                                                                                    <td>
+                                                                                                        {{this.comp_amt}}
+                                                                                                        &nbsp;&nbsp;&nbsp;({{str "LBL_DNB_IN"}}&nbsp;&nbsp;&nbsp;{{this.comp_curr}})
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            {{/each}}
+                                                                                        {{/each}}
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    {{/if}}
+                                                                    </div>
+                                                            </div>
+                                                        {{/with}}
+                                                    {{else}}
+                                                        <aside class='create-no-data'>
+                                                            {{#if dnbCntctDet.errmsg}}
+                                                                <em>{{dnbCntctDet.errmsg}}</em>
+                                                            {{else}}
+                                                                <em>{{str "LBL_DNB_NO_DATA"}}</em>
+                                                            {{/if}}
+                                                        </aside>
+                                                    {{/if}}
+                                                    <div class="dnb-show-more">
+                                                        <a class="backToContactsList">
+                                                            <i class="fa fa-arrow-left"></i>
+                                                            {{str "LBL_DNB_CONTACT_LIST"}}
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

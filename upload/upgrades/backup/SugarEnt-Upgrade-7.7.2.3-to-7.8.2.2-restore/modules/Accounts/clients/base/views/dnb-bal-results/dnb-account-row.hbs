@@ -1,0 +1,45 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<li>
+    <div class='dnb-rslt-chkbox'>
+        <input type="checkbox" name="{{this.duns_num}}" id="{{this.duns_num}}"
+               class="dnb_checkbox dnb-bi-chk" {{#if this.isSelected}}checked{{/if}}
+            {{#if this.isDupe}}disabled{{/if}}/>
+    </div>
+    <div class='dnb-bal-rslt'>
+        {{#if this.locationtype}}
+            <span class="label pull-right" data-placement="right">
+                {{this.locationtype}}
+            </span>
+        {{/if}}
+        <a class="dnb-company-name" id="{{this.duns_num}}">
+            {{this.name}}
+        </a>
+    </div>
+    <div class="record-label dnb-bal-list">
+        {{#if this.isDupe}}
+            <span class="label label-important pull-right" data-placement="right">
+                {{str "LBL_DNB_DUPLICATE"}}
+            </span>
+        {{/if}}
+        {{#if this.billing_address_city}}
+            {{this.billing_address_city}},
+        {{/if}}
+        {{#if this.billing_address_state}}
+            {{this.billing_address_state}},
+        {{/if}}
+        {{#if this.billing_address_country}}
+            {{this.billing_address_country}}
+        {{/if}}
+    </div>
+</li>

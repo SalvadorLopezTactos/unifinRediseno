@@ -1,0 +1,137 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div id="dnb-financials-loading" class="block-footer">
+    {{str "LBL_DNB_FINANCIAL_LOADING"}} ...
+</div>
+<div id="dnb-financials-details">
+    {{#if dnbFin.product}}
+        <div class="accordian dnb-show-less" id="dnb-financials-accordian">
+            <!-- Recent Market Analysis -->
+            {{#if dnbFin.product.marketAnalysis}}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#dnb-financials-accordian" href="#recent-market-analysis">
+                            {{str "LBL_DNB_REC_MARK_ANALYSIS"}}
+                        </a>
+                    </div>
+                    <div id="recent-market-analysis" class="accordion-body collapse in">
+                        <div class="accordion-inner">
+                            <table class="table table-striped table-condensed">
+                                {{#each dnbFin.product.marketAnalysis}}
+                                    <tr>
+                                        <td>
+                                            {{{this.InformationDescription}}}
+                                        </td>
+                                        <td>
+                                            {{this.InformationValue}}
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+            <!-- Annual Income Statements -->
+            {{#if dnbFin.product.finStmt}}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#dnb-financials-accordian" href="#ann-inc-stmt">
+                            {{str "LBL_DNB_FIN_STMT"}}
+                        </a>
+                    </div>
+                    <div id="ann-inc-stmt" class="accordion-body collapse">
+                        <div class="accordion-inner">
+                            <table class="table table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th> {{str "LBL_DNB_FINANCIAL_PERIOD"}}</th>
+                                    <th> {{str "LBL_DNB_SALES_REVENUE"}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{#each dnbFin.product.finStmt}}
+                                    <tr>
+                                        <td>{{this.finStmtDate}}</td>
+                                        <td>
+                                            {{this.salesRevenue}}&nbsp;&nbsp;({{str "LBL_DNB_IN"}} {{this.salesUnits}})
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+            <!-- Basic Financial Information -->
+            {{#if dnbFin.product.stckSym}}
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#dnb-financials-accordian" href="#basic-fin-info">
+                            {{str "LBL_DNB_BASIC_FIN_INF"}}
+                        </a>
+                    </div>
+                    <div id="basic-fin-info" class="accordion-body collapse">
+                        <div class="accordion-inner dnb-inner-nav">
+                            <table class="table table-striped dataTable">
+                                {{#if dnbFin.product.stckSym.ownerType}}
+                                    <tr>
+                                        <td>
+                                            <b> {{str "LBL_DNB_FIN_COMP_TYPE"}}: </b>
+                                        </td>
+                                        <td>
+                                            {{dnbFin.product.stckSym.ownerType}}
+                                        </td>
+                                    </tr>
+                                {{/if}}
+                                {{#if dnbFin.product.stckSym.ownerType}}
+                                    <tr>
+                                        <td class='dnb-stock-exchange'>
+                                            <b> {{str "LBL_DNB_FIN_STCK_EXCH"}} </b>
+                                        </td>
+                                        <td>
+                                            <b> {{str "LBL_DNB_FIN_STCK_SYM"}} </b>
+                                        </td>
+                                    </tr>
+                                    {{#each dnbFin.product.stckSym.stckSymList}}
+                                        {{#if this.StockExchangeName.$}}
+                                            <tr>
+                                                <td>
+                                                    {{this.StockExchangeName.$}}
+                                                </td>
+                                                <td>
+                                                    {{this.StockExchangeTickerName}}
+                                                </td>
+                                            </tr>
+                                        {{/if}}
+                                    {{/each}}
+                                {{/if}}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
+        <div class="dnb-show-more">
+            <a class="showMoreData">{{str "LBL_DNB_SHOW_MORE"}}... <i class="fa fa-chevron-down"></i></a>
+            <a class="showLessData">{{str "LBL_DNB_SHOW_LESS"}}... <i class="fa fa-chevron-up"></i></a>
+        </div>
+    {{else}}
+        <div>
+            <aside class="txt">
+                <em>{{dnbFin.errmsg}}</em>
+            </aside>
+        </div>
+    {{/if}}
+</div>

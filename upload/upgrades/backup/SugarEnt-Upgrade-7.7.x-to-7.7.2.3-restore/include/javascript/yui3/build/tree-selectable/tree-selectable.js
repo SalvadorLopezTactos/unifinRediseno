@@ -1,0 +1,13 @@
+/*
+     YUI 3.15.0 (build 834026e)
+     Copyright 2014 Yahoo! Inc. All rights reserved.
+     Licensed under the BSD License.
+     http://yuilibrary.com/license/
+     */
+YUI.add('tree-selectable',function(Y,NAME){var Do=Y.Do;var EVT_SELECT='select';var EVT_UNSELECT='unselect';function Selectable(){}
+Selectable.prototype={initializer:function(){this.nodeExtensions=this.nodeExtensions.concat(Y.Tree.Node.Selectable);this._selectedMap={};Do.after(this._selectableAfterDefAddFn,this,'_defAddFn');Do.after(this._selectableAfterDefClearFn,this,'_defClearFn');Do.after(this._selectableAfterDefRemoveFn,this,'_defRemoveFn');this._selectableEvents=[this.after('multiSelectChange',this._afterMultiSelectChange)];},destructor:function(){(new Y.EventHandle(this._selectableEvents)).detach();this._selectableEvents=null;this._selectedMap=null;},getSelectedNodes:function(){return Y.Object.values(this._selectedMap);},selectNode:function(node,options){if(!this._selectedMap[node.id]){this._fireTreeEvent(EVT_SELECT,{node:node,src:options&&options.src},{defaultFn:this._defSelectFn,silent:options&&options.silent});}
+return this;},unselect:function(options){for(var id in this._selectedMap){if(this._selectedMap.hasOwnProperty(id)){this.unselectNode(this._selectedMap[id],options);}}
+return this;},unselectNode:function(node,options){if(node.isSelected()||this._selectedMap[node.id]){this._fireTreeEvent(EVT_UNSELECT,{node:node,src:options&&options.src},{defaultFn:this._defUnselectFn,silent:options&&options.silent});}
+return this;},_selectableAfterDefAddFn:function(e){if(e.node.isSelected()){this.selectNode(e.node);}},_selectableAfterDefClearFn:function(){this._selectedMap={};},_selectableAfterDefRemoveFn:function(e){delete e.node.state.selected;delete this._selectedMap[e.node.id];},_afterMultiSelectChange:function(){this.unselect();},_defSelectFn:function(e){if(!this.get('multiSelect')){this.unselect();}
+e.node.state.selected=true;this._selectedMap[e.node.id]=e.node;},_defUnselectFn:function(e){delete e.node.state.selected;delete this._selectedMap[e.node.id];}};Selectable.ATTRS={multiSelect:{value:false}};Y.Tree.Selectable=Selectable;function NodeSelectable(){}
+NodeSelectable.prototype={isSelected:function(){return!!this.state.selected;},select:function(options){this.tree.selectNode(this,options);return this;},unselect:function(options){this.tree.unselectNode(this,options);return this;}};Y.Tree.Node.Selectable=NodeSelectable;},'3.15.0',{"requires":["tree"]});

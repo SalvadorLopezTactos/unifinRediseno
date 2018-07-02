@@ -1,0 +1,132 @@
+<style>
+    #resultados{
+        padding-top: 5%;
+        font-weight: bold;
+    }
+
+    #total{
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .fill_row{
+        padding-bottom: 2%;
+    }
+
+    .citas_field{
+        padding-top: 5%;
+    }
+
+    .brujula_field input[type="text"].inherit-width {
+            width: 20%;
+    }
+
+    .tiempos_header{
+        font-weight: bold;
+        text-align: left;
+        text-indent: 30px;
+    }
+
+    .tiempo input[type="text"].inherit-width {
+        width: 20%;
+    }
+
+    .porcentaje input[type="text"].inherit-width {
+        width: 15%;
+    }
+
+</style>
+
+<table class="mainTable" align="center" width="80%">
+    <tr>
+     <th colspan="2" style="background-color: #000042">
+        <span style="color: white">CONTACTOS / LLAMADAS</span>
+     </th>
+    </tr>
+
+    <tr>
+        <td class="fill_row" colspan="2"></td>
+    </tr>
+
+    {{#each meta.panel_1}}
+        {{#each fields}}
+    <tr>
+        <td>{{str this.label "uni_Brujula"}}</td>
+        <td>
+            {{field ../../this}}
+        </td>
+    </tr>
+        {{/each}}
+    {{/each}}
+
+    <tr>
+        <td id="resultados" colspan="2">
+            RESULTADOS
+        </td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td id="total">Total (#)</td>
+    </tr>
+
+    {{#each meta.panel_2}}
+        {{#each fields}}
+            <tr>
+                <td>{{str this.label "uni_Brujula"}}</td>
+                <td>
+                    {{field ../../this}}
+                </td>
+            </tr>
+        {{/each}}
+    {{/each}}
+
+    {{#each meta.panel_3}}
+        {{#each fields}}
+            <tr>
+                <td class="citas_field" colspan="2">
+                    {{field ../../this}}
+                </td>
+            </tr>
+        {{/each}}
+    {{/each}}
+
+    <tr>
+        <td class="fill_row" colspan="2"></td>
+    </tr>
+</table>
+
+<table class="mainTable" align="center" width="80%">
+    <tr>
+        <th colspan="3" style="background-color: #000042">
+            <span style="color: white">TIEMPOS</span>
+        </th>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="tiempos_header" >Horas</td>
+        <td class="tiempos_header" >%</td>
+    </tr>
+    {{#each meta.panel_4}}
+        {{#each fields}}
+            <tr>
+                {{#each this}}
+                    {{#unless dismiss_label}}
+                        <td>{{str this.label "uni_Brujula"}}</td>
+                    {{/unless}}
+                    <td title="{{str this.tool_tip "uni_Brujula"}}">
+                        {{field ../../../this}}
+                    </td>
+                {{/each}}
+            </tr>
+        {{/each}}
+    {{/each}}
+
+    <tr>
+        <td class="fill_row" colspan="3"></td>
+    </tr>
+
+    <tr>
+        <td class="fill_row" colspan="3"></td>
+    </tr>
+</table>

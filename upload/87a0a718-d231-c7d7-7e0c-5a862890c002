@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:87a0a718-d231-c7d7-7e0c-5a862890c002
+ORGANIZER;CN=Vanessa Aguilera Madrigal:vaguilera@unifin.com.mx
+DTSTART:20180215T174500Z
+DTEND:20180215T184500Z
+DTSTAMP:20180216T004000Z
+SUMMARY:Expediente
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

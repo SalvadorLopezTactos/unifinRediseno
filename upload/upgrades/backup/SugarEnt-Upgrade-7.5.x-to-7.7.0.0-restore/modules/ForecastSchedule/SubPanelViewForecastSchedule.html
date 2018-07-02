@@ -1,0 +1,36 @@
+<!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+-->
+<!-- BEGIN: main -->
+<table cellpadding="0" cellspacing="0" width="100%" border="0" class="list view">
+<!-- BEGIN: list_nav_row -->
+{PAGINATION}
+	<!-- END: list_nav_row -->
+	<tr height="20" >
+	<td scope="col" width="25%" ><slot>{MOD.LBL_SVFS_FORECASTDATE}</slot></td>
+	<td scope="col" width="20%" ><slot>{MOD.LBL_SVFS_STATUS}</slot></td>
+	<td scope="col" width="35%" ><slot>{MOD.LBL_SVFS_USER}</slot></td>
+	<td scope="col" width="20%" ><slot>{MOD.LBL_SVFS_CASCADE}</slot></td>
+	</tr>
+
+
+<!-- BEGIN: row -->
+<tr height="20"  class="{ROW_COLOR}S1">
+		<td scope='row' valign=TOP><slot><a href="{URL_PREFIX}index.php?action=DetailView&module=ForecastSchedule&record={SCHEDULE.ID}{RETURN_URL}" >{SCHEDULE.FORECAST_START_DATE}</a></slot></td>
+		<td valign=TOP><slot>{SCHEDULE.STATUS}</slot></td>
+		<td valign=TOP><slot>{SCHEDULE.USER_NAME}</slot></td>
+    	<td valign=TOP><slot><input type=checkbox class="checkbox" disabled {SCHEDULE.CASCADE_HIERARCHY_CHECKED}></slot></td>
+</tr>
+
+<!-- END: row -->
+</table>
+<!-- END: main -->

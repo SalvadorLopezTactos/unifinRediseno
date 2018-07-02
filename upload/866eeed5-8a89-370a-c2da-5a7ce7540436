@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:866eeed5-8a89-370a-c2da-5a7ce7540436
+ORGANIZER;CN=Dagoberto Cordova Amador:dcordova@unifin.com.mx
+DTSTART:20180207T190000Z
+DTEND:20180207T200000Z
+DTSTAMP:20180209T001100Z
+SUMMARY:AP SUMMIT, S.A. DE C.V.
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

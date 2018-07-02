@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:f284e480-2e78-3ddc-a3ed-5a6632eecce8
+ORGANIZER;CN=Juan Carlos Garcia Uribe:jcgarcia@unifin.com.mx
+DTSTART:20180123T190000Z
+DTEND:20180124T000000Z
+DTSTAMP:20180122T184900Z
+SUMMARY:expediente y cierre de venta
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

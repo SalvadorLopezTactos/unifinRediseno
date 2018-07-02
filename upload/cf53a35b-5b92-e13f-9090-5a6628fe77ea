@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:cf53a35b-5b92-e13f-9090-5a6628fe77ea
+ORGANIZER;CN=Overlín Casas González:ocasas@unifin.com.mx
+DTSTART:20180125T161500Z
+DTEND:20180125T181500Z
+DTSTAMP:20180122T180700Z
+SUMMARY:presentacion  / protexa
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

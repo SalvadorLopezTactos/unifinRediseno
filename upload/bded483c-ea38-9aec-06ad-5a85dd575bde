@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:bded483c-ea38-9aec-06ad-5a85dd575bde
+ORGANIZER;CN=Jose Fernando Peña Rubio:fpena@unifin.com.mx
+DTSTART:20180219T180000Z
+DTEND:20180219T193000Z
+DTSTAMP:20180215T191800Z
+SUMMARY:PRESENTACION
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

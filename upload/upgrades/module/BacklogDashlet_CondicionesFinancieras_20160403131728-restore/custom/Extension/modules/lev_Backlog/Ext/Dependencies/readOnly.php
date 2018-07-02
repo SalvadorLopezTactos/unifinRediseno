@@ -1,0 +1,489 @@
+<?php
+/**
+ * Created by Levementum.
+ * User: jgarcia@levementum.com
+ * Date: 3/7/2016
+ * Time: 3:09 PM
+ */
+
+$dependencies['lev_Backlog']['monto_real_logrado_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'monto_real_logrado',
+                'label' => 'monto_real_logrado_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['monto_original_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'monto_original',
+                'label' => 'monto_original_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['equipo_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'equipo',
+                'label' => 'equipo_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['lev_backlog_opportunities_name_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'lev_backlog_opportunities_name',
+                'label' => 'lev_backlog_opportunities_name_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['activo_c_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'activo_c',
+                'label' => 'activo_c_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['cliente_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'cliente',
+                'label' => 'cliente_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['comentario_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'comentario',
+                'label' => 'comentario_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['description_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'description',
+                'label' => 'description_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['estatus_de_la_operacion_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'estatus_de_la_operacion',
+                'label' => 'estatus_de_la_operacion_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['etapa_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'etapa',
+                'label' => 'etapa_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['monto_comprometido_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'monto_comprometido',
+                'label' => 'monto_comprometido_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['name_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'name',
+                'label' => 'name_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['numero_de_backlog_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'numero_de_backlog',
+                'label' => 'numero_de_backlog_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['numero_de_solicitud_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'numero_de_solicitud',
+                'label' => 'numero_de_solicitud_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['producto_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'producto',
+                'label' => 'producto_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['renta_inicial_comprometida_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'renta_inicial_comprometida',
+                'label' => 'renta_inicial_comprometida_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['renta_inicial_real_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'renta_inicial_real',
+                'label' => 'renta_inicial_real_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['sub_activo_2_c_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'sub_activo_2_c',
+                'label' => 'sub_activo_2_c_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['sub_activo_3_c_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'sub_activo_3_c',
+                'label' => 'sub_activo_3_c_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['sub_activo_c_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'sub_activo_c',
+                'label' => 'sub_activo_c_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['tipo_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'tipo',
+                'label' => 'tipo_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['tipo_de_operacion_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'tipo_de_operacion',
+                'label' => 'tipo_de_operacion_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['assigned_user_name_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'assigned_user_name',
+                'label' => 'assigned_user_name_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+
+$dependencies['lev_Backlog']['activo_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'activo',
+                'label' => 'activo_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['monto_comprometido_cancelado_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'monto_comprometido_cancelado',
+                'label' => 'monto_comprometido_cancelado_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['renta_inicialcomp_can_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'renta_inicialcomp_can',
+                'label' => 'renta_inicialcomp_can_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+
+$dependencies['lev_Backlog']['motivo_de_cancelacion_readonly'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'motivo_de_cancelacion',
+                'label' => 'motivo_de_cancelacion_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['etapa_preliminar_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'etapa_preliminar',
+                'label' => 'etapa_preliminar_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['progreso_readonly'] = array(   
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('editar'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'progreso',
+                'label' => 'progreso_label',
+                'value' => 'equal($editar, false)',
+            ),
+        ),
+    ),
+);
+
+$dependencies['lev_Backlog']['region_readonly'] = array(
+    'hooks' => array("all"),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'region',
+                'label' => 'region_label',
+                'value' => 'true',
+            ),
+        ),
+    ),
+);

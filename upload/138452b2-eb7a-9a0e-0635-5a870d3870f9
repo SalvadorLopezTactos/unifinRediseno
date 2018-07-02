@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:138452b2-eb7a-9a0e-0635-5a870d3870f9
+ORGANIZER;CN=Paloma Cespedes Martinez del Campo:pcespedes@unifin.com.mx
+DTSTART:20180219T183000Z
+DTEND:20180219T193000Z
+DTSTAMP:20180216T165700Z
+SUMMARY:INMUEBLES JOM
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

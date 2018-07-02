@@ -1,0 +1,18 @@
+/*
+     * Your installation or use of this SugarCRM file is subject to the applicable
+     * terms available at
+     * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+     * If you do not agree to all of the applicable terms or do not have the
+     * authority to bind the entity as an authorized representative, then do not
+     * install or use this SugarCRM file.
+     *
+     * Copyright (C) SugarCRM Inc. All rights reserved.
+     */
+({tagName:'span',plugins:['EllipsisInline'],events:{'click [data-event]':'handleMenuEvent','click [data-route]':'handleRouteEvent','shown.bs.dropdown':'populateMenu'},actions:[],_defaultSettings:{favorites:3,recently_viewed:3},_settings:{},initialize:function(options){options.meta=_.extend({},options.meta,app.metadata.getView(null,options.name),app.metadata.getView(options.module,options.name));this._super('initialize',[options]);this._initSettings();this._collections={};},_initSettings:function(){this._settings=_.extend({},this._defaultSettings,this.meta&&this.meta.settings||{});return this;},_renderHtml:function(){var meta=app.metadata.getModule(this.module)||{};this.actions=this.filterByAccess(meta.menu&&meta.menu.header&&meta.menu.header.meta);this._super('_renderHtml');if(!this.meta.short){this.$el.addClass('btn-group');}},filterByAccess:function(meta){var result=[];_.each(meta,function(menuItem){if(app.acl.hasAccess(menuItem.acl_action,menuItem.acl_module)){result.push(menuItem);}});return result;},populateMenu:function(){var meta=app.metadata.getModule(this.module)||{};if(_.isEmpty(_.omit(meta.fields,'_hash'))){return;}
+if(meta.favoritesEnabled){this.populate('favorites',[{'$favorite':''}],this._settings.favorites);}
+this.populate('recently-viewed',[{'$tracker':'-7 DAY'}],this._settings.recently_viewed);},isOpen:function(){return!!this.$el.hasClass('open');},populate:function(tplName,filter,limit){if(limit<=0){return;}
+this.getCollection(tplName).fetch({'showAlerts':false,'fields':['id','name'],'filter':filter,'limit':limit,'success':_.bind(function(){this._renderPartial(tplName);},this)});},getCollection:function(tplName){if(!this._collections[tplName]){this._collections[tplName]=app.data.createBeanCollection(this.module);}
+return this._collections[tplName];},_renderPartial:function(tplName,options){var tpl,$placeholder,$old,focusedRoute,focusSelector,$new,$newFocus;if(this.disposed||!this.isOpen()){return;}
+this.destroyEllipsisTooltips();options=options||{};tpl=app.template.getView(this.name+'.'+tplName,this.module)||app.template.getView(this.name+'.'+tplName);$placeholder=this.$('[data-container="'+tplName+'"]');$old=$placeholder.nextUntil('.divider');focusedRoute=$old.find(document.activeElement).data('route');$old.remove();$placeholder.after(tpl(_.extend({'collection':this.getCollection(tplName)},options)));if(focusedRoute){$new=$placeholder.nextUntil('.divider');focusSelector='[data-route="'+focusedRoute+'"]';$newFocus=$new.find(focusSelector);if($newFocus.length>0){$newFocus.focus();}}
+this.initializeEllipsisTooltips();},handleMenuEvent:function(evt){var $currentTarget=this.$(evt.currentTarget);app.events.trigger($currentTarget.data('event'),this.module,evt);},handleRouteEvent:function(event){var currentRoute,$currentTarget=this.$(event.currentTarget),route=$currentTarget.data('route');event.preventDefault();if((!_.isUndefined(event.button)&&event.button!==0)||event.ctrlKey||event.metaKey||$currentTarget.data('openwindow')===true){event.stopPropagation();window.open(route,'_blank');return false;}
+currentRoute='#'+Backbone.history.getFragment();(currentRoute===route)?app.router.refresh():app.router.navigate(route,{trigger:true});}})

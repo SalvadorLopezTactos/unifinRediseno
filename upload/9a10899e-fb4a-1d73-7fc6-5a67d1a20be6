@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:9a10899e-fb4a-1d73-7fc6-5a67d1a20be6
+ORGANIZER;CN=Alejandra Restrepo Duque:arestrepo@unifin.com.mx
+DTSTART:20180126T170000Z
+DTEND:20180126T180000Z
+DTSTAMP:20180124T002100Z
+SUMMARY:Iké Grupo Empresarial
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

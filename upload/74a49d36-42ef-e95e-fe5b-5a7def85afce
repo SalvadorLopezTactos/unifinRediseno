@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:74a49d36-42ef-e95e-fe5b-5a7def85afce
+ORGANIZER;CN=Benito Lozano Aguilar:blozano@unifin.com.mx
+DTSTART:20180209T150000Z
+DTEND:20180209T171500Z
+DTSTAMP:20180209T185700Z
+SUMMARY:PRESENTACION
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,789 @@
+<!--
+Detall de Personas
+AF - 18-01-18
+-->
+<!-- Estilos modal -->
+<style>
+  /* The Modal (background) */
+  .modal {
+      position: fixed; /* Stay in place */
+      padding-top: 100px; /* Location of the box */
+      padding-bottom: 100px;
+      left: 10;
+      top: 0;
+      /* width: 100%; /* Full width */ */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+
+  /* Modal Content */
+  .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 1;
+      border: 1px solid #888;
+      width: 98%;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+      -webkit-animation-name: animatetop;
+      -webkit-animation-duration: 0.4s;
+      animation-name: animatetop;
+      animation-duration: 0.4s
+  }
+
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+  }
+
+  @keyframes animatetop {
+      from {top:-300px; opacity:0}
+      to {top:0; opacity:1}
+  }
+
+  /* The Close Button */
+  .close {
+      color: white;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+  }
+
+  .modal-header {
+      padding: .5px 0px;
+      background-color: #21618C;
+      color: white;
+  }
+
+  .modal-body {
+    padding: .5px 0px;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .modal-footer {
+      padding: 2px 16px;
+      background-color: #21618C;
+      color: #ffffff;
+      font-size: 12px;
+      text-align: center;
+  }
+
+  .pointer {cursor: pointer;}
+
+</style>
+
+<!-- Fila 1 -->
+<div class="row-fluid">
+  <!-- Bloque 1: General -->
+  <div class="span4">
+    <div style="background-color: #f9f9f9">
+      <div>
+        <!-- Encabezado -->
+        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion0" href="#collapseOne">
+            <font color=#ffffff>
+              <center><strong>General</strong></center>
+            </font>
+          </a>
+        </div>
+        <!-- Contenido -->
+        <div id="collapseOne" class="accordion-body in collapse" style="background-color: #ffffff">
+          <!-- Línea 1 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Tipo</strong> </div>
+            <div class="span6">{{general_cliente.tipo}}</div>
+          </div>
+          <!-- Línea 2 -->
+          <div class="row-fluid"  style="background-color: #ffffff">
+            <div class="span6"><strong>Segmento</strong></div>
+            <div class="span6">{{general_cliente.segmento}}</div>
+          </div>
+          <!-- Línea 3 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Cobranza</strong> </div>
+            <div class="span6">{{general_cliente.cobranza}}</div>
+          </div>
+          <!-- Línea 4 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span6"><strong>Sector económico</strong> </div>
+            <div class="span6">{{general_cliente.sector_economico}}</div>
+          </div>
+          <!-- Línea 5 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Grupo Empresarial</strong> </div>
+            <div class="span6">{{general_cliente.grupo_empresarial}}</div>
+          </div>
+          <!-- Línea 6 -->
+          <!-- <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span6"><strong>Nivel de satisfacción</strong> </div>
+            <div class="span6">{{general_cliente.nivel_satisfaccion}}</div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bloque 2: Alertas -->
+  <div class="span4">
+    <div style="background-color: #f9f9f9">
+      <div>
+        <!-- Encabezado -->
+        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
+            <font color=#ffffff>
+              <center>
+                <strong>
+                  Alertas ({{alertas.total}})
+                </strong>
+              </center>
+            </font>
+          </a>
+        </div>
+        <!-- Contenido -->
+        <div id="collapseTwo" class="accordion-body in collapse" style="background-color: #ffffff">
+          <!-- Línea 1 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span12" style="height: 180px; overflow: scroll;">
+              <strong>
+                {{#if alertas.alerta}}
+                  {{#each alertas.alerta}}
+                    <div style="border-style: groove;">
+                      <font color=#21618C> {{numero}} </font> |
+                      <font color=#F1C40F> {{prioridad}} </font> |
+                      <a href="#Notifications/{{idNotificacion}}" target="_blank">
+                        {{mensaje}}
+                      </a>
+                    </div>
+                  {{/each}}
+                {{else}}
+                  <center>No hay alertas pendientes</center>
+                {{/if}}
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bloque 3: Historial Contactos -->
+  <div class="span4">
+    <div style="background-color: #f9f9f9">
+      <div>
+        <!-- Encabezado -->
+        <div class="accordion-heading" style="background-color: {{historial_contactos.color}}">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#collapseThree">
+            <font color=#ffffff>
+              <center><strong>Historial de contactos</strong></center>
+            </font>
+          </a>
+        </div>
+        <!-- Contenido -->
+        <div id="collapseThree" class="accordion-body in collapse" style="background-color: #ffffff">
+          <!-- Línea 1 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Última cita</strong> </div>
+            <div class="span6">{{historial_contactos.ultima_cita}}</div>
+          </div>
+          <!-- Línea 2 -->
+          <div class="row-fluid"  style="background-color: #ffffff">
+            <div class="span6"><strong>Última llamada</strong></div>
+            <div class="span6">{{historial_contactos.ultima_llamada}}</div>
+          </div>
+          <!-- Línea 3 -->
+          <div class="row-fluid">
+            <center>
+              <font color=#ffffff>
+                <!-- Línea 3.1 -->
+                <div class="span4" style="background-color: #555555">
+                  <strong>{{historial_contactos.citas}}</strong></br>
+                  Citas
+                </div>
+                <!-- Línea 3.2 -->
+                <div class="span4" style="background-color: #555555">
+                  <strong>{{historial_contactos.llamadas}}</strong><br/>
+                  llamadas
+                </div>
+                <!-- Línea 3.3 -->
+                <div class="span4" style="background-color: #555555">
+                  <strong>{{historial_contactos.emails}}</strong><br/>
+                  Emails
+                </div>
+              </font>
+            </center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fila 2 -->
+<div class="row-fluid">
+  <!-- Bloque 4: Leasing- -->
+  <div class="span4">
+    <div style="background-color: #f9f9f9">
+      <div>
+        <!-- Encabezado -->
+        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseFour">
+            <font color=#ffffff>
+              <center><strong>Leasing</strong></center>
+            </font>
+          </a>
+        </div>
+        <!-- Contenido -->
+        <div id="collapseFour" class="accordion-body in collapse" style="background-color: #ffffff">
+          <!-- Línea 1 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Línea autorizada</strong> </div>
+            <div class="span6">$ {{customFormatNumber leasing.linea_autorizada}}</div>
+          </div>
+          <!-- Línea 2 -->
+          <div class="row-fluid"  style="background-color: #ffffff">
+            <div class="span6"><strong>Fecha de vencimiento</strong></div>
+            <div class="span6"> {{leasing.fecha_vencimiento}} </div>
+          </div>
+          <!-- Línea 3 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Línea disponible</strong> </div>
+            <div class="span6">
+              <font {{#if leasing.color}}color="{{leasing.color}}"{{/if}}>
+                $ {{customFormatNumber leasing.linea_disponible}}
+              </font>
+            </div>
+          </div>
+          <!-- Línea 4 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span6"><strong>Fecha de pago</strong> </div>
+            <div class="span6">{{leasing.fecha_pago}}</div>
+          </div>
+          <!-- Línea 5 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Nivel de satisfacción</strong> </div>
+            <div class="span6">{{leasing.nivel_satisfaccion}}</div>
+          </div>
+          <!-- Línea 6 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span6"><strong>Promotor</strong> </div>
+            <div class="span6">{{leasing.promotor}}</div>
+          </div>
+          <!-- Línea 7 -->
+          <div class="row-fluid">
+            <center>
+              <font color=#ffffff>
+                <!-- Línea 7.1 -->
+                <div id="openAnexos" class="span6 openModalAnexos pointer" style="background-color: #555555">
+                  <div class="row-fluid" style="background-color: #555">
+                    <div class="span7" style="text-align:right;" >
+                      <strong>{{leasing.anexos_activos}}</strong>
+                    </div>
+                    <div class="span5" style="text-align:right;">
+                      <i class="fa fa-eye" style="background-color:white"></i>
+                    </div>
+                  </div>
+                  Anexos
+                  <br>activos
+                </div>
+                <!-- Línea 7.2 -->
+                <div class="span6" style="background-color: #555555">
+                  <div class="row-fluid" style="background-color: #555">
+                    <div class="span12" style="text-align:center;" >
+                      <strong>{{leasing.anexos_historicos}}</strong>
+                    </div>
+                  </div>
+                  Anexos
+                  <br>historicos
+                </div>
+              </font>
+            </center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bloque 5: Factoring -->
+  <div class="span4">
+    <div style="background-color: #f9f9f9">
+      <div>
+        <!-- Encabezado -->
+        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive">
+            <font color=#ffffff>
+              <center><strong>Factoring</strong></center>
+            </font>
+          </a>
+        </div>
+        <!-- Contenido -->
+        <div id="collapseFive" class="accordion-body in collapse" style="background-color: #ffffff">
+          <!-- Línea 1 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Línea autorizada</strong> </div>
+            <div class="span6">$ {{customFormatNumber factoring.linea_autorizada}}</div>
+          </div>
+          <!-- Línea 2 -->
+          <div class="row-fluid"  style="background-color: #ffffff">
+            <div class="span6"><strong>Fecha de vencimiento</strong></div>
+            <div class="span6">{{factoring.fecha_vencimiento}}</div>
+          </div>
+          <!-- Línea 3 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Línea disponible</strong> </div>
+            <div class="span6">
+              <font {{#if factoring.color}}color="{{factoring.color}}"{{/if}}>
+                $ {{customFormatNumber factoring.linea_disponible}}
+              </font>
+            </div>
+          </div>
+          <!-- Línea 4 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span6"><strong>Fecha de pago</strong> </div>
+            <div class="span6">{{factoring.fecha_pago}}</div>
+          </div>
+          <!-- Línea 5 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Nivel de satisfacción</strong> </div>
+            <div class="span6">{{factoring.nivel_satisfaccion}}</div>
+          </div>
+          <!-- Línea 6 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span6"><strong>Promotor</strong> </div>
+            <div class="span6">{{factoring.promotor}}</div>
+          </div>
+          <!-- Línea 7 -->
+          <div class="row-fluid">
+            <center>
+              <font color=#ffffff>
+                <!-- Línea 7.1 -->
+                <div id="openCesiones" class="span6 openModalCesiones pointer" style="background-color: #555555">
+                  <div class="row-fluid" style="background-color: #555">
+                    <div class="span7" style="text-align:right;" >
+                      <strong>{{factoring.anexos_activos}}</strong>
+                    </div>
+                    <div class="span5" style="text-align:right;">
+                      <i class="fa fa-eye" style="background-color:white"></i>
+                    </div>
+                  </div>
+                  Cesiones
+                  <br>activas
+                </div>
+                <!-- Línea 7.2 -->
+                <div class="span6" style="background-color: #555555">
+                  <div class="row-fluid" style="background-color: #555">
+                    <div class="span12" style="text-align:center;" >
+                      <strong>{{factoring.anexos_historicos}}</strong>
+                    </div>
+                  </div>
+                  Cesiones
+                  <br>historicas
+                </div>
+              </font>
+            </center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bloque 6: Crédito Auto -->
+  <div class="span4">
+    <div style="background-color: #f9f9f9">
+      <div>
+        <!-- Encabezado -->
+        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseSix">
+            <font color=#ffffff>
+              <center><strong>C.Auto</strong></center>
+            </font>
+          </a>
+        </div>
+        <!-- Contenido -->
+        <div id="collapseSix" class="accordion-body in collapse" style="background-color: #ffffff">
+          <!-- Línea 1 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Línea autorizada</strong> </div>
+            <div class="span6">$ {{customFormatNumber credito_auto.linea_autorizada}}</div>
+          </div>
+          <!-- Línea 2 -->
+          <div class="row-fluid"  style="background-color: #ffffff">
+            <div class="span6"><strong>Fecha de vencimiento</strong></div>
+            <div class="span6">{{credito_auto.fecha_vencimiento}}</div>
+          </div>
+          <!-- Línea 3 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Línea disponible</strong> </div>
+            <div class="span6">
+              <font {{#if credito_auto.color}}color="{{credito_auto.color}}"{{/if}}>
+                $ {{customFormatNumber credito_auto.linea_disponible}}
+              </font>
+            </div>
+          </div>
+          <!-- Línea 4 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span6"><strong>Fecha de pago</strong> </div>
+            <div class="span6">{{credito_auto.fecha_pago}}</div>
+          </div>
+          <!-- Línea 5 -->
+          <div class="row-fluid" style="background-color: #f9f9f9">
+            <div class="span6"><strong>Nivel de satisfacción</strong> </div>
+            <div class="span6">{{credito_auto.nivel_satisfaccion}}</div>
+          </div>
+          <!-- Línea 6 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span6"><strong>Promotor</strong> </div>
+            <div class="span6">{{credito_auto.promotor}}</div>
+          </div>
+          <!-- Línea 7 -->
+          <div class="row-fluid">
+            <center>
+              <font color=#ffffff>
+                <!-- Línea 7.1 -->
+                <div id="openContratos" class="span6 openModalContratos pointer" style="background-color: #555555">
+                  <div class="row-fluid" style="background-color: #555">
+                    <div class="span7" style="text-align:right;" >
+                      <strong>{{credito_auto.anexos_activos}}</strong>
+                    </div>
+                    <div class="span5" style="text-align:right;">
+                      <i class="fa fa-eye" style="background-color:white"></i>
+                    </div>
+                  </div>
+                  Contratos
+                  <br>activos
+                </div>
+                <!-- Línea 7.2 -->
+                <div class="span6" style="background-color: #555555">
+                  <div class="row-fluid" style="background-color: #555">
+                    <div class="span12" style="text-align:center;" >
+                      <strong>{{credito_auto.anexos_historicos}}</strong>
+                    </div>
+                  </div>
+                  Contratos
+                  <br>historicos
+                </div>
+              </font>
+            </center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal- Activos -->
+<div id="myModal1" class="row-fluid" style="display:none">
+  <div class="modal" style="background-color: #21618C">
+    <!-- Modal content -->
+    <center><font color="white">
+      Recuperando información
+      <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
+    </font></center>
+  </div>
+</div>
+<div id="myModal" class="row-fluid" style="display:none">
+  <div class="modal span12">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <!-- Modal header -->
+      <div class="modal-header">
+        <span class="close closeModalAnexos">&times;</span>
+        <h2> &nbsp;&nbsp; {{anexosdata.titulo_modal}}</h2>
+        <!-- Habilita cabeceras -->
+        <!-- Anexos -->
+        {{#if anexosdata.habilita_anexos_activos}}
+          <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+            <thead>
+              <tr>
+                <th class="span4">Activo</th>
+                <th class="span2">
+                  Anexo
+                  <i id="orderByAnexo" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">
+                  Fecha de contratación
+                  <i id="orderByAnexoContrata" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">
+                  Fecha de terminación
+                  <i id="orderByAnexoTermino" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">Renta</th>
+                <th class="span2">Próxima Renta</th>
+                <th class="span2">Vigencia del seguro</th>
+                <th class="span2">Monto</th>
+              </tr>
+            </thead>
+          </table>
+        {{/if}}
+        <!-- Cesiones -->
+        {{#if anexosdata.habilita_cesiones_activas}}
+          <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+            <thead>
+              <tr>
+                <th class="span2">
+                  No. de Cesión
+                  <i id="orderByCesion" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span4">Deudor(es)</th>
+                <th class="span2">
+                  Fecha de Vencimiento
+                  <i id="orderByCesionVencimiento" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">Monto por Vencer Financiado</th>
+                <th class="span2">Monto de Descuento</th>
+              </tr>
+            </thead>
+          </table>
+        {{/if}}
+        <!-- Contratos -->
+        {{#if anexosdata.habilita_contratos_activos}}
+          <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+            <thead>
+              <tr>
+                <th class="span4">Unidad</th>
+                <th class="span2">
+                  Contrato
+                  <i id="orderByContrato" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">
+                  Fecha de contratación
+                  <i id="orderByContratoContrata" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">
+                  Fecha de terminación
+                  <i id="orderByContratoTermino" class="fa fa-unsorted"></i>
+                </th>
+                <th class="span2">Mensualidad</th>
+                <th class="span2">Próxima Domiciliación</th>
+                <th class="span2">Vigencia del seguro</th>
+                <th class="span2">Monto</th>
+              </tr>
+            </thead>
+          </table>
+        {{/if}}
+      </div>
+      <!-- Table header -->
+      <!-- <div>
+         {{#if habilita_anexos_activos}}
+          <div class="row-fluid" style="background-color:gray; color:white; font-size: 12px; text-align: center;">
+            <div class="span4">Activo</div>
+            <div class="span1">Anexo</div>
+            <div class="span1">Fecha de contratación</div>
+            <div class="span1">Fecha de terminación</div>
+            <div class="span1">Renta (X/48)</div>
+            <div class="span1">Próxima Renta</div>
+            <div class="span1">Vigencia del seguro</div>
+            <div class="span2">Monto</div>
+          </div>
+        {{/if}} -->
+        <!-- {{#if habilita_cesiones_activas}}
+          <div class="row-fluid" style="background-color:gray; color:white; font-size: 12px; text-align: center;">
+            <div class="span2">No. de Cesión</div>
+            <div class="span4">Deudor(es)</div>
+            <div class="span2">Fecha de Vencimiento</div>
+            <div class="span2">Monto por Vencer Financiado</div>
+            <div class="span2">Monto de Descuento</div>
+          </div>
+        {{/if}} -->
+        <!-- {{#if habilita_contratos_activos}}
+          <div class="row-fluid" style="background-color:gray; color:white; font-size: 12px; text-align: center;">
+            <div class="span4">Unidad</div>
+            <div class="span1">Contrato</div>
+            <div class="span1">Fecha de contratación</div>
+            <div class="span1">Fecha de terminación</div>
+            <div class="span1">Mensualidad (X/48)</div>
+            <div class="span1">Próxima Domiciliación</div>
+            <div class="span1">Vigencia del seguro</div>
+            <div class="span2">Monto</div>
+          </div>
+        {{/if}}
+      </div> -->
+      <!-- Modal body -->
+      <div class="modal-body">
+            <!-- Anexos -->
+            {{#if anexosdata.habilita_anexos_activos}}
+            	{{#if anexosdata.anexos_activos}}
+                <!--Lista -->
+                <div class="list-view">
+                  <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+                    <thead class="hide">
+                      <tr>
+                        <th class="span4">Activo</th>
+                        <th class="span2">
+                          Anexo
+                          <i id="orderByAnexo" class="fa fa-unsorted"></i>
+                        </th>
+                        <th class="span2">
+                          Fecha de contratación
+                          <i id="orderByAnexoContrata" class="fa fa-unsorted"></i>
+                        </th>
+                        <th class="span2">
+                          Fecha de terminación
+                          <i id="orderByAnexoTermino" class="fa fa-unsorted"></i>
+                        </th>
+                        <th class="span2">Renta</th>
+                        <th class="span2">Próxima Renta</th>
+                        <th class="span2">Vigencia del seguro</th>
+                        <th class="span2">Monto</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{#each anexosdata.anexos_activos}}
+                       <tr>
+                         <td class="span4" style="white-space:initial;">{{columna1}}</td>
+                         <td class="span2">{{columna2}}</td>
+                         <td class="span2">{{columna3}}</td>
+                         <td class="span2">{{columna4}}</td>
+                         <td class="span2">{{columna5}}</td>
+                         <td class="span2">{{columna6}}</td>
+                         <td class="span2">{{columna7}}</td>
+                         <td class="span2">$ {{customFormatNumber columna8}}</td>
+                       </tr>
+                     {{/each}}
+                    </tbody>
+                  </table>
+                </div>
+                <!-- {{#each anexos_activos}}
+                  <div class="row-fluid">
+                      <div class="span4">{{columna1}}</div>
+                      <div class="span1">{{columna2}}</div>
+                      <div class="span1">{{columna3}}</div>
+                      <div class="span1">{{columna4}}</div>
+                      <div class="span1">{{columna5}}</div>
+                      <div class="span1">{{columna6}}</div>
+                      <div class="span1">{{columna7}}</div>
+                      <div class="span2">$ {{customFormatNumber columna8}}</div>
+                  </div>
+                {{/each}} -->
+              {{else}}
+                <div class="row-fluid" style="color:gray;">
+                  <div class="span12"> No se han encontrado registros</div>
+                </div>
+              {{/if}}
+            {{/if}}
+            <!-- Cesiones -->
+            {{#if anexosdata.habilita_cesiones_activas}}
+            	{{#if anexosdata.cesiones_activas}}
+              <!--Lista -->
+              <div class="list-view">
+                <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+                  <thead class="hide">
+                    <tr>
+                      <th class="span2">
+                        No. de Cesión
+                        <i id="orderByCesion" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span4" style="white-space:initial;">Deudor(es)</th>
+                      <th class="span2">
+                        Fecha de Vencimiento
+                        <i id="orderByCesionVencimiento" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span2">Monto por Vencer Financiado</th>
+                      <th class="span2">Monto de Descuento</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each anexosdata.cesiones_activas}}
+                     <tr>
+                       <td class="span2">{{columna1}}</td>
+                       <td class="span4" style="white-space:initial;">{{columna2}}</td>
+                       <td class="span2">{{columna3}}</td>
+                       <td class="span2">$ {{customFormatNumber columna4}}</td>
+                       <td class="span2">$ {{customFormatNumber columna5}}</td>
+                     </tr>
+                   {{/each}}
+                  </tbody>
+                </table>
+              </div>
+                <!-- {{#each cesiones_activas}}
+                  <div class="row-fluid">
+                      <div class="span2">{{columna1}}</div>
+                      <div class="span4">{{columna2}}</div>
+                      <div class="span2">{{columna3}}</div>
+                      <div class="span2">$ {{customFormatNumber columna4}}</div>
+                      <div class="span2">$ {{customFormatNumber columna5}}</div>
+                  </div>
+                {{/each}} -->
+              {{else}}
+                <div class="row-fluid" style="color:gray;">
+                  <div class="span12"> No se han encontrado registros</div>
+                </div>
+              {{/if}}
+            {{/if}}
+            <!-- Contratos -->
+            {{#if anexosdata.habilita_contratos_activos}}
+            	{{#if anexosdata.contratos_activos}}
+              <!--Lista -->
+              <div class="list-view">
+                <table class="dataTable table-striped table-border" style="table-layout: fixed;">
+                  <thead class="hide">
+                    <tr>
+                      <th class="span4">Unidad</th>
+                      <th class="span2">
+                        Contrato
+                        <i id="orderByContrato" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span2">
+                        Fecha de contratación
+                        <i id="orderByContratoContrata" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span2">
+                        Fecha de terminación
+                        <i id="orderByContratoTermino" class="fa fa-unsorted"></i>
+                      </th>
+                      <th class="span2">Mensualidad</th>
+                      <th class="span2">Próxima Domiciliación</th>
+                      <th class="span2">Vigencia del seguro</th>
+                      <th class="span2">Monto</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each anexosdata.contratos_activos}}
+                     <tr>
+                       <td class="span4" style="white-space:initial;">{{columna1}}</td>
+                       <td class="span2">{{columna2}}</td>
+                       <td class="span2">{{columna3}}</td>
+                       <td class="span2">{{columna4}}</td>
+                       <td class="span2">{{columna5}}</td>
+                       <td class="span2">{{columna6}}</td>
+                       <td class="span2">{{columna7}}</td>
+                       <td class="span2">$ {{customFormatNumber columna8}}</td>
+                     </tr>
+                   {{/each}}
+                  </tbody>
+                </table>
+              </div>
+                <!-- {{#each contratos_activos}}
+                  <div class="row-fluid">
+                      <div class="span4">{{columna1}}</div>
+                      <div class="span1">{{columna2}}</div>
+                      <div class="span1">{{columna3}}</div>
+                      <div class="span1">{{columna4}}</div>
+                      <div class="span1">{{columna5}}</div>
+                      <div class="span1">{{columna6}}</div>
+                      <div class="span1">{{columna7}}</div>
+                      <div class="span2">$ {{customFormatNumber columna8}}</div>
+                  </div>
+                {{/each}} -->
+              {{else}}
+                <div class="row-fluid" style="color:gray;">
+                  <div class="span12"> No se han encontrado registros</div>
+                </div>
+              {{/if}}
+            {{/if}}
+            <br>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+Azul: #21618C
+Rojo: #C0392B
+Amarillo: #F1C40F
+->

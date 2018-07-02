@@ -1,0 +1,4 @@
+[
+    "lib/zepto/zepto.js",
+    "lib/zepto/*.js"
+]

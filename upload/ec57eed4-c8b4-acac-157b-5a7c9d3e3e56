@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:ec57eed4-c8b4-acac-157b-5a7c9d3e3e56
+ORGANIZER;CN=Ceydi Ariette Ibarra Trillo:ceydi.ibarra@unifin.com.mx
+DTSTART:20180214T170000Z
+DTEND:20180214T180000Z
+DTSTAMP:20180208T185700Z
+SUMMARY:ABAQUIM / RENOVACIÓN
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

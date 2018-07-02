@@ -1,0 +1,127 @@
+/* BUTTON GROUPS
+  ----------------*/
+.btn-group {
+  position: relative;
+  .clearfix(); // clears the floated buttons
+  // Float them, remove border radius, then re-add to first and last elements
+  .btn {
+    position: relative;
+    display: inline-block;
+    margin-left: -1px;
+    font-size: @baseFontSize;
+    .border-radius(0);
+    // Give the line between buttons some depth
+    .dropdown-toggle {
+      padding-left: 8px;
+      padding-right: 8px;
+    }
+  }
+  // Set corners individual because sometimes a single button can be in a .btn-group and we need :first-child and :last-child to both match
+  span:first-child .btn,
+  & > .btn:first-child:not(:last-of-type) {
+    margin-left: 0;
+    .border-top-left-radius(@baseBorderRadius);
+    .border-bottom-left-radius(@baseBorderRadius);
+    .border-top-right-radius(0);
+    .border-bottom-right-radius(0);
+  }
+  // Need .dropdown-toggle since :last-child doesn't apply given a .dropdown-menu immediately after it
+  span:last-child .btn,
+  & > .btn:last-child,
+  & > .dropdown-toggle {
+    .border-top-right-radius(@baseBorderRadius);
+    .border-bottom-right-radius(@baseBorderRadius);
+    .fa-caret-down {
+      opacity: 1;
+    }
+  }
+
+  // Reset corners for large buttons
+  .btn.large:first-child {
+    margin-left: 0;
+    .border-top-left-radius(@baseBorderRadius);
+    .border-bottom-left-radius(@baseBorderRadius);
+  }
+  .btn.large:last-child,
+  .large.dropdown-toggle {
+    .border-top-right-radius(@baseBorderRadius);
+    .border-bottom-right-radius(@baseBorderRadius);
+  }
+  // On hover/focus/active, bring the proper btn to front
+  .btn:hover,
+  .btn:focus,
+  .btn:active,
+  .btn.active {
+    z-index: 0;
+  }
+  // On active and open, don't show outline
+  .dropdown-toggle:active,
+  &.open {
+    outline: 0;
+    .dropdown-toggle {
+      outline: 0;
+    }
+    .btn.dropdown-toggle,
+    .btn.btn-invisible:not(.disabled):hover {
+      background: @gray;
+      color: @white;
+      > .fa {
+        color: @grayLighter;
+      }
+    }
+    .btn.btn-primary.dropdown-toggle {
+      background-color: darken(@btnPrimaryBackgroundHighlight,10%);
+    }
+    // Reposition menu on open and round all corners
+    .dropdown-menu {
+      display: block;
+      margin-top: 0;
+      .border-radius(@baseBorderRadius);
+    }
+  }
+}
+
+
+// Split button dropdowns
+// ----------------------
+
+// Remove top embossing
+.btn-group > .btn + .dropdown-toggle {
+  .box-shadow(none);
+  width: 12px;
+  padding: 4px 7px;
+}
+
+// Space out series of button groups
+.btn-group + .btn-group {
+  margin-left: 8px;
+}
+
+// Optional: Group multiple button groups together for a toolbar
+.btn-toolbar {
+  margin-top: @baseLineHeight / 2;
+  margin-bottom: @baseLineHeight / 2;
+  padding-left: 20px;
+  .btn-group {
+    display: inline-block;
+  }
+  label,
+  .label,
+  .btn,
+  .dropdown-menu {
+    font-size: @baseFontSize; // redeclare as part 2 of font-size inline-block hack
+  }
+  //.btn + .btn,
+  .btn-group + .btn,
+  .btn + .btn-group {
+    margin-left: 8px;
+  }
+  .dashlet-toolbar .label {
+    font-size: @baseFontSize;
+    font-weight: normal;
+  }
+}
+
+.touch .dashlet-header .btn-group.open {
+  position: static;
+}

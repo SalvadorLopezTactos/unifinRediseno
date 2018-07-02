@@ -1,0 +1,115 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div class="dashboard" data-dashboard="true">
+    <div class="cols row-fluid">
+        <div>
+            <div class="preview-headerbar">
+                <div class="headerpane">
+                    <span class="record-cell">
+                        <h1 class="dnb-account-create">
+                            <span class="detail">
+                                {{str "LBL_DNB_BAL_RSLT"}}
+                            </span>
+                        </h1>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <ul class="dashlets row-fluid">
+            <li class="span12">
+                <ul class="dashlet-row ui-sortable ui-sortable-disabled">
+                    <li class="dashlet-container span12">
+                        <div>
+                            <div class="thumbnail dashlet dashlet-dnb-tall">
+                                <div data-dashlet="toolbar">
+                                    <div class="dashlet-header">
+                                        <h4 data-toggle="dashlet">
+                                            {{#if dnbBalRslt.count}}
+                                                {{dnbBalRslt.count}}
+                                            {{else}}
+                                                {{str "LBL_DNB_BAL_PREVIEW" this.module}}
+                                            {{/if}}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div data-dashlet="dashlet" class="dashlet-content">
+                                    <div id="dnb-bal-result-loading" class="block-footer hide">
+                                        {{str "LBL_DNB_BAL_LOAD"}} ...
+                                    </div>
+                                    <div id="dnb-bal-result" class="hide">
+                                        {{#if dnbBalRslt.product}}
+                                            <ul class="unstyled listed" id="dnb-results-list">
+                                                {{#each dnbBalRslt.product}}
+                                                    <li>
+                                                        <div class='dnb-bal-rslt'>
+                                                            <a class="dnb-company-name" id="{{this.duns_num}}">
+                                                                {{this.name}}
+                                                            </a>
+                                                            {{#if this.locationtype}}
+                                                                <span class="label pull-right" data-placement="right">
+                                                                    {{this.locationtype}}
+                                                                </span>
+                                                            {{/if}}
+                                                        </div>
+                                                        <div class="record-label dnb-bal-list">
+                                                            {{#if this.billing_address_city}}
+                                                                {{this.billing_address_city}},
+                                                            {{/if}}
+                                                            {{#if this.billing_address_state}}
+                                                                {{this.billing_address_state}},
+                                                            {{/if}}
+                                                            {{#if this.billing_address_country}}
+                                                                {{this.billing_address_country}}
+                                                            {{/if}}
+                                                            {{#if this.isDupe}}
+                                                                <span class="label label-important pull-right" data-placement="right">
+                                                                    {{str "LBL_DNB_DUPLICATE"}}
+                                                                </span>
+                                                            {{/if}}
+                                                        </div>
+                                                    </li>
+                                                {{/each}}
+                                            </ul>
+                                        {{else}}
+                                            <aside class='create-no-data'>
+                                                {{#if dnbBalRslt.errmsg}}
+                                                    <em>{{dnbBalRslt.errmsg}}</em>
+                                                {{else}}
+                                                    <em>{{str "LBL_DNB_NO_DATA"}}</em>
+                                                {{/if}}
+                                            </aside>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                                <div class="block-footer hide" id="dnb-page-ctrl">
+                                    <button data-action="show-more" class="btn btn-link btn-invisible more">
+                                        {{str "LBL_DNB_MORE_SRCH_RES"}}
+                                    </button>
+                                    <div class="loading">
+                                        {{str "LBL_ALERT_TITLE_LOADING"}}
+                                        <i class="l1 icon-circle"></i>
+                                        <i class="l2 icon-circle"></i>
+                                        <i class="l3 icon-circle"></i>
+                                    </div>
+                                </div>
+                                <div class="swappable-dashlet icon-download-alt"></div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+

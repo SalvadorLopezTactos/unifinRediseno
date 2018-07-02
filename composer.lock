@@ -1,0 +1,3418 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "c26a16231c71fcc30f8c51db7ea32922",
+    "packages": [
+        {
+            "name": "aws/aws-sdk-php",
+            "version": "2.7.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aws/aws-sdk-php.git",
+                "reference": "c9dff84d401f0933d7e7d85aacbf6ce1b8fc9f0f"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/aws-aws-sdk-php-2.7.7-845e97.tar",
+                "reference": "c9dff84d401f0933d7e7d85aacbf6ce1b8fc9f0f",
+                "shasum": "1fc97d39c15c34e1f0270f81c85b0e9c4b20fb18"
+            },
+            "require": {
+                "guzzle/guzzle": "~3.7",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "doctrine/cache": "~1.0",
+                "ext-openssl": "*",
+                "monolog/monolog": "~1.4",
+                "phpunit/phpunit": "~4.0",
+                "symfony/yaml": "~2.1"
+            },
+            "suggest": {
+                "doctrine/cache": "Adds support for caching of credentials and responses",
+                "ext-apc": "Allows service description opcode caching, request and response caching, and credentials caching",
+                "ext-openssl": "Allows working with CloudFront private distributions and verifying received SNS messages",
+                "monolog/monolog": "Adds support for logging HTTP requests and responses",
+                "symfony/yaml": "Eases the ability to write manifests for creating jobs in AWS Import/Export"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Aws": "src/"
+                }
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Amazon Web Services",
+                    "homepage": "http://aws.amazon.com"
+                }
+            ],
+            "description": "AWS SDK for PHP - Use Amazon Web Services in your PHP project",
+            "homepage": "http://aws.amazon.com/sdkforphp",
+            "keywords": [
+                "amazon",
+                "aws",
+                "cloud",
+                "dynamodb",
+                "ec2",
+                "glacier",
+                "s3",
+                "sdk"
+            ],
+            "support": {
+                "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
+                "issues": "https://github.com/aws/aws-sdk-php/issues"
+            },
+            "time": "2014-11-26T01:13:25+00:00"
+        },
+        {
+            "name": "doctrine/annotations",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/annotations.git",
+                "reference": "548b75c1bfef57460d7b7a17c9d730c9a9a40a19"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/doctrine-annotations-v1.3.1-ff5ce8.tar",
+                "reference": "548b75c1bfef57460d7b7a17c9d730c9a9a40a19",
+                "shasum": "e53742aa743b1c5fdad1541a339b519e55989eb4"
+            },
+            "require": {
+                "doctrine/lexer": "1.*",
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "doctrine/cache": "1.*",
+                "phpunit/phpunit": "^5.6.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Common\\Annotations\\": "lib/Doctrine/Common/Annotations"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Docblock Annotations Parser",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "annotations",
+                "docblock",
+                "parser"
+            ],
+            "time": "2016-12-30T15:59:45+00:00"
+        },
+        {
+            "name": "doctrine/cache",
+            "version": "v1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/cache.git",
+                "reference": "557e44fa9ee20e4f2601844d37ea25229265a72e"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/doctrine-cache-v1.6.1-ef2436.tar",
+                "reference": "557e44fa9ee20e4f2601844d37ea25229265a72e",
+                "shasum": "148ddae1315ecb1f3910d7a5e1dab40bcce602d4"
+            },
+            "require": {
+                "php": "~5.5|~7.0"
+            },
+            "conflict": {
+                "doctrine/common": ">2.2,<2.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8|~5.0",
+                "predis/predis": "~1.0",
+                "satooshi/php-coveralls": "~0.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Common\\Cache\\": "lib/Doctrine/Common/Cache"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Doctrine\\Tests\\": "tests/Doctrine/Tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Caching library offering an object-oriented API for many cache backends",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "cache",
+                "caching"
+            ],
+            "time": "2016-10-29T11:16:17+00:00"
+        },
+        {
+            "name": "doctrine/collections",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/collections.git",
+                "reference": "9915a7be0d21476ed5a106f3cefd6468d220a435"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/doctrine-collections-v1.3.0-0fefe8.tar",
+                "reference": "9915a7be0d21476ed5a106f3cefd6468d220a435",
+                "shasum": "b637de0f7ad315d8bb202f1023d426064d703161"
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Doctrine\\Common\\Collections\\": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Collections Abstraction library",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "array",
+                "collections",
+                "iterator"
+            ],
+            "time": "2015-04-14T22:21:58+00:00"
+        },
+        {
+            "name": "doctrine/common",
+            "version": "v2.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/common.git",
+                "reference": "34be47a0e169fbc850f0b93cfbeb273eb6e89d06"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/doctrine-common-v2.6.2-aba0ad.tar",
+                "reference": "34be47a0e169fbc850f0b93cfbeb273eb6e89d06",
+                "shasum": "3a66cc58a1412bcc70764c6e7de27a167309afad"
+            },
+            "require": {
+                "doctrine/annotations": "1.*",
+                "doctrine/cache": "1.*",
+                "doctrine/collections": "1.*",
+                "doctrine/inflector": "1.*",
+                "doctrine/lexer": "1.*",
+                "php": "~5.5|~7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8|~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Common\\": "lib/Doctrine/Common"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Common Library for Doctrine projects",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "annotations",
+                "collections",
+                "eventmanager",
+                "persistence",
+                "spl"
+            ],
+            "time": "2016-11-30T16:50:46+00:00"
+        },
+        {
+            "name": "doctrine/dbal",
+            "version": "v2.5.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/dbal.git",
+                "reference": "220cd9971c1de05ab5d4be982cf51f15c5530b36"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/doctrine-dbal-v2.5.12-f1e0b4.tar",
+                "reference": "220cd9971c1de05ab5d4be982cf51f15c5530b36",
+                "shasum": "c4ebc36de3c5f85f8a9bb0d12eece35ff3e41344"
+            },
+            "archive": {
+                "exclude": [
+                    "!vendor",
+                    "tests",
+                    "*phpunit.xml",
+                    ".travis.yml",
+                    "build.xml",
+                    "build.properties",
+                    "composer.phar"
+                ]
+            },
+            "require": {
+                "doctrine/common": ">=2.4,<2.8-dev",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "symfony/console": "2.*||^3.0"
+            },
+            "suggest": {
+                "symfony/console": "For helpful console commands such as SQL execution and import of files."
+            },
+            "bin": [
+                "bin/doctrine-dbal"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Doctrine\\DBAL\\": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                }
+            ],
+            "description": "Database Abstraction Layer",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "database",
+                "dbal",
+                "persistence",
+                "queryobject"
+            ],
+            "time": "2017-02-08T12:53:47+00:00"
+        },
+        {
+            "name": "doctrine/inflector",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/inflector.git",
+                "reference": "1a30ab845ec7f2650d3d1b136b915972ef53dc77"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/doctrine-inflector-v1.1.0-6c8dd6.tar",
+                "reference": "1a30ab845ec7f2650d3d1b136b915972ef53dc77",
+                "shasum": "654919ad35875fd52655ec4563ef254b78ebbe65"
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Doctrine\\Common\\Inflector\\": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Benjamin Eberlei",
+                    "email": "kontakt@beberlei.de"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Common String Manipulations with regard to casing and singular/plural rules.",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "inflection",
+                "pluralize",
+                "singularize",
+                "string"
+            ],
+            "time": "2015-11-06T14:35:42+00:00"
+        },
+        {
+            "name": "doctrine/lexer",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/lexer.git",
+                "reference": "d1ec545810553c0f5ed11140a3b5afa74a141459"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/doctrine-lexer-v1.0.1-20cd74.tar",
+                "reference": "d1ec545810553c0f5ed11140a3b5afa74a141459",
+                "shasum": "d0c3ed2af18e48da306ed14181b1dd1e5d1d1036"
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Doctrine\\Common\\Lexer\\": "lib/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Guilherme Blanco",
+                    "email": "guilhermeblanco@gmail.com"
+                },
+                {
+                    "name": "Roman Borschel",
+                    "email": "roman@code-factory.org"
+                },
+                {
+                    "name": "Johannes Schmitt",
+                    "email": "schmittjoh@gmail.com"
+                }
+            ],
+            "description": "Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "lexer",
+                "parser"
+            ],
+            "time": "2014-09-09T13:34:57+00:00"
+        },
+        {
+            "name": "etechnika/idna-convert",
+            "version": "1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/etechnika/idna-convert.git",
+                "reference": "85e488474269b19630ca4e711061e4aa61ac879a"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/etechnika-idna-convert-1.0.3-ae3a24.tar",
+                "reference": "85e488474269b19630ca4e711061e4aa61ac879a",
+                "shasum": "e69c7b5e4a970e05db1f6293d5143a2464ecdb60"
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "dev-master",
+                "pdepend/pdepend": "1.1.*",
+                "phploc/phploc": "2.0.*",
+                "phpmd/phpmd": "1.5.*",
+                "phpunit/php-code-coverage": "1.2.*",
+                "phpunit/phpcov": "dev-master",
+                "phpunit/phpunit": "3.7.*",
+                "satooshi/php-coveralls": "dev-master",
+                "sebastian/phpcpd": "2.0.*",
+                "squizlabs/php_codesniffer": "1.4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Etechnika\\IdnaConvert": "src/"
+                }
+            },
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Tomasz Rutkowski",
+                    "email": "tomasz@etechnika.eu",
+                    "homepage": "http://etechnika.eu",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Etechnika.eu idna-convert",
+            "homepage": "https://github.com/etechnika/idna-convert",
+            "keywords": [
+                "lib"
+            ],
+            "time": "2014-02-15T12:42:32+00:00"
+        },
+        {
+            "name": "google/apiclient",
+            "version": "1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/google/google-api-php-client.git",
+                "reference": "2adb5ba90612858d4add0342eee6b8b9aaca398d"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/google-apiclient-1.1.4-b0e5f5.tar",
+                "reference": "2adb5ba90612858d4add0342eee6b8b9aaca398d",
+                "shasum": "092550b6121aed1795ede6c6d6e354c6cb5e38df"
+            },
+            "require": {
+                "php": ">=5.2.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Client library for Google APIs",
+            "homepage": "http://developers.google.com/api-client-library/php",
+            "keywords": [
+                "google"
+            ],
+            "time": "2015-05-21T19:35:32+00:00"
+        },
+        {
+            "name": "guzzle/guzzle",
+            "version": "v3.9.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle3.git",
+                "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/guzzle-guzzle-v3.9.3-ed28d5.tar",
+                "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9",
+                "shasum": "d8855478ce5a8b3b9edda7f0857c30fe2358c0dc"
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.3",
+                "symfony/event-dispatcher": "~2.1"
+            },
+            "replace": {
+                "guzzle/batch": "self.version",
+                "guzzle/cache": "self.version",
+                "guzzle/common": "self.version",
+                "guzzle/http": "self.version",
+                "guzzle/inflection": "self.version",
+                "guzzle/iterator": "self.version",
+                "guzzle/log": "self.version",
+                "guzzle/parser": "self.version",
+                "guzzle/plugin": "self.version",
+                "guzzle/plugin-async": "self.version",
+                "guzzle/plugin-backoff": "self.version",
+                "guzzle/plugin-cache": "self.version",
+                "guzzle/plugin-cookie": "self.version",
+                "guzzle/plugin-curlauth": "self.version",
+                "guzzle/plugin-error-response": "self.version",
+                "guzzle/plugin-history": "self.version",
+                "guzzle/plugin-log": "self.version",
+                "guzzle/plugin-md5": "self.version",
+                "guzzle/plugin-mock": "self.version",
+                "guzzle/plugin-oauth": "self.version",
+                "guzzle/service": "self.version",
+                "guzzle/stream": "self.version"
+            },
+            "require-dev": {
+                "doctrine/cache": "~1.3",
+                "monolog/monolog": "~1.0",
+                "phpunit/phpunit": "3.7.*",
+                "psr/log": "~1.0",
+                "symfony/class-loader": "~2.1",
+                "zendframework/zend-cache": "2.*,<2.3",
+                "zendframework/zend-log": "2.*,<2.3"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Guzzle 5 has moved to a new package name. The package you have installed, Guzzle 3, is deprecated."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.9-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Guzzle": "src/",
+                    "Guzzle\\Tests": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Guzzle Community",
+                    "homepage": "https://github.com/guzzle/guzzle/contributors"
+                }
+            ],
+            "description": "PHP HTTP client. This library is deprecated in favor of https://packagist.org/packages/guzzlehttp/guzzle",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "HTTP client",
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "rest",
+                "web service"
+            ],
+            "time": "2015-03-18T18:23:50+00:00"
+        },
+        {
+            "name": "ircmaxell/password-compat",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ircmaxell/password_compat.git",
+                "reference": "5c5cde8822a69545767f7c7f3058cb15ff84614c"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/ircmaxell-password-compat-v1.0.4-2be011.tar",
+                "reference": "5c5cde8822a69545767f7c7f3058cb15ff84614c",
+                "shasum": "7a94bee2714b7443941787d128de4a5e35c3ce75"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/password.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anthony Ferrara",
+                    "email": "ircmaxell@php.net",
+                    "homepage": "http://blog.ircmaxell.com"
+                }
+            ],
+            "description": "A compatibility library for the proposed simplified password hashing algorithm: https://wiki.php.net/rfc/password_hash",
+            "homepage": "https://github.com/ircmaxell/password_compat",
+            "keywords": [
+                "hashing",
+                "password"
+            ],
+            "time": "2014-11-20T16:49:30+00:00"
+        },
+        {
+            "name": "monolog/monolog",
+            "version": "1.22.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog.git",
+                "reference": "bad29cb8d18ab0315e6c477751418a82c850d558"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/monolog-monolog-1.22.0-96ac6d.tar",
+                "reference": "bad29cb8d18ab0315e6c477751418a82c850d558",
+                "shasum": "422d61407c024453796e31100590e281140f3090"
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": "~1.0"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0.0"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^2.4.9 || ^3.0",
+                "doctrine/couchdb": "~1.0@dev",
+                "graylog2/gelf-php": "~1.0",
+                "jakub-onderka/php-parallel-lint": "0.9",
+                "php-amqplib/php-amqplib": "~2.4",
+                "php-console/php-console": "^3.1.3",
+                "phpunit/phpunit": "~4.5",
+                "phpunit/phpunit-mock-objects": "2.3.0",
+                "ruflin/elastica": ">=0.90 <3.0",
+                "sentry/sentry": "^0.13",
+                "swiftmailer/swiftmailer": "~5.3"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+                "ext-mongo": "Allow sending log messages to a MongoDB server",
+                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
+                "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
+                "php-console/php-console": "Allow sending log messages to Google Chrome",
+                "rollbar/rollbar": "Allow sending log messages to Rollbar",
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+                "sentry/sentry": "Allow sending log messages to a Sentry server"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Monolog\\": "src/Monolog"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Monolog\\": "tests/Monolog"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "parallel-lint . --exclude vendor",
+                    "phpunit"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+            "homepage": "http://github.com/Seldaek/monolog",
+            "keywords": [
+                "log",
+                "logging",
+                "psr-3"
+            ],
+            "time": "2016-11-26T00:15:39+00:00"
+        },
+        {
+            "name": "moontoast/math",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ramsey/moontoast-math.git",
+                "reference": "df98c89b919b71180560c7f5ef266ee1504f60b9"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/moontoast-math-1.1.0-234d74.tar",
+                "reference": "df98c89b919b71180560c7f5ef266ee1504f60b9",
+                "shasum": "fd97af756a57fc3e8252378764dcc20fe28e4d40"
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Moontoast\\Math": "src/"
+                }
+            },
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "A mathematics library, providing functionality for large numbers",
+            "homepage": "https://github.com/moontoast/math",
+            "keywords": [
+                "bcmath",
+                "math"
+            ],
+            "support": {
+                "issues": "https://github.com/moontoast/math/issues",
+                "source": "https://github.com/moontoast/math"
+            },
+            "time": "2013-01-19T17:42:34+00:00"
+        },
+        {
+            "name": "onelogin/php-saml",
+            "version": "2.10.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/onelogin/php-saml.git",
+                "reference": "3319d7707f342e38291eee6b01a4a5f8df1b333b"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/onelogin-php-saml-2.10.5-4e6fca.tar",
+                "reference": "3319d7707f342e38291eee6b01a4a5f8df1b333b",
+                "shasum": "46b95bb73b837c2d3bdf8f1065cd52e8fb4f4631"
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-mcrypt": "*",
+                "ext-openssl": "*",
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "pdepend/pdepend": "1.1.0",
+                "phploc/phploc": "*",
+                "phpunit/phpunit": "4.8",
+                "satooshi/php-coveralls": "1.0.1",
+                "sebastian/phpcpd": "*",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "suggest": {
+                "ext-gettext": "Install gettext and php5-gettext libs to handle translations",
+                "ext-mcrypt": "Install mcrypt and php5-mcrypt libs in order to support encryption",
+                "lib-openssl": "Install openssl lib in order to handle with x509 certs (require to support sign and encryption)"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "extlib/xmlseclibs",
+                    "lib/Saml",
+                    "lib/Saml2"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "OneLogin PHP SAML Toolkit",
+            "homepage": "https://onelogin.zendesk.com/hc/en-us/sections/200245634-SAML-Toolkits",
+            "keywords": [
+                "onelogin",
+                "saml",
+                "saml2"
+            ],
+            "support": {
+                "email": "sixto.garcia@onelogin.com",
+                "issues": "https://github.com/onelogin/php-saml/issues",
+                "source": "https://github.com/onelogin/php-saml/"
+            },
+            "time": "2017-03-13T09:56:49+00:00"
+        },
+        {
+            "name": "paragonie/random_compat",
+            "version": "v2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paragonie/random_compat.git",
+                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/paragonie-random_compat-v2.0.2-31ee9f.tar",
+                "reference": "088c04e2f261c33bed6ca5245491cfca69195ccf",
+                "shasum": "e7db3de779bc1bcebf5d830762282c5038a38767"
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*|5.*"
+            },
+            "suggest": {
+                "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/random.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Paragon Initiative Enterprises",
+                    "email": "security@paragonie.com",
+                    "homepage": "https://paragonie.com"
+                }
+            ],
+            "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+            "keywords": [
+                "csprng",
+                "pseudorandom",
+                "random"
+            ],
+            "support": {
+                "issues": "https://github.com/paragonie/random_compat/issues",
+                "email": "info@paragonie.com",
+                "source": "https://github.com/paragonie/random_compat"
+            },
+            "time": "2016-04-03T06:00:07+00:00"
+        },
+        {
+            "name": "parsecsv/php-parsecsv",
+            "version": "0.4.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/parsecsv/parsecsv-for-php.git",
+                "reference": "0486a4bf3ef80dfa215f38f865ed8685fbb472c7"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/parsecsv-php-parsecsv-0.4.5-c0d74d.tar",
+                "reference": "0486a4bf3ef80dfa215f38f865ed8685fbb472c7",
+                "shasum": "13ccfa6fafe0a336c615347362680c23b2dbc9d3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.1.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "."
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Myhrberg",
+                    "email": "contact@jimeh.me"
+                }
+            ],
+            "description": "CSV data parser for PHP",
+            "time": "2014-06-03T00:37:04+00:00"
+        },
+        {
+            "name": "phpmailer/phpmailer",
+            "version": "v5.2.22",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPMailer/PHPMailer",
+                "reference": "b18cb98131bd83103ccb26a888fdfe3177b8a663"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/phpmailer-phpmailer-v5.2.22-f88abd.tar",
+                "reference": "b18cb98131bd83103ccb26a888fdfe3177b8a663",
+                "shasum": "02b421185876d238c3178836cbfce5b60d9c9cff"
+            },
+            "require": {
+                "php": ">=5.0.0"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "*",
+                "phpunit/phpunit": "4.7.*"
+            },
+            "suggest": {
+                "league/oauth2-google": "Needed for Google XOAUTH2 authentication"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "class.phpmailer.php",
+                    "class.phpmaileroauth.php",
+                    "class.phpmaileroauthgoogle.php",
+                    "class.smtp.php",
+                    "class.pop3.php",
+                    "extras/EasyPeasyICS.php",
+                    "extras/ntlm_sasl_client.php"
+                ]
+            },
+            "license": [
+                "LGPL-2.1"
+            ],
+            "authors": [
+                {
+                    "name": "Marcus Bointon",
+                    "email": "phpmailer@synchromedia.co.uk"
+                },
+                {
+                    "name": "Jim Jagielski",
+                    "email": "jimjag@gmail.com"
+                },
+                {
+                    "name": "Andy Prevost",
+                    "email": "codeworxtech@users.sourceforge.net"
+                },
+                {
+                    "name": "Brent R. Matzelle"
+                }
+            ],
+            "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
+            "time": "2017-01-09T09:33:47+00:00"
+        },
+        {
+            "name": "psr/log",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/psr-log-1.0.0-e71523.tar",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "shasum": "93e2546e57b9c28306eb0fce599fed484143c95b"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Psr\\Log\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2012-12-21T11:40:51+00:00"
+        },
+        {
+            "name": "ramsey/uuid",
+            "version": "2.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ramsey/uuid.git",
+                "reference": "b2ef4dd9584268d73f92f752a62bc24cd534dc9a"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/ramsey-uuid-2.9.0-0b3a5a.tar",
+                "reference": "b2ef4dd9584268d73f92f752a62bc24cd534dc9a",
+                "shasum": "fb2953922511f4b53b50540ff4516b7ed6e0fa7f"
+            },
+            "require": {
+                "paragonie/random_compat": "^1.0|^2.0",
+                "php": ">=5.3.3"
+            },
+            "replace": {
+                "rhumsaa/uuid": "self.version"
+            },
+            "require-dev": {
+                "doctrine/dbal": ">=2.3",
+                "jakub-onderka/php-parallel-lint": "^0.9.0",
+                "moontoast/math": "~1.1",
+                "phpunit/phpunit": "~4.1|~5.0",
+                "satooshi/php-coveralls": "~0.6",
+                "squizlabs/php_codesniffer": "^2.3",
+                "symfony/console": "~2.3|~3.0"
+            },
+            "suggest": {
+                "doctrine/dbal": "Allow the use of a UUID as doctrine field type.",
+                "moontoast/math": "Support for converting UUID to 128-bit integer (in string form).",
+                "symfony/console": "Support for use of the bin/uuid command line tool."
+            },
+            "bin": [
+                "bin/uuid"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Rhumsaa\\Uuid\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ben Ramsey",
+                    "homepage": "http://benramsey.com"
+                },
+                {
+                    "name": "Marijn Huizendveld",
+                    "email": "marijn.huizendveld@gmail.com"
+                }
+            ],
+            "description": "A PHP 5.3+ library for generating RFC 4122 version 1, 3, 4, and 5 universally unique identifiers (UUID).",
+            "homepage": "https://github.com/ramsey/uuid",
+            "keywords": [
+                "guid",
+                "identifier",
+                "uuid"
+            ],
+            "support": {
+                "issues": "https://github.com/ramsey/uuid/issues",
+                "source": "https://github.com/ramsey/uuid"
+            },
+            "time": "2016-03-22T18:20:19+00:00"
+        },
+        {
+            "name": "ruflin/elastica",
+            "version": "2.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ruflin/Elastica",
+                "reference": "0df1d7b513960ba11d3075652dcd71fcab8dd37a"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/ruflin-elastica-2.3.1-c20d16.tar",
+                "reference": "0df1d7b513960ba11d3075652dcd71fcab8dd37a",
+                "shasum": "9f57c4e0f9fe266ade3696472ea0478c4fef6464"
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "5.3.*",
+                "munkie/elasticsearch-thrift-php": "1.4.*"
+            },
+            "suggest": {
+                "egeloen/http-adapter": "Allow using httpadapter transport",
+                "guzzlehttp/guzzle": "Allow using guzzle 5.3.x as the http transport (Requires php 5.4)",
+                "monolog/monolog": "Logging request",
+                "munkie/elasticsearch-thrift-php": "Allow using thrift transport"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Elastica\\": "lib/Elastica/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Elastica\\Test\\": "test/lib/Elastica/Test/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Ruflin",
+                    "homepage": "http://ruflin.com/"
+                }
+            ],
+            "description": "Elasticsearch Client",
+            "homepage": "http://elastica.io/",
+            "keywords": [
+                "client",
+                "search"
+            ],
+            "time": "2015-10-19T07:09:10+00:00"
+        },
+        {
+            "name": "symfony/console",
+            "version": "v2.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/console.git",
+                "reference": "a1572ad84e6b8dc65c0f5ab18762e0f8079bee26"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/symfony-console-v2.7.1-10acc1.tar",
+                "reference": "a1572ad84e6b8dc65c0f5ab18762e0f8079bee26",
+                "shasum": "bfd62805760c428f398983f1f6c37f02d255eff5"
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/event-dispatcher": "~2.1",
+                "symfony/phpunit-bridge": "~2.7",
+                "symfony/process": "~2.1"
+            },
+            "suggest": {
+                "psr/log": "For using the console logger",
+                "symfony/event-dispatcher": "",
+                "symfony/process": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Console\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Console Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-06-10T15:27:02+00:00"
+        },
+        {
+            "name": "symfony/event-dispatcher",
+            "version": "v2.8.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "feb29bce46c815e639319bd283fa611a8476ff9e"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/symfony-event-dispatcher-v2.8.15-4458c7.tar",
+                "reference": "feb29bce46c815e639319bd283fa611a8476ff9e",
+                "shasum": "806e3f2ec40a10bbf89a22a4019baabedcf64819"
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/config": "~2.0,>=2.0.5|~3.0.0",
+                "symfony/dependency-injection": "~2.6|~3.0.0",
+                "symfony/expression-language": "~2.6|~3.0.0",
+                "symfony/stopwatch": "~2.3|~3.0.0"
+            },
+            "suggest": {
+                "symfony/dependency-injection": "",
+                "symfony/http-kernel": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\EventDispatcher\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony EventDispatcher Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-10-13T01:43:15+00:00"
+        },
+        {
+            "name": "symfony/security-core",
+            "version": "v2.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/security-core.git",
+                "reference": "ca16b4ed0d69d46bb1a2593ed915b3ef0e074dca"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/symfony-security-core-v2.7.1-f87b1b.tar",
+                "reference": "ca16b4ed0d69d46bb1a2593ed915b3ef0e074dca",
+                "shasum": "6108bcdb908ce83744723a68a29222be68406906"
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "ircmaxell/password-compat": "1.0.*",
+                "psr/log": "~1.0",
+                "symfony/event-dispatcher": "~2.1",
+                "symfony/expression-language": "~2.6",
+                "symfony/http-foundation": "~2.4",
+                "symfony/phpunit-bridge": "~2.7",
+                "symfony/translation": "~2.0,>=2.0.5",
+                "symfony/validator": "~2.5,>=2.5.5"
+            },
+            "suggest": {
+                "ircmaxell/password-compat": "For using the BCrypt password encoder in PHP <5.5",
+                "symfony/event-dispatcher": "",
+                "symfony/expression-language": "For using the expression voter",
+                "symfony/http-foundation": "",
+                "symfony/validator": "For using the user password constraint"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Security\\Core\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Security Component - Core Library",
+            "homepage": "https://symfony.com",
+            "time": "2015-06-07T06:33:05+00:00"
+        },
+        {
+            "name": "symfony/security-csrf",
+            "version": "v2.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/security-csrf.git",
+                "reference": "53007f191304956c168741804b49f2a1d16003ac"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/symfony-security-csrf-v2.7.1-ed9ee3.tar",
+                "reference": "53007f191304956c168741804b49f2a1d16003ac",
+                "shasum": "4b3f70a32744287e5826f9c807a914f72e29f5b6"
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "symfony/security-core": "~2.4"
+            },
+            "require-dev": {
+                "symfony/http-foundation": "~2.1",
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "suggest": {
+                "symfony/http-foundation": "For using the class SessionTokenStorage."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Security\\Csrf\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Security Component - CSRF Library",
+            "homepage": "https://symfony.com",
+            "time": "2015-05-13T11:34:46+00:00"
+        },
+        {
+            "name": "symfony/translation",
+            "version": "v2.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Translation.git",
+                "reference": "01f540beda2c067140ca347d61a65046ff3e3831"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/symfony-translation-v2.7.1-a936b9.tar",
+                "reference": "01f540beda2c067140ca347d61a65046ff3e3831",
+                "shasum": "f87a98f48f4321eb461999eb2a6d4a0f41431eda"
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "conflict": {
+                "symfony/config": "<2.7"
+            },
+            "require-dev": {
+                "psr/log": "~1.0",
+                "symfony/config": "~2.7",
+                "symfony/intl": "~2.3",
+                "symfony/phpunit-bridge": "~2.7",
+                "symfony/yaml": "~2.2"
+            },
+            "suggest": {
+                "psr/log": "To use logging capability in translator",
+                "symfony/config": "",
+                "symfony/yaml": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Translation\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Translation Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-06-11T17:26:34+00:00"
+        },
+        {
+            "name": "symfony/validator",
+            "version": "v2.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Validator.git",
+                "reference": "28fe2e1b64f35ac567d7e5bd8456dc5cda5ed5cd"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/symfony-validator-v2.7.1-25dfd8.tar",
+                "reference": "28fe2e1b64f35ac567d7e5bd8456dc5cda5ed5cd",
+                "shasum": "17bfad1e84195dadcad3b5e9d76dc47b3e86e077"
+            },
+            "require": {
+                "php": ">=5.3.9",
+                "symfony/translation": "~2.4"
+            },
+            "require-dev": {
+                "doctrine/annotations": "~1.0",
+                "doctrine/cache": "~1.0",
+                "egulias/email-validator": "~1.2,>=1.2.1",
+                "symfony/config": "~2.2",
+                "symfony/expression-language": "~2.4",
+                "symfony/http-foundation": "~2.1",
+                "symfony/intl": "~2.3",
+                "symfony/phpunit-bridge": "~2.7",
+                "symfony/property-access": "~2.3",
+                "symfony/yaml": "~2.0,>=2.0.5"
+            },
+            "suggest": {
+                "doctrine/annotations": "For using the annotation mapping. You will also need doctrine/cache.",
+                "doctrine/cache": "For using the default cached annotation reader and metadata cache.",
+                "egulias/email-validator": "Strict (RFC compliant) email validation",
+                "symfony/config": "",
+                "symfony/expression-language": "For using the 2.4 Expression validator",
+                "symfony/http-foundation": "",
+                "symfony/intl": "",
+                "symfony/property-access": "For using the 2.4 Validator API",
+                "symfony/yaml": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Validator\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Validator Component",
+            "homepage": "https://symfony.com",
+            "time": "2015-06-07T06:33:05+00:00"
+        },
+        {
+            "name": "tedivm/jshrink",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tedious/JShrink",
+                "reference": "688527a2e854d7935f24f24c7d5eb1b604742bf9"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/tedivm-jshrink-v1.1.0-06b21e.tar",
+                "reference": "688527a2e854d7935f24f24c7d5eb1b604742bf9",
+                "shasum": "f9bf44528656076247eb8ce7671ed921a2e2299f"
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "0.4.0",
+                "phpunit/phpunit": "4.0.*",
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JShrink": "src/"
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Hafner",
+                    "email": "tedivm@tedivm.com"
+                }
+            ],
+            "description": "Javascript Minifier built in PHP",
+            "homepage": "http://github.com/tedious/JShrink",
+            "keywords": [
+                "javascript",
+                "minifier"
+            ],
+            "time": "2015-07-04T07:35:09+00:00"
+        },
+        {
+            "name": "vanderlee/php-stable-sort-functions",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vanderlee/PHP-stable-sort-functions",
+                "reference": "4ea200455b775f0c6613108974d3332c68156194"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/vanderlee-php-stable-sort-functions-2.0.2-02e082.tar",
+                "reference": "4ea200455b775f0c6613108974d3332c68156194",
+                "shasum": "09c1e9187e81210a46a7046353faedc2d2c7c0a9"
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "functions/sarsort.php",
+                    "functions/sasort.php",
+                    "functions/snatcasesort.php",
+                    "functions/snatsort.php",
+                    "functions/suasort.php",
+                    "functions/suksort.php",
+                    "functions/susort.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Class of stable sort methods. Equal values remain in the original order. Only different values are sorted.",
+            "homepage": "https://github.com/vanderlee/PHP-stable-sort-functions",
+            "keywords": [
+                "array",
+                "arsort",
+                "asort",
+                "natcasesort",
+                "natsort",
+                "sort",
+                "stable",
+                "uasort",
+                "uksort",
+                "usort"
+            ],
+            "support": {
+                "issues": "https://github.com/vanderlee/PHP-stable-sort-functions/issues",
+                "source": "https://github.com/vanderlee/PHP-stable-sort-functions/"
+            },
+            "time": "2016-01-15T20:19:34+00:00"
+        }
+    ],
+    "packages-dev": [
+        {
+            "name": "composer/composer",
+            "version": "1.0.0-alpha9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/composer/composer.git",
+                "reference": "eb1ce550ca51134ee619ad3e37f5a0b7e980dd24"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/composer-composer-1.0.0-alpha9-2dacef.tar",
+                "reference": "eb1ce550ca51134ee619ad3e37f5a0b7e980dd24",
+                "shasum": "9bf8708b41f0a871545a2057ee7013ce7a892f5d"
+            },
+            "require": {
+                "justinrainbow/json-schema": "~1.1",
+                "php": ">=5.3.2",
+                "seld/jsonlint": "~1.0",
+                "symfony/console": "~2.3",
+                "symfony/finder": "~2.2",
+                "symfony/process": "~2.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-openssl": "Enabling the openssl extension allows you to access https URLs for repositories and packages",
+                "ext-zip": "Enabling the zip extension allows you to unzip archives, and allows gzip compression of all internet traffic"
+            },
+            "bin": [
+                "bin/composer"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Composer": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-0": {
+                    "Composer\\Test": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nils Adermann",
+                    "email": "naderman@naderman.de",
+                    "homepage": "http://www.naderman.de"
+                },
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Composer helps you declare, manage and install dependencies of PHP projects, ensuring you have the right stack everywhere.",
+            "homepage": "http://getcomposer.org/",
+            "keywords": [
+                "autoload",
+                "dependency",
+                "package"
+            ],
+            "support": {
+                "irc": "irc://irc.freenode.org/composer",
+                "issues": "https://github.com/composer/composer/issues"
+            },
+            "time": "2014-12-07T17:15:20+00:00"
+        },
+        {
+            "name": "doctrine/instantiator",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/instantiator.git",
+                "reference": "cd55575e110c24f67c0827911c501697afb21dff"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/doctrine-instantiator-1.0.5-6a4414.tar",
+                "reference": "cd55575e110c24f67c0827911c501697afb21dff",
+                "shasum": "0919ad33afd3f43ef9b1976e5820ef03b5e008c0"
+            },
+            "require": {
+                "php": ">=5.3,<8.0-DEV"
+            },
+            "require-dev": {
+                "athletic/athletic": "~0.1.8",
+                "ext-pdo": "*",
+                "ext-phar": "*",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Doctrine\\Instantiator\\": "src/Doctrine/Instantiator/"
+                }
+            },
+            "autoload-dev": {
+                "psr-0": {
+                    "DoctrineTest\\InstantiatorPerformance\\": "tests",
+                    "DoctrineTest\\InstantiatorTest\\": "tests",
+                    "DoctrineTest\\InstantiatorTestAsset\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marco Pivetta",
+                    "email": "ocramius@gmail.com",
+                    "homepage": "http://ocramius.github.com/"
+                }
+            ],
+            "description": "A small, lightweight utility to instantiate objects in PHP without invoking their constructors",
+            "homepage": "https://github.com/doctrine/instantiator",
+            "keywords": [
+                "constructor",
+                "instantiate"
+            ],
+            "time": "2015-06-14T21:17:01+00:00"
+        },
+        {
+            "name": "justinrainbow/json-schema",
+            "version": "1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/justinrainbow/json-schema.git",
+                "reference": "cc84765fb7317f6b07bd8ac78364747f95b86341"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/justinrainbow-json-schema-1.6.1-f593db.tar",
+                "reference": "cc84765fb7317f6b07bd8ac78364747f95b86341",
+                "shasum": "ba631fb850de0b97b67bd2e5bbb5e39256869fba"
+            },
+            "require": {
+                "php": ">=5.3.29"
+            },
+            "require-dev": {
+                "json-schema/json-schema-test-suite": "1.1.0",
+                "phpdocumentor/phpdocumentor": "~2",
+                "phpunit/phpunit": "~3.7"
+            },
+            "bin": [
+                "bin/validate-json"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "JsonSchema\\": "src/JsonSchema/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "JsonSchema\\Tests\\": "tests/JsonSchema/Tests/"
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Bruno Prieto Reis",
+                    "email": "bruno.p.reis@gmail.com"
+                },
+                {
+                    "name": "Justin Rainbow",
+                    "email": "justin.rainbow@gmail.com"
+                },
+                {
+                    "name": "Igor Wiedler",
+                    "email": "igor@wiedler.ch"
+                },
+                {
+                    "name": "Robert Schönthal",
+                    "email": "seroscho@googlemail.com"
+                }
+            ],
+            "description": "A library to validate a json schema.",
+            "homepage": "https://github.com/justinrainbow/json-schema",
+            "keywords": [
+                "json",
+                "schema"
+            ],
+            "time": "2016-01-25T15:43:01+00:00"
+        },
+        {
+            "name": "myclabs/deep-copy",
+            "version": "1.5.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/myclabs/DeepCopy.git",
+                "reference": "399c1f9781e222f6eb6cc238796f5200d1b7f108"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/myclabs-deep-copy-1.5.5-7c48b9.tar",
+                "reference": "399c1f9781e222f6eb6cc238796f5200d1b7f108",
+                "shasum": "b2a727a2ffd3197b0d8eaff786f557ad932c0a61"
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "doctrine/collections": "1.*",
+                "phpunit/phpunit": "~4.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DeepCopy\\": "src/DeepCopy/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "DeepCopyTest\\": "tests/DeepCopyTest/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "Create deep copies (clones) of your objects",
+            "homepage": "https://github.com/myclabs/DeepCopy",
+            "keywords": [
+                "clone",
+                "copy",
+                "duplicate",
+                "object",
+                "object graph"
+            ],
+            "time": "2016-10-31T17:19:45+00:00"
+        },
+        {
+            "name": "phpdocumentor/reflection-common",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionCommon",
+                "reference": "144c307535e82c8fdcaacbcfc1d6d8eeb896687c"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/phpdocumentor-reflection-common-1.0-c3be2d.tar",
+                "reference": "144c307535e82c8fdcaacbcfc1d6d8eeb896687c",
+                "shasum": "3de279f1a85a4bad3f40e9e1f4ed970ff6b9b3a1"
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "src"
+                    ]
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaap van Otterdijk",
+                    "email": "opensource@ijaap.nl"
+                }
+            ],
+            "description": "Common reflection classes used by phpdocumentor to reflect the code structure",
+            "homepage": "http://www.phpdoc.org",
+            "keywords": [
+                "FQSEN",
+                "phpDocumentor",
+                "phpdoc",
+                "reflection",
+                "static analysis"
+            ],
+            "time": "2015-12-27T11:43:31+00:00"
+        },
+        {
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/phpdocumentor-reflection-docblock-3.1.1-319752.tar",
+                "reference": "8331b5efe816ae05461b7ca1e721c01b46bafb3e",
+                "shasum": "4ace020ec9ae8215babb5e7664f292f7d40ddc09"
+            },
+            "require": {
+                "php": ">=5.5",
+                "phpdocumentor/reflection-common": "^1.0@dev",
+                "phpdocumentor/type-resolver": "^0.2.0",
+                "webmozart/assert": "^1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "tests/unit"
+                    ]
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "me@mikevanriel.com"
+                }
+            ],
+            "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+            "time": "2016-09-30T07:12:33+00:00"
+        },
+        {
+            "name": "phpdocumentor/type-resolver",
+            "version": "0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/TypeResolver",
+                "reference": "e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/phpdocumentor-type-resolver-0.2.1-e5468a.tar",
+                "reference": "e224fb2ea2fba6d3ad6fdaef91cd09a172155ccb",
+                "shasum": "7f81efdc46e12f4f52806e857e9f03343af2c269"
+            },
+            "require": {
+                "php": ">=5.5",
+                "phpdocumentor/reflection-common": "^1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.2||^4.8.24"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "tests/unit"
+                    ]
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "me@mikevanriel.com"
+                }
+            ],
+            "time": "2016-11-25T06:54:22+00:00"
+        },
+        {
+            "name": "phpspec/prophecy",
+            "version": "v1.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpspec/prophecy.git",
+                "reference": "6c52c2722f8460122f96f86346600e1077ce22cb"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/phpspec-prophecy-v1.6.2-573078.tar",
+                "reference": "6c52c2722f8460122f96f86346600e1077ce22cb",
+                "shasum": "3b7e6b42939ab4c8650fa6e7795264f579ff6f67"
+            },
+            "require": {
+                "doctrine/instantiator": "^1.0.2",
+                "php": "^5.3|^7.0",
+                "phpdocumentor/reflection-docblock": "^2.0|^3.0.2",
+                "sebastian/comparator": "^1.1",
+                "sebastian/recursion-context": "^1.0|^2.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^2.0",
+                "phpunit/phpunit": "^4.8 || ^5.6.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Prophecy\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Fixtures\\Prophecy\\": "fixtures"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Konstantin Kudryashov",
+                    "email": "ever.zet@gmail.com",
+                    "homepage": "http://everzet.com"
+                },
+                {
+                    "name": "Marcello Duarte",
+                    "email": "marcello.duarte@gmail.com"
+                }
+            ],
+            "description": "Highly opinionated mocking framework for PHP 5.3+",
+            "homepage": "https://github.com/phpspec/prophecy",
+            "keywords": [
+                "Double",
+                "Dummy",
+                "Fake",
+                "Mock",
+                "Spy",
+                "Stub"
+            ],
+            "time": "2016-11-21T14:58:47+00:00"
+        },
+        {
+            "name": "phpunit/php-code-coverage",
+            "version": "4.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
+                "reference": "a8f19cf3817d76f0768704b4b379bc11992c9f9b"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/phpunit-php-code-coverage-4.0.4-6cf1af.tar",
+                "reference": "a8f19cf3817d76f0768704b4b379bc11992c9f9b",
+                "shasum": "4a642c0c6ad3e4ff29cf03fa1218ef293ab3a344"
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "phpunit/php-file-iterator": "~1.3",
+                "phpunit/php-text-template": "~1.2",
+                "phpunit/php-token-stream": "^1.4.2",
+                "sebastian/code-unit-reverse-lookup": "~1.0",
+                "sebastian/environment": "^1.3.2 || ^2.0",
+                "sebastian/version": "~1.0|~2.0"
+            },
+            "require-dev": {
+                "ext-xdebug": ">=2.1.4",
+                "phpunit/phpunit": "^5.4"
+            },
+            "suggest": {
+                "ext-dom": "*",
+                "ext-xdebug": ">=2.4.0",
+                "ext-xmlwriter": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "4.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Library that provides collection, processing, and rendering functionality for PHP code coverage information.",
+            "homepage": "https://github.com/sebastianbergmann/php-code-coverage",
+            "keywords": [
+                "coverage",
+                "testing",
+                "xunit"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
+                "irc": "irc://irc.freenode.net/phpunit"
+            },
+            "time": "2016-12-20T15:22:42+00:00"
+        },
+        {
+            "name": "phpunit/php-file-iterator",
+            "version": "1.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
+                "reference": "ebb427869ff12376a1b2050def2c0c66dc322311"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/phpunit-php-file-iterator-1.4.2-05959c.tar",
+                "reference": "ebb427869ff12376a1b2050def2c0c66dc322311",
+                "shasum": "e06d853eed69b273216382a5d81207dc94626cc9"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "FilterIterator implementation that filters files based on a list of suffixes.",
+            "homepage": "https://github.com/sebastianbergmann/php-file-iterator/",
+            "keywords": [
+                "filesystem",
+                "iterator"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/php-file-iterator/issues",
+                "irc": "irc://irc.freenode.net/phpunit"
+            },
+            "time": "2016-10-03T07:40:28+00:00"
+        },
+        {
+            "name": "phpunit/php-text-template",
+            "version": "1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-text-template.git",
+                "reference": "75aefe65c90fa77db317125ac746ed158f136c25"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/phpunit-php-text-template-1.2.1-638b73.tar",
+                "reference": "75aefe65c90fa77db317125ac746ed158f136c25",
+                "shasum": "3c6b78e89ef8b9f1d46052c0015aeafae340c795"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Simple template engine.",
+            "homepage": "https://github.com/sebastianbergmann/php-text-template/",
+            "keywords": [
+                "template"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/php-text-template/issues"
+            },
+            "time": "2015-06-21T13:50:34+00:00"
+        },
+        {
+            "name": "phpunit/php-timer",
+            "version": "1.0.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-timer.git",
+                "reference": "0b788bd6a650d05795227c389b0b24424b8c59d1"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/phpunit-php-timer-1.0.8-cad8b8.tar",
+                "reference": "0b788bd6a650d05795227c389b0b24424b8c59d1",
+                "shasum": "3edae15a67e953e81241e1e2b4e2f2847f39d278"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4|~5"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Utility class for timing",
+            "homepage": "https://github.com/sebastianbergmann/php-timer/",
+            "keywords": [
+                "timer"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/php-timer/issues",
+                "irc": "irc://irc.freenode.net/phpunit"
+            },
+            "time": "2016-05-12T18:03:57+00:00"
+        },
+        {
+            "name": "phpunit/php-token-stream",
+            "version": "1.4.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/php-token-stream.git",
+                "reference": "ee64800ae5e3b25822e8ed83243f9eb98d4fbcfe"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/phpunit-php-token-stream-1.4.9-6f8a1f.tar",
+                "reference": "ee64800ae5e3b25822e8ed83243f9eb98d4fbcfe",
+                "shasum": "873b6664a15d25c7ce266440e7e6659eb0e21dbf"
+            },
+            "require": {
+                "ext-tokenizer": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ],
+            "description": "Wrapper around PHP's tokenizer extension.",
+            "homepage": "https://github.com/sebastianbergmann/php-token-stream/",
+            "keywords": [
+                "tokenizer"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/php-token-stream/issues"
+            },
+            "time": "2016-11-15T14:06:22+00:00"
+        },
+        {
+            "name": "phpunit/phpunit",
+            "version": "5.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit.git",
+                "reference": "5fb2bb41245ea003609a94272117af8cf39a2d6c"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/phpunit-phpunit-5.7.2-b89845.tar",
+                "reference": "5fb2bb41245ea003609a94272117af8cf39a2d6c",
+                "shasum": "00750cf8490aaddb7d8de4ce570e2c7b407c3ecd"
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-json": "*",
+                "ext-libxml": "*",
+                "ext-mbstring": "*",
+                "ext-xml": "*",
+                "myclabs/deep-copy": "~1.3",
+                "php": "^5.6 || ^7.0",
+                "phpspec/prophecy": "^1.3.1",
+                "phpunit/php-code-coverage": "^4.0.3",
+                "phpunit/php-file-iterator": "~1.4",
+                "phpunit/php-text-template": "~1.2",
+                "phpunit/php-timer": "^1.0.6",
+                "phpunit/phpunit-mock-objects": "^3.2",
+                "sebastian/comparator": "~1.2.2",
+                "sebastian/diff": "~1.2",
+                "sebastian/environment": "^1.3.4 || ^2.0",
+                "sebastian/exporter": "~2.0",
+                "sebastian/global-state": "~1.0",
+                "sebastian/object-enumerator": "~2.0",
+                "sebastian/resource-operations": "~1.0",
+                "sebastian/version": "~1.0|~2.0",
+                "symfony/yaml": "~2.1|~3.0"
+            },
+            "conflict": {
+                "phpdocumentor/reflection-docblock": "3.0.2"
+            },
+            "require-dev": {
+                "ext-pdo": "*"
+            },
+            "suggest": {
+                "ext-xdebug": "*",
+                "phpunit/php-invoker": "~1.1"
+            },
+            "bin": [
+                "phpunit"
+            ],
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.7.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "autoload-dev": {
+                "classmap": [
+                    "tests/"
+                ],
+                "files": [
+                    "src/Framework/Assert/Functions.php",
+                    "tests/_files/CoveredFunction.php"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "The PHP Unit Testing framework.",
+            "homepage": "https://phpunit.de/",
+            "keywords": [
+                "phpunit",
+                "testing",
+                "xunit"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/phpunit/issues"
+            },
+            "time": "2016-12-03T08:33:00+00:00"
+        },
+        {
+            "name": "phpunit/phpunit-mock-objects",
+            "version": "3.4.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
+                "reference": "27069611c76d38f1e5f9872c7b266b87ee722132"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/phpunit-phpunit-mock-objects-3.4.3-9fcf42.tar",
+                "reference": "27069611c76d38f1e5f9872c7b266b87ee722132",
+                "shasum": "83e82c027a4525cebf782dd69e3dd4cd5fcacc09"
+            },
+            "require": {
+                "doctrine/instantiator": "^1.0.2",
+                "php": "^5.6 || ^7.0",
+                "phpunit/php-text-template": "^1.2",
+                "sebastian/exporter": "^1.2 || ^2.0"
+            },
+            "conflict": {
+                "phpunit/phpunit": "<5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.4"
+            },
+            "suggest": {
+                "ext-soap": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "autoload-dev": {
+                "classmap": [
+                    "tests/_fixture/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sb@sebastian-bergmann.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Mock Object library for PHPUnit",
+            "homepage": "https://github.com/sebastianbergmann/phpunit-mock-objects/",
+            "keywords": [
+                "mock",
+                "xunit"
+            ],
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/phpunit-mock-objects/issues",
+                "irc": "irc://irc.freenode.net/phpunit"
+            },
+            "time": "2016-12-08T20:27:08+00:00"
+        },
+        {
+            "name": "sebastian/code-unit-reverse-lookup",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/code-unit-reverse-lookup.git",
+                "reference": "c40cdf29b6225865cf94a5dc9999652892ddbe89"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/sebastian-code-unit-reverse-lookup-1.0.0-a544df.tar",
+                "reference": "c40cdf29b6225865cf94a5dc9999652892ddbe89",
+                "shasum": "de4e1e3ab6abfaaeae494a3efe9fedfe5329cc4d"
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ],
+            "description": "Looks up which function or method a line of code belongs to",
+            "homepage": "https://github.com/sebastianbergmann/code-unit-reverse-lookup/",
+            "time": "2016-02-13T06:45:14+00:00"
+        },
+        {
+            "name": "sebastian/comparator",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/comparator.git",
+                "reference": "736cef090804c3e2c72d1886a5418918237335cc"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/sebastian-comparator-1.2.2-3279fb.tar",
+                "reference": "736cef090804c3e2c72d1886a5418918237335cc",
+                "shasum": "42681d5a6794c03bb1e10ffcd14a8e3952938faf"
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "sebastian/diff": "~1.2",
+                "sebastian/exporter": "~1.2 || ~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                },
+                {
+                    "name": "Jeff Welch",
+                    "email": "whatthejeff@gmail.com"
+                },
+                {
+                    "name": "Volker Dusch",
+                    "email": "github@wallbash.com"
+                },
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@2bepublished.at"
+                }
+            ],
+            "description": "Provides the functionality to compare PHP values for equality",
+            "homepage": "http://www.github.com/sebastianbergmann/comparator",
+            "keywords": [
+                "comparator",
+                "compare",
+                "equality"
+            ],
+            "time": "2016-11-19T09:18:40+00:00"
+        },
+        {
+            "name": "sebastian/diff",
+            "version": "1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/diff.git",
+                "reference": "646f712b470e47b12ffb6a58041644961a45340d"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/sebastian-diff-1.4.1-e5c17a.tar",
+                "reference": "646f712b470e47b12ffb6a58041644961a45340d",
+                "shasum": "0d4bf17f0c390cf0cdadc1f8bc27b4c742ac9b27"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                },
+                {
+                    "name": "Kore Nordmann",
+                    "email": "mail@kore-nordmann.de"
+                }
+            ],
+            "description": "Diff implementation",
+            "homepage": "https://github.com/sebastianbergmann/diff",
+            "keywords": [
+                "diff"
+            ],
+            "time": "2015-12-08T07:14:41+00:00"
+        },
+        {
+            "name": "sebastian/environment",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/environment.git",
+                "reference": "ff2156b0fb569919320554c60eb4c10ec2ead647"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/sebastian-environment-2.0.0-21ecdd.tar",
+                "reference": "ff2156b0fb569919320554c60eb4c10ec2ead647",
+                "shasum": "e45327da2e779144b75852807643c7c1dbb20000"
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ],
+            "description": "Provides functionality to handle HHVM/PHP environments",
+            "homepage": "http://www.github.com/sebastianbergmann/environment",
+            "keywords": [
+                "environment",
+                "hhvm",
+                "xdebug"
+            ],
+            "time": "2016-11-26T07:53:53+00:00"
+        },
+        {
+            "name": "sebastian/exporter",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/exporter.git",
+                "reference": "abc09359053f96a7fe483bbc92f7201bbdd1f099"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/sebastian-exporter-2.0.0-c1d041.tar",
+                "reference": "abc09359053f96a7fe483bbc92f7201bbdd1f099",
+                "shasum": "6d547c95fc05b58bb45535f47fa380d077997edb"
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "sebastian/recursion-context": "~2.0"
+            },
+            "require-dev": {
+                "ext-mbstring": "*",
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                },
+                {
+                    "name": "Jeff Welch",
+                    "email": "whatthejeff@gmail.com"
+                },
+                {
+                    "name": "Volker Dusch",
+                    "email": "github@wallbash.com"
+                },
+                {
+                    "name": "Adam Harvey",
+                    "email": "aharvey@php.net"
+                },
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@2bepublished.at"
+                }
+            ],
+            "description": "Provides the functionality to export PHP variables for visualization",
+            "homepage": "http://www.github.com/sebastianbergmann/exporter",
+            "keywords": [
+                "export",
+                "exporter"
+            ],
+            "time": "2016-11-19T07:52:52+00:00"
+        },
+        {
+            "name": "sebastian/global-state",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/global-state.git",
+                "reference": "dd5fa6462205b9b524ac7dff681e658cbfba9fb8"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/sebastian-global-state-1.1.1-e28361.tar",
+                "reference": "dd5fa6462205b9b524ac7dff681e658cbfba9fb8",
+                "shasum": "0dcaa59fa4f11f0ea7127bfdb7ea9df817e217fe"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.2"
+            },
+            "suggest": {
+                "ext-uopz": "*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "autoload-dev": {
+                "classmap": [
+                    "tests/_fixture/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ],
+            "description": "Snapshotting of global state",
+            "homepage": "http://www.github.com/sebastianbergmann/global-state",
+            "keywords": [
+                "global state"
+            ],
+            "time": "2015-10-11T17:20:09+00:00"
+        },
+        {
+            "name": "sebastian/object-enumerator",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/object-enumerator.git",
+                "reference": "489dc7e33b207f6cdc0967f64b521758c509145d"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/sebastian-object-enumerator-2.0.0-a89e0c.tar",
+                "reference": "489dc7e33b207f6cdc0967f64b521758c509145d",
+                "shasum": "f28169ace2fb207670e6a2775aa58aae5aebbf31"
+            },
+            "require": {
+                "php": ">=5.6",
+                "sebastian/recursion-context": "~2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ],
+            "description": "Traverses array structures and object graphs to enumerate all referenced objects",
+            "homepage": "https://github.com/sebastianbergmann/object-enumerator/",
+            "time": "2016-11-19T07:35:10+00:00"
+        },
+        {
+            "name": "sebastian/recursion-context",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/recursion-context.git",
+                "reference": "938359410d5eb73a34317b422feb4662a1215da1"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/sebastian-recursion-context-2.0.0-a3231f.tar",
+                "reference": "938359410d5eb73a34317b422feb4662a1215da1",
+                "shasum": "097bf2bd9a7e6637c05afc978d15b5494dc2e571"
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                },
+                {
+                    "name": "Jeff Welch",
+                    "email": "whatthejeff@gmail.com"
+                },
+                {
+                    "name": "Adam Harvey",
+                    "email": "aharvey@php.net"
+                }
+            ],
+            "description": "Provides functionality to recursively process PHP variables",
+            "homepage": "http://www.github.com/sebastianbergmann/recursion-context",
+            "time": "2016-11-19T07:33:16+00:00"
+        },
+        {
+            "name": "sebastian/resource-operations",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/resource-operations.git",
+                "reference": "eb35907dc618089694b1c2aeef6966e4c897b3c7"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/sebastian-resource-operations-1.0.0-b5a241.tar",
+                "reference": "eb35907dc618089694b1c2aeef6966e4c897b3c7",
+                "shasum": "17d9e1f7b8a15b24be91f43e2d820739d58479eb"
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de"
+                }
+            ],
+            "description": "Provides a list of PHP built-in functions that operate on resources",
+            "homepage": "https://www.github.com/sebastianbergmann/resource-operations",
+            "time": "2015-07-28T20:34:47+00:00"
+        },
+        {
+            "name": "sebastian/version",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/version.git",
+                "reference": "be8fddb7f814c4907bbbe3dcadee2473385d88d0"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/sebastian-version-2.0.1-b999a9.tar",
+                "reference": "be8fddb7f814c4907bbbe3dcadee2473385d88d0",
+                "shasum": "d8b77f949bf6f306a20e1c98d4648bad9dd8e248"
+            },
+            "require": {
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Bergmann",
+                    "email": "sebastian@phpunit.de",
+                    "role": "lead"
+                }
+            ],
+            "description": "Library that helps with managing the version number of Git-hosted PHP projects",
+            "homepage": "https://github.com/sebastianbergmann/version",
+            "support": {
+                "issues": "https://github.com/sebastianbergmann/version/issues"
+            },
+            "time": "2016-10-03T07:35:21+00:00"
+        },
+        {
+            "name": "seld/jsonlint",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/jsonlint.git",
+                "reference": "19495c181d6d53a0a13414154e52817e3b504189"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/seld-jsonlint-1.5.0-519208.tar",
+                "reference": "19495c181d6d53a0a13414154e52817e3b504189",
+                "shasum": "b79ff96f376a37a13fc2d2b14be678966c1a868f"
+            },
+            "require": {
+                "php": "^5.3 || ^7.0"
+            },
+            "bin": [
+                "bin/jsonlint"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Seld\\JsonLint\\": "src/Seld/JsonLint/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "JSON Linter",
+            "keywords": [
+                "json",
+                "linter",
+                "parser",
+                "validator"
+            ],
+            "time": "2016-11-14T17:59:58+00:00"
+        },
+        {
+            "name": "symfony/finder",
+            "version": "v2.8.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Finder.git",
+                "reference": "144c194fb46745242385c7f83f08f7a6ccbad532"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/symfony-finder-v2.8.15-bfa562.tar",
+                "reference": "144c194fb46745242385c7f83f08f7a6ccbad532",
+                "shasum": "e8064cace6a704d9e0ad322bd460fb1f56675935"
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Finder\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Finder Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-12-13T09:38:12+00:00"
+        },
+        {
+            "name": "symfony/process",
+            "version": "v2.8.15",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Process.git",
+                "reference": "b4e8c2e52089066e7d382535f4d245235b0fbf7a"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/symfony-process-v2.8.15-09957a.tar",
+                "reference": "b4e8c2e52089066e7d382535f4d245235b0fbf7a",
+                "shasum": "a94046f92ecf8103dce63d0789119ee5879e7690"
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Process\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Process Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-11-24T00:43:03+00:00"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v3.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Yaml.git",
+                "reference": "cacca21722618bc002a23310e1e562ac780e8b04"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/symfony-yaml-v3.2.1-c5eed1.tar",
+                "reference": "cacca21722618bc002a23310e1e562ac780e8b04",
+                "shasum": "c83040ebd702c2266f11e1bb804cb4f37a7024c2"
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "symfony/console": "~2.8|~3.0"
+            },
+            "suggest": {
+                "symfony/console": "For validating YAML files using the lint command"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Yaml\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "https://symfony.com",
+            "time": "2016-12-10T10:07:06+00:00"
+        },
+        {
+            "name": "webmozart/assert",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webmozart/assert",
+                "reference": "2db61e59ff05fe5126d152bd0655c9ea113e550f"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://satis.sugardev.team/dist/webmozart-assert-1.2.0-36e9ad.tar",
+                "reference": "2db61e59ff05fe5126d152bd0655c9ea113e550f",
+                "shasum": "edb707238c8a114504a5161c4551fc6eec218a1a"
+            },
+            "require": {
+                "php": "^5.3.3 || ^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.6",
+                "sebastian/version": "^1.0.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webmozart\\Assert\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Webmozart\\Assert\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
+                }
+            ],
+            "description": "Assertions to validate method input/output with nice error messages.",
+            "keywords": [
+                "assert",
+                "check",
+                "validate"
+            ],
+            "time": "2016-11-23T20:04:58+00:00"
+        }
+    ],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "composer/composer": 15
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.6.0"
+    },
+    "platform-dev": []
+}

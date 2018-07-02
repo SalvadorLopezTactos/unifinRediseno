@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:a461e011-9c03-009f-bc7a-5a5cdb3eb001
+ORGANIZER;CN=Moises Levy Michan:mlevy@unifin.com.mx
+DTSTART:20180116T170000Z
+DTEND:20180116T200000Z
+DTSTAMP:20180115T165000Z
+SUMMARY:Practi Travel
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

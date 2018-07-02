@@ -1,0 +1,69 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div id="dnb-company-list-loading" class="block-footer">
+    {{str "LBL_DNB_SEARCH_LOADING"}}
+</div>
+<div id="dnb-company-list">
+    {{#if dnbCompanyList.product}}
+        <div>
+            <ul class="unstyled listed" id="dnb_company_list">
+                {{#each dnbCompanyList.product}}
+                    <li>
+                    <div class='dnb-company-label'>
+                        <a class="dnb-company-name" id="{{this.duns_num}}">
+                            {{this.companyname}}
+                        </a>
+                        {{#if this.locationtype}}
+                            <span class="label pull-right" data-placement="right">
+                                {{this.locationtype}}
+                            </span>
+                        {{/if}}
+                    </div>
+                    <div class="record-label dnb-company-list">
+                        {{#if this.streetaddr}}
+                            {{this.streetaddr}},
+                        {{/if}}
+                        {{#if this.town}}
+                            {{this.town}},
+                        {{/if}}
+                        {{#if this.territory}}
+                            {{this.territory}},
+                        {{/if}}
+                        {{#if this.ctrycd}}
+                            {{this.ctrycd}}
+                        {{/if}}
+                        {{#if this.isDupe}}
+                            <span class="label label-important pull-right" data-placement="right">
+                                {{str "LBL_DNB_DUPLICATE"}}
+                            </span>
+                        {{/if}}
+                    </div>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    {{else}}
+        <aside class='create-no-data'>
+            {{#if dnbCompanyList.errmsg}}
+                <em>{{dnbCompanyList.errmsg}}</em>
+            {{else}}
+                <em>{{str "LBL_DNB_NO_DATA"}}</em>
+            {{/if}}
+        </aside>
+    {{/if}}
+    <div class="dnb-show-more">
+        <a class="backToImportEnrich">
+            {{str "LBL_DNB_BACK_TO_IMPORT_ENRICH"}}
+        </a>
+    </div>
+</div>

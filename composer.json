@@ -1,0 +1,130 @@
+{
+    "name" : "sugarcrm/sugarcrm",
+    "description" : "SugarCRM",
+    "type" : "project",
+    "license" : "proprietary",
+    "homepage" : "http://www.sugarcrm.com",
+    "support": {
+        "wiki" : "http://support.sugarcrm.com",
+        "forum": "https://community.sugarcrm.com/sugarcrm",
+        "irc": "irc://irc.freenode.org/sugarcrm"
+    },
+    "config" : {
+        "vendor-dir" : "vendor",
+        "prepend-autoloader" : false,
+        "autoloader-suffix" : "Sugar",
+        "notify-on-install" : false,
+        "discard-changes" : true,
+        "preferred-install" : "dist",
+        "use-include-path" : false
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-0": {
+            "HTMLPurifier_": "vendor/HTMLPurifier/standalone",
+            "Zend_": "vendor"
+        },
+        "psr-4": {
+            "Sugarcrm\\Sugarcrm\\": [
+                "src/",
+                ""
+            ],
+            "Sugarcrm\\Sugarcrm\\custom\\": [
+                "custom/src/",
+                "custom/"
+            ],
+            "Sugarcrm\\Sugarcrm\\inc\\": "include/",
+            "Sugarcrm\\Sugarcrm\\custom\\inc\\": "custom/include/"
+        },
+        "classmap": [
+            "api/",
+            "clients/",
+            "custom/",
+            "data/",
+            "include/",
+            "jssource/",
+            "modules/",
+            "ModuleInstall/",
+            "service/",
+            "soap/",
+            "src/Dbal/Compat/PDO.php",
+            "themes/",
+            "upgrade/",
+            "vendor/lessphp",
+            "vendor/HTMLPurifier/HTMLPurifier.standalone.php",
+            "vendor/Pear",
+            "vendor/nusoap",
+            "vendor/Smarty",
+            "vendor/XTemplate",
+            "vendor/oauth2-php"
+        ],
+        "exclude-from-classmap": [
+            "/include/SearchForm/SearchForm.php",
+            "/include/SearchForm/SearchForm2.php",
+            "/include/EditView/EditView.php",
+            "/include/EditView/EditView2.php",
+            "/modules/*/Popup_picker.php",
+            "/modules/*/SubPanelViewTeams.php",
+            "/modules/*/views/view.index.php",
+            "/modules/HealthCheck/**",
+            "/vendor/nusoap/class.*.php",
+            "/upgrade/scripts/**",
+            "**/upgrade/scripts/**",
+            "**/test/**",
+            "**/tests/**",
+            "**/Test/**",
+            "**/Tests/**"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sugarcrm\\SugarcrmTests\\": [
+                "tests/{old}/src/",
+                "tests/{old}"
+            ],
+            "Sugarcrm\\SugarcrmTests\\inc\\": "tests/{old}/include/",
+            "Sugarcrm\\SugarcrmTestsUnit\\": [
+                "tests/unit-php/src/",
+                "tests/unit-php/"
+            ],
+            "Sugarcrm\\SugarcrmTestsUnit\\inc\\": "tests/unit-php/include/"
+        }
+    },
+    "require": {
+        "psr/log": "1.0.0",
+        "ruflin/elastica" : "2.3.1",
+        "onelogin/php-saml" : "2.10.5",
+        "aws/aws-sdk-php": "2.7.7",
+        "phpmailer/phpmailer" : "v5.2.22",
+        "etechnika/idna-convert" : "1.0.3",
+        "ircmaxell/password-compat": "v1.0.4",
+        "symfony/security-core": "v2.7.1",
+        "symfony/security-csrf": "v2.7.1",
+        "symfony/validator": "v2.7.1",
+        "symfony/translation": "v2.7.1",
+        "symfony/console": "v2.7.1",
+        "google/apiclient": "1.1.4",
+        "parsecsv/php-parsecsv": "0.4.5",
+        "paragonie/random_compat": "v2.0.2",
+        "ramsey/uuid": "2.9.0",
+        "moontoast/math": "1.1.0",
+        "doctrine/dbal": "v2.5.12",
+        "monolog/monolog": "1.22.0",
+        "tedivm/jshrink": "v1.1.0",
+        "vanderlee/php-stable-sort-functions": "2.0.2",
+        "php": ">=5.6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.7.2",
+        "composer/composer": "1.0.0-alpha9"
+    },
+    "repositories": [
+        {
+            "packagist.org": false
+        },
+        {
+            "type": "composer",
+            "url": "https://satis.sugardev.team"
+        }
+    ]
+}

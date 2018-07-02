@@ -1,0 +1,87 @@
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    line-height: 18px;
+    margin: 0;
+}
+
+.loading {
+    display: inline;
+}
+
+.loading span {
+    color: #717171;
+    background-color: #000000;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #efefef #efefef #eee #eee;
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    opacity: 0.1;
+    margin: 0 2px;
+    font-size: 4px;
+    -moz-transform: scale(0.7);
+    -webkit-transform: scale(0.7);
+    -ms-transform: scale(0.7);
+    -moz-animation: move 1s infinite linear;
+    -webkit-animation: move 1s infinite linear;
+    animation: move 1s infinite linear;
+}
+
+.loading .l1 {
+    -moz-animation-delay: .1s;
+    -webkit-animation-delay: .1s;
+}
+
+.loading .l2 {
+    -moz-animation-delay: .2s;
+    -webkit-animation-delay: .2s;
+}
+
+.loading .l3 {
+    -moz-animation-delay: .3s;
+    -webkit-animation-delay: .3s;
+}
+
+@-moz-keyframes move{
+    0%{-moz-transform: scale(1.2);opacity:1;}
+    100%{-moz-transform: scale(0.5);opacity:0.1;}
+}
+@-webkit-keyframes move{
+    0%{-webkit-transform: scale(1.2);opacity:1;}
+    100%{-webkit-transform: scale(0.5);opacity:0.1;}
+}
+
+.alert-top {
+    color: #555555;
+    position: fixed;
+    top: 31px;
+    width: 100%;
+    text-align: center;
+}
+
+.alert-top .alert.alert-process {
+    text-align: left;
+    -webkit-box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1);
+    display:inline-block;
+    padding: 5px 10px;
+    text-shadow: none;
+    border: 1px solid #cdcccb;
+    background-color: #f6f6f6;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}

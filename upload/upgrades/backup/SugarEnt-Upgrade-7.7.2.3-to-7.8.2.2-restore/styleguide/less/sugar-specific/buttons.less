@@ -1,0 +1,192 @@
+/* BUTTONS
+  ----------------*/
+.btn {
+  font-weight: 500;
+  font-size: @fontSizeSmall;
+  .box-shadow(none);
+  margin-left: 8px;
+  border: 1px solid rgba(0,0,0,.1);
+  text-shadow: none;
+  /* keeps button widths with icons the same regardless of icon width */
+  > .fa {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    line-height: 14px;
+    font-size: @baseFontSize + 2;
+    position: relative;
+    top: 1px;
+    color: @grayLight;
+  }
+  // Hover state
+  &:not(.disabled):hover,
+  &.focus
+    {
+    .box-shadow(~"inset 0, 0, 10px fade(@black, 40%)");
+  }
+  // Active state
+  &.active {
+    color: @white !important;
+    text-shadow: none;
+    background: @gray !important;
+    > .fa {
+      color: @grayLighter !important;
+    }
+    &:focus {
+      background: @grayDark !important;
+    }
+  }
+  &.active:hover {
+    > .fa {
+      color: @white !important;
+    }
+  }
+  // Disabled state override bootstrap default
+  &.disabled,
+  &[disabled] {
+    .opacity(65);
+  }
+}
+
+
+// invisible appears as no button
+.btn.btn-invisible {
+  background-image: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  font-weight: normal;
+  font-size: @baseFontSize;
+  .box-shadow(none);
+  .outline(none);
+  &:not(.disabled):hover {
+    .box-shadow(none);
+    border-color: transparent;
+    background-color: transparent;
+    > .fa {
+      color: @grayDark;
+      text-shadow: none;
+    }
+  }
+  &.active {
+    color: @grayLighter;
+    .box-shadow(none);
+    background: @gray;
+  }
+  &.disabled {
+    text-decoration: none;
+    color: @grayLight;
+    .opacity(65);
+    .fa {
+      .opacity(65);
+      color: @grayLight;
+    }
+  }
+  //a darker version of btn-invisible
+  &.btn-dark {
+    background-color: darken(@grayLighter, 5%);
+    > .fa {
+      color: darken(@grayLight, 10%);
+    }
+  }
+}
+
+// Buttons styled as links
+.btn.btn-link {
+  color: @linkColor;
+  &:not(.disabled):hover {
+    text-decoration: underline;
+    color: @linkColorHover;
+    .box-shadow(none);
+    background: transparent;
+  }
+  &.active,
+  &:not(.disabled):active {
+    color: @linkColor;
+    background: transparent;
+    .box-shadow(none);
+  }
+}
+
+.btn.btn-inline {
+  padding: 0;
+  margin: 0;
+  border: none;
+  height: auto;
+  line-height: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  vertical-align: baseline;
+}
+
+// Reposition the caret
+.btn:hover .fa-caret-down,
+.open.btn-group .fa-caret-down {
+  .opacity(100);
+}
+
+// Small dropdowns caret
+.btn-small .fa-caret-down {
+  margin-top: 6px;
+}
+//
+.btn-fixed {
+  width: 178px;
+  margin-right: 10px;
+}
+
+// Account for other colors
+.btn-primary,
+.btn-danger,
+.btn-info,
+.btn-success,
+.btn-inverse {
+  .fa-caret-down {
+    .opacity(60);
+  }
+}
+
+// Set caret text color
+.btn-primary,
+.btn-primary:hover,
+.btn-danger,
+.btn-danger:hover,
+.btn-success,
+.btn-success:hover,
+.btn-info,
+.btn-info:hover,
+.btn-inverse,
+.btn-inverse:hover {
+  color: @white;
+  .fa {
+    color: @white;
+  }
+  &:not(.disabled):hover {
+    .fa {
+      color: @white;
+    }
+  }
+}
+
+.btn-warning,
+.btn-warning:hover {
+  color: darken(@yellow, 70%);
+  .fa {
+    color: darken(@yellow, 70%);
+  }
+  &:not(.disabled):hover {
+    .fa {
+      color: darken(@yellow, 70%);
+    }
+  }
+}
+
+.btn.btn-input-addon {
+  z-index: 2;
+  position: absolute;
+  right: 0;
+}
+input.required + .btn.btn-input-addon {
+  border-bottom: 1px solid @grayLight;
+  border-top: 1px solid @grayLight;
+  border-right: 1px solid @grayLight;
+}

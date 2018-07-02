@@ -1,0 +1,369 @@
+/* MERGE INTERFACE
+  ----------------*/
+
+@mergeFieldHeight: 30px;
+h4.merge-interface-header {
+  padding: 11px 0 0 20px;
+  .preview {
+    padding-top: 0;
+  }
+  i.icon-eye-open {
+    padding: 2px 4px;
+  }
+  button {
+    width: 65px;
+    text-align: left;
+    &.on {
+      #gradient > .horizontal(darken(@grayLighter, 4%), darken(@grayLighter, 4%));
+      .border-radius(4px 0 0 4px);
+      i.icon-eye-open {
+        color: @gray;
+        .opacity(100);
+        text-shadow: 0 1px @white;
+      }
+    }
+  }
+}
+
+.merge-interface {
+  height:auto;
+  margin: 10px 0 0;
+
+  .fluid-div,
+  .fixed-div {
+    padding-bottom: 4px;
+  }
+
+  .fixed-div {
+    width: 140px;
+  }
+
+  .fixed-div aside,
+  .fixed-div label {
+    font-size: 11px;
+  }
+
+  .fixed-div aside a:hover {
+    text-decoration: none;
+  }
+
+  .fluid-div {
+    .calcWidth(~"100% - 150px");
+    display: inline-block;
+    white-space: nowrap;
+    overflow-y: hidden;
+    height: auto;
+    overflow-x: auto;
+    &.num-cols-2 {
+      .col {
+        .calcWidth(~"50% - 23px");
+      }
+    }
+    &.num-cols-3 {
+     .col {
+        .calcWidth(~"33.3% - 20px");
+      }
+    }
+    &.num-cols-4 {
+      .col {
+        .calcWidth(~"25% - 18px");
+      }
+    }
+    &.num-cols-5 {
+      .col {
+        .calcWidth(~"20% - 18px");
+      }
+    }
+  }
+
+  .input-append.date {
+    top: 4px;
+  }
+  .datetime {
+    input[type="text"].datepicker,
+    input[type="text"].ui-timepicker-input {
+      width: 86px;
+    }
+    .add-on {
+      position: absolute;
+      right: 11px;
+      left: auto;
+      &.time {
+        top: 38px;
+      }
+    }
+    .ui-timepicker-input {
+      margin-left: 0;
+    }
+  }
+
+  .col {
+    min-width: 130px;
+    width: 130px;
+    height: 100%;
+    display: inline-block;
+    margin: 2px 0px 0px 10px;
+    float: left;
+    .primary-lbl {
+      cursor: move;
+      height: 20px;
+      margin: 0 0 5px 0;
+      span {
+        display: block;
+        margin: 0 0 5px 0;
+        border: 1px solid #ccc;
+        .border-radius(4px);
+        background: #E9E9E9;
+        text-align: center;
+        font-size: 11px;
+        text-shadow: -1px -1px 1px @white;
+      }
+      span.primary-lbl-placeholder-span {
+        border: 0;
+        display: block;
+        .border-radius(1px);
+        margin: -18px 0 5px 0;
+        background: darken(@grayLighter, 5%);
+        min-height: 20px;
+      }
+      button {
+        position: relative;
+      }
+    }
+    &.pull-left {
+      margin-right: 5px;
+    }
+    .primary-lbl-placeholder {
+      border: 1px dotted black;
+      .border-radius(4px);
+      &.ui-sortable-disabled {
+        span {
+          background: transparent;
+        }
+      }
+      &.ui-sortable-disabled:before {
+        content: "\f05e";
+        padding-left: 61px;
+        font-family: 'FontAwesome';
+      }
+    }
+    .box {
+      border-radius: 3px;
+      .box-shadow(0 0 1px #aaaaaa);
+      overflow: hidden;
+      .merge-edit {
+        display: none;
+      }
+      .merge-view {
+        display: block;
+      }
+    }
+    button.icon-remove-sign {
+      margin-top: 1px;
+      line-height: 8px;
+    }
+  }
+
+  .col.primary-edit-mode { /* PRIMARY */
+    .box {
+      background: #F7F7F7;
+      border:1px solid #CECECE;
+      .merge-row {
+        &.even,
+        &.odd {
+          background: none;
+        }
+        .controls > label {
+          .calcWidth(~"100% - 34px");
+        }
+      }
+      .merge-edit {
+        display: block;
+      }
+      .merge-view {
+        display: none;
+      }
+    }
+  }
+
+  .label-div {
+    .col {
+      margin-top: 30px;
+    }
+    aside {
+      margin-left: 10px;
+      line-height: 32px;
+      a:hover i {
+        text-decoration: none;
+      }
+    }
+  }
+
+  input[type=text] {
+    width: 98%;
+  }
+  input[type=password] {
+    width: 98%;
+  }
+  input[type=radio] {
+    width: 16px;
+    margin-right: 6px;
+  }
+  label input[type=checkbox] {
+    margin-top: 0;
+  }
+  textarea {
+    display: inline;
+  }
+  .merge-row {
+    width: auto;
+    margin: 0;
+    line-height: @mergeFieldHeight;
+    height: (@mergeFieldHeight + 5);
+    padding: 0 5px;
+    white-space: nowrap;
+    &.odd {
+      background: #FEFBF4;
+    }
+    &.even {
+      background: #FDF9EA;
+    }
+    .ellipsis_inline {
+      display: inline-block !important;
+      width: 90%;
+    }
+    .select2-container {
+      .calcWidth(~"100% + 10px") !important;
+    }
+    textarea {
+      height: 18px;
+      width: 98%;
+      resize: none;
+    }
+    .controls {
+      width: 100%;
+      height: @mergeFieldHeight;
+      padding: 2px 0 2px 0;
+      margin: 0;
+      position: relative;
+    }
+    &.control-group .controls>label {
+      width: 100%;
+      overflow: hidden;
+      margin: 0;
+      line-height: (@mergeFieldHeight + 5);
+      height: (@mergeFieldHeight + 5);
+      white-space: nowrap;
+      position: absolute;
+    }
+    &.control-group {
+      height: (@mergeFieldHeight + 5);
+    }
+    &.merge-row-field-parent {
+      height: 70px;
+      .controls label {
+        height: 75px;
+      }
+      .controls label > span > div {
+        width: 90%;
+        margin-left: 0;
+      }
+    }
+    &.merge-row-field-avatar {
+      height: 65px;
+      .controls label {
+        height: 60px;
+      }
+      .image_field {
+        top: 0;
+        left:0;
+        label {
+          height: 50px;
+          width: 50px;
+          position: static;
+        }
+      }
+      .label-module {
+        height: 50px;
+        width: 50px;
+      }
+    }
+    &.merge-row-field-image {
+      height: 110px;
+      .controls label {
+        height: 100px;
+      }
+    }
+    &.merge-row-field-datetimecombo {
+      height: 70px;
+      .controls label {
+        height: 75px;
+        overflow: visible;
+      }
+      .controls label > span > div {
+        width: 90%;
+        margin-left: 0;
+        &.input-append {
+          white-space: normal;
+        }
+      }
+    }
+    &.merge-row-field-currency {
+      height: 70px;
+      .controls label {
+        height: 75px;
+      }
+      .controls label > span > div {
+        width: 90%;
+        margin-left: 0;
+        .span4, span8 {
+          width: 99%;
+        }
+        .converted {
+          display: block;
+          position: relative;
+        }
+        .original{
+          display: inline;
+          position: relative;
+        }
+        input {
+          width: 86px;
+        }
+      }
+    }
+    &.merge-row-field-teamset {
+      height: auto;
+      padding-bottom: 2px;
+      .controls label {
+        height: auto;
+      }
+      button {
+        left: 61px;
+        position: relative;
+      }
+    }
+  }
+}
+
+.record-merge-interface {
+  .merge-interface {
+    .rows-div {
+      position: relative;
+      .merge-row:nth-child(odd) {
+        background-color: lighten(@grayLighter, 1%);
+      }
+    }
+  }
+  overflow: hidden;
+}
+
+@iterations: 50;
+.loopingClass (@index) when (@index > 0) {
+  (~".merge-row-field-height@{index}") {
+    height: (@index *(@mergeFieldHeight + 5)) !important;
+  }
+  .loopingClass(@index - 1);
+}
+.loopingClass (0) {}
+.loopingClass (@iterations);

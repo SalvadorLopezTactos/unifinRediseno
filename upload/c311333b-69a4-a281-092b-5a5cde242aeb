@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:c311333b-69a4-a281-092b-5a5cde242aeb
+ORGANIZER;CN=Victor Manuel Camargo Vargas:vcamargo@unifin.com.mx
+DTSTART:20180115T170000Z
+DTEND:20180115T183000Z
+DTSTAMP:20180115T170100Z
+SUMMARY:PROSPECCION
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

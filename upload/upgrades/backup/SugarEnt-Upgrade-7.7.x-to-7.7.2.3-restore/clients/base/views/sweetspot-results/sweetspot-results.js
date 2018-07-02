@@ -1,0 +1,21 @@
+/*
+     * Your installation or use of this SugarCRM file is subject to the applicable
+     * terms available at
+     * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+     * If you do not agree to all of the applicable terms or do not have the
+     * authority to bind the entity as an authorized representative, then do not
+     * install or use this SugarCRM file.
+     *
+     * Copyright (C) SugarCRM Inc. All rights reserved.
+     */
+({className:'sweetspot-results',tagName:'ul',events:{'click a[href]':'triggerHide','click a[data-callback]':'triggerAction'},initialize:function(options){this._super('initialize',[options]);this.collection=this.layout.collection||app.data.createMixedBeanCollection();this.results=[];this.records=[];this.actions=[];this.keywords=[];this._resultPartial=app.template.get(this.name+'.result');this._showMoreTpl=app.template.get(this.name+'.showmore');this.activeIndex=null;this.layout.on('sweetspot:results',function(results){var oldHighlighted=this.results[this.activeIndex];var options=_.pick(results,'showMore','term');this.renderSection('actions',this._formatResults(results.actions));this.renderSection('records',this._formatResults(results.records),options);this.renderSection('keywords',this._formatResults(results.keywords));if(options.showMore){this.records.push(options);}
+this.results=this.keywords.concat(this.actions).concat(this.records);var newActiveIndex;if(oldHighlighted){_.find(this.results,function(result,index){var test;if(oldHighlighted.id){test=oldHighlighted.id===result.id;}
+if(oldHighlighted.route){test=oldHighlighted.route===result.route;}
+if(test){newActiveIndex=index;return true;}});}
+this.activeIndex=newActiveIndex||0;if(this.results.length){this._highlightActive();this.layout.trigger('sweetspot:calc:resultsHeight');}},this);this.layout.on('show',function(){this.results=this.actions=this.records=this.keywords=[];$(window).on('keydown.'+this.cid,_.bind(this.keydownHandler,this));this.render();},this);this.layout.on('hide',function(){$(window).off('keydown.'+this.cid);},this);this.layout.on('sweetspot:results:adjustMaxHeight',this.setMaxHeight,this);},setMaxHeight:function(maxHeight){if(this.results.length){this.$el.css('maxHeight',maxHeight);}},renderSection:function(section,results,options){options=options||{};var allowed=['actions','keywords','records'];if(!_.contains(allowed,section)){return;}
+if(_.isEqual(this[section],results)){return;}
+var $section=this.$('[data-section="'+section+'"]');var $list=$section.find('ul');$list.empty();this[section]=results;if(results.length===0){$section.addClass('hide');$list.empty();}else{$section.removeClass('hide');_.each(results,function(result){$list.append(this._resultPartial(result));},this);if(options.showMore){$list.append(this._showMoreTpl(options));}}},_render:function(){this._super('_render');this.activeIndex=0;if(this.results.length){this._highlightActive();}},_formatResults:function(results){if(_.isEmpty(results)){return[];}
+return results;},keydownHandler:function(e){switch(e.keyCode){case 13:this.triggerAction();break;case 40:this.moveForward();e.preventDefault();break;case 38:this.moveBackward();e.preventDefault();break;}},triggerHide:function(){this.layout.hide();},triggerAction:function(evt){if(_.isEmpty(this.results)){return;}
+this.triggerHide();var $action=this.$('.active > a');var route=$action.attr('href');if(route){app.router.navigate(route,{trigger:true});}
+var action;if(evt){action=this.$(evt.currentTarget).data('callback');}else{action=$action.data('callback');}
+if(action){this.layout.triggerSystemAction(action);}},_highlightActive:function(){this.$('.active').removeClass('active');var nth=this.activeIndex;var $active=this.$('[data-sweetaction=true]:nth('+nth+')');$active.addClass('active');$active.find('a').focus();this.$el.prev().find('input').focus();},moveForward:function(){this.activeIndex++;if(this.activeIndex<this.results.length){this._highlightActive();}else{this.activeIndex=0;this._highlightActive();}},moveBackward:function(){if(this.activeIndex>0){this.activeIndex--;this._highlightActive();}else{this.activeIndex=this.results.length-1;this._highlightActive();}},_dispose:function(){$(window).off('keydown.'+this.cid);this._super('_dispose');}})

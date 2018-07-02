@@ -1,0 +1,126 @@
+<!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+-->
+<h2 xmlns="http://www.w3.org/1999/html">D&B API -- Post Requests Overview</h2>
+<span class="lead">
+    Interfaces with D&B Direct 2.0 API. <br/>
+    Key to most of the API calls is a 
+    <a href="http://developer.dnb.com/docs/2.0/common/duns-number">
+        D-U-N-S number
+    </a><br/>
+    A D-U-N-S Number is a unique 9-digit number identifying a business on which a D&B Credit Report has been generated; and once assigned, is neither reused nor assigned to another business.
+
+</span>
+
+<h2>Query Parameters</h2>
+<table>
+    <tr>
+        <td><strong>Param</strong></td>
+        <td><strong>Description</strong></td>
+    </tr>
+    <tr>
+        <td>qtype</td>
+        <td>
+            Query Type: Name of D&B Operation To Invoke
+            Below listed is a table of qtypes.
+            Each of these qtypes represent the different D&B Operations / API's that can be invoked
+        </td>
+    </tr>
+     <tr>
+        <td>qdata</td>
+        <td>JSON Object to be POSTed to the D&B operation</td>
+    </tr>
+</table>
+
+<h2>Query Parameters</h2>
+
+<table>
+    <tr>
+        <td><strong>QType</strong></td>
+        <td><strong>Description</strong></td>
+        <td><strong>QData</strong></td>
+        
+    </tr>
+    <tr>
+        <td>cmRequest</td>
+        <td>
+            Performs Cleanse Match Request 
+            Invokes the 
+            <a href="http://developer.dnb.com/docs/2.0/company/4.0/getcleansematch/rest-interface">
+                GetCleanseMatch API
+            </a>
+        </td>
+        <td>
+            The details of the request elements are provided in the 
+            <a href="http://developer.dnb.com/docs/2.0/company/4.0/getcleansematch/rest-interface">
+                GetCleanseMatch Documentation
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td>contacts</td>
+        <td>
+            Gets Details Of A Contact
+            Invokes the 
+            <a href="http://developer.dnb.com/docs/2.0/contact/3.0/contact2">
+                People - Enhanced
+            </a>
+        </td>
+        <td>
+            <pre class="pre-scrollable">
+            {
+                'duns_num' : '<D-U-N-S>',
+                'contact_id' : '<D&B_Principal_Identification>'
+            } 
+            </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>indMap</td>
+        <td>
+            Converts Industry Code to Hoovers Industry Code
+            Invokes the 
+            Invokes the 
+            <a href="http://developer.dnb.com/docs/2.0/entitylist/4.0/findindustry/rest-interface">
+                FindIndustry API
+            </a>
+        </td>
+        <td>
+            <pre class="pre-scrollable">
+            {
+                'industryType' : <3599(SIC),700(NAICS),19295(SIC UK)>,
+                'industryCode' : <Industry_Code>
+            } 
+            </pre>
+        </td>
+    </tr>
+    <tr>
+        <td>industry</td>
+        <td>
+            Mash up of indMap and industry get service.<br/>
+            1. First converts the SIC to HIC <br/>
+            2. Based on HIC invokes the 
+            <a href="http://developer.dnb.com/docs/2.0/industry/3.0/research-industry">
+                Research - Industry Code API
+            </a>
+        </td>
+        <td>
+            <pre class="pre-scrollable">
+            {
+                'industryType' : <3599(SIC),700(NAICS),19295(SIC UK)>,
+                'industryCode' : <Industry_Code>
+            } 
+            </pre>
+        </td>
+        
+    </tr>
+</table>

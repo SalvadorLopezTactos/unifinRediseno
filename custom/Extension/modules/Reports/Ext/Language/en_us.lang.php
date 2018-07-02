@@ -1,0 +1,32 @@
+<?php
+// WARNING: The contents of this file are auto-generated.
+$mod_strings['LNK_NEW_ACCOUNT'] = 'Create Persona';
+$mod_strings['LBL_ACCOUNTS'] = 'Personas';
+$mod_strings['LBL_ACCOUNT'] = 'Persona';
+$mod_strings['LBL_ACCOUNT_REPORTS'] = 'Persona Reports';
+$mod_strings['LBL_MY_TEAM_ACCOUNT_REPORTS'] = 'My Team&#039;s Persona Reports';
+$mod_strings['LBL_MY_ACCOUNT_REPORTS'] = 'My Persona Reports';
+$mod_strings['LBL_PUBLISHED_ACCOUNT_REPORTS'] = 'Published Persona Reports';
+$mod_strings['DEFAULT_REPORT_TITLE_3'] = 'Partner Persona List';
+$mod_strings['DEFAULT_REPORT_TITLE_4'] = 'Customer Persona List';
+$mod_strings['DEFAULT_REPORT_TITLE_16'] = 'Personas By Type By Industry';
+$mod_strings['DEFAULT_REPORT_TITLE_43'] = 'Customer Persona Owners';
+$mod_strings['DEFAULT_REPORT_TITLE_44'] = 'My New Customer Personas';
+$mod_strings['LNK_NEW_OPPORTUNITY'] = 'Create Operaciones';
+$mod_strings['LBL_OPPORTUNITIES'] = 'Operaciones';
+$mod_strings['LBL_OPPORTUNITY'] = 'Operaciones';
+$mod_strings['LBL_OPPORTUNITY_REPORTS'] = 'Operaciones Reports';
+$mod_strings['LBL_MY_TEAM_OPPORTUNITY_REPORTS'] = 'My Team&#039;s Operaciones Reports';
+$mod_strings['LBL_MY_OPPORTUNITY_REPORTS'] = 'My Operaciones Reports';
+$mod_strings['LBL_PUBLISHED_OPPORTUNITY_REPORTS'] = 'Published Operaciones Reports';
+$mod_strings['DEFAULT_REPORT_TITLE_6'] = 'Operaciones By Lead Source';
+$mod_strings['DEFAULT_REPORT_TITLE_17'] = 'Operaciones Won By Lead Source';
+$mod_strings['DEFAULT_REPORT_TITLE_45'] = 'Operaciones By Sales Stage';
+$mod_strings['DEFAULT_REPORT_TITLE_46'] = 'Operaciones By Type';
+$mod_strings['DEFAULT_REPORT_TITLE_50'] = 'Operaciones Won By Account';
+$mod_strings['DEFAULT_REPORT_TITLE_51'] = 'Operaciones Won By User';
+$mod_strings['DEFAULT_REPORT_TITLE_52'] = 'All Open Operaciones';
+$mod_strings['DEFAULT_REPORT_TITLE_53'] = 'All Closed Operaciones';
+$mod_strings['DEFAULT_REPORT_TITLE_56'] = 'Operaciones Product Breakdown For Past, Current, Next Timeperiod By Month';
+$mod_strings['DEFAULT_REPORT_TITLE_57'] = 'Operaciones Sales Stage For Past, Current, Next Timeperiod By Month';
+$mod_strings['DEFAULT_REPORT_TITLE_59'] = 'Operaciones By Sales Stage For Reportees in Current Period';

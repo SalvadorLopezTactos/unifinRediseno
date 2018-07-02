@@ -1,0 +1,1048 @@
+/* DATATABLES
+  ----------------*/
+
+.table {
+  display: table;
+}
+.table-row {
+  display: table-row;
+}
+.table-cell {
+  display: table-cell;
+  &.full-width {
+    width: 100%;
+  }
+}
+
+.dataTable {
+  margin: 0;
+  clear: both;
+  width: 100%;
+  /* ---------
+  TABLE HEADER CELL (specific) */
+  th {
+    line-height: 26px;
+    min-width: @cell-medium;
+    max-width: @cell-large;
+    font-weight: normal;
+    font-size: @fontSizeSmall;
+    color: @tableHeader;
+    border-right: @tableBorder;
+    border-bottom: none;
+    background-color: @white;
+    .rtl(@direction,ltr);
+    &.cell-xxsmall {
+      min-width: @cell-xxsmall;
+      max-width: @cell-xxsmall;
+    }
+    &.cell-xsmall {
+      min-width: @cell-xsmall;
+      max-width: @cell-xsmall;
+    }
+    &.cell-small {
+      min-width: @cell-small;
+      max-width: @cell-small;
+    }
+    &.cell-medium {
+      min-width: @cell-medium;
+      max-width: @cell-medium;
+    }
+    &.cell-large {
+      min-width: @cell-large;
+      max-width: @cell-large;
+    }
+    &.cell-xlarge {
+      min-width: @cell-xlarge;
+      max-width: @cell-xlarge;
+    }
+    &.cell-xxlarge {
+      min-width: @cell-xxlarge;
+      max-width: @cell-xxlarge;
+    }
+    &:last-child {
+      border-right: none;
+    }
+    &.nosort.select-all {
+      padding: 0;
+      .btn-group {
+        position: absolute;
+        top: 0;
+        //centering checkbox in btn-group
+        > .btn:first-child {
+          padding-top: 7px;
+          padding-bottom: 1px;
+        }
+      }
+    }
+    &.header-quota {
+      min-width: 70px;
+    }
+    &.alert.alert-warning {
+      background-color: @warningBackground;
+      border-bottom: none;
+      border-left: none;
+      max-height: none;
+      position: static;
+      > div {
+        position: absolute;
+        display: table;
+        left: 0;
+        width: 100%;
+        height: 42px;
+        margin-top: -35px;
+        > span {
+          font-size: @baseFontSize;
+          display: table-cell;
+          line-height: 16px;
+          vertical-align: middle;
+          padding: 4px 8px;
+        }
+      }
+    }
+    > span {
+      display: inline-block;
+      width: 100%;
+      overflow-x: hidden;
+      white-space: nowrap;
+      word-break: break-word;
+      vertical-align: middle;
+      text-overflow: ellipsis;
+    }
+    .dropdown-menu {
+      text-align: left;
+    }
+    .btn input {
+      position: relative;
+      top: -1px;
+    }
+    a {
+      text-decoration: none;
+    }
+    input[type=checkbox].toggle-all {
+      margin: 0;
+    }
+  }
+
+  /* ---------
+  TABLE BODY CELL (specific) */
+  td {
+    height: 28px;
+    max-width: 21px;
+    padding: 4px 8px;
+    white-space: nowrap;
+    word-break: break-word;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+    background: @white;
+    border-top: none;
+    border-bottom: none;
+    .rtl(@direction,ltr);
+
+    &:last-child {
+      border-right: 0;
+    }
+    &[data-type="currency"] {
+      min-width: 132px !important;
+      max-width: 100% !important;
+      .list {
+        width: 100%;
+        text-align: right;
+        .box-sizing(border-box);
+      }
+    }
+    &[data-type="bool"] {
+      text-align: center;
+      .input-append.error .add-on {
+        //margin-left: -2px;
+      }
+      .list {
+        overflow-y: hidden;
+      }
+    }
+    &[data-type="datetimecombo"] {
+      input[type="text"] {
+        min-width: 0;
+        z-index: 0;
+      }
+      input[type="text"].datepicker {
+        width: 50%;
+        .calcWidth(~"55% - 2px");
+      }
+      input[type="text"].ui-timepicker-input {
+        width: 40%;
+        .calcWidth(~"45% - 2px");
+      }
+    }
+    &[data-type="avatar"] {
+      .label-module {
+        height: 27px;
+        width: 27px;
+        font-size: 11px;
+        line-height: 11px;
+        padding: 3px 0 0 4px;
+      }
+    }
+
+    > span:not(.overflow-visible) {
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      width: 100%;
+      display: inline-block;
+      white-space: nowrap;
+      word-break: break-word;
+      position: relative;
+      vertical-align: middle;
+    }
+    .btn-toolbar {
+      margin: -5px 0 -10px;
+    }
+    .select2-addon {
+      input[type="text"] {
+        width: 95%;
+        .calcWidth(~"100% - 100px");
+      }
+      .input-append {
+        input[type="text"] {
+          width: 100%;
+        }
+      }
+    }
+    .icon-favorite {
+      vertical-align: middle;
+    }
+    .list + .list .icon-favorite {
+      margin: 0 8px;
+    }
+    // email and merge (change)
+    .icon-star {
+      margin: 0 16px;
+      color: @grayLight;
+    }
+    .active .icon-star {
+      color: @orange;
+    }
+    .help-block {
+      display: none;
+    }
+    span.longtext {
+      display: inline-block;
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    input[type="text"] {
+      min-height: 28px;
+      width: 100%;
+      .box-sizing(border-box);
+      padding: 4px 6px;
+    }
+    input[type=radio],
+    input[type=checkbox] {
+      border: 0;
+    }
+  }
+
+  /* ---------
+  TABLE HEAD (specific) */
+  thead tr {
+    border-bottom: @tableBorder;
+  }
+
+  /* ---------
+  TABLE FOOTER */
+  tfoot {
+    tr {
+      border-top: 2px solid @tableBorderColor;
+    }
+    th {
+      white-space: normal;
+      word-break: break-word;
+    }
+    td {
+      font-weight: bold;
+    }
+    tr:first-child {
+      td {
+        border-top: 2px solid @grayLight;
+      }
+    }
+    tr.overall th {
+      font-weight: bold;
+    }
+  }
+
+  /* ---------
+  TABLE ROW (specific) */
+  tbody tr {
+    border-top: @tableBorder;
+    border-bottom: @tableBorder;
+    //for preview
+    &.highlighted {
+      &.current {
+        td {
+          &:last-child {
+            z-index: 2;
+          }
+          .btn.preview-list-item,
+          .rowaction.btn:not(.btn-invisible) {
+            background: @gray;
+          }
+          .icon-eye-open {
+            color: @grayLighter !important;
+          }
+          background: @dropdownLinkBackgroundHover;
+        }
+      }
+    }
+    &.active {
+      td {
+        .icon-eye-open {
+          color:@grayLighter;
+          background: @gray;
+        }
+      }
+    }
+    //inline editing
+    &.tr-inline-edit {
+      td {
+        overflow: visible;
+        padding: 4px;
+        background: @dropdownLinkBackgroundHover;
+        &:first-child {
+          border-right: 1px solid lighten(@dropdownLinkBackgroundHover,5%);
+          .btn {
+            margin-left: 0;
+            padding: 0;
+          }
+        }
+        &:last-child {
+          border-left: 1px solid lighten(@dropdownLinkBackgroundHover,5%);
+          .btn {
+            margin-left: 0;
+            width: 100%;
+            .box-sizing(border-box);
+          }
+        }
+        &[data-type="fullname"] {
+          min-width: 288px;
+          max-width: 288px !important;
+          .box-sizing(content-box);
+          height: 28px;
+          span.edit-cell {
+            display: inline-block;
+          }
+          .edit-cell[data-type="enum"] {
+            width: 80px;
+          }
+          .edit-cell[data-type="text"] {
+            width: 100px;
+          }
+        }
+        &[data-type="relate"] {
+          min-width: 150px;
+          max-width: 150px !important;
+        }
+        &[data-type="date"] {
+          min-width: 108px;
+          max-width: 108px !important;
+          input[type="text"] {
+            width: 100%;
+          }
+        }
+        &[data-type="datetimecombo"] {
+          min-width: 180px;
+          max-width: 180px !important;
+        }
+        &[data-type="currency"] {
+          min-width: 168px;
+          max-width: 168px !important;
+          .select2-addon {
+            .edit {
+              width: 85px;
+            }
+            input[type="text"] {
+              width: 95%;
+              .calcWidth(~"100% - 100px");
+            }
+          }
+        }
+        &[data-type="parent"] {
+          min-width: 200px;
+          max-width: 200px !important;
+        }
+        &[data-type="file"] {
+          min-width: 200px;
+          max-width: 200px;
+          input[type="file"] {
+            width: 192px;
+          }
+          .btn-link {
+            margin-left: 0;
+            padding: 4px 0;
+            max-width: 150px;
+          }
+          button {
+            float: right;
+          }
+        }
+        &[data-type="enum"] {
+          min-width: 150px;
+          max-width: 150px;
+          .select2-container.select2-dropdown-open {
+            min-width: 82px;
+          }
+          .select2-container-multi.select2-choices-pills-close .select2-search-choice div {
+            text-overflow: ellipsis;
+            max-width: 116px;
+            white-space: nowrap;
+            overflow: hidden;
+          }
+        }
+        > span {
+          width: 100%;
+        }
+        > .edit .select2-container-multi {
+          position: absolute;
+          top: -15px;
+        }
+        > *:not(.overflow-visible) {
+          overflow: visible;
+        }
+        .icon-favorite {
+          display: none;
+        }
+        .input-append.date {
+          margin-bottom: 0;
+          font-size: @baseFontSize;
+        }
+        input[type="text"] {
+          width: 100%;
+          min-width: 82px;
+        }
+      }
+    }
+  }
+
+  /* ---------
+  MISC */
+  &.inline-edit-active {
+    tr {
+      td {
+        overflow-x: visible !important;
+      }
+    }
+    input[type="text"] {
+      width: auto;
+    }
+  }
+  td.number,
+  tfoot th.number {
+    text-align: right;
+    .rtlTextAlign(@direction,left);
+    white-space: nowrap;
+    span.edit {
+      div.controls {
+        position: relative;
+      }
+    }
+  }
+
+
+  &.table-striped tbody > tr:not(.current):not(.tr-inline-edit):nth-child(odd) > td {
+    background: @grayLighter;
+  }
+
+}
+
+//Search and Select lists
+.search-and-select.dataTable tbody {
+  tr:hover {
+    td {
+      background-color: @dropdownLinkBackgroundHover;
+    }
+  }
+}
+
+/* ---------
+FLEXLIST GENERIC */
+.flex-list-view {
+  position: relative;
+  border-top: @borderWidget;
+  .flex-list-view-content {
+    overflow-x: auto;
+    width: 100%;
+    /*-webkit-overflow-scrolling: touch;*/
+  }
+
+  //override of bootstrap to fix safari
+  .dataTable {
+    max-width: none;
+    position: static;
+  }
+
+  /*LEFT ACTIONS ONLY*/
+  &.left-actions .dataTable {
+    th,
+    td {
+      &:first-child {
+        width: 55px;
+        min-width: 55px;
+        height: 28px;
+        text-align: center;
+        overflow-x: visible;
+      }
+    }
+    th:first-child {
+      padding: 7px 8px;
+      > span {
+        position: absolute;
+        overflow: visible;
+        width: 55px;
+        height: 28px;
+        top: 0;
+        left: 0;
+        padding: 7px 8px;
+        border-right: @tableBorder;
+        background-color: inherit;
+        z-index: 999;
+      }
+      .btn.checkall {
+        padding: 4px 7px;
+      }
+    }
+    td:first-child {
+      > span {
+        position: absolute;
+        display: inline-block;
+        width: 71px;
+        height: 36px;
+        margin-top: -18px;
+        left: 0;
+        border-bottom: @tableBorder;
+        background-color: inherit;
+        overflow: visible;
+        z-index: 10;
+        // single search and select
+        > input[type=radio] {
+          margin-top: 11px;
+        }
+        > span.list {
+          input[type=checkbox],
+          input[type=radio] {
+            margin: 0 8px;
+          }
+        }
+        > span.list,
+        > span.edit {
+          display: inline-block;
+          margin-top: 8px;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  /*ADD SHADOW TO LEFT ACTION COLUMN*/
+  &.left-actions.scroll-width .dataTable {
+    th:first-child {
+      > span {
+        border-right: @tableBorder;
+        &:after {
+          .right-shadow(43px);
+        }
+      }
+    }
+    td:first-child {
+      > span {
+        border-right: @tableBorder;
+          &:after {
+          .right-shadow(37px);
+        }
+      }
+    }
+  }
+
+  /*RIGHT ACTIONS ONLY*/
+  &.right-actions .dataTable {
+    th,
+    td {
+      &:last-child {
+        width: 55px;
+        min-width: 55px;
+        height: 28px;
+        text-align: center;
+        overflow-x: visible;
+      }
+    }
+    th:last-child {
+      padding: 7px 8px;
+      .dropdown,
+      > span {
+        position: absolute;
+        overflow: visible;
+        width: 55px;
+        height: 28px;
+        top: 0;
+        right: 0;
+        padding: 7px 7px 7px 8px;
+        background-color: inherit;
+        &.open {
+          z-index: 999;
+        }
+      }
+    }
+    td:last-child {
+      > span {
+        position: absolute;
+        display: inline-block;
+        width: 55px;
+        height: 28px;
+        margin-top: -18px;
+        right: 0;
+        padding: 4px 7px 4px 8px;
+        border-bottom: @tableBorder;
+        background-color: inherit;
+        overflow: visible;
+        &.open {
+          z-index: 999;
+        }
+        > .list:first-child {
+          position: absolute;
+          width: 55px;
+          right: 8px;
+          background-color: inherit;
+          display: inline-block;
+          white-space: nowrap;
+        }
+      }
+
+      // row action buttons
+      .actions {
+        a:hover:not(.disabled) {
+          color: @grayDark;
+        }
+        &.open {
+          .icon-eye-open {
+            color: @gray;
+          }
+        }
+        .dropdown-menu {
+          text-align: left;
+          margin-top: -2px;
+        }
+      }
+
+      .list .btn.rowaction {
+        margin-left: 0;
+      }
+    }
+  }
+
+  /*ADD SHADOW TO RIGHT ACTION COLUMN*/
+  &.right-actions.scroll-width .dataTable {
+    th:last-child {
+      .dropdown,
+      > span {
+        border-left: @tableBorder;
+        &:before {
+          .left-shadow(43px);
+        }
+      }
+    }
+    td:last-child {
+      > span {
+        border-left: @tableBorder;
+        &:before {
+          .left-shadow(37px);
+        }
+      }
+    }
+  }
+
+  /*DUPLICATES*/
+  .dataTable.duplicates {
+    tr {
+      border-top-color: @warningBorder;
+      border-bottom-color: @warningBorder;
+    }
+    th {
+      background-color: @warningBackground;
+      border-right-color: @warningBorder;
+    }
+
+    tbody > tr:not(.current):nth-child(odd) > td {
+      background-color: darken(@warningBackground,5%);
+    }
+    tbody > tr:not(.current):nth-child(even) > td {
+      background-color: @warningBackground;
+    }
+
+  // &.table-striped tbody > tr:not(.current):not(.tr-inline-edit):nth-child(odd) > td {
+  //   background: @grayLighter;
+  // }
+    /*create record dup check*/
+    &.duplicates-selectedit {
+      tr {
+        border-bottom: 1px solid @warningBorder;
+      }
+      th,
+      td {
+        &:first-child {
+          padding-left: 20px;
+          max-width: 116px;
+        }
+        &:last-child {
+          width: 123px;
+          min-width: 123px;
+          max-width: 123px;
+          padding-left: 4px;
+        }
+      }
+      td:last-child {
+        > .list {
+          width: 125px;
+          padding-left: 2px;
+          border-bottom: 1px solid @warningBorder;
+          > .list {
+            width: auto;
+            position: relative;
+            right: auto;
+          }
+        }
+      }
+      .morecol .dropdown {
+        width: 123px;
+        padding-left: 4px;
+      }
+    }
+    /*convert lead dup check*/
+    &.duplicates-singleselect {
+      tr:last-child {
+        border-bottom-width: 0;
+      }
+    }
+    /*record view find duplicates*/
+    &.duplicates-multiselect {
+      th:first-child {
+        //hack fix for messed up button group
+        .btn.checkall {
+          .border-radius(3px);
+          margin-left: 0;
+        }
+        .btn-group span,
+        .dropdown-menu {
+          display: none;
+        }
+      }
+    }
+    &.duplicates-singleselect,
+    &.duplicates-multiselect {
+      td:last-child > .list > .list {
+        width: 28px;
+        right: 22px;
+      }
+    }
+  }
+
+  /*FORECASTS WORKSHEETS*/
+  &.forecast-worksheet .dataTable,
+  &.forecast-manager-worksheet .dataTable {
+    td {
+      &[data-type="currency"] {
+        min-width: 115px !important;
+        .box-sizing(border-box);
+      }
+      &.editableColumn {
+        padding: 0 2px;
+        min-width: 92px;
+        .box-sizing(border-box);
+        span.list,
+        span.edit {
+          width: 100%;
+          .box-sizing(border-box);
+        }
+        span.list {
+          padding: 4px 8px 4px 14px;
+        }
+        span.isEditable.edit {
+          padding: 4px 1px 4px 7px;
+        }
+        span.isEditable:hover {
+          overflow: visible;
+          .edit-icon {
+            position: absolute;
+            left: -2px;
+            top: 7px;
+          }
+        }
+        .clickToEdit.active span.edit {
+          display: inline-block;
+        }
+      }
+      &:last-child > .list > .list:first-child {
+        width: 28px;
+        right: 22px;
+      }
+    }
+  }
+
+  /*FORECASTS SALES REP WORKSHEET*/
+  &.forecast-worksheet .dataTable {
+    th,
+    td {
+      &:first-child {
+        padding-left: 14px;
+      }
+    }
+    td.editableColumn.commit_stage_field:first-child {
+      max-width: 80px;
+      padding-left: 6px;
+      > span.list {
+        padding-left: 10px;
+        -ms-overflow-style: none;
+      }
+      > span.edit {
+        padding-left: 1px;
+      }
+    }
+    tr.included td {
+      font-weight: bold;
+      &.commit_stage_field {
+        > span.list:before {
+          width: 6px;
+          background-color: @blue;
+          position: absolute;
+          height: 30px;
+          left: -1px;
+          content: "";
+          top: -2px;
+        }
+        > span:hover:before {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /*FORECASTS MANAGER WORKSHEET*/
+  &.forecast-manager-worksheet .dataTable {
+    border-top: @tableBorder;
+    tr[name$="_commit_history"] td:first-child:last-child {
+      padding: 0;
+      height: auto;
+      background-color: darken(@grayLighter,5%);
+      .icon-arrow-down:before {
+        color: @red;
+      }
+      .icon-arrow-up:before {
+        color: @green;
+      }
+      .list {
+        position: relative;
+        color: @grayDark;
+        text-align: left;
+        padding: 10px 20px;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        border: none;
+        .box-sizing(border-box);
+        .relativetime {
+          color: @gray;
+        }
+      }
+    }
+    th:last-child .dropdown {
+      top: 1px;
+    }
+  }
+}
+
+.touch .flex-list-view {
+  /*Fix rendering of scrolled absolute spans on iPad*/
+  &.left-actions.scroll-width .dataTable {
+    th:first-child,
+    td:first-child {
+      > span {
+        .translate3d(0,0,0);
+      }
+    }
+  }
+  &.right-actions.scroll-width .dataTable {
+    th:last-child,
+    th:last-child {
+      .dropdown {
+        .translate3d(0,0,0);
+      }
+    }
+  }
+}
+
+//from twitter-bootstrap/datatables.less
+th.sorting_asc,
+th.sorting_desc,
+th.sorting {
+  cursor: pointer;
+  padding-right: 12px;
+  span {
+    padding-right: 12px;
+    position: relative;
+  }
+  span:after {
+    color: @grayLight;
+    font-family: FontAwesome;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    line-height: 6px;
+    white-space: pre;
+    position: absolute;
+    top: 7px;
+    right: 2px;
+    float: right;
+    content: "\f0d8\A\f0d7";
+    font-weight: normal;
+  }
+}
+th.sorting_asc,
+th.sorting_desc {
+  background-color: @grayLighter !important;
+  span {
+    font-weight: bold;
+    color: @gray;
+  }
+  span:after {
+    color: @gray;
+    font-weight: normal;
+  }
+}
+th.sorting_asc span:after {
+  content: "\f0d8";
+}
+th.sorting_desc span:after {
+  top: 13px;
+  content: "\f0d7";
+}
+th.sorting_desc_disabled,
+th.sorting_asc_disabled {
+  cursor: default;
+  span:after {
+    color: @grayLighter;
+  }
+}
+
+table th.nosort span:after {
+  content: "";
+  display: none;
+}
+
+.dataTable th:active {
+  outline: none;
+}
+
+.cell-xxsmall {
+  min-width: @cell-xxsmall;
+  max-width: @cell-xxsmall;
+}
+.cell-xsmall {
+  min-width: @cell-xsmall;
+  max-width: @cell-xsmall;
+}
+.cell-small {
+  min-width: @cell-small;
+  max-width: @cell-small;
+}
+.cell-medium {
+  min-width: @cell-medium;
+  max-width: @cell-medium;
+}
+.cell-large {
+  min-width: @cell-large;
+  max-width: @cell-large;
+}
+.cell-xlarge {
+  min-width: @cell-xlarge;
+  max-width: @cell-xlarge;
+}
+.cell-xxlarge {
+  min-width: @cell-xxlarge;
+  max-width: @cell-xxlarge;
+}
+
+.morecol {
+  .btn {
+    margin: 0;
+  }
+  .dropdown {
+    width: 55px;
+    &.open {
+      position: absolute;
+      right: 0;
+      width: 71px;
+      .btn {
+        .box-shadow(none);
+        background-color: @gray;
+        > [class^="icon-"] {
+          color: @white;
+        }
+      }
+    }
+  }
+  .dropdown-menu {
+    .border-radius(2px);
+    margin-top: 7px;
+    right: 20px;
+    button {
+      background: none;
+      border: none;
+      padding-left: 30px;
+      width: 100%;
+      text-align: left;
+      &.active {
+        font-weight: bold;
+        padding-left: 10px;
+        margin-left: 0;
+        .icon-ok {
+          margin-right: 5px;
+        }
+      }
+    }
+    li {
+      border-bottom: 1px solid @grayLighter;
+    }
+  }
+}
+
+[data-type=phone] .gc-cs-link { /*UIUX-1270*/
+  color: inherit;
+}
+
+.dashlet-content { /* UIUX-1636 */
+  :not(.left-actions):not(.right-actions) > table.dataTable {
+    thead tr th:last-child > span,
+    tbody tr td:last-child > span
+    {
+      margin-right: 0;
+      padding-right: 0;
+    }
+
+    thead tr th:last-child { /* two rules below necessary because sort icons run into text on <th> */
+      padding-left: 12px;
+      &> span {
+        padding-right: 6px;
+        right: 4px;
+      }
+    }
+  }
+}
+
+.touch .flex-list-view.right-actions .dataTable {
+  th:last-child > span,
+  th:first-child > *,
+  th:last-child > .dropdown { /*UIUX-1760*/
+    height: 30px;
+  }
+  td:last-child > * { /*SC-3006*/
+    -webkit-transform: translatez(0);
+  }
+}

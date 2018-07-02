@@ -1,0 +1,104 @@
+<!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+-->
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <title>Chart Number Formatting by hhrogersii</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet/less" type="text/css" href="less/styles.less" />
+    <style type="text/less">
+        table {
+            border-collapse: collapse;
+            thead tr {
+                background: #eee;
+            }
+            td {
+                border: 1px solid #ddd;
+                padding: 4px;
+                &.red {
+                    border-color: red;
+                }
+            }
+        }
+    </style>
+    <script src="js/less-1.3.3.min.js"></script>
+    <script src="../../../include/javascript/nvd3/lib/d3.min.js"></script>
+    <script src="../../../include/javascript/nvd3/nv.d3.js"></script>
+</head>
+<body class="full-screen">
+  <div class="nv-demo">
+    <div class="page-header">
+      <h2>Number Format Test</h2>
+    </div>
+
+    <table>
+        <thead><tr><td>data</td><td>expected</td><td>formatted</td></tr></thead>
+        <tbody id="results"></tbody>
+    </table>
+  </div>
+
+<script type="text/javascript">
+// runner
+function test(data, format, precision) {
+    var tbody = d3.select('#results').selectAll('tr').data(data);
+
+    tbody.enter().append('tr').html(function(d) {
+        var f = format(d[0], precision),
+            clss = d[1] == f ? 'green' : 'red';
+
+        return '<td>' + d[0] + '</td><td>' + d[1] + '</td><td class="' + clss + '">' + f + '</td>';
+    });
+}
+
+// spec for precision 2
+var t2 = [
+    [-1.234, '-1.23'],
+    [-0.439, '-0.44'],
+    [0.439, '0.44'],
+    [0.432, '0.43'],
+    [0.43, '0.43'],
+    [0.4, '0.4'],
+    [0, '0'],
+    [1.2, '1.2'],
+    [1.23, '1.23'],
+    [1.234, '1.23'],
+    [1.239, '1.24'],
+    [12, '12'],
+    [123, '123'],
+    [123.45, '123.45'],
+    [1234, '1.23k'],
+    [12345, '12.35k'],
+    [123456, '123.46k'],
+    [1234567, '1.23M']
+];
+
+// from nv.utils.numberFormatSI
+var formatSI = function(d, p) {
+        if (p === 0) {
+          return d;
+        }
+        p = p || 2;
+        if (d < 1 && d > -1) {
+            return d3.round(d, p);
+        }
+        var si = d3.formatPrefix(d, p);
+        return d3.round(si.scale(d), p) + si.symbol;
+    };
+
+test(t2, nv.utils.numberFormatSI, 2);
+</script>
+</body>
+</html>
+
+

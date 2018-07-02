@@ -1,0 +1,112 @@
+{
+    "home": {
+        "version": 1,
+        "scroll": ".list-layout",
+        "intro": "LBL_MOBILE_TUTORIAL_HOME_INTRO",
+        "content":[
+            {
+                "name": "#logo",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_LOGO"
+            },
+            {
+                "name": "#create",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_CREATE",
+                "horizAdj": -3
+            },
+            {
+                "name": ".search-query",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_SEARCH",
+                "vertAdj": -5
+            },
+            {
+                "name": ".favorites-btn",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_FAVORITES_BTN",
+                "vertAdj": -5,
+                "horizAdj": -5
+            },
+            {
+                "name": ".my-items-btn",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_MY_ITEMS_BTN",
+                "vertAdj": -5,
+                "horizAdj": -5
+            },
+            {
+                "name": "#bucket-Upcoming .bucket-header",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_UPCOMING",
+                "horizAdj": 5,
+                "vertAdj": -5
+            },
+            {
+                "name": "#bucket-Recent .bucket-header",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_RECENT",
+                "horizAdj": 5,
+                "vertAdj": -5
+            },
+            {
+                "name": "article .icon-star",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_FAVORITES_ICON",
+                "horizAdj": -3,
+                "vertAdj": -3
+            },
+            {
+                "name": ".grip",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_GRIP",
+                "horizAdj": -5,
+                "vertAdj": 10
+            },
+            {
+                "text": "LBL_MOBILE_TUTORIAL_HOME_END"
+            }
+        ]
+    },
+    "home-menu": {
+        "version": 1,
+        "scroll": "#moduleList.nav",
+        "intro": "LBL_MOBILE_TUTORIAL_HOME_MENU_INTRO",
+        "content":[
+            {
+                "name": "#me",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_MENU_PROFILE",
+                "horizAdj": 4
+            },
+            {
+                "name": "#logo",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_MENU_LOGO"
+            },
+            {
+                "name": "#moduleItems",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_MENU_MODULES",
+                "vertAdj": 5
+            },
+            {
+                "name": "#settings-link",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_MENU_SETTINGS"
+            },
+            {
+                "name": "#desktop",
+                "text": "LBL_MOBILE_TUTORIAL_HOME_MENU_DESKTOP"
+            }
+        ]
+    },
+    "detail~TxLog": {
+        "version": 1,
+        "intro": "LBL_MOBILE_TUTORIAL_DETAIL_INTRO",
+        "content": [
+            {
+                "name": ".bizcard .icon-chevron-right",
+                "text": "LBL_MOBILE_TUTORIAL_DETAIL_RIGHT_ACTION",
+                "vertAdj": -6,
+                "horizAdj": -14
+            },
+            {
+                "name": ".record-action",
+                "text": "LBL_MOBILE_TUTORIAL_DETAIL_RECORD_ACTIONS"
+            },
+            {
+                "name": "#backBtn",
+                "text": "LBL_MOBILE_TUTORIAL_DETAIL_BACK"
+            }
+        ]
+    }
+
+}

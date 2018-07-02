@@ -1,0 +1,163 @@
+/* GLOBAL SEARCH
+  ----------------*/
+
+#searchForm {
+  padding: 8px 6px;
+  position: relative;
+  min-width: 28px;
+
+  .rtlFloat(@direction,left);
+
+  label {
+    display: inline-block;
+    input {
+      display: inline-block;
+      &[type=checkbox]{
+        margin: 0 5px 3px 0;
+      }
+    }
+    &.hide {
+      display: none;
+    }
+    &.active {
+      font-weight: 900;
+    }
+  }
+
+  // Needed by firefox because of navbar table-layout
+  .typeahead-wrapper {
+    position: relative;
+  }
+
+  // Typeahead UL
+  .typeahead {
+    .border-radius(@baseBorderRadius);
+    overflow: hidden;
+    right: 0;
+    left: 0;
+    top: 40px;
+    height: auto;
+    width: 350px;
+    max-height: 333px;
+    li {
+      min-width: 120px;
+      padding: 0;
+    }
+    li > a,
+    li.no-results {
+      padding: 8px 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+
+// Navbar search
+.navbar-search {
+  margin: 0;
+  float: none;
+
+  // Input field
+  .search-query {
+    float: right;
+    color: @gray;
+    margin-bottom: 0;
+    padding: 4px 54px 4px 9px;
+    min-height: 28px;
+    min-width: 220px;
+    border: 1px solid darken(@navbarBackground, 5%);
+    .border-radius(@baseBorderRadius);
+    .box-sizing(border-box);
+    .transition(none);
+    .placeholder(@grayLight);
+  }
+
+  .advanced {
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    .btn-toolbar {
+      margin: 0;
+      padding: 0;
+    }
+    .btn-group {
+      margin: 0;
+      > .btn .icon-caret-down {
+        display: inline-block;
+        color: @grayLight;
+        text-shadow: none;
+      }
+      &:not(.open) {
+        .btn {
+          margin: 0;
+          &:focus {
+            .tab-focus-light();
+            &:active {
+              outline: none;
+            }
+          }
+        }
+      }
+      &:hover > .btn .icon-caret-down {
+        color: @grayDark;
+        text-decoration: none;
+      }
+      &.open > .btn .icon-caret-down,
+      &.open:hover > .btn .icon-caret-down {
+        color: @white;
+      }
+    }
+
+    .dropdown-menu.globalsearch-adv-wrap {
+      margin-top: 6px;
+      border: 1px solid @dropdownBorder;
+      .border-radius(@baseBorderRadius);
+      *border-right-width: 2px;
+      *border-bottom-width: 2px;
+      .box-shadow(0 5px 10px rgba(0,0,0,.2));
+      .globalsearch-adv {
+        z-index: @zindexDropdown;
+        background-color: @dropdownBackground;
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding;
+        background-clip: padding-box;
+        padding: 4px;
+      }
+    }
+    //fix advanced drop down position
+    .dropdown-menu {
+      top: 36px;
+      right: 29px;
+      left: auto;
+      padding: 0;
+      background: none;
+      .border-radius(0);
+      .box-shadow(none);
+      border: 0;
+      li {
+        padding: 5px 10px;
+        min-width: 120px;
+        &.divider {
+          padding: 0;
+        }
+      }
+      &:before,
+      &:after {
+        display: none !important;
+      }
+    }
+    &.dropdown-toggle {
+      position: absolute;
+      right: 27px;
+      box-shadow: none;
+      .border-radius(0);
+    }
+  }
+}
+
+.search-query {
+  .border-radius(@baseBorderRadius);
+}

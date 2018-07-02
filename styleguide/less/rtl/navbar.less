@@ -1,0 +1,99 @@
+.navbar.navbar-fixed-top {
+    .navbar-inner {
+        .nav.megamenu {
+            float: right;
+            .btn-group.home.open {
+                .dropdown-menu {
+                    right: 0;
+                    left: auto;
+                }
+            }
+            .dropdown-menu {
+                &.pull-right {
+                    left: 0;
+                    right: auto;
+                }
+                .label-module-mini {
+                    margin: -2px 0 0 10px;
+                    vertical-align: middle;
+                }
+            }
+            .dropdown > .btn-group:not(.home) .dropdown-menu {
+                margin-right: -8px;
+            }
+        }
+
+        #searchForm label input[type=checkbox] {
+            margin: 0 0 3px 5px;
+        }
+
+        .navbar-search {
+            .search-query {
+                padding-right: 9px;
+                padding-left: 54px;
+            }
+            .advanced {
+                position: relative;
+                .btn-toolbar {
+                    position: absolute;
+                    left: 0px;
+                }
+                .btn-group .fa-caret-down {
+                    left: 24px;
+                }
+                .dropdown-menu {
+                    left: 29px;
+                    right: auto;
+                }
+            }
+        }
+
+        .notification-list {
+            .dropdown-menu {
+                li a {
+                    .fa-bars,
+                    span {
+                        float: right;
+                    }
+                }
+            }
+            div.btn-group.open div.dropdown-menu ul li {
+                a {
+                    span.label {
+                        margin-right: initial;
+                        margin-left: 10px;
+                    }
+                    time {
+                        padding-right: initial;
+                        padding-left: 14px;
+                        text-align: left;
+                    }
+                }
+                &:last-child > a > .span8 {
+                    margin-right: 2.12765957%;
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+.module-list {
+    .megamenu {
+        > .dropdown .btn-group {
+            &.home {
+                padding: 5px 16px 5px 10px;
+            }
+            &:not(.home) {
+                padding: 8px 8px 8px 4px;
+                .dropdown-toggle {
+                    margin-right: 1px;
+                    margin-left: initial;
+                }
+            }
+        }
+    }
+}
+#userActions .profileactions-profile .avatar {
+    right: 11px;
+    left: auto;
+}

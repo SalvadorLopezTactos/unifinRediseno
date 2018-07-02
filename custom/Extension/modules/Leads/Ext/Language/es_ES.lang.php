@@ -1,0 +1,31 @@
+<?php
+// WARNING: The contents of this file are auto-generated.
+$mod_strings['LBL_ACCOUNT_DESCRIPTION'] = 'Descripción de la Persona';
+$mod_strings['LBL_ACCOUNT_ID'] = 'ID Persona';
+$mod_strings['LBL_LIST_ACCOUNT_NAME'] = 'Persona';
+$mod_strings['LBL_CONVERTED_ACCOUNT'] = 'Persona Convertida:';
+$mod_strings['LNK_SELECT_ACCOUNTS'] = 'O Seleccione una Persona';
+$mod_strings['LNK_NEW_ACCOUNT'] = 'Nueva Persona';
+$mod_strings['LBL_OPPORTUNITY_AMOUNT'] = 'Cantidad de la Operacion:';
+$mod_strings['LBL_OPPORTUNITY_ID'] = 'ID Operacion';
+$mod_strings['LBL_OPPORTUNITY_NAME'] = 'Nombre de la Operacion:';
+$mod_strings['LBL_CONVERTED_OPP'] = 'Operacion Convertida:';
+$mod_strings['LBL_STATUS'] = 'Estado:';
+$mod_strings['LBL_PROSPECTOCREADO'] = 'prospectocreado';
+$mod_strings['LNK_NEW_LEAD'] = 'Nuevo Pre-prospecto';
+$mod_strings['LBL_MODULE_NAME'] = 'Pre-prospectos';
+$mod_strings['LBL_MODULE_NAME_SINGULAR'] = 'Pre-prospecto';
+$mod_strings['LBL_NEW_FORM_TITLE'] = 'Nuevo Pre-prospecto';
+$mod_strings['LNK_LEAD_LIST'] = 'Ver Pre-prospectos';
+$mod_strings['LNK_LEAD_REPORTS'] = 'Ver Informes de Clientes Potenciales';
+$mod_strings['LNK_IMPORT_VCARD'] = 'Nuevo Pre-prospecto desde vCard';
+$mod_strings['LNK_IMPORT_LEADS'] = 'Importar Pre-prospectos';
+$mod_strings['LBL_LIST_FORM_TITLE'] = 'Lista de Clientes Potenciales';
+$mod_strings['LBL_SEARCH_FORM_TITLE'] = 'Búsqueda de Clientes Potenciales';
+$mod_strings['LBL_LIST_MY_LEADS'] = 'Mis Pre-prospectos';
+$mod_strings['LBL_RAZONSOCIAL'] = 'Razón Social';
+$mod_strings['LBL_REGIMEN_FISCAL'] = 'Régimen Fiscal';
+$mod_strings['LBL_APELLIDOPATERNO'] = 'Apellido Paterno';
+$mod_strings['LBL_APELLIDOMATERNO'] = 'Apellido Materno';
+$mod_strings['LBL_SEGUNDONOMBRE'] = 'Segundo Nombre';
+$mod_strings['LBL_PRIMERNOMBRE'] = 'Primer Nombre';

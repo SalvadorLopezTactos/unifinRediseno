@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:28ca14e5-71dd-fbea-e8df-5a7ce8ab0eed
+ORGANIZER;CN=Hector Castillo Landarte:hcastillo@unifin.com.mx
+DTSTART:20180208T153000Z
+DTEND:20180208T180000Z
+DTSTAMP:20180209T001600Z
+SUMMARY:Firma de contrato
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

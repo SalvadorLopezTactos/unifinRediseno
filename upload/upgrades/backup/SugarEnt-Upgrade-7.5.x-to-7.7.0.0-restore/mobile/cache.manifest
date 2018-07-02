@@ -1,0 +1,40 @@
+CACHE MANIFEST
+# Tue, 14 Apr 2015 13:20:41 GMT
+# Version: 2.1.2
+# Build: 210/1008
+
+index.html
+
+# cache fonts
+font/fontawesome-webfont.ttf
+
+CACHE:
+# images
+img/favicon.ico
+img/touch-icon.png
+img/touch-icon-152.png
+img/touch-icon-196.png
+img/logo.svg
+img/black_linen_v2.png
+img/brand_256.png
+img/triangles.png
+img/spinner.gif
+img/offline-list.svg
+img/offline-detail.svg
+img/offline-edit.svg
+
+#styles
+css/mobile.css
+
+# javascripts
+lib.js
+sidecar.js
+templates.js
+nomad.js
+
+#other resources
+tutorial.json
+
+NETWORK:
+*
+

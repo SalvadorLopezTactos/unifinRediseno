@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SugarCRM//SugarCRM Calendar//EN
+BEGIN:VEVENT
+UID:45ea0cba-2169-0ffd-dbff-5a822cf456f4
+ORGANIZER;CN=Maria Fernanda Ortiz Apango:mortiz@unifin.com.mx
+DTSTART:20180212T163000Z
+DTEND:20180212T181500Z
+DTSTAMP:20180213T000800Z
+SUMMARY:VISITA OCULAR
+DESCRIPTION:Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.
+END:VEVENT
+END:VCALENDAR

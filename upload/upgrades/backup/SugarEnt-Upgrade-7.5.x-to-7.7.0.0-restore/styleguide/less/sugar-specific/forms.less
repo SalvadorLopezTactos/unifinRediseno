@@ -1,0 +1,547 @@
+/* FORMS
+  ----------------*/
+
+//In IE10+, there is a clear icon on inputs to allow user to clear the input field. We want to prevent that because
+//it messes up with our javascript code that listens to `keyup` events
+input::-ms-clear {
+    display: none;
+}
+
+form[name="signupView"] {
+  .control-group.error input,
+  .control-group.error textarea {
+    width: 180px;
+  }
+}
+
+legend {
+  border-bottom: @borderWidget;
+}
+
+label {
+  color: @grayDark;
+}
+
+.form-actions {
+  border-top: @borderWidget;
+}
+
+// Reset the file input to browser defaults
+input[type="file"] {
+  width: auto;
+  padding: initial;
+  line-height: initial;
+  background-color: @inputBackground;
+  background-color: initial;
+  border: initial;
+  .box-shadow(none);
+}
+
+// Reset line-height for IE
+input[type="file"] {
+  line-height: ~"18px \9";
+}
+
+// Chrome on Linux and Mobile Safari need background-color
+select {
+  background-color: @inputBackground;
+  /*border: inherit; makes select boxes have sharp corners*/
+}
+
+input[type="image"] {
+  border: 0;
+}
+
+// Position radios and checkboxes better
+input[type="radio"],
+input[type="checkbox"],
+input[type="image"] {
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 3px 0;
+  line-height: normal;
+  cursor: pointer;
+  background-color: transparent;
+  border: ~"0 \9"; /* IE9 and down */
+  .border-radius(0);
+}
+
+// Reset width of input buttons, radios, checkboxes
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+input[type="radio"],
+input[type="checkbox"] {
+  height: auto;
+}
+
+// Inputs within a label
+label input,
+label textarea,
+label select {
+  display: block;
+}
+
+// Remove shadow from image inputs
+input[type="image"] {
+  .box-shadow(none);
+}
+
+// Focus for select, file, radio, and checkbox
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  border-color: @linkColor !important;
+  .box-shadow(none);
+}
+
+// Hidden inputs
+input[type="hidden"] {
+  display: none;
+}
+
+// Placeholder text gets special styles; can't be bundled together though for some reason
+//.placeholder(@grayLight);
+::-webkit-input-placeholder { color: @grayLight; font-weight: normal; }
+::-moz-placeholder { color: @grayLight; font-weight: normal; } /* firefox 19+ */
+:-ms-input-placeholder { color: @grayLight; font-weight: normal; } /* ie */
+input:-moz-placeholder { color: @grayLight; font-weight: normal; }
+
+input[disabled],
+select[disabled],
+textarea[disabled],
+input[readonly],
+select[readonly],
+textarea[readonly] {
+  cursor: not-allowed;
+  border: @inputBorder;
+  color: @placeholderText;
+}
+
+input[type=checkbox],
+input[type=radio] {
+  border: none;
+}
+
+input[type=radio] {
+  display: inline-block;
+}
+
+[data-type="currency"] {
+  .currency.edit {
+    .add-on.error-tooltip {
+      display: none;
+    }
+  }
+}
+
+#header .control-group label.hide {
+  display: none;
+}
+
+/*Datetime
+-----------*/
+.date {
+  input[type="text"] {
+    width: 100%;
+  }
+}
+.datetime {
+  input[type="text"].datepicker {
+    min-width: 0;
+    width: 50%;
+    .calcWidth(~"55% - 15px");
+  }
+  input[type="text"].ui-timepicker-input {
+    min-width: 0;
+    width: 40%;
+    .calcWidth(~"45% - 15px");
+  }
+}
+.datepicker {
+  margin-top: 0;
+  span.year.active:hover,
+  span.year.active,
+  span.month.active:hover,
+  span.month.active,
+  td > .active,
+  td > .active:hover {
+    color: @white;
+    background-color: @gray;
+    border-color: @gray;
+    .box-shadow(@shadowWidget);
+  }
+  table th:first-child, table td:first-child {
+    padding-left: 5px;
+  }
+}
+
+.input-append {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  margin-bottom: 0;
+  .add-on {
+    top: 3px;
+    left: -28px;
+    margin-left: 0;
+    height: 16px;
+    padding: 3px 3px;
+    position: relative;
+    border: none;
+    background: @white;
+    line-height: 16px;
+    border-radius: 0;
+    i {
+      line-height: 16px;
+    }
+  }
+  &.textarea,
+  &.select,
+  &.checkbox,
+  &.radio {
+    padding-left: 0;
+    .add-on {
+      background: transparent !important;
+      border: none;
+    }
+  }
+  //not working so adding this
+  input[type="checkbox"] + .add-on,
+  &.checkbox .add-on,
+  &.radio .add-on{
+    padding: 0;
+    top: 0;
+    left: 7px;
+    display: inline;
+  }
+
+  &.select,
+  &.textarea {
+    .add-on {
+      //position: absolute;
+    }
+  }
+  &.widget {
+    width: 100%;
+    .add-on {
+      position: absolute;
+      top: 1px;
+      right: 0;
+    }
+  }
+  input{
+    .border-radius(@inputBorderRadius);
+    /* The size is defined in twitter-bootstrap/forms.less */
+    padding: 4px 6px;
+  }
+  .ui-timepicker-input {
+    margin-left: -24px;
+  }
+  .ui-timepicker-list {
+    margin-left: -24px;
+    font-size: @baseFontSize;
+    li {
+      color: @gray;
+    }
+  }
+  &.error {
+    .add-on {
+      left: -26px;
+      color: @errorText;
+      z-index: 1;
+      [class^="icon-"] {
+        color: @errorText;
+      }
+    }
+    .ui-timepicker-input,
+    .ui-timepicker-list {
+      margin-left: -46px;
+    }
+    textarea,
+    input[type="password"],
+    input[type="text"] {
+      .placeholder(@errorText);
+    }
+  }
+  &.date,
+  &.datetime {
+    &.error {
+      .add-on {
+        left: -28px;
+        &.error-tooltip {
+          left: -42px;
+          & + .add-on {
+            left: -50px;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+
+.radio input[type="radio"],
+.checkbox input[type="checkbox"] {
+  float: none;
+}
+
+.control-group {
+  margin-bottom: 4px;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  .btn-toolbar {
+    margin: 0 0 0 5px !important;
+    display: inline;
+  }
+  .wide {
+    text-align: left;
+  }
+  label {
+    padding: 0 1em 0 0;
+    cursor: default;
+    .rtlPadding(@direction,0 0 0 1em);
+    display: inline-block;
+    float: none;
+    &.hide {
+      display: none;
+    }
+    &.btn {
+      padding: 4px 6px;
+    }
+    input {
+      display: inline-block;
+      float: none;
+    }
+  }
+  &.email {
+    padding-right: 142px;
+    position: relative;
+    &> span,
+    &> del {
+      color: @grayLight;
+    }
+    input[type="text"] {
+      width: 100%;
+    }
+    .btn-toolbar {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 120px;
+      padding: 0;
+      .btn-group {
+        float: left;
+      }
+    }
+  }
+}
+
+// fluid width input fields - fixes overflow of row-fluid spans
+.controls[class*="span"] {
+  input[type="text"].inherit-width,
+  textarea.inherit-width,
+  select.inherit-width {
+    width: 100%;
+    min-height: 28px;
+    .box-sizing(border-box);
+  }
+  textarea.inherit-width { /* some modern browsers let you resize textarea, this ensures it doesn't go beyond parent container */
+    max-width: 100%;
+  }
+}
+
+//Generate fixed spanX modal widths
+.spanLabelX (@index) when (@index > 0) {
+  (~".form-horizontal .control-label.span@{index}") { .spanLabel(@index); }
+  .spanLabelX(@index - 1);
+}
+.spanLabelX (0) {}
+
+.spanLabel (@columns) {
+  width: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1));
+  *width: (@fluidGridColumnWidth * @columns) + (@fluidGridGutterWidth * (@columns - 1)) - (.5 / @gridRowWidth * 100 * 1%);
+}
+
+.spanLabelX (@gridColumns);
+
+// for use by controls not in form-horizontal
+.controls {
+  padding: 0;
+  &.btn-fit {
+    position: relative;
+    &.controls-four {
+      padding-right: 144px;
+    }
+    &.controls-three {
+      padding-right: 108px;
+    }
+    &.controls-two {
+      padding-right: 72px;
+    }
+    &.controls-one {
+      padding-right: 36px;
+    }
+    .btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      &.fourth {
+        right: 108px;
+      }
+      &.third {
+        right: 72px;
+      }
+      &.second {
+        right: 36px;
+      }
+      &.first {
+        /* right:___; default  */
+      }
+    }
+  }
+  &.btn-group-fit {
+    position: relative;
+    &.controls-four {
+      padding-right: 118px;
+    }
+    &.controls-three {
+      padding-right: 90px;
+    }
+    &.controls-two {
+      padding-right: 63px;
+    }
+    .btn-group {
+      position: absolute;
+      top: 0;
+      right: 5px;
+    }
+  }
+}
+
+.form-horizontal {
+  margin-left: 10px;
+
+  .row-fluid.control-group {
+    padding: 0;
+    margin-bottom: 0;
+  }
+  .control-group {
+    margin-bottom: 4px;
+    .controls {
+      margin-bottom: 4px;
+    }
+  }
+
+  .control-group:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .controls {
+    margin-left: @fluidGridGutterWidth;
+    > span {
+      padding: 0;
+    }
+  }
+
+  .card2 .control-group:first-child .control-label-background ,
+  .card2 .control-group .control-label.begin-fieldgroup .control-label-background {
+    .border-radius(@baseBorderRadius @baseBorderRadius 0 0);
+    border-top: @borderWidget;
+  }
+  .card2 .control-group::last-of-type .control-label-background,
+  .card2 .control-group .control-label.end-fieldgroup .control-label-background {
+    padding-bottom: 5px;
+    .border-radius(0 0 @baseBorderRadius @baseBorderRadius);
+    border-bottom: @borderWidget;
+    height: auto;
+  }
+  .card2 .control-group.single .control-label .control-label-background {
+    height: 0;
+    .border-radius(@baseBorderRadius);
+    border-top: @borderWidget;
+    border-bottom: @borderWidget;
+  }
+
+  div.control-label {
+    padding-top: 0;
+    .control-label-background {
+      height: 100%;
+      position: absolute;
+      padding: 4px 0 12px;
+      text-align: right;
+      border-left: @borderWidget;
+      border-right: @borderWidget;
+      background-color: @grayLighter;
+    }
+    label {
+      color: @gray;
+      font-size: @fontSizeSmall;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.help-block {
+  font-size: 11px;
+  margin: 3px 0 0;
+  white-space: normal;
+  line-height: 13px;
+  display: inline-block;
+}
+.form-actions {
+  border: none;
+  background: transparent;
+}
+
+.mu.extend .fieldPlaceHolder {
+  margin-left: 4px;
+}
+
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  &.error {
+    border-color: @errorText;
+    color: @errorText;
+  }
+  // this is breaking forms with tight spacing around inputs like .form=search and .form-horizontal
+  //margin-bottom: 10px;
+  //tbs default is 9px but that is through off the alignment of addons so setting to 0px
+  margin-bottom: 0;
+}
+
+
+input.required {
+  border: 1px solid @grayLight;
+}

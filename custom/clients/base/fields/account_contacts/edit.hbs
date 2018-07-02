@@ -1,0 +1,44 @@
+
+<div class="control-group contacto">
+    <table class="dashlet" style="border: solid lightblue;" cellspacing="1" cellpadding="5">
+        <tr>
+            <td valign="top">
+                <div class="record-label">
+                    Primer Nombre
+                </div>
+                <input type="text" class="newPMPrimerNombre" placeholder="Primer Nombre" value="{{primerNombre}}" data-field="PrimerNombre" data-name="PrimerNombre" style="width: 90%;margin: 0px;">
+            </td>
+            <td valign="top">
+                <div class="record-label">
+                    Segundo Nombre
+                </div>
+                <input type="text" class="newPMSegundoNombre" placeholder="Segundo Nombre" value="{{segundoNombre}}" data-field="segundoNombre" data-name="segundoNombre" style="width: 90%;margin: 0px;">
+            </td>
+            <td valign="top">
+                <div class="record-label">
+                    Apellido Paterno
+                </div>
+                <input type="text" class="newPMApellidoPaterno" placeholder="Apellido Paterno" value="{{apellidoPaterno}}" data-field="ApellidoPaterno" data-name="ApellidoPaterno" style="width: 90%;margin: 0px;">
+            </td>
+            <td valign="top">
+                <div class="record-label">
+                    Apellido Materno
+                </div>
+                <input type="text" class="newPMApellidoMaterno" placeholder="Apellido Materno" value="{{apellidoMaterno}}" data-field="ApellidoMaterno" data-name="ApellidoMaterno" style="width: 90%;margin: 0px;">
+            </td>
+            <td valign="top">
+                <div class="record-label">
+                    Email
+                </div>
+                <input type="text" class="newPMEmail" placeholder="Email" value="{{emailContacto}}" data-field="Email" data-name="Email" style="width: 90%;margin: 0px;">
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Telefono
+                </div>
+                <input type="text" class="newPMTelefono" placeholder="Telefono" value="{{telefonoContacto}}" data-field="Telefono" data-name="Telefono" maxlength="10" style="width: 90%;margin: 0px;">
+            </td>
+        </tr>
+    </table>
+</div>
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

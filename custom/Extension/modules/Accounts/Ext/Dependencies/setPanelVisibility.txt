@@ -1,0 +1,90 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: salvadorlopez
+ * Date: 21/12/17
+ * Time: 11:25
+ */
+/*
+$dependencies['Accounts']['panel_visibility']=array(
+    'hooks' => array("edit","view"),
+    'trigger' => 'true',
+    'triggerFields' => array('tct_fedeicomiso_chk_c','name','tipodepersona_c'),
+    'onload' => true,
+    'actions' => array(
+        // Fideicomiso
+        array(
+            'name' => 'SetPanelVisibility',
+            'params' => array(
+                'target' => 'LBL_RECORDVIEW_PANEL2',
+                'value' => 'equal($tct_fedeicomiso_chk_c,true)',
+            ),
+        ),
+    ),
+   	'notActions' => array(),
+);
+
+
+$dependencies['Accounts']['setPanelVisibility4']=array(
+    'hooks' => array('edit','view'),
+    'trigger' => 'true',
+    'triggerFields' => array('tipodepersona_c','name'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetPanelVisibility',
+            'params' => array(
+                'target' => 'LBL_RECORDVIEW_PANEL4',
+                'value' => 'not(equal($tipodepersona_c,"Persona Moral"))',
+            ),
+        ),
+    ),
+);
+
+$dependencies['Accounts']['setPanelVisibility5']=array(
+    'hooks' => array('edit','view'),
+    'trigger' => 'true',
+    'triggerFields' => array('tipodepersona_c','name'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetPanelVisibility',
+            'params' => array(
+                'target' => 'LBL_RECORDVIEW_PANEL5',
+                'value' => 'not(equal($tipodepersona_c,"Persona Moral"))',
+            ),
+        ),
+    ),
+);
+$dependencies['Accounts']['setPanelVisibility6']=array(
+    'hooks' => array('edit','view'),
+    'trigger' => 'true',
+    'triggerFields' => array('tipodepersona_c','name'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetPanelVisibility',
+            'params' => array(
+                'target' => 'LBL_RECORDVIEW_PANEL6',
+                'value' => 'equal($tipodepersona_c,"Persona Moral")',
+            ),
+        ),
+    ),
+);
+*/
+
+$dependencies['Accounts']['setPanelVisibility8']=array(
+    'hooks' => array('all'),
+    'trigger' => 'true',
+    'triggerFields' => array('show_panel_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetPanelVisibility',
+            'params' => array(
+                'target' => 'LBL_RECORDVIEW_PANEL8',
+                'value' => 'equal($show_panel_c,true)',
+            ),
+        ),
+    ),
+);

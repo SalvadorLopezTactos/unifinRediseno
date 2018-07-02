@@ -1,0 +1,269 @@
+{{log this}}
+
+<link rel="stylesheet" type="text/css" href="custom/clients/base/views/dashlet-salesforceautomation/style.css">
+<div class="dashlet-estatus-del-proceso-wrapper">
+    <div>
+        <table width="100%" class="table table-striped table-bordered table-condensed c1_box" id="c1_dashlet">
+            <tr>
+                <td colspan="14">
+                    <span>
+                    <h4>Filtro:
+                        <select id="Colfiltro">
+                            <option value="sinFiltro"></option>
+                            <option value="BacklogCol">Backlog</option>
+                            <option value="PipelineCol">Pipeline</option>
+                            <option value="Col30">30</option>
+                            <option value="Col60">60</option>
+                            <option value="Col90">90</option>
+                            <option value="Col90Plus">+90</option>
+                        </select>
+                    </h4>
+                        </span>
+                </td>
+            </tr>
+            <tr class="PromotorTotal c1_header"> <!--CABECERA-->
+                <th width="25%" align="left">
+                    Cliente -
+                    <input type="hidden" id="clienteOrden" value="{{clienteOrden}}"/><span id="ClienteSort" class="icon-sort"></span>
+                </th>
+                <th width="5%" align="center" nowrap>Estatus
+
+                </th>
+                <th width="3%" align="center">Activo</th>
+                <th class="BacklogCol" width="5%" align="right">
+                    Backlog -
+                    <input type="hidden" id="BacklogOrden" value="{{BacklogOrden}}"/><span id="BacklogSort" class="icon-sort"></span>
+                </th>
+                <th class="PipelineCol" width="5%" align="right">
+                    Pipeline -
+                    <input type="hidden" id="PipelineOrden" value="{{PipelineOrden}}"/><span id="PipelineSort" class="icon-sort"></span>
+                </th>
+                <th width="5%" align="right" class="Col30">
+                    30 -
+                    <input type="hidden" id="30Orden" value="{{treintaOrden}}"/><span id="30Sort" class="icon-sort"></span>
+                </th>
+                <th class="Col60" width="5%" align="right">
+                    60 -
+                    <input type="hidden" id="60Orden" value="{{sesentaOrden}}"/><span id="60Sort" class="icon-sort"></span>
+                </th>
+                <th class="Col90" width="5%" align="right">
+                    90 -
+                    <input type="hidden" id="90Orden" value="{{noventaOrden}}"/><span id="90Sort" class="icon-sort"></span>
+                </th>
+                <th class="Col90Plus" width="5%" align="right">
+                    +90 -
+                    <input type="hidden" id="90MasOrden" value="{{noventaOrdenMas}}"/><span id="90MasSort" class="icon-sort"></span>
+                </th>
+                <th width="15%" align="right" class="titleAcciones">
+                    Acciones
+                </th>
+            </tr>
+            <tr class="PromotorTotal">
+                <td class="PromotorTotal" style="text-align: left !important">
+                        <a class="rowaction btn btn-primary" href="javascript:void(0);" id="expandir_button" track="click:add_button">
+                            <span class="icon-plus"></span></a>
+                        <a class="rowaction btn btn-primary" href="javascript:void(0);" id="colapsar_button" track="click:add_button">
+                            <span class="icon-minus"></span></a>
+                </td>
+                <td class="PromotorTotal"></td>
+                <td class="PromotorTotal"></td>
+                <td class="BacklogCol PromotorTotal" style="text-align:right;">{{customFormatNumber c1_rows.grandTotal.backlog}}</td>
+                <td class="PipelineCol PromotorTotal" style="text-align:right;">{{customFormatNumber c1_rows.grandTotal.pipeline}}</td>
+                <td class="Col30 PromotorTotal " style="text-align:right;">{{customFormatNumber c1_rows.grandTotal.treinta}}</td>
+                <td class="Col60 PromotorTotal " style="text-align:right;">{{customFormatNumber c1_rows.grandTotal.sesenta}}</td>
+                <td class="Col90 PromotorTotal " style="text-align:right;">{{customFormatNumber c1_rows.grandTotal.noventa}}</td>
+                <td class="Col90Plus PromotorTotal " style="text-align:right;">{{customFormatNumber c1_rows.grandTotal.noventamas}}</td>
+                <td class="PromotorTotal"></td>
+            </tr>
+            <!--CUERPO DE LA TABLA SFA-->
+            <!--Operaciones-->
+            {{#each c1_rows.myOpps}}
+                {{#if Name}}
+                    <tr>
+                        <td>
+                            <a class="btn btn-invisible hideShowGroups" data-id="{{@key}}" href="javascript:void(0);" track="click:" rel="tooltip" data-placement="bottom" title="" name="" data-original-title="Conmutar Visibilidad">
+                                <i class="icon-minus" id="showClient" style="top: -2px;"></i>
+                            </a>
+                            <a href="#Accounts/{{@key}}" target="_blank">{{Name}}</a>
+                        </td>
+                        <td class="personaEstatus">{{getUnifinListValue 'estatus_list' Estatus}}</td>
+                        <td></td>
+                        <td class="BacklogCol">{{customFormatNumber Totals.backlog}}</td>
+                        <td class="PipelineCol">{{customFormatNumber Totals.pipeline}}</td>
+                        <td class="Col30">{{customFormatNumber Totals.treinta}}</td>
+                        <td class="Col60">{{customFormatNumber Totals.sesenta}}</td>
+                        <td class="Col90">{{customFormatNumber Totals.noventa}}</td>
+                        <td class="Col90Plus">{{customFormatNumber Totals.noventamas}}</td>
+                        <td style="text-align:right;"></td>
+                    </tr>
+                {{/if}}
+                {{#each this.Opps}}
+                    <tr class="{{AcctId}}">
+                        <td style="padding-left: 60px;"><a href="#Opportunities/{{OppId}}" target="_blank">{{name}}</a>
+                        </td>
+                        <td class="oppEstatus">{{getUnifinListValue 'estatus_c_operacion_list' estatus_c}}</td>
+                        <td class="oppEstatus">{{activo_nombre_c}}</td>
+                        <td class="BacklogCol">{{customFormatNumber backlog}}</td>
+                        <td class="PipelineCol">{{customFormatNumber pipeline}}</td>
+                        <td class="Col30">{{customFormatNumber treinta}}</td>
+                        <td class="Col60">{{customFormatNumber sesenta}}</td>
+                        <td class="Col90">{{customFormatNumber noventa}}</td>
+                        <td class="Col90Plus">{{customFormatNumber noventamas}}</td>
+                        <td>
+                            <div class="btn-toolbar" style="margin: 0px;">
+                                <div class="btn-group">
+                                    <span class="btn forecastTime forecastTimeB" value="B" title="Mover a Backlog" data-id="{{OppId}}">B</span>
+                                    <!--<span class="btn forecastTime forecastTimeP" value="P" title="Mover a Pipeline" data-id="{{OppId}}">P</span>-->
+                                    <span class="btn forecastTime forecastTime30" value="30" title="Mover a 30" data-id="{{OppId}}">30</span>
+                                    <span class="btn forecastTime forecastTime60" value="60" title="Mover a 60" data-id="{{OppId}}">60</span>
+                                    <span class="btn forecastTime forecastTime90" value="90" title="Mover a 90" data-id="{{OppId}}">90</span>
+                                    <span class="btn forecastTime forecastTime90Mas" value="90Mas" title="Mover a +90" data-id="{{OppId}}">+90</span>
+                                    <span class="btn Notification icon-bell" title="Envia Notificacion" data-id="{{OppId}}" data-assignedUser="{{OppAssignedUser}}" data-name="{{operacion}}"></span>
+                                    <span class="btn Cita icon-calendar" title="Agendar una Cita" data-id="{{OppId}}" data-name="{{operacion}}"></span>
+                                    <span class="btn Llamada icon-phone" title="Agendar una Llamada" data-id="{{OppId}}" data-name="{{operacion}}"></span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {{/each}}
+            {{/each}}
+            <!--Subordinados-->
+            {{#each c1_rows}}
+                {{#if data}}
+                    <tr>
+                        <td style="padding-left: 10px;">
+                            <a class="btn btn-invisible hideShowGroups" data-id="{{@key}}" href="javascript:void(0);" track="click:" rel="tooltip" data-placement="bottom" title="" name="" data-original-title="Conmutar Visibilidad">
+                                <i class="icon-minus" id="showClient" style="top: -2px;"></i>
+                            </a>
+                            <b>{{data}}</b></td>
+                        <td></td>
+                        <td></td>
+                        <td class="BacklogCol subordinadoData">{{customFormatNumber Totals.backlog}}</td>
+                        <td class="PipelineCol subordinadoData">{{customFormatNumber Totals.pipeline}}</td>
+                        <td class="Col30 subordinadoData">{{customFormatNumber Totals.treinta}}</td>
+                        <td class="Col60 subordinadoData">{{customFormatNumber Totals.sesenta}}</td>
+                        <td class="Col90 subordinadoData">{{customFormatNumber Totals.noventa}}</td>
+                        <td class="Col90Plus subordinadoData">{{customFormatNumber Totals.noventamas}}</td>
+                        <td style="text-align:right;"></td>
+                    </tr>
+                {{/if}}
+                <!--Operaciones de Subordinado-->
+                {{#each myOpps}}
+                    <tr class="{{../metadata.id}}">
+                        <td style="padding-left: 40px;">
+                            <a class="btn btn-invisible hideShowGroups" data-id="{{@key}}" href="javascript:void(0);" track="click:" rel="tooltip" data-placement="bottom" title="" name="" data-original-title="Conmutar Visibilidad">
+                                <i class="icon-minus" id="showClient" style="top: -2px;"></i>
+                            </a>
+                            <a href="#Accounts/{{@key}}" target="_blank">{{Name}}</a>
+                        </td>
+                        <td class="personaEstatus">{{getUnifinListValue 'estatus_list' Estatus}}</td>
+                        <td></td>
+                        <td class="BacklogCol">{{customFormatNumber Totals.backlog}}</td>
+                        <td class="PipelineCol">{{customFormatNumber Totals.pipeline}}</td>
+                        <td class="Col30">{{customFormatNumber Totals.treinta}}</td>
+                        <td class="Col60">{{customFormatNumber Totals.sesenta}}</td>
+                        <td class="Col90">{{customFormatNumber Totals.noventa}}</td>
+                        <td class="Col90Plus">{{customFormatNumber Totals.noventamas}}</td>
+                        <td style="text-align:right;"></td>
+                    </tr>
+                    {{#each Opps}}
+                        <tr class="{{AcctId}} {{userId}}">
+                            <td style="padding-left: 80px;">
+                                <a href="#Opportunities/{{OppId}}" target="_blank">{{name}}</a></td>
+                            <td class="oppEstatus">{{getUnifinListValue 'estatus_c_operacion_list' estatus_c}}</td>
+                            <td class="oppEstatus">{{activo_nombre_c}}</td>
+                            <td class="BacklogCol">{{customFormatNumber backlog}}</td>
+                            <td class="PipelineCol">{{customFormatNumber pipeline}}</td>
+                            <td class="Col30">{{customFormatNumber treinta}}</td>
+                            <td class="Col60">{{customFormatNumber sesenta}}</td>
+                            <td class="Col90">{{customFormatNumber noventa}}</td>
+                            <td class="Col90Plus">{{customFormatNumber noventamas}}</td>
+                            <td>
+                                <div class="btn-toolbar" style="margin: 0px;">
+                                    <div class="btn-group">
+                                        <span class="btn forecastTime forecastTimeB" value="B" title="Mover a Backlog" data-id="{{OppId}}">B</span>
+                                       <!-- <span class="btn forecastTime forecastTimeP" value="P" title="Mover a Pipeline" data-id="{{OppId}}">P</span>-->
+                                        <span class="btn forecastTime forecastTime30" value="30" title="Mover a 30" data-id="{{OppId}}">30</span>
+                                        <span class="btn forecastTime forecastTime60" value="60" title="Mover a 60" data-id="{{OppId}}">60</span>
+                                        <span class="btn forecastTime forecastTime90" value="90" title="Mover a 90" data-id="{{OppId}}">90</span>
+                                        <span class="btn forecastTime forecastTime90Mas" value="90Mas" title="Mover a +90" data-id="{{OppId}}">+90</span>
+                                        <span class="btn Notification icon-bell" title="Envia Notificacion" data-id="{{OppId}}" data-assignedUser="{{OppAssignedUser}}" data-owner = "{{OppAssignedUserName}}" data-name="{{operacion}}"></span>
+                                        <span class="btn Cita icon-calendar" title="Agendar una Cita" data-id="{{OppId}}" data-name="{{operacion}}"></span>
+                                        <span class="btn Llamada icon-phone" title="Agendar una Llamada" data-id="{{OppId}}" data-name="{{operacion}}"></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {{/each}}
+                {{/each}}
+            {{/each}}
+
+            <tr class="PromotorTotal">
+                <td class="PromotorTotal" style="text-align: left !important; background: #000042 !important;">
+                    <a class="rowaction btn btn-primary" href="javascript:void(0);" id="expandir_button2" track="click:add_button">
+                        <span class="icon-plus"></span></a>
+                    <a class="rowaction btn btn-primary" href="javascript:void(0);" id="colapsar_button2" track="click:add_button">
+                        <span class="icon-minus"></span></a>
+                </td>
+                <td class="PromotorTotal" style="background: #000042 !important;"></td>
+                <td class="PromotorTotal" style="background: #000042 !important;"></td>
+                <td class="BacklogCol PromotorTotal" style="text-align:right; background: #000042 !important;">{{customFormatNumber c1_rows.grandTotal.backlog}}</td>
+                <td class="PromotorTotal PipelineCol" style="text-align:right; background: #000042 !important;">{{customFormatNumber c1_rows.grandTotal.pipeline}}</td>
+                <td class="PromotorTotal Col30" style="text-align:right; background: #000042 !important;">{{customFormatNumber c1_rows.grandTotal.treinta}}</td>
+                <td class="PromotorTotal Col60" style="text-align:right; background: #000042 !important;">{{customFormatNumber c1_rows.grandTotal.sesenta}}</td>
+                <td class="PromotorTotal Col90" style="text-align:right; background: #000042 !important;">{{customFormatNumber c1_rows.grandTotal.noventa}}</td>
+                <td class="PromotorTotal Col90Plus" style="text-align:right; background: #000042 !important;">{{customFormatNumber c1_rows.grandTotal.noventamas}}</td>
+                <td class="PromotorTotal" style="background: #000042 !important;"></td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.hideShowGroups').click(function () {
+            if ($(this).find('.icon-minus').size() >= 1) {
+                $('.' + $(this).attr('data-id')).hide();
+                $(this).find('.icon-minus').addClass('icon-plus');
+                $(this).find('.icon-minus').removeClass('icon-minus');
+            } else {
+                $('.' + $(this).attr('data-id')).show();
+                $(this).find('.icon-plus').addClass('icon-minus');
+                $(this).find('.icon-plus').removeClass('icon-plus');
+            }
+        });
+
+        $('#colapsar_button').click(function () {
+            $('.hideShowGroups').each(function () {
+                if ($(this).find('.icon-minus').size() >= 1) {
+                    $('.' + $(this).attr('data-id')).hide();
+                    $(this).find('.icon-minus').addClass('icon-plus');
+                    $(this).find('.icon-minus').removeClass('icon-minus');
+                }
+            });
+        });
+
+        $('#colapsar_button2').click(function () {
+            $('#colapsar_button').click();
+        });
+
+        $('#expandir_button').click(function () {
+            $('.hideShowGroups').each(function () {
+                $('.' + $(this).attr('data-id')).show();
+                $(this).find('.icon-plus').addClass('icon-minus');
+                $(this).find('.icon-plus').removeClass('icon-plus');
+            });
+        });
+
+        $('#expandir_button2').click(function () {
+            $('#expandir_button').click();
+        });
+
+
+       //JS: Estado Inicial, si activa la linea de abajo, el dashlet se dibujara colapsado.
+       // $('#colapsar_button').click();
+    });
+
+
+</script>
+
