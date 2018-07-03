@@ -32,7 +32,7 @@
         'change #multi1': 'updateValueIndicadorMultiselect',
         'change select.existingMultiClass': 'updateValueIndicadorExisting',
         //'change .existingMultiClass': 'updateIndicador',
-
+        //CAMBIO DESDE branchSLB
     },
     _flag2Deco: {
         principal: {lbl: "LBL_DIRECCION_PRIMARY", cl: "primary"},
