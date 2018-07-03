@@ -5,6 +5,9 @@
  * Date: 29/01/18
  * Time: 15:54
  */
+
+//Cambio AF
+
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 class ResumenClienteAPI extends SugarApi
