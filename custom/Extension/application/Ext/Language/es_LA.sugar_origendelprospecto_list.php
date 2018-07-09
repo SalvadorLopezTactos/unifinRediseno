@@ -1,10 +1,10 @@
 <?php
- // created: 2018-06-27 18:20:05
+ // created: 2018-07-03 17:19:53
 
 $app_list_strings['origendelprospecto_list']=array (
   '' => '',
   'Prospeccion propia' => 'Prospección propia',
-  'Director' => 'Director',
+  'Referido Director' => 'Referido Director',
   'Referido Cliente' => 'Referido Cliente',
   'Referido Proveedor' => 'Referido Proveedor',
   'Referenciador' => 'Referido Referenciador',

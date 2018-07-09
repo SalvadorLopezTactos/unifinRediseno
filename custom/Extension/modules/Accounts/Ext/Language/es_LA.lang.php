@@ -249,3 +249,4 @@ $mod_strings['LBL_COMENTA_FACTORAJE'] = 'Comentarios';
 $mod_strings['LBL_FECHA_CA'] = 'Fecha';
 $mod_strings['LBL_COMENTA_CA'] = 'Comentarios';
 $mod_strings['LBL_RECORDVIEW_PANEL10'] = 'NPS';
+$mod_strings['LBL_TCT_PUNTO_CONTACTO_DDW'] = 'Punto de Contacto';

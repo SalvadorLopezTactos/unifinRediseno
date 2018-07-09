@@ -1,7 +1,11 @@
 ({
     extendsFrom: 'RecordView',
 
-	initialize: function (options) {
+    events: {
+      'click [name=cancel_button]': 'cancelClicked',
+    },
+        
+	  initialize: function (options) {
 		self = this;
 		this._super("initialize", [options]);
 		/*
@@ -26,8 +30,8 @@
 		*/
 
 		this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
-        this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
-        this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
+    this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
+    this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
 
 		this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
 		this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
@@ -317,6 +321,11 @@
             this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje Renta Inicial");
         }
 	  },
+
+    cancelClicked: function () {
+       this._super('cancelClicked');
+       window.contador=0;
+    },
 
     delegateButtonEvents: function () {
 			this._super("delegateButtonEvents");
