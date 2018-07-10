@@ -347,6 +347,21 @@
                 delete new_options[key];
             }
         });
+
+        //eliminar Lead
+        var checkrol=0;
+        for (var i = 0; i < App.user.attributes.roles.length; i++) {
+            if(App.user.attributes.roles[i]=="Planeacion y Estrategia Comercial"){
+                checkrol++;
+            }
+        }
+        Object.keys(new_options).forEach(function(key) {
+            if(key == "Lead" && checkrol>0){
+                delete new_options[key];
+            }
+        });
+        //fin
+
         this.model.fields['tipo_registro_c'].options = new_options;
 
         this.model.on('change:name', this.cleanName, this);
