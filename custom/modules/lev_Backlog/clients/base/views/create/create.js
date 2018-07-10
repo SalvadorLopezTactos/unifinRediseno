@@ -163,7 +163,7 @@
         }
 
         this.model.fields['mes'].options = opciones_mes;
-        this.model.set("mes", '');
+        //this.model.set("mes", '');
         if(stage != "loading"){
             this.render();
         }
