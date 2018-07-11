@@ -3,3 +3,4 @@
 $mod_strings['LBL_NUMEROCUENTA'] = 'Número de Cuenta';
 $mod_strings['LBL_NUMERODECUENTA'] = 'NumerodeCuenta';
 $mod_strings['LBL_LINEA_CREDITO'] = 'Depósitos promedio';
+$mod_strings['LBL_REFBA_REFERENCIA_BANCARIA_ACCOUNTS_FROM_ACCOUNTS_TITLE'] = 'Cuentas';

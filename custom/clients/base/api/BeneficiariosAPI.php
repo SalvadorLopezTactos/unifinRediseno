@@ -3,8 +3,9 @@
  * @author: CVV
  * @date: 21/04/2017
  * @comments: Rest API to display Beneficiarios list
- */
+*/
 
+//Hello world 
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 class BeneficiariosAPI extends SugarApi
 {
