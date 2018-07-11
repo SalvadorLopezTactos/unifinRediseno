@@ -21,3 +21,4 @@ $mod_strings['LBL_TCT_TEAM_ADDRESS_TXF_C'] = 'Dirección';
 $mod_strings['LBL_CAC'] = 'CAC';
 $mod_strings['LBL_PUESTOID'] = 'puestoid';
 $mod_strings['LBL_OPTOUT'] = 'No recibir notificaciones/Reasignación de promotores';
+$mod_strings['LBL_TCT_ALTAPROVEEDOR_CHK'] = 'Alta Proveedor';

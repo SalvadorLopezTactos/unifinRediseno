@@ -32,6 +32,8 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['puestousuario_c'] = $current_user->puestousuario_c;
         $userArray['current_user']['region_c'] = $current_user->region_c;
         $userArray['current_user']['tipodeproducto_c'] = $current_user->tipodeproducto_c;
+        // agregar deficnicion campo nuevo
+        $userArray['current_user']['tct_altaproveedor_chk_c'] = $current_user->tct_altaproveedor_chk_c;
 
         return $userArray;
     }

@@ -171,6 +171,16 @@
         this.model.set("tipo_registro_c", 'Cliente');
         this.model.set("tipo_registro_c", 'Prospecto');
         //callback(null, fields, errors);
+
+        /* @author F. Javier Garcia S. 10/07/2018
+                 "El tipo de cuenta ""Proveedor"" sólo podrá ser seleccionado por los roles
+                  de Compras y el BackOffice de CA"
+              */
+        if(App.user.attributes.tct_altaproveedor_chk_c) {
+
+            this.model.set("tipo_registro_c", 'Proveedor');
+
+        }
     },
 
     initialize: function (options) {
@@ -354,7 +364,7 @@
             }
         });
 
-        //eliminar Lead
+      //eliminar Lead
         var checkrol=0;
         for (var i = 0; i < App.user.attributes.roles.length; i++) {
             if(App.user.attributes.roles[i]=="Planeacion y Estrategia Comercial"){
