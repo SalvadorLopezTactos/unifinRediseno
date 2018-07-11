@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created by Jorge on 6/16/2015.
  */
 ({
@@ -62,6 +62,12 @@
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL6']").hide();
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL9']").hide();
 
+        /* @author F. Javier Garcia S. 10/07/2018
+            Agregar dependencia al panel NPS, para ser visible si "Tipo de Cuenta" es "Cliente".
+         */
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
+
+        
         /*
          AF: 11/01/18
          Merge create-create-actions.js
@@ -347,6 +353,21 @@
                 delete new_options[key];
             }
         });
+
+        //eliminar Lead
+        var checkrol=0;
+        for (var i = 0; i < App.user.attributes.roles.length; i++) {
+            if(App.user.attributes.roles[i]=="Planeacion y Estrategia Comercial"){
+                checkrol++;
+            }
+        }
+        Object.keys(new_options).forEach(function(key) {
+            if(key == "Lead" && checkrol>0){
+                delete new_options[key];
+            }
+        });
+        //fin
+
         this.model.fields['tipo_registro_c'].options = new_options;
 
         this.model.on('change:name', this.cleanName, this);
@@ -862,13 +883,16 @@
     //No aceptar numeros, solo letras (a-z), puntos(.) y comas(,)
     checkTextOnly:function(evt){
         //console.log(evt.keyCode);
-        if($.inArray(evt.keyCode,[9,16,17,110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,16,32,192,186]) < 0){
-            app.alert.show("Caracter Invalido", {
-                level: "error",
-                title: "Solo texto es permitido en este campo.",
-                autoClose: true
-            });
-            return false;
+        if($.inArray(evt.keyCode,[9,16,17,110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,16,32,192]) < 0){
+	    if(evt.keyCode != 186)
+	    {
+            	app.alert.show("Caracter Invalido", {
+                	level: "error",
+                	title: "Solo texto es permitido en este campo.",
+                	autoClose: true
+            	});
+            	return false;
+	    }
         }
     },
 

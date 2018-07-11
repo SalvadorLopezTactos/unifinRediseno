@@ -14,7 +14,7 @@
     {
         public function nivelSatisfaccion($bean = null, $event = null, $args = null)
         {
-    			if($bean->fetched_row['nivel_satisfaccion_c'] != $bean->nivel_satisfaccion_c)
+    			if($bean->fetched_row['nivel_satisfaccion_c'] != $bean->nivel_satisfaccion_c && $bean->nivel_satisfaccion_c != 'Sin Clasificar')
     			{
     				//Crea Notificacion al Promotor Leasing
     				$notification_bean = BeanFactory::getBean("Notifications");
@@ -40,7 +40,7 @@
     				$notification_bean->is_read = 0;
     				$notification_bean->save();
     			}
-    			if($bean->fetched_row['nivel_satisfaccion_factoring_c'] != $bean->nivel_satisfaccion_factoring_c)
+    			if($bean->fetched_row['nivel_satisfaccion_factoring_c'] != $bean->nivel_satisfaccion_factoring_c && $bean->nivel_satisfaccion_factoring_c != 'Sin Clasificar')
     			{
     				//Crea Notificacion al Promotor Factoraje
     				$notification_bean = BeanFactory::getBean("Notifications");
@@ -66,7 +66,7 @@
     				$notification_bean->is_read = 0;
     				$notification_bean->save();
     			}
-    			if($bean->fetched_row['nivel_satisfaccion_ca_c'] != $bean->nivel_satisfaccion_ca_c)
+    			if($bean->fetched_row['nivel_satisfaccion_ca_c'] != $bean->nivel_satisfaccion_ca_c && $bean->nivel_satisfaccion_ca_c != 'Sin Clasificar')
     			{
     				//Crea Notificacion al Promotor Leasing
     				$notification_bean = BeanFactory::getBean("Notifications");

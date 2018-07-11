@@ -866,7 +866,7 @@ SQL;
                 $host = "http://" . $GLOBALS['unifin_url'] . "/Uni2WsClnt/WsRest/Uni2ClntService.svc/Uni2/ActualizaRelacion";
                 //Obtienes los id_cliente de la personas que se estan asociando
                 $query = <<<SQL
-                SELECT cliente.idcliente_c id_cliente, relacionado.idcliente_c id_relacionado
+                SELECT cliente.idcliente_c id_cliente, relacionado.idcliente_c id_relacionado, rel.deleted deleted
 FROM rel_relaciones_accounts_c rel
   inner join accounts_cstm cliente on rel.rel_relaciones_accountsaccounts_ida = cliente.id_c
   inner join rel_relaciones_cstm rel2 on rel2.id_c=rel.rel_relaciones_accountsrel_relaciones_idb
@@ -879,6 +879,7 @@ SQL;
                 $IntValue = new DropdownValuesHelper();
                 $GLOBALS['log']->fatal(" <".$current_user->user_name."> Fila de resultado" . print_r($row,true));
                 $relacionesActivas = str_replace('^', '', $object->relaciones_activas);
+                if($row['deleted'] == 1) $relacionesActivas = '';
                 $ContieneContacto = strpos($relacionesActivas, 'Contacto') >= 0 ? true : false;
                 $ContieneAccionista = strpos($relacionesActivas, 'Accionista') >= 0 ? true : false;
                 //Las relaciones de Beneficiario no se sincronizan con UNICS
@@ -895,7 +896,6 @@ SQL;
                 }else{
                     $GLOBALS['log']->fatal(" <".$current_user->user_name."> NO Se identificó relacion Beneficiario en:" . print_r($relacionesActivas,true));
                 }
-
                 $fields = array(
                     "oActualizaRelacion" => array(
                         "IdCliente" => intval($row['id_cliente']),

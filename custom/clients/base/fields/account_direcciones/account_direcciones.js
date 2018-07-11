@@ -32,7 +32,6 @@
         'change #multi1': 'updateValueIndicadorMultiselect',
         'change select.existingMultiClass': 'updateValueIndicadorExisting',
         //'change .existingMultiClass': 'updateIndicador',
-        //Cambio desde branch SLB
 
     },
     _flag2Deco: {
@@ -621,7 +620,7 @@
             $selColonia.append($("<option>").val('').html(''));
             var url = app.api.buildURL("dire_Colonia", null, null, {
                 fields: "name",
-                max_num: 50,
+                max_num: 100,
                 "filter": [
                     {
                         "id": {
