@@ -7,5 +7,4 @@ $app_list_strings['tipo_registro_list']=array (
   'Cliente' => 'Cliente',
   'Persona' => 'Persona',
   'Proveedor' => 'Proveedor',
-  'Lead' => 'Lead',
 );
