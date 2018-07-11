@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Author levementum.com - jescamilla@levementum.com, jgarcia@levementum.com
  * File:  custom/modules/Accounts/clients/base/views/create-nodupecheck/create-nodupecheck.js
  *
@@ -551,12 +551,15 @@
     //No aceptar numeros, solo letras (a-z), puntos(.) y comas(,)
     checkTextOnly:function(evt){
         if($.inArray(evt.keyCode,[9,16,17,110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,16,32,192]) < 0){
-            app.alert.show("Caracter Invalido", {
-                level: "error",
-                title: "Solo texto es permitido en este campo.",
-                autoClose: true
-            });
-            return false;
+	    if(evt.keyCode != 186)
+	    {
+            	app.alert.show("Caracter Invalido", {
+                	level: "error",
+                	title: "Solo texto es permitido en este campo.",
+                	autoClose: true
+            	});
+            	return false;
+	    }
         }
     },
 
