@@ -5,5 +5,6 @@ $dictionary['Account']['fields']['fechadenacimiento_c']['labelValue']='Fecha de 
 $dictionary['Account']['fields']['fechadenacimiento_c']['enforced']='';
 $dictionary['Account']['fields']['fechadenacimiento_c']['dependency']='not(equal($tipodepersona_c,"Persona Moral"))';
 $dictionary['Account']['fields']['fechadenacimiento_c']['enable_range_search']='1';
+$dictionary['Account']['fields']['fechadenacimiento_c']['full_text_search']['boost'] = 1;
 
  ?>
