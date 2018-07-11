@@ -1,5 +1,5 @@
 <?php
- // created: 2018-07-05 19:02:07
+ // created: 2018-07-11 14:06:12
 
 $app_list_strings['medio_digital_list']=array (
   '' => '',
