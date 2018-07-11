@@ -5,3 +5,4 @@ $mod_strings['LBL_PERSONA'] = 'Persona';
 $mod_strings['LBL_NUEVO'] = 'Nuevo';
 $mod_strings['LBL_JEFE_NUEVO'] = 'jefe nuevo';
 $mod_strings['LBL_JEFE_ANTERIOR'] = 'jefe anterior';
+$mod_strings['LBL_TCT2_NOTIFICACIONES_ACCOUNTS_FROM_ACCOUNTS_TITLE'] = 'Cuentas';

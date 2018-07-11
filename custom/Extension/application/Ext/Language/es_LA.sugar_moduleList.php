@@ -1,8 +1,8 @@
 <?php
-// created: 2018-02-13 08:54:24
+// created: 2018-07-11 11:38:28
 $app_list_strings['moduleList']['Home'] = 'Inicio';
 $app_list_strings['moduleList']['Contacts'] = 'Contactos';
-$app_list_strings['moduleList']['Accounts'] = 'Personas';
+$app_list_strings['moduleList']['Accounts'] = 'Cuentas';
 $app_list_strings['moduleList']['Opportunities'] = 'Operaciones';
 $app_list_strings['moduleList']['Cases'] = 'Casos';
 $app_list_strings['moduleList']['Notes'] = 'Notas';
@@ -36,7 +36,6 @@ $app_list_strings['moduleList']['BT_Bitacora_Operaciones'] = 'Bitacora de Operac
 $app_list_strings['moduleList']['uni_Brujula'] = 'Brujula';
 $app_list_strings['moduleList']['uni_Citas'] = 'Citas';
 $app_list_strings['moduleList']['lev_CondicionesFinancieras'] = 'Condiciones Financieras';
-$app_list_strings['moduleList']['UNI_condiciones_iniciales'] = 'Condiciones Iniciales';
 $app_list_strings['moduleList']['dire_Pais'] = 'Pais';
 $app_list_strings['moduleList']['dire_Estado'] = 'Estados';
 $app_list_strings['moduleList']['dire_Ciudad'] = 'Ciudades';
@@ -45,9 +44,12 @@ $app_list_strings['moduleList']['dire_CodigoPostal'] = 'Codigo Postal';
 $app_list_strings['moduleList']['dire_Colonia'] = 'Colonias';
 $app_list_strings['moduleList']['dire_Direccion'] = 'Direcciones';
 $app_list_strings['moduleList']['emp_empleo'] = 'Empleos';
+$app_list_strings['moduleList']['TCT2_Notificaciones'] = 'Notificaciones';
+$app_list_strings['moduleList']['TCT1_P_Fideicomiso'] = 'Personas Fideicomiso';
 $app_list_strings['moduleList']['RefBa_Referencia_Bancaria'] = 'Referencias Bancarias';
 $app_list_strings['moduleList']['Rel_Relaciones'] = 'Relaciones';
 $app_list_strings['moduleList']['Tel_Telefonos'] = 'Telefonos';
+$app_list_strings['moduleList']['TCT_UsersPlatform'] = 'Sesión Usuarios';
 $app_list_strings['moduleList']['Val_Validaciones'] = 'Validaciones';
-$app_list_strings['moduleList']['TCT1_P_Fideicomiso'] = 'Personas Fideicomiso';
+$app_list_strings['moduleList']['UNI_condiciones_iniciales'] = 'Condiciones Iniciales';
 $app_list_strings['moduleList']['RevenueLineItems'] = 'Líneas de Ingreso';

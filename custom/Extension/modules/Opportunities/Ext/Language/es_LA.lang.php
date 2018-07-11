@@ -1,8 +1,8 @@
 <?php
 // WARNING: The contents of this file are auto-generated.
-$mod_strings['LBL_ACCOUNT_NAME'] = 'Persona:';
-$mod_strings['LBL_ACCOUNT_ID'] = 'ID de Persona';
-$mod_strings['LBL_LIST_ACCOUNT_NAME'] = 'Persona';
+$mod_strings['LBL_ACCOUNT_NAME'] = 'Cuenta:';
+$mod_strings['LBL_ACCOUNT_ID'] = 'ID de Cuenta';
+$mod_strings['LBL_LIST_ACCOUNT_NAME'] = 'Cuenta';
 $mod_strings['LNK_NEW_OPPORTUNITY'] = 'Nueva Operacion';
 $mod_strings['LNK_CREATE'] = 'Nueva Venta';
 $mod_strings['LBL_MODULE_NAME'] = 'Operaciones';
@@ -151,3 +151,4 @@ $mod_strings['LBL_ACCESORIOS'] = 'Accesorios';
 $mod_strings['LBL_SEGURO_VIDA'] = 'Seguro de Vida';
 $mod_strings['LBL_SEGURO_DESEMPLEO'] = 'Seguro de Desempleo';
 $mod_strings['LBL_RI_ANIO'] = 'LBL_RI_ANIO';
+$mod_strings['LBL_ACCOUNTS_OPPORTUNITIES_1_FROM_ACCOUNTS_TITLE'] = 'Cuentas';
