@@ -62,6 +62,12 @@
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL6']").hide();
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL9']").hide();
 
+        /* @author F. Javier Garcia S. 10/07/2018
+            Agregar dependencia al panel NPS, para ser visible si "Tipo de Cuenta" es "Cliente".
+         */
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
+
+        
         /*
          AF: 11/01/18
          Merge create-create-actions.js

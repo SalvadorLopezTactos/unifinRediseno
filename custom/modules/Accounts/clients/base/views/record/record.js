@@ -453,9 +453,27 @@
         //Solo Lectura campos Origen
         this.readOnlyOrigen();
 
+        /* @author F. Javier Garcia S. 10/07/2018
+            Agregar dependencia al panel NPS, para ser visible si "Tipo de Cuenta" es "Cliente".
+         */
+        this._hideNPS();
         
 
     },
+
+
+    /* @author F. Javier Garcia S. 10/07/2018
+                Funcion para  ser visible panel NPS si "Tipo de Cuenta" es "Cliente".
+             */
+
+    _hideNPS: function()
+    {
+        if(this.model.get('tipo_registro_c')!="Cliente")
+        {
+            this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
+        }
+    },
+
 
     /*
      @author Salvador Lopez
