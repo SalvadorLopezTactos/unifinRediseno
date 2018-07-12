@@ -1,5 +1,5 @@
 <?php
-// created: 2018-02-16 20:36:01
+// created: 2018-07-11 13:58:08
 $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'] = array (
   'type' => 'subpanel-list',
   'rowactions' => 
