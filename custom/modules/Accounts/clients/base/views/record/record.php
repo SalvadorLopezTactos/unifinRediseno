@@ -192,6 +192,9 @@ array (
                 'name' => 'deudor_factor_c',
                 'label' => 'LBL_DEUDOR_FACTOR',
               ),
+              3 => 
+              array (
+              ),
             ),
           ),
           3 => 
@@ -341,6 +344,8 @@ array (
               ),
               17 => 
               array (
+                'name' => 'puesto_c',
+                'label' => 'LBL_PUESTO',
               ),
               18 => 
               array (
@@ -355,6 +360,8 @@ array (
               ),
               21 => 
               array (
+                'name' => 'linkedin_c',
+                'label' => 'LBL_LINKEDIN',
               ),
               22 => 'twitter',
               23 => 
