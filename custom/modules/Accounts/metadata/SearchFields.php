@@ -1,5 +1,5 @@
 <?php
-// created: 2018-07-02 13:32:31
+// created: 2018-07-11 14:58:02
 $searchFields['Accounts'] = array (
   'name' => 
   array (
@@ -271,6 +271,10 @@ $searchFields['Accounts'] = array (
     'query_type' => 'default',
   ),
   'account_leasing' => 
+  array (
+    'query_type' => 'default',
+  ),
+  'asignar_a_promotor' => 
   array (
     'query_type' => 'default',
   ),
