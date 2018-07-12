@@ -449,7 +449,7 @@
     {
         var tipo = this.model.get('tipo_registro_c');
         var puesto = app.user.get('puestousuario_c');
-        if((tipo=="Prospecto" || tipo=="Cliente") && (puesto==6 || puesto==12 || puesto==17))
+        if((tipo=="Prospecto" || tipo=="Cliente"|| tipo=="Lead") && (puesto==6 || puesto==12 || puesto==17))
         {
             $('[name="save_button"]').hide();
         }
