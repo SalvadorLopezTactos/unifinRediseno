@@ -437,8 +437,8 @@ SQL;
         public function crearFolioCliente($bean = null, $event = null, $args = null)
         {
             global $current_user;
-            if (($bean->idcliente_c == '' || $bean->idcliente_c == '0') && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_c == 'Cliente' 
-            	|| $bean->tipo_registro_c == 'Proveedor' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != ""))) {
+            if (($bean->idcliente_c == '' || $bean->idcliente_c == '0' ) && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_c == 'Cliente'
+            	|| $bean->tipo_registro_c == 'Proveedor' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c )) {
                 global $db;
                 $callApi = new UnifinAPI();
                 $numeroDeFolio = $callApi->generarFolios(1);
@@ -586,21 +586,44 @@ SQL;
         /* CVV INICIO**/
         public function clienteCompleto($bean = null, $event = null, $args = null)
         {
+
             /*** ALI INICIO ***/
             if($bean->canal_c == 1 && $bean->sincronizado_unics_c == '0')
             {
+                $GLOBALS['log']-> fatal ("1");
                 $callApi = new UnifinAPI();
                 $cliente = $callApi->InsertaPersona($bean);
                 $this->emailChangetoUnics($bean);
             }
             else
             {
-                if(($bean->tipo_registro_c != 'Persona' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != "")) && $bean->sincronizado_unics_c == '0') { 
+                $GLOBALS['log']-> fatal ("000000005");
+
+                if(($bean->tipo_registro_c != 'Persona' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != "")) && $bean->sincronizado_unics_c == '0') {
+                    $GLOBALS['log']-> fatal ("0000000010");
                     if ($bean->estatus_c == 'Interesado' || ($bean->tipo_registro_c != 'Prospecto' && $_SESSION['estadoPersona'] == 'insertando')) {
+                        $GLOBALS['log']-> fatal ("Entre por nativo");
                         $callApi = new UnifinAPI();
                         $cliente = $callApi->insertarClienteCompleto($bean);
                     }
                 }
+                /**
+                 * F. Javier G. Solar 12/07/2018
+                 * Se realiza el proceso de envió de cuenta al sistema UNICS, solo si no se ha
+                realizado.
+                Conservar los campos que sean obligatorios de acuerdo a la opción
+                seleccionada
+
+                 */
+                 if(($bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c)&& $bean->sincronizado_unics_c == '0' )
+                {
+                    $GLOBALS['log']-> fatal ("Entre por check");
+                    $callApi = new UnifinAPI();
+                    $cliente = $callApi->insertarClienteCompleto($bean);
+
+
+                }
+
             }
             $this->actualizaOportunidadProspecto($bean);
             /*** ALI FIN ***/

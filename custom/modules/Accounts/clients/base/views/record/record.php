@@ -221,9 +221,6 @@ array (
               ),
               2 => 
               array (
-              ),
-              3 => 
-              array (
                 'name' => 'tct_origen_ag_tel_rel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_ORIGEN_AG_TEL_REL',
@@ -236,6 +233,9 @@ array (
                     0 => '27',
                   ),
                 ),
+              ),
+              3 => 
+              array (
               ),
             ),
           ),
@@ -547,26 +547,6 @@ array (
               array (
               ),
               83 => 
-              array (
-              ),
-              84 => 
-              array (
-              ),
-              85 => 
-              array (
-              ),
-              86 => 
-              array (
-              ),
-              87 => 
-              array (
-              ),
-              88 => 
-              array (
-                'name' => 'show_panel_c',
-                'label' => 'LBL_SHOW_PANEL',
-              ),
-              89 => 
               array (
               ),
             ),
