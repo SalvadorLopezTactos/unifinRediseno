@@ -568,6 +568,8 @@ array (
               ),
               89 => 
               array (
+                  'name' => 'tct_prospecto_contactado_chk_c',
+                  'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
               ),
             ),
           ),

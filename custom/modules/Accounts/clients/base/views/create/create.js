@@ -62,6 +62,9 @@
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL6']").hide();
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL9']").hide();
 
+        //Ocultar Div "Prospecto Contactado"
+        $('div[data-name=tct_prospecto_contactado_chk_c]').hide();
+
         /* @author F. Javier Garcia S. 10/07/2018
             Agregar dependencia al panel NPS, para ser visible si "Tipo de Cuenta" es "Cliente".
          */
@@ -381,6 +384,10 @@
         this.model.fields['tipo_registro_c'].options = new_options;
 
         this.model.on('change:name', this.cleanName, this);
+/*
+        //Ocultar Div "Prospecto Contactado"
+        this.$('div[data-name=tct_prospecto_contactado_chk_c]').hide();
+  */
     },
 
     /** BEGIN CUSTOMIZATION:
