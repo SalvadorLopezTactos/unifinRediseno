@@ -330,7 +330,16 @@ class UnifinAPI
                         $objecto->tipo_registro_c = $tipo_registro;
                         $objecto->sincronizado_unics_c = '1';
                         global $db;
-                        $query = " UPDATE accounts_cstm SET tipo_registro_c = '$tipo_registro', sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
+                       //$query = " UPDATE accounts_cstm SET tipo_registro_c = '$tipo_registro', sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
+                        /*
+                        * F. Javier G. Solar 13/07/2018
+                         * se seleccionan los checks de Proveedor, Cedente
+                            Factoraje o Deudor Factoraje se realiza el proceso de envió de cuenta al sistema UNICS, solo si no se ha
+                            realizado.
+                             Conservar los campos que sean obligatorios de acuerdo a la opción
+                            seleccionada
+                        */
+                        $query = " UPDATE accounts_cstm SET sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
                         $queryResult = $db->query($query);
 
                         //CVV se actualiza el campo sincronizado_unics de las direcciones del cliente
