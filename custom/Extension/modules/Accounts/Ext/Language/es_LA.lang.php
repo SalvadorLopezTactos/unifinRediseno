@@ -277,5 +277,6 @@ $mod_strings['LBL_CURRENCY_10'] = 'LBL_CURRENCY';
 $mod_strings['LBL_POTENCIAL_CUENTA'] = 'Potencial de la Cuenta';
 $mod_strings['LBL_SUBTIPO_CUENTA'] = 'Subtipo de Cuenta';
 $mod_strings['LBL_RECORDVIEW_PANEL16'] = 'Origen';
-$mod_strings['LBL_TCT_PROSPECTO_CONTACTADO_CHK'] = 'Prospecto Contactado';
 $mod_strings['LBL_PUESTO'] = 'Puesto';
+$mod_strings['LBL_LINKEDIN'] = 'Cuenta en LinkedIn';
+$mod_strings['LBL_TCT_PROSPECTO_CONTACTADO_CHK'] = 'Prospecto Contactado';

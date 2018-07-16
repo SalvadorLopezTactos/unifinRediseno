@@ -1,7 +1,8 @@
 <?php
- // created: 2018-07-12 12:43:05
+ // created: 2018-07-13 12:17:12
 
 $app_list_strings['puesto_list']=array (
+  '' => '',
   'Duenio' => 'Dueño',
   'Accionistas' => 'Accionistas',
   'Director General' => 'Director General',
