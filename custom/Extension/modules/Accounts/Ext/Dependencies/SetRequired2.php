@@ -347,3 +347,23 @@ $dependencies['Accounts']['tct_fedeicomiso_c21_ddw'] = array(
         ),
     ),
 );
+
+//Adrian Arauz 12/07/18
+//Campo Nombre Comercial requerido para ciertos casos (prospecto/contactado)
+
+$dependencies['Accounts']['nombre_comercial_c_requerido'] = array(
+    'hooks' => array("edit"),
+    'trigger' => 'true',
+    'triggerFields' => array('nombre_comercial_c','tipodepersona_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'nombre_comercial_c',
+                'label' => 'nombre_comercial_c_label',
+                'value' => 'equal($tipodepersona_c,"Persona Moral")',
+            ),
+        ),
+    ),
+);

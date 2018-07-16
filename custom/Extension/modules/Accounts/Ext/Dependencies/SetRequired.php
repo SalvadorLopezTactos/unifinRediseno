@@ -36,7 +36,7 @@
     $dependencies['Accounts']['RazonSocial_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c','razonsocial_c'),
+            'triggerFields' => array('tipodepersona_c','razonsocial_c','subtipo_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -44,16 +44,17 @@
                             'params' => array(
                                     'target' => 'razonsocial_c',
                                     'label' => 'razonsocial_c_label',
-                                    'value' => 'equal($tipodepersona_c,"Persona Moral")', //Formula
+                                    'value' => 'and(equal($tipodepersona_c,"Persona Moral"),equal($subtipo_cuenta_c,"Interesado"))', //Formula
                             ),
                     ),
             ),
     );
-
+//Esta dependencia entra en conflicto con el campo requerido (el RFC)
 	$dependencies['Accounts']['RFC_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipo_registro_c','rfc_c'),
+            //'triggerFields' => array('tipo_registro_c','subtipo_cuenta_c','rfc_c'),
+              'triggerFields' => array('$tipodepersona_c','subtipo_cuenta_c','rfc_c','tipo_registro_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -61,7 +62,8 @@
                             'params' => array(
                                     'target' => 'rfc_c',
                                     'label' => 'rfc_c_label',
-                                    'value' => 'and(not(equal($tipo_registro_c,"Persona"  )),not(equal($tipo_registro_c,"Prospecto")))',
+                                    //'value' => 'and(not(equal($tipo_registro_c,"Persona" )),not(equal($tipo_registro_c,"Prospecto")))',
+                                    'value' => 'and(equal($tipodepersona_c,"Persona Fisica"), equal($tipo_registro_c,"Prospecto"), equal($subtipo_cuenta_c,"Integracion de Expediente"))',
                             ),
                     ),
             ),
@@ -103,11 +105,11 @@
                     ),
             ),
     );
-
+//Se añade la dependencia para subtipo de cuenta Integracion de Expediente. Se añade $subtipo_cuenta_c solamente.
 	$dependencies['Accounts']['estadocivil_c_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c', 'estatus_c'),
+            'triggerFields' => array('tipodepersona_c', 'estatus_c','subtipo_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -115,16 +117,16 @@
                             'params' => array(
                                     'target' => 'estadocivil_c',
                                     'label' => 'estadocivil_c_label',
-                                    'value' => 'and(not(equal($tipodepersona_c,"Persona Moral")), or(equal($tipo_registro_c,"Cliente"), equal($estatus_c,"Interesado")))',
+                                    'value' => 'and(not(equal($tipodepersona_c,"Persona Moral")), or(equal($tipo_registro_c,"Cliente"), equal($estatus_c,"Interesado")),equal($subtipo_cuenta_c,"Integracion de Expediente"))',
                             ),
                     ),
             ),
     );
-
+//Cambio de dependencia para integracion de expediente, se añade el subtipo de cuenta
     $dependencies['Accounts']['Genero_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c', 'estatus_c','genero_c'),
+            'triggerFields' => array('tipodepersona_c','genero_c','subtipo_cuenta_c','tipo_registro_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -132,16 +134,17 @@
                             'params' => array(
                                     'target' => 'genero_c',
                                     'label' => 'genero_c_label',
-                                    'value' => 'and(not(equal($tipodepersona_c,"Persona Moral")), or(equal($tipo_registro_c,"Cliente"), equal($estatus_c,"Interesado")))',
+                                    'value' => 'and(not(equal($tipodepersona_c,"Persona Moral")), or(equal($tipo_registro_c,"Cliente"),equal($tipo_registro_c,"Cliente"),equal($estatus_c,"Interesado"),
+                                    and(equal($subtipo_cuenta_c,"Integracion de Expediente"))))',
                             ),
                     ),
             ),
     );
-
+//Linea 157 se añade el requerimento de integracion de expediente, en la 156 se tenía: not(equal($tipo_registro_c,"Prospecto")) Ya se añadió en Cliente.
     $dependencies['Accounts']['fechaNacimiento_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c', 'estatus_c','tipo_registro_c','fechadenacimiento_c'),
+            'triggerFields' => array('tipodepersona_c', 'estatus_c','tipo_registro_c','fechadenacimiento_c','subtipo_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -151,7 +154,8 @@
                                     'label' => 'fechadenacimiento_c_label',
                                     'value' => 'and(not(equal($tipodepersona_c,"Persona Moral")),
                                     and(not(equal($tipo_registro_c,"Persona")),
-                                        not(equal($tipo_registro_c,"Prospecto"))
+                                       
+                                    or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"))
                                         )
                                     )',
                             ),
@@ -162,7 +166,7 @@
 	$dependencies['Accounts']['fechaconstitutiva_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c', 'estatus_c','tipo_registro_c','fechaconstitutiva_c'),
+            'triggerFields' => array('tipodepersona_c', 'estatus_c','tipo_registro_c','fechaconstitutiva_c','subtipo_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -173,17 +177,18 @@
                                     'value' => 'and(equal($tipodepersona_c,"Persona Moral"),
                                     and(not(equal($tipo_registro_c,"Persona")),
                                         not(equal($tipo_registro_c,"Prospecto"))
+                                        and(equal($subtipo_cuenta_c,"Integracion de Expediente"))
                                         )
                                     )',
                             ),
                     ),
             ),
     );
-
+//Queda a prueba ya que una condicion de visibilidad en Studio.Añadir prospecto e interesado solamente. 16/07/18 actualizado
     $dependencies['Accounts']['Pais_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('pais_nacimiento_c','tipodepersona_c', 'estatus_c','tipo_registro_c'),
+            'triggerFields' => array('pais_nacimiento_c','estatus_c','tipo_registro_c','subtipo_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -191,16 +196,16 @@
                             'params' => array(
                                     'target' => 'pais_nacimiento_c',
                                     'label' => 'pais_nacimiento_c_label',
-                                    'value' => 'or(equal($tipo_registro_c,"Cliente"),  equal($estatus_c,"Interesado"), equal($tipo_registro_c,"Proveedor"))',
+                                    'value' => 'or(equal($tipo_registro_c,"Cliente"),  equal($estatus_c,"Interesado"), equal($tipo_registro_c,"Proveedor"),equal($subtipo_cuenta_c,"Integracion de Expediente"))',
                             ),
                     ),
             ),
     );
-
+//Modificacion para  persona fisica, prospecto e integracion de expediente, se añade el subtipo de cuenta solamente y su valor en la fórmula
     $dependencies['Accounts']['EstadoNacimiento_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('pais_nacimiento_c','estado_nacimiento_c','tipodepersona_c', 'estatus_c','tipo_registro_c'),
+            'triggerFields' => array('pais_nacimiento_c','estado_nacimiento_c','tipodepersona_c', 'estatus_c','tipo_registro_c','subtipo_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -208,16 +213,16 @@
                             'params' => array(
                                     'target' => 'estado_nacimiento_c',
                                     'label' => 'estado_nacimiento_c_label',
-                                    'value' => 'or(equal($tipo_registro_c,"Cliente"),  equal($estatus_c,"Interesado"), equal($tipo_registro_c,"Proveedor"))',
+                                    'value' => 'or(equal($tipo_registro_c,"Cliente"),  equal($estatus_c,"Interesado"), equal($tipo_registro_c,"Proveedor"),equal($subtipo_cuenta_c,"Integracion de Expediente"))',
                             ),
                     ),
             ),
     );
-
+//Actualizacion para la condicion del regimen fiscal para el prospecto/interesado. Adrian Arauz 13/07/18. Se añade cuenta cliente.
     $dependencies['Accounts']['SectorEconomico_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c','tipo_registro_c'),
+            'triggerFields' => array('tipo_registro_c','sectoreconomico_c','subtipo_cuenta_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -225,7 +230,7 @@
                             'params' => array(
                                     'target' => 'sectoreconomico_c',
                                     'label' => 'sectoreconomico_c_label',
-                                    'value' => 'and(not(equal($tipodepersona_c,"Persona Fisica")),or(equal($tipo_registro_c,"Cliente"), equal($tipo_registro_c,"Proveedor")))',
+                                    'value' => 'and(not(equal($tipo_registro_c,"Lead")),not(equal($subtipo_cuenta_c,"Contactado"),equal($tipo_registro_c,"Cliente")))',
                             ),
                     ),
             ),
@@ -675,3 +680,214 @@ $dependencies['Accounts']['alta_proveedor_c_readonly'] = array(
         ),
     ),
 );
+//Dependencia para el apellido materno en el tipo de cuenta Prospecto e Interesado
+$dependencies['Accounts']['ApellidoMaterno_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipodepersona_c','tipo_registro_c','subtipo_cuenta_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'apellidomaterno_c',
+                'label' => 'apellidomaterno_c_label',
+                'value' => 'and(equal($tipodepersona_c,"Persona Fisica"), equal($tipo_registro_c,"Prospecto"), equal($subtipo_cuenta_c,"Interesado"))',
+            ),
+        ),
+    ),
+);
+
+//Dependencia para el sector economico para el tipo de persona fisica en registro prospecto e interesado
+//Adrian Arauz 13/07/18
+
+$dependencies['Accounts']['SectorEconomico_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_registro_c','sectoreconomico_c','subtipo_cuenta_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'sectoreconomico_c',
+                'label' => 'sectoreconomico_c_label',
+                'value' => 'and(not(equal($tipo_registro_c,"Lead")),not(equal($subtipo_cuenta_c,"Contactado")))',
+            ),
+        ),
+    ),
+);
+//Dependencia para ventas anuales para Prospecto con Integracion de expediente
+$dependencies['Accounts']['Ventas_anuales_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_registro_c','ventas_anuales_c','subtipo_cuenta_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'ventas_anuales_c',
+                'label' => 'ventas_anuales_c_label',
+                'value' => 'or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"))',
+            ),
+        ),
+    ),
+);
+//Dependencia para Activo Fijo en Prospecto con Integracion de Expediente
+$dependencies['Accounts']['activo_fijo_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_registro_c','activo_fijo_c','subtipo_cuenta_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'activo_fijo_c',
+                'label' => 'activo_fijo_c_label',
+                'value' => 'or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"))',
+            ),
+        ),
+    ),
+);
+//Dependencia para potencial de la cuenta en Cliente e integración de expediente
+$dependencies['Accounts']['Potencial_cuenta_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_registro_c','activo_fijo_c','subtipo_cuenta_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'potencial_cuenta_c',
+                'label' => 'potencial_cuenta_c_label',
+                'value' => 'or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"))',
+            ),
+        ),
+    ),
+);
+//Dependencia de ZonaGeografica para prospecto e integracion de expediente
+$dependencies['Accounts']['Zona_Geografica_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_registro_c','zonageografica_c','subtipo_cuenta_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'zonageografica_c',
+                'label' => 'zonageografica_c_label',
+                'value' => 'and(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"))',
+            ),
+        ),
+    ),
+);
+//Dependencia para IFE/Pasaporte con persona fisica, integración de expediente. Adrian Arauz/ 16/07/18
+$dependencies['Accounts']['Pasaporte_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_registro_c','ifepasaporte_c','subtipo_cuenta_c','tipodepersona_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'ifepasaporte_c',
+                'label' => 'ifepasaporte_c_label',
+                'value' => 'and(or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente")),equal($tipodepersona_c,"Persona Fisica"))',
+            ),
+        ),
+    ),
+);
+//Dependencia para Curp Requerido en Persona fisica e integracion de expediente
+$dependencies['Accounts']['Curp_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_registro_c','curp_c','subtipo_cuenta_c','tipodepersona_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'curp_c',
+                'label' => 'curp_c_label',
+                'value' => 'and(or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente")),equal($tipodepersona_c,"Persona Fisica"))',
+            ),
+        ),
+    ),
+);
+//Dependencia para el estado civil. Adrian Arauz 16/07/18
+$dependencies['Accounts']['Estado_Civil_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_registro_c','estadocivil_c','subtipo_cuenta_c','tipodepersona_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'estadocivil_c',
+                'label' => 'estadocivil_c_label',
+                'value' => 'and(or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente")),equal($tipodepersona_c,"Persona Fisica"))',
+            ),
+        ),
+    ),
+);
+//Dependencia para regimen patrimonial en Cliente, Prospecto con integracion a expediente. Pendiente despues de actualización.
+$dependencies['Accounts']['Regimen_Patrimonial_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_registro_c','regimenpatrimonial_c','subtipo_cuenta_c','tipodepersona_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'regimenpatrimonial_c',
+                'label' => 'regimenpatrimonial_c_label',
+                'value' => 'and(or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente")),equal($tipodepersona_c,"Persona Fisica"))',
+            ),
+        ),
+    ),
+);
+//Profesion
+$dependencies['Accounts']['Profesion_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_registro_c','profesion_c','subtipo_cuenta_c','tipodepersona_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'profesion_c',
+                'label' => 'profesion_c_label',
+                'value' => 'and(or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente")),equal($tipodepersona_c,"Persona Fisica"))',
+            ),
+        ),
+    ),
+);
+//Dependencia para numero de empleados para prospecto/interesado. A la espera de cambios en la vista registro para visualizar si funciona*
+$dependencies['Accounts']['Numero_Empleados_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_registro_c','empleados_c','subtipo_cuenta_c','tipodepersona_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'empleados_c',
+                'label' => 'empleados_c_label',
+                'value' => 'and(or(equal($subtipo_cuenta_c,"Interesado"),equal($tipo_registro_c,"Prospecto"))',
+            ),
+        ),
+    ),
+);
+
+
+
+
