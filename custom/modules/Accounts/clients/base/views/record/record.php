@@ -135,16 +135,6 @@ array (
               array (
                 'name' => 'name',
               ),
-              //Cambio picklist
-                //16-07-2018
-              /*2 =>
-              array (
-                'name' => 'tipo_registro_c',
-              ),
-              3 => 
-              array (
-                'name' => 'subtipo_cuenta_c',
-              ),*/
             ),
           ),
           1 => 
@@ -179,29 +169,28 @@ array (
             'panelDefault' => 'expanded',
             'fields' => 
             array (
-                0 =>
-                    array (
-                        'name' => 'tipo_registro_c',
-                    ),
-                1 =>
-                    array (
-                        'name' => 'subtipo_cuenta_c',
-                    ),
-                2 =>
-                    array (
-                    ),
-
-              3 =>
+              0 => 
+              array (
+                'name' => 'tipo_registro_c',
+              ),
+              1 => 
+              array (
+                'name' => 'subtipo_cuenta_c',
+              ),
+              2 => 
+              array (
+              ),
+              3 => 
               array (
                 'name' => 'esproveedor_c',
                 'label' => 'LBL_ESPROVEEDOR',
               ),
-              4 =>
+              4 => 
               array (
                 'name' => 'cedente_factor_c',
                 'label' => 'LBL_CEDENTE_FACTOR',
               ),
-              5 =>
+              5 => 
               array (
                 'name' => 'deudor_factor_c',
                 'label' => 'LBL_DEUDOR_FACTOR',
@@ -298,97 +287,105 @@ array (
               ),
               7 => 
               array (
+                'name' => 'fechaconstitutiva_c',
+                'label' => 'LBL_FECHACONSTITUTIVA',
+              ),
+              8 => 
+              array (
                 'name' => 'fechadenacimiento_c',
                 'label' => 'LBL_FECHADENACIMIENTO',
               ),
-              8 => 
+              9 => 
+              array (
+              ),
+              10 => 
               array (
                 'name' => 'pais_nacimiento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PAIS_NACIMIENTO',
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'estado_nacimiento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ESTADO_NACIMIENTO',
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'zonageografica_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ZONAGEOGRAFICA',
               ),
-              11 => 
+              13 => 
               array (
                 'name' => 'genero_c',
                 'studio' => 'visible',
                 'label' => 'LBL_GENERO',
               ),
-              12 => 
+              14 => 
               array (
                 'name' => 'ifepasaporte_c',
                 'label' => 'LBL_IFEPASAPORTE',
               ),
-              13 => 
+              15 => 
               array (
                 'name' => 'curp_c',
                 'label' => 'LBL_CURP',
               ),
-              14 => 
+              16 => 
               array (
                 'name' => 'estadocivil_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ESTADOCIVIL',
               ),
-              15 => 
+              17 => 
               array (
                 'name' => 'regimenpatrimonial_c',
                 'studio' => 'visible',
                 'label' => 'LBL_REGIMENPATRIMONIAL',
               ),
-              16 => 
+              18 => 
               array (
                 'name' => 'profesion_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROFESION',
               ),
-              17 => 
+              19 => 
               array (
                 'name' => 'puesto_c',
                 'label' => 'LBL_PUESTO',
               ),
-              18 => 
+              20 => 
               array (
                 'name' => 'email',
               ),
-              19 => 'website',
-              20 => 
+              21 => 'website',
+              22 => 
               array (
                 'name' => 'facebook',
                 'comment' => 'The facebook name of the company',
                 'label' => 'LBL_FACEBOOK',
               ),
-              21 => 
+              23 => 
               array (
                 'name' => 'linkedin_c',
                 'label' => 'LBL_LINKEDIN',
               ),
-              22 => 'twitter',
-              23 => 
+              24 => 'twitter',
+              25 => 
               array (
                 'name' => 'referenciabancaria_c',
                 'label' => 'LBL_REFERENCIABANCARIA',
               ),
-              24 => 
+              26 => 
               array (
                 'name' => 'show_panel_c',
                 'label' => 'LBL_SHOW_PANEL',
               ),
-              25 => 
+              27 => 
               array (
-                  'name' => 'tct_prospecto_contactado_chk_c',
-                  'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
+                'name' => 'tct_prospecto_contactado_chk_c',
+                'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
               ),
             ),
           ),
