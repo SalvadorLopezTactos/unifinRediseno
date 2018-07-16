@@ -1,4 +1,4 @@
-ï»¿/*
+/*
  * Author levementum.com - jescamilla@levementum.com, jgarcia@levementum.com
  * File:  custom/modules/Accounts/clients/base/views/create-nodupecheck/create-nodupecheck.js
  *
@@ -73,7 +73,7 @@
         this.enableDuplicateCheck = true;
 
         //UNFIN TASK:
-        //@author Carlos Zaragoza: Si la persona es extranjera debe generar RFC genÃ©rico (XXX010101XXX)
+        //@author Carlos Zaragoza: Si la persona es extranjera debe generar RFC genérico (XXX010101XXX)
         //this.model.on('change:pais_nacimiento_c', this._doGeneraCURP, this);
 
         var valParams = {
@@ -197,7 +197,7 @@
         }, this));
         /*
          * @author Carlos Zaragoza ortiz
-         * Ocultar campo de estatus Activo/Inactivo en creaciÃ³n de personas
+         * Ocultar campo de estatus Activo/Inactivo en creación de personas
          * */
         this.$('div[data-name=estatus_persona_c]').hide();  
     },
@@ -218,7 +218,7 @@
 	
 	_doGeneraCURP: function(){
         if(this.model.get('tipodepersona_c') != 'Persona Moral') {
-        	//Valida que se tenga la informaciÃ³n requerida para generar la CURP
+        	//Valida que se tenga la información requerida para generar la CURP
         	if (this.model.get('fechadenacimiento_c') != null && this.model.get('genero_c') != null && this.model.get('genero_c') != ''
         		&& this.model.get('primernombre_c') != null && this.model.get('apellidopaterno_c') != null && this.model.get('apellidomaterno_c') != null
         		&& this.model.get('pais_nacimiento_c') != null && this.model.get('estado_nacimiento_c') != null) {
@@ -304,7 +304,7 @@
 	},*/
 	
 	_doValidateDireccion: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == "Cliente"  || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('estatus_c') == "Interesado") {
+    if (this.model.get('tipo_registro_c') == "Cliente"  || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('tipo_registro_c') == "Prospecto") {
             if (_.isEmpty(this.model.get('account_direcciones'))) {
                 errors[$(".addDireccion")] = errors['account_direcciones'] || {};
                 errors[$(".addDireccion")].required = true;
@@ -315,31 +315,40 @@
                     autoClose: false
                 });
             }
-        }
-        callback(null, fields, errors);
-    },
+    }
+    callback(null, fields, errors);
+  },
 
 	/** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
-    _doValidateEmailTelefono: function(fields, errors, callback) {
-        if(this.model.get('tipodepersona_c') == 'Persona Fisica' || this.model.get('tipodepersona_c') == 'Persona Fisica con Actividad Empresarial') {
-            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos'))) {
+  _doValidateEmailTelefono: function(fields, errors, callback) {
+        if(this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
+            if (_.isEmpty(this.model.get('email'))) {
+                app.alert.show("Correo requerido", {
+                    level: "error",
+                    title: "Al menos un correo electr\u00F3nico es requerido.",
+                    autoClose: false
+                });				
                 errors['email'] = errors['email'] || {};
                 errors['email'].required = true;
             }
-
-            if (_.isEmpty(this.model.get('account_telefonos')) && _.isEmpty(this.model.get('email'))) {
+            if (_.isEmpty(this.model.get('account_telefonos'))) {
+        				app.alert.show("Telefono requerido", {
+                    level: "error",
+                    title: "Al menos un tel\u00E9fono es requerido.",
+                    autoClose: false
+                });
                 errors['account_telefonos'] = errors['account_telefonos'] || {};
                 errors['account_telefonos'].required = true;
             }
         }
         callback(null, fields, errors);
-    },
+  },
 
 	_doValidateRFC: function(fields, errors, callback) {
         var fields = ["primernombre_c","segundonombre_c","apellidopaterno_c","apellidomaterno_c", 'rfc_c'];
         var RFC = this.model.get('rfc_c');
 	    if (RFC != '' && RFC != null){
-				/*MÃ©todo que tiene la funciÃ³n de validar el rfc*/
+				/*Método que tiene la función de validar el rfc*/
 				RFC = RFC.toUpperCase().trim();
 				var expReg = "";
 				if (this.model.get('tipodepersona_c') != 'Persona Moral'){
@@ -409,7 +418,7 @@
             if (enteredAge < 18) {
                 app.alert.show("fechaDeNacimientoCheck", {
                     level: "error",
-                    title: "Persona debe de ser mayor de 18 aÃ±os.",
+                    title: "Persona debe de ser mayor de 18 años.",
                     autoClose: false
                 });
                 errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
@@ -427,7 +436,7 @@
             if (enteredAge < 18) {
                 app.alert.show("fechaDeNacimientoCheck", {
                     level: "error",
-                    title: "Persona debe de ser mayor de 18 aÃ±os.",
+                    title: "Persona debe de ser mayor de 18 años.",
                     autoClose: false
                 });
                 errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
@@ -485,15 +494,15 @@
                             if (rfc != rfc_SinHomoclave) {
                             	app.alert.show("Validar RFC", {
 											level: "confirmation",
-											messages: "El RFC calculado es diferente al escrito, Â¿Desea reemplazarlo?",
+											messages: "El RFC calculado es diferente al escrito, ¿Desea reemplazarlo?",
 											autoClose: false,
 											
 											onConfirm: function(){
-												console.log("*** JSR *** el rfc se remplazo con Ã©xito CONFIRMED");
+												console.log("*** JSR *** el rfc se remplazo con éxito CONFIRMED");
 												self.model.set("rfc_c",rfc_local);
 											},
 											onCancel: function(){
-												console.log("*** JSR *** no se modificÃ³ el RFC");
+												console.log("*** JSR *** no se modificó el RFC");
 												//alert("Cancelled!");
 											}
 										});
@@ -505,7 +514,7 @@
 				                });
 							}	
                         }else{
-							console.log("*** JSR *** el rfc estÃ¡ vacio");
+							console.log("*** JSR *** el rfc está vacio");
 							this.model.set("rfc_c",rfc_local);
 						}                    
                 }          	    
@@ -614,14 +623,14 @@
 
                 if(fecnac_date > today_date){
 
-                    console.log('La fecha de nacimiento no puede ser mayor al dÃ­a de hoy');
+                    console.log('La fecha de nacimiento no puede ser mayor al día de hoy');
                 app.alert.show("fechaDeNacimientoValidate",{
                       level: "error",
-                      title: "La fecha de nacimiento no puede ser mayor al dÃ­a de hoy",
+                      title: "La fecha de nacimiento no puede ser mayor al día de hoy",
                       autoClose : false
                  });
                 errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
-               //errors['fechaapertura'] = 'La fecha de apertura no puede ser posterior al dÃ­a de hoy' || {};
+               //errors['fechaapertura'] = 'La fecha de apertura no puede ser posterior al día de hoy' || {};
                errors['fechadenacimiento_c'].required = true;
             }
         }
@@ -637,15 +646,15 @@
 
                 if(feccons_date > today_date){
 
-                    console.log('La fecha de nacimiento no puede ser mayor al dÃ­a de hoy');
+                    console.log('La fecha de nacimiento no puede ser mayor al día de hoy');
                    app.alert.show("fechaDeConsValidate",{
                       level: "error",
-                      title: "La fecha constitutiva no puede ser mayor al dÃ­a de hoy",
+                      title: "La fecha constitutiva no puede ser mayor al día de hoy",
                       autoClose : false
                  });
 
                 errors['fechaconstitutiva_c'] = errors['fechaconstitutiva_c'] || {};
-               //errors['fechaapertura'] = 'La fecha de apertura no puede ser posterior al dÃ­a de hoy' || {};
+               //errors['fechaapertura'] = 'La fecha de apertura no puede ser posterior al día de hoy' || {};
                errors['fechaconstitutiva_c'].required = true;
             }
         }

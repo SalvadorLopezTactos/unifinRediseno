@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Created by Jorge on 6/16/2015.
  */
 ({
@@ -62,12 +62,6 @@
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL6']").hide();
         this.$("[data-panelname='LBL_RECORDVIEW_PANEL9']").hide();
 
-        /* @author F. Javier Garcia S. 10/07/2018
-            Agregar dependencia al panel NPS, para ser visible si "Tipo de Cuenta" es "Cliente".
-         */
-        this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
-
-        
         /*
          AF: 11/01/18
          Merge create-create-actions.js
@@ -353,21 +347,6 @@
                 delete new_options[key];
             }
         });
-
-        //eliminar Lead
-        var checkrol=0;
-        for (var i = 0; i < App.user.attributes.roles.length; i++) {
-            if(App.user.attributes.roles[i]=="Planeacion y Estrategia Comercial"){
-                checkrol++;
-            }
-        }
-        Object.keys(new_options).forEach(function(key) {
-            if(key == "Lead" && checkrol>0){
-                delete new_options[key];
-            }
-        });
-        //fin
-
         this.model.fields['tipo_registro_c'].options = new_options;
 
         this.model.on('change:name', this.cleanName, this);
@@ -450,14 +429,22 @@
     },
 
     _doValidateEmailTelefono: function(fields, errors, callback) {
-
-        if(this.model.get('tipodepersona_c') == 'Persona Fisica' || this.model.get('tipodepersona_c') == 'Persona Fisica con Actividad Empresarial') {
-            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos'))) {
+        if(this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
+            if (_.isEmpty(this.model.get('email'))) {
+                app.alert.show("Correo requerido", {
+                    level: "error",
+                    title: "Al menos un correo electr\u00F3nico es requerido.",
+                    autoClose: false
+                });				
                 errors['email'] = errors['email'] || {};
                 errors['email'].required = true;
             }
-
-            if (_.isEmpty(this.model.get('account_telefonos')) && _.isEmpty(this.model.get('email'))) {
+            if (_.isEmpty(this.model.get('account_telefonos'))) {
+        				app.alert.show("Telefono requerido", {
+                    level: "error",
+                    title: "Al menos un tel\u00E9fono es requerido.",
+                    autoClose: false
+                });
                 errors['account_telefonos'] = errors['account_telefonos'] || {};
                 errors['account_telefonos'].required = true;
             }
@@ -709,7 +696,8 @@
      },*/
 
     _doValidateDireccion: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('estatus_c') == "Interesado") {
+      if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('tipo_registro_c') == "Prospecto")
+      {
             if (_.isEmpty(this.model.get('account_direcciones'))) {
                 errors[$(".addDireccion")] = errors['account_direcciones'] || {};
                 errors[$(".addDireccion")].required = true;
@@ -717,7 +705,7 @@
                 $('.direcciondashlet').css('border-color', 'red');
                 app.alert.show("Direccion requerida", {
                     level: "error",
-                    title: "Al menos una direccion Fiscal es requerida.",
+                    title: "Al menos una direccion es requerida.",
                     autoClose: false
                 });
             }else{
@@ -883,16 +871,14 @@
     //No aceptar numeros, solo letras (a-z), puntos(.) y comas(,)
     checkTextOnly:function(evt){
         //console.log(evt.keyCode);
-        if($.inArray(evt.keyCode,[9,16,17,110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,16,32,192]) < 0){
-	    if(evt.keyCode != 186)
-	    {
-            	app.alert.show("Caracter Invalido", {
-                	level: "error",
-                	title: "Solo texto es permitido en este campo.",
-                	autoClose: true
-            	});
-            	return false;
-	    }
+        alert(evt.keyCode);
+        if($.inArray(evt.keyCode,[9,16,17,110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,16,32,192,186]) < 0){
+            app.alert.show("Caracter Invalido", {
+                level: "error",
+                title: "Solo texto es permitido en este campo.",
+                autoClose: true
+            });
+            return false;
         }
     },
 
