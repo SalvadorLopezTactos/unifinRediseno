@@ -135,14 +135,16 @@ array (
               array (
                 'name' => 'name',
               ),
-              2 => 
+              //Cambio picklist
+                //16-07-2018
+              /*2 =>
               array (
                 'name' => 'tipo_registro_c',
               ),
               3 => 
               array (
                 'name' => 'subtipo_cuenta_c',
-              ),
+              ),*/
             ),
           ),
           1 => 
@@ -177,23 +179,32 @@ array (
             'panelDefault' => 'expanded',
             'fields' => 
             array (
-              0 => 
+                0 =>
+                    array (
+                        'name' => 'tipo_registro_c',
+                    ),
+                1 =>
+                    array (
+                        'name' => 'subtipo_cuenta_c',
+                    ),
+                2 =>
+                    array (
+                    ),
+
+              3 =>
               array (
                 'name' => 'esproveedor_c',
                 'label' => 'LBL_ESPROVEEDOR',
               ),
-              1 => 
+              4 =>
               array (
                 'name' => 'cedente_factor_c',
                 'label' => 'LBL_CEDENTE_FACTOR',
               ),
-              2 => 
+              5 =>
               array (
                 'name' => 'deudor_factor_c',
                 'label' => 'LBL_DEUDOR_FACTOR',
-              ),
-              3 => 
-              array (
               ),
             ),
           ),
