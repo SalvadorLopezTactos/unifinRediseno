@@ -77,7 +77,7 @@
         this.$('div[data-name=estatus_persona_c]').hide();
 
         if (this.model.dataFetched) {
-            this.model.on("change:tipo_registro_c", _.bind(function() {            
+            this.model.on("change:tipo_registro_c", _.bind(function() {
                 // Carlos Zaragoza: Se elimina el campo por defaiult de tipo de proveedor del registro pero sies proveedor, se selecciona bienes por default
                 // if(this.model.get('tipo_registro_c') == 'Proveedor'){
                 //     this.model.set('tipo_proveedor_c', '1');
@@ -383,6 +383,9 @@
        $("#drawers div.tab-content").children()[0].classList.remove('active');
        $("#drawers div.tab-content").children()[1].classList.add('active');
        $("#drawers div.tab-content").children()[1].classList.remove('fade');
+
+       //Oculta campo
+       $("div[data-name='show_panel_c']").hide();
 
      },
 
