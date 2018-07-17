@@ -800,7 +800,7 @@
     },
 ///////////////////
     regresa_leadClicked: function () {
-        alert("boton precionado");
+        //alert("boton precionado");
         this.model.set("tipo_registro_c", "Lead");
         this.model.set("subtipo_cuenta_c", "");
         this.model.set("tct_prospecto_contactado_chk_c", false);
