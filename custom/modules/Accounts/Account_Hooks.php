@@ -14,7 +14,7 @@
     {
         public function nivelSatisfaccion($bean = null, $event = null, $args = null)
         {
-    			if($bean->fetched_row['nivel_satisfaccion_c'] != $bean->nivel_satisfaccion_c)
+    			if($bean->fetched_row['nivel_satisfaccion_c'] != $bean->nivel_satisfaccion_c && $bean->nivel_satisfaccion_c != 'Sin Clasificar')
     			{
     				//Crea Notificacion al Promotor Leasing
     				$notification_bean = BeanFactory::getBean("Notifications");
@@ -40,7 +40,7 @@
     				$notification_bean->is_read = 0;
     				$notification_bean->save();
     			}
-    			if($bean->fetched_row['nivel_satisfaccion_factoring_c'] != $bean->nivel_satisfaccion_factoring_c)
+    			if($bean->fetched_row['nivel_satisfaccion_factoring_c'] != $bean->nivel_satisfaccion_factoring_c && $bean->nivel_satisfaccion_factoring_c != 'Sin Clasificar')
     			{
     				//Crea Notificacion al Promotor Factoraje
     				$notification_bean = BeanFactory::getBean("Notifications");
@@ -66,7 +66,7 @@
     				$notification_bean->is_read = 0;
     				$notification_bean->save();
     			}
-    			if($bean->fetched_row['nivel_satisfaccion_ca_c'] != $bean->nivel_satisfaccion_ca_c)
+    			if($bean->fetched_row['nivel_satisfaccion_ca_c'] != $bean->nivel_satisfaccion_ca_c && $bean->nivel_satisfaccion_ca_c != 'Sin Clasificar')
     			{
     				//Crea Notificacion al Promotor Leasing
     				$notification_bean = BeanFactory::getBean("Notifications");
@@ -182,7 +182,7 @@ SQL;
          *
          */
         public function account_telefonos($bean = null, $event = null, $args = null)
-        {   
+        {
             $current_id_list = array();
 
             if($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI' ) {
@@ -337,7 +337,7 @@ SQL;
                         $inactivo= $direccion->inactivo==1?$direccion->inactivo:0;
                         $principal = $direccion->principal==1?$direccion->principal:0;
                         $query = <<<SQL
-update dire_direccion set tipodedireccion = '{$direccion->tipodedireccion}',indicador = '{$direccion->indicador}',  calle = '{$direccion->calle}', numext = '{$direccion->numext}', numint= '{$direccion->numint}', principal=$principal, inactivo =$inactivo  where id = '{$direccion->id}';
+update dire_direccion set name='{$direccion_completa}', tipodedireccion = '{$direccion->tipodedireccion}',indicador = '{$direccion->indicador}',  calle = '{$direccion->calle}', numext = '{$direccion->numext}', numint= '{$direccion->numint}', principal=$principal, inactivo =$inactivo  where id = '{$direccion->id}';
 SQL;
                         try{
                             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Update *784 " . $query);
@@ -368,18 +368,18 @@ SQL;
 
         /* TODO: Add Definition and comment */
         public function listaNegraCall($bean = null, $event = null, $args = null)
-        {            
-            if ($bean->primernombre_c != $bean->fetched_row['primernombre_c'] || $bean->segundonombre_c != $bean->fetched_row['segundonombre_c'] 
+        {
+            if ($bean->primernombre_c != $bean->fetched_row['primernombre_c'] || $bean->segundonombre_c != $bean->fetched_row['segundonombre_c']
             || $bean->apellidopaterno_c != $bean->fetched_row['apellidopaterno_c'] || $bean->razonsocial_c != $bean->fetched_row['razonsocial_c']) {
-            	
+
                 //login class located at custom/Levementum/UnifinAPI.php
                 global $db;
                 $callApi = new UnifinAPI();
-                $coincidencias = $callApi->listaNegra($bean->primernombre_c, $bean->segundonombre_c, 
+                $coincidencias = $callApi->listaNegra($bean->primernombre_c, $bean->segundonombre_c,
                 	$bean->apellidopaterno_c, $bean->apellidomaterno_c, $bean->tipodepersona_c, $bean->razonsocial_c);
                 $bean->lista_negra_c = $coincidencias['listaNegra'] <= 0 ? 0 : 1 ;
 				$bean->pep_c = $coincidencias['PEP'] <= 0 ? 0 : 1 ;
-				
+
                 // todo: Validar que el valor de Alto riesgo sea solo por valor del oficial de cumplimiento - Waldo //VAlor anterior 0
                 if ($bean->lista_negra_c > 0 || $bean->pep_c > 0) {
                     $bean->riesgo_c = 'Alto';
@@ -388,7 +388,7 @@ SQL;
                 	 global $db, $current_user;
            			 $query = <<<SQL
 SELECT ifnull(p.altoriesgo,0) as AltoRiesgo
-FROM accounts_cstm acc 
+FROM accounts_cstm acc
 LEFT OUTER JOIN dire_pais p on acc.pais_nacimiento_c = p.id
 where acc.id_c = '{$bean->user_id_c}'
 SQL;
@@ -409,11 +409,11 @@ SQL;
 					        		}
 					        	});
 							}*/
-                			
+
 							$bean->riesgo_c = 'Bajo';
 						}
             		}
-                }   
+                }
                 $GLOBALS['log']->fatal(" <".$current_user->user_name."> : coincidencias['PEP'] " . print_r($coincidencias['PEP'], 1));
                 $GLOBALS['log']->fatal(" <".$current_user->user_name."> : coincidencias['listaNegra'] " . print_r($coincidencias['listaNegra'], 1));
                 $GLOBALS['log']->fatal(" <".$current_user->user_name."> : $bean->riesgo_c " . print_r($bean->riesgo_c, 1));
@@ -437,7 +437,7 @@ SQL;
         public function crearFolioCliente($bean = null, $event = null, $args = null)
         {
             global $current_user;
-            if (($bean->idcliente_c == '' || $bean->idcliente_c == '0') && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_c == 'Cliente' 
+            if (($bean->idcliente_c == '' || $bean->idcliente_c == '0') && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_c == 'Cliente'
             	|| $bean->tipo_registro_c == 'Proveedor' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != ""))) {
                 global $db;
                 $callApi = new UnifinAPI();
@@ -557,7 +557,7 @@ SQL;
                     $opp->estatus_c = 'P';
                     $opp->idsolicitud_c = $solicitudCreditoResultado['idSolicitud'];
                     $opp->save();
-                    
+
                     $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : Opportunity({$opp->id}) changed to Integracion de Expediente OP");
 
 
@@ -582,7 +582,7 @@ SQL;
             }
             // ** jsr ** fin
         }
-        
+
         /* CVV INICIO**/
         public function clienteCompleto($bean = null, $event = null, $args = null)
         {
@@ -595,7 +595,7 @@ SQL;
             }
             else
             {
-                if(($bean->tipo_registro_c != 'Persona' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != "")) && $bean->sincronizado_unics_c == '0') { 
+                if(($bean->tipo_registro_c != 'Persona' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != "")) && $bean->sincronizado_unics_c == '0') {
                     if ($bean->estatus_c == 'Interesado' || ($bean->tipo_registro_c != 'Prospecto' && $_SESSION['estadoPersona'] == 'insertando')) {
                         $callApi = new UnifinAPI();
                         $cliente = $callApi->insertarClienteCompleto($bean);
@@ -615,7 +615,7 @@ SQL;
         public function seguimiento_futuro($bean = null, $event = null, $args = null)
         {
             global $current_user;
-            if ($bean->estatus_c != 'Seguimiento Futuro' || empty($bean->seguimiento_futuro_c) 
+            if ($bean->estatus_c != 'Seguimiento Futuro' || empty($bean->seguimiento_futuro_c)
             	|| $bean->seguimiento_futuro_c == $bean->fetched_row['seguimiento_futuro_c']) {
                 return null;
             }
@@ -728,7 +728,7 @@ SQL;
         {
             if($bean->tipodepersona_c == 'Persona Moral') {
                 $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." bean->account_contacts :  " . print_r($bean->account_contacts,true));
-				
+
                 if ($bean->account_contacts != null && $bean->account_contacts != '') {
                     foreach ($bean->account_contacts as $contact_row) {
 						if($contact_row['primerNombre'] != null) {
