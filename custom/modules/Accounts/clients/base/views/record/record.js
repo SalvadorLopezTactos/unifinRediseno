@@ -154,6 +154,9 @@
             $('#tabContent').children()[1].classList.remove('fade');
 
         }
+
+        //Oculta campo
+        $("div[data-name='show_panel_c']").hide();
      },
 
 
@@ -388,7 +391,7 @@
     _render: function() {
         //Oculta menú lateral para relaciones
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
-        
+
         this._super("_render");
 
         /*
@@ -453,7 +456,7 @@
         //Solo Lectura campos Origen
         this.readOnlyOrigen();
 
-        
+
 
     },
 
