@@ -125,8 +125,6 @@ array (
                     'acl_action' => 'view',
                     'css_class' => 'btn-regresa-alead',
                 ),
-
-
             ),
           ),
           3 =>
@@ -155,14 +153,6 @@ array (
               1 =>
               array (
                 'name' => 'name',
-              ),
-              2 =>
-              array (
-                'name' => 'tipo_registro_c',
-              ),
-              3 =>
-              array (
-                'name' => 'subtipo_cuenta_c',
               ),
             ),
           ),
@@ -200,21 +190,29 @@ array (
             array (
               0 =>
               array (
+                'name' => 'tipo_registro_c',
+              ),
+              1 => 
+              array (
+                'name' => 'subtipo_cuenta_c',
+              ),
+              2 => 
+              array (
+              ),
+              3 => 
+              array (
                 'name' => 'esproveedor_c',
                 'label' => 'LBL_ESPROVEEDOR',
               ),
-              1 =>
+              4 => 
               array (
                 'name' => 'cedente_factor_c',
                 'label' => 'LBL_CEDENTE_FACTOR',
               ),
-              2 =>
+              5 => 
               array (
                 'name' => 'deudor_factor_c',
                 'label' => 'LBL_DEUDOR_FACTOR',
-              ),
-              3 =>
-              array (
               ),
             ),
           ),
@@ -242,9 +240,6 @@ array (
               ),
               2 =>
               array (
-              ),
-              3 =>
-              array (
                 'name' => 'tct_origen_ag_tel_rel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_ORIGEN_AG_TEL_REL',
@@ -257,6 +252,9 @@ array (
                     0 => '27',
                   ),
                 ),
+              ),
+              3 => 
+              array (
               ),
             ),
           ),
@@ -284,313 +282,134 @@ array (
               ),
               2 =>
               array (
+                'name' => 'razonsocial_c',
+                'label' => 'LBL_RAZONSOCIAL',
+                'span' => 12,
+              ),
+              3 => 
+              array (
                 'name' => 'apellidopaterno_c',
                 'label' => 'LBL_APELLIDOPATERNO',
               ),
-              3 =>
+              4 => 
               array (
                 'name' => 'apellidomaterno_c',
                 'label' => 'LBL_APELLIDOMATERNO',
               ),
-              4 =>
+              5 => 
               array (
                 'name' => 'nombre_comercial_c',
                 'label' => 'LBL_NOMBRE_COMERCIAL',
               ),
-              5 =>
+              6 => 
               array (
                 'name' => 'rfc_c',
                 'label' => 'LBL_RFC',
               ),
-              6 =>
+              7 => 
               array (
                 'name' => 'parent_name',
               ),
-              7 =>
+              8 => 
+              array (
+                'name' => 'fechaconstitutiva_c',
+                'label' => 'LBL_FECHACONSTITUTIVA',
+              ),
+              9 => 
               array (
                 'name' => 'fechadenacimiento_c',
                 'label' => 'LBL_FECHADENACIMIENTO',
               ),
-              8 =>
+              10 => 
+              array (
+              ),
+              11 => 
               array (
                 'name' => 'pais_nacimiento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PAIS_NACIMIENTO',
               ),
-              9 =>
+              12 => 
               array (
                 'name' => 'estado_nacimiento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ESTADO_NACIMIENTO',
               ),
-              10 =>
+              13 => 
               array (
                 'name' => 'zonageografica_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ZONAGEOGRAFICA',
               ),
-              11 =>
+              14 => 
               array (
                 'name' => 'genero_c',
                 'studio' => 'visible',
                 'label' => 'LBL_GENERO',
               ),
-              12 =>
+              15 => 
               array (
                 'name' => 'ifepasaporte_c',
                 'label' => 'LBL_IFEPASAPORTE',
               ),
-              13 =>
+              16 => 
               array (
                 'name' => 'curp_c',
                 'label' => 'LBL_CURP',
               ),
-              14 =>
+              17 => 
               array (
                 'name' => 'estadocivil_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ESTADOCIVIL',
               ),
-              15 =>
+              18 => 
               array (
                 'name' => 'regimenpatrimonial_c',
                 'studio' => 'visible',
                 'label' => 'LBL_REGIMENPATRIMONIAL',
               ),
-              16 =>
+              19 => 
               array (
                 'name' => 'profesion_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROFESION',
               ),
-              17 =>
+              20 => 
               array (
                 'name' => 'puesto_c',
                 'label' => 'LBL_PUESTO',
               ),
-              18 =>
+              21 => 
               array (
                 'name' => 'email',
               ),
-              19 => 'website',
-              20 =>
+              22 => 'website',
+              23 => 
               array (
                 'name' => 'facebook',
                 'comment' => 'The facebook name of the company',
                 'label' => 'LBL_FACEBOOK',
               ),
-              21 =>
+              25 => 
               array (
                 'name' => 'linkedin_c',
                 'label' => 'LBL_LINKEDIN',
               ),
-              22 => 'twitter',
-              23 =>
+              26 => 
               array (
                 'name' => 'referenciabancaria_c',
                 'label' => 'LBL_REFERENCIABANCARIA',
               ),
-              24 =>
-              array (
-              ),
-              25 =>
-              array (
-              ),
-              26 =>
-              array (
-              ),
-              27 =>
-              array (
-              ),
-              28 =>
-              array (
-              ),
-              29 =>
-              array (
-              ),
-              30 =>
-              array (
-              ),
-              31 =>
-              array (
-              ),
-              32 =>
-              array (
-              ),
-              33 =>
-              array (
-              ),
-              34 =>
-              array (
-              ),
-              35 =>
-              array (
-              ),
-              36 =>
-              array (
-              ),
-              37 =>
-              array (
-              ),
-              38 =>
-              array (
-              ),
-              39 =>
-              array (
-              ),
-              40 =>
-              array (
-              ),
-              41 =>
-              array (
-              ),
-              42 =>
-              array (
-              ),
-              43 =>
-              array (
-              ),
-              44 =>
-              array (
-              ),
-              45 =>
-              array (
-              ),
-              46 =>
-              array (
-              ),
-              47 =>
-              array (
-              ),
-              48 =>
-              array (
-              ),
-              49 =>
-              array (
-              ),
-              50 =>
-              array (
-              ),
-              51 =>
-              array (
-              ),
-              52 =>
-              array (
-              ),
-              53 =>
-              array (
-              ),
-              54 =>
-              array (
-              ),
-              55 =>
-              array (
-              ),
-              56 =>
-              array (
-              ),
-              57 =>
-              array (
-              ),
-              58 =>
-              array (
-              ),
-              59 =>
-              array (
-              ),
-              60 =>
-              array (
-              ),
-              61 =>
-              array (
-              ),
-              62 =>
-              array (
-              ),
-              63 =>
-              array (
-              ),
-              64 =>
-              array (
-              ),
-              65 =>
-              array (
-              ),
-              66 =>
-              array (
-              ),
-              67 =>
-              array (
-              ),
-              68 =>
-              array (
-              ),
-              69 =>
-              array (
-              ),
-              70 =>
-              array (
-              ),
-              71 =>
-              array (
-              ),
-              72 =>
-              array (
-              ),
-              73 =>
-              array (
-              ),
-              74 =>
-              array (
-              ),
-              75 =>
-              array (
-              ),
-              76 =>
-              array (
-              ),
-              77 =>
-              array (
-              ),
-              78 =>
-              array (
-              ),
-              79 =>
-              array (
-              ),
-              80 =>
-              array (
-              ),
-              81 =>
-              array (
-              ),
-              82 =>
-              array (
-              ),
-              83 =>
-              array (
-              ),
-              84 =>
-              array (
-              ),
-              85 =>
-              array (
-              ),
-              86 =>
-              array (
-              ),
-              87 =>
-              array (
-              ),
-              88 =>
+              27 => 
               array (
                 'name' => 'show_panel_c',
                 'label' => 'LBL_SHOW_PANEL',
               ),
-              89 =>
+              28 => 
               array (
-                  'name' => 'tct_prospecto_contactado_chk_c',
-                  'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
+                'name' => 'tct_prospecto_contactado_chk_c',
+                'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
               ),
             ),
           ),

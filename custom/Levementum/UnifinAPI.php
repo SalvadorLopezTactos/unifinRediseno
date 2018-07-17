@@ -253,6 +253,7 @@ class UnifinAPI
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/11/2015 Description: Method to call Rest service InsertaClienteCompleto */
         public function insertarClienteCompleto($objecto)
         {
+            $GLOBALS['log']-> fatal ("llamada a API con el id cliente: " . $objecto->idcliente_c);
             if (intval($objecto->idcliente_c) > 0){
                 try {
                     global $current_user;
