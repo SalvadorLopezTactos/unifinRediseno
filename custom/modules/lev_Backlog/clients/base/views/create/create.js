@@ -174,9 +174,9 @@
         });
         //Establece valores para año
         this.model.fields['anio'].options = opciones_year;
-        if (this.model.get("anio")== "") {
-            this.model.set("anio",currentYear);
-        }
+        // if (this.model.get("anio")== "") {
+        //     this.model.set("anio",currentYear);
+        // }
 
         //Valida Meses
         var opciones_mes = app.lang.getAppListStrings('mes_list');
@@ -191,7 +191,7 @@
           });
         }
         //Quita mese para año actual
-        if(this.model.get("anio") == currentYear){
+        if(this.model.get("anio") == currentYear || this.model.get("anio")==""){
           Object.keys(opciones_mes).forEach(function(key){
                 if(key != ''){
                     //Quita meses fuera de rango(3 meses)
