@@ -54,7 +54,7 @@
             'hooks' => array("all"),
             'trigger' => 'true',
             //'triggerFields' => array('tipo_registro_c','subtipo_cuenta_c','rfc_c'),
-              'triggerFields' => array('$tipodepersona_c','subtipo_cuenta_c','rfc_c','tipo_registro_c'),
+              'triggerFields' => array('subtipo_cuenta_c','rfc_c','tipo_registro_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -63,7 +63,7 @@
                                     'target' => 'rfc_c',
                                     'label' => 'rfc_c_label',
                                     //'value' => 'and(not(equal($tipo_registro_c,"Persona" )),not(equal($tipo_registro_c,"Prospecto")))',
-                                    'value' => 'and(equal($tipodepersona_c,"Persona Fisica"), equal($tipo_registro_c,"Prospecto"), equal($subtipo_cuenta_c,"Integracion de Expediente"))',
+                                    'value' => 'or(equal($tipo_registro_c,"Cliente"),equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($subtipo_cuenta_c,"Credito"))',
                             ),
                     ),
             ),
@@ -152,9 +152,8 @@
                             'params' => array(
                                     'target' => 'fechadenacimiento_c',
                                     'label' => 'fechadenacimiento_c_label',
-                                    'value' => 'and(not(equal($tipodepersona_c,"Persona Moral")),
+                                    'value' => 'and(equal($tipodepersona_c,"Persona Moral"),
                                     and(not(equal($tipo_registro_c,"Persona")),
-                                       
                                     or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"))
                                         )
                                     )',
@@ -175,10 +174,7 @@
                                     'target' => 'fechaconstitutiva_c',
                                     'label' => 'fechaconstitutiva_c_label',
                                     'value' => 'and(equal($tipodepersona_c,"Persona Moral"),
-                                    and(not(equal($tipo_registro_c,"Persona")),
-                                        not(equal($tipo_registro_c,"Prospecto"))
-                                        and(equal($subtipo_cuenta_c,"Integracion de Expediente"))
-                                        )
+                                    or(equal($tipo_registro_c,"Cliente"),equal($subtipo_cuenta_c,"Integracion de Expediente"))
                                     )',
                             ),
                     ),
