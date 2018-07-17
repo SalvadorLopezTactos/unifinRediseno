@@ -818,7 +818,7 @@
         });
     },
 
-    getllamadas:function () {
+    getreuniones:function () {
         var cday = new Date();
         var reuniones=0;
         self=this;
