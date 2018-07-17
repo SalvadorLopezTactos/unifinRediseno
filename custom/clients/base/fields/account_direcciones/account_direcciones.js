@@ -426,8 +426,8 @@
     },
 
     _doValidateDireccionFiscalCorrespondencia: function (fields, errors, callback){
-
-        if(this.model.get("tipo_registro_c") == "Cliente"){
+        if(this.model.get("tipo_registro_c") == "Cliente" || this.model.get("subtipo_cuenta_c") == "Integracion de Expediente" || this.model.get("subtipo_cuenta_c") == "Credito")
+        {
                  var correspondencia = false;
                  var fiscal = false;
                  var valuesI = [];
@@ -469,9 +469,8 @@
             });
 
             if(fiscal == false || correspondencia == false){
-                var alertOptions = {title: "Se requiere de almenos una direccion fiscal y una de correspondencia.", level: "error"};
+                var alertOptions = {title: "Se requiere de al menos una direccion fiscal y una de correspondencia.", level: "error"};
                 app.alert.show('validation', alertOptions);
-
                 errors['account_direcciones'] = errors['account_direcciones'] || {};
                 errors['account_direcciones'].required = true;
             }
