@@ -404,6 +404,9 @@
 
         this._ActualizaEtiquetas();
 
+        //Ocultar Div "Prospecto Contactado"
+        $('div[data-name=tct_prospecto_contactado_chk_c]').hide();
+        
         // Validación para no poder inactivar clientes con contratos activos
         if (this.model.dataFetched) {
             this.model.on("change:estatus_persona_c", _.bind(function () {

@@ -1,221 +1,517 @@
 <?php
- // created: 2018-02-16 16:59:02
-$dictionary['Account']['fields']['subsectoreconomico_c']['labelValue'] = 'Sub Sector Economico';
-$dictionary['Account']['fields']['subsectoreconomico_c']['dependency'] = '';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['trigger'] = 'sectoreconomico_c';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values']['0100008'][0] = '0100008-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values']['0200006'][0] = '0200006-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values']['0200006'][1] = '0200006-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values']['0300004'][0] = '0300004-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values']['0300004'][1] = '0300004-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values']['0400002'][0] = '0400002-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values']['0400002'][1] = '0400002-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values']['0400002'][2] = '0400002-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values']['0500000'][0] = '0500000-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][1100007][0] = '1100007-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][1100007][1] = '1100007-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][1200005][0] = '1200005-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][1200005][1] = '1200005-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][1300003][0] = '1300003-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][1300003][1] = '1300003-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][1400001][0] = '1400001-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][1500009][0] = '1500009-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2000008][0] = '2000008-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2000008][1] = '2000008-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2000008][2] = '2000008-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2000008][3] = '2000008-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2100006][0] = '2100006-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2100006][1] = '2100006-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2200004][0] = '2200004-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2200004][1] = '2200004-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2300002][0] = '2300002-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2300002][1] = '2300002-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2400000][0] = '2400000-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2400000][1] = '2400000-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2500008][0] = '2500008-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2500008][1] = '2500008-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2600006][0] = '2600006-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2600006][1] = '2600006-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2700004][0] = '2700004-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2700004][1] = '2700004-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2800002][0] = '2800002-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2900000][0] = '2900000-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2900000][1] = '2900000-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][2900000][2] = '2900000-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3000007][0] = '3000007-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3000007][1] = '3000007-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3100005][0] = '3100005-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3200003][0] = '3200003-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3200003][1] = '3200003-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3200003][2] = '3200003-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3200003][3] = '3200003-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3300001][0] = '3300001-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3300001][1] = '3300001-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3300001][2] = '3300001-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3300001][3] = '3300001-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3400009][0] = '3400009-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3400009][1] = '3400009-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3400009][2] = '3400009-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3500007][0] = '3500007-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3500007][1] = '3500007-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3500007][2] = '3500007-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3600005][0] = '3600005-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3600005][1] = '3600005-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3600005][2] = '3600005-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3700003][0] = '3700003-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3700003][1] = '3700003-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3800001][0] = '3800001-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3800001][1] = '3800001-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3900009][0] = '3900009-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3900009][1] = '3900009-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3900009][2] = '3900009-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3900009][3] = '3900009-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3900009][4] = '3900009-5';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3900009][5] = '3900009-6';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3900009][6] = '3900009-7';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3900009][7] = '3900009-8';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3900009][8] = '3900009-9';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3900009][9] = '3900009-10';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3900009][10] = '3900009-11';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][3900009][11] = '3900009-12';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][4100004][0] = '4100004-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][4100004][1] = '4100004-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][4100004][2] = '4100004-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][4200002][0] = '4200002-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][4200002][1] = '4200002-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][4200002][2] = '4200002-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][4200002][3] = '4200002-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][4200002][4] = '4200002-5';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][4200002][5] = '4200002-6';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][5000005][0] = '5000005-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][5000005][1] = '5000005-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][5000005][2] = '5000005-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][5000005][3] = '5000005-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6100002][0] = '6100002-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6100002][1] = '6100002-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6100002][2] = '6100002-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6100002][3] = '6100002-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6100002][4] = '6100002-5';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6200000][0] = '6200000-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6200000][1] = '6200000-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6200000][2] = '6200000-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6200000][3] = '6200000-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6200000][4] = '6200000-5';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6200000][5] = '6200000-6';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6300008][0] = '6300008-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6300008][1] = '6300008-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6300008][2] = '6300008-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6400006][0] = '6400006-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6400006][1] = '6400006-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6500004][0] = '6500004-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6600002][0] = '6600002-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6600002][1] = '6600002-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6600002][2] = '6600002-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6600002][3] = '6600002-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6600002][4] = '6600002-5';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6600002][5] = '6600002-6';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6600002][6] = '6600002-7';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6600002][7] = '6600002-8';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6700000][0] = '6700000-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6700000][1] = '6700000-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6700000][2] = '6700000-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6800001][0] = '6800001-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6800002][0] = '6800002-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6800003][0] = '6800003-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6800008][0] = '6800008-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6800010][0] = '6800010-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6800010][1] = '6800010-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6900001][0] = '6900001-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6900003][0] = '6900003-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6900006][0] = '6900006-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6900006][1] = '6900006-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6900006][2] = '6900006-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][6900006][3] = '6900006-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7100001][0] = '7100001-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7100001][1] = '7100001-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7100001][2] = '7100001-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7100001][3] = '7100001-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7100001][4] = '7100001-5';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7200009][0] = '7200009-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7300007][0] = '7300007-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7400005][0] = '7400005-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7500003][0] = '7500003-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7500003][1] = '7500003-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7500004][0] = '7500004-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7500005][0] = '7500005-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7500006][0] = '7500006-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7500007][0] = '7500007-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][7600001][0] = '7600001-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8100000][0] = '8100000-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8100000][1] = '8100000-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8100000][2] = '8100000-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8100000][3] = '8100000-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8100000][4] = '8100000-5';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8100000][5] = '8100000-6';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8100000][6] = '8100000-7';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8100000][7] = '8100000-8';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8100000][8] = '8100000-9';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8100000][9] = '8100000-10';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8100000][10] = '8100000-11';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8100000][11] = '8100000-12';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8200008][0] = '8200008-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8200008][1] = '8200008-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8200008][2] = '8200008-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8200008][3] = '8200008-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8200008][4] = '8200008-5';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8200008][5] = '8200008-6';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8200008][6] = '8200008-7';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8200008][7] = '8200008-8';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8200008][8] = '8200008-9';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8200008][9] = '8200008-10';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8300006][0] = '8300006-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8400001][0] = '8400001-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8400002][0] = '8400002-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8400003][0] = '8400003-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8400004][0] = '8400004-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8400004][1] = '8400004-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8400004][2] = '8400004-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8400004][3] = '8400004-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8400004][4] = '8400004-5';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8400004][5] = '8400004-6';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8500002][0] = '8500002-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8500002][1] = '8500002-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8600000][0] = '8600000-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8700008][0] = '8700008-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8800001][0] = '8800001-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8800002][0] = '8800002-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8800003][0] = '8800003-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8800006][0] = '8800006-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8900004][0] = '8900004-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8900004][1] = '8900004-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8900004][2] = '8900004-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8900004][3] = '8900004-4';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][8900004][4] = '8900004-5';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9100009][0] = '9100009-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9200007][0] = '9200007-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9200007][1] = '9200007-2';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9200007][2] = '9200007-3';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9300001][0] = '9300001-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9300005][0] = '9300005-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9400003][0] = '9400003-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9501009][0] = '9501009-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9503005][0] = '9503005-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9504003][0] = '9504003-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9505001][0] = '9505001-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9506009][0] = '9506009-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9800000][0] = '9800000-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9900003][0] = '9900003-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9900900][0] = '9900900-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9900904][0] = '9900904-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9900905][0] = '9900905-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9900906][0] = '9900906-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9900907][0] = '9900907-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9900908][0] = '9900908-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9900909][0] = '9900909-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9911018][0] = '9911018-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9912016][0] = '9912016-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9912024][0] = '9912024-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9919012][0] = '9919012-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']['values'][9999999][0] = '9999999-1';
-$dictionary['Account']['fields']['subsectoreconomico_c']['full_text_search']['boost'] = 1;
+ // created: 2018-07-16 19:16:41
+$dictionary['Account']['fields']['subsectoreconomico_c']['labelValue']='Sub Sector Económico';
+$dictionary['Account']['fields']['subsectoreconomico_c']['dependency']='';
+$dictionary['Account']['fields']['subsectoreconomico_c']['visibility_grid']=array (
+  'trigger' => 'sectoreconomico_c',
+  'values' => 
+  array (
+    '0100008' => 
+    array (
+      0 => '0100008-1',
+    ),
+    '0200006' => 
+    array (
+      0 => '0200006-1',
+      1 => '0200006-2',
+    ),
+    '0300004' => 
+    array (
+      0 => '0300004-1',
+      1 => '0300004-2',
+    ),
+    '0400002' => 
+    array (
+      0 => '0400002-1',
+      1 => '0400002-2',
+      2 => '0400002-3',
+    ),
+    '0500000' => 
+    array (
+      0 => '0500000-1',
+    ),
+    1100007 => 
+    array (
+      0 => '1100007-1',
+      1 => '1100007-2',
+    ),
+    1200005 => 
+    array (
+      0 => '1200005-1',
+      1 => '1200005-2',
+    ),
+    1300003 => 
+    array (
+      0 => '1300003-1',
+      1 => '1300003-2',
+    ),
+    1400001 => 
+    array (
+      0 => '1400001-1',
+    ),
+    1500009 => 
+    array (
+      0 => '1500009-1',
+    ),
+    2000008 => 
+    array (
+      0 => '2000008-1',
+      1 => '2000008-2',
+      2 => '2000008-3',
+      3 => '2000008-4',
+    ),
+    2100006 => 
+    array (
+      0 => '2100006-1',
+      1 => '2100006-2',
+    ),
+    2200004 => 
+    array (
+      0 => '2200004-1',
+      1 => '2200004-2',
+    ),
+    2300002 => 
+    array (
+      0 => '2300002-1',
+      1 => '2300002-2',
+    ),
+    2400000 => 
+    array (
+      0 => '2400000-1',
+      1 => '2400000-2',
+    ),
+    2500008 => 
+    array (
+      0 => '2500008-1',
+      1 => '2500008-2',
+    ),
+    2600006 => 
+    array (
+      0 => '2600006-1',
+      1 => '2600006-2',
+    ),
+    2700004 => 
+    array (
+      0 => '2700004-1',
+      1 => '2700004-2',
+    ),
+    2800002 => 
+    array (
+      0 => '2800002-1',
+    ),
+    2900000 => 
+    array (
+      0 => '2900000-1',
+      1 => '2900000-2',
+      2 => '2900000-3',
+    ),
+    3000007 => 
+    array (
+      0 => '3000007-1',
+      1 => '3000007-2',
+    ),
+    3100005 => 
+    array (
+      0 => '3100005-1',
+    ),
+    3200003 => 
+    array (
+      0 => '3200003-1',
+      1 => '3200003-2',
+      2 => '3200003-3',
+      3 => '3200003-4',
+    ),
+    3300001 => 
+    array (
+      0 => '3300001-1',
+      1 => '3300001-2',
+      2 => '3300001-3',
+      3 => '3300001-4',
+    ),
+    3400009 => 
+    array (
+      0 => '3400009-1',
+      1 => '3400009-2',
+      2 => '3400009-3',
+    ),
+    3500007 => 
+    array (
+      0 => '3500007-1',
+      1 => '3500007-2',
+      2 => '3500007-3',
+    ),
+    3600005 => 
+    array (
+      0 => '3600005-1',
+      1 => '3600005-2',
+      2 => '3600005-3',
+    ),
+    3700003 => 
+    array (
+      0 => '3700003-1',
+      1 => '3700003-2',
+    ),
+    3800001 => 
+    array (
+      0 => '3800001-1',
+      1 => '3800001-2',
+    ),
+    3900009 => 
+    array (
+      0 => '3900009-1',
+      1 => '3900009-2',
+      2 => '3900009-3',
+      3 => '3900009-4',
+      4 => '3900009-5',
+      5 => '3900009-6',
+      6 => '3900009-7',
+      7 => '3900009-8',
+      8 => '3900009-9',
+      9 => '3900009-10',
+      10 => '3900009-11',
+      11 => '3900009-12',
+    ),
+    4100004 => 
+    array (
+      0 => '4100004-1',
+      1 => '4100004-2',
+      2 => '4100004-3',
+    ),
+    4200002 => 
+    array (
+      0 => '4200002-1',
+      1 => '4200002-2',
+      2 => '4200002-3',
+      3 => '4200002-4',
+      4 => '4200002-5',
+      5 => '4200002-6',
+    ),
+    5000005 => 
+    array (
+      0 => '5000005-1',
+      1 => '5000005-2',
+      2 => '5000005-3',
+      3 => '5000005-4',
+    ),
+    6100002 => 
+    array (
+      0 => '6100002-1',
+      1 => '6100002-2',
+      2 => '6100002-3',
+      3 => '6100002-4',
+      4 => '6100002-5',
+    ),
+    6200000 => 
+    array (
+      0 => '6200000-1',
+      1 => '6200000-2',
+      2 => '6200000-3',
+      3 => '6200000-4',
+      4 => '6200000-5',
+      5 => '6200000-6',
+    ),
+    6300008 => 
+    array (
+      0 => '6300008-1',
+      1 => '6300008-2',
+      2 => '6300008-3',
+    ),
+    6400006 => 
+    array (
+      0 => '6400006-1',
+      1 => '6400006-2',
+    ),
+    6500004 => 
+    array (
+      0 => '6500004-1',
+    ),
+    6600002 => 
+    array (
+      0 => '6600002-1',
+      1 => '6600002-2',
+      2 => '6600002-3',
+      3 => '6600002-4',
+      4 => '6600002-5',
+      5 => '6600002-6',
+      6 => '6600002-7',
+      7 => '6600002-8',
+    ),
+    6700000 => 
+    array (
+      0 => '6700000-1',
+      1 => '6700000-2',
+      2 => '6700000-3',
+    ),
+    6800001 => 
+    array (
+      0 => '6800001-1',
+    ),
+    6800002 => 
+    array (
+      0 => '6800002-1',
+    ),
+    6800003 => 
+    array (
+      0 => '6800003-1',
+    ),
+    6800008 => 
+    array (
+      0 => '6800008-1',
+    ),
+    6800010 => 
+    array (
+      0 => '6800010-1',
+      1 => '6800010-2',
+    ),
+    6900001 => 
+    array (
+      0 => '6900001-1',
+    ),
+    6900003 => 
+    array (
+      0 => '6900003-1',
+    ),
+    6900006 => 
+    array (
+      0 => '6900006-1',
+      1 => '6900006-2',
+      2 => '6900006-3',
+      3 => '6900006-4',
+    ),
+    7100001 => 
+    array (
+      0 => '7100001-1',
+      1 => '7100001-2',
+      2 => '7100001-3',
+      3 => '7100001-4',
+      4 => '7100001-5',
+    ),
+    7200009 => 
+    array (
+      0 => '7200009-1',
+    ),
+    7300007 => 
+    array (
+      0 => '7300007-1',
+    ),
+    7400005 => 
+    array (
+      0 => '7400005-1',
+    ),
+    7500003 => 
+    array (
+      0 => '7500003-1',
+      1 => '7500003-2',
+    ),
+    7500004 => 
+    array (
+      0 => '7500004-1',
+    ),
+    7500005 => 
+    array (
+      0 => '7500005-1',
+    ),
+    7500006 => 
+    array (
+      0 => '7500006-2',
+    ),
+    7500007 => 
+    array (
+      0 => '7500007-2',
+    ),
+    7600001 => 
+    array (
+      0 => '7600001-1',
+    ),
+    8100000 => 
+    array (
+      0 => '8100000-1',
+      1 => '8100000-2',
+      2 => '8100000-3',
+      3 => '8100000-4',
+      4 => '8100000-5',
+      5 => '8100000-6',
+      6 => '8100000-7',
+      7 => '8100000-8',
+      8 => '8100000-9',
+      9 => '8100000-10',
+      10 => '8100000-11',
+      11 => '8100000-12',
+    ),
+    8200008 => 
+    array (
+      0 => '8200008-1',
+      1 => '8200008-2',
+      2 => '8200008-3',
+      3 => '8200008-4',
+      4 => '8200008-5',
+      5 => '8200008-6',
+      6 => '8200008-7',
+      7 => '8200008-8',
+      8 => '8200008-9',
+      9 => '8200008-10',
+    ),
+    8300006 => 
+    array (
+      0 => '8300006-1',
+    ),
+    8400001 => 
+    array (
+      0 => '8400001-1',
+    ),
+    8400002 => 
+    array (
+      0 => '8400002-1',
+    ),
+    8400003 => 
+    array (
+      0 => '8400003-1',
+    ),
+    8400004 => 
+    array (
+      0 => '8400004-1',
+      1 => '8400004-2',
+      2 => '8400004-3',
+      3 => '8400004-4',
+      4 => '8400004-5',
+      5 => '8400004-6',
+    ),
+    8500002 => 
+    array (
+      0 => '8500002-1',
+      1 => '8500002-2',
+    ),
+    8600000 => 
+    array (
+      0 => '8600000-1',
+    ),
+    8700008 => 
+    array (
+      0 => '8700008-1',
+    ),
+    8800001 => 
+    array (
+      0 => '8800001-1',
+    ),
+    8800002 => 
+    array (
+      0 => '8800002-1',
+    ),
+    8800003 => 
+    array (
+      0 => '8800003-1',
+    ),
+    8800006 => 
+    array (
+      0 => '8800006-1',
+    ),
+    8900004 => 
+    array (
+      0 => '8900004-1',
+      1 => '8900004-2',
+      2 => '8900004-3',
+      3 => '8900004-4',
+      4 => '8900004-5',
+    ),
+    9100009 => 
+    array (
+      0 => '9100009-1',
+    ),
+    9200007 => 
+    array (
+      0 => '9200007-1',
+      1 => '9200007-2',
+      2 => '9200007-3',
+    ),
+    9300001 => 
+    array (
+      0 => '9300001-1',
+    ),
+    9300005 => 
+    array (
+      0 => '9300005-1',
+    ),
+    9400003 => 
+    array (
+      0 => '9400003-1',
+    ),
+    9501009 => 
+    array (
+      0 => '9501009-1',
+    ),
+    9503005 => 
+    array (
+      0 => '9503005-1',
+    ),
+    9504003 => 
+    array (
+      0 => '9504003-1',
+    ),
+    9505001 => 
+    array (
+      0 => '9505001-1',
+    ),
+    9506009 => 
+    array (
+      0 => '9506009-1',
+    ),
+    9800000 => 
+    array (
+      0 => '9800000-1',
+    ),
+    9900003 => 
+    array (
+      0 => '9900003-1',
+    ),
+    9900900 => 
+    array (
+      0 => '9900900-1',
+    ),
+    9900904 => 
+    array (
+      0 => '9900904-1',
+    ),
+    9900905 => 
+    array (
+      0 => '9900905-1',
+    ),
+    9900906 => 
+    array (
+      0 => '9900906-1',
+    ),
+    9900907 => 
+    array (
+      0 => '9900907-1',
+    ),
+    9900908 => 
+    array (
+      0 => '9900908-1',
+    ),
+    9900909 => 
+    array (
+      0 => '9900909-1',
+    ),
+    9911018 => 
+    array (
+      0 => '9911018-1',
+    ),
+    9912016 => 
+    array (
+      0 => '9912016-1',
+    ),
+    9912024 => 
+    array (
+      0 => '9912024-1',
+    ),
+    9919012 => 
+    array (
+      0 => '9919012-1',
+    ),
+    9999999 => 
+    array (
+      0 => '9999999-1',
+    ),
+  ),
+);
 
+ ?>
