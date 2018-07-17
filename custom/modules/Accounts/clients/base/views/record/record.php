@@ -186,78 +186,80 @@ array (
             array (
               0 => 
               array (
-              ),
-              1 => 
-              array (
-              ),
-              2 => 
-              array (
-              ),
-              3 => 
-              array (
-              ),
-              4 => 
-              array (
                 'name' => 'tipo_registro_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TIPO_REGISTRO',
               ),
-              5 => 
+              1 => 
               array (
                 'name' => 'idcliente_c',
                 'label' => 'LBL_IDCLIENTE',
                 'readonly' => true,
               ),
-              6 => 
+              2 => 
               array (
                 'name' => 'reus_c',
                 'label' => 'LBL_REUS',
               ),
-              7 => 
+              3 => 
               array (
                 'name' => 'referencia_bancaria_c',
                 'label' => 'LBL_REFERENCIA_BANCARIA_C',
               ),
-              8 => 
+              4 => 
               array (
                 'name' => 'origendelprospecto_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ORIGENDELPROSPECTO',
               ),
-              9 => 
+              5 => 
               array (
                 'name' => 'tct_detalle_origen_ddw_c',
                 'label' => 'LBL_TCT_DETALLE_ORIGEN_DDW',
               ),
-              10 => 
+              6 => 
               array (
                 'name' => 'tct_origen_busqueda_txf_c',
                 'label' => 'LBL_TCT_ORIGEN_BUSQUEDA_TXF',
               ),
-              11 => 
+              7 => 
               array (
                 'name' => 'tct_origen_base_ddw_c',
                 'label' => 'LBL_TCT_ORIGEN_BASE_DDW',
               ),
-              12 => 
+              8 => 
               array (
                 'name' => 'medio_digital_c',
                 'label' => 'LBL_MEDIO_DIGITAL',
               ),
-              13 => 
+              9 => 
               array (
-                'name' => 'nombre_campana_c',
-                'label' => 'LBL_NOMBRE_CAMPANA',
+                'name' => 'tct_punto_contacto_ddw_c',
+                'label' => 'LBL_TCT_PUNTO_CONTACTO_DDW',
               ),
-              14 => 
+              10 => 
               array (
                 'name' => 'evento_c',
                 'label' => 'LBL_EVENTO',
               ),
-              15 => 
+              11 => 
+              array (
+              ),
+              12 => 
               array (
                 'name' => 'camara_c',
                 'label' => 'LBL_CAMARA',
+              ),
+              13 => 
+              array (
+              ),
+              14 => 
+              array (
+                'name' => 'nombre_campana_c',
+                'label' => 'LBL_NOMBRE_CAMPANA',
+              ),
+              15 => 
+              array (
               ),
               16 => 
               array (
@@ -286,8 +288,9 @@ array (
               ),
               19 => 
               array (
-                'name' => 'tct_punto_contacto_ddw_c',
-                'label' => 'LBL_TCT_PUNTO_CONTACTO_DDW',
+                'name' => 'tct_que_promotor_rel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_QUE_PROMOTOR_REL',
               ),
               20 => 
               array (

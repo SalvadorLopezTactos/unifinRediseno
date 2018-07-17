@@ -252,3 +252,4 @@ $mod_strings['LBL_RECORDVIEW_PANEL10'] = 'NPS';
 $mod_strings['LBL_TCT_PUNTO_CONTACTO_DDW'] = 'Punto de Contacto';
 $mod_strings['LBL_TCT_QUE_PROMOTOR_REL_USER_ID'] = '¿Qué Promotor? (relacionado Usuario ID)';
 $mod_strings['LBL_TCT_QUE_PROMOTOR_REL'] = '¿Qué Promotor?';
+$mod_strings['LBL_NIVEL_SATISFACCION_C'] = 'Nivel Satisfacción Leasing';
