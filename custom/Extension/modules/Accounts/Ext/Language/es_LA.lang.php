@@ -278,3 +278,5 @@ $mod_strings['LBL_POTENCIAL_CUENTA'] = 'Potencial de la Cuenta';
 $mod_strings['LBL_SUBTIPO_CUENTA'] = 'Subtipo de Cuenta';
 $mod_strings['LBL_RECORDVIEW_PANEL16'] = 'Origen';
 $mod_strings['LBL_TCT_PROSPECTO_CONTACTADO_CHK'] = 'Prospecto Contactado';
+$mod_strings['LBL_PROSPECTO_CONTACTADO_C'] = 'Convertir a Prospecto Contactado';
+$mod_strings['LBL_REGRESA_A_LEAD_C'] = 'Regresa a Lead';

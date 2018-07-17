@@ -15,6 +15,12 @@
         this._super("initialize", [options]);
         this.duplicadosName = 0;
         this.duplicadosRFC = 0;
+        this.datallamadas=null;
+        this.totalllamadas=0;
+        this.totalreuniones=0;
+        this.model.on('sync', this.getllamadas, this);
+        this.model.on('sync', this.getreuniones, this);
+
 
         //add validation tasks
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
@@ -404,8 +410,14 @@
 
         this._ActualizaEtiquetas();
 
-        //Ocultar Div "Prospecto Contactado"
+        //Ocultar Div y boton "Prospecto Contactado"
         $('div[data-name=tct_prospecto_contactado_chk_c]').hide();
+
+        // if(document.querySelector('[aria-label="Prospecto Contactado"]').checked==true){
+       // if(this.model.get('tct_prospecto_contactado_chk_c')==false){
+            $('a[name=prospectocontactado]').hide();
+            $('.jcmx1').hide();
+       //}
         
         // Validación para no poder inactivar clientes con contratos activos
         if (this.model.dataFetched) {
@@ -757,6 +769,8 @@
         this.context.on('button:expediente_button:click', this.expedienteClicked, this);
         this.context.on('button:negociacion:click', this.negociacionClicked, this);
         this.context.on('button:Historial_cotizaciones_button:click', this.historialCotizacionesClicked, this);
+        this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
+
     },
 
     cotizadorClicked: function (){
@@ -783,6 +797,122 @@
         var name = this.model.get('name');
         window.open("#bwc/index.php?entryPoint=HistorialCotizaciones&Accountid=" + Accountid + "&name=" + name);
     },
+
+    getllamadas:function () {
+        var cday = new Date();
+        var llamadas=0;
+        self=this;
+        App.api.call("read", app.api.buildURL("Accounts/" + this.model.get('id')+"/link/calls", null, null, {}), null, {
+            success: _.bind(function (data) {
+                this.datallamadas=data;
+                if(data.records.length>0) {
+                    for (var i = 0; i < data.records.length; i++) {
+                        var tempdate = Date.parse(data.records[i].date_start);
+                        if (tempdate < cday) {
+                            llamadas++;
+                        }
+                    }
+                }
+                this.totalllamadas=llamadas;
+            },this)
+        });
+    },
+
+    getllamadas:function () {
+        var cday = new Date();
+        var reuniones=0;
+        self=this;
+        App.api.call("read", app.api.buildURL("Accounts/" + this.model.get('id')+"/link/meetings", null, null, {}), null, {
+            success: _.bind(function (data) {
+                if(data.records.length>0) {
+                    for (var i = 0; i < data.records.length; i++) {
+                        var tempdate = Date.parse(data.records[i].date_start);
+                        if (tempdate < cday) {
+                            reuniones++;
+                        }
+                    }
+                }
+                this.totalreuniones=reuniones;
+            },this)
+        });
+    },
+
+    validar_fields:function() {
+        var datos_telefonos = this.model.get('account_telefonos');
+        var tipolabel = [];
+        var pais = [];
+        var estatus = [];
+        var datos_dirreciones = this.model.get('account_direcciones');
+        var tipolabel2 = [];
+        var cp = [];
+        var municipio = [];
+        var calle = [];
+        var indicador = [];
+        var ciudad = [];
+        var numext = [];
+        var numint = [];
+        var estado = [];
+        var colonia = [];
+        for (var i = 0; i < datos_telefonos.length; i++) {
+            tipolabel.push(datos_telefonos[i].tipo_label);
+            pais.push(datos_telefonos[i].pais);
+            estatus.push(datos_telefonos[i].estatus);
+        }
+        for (var i = 0; i < datos_dirreciones.length; i++) {
+            tipolabel2.push(datos_dirreciones[i].tipo_label);
+            cp.push(datos_dirreciones[i].codigopostal);
+            municipio.push(datos_dirreciones[i].municipio);
+            calle.push(datos_dirreciones[i].calle);
+            indicador.push(datos_dirreciones[i].indicador);
+            ciudad.push(datos_dirreciones[i].ciudad);
+            numext.push(datos_dirreciones[i].numext);
+            numint.push(datos_dirreciones[i].numint);
+            estado.push(datos_dirreciones[i].estado);
+            colonia.push(datos_dirreciones[i].colonia);
+        }
+        var allfields=[tipolabel,pais,estatus,tipolabel2,cp,municipio,calle,indicador,ciudad,numext,numint,estado,colonia];
+        var allfields2=[];
+        console.log(allfields);
+        for(var i=0;i<allfields.length;i++){
+            for(var j=0;j<allfields[i].length;j++)
+            {
+                if(allfields[i][j]!=null || allfields[i][j]!="") {
+                    allfields2.push(true);
+                }else{
+                    allfields2.push(false);
+                }
+            }
+        }
+        console.log(allfields2);
+        if(allfields2.includes(false)==true){
+            app.alert.show('alert_fields_empty', {
+                level: 'error',
+                messages: 'Para convertir a Prospecto Contactado es necesario que se llenen los campos requeridos',
+            });
+        }else{
+                this.model.set('tipo_registro_c','Prospecto');
+                this.model.set('subtipo_registro_c','Contactado');
+                this.model.set('tct_prospecto_contactado_chk_c',true);
+                this.model.save();
+                app.alert.show('alert_change_success', {
+                    level: 'success',
+                    messages: 'Cambio realizado',
+                });
+        }
+    },
+
+    prospectocontactadoClicked:function(){
+        if(this.totalllamadas==0 && this.totalreuniones==0){
+            app.alert.show('alert_calls', {
+                level: 'error',
+                messages: 'El proceso de conversion requiere que el Prospecto Contactado contenga una llamada o reunion con fecha anterior al dia de hoy!',
+            });
+        }else{
+            this.validar_fields();
+        }
+    },
+
+
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
     _doValidateEmailTelefono: function(fields, errors, callback) {
