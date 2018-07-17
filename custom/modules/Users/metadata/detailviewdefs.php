@@ -141,6 +141,15 @@ array (
         ),
         10 => 
         array (
+          0 => 
+          array (
+            'name' => 'tct_altaproveedor_chk_c',
+            'label' => 'LBL_TCT_ALTAPROVEEDOR_CHK',
+          ),
+          1 => '',
+        ),
+        11 => 
+        array (
           0 => 'reports_to_name',
           1 => 
           array (
