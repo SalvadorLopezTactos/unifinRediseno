@@ -1,4 +1,4 @@
-ï»¿/**
+/**
  * Created by Jorge on 6/16/2015.
  */
 ({
@@ -53,7 +53,7 @@
         /*
          * @author Salvador Lopez
          * Ocultar panel de fideicomiso y ocultar paneles de Peps para Persona Moral
-         * (Se asume que valor por default para tipo de persona es "Persona FÃ­sica")
+         * (Se asume que valor por default para tipo de persona es "Persona Física")
          * */
         this.$("li.tab.LBL_RECORDVIEW_PANEL2").hide();
 
@@ -72,7 +72,7 @@
 
         /*
          * @author Carlos Zaragoza ortiz
-         * Ocultar campo de estatus Activo/Inactivo en creaciÃ³n de personas
+         * Ocultar campo de estatus Activo/Inactivo en creación de personas
          * */
         this.$('div[data-name=estatus_persona_c]').hide();
 
@@ -236,7 +236,7 @@
 
         /*
          AF - 26/12/17
-         Ajuste: Ocultar campo dependiente de multiselect "Â¿Instrumento monetario con el que espera realizar los pagos?"
+         Ajuste: Ocultar campo dependiente de multiselect "¿Instrumento monetario con el que espera realizar los pagos?"
          */
         this.model.on('change:tct_inst_monetario_c', this.changeInstMonetario, this);
 
@@ -303,7 +303,7 @@
 
                     return indexOf.call(this, needle) > -1;
                 };
-                /** ModificaciÃ³n a Multiproducto para promotores por default
+                /** Modificación a Multiproducto para promotores por default
                  * Carlos Zaragoza
                  * Enero 25, 2016 10:15 AM
                  * */
@@ -354,7 +354,7 @@
 
     /** BEGIN CUSTOMIZATION:
      * Salvador Lopez 19/01/2018
-     * DescripciÃ³n: FunciÃ³n que oculta o muestra panel de fideicomiso dependiendo el valor de check Â¿Es Fideicomisio? */
+     * Descripción: Función que oculta o muestra panel de fideicomiso dependiendo el valor de check ¿Es Fideicomisio? */
 
     _hideFideicomiso : function(fields, errors, callback) {
         if(this.model.get('tct_fedeicomiso_chk_c')) {
@@ -370,7 +370,7 @@
 
     /** BEGIN CUSTOMIZATION:
      * Salvador Lopez 19/01/2018
-     * DescripciÃ³n: FunciÃ³n que oculta o muestra paneles de Peps segÃºn sea el valor de Tipo de Persona*/
+     * Descripción: Función que oculta o muestra paneles de Peps según sea el valor de Tipo de Persona*/
 
      _hideVista360: function(){
 
@@ -393,7 +393,7 @@
 
         if(this.model.get('tipodepersona_c')=="Persona Fisica" ||
             this.model.get('tipodepersona_c')=="Persona Fisica con Actividad Empresarial") {
-            //Muestra Peps de Persona FÃ­sica
+            //Muestra Peps de Persona Física
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL4']").show();
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL5']").show();
             //Oculta Peps de Persona Moral
@@ -403,7 +403,7 @@
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL9']").hide();
 
         }else{
-            //Oculta Peps de Persona FÃ­sica
+            //Oculta Peps de Persona Física
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL4']").hide();
             this.$("[data-panelname='LBL_RECORDVIEW_PANEL5']").hide();
             //Muestra Peps de Persona Moral
@@ -486,7 +486,7 @@
 
         RFC = this.model.get('rfc_c');
         if (RFC != '' && RFC != null && (RFC != 'XXX010101XXX' && RFC != 'XXXX010101XXX')){
-            //ÃƒÂ©todo que tiene la funciÃƒÂ³n de validar el rfc
+            //Ã©todo que tiene la funciÃ³n de validar el rfc
             RFC = RFC.toUpperCase().trim();
             var expReg = "";
             if (this.model.get('tipodepersona_c') != 'Persona Moral'){
@@ -562,7 +562,7 @@
                     break;
                 case this.STATE.DUPLICATE:
                     $saveButtonEl.getFieldElement().text(app.lang.get('LBL_IGNORE_DUPLICATE_AND_SAVE',this.module)).hide();
-                    //OCULTANDO BOTÃ“N CON JQUERY
+                    //OCULTANDO BOTÓN CON JQUERY
                     $('[name="duplicate_button"]').hide();
                     break;
             }
@@ -605,7 +605,7 @@
 
     _doGeneraCURP: function(){
         if(this.model.get('tipodepersona_c') != 'Persona Moral') {
-            //Valida que se tenga la informaciÃ³n requerida para generar la CURP
+            //Valida que se tenga la información requerida para generar la CURP
             if (this.model.get('fechadenacimiento_c') != null && this.model.get('genero_c') != null && this.model.get('genero_c') != ''
                 && this.model.get('primernombre_c') != null && this.model.get('apellidopaterno_c') != null && this.model.get('apellidomaterno_c') != null
                 && this.model.get('pais_nacimiento_c') != null && this.model.get('estado_nacimiento_c') != null) {
@@ -703,7 +703,7 @@
                     autoClose: false
                 });
             }else{
-                //ValdaciÃ³n Nacional
+                //Valdación Nacional
                 if(this.model.get('tipodepersona_c') != 'Persona Moral'){
                     var nacional = 0;
                     console.log('Validacion Dir.Nacional');
@@ -741,7 +741,7 @@
             if (enteredAge < 18) {
                 app.alert.show("fechaDeNacimientoCheck", {
                     level: "error",
-                    title: "Persona debe de ser mayor de 18 aÃ±os.",
+                    title: "Persona debe de ser mayor de 18 años.",
                     autoClose: false
                 });
                 errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
@@ -800,14 +800,14 @@
                         if (rfc != rfc_SinHomoclave) {
                             app.alert.show("Validar RFC", {
                                 level: "confirmation",
-                                messages: "El RFC calculado es diferente al escrito, Â¿Desea reemplazarlo?",
+                                messages: "El RFC calculado es diferente al escrito, ¿Desea reemplazarlo?",
                                 autoClose: false,
                                 onConfirm: function(){
-                                    console.log("*** JSR *** el rfc se remplazo con Ã©xito CONFIRMED");
+                                    console.log("*** JSR *** el rfc se remplazo con éxito CONFIRMED");
                                     self.model.set("rfc_c",rfc_local);
                                 },
                                 onCancel: function(){
-                                    console.log("*** JSR *** no se modificÃ³ el RFC");
+                                    console.log("*** JSR *** no se modificó el RFC");
                                     //alert("Cancelled!");
                                 }
                             });
@@ -819,7 +819,7 @@
                             });
                         }
                     }else{
-                        console.log("*** JSR *** el rfc estÃ¡ vacio");
+                        console.log("*** JSR *** el rfc está vacio");
                         this.model.set("rfc_c",rfc_local);
                     }
                 }
@@ -866,7 +866,7 @@
     checkTextOnly:function(evt){
         //console.log(evt.keyCode);
         if($.inArray(evt.keyCode,[9,16,17,110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,16,32,192]) < 0){
-	    if(evt.keyCode != 186)
+	    if(evt.keyCode !== 186 && evt.keyCode !== 229)
 	    {
             	app.alert.show("Caracter Invalido", {
                 	level: "error",
@@ -967,14 +967,14 @@
 
             if(fecnac_date > today_date){
 
-                console.log('La fecha de nacimiento no puede ser mayor al dÃ­a de hoy');
+                console.log('La fecha de nacimiento no puede ser mayor al día de hoy');
                 app.alert.show("fechaDeNacimientoValidate",{
                     level: "error",
-                    title: "La fecha de nacimiento no puede ser mayor al dÃ­a de hoy",
+                    title: "La fecha de nacimiento no puede ser mayor al día de hoy",
                     autoClose : false
                 });
                 errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
-                //errors['fechaapertura'] = 'La fecha de apertura no puede ser posterior al dÃ­a de hoy' || {};
+                //errors['fechaapertura'] = 'La fecha de apertura no puede ser posterior al día de hoy' || {};
                 errors['fechadenacimiento_c'].required = true;
             }
         }
@@ -990,15 +990,15 @@
 
             if(feccons_date > today_date){
 
-                console.log('La fecha de nacimiento no puede ser mayor al dÃ­a de hoy');
+                console.log('La fecha de nacimiento no puede ser mayor al día de hoy');
                 app.alert.show("fechaDeConsValidate",{
                     level: "error",
-                    title: "La fecha constitutiva no puede ser mayor al dÃ­a de hoy",
+                    title: "La fecha constitutiva no puede ser mayor al día de hoy",
                     autoClose : false
                 });
 
                 errors['fechaconstitutiva_c'] = errors['fechaconstitutiva_c'] || {};
-                //errors['fechaapertura'] = 'La fecha de apertura no puede ser posterior al dÃ­a de hoy' || {};
+                //errors['fechaapertura'] = 'La fecha de apertura no puede ser posterior al día de hoy' || {};
                 errors['fechaconstitutiva_c'].required = true;
             }
         }
@@ -1032,7 +1032,7 @@
     /**
      * @author Salvador Lopez Balleza
      * @date 13/03/2018
-     * Establecer campo phone_office con la misma informaciÃ³n que el campo personalizado account_telefonos
+     * Establecer campo phone_office con la misma información que el campo personalizado account_telefonos
      * */
     setPhoneOffice: function(){
 
