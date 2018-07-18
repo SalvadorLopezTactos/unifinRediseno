@@ -81,9 +81,7 @@
                             'params' => array(
                                     'target' => 'profesion_c',
                                     'label' => 'profesion_c_label',
-                                    'value' => 'not(or(equal($tipodepersona_c,"Persona Moral"),
-									equal($estatus_c,"Interesado"),
-									equal($tipo_registro_c,"Lead"),equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado")))',
+                                    'value' => 'not(or(equal($tipodepersona_c,"Persona Moral"),equal($estatus_c,"Interesado"),equal($tipo_registro_c,"Lead"),equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado")))',
                             ),
                     ),
             ),
@@ -832,7 +830,7 @@ $dependencies['Accounts']['Estado_Civil_required'] = array(
             'params' => array(
                 'target' => 'estadocivil_c',
                 'label' => 'estadocivil_c_label',
-                'value' => 'and(or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"),equal($tipodepersona_c,"Persona Fisica")))))',
+                'value' => 'and(or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"),equal($tipodepersona_c,"Persona Fisica")))',
             ),
         ),
     ),
