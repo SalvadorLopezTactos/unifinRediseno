@@ -1,5 +1,5 @@
 <?php
- // created: 2018-03-06 19:22:32
+ // created: 2018-07-17 17:48:57
 
 $app_list_strings['estatus_c_operacion_list']=array (
   'P' => 'INTEGRACIÓN DE EXPEDIENTE',
@@ -27,4 +27,5 @@ $app_list_strings['estatus_c_operacion_list']=array (
   'DP' => 'DEVUELTA POR CREDITO',
   'RM' => 'ANALISIS DE CREDITO RM',
   'SG' => 'SUGERENCIAS DE CREDITO',
+  '' => '',
 );

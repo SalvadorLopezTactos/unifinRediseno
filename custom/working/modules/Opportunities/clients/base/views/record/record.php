@@ -624,8 +624,8 @@ array (
             array (
               0 => 
               array (
-                'name' => 'tct_oportunidad_perdida_chk_c',
-                'label' => 'LBL_TCT_OPORTUNIDAD_PERDIDA_CHK',
+                'name' => 'si_c',
+                'label' => 'LBL_SI',
               ),
               1 => 
               array (
