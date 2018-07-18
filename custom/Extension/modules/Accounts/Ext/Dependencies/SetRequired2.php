@@ -354,7 +354,7 @@ $dependencies['Accounts']['tct_fedeicomiso_c21_ddw'] = array(
 $dependencies['Accounts']['nombre_comercial_c_requerido'] = array(
     'hooks' => array("edit"),
     'trigger' => 'true',
-    'triggerFields' => array('nombre_comercial_c','tipodepersona_c'),
+    'triggerFields' => array('nombre_comercial_c','tipodepersona_c','tipo_registro_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -362,7 +362,7 @@ $dependencies['Accounts']['nombre_comercial_c_requerido'] = array(
             'params' => array(
                 'target' => 'nombre_comercial_c',
                 'label' => 'nombre_comercial_c_label',
-                'value' => 'equal($tipodepersona_c,"Persona Moral")',
+                'value' => 'not(or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial"),equal($tipo_registro_c,"Proveedor")))',
             ),
         ),
     ),
