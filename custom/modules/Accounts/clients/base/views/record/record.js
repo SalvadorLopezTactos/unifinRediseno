@@ -15,12 +15,6 @@
         this._super("initialize", [options]);
         this.duplicadosName = 0;
         this.duplicadosRFC = 0;
-        this.datallamadas=null;
-        this.totalllamadas=0;
-        this.totalreuniones=0;
-        this.model.on('sync', this.getllamadas, this);
-        this.model.on('sync', this.getreuniones, this);
-
 
         //add validation tasks
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
@@ -409,11 +403,8 @@
 
         this._ActualizaEtiquetas();
 
-        //Ocultar Div y boton "Prospecto Contactado"
+        //Ocultar Div "Prospecto Contactado"
         $('div[data-name=tct_prospecto_contactado_chk_c]').hide();
-
-            $('a[name=prospectocontactado]').hide();
-            $('.jcmx1').hide();
 
         // Validación para no poder inactivar clientes con contratos activos
         if (this.model.dataFetched) {
@@ -474,7 +465,12 @@
 
     },
 
-
+    /*
+        * @author F. Javier G. Solar
+        * 18/07/2018
+        * Se debe ocultar los botones de Regresa a Lead y Prospecto contactado si cumple
+        * con las condiciones de visibilidad .
+        * */
     hideButton_Conversion: function () {
 
        // var hideButton1 = this.getField('regresalead');
@@ -757,7 +753,8 @@
         callback(null, fields, errors);
     },
     _doValidateDireccion: function (fields, errors, callback) {
-      if(this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('tipo_registro_c') == "Prospecto") {
+        if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('estatus_c') == "Interesado") {
+
             if (_.isEmpty(this.model.get('account_direcciones'))) {
                 errors[$(".addDireccion")] = errors['account_direcciones'] || {};
                 errors[$(".addDireccion")].required = true;
@@ -804,19 +801,26 @@
         this.context.on('button:expediente_button:click', this.expedienteClicked, this);
         this.context.on('button:negociacion:click', this.negociacionClicked, this);
         this.context.on('button:Historial_cotizaciones_button:click', this.historialCotizacionesClicked, this);
-        this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
         this.context.on('button:regresa_lead:click', this.regresa_leadClicked, this);
     },
-///////////////////
+
+    /*
+    * @author F. Javier G. Solar
+    * 18/07/2018
+    * El botón tendrá como finalidad cambiar el Tipo y Subtipo de Cuenta.
+    * */
+
     regresa_leadClicked: function () {
         //alert("boton precionado");
         this.model.set("tipo_registro_c", "Lead");
         this.model.set("subtipo_cuenta_c", "");
         this.model.set("tct_prospecto_contactado_chk_c", false);
         this.model.save();
+        this._render();
 
     },
-//////////////////
+
+
     cotizadorClicked: function () {
         var Accountid = this.model.get('id');
         var Clientid = this.model.get('idcliente_c');
@@ -841,7 +845,6 @@
         var name = this.model.get('name');
         window.open("#bwc/index.php?entryPoint=HistorialCotizaciones&Accountid=" + Accountid + "&name=" + name);
     },
-
     getllamadas:function () {
         var cday = new Date();
         var llamadas=0;
@@ -960,27 +963,15 @@
         }
     },
 
-
-
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
-
-    _doValidateEmailTelefono: function(fields, errors, callback) {
-        if(this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
-            if (_.isEmpty(this.model.get('email'))) {
-                app.alert.show("Correo requerido", {
-                    level: "error",
-                    title: "Al menos un correo electr\u00F3nico es requerido.",
-                    autoClose: false
-                });				
+    _doValidateEmailTelefono: function (fields, errors, callback) {
+        if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos'))) {
                 errors['email'] = errors['email'] || {};
                 errors['email'].required = true;
             }
-            if (_.isEmpty(this.model.get('account_telefonos'))) {
-        				app.alert.show("Telefono requerido", {
-                    level: "error",
-                    title: "Al menos un tel\u00E9fono es requerido.",
-                    autoClose: false
-                });
+
+            if (_.isEmpty(this.model.get('account_telefonos')) && _.isEmpty(this.model.get('email'))) {
                 errors['account_telefonos'] = errors['account_telefonos'] || {};
                 errors['account_telefonos'].required = true;
             }
