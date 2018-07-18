@@ -1739,29 +1739,15 @@ $app_strings['LBL_REVENUELINEITEM_NAME']='Operación';
 $app_strings['LBL_LIKELY']='Backlog';
 $app_strings['LBL_IN_FORECAST']='';
 $app_strings['LBL_FORECAST']='Forecast';
-$app_strings['LBL_OPPORTUNITY']='Operaciones';
-$app_strings['LBL_EMAIL_QC_OPPORTUNITIES']='Operaciones';
-$app_strings['LBL_OPPORTUNITY_METRICS']='Operaciones Metrics';
-$app_strings['LBL_CREATE_OPPORTUNITY']='Create Operaciones';
-$app_strings['LBL_DASHLET_OPPORTUNITY_NAME']='Operaciones Metrics';
-$app_strings['LBL_DASHLET_OPPORTUNITY_DESCRIPTION']='Operaciones Metrics for Related Persona.  Requires D&B subscription.';
-$app_strings['ERR_QUOTE_CONVERTED']='This Quote has already been converted to an Operaciones.';
-$app_strings['LBL_QUOTE_TO_OPPORTUNITY_LABEL']='Create Operaciones from Quote';
-$app_strings['LBL_QUOTE_TO_OPPORTUNITY_TITLE']='Create Operaciones from Quote';
-$app_strings['ERR_OPPORTUNITY_NAME_DUPE']='An Operaciones with the name %s already exists.  Please enter another name below.';
-$app_strings['ERR_OPPORTUNITY_NAME_MISSING']='An Operaciones name was not entered.  Please enter an Operaciones name below.';
 $app_list_strings['moduleList']['Opportunities']='Operaciones';
 $app_list_strings['moduleListSingular']['Opportunities']='Operacion';
 $app_list_strings['record_type_display']['Opportunities']='Operacion';
 $app_list_strings['parent_type_display']['Opportunities']='Operacion';
 $app_list_strings['record_type_display_notes']['Opportunities']='Operacion';
-$app_strings['LBL_TOUR_SCREEN_6_DESCRIPTION_670']='<div style="float: left;"><div style="float: left; width: 300px;"><ul><li class="icon-ok">View Pareto chart for pipeline analysis over time for your Operaciones</li><li class="icon-ok">Choose to visualize pipeline distribution by Sales Stage or Win Probability</li><li class="icon-ok">View projected sales and how close you are to make your assigned Quota</li></ul></div><div class="well" style="float: left; width: 220px; margin-left: 20px;"><img src="themes/default/images/pt-screen6-thumb.png" width="220" id="thumbnail_6" class="thumb"></div></div><div class="clear"></div>';
 $app_strings['LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME']='Top 10 Sales Operaciones';
 $app_strings['LBL_TOP10_OPPORTUNITIES_CHART_DESC']='Displays top ten Operaciones in a bubble chart.';
 $app_strings['LBL_TOP10_OPPORTUNITIES_MY_OPP']='My Operaciones';
 $app_strings['LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP']='My Team\'s Operaciones';
-$app_strings['LBL_OPPORTUNITIES']='Operaciones';
-
 $app_list_strings['estatus_list']=array (
     'Seguimiento Futuro' => 'Seguimiento Futuro',
     'No Interesado' => 'No Interesado',
@@ -6904,8 +6890,6 @@ $app_list_strings['usuario_bo_list']=array (
   'dramirez' => 'Dacia Ramirez',
   'rmarin' => 'Rogelio Marin',
 );
-$app_strings['LBL_TOUR_SCREEN_2_DESCRIPTION_670']='<div style="float: left;"><div style="float: left; width: 300px;"><ul><li class="icon-ok">Choose fiscal year start date</li><li class="icon-ok">Setup Time Periods to be either yearly or quarterly</li><li class="icon-ok">Decide how many past and future Time Periods need to be visible in the worksheet</li><li class="icon-ok">Select Forecast ranges to tag Operaciones as Include, Exclude or Upside</li><li class="icon-ok">Select Forecast scenarios to identify Likely, Best and Worst forecast</li></ul></div><div class="well" style="float: left; width: 220px; margin-left: 20px;"><img src="themes/default/images/pt-screen2-thumb.png" width="220" id="thumbnail_2" class="thumb"></div></div><div class="clear"></div>';
-
 $app_list_strings['forecast_time_list']=array (
   '' => '',
   30 => '30',
@@ -8301,3 +8285,17 @@ $app_list_strings['metodo_prospeccion_list']=array (
   'otros' => 'Otros',
   'parque_industrial' => 'Parque industrial',
 );
+$app_strings['LBL_TOUR_SCREEN_2_DESCRIPTION_670']='<div style="float: left;"><div style="float: left; width: 300px;"><ul><li class="icon-ok">Choose fiscal year start date</li><li class="icon-ok">Setup Time Periods to be either yearly or quarterly</li><li class="icon-ok">Decide how many past and future Time Periods need to be visible in the worksheet</li><li class="icon-ok">Select Forecast ranges to tag Solicitudes y Líneas as Include, Exclude or Upside</li><li class="icon-ok">Select Forecast scenarios to identify Likely, Best and Worst forecast</li></ul></div><div class="well" style="float: left; width: 220px; margin-left: 20px;"><img src="themes/default/images/pt-screen2-thumb.png" width="220" id="thumbnail_2" class="thumb"></div></div><div class="clear"></div>';
+$app_strings['LBL_TOUR_SCREEN_6_DESCRIPTION_670']='<div style="float: left;"><div style="float: left; width: 300px;"><ul><li class="icon-ok">View Pareto chart for pipeline analysis over time for your Solicitudes y Líneas</li><li class="icon-ok">Choose to visualize pipeline distribution by Sales Stage or Win Probability</li><li class="icon-ok">View projected sales and how close you are to make your assigned Quota</li></ul></div><div class="well" style="float: left; width: 220px; margin-left: 20px;"><img src="themes/default/images/pt-screen6-thumb.png" width="220" id="thumbnail_6" class="thumb"></div></div><div class="clear"></div>';
+$app_strings['ERR_OPPORTUNITY_NAME_DUPE']='An Solicitudes y Líneas with the name %s already exists.  Please enter another name below.';
+$app_strings['ERR_OPPORTUNITY_NAME_MISSING']='An Solicitudes y Líneas name was not entered.  Please enter an Solicitudes y Líneas name below.';
+$app_strings['LBL_OPPORTUNITIES']='Solicitudes y Líneas';
+$app_strings['LBL_OPPORTUNITY']='Solicitud y Líneaes';
+$app_strings['LBL_EMAIL_QC_OPPORTUNITIES']='Solicitud y Líneaes';
+$app_strings['LBL_OPPORTUNITY_METRICS']='Solicitud y Líneaes Metrics';
+$app_strings['LBL_CREATE_OPPORTUNITY']='Create Solicitud y Líneaes';
+$app_strings['LBL_DASHLET_OPPORTUNITY_NAME']='Solicitud y Líneaes Metrics';
+$app_strings['LBL_DASHLET_OPPORTUNITY_DESCRIPTION']='Solicitud y Líneaes Metrics for Related Persona.  Requires D&B subscription.';
+$app_strings['ERR_QUOTE_CONVERTED']='This Quote has already been converted to an Solicitud y Líneaes.';
+$app_strings['LBL_QUOTE_TO_OPPORTUNITY_LABEL']='Create Solicitud y Líneaes from Quote';
+$app_strings['LBL_QUOTE_TO_OPPORTUNITY_TITLE']='Create Solicitud y Líneaes from Quote';
