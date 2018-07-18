@@ -918,13 +918,17 @@
         var allfields2=[];
         console.log(allfields);
         for(var i=0;i<allfields.length;i++){
+            var betext=0;
             for(var j=0;j<allfields[i].length;j++)
             {
                 if(allfields[i][j]!=null || allfields[i][j]!="") {
-                    allfields2.push(true);
-                }else{
-                    allfields2.push(false);
+                    betext++;
                 }
+            }
+            if(betext==0){
+                allfields2.push(false);
+            }else{
+                allfields2.push(true);
             }
         }
         console.log(allfields2);
