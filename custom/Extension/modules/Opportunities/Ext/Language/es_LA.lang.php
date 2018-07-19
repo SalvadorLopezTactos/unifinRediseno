@@ -160,3 +160,7 @@ $mod_strings['LBL_RAZON_DOS'] = 'Razón 2';
 $mod_strings['LBL_RAZON_TRES'] = 'Razón 3';
 $mod_strings['LBL_SI'] = 'Si';
 $mod_strings['LBL_TCT_OPORTUNIDAD_PERDIDA_CHK'] = 'Si';
+$mod_strings['LBL_TCT_RAZON_OP_PERDIDA_DDW'] = 'Razón';
+$mod_strings['LBL_TCT_COMPETENCIA_QUIEN_TXF'] = '¿Quien?';
+$mod_strings['LBL_TCT_COMPETENCIA_PORQUE_TXF'] = '¿Por qué?';
+$mod_strings['LBL_TCT_SIN_PROD_FINANCIERO_DDW'] = '¿Qué producto?';

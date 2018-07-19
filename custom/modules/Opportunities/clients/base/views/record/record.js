@@ -1,11 +1,7 @@
 ({
     extendsFrom: 'RecordView',
 
-    events: {
-      'click [name=cancel_button]': 'cancelClicked',
-    },
-        
-	  initialize: function (options) {
+	initialize: function (options) {
 		self = this;
 		this._super("initialize", [options]);
 		/*
@@ -48,6 +44,7 @@
 			//alert('keydown');
 		})
 
+
 		this.getCurrentYearMonth();
 
 		this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
@@ -68,8 +65,7 @@
         self.noEditFields.push('condiciones_financieras');
       }
 
-      //AF: 22/06/2018
-      //Ajuste para establecer usuario_bo_c(Equipo backOffice) como sólo lectura
+
       this.noEditFields.push('usuario_bo_c');
 
       this._super('_renderHtml');
@@ -78,9 +74,28 @@
     _render: function() {
       this._super("_render");
 
-      //AF: 22/06/2018
-      //Ajuste para establecer usuario_bo_c(Equipo backOffice) como sólo lectura
-      this.$("[data-name='usuario_bo_c']").prop("disabled", true);
+      //Victor M.L 19-07-2018
+		//no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
+        if((this.model.get('tct_etapa_ddw_c')=='SI') ||
+            (this.model.get('tct_etapa_ddw_c')=='P' &&
+                (this.model.get('estatus_c')=='PE' || this.model.get('estatus_c')=='P' ))){
+
+
+            //no hace nada y muestra el panel
+
+        }else{
+            this.$('div[data-panelname=LBL_RECORDVIEW_PANEL1]').hide();
+        }
+
+
+
+
+
+
+
+    //AF: 22/06/2018
+    //Ajuste para establecer usuario_bo_c(Equipo backOffice) como sólo lectura
+	  this.$("[data-name='usuario_bo_c']").prop("disabled", true);
 
   		// @author Carlos Zaragoza
   		// @brief Si el usuario esta ratificando una linea autorizada, se le quitan los permisos de edición sobre oportunidades.
@@ -323,11 +338,6 @@
             this.$("div.record-label[data-name='porcentaje_renta_inicial_c']").text("Porcentaje Renta Inicial");
         }
 	  },
-
-    cancelClicked: function () {
-       this._super('cancelClicked');
-       window.contador=0;
-    },
 
     delegateButtonEvents: function () {
 			this._super("delegateButtonEvents");
