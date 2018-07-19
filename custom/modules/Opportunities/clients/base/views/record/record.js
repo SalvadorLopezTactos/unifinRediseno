@@ -28,6 +28,8 @@
 		});
 		this.model.fields['forecast_c'].options = opciones_forecast;
 		*/
+    this.on('render', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
+    this.model.on("change:tct_oportunidad_perdida_chk_c",this._HideSaveButton, this);
 		this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
 		this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
 		this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
@@ -887,4 +889,14 @@ console.log(name);
 			this.model.set("porciento_ri_c", percent);
 		}
 	},
+
+    _HideSaveButton: function () {
+         if (this.model.get('tct_oportunidad_perdida_chk_c'))
+         {
+            $('[name="save_button"]').eq(0).hide();
+         }
+         else {$('[name="save_button"]').eq(0).show();}
+    }
+
 })
+
