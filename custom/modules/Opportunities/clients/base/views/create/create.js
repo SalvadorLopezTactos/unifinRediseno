@@ -9,6 +9,8 @@
         self = this;
         this._super("initialize", [options]);
 
+        this.on('render', this.ocultaFunc, this);
+        
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
         this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
@@ -19,7 +21,7 @@
         //Ajuste Salvador Lopez <salvador.lopez@tactos.com.mx>
         //Validación para evitar asociar una Persona que no sea cliente
         this.model.addValidationTask('check_person_type', _.bind(this.personTypeCheck, this));
-
+        
         this.model.on("change:porciento_ri_c", _.bind(this.calcularRI, this));
         this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
 
@@ -1008,6 +1010,22 @@
         }
     },
 
+    ocultaFunc: function()
+    {
+		_.each(this.fields,function(field)
+		{
+			$('[data-name="'+field.name+'"]').hide();
+		});
+		$('[data-name="name"]').show();
+		$('[data-name="tct_etapa_ddw_c"]').show();
+		$('[data-name="estatus_c"]').show();
+		$('[data-name="idsolicitud_c"]').show();
+		$('[data-name="account_name"]').show();
+		$('[data-name="tipo_producto_c"]').show();
+		$('[data-name="monto_c"]').show();
+		$('[data-name="assigned_user_name"]').show();
+    },
+    
     /*
      validaDatosRequeridos: function(fields, errors, callback){
      console.log("Entro a validacion de mes");
