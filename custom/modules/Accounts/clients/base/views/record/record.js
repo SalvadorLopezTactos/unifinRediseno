@@ -409,11 +409,10 @@
 
         this._ActualizaEtiquetas();
 
+        //@Jesus Carrillo
         //Ocultar Div y boton "Prospecto Contactado"
         $('div[data-name=tct_prospecto_contactado_chk_c]').hide();
 
-            $('a[name=prospectocontactado]').hide();
-            $('.jcmx1').hide();
 
         // Validación para no poder inactivar clientes con contratos activos
         if (this.model.dataFetched) {
@@ -841,7 +840,9 @@
         var name = this.model.get('name');
         window.open("#bwc/index.php?entryPoint=HistorialCotizaciones&Accountid=" + Accountid + "&name=" + name);
     },
-
+    /* @Jesus Carrillo
+        Metodo para verificar  las llamadas de la cuenta
+     */
     getllamadas:function () {
         var cday = new Date();
         var llamadas=0;
@@ -861,7 +862,9 @@
             },this)
         });
     },
-
+    /* @Jesus Carrillo
+        Metodo para verificar  las reuniones de la cuenta
+     */
     getreuniones:function () {
         var cday = new Date();
         var reuniones=0;
@@ -880,7 +883,9 @@
             },this)
         });
     },
-
+    /* @Jesus Carrillo
+        Metodo para validar campos de telefonos y direcciones
+     */
     validar_fields:function() {
         var datos_telefonos = this.model.get('account_telefonos');
         var tipolabel = [];
@@ -948,7 +953,9 @@
                 });
         }
     },
-
+/* @Jesus Carrillo
+    Metodo que convierte a prospecto contactado
+ */
     prospectocontactadoClicked:function(){
         if(this.totalllamadas==0 && this.totalreuniones==0){
             app.alert.show('alert_calls', {
