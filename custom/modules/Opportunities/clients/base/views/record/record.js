@@ -24,14 +24,15 @@
 		});
 		this.model.fields['forecast_c'].options = opciones_forecast;
 		*/
-
-
+    this.on('render', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
+    this.model.on("change:tct_oportunidad_perdida_chk_c",this._HideSaveButton, this);
 		this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
-        this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
-        this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
+		this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
+		this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
 
 		this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
 		this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
+		this.model.addValidationTask('check_oportunidadperdida', _.bind(this.oportunidadperdidacheck, this));
 
 		this.model.on("change:porciento_ri_c", _.bind(this.calcularRI, this));
 		this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
@@ -509,7 +510,7 @@
 					success: _.bind(function (data) {
 						if (data != null) {
 							console.log("Se cancelo padre");
-							window.location.reload()
+							//window.location.reload()
 						} else {
 							console.log("No se cancela Padre");
 						}
@@ -558,7 +559,7 @@
 						success: _.bind(function (data) {
 							if (data != null) {
 								console.log("Se cancelo padre");
-								window.location.reload()
+								//window.location.reload()
 							} else {
 								console.log("No se cancela Padre");
 							}
@@ -872,6 +873,18 @@ console.log(name);
 		callback(null, fields, errors);
 	},
 
+    oportunidadperdidacheck: function(fields, errors, callback){
+	    console.log(fields);
+	    console.log(errors);
+        if(this.model.get('tct_oportunidad_perdida_chk_c')==true){
+            this.cancelaOperacion();
+            this.model.set('estatus_c','K');
+            this.model.save();
+            //window.location.reload()
+        }
+        callback(null, fields, errors);
+    },
+
 	calcularRI: function(){
 		if(!_.isEmpty(this.model.get("amount")) && !_.isEmpty(this.model.get("porciento_ri_c")) && this.model.get("porciento_ri_c") != 0 && this.model.get("tipo_operacion_c") == 1){
 			var percent = (this.model.get("amount") * this.model.get("porciento_ri_c")) / 100;
@@ -886,4 +899,14 @@ console.log(name);
 			this.model.set("porciento_ri_c", percent);
 		}
 	},
+
+    _HideSaveButton: function () {
+         if (this.model.get('tct_oportunidad_perdida_chk_c'))
+         {
+            $('[name="save_button"]').eq(0).hide();
+         }
+         else {$('[name="save_button"]').eq(0).show();}
+    }
+
 })
+

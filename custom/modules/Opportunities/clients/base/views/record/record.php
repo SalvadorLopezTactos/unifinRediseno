@@ -90,14 +90,16 @@ array (
                 'label' => 'Solicitar Sobregiro',
                 'acl_action' => 'view',
               ),
-              8 => 
+             /* Jesus Carrillo 18/07/18
+                Se oculta boton en el modulo soluciones y lineas para implementar la funcionalidad en el checkbox
+             8 =>
               array (
                 'type' => 'rowaction',
                 'event' => 'button:cancela_operacion_button:click',
                 'name' => 'cancela_operacion',
                 'label' => 'Cancela Operacion',
                 'acl_action' => 'view',
-              ),
+              ), */
               9 => 
               array (
                 'type' => 'rowaction',
