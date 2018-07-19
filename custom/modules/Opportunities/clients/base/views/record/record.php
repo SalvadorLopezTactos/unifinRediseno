@@ -181,7 +181,7 @@ array (
             'labels' => true,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'newTab' => false,
+            'newTab' => true,
             'panelDefault' => 'expanded',
             'fields' => 
             array (
@@ -629,25 +629,33 @@ array (
               ),
               1 => 
               array (
-                'name' => 'razon_c',
-                'label' => 'LBL_RAZON',
+                'name' => 'tct_razon_op_perdida_ddw_c',
+                'label' => 'LBL_TCT_RAZON_OP_PERDIDA_DDW',
               ),
               2 => 
               array (
-                'name' => 'razon_dos_c',
-                'label' => 'LBL_RAZON_DOS',
+                'name' => 'tct_competencia_quien_txf_c',
+                'label' => 'LBL_TCT_COMPETENCIA_QUIEN_TXF',
               ),
               3 => 
               array (
-                'name' => 'razon_tres_c',
-                'label' => 'LBL_RAZON_TRES',
+                'name' => 'tct_competencia_porque_txf_c',
+                'label' => 'LBL_TCT_COMPETENCIA_PORQUE_TXF',
+              ),
+              4 => 
+              array (
+                'name' => 'tct_sin_prod_financiero_ddw_c',
+                'label' => 'LBL_TCT_SIN_PROD_FINANCIERO_DDW',
+              ),
+              5 => 
+              array (
               ),
             ),
           ),
         ),
         'templateMeta' => 
         array (
-          'useTabs' => false,
+          'useTabs' => true,
         ),
       ),
     ),
