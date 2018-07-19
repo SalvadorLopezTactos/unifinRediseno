@@ -370,12 +370,26 @@
     },
 
     _doValidateDireccionFiscalCorrespondencia: function (fields, errors, callback){
+        if(this.model.get("tipo_registro_c") == "Cliente" || this.model.get("subtipo_cuenta_c") == "Integracion de Expediente" || this.model.get("subtipo_cuenta_c") == "Credito")
+        {
+                 var correspondencia = false;
+                 var fiscal = false;
+                 var valuesI = [];
+                 var self = this;
+              _.each(this.model.get("account_direcciones"), function(direccion, key) {
 
-        if(this.model.get("tipo_registro_c") == "Cliente"){
-            var correspondencia = false;
-            var fiscal = false;
-            _.each(this.model.get("account_direcciones"), function(direccion, key) {
-                if(direccion.indicador == "1"){
+                //Recupera valores por indicador
+                valuesI = self._getIndicador(direccion.indicador,null);
+                //Valida Fiscal
+                if(valuesI.includes("2")){
+                    fiscal = true;
+                }
+                //Valida Correspondencia
+                if(valuesI.includes("1")){
+                    correspondencia = true;
+                }
+
+                /*if(direccion.indicador == "1"){
                     correspondencia = true;
                 }
                 if(direccion.indicador == "5"){
@@ -394,14 +408,13 @@
                 if(direccion.indicador == "7"){
                     fiscal = true;
                     correspondencia = true;
-                }
+                }*/
 
             });
 
             if(fiscal == false || correspondencia == false){
-                var alertOptions = {title: "Se requiere de almenos una direccion fiscal y una de correspondencia.", level: "error"};
+                var alertOptions = {title: "Se requiere de al menos una direccion fiscal y una de correspondencia.", level: "error"};
                 app.alert.show('validation', alertOptions);
-
                 errors['account_direcciones'] = errors['account_direcciones'] || {};
                 errors['account_direcciones'].required = true;
             }
