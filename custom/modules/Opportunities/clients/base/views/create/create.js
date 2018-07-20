@@ -9,7 +9,7 @@
         self = this;
         this._super("initialize", [options]);
 
-        this.on('render', this.ocultaFunc, this);
+        //this.on('render', this.ocultaFunc, this);
         
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
@@ -960,21 +960,35 @@
            app.api.call('GET', app.api.buildURL('Accounts/' + id_person ), null, {
                success: _.bind(function(data){
                    if(data!=null){
+                       //Obteniendo valores de lista
+                       var types=app.lang.getAppListStrings('tipo_registro_list');
+                       //Eliminando valores de Cliente y Prospecto
+                       delete types['Cliente'];
+                       delete  types['Prospecto']
 
-                       if(data.tipo_registro_c!=='Cliente') {
-
-                           app.alert.show("Cliente no v\u00E1lido", {
-                               level: "error",
-                               title: "No se puede asociar la operaci\u00F3n a una Persona que no sea de tipo Cliente",
-                               autoClose: false
-                           });
-
-                           app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente';
-                           errors['account_name'] = errors['account_name'] || {};
-                           errors['account_name'].custom_message1 = true;
-                           //this.cancelClicked();
-                           
+                       //arr_types mantiene los tipos de cuenta no permitidos
+                       var arr_types=[];
+                       for (var key in types) {
+                           if (types.hasOwnProperty(key)) {
+                               arr_types.push(types[key])
+                           }
                        }
+
+                       if($.inArray(data.tipo_registro_c,arr_types) != -1){
+
+                               app.alert.show("Cliente no v\u00E1lido", {
+                                   level: "error",
+                                   title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " +data.tipo_registro_c,
+                                   autoClose: false
+                               });
+
+                               app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
+                               errors['account_name'] = errors['account_name'] || {};
+                               errors['account_name'].custom_message1 = true;
+                               //this.cancelClicked();
+
+                       }
+
                    }
 
                    callback(null, fields, errors);
@@ -983,7 +997,7 @@
            });
        }else{
 
-           app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente';
+           app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
            errors['account_name'] = errors['account_name'] || {};
            errors['account_name'].custom_message1 = true;
            errors['account_name'].required = true;
