@@ -169,8 +169,8 @@
 
         //Hide Vista360
         this._hideVista360();
-        this.model.set("tipo_registro_c", 'Cliente');
-        this.model.set("tipo_registro_c", 'Prospecto');
+        //this.model.set("tipo_registro_c", 'Cliente');
+        //this.model.set("tipo_registro_c", 'Prospecto');
         //callback(null, fields, errors);
 
         /* @author F. Javier Garcia S. 10/07/2018
