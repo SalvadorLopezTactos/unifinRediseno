@@ -553,6 +553,7 @@
             var $selColonia = $input.parent().parent().parent().find("[placeholder='colonia']");
 
             var $selColoniaTemp = $input.parent().parent().parent().find("select.existingColoniaTemp");
+            var $iconLoading = $input.parent().parent().parent().find(".loadingIconColoniaTemp");
 
             $selColonia.empty();
             $selColoniaTemp.empty();
@@ -590,6 +591,8 @@
                 ]
             });
             console.log(url);
+
+            $iconLoading.show();
             app.api.call('read', url, null, {
                 success: _.bind(function (colonias) {
                     $.each(colonias.records, function (colonia_id, colonia) {
@@ -597,8 +600,10 @@
                         if (colonia.id == $selColonia.next().val()) {
                             $selColonia.append($("<option selected='selected'>").val(colonia.id).html(colonia.name));
                             $selColoniaTemp.append($("<option selected='selected'>").val(colonia.id).html(colonia.name));
+                            $iconLoading.hide();
                         } else {
                             $selColoniaTemp.append($("<option>").val(colonia.id).html(colonia.name));
+                            $iconLoading.hide();
                         }
                     });
                 }, this)
