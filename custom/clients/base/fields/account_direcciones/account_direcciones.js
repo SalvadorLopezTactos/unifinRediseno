@@ -603,6 +603,7 @@
                             $iconLoading.hide();
                         } else {
                             $selColoniaTemp.append($("<option>").val(colonia.id).html(colonia.name));
+                            $iconLoading.hide();
                         }
                     });
                 }, this)
