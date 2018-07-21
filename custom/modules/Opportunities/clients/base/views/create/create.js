@@ -396,56 +396,6 @@
         });
     },
 
-  /*  valida_telefono_direccon: function (id_person) {
-
-        var self = this;
-
-        bandera=0;
-        this.respuestaT = "";
-        this.respuestaD = "";
-        this.respuesta ="";
-
-        app.api.call('GET', app.api.buildURL('Accounts/' + id_person + "/link/accounts_dire_direccion_1"), null, {
-            success: _.bind(function (data) {
-                if (data != null) {
-
-                    if (data.records.length > 0) {
-
-                        console.log(data.records.length );
-                        bandera=1;
-                    } else {
-                       self.respuestaD = "Direcciones";
-                        console.log(self.respuestaD);
-                    }
-                }
-
-            }, self),
-        });
-
-        app.api.call('GET', app.api.buildURL('Accounts/' + id_person + "/link/accounts_tel_telefonos_1"), null, {
-            success: _.bind(function (data) {
-                if (data != null) {
-
-                    if (data.records.length > 0) {
-                        dandera=!
-                        console.log(data.records.length );
-                    } else {
-                        bandera=0;
-                        self.respuestaT = "Teléfonos";
-                        console.log(self.respuestaT);
-                    }
-                }
-
-            }, self),
-        });
-
-
-
-        self.respuesta = self.respuestaD + " " + self.respuestaT;
-        console.log("direcciones y tel  " +self.respuesta);
-        return self.respuesta;
-    },  */
-
     _ValidateAmount: function (fields, errors, callback){
         if (parseFloat(this.model.get('monto_c')) <= 0)
         {
