@@ -50,6 +50,15 @@
         //this.model.addValidationTask('check_requeridos', _.bind(this.validaDatosRequeridos, this));
 
         /*
+        * @author F. Javier G. Solar
+        * 19/07/2018
+        * Valida que los campos de la cuenta esten completos.
+        * **/
+        this.model.addValidationTask('Valida al Guardar',_.bind(this.validacion_proceso_guardar,this));
+
+
+
+        /*
         * @author Carlos Zaragoza Ortiz
         * @version 1
         * Ocultar opciones de cotización, contrato y línea de crédito al crear la oportunidad y bloquear el campo. Los cambios posteriores se controlan desde UNICS
@@ -351,7 +360,44 @@
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
     },
-           
+
+    validacion_proceso_guardar: function (fields, errors, callback) {
+
+        self = this;
+
+        if (this.model.get('account_id' != "") || this.model.get('account_id') != null)
+        {
+            app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')), null, {
+                success: _.bind(function (data) {
+
+                    if (data != "") {
+                        var titulo = "Campos Requeridos en Cuentas";
+                        var nivel = "error";
+                        var mensaje = "Hace falta completar la siguiente información: " + data;
+
+
+                        app.error.errorName2Keys['custom_message1'] = 'Falta información en campos requeridos de la cuenta';
+                        errors['account_name'] = errors['account_name'] || {};
+                        errors['account_name'].custom_message1 = true;
+                        errors['account_name'].required = true;
+                        self.mensajes(titulo, mensaje, nivel);
+
+                    }
+                    callback(null, fields, errors)
+
+                }, self),
+            });
+        }
+
+    },
+
+    mensajes:function (descripcion,texto,nivel) {
+        app.alert.show(descripcion, {
+            level: nivel,
+            messages: texto,
+        });
+    },
+
     _ValidateAmount: function (fields, errors, callback){
         if (parseFloat(this.model.get('monto_c')) <= 0 )
         {
