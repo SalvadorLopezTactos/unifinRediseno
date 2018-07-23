@@ -61,3 +61,5 @@ $mod_strings['LBL_COMISION'] = 'Comisión';
 $mod_strings['LBL_DIF_RESIDUALES'] = 'Diferencia residuales (VRI - VRC)';
 $mod_strings['LBL_MONTO_PIPELINE_POSTERIOR_C'] = 'Colocación Pipeline';
 $mod_strings['LBL_LEV_BACKLOG_OPPORTUNITIES_FROM_OPPORTUNITIES_TITLE'] = 'Solicitudes y Líneas';
+$mod_strings['LBL_TCT_COMPETENCIA_QUIEN_TXF'] = '¿Quién? ';
+$mod_strings['LBL_TCT_QUE_PRODUCTO_TXF'] = '¿Qué producto? ';
