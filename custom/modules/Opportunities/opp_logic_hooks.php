@@ -73,6 +73,14 @@
             }elseif ($bean->tct_etapa_ddw_c!='SI'){
                 $bean->name = str_replace("PRE - ","",$bean->name) ;
             }
+            /* @Jesus Carrillo
+             Convertir a prospecto  interesado , si la cuenta inicial es prospecto
+             */
+            $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
+            if($beanCuenta->tipo_registro_c=='Prospecto'){
+                $beanCuenta->subtipo_cuenta_c='Interesado';
+                $beanCuenta->save();
+            }
         }
 
         public function setFechadeCierre($bean = null, $event = null, $args = null){
