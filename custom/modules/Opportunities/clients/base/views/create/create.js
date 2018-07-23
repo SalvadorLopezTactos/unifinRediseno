@@ -9,13 +9,13 @@
         self = this;
         this._super("initialize", [options]);
 
-        //this.on('render', this.ocultaFunc, this);
+        this.on('render', this.ocultaFunc, this);
         
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
         this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
         this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this));
-        this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
+        //this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
         this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
 
         //Ajuste Salvador Lopez <salvador.lopez@tactos.com.mx>
@@ -31,7 +31,7 @@
         * Validar la cantidad de operaciones que se pueden generar para un cliente/Prospecto (solo una)
         * @type Event
         * */
-        this.model.addValidationTask('check_operaciones_permitidas', _.bind(this.validaOperacionesPermitidasPorCuenta, this));
+        //this.model.addValidationTask('check_operaciones_permitidas', _.bind(this.validaOperacionesPermitidasPorCuenta, this));
 
         /*@author Carlos Zaragoza Ortiz
          * @version 1
@@ -399,12 +399,19 @@
     },
 
     _ValidateAmount: function (fields, errors, callback){
-        if (parseFloat(this.model.get('monto_c')) <= 0)
+        if (parseFloat(this.model.get('monto_c')) <= 0 )
         {
             errors['monto_c'] = errors['monto_c'] || {};
             errors['monto_c'].required = true;
+
+            app.alert.show("Monto de Linea requerido", {
+                level: "error",
+                title: "Monto de L\u00EDnea debe ser mayor a cero",
+                autoClose: false
+            });
         }
-        
+
+        /*
         if (parseFloat(this.model.get('amount')) <= 0)
         {
             errors['amount'] = errors['amount'] || {};
@@ -440,6 +447,7 @@
             });
 
         }
+         */
 
         callback(null, fields, errors);
     },
@@ -1084,6 +1092,10 @@
 		$('[data-name="tipo_producto_c"]').show();
 		$('[data-name="monto_c"]').show();
 		$('[data-name="assigned_user_name"]').show();
+
+
+		//Ocultando el panel de Oportunidad perdida
+        $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
     },
     
     /*

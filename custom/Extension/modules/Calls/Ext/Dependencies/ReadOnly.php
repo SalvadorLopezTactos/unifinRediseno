@@ -1,6 +1,4 @@
 <?php
-global $current_user;
-$userid=$current_user->id;
 
 $dependencies['Calls']['LlamadasNo'] = array(
     'hooks' => array("all"),

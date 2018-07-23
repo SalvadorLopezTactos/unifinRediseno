@@ -248,6 +248,11 @@ SQL;
 
                 // Generales de la operación
                 $opp->name = "R/I para " . $bean->name;
+                //author: Salvador Lopez
+                //La operación nueva debe nacer como "INTEGRACIÓN DE EXPEDIENTE" Y "EN ESPERA"
+                $opp->tct_etapa_ddw_c="P";//Integración de Expediente
+                $opp->estatus_c="PE";//En Espera
+
                 $opp->monto_c = $bean->monto_ratificacion_increment_c + $bean->monto_c;
                 $opp->amount = $bean->monto_ratificacion_increment_c + $bean->amount;
                 $opp->monto_ratificacion_increment_c = $bean->monto_ratificacion_increment_c;
