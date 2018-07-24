@@ -68,6 +68,16 @@ array (
               4 => 'status',
               5 => 
               array (
+                'name' => 'tct_resultado_llamada_ddw_c',
+                'label' => 'LBL_TCT_RESULTADO_LLAMADA_DDW',
+              ),
+              6 => 
+              array (
+                'name' => 'tct_motivo_ilocalizable_ddw_c',
+                'label' => 'LBL_TCT_MOTIVO_ILOCALIZABLE_DDW',
+              ),
+              7 => 
+              array (
                 'name' => 'reminder',
                 'type' => 'fieldset',
                 'orientation' => 'horizontal',
@@ -91,7 +101,7 @@ array (
                   ),
                 ),
               ),
-              6 => 
+              8 => 
               array (
                 'name' => 'email_reminder',
                 'type' => 'fieldset',
@@ -116,9 +126,9 @@ array (
                   ),
                 ),
               ),
-              7 => 'description',
-              8 => 'parent_name',
-              9 => 'assigned_user_name',
+              9 => 'description',
+              10 => 'parent_name',
+              11 => 'assigned_user_name',
             ),
           ),
         ),
