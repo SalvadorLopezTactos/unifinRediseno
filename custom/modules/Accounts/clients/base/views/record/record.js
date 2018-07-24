@@ -377,6 +377,10 @@
             self.noEditFields.push('tct_origen_ag_tel_rel_c');
             self.noEditFields.push('tct_origen_busqueda_txf_c');
             self.noEditFields.push('medio_digital_c');
+            self.noEditFields.push('tct_punto_contacto_ddw_c');
+            self.noEditFields.push('evento_c');
+            self.noEditFields.push('camara_c');
+            self.noEditFields.push('tct_que_promotor_rel_c');
 
         }
 
