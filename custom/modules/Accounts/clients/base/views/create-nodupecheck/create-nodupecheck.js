@@ -200,6 +200,26 @@
          * Ocultar campo de estatus Activo/Inactivo en creación de personas
          * */
         this.$('div[data-name=estatus_persona_c]').hide();  
+
+        /*
+           AF - 2018/07/06
+           Cambio: Se coultan pestañas:  Vista 360, Cuestionario PLD y campo show panel
+        */
+         //Oculta vista 360 y Cuestionario PLD
+         //TabNav
+         $("#drawers li.tab").removeClass('active');
+         $('#drawers li.tab.panel_body').addClass("active");
+         $('#drawers li.tab.LBL_RECORDVIEW_PANEL8').hide();
+         $('#drawers li.tab.LBL_RECORDVIEW_PANEL1').hide();
+         $('#drawers li.tab.LBL_RECORDVIEW_PANEL2').hide();
+ 
+         //Tabcontent
+         $("#drawers div.tab-content").children()[0].classList.remove('active');
+         $("#drawers div.tab-content").children()[1].classList.add('active');
+         $("#drawers div.tab-content").children()[1].classList.remove('fade');
+ 
+         //Oculta campo
+         $("div[data-name='show_panel_c']").hide();
     },
 
     _ActualizaEtiquetas: function(){
