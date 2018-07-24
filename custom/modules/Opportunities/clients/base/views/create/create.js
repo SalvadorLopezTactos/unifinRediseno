@@ -361,19 +361,24 @@
         }
     },
 
+    /*
+    * @Author F. Javier G. Solar
+    * 23-07-2018
+    * Valida campos requeridos antes de crear solicitud
+    * */
     validacion_proceso_guardar: function (fields, errors, callback) {
 
         self = this;
 
         if (this.model.get('account_id' != "") || this.model.get('account_id') != null)
         {
-            app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')), null, {
+            app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/1'), null, {
                 success: _.bind(function (data) {
 
                     if (data != "") {
                         var titulo = "Campos Requeridos en Cuentas";
                         var nivel = "error";
-                        var mensaje = "Hace falta completar la siguiente información: " + data;
+                        var mensaje = "Hace falta completar la siguiente informaci&oacuten: " + data;
 
 
                         app.error.errorName2Keys['custom_message1'] = 'Falta información en campos requeridos de la cuenta';

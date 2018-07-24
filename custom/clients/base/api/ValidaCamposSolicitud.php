@@ -20,9 +20,9 @@ class ValidaCamposSolicitud extends SugarApi
                 'reqType' => 'GET',
                 'noLoginRequired' => true,
                 //endpoint path
-                'path' => array('ObligatoriosCuentasSolicitud', '?'),
+                'path' => array('ObligatoriosCuentasSolicitud', '?','?'),
                 //endpoint variables
-                'pathVars' => array('module', 'id_cuenta'),
+                'pathVars' => array('module', 'id_cuenta','caso'),
                 //method to call
                 'method' => 'validaRequeridos',
                 //short help string to be displayed in the help documentation
@@ -38,6 +38,8 @@ class ValidaCamposSolicitud extends SugarApi
     // FUNCIONES PARA VALIDACIONES
     public function validaRequeridos($api, $args)
     {
+        $option=$args['caso'];
+
         $req_pm = "origendelprospecto_c,tipodepersona_c," .
             "nombre_comercial_c,email1,sectoreconomico_c," .
             "subsectoreconomico_c,actividadeconomica_c," .
@@ -50,6 +52,17 @@ class ValidaCamposSolicitud extends SugarApi
             "empleados_c," .
             "promotorleasing_c,promotorfactoraje_c,promotorcredit_c";
 
+        if($option=='2'){
+            $req_pm .= "generar_rfc_c,fechadenacimiento_c," .
+                "pais_nacimiento_c,estado_nacimiento_c," .
+                "zonageografica_c,ventas_anuales_c," .
+                "potencial_cuenta_c,activo_fijo_c";
+
+            $req_pf_y_pfae .= "generar_rfc_c,fechadenacimiento_c," .
+                "pais_nacimiento_c,estado_nacimiento_c,zonageografica_c," .
+                "genero_c,ifepasaporte_c,curp_c" .
+                "estadocivil_c,regimenpatrimonial_c,profesion_c,ventas_anuales_c,potencial_cuenta_c,activo_fijo_c";
+        }
 
         $id_cuenta = $args['id_cuenta'];
 
@@ -106,7 +119,5 @@ class ValidaCamposSolicitud extends SugarApi
         }
 
 
-    }
-
-
+}
 }
