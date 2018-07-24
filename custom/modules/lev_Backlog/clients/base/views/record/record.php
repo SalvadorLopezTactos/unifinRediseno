@@ -280,6 +280,22 @@ array (
               ),
               27 => 
               array (
+                'name' => 'tct_competencia_quien_txf_c',
+                'label' => 'LBL_TCT_COMPETENCIA_QUIEN_TXF',
+              ),
+              28 => 
+              array (
+              ),
+              29 => 
+              array (
+                'name' => 'tct_que_producto_txf_c',
+                'label' => 'LBL_TCT_QUE_PRODUCTO_TXF',
+              ),
+              30 => 
+              array (
+              ),
+              31 => 
+              array (
                 'name' => 'monto_comprometido_cancelado',
                 'related_fields' => 
                 array (
@@ -288,7 +304,7 @@ array (
                 ),
                 'label' => 'LBL_MONTO_COMPROMETIDO_CANCELADO',
               ),
-              28 => 
+              32 => 
               array (
                 'name' => 'renta_inicialcomp_can',
                 'related_fields' => 
@@ -298,19 +314,19 @@ array (
                 ),
                 'label' => 'LBL_RENTA_INICIALCOMP_CAN',
               ),
-              29 => 
+              33 => 
               array (
                 'name' => 'description',
                 'span' => 12,
               ),
-              30 => 
+              34 => 
               array (
                 'name' => 'progreso',
                 'studio' => 'visible',
                 'label' => 'LBL_PROGRESO',
                 'span' => 12,
               ),
-              31 => 
+              35 => 
               array (
                 'related_fields' => 
                 array (
@@ -320,7 +336,7 @@ array (
                 'name' => 'monto_prospecto_c',
                 'label' => 'LBL_MONTO_PROSPECTO_C',
               ),
-              32 => 
+              36 => 
               array (
                 'related_fields' => 
                 array (
@@ -330,7 +346,7 @@ array (
                 'name' => 'ri_prospecto_c',
                 'label' => 'LBL_RI_PROSPECTO_C',
               ),
-              33 => 
+              37 => 
               array (
                 'related_fields' => 
                 array (
@@ -340,7 +356,7 @@ array (
                 'name' => 'monto_credito_c',
                 'label' => 'LBL_MONTO_CREDITO_C',
               ),
-              34 => 
+              38 => 
               array (
                 'related_fields' => 
                 array (
@@ -350,7 +366,7 @@ array (
                 'name' => 'ri_credito_c',
                 'label' => 'LBL_RI_CREDITO_C',
               ),
-              35 => 
+              39 => 
               array (
                 'related_fields' => 
                 array (
@@ -360,7 +376,7 @@ array (
                 'name' => 'monto_rechazado_c',
                 'label' => 'LBL_MONTO_RECHAZADO_C',
               ),
-              36 => 
+              40 => 
               array (
                 'related_fields' => 
                 array (
@@ -370,7 +386,7 @@ array (
                 'name' => 'ri_rechazada_c',
                 'label' => 'LBL_RI_RECHAZADA_C',
               ),
-              37 => 
+              41 => 
               array (
                 'related_fields' => 
                 array (
@@ -380,7 +396,7 @@ array (
                 'name' => 'monto_sin_solicitud_c',
                 'label' => 'LBL_MONTO_SIN_SOLICITUD_C',
               ),
-              38 => 
+              42 => 
               array (
                 'related_fields' => 
                 array (
@@ -390,7 +406,7 @@ array (
                 'name' => 'ri_sin_solicitud_c',
                 'label' => 'LBL_RI_SIN_SOLICITUD_C',
               ),
-              39 => 
+              43 => 
               array (
                 'related_fields' => 
                 array (
@@ -400,7 +416,7 @@ array (
                 'name' => 'monto_con_solicitud_c',
                 'label' => 'LBL_MONTO_CON_SOLICITUD_C',
               ),
-              40 => 
+              44 => 
               array (
                 'related_fields' => 
                 array (
@@ -410,7 +426,7 @@ array (
                 'name' => 'ri_con_solicitud_c',
                 'label' => 'LBL_RI_CON_SOLICITUD_C',
               ),
-              41 => 
+              45 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
@@ -433,7 +449,7 @@ array (
                   ),
                 ),
               ),
-              42 => 
+              46 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -456,7 +472,7 @@ array (
                   ),
                 ),
               ),
-              43 => 
+              47 => 
               array (
                 'name' => 'tag',
                 'span' => 12,
