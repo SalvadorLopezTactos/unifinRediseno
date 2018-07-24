@@ -146,7 +146,11 @@ array (
             'name' => 'tct_altaproveedor_chk_c',
             'label' => 'LBL_TCT_ALTAPROVEEDOR_CHK',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'tct_alta_clientes_chk_c',
+            'label' => 'LBL_TCT_ALTA_CLIENTES_CHK',
+          ),
         ),
         11 => 
         array (
