@@ -1,5 +1,5 @@
 <?php
- // created: 2018-07-05 19:06:25
+ // created: 2018-07-11 14:11:13
 $dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['labelValue']='Punto de Contacto';
 $dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['dependency']='';
 $dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']=array (
@@ -70,17 +70,35 @@ $dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']=
     ),
     'TV' => 
     array (
+      0 => '',
+      1 => 'Portal',
+      2 => 'Telefono',
     ),
     'Radio' => 
     array (
+      0 => '',
+      1 => 'Portal',
+      2 => 'Telefono',
     ),
     'Prensa' => 
     array (
+      0 => '',
+      1 => 'Portal',
+      2 => 'Telefono',
     ),
     'Revistas' => 
     array (
+      0 => '',
+      1 => 'Portal',
+      2 => 'Telefono',
     ),
     'Espectaculares' => 
+    array (
+      0 => '',
+      1 => 'Portal',
+      2 => 'Telefono',
+    ),
+    '' => 
     array (
     ),
   ),

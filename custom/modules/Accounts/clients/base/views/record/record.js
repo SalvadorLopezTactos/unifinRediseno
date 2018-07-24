@@ -214,6 +214,10 @@
             this.$("[data-name='tct_origen_ag_tel_rel_c']").prop("disabled", true);
             this.$("[data-name='tct_origen_busqueda_txf_c']").prop("disabled", true);
             this.$("[data-name='medio_digital_c']").prop("disabled", true);
+            this.$("[data-name='tct_punto_contacto_ddw_c']").prop("disabled", true);
+            this.$("[data-name='evento_c']").prop("disabled", true);
+            this.$("[data-name='camara_c']").prop("disabled", true);
+            this.$("[data-name='tct_que_promotor_rel_c']").prop("disabled", true);
 
 
         }

@@ -239,6 +239,52 @@ array (
               ),
               2 => 
               array (
+                'name' => 'tct_origen_busqueda_txf_c',
+                'label' => 'LBL_TCT_ORIGEN_BUSQUEDA_TXF',
+              ),
+              3 => 
+              array (
+                'name' => 'tct_origen_base_ddw_c',
+                'label' => 'LBL_TCT_ORIGEN_BASE_DDW',
+              ),
+              4 => 
+              array (
+                'name' => 'medio_digital_c',
+                'label' => 'LBL_MEDIO_DIGITAL',
+              ),
+              5 => 
+              array (
+                'name' => 'tct_punto_contacto_ddw_c',
+                'label' => 'LBL_TCT_PUNTO_CONTACTO_DDW',
+              ),
+              6 => 
+              array (
+                'name' => 'evento_c',
+                'label' => 'LBL_EVENTO',
+              ),
+              7 => 
+              array (
+              ),
+              8 => 
+              array (
+                'name' => 'camara_c',
+                'label' => 'LBL_CAMARA',
+              ),
+              9 => 
+              array (
+              ),
+              10 => 
+              array (
+                'name' => 'como_se_entero_c',
+                'label' => 'LBL_COMO_SE_ENTERO',
+              ),
+              11 => 
+              array (
+                'name' => 'cual_c',
+                'label' => 'LBL_CUAL',
+              ),
+              12 => 
+              array (
                 'name' => 'tct_origen_ag_tel_rel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_ORIGEN_AG_TEL_REL',
@@ -252,8 +298,11 @@ array (
                   ),
                 ),
               ),
-              3 => 
+              13 => 
               array (
+                'name' => 'tct_que_promotor_rel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_QUE_PROMOTOR_REL',
               ),
             ),
           ),
