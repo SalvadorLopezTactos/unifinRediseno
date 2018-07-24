@@ -43,6 +43,9 @@
         'change #renta_a_comprometer': 'calcularPorcientoRI',
         'change #motivo_de_cancelacion_popup': 'motivoCancelacion',
         'change #motivo_de_cancelacion_masivo_popup': 'motivoCancelacionMasivo',
+        //Se añade nueva función para ocultar o mostrar campos dependiendo el motivo de cancelacion
+        
+        'change #motivo_de_cancelacion_popup': 'CancelacionB',
         'click #EquipoSort': 'ordenarPorEquipo',
         'click #PromotorSort': 'ordenarPorPromotor',
         'click #ClienteSort': 'ordenarPorCliente',
@@ -2504,8 +2507,23 @@ cancelarBacklog: function(e){
             $('#label_mes_cancelacion_masivo').hide();
             $('#label_anio_cancelacion_masivo').hide();
         }
+//se añade mas conficiones al popup de motivo de cancelacion
+
 
     },
+//creacion de funcion para ocultar campos en competencia y producto no encontrado
+
+
+    CancelacionB: function(){
+         if($('#motivo_de_cancelacion_popup').val() == "Competencia"){
+             $('#tdquien').show();
+             $('#tdproducto').hide();
+         }else if($('#motivo_de_cancelacion_popup').val() == "No tenemos el producto que requiere"){
+             $('#tdquien').hide();
+             $('#tdproducto').show();
+         }
+     },
+
 
     getElaborationBacklog: function(){
         //Obtiene el Backlog en elaboración
