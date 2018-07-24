@@ -1,0 +1,9 @@
+<?php
+class Cuenta_c{
+    function change($bean, $event, $args){
+
+        $GLOBALS['log']->fatal("mensaje");
+    }
+
+
+}
