@@ -73,7 +73,7 @@
         this.enableDuplicateCheck = true;
 
         //UNFIN TASK:
-        //@author Carlos Zaragoza: Si la persona es extranjera debe generar RFC genérico (XXX010101XXX)
+        //@author Carlos Zaragoza: Si la persona es extranjera debe generar RFC genï¿½rico (XXX010101XXX)
         //this.model.on('change:pais_nacimiento_c', this._doGeneraCURP, this);
 
         var valParams = {
@@ -172,8 +172,13 @@
                     });
 
                     /*jgarcia@levementum.com 9/28/2015 Description: Copiar relaciones activas de la Relacion creada desde el modulo de Relaciones y copiar esos valores en el campo de tipo de relacion*/
-                    if(relContext != null){
+                    try {
+                      if(relContext != null){
                         self.model.set("tipo_relacion_c", relContext.model.get("relaciones_activas"));
+                      }
+                    }
+                    catch(err) {
+                      console.log = err.message;
                     }
                 }
             }, this)
@@ -185,9 +190,15 @@
         this._doValidateProfesionRisk();
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 9/28/2015 Description: Copiar relaciones activas de la Relacion creada desde el modulo de Relaciones y copiar esos valores en
          * el campo de tipo de relacion*/
-        if(relContext != null){
+        try {
+          if(relContext != null){
             self.model.set("tipo_relacion_c", relContext.model.get("relaciones_activas"));
+          }
         }
+        catch(err) {
+          console.log = err.message;
+        }
+
         /* END CUSTOMIZATION */
 
         //cuando creamos una relacion de account a account, el tipo de registro siempre debe de ser persona
@@ -197,13 +208,13 @@
         }, this));
         /*
          * @author Carlos Zaragoza ortiz
-         * Ocultar campo de estatus Activo/Inactivo en creación de personas
+         * Ocultar campo de estatus Activo/Inactivo en creaciï¿½n de personas
          * */
         this.$('div[data-name=estatus_persona_c]').hide();
 
         /*
           AF - 2018/07/06
-          Cambio: Se coultan pestañas:  Vista 360, Cuestionario PLD y campo show panel
+          Cambio: Se coultan pestaï¿½as:  Vista 360, Cuestionario PLD y campo show panel
         */
         //Oculta vista 360 y Cuestionario PLD
         //TabNav
@@ -238,7 +249,7 @@
 
 	_doGeneraCURP: function(){
         if(this.model.get('tipodepersona_c') != 'Persona Moral') {
-        	//Valida que se tenga la información requerida para generar la CURP
+        	//Valida que se tenga la informaciï¿½n requerida para generar la CURP
         	if (this.model.get('fechadenacimiento_c') != null && this.model.get('genero_c') != null && this.model.get('genero_c') != ''
         		&& this.model.get('primernombre_c') != null && this.model.get('apellidopaterno_c') != null && this.model.get('apellidomaterno_c') != null
         		&& this.model.get('pais_nacimiento_c') != null && this.model.get('estado_nacimiento_c') != null) {
@@ -359,7 +370,7 @@
         var fields = ["primernombre_c","segundonombre_c","apellidopaterno_c","apellidomaterno_c", 'rfc_c'];
         var RFC = this.model.get('rfc_c');
 	    if (RFC != '' && RFC != null){
-				/*Método que tiene la función de validar el rfc*/
+				/*Mï¿½todo que tiene la funciï¿½n de validar el rfc*/
 				RFC = RFC.toUpperCase().trim();
 				var expReg = "";
 				if (this.model.get('tipodepersona_c') != 'Persona Moral'){
@@ -429,7 +440,7 @@
             if (enteredAge < 18) {
                 app.alert.show("fechaDeNacimientoCheck", {
                     level: "error",
-                    title: "Persona debe de ser mayor de 18 años.",
+                    title: "Persona debe de ser mayor de 18 aï¿½os.",
                     autoClose: false
                 });
                 errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
@@ -447,7 +458,7 @@
             if (enteredAge < 18) {
                 app.alert.show("fechaDeNacimientoCheck", {
                     level: "error",
-                    title: "Persona debe de ser mayor de 18 años.",
+                    title: "Persona debe de ser mayor de 18 aï¿½os.",
                     autoClose: false
                 });
                 errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
@@ -505,15 +516,15 @@
                             if (rfc != rfc_SinHomoclave) {
                             	app.alert.show("Validar RFC", {
 											level: "confirmation",
-											messages: "El RFC calculado es diferente al escrito, ¿Desea reemplazarlo?",
+											messages: "El RFC calculado es diferente al escrito, ï¿½Desea reemplazarlo?",
 											autoClose: false,
 
 											onConfirm: function(){
-												console.log("*** JSR *** el rfc se remplazo con éxito CONFIRMED");
+												console.log("*** JSR *** el rfc se remplazo con ï¿½xito CONFIRMED");
 												self.model.set("rfc_c",rfc_local);
 											},
 											onCancel: function(){
-												console.log("*** JSR *** no se modificó el RFC");
+												console.log("*** JSR *** no se modificï¿½ el RFC");
 												//alert("Cancelled!");
 											}
 										});
@@ -525,7 +536,7 @@
 				                });
 							}
                         }else{
-							console.log("*** JSR *** el rfc está vacio");
+							console.log("*** JSR *** el rfc estï¿½ vacio");
 							this.model.set("rfc_c",rfc_local);
 						}
                 }
@@ -634,14 +645,14 @@
 
                 if(fecnac_date > today_date){
 
-                    console.log('La fecha de nacimiento no puede ser mayor al día de hoy');
+                    console.log('La fecha de nacimiento no puede ser mayor al dï¿½a de hoy');
                 app.alert.show("fechaDeNacimientoValidate",{
                       level: "error",
-                      title: "La fecha de nacimiento no puede ser mayor al día de hoy",
+                      title: "La fecha de nacimiento no puede ser mayor al dï¿½a de hoy",
                       autoClose : false
                  });
                 errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
-               //errors['fechaapertura'] = 'La fecha de apertura no puede ser posterior al día de hoy' || {};
+               //errors['fechaapertura'] = 'La fecha de apertura no puede ser posterior al dï¿½a de hoy' || {};
                errors['fechadenacimiento_c'].required = true;
             }
         }
@@ -657,15 +668,15 @@
 
                 if(feccons_date > today_date){
 
-                    console.log('La fecha de nacimiento no puede ser mayor al día de hoy');
+                    console.log('La fecha de nacimiento no puede ser mayor al dï¿½a de hoy');
                    app.alert.show("fechaDeConsValidate",{
                       level: "error",
-                      title: "La fecha constitutiva no puede ser mayor al día de hoy",
+                      title: "La fecha constitutiva no puede ser mayor al dï¿½a de hoy",
                       autoClose : false
                  });
 
                 errors['fechaconstitutiva_c'] = errors['fechaconstitutiva_c'] || {};
-               //errors['fechaapertura'] = 'La fecha de apertura no puede ser posterior al día de hoy' || {};
+               //errors['fechaapertura'] = 'La fecha de apertura no puede ser posterior al dï¿½a de hoy' || {};
                errors['fechaconstitutiva_c'].required = true;
             }
         }
@@ -744,8 +755,8 @@
     cambiaRiesgodePersona: function(fields, errors, callback) {
         var riesgo = this.model.get('ctpldpoliticamenteexpuesto_c')==true ? 'Alto' : 'Bajo';
         this.model.set("riesgo_c", riesgo);
-        console.log(this.model.get('ctpldpoliticamenteexpuesto_c'));
-        console.log(this.model.get('riesgo_c'));
+        //console.log(this.model.get('ctpldpoliticamenteexpuesto_c'));
+        //console.log(this.model.get('riesgo_c'));
         callback(null, fields, errors);
     },
 })
