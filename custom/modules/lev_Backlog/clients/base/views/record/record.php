@@ -109,15 +109,15 @@ array (
               ),
               2 => 
               array (
-                'name' => 'mes',
-                'studio' => 'visible',
-                'label' => 'LBL_MES',
-              ),
-              3 => 
-              array (
                 'name' => 'anio',
                 'studio' => 'visible',
                 'label' => 'LBL_ANIO',
+              ),
+              3 => 
+              array (
+                'name' => 'mes',
+                'studio' => 'visible',
+                'label' => 'LBL_MES',
               ),
               4 => 
               array (

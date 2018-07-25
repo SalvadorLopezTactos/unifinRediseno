@@ -194,26 +194,67 @@
             currentMonth += 2;
         }
 
+        /*
+          @AF - 2018-07-16
+          Ajuste: Se deben mostrar los 3 meses siguientes y sólo el año correspondiente.
+                  Si se incluyen meses del siguiente año, agregar año futuro a lista de valores.
+        */
+
+        //Valida número de mes actual
+        var limitMonth = currentMonth + 2;
+        var nextMonth = 0;
+        var nextYear = currentYear;
+        if (limitMonth > 12) {
+          nextMonth = limitMonth - 12;
+          nextYear = currentYear + 1;
+        }
+
+        //Valida Año
         var opciones_year = app.lang.getAppListStrings('anio_list');
         Object.keys(opciones_year).forEach(function(key){
+            //Quita años previos
             if(key < currentYear){
                 delete opciones_year[key];
             }
+            //Habilita años futuros
+            if(key > nextYear){
+                delete opciones_year[key];
+            }
+
         });
+        //Establece valores para año
         this.model.fields['anio'].options = opciones_year;
+        // if (this.model.get("anio")== "") {
+        //     this.model.set("anio",currentYear);
+        // }
+
+        //Valida Meses
         var opciones_mes = app.lang.getAppListStrings('mes_list');
-        if(this.model.get("anio") <= currentYear){
-            Object.keys(opciones_mes).forEach(function(key){
+        //Quita mese para año futuro
+        if(this.model.get("anio") > currentYear){
+          Object.keys(opciones_mes).forEach(function(key){
                 if(key != ''){
-                    if(key < currentMonth){
+                    if(key > nextMonth){
                         delete opciones_mes[key];
                     }
                 }
-            });
+          });
+        }
+        //Quita mese para año actual
+        if(this.model.get("anio") == currentYear || this.model.get("anio")==""){
+          Object.keys(opciones_mes).forEach(function(key){
+                if(key != ''){
+                    //Quita meses fuera de rango(3 meses)
+                    if(key < currentMonth || key >limitMonth ){
+                        delete opciones_mes[key];
+                    }
+                }
+          });
         }
 
         this.model.fields['mes'].options = opciones_mes;
-        this.model.set("mes", '');
+
+        //this.model.set("mes", '');
         if(stage != "loading"){
             this.render();
         }

@@ -459,6 +459,9 @@
         $("#drawers div.tab-content").children()[0].classList.remove('active');
         $("#drawers div.tab-content").children()[1].classList.add('active');
         $("#drawers div.tab-content").children()[1].classList.remove('fade');
+        
+        //Oculta campo Muestra panel
+        $("div[data-name='show_panel_c']").hide();
 
     },
 

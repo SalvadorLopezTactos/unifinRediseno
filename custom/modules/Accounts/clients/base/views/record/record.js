@@ -15,6 +15,8 @@
         this._super("initialize", [options]);
         this.duplicadosName = 0;
         this.duplicadosRFC = 0;
+        this.totalllamadas = 0;
+        this.totalreuniones = 0;
 
         //add validation tasks
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
@@ -122,6 +124,11 @@
          */
         this.model.on('sync', this._render, this);
 
+        //Recupera llamadas y reuniones asociadas al cliente
+        this.model.on('sync', this.getllamadas, this);
+        this.model.on('sync', this.getreuniones, this);
+        
+
     },
 
     /** BEGIN CUSTOMIZATION:
@@ -158,6 +165,9 @@
             $('#tabContent').children()[1].classList.remove('fade');
 
         }
+
+        //Oculta campo
+        $("div[data-name='show_panel_c']").hide();
     },
 
 
@@ -214,6 +224,10 @@
             this.$("[data-name='tct_origen_ag_tel_rel_c']").prop("disabled", true);
             this.$("[data-name='tct_origen_busqueda_txf_c']").prop("disabled", true);
             this.$("[data-name='medio_digital_c']").prop("disabled", true);
+            this.$("[data-name='tct_punto_contacto_ddw_c']").prop("disabled", true);
+            this.$("[data-name='evento_c']").prop("disabled", true);
+            this.$("[data-name='camara_c']").prop("disabled", true);
+            this.$("[data-name='tct_que_promotor_rel_c']").prop("disabled", true);
 
 
         }
@@ -373,6 +387,10 @@
             self.noEditFields.push('tct_origen_ag_tel_rel_c');
             self.noEditFields.push('tct_origen_busqueda_txf_c');
             self.noEditFields.push('medio_digital_c');
+            self.noEditFields.push('tct_punto_contacto_ddw_c');
+            self.noEditFields.push('evento_c');
+            self.noEditFields.push('camara_c');
+            self.noEditFields.push('tct_que_promotor_rel_c');
 
         }
 
@@ -803,6 +821,8 @@
         this.context.on('button:negociacion:click', this.negociacionClicked, this);
         this.context.on('button:Historial_cotizaciones_button:click', this.historialCotizacionesClicked, this);
         this.context.on('button:regresa_lead:click', this.regresa_leadClicked, this);
+        this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
+        
     },
 
     /*
