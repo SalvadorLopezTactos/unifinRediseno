@@ -399,8 +399,8 @@
     _doValidateDireccionNacional: function (fields, errors, callback) {
         if(this.model.get('tipodepersona_c') != 'Persona Moral') {
 
-            console.log('Validación Nacional');
-            console.log(this.name);
+            //console.log('Validación Nacional');
+            //console.log(this.name);
 
             // var alertOptions = {title: "Multiples direcciones fiscales, favor de corregir.", level: "error"};
             // app.alert.show('validation', alertOptions);
