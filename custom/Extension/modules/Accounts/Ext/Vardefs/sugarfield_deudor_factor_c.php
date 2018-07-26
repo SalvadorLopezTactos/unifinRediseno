@@ -1,9 +1,9 @@
 <?php
- // created: 2018-07-13 12:28:33
+ // created: 2018-07-25 18:58:49
 $dictionary['Account']['fields']['deudor_factor_c']['labelValue']='Deudor Factoraje';
 $dictionary['Account']['fields']['deudor_factor_c']['enforced']='';
 $dictionary['Account']['fields']['deudor_factor_c']['dependency']='not(
-equal($tipodepersona_c,"Lead")
+equal($tipo_registro_c,"Lead")
 )';
 
  ?>

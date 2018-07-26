@@ -127,7 +127,7 @@
         //Recupera llamadas y reuniones asociadas al cliente
         this.model.on('sync', this.getllamadas, this);
         this.model.on('sync', this.getreuniones, this);
-        
+
 
     },
 
@@ -772,7 +772,7 @@
         callback(null, fields, errors);
     },
     _doValidateDireccion: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('estatus_c') == "Interesado") {
+        if(this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('tipo_registro_c') == "Prospecto") {
 
             if (_.isEmpty(this.model.get('account_direcciones'))) {
                 errors[$(".addDireccion")] = errors['account_direcciones'] || {};
@@ -822,7 +822,7 @@
         this.context.on('button:Historial_cotizaciones_button:click', this.historialCotizacionesClicked, this);
         this.context.on('button:regresa_lead:click', this.regresa_leadClicked, this);
         this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
-        
+
     },
 
     /*
@@ -866,7 +866,7 @@
         var name = this.model.get('name');
         window.open("#bwc/index.php?entryPoint=HistorialCotizaciones&Accountid=" + Accountid + "&name=" + name);
     },
-  
+
     /* @Jesus Carrillo
         Metodo para verificar  las llamadas de la cuenta
      */
@@ -997,17 +997,19 @@
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
-        if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos'))) {
-                errors['email'] = errors['email'] || {};
-                errors['email'].required = true;
-            }
-
-            if (_.isEmpty(this.model.get('account_telefonos')) && _.isEmpty(this.model.get('email'))) {
-                errors['account_telefonos'] = errors['account_telefonos'] || {};
-                errors['account_telefonos'].required = true;
-            }
-        }
+      if (this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
+          if (_.isEmpty(this.model.get('email')) || _.isEmpty(this.model.get('account_telefonos')) ) {
+              app.alert.show("Correo requerido", {
+                  level: "error",
+                  title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
+                  autoClose: false
+              });
+              errors['email'] = errors['email'] || {};
+              errors['email'].required = true;
+              errors['account_telefonos'] = errors['account_telefonos'] || {};
+              errors['account_telefonos'].required = true;
+          }
+      }
         callback(null, fields, errors);
     },
 
