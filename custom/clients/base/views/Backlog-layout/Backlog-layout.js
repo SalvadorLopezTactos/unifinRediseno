@@ -43,6 +43,8 @@
         'change #renta_a_comprometer': 'calcularPorcientoRI',
         'change #motivo_de_cancelacion_popup': 'motivoCancelacion',
         'change #motivo_de_cancelacion_masivo_popup': 'motivoCancelacionMasivo',
+
+
         'click #EquipoSort': 'ordenarPorEquipo',
         'click #PromotorSort': 'ordenarPorPromotor',
         'click #ClienteSort': 'ordenarPorCliente',
@@ -1210,6 +1212,44 @@ cancelarBacklog: function(e){
                 var comentarios = $('#comentarios_de_cancelacion').val();
                 var mes = $('.mes_popup').val();
                 var anio = $('.anio_popup').val();
+                var Competencia = $('#quien_opcion').val();
+                var Producto = $('#producto_opcion').val();
+
+
+//app alert para validar y notificar que los campos quien y producto contengan información.
+
+                if( Competencia == null || Competencia == "" ) {
+
+                    if(MotivoCancelacion == 'Competencia') {
+
+                        app.alert.show('alertquien', {
+                            level: 'error',
+                            messages: 'La Competencia es requerida',
+                            autoClose: true
+                        });
+                        this.saving = 0;
+                        return;
+                    }
+
+                    //check++;
+                }
+                if(Producto == null || Producto == "" ) {
+
+                    if(MotivoCancelacion == 'No tenemos el producto que requiere') {
+                        app.alert.show('alertproducto', {
+                            level: 'error',
+                            messages: 'El Producto es requerido',
+                            autoClose: true
+                        });
+                        this.saving = 0;
+                        return;
+                    }
+
+                    //check++;
+                }
+                /*if(check>0){
+                    return;
+                }*/
 
                 console.log('Progreso' + self.progresoBL);
 
@@ -2466,7 +2506,7 @@ cancelarBacklog: function(e){
                 self.persistData(tempMes, tempAnio, tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, "", tempProgreso,self.array_checks,self.array_checks_cancelar);
             })
         });
-        //END GetEquipos
+        //END GetEquipos2
     },
 
     motivoCancelacion: function(){
@@ -2477,13 +2517,36 @@ cancelarBacklog: function(e){
             //$('#label_mes_cancelacion').display = "inherit";
             $('#label_mes_cancelacion').show();
             $('#label_anio_cancelacion').show();
-        }else{
+            $('#tdquien').hide();
+            $('#tdproducto').hide();
+        }
+        else if($('#motivo_de_cancelacion_popup').val() == "Competencia"){
+            $('#tdquien').show();
+            $('#tdproducto').hide();
+            $('#mes_cancelacion').hide();
+            $('#anio_cancelacion').hide();
+            $('#label_mes_cancelacion').hide();
+            $('#label_anio_cancelacion').hide();
+        }
+
+        else if($('#motivo_de_cancelacion_popup').val() == "No tenemos el producto que requiere"){
+            $('#tdquien').hide();
+            $('#tdproducto').show();
+        $('#mes_cancelacion').hide();
+        $('#anio_cancelacion').hide();
+        $('#label_mes_cancelacion').hide();
+        $('#label_anio_cancelacion').hide();
+        }
+        else{
+
             //Ocultar mes y año para mover
             $('#mes_cancelacion').hide();
             $('#anio_cancelacion').hide();
             //$('#label_mes_cancelacion').display = "none";
             $('#label_mes_cancelacion').hide();
             $('#label_anio_cancelacion').hide();
+            $('#tdquien').hide();
+            $('#tdproducto').hide();
         }
 
     },
@@ -2507,6 +2570,7 @@ cancelarBacklog: function(e){
 
     },
 
+     
     getElaborationBacklog: function(){
         //Obtiene el Backlog en elaboración
         var currentDay = (new Date).getDate();
