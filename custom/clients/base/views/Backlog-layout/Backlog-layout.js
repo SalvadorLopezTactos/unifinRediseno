@@ -1343,6 +1343,8 @@ cancelarBacklog: function(e){
                     periodo_revision = true;
                 }
 
+
+
                 var Params = {
                     'backlogId': this.backlogId,
                     'backlogName': this.backlogName,
@@ -1957,15 +1959,60 @@ cancelarBacklog: function(e){
             currentMonth = currentMonth - 12;
         }
 
+        //Valida número de mes actual
+        var limitMonth = currentMonth + 2;
+        var nextMonth = 0;
+        var nextYear = currentYear;
+        if (limitMonth > 12) {
+            nextMonth = limitMonth - 12;
+            nextYear = currentYear + 1;
+        }
+
+
         var opciones_year = app.lang.getAppListStrings('anio_list');
         Object.keys(opciones_year).forEach(function(key){
+            //Quita años previos
             if(key < currentYear){
                 delete opciones_year[key];
             }
+            //Habilita años futuros
+            if(key > nextYear){
+                delete opciones_year[key];
+            }
         });
-        this.anio_list_html.options = opciones_year;
+        //this.anio_list_html.options = opciones_year;
+
+        var anios_list_popup_mover_mes = '';
+        for (var anios_keys in opciones_year) {
+            anios_list_popup_mover_mes += '<option value="' + anios_keys + '">' + opciones_year[anios_keys] + '</option>'
+
+        }
+        this.anio_list_html = anios_list_popup_mover_mes;
+
 
         var opciones_mes = app.lang.getAppListStrings('mes_list');
+        //Quita mese para año futuro
+        if(anio_popup > currentYear){
+            Object.keys(opciones_mes).forEach(function(key){
+                if(key != ''){
+                    if(key > nextMonth){
+                        delete opciones_mes[key];
+                    }
+                }
+            });
+        }
+        //Quita mese para año actual
+        if(anio_popup == currentYear || anio_popup ==""){
+            Object.keys(opciones_mes).forEach(function(key){
+                if(key != ''){
+                    //Quita meses fuera de rango(3 meses)
+                    if(key < currentMonth || key >limitMonth ){
+                        delete opciones_mes[key];
+                    }
+                }
+            });
+        }
+        /*
         if(anio_popup){
             if(anio_popup <= currentYear){
                 Object.keys(opciones_mes).forEach(function(key){
@@ -1982,6 +2029,7 @@ cancelarBacklog: function(e){
             }
 
         }
+        */
 
         if(anio_masivo_popup){
             if(anio_masivo_popup <= currentYear){

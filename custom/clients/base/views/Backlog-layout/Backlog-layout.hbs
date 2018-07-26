@@ -430,23 +430,37 @@
                 <table class="popuptables" style="display: {{mes_switch}};">
                     <tr>
                         <td>
-                            Mes:
+                            Año:
                         </td>
                         <td></td>
+                        <!--
                         <td>
                             <select class="mes_switch_popup">
                                 {{{meses_list_popup_mover_mes}}}
                             </select>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Año:
-                        </td>
-                        <td></td>
+                        -->
                         <td>
                             <select class="anio_switch_popup">
                                 {{{anio_list_html}}}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mes:
+                        </td>
+                        <td></td>
+                        <!--
+                        <td>
+                            <select class="anio_switch_popup">
+                                {{{anio_list_html}}}
+                            </select>
+                        </td>
+                        -->
+                        <td>
+                            <select class="mes_switch_popup">
+                                {{{meses_list_popup_mover_mes}}}
                             </select>
                         </td>
                     </tr>
@@ -571,6 +585,16 @@
                     <select id="anio_cancelacion" class="anio_popup" style="width: 180px;">
                         {{{anio_list_html}}}
                     </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" id="tdquien">
+                    <span id="tct_competencia_quien_txf_c">¿Quién?:</span>
+                    <input type="text" id="quien_opcion" style="width: 180px;" required>
+                </td>
+                <td colspan="2" id="tdproducto">
+                    <span id="tct_que_producto_txf_c">Producto:</span>
+                    <input type="text" id="producto_opcion" style="width: 180px;" required>
                 </td>
             </tr>
             <tr>
