@@ -26,10 +26,10 @@
 		*/
 
 		this.on('render', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
-		this.model.on("change:tct_oportunidad_perdida_chk_c",this._HideSaveButton, this);
+    //this.model.on("change:tct_oportunidad_perdida_chk_c",this._HideSaveButton, this);
 		this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
-        this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
-        this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
+    this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
+    this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
 
 		this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
 		this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
@@ -40,7 +40,7 @@
 		* 23-07-2018
 		* Valida campos requeridos de prospecto e Integracion de expediente
 		*/
-        this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));
+    this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));
 
 		this.model.on("change:porciento_ri_c", _.bind(this.calcularRI, this));
 		this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
@@ -86,7 +86,7 @@
 		//no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
         if((this.model.get('tct_etapa_ddw_c')=='SI') ||
             (this.model.get('tct_etapa_ddw_c')=='P' &&
-                (this.model.get('estatus_c')=='PE' || this.model.get('estatus_c')=='P' ))){
+                (this.model.get('estatus_c')=='PE' || this.model.get('estatus_c')=='P' )) || this.model.get('estatus_c')=='K' ){
 
 
             //no hace nada y muestra el panel
@@ -349,31 +349,31 @@
 
     validacionCuentaSubcuentaCheck:function (fields, errors, callback) {
         self=this;
-		var obid=this.model.get('account_id');
-		var caso="2";
-		if(obid!=""|| obid!=null){
+    		var obid=this.model.get('account_id');
+    		var caso="2";
+    		if((obid!=""|| obid!=null) && this.model.get('tct_oportunidad_perdida_chk_c') != true){
             app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/2'), null, {
-                success: _.bind(function (data) {
+            success: _.bind(function (data) {
 
-                    if (data != "") {
-                        var titulo = "Campos Requeridos en Cuentas";
-                        var nivel = "error";
-                        var mensaje = "Hace falta completar la siguiente informaci&oacuten: " + data;
+                if (data != "") {
+                    var titulo = "Campos Requeridos en Cuentas";
+                    var nivel = "error";
+                    var mensaje = "Hace falta completar la siguiente informaci&oacuten: " + data;
 
 
-                        app.error.errorName2Keys['custom_message1'] = 'Falta tipo y subtipo de cuenta';
-                        errors['account_name'] = errors['account_name'] || {};
-                        errors['account_name'].custom_message1 = true;
-                        errors['account_name'].required = true;
-                        self.mensajes(titulo, mensaje, nivel);
+                    app.error.errorName2Keys['custom_message1'] = 'Falta tipo y subtipo de cuenta';
+                    errors['account_name'] = errors['account_name'] || {};
+                    errors['account_name'].custom_message1 = true;
+                    errors['account_name'].required = true;
+                    self.mensajes(titulo, mensaje, nivel);
 
-                    }
-                    callback(null, fields, errors)
+                }
+                callback(null, fields, errors)
 
-                }, self),
-            });
-		}
-    },
+            }, self),
+          });
+        }
+      },
 
 	delegateButtonEvents: function () {
 			this._super("delegateButtonEvents");
@@ -381,6 +381,7 @@
 			this.context.on('button:expediente_button:click', this.expedienteClicked, this);
 			this.context.on('button:ratificado_button:click', this.ratificadoClicked, this);
 			this.context.on('button:edit_button:click', this.checkForRatificado, this);
+      this.context.on('button:edit_button:click', this._HideSaveButton, this);
 			//this.model.on('change:monto_c', this._ValidateAmount, this);
 			//this.events['blur input[name=monto_c]'] = '_ValidateAmount';
 			this.context.on('button:sobregiro:click', this.sobregiroClicked, this);
@@ -546,7 +547,7 @@
 					success: _.bind(function (data) {
 						if (data != null) {
 							console.log("Se cancelo padre");
-							window.location.reload()
+							//window.location.reload()
 						} else {
 							console.log("No se cancela Padre");
 						}
@@ -595,7 +596,7 @@
 						success: _.bind(function (data) {
 							if (data != null) {
 								console.log("Se cancelo padre");
-								window.location.reload()
+								//window.location.reload()
 							} else {
 								console.log("No se cancela Padre");
 							}
@@ -942,13 +943,13 @@ console.log(name);
             messages: texto,
         });
     },
-	
-	_HideSaveButton: function () {
-         if (this.model.get('tct_oportunidad_perdida_chk_c'))
-         {
-            $('[name="save_button"]').eq(0).hide();
-         }
-         else {$('[name="save_button"]').eq(0).show();}
-    }
+
+    _HideSaveButton: function () {
+          if (this.model.get('tct_oportunidad_perdida_chk_c') && this.model.get('estatus_c')=='K')
+          {
+             $('[name="save_button"]').eq(0).hide();
+          }
+          else {$('[name="save_button"]').eq(0).show();}
+     }
 
 })

@@ -10,7 +10,7 @@
         this._super("initialize", [options]);
 
         this.on('render', this.ocultaFunc, this);
-        
+
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
         this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
@@ -21,7 +21,7 @@
         //Ajuste Salvador Lopez <salvador.lopez@tactos.com.mx>
         //Validación para evitar asociar una Persona que no sea cliente
         this.model.addValidationTask('check_person_type', _.bind(this.personTypeCheck, this));
-        
+
         this.model.on("change:porciento_ri_c", _.bind(this.calcularRI, this));
         this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
 
@@ -163,7 +163,7 @@
         this.getCurrentYearMonth("loading");
         this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
     },
-    
+
     _render: function() {
         this._super("_render");
         this.obtieneCondicionesFinancieras();
@@ -251,7 +251,7 @@
         },this));
         */
         /* END CUSTOMIZATION */
-        
+
         this.model.on("change:monto_c", _.bind(function() {
             if (this.model.get('amount') == null || this.model.get('amount') == ''){
                 this.model.set('amount',this.model.get('monto_c'));
@@ -263,10 +263,10 @@
                         autoClose: false
                     });
                     this.model.set('amount',this.model.get('monto_c'));
-                }   
+                }
             }
         },this));
-        
+
         this.model.on("change:amount", _.bind(function() {
             if(parseFloat(this.model.get('amount')) > parseFloat(this.model.get('monto_c'))){
                 app.alert.show("Moto a operar invalido", {
@@ -281,7 +281,7 @@
         this.model.on("change:account_id", _.bind(function(){
             this.verificaOperacionProspecto();
         },this));
-        
+
         // CVV - 28/03/2016 - Los campos de activo se reemplazaron por el control de condiciones financieras
         /*
         this.model.on("change:activo_c", _.bind(function(){
@@ -302,7 +302,7 @@
             this.model.set('sub_activo_3_c','');
         },this));
         */
-        
+
         //Actualiza las etiquetas de acuerdo al tipo de operacion Solicitud/Cotizacion
         //Si la operacion es Cotización o Contrato cambiar etiqueta de "Monto de línea" a "Monto colocación"
         if (this.model.get('tipo_operacion_c') == '3' || this.model.get('tipo_operacion_c') == '4'){
@@ -370,7 +370,7 @@
 
         self = this;
 
-        if (this.model.get('account_id' != "") || this.model.get('account_id') != null)
+        if ((this.model.get('account_id' != "") || this.model.get('account_id') != null) && (this.model.get('tipo_registro_c') == 'Prospecto' || this.model.get('tipo_registro_c') == 'Cliente') )
         {
             app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/1'), null, {
                 success: _.bind(function (data) {
@@ -456,22 +456,22 @@
 
         callback(null, fields, errors);
     },
-    
+
     getCustomSaveOptions: function(options) {
         this.createdModel = this.model;
         // since we are in a drawer
         this.listContext = this.context.parent || this.context;
         this.originalSuccess = options.success;
-        
+
         var success = _.bind(function(model) {
-            this.originalSuccess(model); 
-        }, this); 
+            this.originalSuccess(model);
+        }, this);
 
         return {
             success: success
         };
     },
-    
+
     validaActivoIndex: function(fields, errors, callback){
         //CVV - 28/03/2016 - Modulo de condiciones financieras
         /*var activo = this.model.get('activo_c');
@@ -576,7 +576,7 @@
                     this.model.set('estatus_c','P');
                 }
                 // 0000080: El sistema permite crear una operación de tipo Factoraje para una PF
-                // todo pendiente              
+                // todo pendiente
                 if( modelo.get('tipodepersona_c')=='Persona Fisica' && modelo.get('id') != null){
                     this.tipoDePersona = true;
                     //console.log("Cambiamos a tipo producto leasing");
@@ -1065,7 +1065,7 @@
        }
 
 
-   }, 
+   },
 
     calcularRI: function(){
 
@@ -1102,7 +1102,7 @@
 		//Ocultando el panel de Oportunidad perdida
         $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
     },
-    
+
     /*
      validaDatosRequeridos: function(fields, errors, callback){
      console.log("Entro a validacion de mes");

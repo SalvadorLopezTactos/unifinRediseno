@@ -370,6 +370,7 @@
         });
 
         //eliminar Lead
+        /*
         var checkrol = 0;
         for (var i = 0; i < App.user.attributes.roles.length; i++) {
             if (App.user.attributes.roles[i] == "Planeacion y Estrategia Comercial") {
@@ -381,6 +382,7 @@
                 delete new_options[key];
             }
         });
+        */
         //fin
 
         /* @author: Salvador Lopez
@@ -459,7 +461,7 @@
         $("#drawers div.tab-content").children()[0].classList.remove('active');
         $("#drawers div.tab-content").children()[1].classList.add('active');
         $("#drawers div.tab-content").children()[1].classList.remove('fade');
-        
+
         //Oculta campo Muestra panel
         $("div[data-name='show_panel_c']").hide();
 
@@ -505,21 +507,14 @@
 
     _doValidateEmailTelefono: function (fields, errors, callback) {
         if (this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
-            if (_.isEmpty(this.model.get('email'))) {
+            if (_.isEmpty(this.model.get('email')) || _.isEmpty(this.model.get('account_telefonos')) ) {
                 app.alert.show("Correo requerido", {
                     level: "error",
-                    title: "Al menos un correo electr\u00F3nico es requerido.",
+                    title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
                     autoClose: false
                 });
                 errors['email'] = errors['email'] || {};
                 errors['email'].required = true;
-            }
-            if (_.isEmpty(this.model.get('account_telefonos'))) {
-                app.alert.show("Telefono requerido", {
-                    level: "error",
-                    title: "Al menos un tel\u00E9fono es requerido.",
-                    autoClose: false
-                });
                 errors['account_telefonos'] = errors['account_telefonos'] || {};
                 errors['account_telefonos'].required = true;
             }
