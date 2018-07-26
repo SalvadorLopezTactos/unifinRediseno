@@ -45,7 +45,9 @@
                                     'target' => 'razonsocial_c',
                                     'label' => 'razonsocial_c_label',
                                     //'value' => 'and(equal($tipodepersona_c,"Persona Moral"),equal($subtipo_cuenta_c,"Interesado"))', //Formula
-                                'value' => 'not(or(equal($tipodepersona_c,"Persona Fisica"),equal($tipo_registro_c,"Lead"),equal($subtipo_cuenta_c,"Contactado")))',
+                                //'value' => 'not(or(equal($tipodepersona_c,"Persona Fisica"),equal($tipo_registro_c,"Lead"),equal($subtipo_cuenta_c,"Contactado")))',
+                                //Cambio de condicion, requerido para todos salvo persona fisica
+                                'value' => 'not(or(equal($tipodepersona_c,"Persona Fisica")))',
                             ),
                     ),
             ),
@@ -259,7 +261,7 @@
                             'params' => array(
                                     'target' => 'origendelprospecto_c',
                                     'label' => 'origendelprospecto_c_label',
-                                    'value' => 'or(equal($tipo_registro_c,"Prospecto"),equal($tipo_registro_c,"Cliente"))',
+                                    'value' => 'or(equal($tipo_registro_c,"Lead"),equal($tipo_registro_c,"Prospecto"),equal($tipo_registro_c,"Cliente"))',
                             ),
                     ),
             ),
@@ -783,7 +785,7 @@ $dependencies['Accounts']['Zona_Geografica_required'] = array(
         ),
     ),
 );
-//Dependencia para IFE/Pasaporte con persona fisica, integración de expediente. Adrian Arauz/ 16/07/18
+//Dependencia para IFE/Pasaporte con persona fisica, integración de expediente. Adrian Arauz/ 16/07/18. Actrualizacion debido a choque
 $dependencies['Accounts']['Pasaporte_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
@@ -886,7 +888,3 @@ $dependencies['Accounts']['Numero_Empleados_required'] = array(
         ),
     ),
 );
-
-
-
-
