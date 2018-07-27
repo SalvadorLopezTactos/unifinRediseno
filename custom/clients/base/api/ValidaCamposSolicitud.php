@@ -41,13 +41,13 @@ class ValidaCamposSolicitud extends SugarApi
         $option=$args['caso'];
 
         $req_pm = "origendelprospecto_c,tipodepersona_c," .
-            "nombre_comercial_c,email1,sectoreconomico_c," .
+            "nombre_comercial_c,sectoreconomico_c," .
             "subsectoreconomico_c,actividadeconomica_c," .
             "empleados_c,promotorleasing_c,promotorfactoraje_c,promotorcredit_c";
 
         $req_pf_y_pfae = "origendelprospecto_c,tipodepersona_c," .
             "primernombre_c,apellidopaterno_c,apellidomaterno_c," .
-            "nombre_comercial_c,email1," .
+            "nombre_comercial_c," .
             "sectoreconomico_c,subsectoreconomico_c,actividadeconomica_c," .
             "empleados_c," .
             "promotorleasing_c,promotorfactoraje_c,promotorcredit_c";
@@ -60,7 +60,7 @@ class ValidaCamposSolicitud extends SugarApi
 
             $req_pf_y_pfae .= ",rfc_c,fechadenacimiento_c," .
                 "pais_nacimiento_c,estado_nacimiento_c,zonageografica_c," .
-                "genero_c,ifepasaporte_c,curp_c" .
+                "genero_c,ifepasaporte_c,curp_c," .
                 "estadocivil_c,regimenpatrimonial_c,profesion_c,ventas_anuales_c,potencial_cuenta_c,activo_fijo_c";
         }
 
@@ -107,8 +107,8 @@ class ValidaCamposSolicitud extends SugarApi
         $beanPersona->load_relationship('accounts_tel_telefonos_1');
         $relatedBeansTel = $beanPersona->accounts_tel_telefonos_1->getBeans();
         $telefono = count($relatedBeansTel);
-        if ($telefono == 0) {
-            array_push($array_errores, 'Teléfono');
+        if ($telefono == 0 && ($beanPersona->email1 == "" || $beanPersona->email1 == null)) {
+            array_push($array_errores, 'Teléfono o Email');
         }
 
 
