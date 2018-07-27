@@ -1308,14 +1308,19 @@ cancelarBacklog: function(e){
                     'Anio': anio,
                     'MesAnterior': tempMes,
                     'AnioAnterior': tempAnio,
+                    'Competencia': Competencia,
+                    'Producto': Producto,
                 };
                 var Url = app.api.buildURL("BacklogCancelar", '', {}, {});
+                $(".savingIcon").show();
                 app.api.call("create", Url, {data: Params}, {
                     success: _.bind(function (data) {
                         if (self.disposed) {
+                            $(".savingIcon").hide();
                             this.saving = 0;
                             return;
                         }
+                        $(".savingIcon").hide();
                         self.popup_switch = "none";
                         self.cancelar_switch = "none";
                         this.cancelar_masivo_switch = "none";
@@ -2570,7 +2575,7 @@ cancelarBacklog: function(e){
 
     },
 
-     
+
     getElaborationBacklog: function(){
         //Obtiene el Backlog en elaboración
         var currentDay = (new Date).getDate();
