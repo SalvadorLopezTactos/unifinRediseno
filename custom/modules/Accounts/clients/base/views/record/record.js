@@ -981,7 +981,7 @@
                 this.model.set('tipo_registro_c','Prospecto');
                 this.model.set('subtipo_registro_c','Contactado');
                 this.model.set('tct_prospecto_contactado_chk_c',true);
-                this.model.save(); 
+                this.model.save();
                 app.alert.show('alert_change_success', {
                     level: 'success',
                     messages: 'Cambio realizado',
