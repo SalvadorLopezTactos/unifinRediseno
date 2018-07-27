@@ -425,6 +425,7 @@ array (
               ),
               14 => 
               array (
+                'type' => 'button',
                 'name' => 'generar_curp_c',
                 'label' => 'LBL_GENERAR_CURP',
               ),
@@ -478,6 +479,7 @@ array (
               ),
               24 => 
               array (
+                'type' => 'button',
                 'name' => 'generar_rfc_c',
                 'label' => 'LBL_GENERAR_RFC',
               ),
