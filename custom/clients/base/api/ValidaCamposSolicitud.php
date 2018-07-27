@@ -60,7 +60,7 @@ class ValidaCamposSolicitud extends SugarApi
 
             $req_pf_y_pfae .= "generar_rfc_c,fechadenacimiento_c," .
                 "pais_nacimiento_c,estado_nacimiento_c,zonageografica_c," .
-                "genero_c,ifepasaporte_c,curp_c" .
+                "genero_c,ifepasaporte_c,curp_c," .
                 "estadocivil_c,regimenpatrimonial_c,profesion_c,ventas_anuales_c,potencial_cuenta_c,activo_fijo_c";
         }
 
