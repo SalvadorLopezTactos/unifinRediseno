@@ -25,12 +25,22 @@
 		this.model.fields['forecast_c'].options = opciones_forecast;
 		*/
 
+		this.on('render', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
+    //this.model.on("change:tct_oportunidad_perdida_chk_c",this._HideSaveButton, this);
 		this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
-        this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
-        this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
+    this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
+    this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
 
 		this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
 		this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
+		this.model.addValidationTask('check_oportunidadperdida', _.bind(this.oportunidadperdidacheck, this));
+
+
+		/* @author victor.martinez
+		* 23-07-2018
+		* Valida campos requeridos de prospecto e Integracion de expediente
+		*/
+    this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));
 
 		this.model.on("change:porciento_ri_c", _.bind(this.calcularRI, this));
 		this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
@@ -41,6 +51,7 @@
 		this.$('[data-name=contacto_relacionado_c]').click(function(){
 			//alert('keydown');
 		})
+
 
 		this.getCurrentYearMonth();
 
@@ -62,8 +73,7 @@
         self.noEditFields.push('condiciones_financieras');
       }
 
-      //AF: 22/06/2018
-      //Ajuste para establecer usuario_bo_c(Equipo backOffice) como sólo lectura
+
       this.noEditFields.push('usuario_bo_c');
 
       this._super('_renderHtml');
@@ -72,9 +82,28 @@
     _render: function() {
       this._super("_render");
 
-      //AF: 22/06/2018
-      //Ajuste para establecer usuario_bo_c(Equipo backOffice) como sólo lectura
-      this.$("[data-name='usuario_bo_c']").prop("disabled", true);
+      //Victor M.L 19-07-2018
+		//no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
+        if((this.model.get('tct_etapa_ddw_c')=='SI') ||
+            (this.model.get('tct_etapa_ddw_c')=='P' &&
+                (this.model.get('estatus_c')=='PE' || this.model.get('estatus_c')=='P' )) || this.model.get('estatus_c')=='K' ){
+
+
+            //no hace nada y muestra el panel
+
+        }else{
+            this.$('div[data-panelname=LBL_RECORDVIEW_PANEL1]').hide();
+        }
+
+
+
+
+
+
+
+    //AF: 22/06/2018
+    //Ajuste para establecer usuario_bo_c(Equipo backOffice) como sólo lectura
+	  this.$("[data-name='usuario_bo_c']").prop("disabled", true);
 
   		// @author Carlos Zaragoza
   		// @brief Si el usuario esta ratificando una linea autorizada, se le quitan los permisos de edición sobre oportunidades.
@@ -318,12 +347,41 @@
         }
 	  },
 
-    delegateButtonEvents: function () {
+    validacionCuentaSubcuentaCheck:function (fields, errors, callback) {
+        self=this;
+    		var obid=this.model.get('account_id');
+    		var caso="2";
+    		if((obid!=""|| obid!=null) && this.model.get('tct_oportunidad_perdida_chk_c') != true){
+            app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/2'), null, {
+            success: _.bind(function (data) {
+
+                if (data != "") {
+                    var titulo = "Campos Requeridos en Cuentas";
+                    var nivel = "error";
+                    var mensaje = "Hace falta completar la siguiente informaci&oacuten: " + data;
+
+
+                    app.error.errorName2Keys['custom_message1'] = 'Falta tipo y subtipo de cuenta';
+                    errors['account_name'] = errors['account_name'] || {};
+                    errors['account_name'].custom_message1 = true;
+                    errors['account_name'].required = true;
+                    self.mensajes(titulo, mensaje, nivel);
+
+                }
+                callback(null, fields, errors)
+
+            }, self),
+          });
+        }
+      },
+
+	delegateButtonEvents: function () {
 			this._super("delegateButtonEvents");
 
 			this.context.on('button:expediente_button:click', this.expedienteClicked, this);
 			this.context.on('button:ratificado_button:click', this.ratificadoClicked, this);
 			this.context.on('button:edit_button:click', this.checkForRatificado, this);
+      this.context.on('button:edit_button:click', this._HideSaveButton, this);
 			//this.model.on('change:monto_c', this._ValidateAmount, this);
 			//this.events['blur input[name=monto_c]'] = '_ValidateAmount';
 			this.context.on('button:sobregiro:click', this.sobregiroClicked, this);
@@ -331,7 +389,7 @@
 			this.context.on('button:expediente_credito_button:click', this.expedienteCredito, this);
 			this.context.on('button:votacion_comite_button:click', this.votacionComite, this);
     },
-  	/*
+	/*
   	 _ValidateAmount: function (){
   	 var monto = this.model.get("amount");
   	 if (monto <= 0)
@@ -489,7 +547,7 @@
 					success: _.bind(function (data) {
 						if (data != null) {
 							console.log("Se cancelo padre");
-							window.location.reload()
+							//window.location.reload()
 						} else {
 							console.log("No se cancela Padre");
 						}
@@ -538,7 +596,7 @@
 						success: _.bind(function (data) {
 							if (data != null) {
 								console.log("Se cancelo padre");
-								window.location.reload()
+								//window.location.reload()
 							} else {
 								console.log("No se cancela Padre");
 							}
@@ -851,6 +909,17 @@ console.log(name);
 		}
 		callback(null, fields, errors);
 	},
+	oportunidadperdidacheck: function(fields, errors, callback){
+	    console.log(fields);
+	    console.log(errors);
+        if(this.model.get('tct_oportunidad_perdida_chk_c')==true){
+            this.cancelaOperacion();
+            this.model.set('estatus_c','K');
+            this.model.save();
+            //window.location.reload()
+        }
+        callback(null, fields, errors);
+    	},
 
 	calcularRI: function(){
 		if(!_.isEmpty(this.model.get("amount")) && !_.isEmpty(this.model.get("porciento_ri_c")) && this.model.get("porciento_ri_c") != 0 && this.model.get("tipo_operacion_c") == 1){
@@ -866,4 +935,21 @@ console.log(name);
 			this.model.set("porciento_ri_c", percent);
 		}
 	},
+
+
+    mensajes:function (descripcion,texto,nivel) {
+        app.alert.show(descripcion, {
+            level: nivel,
+            messages: texto,
+        });
+    },
+
+    _HideSaveButton: function () {
+          if (this.model.get('tct_oportunidad_perdida_chk_c') && this.model.get('estatus_c')=='K')
+          {
+             $('[name="save_button"]').eq(0).hide();
+          }
+          else {$('[name="save_button"]').eq(0).show();}
+     }
+
 })

@@ -203,6 +203,8 @@ array (
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
+            'newTab' => false,
+            'panelDefault' => 'expanded',
             'fields' => 
             array (
               0 => 
@@ -394,6 +396,43 @@ array (
                 'name' => 'tel_telefonos_calls_1_name',
                 'span' => 6,
               ),
+              13 => 
+              array (
+                'name' => 'tct_resultado_llamada_ddw_c',
+                'label' => 'LBL_TCT_RESULTADO_LLAMADA_DDW',
+                'span' => 12,
+              ),
+              14 => 
+              array (
+                'name' => 'tct_motivo_ilocalizable_ddw_c',
+                'label' => 'LBL_TCT_MOTIVO_ILOCALIZABLE_DDW',
+                'span' => 12,
+              ),
+              15 => 
+              array (
+                'name' => 'tct_fecha_cita_dat_c',
+                'label' => 'LBL_TCT_FECHA_CITA_DAT',
+                'span' => 12,
+              ),
+              16 => 
+              array (
+                'name' => 'tct_usuario_cita_rel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_USUARIO_CITA_REL',
+                'span' => 12,
+              ),
+              17 => 
+              array (
+                'name' => 'tct_fecha_seguimiento_dat_c',
+                'label' => 'LBL_TCT_FECHA_SEGUIMIENTO_DAT',
+                'span' => 12,
+              ),
+              18 => 
+              array (
+                'name' => 'tct_motivo_desinteres_ddw_c',
+                'label' => 'LBL_TCT_MOTIVO_DESINTERES_DDW',
+                'span' => 12,
+              ),
             ),
           ),
           2 => 
@@ -404,6 +443,8 @@ array (
             'hide' => true,
             'labelsOnTop' => true,
             'placeholders' => true,
+            'newTab' => false,
+            'panelDefault' => 'expanded',
             'fields' => 
             array (
               0 => 
@@ -456,6 +497,10 @@ array (
               ),
             ),
           ),
+        ),
+        'templateMeta' => 
+        array (
+          'useTabs' => false,
         ),
       ),
     ),
