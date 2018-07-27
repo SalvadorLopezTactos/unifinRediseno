@@ -624,7 +624,7 @@ SQL;
             }
 
         }
-        $this->actualizaOportunidadProspecto($bean);
+      //  $this->actualizaOportunidadProspecto($bean);
         /*** ALI FIN ***/
     }
 

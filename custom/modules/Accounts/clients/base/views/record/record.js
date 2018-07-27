@@ -965,16 +965,23 @@
             }
         }
         console.log(allfields2);
-        if(allfields2.includes(false)==true){
+        var fieldstelefono=allfields2.slice(0,2);
+        var fieldsdirec=allfields2.slice(3);
+        if(fieldstelefono.includes(false)==true){
             app.alert.show('alert_fields_empty', {
                 level: 'error',
-                messages: 'Para convertir a Prospecto Contactado es necesario que se llenen los campos requeridos',
+                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos un Telefono',
+            });
+        }else if(fieldsdirec.includes(false)==true){
+            app.alert.show('alert_fields_empty', {
+                level: 'error',
+                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una Direcion',
             });
         }else{
                 this.model.set('tipo_registro_c','Prospecto');
                 this.model.set('subtipo_registro_c','Contactado');
                 this.model.set('tct_prospecto_contactado_chk_c',true);
-                this.model.save();
+                this.model.save(); 
                 app.alert.show('alert_change_success', {
                     level: 'success',
                     messages: 'Cambio realizado',

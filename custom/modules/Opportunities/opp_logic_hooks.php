@@ -55,6 +55,7 @@
 
 		 public function crearFolioSolicitud($bean = null, $event = null, $args = null)
         {
+            $GLOBALS['log']->fatal('>>>>>>>la funcion crearFolioSolici.... ha sido ejecutada<<<<<<<' );
 			//Operaciones de solicitud de crédito
             if(($bean->idsolicitud_c == 0 || empty($bean->idsolicitud_c)) && $bean->tipo_operacion_c == 1) {
                 $callApi = new UnifinAPI();
