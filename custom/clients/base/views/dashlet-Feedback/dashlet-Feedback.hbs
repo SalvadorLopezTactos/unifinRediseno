@@ -1,0 +1,163 @@
+<style>
+    .txtComent {
+
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        height: 90px;
+        margin-top: 20px;
+        columns: 30;
+
+    }
+
+    .btn-Guardar {
+        line-height: 18px;
+        text-align: center;
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 12px;
+    }
+
+    .btn-Cancelar {
+        line-height: 18px;
+        text-align: center;
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 12px;
+    }
+
+    .tr-hover:hover {
+        background-color: #f2f2f2;
+    }
+
+    /*  estilos de la tabla */
+    .wrap {
+        width: 100%;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    .wrap table {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    table tr td {
+        padding: 5px;
+        border: 1px solid #eee;
+        width: 100%;
+        word-wrap: break-word;
+    }
+
+    table.head tr td {
+        background: #2f5085;
+        color: #ffffff;
+    }
+
+    .inner_table {
+        height: 100%;
+        overflow-y: auto;
+    }
+
+
+</style>
+
+<script>
+    $('#states3').select2({
+        minimumResultsForSearch: 5,
+        allowClear: true
+    });
+    $('#states2').select2({
+        minimumResultsForSearch: 5,
+        allowClear: true
+    });
+    var $select = $('select.select2');
+    $select.select2();
+
+</script>
+
+<div class="dashlet-container " style="height: 355px">
+
+{{#if banderaUsr}}
+    <!-- Catalogos de equipos y Usuarios -->
+    <div class="row-fluid" style="margin-top: 20px; ">
+        <div class="span2">
+            <select class="select2 inherit-width equipoList " id="states3" data-name="listEquipos"
+                    data-placeholder="Equipo...">
+                {{{list_equipos_all}}}
+            </select>
+        </div>
+
+        <div class="span8">
+            <select class="select2 inherit-width usrList" id="states2" data-name="listUsuarios"
+                    data-placeholder="Elige un usuario ...">
+                {{#each list_filter_usr }}
+                    <option value={{this.id}}>{{this.full_name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <div class="span2">
+            <div class="showComment btn btn-primary	" style="font-size: 14px" data-toggle="tooltip"
+                 title="Agregar Comentario">
+                <i class="fa fa-comment-o "></i><b>&nbsp+</b>
+            </div>
+        </div>
+    </div>
+{{/if }}
+    <!-- Campo para agregar Comentario -->
+    <div class="div-Comentarios" data-name="div-Comment">
+        <textarea class="txtComent span12" data-name="textComment"
+                  placeholder="Escribe un comentario para este usuario..........."></textarea>
+        <br>
+        <button class="btn btn-success	btn-Guardar" id="btn-Guardar" type="submit">Guardar</button>
+        <button class="btn btn btn-danger btn-Cancelar" id="btn-Cancelar" type="submit">Cancelar</button>
+    </div>
+
+    <!-- Tabla para mostrar Notificaciones de un usuario-->
+
+    <div style="display: inline-block; width: 100%">
+        <div class="wrap container-fluid span12 " style="height: 250px">
+            <table class="head">
+                <tr>
+                    {{#if banderaUsr}}
+                        <td style="width: 40px">Equipo</td>
+                        <td>Promotor</td>
+                        <td style="width: 70px">Fecha</td>
+                        <td>Realizado por</td>
+                        <td>Comentario</td>
+                    {{else}}
+                        <td style="width: 70px">Fecha</td>
+                        <td>Comentario</td>
+                    {{/if }}
+                </tr>
+            </table>
+            <div class="inner_table">
+                <table>
+                    {{#if banderaUsr}}
+                        {{#each notificaciones_usr}}
+                            <tr class="tr-hover ">
+                                <td style="width: 40px">{{this.equipo}}</td>
+                                <td>{{this.assigned_user_name}}</td>
+                                <td style="width: 70px">{{this.date_entered}}</td>
+                                <td>{{this.created_by_name}}</td>
+                                <td>{{this.description}} </td>
+                            </tr>
+                        {{/each}}
+                    {{else}}
+                        {{#each notificaciones_usr}}
+                            <tr class="tr-hover ">
+                                <td style="width: 70px">{{this.date_entered}}</td>
+                                <td>{{this.description}} </td>
+                            </tr>
+                        {{/each}}
+                    {{/if }}
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
