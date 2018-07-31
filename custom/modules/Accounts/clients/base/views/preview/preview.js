@@ -155,16 +155,14 @@
     },
 
 	initialize:function(options){
-        self = this;
         this._super("initialize", [options])
     	console.log('entrando a preview');
         this.model.on('sync', this.hideconfiinfo, this);
-		//this._super('initialize',[options]);
 		//app.events.on("preview:render", this._showHideFields, this);
 		//delete this.model.fields["rfc_c"];
 
 	},
-
+	
 		/*	_showHideFields: function(model, collection, fetch, previewId){
 
 				//Hiding Webcast related Field from preview panel 
@@ -174,5 +172,4 @@
 				//$('div[name="fieldname_1"]').parent().hide();
 
 			}, */
-
 })
