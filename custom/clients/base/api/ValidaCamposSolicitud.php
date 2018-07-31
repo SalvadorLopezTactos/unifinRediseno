@@ -52,7 +52,7 @@ class ValidaCamposSolicitud extends SugarApi
             "promotorleasing_c,promotorfactoraje_c,promotorcredit_c";
 
         if($option=='2'){
-            $req_pm .= ",rfc_c,fechadenacimiento_c," .
+            $req_pm .= ",rfc_c,fechaconstitutiva_c," .
                 "pais_nacimiento_c,estado_nacimiento_c," .
                 "zonageografica_c,ventas_anuales_c," .
                 "potencial_cuenta_c,activo_fijo_c";
