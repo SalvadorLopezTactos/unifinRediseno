@@ -388,7 +388,7 @@ SQL;
                 global $db, $current_user;
                 $query = <<<SQL
 SELECT ifnull(p.altoriesgo,0) as AltoRiesgo
-FROM accounts_cstm acc 
+FROM accounts_cstm acc
 LEFT OUTER JOIN dire_pais p on acc.pais_nacimiento_c = p.id
 where acc.id_c = '{$bean->user_id_c}'
 SQL;
@@ -437,10 +437,7 @@ SQL;
     public function crearFolioCliente($bean = null, $event = null, $args = null)
     {
         global $current_user;
-        if (($bean->idcliente_c == '' || $bean->idcliente_c == '0' ) && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_c == 'Cliente'
-                || $bean->tipo_registro_c == 'Proveedor' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c )
-            ||  ($bean->tipo_registro_c=="Prospecto" && $bean->subtipo_cuenta_c=="Interesado")
-        ) {
+        if (($bean->idcliente_c == '' || $bean->idcliente_c == '0' ) && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_c == 'Cliente' || $bean->tipo_registro_c == 'Proveedor' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c || ($bean->tipo_registro_c=="Prospecto" && $bean->subtipo_cuenta_c=="Interesado"))) {
             global $db;
             $callApi = new UnifinAPI();
             $numeroDeFolio = $callApi->generarFolios(1);
