@@ -42,13 +42,13 @@ $viewdefs['Accounts']['base']['view']['list'] = array (
           'width' => '10%',
           'default' => true,
         ),
-        4 => 
+        /*4 =>
         array (
           'name' => 'email',
           'label' => 'LBL_EMAIL_ADDRESS',
           'enabled' => true,
           'default' => true,
-        ),
+        ), */
         5 => 
         array (
           'name' => 'promotorleasing_c',

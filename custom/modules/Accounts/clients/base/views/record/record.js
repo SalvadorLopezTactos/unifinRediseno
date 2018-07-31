@@ -127,8 +127,9 @@
         //Recupera llamadas y reuniones asociadas al cliente
         this.model.on('sync', this.getllamadas, this);
         this.model.on('sync', this.getreuniones, this);
+        this.model.on('sync', this.hideconfiinfo, this);
 
-
+        //this.hideconfiinfo();
     },
 
     /** BEGIN CUSTOMIZATION:
@@ -482,8 +483,35 @@
         this.hideButton_Conversion();
 
 
+
     },
 
+    hideconfiinfo:function () {
+
+        self=this;
+
+        if(this.model.get('id')!="") {
+            app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
+                success: _.bind(function (data) {
+                    console.log(data);
+                    if(data==false){
+                        $('div[data-name=account_telefonos]').hide();
+                        $('div[data-name=email]').hide();
+                    }else{
+                        $('div[data-name=account_telefonos]').show();
+                        $('div[data-name=email]').show();
+                    }
+                    return data;
+                }, self),
+            });
+            self.render();
+        }
+
+        console.log("valor fuera " + this.model.get('id'));
+
+
+
+    },
     /*
         * @author F. Javier G. Solar
         * 18/07/2018
@@ -1005,7 +1033,7 @@
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
       if (this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
-          if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos')) ) {
+          if (_.isEmpty(this.model.get('email1')) && _.isEmpty(this.model.get('account_telefonos')) ) {
               app.alert.show("Correo requerido", {
                   level: "error",
                   title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",

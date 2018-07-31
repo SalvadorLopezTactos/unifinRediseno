@@ -125,22 +125,51 @@
 		}
 
 		this.previewId = previewId;
-	}
-	/*
-	initialize:function(options){
-		this._super('initialize',[options]);
-		app.events.on("preview:render", this._showHideFields, this);
-		//delete this.model.fields["rfc_c"];
-		console.log(this);
 	},
-		_showHideFields: function(model, collection, fetch, previewId){
+
+    hideconfiinfo:function () {
+
+        self=this;
+
+        if(this.model.get('id')!="") {
+            app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
+                success: _.bind(function (data) {
+                    console.log(data);
+                    if(data==false){
+                        $('div[data-name=account_telefonos]').hide();
+                        $('div[data-name=email]').hide();
+                    }else{
+                        $('div[data-name=account_telefonos]').show();
+                        $('div[data-name=email]').show();
+                    }
+                    return data;
+                }, self),
+            });
+            self.render();
+        }
+
+        console.log("valor fuera " + this.model.get('id'));
+
+
+
+    },
+
+	initialize:function(options){
+        this._super("initialize", [options])
+    	console.log('entrando a preview');
+        this.model.on('sync', this.hideconfiinfo, this);
+		//app.events.on("preview:render", this._showHideFields, this);
+		//delete this.model.fields["rfc_c"];
+
+	},
+	
+		/*	_showHideFields: function(model, collection, fetch, previewId){
 
 				//Hiding Webcast related Field from preview panel 
 				//$('div[name="rfc_c"]').parent().hide();
 				this.$("div[name='rfc_c']").hide();
-				console.log("** JSR ** Entró a ocultar");
+				console.log("** JSR ** Entrï¿½ a ocultar");
 				//$('div[name="fieldname_1"]').parent().hide();
 
-},
-*/
+			}, */
 })
