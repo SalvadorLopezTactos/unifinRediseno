@@ -78,6 +78,27 @@ array (
               ),
               7 => 
               array (
+                'name' => 'tct_fecha_cita_dat_c',
+                'label' => 'LBL_TCT_FECHA_CITA_DAT',
+              ),
+              8 => 
+              array (
+                'name' => 'tct_usuario_cita_rel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_USUARIO_CITA_REL',
+              ),
+              9 => 
+              array (
+                'name' => 'tct_fecha_seguimiento_dat_c',
+                'label' => 'LBL_TCT_FECHA_SEGUIMIENTO_DAT',
+              ),
+              10 => 
+              array (
+                'name' => 'tct_motivo_desinteres_ddw_c',
+                'label' => 'LBL_TCT_MOTIVO_DESINTERES_DDW',
+              ),
+              11 => 
+              array (
                 'name' => 'reminder',
                 'type' => 'fieldset',
                 'orientation' => 'horizontal',
@@ -101,7 +122,7 @@ array (
                   ),
                 ),
               ),
-              8 => 
+              12 => 
               array (
                 'name' => 'email_reminder',
                 'type' => 'fieldset',
@@ -126,9 +147,9 @@ array (
                   ),
                 ),
               ),
-              9 => 'description',
-              10 => 'parent_name',
-              11 => 'assigned_user_name',
+              13 => 'description',
+              14 => 'parent_name',
+              15 => 'assigned_user_name',
             ),
           ),
         ),
