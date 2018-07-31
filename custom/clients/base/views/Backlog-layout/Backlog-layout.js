@@ -1310,9 +1310,8 @@ cancelarBacklog: function(e){
                     'Anio': anio,
                     'MesAnterior': tempMes,
                     'AnioAnterior': tempAnio,
-                    'Param_Competencia':Competencia,
-                    'Param_Producto':Producto
-
+                    'Competencia': Competencia,
+                    'Producto': Producto,
                 };
 
                 var Url = app.api.buildURL("BacklogCancelar", '', {}, {});
@@ -1320,6 +1319,7 @@ cancelarBacklog: function(e){
                 app.api.call("create", Url, {data: Params}, {
                     success: _.bind(function (data) {
                         if (self.disposed) {
+                            $(".savingIcon").hide();
                             this.saving = 0;
                             return;
                         }
@@ -1838,8 +1838,8 @@ cancelarBacklog: function(e){
                                 'Anio': anio,
                                 'MesAnterior': tempMes,
                                 'AnioAnterior': tempAnio,
-                                'Param_Competencia':Competencia,
-                                'Param_Producto':Producto
+                                'Competencia':Competencia,
+                                'Producto':Producto
                             };
 
                             canceladosResumen+="No. Backlog: "+this.checks_cancelar[i].getAttribute('data-numBacklog')+"<br>";

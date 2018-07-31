@@ -965,10 +965,17 @@
             }
         }
         console.log(allfields2);
-        if(allfields2.includes(false)==true){
+        var fieldstelefono=allfields2.slice(0,2);
+        var fieldsdirec=allfields2.slice(3);
+        if(fieldstelefono.includes(false)==true){
             app.alert.show('alert_fields_empty', {
                 level: 'error',
-                messages: 'Para convertir a Prospecto Contactado es necesario que se llenen los campos requeridos',
+                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos un Telefono',
+            });
+        }else if(fieldsdirec.includes(false)==true){
+            app.alert.show('alert_fields_empty', {
+                level: 'error',
+                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una Direcion',
             });
         }else{
                 this.model.set('tipo_registro_c','Prospecto');
@@ -998,7 +1005,7 @@
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
       if (this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
-          if (_.isEmpty(this.model.get('email')) || _.isEmpty(this.model.get('account_telefonos')) ) {
+          if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos')) ) {
               app.alert.show("Correo requerido", {
                   level: "error",
                   title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",

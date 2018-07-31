@@ -55,8 +55,10 @@
 
 		 public function crearFolioSolicitud($bean = null, $event = null, $args = null)
         {
-			//Operaciones de solicitud de crédito
+
+			      //Operaciones de solicitud de crédito
             if(($bean->idsolicitud_c == 0 || empty($bean->idsolicitud_c)) && $bean->tipo_operacion_c == 1) {
+                $GLOBALS['log']->fatal('>>>>>>>la funcion crearFolioSolici.... ha sido ejecutada<<<<<<<' );
                 $callApi = new UnifinAPI();
                 if($bean->canal_c == 1){
                     $numeroDeFolio = $bean->idsolicitud_c;
@@ -149,11 +151,13 @@
     function creaSolicitud($bean = null, $event = null, $args = null)
     {
         global $db, $current_user;
-        $GLOBALS['log']->fatal('----------------------->Imprimiendo el valor de Args:' . print_r($args[0]));
-        if(($args[0]!=null && $args[0]!="") && $bean->tct_etapa_ddw_c=='SI'){//@jesus
-            if (($bean->id_process_c == 0 || $bean->id_process_c == null)/* && $bean->estatus_c == 'P' */ && $bean->tipo_operacion_c == '1') {
+
+        $GLOBALS['log']->fatal('-Update: '. $args['isUpdate'] . '--Etapa: ' . $bean->tct_etapa_ddw_c);
+        if($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI'){//@jesus
+            if (($bean->id_process_c == 0 || $bean->id_process_c == null || empty($bean->id_process_c))/* && $bean->estatus_c == 'P' */ && $bean->tipo_operacion_c == '1') {
             //Hay operaciones vigentes?
             // ** JSR INICIO
+            $GLOBALS['log']->fatal('Entra creación de solicitud');
             $query = <<<SQL
 			SELECT aop.account_id,aop.opportunity_id, oppc.estatus_c, oppc.monto_c, oppc.idsolicitud_c,
     acstm.idcliente_c,ac.name as nombre_cliente,  acstm.riesgo_c as riesgo,acstm.tipodepersona_c as tipo_persona,
@@ -174,7 +178,7 @@
                     INNER JOIN
 						accounts ac ON ac.id = aop.account_id
 					INNER JOIN
-						accounts_cstm acstm ON acstm.id_c = aop.account_id and acstm.tipo_registro_c = 'Cliente'
+						accounts_cstm acstm ON acstm.id_c = aop.account_id and acstm.tipo_registro_c in ('Prospecto','Cliente')
 					LEFT JOIN
 						email_addr_bean_rel  ON email_addr_bean_rel.bean_id = acstm.id_c and email_addr_bean_rel.primary_address = 1
 					LEFT JOIN

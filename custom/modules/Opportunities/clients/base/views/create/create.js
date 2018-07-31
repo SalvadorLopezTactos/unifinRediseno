@@ -370,7 +370,7 @@
 
         self = this;
 
-        if ((this.model.get('account_id' != "") || this.model.get('account_id') != null) && (this.model.get('tipo_registro_c') == 'Prospecto' || this.model.get('tipo_registro_c') == 'Cliente') )
+        if ( (this.model.get('account_id') != "" || this.model.get('account_id') != null) && (this.model.get('tipo_registro_c') == 'Prospecto' || this.model.get('tipo_registro_c') == 'Cliente') )
         {
             app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/1'), null, {
                 success: _.bind(function (data) {
@@ -388,10 +388,12 @@
                         self.mensajes(titulo, mensaje, nivel);
 
                     }
-                    callback(null, fields, errors)
+                    callback(null, fields, errors);
 
                 }, self),
             });
+        }else {
+          callback(null, fields, errors);
         }
 
     },
@@ -520,10 +522,11 @@
         // Obtener el primer activo del control de condiciones financieras
         this.model.set('id_activo_c', "97");
         this.model.set('index_activo_c', "000100030001");
-        callback(null,fields,errors)
+        callback(null,fields,errors);
     },
 
     validaClientesActivos: function(fields, errors, callback){
+      if (this.model.get('account_id')) {
         var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
         account.fetch({
             success: _.bind(function (model) {
@@ -535,6 +538,10 @@
                 callback(null, fields, errors);
             }, this)
         });
+      }else {
+        callback(null, fields, errors);
+      }
+
 
     },
     verificaOperacionProspecto: function(){
@@ -600,36 +607,40 @@
      * */
     validaOperacionesPermitidasPorCuenta: function(fields, errors, callback){
         //Controlamos la solicitud del servicio:
-            var OppParams = {
-                'id_c': this.model.get('account_id'),
-            };
-            var urlOperaciones = app.api.buildURL("Opportunities/Operaciones", '', {}, {});
-            app.api.call("create", urlOperaciones, {data: OppParams}, {
-                success: _.bind(function (data) {
-                    if (data != null) {
-                        //console.log(data);
-                        var cantidad = data['cantidad'];
-                        //console.log("Cantidad de operaciones" + cantidad);
-                        if (cantidad > 0) {
-                            app.alert.show("Cantidad de operaciones", {
-                                level: "error",
-                                title: "No puedes generar m&aacute;s de una operaci&oacute;n para prospectos.",
-                                autoClose: false
-                            });
-                            app.error.errorName2Keys['custom_message'] = 'Solo puede tener una operacion como prospecto ';
-                            errors['account_name'] = errors['account_name'] || {};
-                            errors['account_name'].custom_message = true;
+        if (this.model.get('account_id')) {
+          var OppParams = {
+              'id_c': this.model.get('account_id'),
+          };
+          var urlOperaciones = app.api.buildURL("Opportunities/Operaciones", '', {}, {});
+          app.api.call("create", urlOperaciones, {data: OppParams}, {
+              success: _.bind(function (data) {
+                  if (data != null) {
+                      //console.log(data);
+                      var cantidad = data['cantidad'];
+                      //console.log("Cantidad de operaciones" + cantidad);
+                      if (cantidad > 0) {
+                          app.alert.show("Cantidad de operaciones", {
+                              level: "error",
+                              title: "No puedes generar m&aacute;s de una operaci&oacute;n para prospectos.",
+                              autoClose: false
+                          });
+                          app.error.errorName2Keys['custom_message'] = 'Solo puede tener una operacion como prospecto ';
+                          errors['account_name'] = errors['account_name'] || {};
+                          errors['account_name'].custom_message = true;
 
-                            //this.cancelClicked();
-                            callback(null, fields, errors);
-                        } else {
-                            callback(null, fields, errors);
-                        }
-                    }
-                }, this)
-            });
-
+                          //this.cancelClicked();
+                          callback(null, fields, errors);
+                      } else {
+                          callback(null, fields, errors);
+                      }
+                  }
+              }, this)
+          });
+        }else {
+          callback(null, fields, errors);
+        }
     },
+
     _ActualizaEtiquetas: function(){
         if(this.model.get('tipo_producto_c')=='4'){
             this.$("div.record-label[data-name='plazo_c']").text("Plazo máximo en d\u00EDas");

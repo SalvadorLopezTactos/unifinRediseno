@@ -1,7 +1,7 @@
 <?php
- // created: 2018-07-11 16:43:46
+ // created: 2018-07-27 18:04:18
 $dictionary['Account']['fields']['email']['len']='100';
-$dictionary['Account']['fields']['email']['required']=true;
+$dictionary['Account']['fields']['email']['required']=false;
 $dictionary['Account']['fields']['email']['audited']=false;
 $dictionary['Account']['fields']['email']['massupdate']=true;
 $dictionary['Account']['fields']['email']['duplicate_merge']='enabled';
