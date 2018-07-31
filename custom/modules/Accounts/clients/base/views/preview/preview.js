@@ -138,9 +138,11 @@
                     if(data==false){
                         $('div[data-name=account_telefonos]').hide();
                         $('div[data-name=email]').hide();
+                        $('div[data-name=account_direcciones]').hide();
                     }else{
                         $('div[data-name=account_telefonos]').show();
                         $('div[data-name=email]').show();
+                        $('div[data-name=account_direcciones]').show();
                     }
                     return data;
                 }, self),
@@ -162,7 +164,7 @@
 		//delete this.model.fields["rfc_c"];
 
 	},
-	
+
 		/*	_showHideFields: function(model, collection, fetch, previewId){
 
 				//Hiding Webcast related Field from preview panel 
