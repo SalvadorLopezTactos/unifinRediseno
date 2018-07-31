@@ -841,7 +841,7 @@ $dependencies['Accounts']['Estado_Civil_required'] = array(
 $dependencies['Accounts']['Regimen_Patrimonial_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','regimenpatrimonial_c','subtipo_cuenta_c','tipodepersona_c'),
+    'triggerFields' => array('tipo_registro_c','regimenpatrimonial_c','subtipo_cuenta_c','tipodepersona_c','estadocivil_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -849,7 +849,7 @@ $dependencies['Accounts']['Regimen_Patrimonial_required'] = array(
             'params' => array(
                 'target' => 'regimenpatrimonial_c',
                 'label' => 'regimenpatrimonial_c_label',
-                'value' => 'and(or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente")),equal($tipodepersona_c,"Persona Fisica"))',
+                'value' => 'equal($estadocivil_c,"Casado")',
             ),
         ),
     ),
