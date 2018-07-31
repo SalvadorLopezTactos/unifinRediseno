@@ -218,7 +218,7 @@ array (
           3 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL16',
             'label' => 'LBL_RECORDVIEW_PANEL16',
             'columns' => 2,
@@ -343,7 +343,7 @@ array (
           4 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL11',
             'label' => 'LBL_RECORDVIEW_PANEL11',
             'columns' => 2,
@@ -353,199 +353,199 @@ array (
             array (
               0 => 
               array (
-                'name' => 'reus_c',
-                'label' => 'LBL_REUS',
-              ),
-              1 => 
-              array (
-                'name' => 'referencia_bancaria_c',
-                'label' => 'LBL_REFERENCIA_BANCARIA_C',
-              ),
-              2 => 
-              array (
-                'name' => 'alta_proveedor_c',
-                'label' => 'LBL_ALTA_PROVEEDOR_C',
-              ),
-              3 => 
-              array (
-                'name' => 'tipo_proveedor_c',
-                'label' => 'LBL_TIPO_PROVEEDOR',
-              ),
-              4 => 
-              array (
-                'name' => 'iva_c',
-                'label' => 'LBL_IVA',
-              ),
-              5 => 
-              array (
-                'name' => 'es_referenciador_c',
-                'label' => 'LBL_ES_REFERENCIADOR_C',
-              ),
-              6 => 
-              array (
                 'name' => 'tipodepersona_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TIPODEPERSONA',
               ),
-              7 => 
+              1 => 
               array (
                 'name' => 'primernombre_c',
                 'label' => 'LBL_PRIMERNOMBRE',
               ),
-              8 => 
-              array (
-                'name' => 'razonsocial_c',
-                'label' => 'LBL_RAZONSOCIAL',
-              ),
-              9 => 
-              array (
-                'name' => 'tipo_relacion_c',
-                'label' => 'LBL_TIPO_RELACION',
-              ),
-              10 => 
+              2 => 
               array (
                 'name' => 'apellidopaterno_c',
                 'label' => 'LBL_APELLIDOPATERNO',
               ),
-              11 => 
+              3 => 
               array (
                 'name' => 'apellidomaterno_c',
                 'label' => 'LBL_APELLIDOMATERNO',
               ),
-              12 => 
+              4 => 
+              array (
+                'name' => 'razonsocial_c',
+                'label' => 'LBL_RAZONSOCIAL',
+              ),
+              5 => 
               array (
                 'name' => 'nombre_comercial_c',
                 'label' => 'LBL_NOMBRE_COMERCIAL',
-                'span' => 12,
               ),
-              13 => 
-              array (
-                'name' => 'curp_c',
-                'label' => 'LBL_CURP',
-              ),
-              14 => 
-              array (
-                'type' => 'button',
-                'name' => 'generar_curp_c',
-                'label' => 'LBL_GENERAR_CURP',
-              ),
-              15 => 
-              array (
-                'name' => 'parent_name',
-              ),
-              16 => 
-              array (
-                'name' => 'fechaconstitutiva_c',
-                'label' => 'LBL_FECHACONSTITUTIVA',
-              ),
-              17 => 
+              6 => 
               array (
                 'name' => 'fechadenacimiento_c',
                 'label' => 'LBL_FECHADENACIMIENTO',
               ),
-              18 => 
-              array (
-                'name' => 'pais_nacimiento_c',
-                'studio' => 'visible',
-                'label' => 'LBL_PAIS_NACIMIENTO',
-              ),
-              19 => 
-              array (
-                'name' => 'estado_nacimiento_c',
-                'studio' => 'visible',
-                'label' => 'LBL_ESTADO_NACIMIENTO',
-              ),
-              20 => 
-              array (
-                'name' => 'zonageografica_c',
-                'studio' => 'visible',
-                'label' => 'LBL_ZONAGEOGRAFICA',
-              ),
-              21 => 
+              7 => 
               array (
                 'name' => 'genero_c',
                 'studio' => 'visible',
                 'label' => 'LBL_GENERO',
               ),
-              22 => 
+              8 => 
               array (
-                'name' => 'ifepasaporte_c',
-                'label' => 'LBL_IFEPASAPORTE',
+                'name' => 'parent_name',
               ),
-              23 => 
+              9 => 
+              array (
+                'name' => 'fechaconstitutiva_c',
+                'label' => 'LBL_FECHACONSTITUTIVA',
+              ),
+              10 => 
               array (
                 'name' => 'rfc_c',
                 'label' => 'LBL_RFC',
               ),
-              24 => 
+              11 => 
               array (
                 'type' => 'button',
                 'name' => 'generar_rfc_c',
                 'label' => 'LBL_GENERAR_RFC',
               ),
-              25 => 
+              12 => 
+              array (
+                'name' => 'pais_nacimiento_c',
+                'studio' => 'visible',
+                'label' => 'LBL_PAIS_NACIMIENTO',
+              ),
+              13 => 
+              array (
+                'name' => 'estado_nacimiento_c',
+                'studio' => 'visible',
+                'label' => 'LBL_ESTADO_NACIMIENTO',
+              ),
+              14 => 
+              array (
+                'name' => 'zonageografica_c',
+                'studio' => 'visible',
+                'label' => 'LBL_ZONAGEOGRAFICA',
+              ),
+              15 => 
+              array (
+                'name' => 'ifepasaporte_c',
+                'label' => 'LBL_IFEPASAPORTE',
+              ),
+              16 => 
+              array (
+                'name' => 'curp_c',
+                'label' => 'LBL_CURP',
+              ),
+              17 => 
+              array (
+                'type' => 'button',
+                'name' => 'generar_curp_c',
+                'label' => 'LBL_GENERAR_CURP',
+              ),
+              18 => 
               array (
                 'name' => 'estadocivil_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ESTADOCIVIL',
               ),
-              26 => 
+              19 => 
               array (
                 'name' => 'regimenpatrimonial_c',
                 'studio' => 'visible',
                 'label' => 'LBL_REGIMENPATRIMONIAL',
               ),
-              27 => 
+              20 => 
               array (
                 'name' => 'profesion_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROFESION',
               ),
-              28 => 
+              21 => 
               array (
                 'name' => 'puesto_c',
                 'label' => 'LBL_PUESTO',
               ),
-              29 => 
+              22 => 
               array (
                 'name' => 'email',
               ),
-              30 => 'website',
-              31 => 
+              23 => 'website',
+              24 => 
               array (
                 'name' => 'facebook',
                 'comment' => 'The facebook name of the company',
                 'label' => 'LBL_FACEBOOK',
               ),
-              32 => 
+              25 => 
               array (
                 'name' => 'linkedin_c',
                 'label' => 'LBL_LINKEDIN',
               ),
-              33 => 
+              26 => 'twitter',
+              27 => 
               array (
                 'name' => 'referenciabancaria_c',
                 'label' => 'LBL_REFERENCIABANCARIA',
               ),
+              28 => 
+              array (
+                'name' => 'tipo_relacion_c',
+                'label' => 'LBL_TIPO_RELACION',
+              ),
+              29 => 
+              array (
+              ),
+              30 => 
+              array (
+                'name' => 'tipo_proveedor_c',
+                'label' => 'LBL_TIPO_PROVEEDOR',
+              ),
+              31 => 
+              array (
+                'name' => 'alta_proveedor_c',
+                'label' => 'LBL_ALTA_PROVEEDOR_C',
+              ),
+              32 => 
+              array (
+                'name' => 'iva_c',
+                'label' => 'LBL_IVA',
+              ),
+              33 => 
+              array (
+                'name' => 'es_referenciador_c',
+                'label' => 'LBL_ES_REFERENCIADOR_C',
+              ),
               34 => 
               array (
-                'name' => 'show_panel_c',
-                'label' => 'LBL_SHOW_PANEL',
+                'name' => 'reus_c',
+                'label' => 'LBL_REUS',
               ),
               35 => 
+              array (
+                'name' => 'referencia_bancaria_c',
+                'label' => 'LBL_REFERENCIA_BANCARIA_C',
+              ),
+              36 => 
               array (
                 'name' => 'tct_prospecto_contactado_chk_c',
                 'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
               ),
-              36 => 
+              37 => 
               array (
+                'name' => 'show_panel_c',
+                'label' => 'LBL_SHOW_PANEL',
               ),
             ),
           ),
           5 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL12',
             'label' => 'LBL_RECORDVIEW_PANEL12',
             'columns' => 2,
@@ -560,20 +560,20 @@ array (
               ),
               1 => 
               array (
+                'name' => 'empleados_c',
+                'label' => 'LBL_EMPLEADOS',
+              ),
+              2 => 
+              array (
                 'name' => 'subsectoreconomico_c',
                 'studio' => 'visible',
                 'label' => 'LBL_SUBSECTORECONOMICO',
               ),
-              2 => 
+              3 => 
               array (
                 'name' => 'actividadeconomica_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ACTIVIDADECONOMICA',
-              ),
-              3 => 
-              array (
-                'name' => 'empleados_c',
-                'label' => 'LBL_EMPLEADOS',
               ),
               4 => 
               array (
@@ -614,7 +614,7 @@ array (
           6 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL13',
             'label' => 'LBL_RECORDVIEW_PANEL13',
             'columns' => 2,
@@ -666,7 +666,7 @@ array (
           7 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL10',
             'label' => 'LBL_RECORDVIEW_PANEL10',
             'columns' => 2,
@@ -730,7 +730,7 @@ array (
           8 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL14',
             'label' => 'LBL_RECORDVIEW_PANEL14',
             'columns' => 2,
@@ -750,7 +750,7 @@ array (
           9 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL15',
             'label' => 'LBL_RECORDVIEW_PANEL15',
             'columns' => 2,
@@ -942,7 +942,7 @@ array (
           11 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL4',
             'label' => 'LBL_RECORDVIEW_PANEL4',
             'columns' => 2,
@@ -985,7 +985,7 @@ array (
           12 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL5',
             'label' => 'LBL_RECORDVIEW_PANEL5',
             'columns' => 2,
@@ -1038,7 +1038,7 @@ array (
           13 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL7',
             'label' => 'LBL_RECORDVIEW_PANEL7',
             'columns' => 2,
@@ -1099,7 +1099,7 @@ array (
           14 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL6',
             'label' => 'LBL_RECORDVIEW_PANEL6',
             'columns' => 2,
@@ -1150,7 +1150,7 @@ array (
           15 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL9',
             'label' => 'LBL_RECORDVIEW_PANEL9',
             'columns' => 2,
