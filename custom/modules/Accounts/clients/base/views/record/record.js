@@ -127,8 +127,9 @@
         //Recupera llamadas y reuniones asociadas al cliente
         this.model.on('sync', this.getllamadas, this);
         this.model.on('sync', this.getreuniones, this);
+        this.model.on('sync', this.hideconfiinfo, this);
 
-
+        //this.hideconfiinfo();
     },
 
     /** BEGIN CUSTOMIZATION:
@@ -482,8 +483,39 @@
         this.hideButton_Conversion();
 
 
+
     },
 
+
+
+
+    hideconfiinfo:function () {
+
+        self=this;
+
+        if(this.model.get('id')!="") {
+            app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
+                success: _.bind(function (data) {
+                    console.log(data);
+                    if(data==false){
+                        $('div[data-name=account_telefonos]').hide();
+                        $('div[data-name=email]').hide();
+                    }else{
+                        $('div[data-name=account_telefonos]').show();
+                        $('div[data-name=email]').show();
+                    }
+// data.informaA= a usr_firmado entonces regresa 1 si no cero
+return data;
+                }, self),
+            });
+            self.render();
+        }
+
+        console.log("valor fuera " + this.model.get('id'));
+
+
+
+    },
     /*
         * @author F. Javier G. Solar
         * 18/07/2018
