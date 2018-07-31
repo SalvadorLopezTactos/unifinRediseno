@@ -106,7 +106,7 @@
             ),
     );
 //Se añade la dependencia para subtipo de cuenta Integracion de Expediente. Se añade $subtipo_cuenta_c solamente. Actualizacion Proveedor.
-	$dependencies['Accounts']['estadocivil_c_required'] = array(
+/*	$dependencies['Accounts']['estadocivil_c_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
             'triggerFields' => array('tipodepersona_c', 'estatus_c','subtipo_cuenta_c'),
@@ -122,7 +122,7 @@
                             ),
                     ),
             ),
-    );
+    );*/
 //Cambio de dependencia para integracion de expediente, se añade el subtipo de cuenta, cliente y crédito.
     $dependencies['Accounts']['Genero_required'] = array(
             'hooks' => array("all"),
@@ -832,7 +832,7 @@ $dependencies['Accounts']['Estado_Civil_required'] = array(
             'params' => array(
                 'target' => 'estadocivil_c',
                 'label' => 'estadocivil_c_label',
-                'value' => 'and(or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"),equal($tipodepersona_c,"Persona Fisica")))',
+                'value' => 'and(not(equal($tipodepersona_c,"Persona Moral")),not(equal($tipo_registro_c,"Lead")),not(equal($subtipo_cuenta_c,"Contactado")),not(equal($subtipo_cuenta_c,"Interesado")))',
             ),
         ),
     ),
