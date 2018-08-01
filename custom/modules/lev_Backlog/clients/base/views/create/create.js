@@ -390,7 +390,7 @@
         if (parseFloat(this.model.get('monto_comprometido')) <= 0)
         {
             errors['monto_comprometido'] = errors['monto_comprometido'] || {};
-            errors['monto_comprometido'].required = true;    
+            errors['monto_comprometido'].required = true;
         }
 
         /*
@@ -412,7 +412,7 @@
 
             app.alert.show('tipo de persona', {
                 level: 'error',
-                messages: 'Para poder generar una operaci�n, la persona debe ser un cliente o prospecto.',
+                messages: 'Para poder generar una operaci\u00F3n, la persona debe ser un cliente o prospecto.',
                 autoClose: false
             });
         }

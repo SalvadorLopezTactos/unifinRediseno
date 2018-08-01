@@ -62,8 +62,8 @@ SUGAR.util.doWhen("typeof(check_form) != 'undefined' && typeof check_form == 'fu
               }
 
               //Valida nombre de usuario
-              console.log('Usuarios ---- Cambio contraseña');
-              var user_name = this.$('#user_name')[0].innerHTML;
+              console.log('Usuario ---- Cambio contraseña');
+              var user_name = document.getElementById("user_name").value;
               console.log(user_name);
               user_name = user_name.toLowerCase();
               console.log(user_name);
