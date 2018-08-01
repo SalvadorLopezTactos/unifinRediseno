@@ -172,8 +172,12 @@
                     });
 
                     /*jgarcia@levementum.com 9/28/2015 Description: Copiar relaciones activas de la Relacion creada desde el modulo de Relaciones y copiar esos valores en el campo de tipo de relacion*/
-                    if(relContext != null){
-                        self.model.set("tipo_relacion_c", relContext.model.get("relaciones_activas"));
+                    try {
+                      if(relContext != null){
+                          self.model.set("tipo_relacion_c", relContext.model.get("relaciones_activas"));
+                      }
+                    } catch (e) {
+                      console.log('No es relación');
                     }
                 }
             }, this)
@@ -188,7 +192,7 @@
         });
 
         this.model.fields['tipo_registro_c'].options = new_options;
-        
+
     },
 
     _render: function () {
@@ -196,9 +200,13 @@
         this._doValidateProfesionRisk();
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 9/28/2015 Description: Copiar relaciones activas de la Relacion creada desde el modulo de Relaciones y copiar esos valores en
          * el campo de tipo de relacion*/
-        if(relContext != null){
-            self.model.set("tipo_relacion_c", relContext.model.get("relaciones_activas"));
-        }
+         try {
+           if(relContext != null){
+               self.model.set("tipo_relacion_c", relContext.model.get("relaciones_activas"));
+           }
+         } catch (e) {
+           console.log('No es relación');
+         }
         /* END CUSTOMIZATION */
 
 
