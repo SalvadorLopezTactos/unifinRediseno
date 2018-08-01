@@ -60,7 +60,11 @@ class ValidaCamposSolicitud extends SugarApi
             $req_pf_y_pfae .= ",rfc_c,fechadenacimiento_c," .
                 "pais_nacimiento_c,estado_nacimiento_c,zonageografica_c," .
                 "genero_c,ifepasaporte_c,curp_c," .
+<<<<<<< HEAD
                 "estadocivil_c,profesion_c,ventas_anuales_c,potencial_cuenta_c,activo_fijo_c";
+=======
+                "estadocivil_c,regimenpatrimonial_c,profesion_c,ventas_anuales_c,potencial_cuenta_c,activo_fijo_c";
+>>>>>>> 1c03fc30b4d0f71dcdde15f7a347434524d5d2f5
         }
 
         $id_cuenta = $args['id_cuenta'];
