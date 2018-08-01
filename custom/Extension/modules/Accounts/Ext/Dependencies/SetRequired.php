@@ -832,7 +832,7 @@ $dependencies['Accounts']['Estado_Civil_required'] = array(
             'params' => array(
                 'target' => 'estadocivil_c',
                 'label' => 'estadocivil_c_label',
-                'value' => 'and(not(equal($tipodepersona_c,"Persona Moral")),not(equal($tipo_registro_c,"Lead")),not(equal($subtipo_cuenta_c,"Contactado")),not(equal($subtipo_cuenta_c,"Interesado")))',
+                'value' => 'and(not(equal($tipodepersona_c,"Persona Moral")),not(equal($tipo_registro_c,"Lead")),not(equal($tipo_registro_c,"Persona")),not(equal($subtipo_cuenta_c,"Contactado")),not(equal($subtipo_cuenta_c,"Interesado")))',
             ),
         ),
     ),

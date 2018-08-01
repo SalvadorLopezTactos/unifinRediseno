@@ -178,6 +178,17 @@
                 }
             }, this)
         });
+
+        /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/14/2015 Description: Cuando estamos en el modulo de Personas, no queremos que se muestre la opcion Persona para el tipo de registro */
+        var new_options = app.lang.getAppListStrings('tipo_registro_list');
+        Object.keys(new_options).forEach(function (key) {
+            if (key != "Persona") {
+                delete new_options[key];
+            }
+        });
+
+        this.model.fields['tipo_registro_c'].options = new_options;
+        
     },
 
     _render: function () {
@@ -190,11 +201,13 @@
         }
         /* END CUSTOMIZATION */
 
+
         //cuando creamos una relacion de account a account, el tipo de registro siempre debe de ser persona
         this.model.set('tipo_registro_c','Persona');
-        this.model.on("change:tipo_registro_c", _.bind(function () {
-            this.model.set('tipo_registro_c','Persona');
-        }, this));
+        // this.model.on("change:tipo_registro_c", _.bind(function () {
+        //     this.model.set('tipo_registro_c','Persona');
+        // }, this));
+
         /*
          * @author Carlos Zaragoza ortiz
          * Ocultar campo de estatus Activo/Inactivo en creaci�n de personas
@@ -341,7 +354,7 @@
 
 	/** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
   _doValidateEmailTelefono: function(fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
+        if (this.model.get('tipo_registro_c') != 'Persona' && this.model.get('tipo_registro_c') != 'Proveedor') {
             if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos')) ) {
                 app.alert.show("Correo requerido", {
                     level: "error",
