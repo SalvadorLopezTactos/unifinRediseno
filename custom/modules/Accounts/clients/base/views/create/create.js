@@ -1,7 +1,7 @@
-/**
- * Created by Jorge on 6/16/2015.
- */
 ({
+    /**
+     * Created by Jorge on 6/16/2015.
+     */
     extendsFrom: 'CreateView',
 
     /**
@@ -48,6 +48,9 @@
 
     _render: function (fields, errors, callback) {
         this._super("_render");
+
+
+
         /*
          * @author Salvador Lopez
          * Ocultar panel de fideicomiso y ocultar paneles de Peps para Persona Moral
@@ -207,6 +210,7 @@
         //this.model.on('change:rfc_c',this.validaFechaNacimientoDesdeRFC, this);
         this.model.on('change:account_telefonos', this.setPhoneOffice, this);
 
+
         /*
          AF: 11/01/18
          Merge create-create-actions.js
@@ -255,7 +259,7 @@
         this.model.on('change:profesion_c', this._doValidateProfesionRisk, this);
         this.model.on('change:pais_nacimiento_c', this._doValidateProfesionRisk, this);
         //this.model.on('change:pais_nacimiento_c',this.validaExtranjerosRFC, this);
-
+        this.model
         //this.model.on('change:rfc_c',this.validaFechaNacimientoDesdeRFC, this);
 
         /*
@@ -465,6 +469,7 @@
         //Oculta campo Muestra panel
         $("div[data-name='show_panel_c']").hide();
 
+
     },
 
     _hidePeps: function (fields, errors, callback) {
@@ -507,7 +512,7 @@
 
     _doValidateEmailTelefono: function (fields, errors, callback) {
         if (this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
-            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos')) ) {
+            if (_.isEmpty(this.model.get('email')) || _.isEmpty(this.model.get('account_telefonos')) ) {
                 app.alert.show("Correo requerido", {
                     level: "error",
                     title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",

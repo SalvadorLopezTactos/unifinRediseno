@@ -366,6 +366,12 @@
             });
         }
 
+        /*@author Victor Martinez
+        * Deshabilita los campos de cuenta y subtipo cuenta
+        * 01-Agostp-2018
+        * */
+        this.noEditFields.push('subtipo_cuenta_c');
+        this.noEditFields.push('tipo_registro_c');
         /*
          *
          * Salvador Lopez <salvador.lopez@tactos.com.mx>
