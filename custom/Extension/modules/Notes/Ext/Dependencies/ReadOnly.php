@@ -3,7 +3,7 @@ global $current_user;
 $userid=$current_user->id;
 
 //Dependencia para ocultar en llamdas la cuenta y así asignar una única a la relación Adrian Arauz 20/707/18
-$dependencies['Notes']['NotasNo'] = array(
+/*$dependencies['Notes']['NotasNo'] = array(
 'hooks' => array("all"),
 'trigger' => 'true',
 //Optional, the trigger for the dependency. Defaults to 'true'.
@@ -22,4 +22,4 @@ array(
 ),
 
 ),
-);
+);*/

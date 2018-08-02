@@ -1,6 +1,6 @@
 <?php
 
-$dependencies['Calls']['LlamadasNo'] = array(
+/*$dependencies['Calls']['LlamadasNo'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
     //Optional, the trigger for the dependency. Defaults to 'true'.
@@ -19,7 +19,7 @@ $dependencies['Calls']['LlamadasNo'] = array(
         ),
 
     ),
-);
+);*/
 /*@Jesus Carrillo
     Dependencias en base al resultado de llamadas
 */
