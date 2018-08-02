@@ -647,7 +647,7 @@ floatHeader: function(){
                             if (currentDay == 21 && rolAutorizacion != "DGA") {
                                 app.alert.show('backlog corriente', {
                                     level: 'error',
-                                    messages: 'Esta operaci\u00F3n no puede moverse debido a que se encuentra en periodo de revision.',
+                                    messages: 'Esta operaci\u00F3n no puede moverse debido a que se encuentra en periodo de revisi\u00F3n.',
                                     autoClose: false
                                 });
                                 return;
@@ -666,7 +666,7 @@ floatHeader: function(){
                             //SI es un Backlo anterior o igual al mes corriente natural nadie puede
                             app.alert.show('backlog corriente', {
                                 level: 'error',
-                                messages: 'Esta operaci\u00F3n no puede moverse debido a que el Backlog ya esta corriendo.',
+                                messages: 'Esta operaci\u00F3n no puede moverse debido a que el Backlog ya est\u00E1 corriendo.',
                                 autoClose: false
                             });
                             return;
@@ -1226,7 +1226,7 @@ cancelarBacklog: function(e){
 
                         app.alert.show('alertquien', {
                             level: 'error',
-                            messages: 'El campo ¿Qui\u00E9n? es requqerido',
+                            messages: 'El campo ¿Qui\u00E9n? es requerido',
                             autoClose: true
                         });
                         this.saving = 0;
