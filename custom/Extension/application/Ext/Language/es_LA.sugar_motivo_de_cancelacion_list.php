@@ -1,15 +1,14 @@
 <?php
- // created: 2018-07-26 14:19:49
+ // created: 2018-08-02 17:41:27
 
 $app_list_strings['motivo_de_cancelacion_list']=array (
-  'Mes posterior' => 'Mes posterior',
-  'Cliente no interesado' => 'Cliente no interesado',
-  'No viable' => 'No viable',
+  '' => '',
+  'Precio  Condiciones' => 'Precio / condiciones',
+  'Rechazado por Credito' => 'Rechazado por crédito',
   'Competencia' => 'Competencia',
   'No tenemos el producto que requiere' => 'No tenemos el producto que requiere',
-  'Precio  Condiciones' => 'Precio - Condiciones',
-  'Rechazado por Credito' => 'Rechazado por Credito',
-  'Pago con Recursos Propios' => 'Pagó con Recursos Propios',
-  'Activos no Financiables' => 'Activos no Financiables',
-  'El Cliente Decide no Comprar el Activo' => 'El Cliente Decide no Comprar el Activo',
+  'Pago con Recursos Propios' => 'Pagó con recursos propios',
+  'Activos no Financiables' => 'Activos no financiables',
+  'El Cliente Decide no Comprar el Activo' => 'El cliente decide no comprar el activo',
+  'Mes posterior' => 'Mes posterior',
 );
