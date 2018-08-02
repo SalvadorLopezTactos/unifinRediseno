@@ -331,6 +331,7 @@ array (
                   'puestousuario_c' =>
                   array (
                     0 => '27',
+                    1 => '31',
                   ),
                 ),
               ),
