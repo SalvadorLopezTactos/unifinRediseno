@@ -2,13 +2,20 @@ SUGAR.util.doWhen("typeof(check_form) != 'undefined' && typeof check_form == 'fu
     check_form = _.wrap(check_form, function(originalCheckFormFunction, originalCheckFormFunctionArg) {
         // Adding custom validation
 
-        console.log(document.getElementById("contraseniaactual_c").value);
-        console.log(document.getElementById("nuevacontrasenia_c").value);
-        console.log(document.getElementById("confirmarnuevacontrasenia_c").value);
+        //console.log(document.getElementById("contraseniaactual_c").value);
+        //console.log(document.getElementById("nuevacontrasenia_c").value);
+        //console.log(document.getElementById("confirmarnuevacontrasenia_c").value);
 
          //Valida contraseña
-        if(document.getElementById("contraseniaactual_c").value != "")
+        if(document.getElementById("contraseniaactual_c").value != "" || document.getElementById("nuevacontrasenia_c").value != "")
         {
+
+          //Valida contraseña actual
+          if(document.getElementById("contraseniaactual_c").value == "" ){
+            alert("Ingrese contraseña actual");
+            return false;
+
+          }
 
           //Valida nueva contraseña
           if(document.getElementById("nuevacontrasenia_c").value == "" ){
@@ -66,7 +73,7 @@ SUGAR.util.doWhen("typeof(check_form) != 'undefined' && typeof check_form == 'fu
               var user_name = document.getElementById("user_name").value;
               console.log(user_name);
               user_name = user_name.toLowerCase();
-              console.log(user_name);
+              //console.log(user_name);
               expreg = strPwd.toLowerCase().search(user_name);
               console.log(expreg);
               console.log(strPwd.toLowerCase());
