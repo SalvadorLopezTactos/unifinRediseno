@@ -69,17 +69,26 @@ SUGAR.util.doWhen("typeof(check_form) != 'undefined' && typeof check_form == 'fu
               }
 
               //Valida nombre de usuario
-              console.log('Usuario ---- Cambio contraseña');
-              var user_name = document.getElementById("user_name").value;
-              console.log(user_name);
-              user_name = user_name.toLowerCase();
-              //console.log(user_name);
-              expreg = strPwd.toLowerCase().search(user_name);
-              console.log(expreg);
-              console.log(strPwd.toLowerCase());
-              if (expreg >= 0) {
-                  alert("Contraseña no debe contener el nombre de usuario");
-                  return false;
+              console.log('Usuario ---- Cambio de contraseña');
+              try {
+                var user_name = document.getElementById("user_name").value;
+
+                if (typeof user_name == 'undefined') {
+                  user_name = document.getElementById("user_name").innerHTML;
+                }
+
+                console.log(user_name);
+                user_name = user_name.toLowerCase();
+                //console.log(user_name);
+                expreg = strPwd.toLowerCase().search(user_name);
+                console.log(expreg);
+                console.log(strPwd.toLowerCase());
+                if (expreg >= 0) {
+                    alert("Contraseña no debe contener el nombre de usuario");
+                    return false;
+                }
+              } catch (e) {
+
               }
 
 
