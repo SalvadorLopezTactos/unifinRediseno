@@ -3,7 +3,7 @@
 
 $app_list_strings['motivo_de_cancelacion_list']=array (
   '' => '',
-  'Precio  Condiciones' => 'Precio / condiciones',
+  'Precio Condiciones' => 'Precio / condiciones',
   'Rechazado por Credito' => 'Rechazado por crédito',
   'Competencia' => 'Competencia',
   'No tenemos el producto que requiere' => 'No tenemos el producto que requiere',
