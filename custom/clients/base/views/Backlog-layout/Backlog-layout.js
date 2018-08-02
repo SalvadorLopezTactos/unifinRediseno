@@ -505,7 +505,7 @@ floatHeader: function(){
         if(estatus == "Comprometida"){
             app.alert.show('opp_cancelada', {
                 level: 'error',
-                messages: 'Esta operacion ya ha sido comprometida',
+                messages: 'Esta operaci\u00F3n ya ha sido comprometida',
                 autoClose: false
             });
             return;
@@ -632,7 +632,7 @@ floatHeader: function(){
                 //if (currentBacklogMonth >= backlogMes) {
                     app.alert.show('backlog_pasado', {
                         level: 'error',
-                        messages: 'Esta operacion no puede moverse debido a que se encuentra ' + backlogEstatus,
+                        messages: 'Esta operaci\u00F3n no puede moverse debido a que se encuentra ' + backlogEstatus,
                         autoClose: false
                     });
                     return;
@@ -647,7 +647,7 @@ floatHeader: function(){
                             if (currentDay == 21 && rolAutorizacion != "DGA") {
                                 app.alert.show('backlog corriente', {
                                     level: 'error',
-                                    messages: 'Esta operacion no puede moverse debido a que se encuentra en periodo de revision.',
+                                    messages: 'Esta operaci\u00F3n no puede moverse debido a que se encuentra en periodo de revisi\u00F3n.',
                                     autoClose: false
                                 });
                                 return;
@@ -666,7 +666,7 @@ floatHeader: function(){
                             //SI es un Backlo anterior o igual al mes corriente natural nadie puede
                             app.alert.show('backlog corriente', {
                                 level: 'error',
-                                messages: 'Esta operacion no puede moverse debido a que el Backlog ya esta corriendo.',
+                                messages: 'Esta operaci\u00F3n no puede moverse debido a que el Backlog ya est\u00E1 corriendo.',
                                 autoClose: false
                             });
                             return;
@@ -755,7 +755,7 @@ cancelarBacklog: function(e){
          if(estatus == "Cancelada"){
             app.alert.show('opp_cancelada', {
                 level: 'error',
-                messages: 'Esta operacion ya ha sido cancelada',
+                messages: 'Esta operaci\u00F3n ya ha sido cancelada',
                 autoClose: false
             });
             return;
@@ -1220,13 +1220,13 @@ cancelarBacklog: function(e){
 
                 //app alert para validar y notificar que los campos quien y producto contengan información.
 
-                if( Competencia == null || Competencia == "" ) {
+                if( Competencia == null || Competencia == "" || Competencia.length ==0 ) {
 
                     if(MotivoCancelacion == 'Competencia') {
 
                         app.alert.show('alertquien', {
                             level: 'error',
-                            messages: 'La Competencia es requerida',
+                            messages: 'El campo ¿Qui\u00E9n? es requerido',
                             autoClose: true
                         });
                         this.saving = 0;
@@ -1235,12 +1235,12 @@ cancelarBacklog: function(e){
 
                     //check++;
                 }
-                if(Producto == null || Producto == "" ) {
+                if(Producto == null || Producto == "" || Producto.length==0 ) {
 
                     if(MotivoCancelacion == 'No tenemos el producto que requiere') {
                         app.alert.show('alertproducto', {
                             level: 'error',
-                            messages: 'El Producto es requerido',
+                            messages: 'El campo ¿Qu\u00E9 Producto? es requerido',
                             autoClose: true
                         });
                         this.saving = 0;
@@ -1275,7 +1275,7 @@ cancelarBacklog: function(e){
                 if(_.isEmpty(MotivoCancelacion)){
                     app.alert.show('motivo_requerido', {
                         level: 'error',
-                        messages: 'El motivo de cancelacion es requerido',
+                        messages: 'El motivo de cancelaci\u00F3n es requerido',
                         autoClose: true
                     });
                     this.saving = 0;
@@ -1712,13 +1712,13 @@ cancelarBacklog: function(e){
 
                 //app alert para validar y notificar que los campos quien y producto contengan información.
 
-                if( Competencia == null || Competencia == "" ) {
+                if( Competencia == null || Competencia == "" || Competencia.length==0 ) {
 
                     if(MotivoCancelacion == 'Competencia') {
 
                         app.alert.show('alertquien', {
                             level: 'error',
-                            messages: 'La Competencia es requerida',
+                            messages: 'El campo ¿Qui\u00E9n? es requerido',
                             autoClose: true
                         });
                         this.saving = 0;
@@ -1726,12 +1726,12 @@ cancelarBacklog: function(e){
                     }
 
                 }
-                if(Producto == null || Producto == "" ) {
+                if(Producto == null || Producto == "" || Producto.length==0) {
 
                     if(MotivoCancelacion == 'No tenemos el producto que requiere') {
                         app.alert.show('alertproducto', {
                             level: 'error',
-                            messages: 'El Producto es requerido',
+                            messages: 'El campo ¿Qu\u00E9´Producto? es requerido',
                             autoClose: true
                         });
                         this.saving = 0;
@@ -1774,7 +1774,7 @@ cancelarBacklog: function(e){
                  if(_.isEmpty(MotivoCancelacion)){
                     app.alert.show('motivo_requerido', {
                         level: 'error',
-                        messages: 'El motivo de cancelacion es requerido',
+                        messages: 'El motivo de cancelaci\u00F3n es requerido',
                         autoClose: true
                     });
                     this.saving = 0;
