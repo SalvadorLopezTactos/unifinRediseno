@@ -1,12 +1,12 @@
 <?php
- // created: 2018-07-11 14:06:12
+ // created: 2018-08-02 12:08:55
 
 $app_list_strings['medio_digital_list']=array (
   '' => '',
   'Facebook' => 'Facebook',
   'Twitter' => 'Twitter',
   'Instagram' => 'Instagram',
-  'Web' => 'Página Web',
+  'Web' => 'Buscadores Web (Google, Yahoo, etc..)',
   'LinkedIn' => 'LinkedIn',
   'Radio Online' => 'Radio Online',
   'Prensa Online' => 'Prensa Online',
