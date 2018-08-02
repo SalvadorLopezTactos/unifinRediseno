@@ -191,12 +191,14 @@ array (
               array (
                 'name' => 'tct_etapa_ddw_c',
                 'label' => 'LBL_TCT_ETAPA_DDW_C',
+                'readonly' => 'true',
               ),
               1 => 
               array (
                 'name' => 'estatus_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ESTATUS',
+                'readonly' => 'true',
               ),
               2 => 
               array (
