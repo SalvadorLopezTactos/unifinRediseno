@@ -142,7 +142,7 @@ $dependencies['Meetings']['readOnly'] = array
 
 );
 //Dependencia para ocultar en llamdas la cuenta y así asignar una única a la relación Adrian Arauz 20/707/18
-$dependencies['Meetings']['ReunionesNO'] = array(
+/*$dependencies['Meetings']['ReunionesNO'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
     //Optional, the trigger for the dependency. Defaults to 'true'.
@@ -161,7 +161,7 @@ $dependencies['Meetings']['ReunionesNO'] = array(
         ),
 
     ),
-);
+);*/
 
 $dependencies['Meetings']['status'] = array(
     'hooks' => array("all"),
