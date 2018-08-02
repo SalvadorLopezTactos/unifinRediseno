@@ -31,6 +31,7 @@
          * Valida si el cliente cuenta con al menos una solicitud de los tipos (Linea Nueva o Ratificacion/Incremento
          */
         this.model.addValidationTask('check_solicitud', _.bind(this._ValidateSolicitud, this));
+        this.model.addValidationTask('check_existingBL', _.bind(this._ValidateExistingBL, this));
 
         /*
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
@@ -178,6 +179,61 @@
                 });
             }else {callback(null, fields, errors)}
         },
+
+    _ValidateExistingBL:function(fields, errors, callback){
+
+        //var id_account=$('input[name="cliente"]').val();
+
+        var self=this;
+
+        var id_account=this.model.get('account_id_c');
+        var mes=this.model.get('mes');
+
+        if(id_account && id_account != '' && id_account.length>0){
+
+
+            var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes+'&fields=id,mes,estatus_de_la_operacion',
+                null, null, null);
+
+
+            app.api.call('GET', bl_url, {}, {
+                success: _.bind(function (data) {
+
+                    if(data!=null){
+                        var meses =['0','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+                        if(data.records.length>0){
+
+                            app.alert.show('error_bl_mes', {
+                                level: 'error',
+                                messages: 'Esta Cuenta ya posee un backlog en el mes: '+meses[data.records[0].mes],
+                                autoClose: false
+                            });
+                            app.error.errorName2Keys['custom_message1'] = 'Esta Cuenta ya posee un backlog en el mes: '+meses[data.records[0].mes];
+                            errors['cliente'] = errors['cliente'] || {};
+                            errors['cliente'].custom_message1 = true;
+
+                        }
+
+                    }
+
+                    callback(null, fields, errors);
+
+                },self),
+
+            });
+
+        }else{
+
+            app.error.errorName2Keys['custom_message1'] = 'La cuenta ya posee un backlog en el mes establecido';
+            errors['cliente'] = errors['cliente'] || {};
+            errors['cliente'].custom_message1 = true;
+            errors['cliente'].required = true;
+
+            callback(null, fields, errors);
+        }
+
+
+    },
 
     getCurrentYearMonth: function(stage){
 
