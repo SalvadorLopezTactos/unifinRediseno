@@ -153,10 +153,6 @@ array (
               array (
                 'name' => 'name',
               ),
-              2 =>
-              array (
-                'name' => 'tct_prioridad_ddw_c',
-              ),
             ),
           ),
           1 =>
@@ -198,9 +194,11 @@ array (
               1 =>
               array (
                 'name' => 'subtipo_cuenta_c',
+                'readonly' => true,
               ),
               2 =>
               array (
+                'name' => 'tct_prioridad_ddw_c',
               ),
               3 =>
               array (
@@ -333,6 +331,7 @@ array (
                   'puestousuario_c' =>
                   array (
                     0 => '27',
+                    1 => '31',
                   ),
                 ),
               ),

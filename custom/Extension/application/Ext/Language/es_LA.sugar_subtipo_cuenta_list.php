@@ -1,5 +1,5 @@
 <?php
- // created: 2018-07-20 12:16:28
+ // created: 2018-08-01 17:39:15
 
 $app_list_strings['subtipo_cuenta_list']=array (
   'Contactado' => 'Contactado',
@@ -9,7 +9,8 @@ $app_list_strings['subtipo_cuenta_list']=array (
   'Linea' => 'Con Línea',
   'Nuevo' => 'Nuevo',
   'Unifin' => 'Unifin',
-  'Pasivo' => 'Pasivo',
   'Inactivo' => 'Inactivo',
   'Rechazado' => 'Rechazado',
+  'Dormido' => 'Dormido',
+  'Perdido' => 'Perdido',
 );
