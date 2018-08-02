@@ -366,7 +366,6 @@ array (
               6 => 
               array (
                 'name' => 'parent_name',
-                'readonly' => 'true',
               ),
               7 => 
               array (
