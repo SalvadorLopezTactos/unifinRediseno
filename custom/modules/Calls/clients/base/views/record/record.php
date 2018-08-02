@@ -21,7 +21,7 @@ array (
               'click' => 'button:cancel_button:click',
             ),
           ),
-          1 => 
+          1 =>
           array (
             'type' => 'actiondropdown',
             'name' => 'save_dropdown',
@@ -39,14 +39,14 @@ array (
                 'css_class' => 'btn btn-primary',
                 'acl_action' => 'edit',
               ),
-              1 => 
+             /* 1 =>
               array (
                 'type' => 'save-and-send-invites-button',
                 'event' => 'button:save_button:click',
                 'name' => 'save_invite_button',
                 'label' => 'LBL_SAVE_AND_SEND_INVITES_BUTTON',
                 'acl_action' => 'edit',
-              ),
+              ), */
             ),
           ),
           2 => 
@@ -366,6 +366,7 @@ array (
               6 => 
               array (
                 'name' => 'parent_name',
+                'readonly' => 'true',
               ),
               7 => 
               array (
