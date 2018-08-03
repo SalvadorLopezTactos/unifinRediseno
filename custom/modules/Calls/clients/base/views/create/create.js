@@ -2,6 +2,7 @@
         extendsFrom: 'CreateView',
 
         initialize: function (options) {
+		    this.plugins = _.union(this.plugins || [], ['AddAsInvitee', 'ReminderTimeDefaults']);
             self = this;
             this._super("initialize", [options]);
             this.on('render',this.disableparentsfields,this);
@@ -28,8 +29,8 @@
         disabledates:function () {
             console.log(App.user.attributes.puestousuario_c);
             if(App.user.attributes.puestousuario_c!='27' && App.user.attributes.puestousuario_c!='31' ) {
-                this.$('div[data-name="tct_fecha_cita_dat_c"]').hide();
-                $('div[data-name="tct_usuario_cita_rel_c"]').hide();
+               this.$('div[data-name="tct_fecha_cita_dat_c"]').hide();
+               $('div[data-name="tct_usuario_cita_rel_c"]').hide();
                 console.log('SE ocultaron');
             }else{
                 this.$('div[data-name="tct_fecha_cita_dat_c"]').show();
@@ -48,6 +49,4 @@
                 }
             }
         },
-
-
 })
