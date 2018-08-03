@@ -5,6 +5,7 @@
  * Time: 09:16 AM
  */
 
+require_once('modules/ACLRoles/ACLRole.php');
 
 class GetUsersBoss extends SugarApi
 {
@@ -53,11 +54,18 @@ class GetUsersBoss extends SugarApi
         $idCuenta = $args['id_cuenta'];
         $beanAccounts = BeanFactory::getBean("Accounts", $idCuenta);
         global $current_user;
+        global $app_list_strings;
 
         $usrLeasing = $beanAccounts->user_id_c;
         $usrFactoraje = $beanAccounts->user_id1_c;
         $usrCredito = $beanAccounts->user_id2_c;
         $usuarioLog = $current_user->id;
+        $queryR = "Select R.id, R.name
+ from acl_roles R
+ left join acl_roles_users RU
+ on  RU.role_id=R.id
+ Where RU.user_id='{$usuarioLog}' and RU.deleted=0";
+
 
         /*
          * Validamos si el usuario Firmado es igual a credito, factoraje y leasing
@@ -75,6 +83,26 @@ class GetUsersBoss extends SugarApi
 
                 if ($usuarioLog == $row['reports_to_id']) {
                     $flag = true;
+                }
+            }
+        }
+
+        if ($app_list_strings['full_access_accounts_list'] != "" && $flag == false) {
+
+            $list = $app_list_strings['full_access_accounts_list'];
+            $result = $GLOBALS['db']->query($queryR);
+
+            while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
+
+                $temp = $row['name'];
+
+                foreach ($list as $newList) {
+
+                    if ($row['name'] == $newList) {
+                        $flag = true;
+                        //  $GLOBALS['log']->fatal("coincide: " . $row['name']);
+                    }
+
                 }
             }
         }
