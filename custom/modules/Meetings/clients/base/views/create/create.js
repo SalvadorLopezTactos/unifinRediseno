@@ -2,6 +2,7 @@
     extendsFrom: 'CreateView',
 
     initialize: function (options) {
+        this.plugins = _.union(this.plugins || [], ['AddAsInvitee', 'ReminderTimeDefaults']);
         self = this;
         this._super("initialize", [options]);
         this.on('render',this.disableparentsfields,this);
@@ -9,11 +10,7 @@
 
     _render: function () {
         this._super("_render");
-
-
     },
-
-
 
     /* @Alvador Lopez Y Adrian Arauz
     Oculta los campos relacionados
@@ -25,6 +22,4 @@
             }
         }
     },
-
-
 })
