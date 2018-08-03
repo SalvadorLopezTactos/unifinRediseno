@@ -1138,9 +1138,25 @@ cancelarBacklog: function(e){
                     'backlogName': this.backlogName,
                     'description': description,
                 };
+     //Validación para el campo de comentarios, alerta de requerido y muestra de ícono al guardar el comentario. Adrian Arauz 3/08/18
+
+                if( description == null || description == "" || description.trim().length ==0 ) {
+
+                    console.log('Funciona');
+                    app.alert.show('alertcom', {
+                        level: 'error',
+                        messages: 'Favor de agregar un comentario.',
+                        autoClose: true
+                    });
+                    this.saving = 0;
+                    return;
+               }
+
                 var Url = app.api.buildURL("BacklogComentarios", '', {}, {});
+                $(".savingIcon").show();
                 app.api.call("create", Url, {data: Params}, {
                     success: _.bind(function (data) {
+                        $(".savingIcon").hide();
                         if (self.disposed) {
                             this.saving = 0;
                             return;
@@ -1218,9 +1234,10 @@ cancelarBacklog: function(e){
                 var Producto = $('#producto_opcion').val();
 
 
+
                 //app alert para validar y notificar que los campos quien y producto contengan información.
 
-                if( Competencia == null || Competencia == "" || Competencia.length ==0 ) {
+                if( Competencia == null || Competencia == "" || Competencia.trim().length ==0 ) {
 
                     if(MotivoCancelacion == 'Competencia') {
 
@@ -1235,7 +1252,7 @@ cancelarBacklog: function(e){
 
                     //check++;
                 }
-                if(Producto == null || Producto == "" || Producto.length==0 ) {
+                if(Producto == null || Producto == "" || Producto.trim().length==0 ) {
 
                     if(MotivoCancelacion == 'No tenemos el producto que requiere') {
                         app.alert.show('alertproducto', {
@@ -1712,7 +1729,7 @@ cancelarBacklog: function(e){
 
                 //app alert para validar y notificar que los campos quien y producto contengan información.
 
-                if( Competencia == null || Competencia == "" || Competencia.length==0 ) {
+                if( Competencia == null || Competencia == "" || Competencia.trim().length==0 ) {
 
                     if(MotivoCancelacion == 'Competencia') {
 
@@ -1726,7 +1743,7 @@ cancelarBacklog: function(e){
                     }
 
                 }
-                if(Producto == null || Producto == "" || Producto.length==0) {
+                if(Producto == null || Producto == "" || Producto.trim().length==0) {
 
                     if(MotivoCancelacion == 'No tenemos el producto que requiere') {
                         app.alert.show('alertproducto', {
