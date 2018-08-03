@@ -101,13 +101,13 @@ array (
             array (
               0 => 
               array (
-                'name' => 'numero_de_backlog',
-                'label' => 'LBL_NUMERO_DE_BACKLOG',
+                'name' => 'tct_tipo_op_leasing_mls_c',
+                'label' => 'LBL_TCT_TIPO_OP_LEASING_MLS',
               ),
               1 => 
               array (
-                'name' => 'tct_tipo_op_leasing_mls_c',
-                'label' => 'LBL_TCT_TIPO_OP_LEASING_MLS',
+                'name' => 'numero_de_backlog',
+                'label' => 'LBL_NUMERO_DE_BACKLOG',
               ),
               2 => 
               array (
