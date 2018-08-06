@@ -1243,7 +1243,7 @@ cancelarBacklog: function(e){
 
                         app.alert.show('alertquien', {
                             level: 'error',
-                            messages: 'El campo ¿Qui\u00E9n? es requerido',
+                            messages: 'El campo \u00bfQui\u00E9n? es requerido',
                             autoClose: true
                         });
                         this.saving = 0;
@@ -1257,7 +1257,7 @@ cancelarBacklog: function(e){
                     if(MotivoCancelacion == 'No tenemos el producto que requiere') {
                         app.alert.show('alertproducto', {
                             level: 'error',
-                            messages: 'El campo ¿Qu\u00E9 Producto? es requerido',
+                            messages: 'El campo \u00bfQu\u00E9 Producto? es requerido',
                             autoClose: true
                         });
                         this.saving = 0;
@@ -1735,7 +1735,7 @@ cancelarBacklog: function(e){
 
                         app.alert.show('alertquien', {
                             level: 'error',
-                            messages: 'El campo ¿Qui\u00E9n? es requerido',
+                            messages: 'El campo \u00bfQui\u00E9n? es requerido',
                             autoClose: true
                         });
                         this.saving = 0;
@@ -1748,7 +1748,7 @@ cancelarBacklog: function(e){
                     if(MotivoCancelacion == 'No tenemos el producto que requiere') {
                         app.alert.show('alertproducto', {
                             level: 'error',
-                            messages: 'El campo ¿Qu\u00E9´Producto? es requerido',
+                            messages: 'El campo \u00bfQu\u00E9´Producto? es requerido',
                             autoClose: true
                         });
                         this.saving = 0;
