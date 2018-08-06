@@ -188,11 +188,12 @@
 
         var id_account=this.model.get('account_id_c');
         var mes=this.model.get('mes');
+        var anio=this.model.get('anio');
 
         if(id_account && id_account != '' && id_account.length>0){
 
 
-            var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes+'&fields=id,mes,estatus_de_la_operacion',
+            var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes+'&filter[2][anio][$equals]='+anio+'&fields=id,mes,estatus_de_la_operacion',
                 null, null, null);
 
 
