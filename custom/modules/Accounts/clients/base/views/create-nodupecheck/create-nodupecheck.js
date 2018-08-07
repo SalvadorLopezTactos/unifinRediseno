@@ -190,15 +190,16 @@
         var new_options = app.lang.getAppListStrings('tipo_registro_list');
 
 
-        if (this.context.parent.attributes.module == "Rel_Relaciones") {
-            Object.keys(new_options).forEach(function (key) {
-                if (key != "Persona") {
-                    delete new_options[key];
-                }
-            });
-        }
-        else {
-
+        try {
+            if (relContext != null) {
+              Object.keys(new_options).forEach(function (key) {
+                  if (key != "Persona") {
+                      delete new_options[key];
+                  }
+              });
+            }
+        } catch (e) {
+            console.log('No es relación  error: ' + e);
             // var new_options = app.lang.getAppListStrings('tipo_registro_list');
 
             Object.keys(new_options).forEach(function (key) {
@@ -236,9 +237,8 @@
                     }
                 });
             }
-
-
         }
+
         this.model.fields['tipo_registro_c'].options = new_options;
 
 
