@@ -27,6 +27,7 @@
         this.model.addValidationTask('fechadenacimiento_c', _.bind(this.doValidateDateNac, this));
         this.model.addValidationTask('fechaconstitutiva_c', _.bind(this.doValidateDateCons, this));
         //this.model.addValidationTask('check_formato_curp_c', _.bind(this.ValidaFormatoCURP, this));
+        this.model.addValidationTask('estado_civil_persona', _.bind(this._doValidateEdoCivil, this));
 
         //this.model.on('change:tipo_registro_c', this._ShowDireccionesTipoRegistro, this);
         //this.model.on('change:estatus_c', this._ShowDireccionesTipoRegistro, this);
@@ -421,20 +422,38 @@
         callback(null, fields, errors);
     },
 
-    /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
-    _doValidateEmailTelefono: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') != 'Persona' && this.model.get('tipo_registro_c') != 'Proveedor') {
-            if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos'))) {
-                app.alert.show("Correo requerido", {
-                    level: "error",
-                    title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
-                    autoClose: false
-                });
-                errors['email'] = errors['email'] || {};
-                errors['email'].required = true;
-                errors['account_telefonos'] = errors['account_telefonos'] || {};
-                errors['account_telefonos'].required = true;
-            }
+	/** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
+  _doValidateEmailTelefono: function(fields, errors, callback) {
+
+        //Valida que no sea relación - Persona tipo: tipo_relacion_c = Referencia Cliente/Proveedor
+        if (this.model.get('tipo_relacion_c').includes('Referencia Cliente') || this.model.get('tipo_relacion_c').includes('Referencia Proveedor') ) {
+          //Pide teléfono requerido
+          if (_.isEmpty(this.model.get('account_telefonos'))) {
+              app.alert.show("Telefono requerido", {
+                  level: "error",
+                  title: "Al menos un tel\u00E9fono es requerido.",
+                  autoClose: false
+              });
+
+              errors['account_telefonos'] = errors['account_telefonos'] || {};
+              errors['account_telefonos'].required = true;
+          }
+
+        }else{
+          //Pide teléfono/correo requerido
+          if (/*this.model.get('tipo_registro_c') != 'Persona' && */ this.model.get('tipo_registro_c') != 'Proveedor') {
+              if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos'))) {
+                  app.alert.show("Correo requerido", {
+                      level: "error",
+                      title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
+                      autoClose: false
+                  });
+                  errors['email'] = errors['email'] || {};
+                  errors['email'].required = true;
+                  errors['account_telefonos'] = errors['account_telefonos'] || {};
+                  errors['account_telefonos'].required = true;
+              }
+          }
         }
         callback(null, fields, errors);
     },
@@ -829,6 +848,18 @@
         this.model.set("riesgo_c", riesgo);
         console.log(this.model.get('ctpldpoliticamenteexpuesto_c'));
         console.log(this.model.get('riesgo_c'));
+        callback(null, fields, errors);
+    },
+
+    /*
+      AF- 2018-08-06
+      Validación en relaciones tipo persona: Referenciado Cliente/Proveedor
+    */
+    _doValidateEdoCivil: function(fields, errors, callback){
+        if(this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor')) ){
+            errors['estadocivil_c'] = errors['estadocivil_c'] || {};
+            errors['estadocivil_c'].required = true;
+        }
         callback(null, fields, errors);
     },
 })
