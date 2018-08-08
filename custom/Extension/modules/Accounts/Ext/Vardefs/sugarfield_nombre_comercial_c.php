@@ -13,7 +13,7 @@ equal($nombre_comercial_c,""),
 $razonsocial_c,
 $nombre_comercial_c
 )';
-$dictionary['Account']['fields']['nombre_comercial_c']['enforced']='1';
+$dictionary['Account']['fields']['nombre_comercial_c']['enforced']='0';
 $dictionary['Account']['fields']['nombre_comercial_c']['dependency']='equal($tipodepersona_c,"Persona Moral")';
 
  ?>
