@@ -32,6 +32,7 @@
         //this.model.on('change:tipo_registro_c', this._ShowDireccionesTipoRegistro, this);
         //this.model.on('change:estatus_c', this._ShowDireccionesTipoRegistro, this);
         this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
+        this.model.on('change:account_telefonos', this.setPhoneOffice, this);
 
         //this.model.on('change:fechadenacimiento_c', this._doGenera_RFC_CURP, this);
         //this.model.on('change:fechaconstitutiva_c', this._doGenera_RFC_CURP, this);
@@ -480,14 +481,15 @@
                 errors['rfc_c'].required = true;
             }
         }
-
-        var PrimerNombre = this.model.get('primernombre_c');
-        var SegundoNombre = this.model.get('segundonombre_c');
-        var ApellidoP = this.model.get('apellidopaterno_c');
-        var ApellidoM = this.model.get('apellidomaterno_c');
+        // var PrimerNombre = this.model.get('primernombre_c');
+        // var SegundoNombre = this.model.get('segundonombre_c');
+        // var ApellidoP = this.model.get('apellidopaterno_c');
+        // var ApellidoM = this.model.get('apellidomaterno_c');
+        var Nombre =this.model.get('name');
         var c=0;
         /*@Jesus Carrillo*/
-        var fields2=[PrimerNombre.trim(),SegundoNombre.trim(),ApellidoP.trim(),ApellidoM.trim()]
+        //var fields2=[PrimerNombre.trim(),SegundoNombre.trim(),ApellidoP.trim(),ApellidoM.trim()]
+        var fields2=[Nombre.trim()]
         for(var i=0;i>fields2.length;i++){
             if(fields2[i]!='' || fields2[i]!=null){
                 c++;
@@ -848,6 +850,24 @@
         callback(null, fields, errors);
     },
     /* END */
+
+    /**
+     * @author Salvador Lopez Balleza
+     * @date 13/03/2018
+     * Establecer campo phone_office con la misma informaci�n que el campo personalizado account_telefonos
+     * */
+    setPhoneOffice: function () {
+
+        if (!_.isEmpty(this.model.get('account_telefonos'))) {
+            var telefono = this.model.get('account_telefonos');
+            for (var i = 0; i < telefono.length; i++) {
+                if (telefono[i].principal) {
+                    this.model.set('phone_office', "base" + telefono[i].pais + " " + telefono[i].telefono);
+                }
+            }
+        }
+    },
+
     /**
      * @author Carlos Zaragoza Ortiz
      * @date 16-10-2015

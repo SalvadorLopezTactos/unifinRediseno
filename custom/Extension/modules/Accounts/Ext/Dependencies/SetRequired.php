@@ -208,7 +208,7 @@
                                     'target' => 'estado_nacimiento_c',
                                     'label' => 'estado_nacimiento_c_label',
                                     //'value' => 'or(equal($tipo_registro_c,"Cliente"),  equal($estatus_c,"Interesado"), equal($tipo_registro_c,"Proveedor"),equal($subtipo_cuenta_c,"Integracion de Expediente"))',
-                                'value' => 'not(or(equal($tipo_registro_c,"Lead"),equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado")))',
+                                'value' => 'and(not(equal($pais_nacimiento_c,"")),not(or(equal($tipo_registro_c,"Lead"),equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado"))))',
                             ),
                     ),
             ),
