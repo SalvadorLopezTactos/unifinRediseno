@@ -485,43 +485,53 @@
         var SegundoNombre = this.model.get('segundonombre_c');
         var ApellidoP = this.model.get('apellidopaterno_c');
         var ApellidoM = this.model.get('apellidomaterno_c');
-        app.api.call("read", app.api.buildURL("Accounts/", null, null, {
-            fields: fields.join(','),
-            max_num: 5,
-            "filter": [
-                {
-                    "rfc_c": RFC,
-                    "primernombre_c": PrimerNombre,
-                    "segundonombre_c": SegundoNombre,
-                    "apellidopaterno_c": ApellidoP,
-                    "apellidomaterno_c": ApellidoM,
-                }
-            ]
-        }), null, {
-            success: _.bind(function (data) {
-                if (data.records.length > 0) {
+        var c=0;
+        /*@Jesus Carrillo*/
+        var fields2=[PrimerNombre.trim(),SegundoNombre.trim(),ApellidoP.trim(),ApellidoM.trim()]
+        for(var i=0;i>fields2.length;i++){
+            if(fields2[i]!='' || fields2[i]!=null){
+                c++;
+            }
+        }
+        if(c>0) {
+            app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                fields: fields.join(','),
+                max_num: 5,
+                "filter": [
+                    {
+                        "rfc_c": RFC,
+                        "primernombre_c": PrimerNombre,
+                        "segundonombre_c": SegundoNombre,
+                        "apellidopaterno_c": ApellidoP,
+                        "apellidomaterno_c": ApellidoM,
+                    }
+                ]
+            }), null, {
+                success: _.bind(function (data) {
+                    if (data.records.length > 0) {
 
-                    app.alert.show("DuplicateCheck", {
-                        level: "error",
-                        title: "Se encontro un registro con Id " + data.records[0].id + " con mismo nombre y RFC.",
-                        autoClose: false
-                    });
-                    errors['rfc_c'] = errors['rfc_c'] || {};
-                    errors['rfc_c'].required = true;
+                        app.alert.show("DuplicateCheck", {
+                            level: "error",
+                            title: "Se encontro un registro con Id " + data.records[0].id + " con mismo nombre y RFC.",
+                            autoClose: false
+                        });
+                        errors['rfc_c'] = errors['rfc_c'] || {};
+                        errors['rfc_c'].required = true;
 
-                    errors['primernombre_c'] = errors['primernombre_c'] || {};
-                    errors['primernombre_c'].required = true;
+                        errors['primernombre_c'] = errors['primernombre_c'] || {};
+                        errors['primernombre_c'].required = true;
 
-                    errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
-                    errors['apellidopaterno_c'].required = true;
+                        errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+                        errors['apellidopaterno_c'].required = true;
 
-                    errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
-                    errors['apellidomaterno_c'].required = true;
+                        errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+                        errors['apellidomaterno_c'].required = true;
 
-                }
+                    }
 
-            }, this)
-        });
+                }, this)
+            });
+        }
         callback(null, fields, errors);
     },
 
