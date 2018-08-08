@@ -32,6 +32,7 @@
         //this.model.on('change:tipo_registro_c', this._ShowDireccionesTipoRegistro, this);
         //this.model.on('change:estatus_c', this._ShowDireccionesTipoRegistro, this);
         this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
+        this.model.on('change:account_telefonos', this.setPhoneOffice, this);
 
         //this.model.on('change:fechadenacimiento_c', this._doGenera_RFC_CURP, this);
         //this.model.on('change:fechaconstitutiva_c', this._doGenera_RFC_CURP, this);
@@ -190,15 +191,16 @@
         var new_options = app.lang.getAppListStrings('tipo_registro_list');
 
 
-        if (this.context.parent.attributes.module == "Rel_Relaciones") {
-            Object.keys(new_options).forEach(function (key) {
-                if (key != "Persona") {
-                    delete new_options[key];
-                }
-            });
-        }
-        else {
-
+        try {
+            if (relContext != null) {
+              Object.keys(new_options).forEach(function (key) {
+                  if (key != "Persona") {
+                      delete new_options[key];
+                  }
+              });
+            }
+        } catch (e) {
+            console.log('No es relación  error: ' + e);
             // var new_options = app.lang.getAppListStrings('tipo_registro_list');
 
             Object.keys(new_options).forEach(function (key) {
@@ -236,9 +238,8 @@
                     }
                 });
             }
-
-
         }
+
         this.model.fields['tipo_registro_c'].options = new_options;
 
 
@@ -480,48 +481,59 @@
                 errors['rfc_c'].required = true;
             }
         }
+        // var PrimerNombre = this.model.get('primernombre_c');
+        // var SegundoNombre = this.model.get('segundonombre_c');
+        // var ApellidoP = this.model.get('apellidopaterno_c');
+        // var ApellidoM = this.model.get('apellidomaterno_c');
+        var Nombre =this.model.get('name');
+        var c=0;
+        /*@Jesus Carrillo*/
+        //var fields2=[PrimerNombre.trim(),SegundoNombre.trim(),ApellidoP.trim(),ApellidoM.trim()]
+        var fields2=[Nombre.trim()]
+        for(var i=0;i>fields2.length;i++){
+            if(fields2[i]!='' || fields2[i]!=null){
+                c++;
+            }
+        }
+        if(c>0) {
+            app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                fields: fields.join(','),
+                max_num: 5,
+                "filter": [
+                    {
+                        "rfc_c": RFC,
+                        "primernombre_c": PrimerNombre,
+                        "segundonombre_c": SegundoNombre,
+                        "apellidopaterno_c": ApellidoP,
+                        "apellidomaterno_c": ApellidoM,
+                    }
+                ]
+            }), null, {
+                success: _.bind(function (data) {
+                    if (data.records.length > 0) {
 
-        var PrimerNombre = this.model.get('primernombre_c');
-        var SegundoNombre = this.model.get('segundonombre_c');
-        var ApellidoP = this.model.get('apellidopaterno_c');
-        var ApellidoM = this.model.get('apellidomaterno_c');
-        app.api.call("read", app.api.buildURL("Accounts/", null, null, {
-            fields: fields.join(','),
-            max_num: 5,
-            "filter": [
-                {
-                    "rfc_c": RFC,
-                    "primernombre_c": PrimerNombre,
-                    "segundonombre_c": SegundoNombre,
-                    "apellidopaterno_c": ApellidoP,
-                    "apellidomaterno_c": ApellidoM,
-                }
-            ]
-        }), null, {
-            success: _.bind(function (data) {
-                if (data.records.length > 0) {
+                        app.alert.show("DuplicateCheck", {
+                            level: "error",
+                            title: "Se encontro un registro con Id " + data.records[0].id + " con mismo nombre y RFC.",
+                            autoClose: false
+                        });
+                        errors['rfc_c'] = errors['rfc_c'] || {};
+                        errors['rfc_c'].required = true;
 
-                    app.alert.show("DuplicateCheck", {
-                        level: "error",
-                        title: "Se encontro un registro con Id " + data.records[0].id + " con mismo nombre y RFC.",
-                        autoClose: false
-                    });
-                    errors['rfc_c'] = errors['rfc_c'] || {};
-                    errors['rfc_c'].required = true;
+                        errors['primernombre_c'] = errors['primernombre_c'] || {};
+                        errors['primernombre_c'].required = true;
 
-                    errors['primernombre_c'] = errors['primernombre_c'] || {};
-                    errors['primernombre_c'].required = true;
+                        errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+                        errors['apellidopaterno_c'].required = true;
 
-                    errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
-                    errors['apellidopaterno_c'].required = true;
+                        errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+                        errors['apellidomaterno_c'].required = true;
 
-                    errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
-                    errors['apellidomaterno_c'].required = true;
+                    }
 
-                }
-
-            }, this)
-        });
+                }, this)
+            });
+        }
         callback(null, fields, errors);
     },
 
@@ -838,6 +850,24 @@
         callback(null, fields, errors);
     },
     /* END */
+
+    /**
+     * @author Salvador Lopez Balleza
+     * @date 13/03/2018
+     * Establecer campo phone_office con la misma informaci�n que el campo personalizado account_telefonos
+     * */
+    setPhoneOffice: function () {
+
+        if (!_.isEmpty(this.model.get('account_telefonos'))) {
+            var telefono = this.model.get('account_telefonos');
+            for (var i = 0; i < telefono.length; i++) {
+                if (telefono[i].principal) {
+                    this.model.set('phone_office', "base" + telefono[i].pais + " " + telefono[i].telefono);
+                }
+            }
+        }
+    },
+
     /**
      * @author Carlos Zaragoza Ortiz
      * @date 16-10-2015
@@ -857,8 +887,10 @@
     */
     _doValidateEdoCivil: function(fields, errors, callback){
         if(this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor')) ){
-            errors['estadocivil_c'] = errors['estadocivil_c'] || {};
-            errors['estadocivil_c'].required = true;
+            if (this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null ) {
+                errors['estadocivil_c'] = errors['estadocivil_c'] || {};
+                errors['estadocivil_c'].required = true;
+            }
         }
         callback(null, fields, errors);
     },

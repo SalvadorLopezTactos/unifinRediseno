@@ -1,5 +1,5 @@
 <?php
- // created: 2018-07-16 11:36:22
+ // created: 2018-08-08 13:56:35
 $dictionary['Account']['fields']['ifepasaporte_c']['labelValue']='IFE/Pasaporte';
 $dictionary['Account']['fields']['ifepasaporte_c']['full_text_search']=array (
   'enabled' => '0',
@@ -7,5 +7,6 @@ $dictionary['Account']['fields']['ifepasaporte_c']['full_text_search']=array (
   'searchable' => false,
 );
 $dictionary['Account']['fields']['ifepasaporte_c']['enforced']='';
+$dictionary['Account']['fields']['ifepasaporte_c']['dependency']='not(equal($tipodepersona_c,"Persona Moral"))';
 
  ?>
