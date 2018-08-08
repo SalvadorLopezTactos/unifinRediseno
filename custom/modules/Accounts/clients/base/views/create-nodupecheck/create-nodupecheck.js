@@ -857,8 +857,10 @@
     */
     _doValidateEdoCivil: function(fields, errors, callback){
         if(this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor')) ){
-            errors['estadocivil_c'] = errors['estadocivil_c'] || {};
-            errors['estadocivil_c'].required = true;
+            if (this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null ) {
+                errors['estadocivil_c'] = errors['estadocivil_c'] || {};
+                errors['estadocivil_c'].required = true;
+            }
         }
         callback(null, fields, errors);
     },
