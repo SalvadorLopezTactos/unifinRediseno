@@ -378,7 +378,7 @@
          * Salvador Lopez <salvador.lopez@tactos.com.mx>
          */
         //Establecer campos de promotores como solo lectura cuando el id_cliente_c ya ha sido llenado
-        if (this.model.get('idcliente_c') !== "") {
+        if (this.model.get('id') !== "") {
             var self = this;
             self.noEditFields.push('promotorleasing_c');
             self.noEditFields.push('promotorfactoraje_c');
