@@ -1043,7 +1043,7 @@
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
       if (this.model.get('tipo_registro_c') !== 'Persona' || this.model.get('tipo_registro_c') !== 'Proveedor') {
-          if (_.isEmpty(this.model.get('email')) || _.isEmpty(this.model.get('account_telefonos')) ) {
+          if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos')) ) {
               app.alert.show("Correo requerido", {
                   level: "error",
                   title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
