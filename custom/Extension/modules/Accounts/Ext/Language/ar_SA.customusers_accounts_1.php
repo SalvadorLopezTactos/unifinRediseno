@@ -3,7 +3,6 @@
 ?>
 <?php
 // Merged from custom/Extension/modules/Accounts/Ext/Language/ar_SA.customusers_accounts_1.php
-
 //THIS FILE IS AUTO GENERATED, DO NOT MODIFY
 $mod_strings['LBL_ACCOUNTS_TEL_TELEFONOS_1_FROM_ACCOUNTS_TITLE'] = 'Personas';
 $mod_strings['LBL_ACCOUNTS_TEL_TELEFONOS_1_FROM_TEL_TELEFONOS_TITLE'] = 'Telefonos';

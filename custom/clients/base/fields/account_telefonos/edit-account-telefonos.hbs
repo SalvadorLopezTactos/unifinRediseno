@@ -13,45 +13,47 @@
 
 <div class="control-group telefonos">
     {{{log this}}}
-    <table class="dashlet" style="min-height: 0px;" cellspacing="1" cellpadding="5">
+    <table class="dashlet" style="min-height: 0px; width: 100%;" cellspacing="1" cellpadding="5">
         <tr>
-            <td valign="top" colspan="5">
-                <div class="record-label">
-                    {{{tipoTelLabel}}}
+            <td valign="top">
+                <div class="record-label" >
+                    Tipo de Teléfono
                 </div>
-                <select class="existingTipotelefono" data-field="tipotelefono" style="font-size: 15px;font-weight: 500;width:33%">
+                <select class="existingTipotelefono" data-field="tipotelefono" style="font-size: 15px;font-weight: 500;width: 92%" placeholder="Add Tipo">
                     {{{tipotelefono}}}
                 </select>
             </td>
-        </tr>
-        <tr>
             <td valign="top">
-                <div class="record-label">
-                    Lada
+                <div class="record-label" >
+                    País
                 </div>
-                <select class="existingPais" data-field="pais" style="font-size: 15px;font-weight: 500;width:80%" placeholder="Lada">
+                <select class="existingPais" data-field="pais" style="font-size: 15px;font-weight: 500;width: 92%" placeholder="Lada">
                     {{{pais}}}
                 </select>
             </td>
             <td valign="top">
-                <div class="record-label">
-                    {{{telefonoLabel}}}
-                </div>
-                <input type="text" class="existingTelephono" maxlength="10"
-                       placeholder="Telephono" value="{{telefono}}" data-field="telefono" style="width: 92%;margin: 0px;">
-            </td>
-            <td valign="top" style="width:100px;">
-                <div class="record-label">
-                    {{{extensionLabel}}}
-                </div>
-                <input type="text" class="existingExtension" maxlength="6"
-                       placeholder="Extension" value="{{extension}}" data-field="extension" style="width: 85%;margin: 0px;">
             </td>
             <td valign="top">
-                <div class="record-label">
-                    {{{estatusLabel}}}
+            </td>
+		</tr>
+        <tr>
+            <td valign="top">
+                <div class="record-label" >
+                    Teléfono
                 </div>
-                <select class="existingEstatus" data-field="estatus" style="font-size: 15px;font-weight: 500;width:92%">
+                <input type="text" class="existingTelephono" maxlength="10" placeholder="Telefono" value="{{telefono}}" data-field="telefono" style="width: 92%;margin: 0px;">
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Extensión
+                </div>
+                <input type="text" class="existingExtension" maxlength="6" placeholder="Extension" value="{{extension}}" data-field="extension" style="width: 92%;margin: 0px;">
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Estatus
+                </div>
+                <select class="existingEstatus" data-field="estatus" style="font-size: 15px;font-weight: 500;width:92%" placeholder="Add Estatus">
                     {{{estatus}}}
                 </select>
             </td>

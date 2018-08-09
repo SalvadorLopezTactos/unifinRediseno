@@ -1,5 +1,5 @@
 <?php
- // created: 2018-01-10 14:13:04
+ // created: 2018-08-01 18:03:18
 
 $app_list_strings['Relaciones_Activas_list']=array (
   '' => '',
@@ -18,4 +18,5 @@ $app_list_strings['Relaciones_Activas_list']=array (
   'Referencia Proveedor' => 'Referencia Proveedor',
   'Obligado solidario' => 'Obligado solidario',
   'Beneficiario' => 'Beneficiario',
+  'Firmantes VR' => 'Firmantes VR',
 );

@@ -1,6 +1,5 @@
 <?php
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
 class class_changeCustomPassword{
 
 	function method_changeCustomPassword($bean, $event, $arguments){
@@ -9,33 +8,44 @@ class class_changeCustomPassword{
 		if(!empty($bean->contraseniaactual_c) && !empty($bean->nuevacontrasenia_c))
 		{
 
-			//Recuperar variables
-			$GLOBALS['log']->fatal("Petición de cambio de contraseña LDAP");
+				//Recuperar variables
+				$GLOBALS['log']->fatal("Petición de cambio de contraseña LDAP");
 		    $user = $bean->user_name;
 		    $oldPassword = $bean->contraseniaactual_c;
 		    $newPassword = $bean->nuevacontrasenia_c;
 		    $validatePassword = $bean->confirmarnuevacontrasenia_c;
 		  	//Endpoint: http://192.168.150.85:8080/uni2/rest/passSugarEndPoint/pass?user=adolfo.sanchez&oldPassword=Azucar878&newPassword=Azucar878
 		  	global $sugar_config;
-		  	$base_url = $sugar_config['bpm_url']; //config.php->bpm_url 
+		  	$base_url = $sugar_config['bpm_url']; //config.php->bpm_url
 		    $urlRequest = 'http://'.$base_url.'/uni2/rest/passSugarEndPoint/pass?user='.$user.'&oldPassword='.$oldPassword.'&newPassword='.$newPassword;
 
-		    //Enviar petición 
+		    //Enviar petición
 		    try {
 			    //Envia petición de cambio
 			    $result = class_changeCustomPassword::CallAPI('GET', $urlRequest);
-			  
-			} catch (Exception $e) {
-				//Recupera error
-			    $result = $e->getMessage();
-			}
+					if ($result != "true") {
+						$GLOBALS['log']->fatal('Error-Result1');
+						sugar_die("La contraseña no pudo ser actualizada: ". $result);
+					}
 
-			//Manipular respuesta
+				} catch (Exception $e) {
+						//Recupera error
+				    $result = $e->getMessage();
+						//Limpia variables
+			    	$bean->contraseniaactual_c="";
+						$bean->nuevacontrasenia_c="";
+						$bean->confirmarnuevacontrasenia_c="";
+
+						$GLOBALS['log']->fatal('Error-Catch');
+						sugar_die("La contraseña no pudo ser actualizada: ". $result);
+				}
+
+				//Manipular respuesta
 		    $bean->description = $result;
 	    	//Limpia variables
 	    	$bean->contraseniaactual_c="";
-			$bean->nuevacontrasenia_c="";
-			$bean->confirmarnuevacontrasenia_c="";
+				$bean->nuevacontrasenia_c="";
+				$bean->confirmarnuevacontrasenia_c="";
 
 			//Log
 			// $GLOBALS['log']->fatal('Usuario: '.$user);
@@ -82,5 +92,5 @@ class class_changeCustomPassword{
 	    return $result;
 	}
 
-    
+
 }

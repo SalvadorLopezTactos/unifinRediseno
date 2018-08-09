@@ -1,5 +1,6 @@
 <?php
 
+/*
 $dependencies['Accounts']['tct_mobile_email'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
@@ -16,6 +17,7 @@ $dependencies['Accounts']['tct_mobile_email'] = array(
         ),
     ),
 );
+*/
 
 $dependencies['Accounts']['tct_mobile_phone'] = array(
     'hooks' => array("all"),

@@ -55,8 +55,10 @@
 
 		 public function crearFolioSolicitud($bean = null, $event = null, $args = null)
         {
-			//Operaciones de solicitud de crédito
+
+			      //Operaciones de solicitud de crédito
             if(($bean->idsolicitud_c == 0 || empty($bean->idsolicitud_c)) && $bean->tipo_operacion_c == 1) {
+                $GLOBALS['log']->fatal('>>>>>>>la funcion crearFolioSolici.... ha sido ejecutada<<<<<<<' );
                 $callApi = new UnifinAPI();
                 if($bean->canal_c == 1){
                     $numeroDeFolio = $bean->idsolicitud_c;
@@ -65,7 +67,21 @@
                     $numeroDeFolio = $callApi->generarFolios(2);
                     $bean->idsolicitud_c = $numeroDeFolio;
                 }
-                $bean->name = "SOLICITUD " . $numeroDeFolio . " - " . $bean->name;
+                if($bean->tct_etapa_ddw_c=='SI') {//@jesus
+                    $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $bean->name;
+                }else{
+                    $bean->name = "SOLICITUD " . $numeroDeFolio . " - " . $bean->name;
+                }
+            }elseif ($bean->tct_etapa_ddw_c!='SI'){
+                $bean->name = str_replace("PRE - ","",$bean->name) ;
+            }
+            /* @Jesus Carrillo
+             Convertir a prospecto  interesado , si la cuenta inicial es prospecto
+             */
+            $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
+            if($beanCuenta->tipo_registro_c=='Prospecto'){
+                $beanCuenta->subtipo_cuenta_c='Interesado';
+                $beanCuenta->save();
             }
         }
 
@@ -135,10 +151,14 @@
     function creaSolicitud($bean = null, $event = null, $args = null)
     {
         global $db, $current_user;
-            if(($bean->id_process_c == 0 || $bean->id_process_c == null) && $bean->estatus_c =='P' && $bean->tipo_operacion_c == '1') {
-                //Hay operaciones vigentes?
-                // ** JSR INICIO
-                $query = <<<SQL
+
+        $GLOBALS['log']->fatal('-Update: '. $args['isUpdate'] . '--Etapa: ' . $bean->tct_etapa_ddw_c);
+        if($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI'){//@jesus
+            if (($bean->id_process_c == 0 || $bean->id_process_c == null || empty($bean->id_process_c))/* && $bean->estatus_c == 'P' */ && $bean->tipo_operacion_c == '1') {
+            //Hay operaciones vigentes?
+            // ** JSR INICIO
+            $GLOBALS['log']->fatal('Entra creación de solicitud');
+            $query = <<<SQL
 			SELECT aop.account_id,aop.opportunity_id, oppc.estatus_c, oppc.monto_c, oppc.idsolicitud_c,
     acstm.idcliente_c,ac.name as nombre_cliente,  acstm.riesgo_c as riesgo,acstm.tipodepersona_c as tipo_persona,
     email_addresses.email_address as correo,acstm.lista_negra_c, acstm.pep_c, oppc.activo_c, oppc.id_activo_c,
@@ -158,7 +178,7 @@
                     INNER JOIN
 						accounts ac ON ac.id = aop.account_id
 					INNER JOIN
-						accounts_cstm acstm ON acstm.id_c = aop.account_id and acstm.tipo_registro_c = 'Cliente'
+						accounts_cstm acstm ON acstm.id_c = aop.account_id and acstm.tipo_registro_c in ('Prospecto','Cliente')
 					LEFT JOIN
 						email_addr_bean_rel  ON email_addr_bean_rel.bean_id = acstm.id_c and email_addr_bean_rel.primary_address = 1
 					LEFT JOIN
@@ -170,39 +190,42 @@
 						AND aop.deleted = 0/*
 						AND email_addr_bean_rel.primary_address = 1*/
 SQL;
-                //$GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> :: query " . $query);
-                $queryResult = $db->query($query);
-                $rowCount = $db->getRowCount($queryResult);
+            //$GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> :: query " . $query);
+            $queryResult = $db->query($query);
+            $rowCount = $db->getRowCount($queryResult);
 
-                //$GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : ** JSR ** " . $rowCount);
-                if ($rowCount <= 0) {
-                    return null;
-                }
-                $row = $bean->db->fetchByAssoc($queryResult);
-                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : ** JSR ** DATOS DE LA OPERACION " . print_r($row, true));
-            	$callApi = new UnifinAPI();
-            	$solicitudCreditoResultado = $callApi->obtenSolicitudCredito($row);
-                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . "  <".$current_user->user_name."> : Opportunity({$bean->id_process_c}) changed to Integracion de Expediente ");
-                try {
-                    $bean->id_process_c = $solicitudCreditoResultado['processInstanceId'];
-                    $process_id = $solicitudCreditoResultado['processInstanceId'];
-                    $query = "UPDATE opportunities_cstm
+            //$GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : ** JSR ** " . $rowCount);
+            if ($rowCount <= 0) {
+                return null;
+            }
+            $row = $bean->db->fetchByAssoc($queryResult);
+            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : ** JSR ** DATOS DE LA OPERACION " . print_r($row, true));
+            $callApi = new UnifinAPI();
+            $solicitudCreditoResultado = $callApi->obtenSolicitudCredito($row);
+            $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . "  <" . $current_user->user_name . "> : Opportunity({$bean->id_process_c}) changed to Integracion de Expediente ");
+            try {
+                $bean->id_process_c = $solicitudCreditoResultado['processInstanceId'];
+                $process_id = $solicitudCreditoResultado['processInstanceId'];
+                $query = "UPDATE opportunities_cstm
                               SET id_process_c =  '$process_id'
                               WHERE id_c = '{$bean->id}'";
-                    $queryResult = $db->query($query);
-                    if($bean->id_process_c != 0 && $bean->id_process_c != null && $bean->id_process_c != "-1" && $bean->id_process_c != "" && $bean->tipo_producto_c !=4 ){
-                        $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . "  <".$current_user->user_name."> : Despues de generar Process debe actualizarse la lista de condiciones financieras ");
-						$callApi->actualizaSolicitudCredito($bean);
-                    }
-                } catch (Exception $e) {
-                    error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ .  " <".$current_user->user_name."> : Error: " . $e->getMessage());
-                    $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ .  " <".$current_user->user_name."> : Error " . $e->getMessage());
+                $queryResult = $db->query($query);
+                if ($bean->id_process_c != 0 && $bean->id_process_c != null && $bean->id_process_c != "-1" && $bean->id_process_c != "" && $bean->tipo_producto_c != 4) {
+                    $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . "  <" . $current_user->user_name . "> : Despues de generar Process debe actualizarse la lista de condiciones financieras ");
+                    $callApi->actualizaSolicitudCredito($bean);
                 }
+            } catch (Exception $e) {
+                error_log(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error: " . $e->getMessage());
+                $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : Error " . $e->getMessage());
             }
+        }
+        }else{
+            $GLOBALS['log']->fatal('------------------>Se cancelo peticion a Uni2<------------------');
+        }
             //CVV se manda a llamar la funcion de actualizar la solicitud de UNICS
             //$callApi2 = new UnifinAPI();
             //$callApi2->actualizaSolicitudCredito($bean);
-        }
+    }
 
         public function creaRatificacion($bean = null, $event = null, $args = null){
             global $current_user;
@@ -229,6 +252,11 @@ SQL;
 
                 // Generales de la operación
                 $opp->name = "R/I para " . $bean->name;
+                //author: Salvador Lopez
+                //La operación nueva debe nacer como "INTEGRACIÓN DE EXPEDIENTE" Y "EN ESPERA"
+                $opp->tct_etapa_ddw_c="P";//Integración de Expediente
+                $opp->estatus_c="PE";//En Espera
+
                 $opp->monto_c = $bean->monto_ratificacion_increment_c + $bean->monto_c;
                 $opp->amount = $bean->monto_ratificacion_increment_c + $bean->amount;
                 $opp->monto_ratificacion_increment_c = $bean->monto_ratificacion_increment_c;

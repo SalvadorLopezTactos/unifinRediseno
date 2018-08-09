@@ -109,7 +109,7 @@
                 var tel_tipo_list = app.lang.getAppListStrings('tel_tipo_list');
 
                 for (var i = 0; i < data.records.length; i++) {
-                    self.value[i] = data.records[i].telefono;
+                    //self.value[i] = data.records[i].telefono;
                     //add label for tpl use
 
                     //ignore empty country record trobinson@levementum.com 6/9

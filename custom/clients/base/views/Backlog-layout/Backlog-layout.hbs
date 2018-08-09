@@ -280,7 +280,7 @@
             <tr>
             <tr>
                 <td>
-                    Operacion:
+                    Operación:
                 </td>
                 <td></td>
                 <td class="popupC2" colspan="3">
@@ -410,7 +410,7 @@
             </tr>
             <tr>
                 <td>
-                    Operacion:
+                    Operación:
                 </td>
                 <td></td>
                 <td class="popupC2">
@@ -430,23 +430,37 @@
                 <table class="popuptables" style="display: {{mes_switch}};">
                     <tr>
                         <td>
-                            Mes:
+                            Año:
                         </td>
                         <td></td>
+                        <!--
                         <td>
                             <select class="mes_switch_popup">
                                 {{{meses_list_popup_mover_mes}}}
                             </select>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Año:
-                        </td>
-                        <td></td>
+                        -->
                         <td>
                             <select class="anio_switch_popup">
                                 {{{anio_list_html}}}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mes:
+                        </td>
+                        <td></td>
+                        <!--
+                        <td>
+                            <select class="anio_switch_popup">
+                                {{{anio_list_html}}}
+                            </select>
+                        </td>
+                        -->
+                        <td>
+                            <select class="mes_switch_popup">
+                                {{{meses_list_popup_mover_mes}}}
                             </select>
                         </td>
                     </tr>
@@ -461,7 +475,7 @@
             </tr>
             <tr>
                 <td width="10%">
-                    Operacion:
+                    Operación:
                 </td>
                 <td></td>
                 <td class="popupC2" colspan="4">
@@ -515,7 +529,7 @@
             </tr>
             <tr>
                 <td>
-                    Operacion:
+                    Operación:
                 </td>
                 <td></td>
                 <td class="popupC2" colspan="3">
@@ -542,7 +556,7 @@
             </tr>
             <tr>
                 <td>
-                    Motivo cancelacion:
+                    Motivo cancelación:
                 </td>
                 <td></td>
                 <td colspan ="3">
@@ -553,25 +567,36 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <span id="label_mes_cancelacion">Mes:</span>
+                    <span id="label_anio_cancelacion">Año:</span>
                 </td>
                 <td></td>
                 <td colspan="2">
-                    <span id="label_anio_cancelacion">Año:</span>
+                    <span id="label_mes_cancelacion">Mes:</span>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <select id="mes_cancelacion" class="mes_popup" style="width: 180px;">
-                        {{{meses_list_popup_html}}}
-                    </select>
-                </td>
-                <td></td>
                 <td  colspan="2" >
                     <select id="anio_cancelacion" class="anio_popup" style="width: 180px;">
                         {{{anio_list_html}}}
                     </select>
                 </td>
+                <td></td>
+                <td colspan="2">
+                    <select id="mes_cancelacion" class="mes_popup" style="width: 180px;">
+                        {{{meses_list_popup_html}}}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" id="tdquien" style="display:none">
+
+                         <span id="tct_competencia_quien_txf_c">¿Quién?:</span>
+                         <input type="text" id="quien_opcion" style="width: 180px;" >
+                 </td>
+                 <td colspan="2" id="tdproducto" style="display:none">
+                          <span id="tct_que_producto_txf_c">¿Qué Producto?:</span>
+                          <input type="text" id="producto_opcion" style="width: 180px;" >
+                 </td>
             </tr>
             <tr>
                 <td colspan="5">
@@ -593,7 +618,7 @@
             </tr>
             <tr>
                 <td>
-                    Operacion:
+                    Operación:
                 </td>
                 <td></td>
                 <td class="popupC2" colspan="3">
@@ -662,7 +687,7 @@
             <!--
             <tr>
                 <td>
-                    Operacion:
+                    Operación:
                 </td>
                 <td></td>
                 <td class="popupC2">
@@ -685,23 +710,24 @@
                 <table class="popuptables" style="display: {{mes_masivo_switch}};">
                     <tr>
                         <td>
-                            Mes:
-                        </td>
-                        <td></td>
-                        <td>
-                            <select class="mes_switch_masivo_popup">
-                                {{{meses_list_popup_mover_mes}}}
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
                             Año:
                         </td>
                         <td></td>
                         <td>
                             <select class="anio_masivo_switch_popup">
                                 {{{anio_list_html}}}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            Mes:
+                        </td>
+                        <td></td>
+                        <td>
+                            <select class="mes_switch_masivo_popup">
+                                {{{meses_list_popup_mover_mes}}}
                             </select>
                         </td>
                     </tr>
@@ -747,7 +773,7 @@
             -->
             <tr>
                 <td>
-                    Motivo cancelacion:
+                    Motivo cancelación:
                 </td>
                 <td></td>
                 <td colspan ="3">
@@ -758,26 +784,72 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <span id="label_mes_cancelacion_masivo">Mes:</span>
+                    <span id="label_anio_cancelacion_masivo">Año:</span>
                 </td>
                 <td></td>
                 <td colspan="2">
-                    <span id="label_anio_cancelacion_masivo">Año:</span>
+                    <span id="label_mes_cancelacion_masivo">Mes:</span>
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <select id="mes_cancelacion_masivo" class="mes_masivo_popup" style="width: 180px;">
-                        {{{meses_list_popup_html}}}
-                    </select>
-                </td>
-                <td></td>
                 <td  colspan="2" >
                     <select id="anio_cancelacion_masivo" class="anio_masivo_popup" style="width: 180px;">
                         {{{anio_list_html}}}
                     </select>
                 </td>
+
+                <td colspan="2">
+                    <select id="mes_cancelacion_masivo" class="mes_masivo_popup" style="width: 180px;">
+                        {{{meses_list_popup_html}}}
+                    </select>
+                </td>
             </tr>
+
+            <!--
+            <tr>
+                <td>
+                    ¿Quién?:
+                </td>
+                <td colspan="2" id="tdquienMasivo" style="display:none">
+                    <span id="tct_competencia_quien_txf_c_masivo">¿Quién?:</span>
+                    <input type="text" id="quien_opcion_masivo" style="width: 180px;" >
+                </td>
+                <td colspan="2" id="tdproductoMasivo" style="display:none">
+                    <span id="tct_que_producto_txf_c_masivo">Producto:</span>
+                    <input type="text" id="producto_opcion_masivo" style="width: 180px;" >
+                </td>
+            </tr>
+            -->
+            <tr>
+                <td colspan="2" id="quienMasivoLabel" style="display:none">
+                    <span id="label_quien">¿Quién?</span>
+                </td>
+                <td colspan="2" id="productoMasivoLabel" style="display:none">
+                    <span id="label_producto">Producto:</span>
+                </td>
+
+            </tr>
+            <tr >
+                <td colspan="2" id="quienMasivoVal" style="display:none">
+                    <input type="text" id="quien_opcion_masivo" style="width: 180px;" >
+                </td>
+                <td colspan="2" id="productoMasivoVal" style="display:none">
+                    <input type="text" id="producto_opcion_masivo" style="width: 180px;" >
+                </td>
+            </tr>
+
+            <!--
+            <tr>
+                <td  colspan="2" id="tdquienMasivoVal" style="display:none" >
+                    <input type="text" id="quien_opcion_masivo" style="width: 180px;" >
+                </td>
+
+                <td colspan="2" id="tdproductoMasivoVal" style="display:none">
+                    <input type="text" id="producto_opcion_masivo" style="width: 180px;" >
+                </td>
+            </tr>
+            -->
+
             <tr>
                 <td colspan="5">
                     Comentarios:
