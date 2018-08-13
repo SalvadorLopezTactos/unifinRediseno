@@ -744,6 +744,8 @@
         var isNumber= pattern.test(cp);
         if(str_length==5 && isNumber){
 
+            this.$(evt.target).css('border-color', '');
+
             this.$(evt.target).parent().parent().find('select.existingPaisTemp').empty();
             this.$(evt.target).parent().parent().find('select.existingEstadoTemp').empty();
             this.$(evt.target).parent().parent().next('tr').children().eq(0).find('select.existingMunicipioTemp').empty();
@@ -871,11 +873,14 @@
             });
 
         }else{
+
             app.alert.show('invalid_cp', {
                 level: 'error',
                 autoClose: true,
                 messages: 'C\u00F3digo Postal inv\u00E1lido'
             });
+
+            this.$(evt.target).css('border-color', 'red');
         }
 
     },
@@ -1361,6 +1366,20 @@
 
         }
 
+        //Valida extensión de código postal y valida únicamente números
+         var pattern = /^\d+$/;
+
+        if ($('#postalInputTemp').val().length !=5 || !pattern.test($('#postalInputTemp').val())) {
+
+            $('#postalInputTemp').css('border-color', 'red');
+            return;
+
+
+        } else {
+            $('#postalInputTemp').css('border-color', '');
+
+        }
+
 
         /*
          //Valida pais
@@ -1446,7 +1465,7 @@
 
 
         if (dirError) {
-            if(dirErrorCounter > 1) errorMsg = 'Hay campos vacios en la direccion.'
+            if(dirErrorCounter > 1) errorMsg = 'Hay campos vac\u00EDos en la direcci\u00F3n.'
             app.alert.show('list_delete_direccion_info', {
                 level: 'error',
                 autoClose: true,
