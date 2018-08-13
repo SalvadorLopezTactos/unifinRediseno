@@ -63,7 +63,6 @@
          Se añaden eventos change para mostrar telefonos y direcciones al vincular o desvincular algún registro relacionado
          */
         this.model.on('change:account_telefonos', this.refresca, this);
-
         this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
         this.model.on('change:profesion_c', this._doValidateProfesionRisk, this);
         this.model.on('change:pais_nacimiento_c', this._doValidateProfesionRisk, this);
@@ -214,7 +213,6 @@
     },
 
     readOnlyOrigen: function () {
-
         var origen = this.model.get('origendelprospecto_c');
         if (origen == "Marketing" || origen == "Inteligencia de Negocio") {
 
@@ -229,11 +227,7 @@
             this.$("[data-name='evento_c']").prop("disabled", true);
             this.$("[data-name='camara_c']").prop("disabled", true);
             this.$("[data-name='tct_que_promotor_rel_c']").prop("disabled", true);
-
-
         }
-
-
     },
 
     /* BEGIN CUSTOMIZATION:
@@ -244,7 +238,6 @@
         if (telefonos.action !== "edit") {
             this.render();
         }
-
     },
 
     handleCancel: function () {
@@ -255,6 +248,7 @@
         this.model.set('account_direcciones', account_direcciones);
         this.model._previousAttributes.account_telefonos = account_telefonos;
         this.model._previousAttributes.account_direcciones = account_direcciones;
+        this.render();
     },
 
     bindDataChange: function () {
@@ -859,7 +853,7 @@
         this.context.on('button:Historial_cotizaciones_button:click', this.historialCotizacionesClicked, this);
         this.context.on('button:regresa_lead:click', this.regresa_leadClicked, this);
         this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
-
+        this.context.on('button:cancel_button:click', this.handleCancel, this);
     },
 
     /*
@@ -877,7 +871,6 @@
         this._render();
 
     },
-
 
     cotizadorClicked: function () {
         var Accountid = this.model.get('id');
