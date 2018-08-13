@@ -14,7 +14,7 @@
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
         this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
-        this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this));
+        //this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this));
         //this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
         this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
 
@@ -762,72 +762,72 @@
     validaRequeridosFactoraje: function(fields, errors, callback){
         //console.log(this.model.get('f_aforo_c'));
         //console.log(this.model.get('f_tipo_factoraje_c'));
-     /*   if(this.model.get('tipo_producto_c')=='4'){
-            if(this.model.get('f_tipo_factoraje_c') == undefined || this.model.get('f_tipo_factoraje_c') == ""){
+        if(this.model.get('tipo_producto_c')=='4') {
+            if (this.model.get('f_tipo_factoraje_c') == undefined || this.model.get('f_tipo_factoraje_c') == "") {
                 //error
                 errors['f_tipo_factoraje_c'] = errors['f_tipo_factoraje_c'] || {};
                 errors['f_tipo_factoraje_c'].required = true;
             }
-            if(this.model.get('f_aforo_c') == "" || (Number(this.model.get('f_aforo_c'))<0 || Number(this.model.get('f_aforo_c'))>99.999999)){
+            if (this.model.get('f_aforo_c') == "" || (Number(this.model.get('f_aforo_c')) < 0 || Number(this.model.get('f_aforo_c')) > 99.999999)) {
                 //error
                 errors['f_aforo_c'] = errors['f_aforo_c'] || {};
                 errors['f_aforo_c'].required = true;
             }
-            if(this.model.get('tipo_tasa_ordinario_c') == undefined || this.model.get('tipo_tasa_ordinario_c') == ""){
+            if (this.model.get('tipo_tasa_ordinario_c') == undefined || this.model.get('tipo_tasa_ordinario_c') == "") {
                 //error
                 errors['tipo_tasa_ordinario_c'] = errors['tipo_tasa_ordinario_c'] || {};
                 errors['tipo_tasa_ordinario_c'].required = true;
             }
-            if(this.model.get('instrumento_c') == undefined || this.model.get('instrumento_c') == ""){
+            if (this.model.get('instrumento_c') == undefined || this.model.get('instrumento_c') == "") {
                 //error
                 errors['instrumento_c'] = errors['instrumento_c'] || {};
                 errors['instrumento_c'].required = true;
             }
-            if(this.model.get('puntos_sobre_tasa_c') == "" || (Number(this.model.get('puntos_sobre_tasa_c'))<0 || Number(this.model.get('puntos_sobre_tasa_c'))>99.999999)){
+            if (this.model.get('puntos_sobre_tasa_c') == "" || (Number(this.model.get('puntos_sobre_tasa_c')) < 0 || Number(this.model.get('puntos_sobre_tasa_c')) > 99.999999)) {
                 //error
                 errors['puntos_sobre_tasa_c'] = errors['puntos_sobre_tasa_c'] || {};
                 errors['puntos_sobre_tasa_c'].required = true;
             }
-            if(this.model.get('tipo_tasa_moratorio_c') == undefined || this.model.get('tipo_tasa_moratorio_c') == ""){
+            if (this.model.get('tipo_tasa_moratorio_c') == undefined || this.model.get('tipo_tasa_moratorio_c') == "") {
                 //error
                 errors['tipo_tasa_moratorio_c'] = errors['tipo_tasa_moratorio_c'] || {};
                 errors['tipo_tasa_moratorio_c'].required = true;
             }
-            if(this.model.get('instrumento_moratorio_c') == undefined || this.model.get('instrumento_moratorio_c') == ""){
+            if (this.model.get('instrumento_moratorio_c') == undefined || this.model.get('instrumento_moratorio_c') == "") {
                 //error
                 errors['instrumento_moratorio_c'] = errors['instrumento_moratorio_c'] || {};
                 errors['instrumento_moratorio_c'].required = true;
             }
-            if(this.model.get('puntos_tasa_moratorio_c') == "" || (Number(this.model.get('puntos_tasa_moratorio_c'))<0 || Number(this.model.get('puntos_tasa_moratorio_c'))>99.999999)){
+            if (this.model.get('puntos_tasa_moratorio_c') == "" || (Number(this.model.get('puntos_tasa_moratorio_c')) < 0 || Number(this.model.get('puntos_tasa_moratorio_c')) > 99.999999)) {
                 //error
                 errors['puntos_tasa_moratorio_c'] = errors['puntos_tasa_moratorio_c'] || {};
                 errors['puntos_tasa_moratorio_c'].required = true;
             }
-            if(this.model.get('factor_moratorio_c') == "" || (Number(this.model.get('factor_moratorio_c'))<0 || Number(this.model.get('factor_moratorio_c'))>99.999999)){
+            if (this.model.get('factor_moratorio_c') == "" || (Number(this.model.get('factor_moratorio_c')) < 0 || Number(this.model.get('factor_moratorio_c')) > 99.999999)) {
                 //error
                 errors['factor_moratorio_c'] = errors['factor_moratorio_c'] || {};
                 errors['factor_moratorio_c'].required = true;
             }
-            if(this.model.get('cartera_descontar_c') == "" ){
+            if (this.model.get('cartera_descontar_c') == "") {
                 //error
                 errors['cartera_descontar_c'] = errors['cartera_descontar_c'] || {};
                 errors['cartera_descontar_c'].required = true;
             }
-        /*
-            console.log(this.model.get('tasa_fija_ordinario_c'));
-            console.log('tasa_fija_ordinario_c');
-            if(this.model.get('tasa_fija_ordinario_c') == null ||this.model.get('tasa_fija_ordinario_c') == "" || (Number(this.model.get('tasa_fija_ordinario_c'))<0 || Number(this.model.get('tasa_fija_ordinario_c'))>99.999999)){
-                //error
-                errors['tasa_fija_ordinario_c'] = errors['tasa_fija_ordinario_c'] || {};
-                errors['tasa_fija_ordinario_c'].required = true;
-            }
-            if(this.model.get('tasa_fija_moratorio_c') == null ||this.model.get('tasa_fija_moratorio_c') == "" || (Number(this.model.get('tasa_fija_moratorio_c'))<0 || Number(this.model.get('tasa_fija_moratorio_c'))>99.999999)){
-                //error
-                errors['tasa_fija_moratorio_c'] = errors['tasa_fija_moratorio_c'] || {};
-                errors['tasa_fija_moratorio_c'].required = true;
-            }
-    */
-
+            /*
+                console.log(this.model.get('tasa_fija_ordinario_c'));
+                console.log('tasa_fija_ordinario_c');
+                if(this.model.get('tasa_fija_ordinario_c') == null ||this.model.get('tasa_fija_ordinario_c') == "" || (Number(this.model.get('tasa_fija_ordinario_c'))<0 || Number(this.model.get('tasa_fija_ordinario_c'))>99.999999)){
+                    //error
+                    errors['tasa_fija_ordinario_c'] = errors['tasa_fija_ordinario_c'] || {};
+                    errors['tasa_fija_ordinario_c'].required = true;
+                }
+                if(this.model.get('tasa_fija_moratorio_c') == null ||this.model.get('tasa_fija_moratorio_c') == "" || (Number(this.model.get('tasa_fija_moratorio_c'))<0 || Number(this.model.get('tasa_fija_moratorio_c'))>99.999999)){
+                    //error
+                    errors['tasa_fija_moratorio_c'] = errors['tasa_fija_moratorio_c'] || {};
+                    errors['tasa_fija_moratorio_c'].required = true;
+                }
+        */
+        }
         callback(null, fields, errors);
     },
     // CVV - 28/03/2016 - Se sustituye por modulo de condiciones financieras
