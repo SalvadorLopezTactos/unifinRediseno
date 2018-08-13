@@ -1348,11 +1348,14 @@
 
         //Valida indicador
         if ($('#multi1').val() == null) {
-            errorMsg = 'Indicador de direccion requerido';
+            errorMsg = 'Indicador de direcci\u00F3n requerido';
+
             dirError = true; dirErrorCounter++;
-            $('#multi1').css('border-color', 'red');
+
+            $('#s2id_multi1 ul').css('border-color', 'red');  //Validación para pintar el campo Indicador.
         } else {
-            $('#multi1').css('border-color', '');
+            $('#s2id_multi1 ul').css('border-color', '');
+            //$('#multi1').css('border-color', '');
 
         }
 
