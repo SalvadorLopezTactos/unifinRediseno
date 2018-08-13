@@ -60,7 +60,7 @@ class CG_Class
   {
     if($arguments['related_module'] == 'Rel_Relaciones' && $arguments['relationship'] == 'rel_relaciones_accounts_1')
     {
-      
+
 
       //$GLOBALS['log']->fatal ('After Add Relation - Relaciones:rel_relaciones_accounts_1');
       //$GLOBALS['log']->fatal ($arguments);
@@ -110,7 +110,7 @@ class CG_Class
 
   function CG_Method_BeforeDelete($bean, $event, $arguments)
   {
-    //$GLOBALS['log']->fatal ('Before Del Relation');
+    $GLOBALS['log']->fatal ('Before Del Relation');
     //$GLOBALS['log']->fatal ($arguments);
     //$GLOBALS['log']->fatal ($event);
     $eliminar = true;
@@ -118,17 +118,17 @@ class CG_Class
     {
       if ($bean->load_relationship('rel_relaciones_accounts_1')) {
         //Si tiene relaciones
-        //$GLOBALS['log']->fatal ('Si tiene relaciones:Itera');
+        $GLOBALS['log']->fatal ('Si tiene relaciones:Itera');
         //$relatedBeans = $bean->rel_relaciones_accounts->getBeans();
         $relatedRelaciones = $bean->rel_relaciones_accounts_1->getBeans();
         $totalRelaciones = count($relatedRelaciones);
-        //$GLOBALS['log']->fatal ($totalRelaciones);
-        
+        $GLOBALS['log']->fatal ($totalRelaciones);
+
         //Valida Existencia de CG asociado
-        if($totalRelaciones <= 1){
+        if($totalRelaciones < 1 && ($bean->tipo_registro_c == 'Proveedor' || ($bean->tipo_registro_c == 'Cliente' && $bean->esproveedor_c == true)) ){
           //No tiene relaciones adicionales, detiene eliminación
           $eliminar = false;
-          require_once 'include/api/SugarApiException.php';    
+          require_once 'include/api/SugarApiException.php';
           throw new SugarApiExceptionInvalidParameter("No puede eliminar relación. Se requiere al menos una relación para proveedor");
         }
       }
