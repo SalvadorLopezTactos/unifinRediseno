@@ -111,6 +111,7 @@
         this.model.set('date_closed', FechaCierre.getFullYear() + '-' + (FechaCierre.getMonth()+1) + '-' + FechaCierre.getDate());
         */
         this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
+
         this.model.on('change:tipo_producto_c', this._ActualizaEtiquetas, this);
 
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
@@ -761,7 +762,7 @@
     validaRequeridosFactoraje: function(fields, errors, callback){
         //console.log(this.model.get('f_aforo_c'));
         //console.log(this.model.get('f_tipo_factoraje_c'));
-        if(this.model.get('tipo_producto_c')=='4'){
+     /*   if(this.model.get('tipo_producto_c')=='4'){
             if(this.model.get('f_tipo_factoraje_c') == undefined || this.model.get('f_tipo_factoraje_c') == ""){
                 //error
                 errors['f_tipo_factoraje_c'] = errors['f_tipo_factoraje_c'] || {};
@@ -826,7 +827,7 @@
                 errors['tasa_fija_moratorio_c'].required = true;
             }
     */
-        }
+
         callback(null, fields, errors);
     },
     // CVV - 28/03/2016 - Se sustituye por modulo de condiciones financieras
