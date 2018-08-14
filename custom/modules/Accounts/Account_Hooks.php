@@ -587,7 +587,7 @@ SQL;
     {
 
         /*** ALI INICIO ***/
-        if($bean->canal_c == 1 && $bean->sincronizado_unics_c == '0')
+        if($bean->canal_c == 1 && $bean->sincronizado_unics_c == 0)
         {
             $GLOBALS['log']-> fatal ("1");
             $callApi = new UnifinAPI();
@@ -597,7 +597,7 @@ SQL;
         else
         {
 
-            if(($bean->tipo_registro_c != 'Persona' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != "")) && $bean->sincronizado_unics_c == '0') {
+            if(($bean->tipo_registro_c != 'Persona' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != "")) && $bean->sincronizado_unics_c == 0) {
 
                 if ($bean->estatus_c == 'Interesado' || ($bean->tipo_registro_c != 'Prospecto' && $_SESSION['estadoPersona'] == 'insertando')) {
                     $callApi = new UnifinAPI();
@@ -607,12 +607,12 @@ SQL;
             /**
              * F. Javier G. Solar 12/07/2018
              * Se realiza el proceso de envió de cuenta al sistema UNICS, solo si no se ha
-            realizado.
-            Conservar los campos que sean obligatorios de acuerdo a la opción
-            seleccionada
+            *realizado.
+            *Conservar los campos que sean obligatorios de acuerdo a la opción
+            *seleccionada
 
              */
-            if(($bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c) || ($bean->tipo_registro_c=="Prospecto" && $bean->subtipo_cuenta_c=="Interesado")&& $bean->sincronizado_unics_c == '0' )
+            if( (($bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c) || ($bean->tipo_registro_c=="Prospecto" && $bean->subtipo_cuenta_c=="Interesado")) && $bean->sincronizado_unics_c == 0 && empty($bean->idcliente_c) )
             {
                 $callApi = new UnifinAPI();
                 $cliente = $callApi->insertarClienteCompleto($bean);
@@ -711,8 +711,12 @@ SQL;
         global $current_user;
         try {
             $GLOBALS['log']->fatal(" <".$current_user->user_name."> :El estatus en sesion al actualizar Persona es:" . $_SESSION['estadoPersona']);
-            //no se debe disparar si es prospecto
-            if ($bean->tipo_registro_c != 'Prospecto' && $_SESSION['estadoPersona'] == 'actualizando') {
+            /*
+              AF - 2018/08/14
+              Modica condición para no mandar actualizar leads y si registros que tengan idCliente
+            */
+            //no se debe disparar si es lead
+            if ($bean->tipo_registro_c != 'Lead' && !empty($bean->idcliente_c) && $_SESSION['estadoPersona'] == 'actualizando') {
                 $callApi = new UnifinAPI();
                 //CVV - valida que la persona ya se encuentre sincornizada con UNICS, de lo contrario manda a insertar completo
                 if($bean->sincronizado_unics_c == 1){
