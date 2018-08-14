@@ -411,7 +411,7 @@
             app.alert.show('error_telefono', {
                 level: 'error',
                 autoClose: true,
-                messages: 'Tel\u00E9fono Inv\u00E1lido.'
+                messages: 'Tel\u00E9fono Inv\u00E1lido. Debe contener 8 o m\u00E1s d\u00EDgitos.'
             });
             //$($input).focus();
             $($input).css('border-color', 'red');
