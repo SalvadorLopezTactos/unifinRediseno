@@ -60,13 +60,16 @@
 
         /*
          Salvador Lopez
-         Se añaden eventos change para mostrar telefonos y direcciones al vincular o desvincular algún registro relacionado
+         Se añaden eventos change para mostrar teléfonos y direcciones al vincular o desvincular algún registro relacionado
          */
         this.model.on('change:account_telefonos', this.refresca, this);
         this.model.on('change:tipodepersona_c', this._ActualizaEtiquetas, this);
         this.model.on('change:profesion_c', this._doValidateProfesionRisk, this);
         this.model.on('change:pais_nacimiento_c', this._doValidateProfesionRisk, this);
         this.model.on('change:origendelprospecto_c', this.changeLabelMarketing, this);
+
+        //Se añade función para establecer phone_office
+        this.model.on('change:account_telefonos', this.setPhoneOffice, this);
         /*
          AF - 26/12/17
          Ajuste: Ocultar campo dependiente de multiselect "¿Instrumento monetario con el que espera realizar los pagos?"
@@ -1489,6 +1492,23 @@
         if (this.model.get('origendelprospecto_c') == 'Eventos Mercadotecnia') {
             console.log("Se eligio Eventos Mecadotecnia");
             this.$("div.record-label[data-name='evento_marketing_c']").text("Evento marketing");
+        }
+    },
+
+    /**
+     * @author Salvador Lopez Balleza
+     * @date 13/03/2018
+     * Establecer campo phone_office con la misma informaci�n que el campo personalizado account_telefonos
+     * */
+    setPhoneOffice: function () {
+
+        if (!_.isEmpty(this.model.get('account_telefonos'))) {
+            var telefono = this.model.get('account_telefonos');
+            for (var i = 0; i < telefono.length; i++) {
+                if (telefono[i].principal) {
+                    this.model.set('phone_office', "base" + telefono[i].pais + " " + telefono[i].telefono);
+                }
+            }
         }
     },
 
