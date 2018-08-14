@@ -526,35 +526,44 @@
 
     validatelefonos: function (fields, errors, callback) {
         var expreg =/^[0-9]{8,10}$/;
-        if(this.$('.existingTipotelefono').val()=='' && this.$('.existingPais').val()=='' &&
-            !expreg.test(this.$('.existingTelephono').val()) && this.$('.existingExtension').val().trim()=='') {
+
+        if(this.$('.existingTipotelefono').val()=='' || this.$('.existingPais').val()=='' || !expreg.test(this.$('.existingTelephono').val()) ||
+            this.$('.newEstatus').val()=='') {
+
             app.alert.show('error_modultel', {
                 level: 'error',
                 autoClose: true,
-                messages: 'Favor de llenar los campos señalados.'
+                messages: 'Favor de llenar los campos se\u00F1alados.'
             });
-            if(!expreg.test(this.$('.existingTelephono').val())){
-                this.$('.existingTelephono').css('border-color', 'red');
-            }else{
-                this.$('.existingTelephono').css('border-color', '');
-            }
-            if(this.$('.existingPais').val()==''){
-                this.$('.existingPais').css('border-color', 'red');
-            }else{
-                this.$('.existingPais').css('border-color', '');
-            }
-            if(this.$('.existingTipotelefono').val()==''){
-                this.$('.existingTipotelefono').css('border-color', 'red');
-            }else{
-                this.$('.existingTipotelefono').css('border-color', '');
-            }
-            if(this.$('.existingExtension').val().trim()==''){
-                this.$('.existingExtension').css('border-color', 'red');
-            }else{
-                this.$('.existingExtension').css('border-color', '');
-            }
-            return;
 
+            $('.existingTelephono').each(function () {
+                if(!expreg.test($(this).val())){
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+            $('.existingPais').each(function () {
+                if($(this).val()==''){
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+            $('.existingTipotelefono').each(function () {
+                if($(this).val()==''){
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+            $('.existingEstatus').each(function () {
+                if($(this).val()==''){
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
         }
         callback(null, fields, errors);
     },

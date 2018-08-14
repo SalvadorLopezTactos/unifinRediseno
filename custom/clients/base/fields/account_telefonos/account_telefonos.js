@@ -256,7 +256,7 @@
         var expreg =/^[0-9]{8,10}$/;
 
         if(this.$('.newTipotelefono').val()!='' && this.$('.newPais').val()!='' && expreg.test(this.$('.newTelefono').val()) &&
-            this.$('.newExtension').val().trim()!='') {
+            this.$('.newEstatus').val()!='') {
             var telefono = this.$(evt.currentTarget).val() || this.$('.newTelefono').val(),
                 currentValue,
                 telefonoFieldHtml,
@@ -299,9 +299,9 @@
             app.alert.show('error_modultel', {
                 level: 'error',
                 autoClose: true,
-                messages: 'Favor de llenar los campos señalados.'
+                messages: 'Favor de llenar los campos se\u00F1alados.'
             });
-            if(this.$('.newTipotelefono').val()==''){
+            if(this.$('.newTipotelefono').val()=='' || this.$('.newTipotelefono').val()==null ){
                 this.$('.newTipotelefono').css('border-color', 'red');
             }else{
                 this.$('.newTipotelefono').css('border-color', '');
@@ -316,10 +316,10 @@
             }else{
                 this.$('.newTelefono').css('border-color', '');
             }
-            if(this.$('.newExtension').val().trim()==''){
-                this.$('.newExtension').css('border-color', 'red');
+            if(this.$('.newEstatus').val()==''){
+                this.$('.newEstatus').css('border-color', 'red');
             }else{
-                this.$('.newExtension').css('border-color', '');
+                this.$('.newEstatus').css('border-color', '');
             }
             return;
         }
