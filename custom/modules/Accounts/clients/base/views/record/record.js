@@ -68,7 +68,7 @@
         this.model.on('change:pais_nacimiento_c', this._doValidateProfesionRisk, this);
         this.model.on('change:origendelprospecto_c', this.changeLabelMarketing, this);
 
-        //Se añade función para esablecer phone_office
+        //Se añade función para establecer phone_office
         this.model.on('change:account_telefonos', this.setPhoneOffice, this);
         /*
          AF - 26/12/17
