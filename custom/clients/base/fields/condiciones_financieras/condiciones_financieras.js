@@ -20,13 +20,13 @@
 
     initialize: function (options) {
 
-        window.contador=0;        
+        window.contador=0;
         self = this;
         options = options || {};
         options.def = options.def || {};
 
         this._super('initialize', [options]);
-        
+
         var activo_list = app.lang.getAppListStrings('idactivo_list');
         var activo_keys = app.lang.getAppListKeys('idactivo_list');
         var activo_list_html = '<option value=""></option>';
