@@ -1097,22 +1097,21 @@
 
     ocultaFunc: function()
     {
-		_.each(this.fields,function(field)
-		{
-			$('[data-name="'+field.name+'"]').hide();
-		});
-		$('[data-name="name"]').show();
-		$('[data-name="tct_etapa_ddw_c"]').show();
-		$('[data-name="estatus_c"]').show();
-		$('[data-name="idsolicitud_c"]').show();
-		$('[data-name="account_name"]').show();
-		$('[data-name="tipo_producto_c"]').show();
-		$('[data-name="monto_c"]').show();
-		$('[data-name="assigned_user_name"]').show();
-
-
-		//Ocultando el panel de Oportunidad perdida
-        $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
+  		_.each(this.fields,function(field)
+  		{
+  			$('[data-name="'+field.name+'"]').hide();
+  		});
+  		$('[data-name="name"]').show();
+  		$('[data-name="tct_etapa_ddw_c"]').show();
+  		$('[data-name="estatus_c"]').show();
+  		$('[data-name="idsolicitud_c"]').show();
+  		$('[data-name="account_name"]').show();
+  		$('[data-name="tipo_producto_c"]').show();
+  		$('[data-name="monto_c"]').show();
+  		$('[data-name="assigned_user_name"]').show();
+      $('[data-name="picture"]').show();  
+		  //Ocultando el panel de Oportunidad perdida
+      $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
     },
 
     /*

@@ -20,8 +20,13 @@ $UNI2_URL = $sugar_config['uni2_url'];
             display: none;
         }
         body.tasks section.tasks,
-        body.detail section.detail {
+        body.detail  {
             display: block;
+        }
+        
+        section.detail {
+            display: block;
+            height: 90vh;
         }
         .v-tooltip {
             background-color: #323232;
@@ -69,7 +74,7 @@ $UNI2_URL = $sugar_config['uni2_url'];
 </header>
 
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
-<!-- Se agregan las credenciales de Vaddin para las peticiones, permitiendo las cookies de sesión -->
+<!-- Se agregan las credenciales de Vaddin para las peticiones, permitiendo las cookies de sesiï¿½n -->
 <script>
     XMLHttpRequest.prototype._originalSend = XMLHttpRequest.prototype.send;
     var sendWithCredentials = function(data) {
@@ -79,7 +84,7 @@ $UNI2_URL = $sugar_config['uni2_url'];
     XMLHttpRequest.prototype.send = sendWithCredentials;
 </script>
 
-<!-- Carga Widgets de Vaadin así como el archivo bootstrats.js -->
+<!-- Carga Widgets de Vaadin asï¿½ como el archivo bootstrats.js -->
 
 <script type="text/javascript"
         src="<?php echo $UNI2_URL; ?>VAADIN/vaadinBootstrap.js">

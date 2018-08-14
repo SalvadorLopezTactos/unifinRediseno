@@ -859,7 +859,7 @@
             if (enteredAge < 18) {
                 app.alert.show("fechaDeNacimientoCheck", {
                     level: "error",
-                    title: "Persona debe de ser mayor de 18 a�os.",
+                    title: "Persona debe de ser mayor de 18 a\u00F1os.",  //update
                     autoClose: false
                 });
                 errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
