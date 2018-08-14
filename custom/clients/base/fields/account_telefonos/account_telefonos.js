@@ -20,10 +20,11 @@
         'change .existingTelephono': 'updateExistingAddress',
         'blur .existingTelephono': 'blurExistingTelefono',
         'blur .newTelefono': 'blurExistingTelefono',
+        'keydown .newTelefono': 'keyDownNewExtension',
         'change .existingExtension': 'updateExistingAddress',
-        'blur .existingExtension': 'blurExistingTelefono',
-        'blur .newExtension': 'blurExistingTelefono',
-        'keydown .newExtension': 'keyDownNewExtension',
+        'blur .existingExtension': 'blurExtension',
+        'blur .newExtension': 'blurExtension',
+        //'keydown .newExtension': 'keyDownNewExtension',
         'change .existingSecuencia': 'updateExistingAddress',
         'change .existingEstatus': 'updateExistingAddress',
         'change .existingPais': 'updateExistingAddress',
@@ -251,45 +252,77 @@
      */
     addNewTelefono: function (evt) {
         if (!evt) return;
+        /*@Jesus Carrillo */
+        var expreg =/^[0-9]{8,10}$/;
 
-        var telefono = this.$(evt.currentTarget).val() || this.$('.newTelefono').val(),
-            currentValue,
-            telefonoFieldHtml,
-            $newTelefonoField;
+        if(this.$('.newTipotelefono').val()!='' && this.$('.newPais').val()!='' && expreg.test(this.$('.newTelefono').val()) &&
+            this.$('.newExtension').val().trim()!='') {
+            var telefono = this.$(evt.currentTarget).val() || this.$('.newTelefono').val(),
+                currentValue,
+                telefonoFieldHtml,
+                $newTelefonoField;
 
-        telefono = $.trim(telefono);
+            telefono = $.trim(telefono);
 
-        if ((telefono !== '') && (this._addNewTelefonoToModel(telefono))) {
-            // build the new email field
-            currentValue = this.model.get(this.name);
-            telefonoFieldHtml = this._buildTelefonoFieldHtml({
-                telefono: telefono,
-                extension: $('.newExtension').val(),
-                pais: $('.newPais').val(),
-                tipotelefono: $('.newTipotelefono').val(),
-                estatus: $('.newEstatus').val(),
-                principal: currentValue && (currentValue.length === 1)
-            });
+            if ((telefono !== '') && (this._addNewTelefonoToModel(telefono))) {
+                // build the new email field
+                currentValue = this.model.get(this.name);
+                telefonoFieldHtml = this._buildTelefonoFieldHtml({
+                    telefono: telefono,
+                    extension: $('.newExtension').val(),
+                    pais: $('.newPais').val(),
+                    tipotelefono: $('.newTipotelefono').val(),
+                    estatus: $('.newEstatus').val(),
+                    principal: currentValue && (currentValue.length === 1)
+                });
 
-            // append the new field before the new email input
-            $newTelefonoField = this._getNewEmailField()
-                .closest('.telefonos')
-                .before(telefonoFieldHtml);
+                // append the new field before the new email input
+                $newTelefonoField = this._getNewEmailField()
+                    .closest('.telefonos')
+                    .before(telefonoFieldHtml);
 
-            // add tooltips
-            //this.addPluginTooltips($newTelefonoField.prev());
+                // add tooltips
+                //this.addPluginTooltips($newTelefonoField.prev());
 
-            if (this.def.required && this._shouldRenderRequiredPlaceholder()) {
-                // we need to remove the required place holder now
-                var label = app.lang.get('LBL_REQUIRED_FIELD', this.module),
-                    el = this.$(this.fieldTag).last(),
-                    placeholder = el.prop('placeholder').replace('(' + label + ') ', '');
+                if (this.def.required && this._shouldRenderRequiredPlaceholder()) {
+                    // we need to remove the required place holder now
+                    var label = app.lang.get('LBL_REQUIRED_FIELD', this.module),
+                        el = this.$(this.fieldTag).last(),
+                        placeholder = el.prop('placeholder').replace('(' + label + ') ', '');
 
-                el.prop('placeholder', placeholder.trim()).removeClass('required');
+                    el.prop('placeholder', placeholder.trim()).removeClass('required');
+                }
             }
-        }
 
-        this._clearNewAddressField();
+            this._clearNewAddressField();
+        }else {
+            app.alert.show('error_modultel', {
+                level: 'error',
+                autoClose: true,
+                messages: 'Favor de llenar los campos señalados.'
+            });
+            if(this.$('.newTipotelefono').val()==''){
+                this.$('.newTipotelefono').css('border-color', 'red');
+            }else{
+                this.$('.newTipotelefono').css('border-color', '');
+            }
+            if(this.$('.newPais').val()==''){
+                this.$('.newPais').css('border-color', 'red');
+            }else{
+                this.$('.newPais').css('border-color', '');
+            }
+            if(!expreg.test(this.$('.newTelefono').val())){
+                this.$('.newTelefono').css('border-color', 'red');
+            }else{
+                this.$('.newTelefono').css('border-color', '');
+            }
+            if(this.$('.newExtension').val().trim()==''){
+                this.$('.newExtension').css('border-color', 'red');
+            }else{
+                this.$('.newExtension').css('border-color', '');
+            }
+            return;
+        }
     },
 
     /**
@@ -346,18 +379,45 @@
         }
     },
 
+    /*@Jesus Carrillo*/
+    blurExtension: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var class_name = $input[0].className,
+            field_name = $($input).attr('data-field');
+        if ($($input).val().trim() == '') {
+            app.alert.show('error_ext', {
+                level: 'error',
+                autoClose: true,
+                messages: 'Extensi\u00F3n Inv\u00E1lida.'
+            });
+            //$($input).focus();
+            $($input).css('border-color', 'red');
+            return;
+        }else{
+            $($input).css('border-color', '');
+        }
+
+    },
+
     blurExistingTelefono: function (evt) {
         if (!evt) return;
         var $input = this.$(evt.currentTarget);
         var class_name = $input[0].className,
             field_name = $($input).attr('data-field');
-        if ($.isNumeric($($input).val()) === false && $($input).val() != '') {
+        var expreg =/^[0-9]{8,10}$/;
+        //if ($.isNumeric($($input).val()) === false && $($input).val() != '') {
+        if((expreg.test($($input).val()))==false){
             app.alert.show('error_telefono', {
                 level: 'error',
                 autoClose: true,
-                messages: 'Telefono Invalido.'
+                messages: 'Tel\u00E9fono Inv\u00E1lido.'
             });
-            $($input).focus();
+            //$($input).focus();
+            $($input).css('border-color', 'red');
+            return;
+        }else{
+            $($input).css('border-color', '');
         }
 
     },
@@ -376,7 +436,7 @@
         if($.inArray(evt.keyCode,[110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,16,49,50,51,52,53,54,55,56,57,48,96,97,98,99,100,101,102,103,104,105]) < 0) {
             app.alert.show("Caracter Invalido", {
                 level: "error",
-                title: "Solo numeros son permitido en este campo.",
+                title: "Solo n\u00FAmeros son permitidos en este campo.",
                 autoClose: true
             });
             return false;
@@ -541,10 +601,15 @@
         this._getNewEmailField()
             .val('');
         $('.newPais').val('');
+        $('.newPais').css('border-color', '');
         $('.newExtension').val('');
+        $('.newExtension').css('border-color', '');
         $('.newTipotelefono').val('');
+        $('.newTipotelefono').css('border-color', '');
         $('.newEstatus').val('');
-        $('.newEstatus').val('');
+        $('.newEstatus').css('border-color', '');
+        $('.newTelefono').css('border-color', '');
+
     },
 
     /**

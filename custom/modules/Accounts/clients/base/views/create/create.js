@@ -202,6 +202,8 @@
 
         //add validation tasks
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
+        //@Jesus Carrillo
+        this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonos, this));
         this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
         this.model.on('change:pais_nacimiento_c', this.validaExtranjerosRFC, this);
         //this.model.on('change:rfc_c',this.validaFechaNacimientoDesdeRFC, this);
@@ -518,6 +520,41 @@
                 errors['account_telefonos'] = errors['account_telefonos'] || {};
                 errors['account_telefonos'].required = true;
             }
+        }
+        callback(null, fields, errors);
+    },
+
+    validatelefonos: function (fields, errors, callback) {
+        var expreg =/^[0-9]{8,10}$/;
+        if(this.$('.existingTipotelefono').val()=='' && this.$('.existingPais').val()=='' &&
+            !expreg.test(this.$('.existingTelephono').val()) && this.$('.existingExtension').val().trim()=='') {
+            app.alert.show('error_modultel', {
+                level: 'error',
+                autoClose: true,
+                messages: 'Favor de llenar los campos señalados.'
+            });
+            if(!expreg.test(this.$('.existingTelephono').val())){
+                this.$('.existingTelephono').css('border-color', 'red');
+            }else{
+                this.$('.existingTelephono').css('border-color', '');
+            }
+            if(this.$('.existingPais').val()==''){
+                this.$('.existingPais').css('border-color', 'red');
+            }else{
+                this.$('.existingPais').css('border-color', '');
+            }
+            if(this.$('.existingTipotelefono').val()==''){
+                this.$('.existingTipotelefono').css('border-color', 'red');
+            }else{
+                this.$('.existingTipotelefono').css('border-color', '');
+            }
+            if(this.$('.existingExtension').val().trim()==''){
+                this.$('.existingExtension').css('border-color', 'red');
+            }else{
+                this.$('.existingExtension').css('border-color', '');
+            }
+            return;
+
         }
         callback(null, fields, errors);
     },

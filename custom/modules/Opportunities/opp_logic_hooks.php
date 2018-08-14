@@ -68,9 +68,9 @@
                     $bean->idsolicitud_c = $numeroDeFolio;
                 }
                 if($bean->tct_etapa_ddw_c=='SI') {//@jesus
-                    $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $bean->name;
+                    $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $bean->account_name;
                 }else{
-                    $bean->name = "SOLICITUD " . $numeroDeFolio . " - " . $bean->name;
+                    $bean->name = "SOLICITUD " . $numeroDeFolio . " - " . $bean->account_name;
                 }
             }elseif ($bean->tct_etapa_ddw_c!='SI'){
                 $bean->name = str_replace("PRE - ","",$bean->name) ;
