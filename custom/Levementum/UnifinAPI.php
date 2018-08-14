@@ -444,10 +444,14 @@ class UnifinAPI
                     if ($cliente['UNI2_CTE_001_InsertaPersonaResult']['bResultado'] == true){
                         //Actualizamos el registro a tipo Cliente
                         $tipo_registro = (($objecto->tipo_registro_c == 'Persona' || $objecto->tipo_registro_c == 'Proveedor') ? $objecto->tipo_registro_c : 'Cliente');
-                        $objecto->tipo_registro_c = $tipo_registro;
+                        /*
+                            AF - 2018/08/14
+                            Omite actualización de tipo de registro
+                        */
+                        //$objecto->tipo_registro_c = $tipo_registro;
                         $objecto->sincronizado_unics_c = '1';
                         global $db;
-                        $query = " UPDATE accounts_cstm SET idcliente_c = '{$objecto->idcliente_c}', tipo_registro_c = '$tipo_registro', sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
+                        $query = " UPDATE accounts_cstm SET idcliente_c = '{$objecto->idcliente_c}', /*tipo_registro_c = '$tipo_registro', */sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
                         $queryResult = $db->query($query);
 
                         $this->usuarioProveedores($objecto);

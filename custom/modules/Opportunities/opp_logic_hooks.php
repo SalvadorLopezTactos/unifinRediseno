@@ -57,6 +57,9 @@
         {
 
 			      //Operaciones de solicitud de crédito
+            //Recupera cuenta
+            $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
+
             if(($bean->idsolicitud_c == 0 || empty($bean->idsolicitud_c)) && $bean->tipo_operacion_c == 1) {
                 $GLOBALS['log']->fatal('>>>>>>>la funcion crearFolioSolici.... ha sido ejecutada<<<<<<<' );
                 $callApi = new UnifinAPI();
@@ -68,9 +71,9 @@
                     $bean->idsolicitud_c = $numeroDeFolio;
                 }
                 if($bean->tct_etapa_ddw_c=='SI') {//@jesus
-                    $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $bean->account_name;
+                    $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
                 }else{
-                    $bean->name = "SOLICITUD " . $numeroDeFolio . " - " . $bean->account_name;
+                    $bean->name = "SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
                 }
             }elseif ($bean->tct_etapa_ddw_c!='SI'){
                 $bean->name = str_replace("PRE - ","",$bean->name) ;
@@ -78,7 +81,7 @@
             /* @Jesus Carrillo
              Convertir a prospecto  interesado , si la cuenta inicial es prospecto
              */
-            $beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
+            //$beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
             if($beanCuenta->tipo_registro_c=='Prospecto'){
                 $beanCuenta->subtipo_cuenta_c='Interesado';
                 $beanCuenta->save();
@@ -153,7 +156,7 @@
         global $db, $current_user;
 
         $GLOBALS['log']->fatal('-Update: '. $args['isUpdate'] . '--Etapa: ' . $bean->tct_etapa_ddw_c);
-        if($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI'){//@jesus
+        if(($args['isUpdate']==1 && $bean->tct_etapa_ddw_c=='SI') || empty($bean->id_process_c)){//@jesus
             if (($bean->id_process_c == 0 || $bean->id_process_c == null || empty($bean->id_process_c))/* && $bean->estatus_c == 'P' */ && $bean->tipo_operacion_c == '1') {
             //Hay operaciones vigentes?
             // ** JSR INICIO
