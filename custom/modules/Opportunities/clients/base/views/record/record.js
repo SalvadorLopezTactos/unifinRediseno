@@ -1,5 +1,9 @@
 ({
-    extendsFrom: 'RecordView',
+  extendsFrom: 'RecordView',
+  
+  events: {
+    'click [name=cancel_button]': 'cancelClicked',
+  },
 
 	initialize: function (options) {
 		self = this;
@@ -64,6 +68,11 @@
 		this.model.on('sync', this._render, this);
 
 	},
+
+    cancelClicked: function () {
+       this._super('cancelClicked');
+       window.contador=0;
+    },
 
     _renderHtml : function()
     {
