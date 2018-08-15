@@ -33,6 +33,7 @@
         'click  .removeEmail': 'removeExistingAddress',
         'click  .addTelefono': 'addNewTelefono',
     },
+    
     _flag2Deco: {
         principal: {lbl: "LBL_EMAIL_PRIMARY", cl: "primary"},
         opt_out: {lbl: "LBL_EMAIL_OPT_OUT", cl: "opted-out"},
@@ -40,13 +41,13 @@
     },
     plugins: ['Tooltip', 'ListEditable', 'EmailClientLaunch'],
 
-
     /**
      * @inheritdoc
      * @param options
      */
     initialize: function (options) {
         self = this;
+        window.ids = [];
         options = options || {};
         options.def = options.def || {};
 
@@ -574,6 +575,7 @@
     _removeExistingAddressInModel: function (index) {
         var existingAddresses = app.utils.deepCopy(this.model.get(this.name)),
             primaryAddressRemoved = !!existingAddresses[index]['principal'];
+        window.ids.push(existingAddresses[index]['id']);
 
         //Reject this index from existing addresses
         existingAddresses = _.reject(existingAddresses, function (emailInfo, i) {
@@ -588,7 +590,6 @@
                 address.principal = true;
             }
         }
-
         this.model.set(this.name, existingAddresses);
         return primaryAddressRemoved;
     },
