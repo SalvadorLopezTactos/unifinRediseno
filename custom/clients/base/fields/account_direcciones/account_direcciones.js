@@ -245,6 +245,8 @@
 
         this.fiscalCounter = 0;
 
+        this.counterEmptyFields=0;
+
         this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionFiscal, this));
         this.model.addValidationTask('check_multiple_fiscalCorrespondencia', _.bind(this._doValidateDireccionFiscalCorrespondencia, this));
         //Ajuste Dirección Nacional
@@ -293,7 +295,12 @@
             if (String($(this).find('option:selected').text()).toLowerCase().indexOf('fiscal') >= 0) {
                 fiscalCounter = parseInt(fiscalCounter + 1);
             }
+
         });
+
+        if(dropdown_value==""){
+            this.counterEmptyFields++;
+        }
 
         //contar las direcciones fiscales nuevas
         $('.newIndicador').each(function(){
@@ -370,54 +377,59 @@
     },
 
     _doValidateDireccionFiscalCorrespondencia: function (fields, errors, callback){
-        if(this.model.get("tipo_registro_c") == "Cliente" || this.model.get("subtipo_cuenta_c") == "Integracion de Expediente" || this.model.get("subtipo_cuenta_c") == "Credito")
-        {
-                 var correspondencia = false;
-                 var fiscal = false;
-                 var valuesI = [];
-                 var self = this;
-              _.each(this.model.get("account_direcciones"), function(direccion, key) {
 
-                //Recupera valores por indicador
-                valuesI = self._getIndicador(direccion.indicador,null);
-                //Valida Fiscal
-                if(valuesI.includes("2")){
-                    fiscal = true;
-                }
-                //Valida Correspondencia
-                if(valuesI.includes("1")){
-                    correspondencia = true;
-                }
+        if(this.counterEmptyFields==0){
 
-                /*if(direccion.indicador == "1"){
-                    correspondencia = true;
-                }
-                if(direccion.indicador == "5"){
-                    correspondencia = true;
-                }
-                if(direccion.indicador == "2"){
-                    fiscal = true;
-                }
-                if(direccion.indicador == "6"){
-                    fiscal = true;
-                }
-                if(direccion.indicador == "3"){
-                    fiscal = true;
-                    correspondencia = true;
-                }
-                if(direccion.indicador == "7"){
-                    fiscal = true;
-                    correspondencia = true;
-                }*/
+            if(this.model.get("tipo_registro_c") == "Cliente" || this.model.get("subtipo_cuenta_c") == "Integracion de Expediente" || this.model.get("subtipo_cuenta_c") == "Credito")
+            {
+                var correspondencia = false;
+                var fiscal = false;
+                var valuesI = [];
+                var self = this;
+                _.each(this.model.get("account_direcciones"), function(direccion, key) {
 
-            });
+                    //Recupera valores por indicador
+                    valuesI = self._getIndicador(direccion.indicador,null);
+                    //Valida Fiscal
+                    if(valuesI.includes("2")){
+                        fiscal = true;
+                    }
+                    //Valida Correspondencia
+                    if(valuesI.includes("1")){
+                        correspondencia = true;
+                    }
 
-            if(fiscal == false || correspondencia == false){
-                var alertOptions = {title: "Se requiere de al menos una direccion fiscal y una de correspondencia.", level: "error"};
-                app.alert.show('validation', alertOptions);
-                errors['account_direcciones'] = errors['account_direcciones'] || {};
-                errors['account_direcciones'].required = true;
+                    /*if(direccion.indicador == "1"){
+                     correspondencia = true;
+                     }
+                     if(direccion.indicador == "5"){
+                     correspondencia = true;
+                     }
+                     if(direccion.indicador == "2"){
+                     fiscal = true;
+                     }
+                     if(direccion.indicador == "6"){
+                     fiscal = true;
+                     }
+                     if(direccion.indicador == "3"){
+                     fiscal = true;
+                     correspondencia = true;
+                     }
+                     if(direccion.indicador == "7"){
+                     fiscal = true;
+                     correspondencia = true;
+                     }*/
+
+                });
+
+                if(fiscal == false || correspondencia == false){
+                    var alertOptions = {title: "Se requiere de al menos una direccion fiscal y una de correspondencia.", level: "error"};
+                    app.alert.show('validation', alertOptions);
+                    errors['account_direcciones'] = errors['account_direcciones'] || {};
+                    errors['account_direcciones'].required = true;
+                }
             }
+
         }
 
         callback(null, fields, errors);
@@ -739,6 +751,10 @@
         var cp=evt.currentTarget.value;
         var str_length=cp.length;
         var self = this;
+
+        if(str_length==0){
+            this.counterEmptyFields++;
+        }
 
         var pattern = /^\d+$/;
         var isNumber= pattern.test(cp);
@@ -1653,6 +1669,7 @@
              .addClass('active');
              }
              */
+            this.counterEmptyFields++;
         }
         else {
             this._updateExistingDireccionInModel(index, newDireccion, field_name);

@@ -33,6 +33,8 @@
         this.model.addValidationTask('tipo_proveedor_requerido', _.bind(this.validaProveedorRequerido, this));
         this.model.addValidationTask('check_info', _.bind(this.doValidateInfoReq, this));
         this.model.addValidationTask('sectoreconomico', _.bind(this.sectoreconomico, this));
+        this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
+
 
         /*
          Eduardo Carrasco
@@ -1532,6 +1534,68 @@
         if (this.model.get('tipodepersona_c') != 'Persona Fisica' && this.model.get('sectoreconomico_c') == '' && (this.model.get('tipo_registro_c') == 'Cliente' || this.model.get('tipo_registro_c') == 'Proveedor')) {
             errors['sectoreconomico_c'] = "Error: Favor de verificar los errores";
             errors['sectoreconomico_c'].required = true;
+        }
+        callback(null, fields, errors);
+    },
+
+    validadirecc: function (fields, errors, callback) {
+        var cont=0;
+
+        $('.existingIndicador').each(function (index) {
+            if($(this).val()==''){
+                cont++;
+                $('#s2id_existingMulti1 ul.select2-choices').eq(index).css('border-color', 'red');
+            }else{
+                $('#s2id_existingMulti1 ul.select2-choices').eq(index).css('border-color', '');
+            }
+        });
+        $('.existingPostal').each(function (index) {
+            if($(this).val()==''){
+                cont++;
+                //$(this).css('border-color', 'red');
+                $(this).eq(index).css('border-color', 'red');
+            }else{
+                //$(this).css('border-color', '');
+                $(this).eq(index).css('border-color', '');
+            }
+        });
+        $('.existingCalle').each(function (index) {
+            if($(this).val().trim()==''){
+                cont++;
+                //$(this).css('border-color', 'red');
+                //$(this).eq(index).css('border-color', 'red');
+                $('.existingCalle').eq(index).css('border-color', 'red');
+            }else{
+                $(this).eq(index).css('border-color', '');
+            }
+        });
+        $('.existingNumExt').each(function (index) {
+            if($(this).val().trim()==''){
+                cont++;
+                //$(this).css('border-color', 'red');
+                $(this).eq(index).css('border-color', 'red');
+            }else{
+                //$(this).css('border-color', '');
+                $(this).eq(index).css('border-color', '');
+            }
+        });
+
+        if(cont>0){
+            /*
+             app.alert.show('error_modultel', {
+             level: 'error',
+             autoClose: true,
+             messages: 'Favor de llenar los campos se\u00F1alados.'
+             });
+             */
+            app.alert.show("empty_fields_dire", {
+                level: "error",
+                title: "Favor de llenar los campos se\u00F1alados.",
+                autoClose: true
+            });
+            errors['dire_direccion'] = errors['dire_direccion'] || {};
+            errors['dire_direccion'].required = true;
+
         }
         callback(null, fields, errors);
     },
