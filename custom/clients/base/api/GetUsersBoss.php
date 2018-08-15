@@ -106,6 +106,10 @@ class GetUsersBoss extends SugarApi
                 }
             }
         }
+
+        if ($current_user->is_admin == true) {
+          $flag = true;
+        }
         return $flag;
 
     }

@@ -371,7 +371,7 @@
 
         self = this;
 
-        if ( (this.model.get('account_id') != "" || this.model.get('account_id') != null) && (this.model.get('tipo_registro_c') == 'Prospecto' || this.model.get('tipo_registro_c') == 'Cliente') )
+        if ( this.model.get('account_id') != "" || this.model.get('account_id') != null)
         {
             app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/1'), null, {
                 success: _.bind(function (data) {
@@ -1109,7 +1109,7 @@
   		$('[data-name="tipo_producto_c"]').show();
   		$('[data-name="monto_c"]').show();
   		$('[data-name="assigned_user_name"]').show();
-      $('[data-name="picture"]').show();  
+      $('[data-name="picture"]').show();
 		  //Ocultando el panel de Oportunidad perdida
       $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
     },

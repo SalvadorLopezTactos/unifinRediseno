@@ -204,6 +204,7 @@
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         //@Jesus Carrillo
         this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonos, this));
+        this.model.addValidationTask('check_direcciones', _.bind(this.validadirecc, this));
         this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
         this.model.on('change:pais_nacimiento_c', this.validaExtranjerosRFC, this);
         //this.model.on('change:rfc_c',this.validaFechaNacimientoDesdeRFC, this);
@@ -524,38 +525,97 @@
         callback(null, fields, errors);
     },
 
+    //@Jesus Carrillo
     validatelefonos: function (fields, errors, callback) {
         var expreg =/^[0-9]{8,10}$/;
-        if(this.$('.existingTipotelefono').val()=='' && this.$('.existingPais').val()=='' &&
-            !expreg.test(this.$('.existingTelephono').val()) && this.$('.existingExtension').val().trim()=='') {
-            app.alert.show('error_modultel', {
-                level: 'error',
-                autoClose: true,
-                messages: 'Favor de llenar los campos señalados.'
-            });
-            if(!expreg.test(this.$('.existingTelephono').val())){
-                this.$('.existingTelephono').css('border-color', 'red');
-            }else{
-                this.$('.existingTelephono').css('border-color', '');
-            }
-            if(this.$('.existingPais').val()==''){
-                this.$('.existingPais').css('border-color', 'red');
-            }else{
-                this.$('.existingPais').css('border-color', '');
-            }
-            if(this.$('.existingTipotelefono').val()==''){
-                this.$('.existingTipotelefono').css('border-color', 'red');
-            }else{
-                this.$('.existingTipotelefono').css('border-color', '');
-            }
-            if(this.$('.existingExtension').val().trim()==''){
-                this.$('.existingExtension').css('border-color', 'red');
-            }else{
-                this.$('.existingExtension').css('border-color', '');
-            }
-            return;
+        var cont=0;
 
+            $('.existingTelephono').each(function () {
+                if(!expreg.test($(this).val())){
+                    cont++;
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+            $('.existingPais').each(function () {
+                if($(this).val()==''){
+                    cont++;
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+            $('.existingTipotelefono').each(function () {
+                if($(this).val()==''){
+                    cont++;
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+            $('.existingEstatus').each(function () {
+                if($(this).val()==''){
+                    cont++;
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+
+        if(cont>0){
+                app.alert.show('error_modultel', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'Favor de llenar los campos se\u00F1alados.'
+                });
         }
+        callback(null, fields, errors);
+    },
+
+    validadirecc: function (fields, errors, callback) {
+            var cont=0;
+
+            $('.existingIndicador').each(function (index) {
+                if($(this).val()==''){
+                    cont++;
+                    $('#s2id_existingMulti1 ul.select2-choices').eq(index).css('border-color', 'red');
+                }else{
+                    $('#s2id_existingMulti1 ul.select2-choices').eq(index).css('border-color', '');
+                }
+            });
+            $('.existingPostal').each(function () {
+                if($(this).val()==''){
+                    cont++;
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+            $('.existingCalle').each(function () {
+                if($(this).val().trim()==''){
+                    cont++;
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+            $('.existingNumExt').each(function () {
+                if($(this).val().trim()==''){
+                    cont++;
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+
+            if(cont>0){
+                app.alert.show('error_modultel', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'Favor de llenar los campos se\u00F1alados.'
+                });
+            }
         callback(null, fields, errors);
     },
 
