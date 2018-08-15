@@ -220,10 +220,23 @@
                                             _.each(data.records[0], function (data_value, data_index) {
                                                 if(campo == data_index) {
                                                     if(data_value == "" || data_value == null){
-                                                        self.RequeridosFaltantes.push(data_index);
+
+
+                                                        var pr=app.metadata.getField({module:'Accounts',name:data_index});
+                                                        //pr.labelValue;
+                                                        //console.log("Valores campos Ja  " + data_index + " su etiqueta  " + pr.labelValue);
+
+                                                        self.RequeridosFaltantes.push(pr.labelValue);
+
                                                     }
                                                 }
                                             });
+
+                                           // console.log("Repetidos  "+ self.RequeridosFaltantes);
+                                           // console.log("sin repetir  "+ self.RequeridosFaltantes.unique());
+                                            self.RequeridosFaltantes=$.unique(self.RequeridosFaltantes);
+
+										console.log("lista "+self.RequeridosFaltantes);
                                         }
                                         //jescamilla Process SubValidaciones (AND)
                                         if (rule_index == 'SubValidaciones') {
