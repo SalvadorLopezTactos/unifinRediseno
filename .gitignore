@@ -7,6 +7,7 @@
 /custom/history
 /custom/modules/*/Ext
 /custom/blowfish
+/upload/*
 /.idea/
 /.DS_Store
 
