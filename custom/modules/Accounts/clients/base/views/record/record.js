@@ -1,4 +1,4 @@
-({
+  ({
     extendsFrom: 'RecordView',
 
     /**
@@ -239,9 +239,21 @@
     refresca: function () {
         var telefonos = this.getField('account_telefonos');
         if (telefonos.action !== "edit") {
-            this.render();
+           this.render();
         }
     },
+
+    borraTel: function () {
+      var delids = window.ids;
+      for (i = 0; i < delids.length; i++) {
+        var idtel = delids[i];
+        app.api.call('delete', app.api.buildURL('Tel_Telefonos/'+idtel), null, {
+          success: _.bind(function (data) {
+            console.log(app.api.buildURL('Tel_Telefonos/'+idtel));
+          },this),
+        });
+      }
+    },  
 
     handleCancel: function () {
         var account_telefonos = this.model._previousAttributes.account_telefonos;
@@ -857,6 +869,7 @@
         this.context.on('button:regresa_lead:click', this.regresa_leadClicked, this);
         this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
+        this.context.on('button:save_button:click', this.borraTel, this);
     },
 
     /*
