@@ -71,19 +71,25 @@ class DropdownValuesHelper{
             $cedente = $cedente==1?32:0;
             $deudor = $deudor==1?64:0;
     	switch ($stringValue){
-			case 'Prospecto': 
-				$tipoCliente = ($stringStatus == 'Interesado' ? 1 : 0);
+      /*
+        AF - 2018-08-15
+        Modificación para establecer Mismas validación en Prospecto a Cliente
+      */
+			case 'Prospecto':
+				//$tipoCliente = ($stringStatus == 'Interesado' ? 1 : 0);
+        $tipoCliente = ($EsProveedor == 1 ? 3 : 1);
+                $tipoCliente = $tipoCliente + ($cedente + $deudor);
 				break;
-			case 'Cliente': 
+			case 'Cliente':
 			 	$tipoCliente = ($EsProveedor == 1 ? 3 : 1);
                 $tipoCliente = $tipoCliente + ($cedente + $deudor);
                 //$GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <czaragoza> : cedente: " . $cedente. " deudor: " . $deudor);
                 //$GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <czaragoza> : Tipo Cliente: " . $tipoCliente);
                 break;
-			case 'Proveedor': 
+			case 'Proveedor':
 				$tipoCliente = 2;
 				break;
-			case 'Persona': 
+			case 'Persona':
 				if ($cedente > 1 || $deudor > 1){
 					 $tipoCliente = $cedente + $deudor;
 				}else{
@@ -137,7 +143,7 @@ class DropdownValuesHelper{
         $IdtoSanitize = substr($IdtoSanitize, -5, 5);
         return $IdtoSanitize;
     }
-	
+
 	/***CVV INICIO***/
     public function getUserName($Id){
 		global $db;
@@ -146,7 +152,7 @@ SELECT user_name FROM users where id = '{$Id}'
 SQL;
 		$queryResult = $db->getOne($query);
         return $queryResult;
-    }	
+    }
 	/***CVV FIN***/
     /*** ALI INICIO ***/
     public function getIdTipoRelacion($descRelacion){
@@ -215,6 +221,3 @@ SQL;
         }
     }
 }
-
-
-
