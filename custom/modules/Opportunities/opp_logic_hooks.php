@@ -82,7 +82,7 @@
              Convertir a prospecto  interesado , si la cuenta inicial es prospecto
              */
             //$beanCuenta = BeanFactory::retrieveBean('Accounts', $bean->account_id);
-            if($beanCuenta->tipo_registro_c=='Prospecto'){
+            if($beanCuenta->tipo_registro_c=='Prospecto' && $beanCuenta->subtipo_cuenta_c == 'Contactado'){
                 $beanCuenta->subtipo_cuenta_c='Interesado';
                 $beanCuenta->save();
             }
