@@ -176,6 +176,19 @@ array (
             'label' => 'LBL_CAC',
           ),
         ),
+        11 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_altaproveedor_chk_c',
+            'label' => 'LBL_TCT_ALTAPROVEEDOR_CHK',
+          ),
+          1 => 
+          array (
+            'name' => 'tct_alta_clientes_chk_c',
+            'label' => 'LBL_TCT_ALTA_CLIENTES_CHK',
+          ),
+        ),
       ),
       'lbl_editview_panel1' => 
       array (

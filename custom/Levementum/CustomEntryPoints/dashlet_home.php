@@ -107,9 +107,16 @@ $DASHLET_URL = $sugar_config['dashlet_url'];
         }
 
         body.tasks section.tasks,
-        body.detail section.detail {
+        body.detail {
 
             display: block;
+
+        }
+
+        section.detail {
+
+            display: block;
+            height: 90vh;
 
         }
 
@@ -419,4 +426,3 @@ $DASHLET_URL = $sugar_config['dashlet_url'];
 </body>
 
 </html>
-

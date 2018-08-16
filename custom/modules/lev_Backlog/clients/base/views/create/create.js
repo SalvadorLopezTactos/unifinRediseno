@@ -26,6 +26,13 @@
         this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
         this.model.addValidationTask('check_tipo_cliente', _.bind(this._ValidateTipo, this));
 
+        /*@author Victor.Martinez
+         * 23-07-2018
+         * Valida si el cliente cuenta con al menos una solicitud de los tipos (Linea Nueva o Ratificacion/Incremento
+         */
+        this.model.addValidationTask('check_solicitud', _.bind(this._ValidateSolicitud, this));
+        this.model.addValidationTask('check_existingBL', _.bind(this._ValidateExistingBL, this));
+
         /*
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
         usuario.fetch({
@@ -129,6 +136,106 @@
         });
     },
 
+        /*@author Victor.Martinez
+        * 23-07-2018
+        * Valida que el cliente tenga solictud de tipos "Linea nueva", "Ractificación/Incremento" o "Ambas"
+        */
+        _ValidateSolicitud:function(fields, errors, callback){
+
+            self = this;
+            var accountid=this.model.get('account_id_c');
+            //console.log('sccount_id: '. accountid )
+            if (accountid) {
+                app.api.call('GET', app.api.buildURL('Accounts/'+accountid+'/link/opportunities', null, null, {
+                    "filter":[
+                        {
+                            $or:[
+                                {
+                                    "tipo_de_operacion_c":"LINEA_NUEVA"
+                                },
+                                {
+                                    "tipo_de_operacion_c":"RATIFICACION_INCREMENTO"
+                                }
+                            ]
+                        }
+                    ]
+                }), null, {
+                    success: _.bind(function (data){
+
+                        if (data.records.length<1) {
+                            app.error.errorName2Keys[''] = '';
+                            errors[''] = errors[''] || {};
+                            errors[''] = errors[''] || {};
+                            errors[''].custom_message1 = true;
+                            errors[''].required = true;
+                            app.alert.show('validaSolicitudes', {
+                                level: 'error',
+                                messages: 'Para crear un Backlog es necesario que el cliente cuente m&iacutenimo con una Pre-Solicitud de l&iacutenea'
+                            });
+                        }
+                        callback(null, fields, errors)
+
+                    }, self)
+                });
+            }else {callback(null, fields, errors)}
+        },
+
+    _ValidateExistingBL:function(fields, errors, callback){
+
+        //var id_account=$('input[name="cliente"]').val();
+
+        var self=this;
+
+        var id_account=this.model.get('account_id_c');
+        var mes=this.model.get('mes');
+        var anio=this.model.get('anio');
+
+        if(id_account && id_account != '' && id_account.length>0){
+
+
+            var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes+'&filter[2][anio][$equals]='+anio+'&fields=id,mes,estatus_de_la_operacion',
+                null, null, null);
+
+
+            app.api.call('GET', bl_url, {}, {
+                success: _.bind(function (data) {
+
+                    if(data!=null){
+                        var meses =['0','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+                        if(data.records.length>0){
+
+                            app.alert.show('error_bl_mes', {
+                                level: 'error',
+                                messages: 'Esta Cuenta ya posee un backlog en el mes: '+meses[data.records[0].mes],
+                                autoClose: false
+                            });
+                            app.error.errorName2Keys['custom_message1'] = 'Esta Cuenta ya posee un backlog en el mes: '+meses[data.records[0].mes];
+                            errors['cliente'] = errors['cliente'] || {};
+                            errors['cliente'].custom_message1 = true;
+
+                        }
+
+                    }
+
+                    callback(null, fields, errors);
+
+                },self),
+
+            });
+
+        }else{
+
+            app.error.errorName2Keys['custom_message1'] = 'La cuenta ya posee un backlog en el mes establecido';
+            errors['cliente'] = errors['cliente'] || {};
+            errors['cliente'].custom_message1 = true;
+            errors['cliente'].required = true;
+
+            callback(null, fields, errors);
+        }
+
+
+    },
+
     getCurrentYearMonth: function(stage){
 
         var currentYear = (new Date).getFullYear();
@@ -144,26 +251,67 @@
             currentMonth += 2;
         }
 
+        /*
+          @AF - 2018-07-16
+          Ajuste: Se deben mostrar los 3 meses siguientes y sólo el año correspondiente.
+                  Si se incluyen meses del siguiente año, agregar año futuro a lista de valores.
+        */
+
+        //Valida número de mes actual
+        var limitMonth = currentMonth + 2;
+        var nextMonth = 0;
+        var nextYear = currentYear;
+        if (limitMonth > 12) {
+          nextMonth = limitMonth - 12;
+          nextYear = currentYear + 1;
+        }
+
+        //Valida Año
         var opciones_year = app.lang.getAppListStrings('anio_list');
         Object.keys(opciones_year).forEach(function(key){
+            //Quita años previos
             if(key < currentYear){
                 delete opciones_year[key];
             }
+            //Habilita años futuros
+            if(key > nextYear){
+                delete opciones_year[key];
+            }
+
         });
+        //Establece valores para año
         this.model.fields['anio'].options = opciones_year;
+        // if (this.model.get("anio")== "") {
+        //     this.model.set("anio",currentYear);
+        // }
+
+        //Valida Meses
         var opciones_mes = app.lang.getAppListStrings('mes_list');
-        if(this.model.get("anio") <= currentYear){
-            Object.keys(opciones_mes).forEach(function(key){
+        //Quita mese para año futuro
+        if(this.model.get("anio") > currentYear){
+          Object.keys(opciones_mes).forEach(function(key){
                 if(key != ''){
-                    if(key < currentMonth){
+                    if(key > nextMonth){
                         delete opciones_mes[key];
                     }
                 }
-            });
+          });
+        }
+        //Quita mese para año actual
+        if(this.model.get("anio") == currentYear || this.model.get("anio")==""){
+          Object.keys(opciones_mes).forEach(function(key){
+                if(key != ''){
+                    //Quita meses fuera de rango(3 meses)
+                    if(key < currentMonth || key >limitMonth ){
+                        delete opciones_mes[key];
+                    }
+                }
+          });
         }
 
         this.model.fields['mes'].options = opciones_mes;
-        this.model.set("mes", '');
+
+        //this.model.set("mes", '');
         if(stage != "loading"){
             this.render();
         }
@@ -282,8 +430,8 @@
     },
 
     _ValidateAmount: function (fields, errors, callback){
-        //CVV evaluamos si el monto disponible alcanza para la operaci�n
-        //console.log("Evaluamos si el monto disponible alcanza para la operaci�n");
+        //CVV evaluamos si el monto disponible alcanza para la operaci�n
+        //console.log("Evaluamos si el monto disponible alcanza para la operaci�n");
         var MontoOperar = this.model.get("monto_comprometido") - this.model.get("renta_inicial_comprometida");
         var disponible = this.model.get("monto_original");
         //console.log("Disponible: " + disponible);
@@ -299,7 +447,7 @@
         if (parseFloat(this.model.get('monto_comprometido')) <= 0)
         {
             errors['monto_comprometido'] = errors['monto_comprometido'] || {};
-            errors['monto_comprometido'].required = true;    
+            errors['monto_comprometido'].required = true;
         }
 
         /*
@@ -321,7 +469,7 @@
 
             app.alert.show('tipo de persona', {
                 level: 'error',
-                messages: 'Para poder generar una operaci�n, la persona debe ser un cliente o prospecto.',
+                messages: 'Para poder generar una operaci\u00F3n, la persona debe ser un cliente o prospecto.',
                 autoClose: false
             });
         }

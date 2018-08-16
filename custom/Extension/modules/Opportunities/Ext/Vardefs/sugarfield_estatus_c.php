@@ -1,10 +1,9 @@
 <?php
- // created: 2018-03-06 19:23:02
-$dictionary['Opportunity']['fields']['estatus_c']['labelValue']='Estatus';
+ // created: 2018-07-19 10:57:21
+$dictionary['Opportunity']['fields']['estatus_c']['labelValue']='SubEtapa';
 $dictionary['Opportunity']['fields']['estatus_c']['dependency']='';
-$dictionary['Opportunity']['fields']['estatus_c']['readonly'] = true;
 $dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']=array (
-  'trigger' => 'tipo_operacion_c',
+  'trigger' => 'tct_etapa_ddw_c',
   'values' => 
   array (
     1 => 
@@ -44,6 +43,39 @@ $dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']=array (
       1 => 'CA',
       2 => 'AL',
       3 => 'T',
+    ),
+    'SI' => 
+    array (
+      0 => '',
+      1 => 'K',
+    ),
+    'P' => 
+    array (
+      0 => 'PE',
+      1 => 'P',
+      2 => 'DP',
+      3 => 'K',
+    ),
+    'C' => 
+    array (
+      0 => 'BC',
+      1 => 'CC',
+      2 => 'RF',
+      3 => 'EF',
+      4 => 'E',
+      5 => 'RM',
+      6 => 'SC',
+      7 => 'D',
+      8 => 'CN',
+    ),
+    'CL' => 
+    array (
+      0 => 'N',
+      1 => 'R',
+    ),
+    'R' => 
+    array (
+      0 => 'CM',
     ),
   ),
 );
