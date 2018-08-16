@@ -1567,10 +1567,10 @@
             if($(this).val()==''){
                 cont++;
                 //$(this).css('border-color', 'red');
-                $(this).eq(index).css('border-color', 'red');
+                $('.existingPostal').eq(index).css('border-color', 'red');
             }else{
                 //$(this).css('border-color', '');
-                $(this).eq(index).css('border-color', '');
+                $('.existingPostal').eq(index).css('border-color', '');
             }
         });
         $('.existingCalle').each(function (index) {
@@ -1580,17 +1580,17 @@
                 //$(this).eq(index).css('border-color', 'red');
                 $('.existingCalle').eq(index).css('border-color', 'red');
             }else{
-                $(this).eq(index).css('border-color', '');
+                $('.existingCalle').eq(index).css('border-color', '');
             }
         });
         $('.existingNumExt').each(function (index) {
             if($(this).val().trim()==''){
                 cont++;
                 //$(this).css('border-color', 'red');
-                $(this).eq(index).css('border-color', 'red');
+                $('.existingNumExt').eq(index).css('border-color', 'red');
             }else{
                 //$(this).css('border-color', '');
-                $(this).eq(index).css('border-color', '');
+                $('.existingNumExt').eq(index).css('border-color', '');
             }
         });
 
