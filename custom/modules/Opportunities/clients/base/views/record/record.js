@@ -1,9 +1,5 @@
 ({
-  extendsFrom: 'RecordView',
-  
-  events: {
-    'click [name=cancel_button]': 'cancelClicked',
-  },
+    extendsFrom: 'RecordView',
 
 	initialize: function (options) {
 		self = this;
@@ -69,11 +65,6 @@
 
 	},
 
-    cancelClicked: function () {
-       this._super('cancelClicked');
-       window.contador=0;
-    },
-
     _renderHtml : function()
     {
       if(this.model.get('id_process_c') !== "")
@@ -82,8 +73,10 @@
         self.noEditFields.push('condiciones_financieras');
       }
 
-
-      this.noEditFields.push('usuario_bo_c');
+        if(this.model.get('tct_etapa_ddw_c')!=='SI'){
+            this.noEditFields.push('usuario_bo_c');
+        }
+      /**/
 
       this._super('_renderHtml');
     },
