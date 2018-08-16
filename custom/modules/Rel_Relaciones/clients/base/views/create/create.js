@@ -308,10 +308,13 @@
                                             _.each(data.records[0], function (data_value, data_index) {
                                                 if(campo == data_index) {
                                                     if(data_value == "" || data_value == null){
-                                                        self.RequeridosFaltantes.push(data_index);
+                                                        var pr=app.metadata.getField({module:'Accounts',name:data_index});
+
+                                                        self.RequeridosFaltantes.push(pr.labelValue);
                                                     }
                                                 }
                                             });
+                                            self.RequeridosFaltantes=$.unique(self.RequeridosFaltantes);
                                         }
                                         //jescamilla Process SubValidaciones (AND)
                                         if (rule_index == 'SubValidaciones') {
