@@ -92,7 +92,9 @@
       }
 
 
-      this.noEditFields.push('usuario_bo_c');
+      if(this.model.get('tct_etapa_ddw_c')!=='SI'){
+      	this.noEditFields.push('usuario_bo_c');
+      }
 
       this._super('_renderHtml');
 
