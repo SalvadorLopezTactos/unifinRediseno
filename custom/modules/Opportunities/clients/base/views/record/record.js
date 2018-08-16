@@ -68,6 +68,8 @@
 
 		this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
 
+
+
 		/*
 			AF. 12-02-2018
 			Ajuste para actualizar valores en vista
@@ -93,6 +95,14 @@
       this.noEditFields.push('usuario_bo_c');
 
       this._super('_renderHtml');
+
+        /* F. Javier G. Solar  16/08/2018
+              Oculta los subpaneles dejando solo notas y reuniones
+           */
+
+        $('[data-subpanel-link="lev_backlog_opportunities"]').addClass('hide');
+        $('[data-subpanel-link="opportunities_opportunities_1"]').addClass('hide');
+        $('[data-subpanel-link="tct2_notificaciones_opportunities"]').addClass('hide');
     },
 
     _render: function() {
@@ -110,6 +120,7 @@
         }else{
             this.$('div[data-panelname=LBL_RECORDVIEW_PANEL1]').hide();
         }
+
 
 
 
