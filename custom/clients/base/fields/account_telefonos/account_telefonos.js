@@ -22,8 +22,8 @@
         'blur .newTelefono': 'blurExistingTelefono',
         'keydown .newTelefono': 'keyDownNewExtension',
         'change .existingExtension': 'updateExistingAddress',
-        'blur .existingExtension': 'blurExtension',
-        'blur .newExtension': 'blurExtension',
+        //'blur .existingExtension': 'blurExtension',
+        //'blur .newExtension': 'blurExtension',
         //'keydown .newExtension': 'keyDownNewExtension',
         'change .existingSecuencia': 'updateExistingAddress',
         'change .existingEstatus': 'updateExistingAddress',
@@ -408,7 +408,7 @@
             field_name = $($input).attr('data-field');
         var expreg =/^[0-9]{8,10}$/;
         //if ($.isNumeric($($input).val()) === false && $($input).val() != '') {
-        if((expreg.test($($input).val()))==false){
+        if((expreg.test($($input).val()))==false && $($input).val().trim().length!=0){
             app.alert.show('error_telefono', {
                 level: 'error',
                 autoClose: true,

@@ -21,6 +21,7 @@
         //add validation tasks
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
+        this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonos, this));
         this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
         this.model.addValidationTask('check_fecha_de_nacimiento', _.bind(this._doValidateMayoriadeEdad, this));
         this.model.addValidationTask('check_account_direcciones', _.bind(this._doValidateDireccion, this));
@@ -1612,4 +1613,53 @@
         }
         callback(null, fields, errors);
     },
+
+    validatelefonos: function (fields, errors, callback) {
+          var expreg =/^[0-9]{8,10}$/;
+          var cont=0;
+
+          $('.existingTelephono').each(function () {
+              if(!expreg.test($(this).val())){
+                  cont++;
+                  $(this).css('border-color', 'red');
+              }else{
+                  $(this).css('border-color', '');
+              }
+          });
+          $('.existingPais').each(function () {
+              if($(this).val()==''){
+                  cont++;
+                  $(this).css('border-color', 'red');
+              }else{
+                  $(this).css('border-color', '');
+              }
+          });
+          $('.existingTipotelefono').each(function () {
+              if($(this).val()==''){
+                  cont++;
+                  $(this).css('border-color', 'red');
+              }else{
+                  $(this).css('border-color', '');
+              }
+          });
+          $('.existingEstatus').each(function () {
+              if($(this).val()==''){
+                  cont++;
+                  $(this).css('border-color', 'red');
+              }else{
+                  $(this).css('border-color', '');
+              }
+          });
+
+          if(cont>0){
+              app.alert.show('error_modultel', {
+                  level: 'error',
+                  autoClose: true,
+                  messages: 'Favor de llenar los campos se\u00F1alados.'
+              });
+              errors['xd'] = errors['xd'] || {};
+              errors['xd'].required = true;
+          }
+          callback(null, fields, errors);
+      },
 })
