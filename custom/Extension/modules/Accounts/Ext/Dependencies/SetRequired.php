@@ -92,7 +92,7 @@
 	$dependencies['Accounts']['IVA_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipodepersona_c', 'estatus_c', 'esproveedor_c'),
+            'triggerFields' => array('tipodepersona_c', 'estatus_c', 'esproveedor_c','iva_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -236,7 +236,7 @@
     $dependencies['Accounts']['TipoMotivo_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('estatus_c'),
+            'triggerFields' => array('estatus_c','tipodemotivo_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -292,7 +292,7 @@
     $dependencies['Accounts']['ctpldidproveedorrecursosclie_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipo_registro_c', 'estatus_c'),
+            'triggerFields' => array('tipo_registro_c', 'estatus_c','ctpldidproveedorrecursosclie_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -310,7 +310,7 @@
     $dependencies['Accounts']['ctpldidproveedorrecursosson_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('tipo_registro_c', 'estatus_c'),
+            'triggerFields' => array('tipo_registro_c', 'estatus_c','ctpldidproveedorrecursosson_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -353,7 +353,7 @@
 	$dependencies['Accounts']['ctpldconyugecargo_c_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('ctpldconyuge_c'),
+            'triggerFields' => array('ctpldconyuge_c','ctpldconyugecargo_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -372,7 +372,7 @@
 	$dependencies['Accounts']['ctpldaccionistascargo_c_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('ctpldaccionistas_c'),
+            'triggerFields' => array('ctpldaccionistas_c','ctpldaccionistascargo_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -391,7 +391,7 @@
 	$dependencies['Accounts']['ctpldaccionistasconyugecargo_c_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('ctpldaccionistasconyuge_c'),
+            'triggerFields' => array('ctpldaccionistasconyuge_c','ctpldaccionistasconyugecargo_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -409,7 +409,7 @@
 	$dependencies['Accounts']['imotrodesc_c_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('imotro_c'),
+            'triggerFields' => array('imotro_c','imotrodesc_c'),
             'onload' => true,
             'actions' => array(
                     array(
@@ -426,7 +426,7 @@
         $dependencies['Accounts']['referenciador_c_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('origendelprospecto_c'),
+            'triggerFields' => array('origendelprospecto_c','referenciador_c'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -443,7 +443,7 @@
         $dependencies['Accounts']['referido_cliente_prov_c_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('origendelprospecto_c'),
+            'triggerFields' => array('origendelprospecto_c','referido_cliente_prov_c'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -460,7 +460,7 @@
         $dependencies['Accounts']['referenciado_agencia_c_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('origendelprospecto_c'),
+            'triggerFields' => array('origendelprospecto_c','referenciado_agencia_c'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -477,7 +477,7 @@
         $dependencies['Accounts']['evento_marketing_c_required'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('origendelprospecto_c'),
+            'triggerFields' => array('origendelprospecto_c','evento_marketing_c'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -604,7 +604,7 @@
         $dependencies['Accounts']['promotorcredit_c_readonly'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('idcliente_c'),
+            'triggerFields' => array('idcliente_c','promotorcredit_c'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -622,7 +622,7 @@
         $dependencies['Accounts']['referencia_bancaria_c_readonly'] = array(
             'hooks' => array("all"),
             'trigger' => 'true',
-            'triggerFields' => array('idcliente_c','tipo_registro_c','estatus_c'),
+            'triggerFields' => array('idcliente_c','tipo_registro_c','estatus_c','referencia_bancaria_c'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -662,7 +662,7 @@ $dependencies['Accounts']['estatus_c_readonly'] = array(
 $dependencies['Accounts']['alta_proveedor_c_readonly'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('idcliente_c','tipo_registro_c','estatus_c'),
+    'triggerFields' => array('idcliente_c','tipo_registro_c','estatus_c','alta_proveedor_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -679,7 +679,7 @@ $dependencies['Accounts']['alta_proveedor_c_readonly'] = array(
 $dependencies['Accounts']['ApellidoMaterno_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipodepersona_c','tipo_registro_c','subtipo_cuenta_c'),
+    'triggerFields' => array('tipodepersona_c','tipo_registro_c','subtipo_cuenta_c','apellidomaterno_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -753,7 +753,7 @@ $dependencies['Accounts']['activo_fijo_required'] = array(
 $dependencies['Accounts']['Potencial_cuenta_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
-    'triggerFields' => array('tipo_registro_c','activo_fijo_c','subtipo_cuenta_c'),
+    'triggerFields' => array('tipo_registro_c','activo_fijo_c','subtipo_cuenta_c','potencial_cuenta_c'),
     'onload' => true,
     'actions' => array(
         array(
