@@ -39,6 +39,13 @@
 		this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
 		this.model.addValidationTask('check_oportunidadperdida', _.bind(this.oportunidadperdidacheck, this));
 
+		//Validación para comprobar montos no mayores a rentas y pagos mensuales. Adrian Arauz 16/08/2018
+        this.model.addValidationTask('Valida_montos', _.bind(this.validamontossave, this));
+        this.model.on('change:ca_pago_mensual_c', this.validamontos, this);
+        this.model.on('change:amount', this.validamontos, this);
+        this.model.on('change:porciento_ri_c', this.validamontos, this);
+
+
 
 		/* @author victor.martinez
 		* 23-07-2018
@@ -976,6 +983,75 @@ console.log(name);
              $('[name="save_button"]').eq(0).hide();
           }
           else {$('[name="save_button"]').eq(0).show();}
-     }
+     },
+
+    validamontos: function () {
+
+        var montoop = parseFloat(this.model.get('amount'));
+        var pagomensual = parseFloat(this.model.get('ca_pago_mensual_c'));
+        var montolinea = parseFloat(this.model.get('monto_c'));
+        var rentaini = parseFloat(this.model.get('ca_importe_enganche_c'));
+
+        if (pagomensual > montoop){
+              app.alert.show('alerta_mayor_que1', {
+                level: 'warning',
+                messages: 'El Pago Mensual no puede ser mayor al Monto a Operar.',
+            });
+        }
+
+        if (montoop > montolinea){
+            app.alert.show('alerta_mayor_que2', {
+                level: 'warning',
+                messages: 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.',
+            });
+        }
+
+        if (rentaini > montoop){
+            app.alert.show('alerta_mayor_que3', {
+                level: 'warning',
+                messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
+            });
+        }
+
+    },
+
+    validamontossave: function (fields, errors, callback) {
+
+        var montoop = parseFloat(this.model.get('amount'));
+        var pagomensual = parseFloat(this.model.get('ca_pago_mensual_c'));
+        var montolinea = parseFloat(this.model.get('monto_c'));
+        var rentaini = parseFloat(this.model.get('ca_importe_enganche_c'));
+
+        if (pagomensual > montoop){
+            errors['ca_pago_mensual_c']= 'El Pago Mensual no puede ser mayor al Monto a Operar.';
+            errors['ca_pago_mensual_c'].required = true;
+            app.alert.show('alerta_mayor_que1', {
+                level: 'error',
+                messages: 'El Pago Mensual no puede ser mayor al Monto a Operar.',
+            });
+        }
+
+        if (montoop > montolinea){
+            errors['amount']= 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.';
+            errors['amount'].required = true;
+            app.alert.show('alerta_mayor_que2', {
+                level: 'error',
+                messages: 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.',
+            });
+        }
+
+        if (rentaini > montoop){
+            errors['ca_importe_enganche_c']= 'La Renta Inicial no puede ser mayor al Monto a Operar.';
+            errors['ca_importe_enganche_c'].required = true;
+            app.alert.show('alerta_mayor_que3', {
+                level: 'error',
+                messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
+            });
+        }
+        callback(null, fields, errors);
+    },
+
+
+
 
 })
