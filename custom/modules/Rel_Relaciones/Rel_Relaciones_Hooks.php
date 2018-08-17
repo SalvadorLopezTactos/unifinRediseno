@@ -48,15 +48,22 @@ SQL;
 		while ($row = $db->fetchByAssoc($queryResult)) {
 			$GLOBALS['log']->fatal(" <".$current_user->user_name."> : El valor de idCliente_c al agregar relacion: " . $row['idCliente'] . " El cliente se encuentra sincronizado con UNICS:". $row['ClienteSincronizado']);
 			$callApi = new UnifinAPI();
+
 			//Las relaciones solo se enviaran si el cliente ya se encuentra en UNICS
 			if ($row['ClienteSincronizado'] == 1){
+
 				//Si la persona no esta enviada a UNICS, debe sincronizarse antes de guardar la relación
                 if ($row['RelacionadoSincronizado'] == 0){
                 	$GLOBALS['log']->fatal(" <".$current_user->user_name."> : La persona relacionada NO se encuentra sincronizada con UNICS");
                 	$contacto =  BeanFactory::getBean('Accounts', $row['GuidRelacionado']);
                 	$GLOBALS['log']->fatal(" <".$current_user->user_name."> : Contenido de relacion en persona: " . print_r($contacto->tipo_relacion_c ,true));
                 	$contacto->save();
+                    if ($contacto->tipo_registro_c=='Lead'){
+                        $lead = $callApi->insertarClienteCompleto($contacto);
+                    }
+
 				}
+
 				///Envia la relación
 				if (empty($bean->fetched_row['id'])) {
 						$relacion = $callApi->creaRelacion($bean);

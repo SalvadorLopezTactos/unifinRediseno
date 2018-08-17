@@ -7,7 +7,7 @@
     events: {
         'click  .addCondicionFinanciera': 'addNewCondicionFinanciera',
         'click  .removeCondicionFinanciera': 'removeCondicionFinanciera',
-        'change  .porcentaje': 'checarPorcentajeRango',
+        'change .porcentaje': 'checarPorcentajeRango',
         'change .existingActivo': 'updateExistingCondicionFinanciera',
         'change .newActivo': '_inicializaCondicionesFinancieras',
         'change .existingPlazo': 'updateExistingCondicionFinanciera',
@@ -15,13 +15,12 @@
         'change .checkboxUpdate': 'updateExistingCondicionFinanciera',
         'change .newPlazo': '_inicializaCondicionesFinancieras_Plazo',
     },
-    contador: 0,
 
     plugins: ['Tooltip', 'ListEditable', 'EmailClientLaunch'],
 
     initialize: function (options) {
 
-        
+        window.contador=0;
         self = this;
         options = options || {};
         options.def = options.def || {};
@@ -132,15 +131,18 @@
     },
 
     _render: function () {
-        var CondicionFinancieraHtml = '';
-        this._super("_render");
-        if (this.tplName === 'edit') {
-            //get realted records
-            _.each(this.model.get('condiciones_financieras'), function (condicion_financiera) {
-                CondicionFinancieraHtml += this._buildCondicionFinancieraFieldHtml(condicion_financiera);
-            }, this);
-            this.$el.prepend(CondicionFinancieraHtml);
-        } //if edit
+      if (window.contador === 0)
+      {
+          var CondicionFinancieraHtml = '';
+          this._super("_render");
+          if (this.tplName === 'edit') {
+              //get realted records
+              _.each(this.model.get('condiciones_financieras'), function (condicion_financiera) {
+                  CondicionFinancieraHtml += this._buildCondicionFinancieraFieldHtml(condicion_financiera);
+              }, this);
+              this.$el.prepend(CondicionFinancieraHtml);
+          }
+      }
     },
 
     _buildCondicionFinancieraFieldHtml: function (condicion_financiera) {
@@ -217,8 +219,8 @@
     },
 
     addNewCondicionFinanciera: function (evt) {
+        window.contador=1;
         if (!evt) return;
-
         var idactivo = this.$(evt.currentTarget).val() || this.$('.newActivo').val(),
             currentValue,
             CondicionFinancieraFieldHtml,
@@ -246,7 +248,6 @@
                 activo_nuevo: $('.newActivoNuevo').prop("checked"),
             });
 
-
             // append the new field before the new direccion input
             $CondicionFinanciera = this._getNewCondicionFinancieraField()
                 .closest('.condiciones_financieras')
@@ -255,10 +256,8 @@
             // add tooltips
             //this.addPluginTooltips($CondicionFinanciera.prev());
 
-
             this._clearNewCondicionFinancieraField();
         }
-
     },
 
     _addNewCondicionFinancieraToModel: function (idactivo) {

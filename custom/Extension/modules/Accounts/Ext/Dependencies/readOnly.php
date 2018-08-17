@@ -49,6 +49,44 @@ $dependencies['Accounts']['nivel_satisfaccion_c'] = array
             'notActions' => array(),
 );
 
+$dependencies['Accounts']['fecha_leasing_c'] = array
+(
+            'hooks' => array("all"),
+            'trigger' => 'true',
+            'triggerFields' => array('cac'),
+            'onload' => true,
+            'actions' => array(
+                array(
+                    'name' => 'ReadOnly',
+                    'params' => array(
+                        'target' => 'fecha_leasing_c',
+                        'label' => 'LBL_FECHA_LEASING',
+                        'value' => 'equal('.$cac.',0)',
+                    ),
+                ),
+            ),
+            'notActions' => array(),
+);
+
+$dependencies['Accounts']['comenta_leasing_c'] = array
+(
+            'hooks' => array("all"),
+            'trigger' => 'true',
+            'triggerFields' => array('cac'),
+            'onload' => true,
+            'actions' => array(
+                array(
+                    'name' => 'ReadOnly',
+                    'params' => array(
+                        'target' => 'comenta_leasing_c',
+                        'label' => 'LBL_COMENTA_LEASING',
+                        'value' => 'equal('.$cac.',0)',
+                    ),
+                ),
+            ),
+            'notActions' => array(),
+);
+
 //Dependencia CAC - Nivel de satisfacción Factoraje
 $dependencies['Accounts']['nivel_satisfaccion_factoring_c'] = array
 (
@@ -69,6 +107,44 @@ $dependencies['Accounts']['nivel_satisfaccion_factoring_c'] = array
             'notActions' => array(),
 );
 
+$dependencies['Accounts']['fecha_factoraje_c'] = array
+(
+            'hooks' => array("all"),
+            'trigger' => 'true',
+            'triggerFields' => array('cac'),
+            'onload' => true,
+            'actions' => array(
+                array(
+                    'name' => 'ReadOnly',
+                    'params' => array(
+                        'target' => 'fecha_factoraje_c',
+                        'label' => 'LBL_FECHA_FACTORAJE',
+                        'value' => 'equal('.$cac.',0)',
+                    ),
+                ),
+            ),
+            'notActions' => array(),
+);
+
+$dependencies['Accounts']['comenta_factoraje_c'] = array
+(
+            'hooks' => array("all"),
+            'trigger' => 'true',
+            'triggerFields' => array('cac'),
+            'onload' => true,
+            'actions' => array(
+                array(
+                    'name' => 'ReadOnly',
+                    'params' => array(
+                        'target' => 'comenta_factoraje_c',
+                        'label' => 'LBL_COMENTA_FACTORAJE',
+                        'value' => 'equal('.$cac.',0)',
+                    ),
+                ),
+            ),
+            'notActions' => array(),
+);
+
 //Dependencia CAC - Nivel de satisfacción CA
 $dependencies['Accounts']['nivel_satisfaccion_ca_c'] = array
 (
@@ -82,6 +158,44 @@ $dependencies['Accounts']['nivel_satisfaccion_ca_c'] = array
                     'params' => array(
                         'target' => 'nivel_satisfaccion_ca_c',
                         'label' => 'LBL_NIVEL_SATISFACCION_CA',
+                        'value' => 'equal('.$cac.',0)',
+                    ),
+                ),
+            ),
+            'notActions' => array(),
+);
+
+$dependencies['Accounts']['fecha_ca_c'] = array
+(
+            'hooks' => array("all"),
+            'trigger' => 'true',
+            'triggerFields' => array('cac'),
+            'onload' => true,
+            'actions' => array(
+                array(
+                    'name' => 'ReadOnly',
+                    'params' => array(
+                        'target' => 'fecha_ca_c',
+                        'label' => 'LBL_FECHA_CA',
+                        'value' => 'equal('.$cac.',0)',
+                    ),
+                ),
+            ),
+            'notActions' => array(),
+);
+
+$dependencies['Accounts']['comenta_ca_c'] = array
+(
+            'hooks' => array("all"),
+            'trigger' => 'true',
+            'triggerFields' => array('cac'),
+            'onload' => true,
+            'actions' => array(
+                array(
+                    'name' => 'ReadOnly',
+                    'params' => array(
+                        'target' => 'comenta_ca_c',
+                        'label' => 'LBL_COMENTA_CA',
                         'value' => 'equal('.$cac.',0)',
                     ),
                 ),

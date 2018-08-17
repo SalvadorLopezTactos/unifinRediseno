@@ -17,3 +17,4 @@ $mod_strings['LBL_DIRECCION_COUNTRY'] = 'LBL_DIRECCION_COUNTRY';
 $mod_strings['LBL_NUEVO'] = 'Nuevo';
 $mod_strings['LBL_PARENT_MEETING'] = 'Reunión Principal';
 $mod_strings['LBL_ACTUALIZADO'] = 'Actualizado';
+$mod_strings['LBL_ACCOUNT_NAME'] = 'Cuentas';
