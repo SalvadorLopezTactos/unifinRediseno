@@ -252,8 +252,13 @@
         var idtel = delids[i];
         app.api.call('delete', app.api.buildURL('Tel_Telefonos/'+idtel), null, {
           success: _.bind(function (data) {
+            console.log('Esto es lo que devuelve la funcion borratel:');
+            console.log(data);
             console.log(app.api.buildURL('Tel_Telefonos/'+idtel));
           },this),
+          error: _.bind(function(error) {
+            console.log("Este fue el error:", error)
+          }, this),
         });
       }
     },  
