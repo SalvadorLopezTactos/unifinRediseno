@@ -1025,7 +1025,7 @@
         }else if(fieldsdirec.includes(false)==true){
             app.alert.show('alert_fields_empty', {
                 level: 'error',
-                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una Direccion',
+                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una Direcci\u00F3n',
             });
         }else{
                 this.model.set('tipo_registro_c','Prospecto');
