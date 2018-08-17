@@ -3,6 +3,7 @@
   
   events: {
     'click [name=cancel_button]': 'cancelClicked',
+    'keydown [name=vendedor_c]': 'checkvendedor',
   },
 
 	initialize: function (options) {
@@ -1063,7 +1064,23 @@ console.log(name);
         }
         callback(null, fields, errors);
     },
-
+    //@Jesus Carrillo
+    //Funcion que valida que el campo vendedor no tenga caracteres especiales
+    checkvendedor: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        //var expreg =/^[0-9]{8,10}$/;
+        var expreg =/[A-Za-z0-9]/;
+       //if((expreg.test($($input).val()))==false){
+        if((expreg.test(evt.key))==false){
+            app.alert.show('error_vendedor', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo \"Vendedor\" no acepta caracteres especiales. Favor de corregir'
+            });
+            return false;
+        }
+    },
 
 
 
