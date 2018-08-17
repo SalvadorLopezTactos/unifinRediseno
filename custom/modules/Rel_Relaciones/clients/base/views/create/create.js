@@ -244,7 +244,11 @@
                                         if (rule_index == 'SubValidaciones') {
                                             _.each(rule_body, function (subvalidacion, subvalidacion_index) {
                                                 if(data.records[0][subvalidacion.campo_padre] == subvalidacion.criterio_validacion && subvalidacion.requerido != 1){ //if its not required, do not enforce it
-                                                    //self.RequeridosFaltantes = _.without(self.RequeridosFaltantes, _.findWhere(self.RequeridosFaltantes, subvalidacion.campo_dependiente));
+                                                    var pr2=app.metadata.getField({module:'Accounts',name:subvalidacion.campo_dependiente});
+                                                    if (pr2!==undefined){
+                                                        subvalidacion.campo_dependiente=pr2.labelValue;
+                                                    }
+													//self.RequeridosFaltantes = _.without(self.RequeridosFaltantes, _.findWhere(self.RequeridosFaltantes, subvalidacion.campo_dependiente));
                                                     //Salvador Lopez <salvador.lopez@tactos.com.mx>, replace findWhere by find 
                                                     self.RequeridosFaltantes = _.without(self.RequeridosFaltantes, _.find(self.RequeridosFaltantes, function (x) { return x == subvalidacion.campo_dependiente }));
                                                 }
@@ -320,7 +324,13 @@
                                         if (rule_index == 'SubValidaciones') {
                                             _.each(rule_body, function (subvalidacion, subvalidacion_index) {
                                                 if(data.records[0][subvalidacion.campo_padre] == subvalidacion.criterio_validacion && subvalidacion.requerido != 1){ //if its not required, do not enforce it
-                                                    //self.RequeridosFaltantes = _.without(self.RequeridosFaltantes, _.findWhere(self.RequeridosFaltantes, subvalidacion.campo_dependiente));
+                                                    /*cambio*/
+													var pr2=app.metadata.getField({module:'Accounts',name:subvalidacion.campo_dependiente});
+                                                    if (pr2!==undefined){
+                                                        subvalidacion.campo_dependiente=pr2.labelValue;
+													}
+
+													//self.RequeridosFaltantes = _.without(self.RequeridosFaltantes, _.findWhere(self.RequeridosFaltantes, subvalidacion.campo_dependiente));
                                                     //Salvador Lopez <salvador.lopez@tactos.com.mx>, replace findWhere by find
                                                     self.RequeridosFaltantes = _.without(self.RequeridosFaltantes, _.find(self.RequeridosFaltantes, function (x) { return x == subvalidacion.campo_dependiente }));
                                                 }
