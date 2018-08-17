@@ -886,8 +886,8 @@
       Validación en relaciones tipo persona: Referenciado Cliente/Proveedor
     */
     _doValidateEdoCivil: function(fields, errors, callback){
-        if(this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor')) ){
-            if (this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null ) {
+        if(this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor'))){
+            if ((this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
                 errors['estadocivil_c'] = errors['estadocivil_c'] || {};
                 errors['estadocivil_c'].required = true;
             }

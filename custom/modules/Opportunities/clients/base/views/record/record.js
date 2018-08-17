@@ -343,7 +343,7 @@
             this.$("div.record-label[data-name='monto_c']").text("Monto colocaci\u00F3n");
             this.$("div.record-label[data-name='tipo_de_operacion_c']").text("Tipo de operaci\u00F3n");
         }else{
-            this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00CDnea");
+            this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
             this.$("div.record-label[data-name='tipo_de_operacion_c']").text("Tipo de solicitud");
         }
   		if (this.model.get('tipo_operacion_c') == '2'){
@@ -361,7 +361,7 @@
         }
         if(this.model.get('tipo_producto_c')=='4'){
             this.$("div.record-label[data-name='ri_porcentaje_ca_c']").text("Comisi\u00F3n Incremento/Ratificaci\u00F3n");
-            this.$("div.record-label[data-name='plazo_c']").text("Plazo m\u00E1ximo en d\u00CDas");
+            this.$("div.record-label[data-name='plazo_c']").text("Plazo m\u00E1ximo en d\u00EDas");
         }else{
             this.$("div.record-label[data-name='ri_porcentaje_ca_c']").text("Comisi\u00F3n por apertura Incremento/Ratificaci\u00F3n");
             this.$("div.record-label[data-name='plazo_c']").text("Plazo en meses");
