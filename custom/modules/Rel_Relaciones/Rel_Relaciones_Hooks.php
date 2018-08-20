@@ -35,10 +35,20 @@ SQL;
         $callApiAccounts = new UnifinAPI();
 		try {
 
+		    /*
+		     * F. Javier G. Solar
+		     * 20/08/2018
+		     * Valida si la cuenta arelacionar esta en estado Lead y no ha sido sincronizda
+		     * envia la petición
+		    **/
             $CuentaC =  BeanFactory::getBean('Accounts',$bean->account_id1_c);
 
             if ($CuentaC->tipo_registro_c=='Lead' && $CuentaC->sincronizado_unics_c==0){
                 $GLOBALS['log']->fatal(" el id de la cuenta es ingredsado por JA  " . $bean->account_id1_c);
+
+                $CuentaC->idcliente_c =$callApiAccounts->generarFolios(1);
+                $GLOBALS['log']->fatal(" Folio de unix " . $CuentaC->idcliente_c);
+
                 $lead = $callApiAccounts->insertarClienteCompleto($CuentaC);
            }
 
