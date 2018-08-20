@@ -1069,9 +1069,8 @@ console.log(name);
     checkvendedor: function (evt) {
         if (!evt) return;
         var $input = this.$(evt.currentTarget);
-        //var expreg =/^[0-9]{8,10}$/;
-        var expreg =/[A-Za-z0-9]/;
-       //if((expreg.test($($input).val()))==false){
+        var expreg =/[a-zA-Z\u00F1\u00D1\u00C1\u00E1\u00C9\u00E9\u00CD\u00ED\u00D3\u00F3\u00DA\u00FA\u00DC\u00FC\s]+/;
+        //var expreg =/[A-Za-z]/;
         if((expreg.test(evt.key))==false){
             app.alert.show('error_vendedor', {
                 level: 'error',
