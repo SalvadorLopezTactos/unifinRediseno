@@ -32,8 +32,18 @@ SQL;
 		//Debe validarse si el cliente ya  tiene id_UNICS
 		global $db, $current_user;
         $GLOBALS['log']->fatal(" <".$current_user->user_name."> Entra a insertarRelacionenUNICS");
-
+        $callApiAccounts = new UnifinAPI();
 		try {
+
+            $CuentaC =  BeanFactory::getBean('Accounts',$bean->account_id1_c);
+
+            if ($CuentaC->tipo_registro_c=='Lead' && $CuentaC->sincronizado_unics_c==0){
+                $GLOBALS['log']->fatal(" el id de la cuenta es ingredsado por JA  " . $bean->account_id1_c);
+                $lead = $callApiAccounts->insertarClienteCompleto($CuentaC);
+           }
+
+
+
         $query = <<<SQL
 SELECT acc.idcliente_c idCliente, acc.sincronizado_unics_c ClienteSincronizado,
 contact.idcliente_c idRelacionado, contact.sincronizado_unics_c RelacionadoSincronizado, contact.id_c GuidRelacionado
@@ -49,6 +59,9 @@ SQL;
 			$GLOBALS['log']->fatal(" <".$current_user->user_name."> : El valor de idCliente_c al agregar relacion: " . $row['idCliente'] . " El cliente se encuentra sincronizado con UNICS:". $row['ClienteSincronizado']);
 			$callApi = new UnifinAPI();
 
+
+
+
 			//Las relaciones solo se enviaran si el cliente ya se encuentra en UNICS
 			if ($row['ClienteSincronizado'] == 1){
 
@@ -58,9 +71,7 @@ SQL;
                 	$contacto =  BeanFactory::getBean('Accounts', $row['GuidRelacionado']);
                 	$GLOBALS['log']->fatal(" <".$current_user->user_name."> : Contenido de relacion en persona: " . print_r($contacto->tipo_relacion_c ,true));
                 	$contacto->save();
-                    if ($contacto->tipo_registro_c=='Lead'){
-                        $lead = $callApi->insertarClienteCompleto($contacto);
-                    }
+
 
 				}
 
