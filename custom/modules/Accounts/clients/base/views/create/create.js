@@ -210,6 +210,7 @@
         //this.model.on('change:rfc_c',this.validaFechaNacimientoDesdeRFC, this);
         this.model.on('change:account_telefonos', this.setPhoneOffice, this);
 
+
         /*
          AF: 11/01/18
          Merge create-create-actions.js
@@ -863,13 +864,15 @@
     _doValidateDireccion: function (fields, errors, callback) {
         if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('tipo_registro_c') == "Prospecto") {
             if (_.isEmpty(this.model.get('account_direcciones'))) {
-                errors[$(".addDireccion")] = errors['account_direcciones'] || {};
-                errors[$(".addDireccion")].required = true;
+                //errors[$(".addDireccion")] = errors['account_direcciones'] || {};
+                //errors[$(".addDireccion")].required = true;
+                errors['account_direcciones'] = errors['account_direcciones'] || {};
+                errors['account_direcciones'].required = true;
 
                 $('.direcciondashlet').css('border-color', 'red');
                 app.alert.show("Direccion requerida", {
                     level: "error",
-                    title: "Al menos una direccion es requerida.",
+                    title: "Al menos una direcci\u00F3n es requerida.",
                     autoClose: false
                 });
             } else {
@@ -893,7 +896,7 @@
                         $('.direcciondashlet').css('border-color', 'red');
                         app.alert.show("Direccion nacional requerida", {
                             level: "error",
-                            title: "Al menos una direccion nacional es requerida.",
+                            title: "Al menos una direcci\u00F3n nacional es requerida.",
                             autoClose: false
                         });
                     }

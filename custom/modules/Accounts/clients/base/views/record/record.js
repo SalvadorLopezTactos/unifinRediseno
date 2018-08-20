@@ -21,6 +21,7 @@
         //add validation tasks
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
+        this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonos, this));
         this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
         this.model.addValidationTask('check_fecha_de_nacimiento', _.bind(this._doValidateMayoriadeEdad, this));
         this.model.addValidationTask('check_account_direcciones', _.bind(this._doValidateDireccion, this));
@@ -251,8 +252,13 @@
         var idtel = delids[i];
         app.api.call('delete', app.api.buildURL('Tel_Telefonos/'+idtel), null, {
           success: _.bind(function (data) {
+            console.log('Esto es lo que devuelve la funcion borratel:');
+            console.log(data);
             console.log(app.api.buildURL('Tel_Telefonos/'+idtel));
           },this),
+          error: _.bind(function(error) {
+            console.log("Este fue el error:", error)
+          }, this),
         });
       }
     },  
@@ -872,6 +878,7 @@
         this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
         this.context.on('button:save_button:click', this.borraTel, this);
+        this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
     },
 
     /*
@@ -1023,7 +1030,7 @@
         }else if(fieldsdirec.includes(false)==true){
             app.alert.show('alert_fields_empty', {
                 level: 'error',
-                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una Direcion',
+                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una Direcci\u00F3n',
             });
         }else{
                 this.model.set('tipo_registro_c','Prospecto');
@@ -1044,12 +1051,48 @@
         if(this.totalllamadas==0 && this.totalreuniones==0){
             app.alert.show('alert_calls', {
                 level: 'error',
-                messages: 'El proceso de conversion requiere que el Prospecto Contactado contenga una llamada o reunion con fecha anterior al dia de hoy!',
+                messages: 'El proceso de conversi\u00F3n requiere que el Prospecto Contactado contenga una llamada o reuni\u00F3n con fecha anterior al d\u00EDa de hoy.',
             });
         }else{
             this.validar_fields();
+            this.validaContactado();
         }
     },
+
+      //Validación para que los campos contengan informacion para poder convertir de LEAD a Prospecto/Contactado. Adrian Arauz 15/08/2018
+      validaContactado: function () {
+          var campos= "";
+
+          if (this.model.get('origendelprospecto_c') =="" || this.model.get('origendelprospecto_c')==null){
+              campos= campos + 'Origen, ';
+          }
+
+          if (this.model.get('name') =="" || this.model.get('name')==null){
+              campos= campos + 'Nombre, ';
+          }
+
+          if ( (this.model.get('apellidopaterno_c') =="" || this.model.get('apellidopaterno_c')==null)  && this.model.get('tipodepersona_c') != 'Persona Moral'){
+              campos= campos + 'Apellido Paterno, ';
+          }
+
+          if (this.model.get('email') =="" || this.model.get('email')==null){
+              campos= campos + 'E Mail, ';
+          }
+
+          if ( (this.model.get('nombre_comercial_c') =="" || this.model.get('nombre_comercial_c')==null) && this.model.get('tipodepersona_c')== 'Persona Moral'){
+
+              campos= campos + 'Nombre Comercial.';
+          }
+
+
+          if(campos!=""){
+              console.log ('Validacion Campos OK');
+              app.alert.show('alert_calls2', {
+                  level: 'error',
+                  messages: 'Para convertir a Prospecto Contactado es necesario se llenen los campos requeridos: ' +campos ,
+              });
+          }
+      },
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
@@ -1566,10 +1609,10 @@
             if($(this).val()==''){
                 cont++;
                 //$(this).css('border-color', 'red');
-                $(this).eq(index).css('border-color', 'red');
+                $('.existingPostal').eq(index).css('border-color', 'red');
             }else{
                 //$(this).css('border-color', '');
-                $(this).eq(index).css('border-color', '');
+                $('.existingPostal').eq(index).css('border-color', '');
             }
         });
         $('.existingCalle').each(function (index) {
@@ -1579,17 +1622,17 @@
                 //$(this).eq(index).css('border-color', 'red');
                 $('.existingCalle').eq(index).css('border-color', 'red');
             }else{
-                $(this).eq(index).css('border-color', '');
+                $('.existingCalle').eq(index).css('border-color', '');
             }
         });
         $('.existingNumExt').each(function (index) {
             if($(this).val().trim()==''){
                 cont++;
                 //$(this).css('border-color', 'red');
-                $(this).eq(index).css('border-color', 'red');
+                $('.existingNumExt').eq(index).css('border-color', 'red');
             }else{
                 //$(this).css('border-color', '');
-                $(this).eq(index).css('border-color', '');
+                $('.existingNumExt').eq(index).css('border-color', '');
             }
         });
 
@@ -1612,4 +1655,53 @@
         }
         callback(null, fields, errors);
     },
+
+    validatelefonos: function (fields, errors, callback) {
+          var expreg =/^[0-9]{8,10}$/;
+          var cont=0;
+
+          $('.existingTelephono').each(function () {
+              if(!expreg.test($(this).val())){
+                  cont++;
+                  $(this).css('border-color', 'red');
+              }else{
+                  $(this).css('border-color', '');
+              }
+          });
+          $('.existingPais').each(function () {
+              if($(this).val()==''){
+                  cont++;
+                  $(this).css('border-color', 'red');
+              }else{
+                  $(this).css('border-color', '');
+              }
+          });
+          $('.existingTipotelefono').each(function () {
+              if($(this).val()==''){
+                  cont++;
+                  $(this).css('border-color', 'red');
+              }else{
+                  $(this).css('border-color', '');
+              }
+          });
+          $('.existingEstatus').each(function () {
+              if($(this).val()==''){
+                  cont++;
+                  $(this).css('border-color', 'red');
+              }else{
+                  $(this).css('border-color', '');
+              }
+          });
+
+          if(cont>0){
+              app.alert.show('error_modultel', {
+                  level: 'error',
+                  autoClose: true,
+                  messages: 'Favor de llenar los campos se\u00F1alados.'
+              });
+              errors['xd'] = errors['xd'] || {};
+              errors['xd'].required = true;
+          }
+          callback(null, fields, errors);
+      },
 })

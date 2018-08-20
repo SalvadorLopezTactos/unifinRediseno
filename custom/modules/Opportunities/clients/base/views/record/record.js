@@ -3,6 +3,7 @@
   
   events: {
     'click [name=cancel_button]': 'cancelClicked',
+    'keydown [name=vendedor_c]': 'checkvendedor',
   },
 
 	initialize: function (options) {
@@ -39,6 +40,13 @@
 		this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
 		this.model.addValidationTask('check_oportunidadperdida', _.bind(this.oportunidadperdidacheck, this));
 
+		//Validación para comprobar montos no mayores a rentas y pagos mensuales. Adrian Arauz 16/08/2018
+        this.model.addValidationTask('Valida_montos', _.bind(this.validamontossave, this));
+        this.model.on('change:ca_pago_mensual_c', this.validamontos, this);
+        this.model.on('change:amount', this.validamontos, this);
+        this.model.on('change:porciento_ri_c', this.validamontos, this);
+
+
 
 		/* @author victor.martinez
 		* 23-07-2018
@@ -60,6 +68,8 @@
 		this.getCurrentYearMonth();
 
 		this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
+
+
 
 		/*
 			AF. 12-02-2018
@@ -83,9 +93,19 @@
       }
 
 
-      this.noEditFields.push('usuario_bo_c');
+      if(this.model.get('tct_etapa_ddw_c')!=='SI'){
+      	this.noEditFields.push('usuario_bo_c');
+      }
 
       this._super('_renderHtml');
+
+        /* F. Javier G. Solar  16/08/2018
+              Oculta los subpaneles dejando solo notas y reuniones
+           */
+
+        $('[data-subpanel-link="lev_backlog_opportunities"]').addClass('hide');
+        $('[data-subpanel-link="opportunities_opportunities_1"]').addClass('hide');
+        $('[data-subpanel-link="tct2_notificaciones_opportunities"]').addClass('hide');
     },
 
     _render: function() {
@@ -103,6 +123,7 @@
         }else{
             this.$('div[data-panelname=LBL_RECORDVIEW_PANEL1]').hide();
         }
+
 
 
 
@@ -323,7 +344,7 @@
             this.$("div.record-label[data-name='monto_c']").text("Monto colocaci\u00F3n");
             this.$("div.record-label[data-name='tipo_de_operacion_c']").text("Tipo de operaci\u00F3n");
         }else{
-            this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00CDnea");
+            this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
             this.$("div.record-label[data-name='tipo_de_operacion_c']").text("Tipo de solicitud");
         }
   		if (this.model.get('tipo_operacion_c') == '2'){
@@ -341,7 +362,7 @@
         }
         if(this.model.get('tipo_producto_c')=='4'){
             this.$("div.record-label[data-name='ri_porcentaje_ca_c']").text("Comisi\u00F3n Incremento/Ratificaci\u00F3n");
-            this.$("div.record-label[data-name='plazo_c']").text("Plazo m\u00E1ximo en d\u00CDas");
+            this.$("div.record-label[data-name='plazo_c']").text("Plazo m\u00E1ximo en d\u00EDas");
         }else{
             this.$("div.record-label[data-name='ri_porcentaje_ca_c']").text("Comisi\u00F3n por apertura Incremento/Ratificaci\u00F3n");
             this.$("div.record-label[data-name='plazo_c']").text("Plazo en meses");
@@ -976,6 +997,90 @@ console.log(name);
              $('[name="save_button"]').eq(0).hide();
           }
           else {$('[name="save_button"]').eq(0).show();}
-     }
+     },
+
+    validamontos: function () {
+
+        var montoop = parseFloat(this.model.get('amount'));
+        var pagomensual = parseFloat(this.model.get('ca_pago_mensual_c'));
+        var montolinea = parseFloat(this.model.get('monto_c'));
+        var rentaini = parseFloat(this.model.get('ca_importe_enganche_c'));
+
+        if (pagomensual > montoop){
+              app.alert.show('alerta_mayor_que1', {
+                level: 'warning',
+                messages: 'El Pago Mensual no puede ser mayor al Monto a Operar.',
+            });
+        }
+
+        if (montoop > montolinea){
+            app.alert.show('alerta_mayor_que2', {
+                level: 'warning',
+                messages: 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.',
+            });
+        }
+
+        if (rentaini > montoop){
+            app.alert.show('alerta_mayor_que3', {
+                level: 'warning',
+                messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
+            });
+        }
+
+    },
+
+    validamontossave: function (fields, errors, callback) {
+
+        var montoop = parseFloat(this.model.get('amount'));
+        var pagomensual = parseFloat(this.model.get('ca_pago_mensual_c'));
+        var montolinea = parseFloat(this.model.get('monto_c'));
+        var rentaini = parseFloat(this.model.get('ca_importe_enganche_c'));
+
+        if (pagomensual > montoop){
+            errors['ca_pago_mensual_c']= 'El Pago Mensual no puede ser mayor al Monto a Operar.';
+            errors['ca_pago_mensual_c'].required = true;
+            app.alert.show('alerta_mayor_que1', {
+                level: 'error',
+                messages: 'El Pago Mensual no puede ser mayor al Monto a Operar.',
+            });
+        }
+
+        if (montoop > montolinea){
+            errors['amount']= 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.';
+            errors['amount'].required = true;
+            app.alert.show('alerta_mayor_que2', {
+                level: 'error',
+                messages: 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.',
+            });
+        }
+
+        if (rentaini > montoop){
+            errors['ca_importe_enganche_c']= 'La Renta Inicial no puede ser mayor al Monto a Operar.';
+            errors['ca_importe_enganche_c'].required = true;
+            app.alert.show('alerta_mayor_que3', {
+                level: 'error',
+                messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
+            });
+        }
+        callback(null, fields, errors);
+    },
+    //@Jesus Carrillo
+    //Funcion que valida que el campo vendedor no tenga caracteres especiales
+    checkvendedor: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var expreg =/[a-zA-Z\u00F1\u00D1\u00C1\u00E1\u00C9\u00E9\u00CD\u00ED\u00D3\u00F3\u00DA\u00FA\u00DC\u00FC\s]+/;
+        //var expreg =/[A-Za-z]/;
+        if((expreg.test(evt.key))==false){
+            app.alert.show('error_vendedor', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo \"Vendedor\" no acepta caracteres especiales. Favor de corregir'
+            });
+            return false;
+        }
+    },
+
+
 
 })
