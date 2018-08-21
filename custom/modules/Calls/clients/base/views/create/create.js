@@ -9,25 +9,42 @@
         // this.on('render',this.disabledates,this);
 
         // this.model.on("change:date_start_date", _.bind(this.validaFecha, this));
-        this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial, this));
+        this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicialCall, this));
     },
 
     /* @F. Javier G. Solar
      * Valida que la Fecha Inicial no sea menor que la actual
      * 14/08/2018
      */
-    validaFechaInicial: function (fields, errors, callback) {
-        var hoy =Date.parse(new Date());
-        var fechaInicio =Date.parse(this.model.get("date_start"));
+    validaFechaInicialCall: function (fields, errors, callback) {
 
-        if(fechaInicio<hoy)
-        {
+        // FECHA INICIO
+        var dateInicio = new Date(this.model.get("date_start"));
+        var d = dateInicio.getDate();
+        var m = dateInicio.getMonth() + 1;
+        var y = dateInicio.getFullYear();
+        var fechaCompleta = [m, d, y].join('/');
+        // var dateFormat = dateInicio.toLocaleDateString();
+        var fechaInicio = Date.parse(fechaCompleta);
+
+
+        // FECHA ACTUAL
+        var dateActual = new Date();
+        var d1 = dateActual.getDate();
+        var m1 = dateActual.getMonth() + 1;
+        var y1 = dateActual.getFullYear();
+        var dateActualFormat = [m1, d1, y1].join('/');
+        var fechaActual = Date.parse(dateActualFormat);
+
+
+        if (fechaInicio < fechaActual) {
             app.alert.show("Fecha no valida", {
                 level: "error",
-                title: "La Fecha Inicio no puede ser menor a la actual ",
+                title: "No puedes crear una Llamada con fecha menor al d&Iacutea de hoy..... ",
                 autoClose: false
             });
-            app.error.errorName2Keys['date_start'] = 'La fecha no puede ser menor a la actual';
+
+            app.error.errorName2Keys['custom_message1'] = 'La fecha no puede ser menor a la actual';
             errors['date_start'] = errors['date_start'] || {};
             errors['date_start'].custom_message1 = true;
         }
