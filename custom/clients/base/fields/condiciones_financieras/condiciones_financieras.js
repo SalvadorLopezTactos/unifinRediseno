@@ -38,7 +38,7 @@
 
         var plazo_list = app.lang.getAppListStrings('plazo_0');
         var plazo_keys = app.lang.getAppListKeys('plazo_0');
-        var plazo_list_html = '<option value=""></option>';
+        var plazo_list_html = '<option value="">';
         for (plazo_keys in plazo_list) {
             plazo_list_html += '<option value="' + plazo_keys + '">' + plazo_list[plazo_keys] + '</option>'
 
@@ -221,7 +221,20 @@
     addNewCondicionFinanciera: function (evt) {
         window.contador=1;
         if (!evt) return;
-                
+
+        var idplazo = this.$(evt.currentTarget).val() || this.$('.newPlazo').val(),
+            currentValue,
+            CondicionFinancieraFieldHtml,
+            $CondicionFinanciera;
+        if (idplazo === '')
+        {
+              $('.newPlazo').css('border-color', 'red');
+              app.alert.show("Plazo requerido", {
+                  level: "error",
+                  title: "El campo Plazo es requerido.",
+                  autoClose: false
+              });
+        }       
         var idactivo = this.$(evt.currentTarget).val() || this.$('.newActivo').val(),
             currentValue,
             CondicionFinancieraFieldHtml,
@@ -254,11 +267,13 @@
 
             // add tooltips
             //this.addPluginTooltips($CondicionFinanciera.prev());
-
             this._clearNewCondicionFinancieraField();
+            $('.newActivo').css('border-color', '');
+            $('.newPlazo').css('border-color', '');
         }
         else
         {
+              $('.newActivo').css('border-color', 'red');
               app.alert.show("Activo requerido", {
                   level: "error",
                   title: "El campo Activo es requerido.",
