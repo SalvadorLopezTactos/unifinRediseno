@@ -221,12 +221,11 @@
     addNewCondicionFinanciera: function (evt) {
         window.contador=1;
         if (!evt) return;
+                
         var idactivo = this.$(evt.currentTarget).val() || this.$('.newActivo').val(),
             currentValue,
             CondicionFinancieraFieldHtml,
             $CondicionFinanciera;
-
-        //activo = $.trim(activo);
         if ((idactivo !== '') && (this._addNewCondicionFinancieraToModel(idactivo))) {
             currentValue = this.model.get(this.name);
             CondicionFinancieraFieldHtml = this._buildCondicionFinancieraFieldHtml({
@@ -257,6 +256,14 @@
             //this.addPluginTooltips($CondicionFinanciera.prev());
 
             this._clearNewCondicionFinancieraField();
+        }
+        else
+        {
+              app.alert.show("Activo requerido", {
+                  level: "error",
+                  title: "El campo Activo es requerido.",
+                  autoClose: false
+              });
         }
     },
 

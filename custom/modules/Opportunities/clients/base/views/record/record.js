@@ -7,6 +7,12 @@
 
 	initialize: function (options) {
 		self = this;
+   	var createViewEvents = {};
+    createViewEvents['focus [name=amount]'] = 'maxCurrency';
+    createViewEvents['focus [name=monto_c]'] = 'maxCurrency';
+    createViewEvents['focus [name=ca_pago_mensual_c]'] = 'maxCurrency';
+    createViewEvents['focus [name=ca_importe_enganche_c]'] = 'maxCurrency';    
+ 	  this.events = _.extend({}, this.events, createViewEvents);
 		this._super("initialize", [options]);
 		/*
 		 * @author Carlos Zaragoza Ortiz
@@ -78,6 +84,12 @@
 		this.model.on('sync', this._render, this);
 
 	},
+
+    maxCurrency: function(evt)
+    {
+    	var $field = $("input[name=" + evt.currentTarget.name + "]");
+	    $field.attr('maxlength','16');
+    },
 
     cancelClicked: function () {
        this._super('cancelClicked');

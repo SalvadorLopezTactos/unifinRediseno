@@ -134,14 +134,21 @@
         this.model.on('sync', this.getreuniones, this);
         this.model.on('sync', this.hideconfiinfo, this);
 
-        //this.hideconfiinfo();
+        /*@Jesus Carrillo
+            Funcion que pinta de color los paneles relacionados
+        */
+        this.model.on('sync', this.fulminantcolor, this);
     },
 
+      fulminantcolor: function () {
+          $('.search-filter').before('<div id="space" style="background-color:#000042">&nbsp</div>');
+          $('.control-group').css("background-color", "#e5e5e5");
+          $('.a11y-wrapper').css("background-color", "#e5e5e5");
+          //$('.a11y-wrapper').css("background-color", "#c6d9ff");
+      },
     /** BEGIN CUSTOMIZATION:
      * Salvador Lopez 19/01/2018
      * Descripción: Función que oculta o muestra panel de fideicomiso dependiendo el valor de check ¿Es Fideicomisio? */
-
-
 
     _hideVista360: function () {
         if (this.model.get('show_panel_c') == true) {
