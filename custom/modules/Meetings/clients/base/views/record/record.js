@@ -6,7 +6,8 @@
         this._super("initialize", [options]);
 
         this.on('render',this.disableparentsfields,this);
-        this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial, this));
+       // this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial, this));
+        this.model.on('sync', this.disablestatus, this);
     },
 
     _render: function () {
@@ -35,12 +36,20 @@
         }
         callback(null, fields, errors);
     },
-
-
     /* @Salvador Lopez Y Adrian Arauz
     Oculta los campos relacionados
     */
     disableparentsfields:function () {
         this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;')
+    },
+    /*@Jesus Carrillo
+    Deshabilita campo status dependiendo de diferentes criterios
+     */
+    disablestatus:function () {
+        if(this.model.get('id')=='' || Date.parse(this.model.get('date_end'))>Date.now()){
+            $('span[data-name=status]').css("pointer-events", "none");
+        }else{
+            $('span[data-name=status]').css("pointer-events", "auto");
+        }
     },
 })
