@@ -29,7 +29,7 @@
                 autoClose: false
             });
 
-            app.error.errorName2Keys['date_start'] = 'La fecha no puede ser menor a la actual';
+            app.error.errorName2Keys['custom_message1'] = 'La fecha no puede ser menor a la actual';
             errors['date_start'] = errors['date_start'] || {};
             errors['date_start'].custom_message1 = true;
         }
