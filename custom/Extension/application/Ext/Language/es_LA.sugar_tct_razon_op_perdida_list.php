@@ -2,7 +2,7 @@
  // created: 2018-07-18 12:05:24
 
 $app_list_strings['tct_razon_op_perdida_list']=array (
-  'P' => 'Precio',
+  'P' => 'PRECIO',
   'C' => 'COMPETENCIA',
   'NPR' => 'NO TENEMOS EL PRODUCTO QUE REQUIERE',
   'PRP' => 'PAGÓ CON RECURSOS PROPIOS',

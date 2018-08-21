@@ -933,6 +933,7 @@
         Metodo para verificar  las llamadas de la cuenta
      */
 
+    //CAMBIOS EFECTUADOS
     getllamadas:function () {
         var cday = new Date();
         var llamadas=0;
@@ -944,7 +945,9 @@
                     for (var i = 0; i < data.records.length; i++) {
                         var tempdate = Date.parse(data.records[i].date_start);
                         if (tempdate < cday) {
-                            llamadas++;
+                            if(data.records[i].status=='Held'){ //Conversión de LEAD a Prospecto contactado, solo cuando esten como realizadas
+                                llamadas++;
+                            }
                         }
                     }
                 }
@@ -965,7 +968,9 @@
                     for (var i = 0; i < data.records.length; i++) {
                         var tempdate = Date.parse(data.records[i].date_start);
                         if (tempdate < cday) {
-                            reuniones++;
+                            if(data.records[i].status=='Held'){ //Conversión de LEAD a Prospecto Contactado, solo cuando esten como realizadas
+                                reuniones++;
+                            }
                         }
                     }
                 }
