@@ -173,7 +173,8 @@ $dependencies['Meetings']['status'] = array(
             'name' => 'ReadOnly',
             'params' => array(
                 'target' => 'status',
-                'value' => 'or(equal($id,""),equal($status,"Held"),equal($status,"Not Held"),$paso_c)',
+                //'value' => 'or(equal($id,""),equal($status,"Held"),equal($status,"Not Held"),$paso_c)',
+                'value' => 'equal($id,"")',
             ),
         ),
     ),
