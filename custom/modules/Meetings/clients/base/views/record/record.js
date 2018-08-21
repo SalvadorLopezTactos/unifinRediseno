@@ -6,7 +6,7 @@
         this._super("initialize", [options]);
 
         this.on('render',this.disableparentsfields,this);
-       // this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial, this));
+        this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial, this));
         this.model.on('sync', this.disablestatus, this);
     },
 
