@@ -1,5 +1,5 @@
 <?php
- // created: 2018-08-21 14:20:21
+ // created: 2018-08-22 09:47:37
 
 $app_list_strings['tct_team_region_list']=array (
   '' => '',
@@ -17,7 +17,10 @@ $app_list_strings['tct_team_region_list']=array (
   'CA3' => 'METROPOLITANA',
   'CAN' => 'SUR',
   'CART' => 'METROPOLITANA',
+  'CASA' => 'CASA',
   'CHI' => 'NORTE',
+  'Equipo 0' => 'Region 0',
+  'EXP' => 'EXPRESS',
   'F1' => 'METROPOLITANA',
   'F2' => 'METROPOLITANA',
   'F3' => 'METROPOLITANA',
@@ -33,7 +36,7 @@ $app_list_strings['tct_team_region_list']=array (
   'QRO' => 'BAJIO',
   'QRO2' => 'BAJIO',
   'SLP' => 'BAJIO',
+  'TIJ' => 'SUR',
   'TOL' => 'SUR',
   'VER' => 'SUR',
-  'CASA' => 'CASA',
 );

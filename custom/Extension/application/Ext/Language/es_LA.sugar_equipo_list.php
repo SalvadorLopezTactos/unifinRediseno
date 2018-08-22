@@ -1,9 +1,8 @@
 <?php
- // created: 2018-08-21 13:30:04
+ // created: 2018-08-22 09:35:51
 
 $app_list_strings['equipo_list']=array (
   0 => '',
-  'Equipo 0' => '0',
   1 => '1',
   2 => '2',
   3 => '3',
@@ -21,6 +20,8 @@ $app_list_strings['equipo_list']=array (
   'CASA' => 'CASA',
   'CHI' => 'CHI',
   'CNC' => 'CNC',
+  'Equipo 0' => '0',
+  'EXP' => 'EXP',
   'F1' => 'F1',
   'F2' => 'F2',
   'F3' => 'F3',
@@ -40,5 +41,4 @@ $app_list_strings['equipo_list']=array (
   'TOL' => 'TOL',
   'VER' => 'VER',
   'WorkOut' => 'Work out',
-  'EXP' => 'EXP',
 );
