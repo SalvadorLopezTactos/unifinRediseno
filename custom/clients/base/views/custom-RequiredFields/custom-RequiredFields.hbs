@@ -30,16 +30,17 @@
 
 <div class="container-fluid" >
 
-    <div style=" padding-left: 25%; height: 100px">
-        <h1 id="title">Campos Requeridos para {{relatedAcctName}} en relaciones
-            activas {{relaciones_activas}} </h1>
+    <div style=" padding-left: 25%; padding-right: 25%;  height: 100px; display: flex;
+  align-items: center;">
+        <font size="3">Los campos requeridos para {{relatedAcctName}} en relaciones
+            activas {{relaciones_activas}}, son los siguientes: </font>
     </div>
     <div class="bodyTable">
         <table>
             {{#each camposFaltantes}}
                 <tr>
                     <td>
-                        <label>{{this}}</label>
+                        <font size="4"><b>{{this}}</b></font>
                     </td>
                 </tr>
             {{/each}}
@@ -52,4 +53,3 @@
     </div>
 
 </div>
-
