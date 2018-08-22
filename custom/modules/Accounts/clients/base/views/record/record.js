@@ -545,7 +545,9 @@
 
 
     },
-    /*
+
+
+      /*
         * @author F. Javier G. Solar
         * 18/07/2018
         * Se debe ocultar los botones de Regresa a Lead y Prospecto contactado si cumple
@@ -1072,17 +1074,69 @@
 /* @Jesus Carrillo
     Metodo que convierte a prospecto contactado
  */
+      /*
+       *Solo promotores y directorees pueden cambiar una cuenta de Lead a Prospecto contactado
+       * 22-08-2018 Victor Martínez
+        */
     prospectocontactadoClicked:function(){
-        if(this.totalllamadas==0 && this.totalreuniones==0){
-            app.alert.show('alert_calls', {
-                level: 'error',
-                messages: 'El proceso de conversi\u00F3n requiere que el Prospecto Contactado contenga una llamada o reuni\u00F3n con fecha anterior al d\u00EDa de hoy.',
+        self=this;
+
+        if(this.model.get('id')!="") { //en lugar de self es this
+            app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
+                success: _.bind(function (data) {
+                  var  usuario=App.user.attributes.puestousuario_c;
+                    console.log(data);
+                    if(data==false){
+                        app.alert.show("no acceso", {
+                            level: "error",
+                            title: "Usted no tiene el permiso para llevar a cabo esta acci\u00F3n",
+                            autoClose: true
+                        });
+                    }else   //Promotores
+                    if (usuario=="5"||
+                        usuario=="11"||
+                        usuario=="16"||
+                        //Gerentes
+                        usuario=="15"||
+                        usuario=="4"||
+                        usuario=="10"||
+                        //subdirectores
+                        usuario=="3"||
+                        usuario=="9"||
+                        usuario=="28"||
+                        //Directores
+                        usuario=="2"||
+                        usuario=="8"||
+                        usuario=="14"||
+                        usuario=="21"
+                    )
+
+                    {
+                        if(self.totalllamadas==0 && self.totalreuniones==0){
+                            app.alert.show('alert_calls', {
+                                level: 'error',
+                                messages: 'El proceso de conversi\u00F3n requiere que el Prospecto Contactado contenga una llamada o reuni\u00F3n con fecha anterior al d\u00EDa de hoy.',
+                            });
+                        }else{
+                            self.validar_fields();
+                            self.validaContactado();
+                        }
+                    }
+                    else {
+                        app.alert.show("No acceso", {
+                            level: "error",
+                            title: "Usted no tiene el permiso para llevar a cabo esta acci\u00F3n",
+                            autoClose: true
+                        });
+                    }
+                }, self)
             });
-        }else{
-            this.validar_fields();
-            this.validaContactado();
+            //self.render();
         }
+
+        console.log("valor fuera " + this.model.get('id'));
     },
+
 
       //Validación para que los campos contengan informacion para poder convertir de LEAD a Prospecto/Contactado. Adrian Arauz 15/08/2018
       validaContactado: function () {
