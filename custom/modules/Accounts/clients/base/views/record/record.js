@@ -1144,36 +1144,43 @@
               reqs= reqs + '<b>Nombre Comercial<br></b>';
           }
 
-          if (this.model.get('promotorcredit_c') =="" || this.model.get('promotorcredit_c')==null){
-              /*reqs= reqs + '<b>Promotor de Cr\u00E9dito<br>';*/
-              this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
-              this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
-          }
+             if(reqs!="") {
+                 console.log('Validacion Campos LEAD');
+                 app.alert.show('alert_calls4', {
+                     level: 'error',
+                     messages: 'Para convertir a Lead es necesario que se llenen los siguientes campos requeridos: ' + reqs,
+                 });
+             }
+              else {
+                     if (this.model.get('promotorcredit_c') =="" || this.model.get('promotorcredit_c')==null){
+                         /*reqs= reqs + '<b>Promotor de Cr\u00E9dito<br>';*/
+                         this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
+                         this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
+                     }
 
-          if (this.model.get('promotorfactoraje_c') =="" || this.model.get('promotorfactoraje_c')==null){
-              /*reqs= reqs + '<b>Promotor de Factoraje<br></b>';*/
-              this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
-              this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
-          }
+                     if (this.model.get('promotorfactoraje_c') =="" || this.model.get('promotorfactoraje_c')==null){
+                         /*reqs= reqs + '<b>Promotor de Factoraje<br></b>';*/
+                         this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
+                         this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
+                     }
 
-          if (this.model.get('promotorleasing_c') =="" || this.model.get('promotorleasing_c')==null){
-              /*reqs= reqs + '<b>Promotor Leasing<br></b>';*/
-              this.model.set('promotorleasing_c', '9 - Sin Gestor');
-              this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
-          }
+                     if (this.model.get('promotorleasing_c') =="" || this.model.get('promotorleasing_c')==null){
+                         /*reqs= reqs + '<b>Promotor Leasing<br></b>';*/
+                         this.model.set('promotorleasing_c', '9 - Sin Gestor');
+                         this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                     }
 
-          this.model.set("tipo_registro_c", "Lead");
-          this.model.save();
-          console.log ('Guarda a Lead');
-          this._render();
+                     this.model.set("tipo_registro_c", "Lead");
+                     this.model.save();
+                     console.log ('Guarda a Lead');
+                     app.alert.show('success', {
+                     level: 'success',
+                     messages: 'Proceso Finalizado.',
+                         });
+                    // this._render();
 
-          if(reqs!=""){
-              console.log ('Validacion Campos LEAD');
-              app.alert.show('alert_calls4', {
-                  level: 'error',
-                  messages: 'Para convertir a Lead es necesario que se llenen los siguientes campos requeridos: ' +reqs ,
-              });
-          }
+                 }
+
       },
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
