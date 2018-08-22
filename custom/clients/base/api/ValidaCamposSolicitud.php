@@ -20,9 +20,9 @@ class ValidaCamposSolicitud extends SugarApi
                 'reqType' => 'GET',
                 'noLoginRequired' => true,
                 //endpoint path
-                'path' => array('ObligatoriosCuentasSolicitud', '?','?'),
+                'path' => array('ObligatoriosCuentasSolicitud', '?', '?'),
                 //endpoint variables
-                'pathVars' => array('module', 'id_cuenta','caso'),
+                'pathVars' => array('module', 'id_cuenta', 'caso'),
                 //method to call
                 'method' => 'validaRequeridos',
                 //short help string to be displayed in the help documentation
@@ -38,7 +38,7 @@ class ValidaCamposSolicitud extends SugarApi
     // FUNCIONES PARA VALIDACIONES
     public function validaRequeridos($api, $args)
     {
-        $option=$args['caso'];
+        $option = $args['caso'];
 
         $req_pm = "origendelprospecto_c,tipodepersona_c," .
             "nombre_comercial_c,sectoreconomico_c," .
@@ -51,7 +51,7 @@ class ValidaCamposSolicitud extends SugarApi
             "empleados_c," .
             "promotorleasing_c,promotorfactoraje_c,promotorcredit_c";
 
-        if($option=='2'){
+        if ($option == '2') {
             $req_pm .= ",rfc_c,fechaconstitutiva_c," .
                 "pais_nacimiento_c,estado_nacimiento_c," .
                 "zonageografica_c,ventas_anuales_c," .
@@ -112,11 +112,13 @@ class ValidaCamposSolicitud extends SugarApi
 
 
         if (count($array_errores) > 0) {
-            return implode(',',$array_errores);
+            $strResult = implode('<br>', $array_errores);
+            $strResult = "<b>" . $strResult . "</b>";
+            return $strResult;
         } else {
             return "";
         }
 
 
-}
+    }
 }
