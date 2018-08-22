@@ -558,6 +558,7 @@
 
         var myField = this.getField("regresalead");
         var myField1 = this.getField("prospectocontactado");
+        var myField2 = this.getField("conviertelead");
 
         if (this.model.get('tct_prospecto_contactado_chk_c') == true &&
             this.model.get('tipo_registro_c') == "Prospecto" &&
@@ -588,8 +589,19 @@
                 });
             }
         }
-
-
+        //Para mostrar/ocultar el boton de convertir a Lead y Convertir a Prospecto Contactado. 22/08/2018
+        if (this.model.get('tipo_registro_c') == "Persona") {
+            myField1.listenTo(myField1, "render", function () {
+                myField1.hide();
+            });
+        }
+        else {
+            if (myField2) {
+                myField2.listenTo(myField2, "render", function () {
+                    myField2.hide();
+                });
+            }
+        }
     },
 
 
@@ -886,6 +898,7 @@
         this.context.on('button:cancel_button:click', this.handleCancel, this);
         this.context.on('button:save_button:click', this.borraTel, this);
         this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
+        this.context.on('button:convierte_lead:click', this.validalead, this);
     },
 
     /*
@@ -1102,6 +1115,63 @@
               app.alert.show('alert_calls2', {
                   level: 'error',
                   messages: 'Para convertir a Prospecto Contactado es necesario se llenen los campos requeridos: ' +campos ,
+              });
+          }
+      },
+
+      //Validaciòn para convertir el tipo de cuenta Persona a LEAD, Adrian Arauz 21/08/2018
+      validalead: function () {
+          var reqs= "";
+
+          /*if (this.model.get('origendelprospecto_c') =="" || this.model.get('origendelprospecto_c')==null){
+              reqs= reqs + '<b><br>Origen<br></b>';
+          }*/
+
+          if (this.model.get('name') =="" || this.model.get('name')==null){
+              reqs= reqs + '<b>Nombre<br></b>';
+          }
+
+          if ( (this.model.get('apellidopaterno_c') =="" || this.model.get('apellidopaterno_c')==null)  && this.model.get('tipodepersona_c') != 'Persona Moral'){
+              reqs= reqs + '<b>Apellido Paterno<br></b>';
+          }
+
+          if (this.model.get('email') =="" || this.model.get('email')==null){
+              reqs= reqs + '<b>Email<br></b>';
+          }
+
+          if ( (this.model.get('nombre_comercial_c') =="" || this.model.get('nombre_comercial_c')==null) && this.model.get('tipodepersona_c')== 'Persona Moral'){
+
+              reqs= reqs + '<b>Nombre Comercial<br></b>';
+          }
+
+          if (this.model.get('promotorcredit_c') =="" || this.model.get('promotorcredit_c')==null){
+              /*reqs= reqs + '<b>Promotor de Cr\u00E9dito<br>';*/
+              this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
+              this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
+          }
+
+          if (this.model.get('promotorfactoraje_c') =="" || this.model.get('promotorfactoraje_c')==null){
+              /*reqs= reqs + '<b>Promotor de Factoraje<br></b>';*/
+              this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
+              this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
+          }
+
+          if (this.model.get('promotorleasing_c') =="" || this.model.get('promotorleasing_c')==null){
+              /*reqs= reqs + '<b>Promotor Leasing<br></b>';*/
+              this.model.set('promotorleasing_c', '9 - Sin Gestor');
+              this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
+          }
+
+          this.model.set("tipo_registro_c", "Lead");
+          this.model.save();
+          console.log ('Guarda a Lead');
+          this._render();
+
+          if(reqs!=""){
+              console.log ('Validacion Campos LEAD');
+              app.alert.show('alert_calls4', {
+                  level: 'error',
+                  messages: 'Para convertir a Lead es necesario que se llenen los siguientes campos requeridos: ' +reqs ,
               });
           }
       },
