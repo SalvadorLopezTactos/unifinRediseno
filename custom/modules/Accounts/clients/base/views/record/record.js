@@ -141,6 +141,7 @@
     },
 
       fulminantcolor: function () {
+          $( '#space' ).remove();
           $('.control-group').before('<div id="space" style="background-color:#000042"><br></div>');
           $('.control-group').css("background-color", "#e5e5e5");
           $('.a11y-wrapper').css("background-color", "#e5e5e5");

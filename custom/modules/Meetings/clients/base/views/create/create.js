@@ -7,6 +7,7 @@
         this._super("initialize", [options]);
         this.on('render', this.disableparentsfields, this);
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial, this));
+        this.on('render', this.disablestatus, this);
     },
 
     _render: function () {
@@ -61,6 +62,17 @@
             if (this.model.get('parent_id') != undefined) {
                 this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;')
             }
+        }
+    },
+
+    /*@Jesus Carrillo
+    Deshabilita campo status dependiendo de diferentes criterios
+     */
+    disablestatus:function () {
+        if(this.model.get('id')=='' || Date.parse(this.model.get('date_end'))>Date.now()){
+            $('span[data-name=status]').css("pointer-events", "none");
+        }else{
+            $('span[data-name=status]').css("pointer-events", "auto");
         }
     },
 })
