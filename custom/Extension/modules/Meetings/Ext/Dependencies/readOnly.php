@@ -163,6 +163,8 @@ $dependencies['Meetings']['readOnly'] = array
     ),
 );*/
 
+/*@Jesus Carrillo
+  Se deshabilita con el fin de poder ajustar el tamaño del campo en el CreateView
 $dependencies['Meetings']['status'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
@@ -179,7 +181,7 @@ $dependencies['Meetings']['status'] = array(
         ),
     ),
 );
-
+*/
 $dependencies['Meetings']['invitees'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
