@@ -124,6 +124,15 @@ array (
                 'acl_action' => 'view',
                 'css_class' => 'btn-regresa-alead',
               ),
+              12 =>
+              array (
+               'type' => 'rowaction',
+               'event' => 'button:convierte_lead:click',
+               'name' => 'conviertelead',
+               'label' => 'Convertir a Lead',
+               'acl_action' => 'view',
+               'class' => 'jcmx1',
+               ),
             ),
           ),
           3 =>
