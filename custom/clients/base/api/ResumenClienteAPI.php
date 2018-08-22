@@ -328,7 +328,8 @@ class ResumenClienteAPI extends SugarApi
                 //Recorre reuniones
                 if (count($users)>0) {
                   foreach ($relatedMeetings as $meeting) {
-                    if (in_array($meeting->assigned_user_id, $users) && $meeting->status=='Held') {
+                    //if (in_array($meeting->assigned_user_id, $users) && $meeting->status=='Held') {
+                    if (in_array($meeting->assigned_user_id, $users)) {
                       $total_reuniones++;
 
                       //Obtiene fecha de inicio de reunión
@@ -338,17 +339,21 @@ class ResumenClienteAPI extends SugarApi
 
                       //Compara fechas y establece última fecha de reunión
                       if ( $fecha_reunion > $ultima_reunion){
-                          $ultima_reunion = $fecha_reunion->format("d/m/Y");
+                          //$ultima_reunion = $fecha_reunion->format("d/m/Y");
+                          $ultima_reunion = $fecha_reunion;
                           $fecha_completa_reunion = $dateFR;
                       }
-                    }else{
+                    }
+                    /*
+                    else{
                         $ultima_reunion =" ";
                         $fecha_completa_reunion = " ";
                     }
+                    */
                   }
 
                   //Agrega valores al arreglo de respuesta
-                  $arr_principal['historial_contactos']['ultima_cita']= $ultima_reunion;
+                  $arr_principal['historial_contactos']['ultima_cita']= $ultima_reunion->format("d/m/Y");
                   $arr_principal['historial_contactos']['fecha_completa_cita']= $fecha_completa_reunion;
 
                 }
@@ -396,7 +401,8 @@ class ResumenClienteAPI extends SugarApi
                 //Recorre llamadas
                 if (count($users)>0) {
                   foreach ($relatedCalls as $call) {
-                      if (in_array($call->assigned_user_id, $users) && $call->status=='Held') {
+                      //if (in_array($call->assigned_user_id, $users) && $call->status=='Held') {
+                      if (in_array($call->assigned_user_id, $users)) {
 
                         $total_llamadas++;
                         
@@ -407,18 +413,22 @@ class ResumenClienteAPI extends SugarApi
 
                         //Compara fechas y establece última fecha de llamada
                         if ( $fecha_llamada > $ultima_llamada){
-                            $ultima_llamada = $fecha_llamada->format("d/m/Y");
+                            //$ultima_llamada = $fecha_llamada->format("d/m/Y");
+                            $ultima_llamada = $fecha_llamada;
                             $fecha_completa_llamada = $dateFL;
 
                         }
-                      }else{
+                      }
+                      /*
+                      else{
                           $ultima_llamada ="";
                           $fecha_completa_llamada ="";
                       }
+                      */
                   }
 
                   //Agrega valores al arreglo de respuesta
-                  $arr_principal['historial_contactos']['ultima_llamada']= $ultima_llamada;
+                  $arr_principal['historial_contactos']['ultima_llamada']= $ultima_llamada->format("d/m/Y");
                   $arr_principal['historial_contactos']['fecha_completa_llamada']= $fecha_completa_llamada;
                 }
 

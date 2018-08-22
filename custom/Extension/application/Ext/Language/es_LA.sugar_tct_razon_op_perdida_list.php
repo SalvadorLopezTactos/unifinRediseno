@@ -1,7 +1,8 @@
 <?php
- // created: 2018-07-18 12:05:24
+ // created: 2018-08-22 11:54:48
 
 $app_list_strings['tct_razon_op_perdida_list']=array (
+  '' => '',
   'P' => 'PRECIO',
   'C' => 'COMPETENCIA',
   'NPR' => 'NO TENEMOS EL PRODUCTO QUE REQUIERE',
