@@ -8,8 +8,9 @@
 
         this.on('render', this.disableparentsfields, this);
         this.model.on('sync', this.cambioFecha, this);
+        this.model.on('sync', this.disablestatus, this);
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
-
+       
 
     },
 
@@ -95,12 +96,20 @@
         callback(null, fields, errors);
 
     },
-
-
     /* @Salvador Lopez Y Adrian Arauz
     Oculta los campos relacionados
     */
     disableparentsfields: function () {
         this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;')
+    },
+    /*@Jesus Carrillo
+    Deshabilita campo status dependiendo de diferentes criterios
+     */
+    disablestatus:function () {
+        if(this.model.get('id')=='' || Date.parse(this.model.get('date_end'))>Date.now()){
+            $('span[data-name=status]').css("pointer-events", "none");
+        }else{
+            $('span[data-name=status]').css("pointer-events", "auto");
+        }
     },
 })

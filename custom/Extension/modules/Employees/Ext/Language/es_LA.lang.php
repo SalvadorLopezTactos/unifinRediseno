@@ -6,3 +6,4 @@ $mod_strings['LBL_OPTOUT'] = 'No recibir notificaciones/Reasignación de promoto
 $mod_strings['LBL_TCT_ALTAPROVEEDOR_CHK'] = 'Alta Proveedor';
 $mod_strings['LBL_TCT_ALTA_CLIENTES_CHK'] = 'Alta Clientes';
 $mod_strings['LBL_PUESTOUSUARIO'] = 'PUESTO USUARIO';
+$mod_strings['LBL_EQUIPO'] = 'Equipo Principal UNICS';

@@ -7,10 +7,11 @@
     productos: null,
     initialize: function (options) {
         self = this;
+	      var createViewEvents = {};
+        createViewEvents['focus [name=monto_c]'] = 'maxCurrency';
+      	this.events = _.extend({}, this.events, createViewEvents);
         this._super("initialize", [options]);
-
         this.on('render', this.ocultaFunc, this);
-
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
         this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
@@ -361,6 +362,13 @@
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
     },
+
+    maxCurrency: function(evt)
+    {
+    	var $field = $("input[name=" + evt.currentTarget.name + "]");
+	    $field.attr('maxlength','16');
+    },
+
 
     /*
     * @Author F. Javier G. Solar
@@ -1112,6 +1120,7 @@
       $('[data-name="picture"]').show();
 		  //Ocultando el panel de Oportunidad perdida
       $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
+      $('input[name=monto_c]').attr('maxlength','16');
     },
 
     /*
