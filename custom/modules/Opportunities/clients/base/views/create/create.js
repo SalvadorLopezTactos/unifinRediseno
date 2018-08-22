@@ -7,9 +7,6 @@
     productos: null,
     initialize: function (options) {
         self = this;
-	      var createViewEvents = {};
-        createViewEvents['focus [name=monto_c]'] = 'maxCurrency';
-      	this.events = _.extend({}, this.events, createViewEvents);
         this._super("initialize", [options]);
         this.on('render', this.ocultaFunc, this);
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
@@ -267,6 +264,17 @@
                     this.model.set('amount',this.model.get('monto_c'));
                 }
             }
+            var str = this.model.get('monto_c');
+            var n = str.length;
+            if(n>22)
+    	      {
+                  app.alert.show('monto', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'El campo \"Monto de l&iacutenea\" no debe exceder de 15 digitos. Favor de corregir.'
+                });
+                this.model.set('monto_c',0);
+            }
         },this));
 
         this.model.on("change:amount", _.bind(function() {
@@ -362,14 +370,7 @@
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
     },
-
-    maxCurrency: function(evt)
-    {
-    	var $field = $("input[name=" + evt.currentTarget.name + "]");
-	    $field.attr('maxlength','24');
-    },
-
-
+    
     /*
     * @Author F. Javier G. Solar
     * 23-07-2018
@@ -584,12 +585,12 @@
                 if ( modelo.get('tipo_registro_c') != 'Cliente' ){
                     //Si es prospecto ponemos como primer registro el value 'OP'
                     //console.log(this.model.fields['estatus_c']);
-                    this.model.set('estatus_c','OP');
+                    //this.model.set('estatus_c','OP');
                 }
                 if ( modelo.get('tipo_registro_c') == 'Cliente' ){
                     //Si es prospecto ponemos como primer registro el value 'OP'
                     //console.log(this.model.fields['estatus_c']);
-                    this.model.set('estatus_c','P');
+                    //this.model.set('estatus_c','P');
                 }
                 // 0000080: El sistema permite crear una operación de tipo Factoraje para una PF
                 // todo pendiente
@@ -1120,7 +1121,6 @@
       $('[data-name="picture"]').show();
 		  //Ocultando el panel de Oportunidad perdida
       $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
-      $('input[name=monto_c]').attr('maxlength','16');
     },
 
     /*
