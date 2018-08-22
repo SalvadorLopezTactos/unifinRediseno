@@ -366,7 +366,7 @@
     maxCurrency: function(evt)
     {
     	var $field = $("input[name=" + evt.currentTarget.name + "]");
-	    $field.attr('maxlength','16');
+	    $field.attr('maxlength','24');
     },
 
 

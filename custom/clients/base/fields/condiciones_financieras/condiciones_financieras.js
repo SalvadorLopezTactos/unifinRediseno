@@ -221,7 +221,20 @@
     addNewCondicionFinanciera: function (evt) {
         window.contador=1;
         if (!evt) return;
-                
+
+        var idplazo = this.$(evt.currentTarget).val() || this.$('.newPlazo').val(),
+            currentValue,
+            CondicionFinancieraFieldHtml,
+            $CondicionFinanciera;
+        if (idplazo === '')
+        {
+              $('.newPlazo').css('border-color', 'red');
+              app.alert.show("Plazo requerido", {
+                  level: "error",
+                  title: "El campo Plazo es requerido.",
+                  autoClose: false
+              });
+        }       
         var idactivo = this.$(evt.currentTarget).val() || this.$('.newActivo').val(),
             currentValue,
             CondicionFinancieraFieldHtml,
@@ -254,11 +267,13 @@
 
             // add tooltips
             //this.addPluginTooltips($CondicionFinanciera.prev());
-
             this._clearNewCondicionFinancieraField();
+            $('.newActivo').css('border-color', '');
+            $('.newPlazo').css('border-color', '');
         }
         else
         {
+              $('.newActivo').css('border-color', 'red');
               app.alert.show("Activo requerido", {
                   level: "error",
                   title: "El campo Activo es requerido.",

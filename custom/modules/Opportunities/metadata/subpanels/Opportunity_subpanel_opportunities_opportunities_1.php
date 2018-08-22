@@ -1,5 +1,5 @@
 <?php
-// created: 2018-08-21 11:15:37
+// created: 2018-08-21 11:14:47
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -7,6 +7,16 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_LIST_OPPORTUNITY_NAME',
     'widget_class' => 'SubPanelDetailViewLink',
     'width' => 10,
+    'default' => true,
+  ),
+  'account_name' => 
+  array (
+    'vname' => 'LBL_LIST_ACCOUNT_NAME',
+    'widget_class' => 'SubPanelDetailViewLink',
+    'module' => 'Accounts',
+    'width' => 10,
+    'target_record_key' => 'account_id',
+    'target_module' => 'Accounts',
     'default' => true,
   ),
   'tct_etapa_ddw_c' => 
@@ -23,19 +33,6 @@ $subpanel_layout['list_fields'] = array (
     'vname' => 'LBL_ESTATUS',
     'width' => 10,
   ),
-  'monto_c' => 
-  array (
-    'related_fields' => 
-    array (
-      0 => 'currency_id',
-      1 => 'base_rate',
-    ),
-    'type' => 'currency',
-    'default' => true,
-    'vname' => 'LBL_MONTO',
-    'currency_format' => true,
-    'width' => 10,
-  ),
   'amount' => 
   array (
     'type' => 'currency',
@@ -50,13 +47,6 @@ $subpanel_layout['list_fields'] = array (
     'width' => 10,
     'default' => true,
   ),
-  'vigencialinea_c' => 
-  array (
-    'type' => 'date',
-    'vname' => 'LBL_VIGENCIALINEA',
-    'width' => 10,
-    'default' => true,
-  ),
   'assigned_user_name' => 
   array (
     'name' => 'assigned_user_name',
@@ -67,10 +57,10 @@ $subpanel_layout['list_fields'] = array (
     'width' => 10,
     'default' => true,
   ),
-  'fecha_estimada_cierre_c' => 
+  'date_closed' => 
   array (
-    'type' => 'date',
-    'vname' => 'LBL_FECHA_ESTIMADA_CIERRE',
+    'name' => 'date_closed',
+    'vname' => 'LBL_DATE_CLOSED',
     'width' => 10,
     'default' => true,
   ),
