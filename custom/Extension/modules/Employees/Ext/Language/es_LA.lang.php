@@ -7,3 +7,5 @@ $mod_strings['LBL_TCT_ALTAPROVEEDOR_CHK'] = 'Alta Proveedor';
 $mod_strings['LBL_TCT_ALTA_CLIENTES_CHK'] = 'Alta Clientes';
 $mod_strings['LBL_PUESTOUSUARIO'] = 'PUESTO USUARIO';
 $mod_strings['LBL_EQUIPO'] = 'Equipo Principal UNICS';
+$mod_strings['LBL_EQUIPOS_C'] = 'Equipos de promoción';
+$mod_strings['LBL_EXT'] = 'EXT';
