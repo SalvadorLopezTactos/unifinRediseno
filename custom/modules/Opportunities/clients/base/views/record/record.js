@@ -3,6 +3,7 @@
   
   events: {
     'click [name=cancel_button]': 'cancelClicked',
+    'keydown [name=vendedor_c]': 'checkvendedor',
   },
 
 	initialize: function (options) {
@@ -356,7 +357,7 @@
             this.$("div.record-label[data-name='monto_c']").text("Monto colocaci\u00F3n");
             this.$("div.record-label[data-name='tipo_de_operacion_c']").text("Tipo de operaci\u00F3n");
         }else{
-            this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00CDnea");
+            this.$("div.record-label[data-name='monto_c']").text("Monto de l\u00EDnea");
             this.$("div.record-label[data-name='tipo_de_operacion_c']").text("Tipo de solicitud");
         }
   		if (this.model.get('tipo_operacion_c') == '2'){
@@ -374,7 +375,7 @@
         }
         if(this.model.get('tipo_producto_c')=='4'){
             this.$("div.record-label[data-name='ri_porcentaje_ca_c']").text("Comisi\u00F3n Incremento/Ratificaci\u00F3n");
-            this.$("div.record-label[data-name='plazo_c']").text("Plazo m\u00E1ximo en d\u00CDas");
+            this.$("div.record-label[data-name='plazo_c']").text("Plazo m\u00E1ximo en d\u00EDas");
         }else{
             this.$("div.record-label[data-name='ri_porcentaje_ca_c']").text("Comisi\u00F3n por apertura Incremento/Ratificaci\u00F3n");
             this.$("div.record-label[data-name='plazo_c']").text("Plazo en meses");
@@ -1086,6 +1087,23 @@ console.log(name);
             });
         }
         callback(null, fields, errors);
+    },
+
+     //@Jesus Carrillo  
+    //Funcion que valida que el campo vendedor no tenga caracteres especiales 
+    checkvendedor: function (evt) { 
+        if (!evt) return; 
+        var $input = this.$(evt.currentTarget); 
+        var expreg =/[a-zA-Z\u00F1\u00D1\u00C1\u00E1\u00C9\u00E9\u00CD\u00ED\u00D3\u00F3\u00DA\u00FA\u00DC\u00FC\s]+/;  
+        //var expreg =/[A-Za-z]/; 
+        if((expreg.test(evt.key))==false){  
+            app.alert.show('error_vendedor', {  
+                level: 'error', 
+                autoClose: true,  
+                messages: 'El campo \"Vendedor\" no acepta caracteres especiales. Favor de corregir'  
+            }); 
+            return false; 
+        } 
     },
 
 
