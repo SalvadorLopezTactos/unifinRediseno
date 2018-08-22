@@ -38,7 +38,7 @@
 
         var plazo_list = app.lang.getAppListStrings('plazo_0');
         var plazo_keys = app.lang.getAppListKeys('plazo_0');
-        var plazo_list_html = '<option value="">';
+        var plazo_list_html = '<option value=""></option>';
         for (plazo_keys in plazo_list) {
             plazo_list_html += '<option value="' + plazo_keys + '">' + plazo_list[plazo_keys] + '</option>'
 
