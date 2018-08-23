@@ -380,7 +380,7 @@
 
         self = this;
 
-        if ( this.model.get('account_id') != "" || this.model.get('account_id') != null)
+        if ( this.model.get('account_id') != "" && this.model.get('account_id') != null)
         {
             app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/1'), null, {
                 success: _.bind(function (data) {
