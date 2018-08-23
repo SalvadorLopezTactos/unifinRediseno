@@ -8,12 +8,6 @@
 
 	initialize: function (options) {
 		self = this;
-   	var createViewEvents = {};
-    createViewEvents['focus [name=amount]'] = 'maxCurrency';
-    createViewEvents['focus [name=monto_c]'] = 'maxCurrency';
-    createViewEvents['focus [name=ca_pago_mensual_c]'] = 'maxCurrency';
-    createViewEvents['focus [name=ca_importe_enganche_c]'] = 'maxCurrency';    
- 	  this.events = _.extend({}, this.events, createViewEvents);
 		this._super("initialize", [options]);
 		/*
 		 * @author Carlos Zaragoza Ortiz
@@ -86,17 +80,11 @@
 
 	},
 
-    maxCurrency: function(evt)
-    {
-    	var $field = $("input[name=" + evt.currentTarget.name + "]");
-	    $field.attr('maxlength','24');
-    },
-
     cancelClicked: function () {
        this._super('cancelClicked');
        window.contador=0;
     },
-
+    
     _renderHtml : function()
     {
       if(this.model.get('id_process_c') !== "")
@@ -220,6 +208,19 @@
   		},this))
 
   		this.model.on("change:monto_c", _.bind(function() {
+        var str = this.model.get('monto_c');
+        var n = str.length;
+        if(n>22)
+ 	      {
+             app.alert.show('monto', {
+               level: 'error',
+               autoClose: false,
+               messages: 'El campo \"Monto de l&iacutenea\" no debe exceder de 15 digitos. Favor de corregir.'
+             });
+             this.model.set('monto_c',0);
+             this.render();
+        }
+
   			if (this.model.get('amount') == null || this.model.get('amount') == ''){
   				this.model.set('amount',this.model.get('monto_c'));
   			}else{
@@ -245,7 +246,20 @@
       	},this));
 
   		this.model.on("change:amount", _.bind(function() {
-  			if (this.model.get('monto_c') == null || this.model.get('monto_c') == ''){
+        var str = this.model.get('amount');
+        var n = str.length;
+        if(n>22)
+ 	      {
+             app.alert.show('monto', {
+               level: 'error',
+               autoClose: false,
+               messages: 'El campo \"Monto a operar\" no debe exceder de 15 digitos. Favor de corregir.'
+             });
+             this.model.set('amount',0);
+             this.render();
+        }     
+  			
+        if (this.model.get('monto_c') == null || this.model.get('monto_c') == ''){
   				this.model.set('monto_c',this.model.get('amount'));
   			}else{
   				//Si la oportunidad es de tipo Cotización/Contrato los montos deben ser iguales
@@ -1029,6 +1043,32 @@ console.log(name);
         var pagomensual = parseFloat(this.model.get('ca_pago_mensual_c'));
         var montolinea = parseFloat(this.model.get('monto_c'));
         var rentaini = parseFloat(this.model.get('ca_importe_enganche_c'));
+
+        var str = this.model.get('ca_pago_mensual_c');
+        var n = str.length;
+        if(n>22)
+ 	      {
+             app.alert.show('monto', {
+               level: 'error',
+               autoClose: false,
+               messages: 'El campo \"Pago mensual\" no debe exceder de 15 digitos. Favor de corregir.'
+             });
+             this.model.set('ca_pago_mensual_c',0);
+             this.render();
+        }
+
+        var str1 = this.model.get('ca_importe_enganche_c');
+        var n = str1.length;
+        if(n>22)
+ 	      {
+             app.alert.show('monto', {
+               level: 'error',
+               autoClose: false,
+               messages: 'El campo \"Renta inicial\" no debe exceder de 15 digitos. Favor de corregir.'
+             });
+             this.model.set('ca_importe_enganche_c',0);
+             this.render();
+        }
 
         if (pagomensual > montoop){
               app.alert.show('alerta_mayor_que1', {
