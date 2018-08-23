@@ -1,5 +1,13 @@
 ({
     extendsFrom: 'CreateView',
+
+    events: {
+        'keydown [name=monto_c]': 'checkdinero',
+        'keydown [name=amount]': 'checkdinero',
+        'keydown [name=ca_pago_mensual_c]': 'checkdinero',
+        'keydown [name=ca_importe_enganche_c ]': 'checkdinero',
+    },
+
     tipoDePersona: null,
     prospecto: null,
     productoUsuario: null,
@@ -1155,5 +1163,45 @@
 
     _dispose: function() {
         this._super('_dispose', []);
-    }
+    },
+
+    /*@Jesus Carrillo
+  Metodo que limita el tipo moneda a 15 entetos y 2 decimales
+ */
+    checkdinero: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        if($input.val().includes('.')) {
+            var expreg = /[\d]+/;
+        }else{
+            var expreg = /[\d.]+/;
+        }
+
+        if((expreg.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return false;
+        }else{
+            if($input.val().includes('.')) {
+                dec = $input.val().split('.');
+                if(dec[1].length==2 && evt.key!="Backspace" && evt.key!="Tab"){
+                    return false;
+                }
+                return;
+            }else {
+                while ($input.val().indexOf(',') != -1){
+                    $input.val($input.val().replace(',',''))
+                }
+                if ($input.val().length == 15 && evt.key != "Backspace" && evt.key!="Tab") {
+                    $input.val($input.val() + '.');
+                    return;
+                } else {
+                    return;
+                }
+            }
+        }
+    },
 })
