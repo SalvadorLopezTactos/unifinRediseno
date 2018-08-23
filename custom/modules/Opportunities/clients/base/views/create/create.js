@@ -15,7 +15,7 @@
         //this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this));
         //this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
         this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
-
+        this.model.addValidationTask('checkpromotorFactoraje',_.bind(this.validacrearfactoraje,this));
         //Ajuste Salvador Lopez <salvador.lopez@tactos.com.mx>
         //Validación para evitar asociar una Persona que no sea cliente
         this.model.addValidationTask('check_person_type', _.bind(this.personTypeCheck, this));
@@ -191,7 +191,7 @@
         //* Quitamos los campos Vendedor y Comisión
         this.$('div[data-name=opportunities_ag_vendedores_1_name]').hide();
         this.$('div[data-name=comision_c]').hide();
-
+//Validaciontask
         this.model.on("change:tipo_producto_c", _.bind(function(){
             if(this.model.get('tipo_producto_c') == '4'){
                 if(this.tipoDePersona){
@@ -200,7 +200,7 @@
                         title: "No puedes generar factoraje para Personas Fisicas",
                         autoClose: false
                     });
-                    this.model.set('tipo_producto_c','1');
+                    //this.model.set('tipo_producto_c','1');
                 }
                 this.obtieneCondicionesFinancieras();
             }
@@ -215,6 +215,7 @@
             this.obtieneCondicionesFinancieras();
             this.verificaOperacionProspecto();
         },this));
+
 
         /*
          * @author Carlos Zaragoza
@@ -370,7 +371,23 @@
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
     },
-    
+    /*
+    *Victor Martinez Lopez
+    * Valida que no se pueda crear un producto factoraje para personas fisicas
+     */
+    validacrearfactoraje: function(fields, errors, callback){
+        if(this.model.get('tipo_producto_c') == '4'){
+            if(this.tipoDePersona){
+                app.alert.show("tipoPersonaFisica", {
+                    level: "error",
+                    title: "No puedes generar factoraje para Personas F&iacute;sicas",
+                    autoClose: false
+                });
+                errors['tipo_producto_c'] = "No puedes generar factoraje para Personas F&iacute;sicas";
+                errors['tipo_producto_c'].required = true;
+                }
+        }callback(null,fields,errors);
+        },
     /*
     * @Author F. Javier G. Solar
     * 23-07-2018
@@ -597,7 +614,8 @@
                 if( modelo.get('tipodepersona_c')=='Persona Fisica' && modelo.get('id') != null){
                     this.tipoDePersona = true;
                     //console.log("Cambiamos a tipo producto leasing");
-                    this.model.set('tipo_producto_c','1');
+                    
+                    //this.model.set('tipo_producto_c','1');
                 }else{
                     this.tipoDePersona = false;
                 }
