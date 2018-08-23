@@ -61,7 +61,7 @@ SQL;
         if($id_linea_padre!="" && strlen($id_linea_padre)>0 && $id_linea_padre!=0 && $id_linea_padre != 'NULL'){
             $query = <<<SQL
 UPDATE opportunities_cstm
-SET tipo_de_operacion_c = 'LINEA_NUEVA', plazo_ratificado_incremento_c ="",
+SET /*tipo_de_operacion_c = 'LINEA_NUEVA', */ plazo_ratificado_incremento_c ="",
 ratificacion_incremento_c=0, monto_ratificacion_increment_c=0.00,
 ri_ca_tasa_c = 0,
  ri_deposito_garantia_c = 0,
@@ -70,7 +70,7 @@ ri_ca_tasa_c = 0,
  ri_vrc_c = 0,
  ri_vri_c = 0,
  ri_usuario_bo_c=''
-where id_linea_credito_c = $id_linea_padre and tipo_de_operacion_c = 'RATIFICACION_INCREMENTO' and  tipo_operacion_c = "2" and estatus_c = "N"
+where id_linea_credito_c = $id_linea_padre /* and tipo_de_operacion_c = 'RATIFICACION_INCREMENTO' */ and  tipo_operacion_c = "2" and estatus_c = "N"
 SQL;
             $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : query: " . $query);
             $queryResult = $db->query($query);
