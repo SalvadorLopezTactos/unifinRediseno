@@ -75,7 +75,10 @@ class ValidaCamposSolicitud extends SugarApi
             $array_campos = explode(',', $req_pm);
 
             foreach ($array_campos as $key) {
-                if ($beanPersona->$key == "" || $beanPersona->$key == null) {
+                if($key=="ventas_anuales_c" || $key=="activo_fijo_c"){
+                    $beanPersona->$key=floatval($beanPersona->$key);
+                }
+                if ($beanPersona->$key == "" || $beanPersona->$key == null || $beanPersona->$key == 0) {
                     $label = $beanPersona->field_defs[$key]['labelValue'];
 
                     array_push($array_errores, $label);

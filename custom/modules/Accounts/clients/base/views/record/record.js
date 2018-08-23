@@ -35,6 +35,7 @@
         this.model.addValidationTask('check_info', _.bind(this.doValidateInfoReq, this));
         this.model.addValidationTask('sectoreconomico', _.bind(this.sectoreconomico, this));
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
+        this.model.addValidationTask('checkpotencialfields', _.bind(this.validapotencial, this));
 
 
         /*
@@ -1713,7 +1714,18 @@
             }
         }
     },
-
+    validapotencial: function (fields, errors, callback) {
+          if (parseFloat(this.model.get('ventas_anuales_c')) == 0){
+              errors['ventas_anuales_c'] = errors['ventas_anuales_c'] || {};
+              errors['ventas_anuales_c'].required = true;
+          }
+            if (parseFloat(this.model.get('activo_fijo_c')) == 0){
+                errors['activo_fijo_c'] = errors['activo_fijo_c'] || {};
+                errors['activo_fijo_c'].required = true;
+            }
+          callback(null, fields, errors);
+      },
+      
     doValidateInfoReq: function (fields, errors, callback) {
         if (this.model.get('origendelprospecto_c') == 'Prospeccion propia') {
             var metodoProspeccion = new String(this.model.get('metodo_prospeccion_c'));
