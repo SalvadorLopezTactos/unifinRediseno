@@ -10,13 +10,15 @@
         this.model.on('sync', this.cambioFecha, this);
         this.model.on('sync', this.disablestatus, this);
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
-       
-
+        this.model.on("change:status",_.bind(this.muestracampoResultado, this));
+        //this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
     },
 
     _render: function () {
         this._super("_render");
-
+        if (this.model.get('status') == 'Planned') {
+            this.$('div[data-name=resultado_c]').hide();
+        }
     },
 
     cambioFecha: function () {
@@ -24,6 +26,16 @@
         console.log("Fechas: " + this.fechaInicioTemp);
     },
 
+    /*Solo será visible el resultado cuando el estado se Realizada o No Realizada
+    * Victor Martinez Lopez 23-8-2018
+    * */
+    muestracampoResultado:function () {
+        if(this.model.get('status')=='Held'|| this.model.get('status')=='Not Held'){
+            this.$('div[data-name=resultado_c]').show();
+        } if (this.model.get('status') == 'Planned') {
+            this.$('div[data-name=resultado_c]').hide();
+        }
+    },
     /* @F. Javier G. Solar
      * Valida que la Fecha Inicial no sea menor que la actual
      * 14/08/2018
