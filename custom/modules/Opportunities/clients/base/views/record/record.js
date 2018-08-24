@@ -4,10 +4,21 @@
   events: {
     'click [name=cancel_button]': 'cancelClicked',
     'keydown [name=vendedor_c]': 'checkvendedor',
+
+      //Se añaden eventos para los campos delimitados por limitanumero. Adrian Arauz 23/08/2018
+      'keydown [name=tipo_tasa_ordinario_c]': 'limitanumero',
+      'keydown [name=puntos_sobre_tasa_c]': 'limitanumero',
+      'keydown [name=porcentaje_ca_c]': 'limitanumero',
+      'keydown [name=f_aforo_c]': 'limitanumero',
+      'keydown [name=tasa_fija_moratorio_c]': 'limitanumero',
+      'keydown [name=puntos_tasa_moratorio_c]': 'limitanumero',
+      'keydown [name=factor_moratorio_c]': 'limitanumero',
+
     'keydown [name=monto_c]': 'checkdinero',
     'keydown [name=amount]': 'checkdinero',
     'keydown [name=ca_pago_mensual_c]': 'checkdinero',
     'keydown [name=ca_importe_enganche_c ]': 'checkdinero',
+
   },
 
 	initialize: function (options) {
@@ -50,6 +61,7 @@
         this.model.on('change:ca_pago_mensual_c', this.validamontos, this);
         this.model.on('change:amount', this.validamontos, this);
         this.model.on('change:porciento_ri_c', this.validamontos, this);
+        this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this)); //Se añade funcionalidad para limitar a 99.00 en valores de factoraje. Adrian Arauz 23/08/2018
 
 
 
@@ -88,7 +100,7 @@
        this._super('cancelClicked');
        window.contador=0;
     },
-    
+
     _renderHtml : function()
     {
       if(this.model.get('id_process_c') !== "")
@@ -212,19 +224,6 @@
   		},this))
 
   		this.model.on("change:monto_c", _.bind(function() {
-        var str = this.model.get('monto_c');
-        var n = str.length;
-        if(n>22)
- 	      {
-             app.alert.show('monto', {
-               level: 'error',
-               autoClose: false,
-               messages: 'El campo \"Monto de l&iacutenea\" no debe exceder de 15 digitos. Favor de corregir.'
-             });
-             this.model.set('monto_c',0);
-             this.render();
-        }
-
   			if (this.model.get('amount') == null || this.model.get('amount') == ''){
   				this.model.set('amount',this.model.get('monto_c'));
   			}else{
@@ -250,20 +249,7 @@
       	},this));
 
   		this.model.on("change:amount", _.bind(function() {
-        var str = this.model.get('amount');
-        var n = str.length;
-        if(n>22)
- 	      {
-             app.alert.show('monto', {
-               level: 'error',
-               autoClose: false,
-               messages: 'El campo \"Monto a operar\" no debe exceder de 15 digitos. Favor de corregir.'
-             });
-             this.model.set('amount',0);
-             this.render();
-        }     
-  			
-        if (this.model.get('monto_c') == null || this.model.get('monto_c') == ''){
+  			if (this.model.get('monto_c') == null || this.model.get('monto_c') == ''){
   				this.model.set('monto_c',this.model.get('amount'));
   			}else{
   				//Si la oportunidad es de tipo Cotización/Contrato los montos deben ser iguales
@@ -1048,32 +1034,6 @@ console.log(name);
         var montolinea = parseFloat(this.model.get('monto_c'));
         var rentaini = parseFloat(this.model.get('ca_importe_enganche_c'));
 
-        var str = this.model.get('ca_pago_mensual_c');
-        var n = str.length;
-        if(n>22)
- 	      {
-             app.alert.show('monto', {
-               level: 'error',
-               autoClose: false,
-               messages: 'El campo \"Pago mensual\" no debe exceder de 15 digitos. Favor de corregir.'
-             });
-             this.model.set('ca_pago_mensual_c',0);
-             this.render();
-        }
-
-        var str1 = this.model.get('ca_importe_enganche_c');
-        var n = str1.length;
-        if(n>22)
- 	      {
-             app.alert.show('monto', {
-               level: 'error',
-               autoClose: false,
-               messages: 'El campo \"Renta inicial\" no debe exceder de 15 digitos. Favor de corregir.'
-             });
-             this.model.set('ca_importe_enganche_c',0);
-             this.render();
-        }
-
         if (pagomensual > montoop){
               app.alert.show('alerta_mayor_que1', {
                 level: 'warning',
@@ -1190,6 +1150,131 @@ console.log(name);
         }
 
 
+    },
+
+    //Funcion para delimitar ciertos campos en la presolicitud Leasing. Adrian Arauz 23/08/2018
+    limitanumero: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        if($input.val().includes('.')) {
+            var expreg = /[\d]+/;
+        }else{
+            var expreg = /[\d.]+/;
+        }
+
+        if((expreg.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return false;
+        }else{
+            if($input.val().includes('.')) {
+                dec = $input.val().split('.');
+                if(dec[1].length==2 && evt.key!="Backspace" && evt.key!="Tab"){
+                    return false;
+                }
+                return;
+            }else {
+                while ($input.val().indexOf(',') != -1){
+                    $input.val($input.val().replace(',',''))
+                }
+                if ($input.val().length == 2 && evt.key != "Backspace" && evt.key!="Tab") {
+                    $input.val($input.val() + '.');
+                    return;
+                } else {
+                    return;
+                }
+            }
+        }
+
+
+    },
+
+    validaRequeridosFactoraje: function(fields, errors, callback){
+        //console.log(this.model.get('f_aforo_c'));
+        //console.log(this.model.get('f_tipo_factoraje_c'));
+        if(this.model.get('tipo_producto_c')=='4') {
+            if (this.model.get('f_tipo_factoraje_c') == undefined || this.model.get('f_tipo_factoraje_c') == "") {
+                //error
+                errors['f_tipo_factoraje_c'] = errors['f_tipo_factoraje_c'] || {};
+                errors['f_tipo_factoraje_c'].required = true;
+            }
+            if (this.model.get('tasa_fija_ordinario_c') == undefined || this.model.get('tasa_fija_ordinario_c') == "") {
+                //error
+                errors['tasa_fija_ordinario_c'] = errors['tasa_fija_ordinario_c'] || {};
+                errors['tasa_fija_ordinario_c'].required = true;
+            }
+            if (this.model.get('tipo_tasa_ordinario_c') == undefined || this.model.get('tipo_tasa_ordinario_c') == "") {
+                //error
+                errors['tipo_tasa_ordinario_c'] = errors['tipo_tasa_ordinario_c'] || {};
+                errors['tipo_tasa_ordinario_c'].required = true;
+            }
+            if (this.model.get('instrumento_c') == undefined || this.model.get('instrumento_c') == "") {
+                //error
+                errors['instrumento_c'] = errors['instrumento_c'] || {};
+                errors['instrumento_c'].required = true;
+            }
+            if (this.model.get('tasa_fija_ordinario_c') == undefined || this.model.get('tasa_fija_ordinario_c') == "") {
+                //error
+                errors['tasa_fija_ordinario_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
+                //errors['tasa_fija_ordinario_c'].required = true;
+            }
+            if (this.model.get('puntos_sobre_tasa_c') == "" || (Number(this.model.get('puntos_sobre_tasa_c')) < 0 || Number(this.model.get('puntos_sobre_tasa_c')) > 99.999999)) {
+                //error
+                errors['puntos_sobre_tasa_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
+                //errors['puntos_sobre_tasa_c'].required = true;
+            }
+            if (this.model.get('f_aforo_c') == "" || (Number(this.model.get('f_aforo_c')) < 0 || Number(this.model.get('f_aforo_c')) > 99.99)) {
+                //error
+                errors['f_aforo_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
+                errors['f_aforo_c'].required = true;
+
+            }
+            if (this.model.get('porcentaje_ca_c') == "" || (Number(this.model.get('porcentaje_ca_c')) < 0 || Number(this.model.get('porcentaje_ca_c')) > 99.99)) {
+                //error
+                errors['porcentaje_ca_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
+               // errors['porcentaje_ca_c'].required = true;
+
+            }
+            if (this.model.get('tipo_tasa_moratorio_c') == undefined || this.model.get('tipo_tasa_moratorio_c') == "") {
+                //error
+                errors['tipo_tasa_moratorio_c'] = errors['tipo_tasa_moratorio_c'] || {};
+                errors['tipo_tasa_moratorio_c'].required = true;
+            }
+
+            if (this.model.get('instrumento_moratorio_c') == undefined || this.model.get('instrumento_moratorio_c') == "") {
+                //error
+                errors['instrumento_moratorio_c'] = errors['instrumento_moratorio_c'] || {};
+                errors['instrumento_moratorio_c'].required = true;
+            }
+            if (this.model.get('puntos_tasa_moratorio_c') == "" || (Number(this.model.get('puntos_tasa_moratorio_c')) < 0 || Number(this.model.get('puntos_tasa_moratorio_c')) > 99.999999)) {
+                //error
+                errors['puntos_tasa_moratorio_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
+                errors['puntos_tasa_moratorio_c'].required = true;
+            }
+            if (this.model.get('factor_moratorio_c') == "" || (Number(this.model.get('factor_moratorio_c')) < 0 || Number(this.model.get('factor_moratorio_c')) > 99.999999)) {
+                //error
+                errors['factor_moratorio_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
+                errors['factor_moratorio_c'].required = true;
+            }
+
+                console.log(this.model.get('tasa_fija_ordinario_c'));
+                console.log('tasa_fija_ordinario_c');
+                if(this.model.get('tasa_fija_ordinario_c') == null ||this.model.get('tasa_fija_ordinario_c') == "" || (Number(this.model.get('tasa_fija_ordinario_c'))<0 || Number(this.model.get('tasa_fija_ordinario_c'))>99.999999)){
+                    //error
+                    errors['tasa_fija_ordinario_c'] = errors['tasa_fija_ordinario_c'] || {};
+                    errors['tasa_fija_ordinario_c'].required = true;
+                }
+                if(this.model.get('tasa_fija_moratorio_c') == null ||this.model.get('tasa_fija_moratorio_c') == "" || (Number(this.model.get('tasa_fija_moratorio_c'))<0 || Number(this.model.get('tasa_fija_moratorio_c'))>99.999999)){
+                    //error
+                    errors['tasa_fija_moratorio_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
+                    //errors['tasa_fija_moratorio_c'].required = true;
+                }
+
+        }
+        callback(null, fields, errors);
     },
 
 
