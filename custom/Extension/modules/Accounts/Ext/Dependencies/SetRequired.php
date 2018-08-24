@@ -47,7 +47,7 @@
                                     //'value' => 'and(equal($tipodepersona_c,"Persona Moral"),equal($subtipo_cuenta_c,"Interesado"))', //Formula
                                 //'value' => 'not(or(equal($tipodepersona_c,"Persona Fisica"),equal($tipo_registro_c,"Lead"),equal($subtipo_cuenta_c,"Contactado")))',
                                 //Cambio de condicion, requerido para todos salvo persona fisica
-                                'value' => 'not(or(equal($tipodepersona_c,"Persona Fisica")))',
+                                'value' => 'equal($tipodepersona_c,"Persona Moral")',
                             ),
                     ),
             ),
