@@ -193,11 +193,11 @@
 
         try {
             if (relContext != null) {
-              Object.keys(new_options).forEach(function (key) {
-                  if (key != "Persona") {
-                      delete new_options[key];
-                  }
-              });
+                Object.keys(new_options).forEach(function (key) {
+                    if (key != "Persona") {
+                        delete new_options[key];
+                    }
+                });
             }
         } catch (e) {
             console.log('No es relación  error: ' + e);
@@ -304,6 +304,10 @@
 
         //Oculta campo
         $("div[data-name='show_panel_c']").hide();
+        /*
+        * F. Javier G. Solar 06/08/2018
+         Se oculta el boton de mas opciones en las petañas de cuentas(record) */
+        $('.nav-tabs li a.dropdown-toggle').hide();
     },
 
     _ActualizaEtiquetas: function () {
@@ -361,7 +365,7 @@
     _doValidateTieneContactos: function (fields, errors, callback) {
         if (this.model.get('tipodepersona_c') == 'Persona Moral' &&
             (/*this.model.get('tipo_registro_c') == "Cliente" || this.model.get('estatus_c') == "Interesado"
-	    	||*/ this.model.get('tipo_registro_c') == "Prospecto")) {
+    ||*/ this.model.get('tipo_registro_c') == "Prospecto")) {
             if (_.isEmpty(this.model.get('account_contacts'))) {
                 app.alert.show("Persona sin contactos registrados", {
                     level: "error",
@@ -423,38 +427,38 @@
         callback(null, fields, errors);
     },
 
-	/** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
-  _doValidateEmailTelefono: function(fields, errors, callback) {
+    /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
+    _doValidateEmailTelefono: function (fields, errors, callback) {
 
         //Valida que no sea relación - Persona tipo: tipo_relacion_c = Referencia Cliente/Proveedor
-        if (this.model.get('tipo_relacion_c').includes('Referencia Cliente') || this.model.get('tipo_relacion_c').includes('Referencia Proveedor') ) {
-          //Pide teléfono requerido
-          if (_.isEmpty(this.model.get('account_telefonos'))) {
-              app.alert.show("Telefono requerido", {
-                  level: "error",
-                  title: "Al menos un tel\u00E9fono es requerido.",
-                  autoClose: false
-              });
+        if (this.model.get('tipo_relacion_c').includes('Referencia Cliente') || this.model.get('tipo_relacion_c').includes('Referencia Proveedor')) {
+            //Pide teléfono requerido
+            if (_.isEmpty(this.model.get('account_telefonos'))) {
+                app.alert.show("Telefono requerido", {
+                    level: "error",
+                    title: "Al menos un tel\u00E9fono es requerido.",
+                    autoClose: false
+                });
 
-              errors['account_telefonos'] = errors['account_telefonos'] || {};
-              errors['account_telefonos'].required = true;
-          }
+                errors['account_telefonos'] = errors['account_telefonos'] || {};
+                errors['account_telefonos'].required = true;
+            }
 
-        }else{
-          //Pide teléfono/correo requerido
-          if (/*this.model.get('tipo_registro_c') != 'Persona' && */ this.model.get('tipo_registro_c') != 'Proveedor') {
-              if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos'))) {
-                  app.alert.show("Correo requerido", {
-                      level: "error",
-                      title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
-                      autoClose: false
-                  });
-                  errors['email'] = errors['email'] || {};
-                  errors['email'].required = true;
-                  errors['account_telefonos'] = errors['account_telefonos'] || {};
-                  errors['account_telefonos'].required = true;
-              }
-          }
+        } else {
+            //Pide teléfono/correo requerido
+            if (/*this.model.get('tipo_registro_c') != 'Persona' && */ this.model.get('tipo_registro_c') != 'Proveedor') {
+                if (_.isEmpty(this.model.get('email')) && _.isEmpty(this.model.get('account_telefonos'))) {
+                    app.alert.show("Correo requerido", {
+                        level: "error",
+                        title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
+                        autoClose: false
+                    });
+                    errors['email'] = errors['email'] || {};
+                    errors['email'].required = true;
+                    errors['account_telefonos'] = errors['account_telefonos'] || {};
+                    errors['account_telefonos'].required = true;
+                }
+            }
         }
         callback(null, fields, errors);
     },
@@ -485,17 +489,17 @@
         // var SegundoNombre = this.model.get('segundonombre_c');
         // var ApellidoP = this.model.get('apellidopaterno_c');
         // var ApellidoM = this.model.get('apellidomaterno_c');
-        var Nombre =this.model.get('name');
-        var c=0;
+        var Nombre = this.model.get('name');
+        var c = 0;
         /*@Jesus Carrillo*/
         //var fields2=[PrimerNombre.trim(),SegundoNombre.trim(),ApellidoP.trim(),ApellidoM.trim()]
-        var fields2=[Nombre.trim()]
-        for(var i=0;i>fields2.length;i++){
-            if(fields2[i]!='' || fields2[i]!=null){
+        var fields2 = [Nombre.trim()]
+        for (var i = 0; i > fields2.length; i++) {
+            if (fields2[i] != '' || fields2[i] != null) {
                 c++;
             }
         }
-        if(c>0) {
+        if (c > 0) {
             app.api.call("read", app.api.buildURL("Accounts/", null, null, {
                 fields: fields.join(','),
                 max_num: 5,
@@ -885,8 +889,8 @@
       AF- 2018-08-06
       Validación en relaciones tipo persona: Referenciado Cliente/Proveedor
     */
-    _doValidateEdoCivil: function(fields, errors, callback){
-        if(this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor'))){
+    _doValidateEdoCivil: function (fields, errors, callback) {
+        if (this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor'))) {
             if ((this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
                 errors['estadocivil_c'] = errors['estadocivil_c'] || {};
                 errors['estadocivil_c'].required = true;
