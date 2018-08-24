@@ -183,6 +183,8 @@
 
         //Oculta campo
         $("div[data-name='show_panel_c']").hide();
+        // Se oculta el boton de mas opciones en las petañas de cuentas(record)
+        $('.nav-tabs li a.dropdown-toggle').hide();
     },
 
 
