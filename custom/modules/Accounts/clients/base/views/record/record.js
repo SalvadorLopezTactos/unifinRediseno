@@ -270,7 +270,7 @@
           }, this),
         });
       }
-    },  
+    },
 
     handleCancel: function () {
         var account_telefonos = this.model._previousAttributes.account_telefonos;
@@ -998,7 +998,7 @@
     /* @Jesus Carrillo
         Metodo para validar campos de telefonos y direcciones
      */
-    validar_fields:function() {
+    validar_fields:function(valContacto, validar_fields) {
         var datos_telefonos = this.model.get('account_telefonos');
         var tipolabel = [];
         var pais = [];
@@ -1051,17 +1051,24 @@
         console.log(allfields2);
         var fieldstelefono=allfields2.slice(0,2);
         var fieldsdirec=allfields2.slice(3);
+        var valMedios = 0;
+
         if(fieldstelefono.includes(false)==true){
             app.alert.show('alert_fields_empty', {
                 level: 'error',
                 messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos un Telefono',
             });
-        }else if(fieldsdirec.includes(false)==true){
+            valMedios = 1;
+        }
+        if(fieldsdirec.includes(false)==true){
             app.alert.show('alert_fields_empty', {
                 level: 'error',
                 messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una Direcci\u00F3n',
             });
-        }else{
+            valMedios = 1;
+        }
+
+        if(valMedios==0 && valContacto==0 && validar_fields==0) {
                 this.model.set('tipo_registro_c','Prospecto');
                 this.model.set('subtipo_registro_c','Contactado');
                 this.model.set('tct_prospecto_contactado_chk_c',true);
@@ -1114,15 +1121,20 @@
                     )
 
                     {
+                       //Valida llamadas y reuniones
+                       var valRelacionados = 0;
                         if(self.totalllamadas==0 && self.totalreuniones==0){
                             app.alert.show('alert_calls', {
                                 level: 'error',
                                 messages: 'El proceso de conversi\u00F3n requiere que el Prospecto Contactado contenga una llamada o reuni\u00F3n con fecha anterior al d\u00EDa de hoy.',
                             });
-                        }else{
-                            self.validar_fields();
-                            self.validaContactado();
+                            valRelacionados = 1;
                         }
+
+                        //Valida datos de cuenta
+                        var valContacto = self.validaContactado();
+                        self.validar_fields(valContacto, valRelacionados);
+
                     }
                     else {
                         app.alert.show("No acceso", {
@@ -1172,6 +1184,10 @@
                   level: 'error',
                   messages: 'Para convertir a Prospecto Contactado es necesario se llenen los campos requeridos: ' +campos ,
               });
+
+              return 1;
+          }else {
+            return 0;
           }
       },
 
