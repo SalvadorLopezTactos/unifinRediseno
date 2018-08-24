@@ -372,6 +372,10 @@
                                 $('#anio_a_comprometer_mass_popup').val(tempAnio).change();
 
                                 $(".loadingIcon").hide();
+
+                                if(app.alert.get('loadingRender') !=undefined){
+                                    app.alert.dismiss('loadingRender');
+                                }
                             })
                         });
                         //END GetPromotores
@@ -686,6 +690,12 @@ floatHeader: function(){
         this.popup_switch = "block";
         this.getCurrentYearMonthMoverMes();
 
+        app.alert.show('loadingRender', {
+            level: 'process',
+            title: 'Cargando, por favor espere.',
+        });
+
+
         this.cancel = 'Cancelar';
         this.save = 'Guardar';
         this.backlogName = backlogName;
@@ -817,6 +827,12 @@ cancelarBacklog: function(e){
                 this.popup_switch = "block";
 
                 this.getCurrentYearMonthPopUp();
+
+                app.alert.show('loadingRender', {
+                    level: 'process',
+                    title: 'Cargando, por favor espere.',
+                });
+
                 this.cancel = 'Cancelar';
                 this.save = 'Guardar';
                 this.backlogName = backlogName;
@@ -886,6 +902,13 @@ cancelarBacklog: function(e){
                 this.popup_switch = "block";
 
                 this.getCurrentYearMonthPopUp();
+
+                app.alert.show('loadingRender', {
+                    level: 'process',
+                    title: 'Cargando, por favor espere.',
+                });
+
+
             // SI el usuario NO es promotor, puede revivir para el mismo mes
             if(self.rolAutorizacion != "Promotor"){
                 var opciones_mes = app.lang.getAppListStrings('mes_list');
@@ -949,6 +972,11 @@ cancelarBacklog: function(e){
 
         if (this.popup_switch == "none") {
             this.popup_switch = "block";
+
+            app.alert.show('loadingRender', {
+                level: 'process',
+                title: 'Cargando, por favor espere.',
+            });
 
             this.cancel = 'Cancelar';
             this.save = 'Guardar';
@@ -3165,6 +3193,11 @@ cancelarBacklog: function(e){
                 this.popup_switch = "block";
                 this.getCurrentYearMonthMoverMes();
 
+                app.alert.show('loadingRender', {
+                    level: 'process',
+                    title: 'Cargando, por favor espere.',
+                });
+
                 this.cancel = 'Cancelar';
                 this.save = 'Guardar';
                 /*
@@ -3373,6 +3406,12 @@ cancelarBacklog: function(e){
                 this.popup_switch = "block";
 
                 this.getCurrentYearMonthPopUp();
+
+                app.alert.show('loadingRender', {
+                    level: 'process',
+                    title: 'Cargando, por favor espere.',
+                });
+
                 this.cancel = 'Cancelar';
                 this.save = 'Guardar';
                 /*
