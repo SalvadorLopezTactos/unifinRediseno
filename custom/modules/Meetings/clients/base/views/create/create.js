@@ -12,7 +12,15 @@
 
     _render: function () {
         this._super("_render");
+        /*Oculta el campo de resultado de la llamada cuando la está se encuentra en planificada
+         *Victor Martinez López 23-08-2018
+         * */
+        if(this.model.get('status')=='Planned'){
+            this.$('div[data-name=resultado_c]').hide();
+        }
     },
+
+
 
     /* @F. Javier G. Solar
      * Valida que la Fecha Inicial no sea menor que la actual

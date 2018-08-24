@@ -40,7 +40,7 @@
         if (fechaInicio < fechaActual) {
             app.alert.show("Fecha no valida", {
                 level: "error",
-                title: "No puedes crear una Llamada con fecha menor al d&Iacutea de hoy..... ",
+                title: "No puedes crear una Llamada con fecha menor al d&Iacutea de hoy",
                 autoClose: false
             });
 

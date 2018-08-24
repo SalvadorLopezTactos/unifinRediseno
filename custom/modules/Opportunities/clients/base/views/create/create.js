@@ -1,5 +1,13 @@
 ({
     extendsFrom: 'CreateView',
+
+    events: {
+        'keydown [name=monto_c]': 'checkdinero',
+        'keydown [name=amount]': 'checkdinero',
+        'keydown [name=ca_pago_mensual_c]': 'checkdinero',
+        'keydown [name=ca_importe_enganche_c ]': 'checkdinero',
+    },
+
     tipoDePersona: null,
     prospecto: null,
     productoUsuario: null,
@@ -15,7 +23,7 @@
         //this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this));
         //this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
         this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
-
+        this.model.addValidationTask('checkpromotorFactoraje',_.bind(this.validacrearfactoraje,this));
         //Ajuste Salvador Lopez <salvador.lopez@tactos.com.mx>
         //Validación para evitar asociar una Persona que no sea cliente
         this.model.addValidationTask('check_person_type', _.bind(this.personTypeCheck, this));
@@ -191,7 +199,7 @@
         //* Quitamos los campos Vendedor y Comisión
         this.$('div[data-name=opportunities_ag_vendedores_1_name]').hide();
         this.$('div[data-name=comision_c]').hide();
-
+//Validaciontask
         this.model.on("change:tipo_producto_c", _.bind(function(){
             if(this.model.get('tipo_producto_c') == '4'){
                 if(this.tipoDePersona){
@@ -200,7 +208,7 @@
                         title: "No puedes generar factoraje para Personas Fisicas",
                         autoClose: false
                     });
-                    this.model.set('tipo_producto_c','1');
+                    //this.model.set('tipo_producto_c','1');
                 }
                 this.obtieneCondicionesFinancieras();
             }
@@ -215,6 +223,7 @@
             this.obtieneCondicionesFinancieras();
             this.verificaOperacionProspecto();
         },this));
+
 
         /*
          * @author Carlos Zaragoza
@@ -370,7 +379,23 @@
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
     },
-    
+    /*
+    *Victor Martinez Lopez
+    * Valida que no se pueda crear un producto factoraje para personas fisicas
+     */
+    validacrearfactoraje: function(fields, errors, callback){
+        if(this.model.get('tipo_producto_c') == '4'){
+            if(this.tipoDePersona){
+                app.alert.show("tipoPersonaFisica", {
+                    level: "error",
+                    title: "No puedes generar factoraje para Personas F&iacute;sicas",
+                    autoClose: false
+                });
+                errors['tipo_producto_c'] = "No puedes generar factoraje para Personas F&iacute;sicas";
+                errors['tipo_producto_c'].required = true;
+                }
+        }callback(null,fields,errors);
+        },
     /*
     * @Author F. Javier G. Solar
     * 23-07-2018
@@ -380,7 +405,7 @@
 
         self = this;
 
-        if ( this.model.get('account_id') != "" || this.model.get('account_id') != null)
+        if ( this.model.get('account_id') != "" && this.model.get('account_id') != null)
         {
             app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/1'), null, {
                 success: _.bind(function (data) {
@@ -597,7 +622,8 @@
                 if( modelo.get('tipodepersona_c')=='Persona Fisica' && modelo.get('id') != null){
                     this.tipoDePersona = true;
                     //console.log("Cambiamos a tipo producto leasing");
-                    this.model.set('tipo_producto_c','1');
+                    
+                    //this.model.set('tipo_producto_c','1');
                 }else{
                     this.tipoDePersona = false;
                 }
@@ -1137,5 +1163,45 @@
 
     _dispose: function() {
         this._super('_dispose', []);
-    }
+    },
+
+    /*@Jesus Carrillo
+  Metodo que limita el tipo moneda a 15 entetos y 2 decimales
+ */
+    checkdinero: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        if($input.val().includes('.')) {
+            var expreg = /[\d]+/;
+        }else{
+            var expreg = /[\d.]+/;
+        }
+
+        if((expreg.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return false;
+        }else{
+            if($input.val().includes('.')) {
+                dec = $input.val().split('.');
+                if(dec[1].length==2 && evt.key!="Backspace" && evt.key!="Tab"){
+                    return false;
+                }
+                return;
+            }else {
+                while ($input.val().indexOf(',') != -1){
+                    $input.val($input.val().replace(',',''))
+                }
+                if ($input.val().length == 15 && evt.key != "Backspace" && evt.key!="Tab") {
+                    $input.val($input.val() + '.');
+                    return;
+                } else {
+                    return;
+                }
+            }
+        }
+    },
 })
