@@ -4,6 +4,10 @@
   events: {
     'click [name=cancel_button]': 'cancelClicked',
     'keydown [name=vendedor_c]': 'checkvendedor',
+    'keydown [name=monto_c]': 'checkdinero',
+    'keydown [name=amount]': 'checkdinero',
+    'keydown [name=ca_pago_mensual_c]': 'checkdinero',
+    'keydown [name=ca_importe_enganche_c ]': 'checkdinero',
   },
 
 	initialize: function (options) {
@@ -33,8 +37,8 @@
 		this.on('render', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
     //this.model.on("change:tct_oportunidad_perdida_chk_c",this._HideSaveButton, this);
 		this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
-    this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
-    this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
+        this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
+        this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
 
 		this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
 		this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
@@ -1131,20 +1135,63 @@ console.log(name);
 
      //@Jesus Carrillo  
     //Funcion que valida que el campo vendedor no tenga caracteres especiales 
-    checkvendedor: function (evt) { 
-        if (!evt) return; 
-        var $input = this.$(evt.currentTarget); 
-        var expreg =/[a-zA-Z\u00F1\u00D1\u00C1\u00E1\u00C9\u00E9\u00CD\u00ED\u00D3\u00F3\u00DA\u00FA\u00DC\u00FC\s]+/;  
-        //var expreg =/[A-Za-z]/; 
-        if((expreg.test(evt.key))==false){  
-            app.alert.show('error_vendedor', {  
-                level: 'error', 
-                autoClose: true,  
-                messages: 'El campo \"Vendedor\" no acepta caracteres especiales. Favor de corregir'  
-            }); 
-            return false; 
-        } 
+    checkvendedor: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var expreg =/[a-zA-Z\u00F1\u00D1\u00C1\u00E1\u00C9\u00E9\u00CD\u00ED\u00D3\u00F3\u00DA\u00FA\u00DC\u00FC\s]+/;
+        //var expreg =/[A-Za-z]/;
+        if((expreg.test(evt.key))==false){
+            app.alert.show('error_vendedor', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo \"Vendedor\" no acepta caracteres especiales. Favor de corregir'
+            });
+            return false;
+        }
     },
+
+    /*@Jesus Carrillo
+ Metodo que limita el tipo moneda a 15 entetos y 2 decimales
+*/
+    checkdinero: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        if($input.val().includes('.')) {
+            var expreg = /[\d]+/;
+        }else{
+            var expreg = /[\d.]+/;
+        }
+
+        if((expreg.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return false;
+        }else{
+            if($input.val().includes('.')) {
+                dec = $input.val().split('.');
+                if(dec[1].length==2 && evt.key!="Backspace" && evt.key!="Tab"){
+                    return false;
+                }
+                return;
+            }else {
+                while ($input.val().indexOf(',') != -1){
+                    $input.val($input.val().replace(',',''))
+                }
+                if ($input.val().length == 15 && evt.key != "Backspace" && evt.key!="Tab") {
+                    $input.val($input.val() + '.');
+                    return;
+                } else {
+                    return;
+                }
+            }
+        }
+
+
+    },
+
 
 
 

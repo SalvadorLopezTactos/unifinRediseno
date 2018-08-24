@@ -37,6 +37,7 @@
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
 
 
+
         /*
          Eduardo Carrasco
          revisa que la persona no tenga contratos existentes despues de cambiar el RFC. Si hay contratos existentes, no se podra cambiar el RFC
