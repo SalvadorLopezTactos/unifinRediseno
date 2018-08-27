@@ -9,3 +9,5 @@ $mod_strings['LBL_PUESTOUSUARIO'] = 'PUESTO USUARIO';
 $mod_strings['LBL_EQUIPO'] = 'Equipo Principal UNICS';
 $mod_strings['LBL_EQUIPOS_C'] = 'Equipos de promoción';
 $mod_strings['LBL_EXT'] = 'EXT';
+$mod_strings['LBL_DETAILVIEW_PANEL1'] = 'Pertenezco a';
+$mod_strings['LBL_DETAILVIEW_PANEL2'] = 'Contacto';
