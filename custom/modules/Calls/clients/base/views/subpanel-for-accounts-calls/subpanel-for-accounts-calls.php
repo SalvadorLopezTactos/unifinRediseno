@@ -1,5 +1,5 @@
 <?php
-// created: 2018-08-27 09:47:39
+// created: 2018-08-27 09:48:25
 $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
   'panels' => 
   array (
