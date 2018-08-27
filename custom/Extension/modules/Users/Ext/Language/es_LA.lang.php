@@ -2,10 +2,10 @@
 // WARNING: The contents of this file are auto-generated.
 $mod_strings['LBL_AUT_CARATULARIESGO'] = 'Puede Autorizar caratulas de riesgo';
 $mod_strings['LBL_TIPODEPRODUCTO_C'] = 'Tipo de producto';
-$mod_strings['LBL_PUESTOUSUARIO'] = 'PUESTO USUARIO';
+$mod_strings['LBL_PUESTOUSUARIO'] = 'Puesto Usuario';
 $mod_strings['LBL_EQUIPO'] = 'Equipo Principal UNICS';
 $mod_strings['LBL_SUCURSAL'] = 'Sucursal';
-$mod_strings['LBL_TIPODEPRODUCTO'] = 'Producto principal';
+$mod_strings['LBL_TIPODEPRODUCTO'] = 'Tipo Producto';
 $mod_strings['LBL_MULTIPRODUCTO'] = 'Multiproducto';
 $mod_strings['LBL_EDITVIEW_PANEL1'] = 'Cambiar Contraseña';
 $mod_strings['LBL_PRODUCTOS'] = 'Productos';
