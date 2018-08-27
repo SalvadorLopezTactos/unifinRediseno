@@ -1058,7 +1058,7 @@
         if(fieldstelefono.includes(false)==true){
             app.alert.show('alert_fields_empty', {
                 level: 'error',
-                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos un Telefono',
+                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos un Tel\u00E9fono',
             });
             valMedios = 1;
         }
