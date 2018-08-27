@@ -32,7 +32,7 @@
 				global $db;
 				$cliente = $bean->account_id;
 				$tipo = $bean->tipo_producto_c;					  
-				$query = "select count(*) as total from opportunities a, opportunities_cstm b, accounts_opportunities c where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente' and b.tct_etapa_ddw_c = 'SI' and b.estatus_c <> 'K' and b.tipo_producto_c = '$tipo'";
+				$query = "select count(*) as total from opportunities a, opportunities_cstm b, accounts_opportunities c where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente' and b.tct_etapa_ddw_c = 'SI' and isnull(b.estatus_c) and b.tipo_producto_c = '$tipo'";
 				$result = $db->query($query);
 				$row = $db->fetchByAssoc($result);
 				$count = $row['total'];
