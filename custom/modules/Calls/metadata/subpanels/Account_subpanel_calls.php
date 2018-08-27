@@ -1,5 +1,5 @@
 <?php
-// created: 2018-03-14 09:30:05
+// created: 2018-08-27 09:47:37
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -7,6 +7,13 @@ $subpanel_layout['list_fields'] = array (
     'widget_class' => 'SubPanelDetailViewLink',
     'width' => 10,
     'default' => true,
+  ),
+  'tct_resultado_llamada_ddw_c' => 
+  array (
+    'type' => 'enum',
+    'default' => true,
+    'vname' => 'LBL_TCT_RESULTADO_LLAMADA_DDW',
+    'width' => 10,
   ),
   'status' => 
   array (
