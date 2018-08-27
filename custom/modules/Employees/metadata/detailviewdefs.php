@@ -123,14 +123,6 @@ array (
             'customCode' => '{$fields.full_name.value}',
             'label' => 'LBL_NAME',
           ),
-        ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'puestousuario_c',
-            'label' => 'LBL_PUESTOUSUARIO',
-          ),
           1 => 
           array (
             'name' => 'reports_to_name',
@@ -138,17 +130,12 @@ array (
             'label' => 'LBL_REPORTS_TO_NAME',
           ),
         ),
-        3 => 
+        2 => 
         array (
           0 => 
           array (
-            'name' => 'tipodeproducto_c',
-            'label' => 'LBL_TIPODEPRODUCTO',
-          ),
-          1 => 
-          array (
-            'name' => 'productos_c',
-            'label' => 'LBL_PRODUCTOS',
+            'name' => 'puestousuario_c',
+            'label' => 'LBL_PUESTOUSUARIO',
           ),
         ),
       ),
@@ -176,6 +163,19 @@ array (
           ),
         ),
         2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tipodeproducto_c',
+            'label' => 'LBL_TIPODEPRODUCTO',
+          ),
+          1 => 
+          array (
+            'name' => 'productos_c',
+            'label' => 'LBL_PRODUCTOS',
+          ),
+        ),
+        3 => 
         array (
           0 => 
           array (
