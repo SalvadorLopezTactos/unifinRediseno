@@ -1058,7 +1058,7 @@
         if(fieldstelefono.includes(false)==true){
             app.alert.show('alert_fields_empty', {
                 level: 'error',
-                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos un Telefono',
+                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos un Tel\u00E9fono',
             });
             valMedios = 1;
         }
@@ -1128,7 +1128,7 @@
                         if(self.totalllamadas==0 && self.totalreuniones==0){
                             app.alert.show('alert_calls', {
                                 level: 'error',
-                                messages: 'El proceso de conversi\u00F3n requiere que el Prospecto Contactado contenga una llamada o reuni\u00F3n con fecha anterior al d\u00EDa de hoy.',
+                                messages: 'El proceso de conversi\u00F3n requiere que el Prospecto Contactado contenga una llamada o reuni\u00F3n con estado <b>Realizada</b> y con fecha anterior al d\u00EDa de hoy.',
                             });
                             valRelacionados = 1;
                         }
