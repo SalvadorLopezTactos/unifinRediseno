@@ -7,7 +7,8 @@
      * @brief  opportunity logic hooks
      */
         require_once("custom/Levementum/UnifinAPI.php");
-
+		require_once('include/SugarQuery/SugarQuery.php');
+		
 	class OpportunityLogic
     {
         /**
@@ -24,7 +25,26 @@
          *
          */
 
-        function setTeams($bean = null, $event = null, $args = null)
+		function buscaDuplicados($bean, $event, $arguments)
+		{
+			if(empty($bean->fetched_row['id']))
+			{
+				global $db;
+				$cliente = $bean->account_id;
+				$tipo = $bean->tipo_producto_c;					  
+				$query = "select count(*) as total from opportunities a, opportunities_cstm b, accounts_opportunities c where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente' and b.tct_etapa_ddw_c = 'SI' and b.estatus_c <> 'K' and b.tipo_producto_c = '$tipo'";
+				$result = $db->query($query);
+				$row = $db->fetchByAssoc($result);
+				$count = $row['total'];
+				if($count > 0)
+				{
+					require_once 'include/api/SugarApiException.php';
+					throw new SugarApiExceptionInvalidParameter("No puede guardar la presolicitud, existe una abierta para el mismo cliente");
+				}
+			}
+		}
+
+		function setTeams($bean = null, $event = null, $args = null)
         {
             global $current_user;
             //get teams
