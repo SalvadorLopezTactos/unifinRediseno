@@ -285,3 +285,4 @@ $mod_strings['LBL_REGRESA_A_LEAD_C'] = 'Regresa a Lead';
 $mod_strings['LBL_TCT_QUE_PROMOTOR_REL_USER_ID'] = '¿Qué Promotor? (relacionado Usuario ID)';
 $mod_strings['LBL_TCT_QUE_PROMOTOR_REL'] = '¿Qué Promotor?';
 $mod_strings['LBL_TCT_PRIORIDAD_DDW'] = 'Prioridad';
+$mod_strings['LBL_TCT_REFERENCIADO_DIR_REL'] = 'Referenciado director';
