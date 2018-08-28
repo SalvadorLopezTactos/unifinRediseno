@@ -1,6 +1,6 @@
 <?php
- // created: 2018-06-13 19:26:35
-$dictionary['Account']['fields']['tct_origen_busqueda_txf_c']['labelValue']='Búsqueda';
+ // created: 2018-08-27 10:39:48
+$dictionary['Account']['fields']['tct_origen_busqueda_txf_c']['labelValue']='Base';
 $dictionary['Account']['fields']['tct_origen_busqueda_txf_c']['full_text_search']=array (
   'enabled' => '0',
   'boost' => '1',

@@ -1974,6 +1974,7 @@ SQL;
                     "mesNacimiento"=> intval(date('n',$timestamp)),
                     "diaNacimiento"=> intval(date('j',$timestamp)),
                     "tipoProveedor"=> $tipoProveedor,
+                    "tipoPersona"=> $account->tipodepersona_c,
                     "paisConstitucion"=> ucfirst(strtolower($paisConstitucion)),
                     "estadoConstitucion"=> ucfirst(strtolower($estadoConstitucion))
                 );

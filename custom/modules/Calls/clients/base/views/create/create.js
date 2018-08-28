@@ -9,6 +9,7 @@
         // this.on('render',this.disabledates,this);
 
         // this.model.on("change:date_start_date", _.bind(this.validaFecha, this));
+        this.model.on("change:tct_conferencia_chk_c", _.bind(this.ocultaConferencia, this));
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicialCall, this));
     },
 
@@ -51,7 +52,6 @@
         callback(null, fields, errors);
     },
 
-
     _render: function () {
         this._super("_render");
         this.hide_subpanel();
@@ -69,6 +69,7 @@
             });
         }
     },
+
     disabledates: function () {
         console.log(App.user.attributes.puestousuario_c);
         if (App.user.attributes.puestousuario_c != '27' && App.user.attributes.puestousuario_c != '31') {
@@ -92,4 +93,13 @@
             }
         }
     },
+
+    ocultaConferencia: function ()
+    {
+        if (this.model.get('tct_conferencia_chk_c'))
+        {
+            this.model.set('tct_resultado_llamada_ddw_c',"Conferencia");            
+            this.$('div[data-name="tct_calificacion_conferencia_c"]').hide();
+        }
+    },    
 })

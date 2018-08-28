@@ -8,6 +8,14 @@
 
  $hook_array['before_save'][] = Array(
     1,
+    'busca presolicitudes abiertas para un mismo cliente',
+    'custom/modules/Opportunities/opp_logic_hooks.php',
+    'OpportunityLogic',
+    'buscaDuplicados'
+);
+
+ $hook_array['before_save'][] = Array(
+    2,
     'evey time a new team is added to the account record, All related opportunities get the new team',
     'custom/modules/Opportunities/opp_logic_hooks.php',
     'OpportunityLogic', // name of the class
@@ -15,7 +23,7 @@
 );
 
  $hook_array['before_save'][] = Array(
-    2,
+    3,
     'evey time a new team is added to the account record, All related opportunities get the new team',
     'custom/modules/Opportunities/opp_logic_hooks.php',
     'OpportunityLogic', // name of the class
@@ -24,7 +32,7 @@
 
 
  $hook_array['before_save'][] = Array(
-    3,
+    4,
     'evey time a new team is added to the account record, All related opportunities get the new team',
     'custom/modules/Opportunities/opp_logic_hooks.php',
     'OpportunityLogic', // name of the class
@@ -32,7 +40,7 @@
 );
 
 $hook_array['before_save'][] = Array(
-    4,
+    5,
     'Envia los datos de ratifiacion e incremento',
     'custom/modules/Opportunities/opp_logic_hooks.php',
     'OpportunityLogic', // name of the class
@@ -62,5 +70,3 @@ $hook_array['after_save'][] = Array(
     'OpportunityLogic', // name of the class
     'bitacora_estatus'
 );
-
-

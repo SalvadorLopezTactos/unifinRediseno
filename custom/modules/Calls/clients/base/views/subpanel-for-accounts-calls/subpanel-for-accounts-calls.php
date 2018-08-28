@@ -1,5 +1,5 @@
 <?php
-// created: 2018-03-14 09:30:05
+// created: 2018-08-27 09:48:25
 $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
   'panels' => 
   array (
@@ -19,6 +19,13 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
         ),
         1 => 
         array (
+          'name' => 'tct_resultado_llamada_ddw_c',
+          'label' => 'LBL_TCT_RESULTADO_LLAMADA_DDW',
+          'enabled' => true,
+          'default' => true,
+        ),
+        2 => 
+        array (
           'label' => 'LBL_STATUS',
           'enabled' => true,
           'default' => true,
@@ -26,7 +33,7 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
           'type' => 'event-status',
           'css_class' => 'full-width',
         ),
-        2 => 
+        3 => 
         array (
           'name' => 'date_start',
           'label' => 'LBL_LIST_DATE',
@@ -41,7 +48,7 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
             0 => 'status',
           ),
         ),
-        3 => 
+        4 => 
         array (
           'label' => 'LBL_DATE_END',
           'enabled' => true,
@@ -49,14 +56,14 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
           'name' => 'date_end',
           'css_class' => 'overflow-visible',
         ),
-        4 => 
+        5 => 
         array (
           'name' => 'parent_type',
           'label' => 'LBL_PARENT_TYPE',
           'enabled' => true,
           'default' => true,
         ),
-        5 => 
+        6 => 
         array (
           'name' => 'parent_name',
           'label' => 'LBL_LIST_RELATED_TO',
@@ -66,7 +73,7 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
           'sortable' => false,
           'default' => true,
         ),
-        6 => 
+        7 => 
         array (
           'name' => 'assigned_user_name',
           'target_record_key' => 'assigned_user_id',
