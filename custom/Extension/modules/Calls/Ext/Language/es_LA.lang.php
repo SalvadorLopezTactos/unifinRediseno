@@ -10,3 +10,6 @@ $mod_strings['LBL_TCT_USUARIO_CITA_REL_USER_ID'] = 'Usuario de la Cita (relacion
 $mod_strings['LBL_TCT_USUARIO_CITA_REL'] = 'Usuario de la Cita';
 $mod_strings['LBL_TCT_FECHA_SEGUIMIENTO_DAT'] = 'Fecha de seguimiento';
 $mod_strings['LBL_TCT_MOTIVO_DESINTERES_DDW'] = 'Motivo Desinterés';
+$mod_strings['LBL_TCT_CONFERENCIA_CHK'] = 'Conferencia';
+$mod_strings['LBL_TCT_CALIFICACION_CONFERENCIA'] = 'Calificación de Conferencia';
+$mod_strings['LBL_TCT_CONFERENCIA_FECHA_DAT'] = 'Fecha y Hora';
