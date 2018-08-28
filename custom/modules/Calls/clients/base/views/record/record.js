@@ -1,30 +1,48 @@
 ({
-        extendsFrom: 'RecordView',
+    extendsFrom: 'RecordView',
     fechaInicioTemp: "",
-        initialize: function (options) {
+    initialize: function (options) {
             self = this;
             this._super("initialize", [options]);
 
             this.on('render',this.disableparentsfields,this);
             this.model.on('sync', this.cambioFecha, this);
             this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
+            this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
+    },
 
-        },
+    validaConferencia: function(fields, errors, callback)
+    {
+        if(this.model.get('tct_conferencia_chk_c') && this.model.get('tct_calificacion_conferencia_c') === "")
+    	  {
+          app.alert.show("Calificacion Requerida", {
+            level: "error",
+            title: "El campo Calificaci&oacuten de la Conferencia es requerido",
+            autoClose: false
+          });
+    	    errors['tct_calificacion_conferencia_c'] = "El campo Calificaci&oacuten de la Conferencia es requerido";
+          errors['tct_calificacion_conferencia_c'].required = true;
+        }
+    	  callback(null, fields, errors);
+    },
 
-        _render: function () {
-            this._super("_render");
-        },
-
-        /* @Alvador Lopez Y Adrian Arauz
-           Oculta los campos relacionados
-         */
-        disableparentsfields:function () {
+    /* @Alvador Lopez Y Adrian Arauz
+        Oculta los campos relacionados
+    */
+    disableparentsfields:function () {
                 this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;')
-        },
+    },
 
     cambioFecha: function () {
         this.fechaInicioTemp = Date.parse(this.model.get("date_start"));
         console.log("Fechas: " + this.fechaInicioTemp);
+        //Coloca solo lectura el campo Conferencia
+    		if(this.model.get('tct_conferencia_chk_c'))
+      	{
+    	    var self = this;
+     			self.noEditFields.push('tct_conferencia_chk_c');
+          $('.record-edit-link-wrapper[data-name=tct_conferencia_chk_c]').remove();
+      	}        
     },
 
     /* @F. Javier G. Solar
@@ -96,10 +114,5 @@
             }
         }
         callback(null, fields, errors);
-
-
     },
-
-
-
 })
