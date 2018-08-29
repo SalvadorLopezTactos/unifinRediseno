@@ -1078,6 +1078,7 @@
            });
        }else{
 
+
            app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
            errors['account_name'] = errors['account_name'] || {};
            errors['account_name'].custom_message1 = true;
@@ -1149,18 +1150,19 @@
         console.log ("Valida Rol de Usuario");
         for(var i =0; i<roles_usuario.length; i++) {
             for(var puedecrear in roles_no_crea){
-            }
-            if(roles_usuario[i]==roles_no_crea[puedecrear]){
 
-                    app.alert.show("No Rol", {
-                        level: "error",
-                        title: "No puedes generar una Solicitud ya que tienes un rol no permitido.",
-                        autoClose: false,
-                        return:false,
+            if(roles_usuario[i]==roles_no_crea[puedecrear]) {
 
-                    })
+                app.alert.show("No Rol", {
+                    level: "error",
+                    title: "No puedes generar una Solicitud ya que tienes un rol no permitido.",
+                    autoClose: false,
+                    return: false,
+
+                })
                 app.drawer.closeImmediately();
-                   console.log("ok");
+                console.log("ok");
+            }
             }
         }
 
