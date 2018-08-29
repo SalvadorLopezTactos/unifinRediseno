@@ -5,16 +5,11 @@
         self = this;
         this._super("initialize", [options]);
 
-        this.on('render',this.disableparentsfields,this);
-
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
         */
         this.model.on('sync', this.fulminantcolor, this);
-    },
 
-    _render: function () {
-        this._super("_render");
     },
 
     /*@Jesus Carrillo
@@ -28,10 +23,4 @@
         //$('.a11y-wrapper').css("background-color", "#c6d9ff");
     },
 
-    /* @Salvador Lopez Y Adrian Arauz
-    Oculta los campos relacionados
-    */
-    disableparentsfields:function () {
-        this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;')
-    },
 })

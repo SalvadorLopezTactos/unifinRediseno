@@ -1,6 +1,6 @@
 ({
   extendsFrom: 'RecordView',
-  
+
   events: {
     'click [name=cancel_button]': 'cancelClicked',
     'keydown [name=vendedor_c]': 'checkvendedor',
@@ -95,7 +95,20 @@
 		*/
 		this.model.on('sync', this._render, this);
 
+    /*@Jesus Carrillo
+        Funcion que pinta de color los paneles relacionados
+    */
+    this.model.on('sync', this.fulminantcolor, this);
+
 	},
+
+  fulminantcolor: function () {
+      $( '#space' ).remove();
+      $('.control-group').before('<div id="space" style="background-color:#000042"><br></div>');
+      $('.control-group').css("background-color", "#e5e5e5");
+      $('.a11y-wrapper').css("background-color", "#e5e5e5");
+      //$('.a11y-wrapper').css("background-color", "#c6d9ff");
+  },
 
     cancelClicked: function () {
        this._super('cancelClicked');
@@ -406,7 +419,7 @@
                 if (data != "") {
                     var titulo = "Campos Requeridos en Cuentas";
                     var nivel = "error";
-                    var mensaje = "Hace falta completar la siguiente informaci&oacuten: " + data;
+                    var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>: " + data;
 
 
                     app.error.errorName2Keys['custom_message1'] = 'Falta tipo y subtipo de cuenta';
@@ -1094,8 +1107,8 @@ console.log(name);
         callback(null, fields, errors);
     },
 
-     //@Jesus Carrillo  
-    //Funcion que valida que el campo vendedor no tenga caracteres especiales 
+     //@Jesus Carrillo
+    //Funcion que valida que el campo vendedor no tenga caracteres especiales
     checkvendedor: function (evt) {
         if (!evt) return;
         var $input = this.$(evt.currentTarget);
