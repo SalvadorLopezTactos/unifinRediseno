@@ -1,5 +1,21 @@
 ({
     extendsFrom: 'CreateView',
+<<<<<<< HEAD
+=======
+
+    events: {
+        'click [name=monto_c]': 'formatcoin',
+        'click [name=amount]': 'formatcoin',
+        'click [name=ca_pago_mensual_c]': 'formatcoin',
+        'click [name=ca_importe_enganche_c ]': 'formatcoin',
+        'keydown [name=monto_c]': 'checkmoney',
+        'keydown [name=amount]': 'checkmoney',
+        'keydown [name=ca_pago_mensual_c]': 'checkmoney',
+        'keydown [name=ca_importe_enganche_c ]': 'checkmoney',
+
+    },
+
+>>>>>>> 8ed7799f5e84a7f575f1e05bd1fb34db98e026ba
     tipoDePersona: null,
     prospecto: null,
     productoUsuario: null,
@@ -9,7 +25,17 @@
         self = this;
         this._super("initialize", [options]);
         this.on('render', this.ocultaFunc, this);
+<<<<<<< HEAD
         this.on('render', this._rolnocreacion, this);
+=======
+
+        /*
+          Author: Adrian Arauz 2018-08-28
+          funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
+        */
+        this.on('render', this._rolnocreacion, this);
+
+>>>>>>> 8ed7799f5e84a7f575f1e05bd1fb34db98e026ba
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
         this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
@@ -598,7 +624,12 @@
                 if( modelo.get('tipodepersona_c')=='Persona Fisica' && modelo.get('id') != null){
                     this.tipoDePersona = true;
                     //console.log("Cambiamos a tipo producto leasing");
+<<<<<<< HEAD
                     this.model.set('tipo_producto_c','1');
+=======
+
+                    //this.model.set('tipo_producto_c','1');
+>>>>>>> 8ed7799f5e84a7f575f1e05bd1fb34db98e026ba
                 }else{
                     this.tipoDePersona = false;
                 }
@@ -1141,15 +1172,151 @@
         this._super('_dispose', []);
     },
 
+<<<<<<< HEAD
     //Oculta botones de Crear una presolicitud si el user logueado tiene rol de Gestion Comercial. Adrian Arauz 27/08/2018
     _rolnocreacion: function() {
 
         var roles_no_crea = app.lang.getAppListStrings('roles_no_crea_list');
+=======
+    /*@Jesus Carrillo
+  Metodos que limitan el tipo moneda a 15 entetos y 2 decimales
+ */
+    checkmoney:function (evt) {
+        var enteros=this.checkmoneyint(evt);
+        var decimales=this.checkmoneydec(evt);
+        $.fn.selectRange = function(start, end) {
+            if(!end) end = start;
+            return this.each(function() {
+                if (this.setSelectionRange) {
+                    this.focus();
+                    this.setSelectionRange(start, end);
+                } else if (this.createTextRange) {
+                    var range = this.createTextRange();
+                    range.collapse(true);
+                    range.moveEnd('character', end);
+                    range.moveStart('character', start);
+                    range.select();
+                }
+            });
+        };//funcion para posicionar cursor
+
+        (function ($, undefined) {
+            $.fn.getCursorPosition = function() {
+                var el = $(this).get(0);
+                var pos = [];
+                if('selectionStart' in el) {
+                    pos = [el.selectionStart,el.selectionEnd];
+                } else if('selection' in document) {
+                    el.focus();
+                    var Sel = document.selection.createRange();
+                    var SelLength = document.selection.createRange().text.length;
+                    Sel.moveStart('character', -el.value.length);
+                    pos = Sel.text.length - SelLength;
+                }
+                return pos;
+            }
+        })(jQuery); //funcion para obtener cursor
+        var cursor=$(evt.handleObj.selector).getCursorPosition();//setear cursor
+
+
+            if (enteros == "false" && decimales == "false") {
+                if(cursor[0]==cursor[1]) {
+                    return false;
+                }
+            }else if (typeof enteros == "number" && decimales == "false") {
+               if (cursor[0] < enteros) {
+                    $(evt.handleObj.selector).selectRange(cursor[0], cursor[1]);
+               } else {
+                    $(evt.handleObj.selector).selectRange(enteros);
+               }
+            }
+
+    },
+
+    checkmoneyint: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var digitos = $input.val().split('.');
+        if($input.val().includes('.')) {
+            var justnum = /[\d]+/;
+        }else{
+            var justnum = /[\d.]+/;
+        }
+        var justint = /^[\d]{0,14}$/;
+
+        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return "false";
+        }
+
+        if(typeof digitos[0]!="undefined") {
+            if (justint.test(digitos[0]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
+                console.log('no se cumplen enteros')
+                if(!$input.val().includes('.')) {
+                    $input.val($input.val()+'.')
+                }
+                return "false";
+
+            } else {
+                return digitos[0].length;
+            }
+        }
+    },
+
+    checkmoneydec: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var digitos = $input.val().split('.');
+        if($input.val().includes('.')) {
+            var justnum = /[\d]+/;
+        }else{
+            var justnum = /[\d.]+/;
+        }
+        var justdec = /^[\d]{0,1}$/;
+
+        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return "false";
+        }
+        if(typeof digitos[1]!="undefined") {
+            if (justdec.test(digitos[1]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
+                console.log('no se cumplen dec')
+                return "false";
+            } else {
+                return "true";
+            }
+        }
+    },
+
+    formatcoin: function (evt){
+        if (!evt) return;
+         var $input = this.$(evt.currentTarget);
+         while ($input.val().indexOf(',') != -1){
+           $input.val($input.val().replace(',',''))
+         }
+    },
+
+    /*
+      Author: Adrian Arauz 2018-08-28
+      funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
+    */
+    _rolnocreacion: function() {
+        var roles_no_crea = app.lang.getAppListStrings('roles_no_crea_sol_list');
+>>>>>>> 8ed7799f5e84a7f575f1e05bd1fb34db98e026ba
         var roles_usuario = app.user.attributes.roles;
         var puedecrear = i;
         console.log ("Valida Rol de Usuario");
         for(var i =0; i<roles_usuario.length; i++) {
             for(var puedecrear in roles_no_crea){
+<<<<<<< HEAD
 
             if(roles_usuario[i]==roles_no_crea[puedecrear]) {
 
@@ -1163,10 +1330,25 @@
                 app.drawer.closeImmediately();
                 console.log("ok");
             }
+=======
+                if(roles_usuario[i]==roles_no_crea[puedecrear]) {
+                    app.alert.show("No_Rol_Solicitud", {
+                        level: "error",
+                        title: "No puedes generar una Solicitud ya que tienes un rol no permitido.",
+                        autoClose: false,
+                        return: false,
+                    });
+                    app.drawer.closeImmediately();
+                    //console.log("ok");
+                }
+>>>>>>> 8ed7799f5e84a7f575f1e05bd1fb34db98e026ba
             }
         }
 
     },
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8ed7799f5e84a7f575f1e05bd1fb34db98e026ba
 })
