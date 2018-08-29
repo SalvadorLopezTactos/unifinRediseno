@@ -22,6 +22,13 @@
         self = this;
         this._super("initialize", [options]);
         this.on('render', this.ocultaFunc, this);
+
+        /*
+          Author: Adrian Arauz 2018-08-28
+          funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
+        */
+        this.on('render', this._rolnocreacion, this);
+
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
         this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
@@ -627,7 +634,7 @@
                 if( modelo.get('tipodepersona_c')=='Persona Fisica' && modelo.get('id') != null){
                     this.tipoDePersona = true;
                     //console.log("Cambiamos a tipo producto leasing");
-                    
+
                     //this.model.set('tipo_producto_c','1');
                 }else{
                     this.tipoDePersona = false;
@@ -1294,6 +1301,31 @@
          while ($input.val().indexOf(',') != -1){
            $input.val($input.val().replace(',',''))
          }
+    },
+
+    /*
+      Author: Adrian Arauz 2018-08-28
+      funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
+    */
+    _rolnocreacion: function() {
+        var roles_no_crea = app.lang.getAppListStrings('roles_no_crea_sol_list');
+        var roles_usuario = app.user.attributes.roles;
+        var puedecrear = i;
+        console.log ("Valida Rol de Usuario");
+        for(var i =0; i<roles_usuario.length; i++) {
+            for(var puedecrear in roles_no_crea){
+                if(roles_usuario[i]==roles_no_crea[puedecrear]) {
+                    app.alert.show("No_Rol_Solicitud", {
+                        level: "error",
+                        title: "No puedes generar una Solicitud ya que tienes un rol no permitido.",
+                        autoClose: false,
+                        return: false,
+                    });
+                    app.drawer.closeImmediately();
+                    //console.log("ok");
+                }
+            }
+        }
     },
 
 })
