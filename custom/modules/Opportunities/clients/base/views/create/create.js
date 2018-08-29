@@ -1,7 +1,5 @@
 ({
     extendsFrom: 'CreateView',
-<<<<<<< HEAD
-=======
 
     events: {
         'click [name=monto_c]': 'formatcoin',
@@ -15,7 +13,6 @@
 
     },
 
->>>>>>> 8ed7799f5e84a7f575f1e05bd1fb34db98e026ba
     tipoDePersona: null,
     prospecto: null,
     productoUsuario: null,
@@ -25,9 +22,6 @@
         self = this;
         this._super("initialize", [options]);
         this.on('render', this.ocultaFunc, this);
-<<<<<<< HEAD
-        this.on('render', this._rolnocreacion, this);
-=======
 
         /*
           Author: Adrian Arauz 2018-08-28
@@ -35,14 +29,13 @@
         */
         this.on('render', this._rolnocreacion, this);
 
->>>>>>> 8ed7799f5e84a7f575f1e05bd1fb34db98e026ba
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
         this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
         //this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this));
         //this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
         this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
-
+        this.model.addValidationTask('checkpromotorFactoraje',_.bind(this.validacrearfactoraje,this));
         //Ajuste Salvador Lopez <salvador.lopez@tactos.com.mx>
         //Validación para evitar asociar una Persona que no sea cliente
         this.model.addValidationTask('check_person_type', _.bind(this.personTypeCheck, this));
@@ -218,7 +211,7 @@
         //* Quitamos los campos Vendedor y Comisión
         this.$('div[data-name=opportunities_ag_vendedores_1_name]').hide();
         this.$('div[data-name=comision_c]').hide();
-
+//Validaciontask
         this.model.on("change:tipo_producto_c", _.bind(function(){
             if(this.model.get('tipo_producto_c') == '4'){
                 if(this.tipoDePersona){
@@ -227,7 +220,7 @@
                         title: "No puedes generar factoraje para Personas Fisicas",
                         autoClose: false
                     });
-                    this.model.set('tipo_producto_c','1');
+                    //this.model.set('tipo_producto_c','1');
                 }
                 this.obtieneCondicionesFinancieras();
             }
@@ -243,39 +236,40 @@
             this.verificaOperacionProspecto();
         },this));
 
+
         /*
          * @author Carlos Zaragoza
          * @version 1
          * Validamos que se pueda usar el campo vacío en el forecast. Agregar opción "…" en forecast time para indicar que se cierra este mes (esta opción se selecciona en automático si la fecha de cierre está dentro del mes corriente) Si la fecha de cierre esta fuera del mes corriente calcular si es 30, 60, etc.
          * */
-         // CVV - 28/03/2016 - El campo de fecha de cierre se elimino del layout
-         /*
-        this.model.on("change:date_closed", _.bind(function() {
-            var fecha_cierre = this.model.get('date_closed');
-            var fecha_actual = new Date();
-            fecha_cierre  = new Date(fecha_cierre+"T12:00:00Z");
-            var months;
-            months = (fecha_cierre.getFullYear() - fecha_actual.getFullYear()) * 12;
-            months -= fecha_actual.getMonth();
-            months += fecha_cierre.getMonth();
+        // CVV - 28/03/2016 - El campo de fecha de cierre se elimino del layout
+        /*
+       this.model.on("change:date_closed", _.bind(function() {
+           var fecha_cierre = this.model.get('date_closed');
+           var fecha_actual = new Date();
+           fecha_cierre  = new Date(fecha_cierre+"T12:00:00Z");
+           var months;
+           months = (fecha_cierre.getFullYear() - fecha_actual.getFullYear()) * 12;
+           months -= fecha_actual.getMonth();
+           months += fecha_cierre.getMonth();
 
-            if(months == 0 ){
-                this.model.set('forecast_time_c',"");
-            }
-            if(months == 1){
-                this.model.set('forecast_time_c',"30");
-            }
-            if(months == 2){
-                this.model.set('forecast_time_c',"60");
-            }
-            if(months == 3){
-                this.model.set('forecast_time_c',"90");
-            }
-            if(months >= 4){
-                this.model.set('forecast_time_c',"90mas");
-            }
-        },this));
-        */
+           if(months == 0 ){
+               this.model.set('forecast_time_c',"");
+           }
+           if(months == 1){
+               this.model.set('forecast_time_c',"30");
+           }
+           if(months == 2){
+               this.model.set('forecast_time_c',"60");
+           }
+           if(months == 3){
+               this.model.set('forecast_time_c',"90");
+           }
+           if(months >= 4){
+               this.model.set('forecast_time_c',"90mas");
+           }
+       },this));
+       */
         /* END CUSTOMIZATION */
 
         this.model.on("change:monto_c", _.bind(function() {
@@ -294,8 +288,8 @@
             var str = this.model.get('monto_c');
             var n = str.length;
             if(n>22)
-    	      {
-                  app.alert.show('monto', {
+            {
+                app.alert.show('monto', {
                     level: 'error',
                     autoClose: false,
                     messages: 'El campo \"Monto de l&iacutenea\" no debe exceder de 15 digitos. Favor de corregir.'
@@ -397,7 +391,23 @@
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
     },
-    
+    /*
+    *Victor Martinez Lopez
+    * Valida que no se pueda crear un producto factoraje para personas fisicas
+     */
+    validacrearfactoraje: function(fields, errors, callback){
+        if(this.model.get('tipo_producto_c') == '4'){
+            if(this.tipoDePersona){
+                app.alert.show("tipoPersonaFisica", {
+                    level: "error",
+                    title: "No puedes generar factoraje para Personas F&iacute;sicas",
+                    autoClose: false
+                });
+                errors['tipo_producto_c'] = "No puedes generar factoraje para Personas F&iacute;sicas";
+                errors['tipo_producto_c'].required = true;
+            }
+        }callback(null,fields,errors);
+    },
     /*
     * @Author F. Javier G. Solar
     * 23-07-2018
@@ -407,7 +417,7 @@
 
         self = this;
 
-        if ( this.model.get('account_id') != "" || this.model.get('account_id') != null)
+        if ( this.model.get('account_id') != "" && this.model.get('account_id') != null)
         {
             app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/1'), null, {
                 success: _.bind(function (data) {
@@ -415,7 +425,7 @@
                     if (data != "") {
                         var titulo = "Campos Requeridos en Cuentas";
                         var nivel = "error";
-                        var mensaje = "Hace falta completar la siguiente informaci&oacuten: " + data;
+                        var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br>" + data;
 
 
                         app.error.errorName2Keys['custom_message1'] = 'Falta información en campos requeridos de la cuenta';
@@ -430,7 +440,7 @@
                 }, self),
             });
         }else {
-          callback(null, fields, errors);
+            callback(null, fields, errors);
         }
 
     },
@@ -563,21 +573,21 @@
     },
 
     validaClientesActivos: function(fields, errors, callback){
-      if (this.model.get('account_id')) {
-        var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
-        account.fetch({
-            success: _.bind(function (model) {
-                if (model.get('estatus_persona_c') == 'I') {
-                    app.error.errorName2Keys['custom_message'] = 'No se puede iniciar operacion en una cuenta inactiva';
-                    errors['account_name'] = errors['account_name'] || {};
-                    errors['account_name'].custom_message = true;
-                }
-                callback(null, fields, errors);
-            }, this)
-        });
-      }else {
-        callback(null, fields, errors);
-      }
+        if (this.model.get('account_id')) {
+            var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
+            account.fetch({
+                success: _.bind(function (model) {
+                    if (model.get('estatus_persona_c') == 'I') {
+                        app.error.errorName2Keys['custom_message'] = 'No se puede iniciar operacion en una cuenta inactiva';
+                        errors['account_name'] = errors['account_name'] || {};
+                        errors['account_name'].custom_message = true;
+                    }
+                    callback(null, fields, errors);
+                }, this)
+            });
+        }else {
+            callback(null, fields, errors);
+        }
 
 
     },
@@ -624,12 +634,8 @@
                 if( modelo.get('tipodepersona_c')=='Persona Fisica' && modelo.get('id') != null){
                     this.tipoDePersona = true;
                     //console.log("Cambiamos a tipo producto leasing");
-<<<<<<< HEAD
-                    this.model.set('tipo_producto_c','1');
-=======
 
                     //this.model.set('tipo_producto_c','1');
->>>>>>> 8ed7799f5e84a7f575f1e05bd1fb34db98e026ba
                 }else{
                     this.tipoDePersona = false;
                 }
@@ -650,36 +656,36 @@
     validaOperacionesPermitidasPorCuenta: function(fields, errors, callback){
         //Controlamos la solicitud del servicio:
         if (this.model.get('account_id')) {
-          var OppParams = {
-              'id_c': this.model.get('account_id'),
-          };
-          var urlOperaciones = app.api.buildURL("Opportunities/Operaciones", '', {}, {});
-          app.api.call("create", urlOperaciones, {data: OppParams}, {
-              success: _.bind(function (data) {
-                  if (data != null) {
-                      //console.log(data);
-                      var cantidad = data['cantidad'];
-                      //console.log("Cantidad de operaciones" + cantidad);
-                      if (cantidad > 0) {
-                          app.alert.show("Cantidad de operaciones", {
-                              level: "error",
-                              title: "No puedes generar m&aacute;s de una operaci&oacute;n para prospectos.",
-                              autoClose: false
-                          });
-                          app.error.errorName2Keys['custom_message'] = 'Solo puede tener una operacion como prospecto ';
-                          errors['account_name'] = errors['account_name'] || {};
-                          errors['account_name'].custom_message = true;
+            var OppParams = {
+                'id_c': this.model.get('account_id'),
+            };
+            var urlOperaciones = app.api.buildURL("Opportunities/Operaciones", '', {}, {});
+            app.api.call("create", urlOperaciones, {data: OppParams}, {
+                success: _.bind(function (data) {
+                    if (data != null) {
+                        //console.log(data);
+                        var cantidad = data['cantidad'];
+                        //console.log("Cantidad de operaciones" + cantidad);
+                        if (cantidad > 0) {
+                            app.alert.show("Cantidad de operaciones", {
+                                level: "error",
+                                title: "No puedes generar m&aacute;s de una operaci&oacute;n para prospectos.",
+                                autoClose: false
+                            });
+                            app.error.errorName2Keys['custom_message'] = 'Solo puede tener una operacion como prospecto ';
+                            errors['account_name'] = errors['account_name'] || {};
+                            errors['account_name'].custom_message = true;
 
-                          //this.cancelClicked();
-                          callback(null, fields, errors);
-                      } else {
-                          callback(null, fields, errors);
-                      }
-                  }
-              }, this)
-          });
+                            //this.cancelClicked();
+                            callback(null, fields, errors);
+                        } else {
+                            callback(null, fields, errors);
+                        }
+                    }
+                }, this)
+            });
         }else {
-          callback(null, fields, errors);
+            callback(null, fields, errors);
         }
     },
 
@@ -874,16 +880,16 @@
     // CVV - 28/03/2016 - Se sustituye por modulo de condiciones financieras
     /************/
     validaMultiactivo: function(fields, errors, callback){
-       // console.log("Valida MultiActivo");
+        // console.log("Valida MultiActivo");
         if(this.model.get('es_multiactivo_c')==true){
             this.model.set('activo_c','');
             var activos = new String(this.model.get('multiactivo_c'));
-           // console.log(activos);
-          //  console.log(typeof activos);
+            // console.log(activos);
+            //  console.log(typeof activos);
             var arrActivos = activos.split(",");
-           // console.log(arrActivos);
-          //  console.log(typeof arrActivos);
-          //  console.log(arrActivos.length);
+            // console.log(arrActivos);
+            //  console.log(typeof arrActivos);
+            //  console.log(arrActivos.length);
 
             if(arrActivos.length<=1){
                 errors['multiactivo_c'] = errors['multiactivo_c'] || {};
@@ -1063,63 +1069,62 @@
     },
 
     personTypeCheck:function(fields, errors, callback) {
-       var self=this;
-       var tipo_registro;
-       //id de la Persona asociada
-       var id_person=this.model.get('account_id');
+        var self=this;
+        var tipo_registro;
+        //id de la Persona asociada
+        var id_person=this.model.get('account_id');
 
-       if(id_person && id_person != '' && id_person.length>0){
-           app.api.call('GET', app.api.buildURL('Accounts/' + id_person ), null, {
-               success: _.bind(function(data){
-                   if(data!=null){
-                       //Obteniendo valores de lista
-                       var types=app.lang.getAppListStrings('tipo_registro_list');
-                       //Eliminando valores de Cliente y Prospecto
-                       delete types['Cliente'];
-                       delete  types['Prospecto']
+        if(id_person && id_person != '' && id_person.length>0){
+            app.api.call('GET', app.api.buildURL('Accounts/' + id_person ), null, {
+                success: _.bind(function(data){
+                    if(data!=null){
+                        //Obteniendo valores de lista
+                        var types=app.lang.getAppListStrings('tipo_registro_list');
+                        //Eliminando valores de Cliente y Prospecto
+                        delete types['Cliente'];
+                        delete  types['Prospecto']
 
-                       //arr_types mantiene los tipos de cuenta no permitidos
-                       var arr_types=[];
-                       for (var key in types) {
-                           if (types.hasOwnProperty(key)) {
-                               arr_types.push(types[key])
-                           }
-                       }
+                        //arr_types mantiene los tipos de cuenta no permitidos
+                        var arr_types=[];
+                        for (var key in types) {
+                            if (types.hasOwnProperty(key)) {
+                                arr_types.push(types[key])
+                            }
+                        }
 
-                       if($.inArray(data.tipo_registro_c,arr_types) != -1){
+                        if($.inArray(data.tipo_registro_c,arr_types) != -1){
 
-                               app.alert.show("Cliente no v\u00E1lido", {
-                                   level: "error",
-                                   title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " +data.tipo_registro_c,
-                                   autoClose: false
-                               });
+                            app.alert.show("Cliente no v\u00E1lido", {
+                                level: "error",
+                                title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " +data.tipo_registro_c,
+                                autoClose: false
+                            });
 
-                               app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
-                               errors['account_name'] = errors['account_name'] || {};
-                               errors['account_name'].custom_message1 = true;
-                               //this.cancelClicked();
+                            app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
+                            errors['account_name'] = errors['account_name'] || {};
+                            errors['account_name'].custom_message1 = true;
+                            //this.cancelClicked();
 
-                       }
+                        }
 
-                   }
+                    }
 
-                   callback(null, fields, errors);
+                    callback(null, fields, errors);
 
-               },self),
-           });
-       }else{
+                },self),
+            });
+        }else{
+
+            app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
+            errors['account_name'] = errors['account_name'] || {};
+            errors['account_name'].custom_message1 = true;
+            errors['account_name'].required = true;
+
+            callback(null, fields, errors);
+        }
 
 
-           app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
-           errors['account_name'] = errors['account_name'] || {};
-           errors['account_name'].custom_message1 = true;
-           errors['account_name'].required = true;
-
-           callback(null, fields, errors);
-       }
-
-
-   },
+    },
 
     calcularRI: function(){
 
@@ -1139,21 +1144,21 @@
 
     ocultaFunc: function()
     {
-  		_.each(this.fields,function(field)
-  		{
-  			$('[data-name="'+field.name+'"]').hide();
-  		});
-  		$('[data-name="name"]').show();
-  		$('[data-name="tct_etapa_ddw_c"]').show();
-  		$('[data-name="estatus_c"]').show();
-  		$('[data-name="idsolicitud_c"]').show();
-  		$('[data-name="account_name"]').show();
-  		$('[data-name="tipo_producto_c"]').show();
-  		$('[data-name="monto_c"]').show();
-  		$('[data-name="assigned_user_name"]').show();
-      $('[data-name="picture"]').show();
-		  //Ocultando el panel de Oportunidad perdida
-      $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
+        _.each(this.fields,function(field)
+        {
+            $('[data-name="'+field.name+'"]').hide();
+        });
+        $('[data-name="name"]').show();
+        $('[data-name="tct_etapa_ddw_c"]').show();
+        $('[data-name="estatus_c"]').show();
+        $('[data-name="idsolicitud_c"]').show();
+        $('[data-name="account_name"]').show();
+        $('[data-name="tipo_producto_c"]').show();
+        $('[data-name="monto_c"]').show();
+        $('[data-name="assigned_user_name"]').show();
+        $('[data-name="picture"]').show();
+        //Ocultando el panel de Oportunidad perdida
+        $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
     },
 
     /*
@@ -1172,12 +1177,6 @@
         this._super('_dispose', []);
     },
 
-<<<<<<< HEAD
-    //Oculta botones de Crear una presolicitud si el user logueado tiene rol de Gestion Comercial. Adrian Arauz 27/08/2018
-    _rolnocreacion: function() {
-
-        var roles_no_crea = app.lang.getAppListStrings('roles_no_crea_list');
-=======
     /*@Jesus Carrillo
   Metodos que limitan el tipo moneda a 15 entetos y 2 decimales
  */
@@ -1219,17 +1218,17 @@
         var cursor=$(evt.handleObj.selector).getCursorPosition();//setear cursor
 
 
-            if (enteros == "false" && decimales == "false") {
-                if(cursor[0]==cursor[1]) {
-                    return false;
-                }
-            }else if (typeof enteros == "number" && decimales == "false") {
-               if (cursor[0] < enteros) {
-                    $(evt.handleObj.selector).selectRange(cursor[0], cursor[1]);
-               } else {
-                    $(evt.handleObj.selector).selectRange(enteros);
-               }
+        if (enteros == "false" && decimales == "false") {
+            if(cursor[0]==cursor[1]) {
+                return false;
             }
+        }else if (typeof enteros == "number" && decimales == "false") {
+            if (cursor[0] < enteros) {
+                $(evt.handleObj.selector).selectRange(cursor[0], cursor[1]);
+            } else {
+                $(evt.handleObj.selector).selectRange(enteros);
+            }
+        }
 
     },
 
@@ -1298,10 +1297,10 @@
 
     formatcoin: function (evt){
         if (!evt) return;
-         var $input = this.$(evt.currentTarget);
-         while ($input.val().indexOf(',') != -1){
-           $input.val($input.val().replace(',',''))
-         }
+        var $input = this.$(evt.currentTarget);
+        while ($input.val().indexOf(',') != -1){
+            $input.val($input.val().replace(',',''))
+        }
     },
 
     /*
@@ -1310,27 +1309,11 @@
     */
     _rolnocreacion: function() {
         var roles_no_crea = app.lang.getAppListStrings('roles_no_crea_sol_list');
->>>>>>> 8ed7799f5e84a7f575f1e05bd1fb34db98e026ba
         var roles_usuario = app.user.attributes.roles;
         var puedecrear = i;
         console.log ("Valida Rol de Usuario");
         for(var i =0; i<roles_usuario.length; i++) {
             for(var puedecrear in roles_no_crea){
-<<<<<<< HEAD
-
-            if(roles_usuario[i]==roles_no_crea[puedecrear]) {
-
-                app.alert.show("No Rol", {
-                    level: "error",
-                    title: "No puedes generar una Solicitud ya que tienes un rol no permitido.",
-                    autoClose: false,
-                    return: false,
-
-                })
-                app.drawer.closeImmediately();
-                console.log("ok");
-            }
-=======
                 if(roles_usuario[i]==roles_no_crea[puedecrear]) {
                     app.alert.show("No_Rol_Solicitud", {
                         level: "error",
@@ -1341,14 +1324,8 @@
                     app.drawer.closeImmediately();
                     //console.log("ok");
                 }
->>>>>>> 8ed7799f5e84a7f575f1e05bd1fb34db98e026ba
             }
         }
-
     },
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 8ed7799f5e84a7f575f1e05bd1fb34db98e026ba
 })
