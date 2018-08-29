@@ -139,6 +139,8 @@
             Funcion que pinta de color los paneles relacionados
         */
         this.model.on('sync', this.fulminantcolor, this);
+        this.model.on('sync', this.validarol2, this);
+        this.model.on('sync', this.validarol2, this);
     },
 
       fulminantcolor: function () {
@@ -1867,4 +1869,235 @@
           }
           callback(null, fields, errors);
       },
+
+    validarol: function() {
+          self=this;
+          var roles_limit = app.lang.getAppListStrings('roles_limit_list');
+          var roles_logged = app.user.attributes.roles;
+          var coincide_rol=false;
+          for(var i=0; i<roles_logged.length; i++) {
+              for (var rol_limit in roles_limit) {
+                  if (roles_logged[i] == roles_limit[rol_limit]) {
+                      coincide_rol = true;
+                  }else{
+                      coincide_rol=false;
+                  }
+              }
+          }
+          app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
+              success: _.bind(function (pertenece_a_equipo) {
+                  if(coincide_rol==false) {
+                      if(pertenece_a_equipo==false){
+                          app.alert.show("No Rol", {
+                              level: "error",
+                              title: "No puedes ver la cuenta ya que no tienes el perfil adecuado.",
+                              autoClose: false,
+                              return: false,
+                          });
+                          app.router.navigate('#Accounts', {trigger: true});
+                      }
+                  }
+              }, self),
+          });
+          self.render();
+      },
+
+    validarol2: function() {
+          self=this;
+          var roles_limit = app.lang.getAppListStrings('roles_limit_list_2');
+          var roles_logged = app.user.attributes.roles;
+          var coincide_rol=false;
+          for(var i=0; i<roles_logged.length; i++) {
+              for (var rol_limit in roles_limit) {
+                  if (roles_logged[i] == roles_limit[rol_limit]) {
+                      coincide_rol = true;
+                  }else{
+                      coincide_rol=false;
+                  }
+              }
+          }
+          app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
+            success: _.bind(function (es_promotor) {
+                if(coincide_rol==false) {
+                    if(es_promotor==false){
+                        if(this.model.get('tipo_registro_c')!="Lead" ){
+                            app.alert.show("No Rol", {
+                                level: "error",
+                                title: "No puedes ver la cuenta ya que no tienes  el perfil adecuado.",
+                                autoClose: false,
+                                return: false,
+                            });
+                            app.router.navigate('#Accounts', {trigger: true});
+                        }
+                    }
+                }
+            }, self),
+          });
+          self.render();
+    },
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
