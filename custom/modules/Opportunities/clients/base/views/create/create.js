@@ -1304,7 +1304,7 @@
     },
 
     /*
-      Author: Adrian Arauz 2018-08-28
+      Author: Adrian Arauz 2018-08-28 ok
       funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
     */
     _rolnocreacion: function() {
