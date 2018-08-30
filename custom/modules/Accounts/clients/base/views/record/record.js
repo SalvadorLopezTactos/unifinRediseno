@@ -139,6 +139,8 @@
             Funcion que pinta de color los paneles relacionados
         */
         this.model.on('sync', this.fulminantcolor, this);
+        this.model.on('sync', this.validarol, this);
+        this.model.on('sync', this.validarol2, this);
     },
 
       fulminantcolor: function () {
@@ -517,9 +519,29 @@
 
         this.hideButton_Conversion();
 
+        this.hideButtonLeadNoViable();
+
 
 
     },
+
+    /*
+    * author: Salvador Lopez 29/08/2018
+    * Función para mostrar u ocultar el botón de Lead No viable
+    * */
+    hideButtonLeadNoViable:function(){
+
+        var leadNoViableField = this.getField("leadNoViable");
+
+        //Para mostrar/ocultar el boton de convertir a Lead y Convertir a Prospecto Contactado. 22/08/2018
+        if (this.model.get('tipo_registro_c') != "Lead") {
+            leadNoViableField.listenTo(leadNoViableField, "render", function () {
+                leadNoViableField.hide();
+            });
+        }
+
+    },
+
 
     hideconfiinfo:function () {
 
@@ -905,6 +927,7 @@
         this.context.on('button:save_button:click', this.borraTel, this);
         this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
         this.context.on('button:convierte_lead:click', this.validalead, this);
+        this.context.on('button:lead_no_viable:click', this.leadNoViable, this);
     },
 
     /*
@@ -1038,10 +1061,16 @@
         console.log(allfields);
         for(var i=0;i<allfields.length;i++){
             var betext=0;
+            var indica_direc_admin=0;
             for(var j=0;j<allfields[i].length;j++)
             {
                 if(allfields[i][j]!=null || allfields[i][j]!="") {
                     betext++;
+                    if(i==7) {//si estas apuntando al campo indicador
+                        if (allfields[i][j] == 'Administración' || allfields[i][j] == '16' ) {
+                            indica_direc_admin++;
+                        }
+                    }
                 }
             }
             if(betext==0){
@@ -1058,14 +1087,20 @@
         if(fieldstelefono.includes(false)==true){
             app.alert.show('alert_fields_empty', {
                 level: 'error',
-                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos un Tel\u00E9fono',
+                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos un <b>Tel\u00E9fono</b>',
             });
             valMedios = 1;
         }
         if(fieldsdirec.includes(false)==true){
             app.alert.show('alert_fields_empty', {
                 level: 'error',
-                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una Direcci\u00F3n',
+                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una <b>Direcci\u00F3n</b>',
+            });
+            valMedios = 1;
+        }else if(fieldsdirec.includes(false)==false && indica_direc_admin==0){
+            app.alert.show('alert_fields_empty', {
+                level: 'error',
+                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una <b>Direcci\u00F3n</b> con Indicador <b>Administraci\u00F3n</b>',
             });
             valMedios = 1;
         }
@@ -1082,10 +1117,8 @@
                 });
         }
     },
-/* @Jesus Carrillo
-    Metodo que convierte a prospecto contactado
- */
-      /*
+    /* @Jesus Carrillo
+        Metodo que convierte a prospecto contactado
        *Solo promotores y directorees pueden cambiar una cuenta de Lead a Prospecto contactado
        * 22-08-2018 Victor Martínez
         */
@@ -1128,7 +1161,7 @@
                         if(self.totalllamadas==0 && self.totalreuniones==0){
                             app.alert.show('alert_calls', {
                                 level: 'error',
-                                messages: 'El proceso de conversi\u00F3n requiere que el Prospecto Contactado contenga una llamada o reuni\u00F3n con estado <b>Realizada</b> y con fecha anterior al d\u00EDa de hoy.',
+                                messages: 'El proceso de conversi\u00F3n requiere que la cuenta contenga una <b>llamada</b> o <b>reuni\u00F3n</b> con estado <b>Realizada</b> y con fecha al d\u00EDa de hoy o anterior.',
                             });
                             valRelacionados = 1;
                         }
@@ -1226,24 +1259,89 @@
                  });
              }
               else {
-                     if (this.model.get('promotorcredit_c') =="" || this.model.get('promotorcredit_c')==null){
-                         /*reqs= reqs + '<b>Promotor de Cr\u00E9dito<br>';*/
-                         this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
-                         this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
-                     }
+                 /* hay que traer el campo del usaurio
+                        * PREOMOTORES POR DEFAULT
+                        LEASING:
+                        9 - Sin Gestor
+                        SinGestor
+                        569246c7-da62-4664-ef2a-5628f649537e
+                        CREDIT:
+                        ADRIANA GAYOSSO CRUZ
+                        agayosso
+                        7a83c151-6fc3-dc2b-b3a0-562a60aa3b74
+                        FACTORAJE:
+                        //ANGEL TAMARIZ GALINDO
+                        //angel.tamariz
+                        //3f232cae-4ee1-c9b0-266d-562a600fa9d7
+                        Maria de Lourdes Campos Toca
+                        lcampos
+                        a04540fc-e608-56a7-ad47-562a6078519d
+                        */
 
-                     if (this.model.get('promotorfactoraje_c') =="" || this.model.get('promotorfactoraje_c')==null){
-                         /*reqs= reqs + '<b>Promotor de Factoraje<br></b>';*/
-                         this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
-                         this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
-                     }
+                 var usuario = app.data.createBean('Users', {id: this.model.get('assigned_user_id')});
+                 usuario.fetch({
+                     success: _.bind(function (modelo) {
+                         var contains = function (needle) {
+                             // Per spec, the way to identify NaN is that it is not equal to itself
+                             var findNaN = needle !== needle;
+                             var indexOf;
 
-                     if (this.model.get('promotorleasing_c') =="" || this.model.get('promotorleasing_c')==null){
-                         /*reqs= reqs + '<b>Promotor Leasing<br></b>';*/
-                         this.model.set('promotorleasing_c', '9 - Sin Gestor');
-                         this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
-                     }
+                             if (!findNaN && typeof Array.prototype.indexOf === 'function') {
+                                 indexOf = Array.prototype.indexOf;
+                             } else {
+                                 indexOf = function (needle) {
+                                     var i = -1, index = -1;
 
+                                     for (i = 0; i < this.length; i++) {
+                                         var item = this[i];
+
+                                         if ((findNaN && item !== item) || item === needle) {
+                                             index = i;
+                                             break;
+                                         }
+                                     }
+
+                                     return index;
+                                 };
+                             }
+
+                             return indexOf.call(this, needle) > -1;
+                         };
+                         /** Modificaci�n a Multiproducto para promotores por default
+                          * Carlos Zaragoza
+                          * Enero 25, 2016 10:15 AM
+                          * */
+                         if (contains.call(modelo.get('productos_c'), "1")) {
+                             this.model.set('promotorleasing_c', modelo.get('name'));
+                             this.model.set('user_id_c', modelo.get('id'));
+                         } else {
+                             this.model.set('promotorleasing_c', '9 - Sin Gestor');
+                             this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                         }
+                         if (contains.call(modelo.get('productos_c'), "4")) {
+                             this.model.set('promotorfactoraje_c', modelo.get('name'));
+                             this.model.set('user_id1_c', modelo.get('id'));
+                         } else {
+                             this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
+                             this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
+                         }
+                         if (contains.call(modelo.get('productos_c'), "3")) {
+                             this.model.set('promotorcredit_c', modelo.get('name'));
+                             this.model.set('user_id2_c', modelo.get('id'));
+                         } else {
+                             this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
+                             this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
+                         }
+                         if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false) {
+                             this.model.set('promotorleasing_c', '9 - Sin Gestor');
+                             this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                             this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
+                             this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
+                             this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
+                             this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
+                         }
+                     }, this)
+                 });
                      this.model.set("tipo_registro_c", "Lead");
                      this.model.save();
                      console.log ('Guarda a Lead');
@@ -1254,6 +1352,45 @@
                     // this._render();
 
                  }
+
+      },
+
+      leadNoViable: function(){
+
+        //var self=this;
+          var urlDelete=app.api.buildURL('Accounts/'+this.model.get('id'))
+
+          app.alert.show('confirm_lead_no_viable', {
+              level: 'confirmation',
+              messages: '\u00BFEst\u00E1 seguro de establecer a <b>'+this.model.get('name')+'</b> como Lead No Viable\u003F',
+              autoClose: false,
+              onConfirm: function(){
+
+                  app.alert.show('delete_lead_no_viable', {
+                      level: 'process',
+                  });
+
+                  self.model.set('subtipo_cuenta_c',"No Viable");
+                  self.model.save();
+
+
+                  app.api.call('delete',urlDelete , null, {
+                      success: _.bind(function (data) {
+                          app.alert.dismiss('delete_lead_no_viable');
+                          app.router.navigate('#Accounts', {trigger: true});
+
+                      },self),
+                      error: _.bind(function(error) {
+                          console.log("Este fue el error:", error)
+                      }, self),
+                  });
+
+
+              },
+              onCancel: function(){
+                  //alert("OPERACION CANCELADA!");
+              }
+          });
 
       },
 
@@ -1867,4 +2004,233 @@
           }
           callback(null, fields, errors);
       },
+
+    validarol: function() {
+          self=this;
+          var roles_limit = app.lang.getAppListStrings('roles_limit_list');
+          var roles_logged = app.user.attributes.roles;
+          var coincide_rol=false;
+          for(var i=0; i<roles_logged.length; i++) {
+              for (var rol_limit in roles_limit) {
+                  if (roles_logged[i] == roles_limit[rol_limit]) {
+                      coincide_rol = true;
+                  }else{
+                      coincide_rol=false;
+                  }
+              }
+          }
+          app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
+              success: _.bind(function (pertenece_a_equipo) {
+                  if(coincide_rol==false) {
+                      if(pertenece_a_equipo==false){
+                          app.alert.show("No Rol", {
+                              level: "error",
+                              title: "No puedes ver la cuenta ya que no tienes el perfil adecuado.",
+                              autoClose: false,
+                              return: false,
+                          });
+                          app.router.navigate('#Accounts', {trigger: true});
+                      }
+                  }
+              }, self),
+          });
+      },
+
+    validarol2: function() {
+          self=this;
+          var roles_limit = app.lang.getAppListStrings('roles_limit_list_2');
+          var roles_logged = app.user.attributes.roles;
+          var coincide_rol=false;
+          for(var i=0; i<roles_logged.length; i++) {
+              for (var rol_limit in roles_limit) {
+                  if (roles_logged[i] == roles_limit[rol_limit]) {
+                      coincide_rol = true;
+                  }else{
+                      coincide_rol=false;
+                  }
+              }
+          }
+          app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
+            success: _.bind(function (es_promotor) {
+                if(coincide_rol==false) {
+                    if(es_promotor==false){
+                        if(this.model.get('tipo_registro_c')!="Lead" ){
+                            app.alert.show("No Rol", {
+                                level: "error",
+                                title: "No puedes ver la cuenta ya que no tienes  el perfil adecuado.",
+                                autoClose: false,
+                                return: false,
+                            });
+                            app.router.navigate('#Accounts', {trigger: true});
+                        }
+                    }
+                }
+            }, self),
+          });
+    },
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
