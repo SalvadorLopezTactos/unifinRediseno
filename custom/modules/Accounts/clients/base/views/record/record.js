@@ -1255,107 +1255,110 @@
               reqs= reqs + '<b>Nombre Comercial<br></b>';
           }
 
-             if(reqs!="") {
-                 console.log('Validacion Campos LEAD');
-                 app.alert.show('alert_calls4', {
-                     level: 'error',
-                     messages: 'Para convertir a Lead es necesario que se llenen los siguientes campos requeridos: ' + reqs,
-                 });
-             }
-              else {
-                 /* hay que traer el campo del usaurio
-                        * PREOMOTORES POR DEFAULT
-                        LEASING:
-                        9 - Sin Gestor
-                        SinGestor
-                        569246c7-da62-4664-ef2a-5628f649537e
-                        CREDIT:
-                        ADRIANA GAYOSSO CRUZ
-                        agayosso
-                        7a83c151-6fc3-dc2b-b3a0-562a60aa3b74
-                        FACTORAJE:
-                        //ANGEL TAMARIZ GALINDO
-                        //angel.tamariz
-                        //3f232cae-4ee1-c9b0-266d-562a600fa9d7
-                        Maria de Lourdes Campos Toca
-                        lcampos
-                        a04540fc-e608-56a7-ad47-562a6078519d
-                        */
+          if(reqs!="") {
+              console.log('Validacion Campos LEAD');
+              app.alert.show('alert_calls4', {
+                  level: 'error',
+                  messages: 'Para convertir a Lead es necesario que se llenen los siguientes campos requeridos: ' + reqs,
+              });
+          }
+          else {
+              /* hay que traer el campo del usaurio
+                     * PREOMOTORES POR DEFAULT
+                     LEASING:
+                     9 - Sin Gestor
+                     SinGestor
+                     569246c7-da62-4664-ef2a-5628f649537e
+                     CREDIT:
+                     ADRIANA GAYOSSO CRUZ
+                     agayosso
+                     7a83c151-6fc3-dc2b-b3a0-562a60aa3b74
+                     FACTORAJE:
+                     //ANGEL TAMARIZ GALINDO
+                     //angel.tamariz
+                     //3f232cae-4ee1-c9b0-266d-562a600fa9d7
+                     Maria de Lourdes Campos Toca
+                     lcampos
+                     a04540fc-e608-56a7-ad47-562a6078519d
+                     */
 
-                 var usuario = app.data.createBean('Users', {id: this.model.get('assigned_user_id')});
-                 usuario.fetch({
-                     success: _.bind(function (modelo) {
-                         var contains = function (needle) {
-                             // Per spec, the way to identify NaN is that it is not equal to itself
-                             var findNaN = needle !== needle;
-                             var indexOf;
+              var usuario = app.data.createBean('Users', {id: app.user.id});
+              usuario.fetch({
+                  success: _.bind(function (modelo) {
+                      var contains = function (needle) {
+                          // Per spec, the way to identify NaN is that it is not equal to itself
+                          var findNaN = needle !== needle;
+                          var indexOf;
 
-                             if (!findNaN && typeof Array.prototype.indexOf === 'function') {
-                                 indexOf = Array.prototype.indexOf;
-                             } else {
-                                 indexOf = function (needle) {
-                                     var i = -1, index = -1;
+                          if (!findNaN && typeof Array.prototype.indexOf === 'function') {
+                              indexOf = Array.prototype.indexOf;
+                          } else {
+                              indexOf = function (needle) {
+                                  var i = -1, index = -1;
 
-                                     for (i = 0; i < this.length; i++) {
-                                         var item = this[i];
+                                  for (i = 0; i < this.length; i++) {
+                                      var item = this[i];
 
-                                         if ((findNaN && item !== item) || item === needle) {
-                                             index = i;
-                                             break;
-                                         }
-                                     }
+                                      if ((findNaN && item !== item) || item === needle) {
+                                          index = i;
+                                          break;
+                                      }
+                                  }
 
-                                     return index;
-                                 };
-                             }
+                                  return index;
+                              };
+                          }
 
-                             return indexOf.call(this, needle) > -1;
-                         };
-                         /** Modificaci�n a Multiproducto para promotores por default
-                          * Carlos Zaragoza
-                          * Enero 25, 2016 10:15 AM
-                          * */
-                         if (contains.call(modelo.get('productos_c'), "1")) {
-                             this.model.set('promotorleasing_c', modelo.get('name'));
-                             this.model.set('user_id_c', modelo.get('id'));
-                         } else {
-                             this.model.set('promotorleasing_c', '9 - Sin Gestor');
-                             this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
-                         }
-                         if (contains.call(modelo.get('productos_c'), "4")) {
-                             this.model.set('promotorfactoraje_c', modelo.get('name'));
-                             this.model.set('user_id1_c', modelo.get('id'));
-                         } else {
-                             this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
-                             this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
-                         }
-                         if (contains.call(modelo.get('productos_c'), "3")) {
-                             this.model.set('promotorcredit_c', modelo.get('name'));
-                             this.model.set('user_id2_c', modelo.get('id'));
-                         } else {
-                             this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
-                             this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
-                         }
-                         if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false) {
-                             this.model.set('promotorleasing_c', '9 - Sin Gestor');
-                             this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
-                             this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
-                             this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
-                             this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
-                             this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
-                         }
-                     }, this)
-                 });
-                     this.model.set("tipo_registro_c", "Lead");
-                     this.model.save();
-                     console.log ('Guarda a Lead');
-                     app.alert.show('success', {
-                     level: 'success',
-                     messages: 'Proceso Finalizado.',
-                         });
-                    // this._render();
+                          return indexOf.call(this, needle) > -1;
+                      };
+                      /** Modificaci�n a Multiproducto para promotores por default
+                       * Carlos Zaragoza
+                       * Enero 25, 2016 10:15 AM
+                       * */
+                      if (contains.call(modelo.get('productos_c'), "1")) {
+                          this.model.set('promotorleasing_c', modelo.get('name'));
+                          this.model.set('user_id_c', modelo.get('id'));
+                      } else {
+                          this.model.set('promotorleasing_c', '9 - Sin Gestor');
+                          this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                      }
+                      if (contains.call(modelo.get('productos_c'), "4")) {
+                          this.model.set('promotorfactoraje_c', modelo.get('name'));
+                          this.model.set('user_id1_c', modelo.get('id'));
+                      } else {
+                          this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
+                          this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
+                      }
+                      if (contains.call(modelo.get('productos_c'), "3")) {
+                          this.model.set('promotorcredit_c', modelo.get('name'));
+                          this.model.set('user_id2_c', modelo.get('id'));
+                      } else {
+                          this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
+                          this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
+                      }
+                      if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false) {
+                          this.model.set('promotorleasing_c', '9 - Sin Gestor');
+                          this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                          this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
+                          this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
+                          this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
+                          this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
+                      }
 
-                 }
+                      this.model.set("tipo_registro_c", "Lead");
+                      this.model.set("subtipo_cuenta_list", "En Calificacion");
+                      this.model.save();
+                      console.log ('Guarda a Lead');
+                      app.alert.show('success', {
+                          level: 'success',
+                          messages: 'Proceso Finalizado.',
+                      });
+
+                  }, this)
+              });
+
+
+          }
 
       },
 
