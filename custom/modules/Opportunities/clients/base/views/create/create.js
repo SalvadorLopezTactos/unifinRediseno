@@ -242,34 +242,34 @@
          * @version 1
          * Validamos que se pueda usar el campo vacío en el forecast. Agregar opción "…" en forecast time para indicar que se cierra este mes (esta opción se selecciona en automático si la fecha de cierre está dentro del mes corriente) Si la fecha de cierre esta fuera del mes corriente calcular si es 30, 60, etc.
          * */
-        // CVV - 28/03/2016 - El campo de fecha de cierre se elimino del layout
-        /*
-       this.model.on("change:date_closed", _.bind(function() {
-           var fecha_cierre = this.model.get('date_closed');
-           var fecha_actual = new Date();
-           fecha_cierre  = new Date(fecha_cierre+"T12:00:00Z");
-           var months;
-           months = (fecha_cierre.getFullYear() - fecha_actual.getFullYear()) * 12;
-           months -= fecha_actual.getMonth();
-           months += fecha_cierre.getMonth();
+         // CVV - 28/03/2016 - El campo de fecha de cierre se elimino del layout
+         /*
+        this.model.on("change:date_closed", _.bind(function() {
+            var fecha_cierre = this.model.get('date_closed');
+            var fecha_actual = new Date();
+            fecha_cierre  = new Date(fecha_cierre+"T12:00:00Z");
+            var months;
+            months = (fecha_cierre.getFullYear() - fecha_actual.getFullYear()) * 12;
+            months -= fecha_actual.getMonth();
+            months += fecha_cierre.getMonth();
 
-           if(months == 0 ){
-               this.model.set('forecast_time_c',"");
-           }
-           if(months == 1){
-               this.model.set('forecast_time_c',"30");
-           }
-           if(months == 2){
-               this.model.set('forecast_time_c',"60");
-           }
-           if(months == 3){
-               this.model.set('forecast_time_c',"90");
-           }
-           if(months >= 4){
-               this.model.set('forecast_time_c',"90mas");
-           }
-       },this));
-       */
+            if(months == 0 ){
+                this.model.set('forecast_time_c',"");
+            }
+            if(months == 1){
+                this.model.set('forecast_time_c',"30");
+            }
+            if(months == 2){
+                this.model.set('forecast_time_c',"60");
+            }
+            if(months == 3){
+                this.model.set('forecast_time_c',"90");
+            }
+            if(months >= 4){
+                this.model.set('forecast_time_c',"90mas");
+            }
+        },this));
+        */
         /* END CUSTOMIZATION */
 
         this.model.on("change:monto_c", _.bind(function() {
@@ -288,8 +288,8 @@
             var str = this.model.get('monto_c');
             var n = str.length;
             if(n>22)
-            {
-                app.alert.show('monto', {
+    	      {
+                  app.alert.show('monto', {
                     level: 'error',
                     autoClose: false,
                     messages: 'El campo \"Monto de l&iacutenea\" no debe exceder de 15 digitos. Favor de corregir.'
@@ -405,9 +405,9 @@
                 });
                 errors['tipo_producto_c'] = "No puedes generar factoraje para Personas F&iacute;sicas";
                 errors['tipo_producto_c'].required = true;
-            }
+                }
         }callback(null,fields,errors);
-    },
+        },
     /*
     * @Author F. Javier G. Solar
     * 23-07-2018
@@ -440,7 +440,7 @@
                 }, self),
             });
         }else {
-            callback(null, fields, errors);
+          callback(null, fields, errors);
         }
 
     },
@@ -573,21 +573,21 @@
     },
 
     validaClientesActivos: function(fields, errors, callback){
-        if (this.model.get('account_id')) {
-            var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
-            account.fetch({
-                success: _.bind(function (model) {
-                    if (model.get('estatus_persona_c') == 'I') {
-                        app.error.errorName2Keys['custom_message'] = 'No se puede iniciar operacion en una cuenta inactiva';
-                        errors['account_name'] = errors['account_name'] || {};
-                        errors['account_name'].custom_message = true;
-                    }
-                    callback(null, fields, errors);
-                }, this)
-            });
-        }else {
-            callback(null, fields, errors);
-        }
+      if (this.model.get('account_id')) {
+        var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
+        account.fetch({
+            success: _.bind(function (model) {
+                if (model.get('estatus_persona_c') == 'I') {
+                    app.error.errorName2Keys['custom_message'] = 'No se puede iniciar operacion en una cuenta inactiva';
+                    errors['account_name'] = errors['account_name'] || {};
+                    errors['account_name'].custom_message = true;
+                }
+                callback(null, fields, errors);
+            }, this)
+        });
+      }else {
+        callback(null, fields, errors);
+      }
 
 
     },
@@ -656,36 +656,36 @@
     validaOperacionesPermitidasPorCuenta: function(fields, errors, callback){
         //Controlamos la solicitud del servicio:
         if (this.model.get('account_id')) {
-            var OppParams = {
-                'id_c': this.model.get('account_id'),
-            };
-            var urlOperaciones = app.api.buildURL("Opportunities/Operaciones", '', {}, {});
-            app.api.call("create", urlOperaciones, {data: OppParams}, {
-                success: _.bind(function (data) {
-                    if (data != null) {
-                        //console.log(data);
-                        var cantidad = data['cantidad'];
-                        //console.log("Cantidad de operaciones" + cantidad);
-                        if (cantidad > 0) {
-                            app.alert.show("Cantidad de operaciones", {
-                                level: "error",
-                                title: "No puedes generar m&aacute;s de una operaci&oacute;n para prospectos.",
-                                autoClose: false
-                            });
-                            app.error.errorName2Keys['custom_message'] = 'Solo puede tener una operacion como prospecto ';
-                            errors['account_name'] = errors['account_name'] || {};
-                            errors['account_name'].custom_message = true;
+          var OppParams = {
+              'id_c': this.model.get('account_id'),
+          };
+          var urlOperaciones = app.api.buildURL("Opportunities/Operaciones", '', {}, {});
+          app.api.call("create", urlOperaciones, {data: OppParams}, {
+              success: _.bind(function (data) {
+                  if (data != null) {
+                      //console.log(data);
+                      var cantidad = data['cantidad'];
+                      //console.log("Cantidad de operaciones" + cantidad);
+                      if (cantidad > 0) {
+                          app.alert.show("Cantidad de operaciones", {
+                              level: "error",
+                              title: "No puedes generar m&aacute;s de una operaci&oacute;n para prospectos.",
+                              autoClose: false
+                          });
+                          app.error.errorName2Keys['custom_message'] = 'Solo puede tener una operacion como prospecto ';
+                          errors['account_name'] = errors['account_name'] || {};
+                          errors['account_name'].custom_message = true;
 
-                            //this.cancelClicked();
-                            callback(null, fields, errors);
-                        } else {
-                            callback(null, fields, errors);
-                        }
-                    }
-                }, this)
-            });
+                          //this.cancelClicked();
+                          callback(null, fields, errors);
+                      } else {
+                          callback(null, fields, errors);
+                      }
+                  }
+              }, this)
+          });
         }else {
-            callback(null, fields, errors);
+          callback(null, fields, errors);
         }
     },
 
@@ -880,16 +880,16 @@
     // CVV - 28/03/2016 - Se sustituye por modulo de condiciones financieras
     /************/
     validaMultiactivo: function(fields, errors, callback){
-        // console.log("Valida MultiActivo");
+       // console.log("Valida MultiActivo");
         if(this.model.get('es_multiactivo_c')==true){
             this.model.set('activo_c','');
             var activos = new String(this.model.get('multiactivo_c'));
-            // console.log(activos);
-            //  console.log(typeof activos);
+           // console.log(activos);
+          //  console.log(typeof activos);
             var arrActivos = activos.split(",");
-            // console.log(arrActivos);
-            //  console.log(typeof arrActivos);
-            //  console.log(arrActivos.length);
+           // console.log(arrActivos);
+          //  console.log(typeof arrActivos);
+          //  console.log(arrActivos.length);
 
             if(arrActivos.length<=1){
                 errors['multiactivo_c'] = errors['multiactivo_c'] || {};
@@ -1069,62 +1069,62 @@
     },
 
     personTypeCheck:function(fields, errors, callback) {
-        var self=this;
-        var tipo_registro;
-        //id de la Persona asociada
-        var id_person=this.model.get('account_id');
+       var self=this;
+       var tipo_registro;
+       //id de la Persona asociada
+       var id_person=this.model.get('account_id');
 
-        if(id_person && id_person != '' && id_person.length>0){
-            app.api.call('GET', app.api.buildURL('Accounts/' + id_person ), null, {
-                success: _.bind(function(data){
-                    if(data!=null){
-                        //Obteniendo valores de lista
-                        var types=app.lang.getAppListStrings('tipo_registro_list');
-                        //Eliminando valores de Cliente y Prospecto
-                        delete types['Cliente'];
-                        delete  types['Prospecto']
+       if(id_person && id_person != '' && id_person.length>0){
+           app.api.call('GET', app.api.buildURL('Accounts/' + id_person ), null, {
+               success: _.bind(function(data){
+                   if(data!=null){
+                       //Obteniendo valores de lista
+                       var types=app.lang.getAppListStrings('tipo_registro_list');
+                       //Eliminando valores de Cliente y Prospecto
+                       delete types['Cliente'];
+                       delete  types['Prospecto']
 
-                        //arr_types mantiene los tipos de cuenta no permitidos
-                        var arr_types=[];
-                        for (var key in types) {
-                            if (types.hasOwnProperty(key)) {
-                                arr_types.push(types[key])
-                            }
-                        }
+                       //arr_types mantiene los tipos de cuenta no permitidos
+                       var arr_types=[];
+                       for (var key in types) {
+                           if (types.hasOwnProperty(key)) {
+                               arr_types.push(types[key])
+                           }
+                       }
 
-                        if($.inArray(data.tipo_registro_c,arr_types) != -1){
+                       if($.inArray(data.tipo_registro_c,arr_types) != -1){
 
-                            app.alert.show("Cliente no v\u00E1lido", {
-                                level: "error",
-                                title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " +data.tipo_registro_c,
-                                autoClose: false
-                            });
+                               app.alert.show("Cliente no v\u00E1lido", {
+                                   level: "error",
+                                   title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " +data.tipo_registro_c,
+                                   autoClose: false
+                               });
 
-                            app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
-                            errors['account_name'] = errors['account_name'] || {};
-                            errors['account_name'].custom_message1 = true;
-                            //this.cancelClicked();
+                               app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
+                               errors['account_name'] = errors['account_name'] || {};
+                               errors['account_name'].custom_message1 = true;
+                               //this.cancelClicked();
 
-                        }
+                       }
 
-                    }
+                   }
 
-                    callback(null, fields, errors);
+                   callback(null, fields, errors);
 
-                },self),
-            });
-        }else{
+               },self),
+           });
+       }else{
 
-            app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
-            errors['account_name'] = errors['account_name'] || {};
-            errors['account_name'].custom_message1 = true;
-            errors['account_name'].required = true;
+           app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
+           errors['account_name'] = errors['account_name'] || {};
+           errors['account_name'].custom_message1 = true;
+           errors['account_name'].required = true;
 
-            callback(null, fields, errors);
-        }
+           callback(null, fields, errors);
+       }
 
 
-    },
+   },
 
     calcularRI: function(){
 
@@ -1144,21 +1144,21 @@
 
     ocultaFunc: function()
     {
-        _.each(this.fields,function(field)
-        {
-            $('[data-name="'+field.name+'"]').hide();
-        });
-        $('[data-name="name"]').show();
-        $('[data-name="tct_etapa_ddw_c"]').show();
-        $('[data-name="estatus_c"]').show();
-        $('[data-name="idsolicitud_c"]').show();
-        $('[data-name="account_name"]').show();
-        $('[data-name="tipo_producto_c"]').show();
-        $('[data-name="monto_c"]').show();
-        $('[data-name="assigned_user_name"]').show();
-        $('[data-name="picture"]').show();
-        //Ocultando el panel de Oportunidad perdida
-        $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
+  		_.each(this.fields,function(field)
+  		{
+  			$('[data-name="'+field.name+'"]').hide();
+  		});
+  		$('[data-name="name"]').show();
+  		$('[data-name="tct_etapa_ddw_c"]').show();
+  		$('[data-name="estatus_c"]').show();
+  		$('[data-name="idsolicitud_c"]').show();
+  		$('[data-name="account_name"]').show();
+  		$('[data-name="tipo_producto_c"]').show();
+  		$('[data-name="monto_c"]').show();
+  		$('[data-name="assigned_user_name"]').show();
+      $('[data-name="picture"]').show();
+		  //Ocultando el panel de Oportunidad perdida
+      $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
     },
 
     /*
@@ -1218,17 +1218,17 @@
         var cursor=$(evt.handleObj.selector).getCursorPosition();//setear cursor
 
 
-        if (enteros == "false" && decimales == "false") {
-            if(cursor[0]==cursor[1]) {
-                return false;
+            if (enteros == "false" && decimales == "false") {
+                if(cursor[0]==cursor[1]) {
+                    return false;
+                }
+            }else if (typeof enteros == "number" && decimales == "false") {
+               if (cursor[0] < enteros) {
+                    $(evt.handleObj.selector).selectRange(cursor[0], cursor[1]);
+               } else {
+                    $(evt.handleObj.selector).selectRange(enteros);
+               }
             }
-        }else if (typeof enteros == "number" && decimales == "false") {
-            if (cursor[0] < enteros) {
-                $(evt.handleObj.selector).selectRange(cursor[0], cursor[1]);
-            } else {
-                $(evt.handleObj.selector).selectRange(enteros);
-            }
-        }
 
     },
 
@@ -1297,10 +1297,10 @@
 
     formatcoin: function (evt){
         if (!evt) return;
-        var $input = this.$(evt.currentTarget);
-        while ($input.val().indexOf(',') != -1){
-            $input.val($input.val().replace(',',''))
-        }
+         var $input = this.$(evt.currentTarget);
+         while ($input.val().indexOf(',') != -1){
+           $input.val($input.val().replace(',',''))
+         }
     },
 
     /*
