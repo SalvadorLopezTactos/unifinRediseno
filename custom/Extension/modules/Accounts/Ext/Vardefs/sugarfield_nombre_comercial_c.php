@@ -1,5 +1,5 @@
 <?php
- // created: 2018-08-29 17:42:11
+ // created: 2018-08-30 12:20:15
 $dictionary['Account']['fields']['nombre_comercial_c']['labelValue']='Nombre Comercial';
 $dictionary['Account']['fields']['nombre_comercial_c']['full_text_search']=array (
   'enabled' => '0',
@@ -13,6 +13,6 @@ $name,
 $nombre_comercial_c
 )';
 $dictionary['Account']['fields']['nombre_comercial_c']['enforced']='';
-$dictionary['Account']['fields']['nombre_comercial_c']['dependency']='equal($tipodepersona_c,"Persona Moral")';
+$dictionary['Account']['fields']['nombre_comercial_c']['dependency']='not(equal($tipodepersona_c,"Persona Fisica"))';
 
  ?>
