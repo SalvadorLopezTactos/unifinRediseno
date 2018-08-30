@@ -1182,7 +1182,7 @@ console.log(name);
 
         if(typeof digitos[0]!="undefined") {
             if (justint.test(digitos[0]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
-                console.log('no se cumplen enteros')
+                //console.log('no se cumplen enteros')
                 if(!$input.val().includes('.')) {
                     $input.val($input.val()+'.')
                 }
@@ -1215,7 +1215,7 @@ console.log(name);
         }
         if(typeof digitos[1]!="undefined") {
             if (justdec.test(digitos[1]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
-                console.log('no se cumplen dec')
+                //console.log('no se cumplen dec')
                 return "false";
             } else {
                 return "true";
@@ -1355,34 +1355,29 @@ console.log(name);
      */
     valida_direc_indicador: function(fields, errors, callback){
         self=this;
-        var fiscal=0;
-        var correspondencia=0;
+        var indic_indv=[];
+        var indicador=0;
         app.api.call('GET', app.api.buildURL('Accounts/' +this.model.get('account_id')+'/link/accounts_dire_direccion_1'), null, {
             success: _.bind(function (data) {
                 console.log(data);
                 for(var i=0;i<data.records.length;i++){
-                    if(data.records[i].indicador==1){
-                        correspondencia++;
+                    if(data.records[i].indicador=='1' || data.records[i].indicador=='2'){//por si se tienen varias direcciones con un solo indicador
+                        indic_indv.push(data.records[i].indicador);
                     }
-                    if(data.records[i].indicador==2){
-                        fiscal++;
+                    if(data.records[i].indicador=='3' || data.records[i].indicador=='7' || data.records[i].indicador=='11' || data.records[i].indicador=='7' || data.records[i].indicador=='15'
+                        || data.records[i].indicador=='19' || data.records[i].indicador=='23' || data.records[i].indicador=='7' || data.records[i].indicador=='27' || data.records[i].indicador=='31'){
+                        indicador++;
                     }
                 }
-                if(correspondecia=0){
-                    app.alert.show('indicador_fail', {
-                        level: 'error',
-                        messages: 'La cuenta necesita tener al menos un indicador <b>Correspondencia</b> de direcci\u00F3n',
-                    });
-                    errors['indicador_1'] = errors['indicador_1'] || {};
-                    errors['indicador_1'].required = true;
-                }
-                if(fiscal=0){
-                    app.alert.show('indicador_fail2', {
-                        level: 'error',
-                        messages: 'La cuenta necesita tener al menos un indicador <b>Fiscal</b> de direcci\u00F3n',
-                    });
-                    errors['indicador_2'] = errors['indicador_2'] || {};
-                    errors['indicador_2'].required = true;
+                if(indicador==0){
+                    if(!indic_indv.includes('1') || !indic_indv.includes('2')) {
+                        app.alert.show('indicador_fail', {
+                            level: 'error',
+                            messages: 'La cuenta necesita tener al menos un indicador <b>Correspondencia</b> y un indicador <b>Fiscal</b> en direcci\u00F3nes',
+                        });
+                        errors['indicador_1'] = errors['indicador_1'] || {};
+                        errors['indicador_1'].required = true;
+                    }
                 }
             }, self),
         });

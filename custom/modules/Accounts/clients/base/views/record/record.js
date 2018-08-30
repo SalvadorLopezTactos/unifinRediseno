@@ -139,8 +139,8 @@
             Funcion que pinta de color los paneles relacionados
         */
         this.model.on('sync', this.fulminantcolor, this);
-        this.model.on('sync', this.validarol, this);
-        this.model.on('sync', this.validarol2, this);
+        this.model.on('sync', this.valida_centro_prospec, this);
+        this.model.on('sync', this.valida_backoffice, this);
     },
 
       fulminantcolor: function () {
@@ -1059,15 +1059,17 @@
         var allfields=[tipolabel,pais,estatus,tipolabel2,cp,municipio,calle,indicador,ciudad,numext,numint,estado,colonia];
         var allfields2=[];
         console.log(allfields);
+        var indica_direc_admin=0;
         for(var i=0;i<allfields.length;i++){
             var betext=0;
-            var indica_direc_admin=0;
             for(var j=0;j<allfields[i].length;j++)
             {
                 if(allfields[i][j]!=null || allfields[i][j]!="") {
                     betext++;
                     if(i==7) {//si estas apuntando al campo indicador
-                        if (allfields[i][j] == 'Administración' || allfields[i][j] == '16' ) {
+                        if (allfields[i][j] == '16' || allfields[i][j] == '17' || allfields[i][j] == '18' || allfields[i][j] == '19' || allfields[i][j] == '20' || allfields[i][j] == '21'
+                            || allfields[i][j] == '22' || allfields[i][j] == '23' || allfields[i][j] == '24' || allfields[i][j] == '25' || allfields[i][j] == '26' || allfields[i][j] == '27'
+                            || allfields[i][j] == '28' || allfields[i][j] == '29' || allfields[i][j] == '30' || allfields[i][j] == '31') {
                             indica_direc_admin++;
                         }
                     }
@@ -1085,20 +1087,21 @@
         var valMedios = 0;
 
         if(fieldstelefono.includes(false)==true){
-            app.alert.show('alert_fields_empty', {
+            app.alert.show('alert_fields_empty1', {
                 level: 'error',
                 messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos un <b>Tel\u00E9fono</b>',
             });
             valMedios = 1;
         }
         if(fieldsdirec.includes(false)==true){
-            app.alert.show('alert_fields_empty', {
+            app.alert.show('alert_fields_empty2', {
                 level: 'error',
                 messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una <b>Direcci\u00F3n</b>',
             });
             valMedios = 1;
-        }else if(fieldsdirec.includes(false)==false && indica_direc_admin==0){
-            app.alert.show('alert_fields_empty', {
+        }
+        if(indica_direc_admin==0){
+            app.alert.show('alert_fields_empty3', {
                 level: 'error',
                 messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una <b>Direcci\u00F3n</b> con Indicador <b>Administraci\u00F3n</b>',
             });
@@ -1153,6 +1156,7 @@
                         usuario=="8"||
                         usuario=="14"||
                         usuario=="21"
+                       //|| usuario=="18" //Ajuste para poder trabajar con la cuenta de Wendy
                     )
 
                     {
@@ -1251,107 +1255,110 @@
               reqs= reqs + '<b>Nombre Comercial<br></b>';
           }
 
-             if(reqs!="") {
-                 console.log('Validacion Campos LEAD');
-                 app.alert.show('alert_calls4', {
-                     level: 'error',
-                     messages: 'Para convertir a Lead es necesario que se llenen los siguientes campos requeridos: ' + reqs,
-                 });
-             }
-              else {
-                 /* hay que traer el campo del usaurio
-                        * PREOMOTORES POR DEFAULT
-                        LEASING:
-                        9 - Sin Gestor
-                        SinGestor
-                        569246c7-da62-4664-ef2a-5628f649537e
-                        CREDIT:
-                        ADRIANA GAYOSSO CRUZ
-                        agayosso
-                        7a83c151-6fc3-dc2b-b3a0-562a60aa3b74
-                        FACTORAJE:
-                        //ANGEL TAMARIZ GALINDO
-                        //angel.tamariz
-                        //3f232cae-4ee1-c9b0-266d-562a600fa9d7
-                        Maria de Lourdes Campos Toca
-                        lcampos
-                        a04540fc-e608-56a7-ad47-562a6078519d
-                        */
+          if(reqs!="") {
+              console.log('Validacion Campos LEAD');
+              app.alert.show('alert_calls4', {
+                  level: 'error',
+                  messages: 'Para convertir a Lead es necesario que se llenen los siguientes campos requeridos: ' + reqs,
+              });
+          }
+          else {
+              /* hay que traer el campo del usaurio
+                     * PREOMOTORES POR DEFAULT
+                     LEASING:
+                     9 - Sin Gestor
+                     SinGestor
+                     569246c7-da62-4664-ef2a-5628f649537e
+                     CREDIT:
+                     ADRIANA GAYOSSO CRUZ
+                     agayosso
+                     7a83c151-6fc3-dc2b-b3a0-562a60aa3b74
+                     FACTORAJE:
+                     //ANGEL TAMARIZ GALINDO
+                     //angel.tamariz
+                     //3f232cae-4ee1-c9b0-266d-562a600fa9d7
+                     Maria de Lourdes Campos Toca
+                     lcampos
+                     a04540fc-e608-56a7-ad47-562a6078519d
+                     */
 
-                 var usuario = app.data.createBean('Users', {id: this.model.get('assigned_user_id')});
-                 usuario.fetch({
-                     success: _.bind(function (modelo) {
-                         var contains = function (needle) {
-                             // Per spec, the way to identify NaN is that it is not equal to itself
-                             var findNaN = needle !== needle;
-                             var indexOf;
+              var usuario = app.data.createBean('Users', {id: app.user.id});
+              usuario.fetch({
+                  success: _.bind(function (modelo) {
+                      var contains = function (needle) {
+                          // Per spec, the way to identify NaN is that it is not equal to itself
+                          var findNaN = needle !== needle;
+                          var indexOf;
 
-                             if (!findNaN && typeof Array.prototype.indexOf === 'function') {
-                                 indexOf = Array.prototype.indexOf;
-                             } else {
-                                 indexOf = function (needle) {
-                                     var i = -1, index = -1;
+                          if (!findNaN && typeof Array.prototype.indexOf === 'function') {
+                              indexOf = Array.prototype.indexOf;
+                          } else {
+                              indexOf = function (needle) {
+                                  var i = -1, index = -1;
 
-                                     for (i = 0; i < this.length; i++) {
-                                         var item = this[i];
+                                  for (i = 0; i < this.length; i++) {
+                                      var item = this[i];
 
-                                         if ((findNaN && item !== item) || item === needle) {
-                                             index = i;
-                                             break;
-                                         }
-                                     }
+                                      if ((findNaN && item !== item) || item === needle) {
+                                          index = i;
+                                          break;
+                                      }
+                                  }
 
-                                     return index;
-                                 };
-                             }
+                                  return index;
+                              };
+                          }
 
-                             return indexOf.call(this, needle) > -1;
-                         };
-                         /** Modificaci�n a Multiproducto para promotores por default
-                          * Carlos Zaragoza
-                          * Enero 25, 2016 10:15 AM
-                          * */
-                         if (contains.call(modelo.get('productos_c'), "1")) {
-                             this.model.set('promotorleasing_c', modelo.get('name'));
-                             this.model.set('user_id_c', modelo.get('id'));
-                         } else {
-                             this.model.set('promotorleasing_c', '9 - Sin Gestor');
-                             this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
-                         }
-                         if (contains.call(modelo.get('productos_c'), "4")) {
-                             this.model.set('promotorfactoraje_c', modelo.get('name'));
-                             this.model.set('user_id1_c', modelo.get('id'));
-                         } else {
-                             this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
-                             this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
-                         }
-                         if (contains.call(modelo.get('productos_c'), "3")) {
-                             this.model.set('promotorcredit_c', modelo.get('name'));
-                             this.model.set('user_id2_c', modelo.get('id'));
-                         } else {
-                             this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
-                             this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
-                         }
-                         if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false) {
-                             this.model.set('promotorleasing_c', '9 - Sin Gestor');
-                             this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
-                             this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
-                             this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
-                             this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
-                             this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
-                         }
-                     }, this)
-                 });
-                     this.model.set("tipo_registro_c", "Lead");
-                     this.model.save();
-                     console.log ('Guarda a Lead');
-                     app.alert.show('success', {
-                     level: 'success',
-                     messages: 'Proceso Finalizado.',
-                         });
-                    // this._render();
+                          return indexOf.call(this, needle) > -1;
+                      };
+                      /** Modificaci�n a Multiproducto para promotores por default
+                       * Carlos Zaragoza
+                       * Enero 25, 2016 10:15 AM
+                       * */
+                      if (contains.call(modelo.get('productos_c'), "1")) {
+                          this.model.set('promotorleasing_c', modelo.get('name'));
+                          this.model.set('user_id_c', modelo.get('id'));
+                      } else {
+                          this.model.set('promotorleasing_c', '9 - Sin Gestor');
+                          this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                      }
+                      if (contains.call(modelo.get('productos_c'), "4")) {
+                          this.model.set('promotorfactoraje_c', modelo.get('name'));
+                          this.model.set('user_id1_c', modelo.get('id'));
+                      } else {
+                          this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
+                          this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
+                      }
+                      if (contains.call(modelo.get('productos_c'), "3")) {
+                          this.model.set('promotorcredit_c', modelo.get('name'));
+                          this.model.set('user_id2_c', modelo.get('id'));
+                      } else {
+                          this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
+                          this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
+                      }
+                      if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false) {
+                          this.model.set('promotorleasing_c', '9 - Sin Gestor');
+                          this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
+                          this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
+                          this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
+                          this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
+                          this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
+                      }
 
-                 }
+                      this.model.set("tipo_registro_c", "Lead");
+                      this.model.set("subtipo_cuenta_list", "En Calificacion");
+                      this.model.save();
+                      console.log ('Guarda a Lead');
+                      app.alert.show('success', {
+                          level: 'success',
+                          messages: 'Proceso Finalizado.',
+                      });
+
+                  }, this)
+              });
+
+
+          }
 
       },
 
@@ -2005,57 +2012,63 @@
           callback(null, fields, errors);
       },
 
-    validarol: function() {
+      valida_backoffice: function() {
           self=this;
           var roles_limit = app.lang.getAppListStrings('roles_limit_list');
           var roles_logged = app.user.attributes.roles;
-          var coincide_rol=false;
+          var coincide_rol=0;
           for(var i=0; i<roles_logged.length; i++) {
               for (var rol_limit in roles_limit) {
                   if (roles_logged[i] == roles_limit[rol_limit]) {
-                      coincide_rol = true;
-                  }else{
-                      coincide_rol=false;
+                      coincide_rol++;
                   }
               }
           }
-          app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
-              success: _.bind(function (pertenece_a_equipo) {
-                  if(coincide_rol==false) {
-                      if(pertenece_a_equipo==false){
+          if(coincide_rol!=0) {
+              app.api.call('GET', app.api.buildURL('GetUsersTeams/' + this.model.get('id') + '/Accounts'), null, {
+                  success: _.bind(function (pertenece_a_equipo) {
+                      if (pertenece_a_equipo == false) {
+                          console.log('Funcion Valida_backoffice:' + pertenece_a_equipo);
                           app.alert.show("No Rol", {
                               level: "error",
-                              title: "No puedes ver la cuenta ya que no tienes el perfil adecuado.",
+                              title: "No puedes ver la cuenta ya no formas parte de ningun equipo.",
                               autoClose: false,
                               return: false,
                           });
                           app.router.navigate('#Accounts', {trigger: true});
                       }
-                  }
-              }, self),
-          });
+                  }, self),
+              });
+          }
       },
 
-    validarol2: function() {
+    valida_centro_prospec: function() {
           self=this;
           var roles_limit = app.lang.getAppListStrings('roles_limit_list_2');
           var roles_logged = app.user.attributes.roles;
-          var coincide_rol=false;
+          var coincide_rol=0;
           for(var i=0; i<roles_logged.length; i++) {
               for (var rol_limit in roles_limit) {
                   if (roles_logged[i] == roles_limit[rol_limit]) {
-                      coincide_rol = true;
-                  }else{
-                      coincide_rol=false;
+                      coincide_rol ++;
                   }
               }
           }
-          app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
-            success: _.bind(function (es_promotor) {
-                if(coincide_rol==false) {
-                    if(es_promotor==false){
-                        if(this.model.get('tipo_registro_c')!="Lead" ){
-                            app.alert.show("No Rol", {
+        if(coincide_rol!=0) {
+            if (this.model.get('tipo_registro_c') != "Lead") {
+                app.alert.show("No Rol2", {
+                    level: "error",
+                    title: "No puedes ver la cuenta ya que no tienes  el perfil adecuado.",
+                    autoClose: false,
+                    return: false,
+                });
+                app.router.navigate('#Accounts', {trigger: true});
+            }else {
+                app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
+                    success: _.bind(function (es_promotor) {
+                        if (es_promotor == false) {
+                            console.log('Funcion valida_centro_prospec:' + es_promotor);
+                            app.alert.show("No Rol3", {
                                 level: "error",
                                 title: "No puedes ver la cuenta ya que no tienes  el perfil adecuado.",
                                 autoClose: false,
@@ -2063,174 +2076,9 @@
                             });
                             app.router.navigate('#Accounts', {trigger: true});
                         }
-                    }
-                }
-            }, self),
-          });
+                    }, self),
+                });
+            }
+        }
     },
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
