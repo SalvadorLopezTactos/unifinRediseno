@@ -45,55 +45,37 @@
 		});
 		this.model.fields['forecast_c'].options = opciones_forecast;
 		*/
-
-		this.on('render', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
-    //this.model.on("change:tct_oportunidad_perdida_chk_c",this._HideSaveButton, this);
-		this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
+        this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
+    	this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
         this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
         this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
-
 		this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
 		this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
 		this.model.addValidationTask('check_oportunidadperdida', _.bind(this.oportunidadperdidacheck, this));
-
         this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
-		//Validación para comprobar montos no mayores a rentas y pagos mensuales. Adrian Arauz 16/08/2018
-        this.model.addValidationTask('Valida_montos', _.bind(this.validamontossave, this));
+		this.model.addValidationTask('Valida_montos', _.bind(this.validamontossave, this));//Validación para comprobar montos no mayores a rentas y pagos mensuales. Adrian Arauz 16/08/2018
+        this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this)); //Se añade funcionalidad para limitar a 99.00 en valores de factoraje. Adrian Arauz 23/08/2018
+		this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));/* @author victor.martinez 23-07-2018  Valida campos requeridos de prospecto e Integracion de expediente */
+
+        /*
+            AF. 12-02-2018
+            Ajuste para actualizar valores en vista
+        */
+        this.model.on('sync', this._render, this);
+
         this.model.on('change:ca_pago_mensual_c', this.validamontos, this);
         this.model.on('change:amount', this.validamontos, this);
         this.model.on('change:porciento_ri_c', this.validamontos, this);
-        this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this)); //Se añade funcionalidad para limitar a 99.00 en valores de factoraje. Adrian Arauz 23/08/2018
+        this.model.on("change:porciento_ri_c", _.bind(this.calcularRI, this));
+        this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
+        this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
+        //this.model.on("change:tct_oportunidad_perdida_chk_c",this._HideSaveButton, this);
+        //this.model.set('contacto_relacionado_c', "test");
+        //this.model.on("click:rel_relaciones_id_c", _.bind(this.readOnly_contacto_relacionado, this));
 
-
-
-		/* @author victor.martinez
-		* 23-07-2018
-		* Valida campos requeridos de prospecto e Integracion de expediente
-		*/
-    this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));
-
-		this.model.on("change:porciento_ri_c", _.bind(this.calcularRI, this));
-		this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
-
-		//this.model.set('contacto_relacionado_c', "test");
-		//this.model.on("click:rel_relaciones_id_c", _.bind(this.readOnly_contacto_relacionado, this));
-
-		this.$('[data-name=contacto_relacionado_c]').click(function(){
-			//alert('keydown');
-		})
-
+        this.on('render', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
 
 		this.getCurrentYearMonth();
-
-		this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
-
-
-
-		/*
-			AF. 12-02-2018
-			Ajuste para actualizar valores en vista
-		*/
-		this.model.on('sync', this._render, this);
 
 	},
 
@@ -1362,8 +1344,43 @@ console.log(name);
         callback(null, fields, errors);
     },
 
-
-
-
+    /*@Jesus Carrillo
+     Funcion que valida que la cuenta de la presolicitud tenga una direccion con indicador "correspondencia" y"fiscal"
+     */
+    valida_direc_indicador: function(fields, errors, callback){
+        self=this;
+        var fiscal=0;
+        var correspondencia=0;
+        app.api.call('GET', app.api.buildURL('Accounts/' +this.model.get('account_id')+'/link/accounts_dire_direccion_1'), null, {
+            success: _.bind(function (data) {
+                console.log(data);
+                for(var i=0;i<data.records.length;i++){
+                    if(data.records[i].indicador==1){
+                        correspondencia++;
+                    }
+                    if(data.records[i].indicador==2){
+                        fiscal++;
+                    }
+                }
+                if(correspondecia=0){
+                    app.alert.show('indicador_fail', {
+                        level: 'error',
+                        messages: 'La cuenta necesita tener al menos un indicador <b>Correspondencia</b> de direcci\u00F3n',
+                    });
+                    errors['indicador_1'] = errors['indicador_1'] || {};
+                    errors['indicador_1'].required = true;
+                }
+                if(fiscal=0){
+                    app.alert.show('indicador_fail2', {
+                        level: 'error',
+                        messages: 'La cuenta necesita tener al menos un indicador <b>Fiscal</b> de direcci\u00F3n',
+                    });
+                    errors['indicador_2'] = errors['indicador_2'] || {};
+                    errors['indicador_2'].required = true;
+                }
+            }, self),
+        });
+        callback(null, fields, errors);
+    },
 
 })
