@@ -517,9 +517,29 @@
 
         this.hideButton_Conversion();
 
+        this.hideButtonLeadNoViable();
+
 
 
     },
+
+    /*
+    * author: Salvador Lopez 29/08/2018
+    * Función para mostrar u ocultar el botón de Lead No viable
+    * */
+    hideButtonLeadNoViable:function(){
+
+        var leadNoViableField = this.getField("leadNoViable");
+
+        //Para mostrar/ocultar el boton de convertir a Lead y Convertir a Prospecto Contactado. 22/08/2018
+        if (this.model.get('tipo_registro_c') != "Lead") {
+            leadNoViableField.listenTo(leadNoViableField, "render", function () {
+                leadNoViableField.hide();
+            });
+        }
+
+    },
+
 
     hideconfiinfo:function () {
 
@@ -905,6 +925,7 @@
         this.context.on('button:save_button:click', this.borraTel, this);
         this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
         this.context.on('button:convierte_lead:click', this.validalead, this);
+        this.context.on('button:lead_no_viable:click', this.leadNoViable, this);
     },
 
     /*
@@ -1254,6 +1275,45 @@
                     // this._render();
 
                  }
+
+      },
+
+      leadNoViable: function(){
+
+        //var self=this;
+          var urlDelete=app.api.buildURL('Accounts/'+this.model.get('id'))
+
+          app.alert.show('confirm_lead_no_viable', {
+              level: 'confirmation',
+              messages: '\u00BFEst\u00E1 seguro de establecer a <b>'+this.model.get('name')+'</b> como Lead No Viable\u003F',
+              autoClose: false,
+              onConfirm: function(){
+
+                  app.alert.show('delete_lead_no_viable', {
+                      level: 'process',
+                  });
+
+                  self.model.set('subtipo_cuenta_c',"No Viable");
+                  self.model.save();
+
+
+                  app.api.call('delete',urlDelete , null, {
+                      success: _.bind(function (data) {
+                          app.alert.dismiss('delete_lead_no_viable');
+                          app.router.navigate('#Accounts', {trigger: true});
+
+                      },self),
+                      error: _.bind(function(error) {
+                          console.log("Este fue el error:", error)
+                      }, self),
+                  });
+
+
+              },
+              onCancel: function(){
+                  //alert("OPERACION CANCELADA!");
+              }
+          });
 
       },
 
