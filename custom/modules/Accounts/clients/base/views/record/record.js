@@ -139,8 +139,8 @@
             Funcion que pinta de color los paneles relacionados
         */
         this.model.on('sync', this.fulminantcolor, this);
-        this.model.on('sync', this.validarol, this);
-        this.model.on('sync', this.validarol2, this);
+        this.model.on('sync', this.valida_centro_prospec, this);
+        this.model.on('sync', this.valida_backoffice, this);
     },
 
       fulminantcolor: function () {
@@ -2009,57 +2009,63 @@
           callback(null, fields, errors);
       },
 
-    validarol: function() {
+      valida_backoffice: function() {
           self=this;
           var roles_limit = app.lang.getAppListStrings('roles_limit_list');
           var roles_logged = app.user.attributes.roles;
-          var coincide_rol=false;
+          var coincide_rol=0;
           for(var i=0; i<roles_logged.length; i++) {
               for (var rol_limit in roles_limit) {
                   if (roles_logged[i] == roles_limit[rol_limit]) {
-                      coincide_rol = true;
-                  }else{
-                      coincide_rol=false;
+                      coincide_rol++;
                   }
               }
           }
-          app.api.call('GET', app.api.buildURL('GetUsersTeams/'+this.model.get('id')+'/Accounts'), null, {
-              success: _.bind(function (pertenece_a_equipo) {
-                  if(coincide_rol==false) {
-                      if(pertenece_a_equipo==false){
+          if(coincide_rol!=0) {
+              app.api.call('GET', app.api.buildURL('GetUsersTeams/' + this.model.get('id') + '/Accounts'), null, {
+                  success: _.bind(function (pertenece_a_equipo) {
+                      if (pertenece_a_equipo == false) {
+                          console.log('Funcion Valida_backoffice:' + pertenece_a_equipo);
                           app.alert.show("No Rol", {
                               level: "error",
-                              title: "No puedes ver la cuenta ya que no tienes el perfil adecuado.",
+                              title: "No puedes ver la cuenta ya no formas parte de ningun equipo.",
                               autoClose: false,
                               return: false,
                           });
                           app.router.navigate('#Accounts', {trigger: true});
                       }
-                  }
-              }, self),
-          });
+                  }, self),
+              });
+          }
       },
 
-    validarol2: function() {
+    valida_centro_prospec: function() {
           self=this;
           var roles_limit = app.lang.getAppListStrings('roles_limit_list_2');
           var roles_logged = app.user.attributes.roles;
-          var coincide_rol=false;
+          var coincide_rol=0;
           for(var i=0; i<roles_logged.length; i++) {
               for (var rol_limit in roles_limit) {
                   if (roles_logged[i] == roles_limit[rol_limit]) {
-                      coincide_rol = true;
-                  }else{
-                      coincide_rol=false;
+                      coincide_rol ++;
                   }
               }
           }
-          app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
-            success: _.bind(function (es_promotor) {
-                if(coincide_rol==false) {
-                    if(es_promotor==false){
-                        if(this.model.get('tipo_registro_c')!="Lead" ){
-                            app.alert.show("No Rol", {
+        if(coincide_rol!=0) {
+            if (this.model.get('tipo_registro_c') != "Lead") {
+                app.alert.show("No Rol2", {
+                    level: "error",
+                    title: "No puedes ver la cuenta ya que no tienes  el perfil adecuado.",
+                    autoClose: false,
+                    return: false,
+                });
+                app.router.navigate('#Accounts', {trigger: true});
+            }else {
+                app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
+                    success: _.bind(function (es_promotor) {
+                        if (es_promotor == false) {
+                            console.log('Funcion valida_centro_prospec:' + es_promotor);
+                            app.alert.show("No Rol3", {
                                 level: "error",
                                 title: "No puedes ver la cuenta ya que no tienes  el perfil adecuado.",
                                 autoClose: false,
@@ -2067,10 +2073,10 @@
                             });
                             app.router.navigate('#Accounts', {trigger: true});
                         }
-                    }
-                }
-            }, self),
-          });
+                    }, self),
+                });
+            }
+        }
     },
 })
 
