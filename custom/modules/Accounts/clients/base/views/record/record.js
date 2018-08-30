@@ -1038,15 +1038,17 @@
         var allfields=[tipolabel,pais,estatus,tipolabel2,cp,municipio,calle,indicador,ciudad,numext,numint,estado,colonia];
         var allfields2=[];
         console.log(allfields);
+        var indica_direc_admin=0;
         for(var i=0;i<allfields.length;i++){
             var betext=0;
-            var indica_direc_admin=0;
             for(var j=0;j<allfields[i].length;j++)
             {
                 if(allfields[i][j]!=null || allfields[i][j]!="") {
                     betext++;
                     if(i==7) {//si estas apuntando al campo indicador
-                        if (allfields[i][j] == 'Administración' || allfields[i][j] == '16' ) {
+                        if (allfields[i][j] == '16' || allfields[i][j] == '17' || allfields[i][j] == '18' || allfields[i][j] == '19' || allfields[i][j] == '20' || allfields[i][j] == '21'
+                            || allfields[i][j] == '22' || allfields[i][j] == '23' || allfields[i][j] == '24' || allfields[i][j] == '25' || allfields[i][j] == '26' || allfields[i][j] == '27'
+                            || allfields[i][j] == '28' || allfields[i][j] == '29' || allfields[i][j] == '30' || allfields[i][j] == '31') {
                             indica_direc_admin++;
                         }
                     }
@@ -1076,7 +1078,8 @@
                 messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una <b>Direcci\u00F3n</b>',
             });
             valMedios = 1;
-        }else if(fieldsdirec.includes(false)==false && indica_direc_admin==0){
+        }
+        if(indica_direc_admin==0){
             app.alert.show('alert_fields_empty', {
                 level: 'error',
                 messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una <b>Direcci\u00F3n</b> con Indicador <b>Administraci\u00F3n</b>',
@@ -1132,6 +1135,7 @@
                         usuario=="8"||
                         usuario=="14"||
                         usuario=="21"
+                       || usuario=="18" //Ajuste para poder trabajar con la cuenta de Wendy
                     )
 
                     {
@@ -1959,7 +1963,7 @@
                   }
               }
           }
-          app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
+          app.api.call('GET', app.api.buildURL('GetUsersTeams/'+this.model.get('id')+'/Accounts'), null, {
               success: _.bind(function (pertenece_a_equipo) {
                   if(coincide_rol==false) {
                       if(pertenece_a_equipo==false){
