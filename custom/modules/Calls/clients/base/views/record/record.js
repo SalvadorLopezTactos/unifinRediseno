@@ -9,6 +9,11 @@
             this.model.on('sync', this.cambioFecha, this);
             this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
             this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
+
+            /*@Jesus Carrillo
+                Funcion que pinta de color los paneles relacionados
+            */
+            this.model.on('sync', this.fulminantcolor, this);
     },
 
     validaConferencia: function(fields, errors, callback)
@@ -42,7 +47,7 @@
     	    var self = this;
      			self.noEditFields.push('tct_conferencia_chk_c');
           $('.record-edit-link-wrapper[data-name=tct_conferencia_chk_c]').remove();
-      	}        
+      	}
     },
 
     /* @F. Javier G. Solar
@@ -114,5 +119,16 @@
             }
         }
         callback(null, fields, errors);
+    },
+
+    /*@Jesus Carrillo
+        Funcion que pinta de color los paneles relacionados
+    */
+    fulminantcolor: function () {
+        $( '#space' ).remove();
+        $('.control-group').before('<div id="space" style="background-color:#000042"><br></div>');
+        $('.control-group').css("background-color", "#e5e5e5");
+        $('.a11y-wrapper').css("background-color", "#e5e5e5");
+        //$('.a11y-wrapper').css("background-color", "#c6d9ff");
     },
 })

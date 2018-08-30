@@ -1,6 +1,5 @@
 <?php
- // created: 2018-08-01 17:45:05
-$dictionary['Account']['fields']['nombre_comercial_c']['duplicate_merge_dom_value']=0;
+ // created: 2018-08-30 12:20:15
 $dictionary['Account']['fields']['nombre_comercial_c']['labelValue']='Nombre Comercial';
 $dictionary['Account']['fields']['nombre_comercial_c']['full_text_search']=array (
   'enabled' => '0',
@@ -10,10 +9,10 @@ $dictionary['Account']['fields']['nombre_comercial_c']['full_text_search']=array
 $dictionary['Account']['fields']['nombre_comercial_c']['calculated']='1';
 $dictionary['Account']['fields']['nombre_comercial_c']['formula']='ifElse(
 equal($nombre_comercial_c,""),
-$razonsocial_c,
+$name,
 $nombre_comercial_c
 )';
-$dictionary['Account']['fields']['nombre_comercial_c']['enforced']='0';
-$dictionary['Account']['fields']['nombre_comercial_c']['dependency']='equal($tipodepersona_c,"Persona Moral")';
+$dictionary['Account']['fields']['nombre_comercial_c']['enforced']='';
+$dictionary['Account']['fields']['nombre_comercial_c']['dependency']='not(equal($tipodepersona_c,"Persona Fisica"))';
 
  ?>
