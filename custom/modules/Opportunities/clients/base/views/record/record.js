@@ -1299,11 +1299,6 @@ console.log(name);
                   errors['instrumento_c'] = errors['instrumento_c'] || {};
                   errors['instrumento_c'].required = true;
               }
-              if (this.model.get('tasa_fija_ordinario_c') == undefined || this.model.get('tasa_fija_ordinario_c') == "") {
-                  //error
-                  errors['tasa_fija_ordinario_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
-                  //errors['tasa_fija_ordinario_c'].required = true;
-              }
               if (this.model.get('puntos_sobre_tasa_c') == "" || (Number(this.model.get('puntos_sobre_tasa_c')) < 0 || Number(this.model.get('puntos_sobre_tasa_c')) > 99.999999)) {
                   //error
                   errors['puntos_sobre_tasa_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
@@ -1343,20 +1338,13 @@ console.log(name);
                   errors['factor_moratorio_c'].required = true;
               }
 
-                  console.log(this.model.get('tasa_fija_ordinario_c'));
-                  console.log('tasa_fija_ordinario_c');
-                  if(this.model.get('tasa_fija_ordinario_c') == null ||this.model.get('tasa_fija_ordinario_c') == "" || (Number(this.model.get('tasa_fija_ordinario_c'))<0 || Number(this.model.get('tasa_fija_ordinario_c'))>99.999999)){
-                      //error
-                      errors['tasa_fija_ordinario_c'] = errors['tasa_fija_ordinario_c'] || {};
-                      errors['tasa_fija_ordinario_c'].required = true;
-                  }
-                  if (this.model.get('tipo_tasa_moratorio_c') == '1') {
-                    if(this.model.get('tasa_fija_moratorio_c') == null ||this.model.get('tasa_fija_moratorio_c') == "" || (Number(this.model.get('tasa_fija_moratorio_c'))<0 || Number(this.model.get('tasa_fija_moratorio_c'))>99.999999)){
-                        //error
-                        errors['tasa_fija_moratorio_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
-                        //errors['tasa_fija_moratorio_c'].required = true;
-                    }
-                  }
+              if (this.model.get('tipo_tasa_moratorio_c') == '1') {
+                if(this.model.get('tasa_fija_moratorio_c') == null ||this.model.get('tasa_fija_moratorio_c') == "" || (Number(this.model.get('tasa_fija_moratorio_c'))<0 || Number(this.model.get('tasa_fija_moratorio_c'))>99.999999)){
+                    //error
+                    errors['tasa_fija_moratorio_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
+                    //errors['tasa_fija_moratorio_c'].required = true;
+                }
+              }
           }
         }
         callback(null, fields, errors);
