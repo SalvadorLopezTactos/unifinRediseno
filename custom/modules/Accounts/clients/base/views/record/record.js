@@ -1156,7 +1156,7 @@
                         usuario=="8"||
                         usuario=="14"||
                         usuario=="21"
-                       || usuario=="18" //Ajuste para poder trabajar con la cuenta de Wendy
+                       //|| usuario=="18" //Ajuste para poder trabajar con la cuenta de Wendy
                     )
 
                     {
