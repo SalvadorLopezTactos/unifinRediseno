@@ -18,6 +18,11 @@
         */
         this.model.on('sync', this.fulminantcolor, this);
 
+        /*
+          * Victor Martinez Lopez 24-08-2018
+        */
+        this.model.addValidationTask('resultadoCitaRequerido',_.bind(this.resultadoCitaRequerido, this));
+
     },
 
     _render: function () {
@@ -140,5 +145,20 @@
         $('.control-group').css("background-color", "#e5e5e5");
         $('.a11y-wrapper').css("background-color", "#e5e5e5");
         //$('.a11y-wrapper').css("background-color", "#c6d9ff");
+    },
+
+    /*El resultado es requerido solo cuando se resultado es realizada o no realizada
+    * Victor Martinez Lopez 24-08-2018
+    * */
+    resultadoCitaRequerido:function (fields, errors, callback) {
+      if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
+        if (this.model.get('resultado_c')=='') {
+          app.error.errorName2Keys['requerido_obj'] = 'El resultado de la cita es requerido';
+          errors['resultado_c'] = errors['resultado_c'] || {};
+          errors['resultado_c'].requerido_obj = true;
+          errors['resultado_c'].required = true;
+        }
+      }
+      callback(null, fields, errors);
     },
 })

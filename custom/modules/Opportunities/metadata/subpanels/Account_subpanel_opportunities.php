@@ -1,5 +1,5 @@
 <?php
-// created: 2018-08-21 11:15:37
+// created: 2018-08-29 17:59:09
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -64,13 +64,6 @@ $subpanel_layout['list_fields'] = array (
     'widget_class' => 'SubPanelDetailViewLink',
     'target_record_key' => 'assigned_user_id',
     'target_module' => 'Employees',
-    'width' => 10,
-    'default' => true,
-  ),
-  'fecha_estimada_cierre_c' => 
-  array (
-    'type' => 'date',
-    'vname' => 'LBL_FECHA_ESTIMADA_CIERRE',
     'width' => 10,
     'default' => true,
   ),

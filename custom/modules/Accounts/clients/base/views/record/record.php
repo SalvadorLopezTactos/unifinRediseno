@@ -397,11 +397,13 @@ array (
               array (
                 'name' => 'razonsocial_c',
                 'label' => 'LBL_RAZONSOCIAL',
+                'span' => 12,
               ),
               5 => 
               array (
                 'name' => 'nombre_comercial_c',
                 'label' => 'LBL_NOMBRE_COMERCIAL',
+                'span' => 12,
               ),
               6 => 
               array (
