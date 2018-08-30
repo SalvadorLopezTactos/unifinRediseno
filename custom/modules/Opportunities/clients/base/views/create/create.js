@@ -425,7 +425,7 @@
                     if (data != "") {
                         var titulo = "Campos Requeridos en Cuentas";
                         var nivel = "error";
-                        var mensaje = "Hace falta completar la siguiente informaci&oacuten: " + data;
+                        var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br>" + data;
 
 
                         app.error.errorName2Keys['custom_message1'] = 'Falta información en campos requeridos de la cuenta';

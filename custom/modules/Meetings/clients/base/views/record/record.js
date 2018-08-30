@@ -12,6 +12,12 @@
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
         this.model.on("change:status",_.bind(this.muestracampoResultado, this));
         //this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
+
+        /*@Jesus Carrillo
+            Funcion que pinta de color los paneles relacionados
+        */
+        this.model.on('sync', this.fulminantcolor, this);
+
     },
 
     _render: function () {
@@ -123,5 +129,16 @@
         }else{
             $('span[data-name=status]').css("pointer-events", "auto");
         }
+    },
+
+    /*@Jesus Carrillo
+        Funcion que pinta de color los paneles relacionados
+    */
+    fulminantcolor: function () {
+        $( '#space' ).remove();
+        $('.control-group').before('<div id="space" style="background-color:#000042"><br></div>');
+        $('.control-group').css("background-color", "#e5e5e5");
+        $('.a11y-wrapper').css("background-color", "#e5e5e5");
+        //$('.a11y-wrapper').css("background-color", "#c6d9ff");
     },
 })
