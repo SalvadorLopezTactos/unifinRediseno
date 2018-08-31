@@ -1358,16 +1358,6 @@
                         errors['indicador_16'].required = true;
 
                 }
-                if(admin>1){
-                        app.alert.show('indicador_fail5', {
-                            level: 'error',
-                            messages: 'La cuenta no puede tener m\u00E1s de un indicador <b>Administraci\u00F3n</b> en direcci\u00F3nes',
-                        });
-                        errors['indicador_16'] = errors['indicador_16'] || {};
-                        errors['indicador_16'].required = true;
-
-                }
-
             }, self),
         });
         callback(null, fields, errors);
