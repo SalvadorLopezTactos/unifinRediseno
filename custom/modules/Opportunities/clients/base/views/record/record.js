@@ -1355,33 +1355,113 @@ console.log(name);
      */
     valida_direc_indicador: function(fields, errors, callback){
         self=this;
-        var indic_indv=[];
-        var indicador=0;
+        var fiscal=0;
+        var correspondecia=0;
         app.api.call('GET', app.api.buildURL('Accounts/' +this.model.get('account_id')+'/link/accounts_dire_direccion_1'), null, {
             success: _.bind(function (data) {
+                console.log('Info de Accounts:');
                 console.log(data);
                 for(var i=0;i<data.records.length;i++){
-                    if(data.records[i].indicador=='1' || data.records[i].indicador=='2'){//por si se tienen varias direcciones con un solo indicador
-                        indic_indv.push(data.records[i].indicador);
-                    }
-                    if(data.records[i].indicador=='3' || data.records[i].indicador=='7' || data.records[i].indicador=='11' || data.records[i].indicador=='7' || data.records[i].indicador=='15'
-                        || data.records[i].indicador=='19' || data.records[i].indicador=='23' || data.records[i].indicador=='7' || data.records[i].indicador=='27' || data.records[i].indicador=='31'){
-                        indicador++;
+                    if(data.records[i].indicador!=""){
+                        var array_indicador=this._getIndicador(data.records[i].indicador);
+                        for(var j=0;j<array_indicador.length;j++){
+                            if(array_indicador[j]=='1'){
+                                correspondecia++;
+                            }
+                            if(array_indicador[j]=='2'){
+                                fiscal++;
+                            }
+                        }
                     }
                 }
-                if(indicador==0){
-                    if(!indic_indv.includes('1') || !indic_indv.includes('2')) {
+                if(correspondecia==0){
                         app.alert.show('indicador_fail', {
                             level: 'error',
-                            messages: 'La cuenta necesita tener al menos un indicador <b>Correspondencia</b> y un indicador <b>Fiscal</b> en direcci\u00F3nes',
+                            messages: 'La cuenta necesita tener al menos un indicador <b>Correspondencia</b> en direcci\u00F3nes',
                         });
                         errors['indicador_1'] = errors['indicador_1'] || {};
                         errors['indicador_1'].required = true;
-                    }
+
                 }
+                if(fiscal==0){
+                        app.alert.show('indicador_fail2', {
+                            level: 'error',
+                            messages: 'La cuenta necesita tener al menos un indicador <b>Fiscal</b> en direcci\u00F3nes',
+                        });
+                        errors['indicador_2'] = errors['indicador_2'] || {};
+                        errors['indicador_2'].required = true;
+
+                }
+                if(fiscal>1){
+                        app.alert.show('indicador_fail3', {
+                            level: 'error',
+                            messages: 'La cuenta no puede tener m\u00E1s de un indicador <b>Fiscal</b> en direcci\u00F3nes',
+                        });
+                        errors['indicador_2'] = errors['indicador_2'] || {};
+                        errors['indicador_2'].required = true;
+
+                }
+
             }, self),
         });
         callback(null, fields, errors);
     },
 
+    _getIndicador: function(idSelected, valuesSelected) {
+
+        //variable con resultado
+        var result = null;
+
+        //Arma objeto de mapeo
+        var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
+
+        var element = {};
+        var object = [];
+        var values = [];
+
+        for(var key in dir_indicador_map_list) {
+            var element = {};
+            element.id = key;
+            values = dir_indicador_map_list[key].split(",");
+            element.values = values;
+            object.push(element);
+        }
+
+        //Recupera arreglo de valores por id
+        if(idSelected){
+            for(var i=0; i<object.length; i++) {
+                if ((object[i].id) == idSelected) {
+                    result = object[i].values;
+                }
+            }
+            console.log('Resultado de idSelected:');
+            console.log(result);
+        }
+
+        //Recupera id por valores
+        if(valuesSelected){
+            result = [];
+            for(var i=0; i<object.length; i++) {
+                if (object[i].values.length == valuesSelected.length) {
+                    //Ordena arreglos y compara
+                    valuesSelected.sort();
+                    object[i].values.sort();
+                    var tempVal = true;
+                    for(var j=0; j<valuesSelected.length; j++) {
+                        if(valuesSelected[j] != object[i].values[j]){
+                            tempVal = false;
+                        }
+                    }
+                    if( tempVal == true){
+                        result[0] = object[i].id;
+                    }
+
+                }
+            }
+            console.log('Resultado de valueSelected:');
+            console.log(result);
+        }
+
+        return result;
+    },
 })
