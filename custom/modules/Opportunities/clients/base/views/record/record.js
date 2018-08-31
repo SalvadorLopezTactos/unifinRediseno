@@ -123,6 +123,11 @@
     _render: function() {
       this._super("_render");
 
+      //Victor M.L 30-08-2018
+      //Agrega validación para restringir edición de Gestión Comercial
+      this.noEdita();
+
+
       //Victor M.L 19-07-2018
 		//no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
         if((this.model.get('tct_etapa_ddw_c')=='SI') ||
@@ -460,6 +465,45 @@
 		}
 
 	},
+  /*Valida que solo algunos roles puedan editar la solicitud
+  * Victor Martinez Lopez
+  * */
+  noEdita: function() {
+      //Recuperar roles de usuarios
+      var roles_usuario = app.user.attributes.roles;
+      var roles_no_edicion = app.lang.getAppListStrings('promoaux_list');
+      //var roles_no_edicion=["Gestion Comercial", "Promotor Leasing"];
+      //Definir si puede o no editar
+      var editar = true;
+      //Comparar roles de usuario con roles no edición
+      roles_usuario.forEach(function(element){
+          console.log(element);
+          //Comparar contra roles no edición
+          Object.keys(roles_no_edicion).forEach(function(key) {
+              console.log(roles_no_edicion[key]);
+              if(element == roles_no_edicion[key]){
+                  editar = false;
+              }
+          });
+      });
+
+      //Ocultar edición
+      if(editar == false){
+          app.api.call('GET', app.api.buildURL('GetUsersTeams/' + this.model.get('id')+'/Opportunities'),null,{
+              success:_.bind(function(data){
+                  if (data==false){
+                      $('[name="save_button"]').eq(0).hide();
+                      $('[name="edit_button"]').eq(0).hide();
+                      $(".noEdit").hide();
+                  }
+                  console.log(data);
+              },this),
+              error:_.bind(function(error){
+                  console.log("No se obtuvo nada", error);
+              },this),
+          });
+      }
+  },
 
 	expedienteCredito: function (){
 		if(this.model.get('id_process_c')== '-1'){
