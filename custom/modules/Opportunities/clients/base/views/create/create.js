@@ -29,6 +29,7 @@
         */
         this.on('render', this._rolnocreacion, this);
 
+        this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
         this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
@@ -1328,4 +1329,105 @@
         }
     },
 
+    /*@Jesus Carrillo
+     Funcion que valida que la cuenta de la presolicitud tenga una direccion con indicador "administracion"
+     */
+    valida_direc_indicador: function(fields, errors, callback){
+        self=this;
+        var admin=0;
+        app.api.call('GET', app.api.buildURL('Accounts/' +this.model.get('account_id')+'/link/accounts_dire_direccion_1'), null, {
+            success: _.bind(function (data) {
+                console.log('Info de Accounts:');
+                console.log(data);
+                for(var i=0;i<data.records.length;i++){
+                    if(data.records[i].indicador!=""){
+                        var array_indicador=this._getIndicador(data.records[i].indicador);
+                        for(var j=0;j<array_indicador.length;j++){
+                            if(array_indicador[j]=='16'){
+                                admin++;
+                            }
+                        }
+                    }
+                }
+                if(admin==0){
+                        app.alert.show('indicador_fail4', {
+                            level: 'error',
+                            messages: 'La cuenta necesita tener al menos un indicador <b>Administraci\u00F3n</b> en direcci\u00F3nes',
+                        });
+                        errors['indicador_16'] = errors['indicador_16'] || {};
+                        errors['indicador_16'].required = true;
+
+                }
+                if(admin>1){
+                        app.alert.show('indicador_fail5', {
+                            level: 'error',
+                            messages: 'La cuenta no puede tener m\u00E1s de un indicador <b>Administraci\u00F3n</b> en direcci\u00F3nes',
+                        });
+                        errors['indicador_16'] = errors['indicador_16'] || {};
+                        errors['indicador_16'].required = true;
+
+                }
+
+            }, self),
+        });
+        callback(null, fields, errors);
+    },
+
+    _getIndicador: function(idSelected, valuesSelected) {
+
+        //variable con resultado
+        var result = null;
+
+        //Arma objeto de mapeo
+        var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
+
+        var element = {};
+        var object = [];
+        var values = [];
+
+        for(var key in dir_indicador_map_list) {
+            var element = {};
+            element.id = key;
+            values = dir_indicador_map_list[key].split(",");
+            element.values = values;
+            object.push(element);
+        }
+
+        //Recupera arreglo de valores por id
+        if(idSelected){
+            for(var i=0; i<object.length; i++) {
+                if ((object[i].id) == idSelected) {
+                    result = object[i].values;
+                }
+            }
+            console.log('Resultado de idSelected:');
+            console.log(result);
+        }
+
+        //Recupera id por valores
+        if(valuesSelected){
+            result = [];
+            for(var i=0; i<object.length; i++) {
+                if (object[i].values.length == valuesSelected.length) {
+                    //Ordena arreglos y compara
+                    valuesSelected.sort();
+                    object[i].values.sort();
+                    var tempVal = true;
+                    for(var j=0; j<valuesSelected.length; j++) {
+                        if(valuesSelected[j] != object[i].values[j]){
+                            tempVal = false;
+                        }
+                    }
+                    if( tempVal == true){
+                        result[0] = object[i].id;
+                    }
+
+                }
+            }
+            console.log('Resultado de valueSelected:');
+            console.log(result);
+        }
+
+        return result;
+    },
 })

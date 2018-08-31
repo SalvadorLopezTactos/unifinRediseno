@@ -520,7 +520,7 @@ class ResumenClienteAPI extends SugarApi
           //Recupera alertas y procesa
           $alert_num ++;
           $alerta = array(
-            "mensaje"=>$row['description'],
+            "mensaje"=>str_replace("<br/>","",$row['description']),
             "prioridad"=>$app_list_strings['notifications_severity_list'][$row['severity']],
             "idNotificacion"=>$row['id'],
             "numero"=>$alert_num

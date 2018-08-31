@@ -53,15 +53,10 @@ array (
               ),
               4 => 
               array (
-                'name' => 'monto_c',
-                'label' => 'LBL_MONTO',
+                'name' => 'assigned_user_name',
+                'label' => 'LBL_LIST_ASSIGNED_USER',
+                'id' => 'ASSIGNED_USER_ID',
                 'enabled' => true,
-                'related_fields' => 
-                array (
-                  0 => 'currency_id',
-                  1 => 'base_rate',
-                ),
-                'currency_format' => true,
                 'default' => true,
               ),
               5 => 
@@ -73,22 +68,6 @@ array (
                 'default' => true,
               ),
               6 => 
-              array (
-                'name' => 'assigned_user_name',
-                'label' => 'LBL_LIST_ASSIGNED_USER',
-                'id' => 'ASSIGNED_USER_ID',
-                'enabled' => true,
-                'default' => true,
-              ),
-              7 => 
-              array (
-                'name' => 'date_entered',
-                'label' => 'LBL_DATE_ENTERED',
-                'enabled' => true,
-                'default' => true,
-                'readonly' => true,
-              ),
-              8 => 
               array (
                 'name' => 'team_name',
                 'type' => 'teamset',
