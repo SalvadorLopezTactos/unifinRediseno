@@ -1436,16 +1436,6 @@ console.log(name);
                         errors['indicador_2'].required = true;
 
                 }
-                if(fiscal>1){
-                        app.alert.show('indicador_fail3', {
-                            level: 'error',
-                            messages: 'La cuenta no puede tener m\u00E1s de un indicador <b>Fiscal</b> en direcci\u00F3nes',
-                        });
-                        errors['indicador_2'] = errors['indicador_2'] || {};
-                        errors['indicador_2'].required = true;
-
-                }
-
             }, self),
         });
         callback(null, fields, errors);
