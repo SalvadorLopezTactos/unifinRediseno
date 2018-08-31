@@ -1352,7 +1352,9 @@
                       app.alert.show('success', {
                           level: 'success',
                           messages: 'Proceso Finalizado.',
+
                       });
+                      this.render();
 
                   }, this)
               });
