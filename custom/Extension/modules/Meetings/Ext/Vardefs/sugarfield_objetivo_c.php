@@ -1,7 +1,45 @@
 <?php
- // created: 2018-02-16 16:59:03
-$dictionary['Meeting']['fields']['objetivo_c']['labelValue'] = 'Objetivo';
-$dictionary['Meeting']['fields']['objetivo_c']['dependency'] = '';
-$dictionary['Meeting']['fields']['objetivo_c']['visibility_grid'] = '';
-$dictionary['Meeting']['fields']['objetivo_c']['full_text_search']['boost'] = 1;
+ // created: 2018-09-03 16:40:01
+$dictionary['Meeting']['fields']['objetivo_c']['labelValue']='Objetivo';
+$dictionary['Meeting']['fields']['objetivo_c']['dependency']='';
+$dictionary['Meeting']['fields']['objetivo_c']['visibility_grid']=array (
+  'trigger' => 'status',
+  'values' => 
+  array (
+    'Planned' => 
+    array (
+    ),
+    'Held' => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '2',
+      3 => '5',
+      4 => '6',
+      5 => '7',
+      6 => '8',
+      7 => '10',
+      8 => '4',
+      9 => '9',
+      10 => '11',
+      11 => '12',
+    ),
+    'Not Held' => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '2',
+      3 => '5',
+      4 => '6',
+      5 => '7',
+      6 => '8',
+      7 => '10',
+      8 => '4',
+      9 => '9',
+      10 => '11',
+      11 => '12',
+    ),
+  ),
+);
 
+ ?>
