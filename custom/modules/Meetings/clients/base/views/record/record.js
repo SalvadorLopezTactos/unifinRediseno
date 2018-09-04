@@ -15,6 +15,7 @@
         this.model.on('sync', this.cambioFecha, this);
         this.model.on('sync', this.disablestatus, this);
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
+        this.model.addValidationTask('resultadoCitaRequerido',_.bind(this.resultadoCitaRequerido, this));
         this.model.on("change:status",_.bind(this.muestracampoResultado, this));
         //this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
 
@@ -117,6 +118,18 @@
         } if (this.model.get('status') == 'Planned') {
             this.$('div[data-name=resultado_c]').hide();
         }
+    },
+    /*El resultado es requerido solo cuando se resultado es realizada o no realizada
+    * Victor Martinez Lopez 24-08-2018
+    * */
+    resultadoCitaRequerido:function (fields, errors, callback) {
+        if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
+            app.error.errorName2Keys['requerido_obj'] = 'El resultado de la cita es requerido';
+            errors['resultado_c'] = errors['resultado_c'] || {};
+            errors['resultado_c'].requerido_obj = true;
+            errors['resultado_c'].required = true;
+        }
+        callback(null, fields, errors);
     },
     /* @F. Javier G. Solar
      * Valida que la Fecha Inicial no sea menor que la actual

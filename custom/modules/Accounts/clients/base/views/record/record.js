@@ -395,7 +395,23 @@
                 self.noEditFields.push(field.name);
             });
         }
+        /*Victor Martinez Lopez 31-08-2018*/
+        //this.noEditaCuenta();
+        var self = this;
+        app.api.call('GET',app.api.buildURL('GetUsersBoss/'+this.model.get('id')), null,{
+            success:_.bind(function (data) {
+                console.log(data);
+                if(data==false){
 
+                    $('[name="save_button"]').eq(0).hide();
+                    $('[name="edit_button"]').eq(0).hide();
+                    $(".noEdit").hide(); //
+                    _.each(self.model.fields, function (field) {
+                        self.noEditFields.push(field.name);
+                    });
+                }
+            },self)
+        });
         /*
           @author Victo Martinez - 01/08/2018
           Deshabilita campos: Tipo de cuenta y subtipo de cuenta
@@ -446,7 +462,9 @@
 
         this._super("_render");
 
-        /*
+
+
+      /*
          @author Salvador Lopez
          Se llaman a la funciones para mostrar u ocultar paneles de Fideicomiso y Peps
          * */
@@ -1120,6 +1138,13 @@
                 });
         }
     },
+      /*No deja edatitar los campos si el usuario loggeado no es JEFE, oculta noton de editar y guardar y bloque campos
+      * Victor Martinez López 31-08-218
+      * */
+      noEditaCuenta:function () {
+
+      },
+
     /* @Jesus Carrillo
         Metodo que convierte a prospecto contactado
        *Solo promotores y directorees pueden cambiar una cuenta de Lead a Prospecto contactado
@@ -1352,9 +1377,7 @@
                       app.alert.show('success', {
                           level: 'success',
                           messages: 'Proceso Finalizado.',
-
                       });
-                      this.render();
 
                   }, this)
               });
