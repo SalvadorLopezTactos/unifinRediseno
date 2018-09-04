@@ -1436,9 +1436,10 @@ console.log(name);
                         errors['indicador_2'].required = true;
 
                 }
+                callback(null, fields, errors);
             }, self),
         });
-        callback(null, fields, errors);
+
     },
 
     _getIndicador: function(idSelected, valuesSelected) {
