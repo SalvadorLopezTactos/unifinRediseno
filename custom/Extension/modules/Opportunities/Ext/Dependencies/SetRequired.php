@@ -70,7 +70,7 @@ $dependencies['Opportunities']['f_tipo_factoraje_c_required'] = array(
             'name' => 'SetRequired',
             'params' => array(
                 'target' => 'f_tipo_factoraje_c',
-                'value' => 'equal($tipo_producto_c,"4")',
+                'value' => 'and(equal($tipo_producto_c,"4"),equal($tct_oportunidad_perdida_chk_c,"true"))',
             ),
         ),
     ),
@@ -84,7 +84,7 @@ $dependencies['Opportunities']['f_aforo_c_required'] = array(
             'name' => 'SetRequired',
             'params' => array(
                 'target' => 'f_aforo_c',
-                'value' => 'equal($tipo_producto_c,"4")',
+                'value' => 'and(equal($tipo_producto_c,"4"),equal($tct_oportunidad_perdida_chk_c,"true"))',
             ),
         ),
     ),
