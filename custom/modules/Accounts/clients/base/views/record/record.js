@@ -1100,6 +1100,14 @@
             valMedios = 1;
         }
         */
+        
+    /*    if(indica_direc_admin==0){
+            app.alert.show('alert_fields_empty3', {
+                level: 'error',
+                messages: 'Para convertir a Prospecto Contactado es necesario que tenga al menos una <b>Direcci\u00F3n</b> con Indicador <b>Administraci\u00F3n</b>',
+            });
+            valMedios = 1;
+        } */
 
         /*    if(indica_direc_admin==0){
                 app.alert.show('alert_fields_empty3', {
