@@ -888,3 +888,19 @@ $dependencies['Accounts']['Numero_Empleados_required'] = array(
         ),
     ),
 );
+$dependencies['Accounts']['MacroSector'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipo_registro_c','tct_macro_sector_ddw_c','subtipo_cuenta_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'tct_macro_sector_ddw_c',
+                'label' => 'LBL_TCT_MACRO_SECTOR_DDW',
+                'value' => 'or(equal($tipo_registro_c,"Cliente"),equal($subtipo_cuenta_c,"Interesado"),equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($subtipo_cuenta_c,"Credito"),equal($tipo_registro_c,"Proveedor"))',
+            ),
+        ),
+    ),
+);

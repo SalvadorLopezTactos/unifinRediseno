@@ -286,3 +286,4 @@ $mod_strings['LBL_TCT_QUE_PROMOTOR_REL_USER_ID'] = '¿Qué Promotor? (relacionad
 $mod_strings['LBL_TCT_QUE_PROMOTOR_REL'] = '¿Qué Promotor?';
 $mod_strings['LBL_TCT_PRIORIDAD_DDW'] = 'Prioridad';
 $mod_strings['LBL_TCT_REFERENCIADO_DIR_REL'] = 'Referenciado director';
+$mod_strings['LBL_TCT_MACRO_SECTOR_DDW'] = 'Macro Sector';
