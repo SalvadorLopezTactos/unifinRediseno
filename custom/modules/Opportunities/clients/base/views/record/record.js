@@ -1421,7 +1421,7 @@ console.log(name);
                 if(correspondecia==0){
                         app.alert.show('indicador_fail', {
                             level: 'error',
-                            messages: 'La cuenta necesita tener al menos un indicador <b>Correspondencia</b> en direcci\u00F3nes',
+                            messages: 'La cuenta necesita tener al menos un tipo de direcci\u00F3n <b>Correspondencia</b> en direcciones',
                         });
                         errors['indicador_1'] = errors['indicador_1'] || {};
                         errors['indicador_1'].required = true;
@@ -1430,7 +1430,7 @@ console.log(name);
                 if(fiscal==0){
                         app.alert.show('indicador_fail2', {
                             level: 'error',
-                            messages: 'La cuenta necesita tener al menos un indicador <b>Fiscal</b> en direcci\u00F3nes',
+                            messages: 'La cuenta necesita tener al menos un tipo de direcci\u00F3n <b>Fiscal</b> en direcciones',
                         });
                         errors['indicador_2'] = errors['indicador_2'] || {};
                         errors['indicador_2'].required = true;
