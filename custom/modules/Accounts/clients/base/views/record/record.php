@@ -32,6 +32,7 @@ array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
             'primary' => true,
+              'css_class' => 'noEdit',
             'showOn' => 'view',
             'buttons' =>
             array (
