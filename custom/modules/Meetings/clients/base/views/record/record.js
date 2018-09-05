@@ -15,7 +15,6 @@
         this.model.on('sync', this.cambioFecha, this);
         this.model.on('sync', this.disablestatus, this);
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
-        this.model.addValidationTask('resultadoCitaRequerido',_.bind(this.resultadoCitaRequerido, this));
         this.model.on("change:status",_.bind(this.muestracampoResultado, this));
         //this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
 
@@ -119,18 +118,6 @@
             this.$('div[data-name=resultado_c]').hide();
         }
     },
-    /*El resultado es requerido solo cuando se resultado es realizada o no realizada
-    * Victor Martinez Lopez 24-08-2018
-    * */
-    resultadoCitaRequerido:function (fields, errors, callback) {
-        if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
-            app.error.errorName2Keys['requerido_obj'] = 'El resultado de la cita es requerido';
-            errors['resultado_c'] = errors['resultado_c'] || {};
-            errors['resultado_c'].requerido_obj = true;
-            errors['resultado_c'].required = true;
-        }
-        callback(null, fields, errors);
-    },
     /* @F. Javier G. Solar
      * Valida que la Fecha Inicial no sea menor que la actual
      * 14/08/2018
@@ -179,7 +166,7 @@
                     errors['date_start'].custom_message_date_init0 = true;
                 }
 
-            //    callback(null, fields, errors);
+                //    callback(null, fields, errors);
             }
             if (fechaInicioTmp >= fechaActual) {
                 if (fechaInicioNueva >= fechaActual) {
@@ -197,7 +184,7 @@
                     errors['date_start'].custom_message_date_init1 = true;
                 }
 
-               // callback(null, fields, errors);
+                // callback(null, fields, errors);
             }
         }
         callback(null, fields, errors);
@@ -240,14 +227,14 @@
     * Victor Martinez Lopez 24-08-2018
     * */
     resultadoCitaRequerido:function (fields, errors, callback) {
-      if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
-        if (this.model.get('resultado_c')=='') {
-          app.error.errorName2Keys['requerido_obj'] = 'El resultado de la cita es requerido';
-          errors['resultado_c'] = errors['resultado_c'] || {};
-          errors['resultado_c'].requerido_obj = true;
-          errors['resultado_c'].required = true;
+        if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
+            if (this.model.get('resultado_c')=='') {
+                app.error.errorName2Keys['requerido_obj'] = 'El resultado de la cita es requerido';
+                errors['resultado_c'] = errors['resultado_c'] || {};
+                errors['resultado_c'].requerido_obj = true;
+                errors['resultado_c'].required = true;
+            }
         }
-      }
-      callback(null, fields, errors);
+        callback(null, fields, errors);
     },
 })
