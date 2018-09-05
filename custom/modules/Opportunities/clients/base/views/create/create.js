@@ -1403,7 +1403,7 @@
                 if(admin==0){
                         app.alert.show('indicador_fail4', {
                             level: 'error',
-                            messages: 'La cuenta necesita tener al menos un indicador <b>Administraci\u00F3n</b> en direcci\u00F3nes',
+                            messages: 'La cuenta necesita tener al menos un tipo de direcci\u00F3n <b>Administraci\u00F3n</b> en direcciones',
                         });
                         errors['indicador_16'] = errors['indicador_16'] || {};
                         errors['indicador_16'].required = true;

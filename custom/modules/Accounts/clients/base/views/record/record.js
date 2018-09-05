@@ -1094,6 +1094,7 @@
             });
             valMedios = 1;
         }
+        /*
         if(fieldsdirec.includes(false)==true){
             app.alert.show('alert_fields_empty2', {
                 level: 'error',
@@ -1101,6 +1102,8 @@
             });
             valMedios = 1;
         }
+        */
+        
     /*    if(indica_direc_admin==0){
             app.alert.show('alert_fields_empty3', {
                 level: 'error',
