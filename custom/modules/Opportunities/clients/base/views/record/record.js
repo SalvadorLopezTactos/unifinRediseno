@@ -45,61 +45,42 @@
 		});
 		this.model.fields['forecast_c'].options = opciones_forecast;
 		*/
-
-		this.on('render', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
-    //this.model.on("change:tct_oportunidad_perdida_chk_c",this._HideSaveButton, this);
-		this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
+        this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
+    	this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
         this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
         this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
-
 		this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
 		this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
 		this.model.addValidationTask('check_oportunidadperdida', _.bind(this.oportunidadperdidacheck, this));
-
         this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
-		//Validación para comprobar montos no mayores a rentas y pagos mensuales. Adrian Arauz 16/08/2018
-        this.model.addValidationTask('Valida_montos', _.bind(this.validamontossave, this));
+		this.model.addValidationTask('Valida_montos', _.bind(this.validamontossave, this));//Validación para comprobar montos no mayores a rentas y pagos mensuales. Adrian Arauz 16/08/2018
+        this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this)); //Se añade funcionalidad para limitar a 99.00 en valores de factoraje. Adrian Arauz 23/08/2018
+		this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));/* @author victor.martinez 23-07-2018  Valida campos requeridos de prospecto e Integracion de expediente */
+
+        /*
+            AF. 12-02-2018
+            Ajuste para actualizar valores en vista
+        */
+        this.model.on('sync', this._render, this);
+
         this.model.on('change:ca_pago_mensual_c', this.validamontos, this);
         this.model.on('change:amount', this.validamontos, this);
         this.model.on('change:porciento_ri_c', this.validamontos, this);
-        this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this)); //Se añade funcionalidad para limitar a 99.00 en valores de factoraje. Adrian Arauz 23/08/2018
+        this.model.on("change:porciento_ri_c", _.bind(this.calcularRI, this));
+        this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
+        this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
+        //this.model.on("change:tct_oportunidad_perdida_chk_c",this._HideSaveButton, this);
+        //this.model.set('contacto_relacionado_c', "test");
+        //this.model.on("click:rel_relaciones_id_c", _.bind(this.readOnly_contacto_relacionado, this));
 
-
-
-		/* @author victor.martinez
-		* 23-07-2018
-		* Valida campos requeridos de prospecto e Integracion de expediente
-		*/
-    this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));
-
-		this.model.on("change:porciento_ri_c", _.bind(this.calcularRI, this));
-		this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
-
-		//this.model.set('contacto_relacionado_c', "test");
-		//this.model.on("click:rel_relaciones_id_c", _.bind(this.readOnly_contacto_relacionado, this));
-
-		this.$('[data-name=contacto_relacionado_c]').click(function(){
-			//alert('keydown');
-		})
-
+        this.on('render', this._HideSaveButton, this);  //Función ocultar botón guardar cuando Oportunidad perdida tiene un valor TRUE 18/07/18
 
 		this.getCurrentYearMonth();
-
-		this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
-
-
-
-		/*
-			AF. 12-02-2018
-			Ajuste para actualizar valores en vista
-		*/
-		this.model.on('sync', this._render, this);
 
     /*@Jesus Carrillo
         Funcion que pinta de color los paneles relacionados
     */
     this.model.on('sync', this.fulminantcolor, this);
-
 	},
 
   fulminantcolor: function () {
@@ -141,6 +122,11 @@
 
     _render: function() {
       this._super("_render");
+
+      //Victor M.L 30-08-2018
+      //Agrega validación para restringir edición de Gestión Comercial
+      this.noEdita();
+
 
       //Victor M.L 19-07-2018
 		//no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
@@ -479,6 +465,45 @@
 		}
 
 	},
+  /*Valida que solo algunos roles puedan editar la solicitud
+  * Victor Martinez Lopez
+  * */
+  noEdita: function() {
+      //Recuperar roles de usuarios
+      var roles_usuario = app.user.attributes.roles;
+      var roles_no_edicion = app.lang.getAppListStrings('promoaux_list');
+      //var roles_no_edicion=["Gestion Comercial", "Promotor Leasing"];
+      //Definir si puede o no editar
+      var editar = true;
+      //Comparar roles de usuario con roles no edición
+      roles_usuario.forEach(function(element){
+          console.log(element);
+          //Comparar contra roles no edición
+          Object.keys(roles_no_edicion).forEach(function(key) {
+              console.log(roles_no_edicion[key]);
+              if(element == roles_no_edicion[key]){
+                  editar = false;
+              }
+          });
+      });
+
+      //Ocultar edición
+      if(editar == false){
+          app.api.call('GET', app.api.buildURL('GetUsersTeams/' + this.model.get('id')+'/Opportunities'),null,{
+              success:_.bind(function(data){
+                  if (data==false){
+                      $('[name="save_button"]').eq(0).hide();
+                      $('[name="edit_button"]').eq(0).hide();
+                      $(".noEdit").hide();
+                  }
+                  console.log(data);
+              },this),
+              error:_.bind(function(error){
+                  console.log("No se obtuvo nada", error);
+              },this),
+          });
+      }
+  },
 
 	expedienteCredito: function (){
 		if(this.model.get('id_process_c')== '-1'){
@@ -1201,7 +1226,7 @@ console.log(name);
 
         if(typeof digitos[0]!="undefined") {
             if (justint.test(digitos[0]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
-                console.log('no se cumplen enteros')
+                //console.log('no se cumplen enteros')
                 if(!$input.val().includes('.')) {
                     $input.val($input.val()+'.')
                 }
@@ -1234,7 +1259,7 @@ console.log(name);
         }
         if(typeof digitos[1]!="undefined") {
             if (justdec.test(digitos[1]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
-                console.log('no se cumplen dec')
+                //console.log('no se cumplen dec')
                 return "false";
             } else {
                 return "true";
@@ -1318,11 +1343,6 @@ console.log(name);
                   errors['instrumento_c'] = errors['instrumento_c'] || {};
                   errors['instrumento_c'].required = true;
               }
-              if (this.model.get('tasa_fija_ordinario_c') == undefined || this.model.get('tasa_fija_ordinario_c') == "") {
-                  //error
-                  errors['tasa_fija_ordinario_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
-                  //errors['tasa_fija_ordinario_c'].required = true;
-              }
               if (this.model.get('puntos_sobre_tasa_c') == "" || (Number(this.model.get('puntos_sobre_tasa_c')) < 0 || Number(this.model.get('puntos_sobre_tasa_c')) > 99.999999)) {
                   //error
                   errors['puntos_sobre_tasa_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
@@ -1362,27 +1382,120 @@ console.log(name);
                   errors['factor_moratorio_c'].required = true;
               }
 
-                  console.log(this.model.get('tasa_fija_ordinario_c'));
-                  console.log('tasa_fija_ordinario_c');
-                  if(this.model.get('tasa_fija_ordinario_c') == null ||this.model.get('tasa_fija_ordinario_c') == "" || (Number(this.model.get('tasa_fija_ordinario_c'))<0 || Number(this.model.get('tasa_fija_ordinario_c'))>99.999999)){
-                      //error
-                      errors['tasa_fija_ordinario_c'] = errors['tasa_fija_ordinario_c'] || {};
-                      errors['tasa_fija_ordinario_c'].required = true;
-                  }
-                  if (this.model.get('tipo_tasa_moratorio_c') == '1') {
-                    if(this.model.get('tasa_fija_moratorio_c') == null ||this.model.get('tasa_fija_moratorio_c') == "" || (Number(this.model.get('tasa_fija_moratorio_c'))<0 || Number(this.model.get('tasa_fija_moratorio_c'))>99.999999)){
-                        //error
-                        errors['tasa_fija_moratorio_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
-                        //errors['tasa_fija_moratorio_c'].required = true;
-                    }
-                  }
+              if (this.model.get('tipo_tasa_moratorio_c') == '1') {
+                if(this.model.get('tasa_fija_moratorio_c') == null ||this.model.get('tasa_fija_moratorio_c') == "" || (Number(this.model.get('tasa_fija_moratorio_c'))<0 || Number(this.model.get('tasa_fija_moratorio_c'))>99.999999)){
+                    //error
+                    errors['tasa_fija_moratorio_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
+                    //errors['tasa_fija_moratorio_c'].required = true;
+                }
+              }
           }
         }
         callback(null, fields, errors);
     },
 
+    /*@Jesus Carrillo
+     Funcion que valida que la cuenta de la presolicitud tenga una direccion con indicador "correspondencia" y"fiscal"
+     */
+    valida_direc_indicador: function(fields, errors, callback){
+        self=this;
+        var fiscal=0;
+        var correspondecia=0;
+        app.api.call('GET', app.api.buildURL('Accounts/' +this.model.get('account_id')+'/link/accounts_dire_direccion_1'), null, {
+            success: _.bind(function (data) {
+                console.log('Info de Accounts:');
+                console.log(data);
+                for(var i=0;i<data.records.length;i++){
+                    if(data.records[i].indicador!=""){
+                        var array_indicador=this._getIndicador(data.records[i].indicador);
+                        for(var j=0;j<array_indicador.length;j++){
+                            if(array_indicador[j]=='1'){
+                                correspondecia++;
+                            }
+                            if(array_indicador[j]=='2'){
+                                fiscal++;
+                            }
+                        }
+                    }
+                }
+                if(correspondecia==0){
+                        app.alert.show('indicador_fail', {
+                            level: 'error',
+                            messages: 'La cuenta necesita tener al menos un indicador <b>Correspondencia</b> en direcci\u00F3nes',
+                        });
+                        errors['indicador_1'] = errors['indicador_1'] || {};
+                        errors['indicador_1'].required = true;
 
+                }
+                if(fiscal==0){
+                        app.alert.show('indicador_fail2', {
+                            level: 'error',
+                            messages: 'La cuenta necesita tener al menos un indicador <b>Fiscal</b> en direcci\u00F3nes',
+                        });
+                        errors['indicador_2'] = errors['indicador_2'] || {};
+                        errors['indicador_2'].required = true;
 
+                }
+            }, self),
+        });
+        callback(null, fields, errors);
+    },
 
+    _getIndicador: function(idSelected, valuesSelected) {
 
+        //variable con resultado
+        var result = null;
+
+        //Arma objeto de mapeo
+        var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
+
+        var element = {};
+        var object = [];
+        var values = [];
+
+        for(var key in dir_indicador_map_list) {
+            var element = {};
+            element.id = key;
+            values = dir_indicador_map_list[key].split(",");
+            element.values = values;
+            object.push(element);
+        }
+
+        //Recupera arreglo de valores por id
+        if(idSelected){
+            for(var i=0; i<object.length; i++) {
+                if ((object[i].id) == idSelected) {
+                    result = object[i].values;
+                }
+            }
+            console.log('Resultado de idSelected:');
+            console.log(result);
+        }
+
+        //Recupera id por valores
+        if(valuesSelected){
+            result = [];
+            for(var i=0; i<object.length; i++) {
+                if (object[i].values.length == valuesSelected.length) {
+                    //Ordena arreglos y compara
+                    valuesSelected.sort();
+                    object[i].values.sort();
+                    var tempVal = true;
+                    for(var j=0; j<valuesSelected.length; j++) {
+                        if(valuesSelected[j] != object[i].values[j]){
+                            tempVal = false;
+                        }
+                    }
+                    if( tempVal == true){
+                        result[0] = object[i].id;
+                    }
+
+                }
+            }
+            console.log('Resultado de valueSelected:');
+            console.log(result);
+        }
+
+        return result;
+    },
 })

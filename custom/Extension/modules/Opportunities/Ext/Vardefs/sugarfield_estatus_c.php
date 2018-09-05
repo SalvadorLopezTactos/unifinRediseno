@@ -1,5 +1,5 @@
 <?php
- // created: 2018-08-23 13:27:39
+ // created: 2018-08-29 16:56:08
 $dictionary['Opportunity']['fields']['estatus_c']['labelValue']='SubEtapa';
 $dictionary['Opportunity']['fields']['estatus_c']['dependency']='';
 $dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']=array (
@@ -68,6 +68,7 @@ $dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']=array (
       7 => 'SC',
       8 => 'D',
       9 => 'CN',
+      10 => 'SG',
     ),
     'CL' => 
     array (

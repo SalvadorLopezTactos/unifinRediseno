@@ -1,5 +1,5 @@
 <?php
-// created: 2018-08-21 11:15:38
+// created: 2018-08-29 17:59:13
 $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'] = array (
   'type' => 'subpanel-list',
   'rowactions' => 
@@ -94,13 +94,6 @@ $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'
           'target_record_key' => 'assigned_user_id',
           'target_module' => 'Employees',
           'label' => 'LBL_LIST_ASSIGNED_TO_NAME',
-          'enabled' => true,
-          'default' => true,
-        ),
-        7 => 
-        array (
-          'name' => 'fecha_estimada_cierre_c',
-          'label' => 'LBL_FECHA_ESTIMADA_CIERRE',
           'enabled' => true,
           'default' => true,
         ),

@@ -14,8 +14,10 @@
         'change .existingNumExt': 'updateExistingDireccion',
         'change .existingPais': 'updateExistingDireccionDropdown',
         'change .existingEstado': 'updateExistingDireccionDropdown',
-        'change .existingIndicador': 'updateIndicador',
-        'change .newIndicador': 'updateIndicador',
+        //'change .existingIndicador': 'updateIndicador',
+        //'change .newIndicador': 'updateIndicador',
+        'change .existingIndicador': 'updateIndicadores',
+        'change .newIndicador': 'updateIndicadores',
         'change .existingMunicipio': 'updateExistingDireccionDropdown',
         'change .existingCiudad': 'updateExistingDireccionDropdown',
         'change .existingPostal': 'updateExistingDireccionDropdown',
@@ -277,7 +279,10 @@
         $(evt.target).parent().parent().find('.existingIndicador').trigger('change');
 
     },
-
+    updateIndicadores:function (evt) {
+        this.updateIndicador(evt);
+        this.updateIndicador2(evt);
+    },
     /** BEGIN CUSTOMIZATION: jescamilla@levementum.com 6/18/2015 Description: detect multiple fiscal address*/
     updateIndicador: function (evt) {
 
@@ -345,6 +350,71 @@
         /* END CUSTOMIZATION */
     },
 
+    updateIndicador2: function (evt) {
+
+        var $input = this.$(evt.currentTarget);
+        var class_name = $input[0].className,
+            field_name = $($input).attr('data-field');
+        var $inputs = this.$('.' + class_name),
+            index = $inputs.index($input),
+            dropdown_value = $input.val(),
+            primaryRemoved;
+
+        //contar las direcciones Administrativas existentes
+        var adminCounter = 0;
+        $('.existingIndicador').each(function(){
+            if (String($(this).find('option:selected').text()).toLowerCase().indexOf('administraci\u00F3n') >= 0) {
+                adminCounter = parseInt(adminCounter + 1);
+            }
+
+        });
+
+        if(dropdown_value==""){
+            this.counterEmptyFields++;
+        }
+
+        //contar las direcciones Administrativas nuevas
+        $('.newIndicador').each(function(){
+            if (String($(this).find('option:selected').text()).toLowerCase().indexOf('administraci\u00F3n') >= 0) {
+                adminCounter = parseInt(adminCounter + 1);
+            }
+        });
+
+        this.adminCounter = adminCounter;
+
+        if (this.adminCounter > 1) {
+            var alertOptions = {title: "Multiples direcciones administrativas, favor de corregir.", level: "error"};
+            app.alert.show('validation2', alertOptions);
+            $input.val('');
+            //evt.target.parentElement.previousElementSibling.children[1].value='';
+
+            //Obtener valores de multiselect
+            var valores= $("#multi1").select2('val');
+
+            //Obteniendo índice de "Administracion"
+            var index = valores.indexOf("5");
+            //Eliminando el valor "Administracion" del arreglo
+            valores.splice(index,4);
+            //Estableciendo nuevo arreglo a campo multiselect (sin "Administracion")
+            $("#multi1").select2('val',valores);
+            $('.newIndicador').val(this._getIndicador(null,valores));
+
+            //Obteniendo valores multiselect existing
+            var valoresExisting=$(evt.target).parent().parent().find('select.existingMultiClass').select2('val');
+            var indexExisting=valoresExisting.indexOf("5");
+            valoresExisting.splice(indexExisting,4);
+            $(evt.target).parent().parent().find('select.existingMultiClass').select2('val',valoresExisting);
+            $(evt.target).val(this._getIndicador(null,valoresExisting));
+
+            $input.focus();
+            this.adminCounter = 0;
+        } else {
+            if($input.attr('class') == 'existingIndicador'){
+                this._updateExistingDireccionInModel(index, dropdown_value, 'indicador');
+            }
+        }
+        /* END CUSTOMIZATION */
+    },
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/9/2015 Description: Validacion, No debe de haber mas de una direccion fiscal */
 
     _doValidateDireccionNacional: function (fields, errors, callback) {
@@ -2182,4 +2252,6 @@
             ]
         };
     }
+
+
 })
