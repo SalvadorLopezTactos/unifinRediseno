@@ -93,7 +93,13 @@
                 if($bean->tct_etapa_ddw_c=='SI') {//@jesus
                     $bean->name = "PRE - SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
                 }else{
-                    $bean->name = "SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
+                    if($bean->tipo_de_operacion_c != "RATIFICACION_INCREMENTO"){
+                        $bean->name = "SOLICITUD " . $numeroDeFolio . " - " . $beanCuenta->name;
+
+                    }else{
+                        $bean->name = "SOL. " . $numeroDeFolio . " - " . $bean->name;
+                    }
+                    
                 }
             }elseif ($bean->tct_etapa_ddw_c!='SI'){
                 $bean->name = str_replace("PRE - ","",$bean->name) ;
@@ -274,7 +280,7 @@ SQL;
                 }
 
                 // Generales de la operación
-                $opp->name = "R/I para " . $bean->name;
+                $opp->name = " R/I " . $bean->name;
                 //author: Salvador Lopez
                 //La operación nueva debe nacer como "INTEGRACIÓN DE EXPEDIENTE" Y "EN ESPERA"
                 $opp->tct_etapa_ddw_c="P";//Integración de Expediente
@@ -359,7 +365,7 @@ SQL;
                 $opp->tasa_fija_ordinario_c = $bean->ri_tasa_fija_ordinario_c;
                 $opp->tasa_fija_moratorio_c = $bean->ri_tasa_fija_moratorio_c;
 
-                $opp->estatus_c = 'P';
+                //$opp->estatus_c = 'P';
                 //Copia el listado de condiciones financieras para la nueva solicitud
                 $opp->condiciones_financieras = $bean->condiciones_financieras_incremento_ratificacion;
                 foreach ($opp->condiciones_financieras as $index => $c_financiera) {
