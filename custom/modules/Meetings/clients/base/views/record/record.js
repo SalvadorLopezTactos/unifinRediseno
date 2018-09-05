@@ -166,7 +166,7 @@
                     errors['date_start'].custom_message_date_init0 = true;
                 }
 
-                //    callback(null, fields, errors);
+            //    callback(null, fields, errors);
             }
             if (fechaInicioTmp >= fechaActual) {
                 if (fechaInicioNueva >= fechaActual) {
@@ -184,7 +184,7 @@
                     errors['date_start'].custom_message_date_init1 = true;
                 }
 
-                // callback(null, fields, errors);
+               // callback(null, fields, errors);
             }
         }
         callback(null, fields, errors);
@@ -227,14 +227,14 @@
     * Victor Martinez Lopez 24-08-2018
     * */
     resultadoCitaRequerido:function (fields, errors, callback) {
-        if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
-            if (this.model.get('resultado_c')=='') {
-                app.error.errorName2Keys['requerido_obj'] = 'El resultado de la cita es requerido';
-                errors['resultado_c'] = errors['resultado_c'] || {};
-                errors['resultado_c'].requerido_obj = true;
-                errors['resultado_c'].required = true;
-            }
+      if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
+        if (this.model.get('resultado_c')=='') {
+          app.error.errorName2Keys['requerido_obj'] = 'El resultado de la cita es requerido';
+          errors['resultado_c'] = errors['resultado_c'] || {};
+          errors['resultado_c'].requerido_obj = true;
+          errors['resultado_c'].required = true;
         }
-        callback(null, fields, errors);
+      }
+      callback(null, fields, errors);
     },
 })
