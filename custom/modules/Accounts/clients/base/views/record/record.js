@@ -33,6 +33,7 @@
         this.model.addValidationTask('verificaRiesgoPep', _.bind(this.cambiaRiesgodePersona, this));
         this.model.addValidationTask('tipo_proveedor_requerido', _.bind(this.validaProveedorRequerido, this));
         this.model.addValidationTask('check_info', _.bind(this.doValidateInfoReq, this));
+		this.model.addValidationTask('macrosector', _.bind(this.macrosector, this));
         this.model.addValidationTask('sectoreconomico', _.bind(this.sectoreconomico, this));
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
 
@@ -1891,6 +1892,14 @@
                 errors['metodo_prospeccion_c'] = errors['metodo_prospeccion_c'] || {};
                 errors['metodo_prospeccion_c'].required = true;
             }
+        }
+        callback(null, fields, errors);
+    },
+
+    macrosector: function (fields, errors, callback) {
+        if (this.model.get('tct_macro_sector_ddw_c') == '' && (this.model.get('tipo_registro_c') == 'Cliente' || this.model.get('tipo_registro_c') == 'Proveedor' || this.model.get('subtipo_cuenta_c') == 'Interesado' || this.model.get('subtipo_cuenta_c') == 'Integracion de Expediente' || this.model.get('subtipo_cuenta_c') == 'Credito')) {
+            errors['tct_macro_sector_ddw_c'] = "Error: Favor de verificar los errores";
+            errors['tct_macro_sector_ddw_c'].required = true;
         }
         callback(null, fields, errors);
     },
