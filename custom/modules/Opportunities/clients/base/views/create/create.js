@@ -28,7 +28,7 @@
           funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
         */
         this.on('render', this._rolnocreacion, this);
-
+		this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
         this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
@@ -573,6 +573,58 @@
         callback(null,fields,errors);
     },
 
+	buscaDuplicados: function(fields, errors, callback)
+	{
+		var cliente = this.model.get('account_id');
+		var tipo = this.model.get('tipo_producto_c');		
+		var fields = ["account_id", "tct_etapa_ddw_c", "estatus_c", "tipo_producto_c"];
+        app.api.call("read", app.api.buildURL("Opportunities/", null, null,
+		{
+            fields: fields.join(','),
+            max_num: 5,
+            "filter":
+			[
+                {
+                    "account_id": cliente,
+					"tct_etapa_ddw_c": "SI",
+					"tipo_producto_c": tipo,
+                    "id":
+					{
+                        $not_equals: this.model.id,
+                    }
+                }
+            ]
+        }), null,
+		{
+            success: _.bind(function (data)
+			{
+				var duplicado = 0;
+                if (data.records.length > 0)
+				{
+                    $(data.records).each(function (index, value)
+					{
+                        if (value.estatus_c != "K")
+						{
+                            duplicado = 1;
+                        }
+                    });
+                }
+				if (duplicado === 1)
+				{
+					app.alert.show("Solicitud existente", {
+						level: "error",
+						title: "No puede guardar la presolicitud, existe una abierta para el mismo cliente.",
+						autoClose: false
+					});	
+					app.error.errorName2Keys['custom_message'] = 'No puede guardar la presolicitud, existe una abierta para el mismo cliente';
+					errors['account_name'] = errors['account_name'] || {};
+					errors['account_name'].custom_message = true;
+				}
+				callback(null, fields, errors);
+            }, this)
+        });
+    },
+   
     validaClientesActivos: function(fields, errors, callback){
       if (this.model.get('account_id')) {
         var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
@@ -589,9 +641,8 @@
       }else {
         callback(null, fields, errors);
       }
-
-
     },
+	
     verificaOperacionProspecto: function(){
         var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
         account.fetch({

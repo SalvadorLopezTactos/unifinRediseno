@@ -33,6 +33,7 @@
         this.model.addValidationTask('verificaRiesgoPep', _.bind(this.cambiaRiesgodePersona, this));
         this.model.addValidationTask('tipo_proveedor_requerido', _.bind(this.validaProveedorRequerido, this));
         this.model.addValidationTask('check_info', _.bind(this.doValidateInfoReq, this));
+		this.model.addValidationTask('macrosector', _.bind(this.macrosector, this));
         this.model.addValidationTask('sectoreconomico', _.bind(this.sectoreconomico, this));
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
 
@@ -1370,7 +1371,7 @@
       leadNoViable: function(){
 
         //var self=this;
-          var urlDelete=app.api.buildURL('Accounts/'+this.model.get('id'))
+          var urlDelete=app.api.buildURL('DeleteBeanById/Accounts/'+this.model.get('id'))
 
           app.alert.show('confirm_lead_no_viable', {
               level: 'confirmation',
@@ -1382,14 +1383,17 @@
                       level: 'process',
                   });
 
-                  self.model.set('subtipo_cuenta_c',"No Viable");
-                  self.model.save();
+                 // self.model.set('subtipo_cuenta_c',"No Viable");
+                  //self.model.save();
 
 
-                  app.api.call('delete',urlDelete , null, {
+                  app.api.call('GET',urlDelete , null, {
                       success: _.bind(function (data) {
-                          app.alert.dismiss('delete_lead_no_viable');
-                          app.router.navigate('#Accounts', {trigger: true});
+                          if(data){
+                              app.alert.dismiss('delete_lead_no_viable');
+                              app.router.navigate('#Accounts', {trigger: true});
+                          }
+
 
                       },self),
                       error: _.bind(function(error) {
@@ -1894,6 +1898,14 @@
                 errors['metodo_prospeccion_c'] = errors['metodo_prospeccion_c'] || {};
                 errors['metodo_prospeccion_c'].required = true;
             }
+        }
+        callback(null, fields, errors);
+    },
+
+    macrosector: function (fields, errors, callback) {
+        if (this.model.get('tct_macro_sector_ddw_c') == '' && (this.model.get('tipo_registro_c') == 'Cliente' || this.model.get('tipo_registro_c') == 'Proveedor' || this.model.get('subtipo_cuenta_c') == 'Interesado' || this.model.get('subtipo_cuenta_c') == 'Integracion de Expediente' || this.model.get('subtipo_cuenta_c') == 'Credito')) {
+            errors['tct_macro_sector_ddw_c'] = "Error: Favor de verificar los errores";
+            errors['tct_macro_sector_ddw_c'].required = true;
         }
         callback(null, fields, errors);
     },
