@@ -1371,7 +1371,7 @@
       leadNoViable: function(){
 
         //var self=this;
-          var urlDelete=app.api.buildURL('Accounts/'+this.model.get('id'))
+          var urlDelete=app.api.buildURL('DeleteBeanById/Accounts/'+this.model.get('id'))
 
           app.alert.show('confirm_lead_no_viable', {
               level: 'confirmation',
@@ -1383,14 +1383,17 @@
                       level: 'process',
                   });
 
-                  self.model.set('subtipo_cuenta_c',"No Viable");
-                  self.model.save();
+                 // self.model.set('subtipo_cuenta_c',"No Viable");
+                  //self.model.save();
 
 
-                  app.api.call('delete',urlDelete , null, {
+                  app.api.call('GET',urlDelete , null, {
                       success: _.bind(function (data) {
-                          app.alert.dismiss('delete_lead_no_viable');
-                          app.router.navigate('#Accounts', {trigger: true});
+                          if(data){
+                              app.alert.dismiss('delete_lead_no_viable');
+                              app.router.navigate('#Accounts', {trigger: true});
+                          }
+
 
                       },self),
                       error: _.bind(function(error) {
