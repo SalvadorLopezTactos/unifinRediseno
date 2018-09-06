@@ -107,10 +107,6 @@
     //No permite editar el campo Estado al crear una nueva llamada.
     //Adrian Arauz 6/09/2018
     noestatusedit:function () {
-        if(this.model.get('id')=='' || Date.parse(this.model.get('date_end'))>Date.now()){
-            $('span[data-name=status]').css("pointer-events", "none");
-        }else{
-            $('span[data-name=status]').css("pointer-events", "auto");
-        }
+          $('span[data-name=status]').css("pointer-events", "none");
     },
 })
