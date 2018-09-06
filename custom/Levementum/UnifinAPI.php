@@ -253,6 +253,7 @@ class UnifinAPI
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/11/2015 Description: Method to call Rest service InsertaClienteCompleto */
         public function insertarClienteCompleto($objecto)
         {
+            $GLOBALS['log']-> fatal ("llamada a API con el id cliente: " . $objecto->idcliente_c);
             if (intval($objecto->idcliente_c) > 0){
                 try {
                     global $current_user;
@@ -330,7 +331,16 @@ class UnifinAPI
                         $objecto->tipo_registro_c = $tipo_registro;
                         $objecto->sincronizado_unics_c = '1';
                         global $db;
-                        $query = " UPDATE accounts_cstm SET tipo_registro_c = '$tipo_registro', sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
+                       //$query = " UPDATE accounts_cstm SET tipo_registro_c = '$tipo_registro', sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
+                        /*
+                        * F. Javier G. Solar 13/07/2018
+                         * se seleccionan los checks de Proveedor, Cedente
+                            Factoraje o Deudor Factoraje se realiza el proceso de envió de cuenta al sistema UNICS, solo si no se ha
+                            realizado.
+                             Conservar los campos que sean obligatorios de acuerdo a la opción
+                            seleccionada
+                        */
+                        $query = " UPDATE accounts_cstm SET sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
                         $queryResult = $db->query($query);
 
                         //CVV se actualiza el campo sincronizado_unics de las direcciones del cliente
@@ -434,10 +444,14 @@ class UnifinAPI
                     if ($cliente['UNI2_CTE_001_InsertaPersonaResult']['bResultado'] == true){
                         //Actualizamos el registro a tipo Cliente
                         $tipo_registro = (($objecto->tipo_registro_c == 'Persona' || $objecto->tipo_registro_c == 'Proveedor') ? $objecto->tipo_registro_c : 'Cliente');
-                        $objecto->tipo_registro_c = $tipo_registro;
+                        /*
+                            AF - 2018/08/14
+                            Omite actualización de tipo de registro
+                        */
+                        //$objecto->tipo_registro_c = $tipo_registro;
                         $objecto->sincronizado_unics_c = '1';
                         global $db;
-                        $query = " UPDATE accounts_cstm SET idcliente_c = '{$objecto->idcliente_c}', tipo_registro_c = '$tipo_registro', sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
+                        $query = " UPDATE accounts_cstm SET idcliente_c = '{$objecto->idcliente_c}', /*tipo_registro_c = '$tipo_registro', */sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
                         $queryResult = $db->query($query);
 
                         $this->usuarioProveedores($objecto);
@@ -866,7 +880,7 @@ SQL;
                 $host = "http://" . $GLOBALS['unifin_url'] . "/Uni2WsClnt/WsRest/Uni2ClntService.svc/Uni2/ActualizaRelacion";
                 //Obtienes los id_cliente de la personas que se estan asociando
                 $query = <<<SQL
-                SELECT cliente.idcliente_c id_cliente, relacionado.idcliente_c id_relacionado
+                SELECT cliente.idcliente_c id_cliente, relacionado.idcliente_c id_relacionado, rel.deleted deleted
 FROM rel_relaciones_accounts_c rel
   inner join accounts_cstm cliente on rel.rel_relaciones_accountsaccounts_ida = cliente.id_c
   inner join rel_relaciones_cstm rel2 on rel2.id_c=rel.rel_relaciones_accountsrel_relaciones_idb
@@ -879,6 +893,7 @@ SQL;
                 $IntValue = new DropdownValuesHelper();
                 $GLOBALS['log']->fatal(" <".$current_user->user_name."> Fila de resultado" . print_r($row,true));
                 $relacionesActivas = str_replace('^', '', $object->relaciones_activas);
+                if($row['deleted'] == 1) $relacionesActivas = '';
                 $ContieneContacto = strpos($relacionesActivas, 'Contacto') >= 0 ? true : false;
                 $ContieneAccionista = strpos($relacionesActivas, 'Accionista') >= 0 ? true : false;
                 //Las relaciones de Beneficiario no se sincronizan con UNICS
@@ -895,7 +910,6 @@ SQL;
                 }else{
                     $GLOBALS['log']->fatal(" <".$current_user->user_name."> NO Se identificó relacion Beneficiario en:" . print_r($relacionesActivas,true));
                 }
-
                 $fields = array(
                     "oActualizaRelacion" => array(
                         "IdCliente" => intval($row['id_cliente']),
@@ -1960,6 +1974,7 @@ SQL;
                     "mesNacimiento"=> intval(date('n',$timestamp)),
                     "diaNacimiento"=> intval(date('j',$timestamp)),
                     "tipoProveedor"=> $tipoProveedor,
+                    "tipoPersona"=> $account->tipodepersona_c,
                     "paisConstitucion"=> ucfirst(strtolower($paisConstitucion)),
                     "estadoConstitucion"=> ucfirst(strtolower($estadoConstitucion))
                 );

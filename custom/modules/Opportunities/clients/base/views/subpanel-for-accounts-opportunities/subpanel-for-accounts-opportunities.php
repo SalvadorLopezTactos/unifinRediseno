@@ -1,5 +1,5 @@
 <?php
-// created: 2018-02-16 20:36:01
+// created: 2018-08-29 17:59:13
 $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'] = array (
   'type' => 'subpanel-list',
   'rowactions' => 
@@ -42,12 +42,19 @@ $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'
         ),
         1 => 
         array (
+          'name' => 'tct_etapa_ddw_c',
+          'label' => 'LBL_TCT_ETAPA_DDW_C',
+          'enabled' => true,
+          'default' => true,
+        ),
+        2 => 
+        array (
           'name' => 'estatus_c',
           'label' => 'LBL_ESTATUS',
           'enabled' => true,
           'default' => true,
         ),
-        2 => 
+        3 => 
         array (
           'name' => 'monto_c',
           'label' => 'LBL_MONTO',
@@ -60,7 +67,7 @@ $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'
           'currency_format' => true,
           'default' => true,
         ),
-        3 => 
+        4 => 
         array (
           'name' => 'amount',
           'label' => 'LBL_LIKELY',
@@ -74,26 +81,19 @@ $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'
           'currency_format' => true,
           'default' => true,
         ),
-        4 => 
+        5 => 
         array (
           'name' => 'vigencialinea_c',
           'label' => 'LBL_VIGENCIALINEA',
           'enabled' => true,
           'default' => true,
         ),
-        5 => 
+        6 => 
         array (
           'name' => 'assigned_user_name',
           'target_record_key' => 'assigned_user_id',
           'target_module' => 'Employees',
           'label' => 'LBL_LIST_ASSIGNED_TO_NAME',
-          'enabled' => true,
-          'default' => true,
-        ),
-        6 => 
-        array (
-          'name' => 'fecha_estimada_cierre_c',
-          'label' => 'LBL_FECHA_ESTIMADA_CIERRE',
           'enabled' => true,
           'default' => true,
         ),

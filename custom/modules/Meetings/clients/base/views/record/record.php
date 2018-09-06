@@ -411,7 +411,6 @@ array (
               array (
                 'name' => 'objetivo_c',
                 'label' => 'LBL_OBJETIVO_C',
-                'span' => 12,
               ),
               10 => 
               array (
@@ -422,6 +421,9 @@ array (
               array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
+              ),
+              12 => 
+              array (
               ),
             ),
           ),

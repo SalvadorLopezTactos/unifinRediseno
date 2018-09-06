@@ -46,7 +46,7 @@
 
         var api_params = {
             'max_num': 99,
-            
+
             //Ajuste generado por Salvador Lopez <salvador.lopez@tactos.com.mx>
             //Cambio de orden
             'order_by': 'idactivo:ASC,plazo:ASC',

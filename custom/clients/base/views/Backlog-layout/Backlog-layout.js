@@ -43,6 +43,8 @@
         'change #renta_a_comprometer': 'calcularPorcientoRI',
         'change #motivo_de_cancelacion_popup': 'motivoCancelacion',
         'change #motivo_de_cancelacion_masivo_popup': 'motivoCancelacionMasivo',
+
+
         'click #EquipoSort': 'ordenarPorEquipo',
         'click #PromotorSort': 'ordenarPorPromotor',
         'click #ClienteSort': 'ordenarPorCliente',
@@ -206,6 +208,8 @@
         this.checks_cancelar_error=[];
 
         this.checks_clean=[];
+
+        this.flag=0;
     },
 
     loadData: function (options) {
@@ -368,6 +372,10 @@
                                 $('#anio_a_comprometer_mass_popup').val(tempAnio).change();
 
                                 $(".loadingIcon").hide();
+
+                                if(app.alert.get('loadingRender') !=undefined){
+                                    app.alert.dismiss('loadingRender');
+                                }
                             })
                         });
                         //END GetPromotores
@@ -501,7 +509,7 @@ floatHeader: function(){
         if(estatus == "Comprometida"){
             app.alert.show('opp_cancelada', {
                 level: 'error',
-                messages: 'Esta operacion ya ha sido comprometida',
+                messages: 'Esta operaci\u00F3n ya ha sido comprometida',
                 autoClose: false
             });
             return;
@@ -628,7 +636,7 @@ floatHeader: function(){
                 //if (currentBacklogMonth >= backlogMes) {
                     app.alert.show('backlog_pasado', {
                         level: 'error',
-                        messages: 'Esta operacion no puede moverse debido a que se encuentra ' + backlogEstatus,
+                        messages: 'Esta operaci\u00F3n no puede moverse debido a que se encuentra ' + backlogEstatus,
                         autoClose: false
                     });
                     return;
@@ -643,7 +651,7 @@ floatHeader: function(){
                             if (currentDay == 21 && rolAutorizacion != "DGA") {
                                 app.alert.show('backlog corriente', {
                                     level: 'error',
-                                    messages: 'Esta operacion no puede moverse debido a que se encuentra en periodo de revision.',
+                                    messages: 'Esta operaci\u00F3n no puede moverse debido a que se encuentra en periodo de revisi\u00F3n.',
                                     autoClose: false
                                 });
                                 return;
@@ -662,7 +670,7 @@ floatHeader: function(){
                             //SI es un Backlo anterior o igual al mes corriente natural nadie puede
                             app.alert.show('backlog corriente', {
                                 level: 'error',
-                                messages: 'Esta operacion no puede moverse debido a que el Backlog ya esta corriendo.',
+                                messages: 'Esta operaci\u00F3n no puede moverse debido a que el Backlog ya est\u00E1 corriendo.',
                                 autoClose: false
                             });
                             return;
@@ -681,6 +689,12 @@ floatHeader: function(){
     if (this.popup_switch == "none") {
         this.popup_switch = "block";
         this.getCurrentYearMonthMoverMes();
+
+        app.alert.show('loadingRender', {
+            level: 'process',
+            title: 'Cargando, por favor espere.',
+        });
+
 
         this.cancel = 'Cancelar';
         this.save = 'Guardar';
@@ -751,7 +765,7 @@ cancelarBacklog: function(e){
          if(estatus == "Cancelada"){
             app.alert.show('opp_cancelada', {
                 level: 'error',
-                messages: 'Esta operacion ya ha sido cancelada',
+                messages: 'Esta operaci\u00F3n ya ha sido cancelada',
                 autoClose: false
             });
             return;
@@ -813,6 +827,12 @@ cancelarBacklog: function(e){
                 this.popup_switch = "block";
 
                 this.getCurrentYearMonthPopUp();
+
+                app.alert.show('loadingRender', {
+                    level: 'process',
+                    title: 'Cargando, por favor espere.',
+                });
+
                 this.cancel = 'Cancelar';
                 this.save = 'Guardar';
                 this.backlogName = backlogName;
@@ -882,6 +902,13 @@ cancelarBacklog: function(e){
                 this.popup_switch = "block";
 
                 this.getCurrentYearMonthPopUp();
+
+                app.alert.show('loadingRender', {
+                    level: 'process',
+                    title: 'Cargando, por favor espere.',
+                });
+
+
             // SI el usuario NO es promotor, puede revivir para el mismo mes
             if(self.rolAutorizacion != "Promotor"){
                 var opciones_mes = app.lang.getAppListStrings('mes_list');
@@ -945,6 +972,11 @@ cancelarBacklog: function(e){
 
         if (this.popup_switch == "none") {
             this.popup_switch = "block";
+
+            app.alert.show('loadingRender', {
+                level: 'process',
+                title: 'Cargando, por favor espere.',
+            });
 
             this.cancel = 'Cancelar';
             this.save = 'Guardar';
@@ -1134,9 +1166,25 @@ cancelarBacklog: function(e){
                     'backlogName': this.backlogName,
                     'description': description,
                 };
+     //Validación para el campo de comentarios, alerta de requerido y muestra de ícono al guardar el comentario. Adrian Arauz 3/08/18
+
+                if( description == null || description == "" || description.trim().length ==0 ) {
+
+                    console.log('Funciona');
+                    app.alert.show('alertcom', {
+                        level: 'error',
+                        messages: 'Favor de agregar un comentario.',
+                        autoClose: true
+                    });
+                    this.saving = 0;
+                    return;
+               }
+
                 var Url = app.api.buildURL("BacklogComentarios", '', {}, {});
+                $(".savingIcon").show();
                 app.api.call("create", Url, {data: Params}, {
                     success: _.bind(function (data) {
+                        $(".savingIcon").hide();
                         if (self.disposed) {
                             this.saving = 0;
                             return;
@@ -1210,6 +1258,45 @@ cancelarBacklog: function(e){
                 var comentarios = $('#comentarios_de_cancelacion').val();
                 var mes = $('.mes_popup').val();
                 var anio = $('.anio_popup').val();
+                var Competencia = $('#quien_opcion').val();
+                var Producto = $('#producto_opcion').val();
+
+
+
+                //app alert para validar y notificar que los campos quien y producto contengan información.
+
+                if( Competencia == null || Competencia == "" || Competencia.trim().length ==0 ) {
+
+                    if(MotivoCancelacion == 'Competencia') {
+
+                        app.alert.show('alertquien', {
+                            level: 'error',
+                            messages: 'El campo \u00bfQui\u00E9n? es requerido',
+                            autoClose: true
+                        });
+                        this.saving = 0;
+                        return;
+                    }
+
+                    //check++;
+                }
+                if(Producto == null || Producto == "" || Producto.trim().length==0 ) {
+
+                    if(MotivoCancelacion == 'No tenemos el producto que requiere') {
+                        app.alert.show('alertproducto', {
+                            level: 'error',
+                            messages: 'El campo \u00bfQu\u00E9 Producto? es requerido',
+                            autoClose: true
+                        });
+                        this.saving = 0;
+                        return;
+                    }
+
+                    //check++;
+                }
+                /*if(check>0){
+                    return;
+                }*/
 
                 console.log('Progreso' + self.progresoBL);
 
@@ -1233,7 +1320,7 @@ cancelarBacklog: function(e){
                 if(_.isEmpty(MotivoCancelacion)){
                     app.alert.show('motivo_requerido', {
                         level: 'error',
-                        messages: 'El motivo de cancelacion es requerido',
+                        messages: 'El motivo de cancelaci\u00F3n es requerido',
                         autoClose: true
                     });
                     this.saving = 0;
@@ -1268,14 +1355,20 @@ cancelarBacklog: function(e){
                     'Anio': anio,
                     'MesAnterior': tempMes,
                     'AnioAnterior': tempAnio,
+                    'Competencia': Competencia,
+                    'Producto': Producto,
                 };
+
                 var Url = app.api.buildURL("BacklogCancelar", '', {}, {});
+                $(".savingIcon").show();
                 app.api.call("create", Url, {data: Params}, {
                     success: _.bind(function (data) {
                         if (self.disposed) {
+                            $(".savingIcon").hide();
                             this.saving = 0;
                             return;
                         }
+                        $(".savingIcon").hide();
                         self.popup_switch = "none";
                         self.cancelar_switch = "none";
                         this.cancelar_masivo_switch = "none";
@@ -1297,6 +1390,7 @@ cancelarBacklog: function(e){
                 var anio_popup = $('.anio_switch_popup').val();
                 var current_backlog = $('#mes_filtro').val();
 
+
                 if(_.isEmpty(anio_popup)){
                     app.alert.show('anio requerido', {
                         level: 'error',
@@ -1307,88 +1401,44 @@ cancelarBacklog: function(e){
                     return;
                 }
 
-                var currentYear = (new Date).getFullYear();
-                var currentMonth = (new Date).getMonth();
-                var currentDay = (new Date).getDate();
-                var tipo_opp = '';
-                var periodo_revision = false;
-                var access = $('#access').val();
-                //currentMonth += 1;
 
-                if(currentDay <= 20){
-                    currentMonth += 1;
-                }
-                if(currentDay > 20){
-                    currentMonth += 2;
-                }
 
-                if (currentMonth > 12){  //Si resulta mayor a diciembre
-                    currentMonth = currentMonth - 12;
-                }
+                //Validar que la Persona de Backlog no cuente con Backlogs en el mismo mes
+                var idBacklog=this.backlogId;
+                //Obteniendo id de persona
+                var bl=$('.MoverOperacion[data-id="'+idBacklog+'"]');
+                var str=bl.closest('tr').children('.hide_cliente').children('a').attr('href');
 
-                if(anio_popup <= currentYear){
-                    if(mes_popup > currentMonth){
-                        tipo_opp = "Original";
-                    }
-                    else if(mes_popup == currentMonth){
-                        tipo_opp = "Adicional";
-                    }else{
-                        tipo_opp = "Adicional";
-                    }
-                }else{
-                    tipo_opp = "Original";
-                }
-                // CVV regresar a 20
-                if(currentDay >= 15 && currentDay <= 19){
-                    periodo_revision = true;
-                }
+                var arr_p=str.split('#Accounts/');
 
-                var Params = {
-                    'backlogId': this.backlogId,
-                    'backlogName': this.backlogName,
-                    'mes_popup': mes_popup,
-                    'anio_popup': anio_popup,
-                    'tipo_operacion': tipo_opp,
-                    'periodo_revision': periodo_revision,
-                    'access': access,
-                    'monto_comprometido': $('#monto_mes').html(),
-                    'rolAutorizacion': self.rolAutorizacion,
-                    'MesAnterior': tempMes,
-                    'AnioAnterior': tempAnio,
-                };
-                console.log('tct-create moverOperacion');
-                $(".savingIcon").show();
-                var Url = app.api.buildURL("MoverOperacion", '', {}, {});
-                app.api.call("create", Url, {data: Params}, {
+                var id_account=arr_p[1];
+
+                var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&fields=id,mes,estatus_de_la_operacion',
+                    null, null, null);
+
+
+                app.api.call('GET', bl_url, {}, {
                     success: _.bind(function (data) {
-                        console.log('dataresult');
-                        console.log(data);
-                        if (self.disposed) {
+                        var meses =['0','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+                        if(data.records.length>0){
+
+                            app.alert.show('error_bl_mes', {
+                                level: 'error',
+                                messages: 'Esta Cuenta ya posee un backlog en el mes: '+meses[data.records[0].mes],
+                                autoClose: false
+                            });
                             this.saving = 0;
-                            $(".savingIcon").hide();
                             return;
+
+                        }else{
+                            this.moverOpAfterValidateIndividual(mes_popup,anio_popup,tempMes,tempAnio,tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso);
+
                         }
 
-                        if(!_.isEmpty(data)){
-                            alert(data);
-                        }
-
-                        $(".savingIcon").hide();
-                        console.log('concluye ok');
-                        self.popup_switch = "none";
-                        self.cancelar_switch = "none";
-                        this.cancelar_masivo_switch = "none";
-                        this.revivir_switch = "none";
-                        this.comentarios_switch = "none";
-                        this.mes_switch = "none";
-                        this.mes_masivo_switch="none";
-                        this.lograda_switch = "none";
-                        this.compromiso_masivo_switch = "none";
-                        self.loadData(); self.render();
-                        self.persistData(tempMes, tempAnio, tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso);
-                        this.saving = 0;
                     },this)
-                });
+
+               });
+
             }
             if(this.lograda_switch == "block"){
                 if ($('#mes_a_comprometer_popup').val() == 0){
@@ -1502,6 +1552,7 @@ cancelarBacklog: function(e){
 
             //Nueva condición para mover mes masivo
             if(this.mes_masivo_switch == "block"){
+
                 console.log('tct-mes_masivo_switch');
                 var mes_popup = $('.mes_switch_masivo_popup').val();
                 var anio_popup = $('.anio_masivo_switch_popup').val();
@@ -1517,119 +1568,66 @@ cancelarBacklog: function(e){
                     return;
                 }
 
-                var currentYear = (new Date).getFullYear();
-                var currentMonth = (new Date).getMonth();
-                var currentDay = (new Date).getDate();
-                var tipo_opp = '';
-                var periodo_revision = false;
-                var access = $('#access').val();
-                //currentMonth += 1;
 
-                if(currentDay <= 20){
-                    currentMonth += 1;
-                }
-                if(currentDay > 20){
-                    currentMonth += 2;
-                }
-
-                if (currentMonth > 12){  //Si resulta mayor a diciembre
-                    currentMonth = currentMonth - 12;
-                }
-
-                if(anio_popup <= currentYear){
-                    if(mes_popup > currentMonth){
-                        tipo_opp = "Original";
-                    }
-                    else if(mes_popup == currentMonth){
-                        tipo_opp = "Adicional";
-                    }else{
-                        tipo_opp = "Adicional";
-                    }
-                }else{
-                    tipo_opp = "Original";
-                }
-                // CVV regresar a 20
-                if(currentDay >= 15 && currentDay <= 19){
-                    periodo_revision = true;
-                }
 
                 var countChecks=this.checks_actualizar.length;
 
-                var successCount=0;
-                var countChecksError=this.checks_no_actualizar.length;
-                var actualizadosResumen="";
-                var noActualizadosResumen="";
-                //Ciclo para llenar cadena para mostrar mensaje de resumen sobre registros no actualizados debido a algún error
-                if(countChecksError>0){
-                    for(var j=0;j<this.checks_no_actualizar.length;j++){
-                        noActualizadosResumen+="No. Backlog: "+this.checks_no_actualizar[j].getAttribute('data-numBacklog')+"<br>"
-                    }
+                //Añadir validación para evitar crear Backlogs a Cuentas que ya tienen registros de Backlog en el mismo mes al que se quiere mover
+                if(countChecks>0){
 
-                }
+                    this.controlCount=0;
+                    this.count=0;
 
-                for(var i=0;i<countChecks;i++){
+                    for(var i=0; i<countChecks;i++){
 
-                    var Params = {
-                        'backlogId': this.checks_actualizar[i].getAttribute('data-id'),
-                        'backlogName': this.checks_actualizar[i].getAttribute('data-name'),
-                        'mes_popup': mes_popup,
-                        'anio_popup': anio_popup,
-                        'tipo_operacion': tipo_opp,
-                        'periodo_revision': periodo_revision,
-                        'access': access,
-                        //'monto_comprometido': $('#monto_mes').html(),
-                        'rolAutorizacion': self.rolAutorizacion,
-                        'MesAnterior': tempMes,
-                        'AnioAnterior': tempAnio,
+                        var current_element=this.checks_actualizar[i];
+                        var idBacklog=current_element.getAttribute('data-id');
+                        var bl_check=$('.MoverOperacion[data-id="'+idBacklog+'"]');
+                        var str=bl_check.closest('tr').children('.hide_cliente').children('a').attr('href');
+                        var arr_p=str.split('#Accounts/');
+                        var id_account=arr_p[1];
+                        var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&fields=id,mes,estatus_de_la_operacion,name',
+                            null, null, null);
 
-                    };
-                    actualizadosResumen+="No. Backlog: "+this.checks_actualizar[i].getAttribute('data-numBacklog')+"<br>";
-                    console.log('tct-create moverOperacion');
-                    $(".savingIcon").show();
-                    var Url = app.api.buildURL("MoverOperacion", '', {}, {});
-                    app.api.call("create", Url, {data: Params}, {
-                        success: _.bind(function (data) {
-                            console.log('dataresult');
-                            console.log(data);
-                            successCount++;
-                            if (self.disposed) {
-                                this.saving = 0;
+                        $(".savingIcon").show();
+
+                        app.api.call('GET', bl_url, {}, {
+                            success: _.bind(function (data) {
                                 $(".savingIcon").hide();
-                                return;
-                            }
 
-                            if(!_.isEmpty(data)){
-                                alert(data);
-                            }
+                                var meses =['0','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+                                if(data.records.length>0){
+                                    var name_bl=data.records[0].name;
+                                    var arr_for_cuenta=name_bl.split('-');
 
-                            //Validación para saber si se ejecutó el último índice
-                            if(successCount==countChecks){
-                                self.handleViewsAfterCall(tempMes, tempAnio, tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso);
-
-                                app.alert.show('success_actualizar', {
-                                    level: 'success',
-                                    messages: countChecks +" Registros actualizados:<br>"+ actualizadosResumen,
-                                    autoClose: false
-                                });
-
-
-
-                                if(countChecksError>0){
-                                    app.alert.show('info_no_actualizar', {
-                                        level: 'info',
-                                        messages: countChecksError +" Registros no actualizados:<br>"+ noActualizadosResumen,
+                                    app.alert.show('error_bl_mes', {
+                                        level: 'error',
+                                        messages: 'La cuenta: '+arr_for_cuenta[2]+' ya posee un backlog en el mes: '+meses[data.records[0].mes],
                                         autoClose: false
                                     });
+                                    this.saving = 0;
+                                    return;
+
+
+                                }else{
+                                    this.controlCount++;
+                                    if(this.controlCount==this.checks_actualizar.length){
+                                        this.moverOperacionAfterValidate(mes_popup,anio_popup,tempMes,tempAnio,tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso);
+                                    }
 
                                 }
-                                this.array_checks=[];
+                                this.count++;
 
-                            }
-                        },this),
 
-                    });
+                            },this)
+
+                        });
+
+                    }
+
 
                 }
+
             }
 
             //Nueva condición para cancelar masivamente
@@ -1643,6 +1641,40 @@ cancelarBacklog: function(e){
                 var comentarios = $('#comentarios_de_cancelacion_masivo').val();
                 var mes = $('.mes_masivo_popup').val();
                 var anio = $('.anio_masivo_popup').val();
+
+                var Competencia = $('#quien_opcion_masivo').val();
+                var Producto = $('#producto_opcion_masivo').val();
+
+
+                //app alert para validar y notificar que los campos quien y producto contengan información.
+
+                if( Competencia == null || Competencia == "" || Competencia.trim().length==0 ) {
+
+                    if(MotivoCancelacion == 'Competencia') {
+
+                        app.alert.show('alertquien', {
+                            level: 'error',
+                            messages: 'El campo \u00bfQui\u00E9n? es requerido',
+                            autoClose: true
+                        });
+                        this.saving = 0;
+                        return;
+                    }
+
+                }
+                if(Producto == null || Producto == "" || Producto.trim().length==0) {
+
+                    if(MotivoCancelacion == 'No tenemos el producto que requiere') {
+                        app.alert.show('alertproducto', {
+                            level: 'error',
+                            messages: 'El campo \u00bfQu\u00E9´Producto? es requerido',
+                            autoClose: true
+                        });
+                        this.saving = 0;
+                        return;
+                    }
+
+                }
 
                 console.log('Progreso' + self.progresoBL);
 
@@ -1678,7 +1710,7 @@ cancelarBacklog: function(e){
                  if(_.isEmpty(MotivoCancelacion)){
                     app.alert.show('motivo_requerido', {
                         level: 'error',
-                        messages: 'El motivo de cancelacion es requerido',
+                        messages: 'El motivo de cancelaci\u00F3n es requerido',
                         autoClose: true
                     });
                     this.saving = 0;
@@ -1742,6 +1774,8 @@ cancelarBacklog: function(e){
                                 'Anio': anio,
                                 'MesAnterior': tempMes,
                                 'AnioAnterior': tempAnio,
+                                'Competencia':Competencia,
+                                'Producto':Producto
                             };
 
                             canceladosResumen+="No. Backlog: "+this.checks_cancelar[i].getAttribute('data-numBacklog')+"<br>";
@@ -1792,6 +1826,214 @@ cancelarBacklog: function(e){
             }
         },
 
+     moverOpAfterValidateIndividual:function(mes_popup,anio_popup,tempMes,tempAnio,tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso){
+         var currentYear = (new Date).getFullYear();
+         var currentMonth = (new Date).getMonth();
+         var currentDay = (new Date).getDate();
+         var tipo_opp = '';
+         var periodo_revision = false;
+         var access = $('#access').val();
+         //currentMonth += 1;
+
+         if(currentDay <= 20){
+             currentMonth += 1;
+         }
+         if(currentDay > 20){
+             currentMonth += 2;
+         }
+
+         if (currentMonth > 12){  //Si resulta mayor a diciembre
+             currentMonth = currentMonth - 12;
+         }
+
+         if(anio_popup <= currentYear){
+             if(mes_popup > currentMonth){
+                 tipo_opp = "Original";
+             }
+             else if(mes_popup == currentMonth){
+                 tipo_opp = "Adicional";
+             }else{
+                 tipo_opp = "Adicional";
+             }
+         }else{
+             tipo_opp = "Original";
+         }
+         // CVV regresar a 20
+         if(currentDay >= 15 && currentDay <= 19){
+             periodo_revision = true;
+         }
+
+
+
+         var Params = {
+             'backlogId': this.backlogId,
+             'backlogName': this.backlogName,
+             'mes_popup': mes_popup,
+             'anio_popup': anio_popup,
+             'tipo_operacion': tipo_opp,
+             'periodo_revision': periodo_revision,
+             'access': access,
+             'monto_comprometido': $('#monto_mes').html(),
+             'rolAutorizacion': self.rolAutorizacion,
+             'MesAnterior': tempMes,
+             'AnioAnterior': tempAnio,
+         };
+         console.log('tct-create moverOperacion');
+         $(".savingIcon").show();
+         var Url = app.api.buildURL("MoverOperacion", '', {}, {});
+         app.api.call("create", Url, {data: Params}, {
+             success: _.bind(function (data) {
+                 console.log('dataresult');
+                 console.log(data);
+                 if (self.disposed) {
+                     this.saving = 0;
+                     $(".savingIcon").hide();
+                     return;
+                 }
+
+                 if(!_.isEmpty(data)){
+                     alert(data);
+                 }
+
+                 $(".savingIcon").hide();
+                 console.log('concluye ok');
+                 self.popup_switch = "none";
+                 self.cancelar_switch = "none";
+                 this.cancelar_masivo_switch = "none";
+                 this.revivir_switch = "none";
+                 this.comentarios_switch = "none";
+                 this.mes_switch = "none";
+                 this.mes_masivo_switch="none";
+                 this.lograda_switch = "none";
+                 this.compromiso_masivo_switch = "none";
+                 self.loadData(); self.render();
+                 self.persistData(tempMes, tempAnio, tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso);
+                 this.saving = 0;
+             },this)
+         });
+     },
+
+
+        moverOperacionAfterValidate:function(mes_popup,anio_popup,tempMes,tempAnio,tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso){
+            var currentYear = (new Date).getFullYear();
+            var currentMonth = (new Date).getMonth();
+            var currentDay = (new Date).getDate();
+            var tipo_opp = '';
+            var periodo_revision = false;
+            var access = $('#access').val();
+            //currentMonth += 1;
+
+            if(currentDay <= 20){
+                currentMonth += 1;
+            }
+            if(currentDay > 20){
+                currentMonth += 2;
+            }
+
+            if (currentMonth > 12){  //Si resulta mayor a diciembre
+                currentMonth = currentMonth - 12;
+            }
+
+            if(anio_popup <= currentYear){
+                if(mes_popup > currentMonth){
+                    tipo_opp = "Original";
+                }
+                else if(mes_popup == currentMonth){
+                    tipo_opp = "Adicional";
+                }else{
+                    tipo_opp = "Adicional";
+                }
+            }else{
+                tipo_opp = "Original";
+            }
+            // CVV regresar a 20
+            if(currentDay >= 15 && currentDay <= 19){
+                periodo_revision = true;
+            }
+
+            var countChecks=this.checks_actualizar.length;
+            if(countChecks>0){
+
+                var successCount=0;
+                var countChecksError=this.checks_no_actualizar.length;
+                var actualizadosResumen="";
+                var noActualizadosResumen="";
+                //Ciclo para llenar cadena para mostrar mensaje de resumen sobre registros no actualizados debido a algún error
+                if(countChecksError>0){
+                    for(var j=0;j<this.checks_no_actualizar.length;j++){
+                        noActualizadosResumen+="No. Backlog: "+this.checks_no_actualizar[j].getAttribute('data-numBacklog')+"<br>"
+                    }
+
+                }
+                for(var i=0;i<countChecks;i++){
+
+                    var Params = {
+                        'backlogId': this.checks_actualizar[i].getAttribute('data-id'),
+                        'backlogName': this.checks_actualizar[i].getAttribute('data-name'),
+                        'mes_popup': mes_popup,
+                        'anio_popup': anio_popup,
+                        'tipo_operacion': tipo_opp,
+                        'periodo_revision': periodo_revision,
+                        'access': access,
+                        //'monto_comprometido': $('#monto_mes').html(),
+                        'rolAutorizacion': self.rolAutorizacion,
+                        'MesAnterior': tempMes,
+                        'AnioAnterior': tempAnio,
+
+                    };
+                    actualizadosResumen+="No. Backlog: "+this.checks_actualizar[i].getAttribute('data-numBacklog')+"<br>";
+                    console.log('tct-create moverOperacion');
+                    $(".savingIcon").show();
+                    var Url = app.api.buildURL("MoverOperacion", '', {}, {});
+                    app.api.call("create", Url, {data: Params}, {
+                        success: _.bind(function (data) {
+                            console.log('dataresult');
+                            console.log(data);
+                            successCount++;
+                            if (self.disposed) {
+                                this.saving = 0;
+                                $(".savingIcon").hide();
+                                return;
+                            }
+
+                            if(!_.isEmpty(data)){
+                                alert(data);
+                            }
+
+                            //Validación para saber si se ejecutó el último índice
+                            if(successCount==countChecks){
+                                self.handleViewsAfterCall(tempMes, tempAnio, tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso);
+
+                                app.alert.show('success_actualizar', {
+                                    level: 'success',
+                                    messages: countChecks +" Registros actualizados:<br>"+ actualizadosResumen,
+                                    autoClose: false
+                                });
+
+
+
+                                if(countChecksError>0){
+                                    app.alert.show('info_no_actualizar', {
+                                        level: 'info',
+                                        messages: countChecksError +" Registros no actualizados:<br>"+ noActualizadosResumen,
+                                        autoClose: false
+                                    });
+
+                                }
+                                this.array_checks=[];
+
+                            }
+                        },this),
+
+                    });
+
+                }
+
+            }
+
+
+        },
+
         handleViewsAfterCall:function(tempMes, tempAnio, tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso){
 
             $(".savingIcon").hide();
@@ -1829,7 +2071,8 @@ cancelarBacklog: function(e){
             var tempProgreso = $("#progreso_filtro").val();
 
             var currentYear = (new Date).getFullYear();
-            var currentMonth = (new Date).getMonth() + 1;
+            //var currentMonth = (new Date).getMonth() + 1;
+            var currentMonth = (new Date).getMonth();
             var currentDay = (new Date).getDate();
 
             var anio_popup = $('.anio_popup').val();
@@ -1844,6 +2087,7 @@ cancelarBacklog: function(e){
                 anio_popup = currentYear;
             }
 
+        /*
             if(currentDay <= 20 && (currentMonth) <= tempMes){
                 currentMonth += 1;
             }
@@ -1855,48 +2099,111 @@ cancelarBacklog: function(e){
         if (currentMonth > 12){  //Si resulta mayor a diciembre
             currentMonth = currentMonth - 12;
         }
+        */
 
-        var opciones_year = app.lang.getAppListStrings('anio_list');
-        Object.keys(opciones_year).forEach(function(key){
-            if(key < currentYear){
-                delete opciones_year[key];
+        if(currentDay <= 20){
+            currentMonth += 1;
+        }
+        if(currentDay > 20){
+            currentMonth += 2;
+        }
+
+        if(currentMonth == tempMes){
+            currentMonth += 1;
+        }
+
+        if (currentMonth > 12){  //Si resulta mayor a diciembre
+            currentMonth = currentMonth - 12;
+        }
+
+            //Valida número de mes actual
+            var limitMonth = currentMonth + 2;
+            var nextMonth = 0;
+            var nextYear = currentYear;
+            if (limitMonth > 12) {
+                nextMonth = limitMonth - 12;
+                nextYear = currentYear + 1;
             }
-        });
-        this.anio_list_html.options = opciones_year;
 
-        var opciones_mes = app.lang.getAppListStrings('mes_list');
-        if(anio_popup){
-            if(anio_popup <= currentYear){
+
+            var opciones_year = app.lang.getAppListStrings('anio_list');
+            Object.keys(opciones_year).forEach(function(key){
+                //Quita años previos
+                if(key < currentYear){
+                    delete opciones_year[key];
+                }
+                //Habilita años futuros
+                if(key > nextYear){
+                    delete opciones_year[key];
+                }
+            });
+
+            var anios_list_popup_cancelar = '';
+            for (var anios_keys in opciones_year) {
+                anios_list_popup_cancelar += '<option value="' + anios_keys + '">' + opciones_year[anios_keys] + '</option>'
+
+            }
+            this.anio_list_html = anios_list_popup_cancelar;
+
+
+            var opciones_mes = app.lang.getAppListStrings('mes_list');
+
+                //Quita meses para año futuro
+                if(anio_popup > currentYear){
+                    Object.keys(opciones_mes).forEach(function(key){
+                        if(key != ''){
+                            if(key > nextMonth){
+                                delete opciones_mes[key];
+                            }
+                        }
+                    });
+                }
+                //Quita meses para año actual
+                if(anio_popup == currentYear || anio_popup ==""){
+                    Object.keys(opciones_mes).forEach(function(key){
+                        if(key != ''){
+                        //Quita meses fuera de rango(3 meses)
+                        if(key < currentMonth || key >limitMonth ){
+                            delete opciones_mes[key];
+                        }
+                    }
+                });
+                }            
+
+                if(anio_masivo_popup > currentYear){
+                    Object.keys(opciones_mes).forEach(function(key){
+                        if(key != ''){
+                            if(key > nextMonth){
+                                delete opciones_mes[key];
+                            }
+                        }
+                    });
+                }
+            //Quita meses para año actual
+            if(anio_masivo_popup == currentYear || anio_popup ==""){
                 Object.keys(opciones_mes).forEach(function(key){
-                    if(key < currentMonth){
-                        delete opciones_mes[key];
+                    if(key != ''){
+                        //Quita meses fuera de rango(3 meses)
+                        if(key < currentMonth || key >limitMonth ){
+                            delete opciones_mes[key];
+                        }
                     }
                 });
             }
-        }
+            
 
-        if(anio_masivo_popup){
-            if(anio_masivo_popup <= currentYear){
-                Object.keys(opciones_mes).forEach(function(key){
-                    if(key < currentMonth){
-                        delete opciones_mes[key];
-                    }
-                });
+
+
+            var meses_keys = opciones_mes;
+
+            var meses_list_popup_html = '<option value="' + 0 + '">SELECCIONAR</option>';
+            for (meses_keys in opciones_mes) {
+                meses_list_popup_html += '<option value="' + meses_keys + '">' + opciones_mes[meses_keys] + '</option>'
+
             }
+            this.meses_list_popup_html = meses_list_popup_html;
 
-        }
-        
-
-        var meses_keys = opciones_mes;
-
-        var meses_list_popup_html = '<option value="' + 0 + '">SELECCIONAR</option>';
-        for (meses_keys in opciones_mes) {
-            meses_list_popup_html += '<option value="' + meses_keys + '">' + opciones_mes[meses_keys] + '</option>'
-
-        }
-        this.meses_list_popup_html = meses_list_popup_html;
-
-        this.render();
+            this.render();
 
         //var temp=_.isEmpty(this.array_checks) ? this.array_checks_cancelar:this.array_checks;
 
@@ -1957,15 +2264,60 @@ cancelarBacklog: function(e){
             currentMonth = currentMonth - 12;
         }
 
+        //Valida número de mes actual
+        var limitMonth = currentMonth + 2;
+        var nextMonth = 0;
+        var nextYear = currentYear;
+        if (limitMonth > 12) {
+            nextMonth = limitMonth - 12;
+            nextYear = currentYear + 1;
+        }
+
+
         var opciones_year = app.lang.getAppListStrings('anio_list');
         Object.keys(opciones_year).forEach(function(key){
+            //Quita años previos
             if(key < currentYear){
                 delete opciones_year[key];
             }
+            //Habilita años futuros
+            if(key > nextYear){
+                delete opciones_year[key];
+            }
         });
-        this.anio_list_html.options = opciones_year;
+        //this.anio_list_html.options = opciones_year;
+
+        var anios_list_popup_mover_mes = '';
+        for (var anios_keys in opciones_year) {
+            anios_list_popup_mover_mes += '<option value="' + anios_keys + '">' + opciones_year[anios_keys] + '</option>'
+
+        }
+        this.anio_list_html = anios_list_popup_mover_mes;
+
 
         var opciones_mes = app.lang.getAppListStrings('mes_list');
+        //Quita mese para año futuro
+        if(anio_popup > currentYear){
+            Object.keys(opciones_mes).forEach(function(key){
+                if(key != ''){
+                    if(key > nextMonth){
+                        delete opciones_mes[key];
+                    }
+                }
+            });
+        }
+        //Quita meses para año actual
+        if(anio_popup == currentYear || anio_popup ==""){
+            Object.keys(opciones_mes).forEach(function(key){
+                if(key != ''){
+                    //Quita meses fuera de rango(3 meses)
+                    if(key < currentMonth || key >limitMonth ){
+                        delete opciones_mes[key];
+                    }
+                }
+            });
+        }
+        /*
         if(anio_popup){
             if(anio_popup <= currentYear){
                 Object.keys(opciones_mes).forEach(function(key){
@@ -1982,6 +2334,7 @@ cancelarBacklog: function(e){
             }
 
         }
+        */
 
         if(anio_masivo_popup){
             if(anio_masivo_popup <= currentYear){
@@ -2466,7 +2819,7 @@ cancelarBacklog: function(e){
                 self.persistData(tempMes, tempAnio, tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, "", tempProgreso,self.array_checks,self.array_checks_cancelar);
             })
         });
-        //END GetEquipos
+        //END GetEquipos2
     },
 
     motivoCancelacion: function(){
@@ -2477,15 +2830,37 @@ cancelarBacklog: function(e){
             //$('#label_mes_cancelacion').display = "inherit";
             $('#label_mes_cancelacion').show();
             $('#label_anio_cancelacion').show();
-        }else{
+            $('#tdquien').hide();
+            $('#tdproducto').hide();
+        }
+        else if($('#motivo_de_cancelacion_popup').val() == "Competencia"){
+            $('#tdquien').show();
+            $('#tdproducto').hide();
+            $('#mes_cancelacion').hide();
+            $('#anio_cancelacion').hide();
+            $('#label_mes_cancelacion').hide();
+            $('#label_anio_cancelacion').hide();
+        }
+
+        else if($('#motivo_de_cancelacion_popup').val() == "No tenemos el producto que requiere"){
+            $('#tdquien').hide();
+            $('#tdproducto').show();
+            $('#mes_cancelacion').hide();
+            $('#anio_cancelacion').hide();
+            $('#label_mes_cancelacion').hide();
+            $('#label_anio_cancelacion').hide();
+        }
+        else{
+
             //Ocultar mes y año para mover
             $('#mes_cancelacion').hide();
             $('#anio_cancelacion').hide();
             //$('#label_mes_cancelacion').display = "none";
             $('#label_mes_cancelacion').hide();
             $('#label_anio_cancelacion').hide();
+            $('#tdquien').hide();
+            $('#tdproducto').hide();
         }
-
     },
 
     motivoCancelacionMasivo: function(){
@@ -2496,16 +2871,63 @@ cancelarBacklog: function(e){
             //$('#label_mes_cancelacion').display = "inherit";
             $('#label_mes_cancelacion_masivo').show();
             $('#label_anio_cancelacion_masivo').show();
-        }else{
-            //Ocultar mes y año para mover
+            //$('#tdquienMasivo').hide();
+            //$('#tdproductoMasivo').hide();
+
+            $('#quienMasivoLabel').hide();
+            $('#productoMasivoLabel').hide();
+            $('#quienMasivoVal').hide();
+            $('#productoMasivoVal').hide();
+
+        }
+        else if($('#motivo_de_cancelacion_masivo_popup').val() == "Competencia"){
+            //$('#tdquienMasivo').show();
+            //$('#tdproductoMasivo').hide();
+            
+            $('#quienMasivoLabel').show();
+            $('#productoMasivoLabel').hide();
+            $('#quienMasivoVal').show();
+            $('#productoMasivoVal').hide();
+
             $('#mes_cancelacion_masivo').hide();
             $('#anio_cancelacion_masivo').hide();
-            //$('#label_mes_cancelacion').display = "none";
             $('#label_mes_cancelacion_masivo').hide();
             $('#label_anio_cancelacion_masivo').hide();
         }
 
+        else if($('#motivo_de_cancelacion_masivo_popup').val() == "No tenemos el producto que requiere"){
+            //$('#tdquienMasivo').hide();
+            //$('#tdproductoMasivo').show();
+
+            $('#quienMasivoLabel').hide();
+            $('#productoMasivoLabel').show();
+            $('#quienMasivoVal').hide();
+            $('#productoMasivoVal').show();
+
+            $('#mes_cancelacion_masivo').hide();
+            $('#anio_cancelacion_masivo').hide();
+            $('#label_mes_cancelacion_masivo').hide();
+            $('#label_anio_cancelacion_masivo').hide();
+        }
+        else{
+
+            //Ocultar mes y año para mover
+            $('#mes_cancelacion_masivo').hide();
+            $('#anio_cancelacion_masivo').hide();
+            $('#label_mes_cancelacion_masivo').hide();
+            $('#label_anio_cancelacion_masivo').hide();
+            //$('#tdquienMasivo').hide();
+            //$('#tdproductoMasivo').hide();
+
+            $('#quienMasivoLabel').hide();
+            $('#productoMasivoLabel').hide();
+            $('#quienMasivoVal').hide();
+            $('#productoMasivoVal').hide();
+        }
+
+
     },
+
 
     getElaborationBacklog: function(){
         //Obtiene el Backlog en elaboración
@@ -2771,6 +3193,11 @@ cancelarBacklog: function(e){
                 this.popup_switch = "block";
                 this.getCurrentYearMonthMoverMes();
 
+                app.alert.show('loadingRender', {
+                    level: 'process',
+                    title: 'Cargando, por favor espere.',
+                });
+
                 this.cancel = 'Cancelar';
                 this.save = 'Guardar';
                 /*
@@ -2979,6 +3406,12 @@ cancelarBacklog: function(e){
                 this.popup_switch = "block";
 
                 this.getCurrentYearMonthPopUp();
+
+                app.alert.show('loadingRender', {
+                    level: 'process',
+                    title: 'Cargando, por favor espere.',
+                });
+
                 this.cancel = 'Cancelar';
                 this.save = 'Guardar';
                 /*

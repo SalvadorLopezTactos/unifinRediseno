@@ -41,7 +41,7 @@
 
 </script>
 <div class="control-group direccion">
-    <table class="dashlet" cellspacing="1" cellpadding="5">
+    <table class="dashlet" cellspacing="1" cellpadding="5" style="width: 100%;">
         <tr>
             <td valign="top">
                 <div class="record-label" >
@@ -71,7 +71,7 @@
                 </select> -->
             </td>
         </tr>
-        <tr>
+        <tr class="rowPem">
             <td valign="top">
                 <div class="record-label" >
                     Pais
@@ -97,7 +97,7 @@
                 </select>
             </td>
         </tr>
-        <tr>
+        <tr class="rowCPcc">
             <td valign="top">
                 <div class="record-label" >
                     Codigo Postal
@@ -121,11 +121,78 @@
                     Colonia
                 </div>
                 <select class="existingColonia" data-field="colonia" placeholder="colonia" style="font-size: 15px;font-weight: 500;">
-                    {{{colonia_html}}}
+                    <!-- {{{colonia_html}}} -->
                 </select>
                 <input type="hidden" class="existingColoniaId" placeholder="postal" value="{{colonia_id}}" data-field="colonia_id">
             </td>
         </tr>
+        <!-- Nueva fila para rediseño de direcciones-->
+        <tr>
+            <td valign="top">
+                <div class="record-label" >
+                    Codigo Postal
+                </div>
+
+                <!--<select id="postalTemp" class="select2"  data-field="codigopostaltemp" placeholder="Codigo Postal Temp" style="font-size: 15px;font-weight: 500;">-->
+                <!--  {{{def.postal_htmlTemp}}} -->
+                <!--</select>-->
+                <input type="text" id="existingPostalInput" class="select2" value="{{postal_htmlTemp}}"/>
+                <!--<input type="text" class="newPostal" placeholder="Codigo Postal" value="{{postal_html}}" data-field="codigopostal" data-name="codigopostal" style="width: 90%;margin: 0px;">-->
+                <input type="hidden" id="existingPostalHidden" class="existingPostalIdHidden" placeholder="postal" value="{{postal}}" data-field="postal_temp" style="width: 33%;margin: 0px;">
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    País
+                </div>
+                <select class="existingPaisTemp" placeholder="paisTemp" data-field="pais_temp" style="font-size: 15px;font-weight: 500;">
+                    {{{paises_list}}}
+                </select>
+                <i class="fa fa-spinner fa-spin loadingIconPaisTemp" style="display: none"></i>
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Estado
+                </div>
+                <select class="existingEstadoTemp" data-field="estado_temp" placeholder="estadoTemp" style="font-size: 15px;font-weight: 500;">
+                    {{{estados_html}}}
+                </select>
+                <i class="fa fa-spinner fa-spin loadingIconEdoTemp" style="display: none"></i>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top">
+                <div class="record-label" >
+                    Municipio
+                </div>
+                <select class="existingMunicipioTemp" data-field="municipio_temp" placeholder="Municipio" style="font-size: 15px;font-weight: 500;">
+                    {{{municipios_html}}}
+                </select>
+                <i class="fa fa-spinner fa-spin loadingIconMunicipioTemp" style="display: none"></i>
+                <!-- <input type="hidden" class="newPostalId" placeholder="postal" value="{{postal}}" data-field="postal" style="width: 33%;margin: 0px;"> -->
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Ciudad
+                </div>
+                <select class="existingCiudadTemp" data-field="ciudad_temp" placeholder="Ciudad" style="font-size: 15px;font-weight: 500;">
+                    {{{ciudad_html}}}
+                </select>
+                <i class="fa fa-spinner fa-spin loadingIconCiudadTemp" style="display: none"></i>
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Colonia
+                </div>
+                <select class="existingColoniaTemp" placeholder="Colonia" data-field="colonia_temp" style="font-size: 15px;font-weight: 500;">
+                    {{{colonia_html}}}
+                </select>
+                <input type="hidden" class="existingColoniaIdTemp" placeholder="postal" value="{{colonia_id}}" data-field="colonia_idTemp">
+                <i class="fa fa-spinner fa-spin loadingIconColoniaTemp" style="display: none"></i>
+            </td>
+        </tr>
+
+        <!--fin de fila rediseño de direcciones -->
         <tr>
             <td colspan="2" valign="top">
                 <div class="record-label" >

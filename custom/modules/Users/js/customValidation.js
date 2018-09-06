@@ -1,14 +1,21 @@
 SUGAR.util.doWhen("typeof(check_form) != 'undefined' && typeof check_form == 'function'", function() {
     check_form = _.wrap(check_form, function(originalCheckFormFunction, originalCheckFormFunctionArg) {
-        // Adding custom validation 
-        
-        console.log(document.getElementById("contraseniaactual_c").value); 
-        console.log(document.getElementById("nuevacontrasenia_c").value); 
-        console.log(document.getElementById("confirmarnuevacontrasenia_c").value);   
+        // Adding custom validation
+
+        //console.log(document.getElementById("contraseniaactual_c").value);
+        //console.log(document.getElementById("nuevacontrasenia_c").value);
+        //console.log(document.getElementById("confirmarnuevacontrasenia_c").value);
 
          //Valida contraseña
-        if(document.getElementById("contraseniaactual_c").value != "")
+        if(document.getElementById("contraseniaactual_c").value != "" || document.getElementById("nuevacontrasenia_c").value != "")
         {
+
+          //Valida contraseña actual
+          if(document.getElementById("contraseniaactual_c").value == "" ){
+            alert("Ingrese contraseña actual");
+            return false;
+
+          }
 
           //Valida nueva contraseña
           if(document.getElementById("nuevacontrasenia_c").value == "" ){
@@ -20,7 +27,7 @@ SUGAR.util.doWhen("typeof(check_form) != 'undefined' && typeof check_form == 'fu
           //Valida expresión regular
           // Almenos 1, Mayuscula, minuscula y número, 8-16 caracteres
           if(document.getElementById("nuevacontrasenia_c").value != "" ){
-            
+
             var strPwd = document.getElementById("nuevacontrasenia_c").value;
             //var strExpReg = new RegExp("[a-zA-Z0-9]{8,16}");
             var strExpRegMayus = new RegExp("[A-Z]{8,16}");
@@ -46,17 +53,44 @@ SUGAR.util.doWhen("typeof(check_form) != 'undefined' && typeof check_form == 'fu
                   return false;
               }
 
+              //Valida caracteres especiales
+
               expreg = /[`~!@#$%^&*()_°¬|+\-=?;:'",.<>\s\{\}\[\]\\\/]/;
               if (expreg.test(strPwd)) {
                   alert("Contraseña no debe tener caracteres especiales");
                   return false;
               }
-              
+
+              //Valida palabra UNIFIN
               expreg = strPwd.search(/unifin/i);
               if (expreg >= 0) {
                   alert("Contraseña no debe contener la palabra unifin");
                   return false;
               }
+
+              //Valida nombre de usuario
+              console.log('Usuario ---- Cambio de contraseña');
+              try {
+                var user_name = document.getElementById("user_name").value;
+
+                if (typeof user_name == 'undefined') {
+                  user_name = document.getElementById("user_name").innerHTML;
+                }
+
+                console.log(user_name);
+                user_name = user_name.toLowerCase();
+                //console.log(user_name);
+                expreg = strPwd.toLowerCase().search(user_name);
+                console.log(expreg);
+                console.log(strPwd.toLowerCase());
+                if (expreg >= 0) {
+                    alert("Contraseña no debe contener el nombre de usuario");
+                    return false;
+                }
+              } catch (e) {
+
+              }
+
 
             }else{
               alert("Contraseña debe tener entre 8 y 16 caracteres");

@@ -1,5 +1,18 @@
 ({
     extendsFrom: 'CreateView',
+
+    events: {
+        'click [name=monto_c]': 'formatcoin',
+        'click [name=amount]': 'formatcoin',
+        'click [name=ca_pago_mensual_c]': 'formatcoin',
+        'click [name=ca_importe_enganche_c ]': 'formatcoin',
+        'keydown [name=monto_c]': 'checkmoney',
+        'keydown [name=amount]': 'checkmoney',
+        'keydown [name=ca_pago_mensual_c]': 'checkmoney',
+        'keydown [name=ca_importe_enganche_c ]': 'checkmoney',
+
+    },
+
     tipoDePersona: null,
     prospecto: null,
     productoUsuario: null,
@@ -8,14 +21,21 @@
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
+        this.on('render', this.ocultaFunc, this);
+
+        /*
+          Author: Adrian Arauz 2018-08-28
+          funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
+        */
+        this.on('render', this._rolnocreacion, this);
 
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
         this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
-        this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this));
-        this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
+        //this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this));
+        //this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
         this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
-
+        this.model.addValidationTask('checkpromotorFactoraje',_.bind(this.validacrearfactoraje,this));
         //Ajuste Salvador Lopez <salvador.lopez@tactos.com.mx>
         //Validación para evitar asociar una Persona que no sea cliente
         this.model.addValidationTask('check_person_type', _.bind(this.personTypeCheck, this));
@@ -29,7 +49,7 @@
         * Validar la cantidad de operaciones que se pueden generar para un cliente/Prospecto (solo una)
         * @type Event
         * */
-        this.model.addValidationTask('check_operaciones_permitidas', _.bind(this.validaOperacionesPermitidasPorCuenta, this));
+        //this.model.addValidationTask('check_operaciones_permitidas', _.bind(this.validaOperacionesPermitidasPorCuenta, this));
 
         /*@author Carlos Zaragoza Ortiz
          * @version 1
@@ -46,6 +66,15 @@
 
         this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinanceras, this));
         //this.model.addValidationTask('check_requeridos', _.bind(this.validaDatosRequeridos, this));
+
+        /*
+        * @author F. Javier G. Solar
+        * 19/07/2018
+        * Valida que los campos de la cuenta esten completos.
+        * **/
+        this.model.addValidationTask('Valida al Guardar',_.bind(this.validacion_proceso_guardar,this));
+
+
 
         /*
         * @author Carlos Zaragoza Ortiz
@@ -100,6 +129,7 @@
         this.model.set('date_closed', FechaCierre.getFullYear() + '-' + (FechaCierre.getMonth()+1) + '-' + FechaCierre.getDate());
         */
         this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
+
         this.model.on('change:tipo_producto_c', this._ActualizaEtiquetas, this);
 
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
@@ -152,7 +182,7 @@
         this.getCurrentYearMonth("loading");
         this.model.on("change:anio_c", _.bind(this.getCurrentYearMonth, this));
     },
-    
+
     _render: function() {
         this._super("_render");
         this.obtieneCondicionesFinancieras();
@@ -181,7 +211,7 @@
         //* Quitamos los campos Vendedor y Comisión
         this.$('div[data-name=opportunities_ag_vendedores_1_name]').hide();
         this.$('div[data-name=comision_c]').hide();
-
+//Validaciontask
         this.model.on("change:tipo_producto_c", _.bind(function(){
             if(this.model.get('tipo_producto_c') == '4'){
                 if(this.tipoDePersona){
@@ -190,7 +220,7 @@
                         title: "No puedes generar factoraje para Personas Fisicas",
                         autoClose: false
                     });
-                    this.model.set('tipo_producto_c','1');
+                    //this.model.set('tipo_producto_c','1');
                 }
                 this.obtieneCondicionesFinancieras();
             }
@@ -205,6 +235,7 @@
             this.obtieneCondicionesFinancieras();
             this.verificaOperacionProspecto();
         },this));
+
 
         /*
          * @author Carlos Zaragoza
@@ -240,7 +271,7 @@
         },this));
         */
         /* END CUSTOMIZATION */
-        
+
         this.model.on("change:monto_c", _.bind(function() {
             if (this.model.get('amount') == null || this.model.get('amount') == ''){
                 this.model.set('amount',this.model.get('monto_c'));
@@ -252,10 +283,21 @@
                         autoClose: false
                     });
                     this.model.set('amount',this.model.get('monto_c'));
-                }   
+                }
+            }
+            var str = this.model.get('monto_c');
+            var n = str.length;
+            if(n>22)
+    	      {
+                  app.alert.show('monto', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'El campo \"Monto de l&iacutenea\" no debe exceder de 15 digitos. Favor de corregir.'
+                });
+                this.model.set('monto_c',0);
             }
         },this));
-        
+
         this.model.on("change:amount", _.bind(function() {
             if(parseFloat(this.model.get('amount')) > parseFloat(this.model.get('monto_c'))){
                 app.alert.show("Moto a operar invalido", {
@@ -270,7 +312,7 @@
         this.model.on("change:account_id", _.bind(function(){
             this.verificaOperacionProspecto();
         },this));
-        
+
         // CVV - 28/03/2016 - Los campos de activo se reemplazaron por el control de condiciones financieras
         /*
         this.model.on("change:activo_c", _.bind(function(){
@@ -291,7 +333,7 @@
             this.model.set('sub_activo_3_c','');
         },this));
         */
-        
+
         //Actualiza las etiquetas de acuerdo al tipo de operacion Solicitud/Cotizacion
         //Si la operacion es Cotización o Contrato cambiar etiqueta de "Monto de línea" a "Monto colocación"
         if (this.model.get('tipo_operacion_c') == '3' || this.model.get('tipo_operacion_c') == '4'){
@@ -349,14 +391,81 @@
             this.$('div[data-name=ri_usuario_bo_c]').show();
         }
     },
-           
+    /*
+    *Victor Martinez Lopez
+    * Valida que no se pueda crear un producto factoraje para personas fisicas
+     */
+    validacrearfactoraje: function(fields, errors, callback){
+        if(this.model.get('tipo_producto_c') == '4'){
+            if(this.tipoDePersona){
+                app.alert.show("tipoPersonaFisica", {
+                    level: "error",
+                    title: "No puedes generar factoraje para Personas F&iacute;sicas",
+                    autoClose: false
+                });
+                errors['tipo_producto_c'] = "No puedes generar factoraje para Personas F&iacute;sicas";
+                errors['tipo_producto_c'].required = true;
+                }
+        }callback(null,fields,errors);
+        },
+    /*
+    * @Author F. Javier G. Solar
+    * 23-07-2018
+    * Valida campos requeridos antes de crear solicitud
+    * */
+    validacion_proceso_guardar: function (fields, errors, callback) {
+
+        self = this;
+
+        if ( this.model.get('account_id') != "" && this.model.get('account_id') != null)
+        {
+            app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/1'), null, {
+                success: _.bind(function (data) {
+
+                    if (data != "") {
+                        var titulo = "Campos Requeridos en Cuentas";
+                        var nivel = "error";
+                        var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br>" + data;
+
+
+                        app.error.errorName2Keys['custom_message1'] = 'Falta información en campos requeridos de la cuenta';
+                        errors['account_name'] = errors['account_name'] || {};
+                        errors['account_name'].custom_message1 = true;
+                        errors['account_name'].required = true;
+                        self.mensajes(titulo, mensaje, nivel);
+
+                    }
+                    callback(null, fields, errors);
+
+                }, self),
+            });
+        }else {
+          callback(null, fields, errors);
+        }
+
+    },
+
+    mensajes:function (descripcion,texto,nivel) {
+        app.alert.show(descripcion, {
+            level: nivel,
+            messages: texto,
+        });
+    },
+
     _ValidateAmount: function (fields, errors, callback){
-        if (parseFloat(this.model.get('monto_c')) <= 0)
+        if (parseFloat(this.model.get('monto_c')) <= 0 )
         {
             errors['monto_c'] = errors['monto_c'] || {};
             errors['monto_c'].required = true;
+
+            app.alert.show("Monto de Linea requerido", {
+                level: "error",
+                title: "Monto de L\u00EDnea debe ser mayor a cero",
+                autoClose: false
+            });
         }
-        
+
+        /*
         if (parseFloat(this.model.get('amount')) <= 0)
         {
             errors['amount'] = errors['amount'] || {};
@@ -392,25 +501,26 @@
             });
 
         }
+         */
 
         callback(null, fields, errors);
     },
-    
+
     getCustomSaveOptions: function(options) {
         this.createdModel = this.model;
         // since we are in a drawer
         this.listContext = this.context.parent || this.context;
         this.originalSuccess = options.success;
-        
+
         var success = _.bind(function(model) {
-            this.originalSuccess(model); 
-        }, this); 
+            this.originalSuccess(model);
+        }, this);
 
         return {
             success: success
         };
     },
-    
+
     validaActivoIndex: function(fields, errors, callback){
         //CVV - 28/03/2016 - Modulo de condiciones financieras
         /*var activo = this.model.get('activo_c');
@@ -459,10 +569,11 @@
         // Obtener el primer activo del control de condiciones financieras
         this.model.set('id_activo_c', "97");
         this.model.set('index_activo_c', "000100030001");
-        callback(null,fields,errors)
+        callback(null,fields,errors);
     },
 
     validaClientesActivos: function(fields, errors, callback){
+      if (this.model.get('account_id')) {
         var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
         account.fetch({
             success: _.bind(function (model) {
@@ -474,6 +585,10 @@
                 callback(null, fields, errors);
             }, this)
         });
+      }else {
+        callback(null, fields, errors);
+      }
+
 
     },
     verificaOperacionProspecto: function(){
@@ -507,19 +622,20 @@
                 if ( modelo.get('tipo_registro_c') != 'Cliente' ){
                     //Si es prospecto ponemos como primer registro el value 'OP'
                     //console.log(this.model.fields['estatus_c']);
-                    this.model.set('estatus_c','OP');
+                    //this.model.set('estatus_c','OP');
                 }
                 if ( modelo.get('tipo_registro_c') == 'Cliente' ){
                     //Si es prospecto ponemos como primer registro el value 'OP'
                     //console.log(this.model.fields['estatus_c']);
-                    this.model.set('estatus_c','P');
+                    //this.model.set('estatus_c','P');
                 }
                 // 0000080: El sistema permite crear una operación de tipo Factoraje para una PF
-                // todo pendiente              
+                // todo pendiente
                 if( modelo.get('tipodepersona_c')=='Persona Fisica' && modelo.get('id') != null){
                     this.tipoDePersona = true;
                     //console.log("Cambiamos a tipo producto leasing");
-                    this.model.set('tipo_producto_c','1');
+
+                    //this.model.set('tipo_producto_c','1');
                 }else{
                     this.tipoDePersona = false;
                 }
@@ -539,36 +655,40 @@
      * */
     validaOperacionesPermitidasPorCuenta: function(fields, errors, callback){
         //Controlamos la solicitud del servicio:
-            var OppParams = {
-                'id_c': this.model.get('account_id'),
-            };
-            var urlOperaciones = app.api.buildURL("Opportunities/Operaciones", '', {}, {});
-            app.api.call("create", urlOperaciones, {data: OppParams}, {
-                success: _.bind(function (data) {
-                    if (data != null) {
-                        //console.log(data);
-                        var cantidad = data['cantidad'];
-                        //console.log("Cantidad de operaciones" + cantidad);
-                        if (cantidad > 0) {
-                            app.alert.show("Cantidad de operaciones", {
-                                level: "error",
-                                title: "No puedes generar m&aacute;s de una operaci&oacute;n para prospectos.",
-                                autoClose: false
-                            });
-                            app.error.errorName2Keys['custom_message'] = 'Solo puede tener una operacion como prospecto ';
-                            errors['account_name'] = errors['account_name'] || {};
-                            errors['account_name'].custom_message = true;
+        if (this.model.get('account_id')) {
+          var OppParams = {
+              'id_c': this.model.get('account_id'),
+          };
+          var urlOperaciones = app.api.buildURL("Opportunities/Operaciones", '', {}, {});
+          app.api.call("create", urlOperaciones, {data: OppParams}, {
+              success: _.bind(function (data) {
+                  if (data != null) {
+                      //console.log(data);
+                      var cantidad = data['cantidad'];
+                      //console.log("Cantidad de operaciones" + cantidad);
+                      if (cantidad > 0) {
+                          app.alert.show("Cantidad de operaciones", {
+                              level: "error",
+                              title: "No puedes generar m&aacute;s de una operaci&oacute;n para prospectos.",
+                              autoClose: false
+                          });
+                          app.error.errorName2Keys['custom_message'] = 'Solo puede tener una operacion como prospecto ';
+                          errors['account_name'] = errors['account_name'] || {};
+                          errors['account_name'].custom_message = true;
 
-                            //this.cancelClicked();
-                            callback(null, fields, errors);
-                        } else {
-                            callback(null, fields, errors);
-                        }
-                    }
-                }, this)
-            });
-
+                          //this.cancelClicked();
+                          callback(null, fields, errors);
+                      } else {
+                          callback(null, fields, errors);
+                      }
+                  }
+              }, this)
+          });
+        }else {
+          callback(null, fields, errors);
+        }
     },
+
     _ActualizaEtiquetas: function(){
         if(this.model.get('tipo_producto_c')=='4'){
             this.$("div.record-label[data-name='plazo_c']").text("Plazo máximo en d\u00EDas");
@@ -689,71 +809,71 @@
     validaRequeridosFactoraje: function(fields, errors, callback){
         //console.log(this.model.get('f_aforo_c'));
         //console.log(this.model.get('f_tipo_factoraje_c'));
-        if(this.model.get('tipo_producto_c')=='4'){
-            if(this.model.get('f_tipo_factoraje_c') == undefined || this.model.get('f_tipo_factoraje_c') == ""){
+        if(this.model.get('tipo_producto_c')=='4') {
+            if (this.model.get('f_tipo_factoraje_c') == undefined || this.model.get('f_tipo_factoraje_c') == "") {
                 //error
                 errors['f_tipo_factoraje_c'] = errors['f_tipo_factoraje_c'] || {};
                 errors['f_tipo_factoraje_c'].required = true;
             }
-            if(this.model.get('f_aforo_c') == "" || (Number(this.model.get('f_aforo_c'))<0 || Number(this.model.get('f_aforo_c'))>99.999999)){
+            if (this.model.get('f_aforo_c') == "" || (Number(this.model.get('f_aforo_c')) < 0 || Number(this.model.get('f_aforo_c')) > 99.999999)) {
                 //error
                 errors['f_aforo_c'] = errors['f_aforo_c'] || {};
                 errors['f_aforo_c'].required = true;
             }
-            if(this.model.get('tipo_tasa_ordinario_c') == undefined || this.model.get('tipo_tasa_ordinario_c') == ""){
+            if (this.model.get('tipo_tasa_ordinario_c') == undefined || this.model.get('tipo_tasa_ordinario_c') == "") {
                 //error
                 errors['tipo_tasa_ordinario_c'] = errors['tipo_tasa_ordinario_c'] || {};
                 errors['tipo_tasa_ordinario_c'].required = true;
             }
-            if(this.model.get('instrumento_c') == undefined || this.model.get('instrumento_c') == ""){
+            if (this.model.get('instrumento_c') == undefined || this.model.get('instrumento_c') == "") {
                 //error
                 errors['instrumento_c'] = errors['instrumento_c'] || {};
                 errors['instrumento_c'].required = true;
             }
-            if(this.model.get('puntos_sobre_tasa_c') == "" || (Number(this.model.get('puntos_sobre_tasa_c'))<0 || Number(this.model.get('puntos_sobre_tasa_c'))>99.999999)){
+            if (this.model.get('puntos_sobre_tasa_c') == "" || (Number(this.model.get('puntos_sobre_tasa_c')) < 0 || Number(this.model.get('puntos_sobre_tasa_c')) > 99.999999)) {
                 //error
                 errors['puntos_sobre_tasa_c'] = errors['puntos_sobre_tasa_c'] || {};
                 errors['puntos_sobre_tasa_c'].required = true;
             }
-            if(this.model.get('tipo_tasa_moratorio_c') == undefined || this.model.get('tipo_tasa_moratorio_c') == ""){
+            if (this.model.get('tipo_tasa_moratorio_c') == undefined || this.model.get('tipo_tasa_moratorio_c') == "") {
                 //error
                 errors['tipo_tasa_moratorio_c'] = errors['tipo_tasa_moratorio_c'] || {};
                 errors['tipo_tasa_moratorio_c'].required = true;
             }
-            if(this.model.get('instrumento_moratorio_c') == undefined || this.model.get('instrumento_moratorio_c') == ""){
+            if (this.model.get('instrumento_moratorio_c') == undefined || this.model.get('instrumento_moratorio_c') == "") {
                 //error
                 errors['instrumento_moratorio_c'] = errors['instrumento_moratorio_c'] || {};
                 errors['instrumento_moratorio_c'].required = true;
             }
-            if(this.model.get('puntos_tasa_moratorio_c') == "" || (Number(this.model.get('puntos_tasa_moratorio_c'))<0 || Number(this.model.get('puntos_tasa_moratorio_c'))>99.999999)){
+            if (this.model.get('puntos_tasa_moratorio_c') == "" || (Number(this.model.get('puntos_tasa_moratorio_c')) < 0 || Number(this.model.get('puntos_tasa_moratorio_c')) > 99.999999)) {
                 //error
                 errors['puntos_tasa_moratorio_c'] = errors['puntos_tasa_moratorio_c'] || {};
                 errors['puntos_tasa_moratorio_c'].required = true;
             }
-            if(this.model.get('factor_moratorio_c') == "" || (Number(this.model.get('factor_moratorio_c'))<0 || Number(this.model.get('factor_moratorio_c'))>99.999999)){
+            if (this.model.get('factor_moratorio_c') == "" || (Number(this.model.get('factor_moratorio_c')) < 0 || Number(this.model.get('factor_moratorio_c')) > 99.999999)) {
                 //error
                 errors['factor_moratorio_c'] = errors['factor_moratorio_c'] || {};
                 errors['factor_moratorio_c'].required = true;
             }
-            if(this.model.get('cartera_descontar_c') == "" ){
+            if (this.model.get('cartera_descontar_c') == "") {
                 //error
                 errors['cartera_descontar_c'] = errors['cartera_descontar_c'] || {};
                 errors['cartera_descontar_c'].required = true;
             }
-        /*
-            console.log(this.model.get('tasa_fija_ordinario_c'));
-            console.log('tasa_fija_ordinario_c');
-            if(this.model.get('tasa_fija_ordinario_c') == null ||this.model.get('tasa_fija_ordinario_c') == "" || (Number(this.model.get('tasa_fija_ordinario_c'))<0 || Number(this.model.get('tasa_fija_ordinario_c'))>99.999999)){
-                //error
-                errors['tasa_fija_ordinario_c'] = errors['tasa_fija_ordinario_c'] || {};
-                errors['tasa_fija_ordinario_c'].required = true;
-            }
-            if(this.model.get('tasa_fija_moratorio_c') == null ||this.model.get('tasa_fija_moratorio_c') == "" || (Number(this.model.get('tasa_fija_moratorio_c'))<0 || Number(this.model.get('tasa_fija_moratorio_c'))>99.999999)){
-                //error
-                errors['tasa_fija_moratorio_c'] = errors['tasa_fija_moratorio_c'] || {};
-                errors['tasa_fija_moratorio_c'].required = true;
-            }
-    */
+            /*
+                console.log(this.model.get('tasa_fija_ordinario_c'));
+                console.log('tasa_fija_ordinario_c');
+                if(this.model.get('tasa_fija_ordinario_c') == null ||this.model.get('tasa_fija_ordinario_c') == "" || (Number(this.model.get('tasa_fija_ordinario_c'))<0 || Number(this.model.get('tasa_fija_ordinario_c'))>99.999999)){
+                    //error
+                    errors['tasa_fija_ordinario_c'] = errors['tasa_fija_ordinario_c'] || {};
+                    errors['tasa_fija_ordinario_c'].required = true;
+                }
+                if(this.model.get('tasa_fija_moratorio_c') == null ||this.model.get('tasa_fija_moratorio_c') == "" || (Number(this.model.get('tasa_fija_moratorio_c'))<0 || Number(this.model.get('tasa_fija_moratorio_c'))>99.999999)){
+                    //error
+                    errors['tasa_fija_moratorio_c'] = errors['tasa_fija_moratorio_c'] || {};
+                    errors['tasa_fija_moratorio_c'].required = true;
+                }
+        */
         }
         callback(null, fields, errors);
     },
@@ -958,21 +1078,35 @@
            app.api.call('GET', app.api.buildURL('Accounts/' + id_person ), null, {
                success: _.bind(function(data){
                    if(data!=null){
+                       //Obteniendo valores de lista
+                       var types=app.lang.getAppListStrings('tipo_registro_list');
+                       //Eliminando valores de Cliente y Prospecto
+                       delete types['Cliente'];
+                       delete  types['Prospecto']
 
-                       if(data.tipo_registro_c!=='Cliente') {
-
-                           app.alert.show("Cliente no v\u00E1lido", {
-                               level: "error",
-                               title: "No se puede asociar la operaci\u00F3n a una Persona que no sea de tipo Cliente",
-                               autoClose: false
-                           });
-
-                           app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente';
-                           errors['account_name'] = errors['account_name'] || {};
-                           errors['account_name'].custom_message1 = true;
-                           //this.cancelClicked();
-                           
+                       //arr_types mantiene los tipos de cuenta no permitidos
+                       var arr_types=[];
+                       for (var key in types) {
+                           if (types.hasOwnProperty(key)) {
+                               arr_types.push(types[key])
+                           }
                        }
+
+                       if($.inArray(data.tipo_registro_c,arr_types) != -1){
+
+                               app.alert.show("Cliente no v\u00E1lido", {
+                                   level: "error",
+                                   title: "No se puede asociar la operaci\u00F3n a una Cuenta de tipo: " +data.tipo_registro_c,
+                                   autoClose: false
+                               });
+
+                               app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
+                               errors['account_name'] = errors['account_name'] || {};
+                               errors['account_name'].custom_message1 = true;
+                               //this.cancelClicked();
+
+                       }
+
                    }
 
                    callback(null, fields, errors);
@@ -981,7 +1115,7 @@
            });
        }else{
 
-           app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente';
+           app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
            errors['account_name'] = errors['account_name'] || {};
            errors['account_name'].custom_message1 = true;
            errors['account_name'].required = true;
@@ -990,7 +1124,7 @@
        }
 
 
-   }, 
+   },
 
     calcularRI: function(){
 
@@ -1008,6 +1142,25 @@
         }
     },
 
+    ocultaFunc: function()
+    {
+  		_.each(this.fields,function(field)
+  		{
+  			$('[data-name="'+field.name+'"]').hide();
+  		});
+  		$('[data-name="name"]').show();
+  		$('[data-name="tct_etapa_ddw_c"]').show();
+  		$('[data-name="estatus_c"]').show();
+  		$('[data-name="idsolicitud_c"]').show();
+  		$('[data-name="account_name"]').show();
+  		$('[data-name="tipo_producto_c"]').show();
+  		$('[data-name="monto_c"]').show();
+  		$('[data-name="assigned_user_name"]').show();
+      $('[data-name="picture"]').show();
+		  //Ocultando el panel de Oportunidad perdida
+      $('div[data-panelname="LBL_RECORDVIEW_PANEL1"]').addClass('hide');
+    },
+
     /*
      validaDatosRequeridos: function(fields, errors, callback){
      console.log("Entro a validacion de mes");
@@ -1022,5 +1175,157 @@
 
     _dispose: function() {
         this._super('_dispose', []);
-    }
+    },
+
+    /*@Jesus Carrillo
+  Metodos que limitan el tipo moneda a 15 entetos y 2 decimales
+ */
+    checkmoney:function (evt) {
+        var enteros=this.checkmoneyint(evt);
+        var decimales=this.checkmoneydec(evt);
+        $.fn.selectRange = function(start, end) {
+            if(!end) end = start;
+            return this.each(function() {
+                if (this.setSelectionRange) {
+                    this.focus();
+                    this.setSelectionRange(start, end);
+                } else if (this.createTextRange) {
+                    var range = this.createTextRange();
+                    range.collapse(true);
+                    range.moveEnd('character', end);
+                    range.moveStart('character', start);
+                    range.select();
+                }
+            });
+        };//funcion para posicionar cursor
+
+        (function ($, undefined) {
+            $.fn.getCursorPosition = function() {
+                var el = $(this).get(0);
+                var pos = [];
+                if('selectionStart' in el) {
+                    pos = [el.selectionStart,el.selectionEnd];
+                } else if('selection' in document) {
+                    el.focus();
+                    var Sel = document.selection.createRange();
+                    var SelLength = document.selection.createRange().text.length;
+                    Sel.moveStart('character', -el.value.length);
+                    pos = Sel.text.length - SelLength;
+                }
+                return pos;
+            }
+        })(jQuery); //funcion para obtener cursor
+        var cursor=$(evt.handleObj.selector).getCursorPosition();//setear cursor
+
+
+            if (enteros == "false" && decimales == "false") {
+                if(cursor[0]==cursor[1]) {
+                    return false;
+                }
+            }else if (typeof enteros == "number" && decimales == "false") {
+               if (cursor[0] < enteros) {
+                    $(evt.handleObj.selector).selectRange(cursor[0], cursor[1]);
+               } else {
+                    $(evt.handleObj.selector).selectRange(enteros);
+               }
+            }
+
+    },
+
+    checkmoneyint: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var digitos = $input.val().split('.');
+        if($input.val().includes('.')) {
+            var justnum = /[\d]+/;
+        }else{
+            var justnum = /[\d.]+/;
+        }
+        var justint = /^[\d]{0,14}$/;
+
+        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return "false";
+        }
+
+        if(typeof digitos[0]!="undefined") {
+            if (justint.test(digitos[0]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
+                console.log('no se cumplen enteros')
+                if(!$input.val().includes('.')) {
+                    $input.val($input.val()+'.')
+                }
+                return "false";
+
+            } else {
+                return digitos[0].length;
+            }
+        }
+    },
+
+    checkmoneydec: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var digitos = $input.val().split('.');
+        if($input.val().includes('.')) {
+            var justnum = /[\d]+/;
+        }else{
+            var justnum = /[\d.]+/;
+        }
+        var justdec = /^[\d]{0,1}$/;
+
+        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return "false";
+        }
+        if(typeof digitos[1]!="undefined") {
+            if (justdec.test(digitos[1]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
+                console.log('no se cumplen dec')
+                return "false";
+            } else {
+                return "true";
+            }
+        }
+    },
+
+    formatcoin: function (evt){
+        if (!evt) return;
+         var $input = this.$(evt.currentTarget);
+         while ($input.val().indexOf(',') != -1){
+           $input.val($input.val().replace(',',''))
+         }
+    },
+
+    /*
+      Author: Adrian Arauz 2018-08-28
+      funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
+    */
+    _rolnocreacion: function() {
+        var roles_no_crea = app.lang.getAppListStrings('roles_no_crea_sol_list');
+        var roles_usuario = app.user.attributes.roles;
+        var puedecrear = i;
+        console.log ("Valida Rol de Usuario");
+        for(var i =0; i<roles_usuario.length; i++) {
+            for(var puedecrear in roles_no_crea){
+                if(roles_usuario[i]==roles_no_crea[puedecrear]) {
+                    app.alert.show("No_Rol_Solicitud", {
+                        level: "error",
+                        title: "No puedes generar una Solicitud ya que tienes un rol no permitido.",
+                        autoClose: false,
+                        return: false,
+                    });
+                    app.drawer.closeImmediately();
+                    //console.log("ok");
+                }
+            }
+        }
+    },
+
 })
