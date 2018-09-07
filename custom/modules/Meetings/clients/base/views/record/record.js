@@ -14,6 +14,7 @@
         this.on('render', this.disableparentsfields, this);
         this.model.on('sync', this.cambioFecha, this);
         this.model.on('sync', this.disablestatus, this);
+        this.model.on('sync', this.disableFieldsTime,this);
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
         this.model.on("change:status",_.bind(this.muestracampoResultado, this));
         //this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
@@ -197,10 +198,28 @@
 
         //this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
 
-        //Elimina ícono de lápiz para editar parent_name
+        //Elimina ícono de lápiz para editar parent_name*
         $('[data-name="parent_name"]').find('.fa-pencil').remove();
-
+        },
+    /*Victor Martinez López
+    * Duración y recordatorios no son editables cuando la reunión esta como realizada
+    * */
+    disableFieldsTime: function(){
+        $('.record-edit-link-wrapper[data-name=duration]').remove();
+        $('.record-edit-link-wrapper[data-name=reminders]').remove();
+        if (this.model.get('objetivo_c')=='' ){
+            this.$("[data-name='objetivo_c']").prop("enable", true);
+        }else {
+            $('.record-edit-link-wrapper[data-name=objetivo_c]').remove();
+        }
+        if(this.model.get('resultado_c')==''){
+            this.$("[data-name='resultado_c']").prop("enable", true);
+        }else{
+            $('.record-edit-link-wrapper[data-name=resultado_c]').remove();
+        }
     },
+
+
     /*@Jesus Carrillo
     Deshabilita campo status dependiendo de diferentes criterios
      */
