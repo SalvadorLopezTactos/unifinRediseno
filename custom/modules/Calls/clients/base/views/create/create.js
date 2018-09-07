@@ -7,6 +7,7 @@
         this._super("initialize", [options]);
         this.on('render', this.disableparentsfields, this);
         // this.on('render',this.disabledates,this);
+        this.on('render', this.noestatusedit, this);
 
         // this.model.on("change:date_start_date", _.bind(this.validaFecha, this));
         this.model.on("change:tct_conferencia_chk_c", _.bind(this.ocultaConferencia, this));
@@ -101,5 +102,11 @@
             this.model.set('tct_resultado_llamada_ddw_c',"Conferencia");            
             this.$('div[data-name="tct_calificacion_conferencia_c"]').hide();
         }
-    },    
+    },
+
+    //No permite editar el campo Estado al crear una nueva llamada.
+    //Adrian Arauz 6/09/2018
+    noestatusedit:function () {
+          $('span[data-name=status]').css("pointer-events", "none");
+    },
 })
