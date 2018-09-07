@@ -9,12 +9,11 @@
     initialize: function (options) {
             self = this;
             this._super("initialize", [options]);
-
             this.on('render',this.disableparentsfields,this);
             this.model.on('sync', this.cambioFecha, this);
             this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
             this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
-
+            this.model.addValidationTask('VaildaFecha', _.bind(this.VaildaFecha, this));
             /*@Jesus Carrillo
                 Funcion que pinta de color los paneles relacionados
             */
@@ -22,7 +21,7 @@
     },
 
     /**
-     * @author Salvador Lopez
+     * @author Salvador Lopez	
      * Se habilita handleEdit, editClicked y cancelClicked para dejar habilitado el campo parent_name y solo se bloquea al
      * dar click en el campo e intentar editar
     * */
@@ -87,10 +86,37 @@
         this.unsetContextAction();
     },
 
+    VaildaFecha: function(fields, errors, callback)
+    {
+        var startDate = new Date(this.model.get('date_start'));
+	var startMonth = startDate.getMonth() + 1;
+	var startDay = startDate.getDate();
+	var startYear = startDate.getFullYear();
+	var startDateText = startDay + "/" + startMonth + "/" + startYear;
+	var conferDate = new Date(this.model.get('tct_conferencia_fecha_dat_c'));
+	var conferMonth = conferDate.getMonth() + 1;
+	var conferDay = conferDate.getDate();
+	var conferYear = conferDate.getFullYear();
+	var conferDateText = conferDay + "/" + conferMonth + "/" + conferYear;
+        var startToDate = Date.parse(startDateText);
+        var inputToDate = Date.parse(conferDateText);
+	if(inputToDate < startToDate)
+    	{
+          app.alert.show("Fecha Incorrecta", {
+            level: "error",
+            title: "La fecha a contactar debe ser mayor a la fecha actual",
+            autoClose: false
+          });
+    	  errors['tct_conferencia_fecha_dat_c'] = "La fecha a contactar debe ser mayor a la fecha actual";
+          errors['tct_conferencia_fecha_dat_c'].required = true;
+        }
+    	callback(null, fields, errors);
+    },
+
     validaConferencia: function(fields, errors, callback)
     {
-        if(this.model.get('tct_conferencia_chk_c') && this.model.get('tct_calificacion_conferencia_c') === "")
-    	  {
+      if(this.model.get('tct_conferencia_chk_c') && this.model.get('tct_calificacion_conferencia_c') === "")
+    	{
           app.alert.show("Calificacion Requerida", {
             level: "error",
             title: "El campo Calificaci&oacuten de la Conferencia es requerido",
@@ -98,8 +124,8 @@
           });
     	    errors['tct_calificacion_conferencia_c'] = "El campo Calificaci&oacuten de la Conferencia es requerido";
           errors['tct_calificacion_conferencia_c'].required = true;
-        }
-    	  callback(null, fields, errors);
+      }
+    	callback(null, fields, errors);
     },
 
     /* @Salvador Lopez Y Adrian Arauz
@@ -109,7 +135,7 @@
 
         //this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
 
-        //Elimina Ã­cono de lÃ¡piz para editar parent_name
+        //Elimina ícono de lápiz para editar parent_name
         $('[data-name="parent_name"]').find('.fa-pencil').remove();
 
     },

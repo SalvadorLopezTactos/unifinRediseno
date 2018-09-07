@@ -613,10 +613,10 @@
 				{
 					app.alert.show("Solicitud existente", {
 						level: "error",
-						title: "No puede guardar la presolicitud, existe una abierta para el mismo cliente.",
+						title: "No es posible crear una Pre-solicitud cuando ya se encuentra una en proceso.",
 						autoClose: false
 					});	
-					app.error.errorName2Keys['custom_message'] = 'No puede guardar la presolicitud, existe una abierta para el mismo cliente';
+					app.error.errorName2Keys['custom_message'] = 'No es posible crear una Pre-solicitud cuando ya se encuentra una en proceso';
 					errors['account_name'] = errors['account_name'] || {};
 					errors['account_name'].custom_message = true;
 				}
