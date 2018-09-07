@@ -6,6 +6,7 @@
     events: {
         'click .record-edit-link-wrapper': 'handleEdit',
     },
+
     initialize: function (options) {
             self = this;
             this._super("initialize", [options]);
@@ -18,6 +19,42 @@
                 Funcion que pinta de color los paneles relacionados
             */
             this.model.on('sync', this.fulminantcolor, this);
+
+            this.model.on('sync', this.disablestatus1, this);
+    },
+
+    disablestatus1: function () {
+
+/*
+      var self = this;
+
+      var  fechaFinal = Date.parse(this.model.get("date_end"));
+      //  console.log("Fechas: Final" + fechaFinal);
+
+        var dateActual = new Date();
+        var hoy = Date.parse(dateActual);
+
+        //console.log(this.model.get("date_end"));
+        //console.log(dateActual);
+
+        console.log(hoy +"   " + fechaFinal);
+
+        if(hoy<fechaFinal)
+        {
+            alert("Bloquea campo porque au no se cumple la fecha ");
+             $('span[data-name=status]').css("pointer-events", "none");
+        }
+        else
+        {
+            $('span[data-name=status]').css("pointer-events", "auto");
+        }*/
+
+      if(Date.parse(this.model.get('date_end'))>Date.now()){
+            $('span[data-name=status]').css("pointer-events", "none");
+        }else{
+            $('span[data-name=status]').css("pointer-events", "auto");
+        }
+
     },
 
     /**
@@ -142,7 +179,7 @@
 
     cambioFecha: function () {
         this.fechaInicioTemp = Date.parse(this.model.get("date_start"));
-        console.log("Fechas: " + this.fechaInicioTemp);
+       // console.log("Fechas: " + this.fechaInicioTemp);
         //Coloca solo lectura el campo Conferencia
     		if(this.model.get('tct_conferencia_chk_c'))
       	{
