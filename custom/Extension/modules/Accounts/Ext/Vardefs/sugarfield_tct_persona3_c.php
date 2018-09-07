@@ -1,6 +1,6 @@
 <?php
- // created: 2018-06-25 10:58:00
-$dictionary['Account']['fields']['tct_persona3_c']['labelValue']='Persona 3';
-$dictionary['Account']['fields']['tct_persona3_c']['dependency']='and(equal($tipodepersona_c,"Persona Moral"),equal($tipo_registro_c,"Cliente"))';
+ // created: 2018-09-04 17:02:42
+$dictionary['Account']['fields']['tct_persona3_c']['labelValue']='Cuentas 3';
+$dictionary['Account']['fields']['tct_persona3_c']['dependency']='equal($tipodepersona_c,"Persona Moral")';
 
  ?>
