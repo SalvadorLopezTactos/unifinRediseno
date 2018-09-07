@@ -773,6 +773,7 @@
                             $('select.newMunicipioTemp').append($("<option>").val(list_municipios[i].idMunicipio).html(list_municipios[i].nameMunicipio));
                         }
 
+                        $('select.newColoniaTemp').append($("<option>").val("1").html("Seleccionar Colonia"));
                         for (var i = 0; i < list_colonias.length; i++) {
                             //paises_options +='<option value="' + list_paises[i].idPais + '" >' + list_paises[i].namePais + '</option>';
                             $('select.newColoniaTemp').append($("<option>").val(list_colonias[i].idColonia).html(list_colonias[i].nameColonia));
@@ -919,6 +920,8 @@
                             //$('select.existingMunicipioTemp').append($("<option>").val(list_municipios[i].idMunicipio).html(list_municipios[i].nameMunicipio));
                             $(self.cpEvt.target).parent().parent().next('tr').children().eq(0).find('select.existingMunicipioTemp').append($("<option>").val(list_municipios[i].idMunicipio).html(list_municipios[i].nameMunicipio));
                         }
+
+                        $(self.cpEvt.target).parent().parent().next('tr').children().eq(2).find('select.existingColoniaTemp').append($("<option>").val("1").html("Seleccionar Colonia"));;
 
                         for (var i = 0; i < list_colonias.length; i++) {
                             //paises_options +='<option value="' + list_paises[i].idPais + '" >' + list_paises[i].namePais + '</option>';
@@ -1466,6 +1469,16 @@
 
         } else {
             $('#postalInputTemp').css('border-color', '');
+
+        }
+
+        //Valida colonia
+        if ($('select.newColoniaTemp').val() == '1') {
+            errorMsg = 'Favor de seleccionar una colonia';
+            dirError = true; dirErrorCounter++;
+            $('select.newColoniaTemp').css('border-color', 'red');
+        } else {
+            $('select.newColoniaTemp').css('border-color', '');
 
         }
 
