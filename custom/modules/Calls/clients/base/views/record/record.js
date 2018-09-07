@@ -115,24 +115,6 @@
 
     validaConferencia: function(fields, errors, callback)
     {
-        var todayDate = new Date();
-        var todayToDate = Date.parse(todayDate);
-        var inputToDate = Date.parse(this.model.get('tct_conferencia_fecha_dat_c'));
-	      if(inputToDate < todayToDate)
-    	  {
-          app.alert.show("Fecha Incorrecta", {
-            level: "error",
-            title: "La fecha a contactar debe ser mayor a la fecha actual",
-            autoClose: false
-          });
-    	    errors['tct_conferencia_fecha_dat_c'] = "La fecha a contactar debe ser mayor a la fecha actual";
-          errors['tct_conferencia_fecha_dat_c'].required = true;
-        }
-    	  callback(null, fields, errors);
-    },
-
-    validaConferencia: function(fields, errors, callback)
-    {
       if(this.model.get('tct_conferencia_chk_c') && this.model.get('tct_calificacion_conferencia_c') === "")
     	{
           app.alert.show("Calificacion Requerida", {
