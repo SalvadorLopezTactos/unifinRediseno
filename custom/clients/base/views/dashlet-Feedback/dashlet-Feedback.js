@@ -84,7 +84,7 @@
 
                 if (data != "") {
 
-                    this.notificaciones_usr = data.records;
+                    self.notificaciones_usr = data.records;
 
                 }
                 this.render();
@@ -92,6 +92,47 @@
                 $('#states2').select2('val', tempUsr);
             }, self),
         });
+
+
+
+
+    },
+
+    setNotificationUsr: function () {
+
+        var self =this;
+
+        var tempUsr = $("#states2").val();
+        var comentario = this.$('.txtComent').val();
+        var notification = app.data.createBean('Notifications');
+
+        if(comentario!=""){
+            notification.set("description", comentario);
+            notification.set("assigned_user_id", tempUsr);
+            notification.set("name", 'FeedBack');
+            //notification.save();
+            notification.save(null,{
+                success:function() {
+               // alert("Prueba si entre");
+
+                    self.hideDivComment();
+                    self.getNotificationUsr();
+                },
+                error:function() {}
+            });
+
+            //this.hideDivComment();
+            //this.getNotificationUsr();
+        }
+        else {
+            //alert("Falta comentario");
+            app.alert.show('Error', {
+                level: 'error',
+                messages: 'Falta comentario',
+                autoClose: false
+            });
+            return;
+        }
 
 
     },
@@ -109,10 +150,14 @@
     getUserList: function () {
         self = this;
         $("#states2").val = "";
+        this.notificaciones_usr = "";
+
 
         var tempEquipo = $("#states3").val();
         var objUsers = this.listadoUsers;
         var arrayUsr = [];
+
+
 
         if (!_.isEmpty(objUsers)) {
             arrayUsr.push(
@@ -142,21 +187,6 @@
 
     },
 
-    setNotificationUsr: function () {
-
-        var tempUsr = $("#states2").val();
-        var comentario = this.$('.txtComent').val();
-        var notification = app.data.createBean('Notifications');
-
-        notification.set("description", comentario);
-        notification.set("assigned_user_id", tempUsr);
-        notification.set("name", 'FeedBack');
-        notification.save();
-        this.hideDivComment();
-        this.getNotificationUsr();
-
-    },
-
     selectOption: function (selectEquipo) {
         $('#states3').select2('val', selectEquipo);
         //$("#states3").val(selectEquipo);
@@ -176,13 +206,13 @@
         this.$('div[data-name=div-Comment]').hide();
     },
 
-    loadData: function (options) {
+   /* loadData: function (options) {
         if (_.isUndefined(this.model)) {
             return;
         }
 
         this.render();
-    }
+    } */
 
 
 })
