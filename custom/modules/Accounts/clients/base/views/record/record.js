@@ -1939,6 +1939,16 @@
                 $('.existingPostal').eq(index).css('border-color', '');
             }
         });
+
+        $('.existingColoniaTemp').each(function () {
+            if($(this).val()=='1'){
+                cont++;
+                $(this).css('border-color', 'red');
+            }else{
+                $(this).css('border-color', '');
+            }
+        });
+
         $('.existingCalle').each(function (index) {
             if($(this).val().trim()==''){
                 cont++;
@@ -1971,7 +1981,7 @@
             app.alert.show("empty_fields_dire", {
                 level: "error",
                 title: "Favor de llenar los campos se\u00F1alados.",
-                autoClose: true
+                autoClose: false
             });
             errors['dire_direccion'] = errors['dire_direccion'] || {};
             errors['dire_direccion'].required = true;

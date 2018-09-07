@@ -594,6 +594,16 @@
                     $(this).css('border-color', '');
                 }
             });
+
+            $('.existingColoniaTemp').each(function () {
+                if($(this).val()=='1'){
+                    cont++;
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+
             $('.existingCalle').each(function () {
                 if($(this).val().trim()==''){
                     cont++;
@@ -614,7 +624,7 @@
             if(cont>0){
                 app.alert.show('error_modultel', {
                     level: 'error',
-                    autoClose: true,
+                    autoClose: false,
                     messages: 'Favor de llenar los campos se\u00F1alados.'
                 });
             }
