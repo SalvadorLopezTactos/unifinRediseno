@@ -1089,6 +1089,9 @@
                         if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
                             falta = falta + '<b>Nombre Comercial<br></b>';
                         }
+                        if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
+                            falta = falta + '<b>Raz\u00F3n Social<br></b>';
+                        }
                         app.alert.show("Generar RFC", {
                             level: "error",
                             title: "Faltan los siguientes datos para poder generar el RFC: " + falta,
