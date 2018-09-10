@@ -74,7 +74,7 @@
         var country_list = app.metadata.getCountries();
         var tel_tipo_list_html = '',
             tel_estatus_list_html = '',
-            pais_list_html = '<option value="">Lada</option>';
+            pais_list_html = '';
         //dynamicly populate dropdown options based on language values
         for (var i = 0; i < tel_tipo_list.length; i++) {
             tel_tipo_list_html += '<option value="' + tel_tipo_list[i] + '">' + tel_tipo_list[i] + '</option>'
@@ -186,7 +186,7 @@
         var country_list = app.metadata.getCountries();
         var tel_tipo_list_html = '',
             tel_estatus_list_html = '',
-            pais_list_html = '<option value="">Lada</option>';
+            pais_list_html = '';
         //dynamicly populate dropdown options based on language values
         //for(var i=0;i<tel_tipo_list.length;i++){
         //    if(telefono.tipotelefono==tel_tipo_list[i]){
@@ -601,13 +601,13 @@
     _clearNewAddressField: function () {
         this._getNewEmailField()
             .val('');
-        $('.newPais').val('');
+        $('.newPais').val('52');
         $('.newPais').css('border-color', '');
         $('.newExtension').val('');
         $('.newExtension').css('border-color', '');
         $('.newTipotelefono').val('');
         $('.newTipotelefono').css('border-color', '');
-        $('.newEstatus').val('');
+        $('.newEstatus').val('Activo');
         $('.newEstatus').css('border-color', '');
         $('.newTelefono').css('border-color', '');
 
