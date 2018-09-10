@@ -841,8 +841,6 @@
 
                 else (necesarios != "")
                 {
-
-
                     console.log("Confirma necesarios");
                     app.alert.show("Generar CURP", {
                         level: "error",
@@ -1056,24 +1054,50 @@
                     && this.model.get('apellidopaterno_c') != null && this.model.get('apellidomaterno_c') != null) {
                     this._doValidateWSRFC();
                 } else {
-                    app.alert.show("Generar RFC", {
-                        level: "error",
-                        title: "Faltan datos para poder generar el RFC",
-                        autoClose: true
-                    });
-                }
-            } else {
-                if (this.model.get('razonsocial_c') != null && this.model.get('fechaconstitutiva_c') != null) {
-                    this._doValidateWSRFC();
-                } else {
-                    app.alert.show("Generar RFC", {
-                        level: "error",
-                        title: "Faltan datos para poder generar el RFC",
-                        autoClose: true
-                    });
+                    var faltantes = "";
+
+                    if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                        faltantes = faltantes + '<b>Fecha de Nacimiento<br></b>';
+                    }
+                    if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+                        faltantes = faltantes + '<b>Primer Nombre<br></b>';
+                    }
+                    if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+                        faltantes = faltantes + '<b>Apellido Paterno<br></b>';
+                    }
+                    if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                        faltantes = faltantes + '<b>Apellido Materno<br></b>';
+                    }
+
+                        else (faltantes != "")
+                        app.alert.show("Generar RFC", {
+                            level: "error",
+                            title: "Faltan los siguientes datos para poder generar el RFC: <br>" + faltantes,
+                            autoClose: true
+                        });
+                    }
+                  }
+            else
+                {
+                    if (this.model.get('razonsocial_c') != null && this.model.get('fechaconstitutiva_c') != null) {
+                        this._doValidateWSRFC();
+                    } else {
+                        var falta = "";
+                        if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
+                            falta = falta + '<b>Fecha Constitutiva<br></b>';
+                        }
+                        if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
+                            falta = falta + '<b>Nombre Comercial<br></b>';
+                        }
+                        app.alert.show("Generar RFC", {
+                            level: "error",
+                            title: "Faltan los siguientes datos para poder generar el RFC: " + falta,
+                            autoClose: true
+                        });
+                    }
                 }
             }
-        }
+
     },
 
     //No aceptar numeros, solo letras (a-z), puntos(.) y comas(,)
