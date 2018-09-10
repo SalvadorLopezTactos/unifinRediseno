@@ -33,19 +33,12 @@ array (
               ),
               2 => 
               array (
-                'name' => 'tipo_registro_c',
-                'label' => 'LBL_TIPO_REGISTRO',
+                'name' => 'tct_tipo_subtipo_txf_c',
+                'label' => 'LBL_TCT_TIPO_SUBTIPO_TXF',
                 'enabled' => true,
                 'default' => true,
               ),
               3 => 
-              array (
-                'name' => 'subtipo_cuenta_c',
-                'label' => 'LBL_SUBTIPO_CUENTA',
-                'enabled' => true,
-                'default' => true,
-              ),
-              4 => 
               array (
                 'name' => 'promotorleasing_c',
                 'label' => 'LBL_PROMOTORLEASING',
@@ -55,7 +48,7 @@ array (
                 'sortable' => false,
                 'default' => true,
               ),
-              5 => 
+              4 => 
               array (
                 'name' => 'promotorfactoraje_c',
                 'label' => 'LBL_PROMOTORFACTORAJE',
@@ -65,7 +58,7 @@ array (
                 'sortable' => false,
                 'default' => true,
               ),
-              6 => 
+              5 => 
               array (
                 'name' => 'promotorcredit_c',
                 'label' => 'LBL_PROMOTORCREDIT',
@@ -74,6 +67,20 @@ array (
                 'link' => true,
                 'sortable' => false,
                 'default' => true,
+              ),
+              6 => 
+              array (
+                'name' => 'subtipo_cuenta_c',
+                'label' => 'LBL_SUBTIPO_CUENTA',
+                'enabled' => true,
+                'default' => false,
+              ),
+              7 => 
+              array (
+                'name' => 'tipo_registro_c',
+                'label' => 'LBL_TIPO_REGISTRO',
+                'enabled' => true,
+                'default' => false,
               ),
             ),
           ),
