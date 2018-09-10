@@ -11,8 +11,8 @@ class Meetings_Hooks
     function RelationAdd($bean = null, $event = null, $args = null)
     {
 		global $db;
-		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $bean->date_entered != $bean->date_modified && $bean->description!="Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.")
-		{	
+		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $args['related_id'] != $bean->assigned_user_id && $bean->date_entered != $bean->date_modified && $bean->description!="Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.")
+		{
 			$query = <<<SQL
                 SELECT a.id, b.parent_meeting_c
                 FROM meetings a, meetings_cstm b
