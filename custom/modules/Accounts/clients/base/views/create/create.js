@@ -814,11 +814,42 @@
                     this.model.set('curp_c', '');
                 }
             } else {
-                app.alert.show("Generar CURP", {
-                    level: "error",
-                    title: "Faltan datos para poder generar el CURP",
-                    autoClose: false
-                });
+                var necesarios = "";  //Se habilita variable para concatenar campos faltantes para generar el CURP
+                //Adrian Arauz 10/09/2018
+                if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                    necesarios = necesarios + '<b><br>Fecha de Nacimiento<br></b>';
+                }
+                if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
+                    necesarios = necesarios + '<b><br>G\u00E9nero</b>';
+                }
+                if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+                    necesarios = necesarios + '<b><br>Primer Nombre</b>';
+                }
+                if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+                    necesarios = necesarios + '<b><br>Apellido Paterno</b>';
+                }
+                if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                    necesarios = necesarios + '<b><br>Apellido Materno</b>';
+                }
+                if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
+                    necesarios = necesarios + '<b><br>Pa\u00EDs de Nacimiento</b>';
+                }
+
+                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
+                    necesarios = necesarios + '<b><br>Estado de Nacimiento</b>';
+                }
+
+                else (necesarios != "")
+                {
+
+
+                    console.log("Confirma necesarios");
+                    app.alert.show("Generar CURP", {
+                        level: "error",
+                        title: "Faltan los siguientes datos para poder generar el CURP: " + necesarios,
+                        autoClose: false
+                    });
+                }
             }
         }
     },
