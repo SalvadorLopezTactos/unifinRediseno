@@ -405,8 +405,11 @@
                 if (data != "") {
                     var titulo = "Campos Requeridos en Cuentas";
                     var nivel = "error";
-                    var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br> " + data;
-
+                    if(this.multiSearchOr(data, ["Cuenta 1"])=='1'){
+                        var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br> " + data +"</b></b><br><br>(Cuenta 1 se encuentra en el <b>Cuestionario PLD</b>:<br><b>Propietario real > Cuenta 1</b>)" ;
+                    }else {
+                        var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br> " + data;
+                    }
 
                     app.error.errorName2Keys['custom_message1'] = 'Falta tipo y subtipo de cuenta';
                     errors['account_name'] = errors['account_name'] || {};
@@ -424,6 +427,15 @@
                 callback(null, fields, errors);
             }
       },
+
+    //@Jesus Carrillo, metodo que busca las palabras dadas
+    multiSearchOr: function(text, searchWords){
+        var regex = searchWords
+            .map(word => "(?=.*\\b" + word + "\\b)")
+            .join('');
+        var searchExp = new RegExp(regex, "gi");
+        return (searchExp.test(text))? "1" : "0";
+    },
 
 	delegateButtonEvents: function () {
 			this._super("delegateButtonEvents");
