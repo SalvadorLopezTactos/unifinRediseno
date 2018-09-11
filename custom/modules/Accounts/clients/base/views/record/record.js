@@ -17,6 +17,7 @@
         this.duplicadosRFC = 0;
         this.totalllamadas = 0;
         this.totalreuniones = 0;
+        this.flagheld=0;
 
         //add validation tasks
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
@@ -132,8 +133,8 @@
         this.model.on('sync', this._render, this);
 
         //Recupera llamadas y reuniones asociadas al cliente
-        this.model.on('sync', this.getllamadas, this);
-        this.model.on('sync', this.getreuniones, this);
+        //this.model.on('sync', this.getllamadas, this);
+        //this.model.on('sync', this.getreuniones, this);
         this.model.on('sync', this.hideconfiinfo, this);
 
         /*@Jesus Carrillo
@@ -522,7 +523,8 @@
 
         this.hideButtonLeadNoViable();
 
-
+        //this.getreuniones();
+        //this.getllamadas();
 
     },
 
@@ -977,7 +979,7 @@
      */
 
     //CAMBIOS EFECTUADOS
-    getllamadas:function () {
+        getllamadas:function (callback) {
         var cday = new Date();
         var llamadas=0;
         self=this;
@@ -994,14 +996,17 @@
                         }
                     }
                 }
-                this.totalllamadas=llamadas;
+                self.flagheld++;
+                callback(llamadas,null,self);
+             //This.totalllamadas=llamadas;
+             //return llamadas;
             },this)
         });
     },
     /* @Jesus Carrillo
         Metodo para verificar  las reuniones de la cuenta
      */
-    getreuniones:function () {
+    getreuniones:function (callBackResult) {
         var cday = new Date();
         var reuniones=0;
         self=this;
@@ -1017,7 +1022,10 @@
                         }
                     }
                 }
-                this.totalreuniones=reuniones;
+                //this.totalreuniones=reuniones;
+                //return reuniones;
+                self.flagheld++;
+                callBackResult(null,reuniones,self);
             },this)
         });
     },
@@ -1131,7 +1139,7 @@
         */
     prospectocontactadoClicked:function(){
         self=this;
-
+        self.flagheld=0;
         if(this.model.get('id')!="") { //en lugar de self es this
             app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
                 success: _.bind(function (data) {
@@ -1160,13 +1168,24 @@
                         usuario=="8"||
                         usuario=="14"||
                         usuario=="21"
-                       //|| usuario=="18" //Ajuste para poder trabajar con la cuenta de Wendy
+                       || usuario=="18" //Ajuste para poder trabajar con la cuenta de Wendy
                     )
 
                     {
                        //Valida llamadas y reuniones
                        var valRelacionados = 0;
-                        if(self.totalllamadas==0 && self.totalreuniones==0){
+                       //self.getllamadas();
+                       //self.getreuniones();
+
+                        app.alert.show('loadcontactado', {
+                            level: 'process',
+                        });
+                       self.getllamadas(this.resultCallback);
+                        self.getreuniones(this.resultCallback);
+
+                       /*
+
+                        if(this.totalllamadas==0 && self.totalreuniones==0){
                             app.alert.show('alert_calls', {
                                 level: 'error',
                                 messages: 'El proceso de conversi\u00F3n requiere que la cuenta contenga una <b>llamada</b> o <b>reuni\u00F3n</b> con estado <b>Realizada</b> y con fecha al d\u00EDa de hoy o anterior.',
@@ -1177,6 +1196,7 @@
                         //Valida datos de cuenta
                         var valContacto = self.validaContactado();
                         self.validar_fields(valContacto, valRelacionados);
+                        */
 
                     }
                     else {
@@ -1193,6 +1213,37 @@
 
         console.log("valor fuera " + this.model.get('id'));
     },
+
+      resultCallback:function(resultLlamadas,resultReuniones,context) {
+          self=context;
+          var valRelacionados = 0;
+          if (resultLlamadas != null) {
+              self.totalllamadas = resultLlamadas;
+
+          }
+          if (resultReuniones != null) {
+              self.totalreuniones = resultReuniones;
+
+          }
+
+         // if (self.totalllamadas != undefined && self.totalreuniones != undefined) {
+          if (self.flagheld>=2) {
+              if (self.totalllamadas == 0 && self.totalreuniones == 0) {
+                  app.alert.show('alert_calls', {
+                      level: 'error',
+                      messages: 'El proceso de conversi\u00F3n requiere que la cuenta contenga una <b>llamada</b> o <b>reuni\u00F3n</b> con estado <b>Realizada</b> y con fecha al d\u00EDa de hoy o anterior.',
+                  });
+                  valRelacionados = 1;
+              }
+
+              //Valida datos de cuenta
+              var valContacto = self.validaContactado();
+              self.validar_fields(valContacto, valRelacionados);
+              app.alert.dismiss('loadcontactado');
+
+          }
+
+      },
 
 
       //Validación para que los campos contengan informacion para poder convertir de LEAD a Prospecto/Contactado. Adrian Arauz 15/08/2018
