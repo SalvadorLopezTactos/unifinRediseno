@@ -34,7 +34,14 @@ array (
             'fields' => 
             array (
               0 => 'name',
-              1 => 
+              1 => 'status',
+              2 => 
+              array (
+                'name' => 'location',
+                'comment' => 'Meeting location',
+                'label' => 'LBL_LOCATION',
+              ),
+              3 => 
               array (
                 'name' => 'date',
                 'type' => 'fieldset',
@@ -58,8 +65,7 @@ array (
                   ),
                 ),
               ),
-              2 => 'status',
-              3 => 
+              4 => 
               array (
                 'name' => 'reminder',
                 'type' => 'fieldset',
@@ -84,7 +90,7 @@ array (
                   ),
                 ),
               ),
-              4 => 
+              5 => 
               array (
                 'name' => 'email_reminder',
                 'type' => 'fieldset',
@@ -109,15 +115,9 @@ array (
                   ),
                 ),
               ),
-              5 => 'description',
-              6 => 'parent_name',
-              7 => 'assigned_user_name',
-              8 => 
-              array (
-                'name' => 'location',
-                'comment' => 'Meeting location',
-                'label' => 'LBL_LOCATION',
-              ),
+              6 => 'description',
+              7 => 'parent_name',
+              8 => 'assigned_user_name',
               9 => 
               array (
                 'name' => 'check_in_address_c',
