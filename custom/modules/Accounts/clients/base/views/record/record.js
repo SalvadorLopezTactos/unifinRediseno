@@ -720,7 +720,7 @@
 
     _doGeneraCURP: function () {
         if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-            //Valida que se tenga la información requerida para generar la CURP
+            //Valida que se tenga la informaci�n requerida para generar la CURP
             if (this.model.get('fechadenacimiento_c') != null && this.model.get('genero_c') != null && this.model.get('genero_c') != ''
                 && this.model.get('primernombre_c') != null && this.model.get('apellidopaterno_c') != null && this.model.get('apellidomaterno_c') != null
                 && this.model.get('pais_nacimiento_c') != null && this.model.get('estado_nacimiento_c') != null) {
@@ -747,11 +747,40 @@
                     this.model.set('curp_c', '');
                 }
             } else {
-                app.alert.show("Generar CURP", {
-                    level: "error",
-                    title: "Faltan datos para poder generar el CURP",
-                    autoClose: false
-                });
+                var necesarios = "";  //Se habilita variable para concatenar campos faltantes para generar el CURP
+                //Adrian Arauz 10/09/2018
+                if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                    necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
+                }
+                if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
+                    necesarios = necesarios + '<b>G\u00E9nero</b><br>';
+                }
+                if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+                    necesarios = necesarios + '<b>Primer Nombre</b><br>';
+                }
+                if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+                    necesarios = necesarios + '<b>Apellido Paterno</b><br>';
+                }
+                if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                    necesarios = necesarios + '<b>Apellido Materno</b><br>';
+                }
+                if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
+                    necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
+                }
+
+                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
+                    necesarios = necesarios + '<b>Estado de Nacimiento</b><br>';
+                }
+
+                else (necesarios != "")
+                {
+                    console.log("Confirma necesarios");
+                    app.alert.show("Generar CURP", {
+                        level: "error",
+                        title: "Faltan los siguientes datos para poder generar el CURP: <br>" + necesarios,
+                        autoClose: false
+                    });
+                }
             }
         }
     },
