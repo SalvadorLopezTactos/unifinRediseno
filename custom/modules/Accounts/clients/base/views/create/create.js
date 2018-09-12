@@ -271,8 +271,7 @@
          */
         this.model.on('change:tct_inst_monetario_c', this.changeInstMonetario, this);
 
-        this.events['keydown input[name=primernombre_c]'] = 'chec' +
-            'kTextOnly';
+        this.events['keydown input[name=primernombre_c]'] = 'checkTextOnly';
         this.events['keydown input[name=segundonombre_c]'] = 'checkTextOnly';
         this.events['keydown input[name=apellidomaterno_c]'] = 'checkTextOnly';
         this.events['keydown input[name=apellidopaterno_c]'] = 'checkTextOnly';
@@ -572,8 +571,8 @@
             });
 
         if(cont>0){
-                errors['exisntigtelefono'] = errors['exisntigtelefono'] || {};
-                errors['exisntigtelefono'].required = true;
+                errors['existingtelefono'] = errors['existingtelefono'] || {};
+                errors['existingtelefono'].required = true;
                 app.alert.show('error_modultel', {
                     level: 'error',
                     autoClose: true,
