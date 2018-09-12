@@ -42,8 +42,8 @@ array (
                   'wireless_edit_only' => true,
                 ),
               ),
-              1 => 'date_start',
-              2 => 'status',
+              1 => 'status',
+              2 => 'date_start',
               3 => 
               array (
                 'name' => 'duration',

@@ -824,11 +824,40 @@
                     this.model.set('curp_c', '');
                 }
             } else {
-                app.alert.show("Generar CURP", {
-                    level: "error",
-                    title: "Faltan datos para poder generar el CURP",
-                    autoClose: false
-                });
+                var necesarios = "";  //Se habilita variable para concatenar campos faltantes para generar el CURP
+                //Adrian Arauz 10/09/2018
+                if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                    necesarios = necesarios + '<b><br>Fecha de Nacimiento<br></b>';
+                }
+                if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
+                    necesarios = necesarios + '<b><br>G\u00E9nero</b>';
+                }
+                if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+                    necesarios = necesarios + '<b><br>Primer Nombre</b>';
+                }
+                if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+                    necesarios = necesarios + '<b><br>Apellido Paterno</b>';
+                }
+                if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                    necesarios = necesarios + '<b><br>Apellido Materno</b>';
+                }
+                if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
+                    necesarios = necesarios + '<b><br>Pa\u00EDs de Nacimiento</b>';
+                }
+
+                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
+                    necesarios = necesarios + '<b><br>Estado de Nacimiento</b>';
+                }
+
+                else (necesarios != "")
+                {
+                    console.log("Confirma necesarios");
+                    app.alert.show("Generar CURP", {
+                        level: "error",
+                        title: "Faltan los siguientes datos para poder generar el CURP: <br>" + necesarios,
+                        autoClose: false
+                    });
+                }
             }
         }
     },
@@ -1035,24 +1064,54 @@
                     && this.model.get('apellidopaterno_c') != null && this.model.get('apellidomaterno_c') != null) {
                     this._doValidateWSRFC();
                 } else {
-                    app.alert.show("Generar RFC", {
-                        level: "error",
-                        title: "Faltan datos para poder generar el RFC",
-                        autoClose: true
-                    });
-                }
-            } else {
-                if (this.model.get('razonsocial_c') != null && this.model.get('fechaconstitutiva_c') != null) {
-                    this._doValidateWSRFC();
-                } else {
-                    app.alert.show("Generar RFC", {
-                        level: "error",
-                        title: "Faltan datos para poder generar el RFC",
-                        autoClose: true
-                    });
+                    var faltantes = "";
+                    console.log('Valida campos para RFC');
+                    if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                        faltantes = faltantes + '<b>Fecha de Nacimiento<br></b>';
+                    }
+                    if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+                        faltantes = faltantes + '<b>Primer Nombre<br></b>';
+                    }
+                    if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+                        faltantes = faltantes + '<b>Apellido Paterno<br></b>';
+                    }
+                    if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                        faltantes = faltantes + '<b>Apellido Materno<br></b>';
+                    }
+
+                        else (faltantes != "")
+                        app.alert.show("Generar RFC", {
+                            level: "error",
+                            title: "Faltan los siguientes datos para poder generar el RFC: <br>" + faltantes,
+                            autoClose: true
+                        });
+                    }
+                  }
+            else
+                {
+                    if ((this.model.get('razonsocial_c') != null && this.model.get('razonsocial_c')!="") && (this.model.get('fechaconstitutiva_c') != null && this.model.get('fechaconstitutiva_c') !="" )) {
+                        this._doValidateWSRFC();
+                    } else {
+                        var falta = "";
+                        console.log('Entra P Moral RFC');
+                        if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
+                            falta = falta + '<b>Fecha Constitutiva<br></b>';
+                        }
+                        /*if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
+                            falta = falta + '<b>Nombre Comercial<br></b>';
+                        }*/
+                        if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
+                            falta = falta + '<b>Raz\u00F3n Social<br></b>';
+                        }
+                        app.alert.show("Generar RFC", {
+                            level: "error",
+                            title: "Faltan los siguientes datos para poder generar el RFC: <br>" + falta,
+                            autoClose: true
+                        });
+                    }
                 }
             }
-        }
+
     },
 
     //No aceptar numeros, solo letras (a-z), puntos(.) y comas(,)
