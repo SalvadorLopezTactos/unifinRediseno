@@ -42,10 +42,9 @@ array (
                   'wireless_edit_only' => true,
                 ),
               ),
-              1 => 'date_start',
-              2 => 'direction',
-              3 => 'status',
-              4 => 
+              1 => 'status',
+              2 => 'date_start',
+              3 => 
               array (
                 'name' => 'duration',
                 'type' => 'fieldset',
@@ -80,6 +79,7 @@ array (
                   ),
                 ),
               ),
+              4 => 'direction',
               5 => 'description',
               6 => 'parent_name',
               7 => 'assigned_user_name',

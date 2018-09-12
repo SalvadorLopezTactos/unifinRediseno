@@ -34,7 +34,8 @@ array (
             'fields' => 
             array (
               0 => 'name',
-              1 => 
+              1 => 'status',
+              2 => 
               array (
                 'name' => 'date',
                 'type' => 'fieldset',
@@ -58,46 +59,7 @@ array (
                   ),
                 ),
               ),
-              2 => 
-              array (
-                'name' => 'tct_related_person_txf_c',
-                'label' => 'LBL_TCT_RELATED_PERSON_TXF',
-                'css_class' => 'related_person',
-              ),
-              3 => 'direction',
-              4 => 'status',
-              5 => 
-              array (
-                'name' => 'tct_resultado_llamada_ddw_c',
-                'label' => 'LBL_TCT_RESULTADO_LLAMADA_DDW',
-              ),
-              6 => 
-              array (
-                'name' => 'tct_motivo_ilocalizable_ddw_c',
-                'label' => 'LBL_TCT_MOTIVO_ILOCALIZABLE_DDW',
-              ),
-              7 => 
-              array (
-                'name' => 'tct_fecha_cita_dat_c',
-                'label' => 'LBL_TCT_FECHA_CITA_DAT',
-              ),
-              8 => 
-              array (
-                'name' => 'tct_usuario_cita_rel_c',
-                'studio' => 'visible',
-                'label' => 'LBL_TCT_USUARIO_CITA_REL',
-              ),
-              9 => 
-              array (
-                'name' => 'tct_fecha_seguimiento_dat_c',
-                'label' => 'LBL_TCT_FECHA_SEGUIMIENTO_DAT',
-              ),
-              10 => 
-              array (
-                'name' => 'tct_motivo_desinteres_ddw_c',
-                'label' => 'LBL_TCT_MOTIVO_DESINTERES_DDW',
-              ),
-              11 => 
+              3 => 
               array (
                 'name' => 'reminder',
                 'type' => 'fieldset',
@@ -122,7 +84,7 @@ array (
                   ),
                 ),
               ),
-              12 => 
+              4 => 
               array (
                 'name' => 'email_reminder',
                 'type' => 'fieldset',
@@ -147,9 +109,47 @@ array (
                   ),
                 ),
               ),
-              13 => 'description',
-              14 => 'parent_name',
-              15 => 'assigned_user_name',
+              5 => 'direction',
+              6 => 'description',
+              7 => 
+              array (
+                'name' => 'tct_related_person_txf_c',
+                'label' => 'LBL_TCT_RELATED_PERSON_TXF',
+                'css_class' => 'related_person',
+              ),
+              8 => 'assigned_user_name',
+              9 => 
+              array (
+                'name' => 'tct_resultado_llamada_ddw_c',
+                'label' => 'LBL_TCT_RESULTADO_LLAMADA_DDW',
+              ),
+              10 => 
+              array (
+                'name' => 'tct_motivo_ilocalizable_ddw_c',
+                'label' => 'LBL_TCT_MOTIVO_ILOCALIZABLE_DDW',
+              ),
+              11 => 
+              array (
+                'name' => 'tct_fecha_cita_dat_c',
+                'label' => 'LBL_TCT_FECHA_CITA_DAT',
+              ),
+              12 => 
+              array (
+                'name' => 'tct_usuario_cita_rel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_USUARIO_CITA_REL',
+              ),
+              13 => 
+              array (
+                'name' => 'tct_fecha_seguimiento_dat_c',
+                'label' => 'LBL_TCT_FECHA_SEGUIMIENTO_DAT',
+              ),
+              14 => 
+              array (
+                'name' => 'tct_motivo_desinteres_ddw_c',
+                'label' => 'LBL_TCT_MOTIVO_DESINTERES_DDW',
+              ),
+              15 => 'parent_name',
             ),
           ),
         ),
