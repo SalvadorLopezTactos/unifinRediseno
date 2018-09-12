@@ -75,7 +75,7 @@ class GetNotifications extends SugarApi
           left join users u2 on n.assigned_user_id = u2.id
           left join users_cstm uc on u2.id = uc.id_c
           where n.name like 'FeedBack%' ";
-        if ($id != 1) {
+        if ($id != '1') {
             $query .= "and n.assigned_user_id='{$id}'";
         }
         $query .= "order by n.date_entered desc limit {$limit};";
