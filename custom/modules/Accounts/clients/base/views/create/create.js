@@ -11,6 +11,9 @@
      *
      * @override
      */
+
+
+
     handleCancel: function () {
         var account_telefonos = this.model._previousAttributes.account_telefonos;
         var account_direcciones = this.model._previousAttributes.account_direcciones;
@@ -203,8 +206,8 @@
         //add validation tasks
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         //@Jesus Carrillo
-        this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonos, this));
-        this.model.addValidationTask('check_direcciones', _.bind(this.validadirecc, this));
+        this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonosexisting, this));
+        this.model.addValidationTask('check_direcciones', _.bind(this.validadireccexisting, this));
         this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
         this.model.on('change:pais_nacimiento_c', this.validaExtranjerosRFC, this);
         //this.model.on('change:rfc_c',this.validaFechaNacimientoDesdeRFC, this);
@@ -268,7 +271,8 @@
          */
         this.model.on('change:tct_inst_monetario_c', this.changeInstMonetario, this);
 
-        this.events['keydown input[name=primernombre_c]'] = 'checkTextOnly';
+        this.events['keydown input[name=primernombre_c]'] = 'chec' +
+            'kTextOnly';
         this.events['keydown input[name=segundonombre_c]'] = 'checkTextOnly';
         this.events['keydown input[name=apellidomaterno_c]'] = 'checkTextOnly';
         this.events['keydown input[name=apellidopaterno_c]'] = 'checkTextOnly';
@@ -278,6 +282,8 @@
 
         this.events['click a[name=generar_rfc_c]'] = '_doGenera_RFC_CURP';
         this.events['click a[name=generar_curp_c]'] = '_doGeneraCURP';
+
+
 
 
         /* hay que traer el campo del usaurio
@@ -527,8 +533,8 @@
         callback(null, fields, errors);
     },
 
-    //@Jesus Carrillo
-    validatelefonos: function (fields, errors, callback) {
+//@Jesus Carrillo
+    validatelefonosexisting: function (fields, errors, callback) {
         var expreg =/^[0-9]{8,10}$/;
         var cont=0;
 
@@ -566,6 +572,8 @@
             });
 
         if(cont>0){
+                errors['exisntigtelefono'] = errors['exisntigtelefono'] || {};
+                errors['exisntigtelefono'].required = true;
                 app.alert.show('error_modultel', {
                     level: 'error',
                     autoClose: true,
@@ -575,7 +583,7 @@
         callback(null, fields, errors);
     },
 
-    validadirecc: function (fields, errors, callback) {
+    validadireccexisting: function (fields, errors, callback) {
             var cont=0;
 
             $('.existingIndicador').each(function (index) {
@@ -622,7 +630,9 @@
             });
 
             if(cont>0){
-                app.alert.show('error_modultel', {
+                errors['existingdirec'] = errors['existingdirec'] || {};
+                errors['existingdirec'].required = true;
+                app.alert.show('error_moduldirec', {
                     level: 'error',
                     autoClose: false,
                     messages: 'Favor de llenar los campos se\u00F1alados.'

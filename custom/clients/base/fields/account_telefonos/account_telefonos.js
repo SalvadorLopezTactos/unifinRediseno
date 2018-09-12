@@ -254,10 +254,17 @@
     addNewTelefono: function (evt) {
         if (!evt) return;
         /*@Jesus Carrillo */
+
+
         var expreg =/^[0-9]{8,10}$/;
 
         if(this.$('.newTipotelefono').val()!='' && this.$('.newPais').val()!='' && expreg.test(this.$('.newTelefono').val()) &&
             this.$('.newEstatus').val()!='') {
+
+            $('[data-name=account_telefonos]').removeClass("error");
+            $('[data-name=account_telefonos]').find('.input-append').removeClass("error");
+            $('[data-name=account_telefonos]').find('span.error-tooltip.add-on').hide();
+
             var telefono = this.$(evt.currentTarget).val() || this.$('.newTelefono').val(),
                 currentValue,
                 telefonoFieldHtml,
