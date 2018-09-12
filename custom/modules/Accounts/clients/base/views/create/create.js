@@ -210,6 +210,10 @@
         //this.model.on('change:rfc_c',this.validaFechaNacimientoDesdeRFC, this);
         this.model.on('change:account_telefonos', this.setPhoneOffice, this);
 
+        //Se mete expresion regular para limitar el funcionamiento del campo email .
+        //Adrian Arauz 12-/09/2018
+        this.model.on("change:email", _.bind(this.expmail, this));
+
 
         /*
          AF: 11/01/18
@@ -817,26 +821,26 @@
                 var necesarios = "";  //Se habilita variable para concatenar campos faltantes para generar el CURP
                 //Adrian Arauz 10/09/2018
                 if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
-                    necesarios = necesarios + '<b><br>Fecha de Nacimiento<br></b>';
+                    necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
                 }
                 if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
-                    necesarios = necesarios + '<b><br>G\u00E9nero</b>';
+                    necesarios = necesarios + '<b>G\u00E9nero</b><br>';
                 }
                 if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
-                    necesarios = necesarios + '<b><br>Primer Nombre</b>';
+                    necesarios = necesarios + '<b>Primer Nombre</b><br>';
                 }
                 if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
-                    necesarios = necesarios + '<b><br>Apellido Paterno</b>';
+                    necesarios = necesarios + '<b>Apellido Paterno</b><br>';
                 }
                 if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
-                    necesarios = necesarios + '<b><br>Apellido Materno</b>';
+                    necesarios = necesarios + '<b>Apellido Materno</b><br>';
                 }
                 if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
-                    necesarios = necesarios + '<b><br>Pa\u00EDs de Nacimiento</b>';
+                    necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                 }
 
                 if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
-                    necesarios = necesarios + '<b><br>Estado de Nacimiento</b>';
+                    necesarios = necesarios + '<b>Estado de Nacimiento</b><br>';
                 }
 
                 else (necesarios != "")
@@ -1362,4 +1366,29 @@
         }
         callback(null, fields, errors);
     },
+
+    expmail: function (evt){
+        if (this.model.get('email') != null && this.model.get('email') !="") {
+            if (!evt) return;
+            console.log('valida correo');
+            //var $input = this.$(evt.currentTarget);
+            var expresion = /[Za-z]\S+@[Za-z]+.[Za-z]{3}\S+.[Za-z]{2}/;
+            return false;
+        }
+            else((expresion.test(evt.key))==false)
+        {
+            app.alert.show('Error al validar email', {
+                level: 'error',
+                autoClose: true,
+                messages: 'Formato de email incorrecto.'
+            });
+
+        }
+        console.log ('fin validacion');
+        return false;
+
+    },
+
+
+
 })
