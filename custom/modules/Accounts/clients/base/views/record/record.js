@@ -17,7 +17,6 @@
         this.duplicadosRFC = 0;
         this.totalllamadas = 0;
         this.totalreuniones = 0;
-        this.flagheld=0;
 
         //add validation tasks
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
@@ -133,8 +132,8 @@
         this.model.on('sync', this._render, this);
 
         //Recupera llamadas y reuniones asociadas al cliente
-        //this.model.on('sync', this.getllamadas, this);
-        //this.model.on('sync', this.getreuniones, this);
+        this.model.on('sync', this.getllamadas, this);
+        this.model.on('sync', this.getreuniones, this);
         this.model.on('sync', this.hideconfiinfo, this);
 
         /*@Jesus Carrillo
@@ -523,8 +522,7 @@
 
         this.hideButtonLeadNoViable();
 
-        //this.getreuniones();
-        //this.getllamadas();
+
 
     },
 
@@ -747,48 +745,103 @@
                     this.model.set('curp_c', '');
                 }
             } else {
+                var necesarios = "";  //Se habilita variable para concatenar campos faltantes para generar el CURP
+                //Adrian Arauz 10/09/2018
+                if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                    necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
+                }
+                if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
+                    necesarios = necesarios + '<b>G\u00E9nero</b><br>';
+                }
+                if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+                    necesarios = necesarios + '<b>Primer Nombre</b><br>';
+                }
+                if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+                    necesarios = necesarios + '<b>Apellido Paterno</b><br>';
+                }
+                if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                    necesarios = necesarios + '<b>Apellido Materno</b><br>';
+                }
+                if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
+                    necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
+                }
+
+                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
+                    necesarios = necesarios + '<b>Estado de Nacimiento</b><br>';
+                }
+                else (necesarios != "")
                 app.alert.show("Generar CURP", {
                     level: "error",
-                    title: "Faltan datos para poder generar el CURP",
+                    title: "Faltan los siguientes datos para poder generar el CURP: <br>" + necesarios,
                     autoClose: false
                 });
             }
         }
     },
 
-    _doGenera_RFC_CURP: function () {
-        if (this.model.get('pais_nacimiento_c') != 2 && this.model.get('pais_nacimiento_c') != '' && this.model.get('pais_nacimiento_c') != null
-            && (this.model.get('tipo_registro_c') != 'Prospecto' || this.model.get('estatus_c') != 'Interesado')) {
-            if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                this.model.set('rfc_c', 'XXXX010101XXX');
-            } else {
-                this.model.set('rfc_c', 'XXX010101XXX');
-            }
-        } else {
-            if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                if (this.model.get('fechadenacimiento_c') != null && this.model.get('fechadenacimiento_c') != '' && this.model.get('primernombre_c') != null
-                    && this.model.get('apellidopaterno_c') != null && this.model.get('apellidomaterno_c') != null) {
-                    this._doValidateWSRFC();
-                } else {
-                    app.alert.show("Generar RFC", {
-                        level: "error",
-                        title: "Faltan datos para poder generar el RFC",
-                        autoClose: true
-                    });
-                }
-            } else {
-                if (this.model.get('razonsocial_c') != null && this.model.get('fechaconstitutiva_c') != null) {
-                    this._doValidateWSRFC();
-                } else {
-                    app.alert.show("Generar RFC", {
-                        level: "error",
-                        title: "Faltan datos para poder generar el RFC",
-                        autoClose: true
-                    });
-                }
-            }
-        }
-    },
+      _doGenera_RFC_CURP: function () {
+          if (this.model.get('pais_nacimiento_c') != 2 && this.model.get('pais_nacimiento_c') != '' && this.model.get('pais_nacimiento_c') != null
+              && (this.model.get('tipo_registro_c') != 'Prospecto' || this.model.get('estatus_c') != 'Interesado')) {
+              if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+                  this.model.set('rfc_c', 'XXXX010101XXX');
+              } else {
+                  this.model.set('rfc_c', 'XXX010101XXX');
+              }
+          } else {
+              if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+                  if (this.model.get('fechadenacimiento_c') != null && this.model.get('fechadenacimiento_c') != '' && this.model.get('primernombre_c') != null
+                      && this.model.get('apellidopaterno_c') != null && this.model.get('apellidomaterno_c') != null) {
+                      this._doValidateWSRFC();
+                  } else {
+                      var faltantes = "";
+                      console.log('Valida campos para RFC');
+                      if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                          faltantes = faltantes + '<b>Fecha de Nacimiento<br></b>';
+                      }
+                      if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+                          faltantes = faltantes + '<b>Primer Nombre<br></b>';
+                      }
+                      if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+                          faltantes = faltantes + '<b>Apellido Paterno<br></b>';
+                      }
+                      if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                          faltantes = faltantes + '<b>Apellido Materno<br></b>';
+                      }
+
+                      else (faltantes != "")
+                      app.alert.show("Generar RFC", {
+                          level: "error",
+                          title: "Faltan los siguientes datos para poder generar el RFC: <br>" + faltantes,
+                          autoClose: true
+                      });
+                  }
+              }
+              else
+              {
+                  if ((this.model.get('razonsocial_c') != null && this.model.get('razonsocial_c')!="") && (this.model.get('fechaconstitutiva_c') != null && this.model.get('fechaconstitutiva_c') !="" )) {
+                      this._doValidateWSRFC();
+                  } else {
+                      var falta = "";
+                      console.log('Entra P Moral RFC');
+                      if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
+                          falta = falta + '<b>Fecha Constitutiva<br></b>';
+                      }
+                      /*if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
+                          falta = falta + '<b>Nombre Comercial<br></b>';
+                      }*/
+                      if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
+                          falta = falta + '<b>Raz\u00F3n Social<br></b>';
+                      }
+                      app.alert.show("Generar RFC", {
+                          level: "error",
+                          title: "Faltan los siguientes datos para poder generar el RFC: <br>" + falta,
+                          autoClose: true
+                      });
+                  }
+              }
+          }
+
+      },
 
     ValidaFormatoCURP: function (fields, errors, callback) {
         if (this.model.get('tipodepersona_c') != 'Persona Moral') {
@@ -979,7 +1032,7 @@
      */
 
     //CAMBIOS EFECTUADOS
-        getllamadas:function (callback) {
+    getllamadas:function () {
         var cday = new Date();
         var llamadas=0;
         self=this;
@@ -996,17 +1049,14 @@
                         }
                     }
                 }
-                self.flagheld++;
-                callback(llamadas,null,self);
-             //This.totalllamadas=llamadas;
-             //return llamadas;
+                this.totalllamadas=llamadas;
             },this)
         });
     },
     /* @Jesus Carrillo
         Metodo para verificar  las reuniones de la cuenta
      */
-    getreuniones:function (callBackResult) {
+    getreuniones:function () {
         var cday = new Date();
         var reuniones=0;
         self=this;
@@ -1022,10 +1072,7 @@
                         }
                     }
                 }
-                //this.totalreuniones=reuniones;
-                //return reuniones;
-                self.flagheld++;
-                callBackResult(null,reuniones,self);
+                this.totalreuniones=reuniones;
             },this)
         });
     },
@@ -1139,7 +1186,7 @@
         */
     prospectocontactadoClicked:function(){
         self=this;
-        self.flagheld=0;
+
         if(this.model.get('id')!="") { //en lugar de self es this
             app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
                 success: _.bind(function (data) {
@@ -1168,24 +1215,13 @@
                         usuario=="8"||
                         usuario=="14"||
                         usuario=="21"
-                       || usuario=="18" //Ajuste para poder trabajar con la cuenta de Wendy
+                       //|| usuario=="18" //Ajuste para poder trabajar con la cuenta de Wendy
                     )
 
                     {
                        //Valida llamadas y reuniones
                        var valRelacionados = 0;
-                       //self.getllamadas();
-                       //self.getreuniones();
-
-                        app.alert.show('loadcontactado', {
-                            level: 'process',
-                        });
-                       self.getllamadas(this.resultCallback);
-                        self.getreuniones(this.resultCallback);
-
-                       /*
-
-                        if(this.totalllamadas==0 && self.totalreuniones==0){
+                        if(self.totalllamadas==0 && self.totalreuniones==0){
                             app.alert.show('alert_calls', {
                                 level: 'error',
                                 messages: 'El proceso de conversi\u00F3n requiere que la cuenta contenga una <b>llamada</b> o <b>reuni\u00F3n</b> con estado <b>Realizada</b> y con fecha al d\u00EDa de hoy o anterior.',
@@ -1196,7 +1232,6 @@
                         //Valida datos de cuenta
                         var valContacto = self.validaContactado();
                         self.validar_fields(valContacto, valRelacionados);
-                        */
 
                     }
                     else {
@@ -1213,37 +1248,6 @@
 
         console.log("valor fuera " + this.model.get('id'));
     },
-
-      resultCallback:function(resultLlamadas,resultReuniones,context) {
-          self=context;
-          var valRelacionados = 0;
-          if (resultLlamadas != null) {
-              self.totalllamadas = resultLlamadas;
-
-          }
-          if (resultReuniones != null) {
-              self.totalreuniones = resultReuniones;
-
-          }
-
-         // if (self.totalllamadas != undefined && self.totalreuniones != undefined) {
-          if (self.flagheld>=2) {
-              if (self.totalllamadas == 0 && self.totalreuniones == 0) {
-                  app.alert.show('alert_calls', {
-                      level: 'error',
-                      messages: 'El proceso de conversi\u00F3n requiere que la cuenta contenga una <b>llamada</b> o <b>reuni\u00F3n</b> con estado <b>Realizada</b> y con fecha al d\u00EDa de hoy o anterior.',
-                  });
-                  valRelacionados = 1;
-              }
-
-              //Valida datos de cuenta
-              var valContacto = self.validaContactado();
-              self.validar_fields(valContacto, valRelacionados);
-              app.alert.dismiss('loadcontactado');
-
-          }
-
-      },
 
 
       //Validación para que los campos contengan informacion para poder convertir de LEAD a Prospecto/Contactado. Adrian Arauz 15/08/2018

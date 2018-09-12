@@ -844,7 +844,7 @@
                     console.log("Confirma necesarios");
                     app.alert.show("Generar CURP", {
                         level: "error",
-                        title: "Faltan los siguientes datos para poder generar el CURP: " + necesarios,
+                        title: "Faltan los siguientes datos para poder generar el CURP: <br>" + necesarios,
                         autoClose: false
                     });
                 }
@@ -1055,7 +1055,7 @@
                     this._doValidateWSRFC();
                 } else {
                     var faltantes = "";
-
+                    console.log('Valida campos para RFC');
                     if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
                         faltantes = faltantes + '<b>Fecha de Nacimiento<br></b>';
                     }
@@ -1079,22 +1079,23 @@
                   }
             else
                 {
-                    if (this.model.get('razonsocial_c') != null && this.model.get('fechaconstitutiva_c') != null) {
+                    if ((this.model.get('razonsocial_c') != null && this.model.get('razonsocial_c')!="") && (this.model.get('fechaconstitutiva_c') != null && this.model.get('fechaconstitutiva_c') !="" )) {
                         this._doValidateWSRFC();
                     } else {
                         var falta = "";
+                        console.log('Entra P Moral RFC');
                         if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
                             falta = falta + '<b>Fecha Constitutiva<br></b>';
                         }
-                        if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
+                        /*if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
                             falta = falta + '<b>Nombre Comercial<br></b>';
-                        }
+                        }*/
                         if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
                             falta = falta + '<b>Raz\u00F3n Social<br></b>';
                         }
                         app.alert.show("Generar RFC", {
                             level: "error",
-                            title: "Faltan los siguientes datos para poder generar el RFC: " + falta,
+                            title: "Faltan los siguientes datos para poder generar el RFC: <br>" + falta,
                             autoClose: true
                         });
                     }

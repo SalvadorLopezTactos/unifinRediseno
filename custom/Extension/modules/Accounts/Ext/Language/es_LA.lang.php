@@ -287,3 +287,4 @@ $mod_strings['LBL_TCT_QUE_PROMOTOR_REL'] = '¿Qué Promotor?';
 $mod_strings['LBL_TCT_PRIORIDAD_DDW'] = 'Prioridad';
 $mod_strings['LBL_TCT_REFERENCIADO_DIR_REL'] = 'Referenciado director';
 $mod_strings['LBL_TCT_MACRO_SECTOR_DDW'] = 'Macro Sector';
+$mod_strings['LBL_TCT_TIPO_SUBTIPO_TXF'] = 'Tipo y Subtipo de la Cuenta';
