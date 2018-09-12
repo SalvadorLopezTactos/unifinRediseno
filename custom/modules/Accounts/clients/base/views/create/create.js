@@ -212,7 +212,7 @@
 
         //Se mete expresion regular para limitar el funcionamiento del campo email .
         //Adrian Arauz 12-/09/2018
-        this.model.on("change:email", _.bind(this.expmail, this));
+        //this.model.on("change:email", _.bind(this.expmail, this));
 
 
         /*
@@ -1367,27 +1367,7 @@
         callback(null, fields, errors);
     },
 
-    expmail: function (evt){
-        if (this.model.get('email') != null && this.model.get('email') !="") {
-            if (!evt) return;
-            console.log('valida correo');
-            //var $input = this.$(evt.currentTarget);
-            var expresion = /[Za-z]\S+@[Za-z]+.[Za-z]{3}\S+.[Za-z]{2}/;
-            return false;
-        }
-            else((expresion.test(evt.key))==false)
-        {
-            app.alert.show('Error al validar email', {
-                level: 'error',
-                autoClose: true,
-                messages: 'Formato de email incorrecto.'
-            });
 
-        }
-        console.log ('fin validacion');
-        return false;
-
-    },
 
 
 
