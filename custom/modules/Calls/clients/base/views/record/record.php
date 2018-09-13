@@ -384,7 +384,11 @@ array (
                 ),
                 'span' => 12,
               ),
-              11 => 'assigned_user_name',
+              11 => 
+              array (
+                'name' => 'assigned_user_name',
+                'readonly' => true,
+              ),
               12 => 'team_name',
               13 => 
               array (
