@@ -586,7 +586,6 @@
 			[
                 {
                     "account_id": cliente,
-					"tct_etapa_ddw_c": "SI",
 					"tipo_producto_c": tipo,
                     "id":
 					{
@@ -603,7 +602,7 @@
 				{
                     $(data.records).each(function (index, value)
 					{
-                        if (value.estatus_c != "K")
+                        if (value.estatus_c != "K" && value.tct_etapa_ddw_c != "CL" && value.tct_etapa_ddw_c != "R")
 						{
                             duplicado = 1;
                         }

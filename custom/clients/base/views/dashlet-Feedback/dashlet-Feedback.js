@@ -60,6 +60,7 @@
             this.banderaUsr = 'OK';
         }
         else {
+            console.log("usuario activo es:  " + id_usr_activo);
             app.api.call('GET', app.api.buildURL('GetNotifications/' + id_usr_activo + '/5'), null, {
                 success: _.bind(function (data) {
 
@@ -79,22 +80,21 @@
         var tempUsr = $("#states2").val();
         var tempEqp = $("#states3").val();
 
-        app.api.call('GET', app.api.buildURL('GetNotifications/' + tempUsr + '/-1'), null, {
-            success: _.bind(function (data) {
+        if(tempUsr!=""){
+            app.api.call('GET', app.api.buildURL('GetNotifications/' + tempUsr + '/-1'), null, {
+                success: _.bind(function (data) {
 
-                if (data != "") {
+                    if (data != "") {
 
-                    self.notificaciones_usr = data.records;
+                        self.notificaciones_usr = data.records;
 
-                }
-                this.render();
-                $('#states3').select2('val', tempEqp);
-                $('#states2').select2('val', tempUsr);
-            }, self),
-        });
-
-
-
+                    }
+                    this.render();
+                    $('#states3').select2('val', tempEqp);
+                    $('#states2').select2('val', tempUsr);
+                }, self),
+            });
+        }
 
     },
 

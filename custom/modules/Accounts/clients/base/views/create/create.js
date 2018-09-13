@@ -11,6 +11,9 @@
      *
      * @override
      */
+
+
+
     handleCancel: function () {
         var account_telefonos = this.model._previousAttributes.account_telefonos;
         var account_direcciones = this.model._previousAttributes.account_direcciones;
@@ -203,12 +206,16 @@
         //add validation tasks
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         //@Jesus Carrillo
-        this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonos, this));
-        this.model.addValidationTask('check_direcciones', _.bind(this.validadirecc, this));
+        this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonosexisting, this));
+        this.model.addValidationTask('check_direcciones', _.bind(this.validadireccexisting, this));
         this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
         this.model.on('change:pais_nacimiento_c', this.validaExtranjerosRFC, this);
         //this.model.on('change:rfc_c',this.validaFechaNacimientoDesdeRFC, this);
         this.model.on('change:account_telefonos', this.setPhoneOffice, this);
+
+        //Se mete expresion regular para limitar el funcionamiento del campo email .
+        //Adrian Arauz 12-/09/2018
+        //this.model.on("change:email", _.bind(this.expmail, this));
 
 
         /*
@@ -278,6 +285,8 @@
 
         this.events['click a[name=generar_rfc_c]'] = '_doGenera_RFC_CURP';
         this.events['click a[name=generar_curp_c]'] = '_doGeneraCURP';
+
+
 
 
         /* hay que traer el campo del usaurio
@@ -527,8 +536,8 @@
         callback(null, fields, errors);
     },
 
-    //@Jesus Carrillo
-    validatelefonos: function (fields, errors, callback) {
+//@Jesus Carrillo
+    validatelefonosexisting: function (fields, errors, callback) {
         var expreg =/^[0-9]{8,10}$/;
         var cont=0;
 
@@ -566,6 +575,8 @@
             });
 
         if(cont>0){
+                errors['existingtelefono'] = errors['existingtelefono'] || {};
+                errors['existingtelefono'].required = true;
                 app.alert.show('error_modultel', {
                     level: 'error',
                     autoClose: true,
@@ -575,7 +586,7 @@
         callback(null, fields, errors);
     },
 
-    validadirecc: function (fields, errors, callback) {
+    validadireccexisting: function (fields, errors, callback) {
             var cont=0;
 
             $('.existingIndicador').each(function (index) {
@@ -622,7 +633,9 @@
             });
 
             if(cont>0){
-                app.alert.show('error_modultel', {
+                errors['existingdirec'] = errors['existingdirec'] || {};
+                errors['existingdirec'].required = true;
+                app.alert.show('error_moduldirec', {
                     level: 'error',
                     autoClose: false,
                     messages: 'Favor de llenar los campos se\u00F1alados.'
@@ -814,11 +827,40 @@
                     this.model.set('curp_c', '');
                 }
             } else {
-                app.alert.show("Generar CURP", {
-                    level: "error",
-                    title: "Faltan datos para poder generar el CURP",
-                    autoClose: false
-                });
+                var necesarios = "";  //Se habilita variable para concatenar campos faltantes para generar el CURP
+                //Adrian Arauz 10/09/2018
+                if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                    necesarios = necesarios + '<b>Fecha de Nacimiento<br></b>';
+                }
+                if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
+                    necesarios = necesarios + '<b>G\u00E9nero</b><br>';
+                }
+                if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+                    necesarios = necesarios + '<b>Primer Nombre</b><br>';
+                }
+                if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+                    necesarios = necesarios + '<b>Apellido Paterno</b><br>';
+                }
+                if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                    necesarios = necesarios + '<b>Apellido Materno</b><br>';
+                }
+                if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
+                    necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
+                }
+
+                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
+                    necesarios = necesarios + '<b>Estado de Nacimiento</b><br>';
+                }
+
+                else (necesarios != "")
+                {
+                    console.log("Confirma necesarios");
+                    app.alert.show("Generar CURP", {
+                        level: "error",
+                        title: "Faltan los siguientes datos para poder generar el CURP: <br>" + necesarios,
+                        autoClose: false
+                    });
+                }
             }
         }
     },
@@ -1025,24 +1067,54 @@
                     && this.model.get('apellidopaterno_c') != null && this.model.get('apellidomaterno_c') != null) {
                     this._doValidateWSRFC();
                 } else {
-                    app.alert.show("Generar RFC", {
-                        level: "error",
-                        title: "Faltan datos para poder generar el RFC",
-                        autoClose: true
-                    });
-                }
-            } else {
-                if (this.model.get('razonsocial_c') != null && this.model.get('fechaconstitutiva_c') != null) {
-                    this._doValidateWSRFC();
-                } else {
-                    app.alert.show("Generar RFC", {
-                        level: "error",
-                        title: "Faltan datos para poder generar el RFC",
-                        autoClose: true
-                    });
+                    var faltantes = "";
+                    console.log('Valida campos para RFC');
+                    if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                        faltantes = faltantes + '<b>Fecha de Nacimiento<br></b>';
+                    }
+                    if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+                        faltantes = faltantes + '<b>Primer Nombre<br></b>';
+                    }
+                    if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+                        faltantes = faltantes + '<b>Apellido Paterno<br></b>';
+                    }
+                    if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                        faltantes = faltantes + '<b>Apellido Materno<br></b>';
+                    }
+
+                        else (faltantes != "")
+                        app.alert.show("Generar RFC", {
+                            level: "error",
+                            title: "Faltan los siguientes datos para poder generar el RFC: <br>" + faltantes,
+                            autoClose: true
+                        });
+                    }
+                  }
+            else
+                {
+                    if ((this.model.get('razonsocial_c') != null && this.model.get('razonsocial_c')!="") && (this.model.get('fechaconstitutiva_c') != null && this.model.get('fechaconstitutiva_c') !="" )) {
+                        this._doValidateWSRFC();
+                    } else {
+                        var falta = "";
+                        console.log('Entra P Moral RFC');
+                        if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
+                            falta = falta + '<b>Fecha Constitutiva<br></b>';
+                        }
+                        /*if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
+                            falta = falta + '<b>Nombre Comercial<br></b>';
+                        }*/
+                        if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
+                            falta = falta + '<b>Raz\u00F3n Social<br></b>';
+                        }
+                        app.alert.show("Generar RFC", {
+                            level: "error",
+                            title: "Faltan los siguientes datos para poder generar el RFC: <br>" + falta,
+                            autoClose: true
+                        });
+                    }
                 }
             }
-        }
+
     },
 
     //No aceptar numeros, solo letras (a-z), puntos(.) y comas(,)
@@ -1303,4 +1375,9 @@
         }
         callback(null, fields, errors);
     },
+
+
+
+
+
 })
