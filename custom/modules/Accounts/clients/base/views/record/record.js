@@ -91,6 +91,7 @@
         this.model.on('change:tipodepersona_c', this._hidePeps, this);
 
 
+
         this.events['keydown input[name=primernombre_c]'] = 'checkTextOnly';
         this.events['keydown input[name=segundonombre_c]'] = 'checkTextOnly';
         this.events['keydown input[name=apellidomaterno_c]'] = 'checkTextOnly';
@@ -132,9 +133,6 @@
          */
         this.model.on('sync', this._render, this);
 
-        //Recupera llamadas y reuniones asociadas al cliente
-        //this.model.on('sync', this.getllamadas, this);
-        //this.model.on('sync', this.getreuniones, this);
         this.model.on('sync', this.hideconfiinfo, this);
 
         /*@Jesus Carrillo
@@ -143,7 +141,10 @@
         this.model.on('sync', this.fulminantcolor, this);
         this.model.on('sync', this.valida_centro_prospec, this);
         this.model.on('sync', this.valida_backoffice, this);
+
+
     },
+
 
     fulminantcolor: function () {
         $( '#space' ).remove();
@@ -555,6 +556,16 @@
                 success: _.bind(function (data) {
                     console.log(data);
                     if(data==false){
+                        $('.rowaction.btn.btn-primary').hide()
+
+                        $('div.row-fluid.panel_body.panel_body').click(function(e) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            e.stopImmediatePropagation();
+                            return false;
+                        });
+
+                        $('i').removeClass('fa-pencil')
                         $('div[data-name=account_telefonos]').hide();
                         $('div[data-name=email]').hide();
                         $('div[data-name=account_direcciones]').hide();
