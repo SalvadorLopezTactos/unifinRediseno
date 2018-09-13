@@ -134,11 +134,9 @@
         this.model.on('sync', this._render, this);
 
         this.model.on('sync', this.hideconfiinfo, this);
-
-        /*@Jesus Carrillo
-            Funcion que pinta de color los paneles relacionados
-        */
-        this.model.on('sync', this.fulminantcolor, this);
+        this.model.on('sync', this.disable_panels_rol, this); //@Jesus Carrilllo; metodo que deshabilita panels de acuerdo a rol;
+        this.model.on('sync', this.disable_panels_team, this);
+        this.model.on('sync', this.fulminantcolor, this); //*@Jesus Carrillo; Funcion que pinta de color los paneles relacionados
         this.model.on('sync', this.valida_centro_prospec, this);
         this.model.on('sync', this.valida_backoffice, this);
 
@@ -556,17 +554,43 @@
                 success: _.bind(function (data) {
                     console.log(data);
                     if(data==false){
-                        var roles_limit = app.lang.getAppListStrings('roles_limit_list');
-                        var roles_logged = app.user.attributes.roles;
-                        var coincide_rol=0;
-                        for(var i=0; i<roles_logged.length; i++) {
-                            for (var rol_limit in roles_limit) {
-                                if (roles_logged[i] == roles_limit[rol_limit]) {
-                                    coincide_rol++;
-                                }
-                            }
-                        }
-                        if(coincide_rol==0) {
+                        $('div[data-name=account_telefonos]').hide();
+                        $('div[data-name=email]').hide();
+                        $('div[data-name=account_direcciones]').hide();
+                    }else{
+                        $('div[data-name=account_telefonos]').show();
+                        $('div[data-name=email]').show();
+                        $('div[data-name=account_direcciones]').show();
+                    }
+                    return data;
+                }, self),
+            });
+            self.render();
+        }
+        console.log("valor fuera " + this.model.get('id'));
+    },
+
+    disable_panels_rol:function () {
+
+        self=this;
+
+        if(this.model.get('id')!="") {
+            var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
+            var roles_logged = app.user.attributes.roles;
+            var coincide_rol=0;
+            for(var i=0; i<roles_logged.length; i++) {
+                for (var rol_limit in roles_limit) {
+                    if (roles_logged[i] == roles_limit[rol_limit]) {
+                        coincide_rol++;
+                    }
+                }
+            }
+            if(coincide_rol!=0) {
+                app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
+                    success: _.bind(function (data) {
+                        console.log(data);
+                        if (data == false) {
+
                             $('.noEdit.fieldset.actions.detail.btn-group').hide();
 
                             $('i').removeClass('fa-pencil');
@@ -578,27 +602,60 @@
                                 return false;
                             });
                         }
-
-                        $('div[data-name=account_telefonos]').hide();
-                        $('div[data-name=email]').hide();
-                        $('div[data-name=account_direcciones]').hide();
-
-                    }else{
-                        $('div[data-name=account_telefonos]').show();
-                        $('div[data-name=email]').show();
-                        $('div[data-name=account_direcciones]').show();
-                    }
-                    return data;
-                }, self),
-            });
-            self.render();
+                        return data;
+                    }, self),
+                });
+                self.render();
+            }
         }
-
-        console.log("valor fuera " + this.model.get('id'));
-
-
-
     },
+
+    disable_panels_team:function () {
+
+        self=this;
+
+        if(this.model.get('id')!="") {
+            var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
+            var roles_logged = app.user.attributes.roles;
+            var coincide_rol=0;
+            for(var i=0; i<roles_logged.length; i++) {
+                for (var rol_limit in roles_limit) {
+                    if (roles_logged[i] == roles_limit[rol_limit]) {
+                        coincide_rol++;
+                    }
+                }
+            }
+            if(coincide_rol!=0) {
+                app.api.call('GET', app.api.buildURL('GetUsersTeams/' + this.model.get('id') + '/Accounts'), null, {
+                    success: _.bind(function (data) {
+                        console.log(data);
+                        if (data == false) {
+
+                            $('.noEdit.fieldset.actions.detail.btn-group').hide();
+
+                            $('i').removeClass('fa-pencil');
+
+                            $('div.row-fluid.panel_body.panel_body').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
+                        }else {
+                            alert('se pretende deshabilitar todo excepto Datos generales');
+                            $('.noEdit.fieldset.actions.detail.btn-group').hide();
+                            $('i').removeClass('fa-pencil');
+                            
+                        }
+                        return data;
+                    }, self),
+                });
+                self.render();
+            }
+        }
+    },
+
+
 
 
     /*
