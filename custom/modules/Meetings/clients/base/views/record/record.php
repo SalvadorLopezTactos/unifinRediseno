@@ -405,6 +405,7 @@ array (
               8 => 
               array (
                 'name' => 'assigned_user_name',
+                'readonly' => true,
                 'span' => 12,
               ),
               9 => 
