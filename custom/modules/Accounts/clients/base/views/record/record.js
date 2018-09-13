@@ -556,17 +556,28 @@
                 success: _.bind(function (data) {
                     console.log(data);
                     if(data==false){
+                        var roles_limit = app.lang.getAppListStrings('roles_limit_list');
+                        var roles_logged = app.user.attributes.roles;
+                        var coincide_rol=0;
+                        for(var i=0; i<roles_logged.length; i++) {
+                            for (var rol_limit in roles_limit) {
+                                if (roles_logged[i] == roles_limit[rol_limit]) {
+                                    coincide_rol++;
+                                }
+                            }
+                        }
+                        if(coincide_rol==0) {
+                            $('.noEdit.fieldset.actions.detail.btn-group').hide();
 
-                        $('.noEdit.fieldset.actions.detail.btn-group').hide();
+                            $('i').removeClass('fa-pencil');
 
-                        $('i').removeClass('fa-pencil');
-
-                        $('div.row-fluid.panel_body.panel_body').click(function(e) {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            e.stopImmediatePropagation();
-                            return false;
-                        }); 
+                            $('div.row-fluid.panel_body.panel_body').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
+                        }
 
                         $('div[data-name=account_telefonos]').hide();
                         $('div[data-name=email]').hide();
