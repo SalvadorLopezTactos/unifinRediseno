@@ -162,6 +162,24 @@
     	    errors['tct_calificacion_conferencia_c'] = "El campo Calificaci&oacuten de la Conferencia es requerido";
           errors['tct_calificacion_conferencia_c'].required = true;
       }
+
+        if (this.model.get('tct_conferencia_chk_c') && this.model.get('tct_conferencia_fecha_dat_c') != '') {
+            //var todayDate = new Date();
+            var dateStart = Date.parse(this.model.get('date_start'));
+            var inputToDate = Date.parse(this.model.get('tct_conferencia_fecha_dat_c'));
+            if(dateStart > inputToDate)
+            {
+                app.alert.show("Fecha_Incorrecta_Conferencia", {
+                   level: "error",
+                    title: "La fecha a contactar debe ser mayor a la fecha de inicio",
+                    autoClose: false
+                });
+
+                errors['tct_conferencia_fecha_dat_c'] = "La fecha a contactar debe ser mayor a la fecha de inicio";
+                errors['tct_conferencia_fecha_dat_c'].required = true;
+            }
+        }
+
     	callback(null, fields, errors);
     },
 
