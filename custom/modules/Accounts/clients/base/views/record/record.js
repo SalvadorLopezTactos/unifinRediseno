@@ -556,19 +556,22 @@
                 success: _.bind(function (data) {
                     console.log(data);
                     if(data==false){
-                        $('.rowaction.btn.btn-primary').hide()
+
+                        $('.noEdit.fieldset.actions.detail.btn-group').hide();
+
+                        $('i').removeClass('fa-pencil');
 
                         $('div.row-fluid.panel_body.panel_body').click(function(e) {
                             e.stopPropagation();
                             e.preventDefault();
                             e.stopImmediatePropagation();
                             return false;
-                        });
+                        }); 
 
-                        $('i').removeClass('fa-pencil')
                         $('div[data-name=account_telefonos]').hide();
                         $('div[data-name=email]').hide();
                         $('div[data-name=account_direcciones]').hide();
+
                     }else{
                         $('div[data-name=account_telefonos]').show();
                         $('div[data-name=email]').show();
