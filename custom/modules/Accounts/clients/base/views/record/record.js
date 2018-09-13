@@ -645,7 +645,7 @@
                             alert('se pretende deshabilitar todo excepto Datos generales');
                             $('.noEdit.fieldset.actions.detail.btn-group').hide();
                             $('i').removeClass('fa-pencil');
-                            
+
                         }
                         return data;
                     }, self),
