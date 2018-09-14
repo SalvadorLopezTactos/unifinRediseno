@@ -224,7 +224,7 @@
     Deshabilita campo status dependiendo de diferentes criterios
      */
     disablestatus:function () {
-        if(this.model.get('id')=='' || Date.parse(this.model.get('date_end'))>Date.now()){
+        if(this.model.get('id')=='' || Date.parse(this.model.get('date_end'))>Date.now() || this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held'){
             $('span[data-name=status]').css("pointer-events", "none");
         }else{
             $('span[data-name=status]').css("pointer-events", "auto");
