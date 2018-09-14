@@ -62,7 +62,7 @@
             Ajuste para actualizar valores en vista
         */
         this.model.on('sync', this._render, this);
-
+        this.model.on('sync', this.disable_panels_team, this);
         this.model.on('change:ca_pago_mensual_c', this.validamontos, this);
         this.model.on('change:amount', this.validamontos, this);
         this.model.on('change:porciento_ri_c', this.validamontos, this);
@@ -1510,5 +1510,45 @@ console.log(name);
         }
 
         return result;
+    },
+
+    disable_panels_team:function () {
+
+        self=this;
+
+        if(this.model.get('id')!="") {
+            var roles_limit = app.lang.getAppListStrings('edicion_cuentas_list');
+            var roles_logged = app.user.attributes.roles;
+            var coincide_rol=0;
+            for(var i=0; i<roles_logged.length; i++) {
+                for (var rol_limit in roles_limit) {
+                    if (roles_logged[i] == roles_limit[rol_limit]) {
+                        coincide_rol++;
+                    }
+                }
+            }
+            if(coincide_rol!=0) {
+                app.api.call('GET', app.api.buildURL('GetUsersTeams/' + this.model.get('id') + '/Accounts'), null, {
+                    success: _.bind(function (data) {
+                        console.log(data);
+                        if (data == false) {
+
+                            $('.noEdit.fieldset.actions.detail.btn-group').hide();
+
+                            $('i').removeClass('fa-pencil');
+
+                            $('div.span6.record-cell').not('[data-name=account_name]').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
+                        }
+                        return data;
+                    }, self),
+                });
+                self.render();
+            }
+        }
     },
 })
