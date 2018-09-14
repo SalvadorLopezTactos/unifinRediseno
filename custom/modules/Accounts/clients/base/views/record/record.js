@@ -645,6 +645,72 @@
                             alert('se pretende deshabilitar todo excepto Datos generales');
                             $('.noEdit.fieldset.actions.detail.btn-group').hide();
                             $('i').removeClass('fa-pencil');
+                            $('.row-fluid.panel_body.LBL_RECORDVIEW_PANEL12').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
+                            $('.row-fluid.panel_body.LBL_RECORDVIEW_PANEL13').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
+                            $('.row-fluid.panel_body.LBL_RECORDVIEW_PANEL14').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
+                            $('.row-fluid.panel_body.LBL_RECORDVIEW_PANEL15').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
+                            $('.row-fluid.panel_body.LBL_RECORDVIEW_PANEL16').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
+                            $('div[data-name=tipo_registro_c]').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
+                            $('div[data-name=subtipo_cuenta_c]').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
+                            $('div[data-name=tct_prioridad_ddw_c]').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
+                            $('div[data-name=esproveedor_c]').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
+                            $('div[data-name=cedente_factor_c]').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
+                            $('div[data-name=deudor_factor_c]').click(function (e) {
+                                e.stopPropagation();
+                                e.preventDefault();
+                                e.stopImmediatePropagation();
+                                return false;
+                            });
 
                         }
                         return data;
