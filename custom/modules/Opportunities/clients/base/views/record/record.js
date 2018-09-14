@@ -1537,7 +1537,7 @@ console.log(name);
 
                             $('i').removeClass('fa-pencil');
 
-                            $('.span6.record-cell').children().not('.normal.index').click(function (e) { //Habilita solo links
+                            $('.record-cell').children().not('.normal.index').click(function (e) { //Habilita solo links
                                 e.stopPropagation();
                                 e.preventDefault();
                                 e.stopImmediatePropagation();
