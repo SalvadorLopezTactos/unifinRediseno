@@ -16,7 +16,7 @@ $dependencies['Calls']['ResultadoCalls'] = array(
             //The parameters passed in will depend on the action type set in 'name'
             'params' => array(
                 'target' => 'tct_resultado_llamada_ddw_c',
-                'value' => 'or(not(equal($id,"")),$tct_conferencia_chk_c)',
+                'value' => '$tct_conferencia_chk_c',
             ),
         ),
     ),

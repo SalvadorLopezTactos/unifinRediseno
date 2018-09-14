@@ -192,6 +192,9 @@
 
         }
 
+        //VM 14/09/2018
+        this.checkProveedor();
+
     },
 
     initialize: function (options) {
@@ -534,6 +537,14 @@
             }
         }
         callback(null, fields, errors);
+    },
+    /*Victor Martinez Lopez 12-09-2018
+    *La casilla proveedor se debe mantener activa al crear un proveedor
+    * */
+    checkProveedor:function(){
+        if(this.model.get('tipo_registro_c')=='Proveedor'){
+            this.$('[data-name="esproveedor_c"]').attr('style', 'pointer-events:none;');
+        }
     },
 
 //@Jesus Carrillo

@@ -164,3 +164,4 @@ $mod_strings['LBL_TCT_RAZON_OP_PERDIDA_DDW'] = 'Razón';
 $mod_strings['LBL_TCT_COMPETENCIA_QUIEN_TXF'] = '¿Quien?';
 $mod_strings['LBL_TCT_COMPETENCIA_PORQUE_TXF'] = '¿Por qué?';
 $mod_strings['LBL_TCT_SIN_PROD_FINANCIERO_DDW'] = '¿Qué producto?';
+$mod_strings['LBL_TCT_ESTAPA_SUBETAPA_TXF'] = 'Etapa y Subetapa de la Solicitud';

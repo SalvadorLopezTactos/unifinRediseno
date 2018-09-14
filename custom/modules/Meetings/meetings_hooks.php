@@ -121,7 +121,7 @@ SQL;
     {
         global $db;
         // Crear Reunión
-        if($bean->description!="Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante." && $bean->nuevo_c == 1)
+        if($bean->description!="Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante." && $bean->nuevo_c == 1 && $bean->repeat_parent_id == "")
         {
             $query = <<<SQL
                 SELECT id, user_id
