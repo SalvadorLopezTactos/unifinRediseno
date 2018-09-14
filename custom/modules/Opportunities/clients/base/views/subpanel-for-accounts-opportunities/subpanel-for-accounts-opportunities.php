@@ -1,5 +1,5 @@
 <?php
-// created: 2018-08-29 17:59:13
+// created: 2018-09-14 17:24:21
 $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'] = array (
   'type' => 'subpanel-list',
   'rowactions' => 
@@ -42,19 +42,12 @@ $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'
         ),
         1 => 
         array (
-          'name' => 'tct_etapa_ddw_c',
-          'label' => 'LBL_TCT_ETAPA_DDW_C',
+          'name' => 'tct_estapa_subetapa_txf_c',
+          'label' => 'LBL_TCT_ESTAPA_SUBETAPA_TXF',
           'enabled' => true,
           'default' => true,
         ),
         2 => 
-        array (
-          'name' => 'estatus_c',
-          'label' => 'LBL_ESTATUS',
-          'enabled' => true,
-          'default' => true,
-        ),
-        3 => 
         array (
           'name' => 'monto_c',
           'label' => 'LBL_MONTO',
@@ -67,7 +60,7 @@ $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'
           'currency_format' => true,
           'default' => true,
         ),
-        4 => 
+        3 => 
         array (
           'name' => 'amount',
           'label' => 'LBL_LIKELY',
@@ -81,14 +74,14 @@ $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'
           'currency_format' => true,
           'default' => true,
         ),
-        5 => 
+        4 => 
         array (
           'name' => 'vigencialinea_c',
           'label' => 'LBL_VIGENCIALINEA',
           'enabled' => true,
           'default' => true,
         ),
-        6 => 
+        5 => 
         array (
           'name' => 'assigned_user_name',
           'target_record_key' => 'assigned_user_id',

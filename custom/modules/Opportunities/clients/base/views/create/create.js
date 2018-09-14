@@ -612,10 +612,10 @@
 				{
 					app.alert.show("Solicitud existente", {
 						level: "error",
-						title: "No es posible crear una Pre-solicitud cuando ya se encuentra una en proceso.",
+						title: "No es posible crear una Pre-solicitud cuando ya se encuentra una Pre-solicitud o Solicitud en proceso.",
 						autoClose: false
 					});	
-					app.error.errorName2Keys['custom_message'] = 'No es posible crear una Pre-solicitud cuando ya se encuentra una en proceso';
+					app.error.errorName2Keys['custom_message'] = 'No es posible crear una Pre-solicitud cuando ya se encuentra una Pre-solicitud o Solicitud en proceso.';
 					errors['account_name'] = errors['account_name'] || {};
 					errors['account_name'].custom_message = true;
 				}
