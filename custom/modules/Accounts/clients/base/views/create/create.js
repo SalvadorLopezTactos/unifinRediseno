@@ -1389,24 +1389,28 @@
     //Funcion que valida el contenido ingresado en el campo del Email
     expmail: function (fields, errors, callback){
         if (this.model.get('email') != null && this.model.get('email') !="") {
-            console.log('valida correo');
+
             var input = (this.model.get('email'));
             var expresion = /\S+@\S+\.\S+[$%&|<>#]?$/;
+            var cumple = true;
 
-            //Evaluar correo
-            if (expresion.test(input[0].email_address)) {
-                console.log('a\u00F1ade correo');
+            for (i=0; i< input.length; i++) {
 
-            }else {
-                app.alert.show('Error al validar email', {
-                    level: 'error',
-                    autoClose: true,
-                    messages: '<b>Formato de email incorrecto.</b>'
-                })
-                errors['email'] = errors['email'] || {};
-                errors['email'].required = true;
+                if (expresion.test(input[i].email_address)== false) {
+                    cumple = false;
+
+                }
             }
-            console.log('fin validacion');
+
+                if (cumple == false) {
+                    app.alert.show('Error al validar email', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: '<b>Formato de email incorrecto.</b>'
+                    })
+                    errors['email'] = errors['email'] || {};
+                    errors['email'].required = true;
+                }
         }
 
         callback(null, fields, errors);
