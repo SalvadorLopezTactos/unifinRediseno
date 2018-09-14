@@ -48,10 +48,16 @@ array (
                 'name' => 'estatus_c',
                 'label' => 'LBL_ESTATUS',
                 'enabled' => true,
-                'readonly' => true,
                 'default' => true,
               ),
               4 => 
+              array (
+                'name' => 'tct_estapa_subetapa_txf_c',
+                'label' => 'LBL_TCT_ESTAPA_SUBETAPA_TXF',
+                'enabled' => true,
+                'default' => true,
+              ),
+              5 => 
               array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_LIST_ASSIGNED_USER',
@@ -59,7 +65,7 @@ array (
                 'enabled' => true,
                 'default' => true,
               ),
-              5 => 
+              6 => 
               array (
                 'name' => 'tipo_producto_c',
                 'label' => 'LBL_TIPO_PRODUCTO',
@@ -67,7 +73,7 @@ array (
                 'readonly' => true,
                 'default' => true,
               ),
-              6 => 
+              7 => 
               array (
                 'name' => 'team_name',
                 'type' => 'teamset',

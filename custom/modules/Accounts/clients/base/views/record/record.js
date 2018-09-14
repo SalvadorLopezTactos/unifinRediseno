@@ -151,6 +151,15 @@
         $('.a11y-wrapper').css("background-color", "#e5e5e5");
         //$('.a11y-wrapper').css("background-color", "#c6d9ff");
     },
+
+    /*Victor Martinez Lopez 12-09-2018
+    *La casilla proveedor se debe mantener activa al crear un proveedor
+    * */
+    checkProveedor:function(){
+        if(this.model.get('tipo_registro_c')=='Proveedor'){
+            this.$('[data-name="esproveedor_c"]').attr('style', 'pointer-events:none;');
+        }
+    },
     /** BEGIN CUSTOMIZATION:
      * Salvador Lopez 19/01/2018
      * Descripción: Función que oculta o muestra panel de fideicomiso dependiendo el valor de check ¿Es Fideicomisio? */
@@ -506,6 +515,10 @@
                 }, this)
             });
         }
+        /*Victor Martinez Lopez
+        * Deshabilita el campo es proveedor 13-09-2018
+        * */
+        this.checkProveedor();
 
         //Display or Hide Vista360
         this._hideVista360();
