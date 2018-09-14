@@ -610,7 +610,7 @@
 
                             $('i').removeClass('fa-pencil');
 
-                            $('div.row-fluid.panel_body.panel_body').click(function (e) {
+                            $('.record-cell').children().not('.normal.index').click(function (e) { //Habilita solo links
                                 e.stopPropagation();
                                 e.preventDefault();
                                 e.stopImmediatePropagation();
@@ -650,7 +650,7 @@
 
                             $('i').removeClass('fa-pencil');
 
-                            $('div.row-fluid.panel_body.panel_body').click(function (e) {
+                            $('.record-cell').children().not('.normal.index').click(function (e) { //Habilita solo links
                                 e.stopPropagation();
                                 e.preventDefault();
                                 e.stopImmediatePropagation();
@@ -664,12 +664,21 @@
                             var fields_hide = app.lang.getAppListStrings('fields_hide_list');
 
                             for (var panel in panels_hide) {
-                                $('.row-fluid.panel_body.'+panel).click(function (e) {
-                                    e.stopPropagation();
-                                    e.preventDefault();
-                                    e.stopImmediatePropagation();
-                                    return false;
-                                });
+                                if(panel=='LBL_RECORDVIEW_PANEL9' || panel=='LBL_RECORDVIEW_PANEL13'){
+                                    $('.record-cell').children().not('.normal.index').click(function (e) { //Habilita solo links
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        e.stopImmediatePropagation();
+                                        return false;
+                                    });
+                                }else {
+                                    $('.row-fluid.panel_body.' + panel).click(function (e) {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                        e.stopImmediatePropagation();
+                                        return false;
+                                    });
+                                }
                             }
 
                             for (var field in fields_hide) {
