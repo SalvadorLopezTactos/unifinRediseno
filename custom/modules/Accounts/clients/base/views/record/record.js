@@ -655,9 +655,29 @@
                                 return false;
                             });
                         }else {
-                            alert('se pretende deshabilitar todo excepto Datos generales');
                             $('.noEdit.fieldset.actions.detail.btn-group').hide();
                             $('i').removeClass('fa-pencil');
+
+                            var panels_hide = app.lang.getAppListStrings('panels_hide_list');
+                            var fields_hide = app.lang.getAppListStrings('fields_hide_list');
+
+                            for (var panel in panels_hide) {
+                                $('.row-fluid.panel_body.'+panel).click(function (e) {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                    e.stopImmediatePropagation();
+                                    return false;
+                                });
+                            }
+
+                            for (var field in fields_hide) {
+                                $('div[data-name='+field+']').click(function (e) {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                    e.stopImmediatePropagation();
+                                    return false;
+                                });
+                            }
 
                         }
                         return data;
