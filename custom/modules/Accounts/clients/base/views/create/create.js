@@ -170,7 +170,6 @@
             console.log($('.existingAddress').val());
         }
 
-        this.checkProveedor();
         //Hide Vista360
         this._hideVista360();
         //this.model.set("tipo_registro_c", 'Cliente');
@@ -192,6 +191,9 @@
             this.model.set("tipo_registro_c", 'Cliente');
 
         }
+
+        //VM 14/09/2018
+        this.checkProveedor();
 
     },
 
