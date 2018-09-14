@@ -1537,7 +1537,7 @@ console.log(name);
 
                             $('i').removeClass('fa-pencil');
 
-                            $('div#tabContent').click(function (e) {
+                            $('div.span6.record-cell').not('[data-name=account_name]').click(function (e) {
                                 e.stopPropagation();
                                 e.preventDefault();
                                 e.stopImmediatePropagation();
