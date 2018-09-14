@@ -218,7 +218,7 @@
 
         //Se mete expresion regular para limitar el funcionamiento del campo email .
         //Adrian Arauz 12-/09/2018
-        //this.model.on("change:email", _.bind(this.expmail, this));
+        this.model.addValidationTask('change:email', _.bind(this.expmail, this));
 
 
         /*
@@ -859,7 +859,7 @@
                     necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                 }
 
-                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
+                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null || this.model.get('estado_nacimiento_c') == "1") {
                     necesarios = necesarios + '<b>Estado de Nacimiento</b><br>';
                 }
 
@@ -1386,8 +1386,31 @@
         }
         callback(null, fields, errors);
     },
+    //Funcion que valida el contenido ingresado en el campo del Email
+    expmail: function (fields, errors, callback){
+        if (this.model.get('email') != null && this.model.get('email') !="") {
+            console.log('valida correo');
+            var input = (this.model.get('email'));
+            var expresion = /\S+@\S+\.\S+[$%&|<>#]?$/;
 
+            //Evaluar correo
+            if (expresion.test(input[0].email_address)) {
+                console.log('a\u00F1ade correo');
 
+            }else {
+                app.alert.show('Error al validar email', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: '<b>Formato de email incorrecto.</b>'
+                })
+                errors['email'] = errors['email'] || {};
+                errors['email'].required = true;
+            }
+            console.log('fin validacion');
+        }
+
+        callback(null, fields, errors);
+    },
 
 
 
