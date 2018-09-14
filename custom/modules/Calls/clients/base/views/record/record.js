@@ -11,6 +11,9 @@
             self = this;
             this._super("initialize", [options]);
             this.on('render',this.disableparentsfields,this);
+
+            this.model.on('sync', this.bloqueaTodo, this);
+
             this.model.on('sync', this.cambioFecha, this);
             this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
             this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
@@ -21,33 +24,46 @@
             this.model.on('sync', this.fulminantcolor, this);
 
             this.model.on('sync', this.disablestatus1, this);
+        this.model.addValidationTask('resultCallReq',_.bind(this.resultCallRequerido, this));
+
+
     },
 
-    disablestatus1: function () {
+    bloqueaTodo:function()
+    {
+        //this._super("_renderHtml");
+        var self=this;
 
-/*
-      var self = this;
+        if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held') {
 
-      var  fechaFinal = Date.parse(this.model.get("date_end"));
-      //  console.log("Fechas: Final" + fechaFinal);
+            _.each(this.model.fields, function (field) {
+                self.noEditFields.push(field.name);
+            }, self);
 
-        var dateActual = new Date();
-        var hoy = Date.parse(dateActual);
-
-        //console.log(this.model.get("date_end"));
-        //console.log(dateActual);
-
-        console.log(hoy +"   " + fechaFinal);
-
-        if(hoy<fechaFinal)
-        {
-            alert("Bloquea campo porque au no se cumple la fecha ");
-             $('span[data-name=status]').css("pointer-events", "none");
         }
-        else
-        {
-            $('span[data-name=status]').css("pointer-events", "auto");
-        }*/
+
+    },
+
+    
+
+
+    resultCallRequerido:function (fields, errors, callback) {
+        if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
+            if (this.model.get('tct_resultado_llamada_ddw_c')=='') {
+
+                app.error.errorName2Keys['requResultCall'] = 'El resultado de la Llamada es requerido';
+                errors['tct_resultado_llamada_ddw_c'] = errors['tct_resultado_llamada_ddw_c'] || {};
+                errors['tct_resultado_llamada_ddw_c'].requResultCall = true;
+                errors['tct_resultado_llamada_ddw_c'].required = true;
+            }
+        }
+        callback(null, fields, errors);
+    },
+
+    /*
+    * F. Javier G. Solar 13/09/2018
+    * Se bloquea el campo estatus si aun no se ha cumplido la fecha y hora cumplida**/
+    disablestatus1: function () {
 
       if(Date.parse(this.model.get('date_end'))>Date.now()){
             $('span[data-name=status]').css("pointer-events", "none");
@@ -172,7 +188,7 @@
 
         //this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
 
-        //Elimina ícono de lápiz para editar parent_name
+        //Elimina ï¿½cono de lï¿½piz para editar parent_name
         $('[data-name="parent_name"]').find('.fa-pencil').remove();
 
     },
