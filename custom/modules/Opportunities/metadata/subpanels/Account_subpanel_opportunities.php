@@ -1,5 +1,5 @@
 <?php
-// created: 2018-08-29 17:59:09
+// created: 2018-09-14 17:24:21
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
@@ -9,19 +9,12 @@ $subpanel_layout['list_fields'] = array (
     'width' => 10,
     'default' => true,
   ),
-  'tct_etapa_ddw_c' => 
+  'tct_estapa_subetapa_txf_c' => 
   array (
-    'type' => 'enum',
-    'default' => true,
-    'vname' => 'LBL_TCT_ETAPA_DDW_C',
+    'type' => 'varchar',
+    'vname' => 'LBL_TCT_ESTAPA_SUBETAPA_TXF',
     'width' => 10,
-  ),
-  'estatus_c' => 
-  array (
-    'type' => 'enum',
     'default' => true,
-    'vname' => 'LBL_ESTATUS',
-    'width' => 10,
   ),
   'monto_c' => 
   array (
