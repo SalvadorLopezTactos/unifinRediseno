@@ -38,6 +38,8 @@
         this.model.addValidationTask('sectoreconomico', _.bind(this.sectoreconomico, this));
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
 
+        this.model.addValidationTask('change:email', _.bind(this.expmail, this));
+
 
 
         /*
@@ -881,7 +883,7 @@
                     necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                 }
 
-                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
+                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null || this.model.get('estado_nacimiento_c') == "1") {
                     necesarios = necesarios + '<b>Estado de Nacimiento</b><br>';
                 }
 
@@ -2331,4 +2333,36 @@
             }
         }
     },
+
+    //Funcion que valida el contenido ingresado en el campo del Email
+    expmail: function (fields, errors, callback){
+        if (this.model.get('email') != null && this.model.get('email') !="") {
+
+            var input = (this.model.get('email'));
+            var expresion = /\S+@\S+\.\S+[$%&|<>#]?$/;
+            var cumple = true;
+
+            for (i=0; i< input.length; i++) {
+
+                if (expresion.test(input[i].email_address)== false) {
+                    cumple = false;
+
+                }
+            }
+
+            if (cumple == false) {
+                app.alert.show('Error al validar email', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: '<b>Formato de email incorrecto.</b>'
+                })
+                errors['email'] = errors['email'] || {};
+                errors['email'].required = true;
+            }
+        }
+
+        callback(null, fields, errors);
+    },
+
+
 })
