@@ -41,13 +41,13 @@ class ValidaCamposSolicitud extends SugarApi
         $option = $args['caso'];
 
         $req_pm = "origendelprospecto_c,tipodepersona_c," .
-            "nombre_comercial_c,sectoreconomico_c," .
+            "nombre_comercial_c,sectoreconomico_c,tct_macro_sector_ddw_c," .
             "subsectoreconomico_c,actividadeconomica_c," .
             "empleados_c,promotorleasing_c,promotorfactoraje_c,promotorcredit_c";
 
         $req_pf_y_pfae = "origendelprospecto_c,tipodepersona_c," .
             "primernombre_c,apellidopaterno_c,apellidomaterno_c," .
-            "sectoreconomico_c,subsectoreconomico_c,actividadeconomica_c," .
+            "sectoreconomico_c,subsectoreconomico_c,tct_macro_sector_ddw_c,actividadeconomica_c," .
             "empleados_c," .
             "promotorleasing_c,promotorfactoraje_c,promotorcredit_c";
 
