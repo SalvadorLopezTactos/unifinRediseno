@@ -32,3 +32,7 @@ $mod_strings['LBL_VENCIMIENTO_ANEXOS_CA'] = 'Vencimiento de anexos CA';
 $mod_strings['LBL_ULTIMO_ANEXO_LEASING'] = 'Último anexo activado leasing';
 $mod_strings['LBL_RECORDVIEW_PANEL6'] = 'Seguro';
 $mod_strings['LBL_RECORDVIEW_PANEL7'] = 'Anexos';
+$mod_strings['LBL_TCT_NOTICIA_GENERAL'] = 'Noticia General';
+$mod_strings['LBL_TCT_NOTICIA_SECTOR'] = 'Noticia Macro Sector';
+$mod_strings['LBL_TCT_NOTICIA_REGION'] = 'Noticia Región';
+$mod_strings['LBL_RECORDVIEW_PANEL8'] = 'Noticias';
