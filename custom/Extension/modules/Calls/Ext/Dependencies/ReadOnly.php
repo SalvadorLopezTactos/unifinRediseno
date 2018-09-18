@@ -108,6 +108,14 @@ $dependencies['Calls']['readOnly_Held_NotHeld'] = array
                 'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
             ),
         ),
+        //team_name
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'team_name',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
+            ),
+        ),
 
     ),
     'notActions' => array(),
