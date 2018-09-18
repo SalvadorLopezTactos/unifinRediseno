@@ -2348,7 +2348,7 @@
         if (this.model.get('email') != null && this.model.get('email') !="") {
 
             var input = (this.model.get('email'));
-            var expresion = /\S+@\S+\.\S+[$%&|<>#]?$/;
+            var expresion = /^\S+@\S+\.\S+[$%&|<>#]?$/;
             var cumple = true;
 
             for (i=0; i< input.length; i++) {
