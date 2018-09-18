@@ -814,7 +814,7 @@
             //Valida que se tenga la informaci�n requerida para generar la CURP
             if (this.model.get('fechadenacimiento_c') != null && this.model.get('genero_c') != null && this.model.get('genero_c') != ''
                 && this.model.get('primernombre_c') != null && this.model.get('apellidopaterno_c') != null && this.model.get('apellidomaterno_c') != null
-                && this.model.get('pais_nacimiento_c') != null && this.model.get('estado_nacimiento_c') != null) {
+                && this.model.get('pais_nacimiento_c') != null && this.model.get('estado_nacimiento_c') != null && this.model.get('estado_nacimiento_c') != "1") {
                 var firmoParams = {
                     'fechadenacimiento': this.model.get('fechadenacimiento_c'),
                     'primernombre': this.model.get('primernombre_c'),
