@@ -392,7 +392,11 @@ array (
                 'name' => 'promotorcredit_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTORCREDIT',
-                'span' => 24,
+              ),
+              67 => 'phone_office',
+              68 => 
+              array (
+                'span' => 12,
               ),
             ),
           ),
