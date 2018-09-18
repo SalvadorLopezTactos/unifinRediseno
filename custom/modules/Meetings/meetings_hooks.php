@@ -11,7 +11,7 @@ class Meetings_Hooks
     function RelationAdd($bean = null, $event = null, $args = null)
     {
 		global $db;
-		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $args['related_id'] != $bean->assigned_user_id && $bean->date_entered != $bean->date_modified && stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.") == False)
+		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $args['related_id'] != $bean->assigned_user_id && $bean->date_entered != $bean->date_modified && stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False)
 		{
 			$query = <<<SQL
                 SELECT a.id, b.parent_meeting_c
@@ -55,7 +55,7 @@ SQL;
       		}
       		$acompanianteMeet1->parent_meeting_c = $bean->id;
       		$acompanianteMeet1->assigned_user_id = $args['related_id'];
-      		$acompanianteMeet1->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.";
+      		$acompanianteMeet1->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
       		$acompanianteMeet1->save(); 
       		//Agregar relaciones de invitados
       		$queryrel = <<<SQL
@@ -76,7 +76,7 @@ SQL;
     function RelationDel($bean = null, $event = null, $args = null)
     {
 		global $db;
-		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $bean->date_entered != $bean->date_modified && stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.") == False)
+		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $bean->date_entered != $bean->date_modified && stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False)
 		{
 			$relid = $args['related_id'];
 			$elimina = <<<SQL
@@ -121,7 +121,7 @@ SQL;
     {
         global $db;
         // Crear Reunión
-        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.") == False && $bean->nuevo_c == 1 && $bean->repeat_parent_id == "")
+        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->nuevo_c == 1 && $bean->repeat_parent_id == "")
         {
             $query = <<<SQL
                 SELECT id, user_id
@@ -154,7 +154,7 @@ SQL;
       				}
       				$acompanianteMeet->parent_meeting_c = $bean->id;
       				$acompanianteMeet->assigned_user_id = $row['user_id'];
-      				$acompanianteMeet->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.";
+      				$acompanianteMeet->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
       				$acompanianteMeet->save();
       				//Agregar relaciones de invitados
       				$query1 = $db->query($query);
@@ -172,7 +172,7 @@ SQL;
  			$ultimo1 = $db->query($ultimo);
         }
 		// Editar Reunión
-        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante.") == False && $bean->date_entered != $bean->date_modified && $bean->nuevo_c == 0 && $bean->actualizado_c == 1)
+        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->date_entered != $bean->date_modified && $bean->nuevo_c == 0 && $bean->actualizado_c == 1)
 	    {
 			$query = <<<SQL
                 SELECT a.id, b.parent_meeting_c
