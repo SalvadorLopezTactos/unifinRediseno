@@ -312,10 +312,26 @@
     disableFieldsTime: function(){
         $('.record-edit-link-wrapper[data-name=duration]').remove();
         $('.record-edit-link-wrapper[data-name=reminders]').remove();
-        if (this.model.get('tct_resultado_llamada_ddw_c')=='' ){
+        if (this.model.get('tct_resultado_llamada_ddw_c')==''){
             this.$("[data-name='tct_resultado_llamada_ddw_c']").prop("enable", true);
         }else {
             $('.record-edit-link-wrapper[data-name=tct_resultado_llamada_ddw_c]').remove();
         }
+
+        //Establece campo dependientes de resultado de llamada como editables mientras sea planeado
+        if (this.model.get('status')=='Planned'  ){
+            this.$("[data-name='tct_motivo_ilocalizable_ddw_c']").prop("enable", true);
+            this.$("[data-name='tct_usuario_cita_rel_c']").prop("enable", true);
+            this.$("[data-name='tct_fecha_cita_dat_c']").prop("enable", true);
+            this.$("[data-name='tct_fecha_seguimiento_dat_c']").prop("enable", true);
+            this.$("[data-name='tct_motivo_desinteres_ddw_c']").prop("enable", true);
+        }else {
+            $('.record-edit-link-wrapper[data-name=tct_motivo_ilocalizable_ddw_c]').remove();
+            $('.record-edit-link-wrapper[data-name=tct_usuario_cita_rel_c]').remove();
+            $('.record-edit-link-wrapper[data-name=tct_fecha_cita_dat_c]').remove();
+            $('.record-edit-link-wrapper[data-name=tct_fecha_seguimiento_dat_c]').remove();
+            $('.record-edit-link-wrapper[data-name=tct_motivo_desinteres_ddw_c]').remove();
+        }
+
     },
 })
