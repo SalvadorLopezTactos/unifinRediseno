@@ -414,6 +414,7 @@
         var class_name = $input[0].className,
             field_name = $($input).attr('data-field');
         var expreg =/^[0-9]{8,10}$/;
+        var phones=this.model.get('account_telefonos');
         //if ($.isNumeric($($input).val()) === false && $($input).val() != '') {
         if((expreg.test($($input).val()))==false && $($input).val().trim().length!=0){
             app.alert.show('error_telefono', {
@@ -425,7 +426,27 @@
             $($input).css('border-color', 'red');
             return;
         }else{
-            $($input).css('border-color', '');
+            var coincidencia=0;
+            for(var i=0;i<phones.length;i++){
+                if($($input).val()==phones[i].telefono){
+                    coincidencia++;
+                }
+            }
+            if(coincidencia>0){
+                if(coincidencia==1 && $input[0].className=='existingTelephono'){
+                    $($input).css('border-color', '');
+                }else {
+                    app.alert.show('error_sametelefono', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Este n\u00FAmero telef\u00F3nico ya existe,favor de corregir.'
+                    });
+                    //$($input).focus();
+                    $($input).css('border-color', 'red');
+                }
+            }else {
+                $($input).css('border-color', '');
+            }
         }
 
     },

@@ -224,7 +224,7 @@
     Deshabilita campo status dependiendo de diferentes criterios
      */
     disablestatus:function () {
-        if(this.model.get('id')=='' || Date.parse(this.model.get('date_end'))>Date.now()){
+        if(Date.parse(this.model.get('date_end'))>Date.now() || app.user.attributes.full_name!=this.model.get('assigned_user_name')){
             $('span[data-name=status]').css("pointer-events", "none");
         }else{
             $('span[data-name=status]').css("pointer-events", "auto");
