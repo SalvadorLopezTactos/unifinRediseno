@@ -1,6 +1,7 @@
 <?php
- // created: 2018-09-03 13:35:31
+ // created: 2018-09-19 18:16:00
 $dictionary['Account']['fields']['sectoreconomico_c']['labelValue']='Sector Económico';
+$dictionary['Account']['fields']['sectoreconomico_c']['dependency']='';
 $dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']=array (
   'trigger' => 'tct_macro_sector_ddw_c',
   'values' => 
@@ -100,6 +101,14 @@ $dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']=array (
       0 => '8200008',
       1 => '8100000',
       2 => '9503005',
+    ),
+    9 => 
+    array (
+      0 => '9506009',
+      1 => '9900904',
+      2 => '9900905',
+      3 => '9900906',
+      4 => '9900907',
     ),
     '' => 
     array (
