@@ -140,7 +140,10 @@
         this.model.on('sync', this.valida_centro_prospec, this);
         this.model.on('sync', this.valida_backoffice, this);
 
-
+        //Funcion para eliminar duplicados de arrays
+        Array.prototype.unique=function(a){
+            return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0
+        });
     },
 
 
@@ -2225,6 +2228,7 @@
     validatelefonos: function (fields, errors, callback) {
         var expreg =/^[0-9]{8,10}$/;
         var cont=0;
+        var phones=this.model.get('account_telefonos');
 
         $('.existingTelephono').each(function () {
             if(!expreg.test($(this).val())){
@@ -2267,6 +2271,34 @@
             });
             errors['xd'] = errors['xd'] || {};
             errors['xd'].required = true;
+        }else {
+            var coincidencia = 0;
+            var indices=[];
+            for (var i = 0; i < phones.length; i++) {
+                for (var j = 0; j < phones.length; j++) {
+                    if (phones[j].telefono == phones[i].telefono && i!=j) {
+                        coincidencia++;
+                        indices.push(i);
+                        indices.push(j);
+                    }
+                }
+            }
+            indices=indices.unique();
+            if (coincidencia > 0) {
+                    app.alert.show('error_sametelefono3', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Los n\u00FAmeros telef\u00F3nicos que estas intentando guardar son iguales,favor de corregir.'
+                    });
+                    //$($input).focus();
+                    if(indices.length>0) {
+                        for (var i = 0; i < indices.length; i++) {
+                            $('.existingTelephono').eq(indices[i]).css('border-color', 'red');
+                        }
+                    }
+                    errors['xd'] = errors['xd'] || {};
+                    errors['xd'].required = true;
+            }
         }
         callback(null, fields, errors);
     },
