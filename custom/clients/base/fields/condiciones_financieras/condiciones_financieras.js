@@ -63,39 +63,42 @@
 
         app.api.call('READ', pull_condicionFinanciera_url, {}, {
             success: function (data) {
+			  try
+			  {				
                 var activo_list = app.lang.getAppListStrings('idactivo_list');
                 var plazo_list = app.lang.getAppListStrings('plazo_0');
                 for (var i = 0; i < data.records.length; i++) {
                     self.value[i] = data.records[i].idactivo;
                     //add label for tpl use
-
-
                     data.records[i].activo_label = activo_list[data.records[i].idactivo];
                     data.records[i].plazo_label = plazo_list[data.records[i].plazo];
-
                     if (data.records[i].deposito_en_garantia == true) {
                         data.records[i].detail_deposito_en_garantia_checked = "checked";
                     }
-
                     if (data.records[i].activo_nuevo == true) {
                         data.records[i].detail_activo_nuevo_checked = "checked";
                     }
-
                     if (data.records[i].uso_particular == true) {
                         data.records[i].detail_uso_particular_checked = "checked";
                     }
-
                     if (data.records[i].uso_empresarial == true) {
                         data.records[i].detail_uso_empresarial_checked = "checked";
                     }
                 }
-
                 //set model so tpl detail tpl can read data
                 self.model.set('condiciones_financieras', data.records);
                 self.model._previousAttributes.condiciones_financieras = data.records;
                 self.model._syncedAttributes.condiciones_financieras = data.records;
                 self.format();
                 self._render();
+			  }
+			  catch(err)
+			  {
+                self.model.set('condiciones_financieras', data.records);
+                self.model._previousAttributes.condiciones_financieras = data.records;
+                self.model._syncedAttributes.condiciones_financieras = data.records;
+                self._render();				  
+			  }
             }
         });
 

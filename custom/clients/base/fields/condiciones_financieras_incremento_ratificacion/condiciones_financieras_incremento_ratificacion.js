@@ -44,24 +44,27 @@
         }
         this.incremento_plazo_list_html = incremento_plazo_list_html;
 
-        var api_params = {
-            'max_num': 99,
+		var api_params = {
+			'max_num': 99,
 
-            //Ajuste generado por Salvador Lopez <salvador.lopez@tactos.com.mx>
-            //Cambio de orden
-            'order_by': 'idactivo:ASC,plazo:ASC',
-            'filter': [
-                {
-                    'lev_condicionesfinancieras_opportunitiesopportunities_ida': this.model.id,
-                    'incremento_ratificacion': 1
-                }
-            ]
-        };
-        var pull_condicionFinanciera_url = app.api.buildURL('lev_CondicionesFinancieras',
-            null, null, api_params);
+			//Ajuste generado por Salvador Lopez <salvador.lopez@tactos.com.mx>
+			//Cambio de orden
+			'order_by': 'idactivo:ASC,plazo:ASC',
+			'filter': [
+				{
+					'lev_condicionesfinancieras_opportunitiesopportunities_ida': this.model.id,
+					'incremento_ratificacion': 1
+				}
+			]
+		};
+
+		var pull_condicionFinanciera_url = app.api.buildURL('lev_CondicionesFinancieras',
+			null, null, api_params);
 
         app.api.call('READ', pull_condicionFinanciera_url, {}, {
             success: function (data) {
+				try
+				{
                     var activo_list = app.lang.getAppListStrings('idactivo_list');
                     for (var i = 0; i < data.records.length; i++) {
                         self.value[i] = data.records[i].idactivo;
@@ -80,16 +83,23 @@
                             data.records[i].detail_uso_empresarial_checked = "checked";
                         }
                     }
-
                     //set model so tpl detail tpl can read data
                     self.model.set('condiciones_financieras_incremento_ratificacion', data.records);
                     self.model._previousAttributes.condiciones_financieras_incremento_ratificacion = data.records;
                     self.model._syncedAttributes.condiciones_financieras_incremento_ratificacion = data.records;
                     self.format();
                     self._render();
+				}
+				catch(err)
+				{
+                    self.model.set('condiciones_financieras_incremento_ratificacion', data.records);
+                    self.model._previousAttributes.condiciones_financieras_incremento_ratificacion = data.records;
+                    self.model._syncedAttributes.condiciones_financieras_incremento_ratificacion = data.records;
+                    self._render();					
+				}
             }
         });
-
+			
         //Obtener las condiciones iniciales
         var api_params_cond_iniciales = {
             'max_num': 500,
