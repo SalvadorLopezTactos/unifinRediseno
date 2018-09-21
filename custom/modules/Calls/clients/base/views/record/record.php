@@ -392,56 +392,46 @@ array (
               12 => 'team_name',
               13 => 
               array (
-                'name' => 'tag',
-                'span' => 6,
-              ),
-              14 => 
-              array (
-                'name' => 'tel_telefonos_calls_1_name',
-                'span' => 6,
-              ),
-              15 => 
-              array (
                 'name' => 'tct_resultado_llamada_ddw_c',
                 'label' => 'LBL_TCT_RESULTADO_LLAMADA_DDW',
                 'span' => 12,
               ),
-              16 => 
+              14 => 
               array (
                 'name' => 'tct_calificacion_conferencia_c',
                 'label' => 'LBL_TCT_CALIFICACION_CONFERENCIA',
               ),
-              17 => 
+              15 => 
               array (
                 'name' => 'tct_conferencia_fecha_dat_c',
                 'label' => 'LBL_TCT_CONFERENCIA_FECHA_DAT',
               ),
-              18 => 
+              16 => 
               array (
                 'name' => 'tct_motivo_ilocalizable_ddw_c',
                 'label' => 'LBL_TCT_MOTIVO_ILOCALIZABLE_DDW',
                 'span' => 12,
               ),
-              19 => 
+              17 => 
               array (
                 'name' => 'tct_fecha_cita_dat_c',
                 'label' => 'LBL_TCT_FECHA_CITA_DAT',
                 'span' => 12,
               ),
-              20 => 
+              18 => 
               array (
                 'name' => 'tct_usuario_cita_rel_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_USUARIO_CITA_REL',
                 'span' => 12,
               ),
-              21 => 
+              19 => 
               array (
                 'name' => 'tct_fecha_seguimiento_dat_c',
                 'label' => 'LBL_TCT_FECHA_SEGUIMIENTO_DAT',
                 'span' => 12,
               ),
-              22 => 
+              20 => 
               array (
                 'name' => 'tct_motivo_desinteres_ddw_c',
                 'label' => 'LBL_TCT_MOTIVO_DESINTERES_DDW',

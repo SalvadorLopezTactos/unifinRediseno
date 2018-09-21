@@ -12,7 +12,7 @@
             this._super("initialize", [options]);
             this.on('render',this.disableparentsfields,this);
 
-            this.model.on('sync', this.bloqueaTodo, this);
+            //this.model.on('sync', this.bloqueaTodo, this);
 
             this.model.on('sync', this.cambioFecha, this);
             this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
@@ -24,7 +24,8 @@
             this.model.on('sync', this.fulminantcolor, this);
 
             this.model.on('sync', this.disablestatus1, this);
-        this.model.addValidationTask('resultCallReq',_.bind(this.resultCallRequerido, this));
+            this.model.on('sync', this.disableFieldsTime,this);
+            this.model.addValidationTask('resultCallReq',_.bind(this.resultCallRequerido, this));
 
 
     },
@@ -65,7 +66,7 @@
     * Se bloquea el campo estatus si aun no se ha cumplido la fecha y hora cumplida**/
     disablestatus1: function () {
 
-      if(Date.parse(this.model.get('date_end'))>Date.now()){
+      if(Date.parse(this.model.get('date_end'))>Date.now() || this.model.get('status') == 'Held' || this.model.get('status') == 'Not Held'){
             $('span[data-name=status]').css("pointer-events", "none");
         }else{
             $('span[data-name=status]').css("pointer-events", "auto");
@@ -303,5 +304,34 @@
         $('.control-group').css("background-color", "#e5e5e5");
         $('.a11y-wrapper').css("background-color", "#e5e5e5");
         //$('.a11y-wrapper').css("background-color", "#c6d9ff");
+    },
+
+    /*Victor Martinez López
+    * Duración y recordatorios no son editables cuando la reunión esta como realizada
+    * */
+    disableFieldsTime: function(){
+        $('.record-edit-link-wrapper[data-name=duration]').remove();
+        $('.record-edit-link-wrapper[data-name=reminders]').remove();
+        if (this.model.get('tct_resultado_llamada_ddw_c')==''){
+            this.$("[data-name='tct_resultado_llamada_ddw_c']").prop("enable", true);
+        }else {
+            $('.record-edit-link-wrapper[data-name=tct_resultado_llamada_ddw_c]').remove();
+        }
+
+        //Establece campo dependientes de resultado de llamada como editables mientras sea planeado
+        if (this.model.get('status')=='Planned'  ){
+            this.$("[data-name='tct_motivo_ilocalizable_ddw_c']").prop("enable", true);
+            this.$("[data-name='tct_usuario_cita_rel_c']").prop("enable", true);
+            this.$("[data-name='tct_fecha_cita_dat_c']").prop("enable", true);
+            this.$("[data-name='tct_fecha_seguimiento_dat_c']").prop("enable", true);
+            this.$("[data-name='tct_motivo_desinteres_ddw_c']").prop("enable", true);
+        }else {
+            $('.record-edit-link-wrapper[data-name=tct_motivo_ilocalizable_ddw_c]').remove();
+            $('.record-edit-link-wrapper[data-name=tct_usuario_cita_rel_c]').remove();
+            $('.record-edit-link-wrapper[data-name=tct_fecha_cita_dat_c]').remove();
+            $('.record-edit-link-wrapper[data-name=tct_fecha_seguimiento_dat_c]').remove();
+            $('.record-edit-link-wrapper[data-name=tct_motivo_desinteres_ddw_c]').remove();
+        }
+
     },
 })
