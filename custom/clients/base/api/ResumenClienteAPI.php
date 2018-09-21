@@ -71,6 +71,26 @@ class ResumenClienteAPI extends SugarApi
             "rojo" => $Rojo,
             "amarillo" => $Amarillo
         );
+        /*Victor Martinez Lopez
+        *20-Septiembre-2018
+        *Nuevos Campos de de noticias 
+        */
+        //Noticias General
+        $arr_principal['noticia_general']=array(
+            "noticia"=>""
+            );
+        //Noticias Macro Sector
+        $arr_principal['noticia_macro_sector']=array(
+            "noticia"=>""
+            );
+        //Noticias de Región
+        $arr_principal['noticia_region']=array(
+            "noticia"=>""
+            );
+        //Datos Clave
+        $arr_principal['datos_clave']=array(
+            "dato_clave"=>""
+            );
         //General
         $arr_principal['general_cliente'] = array(
             "tipo" => "No definido",
@@ -176,7 +196,7 @@ class ResumenClienteAPI extends SugarApi
             $linea_disp_credito_aut = 0;
 
             //Fecha de vencimiento
-            $vencimiento_leasing;
+            $vencimiento_leasing = date("Y-m-d");
             $vencimiento_factoring;
             $vencimiento_cauto;
 
@@ -461,6 +481,11 @@ class ResumenClienteAPI extends SugarApi
             if($beanResumen){
                 //Recupera Leasing
                 $arr_principal['leasing']['fecha_pago']= $beanResumen->leasing_fecha_pago;
+                //Victor
+                $arr_principal['noticia_general']['noticia']=$beanResumen->tct_noticia_general_c;
+                $arr_principal['noticia_macro_sector']['noticia']=$beanResumen->tct_noticia_sector_c;
+                $arr_principal['noticia_region']['noticia']=$beanResumen->tct_noticia_region_c;
+                $arr_principal['datos_clave']['dato_clave']=$beanResumen->tct_datos_clave_txa_c;
                 if(!empty($beanResumen->leasing_anexos_activos) && $beanResumen->leasing_anexos_activos!="")
                 {
                     $arr_principal['leasing']['anexos_activos']= $beanResumen->leasing_anexos_activos;

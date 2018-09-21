@@ -5,6 +5,18 @@ AF - 18-01-18
 <!-- Estilos modal -->
 <style>
   /* The Modal (background) */
+  .btn-Guardar {
+        line-height: 18px;
+        text-align: center;
+        display: inline-block;
+        margin-top: 2px;
+        font-size: 12px;
+    }
+  
+  .sinborde { /*Table without border*/
+  border: 0;
+  }
+
   .modal {
       position: fixed; /* Stay in place */
       padding-top: 100px; /* Location of the box */
@@ -83,6 +95,151 @@ AF - 18-01-18
 
 </style>
 
+<!--Fila 0-->
+<div class="row-fluid">
+  <!-- Bloque 1: Noticias General -->
+  <div class="span3">
+    <div style="background-color: #f9f9f9">
+      <div>
+        <!-- Encabezado -->
+        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
+            <font color=#ffffff>
+              <center>
+                <strong>
+                  Noticias General
+                </strong>
+              </center>
+            </font>
+          </a>
+        </div>
+        <!-- Contenido -->
+        <div id="collapseTwo" class="accordion-body in collapse" style="background-color: #ffffff">
+          <!-- Línea 1 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span12" style="height: 180px; overflow: scroll;"> <!--<div class="span12" style="height: 180px; overflow: scroll;">-->
+              <strong>
+                {{#if noticia_general.noticia}}
+                        {{noticia_general.noticia}}
+                {{else}}
+                  <center>No hay noticia general</center>
+                {{/if}}
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bloque 2: Noticias Macro Sector General -->
+  <div class="span3">
+    <div style="background-color: #f9f9f9">
+      <div>
+        <!-- Encabezado -->
+        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
+            <font color=#ffffff>
+              <center>
+                <strong>
+                  Noticias de Macro Sector
+                </strong>
+              </center>
+            </font>
+          </a>
+        </div>
+        <!-- Contenido -->
+        <div id="collapseTwo" class="accordion-body in collapse" style="background-color: #ffffff">
+          <!-- Línea 1 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span12" style="height: 180px; overflow: scroll;"> <!--<div class="span12" style="height: 180px; overflow: scroll;">-->
+              <strong>
+                {{#if noticia_macro_sector.noticia}}
+                  {{noticia_macro_sector.noticia}}
+                {{else}}
+                  <center>No hay noticia de macro sector</center>
+                {{/if}}
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bloque 3: Noticias Región -->
+  <div class="span3">
+    <div style="background-color: #f9f9f9">
+      <div>
+        <!-- Encabezado -->
+        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
+            <font color=#ffffff>
+              <center>
+                <strong>
+                  Noticias de Región 
+                </strong>
+              </center>
+            </font>
+          </a>
+        </div>
+        <!-- Contenido -->
+        <div id="collapseTwo" class="accordion-body in collapse" style="background-color: #ffffff">
+          <!-- Línea 1 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span12" style="height: 180px; overflow: scroll;"> <!--<div class="span12" style="height: 180px; overflow: scroll;">-->
+              <strong>
+                {{#if noticia_region.noticia}}
+                  {{noticia_region.noticia}}
+                {{else}}
+                  <center>No hay noticia de región</center>
+                {{/if}}
+              </strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bloque 4: Datos Clave -->
+  <div class="span3">
+    <div style="background-color: #f9f9f9">
+      <div>
+        <!-- Encabezado -->
+        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
+            <font color=#ffffff>
+              <center>
+                <strong>
+                  Datos Clave 
+                </strong>
+              </center>
+            </font>
+          </a>
+        </div>
+        <!-- Contenido -->
+        <div id="collapseTwo" class="accordion-body in collapse" style="background-color: #ffffff">
+          <!-- Línea 1 -->
+          <div class="row-fluid" style="background-color: #ffffff">
+            <div class="span12" style="height: 180px; resize: none;" align="right">
+            <textarea style="height: 78%; overflow: scroll; resize: none;" class="sinborde" data-name="textComment" id="txtComment">
+                {{#if datos_clave.dato_clave}}
+                  {{datos_clave.dato_clave}}
+                  {{/if}}
+            </textarea>
+              <button class="btn btn-success  btn-Guardar" id="btn-Guardar" type="submit">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</font>
+  </center>
+    </div>
+        </div>
+          </div>
+            </div>
+              </div>
+                </div>
 <!-- Fila 1 -->
 <div class="row-fluid">
   <!-- Bloque 1: General -->
@@ -475,7 +632,6 @@ AF - 18-01-18
     </div>
   </div>
 </div>
-
 <!-- Modal- Activos -->
 <div id="myModal1" class="row-fluid" style="display:none">
   <div class="modal" style="background-color: #21618C">

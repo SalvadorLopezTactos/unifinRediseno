@@ -25,6 +25,7 @@
       //Cesiones
       'click #orderByCesion': 'orderCesion',
       'click #orderByCesionVencimiento': 'orderCesionVencimiento',
+      'click .btn-Guardar': 'Save_comentario',
 
   },
 
@@ -394,6 +395,46 @@
     this.getData(null,null,orderData);
   },
 
+  Save_comentario: function(){
+    var self =this;
+        var comentario = this.$('#txtComment').val();
+        //var notification = app.data.createBean('Notifications');
+        if(comentario!="")
+        {
+          app.api.call("update", app.api.buildURL("tct02_Resumen/"+this.model.get('id')),{"tct_datos_clave_txa_c":comentario
+           }, {
+               success: _.bind(function (data) {
+                   if (data!=null) {
+                       app.alert.show("alerta_datos_clave", {
+                           level: "info",
+                           title: "Datos creados",
+                           autoClose: false
+                       });                       
+                   }
+               }, this)
+           });
+
+           // notification.set("tct_datos_clave_txa_c", comentario);
+            //notification.set("assigned_user_id", tempUsr);
+            /*
+            notification.set("name", 'FeedBack');
+            notification.save();
+            notification.save(null,{
+                success:function() {
+               // alert("Prueba si entre");
+
+                    self.hideDivComment();
+                    self.getNotificationUsr();
+                },
+                error:function() {}
+            });
+            */
+
+            //this.hideDivComment();
+            //this.getNotificationUsr();
+        
+        }
+  },
   orderCesion: function(){
     //Ordenamiento: Anexos por Anexo - Columna 2
     // console.log('--anexosdata--');
@@ -467,7 +508,6 @@
 
     this.getData(null,null,orderData);
   },
-
   // Función para comparación de fechas
   fDate: function(s) {
     var d = new Date();
