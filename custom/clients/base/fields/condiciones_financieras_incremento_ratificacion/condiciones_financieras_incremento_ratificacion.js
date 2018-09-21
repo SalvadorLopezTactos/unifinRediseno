@@ -95,6 +95,7 @@
                     self.model.set('condiciones_financieras_incremento_ratificacion', data.records);
                     self.model._previousAttributes.condiciones_financieras_incremento_ratificacion = data.records;
                     self.model._syncedAttributes.condiciones_financieras_incremento_ratificacion = data.records;
+					self.format();
                     self._render();					
 				}
             }
