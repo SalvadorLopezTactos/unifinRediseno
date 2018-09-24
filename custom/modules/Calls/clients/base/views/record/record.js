@@ -11,7 +11,7 @@
             self = this;
             this._super("initialize", [options]);
             this.on('render',this.disableparentsfields,this);
-
+            this.on('render', this.noEditStatus,this);
             //this.model.on('sync', this.bloqueaTodo, this);
 
             this.model.on('sync', this.cambioFecha, this);
@@ -22,6 +22,9 @@
                 Funcion que pinta de color los paneles relacionados
             */
             this.model.on('sync', this.fulminantcolor, this);
+            
+            $('[data-name="status"]').find('.fa-pencil').remove();
+            $('.record-edit-link-wrapper[data-name=status]').remove();
 
             this.model.on('sync', this.disablestatus1, this);
             this.model.on('sync', this.disableFieldsTime,this);
@@ -83,7 +86,6 @@
         var target,
             cellData,
             field;
-
         if (e) { // If result of click event, extract target and cell.
             target = this.$(e.target);
             cell = target.parents('.record-cell');
@@ -209,8 +211,16 @@
 
         //Elimina �cono de l�piz para editar parent_name
         $('[data-name="parent_name"]').find('.fa-pencil').remove();
+        
+        },
 
-    },
+        /*Victor Martinez Lopez
+        *El estado no es editable de manera directa al dar click, solo cuando se presiona el boton editar
+        */
+    noEditStatus:function(){
+        $('[data-name="status"]').find('.fa-pencil').remove();
+        $('.record-edit-link-wrapper[data-name=status]').remove();
+        },
 
     cambioFecha: function () {
         this.fechaInicioTemp = Date.parse(this.model.get("date_start"));
