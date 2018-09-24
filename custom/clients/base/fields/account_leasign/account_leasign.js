@@ -399,6 +399,8 @@
     var self =this;
         var comentario = this.$('#txtComment').val();
         //var notification = app.data.createBean('Notifications');
+        alert("comentarios  " +comentario);
+        
         if(comentario!="")
         {
           app.api.call("update", app.api.buildURL("tct02_Resumen/"+this.model.get('id')),{"tct_datos_clave_txa_c":comentario
