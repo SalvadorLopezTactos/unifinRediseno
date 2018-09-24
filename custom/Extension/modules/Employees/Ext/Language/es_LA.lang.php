@@ -14,3 +14,5 @@ $mod_strings['LBL_DETAILVIEW_PANEL2'] = 'Contacto';
 $mod_strings['LBL_TIPODEPRODUCTO'] = 'Tipo Producto';
 $mod_strings['LBL_PRODUCTOS'] = 'Productos';
 $mod_strings['LBL_TCT_TEAM_ADDRESS_TXF_C'] = 'Dirección';
+$mod_strings['LBL_TCT_ALTA_CD_CHK'] = 'Alta Cedente / Deudor Factoraje';
+$mod_strings['LBL_TCT_ALTA_CD_CHK_C'] = 'Alta Cedente / Deudor Factoraje';
