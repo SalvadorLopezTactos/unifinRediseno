@@ -316,13 +316,11 @@ array (
               ),
               55 => 
               array (
-                'name' => 'show_panel_c',
-                'label' => 'LBL_SHOW_PANEL',
+                'name' => 'tct_macro_sector_ddw_c',
+                'label' => 'LBL_TCT_MACRO_SECTOR_DDW',
               ),
               56 => 
               array (
-                'name' => 'tct_prospecto_contactado_chk_c',
-                'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
               ),
               57 => 
               array (
@@ -392,7 +390,11 @@ array (
                 'name' => 'promotorcredit_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROMOTORCREDIT',
-                'span' => 24,
+              ),
+              67 => 'phone_office',
+              68 => 
+              array (
+                'span' => 12,
               ),
             ),
           ),

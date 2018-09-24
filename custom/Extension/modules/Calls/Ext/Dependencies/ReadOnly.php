@@ -108,6 +108,14 @@ $dependencies['Calls']['readOnly_Held_NotHeld'] = array
                 'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
             ),
         ),
+        //team_name
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'team_name',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
+            ),
+        ),
 
     ),
     'notActions' => array(),
@@ -149,14 +157,14 @@ $dependencies['Calls']['MotivoIlocalizable'] = array(
                     'value' => 'equal($tct_resultado_llamada_ddw_c,"Ilocalizable")',
                 ),
             ),
-            array(
+            /*array(
                 'name' => 'ReadOnly',
                 //The parameters passed in will depend on the action type set in 'name'
                 'params' => array(
                     'target' => 'tct_motivo_ilocalizable_ddw_c',
                     'value' => 'and(not(equal($id,"")),not(equal($tct_resultado_llamada_ddw_c,"")),not(equal($status,"Planned")))',
                 ),
-            ),
+            ),*/
         ),
     );
 $dependencies['Calls']['MotivoDesinteres'] = array(
@@ -172,14 +180,14 @@ $dependencies['Calls']['MotivoDesinteres'] = array(
                 'value' => 'equal($tct_resultado_llamada_ddw_c,"No_esta_Interesado")',
             ),
         ),
-        array(
+        /*array(
             'name' => 'ReadOnly',
             //The parameters passed in will depend on the action type set in 'name'
             'params' => array(
                 'target' => 'tct_motivo_desinteres_ddw_c',
                 'value' => 'and(not(equal($id,"")),not(equal($tct_resultado_llamada_ddw_c,"")),not(equal($status,"Planned")))',
             ),
-        ),
+        ),*/
     ),
 );
 $dependencies['Calls']['FechaCita'] = array(
@@ -195,14 +203,14 @@ $dependencies['Calls']['FechaCita'] = array(
                 'value' => 'equal($tct_resultado_llamada_ddw_c,"Cita")',
             ),
         ),
-        array(
+        /*array(
             'name' => 'ReadOnly',
             //The parameters passed in will depend on the action type set in 'name'
             'params' => array(
                 'target' => 'tct_fecha_cita_dat_c',
                 'value' => 'and(not(equal($id,"")),not(equal($tct_resultado_llamada_ddw_c,"")),not(equal($status,"Planned")))',
             ),
-        ),
+        ),*/
     ),
 );
 $dependencies['Calls']['FechaSeguimiento'] = array(
@@ -218,14 +226,14 @@ $dependencies['Calls']['FechaSeguimiento'] = array(
                 'value' => 'equal($tct_resultado_llamada_ddw_c,"Seguimiento")',
             ),
         ),
-        array(
+        /*array(
             'name' => 'ReadOnly',
             //The parameters passed in will depend on the action type set in 'name'
             'params' => array(
                 'target' => 'tct_fecha_seguimiento_dat_c',
                 'value' => 'and(not(equal($id,"")),not(equal($tct_resultado_llamada_ddw_c,"")),not(equal($status,"Planned")))',
             ),
-        ),
+        ),*/
     ),
 );
 $dependencies['Calls']['UsuarioCita'] = array(
@@ -241,13 +249,13 @@ $dependencies['Calls']['UsuarioCita'] = array(
                 'value' => 'equal($tct_resultado_llamada_ddw_c,"Cita")',
             ),
         ),
-        array(
+        /*array(
             'name' => 'ReadOnly',
             //The parameters passed in will depend on the action type set in 'name'
             'params' => array(
                 'target' => 'tct_usuario_cita_rel_c',
                 'value' => 'and(not(equal($id,"")),not(equal($tct_resultado_llamada_ddw_c,"")),not(equal($status,"Planned")))',
             ),
-        ),
+        ),*/
     ),
 );

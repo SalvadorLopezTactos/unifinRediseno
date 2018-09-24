@@ -348,7 +348,9 @@ $DASHLET_URL = $sugar_config['uni2_url'];
 
             "widgetset": "com.unifin.MyAppWidgetset",
 
-            "theme": "mytheme",
+            //"theme": "mytheme",
+            "theme": "uni2Theme",
+            
 
             "versionInfo": {"vaadinVersion": "7.4.0"},
 
