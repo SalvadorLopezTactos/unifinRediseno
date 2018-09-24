@@ -2451,8 +2451,8 @@
                     autoClose: false,
                     messages: 'Debe tener las siguientes direcciones: <br><b>' + direccionesfaltantes + '</b>'
                 })
-                errors['account_direcciones'] = errors['account_direcciones'] || {};
-                errors['account_direcciones'].required = true;
+                errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
+                errors['account_direcciones_c'].required = true;
 
             }
         }
