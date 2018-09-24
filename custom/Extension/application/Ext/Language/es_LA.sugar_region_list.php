@@ -1,5 +1,5 @@
 <?php
- // created: 2018-08-22 09:52:28
+ // created: 2018-09-24 17:25:32
 
 $app_list_strings['region_list']=array (
   'Metropolitana' => 'Metropolitana',
@@ -9,4 +9,5 @@ $app_list_strings['region_list']=array (
   'Occidente' => 'Occidente',
   'Region 0' => '0',
   'CASA' => 'CASA',
+  'Express' => 'Express',
 );
