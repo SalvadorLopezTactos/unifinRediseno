@@ -20,6 +20,7 @@
         'change .existingTelephono': 'updateExistingAddress',
         'blur .existingTelephono': 'blurExistingTelefono',
         'blur .newTelefono': 'blurExistingTelefono',
+        'keydown .existingTelephono': 'keyDownNewExtension',
         'keydown .newTelefono': 'keyDownNewExtension',
         'change .existingExtension': 'updateExistingAddress',
         //'blur .existingExtension': 'blurExtension',
@@ -255,54 +256,76 @@
         if (!evt) return;
         /*@Jesus Carrillo */
 
-
         var expreg =/^[0-9]{8,10}$/;
+        var phones=this.model.get('account_telefonos');
 
         if(this.$('.newTipotelefono').val()!='' && this.$('.newPais').val()!='' && expreg.test(this.$('.newTelefono').val()) &&
             this.$('.newEstatus').val()!='') {
 
-            $('[data-name=account_telefonos]').removeClass("error");
-            $('[data-name=account_telefonos]').find('.input-append').removeClass("error");
-            $('[data-name=account_telefonos]').find('span.error-tooltip.add-on').hide();
+            this.$('.newTipotelefono').css('border-color', '');
+            this.$('.newPais').css('border-color', '');
+            this.$('.newTelefono').css('border-color', '');
+            this.$('.newEstatus').css('border-color', '');
 
-            var telefono = this.$(evt.currentTarget).val() || this.$('.newTelefono').val(),
-                currentValue,
-                telefonoFieldHtml,
-                $newTelefonoField;
-
-            telefono = $.trim(telefono);
-
-            if ((telefono !== '') && (this._addNewTelefonoToModel(telefono))) {
-                // build the new email field
-                currentValue = this.model.get(this.name);
-                telefonoFieldHtml = this._buildTelefonoFieldHtml({
-                    telefono: telefono,
-                    extension: $('.newExtension').val(),
-                    pais: $('.newPais').val(),
-                    tipotelefono: $('.newTipotelefono').val(),
-                    estatus: $('.newEstatus').val(),
-                    principal: currentValue && (currentValue.length === 1)
-                });
-
-                // append the new field before the new email input
-                $newTelefonoField = this._getNewEmailField()
-                    .closest('.telefonos')
-                    .before(telefonoFieldHtml);
-
-                // add tooltips
-                //this.addPluginTooltips($newTelefonoField.prev());
-
-                if (this.def.required && this._shouldRenderRequiredPlaceholder()) {
-                    // we need to remove the required place holder now
-                    var label = app.lang.get('LBL_REQUIRED_FIELD', this.module),
-                        el = this.$(this.fieldTag).last(),
-                        placeholder = el.prop('placeholder').replace('(' + label + ') ', '');
-
-                    el.prop('placeholder', placeholder.trim()).removeClass('required');
+            var coincidencia=0;
+            for(var i=0;i<phones.length;i++){
+                if($('.newTelefono').val()==phones[i].telefono){
+                    coincidencia++;
                 }
             }
+            if(coincidencia==0) {
 
-            this._clearNewAddressField();
+                $('[data-name=account_telefonos]').removeClass("error");
+                $('[data-name=account_telefonos]').find('.input-append').removeClass("error");
+                $('[data-name=account_telefonos]').find('span.error-tooltip.add-on').hide();
+
+                var telefono = this.$(evt.currentTarget).val() || this.$('.newTelefono').val(),
+                    currentValue,
+                    telefonoFieldHtml,
+                    $newTelefonoField;
+
+                telefono = $.trim(telefono);
+
+                if ((telefono !== '') && (this._addNewTelefonoToModel(telefono))) {
+                    // build the new email field
+                    currentValue = this.model.get(this.name);
+                    telefonoFieldHtml = this._buildTelefonoFieldHtml({
+                        telefono: telefono,
+                        extension: $('.newExtension').val(),
+                        pais: $('.newPais').val(),
+                        tipotelefono: $('.newTipotelefono').val(),
+                        estatus: $('.newEstatus').val(),
+                        principal: currentValue && (currentValue.length === 1)
+                    });
+
+                    // append the new field before the new email input
+                    $newTelefonoField = this._getNewEmailField()
+                        .closest('.telefonos')
+                        .before(telefonoFieldHtml);
+
+                    // add tooltips
+                    //this.addPluginTooltips($newTelefonoField.prev());
+
+                    if (this.def.required && this._shouldRenderRequiredPlaceholder()) {
+                        // we need to remove the required place holder now
+                        var label = app.lang.get('LBL_REQUIRED_FIELD', this.module),
+                            el = this.$(this.fieldTag).last(),
+                            placeholder = el.prop('placeholder').replace('(' + label + ') ', '');
+
+                        el.prop('placeholder', placeholder.trim()).removeClass('required');
+                    }
+                }
+
+                this._clearNewAddressField();
+            }else {
+                app.alert.show('error_sametelefono2', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'Este n\u00FAmero telef\u00F3nico ya existe,favor de corregir.'
+                });
+                //$($input).focus();
+                $('.newTelefono').css('border-color', 'red');
+            }
         }else {
             app.alert.show('error_modultel', {
                 level: 'error',
@@ -414,6 +437,7 @@
         var class_name = $input[0].className,
             field_name = $($input).attr('data-field');
         var expreg =/^[0-9]{8,10}$/;
+        var phones=this.model.get('account_telefonos');
         //if ($.isNumeric($($input).val()) === false && $($input).val() != '') {
         if((expreg.test($($input).val()))==false && $($input).val().trim().length!=0){
             app.alert.show('error_telefono', {
@@ -425,7 +449,27 @@
             $($input).css('border-color', 'red');
             return;
         }else{
-            $($input).css('border-color', '');
+            var coincidencia=0;
+            for(var i=0;i<phones.length;i++){
+                if($($input).val()==phones[i].telefono){
+                    coincidencia++;
+                }
+            }
+            if(coincidencia>0){
+                if(coincidencia==1 && $input[0].className=='existingTelephono'){
+                    $($input).css('border-color', '');
+                }else {
+                    app.alert.show('error_sametelefono', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Este n\u00FAmero telef\u00F3nico ya existe,favor de corregir.'
+                    });
+                    //$($input).focus();
+                    $($input).css('border-color', 'red');
+                }
+            }else {
+                $($input).css('border-color', '');
+            }
         }
 
     },

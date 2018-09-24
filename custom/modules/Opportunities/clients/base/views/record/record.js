@@ -1075,7 +1075,7 @@ console.log(name);
           {
              $('[name="save_button"]').eq(0).hide();
           }
-          else {$('[name="save_button"]').eq(0).show();}
+          //else {$('[name="save_button"]').eq(0).show();}
      },
 
     validamontos: function () {
