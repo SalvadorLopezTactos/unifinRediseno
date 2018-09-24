@@ -12,6 +12,7 @@
         this._super("initialize", [options]);
 
         this.on('render', this.disableparentsfields, this);
+        this.on('render', this.noEditStatus,this);
         this.model.on('sync', this.cambioFecha, this);
         this.model.on('sync', this.disablestatus, this);
         this.model.on('sync', this.disableFieldsTime,this);
@@ -23,7 +24,6 @@
             Funcion que pinta de color los paneles relacionados
         */
         this.model.on('sync', this.fulminantcolor, this);
-
         /*
           * Victor Martinez Lopez 24-08-2018
         */
@@ -201,6 +201,14 @@
         //Elimina ícono de lápiz para editar parent_name*
         $('[data-name="parent_name"]').find('.fa-pencil').remove();
         },
+        
+        /*Victor Martinez Lopez
+        *El estado no es editable de manera directa al dar click, solo cuando se presiona el boton editar
+        */
+    noEditStatus:function (){
+        $('[data-name="status"]').find('.fa-pencil').remove();
+        $('.record-edit-link-wrapper[data-name=status]').remove();
+    },
     /*Victor Martinez López
     * Duración y recordatorios no son editables cuando la reunión esta como realizada
     * */
