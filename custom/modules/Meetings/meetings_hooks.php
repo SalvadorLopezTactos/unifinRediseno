@@ -13,7 +13,7 @@ class Meetings_Hooks
 		global $db;
 		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $args['related_id'] != $bean->assigned_user_id && $bean->date_entered != $bean->date_modified && stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False)
 		{
-			$query = <<<SQL
+/*			$query = <<<SQL
                 SELECT a.id, b.parent_meeting_c
                 FROM meetings a, meetings_cstm b
                 WHERE b.parent_meeting_c = '{$bean->id}'
@@ -33,8 +33,8 @@ SQL;
 					AND user_id = 1
 SQL;
 				$levadmin1 = $db->query($levadmin);
-			}
-        // Crear Reunión
+			}*/
+			// Crear Reunión
   			$exclude = array
 			  (
   				'id',
@@ -57,7 +57,7 @@ SQL;
       		$acompanianteMeet1->assigned_user_id = $args['related_id'];
       		$acompanianteMeet1->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
       		$acompanianteMeet1->save(); 
-      		//Agregar relaciones de invitados
+/*      		//Agregar relaciones de invitados
       		$queryrel = <<<SQL
 				SELECT id, user_id
       			FROM meetings_users
@@ -68,8 +68,25 @@ SQL;
       		while($rowrel = $db->fetchByAssoc($queryrel1))
       		{
       			$acompanianteMeet1->set_relationship('meetings_users', array('meeting_id' => $acompanianteMeet1->id, 'user_id' => $rowrel['user_id']));
-      		}
+      		}*/
 		}
+		//Elimina Invitados
+        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == True)
+	    {
+			$levadmin = <<<SQL
+				UPDATE meetings_users SET deleted = 1
+				WHERE meeting_id = '{$bean->id}'
+				AND user_id <> '{$bean->assigned_user_id}'
+SQL;
+			$levadmin1 = $db->query($levadmin);
+		}
+		//Elimina Admin
+		$levadmin = <<<SQL
+			UPDATE meetings_users SET deleted = 1
+			WHERE meeting_id = '{$bean->id}'
+			AND user_id = 1
+SQL;
+		$levadmin1 = $db->query($levadmin);
 	}
 	
     //Eliminar Invitados
@@ -156,12 +173,12 @@ SQL;
       				$acompanianteMeet->assigned_user_id = $row['user_id'];
       				$acompanianteMeet->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
       				$acompanianteMeet->save();
-      				//Agregar relaciones de invitados
+/*      				//Agregar relaciones de invitados
       				$query1 = $db->query($query);
       				while($row1 = $db->fetchByAssoc($query1))
       				{
       					$acompanianteMeet->set_relationship('meetings_users', array('meeting_id' => $acompanianteMeet->id, 'user_id' => $row1['user_id']));
-      				}
+      				}*/
       			}
       		}
       		$ultimo = <<<SQL
@@ -212,13 +229,6 @@ SQL;
       				}
       			}
       			$acompanianteMeet->save();
-				//Elimina Admin
-				$levadmin = <<<SQL
-					UPDATE meetings_users SET deleted = 1
-					WHERE meeting_id = '{$acompanianteMeet->id}'
-					AND user_id = 1
-SQL;
-				$levadmin1 = $db->query($levadmin);
       		}
       		$ultimo = <<<SQL
                     UPDATE meetings_cstm
@@ -227,5 +237,23 @@ SQL;
 SQL;
             $ultimo1 = $db->query($ultimo);
         }
+		//Elimina Invitados
+        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == True)
+	    {
+			$levadmin = <<<SQL
+				UPDATE meetings_users SET deleted = 1
+				WHERE meeting_id = '{$bean->id}'
+				AND user_id <> '{$bean->assigned_user_id}'
+SQL;
+			$levadmin1 = $db->query($levadmin);
+			$GLOBALS['log']->fatal("Hola");
+		}
+		//Elimina Admin
+		$levadmin = <<<SQL
+			UPDATE meetings_users SET deleted = 1
+			WHERE meeting_id = '{$bean->id}'
+			AND user_id = 1
+SQL;
+		$levadmin1 = $db->query($levadmin);		
     }
 }
