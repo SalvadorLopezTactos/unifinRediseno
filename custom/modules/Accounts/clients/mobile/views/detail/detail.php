@@ -345,37 +345,32 @@ array (
               ),
               57 => 
               array (
-                'name' => 'show_panel_c',
-                'label' => 'LBL_SHOW_PANEL',
+                'name' => 'tct_macro_sector_ddw_c',
+                'label' => 'LBL_TCT_MACRO_SECTOR_DDW',
               ),
               58 => 
-              array (
-                'name' => 'tct_prospecto_contactado_chk_c',
-                'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
-              ),
-              59 => 
               array (
                 'name' => 'sectoreconomico_c',
                 'label' => 'LBL_SECTORECONOMICO',
               ),
-              60 => 
+              59 => 
               array (
                 'name' => 'subsectoreconomico_c',
                 'studio' => 'visible',
                 'label' => 'LBL_SUBSECTORECONOMICO',
               ),
-              61 => 
+              60 => 
               array (
                 'name' => 'actividadeconomica_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ACTIVIDADECONOMICA',
               ),
-              62 => 
+              61 => 
               array (
                 'name' => 'empleados_c',
                 'label' => 'LBL_EMPLEADOS',
               ),
-              63 => 
+              62 => 
               array (
                 'related_fields' => 
                 array (
@@ -385,7 +380,7 @@ array (
                 'name' => 'ventas_anuales_c',
                 'label' => 'LBL_VENTAS_ANUALES',
               ),
-              64 => 
+              63 => 
               array (
                 'related_fields' => 
                 array (
@@ -395,7 +390,7 @@ array (
                 'name' => 'activo_fijo_c',
                 'label' => 'LBL_ACTIVO_FIJO',
               ),
-              65 => 
+              64 => 
               array (
                 'related_fields' => 
                 array (
@@ -405,7 +400,7 @@ array (
                 'name' => 'potencial_cuenta_c',
                 'label' => 'LBL_POTENCIAL_CUENTA',
               ),
-              66 => 
+              65 => 
               array (
                 'name' => 'promotorleasing_c',
                 'studio' => 'visible',
@@ -417,7 +412,7 @@ array (
                   'tipodeproducto_c' => '1',
                 ),
               ),
-              67 => 
+              66 => 
               array (
                 'name' => 'promotorfactoraje_c',
                 'studio' => 'visible',
@@ -429,7 +424,7 @@ array (
                   'tipodeproducto_c' => '4',
                 ),
               ),
-              68 => 
+              67 => 
               array (
                 'name' => 'promotorcredit_c',
                 'studio' => 'visible',
@@ -441,7 +436,7 @@ array (
                   'tipodeproducto_c' => '3',
                 ),
               ),
-              69 => 'phone_office',
+              68 => 'phone_office',
             ),
           ),
         ),
