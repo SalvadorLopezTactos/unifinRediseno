@@ -189,6 +189,15 @@ array (
             'label' => 'LBL_TCT_ALTA_CLIENTES_CHK',
           ),
         ),
+        12 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_alta_cd_chk_c',
+            'label' => 'LBL_TCT_ALTA_CD_CHK_C',
+          ),
+          1 => '',
+        ),
       ),
       'lbl_editview_panel1' => 
       array (
