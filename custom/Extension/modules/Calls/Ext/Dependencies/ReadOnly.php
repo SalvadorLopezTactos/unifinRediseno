@@ -145,7 +145,7 @@ $dependencies['Calls']['ResultadoCalls'] = array(
     ),
 );
 $dependencies['Calls']['MotivoIlocalizable'] = array(
-        'hooks' => array("edit"),
+        'hooks' => array("all"),
         'triggerFields' => array('tct_resultado_llamada_ddw_c','status','id'),
         'onload' => true,
         //Actions is a list of actions to fire when the trigger is true
@@ -168,7 +168,7 @@ $dependencies['Calls']['MotivoIlocalizable'] = array(
         ),
     );
 $dependencies['Calls']['MotivoDesinteres'] = array(
-    'hooks' => array("edit"),
+    'hooks' => array("all"),
     'triggerFields' => array('tct_resultado_llamada_ddw_c','status','id'),
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
@@ -191,7 +191,7 @@ $dependencies['Calls']['MotivoDesinteres'] = array(
     ),
 );
 $dependencies['Calls']['FechaCita'] = array(
-    'hooks' => array("edit"),
+    'hooks' => array("all"),
     'triggerFields' => array('tct_resultado_llamada_ddw_c','status','id'),
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
@@ -214,7 +214,7 @@ $dependencies['Calls']['FechaCita'] = array(
     ),
 );
 $dependencies['Calls']['FechaSeguimiento'] = array(
-    'hooks' => array("edit"),
+    'hooks' => array("all"),
     'triggerFields' => array('tct_resultado_llamada_ddw_c','status','id'),
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
@@ -237,7 +237,7 @@ $dependencies['Calls']['FechaSeguimiento'] = array(
     ),
 );
 $dependencies['Calls']['UsuarioCita'] = array(
-    'hooks' => array("edit"),
+    'hooks' => array("all"),
     'triggerFields' => array('tct_resultado_llamada_ddw_c','status','id'),
     'onload' => true,
     //Actions is a list of actions to fire when the trigger is true
