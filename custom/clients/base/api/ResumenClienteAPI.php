@@ -197,8 +197,8 @@ class ResumenClienteAPI extends SugarApi
 
             //Fecha de vencimiento
             $vencimiento_leasing = date("Y-m-d");
-            $vencimiento_factoring;
-            $vencimiento_cauto;
+            $vencimiento_factoring = date("Y-m-d");
+            $vencimiento_cauto = date("Y-m-d");
 
             //Recorre operaciones
             foreach ($relatedBeans as $opps) {

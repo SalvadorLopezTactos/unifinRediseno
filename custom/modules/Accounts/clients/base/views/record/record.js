@@ -2118,8 +2118,12 @@
         if (!_.isEmpty(this.model.get('account_telefonos'))) {
             var telefono = this.model.get('account_telefonos');
             for (var i = 0; i < telefono.length; i++) {
-                if (telefono[i].principal) {
+                if (telefono[i].principal) { 
+                    if (telefono[i].pais!='52'){
                     this.model.set('phone_office', "base" + telefono[i].pais + " " + telefono[i].telefono);
+                            }else{
+                                this.model.set('phone_office', "" + telefono[i].telefono);
+                    }
                 }
             }
         }
