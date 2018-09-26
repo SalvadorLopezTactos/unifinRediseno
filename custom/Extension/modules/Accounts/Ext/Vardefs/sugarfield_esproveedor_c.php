@@ -3,7 +3,7 @@
 $dictionary['Account']['fields']['esproveedor_c']['labelValue']='Es Proveedor';
 $dictionary['Account']['fields']['esproveedor_c']['enforced']='';
 $dictionary['Account']['fields']['esproveedor_c']['dependency']='and(
-equal($tipo_registro_c,"Lead"),equal($tipo_registro_c,"Persona")
+not(equal($tipo_registro_c,"Lead")),not(equal($tipo_registro_c,"Persona"))
 )';
 
  ?>
