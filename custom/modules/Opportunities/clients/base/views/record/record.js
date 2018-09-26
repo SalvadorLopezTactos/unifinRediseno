@@ -685,7 +685,6 @@
                     }
 
                     if (Number(this.model.get('ca_pago_mensual_c')) == 0) {
-                        
                         errors['ca_pago_mensual_c'] = errors['ca_pago_mensual_c'] || {};
                         errors['ca_pago_mensual_c'].required = true;
 
