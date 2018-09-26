@@ -2446,6 +2446,7 @@
             }
 
             if ( direccionesfaltantes != "") {
+                $('#s2id_multi1 ul').css('border-color', 'red');
                 app.alert.show('Error al validar Direcciones', {
                     level: 'error',
                     autoClose: false,
