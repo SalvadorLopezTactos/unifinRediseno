@@ -246,7 +246,6 @@ SQL;
 				AND user_id <> '{$bean->assigned_user_id}'
 SQL;
 			$levadmin1 = $db->query($levadmin);
-			$GLOBALS['log']->fatal("Hola");
 		}
 		//Elimina Admin
 		$levadmin = <<<SQL
