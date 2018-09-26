@@ -1466,8 +1466,7 @@
             if ( direccionesfaltantes != "") {
                 //Funcionalidad de pintar en rojo el borde del campo indicador en caso de estar vacio y de la direccion añadida
                 //Adrian Arauz 25/09/2018.
-                //$('.select2-choices').eq(2).css('border-color', 'red');
-                //$('.select2-choices').eq(3).css('border-color', '');
+                $('.select2-choices').css('border-color', 'red');
 
                 app.alert.show('Error al validar Direcciones', {
                     level: 'error',
@@ -1478,6 +1477,12 @@
                 errors['account_direcciones_c'].required = true;
 
             }
+            else {
+                $('.select2-choices').css('border-color', '');
+
+            }
+
+
         }
 
         callback(null, fields, errors);
