@@ -28,14 +28,16 @@
           * Victor Martinez Lopez 24-08-2018
         */
         this.model.addValidationTask('resultadoCitaRequerido',_.bind(this.resultadoCitaRequerido, this));
-
+        this.model.on('sync',this.enableparentname,this);
     },
 
     _render: function () {
         this._super("_render");
         if (this.model.get('status') == 'Planned') {
             this.$('div[data-name=resultado_c]').hide();
+
         }
+        //this.$('[data-name="parent_name"]').attr('style', '');
     },
 
     /**
@@ -78,17 +80,17 @@
 
 
     },
-
-    editClicked: function() {
+    
+    /*editClicked: function() {
 
         this._super("editClicked");
-        this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
+        this.$('[data-name="parent_name"]').attr('style', '');
         this.setButtonStates(this.STATE.EDIT);
         this.action = 'edit';
         this.toggleEdit(true);
         this.setRoute('edit');
 
-    },
+    },*/
 
     cancelClicked: function() {
 
@@ -119,6 +121,25 @@
             this.$('div[data-name=resultado_c]').hide();
         }
     },
+
+    /*Victor Martinez Lopez
+    *25-09-2018
+    *El campo parent_name se habilita cuando esta vacio
+    */
+    enableparentname:function(){
+    if (this.model.get('parent_name') !=='' && this.model.get('parent_name')!==undefined){
+            var self = this;
+            self.noEditFields.push('parent_name');
+        }
+        else {
+        this.$('[data-name="parent_name"]').attr('style', '');
+        this.setButtonStates(this.STATE.EDIT);
+        this.action = 'edit';
+        this.toggleEdit(true);
+        this.setRoute('edit');
+        }
+    },
+
     /* @F. Javier G. Solar
      * Valida que la Fecha Inicial no sea menor que la actual
      * 14/08/2018

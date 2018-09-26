@@ -14,6 +14,8 @@
             this.on('render', this.noEditStatus,this);
             //this.model.on('sync', this.bloqueaTodo, this);
 
+            //Habilita el campo parent_name cuando esta vacio y lo deshabilta cuando ya tiene una cuenta
+            this.model.on('sync',this.enableparentname,this);
             this.model.on('sync', this.cambioFecha, this);
             this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
             this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
@@ -117,7 +119,7 @@
 
     },
 
-    editClicked: function() {
+    /*editClicked: function() {
 
         this._super("editClicked");
         this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
@@ -126,8 +128,8 @@
         this.toggleEdit(true);
         this.setRoute('edit');
 
-    },
-
+    },*/
+    
     cancelClicked: function() {
 
         this._super("cancelClicked");
@@ -140,6 +142,24 @@
         this.clearValidationErrors(this.editableFields);
         this.setRoute();
         this.unsetContextAction();
+    },
+
+    /*Victor Martinez Lopez
+    *25-09-2018
+    *El campo parent_name se habilita cuando esta vacio
+    */
+    enableparentname:function(){
+    if (this.model.get('parent_name') !=='' && this.model.get('parent_name')!==undefined){
+            var self = this;
+            self.noEditFields.push('parent_name');
+        }
+        else {
+        this.$('[data-name="parent_name"]').attr('style', '');
+        this.setButtonStates(this.STATE.EDIT);
+        this.action = 'edit';
+        this.toggleEdit(true);
+        this.setRoute('edit');
+        }
     },
 
     VaildaFecha: function(fields, errors, callback)

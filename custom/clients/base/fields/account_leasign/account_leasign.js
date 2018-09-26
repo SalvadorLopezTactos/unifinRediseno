@@ -398,9 +398,7 @@
   Save_comentario: function(){
     var self =this;
         var comentario = this.$('#txtComment').val();
-        //var notification = app.data.createBean('Notifications');
-        alert("comentarios  " +comentario);
-        
+        //alert("comentarios  " +comentario);        
         if(comentario!="")
         {
           app.api.call("update", app.api.buildURL("tct02_Resumen/"+this.model.get('id')),{"tct_datos_clave_txa_c":comentario
@@ -416,25 +414,6 @@
                }, this)
            });
 
-           // notification.set("tct_datos_clave_txa_c", comentario);
-            //notification.set("assigned_user_id", tempUsr);
-            /*
-            notification.set("name", 'FeedBack');
-            notification.save();
-            notification.save(null,{
-                success:function() {
-               // alert("Prueba si entre");
-
-                    self.hideDivComment();
-                    self.getNotificationUsr();
-                },
-                error:function() {}
-            });
-            */
-
-            //this.hideDivComment();
-            //this.getNotificationUsr();
-        
         }
   },
   orderCesion: function(){
