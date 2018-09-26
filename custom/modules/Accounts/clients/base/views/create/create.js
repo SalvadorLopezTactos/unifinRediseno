@@ -192,11 +192,6 @@
 
         }
 
-        if (App.user.attributes.tct_alta_cd_chk_c) {
-
-            this.model.set("tipo_registro_c", 'Persona');
-
-        }
 
         //VM 14/09/2018
         this.checkProveedor();
@@ -419,7 +414,7 @@
         * */
 
         //Establecer únicamente las opciones de Cliente y Proveedor cuando el usuario tenga las dos casillas seleccionadas
-        if (App.user.attributes.tct_alta_clientes_chk_c == 1 && App.user.attributes.tct_altaproveedor_chk_c == 1) {
+        if (App.user.attributes.tct_alta_clientes_chk_c == 1 && App.user.attributes.tct_altaproveedor_chk_c == 1 ) {
             Object.keys(new_options).forEach(function (key) {
                 if (key != "Cliente" && key != "Proveedor") {
                     delete new_options[key];
@@ -440,13 +435,6 @@
                 }
             });
         }
-        else if (App.user.attributes.tct_alta_cd_chk_c == 1) {
-            Object.keys(new_options).forEach(function (key) {
-                if (key != "Persona") {
-                    delete new_options[key];
-                }
-            });
-        }
         //En otro caso, solo mostrar Lead
         else{
             Object.keys(new_options).forEach(function (key) {
@@ -454,6 +442,9 @@
                     delete new_options[key];
                 }
             });
+        }
+        if (App.user.attributes.tct_alta_cd_chk_c == true){
+            new_options["Persona"]="Persona";
         }
 
         this.model.fields['tipo_registro_c'].options = new_options;
@@ -1324,7 +1315,12 @@
             var telefono = this.model.get('account_telefonos');
             for (var i = 0; i < telefono.length; i++) {
                 if (telefono[i].principal) {
+                   if (telefono[i].pais!='52'){
                     this.model.set('phone_office', "base" + telefono[i].pais + " " + telefono[i].telefono);
+                            }else{
+                                this.model.set('phone_office', "" + telefono[i].telefono);
+                    }
+                    
                 }
             }
         }
@@ -1437,7 +1433,7 @@
 
     validacedente: function (fields, errors, callback){
 
-        if ((this.model.get('tipo_registro_c') == "Persona" && App.user.attributes.tct_alta_cd_chk_c) || this.model.get('cedente_factor_c') == true || this.model.get('deudor_factor_c') == true  ) {
+        if (this.model.get('cedente_factor_c') == true || this.model.get('deudor_factor_c') == true  ) {
 
 
             var value = this.model.get('account_direcciones');
@@ -1473,6 +1469,10 @@
             }
 
             if ( direccionesfaltantes != "") {
+                //Funcionalidad de pintar en rojo el borde del campo indicador en caso de estar vacio y de la direccion añadida
+                //Adrian Arauz 25/09/2018.
+                $('.select2-choices').css('border-color', 'red');
+
                 app.alert.show('Error al validar Direcciones', {
                     level: 'error',
                     autoClose: false,
@@ -1482,6 +1482,12 @@
                 errors['account_direcciones_c'].required = true;
 
             }
+            else {
+                $('.select2-choices').css('border-color', '');
+
+            }
+
+
         }
 
         callback(null, fields, errors);

@@ -2118,8 +2118,12 @@
         if (!_.isEmpty(this.model.get('account_telefonos'))) {
             var telefono = this.model.get('account_telefonos');
             for (var i = 0; i < telefono.length; i++) {
-                if (telefono[i].principal) {
+                if (telefono[i].principal) { 
+                    if (telefono[i].pais!='52'){
                     this.model.set('phone_office', "base" + telefono[i].pais + " " + telefono[i].telefono);
+                            }else{
+                                this.model.set('phone_office', "" + telefono[i].telefono);
+                    }
                 }
             }
         }
@@ -2410,7 +2414,7 @@
 
     validacedente: function (fields, errors, callback){
 
-        if (this.model.get('tipo_registro_c') == "Persona" && App.user.attributes.tct_alta_cd_chk_c) {
+        if (this.model.get('cedente_factor_c') == true || this.model.get('deudor_factor_c') == true  ) {
 
 
             var value = this.model.get('account_direcciones');
@@ -2446,6 +2450,7 @@
             }
 
             if ( direccionesfaltantes != "") {
+                $('.select2-choices').css('border-color', 'red');
                 app.alert.show('Error al validar Direcciones', {
                     level: 'error',
                     autoClose: false,
@@ -2453,6 +2458,10 @@
                 })
                 errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
                 errors['account_direcciones_c'].required = true;
+
+            }
+            else {
+                $('.select2-choices').css('border-color', '');
 
             }
         }
