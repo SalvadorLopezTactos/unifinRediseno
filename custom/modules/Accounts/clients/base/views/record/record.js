@@ -8,7 +8,9 @@
      *
      * @override
      */
-
+    
+	oculta : 0,
+	
     initialize: function (options) {
         self = this;
         self.hasContratosActivos = false;
@@ -37,10 +39,7 @@
         this.model.addValidationTask('macrosector', _.bind(this.macrosector, this));
         this.model.addValidationTask('sectoreconomico', _.bind(this.sectoreconomico, this));
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
-
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
-
-
 
         /*
          Eduardo Carrasco
@@ -92,8 +91,6 @@
         this.model.on('change:tct_fedeicomiso_chk_c', this._hideFideicomiso, this);
         this.model.on('change:tipodepersona_c', this._hidePeps, this);
 
-
-
         this.events['keydown input[name=primernombre_c]'] = 'checkTextOnly';
         this.events['keydown input[name=segundonombre_c]'] = 'checkTextOnly';
         this.events['keydown input[name=apellidomaterno_c]'] = 'checkTextOnly';
@@ -134,7 +131,6 @@
          Ajuste para mostrar direcciones y teléfonos
          */
         this.model.on('sync', this._render, this);
-
         this.model.on('sync', this.hideconfiinfo, this);
         this.model.on('sync', this.disable_panels_rol, this); //@Jesus Carrilllo; metodo que deshabilita panels de acuerdo a rol;
         this.model.on('sync', this.disable_panels_team, this);
@@ -401,7 +397,7 @@
      * Función para habilitar campos a solo lectura evaluando condiciones específicas
      */
     _renderHtml: function ()
-        //Establecer todos los campos como solo lectura cuando el registro actual es el contacto genérico
+    //Establecer todos los campos como solo lectura cuando el registro actual es el contacto genérico
     {
         var id = app.lang.getAppListStrings('tct_persona_generica_list');
         if (this.model.get('id') === id['accid'] && app.user.get('type') !== 'admin') {
@@ -432,7 +428,6 @@
 
         var origen = this.model.get('origendelprospecto_c');
         if (origen == "Marketing" || origen == "Inteligencia de Negocio") {
-
             var self = this;
             self.noEditFields.push('origendelprospecto_c');
             self.noEditFields.push('tct_detalle_origen_ddw_c');
@@ -444,15 +439,12 @@
             self.noEditFields.push('evento_c');
             self.noEditFields.push('camara_c');
             self.noEditFields.push('tct_que_promotor_rel_c');
-
         }
 
         //Oculta menú lateral para relaciones
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
 
         this._super('_renderHtml');
-
-
     },
 
     _render: function (options) {
@@ -543,6 +535,19 @@
         //this.getreuniones();
         //this.getllamadas();
 
+		//Oculta correo, telefonos y direcciones
+		if(this.oculta === 1)
+		{
+			$('div[data-name=account_telefonos]').hide();
+			$('div[data-name=email]').hide();
+			$('div[data-name=account_direcciones]').hide();
+		}
+		else
+		{
+			$('div[data-name=account_telefonos]').show();
+			$('div[data-name=email]').show();
+			$('div[data-name=account_direcciones]').show();
+		}
     },
 
     /*
@@ -562,20 +567,21 @@
 
     },
 
-
     hideconfiinfo:function () {
-
-        self=this;
-
+        $('div[data-name=account_telefonos]').hide();
+        $('div[data-name=email]').hide();
+        $('div[data-name=account_direcciones]').hide();
+		self=this;
         if(this.model.get('id')!="") {
             app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
                 success: _.bind(function (data) {
-                    console.log(data);
                     if(data==false){
+						this.oculta = 1;
                         $('div[data-name=account_telefonos]').hide();
                         $('div[data-name=email]').hide();
                         $('div[data-name=account_direcciones]').hide();
                     }else{
+						this.oculta = 0;
                         $('div[data-name=account_telefonos]').show();
                         $('div[data-name=email]').show();
                         $('div[data-name=account_direcciones]').show();
