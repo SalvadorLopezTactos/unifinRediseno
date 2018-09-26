@@ -670,9 +670,9 @@
     validaTipoRatificacion: function(fields, errors, callback){
         if(this.model.get('tct_oportunidad_perdida_chk_c')==false) {
             if (this.model.get('tipo_operacion_c') == '2') {
-                /*if (this.model.get('ratificacion_incremento_c')==true){
+                if (this.model.get('ratificacion_incremento_c')==true) {
 
-                    if (parseFloat(this.model.get('monto_ratificacion_increment_c'))==0) {
+                    if (Number(this.model.get('monto_ratificacion_increment_c')) == 0) {
                         //errores
                         app.alert.show("Monto Ratificacion", {
                             level: "error",
@@ -682,12 +682,14 @@
                         errors['monto_ratificacion_increment_c'] = errors['monto_ratificacion_increment_c'] || {};
                         errors['monto_ratificacion_increment_c'].required = true;
 
-                    } else {
-                        this.model.set('tipo_de_operacion_c', 'RATIFICACION_INCREMENTO')
                     }
-                } else {
-                    this.model.set('tipo_de_operacion_c', 'LINEA_NUEVA')
-                }*/
+
+                    if (Number(this.model.get('ca_pago_mensual_c')) == 0) {
+                        errors['ca_pago_mensual_c'] = errors['ca_pago_mensual_c'] || {};
+                        errors['ca_pago_mensual_c'].required = true;
+
+                    }
+                }
             }
         }
         callback(null, fields, errors);
@@ -788,18 +790,6 @@
                         errors['ri_cartera_descontar_c'] = errors['ri_cartera_descontar_c'] || {};
                         errors['ri_cartera_descontar_c'].required = true;
                     }
-                    /*
-                    if(this.model.get('ri_tasa_fija_ordinario_c') == null || this.model.get('ri_tasa_fija_ordinario_c') == "" || (Number(this.model.get('ri_tasa_fija_ordinario_c'))<0 || Number(this.model.get('ri_tasa_fija_ordinario_c'))>99.999999)){
-                        //error
-                        errors['ri_tasa_fija_ordinario_c'] = errors['ri_tasa_fija_ordinario_c'] || {};
-                        errors['ri_tasa_fija_ordinario_c'].required = true;
-                    }
-                    if(this.model.get('ri_tasa_fija_moratorio_c') == null || this.model.get('ri_tasa_fija_moratorio_c') == "" || (Number(this.model.get('ri_tasa_fija_moratorio_c'))<0 || Number(this.model.get('ri_tasa_fija_moratorio_c'))>99.999999)){
-                        //error
-                        errors['ri_tasa_fija_moratorio_c'] = errors['ri_tasa_fija_moratorio_c'] || {};
-                        errors['ri_tasa_fija_moratorio_c'].required = true;
-                    }
-                    */
                 }
             } else {
                 //this.model.set('ri_ca_tasa_c','0.000000');
