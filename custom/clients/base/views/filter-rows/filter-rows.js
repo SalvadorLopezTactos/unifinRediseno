@@ -26,8 +26,6 @@
         app.shortcuts.register('Filter:Remove', '-', function () {
             this.$('[data-action=remove]').last().click();
         }, this);
-
-alert("30");
         if (this.moduleName == 'Accounts') {
             var filterName = this.context.editingFilter.get('name');
             if (filterName == 'Equipo Unifin') {
