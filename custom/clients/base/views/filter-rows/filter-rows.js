@@ -11,14 +11,7 @@
 
     openForm: _.debounce(function (filterModel) {
         $(".filter-header").show();
-        if (this.moduleName == 'Accounts') {
-            var filterName = this.context.editingFilter.get('name');
-            if (filterName == 'Equipo Unifin') {
-                $("[data-filter=field]").hide();
-                $("[data-filter=operator]").hide();
-                $(".filter-header").hide();
-            }
-        }
+
         var template = filterModel.get('filter_template') || filterModel.get('filter_definition');
         if (_.isEmpty(template)) {
             this.render();
@@ -33,7 +26,55 @@
         app.shortcuts.register('Filter:Remove', '-', function () {
             this.$('[data-action=remove]').last().click();
         }, this);
+        if (this.moduleName == 'Accounts') {
+            var filterName = this.context.editingFilter.get('name');
+            if (filterName == 'Equipo Unifin') {
+                $("[data-filter=field]").hide();
+                $("[data-filter=operator]").hide();
+                $(".filter-header").hide();
+            }
+            if (filterName == 'Mis Cuentas') {
+                this.Test();
+            }
+
+
+
+        }
     }, 100, true),
+
+
+
+
+    Test: _.debounce(function()  {
+
+
+       /* var fila=this.$('div.filter-definition-container').find('.filter-body').eq(0);
+        var hijos=fila.children();
+        hijos.eq(0).attr('style', 'pointer-events:none');
+        hijos.eq(1).attr('style', 'pointer-events:none');
+        hijos.eq(2).attr('style', 'pointer-events:none');
+        var actions=hijos.find('.filter-actions');
+        actions.eq(0).children().eq(0).attr("style","pointer-events:none");
+        $("input.inherit-width").attr('style', 'pointer-events:none');*/
+
+        /*$("#s2id_autogen3").attr('style', 'pointer-events:none');
+        $("#s2id_autogen5").attr('style', 'pointer-events:none');
+        $("#s2id_autogen6").attr('style', 'pointer-events:none');
+        $(".inherit-width").attr('style', 'pointer-events:none');*/
+
+        //$('[data-name="assigned_user_name"]').find("*").prop("disabled", true);
+
+
+        $('div.filter-definition-container').find('.filter-body').eq(0).find('.controls.span4').css("pointer-events", "none")
+        $(".controls.span6").css("pointer-events", "none");
+        $('div.filter-definition-container').find('.filter-body').eq(0).find('[data-action=remove]').hide();
+        $("[data-action=filter-reset]").hide();
+        $("[data-action=filter-delete]").hide();
+
+        //this.saveFilterEditState();
+
+    },400),
+
 
 /*    populateRow: function (rowObj) {
         var $row = this.addRow(), moduleMeta = app.metadata.getModule(this.layout.currentModule),
