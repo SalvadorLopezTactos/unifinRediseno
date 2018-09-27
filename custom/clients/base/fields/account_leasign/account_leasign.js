@@ -25,6 +25,7 @@
       //Cesiones
       'click #orderByCesion': 'orderCesion',
       'click #orderByCesionVencimiento': 'orderCesionVencimiento',
+      'click .btn-Guardar': 'Save_comentario',
 
   },
 
@@ -394,6 +395,27 @@
     this.getData(null,null,orderData);
   },
 
+  Save_comentario: function(){
+    var self =this;
+        var comentario = this.$('#txtComment').val();
+        //alert("comentarios  " +comentario);        
+        if(comentario!="")
+        {
+          app.api.call("update", app.api.buildURL("tct02_Resumen/"+this.model.get('id')),{"tct_datos_clave_txa_c":comentario
+           }, {
+               success: _.bind(function (data) {
+                   if (data!=null) {
+                       app.alert.show("alerta_datos_clave", {
+                           level: "info",
+                           title: "Datos creados",
+                           autoClose: false
+                       });                       
+                   }
+               }, this)
+           });
+
+        }
+  },
   orderCesion: function(){
     //Ordenamiento: Anexos por Anexo - Columna 2
     // console.log('--anexosdata--');
@@ -467,7 +489,6 @@
 
     this.getData(null,null,orderData);
   },
-
   // Función para comparación de fechas
   fDate: function(s) {
     var d = new Date();

@@ -57,14 +57,18 @@
                 }
             ]
         };
+
         var pull_condicionFinanciera_url = app.api.buildURL('lev_CondicionesFinancieras',
             null, null, api_params);
 
-        app.api.call('READ', pull_condicionFinanciera_url, {}, {
-            success: function (data) {
+        try
+        {
+            app.api.call('READ', pull_condicionFinanciera_url, {}, {
+                success: function (data) {
+                
                     var activo_list = app.lang.getAppListStrings('idactivo_list');
                     for (var i = 0; i < data.records.length; i++) {
-                        self.value[i] = data.records[i].idactivo;
+                        //self.value[i] = data.records[i].idactivo;
                         data.records[i].activo_label = activo_list[data.records[i].idactivo];
                         data.records[i].plazo_label = plazo_list[data.records[i].plazo];
                         if (data.records[i].deposito_en_garantia == true) {
@@ -80,16 +84,27 @@
                             data.records[i].detail_uso_empresarial_checked = "checked";
                         }
                     }
-
                     //set model so tpl detail tpl can read data
                     self.model.set('condiciones_financieras_incremento_ratificacion', data.records);
                     self.model._previousAttributes.condiciones_financieras_incremento_ratificacion = data.records;
                     self.model._syncedAttributes.condiciones_financieras_incremento_ratificacion = data.records;
-                    self.format();
-                    self._render();
-            }
-        });
-
+                    //self.format();
+                    //self._render();
+                    _.extend(self, data);
+                    self.render();
+                }
+                
+            });
+        }
+        catch(err)
+        {
+            console.log(err);
+            // self.model.set('condiciones_financieras_incremento_ratificacion', data.records);
+            // self.model._previousAttributes.condiciones_financieras_incremento_ratificacion = data.records;
+            // self.model._syncedAttributes.condiciones_financieras_incremento_ratificacion = data.records;
+            // self._render();                  
+        }
+            
         //Obtener las condiciones iniciales
         var api_params_cond_iniciales = {
             'max_num': 500,

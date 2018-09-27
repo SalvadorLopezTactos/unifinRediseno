@@ -3,6 +3,7 @@
 $dependencies['Accounts']['tct_persona1_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
+    'triggerFields' => array('id','tipodepersona_c'),
     'onload' => true,
     'actions' => array(
         array(
@@ -16,7 +17,7 @@ $dependencies['Accounts']['tct_persona1_c'] = array(
             'name' => 'SetRequired',
             'params' => array(
                 'target' => 'tct_persona1_c',
-                'value' => 'or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente"))',
+                'value' => 'and(equal($tipodepersona_c,"Persona Moral"),or(equal($subtipo_cuenta_c,"Integracion de Expediente"),equal($tipo_registro_c,"Cliente")))',
             ),
         ),
     ),

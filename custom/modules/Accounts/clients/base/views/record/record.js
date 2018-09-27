@@ -8,7 +8,9 @@
      *
      * @override
      */
-
+    
+	oculta : 0,
+	
     initialize: function (options) {
         self = this;
         self.hasContratosActivos = false;
@@ -37,8 +39,9 @@
         this.model.addValidationTask('macrosector', _.bind(this.macrosector, this));
         this.model.addValidationTask('sectoreconomico', _.bind(this.sectoreconomico, this));
         this.model.addValidationTask('checkEmptyFieldsDire', _.bind(this.validadirecc, this));
-
-
+        this.model.addValidationTask('change:email', _.bind(this.expmail, this));
+        //Valida que el campo Alta Cedente este check en el perfil del usuario. Adrian Arauz 20/09/2018
+        this.model.addValidationTask('check_alta_cedente', _.bind(this.validacedente, this));
 
         /*
          Eduardo Carrasco
@@ -90,8 +93,6 @@
         this.model.on('change:tct_fedeicomiso_chk_c', this._hideFideicomiso, this);
         this.model.on('change:tipodepersona_c', this._hidePeps, this);
 
-
-
         this.events['keydown input[name=primernombre_c]'] = 'checkTextOnly';
         this.events['keydown input[name=segundonombre_c]'] = 'checkTextOnly';
         this.events['keydown input[name=apellidomaterno_c]'] = 'checkTextOnly';
@@ -132,7 +133,6 @@
          Ajuste para mostrar direcciones y teléfonos
          */
         this.model.on('sync', this._render, this);
-
         this.model.on('sync', this.hideconfiinfo, this);
         this.model.on('sync', this.disable_panels_rol, this); //@Jesus Carrilllo; metodo que deshabilita panels de acuerdo a rol;
         this.model.on('sync', this.disable_panels_team, this);
@@ -399,7 +399,7 @@
      * Función para habilitar campos a solo lectura evaluando condiciones específicas
      */
     _renderHtml: function ()
-        //Establecer todos los campos como solo lectura cuando el registro actual es el contacto genérico
+    //Establecer todos los campos como solo lectura cuando el registro actual es el contacto genérico
     {
         var id = app.lang.getAppListStrings('tct_persona_generica_list');
         if (this.model.get('id') === id['accid'] && app.user.get('type') !== 'admin') {
@@ -430,7 +430,6 @@
 
         var origen = this.model.get('origendelprospecto_c');
         if (origen == "Marketing" || origen == "Inteligencia de Negocio") {
-
             var self = this;
             self.noEditFields.push('origendelprospecto_c');
             self.noEditFields.push('tct_detalle_origen_ddw_c');
@@ -442,15 +441,12 @@
             self.noEditFields.push('evento_c');
             self.noEditFields.push('camara_c');
             self.noEditFields.push('tct_que_promotor_rel_c');
-
         }
 
         //Oculta menú lateral para relaciones
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
 
         this._super('_renderHtml');
-
-
     },
 
     _render: function (options) {
@@ -541,6 +537,19 @@
         //this.getreuniones();
         //this.getllamadas();
 
+		//Oculta correo, telefonos y direcciones
+		if(this.oculta === 1)
+		{
+			$('div[data-name=account_telefonos]').hide();
+			$('div[data-name=email]').hide();
+			$('div[data-name=account_direcciones]').hide();
+		}
+		else
+		{
+			$('div[data-name=account_telefonos]').show();
+			$('div[data-name=email]').show();
+			$('div[data-name=account_direcciones]').show();
+		}
     },
 
     /*
@@ -560,20 +569,21 @@
 
     },
 
-
     hideconfiinfo:function () {
-
-        self=this;
-
+        $('div[data-name=account_telefonos]').hide();
+        $('div[data-name=email]').hide();
+        $('div[data-name=account_direcciones]').hide();
+		self=this;
         if(this.model.get('id')!="") {
             app.api.call('GET', app.api.buildURL('GetUsersBoss/' + this.model.get('id')), null, {
                 success: _.bind(function (data) {
-                    console.log(data);
                     if(data==false){
+						this.oculta = 1;
                         $('div[data-name=account_telefonos]').hide();
                         $('div[data-name=email]').hide();
                         $('div[data-name=account_direcciones]').hide();
                     }else{
+						this.oculta = 0;
                         $('div[data-name=account_telefonos]').show();
                         $('div[data-name=email]').show();
                         $('div[data-name=account_direcciones]').show();
@@ -848,7 +858,7 @@
     _doGeneraCURP: function () {
         if (this.model.get('tipodepersona_c') != 'Persona Moral') {
             //Valida que se tenga la informaci�n requerida para generar la CURP
-            if (this.model.get('fechadenacimiento_c') != '' && this.model.get('genero_c') != '' && this.model.get('primernombre_c') != '' && this.model.get('apellidopaterno_c') != '' && this.model.get('apellidomaterno_c') != '' && this.model.get('pais_nacimiento_c') != '' && this.model.get('estado_nacimiento_c') != '') {
+            if (this.model.get('fechadenacimiento_c') != '' && this.model.get('genero_c') != '' && this.model.get('primernombre_c') != '' && this.model.get('apellidopaterno_c') != '' && this.model.get('apellidomaterno_c') != '' && this.model.get('pais_nacimiento_c') != '' && this.model.get('estado_nacimiento_c') != '' && this.model.get('estado_nacimiento_c') != "1") {
                 var firmoParams = {
                     'fechadenacimiento': this.model.get('fechadenacimiento_c'),
                     'primernombre': this.model.get('primernombre_c'),
@@ -893,7 +903,7 @@
                     necesarios = necesarios + '<b>Pa\u00EDs de Nacimiento</b><br>';
                 }
 
-                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
+                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null || this.model.get('estado_nacimiento_c') == "1") {
                     necesarios = necesarios + '<b>Estado de Nacimiento</b><br>';
                 }
 
@@ -2114,8 +2124,12 @@
         if (!_.isEmpty(this.model.get('account_telefonos'))) {
             var telefono = this.model.get('account_telefonos');
             for (var i = 0; i < telefono.length; i++) {
-                if (telefono[i].principal) {
+                if (telefono[i].principal) { 
+                    if (telefono[i].pais!='52'){
                     this.model.set('phone_office', "base" + telefono[i].pais + " " + telefono[i].telefono);
+                            }else{
+                                this.model.set('phone_office', "" + telefono[i].telefono);
+                    }
                 }
             }
         }
@@ -2372,4 +2386,153 @@
             }
         }
     },
+
+    //Funcion que valida el contenido ingresado en el campo del Email
+    expmail: function (fields, errors, callback){
+        if (this.model.get('email') != null && this.model.get('email') !="") {
+
+            var input = (this.model.get('email'));
+            var expresion = /^\S+@\S+\.\S+[$%&|<>#]?$/;
+            var cumple = true;
+
+            for (i=0; i< input.length; i++) {
+
+                if (expresion.test(input[i].email_address)== false) {
+                    cumple = false;
+
+                }
+            }
+
+            if (cumple == false) {
+                app.alert.show('Error al validar email', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: '<b>Formato de email incorrecto.</b>'
+                })
+                errors['email'] = errors['email'] || {};
+                errors['email'].required = true;
+            }
+        }
+
+        callback(null, fields, errors);
+    },
+
+
+    validacedente: function (fields, errors, callback){
+
+        if (this.model.get('cedente_factor_c') == true || this.model.get('deudor_factor_c') == true  ) {
+
+
+            var value = this.model.get('account_direcciones');
+            var totalindicadores = "";
+
+
+            for (i=0; i < value.length; i++) {
+                console.log("Valida Cedente");
+                var valorecupera = this._getIndicador(value[i].indicador);
+                totalindicadores = totalindicadores + "," + valorecupera;
+
+            }
+
+            var arregloindicadores = [];
+            if(value== "" || value == null){
+                arregloindicadores = [0];
+
+            }else{
+                arregloindicadores =  totalindicadores.split (",");
+
+            }
+
+            var direccionesfaltantes = "";
+
+            if (arregloindicadores.indexOf("1") == -1){
+                direccionesfaltantes = direccionesfaltantes + 'Correspondencia<br>';
+            }
+            if (arregloindicadores.indexOf("2") == -1){
+                direccionesfaltantes = direccionesfaltantes + 'Fiscal<br>';
+            }
+            if (arregloindicadores.indexOf("4") == -1){
+                direccionesfaltantes = direccionesfaltantes + 'Entrega de Bienes<br>';
+            }
+
+            if ( direccionesfaltantes != "") {
+                $('.select2-choices').css('border-color', 'red');
+                app.alert.show('Error al validar Direcciones', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'Debe tener las siguientes direcciones: <br><b>' + direccionesfaltantes + '</b>'
+                })
+                errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
+                errors['account_direcciones_c'].required = true;
+
+            }
+            else {
+                $('.select2-choices').css('border-color', '');
+
+            }
+        }
+
+        callback(null, fields, errors);
+
+
+    },
+
+    _getIndicador: function(idSelected, valuesSelected) {
+
+        //variable con resultado
+        var result = null;
+
+        //Arma objeto de mapeo
+        var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
+
+        var element = {};
+        var object = [];
+        var values = [];
+
+        for(var key in dir_indicador_map_list) {
+            var element = {};
+            element.id = key;
+            values = dir_indicador_map_list[key].split(",");
+            element.values = values;
+            object.push(element);
+        }
+
+        //Recupera arreglo de valores por id
+        if(idSelected){
+            for(var i=0; i<object.length; i++) {
+                if ((object[i].id) == idSelected) {
+                    result = object[i].values;
+                }
+            }
+            console.log(result);
+        }
+
+        //Recupera id por valores
+        if(valuesSelected){
+            result = [];
+            for(var i=0; i<object.length; i++) {
+                if (object[i].values.length == valuesSelected.length) {
+                    //Ordena arreglos y compara
+                    valuesSelected.sort();
+                    object[i].values.sort();
+                    var tempVal = true;
+                    for(var j=0; j<valuesSelected.length; j++) {
+                        if(valuesSelected[j] != object[i].values[j]){
+                            tempVal = false;
+                        }
+                    }
+                    if( tempVal == true){
+                        result[0] = object[i].id;
+                    }
+
+                }
+            }
+
+            console.log(result);
+        }
+
+        return result;
+    },
+
+
 })

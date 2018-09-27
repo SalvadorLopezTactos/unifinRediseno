@@ -12,6 +12,7 @@
         this._super("initialize", [options]);
 
         this.on('render', this.disableparentsfields, this);
+        this.on('render', this.noEditStatus,this);
         this.model.on('sync', this.cambioFecha, this);
         this.model.on('sync', this.disablestatus, this);
         this.model.on('sync', this.disableFieldsTime,this);
@@ -23,19 +24,20 @@
             Funcion que pinta de color los paneles relacionados
         */
         this.model.on('sync', this.fulminantcolor, this);
-
         /*
           * Victor Martinez Lopez 24-08-2018
         */
         this.model.addValidationTask('resultadoCitaRequerido',_.bind(this.resultadoCitaRequerido, this));
-
+        this.model.on('sync',this.enableparentname,this);
     },
 
     _render: function () {
         this._super("_render");
         if (this.model.get('status') == 'Planned') {
             this.$('div[data-name=resultado_c]').hide();
+
         }
+        //this.$('[data-name="parent_name"]').attr('style', '');
     },
 
     /**
@@ -78,17 +80,17 @@
 
 
     },
-
-    editClicked: function() {
+    
+    /*editClicked: function() {
 
         this._super("editClicked");
-        this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
+        this.$('[data-name="parent_name"]').attr('style', '');
         this.setButtonStates(this.STATE.EDIT);
         this.action = 'edit';
         this.toggleEdit(true);
         this.setRoute('edit');
 
-    },
+    },*/
 
     cancelClicked: function() {
 
@@ -119,6 +121,25 @@
             this.$('div[data-name=resultado_c]').hide();
         }
     },
+
+    /*Victor Martinez Lopez
+    *25-09-2018
+    *El campo parent_name se habilita cuando esta vacio
+    */
+    enableparentname:function(){
+    if (this.model.get('parent_name') !=='' && this.model.get('parent_name')!==undefined){
+            var self = this;
+            self.noEditFields.push('parent_name');
+        }
+        else {
+        this.$('[data-name="parent_name"]').attr('style', '');
+        this.setButtonStates(this.STATE.EDIT);
+        this.action = 'edit';
+        this.toggleEdit(true);
+        this.setRoute('edit');
+        }
+    },
+
     /* @F. Javier G. Solar
      * Valida que la Fecha Inicial no sea menor que la actual
      * 14/08/2018
@@ -201,6 +222,14 @@
         //Elimina ícono de lápiz para editar parent_name*
         $('[data-name="parent_name"]').find('.fa-pencil').remove();
         },
+        
+        /*Victor Martinez Lopez
+        *El estado no es editable de manera directa al dar click, solo cuando se presiona el boton editar
+        */
+    noEditStatus:function (){
+        $('[data-name="status"]').find('.fa-pencil').remove();
+        $('.record-edit-link-wrapper[data-name=status]').remove();
+    },
     /*Victor Martinez López
     * Duración y recordatorios no son editables cuando la reunión esta como realizada
     * */
@@ -225,6 +254,7 @@
      */
     disablestatus:function () {
         if(Date.parse(this.model.get('date_end'))>Date.now() || app.user.attributes.id!=this.model.get('assigned_user_id')){
+   
             $('span[data-name=status]').css("pointer-events", "none");
         }else{
             $('span[data-name=status]').css("pointer-events", "auto");
