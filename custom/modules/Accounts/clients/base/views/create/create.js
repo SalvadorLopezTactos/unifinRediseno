@@ -192,6 +192,7 @@
 
         }
 
+
         //VM 14/09/2018
         this.checkProveedor();
 
@@ -219,6 +220,9 @@
         //Se mete expresion regular para limitar el funcionamiento del campo email .
         //Adrian Arauz 12-/09/2018
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
+
+        //Valida que el campo Alta Cedente este check en el perfil del usuario. Adrian Arauz 20/09/2018
+        this.model.addValidationTask('check_alta_cedente', _.bind(this.validacedente, this));
 
 
         /*
@@ -379,11 +383,14 @@
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/14/2015 Description: Cuando estamos en el modulo de Personas, no queremos que se muestre la opcion Persona para el tipo de registro */
         var new_options = app.lang.getAppListStrings('tipo_registro_list');
 
-        Object.keys(new_options).forEach(function (key) {
-            if (key == "Persona") {
-                delete new_options[key];
-            }
-        });
+        if (App.user.attributes.tct_alta_cd_chk_c != 1) {
+            Object.keys(new_options).forEach(function (key) {
+                if (key == "Persona") {
+                    delete new_options[key];
+                }
+            });
+        }
+
 
         //eliminar Lead
         /*
@@ -407,7 +414,7 @@
         * */
 
         //Establecer únicamente las opciones de Cliente y Proveedor cuando el usuario tenga las dos casillas seleccionadas
-        if (App.user.attributes.tct_alta_clientes_chk_c == 1 && App.user.attributes.tct_altaproveedor_chk_c == 1) {
+        if (App.user.attributes.tct_alta_clientes_chk_c == 1 && App.user.attributes.tct_altaproveedor_chk_c == 1 ) {
             Object.keys(new_options).forEach(function (key) {
                 if (key != "Cliente" && key != "Proveedor") {
                     delete new_options[key];
@@ -435,6 +442,9 @@
                     delete new_options[key];
                 }
             });
+        }
+        if (App.user.attributes.tct_alta_cd_chk_c == true){
+            new_options["Persona"]="Persona";
         }
 
         this.model.fields['tipo_registro_c'].options = new_options;
@@ -1305,7 +1315,12 @@
             var telefono = this.model.get('account_telefonos');
             for (var i = 0; i < telefono.length; i++) {
                 if (telefono[i].principal) {
+                   if (telefono[i].pais!='52'){
                     this.model.set('phone_office', "base" + telefono[i].pais + " " + telefono[i].telefono);
+                            }else{
+                                this.model.set('phone_office', "" + telefono[i].telefono);
+                    }
+                    
                 }
             }
         }
@@ -1414,6 +1429,127 @@
         }
 
         callback(null, fields, errors);
+    },
+
+    validacedente: function (fields, errors, callback){
+
+        if (this.model.get('cedente_factor_c') == true || this.model.get('deudor_factor_c') == true  ) {
+
+
+            var value = this.model.get('account_direcciones');
+            var totalindicadores = "";
+
+
+            for (i=0; i < value.length; i++) {
+                console.log("Valida Cedente");
+                var valorecupera = this._getIndicador(value[i].indicador);
+                totalindicadores = totalindicadores + "," + valorecupera;
+
+            }
+
+            var arregloindicadores = [];
+            if(value== "" || value == null){
+                arregloindicadores = [0];
+
+            }else{
+                arregloindicadores =  totalindicadores.split (",");
+
+            }
+
+            var direccionesfaltantes = "";
+
+            if (arregloindicadores.indexOf("1") == -1){
+                direccionesfaltantes = direccionesfaltantes + 'Correspondencia<br>';
+            }
+            if (arregloindicadores.indexOf("2") == -1){
+                direccionesfaltantes = direccionesfaltantes + 'Fiscal<br>';
+            }
+            if (arregloindicadores.indexOf("4") == -1){
+                direccionesfaltantes = direccionesfaltantes + 'Entrega de Bienes<br>';
+            }
+
+            if ( direccionesfaltantes != "") {
+                //Funcionalidad de pintar en rojo el borde del campo indicador en caso de estar vacio y de la direccion añadida
+                //Adrian Arauz 25/09/2018.
+                $('.select2-choices').css('border-color', 'red');
+
+                app.alert.show('Error al validar Direcciones', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'Debe tener las siguientes direcciones: <br><b>' + direccionesfaltantes + '</b>'
+                })
+                errors['account_direcciones_c'] = errors['account_direcciones_c'] || {};
+                errors['account_direcciones_c'].required = true;
+
+            }
+            else {
+                $('.select2-choices').css('border-color', '');
+
+            }
+
+
+        }
+
+        callback(null, fields, errors);
+
+
+    },
+
+    _getIndicador: function(idSelected, valuesSelected) {
+
+        //variable con resultado
+        var result = null;
+
+        //Arma objeto de mapeo
+        var dir_indicador_map_list = app.lang.getAppListStrings('dir_indicador_map_list');
+
+        var element = {};
+        var object = [];
+        var values = [];
+
+        for(var key in dir_indicador_map_list) {
+            var element = {};
+            element.id = key;
+            values = dir_indicador_map_list[key].split(",");
+            element.values = values;
+            object.push(element);
+        }
+
+        //Recupera arreglo de valores por id
+        if(idSelected){
+            for(var i=0; i<object.length; i++) {
+                if ((object[i].id) == idSelected) {
+                    result = object[i].values;
+                }
+            }
+            console.log(result);
+        }
+
+        //Recupera id por valores
+        if(valuesSelected){
+            result = [];
+            for(var i=0; i<object.length; i++) {
+                if (object[i].values.length == valuesSelected.length) {
+                    //Ordena arreglos y compara
+                    valuesSelected.sort();
+                    object[i].values.sort();
+                    var tempVal = true;
+                    for(var j=0; j<valuesSelected.length; j++) {
+                        if(valuesSelected[j] != object[i].values[j]){
+                            tempVal = false;
+                        }
+                    }
+                    if( tempVal == true){
+                        result[0] = object[i].id;
+                    }
+
+                }
+            }
+
+            console.log(result);
+        }
+
+        return result;
     },
 
 
