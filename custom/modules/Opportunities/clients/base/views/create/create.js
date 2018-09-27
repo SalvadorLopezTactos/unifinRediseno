@@ -32,7 +32,7 @@
         this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
-        this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
+        //this.model.addValidationTask('check_aforo', _.bind(this.valiaAforo, this));
         //this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this));
         //this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
         this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
@@ -146,8 +146,12 @@
 
                 var op = app.lang.getAppListStrings('tipo_producto_list');
                 var op2 = {};
-                for (id in this.productos){
-                    op2[this.productos[id]] = op[this.productos[id]];
+
+                for (id in this.productos) {
+                    if (id != 'unique')
+                    {
+                        op2[this.productos[id]] = op[this.productos[id]];
+                    }
                 }
                 var lista = this.getField('tipo_producto_c');
                 lista.items = op2;
