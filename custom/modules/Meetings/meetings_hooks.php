@@ -5,6 +5,8 @@
      * Date: 19/10/2016
      */
 
+    require_once('modules/Emails/Email.php');
+
 class Meetings_Hooks
 {
     //Agregar Invitados
@@ -34,7 +36,7 @@ SQL;
 SQL;
 				$levadmin1 = $db->query($levadmin);
 			}
-        // Crear Reunión
+        // Crear Reuniï¿½n
   			$exclude = array
 			  (
   				'id',
@@ -96,7 +98,7 @@ SQL;
 					WHERE id = '{$idel}'
 SQL;
 				$actualiza = $db->query($querys);
-				// Elimina Reunión
+				// Elimina Reuniï¿½n
 				$querydel = <<<SQL
 						SELECT a.id, a.assigned_user_id, b.parent_meeting_c
 						FROM meetings a, meetings_cstm b
@@ -116,11 +118,11 @@ SQL;
 		}
 	}
 
-    //Generar una copia del meeting para los acompañantes de la cita en Brujula
+    //Generar una copia del meeting para los acompaï¿½antes de la cita en Brujula
     function MeetingAcompaniante($bean = null, $event = null, $args = null)
     {
         global $db;
-        // Crear Reunión
+        // Crear Reuniï¿½n
         if($bean->description!="Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante." && $bean->nuevo_c == 1 && $bean->repeat_parent_id == "")
         {
             $query = <<<SQL
@@ -171,7 +173,7 @@ SQL;
 SQL;
  			$ultimo1 = $db->query($ultimo);
         }
-		// Editar Reunión
+		// Editar Reuniï¿½n
         if($bean->description!="Cita registrada automaticamente por CRM ya que ha sido asignado como acompaniante." && $bean->date_entered != $bean->date_modified && $bean->nuevo_c == 0 && $bean->actualizado_c == 1)
 	    {
 			$query = <<<SQL
@@ -226,6 +228,89 @@ SQL;
                     WHERE id_c = '{$bean->id}'
 SQL;
             $ultimo1 = $db->query($ultimo);
+        }
+    }
+
+    //@Jesus Carrillo
+    //Envia encuesta de satisfaccion al cambiar el estatus de la reunion
+    function SendMail($bean = null, $event = null, $args = null)
+    {
+        $emails=[];
+        $GLOBALS['log']->fatal('>>>>>>>Status anterior: '.$bean->fetched_row['status']);//-------------------------------------
+        $GLOBALS['log']->fatal('>>>>>>>Status posterior: '.$bean->status);//-------------------------------------
+        $GLOBALS['log']->fatal('>>>>>>>Description: '.$bean->description);//-------------------------------------
+
+        if($bean->fetched_row['status']!='Held' && $bean->description==''/*$bean->status=='Held'*/){
+            $contador=0;
+            $parent_type=$bean->parent_type;
+            $parent_id=$bean->parent_id;
+
+            if($parent_type=='Accounts') {
+                $bean_cuenta = BeanFactory::retrieveBean('Accounts', $parent_id);
+                $bean_cuenta->load_relationship('rel_relaciones_accounts');
+                $bean_relaciones = $bean_cuenta->rel_relaciones_accounts->getBeans();
+
+                $GLOBALS['log']->fatal('Length de Relaciones: '.count($bean_relaciones));//-------------------------------------
+                if(count($bean_relaciones)>0) {
+                    foreach ($bean_relaciones as $relacion) {
+                        if (strpos($relacion->relaciones_activas, 'Contacto') && $relacion->tipodecontacto == 'Promocion') {
+                            $bean_cuenta_promocion = BeanFactory::retrieveBean('Accounts', $relacion->account_id1_c);
+                            if($bean_cuenta_promocion->email[0]['email_address']!='') {
+                                $emails[] = $bean_cuenta_promocion->email[0]['email_address'];
+                            }
+                            $contador++;
+                        }
+                    }
+                }
+                if($contador==0){
+                    if($bean_cuenta->email[0]['email_address']!='') {
+                        $emails[] = $bean_cuenta->email[0]['email_address'];
+                    }
+                }
+                $GLOBALS['log']->fatal('Length de Emails: '.count($emails));//-------------------------------------
+                $GLOBALS['log']->fatal('Se enviara correo a las siguientes personas:');//----------------------
+                $GLOBALS['log']->fatal(print_r($emails,true));//----------------------
+
+            }
+
+            if(count($emails)>=0){
+                //Define mail
+                ## START Send Email
+                $mail = new SugarPHPMailer();
+
+                //$mail->prepForOutbound();
+                //$mail->setMailerForSystem();
+                $mail->setMailer();
+
+                //$mail->From = 'jesusmoca7@gmail.com';
+                $mail->FromName = 'Axel.';
+
+                $mail->Sender = $mail->From;
+                $mail->Subject = "Survey TST";
+
+
+
+                include 'custom/Levementum/CustomEntryPoints/encuesta_template.php';
+
+                $mail->Body = $forma;
+
+
+                $mail->IsHTML(true);
+
+                /*foreach ($emails as $correo){
+                    $mail->AddAddress($correo);
+                }*/
+                $mail->AddAddress('jesus.carrillo@tactos.com.mx');
+                $mail->AddAddress('adrauz@gmail.com');
+                $mail->AddAddress('axel.flores@tactos.com.mx');
+                //$mail->AddAddress('jesusmoca7@hotmail.com');
+                //$mail->AddAddress('wendy.reyes@unifin.com.mx');
+
+                $mail->Send();
+
+                $GLOBALS['log']->fatal("Se ha enviado encuesta---------------");//----------------------
+
+            }
         }
     }
 }

@@ -28,3 +28,13 @@ $hook_array['after_relationship_delete'][] = Array(
     'Meetings_Hooks', // name of the class
     'RelationDel' // name of the function
 );
+
+
+//@Jesus Carrillo
+$hook_array['before_save'][] = Array(
+    1,
+    'Send email to related people',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks', // name of the class
+    'SendMail' // name of the function
+);
