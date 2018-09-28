@@ -10,6 +10,8 @@
          * Time: 10:10
          */
 
+        $GLOBALS['log']->fatal('>>>>>>>Entro el Entrypoint SaveSurvey:');//-------------------------------------
+
         $answers=[];
         $resultado = 'Resultado de Encuesta:\n';
         $id_encuesta=$_GET['id_encuesta'];

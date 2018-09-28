@@ -266,7 +266,7 @@ SQL;
     {
         $emails=[];
         $ids=[];
-        $GLOBALS['log']->fatal('>>>>>>>Meeting Hook: ');//-------------------------------------
+        $GLOBALS['log']->fatal('>>>>>>>Entro el Meeting Hook: ');//-------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Status anterior: '.$bean->fetched_row['status']);//-------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Status posterior: '.$bean->status);//-------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Description: '.$bean->description);//-------------------------------------
@@ -301,8 +301,8 @@ SQL;
                     }
                 }
 
-                $emails[]='jesus.carrillo@tactos.com.mx';
-                $emails[]='axel.flores@tactos.com.mx';
+                //$emails[]='jesus.carrillo@tactos.com.mx';
+                //$emails[]='axel.flores@tactos.com.mx';
                 //$emails[]='adrauz@gmail.com';
 
                 $GLOBALS['log']->fatal('Length de Emails: '.count($emails));//-------------------------------------
