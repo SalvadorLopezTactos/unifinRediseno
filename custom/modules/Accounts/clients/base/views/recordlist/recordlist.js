@@ -15,10 +15,13 @@
 
     initialize: function (options) {
         this._super("initialize", [options]);
-        // this.listenTo(this.layout, "filter:promotorAccounts", this.test);
-        //this.events['click [.choice-filter.choice-filter-clickable]'] = this.test;
 
-        // this.listenTo(this.layout, "filter:create:open", this.test);
+        if(options.context.get("dataView")=="list") {
+                options.context.set("default_filter", "all_records");
+        }
+       //    App.controller.context.attributes.filterOptions
+
+
     },
 
 
@@ -37,6 +40,8 @@
         }
 
     },
+
+
 
 
 })
