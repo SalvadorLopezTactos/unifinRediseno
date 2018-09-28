@@ -47,31 +47,20 @@
 
     Test: _.debounce(function()  {
 
+        filtroPromotorArray = [5,11,16,4,10,15,3,9,2,8,14,1,7,13,6,12,17];
+        var puestoUsr=App.user.attributes.puestousuario_c;
+         puestoUsr = parseInt(puestoUsr, 10);
+        var resultado=filtroPromotorArray.indexOf(puestoUsr);
 
-       /* var fila=this.$('div.filter-definition-container').find('.filter-body').eq(0);
-        var hijos=fila.children();
-        hijos.eq(0).attr('style', 'pointer-events:none');
-        hijos.eq(1).attr('style', 'pointer-events:none');
-        hijos.eq(2).attr('style', 'pointer-events:none');
-        var actions=hijos.find('.filter-actions');
-        actions.eq(0).children().eq(0).attr("style","pointer-events:none");
-        $("input.inherit-width").attr('style', 'pointer-events:none');*/
+            if(resultado != -1){
 
-        /*$("#s2id_autogen3").attr('style', 'pointer-events:none');
-        $("#s2id_autogen5").attr('style', 'pointer-events:none');
-        $("#s2id_autogen6").attr('style', 'pointer-events:none');
-        $(".inherit-width").attr('style', 'pointer-events:none');*/
+            $('div.filter-definition-container').find('.filter-body').eq(0).find('.controls.span4').css("pointer-events", "none");
+            $(".controls.span6").css("pointer-events", "none");
+            $('div.filter-definition-container').find('.filter-body').eq(0).find('[data-action=remove]').hide();
+            $("[data-action=filter-reset]").hide();
+            $("[data-action=filter-delete]").hide();
 
-        //$('[data-name="assigned_user_name"]').find("*").prop("disabled", true);
-
-
-        $('div.filter-definition-container').find('.filter-body').eq(0).find('.controls.span4').css("pointer-events", "none")
-        $(".controls.span6").css("pointer-events", "none");
-        $('div.filter-definition-container').find('.filter-body').eq(0).find('[data-action=remove]').hide();
-        $("[data-action=filter-reset]").hide();
-        $("[data-action=filter-delete]").hide();
-
-        //this.saveFilterEditState();
+        }
 
     },400),
 
