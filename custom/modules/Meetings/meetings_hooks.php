@@ -266,7 +266,7 @@ SQL;
     {
         $emails=[];
         $ids=[];
-        $GLOBALS['log']->fatal('>>>>>>>Entro el Meeting Hook: ');//-------------------------------------
+        $GLOBALS['log']->fatal('>>>>>>>Entro Meeting Hook: ');//-------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Status anterior: '.$bean->fetched_row['status']);//-------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Status posterior: '.$bean->status);//-------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Description: '.$bean->description);//-------------------------------------

@@ -17,7 +17,7 @@ class Encuestas_Hooks
     {
         $emails = [];
         $ids = [];
-        $GLOBALS['log']->fatal('>>>>>>>Entro el Encuestas_Hook: ');//-------------------------------------
+        $GLOBALS['log']->fatal('>>>>>>>Entro Encuestas_Hook: ');//-------------------------------------
 
 
         if ($bean->tct_correo_txf != '' && $bean->description == '') {
