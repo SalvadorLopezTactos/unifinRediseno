@@ -12,7 +12,7 @@ $forma='
         <div align="center" style="width: 660px;">
         <img src="https://fotos.subefotos.com/d83bd716402da605745bfa6158d0f376o.png">
         <h2>Encuesta de Satisfacción</h2>
-          <form target="request" method="POST" action="http://192.168.226.222:8888/unifin/rediseno/custom/Levementum/CustomEntryPoints/SaveSurvey.php?id_reunion='.$bean->id.'">
+          <form target="request" method="POST" action="'.$GLOBALS['site_url'].'/custom/Levementum/CustomEntryPoints/SaveSurvey.php?id_encuesta='.$bean->id.'">
               <div> 
                 <table style="width:100%">
                  <tr>

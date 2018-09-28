@@ -36,5 +36,5 @@ $hook_array['before_save'][] = Array(
     'Send email to related people',
     'custom/modules/Meetings/meetings_hooks.php',
     'Meetings_Hooks', // name of the class
-    'SendMail' // name of the function
+    'Getmails' // name of the function
 );

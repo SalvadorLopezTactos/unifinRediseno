@@ -12,10 +12,10 @@
 
         $answers=[];
         $resultado = 'Resultado de Encuesta:\n';
-        $id_reunion=$_GET['id_reunion'];
+        $id_encuesta=$_GET['id_encuesta'];
 
         //$resultado = "777777777777";
-        //$id_reunion="b6b5c0d0-b2c4-11e8-982e-3035add3ad60";
+        //$id_encuesta="b6b5c0d0-b2c4-11e8-982e-3035add3ad60";
 
         $questions [0]= "En terminos generales¿Qué tan satisfecho se encuentra con el asesor UNIFIN asignado?: ";
         $questions [1]= "¿Qué tan satisfecho se encuentra con la atención y el trato brindado por el asesor?: ";
@@ -26,10 +26,10 @@
         $questions [6]= "Despues de la cita con el asesor de UNIFIN usted diria que: ";
 
         for ($i=0;$i<count($questions);$i++) {
-            if($_POST["rq" . ($i + 1)]!='') {
+           // if($_POST["rq" . ($i + 1)]!='') {
                 $answers[$i] = $_POST["rq" . ($i + 1)];
                 $resultado .= $questions[$i] . $answers[$i] . '\n';
-            }
+           // }
 
         }
 
@@ -41,7 +41,7 @@
         ?>
 
         <script>
-            var id="<?php echo $id_reunion;?>";
+            var id="<?php echo $id_encuesta;?>";
             var preguntas=<?php echo json_encode($questions);?>;
             var respuestas=<?php echo json_encode($answers);?>;
             var resultado="<?php echo $resultado;?>";

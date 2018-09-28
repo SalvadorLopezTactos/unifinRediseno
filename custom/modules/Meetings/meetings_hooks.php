@@ -261,15 +261,17 @@ SQL;
     }
 
     //@Jesus Carrillo
-    //Envia encuesta de satisfaccion al cambiar el estatus de la reunion
-    function SendMail($bean = null, $event = null, $args = null)
+    //
+    function Getmails($bean = null, $event = null, $args = null)
     {
         $emails=[];
+        $ids=[];
+        $GLOBALS['log']->fatal('>>>>>>>Meeting Hook: ');//-------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Status anterior: '.$bean->fetched_row['status']);//-------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Status posterior: '.$bean->status);//-------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Description: '.$bean->description);//-------------------------------------
 
-        if($bean->fetched_row['status']!='Held' && $bean->description==''/*$bean->status=='Held'*/){
+        if($bean->fetched_row['status']!='Held' && $bean->status=='Held'){
             $contador=0;
             $parent_type=$bean->parent_type;
             $parent_id=$bean->parent_id;
@@ -286,6 +288,7 @@ SQL;
                             $bean_cuenta_promocion = BeanFactory::retrieveBean('Accounts', $relacion->account_id1_c);
                             if($bean_cuenta_promocion->email[0]['email_address']!='') {
                                 $emails[] = $bean_cuenta_promocion->email[0]['email_address'];
+                                $ids[]=$bean_cuenta_promocion->id;
                             }
                             $contador++;
                         }
@@ -294,51 +297,38 @@ SQL;
                 if($contador==0){
                     if($bean_cuenta->email[0]['email_address']!='') {
                         $emails[] = $bean_cuenta->email[0]['email_address'];
+                        $ids[]=$bean_cuenta->id;
                     }
                 }
+
+                $emails[]='jesus.carrillo@tactos.com.mx';
+                $emails[]='axel.flores@tactos.com.mx';
+                //$emails[]='adrauz@gmail.com';
+
                 $GLOBALS['log']->fatal('Length de Emails: '.count($emails));//-------------------------------------
                 $GLOBALS['log']->fatal('Se enviara correo a las siguientes personas:');//----------------------
                 $GLOBALS['log']->fatal(print_r($emails,true));//----------------------
+                //$GLOBALS['log']->fatal(print_r($ids,true));//----------------------
 
             }
 
-            if(count($emails)>=0){
-                //Define mail
-                ## START Send Email
-                $mail = new SugarPHPMailer();
+            if(count($emails)>0){
+                foreach ($emails as $correo){
+                    $bean_encuesta=BeanFactory::newBean('TCT01_Encuestas');
+                    $GLOBALS['log']->fatal('Bean creado:');//----------------------
+                    $bean_encuesta->name='Encuesta Satisfaccion-'.$bean->name;
+                    $GLOBALS['log']->fatal('Nombre asignado');//----------------------
+                    $bean_encuesta->tct_correo_txf=$correo;
+                    $GLOBALS['log']->fatal('Correo asignado');//----------------------
 
-                //$mail->prepForOutbound();
-                //$mail->setMailerForSystem();
-                $mail->setMailer();
+                    $bean_encuesta->tct01_encuestas_meetingsmeetings_ida=$bean->id;
 
-                //$mail->From = 'jesusmoca7@gmail.com';
-                $mail->FromName = 'Axel.';
+                        $GLOBALS['log']->fatal('Id asignado:');//----------------------
+                    $bean_encuesta->save();
 
-                $mail->Sender = $mail->From;
-                $mail->Subject = "Survey TST";
-
-
-
-                include 'custom/Levementum/CustomEntryPoints/encuesta_template.php';
-
-                $mail->Body = $forma;
-
-
-                $mail->IsHTML(true);
-
-                /*foreach ($emails as $correo){
-                    $mail->AddAddress($correo);
-                }*/
-                $mail->AddAddress('jesus.carrillo@tactos.com.mx');
-                $mail->AddAddress('adrauz@gmail.com');
-                $mail->AddAddress('axel.flores@tactos.com.mx');
-                //$mail->AddAddress('jesusmoca7@hotmail.com');
-                //$mail->AddAddress('wendy.reyes@unifin.com.mx');
-
-                $mail->Send();
-
-                $GLOBALS['log']->fatal("Se ha enviado encuesta---------------");//----------------------
-
+                    $GLOBALS['log']->fatal('Se ha creado una encuesta de: '.$correo);//-------------------------------------
+                    //$bean->load_relationship('rel_relaciones_accounts');
+                }
             }
         }
     }
