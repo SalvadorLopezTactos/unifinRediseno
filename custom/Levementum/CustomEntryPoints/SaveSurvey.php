@@ -3,6 +3,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <body>
+        <h4>titulo</h4>
         <?php
         /**
          * User: AF
@@ -10,11 +11,13 @@
          * Time: 10:10
          */
 
-        $GLOBALS['log']->fatal('>>>>>>>Entro el Entrypoint SaveSurvey:');//-------------------------------------
-
         $answers=[];
         $resultado = 'Resultado de Encuesta:\n';
         $id_encuesta=$_GET['id_encuesta'];
+
+        global $sugar_config;
+        $GLOBALS['site_url'] = $sugar_config['site_url'];
+
 
         //$resultado = "777777777777";
         //$id_encuesta="b6b5c0d0-b2c4-11e8-982e-3035add3ad60";
@@ -28,10 +31,10 @@
         $questions [6]= "Despues de la cita con el asesor de UNIFIN usted diria que: ";
 
         for ($i=0;$i<count($questions);$i++) {
-           // if($_POST["rq" . ($i + 1)]!='') {
+            if(isset($_POST["rq" . ($i + 1)])) {
                 $answers[$i] = $_POST["rq" . ($i + 1)];
                 $resultado .= $questions[$i] . $answers[$i] . '\n';
-           // }
+            }
 
         }
 
@@ -48,7 +51,8 @@
             var respuestas=<?php echo json_encode($answers);?>;
             var resultado="<?php echo $resultado;?>";
             var parametros=[id,preguntas,respuestas,resultado];
-            var urlSugar='http://192.168.226.222:8888/unifin/rediseno';
+            var urlSugar="http://<?php echo $_SERVER['SERVER_NAME'];?>/unifin"; //////Activar esta variable
+            //var urlSugar="http://<?php echo $_SERVER['SERVER_NAME'];?>:8888/unifin/rediseno";
 
                $.ajax({
                     type: 'post',
@@ -57,10 +61,9 @@
 
                 });
 
-                alert('Encuesta enviada,Gracias!......');
+                alert('Encuesta enviada,Gracias!......'+window.location.hostname);
 
                 window.close();
-
         </script>
     </body>
 </html>

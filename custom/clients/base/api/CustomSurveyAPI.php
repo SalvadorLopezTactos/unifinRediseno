@@ -41,7 +41,7 @@ class CustomSurveyAPI extends SugarApi
         $respuestas=$args[parametros][2];
         $resultado=$args[parametros][3];
 
-        $GLOBALS['log']->fatal('>>>>>>>Entro CustomSurveyAPI');//-------------------------------------
+        $GLOBALS['log']->fatal('>>>>>>>Entro CustomSurveyAPI');//------------------------------------
         $GLOBALS['log']->fatal("Api ->Id de encuesta:".$id_encuesta."--------------");//----------------------
         $GLOBALS['log']->fatal("Api ->respuestas:".print_r($respuestas,true)."--------------");//----------------------
 

@@ -17,7 +17,7 @@ class Encuestas_Hooks
     {
         $emails = [];
         $ids = [];
-        $GLOBALS['log']->fatal('>>>>>>>Entro Encuestas_Hook: ');//-------------------------------------
+        $GLOBALS['log']->fatal('>>>>>>>Entro Encuestas_Hook: ');//------------------------------------
 
 
         if ($bean->tct_correo_txf != '' && $bean->description == '') {
@@ -50,7 +50,8 @@ class Encuestas_Hooks
 
             $outboundEmail                    = new OutboundEmail();
             $outboundEmail->mail_sendtype     = 'smtp';
-            $outboundEmail->mail_smtpserver   = $_REQUEST['mail_smtpserver'];
+            //$outboundEmail->mail_smtpserver   = $_REQUEST['mail_smtpserver'];
+            $outboundEmail->mail_smtpserver   = 'mail.unifin.com.mx';
             $outboundEmail->mail_smtpport     = '25';
             $outboundEmail->mail_smtpauth_req = 0;
             $outboundEmail->mail_smtpuser     = '';
@@ -61,8 +62,10 @@ class Encuestas_Hooks
 
             $configurations = array();
             $configurations["from_email"] = 'unifin-notificaciones@unifin.com.mx';
-            $configurations["from_name"] = $_REQUEST['mail_from_name'];
-            $configurations["display_name"] = "{$_REQUEST['mail_from_name']} (unifin-notificaciones@unifin.com.mx)";
+            //$configurations["from_name"] = $_REQUEST['mail_from_name'];
+            //$configurations["display_name"] = "{$_REQUEST['mail_from_name']} (unifin-notificaciones@unifin.com.mx)";
+            $configurations["from_name"] = 'Unifin Financiera';
+            $configurations["display_name"] = "{'Unifin Financiera'} ({'unifin-notificaciones@unifin.com.mx'})";
             $configurations["personal"] = 0;
 
             $outboundEmailConfiguration = OutboundEmailConfigurationPeer::buildOutboundEmailConfiguration(

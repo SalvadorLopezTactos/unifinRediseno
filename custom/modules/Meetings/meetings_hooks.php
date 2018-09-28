@@ -266,7 +266,7 @@ SQL;
     {
         $emails=[];
         $ids=[];
-        $GLOBALS['log']->fatal('>>>>>>>Entro Meeting Hook: ');//-------------------------------------
+        $GLOBALS['log']->fatal('>>>>>>>Entro Meeting Hook: ');//------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Status anterior: '.$bean->fetched_row['status']);//-------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Status posterior: '.$bean->status);//-------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Description: '.$bean->description);//-------------------------------------
@@ -302,6 +302,7 @@ SQL;
                 }
 
                 //$emails[]='jesus.carrillo@tactos.com.mx';
+                //$emails[]='victor.martinez@tactos.com.mx';
                 //$emails[]='axel.flores@tactos.com.mx';
                 //$emails[]='adrauz@gmail.com';
 
@@ -320,10 +321,8 @@ SQL;
                     $GLOBALS['log']->fatal('Nombre asignado');//----------------------
                     $bean_encuesta->tct_correo_txf=$correo;
                     $GLOBALS['log']->fatal('Correo asignado');//----------------------
-
                     $bean_encuesta->tct01_encuestas_meetingsmeetings_ida=$bean->id;
-
-                        $GLOBALS['log']->fatal('Id asignado:');//----------------------
+                    $GLOBALS['log']->fatal('Id asignado:');//----------------------
                     $bean_encuesta->save();
 
                     $GLOBALS['log']->fatal('Se ha creado una encuesta de: '.$correo);//-------------------------------------
