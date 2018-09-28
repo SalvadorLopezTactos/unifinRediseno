@@ -110,13 +110,13 @@ $forma='
                    <td align="center"><input type="radio" name="rq4" id="q4-3" value="3" /></td>
                    <td align="center"><input type="radio" name="rq4" id="q4-4" value="4" /></td>
                    <td align="center"><input type="radio" name="rq4" id="q4-5" value="5" /></td>
-                   </tr>
+                  </tr>
                 </table>
               </div><br>
               <div> 
                 <table style="width:100%">
                  <tr>
-                   <td colspan="5" align="center"><<h4 name="question" id="q5">¿Cómo calificaría al asesor con respecto a la comprensión de las necesidades de la empresa?</h4></td>
+                   <td colspan="5" align="center"><h4 name="question" id="q5">¿Cómo calificaría al asesor con respecto a la comprensión de las necesidades de la empresa?</h4></td>
                  </tr>
                  <tr>
                    <td colspan="3" align="left"><h6  style=";display: inline;">Totalmente Insatisfecho</h6></td>
