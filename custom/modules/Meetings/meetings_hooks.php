@@ -5,6 +5,8 @@
      * Date: 19/10/2016
      */
 
+    require_once('modules/Emails/Email.php');
+
 class Meetings_Hooks
 {
     //Agregar Invitados
@@ -34,7 +36,8 @@ SQL;
 SQL;
 				$levadmin1 = $db->query($levadmin);
 			}*/
-			// Crear Reunión
+			// Crear Reuniï¿½n
+
   			$exclude = array
 			  (
   				'id',
@@ -113,7 +116,7 @@ SQL;
 					WHERE id = '{$idel}'
 SQL;
 				$actualiza = $db->query($querys);
-				// Elimina Reunión
+				// Elimina Reuniï¿½n
 				$querydel = <<<SQL
 						SELECT a.id, a.assigned_user_id, b.parent_meeting_c
 						FROM meetings a, meetings_cstm b
@@ -133,11 +136,11 @@ SQL;
 		}
 	}
 
-    //Generar una copia del meeting para los acompañantes de la cita en Brujula
+    //Generar una copia del meeting para los acompaï¿½antes de la cita en Brujula
     function MeetingAcompaniante($bean = null, $event = null, $args = null)
     {
         global $db;
-        // Crear Reunión
+        // Crear Reuniï¿½n
         if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->nuevo_c == 1 && $bean->repeat_parent_id == "")
         {
             $query = <<<SQL
@@ -188,7 +191,8 @@ SQL;
 SQL;
  			$ultimo1 = $db->query($ultimo);
         }
-		// Editar Reunión
+
+		// Editar Reuniï¿½n
         if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->date_entered != $bean->date_modified && $bean->nuevo_c == 0 && $bean->actualizado_c == 1)
 	    {
 			$query = <<<SQL
@@ -254,5 +258,78 @@ SQL;
 			AND user_id = 1
 SQL;
 		$levadmin1 = $db->query($levadmin);		
+    }
+
+    //@Jesus Carrillo
+    //
+    function Getmails($bean = null, $event = null, $args = null)
+    {
+        $emails=[];
+        $ids=[];
+        $GLOBALS['log']->fatal('>>>>>>>Meeting Hook: ');//-------------------------------------
+        $GLOBALS['log']->fatal('>>>>>>>Status anterior: '.$bean->fetched_row['status']);//-------------------------------------
+        $GLOBALS['log']->fatal('>>>>>>>Status posterior: '.$bean->status);//-------------------------------------
+        $GLOBALS['log']->fatal('>>>>>>>Description: '.$bean->description);//-------------------------------------
+
+        if($bean->fetched_row['status']!='Held' && $bean->status=='Held'){
+            $contador=0;
+            $parent_type=$bean->parent_type;
+            $parent_id=$bean->parent_id;
+
+            if($parent_type=='Accounts') {
+                $bean_cuenta = BeanFactory::retrieveBean('Accounts', $parent_id);
+                $bean_cuenta->load_relationship('rel_relaciones_accounts');
+                $bean_relaciones = $bean_cuenta->rel_relaciones_accounts->getBeans();
+
+                $GLOBALS['log']->fatal('Length de Relaciones: '.count($bean_relaciones));//-------------------------------------
+                if(count($bean_relaciones)>0) {
+                    foreach ($bean_relaciones as $relacion) {
+                        if (strpos($relacion->relaciones_activas, 'Contacto') && $relacion->tipodecontacto == 'Promocion') {
+                            $bean_cuenta_promocion = BeanFactory::retrieveBean('Accounts', $relacion->account_id1_c);
+                            if($bean_cuenta_promocion->email[0]['email_address']!='') {
+                                $emails[] = $bean_cuenta_promocion->email[0]['email_address'];
+                                $ids[]=$bean_cuenta_promocion->id;
+                            }
+                            $contador++;
+                        }
+                    }
+                }
+                if($contador==0){
+                    if($bean_cuenta->email[0]['email_address']!='') {
+                        $emails[] = $bean_cuenta->email[0]['email_address'];
+                        $ids[]=$bean_cuenta->id;
+                    }
+                }
+
+                $emails[]='jesus.carrillo@tactos.com.mx';
+                $emails[]='axel.flores@tactos.com.mx';
+                //$emails[]='adrauz@gmail.com';
+
+                $GLOBALS['log']->fatal('Length de Emails: '.count($emails));//-------------------------------------
+                $GLOBALS['log']->fatal('Se enviara correo a las siguientes personas:');//----------------------
+                $GLOBALS['log']->fatal(print_r($emails,true));//----------------------
+                //$GLOBALS['log']->fatal(print_r($ids,true));//----------------------
+
+            }
+
+            if(count($emails)>0){
+                foreach ($emails as $correo){
+                    $bean_encuesta=BeanFactory::newBean('TCT01_Encuestas');
+                    $GLOBALS['log']->fatal('Bean creado:');//----------------------
+                    $bean_encuesta->name='Encuesta Satisfaccion-'.$bean->name;
+                    $GLOBALS['log']->fatal('Nombre asignado');//----------------------
+                    $bean_encuesta->tct_correo_txf=$correo;
+                    $GLOBALS['log']->fatal('Correo asignado');//----------------------
+
+                    $bean_encuesta->tct01_encuestas_meetingsmeetings_ida=$bean->id;
+
+                        $GLOBALS['log']->fatal('Id asignado:');//----------------------
+                    $bean_encuesta->save();
+
+                    $GLOBALS['log']->fatal('Se ha creado una encuesta de: '.$correo);//-------------------------------------
+                    //$bean->load_relationship('rel_relaciones_accounts');
+                }
+            }
+        }
     }
 }
