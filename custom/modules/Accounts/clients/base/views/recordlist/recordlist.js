@@ -24,20 +24,17 @@
 
     _render: function (fields, errors, callback) {
         this._super("_render");
-        filtroPromotor = [5,11,16];
+        filtroPromotor = [5,11,16,4,10,15,3,9,2,8,14,1,7,13,6,12,17];
         var puesto=App.user.attributes.puestousuario_c;
+        puesto = parseInt(puesto, 10);
+        var resultado=filtroPromotor.indexOf(puesto);
 
-        if ($.inArray(puesto,filtroPromotor))
+        if(resultado != -1)
         {
             $(".choice-filter-close").attr('style', 'display:none;');
             $("#s2id_autogen1").attr('style', 'pointer-events:none;');
             $("[data-action=filter-delete]").attr('style', 'display:none;');
         }
-
-
-
-
-
 
     },
 
