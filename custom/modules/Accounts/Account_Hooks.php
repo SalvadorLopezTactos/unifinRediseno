@@ -612,7 +612,7 @@ SQL;
             *seleccionada
 
              */
-            if( (($bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c) || ($bean->tipo_registro_c=="Prospecto" && $bean->subtipo_cuenta_c=="Interesado")) && $bean->sincronizado_unics_c == 0 && empty($bean->idcliente_c) )
+            if( (($bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c) || ($bean->tipo_registro_c=="Prospecto" && $bean->subtipo_cuenta_c=="Interesado")) && $bean->sincronizado_unics_c == 0 && !empty($bean->idcliente_c) )
             {
                 $callApi = new UnifinAPI();
                 $cliente = $callApi->insertarClienteCompleto($bean);
