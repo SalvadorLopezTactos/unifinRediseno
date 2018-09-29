@@ -11,7 +11,7 @@
 
     openForm: _.debounce(function (filterModel) {
         $(".filter-header").show();
-
+        this.resetFilterValues();
         var template = filterModel.get('filter_template') || filterModel.get('filter_definition');
         if (_.isEmpty(template)) {
             this.render();
@@ -46,6 +46,7 @@
 
 
     Test: _.debounce(function()  {
+
 
         filtroPromotorArray = [5,11,16,4,10,15,3,9,2,8,14,1,7,13,6,12,17,33];
         var puestoUsr=App.user.attributes.puestousuario_c;
