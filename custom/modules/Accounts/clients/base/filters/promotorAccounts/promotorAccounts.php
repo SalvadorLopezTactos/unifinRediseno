@@ -50,11 +50,13 @@ if (in_array($puestoUsuario, $filtroPromotor)) {
     $field = 'unifin_team';
 
     $value = str_replace("^","",$current_user->equipos_c);
+    $GLOBALS['log']->fatal(print_r($value,true));
+
     $value=split(',',$value);
 
 } elseif (in_array($puestoUsuario, $filtroSin)) {
-    $field = '';
-    $value = '';
+    $field = "user_id_c";
+   // $value = '';
 }
 
 
