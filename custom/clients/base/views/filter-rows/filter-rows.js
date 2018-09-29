@@ -47,7 +47,7 @@
 
     Test: _.debounce(function()  {
 
-        filtroPromotorArray = [5,11,16,4,10,15,3,9,2,8,14,1,7,13,6,12,17];
+        filtroPromotorArray = [5,11,16,4,10,15,3,9,2,8,14,1,7,13,6,12,17,33];
         var puestoUsr=App.user.attributes.puestousuario_c;
          puestoUsr = parseInt(puestoUsr, 10);
         var resultado=filtroPromotorArray.indexOf(puestoUsr);

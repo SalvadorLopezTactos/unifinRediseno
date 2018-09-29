@@ -25,3 +25,4 @@ $mod_strings['LBL_TCT_ALTAPROVEEDOR_CHK'] = 'Alta Proveedor';
 $mod_strings['LBL_TCT_ALTA_CLIENTES_CHK'] = 'Alta Clientes';
 $mod_strings['LBL_TCT_ALTA_CD_CHK'] = 'Alta Cedente / Deudor Factoraje';
 $mod_strings['LBL_TCT_ALTA_CD_CHK_C'] = 'Alta Cedente / Deudor Factoraje';
+$mod_strings['LBL_EDITVIEW_PANEL2'] = 'Privilegios Especiales';

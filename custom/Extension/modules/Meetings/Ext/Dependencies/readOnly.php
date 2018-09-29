@@ -1,145 +1,143 @@
-﻿<?php
+<?php
 global $current_user;
 $userid=$current_user->id;
 $dependencies['Meetings']['readOnly'] = array
 (
-            'hooks' => array("all"),
-            'trigger' => 'true',
-            'triggerFields' => array('created_by','description','status'),
-            'onload' => true,
-            'actions' => array
-      	    (
-                array
-	            	(
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'edit_button',
-                        'label' => 'LBL_EDIT_BUTTON_LABEL',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),
-                array
-		            (
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'name',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),
-                array
-		            (
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'date_start',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),
-                array
-		            (
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'date_end',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),
-                array
-		            (
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'repeat_type',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),                                                
-                array
-		            (
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'location',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),                                                                                                                
-                array
-		            (
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'reminder_time',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),
-                array
-		            (
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'email_reminder_time',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),                                                
-                array
-		            (
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'description',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),                                            
-                array
-		            (
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'invitees',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),                                                
-                array
-		            (
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'assigned_user_name',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),                                                
-                array
-		            (
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'referenciada_c',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),                                                
-                array
-		            (
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'parent_type',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),                                                
-                array
-		            (
-                    'name' => 'ReadOnly',
-                    'params' => array
-		                (
-                        'target' => 'check_in_address_c',
-                        'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
-                    ),
-                ),                                                
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('created_by','description','status'),
+    'onload' => true,
+    'actions' => array
+    (
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'edit_button',
+                'label' => 'LBL_EDIT_BUTTON_LABEL',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
             ),
-            'notActions' => array(),
-
-
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'name',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'date_start',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'date_end',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'repeat_type',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'location',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'reminder_time',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'email_reminder_time',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'description',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'invitees',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'assigned_user_name',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'referenciada_c',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'parent_type',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'check_in_address_c',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+            ),
+        ),
+    ),
+    'notActions' => array(),
 );
 //Dependencia para ocultar en llamdas la cuenta y así asignar una única a la relación Adrian Arauz 20/707/18
 /*$dependencies['Meetings']['ReunionesNO'] = array(
@@ -159,10 +157,8 @@ $dependencies['Meetings']['readOnly'] = array
                 'value' => 'true',
             ),
         ),
-
     ),
 );*/
-
 /*@Jesus Carrillo
   Se deshabilita con el fin de poder ajustar el tamaño del campo en el CreateView
 $dependencies['Meetings']['status'] = array(
@@ -197,7 +193,6 @@ $dependencies['Meetings']['invitees'] = array(
         ),
     ),
 );
-
 $dependencies['Meetings']['objetivo_c'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',

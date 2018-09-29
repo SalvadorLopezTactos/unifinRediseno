@@ -199,6 +199,8 @@
         //VM 14/09/2018
         this.checkProveedor();
 
+        this.mostrarpaneldirec();
+
     },
 
     initialize: function (options) {
@@ -297,8 +299,6 @@
         this.events['click a[name=generar_curp_c]'] = '_doGeneraCURP';
 
 
-
-
         /* hay que traer el campo del usaurio
          * PREOMOTORES POR DEFAULT
          LEASING:
@@ -317,6 +317,7 @@
          lcampos
          a04540fc-e608-56a7-ad47-562a6078519d
          */
+
 
         var usuario = app.data.createBean('Users', {id: this.model.get('assigned_user_id')});
         usuario.fetch({
@@ -558,6 +559,13 @@
         if(this.model.get('tipo_registro_c')=='Proveedor'){
             this.$('[data-name="esproveedor_c"]').attr('style', 'pointer-events:none;');
         }
+    },
+    //funcion que muestra siempre el panel de direcciones a la hora de crear una cuenta. Adrian Arauz 28/09/2018.
+    mostrarpaneldirec: function () {
+        $('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL15"]').children().eq(0).removeClass('panel-inactive');
+        $('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL15"]').children().eq(0).addClass('panel-active');
+        $('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL15"]').children().eq(1).addClass('panel-active').removeClass('hide');
+
     },
 
 //@Jesus Carrillo
@@ -1476,6 +1484,7 @@
                 //Adrian Arauz 25/09/2018.
                 $('.select2-choices').css('border-color', 'red');
                 $('.select2-choices').eq(0).css('border-color', '');
+
 
 
                 app.alert.show('Error al validar Direcciones', {
