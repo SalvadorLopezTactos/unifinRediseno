@@ -16,17 +16,20 @@
     initialize: function (options) {
         this._super("initialize", [options]);
 
-        if(options.context.get("dataView")=="list") {
-                options.context.set("default_filter", "all_records");
-        }
+
        //    App.controller.context.attributes.filterOptions
 
-
+        if(options.context.get("dataView")=="list") {
+            options.context.set("currentFilterId", "promotorAccounts");
+        }
     },
 
 
     _render: function (fields, errors, callback) {
         this._super("_render");
+
+
+
         filtroPromotor = [5,11,16,4,10,15,3,9,2,8,14,1,7,13,6,12,17,33];
         var puesto=App.user.attributes.puestousuario_c;
         puesto = parseInt(puesto, 10);

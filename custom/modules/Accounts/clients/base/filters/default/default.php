@@ -2,8 +2,8 @@
 if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
 
 $viewdefs['Accounts']['base']['filter']['default'] = array(
-/*'default_filter' => 'all_records', */
-    'default_filter' => 'promotorAccounts',
+'default_filter' => 'all_records',
+    //'default_filter' => 'promotorAccounts',
     'fields' => array(
         'name' => array(),
         'rfc_c' => array(),
