@@ -15,10 +15,6 @@
         self = this;
         self.hasContratosActivos = false;
         this._super("initialize", [options]);
-        
-        if(options.context.get("dataView")=="list") {
-        options.context.set("default_filter", "all_records");
-        }
 
         this.duplicadosName = 0;
         this.duplicadosRFC = 0;
