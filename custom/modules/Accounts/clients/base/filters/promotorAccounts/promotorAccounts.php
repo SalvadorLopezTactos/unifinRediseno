@@ -20,7 +20,7 @@ $filtroPromotor = array(5, 11, 16);
 //Gerente, Subdirector, Director
 $filtroEquipo = array(4, 10, 15, 3, 9, 2, 8, 14);
 //DGA, Backoffice
-$filtroEquipo2 = array(1, 7, 13, 6, 12, 17);
+$filtroEquipo2 = array(1, 7, 13, 6, 12, 17,33);
 //No filtro
 $filtroSin = array(18);
 
