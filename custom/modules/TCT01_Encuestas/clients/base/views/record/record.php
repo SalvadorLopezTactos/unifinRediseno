@@ -175,6 +175,9 @@ array (
               ),
               1 => 
               array (
+                'name' => 'tct_account_survey_rel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_ACCOUNT_SURVEY_REL',
               ),
               2 => 
               array (
