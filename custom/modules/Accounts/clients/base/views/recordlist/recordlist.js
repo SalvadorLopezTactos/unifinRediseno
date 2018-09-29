@@ -20,7 +20,7 @@
        //    App.controller.context.attributes.filterOptions
 
         if(options.context.get("dataView")=="list") {
-            options.context.set("currentFilterId", "promotorAccounts");
+            options.context.set("currentFilterId", app.user.attributes.id);
         }
     },
 
