@@ -21,7 +21,7 @@ $forma='
     <body>
         <div align="center" style="width: 660px;">
         <img src="https://fotos.subefotos.com/d83bd716402da605745bfa6158d0f376o.png">
-        <h2>'.$bean_acc->name.':</h2>
+        <h2>'.$bean_acc->name.'</h2>
         <h2>Encuesta de Satisfacción</h2>
           <form target="request" method="POST" action="'.$GLOBALS['site_url'].'/custom/Levementum/CustomEntryPoints/SaveSurvey.php?id_encuesta='.$bean->id.'">
               <div> 
