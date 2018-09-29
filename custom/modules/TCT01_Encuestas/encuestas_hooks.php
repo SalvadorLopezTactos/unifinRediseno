@@ -65,7 +65,7 @@ class Encuestas_Hooks
             //$configurations["from_name"] = $_REQUEST['mail_from_name'];
             //$configurations["display_name"] = "{$_REQUEST['mail_from_name']} (unifin-notificaciones@unifin.com.mx)";
             $configurations["from_name"] = 'Unifin Financiera';
-            $configurations["display_name"] = "{'Unifin Financiera'} ({'unifin-notificaciones@unifin.com.mx'})";
+            $configurations["display_name"] = "Unifin Financiera (unifin-notificaciones@unifin.com.mx)";
             $configurations["personal"] = 0;
 
             $outboundEmailConfiguration = OutboundEmailConfigurationPeer::buildOutboundEmailConfiguration(
