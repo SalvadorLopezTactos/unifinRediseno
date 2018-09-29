@@ -266,6 +266,7 @@ SQL;
     {
         $emails=[];
         $ids=[];
+        $names=[];
         $GLOBALS['log']->fatal('>>>>>>>Entro Meeting Hook: ');//------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Status anterior: '.$bean->fetched_row['status']);//-------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Status posterior: '.$bean->status);//-------------------------------------
@@ -289,6 +290,7 @@ SQL;
                             if($bean_cuenta_promocion->email[0]['email_address']!='') {
                                 $emails[] = $bean_cuenta_promocion->email[0]['email_address'];
                                 $ids[]=$bean_cuenta_promocion->id;
+                                $names[]=$bean_cuenta_promocion->name;
                             }
                             $contador++;
                         }
@@ -298,6 +300,7 @@ SQL;
                     if($bean_cuenta->email[0]['email_address']!='') {
                         $emails[] = $bean_cuenta->email[0]['email_address'];
                         $ids[]=$bean_cuenta->id;
+                        $names[]=$bean_cuenta->name;
                     }
                 }
 
@@ -307,25 +310,41 @@ SQL;
                 //$emails[]='adrauz@gmail.com';
 
                 $GLOBALS['log']->fatal('Length de Emails: '.count($emails));//-------------------------------------
+                //$GLOBALS['log']->fatal(print_r($bean_cuenta,true));//----------------------
                 $GLOBALS['log']->fatal('Se enviara correo a las siguientes personas:');//----------------------
                 $GLOBALS['log']->fatal(print_r($emails,true));//----------------------
-                //$GLOBALS['log']->fatal(print_r($ids,true));//----------------------
+                $GLOBALS['log']->fatal(print_r($ids,true));//----------------------
 
             }
 
             if(count($emails)>0){
-                foreach ($emails as $correo){
-                    $bean_encuesta=BeanFactory::newBean('TCT01_Encuestas');
-                    $GLOBALS['log']->fatal('Bean creado:');//----------------------
-                    $bean_encuesta->name='Encuesta Satisfaccion-'.$bean->name;
-                    $GLOBALS['log']->fatal('Nombre asignado');//----------------------
-                    $bean_encuesta->tct_correo_txf=$correo;
-                    $GLOBALS['log']->fatal('Correo asignado');//----------------------
-                    $bean_encuesta->tct01_encuestas_meetingsmeetings_ida=$bean->id;
-                    $GLOBALS['log']->fatal('Id asignado:');//----------------------
-                    $bean_encuesta->save();
+                for($i=0;$i<count($emails);$i++){
 
-                    $GLOBALS['log']->fatal('Se ha creado una encuesta de: '.$correo);//-------------------------------------
+                        $bean_encuesta = BeanFactory::newBean('TCT01_Encuestas');
+                        $GLOBALS['log']->fatal('Bean creado:');//----------------------
+                        $bean_encuesta->name = 'Encuesta Satisfaccion-' . $bean->name;
+                        $GLOBALS['log']->fatal('Nombre asignado');//----------------------
+                        $bean_encuesta->tct_correo_txf = $emails[$i];
+                        $GLOBALS['log']->fatal('Correo asignado');//----------------------
+                        $bean_encuesta->tct01_encuestas_meetingsmeetings_ida = $bean->id;
+                        $GLOBALS['log']->fatal('Id asignado:');//----------------------
+
+                        //$bean_encuesta->tct_account_survey_rel_c = $names[i];
+
+                        //$bean_encuesta->tct_account_survey_rel_c = $ids[$i];
+
+                        $bean_encuesta->account_id_c=$ids[$i];
+
+                        $GLOBALS['log']->fatal('Id del cliente:'.$ids[$i] );//----------------------
+
+                        $bean_cuenta2 = BeanFactory::retrieveBean('Accounts', $ids[$i]);
+                        //$GLOBALS['log']->fatal(print_r($bean_cuenta2,true));//----------------------
+
+
+
+                        $bean_encuesta->save();
+
+                        $GLOBALS['log']->fatal('Se ha creado una encuesta de: ' . $emails[$i]);//-------------------------------------
                     //$bean->load_relationship('rel_relaciones_accounts');
                 }
             }
