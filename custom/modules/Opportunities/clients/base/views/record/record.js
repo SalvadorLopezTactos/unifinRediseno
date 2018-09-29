@@ -22,7 +22,7 @@
       'keydown [name=factor_moratorio_c]': 'limitanumero',
   },
 
-	initialize: function (otions) {
+	initialize: function (options) {
 		self = this;
 		this._super("initialize", [options]);
 		/*
