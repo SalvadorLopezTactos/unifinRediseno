@@ -30,10 +30,10 @@
         $questions [6]= "Despues de la cita con el asesor de UNIFIN usted diria que: ";
 
         for ($i=0;$i<count($questions);$i++) {
-            if(isset($_POST["rq" . ($i + 1)])) {
+            //if(isset($_POST["rq" . ($i + 1)])) {
                 $answers[$i] = $_POST["rq" . ($i + 1)];
                 $resultado .= $questions[$i] . $answers[$i] . '\n';
-            }
+            //}
 
         }
 

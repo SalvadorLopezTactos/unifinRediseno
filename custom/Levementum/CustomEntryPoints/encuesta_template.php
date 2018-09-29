@@ -2,7 +2,12 @@
 if(isset($_GET['id_encuesta']) && isset($_GET['url'])){
     $bean->id=$_GET['id_encuesta'];
     $GLOBALS['site_url']=$_GET['url'];
+    $link='';
+    $bean->tct_account_survey_rel_c=$_GET['name'];
+}else{
+    $link='<b>Si la encuesta de arriba no esta habilitada por favor da click <a href="'.$GLOBALS['site_url'].'/custom/Levementum/CustomEntryPoints/encuesta_template.php?id_encuesta='.$bean->id.'&url='.$GLOBALS['site_url'].'&name='. $bean->tct_account_survey_rel_c.'">aqui</a></b>';
 }
+
 $forma='
 
 
@@ -14,7 +19,7 @@ $forma='
     <body>
         <div align="center" style="width: 660px;">
         <img src="https://fotos.subefotos.com/d83bd716402da605745bfa6158d0f376o.png">
-        <h2>Nombre del cliente</h2>
+        <h2>'.$bean->tct_account_survey_rel_c.':</h2>
         <h2>Encuesta de Satisfacción</h2>
           <form target="request" method="POST" action="'.$GLOBALS['site_url'].'/custom/Levementum/CustomEntryPoints/SaveSurvey.php?id_encuesta='.$bean->id.'">
               <div> 
@@ -190,7 +195,7 @@ $forma='
             <br>
             <input type="submit" value="Enviar encuesta!">
             <br>
-            <p><b>Si la encuesta de arriba no esta habilitada por favor da click <a href="'.$GLOBALS['site_url'].'/custom/Levementum/CustomEntryPoints/encuesta_template.php?id_encuesta='.$bean->id.'&url='.$GLOBALS['site_url'].'">aqui</a></b></p>
+            <p>'.$link.'</p>
         </form>
         <img src="https://fotos.subefotos.com/21e0681a07a484fedf20d4fbc9817396o.png">
         </div>
