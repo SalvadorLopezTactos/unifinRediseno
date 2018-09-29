@@ -22,7 +22,7 @@
       'keydown [name=factor_moratorio_c]': 'limitanumero',
   },
 
-	initialize: function (options) {
+	initialize: function (otions) {
 		self = this;
 		this._super("initialize", [options]);
 		/*
@@ -130,13 +130,8 @@
 
       //Victor M.L 19-07-2018
 		//no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
-        if((this.model.get('tct_etapa_ddw_c')=='SI') ||
-            (this.model.get('tct_etapa_ddw_c')=='P' &&
-                (this.model.get('estatus_c')=='PE' || this.model.get('estatus_c')=='P' )) || this.model.get('estatus_c')=='K' ){
-
-
+        if(this.model.get('tct_etapa_ddw_c')=='SI' ||this.model.get('tct_etapa_ddw_c')=='P'){
             //no hace nada y muestra el panel
-
         }else{
             this.$('div[data-panelname=LBL_RECORDVIEW_PANEL1]').hide();
         }
