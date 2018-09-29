@@ -1345,34 +1345,70 @@
                     var  usuario=App.user.attributes.puestousuario_c;
                     console.log(data);
                     if(data==false){
-                        app.alert.show("no acceso", {
-                            level: "error",
-                            title: "Usted no tiene el permiso para llevar a cabo esta acci\u00F3n",
-                            autoClose: true
-                        });
-                    }else   //Promotores
-                    if (usuario=="5"||
-                        usuario=="11"||
-                        usuario=="16"||
-                        //Gerentes
-                        usuario=="15"||
-                        usuario=="4"||
-                        usuario=="10"||
-                        //subdirectores
-                        usuario=="3"||
-                        usuario=="9"||
-                        usuario=="28"||
-                        //Directores
-                        usuario=="2"||
-                        usuario=="8"||
-                        usuario=="14"||
-                        usuario=="21"
-                        || usuario=="18" //Ajuste para poder trabajar con la cuenta de Wendy
-                    )
 
-                    {
-                        //Valida llamadas y reuniones
-                        var valRelacionados = 0;
+
+                        if (usuario=="5"||
+                            usuario=="11"||
+                            usuario=="16"||
+                            //Gerentes
+                            usuario=="15"||
+                            usuario=="4"||
+                            usuario=="10"||
+                            //subdirectores
+                            usuario=="3"||
+                            usuario=="9"||
+                            usuario=="28"||
+                            //Directores
+                            usuario=="1"||
+                            usuario=="2"||
+                            usuario=="8"||
+                            usuario=="14"||
+                            usuario=="21"
+                            || usuario=="18" //Ajuste para poder trabajar con la cuenta de Wendy
+                        ) {
+
+                            //Valida llamadas y reuniones
+                            var valRelacionados = 0;
+                            //self.getllamadas();
+                            //self.getreuniones();
+
+                            app.alert.show('loadcontactado', {
+                                level: 'process',
+                            });
+                            self.getllamadas(this.resultCallback);
+                            self.getreuniones(this.resultCallback);
+
+                        }
+                            else
+                            {
+
+                                app.alert.show("No acceso", {
+                                    level: "error",
+                                    title: "Usted no tiene el permiso para llevar a cabo esta acci\u00F3n",
+                                    autoClose: true
+                                });
+                            }
+
+                            /*
+
+                             if(this.totalllamadas==0 && self.totalreuniones==0){
+                                 app.alert.show('alert_calls', {
+                                     level: 'error',
+                                     messages: 'El proceso de conversi\u00F3n requiere que la cuenta contenga una <b>llamada</b> o <b>reuni\u00F3n</b> con estado <b>Realizada</b> y con fecha al d\u00EDa de hoy o anterior.',
+                                 });
+                                 valRelacionados = 1;
+                             }
+
+                             //Valida datos de cuenta
+                             var valContacto = self.validaContactado();
+                             self.validar_fields(valContacto, valRelacionados);
+                             */
+
+                        }
+                        else if(data==true){
+
+                            //Valida llamadas y reuniones
+                            var valRelacionados = 0;
                         //self.getllamadas();
                         //self.getreuniones();
 
@@ -1382,29 +1418,10 @@
                         self.getllamadas(this.resultCallback);
                         self.getreuniones(this.resultCallback);
 
-                        /*
 
-                         if(this.totalllamadas==0 && self.totalreuniones==0){
-                             app.alert.show('alert_calls', {
-                                 level: 'error',
-                                 messages: 'El proceso de conversi\u00F3n requiere que la cuenta contenga una <b>llamada</b> o <b>reuni\u00F3n</b> con estado <b>Realizada</b> y con fecha al d\u00EDa de hoy o anterior.',
-                             });
-                             valRelacionados = 1;
-                         }
+                        }
 
-                         //Valida datos de cuenta
-                         var valContacto = self.validaContactado();
-                         self.validar_fields(valContacto, valRelacionados);
-                         */
 
-                    }
-                    else {
-                        app.alert.show("No acceso", {
-                            level: "error",
-                            title: "Usted no tiene el permiso para llevar a cabo esta acci\u00F3n",
-                            autoClose: true
-                        });
-                    }
                 }, self)
             });
             //self.render();
@@ -1475,7 +1492,7 @@
             console.log ('Validacion Campos OK');
             app.alert.show('alert_calls2', {
                 level: 'error',
-                messages: 'Para convertir a Prospecto Contactado es necesario se llenen los campos requeridos: ' +campos ,
+                messages: 'Para convertir a Prospecto Contactado es necesario se llenen los campos requeridos: <br>' +campos ,
             });
 
             return 1;
