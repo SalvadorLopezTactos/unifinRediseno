@@ -1,4 +1,5 @@
 <?php
+/*
 $hook_array['after_save'][] = Array(
     1,
     'Send emails',
@@ -6,4 +7,4 @@ $hook_array['after_save'][] = Array(
     'Encuestas_Hooks', // name of the class
     'Sendmails' // name of the function
 );
-
+*/

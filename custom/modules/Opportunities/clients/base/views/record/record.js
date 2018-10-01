@@ -1516,6 +1516,7 @@ console.log(name);
                 app.api.call('GET', app.api.buildURL('GetUsersTeams/' + this.model.get('id') + '/Accounts'), null, {
                     success: _.bind(function (data) {
                         console.log(data);
+                        /*
                         if (data == false) {
 
                             $('.noEdit.fieldset.actions.detail.btn-group').hide();
@@ -1529,6 +1530,7 @@ console.log(name);
                                 return false;
                             });
                         }
+                        */
                         return data;
                     }, self),
                 });

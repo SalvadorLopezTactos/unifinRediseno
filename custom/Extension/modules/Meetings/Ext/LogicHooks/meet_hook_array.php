@@ -31,6 +31,7 @@ $hook_array['after_relationship_delete'][] = Array(
 
 
 //@Jesus Carrillo
+/*
 $hook_array['before_save'][] = Array(
     1,
     'Send email to related people',
@@ -38,3 +39,4 @@ $hook_array['before_save'][] = Array(
     'Meetings_Hooks', // name of the class
     'Getmails' // name of the function
 );
+*/
