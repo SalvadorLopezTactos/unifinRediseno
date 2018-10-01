@@ -618,16 +618,19 @@
                         console.log(data);
                         if (data == false) {
 
-                            $('.noEdit.fieldset.actions.detail.btn-group').hide();
+                            if(this.model.get('tipo_registro_c')!="Persona"){
 
-                            $('i').removeClass('fa-pencil');
+                                $('.noEdit.fieldset.actions.detail.btn-group').hide();
 
-                            $('.record-cell').children().not('.normal.index').click(function (e) { //Habilita solo links
-                                e.stopPropagation();
-                                e.preventDefault();
-                                e.stopImmediatePropagation();
-                                return false;
-                            });
+                                $('i').removeClass('fa-pencil');
+
+                                $('.record-cell').children().not('.normal.index').click(function (e) { //Habilita solo links
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                    e.stopImmediatePropagation();
+                                    return false;
+                                });
+                            }
                         }
                         return data;
                     }, self),
@@ -658,18 +661,21 @@
                         console.log(data);
                         if (data == false) {
 
-                            $('.noEdit.fieldset.actions.detail.btn-group').hide();
+                            if(this.model.get('tipo_registro_c')!="Persona"){
 
-                            $('i').removeClass('fa-pencil');
+                                $('.noEdit.fieldset.actions.detail.btn-group').hide();
 
-                            $('.record-cell').children().not('.normal.index').click(function (e) { //Habilita solo links
-                                e.stopPropagation();
-                                e.preventDefault();
-                                e.stopImmediatePropagation();
-                                return false;
-                            });
+                                $('i').removeClass('fa-pencil');
+
+                                $('.record-cell').children().not('.normal.index').click(function (e) { //Habilita solo links
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                    e.stopImmediatePropagation();
+                                    return false;
+                                });
+                            }
                         }else {
-                            $('.noEdit.fieldset.actions.detail.btn-group').hide();
+                            /*$('.noEdit.fieldset.actions.detail.btn-group').hide();
                             $('i').removeClass('fa-pencil');
 
                             var panels_hide = app.lang.getAppListStrings('panels_hide_list');
@@ -700,7 +706,7 @@
                                     e.stopImmediatePropagation();
                                     return false;
                                 });
-                            }
+                            }*/
 
                         }
                         return data;
