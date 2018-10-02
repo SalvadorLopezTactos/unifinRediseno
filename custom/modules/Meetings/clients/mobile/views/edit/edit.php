@@ -132,6 +132,7 @@ array (
               array (
                 'name' => 'resultado_c',
                 'label' => 'LBL_RESULTADO_C',
+                'css_class'=>'result_meeting_class'
               ),
               12 => 
               array (
