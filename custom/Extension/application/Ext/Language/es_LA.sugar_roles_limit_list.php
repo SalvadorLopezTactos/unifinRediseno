@@ -1,6 +1,6 @@
 <?php
- // created: 2018-08-29 10:48:13
+ // created: 2018-10-02 11:17:33
 
 $app_list_strings['roles_limit_list']=array (
-  1 => 'Centro Prospección',
+  1 => 'Centro Prospección X',
 );
