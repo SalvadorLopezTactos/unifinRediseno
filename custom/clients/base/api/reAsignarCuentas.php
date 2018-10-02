@@ -134,7 +134,6 @@ SET rel_relaciones.assigned_user_id = '{$reAsignado}'
 WHERE accounts.id = '{$value}'
 SQL;
                 $queryResult = $db->query($query);
-				$GLOBALS['log']->fatal("Actualiza");				
                 // Se comenta la actualizacion directa a BD para utilizar el BEAN y registrar bitacora
                /* $query = <<<SQL
 UPDATE accounts_cstm
