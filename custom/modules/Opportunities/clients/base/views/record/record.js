@@ -1069,28 +1069,28 @@ console.log(name);
         var pagomensual = parseFloat(this.model.get('ca_pago_mensual_c'));
         var montolinea = parseFloat(this.model.get('monto_c'));
         var rentaini = parseFloat(this.model.get('ca_importe_enganche_c'));
+        if (this.model.get('tct_etapa_ddw_c') == 'SI') {
+          if (pagomensual > montoop){
+                app.alert.show('alerta_mayor_que1', {
+                  level: 'warning',
+                  messages: 'El Pago Mensual no puede ser mayor al Monto a Operar.',
+              });
+          }
 
-        if (pagomensual > montoop){
-              app.alert.show('alerta_mayor_que1', {
-                level: 'warning',
-                messages: 'El Pago Mensual no puede ser mayor al Monto a Operar.',
-            });
+          if (montoop > montolinea){
+              app.alert.show('alerta_mayor_que2', {
+                  level: 'warning',
+                  messages: 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.',
+              });
+          }
+
+          if (rentaini > montoop){
+              app.alert.show('alerta_mayor_que3', {
+                  level: 'warning',
+                  messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
+              });
+          }
         }
-
-        if (montoop > montolinea){
-            app.alert.show('alerta_mayor_que2', {
-                level: 'warning',
-                messages: 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.',
-            });
-        }
-
-        if (rentaini > montoop){
-            app.alert.show('alerta_mayor_que3', {
-                level: 'warning',
-                messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
-            });
-        }
-
     },
 
     validamontossave: function (fields, errors, callback) {
@@ -1099,32 +1099,33 @@ console.log(name);
         var pagomensual = parseFloat(this.model.get('ca_pago_mensual_c'));
         var montolinea = parseFloat(this.model.get('monto_c'));
         var rentaini = parseFloat(this.model.get('ca_importe_enganche_c'));
+        if (this.model.get('tct_etapa_ddw_c') == 'SI') {
+          if (pagomensual > montoop){
+              errors['ca_pago_mensual_c']= 'El Pago Mensual no puede ser mayor al Monto a Operar.';
+              errors['ca_pago_mensual_c'].required = true;
+              app.alert.show('alerta_mayor_que1', {
+                  level: 'error',
+                  messages: 'El Pago Mensual no puede ser mayor al Monto a Operar.',
+              });
+          }
 
-        if (pagomensual > montoop){
-            errors['ca_pago_mensual_c']= 'El Pago Mensual no puede ser mayor al Monto a Operar.';
-            errors['ca_pago_mensual_c'].required = true;
-            app.alert.show('alerta_mayor_que1', {
-                level: 'error',
-                messages: 'El Pago Mensual no puede ser mayor al Monto a Operar.',
-            });
-        }
+          if (montoop > montolinea){
+              errors['amount']= 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.';
+              errors['amount'].required = true;
+              app.alert.show('alerta_mayor_que2', {
+                  level: 'error',
+                  messages: 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.',
+              });
+          }
 
-        if (montoop > montolinea){
-            errors['amount']= 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.';
-            errors['amount'].required = true;
-            app.alert.show('alerta_mayor_que2', {
-                level: 'error',
-                messages: 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.',
-            });
-        }
-
-        if (rentaini > montoop){
-            errors['ca_importe_enganche_c']= 'La Renta Inicial no puede ser mayor al Monto a Operar.';
-            errors['ca_importe_enganche_c'].required = true;
-            app.alert.show('alerta_mayor_que3', {
-                level: 'error',
-                messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
-            });
+          if (rentaini > montoop){
+              errors['ca_importe_enganche_c']= 'La Renta Inicial no puede ser mayor al Monto a Operar.';
+              errors['ca_importe_enganche_c'].required = true;
+              app.alert.show('alerta_mayor_que3', {
+                  level: 'error',
+                  messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
+              });
+          }
         }
         callback(null, fields, errors);
     },
