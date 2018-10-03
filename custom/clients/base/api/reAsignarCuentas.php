@@ -77,43 +77,57 @@ SQL;
                 $para = $User->email1;
                 if(($account->tipo_registro_c == 'Cliente' || $account->tipo_registro_c == 'Prospecto') && $para != null)
                 {
-          					if($User->optout_c == 1)
-          					{
-          						$reAsignado = '5cd93b08-6f5a-11e8-8553-00155d963615';
-          					}
-          					$jefeAsignado = '';
-          					$jefe = $User->reports_to_id;
-          					$User->retrieve($jefe);
-          					if($User->optout_c != 1)
-          					{
-          						$jefeAsignado = $User->email1;
-          					}
+          			if($User->optout_c == 1)
+          			{
+          				$reAsignado = '5cd93b08-6f5a-11e8-8553-00155d963615';
+          			}
+          			$jefeAsignado = '';
+          			$jefe = $User->reports_to_id;
+          			$User->retrieve($jefe);
+          			if($User->optout_c != 1)
+          			{
+          				$jefeAsignado = $User->email1;
+          			}
                     $User->retrieve($promoActual);
-          					if($User->optout_c == 1)
-          					{
-          						$promoActual = '5cd93b08-6f5a-11e8-8553-00155d963615';
-          					}
-          					$jefeActual = '';
-          					$jefe = $User->reports_to_id;
-          					$User->retrieve($jefe);
-          					if($User->optout_c != 1)
-          					{
-          						$jefeActual = $User->email1;
-          					}					
-					          $notifica=BeanFactory::newBean('TCT2_Notificaciones');
+          			if($User->optout_c == 1)
+          			{
+          				$promoActual = '5cd93b08-6f5a-11e8-8553-00155d963615';
+          			}
+          			$jefeActual = '';
+          			$jefe = $User->reports_to_id;
+          			$User->retrieve($jefe);
+          			if($User->optout_c != 1)
+          			{
+          				$jefeActual = $User->email1;
+          			}					
+					$notifica=BeanFactory::newBean('TCT2_Notificaciones');
                     $notifica->name = $para.' '.date("Y-m-d H:i:s");
                     $notifica->created_by = $promoActual;
                     $notifica->assigned_user_id = $reAsignado;
                     $notifica->tipo = 'Cambio Promotor';
                     $notifica->tct2_notificaciones_accountsaccounts_ida = $value;
-	          				$notifica->jefe_anterior_c = $jefeActual;
-  					        $notifica->jefe_nuevo_c = $jefeAsignado;
+	          		$notifica->jefe_anterior_c = $jefeActual;
+  					$notifica->jefe_nuevo_c = $jefeAsignado;
                     $notifica->save();
                     $notId = $notifica->id;
-                 	  global $db;
+                 	global $db;
                     $query = "update tct2_notificaciones set created_by = '$promoActual' where id = '$notId'";
                     $result = $db->query($query);
                 }
+
+				//Actualiza Oportunidades
+				if($product == 'LEASING') $producto = 1;
+				if($product == 'CREDITO AUTOMOTRIZ') $producto = 3;
+				if($product == 'FACTORAJE') $producto = 4;
+                $query = <<<SQL
+UPDATE opportunities
+INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
+INNER JOIN accounts ON accounts.id = accounts_opportunities.account_id AND accounts.deleted = 0
+INNER JOIN opportunities_cstm cs ON opportunities.id = cs.id_c
+SET opportunities.assigned_user_id = '{$reAsignado}'
+WHERE accounts.id = '{$value}' AND cs.tipo_producto_c = '{$producto}'
+SQL;
+                $queryResult = $db->query($query);
 
                 // Se comenta la actualizacion directa a BD para utilizar el BEAN y registrar bitacora
                /* $query = <<<SQL

@@ -85,6 +85,11 @@
                 self.render();
             }
         });
+        /*
+            AF. - 2018-10-02
+            Ejecuta recuperación de citas 
+        */
+        this.getCitas();
     },
 
     getCitas: function(){
