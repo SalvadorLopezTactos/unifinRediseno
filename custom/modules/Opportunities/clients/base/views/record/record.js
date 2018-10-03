@@ -96,6 +96,22 @@
        window.contador=0;
     },
 
+    //No muestra en alert en algunos casos
+    hasUnsavedChanges: function(){
+      this._super('hasUnsavedChanges');
+      
+      if (this.action==='detail'){
+      return false;
+      }
+      else{   
+            if(_.isEmpty(this.collection.models[0].changed)){
+              return false; 
+            }else{
+              return true;
+            }
+      }
+    },
+
     _renderHtml : function()
     {
       if(this.model.get('id_process_c') !== "")
