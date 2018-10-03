@@ -125,15 +125,7 @@ SET opportunities.assigned_user_id = '{$reAsignado}'
 WHERE accounts.id = '{$value}' AND cs.tipo_producto_c = '{$product}'
 SQL;
                 $queryResult = $db->query($query);
-				//Actualiza Relaciones
-                $query = <<<SQL
-UPDATE rel_relaciones
-INNER JOIN rel_relaciones_accounts_1_c ON rel_relaciones_accounts_1_c.rel_relaciones_accounts_1rel_relaciones_idb = rel_relaciones.id AND rel_relaciones_accounts_1_c.deleted = 0
-INNER JOIN accounts ON accounts.id = rel_relaciones_accounts_1_c.rel_relaciones_accounts_1accounts_ida AND accounts.deleted = 0
-SET rel_relaciones.assigned_user_id = '{$reAsignado}'
-WHERE accounts.id = '{$value}'
-SQL;
-                $queryResult = $db->query($query);
+
                 // Se comenta la actualizacion directa a BD para utilizar el BEAN y registrar bitacora
                /* $query = <<<SQL
 UPDATE accounts_cstm
