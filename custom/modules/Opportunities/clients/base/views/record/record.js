@@ -635,28 +635,30 @@
                 errors['ca_pago_mensual_c'].required = true;
             }
 
-            if (parseFloat(this.model.get('ca_importe_enganche_c')) <= 0 && this.model.get('tipo_producto_c') == "1") {
-                errors['ca_importe_enganche_c'] = errors['ca_importe_enganche_c'] || {};
-                errors['ca_importe_enganche_c'].required = true;
+            if (this.model.get('tct_etapa_ddw_c') == 'SI') {
+              if (parseFloat(this.model.get('ca_importe_enganche_c')) <= 0 && this.model.get('tipo_producto_c') == "1") {
+                  errors['ca_importe_enganche_c'] = errors['ca_importe_enganche_c'] || {};
+                  errors['ca_importe_enganche_c'].required = true;
 
-                app.alert.show("Renta inicial requerida", {
-                    level: "error",
-                    title: "Renta inicial debe ser mayor a cero",
-                    autoClose: false
-                });
+                  app.alert.show("Renta inicial requerida", {
+                      level: "error",
+                      title: "Renta inicial debe ser mayor a cero",
+                      autoClose: false
+                  });
 
-            }
+              }
 
-            if (parseFloat(this.model.get('porciento_ri_c')) <= 0 && this.model.get('tipo_producto_c') == "1" || this.model.get('porciento_ri_c') == "" && this.model.get('tipo_producto_c') == "1") {
-                errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
-                errors['porciento_ri_c'].required = true;
+              if (parseFloat(this.model.get('porciento_ri_c')) <= 0 && this.model.get('tipo_producto_c') == "1" || this.model.get('porciento_ri_c') == "" && this.model.get('tipo_producto_c') == "1") {
+                  errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
+                  errors['porciento_ri_c'].required = true;
 
-                app.alert.show("Renta inicial requerida", {
-                    level: "error",
-                    title: "% Renta inicial debe ser mayor a cero",
-                    autoClose: false
-                });
+                  app.alert.show("Renta inicial requerida", {
+                      level: "error",
+                      title: "% Renta inicial debe ser mayor a cero",
+                      autoClose: false
+                  });
 
+              }
             }
 
         }
