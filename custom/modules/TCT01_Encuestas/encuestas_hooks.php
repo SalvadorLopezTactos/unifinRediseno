@@ -12,7 +12,7 @@ class Encuestas_Hooks
 
 
     //@Jesus Carrillo
-    //
+    //Funcion que envia encuesta de satisfaccion al crear un nuevo registro en el modulo de encuestas
     function Sendmails($bean = null, $event = null, $args = null)
     {
         $emails = [];
