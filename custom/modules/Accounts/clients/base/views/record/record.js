@@ -43,6 +43,11 @@
         this.model.addValidationTask('change:email', _.bind(this.expmail, this));
         //Valida que el campo Alta Cedente este check en el perfil del usuario. Adrian Arauz 20/09/2018
         this.model.addValidationTask('check_alta_cedente', _.bind(this.validacedente, this));
+        /*Funcion para validar los campos ventas anuales y activo fijo al editar una cuenta de tipo
+        * Integración de Expediente
+        * Adrian Arauz 4/10/2018
+        * */
+        this.model.addValidationTask('valida_potencial',_.bind(this.validapotencial, this));
 
         /*
          Eduardo Carrasco
@@ -1469,24 +1474,24 @@
         var campos= "";
 
         if (this.model.get('origendelprospecto_c') =="" || this.model.get('origendelprospecto_c')==null){
-            campos= campos + 'Origen, ';
+            campos= campos + '<b>Origen, </b>';
         }
 
         if (this.model.get('name') =="" || this.model.get('name')==null){
-            campos= campos + 'Nombre, ';
+            campos= campos + '<b>Nombre, </b>';
         }
 
         if ( (this.model.get('apellidopaterno_c') =="" || this.model.get('apellidopaterno_c')==null)  && this.model.get('tipodepersona_c') != 'Persona Moral'){
-            campos= campos + 'Apellido Paterno, ';
+            campos= campos + '<b>Apellido Paterno, </b>';
         }
 
         if (this.model.get('email') =="" || this.model.get('email')==null){
-            campos= campos + 'E Mail, ';
+            campos= campos + '<b>E Mail, </b>';
         }
 
         if ( (this.model.get('nombre_comercial_c') =="" || this.model.get('nombre_comercial_c')==null) && this.model.get('tipodepersona_c')== 'Persona Moral'){
 
-            campos= campos + 'Nombre Comercial.';
+            campos= campos + '<b>Nombre Comercial. </b> ';
         }
 
 
@@ -2556,6 +2561,21 @@
         }
 
         return result;
+    },
+
+    validapotencial: function(fields, errors, callback) {
+
+        if ((this.model.get('tipo_registro_c') == 'Prospecto' && this.model.get('subtipo_cuenta_c') == 'Integracion de Expediente') || this.model.get('tipo_registro_c') == 'Cliente'  ) {
+            if (this.model.get('ventas_anuales_c') == undefined || this.model.get('ventas_anuales_c') == "" || (Number(this.model.get('ventas_anuales_c')) <= 0 ))  {
+                errors['ventas_anuales_c'] = "Este campo debe tener un valor mayor a 0.";
+                errors['ventas_anuales_c'].required = true;
+            }
+            if (this.model.get('activo_fijo_c') == undefined || this.model.get('activo_fijo_c') == "" || (Number(this.model.get('activo_fijo_c')) <= 0 ))  {
+                errors['activo_fijo_c'] = "Este campo debe tener un valor mayor a 0.";
+                errors['activo_fijo_c'].required = true;
+            }
+        }
+        callback(null, fields, errors);
     },
 
 
