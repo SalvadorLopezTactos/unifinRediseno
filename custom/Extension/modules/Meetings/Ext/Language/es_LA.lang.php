@@ -18,3 +18,4 @@ $mod_strings['LBL_NUEVO'] = 'Nuevo';
 $mod_strings['LBL_PARENT_MEETING'] = 'Reunión Principal';
 $mod_strings['LBL_ACTUALIZADO'] = 'Actualizado';
 $mod_strings['LBL_ACCOUNT_NAME'] = 'Cuentas';
+$mod_strings['LBL_RECORD_SAVED_SUCCESS'] = 'Has agendado la {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> para {{formatDate date_start}}';
