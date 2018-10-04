@@ -274,6 +274,12 @@
         //this.model.on('change:pais_nacimiento_c', this._doGeneraCURP, this);
         //this.model.on('change:estado_nacimiento_c', this._doGeneraCURP, this);
 
+        this.model.addValidationTask('valida_potencial',_.bind(this.validapotencial, this));
+        /*Funcion para validar los campos ventas anuales y activo fijo al editar una cuenta de tipo
+        * Integración de Expediente
+        * Adrian Arauz 4/10/2018
+        * */
+
 
         this.model.on('change:profesion_c', this._doValidateProfesionRisk, this);
         this.model.on('change:pais_nacimiento_c', this._doValidateProfesionRisk, this);
@@ -1615,6 +1621,21 @@
         }
 
         return result;
+    },
+
+    validapotencial: function(fields, errors, callback) {
+
+        if (this.model.get('tipo_registro_c') == 'Prospecto' || this.model.get('subtipo_cuenta_c') == 'Integracion de Expediente' || this.model.get('tipo_registro_c') == 'Cliente'  ) {
+            if (this.model.get('ventas_anuales_c') == undefined || this.model.get('ventas_anuales_c') == "" || (Number(this.model.get('ventas_anuales_c')) <= 0 ))  {
+                errors['ventas_anuales_c'] = "Este campo debe tener un valor mayor a 0.";
+                errors['ventas_anuales_c'].required = true;
+            }
+            if (this.model.get('activo_fijo_c') == undefined || this.model.get('activo_fijo_c') == "" || (Number(this.model.get('activo_fijo_c')) <= 0 ))  {
+                errors['activo_fijo_c'] = "Este campo debe tener un valor mayor a 0.";
+                errors['activo_fijo_c'].required = true;
+            }
+        }
+        callback(null, fields, errors);
     },
 
 

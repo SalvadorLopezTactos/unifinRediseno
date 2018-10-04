@@ -84,7 +84,6 @@ class GetUsersBoss extends SugarApi
                 (select @pv :='{$usuarioLog}') iniatialisation
                 where find_in_set(reports_to_id, @pv)
                 and length(@pv := concat(@pv,',',id));";
-
             $result = $GLOBALS['db']->query($query);
             while ($row = $GLOBALS['db']->fetchByAssoc($result)){
                 if (  $row['id'] == $usrLeasing ||  $row['id'] == $usrFactoraje ||  $row['id'] ==$usrCredito) {
@@ -92,12 +91,10 @@ class GetUsersBoss extends SugarApi
                 }
             }
         }
-            $GLOBALS['log']->fatal("GetUserBoss-3");
-        if ($app_list_strings['full_access_accounts_list'] != "" && $flag == false) {
 
+        if ($app_list_strings['full_access_accounts_list'] != "" && $flag == false) {
             $list = $app_list_strings['full_access_accounts_list'];
             $result = $GLOBALS['db']->query($queryR);
-
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
 
                 $temp = $row['name'];
@@ -112,7 +109,6 @@ class GetUsersBoss extends SugarApi
                 }
             }
         }
-        $GLOBALS['log']->fatal("GetUserBoss-4");
         if ($current_user->is_admin == true) {
           $flag = true;
         }
