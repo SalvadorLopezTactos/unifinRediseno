@@ -325,7 +325,7 @@ SQL;
 
                         $bean_encuesta = BeanFactory::newBean('TCT01_Encuestas');
                         $GLOBALS['log']->fatal('Bean creado:');//----------------------
-                        $bean_encuesta->name = 'Encuesta Satisfaccion-' . $bean->name;
+                        $bean_encuesta->name = 'Encuesta Satisfacción-' . $bean->name;
                         $GLOBALS['log']->fatal('Nombre asignado');//----------------------
                         $bean_encuesta->tct_correo_txf = $emails[$i];
                         $GLOBALS['log']->fatal('Correo asignado');//----------------------
