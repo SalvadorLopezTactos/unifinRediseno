@@ -24,6 +24,11 @@
                 route = '#bwc/index.php?entryPoint=ExpedienteMod';
                 //app.user.lastState.set('Leads:filter:last-Leads-records', this.meta.filter);
                 break;
+
+            case '#CotizadorProspectos':
+                route = '#bwc/index.php?entryPoint=CotizadorProspectos';
+                //app.user.lastState.set('Leads:filter:last-Leads-records', this.meta.filter);
+                break;
         }
 
         event.preventDefault();

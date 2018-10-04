@@ -8,6 +8,7 @@
 		
 		moduleList.push('Cotizador');
         moduleList.push('Expediente');
+        moduleList.push('CotizadorProspectos');
 
         _.each(moduleList, function(module) {
             this._addMenu(module, true);
@@ -28,6 +29,11 @@
             case 'Expediente':
                 filter = 'all_records';
                 alias = true;
+                break;
+
+            case 'CotizadorProspectos':
+                filter = 'all_records';
+                alias = false;
                 break;
         }
 
