@@ -6,10 +6,10 @@ if(isset($_GET['id_encuesta']) && isset($_GET['url'])){
     $bean_acc->name=$_GET['name'];
 }else{
     $bean_acc = BeanFactory::retrieveBean('Accounts', $bean->account_id_c);
-    $link='<b>Si la encuesta de arriba no funciona por favor da click <a href="'.$GLOBALS['site_url'].'/custom/Levementum/CustomEntryPoints/encuesta_template.php?id_encuesta='.$bean->id.'&url='.$GLOBALS['site_url'].'&name='. $bean_acc->name.'">aqui</a></b>';
+    $link='<h2><b>Para contestar la encuesta favor de dar click <a href="'.$GLOBALS['site_url'].'/custom/Levementum/CustomEntryPoints/encuesta_template.php?id_encuesta='.$bean->id.'&url='.$GLOBALS['site_url'].'&name='. $bean_acc->name.'">aqui</a></b></h2>';
 }
 
-$forma='
+$body='
 
 <html>
     <head>
@@ -204,5 +204,5 @@ $forma='
 </html>
 
 ';
-echo $forma;
+echo $body;
 ?>

@@ -77,7 +77,8 @@ class Encuestas_Hooks
 
             $mailer->setSubject($bean->name);
             $mailer->addRecipientsTo(new EmailIdentity($bean->tct_correo_txf));
-            $mailer->setHtmlBody($forma);
+            //$mailer->setHtmlBody($body); //Si queremos que la encuesta vaya en el cuerpo del correo
+            $mailer->setHtmlBody($link);
 
             $mailer->send();
 
