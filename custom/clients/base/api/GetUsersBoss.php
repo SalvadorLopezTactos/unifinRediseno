@@ -50,6 +50,8 @@ class GetUsersBoss extends SugarApi
      */
     public function GetUserHeadByTeam($api, $args)
     {
+        $GLOBALS['log']->fatal("GetUserBoss");
+
         $flag = false;
         $idCuenta = $args['id_cuenta'];
         $beanAccounts = BeanFactory::getBean("Accounts", $idCuenta);
@@ -68,30 +70,31 @@ class GetUsersBoss extends SugarApi
 
 
         /*
-         * Validamos si el usuario Firmado es igual a credito, factoraje y leasing
+         * Validamos si el usuario Firmado es igual a credito, factoraje y leasing.
+         * Modificación para obtener padres e hijos del usuario logueado. Adrian Arauz 3/10/2018
         **/
 
         if ($usuarioLog == $usrLeasing || $usuarioLog == $usrFactoraje || $usuarioLog == $usrCredito) {
             $flag = true;
         }
 
-        if ($flag == false) {
-            $query = "SELECT id,reports_to_id from users
-                  where id IN ('{$usrLeasing}','{$usrFactoraje}','{$usrCredito}')";
-            $result = $GLOBALS['db']->query($query);
-            while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
 
-                if ($usuarioLog == $row['reports_to_id']) {
+        if ($flag == false)  {
+            $query = "select id from (select * from users order by reports_to_id,id) users_sorted,
+                (select @pv :='{$usuarioLog}') iniatialisation
+                where find_in_set(reports_to_id, @pv)
+                and length(@pv := concat(@pv,',',id));";
+            $result = $GLOBALS['db']->query($query);
+            while ($row = $GLOBALS['db']->fetchByAssoc($result)){
+                if (  $row['id'] == $usrLeasing ||  $row['id'] == $usrFactoraje ||  $row['id'] ==$usrCredito) {
                     $flag = true;
                 }
             }
         }
 
         if ($app_list_strings['full_access_accounts_list'] != "" && $flag == false) {
-
             $list = $app_list_strings['full_access_accounts_list'];
             $result = $GLOBALS['db']->query($queryR);
-
             while ($row = $GLOBALS['db']->fetchByAssoc($result)) {
 
                 $temp = $row['name'];
@@ -106,7 +109,6 @@ class GetUsersBoss extends SugarApi
                 }
             }
         }
-
         if ($current_user->is_admin == true) {
           $flag = true;
         }

@@ -1,6 +1,9 @@
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="assets/jquery-3.3.1.min.js"><\/script>'))
+        </script>
     </head>
     <body>
         <?php
@@ -50,19 +53,26 @@
             var respuestas=<?php echo json_encode($answers);?>;
             var resultado="<?php echo $resultado;?>";
             var parametros=[id,preguntas,respuestas,resultado];
+            var isIE = /*@cc_on!@*/false || !!document.documentMode;
             var urlSugar="http://<?php echo $_SERVER['SERVER_NAME'];?>/unifin"; //////Activar esta variable
             //var urlSugar="http://<?php echo $_SERVER['SERVER_NAME'];?>:8888/unifin/rediseno";
 
+            if(isIE) {
+                alert('Si se te muestra un mensaje acerca de ActiveX o Scripts, permite su ejecuci\u00F3n para el funcionamiento correcto de la encuesta');
+            }
+
                $.ajax({
+                    cache:false,
                     type: 'post',
                     url: urlSugar + '/rest/v10/customSurvey',
-                    data: {parametros},
+                    data: {parametros:parametros}
 
                 });
 
-                alert('Encuesta enviada,Gracias!......'+window.location.hostname);
-
+                alert('Encuesta enviada,Gracias!......');
                 window.close();
+
+
         </script>
     </body>
 </html>

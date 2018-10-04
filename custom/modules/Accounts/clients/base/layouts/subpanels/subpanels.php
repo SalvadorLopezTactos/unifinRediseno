@@ -39,13 +39,13 @@ $viewdefs['Accounts']['base']['layout']['subpanels'] = array (
                 'link' => 'notes',
             ),
         ),
-       /* array(
+        array(
             'layout' => 'subpanel',
             'label' => 'LBL_MEMBER_ORG_SUBPANEL_TITLE',
             'context' => array(
                 'link' => 'members',
             ),
-        ),*/
+        ),
         array(
             'layout' => 'subpanel',
             'label' => 'LBL_EMAILS_SUBPANEL_TITLE',

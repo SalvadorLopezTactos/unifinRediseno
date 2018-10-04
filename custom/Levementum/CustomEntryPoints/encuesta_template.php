@@ -6,12 +6,10 @@ if(isset($_GET['id_encuesta']) && isset($_GET['url'])){
     $bean_acc->name=$_GET['name'];
 }else{
     $bean_acc = BeanFactory::retrieveBean('Accounts', $bean->account_id_c);
-    $link='<b>Si la encuesta de arriba no esta habilitada por favor da click <a href="'.$GLOBALS['site_url'].'/custom/Levementum/CustomEntryPoints/encuesta_template.php?id_encuesta='.$bean->id.'&url='.$GLOBALS['site_url'].'&name='. $bean_acc->name.'">aqui</a></b>';
+    $link='<h2><b>Para contestar la encuesta favor de dar click <a href="'.$GLOBALS['site_url'].'/custom/Levementum/CustomEntryPoints/encuesta_template.php?id_encuesta='.$bean->id.'&url='.$GLOBALS['site_url'].'&name='. $bean_acc->name.'">aqui</a></b></h2>';
 }
 
-
-$forma='
-
+$body='
 
 <html>
     <head>
@@ -27,7 +25,7 @@ $forma='
               <div> 
                 <table style="width:100%">
                  <tr>
-                   <td colspan="5" align="center"><h4 name="question" id="q1">En terminos generales¿Qué tan satisfecho se encuentra con el asesor UNIFIN asignado?</h4></td>
+                   <td colspan="5" align="center"><h4 name="question" id="q1">En términos generales¿Qué tan satisfecho se encuentra con el asesor UNIFIN asignado?</h4></td>
                  </tr>
                  <tr>
                    <td colspan="3" align="left"><h6  style=";display: inline;">Totalmente Insatisfecho</h6></td>
@@ -45,7 +43,7 @@ $forma='
                    <td align="center"><input type="radio" name="rq1" id="q1-2" value="2" /></td>
                    <td align="center"><input type="radio" name="rq1" id="q1-3" value="3" /></td>
                    <td align="center"><input type="radio" name="rq1" id="q1-4" value="4" /></td>
-                   <td align="center"><input type="radio" name="rq1" id="q1-5" value="5" /></td>
+                   <td align="center"><input type="radio" name="rq1" id="q1-5" value="5" required/></td>
                    </tr>
                 </table>
             </div><br>
@@ -70,7 +68,7 @@ $forma='
                    <td align="center"><input type="radio" name="rq2" id="q2-2" value="2" /></td>
                    <td align="center"><input type="radio" name="rq2" id="q2-3" value="3" /></td>
                    <td align="center"><input type="radio" name="rq2" id="q2-4" value="4" /></td>
-                   <td align="center"><input type="radio" name="rq2" id="q2-5" value="5" /></td>
+                   <td align="center"><input type="radio" name="rq2" id="q2-5" value="5" required/></td>
                    </tr>
                 </table>
             </div><br>
@@ -95,7 +93,7 @@ $forma='
                    <td align="center"><input type="radio" name="rq3" id="q3-2" value="2" /></td>
                    <td align="center"><input type="radio" name="rq3" id="q3-3" value="3" /></td>
                    <td align="center"><input type="radio" name="rq3" id="q3-4" value="4" /></td>
-                   <td align="center"><input type="radio" name="rq3" id="q3-5" value="5" /></td>
+                   <td align="center"><input type="radio" name="rq3" id="q3-5" value="5" required/></td>
                    </tr>
                 </table>
               </div><br>
@@ -120,7 +118,7 @@ $forma='
                    <td align="center"><input type="radio" name="rq4" id="q4-2" value="2" /></td>
                    <td align="center"><input type="radio" name="rq4" id="q4-3" value="3" /></td>
                    <td align="center"><input type="radio" name="rq4" id="q4-4" value="4" /></td>
-                   <td align="center"><input type="radio" name="rq4" id="q4-5" value="5" /></td>
+                   <td align="center"><input type="radio" name="rq4" id="q4-5" value="5" required/></td>
                   </tr>
                 </table>
               </div><br>
@@ -145,7 +143,7 @@ $forma='
                    <td align="center"><input type="radio" name="rq5" id="q5-2" value="2" /></td>
                    <td align="center"><input type="radio" name="rq5" id="q5-3" value="3" /></td>
                    <td align="center"><input type="radio" name="rq5" id="q5-4" value="4" /></td>
-                   <td align="center"><input type="radio" name="rq5" id="q5-5" value="5" /></td>
+                   <td align="center"><input type="radio" name="rq5" id="q5-5" value="5" required/></td>
                    </tr>
                 </table>
               </div><br>
@@ -170,30 +168,31 @@ $forma='
                    <td align="center"><input type="radio" name="rq6" id="q6-2" value="2" /></td>
                    <td align="center"><input type="radio" name="rq6" id="q6-3" value="3" /></td>
                    <td align="center"><input type="radio" name="rq6" id="q6-4" value="4" /></td>
-                   <td align="center"><input type="radio" name="rq6" id="q6-5" value="5" /></td>
+                   <td align="center"><input type="radio" name="rq6" id="q6-5" value="5" required/></td>
                    </tr>
                 </table>
               </div><br>
               <div style="width:60%;">
-                <h4 name="question" id="q7">Despues de la cita con el asesor de UNIFIN usted diria que:</h4>
+                <h4 name="question" id="q7">Después de la cita con el asesor de UNIFIN usted diría que:</h4>
                 <div align="left">
-                  <input type="radio" name="rq7" id="q7-1" value="Hace mucho mas probable que considere a UNIFIN" />
-                  <label for="q7-1">Hace mucho mas probable que considere a UNIFIN</label> <br>
+                  <input type="radio" name="rq7" id="q7-1" value="Hace mucho mas probable que considere a UNIFIN" required/>
+                  <label for="q7-1">Hace mucho más probable que considere a UNIFIN</label> <br>
              
                  
                   <input type="radio" name="rq7" id="q7-2" value="Hace mucho mas probable que considere a UNIFIN" />
-                   <label for="q7-2" >Hace mas probable que considere a UNIFIN</label><br> 
+                   <label for="q7-2" >Hace más probable que considere a UNIFIN</label><br> 
         
                   <input type="radio" name="rq7" id="q7-3" value="No hara ninguna diferencia"  align="left"/>
-                  <label for="q7-3" >No hara ninguna diferencia</label><br> 
+                  <label for="q7-3" >No hará ninguna diferencia</label><br> 
         
                  <input type="radio" name="rq7" id="q7-4" value="Hace probable que no considere a UNIFIN" />
                  <label for="q7-4" >Hace probable que no considere a UNIFIN</label><br> 
         
                   <input type="radio" name="rq7" id="q7-5" value="Hace mucho mas probable que no considere a UNIFIN"/>
-                  <label for="q7-5" >Hace mucho mas probable que no considere a UNIFIN</label> <br>
+                  <label for="q7-5" >Hace mucho más probable que no considere a UNIFIN</label> <br>
                 </div>
               </div>
+
             <br>
             <input type="submit" value="Enviar encuesta!">
             <br>
@@ -205,5 +204,5 @@ $forma='
 </html>
 
 ';
-echo $forma;
+echo $body;
 ?>
