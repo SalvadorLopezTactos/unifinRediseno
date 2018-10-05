@@ -272,7 +272,9 @@ SQL;
         $GLOBALS['log']->fatal('>>>>>>>Status posterior: '.$bean->status);//-------------------------------------
         $GLOBALS['log']->fatal('>>>>>>>Description: '.$bean->description);//-------------------------------------
 
+
         if($bean->fetched_row['status']!='Held' && $bean->status=='Held'){
+
             $contador=0;
             $parent_type=$bean->parent_type;
             $parent_id=$bean->parent_id;
@@ -305,9 +307,10 @@ SQL;
                 }
 
                 //$emails[]='jesus.carrillo@tactos.com.mx';
-                //$emails[]='victor.martinez@tactos.com.mx';
+                //$emails[]='apena@appwhere.mx';
+                //$emails[]='jslb_cafcb10@hotmail.com';
                 //$emails[]='axel.flores@tactos.com.mx';
-                //$emails[]='adrauz@gmail.com';
+
 
                 $GLOBALS['log']->fatal('Length de Emails: '.count($emails));//-------------------------------------
                 //$GLOBALS['log']->fatal(print_r($bean_cuenta,true));//----------------------
@@ -322,12 +325,12 @@ SQL;
 
                         $bean_encuesta = BeanFactory::newBean('TCT01_Encuestas');
                         $GLOBALS['log']->fatal('Bean creado:');//----------------------
-                        $bean_encuesta->name = 'Encuesta Satisfaccion-' . $bean->name;
+                        $bean_encuesta->name = 'Encuesta Satisfacción-' . $bean->name;
                         $GLOBALS['log']->fatal('Nombre asignado');//----------------------
                         $bean_encuesta->tct_correo_txf = $emails[$i];
                         $GLOBALS['log']->fatal('Correo asignado');//----------------------
                         $bean_encuesta->tct01_encuestas_meetingsmeetings_ida = $bean->id;
-                        $GLOBALS['log']->fatal('Id asignado:');//----------------------
+                        $GLOBALS['log']->fatal('Id  de encuesta asignado');//----------------------
 
                         //$bean_encuesta->tct_account_survey_rel_c = $names[i];
 

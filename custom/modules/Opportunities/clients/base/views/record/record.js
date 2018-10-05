@@ -96,6 +96,22 @@
        window.contador=0;
     },
 
+    //No muestra en alert en algunos casos
+    hasUnsavedChanges: function(){
+      this._super('hasUnsavedChanges');
+      
+      if (this.action==='detail'){
+      return false;
+      }
+      else{   
+            if(_.isEmpty(this.collection.models[0].changed)){
+              return false; 
+            }else{
+              return true;
+            }
+      }
+    },
+
     _renderHtml : function()
     {
       if(this.model.get('id_process_c') !== "")
@@ -635,28 +651,30 @@
                 errors['ca_pago_mensual_c'].required = true;
             }
 
-            if (parseFloat(this.model.get('ca_importe_enganche_c')) <= 0 && this.model.get('tipo_producto_c') == "1") {
-                errors['ca_importe_enganche_c'] = errors['ca_importe_enganche_c'] || {};
-                errors['ca_importe_enganche_c'].required = true;
+            if (this.model.get('tct_etapa_ddw_c') == 'SI') {
+              if (parseFloat(this.model.get('ca_importe_enganche_c')) <= 0 && this.model.get('tipo_producto_c') == "1") {
+                  errors['ca_importe_enganche_c'] = errors['ca_importe_enganche_c'] || {};
+                  errors['ca_importe_enganche_c'].required = true;
 
-                app.alert.show("Renta inicial requerida", {
-                    level: "error",
-                    title: "Renta inicial debe ser mayor a cero",
-                    autoClose: false
-                });
+                  app.alert.show("Renta inicial requerida", {
+                      level: "error",
+                      title: "Renta inicial debe ser mayor a cero",
+                      autoClose: false
+                  });
 
-            }
+              }
 
-            if (parseFloat(this.model.get('porciento_ri_c')) <= 0 && this.model.get('tipo_producto_c') == "1" || this.model.get('porciento_ri_c') == "" && this.model.get('tipo_producto_c') == "1") {
-                errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
-                errors['porciento_ri_c'].required = true;
+              if (parseFloat(this.model.get('porciento_ri_c')) <= 0 && this.model.get('tipo_producto_c') == "1" || this.model.get('porciento_ri_c') == "" && this.model.get('tipo_producto_c') == "1") {
+                  errors['porciento_ri_c'] = errors['porciento_ri_c'] || {};
+                  errors['porciento_ri_c'].required = true;
 
-                app.alert.show("Renta inicial requerida", {
-                    level: "error",
-                    title: "% Renta inicial debe ser mayor a cero",
-                    autoClose: false
-                });
+                  app.alert.show("Renta inicial requerida", {
+                      level: "error",
+                      title: "% Renta inicial debe ser mayor a cero",
+                      autoClose: false
+                  });
 
+              }
             }
 
         }
@@ -1069,28 +1087,28 @@ console.log(name);
         var pagomensual = parseFloat(this.model.get('ca_pago_mensual_c'));
         var montolinea = parseFloat(this.model.get('monto_c'));
         var rentaini = parseFloat(this.model.get('ca_importe_enganche_c'));
+        if (this.model.get('tct_etapa_ddw_c') == 'SI') {
+          if (pagomensual > montoop){
+                app.alert.show('alerta_mayor_que1', {
+                  level: 'warning',
+                  messages: 'El Pago Mensual no puede ser mayor al Monto a Operar.',
+              });
+          }
 
-        if (pagomensual > montoop){
-              app.alert.show('alerta_mayor_que1', {
-                level: 'warning',
-                messages: 'El Pago Mensual no puede ser mayor al Monto a Operar.',
-            });
+          if (montoop > montolinea){
+              app.alert.show('alerta_mayor_que2', {
+                  level: 'warning',
+                  messages: 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.',
+              });
+          }
+
+          if (rentaini > montoop){
+              app.alert.show('alerta_mayor_que3', {
+                  level: 'warning',
+                  messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
+              });
+          }
         }
-
-        if (montoop > montolinea){
-            app.alert.show('alerta_mayor_que2', {
-                level: 'warning',
-                messages: 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.',
-            });
-        }
-
-        if (rentaini > montoop){
-            app.alert.show('alerta_mayor_que3', {
-                level: 'warning',
-                messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
-            });
-        }
-
     },
 
     validamontossave: function (fields, errors, callback) {
@@ -1099,32 +1117,33 @@ console.log(name);
         var pagomensual = parseFloat(this.model.get('ca_pago_mensual_c'));
         var montolinea = parseFloat(this.model.get('monto_c'));
         var rentaini = parseFloat(this.model.get('ca_importe_enganche_c'));
+        if (this.model.get('tct_etapa_ddw_c') == 'SI') {
+          if (pagomensual > montoop){
+              errors['ca_pago_mensual_c']= 'El Pago Mensual no puede ser mayor al Monto a Operar.';
+              errors['ca_pago_mensual_c'].required = true;
+              app.alert.show('alerta_mayor_que1', {
+                  level: 'error',
+                  messages: 'El Pago Mensual no puede ser mayor al Monto a Operar.',
+              });
+          }
 
-        if (pagomensual > montoop){
-            errors['ca_pago_mensual_c']= 'El Pago Mensual no puede ser mayor al Monto a Operar.';
-            errors['ca_pago_mensual_c'].required = true;
-            app.alert.show('alerta_mayor_que1', {
-                level: 'error',
-                messages: 'El Pago Mensual no puede ser mayor al Monto a Operar.',
-            });
-        }
+          if (montoop > montolinea){
+              errors['amount']= 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.';
+              errors['amount'].required = true;
+              app.alert.show('alerta_mayor_que2', {
+                  level: 'error',
+                  messages: 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.',
+              });
+          }
 
-        if (montoop > montolinea){
-            errors['amount']= 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.';
-            errors['amount'].required = true;
-            app.alert.show('alerta_mayor_que2', {
-                level: 'error',
-                messages: 'El Monto a Operar no puede ser mayor al Monto de L\u00EDnea.',
-            });
-        }
-
-        if (rentaini > montoop){
-            errors['ca_importe_enganche_c']= 'La Renta Inicial no puede ser mayor al Monto a Operar.';
-            errors['ca_importe_enganche_c'].required = true;
-            app.alert.show('alerta_mayor_que3', {
-                level: 'error',
-                messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
-            });
+          if (rentaini > montoop){
+              errors['ca_importe_enganche_c']= 'La Renta Inicial no puede ser mayor al Monto a Operar.';
+              errors['ca_importe_enganche_c'].required = true;
+              app.alert.show('alerta_mayor_que3', {
+                  level: 'error',
+                  messages: 'La Renta Inicial no puede ser mayor al Monto a Operar.',
+              });
+          }
         }
         callback(null, fields, errors);
     },

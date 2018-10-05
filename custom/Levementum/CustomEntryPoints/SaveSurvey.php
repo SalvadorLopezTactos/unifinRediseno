@@ -1,6 +1,9 @@
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>
+            window.jQuery || document.write('<script src="assets/jquery-3.3.1.min.js"><\/script>'))
+        </script>
     </head>
     <body>
         <?php
@@ -18,9 +21,6 @@
         $GLOBALS['site_url'] = $sugar_config['site_url'];
 
 
-        //$resultado = "777777777777";
-        //$id_encuesta="b6b5c0d0-b2c4-11e8-982e-3035add3ad60";
-
         $questions [0]= "En terminos generales¿Qué tan satisfecho se encuentra con el asesor UNIFIN asignado?: ";
         $questions [1]= "¿Qué tan satisfecho se encuentra con la atención y el trato brindado por el asesor?: ";
         $questions [2]= "¿Cómo calificaría al asesor con respecto al dominio del SECTOR al que pertenece su empresa / la empresa para la que trabaja?: ";
@@ -37,11 +37,6 @@
 
         }
 
-
-
-        //echo "<script languaje='javascript' type='text/javascript'>alert('Enviando Encuesta....esta ventana se cerrara automaticamente, por favor espere');</script>";
-        //echo "<script languaje='javascript' type='text/javascript'>window.close();</script>";
-
         ?>
 
         <script>
@@ -50,19 +45,25 @@
             var respuestas=<?php echo json_encode($answers);?>;
             var resultado="<?php echo $resultado;?>";
             var parametros=[id,preguntas,respuestas,resultado];
+            var isIE = /*@cc_on!@*/false || !!document.documentMode;
             var urlSugar="http://<?php echo $_SERVER['SERVER_NAME'];?>/unifin"; //////Activar esta variable
             //var urlSugar="http://<?php echo $_SERVER['SERVER_NAME'];?>:8888/unifin/rediseno";
 
+            if(isIE) {
+                alert('Si se te muestra un mensaje acerca de ActiveX o Scripts, permite su ejecuci\u00F3n para el funcionamiento correcto de la encuesta');
+            }
+
                $.ajax({
+                    cache:false,
                     type: 'post',
                     url: urlSugar + '/rest/v10/customSurvey',
-                    data: {parametros},
+                    data: {parametros:parametros}
 
                 });
 
-                alert('Encuesta enviada,Gracias!......'+window.location.hostname);
-
+                alert('Encuesta enviada,Gracias!......');
                 window.close();
+
         </script>
     </body>
 </html>
