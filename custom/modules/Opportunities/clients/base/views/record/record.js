@@ -1291,7 +1291,7 @@ console.log(name);
         }
     },
 
-    //Funcion para delimitar ciertos campos en la presolicitud Leasing. Adrian Arauz 23/08/2018
+    //Funcion para delimitar porcentajes. Adrian Arauz 23/08/2018
     limitanumero: function (evt) {
         if (!evt) return;
         var $input = this.$(evt.currentTarget);
@@ -1319,7 +1319,7 @@ console.log(name);
                 while ($input.val().indexOf(',') != -1){
                     $input.val($input.val().replace(',',''))
                 }
-                if ($input.val().length == 2 && evt.key != "Backspace" && evt.key!="Tab") {
+                if ($input.val().length == 2 && evt.key != "Backspace" && evt.key!="Tab" && evt.key!=".") {
                     $input.val($input.val() + '.');
                     return;
                 } else {
