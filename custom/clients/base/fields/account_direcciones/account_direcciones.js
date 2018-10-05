@@ -9,9 +9,12 @@
 
     events: {
         'change .existingTipodedireccion': 'updateExistingDireccion',
-        'change .existingCalle': 'updateExistingDireccion',
-        'change .existingNumInt': 'updateExistingDireccion',
-        'change .existingNumExt': 'updateExistingDireccion',
+        'keydown .existingCalle': 'checkcallenum',
+        'keydown .existingNumInt': 'checknumint',
+        'keydown .existingNumExt': 'checkcallenum',
+        'keydown .newCalle': 'limitto100',
+        'keydown .newNumInt': 'limitto50',
+        'keydown .newNumExt': 'limitto100',
         'change .existingPais': 'updateExistingDireccionDropdown',
         'change .existingEstado': 'updateExistingDireccionDropdown',
         //'change .existingIndicador': 'updateIndicador',
@@ -1702,6 +1705,46 @@
             this._clearNewDireccionField();
         }
 
+    },
+
+    checkcallenum: function(evt){
+        var limite=this.limitto100(evt);
+        if(limite==false){
+            return false;
+        }
+        this.updateExistingDireccion(evt);
+    },
+
+    limitto100: function(evt){
+        if (!evt) return;
+        //get field that changed
+        var $input = this.$(evt.currentTarget);
+
+        var direccion = $input.val();
+
+        if(direccion.length>99){
+            return false;
+        }
+    },
+
+    checknumint: function(evt){
+        var limite=this.limitto50(evt);
+        if(limite==false){
+            return false;
+        }
+        this.updateExistingDireccion(evt);
+    },
+
+    limitto50: function(evt){
+        if (!evt) return;
+        //get field that changed
+        var $input = this.$(evt.currentTarget);
+
+        var direccion = $input.val();
+
+        if(direccion.length>49){
+            return false;
+        }
     },
 
     /**
