@@ -172,7 +172,7 @@
                                     'target' => 'fechaconstitutiva_c',
                                     'label' => 'fechaconstitutiva_c_label',
                                     //'value' => 'and(equal($tipodepersona_c,"Persona Moral"),or(equal($tipo_registro_c,"Cliente"),equal($subtipo_cuenta_c,"Integracion de Expediente")))',
-                                'value' => 'not(or(equal($tipodepersona_c,"Persona Fisica"),equal($tipo_registro_c,"Lead"),equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado"),equal($tipo_registro_c,"Persona")))',
+                                'value' => 'not(or(equal($tipodepersona_c,"Persona Fisica"),equal($tipodepersona_c,"Persona Fisica con Actividad Empresarial"),equal($tipo_registro_c,"Lead"),equal($subtipo_cuenta_c,"Contactado"),equal($subtipo_cuenta_c,"Interesado"),equal($tipo_registro_c,"Persona")))',
                             ),
                     ),
             ),
