@@ -418,7 +418,7 @@ $bodyv2=<<<EOF
                   preguntas.push(elm.innerText);
                 });
                 var isIE = /*@cc_on!@*/false || !!document.documentMode;
-                var urlSugar="http://<?php echo {$_SERVER['SERVER_NAME']};?>/unifin"; //////Activar esta variable
+                var urlSugar="http://{$_SERVER['SERVER_NAME']}/unifin"; //////Activar esta variable
                 //var urlSugar="http://{$_SERVER['SERVER_NAME']}:8888/unifin/rediseno";
     
                 if(isIE) {

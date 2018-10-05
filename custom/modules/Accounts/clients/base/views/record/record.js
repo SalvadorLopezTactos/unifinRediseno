@@ -1082,7 +1082,8 @@
         callback(null, fields, errors);
     },
     _doValidateDireccion: function (fields, errors, callback) {
-        if(this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('tipo_registro_c') == "Prospecto") {
+        if(this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" 
+            || this.model.get('tipo_registro_c') == "Prospecto" || this.model.get('esproveedor_c')==true) {
 
             if (_.isEmpty(this.model.get('account_direcciones'))) {
                 errors[$(".addDireccion")] = errors['account_direcciones'] || {};
@@ -1828,9 +1829,9 @@
             RFC = RFC.toUpperCase().trim();
             var expReg = "";
             if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                expReg = "[A-Z&]{4}[0-9]{6}[A-Z0-9]{3}";
+                expReg = "[A-Z&-zÑñ]{4}[0-9]{6}[A-Z0-9]{3}";
             } else {
-                expReg = "[A-Z&]{3}[0-9]{6}[A-Z0-9]{3}";
+                expReg = "[A-Z&-zÑñ]{3}[0-9]{6}[A-Z0-9]{3}";
             }
             if (!RFC.match(expReg)) {
                 app.alert.show("RFC incorrecto", {
@@ -2055,7 +2056,7 @@
     },
 
     validaProveedorRequerido: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == 'Proveedor' || this.model.get('esproveedor_c') == true) {
+        if (this.model.get('tipo_registro_c') == 'Proveedor' || this.model.get('esproveedor_c') == true) { //duda
             this.model.set("esproveedor_c", true);
             var tipoProveedor = new String(this.model.get('tipo_proveedor_c'));
             if (tipoProveedor.length == 0) {
@@ -2181,7 +2182,8 @@
     },
 
     macrosector: function (fields, errors, callback) {
-        if (this.model.get('tct_macro_sector_ddw_c') == '' && (this.model.get('tipo_registro_c') == 'Cliente' || this.model.get('tipo_registro_c') == 'Proveedor' || this.model.get('subtipo_cuenta_c') == 'Interesado' || this.model.get('subtipo_cuenta_c') == 'Integracion de Expediente' || this.model.get('subtipo_cuenta_c') == 'Credito')) {
+        if (this.model.get('tct_macro_sector_ddw_c') == '' && (this.model.get('tipo_registro_c') == 'Cliente' || this.model.get('tipo_registro_c') == 'Proveedor' 
+            || this.model.get('esproveedor_c')==true || this.model.get('subtipo_cuenta_c') == 'Interesado' || this.model.get('subtipo_cuenta_c') == 'Integracion de Expediente' || this.model.get('subtipo_cuenta_c') == 'Credito')) {
             errors['tct_macro_sector_ddw_c'] = "Error: Favor de verificar los errores";
             errors['tct_macro_sector_ddw_c'].required = true;
         }
@@ -2189,7 +2191,7 @@
     },
 
     sectoreconomico: function (fields, errors, callback) {
-        if (this.model.get('tipodepersona_c') != 'Persona Fisica' && this.model.get('sectoreconomico_c') == '' && (this.model.get('tipo_registro_c') == 'Cliente' || this.model.get('tipo_registro_c') == 'Proveedor')) {
+        if (this.model.get('tipodepersona_c') != 'Persona Fisica' && this.model.get('sectoreconomico_c') == '' && (this.model.get('tipo_registro_c') == 'Cliente' || this.model.get('tipo_registro_c') == 'Proveedor' || this.model.get('esproveedor_c')==true)) {
             errors['sectoreconomico_c'] = "Error: Favor de verificar los errores";
             errors['sectoreconomico_c'].required = true;
         }

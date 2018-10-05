@@ -242,6 +242,7 @@
         this.model.addValidationTask('fechadenacimiento_c', _.bind(this.doValidateDateNac, this));
         this.model.addValidationTask('fechaconstitutiva_c', _.bind(this.doValidateDateCons, this));
         this.model.addValidationTask('check_info', _.bind(this.doValidateInfoReq, this));
+        //this.model.addValidationTask('tipo_proveedor', _.bind(this.tipoProveedor_check,this));
         //this.model.addValidationTask('check_formato_curp_c', _.bind(this.ValidaFormatoCURP, this));
 
         /**
@@ -724,9 +725,9 @@
             RFC = RFC.toUpperCase().trim();
             var expReg = "";
             if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                expReg = "[A-Z&]{4}[0-9]{6}[A-Z0-9]{3}";
+                expReg = "[[A-Za-zÑñ&]{4}[0-9]{6}[A-ZØ9]{3}";
             } else {
-                expReg = "[A-Z&]{3}[0-9]{6}[A-Z0-9]{3}";
+                expReg = "[A-Za-zÑñ&]{4}[0-9]{6}[A-ZØ9]{3}";
             }
             if (!RFC.match(expReg)) {
                 app.alert.show("RFC incorrecto", {
@@ -953,7 +954,7 @@
      },*/
 
     _doValidateDireccion: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('tipo_registro_c') == "Prospecto") {
+        if (this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor" || this.model.get('tipo_registro_c') == "Prospecto" || this.model.get('esproveedor_c')==true) {
             if (_.isEmpty(this.model.get('account_direcciones'))) {
                 //errors[$(".addDireccion")] = errors['account_direcciones'] || {};
                 //errors[$(".addDireccion")].required = true;
@@ -1304,7 +1305,7 @@
      * @type function
      * */
     validaProveedorRequerido: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == 'Proveedor' || this.model.get('esproveedor_c') == true) {
+        if (this.model.get('tipo_registro_c') == 'Proveedor' || this.model.get('esproveedor_c')==true) {
             this.model.set("esproveedor_c", true);
             var tipoProveedor = new String(this.model.get('tipo_proveedor_c'));
             if (tipoProveedor.length == 0) {
@@ -1320,7 +1321,19 @@
         callback(null, fields, errors);
     },
     /* END */
+    /*tipoProveedor_check: function(fields, errors, callback){
+        if(this.model.get('esproveedor_c')==true){
 
+            app.alert.show("Proveedor Requerido", {
+                    level: "error",
+                    title: "Debe seleccionar un un tipo de proveedor al menos",
+                    autoClose: false
+                });
+             errors['tipo_proveedor_c'] = errors['tipo_proveedor_c'] || {};
+                errors['tipo_proveedor_c'].required = true;
+        }
+        callback(null, fields,errors);
+    },*/
     /**
      * @author Salvador Lopez Balleza
      * @date 13/03/2018
