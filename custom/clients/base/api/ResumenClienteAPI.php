@@ -370,7 +370,7 @@ class ResumenClienteAPI extends SugarApi
                         }
                       }
                       //Agrega valores al arreglo de respuesta
-                      $arr_principal['historial_contactos']['ultima_cita']= $ultima_reunion->format("d/m/Y");
+                      $arr_principal['historial_contactos']['ultima_cita']= date_format($ultima_reunion, "d/m/Y");
                       $arr_principal['historial_contactos']['fecha_completa_cita']= $fecha_completa_reunion;
                     }
                   }
@@ -695,7 +695,7 @@ class ResumenClienteAPI extends SugarApi
             $fecha_llamada = $timedateFL->fromUser($dateFL, $current_user);
 
             //Recupera última fecha de contacto
-            $fecha_contacto;
+            $fecha_contacto = "";
             if ($fecha_llamada > $fecha_cita) {
               $fecha_contacto = $fecha_llamada;
             }else {
