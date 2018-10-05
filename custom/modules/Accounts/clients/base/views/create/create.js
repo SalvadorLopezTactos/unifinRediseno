@@ -724,9 +724,9 @@
             RFC = RFC.toUpperCase().trim();
             var expReg = "";
             if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                expReg = "[A-Z&]{4}[0-9]{6}[A-Z0-9]{3}";
+                expReg = "[[A-Za-zÑñ&]{4}[0-9]{6}[A-ZØ9]{3}";
             } else {
-                expReg = "[A-Z&]{3}[0-9]{6}[A-Z0-9]{3}";
+                expReg = "[A-Za-zÑñ&]{4}[0-9]{6}[A-ZØ9]{3}";
             }
             if (!RFC.match(expReg)) {
                 app.alert.show("RFC incorrecto", {
