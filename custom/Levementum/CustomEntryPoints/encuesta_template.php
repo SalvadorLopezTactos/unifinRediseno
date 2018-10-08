@@ -1,6 +1,5 @@
 <?php
 
-<<<<<<< HEAD
 if(isset($_GET['id_encuesta']) && isset($_GET['url'])){
     $bean->id=$_GET['id_encuesta'];
     $GLOBALS['site_url']=$_GET['url'];
@@ -211,20 +210,11 @@ $bodyv2=<<<EOF
         <script>
             window.jQuery || document.write('<script src="assets/jquery-3.3.1.min.js"><\/script>'))
         </script>
-=======
-$forma='
-
-
-<html>
-    <head>
-    
->>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
     </head>
 
     <body>
         <div align="center" style="width: 660px;">
         <img src="https://fotos.subefotos.com/d83bd716402da605745bfa6158d0f376o.png">
-<<<<<<< HEAD
         <h2>{$bean_acc->name}</h2>
         <h2>Encuesta de Satisfacción</h2>
           <form id="form">
@@ -232,14 +222,6 @@ $forma='
                 <table style="width:100%">
                  <tr>
                    <td colspan="5" align="center"><h4 name="question" id="q1">En términos generales¿Qué tan satisfecho se encuentra con el asesor UNIFIN asignado?</h4></td>
-=======
-        <h2>Encuesta de Satisfacción</h2>
-          <form target="request" method="POST" action="http://192.168.226.222:8888/unifin/rediseno/custom/Levementum/CustomEntryPoints/SaveSurvey.php?id_reunion='.$bean->id.'">
-              <div> 
-                <table style="width:100%">
-                 <tr>
-                   <td colspan="5" align="center"><h4 name="question" id="q1">En terminos generales¿Qué tan satisfecho se encuentra con el asesor UNIFIN asignado?</h4></td>
->>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
                  </tr>
                  <tr>
                    <td colspan="3" align="left"><h6  style=";display: inline;">Totalmente Insatisfecho</h6></td>
@@ -257,11 +239,7 @@ $forma='
                    <td align="center"><input type="radio" name="rq1" id="q1-2" value="2" /></td>
                    <td align="center"><input type="radio" name="rq1" id="q1-3" value="3" /></td>
                    <td align="center"><input type="radio" name="rq1" id="q1-4" value="4" /></td>
-<<<<<<< HEAD
                    <td align="center"><input type="radio" name="rq1" id="q1-5" value="5" required/></td>
-=======
-                   <td align="center"><input type="radio" name="rq1" id="q1-5" value="5" /></td>
->>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
                    </tr>
                 </table>
             </div><br>
@@ -286,11 +264,7 @@ $forma='
                    <td align="center"><input type="radio" name="rq2" id="q2-2" value="2" /></td>
                    <td align="center"><input type="radio" name="rq2" id="q2-3" value="3" /></td>
                    <td align="center"><input type="radio" name="rq2" id="q2-4" value="4" /></td>
-<<<<<<< HEAD
                    <td align="center"><input type="radio" name="rq2" id="q2-5" value="5" required/></td>
-=======
-                   <td align="center"><input type="radio" name="rq2" id="q2-5" value="5" /></td>
->>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
                    </tr>
                 </table>
             </div><br>
@@ -315,11 +289,7 @@ $forma='
                    <td align="center"><input type="radio" name="rq3" id="q3-2" value="2" /></td>
                    <td align="center"><input type="radio" name="rq3" id="q3-3" value="3" /></td>
                    <td align="center"><input type="radio" name="rq3" id="q3-4" value="4" /></td>
-<<<<<<< HEAD
                    <td align="center"><input type="radio" name="rq3" id="q3-5" value="5" required/></td>
-=======
-                   <td align="center"><input type="radio" name="rq3" id="q3-5" value="5" /></td>
->>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
                    </tr>
                 </table>
               </div><br>
@@ -344,23 +314,14 @@ $forma='
                    <td align="center"><input type="radio" name="rq4" id="q4-2" value="2" /></td>
                    <td align="center"><input type="radio" name="rq4" id="q4-3" value="3" /></td>
                    <td align="center"><input type="radio" name="rq4" id="q4-4" value="4" /></td>
-<<<<<<< HEAD
                    <td align="center"><input type="radio" name="rq4" id="q4-5" value="5" required/></td>
                   </tr>
-=======
-                   <td align="center"><input type="radio" name="rq4" id="q4-5" value="5" /></td>
-                   </tr>
->>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
                 </table>
               </div><br>
               <div> 
                 <table style="width:100%">
                  <tr>
-<<<<<<< HEAD
                    <td colspan="5" align="center"><h4 name="question" id="q5">¿Cómo calificaría al asesor con respecto a la comprensión de las necesidades de la empresa?</h4></td>
-=======
-                   <td colspan="5" align="center"><<h4 name="question" id="q5">¿Cómo calificaría al asesor con respecto a la comprensión de las necesidades de la empresa?</h4></td>
->>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
                  </tr>
                  <tr>
                    <td colspan="3" align="left"><h6  style=";display: inline;">Totalmente Insatisfecho</h6></td>
@@ -378,11 +339,7 @@ $forma='
                    <td align="center"><input type="radio" name="rq5" id="q5-2" value="2" /></td>
                    <td align="center"><input type="radio" name="rq5" id="q5-3" value="3" /></td>
                    <td align="center"><input type="radio" name="rq5" id="q5-4" value="4" /></td>
-<<<<<<< HEAD
                    <td align="center"><input type="radio" name="rq5" id="q5-5" value="5" required/></td>
-=======
-                   <td align="center"><input type="radio" name="rq5" id="q5-5" value="5" /></td>
->>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
                    </tr>
                 </table>
               </div><br>
@@ -407,16 +364,11 @@ $forma='
                    <td align="center"><input type="radio" name="rq6" id="q6-2" value="2" /></td>
                    <td align="center"><input type="radio" name="rq6" id="q6-3" value="3" /></td>
                    <td align="center"><input type="radio" name="rq6" id="q6-4" value="4" /></td>
-<<<<<<< HEAD
                    <td align="center"><input type="radio" name="rq6" id="q6-5" value="5" required/></td>
-=======
-                   <td align="center"><input type="radio" name="rq6" id="q6-5" value="5" /></td>
->>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
                    </tr>
                 </table>
               </div><br>
               <div style="width:60%;">
-<<<<<<< HEAD
                 <h4 name="question" id="q7">Después de la cita con el asesor de UNIFIN usted diría que:</h4>
                 <div align="left">
                   <input type="radio" name="rq7" id="q7-1" value="Hace mucho mas probable que considere a UNIFIN" required/>
@@ -428,34 +380,16 @@ $forma='
         
                   <input type="radio" name="rq7" id="q7-3" value="No hara ninguna diferencia"  align="left"/>
                   <label for="q7-3" >No hará ninguna diferencia</label><br> 
-=======
-                <h4 name="question" id="q7">Despues de la cita con el asesor de UNIFIN usted diria que:</h4>
-                <div align="left">
-                  <input type="radio" name="rq7" id="q7-1" value="Hace mucho mas probable que considere a UNIFIN" />
-                  <label for="q7-1">Hace mucho mas probable que considere a UNIFIN</label> <br>
-             
-                 
-                  <input type="radio" name="rq7" id="q7-2" value="Hace mucho mas probable que considere a UNIFIN" />
-                   <label for="q7-2" >Hace mas probable que considere a UNIFIN</label><br> 
-        
-                  <input type="radio" name="rq7" id="q7-3" value="No hara ninguna diferencia"  align="left"/>
-                  <label for="q7-3" >No hara ninguna diferencia</label><br> 
->>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
         
                  <input type="radio" name="rq7" id="q7-4" value="Hace probable que no considere a UNIFIN" />
                  <label for="q7-4" >Hace probable que no considere a UNIFIN</label><br> 
         
                   <input type="radio" name="rq7" id="q7-5" value="Hace mucho mas probable que no considere a UNIFIN"/>
-<<<<<<< HEAD
                   <label for="q7-5" >Hace mucho más probable que no considere a UNIFIN</label> <br>
-=======
-                  <label for="q7-5" >Hace mucho mas probable que no considere a UNIFIN</label> <br>
->>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
                 </div>
               </div>
             <br>
             <input type="submit" value="Enviar encuesta!">
-<<<<<<< HEAD
             <br>
         </form>
         <img src="https://fotos.subefotos.com/21e0681a07a484fedf20d4fbc9817396o.png">
@@ -518,14 +452,4 @@ EOF;
 //echo $body; //version 1 con procesamiento de datos mediante metodo POST, este caso se utiliza si el el cuerpo del mail va la encuesta
 echo $bodyv2;
 
-=======
-        </form>
-        <img src="https://fotos.subefotos.com/21e0681a07a484fedf20d4fbc9817396o.png">
-        </div>
-    </body>
-</html>
-
-';
-echo $forma;
->>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
 ?>
