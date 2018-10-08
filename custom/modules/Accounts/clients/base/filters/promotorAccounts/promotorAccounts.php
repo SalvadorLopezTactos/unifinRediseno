@@ -5,9 +5,13 @@
  * Date: 21/09/2018
  */
 
+<<<<<<< HEAD
 //AF - 25/09/18
 
 //Define variables
+=======
+
+>>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
 global $current_user;
 //$field = 'user_id_c';
 //$value = $current_user->id;

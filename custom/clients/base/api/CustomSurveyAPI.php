@@ -36,23 +36,34 @@ class CustomSurveyAPI extends SugarApi
     public function customSurveyMethod($api, $args)
     {
 
+<<<<<<< HEAD
         $id_encuesta = $args[parametros][0];
+=======
+        $id_reunion = $args[parametros][0];
+>>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
         $preguntas = $args[parametros][1];
         $respuestas=$args[parametros][2];
         $resultado=$args[parametros][3];
 
+<<<<<<< HEAD
         $GLOBALS['log']->fatal('>>>>>>>Entro CustomSurveyAPI');//------------------------------------
         $GLOBALS['log']->fatal("Api ->Id de encuesta:".$id_encuesta."--------------");//----------------------
         $GLOBALS['log']->fatal("Api ->respuestas:".print_r($respuestas,true)."--------------");//----------------------
 
         $bean = BeanFactory::retrieveBean("TCT01_Encuestas", $id_encuesta, array('disable_row_level_security' => true));
 
+=======
+        $GLOBALS['log']->fatal("Api ->Id de reunion:".$id_reunion."--------------");//----------------------
+
+        $bean = BeanFactory::getBean("Meetings", $id_reunion);
+>>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
         if($bean->description!=''){
             $bean->description .= $resultado;
         }else {
             $bean->description = $resultado;
         }
 
+<<<<<<< HEAD
         $bean->tct_pregunta_1_txf=$preguntas[0];
         $bean->tct_pregunta_2_txf=$preguntas[1];
         $bean->tct_pregunta_3_txf=$preguntas[2];
@@ -70,6 +81,8 @@ class CustomSurveyAPI extends SugarApi
         $bean->tct_respuesta_7_txf=$respuestas[6];
 
 
+=======
+>>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
         $GLOBALS['log']->fatal("Api->Descripcion:".$bean->description."---------------");//----------------------
 
         $bean->save();
@@ -78,6 +91,10 @@ class CustomSurveyAPI extends SugarApi
 
         return true;
 
+<<<<<<< HEAD
+=======
+        $GLOBALS['log']->fatal("Legaste al final---------------");//----------------------
+>>>>>>> 43977a7c3fd403cd75b4edeab19569e01f7b5f2e
     }
 
 }
