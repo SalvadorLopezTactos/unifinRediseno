@@ -1829,9 +1829,9 @@
             RFC = RFC.toUpperCase().trim();
             var expReg = "";
             if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                expReg = "[A-Z&-zÑñ]{4}[0-9]{6}[A-Z0-9]{3}";
+                expReg =  /^([A-Z\u00D1&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/;
             } else {
-                expReg = "[A-Z&-zÑñ]{3}[0-9]{6}[A-Z0-9]{3}";
+                expReg =  /^([A-Z\u00D1&]{3,4}) ?(?:- ?)?(\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])) ?(?:- ?)?([A-Z\d]{2})([A\d])$/; 
             }
             if (!RFC.match(expReg)) {
                 app.alert.show("RFC incorrecto", {
