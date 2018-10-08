@@ -8,7 +8,20 @@ if(isset($_GET['id_encuesta']) && isset($_GET['url'])){
 }else{
     $bean_acc = BeanFactory::retrieveBean('Accounts', $bean->account_id_c);
     $link='<b>Si la encuesta de arriba no funciona por favor da click <a href="'.$GLOBALS['site_url'].'/custom/Levementum/CustomEntryPoints/encuesta_template.php?id_encuesta='.$bean->id.'&url='.$GLOBALS['site_url'].'&name='. $bean_acc->name.'">aqui</a></b>';
-    $linkv2='<h3><b>Hola '.$bean_acc->name.'<br>Para UNIFIN tu opinión es muy importante.<br>Por eso te invitamos a responder una sencilla encuesta.<br>Para iniciar, da clic <a href="'.$GLOBALS['site_url'].'/custom/Levementum/CustomEntryPoints/encuesta_template.php?id_encuesta='.$bean->id.'&url='.$GLOBALS['site_url'].'&name='. $bean_acc->name.'">aqui</a><br>Gracias por ayudarnos a mejorar para ti.</b></h3>';
+    $linkv2='<html>
+                <head>
+                </head>
+                <body>
+                    <div align="center" style="width: 660px;">
+                        <img src="https://fotos.subefotos.com/d83bd716402da605745bfa6158d0f376o.png">
+                        <br><br><br><br> 
+                        <h3><b>Hola '.$bean_acc->name.'<br><br>Para UNIFIN tu opinión es muy importante.<br>Por eso te invitamos a responder una sencilla encuesta.<br>Para iniciar, da clic <a href="'.$GLOBALS['site_url'].'/custom/Levementum/CustomEntryPoints/encuesta_template.php?id_encuesta='.$bean->id.'&url='.$GLOBALS['site_url'].'&name='. $bean_acc->name.'">aquí</a><br><br>Gracias por ayudarnos a mejorar para ti.</b></h3>
+                        <br><br><br><br>
+                        <img src="https://fotos.subefotos.com/21e0681a07a484fedf20d4fbc9817396o.png">
+                    </div>
+                </body>
+            </html>
+    ';
 }
 
 $body='
@@ -405,7 +418,7 @@ $bodyv2=<<<EOF
                   preguntas.push(elm.innerText);
                 });
                 var isIE = /*@cc_on!@*/false || !!document.documentMode;
-                var urlSugar="http://<?php echo {$_SERVER['SERVER_NAME']};?>/unifin"; //////Activar esta variable
+                var urlSugar="http://{$_SERVER['SERVER_NAME']}/unifin"; //////Activar esta variable
                 //var urlSugar="http://{$_SERVER['SERVER_NAME']}:8888/unifin/rediseno";
     
                 if(isIE) {

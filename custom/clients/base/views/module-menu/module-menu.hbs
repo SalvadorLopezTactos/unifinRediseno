@@ -15,10 +15,21 @@
 {{else}}
 
     {{#notEq module "Expediente"}}
+        {{#notEq module "Cotizador"}}
+            {{#notEq module "CotizadorProspectos"}}
         <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">{{str 'LBL_MODULE_NAME' module}}</a>
-    {{/notEq}}
+    {{/notEq}}{{/notEq}}{{/notEq}}
+
+    {{#eq module "Cotizador"}}
+        <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">{{module}}</a>
+    {{/eq}}
+
     {{#eq module "Expediente"}}
             <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">{{module}}</a>
+    {{/eq}}
+
+    {{#eq module "CotizadorProspectos"}}
+        <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">Cotizador Prospectos</a>
     {{/eq}}
 
     {{#if actions}}

@@ -337,6 +337,7 @@ SQL;
                         //$bean_encuesta->tct_account_survey_rel_c = $ids[$i];
 
                         $bean_encuesta->account_id_c=$ids[$i];
+                        $bean_encuesta->description = 'Pendiente Envio';
 
                         $GLOBALS['log']->fatal('Id del cliente:'.$ids[$i] );//----------------------
 
