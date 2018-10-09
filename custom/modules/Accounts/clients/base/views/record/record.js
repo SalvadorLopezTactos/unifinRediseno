@@ -158,7 +158,7 @@
     },
 
 
-    checkmoney:function (evt) {
+    checkInVentas:function (evt) {
         var enteros=this.checkmoneyint(evt);
         var decimales=this.checkmoneydec(evt);
         $.fn.selectRange = function(start, end) {
