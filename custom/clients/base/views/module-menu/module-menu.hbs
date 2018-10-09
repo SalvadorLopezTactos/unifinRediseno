@@ -11,7 +11,8 @@
  */
 --}}
 {{#if meta.short}}
-    <a class="module-list-link" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" tabindex="-1"><span class="label label-module label-module-mini label-{{module}}" {{#if meta.alias}} title="{{module}} {{else}} title="{{str 'LBL_MODULE_NAME' module}} {{/if}}">{{moduleIconLabel module}}</span>{{#if meta.alias}} {{module}} {{else}} {{str 'LBL_MODULE_NAME' module}} {{/if}}</a>
+    <a class="module-list-link" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}"
+       track="click:{{module}}" tabindex="-1" xmlns="http://www.w3.org/1999/html"><span class="label label-module label-module-mini label-{{module}}" {{#if meta.alias}} title="{{module}} {{else}} title="{{str 'LBL_MODULE_NAME' module}} {{/if}}">{{moduleIconLabel module}}</span>{{#if meta.alias}} {{module}} {{else}} {{str 'LBL_MODULE_NAME' module}} {{/if}}</a>
 {{else}}
 
     {{#notEq module "Expediente"}}
@@ -21,16 +22,25 @@
     {{/notEq}}{{/notEq}}{{/notEq}}
 
     {{#eq module "Cotizador"}}
-        <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">{{module}}</a>
+        <a class="btn btn-invisible btn-link module-name" aria-label="{{str 'LBL_MODULE_NAME' module}}">Cotizadores</a>
+        <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown" class="btn btn-invisible dropdown-toggle" track="click:{{name}}-dropdown" aria-label="{{str 'LBL_MODULE_NAME' module}} - {{str 'LBL_LINK_MORE' module}}"><i class="fa fa-caret-down"></i></button>
+        <div class="dropdown-menu scroll">
+            <ul role="menu">
+            <li> <a class="ellipsis_inline" tabindex="-1" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}"><i class="fa fa-file-text"></i>{{module}}</a></li>
+
+
+            <li> <a class="ellipsis_inline" tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=CotizadorProspectos" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}"><i class="fa fa-users"></i>Cotizador Prospectos</a></li>
+            </ul>
+        </div>
     {{/eq}}
 
     {{#eq module "Expediente"}}
             <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">{{module}}</a>
     {{/eq}}
 
-    {{#eq module "CotizadorProspectos"}}
+    <!--{{#eq module "CotizadorProspectos"}}
         <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">Cotizador Prospectos</a>
-    {{/eq}}
+    {{/eq}}-->
 
     {{#if actions}}
     <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown" class="btn btn-invisible dropdown-toggle" track="click:{{name}}-dropdown" aria-label="{{str 'LBL_MODULE_NAME' module}} - {{str 'LBL_LINK_MORE' module}}"><i class="fa fa-caret-down"></i></button>
