@@ -1722,7 +1722,7 @@
 
         var direccion = $input.val();
 
-        if(direccion.length>99){
+        if(direccion.length>99 && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
             return false;
         }
     },
@@ -1742,7 +1742,7 @@
 
         var direccion = $input.val();
 
-        if(direccion.length>49){
+        if(direccion.length>49 && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
             return false;
         }
     },
