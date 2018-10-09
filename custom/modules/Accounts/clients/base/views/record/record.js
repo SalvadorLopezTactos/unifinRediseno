@@ -2693,10 +2693,20 @@
             if (this.model.get('ventas_anuales_c') == undefined || this.model.get('ventas_anuales_c') == "" || (Number(this.model.get('ventas_anuales_c')) <= 0 ))  {
                 errors['ventas_anuales_c'] = "Este campo debe tener un valor mayor a 0.";
                 errors['ventas_anuales_c'].required = true;
+                app.alert.show('Error_ventas_anuales', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'el campo <b>ventas anuales</b> debe tener un valor mayor a 0.'
+                });
             }
             if (this.model.get('activo_fijo_c') == undefined || this.model.get('activo_fijo_c') == "" || (Number(this.model.get('activo_fijo_c')) <= 0 ))  {
                 errors['activo_fijo_c'] = "Este campo debe tener un valor mayor a 0.";
                 errors['activo_fijo_c'].required = true;
+                app.alert.show('Error_activof', {
+                    level: 'error',
+                    autoClose: false,
+                    messages: 'el campo <b>activo fijo</b> debe tener un valor mayor a 0.'
+                });
             }
         }
         callback(null, fields, errors);
