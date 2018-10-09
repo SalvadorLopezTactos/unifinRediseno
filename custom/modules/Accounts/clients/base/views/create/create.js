@@ -1311,7 +1311,7 @@
             if (tipoProveedor.length == 0) {
                 app.alert.show("Proveedor Requerido", {
                     level: "error",
-                    title: "Debe seleccionar un un tipo de proveedor al menos",
+                    title: "Debe seleccionar un tipo de proveedor al menos",
                     autoClose: false
                 });
                 errors['tipo_proveedor_c'] = errors['tipo_proveedor_c'] || {};
