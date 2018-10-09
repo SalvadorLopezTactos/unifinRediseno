@@ -600,44 +600,6 @@
             self.render();
         }
         console.log("valor fuera " + this.model.get('id'));
-		
-		//Valida las relaciones
-        app.api.call("read", app.api.buildURL("Rel_Relaciones/", null, null, {
-            fields: "rel_relaciones_accounts_1accounts_ida",
-            "filter": [
-				{
-					"account_id1_c": this.model.get("id")
-				}
-            ]
-        }), null, {
-            success: _.bind(function (data) {
-				alert(data.records.length);
-                if (data.records.length > 0) {
-                    $(data.records).each(function (index, value) {
-						alert(value.rel_relaciones_accounts_1accounts_ida); 
-						if (value.rel_relaciones_accounts_1accounts_ida) {
-							app.api.call('GET', app.api.buildURL('GetUsersBoss/' + value.rel_relaciones_accounts_1accounts_ida), null, {
-								success: _.bind(function (data) {
-									if(data==false){
-										this.oculta = 1;
-										$('div[data-name=account_telefonos]').hide();
-										$('div[data-name=email]').hide();
-										$('div[data-name=account_direcciones]').hide();
-									}else{
-										this.oculta = 0;
-										$('div[data-name=account_telefonos]').show();
-										$('div[data-name=email]').show();
-										$('div[data-name=account_direcciones]').show();
-									}
-									return data;
-								}, self),
-							});
-							self.render();
-                        }
-                    });
-                }
-            }, this)
-        });
     },
 
     disable_panels_rol:function () {
