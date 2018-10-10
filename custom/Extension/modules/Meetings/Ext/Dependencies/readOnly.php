@@ -16,7 +16,7 @@ $dependencies['Meetings']['readOnly'] = array
             (
                 'target' => 'edit_button',
                 'label' => 'LBL_EDIT_BUTTON_LABEL',
-                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
             ),
         ),
         array
