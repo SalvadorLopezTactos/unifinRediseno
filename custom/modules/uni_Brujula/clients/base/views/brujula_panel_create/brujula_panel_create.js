@@ -4,6 +4,27 @@
  */
 
 ({
+    //extendsFrom: 'CreateView',
+
+    events: {
+        //Funcion para enteros
+        'keydown [name=contactos_numero]': 'checkbrujula',
+        'keydown [name=contactos_no_localizados]': 'checkbrujula',
+        'keydown [name=contactos_no_interesados]': 'checkbrujula',
+        'keydown [name=contactos_seguimiento_futuro]': 'checkbrujula',
+        'keydown [name=contactos_siguiente_llamada]': 'checkbrujula',
+        'keydown [name=contactos_por_visitar]': 'checkbrujula',
+        'keydown [name=contactos_enviaran_informacion]': 'checkbrujula',
+        'keydown [name=contactos_duracion]': 'checkbrujula',
+        //Función para decimales
+        'keydown [name=tiempo_revision_expediente_c]': 'checkbrujuladec',
+        'keydown [name=tiempo_armado_expedientes]': 'checkbrujuladec',
+        'keydown [name=tiempo_seguimiento_expedientes]': 'checkbrujuladec',
+        'keydown [name=tiempo_operacion]': 'checkbrujuladec',
+        'keydown [name=tiempo_liberacion]': 'checkbrujuladec',
+        'keydown [name=tiempo_servicio_cliente]': 'checkbrujuladec',
+        'keydown [name=tiempo_otras_actividades]': 'checkbrujuladec',
+    },
 
     initialize: function (options) {
         self = this;
@@ -15,6 +36,7 @@
         this.model.addValidationTask('sync_citas_alert', _.bind(this.citasSyncAlert, this));
         this.model.addValidationTask('citas_campos_requeridos', _.bind(this.citasCamposRequeridos, this));
         this.model.addValidationTask('campos_numero', _.bind(this.camposNumericos, this));
+        //this.events['keydown input[name=contactos_numero]'] = 'checkNum';
     },
 
     _render: function() {
@@ -405,7 +427,39 @@
 
         callback(null, fields, errors);
     },
-
+    /*Funcion para campos enteros 10-Oct-2018
+    *Victor Martinez
+    */ 
+    checkbrujula:function(evt){
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var regex_numeros = /^[0-9]/;
+        if((regex_numeros.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            app.alert.show('error_entero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return false;
+        }
+    },
+    /*Funcion para campos con punto decimal 10-Oct-2018
+    *Victor Martinez
+    */
+    checkbrujuladec:function(evt){
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var regex_numeros = /^\d*(\.\d{1})?\d{0,1}$/;
+        if((regex_numeros.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight" && evt.key!="."){
+            app.alert.show('error_decimal', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return false;
+        }
+    },
+    
     daysBetween: function( date1, date2 ) {
         //Get 1 day in milliseconds
         var one_day=1000*60*60*24;
