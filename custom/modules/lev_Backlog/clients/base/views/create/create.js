@@ -6,16 +6,6 @@
 ({
     extendsFrom: 'CreateView',
 
-    events: {
-        'keydown [name=dif_residuales_c]': 'checkInVentas',
-        'keydown [name=tasa_c]': 'checkInVentas',
-        'keydown [name=comision_c]': 'checkInVentas',
-        'keydown [name=monto_comprometido]': 'checkInVentas',
-        'keydown [name=porciento_ri]': 'checkInVentas',
-        'keydown [name=renta_inicial_comprometida]': 'checkInVentas',
-
-    },
-
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
@@ -79,6 +69,15 @@
                  }*/
             /*},this)
         });*/
+
+        // validación de los campos con formato númerico
+        this.events['keydown [name=dif_residuales_c]'] = 'checkInVentas';
+        this.events['keydown [name=tasa_c]'] = 'checkInVentas';
+        this.events['keydown [name=comision_c]'] = 'checkInVentas';
+        this.events['keydown [name=monto_comprometido]'] = 'checkInVentas';
+        this.events['keydown [name=porciento_ri]'] = 'checkInVentas';
+        this.events['keydown [name=renta_inicial_comprometida]'] = 'checkInVentas';
+
     },
 
     _render: function() {
