@@ -45,8 +45,7 @@ class Encuestas_Hooks
             $mail->Send();
         */
 
-            include 'custom/Levementum/CustomEntryPoints/encuesta_template.php';
-
+//            include 'custom/Levementum/CustomEntryPoints/encuesta_template.php';
 
             $outboundEmail                    = new OutboundEmail();
             $outboundEmail->mail_sendtype     = 'smtp';
@@ -73,10 +72,26 @@ class Encuestas_Hooks
                 $configurations,
                 $outboundEmail);
 
+
             $mailer = MailerFactory::getMailer($outboundEmailConfiguration);
 
             $mailer->setSubject($bean->name);
             $mailer->addRecipientsTo(new EmailIdentity($bean->tct_correo_txf));
+            $bean_acc = BeanFactory::retrieveBean('Accounts', $bean->account_id_c);
+            $linkv2='<html>
+                <head>
+                </head>
+                <body>
+                    <div align="center" style="width: 660px;">
+                        <img src="https://fotos.subefotos.com/d83bd716402da605745bfa6158d0f376o.png">
+                        <br><br><br><br> 
+                        <h3><b>Hola '.$bean_acc->name.'<br><br>Para UNIFIN tu opinión es muy importante.<br>Por eso te invitamos a responder una sencilla encuesta.<br>Para iniciar, da clic <a href="'.$GLOBALS['site_url'].'/custom/Levementum/CustomEntryPoints/encuesta_template.php?id_encuesta='.$bean->id.'&url='.$GLOBALS['site_url'].'&name='. $bean_acc->name.'">aquí</a><br><br>Gracias por ayudarnos a mejorar para ti.</b></h3>
+                        <br><br><br><br>
+                        <img src="https://fotos.subefotos.com/21e0681a07a484fedf20d4fbc9817396o.png">
+                    </div>
+                </body>
+            </html>
+            ';
             //$mailer->setHtmlBody($body); //Si queremos que la encuesta vaya en el cuerpo del correo
             $mailer->setHtmlBody($linkv2);
 
