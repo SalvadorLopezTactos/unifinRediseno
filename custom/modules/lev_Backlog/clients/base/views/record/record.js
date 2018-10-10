@@ -372,7 +372,7 @@
                 this.model.set("renta_inicial_comprometida",this.model.get("ri_final_comprometida_c"));
                 app.alert.show("Moto Modificado", {
                     level: "info",
-                    title: "El Monto de Operacion se igualara al Monto Final ya que el Backlog aun esta en revisi�n.",
+                    title: "El Monto de Operacion se igualara al Monto Final ya que el Backlog aun esta en revisión.",
                     autoClose: false
                 });
             }
