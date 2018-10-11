@@ -82,4 +82,3 @@ $viewdefs['Accounts']['base']['filter']['promotorAccounts'] = array(
     )
 );
 
-
