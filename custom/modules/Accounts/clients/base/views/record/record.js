@@ -2373,13 +2373,6 @@
         });
 
         if(cont>0){
-            /*
-             app.alert.show('error_modultel', {
-             level: 'error',
-             autoClose: true,
-             messages: 'Favor de llenar los campos se\u00F1alados.'
-             });
-             */
             app.alert.show("empty_fields_dire", {
                 level: "error",
                 title: "Favor de llenar los campos se\u00F1alados.",
@@ -2405,7 +2398,7 @@
                 $(this).css('border-color', '');
             }
         });
-        $('.existingPais').each(function () {
+        $('div[data-name=account_telefonos]').find('.existingPais').each(function () {
             if($(this).val()==''){
                 cont++;
                 $(this).css('border-color', 'red');
