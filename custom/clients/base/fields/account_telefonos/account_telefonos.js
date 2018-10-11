@@ -880,7 +880,7 @@
             messages: '¿Realmente quieres realizar la llamada?',
             autoClose: false,
             onConfirm: function(){
-                $.ajax({
+            /*    $.ajax({
                     cache:false,
                     type: "get",
                     url: issabel,
@@ -903,7 +903,7 @@
                             }, self),
                         });
                     },
-                });
+                }); */
             },
         });
     },
