@@ -12,14 +12,6 @@
      * @override
      */
 
-    events: {
-        'keydown [name=ventas_anuales_c]': 'checkInVentas',
-        'keydown [name=activo_fijo_c]': 'checkInVentas',
-
-
-    },
-
-
     checkInVentas:function (evt) {
         var enteros=this.checkmoneyint(evt);
         var decimales=this.checkmoneydec(evt);
@@ -587,6 +579,11 @@
          //Ocultar Div "Prospecto Contactado"
          this.$('div[data-name=tct_prospecto_contactado_chk_c]').hide();
          */
+
+
+        this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
+        this.events['keydown [name=activo_fijo_c]'] = 'checkInVentas';
+
     },
 
     /** BEGIN CUSTOMIZATION:
