@@ -70,6 +70,7 @@ class DropdownValuesHelper{
             //$GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <czaragoza> : Antes cedente: " . $cedente. " deudor: " . $deudor);
             $cedente = $cedente==1?32:0;
             $deudor = $deudor==1?64:0;
+            $EsProveedor = $EsProveedor==1?2:0;
     	switch ($stringValue){
       /*
         AF - 2018-08-15
@@ -87,11 +88,14 @@ class DropdownValuesHelper{
                 //$GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <czaragoza> : Tipo Cliente: " . $tipoCliente);
                 break;
 			case 'Proveedor':
-				$tipoCliente = 2;
+				if ($cedente > 1 || $deudor > 1 ){
+                    $tipoCliente = $cedente + $deudor;
+                }
+                $tipoCliente= $tipoCliente + $EsProveedor;
 				break;
 			case 'Persona':
-				if ($cedente > 1 || $deudor > 1){
-					 $tipoCliente = $cedente + $deudor;
+				if ($cedente > 1 || $deudor > 1 || $EsProveedor > 1){
+					 $tipoCliente = $cedente + $deudor + $EsProveedor;
 				}else{
 					$tipoCliente = 0;
 					/*

@@ -12,6 +12,120 @@
      * @override
      */
 
+    checkInVentas:function (evt) {
+        var enteros=this.checkmoneyint(evt);
+        var decimales=this.checkmoneydec(evt);
+        $.fn.selectRange = function(start, end) {
+            if(!end) end = start;
+            return this.each(function() {
+                if (this.setSelectionRange) {
+                    this.focus();
+                    this.setSelectionRange(start, end);
+                } else if (this.createTextRange) {
+                    var range = this.createTextRange();
+                    range.collapse(true);
+                    range.moveEnd('character', end);
+                    range.moveStart('character', start);
+                    range.select();
+                }
+            });
+        };//funcion para posicionar cursor
+
+        (function ($, undefined) {
+            $.fn.getCursorPosition = function() {
+                var el = $(this).get(0);
+                var pos = [];
+                if('selectionStart' in el) {
+                    pos = [el.selectionStart,el.selectionEnd];
+                } else if('selection' in document) {
+                    el.focus();
+                    var Sel = document.selection.createRange();
+                    var SelLength = document.selection.createRange().text.length;
+                    Sel.moveStart('character', -el.value.length);
+                    pos = Sel.text.length - SelLength;
+                }
+                return pos;
+            }
+        })(jQuery); //funcion para obtener cursor
+        var cursor=$(evt.handleObj.selector).getCursorPosition();//setear cursor
+
+
+        if (enteros == "false" && decimales == "false") {
+            if(cursor[0]==cursor[1]) {
+                return false;
+            }
+        }else if (typeof enteros == "number" && decimales == "false") {
+            if (cursor[0] < enteros) {
+                $(evt.handleObj.selector).selectRange(cursor[0], cursor[1]);
+            } else {
+                $(evt.handleObj.selector).selectRange(enteros);
+            }
+        }
+
+    },
+
+    checkmoneyint: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var digitos = $input.val().split('.');
+        if($input.val().includes('.')) {
+            var justnum = /[\d]+/;
+        }else{
+            var justnum = /[\d.]+/;
+        }
+        var justint = /^[\d]{0,14}$/;
+
+        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return "false";
+        }
+
+        if(typeof digitos[0]!="undefined") {
+            if (justint.test(digitos[0]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
+                console.log('no se cumplen enteros')
+                if(!$input.val().includes('.')) {
+                    $input.val($input.val()+'.')
+                }
+                return "false";
+
+            } else {
+                return digitos[0].length;
+            }
+        }
+    },
+
+    checkmoneydec: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var digitos = $input.val().split('.');
+        if($input.val().includes('.')) {
+            var justnum = /[\d]+/;
+        }else{
+            var justnum = /[\d.]+/;
+        }
+        var justdec = /^[\d]{0,1}$/;
+
+        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return "false";
+        }
+        if(typeof digitos[1]!="undefined") {
+            if (justdec.test(digitos[1]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
+                console.log('no se cumplen dec')
+                return "false";
+            } else {
+                return "true";
+            }
+        }
+    },
 
 
     handleCancel: function () {
@@ -465,6 +579,11 @@
          //Ocultar Div "Prospecto Contactado"
          this.$('div[data-name=tct_prospecto_contactado_chk_c]').hide();
          */
+
+
+        this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
+        this.events['keydown [name=activo_fijo_c]'] = 'checkInVentas';
+
     },
 
     /** BEGIN CUSTOMIZATION:
