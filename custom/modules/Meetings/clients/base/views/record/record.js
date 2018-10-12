@@ -5,6 +5,7 @@
 
     events: {
         'click .record-edit-link-wrapper': 'handleEdit',
+
     },
 
     initialize: function (options) {
@@ -19,7 +20,10 @@
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
         this.model.on("change:status",_.bind(this.muestracampoResultado, this));
         //this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
-
+        
+        //Al dar click mandara a la vista de creacion correspondiente a la minuta 
+        this.context.on('button:new_minuta_b:click', this.CreaMinuta,this);
+        
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
         */
@@ -80,7 +84,19 @@
 
 
     },
-    
+    CreaMinuta:function(){
+  app.drawer.open({
+       layout:'create',
+       context:{
+         create: true,
+         module:'Tasks',
+       }
+    });
+  },
+  _dispose: function() {
+     this._super('_dispose');
+   },
+
     /*editClicked: function() {
 
         this._super("editClicked");
