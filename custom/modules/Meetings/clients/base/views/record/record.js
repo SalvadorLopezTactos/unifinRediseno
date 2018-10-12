@@ -89,7 +89,7 @@
        layout:'create',
        context:{
          create: true,
-         module:'Tasks',
+         module:'minut_Minutas',
        }
     });
   },
