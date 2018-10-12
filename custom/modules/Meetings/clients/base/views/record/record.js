@@ -85,14 +85,19 @@
 
     },
     CreaMinuta:function(){
-  app.drawer.open({
-       layout:'create',
-       context:{
-         create: true,
-         module:'minut_Minutas',
+        var model=App.data.createBean('minut_Minutas');
+        model.set('account_id_c', this.model.get('parent_id'));
+        model.set('tct_relacionado_con_c', this.model.get('parent_name'));
+        app.drawer.open({
+            layout:'create',
+            context:{
+            create: true,
+            module:'minut_Minutas',
+            model:model
        }
     });
   },
+
   _dispose: function() {
      this._super('_dispose');
    },
