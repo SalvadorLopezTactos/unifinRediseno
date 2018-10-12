@@ -876,7 +876,7 @@
         }
 
         if(tel_usr!='' || tel_usr!=null){
-            if(tel_client1='' || tel_client!=null){
+            if(tel_client!='' || tel_client!=null){
                 app.alert.show('do-call', {
                     level: 'confirmation',
                     messages: '¿Realmente quieres realizar la llamada?',
