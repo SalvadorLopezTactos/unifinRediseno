@@ -33,6 +33,7 @@
         'click  .btn-edit': 'toggleExistingAddressProperty',
         'click  .removeEmail': 'removeExistingAddress',
         'click  .addTelefono': 'addNewTelefono',
+        'click  .mcall': 'makecall',
     },
     
     _flag2Deco: {
@@ -842,5 +843,86 @@
                 }
             ]
         };
-    }
+    },
+
+    //Funcion para buscar palabras en string
+
+    multiSearchOr: function(text, searchWords){
+        var regex = searchWords
+            .map(word => "(?=.*\\b" + word + "\\b)")
+            .join('');
+        var searchExp = new RegExp(regex, "gi");
+        return (searchExp.test(text))? "1" : "0";
+    },
+
+    // @Jesus Carrillo, funcion para realizar llamadas
+
+    makecall: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+
+        var tel_client=$input.closest("tr").find("td").eq(1).html();
+        var tel_usr=app.user.attributes.ext_c;
+        var name_client=this.model.get('name');
+        var id_client=this.model.get('id');
+        var Params=[id_client,name_client];
+        //var urlSugar="http://{$_SERVER['SERVER_NAME']}/unifin"; //////Activar esta variable
+
+
+        if(this.multiSearchOr($input.closest("tr").find("td").eq(0).html(),["CELULAR"])=='1'){
+            var issabel=App.config.issabel+'/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
+        }else{
+            var issabel=App.config.issabel+'/call_unifin.php?numero='+tel_client+'&userexten='+tel_usr;
+        }
+
+        if(tel_usr!='' || tel_usr!=null){
+            if(tel_client!='' || tel_client!=null){
+                app.alert.show('do-call', {
+                    level: 'confirmation',
+                    messages: '¿Realmente quieres realizar la llamada?',
+                    autoClose: false,
+                    onConfirm: function(){
+                        /*    $.ajax({
+                                cache:false,
+                                type: "get",
+                                url: issabel,
+                                beforeSend:function(){
+                                    app.alert.show('message-to', {
+                                        level: 'info',
+                                        messages: 'Usted esta llamando a '+name_client,
+                                        autoClose: true
+                                    });
+                                },
+                                complete:function(data) {
+                                    app.alert.show('message-call-start', {
+                                        level: 'info',
+                                        messages: 'Llamada en curso.....',
+                                        autoClose: true
+                                    });
+                                    app.api.call('create', app.api.buildURL('createcall/'),{data: Params}, {
+                                        success: _.bind(function (data) {
+                                            console.log('Llamada creada');
+                                        }, self),
+                                    });
+                                },
+                            }); */
+                    },
+                });
+            }else{
+                app.alert.show('error_tel_client', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
+                });
+            }
+        }else {
+            app.alert.show('error_tel_usr', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El usuario con el que estas logueado no tiene <b>Extensi\u00F3n</b>.'
+            });
+        }
+    },
+
+
 })
