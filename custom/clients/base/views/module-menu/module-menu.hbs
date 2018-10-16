@@ -12,25 +12,41 @@
 --}}
 {{#if meta.short}}
     <a class="module-list-link" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}"
-       track="click:{{module}}" tabindex="-1" xmlns="http://www.w3.org/1999/html"><span class="label label-module label-module-mini label-{{module}}" {{#if meta.alias}} title="{{module}} {{else}} title="{{str 'LBL_MODULE_NAME' module}} {{/if}}">{{moduleIconLabel module}}</span>{{#if meta.alias}} {{module}} {{else}} {{str 'LBL_MODULE_NAME' module}} {{/if}}</a>
+       track="click:{{module}}" tabindex="-1" xmlns="http://www.w3.org/1999/html"><span class="label label-module label-module-mini label-{{module}}"
+        {{#if meta.alias}} title="{{module}} {{else}} title="{{str 'LBL_MODULE_NAME' module}} {{/if}}"
+        >{{moduleIconLabel module}}</span>
+
+        <!--{{#if meta.alias}} {{module}} {{else}} {{str 'LBL_MODULE_NAME' module}} {{/if}}-->
+        {{#notEq module "Expediente"}}
+            {{#notEq module "Cotizador"}}
+                {{#notEq module "CotizadorProspectos"}}
+                    {{#if meta.alias}} {{module}} {{else}} {{str 'LBL_MODULE_NAME' module}} {{/if}}
+                {{/notEq}}{{/notEq}}{{/notEq}}
+
+    {{#eq module "Cotizador"}} {{str 'Cotizador UNI2'}} {{/eq}}
+    {{#eq module "CotizadorProspectos"}} {{str 'Cotizador IPAD'}} {{/eq}}
+        {{#eq module "Expediente"}} {{str 'Expediente'}} {{/eq}}
+
+    </a>
 {{else}}
 
     {{#notEq module "Expediente"}}
         {{#notEq module "Cotizador"}}
             {{#notEq module "CotizadorProspectos"}}
+
         <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">{{str 'LBL_MODULE_NAME' module}}</a>
     {{/notEq}}{{/notEq}}{{/notEq}}
 
     {{#eq module "Cotizador"}}
-        <a class="btn btn-invisible btn-link module-name" aria-label="{{str 'LBL_MODULE_NAME' module}}">Cotizadores</a>
+        <a class="btn btn-invisible btn-link module-name">Cotizadores</a>
         <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown" class="btn btn-invisible dropdown-toggle" track="click:{{name}}-dropdown" aria-label="{{str 'LBL_MODULE_NAME' module}} - {{str 'LBL_LINK_MORE' module}}"><i class="fa fa-caret-down"></i></button>
         <div class="dropdown-menu scroll">
             <ul role="menu">
 
-            <li> <a class="ellipsis_inline" tabindex="-1" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}"><i class="fa fa-clipboard"></i>{{module}}</a></li>
+            <li> <a class="ellipsis_inline"  tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=OpportunidadVaadin" track="click:{{module}}"><i class="fa fa-clipboard"></i>Cotizador UNI2</a></li>
 
 
-            <li> <a class="ellipsis_inline" tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=CotizadorProspectos" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}"><i class="fa fa-users"></i>Cotizador Prospectos</a></li>
+            <li> <a class="ellipsis_inline"  tabindex="-1" href="#{{buildRoute module=module}}" data-route="#bwc/index.php?entryPoint=CotizadorProspectos" track="click:{{module}}"><i class="fa fa-users"></i>Cotizador IPAD</a></li>
             </ul>
         </div>
     {{/eq}}
@@ -38,10 +54,6 @@
     {{#eq module "Expediente"}}
             <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">{{module}}</a>
     {{/eq}}
-
-    <!--{{#eq module "CotizadorProspectos"}}
-        <a class="btn btn-invisible btn-link module-name" href="#{{buildRoute module=module}}" data-route="#{{buildRoute module=module}}" track="click:{{module}}" aria-label="{{str 'LBL_MODULE_NAME' module}}">Cotizador Prospectos</a>
-    {{/eq}}-->
 
     {{#if actions}}
     <button type="button" title="{{str 'LBL_LINK_MORE' module}}" data-toggle="dropdown" class="btn btn-invisible dropdown-toggle" track="click:{{name}}-dropdown" aria-label="{{str 'LBL_MODULE_NAME' module}} - {{str 'LBL_LINK_MORE' module}}"><i class="fa fa-caret-down"></i></button>
