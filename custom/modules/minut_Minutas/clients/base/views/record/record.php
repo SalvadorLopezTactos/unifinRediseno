@@ -173,6 +173,7 @@ array (
                 'name' => 'tct_relacionado_con_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_RELACIONADO_CON_C',
+                'readonly'=> true,
               ),
               1 => 
               array (

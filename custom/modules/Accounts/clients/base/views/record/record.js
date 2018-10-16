@@ -904,6 +904,16 @@
                 });
             }
         }
+
+        if(this.model.get('tipo_registro_c')=="Proveedor"){
+             myField2.listenTo(myField2, "render", function () {
+                myField2.show();
+            });
+             myField1.listenTo(myField1, "render", function () {
+                myField1.hide();
+            });
+        }
+
     },
 
 
