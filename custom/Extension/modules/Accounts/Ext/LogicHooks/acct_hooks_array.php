@@ -63,6 +63,13 @@ $hook_array['after_save'][] = Array(
     'account_contacts'
 );
 
+$hook_array['after_save'][] = Array(
+    9,
+    'Sincroniza UNICS Relacion',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'relacion2UNICS'
+);
 
 $hook_array['before_save'][] = Array(
     1,
@@ -136,4 +143,12 @@ $hook_array['before_save'][] = Array(
     'custom/modules/Accounts/Account_Hooks.php',
     'Account_Hooks',
     'nivelSatisfaccion'
+);
+
+$hook_array['before_save'][] = Array(
+    12,
+    'Genera ClienteID Relacion',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'crearFolioRelacion'
 );

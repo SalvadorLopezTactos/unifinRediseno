@@ -56,7 +56,7 @@ SQL;
             if($all == 1){
                 $query .= "AND relaciones_activas not in ('^Conyuge^','^Contacto^','^Directivo^','^Referencia^','^Referencia Personal^','^Referencia Cliente^','^Accionista^','^Referencia Proveedor^')";
             }else{
-                $query .= "AND relaciones_activas like '%^Representante^%'";
+                $query .= "AND relaciones_activas like '%^Representante^%' AND acc.id <> '{$idPersona}'";
             }
 
             $Rows = $db->query($query);
