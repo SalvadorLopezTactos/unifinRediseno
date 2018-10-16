@@ -9,20 +9,33 @@ require_once("custom/Levementum/UnifinAPI.php");
 class Rel_Relaciones_Hooks{
 
     public function SetName($bean=null,$event=null,$args=null){
-
-         global $db;
-         $query = <<<SQL
+        global $db;
+        $query = <<<SQL
+select id from rel_relaciones_accounts_1_c where deleted = 0 and rel_relaciones_accounts_1rel_relaciones_idb <> '{$bean->id}' 
+and rel_relaciones_accounts_1accounts_ida = '{$bean->rel_relaciones_accounts_1accounts_ida}'
+and rel_relaciones_accounts_1rel_relaciones_idb in (SELECT id_c FROM rel_relaciones_cstm WHERE account_id1_c = '{$bean->account_id1_c}');
+SQL;
+        $queryResult = $db->query($query);
+        $row = $db->fetchByAssoc($queryResult);
+		if($row)
+        {
+			require_once 'include/api/SugarApiException.php';
+			throw new SugarApiExceptionInvalidParameter("Ya existe la relación");
+		}
+		else
+		{
+			$query = <<<SQL
 SELECT name FROM accounts WHERE id = '{$bean->account_id1_c}'
 SQL;
-         $queryResult = $db->query($query);
-
-        // $relacionesActivas = $bean->relaciones_activas;
-        // $relacionesActivas = str_replace('^','',$relacionesActivas);
-         while($row = $db->fetchByAssoc($queryResult))
-         {
-             // $bean->name = $relacionesActivas . " - " . $row['name'];
-             $bean->name = $row['name'];
-         }
+			 $queryResult = $db->query($query);
+			 // $relacionesActivas = $bean->relaciones_activas;
+			 // $relacionesActivas = str_replace('^','',$relacionesActivas);
+			 while($row = $db->fetchByAssoc($queryResult))
+			 {
+				 // $bean->name = $relacionesActivas . " - " . $row['name'];
+				 $bean->name = $row['name'];
+			 }
+		}
     }
 
     public function insertarRelacionenUNICS($bean=null,$event=null,$args=null){
