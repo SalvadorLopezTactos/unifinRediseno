@@ -1169,6 +1169,9 @@
         console.log('Validación CP');
         var direcciones = this.model.get('account_direcciones');
         for (i = 0; i < direcciones.length; i++) {
+            if (direcciones[i].codigopostal == 'xkcd' && isNaN($("#existingPostalInput").eq(i).val())==false){
+                direcciones[i].codigopostal = $("#existingPostalInput").eq(i).val();
+            }
             if (direcciones[i].codigopostal == 'xkcd' || direcciones[i].codigopostal == null || direcciones[i].codigopostal == '') {
                 errors[$(".account_direcciones")] = errors['account_direcciones'] || {};
                 errors[$(".account_direcciones")].required = true;
@@ -1178,6 +1181,7 @@
                     autoClose: false
                 });
             }
+
         }
 
         //Valida Ciudad
