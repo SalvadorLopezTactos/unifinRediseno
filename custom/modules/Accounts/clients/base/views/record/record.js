@@ -1281,7 +1281,8 @@
     regresa_leadClicked: function () {
         //alert("boton precionado");
         this.model.set("tipo_registro_c", "Lead");
-        this.model.set("subtipo_cuenta_c", "");
+        this.model.set("subtipo_cuenta_c", "En Calificacion");
+        this.model.set("tct_tipo_subtipo_txf_c","Lead En Calificacion");
         this.model.set("tct_prospecto_contactado_chk_c", false);
         this.model.save();
         this._render();
