@@ -177,7 +177,7 @@ class UnifinAPI
     }
 
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/11/2015 Description: Method to generate a folio number in sugar by consuming the ObtieneFolio Rest service*/
-        public function generarFolios($tipoFolio)
+        public function generarFolios($tipoFolio,$bean)
         {
             global $current_user;
             try {
@@ -200,7 +200,13 @@ class UnifinAPI
 
 
 				if($flagUpdateProspectoCliente){
-                    $resp = $this->unifingetCall($GLOBALS['esb_url']."/crm/rest/updateProspectoACliente");
+
+                    $fields = array(
+                        "idCliente"=> $folio,
+                        "guid"=> $bean->id
+                    );
+                    //$resp = $this->unifingetCall($GLOBALS['esb_url']."/crm/rest/updateProspectoACliente");
+                    $resp = $this->unifinPostCall($GLOBALS['esb_url']."/crm/rest/updateProspectoACliente",$fields);
                 }
 				/*Termina bloque*/
 
@@ -398,7 +404,7 @@ class UnifinAPI
                 $cleanValues = array();
 
                 if ($objecto->idcliente_c == '' || $objecto->idcliente_c == '0'){
-                    $numeroDeFolio = $this->generarFolios(1);
+                    $numeroDeFolio = $this->generarFolios(1,$objecto);
                     $objecto->idcliente_c = $numeroDeFolio;
                 }
                 if ($objecto->idcliente_c != '' && $objecto->idcliente_c != '0') {
