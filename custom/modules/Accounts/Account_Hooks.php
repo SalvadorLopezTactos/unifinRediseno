@@ -440,7 +440,7 @@ SQL;
         if (($bean->idcliente_c == '' || $bean->idcliente_c == '0' ) && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_c == 'Cliente' || $bean->tipo_registro_c == 'Proveedor' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c || ($bean->tipo_registro_c=="Prospecto" && $bean->subtipo_cuenta_c=="Interesado"))) {
             global $db;
             $callApi = new UnifinAPI();
-            $numeroDeFolio = $callApi->generarFolios(1);
+            $numeroDeFolio = $callApi->generarFolios(1,$bean);
             $bean->idcliente_c = $numeroDeFolio;
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> :numeroDeFolio   " . ": $numeroDeFolio ");
 
@@ -899,7 +899,7 @@ where rfc_c = '{$bean->rfc_c}' and
     	{
 			if ($bean->idcliente_c == '' || $bean->idcliente_c == '0') {
 				$callApi = new UnifinAPI();
-				$numeroDeFolio = $callApi->generarFolios(1);
+				$numeroDeFolio = $callApi->generarFolios(1,$bean);
 				$bean->idcliente_c = $numeroDeFolio;
 			}
 		}

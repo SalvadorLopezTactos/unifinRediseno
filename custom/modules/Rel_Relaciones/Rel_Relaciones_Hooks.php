@@ -55,7 +55,7 @@ SQL;
             $CuentaC =  BeanFactory::getBean('Accounts',$bean->account_id1_c);
             if(($CuentaC->tipo_registro_c=='Lead' || $CuentaC->tipo_registro_c=='Prospecto') && $CuentaC->sincronizado_unics_c==0){
                 $GLOBALS['log']->fatal(" el id de la cuenta es ingredsado por JA  " . $bean->account_id1_c);
-                $CuentaC->idcliente_c =$callApiAccounts->generarFolios(1);
+                $CuentaC->idcliente_c =$callApiAccounts->generarFolios(1,$CuentaC);
                 $GLOBALS['log']->fatal(" Folio de unix " . $CuentaC->idcliente_c);
                 $actualizaIdClienteLead= <<<SQL
 update accounts_cstm set idcliente_c = '{$CuentaC->idcliente_c}' where id_c = '{$CuentaC->id}';
