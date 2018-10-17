@@ -181,10 +181,12 @@ class UnifinAPI
         {
             global $current_user;
             try {
+                $flagUpdateProspectoCliente=false;
 				/*Este bloque de codigo es para cuando el ESB no responde*/
 				switch($tipoFolio){
 					case 1:
 						$host = "http://".$GLOBALS['unifin_url']."/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/consultaFolio?sTabla=ctCliente";
+                        $flagUpdateProspectoCliente=true;
 						break;
 					case 2:
 						$host = "http://".$GLOBALS['unifin_url']."/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/consultaFolio?sTabla=crSolicitudes";
@@ -195,6 +197,11 @@ class UnifinAPI
 				}
 				$folio = $this->unifingetCall($host);
 				$folio = intval($folio['UNI2_UTL_001_traeFolioResult']);
+
+
+				if($flagUpdateProspectoCliente){
+                    $resp = $this->unifingetCall($GLOBALS['esb_url']."/crm/rest/updateProspectoACliente");
+                }
 				/*Termina bloque*/
 
 				//$host = "http://" . $GLOBALS['esb_url'] ."/rest/unics/obtieneFolio?tipoFolio=$tipoFolio";
