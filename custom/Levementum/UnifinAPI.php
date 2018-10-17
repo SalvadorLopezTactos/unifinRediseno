@@ -177,7 +177,7 @@ class UnifinAPI
     }
 
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/11/2015 Description: Method to generate a folio number in sugar by consuming the ObtieneFolio Rest service*/
-        public function generarFolios($tipoFolio,$bean)
+        public function generarFolios($tipoFolio,$bean=null)
         {
             global $current_user;
             try {
