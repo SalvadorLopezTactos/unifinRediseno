@@ -108,6 +108,11 @@
         this.$('div[data-name=date_entered_by]').hide();
         this.$('div[data-name=date_modified_by]').hide();
 
+        //Ocultar banderas de control para establecer registro como solo lectura
+        this.$('div[data-name=tct_carga_masiva_chk_c]').hide();
+        this.$('div[data-name=tct_bloqueo_txf_c]').hide();
+
+
 
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
         usuario.fetch({
