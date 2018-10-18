@@ -134,14 +134,14 @@
 
     buscarCuentas: function(){
         var assigneUsr = this.model.get('users_accounts_1users_ida');
-/*        if((_.isEmpty(assigneUsr) || _.isUndefined(assigneUsr) || assigneUsr == "") && !$("#persona")[0].checked) {
+        if((_.isEmpty(assigneUsr) || _.isUndefined(assigneUsr) || assigneUsr == "") && !$("#persona")[0].checked) {
             var alertOptions = {
                 title: "Por favor, seleccione un Promotor",
                 level: "error"
             };
             app.alert.show('validation', alertOptions);
             return;
-        }*/
+        }
 
         var producto_seleccionado = $("#Productos").val();
         var from_set = $("#offset_value").attr("from_set");
