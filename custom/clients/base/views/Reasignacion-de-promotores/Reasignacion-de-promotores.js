@@ -133,11 +133,10 @@
     },
 
     buscarCuentas: function(){
-
         var assigneUsr = this.model.get('users_accounts_1users_ida');
-        if(_.isEmpty(assigneUsr) || _.isUndefined(assigneUsr) || assigneUsr == "") {
+        if((_.isEmpty(assigneUsr) || _.isUndefined(assigneUsr) || assigneUsr == "") && !$("#persona")[0].checked) {
             var alertOptions = {
-                title: "Porfavor, seleccione un Promotor",
+                title: "Por favor, seleccione un Promotor",
                 level: "error"
             };
             app.alert.show('validation', alertOptions);
@@ -150,7 +149,6 @@
         var current_set = $("#offset_value").html();
         var from_set_num = parseInt(from_set);
         var filtroCliente = $("#filtroCliente").val();
-
         var crossSeleccionados = $("#crossSeleccionados").val();
 
         if(isNaN(from_set_num)){
@@ -224,7 +222,7 @@
             });
         }else{
             var alertOptions = {
-                title: "Porfavor, seleccione un Promotor",
+                title: "Por favor, seleccione un Promotor",
                 level: "error"
             };
             app.alert.show('validation', alertOptions);
@@ -305,7 +303,7 @@
             }
         }else{
             var alertOptions = {
-                title: "Porfavor, seleccione un Promotor Destino",
+                title: "Por favor, seleccione un Promotor Destino",
                 level: "error"
             };
             app.alert.show('validation', alertOptions);

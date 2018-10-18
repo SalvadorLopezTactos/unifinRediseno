@@ -57,6 +57,8 @@ SQL;
       			}
       		}
       		$acompanianteMeet1->parent_meeting_c = $bean->id;
+			$acompanianteMeet1->created_by = $bean->created_by;
+			$acompanianteMeet1->modified_user_id = $bean->modified_user_id; 
       		$acompanianteMeet1->assigned_user_id = $args['related_id'];
       		$acompanianteMeet1->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
       		$acompanianteMeet1->save(); 
@@ -173,6 +175,8 @@ SQL;
       					}
       				}
       				$acompanianteMeet->parent_meeting_c = $bean->id;
+					$acompanianteMeet->created_by = $bean->created_by;
+					$acompanianteMeet->modified_user_id = $bean->modified_user_id;
       				$acompanianteMeet->assigned_user_id = $row['user_id'];
       				$acompanianteMeet->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
       				$acompanianteMeet->save();
@@ -241,6 +245,7 @@ SQL;
 SQL;
             $ultimo1 = $db->query($ultimo);
         }
+
 		//Elimina Invitados
         if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == True)
 	    {
@@ -250,6 +255,25 @@ SQL;
 				AND user_id <> '{$bean->assigned_user_id}'
 SQL;
 			$levadmin1 = $db->query($levadmin);
+			//Cambia Admin
+			$query = <<<SQL
+				SELECT created_by, modified_user_id
+				FROM meetings
+				WHERE id = '{$bean->parent_meeting_c}'
+				AND deleted = 0
+SQL;
+			$conn = $db->getConnection();
+			$queryResult = $conn->executeQuery($query);
+			foreach($queryResult->fetchAll() as $row)
+			{
+				$creado = $row['created_by'];
+				$modificado = $row['modified_user_id'];
+				$levadmin = <<<SQL
+					UPDATE meetings SET created_by = '{$creado}', modified_user_id = '{$creado}'
+					WHERE id = '{$bean->id}'
+SQL;
+				$levadmin1 = $db->query($levadmin);
+			}
 		}
 		//Elimina Admin
 		$levadmin = <<<SQL
@@ -257,7 +281,7 @@ SQL;
 			WHERE meeting_id = '{$bean->id}'
 			AND user_id = 1
 SQL;
-		$levadmin1 = $db->query($levadmin);		
+		$levadmin1 = $db->query($levadmin);
     }
 
     //@Jesus Carrillo
