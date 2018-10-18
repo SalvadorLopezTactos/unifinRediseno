@@ -479,6 +479,16 @@ array (
                 'name' => 'tag',
                 'span' => 12,
               ),
+              48 => 
+              array (
+                'name' => 'tct_carga_masiva_chk_c',
+                'label' => 'LBL_TCT_CARGA_MASIVA_CHK',
+              ),
+              49 => 
+              array (
+                'name' => 'tct_bloqueo_txf_c',
+                'label' => 'LBL_TCT_BLOQUEO_TXF',
+              ),
             ),
           ),
         ),
