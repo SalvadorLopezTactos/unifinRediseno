@@ -378,6 +378,10 @@ class UnifinAPI
                         }
 
                         $this->usuarioProveedores($objecto);
+
+
+                        //Valida y crea relaciones
+                        $this->enviaRelaciones($objecto->id);
                     }
                     /***CVV FIN***/
                 } catch (Exception $e) {
@@ -2006,5 +2010,33 @@ SQL;
                     $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error " . $e->getMessage());
                 }
             }
+        }
+
+        /*
+            AF- 2018-10-19
+            Habilita funcionalidad para envíar relaciones no creadas previamente, para cuentas que no existían en unics
+        */
+        public function enviaRelaciones($id_account){
+            try{
+                //Retrieve account
+                $GLOBALS['log']->fatal('Valida relaciones - Recupera cuenta');
+                $account = BeanFactory::getBean('Accounts', $id_account);
+
+                //retrieve all related records
+                $GLOBALS['log']->fatal('Valida relaciones - Recupera relaciones');
+                $account->load_relationship('rel_relaciones_accounts_1');
+
+                foreach($account->rel_relaciones_accounts_1->getBeans() as $relacion) {
+                    if($relacion->sincronizado_unics_c!= 1) {
+                        $GLOBALS['log']->fatal('Valida relaciones - Envía relación: '.$relacion->id);
+                        $rel = BeanFactory::getBean('Rel_Relaciones', $relacion->id);                    
+                        $rel->save();
+                    }
+                }   
+            } catch (Exception $e) {
+                $GLOBALS['log']->fatal('Valida relaciones - Error:');
+                $GLOBALS['log']->fatal($e);
+            }
+
         }
 }
