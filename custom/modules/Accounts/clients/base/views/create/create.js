@@ -704,8 +704,28 @@
                     cont++;
                     $(this).css('border-color', 'red');
                 }else{
+                //funcion
+                var cont=0;
+                for (var i =0; i < $(this).val().length; i++) {
+                    if($(this).val().charAt(0)==$(this).val().charAt(i)){
+                        cont++;
+                    }
+                }
+                if(cont==$(this).val().length){
+                        app.alert.show('numero_repetido1234', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Tel\u00E9fono Invalido caracter repetido'
+                        });
+                    errors['repetido'] = errors['Tel\u00E9fono Invalido,un mismo n\u00FA ha sido repetido varias veces'] || {};
+                    errors['repetido'].required = true;
+                    $(this).css('border-color', 'red');
+                    callback(null, fields, errors);
+
+                } else {
                     $(this).css('border-color', '');
                 }
+            }
             });
             $('.existingPais').each(function () {
                 if($(this).val()==''){

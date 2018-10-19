@@ -34,6 +34,7 @@
         'click  .removeEmail': 'removeExistingAddress',
         'click  .addTelefono': 'addNewTelefono',
         'click  .mcall': 'makecall',
+        //'change .newTelefono':'checkNorepeat',  Valida que un número no se repita ocho veces
     },
     
     _flag2Deco: {
@@ -52,7 +53,7 @@
         window.ids = [];
         options = options || {};
         options.def = options.def || {};
-
+        //this.model.on('sync', this.TelNoValido, this);
         // By default, compose email link should be allowed
         if (_.isUndefined(options.def.emailLink)) {
             options.def.emailLink = true;
@@ -274,6 +275,9 @@
                     coincidencia++;
                 }
             }
+
+             //Funcion
+
             if(coincidencia==0) {
 
                 $('[data-name=account_telefonos]').removeClass("error");
@@ -287,33 +291,56 @@
 
                 telefono = $.trim(telefono);
 
-                if ((telefono !== '') && (this._addNewTelefonoToModel(telefono))) {
-                    // build the new email field
-                    currentValue = this.model.get(this.name);
-                    telefonoFieldHtml = this._buildTelefonoFieldHtml({
-                        telefono: telefono,
-                        extension: $('.newExtension').val(),
-                        pais: $('.newPais').val(),
-                        tipotelefono: $('.newTipotelefono').val(),
-                        estatus: $('.newEstatus').val(),
-                        principal: currentValue && (currentValue.length === 1)
-                    });
+                if (telefono !== '') {
 
-                    // append the new field before the new email input
-                    $newTelefonoField = this._getNewEmailField()
-                        .closest('.telefonos')
-                        .before(telefonoFieldHtml);
+                    //funcion
+                    var cont=0;
+                    for (var i =0; i < $('.newTelefono')[0].value.length; i++) {
+                        if($('.newTelefono')[0].value.charAt(0)==$('.newTelefono')[0].value.charAt(i)){
+                            cont++;
+                        }
+                    }
+                    //$('.newTelefono')[0].value.charAt(0)
+                    if(cont==$('.newTelefono')[0].value.length){
+                        //if($input[0].className=='existingTelephono'){
+                            app.alert.show('numero_repetido56', {
+                            level: 'error',
+                            autoClose: true,
+                            messages: 'Tel\u00E9fono Invalido caracter repetido'
+                            });
+                        //$($input).focus();
+                        $('.newtelefono').css('border-color', 'red');
+                        //}   
+                    }else{
+                        this._addNewTelefonoToModel(telefono);
+                        $('.newtelefono').css('border-color', '');
+                    
+                        // build the new email field
+                        currentValue = this.model.get(this.name);
+                        telefonoFieldHtml = this._buildTelefonoFieldHtml({
+                            telefono: telefono,
+                            extension: $('.newExtension').val(),
+                            pais: $('.newPais').val(),
+                            tipotelefono: $('.newTipotelefono').val(),
+                            estatus: $('.newEstatus').val(),
+                            principal: currentValue && (currentValue.length === 1)
+                        });
+                        // append the new field before the new email input
+                        $newTelefonoField = this._getNewEmailField()
+                            .closest('.telefonos')
+                            .before(telefonoFieldHtml);
 
-                    // add tooltips
-                    //this.addPluginTooltips($newTelefonoField.prev());
+                        // add tooltips
+                        //this.addPluginTooltips($newTelefonoField.prev());
 
-                    if (this.def.required && this._shouldRenderRequiredPlaceholder()) {
-                        // we need to remove the required place holder now
-                        var label = app.lang.get('LBL_REQUIRED_FIELD', this.module),
-                            el = this.$(this.fieldTag).last(),
-                            placeholder = el.prop('placeholder').replace('(' + label + ') ', '');
+                        if (this.def.required && this._shouldRenderRequiredPlaceholder()) {
+                            // we need to remove the required place holder now
+                            var label = app.lang.get('LBL_REQUIRED_FIELD', this.module),
+                                el = this.$(this.fieldTag).last(),
+                                placeholder = el.prop('placeholder').replace('(' + label + ') ', '');
 
-                        el.prop('placeholder', placeholder.trim()).removeClass('required');
+                            el.prop('placeholder', placeholder.trim()).removeClass('required');
+                        }
                     }
                 }
 
@@ -333,6 +360,8 @@
                 autoClose: true,
                 messages: 'Favor de llenar los campos se\u00F1alados.'
             });
+            
+
             if(this.$('.newTipotelefono').val()=='' || this.$('.newTipotelefono').val()==null ){
                 this.$('.newTipotelefono').css('border-color', 'red');
             }else{
@@ -361,6 +390,30 @@
      * Event handler to update an telefono address.
      * @param {Event} evt
      */
+     /*
+    TelNoValido:function(){
+         var cont=0;
+         var $input = this.$(evt.c);
+                    for (var i =0; i < $input.val().length; i++) {
+                        if($input.val().charAt(0)==$input.val().charAt(i)){
+                            cont++;
+                        }
+                    }
+                if(cont==$input.val().length){
+                    app.alert.show("numero repetido", {
+                    level: "error",
+                    title: "Tel\u00E9fono Invalido",
+                    autoClose: true
+                    });
+                    //$('.newTelefono').val('');
+                    $('.existingTelephono').css('border-color', 'red');
+                    //$('.newTelefono').css('border-color', '');
+                    //$('.existingTelephono').css('border-color', 'red');
+                    return;
+                }
+
+    },*/
+
     updateExistingAddress: function (evt) {
         if (!evt) return;
         //get field that changed
@@ -468,12 +521,28 @@
                     //$($input).focus();
                     $($input).css('border-color', 'red');
                 }
-            }else {
-                $($input).css('border-color', '');
             }
-        }
-
-    },
+                var cont=0;
+                    for (var i =0; i < $input.val().length; i++) {
+                        if($input.val().charAt(0)==$input.val().charAt(i)){
+                            cont++;
+                        }
+                    }
+                if(cont==$input.val().length){
+                    //if($input[0].className=='existingTelephono'){
+                        app.alert.show('numero repetido', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Tel\u00E9fono Invalido'
+                        });
+                    //$($input).focus();
+                    $($input).css('border-color', 'red');
+                    //}   
+                }else {
+                        $($input).css('border-color', '');
+                    }   
+            }
+        },
 
     keyDownNewExtension: function (evt) {
         if (!evt) return;
@@ -855,6 +924,26 @@
         return (searchExp.test(text))? "1" : "0";
     },
 
+    /*checkNorepeat: function (evt) {
+    if (!evt) return;
+    var $input=this.$(evt.currentTarget);
+    var cont=0;
+        for (var i =0; i < $input.val().length; i++) {
+            if($input.val().charAt(0)==$input.val().charAt(i)){
+                cont++;
+                }
+        }
+        if(cont==$input.val().length){
+        app.alert.show("Caracter repetido", {
+                level: "error",
+                title: "Caracter repetido.",
+                autoClose: true
+            });
+        $('.newTelefono').val('');
+        $('.newTelefono').css('border-color', 'red');
+        }       
+    },*/
+    
     // @Jesus Carrillo, funcion para realizar llamadas
 
     makecall: function (evt) {
