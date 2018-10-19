@@ -18,9 +18,9 @@ SQL;
         $queryResult = $db->query($query);
         $row = $db->fetchByAssoc($queryResult);
 		if($row)
-        {
+        {			
 			require_once 'include/api/SugarApiException.php';
-			throw new SugarApiExceptionInvalidParameter("Ya existe la relación");
+			throw new SugarApiExceptionInvalidParameter("La relación ".$bean->name." ya existe para la cuenta ".$bean->rel_relaciones_accounts_1_name." Favor de verificarlo. Si deseas agregar una nueva Relación Activa para ".$bean->name.", favor de acceder a la Relación, editar y agregarlo.");
 		}
 		else
 		{

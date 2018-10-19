@@ -1288,6 +1288,7 @@
         this.model.set("subtipo_cuenta_c", "En Calificacion");
         this.model.set("tct_tipo_subtipo_txf_c","Lead En Calificacion");
         this.model.set("tct_prospecto_contactado_chk_c", false);
+		this.model.set("show_panel_c",0);
         this.model.save();
         this._render();
 
@@ -1468,6 +1469,7 @@
             this.model.set('tipo_registro_c','Prospecto');
             this.model.set('subtipo_registro_c','Contactado');
             this.model.set('tct_prospecto_contactado_chk_c',true);
+			this.model.set("show_panel_c",1);
             this.model.save();
             this._render();
             app.alert.show('alert_change_success', {
@@ -1763,6 +1765,7 @@
 
                     this.model.set("tipo_registro_c", "Lead");
                     this.model.set("subtipo_cuenta_list", "En Calificacion");
+					this.model.set("show_panel_c",0);
                     this.model.save();
                     console.log ('Guarda a Lead');
                     app.alert.show('success', {
