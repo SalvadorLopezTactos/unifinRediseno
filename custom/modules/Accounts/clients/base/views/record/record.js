@@ -145,6 +145,7 @@
         this.model.on('sync', this.fulminantcolor, this); //*@Jesus Carrillo; Funcion que pinta de color los paneles relacionados
         this.model.on('sync', this.valida_centro_prospec, this);
         this.model.on('sync', this.valida_backoffice, this);
+        //this.model.on('sync', this.checkTelNorepeat, this);
 
         //Funcion para eliminar duplicados de arrays
         Array.prototype.unique=function(a){
@@ -2412,8 +2413,27 @@
             if(!expreg.test($(this).val())){
                 cont++;
                 $(this).css('border-color', 'red');
+
             }else{
-                $(this).css('border-color', '');
+                //funcion
+                var cont=0;
+                for (var i =0; i < $(this).val().length; i++) {
+                    if($(this).val().charAt(0)==$(this).val().charAt(i)){
+                        cont++;
+                    }
+                }
+                if(cont==$(this).val().length){
+                        app.alert.show('numero_repetido1', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Tel\u00E9fono Invalido caracter repetido'
+                        });
+                    errors['rep'] = errors['Tel\u00E9fono Invalido,un mismo n\u00FA ha sido repetido varias veces'] || {};
+                    errors['rep'].required = true;
+                    $(this).css('border-color', 'red');
+                } else {
+                    $(this).css('border-color', '');
+                }
             }
         });
         $('div[data-name=account_telefonos]').find('.existingPais').each(function () {
@@ -2424,6 +2444,7 @@
                 $(this).css('border-color', '');
             }
         });
+
         $('.existingTipotelefono').each(function () {
             if($(this).val()==''){
                 cont++;
@@ -2480,7 +2501,8 @@
         }
         callback(null, fields, errors);
     },
-
+    
+    
     valida_backoffice: function() {
         self=this;
         var roles_limit = app.lang.getAppListStrings('roles_limit_list');
