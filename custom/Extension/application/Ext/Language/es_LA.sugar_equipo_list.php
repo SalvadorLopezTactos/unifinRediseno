@@ -1,5 +1,5 @@
 <?php
- // created: 2018-09-29 01:39:29
+ // created: 2018-10-18 14:28:50
 
 $app_list_strings['equipo_list']=array (
   0 => '',
@@ -15,6 +15,8 @@ $app_list_strings['equipo_list']=array (
   'CA1' => 'CA1',
   'CA2' => 'CA2',
   'CA3' => 'CA3',
+  'CA4' => 'CA4',
+  'CA5' => 'CA5',
   'CAN' => 'CAN',
   'CART' => 'CART',
   'CASA' => 'CASA',
@@ -29,6 +31,7 @@ $app_list_strings['equipo_list']=array (
   'F5' => 'F5',
   'GDL' => 'GDL',
   'HER' => 'HER',
+  'IPTO' => 'IPTO',
   'LEO' => 'LEO',
   'MER' => 'MER',
   'MTY' => 'MTY',
@@ -41,5 +44,4 @@ $app_list_strings['equipo_list']=array (
   'TOL' => 'TOL',
   'VER' => 'VER',
   'WorkOut' => 'Work out',
-  'IPTO' => 'IPTO',
 );
