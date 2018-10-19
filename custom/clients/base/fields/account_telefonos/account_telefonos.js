@@ -386,34 +386,6 @@
         }
     },
 
-    /**
-     * Event handler to update an telefono address.
-     * @param {Event} evt
-     */
-     /*
-    TelNoValido:function(){
-         var cont=0;
-         var $input = this.$(evt.c);
-                    for (var i =0; i < $input.val().length; i++) {
-                        if($input.val().charAt(0)==$input.val().charAt(i)){
-                            cont++;
-                        }
-                    }
-                if(cont==$input.val().length){
-                    app.alert.show("numero repetido", {
-                    level: "error",
-                    title: "Tel\u00E9fono Invalido",
-                    autoClose: true
-                    });
-                    //$('.newTelefono').val('');
-                    $('.existingTelephono').css('border-color', 'red');
-                    //$('.newTelefono').css('border-color', '');
-                    //$('.existingTelephono').css('border-color', 'red');
-                    return;
-                }
-
-    },*/
-
     updateExistingAddress: function (evt) {
         if (!evt) return;
         //get field that changed
@@ -924,26 +896,6 @@
         return (searchExp.test(text))? "1" : "0";
     },
 
-    /*checkNorepeat: function (evt) {
-    if (!evt) return;
-    var $input=this.$(evt.currentTarget);
-    var cont=0;
-        for (var i =0; i < $input.val().length; i++) {
-            if($input.val().charAt(0)==$input.val().charAt(i)){
-                cont++;
-                }
-        }
-        if(cont==$input.val().length){
-        app.alert.show("Caracter repetido", {
-                level: "error",
-                title: "Caracter repetido.",
-                autoClose: true
-            });
-        $('.newTelefono').val('');
-        $('.newTelefono').css('border-color', 'red');
-        }       
-    },*/
-    
     // @Jesus Carrillo, funcion para realizar llamadas
 
     makecall: function (evt) {
