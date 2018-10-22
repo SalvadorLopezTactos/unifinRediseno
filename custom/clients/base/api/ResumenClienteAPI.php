@@ -440,7 +440,7 @@ class ResumenClienteAPI extends SugarApi
                           }
                         }
                         //Agrega valores al arreglo de
-                        $arr_principal['historial_contactos']['ultima_llamada']= $ultima_llamada->format("d/m/Y");
+                        $arr_principal['historial_contactos']['ultima_llamada']= date_format($ultima_llamada, "d/m/Y");
                         $arr_principal['historial_contactos']['fecha_completa_llamada']= $fecha_completa_llamada;
 
                       }
