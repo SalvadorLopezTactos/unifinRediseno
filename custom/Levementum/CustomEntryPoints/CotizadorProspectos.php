@@ -3,6 +3,7 @@
  * Created by Salvador Lopez.
  * Date: 04/10/18
  * Time: 12:20
+ * Modificando la URL
  */
 
 global $current_user;
