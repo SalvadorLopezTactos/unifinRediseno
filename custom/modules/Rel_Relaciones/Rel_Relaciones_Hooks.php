@@ -17,25 +17,26 @@ and rel_relaciones_accounts_1rel_relaciones_idb in (SELECT id_c FROM rel_relacio
 SQL;
         $queryResult = $db->query($query);
         $row = $db->fetchByAssoc($queryResult);
-		if($row)
-        {			
-			require_once 'include/api/SugarApiException.php';
-			throw new SugarApiExceptionInvalidParameter("La relación ".$bean->name." ya existe para la cuenta ".$bean->rel_relaciones_accounts_1_name." Favor de verificarlo. Si deseas agregar una nueva Relación Activa para ".$bean->name.", favor de acceder a la Relación, editar y agregarlo.");
-		}
-		else
-		{
-			$query = <<<SQL
+		    if($row)
+        {
+       	  $beanPersona = BeanFactory::getBean('Accounts', $bean->account_id1_c);
+    			$persona = $beanPersona->name;
+          $beanRelacion = BeanFactory::getBean('Accounts', $bean->rel_relaciones_accounts_1accounts_ida);
+    			$relacion = $beanRelacion->name;
+    			require_once 'include/api/SugarApiException.php';
+    			throw new SugarApiExceptionInvalidParameter("La relación ".$persona." ya existe para la cuenta ".$relacion." Favor de verificarlo. Si deseas agregar una nueva Relación Activa para ".$persona.", favor de acceder a la Relación, editar y agregarlo.");
+    	  }
+    		else
+    		{
+      		$query = <<<SQL
 SELECT name FROM accounts WHERE id = '{$bean->account_id1_c}'
 SQL;
-			 $queryResult = $db->query($query);
-			 // $relacionesActivas = $bean->relaciones_activas;
-			 // $relacionesActivas = str_replace('^','',$relacionesActivas);
-			 while($row = $db->fetchByAssoc($queryResult))
-			 {
-				 // $bean->name = $relacionesActivas . " - " . $row['name'];
-				 $bean->name = $row['name'];
-			 }
-		}
+    			$queryResult = $db->query($query);
+   			  while($row = $db->fetchByAssoc($queryResult))
+    			{
+    				 $bean->name = $row['name'];
+   			  }
+    		}
     }
 
     public function insertarRelacionenUNICS($bean=null,$event=null,$args=null){
