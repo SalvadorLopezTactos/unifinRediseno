@@ -30,10 +30,19 @@
         this.events['keydown [name=renta_inicial_comprometida]'] = 'checkInVentas';
 
 
+        //Se añade evento para establecer registro como Solo Lectura
+        this.model.on('sync', this.setNoEditAllFields, this);
+
+
     },
 
     _render: function() {
         this._super("_render");
+
+        //Se ocultan banderas
+        $('[data-name="tct_carga_masiva_chk_c"]').hide();
+        $('[data-name="tct_bloqueo_txf_c"]').hide();
+
 
         if (this.model.dataFetched) {
             this.$('[data-name=editar]').hide();
@@ -78,6 +87,38 @@
                 //this.model.set("region", modelo.get("region_c"));
             },this)
         });
+
+    },
+
+    /**
+     * Establecer todo el registro como solo lectura cuando los campos bandera son = true
+     * Estos campos bandera son actualizados a través de un Job
+     * */
+    setNoEditAllFields:function(){
+
+        //Ocultando banderas
+        $('.record-cell[data-name="tct_carga_masiva_chk_c"]').addClass('hide');
+        $('.record-cell[data-name="tct_bloqueo_txf_c"]').addClass('hide');
+
+        //Estableciendo registro completo como solo lectura
+        //Obtener valores para validar bloqueo
+        var carga_masiva = this.model.get('tct_carga_masiva_chk_c');
+        var bloqueo = this.model.get('tct_bloqueo_txf_c');
+
+        //Validación para establecer como solo lectura todos los campos del registro
+        if (carga_masiva && bloqueo=="1")
+        {
+            //Se establecen todos los campos como solo lectura
+            $('.record-cell').attr("style","pointer-events:none");
+            //Excepto los campos de tipo relacionado para permitir la navegación hacia el registro
+            $('.record-cell[data-type="relate"]').removeAttr( "style" );
+            $('.record-cell[data-name="date_entered_by"]').removeAttr( "style" );
+            $('.record-cell[data-name="date_modified_by"]').removeAttr( "style" );
+
+            //Se oculta botón de edición
+            $('[name="edit_button"]').hide();
+        }
+
     },
 
     checkInVentas:function (evt) {

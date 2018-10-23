@@ -65,6 +65,15 @@ array (
                 'label' => 'LBL_EDIT_BUTTON_LABEL',
                 'acl_action' => 'edit',
               ),
+              1 => //Opción de crear la minuta
+              array (
+                'type' => 'rowaction',
+                'event' => 'button:new_minuta_b:click',
+                'name' => 'new_minuta',
+                'label' => 'LBL_CREATE_NEW_MINUTA',
+                'acl_action' => 'edit',
+              ),
+              /*
               1 => 
               array (
                 'type' => 'editrecurrencesbutton',
@@ -73,6 +82,7 @@ array (
                 'label' => 'LBL_EDIT_ALL_RECURRENCES',
                 'acl_action' => 'edit',
               ),
+
               2 => 
               array (
                 'type' => 'launchbutton',
@@ -156,7 +166,7 @@ array (
                 'label' => 'LBL_CLOSE_BUTTON_LABEL',
                 'closed_status' => 'Held',
                 'acl_action' => 'edit',
-              ),
+              ),*/
             ),
           ),
           3 => 

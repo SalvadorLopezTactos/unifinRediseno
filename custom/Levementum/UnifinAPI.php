@@ -177,14 +177,16 @@ class UnifinAPI
     }
 
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/11/2015 Description: Method to generate a folio number in sugar by consuming the ObtieneFolio Rest service*/
-        public function generarFolios($tipoFolio)
+        public function generarFolios($tipoFolio,$bean=null)
         {
             global $current_user;
             try {
+                $flagUpdateProspectoCliente=false;
 				/*Este bloque de codigo es para cuando el ESB no responde*/
 				switch($tipoFolio){
 					case 1:
 						$host = "http://".$GLOBALS['unifin_url']."/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/consultaFolio?sTabla=ctCliente";
+                        $flagUpdateProspectoCliente=true;
 						break;
 					case 2:
 						$host = "http://".$GLOBALS['unifin_url']."/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/consultaFolio?sTabla=crSolicitudes";
@@ -195,6 +197,17 @@ class UnifinAPI
 				}
 				$folio = $this->unifingetCall($host);
 				$folio = intval($folio['UNI2_UTL_001_traeFolioResult']);
+
+
+				if($flagUpdateProspectoCliente){
+
+                    $fields = array(
+                        "idCliente"=> $folio,
+                        "guid"=> $bean->id
+                    );
+                    //$resp = $this->unifingetCall($GLOBALS['esb_url']."/crm/rest/updateProspectoACliente");
+                    $resp = $this->unifinPostCall($GLOBALS['esb_url']."/crm/rest/updateProspectoACliente",$fields);
+                }
 				/*Termina bloque*/
 
 				//$host = "http://" . $GLOBALS['esb_url'] ."/rest/unics/obtieneFolio?tipoFolio=$tipoFolio";
@@ -365,6 +378,10 @@ class UnifinAPI
                         }
 
                         $this->usuarioProveedores($objecto);
+
+
+                        //Valida y crea relaciones
+                        $this->enviaRelaciones($objecto->id);
                     }
                     /***CVV FIN***/
                 } catch (Exception $e) {
@@ -391,7 +408,7 @@ class UnifinAPI
                 $cleanValues = array();
 
                 if ($objecto->idcliente_c == '' || $objecto->idcliente_c == '0'){
-                    $numeroDeFolio = $this->generarFolios(1);
+                    $numeroDeFolio = $this->generarFolios(1,$objecto);
                     $objecto->idcliente_c = $numeroDeFolio;
                 }
                 if ($objecto->idcliente_c != '' && $objecto->idcliente_c != '0') {
@@ -1993,5 +2010,33 @@ SQL;
                     $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error " . $e->getMessage());
                 }
             }
+        }
+
+        /*
+            AF- 2018-10-19
+            Habilita funcionalidad para envíar relaciones no creadas previamente, para cuentas que no existían en unics
+        */
+        public function enviaRelaciones($id_account){
+            try{
+                //Retrieve account
+                $GLOBALS['log']->fatal('Valida relaciones - Recupera cuenta');
+                $account = BeanFactory::getBean('Accounts', $id_account);
+
+                //retrieve all related records
+                $GLOBALS['log']->fatal('Valida relaciones - Recupera relaciones');
+                $account->load_relationship('rel_relaciones_accounts_1');
+
+                foreach($account->rel_relaciones_accounts_1->getBeans() as $relacion) {
+                    if($relacion->sincronizado_unics_c!= 1) {
+                        $GLOBALS['log']->fatal('Valida relaciones - Envía relación: '.$relacion->id);
+                        $rel = BeanFactory::getBean('Rel_Relaciones', $relacion->id);                    
+                        $rel->save();
+                    }
+                }   
+            } catch (Exception $e) {
+                $GLOBALS['log']->fatal('Valida relaciones - Error:');
+                $GLOBALS['log']->fatal($e);
+            }
+
         }
 }
