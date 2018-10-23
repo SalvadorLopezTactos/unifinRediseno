@@ -12,7 +12,7 @@ global $current_user;
 <body>
 
 
-<iframe src="http://187.248.43.210:1024/vendors.html?<?php echo $current_user->id; ?>" style="width:100%;height: 100%;position: absolute;"></iframe>
+<iframe src="http://apolo.unifin.com.mx:1024/vendors.html?<?php echo $current_user->id; ?>" style="width:100%;height: 100%;position: absolute;"></iframe>
 
 </body>
 </html>
