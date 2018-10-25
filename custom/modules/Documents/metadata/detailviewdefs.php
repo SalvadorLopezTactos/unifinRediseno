@@ -105,7 +105,6 @@ array (
         6 => 
         array (
           0 => 'related_doc_rev_number',
-          1 => '',
         ),
         7 => 
         array (
@@ -118,6 +117,13 @@ array (
           array (
             'name' => 'team_name',
             'label' => 'LBL_TEAM',
+          ),
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'minut_minutas_documents_1_name',
           ),
         ),
       ),
