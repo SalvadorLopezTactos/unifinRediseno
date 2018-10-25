@@ -26,7 +26,7 @@
     loadData: function (options) {
       //Recupera data existente
       //myData = $.parseJSON( '{"myData":{"records":[{"compromiso":"1","id_resp":"82ec8bcc-cdb3-b56e-a472-573a06966424","responsable":"Carmen Velasco","fecha":"2018-10-24","deleted":0},{"compromiso":"2","id_resp":"bafb1018-7a44-11e8-bb52-00155d967407","responsable":"Adrian","fecha":"2018-10-30","deleted":0}]}}');
-      this.model.set('minuta_compromisos',[{"compromiso":"1","id_resp":"716822f6-f2f9-3053-e052-5626c99305ac","responsable":"Carmen Velasco","fecha":"2018-10-24"},{"compromiso":"2","id_resp":"bafb1018-7a44-11e8-bb52-00155d967407","responsable":"Adrian","fecha":"2018-10-30"}]);
+     // this.model.set('minuta_compromisos',[{"compromiso":"1","id_resp":"716822f6-f2f9-3053-e052-5626c99305ac","responsable":"Carmen Velasco","fecha":"2018-10-24"},{"compromiso":"2","id_resp":"bafb1018-7a44-11e8-bb52-00155d967407","responsable":"Adrian","fecha":"2018-10-30"}]);
       myData = $.parseJSON( '{"myData":{"records":'+JSON.stringify(this.model.get('minuta_compromisos'))+'}}');
 
       arr_responsables={"arr_responsables": {"responsables":[{"id_resp2":"716822f6-f2f9-3053-e052-5626c99305ac",
