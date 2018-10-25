@@ -112,6 +112,14 @@ array (
                 'label' => 'LBL_DELETE_BUTTON_LABEL',
                 'acl_action' => 'delete',
               ),
+              10 => 
+              array (
+                'type' => 'rowaction',
+                'event' => 'button:view_document:click',
+                'name' => 'view_document',
+                'label' => 'Ver proceso UNIFIN',
+                'acl_action' => 'view',
+              ),
             ),
           ),
           3 => 
@@ -173,17 +181,22 @@ array (
                 'name' => 'tct_relacionado_con_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_RELACIONADO_CON_C',
-                'readonly'=> true,
+                'readonly' => true,
               ),
               1 => 
               array (
+                'name' => 'minut_minutas_meetings_name',
+                'studio' => 'visible',
+                'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MEETINGS_TITLE',
               ),
               2 => 
               array (
                 'name' => 'minuta_participantes',
                 'studio' => 'visible',
                 'label' => 'minuta_participantes',
-                'span' => 12,
+              ),
+              3 => 
+              array (
               ),
             ),
           ),
@@ -241,31 +254,52 @@ array (
             array (
               0 => 
               array (
+                'name' => 'objetivo_c',
+                'label' => 'LBL_OBJETIVO_C',
+                'readonly' => true,
+              ),
+              1 => 
+              array (
+                'name' => 'resultado_c',
+                'label' => 'LBL_RESULTADO_C',
+              ),
+              2 => 
+              array (
                 'name' => 'tct_cliente_no_interesado_chk',
                 'label' => 'LBL_TCT_CLIENTE_NO_INTERESADO_CHK',
               ),
-              1 => 
+              3 => 
               array (
                 'name' => 'tct_motivo_c',
                 'label' => 'LBL_TCT_MOTIVO_C',
               ),
-              2 => 
+              4 => 
               array (
                 'name' => 'tct_programa_nueva_reunion_chk',
                 'label' => 'LBL_TCT_PROGRAMA_NUEVA_REUNION_CHK',
               ),
-              3 => 
+              5 => 
               array (
                 'name' => 'fecha_y_hora_c',
                 'label' => 'LBL_FECHA_Y_HORA_C',
               ),
-              4 => 
-              array (
-              ),
-              5 => 
+              6 => 
               array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_ASSIGNED_TO',
+              ),
+              7 => 
+              array (
+                'name' => 'minut_minutas_meetings_1_name',
+                'studio' => 'visible',
+                'label' => 'LBL_MINUT_MINUTAS_MEETINGS_1_FROM_MINUT_MINUTAS_TITLE',
+                'readonly' => true,
+              ),
+              8 => 
+              array (
+              ),
+              9 => 
+              array (
               ),
             ),
           ),
