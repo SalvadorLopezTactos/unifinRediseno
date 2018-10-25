@@ -20,3 +20,8 @@ $mod_strings['LBL_ACTUALIZADO'] = 'Actualizado';
 $mod_strings['LBL_ACCOUNT_NAME'] = 'Cuentas';
 $mod_strings['LBL_CREATE_NEW_MINUTA'] = 'Crear Nueva Minuta';
 $mod_strings['LBL_RECORD_SAVED_SUCCESS'] = 'Has agendado la {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> para {{formatDate date_start}}';
+$mod_strings['LBL_CHECK_OUT_ADDRESS_C'] = 'Dirección Check-Out';
+$mod_strings['LBL_CHECK_OUT_LATITUDE_C'] = 'Latitude Check-Out';
+$mod_strings['LBL_CHECK_OUT_LONGITUDE_C'] = 'Longitud Check-Out';
+$mod_strings['LBL_CHECK_OUT_TIME_C'] = 'Tiempo Check-Out';
+$mod_strings['LBL_CHECK_IN_TIME_C'] = 'Tiempo Check-in';
