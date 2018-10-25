@@ -1,0 +1,580 @@
+
+/**
+ * @class View.Fields.Base.telefonoField
+ * @alias SUGAR.App.view.fields.BasetelefonoField
+ * @extends View.Field
+ */
+({
+    // CustomAccount_telefonos Field (base)
+
+    events: {
+
+        'click  .addTelefono': 'addNewTelefono',
+        'keydown .txtTelefono': 'keyDownNewExtension',
+    },
+    rowsParticipantes:[],
+
+    plugins: ['Tooltip', 'ListEditable', 'EmailClientLaunch'],
+
+    /**
+     * @inheritdoc
+     * @param options
+     */
+    initialize: function (options) {
+        self = this;
+        window.ids = [];
+        options = options || {};
+        options.def = options.def || {};
+
+        this._super('initialize', [options]);
+
+        this.events['click  [data-name=lblCheck]'] = 'clickChecked';
+        this._loadData();
+    },
+
+
+    _loadData:function()
+    {
+        app.api.call('GET', app.api.buildURL('GetParticipantes/'+this.model.get('minut_minutas_meetings_1_id') ), null, {
+            success: _.bind(function (data) {
+                this.rowsParticipantes=data;
+console.log(data);
+                if (data != "") {
+
+                    rowParticipantes = data.participantes;
+                    //data.participantes[0]['id']
+                    currentValue = this.model.get(this.name);
+
+                    for(i=0;i<rowParticipantes.length;i++)
+                    {
+                        telefonoFieldHtml = this._buildTelefonoFieldHtml({
+                            txtNombres11: rowParticipantes[i]['nombre'],
+                            txtCorreo11: rowParticipantes[i]['correo'],
+                            txtTelefono11: rowParticipantes[i]['telefono'],
+                            checked11: rowParticipantes[i]['asistencia'],
+                            color11: '#707070',
+
+                        });
+                        // append the new field before the new email input
+                        $newTelefonoField = this.$('.txtNombre')
+                            .closest('.participante')
+                            .before(telefonoFieldHtml);
+                    }
+
+
+                }
+               // this.render();
+
+            }, self),
+        });
+
+    },
+
+
+
+    _render: function () {
+
+        this._super("_render");
+
+
+    },
+
+    clickChecked: function (evt) {
+        self = this;
+        if (!evt) return;
+
+        banderaCheck = $(evt.currentTarget.children[0]).is(":checked");
+
+        if (banderaCheck == true) {
+            $(evt.currentTarget.children[1]).css('color', '#00f80d');
+        }
+        else {
+            $(evt.currentTarget.children[1]).css('color', '#707070');
+
+        }
+
+    },
+
+    _buildTelefonoFieldHtml: function (telefono) {
+        var editTelefonoFieldTemplate = app.template.getField('minuta_participantes', 'edit-minuta-participantes'),
+            telefonos = this.model.get('minuta_participantes');
+        var asistio="";
+        if(telefono.checked11==1)
+        {
+            asistio='checked';
+        }
+        return editTelefonoFieldTemplate({
+
+
+            txtNombres1: telefono.txtNombres11,
+            txtCorreo1: telefono.txtCorreo11,
+            txtTelefono1: telefono.txtTelefono11,
+            checked1: asistio,
+            color1: telefono.color11,
+
+        });
+    },
+
+
+
+    keyDownNewExtension: function (evt) {
+        if (!evt) return;
+        if(!this.checkNumOnly(evt)){
+            return false;
+        }
+
+    },
+    checkNumOnly:function(evt){
+        if($.inArray(evt.keyCode,[110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,16,49,50,51,52,53,54,55,56,57,48,96,97,98,99,100,101,102,103,104,105]) < 0) {
+            app.alert.show("Caracter Invalido", {
+                level: "error",
+                title: "Solo n\u00FAmeros son permitidos en este campo.",
+                autoClose: true
+            });
+            return false;
+        }else{
+            return true;
+        }
+    },
+
+    addNewTelefono: function (evt) {
+        if (!evt) return;
+
+        var expreg =/^[0-9]{8,10}$/;
+
+        if(this.$('.txtNombre').val()!='' && this.$('.txtAPaterno').val()!='' &&this.$('.txtAMaterno').val()!='' && expreg.test(this.$('.txtTelefono').val()) &&
+            this.$('.txtCorreo').val()!='') {
+
+            this.$('.txtNombre').css('border-color', '');
+            this.$('.txtAPaterno').css('border-color', '');
+            this.$('.txtAMaterno').css('border-color', '');
+            this.$('.txtTelefono').css('border-color', '');
+            this.$('.txtCorreo').css('border-color', '');
+
+
+                    currentValue = this.model.get(this.name);
+                    telefonoFieldHtml = this._buildTelefonoFieldHtml({
+                        txtNombres11: $('.txtNombre').val() + " " + $('.txtAPaterno').val() + " " + $('.txtAMaterno').val(),
+                        txtCorreo11: $('.txtCorreo').val(),
+                        txtTelefono11: $('.txtTelefono').val(),
+                        checked11: 1,
+                        color11: '#00f80d',
+
+                    });
+                    // append the new field before the new email input
+                    $newTelefonoField = this.$('.txtNombre')
+                        .closest('.participante')
+                        .before(telefonoFieldHtml);
+
+
+        }
+        else {
+            app.alert.show('error_modulMinuta', {
+                level: 'error',
+                autoClose: true,
+                messages: 'Favor de llenar los campos se\u00F1alados.'
+            });
+
+            // #Nombres
+            if(this.$('.txtNombre').val()=='' || this.$('.txtNombre').val()==null ){
+                this.$('.txtNombre').css('border-color', 'red');
+            }else{
+                this.$('.txtNombre').css('border-color', '');
+            }
+
+            // #Apellido Paterno
+            if(this.$('.txtAPaterno').val()=='' || this.$('.txtAPaterno').val()==null ){
+                this.$('.txtAPaterno').css('border-color', 'red');
+            }else{
+                this.$('.txtAPaterno').css('border-color', '');
+            }
+
+            // #Apellido Materno
+            if(this.$('.txtAMaterno').val()=='' || this.$('.txtAMaterno').val()==null ){
+                this.$('.txtAMaterno').css('border-color', 'red');
+            }else{
+                this.$('.txtAMaterno').css('border-color', '');
+            }
+
+            // #Correo
+            if(this.$('.txtCorreo').val()=='' || this.$('.txtCorreo').val()==null ){
+                this.$('.txtCorreo').css('border-color', 'red');
+            }else{
+                this.$('.txtCorreo').css('border-color', '');
+            }
+
+            // # Telefono
+            if(!expreg.test(this.$('.txtTelefono').val())){
+                this.$('.txtTelefono').css('border-color', 'red');
+            }else{
+                this.$('.txtTelefono').css('border-color', '');
+            }
+
+
+
+            return;
+        }
+       // this.clickChecked();
+        this._clearNewAddressField();
+    },
+
+
+    _addNewTelefonoToModel: function (telefono) {
+        //var existingTelfonos = this.model.get('account_telefonos');
+        var existingTelfonos = app.utils.deepCopy(this.model.get('account_telefonos'));
+
+        existingTelfonos.push({
+            telefono: telefono,
+            extension: $('.newExtension').val(),
+            pais: $('.newPais').val(),
+            tipotelefono: $('.newTipotelefono').val(),
+            estatus: $('.newEstatus').val(),
+            principal: (existingTelfonos.length === 0)
+        });
+        this.model.set(this.name, existingTelfonos);
+        success = true;
+
+        return success;
+    },
+
+    _updateExistingAddressInModel: function (index, newTelefono, field_name) {
+        var existingAddresses = app.utils.deepCopy(this.model.get('account_telefonos'));
+        //Simply update the email address
+        existingAddresses[index][field_name] = newTelefono;
+        this.model.set(this.name, existingAddresses);
+    },
+
+    /**
+     * Toggle telefono address properties: primary, opt-out, and invalid.
+     * @param {Number} index
+     * @param {String} property
+     * @private
+     */
+    _toggleExistingAddressPropertyInModel: function (index, property) {
+        var existingAddresses = app.utils.deepCopy(this.model.get(this.name));
+
+        //If property is principal, we want to make sure one and only one primary email is set
+        //As a consequence we reset all the principal properties to 0 then we toggle property for this index.
+        if (property === 'principal') {
+            existingAddresses[index][property] = false;
+            _.each(existingAddresses, function (email, i) {
+                if (email[property]) {
+                    existingAddresses[i][property] = false;
+                }
+            });
+        }
+
+        // Toggle property for this email
+        if (existingAddresses[index][property]) {
+            existingAddresses[index][property] = false;
+        }
+        else {
+            existingAddresses[index][property] = true;
+        }
+
+        this.model.set(this.name, existingAddresses);
+    },
+
+    /**
+     * Remove telefono address from the model.
+     * @param {Number} index
+     * @returns {Boolean} Returns true if the removed address was the primary address.
+     * @private
+     */
+    _removeExistingAddressInModel: function (index) {
+        var existingAddresses = app.utils.deepCopy(this.model.get(this.name)),
+            primaryAddressRemoved = !!existingAddresses[index]['principal'];
+        window.ids.push(existingAddresses[index]['id']);
+
+        //Reject this index from existing addresses
+        existingAddresses = _.reject(existingAddresses, function (emailInfo, i) {
+            return i == index;
+        });
+
+        // If a removed address was the primary email, we still need at least one address to be set as the primary email
+        if (primaryAddressRemoved) {
+            //Let's pick the first one
+            var address = _.first(existingAddresses);
+            if (address) {
+                address.principal = true;
+            }
+        }
+        this.model.set(this.name, existingAddresses);
+        return primaryAddressRemoved;
+    },
+
+    /**
+     * Clear out the new telefono address field.
+     * @private
+     */
+    _clearNewAddressField: function () {
+
+        $('.txtNombre').val('');
+        $('.txtAPaterno').val('');
+        $('.txtAMaterno').val('');
+        $('.txtCorreo').val('');
+        $('.txtTelefono').val('');
+
+    },
+
+    /**
+     * Get the new telefono address input field.
+     * @returns {jQuery}
+     * @private
+     */
+    _getNewEmailField: function () {
+        return this.$('.newTelefono');
+    },
+
+    /**
+     * Custom error styling for the e-mail field
+     * @param {Object} errors
+     * @override BaseField
+     */
+    decorateError: function (errors) {
+        var emails;
+
+        this.$el.closest('.record-cell').addClass("error");
+
+        //Select all existing emails
+        emails = this.$('input:not(.newTelefono)');
+
+        _.each(errors, function (errorContext, errorName) {
+            //For `email` validator the error is specific to an email
+            if (errorName === 'email' || errorName === 'duplicateEmail') {
+
+                // For each of our `sub-email` fields
+                _.each(emails, function (e) {
+                    var $email = this.$(e),
+                        email = $email.val();
+
+                    var isError = _.find(errorContext, function (emailError) {
+                        return emailError === email;
+                    });
+                    // if we're on an email sub field where error occurred, add error styling
+                    if (!_.isUndefined(isError)) {
+                        this._addErrorDecoration($email, errorName, [isError]);
+                    }
+                }, this);
+                //For required or primaryEmail we want to decorate only the first email
+            }
+            else {
+                var $email = this.$('input:first');
+                this._addErrorDecoration($email, errorName, errorContext);
+            }
+        }, this);
+    },
+
+    _addErrorDecoration: function ($input, errorName, errorContext) {
+        var isWrapped = $input.parent().hasClass('input-append');
+        if (!isWrapped)
+            $input.wrap('<div class="input-append error ' + this.fieldTag + '">');
+        $input.next('.error-tooltip').remove();
+        $input.after(this.exclamationMarkTemplate([app.error.getErrorString(errorName, errorContext)]));
+        //this.createErrorTooltips($input.next('.error-tooltip'));
+    },
+
+    /**
+     * Binds DOM changes to set field value on model.
+     * @param {Backbone.Model} model model this field is bound to.
+     * @param {String} fieldName field name.
+     */
+    bindDomChange: function () {
+        if (this.tplName === 'list-edit') {
+            this._super("bindDomChange");
+        }
+    },
+
+    /**
+     * To display representation
+     * @param {String|Array} value single telefono address or set of telefono addresses
+     */
+    format: function (value) {
+        value = app.utils.deepCopy(value);
+        if (_.isArray(value) && value.length > 0) {
+            // got an array of email addresses
+            _.each(value, function (email) {
+                // On render, determine which e-mail addresses need anchor tag included
+                // Needed for handlebars template, can't accomplish this boolean expression with handlebars
+                email.hasAnchor = this.def.emailLink && !email.opt_out && !email.invalid_email;
+            }, this);
+        }
+        else if ((_.isString(value) && value !== "") || this.view.action === 'list') {
+            // expected an array with a single address but got a string or an empty array
+            value = [{
+                email_address: value[0].telefono,
+                principal: true,
+                hasAnchor: true
+            }];
+        }
+
+        value = this.addFlagLabels(value);
+        return value;
+    },
+
+    /**
+     * Build label that gets displayed in tooltips.
+     * @param {Object} value
+     * @returns {Object}
+     */
+    addFlagLabels: function (value) {
+        var flagStr = "", flagArray;
+        _.each(value, function (emailObj) {
+            flagStr = "";
+            flagArray = _.map(emailObj, function (flagValue, key) {
+                if (!_.isUndefined(this._flag2Deco[key]) && this._flag2Deco[key].lbl && flagValue) {
+                    return app.lang.get(this._flag2Deco[key].lbl);
+                }
+            }, this);
+            flagArray = _.without(flagArray, undefined);
+            if (flagArray.length > 0) {
+                flagStr = flagArray.join(", ");
+            }
+            emailObj.flagLabel = flagStr;
+        }, this);
+        return value;
+    },
+
+    /**
+     * To API representation
+     * @param {String|Array} value single telefono address or set of telefono addresses
+     */
+    unformat: function (value) {
+        if (this.view.action === 'list') {
+            var telefonos = app.utils.deepCopy(this.model.get(this.name));
+
+            if (!_.isArray(telefonos)) { // telefonos is empty, initialize array
+                telefonos = [];
+            }
+
+            telefonos = _.map(telefonos, function (email) {
+                if (email.principal && email.email_address !== value) {
+                    email.email_address = value;
+                }
+                return email;
+            }, this);
+
+            // Adding a new email
+            if (telefonos.length == 0) {
+                telefonos.push({
+                    email_address: value,
+                    principal: true
+                });
+            }
+
+            return telefonos;
+        }
+
+        if (this.view.action === 'filter-rows') {
+            return value;
+        }
+    },
+
+    /**
+     * Apply focus on the new email input field.
+     */
+    focus: function () {
+        if (this.action !== 'disabled') {
+            this._getNewEmailField().focus();
+        }
+    },
+
+    /**
+     * Retrieve link specific telefono options for launching the telefono client
+     * Builds upon telefonoOptions on this
+     *
+     * @param $link
+     * @private
+     */
+    _retrieveEmailOptionsFromLink: function ($link) {
+        return {
+            to_addresses: [
+                {
+                    email: $link.data('email-to'),
+                    bean: this.emailOptions.related
+                }
+            ]
+        };
+    },
+
+    //Funcion para buscar palabras en string
+
+    multiSearchOr: function(text, searchWords){
+        var regex = searchWords
+            .map(word => "(?=.*\\b" + word + "\\b)")
+            .join('');
+        var searchExp = new RegExp(regex, "gi");
+        return (searchExp.test(text))? "1" : "0";
+    },
+
+    // @Jesus Carrillo, funcion para realizar llamadas
+
+    makecall: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+
+        var tel_client=$input.closest("tr").find("td").eq(1).html();
+        var tel_usr=app.user.attributes.ext_c;
+        var name_client=this.model.get('name');
+        var id_client=this.model.get('id');
+        var Params=[id_client,name_client];
+        //var urlSugar="http://{$_SERVER['SERVER_NAME']}/unifin"; //////Activar esta variable
+
+
+        if(this.multiSearchOr($input.closest("tr").find("td").eq(0).html(),["CELULAR"])=='1'){
+            var issabel=App.config.issabel+'/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
+        }else{
+            var issabel=App.config.issabel+'/call_unifin.php?numero='+tel_client+'&userexten='+tel_usr;
+        }
+
+        if(tel_usr!='' || tel_usr!=null){
+            if(tel_client!='' || tel_client!=null){
+                app.alert.show('do-call', {
+                    level: 'confirmation',
+                    messages: '¿Realmente quieres realizar la llamada?',
+                    autoClose: false,
+                    onConfirm: function(){
+                        /*    $.ajax({
+                                cache:false,
+                                type: "get",
+                                url: issabel,
+                                beforeSend:function(){
+                                    app.alert.show('message-to', {
+                                        level: 'info',
+                                        messages: 'Usted esta llamando a '+name_client,
+                                        autoClose: true
+                                    });
+                                },
+                                complete:function(data) {
+                                    app.alert.show('message-call-start', {
+                                        level: 'info',
+                                        messages: 'Llamada en curso.....',
+                                        autoClose: true
+                                    });
+                                    app.api.call('create', app.api.buildURL('createcall/'),{data: Params}, {
+                                        success: _.bind(function (data) {
+                                            console.log('Llamada creada');
+                                        }, self),
+                                    });
+                                },
+                            }); */
+                    },
+                });
+            }else{
+                app.alert.show('error_tel_client', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'El cliente al que quieres llamar no tiene <b>N\u00FAmero telefonico</b>.'
+                });
+            }
+        }else {
+            app.alert.show('error_tel_usr', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El usuario con el que estas logueado no tiene <b>Extensi\u00F3n</b>.'
+            });
+        }
+    },
+
+
+})

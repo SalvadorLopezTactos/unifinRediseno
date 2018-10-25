@@ -1,0 +1,34 @@
+<style>
+
+    .encabezado {
+        /*border-color: #2f5085;
+        border-style: solid; */
+        background: #dcdcdc;
+        color:#0b0f00 ;
+        margin: 0px;
+        padding: 5px;
+        font-size: 15px;
+    }
+
+</style>
+<div class="control-group participante ">
+    <div class="encabezado span12">
+        <!-- ENCABEZADO DE LA TABLA 4 COLUMNAS -->
+        <div class="span4">Nombre</div>
+        <div class="span3">Correo</div>
+        <div class="span3">Teléfono</div>
+        <div class="span2">Asistencia</div>
+    </div>
+    <div>
+        {{#each value}}
+            <div class="span12">
+                <div class="4">{{descripNombre}}</div>
+                <div class="3">{{descripCorreo}}</div>
+                <div class="3">{{descriptTelefono}}</div>
+                <div class="2">
+                    <i class="fa fa-check iconoS" style="width: 10px; height: 10px; color: {{color}}"></i>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>

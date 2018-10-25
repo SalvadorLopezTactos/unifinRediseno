@@ -1,0 +1,39 @@
+<style>
+    #asistenciaOK {
+        /*display: none; */
+    }
+
+</style>
+
+<div class="control-group participante">
+    {{{log this}}}
+
+            <div id="fila1" class=" span12" style="margin: 0px">
+                <!-- FILA #N -->
+                <div class="span4">
+                    <label class="record-label">Nombre</label>
+                    <br>
+                    <input type="text" class="txtNombre1" value="{{txtNombres1}}" data-field="txtNombres" disabled/>
+                </div>
+                <div class="span3">
+                    <label class="record-label">Correo</label>
+                    <br>
+                    <input type="text" class="txtCorreo1" value="{{txtCorreo1}}" data-field="txtCorreo" disabled/>
+                </div>
+                <div class="span3">
+                    <label class="record-label">Teléfono</label>
+                    <br>
+                    <input type="text" class="txtTelefono1" value="{{txtTelefono1}}" data-field="txtTelefono" disabled/>
+                </div>
+                <div class="span2 control-group ">
+                    <br>
+                    <!--<input type="checkbox" id="asistenciaOK" style="width: 1.25rem; height: 1.25rem;"> -->
+                    <!--  <input  class="chkAsistio" id="toggle1" type="checkbox" style="width: 1.25rem; height: 1.25rem;"> -->
+                    <label class="checkeable" data-name="lblCheck" style="font-size: 25px;">
+                        <input type="checkbox" name="cap1" id="asistenciaOK" {{checked1}}/>
+                        <i class="fa fa-check iconoS" style="width: 10px; height: 10px; color: {{color}}"></i>
+                    </label>
+                </div>
+            </div>
+
+</div>
