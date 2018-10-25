@@ -118,7 +118,13 @@ array (
             'name' => 'related_doc_rev_number',
             'customCode' => '<select name="related_doc_rev_id" id="related_doc_rev_id" {$RELATED_DOCUMENT_REVISION_DISABLED}>{$RELATED_DOCUMENT_REVISION_OPTIONS}</select>',
           ),
-          1 => '',
+        ),
+        8 => 
+        array (
+          0 => 
+          array (
+            'name' => 'minut_minutas_documents_1_name',
+          ),
         ),
       ),
       'LBL_PANEL_ASSIGNMENT' => 
