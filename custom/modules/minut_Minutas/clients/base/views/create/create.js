@@ -8,7 +8,7 @@
     
     view_document: function()
     {
-		var pdf = window.location.origin+window.location.pathname+"/custom/pdf/ladas.pdf";
+		var pdf = window.location.origin+window.location.pathname+"/custom/pdf/Ladas.pdf";
     	window.open(pdf,'_blank');
     	var cDate = new Date();
         this.model.set('tct_proceso_unifin_time_c',cDate);
