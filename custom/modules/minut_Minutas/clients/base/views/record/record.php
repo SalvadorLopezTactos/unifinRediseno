@@ -112,14 +112,6 @@ array (
                 'label' => 'LBL_DELETE_BUTTON_LABEL',
                 'acl_action' => 'delete',
               ),
-              10 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:view_document:click',
-                'name' => 'view_document',
-                'label' => 'Ver proceso UNIFIN',
-                'acl_action' => 'view',
-              ),
             ),
           ),
           3 => 
