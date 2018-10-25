@@ -13,10 +13,12 @@ class Rel_Relaciones_Hooks{
         $query = <<<SQL
 select id from rel_relaciones_accounts_1_c where deleted = 0 and rel_relaciones_accounts_1rel_relaciones_idb <> '{$bean->id}' 
 and rel_relaciones_accounts_1accounts_ida = '{$bean->rel_relaciones_accounts_1accounts_ida}'
-and rel_relaciones_accounts_1rel_relaciones_idb in (SELECT id_c FROM rel_relaciones_cstm WHERE account_id1_c = '{$bean->account_id1_c}');
+and rel_relaciones_accounts_1rel_relaciones_idb in 
+(SELECT b.id_c FROM rel_relaciones a, rel_relaciones_cstm b WHERE a.id = b.id_c AND a.deleted = 0 AND b.account_id1_c = '{$bean->account_id1_c}');
 SQL;
         $queryResult = $db->query($query);
         $row = $db->fetchByAssoc($queryResult);
+        $GLOBALS['log']->fatal("LALO: ".$query);
 		    if($row)
         {
        	  $beanPersona = BeanFactory::getBean('Accounts', $bean->account_id1_c);
