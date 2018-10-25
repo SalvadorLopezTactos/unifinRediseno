@@ -23,7 +23,7 @@
         //this.model.addValidationTask('ValidaCuentaNoVacia',_.bind(this.ValidaCuentaNoVacia, this));
         //Al dar click mandara a la vista de creacion correspondiente a la minuta 
         this.context.on('button:new_minuta_b:click', this.CreaMinuta,this);
-        this.model.on('sync', this.ValidaCuentNoVacia,this);
+        this.model.on('sync', this.ValidaCuentNoVacia,this); //Validacion para creación de la minuta
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
         */
@@ -309,21 +309,37 @@
       callback(null, fields, errors);
     },
 
-    /*El boton de creación de la minuta solo será visible cuando la reunión tenga unca cuenta
-    * */
+    /*El boton de creación de la minuta solo será visible cuando la reunión tenga una cuenta
+    *La fecha de termino sea igual a la fecha actual y el usuario asignado sea el usuario loggeado
+     */
     ValidaCuentNoVacia: function () {
-        var myField = this.getField("new_minuta");
+        //Obtención de la fecha actual
+        var dateActual = new Date();
+        var d1 = dateActual.getDate();
+        var m1 = dateActual.getMonth() + 1;
+        var y1 = dateActual.getFullYear();
+        var dateActualFormat = [m1, d1, y1].join('/');
+        var fechaActual = Date.parse(dateActualFormat);
 
-        if (this.model.get('parent_name')==''){
+        // Fecha termino en campo 
+        var dateend = new Date(this.model.get("date_end"));
+        var d = dateend.getDate();
+        var m = dateend.getMonth() + 1;
+        var y = dateend.getFullYear();
+        var fechaCompleta = [m, d, y].join('/');
+        var fechaendnew = Date.parse(fechaCompleta);
+
+        var myField = this.getField("new_minuta");
+        if (this.model.get('parent_name')!='' && app.user.attributes.id==this.model.get('assigned_user_id') && fechaActual==fechaendnew){
             myField.listenTo(myField, "render", function () {
-                myField.hide();
+                myField.show();
                 console.log("field being rendered as: " + myField.tplName);
             });
         }
 
-        else {
+        else { 
             myField.listenTo(myField, "render", function () {
-                myField.show();
+                myField.hide();
                 console.log("field being rendered as: " + myField.tplName);
             });
         }

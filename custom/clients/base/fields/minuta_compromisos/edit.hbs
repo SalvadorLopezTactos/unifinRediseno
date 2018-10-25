@@ -1,0 +1,47 @@
+<!--
+/*
+ *  AF - 2018-10-23
+ *  CustomField - Grid
+ */
+-->
+  <b>Compromisos existentes</b><br>
+  <div>
+      {{#each myData.records}}
+      {{#if_eq deleted 0}}
+        <div class="control-group compromisos" style="display: flex;flex-direction: row;align-items: flex-start">
+          <input type="text" class="existingcompromiso" value={{compromiso}} style="width: 95%;margin: 4px;display: inline-block;">
+          <select class="existingresponsable" data-field="responsable"  style="font-size: 15px;font-weight: 500;width: 90%;margin: 4px;">
+              <option value={{id}} selected="true">{{responsable}}</option>
+                {{#each ../myData.records}}
+                  <option value={{id}}>{{responsable}}</option>
+                {{/each}}
+          </select>
+          <input type="date" class="existingdate" value={{fecha}} data-field="date_compromiso" style="width: 95%;margin: 4px;display: inline-block;">
+          <div class="btn-toolbar prevent-mousedown">
+              <div class="btn-group prevent-mousedown">
+                  <a href="javascript:void(0)" class="btn removecompromiso" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="fa fa-minus"></i></a>
+              </div>
+          </div>
+        </div>  
+      {{/if_eq}}    
+      {{/each}}
+  </div>      
+  <br>
+  <b>Nuevo Compromiso</b>
+  <div class="control-group compromiso" style="display: flex;flex-direction: row;align-items: flex-start">
+      <input type="text" class="newcompromiso input-append" placeholder="Agregar compromiso" style="width: 95%;margin: 4px;display: inline-block;">
+      <select class="newresponsable" data-field="responsable" placeholder="Responsable" style="font-size: 15px;font-weight: 500;width: 90%;margin: 4px;">
+        <option>-Selecciona un Responsable-</option>
+        {{#each myData.records}}
+          <option value={{id}}>{{responsable}}</option>
+        {{/each}}
+      </select>
+      <input type="date" class="newdate" placeholder="Fecha Compromiso" data-field="date_compromiso" style="width: 95%;margin: 4px;display: inline-block;">
+      <div class="btn-toolbar prevent-mousedown">
+         <div class="btn-group">
+            <a href="javascript:void(0)" class="btn addcompromiso" rel="tooltip" title="{{str "LBL_EMAIL_ADD"}}"><i class="fa fa-check"></i></a>
+         </div>
+      </div>
+  </div>
+  {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
+
