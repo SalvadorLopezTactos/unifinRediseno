@@ -112,6 +112,14 @@ array (
                 'label' => 'LBL_DELETE_BUTTON_LABEL',
                 'acl_action' => 'delete',
               ),
+              10 => 
+              array (
+                'type' => 'rowaction',
+                'event' => 'button:view_document:click',
+                'name' => 'view_document',
+                'label' => 'Ver proceso UNIFIN',
+                'acl_action' => 'view',
+              ),
             ),
           ),
           3 => 
@@ -177,13 +185,18 @@ array (
               ),
               1 => 
               array (
+                'name' => 'minut_minutas_meetings_name',
+                'studio' => 'visible',
+                'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MEETINGS_TITLE',
               ),
               2 => 
               array (
                 'name' => 'minuta_participantes',
                 'studio' => 'visible',
                 'label' => 'minuta_participantes',
-                'span' => 12,
+              ),
+              3 => 
+              array (
               ),
             ),
           ),
@@ -273,6 +286,19 @@ array (
               array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_ASSIGNED_TO',
+              ),
+              7 => 
+              array (
+                'name' => 'minut_minutas_meetings_1_name',
+                'studio' => 'visible',
+                'label' => 'LBL_MINUT_MINUTAS_MEETINGS_1_FROM_MINUT_MINUTAS_TITLE',
+                'readonly' => true,
+              ),
+              8 => 
+              array (
+              ),
+              9 => 
+              array (
               ),
             ),
           ),

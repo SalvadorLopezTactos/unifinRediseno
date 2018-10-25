@@ -1,5 +1,5 @@
 <?php
- // created: 2018-09-28 23:55:02
+ // created: 2018-10-25 19:24:22
 $dictionary['Meeting']['fields']['objetivo_c']['labelValue']='Objetivo';
 $dictionary['Meeting']['fields']['objetivo_c']['dependency']='';
 $dictionary['Meeting']['fields']['objetivo_c']['visibility_grid']=array (

@@ -25,3 +25,4 @@ $mod_strings['LBL_CHECK_OUT_LATITUDE_C'] = 'Latitude Check-Out';
 $mod_strings['LBL_CHECK_OUT_LONGITUDE_C'] = 'Longitud Check-Out';
 $mod_strings['LBL_CHECK_OUT_TIME_C'] = 'Tiempo Check-Out';
 $mod_strings['LBL_CHECK_IN_TIME_C'] = 'Tiempo Check-in';
+$mod_strings['LBL_CHECK_IN_LABEL'] = 'Check-in';
