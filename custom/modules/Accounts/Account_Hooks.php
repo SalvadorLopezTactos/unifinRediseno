@@ -440,7 +440,7 @@ SQL;
         if (($bean->idcliente_c == '' || $bean->idcliente_c == '0' ) && ($bean->estatus_c == 'Interesado' || $bean->tipo_registro_c == 'Cliente' || $bean->tipo_registro_c == 'Proveedor' || ($bean->tipo_registro_c == 'Persona' && $bean->tipo_relacion_c != "") || $bean->esproveedor_c || $bean->cedente_factor_c || $bean->deudor_factor_c || ($bean->tipo_registro_c=="Prospecto" && $bean->subtipo_cuenta_c=="Interesado"))) {
             global $db;
             $callApi = new UnifinAPI();
-            $numeroDeFolio = $callApi->generarFolios(1);
+            $numeroDeFolio = $callApi->generarFolios(1,$bean);
             $bean->idcliente_c = $numeroDeFolio;
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> :numeroDeFolio   " . ": $numeroDeFolio ");
 
@@ -871,10 +871,7 @@ where rfc_c = '{$bean->rfc_c}' and
         } else {
             $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " <" . $current_user->user_name . "> : No hay duplicados " . $queryResult);
         }
-
-
     }
-
 
     public function GeneraReferenciaBancaria($idCliente)
     {
@@ -889,5 +886,39 @@ where rfc_c = '{$bean->rfc_c}' and
         }
         $sum = 10 - $sum %10;
         return $idCliente . ($sum % 10);
+    }
+	
+    public function crearFolioRelacion($bean = null, $event = null, $args = null)
+    {
+   		global $db;
+		$idCuenta = $bean->id;
+		$query = "select id_c from rel_relaciones_cstm where account_id1_c = '$idCuenta'";
+        $result = $db->query($query);
+    	$row = $db->fetchByAssoc($result);
+		if($row)
+    	{
+			if ($bean->idcliente_c == '' || $bean->idcliente_c == '0') {
+				$callApi = new UnifinAPI();
+				$numeroDeFolio = $callApi->generarFolios(1,$bean);
+				$bean->idcliente_c = $numeroDeFolio;
+			}
+		}
+    }
+
+    public function relacion2UNICS($bean = null, $event = null, $args = null)
+    {
+   		global $db;
+		$idCuenta = $bean->id;
+		$query = "select id_c from rel_relaciones_cstm where account_id1_c = '$idCuenta'";
+        $result = $db->query($query);
+    	$row = $db->fetchByAssoc($result);
+		if($row)
+    	{
+			if($bean->sincronizado_unics_c == 0)
+			{
+				$callApi = new UnifinAPI();
+				$cliente = $callApi->insertarClienteCompleto($bean);
+			}
+		}
     }
 }

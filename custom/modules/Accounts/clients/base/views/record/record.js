@@ -145,6 +145,7 @@
         this.model.on('sync', this.fulminantcolor, this); //*@Jesus Carrillo; Funcion que pinta de color los paneles relacionados
         this.model.on('sync', this.valida_centro_prospec, this);
         this.model.on('sync', this.valida_backoffice, this);
+        //this.model.on('sync', this.checkTelNorepeat, this);
 
         //Funcion para eliminar duplicados de arrays
         Array.prototype.unique=function(a){
@@ -904,6 +905,16 @@
                 });
             }
         }
+
+        if(this.model.get('tipo_registro_c')=="Proveedor"){
+             myField2.listenTo(myField2, "render", function () {
+                myField2.show();
+            });
+             myField1.listenTo(myField1, "render", function () {
+                myField1.hide();
+            });
+        }
+
     },
 
 
@@ -1275,8 +1286,10 @@
     regresa_leadClicked: function () {
         //alert("boton precionado");
         this.model.set("tipo_registro_c", "Lead");
-        this.model.set("subtipo_cuenta_c", "");
+        this.model.set("subtipo_cuenta_c", "En Calificacion");
+        this.model.set("tct_tipo_subtipo_txf_c","Lead En Calificacion");
         this.model.set("tct_prospecto_contactado_chk_c", false);
+		this.model.set("show_panel_c",0);
         this.model.save();
         this._render();
 
@@ -1457,6 +1470,7 @@
             this.model.set('tipo_registro_c','Prospecto');
             this.model.set('subtipo_registro_c','Contactado');
             this.model.set('tct_prospecto_contactado_chk_c',true);
+			this.model.set("show_panel_c",1);
             this.model.save();
             this._render();
             app.alert.show('alert_change_success', {
@@ -1752,6 +1766,7 @@
 
                     this.model.set("tipo_registro_c", "Lead");
                     this.model.set("subtipo_cuenta_list", "En Calificacion");
+					this.model.set("show_panel_c",0);
                     this.model.save();
                     console.log ('Guarda a Lead');
                     app.alert.show('success', {
@@ -2398,8 +2413,27 @@
             if(!expreg.test($(this).val())){
                 cont++;
                 $(this).css('border-color', 'red');
+
             }else{
-                $(this).css('border-color', '');
+                //funcion
+                var cont=0;
+                for (var i =0; i < $(this).val().length; i++) {
+                    if($(this).val().charAt(0)==$(this).val().charAt(i)){
+                        cont++;
+                    }
+                }
+                if(cont==$(this).val().length){
+                        app.alert.show('numero_repetido1', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Tel\u00E9fono Invalido caracter repetido'
+                        });
+                    errors['rep'] = errors['Tel\u00E9fono Invalido,un mismo n\u00FA ha sido repetido varias veces'] || {};
+                    errors['rep'].required = true;
+                    $(this).css('border-color', 'red');
+                } else {
+                    $(this).css('border-color', '');
+                }
             }
         });
         $('div[data-name=account_telefonos]').find('.existingPais').each(function () {
@@ -2410,6 +2444,7 @@
                 $(this).css('border-color', '');
             }
         });
+
         $('.existingTipotelefono').each(function () {
             if($(this).val()==''){
                 cont++;
@@ -2466,7 +2501,8 @@
         }
         callback(null, fields, errors);
     },
-
+    
+    
     valida_backoffice: function() {
         self=this;
         var roles_limit = app.lang.getAppListStrings('roles_limit_list');

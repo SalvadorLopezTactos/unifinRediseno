@@ -2073,6 +2073,7 @@ cancelarBacklog: function(e){
             var currentYear = (new Date).getFullYear();
             //var currentMonth = (new Date).getMonth() + 1;
             var currentMonth = (new Date).getMonth();
+            var currentMonthTemp = (new Date).getMonth();
             var currentDay = (new Date).getDate();
 
             var anio_popup = $('.anio_popup').val();
@@ -2083,6 +2084,9 @@ cancelarBacklog: function(e){
             var mes__masivo_popup = $('.mes_masivo_popup').val();
             var motivo_de_cancelacion_masivo_popup = $('#motivo_de_cancelacion_masivo_popup').val();
 
+            if (this.cancelar_masivo_switch == "block") {
+                anio_popup=anio_masivo_popup;
+            }
             if(typeof anio_popup === "undefined"){
                 anio_popup = currentYear;
             }
@@ -2125,6 +2129,7 @@ cancelarBacklog: function(e){
                 nextYear = currentYear + 1;
             }
 
+            currentMonth = currentMonthTemp +1;
 
             var opciones_year = app.lang.getAppListStrings('anio_list');
             Object.keys(opciones_year).forEach(function(key){
@@ -2170,26 +2175,28 @@ cancelarBacklog: function(e){
                 });
                 }            
 
-                if(anio_masivo_popup > currentYear){
-                    Object.keys(opciones_mes).forEach(function(key){
-                        if(key != ''){
-                            if(key > nextMonth){
-                                delete opciones_mes[key];
+                if (this.cancelar_masivo_switch == "block") {
+                    if(anio_masivo_popup > currentYear){
+                        Object.keys(opciones_mes).forEach(function(key){
+                            if(key != ''){
+                                if(key > nextMonth){
+                                    delete opciones_mes[key];
+                                }
                             }
-                        }
-                    });
-                }
-            //Quita meses para año actual
-            if(anio_masivo_popup == currentYear || anio_popup ==""){
-                Object.keys(opciones_mes).forEach(function(key){
-                    if(key != ''){
-                        //Quita meses fuera de rango(3 meses)
-                        if(key < currentMonth || key >limitMonth ){
-                            delete opciones_mes[key];
-                        }
+                        });
                     }
-                });
-            }
+                    //Quita meses para año actual
+                    if(anio_masivo_popup == currentYear || anio_popup ==""){
+                        Object.keys(opciones_mes).forEach(function(key){
+                            if(key != ''){
+                                //Quita meses fuera de rango(3 meses)
+                                if(key < currentMonth || key >limitMonth ){
+                                    delete opciones_mes[key];
+                                }
+                            }
+                        });
+                    }
+                }
             
 
 
@@ -2232,12 +2239,17 @@ cancelarBacklog: function(e){
 
         var currentYear = (new Date).getFullYear();
         var currentMonth = (new Date).getMonth();
+        var currentMonthTemp = (new Date).getMonth();
         var currentDay = (new Date).getDate();
 
         var anio_popup = $('.anio_switch_popup').val();
         var anio_masivo_popup = $('.anio_masivo_switch_popup').val();
         var tempmes_switch_popup = $(".mes_switch_popup").val();
         var tempmes_masivo_switch_popup = $(".mes_switch_masivo_popup").val();
+
+        if (this.mes_masivo_switch == "block") {
+            anio_popup = anio_masivo_popup;
+        }
 
         if(typeof anio_popup === "undefined"){
             anio_popup = currentYear;
@@ -2273,6 +2285,7 @@ cancelarBacklog: function(e){
             nextYear = currentYear + 1;
         }
 
+        currentMonth =currentMonthTemp +1; 
 
         var opciones_year = app.lang.getAppListStrings('anio_list');
         Object.keys(opciones_year).forEach(function(key){
@@ -2336,22 +2349,23 @@ cancelarBacklog: function(e){
         }
         */
 
-        if(anio_masivo_popup){
-            if(anio_masivo_popup <= currentYear){
-                Object.keys(opciones_mes).forEach(function(key){
-                    if (self.mesNaturalCerrado == 1 && self.rolAutorizacion != "DGA"){
-                        if(key < (currentMonth+1)){ // CVV PARA CERRAR PERIODO NATURAL
-                            delete opciones_mes[key];
+        if (this.mes_masivo_switch == "block") {
+            if(anio_masivo_popup){
+                if(anio_masivo_popup <= currentYear){
+                    Object.keys(opciones_mes).forEach(function(key){
+                        if (self.mesNaturalCerrado == 1 && self.rolAutorizacion != "DGA"){
+                            if(key < (currentMonth+1)){ // CVV PARA CERRAR PERIODO NATURAL
+                                delete opciones_mes[key];
+                            }
+                        }else{
+                            if(key < currentMonth){
+                                delete opciones_mes[key];
+                            }
                         }
-                    }else{
-                        if(key < currentMonth){
-                            delete opciones_mes[key];
-                        }
-                    }
-                });
+                    });
+                }
             }
         }
-        
 
         /*
         if(anio_masivo_popup <= currentYear){

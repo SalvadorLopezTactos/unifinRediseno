@@ -1267,7 +1267,7 @@
         var ciudad_html = '<option value="xkcd"> Seleccionar Ciudad</option>';
         for (city_id in city_list) {
             if (city_list[city_id].estado_id == direccion.dire_direccion_dire_estadodire_estado_ida) {
-                if (city_id == direccion.ciudad) {
+                if (city_list[city_id].id==direccion.ciudad) {
                     ciudad_html += '<option value="' + city_id + '" selected="true">' + city_list[city_id].name + '</option>';
                 }
                 else {

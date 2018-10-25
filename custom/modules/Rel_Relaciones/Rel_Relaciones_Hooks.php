@@ -9,24 +9,39 @@ require_once("custom/Levementum/UnifinAPI.php");
 class Rel_Relaciones_Hooks{
 
     public function SetName($bean=null,$event=null,$args=null){
-
-         global $db;
-         $query = <<<SQL
+        global $db;
+        $query = <<<SQL
+select id from rel_relaciones_accounts_1_c where deleted = 0 and rel_relaciones_accounts_1rel_relaciones_idb <> '{$bean->id}' 
+and rel_relaciones_accounts_1accounts_ida = '{$bean->rel_relaciones_accounts_1accounts_ida}'
+and rel_relaciones_accounts_1rel_relaciones_idb in 
+(SELECT b.id_c FROM rel_relaciones a, rel_relaciones_cstm b WHERE a.id = b.id_c AND a.deleted = 0 AND b.account_id1_c = '{$bean->account_id1_c}');
+SQL;
+        $queryResult = $db->query($query);
+        $row = $db->fetchByAssoc($queryResult);
+        $GLOBALS['log']->fatal("LALO: ".$query);
+		    if($row)
+        {
+       	  $beanPersona = BeanFactory::getBean('Accounts', $bean->account_id1_c);
+    			$persona = $beanPersona->name;
+          $beanRelacion = BeanFactory::getBean('Accounts', $bean->rel_relaciones_accounts_1accounts_ida);
+    			$relacion = $beanRelacion->name;
+    			require_once 'include/api/SugarApiException.php';
+    			throw new SugarApiExceptionInvalidParameter("La relación ".$persona." ya existe para la cuenta ".$relacion." Favor de verificarlo. Si deseas agregar una nueva Relación Activa para ".$persona.", favor de acceder a la Relación, editar y agregarlo.");
+    	  }
+    		else
+    		{
+      		$query = <<<SQL
 SELECT name FROM accounts WHERE id = '{$bean->account_id1_c}'
 SQL;
-         $queryResult = $db->query($query);
-
-        // $relacionesActivas = $bean->relaciones_activas;
-        // $relacionesActivas = str_replace('^','',$relacionesActivas);
-         while($row = $db->fetchByAssoc($queryResult))
-         {
-             // $bean->name = $relacionesActivas . " - " . $row['name'];
-             $bean->name = $row['name'];
-         }
+    			$queryResult = $db->query($query);
+   			  while($row = $db->fetchByAssoc($queryResult))
+    			{
+    				 $bean->name = $row['name'];
+   			  }
+    		}
     }
 
     public function insertarRelacionenUNICS($bean=null,$event=null,$args=null){
-
 		//only for new records
 		/*** CVV INICIO ***/
 		//Debe validarse si el cliente ya  tiene id_UNICS
@@ -34,7 +49,6 @@ SQL;
         $GLOBALS['log']->fatal(" <".$current_user->user_name."> Entra a insertarRelacionenUNICS");
         $callApiAccounts = new UnifinAPI();
 		try {
-
 		    /*
 		     * F. Javier G. Solar
 		     * 20/08/2018
@@ -42,22 +56,16 @@ SQL;
 		     * envia la petición
 		    **/
             $CuentaC =  BeanFactory::getBean('Accounts',$bean->account_id1_c);
-
-            if ($CuentaC->tipo_registro_c=='Lead' && $CuentaC->sincronizado_unics_c==0){
+            if(($CuentaC->tipo_registro_c=='Lead' || $CuentaC->tipo_registro_c=='Prospecto') && $CuentaC->sincronizado_unics_c==0){
                 $GLOBALS['log']->fatal(" el id de la cuenta es ingredsado por JA  " . $bean->account_id1_c);
-
-                $CuentaC->idcliente_c =$callApiAccounts->generarFolios(1);
-
+                $CuentaC->idcliente_c =$callApiAccounts->generarFolios(1,$CuentaC);
                 $GLOBALS['log']->fatal(" Folio de unix " . $CuentaC->idcliente_c);
                 $actualizaIdClienteLead= <<<SQL
 update accounts_cstm set idcliente_c = '{$CuentaC->idcliente_c}' where id_c = '{$CuentaC->id}';
 SQL;
                 $db->query($actualizaIdClienteLead);
-                
                 $lead = $callApiAccounts->insertarClienteCompleto($CuentaC);
-           }
-
-
+			}
 
         $query = <<<SQL
 SELECT acc.idcliente_c idCliente, acc.sincronizado_unics_c ClienteSincronizado,
@@ -69,25 +77,19 @@ inner join accounts_cstm contact on contact.id_c = Relcontact.account_id1_c
 where rel.rel_relaciones_accountsrel_relaciones_idb = '{$bean->id}'
 SQL;
             $GLOBALS['log']->fatal(" <".$current_user->user_name."> query" . $query);
-        $queryResult = $db->query($query);
-		while ($row = $db->fetchByAssoc($queryResult)) {
+			$queryResult = $db->query($query);
+			while ($row = $db->fetchByAssoc($queryResult)) {
 			$GLOBALS['log']->fatal(" <".$current_user->user_name."> : El valor de idCliente_c al agregar relacion: " . $row['idCliente'] . " El cliente se encuentra sincronizado con UNICS:". $row['ClienteSincronizado']);
 			$callApi = new UnifinAPI();
 
-
-
-
 			//Las relaciones solo se enviaran si el cliente ya se encuentra en UNICS
 			if ($row['ClienteSincronizado'] == 1){
-
 				//Si la persona no esta enviada a UNICS, debe sincronizarse antes de guardar la relación
                 if ($row['RelacionadoSincronizado'] == 0){
                 	$GLOBALS['log']->fatal(" <".$current_user->user_name."> : La persona relacionada NO se encuentra sincronizada con UNICS");
                 	$contacto =  BeanFactory::getBean('Accounts', $row['GuidRelacionado']);
                 	$GLOBALS['log']->fatal(" <".$current_user->user_name."> : Contenido de relacion en persona: " . print_r($contacto->tipo_relacion_c ,true));
                 	$contacto->save();
-
-
 				}
 
 				///Envia la relación
@@ -109,9 +111,7 @@ update rel_relaciones_cstm set sincronizado_unics_c = '1' where id_c = '{$bean->
 SQL;
                     $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ .  " <".$current_user->user_name."> : CONSULTA " . $fieldUnicsSincronize);
 					$db->query($fieldUnicsSincronize);
-
 				}
-
             }
 		}
 

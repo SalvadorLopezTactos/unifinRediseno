@@ -5,6 +5,7 @@
 
     events: {
         'click .record-edit-link-wrapper': 'handleEdit',
+
     },
 
     initialize: function (options) {
@@ -19,7 +20,10 @@
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
         this.model.on("change:status",_.bind(this.muestracampoResultado, this));
         //this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
-
+        //this.model.addValidationTask('ValidaCuentaNoVacia',_.bind(this.ValidaCuentaNoVacia, this));
+        //Al dar click mandara a la vista de creacion correspondiente a la minuta 
+        this.context.on('button:new_minuta_b:click', this.CreaMinuta,this);
+        this.model.on('sync', this.ValidaCuentNoVacia,this); //Validacion para creación de la minuta
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
         */
@@ -31,12 +35,13 @@
         this.model.on('sync',this.enableparentname,this);
     },
 
-    _render: function () {
+    _render: function (options) {
         this._super("_render");
         if (this.model.get('status') == 'Planned') {
             this.$('div[data-name=resultado_c]').hide();
 
         }
+        //this.ValidaCuentNoVacia();
         //this.$('[data-name="parent_name"]').attr('style', '');
     },
 
@@ -80,7 +85,24 @@
 
 
     },
-    
+    CreaMinuta:function(){
+        var model=App.data.createBean('minut_Minutas');
+        model.set('account_id_c', this.model.get('parent_id'));
+        model.set('tct_relacionado_con_c', this.model.get('parent_name'));
+        app.drawer.open({
+            layout:'create',
+            context:{
+            create: true,
+            module:'minut_Minutas',
+            model:model
+       }
+    });
+  },
+
+  _dispose: function() {
+     this._super('_dispose');
+   },
+
     /*editClicked: function() {
 
         this._super("editClicked");
@@ -285,5 +307,41 @@
         }
       }
       callback(null, fields, errors);
+    },
+
+    /*El boton de creación de la minuta solo será visible cuando la reunión tenga una cuenta
+    *La fecha de termino sea igual a la fecha actual y el usuario asignado sea el usuario loggeado
+     */
+    ValidaCuentNoVacia: function () {
+        //Obtención de la fecha actual
+        var dateActual = new Date();
+        var d1 = dateActual.getDate();
+        var m1 = dateActual.getMonth() + 1;
+        var y1 = dateActual.getFullYear();
+        var dateActualFormat = [m1, d1, y1].join('/');
+        var fechaActual = Date.parse(dateActualFormat);
+
+        // Fecha termino en campo 
+        var dateend = new Date(this.model.get("date_end"));
+        var d = dateend.getDate();
+        var m = dateend.getMonth() + 1;
+        var y = dateend.getFullYear();
+        var fechaCompleta = [m, d, y].join('/');
+        var fechaendnew = Date.parse(fechaCompleta);
+
+        var myField = this.getField("new_minuta");
+        if (this.model.get('parent_name')!='' && app.user.attributes.id==this.model.get('assigned_user_id') && fechaActual==fechaendnew){
+            myField.listenTo(myField, "render", function () {
+                myField.show();
+                console.log("field being rendered as: " + myField.tplName);
+            });
+        }
+
+        else { 
+            myField.listenTo(myField, "render", function () {
+                myField.hide();
+                console.log("field being rendered as: " + myField.tplName);
+            });
+        }
     },
 })
