@@ -254,34 +254,33 @@ array (
             array (
               0 => 
               array (
-                'name' => 'objetivo_c',
-                'label' => 'LBL_OBJETIVO_C',
-                'readonly' => true,
+                'name' => 'custom_grid',
+                'studio' => 'visible',
+                'label' => 'custom_grid',
+                'span' => 12,
               ),
               1 => 
-              array (
-                'name' => 'resultado_c',
-                'label' => 'LBL_RESULTADO_C',
-              ),
-              2 => 
               array (
                 'name' => 'tct_cliente_no_interesado_chk',
                 'label' => 'LBL_TCT_CLIENTE_NO_INTERESADO_CHK',
               ),
-              3 => 
+              2 => 
               array (
                 'name' => 'tct_motivo_c',
                 'label' => 'LBL_TCT_MOTIVO_C',
               ),
-              4 => 
+              3 => 
               array (
                 'name' => 'tct_programa_nueva_reunion_chk',
                 'label' => 'LBL_TCT_PROGRAMA_NUEVA_REUNION_CHK',
               ),
-              5 => 
+              4 => 
               array (
                 'name' => 'fecha_y_hora_c',
                 'label' => 'LBL_FECHA_Y_HORA_C',
+              ),
+              5 => 
+              array (
               ),
               6 => 
               array (

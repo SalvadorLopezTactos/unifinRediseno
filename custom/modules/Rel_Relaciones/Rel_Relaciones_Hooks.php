@@ -13,29 +13,32 @@ class Rel_Relaciones_Hooks{
         $query = <<<SQL
 select id from rel_relaciones_accounts_1_c where deleted = 0 and rel_relaciones_accounts_1rel_relaciones_idb <> '{$bean->id}' 
 and rel_relaciones_accounts_1accounts_ida = '{$bean->rel_relaciones_accounts_1accounts_ida}'
-and rel_relaciones_accounts_1rel_relaciones_idb in (SELECT id_c FROM rel_relaciones_cstm WHERE account_id1_c = '{$bean->account_id1_c}');
+and rel_relaciones_accounts_1rel_relaciones_idb in 
+(SELECT b.id_c FROM rel_relaciones a, rel_relaciones_cstm b WHERE a.id = b.id_c AND a.deleted = 0 AND b.account_id1_c = '{$bean->account_id1_c}');
 SQL;
         $queryResult = $db->query($query);
         $row = $db->fetchByAssoc($queryResult);
-		if($row)
-        {			
-			require_once 'include/api/SugarApiException.php';
-			throw new SugarApiExceptionInvalidParameter("La relación ".$bean->name." ya existe para la cuenta ".$bean->rel_relaciones_accounts_1_name." Favor de verificarlo. Si deseas agregar una nueva Relación Activa para ".$bean->name.", favor de acceder a la Relación, editar y agregarlo.");
-		}
-		else
-		{
-			$query = <<<SQL
+        $GLOBALS['log']->fatal("LALO: ".$query);
+		    if($row)
+        {
+       	  $beanPersona = BeanFactory::getBean('Accounts', $bean->account_id1_c);
+    			$persona = $beanPersona->name;
+          $beanRelacion = BeanFactory::getBean('Accounts', $bean->rel_relaciones_accounts_1accounts_ida);
+    			$relacion = $beanRelacion->name;
+    			require_once 'include/api/SugarApiException.php';
+    			throw new SugarApiExceptionInvalidParameter("La relación ".$persona." ya existe para la cuenta ".$relacion." Favor de verificarlo. Si deseas agregar una nueva Relación Activa para ".$persona.", favor de acceder a la Relación, editar y agregarlo.");
+    	  }
+    		else
+    		{
+      		$query = <<<SQL
 SELECT name FROM accounts WHERE id = '{$bean->account_id1_c}'
 SQL;
-			 $queryResult = $db->query($query);
-			 // $relacionesActivas = $bean->relaciones_activas;
-			 // $relacionesActivas = str_replace('^','',$relacionesActivas);
-			 while($row = $db->fetchByAssoc($queryResult))
-			 {
-				 // $bean->name = $relacionesActivas . " - " . $row['name'];
-				 $bean->name = $row['name'];
-			 }
-		}
+    			$queryResult = $db->query($query);
+   			  while($row = $db->fetchByAssoc($queryResult))
+    			{
+    				 $bean->name = $row['name'];
+   			  }
+    		}
     }
 
     public function insertarRelacionenUNICS($bean=null,$event=null,$args=null){
