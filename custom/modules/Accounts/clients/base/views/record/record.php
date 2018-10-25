@@ -32,7 +32,7 @@ array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
             'primary' => true,
-              'css_class' => 'noEdit',
+            'css_class' => 'noEdit',
             'showOn' => 'view',
             'buttons' => 
             array (
@@ -448,127 +448,135 @@ array (
               ),
               12 => 
               array (
+                'name' => 'nacionalidad_c',
+                'label' => 'LBL_NACIONALIDAD',
+              ),
+              13 => 
+              array (
+              ),
+              14 => 
+              array (
                 'name' => 'pais_nacimiento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PAIS_NACIMIENTO',
               ),
-              13 => 
+              15 => 
               array (
                 'name' => 'estado_nacimiento_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ESTADO_NACIMIENTO',
               ),
-              14 => 
+              16 => 
               array (
                 'name' => 'zonageografica_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ZONAGEOGRAFICA',
               ),
-              15 => 
+              17 => 
               array (
                 'name' => 'ifepasaporte_c',
                 'label' => 'LBL_IFEPASAPORTE',
               ),
-              16 => 
+              18 => 
               array (
                 'name' => 'curp_c',
                 'label' => 'LBL_CURP',
               ),
-              17 => 
+              19 => 
               array (
                 'type' => 'button',
                 'name' => 'generar_curp_c',
                 'label' => 'LBL_GENERAR_CURP',
               ),
-              18 => 
+              20 => 
               array (
                 'name' => 'estadocivil_c',
                 'studio' => 'visible',
                 'label' => 'LBL_ESTADOCIVIL',
               ),
-              19 => 
+              21 => 
               array (
                 'name' => 'regimenpatrimonial_c',
                 'studio' => 'visible',
                 'label' => 'LBL_REGIMENPATRIMONIAL',
               ),
-              20 => 
+              22 => 
               array (
                 'name' => 'profesion_c',
                 'studio' => 'visible',
                 'label' => 'LBL_PROFESION',
               ),
-              21 => 
+              23 => 
               array (
                 'name' => 'puesto_c',
                 'label' => 'LBL_PUESTO',
               ),
-              22 => 
+              24 => 
               array (
                 'name' => 'email',
               ),
-              23 => 'website',
-              24 => 
+              25 => 'website',
+              26 => 
               array (
                 'name' => 'facebook',
                 'comment' => 'The facebook name of the company',
                 'label' => 'LBL_FACEBOOK',
               ),
-              25 => 
+              27 => 
               array (
                 'name' => 'linkedin_c',
                 'label' => 'LBL_LINKEDIN',
               ),
-              26 => 'twitter',
-              27 => 
+              28 => 'twitter',
+              29 => 
               array (
                 'name' => 'referenciabancaria_c',
                 'label' => 'LBL_REFERENCIABANCARIA',
               ),
-              28 => 
+              30 => 
               array (
                 'name' => 'tipo_relacion_c',
                 'label' => 'LBL_TIPO_RELACION',
               ),
-              29 => 
+              31 => 
               array (
               ),
-              30 => 
+              32 => 
               array (
                 'name' => 'tipo_proveedor_c',
                 'label' => 'LBL_TIPO_PROVEEDOR',
               ),
-              31 => 
+              33 => 
               array (
                 'name' => 'alta_proveedor_c',
                 'label' => 'LBL_ALTA_PROVEEDOR_C',
               ),
-              32 => 
+              34 => 
               array (
                 'name' => 'iva_c',
                 'label' => 'LBL_IVA',
               ),
-              33 => 
+              35 => 
               array (
                 'name' => 'es_referenciador_c',
                 'label' => 'LBL_ES_REFERENCIADOR_C',
               ),
-              34 => 
+              36 => 
               array (
                 'name' => 'reus_c',
                 'label' => 'LBL_REUS',
               ),
-              35 => 
+              37 => 
               array (
                 'name' => 'referencia_bancaria_c',
                 'label' => 'LBL_REFERENCIA_BANCARIA_C',
               ),
-              36 => 
+              38 => 
               array (
                 'name' => 'tct_prospecto_contactado_chk_c',
                 'label' => 'LBL_TCT_PROSPECTO_CONTACTADO_CHK',
               ),
-              37 => 
+              39 => 
               array (
                 'name' => 'show_panel_c',
                 'label' => 'LBL_SHOW_PANEL',
