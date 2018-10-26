@@ -5,6 +5,7 @@
  */
 -->
   <b>Compromisos existentes</b><br>
+<!--Compromisos que se cargan -->
   <div>
       {{#each myData2.records}}
         <div class="control-group compromisos" style="display: flex;flex-direction: row;align-items: flex-start" >
@@ -27,16 +28,17 @@
         </div>  
       {{/each}}
   </div>
+<!--Compromisos que se van agregando -->
   <div>
       {{#each myData.records}}
           <div class="control-group compromisos2" style="display: flex;flex-direction: row;align-items: flex-start">
               <input type="text" class="existingcompromiso" value="{{compromiso}}" style="width: 95%;margin: 4px;display: inline-block;">
               <select class="existingresponsable" data-field="responsable"  style="font-size: 15px;font-weight: 500;width: 90%;margin: 4px;">
                   {{#each ../arr_responsables.responsables}}
-                      {{#if_eq id_resp2 ../id_resp}}
-                          <option value="{{id_resp2}}" selected="true">{{responsable2}}</option>
+                      {{#if_eq id ../id_resp}}
+                          <option value="{{id}}" selected="true">{{nombres}} {{aparterno}} {{amaterno}}</option>
                       {{else}}
-                          <option value="{{id_resp2}}">{{responsable2}}</option>
+                          <option value="{{id}}">{{nombres}} {{aparterno}} {{amaterno}}</option>
                       {{/if_eq}}
                   {{/each}}
               </select>
@@ -50,13 +52,14 @@
       {{/each}}
   </div>      
   <br>
+<!--Nuevo compromiso -->
   <b>Nuevo Compromiso</b>
   <div class="control-group compromiso2" style="display: flex;flex-direction: row;align-items: flex-start">
       <input type="text" class="newcompromiso input-append" placeholder="Agregar compromiso" style="width: 95%;margin: 4px;display: inline-block;">
       <select class="newresponsable" data-field="responsable" placeholder="Responsable" style="font-size: 15px;font-weight: 500;width: 90%;margin: 4px;">
         <option>-Selecciona un Responsable-</option>
         {{#each arr_responsables.responsables}}
-          <option value="{{id_resp2}}">{{responsable2}}</option>
+          <option value="{{id}}">{{nombres}} {{aparterno}} {{amaterno}}</option>
         {{/each}}
       </select>
       <input type="date" class="newdate" placeholder="Fecha Compromiso" data-field="date_compromiso" style="width: 95%;margin: 4px;display: inline-block;">

@@ -20,8 +20,11 @@ class Minuta_Hooks
 		            $bean_compromiso = BeanFactory::newBean('minut_Compromisos');
 		            $bean_compromiso->name = $compromiso['compromiso'];
 		            $bean_compromiso->minut_minutas_minut_compromisosminut_minutas_ida=$bean->id;
+
 		            $bean_tarea = BeanFactory::newBean('Tasks');
                     $bean_tarea->name = $compromiso['compromiso'];
+                    $bean_tarea->parent_type='Accounts';
+                    $bean_tarea->parent_id=$compromiso['cuenta_madre'];
 
 		            $hour = date('H:i');
                     $now = date('d/m/Y h:i a');
@@ -37,13 +40,16 @@ class Minuta_Hooks
 
                         //$GLOBALS['log']->fatal('El compromiso es de una cuenta, su id es: '.$bean->assigned_user_id);//------------------------------------
 		                $bean_compromiso->assigned_user_id=$bean->assigned_user_id;
+                        $bean_compromiso->description=" Este compromiso ha sido asignado a la cuenta: ".$compromiso['responsable']."\n Con id de cuenta:".$compromiso['id_resp'];
 		                $bean_tarea->assigned_user_id=$bean->assigned_user_id;
+		                $bean_tarea->priority='High';
 
 		            }else{//si el id del responsable es un usuario
 
                         //$GLOBALS['log']->fatal('El compromiso es de un usuario, su id es: '.$compromiso['id_resp']);//------------------------------------
 		                $bean_compromiso->assigned_user_id=$compromiso['id_resp'];
 		                $bean_tarea->assigned_user_id=$compromiso['id_resp'];
+                        $bean_tarea->priority='Low';
 
 		            }
 
