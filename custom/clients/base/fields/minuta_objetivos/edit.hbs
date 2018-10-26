@@ -1,0 +1,38 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+
+<div class="control-group objetivos">
+    <table class="Objetivos" style="width: 100%;" cellspacing="1" cellpadding="5">
+
+        <tr>
+            <td> <div class="record-label" > Objetivo</div></td>
+            <td> <div class="record-label" > Objetivo Cumplido </div></td>
+        </tr>
+        <tr>
+        <td valign="top">
+            <div class="record-label">
+                <input type="text" class="newObjetivo" value="{{objetivo}}" data-field="objetivo1" style="width: 100%;margin: 0px;"/>
+            </div>
+        </td>
+
+        <td valign="top">
+                <div class="btn btn-link" style="background-color: transparent; border:transparent; font-size: 25px;">
+                    <i class="fa fa-check" style="font-size: 1em; border-color: transparent; background-color: transparent"></i>
+                    <a href="javascript:void(0)" class="btn addObjetivo" style="border:transparent; background-color:transparent"></a>
+                </div>
+        </td>
+        </tr>
+
+    </table>
+</div>
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

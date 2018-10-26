@@ -65,7 +65,7 @@ array (
                 'label' => 'LBL_EDIT_BUTTON_LABEL',
                 'acl_action' => 'edit',
               ),
-              1 => //Opción de crear la minuta
+              1 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:new_minuta_b:click',
@@ -73,100 +73,6 @@ array (
                 'label' => 'LBL_CREATE_NEW_MINUTA',
                 'acl_action' => 'edit',
               ),
-              /*
-              1 => 
-              array (
-                'type' => 'editrecurrencesbutton',
-                'event' => 'button:edit_recurrence_button:click',
-                'name' => 'edit_recurrence_button',
-                'label' => 'LBL_EDIT_ALL_RECURRENCES',
-                'acl_action' => 'edit',
-              ),
-
-              2 => 
-              array (
-                'type' => 'launchbutton',
-                'name' => 'host_button',
-                'host' => true,
-                'acl_action' => 'view',
-              ),
-              3 => 
-              array (
-                'type' => 'launchbutton',
-                'name' => 'join_button',
-                'acl_action' => 'view',
-              ),
-              4 => 
-              array (
-                'type' => 'shareaction',
-                'name' => 'share',
-                'label' => 'LBL_RECORD_SHARE_BUTTON',
-                'acl_action' => 'view',
-              ),
-              5 => 
-              array (
-                'type' => 'pdfaction',
-                'name' => 'download-pdf',
-                'label' => 'LBL_PDF_VIEW',
-                'action' => 'download',
-                'acl_action' => 'view',
-              ),
-              6 => 
-              array (
-                'type' => 'pdfaction',
-                'name' => 'email-pdf',
-                'label' => 'LBL_PDF_EMAIL',
-                'action' => 'email',
-                'acl_action' => 'view',
-              ),
-              7 => 
-              array (
-                'type' => 'divider',
-              ),
-              8 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:duplicate_button:click',
-                'name' => 'duplicate_button',
-                'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
-                'acl_module' => 'Meetings',
-                'acl_action' => 'create',
-              ),
-              9 => 
-              array (
-                'type' => 'divider',
-              ),
-              10 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:delete_button:click',
-                'name' => 'delete_button',
-                'label' => 'LBL_DELETE_BUTTON_LABEL',
-                'acl_action' => 'delete',
-              ),
-              11 => 
-              array (
-                'type' => 'deleterecurrencesbutton',
-                'name' => 'delete_recurrence_button',
-                'label' => 'LBL_REMOVE_ALL_RECURRENCES',
-                'acl_action' => 'delete',
-              ),
-              12 => 
-              array (
-                'type' => 'closebutton',
-                'name' => 'record-close-new',
-                'label' => 'LBL_CLOSE_AND_CREATE_BUTTON_LABEL',
-                'closed_status' => 'Held',
-                'acl_action' => 'edit',
-              ),
-              13 => 
-              array (
-                'type' => 'closebutton',
-                'name' => 'record-close',
-                'label' => 'LBL_CLOSE_BUTTON_LABEL',
-                'closed_status' => 'Held',
-                'acl_action' => 'edit',
-              ),*/
             ),
           ),
           3 => 
@@ -430,10 +336,31 @@ array (
               ),
               11 => 
               array (
+                'name' => 'reunion_objetivos',
+                'studio' => 'visible',
+                'label' => 'reunion_objetivos',
+              ),
+              12 => 
+              array (
+              ),
+              13 => 
+              array (
+                'name' => 'minut_minutas_meetings_name',
+                'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MINUT_MINUTAS_TITLE',
+                'span' => 12,
+              ),
+              14 => 
+              array (
+              ),
+              15 => 
+              array (
+              ),
+              16 => 
+              array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
               ),
-              12 => 
+              17 => 
               array (
               ),
             ),

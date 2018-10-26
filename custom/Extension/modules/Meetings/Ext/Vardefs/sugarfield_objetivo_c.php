@@ -1,6 +1,6 @@
 <?php
- // created: 2018-09-28 23:55:02
-$dictionary['Meeting']['fields']['objetivo_c']['labelValue']='Objetivo';
+ // created: 2018-10-25 09:52:34
+$dictionary['Meeting']['fields']['objetivo_c']['labelValue']='Objetivo General';
 $dictionary['Meeting']['fields']['objetivo_c']['dependency']='';
 $dictionary['Meeting']['fields']['objetivo_c']['visibility_grid']=array (
   'trigger' => 'status',
