@@ -1,0 +1,87 @@
+<!--
+/*
+ *  AF - 2018-10-23
+ *  CustomField - Grid
+ */
+-->
+  <div>
+    <!-- Table list-->
+    <div class="list-view">
+      <table id="tableParticipantes" class="table table-striped">
+          <thead>
+              <tr>
+                  <th width="30%">Participante</th>
+                  <th width="30%">Correo</th>
+                  <th width="30%">Teléfono</th>
+                  <th width="10%">Asistencia</th>
+              </tr>
+          </thead>
+          <tbody>
+            {{#each participantes}}
+              <tr>
+                  <td class="campo1SelectP">
+                    {{nombres}} {{apaterno}} {{amaterno}}
+                  </td>
+                  <td class="campo2SelectP">
+                    {{correo}}
+                  </td>
+                  <td class="campo3SelectP">
+                    {{telefono}}
+                  </td>
+                  <td class="CheckActionP" style="text-align:center" >
+                    <button type="button" class="updateAsistencia" style="border-width:0;background-color: rgba(255,255,255,0.15);">
+                      {{#if asistencia}}
+                        <i class="fa fa-check" style="color: #33800d; font-size:20px"></i>
+                      {{else}}
+                        <i class="fa fa-check" style="font-size:20px"></i>
+                      {{/if}}
+                    </button>
+                  </td>
+              </tr>
+            {{/each}}
+          </tbody>
+      </table>
+    </div>
+  </div>
+  <br>
+  <b>Nuevo Participante</b>
+  <div>
+    <!-- header -->
+    <div id="input">
+      <!-- Línea 1 -->
+      <!-- Contenid Línea n -->
+      <div class="row-fluid">
+        <div class="span4">
+          <input type="text" class="newCampo1P span3" placeholder="Nombre">
+        </div>
+        <div class="span4">
+          <input type="text" class="newCampo2P span3" placeholder="Apellido Paterno">
+        </div>
+        <div class="span4">
+          <input type="text" class="newCampo3P span3" placeholder="Apellido Materno">
+        </div>
+      </div>
+      <br>
+      <!-- Contenid Línea n -->
+      <div class="row-fluid">
+        <div class="span4">
+          <input type="text" class="newCampo4P span3" placeholder="Correo">
+        </div>
+        <div class="span4">
+          <input type="text" class="newCampo5P span3" placeholder="Teléfono">
+        </div>
+        <div class="span3">
+          <select class="newCampo6P select2" placeholder="Select">
+            <option></option>
+          </select>
+        </div>
+        <!-- Guardar btn -->
+        <div class="span1">
+          <a class="btn addParticipante">
+            <i class="fa fa-plus"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
