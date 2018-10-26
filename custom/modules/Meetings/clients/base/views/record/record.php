@@ -376,13 +376,31 @@ array (
               ),
               16 => 
               array (
+                'name' => 'reunion_objetivos',
+                'studio' => 'visible',
+                'label' => 'reunion_objetivos',
+              ),
+              12 => 
+              array (
+              ),
+              13 => 
+              array (
+                'name' => 'minut_minutas_meetings_name',
+                'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MINUT_MINUTAS_TITLE',
+                'span' => 12,
+              ),
+              14 => 
+              array (
+              ),
+              15 => 
+              array (
+              ),
+              16 => 
+              array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
               ),
               17 => 
-              array (
-              ),
-              18 => 
               array (
                 'name' => 'minut_minutas_meetings_1_name',
               ),
