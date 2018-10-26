@@ -27,16 +27,30 @@
       //Recupera data existente
       //myData = $.parseJSON( '{"myData":{"records":[{"compromiso":"1","id_resp":"82ec8bcc-cdb3-b56e-a472-573a06966424","responsable":"Carmen Velasco","fecha":"2018-10-24","deleted":0},{"compromiso":"2","id_resp":"bafb1018-7a44-11e8-bb52-00155d967407","responsable":"Adrian","fecha":"2018-10-30","deleted":0}]}}');
      // this.model.set('minuta_compromisos',[{"compromiso":"1","id_resp":"716822f6-f2f9-3053-e052-5626c99305ac","responsable":"Carmen Velasco","fecha":"2018-10-24"},{"compromiso":"2","id_resp":"bafb1018-7a44-11e8-bb52-00155d967407","responsable":"Adrian","fecha":"2018-10-30"}]);
-      myData = $.parseJSON( '{"myData":{"records":'+JSON.stringify(this.model.get('minuta_compromisos'))+'}}');
+      //myData = $.parseJSON( '{"myData":{"records":'+JSON.stringify(this.model.get('minuta_compromisos'))+'}}');
 
-      arr_responsables={"arr_responsables": {"responsables":[{"id_resp2":"716822f6-f2f9-3053-e052-5626c99305ac",
-                                            "responsable2":"Carmen Velasco"},
+
+        app.api.call('GET', app.api.buildURL('minut_Minutas/'+this.model.get('id')+'/link/minut_minutas_minut_compromisos'), null, {
+            success: function (data) {
+                self.myData = $.parseJSON( '{"myData":{"records":'+JSON.stringify(data.records)+'}}');
+                _.extend(self, self.myData);
+                self.render();
+                console.log("myData seteado");
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
+
+        arr_responsables={"arr_responsables": {"responsables":[{"id_resp2":"39b44c75-fbff-aa7e-d246-5629671efaa2",
+                                            "responsable2":"Sonia Sanchez"},
                                                             {"id_resp2":"bafb1018-7a44-11e8-bb52-00155d967407",
                                                   "responsable2":"Adrian"}
                                                             ]
                                             }
                         };
-      _.extend(this, myData);
+
+      //_.extend(this, myData);
       _.extend(this, arr_responsables);
       this.render();
     },
