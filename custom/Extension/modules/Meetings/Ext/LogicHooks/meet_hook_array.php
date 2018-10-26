@@ -39,3 +39,12 @@ $hook_array['before_save'][] = Array(
     'Meetings_Hooks', // name of the class
     'Getmails' // name of the function
 );
+
+//Adrian Arauz
+$hook_array['after_save'][] = Array(
+    2,
+    'Apply Meeting/Objectives into Minuta',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks', // name of the class
+    'saveObjetivos' // name of the function
+);
