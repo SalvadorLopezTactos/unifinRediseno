@@ -13,26 +13,27 @@
         this._super('initialize', [options]);
         this.model.addValidationTask('ObtenerObjetivos', _.bind(this.almacenaobjetivos, this));
         //Carga datos
-        this.loadData();
+        this.model.on('sync', this.loadData, this);
+        this.myobjmin={};
+        this.myobjmin.records=[];
     },
 
 
     loadData: function (options) {
-        //Recupera data existente
-        //myData = $.parseJSON('{"myData":{"records":[{"objetivo":"Objetivo 1","cumplimiento":""},{"objetivo":"Objetivo 2","cumplimiento":""},{"objetivo":"Objetivo 3","cumplimiento":""}]}}');
-        myData = "";
+        myobjmin = "";
         var selfvalue= this;
-
-        app.api.call('GET', app.api.buildURL('Meetings/2ba66d5c-d716-11e8-8ece-a0481cdf89eb/link/meetings_minut_objetivos_1'), null, {
+        if (this.model.get("minut_minutas_meetingsmeetings_idb") != "")  {
+        app.api.call('GET', app.api.buildURL('Meetings/' + this.model.get("minut_minutas_meetingsmeetings_idb") + '/link/meetings_minut_objetivos_1'), null, {
             success: function (data) {
-                selfvalue.myData= data;
-                _.extend(this, selfvalue.myData);
+                selfvalue.myobjmin= data;
+                _.extend(this, selfvalue.myobjmin);
                 selfvalue.render();
             },
             error: function (e) {
                 throw e;
             }
         });
+    }
 
 
     },
@@ -45,10 +46,10 @@
 
         $('.updateRecord').click(function(evt) {
           var row = $(this).closest("tr");    // Find the row
-          if (self.myData.records[row.index()].cumplimiento != '') {
-              self.myData.records[row.index()].cumplimiento = '';
+          if (self.myobjmin.records[row.index()].cumplimiento != '') {
+              self.myobjmin.records[row.index()].cumplimiento = '';
           }else{
-              self.myData.records[row.index()].cumplimiento = '1';
+              self.myobjmin.records[row.index()].cumplimiento = '1';
           }
           self.render();
         });
@@ -79,7 +80,7 @@
     },
 
     almacenaobjetivos:function(fields, errors, callback) {
-        this.model.set('minuta_objetivos', self.myData);
+        this.model.set('minuta_objetivos', self.myobjmin);
 
 
         callback(null, fields, errors);
