@@ -1,0 +1,21 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<div class="control-group email">
+    <input type="text" class="existingAddress" {{#if max_length}} maxlength="{{max_length}}"{{/if}} placeholder="{{str "LBL_EMAIL_TITLE"}}" value="{{email_address}}">
+    <div class="btn-toolbar prevent-mousedown">
+
+        <div class="btn-group prevent-mousedown">
+            <a href="javascript:void(0)" class="btn removeEmail" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="fa fa-minus"></i></a>
+        </div>
+    </div>
+</div>

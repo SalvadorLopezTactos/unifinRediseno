@@ -9,7 +9,7 @@ array (
       array (
         'buttons' => 
         array (
-          0 => 
+          1 => 
           array (
             'type' => 'button',
             'name' => 'cancel_button',
@@ -21,7 +21,7 @@ array (
               'click' => 'button:cancel_button:click',
             ),
           ),
-          1 => 
+          2 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'save_dropdown',
@@ -49,7 +49,7 @@ array (
               ),
             ),
           ),
-          2 => 
+          3 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -65,7 +65,7 @@ array (
                 'label' => 'LBL_EDIT_BUTTON_LABEL',
                 'acl_action' => 'edit',
               ),
-              1 => //Opción de crear la minuta
+              1 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:new_minuta_b:click',
@@ -73,103 +73,17 @@ array (
                 'label' => 'LBL_CREATE_NEW_MINUTA',
                 'acl_action' => 'edit',
               ),
-              /*
-              1 => 
-              array (
-                'type' => 'editrecurrencesbutton',
-                'event' => 'button:edit_recurrence_button:click',
-                'name' => 'edit_recurrence_button',
-                'label' => 'LBL_EDIT_ALL_RECURRENCES',
-                'acl_action' => 'edit',
-              ),
-
               2 => 
               array (
-                'type' => 'launchbutton',
-                'name' => 'host_button',
-                'host' => true,
-                'acl_action' => 'view',
-              ),
-              3 => 
-              array (
-                'type' => 'launchbutton',
-                'name' => 'join_button',
-                'acl_action' => 'view',
-              ),
-              4 => 
-              array (
-                'type' => 'shareaction',
-                'name' => 'share',
-                'label' => 'LBL_RECORD_SHARE_BUTTON',
-                'acl_action' => 'view',
-              ),
-              5 => 
-              array (
-                'type' => 'pdfaction',
-                'name' => 'download-pdf',
-                'label' => 'LBL_PDF_VIEW',
-                'action' => 'download',
-                'acl_action' => 'view',
-              ),
-              6 => 
-              array (
-                'type' => 'pdfaction',
-                'name' => 'email-pdf',
-                'label' => 'LBL_PDF_EMAIL',
-                'action' => 'email',
-                'acl_action' => 'view',
-              ),
-              7 => 
-              array (
-                'type' => 'divider',
-              ),
-              8 => 
-              array (
                 'type' => 'rowaction',
-                'event' => 'button:duplicate_button:click',
-                'name' => 'duplicate_button',
-                'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
-                'acl_module' => 'Meetings',
-                'acl_action' => 'create',
-              ),
-              9 => 
-              array (
-                'type' => 'divider',
-              ),
-              10 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:delete_button:click',
-                'name' => 'delete_button',
-                'label' => 'LBL_DELETE_BUTTON_LABEL',
-                'acl_action' => 'delete',
-              ),
-              11 => 
-              array (
-                'type' => 'deleterecurrencesbutton',
-                'name' => 'delete_recurrence_button',
-                'label' => 'LBL_REMOVE_ALL_RECURRENCES',
-                'acl_action' => 'delete',
-              ),
-              12 => 
-              array (
-                'type' => 'closebutton',
-                'name' => 'record-close-new',
-                'label' => 'LBL_CLOSE_AND_CREATE_BUTTON_LABEL',
-                'closed_status' => 'Held',
+                'event' => 'button:getlocation:click',
+                'name' => 'check_in1',
+                'label' => 'LBL_CHECK_IN_LABEL',
                 'acl_action' => 'edit',
               ),
-              13 => 
-              array (
-                'type' => 'closebutton',
-                'name' => 'record-close',
-                'label' => 'LBL_CLOSE_BUTTON_LABEL',
-                'closed_status' => 'Held',
-                'acl_action' => 'edit',
-              ),*/
             ),
           ),
-          3 => 
+          4 => 
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
@@ -415,26 +329,37 @@ array (
               8 => 
               array (
                 'name' => 'assigned_user_name',
-                'readonly' => true,
-                'span' => 12,
               ),
               9 => 
+              array (
+              ),
+              10 => 
               array (
                 'name' => 'objetivo_c',
                 'label' => 'LBL_OBJETIVO_C',
               ),
-              10 => 
+              11 => 
               array (
                 'name' => 'resultado_c',
                 'label' => 'LBL_RESULTADO_C',
               ),
-              11 => 
+              12 => 
+              array (
+                'name' => 'reunion_objetivos',
+                'studio' => 'visible',
+                'label' => 'reunion_objetivos',
+              ),
+              13 => 
+              array (
+              ),
+              14 => 
               array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
               ),
-              12 => 
+              15 => 
               array (
+                'name' => 'minut_minutas_meetings_1_name',
               ),
             ),
           ),
@@ -497,6 +422,54 @@ array (
                     'name' => 'created_by_name',
                   ),
                 ),
+              ),
+              2 => 
+              array (
+                'name' => 'minut_minutas_meetings_name',
+                'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MINUT_MINUTAS_TITLE',
+              ),
+              3 => 
+              array (
+              ),
+              4 => 
+              array (
+                'name' => 'check_in_longitude_c',
+                'label' => 'LBL_CHECK_IN_LONGITUDE',
+              ),
+              5 => 
+              array (
+                'name' => 'check_in_latitude_c',
+                'label' => 'LBL_CHECK_IN_LATITUDE',
+              ),
+              6 => 
+              array (
+                'name' => 'check_in_address_c',
+                'label' => 'LBL_CHECK_IN_ADDRESS',
+              ),
+              7 => 
+              array (
+                'name' => 'check_in_time_c',
+                'label' => 'LBL_CHECK_IN_TIME_C',
+              ),
+              8 => 
+              array (
+                'name' => 'check_out_longitude_c',
+                'label' => 'LBL_CHECK_OUT_LONGITUDE_C',
+              ),
+              9 => 
+              array (
+                'name' => 'check_out_latitude_c',
+                'label' => 'LBL_CHECK_OUT_LATITUDE_C',
+              ),
+              10 => 
+              array (
+                'name' => 'check_out_address_c',
+                'label' => 'LBL_CHECK_OUT_ADDRESS_C',
+              ),
+              11 => 
+              array (
+                'name' => 'check_out_time_c',
+                'label' => 'LBL_CHECK_OUT_TIME_C',
               ),
             ),
           ),
