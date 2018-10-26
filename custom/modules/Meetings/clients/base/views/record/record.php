@@ -9,7 +9,15 @@ array (
       array (
         'buttons' => 
         array (
-          0 => 
+          /*0 => 
+          array (
+            'type' => 'button',
+            'event' => 'button:getlocation:click',
+            'name' => 'check_in',
+            'label' => 'LBL_CHECK_IN_LABEL',
+            'acl_action' => 'edit',
+          ),*/
+          1 => 
           array (
             'type' => 'button',
             'name' => 'cancel_button',
@@ -21,7 +29,7 @@ array (
               'click' => 'button:cancel_button:click',
             ),
           ),
-          1 => 
+          2 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'save_dropdown',
@@ -49,7 +57,7 @@ array (
               ),
             ),
           ),
-          2 => 
+          3 => 
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
@@ -73,9 +81,17 @@ array (
                 'label' => 'LBL_CREATE_NEW_MINUTA',
                 'acl_action' => 'edit',
               ),
+              2 => 
+              array (
+                'type' => 'rowaction',
+                'event' => 'button:getlocation:click',
+                'name' => 'check_in1',
+                'label' => 'LBL_CHECK_IN_LABEL',
+                'acl_action' => 'edit',
+              ),
             ),
           ),
-          3 => 
+          4 => 
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
@@ -288,16 +304,40 @@ array (
               ),
               5 => 
               array (
+                'name' => 'check_in_longitude_c',
+                'label' => 'LBL_CHECK_IN_LONGITUDE',
+              ),
+              6 => 
+              array (
+                'name' => 'check_in_latitude_c',
+                'label' => 'LBL_CHECK_IN_LATITUDE',
+              ),
+              7 => 
+              array (
+                'name' => 'check_in_time_c',
+                'label' => 'LBL_CHECK_IN_TIME_C',
+              ),
+              8 => 
+              array (
+              ),
+              9 => 
+              array (
+                'name' => 'check_in_address_c',
+                'label' => 'LBL_CHECK_IN_ADDRESS',
+                'span' => 12,
+              ),
+              10 => 
+              array (
                 'name' => 'description',
                 'rows' => 3,
                 'span' => 12,
               ),
-              6 => 
+              11 => 
               array (
                 'name' => 'parent_name',
                 'span' => 12,
               ),
-              7 => 
+              12 => 
               array (
                 'name' => 'invitees',
                 'type' => 'participants',
@@ -318,23 +358,23 @@ array (
                 ),
                 'span' => 12,
               ),
-              8 => 
+              13 => 
               array (
                 'name' => 'assigned_user_name',
                 'readonly' => true,
                 'span' => 12,
               ),
-              9 => 
+              14 => 
               array (
                 'name' => 'objetivo_c',
                 'label' => 'LBL_OBJETIVO_C',
               ),
-              10 => 
+              15 => 
               array (
                 'name' => 'resultado_c',
                 'label' => 'LBL_RESULTADO_C',
               ),
-              11 => 
+              16 => 
               array (
                 'name' => 'reunion_objetivos',
                 'studio' => 'visible',
@@ -362,6 +402,7 @@ array (
               ),
               17 => 
               array (
+                'name' => 'minut_minutas_meetings_1_name',
               ),
             ),
           ),

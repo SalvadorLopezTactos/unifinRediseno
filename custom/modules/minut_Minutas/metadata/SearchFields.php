@@ -1,5 +1,6 @@
 <?php
-// created: 2018-10-22 13:40:31
+// created: 2018-10-22 11:16:22
+
 $searchFields['minut_Minutas'] = array (
   'name' => 
   array (

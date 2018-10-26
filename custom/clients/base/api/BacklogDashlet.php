@@ -574,7 +574,11 @@ SQL;
         $backlog = BeanFactory::retrieveBean('lev_Backlog', $backlogId);
         $backlog->description .= "\r\n" . $current_user->first_name . " " . $current_user->last_name . " - " . $todayDate . ": " . $comentarios_de_cancelacion;
 
-        if($motivo_de_cancelacion != "Cliente no interesado" && $motivo_de_cancelacion != "No viable"){
+        /* AF- 2018-10-24
+         *  Se modifica condición 
+        //if($motivo_de_cancelacion != "Cliente no interesado" && $motivo_de_cancelacion != "No viable"){
+        */
+        if($motivo_de_cancelacion == 'Mes posterior'){
             //Reevaluamos el tipo de operaci�n que tendra el nuevo BL
             $currentYear = date("Y");
             $currentDay = date("d");
