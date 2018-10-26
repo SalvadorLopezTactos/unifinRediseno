@@ -11,19 +11,32 @@
         //Inicializa campo custom
         self = this;
         this._super('initialize', [options]);
-
+        this.model.addValidationTask('ObtenerObjetivos', _.bind(this.almacenaobjetivos, this));
         //Carga datos
         this.loadData();
     },
 
 
     loadData: function (options) {
-      //Recupera data existente
-      //myData = $.parseJSON('{"myData":{"records":[{"objetivo":"Objetivo 1","cumplimiento":""},{"objetivo":"Objetivo 2","cumplimiento":""},{"objetivo":"Objetivo 3","cumplimiento":""}]}}');
-      mObjetivos     =  $.parseJSON('{"records":[{"objetivo":"Objetivo 1","cumplimiento":""},{"objetivo":"Objetivo 2","cumplimiento":""},{"objetivo":"Objetivo 3","cumplimiento":""}]}');
-      _.extend(this, mObjetivos);
-      this.render();
+        //Recupera data existente
+        //myData = $.parseJSON('{"myData":{"records":[{"objetivo":"Objetivo 1","cumplimiento":""},{"objetivo":"Objetivo 2","cumplimiento":""},{"objetivo":"Objetivo 3","cumplimiento":""}]}}');
+        myData = "";
+        var selfvalue= this;
+
+        app.api.call('GET', app.api.buildURL('Meetings/2ba66d5c-d716-11e8-8ece-a0481cdf89eb/link/meetings_minut_objetivos_1'), null, {
+            success: function (data) {
+                selfvalue.myData= data;
+                _.extend(this, selfvalue.myData);
+                selfvalue.render();
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
+
+
     },
+
 
 
     _render: function () {
@@ -63,6 +76,13 @@
                 this.render();
             }
         }, this);
+    },
+
+    almacenaobjetivos:function(fields, errors, callback) {
+        this.model.set('minuta_objetivos', self.myData);
+
+
+        callback(null, fields, errors);
     },
 
 
