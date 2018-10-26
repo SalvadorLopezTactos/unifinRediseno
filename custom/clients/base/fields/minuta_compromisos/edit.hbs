@@ -6,30 +6,52 @@
 -->
   <b>Compromisos existentes</b><br>
   <div>
-      {{#each myData.records}}
-        <div class="control-group compromisos" style="display: flex;flex-direction: row;align-items: flex-start">
-          <input type="text" class="existingcompromiso" value="{{name}}" style="width: 95%;margin: 4px;display: inline-block;">
-          <select class="existingresponsable" data-field="responsable"  style="font-size: 15px;font-weight: 500;width: 90%;margin: 4px;">
+      {{#each myData2.records}}
+        <div class="control-group compromisos" style="display: flex;flex-direction: row;align-items: flex-start" >
+          <input type="text" class="existingcompromiso" value="{{name}}" style="width: 95%;margin: 4px;display: inline-block;" disabled>
+          <select class="existingresponsable" data-field="responsable"  style="font-size: 15px;font-weight: 500;width: 90%;margin: 4px;" disabled>
               {{#each ../arr_responsables.responsables}}
-                  {{#if_eq id_resp2 ../created_by}}
+                  {{#if_eq id_resp2 ../assigned_user_id}}
                       <option value="{{id_resp2}}" selected="true">{{responsable2}}</option>
                   {{else}}
                       <option value="{{id_resp2}}">{{responsable2}}</option>
                   {{/if_eq}}
               {{/each}}
           </select>
-          <input type="date" class="existingdate" value="{{date_entered}}" data-field="date_compromiso" style="width: 95%;margin: 4px;display: inline-block;">
-          <div class="btn-toolbar prevent-mousedown">
+          <input type="date" class="existingdate" value="{{date_entered}}" data-field="date_compromiso" style="width: 95%;margin: 4px;display: inline-block;" disabled >
+          <!--<div class="btn-toolbar prevent-mousedown">
               <div class="btn-group prevent-mousedown">
                   <a href="javascript:void(0)" class="btn removecompromiso" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="fa fa-minus"></i></a>
-              </div>
+              </div>-->
           </div>
         </div>  
+      {{/each}}
+  </div>
+  <div>
+      {{#each myData.records}}
+          <div class="control-group compromisos2" style="display: flex;flex-direction: row;align-items: flex-start">
+              <input type="text" class="existingcompromiso" value="{{compromiso}}" style="width: 95%;margin: 4px;display: inline-block;">
+              <select class="existingresponsable" data-field="responsable"  style="font-size: 15px;font-weight: 500;width: 90%;margin: 4px;">
+                  {{#each ../arr_responsables.responsables}}
+                      {{#if_eq id_resp2 ../id_resp}}
+                          <option value="{{id_resp2}}" selected="true">{{responsable2}}</option>
+                      {{else}}
+                          <option value="{{id_resp2}}">{{responsable2}}</option>
+                      {{/if_eq}}
+                  {{/each}}
+              </select>
+              <input type="date" class="existingdate" value="{{fecha}}" data-field="date_compromiso" style="width: 95%;margin: 4px;display: inline-block;">
+              <div class="btn-toolbar prevent-mousedown">
+                  <div class="btn-group prevent-mousedown">
+                      <a href="javascript:void(0)" class="btn removecompromiso2" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="fa fa-minus"></i></a>
+                  </div>
+              </div>
+          </div>
       {{/each}}
   </div>      
   <br>
   <b>Nuevo Compromiso</b>
-  <div class="control-group compromiso" style="display: flex;flex-direction: row;align-items: flex-start">
+  <div class="control-group compromiso2" style="display: flex;flex-direction: row;align-items: flex-start">
       <input type="text" class="newcompromiso input-append" placeholder="Agregar compromiso" style="width: 95%;margin: 4px;display: inline-block;">
       <select class="newresponsable" data-field="responsable" placeholder="Responsable" style="font-size: 15px;font-weight: 500;width: 90%;margin: 4px;">
         <option>-Selecciona un Responsable-</option>
