@@ -30,20 +30,22 @@
       mParticipantes = $.parseJSON( '{"idReunion":"bfa7bec6-d738-11e8-b1d9-a0b3cc24d95e","idCuenta":"43022956-4bb1-0e14-6a7e-58864d4069d4","participantes":[{"id":"aebe503b-c10c-9960-0f16-5626cdfba70a","nombres":"José Alfredo García Cruz","apaterno":"José Alfredo García Cruz","amaterno":"José Alfredo García Cruz","telefono":"5552495800","correo":"ggonzalez@unifin.com.mx","origen":"U","unifin":1,"tipo_contacto":"","asistencia":0},{"id":"c57e811e-b81a-cde4-d6b4-5626c9961772","nombres":"Wendy Amairini Reyes Peralta","apaterno":"Wendy Amairini Reyes Peralta","amaterno":"Wendy Amairini Reyes Peralta","telefono":"","correo":"ggonzalez@unifin.com.mx","origen":"U","unifin":1,"tipo_contacto":"","asistencia":0},{"id":"cf3b6b9f-db1a-bde7-4600-5925cedcacb5","nombres":"ALEJANDRO PEREZ VAZQUEZ","apaterno":"Wendy Amairini Reyes Peralta","amaterno":"Wendy Amairini Reyes Peralta","telefono":"","correo":"ggonzalez@unifin.com.mx","origen":"C","unifin":0,"tipo_contacto":"","asistencia":0}],"compromisos":[]}');
       */
       this.mParticipantes = '';
-
-      var idReunion = this.context.parent.attributes.modelId;
-
       selfData = this;
-      app.api.call('GET', app.api.buildURL('GetParticipantes/'+idReunion), null, {
-          success: function (data) {
-              selfData.mParticipantes= data;
-              _.extend(this, selfData.mParticipantes);
-              selfData.render();
-          },
-          error: function (e) {
-              throw e;
-          }
-      });
+
+
+      if (this.context.parent) {
+        var idReunion = this.context.parent.attributes.modelId;
+        app.api.call('GET', app.api.buildURL('GetParticipantes/'+idReunion), null, {
+            success: function (data) {
+                selfData.mParticipantes= data;
+                _.extend(this, selfData.mParticipantes);
+                selfData.render();
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
+      }
       //_.extend(this, mParticipantes);
       //this.model.set('minuta_participantes',mParticipantes);
       //this.render();
