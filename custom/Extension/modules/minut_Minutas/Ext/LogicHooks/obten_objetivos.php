@@ -8,7 +8,7 @@
 
 
 $hook_array['after_save'][] = Array(
-    1,
+    5,
     'Obtiene Objetivos de la reunion para minuta',
     'custom/modules/minut_Minutas/minuta_objetivos.php',
     'Objetivos_minuta',          //Nombre de la Clase
