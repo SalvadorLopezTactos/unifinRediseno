@@ -4,48 +4,36 @@
  *  CustomField - Grid
  */
 -->
-<b>Elementos existentes</b>
+<b>Participantes</b>
 <div>
   <!-- Table list-->
   <div class="list-view">
-    <table id="tableResult" class="table table-striped dataTable">
+    <table id="tableParticipantes" class="table table-striped">
         <thead>
             <tr>
-                <th>Campo1</th>
-                <th>Campo2</th>
-                <th>Campo3</th>
-                <th>Campo4</th>
-                <th>Id</th>
-                <th>Deleted</th>
-                <th>Check</th>
+                <th width="30%">Participante</th>
+                <th width="30%">Correo</th>
+                <th width="30%">Teléfono</th>
+                <th width="10%">Asistencia</th>
             </tr>
         </thead>
         <tbody>
-          {{#each myData.records}}
+          {{#each mParticipantes.participantes}}
             <tr>
-                <td class="campo1Select">
-                  {{campo1}}
+                <td class="campo1SelectP">
+                  {{nombres}} {{apaterno}} {{amaterno}}
                 </td>
-                <td class="campo2Select">
-                  {{campo2}}
+                <td class="campo2SelectP">
+                  {{correo}}
                 </td>
-                <td class="campo3Select">
-                  {{campo3}}
+                <td class="campo3SelectP">
+                  {{telefono}}
                 </td>
-                <td class="campo4Select">
-                  {{campo4}}
-                </td>
-                <td class="IdSelect">
-                  {{id}}
-                </td>
-                <td class="DeletedSelect">
-                  {{deleted}}
-                </td>
-                <td class="">
-                  {{#if campo3}}
-                    <i class="fa fa-check"></i>
+                <td class="CheckActionP" style="text-align:center" >
+                  {{#if asistencia}}
+                    <i class="fa fa-check" style="color: #33800d; font-size:20px"></i>
                   {{else}}
-                    <i class="fa fa-times"></i>
+                    <i class="fa fa-check" style="font-size:20px"></i>
                   {{/if}}
                 </td>
             </tr>
