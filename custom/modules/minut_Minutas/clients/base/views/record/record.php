@@ -280,10 +280,20 @@ array (
               ),
               6 => 
               array (
+                'name' => 'objetivo_c',
+                'label' => 'LBL_OBJETIVO_C',
+              ),
+              7 => 
+              array (
+                'name' => 'resultado_c',
+                'label' => 'LBL_RESULTADO_C',
+              ),
+              8 => 
+              array (
                 'name' => 'tct_proceso_unifin_time_c',
                 'label' => 'LBL_TCT_PROCESO_UNIFIN_TIME',
               ),
-              7 => 
+              9 => 
               array (
                 'name' => 'tct_proceso_unifin_address_c',
                 'label' => 'LBL_TCT_PROCESO_UNIFIN_ADDRESS',
