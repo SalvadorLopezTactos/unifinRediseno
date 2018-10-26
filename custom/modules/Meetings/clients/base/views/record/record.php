@@ -9,14 +9,6 @@ array (
       array (
         'buttons' => 
         array (
-          /*0 => 
-          array (
-            'type' => 'button',
-            'event' => 'button:getlocation:click',
-            'name' => 'check_in',
-            'label' => 'LBL_CHECK_IN_LABEL',
-            'acl_action' => 'edit',
-          ),*/
           1 => 
           array (
             'type' => 'button',
@@ -304,40 +296,16 @@ array (
               ),
               5 => 
               array (
-                'name' => 'check_in_longitude_c',
-                'label' => 'LBL_CHECK_IN_LONGITUDE',
-              ),
-              6 => 
-              array (
-                'name' => 'check_in_latitude_c',
-                'label' => 'LBL_CHECK_IN_LATITUDE',
-              ),
-              7 => 
-              array (
-                'name' => 'check_in_time_c',
-                'label' => 'LBL_CHECK_IN_TIME_C',
-              ),
-              8 => 
-              array (
-              ),
-              9 => 
-              array (
-                'name' => 'check_in_address_c',
-                'label' => 'LBL_CHECK_IN_ADDRESS',
-                'span' => 12,
-              ),
-              10 => 
-              array (
                 'name' => 'description',
                 'rows' => 3,
                 'span' => 12,
               ),
-              11 => 
+              6 => 
               array (
                 'name' => 'parent_name',
                 'span' => 12,
               ),
-              12 => 
+              7 => 
               array (
                 'name' => 'invitees',
                 'type' => 'participants',
@@ -358,49 +326,38 @@ array (
                 ),
                 'span' => 12,
               ),
-              13 => 
+              8 => 
               array (
                 'name' => 'assigned_user_name',
-                'readonly' => true,
-                'span' => 12,
               ),
-              14 => 
+              9 => 
+              array (
+              ),
+              10 => 
               array (
                 'name' => 'objetivo_c',
                 'label' => 'LBL_OBJETIVO_C',
               ),
-              15 => 
+              11 => 
               array (
                 'name' => 'resultado_c',
                 'label' => 'LBL_RESULTADO_C',
               ),
-              16 => 
+              12 => 
               array (
                 'name' => 'reunion_objetivos',
                 'studio' => 'visible',
                 'label' => 'reunion_objetivos',
               ),
-              12 => 
-              array (
-              ),
               13 => 
               array (
-                'name' => 'minut_minutas_meetings_name',
-                'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MINUT_MINUTAS_TITLE',
-                'span' => 12,
               ),
               14 => 
-              array (
-              ),
-              15 => 
-              array (
-              ),
-              16 => 
               array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
               ),
-              17 => 
+              15 => 
               array (
                 'name' => 'minut_minutas_meetings_1_name',
               ),
@@ -465,6 +422,54 @@ array (
                     'name' => 'created_by_name',
                   ),
                 ),
+              ),
+              2 => 
+              array (
+                'name' => 'minut_minutas_meetings_name',
+                'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MINUT_MINUTAS_TITLE',
+              ),
+              3 => 
+              array (
+              ),
+              4 => 
+              array (
+                'name' => 'check_in_longitude_c',
+                'label' => 'LBL_CHECK_IN_LONGITUDE',
+              ),
+              5 => 
+              array (
+                'name' => 'check_in_latitude_c',
+                'label' => 'LBL_CHECK_IN_LATITUDE',
+              ),
+              6 => 
+              array (
+                'name' => 'check_in_address_c',
+                'label' => 'LBL_CHECK_IN_ADDRESS',
+              ),
+              7 => 
+              array (
+                'name' => 'check_in_time_c',
+                'label' => 'LBL_CHECK_IN_TIME_C',
+              ),
+              8 => 
+              array (
+                'name' => 'check_out_longitude_c',
+                'label' => 'LBL_CHECK_OUT_LONGITUDE_C',
+              ),
+              9 => 
+              array (
+                'name' => 'check_out_latitude_c',
+                'label' => 'LBL_CHECK_OUT_LATITUDE_C',
+              ),
+              10 => 
+              array (
+                'name' => 'check_out_address_c',
+                'label' => 'LBL_CHECK_OUT_ADDRESS_C',
+              ),
+              11 => 
+              array (
+                'name' => 'check_out_time_c',
+                'label' => 'LBL_CHECK_OUT_TIME_C',
               ),
             ),
           ),

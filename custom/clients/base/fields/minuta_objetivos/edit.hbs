@@ -1,38 +1,39 @@
-{{!--
+<!--
 /*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
+ *  AF - 2018-10-23
+ *  CustomField - Grid
  */
---}}
-
-<div class="control-group objetivos">
-    <table class="Objetivos" style="width: 100%;" cellspacing="1" cellpadding="5">
-
-        <tr>
-            <td> <div class="record-label" > Objetivo</div></td>
-            <td> <div class="record-label" > Objetivo Cumplido </div></td>
-        </tr>
-        <tr>
-        <td valign="top">
-            <div class="record-label">
-                <input type="text" class="newObjetivo" value="{{objetivo}}" data-field="objetivo1" style="width: 100%;margin: 0px;"/>
-            </div>
-        </td>
-
-        <td valign="top">
-                <div class="btn btn-link" style="background-color: transparent; border:transparent; font-size: 25px;">
-                    <i class="fa fa-check" style="font-size: 1em; border-color: transparent; background-color: transparent"></i>
-                    <a href="javascript:void(0)" class="btn addObjetivo" style="border:transparent; background-color:transparent"></a>
-                </div>
-        </td>
-        </tr>
-
+-->
+<!-- Campo para desplegar Objetivos en minuta:Edición -->
+<div>
+  <!-- Table list-->
+  <div class="list-view">
+    <table id="tableResult" class="table table-striped">
+        <thead>
+            <tr>
+                <th width="80%">Objetivo</th>
+                <th width="20%" style="text-align:center">Cumplimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+          {{#each myData.records}}
+            <tr>
+                <td class="objetivoSelect">
+                  {{objetivo}}
+                </td>
+                <td class="CheckAction" style="text-align:center" >
+                  <button type="button" class="updateRecord" style="border-width:0;background-color: rgba(255,255,255,0.15);">
+                    {{#if cumplimiento}}
+                      <i class="fa fa-check" style="color: #33800d; font-size:20px"></i>
+                    {{else}}
+                      <i class="fa fa-check" style="font-size:20px"></i>
+                    {{/if}}
+                  </button>
+                </td>
+            </tr>
+          {{/each}}
+        </tbody>
     </table>
+  </div>
 </div>
 {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

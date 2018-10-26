@@ -1,0 +1,56 @@
+<!--
+/*
+ *  AF - 2018-10-23
+ *  CustomField - Grid
+ */
+-->
+<b>Elementos existentes</b>
+<div>
+  <!-- Table list-->
+  <div class="list-view">
+    <table id="tableResult" class="table table-striped dataTable">
+        <thead>
+            <tr>
+                <th>Campo1</th>
+                <th>Campo2</th>
+                <th>Campo3</th>
+                <th>Campo4</th>
+                <th>Id</th>
+                <th>Deleted</th>
+                <th>Check</th>
+            </tr>
+        </thead>
+        <tbody>
+          {{#each myData.records}}
+            <tr>
+                <td class="campo1Select">
+                  {{campo1}}
+                </td>
+                <td class="campo2Select">
+                  {{campo2}}
+                </td>
+                <td class="campo3Select">
+                  {{campo3}}
+                </td>
+                <td class="campo4Select">
+                  {{campo4}}
+                </td>
+                <td class="IdSelect">
+                  {{id}}
+                </td>
+                <td class="DeletedSelect">
+                  {{deleted}}
+                </td>
+                <td class="">
+                  {{#if campo3}}
+                    <i class="fa fa-check"></i>
+                  {{else}}
+                    <i class="fa fa-times"></i>
+                  {{/if}}
+                </td>
+            </tr>
+          {{/each}}
+        </tbody>
+    </table>
+  </div>
+</div>

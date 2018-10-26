@@ -1,29 +1,37 @@
-{{!--
+<!--
 /*
- * Your installation or use of this SugarCRM file is subject to the applicable
- * terms available at
- * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
- * If you do not agree to all of the applicable terms or do not have the
- * authority to bind the entity as an authorized representative, then do not
- * install or use this SugarCRM file.
- *
- * Copyright (C) SugarCRM Inc. All rights reserved.
+ *  AF - 2018-10-23
+ *  CustomField - Grid
  */
---}}
-
-<table class="table table-striped table-bordered table-condensed">
-    <tr>
-        <th style="width: 900px">Objetivos</th>
-        <th>Objetivos Cumplidos</th>
-
-    </tr>
-    {{#each value}}
-        <tr>
-            <td>{{tipo_label}}</td>
-            <td>{{indicador_label}}</td>
-            <td> {{calle}}</td>
-            <td>{{numext}}</td>
-            <td>{{numint}}</td>
-        </tr>
-    {{/each}}
-</table>
+-->
+<!-- Campo para desplegar Objetivos en minuta: Detalle -->
+<div>
+  <!-- Table list-->
+  <div class="list-view">
+    <table id="tableResult" class="table table-striped">
+        <thead>
+            <tr>
+                <th width="80%">Objetivo</th>
+                <th width="20%" style="text-align:center">Cumplimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+          {{#each myData.records}}
+            <tr>
+                <td class="objetivoSelect">
+                  {{objetivo}}
+                </td>
+                <td class="CheckAction" style="text-align:center">
+                  {{#if cumplimiento}}
+                    <i class="fa fa-check" style="color: #33800d; font-size:20px"></i>
+                  {{else}}
+                    <i class="fa fa-check" style="font-size:20px"></i>
+                  {{/if}}
+                </td>
+            </tr>
+          {{/each}}
+        </tbody>
+    </table>
+  </div>
+</div>
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
