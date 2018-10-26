@@ -32,13 +32,31 @@
 
         app.api.call('GET', app.api.buildURL('minut_Minutas/'+this.model.get('id')+'/link/minut_minutas_minut_compromisos'), null, {
             success: function (data) {
-                self.myData = $.parseJSON( '{"myData":{"records":'+JSON.stringify(data.records)+'}}');
-                _.extend(self, self.myData);
+                for(var i=0;i<data.records.length;i++){
+                    var temp=data.records[i].date_entered;
+                    var temp2=temp.split("T");
+                    data.records[i].date_entered=temp2[0];
+                }
+                self.myData2 = $.parseJSON( '{"myData2":{"records":'+JSON.stringify(data.records)+'}}');
+                _.extend(self, self.myData2);
                 self.render();
-                console.log("myData seteado");
+                console.log("myData2 seteado");
             },
             error: function (e) {
                 console.log(e);
+            }
+        });
+
+        var idReunion ="bbcdcc68-bdad-11e8-9624-a0d3c19a8bbf";
+        app.api.call('GET', app.api.buildURL('GetParticipantes/'+idReunion), null, {
+            success: function (data) {
+                mParticipantes= data;
+                _.extend(this, mParticipantes);
+                self.render();
+                console.log("Participantes seteado");
+            },
+            error: function (e) {
+                throw e;
             }
         });
 
@@ -50,7 +68,8 @@
                                             }
                         };
 
-      //_.extend(this, myData);
+        myData = $.parseJSON( '{"myData":{"records":[]}}');
+         _.extend(this, myData);
       _.extend(this, arr_responsables);
       this.render();
     },
@@ -78,14 +97,14 @@
     _render: function () {
         this._super("_render");
 
-        $('.removecompromiso').click(function(evt) {
-            var row = $(this).closest(".compromisos");    // Find the row
+        $('.removecompromiso2').click(function(evt) {
+            var row = $(this).closest(".compromisos2");    // Find the row
             self.myData.records.splice(row.index(),1);
             self.render();
         });
 
         $('.existingresponsable').change(function(evt) {
-            var row = $(this).closest(".compromisos");    // Find the row
+            var row = $(this).closest(".compromisos2");    // Find the row
             var val= row.find(".existingresponsable").context.value;
             var text = row.find(".existingresponsable option[value="+val+"]").text();
             self.myData.records[row.index()].responsable = text;
@@ -94,14 +113,14 @@
         });
 
         $('.existingcompromiso').change(function(evt) {
-            var row = $(this).closest(".compromisos");    // Find the row
+            var row = $(this).closest(".compromisos2");    // Find the row
             var val= row.find(".existingcompromiso").context.value;
             self.myData.records[row.index()].compromiso = val;
             self.render();
         });
 
         $('.existingdate').change(function(evt) {
-            var row = $(this).closest(".compromisos");    // Find the row
+            var row = $(this).closest(".compromisos2");    // Find the row
             var val= row.find(".existingdate").context.value;
             self.myData.records[row.index()].fecha = val;
             self.render();
