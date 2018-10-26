@@ -1,0 +1,223 @@
+{{!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/06_Customer_Center/10_Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+--}}
+<script>
+    //existingMultiClass
+    /*
+    $(".saninput").each(function(){
+        if ($(this).val() != ""){
+        var animal = $(".saninput").data("animal");
+        alert (animal)
+        };
+    });
+    */
+    /*
+    $('select.existingMultiClass').each(function(){
+        $(this).select2({
+            width:'100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+    });
+    */
+
+    /*
+    $('#existingMulti1').select2({
+        width:'100%',
+        //minimumResultsForSearch:7,
+        closeOnSelect: false,
+        containerCssClass: 'select2-choices-pills-close'
+    });
+    */
+
+</script>
+<div class="control-group direccion">
+    <table class="dashlet" cellspacing="1" cellpadding="5" style="width: 100%;">
+        <tr>
+            <td valign="top">
+                <div class="record-label" >
+                    Tipo
+                </div>
+                <select class="existingTipodedireccion" data-field="tipodedireccion" placeholder="tipo" style="font-size: 15px;font-weight: 500;">
+                    {{{tipodedireccion}}}
+                </select>
+            </td>
+            <td valign="top" style="display:block;">
+                <div class="record-label" >
+                    Tipo de direcci&oacute;n
+                </div>
+                <select class="existingIndicador" data-field="indicador" placeholder="indicador" style="font-size: 15px;font-weight: 500;">
+                    {{{indicador_html}}}
+                </select>
+                <select id="existingMulti1" class="existingMultiClass select2" multiple="multiple" size="3">
+                    {{{indicador_multi_html}}}
+                </select>
+            </td>
+            <td valign="top">
+                <!-- <div class="record-label">
+                    Indicador
+                </div>
+                <select id="existingMulti1" class="existingMultiClass select2" multiple="multiple" size="3">
+                    {{{indicador_multi_html}}}
+                </select> -->
+            </td>
+        </tr>
+        <tr class="rowPem">
+            <td valign="top">
+                <div class="record-label" >
+                    Pais
+                </div>
+                <select class="existingPais" data-field="pais" placeholder="pais" style="font-size: 15px;font-weight: 500;">
+                    {{{pais}}}
+                </select>
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Estado
+                </div>
+                <select class="existingEstado" data-field="estado" placeholder="estado" style="font-size: 15px;font-weight: 500;">
+                    {{{estado_html}}}
+                </select>
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Municipio
+                </div>
+                <select class="existingMunicipio" data-field="municipio" placeholder="municipio" style="font-size: 15px;font-weight: 500;">
+                    {{{municipio_html}}}
+                </select>
+            </td>
+        </tr>
+        <tr class="rowCPcc">
+            <td valign="top">
+                <div class="record-label" >
+                    Codigo Postal
+                </div>
+                <select class="existingPostal" data-field="codigopostal" placeholder="Codigo Postal" style="font-size: 15px;font-weight: 500;">
+                    {{{postal_html}}}
+                </select>
+                <!--<input type="text" class="existingPostal" placeholder="Codigo Postal" value="{{postal_html}}" data-field="codigopostal" data-name="codigopostal" style="width: 94%;margin: 0px;">-->
+                <input type="hidden" class="existingPostalId" placeholder="postal" value="{{postal}}" data-field="postal" style="width: 57%;margin: 0px;">
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Ciudad
+                </div>
+                <select class="existingCiudad" data-field="ciudad" placeholder="ciudad" style="font-size: 15px;font-weight: 500;">
+                    {{{ciudad_html}}}
+                </select>
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Colonia
+                </div>
+                <select class="existingColonia" data-field="colonia" placeholder="colonia" style="font-size: 15px;font-weight: 500;">
+                    <!-- {{{colonia_html}}} -->
+                </select>
+                <input type="hidden" class="existingColoniaId" placeholder="postal" value="{{colonia_id}}" data-field="colonia_id">
+            </td>
+        </tr>
+        <!-- Nueva fila para rediseño de direcciones-->
+        <tr>
+            <td valign="top">
+                <div class="record-label" >
+                    Codigo Postal
+                </div>
+
+                <!--<select id="postalTemp" class="select2"  data-field="codigopostaltemp" placeholder="Codigo Postal Temp" style="font-size: 15px;font-weight: 500;">-->
+                <!--  {{{def.postal_htmlTemp}}} -->
+                <!--</select>-->
+                <input type="text" id="existingPostalInput" class="select2" value="{{postal_htmlTemp}}"/>
+                <!--<input type="text" class="newPostal" placeholder="Codigo Postal" value="{{postal_html}}" data-field="codigopostal" data-name="codigopostal" style="width: 90%;margin: 0px;">-->
+                <input type="hidden" id="existingPostalHidden" class="existingPostalIdHidden" placeholder="postal" value="{{postal}}" data-field="postal_temp" style="width: 33%;margin: 0px;">
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    País
+                </div>
+                <select class="existingPaisTemp" placeholder="paisTemp" data-field="pais_temp" style="font-size: 15px;font-weight: 500;">
+                    {{{paises_list}}}
+                </select>
+                <i class="fa fa-spinner fa-spin loadingIconPaisTemp" style="display: none"></i>
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Estado
+                </div>
+                <select class="existingEstadoTemp" data-field="estado_temp" placeholder="estadoTemp" style="font-size: 15px;font-weight: 500;">
+                    {{{estados_html}}}
+                </select>
+                <i class="fa fa-spinner fa-spin loadingIconEdoTemp" style="display: none"></i>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top">
+                <div class="record-label" >
+                    Municipio
+                </div>
+                <select class="existingMunicipioTemp" data-field="municipio_temp" placeholder="Municipio" style="font-size: 15px;font-weight: 500;">
+                    {{{municipios_html}}}
+                </select>
+                <i class="fa fa-spinner fa-spin loadingIconMunicipioTemp" style="display: none"></i>
+                <!-- <input type="hidden" class="newPostalId" placeholder="postal" value="{{postal}}" data-field="postal" style="width: 33%;margin: 0px;"> -->
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Ciudad
+                </div>
+                <select class="existingCiudadTemp" data-field="ciudad_temp" placeholder="Ciudad" style="font-size: 15px;font-weight: 500;">
+                    {{{ciudad_html}}}
+                </select>
+                <i class="fa fa-spinner fa-spin loadingIconCiudadTemp" style="display: none"></i>
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Colonia
+                </div>
+                <select class="existingColoniaTemp" placeholder="Colonia" data-field="colonia_temp" style="font-size: 15px;font-weight: 500;">
+                    {{{colonia_html}}}
+                </select>
+                <input type="hidden" class="existingColoniaIdTemp" placeholder="postal" value="{{colonia_id}}" data-field="colonia_idTemp">
+                <i class="fa fa-spinner fa-spin loadingIconColoniaTemp" style="display: none"></i>
+            </td>
+        </tr>
+
+        <!--fin de fila rediseño de direcciones -->
+        <tr>
+            <td colspan="2" valign="top">
+                <div class="record-label" >
+                    Calle
+                </div>
+                <input type="text" class="existingCalle" placeholder="Calle" value="{{calle}}" data-field="calle" style="width: 95%;margin: 0px;"/>
+            </td>
+            <td valign="top">
+                <div class="record-label" >
+                    Numero Exterior y Numero Interior
+                </div>
+                <input type="text" class="existingNumExt" placeholder="numExt" value="{{numext}}" data-field="numext" style="width: 25%;margin: 0px;">
+                <input type="text" class="existingNumInt" placeholder="numInt" value="{{numint}}" data-field="numint" style="width: 25%;margin: 0px;">
+
+                <div class="btn-toolbar prevent-mousedown">
+                    <div class="btn-group" data-toggle="buttons-checkbox">
+                        <button type="button" class="{{#if principal}}active {{/if}}is_primary btn btn-edit" data-direccionproperty="principal" rel="tooltip" title="{{str "LBL_EMAIL_PRIMARY"}}">
+                            <i class="fa fa-star"></i></button>
+                    </div>
+                    <div class="btn-group" data-toggle="buttons-checkbox">
+                        <button type="button" class="{{#if inactivo}}active {{/if}}is_primary btn btn-edit" data-direccionproperty="inactivo" rel="tooltip" title="inactivo">
+                            <i class="fa fa-power-off"></i></button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
