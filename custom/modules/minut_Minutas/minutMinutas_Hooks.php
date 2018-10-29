@@ -22,7 +22,7 @@ class minutMinutas_Hooks
 
 
         // Creamos la Relación entre Minuta y Participantes
-        if ($objArrParticipnates != "" && isset($objArrParticipnates)
+        if ($objArrParticipnates != "" && isset($objArrParticipnates))
         {
           for ($i = 0; $i < count($objArrParticipnates); $i++) {
               $beanParticipante = BeanFactory::newBean("minut_Participantes");
