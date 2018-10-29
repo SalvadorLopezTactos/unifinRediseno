@@ -1,5 +1,5 @@
 <?php
-$module_name = 'minut_Objetivos';
+$module_name = 'minut_Compromisos';
 $viewdefs[$module_name] = 
 array (
   'base' => 
@@ -89,7 +89,7 @@ array (
                 'event' => 'button:duplicate_button:click',
                 'name' => 'duplicate_button',
                 'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
-                'acl_module' => 'minut_Objetivos',
+                'acl_module' => 'minut_Compromisos',
                 'acl_action' => 'create',
               ),
               7 => 
@@ -170,30 +170,41 @@ array (
             array (
               0 => 
               array (
-                'name' => 'tct_objetivo_c',
-                'label' => 'LBL_TCT_OBJETIVO_C',
+                'name' => 'tct_compromiso_c',
+                'label' => 'LBL_TCT_COMPROMISO_C',
               ),
               1 => 
               array (
-                'name' => 'tct_cumplimiento_chk',
-                'label' => 'LBL_TCT_CUMPLIMIENTO_CHK',
+                'name' => 'tct_fecha_compromiso_c',
+                'label' => 'LBL_TCT_FECHA_COMPROMISO_C',
               ),
-              2 => 'assigned_user_name',
-              3 => 'team_name',
+              2 => 
+              array (
+                'name' => 'tct_responsable_ddw',
+                'label' => 'LBL_TCT_RESPONSABLE_DDW',
+              ),
+              3 => 
+              array (
+                'name' => 'tct_responsable_id_c',
+                'label' => 'LBL_TCT_RESPONSABLE_ID_C',
+              ),
               4 => 
               array (
-                'name' => 'tag',
+                'name' => 'tct_generar_tarea_chk',
+                'label' => 'LBL_TCT_GENERAR_TAREA_CHK',
               ),
               5 => 
               array (
-                'name' => 'minut_minutas_minut_objetivos_name',
               ),
-              6 => 
+              6 => 'assigned_user_name',
+              7 => 'team_name',
+              8 => 
               array (
-                'name' => 'meetings_minut_objetivos_1_name',
+                'name' => 'tag',
               ),
-              7 => 
+              9 => 
               array (
+                'name' => 'minut_minutas_minut_compromisos_name',
               ),
             ),
           ),
