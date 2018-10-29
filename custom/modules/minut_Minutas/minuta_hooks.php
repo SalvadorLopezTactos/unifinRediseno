@@ -12,7 +12,9 @@ class Minuta_Hooks
     {
 
         $GLOBALS['log']->fatal('>>>>>>>Entro Minuta Hook: ');//------------------------------------
-        //$GLOBALS['log']->fatal('Minuta_compromisos: '.print_r($bean->minuta_compromisos,true));//------------------------------------
+        $GLOBALS['log']->fatal('Tipo de Minuta_compromisos: '.gettype($bean->minuta_compromisos));//------------------------------------
+        $GLOBALS['log']->fatal('Count de Minuta_compromisos: '.count($bean->minuta_compromisos));//------------------------------------
+        $GLOBALS['log']->fatal('Minuta_compromisos: '.print_r($bean->minuta_compromisos,true));//------------------------------------
 
         if(count($bean->minuta_compromisos)>0 && gettype($bean->minuta_compromisos)=="array"){
         	foreach($bean->minuta_compromisos as $compromiso){
