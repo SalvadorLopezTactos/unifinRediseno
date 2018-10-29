@@ -76,15 +76,37 @@
     /*
         Función para agregar nuevos elementos al objeto
     */
-    addRecordFunction: function (options) {
-      var valor1 = $('.newCampo1')[0].value;
+    addRecordFunction: function (evt) {
+        if (!evt) return;
 
+        var errorMsg = '';
+        var dirErrorCounter = 0;
+        var dirError = false;
+
+        if($('.newCampo1').val() == '' || $('.newCampo1').val() == null){
+            $('.newCampo1').css('border-color', 'red');
+            errorMsg = 'Favor de agregar un objetivo.';
+            dirError = true; dirErrorCounter++;
+
+            if (dirError) {
+                if (dirErrorCounter > 1) errorMsg = ''
+                app.alert.show('Error al agregar objetivo', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: errorMsg
+
+                });
+                return;
+            }
+        }else{
+      var valor1 = $('.newCampo1')[0].value;
       var item = {
-        "name":valor1,"cumplimiento":""
+      "name":valor1,"cumplimiento":""
       };
 
       this.myobject.records.push(item);
       this.render();
+        }
     },
 
     // /**
