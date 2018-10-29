@@ -52,6 +52,14 @@
 
     loadparticipantes:function(options){
         this.arr_responsables=$.parseJSON( '{"arr_responsables": {"responsables":'+JSON.stringify(selfData.mParticipantes.participantes)+'}}');
+        for(var i=0;i<this.arr_responsables.arr_responsables.responsables.length;i++){
+            if(this.arr_responsables.arr_responsables.responsables[i].apaterno!=null || this.arr_responsables.arr_responsables.responsables[i].apaterno!=undefined){
+                this.arr_responsables.arr_responsables.responsables[i].nombres+=' '+this.arr_responsables.arr_responsables.responsables[i].apaterno;
+            }
+            if(this.arr_responsables.arr_responsables.responsables[i].amaterno!=null || this.arr_responsables.arr_responsables.responsables[i].amaterno!=undefined){
+                this.arr_responsables.arr_responsables.responsables[i].nombres+=' '+this.arr_responsables.arr_responsables.responsables[i].amaterno;
+            }
+        }
         _.extend(this, this.arr_responsables);
         this.compromiso=$('.newcompromiso')[0].value;
         _.extend(this, this.compromiso);
@@ -79,6 +87,9 @@
             this.model.set('minuta_compromisos', this.myData.records);
             //this.model.save();
             this.render();
+            $('.newcompromiso').val('');
+            $('.newresponsable').val('0');
+            $('.newdate ').val('');
         }
     },
 
