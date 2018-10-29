@@ -1,5 +1,5 @@
 <?php
-$module_name = 'minut_Objetivos';
+$module_name = 'minut_Participantes';
 $viewdefs[$module_name] = 
 array (
   'base' => 
@@ -89,7 +89,7 @@ array (
                 'event' => 'button:duplicate_button:click',
                 'name' => 'duplicate_button',
                 'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
-                'acl_module' => 'minut_Objetivos',
+                'acl_module' => 'minut_Participantes',
                 'acl_action' => 'create',
               ),
               7 => 
@@ -170,30 +170,51 @@ array (
             array (
               0 => 
               array (
-                'name' => 'tct_objetivo_c',
-                'label' => 'LBL_TCT_OBJETIVO_C',
+                'name' => 'tct_nombre_completo_c',
+                'label' => 'LBL_TCT_NOMBRE_COMPLETO_C',
               ),
               1 => 
               array (
-                'name' => 'tct_cumplimiento_chk',
-                'label' => 'LBL_TCT_CUMPLIMIENTO_CHK',
+                'name' => 'tct_asistencia_c',
+                'label' => 'LBL_TCT_ASISTENCIA_C',
               ),
-              2 => 'assigned_user_name',
-              3 => 'team_name',
+              2 => 
+              array (
+                'name' => 'tct_apellido_paterno_c',
+                'label' => 'LBL_TCT_APELLIDO_PATERNO_C',
+              ),
+              3 => 
+              array (
+                'name' => 'tct_apellido_materno_c',
+                'label' => 'LBL_TCT_APELLIDO_MATERNO_C',
+              ),
               4 => 
               array (
-                'name' => 'tag',
+                'name' => 'tct_correo_c',
+                'label' => 'LBL_TCT_CORREO_C',
               ),
               5 => 
               array (
-                'name' => 'minut_minutas_minut_objetivos_name',
+                'name' => 'tct_telefono_c',
+                'label' => 'LBL_TCT_TELEFONO_C',
               ),
               6 => 
               array (
-                'name' => 'meetings_minut_objetivos_1_name',
+                'name' => 'tct_tipo_registro_c',
+                'label' => 'LBL_TCT_TIPO_REGISTRO_C',
               ),
               7 => 
               array (
+              ),
+              8 => 'assigned_user_name',
+              9 => 'team_name',
+              10 => 
+              array (
+                'name' => 'tag',
+              ),
+              11 => 
+              array (
+                'name' => 'minut_minutas_minut_participantes_name',
               ),
             ),
           ),

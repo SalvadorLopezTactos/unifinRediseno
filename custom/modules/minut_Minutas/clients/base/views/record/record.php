@@ -1,28 +1,28 @@
 <?php
 $module_name = 'minut_Minutas';
-$viewdefs[$module_name] = 
+$viewdefs[$module_name] =
 array (
-  'base' => 
+  'base' =>
   array (
-    'view' => 
+    'view' =>
     array (
-      'record' => 
+      'record' =>
       array (
-        'buttons' => 
+        'buttons' =>
         array (
-          0 => 
+          0 =>
           array (
             'type' => 'button',
             'name' => 'cancel_button',
             'label' => 'LBL_CANCEL_BUTTON_LABEL',
             'css_class' => 'btn-invisible btn-link',
             'showOn' => 'edit',
-            'events' => 
+            'events' =>
             array (
               'click' => 'button:cancel_button:click',
             ),
           ),
-          1 => 
+          1 =>
           array (
             'type' => 'rowaction',
             'event' => 'button:save_button:click',
@@ -32,15 +32,15 @@ array (
             'showOn' => 'edit',
             'acl_action' => 'edit',
           ),
-          2 => 
+          2 =>
           array (
             'type' => 'actiondropdown',
             'name' => 'main_dropdown',
             'primary' => true,
             'showOn' => 'view',
-            'buttons' => 
+            'buttons' =>
             array (
-              0 => 
+              0 =>
               array (
                 'type' => 'rowaction',
                 'event' => 'button:edit_button:click',
@@ -48,14 +48,14 @@ array (
                 'label' => 'LBL_EDIT_BUTTON_LABEL',
                 'acl_action' => 'edit',
               ),
-              1 => 
+              /*1 =>
               array (
                 'type' => 'shareaction',
                 'name' => 'share',
                 'label' => 'LBL_RECORD_SHARE_BUTTON',
                 'acl_action' => 'view',
               ),
-              2 => 
+              2 =>
               array (
                 'type' => 'pdfaction',
                 'name' => 'download-pdf',
@@ -63,7 +63,7 @@ array (
                 'action' => 'download',
                 'acl_action' => 'view',
               ),
-              3 => 
+              3 =>
               array (
                 'type' => 'pdfaction',
                 'name' => 'email-pdf',
@@ -71,11 +71,11 @@ array (
                 'action' => 'email',
                 'acl_action' => 'view',
               ),
-              4 => 
+              4 =>
               array (
                 'type' => 'divider',
               ),
-              5 => 
+              5 =>
               array (
                 'type' => 'rowaction',
                 'event' => 'button:find_duplicates_button:click',
@@ -83,7 +83,7 @@ array (
                 'label' => 'LBL_DUP_MERGE',
                 'acl_action' => 'edit',
               ),
-              6 => 
+              6 =>
               array (
                 'type' => 'rowaction',
                 'event' => 'button:duplicate_button:click',
@@ -92,7 +92,7 @@ array (
                 'acl_module' => 'minut_Minutas',
                 'acl_action' => 'create',
               ),
-              7 => 
+              7 =>
               array (
                 'type' => 'rowaction',
                 'event' => 'button:audit_button:click',
@@ -100,19 +100,19 @@ array (
                 'label' => 'LNK_VIEW_CHANGE_LOG',
                 'acl_action' => 'view',
               ),
-              8 => 
+              8 =>
               array (
                 'type' => 'divider',
               ),
-              9 => 
+              9 =>
               array (
                 'type' => 'rowaction',
                 'event' => 'button:delete_button:click',
                 'name' => 'delete_button',
                 'label' => 'LBL_DELETE_BUTTON_LABEL',
                 'acl_action' => 'delete',
-              ),
-              10 => 
+              ),*/
+              1 =>
               array (
                 'type' => 'rowaction',
                 'event' => 'button:view_document:click',
@@ -122,22 +122,22 @@ array (
               ),
             ),
           ),
-          3 => 
+          3 =>
           array (
             'name' => 'sidebar_toggle',
             'type' => 'sidebartoggle',
           ),
         ),
-        'panels' => 
+        'panels' =>
         array (
-          0 => 
+          0 =>
           array (
             'name' => 'panel_header',
             'label' => 'LBL_RECORD_HEADER',
             'header' => true,
-            'fields' => 
+            'fields' =>
             array (
-              0 => 
+              0 =>
               array (
                 'name' => 'picture',
                 'type' => 'avatar',
@@ -147,7 +147,7 @@ array (
                 'readonly' => true,
               ),
               1 => 'name',
-              2 => 
+              2 =>
               array (
                 'name' => 'favorite',
                 'label' => 'LBL_FAVORITE',
@@ -155,7 +155,7 @@ array (
                 'readonly' => true,
                 'dismiss_label' => true,
               ),
-              3 => 
+              3 =>
               array (
                 'name' => 'follow',
                 'label' => 'LBL_FOLLOW',
@@ -165,7 +165,7 @@ array (
               ),
             ),
           ),
-          1 => 
+          1 =>
           array (
             'name' => 'panel_body',
             'label' => 'LBL_RECORD_BODY',
@@ -174,31 +174,45 @@ array (
             'placeholders' => true,
             'newTab' => false,
             'panelDefault' => 'collapsed',
-            'fields' => 
+            'fields' =>
             array (
-              0 => 
+              0 =>
               array (
                 'name' => 'tct_relacionado_con_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_RELACIONADO_CON_C',
                 'readonly' => true,
               ),
-              1 => 
+              1 =>
               array (
                 'name' => 'minut_minutas_meetings_name',
                 'studio' => 'visible',
                 'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MEETINGS_TITLE',
               ),
-              2 => 
+              2 =>
+              array (
+                'name' => 'minuta_division',
+                'studio' => 'visible',
+                'label' => 'minuta_division',
+                'span' => 12,
+              ),
+              3 =>
               array (
                 'name' => 'minuta_participantes',
                 'studio' => 'visible',
                 'label' => 'minuta_participantes',
                 'span' => 12,
               ),
+              4 =>
+              array (
+                'name' => 'minuta_division',
+                'studio' => 'visible',
+                'label' => 'minuta_division',
+                'span' => 12,
+              ),
             ),
           ),
-          2 => 
+          2 =>
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -207,18 +221,32 @@ array (
             'columns' => 2,
             'labelsOnTop' => 1,
             'placeholders' => 1,
-            'fields' => 
+            'fields' =>
             array (
-              0 => 
+              0 =>
+              array (
+                'name' => 'minuta_division',
+                'studio' => 'visible',
+                'label' => 'minuta_division',
+                'span' => 12,
+              ),
+              1 =>
               array (
                 'name' => 'minuta_objetivos',
                 'studio' => 'visible',
                 'label' => 'minuta_objetivos',
                 'span' => 12,
               ),
+              2 =>
+              array (
+                'name' => 'minuta_division',
+                'studio' => 'visible',
+                'label' => 'minuta_division',
+                'span' => 12,
+              ),
             ),
           ),
-          3 => 
+          3 =>
           array (
             'newTab' => false,
             'panelDefault' => 'collapsed',
@@ -227,18 +255,32 @@ array (
             'columns' => 2,
             'labelsOnTop' => 1,
             'placeholders' => 1,
-            'fields' => 
+            'fields' =>
             array (
-              0 => 
+              0 =>
+              array (
+                'name' => 'minuta_division',
+                'studio' => 'visible',
+                'label' => 'minuta_division',
+                'span' => 12,
+              ),
+              1 =>
               array (
                 'name' => 'minuta_compromisos',
                 'studio' => 'visible',
                 'label' => 'minuta_compromisos',
                 'span' => 12,
               ),
+              2 =>
+              array (
+                'name' => 'minuta_division',
+                'studio' => 'visible',
+                'label' => 'minuta_division',
+                'span' => 12,
+              ),
             ),
           ),
-          4 => 
+          4 =>
           array (
             'name' => 'panel_hidden',
             'label' => 'LBL_SHOW_MORE',
@@ -248,52 +290,52 @@ array (
             'placeholders' => true,
             'newTab' => false,
             'panelDefault' => 'collapsed',
-            'fields' => 
+            'fields' =>
             array (
-              0 => 
+              0 =>
               array (
                 'name' => 'tct_cliente_no_interesado_chk',
                 'label' => 'LBL_TCT_CLIENTE_NO_INTERESADO_CHK',
               ),
-              1 => 
+              1 =>
               array (
                 'name' => 'tct_motivo_c',
                 'label' => 'LBL_TCT_MOTIVO_C',
               ),
-              2 => 
+              2 =>
               array (
                 'name' => 'tct_programa_nueva_reunion_chk',
                 'label' => 'LBL_TCT_PROGRAMA_NUEVA_REUNION_CHK',
               ),
-              3 => 
+              3 =>
               array (
                 'name' => 'fecha_y_hora_c',
                 'label' => 'LBL_FECHA_Y_HORA_C',
               ),
-              4 => 
+              4 =>
               array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_ASSIGNED_TO',
               ),
-              5 => 
+              5 =>
               array (
               ),
-              6 => 
+              6 =>
               array (
                 'name' => 'objetivo_c',
                 'label' => 'LBL_OBJETIVO_C',
               ),
-              7 => 
+              7 =>
               array (
                 'name' => 'resultado_c',
                 'label' => 'LBL_RESULTADO_C',
               ),
-              8 => 
+              8 =>
               array (
                 'name' => 'tct_proceso_unifin_time_c',
                 'label' => 'LBL_TCT_PROCESO_UNIFIN_TIME',
               ),
-              9 => 
+              9 =>
               array (
                 'name' => 'tct_proceso_unifin_address_c',
                 'label' => 'LBL_TCT_PROCESO_UNIFIN_ADDRESS',
@@ -301,7 +343,7 @@ array (
             ),
           ),
         ),
-        'templateMeta' => 
+        'templateMeta' =>
         array (
           'useTabs' => false,
         ),
