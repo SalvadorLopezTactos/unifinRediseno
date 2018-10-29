@@ -89,7 +89,7 @@ SQL;
 		$levadmin = <<<SQL
 			UPDATE meetings_users SET deleted = 1
 			WHERE meeting_id = '{$bean->id}'
-			AND user_id = 1
+			AND user_id = '1'
 SQL;
 		$levadmin1 = $db->query($levadmin);
 	}
@@ -277,9 +277,9 @@ SQL;
 		}
 		//Elimina Admin
 		$levadmin = <<<SQL
-			UPDATE meetings_users SET deleted = 1
-			WHERE meeting_id = '{$bean->id}'
-			AND user_id = 1
+                UPDATE meetings_users SET deleted = 1
+                WHERE meeting_id = '{$bean->id}'
+			AND user_id = '1'
 SQL;
 		$levadmin1 = $db->query($levadmin);
     }
