@@ -10,6 +10,15 @@
 
     },
 
+    render: function(){
+        this._super("render");
+        //Quita etiquetas de campos custom
+        $('[data-name=minuta_participantes]').find('.record-label').addClass('hide');
+        $('[data-name=minuta_objetivos]').find('.record-label').addClass('hide');
+        $('[data-name=minuta_compromisos]').find('.record-label').addClass('hide');
+        $('[data-name=minuta_division]').find('.record-label').addClass('hide');
+    },
+
     view_document: function()
     {
         window.open('https://www.natura.com.mx/repositorio/descargas/consultorias/CONSULTORIA_C15-18.pdf','_blank');

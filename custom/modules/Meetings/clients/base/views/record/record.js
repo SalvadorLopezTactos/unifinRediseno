@@ -326,11 +326,16 @@
         self.model.set('check_in_time_c', today);
         self.model.save();
     },
+    
     showPosition:function(position) {
         self.model.set('check_in_longitude_c', position.coords.longitude);
         self.model.set('check_in_latitude_c',position.coords.latitude);
         self.model.save();
         self.render();
+        app.alert.show('alert_check-in_success', {
+                level: 'success',
+                messages: 'Check-in Existoso',
+            });
         },
  
     /*Victor Martinez Lopez 22-10-2018
