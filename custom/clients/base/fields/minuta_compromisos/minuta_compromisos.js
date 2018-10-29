@@ -63,6 +63,10 @@
         _.extend(this, this.arr_responsables);
         this.compromiso=$('.newcompromiso')[0].value;
         _.extend(this, this.compromiso);
+        this.responsable=$('.newresponsable')[0].value;
+        _.extend(this, this.responsable);
+        this.date=$('.newdate')[0].value;
+        _.extend(this, this.date);
         console.log("responsables seteados");
 
         this.render();
@@ -82,14 +86,34 @@
         "compromiso":valor1,"id_resp":valor2, "responsable":valor3, "fecha":valor4, "cuenta_madre":valor5
       };
 
-        if(valor1.trim()!='') {
+
+        if(valor1.trim()!='' && valor2!='0' && valor4!='') {
             this.myData.records.push(item);
             this.model.set('minuta_compromisos', this.myData.records);
-            //this.model.save();
             this.render();
             $('.newcompromiso').val('');
+            $('.newcompromiso').css('border-color', '');
             $('.newresponsable').val('0');
+            $('.newresponsable').css('border-color', '');
             $('.newdate ').val('');
+            $('.newdate').css('border-color', '');
+
+        }else{
+            if(valor1.trim()=='') {
+                $('.newcompromiso').css('border-color', 'red');
+            }else{
+                $('.newcompromiso').css('border-color', '');
+            }
+            if(valor2=='0') {
+                $('.newresponsable').css('border-color', 'red');
+            }else{
+                $('.newresponsable').css('border-color', '');
+            }
+            if(valor4=='') {
+                $('.newdate').css('border-color', 'red');
+            }else{
+                $('.newdate').css('border-color', '');
+            }
         }
     },
 
@@ -98,6 +122,18 @@
 
         if(this.compromiso!=undefined) {
             $('.newcompromiso').val(this.compromiso);
+            $('.newresponsable').val(this.responsable);
+            $('.newdate').val(this.date);
+
+            if($('.newcompromiso').val().trim()=='') {
+                $('.newcompromiso').css('border-color', 'red');
+            }
+            if($('.newresponsable').val()=='0') {
+                $('.newresponsable').css('border-color', 'red');
+            }
+            if($('.newdate').val()=='') {
+                $('.newdate').css('border-color', 'red');
+            }
         }
 
         $('.removecompromiso2').click(function(evt) {
