@@ -9,8 +9,8 @@
   <div>
       {{#each myData2.records}}
         <div class="control-group compromisos" style="display: flex;flex-direction: row;align-items: flex-start" >
-          <input type="text" class="existingcompromiso" value="{{name}}" style="width: 95%;margin: 4px;display: inline-block;" disabled>
-          <select class="existingresponsable" data-field="responsable"  style="font-size: 15px;font-weight: 500;width: 90%;margin: 4px;" disabled>
+          <input type="text" class="loadedcompromiso" value="{{name}}" style="width: 95%;margin: 4px;display: inline-block;" disabled>
+          <select class="loadedresponsable" data-field="responsable"  style="font-size: 15px;font-weight: 500;width: 90%;margin: 4px;" disabled>
               {{#each ../arr_responsables.responsables}}
                   {{#if_eq id_resp2 ../assigned_user_id}}
                       <option value="{{id_resp2}}" selected="true">{{responsable2}}</option>
@@ -19,7 +19,7 @@
                   {{/if_eq}}
               {{/each}}
           </select>
-          <input type="date" class="existingdate" value="{{date_entered}}" data-field="date_compromiso" style="width: 95%;margin: 4px;display: inline-block;" disabled >
+          <input type="date" class="loadeddate" value="{{date_entered}}" data-field="date_compromiso" min="{{../min_date}}" style="width: 95%;margin: 4px;display: inline-block;" disabled >
           <!--<div class="btn-toolbar prevent-mousedown">
               <div class="btn-group prevent-mousedown">
                   <a href="javascript:void(0)" class="btn removecompromiso" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="fa fa-minus"></i></a>
@@ -42,7 +42,7 @@
                       {{/if_eq}}
                   {{/each}}
               </select>
-              <input type="date" class="existingdate" value="{{fecha}}" data-field="date_compromiso" style="width: 95%;margin: 4px;display: inline-block;">
+              <input type="date" class="existingdate" value="{{fecha}}" data-field="date_compromiso" min="{{../min_date}}" style="width: 95%;margin: 4px;display: inline-block;">
               <div class="btn-toolbar prevent-mousedown">
                   <div class="btn-group prevent-mousedown">
                       <a href="javascript:void(0)" class="btn removecompromiso2" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="fa fa-minus"></i></a>
@@ -62,7 +62,7 @@
           <option value="{{id}}">{{nombres}}</option>
         {{/each}}
       </select>
-      <input type="date" class="newdate" placeholder="Fecha Compromiso" data-field="date_compromiso" style="width: 95%;margin: 4px;display: inline-block;">
+      <input type="date" class="newdate" placeholder="Fecha Compromiso" data-field="date_compromiso" min="{{min_date}}" style="width: 95%;margin: 4px;display: inline-block;">
       <div class="btn-toolbar prevent-mousedown">
          <div class="btn-group">
             <a href="javascript:void(0)" class="btn addcompromiso" rel="tooltip" title="{{str "LBL_EMAIL_ADD"}}"><i class="fa fa-check"></i></a>

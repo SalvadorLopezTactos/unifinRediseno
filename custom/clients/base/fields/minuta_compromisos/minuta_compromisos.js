@@ -23,7 +23,6 @@
         this.loadData();
     },
 
-
     loadData: function (options) {
         selfcomp=this;
 
@@ -43,6 +42,19 @@
                 console.log(e);
             }
         });
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10) {
+            dd = '0'+dd
+        }
+        if(mm<10) {
+            mm = '0'+mm
+        }
+        min_date = {"min_date": yyyy + '-' + mm + '-' + dd};
+        _.extend(this, min_date);
 
         myData = $.parseJSON( '{"myData":{"records":[]}}');
         _.extend(this, myData);
@@ -70,11 +82,13 @@
         console.log("responsables seteados");
 
         this.render();
+
+        $('.newcompromiso').val(this.compromiso);
+        $('.newresponsable').val(this.responsable);
+        $('.newdate').val(this.date);
     },
 
-    /*
-        Función para agregar nuevos elementos al objeto
-    */
+    //Función para agregar nuevos elementos al objeto
     addRecordFunction: function (options) {
       var valor1 = $('.newcompromiso')[0].value;
       var valor2 = $('.newresponsable')[0].value;
@@ -87,7 +101,7 @@
       };
 
 
-        if(valor1.trim()!='' && valor2!='0' && valor4!='') {
+        if(valor1.trim()!='' /*&& valor2!='0'*/ && valor4!='') {//////////////////////////////////////////////////////////////
             this.myData.records.push(item);
             this.model.set('minuta_compromisos', this.myData.records);
             this.render();
@@ -117,24 +131,34 @@
         }
     },
 
+    emptyfield:function(evt){
+        if (!evt) return;
+
+        $('.existingcompromiso').each(function(index,value){
+            if($(value).val()==''){
+                $('.existingcompromiso').eq(index).css('border-color', 'red');
+            }else{
+                $('.existingcompromiso').eq(index).css('border-color', '');
+            }
+        });
+        $('.existingdate').each(function(index,value){
+            if($(value).val()==''){
+                $('.existingdate').eq(index).css('border-color', 'red');
+            }else{
+                $('.existingdate').eq(index).css('border-color', '');
+            }
+        });
+        $('.existingresponsable').each(function(index,value){
+            if($(value).text().trim()==''){
+                $('.existingresponsable').eq(index).css('border-color', 'red');
+            }else{
+                $('.existingresponsable').eq(index).css('border-color', '');
+            }
+        });
+    },
+
     _render: function () {
         this._super("_render");
-
-        if(this.compromiso!=undefined) {
-            $('.newcompromiso').val(this.compromiso);
-            $('.newresponsable').val(this.responsable);
-            $('.newdate').val(this.date);
-
-            if($('.newcompromiso').val().trim()=='') {
-                $('.newcompromiso').css('border-color', 'red');
-            }
-            if($('.newresponsable').val()=='0') {
-                $('.newresponsable').css('border-color', 'red');
-            }
-            if($('.newdate').val()=='') {
-                $('.newdate').css('border-color', 'red');
-            }
-        }
 
         $('.removecompromiso2').click(function(evt) {
             var row = $(this).closest(".compromisos2");    // Find the row
@@ -146,23 +170,39 @@
             var row = $(this).closest(".compromisos2");    // Find the row
             var val= row.find(".existingresponsable").context.value;
             var text = row.find(".existingresponsable option[value="+val+"]").text();
-            selfcomp.myData.records[row.index()].responsable = text;
-            selfcomp.myData.records[row.index()].id_resp = val;
-            selfcomp.render();
+            if($('.existingresponsable').eq(row.index()).text().trim()!='') {
+                selfcomp.myData.records[row.index()].responsable = text;
+                selfcomp.myData.records[row.index()].id_resp = val;
+                selfcomp.render();
+                $('.existingresponsable').eq(row.index()).css('border-color', '');
+            }else{
+                $('.existingresponsable').eq(row.index()).css('border-color', 'red');
+            }
         });
 
         $('.existingcompromiso').change(function(evt) {
             var row = $(this).closest(".compromisos2");    // Find the row
             var val= row.find(".existingcompromiso").context.value;
+            if($('.existingcompromiso').eq(row.index()).val().trim()!='') {
             selfcomp.myData.records[row.index()].compromiso = val;
             selfcomp.render();
+                $('.existingcompromiso').eq(row.index()).css('border-color', '');
+            }else{
+                $('.existingcompromiso').eq(row.index()).css('border-color', 'red');
+            }
         });
 
         $('.existingdate').change(function(evt) {
             var row = $(this).closest(".compromisos2");    // Find the row
             var val= row.find(".existingdate").context.value;
+            if($('.existingdate').eq(row.index()).val().trim()!='') {
             selfcomp.myData.records[row.index()].fecha = val;
             selfcomp.render();
+            selfcomp.render();
+                $('.existingdate').eq(row.index()).css('border-color', '');
+            }else{
+                $('.existingdate').eq(row.index()).css('border-color', 'red');
+            }
         });
     },
 
