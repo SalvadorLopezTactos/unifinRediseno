@@ -387,7 +387,7 @@ SQL;
                 //Actualiza
                 $GLOBALS['log']->fatal('Actualiza Objetivos');
                 $GLOBALS['log']->fatal($objetivo['name']);
-                $beanObjetivo = BeanFactory::retrieveBean('minut_Objetivos', $objetivo->id);
+                $beanObjetivo = BeanFactory::retrieveBean('minut_Objetivos', $objetivo['id']);
                 $beanObjetivo->name = $objetivo['name'];
                 $beanObjetivo->save();
             }else{

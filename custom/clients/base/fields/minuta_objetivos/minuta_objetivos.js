@@ -14,44 +14,70 @@
         this.model.addValidationTask('ObtenerObjetivos', _.bind(this.almacenaobjetivos, this));
         //Carga datos
         this.model.on('sync', this.loadData, this);
-        this.myobjmin={};
-        this.myobjmin.records=[];
+        this.myobjmin = {};
+        this.myobjmin.records = [];
+
+        //Carga datos:
+        //Creación
+        this.loadData();
+        //Registro
+        this.model.on('sync', this.loadData, this);
     },
 
 
     loadData: function (options) {
         myobjmin = "";
-        var selfvalue= this;
-        if (this.model.get("minut_minutas_meetingsmeetings_idb") != "")  {
-        app.api.call('GET', app.api.buildURL('Meetings/' + this.model.get("minut_minutas_meetingsmeetings_idb") + '/link/meetings_minut_objetivos_1'), null, {
-            success: function (data) {
-                selfvalue.myobjmin= data;
-                _.extend(this, selfvalue.myobjmin);
-                selfvalue.render();
-            },
-            error: function (e) {
-                throw e;
-            }
-        });
-    }
+        var selfvalue = this;
 
+        //Codición para cargar objetivos relacionados a la REUNIÓN
+        if (this.action == 'detail') {
+
+            if (this.model.get("minut_minutas_meetingsmeetings_idb") != "") {
+                app.api.call('GET', app.api.buildURL('Meetings/' + this.model.get("minut_minutas_meetingsmeetings_idb") + '/link/meetings_minut_objetivos_1'), null, {
+                    success: function (data) {
+                        selfvalue.myobjmin = data;
+                        _.extend(this, selfvalue.myobjmin);
+                        selfvalue.render();
+                    },
+                    error: function (e) {
+                        throw e;
+                    }
+                });
+            }
+
+        }
+        //Condición para cargar objetivos de la Reunión, desde la vista de Minuta
+        else if(this.context.parent){
+            var idReunion=this.context.parent.get('modelId');
+
+            app.api.call('GET', app.api.buildURL('Meetings/' + idReunion + '/link/meetings_minut_objetivos_1'), null, {
+                success: function (data) {
+                    selfvalue.myobjmin = data;
+                    _.extend(this, selfvalue.myobjmin);
+                    selfvalue.render();
+                },
+                error: function (e) {
+                    throw e;
+                }
+            });
+
+        }
 
     },
-
 
 
     _render: function () {
         self = this;
         this._super("_render");
 
-        $('.updateRecord').click(function(evt) {
-          var row = $(this).closest("tr");    // Find the row
-          if (self.myobjmin.records[row.index()].cumplimiento != '') {
-              self.myobjmin.records[row.index()].cumplimiento = '';
-          }else{
-              self.myobjmin.records[row.index()].cumplimiento = '1';
-          }
-          self.render();
+        $('.updateRecord').click(function (evt) {
+            var row = $(this).closest("tr");    // Find the row
+            if (self.myobjmin.records[row.index()].cumplimiento != '') {
+                self.myobjmin.records[row.index()].cumplimiento = '';
+            } else {
+                self.myobjmin.records[row.index()].cumplimiento = '1';
+            }
+            self.render();
         });
 
     },
@@ -79,9 +105,9 @@
         }, this);
     },
 
-    almacenaobjetivos:function(fields, errors, callback) {
-        this.model.set('minuta_objetivos', self.myobjmin);
+    almacenaobjetivos: function (fields, errors, callback) {
 
+        this.model.set('minuta_objetivos', this.myobjmin);
 
         callback(null, fields, errors);
     },
