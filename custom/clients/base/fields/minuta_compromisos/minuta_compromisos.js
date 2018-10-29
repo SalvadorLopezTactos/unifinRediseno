@@ -79,6 +79,9 @@
             this.model.set('minuta_compromisos', this.myData.records);
             //this.model.save();
             this.render();
+            $('.newcompromiso').val('');
+            $('.newresponsable').val('0');
+            $('.newdate ').val('');
         }
     },
 

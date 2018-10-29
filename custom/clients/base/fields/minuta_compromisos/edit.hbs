@@ -57,7 +57,7 @@
   <div class="control-group compromiso2" style="display: flex;flex-direction: row;align-items: flex-start">
       <input type="text" class="newcompromiso input-append" placeholder="Agregar compromiso" style="width: 95%;margin: 4px;display: inline-block;">
       <select class="newresponsable" data-field="responsable" placeholder="Responsable" style="font-size: 15px;font-weight: 500;width: 90%;margin: 4px;">
-        <option>-Selecciona un Responsable-</option>
+        <option value="0">-Selecciona un Responsable-</option>
         {{#each arr_responsables.responsables}}
           <option value="{{id}}">{{nombres}} {{aparterno}} {{amaterno}}</option>
         {{/each}}
