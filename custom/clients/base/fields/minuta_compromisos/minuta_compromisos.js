@@ -23,7 +23,7 @@
         this.loadData();
     },
 
-    loadData: function (options) {
+    loadData: function () {
         selfcomp=this;
 
         app.api.call('GET', app.api.buildURL('minut_Minutas/'+this.model.get('id')+'/link/minut_minutas_minut_compromisos'), null, {
@@ -62,7 +62,7 @@
         this.render();
     },
 
-    loadparticipantes:function(options){
+    loadparticipantes:function(){
         this.arr_responsables=$.parseJSON( '{"arr_responsables": {"responsables":'+JSON.stringify(selfData.mParticipantes.participantes)+'}}');
         for(var i=0;i<this.arr_responsables.arr_responsables.responsables.length;i++){
             if(this.arr_responsables.arr_responsables.responsables[i].apaterno!=null || this.arr_responsables.arr_responsables.responsables[i].apaterno!=undefined){
@@ -89,7 +89,7 @@
     },
 
     //Función para agregar nuevos elementos al objeto
-    addRecordFunction: function (options) {
+    addRecordFunction: function () {
       var valor1 = $('.newcompromiso')[0].value;
       var valor2 = $('.newresponsable')[0].value;
       var valor3 = $(".newresponsable option:selected").text();
@@ -100,8 +100,7 @@
         "compromiso":valor1,"id_resp":valor2, "responsable":valor3, "fecha":valor4, "cuenta_madre":valor5
       };
 
-
-        if(valor1.trim()!='' /*&& valor2!='0'*/ && valor4!='') {//////////////////////////////////////////////////////////////
+        if(valor1.trim()!='' && valor2!='0' && valor4!='') {
             this.myData.records.push(item);
             this.model.set('minuta_compromisos', this.myData.records);
             this.render();
@@ -129,32 +128,6 @@
                 $('.newdate').css('border-color', '');
             }
         }
-    },
-
-    emptyfield:function(evt){
-        if (!evt) return;
-
-        $('.existingcompromiso').each(function(index,value){
-            if($(value).val()==''){
-                $('.existingcompromiso').eq(index).css('border-color', 'red');
-            }else{
-                $('.existingcompromiso').eq(index).css('border-color', '');
-            }
-        });
-        $('.existingdate').each(function(index,value){
-            if($(value).val()==''){
-                $('.existingdate').eq(index).css('border-color', 'red');
-            }else{
-                $('.existingdate').eq(index).css('border-color', '');
-            }
-        });
-        $('.existingresponsable').each(function(index,value){
-            if($(value).text().trim()==''){
-                $('.existingresponsable').eq(index).css('border-color', 'red');
-            }else{
-                $('.existingresponsable').eq(index).css('border-color', '');
-            }
-        });
     },
 
     _render: function () {
