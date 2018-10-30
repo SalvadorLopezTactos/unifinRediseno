@@ -125,7 +125,6 @@ array (
               4 => 
               array (
                 'name' => 'status',
-                'type' => 'event-status',
                 'enum_width' => 'auto',
                 'dropdown_width' => 'auto',
                 'dropdown_class' => 'select2-menu-only',
