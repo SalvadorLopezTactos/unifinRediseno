@@ -116,6 +116,7 @@ array (
                 'name' => 'minut_minutas_meetings_name',
                 'studio' => 'visible',
                 'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MEETINGS_TITLE',
+                'readonly' => true,
               ),
             ),
           ),
