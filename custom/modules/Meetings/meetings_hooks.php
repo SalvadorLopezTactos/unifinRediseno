@@ -89,7 +89,7 @@ SQL;
 		$levadmin = <<<SQL
 			UPDATE meetings_users SET deleted = 1
 			WHERE meeting_id = '{$bean->id}'
-			AND user_id = 1
+			AND user_id = '1'
 SQL;
 		$levadmin1 = $db->query($levadmin);
 	}
@@ -277,9 +277,9 @@ SQL;
 		}
 		//Elimina Admin
 		$levadmin = <<<SQL
-			UPDATE meetings_users SET deleted = 1
-			WHERE meeting_id = '{$bean->id}'
-			AND user_id = 1
+                UPDATE meetings_users SET deleted = 1
+                WHERE meeting_id = '{$bean->id}'
+			AND user_id = '1'
 SQL;
 		$levadmin1 = $db->query($levadmin);
     }
@@ -378,4 +378,33 @@ SQL;
             }
         }
     }
+
+    function saveObjetivos ($bean = null, $event = null, $args = null)
+    {
+
+        if($bean->reunion_objetivos != null || !empty($bean->reunion_objetivos)){
+
+            foreach ($bean->reunion_objetivos['records'] as $objetivo) {
+                if ($objetivo['id']) {
+                    //Actualiza
+                    $GLOBALS['log']->fatal('Actualiza Objetivos');
+                    $GLOBALS['log']->fatal($objetivo['name']);
+                    $beanObjetivo = BeanFactory::retrieveBean('minut_Objetivos', $objetivo['id']);
+                    $beanObjetivo->name = $objetivo['name'];
+                    $beanObjetivo->save();
+                }else{
+                    //Crea
+                    $GLOBALS['log']->fatal('Inserta Objetivos');
+                    $GLOBALS['log']->fatal($objetivo['name']);
+                    $beanObjetivo = BeanFactory::newBean('minut_Objetivos');
+                    $beanObjetivo->name = $objetivo['name'];
+                    $beanObjetivo->meetings_minut_objetivos_1meetings_ida = $bean->id;
+                    $beanObjetivo->save();
+                }
+            }
+
+        }
+
+    }
+
 }

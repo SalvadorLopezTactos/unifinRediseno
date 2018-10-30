@@ -1,0 +1,24 @@
+<!--
+/*
+ *  AF - 2018-10-23
+ *  CustomField - Grid
+ */
+-->
+<!-- Campo para desplegar Objetivos en minuta: Detalle -->
+<div>
+  <!-- Table list-->
+  <div class="list-view">
+    <table id="tableResult" class="table">
+        <tbody>
+          {{#each myobject.records}}
+            <tr>
+                <td class="objetivoSelect" width="100%">
+                  {{name}}
+                </td>
+            </tr>
+          {{/each}}
+        </tbody>
+    </table>
+  </div>
+</div>
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

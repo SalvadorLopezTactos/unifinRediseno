@@ -23,7 +23,11 @@
         //this.model.addValidationTask('ValidaCuentaNoVacia',_.bind(this.ValidaCuentaNoVacia, this));
         //Al dar click mandara a la vista de creacion correspondiente a la minuta 
         this.context.on('button:new_minuta_b:click', this.CreaMinuta,this);
+        
+        this.context.on('button:getlocation:click', this.GetLocation, this);
+        
         this.model.on('sync', this.ValidaCuentNoVacia,this); //Validacion para creación de la minuta
+        this.model.on('sync', this.showCheckin, this);
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
         */
@@ -41,8 +45,6 @@
             this.$('div[data-name=resultado_c]').hide();
 
         }
-        //this.ValidaCuentNoVacia();
-        //this.$('[data-name="parent_name"]').attr('style', '');
     },
 
     /**
@@ -89,6 +91,9 @@
         var model=App.data.createBean('minut_Minutas');
         model.set('account_id_c', this.model.get('parent_id'));
         model.set('tct_relacionado_con_c', this.model.get('parent_name'));
+        model.set('objetivo_c', this.model.get('objetivo_c'));
+        model.set('minut_minutas_meetingsmeetings_idb',this.model.get('id'))
+        model.set('minut_minutas_meetings_name',this.model.get('name'))
         app.drawer.open({
             layout:'create',
             context:{
@@ -309,6 +314,54 @@
       callback(null, fields, errors);
     },
 
+    /*Victor Martinez Lopez 23-10-2018
+    *Función para obtener la latitud y longitud(coordenadas) y transformar a una dirección
+    */
+    GetLocation: function (){
+        self=this;
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(this.showPosition);
+        }else {
+            alert("No se pudo encontrar tu ubicacion");
+        }
+        var today= new Date();
+        self.model.set('check_in_time_c', today);
+        self.model.save();
+    },
+    
+    showPosition:function(position) {
+        self.model.set('check_in_longitude_c', position.coords.longitude);
+        self.model.set('check_in_latitude_c',position.coords.latitude);
+        self.model.save();
+        self.render();
+        app.alert.show('alert_check-in_success', {
+                level: 'success',
+                messages: 'Check-in Existoso',
+            });
+        },
+ 
+    /*Victor Martinez Lopez 22-10-2018
+    El boton de Check-in solo será visible una ocasion para guardar datos 
+    y cuando el usuario asignado sea igual la ususario loggeado Pendiente de terminar
+    */
+    showCheckin:function(){
+        var myField=this.getField("check_in1");
+    if (this.model.get('assigned_user_id')==app.user.attributes.id && (this.model.get('check_in_latitude_c')=='' || this.model.get('check_in_latitude_c')==null)){
+        //$('[name="check_in"]').eq(0).show();
+        myField.listenTo(myField, "render", function () {
+                myField.show();
+                console.log("field being rendered as: " + myField.tplName);
+            });
+    }   else   {
+        //$('[name="check_in"]').eq(0).hide();
+        myField.listenTo(myField, "render", function () {
+                myField.hide();
+                console.log("field being rendered as: " + myField.tplName);
+            });
+        }
+
+    },
+    //Heredar el objetivo y el resultado a la minuta y cambiar y una etiqueta de la minuta a la cuenta
     /*El boton de creación de la minuta solo será visible cuando la reunión tenga una cuenta
     *La fecha de termino sea igual a la fecha actual y el usuario asignado sea el usuario loggeado
      */
@@ -330,7 +383,8 @@
         var fechaendnew = Date.parse(fechaCompleta);
 
         var myField = this.getField("new_minuta");
-        if (this.model.get('parent_name')!='' && app.user.attributes.id==this.model.get('assigned_user_id') && fechaActual==fechaendnew){
+        if (this.model.get('parent_name')!='' && app.user.attributes.id==this.model.get('assigned_user_id') 
+            && fechaActual==fechaendnew && this.model.get('status')=='Planned'){
             myField.listenTo(myField, "render", function () {
                 myField.show();
                 console.log("field being rendered as: " + myField.tplName);

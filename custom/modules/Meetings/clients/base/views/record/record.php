@@ -125,7 +125,12 @@ array (
               4 => 
               array (
                 'name' => 'status',
-              ),              
+                'type' => 'event-status',
+                'enum_width' => 'auto',
+                'dropdown_width' => 'auto',
+                'dropdown_class' => 'select2-menu-only',
+                'container_class' => 'select2-menu-only',
+              ),
             ),
           ),
           1 => 
@@ -273,10 +278,10 @@ array (
                     'type' => 'repeat-count',
                   ),
                 ),
-                'span' => 6,
+                'span' => 12,
               ),
-              4 => 'location',
-              5 => 
+              3 => 'location',
+              4 => 
               array (
                 'name' => 'reminders',
                 'type' => 'fieldset',
@@ -289,18 +294,18 @@ array (
                   1 => 'email_reminder_time',
                 ),
               ),
-              6 => 
+              5 => 
               array (
                 'name' => 'description',
                 'rows' => 3,
                 'span' => 12,
               ),
-              7 => 
+              6 => 
               array (
                 'name' => 'parent_name',
                 'span' => 12,
               ),
-              8 => 
+              7 => 
               array (
                 'name' => 'invitees',
                 'type' => 'participants',
@@ -321,38 +326,38 @@ array (
                 ),
                 'span' => 12,
               ),
-              9 => 
+              8 => 
               array (
                 'name' => 'assigned_user_name',
               ),
-              10 => 
+              9 => 
               array (
               ),
-              11 => 
+              10 => 
               array (
                 'name' => 'objetivo_c',
                 'label' => 'LBL_OBJETIVO_C',
               ),
-              12 => 
+              11 => 
               array (
                 'name' => 'resultado_c',
                 'label' => 'LBL_RESULTADO_C',
               ),
-              13 => 
+              12 => 
               array (
                 'name' => 'reunion_objetivos',
                 'studio' => 'visible',
                 'label' => 'reunion_objetivos',
               ),
-              14 => 
+              13 => 
               array (
               ),
-              15 => 
+              14 => 
               array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
               ),
-              16 => 
+              15 => 
               array (
                 'name' => 'minut_minutas_meetings_1_name',
               ),
