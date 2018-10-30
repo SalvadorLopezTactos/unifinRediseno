@@ -4,6 +4,8 @@
  *  CustomField - Grid
  */
 -->
+<hr style="display: block;    height: 1px;    border: 0;    border-top: 15px solid #000042;    margin: 1em 0;    padding: 0;" >
+<br>
   <b>Compromisos existentes</b><br>
 <!--Compromisos que se cargan -->
   <div>
@@ -25,7 +27,7 @@
                   <a href="javascript:void(0)" class="btn removecompromiso" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="fa fa-minus"></i></a>
               </div>-->
           </div>
-        </div>  
+        </div>
       {{/each}}
   </div>
 <!--Compromisos que se van agregando -->
@@ -50,7 +52,7 @@
               </div>
           </div>
       {{/each}}
-  </div>      
+  </div>
   <br>
 <!--Nuevo compromiso -->
   <b>Nuevo Compromiso</b>
@@ -69,5 +71,6 @@
          </div>
       </div>
   </div>
-  {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
+  <hr style="display: block;    height: 1px;    border: 0;    border-top: 15px solid #000042;    margin: 1em 0;    padding: 0;" >
 
+  {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
