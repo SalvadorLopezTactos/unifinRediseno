@@ -1,6 +1,5 @@
 <?php
-$module_name = 'minut_Compromisos';
-$viewdefs[$module_name] = 
+$viewdefs['Tasks'] = 
 array (
   'base' => 
   array (
@@ -46,6 +45,7 @@ array (
                 'event' => 'button:edit_button:click',
                 'name' => 'edit_button',
                 'label' => 'LBL_EDIT_BUTTON_LABEL',
+                'primary' => true,
                 'acl_action' => 'edit',
               ),
               1 => 
@@ -77,22 +77,34 @@ array (
               ),
               5 => 
               array (
-                'type' => 'rowaction',
-                'event' => 'button:find_duplicates_button:click',
-                'name' => 'find_duplicates_button',
-                'label' => 'LBL_DUP_MERGE',
+                'type' => 'closebutton',
+                'name' => 'record-close-new',
+                'label' => 'LBL_CLOSE_AND_CREATE_BUTTON_TITLE',
+                'closed_status' => 'Completed',
                 'acl_action' => 'edit',
               ),
               6 => 
               array (
-                'type' => 'rowaction',
-                'event' => 'button:duplicate_button:click',
-                'name' => 'duplicate_button',
-                'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
-                'acl_module' => 'minut_Compromisos',
-                'acl_action' => 'create',
+                'type' => 'closebutton',
+                'name' => 'record-close',
+                'label' => 'LBL_CLOSE_BUTTON_TITLE',
+                'closed_status' => 'Completed',
+                'acl_action' => 'edit',
               ),
               7 => 
+              array (
+                'type' => 'divider',
+              ),
+              8 => 
+              array (
+                'type' => 'rowaction',
+                'name' => 'duplicate_button',
+                'event' => 'button:duplicate_button:click',
+                'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
+                'acl_module' => 'Tasks',
+                'acl_action' => 'create',
+              ),
+              9 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:audit_button:click',
@@ -100,11 +112,11 @@ array (
                 'label' => 'LNK_VIEW_CHANGE_LOG',
                 'acl_action' => 'view',
               ),
-              8 => 
+              10 => 
               array (
                 'type' => 'divider',
               ),
-              9 => 
+              11 => 
               array (
                 'type' => 'rowaction',
                 'event' => 'button:delete_button:click',
@@ -125,7 +137,6 @@ array (
           0 => 
           array (
             'name' => 'panel_header',
-            'label' => 'LBL_RECORD_HEADER',
             'header' => true,
             'fields' => 
             array (
@@ -133,8 +144,7 @@ array (
               array (
                 'name' => 'picture',
                 'type' => 'avatar',
-                'width' => 42,
-                'height' => 42,
+                'size' => 'large',
                 'dismiss_label' => true,
                 'readonly' => true,
               ),
@@ -144,7 +154,6 @@ array (
                 'name' => 'favorite',
                 'label' => 'LBL_FAVORITE',
                 'type' => 'favorite',
-                'readonly' => true,
                 'dismiss_label' => true,
               ),
               3 => 
@@ -168,53 +177,30 @@ array (
             'panelDefault' => 'expanded',
             'fields' => 
             array (
-              0 => 
-              array (
-                'name' => 'description',
-                'span' => 12,
-              ),
-              1 => 'assigned_user_name',
-              2 => 
-              array (
-                'name' => 'minut_minutas_minut_compromisos_name',
-              ),
+              0 => 'date_start',
+              1 => 'priority',
+              2 => 'date_due',
+              3 => 'status',
+              4 => 'assigned_user_name',
+              5 => 'parent_name',
             ),
           ),
           2 => 
           array (
             'name' => 'panel_hidden',
-            'label' => 'LBL_SHOW_MORE',
+            'label' => 'LBL_RECORD_SHOWMORE',
             'hide' => true,
             'columns' => 2,
             'labelsOnTop' => true,
-            'placeholders' => true,
             'newTab' => false,
             'panelDefault' => 'expanded',
+            'placeholders' => 1,
             'fields' => 
             array (
               0 => 
               array (
-                'name' => 'date_modified_by',
-                'readonly' => true,
-                'inline' => true,
-                'type' => 'fieldset',
-                'label' => 'LBL_DATE_MODIFIED',
-                'fields' => 
-                array (
-                  0 => 
-                  array (
-                    'name' => 'date_modified',
-                  ),
-                  1 => 
-                  array (
-                    'type' => 'label',
-                    'default_value' => 'LBL_BY',
-                  ),
-                  2 => 
-                  array (
-                    'name' => 'modified_by_name',
-                  ),
-                ),
+                'name' => 'description',
+                'span' => 12,
               ),
               1 => 
               array (
@@ -237,6 +223,30 @@ array (
                   2 => 
                   array (
                     'name' => 'created_by_name',
+                  ),
+                ),
+              ),
+              2 => 
+              array (
+                'name' => 'date_modified_by',
+                'readonly' => true,
+                'inline' => true,
+                'type' => 'fieldset',
+                'label' => 'LBL_DATE_MODIFIED',
+                'fields' => 
+                array (
+                  0 => 
+                  array (
+                    'name' => 'date_modified',
+                  ),
+                  1 => 
+                  array (
+                    'type' => 'label',
+                    'default_value' => 'LBL_BY',
+                  ),
+                  2 => 
+                  array (
+                    'name' => 'modified_by_name',
                   ),
                 ),
               ),
