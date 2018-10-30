@@ -116,6 +116,7 @@ array (
                 'name' => 'minut_minutas_meetings_name',
                 'studio' => 'visible',
                 'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MEETINGS_TITLE',
+                'readonly' => true,
               ),
             ),
           ),
@@ -215,6 +216,7 @@ array (
               array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_ASSIGNED_TO',
+                'readonly'=> true,
               ),
               5 => 
               array (
