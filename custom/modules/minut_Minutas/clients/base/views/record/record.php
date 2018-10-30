@@ -215,6 +215,7 @@ array (
               array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_ASSIGNED_TO',
+                'readonly'=> true,
               ),
               5 => 
               array (
