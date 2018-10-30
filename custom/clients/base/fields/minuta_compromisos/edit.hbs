@@ -4,9 +4,20 @@
  *  CustomField - Grid
  */
 -->
-<hr style="display: block;    height: 1px;    border: 0;    border-top: 15px solid #000042;    margin: 1em 0;    padding: 0;" >
-<br>
-  <b>Compromisos existentes</b><br>
+<div style="border: 2px solid #58749a;border-radius: 12px;padding:10px;">
+<!--Cabecera -->
+  <div>
+  <table id="tableResult" class="table table-striped">
+      <thead>
+          <tr bgcolor="#001441" style="color:#fff">
+              <th width="30%">Compromiso</th>
+              <th width="30%">Responsable</th>
+              <th width="30%">Fecha Compromiso</th>
+              <th width="10%">&nbsp;</th>
+          </tr>
+      </thead>
+  </table>
+  </div>
 <!--Compromisos que se cargan -->
   <div>
       {{#each myData2.records}}
@@ -26,7 +37,6 @@
               <div class="btn-group prevent-mousedown">
                   <a href="javascript:void(0)" class="btn removecompromiso" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="fa fa-minus"></i></a>
               </div>-->
-          </div>
         </div>
       {{/each}}
   </div>
@@ -71,6 +81,5 @@
          </div>
       </div>
   </div>
-  <hr style="display: block;    height: 1px;    border: 0;    border-top: 15px solid #000042;    margin: 1em 0;    padding: 0;" >
-
-  {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
+</div>
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
