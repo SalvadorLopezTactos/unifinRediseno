@@ -21,6 +21,13 @@
         $('[data-name=minuta_objetivos]').find('.record-label').addClass('hide');
         $('[data-name=minuta_compromisos]').find('.record-label').addClass('hide');
         $('[data-name=minuta_division]').find('.record-label').addClass('hide');
+
+        //Bloquea campo de Reunión relacionada
+        if(this.model.get('minut_minutas_meetingsmeetings_idb')!=undefined){
+
+            $('[data-name="minut_minutas_meetings_name"]').attr('style','pointer-events:none');
+
+        }
     },
 
     /*Actualiza el estado de la reunion además de guardar fecha y lugar de Check-Out
