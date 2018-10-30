@@ -135,7 +135,7 @@ array (
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
-            'newTab' => false,
+            'newTab' => true,
             'panelDefault' => 'expanded',
             'fields' => 
             array (
@@ -340,25 +340,40 @@ array (
               ),
               12 => 
               array (
-                'name' => 'reunion_objetivos',
-                'studio' => 'visible',
-                'label' => 'reunion_objetivos',
+                'span' => 12,
               ),
               13 => 
-              array (
-              ),
-              14 => 
               array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
               ),
-              15 => 
+              14 => 
               array (
                 'name' => 'minut_minutas_meetings_1_name',
               ),
             ),
           ),
           2 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL1',
+            'label' => 'LBL_RECORDVIEW_PANEL1',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'reunion_objetivos',
+                'studio' => 'visible',
+                'label' => 'reunion_objetivos',
+                'span' => 12,
+              ),
+            ),
+          ),
+          3 => 
           array (
             'name' => 'panel_hidden',
             'label' => 'LBL_RECORD_SHOWMORE',
@@ -471,7 +486,7 @@ array (
         ),
         'templateMeta' => 
         array (
-          'useTabs' => false,
+          'useTabs' => true,
         ),
       ),
     ),
