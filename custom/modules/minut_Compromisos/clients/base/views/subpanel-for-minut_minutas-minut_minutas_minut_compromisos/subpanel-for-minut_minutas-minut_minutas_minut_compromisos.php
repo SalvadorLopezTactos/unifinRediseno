@@ -1,5 +1,5 @@
 <?php
-// created: 2018-10-29 11:44:55
+// created: 2018-10-29 18:08:53
 $viewdefs['minut_Compromisos']['base']['view']['subpanel-for-minut_minutas-minut_minutas_minut_compromisos'] = array (
   'panels' => 
   array (
@@ -19,26 +19,19 @@ $viewdefs['minut_Compromisos']['base']['view']['subpanel-for-minut_minutas-minut
         ),
         1 => 
         array (
+          'name' => 'description',
+          'label' => 'LBL_DESCRIPTION',
+          'enabled' => true,
+          'sortable' => false,
+          'default' => true,
+        ),
+        2 => 
+        array (
           'name' => 'assigned_user_name',
           'label' => 'LBL_ASSIGNED_TO',
           'enabled' => true,
           'id' => 'ASSIGNED_USER_ID',
           'link' => true,
-          'default' => true,
-        ),
-        2 => 
-        array (
-          'name' => 'date_entered',
-          'label' => 'LBL_DATE_ENTERED',
-          'enabled' => true,
-          'readonly' => true,
-          'default' => true,
-        ),
-        3 => 
-        array (
-          'name' => 'tct_fecha_compromiso_c',
-          'label' => 'LBL_TCT_FECHA_COMPROMISO_C',
-          'enabled' => true,
           'default' => true,
         ),
       ),

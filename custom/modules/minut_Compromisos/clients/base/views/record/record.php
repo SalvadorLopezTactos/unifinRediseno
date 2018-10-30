@@ -170,39 +170,11 @@ array (
             array (
               0 => 
               array (
-                'name' => 'tct_compromiso_c',
-                'label' => 'LBL_TCT_COMPROMISO_C',
+                'name' => 'description',
+                'span' => 12,
               ),
-              1 => 
-              array (
-                'name' => 'tct_fecha_compromiso_c',
-                'label' => 'LBL_TCT_FECHA_COMPROMISO_C',
-              ),
+              1 => 'assigned_user_name',
               2 => 
-              array (
-                'name' => 'tct_responsable_ddw',
-                'label' => 'LBL_TCT_RESPONSABLE_DDW',
-              ),
-              3 => 
-              array (
-                'name' => 'tct_responsable_id_c',
-                'label' => 'LBL_TCT_RESPONSABLE_ID_C',
-              ),
-              4 => 
-              array (
-                'name' => 'tct_generar_tarea_chk',
-                'label' => 'LBL_TCT_GENERAR_TAREA_CHK',
-              ),
-              5 => 
-              array (
-              ),
-              6 => 'assigned_user_name',
-              7 => 'team_name',
-              8 => 
-              array (
-                'name' => 'tag',
-              ),
-              9 => 
               array (
                 'name' => 'minut_minutas_minut_compromisos_name',
               ),
@@ -221,11 +193,6 @@ array (
             'fields' => 
             array (
               0 => 
-              array (
-                'name' => 'description',
-                'span' => 12,
-              ),
-              1 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -249,7 +216,7 @@ array (
                   ),
                 ),
               ),
-              2 => 
+              1 => 
               array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
