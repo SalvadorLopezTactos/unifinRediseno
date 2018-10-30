@@ -48,14 +48,6 @@ array (
                 'label' => 'LBL_EDIT_BUTTON_LABEL',
                 'acl_action' => 'edit',
               ),
-              1 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:view_document:click',
-                'name' => 'view_document',
-                'label' => 'Ver proceso UNIFIN',
-                'acl_action' => 'view',
-              ),
             ),
           ),
           3 => 
