@@ -78,11 +78,11 @@ class DropdownValuesHelper{
       */
 			case 'Prospecto':
 				//$tipoCliente = ($stringStatus == 'Interesado' ? 1 : 0);
-        $tipoCliente = ($EsProveedor == 1 ? 3 : 1);
+        $tipoCliente = 1 + $EsProveedor; //($EsProveedor == 1 ? 3 : 1);
                 $tipoCliente = $tipoCliente + ($cedente + $deudor);
 				break;
 			case 'Cliente':
-			 	$tipoCliente = ($EsProveedor == 1 ? 3 : 1);
+			 	$tipoCliente = 1 + $EsProveedor; ($EsProveedor == 1 ? 3 : 1);
                 $tipoCliente = $tipoCliente + ($cedente + $deudor);
                 //$GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <czaragoza> : cedente: " . $cedente. " deudor: " . $deudor);
                 //$GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <czaragoza> : Tipo Cliente: " . $tipoCliente);

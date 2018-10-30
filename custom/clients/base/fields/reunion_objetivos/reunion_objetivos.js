@@ -17,6 +17,7 @@
         this._super('initialize', [options]);
 
         this.model.addValidationTask('Guardarobjetivos', _.bind(this.almacenaobjetivos, this));
+        this.model.addValidationTask('validaobjetivosave', _.bind(this.validaobjetivos, this));
 
         //Carga datos
         this.model.on('sync', this.loadData, this);
@@ -133,11 +134,28 @@
     },
 
     almacenaobjetivos:function(fields, errors, callback) {
-        this.model.set('reunion_objetivos', self.myobject);
-        if (this.model.get('reunion_objetivos') == "" || this.model.get('reunion_objetivos') == null) {
-            errors['reunion_objetivos'] = "Almenos un objetivo es requerido.";
+        this.model.set('reunion_objetivos', this.myobject);
+        if (this.model.get('reunion_objetivos') == "" || this.model.get('reunion_objetivos') == null || this.model.get('reunion_objetivos').records.length==0) {
+            errors['reunion_objetivos'] = "Al menos un objetivo es requerido.";
             errors['reunion_objetivos'].required = true;
         }
+        callback(null, fields, errors);
+    },
+
+    //Adrian Arauz
+    //Validacion para que los objetivos añadidos no estén vacíos a la hora de crear la reunion.
+    validaobjetivos: function (fields, errors, callback) {
+        var cont=0;
+        $('.objetivoSelect').find('.span10').each(function () {
+
+            if ($(this).val()=="") {
+
+                $(this).css('border-color', 'red');
+                errors[$(this)] = errors['<b>Favor de no añadir Objetivo(s) vac\u00EDos</b>'] || {};
+                errors[$(this)].required = true;
+            }
+
+        });
         callback(null, fields, errors);
     },
 
