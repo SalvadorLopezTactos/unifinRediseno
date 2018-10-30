@@ -27,3 +27,4 @@ $mod_strings['LBL_CHECK_OUT_TIME_C'] = 'Tiempo Check-Out';
 $mod_strings['LBL_CHECK_IN_TIME_C'] = 'Tiempo Check-in';
 $mod_strings['LBL_CHECK_IN_LABEL'] = 'Check-in';
 $mod_strings['REUNION_OBJETIVOS'] = 'Objetivos Específicos';
+$mod_strings['LBL_RECORDVIEW_PANEL1'] = 'Objetivos Específicos';
