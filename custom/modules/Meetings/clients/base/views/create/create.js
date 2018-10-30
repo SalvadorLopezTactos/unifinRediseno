@@ -18,6 +18,8 @@
         if(this.model.get('status')=='Planned'){
             this.$('div[data-name=resultado_c]').hide();
         }
+        //Deshabilita campo "asignado a"
+        $('div[data-name=assigned_user_name]').css("pointer-events", "none");
     },
 
 
