@@ -340,14 +340,10 @@ array (
               ),
               12 => 
               array (
-                'span' => 12,
-              ),
-              13 => 
-              array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
               ),
-              14 => 
+              13 => 
               array (
                 'name' => 'minut_minutas_meetings_1_name',
               ),
@@ -356,7 +352,7 @@ array (
           2 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'expanded',
+            'panelDefault' => 'collapsed',
             'name' => 'LBL_RECORDVIEW_PANEL1',
             'label' => 'LBL_RECORDVIEW_PANEL1',
             'columns' => 2,
