@@ -338,6 +338,7 @@
                 level: 'success',
                 messages: 'Check-in Existoso',
             });
+        SUGAR.App.controller.context.reloadData({});
         },
  
     /*Victor Martinez Lopez 22-10-2018
@@ -346,7 +347,7 @@
     */
     showCheckin:function(){
         var myField=this.getField("check_in1");
-    if (this.model.get('assigned_user_id')==app.user.attributes.id && (this.model.get('check_in_latitude_c')=='' || this.model.get('check_in_latitude_c')==null)){
+    if (this.model.get('assigned_user_id')==app.user.attributes.id && (this.model.get('check_in_time_c')=='' || this.model.get('check_in_latitude_c')==null)){
         //$('[name="check_in"]').eq(0).show();
         myField.listenTo(myField, "render", function () {
                 myField.show();

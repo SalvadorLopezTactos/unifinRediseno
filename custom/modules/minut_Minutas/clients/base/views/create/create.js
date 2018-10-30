@@ -10,7 +10,9 @@
         self = this;
         this._super("initialize", [options]);
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
-    		this.context.on('button:view_document:click', this.view_document, this);
+        this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
+
+        this.context.on('button:view_document:click', this.view_document, this);
 
     },
 
@@ -69,13 +71,58 @@
         callback(null,fields,errors);
     },
 
+    checkcompromisos:function(fields, errors, callback){
+        $('.existingcompromiso').each(function(index,item){
+            if($(item).val().trim()!=''){
+                $('.existingcompromiso').eq(index).css('border-color', '');
+            }else{
+                $('.existingcompromiso').eq(index).css('border-color', 'red');
+                app.alert.show("empty_compromiso", {
+                    level: "error",
+                    title: "Existen compromisos <b>sin nombre</b>, favor de verificar",
+                    autoClose: false
+                });
+                errors['comp_comp'] = errors['comp_comp'] || {};
+                errors['comp_comp'].required = true;
+            }
+        });
+        $('.existingdate').each(function(index,item){
+            if($(item).val().trim()!=''){
+                $('.existingdate').eq(index).css('border-color', '');
+            }else{
+                $('.existingdate').eq(index).css('border-color', 'red');
+                app.alert.show("empty_date", {
+                    level: "error",
+                    title: "Existen compromisos <b>sin fecha</b>, favor de verificar",
+                    autoClose: false
+                });
+                errors['comp_date'] = errors['comp_date'] || {};
+                errors['comp_date'].required = true;
+            }
+        });
+        $('.existingresponsable').each(function(index,item){
+            if($(item).text().trim()!=''){
+                $('.existingresponsable').eq(index).css('border-color', '');
+            }else{
+                $('.existingresponsable').eq(index).css('border-color', 'red');
+                app.alert.show("empty_resp", {
+                    level: "error",
+                    title: "Existen compromisos <b>sin responsable</b>, favor de verificar",
+                    autoClose: false
+                });
+                errors['comp_resp'] = errors['comp_resp'] || {};
+                errors['comp_resp'].required = true;
+            }
+        });
+        callback(null,fields,errors);
+    },
+
     showPosition:function(position) {
         self.longitude=position.coords.longitude;
         self.latitude=position.coords.latitude;
         },
 
-    view_document: function()
-    {
+    view_document: function(){
 		var pdf = window.location.origin+window.location.pathname+"/custom/pdf/Ladas.pdf";
     	window.open(pdf,'_blank');
     	var cDate = new Date();

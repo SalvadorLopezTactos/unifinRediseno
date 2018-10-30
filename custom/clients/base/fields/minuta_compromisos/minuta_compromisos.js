@@ -23,8 +23,7 @@
         this.loadData();
     },
 
-
-    loadData: function (options) {
+    loadData: function () {
         selfcomp=this;
 
         app.api.call('GET', app.api.buildURL('minut_Minutas/'+this.model.get('id')+'/link/minut_minutas_minut_compromisos'), null, {
@@ -44,13 +43,26 @@
             }
         });
 
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10) {
+            dd = '0'+dd
+        }
+        if(mm<10) {
+            mm = '0'+mm
+        }
+        min_date = {"min_date": yyyy + '-' + mm + '-' + dd};
+        _.extend(this, min_date);
+
         myData = $.parseJSON( '{"myData":{"records":[]}}');
         _.extend(this, myData);
         console.log("myData seteado");
         this.render();
     },
 
-    loadparticipantes:function(options){
+    loadparticipantes:function(){
         this.arr_responsables=$.parseJSON( '{"arr_responsables": {"responsables":'+JSON.stringify(selfData.mParticipantes.participantes)+'}}');
         for(var i=0;i<this.arr_responsables.arr_responsables.responsables.length;i++){
             if(this.arr_responsables.arr_responsables.responsables[i].apaterno!=null || this.arr_responsables.arr_responsables.responsables[i].apaterno!=undefined){
@@ -70,12 +82,14 @@
         console.log("responsables seteados");
 
         this.render();
+
+        $('.newcompromiso').val(this.compromiso);
+        $('.newresponsable').val(this.responsable);
+        $('.newdate').val(this.date);
     },
 
-    /*
-        Función para agregar nuevos elementos al objeto
-    */
-    addRecordFunction: function (options) {
+    //Función para agregar nuevos elementos al objeto
+    addRecordFunction: function () {
       var valor1 = $('.newcompromiso')[0].value;
       var valor2 = $('.newresponsable')[0].value;
       var valor3 = $(".newresponsable option:selected").text();
@@ -85,7 +99,6 @@
       var item = {
         "compromiso":valor1,"id_resp":valor2, "responsable":valor3, "fecha":valor4, "cuenta_madre":valor5
       };
-
 
         if(valor1.trim()!='' && valor2!='0' && valor4!='') {
             this.myData.records.push(item);
@@ -120,22 +133,6 @@
     _render: function () {
         this._super("_render");
 
-        if(this.compromiso!=undefined) {
-            $('.newcompromiso').val(this.compromiso);
-            $('.newresponsable').val(this.responsable);
-            $('.newdate').val(this.date);
-
-            if($('.newcompromiso').val().trim()=='') {
-                $('.newcompromiso').css('border-color', 'red');
-            }
-            if($('.newresponsable').val()=='0') {
-                $('.newresponsable').css('border-color', 'red');
-            }
-            if($('.newdate').val()=='') {
-                $('.newdate').css('border-color', 'red');
-            }
-        }
-
         $('.removecompromiso2').click(function(evt) {
             var row = $(this).closest(".compromisos2");    // Find the row
             selfcomp.myData.records.splice(row.index(),1);
@@ -146,23 +143,39 @@
             var row = $(this).closest(".compromisos2");    // Find the row
             var val= row.find(".existingresponsable").context.value;
             var text = row.find(".existingresponsable option[value="+val+"]").text();
-            selfcomp.myData.records[row.index()].responsable = text;
-            selfcomp.myData.records[row.index()].id_resp = val;
-            selfcomp.render();
+            if($('.existingresponsable').eq(row.index()).text().trim()!='') {
+                selfcomp.myData.records[row.index()].responsable = text;
+                selfcomp.myData.records[row.index()].id_resp = val;
+                selfcomp.render();
+                $('.existingresponsable').eq(row.index()).css('border-color', '');
+            }else{
+                $('.existingresponsable').eq(row.index()).css('border-color', 'red');
+            }
         });
 
         $('.existingcompromiso').change(function(evt) {
             var row = $(this).closest(".compromisos2");    // Find the row
             var val= row.find(".existingcompromiso").context.value;
+            if($('.existingcompromiso').eq(row.index()).val().trim()!='') {
             selfcomp.myData.records[row.index()].compromiso = val;
             selfcomp.render();
+                $('.existingcompromiso').eq(row.index()).css('border-color', '');
+            }else{
+                $('.existingcompromiso').eq(row.index()).css('border-color', 'red');
+            }
         });
 
         $('.existingdate').change(function(evt) {
             var row = $(this).closest(".compromisos2");    // Find the row
             var val= row.find(".existingdate").context.value;
+            if($('.existingdate').eq(row.index()).val().trim()!='') {
             selfcomp.myData.records[row.index()].fecha = val;
             selfcomp.render();
+            selfcomp.render();
+                $('.existingdate').eq(row.index()).css('border-color', '');
+            }else{
+                $('.existingdate').eq(row.index()).css('border-color', 'red');
+            }
         });
     },
 
