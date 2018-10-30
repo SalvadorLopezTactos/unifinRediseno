@@ -384,6 +384,67 @@ SQL;
 
         if($bean->reunion_objetivos != null || !empty($bean->reunion_objetivos)){
 
+            //Obtener objetivos relacionados a la reunión actual
+            if ($bean->load_relationship('meetings_minut_objetivos_1')) {
+                //Fetch related beans
+                $relatedBeans = $bean->meetings_minut_objetivos_1->getBeans();
+            }
+
+            $lengthRelated=count($relatedBeans);
+            $lengthObj=count($bean->reunion_objetivos['records']);
+            //Arreglo para mantener identificadores de objetivos del campo reunion_objetivos
+            $arr_ids_field_objetivos=array();
+            //Arreglo para mantener identificadores de objetivos relacionados a la reunión (subpanel)
+            $arr_ids_rel_objetivos=array();
+            //Arreglo para mentener los identificadores de los objetivos que serán removidos
+            $objetivos_a_borrar=array();
+
+            foreach ($bean->reunion_objetivos['records'] as $record){
+                array_push($arr_ids_field_objetivos,$record['id']);
+            }
+
+
+            if ($lengthRelated>0){
+
+                foreach ($relatedBeans as $rel){
+                    array_push($arr_ids_rel_objetivos,$rel->id);
+                }
+
+                //Los arreglos serán comparados únicamente cuando las longitudes sean diferentes
+                //Es decir, los objetivos del campo custom no tiene la misma longitud,
+                // ya que aún no están sincronizados los objetivos del campo custom con los objetivos del subpanel
+                if($lengthRelated != $lengthObj){
+
+                    for($i=0;$i<count($arr_ids_rel_objetivos);$i++){
+
+                        if(!in_array($arr_ids_rel_objetivos[$i], $arr_ids_field_objetivos)){
+                            array_push($objetivos_a_borrar,$arr_ids_rel_objetivos[$i]);
+
+                        }
+
+                    }
+                }
+
+                if(count($objetivos_a_borrar)>0){
+
+                    //Recorrer arreglo que mantiene identificadores que se eliminarán
+                    for($j=0;$j<count($objetivos_a_borrar);$j++){
+
+                        //Recuperar bean de objetivos
+                        $beanObjetivo = BeanFactory::retrieveBean('minut_Objetivos', $objetivos_a_borrar[$j]);
+
+                        //Se establece como borrado
+                        $beanObjetivo->mark_deleted($objetivos_a_borrar[$j]);
+
+                        $beanObjetivo->save();
+
+                    }
+
+                }
+
+            }
+
+
             foreach ($bean->reunion_objetivos['records'] as $objetivo) {
                 if ($objetivo['id']) {
                     //Actualiza
