@@ -28,7 +28,7 @@
     /*Actualiza el estado de la reunion además de guardar fecha y lugar de Check-Out
     *Victor Martínez 23-10-2018
     */
-    savestatusandlocation:function(fields, errors, callback){
+        savestatusandlocation:function(fields, errors, callback){
 
         try {
           self=this;
@@ -42,20 +42,26 @@
           //self.model.set('check_in_time_c', today);
           var moduleid = app.data.createBean('Meetings',{id:this.model.get('minut_minutas_meetingsmeetings_idb')});
           moduleid.fetch({
-          success:_.bind(function(modelo){
-              this.estado = modelo.get('status');
-              this.checkoutad=modelo.get('check_out_address_c');
-              this.checkoutime=modelo.get('check_out_time_c');
-              this.checkoutlat=modelo.get('check_out_latitude_c');
-              this.checkoutlong=modelo.get('check_out_longitude_c');
-              this.resultado=modelo.get('resultado_c');
-              modelo.set('status', 'Held');
-              modelo.set('check_out_address_c');
-              modelo.set('check_out_time_c', today);
-              modelo.set('check_out_latitude_c',self.latitude);
-              modelo.set('check_out_longitude_c',self.longitude);
-              modelo.set('resultado_c', self.model.get('resultado_c'));
-              modelo.save();
+              success:_.bind(function(modelo){
+                  this.estado = modelo.get('status');
+                  this.checkoutad=modelo.get('check_out_address_c');
+                  this.checkoutime=modelo.get('check_out_time_c');
+                  this.checkoutlat=modelo.get('check_out_latitude_c');
+                  this.checkoutlong=modelo.get('check_out_longitude_c');
+                  this.resultado=modelo.get('resultado_c');
+                  modelo.set('status', 'Held');
+                  modelo.set('check_out_address_c');
+                  modelo.set('check_out_time_c', today);
+                  modelo.set('check_out_latitude_c',self.latitude);
+                  modelo.set('check_out_longitude_c',self.longitude);
+                  modelo.set('resultado_c', self.model.get('resultado_c'));
+                  modelo.save([],{
+                      dataType:"text",
+                      complete:function() {
+                          //app.router.navigate(module_name , {trigger: true});
+                          location.reload();
+                      }
+                  });
               }, this)
           });
         } catch (e) {
