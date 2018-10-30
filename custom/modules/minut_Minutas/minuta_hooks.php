@@ -42,8 +42,9 @@ class Minuta_Hooks
 
                         //$GLOBALS['log']->fatal('El compromiso es de una cuenta, su id es: '.$bean->assigned_user_id);//------------------------------------
 		                $bean_compromiso->assigned_user_id=$bean->assigned_user_id;
-                        $bean_compromiso->description=" Este compromiso ha sido asignado a la cuenta: ".$compromiso['responsable']."\n Con id de cuenta:".$compromiso['id_resp'];
+                        $bean_compromiso->description=" Este compromiso originalmente ha sido asignado a la cuenta: ".$compromiso['responsable']."\n Con id de cuenta:".$compromiso['id_resp'];
 		                $bean_tarea->assigned_user_id=$bean->assigned_user_id;
+                        $bean_tarea->description=" Esta tarea originalmente ha sido asignado a la cuenta: ".$compromiso['responsable']."\n Con id de cuenta:".$compromiso['id_resp'];
 		                $bean_tarea->priority='High';
 
 		            }else{//si el id del responsable es un usuario
