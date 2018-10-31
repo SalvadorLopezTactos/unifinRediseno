@@ -102,16 +102,23 @@
     },
 
     loadprevdate: function(){
-        this.temp_startdate= new Date(this.model.get('date_start'));
+        var temp1=this.model.get('date_start');
+        var temp2=temp1.split('T');
+        this.temp_startdate = new Date(temp2[0]);
         _.extend(this,this.temp_startdate);
-        this.temp_duedate= new Date(this.model.get('date_due'));
+        var temp3=this.model.get('date_due');
+        var temp4=temp3.split('T');
+        this.temp_duedate = new Date(this.model.get(temp4[0]));
         _.extend(this,this.temp_duedate);
     },
 
     checkdate: function (fields, errors, callback) {
-        var start_date = new Date(this.model.get('date_start'));
-        var due_date = new Date(this.model.get('date_due'));
-        var now = new Date();
+        var temp1=this.model.get('date_start');
+        var temp2=temp1.split('T');
+        var start_date = temp2[0];
+        var temp3=this.model.get('date_due');
+        var temp4=temp3.split('T');
+        var due_date = temp4[0];
         if(start_date<this.temp_startdate ){
             app.alert.show("start_invalid", {
                 level: "error",
