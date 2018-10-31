@@ -260,12 +260,12 @@
     },
 
     noEditView: function (){
-        if(this.model.get('parent_name')=='' || this.model.get('parent_name')==null){
-            var rec_id = this.model.get('meetings_id');
+        if(this.model.get('parent_name')=='' || this.model.get('parent_name')==null || this.model.get('parent_name')==undefined){
+            var rec_id = this.model.get('id');
             var module_name = "#Meetings/"+rec_id;
-        if (!_.isEmpty(rec_id)) {
-            app.router.redirect(module_name);
-            }
+            window.location.replace(module_name);
+            //app.router.redirect
+            
         }
     },
 
@@ -331,14 +331,14 @@
     */
     GetLocation: function (){
         self=this;
+        var today= new Date();
+        self.model.set('check_in_time_c', today);
         if(navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(this.showPosition);
+            navigator.geolocation.getCurrentPosition(this.showPosition,this.showError);
         }else {
             alert("No se pudo encontrar tu ubicacion");
         }
-        var today= new Date();
-        self.model.set('check_in_time_c', today);
-        self.model.save();
+        //self.model.save();
     },
     
     showPosition:function(position) {
@@ -350,9 +350,27 @@
                 level: 'success',
                 messages: 'Check-in Existoso',
             });
-        SUGAR.App.controller.context.reloadData({});
+        //SUGAR.App.controller.context.reloadData({});
         },
- 
+    showError:function(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert("Permiso de geolocalización no autorizado")
+            break;
+                case error.POSITION_UNAVAILABLE:
+                alert("La información de la geolocalización no está disponible");
+                break;
+            case error.TIMEOUT:
+                alert("El tiempo de espera a terminado");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("A ocurrido un error desconocido");
+                break;
+        }
+        self.model.save();
+        self.render();
+        SUGAR.App.controller.context.reloadData({});
+    },
     /*Victor Martinez Lopez 22-10-2018
     El boton de Check-in solo será visible una ocasion para guardar datos 
     y cuando el usuario asignado sea igual la ususario loggeado Pendiente de terminar
