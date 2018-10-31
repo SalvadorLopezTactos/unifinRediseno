@@ -10,7 +10,7 @@
         this._super("initialize", [options]);
 
         this.on('render',this.disableparentsfields,this);
-        this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
+        //this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
 
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
