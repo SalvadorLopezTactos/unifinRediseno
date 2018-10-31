@@ -72,10 +72,10 @@
 
         $('.updateRecord').click(function (evt) {
             var row = $(this).closest("tr");    // Find the row
-            if (self.myobjmin.records[row.index()].cumplimiento != '') {
-                self.myobjmin.records[row.index()].cumplimiento = '';
+            if (self.myobjmin.records[row.index()].cumplimiento == 1) {
+                self.myobjmin.records[row.index()].cumplimiento = 0;
             } else {
-                self.myobjmin.records[row.index()].cumplimiento = '1';
+                self.myobjmin.records[row.index()].cumplimiento = 1;
             }
             self.render();
         });
