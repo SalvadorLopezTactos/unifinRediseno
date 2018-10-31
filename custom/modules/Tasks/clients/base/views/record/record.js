@@ -104,11 +104,11 @@
     loadprevdate: function(){
         var temp1=this.model.get('date_start');
         var temp2=temp1.split('T');
-        this.temp_startdate = new Date(temp2[0]);
+        this.temp_startdate = temp2[0];
         _.extend(this,this.temp_startdate);
         var temp3=this.model.get('date_due');
         var temp4=temp3.split('T');
-        this.temp_duedate = new Date(this.model.get(temp4[0]));
+        this.temp_duedate = temp4[0];
         _.extend(this,this.temp_duedate);
     },
 
