@@ -21,6 +21,8 @@ function obtenobjetivos ($bean = null, $event = null, $args = null)
                     $GLOBALS['log']->fatal($objetivo['name']);
                     $beanObjetivo = BeanFactory::retrieveBean('minut_Objetivos', $objetivo['id']);
                     $beanObjetivo->name = $objetivo['name'];
+                    $beanObjetivo->minut_minutas_minut_objetivosminut_minutas_ida = $bean->id;
+                    $beanObjetivo->tct_cumplimiento_chk = $objetivo['cumplimiento'];
                     $beanObjetivo->save();
                 }else{
                     //Crea
@@ -28,7 +30,8 @@ function obtenobjetivos ($bean = null, $event = null, $args = null)
                     $GLOBALS['log']->fatal($objetivo['name']);
                     $beanObjetivo = BeanFactory::newBean('minut_Objetivos');
                     $beanObjetivo->name = $objetivo['name'];
-                    $beanObjetivo->meetings_minut_objetivos_1meetings_ida = $bean->id;
+                    $beanObjetivo->minut_minutas_minut_objetivosminut_minutas_ida = $bean->id;
+                    $beanObjetivo->tct_cumplimiento_chk = $objetivo['cumplimiento'];
                     $beanObjetivo->save();
                 }
 

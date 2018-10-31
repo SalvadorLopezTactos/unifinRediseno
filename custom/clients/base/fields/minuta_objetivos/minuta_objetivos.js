@@ -12,8 +12,7 @@
         self = this;
         this._super('initialize', [options]);
         this.model.addValidationTask('ObtenerObjetivos', _.bind(this.almacenaobjetivos, this));
-        //Carga datos
-        this.model.on('sync', this.loadData, this);
+
         this.myobjmin = {};
         this.myobjmin.records = [];
 
@@ -53,6 +52,14 @@
             app.api.call('GET', app.api.buildURL('Meetings/' + idReunion + '/link/meetings_minut_objetivos_1'), null, {
                 success: function (data) {
                     selfvalue.myobjmin = data;
+                    //Obteniendo el objetivo general de la Reunión (parent)
+                    var modeloReunion=selfvalue.context.parent.get('model');
+                    var objetivoGral=App.lang.getAppListStrings('objetivo_list')[modeloReunion.get('objetivo_c')];
+                    var item = {
+                        "name":objetivoGral,"cumplimiento":""
+                    };
+                    //Se añade el objetivo general al principio del arreglo
+                    selfvalue.myobjmin.records.unshift(item);
                     _.extend(this, selfvalue.myobjmin);
                     selfvalue.render();
                 },
@@ -72,10 +79,10 @@
 
         $('.updateRecord').click(function (evt) {
             var row = $(this).closest("tr");    // Find the row
-            if (self.myobjmin.records[row.index()].cumplimiento != '') {
-                self.myobjmin.records[row.index()].cumplimiento = '';
+            if (self.myobjmin.records[row.index()].cumplimiento == 1) {
+                self.myobjmin.records[row.index()].cumplimiento = 0;
             } else {
-                self.myobjmin.records[row.index()].cumplimiento = '1';
+                self.myobjmin.records[row.index()].cumplimiento = 1;
             }
             self.render();
         });

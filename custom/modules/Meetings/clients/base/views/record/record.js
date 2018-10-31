@@ -12,6 +12,7 @@
 
         this.on('render', this.disableparentsfields, this);
         this.on('render', this.noEditStatus,this);
+        this.on('render', this.noEditView, this);
         this.model.on('sync', this.cambioFecha, this);
         this.model.on('sync', this.disablestatus, this);
         this.model.on('sync', this.disableFieldsTime,this);
@@ -257,6 +258,17 @@
         $('[data-name="status"]').find('.fa-pencil').remove();
         $('.record-edit-link-wrapper[data-name=status]').remove();
     },
+
+    noEditView: function (){
+        if(this.model.get('parent_name')=='' || this.model.get('parent_name')==null || this.model.get('parent_name')==undefined){
+            var rec_id = this.model.get('id');
+            var module_name = "#Meetings/"+rec_id;
+            window.location.replace(module_name);
+            //app.router.redirect
+            
+        }
+    },
+
     /*Victor Martinez López
     * Duración y recordatorios no son editables cuando la reunión esta como realizada
     * */
@@ -319,14 +331,14 @@
     */
     GetLocation: function (){
         self=this;
+        var today= new Date();
+        self.model.set('check_in_time_c', today);
         if(navigator.geolocation){
-            navigator.geolocation.getCurrentPosition(this.showPosition);
+            navigator.geolocation.getCurrentPosition(this.showPosition,this.showError);
         }else {
             alert("No se pudo encontrar tu ubicacion");
         }
-        var today= new Date();
-        self.model.set('check_in_time_c', today);
-        self.model.save();
+        //self.model.save();
     },
     
     showPosition:function(position) {
@@ -338,29 +350,59 @@
                 level: 'success',
                 messages: 'Check-in Existoso',
             });
-        SUGAR.App.controller.context.reloadData({});
+        //SUGAR.App.controller.context.reloadData({});
         },
- 
+    showError:function(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert("Permiso de geolocalización no autorizado")
+            break;
+                case error.POSITION_UNAVAILABLE:
+                alert("La información de la geolocalización no está disponible");
+                break;
+            case error.TIMEOUT:
+                alert("El tiempo de espera a terminado");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("A ocurrido un error desconocido");
+                break;
+        }
+        self.model.save();
+        self.render();
+        SUGAR.App.controller.context.reloadData({});
+    },
     /*Victor Martinez Lopez 22-10-2018
     El boton de Check-in solo será visible una ocasion para guardar datos 
     y cuando el usuario asignado sea igual la ususario loggeado Pendiente de terminar
     */
     showCheckin:function(){
         var myField=this.getField("check_in1");
-    if (this.model.get('assigned_user_id')==app.user.attributes.id && (this.model.get('check_in_time_c')=='' || this.model.get('check_in_latitude_c')==null)){
-        //$('[name="check_in"]').eq(0).show();
-        myField.listenTo(myField, "render", function () {
-                myField.show();
-                console.log("field being rendered as: " + myField.tplName);
-            });
-    }   else   {
-        //$('[name="check_in"]').eq(0).hide();
-        myField.listenTo(myField, "render", function () {
-                myField.hide();
-                console.log("field being rendered as: " + myField.tplName);
-            });
-        }
+        var dateActual = new Date();
+        var d1 = dateActual.getDate();
+        var m1 = dateActual.getMonth() + 1;
+        var y1 = dateActual.getFullYear();
+        var dateActualFormat = [m1, d1, y1].join('/');
+        var fechaActual = Date.parse(dateActualFormat);
 
+        var dateend = new Date(this.model.get("date_start"));
+        var d = dateend.getDate();
+        var m = dateend.getMonth() + 1;
+        var y = dateend.getFullYear();
+        var fechaCompleta = [m, d, y].join('/');
+        var fechaendnew = Date.parse(fechaCompleta);
+
+        if (this.model.get('assigned_user_id')==app.user.attributes.id && (this.model.get('check_in_time_c')=='' || this.model.get('check_in_time_c')==null)
+            && fechaActual==fechaendnew){
+                myField.listenTo(myField, "render", function () {
+                        myField.show();
+                        console.log("field being rendered as: " + myField.tplName);
+                    });
+            }   else   {
+                myField.listenTo(myField, "render", function () {
+                        myField.hide();
+                        console.log("field being rendered as: " + myField.tplName);
+                    });
+            }
     },
     //Heredar el objetivo y el resultado a la minuta y cambiar y una etiqueta de la minuta a la cuenta
     /*El boton de creación de la minuta solo será visible cuando la reunión tenga una cuenta

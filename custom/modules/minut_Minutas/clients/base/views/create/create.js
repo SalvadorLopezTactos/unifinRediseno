@@ -79,6 +79,18 @@
     },
 
     checkcompromisos:function(fields, errors, callback){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10) {
+            dd = '0'+dd
+        }
+        if(mm<10) {
+            mm = '0'+mm
+        }
+        today = yyyy+'-'+mm+'-'+dd;
+
         $('.existingcompromiso').each(function(index,item){
             if($(item).val().trim()!=''){
                 $('.existingcompromiso').eq(index).css('border-color', '');
@@ -95,7 +107,18 @@
         });
         $('.existingdate').each(function(index,item){
             if($(item).val().trim()!=''){
-                $('.existingdate').eq(index).css('border-color', '');
+                if($(item).val().trim()<today){
+                    $('.existingdate').eq(index).css('border-color', 'red');
+                    app.alert.show("datecomp_invalid", {
+                        level: "error",
+                        title: "La fechas de los compromisos deben ser mayor al d\u00EDa de hoy",
+                        autoClose: false
+                    });
+                    errors['comp_date'] = errors['comp_date'] || {};
+                    errors['comp_date'].required = true;
+                }else {
+                    $('.existingdate').eq(index).css('border-color', '');
+                }
             }else{
                 $('.existingdate').eq(index).css('border-color', 'red');
                 app.alert.show("empty_date", {
