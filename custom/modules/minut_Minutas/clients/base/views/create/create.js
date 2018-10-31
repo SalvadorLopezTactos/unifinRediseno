@@ -188,18 +188,18 @@
     },
 
     view_document: function(){
-		  var pdf = window.location.origin+window.location.pathname+"/custom/pdf/Ladas.pdf";
-    	window.open(pdf,'_blank');
-      self.model.set('tct_proceso_unifin_time_c',this.model.get('tct_today_c'));
-      navigator.geolocation.getCurrentPosition(function(position) {
+		var pdf = window.location.origin+window.location.pathname+"/custom/pdf/Ladas.pdf";
+		window.open(pdf,'_blank');
+		self.model.set('tct_proceso_unifin_time_c',this.model.get('tct_today_c'));
+		navigator.geolocation.getCurrentPosition(function(position) {
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
-		      var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=1234";
-          $.getJSON(url, function(data) {
+		  var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=1234";
+          /*$.getJSON(url, function(data) {
           	var address = data.results[0]['formatted_address'];
-			      //self.model.set('tct_proceso_unifin_address_c',address);
-            self.model.set('tct_proceso_unifin_address_c',lat+lng);                                                                         
-          });
-      });
+			      self.model.set('tct_proceso_unifin_address_c',address);
+          });*/
+		  self.model.set('tct_proceso_unifin_address_c',lat+lng);
+		});
     },
 })
