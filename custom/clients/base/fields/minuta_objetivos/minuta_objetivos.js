@@ -52,6 +52,14 @@
             app.api.call('GET', app.api.buildURL('Meetings/' + idReunion + '/link/meetings_minut_objetivos_1'), null, {
                 success: function (data) {
                     selfvalue.myobjmin = data;
+                    //Obteniendo el objetivo general de la Reunión (parent)
+                    var modeloReunion=selfvalue.context.parent.get('model');
+                    var objetivoGral=App.lang.getAppListStrings('objetivo_list')[modeloReunion.get('objetivo_c')];
+                    var item = {
+                        "name":objetivoGral,"cumplimiento":""
+                    };
+                    //Se añade el objetivo general al principio del arreglo
+                    selfvalue.myobjmin.records.unshift(item);
                     _.extend(this, selfvalue.myobjmin);
                     selfvalue.render();
                 },
