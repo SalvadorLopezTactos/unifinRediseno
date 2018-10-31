@@ -95,12 +95,23 @@
       var valor3 = $(".newresponsable option:selected").text();
       var valor4 = $('.newdate')[0].value;
       var valor5=selfData.mParticipantes.idCuenta;
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10) {
+            dd = '0'+dd
+        }
+        if(mm<10) {
+            mm = '0'+mm
+        }
+        today = yyyy+'-'+mm+'-'+dd;
 
       var item = {
         "compromiso":valor1,"id_resp":valor2, "responsable":valor3, "fecha":valor4, "cuenta_madre":valor5
       };
 
-        if(valor1.trim()!='' && valor2!='0' && valor4!='') {
+        if(valor1.trim()!='' && valor2!='0' && valor4!='' && valor4>=today) {
             this.myData.records.push(item);
             this.model.set('minuta_compromisos', this.myData.records);
             this.render();
@@ -125,8 +136,18 @@
             if(valor4=='') {
                 $('.newdate').css('border-color', 'red');
             }else{
-                $('.newdate').css('border-color', '');
+                if(valor4<today){
+                    $('.newdate').css('border-color', 'red');
+                    app.alert.show("datecomp_invalid", {
+                        level: "error",
+                        title: "La fecha del compromiso que quieres agregar debe ser mayor al d\u00EDa de hoy",
+                        autoClose: false
+                    });
+                }else{
+                    $('.newdate').css('border-color', '');
+                }
             }
+
         }
     },
 
