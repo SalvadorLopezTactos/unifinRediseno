@@ -12,12 +12,15 @@
 
     _render: function () {
         this._super("_render");
+        $('[data-name=reunion_objetivos]').find('.record-label').addClass('hide');
         /*Oculta el campo de resultado de la llamada cuando la está se encuentra en planificada
          *Victor Martinez López 23-08-2018
          * */
         if(this.model.get('status')=='Planned'){
             this.$('div[data-name=resultado_c]').hide();
         }
+        //Deshabilita campo "asignado a"
+        $('div[data-name=assigned_user_name]').css("pointer-events", "none");
     },
 
 

@@ -134,9 +134,9 @@
     },
 
     almacenaobjetivos:function(fields, errors, callback) {
-        this.model.set('reunion_objetivos', self.myobject);
-        if (this.model.get('reunion_objetivos') == "" || this.model.get('reunion_objetivos') == null) {
-            errors['reunion_objetivos'] = "Almenos un objetivo es requerido.";
+        this.model.set('reunion_objetivos', this.myobject);
+        if (this.model.get('reunion_objetivos') == "" || this.model.get('reunion_objetivos') == null || this.model.get('reunion_objetivos').records.length==0) {
+            errors['reunion_objetivos'] = "Al menos un objetivo es requerido.";
             errors['reunion_objetivos'].required = true;
         }
         callback(null, fields, errors);

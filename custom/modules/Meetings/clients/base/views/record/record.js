@@ -3,14 +3,12 @@
 
     fechaInicioTemp: "",
 
-    events: {
-        'click .record-edit-link-wrapper': 'handleEdit',
 
-    },
 
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
+        this.events['click a[name=parent_name]'] = 'handleEdit';
 
         this.on('render', this.disableparentsfields, this);
         this.on('render', this.noEditStatus,this);
@@ -42,10 +40,12 @@
 
     _render: function (options) {
         this._super("_render");
+        $('[data-name=reunion_objetivos]').find('.record-label').addClass('hide');
         if (this.model.get('status') == 'Planned') {
             this.$('div[data-name=resultado_c]').hide();
-
         }
+        //Deshabilita campo "asignado a"
+        $('div[data-name=assigned_user_name]').css("pointer-events", "none");
     },
 
     /**
