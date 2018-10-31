@@ -130,30 +130,37 @@
     },
 
     validaFechaReunion: function(fields, errors, callback){
-        var startDate = new Date(this.model.get('fecha_y_hora_c'));
-        var startMonth = startDate.getMonth() + 1;
-        var startDay = startDate.getDate();
-        var startYear = startDate.getFullYear();
-        var startDateText = startMonth + "/" + startDay + "/" + startYear;
-        // FECHA ACTUAL
-        var dateActual = new Date();
-        var d1 = dateActual.getDate();
-        var m1 = dateActual.getMonth() + 1;
-        var y1 = dateActual.getFullYear();
-        var dateActualFormat = [m1, d1, y1].join('/');
 
-        var fechaActual = Date.parse(dateActualFormat);
-        var startToDate = Date.parse(startDateText);
-        if(startToDate < fechaActual)
-        {
-            app.alert.show("invalid_date_reunion", {
-                level: "error",
-                title: "No se puede agendar reuni\u00F3n para una fecha anterior a la actual",
-                autoClose: false
-            });
-            errors['fecha_y_hora_c'] = "No se puede agendar reuni\u00F3n para una fecha anterior a la actual";
-            errors['fecha_y_hora_c'].required = true;
+        //Validar fecha de reunión únicamente cuando el campo sea visible
+        if (!$('[data-fieldname="fecha_y_hora_c"]').children().eq(0).hasClass("vis_action_hidden")) {
+
+            var startDate = new Date(this.model.get('fecha_y_hora_c'));
+            var startMonth = startDate.getMonth() + 1;
+            var startDay = startDate.getDate();
+            var startYear = startDate.getFullYear();
+            var startDateText = startMonth + "/" + startDay + "/" + startYear;
+            // FECHA ACTUAL
+            var dateActual = new Date();
+            var d1 = dateActual.getDate();
+            var m1 = dateActual.getMonth() + 1;
+            var y1 = dateActual.getFullYear();
+            var dateActualFormat = [m1, d1, y1].join('/');
+
+            var fechaActual = Date.parse(dateActualFormat);
+            var startToDate = Date.parse(startDateText);
+            if(startToDate < fechaActual)
+            {
+                app.alert.show("invalid_date_reunion", {
+                    level: "error",
+                    title: "No se puede agendar reuni\u00F3n para una fecha anterior a la actual",
+                    autoClose: false
+                });
+                errors['fecha_y_hora_c'] = "No se puede agendar reuni\u00F3n para una fecha anterior a la actual";
+                errors['fecha_y_hora_c'].required = true;
+            }
+
         }
+
         callback(null, fields, errors);
     },
 
