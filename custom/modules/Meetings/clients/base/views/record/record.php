@@ -343,10 +343,6 @@ array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
               ),
-              13 => 
-              array (
-                'name' => 'minut_minutas_meetings_1_name',
-              ),
             ),
           ),
           2 => 
