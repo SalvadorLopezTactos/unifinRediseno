@@ -16,6 +16,8 @@
             Funcion que pinta de color los paneles relacionados
         */
         this.model.on('sync', this.fulminantcolor, this);
+        this.model.on('sync', this.loadprevdate, this);
+
 
     },
 
@@ -99,23 +101,30 @@
         //$('.a11y-wrapper').css("background-color", "#c6d9ff");
     },
 
+    loadprevdate: function(){
+        this.temp_startdate= new Date(this.model.get('date_start'));
+        _.extend(this,this.temp_startdate);
+        this.temp_duedate= new Date(this.model.get('date_due'));
+        _.extend(this,this.temp_duedate);
+    },
+
     checkdate: function (fields, errors, callback) {
         var start_date = new Date(this.model.get('date_start'));
         var due_date = new Date(this.model.get('date_due'));
         var now = new Date();
-        if(start_date<now ){
+        if(start_date<this.temp_startdate ){
             app.alert.show("start_invalid", {
                 level: "error",
-                title: "La fecha de inicio no puede ser menor al d\u00EDa de hoy",
+                title: "La fecha de inicio actual no puede ser menor a la que estaba guardada",
                 autoClose: false
             });
             errors['date_start'] = errors['date_start'] || {};
             errors['date_start'].datetime = true;
         }
-        if(due_date<now ){
-            app.alert.show("start_invalid", {
+        if(due_date<this.temp_duedate ){
+            app.alert.show("due_invalid", {
                 level: "error",
-                title: "La fecha de vencimiento no puede ser menor al d\u00EDa de hoy",
+                title: "La fecha de vencimiento actual no puede ser menor a la que estaba guardada",
                 autoClose: false
             });
             errors['date_due'] = errors['date_due'] || {};
