@@ -1,11 +1,11 @@
 <?php
- // created: 2018-01-10 14:11:09
+ // created: 2018-10-31 11:53:17
 
 $app_list_strings['Tipo_Contacto_list']=array (
   '' => '',
-  'Promocion' => 'Promocion',
+  'Promocion' => 'Promoción',
   'Cobranza' => 'Cobranza',
-  'Administracion' => 'Administracion',
+  'Administracion' => 'Administración',
   'Entrega de bienes' => 'Entrega de bienes',
   'Factoraje' => 'Factoraje',
   'FirmanteVR' => 'Firmante VR',
