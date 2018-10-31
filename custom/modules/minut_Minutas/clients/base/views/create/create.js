@@ -21,7 +21,7 @@
         $('[data-name=minuta_compromisos]').find('.record-label').addClass('hide');
         $('[data-name=minuta_division]').find('.record-label').addClass('hide');
 
-        //Bloquea campo de Reunión relacionada
+        //Bloquea campo de ReuniÃ³n relacionada
         if(this.model.get('minut_minutas_meetingsmeetings_idb')!=undefined){
 
             $('[data-name="minut_minutas_meetings_name"]').attr('style','pointer-events:none');
@@ -29,8 +29,8 @@
         }
     },
 
-    /*Actualiza el estado de la reunion adem�s de guardar fecha y lugar de Check-Out
-    *Victor Mart�nez 23-10-2018
+    /*Actualiza el estado de la reunion además de guardar fecha y lugar de Check-Out
+    *Victor Martínez 23-10-2018
     */
         savestatusandlocation:function(fields, errors, callback){
 
@@ -69,7 +69,7 @@
               }, this)
           });
         } catch (e) {
-            console.log("Error: al recuperar ubicaci�n para unifin proceso")
+            console.log("Error: al recuperar ubicación para unifin proceso")
         }
         callback(null,fields,errors);
     },
