@@ -12,8 +12,7 @@
         self = this;
         this._super('initialize', [options]);
         this.model.addValidationTask('ObtenerObjetivos', _.bind(this.almacenaobjetivos, this));
-        //Carga datos
-        this.model.on('sync', this.loadData, this);
+
         this.myobjmin = {};
         this.myobjmin.records = [];
 
