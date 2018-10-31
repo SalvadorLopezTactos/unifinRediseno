@@ -14,6 +14,7 @@
 
         this.on('render', this.disableparentsfields, this);
         this.on('render', this.noEditStatus,this);
+        this.on('render', this.noEditView, this);
         this.model.on('sync', this.cambioFecha, this);
         this.model.on('sync', this.disablestatus, this);
         this.model.on('sync', this.disableFieldsTime,this);
@@ -257,6 +258,17 @@
         $('[data-name="status"]').find('.fa-pencil').remove();
         $('.record-edit-link-wrapper[data-name=status]').remove();
     },
+
+    noEditView: function (){
+        if(this.model.get('parent_name')=='' || this.model.get('parent_name')==null){
+            var rec_id = this.model.get('meetings_id');
+            var module_name = "#Meetings/"+rec_id;
+        if (!_.isEmpty(rec_id)) {
+            app.router.redirect(module_name);
+            }
+        }
+    },
+
     /*Victor Martinez López
     * Duración y recordatorios no son editables cuando la reunión esta como realizada
     * */
@@ -347,20 +359,32 @@
     */
     showCheckin:function(){
         var myField=this.getField("check_in1");
-    if (this.model.get('assigned_user_id')==app.user.attributes.id && (this.model.get('check_in_time_c')=='' || this.model.get('check_in_latitude_c')==null)){
-        //$('[name="check_in"]').eq(0).show();
-        myField.listenTo(myField, "render", function () {
-                myField.show();
-                console.log("field being rendered as: " + myField.tplName);
-            });
-    }   else   {
-        //$('[name="check_in"]').eq(0).hide();
-        myField.listenTo(myField, "render", function () {
-                myField.hide();
-                console.log("field being rendered as: " + myField.tplName);
-            });
-        }
+        var dateActual = new Date();
+        var d1 = dateActual.getDate();
+        var m1 = dateActual.getMonth() + 1;
+        var y1 = dateActual.getFullYear();
+        var dateActualFormat = [m1, d1, y1].join('/');
+        var fechaActual = Date.parse(dateActualFormat);
 
+        var dateend = new Date(this.model.get("date_start"));
+        var d = dateend.getDate();
+        var m = dateend.getMonth() + 1;
+        var y = dateend.getFullYear();
+        var fechaCompleta = [m, d, y].join('/');
+        var fechaendnew = Date.parse(fechaCompleta);
+
+        if (this.model.get('assigned_user_id')==app.user.attributes.id && (this.model.get('check_in_time_c')=='' || this.model.get('check_in_time_c')==null)
+            && fechaActual==fechaendnew){
+                myField.listenTo(myField, "render", function () {
+                        myField.show();
+                        console.log("field being rendered as: " + myField.tplName);
+                    });
+            }   else   {
+                myField.listenTo(myField, "render", function () {
+                        myField.hide();
+                        console.log("field being rendered as: " + myField.tplName);
+                    });
+            }
     },
     //Heredar el objetivo y el resultado a la minuta y cambiar y una etiqueta de la minuta a la cuenta
     /*El boton de creación de la minuta solo será visible cuando la reunión tenga una cuenta
