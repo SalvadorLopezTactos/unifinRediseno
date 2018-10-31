@@ -10,12 +10,14 @@
         this._super("initialize", [options]);
 
         this.on('render',this.disableparentsfields,this);
-        //this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
+        this.model.addValidationTask('checkdate', _.bind(this.checkdate, this));
 
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
         */
         this.model.on('sync', this.fulminantcolor, this);
+        this.model.on('sync', this.loadprevdate, this);
+
 
     },
 
@@ -99,23 +101,37 @@
         //$('.a11y-wrapper').css("background-color", "#c6d9ff");
     },
 
+    loadprevdate: function(){
+        var temp1=this.model.get('date_start');
+        var temp2=temp1.split('T');
+        this.temp_startdate = temp2[0];
+        _.extend(this,this.temp_startdate);
+        var temp3=this.model.get('date_due');
+        var temp4=temp3.split('T');
+        this.temp_duedate = temp4[0];
+        _.extend(this,this.temp_duedate);
+    },
+
     checkdate: function (fields, errors, callback) {
-        var start_date = new Date(this.model.get('date_start'));
-        var due_date = new Date(this.model.get('date_due'));
-        var now = new Date();
-        if(start_date<now ){
+        var temp1=this.model.get('date_start');
+        var temp2=temp1.split('T');
+        var start_date = temp2[0];
+        var temp3=this.model.get('date_due');
+        var temp4=temp3.split('T');
+        var due_date = temp4[0];
+        if(start_date<this.temp_startdate ){
             app.alert.show("start_invalid", {
                 level: "error",
-                title: "La fecha de inicio no puede ser menor al d\u00EDa de hoy",
+                title: "La fecha de inicio actual no puede ser menor a la que estaba guardada",
                 autoClose: false
             });
             errors['date_start'] = errors['date_start'] || {};
             errors['date_start'].datetime = true;
         }
-        if(due_date<now ){
-            app.alert.show("start_invalid", {
+        if(due_date<this.temp_duedate ){
+            app.alert.show("due_invalid", {
                 level: "error",
-                title: "La fecha de vencimiento no puede ser menor al d\u00EDa de hoy",
+                title: "La fecha de vencimiento actual no puede ser menor a la que estaba guardada",
                 autoClose: false
             });
             errors['date_due'] = errors['date_due'] || {};
