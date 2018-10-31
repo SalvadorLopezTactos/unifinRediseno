@@ -8,9 +8,11 @@
         //this.plugins = _.union(this.plugins || [], ['AddAsInvitee', 'ReminderTimeDefaults']);
         self = this;
         this._super("initialize", [options]);
-        this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
+        this.model.addValidationTask('validaFecha', _.bind(this.validaFechaReunion, this));
+        this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.context.on('button:view_document:click', this.view_document, this);
+
     },
 
     render: function(){
@@ -21,7 +23,7 @@
         $('[data-name=minuta_compromisos]').find('.record-label').addClass('hide');
         $('[data-name=minuta_division]').find('.record-label').addClass('hide');
 
-        //Bloquea campo de Reunión relacionada
+        //Bloquea campo de ReuniÃ³n relacionada
         if(this.model.get('minut_minutas_meetingsmeetings_idb')!=undefined){
 
             $('[data-name="minut_minutas_meetings_name"]').attr('style','pointer-events:none');
@@ -29,49 +31,51 @@
         }
     },
 
-    /*Actualiza el estado de la reunion adem�s de guardar fecha y lugar de Check-Out
-    *Victor Mart�nez 23-10-2018
+    /*Actualiza el estado de la reunion además de guardar fecha y lugar de Check-Out
+    *Victor Martínez 23-10-2018
     */
-        savestatusandlocation:function(fields, errors, callback){
+    savestatusandlocation:function(fields, errors, callback){
 
-        try {
-          self=this;
-          if(navigator.geolocation){
-              navigator.geolocation.getCurrentPosition(this.showPosition);
-          }else {
-              alert("No se pudo encontrar tu ubicacion");
+      if (Object.keys(errors).length == 0) {
+          try {
+            self=this;
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(this.showPosition);
+            }else {
+                alert("No se pudo encontrar tu ubicacion");
+            }
+
+            var today= new Date();
+            //self.model.set('check_in_time_c', today);
+            var moduleid = app.data.createBean('Meetings',{id:this.model.get('minut_minutas_meetingsmeetings_idb')});
+            moduleid.fetch({
+                success:_.bind(function(modelo){
+                    this.estado = modelo.get('status');
+                    this.checkoutad=modelo.get('check_out_address_c');
+                    this.checkoutime=modelo.get('check_out_time_c');
+                    this.checkoutlat=modelo.get('check_out_latitude_c');
+                    this.checkoutlong=modelo.get('check_out_longitude_c');
+                    this.resultado=modelo.get('resultado_c');
+                    modelo.set('status', 'Held');
+                    modelo.set('check_out_address_c');
+                    modelo.set('check_out_time_c', today);
+                    modelo.set('check_out_latitude_c',self.latitude);
+                    modelo.set('check_out_longitude_c',self.longitude);
+                    modelo.set('resultado_c', self.model.get('resultado_c'));
+                    modelo.save([],{
+                        dataType:"text",
+                        complete:function() {
+                            //app.router.navigate(module_name , {trigger: true});
+                            location.reload();
+                        }
+                    });
+                }, this)
+            });
+          } catch (e) {
+              console.log("Error: al recuperar ubicación para unifin proceso")
           }
-
-          var today= new Date();
-          //self.model.set('check_in_time_c', today);
-          var moduleid = app.data.createBean('Meetings',{id:this.model.get('minut_minutas_meetingsmeetings_idb')});
-          moduleid.fetch({
-              success:_.bind(function(modelo){
-                  this.estado = modelo.get('status');
-                  this.checkoutad=modelo.get('check_out_address_c');
-                  this.checkoutime=modelo.get('check_out_time_c');
-                  this.checkoutlat=modelo.get('check_out_latitude_c');
-                  this.checkoutlong=modelo.get('check_out_longitude_c');
-                  this.resultado=modelo.get('resultado_c');
-                  modelo.set('status', 'Held');
-                  modelo.set('check_out_address_c');
-                  modelo.set('check_out_time_c', today);
-                  modelo.set('check_out_latitude_c',self.latitude);
-                  modelo.set('check_out_longitude_c',self.longitude);
-                  modelo.set('resultado_c', self.model.get('resultado_c'));
-                  modelo.save([],{
-                      dataType:"text",
-                      complete:function() {
-                          //app.router.navigate(module_name , {trigger: true});
-                          location.reload();
-                      }
-                  });
-              }, this)
-          });
-        } catch (e) {
-            console.log("Error: al recuperar ubicaci�n para unifin proceso")
-        }
-        callback(null,fields,errors);
+      }
+      callback(null,fields,errors);
     },
 
     checkcompromisos:function(fields, errors, callback){
@@ -125,6 +129,41 @@
         self.latitude=position.coords.latitude;
     },
 
+    validaFechaReunion: function(fields, errors, callback){
+
+        //Validar fecha de reunión únicamente cuando el campo sea visible
+        if (!$('[data-fieldname="fecha_y_hora_c"]').children().eq(0).hasClass("vis_action_hidden")) {
+
+            var startDate = new Date(this.model.get('fecha_y_hora_c'));
+            var startMonth = startDate.getMonth() + 1;
+            var startDay = startDate.getDate();
+            var startYear = startDate.getFullYear();
+            var startDateText = startMonth + "/" + startDay + "/" + startYear;
+            // FECHA ACTUAL
+            var dateActual = new Date();
+            var d1 = dateActual.getDate();
+            var m1 = dateActual.getMonth() + 1;
+            var y1 = dateActual.getFullYear();
+            var dateActualFormat = [m1, d1, y1].join('/');
+
+            var fechaActual = Date.parse(dateActualFormat);
+            var startToDate = Date.parse(startDateText);
+            if(startToDate < fechaActual)
+            {
+                app.alert.show("invalid_date_reunion", {
+                    level: "error",
+                    title: "No se puede agendar reuni\u00F3n para una fecha anterior a la actual",
+                    autoClose: false
+                });
+                errors['fecha_y_hora_c'] = "No se puede agendar reuni\u00F3n para una fecha anterior a la actual";
+                errors['fecha_y_hora_c'].required = true;
+            }
+
+        }
+
+        callback(null, fields, errors);
+    },
+
     view_document: function(){
 		  var pdf = window.location.origin+window.location.pathname+"/custom/pdf/Ladas.pdf";
     	window.open(pdf,'_blank');
@@ -132,10 +171,11 @@
       navigator.geolocation.getCurrentPosition(function(position) {
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
-		      var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=AIzaSyDdJzHxd4GtxcrAhc9C_2Qg-mqra1-IjtQ";
+		      var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=1234";
           $.getJSON(url, function(data) {
           	var address = data.results[0]['formatted_address'];
-			      self.model.set('tct_proceso_unifin_address_c',address);
+			      //self.model.set('tct_proceso_unifin_address_c',address);
+            self.model.set('tct_proceso_unifin_address_c',lat+lng);                                                                         
           });
       });
     },
