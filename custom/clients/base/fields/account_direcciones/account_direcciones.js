@@ -14,7 +14,13 @@
         'keydown .existingNumExt': 'checkcallenum',
         'keydown .newCalle': 'limitto100',
         'keydown .newNumInt': 'limitto50',
-        'keydown .newNumExt': 'limitto100',
+        'keydown .newNumExt': 'limitto100',        
+        'blur .existingCalle': 'checkcallenum',
+        'blur .existingNumInt': 'checknumint',
+        'blur .existingNumExt': 'checkcallenum',
+        'blur .newCalle': 'limitto100',
+        'blur .newNumInt': 'limitto50',
+        'blur .newNumExt': 'limitto100',
         'change .existingPais': 'updateExistingDireccionDropdown',
         'change .existingEstado': 'updateExistingDireccionDropdown',
         //'change .existingIndicador': 'updateIndicador',
@@ -1739,9 +1745,7 @@
         if (!evt) return;
         //get field that changed
         var $input = this.$(evt.currentTarget);
-
         var direccion = $input.val();
-
         if(direccion.length>49 && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
             return false;
         }
