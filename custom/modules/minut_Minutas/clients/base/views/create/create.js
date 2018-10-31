@@ -6,12 +6,11 @@
 
     initialize: function (options) {
         //this.plugins = _.union(this.plugins || [], ['AddAsInvitee', 'ReminderTimeDefaults']);
-
         self = this;
         this._super("initialize", [options]);
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
-
+        this.model.addValidationTask('validaFecha', _.bind(this.validaFechaReunion, this));
         this.context.on('button:view_document:click', this.view_document, this);
 
     },
@@ -24,7 +23,7 @@
         $('[data-name=minuta_compromisos]').find('.record-label').addClass('hide');
         $('[data-name=minuta_division]').find('.record-label').addClass('hide');
 
-        //Bloquea campo de Reunión relacionada
+        //Bloquea campo de ReuniÃ³n relacionada
         if(this.model.get('minut_minutas_meetingsmeetings_idb')!=undefined){
 
             $('[data-name="minut_minutas_meetings_name"]').attr('style','pointer-events:none');
@@ -126,22 +125,48 @@
     showPosition:function(position) {
         self.longitude=position.coords.longitude;
         self.latitude=position.coords.latitude;
-        },
-
-    view_document: function(){
-		var pdf = window.location.origin+window.location.pathname+"/custom/pdf/Ladas.pdf";
-    	window.open(pdf,'_blank');
-    	var cDate = new Date();
-        this.model.set('tct_proceso_unifin_time_c',cDate);
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var lat = position.coords.latitude;
-          var lng = position.coords.longitude;
-		  var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=AIzaSyDdJzHxd4GtxcrAhc9C_2Qg-mqra1-IjtQ";
-          $.getJSON(url, function(data) {
-          	var address = data.results[0]['formatted_address'];
-			self.model.set('tct_proceso_unifin_address_c',address);
-          });
-        });
     },
 
+    validaFechaReunion: function(fields, errors, callback){
+        var startDate = new Date(this.model.get('fecha_y_hora_c'));
+        var startMonth = startDate.getMonth() + 1;
+        var startDay = startDate.getDate();
+        var startYear = startDate.getFullYear();
+        var startDateText = startDay + "/" + startMonth + "/" + startYear;
+        // FECHA ACTUAL
+        var dateActual = new Date();
+        var d1 = dateActual.getDate();
+        var m1 = dateActual.getMonth() + 1;
+        var y1 = dateActual.getFullYear();
+        var dateActualFormat = [m1, d1, y1].join('/');
+
+        var fechaActual = Date.parse(dateActualFormat);
+        var startToDate = Date.parse(startDateText);
+        if(startToDate < fechaActual)
+        {
+            app.alert.show("invalid_date_reunion", {
+                level: "error",
+                title: "No se puede agendar reuni\u00F3n para una fecha anterior a la actual",
+                autoClose: false
+            });
+            errors['fecha_y_hora_c'] = "No se puede agendar reuni\u00F3n para una fecha anterior a la actual";
+            errors['fecha_y_hora_c'].required = true;
+        }
+        callback(null, fields, errors);
+    },
+
+    view_document: function(){
+		  var pdf = window.location.origin+window.location.pathname+"/custom/pdf/Ladas.pdf";
+    	window.open(pdf,'_blank');
+      self.model.set('tct_proceso_unifin_time_c',this.model.get('tct_today_c'));
+      navigator.geolocation.getCurrentPosition(function(position) {
+          var lat = position.coords.latitude;
+          var lng = position.coords.longitude;
+		      var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=AIzaSyDdJzHxd4GtxcrAhc9C_2Qg-mqra1-IjtQ";
+          $.getJSON(url, function(data) {
+          	var address = data.results[0]['formatted_address'];
+			      self.model.set('tct_proceso_unifin_address_c',address);
+          });
+      });
+    },
 })
