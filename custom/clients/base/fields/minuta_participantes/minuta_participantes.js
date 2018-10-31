@@ -134,6 +134,12 @@
         if (valor4 == '' && valor5 == '') {
             $('.newCampo4P').css('border-color', 'red');
             $('.newCampo5P').css('border-color', 'red');
+            app.alert.show('email_telefono_error', {
+                level: 'error',
+                autoClose: true,
+                messages: 'Favor de agregar un <b>Tel\u00E9fono</b> o un <b>Correo</b>'
+
+            });
             faltantes++
         }
         //Tipo de contacto
