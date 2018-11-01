@@ -30,7 +30,7 @@
 		this.model.addValidationTask('check_custom_relacion_c', _.bind(this.checarRelacion, this));
 		this.model.addValidationTask('check_Relaciones_Permitidas', _.bind(this.RelacionesPermitidas, this));
 		this.model.addValidationTask('check_Relaciones_Duplicadas', _.bind(this.relacionesDuplicadas, this));
-
+        this.model.addValidationTask('crearrelacionaccionista', _.bind(this.Relacionaccionista, this));
 
 
 		this.model.on('change:relacion_c', this.checarValidaciones, this);
@@ -417,5 +417,15 @@
 		});
         callback(null, fields, errors);
 	},
+
+    Relacionaccionista: function (fields, errors, callback) {
+            if (this.model.get('porcentaje_participacion_c')=="" || this.model.get('porcentaje_participacion_c')==null || this.model.get('porcentaje_participacion_c')== "0.00") {
+                errors['porcentaje_participacion_c'] = errors['porcentaje_participacion_c'] || {};
+                errors['porcentaje_participacion_c'].required = true;
+            }
+
+        callback(null, fields, errors);
+    },
+
 
 })
