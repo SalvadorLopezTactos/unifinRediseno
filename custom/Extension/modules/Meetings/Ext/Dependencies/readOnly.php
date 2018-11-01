@@ -208,3 +208,19 @@ $dependencies['Meetings']['objetivo_c'] = array(
         ),
     ),
 );
+
+$dependencies['Meetings']['reunion_objetivos'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('status'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'ReadOnly',
+            'params' => array(
+                'target' => 'reunion_objetivos',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
+            ),
+        ),
+    ),
+);

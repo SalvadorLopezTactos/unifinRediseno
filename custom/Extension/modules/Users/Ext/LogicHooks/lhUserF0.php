@@ -1,7 +1,7 @@
 <?php
 
 $hook_array['before_save'][] = Array(
-    1,
+    4,
     'User Private Team',
     'custom/modules/Users/DefaultTeam.php',
     'DefaultTeam',

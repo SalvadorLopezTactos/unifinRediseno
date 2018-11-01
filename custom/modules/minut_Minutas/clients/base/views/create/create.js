@@ -23,6 +23,9 @@
         $('[data-name=minuta_compromisos]').find('.record-label').addClass('hide');
         $('[data-name=minuta_division]').find('.record-label').addClass('hide');
 
+        //Oculta panel con campos de checkin en minuta
+        $('[data-panelname="LBL_RECORDVIEW_PANEL4"]').addClass('hide');
+
         //Bloquea campo de ReuniÃ³n relacionada
         if(this.model.get('minut_minutas_meetingsmeetings_idb')!=undefined){
 
@@ -79,6 +82,18 @@
     },
 
     checkcompromisos:function(fields, errors, callback){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10) {
+            dd = '0'+dd
+        }
+        if(mm<10) {
+            mm = '0'+mm
+        }
+        today = yyyy+'-'+mm+'-'+dd;
+
         $('.existingcompromiso').each(function(index,item){
             if($(item).val().trim()!=''){
                 $('.existingcompromiso').eq(index).css('border-color', '');
@@ -95,7 +110,18 @@
         });
         $('.existingdate').each(function(index,item){
             if($(item).val().trim()!=''){
-                $('.existingdate').eq(index).css('border-color', '');
+                if($(item).val().trim()<today){
+                    $('.existingdate').eq(index).css('border-color', 'red');
+                    app.alert.show("datecomp_invalid", {
+                        level: "error",
+                        title: "La fechas de los compromisos deben ser mayor al d\u00EDa de hoy",
+                        autoClose: false
+                    });
+                    errors['comp_date'] = errors['comp_date'] || {};
+                    errors['comp_date'].required = true;
+                }else {
+                    $('.existingdate').eq(index).css('border-color', '');
+                }
             }else{
                 $('.existingdate').eq(index).css('border-color', 'red');
                 app.alert.show("empty_date", {
@@ -165,17 +191,18 @@
     },
 
     view_document: function(){
-		  var pdf = window.location.origin+window.location.pathname+"/custom/pdf/Ladas.pdf";
-    	window.open(pdf,'_blank');
-      self.model.set('tct_proceso_unifin_time_c',this.model.get('tct_today_c'));
-      navigator.geolocation.getCurrentPosition(function(position) {
+		var pdf = window.location.origin+window.location.pathname+"/custom/pdf/Ladas.pdf";
+		window.open(pdf,'_blank');
+		self.model.set('tct_proceso_unifin_time_c',this.model.get('tct_today_c'));
+		navigator.geolocation.getCurrentPosition(function(position) {
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
-		      var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=AIzaSyDdJzHxd4GtxcrAhc9C_2Qg-mqra1-IjtQ";
-          $.getJSON(url, function(data) {
+		  var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=1234";
+          /*$.getJSON(url, function(data) {
           	var address = data.results[0]['formatted_address'];
 			      self.model.set('tct_proceso_unifin_address_c',address);
-          });
-      });
+          });*/
+		  self.model.set('tct_proceso_unifin_address_c',lat+lng);
+		});
     },
 })

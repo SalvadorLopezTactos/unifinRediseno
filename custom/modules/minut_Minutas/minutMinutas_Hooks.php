@@ -34,11 +34,13 @@ class minutMinutas_Hooks
               $beanParticipante->tct_nombre_completo_c = $objArrParticipnates[$i]['nombres'] . " " . $objArrParticipnates[$i]['apaterno'] . " " . $objArrParticipnates[$i]['amaterno'];
 
               $beanParticipante->tct_correo_c = $objArrParticipnates[$i]['correo'];
-              $beanParticipante->tct_telefono = $objArrParticipnates[$i]['telefono'];
+              $beanParticipante->tct_telefono_c = $objArrParticipnates[$i]['telefono'];
               $beanParticipante->tct_asistencia_c = $objArrParticipnates[$i]['asistencia'];
               $beanParticipante->tct_tipo_registro_c = $objArrParticipnates[$i]['tipo_contacto'];
               //$beanParticipante->tct_id_registro_c=$objArrParticipnates[$i]['nombres'];
               $beanParticipante->minut_minutas_minut_participantesminut_minutas_ida = $idMinuta;
+              $beanParticipante->description = $objArrParticipnates[$i]['unifin'];
+
               $beanParticipante->save();
 
 

@@ -12,8 +12,7 @@
         self = this;
         this._super('initialize', [options]);
         this.model.addValidationTask('ObtenerObjetivos', _.bind(this.almacenaobjetivos, this));
-        //Carga datos
-        this.model.on('sync', this.loadData, this);
+
         this.myobjmin = {};
         this.myobjmin.records = [];
 
@@ -29,12 +28,13 @@
         myobjmin = "";
         var selfvalue = this;
 
-        //Codición para cargar objetivos relacionados a la REUNIÓN
+        //Condición para cargar objetivos relacionados a la REUNIÓN
         if (this.action == 'detail') {
+            var idReunion=this.model.get('id');
 
-            if (this.model.get("minut_minutas_meetingsmeetings_idb") != "") {
-                app.api.call('GET', app.api.buildURL('Meetings/' + this.model.get("minut_minutas_meetingsmeetings_idb") + '/link/meetings_minut_objetivos_1'), null, {
-                    success: function (data) {
+                if (this.model.get("minut_minutas_meetingsmeetings_idb") != "") {
+                    app.api.call('GET', app.api.buildURL('minut_Minutas/' + idReunion + '/link/minut_minutas_minut_objetivos'), null, {
+                        success: function (data) {
                         selfvalue.myobjmin = data;
                         _.extend(this, selfvalue.myobjmin);
                         selfvalue.render();
@@ -53,6 +53,14 @@
             app.api.call('GET', app.api.buildURL('Meetings/' + idReunion + '/link/meetings_minut_objetivos_1'), null, {
                 success: function (data) {
                     selfvalue.myobjmin = data;
+                    //Obteniendo el objetivo general de la Reunión (parent)
+                    var modeloReunion=selfvalue.context.parent.get('model');
+                    var objetivoGral=App.lang.getAppListStrings('objetivo_list')[modeloReunion.get('objetivo_c')];
+                    var item = {
+                        "name":objetivoGral,"cumplimiento":""
+                    };
+                    //Se añade el objetivo general al principio del arreglo
+                    selfvalue.myobjmin.records.unshift(item);
                     _.extend(this, selfvalue.myobjmin);
                     selfvalue.render();
                 },
