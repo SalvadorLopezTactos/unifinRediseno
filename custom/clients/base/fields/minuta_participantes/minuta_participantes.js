@@ -36,7 +36,6 @@
       this.mParticipantes = '';
       this.tipoContacto = App.lang.getAppListStrings('Tipo_Contacto_list');
 
-
       selfData = this;
       var idReunion = '';
 
@@ -54,18 +53,31 @@
             }
         });
       }else if(this.context.parent){
-        //Recupera datos para vista de creación
-        idReunion = this.context.parent.attributes.modelId;
-        app.api.call('GET', app.api.buildURL('GetParticipantes/'+idReunion), null, {
-            success: function (data) {
-                selfData.mParticipantes= data;
-                _.extend(this, selfData.mParticipantes);
-                selfData.render();
-            },
-            error: function (e) {
-                throw e;
-            }
-        });
+
+          //Recupera datos para vista de creación
+          idReunion = this.context.parent.attributes.modelId;
+
+          var moduleid = app.data.createBean('Meetings',{id:idReunion});
+          moduleid.fetch({
+              success:_.bind(function(modelo){
+                  if(modelo.get('parent_meeting_c')!="" && modelo.get('parent_meeting_c')!="undefine"){
+                      idReunion = modelo.get('parent_meeting_c');
+                  }
+
+                  app.api.call('GET', app.api.buildURL('GetParticipantes/'+idReunion), null, {
+                      success: function (data) {
+                          selfData.mParticipantes= data;
+                          _.extend(this, selfData.mParticipantes);
+                          selfData.render();
+                      },
+                      error: function (e) {
+                          throw e;
+                      }
+                  });
+
+              }, this)
+          });
+
       }
 
       this.render();
