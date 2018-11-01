@@ -381,6 +381,7 @@ array (
               array (
                 'name' => 'minut_minutas_meetings_name',
                 'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MINUT_MINUTAS_TITLE',
+                'readonly' => true,
               ),
               1 => 
               array (
