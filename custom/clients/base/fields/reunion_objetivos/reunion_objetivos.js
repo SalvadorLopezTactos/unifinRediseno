@@ -102,7 +102,7 @@
         }else{
       var valor1 = $('.newCampo1')[0].value;
       var item = {
-      "name":valor1,"cumplimiento":""
+      "name":valor1,"cumplimiento":"", "description":1
       };
 
       this.myobject.records.push(item);

@@ -454,6 +454,7 @@ SQL;
                     $GLOBALS['log']->fatal($objetivo['name']);
                     $beanObjetivo = BeanFactory::retrieveBean('minut_Objetivos', $objetivo['id']);
                     $beanObjetivo->name = $objetivo['name'];
+                    $beanObjetivo->description = $objetivo['description'];
                     $beanObjetivo->save();
                 }else{
                     //Crea
@@ -462,6 +463,7 @@ SQL;
                     $beanObjetivo = BeanFactory::newBean('minut_Objetivos');
                     $beanObjetivo->name = $objetivo['name'];
                     $beanObjetivo->meetings_minut_objetivos_1meetings_ida = $bean->id;
+                    $beanObjetivo->description = $objetivo['description'];
                     $beanObjetivo->save();
                 }
             }
