@@ -13,6 +13,10 @@
     _render: function () {
         this._super("_render");
         $('[data-name=reunion_objetivos]').find('.record-label').addClass('hide');
+
+        //Ocultar panel con campos de control de check in
+        $('[data-panelname="LBL_RECORDVIEW_PANEL2"]').addClass('hide');
+
         /*Oculta el campo de resultado de la llamada cuando la está se encuentra en planificada
          *Victor Martinez López 23-08-2018
          * */

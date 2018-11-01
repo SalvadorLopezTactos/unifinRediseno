@@ -27,14 +27,14 @@ class MinutaReunion extends SugarApi
                 'shortHelp' => 'Método GET para obtener los participantes invitados en la Reunion',
                 'longHelp' => '',
             ),
-
-            'POST_Participantes' => array(
-                'reqType' => 'POST',
+            'ParticipantesRecord' => array(
+                'reqType' => 'GET',
                 'noLoginRequired' => true,
-                'path' => array('CreateParticipantes'),
-                'pathVars' => array(''),
-                'method' => 'createParticipantes',
-                'shortHelp' => 'Agrega  participantes que no se encontraban en la reunion',
+                'path' => array('RecordParticipantes', '?'),
+                'pathVars' => array('module', 'id_Minuta'),
+                'method' => 'getParticipantesReunionRecord',
+                'shortHelp' => 'Método para obtener los participantes invitados en la Reunion y mostrar en la Vista Detalle',
+                'longHelp' => '',
             ),
 
 
@@ -117,17 +117,48 @@ where t1.rel_relaciones_accounts_1accounts_ida = '{$idCuenta}'
     }
 
 
-    /*  public function createParticipantes($api, $args)
-      {
-          $id_Reunion = $args['idReunion'];
-          $id_Cuenta = $args['idCuenta'];
-          $arrayParti = $args['participantes'];
+    public function getParticipantesReunionRecord($api, $args)
+    {
+        $idMinuta = $args['id_Minuta'];
 
-          $beanParticipantes = BeanFactory::newBean("minut_Participantes");
-          $beanParticipantes->
+        // CREAMOS LA ESTRUCTURA DE LA RESPUESTA
+        $respuestaJson = array('participantes' => array(), 'compromisos' => array());
+
+        $queryRecord = "SELECT T3.id,T3.name,T3.description,T3.tct_apellido_paterno_c,T3.tct_apellido_materno_c,T3.tct_nombre_completo_c,
+       T3.tct_correo_c,T3.tct_telefono_c,T3.tct_asistencia_c,T3.tct_tipo_registro_c
+        FROM minut_minutas T1
+        INNER JOIN minut_minutas_minut_participantes_c T2
+        ON T2.minut_minutas_minut_participantesminut_minutas_ida=T1.id
+        INNER JOIN minut_participantes T3
+        ON T3.id=T2.minut_minutas_minut_participantesminut_participantes_idb
+        WHERE T1.id='{$idMinuta}'
+        AND T1.deleted=0
+        AND T2.deleted=0
+        AND T3.deleted=0";
+
+        $resultado = $bd = $GLOBALS['db']->query($queryRecord);
+
+        while ($row = $GLOBALS['db']->fetchByAssoc($resultado)) {
+
+            $participantesMinuta = [
+
+                "id" => $row['id'],
+                "nombres" => $row['name'],
+                "apaterno" => $row['tct_apellido_paterno_c'],
+                "amaterno" => $row['tct_apellido_materno_c'],
+                "telefono" => $row['tct_telefono_c'],
+                "correo" => $row['tct_correo_c'],
+                "origen" => "",
+                "unifin" => (int)$row['description'],
+                "tipo_contacto" => $row['tct_tipo_registro_c'],
+                "asistencia" => (int)$row['tct_asistencia_c'],
+
+            ];
+
+            array_push($respuestaJson['participantes'], $participantesMinuta);
+        }
+        return $respuestaJson;
+    }
 
 
-          return $arrayParti;
-      }
-      */
 }

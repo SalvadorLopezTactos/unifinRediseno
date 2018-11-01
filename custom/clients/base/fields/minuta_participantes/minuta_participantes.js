@@ -42,8 +42,8 @@
 
       if (this.action == 'detail') {
         //Recupera datos para vista de detalle
-        idReunion = this.model.get('minut_minutas_meetingsmeetings_idb');
-        app.api.call('GET', app.api.buildURL('GetParticipantes/'+idReunion), null, {
+        idReunion = this.model.get('id');
+        app.api.call('GET', app.api.buildURL('RecordParticipantes/'+idReunion), null, {
             success: function (data) {
                 selfData.mParticipantes= data;
                 _.extend(this, selfData.mParticipantes);

@@ -379,6 +379,14 @@ array (
             array (
               0 => 
               array (
+                'name' => 'minut_minutas_meetings_name',
+                'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MINUT_MINUTAS_TITLE',
+              ),
+              1 => 
+              array (
+              ),
+              2 => 
+              array (
                 'name' => 'date_entered_by',
                 'readonly' => true,
                 'inline' => true,
@@ -401,7 +409,7 @@ array (
                   ),
                 ),
               ),
-              1 => 
+              3 => 
               array (
                 'name' => 'date_modified_by',
                 'readonly' => true,
@@ -425,50 +433,55 @@ array (
                   ),
                 ),
               ),
-              2 => 
-              array (
-                'name' => 'minut_minutas_meetings_name',
-                'label' => 'LBL_MINUT_MINUTAS_MEETINGS_FROM_MINUT_MINUTAS_TITLE',
-              ),
-              3 => 
-              array (
-              ),
-              4 => 
+            ),
+          ),
+          4 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL2',
+            'label' => 'LBL_RECORDVIEW_PANEL2',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
               array (
                 'name' => 'check_in_longitude_c',
                 'label' => 'LBL_CHECK_IN_LONGITUDE',
               ),
-              5 => 
+              1 => 
               array (
                 'name' => 'check_in_latitude_c',
                 'label' => 'LBL_CHECK_IN_LATITUDE',
               ),
-              6 => 
+              2 => 
               array (
                 'name' => 'check_in_address_c',
                 'label' => 'LBL_CHECK_IN_ADDRESS',
               ),
-              7 => 
+              3 => 
               array (
                 'name' => 'check_in_time_c',
                 'label' => 'LBL_CHECK_IN_TIME_C',
               ),
-              8 => 
+              4 => 
               array (
                 'name' => 'check_out_longitude_c',
                 'label' => 'LBL_CHECK_OUT_LONGITUDE_C',
               ),
-              9 => 
+              5 => 
               array (
                 'name' => 'check_out_latitude_c',
                 'label' => 'LBL_CHECK_OUT_LATITUDE_C',
               ),
-              10 => 
+              6 => 
               array (
                 'name' => 'check_out_address_c',
                 'label' => 'LBL_CHECK_OUT_ADDRESS_C',
               ),
-              11 => 
+              7 => 
               array (
                 'name' => 'check_out_time_c',
                 'label' => 'LBL_CHECK_OUT_TIME_C',
