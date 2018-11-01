@@ -23,6 +23,9 @@
         $('[data-name=minuta_compromisos]').find('.record-label').addClass('hide');
         $('[data-name=minuta_division]').find('.record-label').addClass('hide');
 
+        //Oculta panel con campos de checkin en minuta
+        $('[data-panelname="LBL_RECORDVIEW_PANEL4"]').addClass('hide');
+
         //Bloquea campo de ReuniÃ³n relacionada
         if(this.model.get('minut_minutas_meetingsmeetings_idb')!=undefined){
 
