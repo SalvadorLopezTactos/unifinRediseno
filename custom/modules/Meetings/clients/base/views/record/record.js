@@ -12,7 +12,6 @@
 
         this.on('render', this.disableparentsfields, this);
         this.on('render', this.noEditStatus,this);
-        this.on('render', this.noEditView, this);
         this.model.on('sync', this.cambioFecha, this);
         this.model.on('sync', this.disablestatus, this);
         this.model.on('sync', this.disableFieldsTime,this);
@@ -161,10 +160,10 @@
         }
         else {
         this.$('[data-name="parent_name"]').attr('style', '');
-        this.setButtonStates(this.STATE.EDIT);
-        this.action = 'edit';
-        this.toggleEdit(true);
-        this.setRoute('edit');
+        //this.setButtonStates(this.STATE.EDIT);
+        this.action = 'detail';
+        this.toggleEdit(false);
+        //this.setRoute('detail');
         }
     },
 
@@ -257,16 +256,6 @@
     noEditStatus:function (){
         $('[data-name="status"]').find('.fa-pencil').remove();
         $('.record-edit-link-wrapper[data-name=status]').remove();
-    },
-
-    noEditView: function (){
-        if(this.model.get('parent_name')=='' || this.model.get('parent_name')==null || this.model.get('parent_name')==undefined){
-            var rec_id = this.model.get('id');
-            var module_name = "#Meetings/"+rec_id;
-            window.location.replace(module_name);
-            //app.router.redirect
-            
-        }
     },
 
     /*Victor Martinez López
