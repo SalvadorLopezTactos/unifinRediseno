@@ -302,21 +302,21 @@
             <input type="hidden" value="{{this.nuevo_acompanante_id}}">
         </td>
         <td width="10%" >
-            <select id="nuevo_objetivo{{this.id}}" class="objetivo_list" style="width: 134px;">
+            <select id="nuevo_objetivo{{this.id}}" class="objetivo_list" style="width: 134px;" disabled>
                 {{#select this.nuevo_objetivo}}
                     {{{../../objetivo}}}
                 {{/select}}
             </select>
         </td>
         <td width="10%" >
-            <select id="nuevo_estatus{{this.id}}" class="estatus_cita" style="width: 134px;">
+            <select id="nuevo_estatus{{this.id}}" class="estatus_cita" style="width: 134px;" disabled>
                 {{#select this.nuevo_estatus}}
                     {{{../../estatus}}}
                 {{/select}}
             </select>
         </td>
         <td width="10%" >
-            <select class="resultado_list" id="resultado{{this.id}}">
+            <select class="resultado_list" id="resultado{{this.id}}" disabled>
                 {{#select this.nuevo_resultado}}
                     {{{../../resultado}}}
                 {{/select}}

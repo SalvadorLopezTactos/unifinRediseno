@@ -92,21 +92,30 @@
 
     },
     CreaMinuta:function(){
-        var model=App.data.createBean('minut_Minutas');
-        model.set('account_id_c', this.model.get('parent_id'));
-        model.set('tct_relacionado_con_c', this.model.get('parent_name'));
-        model.set('objetivo_c', this.model.get('objetivo_c'));
-        model.set('minut_minutas_meetingsmeetings_idb',this.model.get('id'))
-        model.set('minut_minutas_meetings_name',this.model.get('name'))
-        app.drawer.open({
-            layout:'create',
-            context:{
-            create: true,
-            module:'minut_Minutas',
-            model:model
-       }
-    });
-  },
+        
+        if($('.objetivoSelect').length<=0){
+            app.alert.show("Objetivo vacio",{
+                    level: "error",
+                    title: "Es necesario tener por lo menos un objetivo espec\u00EDfico para generar la minuta",
+                    autoClose: false
+                });
+        }else{
+            var model=App.data.createBean('minut_Minutas');
+            model.set('account_id_c', this.model.get('parent_id'));
+            model.set('tct_relacionado_con_c', this.model.get('parent_name'));
+            model.set('objetivo_c', this.model.get('objetivo_c'));
+            model.set('minut_minutas_meetingsmeetings_idb',this.model.get('id'))
+            model.set('minut_minutas_meetings_name',this.model.get('name'))
+            app.drawer.open({
+                layout:'create',
+                context:{
+                create: true,
+                module:'minut_Minutas',
+                model:model
+                }
+            });
+        }
+    },
 
   _dispose: function() {
      this._super('_dispose');
@@ -348,10 +357,10 @@
     showError:function(error) {
         switch(error.code) {
             case error.PERMISSION_DENIED:
-                alert("Permiso de geolocalización no autorizado")
+                alert("Permiso de geolocalizaci\u00F3n no autorizado")
             break;
                 case error.POSITION_UNAVAILABLE:
-                alert("La información de la geolocalización no está disponible");
+                alert("La informaci\u00F3n de la geolocalizaci\u00F3n no está disponible");
                 break;
             case error.TIMEOUT:
                 alert("El tiempo de espera a terminado");

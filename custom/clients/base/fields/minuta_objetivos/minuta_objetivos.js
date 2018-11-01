@@ -57,7 +57,7 @@
                     var modeloReunion=selfvalue.context.parent.get('model');
                     var objetivoGral=App.lang.getAppListStrings('objetivo_list')[modeloReunion.get('objetivo_c')];
                     var item = {
-                        "name":objetivoGral,"cumplimiento":""
+                        "name":objetivoGral,"cumplimiento":"","description":""
                     };
                     //Se añade el objetivo general al principio del arreglo
                     selfvalue.myobjmin.records.unshift(item);

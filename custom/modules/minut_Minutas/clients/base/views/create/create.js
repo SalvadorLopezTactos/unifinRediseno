@@ -69,7 +69,10 @@
                         dataType:"text",
                         complete:function() {
                             //app.router.navigate(module_name , {trigger: true});
-                            location.reload();
+                            $('a[name=new_minuta]').hide()
+                            SUGAR.App.controller.context.reloadData({});
+                            $('[data-name="minut_minutas_meetings_name"]').removeAttr("style");
+                            $('[data-name="assigned_user_name"]').removeAttr("style");
                         }
                     });
                 }, this)
