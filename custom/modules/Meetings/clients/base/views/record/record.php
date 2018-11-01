@@ -489,6 +489,14 @@ array (
                 'name' => 'check_out_time_c',
                 'label' => 'LBL_CHECK_OUT_TIME_C',
               ),
+              8 => 
+              array (
+                'name' => 'parent_meeting_c',
+                'label' => 'LBL_PARENT_MEETING',
+              ),
+              9 => 
+              array (
+              ),
             ),
           ),
         ),
