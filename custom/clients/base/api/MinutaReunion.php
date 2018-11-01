@@ -149,9 +149,9 @@ where t1.rel_relaciones_accounts_1accounts_ida = '{$idCuenta}'
                 "telefono" => $row['tct_telefono_c'],
                 "correo" => $row['tct_correo_c'],
                 "origen" => "",
-                "unifin" => $row['description'],
+                "unifin" => (int)$row['description'],
                 "tipo_contacto" => $row['tct_tipo_registro_c'],
-                "asistencia" => $row['tct_asistencia_c'],
+                "asistencia" => (int)$row['tct_asistencia_c'],
 
             ];
 
