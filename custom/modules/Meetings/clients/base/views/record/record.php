@@ -343,9 +343,6 @@ array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
               ),
-              13 => 
-              array (
-              ),
             ),
           ),
           2 => 
