@@ -400,7 +400,9 @@ SQL;
             $objetivos_a_borrar=array();
 
             foreach ($bean->reunion_objetivos['records'] as $record){
-                array_push($arr_ids_field_objetivos,$record['id']);
+                if(isset($record['id'])) {
+                    array_push($arr_ids_field_objetivos, $record['id']);
+                }
             }
 
 
@@ -446,7 +448,7 @@ SQL;
 
 
             foreach ($bean->reunion_objetivos['records'] as $objetivo) {
-                if ($objetivo['id']) {
+                if (isset($objetivo['id'])) {
                     //Actualiza
                     $GLOBALS['log']->fatal('Actualiza Objetivos');
                     $GLOBALS['log']->fatal($objetivo['name']);
