@@ -125,7 +125,7 @@ from meetings m
 left join meetings_cstm mc on m.id = mc.id_c
 inner join accounts a on m.parent_id = a.id
 where m.deleted=0
-and m.status != 'Not Held'
+and m.status = 'Held'
 and date(convert_tz(m.date_start,'+00:00','-06:00')) = '{$fecha}'
 and m.assigned_user_id='{$promotor}'
 SQL;
