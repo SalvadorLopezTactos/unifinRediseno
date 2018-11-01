@@ -35,12 +35,6 @@
                 if (this.model.get("minut_minutas_meetingsmeetings_idb") != "") {
                     app.api.call('GET', app.api.buildURL('minut_Minutas/' + idReunion + '/link/minut_minutas_minut_objetivos'), null, {
                         success: function (data) {
-                        var objetivoGral=  App.lang.getAppListStrings('objetivo_list')[selfvalue.model.get('objetivo_c')];
-                        var item = {
-                            "name":objetivoGral,"cumplimiento":""
-                        };
-                        //Se añade el objetivo general al principio del arreglo
-                        selfvalue.myobjmin.records.unshift(item);
                         selfvalue.myobjmin = data;
                         _.extend(this, selfvalue.myobjmin);
                         selfvalue.render();
