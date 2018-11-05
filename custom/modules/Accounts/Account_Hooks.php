@@ -709,6 +709,7 @@ SQL;
     public function actualizaPersona($bean = null, $event = null, $args = null)
     {
         global $current_user;
+        global $db;
         try {
             $GLOBALS['log']->fatal(" <".$current_user->user_name."> :El estatus en sesion al actualizar Persona es:" . $_SESSION['estadoPersona']);
             /*
