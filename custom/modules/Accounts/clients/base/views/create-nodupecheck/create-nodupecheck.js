@@ -308,6 +308,14 @@
         * F. Javier G. Solar 06/08/2018
          Se oculta el boton de mas opciones en las petañas de cuentas(record) */
         $('.nav-tabs li a.dropdown-toggle').hide();
+
+
+        /* @author F. Javier Garcia S. 05/10/2018
+        Se oculta panel NPS,al crear cuenta desde el modulo Rel_Relacion".
+         */
+        this.$("[data-panelname='LBL_RECORDVIEW_PANEL10']").hide();
+
+
     },
 
     _ActualizaEtiquetas: function () {
