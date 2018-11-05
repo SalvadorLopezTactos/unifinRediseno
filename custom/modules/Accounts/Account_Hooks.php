@@ -725,7 +725,7 @@ SQL;
                   // Consulta si tiene relación
                   $query = "select id_c from rel_relaciones_cstm
                           where account_id1_c ='". $bean->id ."'
-                          limit 1;"
+                          limit 1;";
                   $queryResult = $db->query($query);
                   //Si tiene relaciones envia petición
                   while ($row = $db->fetchByAssoc($queryResult)) {
