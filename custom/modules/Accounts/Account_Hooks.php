@@ -712,16 +712,32 @@ SQL;
         try {
             $GLOBALS['log']->fatal(" <".$current_user->user_name."> :El estatus en sesion al actualizar Persona es:" . $_SESSION['estadoPersona']);
             /*
-              AF - 2018/08/14
-              Modica condición para no mandar actualizar leads y si registros que tengan idCliente
+              AF - 2018/11/01
+              Modica condición para  actualizar  registros que tengan idCliente y Leads que sean relación de otras cuentas
             */
             //no se debe disparar si es lead
-            if ($bean->tipo_registro_c != 'Lead' && !empty($bean->idcliente_c) && $_SESSION['estadoPersona'] == 'actualizando') {
+            if (!empty($bean->idcliente_c) && $_SESSION['estadoPersona'] == 'actualizando') {
                 $callApi = new UnifinAPI();
+
+                //Evalua si envía lead
+                $relacionado = 0;
+                if ($bean->tipo_registro_c == 'Lead') {
+                  // Consulta si tiene relación
+                  $query = "select id_c from rel_relaciones_cstm
+                          where account_id1_c ='". $bean->id ."'
+                          limit 1;"
+                  $queryResult = $db->query($query);
+                  //Si tiene relaciones envia petición
+                  while ($row = $db->fetchByAssoc($queryResult)) {
+                      $relacionado = 1;
+                  }
+                }
                 //CVV - valida que la persona ya se encuentre sincornizada con UNICS, de lo contrario manda a insertar completo
                 if($bean->sincronizado_unics_c == 1){
-                    $Actualizacliente = $callApi->actualizaPersonaUNICS($bean);
-                    $this->emailChangetoUnics($bean);
+                    if (($bean->tipo_registro_c == 'Lead' && $relacionado==1) || $bean->tipo_registro_c != 'Lead') {
+                      $Actualizacliente = $callApi->actualizaPersonaUNICS($bean);
+                      $this->emailChangetoUnics($bean);
+                    }
                 }else{
                     $Actualizacliente = $callApi->insertarClienteCompleto($bean);
                 }
@@ -887,7 +903,7 @@ where rfc_c = '{$bean->rfc_c}' and
         $sum = 10 - $sum %10;
         return $idCliente . ($sum % 10);
     }
-	
+
     public function crearFolioRelacion($bean = null, $event = null, $args = null)
     {
    		global $db;
