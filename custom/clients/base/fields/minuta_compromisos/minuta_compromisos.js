@@ -125,16 +125,31 @@
         }else{
             if(valor1.trim()=='') {
                 $('.newcompromiso').css('border-color', 'red');
+                app.alert.show("empty_comp", {
+                    level: "error",
+                    title: "El compromiso est\u00E1 vac\u00EDo",
+                    autoClose: false
+                });
             }else{
                 $('.newcompromiso').css('border-color', '');
             }
             if(valor2=='0') {
                 $('.newresponsable').css('border-color', 'red');
+                app.alert.show("empty_resp", {
+                    level: "error",
+                    title: "El responsable est\u00E1 vac\u00EDo",
+                    autoClose: false
+                });
             }else{
                 $('.newresponsable').css('border-color', '');
             }
             if(valor4=='') {
                 $('.newdate').css('border-color', 'red');
+                app.alert.show("empty_date", {
+                    level: "error",
+                    title: "La fecha est\u00E1 vac\u00EDa",
+                    autoClose: false
+                });
             }else{
                 if(valor4<today){
                     $('.newdate').css('border-color', 'red');
