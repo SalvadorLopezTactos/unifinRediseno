@@ -160,7 +160,7 @@ class ResumenClienteAPI extends SugarApi
         ############################
         if($beanPersona){
             //General
-            $arr_principal['general_cliente']['tipo'] = $beanPersona->tipo_general_c;
+            $arr_principal['general_cliente']['tipo'] = $beanPersona->tct_tipo_subtipo_txf_c;  // tipo_general_c
             $arr_principal['general_cliente']['segmento'] = $beanPersona->segmento_c;
             $arr_principal['general_cliente']['cobranza'] = $beanPersona->cobranza_c;
             $arr_principal['general_cliente']['sector_economico'] = $app_list_strings['sectoreconomico_list'][$beanPersona->sectoreconomico_c];
