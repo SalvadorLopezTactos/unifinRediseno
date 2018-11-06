@@ -419,10 +419,13 @@
 	},
 
     Relacionaccionista: function (fields, errors, callback) {
+    	if (this.model.get('relaciones_activas').includes('Accionista')) 
+    	{
             if (this.model.get('porcentaje_participacion_c')=="" || this.model.get('porcentaje_participacion_c')==null || this.model.get('porcentaje_participacion_c')== "0.00") {
                 errors['porcentaje_participacion_c'] = errors['porcentaje_participacion_c'] || {};
                 errors['porcentaje_participacion_c'].required = true;
             }
+        }
 
         callback(null, fields, errors);
     },
