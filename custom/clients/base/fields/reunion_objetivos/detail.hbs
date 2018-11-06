@@ -5,10 +5,15 @@
  */
 -->
 <!-- Campo para desplegar Objetivos en minuta: Detalle -->
-<div>
+<div style="border: 2px solid #58749a;border-radius: 12px;padding:10px;">
   <!-- Table list-->
   <div class="list-view">
-    <table id="tableResult" class="table">
+    <table id="tableResult" class="table table-striped">
+        <thead>
+            <tr bgcolor="#001441" style="color:#fff">
+                <th width="100%">Objetivo</th>
+            </tr>
+        </thead>
         <tbody>
           {{#each myobject.records}}
             <tr>
