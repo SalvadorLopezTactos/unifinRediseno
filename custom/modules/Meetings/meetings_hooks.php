@@ -453,10 +453,12 @@ SQL;
                     $GLOBALS['log']->fatal('Actualiza Objetivos');
                     $GLOBALS['log']->fatal($objetivo['name']);
                     $beanObjetivo = BeanFactory::retrieveBean('minut_Objetivos', $objetivo['id']);
-                    $beanObjetivo->name = $objetivo['name'];
-                    $beanObjetivo->description = $objetivo['description'];
-                    $beanObjetivo->deleted = $objetivo['deleted'];
-                    $beanObjetivo->save();
+                    if($beanObjetivo!=null){
+                        $beanObjetivo->name = $objetivo['name'];
+                        $beanObjetivo->description = $objetivo['description'];
+                        $beanObjetivo->deleted = $objetivo['deleted'];
+                        $beanObjetivo->save();
+                    }
                 }else{
                     //Crea
                     $GLOBALS['log']->fatal('Inserta Objetivos');
