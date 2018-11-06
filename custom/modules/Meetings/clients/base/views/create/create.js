@@ -7,6 +7,7 @@
         this._super("initialize", [options]);
         this.on('render', this.disableparentsfields, this);
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial, this));
+        this.model.addValidationTask('ValidaObjetivos',_.bind(this.ValidaObjetivos,this));
         this.on('render', this.disablestatus, this);
     },
 
@@ -27,7 +28,20 @@
         $('div[data-name=assigned_user_name]').css("pointer-events", "none");
     },
 
-
+    /*Valida que por lo menos exita un objetivo específico*/
+    ValidaObjetivos:function(fields, errors, callback){
+        if ($('.objetivoSelect').length<=0){
+            errors[$(".objetivoSelect")] = errors['objetivos_especificos'] || {};
+            errors[$("objetivos_especificos")].required = true;
+            $('.newCampo1').css('border-color', 'red');
+            app.alert.show("Objetivo vacio",{
+                    level: "error",
+                    title: "Es necesario tener por lo menos un objetivo espec\u00EDfico",
+                    autoClose: false
+                });
+        }
+        callback(null, fields, errors);
+    },
 
     /* @F. Javier G. Solar
      * Valida que la Fecha Inicial no sea menor que la actual

@@ -58,10 +58,10 @@ SQL;
       		}
       		$acompanianteMeet1->parent_meeting_c = $bean->id;
 			$acompanianteMeet1->created_by = $bean->created_by;
-			$acompanianteMeet1->modified_user_id = $bean->modified_user_id; 
+			$acompanianteMeet1->modified_user_id = $bean->modified_user_id;
       		$acompanianteMeet1->assigned_user_id = $args['related_id'];
       		$acompanianteMeet1->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
-      		$acompanianteMeet1->save(); 
+      		$acompanianteMeet1->save();
 /*      		//Agregar relaciones de invitados
       		$queryrel = <<<SQL
 				SELECT id, user_id
@@ -93,7 +93,7 @@ SQL;
 SQL;
 		$levadmin1 = $db->query($levadmin);
 	}
-	
+
     //Eliminar Invitados
     function RelationDel($bean = null, $event = null, $args = null)
     {
@@ -104,7 +104,7 @@ SQL;
 			$elimina = <<<SQL
 						SELECT id, meeting_id, user_id
 						FROM meetings_users
-						WHERE meeting_id IN (SELECT a.id FROM meetings a, meetings_cstm b 
+						WHERE meeting_id IN (SELECT a.id FROM meetings a, meetings_cstm b
 							  WHERE a.id = b.id_c AND a.deleted = 0 AND b.parent_meeting_c = '{$bean->id}')
 						AND user_id = '{$relid}'
 						AND deleted = 0
@@ -156,7 +156,7 @@ SQL;
             foreach($queryResult->fetchAll() as $row)
 		    {
       			if($row['user_id'] != $bean->assigned_user_id)
-			      {	
+			      {
       				$exclude = array
       				(
       					'id',
@@ -453,9 +453,12 @@ SQL;
                     $GLOBALS['log']->fatal('Actualiza Objetivos');
                     $GLOBALS['log']->fatal($objetivo['name']);
                     $beanObjetivo = BeanFactory::retrieveBean('minut_Objetivos', $objetivo['id']);
-                    $beanObjetivo->name = $objetivo['name'];
-                    $beanObjetivo->description = $objetivo['description'];
-                    $beanObjetivo->save();
+                    if($beanObjetivo!=null){
+                        $beanObjetivo->name = $objetivo['name'];
+                        $beanObjetivo->description = $objetivo['description'];
+                        $beanObjetivo->deleted = $objetivo['deleted'];
+                        $beanObjetivo->save();
+                    }
                 }else{
                     //Crea
                     $GLOBALS['log']->fatal('Inserta Objetivos');
