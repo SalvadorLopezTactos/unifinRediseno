@@ -31,7 +31,7 @@
        var selfvalue = this;
 
         if (this.model.get("id") != "") {
-            app.api.call('GET', app.api.buildURL('Meetings/' + this.model.get("id") + '/link/meetings_minut_objetivos_1'), null, {
+            app.api.call('GET', app.api.buildURL('Meetings/' + this.model.get("id") + '/link/meetings_minut_objetivos_1?order_by=date_modified:desc'), null, {
                 success: function (data) {
                     selfvalue.myobject = data;
                     _.extend(this, selfvalue.myobject);
@@ -84,7 +84,7 @@
         var dirErrorCounter = 0;
         var dirError = false;
 
-        if($('.newCampo1').val() == '' || $('.newCampo1').val() == null){
+        if($('.newCampo1').val() == '' || $('.newCampo1').val() == null || $('.newCampo1').val().trim()==''){
             $('.newCampo1').css('border-color', 'red');
             errorMsg = 'Favor de agregar un objetivo.';
             dirError = true; dirErrorCounter++;
@@ -106,6 +106,7 @@
       };
 
       this.myobject.records.push(item);
+      //this.myobject.records.reverse();
       this.render();
         }
     },
