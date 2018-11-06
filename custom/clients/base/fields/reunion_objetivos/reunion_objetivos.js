@@ -31,7 +31,7 @@
        var selfvalue = this;
 
         if (this.model.get("id") != "") {
-            app.api.call('GET', app.api.buildURL('Meetings/' + this.model.get("id") + '/link/meetings_minut_objetivos_1?order_by=date_modified:desc'), null, {
+            app.api.call('GET', app.api.buildURL('Meetings/' + this.model.get("id") + '/link/meetings_minut_objetivos_1?order_by=date_entered:asc'), null, {
                 success: function (data) {
                     selfvalue.myobject = data;
                     _.extend(this, selfvalue.myobject);
@@ -106,7 +106,6 @@
       };
 
       this.myobject.records.push(item);
-      //this.myobject.records.reverse();
       this.render();
         }
     },
