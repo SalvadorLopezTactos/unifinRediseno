@@ -50,7 +50,7 @@
         else if(this.context.parent){
             var idReunion=this.context.parent.get('modelId');
 
-            app.api.call('GET', app.api.buildURL('Meetings/' + idReunion + '/link/meetings_minut_objetivos_1'), null, {
+            app.api.call('GET', app.api.buildURL('Meetings/' + idReunion + '/link/meetings_minut_objetivos_1?order_by=date_entered:asc'), null, {
                 success: function (data) {
                     selfvalue.myobjmin = data;
                     //Obteniendo el objetivo general de la Reunión (parent)
