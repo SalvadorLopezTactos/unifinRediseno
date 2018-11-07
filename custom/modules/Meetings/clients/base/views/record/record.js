@@ -464,6 +464,7 @@
                     if (self.myobject.records[i].id == undefined) {
 
                         self.myobject.records.splice(i, 1);
+                        //Cambia la longitud del ciclo al eliminar elemento del array
                         lengthArr=self.myobject.records.length;
                         i=i-1;
 
