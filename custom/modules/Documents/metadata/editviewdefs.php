@@ -29,7 +29,8 @@ array (
         ),
       ),
       'javascript' => '{sugar_getscript file="include/javascript/popup_parent_helper.js"}
-{sugar_getscript file="modules/Documents/documents.js"}',
+                       {sugar_getscript file="modules/Documents/documents.js"}
+                        <script type="text/javascript" src="custom/modules/Documents/include/Javascript/Validate_files.js"></script>',
       'useTabs' => false,
       'tabDefs' => 
       array (
