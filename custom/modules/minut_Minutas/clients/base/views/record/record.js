@@ -1,18 +1,13 @@
 ({
     extendsFrom: 'RecordView',
 
-    events: {
-        'click  .clearfix': 'hidedeletedocuments',
-        'click  .a11y-wrapper': 'hidedeletedocuments',
-    },
-
     initialize: function (options) {
         this._super("initialize", [options]);
         //Se añade evento para establecer registro como Solo Lectura
         this.model.on('sync', this.setNoEditAllFields, this);
 
-        this.events['click a[class=dropdown-toggle]'] = 'hidedeletedocuments';
-    },
+        this.model.on('data:sync:complete', this.hidedeletedocuments, this);
+   },
 
     render: function(){
 
@@ -26,8 +21,6 @@
         //Oculta panel con campos de checkin en minuta
         $('[data-panelname="LBL_RECORDVIEW_PANEL4"]').addClass('hide');
 
-
-        this.events['click a[class=dropdown-toggle]'] = 'hidedeletedocuments';
     },
 
     setNoEditAllFields: function () {
@@ -43,13 +36,10 @@
         //Se oculta botón de edición
         $('[name="edit_button"]').hide();
 
-        //Contrae panel de documentos
-        $('.subpanel.clearfix').addClass('closed');
-
     },
 
     hidedeletedocuments: function () {
-        console.log('Entro a hidedeletedocuments()');
+        //console.log('Entro a hidedeletedocuments()');
         $('div[data-subpanel-link="minut_minutas_documents_1"]').find('a[class="btn dropdown-toggle"]').hide()
         //$('div[data-subpanel-link="minut_minutas_documents_1"]').find('.flex-list-view.left-actions.right-actions.scroll-width').find('a[class="btn dropdown-toggle"]').hide();
     }
