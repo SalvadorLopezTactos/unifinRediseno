@@ -453,19 +453,25 @@
     cancelClicked: function () {
         this._super('cancelClicked');
 
-        var lengthArr=self.myobject.records.length;
+        if(!_.isEmpty(this.context.get('model').changed) && this.context.get('model').changed.reunion_objetivos != undefined) {
 
-        if(lengthArr>0){
+            var lengthArr = self.myobject.records.length;
 
-            for(var i=0;i<lengthArr;i++){
+            if (lengthArr > 0) {
 
-                if(self.myobject.records[i].id==undefined){
+                for (var i = 0; i < lengthArr; i++) {
 
-                    self.myobject.records.splice(i,1);
+                    if (self.myobject.records[i].id == undefined) {
 
+                        self.myobject.records.splice(i, 1);
+                        lengthArr=self.myobject.records.length;
+                        i=i-1;
+
+                    }
                 }
             }
         }
+
 
     },
 
