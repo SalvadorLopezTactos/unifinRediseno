@@ -21,7 +21,7 @@
         var filePath = fileInput.value;
         var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.docx|\.doc|\.xlsx|\.xls)$/i;
         if (!allowedExtensions.exec(filePath)) {
-            alert('El archivo que estas intentando guardar no cumple con los permitidos.');
+            alert('Archivo con extensi\u00F3n no permitida');
             fileInput.value = '';
             return false;
         }
