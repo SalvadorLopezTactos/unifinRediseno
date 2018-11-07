@@ -194,7 +194,7 @@
     },
 
     view_document: function(){
-		var pdf = window.location.origin+window.location.pathname+"/custom/pdf/Ladas.pdf";
+		var pdf = window.location.origin+window.location.pathname+"/custom/pdf/proceso_unifin.pdf";
 		window.open(pdf,'_blank');
 		self.model.set('tct_proceso_unifin_time_c',this.model.get('tct_today_c'));
 		navigator.geolocation.getCurrentPosition(function(position) {
