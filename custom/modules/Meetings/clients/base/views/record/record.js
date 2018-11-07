@@ -9,6 +9,7 @@
         self = this;
         this._super("initialize", [options]);
         this.events['click a[name=parent_name]'] = 'handleEdit';
+        this.events['click [name=cancel_button]'] = 'cancelClicked';
 
         this.on('render', this.disableparentsfields, this);
         this.on('render', this.noEditStatus,this);
@@ -92,21 +93,30 @@
 
     },
     CreaMinuta:function(){
-        var model=App.data.createBean('minut_Minutas');
-        model.set('account_id_c', this.model.get('parent_id'));
-        model.set('tct_relacionado_con_c', this.model.get('parent_name'));
-        model.set('objetivo_c', this.model.get('objetivo_c'));
-        model.set('minut_minutas_meetingsmeetings_idb',this.model.get('id'))
-        model.set('minut_minutas_meetings_name',this.model.get('name'))
-        app.drawer.open({
-            layout:'create',
-            context:{
-            create: true,
-            module:'minut_Minutas',
-            model:model
-       }
-    });
-  },
+        
+        if($('.objetivoSelect').length<=0){
+            app.alert.show("Objetivo vacio",{
+                    level: "error",
+                    title: "Es necesario tener por lo menos un objetivo espec\u00EDfico para generar la minuta",
+                    autoClose: false
+                });
+        }else{
+            var model=App.data.createBean('minut_Minutas');
+            model.set('account_id_c', this.model.get('parent_id'));
+            model.set('tct_relacionado_con_c', this.model.get('parent_name'));
+            model.set('objetivo_c', this.model.get('objetivo_c'));
+            model.set('minut_minutas_meetingsmeetings_idb',this.model.get('id'))
+            model.set('minut_minutas_meetings_name',this.model.get('name'))
+            app.drawer.open({
+                layout:'create',
+                context:{
+                create: true,
+                module:'minut_Minutas',
+                model:model
+                }
+            });
+        }
+    },
 
   _dispose: function() {
      this._super('_dispose');
@@ -348,10 +358,10 @@
     showError:function(error) {
         switch(error.code) {
             case error.PERMISSION_DENIED:
-                alert("Permiso de geolocalización no autorizado")
+                alert("Permiso de geolocalizaci\u00F3n no autorizado")
             break;
                 case error.POSITION_UNAVAILABLE:
-                alert("La información de la geolocalización no está disponible");
+                alert("La informaci\u00F3n de la geolocalizaci\u00F3n no está disponible");
                 break;
             case error.TIMEOUT:
                 alert("El tiempo de espera a terminado");
@@ -434,4 +444,36 @@
             });
         }
     },
+
+    /*
+    @Salvador Lopez
+    * Se agrega función para controlar registros NO guardados en el modelo que se enuentran en el campo de reunion_objetivos
+    * y eliminar del array a que se muestra en el hbs, los objetivos NO GUARDADOS
+    * */
+    cancelClicked: function () {
+        this._super('cancelClicked');
+
+        if(!_.isEmpty(this.context.get('model').changed) && this.context.get('model').changed.reunion_objetivos != undefined) {
+
+            var lengthArr = self.myobject.records.length;
+
+            if (lengthArr > 0) {
+
+                for (var i = 0; i < lengthArr; i++) {
+
+                    if (self.myobject.records[i].id == undefined) {
+
+                        self.myobject.records.splice(i, 1);
+                        //Cambia la longitud del ciclo al eliminar elemento del array
+                        lengthArr=self.myobject.records.length;
+                        i=i-1;
+
+                    }
+                }
+            }
+        }
+
+
+    },
+
 })

@@ -343,9 +343,6 @@ array (
                 'name' => 'referenciada_c',
                 'label' => 'LBL_REFERENCIADA_C',
               ),
-              13 => 
-              array (
-              ),
             ),
           ),
           2 => 
@@ -489,6 +486,14 @@ array (
               array (
                 'name' => 'check_out_time_c',
                 'label' => 'LBL_CHECK_OUT_TIME_C',
+              ),
+              8 => 
+              array (
+                'name' => 'parent_meeting_c',
+                'label' => 'LBL_PARENT_MEETING',
+              ),
+              9 => 
+              array (
               ),
             ),
           ),
