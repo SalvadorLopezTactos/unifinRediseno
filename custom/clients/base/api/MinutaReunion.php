@@ -45,7 +45,7 @@ class MinutaReunion extends SugarApi
     public function getParticipantesReunion($api, $args)
     {
         $idReunion = $args['id_Reunion'];
-        $beanReunion = BeanFactory::getBean("Meetings", $idReunion);
+        $beanReunion = BeanFactory::getBean("Meetings", $idReunion, array('disable_row_level_security' => true));
         $idCuenta = $beanReunion->parent_id; // id de la cuenta asociada
 
         // CREAMOS LA ESTRUCTURA DE LA RESPUESTA

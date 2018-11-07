@@ -9,6 +9,7 @@
         self = this;
         this._super("initialize", [options]);
         this.events['click a[name=parent_name]'] = 'handleEdit';
+        this.events['click [name=cancel_button]'] = 'cancelClicked';
 
         this.on('render', this.disableparentsfields, this);
         this.on('render', this.noEditStatus,this);
@@ -443,4 +444,29 @@
             });
         }
     },
+
+    /*
+    @Salvador Lopez
+    * Se agrega función para controlar registros NO guardados en el modelo que se enuentran en el campo de reunion_objetivos
+    * y eliminar del array a que se muestra en el hbs, los objetivos NO GUARDADOS
+    * */
+    cancelClicked: function () {
+        this._super('cancelClicked');
+
+        var lengthArr=self.myobject.records.length;
+
+        if(lengthArr>0){
+
+            for(var i=0;i<lengthArr;i++){
+
+                if(self.myobject.records[i].id==undefined){
+
+                    self.myobject.records.splice(i,1);
+
+                }
+            }
+        }
+
+    },
+
 })
