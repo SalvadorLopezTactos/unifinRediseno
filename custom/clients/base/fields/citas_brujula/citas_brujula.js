@@ -87,7 +87,7 @@
         });
         /*
             AF. - 2018-10-02
-            Ejecuta recuperación de citas 
+            Ejecuta recuperaciï¿½n de citas 
         */
         this.getCitas();
     },
@@ -391,11 +391,20 @@
     resultadosList: function(e){
 
         var rowId = $(e.target).closest("tr").attr("id");
+        var rowId_resultado="";
 
         $("#resultado" + rowId).empty();
         $("#resultado" + rowId).append(self.resultado);
-        
-        //Presentación, Expediente, Incremento o Renovación
+
+        for(var i=0;i<self.citas.length;i++){
+            if(self.citas[i].id==rowId){
+                rowId_resultado=self.citas[i].nuevo_resultado;
+            }
+        }
+
+        $("#resultado" + rowId+ " option[value="+rowId_resultado+"]").prop("selected", "selected");
+
+        //Presentaciï¿½n, Expediente, Incremento o Renovaciï¿½n
         if(parseInt($(e.target).val()) == 1 || parseInt($(e.target).val()) == 2 || parseInt($(e.target).val()) == 5 || parseInt($(e.target).val()) == 6 || parseInt($(e.target).val()) == 9){
             $("#resultado" + rowId + " option").each(function(){
                 if (parseInt($(this).val()) > 7 && !_.isEmpty($(this).val())) {
@@ -456,7 +465,7 @@
         $("#nuevo_resultado").empty();
         $("#nuevo_resultado").append(self.resultado);
 
-        //Presentación, Expediente, Incremento o Renovación
+        //Presentaciï¿½n, Expediente, Incremento o Renovaciï¿½n
         if($("#nuevo_objetivo").val()==1 || $("#nuevo_objetivo").val()==2 || $("#nuevo_objetivo").val()==5 || $("#nuevo_objetivo").val()==6 || $("#nuevo_objetivo").val()==9){
             $("#nuevo_resultado option").each(function(){
                 if (parseInt($(this).val()) > 7 && !_.isEmpty($(this).val())) {
