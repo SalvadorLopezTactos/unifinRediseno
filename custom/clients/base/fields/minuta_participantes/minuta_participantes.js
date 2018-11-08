@@ -226,37 +226,51 @@
         callback(null, fields, errors);
     },
 
-    keyDownNewPhone: function (evt) {
-        if (!evt) return;
-        if(!this.checkNumOnly(evt)){
-            return false;
-        }
+   keyDownNewPhone: function (evt) {
+       var charCode = (evt.which) ? evt.which : event.keyCode
+       if (charCode > 31 && (charCode < 48 || charCode > 57))
+           return false;
+
+       return true;
+
+   /*     if (!evt) return;
+
+       var expreg = /^[0-9]$/;
+       banderaExpresion=false;
+
+           if (expreg.test(evt)) {
+               banderaExpresion = true;
+
+       }
+       else {
+           app.alert.show("N\u00FAmero incorrecto", {
+               level: "error",
+               title: "Formato invalido",
+               autoClose: true
+           });
+
+       }
+       return banderaExpresion;*/
 
     },
-    checkNumOnly:function(evt){
-        if($.inArray(evt.keyCode,[110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,16,49,50,51,52,53,54,55,56,57,48,96,97,98,99,100,101,102,103,104,105]) < 0) {
-            app.alert.show("Caracter Invalido", {
-                level: "error",
-                title: "Solo n\u00FAmeros son permitidos en este campo.",
-                autoClose: true
-            });
-            return false;
-        }else{
-            return true;
-        }
-    },
-    validaTamano: function() {
-        var telefonoTam=$('.newCampo5P').val().length;
-        var banderTelefono=false;
-        if(telefonoTam>=8 && telefonoTam<=10)
-        {
+
+
+    validaTamano: function () {
+        var telefonoTam = $('.newCampo5P').val().length;
+        var banderTelefono = false;
+        // var expreg = /^[0-9]*$/;
+
+        if (telefonoTam >= 8 && telefonoTam <= 10) {
             //$('.newCampo5P').css('border-color', '')
-            banderTelefono=true;
+         //   if (expreg.test(this.$('.newCampo5P').val())) {
+                banderTelefono = true;
+
+           // }
         }
         else {
-            /* app.alert.show("N\u00FAmero incorrecto", {
+          /*   app.alert.show("N\u00FAmero incorrecto", {
              level: "error",
-             title: "El n\u00FAmero es incorrecto",
+             title: "Formato invalido",
              autoClose: true
              });*/
 
