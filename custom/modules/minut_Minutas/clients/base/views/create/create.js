@@ -58,12 +58,14 @@
                     this.checkoutime=modelo.get('check_out_time_c');
                     this.checkoutlat=modelo.get('check_out_latitude_c');
                     this.checkoutlong=modelo.get('check_out_longitude_c');
+                    this.checkoutplat=modelo.get('check_out_platform_c');
                     this.resultado=modelo.get('resultado_c');
                     modelo.set('status', 'Held');
                     modelo.set('check_out_address_c');
                     modelo.set('check_out_time_c', today);
                     modelo.set('check_out_latitude_c',self.latitude);
                     modelo.set('check_out_longitude_c',self.longitude);
+                    modelo.set('check_out_platform_c', self.GetPlatform());
                     modelo.set('resultado_c', self.model.get('resultado_c'));
                     modelo.save([],{
                         dataType:"text",
@@ -82,6 +84,21 @@
           }
       }
       callback(null,fields,errors);
+    },
+
+    showPosition:function(position) {
+        self.longitude=position.coords.longitude;
+        self.latitude=position.coords.latitude;
+    },
+
+    //Obienete la plataforma del usuario en la cual haya hecho check-in
+    GetPlatform: function(){
+        var plataforma=navigator.platform;
+        if(plataforma!='iPad'){
+            return 'Pc';
+        }else{
+            return 'iPad';
+        }
     },
 
     checkcompromisos:function(fields, errors, callback){
@@ -153,11 +170,6 @@
         callback(null,fields,errors);
     },
 
-    showPosition:function(position) {
-        self.longitude=position.coords.longitude;
-        self.latitude=position.coords.latitude;
-    },
-
     validaFechaReunion: function(fields, errors, callback){
 
         //Validar fecha de reunión únicamente cuando el campo sea visible
@@ -197,7 +209,8 @@
 		var pdf = window.location.origin+window.location.pathname+"/custom/pdf/proceso_unifin.pdf";
 		window.open(pdf,'_blank');
 		self.model.set('tct_proceso_unifin_time_c',this.model.get('tct_today_c'));
-		navigator.geolocation.getCurrentPosition(function(position) {
+		self.model.set('tct_proceso_unifin_platfom_c', this.GetPlatform());
+        navigator.geolocation.getCurrentPosition(function(position) {
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
 		  var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=1234";
@@ -207,5 +220,7 @@
           });*/
 		  self.model.set('tct_proceso_unifin_address_c',lat+lng);
 		});
+        self.model.save();
+
     },
 })
