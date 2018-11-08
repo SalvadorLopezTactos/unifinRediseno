@@ -2416,13 +2416,13 @@
 
             }else{
                 //funcion
-                var cont=0;
+                var conta=0;
                 for (var i =0; i < $(this).val().length; i++) {
                     if($(this).val().charAt(0)==$(this).val().charAt(i)){
-                        cont++;
+                        conta++;
                     }
                 }
-                if(cont==$(this).val().length){
+                if(conta==$(this).val().length){
                         app.alert.show('numero_repetido1', {
                         level: 'error',
                         autoClose: true,
@@ -2466,7 +2466,7 @@
             app.alert.show('error_modultel', {
                 level: 'error',
                 autoClose: true,
-                messages: 'Favor de llenar los campos se\u00F1alados.'
+                messages: 'Favor de llenar o corregir los campos se\u00F1alados.'
             });
             errors['xd'] = errors['xd'] || {};
             errors['xd'].required = true;
