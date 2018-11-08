@@ -61,7 +61,7 @@ $dependencies['Meetings']['readOnly'] = array
             'params' => array
             (
                 'target' => 'repeat_type',
-                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"),)',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
             ),
         ),
         array
