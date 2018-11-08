@@ -34,7 +34,7 @@ $dependencies['Meetings']['readOnly'] = array
             'params' => array
             (
                 'target' => 'date_start',
-                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
             ),
         ),
         array
@@ -43,7 +43,16 @@ $dependencies['Meetings']['readOnly'] = array
             'params' => array
             (
                 'target' => 'date_end',
-                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
+            ),
+        ),
+        array
+        (
+            'name' => 'ReadOnly',
+            'params' => array
+            (
+                'target' => 'duration',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),not(equal($parent_meeting_c,"")))',
             ),
         ),
         array
@@ -52,7 +61,7 @@ $dependencies['Meetings']['readOnly'] = array
             'params' => array
             (
                 'target' => 'repeat_type',
-                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
+                'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"),)',
             ),
         ),
         array
