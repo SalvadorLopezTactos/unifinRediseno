@@ -9,7 +9,6 @@
         self = this;
         this._super("initialize", [options]);
         this.events['click a[name=parent_name]'] = 'handleEdit';
-        this.events['click [name=cancel_button]'] = 'cancelClicked';
 
 
         this.on('render', this.disableparentsfields, this);
@@ -157,6 +156,9 @@
         this.clearValidationErrors(this.editableFields);
         this.setRoute();
         this.unsetContextAction();
+
+        //LLamando función para limpiar los objetivos específicos que no hayan sido guardados
+        this.clearUnsavedObjectives();
     },
 
     cambioFecha: function () {
@@ -473,10 +475,9 @@
     * Se agrega función para controlar registros NO guardados en el modelo que se enuentran en el campo de reunion_objetivos
     * y eliminar del array a que se muestra en el hbs, los objetivos NO GUARDADOS
     * */
-    cancelClicked: function () {
-        this._super('cancelClicked');
+    clearUnsavedObjectives: function () {
 
-        if(!_.isEmpty(this.context.get('model').changed) && this.context.get('model').changed.reunion_objetivos != undefined) {
+        //if(!_.isEmpty(this.context.get('model').changed) && this.context.get('model').changed.reunion_objetivos != undefined) {
 
             var lengthArr = self.myobject.records.length;
 
@@ -494,6 +495,26 @@
                     }
                 }
             }
+        //}
+
+
+        var lengthDelete= self.myDeletedObj.records.length;
+
+        if(lengthDelete>0){
+
+            for(var i=0;i<self.myIndexDeleted.length;i++){
+                //Establecer deleted como 0, ya que myDeletedObj.records[i] trae 1
+                self.myDeletedObj.records[i].deleted=0;
+                self.myobject.records.splice(self.myIndexDeleted[i],0,self.myDeletedObj.records[i]);
+
+            }
+
+            self.render();
         }
+
+        //Reiniciar arreglos
+        self.myDeletedObj.records=[];
+        self.myIndexDeleted=[];
+
     },
 })

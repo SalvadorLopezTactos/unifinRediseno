@@ -30,6 +30,9 @@
         //Data original
         this.myOriginal={};
         this.myOriginal.records=[];
+
+        //Array para mantener indices eliminados
+        this.myIndexDeleted=[];
     },
 
 
@@ -40,6 +43,11 @@
         if (this.model.get("id") != "") {
             app.api.call('GET', app.api.buildURL('Meetings/' + this.model.get("id") + '/link/meetings_minut_objetivos_1?order_by=date_entered:asc'), null, {
                 success: function (data) {
+                    //Reiniciando arreglos de registros eliminados
+                    selfvalue.myDeletedObj={};
+                    selfvalue.myDeletedObj.records=[];
+                    selfvalue.myIndexDeleted=[];
+
                     selfvalue.myobject = data;
                     selfvalue.myOriginal = data;
                     _.extend(this, selfvalue.myobject);
@@ -76,6 +84,7 @@
              self.myDeletedObj.records.push(self.myobject.records[row.index()]);
            }
 
+           self.myIndexDeleted.push(row.index());
            self.myobject.records.splice(row.index(),1);
            self.render();
        });
@@ -86,6 +95,7 @@
           self.myobject.records[row.index()].name = text;
           self.render();
       });
+
 
     },
 
