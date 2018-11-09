@@ -232,16 +232,6 @@ array (
                 'name' => 'resultado_c',
                 'label' => 'LBL_RESULTADO_C',
               ),
-              8 => 
-              array (
-                'name' => 'tct_proceso_unifin_platfom_c',
-                'label' => 'LBL_TCT_PROCESO_UNIFIN_PLATFOM_C',
-              ),
-              9 => 
-              array (
-                'name' => 'tct_proceso_unifin_time_c',
-                'label' => 'LBL_TCT_PROCESO_UNIFIN_TIME',
-              ),
             ),
           ),
           6 => 
@@ -257,9 +247,21 @@ array (
             array (
               0 => 
               array (
+                'name' => 'tct_proceso_unifin_platfom_c',
+                'label' => 'LBL_TCT_PROCESO_UNIFIN_PLATFOM_C',
+              ),
+              1 => 
+              array (
+                'name' => 'tct_proceso_unifin_time_c',
+                'label' => 'LBL_TCT_PROCESO_UNIFIN_TIME',
+              ),
+              2 => 
+              array (
                 'name' => 'tct_proceso_unifin_address_c',
                 'label' => 'LBL_TCT_PROCESO_UNIFIN_ADDRESS',
-                'span' => 12,
+              ),
+              3 => 
+              array (
               ),
             ),
           ),

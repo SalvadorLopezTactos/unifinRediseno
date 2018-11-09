@@ -437,52 +437,6 @@ array (
                   ),
                 ),
               ),
-              4 => 
-              array (
-                'name' => 'check_in_platform_c',
-                'label' => 'LBL_CHECK_IN_PLATFORM_C',
-              ),
-              5 => 
-              array (
-                'name' => 'check_out_platform_c',
-                'label' => 'LBL_CHECK_OUT_PLATFORM_C',
-              ),
-              6 => 
-              array (
-                'name' => 'check_in_longitude_c',
-                'label' => 'LBL_CHECK_IN_LONGITUDE',
-              ),
-              7 => 
-              array (
-                'name' => 'check_in_time_c',
-                'label' => 'LBL_CHECK_IN_TIME_C',
-              ),
-              8 => 
-              array (
-                'name' => 'check_in_address_c',
-                'label' => 'LBL_CHECK_IN_ADDRESS',
-              ),
-              9 => 
-              array (
-                'name' => 'check_in_latitude_c',
-                'label' => 'LBL_CHECK_IN_LATITUDE',
-              ),
-              10 => 
-              array (
-                'name' => 'check_out_latitude_c',
-                'label' => 'LBL_CHECK_OUT_LATITUDE_C',
-              ),
-              11 => 
-              array (
-                'name' => 'check_out_time_c',
-                'label' => 'LBL_CHECK_OUT_TIME_C',
-              ),
-              12 => 
-              array (
-                'name' => 'check_out_longitude_c',
-                'label' => 'LBL_CHECK_OUT_LONGITUDE_C',
-                'span' => 12,
-              ),
             ),
           ),
           4 => 
@@ -498,21 +452,61 @@ array (
             array (
               0 => 
               array (
-                'name' => 'check_out_address_c',
-                'label' => 'LBL_CHECK_OUT_ADDRESS_C',
-                'span' => 12,
+                'name' => 'parent_meeting_c',
+                'label' => 'LBL_PARENT_MEETING',
               ),
               1 => 
               array (
-                'name' => 'parent_meeting_c',
-                'label' => 'LBL_PARENT_MEETING',
-                'span' => 12,
               ),
               2 => 
               array (
+                'name' => 'check_in_longitude_c',
+                'label' => 'LBL_CHECK_IN_LONGITUDE',
               ),
               3 => 
               array (
+                'name' => 'check_in_latitude_c',
+                'label' => 'LBL_CHECK_IN_LATITUDE',
+              ),
+              4 => 
+              array (
+                'name' => 'check_in_address_c',
+                'label' => 'LBL_CHECK_IN_ADDRESS',
+              ),
+              5 => 
+              array (
+                'name' => 'check_in_time_c',
+                'label' => 'LBL_CHECK_IN_TIME_C',
+              ),
+              6 => 
+              array (
+                'name' => 'check_out_latitude_c',
+                'label' => 'LBL_CHECK_OUT_LATITUDE_C',
+              ),
+              7 => 
+              array (
+                'name' => 'check_out_longitude_c',
+                'label' => 'LBL_CHECK_OUT_LONGITUDE_C',
+              ),
+              8 => 
+              array (
+                'name' => 'check_out_address_c',
+                'label' => 'LBL_CHECK_OUT_ADDRESS_C',
+              ),
+              9 => 
+              array (
+                'name' => 'check_out_time_c',
+                'label' => 'LBL_CHECK_OUT_TIME_C',
+              ),
+              10 => 
+              array (
+                'name' => 'check_in_platform_c',
+                'label' => 'LBL_CHECK_IN_PLATFORM_C',
+              ),
+              11 => 
+              array (
+                'name' => 'check_out_platform_c',
+                'label' => 'LBL_CHECK_OUT_PLATFORM_C',
               ),
             ),
           ),

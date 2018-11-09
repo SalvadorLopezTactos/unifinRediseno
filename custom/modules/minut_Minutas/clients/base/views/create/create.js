@@ -220,7 +220,5 @@
           });*/
 		  self.model.set('tct_proceso_unifin_address_c',lat+lng);
 		});
-        self.model.save();
-
     },
 })
