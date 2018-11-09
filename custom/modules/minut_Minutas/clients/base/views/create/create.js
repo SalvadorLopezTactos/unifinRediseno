@@ -10,6 +10,7 @@
         this._super("initialize", [options]);
         this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
         this.model.addValidationTask('validaFecha', _.bind(this.validaFechaReunion, this));
+        this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.context.on('button:view_document:click', this.view_document, this);
 
@@ -34,6 +35,24 @@
         }
     },
 
+    validaObjetivosmarcados:function(fields,errors,callback){
+        var objetivoesp=self.myobjmin;
+        var check=false;
+        for( i=0 ; i<objetivoesp.records.length; i++){
+            if(objetivoesp.records[i].cumplimiento==1 && objetivoesp.records[i].description=="1"){
+                check=true;
+            }
+        }
+        if(check==false){
+            app.alert.show("Objetivo especifico requerido", {
+                level: "error",
+                title: "Al menos un un objetivo espec\u00EDfico debe estar marcado",
+                autoClose: false
+            });
+            errors['objetivoespecificos'] = "Al menos un un objetivo espec\u00EDfico debe estar marcado";
+        }
+        callback(null, fields, errors);
+    },
     /*Actualiza el estado de la reunion además de guardar fecha y lugar de Check-Out
     *Victor Martínez 23-10-2018
     */
@@ -58,12 +77,14 @@
                     this.checkoutime=modelo.get('check_out_time_c');
                     this.checkoutlat=modelo.get('check_out_latitude_c');
                     this.checkoutlong=modelo.get('check_out_longitude_c');
+                    this.checkoutplat=modelo.get('check_out_platform_c');
                     this.resultado=modelo.get('resultado_c');
                     modelo.set('status', 'Held');
                     modelo.set('check_out_address_c');
                     modelo.set('check_out_time_c', today);
                     modelo.set('check_out_latitude_c',self.latitude);
                     modelo.set('check_out_longitude_c',self.longitude);
+                    modelo.set('check_out_platform_c', self.GetPlatform());
                     modelo.set('resultado_c', self.model.get('resultado_c'));
                     modelo.save([],{
                         dataType:"text",
@@ -82,6 +103,21 @@
           }
       }
       callback(null,fields,errors);
+    },
+
+    showPosition:function(position) {
+        self.longitude=position.coords.longitude;
+        self.latitude=position.coords.latitude;
+    },
+
+    //Obienete la plataforma del usuario en la cual haya hecho check-in
+    GetPlatform: function(){
+        var plataforma=navigator.platform;
+        if(plataforma!='iPad'){
+            return 'Pc';
+        }else{
+            return 'iPad';
+        }
     },
 
     checkcompromisos:function(fields, errors, callback){
@@ -153,11 +189,6 @@
         callback(null,fields,errors);
     },
 
-    showPosition:function(position) {
-        self.longitude=position.coords.longitude;
-        self.latitude=position.coords.latitude;
-    },
-
     validaFechaReunion: function(fields, errors, callback){
 
         //Validar fecha de reunión únicamente cuando el campo sea visible
@@ -197,7 +228,8 @@
 		var pdf = window.location.origin+window.location.pathname+"/custom/pdf/proceso_unifin.pdf";
 		window.open(pdf,'_blank');
 		self.model.set('tct_proceso_unifin_time_c',this.model.get('tct_today_c'));
-		navigator.geolocation.getCurrentPosition(function(position) {
+		self.model.set('tct_proceso_unifin_platfom_c', this.GetPlatform());
+        navigator.geolocation.getCurrentPosition(function(position) {
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
 		  var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+lat+","+lng+"&key=1234";

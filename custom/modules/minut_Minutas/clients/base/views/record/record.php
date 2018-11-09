@@ -247,13 +247,21 @@ array (
             array (
               0 => 
               array (
-                'name' => 'tct_proceso_unifin_time_c',
-                'label' => 'LBL_TCT_PROCESO_UNIFIN_TIME',
+                'name' => 'tct_proceso_unifin_platfom_c',
+                'label' => 'LBL_TCT_PROCESO_UNIFIN_PLATFOM_C',
               ),
               1 => 
               array (
+                'name' => 'tct_proceso_unifin_time_c',
+                'label' => 'LBL_TCT_PROCESO_UNIFIN_TIME',
+              ),
+              2 => 
+              array (
                 'name' => 'tct_proceso_unifin_address_c',
                 'label' => 'LBL_TCT_PROCESO_UNIFIN_ADDRESS',
+              ),
+              3 => 
+              array (
               ),
             ),
           ),
