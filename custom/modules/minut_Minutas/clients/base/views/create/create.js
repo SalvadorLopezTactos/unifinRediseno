@@ -10,6 +10,7 @@
         this._super("initialize", [options]);
         this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
         this.model.addValidationTask('validaFecha', _.bind(this.validaFechaReunion, this));
+        this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.context.on('button:view_document:click', this.view_document, this);
 
@@ -34,6 +35,24 @@
         }
     },
 
+    validaObjetivosmarcados:function(fields,errors,callback){
+        var objetivoesp=self.myobjmin;
+        var check=false;
+        for( i=0 ; i<objetivoesp.records.length; i++){
+            if(objetivoesp.records[i].cumplimiento==1 && objetivoesp.records[i].description=="1"){
+                check=true;
+            }
+        }
+        if(check==false){
+            app.alert.show("Objetivo especifico requerido", {
+                level: "error",
+                title: "Al menos un un objetivo espec\u00EDfico debe estar marcado",
+                autoClose: false
+            });
+            errors['objetivoespecificos'] = "Al menos un un objetivo espec\u00EDfico debe estar marcado";
+        }
+        callback(null, fields, errors);
+    },
     /*Actualiza el estado de la reunion además de guardar fecha y lugar de Check-Out
     *Victor Martínez 23-10-2018
     */
