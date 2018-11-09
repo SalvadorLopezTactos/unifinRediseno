@@ -11,3 +11,4 @@ $mod_strings['LBL_MINUT_MINUTAS_DOCUMENTS_1_FROM_MINUT_MINUTAS_TITLE'] = 'Docume
 $mod_strings['LBL_RECORDVIEW_PANEL3'] = 'Minuta';
 $mod_strings['LBL_TCT_TODAY'] = 'Hoy';
 $mod_strings['LBL_RECORDVIEW_PANEL4'] = 'Check in';
+$mod_strings['LBL_TCT_PROCESO_UNIFIN_PLATFOM_C'] = 'Plataforma proceso UNIFIN';

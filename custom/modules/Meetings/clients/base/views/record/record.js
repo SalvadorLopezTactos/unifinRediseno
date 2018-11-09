@@ -11,6 +11,7 @@
         this.events['click a[name=parent_name]'] = 'handleEdit';
         this.events['click [name=cancel_button]'] = 'cancelClicked';
 
+
         this.on('render', this.disableparentsfields, this);
         this.on('render', this.noEditStatus,this);
         this.model.on('sync', this.cambioFecha, this);
@@ -91,6 +92,17 @@
         }
 
 
+    },
+
+    hasUnsavedChanges: function(){
+        this._super('hasUnsavedChanges');
+
+        if (this.action==='detail'){
+            return false;
+        }
+        else{
+            return true;
+            }
     },
     CreaMinuta:function(){
         
@@ -336,12 +348,23 @@
         self=this;
         var today= new Date();
         self.model.set('check_in_time_c', today);
+        self.model.set('check_in_platform_c', self.GetPlatform());
         if(navigator.geolocation){
             navigator.geolocation.getCurrentPosition(this.showPosition,this.showError);
         }else {
             alert("No se pudo encontrar tu ubicacion");
         }
         //self.model.save();
+    },
+    
+    //Obienete la plataforma del usuario en la cual haya hecho check-in
+    GetPlatform: function(){
+        var plataforma=navigator.platform;
+        if(plataforma!='iPad'){
+            return 'Pc';
+        }else{
+            return 'iPad';
+        }
     },
     
     showPosition:function(position) {
@@ -472,8 +495,5 @@
                 }
             }
         }
-
-
     },
-
 })
