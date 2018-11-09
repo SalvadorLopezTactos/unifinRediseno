@@ -1752,16 +1752,16 @@
                         this.model.set('promotorcredit_c', modelo.get('name'));
                         this.model.set('user_id2_c', modelo.get('id'));
                     } else {
-                        this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
-                        this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
+                        this.model.set('promotorcredit_c', '9 - Sin Gestor');
+                        this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
                     if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false) {
                         this.model.set('promotorleasing_c', '9 - Sin Gestor');
                         this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
                         this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
                         this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
-                        this.model.set('promotorcredit_c', 'Adriana Gayosso Cruz');
-                        this.model.set('user_id2_c', '7a83c151-6fc3-dc2b-b3a0-562a60aa3b74');
+                        this.model.set('promotorcredit_c', '9 - Sin Gestor');
+                        this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     }
 
                     this.model.set("tipo_registro_c", "Lead");
@@ -2416,13 +2416,13 @@
 
             }else{
                 //funcion
-                var cont=0;
+                var conta=0;
                 for (var i =0; i < $(this).val().length; i++) {
                     if($(this).val().charAt(0)==$(this).val().charAt(i)){
-                        cont++;
+                        conta++;
                     }
                 }
-                if(cont==$(this).val().length){
+                if(conta==$(this).val().length){
                         app.alert.show('numero_repetido1', {
                         level: 'error',
                         autoClose: true,
@@ -2466,7 +2466,7 @@
             app.alert.show('error_modultel', {
                 level: 'error',
                 autoClose: true,
-                messages: 'Favor de llenar los campos se\u00F1alados.'
+                messages: 'Favor de llenar o corregir los campos se\u00F1alados.'
             });
             errors['xd'] = errors['xd'] || {};
             errors['xd'].required = true;

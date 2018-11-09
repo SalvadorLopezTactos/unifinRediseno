@@ -11,6 +11,7 @@
         this.events['click a[name=parent_name]'] = 'handleEdit';
         this.events['click [name=cancel_button]'] = 'cancelClicked';
 
+
         this.on('render', this.disableparentsfields, this);
         this.on('render', this.noEditStatus,this);
         this.model.on('sync', this.cambioFecha, this);
@@ -91,6 +92,17 @@
         }
 
 
+    },
+
+    hasUnsavedChanges: function(){
+        this._super('hasUnsavedChanges');
+
+        if (this.action==='detail'){
+            return false;
+        }
+        else{
+            return true;
+            }
     },
     CreaMinuta:function(){
         
@@ -483,8 +495,5 @@
                 }
             }
         }
-
-
     },
-
 })

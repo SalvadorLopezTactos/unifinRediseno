@@ -358,7 +358,7 @@
             app.alert.show('error_modultel', {
                 level: 'error',
                 autoClose: true,
-                messages: 'Favor de llenar los campos se\u00F1alados.'
+                messages: 'Favor de llenar o corregir los campos se\u00F1alados.'
             });
             
 
