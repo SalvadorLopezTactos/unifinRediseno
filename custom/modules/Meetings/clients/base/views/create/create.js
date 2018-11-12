@@ -28,17 +28,22 @@
         $('div[data-name=assigned_user_name]').css("pointer-events", "none");
     },
 
-    /*Valida que por lo menos exita un objetivo específico*/
+    /*Valida que por lo menos exita un objetivo específico a su vez expande el panel*/
     ValidaObjetivos:function(fields, errors, callback){
-        if ($('.objetivoSelect').length<=0){
+        if (this.$('.objetivoSelect').length<=0){
             errors[$(".objetivoSelect")] = errors['objetivos_especificos'] || {};
             errors[$("objetivos_especificos")].required = true;
-            $('.newCampo1').css('border-color', 'red');
+            //Agrega borde
+            this.$('.newCampo1').css('border-color', 'red');
+            //Expande panel
+            this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(0).removeClass('panel-inactive');
+            this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(0).addClass('panel-active');
+            this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(1).attr("style","display:block");
             app.alert.show("Objetivo vacio",{
-                    level: "error",
-                    title: "Es necesario tener por lo menos un objetivo espec\u00EDfico",
-                    autoClose: false
-                });
+                level: "error",
+                title: "Es necesario tener por lo menos un objetivo espec\u00EDfico",
+                autoClose: false
+            });
         }
         callback(null, fields, errors);
     },
