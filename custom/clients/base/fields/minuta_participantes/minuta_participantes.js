@@ -127,7 +127,8 @@
             "origen": "N",
             "unifin": 0,
             "tipo_contacto": valor6,
-            "asistencia": 1
+            "asistencia": 1,
+            "activo" : "1"
         };
 
         //Valida campos requeridos
@@ -226,7 +227,7 @@
         callback(null, fields, errors);
     },
 
-   keyDownNewPhone: function (evt) {
+    keyDownNewPhone: function (evt) {
        var charCode = (evt.which) ? evt.which : event.keyCode
        if (charCode > 31 && (charCode < 48 || charCode > 57))
            return false;
@@ -253,7 +254,6 @@
        return banderaExpresion;*/
 
     },
-
 
     validaTamano: function () {
         var telefonoTam = $('.newCampo5P').val().length;
