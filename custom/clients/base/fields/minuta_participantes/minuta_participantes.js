@@ -6,6 +6,9 @@
     events: {
         'click  .addParticipante': 'addParticipanteFunction',
         'keydown .newCampo5P': 'keyDownNewPhone',
+        'keydown .newCampo1P': 'checkText',
+        'keydown .newCampo2P': 'checkText',
+        'keydown .newCampo3P': 'checkText',
         'change .newCampo5P': 'validaTamano'
     },
 
@@ -98,6 +101,21 @@
         });
     },
 
+    //No aceptar numeros, solo letras (a-z), puntos(.) y comas(,)
+    checkText: function (evt) {
+        //console.log(evt.keyCode);
+        if ($.inArray(evt.keyCode, [9, 16, 17, 110, 188, 190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192]) < 0) {
+            if (evt.keyCode != 186) {
+                app.alert.show("Caracter Invalido", {
+                    level: "error",
+                    title: "Solo texto es permitido en este campo.",
+                    autoClose: true
+                });
+                return false;
+            }
+        }
+    },
+
     /*
         Función para agregar nuevos elementos al objeto
     */
@@ -134,12 +152,12 @@
         //Valida campos requeridos
         var faltantes = 0;
         //Nombres
-        if (valor1 == '') {
+        if (valor1 == '' || valor1.trim()=='') {
             $('.newCampo1P').css('border-color', 'red');
             faltantes++;
         }
         //Apellido Paterno
-        if (valor2 == '') {
+        if (valor2 == '' || valor2.trim()=='') {
             $('.newCampo2P').css('border-color', 'red');
             faltantes++
         }
@@ -209,6 +227,9 @@
     //         this._super("bindDomChange");
     //     }
     // },
+
+
+
 
     /**
      * When data changes, re-render the field only if it is not on edit (see MAR-1617).
