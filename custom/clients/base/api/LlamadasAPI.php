@@ -37,8 +37,8 @@ class LlamadasAPI extends SugarApi
     {
         $GLOBALS['log']->fatal('>>>>>>>Entro llamadasAPI');//------------------------------------
 
-        $id_cliente=$args[data][0];
-        $nombre_cliente=$args[data][1];
+        $id_cliente=$args['data'][0];
+        $nombre_cliente=$args['data'][1];
 
         $GLOBALS['log']->fatal('id cliente: '.$id_cliente);//------------------------------------
         $GLOBALS['log']->fatal('nombre del cliente: '.$nombre_cliente);//------------------------------------
@@ -53,11 +53,13 @@ class LlamadasAPI extends SugarApi
         $bean_call->parent_type = 'Accounts';
         $GLOBALS['log']->fatal('Id de cliente asignado');//----------------------
 
+        $bean_call->tct_call_issabel_c=1;
+
         $bean_call->save();
 
         $GLOBALS['log']->fatal('Bean de llamadas guardado');//----------------------
 
-        return true;
+        return $bean_call->id;
 
     }
 

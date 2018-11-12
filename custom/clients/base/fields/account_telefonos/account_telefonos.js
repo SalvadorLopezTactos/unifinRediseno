@@ -904,49 +904,25 @@
 
         var tel_client=$input.closest("tr").find("td").eq(1).html();
         var tel_usr=app.user.attributes.ext_c;
-        var name_client=this.model.get('name');
-        var id_client=this.model.get('id');
-        var Params=[id_client,name_client];
         //var urlSugar="http://{$_SERVER['SERVER_NAME']}/unifin"; //////Activar esta variable
 
 
         if(this.multiSearchOr($input.closest("tr").find("td").eq(0).html(),["CELULAR"])=='1'){
-            var issabel=App.config.issabel+'/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
+             issabel=App.config.issabel+'/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
         }else{
-            var issabel=App.config.issabel+'/call_unifin.php?numero='+tel_client+'&userexten='+tel_usr;
+             issabel=App.config.issabel+'/call_unifin.php?numero='+tel_client+'&userexten='+tel_usr;
         }
+        _.extend(this, issabel);
 
         if(tel_usr!='' || tel_usr!=null){
             if(tel_client!='' || tel_client!=null){
+                context=this;
                 app.alert.show('do-call', {
                     level: 'confirmation',
                     messages: '¿Realmente quieres realizar la llamada?',
                     autoClose: false,
                     onConfirm: function(){
-                        /*    $.ajax({
-                                cache:false,
-                                type: "get",
-                                url: issabel,
-                                beforeSend:function(){
-                                    app.alert.show('message-to', {
-                                        level: 'info',
-                                        messages: 'Usted esta llamando a '+name_client,
-                                        autoClose: true
-                                    });
-                                },
-                                complete:function(data) {
-                                    app.alert.show('message-call-start', {
-                                        level: 'info',
-                                        messages: 'Llamada en curso.....',
-                                        autoClose: true
-                                    });
-                                    app.api.call('create', app.api.buildURL('createcall/'),{data: Params}, {
-                                        success: _.bind(function (data) {
-                                            console.log('Llamada creada');
-                                        }, self),
-                                    });
-                                },
-                            }); */
+                        context.createcall(context.resultCallback);
                     },
                 });
             }else{
@@ -964,6 +940,47 @@
             });
         }
     },
+
+    createcall: function (callback) {
+        self=this;
+        var id_call='';
+        var name_client=this.model.get('name');
+        var id_client=this.model.get('id');
+        var Params=[id_client,name_client];
+        app.api.call('create', app.api.buildURL('createcall'),{data: Params}, {
+            success: _.bind(function (data) {
+                console.log('Llamada creada');
+                id_call=data;
+                callback(id_call,name_client,self);
+            }, this),
+        });
+    },
+
+    resultCallback:function(id_call,name_client,context) {
+        self=context;
+        issabel+='&id_call='+id_call;
+        console.log('Issabel_link:'+issabel);
+        $.ajax({
+            cache:false,
+            type: "get",
+            url: issabel,
+            beforeSend:function(){
+              app.alert.show('message-to', {
+                  level: 'info',
+                  messages: 'Usted esta llamando a '+name_client,
+                  autoClose: true
+              });
+            },
+            complete:function() {
+              app.alert.show('message-call-start', {
+                  level: 'info',
+                  messages: 'Llamada en curso.....',
+                  autoClose: true
+              });
+            },
+        });
+
+},
 
 
 })

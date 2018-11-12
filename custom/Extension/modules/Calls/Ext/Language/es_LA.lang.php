@@ -14,3 +14,4 @@ $mod_strings['LBL_TCT_CONFERENCIA_CHK'] = 'Conferencia';
 $mod_strings['LBL_TCT_CALIFICACION_CONFERENCIA'] = 'Calificación de Conferencia';
 $mod_strings['LBL_TCT_CONFERENCIA_FECHA_DAT'] = 'Fecha y Hora';
 $mod_strings['LBL_RECORD_SAVED_SUCCESS'] = 'Has agendado la {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{name}}</a> para {{formatDate date_start}}';
+$mod_strings['LBL_TCT_CALL_ISSABEL_C'] = 'Llamada desde Issabel';
