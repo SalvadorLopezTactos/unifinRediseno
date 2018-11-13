@@ -922,7 +922,7 @@
                     messages: '¿Realmente quieres realizar la llamada?',
                     autoClose: false,
                     onConfirm: function(){
-                        context.createcall(context.resultCallback);
+                        //context.createcall(context.resultCallback);
                     },
                 });
             }else{
