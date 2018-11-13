@@ -22,9 +22,7 @@
 			while($row=$statement->fetch(PDO::FETCH_ASSOC)){
 				$id = $row['id_call'];
             	$bean_call = BeanFactory::retrieveBean('Calls', $id);
-            	if($bean_call->tct_call_issabel_c==0){
-            		break;
-            	}else{
+            	if($bean_call->tct_call_issabel_c==1){
             		$bean_call->tct_call_issabel_c=0;
             		$bean_call->description='El resultado de la llamada fue: '.$row['disposition'];
             		$bean_call->date_start=row['calldate']; 
@@ -36,6 +34,8 @@
             		$bean_call->date_end=implode("T", $temp);
             		$bean_call->save();
             		$contador++;
+            	}else{
+            		continue;
             	}
 			}
 		}else{
