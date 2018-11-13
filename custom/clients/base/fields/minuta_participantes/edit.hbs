@@ -37,7 +37,7 @@
                   {{telefono}}
                 </td>
                 <td class="CheckActionP" style="text-align:center" >
-                  <button type="button" class="updateAsistencia" style="border-width:0;background-color: rgba(255,255,255,0.15);">
+                    <button type="button" {{#if activo}}class="updateAsistencia" {{/if}} style="border-width:0;background-color: rgba(255,255,255,0.15);">
                     {{#if asistencia}}
                       <i class="fa fa-check" style="color: #33800d; font-size:20px"></i>
                     {{else}}
