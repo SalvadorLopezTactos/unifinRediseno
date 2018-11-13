@@ -34,12 +34,8 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
-        'LBL_REVISIONS_PANEL' => 
-        array (
-          'newTab' => false,
-          'panelDefault' => 'expanded',
-        ),
       ),
+      'syncDetailEditViews' => true,
     ),
     'panels' => 
     array (
@@ -56,87 +52,20 @@ array (
               'id' => 'document_revision_id',
             ),
           ),
-          1 => 'status_id',
-        ),
-        1 => 
-        array (
-          0 => 
+          1 => 
           array (
             'name' => 'document_name',
             'label' => 'LBL_DOC_NAME',
           ),
-          1 => 
-          array (
-            'name' => 'revision',
-            'label' => 'LBL_DOC_VERSION',
-          ),
         ),
-        2 => 
-        array (
-          0 => 
-          array (
-            'name' => 'template_type',
-            'label' => 'LBL_DET_TEMPLATE_TYPE',
-          ),
-          1 => 
-          array (
-            'name' => 'is_template',
-            'label' => 'LBL_DET_IS_TEMPLATE',
-          ),
-        ),
-        3 => 
-        array (
-          0 => 'active_date',
-          1 => 'category_id',
-        ),
-        4 => 
-        array (
-          0 => 'exp_date',
-          1 => 'subcategory_id',
-        ),
-        5 => 
-        array (
-          0 => 
-          array (
-            'name' => 'description',
-            'label' => 'LBL_DOC_DESCRIPTION',
-          ),
-        ),
-        6 => 
-        array (
-          0 => 'related_doc_rev_number',
-        ),
-        7 => 
+        1 => 
         array (
           0 => 
           array (
             'name' => 'assigned_user_name',
             'label' => 'LBL_ASSIGNED_TO_NAME',
           ),
-          1 => 
-          array (
-            'name' => 'team_name',
-            'label' => 'LBL_TEAM',
-          ),
-        ),
-        8 => 
-        array (
-          0 => 
-          array (
-            'name' => 'minut_minutas_documents_1_name',
-          ),
-        ),
-      ),
-      'LBL_REVISIONS_PANEL' => 
-      array (
-        0 => 
-        array (
-          0 => 'last_rev_created_name',
-          1 => 
-          array (
-            'name' => 'last_rev_create_date',
-            'type' => 'date',
-          ),
+          1 => '',
         ),
       ),
     ),
