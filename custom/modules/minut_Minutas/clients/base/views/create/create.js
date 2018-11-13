@@ -10,6 +10,7 @@
         this._super("initialize", [options]);
         this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
         this.model.addValidationTask('validaFecha', _.bind(this.validaFechaReunion, this));
+        this.model.addValidationTask('save_Asistencia_Parti', _.bind(this.saveAsistencia, this));
         this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.context.on('button:view_document:click', this.view_document, this);
@@ -33,6 +34,35 @@
             $('[data-name="minut_minutas_meetings_name"]').attr('style','pointer-events:none');
 
         }
+    },
+
+    /* F. Javier G. Solar 9-10-2018
+     * Valida asistencia de almenos un participante tipo Cuenta
+     */
+    saveAsistencia: function (fields, errors, callback) {
+        var objParticipantes = selfData.mParticipantes["participantes"];
+        banderaAsistencia = 0;
+
+        for (var i = 0; i < objParticipantes.length; i++) {
+            if (objParticipantes[i].asistencia == 1 && objParticipantes[i].unifin != 1) {
+                banderaAsistencia++;
+            }
+        }
+
+        if (banderaAsistencia < 1) {
+            console.log("Faltan marcar Asistencia");
+
+            app.alert.show("Asistencia", {
+                level: "error",
+                title: "Debes marcar asistencia por lo menos a un Participante tipo Cuenta",
+                autoClose: true,
+                return: false,
+            });
+            errors['xd'] = errors['xd'] || {};
+            errors['xd'].required = true;
+        }
+
+        callback(null, fields, errors);
     },
 
     validaObjetivosmarcados:function(fields,errors,callback){
