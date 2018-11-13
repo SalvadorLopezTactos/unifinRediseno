@@ -9,7 +9,13 @@
         var filePath = fileInput.value;
         var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp|\.pdf|\.docx|\.doc|\.dot|\.xlsx|\.xls|\.pps|\.ppsx\.pptx|\.ppt|\.sldx)$/i;
         if (!allowedExtensions.exec(filePath)) {
-            alert('El archivo que estas intentando subir no cumple con los permitidos.');
+            alert('"El archivo que intentas adjuntar NO esta permitido, favor de verificar.\n' +
+                    'Archivos permitidos:\n' +
+                    'Word\n' +
+                    'Excel\n' +
+                    'Power Point\n' +
+                    'Imagenes\n' +
+                    'PDF"');
             fileInput.value = '';
             return false;
         }
