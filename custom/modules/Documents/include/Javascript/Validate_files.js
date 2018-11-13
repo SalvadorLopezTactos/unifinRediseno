@@ -9,7 +9,7 @@
         var filePath = fileInput.value;
         var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp|\.pdf|\.docx|\.doc|\.dot|\.xlsx|\.xls|\.pps|\.ppsx\.pptx|\.ppt|\.sldx)$/i;
         if (!allowedExtensions.exec(filePath)) {
-            alert('"El archivo que intentas adjuntar NO esta permitido, favor de verificar.\n' +
+            alert('"El archivo que intentas adjuntar NO est\u00E1 permitido, favor de verificar.\n' +
                     'Archivos permitidos:\n' +
                     'Word\n' +
                     'Excel\n' +
