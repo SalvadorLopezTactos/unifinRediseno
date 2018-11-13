@@ -10,6 +10,7 @@ extendsFrom: 'RecordView',
 		this.model.addValidationTask('check_Relaciones_Duplicadas', _.bind(this.relacionesDuplicadas, this));
 
 		this.model.on('sync', this._render, this);
+        this.model.addValidationTask('crearrelacionaccionista', _.bind(this.Relacionaccionista, this));
 
 	},
 
@@ -189,5 +190,22 @@ extendsFrom: 'RecordView',
 		});
         callback(null, fields, errors);
 	},
+    Relacionaccionista: function (fields, errors, callback) {
+        if (this.model.get('relaciones_activas').includes('Accionista'))
+        {
+            if (this.model.get('porcentaje_participacion_c')=="" || this.model.get('porcentaje_participacion_c')==null || this.model.get('porcentaje_participacion_c')== "0.00") {
+                app.alert.show("% requerido", {
+                    level: "error",
+                    title: "El Porcentaje de Participaci\u00F3n valor debe ser mayor a cero.",
+                    autoClose: false
+                });
+                errors['porcentaje_participacion_c'] = errors['porcentaje_participacion_c'] || {};
+                errors['porcentaje_participacion_c'].required = true;
+            }
+        }
+
+        callback(null, fields, errors);
+    },
+
 
 })
