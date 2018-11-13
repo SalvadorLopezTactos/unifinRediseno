@@ -7,7 +7,7 @@
         console.log("Entro a fileValidation()");
         var fileInput = document.getElementById('filename_file');
         var filePath = fileInput.value;
-        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.docx|\.doc|\.xlsx|\.xls|\.pps|\.ppsx)$/i;
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp|\.pdf|\.docx|\.doc|\.dot|\.xlsx|\.xls|\.pps|\.ppsx\.pptx|\.ppt|\.sldx)$/i;
         if (!allowedExtensions.exec(filePath)) {
             alert('El archivo que estas intentando subir no cumple con los permitidos.');
             fileInput.value = '';
@@ -15,14 +15,3 @@
         }
     }
 
-    function file_save() {
-        console.log("Entro a file_save()");
-        var fileInput = document.getElementById('filename_file');
-        var filePath = fileInput.value;
-        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.docx|\.doc|\.xlsx|\.xls)$/i;
-        if (!allowedExtensions.exec(filePath)) {
-            alert('Archivo con extensi\u00F3n no permitida');
-            fileInput.value = '';
-            return false;
-        }
-    }
