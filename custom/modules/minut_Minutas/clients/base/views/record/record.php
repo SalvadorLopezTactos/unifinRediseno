@@ -128,7 +128,7 @@ array (
             'labelsOnTop' => true,
             'placeholders' => true,
             'newTab' => false,
-            'panelDefault' => 'collapsed',
+            'panelDefault' => 'expanded',
             'fields' => 
             array (
               0 => 
@@ -143,7 +143,7 @@ array (
           3 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'collapsed',
+            'panelDefault' => 'expanded',
             'name' => 'LBL_RECORDVIEW_PANEL1',
             'label' => 'LBL_RECORDVIEW_PANEL1',
             'columns' => 2,
@@ -163,7 +163,7 @@ array (
           4 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'collapsed',
+            'panelDefault' => 'expanded',
             'name' => 'LBL_RECORDVIEW_PANEL2',
             'label' => 'LBL_RECORDVIEW_PANEL2',
             'columns' => 2,
@@ -189,7 +189,7 @@ array (
             'labelsOnTop' => true,
             'placeholders' => true,
             'newTab' => false,
-            'panelDefault' => 'collapsed',
+            'panelDefault' => 'expanded',
             'fields' => 
             array (
               0 => 

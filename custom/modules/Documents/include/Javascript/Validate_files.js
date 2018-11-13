@@ -7,7 +7,7 @@
         console.log("Entro a fileValidation()");
         var fileInput = document.getElementById('filename_file');
         var filePath = fileInput.value;
-        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp|\.pdf|\.docx|\.doc|\.dot|\.xlsx|\.xls|\.pps|\.ppsx\.pptx|\.ppt|\.sldx)$/i;
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp|\.pdf|\.docx|\.doc|\.dot|\.xlsx|\.xls|\.pps|\.ppsx|\.pptx|\.ppt|\.sldx)$/i;
         if (!allowedExtensions.exec(filePath)) {
             alert('"El archivo que intentas adjuntar NO est\u00E1 permitido, favor de verificar.\n' +
                     'Archivos permitidos:\n' +

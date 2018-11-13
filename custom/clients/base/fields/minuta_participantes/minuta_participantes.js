@@ -5,7 +5,6 @@
 ({
     events: {
         'click  .addParticipante': 'addParticipanteFunction',
-        'keydown .newCampo5P': 'keyDownNewPhone',
         'keydown .newCampo1P': 'checkText',
         'keydown .newCampo2P': 'checkText',
         'keydown .newCampo3P': 'checkText',
@@ -104,7 +103,7 @@
     //No aceptar numeros, solo letras (a-z), puntos(.) y comas(,)
     checkText: function (evt) {
         //console.log(evt.keyCode);
-        if ($.inArray(evt.keyCode, [9, 16, 17, 110, 188, 190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192]) < 0) {
+        if ($.inArray(evt.keyCode, [9, 16, 17, 110,190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192]) < 0) {
             if (evt.keyCode != 186) {
                 app.alert.show("Caracter Invalido", {
                     level: "error",
@@ -123,6 +122,7 @@
         //Estableciendo el color de borde original en cada campo
         $('.newCampo1P').css('border-color', '');
         $('.newCampo2P').css('border-color', '');
+        $('.newCampo3P').css('border-color', '');
         $('.newCampo4P').css('border-color', '');
         $('.newCampo5P').css('border-color', '');
         $('.newCampo6P').css('border-color', '');
@@ -153,14 +153,67 @@
         var faltantes = 0;
         //Nombres
         if (valor1 == '' || valor1.trim()=='') {
-            $('.newCampo1P').css('border-color', 'red');
-            faltantes++;
+
+                $('.newCampo1P').css('border-color', 'red');
+                faltantes++;
         }
+
+        if ((valor1 != '' || valor1.trim()!='') ) {
+
+            if(!this.ValidaCaracter(valor1))
+            {
+                $('.newCampo1P').css('border-color', 'red');
+
+                app.alert.show('Tname_participante_error', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'Formato de nombre incorrecto'
+
+                });
+                faltantes++;
+            }
+        }
+
+
         //Apellido Paterno
         if (valor2 == '' || valor2.trim()=='') {
             $('.newCampo2P').css('border-color', 'red');
             faltantes++
         }
+
+        if ((valor2 != '' || valor2.trim()!='') ) {
+
+            if(!this.ValidaCaracter(valor2))
+            {
+                $('.newCampo2P').css('border-color', 'red');
+
+                app.alert.show('Tname_participante_error', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'Formato de nombre incorrecto'
+
+                });
+                faltantes++;
+            }
+        }
+
+        // Apellido Materno
+        if ((valor3 != '' || valor3.trim()!='') ) {
+
+            if(!this.ValidaCaracter(valor3))
+            {
+                $('.newCampo3P').css('border-color', 'red');
+
+                app.alert.show('Tname_participante_error', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'Formato de nombre incorrecto'
+
+                });
+                faltantes++;
+            }
+        }
+
         //Correo o Teléfono
         if (valor4 == '' && valor5 == '') {
             $('.newCampo4P').css('border-color', 'red');
@@ -248,55 +301,72 @@
         callback(null, fields, errors);
     },
 
-    keyDownNewPhone: function (evt) {
-       var charCode = (evt.which) ? evt.which : event.keyCode
-       if (charCode > 31 && (charCode < 48 || charCode > 57))
-           return false;
+   /* F. Javier G. Solar 13/11/2018
+   OBS70
+    Se debe validar que el teléfono ingresado no tenga los mismos números
+    Valida que se ingrese solo numero
+    VAlida que su tamaño sea entre 8 y 10
+    */
+    validaTamano: function () {
 
-       return true;
+        var telefonoTam = $('.newCampo5P').val().length;
+        var ValTel = $('.newCampo5P').val();
+        var banderTelefono = false;
+        var expreg = /^[0-9]{8,10}$/;
 
-   /*     if (!evt) return;
+        if (telefonoTam >= 8 && telefonoTam <= 10) {
 
-       var expreg = /^[0-9]$/;
-       banderaExpresion=false;
+            if (expreg.test(this.$('.newCampo5P').val())) {
 
-           if (expreg.test(evt)) {
-               banderaExpresion = true;
+                var cont = 0;
+                for (var j = 0; j < telefonoTam; j++) {
 
-       }
-       else {
-           app.alert.show("N\u00FAmero incorrecto", {
+                    if (ValTel.charAt(0) == ValTel.charAt(j)) {
+                        cont++;
+                    }
+                }
+                if (cont != telefonoTam) {
+                    banderTelefono = true;
+                }
+            }
+        }
+        else {
+            /*   app.alert.show("N\u00FAmero incorrecto", {
                level: "error",
                title: "Formato invalido",
                autoClose: true
-           });
-
-       }
-       return banderaExpresion;*/
-
-    },
-
-    validaTamano: function () {
-        var telefonoTam = $('.newCampo5P').val().length;
-        var banderTelefono = false;
-        // var expreg = /^[0-9]*$/;
-
-        if (telefonoTam >= 8 && telefonoTam <= 10) {
-            //$('.newCampo5P').css('border-color', '')
-         //   if (expreg.test(this.$('.newCampo5P').val())) {
-                banderTelefono = true;
-
-           // }
-        }
-        else {
-          /*   app.alert.show("N\u00FAmero incorrecto", {
-             level: "error",
-             title: "Formato invalido",
-             autoClose: true
-             });*/
+               });*/
 
         }
         return banderTelefono;
+    },
+
+
+    ValidaCaracter: function(texto)
+    {
+        var valido=false;
+        var cont = 0;
+        var contDosPuntos = 0;
+        var ValText = texto;
+        var TextTam = texto.length;
+        for (var j = 0; j < TextTam; j++) {
+
+            if (ValText.charAt(j)==".") {
+                cont++;
+            }
+            if (ValText.charAt(j)==":") {
+                contDosPuntos++;
+            }
+        }
+
+        if (cont < 2 && contDosPuntos==0 ) {
+            valido = true;
+        }
+        if (cont == 1 && TextTam==1) {
+            valido = false;
+        }
+
+        return valido;
     },
 
     validaMail:function() {

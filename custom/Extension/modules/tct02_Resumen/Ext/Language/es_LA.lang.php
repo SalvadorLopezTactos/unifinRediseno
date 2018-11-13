@@ -36,3 +36,4 @@ $mod_strings['LBL_TCT_NOTICIA_GENERAL'] = 'Noticia General';
 $mod_strings['LBL_TCT_NOTICIA_SECTOR'] = 'Noticia Macro Sector';
 $mod_strings['LBL_TCT_NOTICIA_REGION'] = 'Noticia Región';
 $mod_strings['LBL_RECORDVIEW_PANEL8'] = 'Noticias';
+$mod_strings['LBL_TCT_DATOS_CLAVE_TXA'] = 'LBL_TCT_DATOS_CLAVE_TXA';

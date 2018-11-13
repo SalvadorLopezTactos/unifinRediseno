@@ -1,5 +1,5 @@
 <?php
- // created: 2018-09-19 18:16:00
+ // created: 2018-11-07 19:57:59
 $dictionary['Account']['fields']['sectoreconomico_c']['labelValue']='Sector Económico';
 $dictionary['Account']['fields']['sectoreconomico_c']['dependency']='';
 $dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']=array (
@@ -10,7 +10,8 @@ $dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']=array (
     array (
       0 => '0100008',
       1 => '0200006',
-      2 => '0300004',
+      2 => '0400002',
+      3 => '0300004',
     ),
     2 => 
     array (
