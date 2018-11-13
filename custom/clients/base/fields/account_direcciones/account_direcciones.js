@@ -2132,6 +2132,7 @@
         $("#multi1").select2('val',[]);
         $("#multi1").trigger('change');
         $('[data-type="account_direcciones"]').removeClass('error');
+        $('.direcciondashlet').css('border-color', '');
     },
 
     /**
