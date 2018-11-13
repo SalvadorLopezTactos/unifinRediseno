@@ -1,4 +1,6 @@
+
 ({
+    
     extendsFrom: 'CreateView',
 
     initialize: function (options) {
@@ -8,6 +10,7 @@
         this.on('render', this.disableparentsfields, this);
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial, this));
         this.model.addValidationTask('ValidaObjetivos',_.bind(this.ValidaObjetivos,this));
+        this.model.addValidationTask('Campos_necesarios', _.bind(this.Campos_necesarios, this));
         this.on('render', this.disablestatus, this);
     },
 
@@ -39,9 +42,26 @@
             this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(0).removeClass('panel-inactive');
             this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(0).addClass('panel-active');
             this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(1).attr("style","display:block");
-            app.alert.show("Objetivo vacio",{
+        }
+        callback(null, fields, errors);
+    },
+
+    Campos_necesarios:function(fields, errors, callback){
+        var necesario="";
+        if(this.model.get('name')=="" || this.model.get('name')==null){
+            necesario= necesario + '<b>Asunto</b><br>';
+        }
+        if(this.model.get('objetivo_c')=="" || this.model.get('objetivo_c')==null){
+            necesario=necesario + '<b>Objetivo General</b><br>';
+        }
+        if(this.$('.objetivoSelect').length<=0){
+            necesario=necesario + '<b>Objetivos Espec\u00EDficos</b><br>';
+        }
+        if (necesario != ""){
+            console.log("Confirma necesarios");
+            app.alert.show("Guardar Reunion", {
                 level: "error",
-                title: "Es necesario tener por lo menos un objetivo espec\u00EDfico",
+                title: '<p style="font-weight: normal;">Faltan los siguientes datos para poder guardar la Reuni\u00F3n:</p>' + necesario,
                 autoClose: false
             });
         }
