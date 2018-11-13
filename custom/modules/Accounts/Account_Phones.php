@@ -31,11 +31,13 @@ class Account_Phones
                     //Valida si cuenta con teléfono principal
                     $contador=0;
                     $principal=-99;
+                    $id_tel="";
                     foreach ($relatedTelefonos as $telefono) {
 
                         if ($telefono->principal) {
                             //Ya cuenta con un teléfono principal, actualizando
                             $principal=$contador;
+                            $id_tel=$telefono->id;
                         }
                         $contador++;
 
@@ -44,6 +46,11 @@ class Account_Phones
                     if($principal !==-99){
                         //Actualiza teléfono principal
                         $relatedTelefonos[$principal]['telefono']=$phone_office;
+                        $beanTelefono = BeanFactory::retrieveBean('Tel_Telefonos', $id_tel);
+                        $beanTelefono->name=$phone_office;
+                        $beanTelefono->telefono = $phone_office;
+                        $beanTelefono->save();
+
                     }else{
                         //Agrega nuevo teléfono principal de trabajo Tipo 2
                         $beanTelefono = BeanFactory::newBean("Tel_Telefonos");
