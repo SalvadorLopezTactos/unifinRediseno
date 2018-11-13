@@ -5,7 +5,6 @@
 ({
     events: {
         'click  .addParticipante': 'addParticipanteFunction',
-        'keydown .newCampo5P': 'keyDownNewPhone',
         'keydown .newCampo1P': 'checkText',
         'keydown .newCampo2P': 'checkText',
         'keydown .newCampo3P': 'checkText',
@@ -248,52 +247,41 @@
         callback(null, fields, errors);
     },
 
-    keyDownNewPhone: function (evt) {
-       var charCode = (evt.which) ? evt.which : event.keyCode
-       if (charCode > 31 && (charCode < 48 || charCode > 57))
-           return false;
+   /* F. Javier G. Solar 13/11/2018
+   OBS70
+    Se debe validar que el teléfono ingresado no tenga los mismos números
+    Valida que se ingrese solo numero
+    VAlida que su tamaño sea entre 8 y 10
+    */
+    validaTamano: function () {
 
-       return true;
+        var telefonoTam = $('.newCampo5P').val().length;
+        var ValTel = $('.newCampo5P').val();
+        var banderTelefono = false;
+        var expreg = /^[0-9]{8,10}$/;
 
-   /*     if (!evt) return;
+        if (telefonoTam >= 8 && telefonoTam <= 10) {
 
-       var expreg = /^[0-9]$/;
-       banderaExpresion=false;
+            if (expreg.test(this.$('.newCampo5P').val())) {
 
-           if (expreg.test(evt)) {
-               banderaExpresion = true;
+                var cont = 0;
+                for (var j = 0; j < telefonoTam; j++) {
 
-       }
-       else {
-           app.alert.show("N\u00FAmero incorrecto", {
+                    if (ValTel.charAt(0) == ValTel.charAt(j)) {
+                        cont++;
+                    }
+                }
+                if (cont != telefonoTam) {
+                    banderTelefono = true;
+                }
+            }
+        }
+        else {
+            /*   app.alert.show("N\u00FAmero incorrecto", {
                level: "error",
                title: "Formato invalido",
                autoClose: true
-           });
-
-       }
-       return banderaExpresion;*/
-
-    },
-
-    validaTamano: function () {
-        var telefonoTam = $('.newCampo5P').val().length;
-        var banderTelefono = false;
-        // var expreg = /^[0-9]*$/;
-
-        if (telefonoTam >= 8 && telefonoTam <= 10) {
-            //$('.newCampo5P').css('border-color', '')
-         //   if (expreg.test(this.$('.newCampo5P').val())) {
-                banderTelefono = true;
-
-           // }
-        }
-        else {
-          /*   app.alert.show("N\u00FAmero incorrecto", {
-             level: "error",
-             title: "Formato invalido",
-             autoClose: true
-             });*/
+               });*/
 
         }
         return banderTelefono;
