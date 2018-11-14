@@ -1,7 +1,12 @@
 <?php
 
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
-
+/*
+ * Creado por: Salvador Lopez salvador.lopez@tactos.com.mx
+ *
+ * Logichook que se ejecuta en los módulos bwc
+ * Este archivo bloquea el campo de "Asignado a" en módulo de Documents
+ * */
 class application_hooks_class
 {
     function after_ui_footer_method($event, $arguments)
