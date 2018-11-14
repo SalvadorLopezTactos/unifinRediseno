@@ -46,6 +46,7 @@
         var resultado_list = app.lang.getAppListStrings('resultado_list');
         var resultado_keys = app.lang.getAppListKeys('resultado_list');
         this.resultado = self.obtenerLista(resultado_list, resultado_keys);
+        this.model.addValidationTask('Revalidafecha', _.bind(this.tercerafecha, this));
 
         var api_params = {
             'brujula_id': this.model.id,
@@ -170,6 +171,16 @@
                 $(".objetivo_list").change();
             })
         });
+
+        if(this.model.get("fecha_reporte")=="" ||this.model.get("fecha_reporte")==null){
+            /*app.alert.show('citas_sync_alert', {
+                level: 'error',
+                messages: 'El campo esta vacio.',
+
+            });*/
+            return;
+
+        }
     },
 
     removerCita: function(e){
@@ -570,6 +581,15 @@
         if (this.tplName === 'list-edit') {
             this._super("bindDomChange");
         }
+    },
+    tercerafecha:function(fields, errors, callback) {
+    if(this.model.get("fecha_reporte")=="" ||this.model.get("fecha_reporte")==null) {
+
+        errors['fecha_reporte'] = errors['fecha_reporte'] || {};
+        errors['fecha_reporte'].required = true;
+
+    }
+        callback(null, fields, errors);
     },
 
 })
