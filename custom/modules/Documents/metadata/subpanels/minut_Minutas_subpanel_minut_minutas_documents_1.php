@@ -1,5 +1,5 @@
 <?php
-// created: 2018-11-06 18:55:31
+// created: 2018-11-13 15:41:50
 $subpanel_layout['list_fields'] = array (
   'document_name' => 
   array (
@@ -22,38 +22,17 @@ $subpanel_layout['list_fields'] = array (
     ),
     'default' => true,
   ),
-  'category_id' => 
+  'assigned_user_name' => 
   array (
-    'name' => 'category_id',
-    'vname' => 'LBL_LIST_CATEGORY',
+    'link' => true,
+    'type' => 'relate',
+    'vname' => 'LBL_ASSIGNED_TO',
+    'id' => 'ASSIGNED_USER_ID',
     'width' => 10,
     'default' => true,
-  ),
-  'doc_type' => 
-  array (
-    'name' => 'doc_type',
-    'vname' => 'LBL_LIST_DOC_TYPE',
-    'width' => 10,
-    'default' => true,
-  ),
-  'date_entered' => 
-  array (
-    'type' => 'datetime',
-    'studio' => 
-    array (
-      'portaleditview' => false,
-    ),
-    'readonly' => true,
-    'vname' => 'LBL_DATE_ENTERED',
-    'width' => 10,
-    'default' => true,
-  ),
-  'status_id' => 
-  array (
-    'name' => 'status_id',
-    'vname' => 'LBL_LIST_STATUS',
-    'width' => 10,
-    'default' => true,
+    'widget_class' => 'SubPanelDetailViewLink',
+    'target_module' => 'Users',
+    'target_record_key' => 'assigned_user_id',
   ),
   'document_revision_id' => 
   array (

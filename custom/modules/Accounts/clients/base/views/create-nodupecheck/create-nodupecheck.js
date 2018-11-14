@@ -190,7 +190,6 @@
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/14/2015 Description: Cuando estamos en el modulo de Personas, no queremos que se muestre la opcion Persona para el tipo de registro */
         var new_options = app.lang.getAppListStrings('tipo_registro_list');
 
-
         try {
             if (relContext != null) {
                 Object.keys(new_options).forEach(function (key) {
@@ -203,40 +202,49 @@
             console.log('No es relación  error: ' + e);
             // var new_options = app.lang.getAppListStrings('tipo_registro_list');
 
-            Object.keys(new_options).forEach(function (key) {
-                if (key == "Persona") {
-                    delete new_options[key];
-                }
-            });
-
-            if (App.user.attributes.tct_alta_clientes_chk_c == 1 && App.user.attributes.tct_altaproveedor_chk_c == 1) {
+            if (this.context.parent.attributes.module == "Accounts") {
                 Object.keys(new_options).forEach(function (key) {
-                    if (key != "Cliente" && key != "Proveedor") {
-                        delete new_options[key];
-                    }
-                });
-            } else if (App.user.attributes.tct_alta_clientes_chk_c == 1) {
-
-                Object.keys(new_options).forEach(function (key) {
-                    if (key != "Cliente") {
-                        delete new_options[key];
-                    }
-                });
-            } else if (App.user.attributes.tct_altaproveedor_chk_c == 1) {
-
-                Object.keys(new_options).forEach(function (key) {
-                    if (key != "Proveedor") {
+                    if (key != "Persona") {
                         delete new_options[key];
                     }
                 });
             }
-            //En otro caso, solo mostrar Lead
             else {
                 Object.keys(new_options).forEach(function (key) {
-                    if (key != "Lead") {
+                    if (key == "Persona") {
                         delete new_options[key];
                     }
                 });
+
+                if (App.user.attributes.tct_alta_clientes_chk_c == 1 && App.user.attributes.tct_altaproveedor_chk_c == 1) {
+                    Object.keys(new_options).forEach(function (key) {
+                        if (key != "Cliente" && key != "Proveedor") {
+                            delete new_options[key];
+                        }
+                    });
+                } else if (App.user.attributes.tct_alta_clientes_chk_c == 1) {
+
+                    Object.keys(new_options).forEach(function (key) {
+                        if (key != "Cliente") {
+                            delete new_options[key];
+                        }
+                    });
+                } else if (App.user.attributes.tct_altaproveedor_chk_c == 1) {
+
+                    Object.keys(new_options).forEach(function (key) {
+                        if (key != "Proveedor") {
+                            delete new_options[key];
+                        }
+                    });
+                }
+                //En otro caso, solo mostrar Lead
+                else {
+                    Object.keys(new_options).forEach(function (key) {
+                        if (key != "Lead") {
+                            delete new_options[key];
+                        }
+                    });
+                }
             }
         }
 

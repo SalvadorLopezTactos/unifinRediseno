@@ -262,6 +262,8 @@ array (
               ),
               3 => 
               array (
+                'name' => 'documentos_c',
+                'label' => 'LBL_DOCUMENTOS',
               ),
             ),
           ),
