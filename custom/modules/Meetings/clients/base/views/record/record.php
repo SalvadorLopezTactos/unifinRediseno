@@ -351,7 +351,7 @@ array (
           2 => 
           array (
             'newTab' => false,
-            'panelDefault' => 'collapsed',
+            'panelDefault' => 'expanded',
             'name' => 'LBL_RECORDVIEW_PANEL1',
             'label' => 'LBL_RECORDVIEW_PANEL1',
             'columns' => 2,
