@@ -113,12 +113,21 @@
                     autoClose: false
                 });
         }else{
+            
             var model=App.data.createBean('minut_Minutas');
+            // FECHA ACTUAL
+            var startDate = new Date(this.model.get('date_start'));
+            var startMonth = startDate.getMonth() + 1;
+            var startDay = startDate.getDate();
+            var startYear = startDate.getFullYear();
+            var startDateText = startDay + "/" + startMonth + "/" + startYear;
+            var objetivo=App.lang.getAppListStrings('objetivo_list');
             model.set('account_id_c', this.model.get('parent_id'));
             model.set('tct_relacionado_con_c', this.model.get('parent_name'));
             model.set('objetivo_c', this.model.get('objetivo_c'));
-            model.set('minut_minutas_meetingsmeetings_idb',this.model.get('id'))
-            model.set('minut_minutas_meetings_name',this.model.get('name'))
+            model.set('minut_minutas_meetingsmeetings_idb',this.model.get('id'));
+            model.set('minut_minutas_meetings_name',this.model.get('name'));
+            model.set('name',"Minuta"+" "+startDateText+" "+objetivo[this.model.get('objetivo_c')]);
             app.drawer.open({
                 layout:'create',
                 context:{

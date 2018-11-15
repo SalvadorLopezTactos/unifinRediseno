@@ -12,6 +12,5 @@ $app_list_strings['tct_motivo_minuta_list']=array (
   7 => 'Está fuera de perfil',
   8 => 'Ya es cliente',
   9 => 'Condiciones',
-  10 => 'Seguimiento Futuro',
-  11 => 'Otro',
+  10 => 'Otro',
 );

@@ -34,6 +34,9 @@
             $('[data-name="minut_minutas_meetings_name"]').attr('style','pointer-events:none');
 
         }
+        this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(0).removeClass('panel-inactive');
+        this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(0).addClass('panel-active');
+        this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(1).attr("style","display:block");
     },
 
     /* F. Javier G. Solar 9-10-2018
