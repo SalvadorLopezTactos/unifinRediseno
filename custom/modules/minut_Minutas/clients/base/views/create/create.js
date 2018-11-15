@@ -11,7 +11,7 @@
         this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
         this.model.addValidationTask('validaFecha', _.bind(this.validaFechaReunion, this));
         this.model.addValidationTask('save_Asistencia_Parti', _.bind(this.saveAsistencia, this));
-        this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
+        //this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.context.on('button:view_document:click', this.view_document, this);
 
