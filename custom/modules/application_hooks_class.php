@@ -11,7 +11,7 @@ class application_hooks_class
 {
     function after_ui_footer_method($event, $arguments)
     {
-        if($_REQUEST['module']=='Documents' && $_REQUEST['action']=='editview') {
+        if($_REQUEST['module']=='Documents' && ($_REQUEST['action']=='editview' ||  $_REQUEST['action']=='EditView')) {
             ?>
             <script type="text/javascript">
                 $('input[name="assigned_user_name"]').parent().attr('style', 'pointer-events:none');
