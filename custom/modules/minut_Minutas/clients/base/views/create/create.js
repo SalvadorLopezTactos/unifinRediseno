@@ -11,7 +11,7 @@
         this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
         this.model.addValidationTask('validaFecha', _.bind(this.validaFechaReunion, this));
         this.model.addValidationTask('save_Asistencia_Parti', _.bind(this.saveAsistencia, this));
-        this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
+        //this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.context.on('button:view_document:click', this.view_document, this);
 
@@ -34,6 +34,9 @@
             $('[data-name="minut_minutas_meetings_name"]').attr('style','pointer-events:none');
 
         }
+        this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(0).removeClass('panel-inactive');
+        this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(0).addClass('panel-active');
+        this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(1).attr("style","display:block");
     },
 
     /* F. Javier G. Solar 9-10-2018

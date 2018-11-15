@@ -74,7 +74,11 @@ array (
                 'dismiss_label' => true,
                 'readonly' => true,
               ),
-              1 => 'name',
+              1 => 
+              array (
+              'name'=>'name',
+              'readonly' => true,
+              ),
               2 => 
               array (
                 'name' => 'favorite',
@@ -202,16 +206,16 @@ array (
                 'name' => 'tct_motivo_c',
                 'label' => 'LBL_TCT_MOTIVO_C',
               ),
-              2 => 
+              /*2 => 
               array (
                 'name' => 'tct_programa_nueva_reunion_chk',
                 'label' => 'LBL_TCT_PROGRAMA_NUEVA_REUNION_CHK',
               ),
-              3 => 
+              /*3 => 
               array (
                 'name' => 'fecha_y_hora_c',
                 'label' => 'LBL_FECHA_Y_HORA_C',
-              ),
+              ),*/
               4 => 
               array (
                 'name' => 'assigned_user_name',
@@ -262,6 +266,8 @@ array (
               ),
               3 => 
               array (
+                'name' => 'documentos_c',
+                'label' => 'LBL_DOCUMENTOS',
               ),
             ),
           ),
