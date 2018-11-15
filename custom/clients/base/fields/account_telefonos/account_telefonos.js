@@ -949,14 +949,19 @@
         var Params=[id_client,name_client];
         app.api.call('create', app.api.buildURL('createcall'),{data: Params}, {
             success: _.bind(function (data) {
-                console.log('Llamada creada');
                 id_call=data;
-                callback(id_call,name_client,self);
+                console.log('Llamada creada, id: '+id_call);
+                app.alert.show('message-to', {
+                    level: 'info',
+                    messages: 'Usted esta llamando a '+name_client,
+                    autoClose: true
+                });
+                callback(id_call,self);
             }, this),
         });
     },
 
-    resultCallback:function(id_call,name_client,context) {
+        resultCallback:function(id_call,context) {
         self=context;
         issabel+='&id_call='+id_call;
         console.log('Issabel_link:'+issabel);
@@ -967,20 +972,27 @@
             beforeSend:function(){
               app.alert.show('message-to', {
                   level: 'info',
-                  messages: 'Usted esta llamando a '+name_client,
-                  autoClose: true
-              });
-            },
-            complete:function() {
-              app.alert.show('message-call-start', {
-                  level: 'info',
                   messages: 'Llamada en curso.....',
                   autoClose: true
               });
             },
+            success:function() {
+                app.alert.show('message-call-start', {
+                    level: 'info',
+                    messages: 'Llamada iniciada.....',
+                    autoClose: true
+                });
+            },
+            complete:function(response) {
+              app.alert.show('message-call-start', {
+                  level: 'info',
+                  messages: 'Llamada contestada.....',
+                  autoClose: true
+              });
+              console.log(response);
+            },
         });
-
-},
+    },
 
 
 })
