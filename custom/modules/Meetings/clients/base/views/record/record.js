@@ -116,7 +116,7 @@
             
             var model=App.data.createBean('minut_Minutas');
             // FECHA ACTUAL
-            var startDate = new Date(this.model.get('date_start'));
+            var startDate = new Date(this.model.get('date_end'));
             var startMonth = startDate.getMonth() + 1;
             var startDay = startDate.getDate();
             var startYear = startDate.getFullYear();

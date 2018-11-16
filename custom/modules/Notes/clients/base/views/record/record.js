@@ -5,7 +5,7 @@
         self = this;
         this._super("initialize", [options]);
 
-        this.on('render',this.disableparentsfields,this);
+        this.model.on('sync',this.disableparentsfields,this);
 
         /*@Jesus Carrillo
             Funcion que pinta de color los paneles relacionados
@@ -32,6 +32,9 @@
     Oculta los campos relacionados
     */
     disableparentsfields:function () {
-        this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;')
+        if (this.model.get('parent_name') !=='' && this.model.get('parent_name')!==undefined){
+            var self = this;
+            self.noEditFields.push('parent_name');
+        }
     },
 })
