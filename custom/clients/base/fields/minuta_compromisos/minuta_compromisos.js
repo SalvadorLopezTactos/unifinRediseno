@@ -29,9 +29,11 @@
         app.api.call('GET', app.api.buildURL('minut_Minutas/'+this.model.get('id')+'/link/minut_minutas_minut_compromisos'), null, {
             success: function (data) {
                 for(var i=0;i<data.records.length;i++){
-                    var temp=data.records[i].date_entered;
-                    var temp2=temp.split("T");
-                    data.records[i].date_entered=temp2[0];
+                    if(data.records[i].tct_fecha_compromiso_c!='') {
+                        var temp = data.records[i].tct_fecha_compromiso_c;
+                        var temp2 = temp.split("T");
+                        data.records[i].tct_fecha_compromiso_c = temp2[0];
+                    }
                 }
                 selfcomp.myData2 = $.parseJSON( '{"myData2":{"records":'+JSON.stringify(data.records)+'}}');
                 _.extend(selfcomp, selfcomp.myData2);
