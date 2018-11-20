@@ -34,6 +34,7 @@ class Minuta_Hooks
 
 		            $bean_tarea->date_start=$now;
                     $bean_tarea->date_due=$end;
+                    $bean_compromiso->tct_fecha_compromiso_c=$end;
 
 		            $dummy_bean = BeanFactory::retrieveBean('Accounts', $compromiso['id_resp']);
 		            $GLOBALS['log']->fatal('Count de dummy: '.count($dummy_bean));//------------------------------------
