@@ -2656,10 +2656,61 @@
                 $('.select2-choices').css('border-color', '');
 
             }
+            //Validar campos adionales
+            if (this.model.get('tipo_registro_c') == 'Persona') {
+                if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
+                    errors['rfc_c'] = errors['rfc_c'] || {};
+                    errors['rfc_c'].required = true;
+                }
+                if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == null) {
+                    errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
+                    errors['pais_nacimiento_c'].required = true;
+                }
+                if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
+                    errors['estado_nacimiento_c'] = errors['estado_nacimiento_c'] || {};
+                    errors['estado_nacimiento_c'].required = true;
+                }
+
+                if (this.model.get('tipodepersona_c') == 'Persona Moral') {
+                    if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null) {
+                        errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
+                        errors['tct_macro_sector_ddw_c'].required = true;
+                    }
+                    if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
+                        errors['fechaconstitutiva_c'] = errors['fechaconstitutiva_c'] || {};
+                        errors['fechaconstitutiva_c'].required = true;
+                    }
+                } else {
+
+                    if (this.model.get('curp_c') == "" || this.model.get('curp_c') == null) {
+                        errors['curp_c'] = errors['curp_c'] || {};
+                        errors['curp_c'].required = true;
+                    }
+                    if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                        errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+                        errors['apellidomaterno_c'].required = true;
+                    }
+                    if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                        errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
+                        errors['fechadenacimiento_c'].required = true;
+                    }
+                    if (this.model.get('genero_c') == "" || this.model.get('genero_c') == null) {
+                        errors['genero_c'] = errors['genero_c'] || {};
+                        errors['genero_c'].required = true;
+                    }
+
+                }
+                if (this.model.get('tipodepersona_c') == 'Persona Fisica con Actividad Empresarial') {
+                    if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null) {
+                        errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
+                        errors['tct_macro_sector_ddw_c'].required = true;
+                    }
+                }
+
+            }
         }
 
         callback(null, fields, errors);
-
 
     },
 
