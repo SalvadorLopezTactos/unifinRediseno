@@ -183,7 +183,7 @@ class ResumenClienteAPI extends SugarApi
         ############################
         if ($beanPersona->load_relationship('opportunities')) {
             //Recupera operaciones
-            $relatedBeans = $beanPersona->opportunities->getBeans();
+            $relatedBeans = $beanPersona->opportunities->getBeans($beanPersona->id,array('disable_row_level_security' => true));
 
             //Línea autorizada
             $linea_aut_leasing = 0;
