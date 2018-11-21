@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 class reasigna_class
 {
     function reasigna_method($bean, $event, $arguments)
@@ -65,7 +65,7 @@ class reasigna_class
 
     function cambiAdmin ($bean = null, $event = null, $args = null)
     {
-      if($bean->modified_by_name == 'levadmin')
+      if($bean->modified_user_id == '1')
       {
         $bean->modified_user_id = $bean->fetched_row['modified_user_id'];
       }

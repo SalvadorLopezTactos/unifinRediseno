@@ -474,7 +474,7 @@ SQL;
 
     function cambiAdmin ($bean = null, $event = null, $args = null)
     {
-      if($bean->modified_by_name == 'levadmin')
+      if($bean->modified_user_id == '1')
       {
         $bean->modified_user_id = $bean->fetched_row['modified_user_id'];
       }
