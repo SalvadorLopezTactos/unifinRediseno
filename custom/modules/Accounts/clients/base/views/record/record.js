@@ -48,6 +48,10 @@
         * Adrian Arauz 4/10/2018
         * */
         this.model.addValidationTask('valida_potencial',_.bind(this.validapotencial, this));
+        /* F. Javier G. Solar
+           OBS299 Validar que las Direcciones no se repitan 21/11/2018
+        */
+        this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
 
         /*
          Eduardo Carrasco
@@ -158,6 +162,58 @@
 
     },
 
+    /* F. Javier G. Solar
+          OBS299 Validar que las Direcciones no se repitan 21/11/2018
+       */
+    _direccionDuplicada: function (fields, errors, callback) {
+
+        /* SE VALIDA DIRECTAMENTE DE LOS ELEMENTOS DEL HTML POR LA COMPLEJIDAD DE
+        OBETENER LAS DESDRIPCIONES DE LOS COMBOS*/
+
+        var objDirecciones = $('.control-group.direccion')
+        var concatDirecciones = [];
+        var strDireccionTemp = "";
+        for (var i = 0; i < objDirecciones.length-1; i++) {
+            strDireccionTemp = objDirecciones.eq(i).find('.existingCalle').val() +
+                objDirecciones.eq(i).find('.existingNumExt').val() +
+                objDirecciones.eq(i).find('.existingNumInt').val() +
+                objDirecciones.eq(i).find('select.existingColoniaTemp option:selected').text() +
+                objDirecciones.eq(i).find('select.existingMunicipioTemp option:selected').text() +
+                objDirecciones.eq(i).find('select.existingEstadoTemp option:selected').text() +
+                objDirecciones.eq(i).find('select.existingCiudadTemp option:selected').text() +
+                objDirecciones.eq(i).find('#existingPostalInput').val();
+
+            concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
+
+        }
+
+        // validamos  el arreglo generado
+        var existe = false;
+        for (var j = 0; j < concatDirecciones.length; j++) {
+            for (var k = j + 1; k < concatDirecciones.length; k++) {
+
+                if (concatDirecciones[j] == concatDirecciones[k]) {
+                    existe = true;
+                }
+            }
+
+        }
+
+        if(existe)
+        {
+            app.alert.show('Direcci\u00F3n', {
+                level: 'error',
+                autoClose: false,
+                messages: 'Existe una o mas direcciones repetidas'
+            });
+            var messages1= 'Existe una o mas direcciones repetidas';
+            errors['xd'] = errors['xd'] || {};
+           // errors['xd'].messages1 = true;
+            errors['xd'].required = true;
+        }
+
+        callback(null, fields, errors);
+    },
 
     checkInVentas:function (evt) {
         var enteros=this.checkmoneyint(evt);
