@@ -1,8 +1,8 @@
 <?php
 class reasigna_class
 {
-  function reasigna_method($bean, $event, $arguments)
-  {
+    function reasigna_method($bean, $event, $arguments)
+    {
       /**
         * Escenario 1: Llamada a partir de teléfono
         * Aplica para llamadas generadas desde un teléfono
@@ -61,7 +61,14 @@ class reasigna_class
   				}
         }
       }
-  }
+    }
 
+    function cambiAdmin ($bean = null, $event = null, $args = null)
+    {
+      if($bean->modified_by_name == 'levadmin')
+      {
+        $bean->modified_user_id = $bean->fetched_row['modified_user_id'];
+      }
+    }
 }
 ?>
