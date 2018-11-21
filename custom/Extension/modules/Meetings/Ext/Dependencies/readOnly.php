@@ -27,7 +27,7 @@ $dependencies['Meetings']['readOnly'] = array
                 'target' => 'name',
                 'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
             ),
-        ),
+        ),/*
         array
         (
             'name' => 'ReadOnly',
@@ -54,7 +54,7 @@ $dependencies['Meetings']['readOnly'] = array
                 'target' => 'duration',
                 'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),not(equal($parent_meeting_c,"")))',
             ),
-        ),
+        ),*/
         array
         (
             'name' => 'ReadOnly',
