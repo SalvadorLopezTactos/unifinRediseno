@@ -306,7 +306,7 @@
                             app.alert.show('numero_repetido56', {
                             level: 'error',
                             autoClose: true,
-                            messages: 'Tel\u00E9fono Invalido caracter repetido'
+                            messages: 'Tel\u00E9fono Inv\u00E1lido caracter repetido'
                             });
                         //$($input).focus();
                         $('.newtelefono').css('border-color', 'red');
@@ -505,7 +505,7 @@
                         app.alert.show('numero repetido', {
                         level: 'error',
                         autoClose: true,
-                        messages: 'Tel\u00E9fono Invalido'
+                        messages: 'Tel\u00E9fono Inv\u00E1lido caracter repetido'
                         });
                     //$($input).focus();
                     $($input).css('border-color', 'red');

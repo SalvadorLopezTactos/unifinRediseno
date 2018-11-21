@@ -715,9 +715,9 @@
                         app.alert.show('numero_repetido1234', {
                         level: 'error',
                         autoClose: true,
-                        messages: 'Tel\u00E9fono Invalido caracter repetido'
+                        messages: 'Tel\u00E9fono Inv\u00E1lido caracter repetido'
                         });
-                    errors['repetido'] = errors['Tel\u00E9fono Invalido,un mismo n\u00FA ha sido repetido varias veces'] || {};
+                    errors['repetido'] = errors['Tel\u00E9fono Inv\u00E1lido,un mismo n\u00FA ha sido repetido varias veces'] || {};
                     errors['repetido'].required = true;
                     $(this).css('border-color', 'red');
                     callback(null, fields, errors);
@@ -1315,7 +1315,7 @@
         if ($.inArray(evt.keyCode, [110, 188, 190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192, 186, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105]) < 0) {
             app.alert.show("Caracter Invalido", {
                 level: "error",
-                title: "Caracter Invalido.",
+                title: "Caracter Inv\u00E1lido.",
                 autoClose: true
             });
             return false;
@@ -1327,7 +1327,7 @@
         if ($.inArray(evt.keyCode, [45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192, 186, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105]) < 0) {
             app.alert.show("Caracter Invalido", {
                 level: "error",
-                title: "Caracter Invalido.",
+                title: "Caracter Inv\u00E1lido.",
                 autoClose: true
             });
             return false;
