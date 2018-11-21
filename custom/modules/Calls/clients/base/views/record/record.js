@@ -31,9 +31,15 @@
             this.model.on('sync', this.disablestatus1, this);
             this.model.on('sync', this.disableFieldsTime,this);
             this.model.addValidationTask('resultCallReq',_.bind(this.resultCallRequerido, this));
+            this.events['click a[name=edit_button]'] = 'fechascallsymeet';
 
 
     },
+    _render: function (options) {
+        this._super("_render");
+        this.enableparentname();
+    },
+
 
     bloqueaTodo:function()
     {
@@ -155,10 +161,10 @@
         }
         else {
         this.$('[data-name="parent_name"]').attr('style', '');
-        this.setButtonStates(this.STATE.EDIT);
-        this.action = 'edit';
-        this.toggleEdit(true);
-        this.setRoute('edit');
+        //this.setButtonStates(this.STATE.EDIT);
+        this.action = 'detail';
+        this.toggleEdit(false);
+        //this.setRoute('edit');
         }
     },
 
@@ -363,5 +369,15 @@
             $('.record-edit-link-wrapper[data-name=tct_motivo_desinteres_ddw_c]').remove();
         }
 
+    },
+
+    fechascallsymeet: function(){
+        if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held' || (this.model.get('parent_meeting_c')!="" && this.model.get('parent_meeting_c')!=undefined)){
+            var self = this;
+            self.noEditFields.push('date_start');
+            self.noEditFields.push('date_end');
+            self.render();
+
+        }
     },
 })

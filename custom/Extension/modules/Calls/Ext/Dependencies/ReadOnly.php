@@ -35,7 +35,7 @@ $dependencies['Calls']['readOnly_Held_NotHeld'] = array
                 'target' => 'tct_conferencia_chk_c',
                 'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
             ),
-        ),
+        ),/*
         //Fecha inicio
         array(
             'name' => 'ReadOnly',
@@ -51,7 +51,7 @@ $dependencies['Calls']['readOnly_Held_NotHeld'] = array
                 'target' => 'date_end',
                 'value' => 'or(equal($status,"Held"),equal($status,"Not Held"))',
             ),
-        ),
+        ),*/
         //Repetir
         array(
             'name' => 'ReadOnly',
