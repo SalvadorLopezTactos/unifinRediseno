@@ -145,16 +145,16 @@
      this._super('_dispose');
    },
 
-    /*editClicked: function() {
-
+    editClicked: function() {
         this._super("editClicked");
-        this.$('[data-name="parent_name"]').attr('style', '');
-        this.setButtonStates(this.STATE.EDIT);
-        this.action = 'edit';
-        this.toggleEdit(true);
-        this.setRoute('edit');
 
-    },*/
+        if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
+            this.setButtonStates(this.STATE.VIEW);
+            this.action = 'detail';
+            this.toggleEdit(false);
+            this.setRoute('');
+        }
+    },
 
     cancelClicked: function() {
 
