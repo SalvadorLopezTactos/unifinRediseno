@@ -33,7 +33,6 @@
             this.model.addValidationTask('resultCallReq',_.bind(this.resultCallRequerido, this));
             this.events['click a[name=edit_button]'] = 'fechascallsymeet';
 
-
     },
     _render: function (options) {
         this._super("_render");
@@ -55,9 +54,6 @@
         }
 
     },
-
-    
-
 
     resultCallRequerido:function (fields, errors, callback) {
         if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
@@ -125,16 +121,18 @@
 
     },
 
-    /*editClicked: function() {
-
+    editClicked: function() {
         this._super("editClicked");
-        this.$('[data-name="parent_name"]').attr('style', 'pointer-events:none;');
-        this.setButtonStates(this.STATE.EDIT);
-        this.action = 'edit';
-        this.toggleEdit(true);
-        this.setRoute('edit');
 
-    },*/
+        if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
+            this.setButtonStates(this.STATE.VIEW);
+            this.action = 'detail';
+            this.toggleEdit(false);
+            this.setRoute('');
+
+        }
+
+    },
     
     cancelClicked: function() {
 
@@ -372,7 +370,7 @@
     },
 
     fechascallsymeet: function(){
-        if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held' || (this.model.get('parent_meeting_c')!="" && this.model.get('parent_meeting_c')!=undefined)){
+        if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
             var self = this;
             self.noEditFields.push('date_start');
             self.noEditFields.push('date_end');
@@ -380,4 +378,5 @@
 
         }
     },
+
 })
