@@ -1987,11 +1987,11 @@
         // Cambiamos los id por Descripcion
         var postal_modelTemp1 = app.metadata.getPostalCode($('#postalHidden').val());
 
-        var strDireccion = Calle1 + $('.newNumInt').val() + $('.newNumExt').val() + $('.newColoniaTemp').val() + $('.newMunicipioTemp option:selected').text()
-            + $('.newEstadoTemp option:selected').text() + $('.newCiudadTemp').val() + postal_modelTemp1.name;
+        var strDireccion = Calle1 + $('.newNumInt').val() + $('.newNumExt').val() + $('.newColoniaTemp option:selected').text() + $('.newMunicipioTemp option:selected').text()
+            + $('.newEstadoTemp option:selected').text() + $('.newCiudadTemp option:selected').text() + postal_modelTemp1.name;
 
 
-        if (objDireccion != "" && objDireccion != undefined) {
+  /*      if (objDireccion != "" && objDireccion != undefined) {
             for (var i = 0; i < objDireccion.length; i++) {
                 var tempDireccion = objDireccion[i].calle + objDireccion[i].numint + objDireccion[i].numext + objDireccion[i].colonia
                     + objDireccion[i].municipio_code_label + objDireccion[i].estado_code_label + objDireccion[i].ciudad + objDireccion[i].postal_code_label;
@@ -2002,8 +2002,34 @@
 
             }
 
-        }
+        }*/
         // si regresa el valor verdadero significa que si esta duplicado por lo tanto no debe agregar la
+
+        var objDirecciones = $('.control-group.direccion')
+        var concatDirecciones = [];
+        var strDireccionTemp = "";
+        for (var i = 0; i < objDirecciones.length-1; i++) {
+            strDireccionTemp = objDirecciones.eq(i).find('.existingCalle').val() +
+                objDirecciones.eq(i).find('.existingNumExt').val() +
+                objDirecciones.eq(i).find('.existingNumInt').val() +
+                objDirecciones.eq(i).find('select.existingColoniaTemp option:selected').text() +
+                objDirecciones.eq(i).find('select.existingMunicipioTemp option:selected').text() +
+                objDirecciones.eq(i).find('select.existingEstadoTemp option:selected').text() +
+                objDirecciones.eq(i).find('select.existingCiudadTemp option:selected').text() +
+                objDirecciones.eq(i).find('#existingPostalInput').val();
+
+            concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
+
+        }
+
+        for (var j = 0; j < concatDirecciones.length; j++) {
+
+                if (concatDirecciones[j] ==strDireccion.replace(/\s/g, "").toUpperCase() ) {
+                    direccValida = true;
+                }
+
+
+        }
         return direccValida;
     },
 
