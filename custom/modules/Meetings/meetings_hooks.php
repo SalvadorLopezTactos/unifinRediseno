@@ -470,6 +470,15 @@ SQL;
                 }
             }
         }
+
+        //Restablece check-in/out time en creación
+        if (!$args[isUpdate]) {
+          global $db;
+          $update = " update meetings_cstm set check_in_time_c = null, check_out_time_c = null where id_c='{$bean->id}'";
+			    $execute = $db->query($update);
+          $GLOBALS['log']->fatal('Actualiza check_in_time_c & check_out_time_c');
+
+        }
     }
 
     function cambiAdmin ($bean = null, $event = null, $args = null)
