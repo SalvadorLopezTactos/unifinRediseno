@@ -1,4 +1,4 @@
-<?php
+ <?php
 /**
  * Created by PhpStorm.
  * User: Adrian Arauz
@@ -14,3 +14,12 @@ $hook_array['after_save'][] = Array(
     'Objetivos_minuta',          //Nombre de la Clase
     'obtenobjetivos'             //Nombre funcion
 );
+
+
+ $hook_array['after_save'][] = Array(
+     20,
+     'Actualiza la Relacion de la minuta y Reunion  correctamente',
+     'custom/modules/minut_Minutas/actualizaRelacionMinutaReunion.php',
+     'actualizaRelacionMinutaReunion',          //Nombre de la Clase
+     'actualizaRelacion'             //Nombre funcion
+ );
