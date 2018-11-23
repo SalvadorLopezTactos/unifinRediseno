@@ -127,7 +127,7 @@ $dependencies['Meetings']['readOnly'] = array
                 'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
             ),
         ),
-        array
+        /*array
         (
             'name' => 'ReadOnly',
             'params' => array
@@ -135,7 +135,7 @@ $dependencies['Meetings']['readOnly'] = array
                 'target' => 'parent_type',
                 'value' => 'or(equal($status,"Held"),equal($status,"Not Held"),contains($description,"Cita registrada automaticamente por CRM ya que ha sido asignado como"))',
             ),
-        ),
+        ),*/
         array
         (
             'name' => 'ReadOnly',

@@ -21,11 +21,11 @@
         this.model.on("change:status",_.bind(this.muestracampoResultado, this));
         //this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
         //this.model.addValidationTask('ValidaCuentaNoVacia',_.bind(this.ValidaCuentaNoVacia, this));
-        //Al dar click mandara a la vista de creacion correspondiente a la minuta 
+        //Al dar click mandara a la vista de creacion correspondiente a la minuta
         this.context.on('button:new_minuta_b:click', this.CreaMinuta,this);
-        
+
         this.context.on('button:getlocation:click', this.GetLocation, this);
-        
+
         this.model.on('sync', this.ValidaCuentNoVacia,this); //Validacion para creación de la minuta
         this.model.on('sync', this.showCheckin, this);
         /*@Jesus Carrillo
@@ -51,6 +51,7 @@
         }
         //Deshabilita campo "asignado a"
         $('div[data-name=assigned_user_name]').css("pointer-events", "none");
+        this.enableparentname();
     },
 
     /**
@@ -105,7 +106,7 @@
             }
     },
     CreaMinuta:function(){
-        
+
         if($('.objetivoSelect').length<=0){
             app.alert.show("Objetivo vacio",{
                     level: "error",
@@ -113,7 +114,7 @@
                     autoClose: false
                 });
         }else{
-            
+
             var model=App.data.createBean('minut_Minutas');
             // FECHA ACTUAL
             var startDate = new Date(this.model.get('date_end'));
@@ -192,17 +193,39 @@
     *El campo parent_name se habilita cuando esta vacio
     */
     enableparentname:function(){
-    if (this.model.get('parent_name') !=='' && this.model.get('parent_name')!==undefined){
-            var self = this;
-            self.noEditFields.push('parent_name');
+        var self = this;
+        if (this.model.get('parent_name') !=='' && this.model.get('parent_name')!==undefined){
+          self.noEditFields.push('parent_name');
         }
         else {
         this.$('[data-name="parent_name"]').attr('style', '');
-        //this.setButtonStates(this.STATE.EDIT);
         this.action = 'detail';
         this.toggleEdit(false);
-        //this.setRoute('detail');
         }
+
+        //Valida fechas
+        if (this.model.get('parent_meeting_c') || this.model.get('status')=='Held'|| this.model.get('status')=='Not Held' ) {
+          self.noEditFields.push('date_start');
+          self.noEditFields.push('date_end');
+          self.noEditFields.push('duration');
+        } else {
+          this.$('[data-name="date_start"]').attr('style', '');
+          this.$('[data-name="date_end"]').attr('style', '');
+          this.$('[data-name="duration"]').attr('style', '');
+          this.action = 'detail';
+          this.toggleEdit(false);
+        }
+
+        //Valida estado
+        if (this.model.get('status')=='Held'|| this.model.get('status')=='Not Held' ) {
+          self.noEditFields.push('status');
+        } else {
+          this.$('[data-name="status"]').attr('style', '');
+          this.action = 'detail';
+          this.toggleEdit(false);
+        }
+
+
     },
 
     /* @F. Javier G. Solar
@@ -287,7 +310,7 @@
         //Elimina ícono de lápiz para editar parent_name*
         $('[data-name="parent_name"]').find('.fa-pencil').remove();
         },
-        
+
         /*Victor Martinez Lopez
         *El estado no es editable de manera directa al dar click, solo cuando se presiona el boton editar
         */
@@ -320,7 +343,7 @@
      */
     disablestatus:function () {
         if(Date.parse(this.model.get('date_end'))>Date.now() || app.user.attributes.id!=this.model.get('assigned_user_id')){
-   
+
             $('span[data-name=status]').css("pointer-events", "none");
         }else{
             $('span[data-name=status]').css("pointer-events", "auto");
@@ -368,7 +391,7 @@
         }
         //self.model.save();
     },
-    
+
     //Obienete la plataforma del usuario en la cual haya hecho check-in
     GetPlatform: function(){
         var plataforma=navigator.platform;
@@ -378,7 +401,7 @@
             return 'iPad';
         }
     },
-    
+
     showPosition:function(position) {
         self.model.set('check_in_longitude_c', position.coords.longitude);
         self.model.set('check_in_latitude_c',position.coords.latitude);
@@ -410,7 +433,7 @@
         SUGAR.App.controller.context.reloadData({});
     },
     /*Victor Martinez Lopez 22-10-2018
-    El boton de Check-in solo será visible una ocasion para guardar datos 
+    El boton de Check-in solo será visible una ocasion para guardar datos
     y cuando el usuario asignado sea igual la ususario loggeado Pendiente de terminar
     */
     showCheckin:function(){
@@ -455,7 +478,7 @@
         var dateActualFormat = [m1, d1, y1].join('/');
         var fechaActual = Date.parse(dateActualFormat);
 
-        // Fecha termino en campo 
+        // Fecha termino en campo
         var dateend = new Date(this.model.get("date_end"));
         var d = dateend.getDate();
         var m = dateend.getMonth() + 1;
@@ -464,7 +487,7 @@
         var fechaendnew = Date.parse(fechaCompleta);
 
         var myField = this.getField("new_minuta");
-        if (this.model.get('parent_name')!='' && app.user.attributes.id==this.model.get('assigned_user_id') 
+        if (this.model.get('parent_name')!='' && app.user.attributes.id==this.model.get('assigned_user_id')
             && fechaActual==fechaendnew && this.model.get('status')=='Planned'){
             myField.listenTo(myField, "render", function () {
                 myField.show();
@@ -472,7 +495,7 @@
             });
         }
 
-        else { 
+        else {
             myField.listenTo(myField, "render", function () {
                 myField.hide();
                 console.log("field being rendered as: " + myField.tplName);
