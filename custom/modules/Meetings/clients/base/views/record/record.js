@@ -10,7 +10,6 @@
         this._super("initialize", [options]);
         this.events['click a[name=parent_name]'] = 'handleEdit';
         this.model.addValidationTask('ValidaObjetivos',_.bind(this.ValidaObjetivos,this));
-        this.events['click a[name=edit_button]'] = 'fechascallsymeet';
 
 
         this.on('render', this.disableparentsfields, this);
@@ -52,7 +51,6 @@
         }
         //Deshabilita campo "asignado a"
         $('div[data-name=assigned_user_name]').css("pointer-events", "none");
-        this.enableparentname();
     },
 
     /**
@@ -548,15 +546,5 @@
             });
         }
         callback(null, fields, errors);
-    },
-
-    fechascallsymeet: function(){
-        if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held' || (this.model.get('parent_meeting_c')!="" && this.model.get('parent_meeting_c')!=undefined)){
-            var self = this;
-            self.noEditFields.push('date_start');
-            self.noEditFields.push('date_end');
-            self.render();
-
-        }
     },
 })
