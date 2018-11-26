@@ -676,8 +676,8 @@ floatHeader: function(){
                             return;
                         }
 
-                        
-                        
+
+
                     }
                 }
 
@@ -1080,7 +1080,7 @@ cancelarBacklog: function(e){
                 }
 
             }
-            /*    
+            /*
             else{
                 $('input[type="checkbox"]').attr('checked', false);
             }
@@ -2109,7 +2109,7 @@ cancelarBacklog: function(e){
             currentMonth += 1;
         }
         if(currentDay > 20){
-            currentMonth += 2;
+            currentMonth += 1;
         }
 
         if(currentMonth == tempMes){
@@ -2121,7 +2121,7 @@ cancelarBacklog: function(e){
         }
 
             //Valida número de mes actual
-            var limitMonth = currentMonth + 2;
+            var limitMonth = currentMonth + 3;
             var nextMonth = 0;
             var nextYear = currentYear;
             if (limitMonth > 12) {
@@ -2173,7 +2173,7 @@ cancelarBacklog: function(e){
                         }
                     }
                 });
-                }            
+                }
 
                 if (this.cancelar_masivo_switch == "block") {
                     if(anio_masivo_popup > currentYear){
@@ -2197,7 +2197,7 @@ cancelarBacklog: function(e){
                         });
                     }
                 }
-            
+
 
 
 
@@ -2255,17 +2255,17 @@ cancelarBacklog: function(e){
             anio_popup = currentYear;
         }
 
-        
+
         if(typeof anio_masivo_popup === "undefined"){
             anio_masivo_popup = currentYear;
         }
-        
+
 
         if(currentDay <= 20){
             currentMonth += 1;
         }
         if(currentDay > 20){
-            currentMonth += 2;
+            currentMonth += 1;
         }
 
         if(currentMonth == tempMes){
@@ -2277,7 +2277,7 @@ cancelarBacklog: function(e){
         }
 
         //Valida número de mes actual
-        var limitMonth = currentMonth + 2;
+        var limitMonth = currentMonth + 3;
         var nextMonth = 0;
         var nextYear = currentYear;
         if (limitMonth > 12) {
@@ -2285,7 +2285,7 @@ cancelarBacklog: function(e){
             nextYear = currentYear + 1;
         }
 
-        currentMonth =currentMonthTemp +1; 
+        currentMonth =currentMonthTemp +1;
 
         var opciones_year = app.lang.getAppListStrings('anio_list');
         Object.keys(opciones_year).forEach(function(key){
@@ -2897,7 +2897,7 @@ cancelarBacklog: function(e){
         else if($('#motivo_de_cancelacion_masivo_popup').val() == "Competencia"){
             //$('#tdquienMasivo').show();
             //$('#tdproductoMasivo').hide();
-            
+
             $('#quienMasivoLabel').show();
             $('#productoMasivoLabel').hide();
             $('#quienMasivoVal').show();
@@ -3129,7 +3129,7 @@ cancelarBacklog: function(e){
                             app.alert.show('backlog_pasado', {
                                 level: 'error',
                             //messages: 'Esta operacion no puede moverse debido a que se encuentra ' + backlogEstatus,
-                            messages: 'Alguna de las operaciones no puede moverse debido a que se encuentra ' + backlogEstatus + 
+                            messages: 'Alguna de las operaciones no puede moverse debido a que se encuentra ' + backlogEstatus +
                             '<br>No. Backlog: '+ backlogNum,
                             autoClose: false
                         });
@@ -3164,7 +3164,7 @@ cancelarBacklog: function(e){
                             }else{
                                 if (rolAutorizacion == "Promotor"){
                                     //SI es un Backlo anterior o igual al mes corriente natural nadie puede
-                                    
+
                                     app.alert.show('backlog corriente', {
                                         level: 'error',
                                         //messages: 'Esta operacion no puede moverse debido a que el Backlog ya esta corriendo.',
@@ -3176,7 +3176,7 @@ cancelarBacklog: function(e){
                                     $('input[type="checkbox"][data-id='+backlogId+']').attr('checked',false);
 
                                     return;
-                                    
+
                                     //arr_checks_no_actualizar.push(this.array_checks[i]);
                                 }else{
                                     arr_checks_actualizar.push(this.array_checks[i]);
