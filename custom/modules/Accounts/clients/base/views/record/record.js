@@ -2713,7 +2713,7 @@
 
             }
             //Validar campos adionales
-            if (this.model.get('tipo_registro_c') == 'Persona' || this.model.get('tiporegistro_c')=='Prospecto') {
+            if (this.model.get('tipo_registro_c') == 'Persona' || this.model.get('tipo_registro_c')=='Prospecto') {
                 if (this.model.get('rfc_c') == "" || this.model.get('rfc_c') == null) {
                     errors['rfc_c'] = errors['rfc_c'] || {};
                     errors['rfc_c'].required = true;
