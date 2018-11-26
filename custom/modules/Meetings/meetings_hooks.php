@@ -246,7 +246,7 @@ SQL;
             $ultimo1 = $db->query($ultimo);
         }
 
-		    //Elimina Invitados
+		//Elimina Invitados
         if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == True)
         {
   			  $levadmin = <<<SQL
@@ -255,7 +255,7 @@ SQL;
   				AND user_id <> '{$bean->assigned_user_id}'
 SQL;
     			$levadmin1 = $db->query($levadmin);
-		    	//Cambia Admin
+/*		    	//Cambia Admin
 		    	$query = <<<SQL
   				SELECT created_by, modified_user_id
   				FROM meetings
@@ -273,15 +273,15 @@ SQL;
     					WHERE id = '{$bean->id}'
 SQL;
     				$levadmin1 = $db->query($levadmin);
-		    	}
-  		  }
-		    //Elimina Admin
-		    $levadmin = <<<SQL
-                UPDATE meetings_users SET deleted = 1
-                WHERE meeting_id = '{$bean->id}'
-			          AND user_id = '1'
+		    	}*/
+  		}
+		//Elimina Admin
+		$levadmin = <<<SQL
+            UPDATE meetings_users SET deleted = 1
+            WHERE meeting_id = '{$bean->id}'
+		    AND user_id = '1'
 SQL;
-		    $levadmin1 = $db->query($levadmin);
+		$levadmin1 = $db->query($levadmin);
     }
 
     //@Jesus Carrillo
