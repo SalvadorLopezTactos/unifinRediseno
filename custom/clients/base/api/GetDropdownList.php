@@ -28,7 +28,7 @@ class GetDropdownList extends SugarApi
                 //endpoint variables
                 'pathVars' => array('method', 'list_name'),
                 //method to call
-                'method' => 'getDropdownList',
+                'method' => 'getDropdownListMethod',
                 //short help string to be displayed in the help documentation
                 'shortHelp' => 'Método que obtiene clave => valor de la lista pasada como parámetro en la URL',
                 //long help to be displayed in the help documentation
@@ -50,7 +50,7 @@ class GetDropdownList extends SugarApi
      * @return array $list_values Array con los valores de la lista pasada como parámetro
      * @throws SugarApiExceptionInvalidParameter
      */
-    public function getDropdownList($api, $args)
+    public function getDropdownListMethod($api, $args)
     {
         global $app_list_strings;
         $list_name=$args['list_name'];
@@ -71,4 +71,3 @@ class GetDropdownList extends SugarApi
 }
 
 ?>
-

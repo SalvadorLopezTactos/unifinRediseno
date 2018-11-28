@@ -17,13 +17,13 @@ class GenerarCURP extends SugarApi
                 'reqType' => 'POST',
                 'path' => array('Accounts', 'GenerarCURP'),
                 'pathVars' => array('',''),
-                'method' => 'GenerarCURP',
+                'method' => 'GenerarCURPMethod',
                 'shortHelp' => 'Genera CURP de la persona',
             ),
         );
     }
 
-    public function GenerarCURP($api, $args)
+    public function GenerarCURPMethod($api, $args)
     {
         global $current_user;
         try
@@ -50,4 +50,3 @@ class GenerarCURP extends SugarApi
     }
 
 }
-
