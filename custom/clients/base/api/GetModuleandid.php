@@ -1,4 +1,4 @@
-<?php  
+<?php
 
 /**Victor Martinez Lopez 10-10-2018
 * Obtiene el modulo el id del elemento de una lista y su etiqueta
@@ -18,7 +18,7 @@ class GetModuleandid extends SugarApi
                //endpoint variables
                'pathVars' => array('module','field', 'id'),
                //method to call
-               'method' => 'GetModuleAndID',
+               'method' => 'GetModuleAndIDMethod',
                //short help string to be displayed in the help documentation
                'shortHelp' => 'Api para obtener el id de un elemento de la lista y la etiqueta',
                //long help to be displayed in the help documentation
@@ -29,7 +29,7 @@ class GetModuleandid extends SugarApi
 
   }
 
-  public function GetModuleAndID($api, $args){
+  public function GetModuleAndIDMethod($api, $args){
     //Recuperar variables
     $modulo = $args['module'];
     $campo = $args['field'];
