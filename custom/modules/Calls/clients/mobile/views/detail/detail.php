@@ -42,10 +42,9 @@ array (
                   'wireless_edit_only' => true,
                 ),
               ),
-              1 => 'date_start',
-              2 => 'direction',
-              3 => 'status',
-              4 => 
+              1 => 'status',
+              2 => 'date_start',
+              3 => 
               array (
                 'name' => 'duration',
                 'type' => 'fieldset',
@@ -80,9 +79,41 @@ array (
                   ),
                 ),
               ),
+              4 => 'direction',
               5 => 'description',
               6 => 'parent_name',
               7 => 'assigned_user_name',
+              8 => 
+              array (
+                'name' => 'tct_resultado_llamada_ddw_c',
+                'label' => 'LBL_TCT_RESULTADO_LLAMADA_DDW',
+              ),
+              9 => 
+              array (
+                'name' => 'tct_motivo_ilocalizable_ddw_c',
+                'label' => 'LBL_TCT_MOTIVO_ILOCALIZABLE_DDW',
+              ),
+              10 => 
+              array (
+                'name' => 'tct_fecha_cita_dat_c',
+                'label' => 'LBL_TCT_FECHA_CITA_DAT',
+              ),
+              11 => 
+              array (
+                'name' => 'tct_usuario_cita_rel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_USUARIO_CITA_REL',
+              ),
+              12 => 
+              array (
+                'name' => 'tct_fecha_seguimiento_dat_c',
+                'label' => 'LBL_TCT_FECHA_SEGUIMIENTO_DAT',
+              ),
+              13 => 
+              array (
+                'name' => 'tct_motivo_desinteres_ddw_c',
+                'label' => 'LBL_TCT_MOTIVO_DESINTERES_DDW',
+              ),
             ),
           ),
         ),

@@ -1,0 +1,35 @@
+<!--
+/*
+ *  AF - 2018-10-23
+ *  CustomField - Grid
+ */
+-->
+<div style="border: 2px solid #58749a;border-radius: 12px;padding:10px;">
+  <!-- Table list-->
+  <div class="list-view">
+    <table id="tableResult" class="table table-striped">
+        <thead>
+            <tr bgcolor="#001441" style="color:#fff">
+                <th>Compromiso</th>
+                <th>Responsable</th>
+                <th>Fecha</th>
+            </tr>
+        </thead>
+        <tbody>
+          {{#each myData2.records}}
+            <tr>
+                <td class="campo1Select">
+                  {{name}}
+                </td>
+                <td class="campo2Select">
+                  {{assigned_user_name}}
+                </td>
+                <td class="campo3Select">
+                  {{tct_fecha_compromiso_c}}
+                </td>
+            </tr>
+          {{/each}}
+        </tbody>
+    </table>
+  </div>
+</div>

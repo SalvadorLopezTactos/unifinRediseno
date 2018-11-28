@@ -1,5 +1,5 @@
 <?php
-// created: 2018-02-15 18:33:16
+// created: 2018-08-21 11:14:48
 $viewdefs['Opportunities']['base']['view']['subpanel-for-opportunities-opportunities_opportunities_1'] = array (
   'type' => 'subpanel-list',
   'rowactions' => 
@@ -49,12 +49,19 @@ $viewdefs['Opportunities']['base']['view']['subpanel-for-opportunities-opportuni
         ),
         2 => 
         array (
+          'name' => 'tct_etapa_ddw_c',
+          'label' => 'LBL_TCT_ETAPA_DDW_C',
+          'enabled' => true,
+          'default' => true,
+        ),
+        3 => 
+        array (
           'name' => 'estatus_c',
           'label' => 'LBL_ESTATUS',
           'enabled' => true,
           'default' => true,
         ),
-        3 => 
+        4 => 
         array (
           'name' => 'amount',
           'label' => 'LBL_LIKELY',
@@ -68,7 +75,7 @@ $viewdefs['Opportunities']['base']['view']['subpanel-for-opportunities-opportuni
           'currency_format' => true,
           'default' => true,
         ),
-        4 => 
+        5 => 
         array (
           'name' => 'assigned_user_name',
           'target_record_key' => 'assigned_user_id',
@@ -77,7 +84,7 @@ $viewdefs['Opportunities']['base']['view']['subpanel-for-opportunities-opportuni
           'enabled' => true,
           'default' => true,
         ),
-        5 => 
+        6 => 
         array (
           'name' => 'date_closed',
           'label' => 'LBL_DATE_CLOSED',

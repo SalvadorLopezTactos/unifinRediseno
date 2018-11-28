@@ -63,6 +63,12 @@
             <td colspan="2">
                 <input id="filtroCliente" type="text" value="">
             </td>
+            <td>
+                 <th>Persona / Proveedor</th>
+            </td>
+            <td>
+                <input id="persona" type="checkbox" value="True" checked>
+            </td>
             <td><input type="button" value="Buscar" id="btn_Cuentas" class="btn btn-primary" /></td>
         </tr>
         <tr>
@@ -133,9 +139,9 @@
                 <td colspan="4"></td>
                 <td>
                     <div class="btn-group">
-                        <a class="btn fa icon-caret-left" id="previous_offset"></a>
+                        <a class="btn fa fa-caret-left" id="previous_offset"></a>
                         <a class="btn disabled" id="offset_value" from_set="" to_set="" total="{{../this.total}}" ></a>
-                        <a class="btn fa icon-caret-right" id="next_offset"></a>
+                        <a class="btn fa fa-caret-right" id="next_offset"></a>
                     </div>
                 </td>
             </tr>

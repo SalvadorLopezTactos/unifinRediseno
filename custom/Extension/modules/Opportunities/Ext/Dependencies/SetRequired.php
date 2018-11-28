@@ -64,13 +64,14 @@ $dependencies['Opportunities']['anio_c_required'] = array(
 $dependencies['Opportunities']['f_tipo_factoraje_c_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
+    'triggerFields' => array('f_tipo_factoraje_c','tct_oportunidad_perdida_chk_c'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'SetRequired',
             'params' => array(
                 'target' => 'f_tipo_factoraje_c',
-                'value' => 'equal($tipo_producto_c,"4")',
+                'value' => 'and(equal($tipo_producto_c,"4"),equal($tct_oportunidad_perdida_chk_c,false))',
             ),
         ),
     ),
@@ -78,13 +79,14 @@ $dependencies['Opportunities']['f_tipo_factoraje_c_required'] = array(
 $dependencies['Opportunities']['f_aforo_c_required'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
+    'triggerFields' => array('f_aforo_c','tct_oportunidad_perdida_chk_c'),
     'onload' => true,
     'actions' => array(
         array(
             'name' => 'SetRequired',
             'params' => array(
                 'target' => 'f_aforo_c',
-                'value' => 'equal($tipo_producto_c,"4")',
+                'value' => 'and(equal($tipo_producto_c,"4"),equal($tct_oportunidad_perdida_chk_c,false))',
             ),
         ),
     ),

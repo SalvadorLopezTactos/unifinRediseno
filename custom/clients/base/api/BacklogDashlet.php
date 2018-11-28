@@ -265,7 +265,7 @@ case lb.equipo when '1' then 1 when '2' then 2 when '3' then 3 when '4' then 4 w
 when 'MTY' then 10 when 'HER' then 11 when 'CHI' then 12 when 'GDL' then 13 when 'QRO' then 14 when 'LEO' then 15
 when 'PUE' then 16 when 'VER' then 17  when 'CUN' then 18 when 'CAN' then 18 when 'MER' then 19 when 'TOL' then 20 when 'CASA' then 21 else 50 end AS ordenEquipo,
 case lb.estatus_de_la_operacion when 'Comprometida' then 1 when 'Cancelada' then 2 when 'Activa' then 3
-when 'Enviada a otro mes' then 4 when 'Enviada a otro mes - Automático' then 5 when 'Cancelada por cliente' then 6 else 10 end as ordenEstatus,
+when 'Enviada a otro mes' then 4 when 'Enviada a otro mes - Automï¿½tico' then 5 when 'Cancelada por cliente' then 6 else 10 end as ordenEstatus,
 uc.iniciales_c AS iniciales, IFNULL(blcs.monto_activado_anticipado_c,0) AS monto_anticipado, IFNULL(blcs.ri_activada_anticipada_c,0) AS ri_anticipada,
 IFNULL(monto_disp_vencido_c,0) disp_vencido, acc.idcliente_c idcliente, monto_prospecto_c, monto_credito_c, monto_rechazado_c, monto_sin_solicitud_c, monto_con_solicitud_c,
 ri_prospecto_c, ri_credito_c, ri_rechazada_c, ri_sin_solicitud_c, ri_con_solicitud_c,
@@ -564,6 +564,9 @@ SQL;
 
         $MesAnterior = $args['data']['MesAnterior'];
         $AnioAnterior = $args['data']['AnioAnterior'];
+        $cam_competencia =$args['data']['Competencia'];
+        $cam_producto =$args['data']['Producto'];
+
 
         $monto_cancelado = $this->cleanNumber($monto_cancelado);
         $renta_cancelada = $this->cleanNumber($renta_cancelada);
@@ -571,13 +574,17 @@ SQL;
         $backlog = BeanFactory::retrieveBean('lev_Backlog', $backlogId);
         $backlog->description .= "\r\n" . $current_user->first_name . " " . $current_user->last_name . " - " . $todayDate . ": " . $comentarios_de_cancelacion;
 
-        if($motivo_de_cancelacion != "Cliente no interesado" && $motivo_de_cancelacion != "No viable"){
-            //Reevaluamos el tipo de operación que tendra el nuevo BL
+        /* AF- 2018-10-24
+         *  Se modifica condiciÃ³n 
+        //if($motivo_de_cancelacion != "Cliente no interesado" && $motivo_de_cancelacion != "No viable"){
+        */
+        if($motivo_de_cancelacion == 'Mes posterior'){
+            //Reevaluamos el tipo de operaciï¿½n que tendra el nuevo BL
             $currentYear = date("Y");
             $currentDay = date("d");
             $BacklogElaboracion = date("m") + 1;
 
-            //Obtiene el Backlog en revisión
+            //Obtiene el Backlog en revisiï¿½n
             if($currentDay > 20){  //Si ya pasamos del dia 20 ya se esta planeando el BL de 2 meses naturales adelante
                 $BacklogElaboracion += 1;
             }
@@ -613,7 +620,7 @@ SQL;
             $callApi->unifinPutCall($host,$fields);
         }
 
-        //Obtiene el Backlog en revisión
+        //Obtiene el Backlog en revisiï¿½n
         $currentDay = date("d");
         $BacklogElaboracion = date("m") + 1;
 
@@ -632,6 +639,8 @@ SQL;
         $backlog->monto_real_logrado = 0;
         $backlog->renta_inicial_real = 0;
         $backlog->motivo_de_cancelacion = $motivo_de_cancelacion;
+        $backlog->tct_competencia_quien_txf_c = $cam_competencia ;
+        $backlog->tct_que_producto_txf_c = $cam_producto;
         $backlog->save();
     }
 
@@ -664,12 +673,12 @@ SQL;
                 $backlog->description .= $current_user->first_name . " " . $current_user->last_name . " - " . $todayDate . ": " . $comentarios;
             }
 
-            //Evalua el tipo de operación
+            //Evalua el tipo de operaciï¿½n
             $currentYear = date("Y");
             $currentDay = date("d");
             $BacklogElaboracion = date("m") + 1;
 
-            //Obtiene el Backlog en revisión
+            //Obtiene el Backlog en revisiï¿½n
             if($currentDay > 20){  //Si ya pasamos del dia 20 ya se esta planeando el BL de 2 meses naturales adelante
                 $BacklogElaboracion += 1;
             }
@@ -738,7 +747,7 @@ SQL;
                 $currentMonth = date("m");
                 $BacklogElaboracion = date("m") + 1;
 
-                //Obtiene el Backlog en revisión
+                //Obtiene el Backlog en revisiï¿½n
                 if($currentDay > 20){  //Si ya pasamos del dia 20 ya se esta planeando el BL de 2 meses naturales adelante
                     $BacklogElaboracion += 1;
                 }
@@ -746,11 +755,11 @@ SQL;
                     $BacklogElaboracion = $BacklogElaboracion - 12;
                 }
 
-                $GLOBALS['log']->fatal("Mes de Backlog en elaboración: " . print_r($BacklogElaboracion,1));
+                $GLOBALS['log']->fatal("Mes de Backlog en elaboraciï¿½n: " . print_r($BacklogElaboracion,1));
 
-                //En caso de ser Bl de Carga general, asignar el tipo de operación que corresponde
+                //En caso de ser Bl de Carga general, asignar el tipo de operaciï¿½n que corresponde
                 if($backlog->tipo_de_operacion == "Carga General"){
-                    //Evalua el tipo de operación
+                    //Evalua el tipo de operaciï¿½n
                     if ($anio <= $currentYear){
                         if ($mes >= $BacklogElaboracion){
                             $backlog->tipo_de_operacion = 'Original';
@@ -773,7 +782,7 @@ SQL;
                             $response = "Esta Operacion ya esta comprometida y solo podra ser movida por un Director en periodo de revison";
                         }
                     }else{ // Si no se esta en periodo de revision
-                        // Si se esta moviendo un BL del BL en elaboración o posterior
+                        // Si se esta moviendo un BL del BL en elaboraciï¿½n o posterior
                         //if ($backlog->mes >= $BacklogElaboracion){
                         if ($anio > $backlog->anio || ($anio==$backlog->anio && $mes >= $backlog->mes)){
                             $backlog->mes = $mes;
@@ -965,9 +974,9 @@ SQL;
         $fp = fopen($csvfile, 'w');
 
         // output the column headings
-        fputcsv($fp, array('ESTATUS', 'MES','EQUIPO', 'ZONA', 'PROMOTOR', 'ID CLIENTE','CLIENTE', 'N° BACKLOG', 'BIEN',  'LINEA DISPONIBLE',
-            'MONTO ORIGINAL', 'RI ORIGINAL', 'DIFERENCIA', 'BACKLOG', 'RENTA INICIAL', 'BACKLOG ACTUAL', 'COLOCACIÓN REAL', 'RI REAL', 'MONTO CANCELADO',
-            'RI CANCELADA',  'TIPO DE OPERACIÓN','ETAPA INICIO MES', 'ETAPA', 'SOLICITUD',
+        fputcsv($fp, array('ESTATUS', 'MES','EQUIPO', 'ZONA', 'PROMOTOR', 'ID CLIENTE','CLIENTE', 'Nï¿½ BACKLOG', 'BIEN',  'LINEA DISPONIBLE',
+            'MONTO ORIGINAL', 'RI ORIGINAL', 'DIFERENCIA', 'BACKLOG', 'RENTA INICIAL', 'BACKLOG ACTUAL', 'COLOCACIï¿½N REAL', 'RI REAL', 'MONTO CANCELADO',
+            'RI CANCELADA',  'TIPO DE OPERACIï¿½N','ETAPA INICIO MES', 'ETAPA', 'SOLICITUD',
             'PROSPECTO','CREDITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','RI PROSPECTO','RI CREDITO','RI RECHAZADA','RI SIN SOLICITUD','RI CON SOLICITUD', 'TASA', 'COMISION', 'DIF RESIDUALES', 'COLOCACION PIPELINE'));
 
         foreach ($args['data']['backlogs'] as $key => $values) {

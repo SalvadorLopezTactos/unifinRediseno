@@ -1,0 +1,51 @@
+<!--
+/*
+ *  AF - 2018-10-23
+ *  CustomField - Grid
+ */
+-->
+<div style="border: 2px solid #58749a;border-radius: 12px;padding:10px;">
+  <!-- Table list-->
+  <div class="list-view">
+    <table id="tableParticipantes" class="table table-striped">
+        <thead>
+            <tr bgcolor="#001441" style="color:#fff">
+                <th width="10%">&nbsp;</th>
+                <th width="30%">Participante</th>
+                <th width="30%">Correo</th>
+                <th width="20%">Teléfono</th>
+                <th width="10%">Asistencia</th>
+            </tr>
+        </thead>
+        <tbody>
+          {{#each mParticipantes.participantes}}
+            <tr>
+                <td>
+                  {{#if unifin}}
+                    <button class="btn btn-primary">UNIFIN</button>
+                  {{else}}
+                    <button class="btn btn-inverse">Cuenta</button>
+                  {{/if}}
+                </td>
+                <td class="campo1SelectP">
+                  {{nombres}} {{apaterno}} {{amaterno}}
+                </td>
+                <td class="campo2SelectP">
+                  {{correo}}
+                </td>
+                <td class="campo3SelectP">
+                  {{telefono}}
+                </td>
+                <td class="CheckActionP" style="text-align:center" >
+                  {{#if asistencia}}
+                    <i class="fa fa-check" style="color: #33800d; font-size:20px"></i>
+                  {{else}}
+                    <i class="fa fa-check" style="font-size:20px"></i>
+                  {{/if}}
+                </td>
+            </tr>
+          {{/each}}
+        </tbody>
+    </table>
+  </div>
+</div>

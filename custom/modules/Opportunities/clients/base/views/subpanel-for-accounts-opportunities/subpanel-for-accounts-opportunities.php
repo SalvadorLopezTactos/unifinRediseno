@@ -1,5 +1,5 @@
 <?php
-// created: 2018-02-16 20:36:01
+// created: 2018-09-14 17:24:21
 $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'] = array (
   'type' => 'subpanel-list',
   'rowactions' => 
@@ -42,8 +42,8 @@ $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'
         ),
         1 => 
         array (
-          'name' => 'estatus_c',
-          'label' => 'LBL_ESTATUS',
+          'name' => 'tct_estapa_subetapa_txf_c',
+          'label' => 'LBL_TCT_ESTAPA_SUBETAPA_TXF',
           'enabled' => true,
           'default' => true,
         ),
@@ -87,13 +87,6 @@ $viewdefs['Opportunities']['base']['view']['subpanel-for-accounts-opportunities'
           'target_record_key' => 'assigned_user_id',
           'target_module' => 'Employees',
           'label' => 'LBL_LIST_ASSIGNED_TO_NAME',
-          'enabled' => true,
-          'default' => true,
-        ),
-        6 => 
-        array (
-          'name' => 'fecha_estimada_cierre_c',
-          'label' => 'LBL_FECHA_ESTIMADA_CIERRE',
           'enabled' => true,
           'default' => true,
         ),

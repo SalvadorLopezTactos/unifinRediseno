@@ -1,21 +1,20 @@
 <?php
-// created: 2017-10-28 12:44:08
+// created: 2018-09-14 17:24:21
 $subpanel_layout['list_fields'] = array (
   'name' => 
   array (
     'name' => 'name',
     'vname' => 'LBL_LIST_OPPORTUNITY_NAME',
     'widget_class' => 'SubPanelDetailViewLink',
-    'width' => '10%',
+    'width' => 10,
     'default' => true,
   ),
-  'estatus_c' => 
+  'tct_estapa_subetapa_txf_c' => 
   array (
-    'type' => 'enum',
+    'type' => 'varchar',
+    'vname' => 'LBL_TCT_ESTAPA_SUBETAPA_TXF',
+    'width' => 10,
     'default' => true,
-    'studio' => 'visible',
-    'vname' => 'LBL_ESTATUS',
-    'width' => '10%',
   ),
   'monto_c' => 
   array (
@@ -28,28 +27,28 @@ $subpanel_layout['list_fields'] = array (
     'default' => true,
     'vname' => 'LBL_MONTO',
     'currency_format' => true,
-    'width' => '10%',
+    'width' => 10,
   ),
   'amount' => 
   array (
     'type' => 'currency',
-    'readonly' => false,
     'related_fields' => 
     array (
       0 => 'currency_id',
       1 => 'base_rate',
     ),
+    'readonly' => false,
     'vname' => 'LBL_LIKELY',
     'currency_format' => true,
-    'width' => '10%',
+    'width' => 10,
     'default' => true,
   ),
   'vigencialinea_c' => 
   array (
     'type' => 'date',
-    'default' => true,
     'vname' => 'LBL_VIGENCIALINEA',
-    'width' => '10%',
+    'width' => 10,
+    'default' => true,
   ),
   'assigned_user_name' => 
   array (
@@ -58,15 +57,8 @@ $subpanel_layout['list_fields'] = array (
     'widget_class' => 'SubPanelDetailViewLink',
     'target_record_key' => 'assigned_user_id',
     'target_module' => 'Employees',
-    'width' => '10%',
+    'width' => 10,
     'default' => true,
-  ),
-  'fecha_estimada_cierre_c' => 
-  array (
-    'type' => 'date',
-    'default' => true,
-    'vname' => 'LBL_FECHA_ESTIMADA_CIERRE',
-    'width' => '10%',
   ),
   'currency_id' => 
   array (

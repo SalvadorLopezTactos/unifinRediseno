@@ -20,10 +20,29 @@
         this.model.on("change:monto_final_comprometido_c", _.bind(this.setRI, this));
         //this.model.on("change:ri_final_comprometida_c", _.bind(this.setEtapa, this));
         this.model.addValidationTask('igualaMontosFinales', _.bind(this.igualaMontoFinalOpp, this));
+
+        // validaci√≥n de los campos con formato n√∫merico
+        this.events['keydown [name=dif_residuales_c]'] = 'checkInVentas';
+        this.events['keydown [name=tasa_c]'] = 'checkInVentas';
+        this.events['keydown [name=comision_c]'] = 'checkInVentas';
+        this.events['keydown [name=monto_comprometido]'] = 'checkInVentas';
+        this.events['keydown [name=porciento_ri]'] = 'checkInVentas';
+        this.events['keydown [name=renta_inicial_comprometida]'] = 'checkInVentas';
+
+
+        //Se a√±ade evento para establecer registro como Solo Lectura
+        this.model.on('sync', this.setNoEditAllFields, this);
+
+
     },
 
     _render: function() {
         this._super("_render");
+
+        //Se ocultan banderas
+        $('[data-name="tct_carga_masiva_chk_c"]').hide();
+        $('[data-name="tct_bloqueo_txf_c"]').hide();
+
 
         if (this.model.dataFetched) {
             this.$('[data-name=editar]').hide();
@@ -68,7 +87,155 @@
                 //this.model.set("region", modelo.get("region_c"));
             },this)
         });
+
     },
+
+    /**
+     * Establecer todo el registro como solo lectura cuando los campos bandera son = true
+     * Estos campos bandera son actualizados a trav√©s de un Job
+     * */
+    setNoEditAllFields:function(){
+
+        //Ocultando banderas
+        $('.record-cell[data-name="tct_carga_masiva_chk_c"]').addClass('hide');
+        $('.record-cell[data-name="tct_bloqueo_txf_c"]').addClass('hide');
+
+        //Estableciendo registro completo como solo lectura
+        //Obtener valores para validar bloqueo
+        var carga_masiva = this.model.get('tct_carga_masiva_chk_c');
+        var bloqueo = this.model.get('tct_bloqueo_txf_c');
+
+        //Validaci√≥n para establecer como solo lectura todos los campos del registro
+        if (carga_masiva && bloqueo=="1")
+        {
+            //Se establecen todos los campos como solo lectura
+            $('.record-cell').attr("style","pointer-events:none");
+            //Excepto los campos de tipo relacionado para permitir la navegaci√≥n hacia el registro
+            $('.record-cell[data-type="relate"]').removeAttr( "style" );
+            $('.record-cell[data-name="date_entered_by"]').removeAttr( "style" );
+            $('.record-cell[data-name="date_modified_by"]').removeAttr( "style" );
+
+            //Se oculta bot√≥n de edici√≥n
+            $('[name="edit_button"]').hide();
+        }
+
+    },
+
+    checkInVentas:function (evt) {
+        var enteros=this.checkmoneyint(evt);
+        var decimales=this.checkmoneydec(evt);
+        $.fn.selectRange = function(start, end) {
+            if(!end) end = start;
+            return this.each(function() {
+                if (this.setSelectionRange) {
+                    this.focus();
+                    this.setSelectionRange(start, end);
+                } else if (this.createTextRange) {
+                    var range = this.createTextRange();
+                    range.collapse(true);
+                    range.moveEnd('character', end);
+                    range.moveStart('character', start);
+                    range.select();
+                }
+            });
+        };//funcion para posicionar cursor
+
+        (function ($, undefined) {
+            $.fn.getCursorPosition = function() {
+                var el = $(this).get(0);
+                var pos = [];
+                if('selectionStart' in el) {
+                    pos = [el.selectionStart,el.selectionEnd];
+                } else if('selection' in document) {
+                    el.focus();
+                    var Sel = document.selection.createRange();
+                    var SelLength = document.selection.createRange().text.length;
+                    Sel.moveStart('character', -el.value.length);
+                    pos = Sel.text.length - SelLength;
+                }
+                return pos;
+            }
+        })(jQuery); //funcion para obtener cursor
+        var cursor=$(evt.handleObj.selector).getCursorPosition();//setear cursor
+
+
+        if (enteros == "false" && decimales == "false") {
+            if(cursor[0]==cursor[1]) {
+                return false;
+            }
+        }else if (typeof enteros == "number" && decimales == "false") {
+            if (cursor[0] < enteros) {
+                $(evt.handleObj.selector).selectRange(cursor[0], cursor[1]);
+            } else {
+                $(evt.handleObj.selector).selectRange(enteros);
+            }
+        }
+
+    },
+
+    checkmoneyint: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var digitos = $input.val().split('.');
+        if($input.val().includes('.')) {
+            var justnum = /[\d]+/;
+        }else{
+            var justnum = /[\d.]+/;
+        }
+        var justint = /^[\d]{0,14}$/;
+
+        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return "false";
+        }
+
+        if(typeof digitos[0]!="undefined") {
+            if (justint.test(digitos[0]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
+                console.log('no se cumplen enteros')
+                if(!$input.val().includes('.')) {
+                    $input.val($input.val()+'.')
+                }
+                return "false";
+
+            } else {
+                return digitos[0].length;
+            }
+        }
+    },
+
+    checkmoneydec: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var digitos = $input.val().split('.');
+        if($input.val().includes('.')) {
+            var justnum = /[\d]+/;
+        }else{
+            var justnum = /[\d.]+/;
+        }
+        var justdec = /^[\d]{0,1}$/;
+
+        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return "false";
+        }
+        if(typeof digitos[1]!="undefined") {
+            if (justdec.test(digitos[1]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
+                console.log('no se cumplen dec')
+                return "false";
+            } else {
+                return "true";
+            }
+        }
+    },
+
 
     getCurrentYearMonth: function(){
 
@@ -201,7 +368,7 @@
         var currentMonth = (new Date).getMonth() + 1;
         var mesBL = this.model.get("mes") - 2;
 
-        //CVV se cambia la validaciÛn para permitir actualizar el BL hasta antes dek dÌa 20
+        //CVV se cambia la validaciÔøΩn para permitir actualizar el BL hasta antes dek dÔøΩa 20
         //if (this.model.get("estatus_de_la_operacion") != 'Comprometida') {
         if (this.model.get("mes") >= ElaborationBacklog && this.model.get("estatus_de_la_operacion") == 'Comprometida'){
             if(currentDay <= 20 || (currentMonth == mesBL && currentDay > 20) || this.model.get("mes") > ElaborationBacklog){
@@ -219,7 +386,7 @@
         var currentMonth = (new Date).getMonth() + 1;
         var mesBL = this.model.get("mes") - 2;
 
-        //CVV se cambia la validaciÛn para permitir actualizar el BL hasta antes dek dÌa 20
+        //CVV se cambia la validaciÔøΩn para permitir actualizar el BL hasta antes dek dÔøΩa 20
         //if (this.model.get("estatus_de_la_operacion") != 'Comprometida'){
         if (this.model.get("mes") >= ElaborationBacklog && this.model.get("estatus_de_la_operacion") == 'Comprometida'){
             if(currentDay <= 20 || (currentMonth == mesBL && currentDay > 20) || this.model.get("mes") > ElaborationBacklog){
@@ -247,7 +414,7 @@
                 this.model.set("renta_inicial_comprometida",this.model.get("ri_final_comprometida_c"));
                 app.alert.show("Moto Modificado", {
                     level: "info",
-                    title: "El Monto de Operacion se igualara al Monto Final ya que el Backlog aun esta en revisiÛn.",
+                    title: "El Monto de Operacion se igualara al Monto Final ya que el Backlog aun esta en revisi√≥n.",
                     autoClose: false
                 });
             }
@@ -258,11 +425,11 @@
 
 
     getElaborationBacklog: function(){
-        //Obtiene el Backlog en elaboraciÛn
+        //Obtiene el Backlog en elaboraciÔøΩn
         var currentDay = (new Date).getDate();
         var BacklogCorriente = (new Date).getMonth()+1;
 
-        if(currentDay > 20){ // Si ya cerro el periodo de elaboraciÛn de promotor, el Backlog del siguiente mes (natural) se encuentra corriendo
+        if(currentDay > 20){ // Si ya cerro el periodo de elaboraciÔøΩn de promotor, el Backlog del siguiente mes (natural) se encuentra corriendo
             BacklogCorriente += 2;
         }else{
             BacklogCorriente += 1;
@@ -276,7 +443,7 @@
     },
 
     setEtapa: function(){
-        //Se recalcula la distribuciÛn de montos en cada etapa
+        //Se recalcula la distribuciÔøΩn de montos en cada etapa
         var RI = 0;
         if (parseFloat(this.model.get("monto_final_comprometido_c")) > 0){
             var RI = (parseFloat(this.model.get("ri_final_comprometida_c")) / parseFloat(this.model.get("monto_final_comprometido_c"))).toFixed(2);

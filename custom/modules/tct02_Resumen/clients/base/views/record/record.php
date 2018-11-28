@@ -474,6 +474,40 @@ array (
           ),
           9 => 
           array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL8',
+            'label' => 'LBL_RECORDVIEW_PANEL8',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'tct_noticia_general_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_NOTICIA_GENERAL',
+              ),
+              1 => 
+              array (
+                'name' => 'tct_noticia_sector_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_NOTICIA_SECTOR',
+              ),
+              2 => 
+              array (
+                'name' => 'tct_noticia_region_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_NOTICIA_REGION',
+              ),
+              3 => 
+              array (
+              ),
+            ),
+          ),
+          10 => 
+          array (
             'name' => 'panel_hidden',
             'label' => 'LBL_SHOW_MORE',
             'hide' => true,

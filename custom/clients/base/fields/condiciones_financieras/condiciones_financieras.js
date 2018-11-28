@@ -1,3 +1,4 @@
+
 /**
  * Created by Levementum on 3/8/2016.
  * User: jgarcia@levementum.com
@@ -20,13 +21,12 @@
 
     initialize: function (options) {
 
-        window.contador=0;        
-        self = this;
+        window.contador=0;
         options = options || {};
         options.def = options.def || {};
-
         this._super('initialize', [options]);
-        
+        self = this;
+
         var activo_list = app.lang.getAppListStrings('idactivo_list');
         var activo_keys = app.lang.getAppListKeys('idactivo_list');
         var activo_list_html = '<option value=""></option>';
@@ -61,43 +61,46 @@
         var pull_condicionFinanciera_url = app.api.buildURL('lev_CondicionesFinancieras',
             null, null, api_params);
 
-        app.api.call('READ', pull_condicionFinanciera_url, {}, {
-            success: function (data) {
-                var activo_list = app.lang.getAppListStrings('idactivo_list');
-                var plazo_list = app.lang.getAppListStrings('plazo_0');
-                for (var i = 0; i < data.records.length; i++) {
-                    self.value[i] = data.records[i].idactivo;
-                    //add label for tpl use
-
-
-                    data.records[i].activo_label = activo_list[data.records[i].idactivo];
-                    data.records[i].plazo_label = plazo_list[data.records[i].plazo];
-
-                    if (data.records[i].deposito_en_garantia == true) {
-                        data.records[i].detail_deposito_en_garantia_checked = "checked";
+        try
+        {
+            app.api.call('READ', pull_condicionFinanciera_url, {}, {
+                success: function (data) {
+                            
+                    var activo_list = app.lang.getAppListStrings('idactivo_list');
+                    var plazo_list = app.lang.getAppListStrings('plazo_0');
+                    for (var i = 0; i < data.records.length; i++) {
+                        //self.value[i] = data.records[i].idactivo;
+                        //add label for tpl use
+                        data.records[i].activo_label = activo_list[data.records[i].idactivo];
+                        data.records[i].plazo_label = plazo_list[data.records[i].plazo];
+                        if (data.records[i].deposito_en_garantia == true) {
+                            data.records[i].detail_deposito_en_garantia_checked = "checked";
+                        }
+                        if (data.records[i].activo_nuevo == true) {
+                            data.records[i].detail_activo_nuevo_checked = "checked";
+                        }
+                        if (data.records[i].uso_particular == true) {
+                            data.records[i].detail_uso_particular_checked = "checked";
+                        }
+                        if (data.records[i].uso_empresarial == true) {
+                            data.records[i].detail_uso_empresarial_checked = "checked";
+                        }
                     }
 
-                    if (data.records[i].activo_nuevo == true) {
-                        data.records[i].detail_activo_nuevo_checked = "checked";
-                    }
-
-                    if (data.records[i].uso_particular == true) {
-                        data.records[i].detail_uso_particular_checked = "checked";
-                    }
-
-                    if (data.records[i].uso_empresarial == true) {
-                        data.records[i].detail_uso_empresarial_checked = "checked";
-                    }
+                    //set model so tpl detail tpl can read data
+                    self.model.set('condiciones_financieras', data.records);
+                    self.model._previousAttributes.condiciones_financieras = data.records;
+                    self.model._syncedAttributes.condiciones_financieras = data.records;
+                    
+                    _.extend(self, data);
+                    self.render();
                 }
-
-                //set model so tpl detail tpl can read data
-                self.model.set('condiciones_financieras', data.records);
-                self.model._previousAttributes.condiciones_financieras = data.records;
-                self.model._syncedAttributes.condiciones_financieras = data.records;
-                self.format();
-                self._render();
-            }
-        });
+            });
+        }
+        catch(err)
+        {
+            console.log(err);
+        }
 
         //Obtener las condiciones iniciales
         var api_params_cond_iniciales = {
@@ -221,12 +224,24 @@
     addNewCondicionFinanciera: function (evt) {
         window.contador=1;
         if (!evt) return;
+
+        var idplazo = this.$(evt.currentTarget).val() || this.$('.newPlazo').val(),
+            currentValue,
+            CondicionFinancieraFieldHtml,
+            $CondicionFinanciera;
+        if (idplazo === '')
+        {
+              $('.newPlazo').css('border-color', 'red');
+              app.alert.show("Plazo requerido", {
+                  level: "error",
+                  title: "El campo Plazo es requerido.",
+                  autoClose: false
+              });
+        }       
         var idactivo = this.$(evt.currentTarget).val() || this.$('.newActivo').val(),
             currentValue,
             CondicionFinancieraFieldHtml,
             $CondicionFinanciera;
-
-        //activo = $.trim(activo);
         if ((idactivo !== '') && (this._addNewCondicionFinancieraToModel(idactivo))) {
             currentValue = this.model.get(this.name);
             CondicionFinancieraFieldHtml = this._buildCondicionFinancieraFieldHtml({
@@ -255,8 +270,18 @@
 
             // add tooltips
             //this.addPluginTooltips($CondicionFinanciera.prev());
-
             this._clearNewCondicionFinancieraField();
+            $('.newActivo').css('border-color', '');
+            $('.newPlazo').css('border-color', '');
+        }
+        else
+        {
+              $('.newActivo').css('border-color', 'red');
+              app.alert.show("Activo requerido", {
+                  level: "error",
+                  title: "El campo Activo es requerido.",
+                  autoClose: false
+              });
         }
     },
 

@@ -11,14 +11,7 @@
 
     openForm: _.debounce(function (filterModel) {
         $(".filter-header").show();
-        if (this.moduleName == 'Accounts') {
-            var filterName = this.context.editingFilter.get('name');
-            if (filterName == 'Equipo Unifin') {
-                $("[data-filter=field]").hide();
-                $("[data-filter=operator]").hide();
-                $(".filter-header").hide();
-            }
-        }
+        this.resetFilterValues();
         var template = filterModel.get('filter_template') || filterModel.get('filter_definition');
         if (_.isEmpty(template)) {
             this.render();
@@ -33,7 +26,45 @@
         app.shortcuts.register('Filter:Remove', '-', function () {
             this.$('[data-action=remove]').last().click();
         }, this);
+        if (this.moduleName == 'Accounts') {
+            var filterName = this.context.editingFilter.get('name');
+            if (filterName == 'Equipo Unifin') {
+                $("[data-filter=field]").hide();
+                $("[data-filter=operator]").hide();
+                $(".filter-header").hide();
+            }
+            if (filterName == 'Mis Cuentas') {
+                this.Test();
+            }
+
+
+
+        }
     }, 100, true),
+
+
+
+
+    Test: _.debounce(function()  {
+
+
+        filtroPromotorArray = [5,11,16,4,10,15,3,9,2,8,14,1,7,13,6,12,17,33];
+        var puestoUsr=App.user.attributes.puestousuario_c;
+         puestoUsr = parseInt(puestoUsr, 10);
+        var resultado=filtroPromotorArray.indexOf(puestoUsr);
+
+            if(resultado != -1){
+
+            $('div.filter-definition-container').find('.filter-body').eq(0).find('.controls.span4').css("pointer-events", "none");
+            $(".controls.span6").css("pointer-events", "none");
+            $('div.filter-definition-container').find('.filter-body').eq(0).find('[data-action=remove]').hide();
+            $("[data-action=filter-reset]").hide();
+            $("[data-action=filter-delete]").hide();
+
+        }
+
+    },400),
+
 
 /*    populateRow: function (rowObj) {
         var $row = this.addRow(), moduleMeta = app.metadata.getModule(this.layout.currentModule),

@@ -1,0 +1,49 @@
+<!--
+/*
+ *  AF - 2018-10-23
+ *  CustomField - Grid
+ */
+-->
+<!-- Campo para desplegar Objetivos en minuta:Edición -->
+<div style="border: 2px solid #58749a;border-radius: 12px;padding:10px;">
+  <!-- Table list-->
+  <div class="list-view">
+    <table id="tableResult" class="table table-striped">
+        <thead>
+            <tr bgcolor="#001441" style="color:#fff">
+                <th width="10%">&nbsp;</th>
+                <th width="80%">Objetivo</th>
+                <th width="10%" style="text-align:center">Cumplimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+          {{#each myobjmin.records}}
+            <tr>
+                <td>
+                    {{#if description}}
+                        <button class="btn btn-inverse">Específico</button>
+                    {{else}}
+                        <button class="btn btn-primary">&nbsp;&nbsp;General&nbsp;&nbsp;</button>
+                    {{/if}}
+                </td>
+                <td class="objetivoSelect">
+                  {{name}}
+                </td>
+                <td class="CheckAction" style="text-align:center" >
+
+                  <button type="button"  class="updateRecord" style="border-width:0;background-color: rgba(255,255,255,0.15);">
+                    {{#if cumplimiento}}
+                      <i class="fa fa-check" style="color: #33800d; font-size:20px"></i>
+                    {{else}}
+                      <i class="fa fa-check" style="font-size:20px"></i>
+                    {{/if}}
+                  </button>
+                </td>
+            </tr>
+          {{/each}}
+        </tbody>
+    </table>
+  </div>
+</div>
+
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

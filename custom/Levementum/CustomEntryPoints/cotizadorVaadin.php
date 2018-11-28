@@ -19,9 +19,16 @@
 
     body.tasks section.tasks,
 
-    body.detail section.detail {
+    body.detail {
 
         display: block;
+
+    }
+
+    section.detail {
+
+        display: block;
+        height: 90vh;
 
     }
 
@@ -102,7 +109,7 @@ $DASHLET_URL = $sugar_config['dashlet_url'];
 
 ?>
 
-<!-- Se agregan las credenciales de Vaddin para las peticiones, permitiendo las cookies de sesión -->
+<!-- Se agregan las credenciales de Vaddin para las peticiones, permitiendo las cookies de sesiï¿½n -->
 
 <script>
 
@@ -123,7 +130,7 @@ $DASHLET_URL = $sugar_config['dashlet_url'];
 
 
 
-<!-- Carga Widgets de Vaadin así como el archivo bootstrats.js -->
+<!-- Carga Widgets de Vaadin asï¿½ como el archivo bootstrats.js -->
 
 <script type="text/javascript"
 
@@ -228,4 +235,3 @@ $DASHLET_URL = $sugar_config['dashlet_url'];
 </body>
 
 </html>
-

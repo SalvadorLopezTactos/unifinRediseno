@@ -16,6 +16,7 @@
         <th>Telefono</th>
         <th>Ext</th>
         <th>Estatus</th>
+        <th>Llamar</th>
     </tr>
     {{#each value}}
         <tr>
@@ -23,6 +24,7 @@
             <td>{{telefono}}</td>
             <td>{{extension}}</td>
             <td>{{estatus}}</td>
+            <td align="center"><button class="mcall fa fa-phone" style="background-color: #33800d;color: white;"></button></td>
         </tr>
     {{/each}}
 </table>

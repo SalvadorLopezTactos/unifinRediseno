@@ -28,3 +28,31 @@ $hook_array['after_relationship_delete'][] = Array(
     'Meetings_Hooks', // name of the class
     'RelationDel' // name of the function
 );
+
+
+//@Jesus Carrillo
+
+/* $hook_array['before_save'][] = Array(
+    1,
+    'Send email to related people',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks', // name of the class
+    'Getmails' // name of the function
+); */
+
+//Adrian Arauz
+$hook_array['after_save'][] = Array(
+    2,
+    'Apply Meeting/Objectives into Minuta',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks', // name of the class
+    'saveObjetivos' // name of the function
+);
+
+$hook_array['before_save'][] = Array(
+    1,
+    'Cambia LevAdmin',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks', // name of the class
+    'cambiAdmin' // name of the function
+);

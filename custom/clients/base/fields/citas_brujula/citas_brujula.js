@@ -46,6 +46,7 @@
         var resultado_list = app.lang.getAppListStrings('resultado_list');
         var resultado_keys = app.lang.getAppListKeys('resultado_list');
         this.resultado = self.obtenerLista(resultado_list, resultado_keys);
+        this.model.addValidationTask('Revalidafecha', _.bind(this.tercerafecha, this));
 
         var api_params = {
             'brujula_id': this.model.id,
@@ -85,6 +86,11 @@
                 self.render();
             }
         });
+        /*
+            AF. - 2018-10-02
+            Ejecuta recuperaciï¿½n de citas 
+        */
+        this.getCitas();
     },
 
     getCitas: function(){
@@ -165,6 +171,16 @@
                 $(".objetivo_list").change();
             })
         });
+
+        if(this.model.get("fecha_reporte")=="" ||this.model.get("fecha_reporte")==null){
+            /*app.alert.show('citas_sync_alert', {
+                level: 'error',
+                messages: 'El campo esta vacio.',
+
+            });*/
+            return;
+
+        }
     },
 
     removerCita: function(e){
@@ -386,11 +402,20 @@
     resultadosList: function(e){
 
         var rowId = $(e.target).closest("tr").attr("id");
+        var rowId_resultado="";
 
         $("#resultado" + rowId).empty();
         $("#resultado" + rowId).append(self.resultado);
-        
-        //Presentación, Expediente, Incremento o Renovación
+
+        for(var i=0;i<self.citas.length;i++){
+            if(self.citas[i].id==rowId){
+                rowId_resultado=self.citas[i].nuevo_resultado;
+            }
+        }
+
+        $("#resultado" + rowId+ " option[value="+rowId_resultado+"]").prop("selected", "selected");
+
+        //Presentaciï¿½n, Expediente, Incremento o Renovaciï¿½n
         if(parseInt($(e.target).val()) == 1 || parseInt($(e.target).val()) == 2 || parseInt($(e.target).val()) == 5 || parseInt($(e.target).val()) == 6 || parseInt($(e.target).val()) == 9){
             $("#resultado" + rowId + " option").each(function(){
                 if (parseInt($(this).val()) > 7 && !_.isEmpty($(this).val())) {
@@ -451,7 +476,7 @@
         $("#nuevo_resultado").empty();
         $("#nuevo_resultado").append(self.resultado);
 
-        //Presentación, Expediente, Incremento o Renovación
+        //Presentaciï¿½n, Expediente, Incremento o Renovaciï¿½n
         if($("#nuevo_objetivo").val()==1 || $("#nuevo_objetivo").val()==2 || $("#nuevo_objetivo").val()==5 || $("#nuevo_objetivo").val()==6 || $("#nuevo_objetivo").val()==9){
             $("#nuevo_resultado option").each(function(){
                 if (parseInt($(this).val()) > 7 && !_.isEmpty($(this).val())) {
@@ -556,6 +581,15 @@
         if (this.tplName === 'list-edit') {
             this._super("bindDomChange");
         }
+    },
+    tercerafecha:function(fields, errors, callback) {
+    if(this.model.get("fecha_reporte")=="" ||this.model.get("fecha_reporte")==null) {
+
+        errors['fecha_reporte'] = errors['fecha_reporte'] || {};
+        errors['fecha_reporte'].required = true;
+
+    }
+        callback(null, fields, errors);
     },
 
 })

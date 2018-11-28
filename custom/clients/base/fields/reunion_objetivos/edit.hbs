@@ -1,0 +1,48 @@
+<!--
+/*
+ *  AF - 2018-10-23
+ *  CustomField - Grid
+ */
+-->
+<!-- Campo para desplegar Objetivos en minuta:Edición -->
+<div style="border: 2px solid #58749a;border-radius: 12px;padding:10px;">
+  <!-- Table list-->
+  <div class="list-view">
+    <table id="tableResult" class="table table-striped">
+        <thead>
+            <tr bgcolor="#001441" style="color:#fff">
+                <th width="80%">Objetivo</th>
+                <th width="20%" style="text-align:center">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+          {{#each myobject.records}}
+            <tr>
+                <td class="objetivoSelect" width="80%">
+                  <input type="text" class="objetivoSelect span10" value="{{name}}">
+                </td>
+                <td class="objetivoSelect" width="20%">
+                  <button type="button" class="deleteRecord">
+                    <i class="fa fa-minus"></i>
+                  </button>
+                </td>
+            </tr>
+          {{/each}}
+        </tbody>
+    </table>
+  </div>
+  <div id="input">
+    <!-- Contenid Línea n -->
+    <div class="row-fluid">
+      <div class="span10">
+        <input type="text" class="newCampo1 span10" placeholder="Nuevo Objetivo">
+      </div>
+      <div class="span2">
+        <a class="btn addRecord">
+          <i class="fa fa-plus"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

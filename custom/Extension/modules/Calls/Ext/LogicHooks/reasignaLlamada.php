@@ -19,3 +19,11 @@ $hook_array['before_save'][] = Array(
     'reasigna_class',
     'reasigna_method'
 );
+
+$hook_array['before_save'][] = Array(
+    2,
+    'Cambia Levadmin',
+    'custom/modules/Calls/lh_reasigna_llamada.php',
+    'reasigna_class',
+    'cambiAdmin'
+);

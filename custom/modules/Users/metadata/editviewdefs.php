@@ -39,6 +39,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_EDITVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
         'LBL_EDITVIEW_PANEL1' => 
         array (
           'newTab' => false,
@@ -155,26 +160,51 @@ array (
         ),
         9 => 
         array (
-          0 => 
+          0 => 'reports_to_name',
+          1 => 
           array (
             'name' => 'tipodeproducto_c',
             'studio' => 'visible',
             'label' => 'LBL_TIPODEPRODUCTO',
           ),
+        ),
+      ),
+      'lbl_editview_panel2' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_altaproveedor_chk_c',
+            'label' => 'LBL_TCT_ALTAPROVEEDOR_CHK',
+          ),
           1 => 
           array (
-            'name' => 'optout_c',
-            'label' => 'LBL_OPTOUT',
+            'name' => 'tct_alta_clientes_chk_c',
+            'label' => 'LBL_TCT_ALTA_CLIENTES_CHK',
           ),
         ),
-        10 => 
+        1 => 
         array (
-          0 => 'reports_to_name',
+          0 => 
+          array (
+            'name' => 'tct_alta_cd_chk_c',
+            'label' => 'LBL_TCT_ALTA_CD_CHK_C',
+          ),
           1 => 
           array (
             'name' => 'cac_c',
             'label' => 'LBL_CAC',
           ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'optout_c',
+            'label' => 'LBL_OPTOUT',
+          ),
+          1 => '',
         ),
       ),
       'lbl_editview_panel1' => 

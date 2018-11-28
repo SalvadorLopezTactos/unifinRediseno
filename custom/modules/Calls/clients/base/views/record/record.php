@@ -39,14 +39,6 @@ array (
                 'css_class' => 'btn btn-primary',
                 'acl_action' => 'edit',
               ),
-              1 => 
-              array (
-                'type' => 'save-and-send-invites-button',
-                'event' => 'button:save_button:click',
-                'name' => 'save_invite_button',
-                'label' => 'LBL_SAVE_AND_SEND_INVITES_BUTTON',
-                'acl_action' => 'edit',
-              ),
             ),
           ),
           2 => 
@@ -203,9 +195,19 @@ array (
             'columns' => 2,
             'labelsOnTop' => true,
             'placeholders' => true,
+            'newTab' => false,
+            'panelDefault' => 'expanded',
             'fields' => 
             array (
               0 => 
+              array (
+                'name' => 'tct_conferencia_chk_c',
+                'label' => 'LBL_TCT_CONFERENCIA_CHK',
+              ),
+              1 => 
+              array (
+              ),
+              2 => 
               array (
                 'name' => 'duration',
                 'type' => 'duration',
@@ -250,7 +252,7 @@ array (
                 ),
                 'span' => 9,
               ),
-              1 => 
+              3 => 
               array (
                 'name' => 'repeat_type',
                 'related_fields' => 
@@ -259,7 +261,7 @@ array (
                 ),
                 'span' => 3,
               ),
-              2 => 
+              4 => 
               array (
                 'name' => 'recurrence',
                 'type' => 'recurrence',
@@ -341,8 +343,8 @@ array (
                 ),
                 'span' => 12,
               ),
-              3 => 'direction',
-              4 => 
+              5 => 'direction',
+              6 => 
               array (
                 'name' => 'reminders',
                 'type' => 'fieldset',
@@ -355,20 +357,20 @@ array (
                   1 => 'email_reminder_time',
                 ),
               ),
-              5 => 
+              7 => 
               array (
                 'name' => 'description',
                 'rows' => 3,
                 'span' => 12,
               ),
-              6 => 
+              8 => 
               array (
                 'name' => 'parent_name',
               ),
-              7 => 
+              9 => 
               array (
               ),
-              8 => 
+              10 => 
               array (
                 'name' => 'invitees',
                 'type' => 'participants',
@@ -382,17 +384,58 @@ array (
                 ),
                 'span' => 12,
               ),
-              9 => 'assigned_user_name',
-              10 => 'team_name',
               11 => 
               array (
-                'name' => 'tag',
-                'span' => 6,
+                'name' => 'assigned_user_name',
+                'readonly' => true,
               ),
-              12 => 
+              12 => 'team_name',
+              13 => 
               array (
-                'name' => 'tel_telefonos_calls_1_name',
-                'span' => 6,
+                'name' => 'tct_resultado_llamada_ddw_c',
+                'label' => 'LBL_TCT_RESULTADO_LLAMADA_DDW',
+                'span' => 12,
+              ),
+              14 => 
+              array (
+                'name' => 'tct_calificacion_conferencia_c',
+                'label' => 'LBL_TCT_CALIFICACION_CONFERENCIA',
+              ),
+              15 => 
+              array (
+                'name' => 'tct_conferencia_fecha_dat_c',
+                'label' => 'LBL_TCT_CONFERENCIA_FECHA_DAT',
+              ),
+              16 => 
+              array (
+                'name' => 'tct_motivo_ilocalizable_ddw_c',
+                'label' => 'LBL_TCT_MOTIVO_ILOCALIZABLE_DDW',
+                'span' => 12,
+              ),
+              17 => 
+              array (
+                'name' => 'tct_fecha_cita_dat_c',
+                'label' => 'LBL_TCT_FECHA_CITA_DAT',
+                'span' => 12,
+              ),
+              18 => 
+              array (
+                'name' => 'tct_usuario_cita_rel_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_USUARIO_CITA_REL',
+                'span' => 12,
+              ),
+              19 => 
+              array (
+                'name' => 'tct_fecha_seguimiento_dat_c',
+                'label' => 'LBL_TCT_FECHA_SEGUIMIENTO_DAT',
+                'span' => 12,
+              ),
+              20 => 
+              array (
+                'name' => 'tct_motivo_desinteres_ddw_c',
+                'label' => 'LBL_TCT_MOTIVO_DESINTERES_DDW',
+                'span' => 12,
               ),
             ),
           ),
@@ -404,6 +447,8 @@ array (
             'hide' => true,
             'labelsOnTop' => true,
             'placeholders' => true,
+            'newTab' => false,
+            'panelDefault' => 'expanded',
             'fields' => 
             array (
               0 => 
@@ -456,6 +501,10 @@ array (
               ),
             ),
           ),
+        ),
+        'templateMeta' => 
+        array (
+          'useTabs' => false,
         ),
       ),
     ),

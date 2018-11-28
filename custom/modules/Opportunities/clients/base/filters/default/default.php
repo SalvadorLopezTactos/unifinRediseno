@@ -1,5 +1,5 @@
 <?php
-// created: 2018-02-16 17:02:35
+// created: 2018-08-21 11:19:06
 $viewdefs['Opportunities']['base']['filter']['default'] = array (
   'default_filter' => 'all_records',
   'fields' => 
@@ -11,6 +11,9 @@ $viewdefs['Opportunities']['base']['filter']['default'] = array (
     array (
     ),
     'amount' => 
+    array (
+    ),
+    'tct_etapa_ddw_c' => 
     array (
     ),
     'estatus_c' => 

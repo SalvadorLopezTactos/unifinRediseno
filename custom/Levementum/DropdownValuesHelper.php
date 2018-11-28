@@ -70,22 +70,32 @@ class DropdownValuesHelper{
             //$GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <czaragoza> : Antes cedente: " . $cedente. " deudor: " . $deudor);
             $cedente = $cedente==1?32:0;
             $deudor = $deudor==1?64:0;
+            $EsProveedor = $EsProveedor==1?2:0;
     	switch ($stringValue){
-			case 'Prospecto': 
-				$tipoCliente = ($stringStatus == 'Interesado' ? 1 : 0);
+      /*
+        AF - 2018-08-15
+        Modificación para establecer Mismas validación en Prospecto a Cliente
+      */
+			case 'Prospecto':
+				//$tipoCliente = ($stringStatus == 'Interesado' ? 1 : 0);
+        $tipoCliente = 1 + $EsProveedor; //($EsProveedor == 1 ? 3 : 1);
+                $tipoCliente = $tipoCliente + ($cedente + $deudor);
 				break;
-			case 'Cliente': 
-			 	$tipoCliente = ($EsProveedor == 1 ? 3 : 1);
+			case 'Cliente':
+			 	$tipoCliente = 1 + $EsProveedor; ($EsProveedor == 1 ? 3 : 1);
                 $tipoCliente = $tipoCliente + ($cedente + $deudor);
                 //$GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <czaragoza> : cedente: " . $cedente. " deudor: " . $deudor);
                 //$GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <czaragoza> : Tipo Cliente: " . $tipoCliente);
                 break;
-			case 'Proveedor': 
-				$tipoCliente = 2;
+			case 'Proveedor':
+				if ($cedente > 1 || $deudor > 1 ){
+                    $tipoCliente = $cedente + $deudor;
+                }
+                $tipoCliente= $tipoCliente + $EsProveedor;
 				break;
-			case 'Persona': 
-				if ($cedente > 1 || $deudor > 1){
-					 $tipoCliente = $cedente + $deudor;
+			case 'Persona':
+				if ($cedente > 1 || $deudor > 1 || $EsProveedor > 1){
+					 $tipoCliente = $cedente + $deudor + $EsProveedor;
 				}else{
 					$tipoCliente = 0;
 					/*
@@ -137,7 +147,7 @@ class DropdownValuesHelper{
         $IdtoSanitize = substr($IdtoSanitize, -5, 5);
         return $IdtoSanitize;
     }
-	
+
 	/***CVV INICIO***/
     public function getUserName($Id){
 		global $db;
@@ -146,7 +156,7 @@ SELECT user_name FROM users where id = '{$Id}'
 SQL;
 		$queryResult = $db->getOne($query);
         return $queryResult;
-    }	
+    }
 	/***CVV FIN***/
     /*** ALI INICIO ***/
     public function getIdTipoRelacion($descRelacion){
@@ -215,6 +225,3 @@ SQL;
         }
     }
 }
-
-
-

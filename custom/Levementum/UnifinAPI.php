@@ -177,14 +177,16 @@ class UnifinAPI
     }
 
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/11/2015 Description: Method to generate a folio number in sugar by consuming the ObtieneFolio Rest service*/
-        public function generarFolios($tipoFolio)
+        public function generarFolios($tipoFolio,$bean=null)
         {
             global $current_user;
             try {
+                $flagUpdateProspectoCliente=false;
 				/*Este bloque de codigo es para cuando el ESB no responde*/
 				switch($tipoFolio){
 					case 1:
 						$host = "http://".$GLOBALS['unifin_url']."/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/consultaFolio?sTabla=ctCliente";
+                        $flagUpdateProspectoCliente=true;
 						break;
 					case 2:
 						$host = "http://".$GLOBALS['unifin_url']."/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/consultaFolio?sTabla=crSolicitudes";
@@ -195,6 +197,17 @@ class UnifinAPI
 				}
 				$folio = $this->unifingetCall($host);
 				$folio = intval($folio['UNI2_UTL_001_traeFolioResult']);
+
+
+				if($flagUpdateProspectoCliente){
+
+                    $fields = array(
+                        "idCliente"=> $folio,
+                        "guid"=> $bean->id
+                    );
+                    //$resp = $this->unifingetCall($GLOBALS['esb_url']."/crm/rest/updateProspectoACliente");
+                    $resp = $this->unifinPostCall($GLOBALS['esb_url']."/crm/rest/updateProspectoACliente",$fields);
+                }
 				/*Termina bloque*/
 
 				//$host = "http://" . $GLOBALS['esb_url'] ."/rest/unics/obtieneFolio?tipoFolio=$tipoFolio";
@@ -253,6 +266,7 @@ class UnifinAPI
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/11/2015 Description: Method to call Rest service InsertaClienteCompleto */
         public function insertarClienteCompleto($objecto)
         {
+            $GLOBALS['log']-> fatal ("llamada a API con el id cliente: " . $objecto->idcliente_c);
             if (intval($objecto->idcliente_c) > 0){
                 try {
                     global $current_user;
@@ -330,7 +344,16 @@ class UnifinAPI
                         $objecto->tipo_registro_c = $tipo_registro;
                         $objecto->sincronizado_unics_c = '1';
                         global $db;
-                        $query = " UPDATE accounts_cstm SET tipo_registro_c = '$tipo_registro', sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
+                       //$query = " UPDATE accounts_cstm SET tipo_registro_c = '$tipo_registro', sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
+                        /*
+                        * F. Javier G. Solar 13/07/2018
+                         * se seleccionan los checks de Proveedor, Cedente
+                            Factoraje o Deudor Factoraje se realiza el proceso de envió de cuenta al sistema UNICS, solo si no se ha
+                            realizado.
+                             Conservar los campos que sean obligatorios de acuerdo a la opción
+                            seleccionada
+                        */
+                        $query = " UPDATE accounts_cstm SET sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
                         $queryResult = $db->query($query);
 
                         //CVV se actualiza el campo sincronizado_unics de las direcciones del cliente
@@ -355,6 +378,10 @@ class UnifinAPI
                         }
 
                         $this->usuarioProveedores($objecto);
+
+
+                        //Valida y crea relaciones
+                        $this->enviaRelaciones($objecto->id);
                     }
                     /***CVV FIN***/
                 } catch (Exception $e) {
@@ -381,7 +408,7 @@ class UnifinAPI
                 $cleanValues = array();
 
                 if ($objecto->idcliente_c == '' || $objecto->idcliente_c == '0'){
-                    $numeroDeFolio = $this->generarFolios(1);
+                    $numeroDeFolio = $this->generarFolios(1,$objecto);
                     $objecto->idcliente_c = $numeroDeFolio;
                 }
                 if ($objecto->idcliente_c != '' && $objecto->idcliente_c != '0') {
@@ -434,10 +461,14 @@ class UnifinAPI
                     if ($cliente['UNI2_CTE_001_InsertaPersonaResult']['bResultado'] == true){
                         //Actualizamos el registro a tipo Cliente
                         $tipo_registro = (($objecto->tipo_registro_c == 'Persona' || $objecto->tipo_registro_c == 'Proveedor') ? $objecto->tipo_registro_c : 'Cliente');
-                        $objecto->tipo_registro_c = $tipo_registro;
+                        /*
+                            AF - 2018/08/14
+                            Omite actualización de tipo de registro
+                        */
+                        //$objecto->tipo_registro_c = $tipo_registro;
                         $objecto->sincronizado_unics_c = '1';
                         global $db;
-                        $query = " UPDATE accounts_cstm SET idcliente_c = '{$objecto->idcliente_c}', tipo_registro_c = '$tipo_registro', sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
+                        $query = " UPDATE accounts_cstm SET idcliente_c = '{$objecto->idcliente_c}', /*tipo_registro_c = '$tipo_registro', */sincronizado_unics_c = '1' WHERE id_c = '{$objecto->id}'";
                         $queryResult = $db->query($query);
 
                         $this->usuarioProveedores($objecto);
@@ -1960,6 +1991,7 @@ SQL;
                     "mesNacimiento"=> intval(date('n',$timestamp)),
                     "diaNacimiento"=> intval(date('j',$timestamp)),
                     "tipoProveedor"=> $tipoProveedor,
+                    "tipoPersona"=> $account->tipodepersona_c,
                     "paisConstitucion"=> ucfirst(strtolower($paisConstitucion)),
                     "estadoConstitucion"=> ucfirst(strtolower($estadoConstitucion))
                 );
@@ -1978,5 +2010,33 @@ SQL;
                     $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : Error " . $e->getMessage());
                 }
             }
+        }
+
+        /*
+            AF- 2018-10-19
+            Habilita funcionalidad para envíar relaciones no creadas previamente, para cuentas que no existían en unics
+        */
+        public function enviaRelaciones($id_account){
+            try{
+                //Retrieve account
+                $GLOBALS['log']->fatal('Valida relaciones - Recupera cuenta');
+                $account = BeanFactory::getBean('Accounts', $id_account);
+
+                //retrieve all related records
+                $GLOBALS['log']->fatal('Valida relaciones - Recupera relaciones');
+                $account->load_relationship('rel_relaciones_accounts_1');
+
+                foreach($account->rel_relaciones_accounts_1->getBeans() as $relacion) {
+                    if($relacion->sincronizado_unics_c!= 1) {
+                        $GLOBALS['log']->fatal('Valida relaciones - Envía relación: '.$relacion->id);
+                        $rel = BeanFactory::getBean('Rel_Relaciones', $relacion->id);                    
+                        $rel->save();
+                    }
+                }   
+            } catch (Exception $e) {
+                $GLOBALS['log']->fatal('Valida relaciones - Error:');
+                $GLOBALS['log']->fatal($e);
+            }
+
         }
 }

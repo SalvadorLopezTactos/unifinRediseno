@@ -1,5 +1,5 @@
 <?php
- // created: 2018-07-11 13:59:21
+ // created: 2018-08-23 13:47:54
 $dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['labelValue']='Detalle Origen';
 $dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['dependency']='';
 $dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']=array (
@@ -55,6 +55,7 @@ $dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']=
       1 => 'Digital',
       2 => 'Offline',
       3 => 'Acciones Estrategicas',
+      4 => 'Recomendacion',
     ),
     'Referido Director' => 
     array (

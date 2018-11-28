@@ -5,6 +5,7 @@
 
 ({
     extendsFrom: 'CreateView',
+
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
@@ -25,6 +26,13 @@
 
         this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
         this.model.addValidationTask('check_tipo_cliente', _.bind(this._ValidateTipo, this));
+
+        /*@author Victor.Martinez
+         * 23-07-2018
+         * Valida si el cliente cuenta con al menos una solicitud de los tipos (Linea Nueva o Ratificacion/Incremento
+         */
+        this.model.addValidationTask('check_solicitud', _.bind(this._ValidateSolicitud, this));
+        this.model.addValidationTask('check_existingBL', _.bind(this._ValidateExistingBL, this));
 
         /*
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
@@ -61,6 +69,15 @@
                  }*/
             /*},this)
         });*/
+
+        // validación de los campos con formato númerico
+        this.events['keydown [name=dif_residuales_c]'] = 'checkInVentas';
+        this.events['keydown [name=tasa_c]'] = 'checkInVentas';
+        this.events['keydown [name=comision_c]'] = 'checkInVentas';
+        this.events['keydown [name=monto_comprometido]'] = 'checkInVentas';
+        this.events['keydown [name=porciento_ri]'] = 'checkInVentas';
+        this.events['keydown [name=renta_inicial_comprometida]'] = 'checkInVentas';
+
     },
 
     _render: function() {
@@ -90,6 +107,11 @@
         this.$('div[data-name=progreso]').hide();
         this.$('div[data-name=date_entered_by]').hide();
         this.$('div[data-name=date_modified_by]').hide();
+
+        //Ocultar banderas de control para establecer registro como solo lectura
+        this.$('div[data-name=tct_carga_masiva_chk_c]').hide();
+        this.$('div[data-name=tct_bloqueo_txf_c]').hide();
+
 
 
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
@@ -127,6 +149,224 @@
                 }*/
             },this)
         });
+    },
+
+
+    checkInVentas:function (evt) {
+        var enteros=this.checkmoneyint(evt);
+        var decimales=this.checkmoneydec(evt);
+        $.fn.selectRange = function(start, end) {
+            if(!end) end = start;
+            return this.each(function() {
+                if (this.setSelectionRange) {
+                    this.focus();
+                    this.setSelectionRange(start, end);
+                } else if (this.createTextRange) {
+                    var range = this.createTextRange();
+                    range.collapse(true);
+                    range.moveEnd('character', end);
+                    range.moveStart('character', start);
+                    range.select();
+                }
+            });
+        };//funcion para posicionar cursor
+
+        (function ($, undefined) {
+            $.fn.getCursorPosition = function() {
+                var el = $(this).get(0);
+                var pos = [];
+                if('selectionStart' in el) {
+                    pos = [el.selectionStart,el.selectionEnd];
+                } else if('selection' in document) {
+                    el.focus();
+                    var Sel = document.selection.createRange();
+                    var SelLength = document.selection.createRange().text.length;
+                    Sel.moveStart('character', -el.value.length);
+                    pos = Sel.text.length - SelLength;
+                }
+                return pos;
+            }
+        })(jQuery); //funcion para obtener cursor
+        var cursor=$(evt.handleObj.selector).getCursorPosition();//setear cursor
+
+
+        if (enteros == "false" && decimales == "false") {
+            if(cursor[0]==cursor[1]) {
+                return false;
+            }
+        }else if (typeof enteros == "number" && decimales == "false") {
+            if (cursor[0] < enteros) {
+                $(evt.handleObj.selector).selectRange(cursor[0], cursor[1]);
+            } else {
+                $(evt.handleObj.selector).selectRange(enteros);
+            }
+        }
+
+    },
+
+    checkmoneyint: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var digitos = $input.val().split('.');
+        if($input.val().includes('.')) {
+            var justnum = /[\d]+/;
+        }else{
+            var justnum = /[\d.]+/;
+        }
+        var justint = /^[\d]{0,14}$/;
+
+        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return "false";
+        }
+
+        if(typeof digitos[0]!="undefined") {
+            if (justint.test(digitos[0]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
+                console.log('no se cumplen enteros')
+                if(!$input.val().includes('.')) {
+                    $input.val($input.val()+'.')
+                }
+                return "false";
+
+            } else {
+                return digitos[0].length;
+            }
+        }
+    },
+
+    checkmoneydec: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var digitos = $input.val().split('.');
+        if($input.val().includes('.')) {
+            var justnum = /[\d]+/;
+        }else{
+            var justnum = /[\d.]+/;
+        }
+        var justdec = /^[\d]{0,1}$/;
+
+        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return "false";
+        }
+        if(typeof digitos[1]!="undefined") {
+            if (justdec.test(digitos[1]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
+                console.log('no se cumplen dec')
+                return "false";
+            } else {
+                return "true";
+            }
+        }
+    },
+
+
+
+    /*@author Victor.Martinez
+    * 23-07-2018
+    * Valida que el cliente tenga solictud de tipos "Linea nueva", "Ractificación/Incremento" o "Ambas"
+    */
+        _ValidateSolicitud:function(fields, errors, callback){
+
+            self = this;
+            var accountid=this.model.get('account_id_c');
+            //console.log('sccount_id: '. accountid )
+            if (accountid) {
+                app.api.call('GET', app.api.buildURL('Accounts/'+accountid+'/link/opportunities', null, null, {
+                    "filter":[
+                        {
+                            $or:[
+                                {
+                                    "tipo_de_operacion_c":"LINEA_NUEVA"
+                                },
+                                {
+                                    "tipo_de_operacion_c":"RATIFICACION_INCREMENTO"
+                                }
+                            ]
+                        }
+                    ]
+                }), null, {
+                    success: _.bind(function (data){
+
+                        if (data.records.length<1) {
+                            app.error.errorName2Keys[''] = '';
+                            errors[''] = errors[''] || {};
+                            errors[''] = errors[''] || {};
+                            errors[''].custom_message1 = true;
+                            errors[''].required = true;
+                            app.alert.show('validaSolicitudes', {
+                                level: 'error',
+                                messages: 'Para crear un Backlog es necesario que el cliente cuente m&iacutenimo con una Pre-Solicitud de l&iacutenea'
+                            });
+                        }
+                        callback(null, fields, errors)
+
+                    }, self)
+                });
+            }else {callback(null, fields, errors)}
+        },
+
+    _ValidateExistingBL:function(fields, errors, callback){
+
+        //var id_account=$('input[name="cliente"]').val();
+
+        var self=this;
+
+        var id_account=this.model.get('account_id_c');
+        var mes=this.model.get('mes');
+        var anio=this.model.get('anio');
+
+        if(id_account && id_account != '' && id_account.length>0){
+
+
+            var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes+'&filter[2][anio][$equals]='+anio+'&fields=id,mes,estatus_de_la_operacion',
+                null, null, null);
+
+
+            app.api.call('GET', bl_url, {}, {
+                success: _.bind(function (data) {
+
+                    if(data!=null){
+                        var meses =['0','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+                        if(data.records.length>0){
+
+                            app.alert.show('error_bl_mes', {
+                                level: 'error',
+                                messages: 'Esta Cuenta ya posee un backlog en el mes: '+meses[data.records[0].mes],
+                                autoClose: false
+                            });
+                            app.error.errorName2Keys['custom_message1'] = 'Esta Cuenta ya posee un backlog en el mes: '+meses[data.records[0].mes];
+                            errors['cliente'] = errors['cliente'] || {};
+                            errors['cliente'].custom_message1 = true;
+
+                        }
+
+                    }
+
+                    callback(null, fields, errors);
+
+                },self),
+
+            });
+
+        }else{
+
+            app.error.errorName2Keys['custom_message1'] = 'La cuenta ya posee un backlog en el mes establecido';
+            errors['cliente'] = errors['cliente'] || {};
+            errors['cliente'].custom_message1 = true;
+            errors['cliente'].required = true;
+
+            callback(null, fields, errors);
+        }
+
+
     },
 
     getCurrentYearMonth: function(stage){
@@ -362,7 +602,7 @@
 
             app.alert.show('tipo de persona', {
                 level: 'error',
-                messages: 'Para poder generar una operaci�n, la persona debe ser un cliente o prospecto.',
+                messages: 'Para poder generar una operaci\u00F3n, la persona debe ser un cliente o prospecto.',
                 autoClose: false
             });
         }
