@@ -154,6 +154,9 @@
             $('#tabContent').children()[1].classList.remove('fade');
 
         }
+
+        //Oculta campo
+        $("div[data-name='show_panel_c']").hide();
      },
 
 
@@ -211,6 +214,10 @@
             this.$("[data-name='tct_origen_ag_tel_rel_c']").prop("disabled", true);
             this.$("[data-name='tct_origen_busqueda_txf_c']").prop("disabled", true);
             this.$("[data-name='medio_digital_c']").prop("disabled", true);
+            this.$("[data-name='tct_punto_contacto_ddw_c']").prop("disabled", true);
+            this.$("[data-name='evento_c']").prop("disabled", true);
+            this.$("[data-name='camara_c']").prop("disabled", true);
+            this.$("[data-name='tct_que_promotor_rel_c']").prop("disabled", true);
 
 
         }
@@ -374,6 +381,10 @@
             self.noEditFields.push('tct_origen_ag_tel_rel_c');
             self.noEditFields.push('tct_origen_busqueda_txf_c');
             self.noEditFields.push('medio_digital_c');
+            self.noEditFields.push('tct_punto_contacto_ddw_c');
+            self.noEditFields.push('evento_c');
+            self.noEditFields.push('camara_c');
+            self.noEditFields.push('tct_que_promotor_rel_c');
 
         }
 
@@ -388,7 +399,7 @@
     _render: function() {
         //Oculta menú lateral para relaciones
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
-        
+
         this._super("_render");
 
         /*
@@ -453,7 +464,7 @@
         //Solo Lectura campos Origen
         this.readOnlyOrigen();
 
-        
+
 
     },
 
@@ -493,13 +504,16 @@
 
     //No aceptar numeros, solo letras (a-z), puntos(.) y comas(,)
     checkTextOnly:function(evt){
-        if($.inArray(evt.keyCode,[9,16,17,110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,16,32,192,186]) < 0){
-            app.alert.show("Caracter Invalido", {
-                level: "error",
-                title: "Solo texto es permitido en este campo.",
-                autoClose: true
-            });
-            return false;
+        if($.inArray(evt.keyCode,[9,16,17,110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,16,32,192]) < 0){
+    	    if(evt.keyCode != 186 && evt.keyCode !== 229)
+    	    {
+    	        app.alert.show("Caracter Invalido", {
+                  	level: "error",
+                   	title: "Solo texto es permitido en este campo.",
+                   	autoClose: true
+              });
+              return false;
+    	    }
         }
     },
 

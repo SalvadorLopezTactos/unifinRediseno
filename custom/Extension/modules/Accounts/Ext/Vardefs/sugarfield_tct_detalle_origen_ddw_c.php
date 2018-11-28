@@ -1,5 +1,5 @@
 <?php
- // created: 2018-06-20 11:15:34
+ // created: 2018-07-11 13:59:21
 $dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['labelValue']='Detalle Origen';
 $dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['dependency']='';
 $dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']=array (
@@ -44,17 +44,20 @@ $dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']=
     ),
     'Inteligencia de Negocio' => 
     array (
-      0 => 'Bases de datos',
-      1 => 'Centro de Prospeccion',
+      0 => '',
+      1 => 'Bases de datos',
+      2 => 'Afiliaciones',
+      3 => 'Cartera Promotores',
     ),
     'Marketing' => 
     array (
-      0 => 'Digital',
-      1 => 'Campanas',
-      2 => 'Acciones Estrategicas',
-      3 => 'Afiliaciones',
-      4 => 'Llamadas Inbound',
-      5 => 'Parques Industriales',
+      0 => '',
+      1 => 'Digital',
+      2 => 'Offline',
+      3 => 'Acciones Estrategicas',
+    ),
+    'Referido Director' => 
+    array (
     ),
   ),
 );

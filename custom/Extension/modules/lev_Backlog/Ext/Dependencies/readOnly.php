@@ -66,23 +66,6 @@ $dependencies['lev_Backlog']['lev_backlog_opportunities_name_readonly'] = array(
     ),
 );
 
-$dependencies['lev_Backlog']['activo_c_readonly'] = array(
-    'hooks' => array("all"),
-    'trigger' => 'true',
-    'triggerFields' => array('editar'),
-    'onload' => true,
-    'actions' => array(
-        array(
-            'name' => 'ReadOnly',
-            'params' => array(
-                'target' => 'activo_c',
-                'label' => 'activo_c_label',
-                'value' => 'not(equal($numero_de_backlog, ""))', //'not(equal($estatus_de_la_operacion, "Activa"))',
-            ),
-        ),
-    ),
-);
-
 $dependencies['lev_Backlog']['cliente_readonly'] = array(
     'hooks' => array("all"),
     'trigger' => 'true',
@@ -337,23 +320,6 @@ $dependencies['lev_Backlog']['assigned_user_name_readonly'] = array(
     ),
 );
 
-
-$dependencies['lev_Backlog']['activo_readonly'] = array(
-    'hooks' => array("all"),
-    'trigger' => 'true',
-    'triggerFields' => array('editar'),
-    'onload' => true,
-    'actions' => array(
-        array(
-            'name' => 'ReadOnly',
-            'params' => array(
-                'target' => 'activo',
-                'label' => 'activo_label',
-                'value' => 'not(equal($numero_de_backlog, ""))', //'not(equal($estatus_de_la_operacion, "Activa"))',
-            ),
-        ),
-    ),
-);
 
 $dependencies['lev_Backlog']['monto_comprometido_cancelado_readonly'] = array(
     'hooks' => array("all"),
