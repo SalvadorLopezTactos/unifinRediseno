@@ -1904,13 +1904,12 @@
             postal_idTemp = postal_modelTemp.id;
         }
 
-        console.log("EL ARREGLODE LAS DIRECCION " + existingDirecciones);
 
         // VALIDA QUE LA DIRECCION NO SEA LA MISMA
         // si regresa el valor verdadero significa que si esta duplicado por lo tanto no debe agregar la direccion
-        var success=false;
-        if(!this.direccionExistente(existingDirecciones,calle))
-        {
+       // var success=false;
+       // if(!this.direccionExistente(existingDirecciones,calle))
+       // {
             existingDirecciones.push({
                 tipodedireccion: $('.newTipodedireccion').val(),
                 tipo_label: dir_tipo_list[$('.newTipodedireccion').val()],
@@ -1973,7 +1972,7 @@
             this.model.set(this.name, existingDirecciones);
             success = true;
 
-        }
+        //}
 
 
 
