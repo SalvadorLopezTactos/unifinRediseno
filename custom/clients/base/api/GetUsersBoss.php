@@ -28,7 +28,7 @@ class GetUsersBoss extends SugarApi
                 //method to call
                 'method' => 'GetUserHeadByTeam',
                 //short help string to be displayed in the help documentation
-                'shortHelp' => 'M�todo GET para validar que cumpla con los datos necesarios para crear la solicitud',
+                'shortHelp' => 'Método GET para validar que cumpla con los datos necesarios para crear la solicitud',
                 //long help to be displayed in the help documentation
                 'longHelp' => '',
             ),
@@ -40,11 +40,11 @@ class GetUsersBoss extends SugarApi
     /**
      * Obtiene los Jefes y usuarios relacionados con la Cuenta
      *
-     * M�todo que obtiene los jefes y usuarios relacionados con una Cuenta y compara
-     * con el usuario firmado para otorgar permisos de visibilidad sonbre el campo correo y tel�fonos
+     * Método que obtiene los jefes y usuarios relacionados con una Cuenta y compara
+     * con el usuario firmado para otorgar permisos de visibilidad sonbre el campo correo y teléfonos
      *
      * @param array $api
-     * @param array $args Array con los par�metros enviados para su procesamiento
+     * @param array $args Array con los parámetros enviados para su procesamiento
      * @return bander true o false
      * @throws SugarApiExceptionInvalidParameter
      */
@@ -94,7 +94,7 @@ class GetUsersBoss extends SugarApi
 
         /*
          * Validamos si el usuario Firmado es igual a credito, factoraje y leasing.
-         * Modificaci�n para obtener padres e hijos del usuario logueado. Adrian Arauz 3/10/2018
+         * Modificación para obtener padres e hijos del usuario logueado. Adrian Arauz 3/10/2018
         **/
 
         if ($usuarioLog == $usrLeasing || $usuarioLog == $usrFactoraje || $usuarioLog == $usrCredito) {
