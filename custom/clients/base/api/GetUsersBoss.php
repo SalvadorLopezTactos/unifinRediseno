@@ -28,7 +28,7 @@ class GetUsersBoss extends SugarApi
                 //method to call
                 'method' => 'GetUserHeadByTeam',
                 //short help string to be displayed in the help documentation
-                'shortHelp' => 'Método GET para validar que cumpla con los datos necesarios para crear la solicitud',
+                'shortHelp' => 'MÃ©todo GET para validar que cumpla con los datos necesarios para crear la solicitud',
                 //long help to be displayed in the help documentation
                 'longHelp' => '',
             ),
@@ -40,11 +40,11 @@ class GetUsersBoss extends SugarApi
     /**
      * Obtiene los Jefes y usuarios relacionados con la Cuenta
      *
-     * Método que obtiene los jefes y usuarios relacionados con una Cuenta y compara
-     * con el usuario firmado para otorgar permisos de visibilidad sonbre el campo correo y teléfonos
+     * MÃ©todo que obtiene los jefes y usuarios relacionados con una Cuenta y compara
+     * con el usuario firmado para otorgar permisos de visibilidad sonbre el campo correo y telÃ©fonos
      *
      * @param array $api
-     * @param array $args Array con los parámetros enviados para su procesamiento
+     * @param array $args Array con los parÃ¡metros enviados para su procesamiento
      * @return bander true o false
      * @throws SugarApiExceptionInvalidParameter
      */
@@ -52,7 +52,7 @@ class GetUsersBoss extends SugarApi
     {
   		$flag = false;
   		$idCuenta = $args['id_cuenta'];
-  		$flag = GetUsersBoss::GetUsersBoss($idCuenta);
+  		$flag = GetUsersBoss::GetUsersBossMethod($idCuenta);
       if(!$flag)
       {
     		global $db;
@@ -68,17 +68,17 @@ class GetUsersBoss extends SugarApi
     				$idCuenta1 = $row1['rel_relaciones_accounts_1accounts_ida'];
             if(!$flag)
             {
-              $flag = GetUsersBoss::GetUsersBoss($idCuenta1);
+              $flag = GetUsersBoss::GetUsersBossMethod($idCuenta1);
             }
     			}
   		  }
       }
       return $flag;
     }
-	
-	  public function GetUsersBoss($idCuenta)
+
+	  public function GetUsersBossMethod($idCuenta)
 	  {
-        $flag = false; 
+        $flag = false;
         $beanAccounts = BeanFactory::getBean("Accounts", $idCuenta);
         global $current_user;
         global $app_list_strings;
@@ -94,7 +94,7 @@ class GetUsersBoss extends SugarApi
 
         /*
          * Validamos si el usuario Firmado es igual a credito, factoraje y leasing.
-         * Modificación para obtener padres e hijos del usuario logueado. Adrian Arauz 3/10/2018
+         * ModificaciÃ³n para obtener padres e hijos del usuario logueado. Adrian Arauz 3/10/2018
         **/
 
         if ($usuarioLog == $usrLeasing || $usuarioLog == $usrFactoraje || $usuarioLog == $usrCredito) {
@@ -134,7 +134,7 @@ class GetUsersBoss extends SugarApi
         if ($current_user->is_admin == true) {
           $flag = true;
         }
-		
+
 		    return $flag;
 	  }
 }
