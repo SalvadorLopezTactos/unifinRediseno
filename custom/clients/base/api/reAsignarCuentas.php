@@ -75,7 +75,7 @@ SQL;
                 $User = new User();
                 $User->retrieve($reAsignado);
                 $para = $User->email1;
-                if(($account->tipo_registro_c == 'Cliente' || $account->tipo_registro_c == 'Prospecto') && $para != null)
+                if($para != null)
                 {
           			if($User->optout_c == 1)
           			{

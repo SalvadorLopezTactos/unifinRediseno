@@ -1,3 +1,3 @@
 <?php
-$dictionary['Opportunity']['visibility'] = array('TeamSecurity' => false);
+/*$dictionary['Opportunity']['visibility'] = array('TeamSecurity' => false);*/
 ?>
