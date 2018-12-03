@@ -796,19 +796,22 @@
                         var ciudades_list = app.metadata.getCities();
                         $('select.newEstadoTemp').val();
                         //var ciudad_html = '<option value="xkcd"> Seleccionar Ciudad</option>';
+                        /**
+                            *AF- 2018-11-30:
+                            *Ajuste para recuperar ciudades por todos los estados mostrados
+                        */
+                        //Recupera lista de Estados
+                        var estadoOpciones = $('select.newEstadoTemp')[0];
+                        //Itera por cada estado obtenido
                         for (city_id in ciudades_list) {
-                            if (ciudades_list[city_id].estado_id == $('select.newEstadoTemp').val()) {
-                                $('select.newCiudadTemp').append($("<option>").val(city_id).html(ciudades_list[city_id].name));
-                                /*
-                                 if (city_id == direccion.ciudad) {
-                                 ciudad_html += '<option value="' + city_id + '" selected="true">' + city_list[city_id].name + '</option>';
-                                 }
-                                 else {
-                                 ciudad_html += '<option value="' + city_id + '" >' + city_list[city_id].name + '</option>';
-                                 }
-                                 */
+                            for (iEstado = 0; iEstado < estadoOpciones.options.length; iEstado++) {
+                                if (ciudades_list[city_id].estado_id == estadoOpciones.options[iEstado].value ) {
+                                    $('select.newCiudadTemp').append($("<option>").val(city_id).html(ciudades_list[city_id].name));
+                                    
+                                }
                             }
                         }
+                        
                         $(".loadingIconCiudad").hide();
                     }
                 },this)
