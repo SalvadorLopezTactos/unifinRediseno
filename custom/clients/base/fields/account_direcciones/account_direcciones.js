@@ -1230,7 +1230,7 @@
         }
 
         var estado_html = '<option value="xkcd"> Seleccionar Estado</option>';
-        for (state_id in estado_list) {
+		for (state_id in estado_list) {
             if (estado_list[state_id].pais_id == direccion.dire_direccion_dire_paisdire_pais_ida) {
                 if (state_id == direccion.dire_direccion_dire_estadodire_estado_ida) {
                     estado_html += '<option value="' + state_id + '" selected="true">' + estado_list[state_id].name + '</option>';
@@ -1242,7 +1242,6 @@
                 }
             }
         }
-
 
         var municipio_html = '<option value="xkcd"> Selecionar Municipio</option>';
         for (municipo_id in municipio_list) {
@@ -1283,9 +1282,8 @@
                     ciudad_html += '<option value="' + city_id + '" >' + city_list[city_id].name + '</option>';
                 }
             }
-
         }
-
+		ciudad_html += '<option value="' + direccion.ciudad + '" selected="true">' + direccion.ciudad_label + '</option>';
 
         var postal_html = '<option value="xkcd"> Seleccionar Codigo Postal</option>';
         var postal = '';
@@ -1297,12 +1295,10 @@
                 }
                 else {
                     postal_html += '<option value="' + codigopostal_id + '" >' + postal_list[codigopostal_id].name + '</option>';
-
                 }
-
             }
-
         }
+		postal_html += '<option value="' + direccion.dire_direccion_dire_codigopostaldire_codigopostal_ida + '" selected="true">' + direccion.postal_code_label + '</option>';
 
         //var postal_html=direccion.postal_code_label;
 
@@ -1338,58 +1334,51 @@
 
 
         //Traer los id_municipio que tengan name postal_code_label en postal_list
-        var municipios_html="";
+		var municipios_html="";
         for(var pos in postal_list){
             if (postal_list[pos].name == direccion.postal_code_label) {
                 //Obtener etiqueta del municipio
                 var id_municipio=postal_list[pos].id_municipio;
                 for(var pos_mun in municipio_list){
                     if(municipio_list[pos_mun].id == id_municipio){
-                        municipios_html += '<option value="' + id_municipio + '" selected="true">' + municipio_list[pos_mun].name + '</option>';
-
-                    }
+						if(municipio_list[pos_mun].id != direccion.dire_direccion_dire_municipiodire_municipio_ida){
+							municipios_html += '<option value="' + id_municipio + '" selected="true">' + municipio_list[pos_mun].name + '</option>';
+						}
+					}
                 }
             }
-
         }
-
+		municipios_html += '<option value="' + direccion.dire_direccion_dire_municipiodire_municipio_ida + '" selected="true">' + direccion.municipio_code_label + '</option>';
+		
         //Obtener el estado perteneciente a los municipios
         var estados_list_html="";
         for(var pos_mun in municipio_list){
-
             if(municipio_list[pos_mun].id== direccion.municipio){
                 //Obtener etiqueta del estado
                 var id_estado=municipio_list[pos_mun].estado_id;
                 for(var pos_es in estado_list){
                     if(estado_list[pos_es].id== id_estado){
-                        estados_list_html += '<option value="' + id_estado + '" selected="true">' + estado_list[pos_es].name + '</option>';
-
+						if(estado_list[pos_es].id != direccion.dire_direccion_dire_estadodire_estado_ida){
+							estados_list_html += '<option value="' + id_estado + '" selected="true">' + estado_list[pos_es].name + '</option>';
+						}
                     }
-
                 }
-
             }
-
         }
+		estados_list_html += '<option value="' + direccion.dire_direccion_dire_estadodire_estado_ida + '" selected="true">' + direccion.estado_code_label + '</option>';
 
         var paises_list_html="";
         for(var pos_est in estado_list){
-
             if(estado_list[pos_est].name== direccion.estado_code_label){
                 //Obtener etiqueta del estado
                 var id_pais=estado_list[pos_est].pais_id;
                 for(var pos_pais in country_list){
                     if(country_list[pos_pais].id== id_pais){
                         paises_list_html += '<option value="' + id_pais + '" selected="true">' + country_list[pos_pais].name + '</option>';
-
                     }
-
                 }
-
             }
-
         }
-
 
         return editDireccionFieldTemplate({
             max_length: this.def.len,
