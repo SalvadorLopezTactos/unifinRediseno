@@ -2105,6 +2105,7 @@ cancelarBacklog: function(e){
         }
         */
 
+        /*AF -TEST
         if(currentDay <= 20){
             currentMonth += 1;
         }
@@ -2119,6 +2120,7 @@ cancelarBacklog: function(e){
         if (currentMonth > 12){  //Si resulta mayor a diciembre
             currentMonth = currentMonth - 12;
         }
+        */
 
             //Valida número de mes actual
             var limitMonth = currentMonth + 3;
@@ -2261,6 +2263,7 @@ cancelarBacklog: function(e){
         }
 
 
+        /* AF - TEST
         if(currentDay <= 20){
             currentMonth += 1;
         }
@@ -2275,6 +2278,7 @@ cancelarBacklog: function(e){
         if (currentMonth > 12){  //Si resulta mayor a diciembre
             currentMonth = currentMonth - 12;
         }
+        */
 
         //Valida número de mes actual
         var limitMonth = currentMonth + 3;

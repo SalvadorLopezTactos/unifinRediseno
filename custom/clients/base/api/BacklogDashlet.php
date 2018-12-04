@@ -639,7 +639,7 @@ SQL;
         $backlog->monto_real_logrado = 0;
         $backlog->renta_inicial_real = 0;
         $backlog->motivo_de_cancelacion = $motivo_de_cancelacion;
-        $backlog->tct_competencia_quien_txf_c = $cam_competencia ;
+        $backlog->tct_competencia_quien_txf_c = $cam_competencia;
         $backlog->tct_que_producto_txf_c = $cam_producto;
         $backlog->save();
     }
@@ -985,6 +985,8 @@ SQL;
                 if ($index == "MyBacklogs") {
                     foreach ($linea as $backlogId => $backlogValues) {
                         foreach ($backlogValues as $colName => $colValues) {
+                            $colValues['equipo'] = ($colValues['equipo'] == "Equipo 0") ? "0" : $colValues['equipo'];
+                            $colValues['zona'] = ($colValues['zona'] == "Region 0") ? "0" : $colValues['zona'];
                             $colValues = $this->removeElement($colValues, "name");
                             $colValues = $this->removeElement($colValues, "clienteId");
                             $colValues = $this->removeElement($colValues, "activo");
@@ -1011,6 +1013,8 @@ SQL;
                     foreach ($linea as $backlogId => $backlogValues) {
                         foreach ($backlogValues as $colName => $colValues) {
                             foreach ($colValues as $subColName => $subColValues) {
+                                $subColValues['equipo'] = ($subColValues['equipo'] == "Equipo 0") ? "0" : $subColValues['equipo'];
+                                $subColValues['zona'] = ($subColValues['zona'] == "Region 0") ? "0" : $subColValues['zona'];
                                 $subColValues = $this->removeElement($subColValues, "name");
                                 $subColValues = $this->removeElement($subColValues, "clienteId");
                                 $subColValues = $this->removeElement($subColValues, "activo");
@@ -1039,6 +1043,8 @@ SQL;
                         foreach ($backlogValues as $colName => $colValues) {
                             foreach ($colValues as $subColName => $subColValues) {
                                 foreach ($subColValues as $childrenColName => $childrenColValues) {
+                                    $childrenColValues['equipo'] = ($childrenColValues['equipo'] == "Equipo 0") ? "0" : $childrenColValues['equipo'];
+                                    $childrenColValues['zona'] = ($childrenColValues['zona'] == "Region 0") ? "0" : $childrenColValues['zona'];
                                     $childrenColValues = $this->removeElement($childrenColValues, "name");
                                     $childrenColValues = $this->removeElement($childrenColValues, "clienteId");
                                     $childrenColValues = $this->removeElement($childrenColValues, "activo");
