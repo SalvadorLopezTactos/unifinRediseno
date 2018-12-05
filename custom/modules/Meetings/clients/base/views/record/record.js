@@ -3,6 +3,9 @@
 
     fechaInicioTemp: "",
 
+    estadoOriginal: "",
+    parentIdOriginal: "",
+
 
 
     initialize: function (options) {
@@ -11,6 +14,11 @@
         this.events['click a[name=parent_name]'] = 'handleEdit';
         this.model.addValidationTask('ValidaObjetivos',_.bind(this.ValidaObjetivos,this));
 
+        /**
+          AF: 2018-12-04
+          Validación para identificar si una reunión es marcada como realizada y se agrega cuenta
+        **/
+        this.model.addValidationTask('ValidaRealizadaSinCuenta',_.bind(this.validaRealizada,this));
 
         this.on('render', this.disableparentsfields, this);
         this.on('render', this.noEditStatus,this);
@@ -342,6 +350,10 @@
     Deshabilita campo status dependiendo de diferentes criterios
      */
     disablestatus:function () {
+        //Recupera valores originales antes de edición
+        this.estadoOriginal = this.model.get('status');
+        this.parentIdOriginal = this.model.get('parent_id');
+
         if(Date.parse(this.model.get('date_end'))>Date.now() || app.user.attributes.id!=this.model.get('assigned_user_id')){
 
             $('span[data-name=status]').css("pointer-events", "none");
@@ -569,5 +581,22 @@
             });
         }
         callback(null, fields, errors);
+    },
+
+    /**
+      Valida que no permita pasara a realizada y agregar cuetna en la misma edición de la reunión
+    */
+    validaRealizada:function(fields, errors, callback){
+      //Recupera valores
+      if (this.estadoOriginal != "Held" && this.parentIdOriginal == "" && this.model.get('status')=='Held' && this.model.get('parent_type') == 'Accounts' && this.model.get('parent_id') != "" ) {
+        errors['status_cuenta'] = 'No es posible actualizar el estado y la cuenta en la misma edición';
+        errors['status_cuenta'].required = true;
+        app.alert.show("Estado_sin_cuenta",{
+            level: "error",
+            title: "No es posible actualizar el estado y la cuenta en la misma edici\u00F3n",
+            autoClose: false
+        });
+      }
+      callback(null, fields, errors);
     },
 })
