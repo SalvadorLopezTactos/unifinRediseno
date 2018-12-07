@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa valmistajan.',
   'NTC_STATUS' => 'Aseta statukseksi Epäaktiivinen poistaaksesi tämän valmistajan Valmistajat-pudotusvalikoista.',
   'NTC_LIST_ORDER' => 'Aseta järjestys, jossa tämä valmistaja näkyy Valmistajat-pudotusvalikoissa',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Aktiivinen',
-    'Inactive' => 'Epäaktiivinen',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Tuo valmistajia',
 	'LBL_EDITLAYOUT' => 'Muokkaa asettelua' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Tuoterivit',

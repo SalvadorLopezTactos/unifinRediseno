@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Žinių bazės sąrašo ataskaitų sritis',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Žinių bazės duomenų ataskaitų sritos',
+
     'LBL_MODULE_NAME' => 'Žinių bazė',
     'LBL_MODULE_NAME_SINGULAR' => 'Žinių bazės straipsnis',
     'LBL_MODULE_TITLE' => 'Žinių bazės straipsnis',

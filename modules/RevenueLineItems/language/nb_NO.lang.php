@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Dashbord for inntektslinjeelement',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Dashbord for inntektslinjeoppføring',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampanje produkt',
     'LBL_MODULE_NAME' => 'Omsetningsposter',
     'LBL_MODULE_NAME_SINGULAR' => 'Omsetningspost',

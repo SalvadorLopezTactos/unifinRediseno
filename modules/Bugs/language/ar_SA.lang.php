@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'لوحة معلومات قائمة الأخطاء',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'لوحة معلومات سجل الأخطاء',
+
   'LBL_MODULE_NAME' => 'الأخطاء',
   'LBL_MODULE_NAME_SINGULAR'	=> 'الخطأ',
   'LBL_MODULE_TITLE' => 'متعقب الأخطاء: الصفحة الرئيسية',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'الحالات',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'المشروعات',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'المستندات',
-  'LBL_SYSTEM_ID' => 'معرّف النظام',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'المستخدم المعين',
 	'LBL_ASSIGNED_TO_NAME' => 'تعيين إلى',
 

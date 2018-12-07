@@ -267,7 +267,8 @@ class DynamicField {
     *
     * @return array select=>select columns, join=>prebuilt join statement
     */
-  function getJOIN( $expandedList = false , $includeRelates = false, &$where = false){
+    public function getJOIN($expandedList = false, $includeRelates = false, &$where = false)
+    {
         if(!$this->bean->hasCustomFields()){
             return array(
                 'select' => '',
@@ -317,10 +318,10 @@ class DynamicField {
         }
 
         return array('select'=>$select, 'join'=>$join);
-
     }
 
-   public function getRelateJoin($field_def, $joinTableAlias, $withIdName = true) {
+    public function getRelateJoin($field_def, $joinTableAlias, $withIdName = true)
+    {
         if (empty($field_def['type']) || $field_def['type'] != "relate" || empty($field_def['module'])) {
             return false;
         }
@@ -368,13 +369,13 @@ class DynamicField {
         $ret_array['from'] = " LEFT JOIN $rel_table $joinTableAlias ON $tableName.$relID = $joinTableAlias.id"
                             . " AND $joinTableAlias.deleted=0 " . $relate_query['join'];
         return $ret_array;
-   }
+    }
 
-   /**
-    * Fills in all the custom fields of type relate relationships for an object
-    *
-    */
-   public function fill_relationships(){
+    /**
+     * Fills in all the custom fields of type relate relationships for an object
+     */
+    public function fill_relationships()
+    {
         global $beanList, $beanFiles;
         if(!empty($this->bean->relDepth)) {
             if($this->bean->relDepth > 1)return;
@@ -430,7 +431,7 @@ class DynamicField {
                             'int', 'float', 'double', 'uint', 'ulong', 'long', 'short', 'tinyint', 'currency',
                             'decimal')
                     )) {
-                        if (!isset($this->bean->$name) || !is_numeric($this->bean->$name)) {
+                        if (!is_numeric($this->bean->$name)) {
                             if ($field['required']) {
                                 $this->bean->$name = 0;
                             } else {
@@ -447,14 +448,14 @@ class DynamicField {
                     }
 
                     if (($field['type'] == 'date' || $field['type'] == 'datetimecombo')
-                    && (empty($this->bean->$name) || $this->bean->$name == '1900-01-01')) {
+                        && (empty($this->bean->$name) || $this->bean->$name == '1900-01-01')) {
                         $this->bean->$name = ''; // do not set it to string 'NULL'
                     }
-                    $values[$name] = $this->bean->$name;
                 }
+                $values[$name] = $this->bean->$name;
             }
             if (!$hasCustomFields) {
-                return null;
+                return;
             }
             //Verify if this record has an existing entry in the custom table
             if ($isUpdate) {
@@ -472,6 +473,7 @@ class DynamicField {
             }
         }
     }
+
     /**
      * Deletes the field from fields_meta_data and drops the database column then it rebuilds the cache
      * Use the widgets get_db_modify_alter_table() method to get the table sql - some widgets do not need any custom table modifications
@@ -508,7 +510,7 @@ class DynamicField {
         //MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_LABELS));
     }
 
-    /*
+    /**
      * Method required by the TemplateRelatedTextField->save() method
      * Taken from MBModule's implementation
      */
@@ -539,10 +541,11 @@ class DynamicField {
     /**
      * Adds a custom field using a field object
      *
-     * @param Field Object $field
+     * @param TemplateField $field
      * @return boolean
      */
-    public function addFieldObject(&$field){
+    public function addFieldObject(&$field)
+    {
         $GLOBALS['log']->debug('adding field');
         $object_name = $this->module;
         $db_name = $field->name;
@@ -576,7 +579,9 @@ class DynamicField {
         $fmd->massupdate = $field->massupdate;
         $fmd->importable = ( isset ( $field->importable ) ) ? $field->importable : null ;
         $fmd->duplicate_merge = $field->duplicate_merge;
-        $fmd->audited =$field->audited;
+        $fmd->pii = $field->pii;
+        // pii field is always auditable
+        $fmd->audited = isTruthy($field->audited) || isTruthy($field->pii);
         $fmd->reportable = ($field->reportable ? 1 : 0);
         if(!$is_update){
             $fmd->new_with_id=true;

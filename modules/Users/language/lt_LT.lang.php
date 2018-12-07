@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Vartotojo informacija nerasta',
     'ERR_USER_NAME_EXISTS'              => 'The user name {0} already exists. Duplicate user names are not allowed. Change the user name to be unique.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Šis vartotojas yra užblokuotas, negalima prisijungti naudojantis senu slaptažodžiu.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Tik išorinio autentifikavimo įgaliojimus turinčiam vartotojui neleidžiama prisijungti naudojant „Sugar“ kredencialus',
 
 	'LBL_PASSWORD_SENT'                => 'Slaptažodis atnaujintas',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Neįmanoma išsiųsti slaptažodžio',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Gavėjo pašo adresas',
 	'ERR_SERVER_STATUS'					=> 'Jūsų serverio statusas',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistema negali išsiųsti el. pašto gavėjui. Patikrinkite Išeinančio pašto konfigūraciją: <a href="index.php?module=EmailMan&action=config">El. pašto nustatymai</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Vartotoją galima sukurti tik <a href="{0}" target="_blank">debesies konsolėje</a> IDM režimu.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Pagrindinį el. pašto adresą galima atnaujinti tik <a href="{0}" target="_blank">debesies konsolėje</a> IDM režimu.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Email Address',
 
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 's.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Prašome susisiekti su administratoriumi.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Norėdami naudoti „OpenID Connect“ (OIDC) autentifikavimą IDM režimu, įdiekite GMP PHP plėtinį.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Jūs buvote atjungtas iš sistemos. Prašome vėl prisijungti',
     'LBL_LOGGED_OUT_2' => 'čia',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Users&#39; reports',
     'LBL_CONTACTS_SYNC' => 'Contacts',
     'LBL_DETAIL' => 'Vartotojo profilis',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Jei tam tikrų laukų neįmanoma redaguoti, prisijunkite prie savo debesies konsolės ir tvarkykite šiuos laukus',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Jei norite pakeisti tam tikrus laukus, kurių redaguoti neįmanoma, ' .
+        'susisiekite su administratoriumi ir praneškite jam apie šiuos pakeitimus',
 ); // END STRINGS DEFS
 
 ?>

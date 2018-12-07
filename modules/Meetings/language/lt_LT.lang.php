@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Susitikimų sąrašo ataskaitų sritis',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Susitikimų duomenų ataskaitų sritis',
+
 	'ERR_DELETE_RECORD' => 'Įrašo numeris turi būti nurodytas norint ištrinti susitikimą.',
 	'LBL_ACCEPT_THIS'=>'Patvirtinti?',
 	'LBL_ADD_BUTTON'=> 'Pridėti',

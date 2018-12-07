@@ -224,7 +224,7 @@ $mod_strings = array (
   'LBL_TOTAL' => 'סך-הכל',
   'LBL_MODULE_NAME_SAVED' => 'שם המודול',
   'LBL_REPORT_TYPE' => 'סוג דוח',
-  'LBL_REPORT_LAST_RUN_DATE' => 'נגשו אליו ב',
+  'LBL_REPORT_LAST_RUN_DATE' => 'בוצעה גישה ב-',
   'LBL_REPORT__ATT_TYPE' => 'סוג',
   'LBL_REPORT_RUN_WITH_FILTER' => 'הפעל מסננים',
   'LBL_REPORT_RESET_FILTER' => 'איפוס',
@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'לפי רבעון',
     'LBL_BY_FISCAL_YEAR' => 'לפי שנת כספים',
     'LBL_BY_FISCAL_QUARTER' => 'לפי רבעון כספים',
+    'LBL_AMOUNT' => 'סכום',
     'LBL_COUNT' => 'מנה',
+    'LBL_PERCENT' => 'אחוז',
     'LBL_SUM' => 'סיכום',
     'LBL_AVG' => 'ממוצע',
     'LBL_MAX' => 'מקסימאלי',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'חודש',
     'LBL_YEAR' => 'שנה',
     'LBL_QUARTER' => 'רבעון',
+    'LBL_FISCAL' => 'כספי',
     'LBL_FISCAL_YEAR' => 'שנת כספים',
     'LBL_FISCAL_QUARTER' => 'רבעון כספים',
 	'LBL_YESTERDAY'=>'אתמול',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'ברבעון הבא',
     'LBL_ADD_RELATE' => "הוסף קשור",
     'LBL_DEL_THIS' => "הסר",
-    'LBL_ALERT_CANT_ADD' => 'You cannot add a related module until you select a table to relate from.\nSelect a module in the dropdown left of the &#39;Add Related&#39; button you clicked.',
+    'LBL_ALERT_CANT_ADD' => 'You cannot add a related module until you select a table to relate from.\\nSelect a module in the dropdown left of the &#39;Add Related&#39; button you clicked.',
     'LBL_BY_DAY' => 'לפי יום',
     'LBL_DAY' => 'יום',
     'LBL_OUTER_JOIN_CHECKBOX' => 'מודולים שאופציונאלית קשורים',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'יותר או שווה ל-',
 
     'LBL_FILTER_BY_MODULE' => 'לפי מודול',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'עם &#39;תרשימים&#39;',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'ישנה שגיאה באחזור נתוני דוח הפירוט לפעולה זו. צור קשר עם בעל הדוח לקבלת עזרה.',
+    'LBL_CHART_NO_DRILLTHRU' => 'פירוט לא זמין',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'הצגת הרשימה מציגה את כל הדוחות התואמים את קריטריוני החיפוש הנוכחיים שאליהם יש למשתמשים גישה. באפשרותך להציג את הפרטים הבסיסיים של כל דוח בתוך שדה העמודות של הצגת הרשימה ובתצוגה המקדימה. ניתן להגדיר תגים עבור דוחות וליצור מסננים. לחץ על שם הדוח כדי להציג את הדו"ח או בחר &#39;עריכת דוח&#39; בתפריט הפעולה כדי לשנות את הדוח.',
+  );

@@ -184,16 +184,10 @@ class SugarFieldCurrency extends SugarFieldFloat
      * Since SugarFieldFloat override this method, we need to do the same here and always return true as we want
      * to use the default processing
      *
-     * @param Number $value                         The value for which we are trying to filter
-     * @param String $fieldName                     What field we are trying to modify
-     * @param SugarBean $bean                       The associated SugarBean
-     * @param SugarQuery $q                         The full query object
-     * @param SugarQuery_Builder_Where $where       The where object for the filter
-     * @param String $op                            The filter operation we are trying to do
-     * @return bool
-     * @throws SugarApiExceptionInvalidParameter
+     * {@inheritdoc}
      */
-    public function fixForFilter(&$value, $fieldName, SugarBean $bean, SugarQuery $q, SugarQuery_Builder_Where $where, $op) {
+    public function fixForFilter(&$value, $columnName, SugarBean $bean, SugarQuery $q, SugarQuery_Builder_Where $where, $op)
+    {
         return true;
     }
 }

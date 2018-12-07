@@ -17,99 +17,138 @@ use Sugarcrm\Sugarcrm\ProcessManager;
 
 class PMSEEmailHandler
 {
-
     /**
-     *
+     * The Bean Handler object
      * @var PMSEBeanHandler
      */
     private $beanUtils;
 
     /**
-     *
+     * The Administration bean
      * @var Administration
      */
     private $admin;
 
     /**
-     *
-     * @var type
+     * The Localization Bean
+     * @deprecated Will be removed in a future release
+     * @var PMSELogger
      */
     private $locale;
 
     /**
-     *
+     * The Logger object
      * @var PMSELogger
      */
     private $logger;
 
     /**
+     * The Related Module object
      * @var PMSERelatedModule
      */
     private $pmseRelatedModule;
 
     /**
-     * @global beanList
-     */
-    protected $beanList;
-
-    /**
-     *
-     * @global type $locale
      * @codeCoverageIgnore
      */
     public function __construct()
     {
-        global $locale, $beanList;
-        $this->beanList = $beanList;
-        $this->locale = $locale;
-        $this->beanUtils = ProcessManager\Factory::getPMSEObject('PMSEBeanHandler');
-        $this->logger = PMSELogger::getInstance();
-        $this->admin = new Administration();
-        $this->pmseRelatedModule = ProcessManager\Factory::getPMSEObject('PMSERelatedModule');
+        $msg = 'The %s method will be removed in a future release and should no longer be used';
+        LoggerManager::getLogger()->deprecated(sprintf($msg, __METHOD__));
     }
 
     /**
-     *
-     * @return type
+     * Get the PMSE Related Module object
+     * @return PMSERelatedModule
+     */
+    protected function getRelatedModuleObject()
+    {
+        if (empty($this->pmseRelatedModule)) {
+            $this->pmseRelatedModule = ProcessManager\Factory::getPMSEObject('PMSERelatedModule');
+        }
+
+        return $this->pmseRelatedModule;
+    }
+
+    /**
+     * Gets the proper bean for processing
+     * @param SugarBean $bean The target bean
+     * @param string $module The related module name
+     * @return SugarBean
+     */
+    protected function getProperBean(SugarBean $bean, $module)
+    {
+        global $beanList;
+
+        // Module in this case could be a relationship name, link name or
+        // some other value
+        if (!isset($beanList[$module])) {
+            return $this->getRelatedModuleObject()->getRelatedModule($bean, $module);
+        }
+
+        // If the module is an actual module, send the original bean back
+        return $bean;
+    }
+
+    /**
+     * Gets the Bean Handler object
+     * @return PMSEBeanHandler
      * @codeCoverageIgnore
      */
     public function getBeanUtils()
     {
+        if (empty($this->beanUtils)) {
+            $this->beanUtils = ProcessManager\Factory::getPMSEObject('PMSEBeanHandler');
+        }
+
         return $this->beanUtils;
     }
 
     /**
-     *
+     * Gets the localization object
+     * @deprecated Will be removed in a future release
      * @return type
      * @codeCoverageIgnore
      */
     public function getLocale()
     {
-        return $this->locale;
+        $msg = 'The %s method will be removed in a future release and should no longer be used';
+        LoggerManager::getLogger()->deprecated(sprintf($msg, __METHOD__));
+
+        global $locale;
+        return $locale;
     }
 
     /**
-     *
-     * @return type
+     * Gets the PMSE Logger object
+     * @return PMSELogger
      * @codeCoverageIgnore
      */
     public function getLogger()
     {
+        if (empty($this->logger)) {
+            $this->logger = PMSELogger::getInstance();
+        }
+
         return $this->logger;
     }
 
     /**
-     *
-     * @return type
+     * Gets the administration object
+     * @return Administration
      * @codeCoverageIgnore
      */
     public function getAdmin()
     {
+        if (empty($this->admin)) {
+            $this->admin = new Administration();
+        }
+
         return $this->admin;
     }
 
     /**
-     *
+     * Sets the administration object
      * @param Administration $admin
      */
     public function setAdmin(Administration $admin)
@@ -118,44 +157,37 @@ class PMSEEmailHandler
     }
 
     /**
-     *
-     * @param type $beanUtils
+     * Sets the bean handler object
+     * @param PMSEBeanHandler $beanUtils
      * @codeCoverageIgnore
      */
-    public function setBeanUtils($beanUtils)
+    public function setBeanUtils(PMSEBeanHandler $beanUtils)
     {
         $this->beanUtils = $beanUtils;
     }
 
     /**
-     *
+     * Sets the localization object
+     * @deprecated Will be removed in a future release
      * @param type $locale
      * @codeCoverageIgnore
      */
     public function setLocale($locale)
     {
+        $msg = 'The %s method will be removed in a future release and should no longer be used';
+        LoggerManager::getLogger()->deprecated(sprintf($msg, __METHOD__));
+
         $this->locale = $locale;
     }
 
     /**
-     *
-     * @param type $logger
+     * Sets the logger oject
+     * @param PMSELogger $logger
      * @codeCoverageIgnore
      */
-    public function setLogger($logger)
+    public function setLogger(PMSELogger $logger)
     {
         $this->logger = $logger;
-    }
-
-    /**
-     *
-     * @param type $param
-     * @return \SugarPHPMailer
-     * @codeCoverageIgnore
-     */
-    public function retrieveSugarPHPMailer()
-    {
-        return new SugarPHPMailer();
     }
 
     /**
@@ -190,6 +222,7 @@ class PMSEEmailHandler
         if (isset($addresses->bcc) && is_array($addresses->bcc)) {
             $result->bcc = $this->processEmailsAndExpand($bean, $addresses->bcc, $flowData);
         }
+
         return $result;
     }
 
@@ -238,18 +271,16 @@ class PMSEEmailHandler
                     break;
             }
         }
-        
+
         return $res;
     }
 
     public function processUserEmails($bean, $entry, $flowData)
     {
-        $res = array();
-        $users = array();
+        $res = $users = array();
 
-        if (!isset($this->beanList[$entry->module])) {
-            $bean = $this->pmseRelatedModule->getRelatedModule($bean, $entry->module);
-        }
+        // Get the correct bean for this request
+        $bean = $this->getProperBean($bean, $entry->module);
         switch ($entry->value) {
             case 'last_modifier':
                 $users[] = $this->getLastModifier($bean);
@@ -260,25 +291,25 @@ class PMSEEmailHandler
             case 'is_assignee':
                 $users[] = $this->getCurrentAssignee($bean);
                 break;
-        }        
+        }
         foreach ($users as $user) {
             $res = array_merge($res, $this->getUserEmails($user, $entry));
         }
         return $res;
     }
-    
+
     public function getCurrentAssignee($bean)
     {
         $userBean = $this->retrieveBean("Users", $bean->assigned_user_id);
         return $userBean;
     }
-    
+
     public function getRecordCreator($bean)
     {
         $userBean = $this->retrieveBean("Users", $bean->created_by);
         return $userBean;
     }
-    
+
     public function getLastModifier($bean)
     {
         $userBean = $this->retrieveBean("Users", $bean->modified_user_id);
@@ -312,15 +343,15 @@ class PMSEEmailHandler
         }
         return $res;
     }
-    
+
     public function getSupervisor($user)
     {
         if (isset($user->reports_to_id) && $user->reports_to_id != '') {
             $supervisor = $this->retrieveBean("Users", $user->reports_to_id);
             if (
-                isset($supervisor->full_name) && 
-                !empty($supervisor->full_name) && 
-                isset($supervisor->email1) && 
+                isset($supervisor->full_name) &&
+                !empty($supervisor->full_name) &&
+                isset($supervisor->email1) &&
                 !empty($supervisor->email1)
             ) {
                 return $supervisor;
@@ -329,7 +360,7 @@ class PMSEEmailHandler
             }
         }
     }
-    
+
     public function processTeamEmails($bean, $entry, $flowData)
     {
         $res = array();
@@ -338,7 +369,7 @@ class PMSEEmailHandler
         $members = $team->get_team_members();
         foreach ($members as $user) {
             $userBean = $this->retrieveBean("Users", $user->id);
-            if ($this->isUserActiveForEmail($user)) {
+            if ($this->isUserActiveForEmail($userBean)) {
                 $item = new stdClass();
                 $item->name = $userBean->full_name;
                 $item->address = $userBean->email1;
@@ -368,11 +399,9 @@ class PMSEEmailHandler
     {
         $res = array();
         $field = $entry->value;
-        $module = $entry->module;
 
-        if (!isset($this->beanList[$module])) {
-            $bean = $this->pmseRelatedModule->getRelatedModule($bean, $module);
-        }
+        // Get the correct bean for this request
+        $bean = $this->getProperBean($bean, $entry->module);
         if (!empty($bean) && is_object($bean)) {
             $value = $bean->$field;
         } else {
@@ -406,41 +435,15 @@ class PMSEEmailHandler
 
         return $res;
     }
-    
-    /**
-     * filling the mail object with all the administrative settings and configurations
-     * @global type $sugar_version
-     * @global type $sugar_config
-     * @global type $app_list_strings
-     * @global type $current_user
-     * @param type $mailObject
-     */
-    public function setupMailObject($mailObject)
-    {
-        $this->admin->retrieveSettings();
-        if ($this->admin->settings['mail_sendtype'] == "SMTP") {
-            $mailObject->Mailer = "smtp";
-            $mailObject->Host = $this->admin->settings['mail_smtpserver'];
-            $mailObject->Port = $this->admin->settings['mail_smtpport'];
-            $mailObject->SMTPSecure = '';
-            if ($this->admin->settings['mail_smtpssl'] == 1) {
-                $mailObject->SMTPSecure = 'ssl';
-            }
-            if ($this->admin->settings['mail_smtpssl'] == 2) {
-                $mailObject->SMTPSecure = 'tls';
-            }
-            if ($this->admin->settings['mail_smtpauth_req']) {
-                $mailObject->SMTPAuth = true;
-                $mailObject->Username = $this->admin->settings['mail_smtpuser'];
-                $mailObject->Password = $this->admin->settings['mail_smtppass'];
-            }
-        } else {
-            $mailObject->Mailer = 'sendmail';
-        }
-        $mailObject->From = $this->admin->settings['notify_fromaddress'];
-        $mailObject->FromName = (empty($this->admin->settings['notify_fromname'])) ? "" : $this->admin->settings['notify_fromname'];
-    }
 
+    /**
+     * Returns a Mailer object
+     * @return mixed
+     */
+    protected function retrieveMailer()
+    {
+        return MailerFactory::getSystemDefaultMailer();
+    }
     /**
      * Send the email based in an email template and with the email data parsed.
      * @param type $moduleName
@@ -451,91 +454,81 @@ class PMSEEmailHandler
      */
     public function sendTemplateEmail($moduleName, $beanId, $addresses, $templateId)
     {
+        $mailTransmissionProtocol = "unknown";
         if (PMSEEngineUtils::isEmailRecipientEmpty($addresses)) {
             $this->getLogger()->alert('All email recipients are filtered out of the email recipient list.');
             return;
         }
-        $msgError = '';
-        $bean = $this->retrieveBean($moduleName, $beanId);
+        try {
+            $bean = $this->retrieveBean($moduleName, $beanId);
+            $templateObject = $this->retrieveBean('pmse_Emails_Templates');
+            $templateObject->disable_row_level_security = true;
 
-        $mailObject = $this->retrieveSugarPHPMailer();
-        $this->setupMailObject($mailObject);
+            $mailObject = $this->retrieveMailer();
+            $mailTransmissionProtocol   = $mailObject->getMailTransmissionProtocol();
 
-        $OBCharset = $this->locale->getPrecedentPreference('default_email_charset');
+            $this->addRecipients($mailObject, $addresses);
 
-        if (isset($addresses->to)) {
-            foreach ($addresses->to as $key => $email) {
-                $mailObject->AddAddress($email->address, $this->locale->translateCharsetMIME(trim($email->name), 'UTF-8', $OBCharset));
-            }
-        } else {
-            $msgError = 'addresses field \'TO\' is not defined';
-        }
-
-        if (isset($addresses->cc)) {
-            foreach ($addresses->cc as $key => $email) {
-                $mailObject->AddCC($email->address, $this->locale->translateCharsetMIME(trim($email->name), 'UTF-8', $OBCharset));
-            }
-        } else {
-            $this->logger->info('addresses field \'CC\' is not defined');
-        }
-
-        if (isset($addresses->bcc)) {
-            foreach ($addresses->bcc as $key => $email) {
-                $mailObject->AddBCC($email->address, $this->locale->translateCharsetMIME(trim($email->name), 'UTF-8', $OBCharset));
-            }
-        } else {
-            $this->logger->info('addresses field \'BCC\' is not defined');
-        }
-
-        //    $email = trim($this->mergeBeanInTemplate($bean, $addressArray['to'][0][1], false));
-        $templateObject = $this->retrieveBean('pmse_Emails_Templates');
-        $templateObject->disable_row_level_security = true;
-
-        if (isset($templateId) && $templateId != "") {
-            $templateObject->retrieve($templateId);
-        } else {
-            $msgError = 'template_id is not defined';
-        }
-
-        if (isset($templateObject->from_name) && $templateObject->from_name != '') {
-            $mailObject->FromName = $templateObject->from_name;
-        }
-
-        if (isset($templateObject->from_address) && $templateObject->from_address != '') {
-            $mailObject->From = $templateObject->from_address;
-        }
-
-        if (isset($templateObject->body) && empty($templateObject->body)) {
-            $templateObject->body = strip_tags(from_html($templateObject->body_html));
-        } else {
-            $this->logger->warning('template body is not defined');
-        }
-
-        if (isset($templateObject->body) && isset($templateObject->body_html)) {
-            if (!empty($templateObject->body_html)) {
-                $mailObject->IsHTML(true);
-                $mailObject->Body = from_html($this->beanUtils->mergeBeanInTemplate($bean, $templateObject->body_html));
-                $mailObject->AltBody = from_html($this->beanUtils->mergeBeanInTemplate($bean, $templateObject->body));
+            if (isset($templateId) && $templateId != "") {
+                $templateObject->retrieve($templateId);
             } else {
-                $mailObject->AltBody = from_html($this->beanUtils->mergeBeanInTemplate($bean, $templateObject->body));
+                $this->getLogger()->warning('template_id is not defined');
             }
-        } else {
-            $this->logger->warning('template body_html is not defined');
+
+            if (!empty($templateObject->from_name) && !empty($templateObject->from_address)) {
+                $mailObject->setHeader(EmailHeaders::From, new EmailIdentity($templateObject->from_address, $templateObject->from_name));
+            }
+
+            if (isset($templateObject->body) && empty($templateObject->body)) {
+                $templateObject->body = strip_tags(from_html($templateObject->body_html));
+            } else {
+                $this->getLogger()->warning('template body is not defined');
+            }
+
+            if (!empty($templateObject->body) && !empty($templateObject->body_html)) {
+                $textOnly = EmailFormatter::isTextOnly($templateObject->body_html);
+                if (!$textOnly) {
+                    if (!empty($templateObject->body_html)) {
+                        //set HTMLBody
+                        $htmlBody = from_html($this->getBeanUtils()->mergeBeanInTemplate($bean, $templateObject->body_html));
+                        $mailObject->setHtmlBody($htmlBody);
+                    }
+                }
+                // set TextBody too
+                $textBody = strip_tags(br2nl($templateObject->body));
+                $mailObject->setTextBody($textBody);
+            } else {
+                $this->getLogger()->warning('template body_html is not defined');
+            }
+
+            if (isset($templateObject->subject)) {
+                $mailObject->setSubject(from_html($this->getBeanUtils()->mergeBeanInTemplate($bean, $templateObject->subject)));
+            } else {
+                $this->getLogger()->warning('template subject is not defined');
+            }
+
+            $mailObject->send();
+        } catch (MailerException $mailerException) {
+            $message = $mailerException->getMessage();
+            $this->getLogger()->warning("Error sending email (method: {$mailTransmissionProtocol}), (error: {$message})");
         }
+    }
 
-        if (isset($templateObject->subject)) {
-            $mailObject->Subject = from_html($this->beanUtils->mergeBeanInTemplate($bean, $templateObject->subject));
-        } else {
-            $this->logger->warning('template subject is not defined');
+    /**
+     * Add receipients to Mailer object in preparation to sending email
+     * @param $mailObject Mailer object
+     * @param $addresses To, CC & BCC Email addresses
+     */
+    protected function addRecipients($mailObject, $addresses)
+    {
+        foreach (['to', 'cc', 'bcc'] as $type) {
+            if (isset($addresses->{$type})) {
+                $method = 'addRecipients' . ucfirst($type);
+                foreach ($addresses->{$type} as $key => $email) {
+                    $mailObject->{$method}(new EmailIdentity($email->address, $email->name));
+                }
+            }
         }
-
-        $mailObject->prepForOutbound();
-        $result = $mailObject->Send();
-
-        //if (isset($mailObject->ErrorInfo)) {
-        //$this->bpmLog('ERROR', "mail error: " . $mailObject->ErrorInfo);
-        //}
-        return array('result' => $result, 'ErrorMessage' => $msgError, 'ErrorInfo' => $mailObject->ErrorInfo);
     }
 
     /**
@@ -631,7 +624,7 @@ class PMSEEmailHandler
         }
         foreach ($addresses as $item => $data) {
             if (!isset($data['email_address_id']) || !isset($data['primary_address'])) {
-                $this->logger->error(' The Email address Id or the primary address flag does not exist in DB');
+                $this->getLogger()->error(' The Email address Id or the primary address flag does not exist in DB');
                 continue;
             }
             $emailAddressId = $data['email_address_id'];
@@ -645,9 +638,6 @@ class PMSEEmailHandler
             $_REQUEST[$emailId . 'Id' . $item] = $emailAddressId;
             $_REQUEST[$emailId . 'VerifiedFlag' . $item] = true;
             $_REQUEST[$emailId . 'VerifiedValue' . $item] = $data['email_address'];
-            //$upd_query = "UPDATE email_addresses SET email_address='" . $emailAddress . "', email_address_caps='" . mb_strtoupper($emailAddress) . "', date_modified=" . $db->now() . " WHERE id='" . $row['email_address_id'] . "'";
-            //$upd_res = $db->Query($upd_query);
-            //$this->bpmLog('INFO',  $upd_query . ' result :  ' . print_r($upd_res,true));
         }
     }
 

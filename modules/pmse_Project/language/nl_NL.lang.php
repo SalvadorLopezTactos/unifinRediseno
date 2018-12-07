@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Procesdefinities',
   'LBL_MODULE_TITLE' => 'Procesdefinities',
   'LBL_MODULE_NAME_SINGULAR' => 'Procesdefinitie',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'is ongelijk aan',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'is niet',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'niet gelijk aan',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Looptijd',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Toevoegen',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Sluiten',

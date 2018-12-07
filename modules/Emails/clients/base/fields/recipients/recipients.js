@@ -12,6 +12,8 @@
  * @class View.Fields.Base.Emails.RecipientsField
  * @alias SUGAR.App.view.fields.BaseEmailsRecipientsField
  * @extends View.Fields.Base.BaseField
+ * @deprecated Use {@link View.Fields.Base.Emails.EmailRecipientsField}
+ * instead.
  */
 ({
     /**
@@ -30,13 +32,15 @@
     plugins: ['DragdropSelect2'],
 
     /**
-     * @override
-     * @param {Object} options
+     * @inheritdoc
      */
     initialize: function(options) {
-        app.view.Field.prototype.initialize.call(this, options);
+        app.logger.warn('View.Fields.Base.Emails.RecipientsField is deprecated. Use ' +
+            'View.Fields.Base.Emails.EmailRecipientsField instead.');
+
+        this._super('initialize', [options]);
         // initialize the value to an empty collection
-        this.model.set(this.name, new Backbone.Collection);
+        this.model.setDefault(this.name, new Backbone.Collection);
     },
 
     /**
@@ -124,7 +128,7 @@
             value.off(null, null, this);
         }
 
-        app.view.Field.prototype.unbindData.call(this);
+        this._super('unbindData');
     },
 
     /**
@@ -133,9 +137,18 @@
      * @private
      */
     _render: function() {
-        app.view.Field.prototype._render.call(this);
+        var $controlsEl;
+        var $recipientsField;
 
-        var $recipientsField = this.getFieldElement();
+        if (this.$el) {
+            $controlsEl = this.$el.closest('.controls');
+            if ($controlsEl.length) {
+                $controlsEl.addClass('controls-one btn-fit');
+            }
+        }
+        this._super('_render');
+
+        $recipientsField = this.getFieldElement();
 
         if ($recipientsField.length > 0) {
             $recipientsField.select2({
@@ -399,7 +412,7 @@
      */
     unbindDom: function() {
         this.getFieldElement().select2('destroy');
-        app.view.Field.prototype.unbindDom.call(this);
+        this._super('unbindDom');
     },
 
     /**

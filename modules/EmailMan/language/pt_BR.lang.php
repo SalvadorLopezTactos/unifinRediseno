@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'clique aqui',
 	'TXT_REMOVE_ME'								=> 'Para sair desta lista de e-mails',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Enviar notificação do endereço de e-mail do usuário atribuído',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Optar pela não participação de novos endereços de e-mail por padrão',
 
 	'LBL_SECURITY_TITLE'						=> 'Definições de Segurança do E-mail',
 	'LBL_SECURITY_DESC'							=> 'Verificar a seguir o que NÃO deve ser recebido por e-mail de entrada ou exibido no módulo de e-mails.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Permitir que usuários usem esta conta para enviar e-mail:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Quando esta opção for selecionada, todos os usuários serão capazes de enviar<br> e-mails usando a mesma conta que o sistema usa para enviar notificações e alertas. Se a opção não for selecionada, os <br>usuários podem ainda utilizar o servidor de envio de e-mail, depois de fornecerem suas informações de conta.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Quando ativado, o nome do usuário atribuído e seu endereço de e-mail serão incluídos no campo "De" do e-mail. Esse recurso pode não funcionar com servidores SMTP que não permitem o envio de uma conta de e-mail diferente da conta do servidor.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Ao adicionar um novo endereço de e-mail, a opção de não participação será ativada automaticamente. Não serão enviados e-mails de campanhas aos endereços que optaram por essa opção. A alteração desta definição não afetará os endereços de e-mail existentes.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

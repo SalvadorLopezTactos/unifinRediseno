@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Mødeliste-dashboard',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Mødeoptegnelses-dashboard',
+
 	'ERR_DELETE_RECORD' => 'Der skal angives et postnummer for at slette mødet.',
 	'LBL_ACCEPT_THIS'=>'Acceptér?',
 	'LBL_ADD_BUTTON'=> 'Tilføj',

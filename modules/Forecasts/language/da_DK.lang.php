@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Prognose-dashboard',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Prognoser',
     'LBL_MODULE_NAME_SINGULAR' => 'Prognose',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'Produkt-id:',
     'LBL_QUOTA_ID' => 'Kvote ID',
     'LBL_VERSION' => 'Version',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Skjul tekstbjælke',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Vis tekstbjælke',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Skjul linjetekst',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Vis linjetekst',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Fejl: Brugeren {0} ikke har administratoradgang til anmode om Prognoser for {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Finansår startdato:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigurer den tidsperiode, der skal bruges i prognose modulet.<br><br>Bemærk, at tidsperiode indstillingerne ikke kan ændres efter første opsætning.<br><br>Start med at vælge startdato for dit regnskabsår. Vælg derefter type tidsperiode for prognose. Datointervallet for tidsperioder vil automatisk blive beregnet baseret på dine valg. Sub-tidsperiode er grundlaget for Prognoseregnearket.<br><br>Den synlige fremtid og tidligere tidsperioder vil bestemme antallet af synlige sub-tidsperioder i prognosemodulet. Brugerne er i stand til at se og redigere prognosetal i de synlige delperioder.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurer, hvordan du ønsker at kategorisere {{forecastByModule}}. <br><br>Bemærk, at indstillingerne for intervaller ikke kan ændres efter den første bekræftelse. Indstillingerne for intervaller er låst med eksisterende prognosedata for opgraderede instanser.<br><br>Du kan vælge to eller flere kategorier baseret på sandsynlighedsintervaller eller oprette kategorier, der ikke er baseret på sandsynlighed.<br><br>Der er afkrydsningsfelterne til venstre for dine brugerdefinerede kategorier; brug dem til at beslutte hvilke områder der vil blive medtaget inden for de prognosebeløb, der er udført og rapporteret til ledere.<br><br>En bruger kan manuelt ændre status for medtag/udelad og kategori af {{forecastByModule}} fra deres regneark.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurer hvordan du ønsker at kategorisere {{forecastByModule}}. <br><br>Bemærk at intervalindstillingerne ikke kan ændres efter den første bekræftelse. Intervalindstillingerne er låst for eksisterende prognosedata.<br><br>Du kan vælge to eller flere kategorier baseret på sandsynlighedsintervaller eller oprette kategorier, der ikke er baseret på sandsynlighed. <br><br>Du finder afkrydsningsfelterne til venstre for din brugerdefinerede kategorier; brug disse til at beslutte, hvilke intervaller der skal medtages i prognosebeløbet og indberettes til ledelsen. <br><br>En bruger kan manuelt ændre status for medtag/udelad og kategori af {{forecastByModule}} fra deres regneark.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Vælg de kolonner, du ønsker at brugeren skal udfylde med sine prognoser for hver {{forecastByModuleSingular}}. Bemærk venligst at sandsynlige beløb er bundet til beløbet i {{forecastByModule}}; af denne grund kan Sandsynlig kolonne ikke skjules.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Vælg hvilke kolonner, du gerne vil se i Prognosemodulet. Listen over felter vil kombinere regnearket og giver brugeren mulighed for at vælge, hvordan konfigurationen skal vises.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Jeg er en pladsholder for prognosen ved how-to tekst!',

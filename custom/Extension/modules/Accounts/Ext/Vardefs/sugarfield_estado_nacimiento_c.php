@@ -1,5 +1,5 @@
 <?php
- // created: 2018-02-16 16:59:02
+ // created: 2018-12-05 18:17:34
 $dictionary['Account']['fields']['estado_nacimiento_c']['labelValue'] = 'Estado de nacimiento';
 $dictionary['Account']['fields']['estado_nacimiento_c']['dependency'] = '';
 $dictionary['Account']['fields']['estado_nacimiento_c']['visibility_grid']['trigger'] = 'pais_nacimiento_c';

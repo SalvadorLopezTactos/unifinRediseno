@@ -9,7 +9,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 (function() {
 
 SUGAR.forms = SUGAR.forms || {};
@@ -157,8 +156,8 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
             result;
 
         if (!def) {
-            console.log("attempted to get a value for field " + varname
-                + " which is not a field in " + this.model.module);
+            SUGAR.App.logger.warn('Attempted to get a value for field ' + varname
+                + ' which is not a field in ' + this.model.module);
         }
 
         //Relate fields are only string on the client side, so return the variable name back.
@@ -492,14 +491,17 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
                 var fieldVal = field + '_values';
                 var isCurrency = relModel.fields[field] && relModel.fields[field].type === 'currency';
                 var current = linkValues[fType] && linkValues[fType][fieldVal] || {};
+
                 if (!_.isEmpty(current) && operation == 'remove') {
-                    if (current[relModel.id]) {
+                    if (relModel.id in current) {
                         delete current[relModel.id];
                     }
-                    if (current[relModel.cid]) {
+
+                    if (relModel.cid in current) {
                         delete current[relModel.cid];
                     }
                 }
+
                 if (!operation || operation == 'add') {
                     //Cleanup references to a model's CID if it now has an ID
                     if (current[relModel.cid] && relModel.id) {
@@ -514,7 +516,6 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
                         );
                     }
                     current[id] = value;
-
                 }
                 linkValues[fType] = linkValues[fType] || {};
                 linkValues[fType][fieldVal] = current;
@@ -637,7 +638,8 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
         var cachedKey = link + '_' + field + '_' + relationID;
 
         if (field &&
-            (!relContext.isDataFetched() || (relModel && _.isUndefined(relModel.get(field)))) &&
+            (!relContext.isDataFetched() ||
+            (relModel && _.isUndefined(relModel.get(field)) && !relModel.getFetchRequest())) &&
             !this.view._loadedRelatedFields.hasOwnProperty(cachedKey)) {
 
             // fields may contain more fields than just the original one
@@ -770,11 +772,7 @@ App.utils.extendFrom(SEC, SE.ExpressionContext, {
         disabled = (_.isUndefined(disabled)) ? true : disabled;
         var field = this.getField(target);
         if (field) {
-            field.setDisabled(disabled);
-
-            //We then need to show or hide the inline edit pencil if it exists
-            //FIXME SC-5212 will remove this.
-            this.view.$('span.record-edit-link-wrapper[data-name=' + target + ']').toggleClass('hide', disabled);
+            field.setDisabled(disabled, {trigger: true});
 
             // if disabled is false
             // and the currentState of the field is not edit
@@ -1043,7 +1041,7 @@ SUGAR.forms.Dependency.fromMeta = function(meta, context) {
         var addAction = true;
         // if the action is SetValue, lets make sure the the user has edit access to this field
         if (actionDef.action === 'SetValue' && actionDef.params.target) {
-            addAction = App.acl.hasAccess('edit', this.model.module, undefined, actionDef.params.target);
+            addAction = SUGAR.App.acl.hasAccess('edit', this.model.module, undefined, actionDef.params.target);
         }
 
         if (addAction) {
@@ -1057,7 +1055,7 @@ SUGAR.forms.Dependency.fromMeta = function(meta, context) {
         var addAction = true;
         // if the action is SetValue, lets make sure the the user has edit access to this field
         if (actionDef.action === 'SetValue' && actionDef.params.target) {
-            addAction = App.acl.hasAccess('edit', this.model.module, undefined, actionDef.params.target);
+            addAction = SUGAR.App.acl.hasAccess('edit', this.model.module, undefined, actionDef.params.target);
         }
 
         if (addAction) {

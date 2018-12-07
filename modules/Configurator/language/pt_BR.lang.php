@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Servidor Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Itens do subpainel por página',
 	'LOG_MEMORY_USAGE'=>'Registrar a utilização da memória',
-	'LOG_SLOW_QUERIES'=>'Registrar consultas lentas',
+    'LOG_SLOW_QUERIES' => 'Registrar consultas lentas',
     'LOCK_HOMEPAGE_HELP'=>'Esta configuração destina-se a prever<BR> 1) a adição de novas páginas principais e dashlets no módulo Página Principal, <BR>2) a personalização do posicionamento do dashlet nas páginas com arrastar e soltar.',
     'CURRENT_LOGO'=>'Logotipo atual:',
     'CURRENT_LOGO_HELP'=>'Este logotipo é exibido no canto esquerdo do rodapé do aplicativo Sugar.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Nome que aparece na barra de título do seu navegador.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Ativar/Desativar exibição de e-mails de contatos relacionados (ou relacionados) no subpainel de e-mail.',
 
-    'LBL_OC_STATUS'                     => 'Estado do Cliente Offline Padrão',
-    'DEFAULT_OC_STATUS'                 => 'Habilitar o Cliente Offline por Padrão',
-    'LBL_OC_STATUS_DESC' => 'Selecione esta opção se deseja que qualquer usuário tenha acesso ao Cliente Offline. Caso contrário, você poderá configurar o acesso no nível do usuário.',
     'SESSION_TIMEOUT' => 'Tempo limite da sessão do portal',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'O tempo limite da sessão do portal é para versões herdadas do portal Sugar disponível nas versões 6.5 e anteriores.',
     'UPLOAD_MAXSIZE_UNITS' => 'bytes',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'A URL de Logon do SAML não pode ficar vazia',
     'ERR_EMPTY_SAML_CERT' => 'O certificado SAML não pode ficar vazio',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'O ID da entidade do SAML não pode estar vazio',
     'ERR_SAML_LOGIN_URL' => 'A URL de Logon do SAML não é válida',
     'ERR_SAML_SLO_URL' => 'A URL de SLO do SAML não é válida',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'O arquivo PEM deve conter a chave privada',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'O arquivo PEM deve conter o certificado x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'O certificado x.509 fornecido não corresponde à chave privada',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Fluxos de atividades',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Ativar Fluxos de Atividades',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Ativa os Fluxos de Atividades para o aplicativo',
 );
 
 

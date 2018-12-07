@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'يجب أن تحدد رقم السجل لحذف الشركة المصنعة.',
   'NTC_STATUS' => 'اضبط الحالة على غير نشط لإزالة الشركة المصنعة هذه من القوائم المنسدلة لشركات التصنيع',
   'NTC_LIST_ORDER' => 'تعيين ترتيب ظهور الشركة المصنعة هذه به في القوائم المنسدلة للشركة المصنعة',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'نشط',
-    'Inactive' => 'غير نشط',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'استيراد الشركة المصنعة',
 	'LBL_EDITLAYOUT' => 'تعديل المخطط' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'بنود العائدات',

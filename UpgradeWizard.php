@@ -13,7 +13,7 @@ if(!defined('sugarEntry'))define('sugarEntry', true);
 
 // if we're in upgrade, upgrade files will be preserved in special place
 $webUpgraderFile = 'modules/UpgradeWizard/WebUpgrader.php';
-if(!empty($_REQUEST['action']) && !empty($_REQUEST['token'])) {
+if (!empty($_REQUEST['action']) && !empty($_REQUEST['token'])) {
     session_start();
     if (!empty($_SESSION['upgrade_dir']) && is_file($_SESSION['upgrade_dir'] . 'WebUpgrader.php')) {
         $webUpgraderFile = $_SESSION['upgrade_dir'] . 'WebUpgrader.php';
@@ -42,10 +42,10 @@ if (!empty($_REQUEST['action']) && $_REQUEST['action'] == 'exportlog') {
     exit;
 }
 
-if(empty($_REQUEST['action']) || empty($_REQUEST['token'])) {
+if (empty($_REQUEST['action']) || empty($_REQUEST['token'])) {
     $token = $upg->startUpgrade();
-    if(!$token) {
-        if(!$upg->error) {
+    if (!$token) {
+        if (!$upg->error) {
             $errmsg = "Failed to initialize the upgrader, please check you're logged in as admin";
         } else {
             $errmsg = $upg->error;
@@ -55,19 +55,19 @@ if(empty($_REQUEST['action']) || empty($_REQUEST['token'])) {
 	$upg->displayUpgradePage();
 	exit(0);
 }
-if(!$upg->startRequest($_REQUEST['token'])) {
+if (!$upg->startRequest($_REQUEST['token'])) {
     die("Bad token");
 }
 
 ob_start();
 $res = $upg->process($_REQUEST['action']);
-if($res !== false && $upg->success) {
+if ($res !== false && $upg->success) {
     // OK
     $reply = array("status" => "ok", "data" => $res);
-    if(!empty($upg->license)) {
+    if (!empty($upg->license)) {
         $reply['license'] = $upg->license;
     }
-    if(!empty($upg->readme)) {
+    if (!empty($upg->readme)) {
         $reply['readme'] = $upg->readme;
     }
 } else {
@@ -86,8 +86,8 @@ if ($_REQUEST['action'] == 'healthcheck') {
 
 $msg = ob_get_clean();
 
-if(!empty($msg)) {
-    if(!empty($reply['message'])) {
+if (!empty($msg)) {
+    if (!empty($reply['message'])) {
         $reply['message'] .= $msg;
     } else {
         $reply['message'] = $msg;

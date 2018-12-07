@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '機會清單儀表板',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '機會記錄儀表板',
+
     'LBL_MODULE_NAME' => '商機',
     'LBL_MODULE_NAME_SINGULAR' => '商機',
     'LBL_MODULE_TITLE' => '商機：首頁',
@@ -182,25 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => '在您開始此變更后，會在後台建立各現有 {{module_name}} 的「營收項目」記錄。在「營收項目」完成且可用后，會向您使用者設定檔上的電子郵件地址傳送通知。請注意，實例必須設定為透過「管理」>「電子郵件設定」傳送電子郵件，以便能夠傳送通知。',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模組可以從頭至尾追蹤單個銷售。每個 {{module_name}} 記錄都代表一次未來的銷售，並包含相關銷售資料，且與其他重要記錄有關，如 {{quotes_module}}、{{contacts_module}} 等等。{{module_name}} 一般會經歷數個「銷售階段」，直到它標記為「結束並贏得客戶」或「結束但客戶流失」。甚至可以透過使用 Sugar 的 {{forecasts_singular_module}} 模組來了解和預測銷售趨勢以及實現銷售配額的工作重心，對 {{plural_module_name}} 和進一步加以利用。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模組允許您全程追蹤個人銷售。每個 {{module_name}} 紀錄都代表一次未来的銷售，包括相關銷售數據，且和 {{quotes_module}}、{{contacts_module}} 等其他重要紀錄相關。{{module_name}} 通常經過幾個銷售階段實現進步，直到被標記為“談成结束”或“丢單结束”。甚至可以使用 Sugar 的 {{forecasts_singular_module}}ing 模組進一步調節{{plural_module_name}}，以便理解和預測銷售趨勢，以及集中精力達成銷售定額。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '透過 {{plural_module_name}} 模組，您可從頭至尾追蹤單個銷售及其所屬項目。各 {{module_name}} 記錄都代表一次未來的銷售，並包含相關銷售資料，且與其他重要記錄有關，比如 {{quotes_module}}、{{contacts_module}} 等。
+    'LBL_HELP_RECORD' => '{{plural_module_name}} 模組允許您全程追蹤個人銷售和這些銷售的明細項目。每個 {{module_name}} 紀錄都代表一次未来的銷售，包括相關銷售數據，且和 {{quotes_module}}、{{contacts_module}} 等其他重要紀錄相關。
 
-- 透過按一下單個欄位或「編輯」按鈕，編輯此記錄的欄位。
-- 透過切換左下角窗格至「資料檢視」，檢視或修改子面板其他記錄的連結
-- 透過切換左下角窗格至「活動流」，在 {{activitystream_singular_module}} 中執行和檢視使用者註解和記錄變更歷史。
-- 使用記錄名稱右側的圖示追蹤此記錄或將此記錄新增至我的最愛。
-- 「編輯」按鈕右側的下拉式「動作」功能表提供其他動作選項。',
+- 通過點擊單個字段或“編輯”按鈕來編輯此紀錄的字段。
+- 通過切換左下角窗格至“數據視圖”來查看或修改子面板中其他紀錄的連結。
+- 通過切換左下角窗格至“活動流”在{{activitystream_singular_module}} 中撰寫和查看用戶評論和紀錄更改歷史。
+- 使用紀錄名稱右側的圖標關注此紀錄或將此紀錄新增至收藏夾。
+- “編輯”按鈕右側的下拉“操作”菜單提供其他操作選項。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '透過 {{plural_module_name}} 模組，您可從頭至尾追蹤單個銷售及其所屬項目。各 {{module_name}} 記錄都代表一次未來的銷售，並包含相關銷售資料，且與其他重要記錄有關，比如 {{quotes_module}}、{{contacts_module}} 等。
+    'LBL_HELP_CREATE' => '{{plural_module_name}} 模組允許您全程追蹤個人銷售和這些銷售的明細項目。每個 {{module_name}} 紀錄都代表一次未來的銷售，包括相關銷售數據，且和 {{quotes_module}}、{{contacts_module}} 等其他重要紀錄相關。
 
-建立 {{module_name}}：
-1. 按需提供欄位值。
- - 標記為「必填」的欄位在儲存前必須先填寫完整。
- - 按一下「顯示更多」以顯示更多欄位（若需）。
-2. 按一下「儲存」以完成新記錄並返回至上一頁。',
+若要創建 {{module_name}}：
+1. 按需提供字段值。
+ - 標記為“必填”的字段在保存前必須先填寫完整。
+ - 如有需要，點擊“顯示更多”以顯示其他字段。
+2. 點擊“保存”以完成新紀錄，並返回至上一頁。',
 
 // END ENT/ULT
 

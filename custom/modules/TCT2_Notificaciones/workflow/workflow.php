@@ -41,17 +41,16 @@ include_once("include/workflow/custom_utils.php");
 	 $secondary_array = array(); 
 	 //Secondary Triggers 
 	 //Secondary Trigger number #1
-	 $secondary_array = check_rel_filter($focus, $secondary_array, 'tct2_notificaciones_accounts', $trigger_meta_array['trigger_0_secondary_0'], 'any'); 
-	 if(($secondary_array['results']==true)	 ){ 
+	 if( (isset($focus->persona_c) && $focus->persona_c ==  stripslashes('Cliente'))	 ){ 
 	 
 
 
 	global $triggeredWorkflows;
-	if (!isset($triggeredWorkflows['c31eefc2_730e_11e8_8e00_00155d963615'])){
-		$triggeredWorkflows['c31eefc2_730e_11e8_8e00_00155d963615'] = true;
+	if (!isset($triggeredWorkflows['a87776c4_f9a7_11e8_a275_00155da06f04'])){
+		$triggeredWorkflows['a87776c4_f9a7_11e8_a275_00155da06f04'] = true;
 		 $alertshell_array = array(); 
 
-	 $alertshell_array['alert_msg'] = "c7858982-41bc-11e8-9540-00155d963615"; 
+	 $alertshell_array['alert_msg'] = "88a3c80c-4278-11e8-9e62-00155d967307"; 
 
 	 $alertshell_array['source_type'] = "Custom Template"; 
 
@@ -60,7 +59,7 @@ include_once("include/workflow/custom_utils.php");
 	 process_workflow_alerts($focus, $alert_meta_array['TCT2_Notificaciones0_alert0'], $alertshell_array, false); 
  	 $alertshell_array = array(); 
 
-	 $alertshell_array['alert_msg'] = "182ceabe-4984-11e8-bb16-00155d963615"; 
+	 $alertshell_array['alert_msg'] = "6155ce22-766b-11e8-989a-00155d967407"; 
 
 	 $alertshell_array['source_type'] = "Custom Template"; 
 
@@ -87,7 +86,16 @@ include_once("include/workflow/custom_utils.php");
 
 if(isset($focus->fetched_row['id']) && $focus->fetched_row['id']!=""){ 
  
- if( (
+ if( ( !(
+ 	 ( 
+ 		$focus->fetched_row['ejecutado_c'] === true ||
+ 		$focus->fetched_row['ejecutado_c'] === 'true' ||
+ 		$focus->fetched_row['ejecutado_c'] === 'on' ||
+ 		$focus->fetched_row['ejecutado_c'] === 1 ||
+ 		$focus->fetched_row['ejecutado_c'] === '1'
+ 	 )  
+ )) && 
+ (
  	 ( 
  		isset($focus->ejecutado_c) && $focus->ejecutado_c === true ||
  		isset($focus->ejecutado_c) && $focus->ejecutado_c === 'true' ||
@@ -108,11 +116,11 @@ if(isset($focus->fetched_row['id']) && $focus->fetched_row['id']!=""){
 
 
 	global $triggeredWorkflows;
-	if (!isset($triggeredWorkflows['c31f7406_730e_11e8_9c0f_00155d963615'])){
-		$triggeredWorkflows['c31f7406_730e_11e8_9c0f_00155d963615'] = true;
+	if (!isset($triggeredWorkflows['a878216e_f9a7_11e8_b6dd_00155da06f04'])){
+		$triggeredWorkflows['a878216e_f9a7_11e8_b6dd_00155da06f04'] = true;
 		 $alertshell_array = array(); 
 
-	 $alertshell_array['alert_msg'] = "c7858982-41bc-11e8-9540-00155d963615"; 
+	 $alertshell_array['alert_msg'] = "88a3c80c-4278-11e8-9e62-00155d967307"; 
 
 	 $alertshell_array['source_type'] = "Custom Template"; 
 
@@ -121,7 +129,7 @@ if(isset($focus->fetched_row['id']) && $focus->fetched_row['id']!=""){
 	 process_workflow_alerts($focus, $alert_meta_array['TCT2_Notificaciones1_alert0'], $alertshell_array, false); 
  	 $alertshell_array = array(); 
 
-	 $alertshell_array['alert_msg'] = "2c519f60-499f-11e8-903b-00155d963615"; 
+	 $alertshell_array['alert_msg'] = "9a074084-766b-11e8-afca-00155d967407"; 
 
 	 $alertshell_array['source_type'] = "Custom Template"; 
 

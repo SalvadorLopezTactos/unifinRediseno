@@ -8,40 +8,42 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 /**
- * @class MenuItem
+ * @class PMSE.MenuItem
  * Handles the items into the menu
- * @extend Item
+ * @extends PMSE.Item
  *
  * @constructor
- * Creates a new instance of the MenuItem Class
+ * Creates a new instance of the PMSE.MenuItem Class
  * @param {Object} options
- * @param {Menu} [parent]
+ * @param {PMSE.Menu} [parent]
  */
-var MenuItem = function (options, parent) {
-    Item.call(this, options, parent);
+PMSE.MenuItem = function(options, parent) {
+    PMSE.Item.call(this, options, parent);
     /**
      * Defines the icon to be used into the item
      * @type {String}
      */
     this.itemAnchor = null;
     this.hasMenuActive = null;
-    MenuItem.prototype.initObject.call(this, options);
+    PMSE.MenuItem.prototype.initObject.call(this, options);
 };
-MenuItem.prototype = new Item();
+PMSE.MenuItem.prototype = new PMSE.Item();
 
 /**
  * Defines the object's type
  * @type {String}
  */
-MenuItem.prototype.type = "MenuItem";
+PMSE.MenuItem.prototype.type = 'PMSE.MenuItem';
 
 /**
  * Initializes the object with default values
  * @param {Object} options
  * @private
  */
-MenuItem.prototype.initObject = function (options) {
+PMSE.MenuItem.prototype.initObject = function(options) {
     var defaults = {
         hasMenuActive: false
     };
@@ -50,14 +52,14 @@ MenuItem.prototype.initObject = function (options) {
 };
 
 
-MenuItem.prototype.setHasMenuActive = function (value) {
+PMSE.MenuItem.prototype.setHasMenuActive = function(value) {
     this.hasMenuActive = value;
     return this;
 };
 
-MenuItem.prototype.createHTML = function () {
+PMSE.MenuItem.prototype.createHTML = function() {
     var labelSpan, iconSpan;
-    Item.prototype.createHTML.call(this);
+    PMSE.Item.prototype.createHTML.call(this);
 
 
     this.itemAnchor = this.createHTMLElement('a');
@@ -86,11 +88,11 @@ MenuItem.prototype.createHTML = function () {
 
 };
 
-MenuItem.prototype.attachListeners = function () {
+PMSE.MenuItem.prototype.attachListeners = function() {
     var self = this;
     if (this.html) {
         $(this.itemAnchor)
-            .click(function (e) {
+            .click(function(e) {
 
                e.stopPropagation();
                if (!self.menu && !self.disabled && !self.selected) {
@@ -99,7 +101,7 @@ MenuItem.prototype.attachListeners = function () {
                 }
                 e.preventDefault();
             })
-            .mouseover(function () {
+            .mouseover(function() {
                 self.setActiveItem(true);
                 self.setActiveMenu(true);
                 // if (self.menu && !self.disabled) {
@@ -107,23 +109,23 @@ MenuItem.prototype.attachListeners = function () {
                 //     self.setHasMenuActive(true);
                 // }
             })
-            .mouseout(function () {
+            .mouseout(function() {
                 self.setActiveItem(false);
                 self.setActiveMenu(false);
                 // if (self.menu && !self.disabled) {
                 //     self.menu.hide();
                 // }
             })
-            .mouseup(function (e) {
+            .mouseup(function(e) {
                 e.stopPropagation();
             })
-            .mousedown(function (e) {
+            .mousedown(function(e) {
                 e.stopPropagation();
             });
     }
 };
 
-MenuItem.prototype.setActiveItem = function (value) {
+PMSE.MenuItem.prototype.setActiveItem = function(value) {
     if (!this.disabled && !this.unavailable) {
         if (value) {
             if (!this.focused) {
@@ -141,7 +143,7 @@ MenuItem.prototype.setActiveItem = function (value) {
     }
 };
 
-MenuItem.prototype.setActiveMenu = function (value) {
+PMSE.MenuItem.prototype.setActiveMenu = function(value) {
     if (this.menu && !this.disabled) {
         if (value) {
             if (!this.focused) {

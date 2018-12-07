@@ -12,8 +12,7 @@
 
 
 $mod_strings = array (
-
-  'LBL_MODULE_NAME' => 'القواعد التجارية للعملية',
+  'LBL_MODULE_NAME' => 'قواعد الأعمال للعملية',
   'LBL_MODULE_TITLE' => 'القواعد التجارية للعملية',
   'LBL_MODULE_NAME_SINGULAR' => 'القاعدة التجارية للعملية',
 
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'الشروط',
     'LBL_PMSE_LABEL_RETURN' => 'رجوع',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'النتائج',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'تغيير الحقل',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'قيمة العائد',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'إضافة شرط',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'إضافة نتيجة',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'إضافة صف',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'إزالة العمود',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'إزالة الشرط',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'إزالة النتيجة',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'إزالة بيانات العمود',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'نعم',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'لا',

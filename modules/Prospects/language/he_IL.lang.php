@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת מטרות',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת מטרות',
+
   'LBL_MODULE_NAME' => 'מטרות',
   'LBL_MODULE_NAME_SINGULAR' => 'מטרה',
   'LBL_MODULE_ID'   => 'מטרות',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'ברכות',
   'LBL_SAVE_PROSPECT' => 'שמור מטרה',
   'LBL_CREATED_OPPORTUNITY' =>'צור הזדמנות חדשה',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'כשי ליצור הזדמנות יש צורך בחשבון.\n בחר חשבון קיים או צור חדש.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'כשי ליצור הזדמנות יש צורך בחשבון.\\n בחר חשבון קיים או צור חדש.',
   'LNK_SELECT_ACCOUNT' => "בחר חשבון",
   'LNK_NEW_PROSPECT' => 'צור מטרה',
   'LNK_PROSPECT_LIST' => 'צפייה במטרות',
@@ -195,4 +199,6 @@ $mod_strings = array (
 2. לחץ על "שמור" כדי להשלים את הרישום החדש ולחזור לדף הקודם.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'דוח מטרות',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'הסכמה למטרות עסקיות עבור',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'ההסכמה עודכנה לאחרונה בתאריך',
 );

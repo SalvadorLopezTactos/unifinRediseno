@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Skambučių sąrašo ataskaitų sritis',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Skambučių duomenų ataskaitų sritis',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Skambučiai',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Skambutis',

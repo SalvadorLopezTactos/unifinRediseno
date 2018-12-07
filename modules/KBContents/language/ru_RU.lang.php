@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Информационная панель списка базы знаний',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Информационная панель записей базы знаний',
+
     'LBL_MODULE_NAME' => 'База знаний',
     'LBL_MODULE_NAME_SINGULAR' => 'База знаний: статья',
     'LBL_MODULE_TITLE' => 'База знаний: статья',

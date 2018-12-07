@@ -11,7 +11,7 @@
  */
 
 $mod_strings = array(
-    'LBL_LISTVIEW_FILTER_ALL' => 'Visas {0}',
+    'LBL_LISTVIEW_FILTER_ALL' => 'Visi {0}',
     'LBL_TEAM' => 'Darba grupas',
     'LBL_TEAMS' => 'Darba grupas',
     'LBL_TEAM_ID' => 'Darba grupas ID',
@@ -48,9 +48,9 @@ $mod_strings = array(
     'LBL_NEW_FORM_TITLE' => 'Jauns  filtrs',
     'LBL_FILTER_DEFINITION' => 'Filtra definīcija',
     'LBL_FILTER_TEMPLATE' => 'Ad-hoc filtra definīcija',
-    'LBL_ASSIGNED_TO_ME' => 'Piešķirtas man',
-    'LBL_RECENTLY_VIEWED' => 'Pēdējās apskatītās',
-    'LBL_NEW_RECORDS' => 'Pēdējās izveidotās',
+    'LBL_ASSIGNED_TO_ME' => 'Mani {0}',
+    'LBL_RECENTLY_VIEWED' => 'Pēdējie apskatītie',
+    'LBL_NEW_RECORDS' => 'Pēdējie izveidotie',
     'LBL_FAVORITES' => 'Mani favorīti',
     'LBL_CLOSED_WON' => 'Iegūts',
     'LBL_CLOSING_THIS_QUARTER' => 'Noslēdzas šajā ceturksnī',

@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Quadres de comandament de previsions',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Objectius',
     'LBL_MODULE_NAME_SINGULAR' => 'Pronòstic',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'ID Producte',
     'LBL_QUOTA_ID' => 'Límit d&#39;ID',
     'LBL_VERSION' => 'Versió',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Oculta la barra de llegendes',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Mostra la barra de llegendes',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Oculta la barra de línies',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Mostra la barra de línies',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Error: usuari {0} no té accés d&#39;administrador per sol·licitar previsions per {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Data d&#39;inici d&#39;any fiscal',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Conﬁgureu el període de temps que es farà servir al mòdul de previsions. <br><br>Teniu en compte que la configuració del període de temps no es pot canviar després de la configuració inicial.<br><br>Comenceu per triar la data d&#39;inici de l&#39;any fiscal. A continuació trieu el tipus de període de temps per a la previsió. El interval de dates per als períodes de temps es calcularà automàticament en base a les seves seleccions. El subperíode de temps es la base del full de càlcul de la previsió. <br><br>els períodes de temps futurs i passats que es poden veure determinaran el nombre de subperíodes visibles al mòdul previsions. Els usuaris poden veure i editar els nombres de previsions als subperíodes visibles.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configureu la manera en què us agradaria categoritzar {{forecastByModule}}. <br><br>Teniu en compte que la configuració de l&#39;interval no es pot canviar després de la primera confirmació. En instàncies actualitzades, la configuració de l&#39;interval està bloquejada amb dades de previsió existents.<br><br>Podeu seleccionar dues o més categories segons els intervals de probabilitat o crear categories que no estiguin basades en probabilitats. <br><br>Hi ha caselles de selecció a l&#39;esquerra de les categories personalitzades; feu-les servir per per decidir els intervals que s&#39;inclouran a la quantitat de previsions confirmada i notificada als directors. <br><br>Un usuari pot canviar l&#39;estat inclou/exclou i la categoria de {{forecastByModule}} manualment al seu full de càlcul.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configureu com us agradaria categoritzar {{forecastByModule}}. <br><br>Teniu en compte que la Configuració del rang no es pot canviar després de confirmar-la per primera vegada. En casos d&#39;actualització, la Configuració es bloqueja amb les dades de la predicció existents.<br><br>Podeu seleccionar una o dues categories basades en els rangs de probabilitat o crear categories que no estiguin basades en la probabilitat. <br><br>Hi ha caselles de verificació a l&#39;esquerra de les categories personalitzades; utilitzeu-les per decidir quins rangs s&#39;inclouran a la quantitat de la Predicció confirmada i notificada als directors. <br><br>Un usuari pot canviar manualment l&#39;estat i la categoria d&#39;incusió/exclusió de {{forecastByModule}} des del seu full de càlcul.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Seleccioneu les columnes que us agradaria que emplenés l&#39;usuari per a les seves previsions de cada {{forecastByModuleSingular}}. Teniu en compte que la quantitat probable està relacionada amb la quantitat mostrada a {{forecastByModule}}, per la qual cosa no es pot ocultar la columna de probabilitat',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Seleccioneu les columnes que us agradaria veire al mòdul de previsions. La llista de camps combinarà els fulls de càlcul i permetrà als usuaris triar la manera de configurar la seva vista.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Soc un marcador de posició per al text que explica com fer previsions per',

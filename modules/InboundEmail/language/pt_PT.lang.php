@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Login ou Palavra-passe Incorrecta',
-	'ERR_BODY_TOO_LONG'		=> 'texto \rBody muito longo para capturar e-mail COMPLETO. Ajustado.',
+	'ERR_BODY_TOO_LONG'		=> 'texto \\rBody muito longo para capturar e-mail COMPLETO. Ajustado.',
 	'ERR_INI_ZLIB'			=> 'Não é possível desativar a compressão Zlib temporariamente. "Definições de Teste" podem falhar.',
 	'ERR_MAILBOX_FAIL'		=> 'Não foi possível recuperar nenhumas contas de e-mail.',
 	'ERR_NO_IMAP'			=> 'Nenhuma biblioteca IMAP encontrada. Por favor resolva isto antes de prosseguir com o E-mail Recebido',

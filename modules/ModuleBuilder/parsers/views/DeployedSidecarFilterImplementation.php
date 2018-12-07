@@ -195,7 +195,7 @@ class DeployedSidecarFilterImplementation extends AbstractMetaDataImplementation
         $workingFilename = $this->getMetadataFilename(MB_WORKINGMETADATALOCATION);
 
         if (file_exists($workingFilename)) {
-            SugarAutoLoader::unlink($workingFilename);
+            unlink($workingFilename);
         }
 
         if ($clearCache) {

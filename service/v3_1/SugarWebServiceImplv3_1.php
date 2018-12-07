@@ -194,7 +194,16 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
             }else if($name === 'id' ){
 
                 $seed->retrieve($value);
+                break;
             }
+        }
+
+        if (self::$helperObject->isIDMMode()
+                && self::$helperObject->isIDMModeModule($module_name)
+                && !$seed->isUpdate()) {
+            $error->set_error('idm_mode_cannot_create_user');
+            self::$helperObject->setFaultObject($error);
+            return;
         }
 
         $return_fields = array();
@@ -209,6 +218,12 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
             if (is_array($value)) {
                 $name = $value['name'];
                 $value = $value['value'];
+            }
+
+            if (self::$helperObject->isIDMMode()
+                    && self::$helperObject->isIDMModeModule($module_name)
+                    && self::$helperObject->isIDMModeField($name)) {
+                continue;
             }
 
             if (!self::$helperObject->checkFieldValue($seed, $name, $value)) {
@@ -294,11 +309,17 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
         $success = false;
         $authController = AuthenticationController::getInstance();
 
-        if(!empty($user_auth['encryption']) && $user_auth['encryption'] === 'PLAIN' && $authController->authController->userAuthenticateClass != "LDAPAuthenticateUser")
-        {
+        if (!empty($user_auth['encryption']) && $user_auth['encryption'] === 'PLAIN' &&
+            $authController->authController->userAuthenticateClass != "LDAPAuthenticateUser" &&
+            !$authController->authController instanceof IdMLDAPAuthenticate &&
+            !$authController->authController instanceof OAuth2Authenticate) {
             $user_auth['password'] = md5($user_auth['password']);
         }
-        $isLoginSuccess = $authController->login($user_auth['user_name'], $user_auth['password'], array('passwordEncrypted' => true));
+        $isLoginSuccess = (bool) $authController->login(
+            $user_auth['user_name'],
+            $user_auth['password'],
+            ['passwordEncrypted' => true]
+        );
         $usr_id=$user->retrieve_user_id($user_auth['user_name']);
         if($usr_id)
             $user->retrieve($usr_id);
@@ -329,16 +350,16 @@ class SugarWebServiceImplv3_1 extends SugarWebServiceImplv3 {
             $GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
             self::$helperObject->setFaultObject($error);
             return;
-        }
-        else if( $authController->authController->userAuthenticateClass == "LDAPAuthenticateUser"
-                 && (empty($user_auth['encryption']) || $user_auth['encryption'] !== 'PLAIN' ) )
-        {
+        } elseif ((!empty($authController->authController->userAuthenticateClass)
+            && $authController->authController->userAuthenticateClass == "LDAPAuthenticateUser" ||
+            $authController->authController instanceof IdMLDAPAuthenticate)
+                 && (empty($user_auth['encryption']) || $user_auth['encryption'] !== 'PLAIN' )) {
             $error->set_error('ldap_error');
             LogicHook::initialize();
             $GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
             self::$helperObject->setFaultObject($error);
             return;
-        } elseif (extension_loaded('mcrypt')) {
+        } elseif (extension_loaded('mcrypt') && !$authController->authController instanceof OAuth2Authenticate) {
             $password = self::$helperObject->decrypt_string($user_auth['password']);
             if($authController->login($user_auth['user_name'], $password) && isset($_SESSION['authenticated_user_id']))
                 $success = true;

@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Tableau de bord de la liste de notes',
+
     'ERR_DELETE_RECORD' => 'Vous devez spécifier un ID pour toute suppression.',
     'LBL_ACCOUNT_ID' => 'Compte (ID) :',
     'LBL_CASE_ID' => 'Ticket (ID) :',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Note',
     'LBL_EMAIL_ADDRESS' => 'Adresse Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Pièces jointes',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Pièce jointe d&#39;e-mail pour',
     'LBL_FILE_MIME_TYPE' => 'Type Mime',
+    'LBL_FILE_EXTENSION' => 'Extension de fichier',
+    'LBL_FILE_SOURCE' => 'Source de fichier',
+    'LBL_FILE_SIZE' => 'Taille de fichier',
     'LBL_FILE_URL' => 'URL Fichier',
     'LBL_FILENAME' => 'Pièce jointe :',
     'LBL_LEAD_ID' => 'Lead (ID) :',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Affaire (ID) :',
     'LBL_PARENT_ID' => 'Parent (ID):',
     'LBL_PARENT_TYPE' => 'Type Parentée',
+    'LBL_EMAIL_TYPE' => 'Type d&#39;e-mail',
+    'LBL_EMAIL_ID' => 'ID d&#39;e-mail',
     'LBL_PHONE' => 'Téléphone :',
     'LBL_PORTAL_FLAG' => 'Afficher dans le Portail?',
     'LBL_EMBED_FLAG' => 'Joindre à l&#39;email?',

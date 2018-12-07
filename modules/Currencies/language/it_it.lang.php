@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Nuovo Compito',
   'NTC_DELETE_CONFIRMATION' => 'Sei sicuro di voler cancellare questo record? Si consiglia di impostare lo stato in inattivo altrimenti tutti gli importi con questa valuta verranno convertiti in dollari USA al primo accesso.',
   'LBL_BELOW_MIN' => 'Il tasso di conversione deve essere superiore a 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Attivo',
-    'Inactive' => 'Inattivo',
-  ),
   'LBL_CREATED_BY' => 'Creato Da',
   'LBL_EDIT_LAYOUT' => 'Modifica Layout' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Solo Amministratori',
+  'LBL_CURRENCY_DEFAULT' => 'Dollari USA (predefinito)',
+
 );
 ?>

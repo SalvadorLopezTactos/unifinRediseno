@@ -49,6 +49,8 @@ class ConfiguratorController extends SugarController
         'logger_level',
         'logger_file_maxLogs',
         'logger_file_ext',
+
+        'activity_streams_enabled',
     );
 
     /**

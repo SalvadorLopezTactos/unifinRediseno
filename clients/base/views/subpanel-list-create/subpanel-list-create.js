@@ -51,9 +51,28 @@
      * @inheritdoc
      */
     bindDataChange: function() {
+        var link;
+        var oppsConfig;
+        var userACLs;
+
         this._super('bindDataChange');
 
-        var link = this.context.get('link');
+        link = this.context.get('link');
+        oppsConfig = app.metadata.getModule('Opportunities', 'config');
+        userACLs = app.user.getAcls();
+
+        if (oppsConfig.opps_view_by === 'RevenueLineItems') {
+            if (!(_.has(userACLs.Opportunities, 'edit') ||
+                    _.has(userACLs.RevenueLineItems, 'access') ||
+                    _.has(userACLs.RevenueLineItems, 'edit'))) {
+                // only listen for PCDashlet if this is Opps in Opps/RLI mode and user has access
+                // to both Opportunities and RLIs
+                // need to trigger on app.controller.context because of contexts changing between
+                // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
+                // app.controller.context is the only consistent context to use
+                app.controller.context.on('productCatalogDashlet:add', this.onAddFromProductCatalog, this);
+            }
+        }
 
         // listen to revalidate the collection
         this.context.parent.on('subpanel:validateCollection:' + link, this.validateModels, this);
@@ -64,6 +83,30 @@
         this.collection.on('add remove', this.render, this);
 
         this.resetSubpanel();
+    },
+
+    /**
+     * Handles when users click to add items from the Product Catalog dashlet to the Opportunity
+     *
+     * @param {Object} data The ProductCatalog Data
+     */
+    onAddFromProductCatalog: function(data) {
+        var existingModel = this.collection.length === 1 && this.collection.at(0);
+        var isEmpty = existingModel &&
+            _.isEmpty(existingModel.changedAttributes()) &&
+            _.isEmpty(existingModel.get('product_template_id'));
+
+        data.likely_case = data.discount_price;
+        data.best_case = data.discount_price;
+        data.worst_case = data.discount_price;
+        data.assigned_user_id = app.user.get('id');
+        data.assigned_user_name = app.user.get('name');
+
+        if (isEmpty) {
+            this.collection.remove(existingModel);
+        }
+
+        this._addBeanToList(true, data);
     },
 
     /**
@@ -101,7 +144,7 @@
 
         // toggle the fields in the list to be in edit mode
         _.each(this.collection.models, function(model) {
-            this.toggleFields(this.rowFields[model.get('id')], isEdit)
+            this.toggleFields(this.rowFields[model.get('id')], isEdit);
             if (isEdit) {
                 // this is a subpanel specific logic: when the subpanel is back to edit mode,
                 // manually fire the dependency trigger on all its models
@@ -114,8 +157,11 @@
      * Checks the -/+ buttons to enable/disable
      */
     checkButtons: function() {
-        var delBtns = this.$('.deleteBtn'),
-            addBtns = this.$('.addBtn');
+        if (this.disposed) {
+            return;
+        }
+        var delBtns = this.$('.deleteBtn');
+        var addBtns = this.$('.addBtn');
         if (delBtns && delBtns.length === 1 && !delBtns.hasClass('disabled')) {
             // if we have only one button, disable it, otherwise leave them all open
             delBtns.addClass('disabled');
@@ -238,16 +284,22 @@
      * Adds a bean for this.module to the collection
      *
      * @param {Boolean} hasValidModels If this collection has validated models
+     * @param {Object} prepopulateData The ProductCatalog data to add prepopulate an RLI
      * @private
      */
-    _addBeanToList: function(hasValidModels) {
-        if (hasValidModels) {
-            var beanId = app.utils.generateUUID(),
-                bean = app.data.createBean(this.module);
+    _addBeanToList: function(hasValidModels, prepopulateData) {
+        var beanId;
+        var bean;
+        var addAtZeroIndex;
+        prepopulateData = prepopulateData || {};
 
-            bean.set({
-                id: beanId
-            });
+        if (hasValidModels) {
+            beanId = app.utils.generateUUID();
+            addAtZeroIndex = !_.isEmpty(prepopulateData);
+
+            prepopulateData.id = beanId;
+            bean = app.data.createBean(this.module);
+            bean.set(prepopulateData);
             bean._module = this.module;
 
             // check the parent record to see if an assigned user ID/name has been set
@@ -265,10 +317,14 @@
                 }
             }
 
-            bean = this._addCustomFieldsToBean(bean);
+            bean = this._addCustomFieldsToBean(bean, addAtZeroIndex);
 
             // must add to this.collection so the bean shows up in the subpanel list
-            this.collection.add(bean);
+            if (addAtZeroIndex) {
+                this.collection.unshift(bean);
+            } else {
+                this.collection.add(bean);
+            }
         }
 
         this.checkButtons();
@@ -279,10 +335,11 @@
      * before it gets added to the collection
      *
      * @param {Data.Bean} bean The bean to add new properties to
+     * @param {boolean} skipCurrency Skip or set currency properties
      * @return {Data.Bean}
      * @private
      */
-    _addCustomFieldsToBean: function(bean) {
+    _addCustomFieldsToBean: function(bean, skipCurrency) {
         return bean;
     },
 
@@ -290,7 +347,12 @@
      * @inheritdoc
      */
     _dispose: function() {
-        this.context.parent.off(null, null, this);
+        if (app.controller && app.controller.context) {
+            app.controller.context.off('productCatalogDashlet:add', null, this);
+        }
+        if (this.context && this.context.parent) {
+            this.context.parent.off(null, null, this);
+        }
         this._super('_dispose');
     }
 })

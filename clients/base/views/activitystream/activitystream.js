@@ -81,11 +81,18 @@
 
         this.preview = this.getPreviewData();
         var data = this.model.get('data');
-        var activity_type = this.model.get('activity_type');
+        var activityType = this.model.get('activity_type');
 
-        this.tpl = "TPL_ACTIVITY_" + activity_type.toUpperCase();
+        this.tpl = 'TPL_ACTIVITY_' + activityType.toUpperCase();
 
-        switch(activity_type) {
+        if (data.object && !_.isUndefined(data.object.name) && data.object.name === 'LBL_VALUE_ERASED') {
+            data.object.name = app.lang.get('LBL_VALUE_ERASED', activityType);
+        }
+        if (data.subject && !_.isUndefined(data.subject.name) && data.subject.name === 'LBL_VALUE_ERASED') {
+            data.subject.name = app.lang.get('LBL_VALUE_ERASED', activityType);
+        }
+
+        switch (activityType) {
             case 'post':
                 if (!data.value) {
                     this.tpl = null;
@@ -159,8 +166,17 @@
                      viewName: 'detail'
                  });
 
-             changeObj.before = field.format(changeObj.before);
-             changeObj.after = field.format(changeObj.after);
+             if (changeObj.before === 'LBL_VALUE_ERASED') {
+                 changeObj.before = app.lang.get('LBL_VALUE_ERASED', parentType);
+             } else {
+                 changeObj.before = field.format(changeObj.before);
+             }
+             if (changeObj.after === 'LBL_VALUE_ERASED') {
+                 changeObj.after = app.lang.get('LBL_VALUE_ERASED', parentType);
+             } else {
+                 changeObj.after = field.format(changeObj.after);
+             }
+
              changeObj.field_label = app.lang.get(fields[changeObj.field_name].vname, parentType);
 
              if (memo) {

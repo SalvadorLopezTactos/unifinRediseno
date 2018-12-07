@@ -8,14 +8,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 var FieldPanelItem = function(settings) {
-	Element.call(this, settings);
+	PMSE.Element.call(this, settings);
 	this._parent = null;
 	this.onValueAction = null;
 	FieldPanelItem.prototype.init.call(this, settings);
 };
 
-FieldPanelItem.prototype = new Element();
+FieldPanelItem.prototype = new PMSE.Element();
 FieldPanelItem.prototype.constructor = FieldPanelItem;
 
 FieldPanelItem.prototype.family = "FieldPanelItem";

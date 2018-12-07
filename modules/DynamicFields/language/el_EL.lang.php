@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'Προεπιλογή URL',
 	'COLUMN_TITLE_AUDIT' =>'Λογιστικός Έλεγχος',
+    'COLUMN_TITLE_PII' => 'Προσωπικές πληροφορίες',
     'COLUMN_TITLE_FTS' =>'Πλήρες Κείμενο Αναζήτησης',
     'COLUMN_TITLE_FTS_BOOST' => 'Boost value',
 	'COLUMN_TITLE_REPORTABLE' => 'Καταγράψιμη',

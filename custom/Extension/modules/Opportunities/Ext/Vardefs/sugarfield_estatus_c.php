@@ -1,84 +1,52 @@
 <?php
- // created: 2018-09-20 12:19:32
-$dictionary['Opportunity']['fields']['estatus_c']['labelValue']='SubEtapa';
-$dictionary['Opportunity']['fields']['estatus_c']['dependency']='';
-$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']=array (
-  'trigger' => 'tct_etapa_ddw_c',
-  'values' => 
-  array (
-    1 => 
-    array (
-      0 => 'P',
-      1 => 'E',
-      2 => 'D',
-      3 => 'R',
-      4 => 'K',
-      5 => 'CM',
-      6 => 'OP',
-      7 => 'N',
-      8 => 'BC',
-      9 => 'EF',
-      10 => 'SC',
-      11 => 'RF',
-      12 => 'CC',
-      13 => 'CN',
-      14 => 'RM',
-      15 => 'DP',
-      16 => 'SG',
-    ),
-    2 => 
-    array (
-      0 => 'N',
-    ),
-    3 => 
-    array (
-      0 => 'CZ',
-      1 => 'SL',
-      2 => 'OC',
-      3 => 'CT',
-    ),
-    4 => 
-    array (
-      0 => 'LB',
-      1 => 'CA',
-      2 => 'AL',
-      3 => 'T',
-    ),
-    'SI' => 
-    array (
-      0 => '',
-      1 => 'K',
-    ),
-    'P' => 
-    array (
-      0 => 'PE',
-      1 => 'P',
-      2 => 'DP',
-      3 => 'K',
-    ),
-    'C' => 
-    array (
-      0 => 'BC',
-      1 => 'CC',
-      2 => 'RF',
-      3 => 'EF',
-      4 => 'E',
-      5 => 'RM',
-      6 => 'SC',
-      7 => 'D',
-      8 => 'CN',
-      9 => 'SG',
-    ),
-    'CL' => 
-    array (
-      0 => 'N',
-    ),
-    'R' => 
-    array (
-      0 => 'CM',
-      1 => 'R',
-    ),
-  ),
-);
+ // created: 2018-12-05 18:17:34
+$dictionary['Opportunity']['fields']['estatus_c']['labelValue'] = 'SubEtapa';
+$dictionary['Opportunity']['fields']['estatus_c']['dependency'] = '';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['trigger'] = 'tct_etapa_ddw_c';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][0] = 'P';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][1] = 'E';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][2] = 'D';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][3] = 'R';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][4] = 'K';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][5] = 'CM';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][6] = 'OP';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][7] = 'N';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][8] = 'BC';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][9] = 'EF';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][10] = 'SC';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][11] = 'RF';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][12] = 'CC';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][13] = 'CN';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][14] = 'RM';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][15] = 'DP';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][1][16] = 'SG';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][2][0] = 'N';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][3][0] = 'CZ';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][3][1] = 'SL';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][3][2] = 'OC';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][3][3] = 'CT';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][4][0] = 'LB';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][4][1] = 'CA';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][4][2] = 'AL';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values'][4][3] = 'T';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['SI'][0] = '';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['SI'][1] = 'K';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['P'][0] = 'PE';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['P'][1] = 'P';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['P'][2] = 'DP';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['P'][3] = 'K';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['C'][0] = 'BC';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['C'][1] = 'CC';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['C'][2] = 'RF';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['C'][3] = 'EF';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['C'][4] = 'E';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['C'][5] = 'RM';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['C'][6] = 'SC';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['C'][7] = 'D';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['C'][8] = 'CN';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['C'][9] = 'SG';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['CL'][0] = 'N';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['R'][0] = 'CM';
+$dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['values']['R'][1] = 'R';
+$dictionary['Opportunity']['fields']['estatus_c']['full_text_search']['boost'] = 1;
 
- ?>

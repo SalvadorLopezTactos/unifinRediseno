@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => '必须指定记录编号才能删除税率。',
   'NTC_STATUS' => '设置状态为“停用”，从税率下拉列表删除此税率',
   'NTC_LIST_ORDER' => '设置税率在其下拉列表中显示的顺序',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => '启用',
-    'Inactive' => '停用',
-  ),
   'LBL_EDITLAYOUT' => '编辑布局' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'创建人 ID',
   'LBL_MODIFIED_ID'=>'修改人 ID',

@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Cotações (enviar para)',
 	'LNK_ACCOUNT_REPORTS' => 'Visualizar relatórios de contas',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documentos',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Painel de lista de contas',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Painel de registo de contas',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Gráficos',
 	'LBL_DEFAULT' => 'Visualizações',
@@ -45,7 +49,7 @@ $mod_strings = array (
 	'LBL_ASSIGNED_TO_NAME' => 'Atribuído a:',
 	'LBL_ASSIGNED_TO_ID' => 'Usuário atribuído:',
 	'LBL_BILLING_ADDRESS_CITY' => 'Cidade de Cobrança:',
-	'LBL_BILLING_ADDRESS_COUNTRY' => 'País de Cobrança:',
+	'LBL_BILLING_ADDRESS_COUNTRY' => 'País de cobrança:',
 	'LBL_BILLING_ADDRESS_POSTALCODE' => 'CEP de Cobrança:',
 	'LBL_BILLING_ADDRESS_STATE' => 'Estado de Cobrança:',
 	'LBL_BILLING_ADDRESS_STREET_2' =>'Endereço de Cobrança 2',

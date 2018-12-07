@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Targets List Dashboard',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Targets Record Dashboard',
+
   'LBL_MODULE_NAME' => 'Targets',
   'LBL_MODULE_NAME_SINGULAR' => 'Target',
   'LBL_MODULE_ID'   => 'Targets',
@@ -195,4 +199,6 @@ To create a {{module_name}}:
 2. Click "Save" to finalize the new record and return to the previous page.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Targets\' reports',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Business Purposes Consented for',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consent Last Updated',
 );

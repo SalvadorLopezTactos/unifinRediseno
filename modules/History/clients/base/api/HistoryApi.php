@@ -165,7 +165,8 @@ class HistoryApi extends RelateApi
                 $args['filter'] = $this->moduleFilters[$module];
             }
 
-            list($args, $q, $options, $linkSeed) = $this->filterRelatedSetup($api, $args);
+            /** @var SugarQuery $q */
+            list($args, $q, $options) = $this->filterRelatedSetup($api, $args);
             $q->select()->selectReset();
             $q->orderByReset(); // ORACLE doesn't allow order by in UNION queries
             if (!empty($args['placeholder_fields'])) {

@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Информационная панель списка продуктов',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Продукт кампании',
     'LBL_MODULE_NAME' => 'Продукты',
     'LBL_MODULE_NAME_SINGULAR' => 'Продукт',
@@ -50,7 +53,7 @@ $mod_strings = array(
     'LBL_DISCOUNT_RATE_USDOLLAR' => 'Коэффициент скидки (в долларах США)',
     'LBL_DISCOUNT_TOTAL_USDOLLAR' => 'Скидка (в долларах США)',
     'LBL_SELECT_DISCOUNT' => '% скидки',
-    'LBL_LIST_PRICE' => 'Цена по прайсу:',
+    'LBL_LIST_PRICE' => 'Цена по прейскуранту:',
     'LBL_VENDOR_PART_NUM' => 'Код поставщика:',
     'LBL_MFT_PART_NUM' => 'Номер части:',
     'LBL_NEXT_STEP' => 'Следующий шаг:',
@@ -174,4 +177,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Список данных коммерческого предложения продуктов',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Новый продукт)',
     'LBL_DISCOUNT_PERCENT' => '%, проценты',
+    'LBL_DISCOUNT_TYPE' => 'Тип скидки',
 );

@@ -15,8 +15,9 @@
  */
 ({
     events: {
-        'click .dropdown-toggle' : 'toggleClicked',
-        'click a[data-id]' : 'navigateClicked'
+        'click .dropdown-toggle': 'toggleClicked',
+        'click a[data-id]': 'navigateClicked',
+        'click a[data-action=manager]': 'managerClicked'
     },
     dashboards: null,
     toggleClicked: function(evt) {
@@ -32,7 +33,7 @@
         _.each(collection.models, function(model) {
             if (pattern.test(model.get('name'))) {
                 model.set('name',
-                    app.lang.get(model.get('name'), collection.module || null)
+                    app.lang.get(model.get('name'), model.get('dashboard_module'))
                 );
             }
         });
@@ -47,6 +48,16 @@
     navigateClicked: function(evt) {
         var id = $(evt.currentTarget).data('id');
         this.navigate(id);
+    },
+    /**
+     * Navigate the user to the manage dashboards view
+     */
+    managerClicked: function() {
+        var controllerContext = app.controller.context;
+        var dashboardModule = controllerContext.get('module');
+        var dashboardLayout = controllerContext.get('layout');
+        app.router.navigate('#Dashboards?moduleName=' + dashboardModule +
+            '&viewName=' + dashboardLayout, {trigger: true});
     },
     /**
      * Change the Dashboard

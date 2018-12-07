@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Řídicí panel seznamu případů',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Řídicí panel záznamů případů',
+
 	'ERR_DELETE_RECORD'					=> 'Pro vymazání zaměstnance musíte specifikovat číslo záznamu.',
 	'LBL_ACCOUNT_ID'					=> 'ID společnosti',
 	'LBL_ACCOUNT_NAME'					=> 'Název společnosti:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Stav:',
     'LBL_SOURCE' => 'Zdroj:',
 	'LBL_SUBJECT'						=> 'Předmět:',
-	'LBL_SYSTEM_ID'						=> 'ID Systému',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Jméno společnosti',
 	'LBL_LIST_ASSIGNED'					=> 'Přidělen',
 	'LBL_LIST_CLOSE'					=> 'Zavřít',

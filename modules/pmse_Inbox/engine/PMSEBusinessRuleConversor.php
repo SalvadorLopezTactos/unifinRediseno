@@ -134,15 +134,46 @@ class PMSEBusinessRuleConversor
             $criteriaToken->expOperator = $this->transformConditionOperator($businessRuleToken->condition);
             $criteriaToken->expDirection = "after";
             $criteriaToken->expType = "MODULE";
-            $valueToken = $this->processValueExpression($businessRuleToken->value);
-            $criteriaToken->expSubtype = $valueToken->type;
-            $criteriaToken->expValue = $valueToken->value;
+            // Add the value, subtype, and any other properties needed based on those.
+            $this->addValueToTransformedToken($criteriaToken, $businessRuleToken);
             $separator = $criteriaToken->expSubtype == "STRING" ? "&" : "";
-            $criteriaToken->expLabel = $criteriaToken->expField . " " . $businessRuleToken->condition . " " . $separator . $valueToken->value . $separator;
+            $criteriaToken->expLabel = $criteriaToken->expField . " " . $businessRuleToken->condition . " " . $separator . $criteriaToken->expValue . $separator;
             $criteriaToken->expModule = $businessRuleToken->variable_module;
-//            $criteriaToken->expModule = $this->baseModule;
         }
         return $criteriaToken;
+    }
+
+    /**
+     * Use the supplied business rule token to calculate and add the expValue, expSubtype,
+     * and any other needed properties (such as expCurrency) to the supplied criteria token.
+     * @param object $criteriaToken The criteria token to add the properties to. Is mutated.
+     * @param object $businessRuleToken The business rule token used to calculate the fields.
+     */
+    public function addValueToTransformedToken($criteriaToken, $businessRuleToken)
+    {
+        // Process the value to account for complicated values and expressions.
+        $valueToken = $this->processValueExpression($businessRuleToken->value);
+        // Check if the value we're supposed to get is of a type the above function can't do well.
+        $type = $this->evaluatedBean->field_defs[$criteriaToken->expField]['type'];
+        switch (strtolower($type)) {
+            // Currency is spat out encoded as a json containing all the things needed.
+            case 'currency':
+                $parsed = json_decode($valueToken->value);
+                // This needs to be hard coded because processValueExpression returns type string.
+                $criteriaToken->expSubtype = 'currency';
+                $criteriaToken->expValue = $parsed->expValue;
+                /*
+                 * Currency values need an extra field called expCurrency to specify the id for the
+                 * currency the amount is in (USD, EUR, GBP, etc.). Currently business
+                 * rules store that value in expField instead of expCurrency, but also checking
+                 * for expCurrency allows this to work if that is ever fixed.
+                 */
+                $criteriaToken->expCurrency = (isset($parsed->expCurrency)) ? $parsed->expCurrency : $parsed->expField;
+                break;
+            default:
+                $criteriaToken->expSubtype = $valueToken->type;
+                $criteriaToken->expValue = $valueToken->value;
+        }
     }
 
     /**

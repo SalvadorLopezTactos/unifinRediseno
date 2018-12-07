@@ -30,7 +30,7 @@ class ApiHelper
      *                         This is used so the formatting functions can handle different
      *                         API's with varying formatting requirements.
      * @param $bean SugarBean Grab the helper module for this bean
-     * @returns SugarBeanApiHelper A API helper class for beans
+     * @return SugarBeanApiHelper API helper
      */
     public static function getHelper(ServiceBase $api, SugarBean $bean)
     {
@@ -40,7 +40,7 @@ class ApiHelper
         if (!isset(self::$moduleHelpers[$moduleName])) {
             if (SugarAutoLoader::requireWithCustom('modules/' . $modulePath . '/' . $moduleName . 'ApiHelper.php')) {
                 $moduleHelperClass = SugarAutoLoader::customClass($moduleName . 'ApiHelper');
-            } elseif (SugarAutoLoader::fileExists('custom/data/SugarBeanApiHelper.php')) {
+            } elseif (file_exists('custom/data/SugarBeanApiHelper.php')) {
                 require_once('custom/data/SugarBeanApiHelper.php');
                 $moduleHelperClass = 'CustomSugarBeanApiHelper';
             } else {
@@ -50,8 +50,7 @@ class ApiHelper
             self::$moduleHelpers[$moduleName] = new $moduleHelperClass($api);
         }
 
-        $moduleHelperClass = self::$moduleHelpers[$moduleName];
-        return $moduleHelperClass;
+        return self::$moduleHelpers[$moduleName];
     }
 
     /**

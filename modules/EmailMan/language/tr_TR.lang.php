@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'buraya tıklayın',
 	'TXT_REMOVE_ME'								=> 'Bu E-Posta listesinden çıkmak için',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Atayan kullanıcının E-Posta adresinden uyarı gönderilsin mi?',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Yeni e-posta adreslerini varsayılan olarak kabul etmeyin',
 
 	'LBL_SECURITY_TITLE'						=> 'E-Posta Güvenlik Ayarları',
 	'LBL_SECURITY_DESC'							=> 'Aşağıdakilerden alınan E-Posta için izin verilmemesi gereken veya E-Posta modülünde gösterilmeyecek olanları seçiniz.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Gönderilen e-posta için kullanıcıların bu e-posta hesabını kullanmasına izin ver:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Bu seçenek seçildiğinde, tüm kullanıcılar sistem bildiri ve uyarılarını göndermek için<br> kullanılan aynı giden posta hesabını kullanarak e-postalarını gönderebilecek. Eğer bu seçenek seçilmezse,<br> kullanıcılar kendi hesap bilgilerini girdikten sonra giden mesaj sunucusunu kullanmaya devam edebilirler.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Seçildiğinde, atayan kullanıcının ismi ve E-posta adresi Kimden alanında yer alacaktır. Farklı hesaplardan gönderime izin vermeyen sunucularda çalışmayabilir.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Yeni bir e-posta adresi eklendiğinde otomatik olarak kabul edilmeyecek. Kampanya e-postaları, kabul edilmeyen adreslere gönderilemez. Bu ayarın değiştirilmesi mevcut e-posta adreslerini etkilemeyecek.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Değiştir' /*for 508 compliance fix*/,

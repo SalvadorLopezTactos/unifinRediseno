@@ -14,11 +14,11 @@
  * @extends View.Views.Base.HeaderpaneView
  */
 ({
-    extendsFrom: "HeaderpaneView",
+    extendsFrom: 'HeaderpaneView',
 
     events: {
-        "click [name=done_button]":   "_done",
-        "click [name=cancel_button]": "_cancel"
+        'click [name=done_button]': '_done',
+        'click [name=cancel_button]': '_cancel'
     },
 
      /**
@@ -28,7 +28,7 @@
       * @private
       */
      _done: function() {
-         var recipients = this.model.get("compose_addressbook_selected_recipients");
+         var recipients = this.model.get('to_collection');
 
          if (recipients) {
              app.drawer.close(recipients);

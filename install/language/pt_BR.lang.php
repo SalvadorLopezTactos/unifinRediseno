@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> 'Esta consulta será posicionada abaixo da primeira consulta do relatório',
     'ERR_DB_VERSION_FAILURE'			=> 'Não foi possível verificar a versão do banco de dados.',
 
-
-	'ERR_OC_PASSWORD'					=> 'A senha é obrigatória.',
-	'ERR_OC_SERVER_URL'					=> 'A URL do Server Sugar é obrigatória.',
-	'ERR_OC_USERNAME'					=> 'O nome de usuário do servidor é obrigatório.',
-	'LBL_INSTALL_OC'					=> 'Instalar Cliente Offline',
-    'LBL_OC_ADMIN'                      => 'Entre em contato com o seu Administrador para resolver este problema.',
-    'LBL_OC_SUCCESS'                    => 'Instalação de Cliente Offline concluída. Clique no botão abaixo para ir para sua instalação.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'Nome de usuário do Administrador',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'Insira os detalhes abaixo para instalar e sincronizar devidamente o seu cliente offline.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'URL do Servidor Sugar',
-	'LBL_OC_INSTALL_PASS'				=> 'Senha do usuário do servidor',
-	'LBL_OC_INSTALL_TITLE'				=> 'Instalação de Cliente Offline',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'Este é o nome de usuário com que você se conectará ao seu servidor Sugar.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'Nome de Usuário',
-	'LBL_PERFORM_OC_INSTALL'			=> 'Iniciando Instalação de Cliente Offline',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'Insira os detalhes abaixo para instalar e sincronizar devidamente o seu cliente offline.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Forneça o nome de usuário para o usuário administrador do Sugar.',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Forneça a senha para o usuário administrador do Sugar.',
@@ -76,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Foram detectados erros durante a verificação de compatibilidade. Para que a sua instalação do SugarCRM funcione corretamente, tome as medidas adequadas para resolver os problemas listados abaixo e pressione o botão para verificar novamente ou tente instalar de novo.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Permissão de Passagem por Referência do Tempo de Chamada está Ligada (deverá ser definida para Desligada em php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Não encontrado: O Agendador Sugar será executado com funcionalidade limitada. O serviço de Arquivamento de E-mails não será executado.',
+	'ERR_CHECKSYS_CURL'					=> 'Não encontrado: o Agendador do Sugar será executado com funcionalidades limitadas. O serviço de Arquivamento de E-mail não será executado.',
     'ERR_CHECKSYS_IMAP'					=> 'Não encontrado: InboundEmail e Campanhas (E-mail) requerem as bibliotecas IMAP. Nenhum deles será funcional.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'O Magic Quotes GPC não pode ser ligado durante a utilização do MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Aviso:',
@@ -92,7 +75,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Para uma utilização otimizada do sapi IIS/FastCGI, defina fastcgi.logging para 0 no seu arquivo php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Versão de PHP instalada não suportada: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Banco de dados indisponível',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Compatibilidade não encontrada com o banco de dados.  Verifique se você tem os drivers necessários para um dos tipos a seguir de bancos de dados compatíveis: MySQL, MS SQLServer, Oracle ou DB2.  Talvez seja necessário remover os comentários da extensão no arquivo php. ini ou recompilar com o arquivo binário correto, dependendo da sua versão do PHP.  Consulte o manual do PHP para mais informações sobre como habilitar o suporte ao banco de dados.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'O Suporte ao Banco de Dados não foi encontrado. Certifique-se de que você possui os drivers necessários para um dos seguintes Tipos de Banco de Dados suportados: MySQL, MS SQLServer, Oracle ou DB2. Talvez seja necessário anular o comentário da extensão no arquivo php.ini ou recompilar com o arquivo binário correto, conforme a sua versão de PHP. Consulte o Manual do PHP para mais informações sobre como ativar o Suporte ao Banco de Dados.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funções associadas às XML Parser Libraries que são necessárias para executar o aplicativo Sugar não foram encontradas. Talvez seja necessário remover comentário da extensão no arquivo php.ini ou recompilar com arquivo binário correto, dependendo da sua versão de PHP. Consulte o Manual do PHP para obter mais informações sobre como ativar o Suporte do Banco de Dados.',
     'LBL_CHECKSYS_CSPRNG' => 'Gerador de números aleatórios',
     'ERR_CHECKSYS_MBSTRING'             => 'Funções associadas com a extensão Multibyte Strings PHP (mbstring) que são necessárias para executar o aplicativo Sugar não foram encontradas. <br/><br/>Geralmente, o módulo mbstring não está ativado por defeito no PHP e deve ser ativado com --enable-mbstring quando o binário PHP é construído. Consulte o Manual do PHP para obter mais informações sobre como ativar o suporte mbstring.',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'Tamanho do arquivo de carregamento',
 	'ERR_URL_BLANK'						=> 'Informe a URL base para a instância do Sugar.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'Não foi possível localizar registro de instalação de',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'O arquivo carregado não é compatível com esta versão (Community Edition, Professional ou Enterprise) do Sugar:',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'O arquivo carregado não é compatível com esta versão (edição Professional, Enterprise ou Ultimate) do Sugar: ',
 	'ERROR_LICENSE_EXPIRED'				=> "Erro: a sua licença expirou",
 	'ERROR_LICENSE_EXPIRED2'			=> " dia(s) atrás. Acesse <a href='index.php?action=LicenseSettings&module=Administration'>'\"Administração de licença\"</a> na tela de Administração para inserir a sua nova chave de licença. Se você não inserir uma nova chave de licença nos 30 dias seguintes ao vencimento da chave, não poderá mais acessar este aplicativo.",
 	'ERROR_MANIFEST_TYPE'				=> 'Arquivo manifesto deve especificar o tipo de pacote.',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'Data de vencimento',
 	'LBL_LICENSE_I_ACCEPT'				=> 'Eu aceito',
 	'LBL_LICENSE_NUM_USERS'				=> 'Número de usuários',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'Insira o número de clientes offline adquiridos.',
-	'LBL_LICENSE_OC_NUM'				=> 'Número de Licenças de Clientes Offline',
-	'LBL_LICENSE_OC'					=> 'Licenças de clientes offline',
 	'LBL_LICENSE_PRINTABLE'				=> 'Versão para impressão',
     'LBL_PRINT_SUMM'                    => 'Imprimir resumo',
 	'LBL_LICENSE_TITLE_2'				=> 'Licença SugarCRM',
@@ -496,10 +476,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'Configurações de agrupamento',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Forneça um Nome do Sistema para a instância Sugar.',
 	'LBL_PATCH_UPLOAD' => 'Selecione um arquivo patch do seu computador local',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'Versão 5 ou superior do PHP é necessária.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(A sua versão PHP atual é',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Modo de Compatibilidade Retroativa do PHP está ligado. Defina zend.ze1_compatibility_mode como Desligado para prosseguir',
 
     'advanced_password_new_account_email' => array(
@@ -519,5 +495,3 @@ $mod_strings = array(
         'name' => 'E-mail de esquecimento da senha',
         ),
 );
-
-?>

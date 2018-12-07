@@ -75,7 +75,7 @@ class QuoteConvertApi extends SugarApi
         $opportunity->save();
 
         // re-enable activity streams
-        Activity::enable();
+        Activity::restoreToPreviousState();
 
         return array(
             'record' => $this->formatBean($api, $args, $opportunity),

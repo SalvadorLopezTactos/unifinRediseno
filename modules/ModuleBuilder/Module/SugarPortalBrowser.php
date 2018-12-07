@@ -72,7 +72,7 @@ class SugarPortalBrowser
             $viewFiles = array_keys($views);
             foreach ($viewFiles as $file) {
                 $fullPath = $path . basename($file, '.php') . '/' . $file;
-                if (SugarAutoLoader::fileExists($fullPath)) {
+                if (file_exists($fullPath)) {
                     return true;
                 }
             }

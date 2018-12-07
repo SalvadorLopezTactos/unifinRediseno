@@ -11,7 +11,7 @@
  */
 
 
-use Sugarcrm\Sugarcrm\Elasticsearch\Query\Highlighter\HighlighterInterface;
+use Sugarcrm\Sugarcrm\Elasticsearch\Query\Result\ParserInterface;
 
 /**
  * Adapter class to Elastica Result Set
@@ -34,9 +34,9 @@ class SugarSeachEngineElasticResultSet implements SugarSearchEngineResultSet
     private $elasticaResultSet;
 
     /**
-     * @var HighlighterInterface
+     * @var ParserInterface
      */
-    protected $highlighter;
+    protected $resultParser;
 
     /**
      * @param \Elastica\ResultSet $rs
@@ -63,7 +63,7 @@ class SugarSeachEngineElasticResultSet implements SugarSearchEngineResultSet
      */
     public function getFacets()
     {
-        return $this->elasticaResultSet->getFacets();
+        return $this->elasticaResultSet->getAggregations();
     }
 
     /**
@@ -73,7 +73,7 @@ class SugarSeachEngineElasticResultSet implements SugarSearchEngineResultSet
      */
     public function getModuleFacet()
     {
-        $rs = $this->elasticaResultSet->getFacets();
+        $rs = $this->elasticaResultSet->getAggregations();
         $results = array();
         if( !isset($rs['_type'] ) || !isset($rs['_type']['terms']) )
         {
@@ -102,8 +102,8 @@ class SugarSeachEngineElasticResultSet implements SugarSearchEngineResultSet
     public function current()
     {
         $res = new SugarSeachEngineElasticResult($this->elasticaResultSet->current());
-        if (isset($this->highlighter)) {
-            $res->setHighlighter($this->highlighter);
+        if ($this->resultParser) {
+            $res->setResultParser($this->resultParser);
         }
         return $res;
     }
@@ -139,11 +139,11 @@ class SugarSeachEngineElasticResultSet implements SugarSearchEngineResultSet
     }
 
     /**
-     * Set highlighter
-     * @param HighlighterInterface $highlighter
+     * Set result parser
+     * @param ParserInterface $parser
      */
-    public function setHighlighter(HighlighterInterface $highlighter)
+    public function setResultParser(ParserInterface $parser)
     {
-        $this->highlighter = $highlighter;
+        $this->resultParser = $parser;
     }
 }

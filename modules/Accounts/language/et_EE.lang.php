@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Hinnapakkumised (saaja aadress)',
 	'LNK_ACCOUNT_REPORTS' => 'Vaata konto aruandeid',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumendid',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Kontode loendi töölaud',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Kontokirjete töölaud',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagrammid',
 	'LBL_DEFAULT' => 'Vaatamisi',

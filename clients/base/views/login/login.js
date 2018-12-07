@@ -66,6 +66,18 @@
     logoUrl: null,
 
     /**
+     * Is external login in progress?
+     *
+     * @type {boolean}
+     */
+    isExternalLoginInProgress: false,
+
+    /**
+     * Save login popup handler
+     */
+    childLoginPopup: null,
+
+    /**
      * Process login on key `Enter`.
      *
      * @param {Event} event The `keypress` event.
@@ -123,7 +135,15 @@
         if (config && app.config.forgotpasswordON === true) {
             this.showPasswordReset = true;
         }
-        
+
+        /**
+         * Set window open handler to save popup handler
+         */
+        app.api.setExternalLoginUICallback(_.bind(function(url, name, params) {
+            this.closeLoginPopup();
+            this.childLoginPopup = window.open(url, name, params);
+        }, this));
+
         if (config && 
             app.config.externalLogin === true && 
             app.config.externalLoginSameWindow === true
@@ -132,9 +152,14 @@
             this.externalLoginUrl = app.config.externalLoginUrl;
             app.api.setExternalLoginUICallback(_.bind(function(url) {
                 this.externalLoginUrl = app.config.externalLoginUrl = url;
-                this.render();
+                if (this.isExternalLoginInProgress) {
+                    this.isExternalLoginInProgress = false;
+                    app.api.setRefreshingToken(true);
+                    window.location.replace(this.externalLoginUrl);
+                } else {
+                    this.render();
+                }
             }, this));
-
         }
 
         // Set the page title to 'SugarCRM' while on the login screen
@@ -208,6 +233,19 @@
             password: this.$('input[name=password]').val(),
             username: this.$('input[name=username]').val()
         });
+
+        // Prepare local auth variables if user chooses local auth
+        if (app.api.isExternalLogin() &&
+            app.config.externalLogin === true &&
+            !_.isNull(app.config.externalLoginSameWindow) &&
+            app.config.externalLoginSameWindow === false
+        ) {
+            app.config.externalLogin = false;
+            app.config.externalLoginUrl = undefined;
+            app.api.setExternalLogin(false);
+            this.closeLoginPopup();
+        }
+
         this.model.doValidate(null,
             _.bind(function(isValid) {
                 if (isValid) {
@@ -225,24 +263,30 @@
                     };
 
                     app.login(args, null, {
-                        error: function() {
-                            app.$contentEl.show();
-                            app.logger.debug('login failed!');
-                        },
+                        error: _.bind(function() {
+                            this.showSugarLoginForm();
+                        }, this),
                         success: _.bind(function() {
                             app.logger.debug('logged in successfully!');
                             app.alert.dismiss(this._alertKeys.invalidGrant);
                             app.alert.dismiss(this._alertKeys.needLogin);
+                            app.alert.dismiss(this._alertKeys.login);
                             //External login URL should be cleaned up if the login form was successfully used instead.
                             app.config.externalLoginUrl = undefined;
 
                             app.events.on('app:sync:complete', function() {
+                                app.events.trigger('data:sync:complete', 'login', null, {
+                                    'showAlerts': {'process': true}
+                                });
+                                app.api.setRefreshingToken(false);
                                 app.logger.debug('sync in successfully!');
                                 _.defer(_.bind(this.postLogin, this));
                             }, this);
                         }, this),
-                        complete: _.bind(function() {
-                            app.alert.dismiss(this._alertKeys.login);
+                        complete: _.bind(function(request) {
+                            if (request.xhr.status == 401) {
+                                this.showSugarLoginForm();
+                            }
                         }, this)
                     });
                 }
@@ -250,6 +294,29 @@
         );
 
         app.alert.dismiss('offset_problem');
+    },
+
+    /**
+     * When SAML enabled app login error callback will be run only when _refreshToken = true and
+     * app login complete callback will be run when _refreshToken = false
+     * So to avoid form disappearance after second incorrect login we need to run the same code into to two callbacks
+     */
+    showSugarLoginForm: function() {
+        app.alert.dismiss(this._alertKeys.login);
+        app.api.setExternalLogin(false);
+        app.config.externalLoginUrl = undefined;
+        app.$contentEl.show();
+        app.logger.debug('login failed!');
+    },
+
+    /**
+     * close log in popup
+     */
+    closeLoginPopup: function() {
+        if (!_.isNull(this.childLoginPopup)) {
+            this.childLoginPopup.close();
+            this.childLoginPopup = null;
+        }
     },
 
     /**
@@ -319,9 +386,9 @@
      * Process Login
      */
     external_login: function() {
-        if (this.externalLoginUrl) {
-            window.location.replace(this.externalLoginUrl);
-        }
+        this.isExternalLoginInProgress = true;
+        app.api.setRefreshingToken(false);
+        app.api.ping(null, {});
     },
     
     /**
@@ -329,6 +396,7 @@
      */
     login_form: function() {
         app.config.externalLogin = false;
+        app.api.setExternalLogin(false);
         app.controller.loadView({
             module: "Login",
             layout: "login",

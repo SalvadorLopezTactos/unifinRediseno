@@ -249,10 +249,20 @@ class BulkHandler
                 isset($data['_index']) ? $data['_index'] : 'unknown index',
                 isset($data['_type']) ? $data['_type'] : 'unknown type',
                 isset($data['_id']) ? $data['_id'] : 'unknown id',
-                isset($data['error']) ? $data['error'] : 'unknown'
+                isset($data['error']) ? $this->formatExceptionError($data['error']) : 'unknown'
             );
             $this->log(LogLevel::CRITICAL, $errorMsg);
         }
+    }
+
+    /**
+     * Format exception error returning string
+     * @param string|array $error
+     * @return string
+     */
+    protected function formatExceptionError($error)
+    {
+        return is_array($error) ? str_replace("\n", " ", var_export($error, true)) : $error;
     }
 
     /**

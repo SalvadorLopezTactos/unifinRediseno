@@ -45,6 +45,7 @@
     {"pattern": "include/javascript/sugar7/plugins/*.js", "included": true, "served": true, "watched": true},
 
     "include/javascript/jquery/jquery.dataTables.min.js",
+    "include/javascript/jquery/jquery-ui-min.js",
     "include/javascript/jquery/sugar.resizableColumns.js",
     "include/javascript/twitterbootstrap/bootstrap-collapse.js",
     "include/javascript/twitterbootstrap/bootstrap-tooltip.js",
@@ -55,6 +56,10 @@
     "include/javascript/select2/select2.js",
     "include/javascript/nvd3/lib/d3.min.js",
     "include/javascript/nvd3/nv.d3.min.js",
+    "include/javascript/d3-sugar/d3-sugar.min.js",
+    "include/SugarCharts/sucrose/js/sugarCharts.js",
+    "include/javascript/sucrose/sucrose.min.js",
+    "include/javascript/phaser/phaser-sugar.min.js",
     "include/javascript/tiny_mce/tiny_mce.js",
     "include/javascript/mousetrap/mousetrap.js",
     "include/javascript/sugar7/shortcuts.js",

@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'Kattintson ide',
 	'TXT_REMOVE_ME'								=> 'Ha el akarja távolítani magát erről az email listáról,',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Értesítés küldése a hozzárendelő email címéről',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Alapértelmezetten leiratkozás új e-mail címek esetén',
 
 	'LBL_SECURITY_TITLE'						=> 'Email biztonsági beállítások',
 	'LBL_SECURITY_DESC'							=> 'Ellenőrizze, hogy a következők nincsenek engedélyezve a bejövő emaileknél vagy az email modulban.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Engedélyezze a felhasználóknak ezen kimenő email fiók használatát:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Ha ezt a beállítást választja, akkor minden felhasználó képes lesz üzeneteket küldeni ugyanazzal a kimenő email fiók hozzáféréssel, amin keresztül a rendszerértesítések és riasztások történnek. Kiválasztás hiányában a felhasználók továbbra is képesek lesznek a kimenő fiók használatára, amennyiben megadják saját kliensük információit.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Engedélyezés esetén a kijelölő felhasználó neve és email címe meg fog jelenni az email feladó mezőjében. Lehetséges, hogy ez a funkció nem fog működni azokon az SMTP szervereken, amelyek nem támogatják a szerverétől eltérő levelező fiókok használatát.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Új e-mail cím hozzáadásakor ez automatikusan a leiratkozott állapotot veszi fel. A kampány e-mailek nem továbbíthatók leiratkozott címekre. A beállítás módosítása nincs hatással a meglévő e-mail címekre.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Csere' /*for 508 compliance fix*/,

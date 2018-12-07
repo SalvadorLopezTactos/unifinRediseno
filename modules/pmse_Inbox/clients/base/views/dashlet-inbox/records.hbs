@@ -31,7 +31,7 @@
                     {{/if}}
                 {{/if}}
                     <p style="margin-left: 0;padding-left: 0px;">
-                        <a href="#{{fieldValue this "show_case_url"}}">{{str "LBL_PMSE_LABEL_PROCESS" this.module}}&nbsp;&nbsp;#&nbsp;&nbsp;{{fieldValue this "cas_id"}}&nbsp;-&nbsp; {{fieldValue this "name"}}</a>
+                        <a href="#{{fieldValue this "show_case_url"}}">{{str "LBL_PMSE_LABEL_PROCESS" this.module}}&nbsp;&nbsp;#&nbsp;&nbsp;{{fieldValue this "cas_id"}}{{#if attributes.name}}&nbsp;-&nbsp;{{fieldValue ../this "name"}}{{/if}}</a>
                     </p>
                     {{#if ../overdueBadge}}
                         {{#with ../../overdueBadge}}

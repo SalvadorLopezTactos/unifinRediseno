@@ -34,7 +34,7 @@
 
         this.destroyTinyMCEEditor();
 
-        app.view.Field.prototype._render.call(this);
+        this._super('_render');
 
         this._getHtmlEditableField().attr('name', this.name);
         if (this._isEditView()) {
@@ -53,9 +53,19 @@
                 this._saveOnSetContent = false; // the model already has the value being set, so don't set it again
                 this.setEditorContent(value);
             } else {
-                this.setViewContent(value)
+                this.setViewContent(value);
             }
         }, this);
+    },
+
+    /**
+     * Determines if the iframe is loaded and has a body element
+     *
+     * @param {Object} editable A reference to a field jQuery object
+     * @protected
+     */
+    _iframeHasBody: function(editable) {
+        return editable.contents().length > 0 && editable.contents().find('body').length > 0;
     },
 
     /**
@@ -65,13 +75,31 @@
      */
     setViewContent: function(value){
         var editable = this._getHtmlEditableField();
+        var styleExists = false;
+        var styleSrc = 'styleguide/assets/css/iframe-sugar.css';
+
         if (!editable) {
             return;
         }
-        if (!_.isUndefined(editable.get(0)) && !_.isEmpty(editable.get(0).contentDocument)) {
-            if (editable.contents().find('body').length > 0) {
-                editable.contents().find('body').html(value);
+
+        if (this._iframeHasBody(editable)) {
+            // Only add the stylesheet that is sugar-specific while making sure not to add any duplicates
+            editable.contents().find('link[rel="stylesheet"]').each(function() {
+                if ($(this).attr('href') === styleSrc) {
+                    styleExists = true;
+                }
+            });
+
+            if (!styleExists) {
+                // Add the tinyMCE specific stylesheet to the iframe
+                editable.contents().find('head').append($('<link/>', {
+                    rel: 'stylesheet',
+                    href: styleSrc,
+                    type: 'text/css'
+                }));
             }
+
+            editable.contents().find('body').html(value);
         } else {
             editable.html(value);
         }
@@ -89,8 +117,6 @@
         this._getHtmlEditableField().on('change', function(){
             self.model.set(self.name, self._getHtmlEditableField().val());
         });
-
-
     },
 
     /**
@@ -109,7 +135,7 @@
      * @private
      */
     _isEditView: function() {
-        return (this._getHtmlEditableField().prop('tagName') === 'TEXTAREA');
+        return this.action === 'edit';
     },
 
     /**
@@ -137,8 +163,21 @@
             menubar: false,
             statusbar: false,
             resize: false,
-            toolbar: 'code | bold italic underline strikethrough | bullist numlist | ' +
-                     'alignleft aligncenter alignright alignjustify | forecolor backcolor | fontsizeselect',
+            toolbar: 'code | bold italic underline strikethrough | bullist numlist | alignleft aligncenter ' +
+                'alignright alignjustify | forecolor backcolor | fontsizeselect | formatselect | fontselect',
+
+            // Sets the text of the Target element of the link plugin. To disable
+            // this completely, set target_list: false
+            target_list: [
+                {
+                    text: app.lang.getAppString('LBL_TINYMCE_TARGET_SAME'),
+                    value: ''
+                },
+                {
+                    text: app.lang.getAppString('LBL_TINYMCE_TARGET_NEW'),
+                    value: '_blank'
+                }
+            ],
 
             // Output options
             entity_encoding: 'raw',
@@ -168,7 +207,7 @@
                 self._htmleditor.on('init', function(event) {
                     self.setEditorContent(self.getFormattedValue());
                     $(event.target.getWin()).blur(function(e){ // Editor window lost focus, update model immediately
-                        self._saveEditor();
+                        self._saveEditor(true);
                     });
                 });
                 self._htmleditor.on('deactivate', function(ed){

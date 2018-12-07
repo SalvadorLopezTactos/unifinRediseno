@@ -64,7 +64,7 @@ class RangeAggregation extends AbstractAggregation
             return false;
         }
 
-        $filter = new \Elastica\Filter\BoolFilter();
+        $filter = new \Elastica\Query\BoolQuery();
         foreach ($filterDefs as $rangeId) {
 
             if (!isset($this->options['ranges'])) {
@@ -72,7 +72,7 @@ class RangeAggregation extends AbstractAggregation
             }
 
             // create range filter
-            $rangeFilter = new \Elastica\Filter\Range();
+            $rangeFilter = new \Elastica\Query\Range();
             $rangeOptions = array_intersect_key(
                 $this->options['ranges'][$rangeId],
                 array_flip($this->acceptedRangeOptions)

@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da bi obrisali poresku stopu.',
   'NTC_STATUS' => 'Podesite status na Neaktivan da bi ovu poresku stopu uklonili iz padajućih lista',
   'NTC_LIST_ORDER' => 'Podesite redosled po kome će se ova poreska stopa prikazati u padajućim listama poreskih stopa',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktivan',
-    'Inactive' => 'Neaktivan',
-  ),
   'LBL_EDITLAYOUT' => 'Izmeni raspored' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Kreirano prema Id-u',
   'LBL_MODIFIED_ID'=>'ID broj korisnika koji je promenio',

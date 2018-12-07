@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => '견적 목록 대시보드',
+    'LBL_QUOTES_RECORD_DASHBOARD' => '견적 기록 대시보드',
+
     'LBL_CONTRACTS'=>'계약 및 수주',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'계약 및 수주',
     'ERR_DELETE_RECORD' => '견적을 삭제하시려면 정확한 자료 고유번호를 입력하셔야합니다.',
@@ -95,7 +99,7 @@ $mod_strings = array (
     'LBL_LIST_PRODUCT_NAME' => '견적 라인아이템',
     'LBL_LIST_QUANTITY' => '분량',
     'LBL_LIST_QUOTE_NAME' => '제목',
-    'LBL_LIST_QUOTE_NUM' => '번호:',
+    'LBL_LIST_QUOTE_NUM' => '번호',
     'LBL_LIST_QUOTE_STAGE' => '단계',
     'LBL_LIST_TAXCLASS' => '세금 종류',
     'LBL_MODIFIED_BY'=>'수정자',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'소계(미화)',
     'LBL_SUBTOTAL' => '소계',
     'LBL_TAXABLE_SUBTOTAL' => '과세 소계',
-    'LBL_SYSTEM_ID' => '시스템 ID',
     'LBL_TAX_USDOLLAR'=>'세금(미화)',
     'LBL_TAX' => '세금',
     'LBL_TAX_TOTAL' => '총 세금',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => '선택된 것 삭제',
     'LBL_DELETE_SELECTED_TOOLTIP' => '선택된 항목 삭제',
     'LBL_SAVE_LINE_ITEMS' => '이 견적을 저장하기 전에 각 상품 옆의 파란색 확인 표시를 클릭하여 활성화된 상품을 저장하십시오.',
+    'LBL_COPY_LINE_ITEMS' => '각 상품 옆의 파란색 확인 표시를 클릭하여 활성화된 상품을 저장한 뒤 이 견적을 복사하십시오.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => '제품 카탈로그 검색',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => '이용 가능한 데이터 없음',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => '견적 라인아이템을 새로운 견적으로 복사.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => '견적 라인아이템을 새로운 견적으로 복사. 이 과정에는 다소 시간이 걸릴 수 있습니다.',
 );

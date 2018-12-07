@@ -8,6 +8,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// Get the global PMSE classes variable.
+var PMSE = PMSE || {};
 /**
  * That method builds the show History window
  * if ago options is enabled
@@ -81,7 +83,7 @@ function showHistory(caseId, caseIndex) {
         }
     });
 
-    w2 = new Window({
+    w2 = new PMSE.Window({
         width: 800,
         height: 350,
         modal: true,

@@ -28,9 +28,16 @@ class PMSEFieldParser implements PMSEDataParserInterface
 
     /**
      * Related bean to the evaluated bean
+     * @deprecated since version 7.11.0.0
      * @var SugarBean
      */
     protected $relatedBean;
+
+    /**
+     * Related beans to the evaluated bean
+     * @var array
+     */
+    protected $relatedBeans;
 
     /**
      * Lists modules Bean
@@ -87,6 +94,7 @@ class PMSEFieldParser implements PMSEDataParserInterface
     {
         $this->evaluatedBean = $evaluatedBean;
         $this->relatedBean = null;
+        $this->relatedBeans = array();
     }
 
     /**
@@ -148,13 +156,14 @@ class PMSEFieldParser implements PMSEDataParserInterface
      */
     public function parseCriteria($criteriaToken, $params = array())
     {
-        $tokenDelimiter = '::';
-        $newTokenArray = array('{', 'future', $criteriaToken->expModule, $criteriaToken->expField, $criteriaToken->expOperator, '}');
-        $assembledTokenString = implode($tokenDelimiter, $newTokenArray);
-        $tokenValue = $this->parseTokenValue($assembledTokenString);
-        $criteriaToken->expToken = $assembledTokenString;
-        $criteriaToken->currentValue = $tokenValue;
-        $criteriaToken->expValue = $this->setExpValueFromCriteria($criteriaToken);
+        $tokenArray = array($criteriaToken->expModule, $criteriaToken->expField, $criteriaToken->expOperator);
+        $criteriaToken->currentValue = $this->parseTokenValue($tokenArray);
+        if (isset($criteriaToken->valType) && $criteriaToken->valType == 'MODULE') {
+            $tokenArray = array($criteriaToken->valModule, $criteriaToken->valField, $criteriaToken->expOperator);
+            $criteriaToken->expValue = $this->parseTokenValue($tokenArray);
+        } else {
+            $criteriaToken->expValue = $this->setExpValueFromCriteria($criteriaToken);
+        }
 
         // We need to check to see if the evaluated bean (sometimes the target
         // and sometimes the related bean) is the right bean to work on
@@ -221,12 +230,8 @@ class PMSEFieldParser implements PMSEDataParserInterface
      */
     public function parseVariable($criteriaToken, $params = array())
     {
-        $tokenDelimiter = '::';
-
-        $newTokenArray = array('{', 'future', $criteriaToken->expModule, $criteriaToken->expValue, '}');
-        $assembledTokenString = implode($tokenDelimiter, $newTokenArray);
-        $tokenValue = $this->parseTokenValue($assembledTokenString);
-        $criteriaToken->expToken = $assembledTokenString;
+        $tokenArray = array($criteriaToken->expModule, $criteriaToken->expValue, $criteriaToken->expOperator);
+        $tokenValue = $this->parseTokenValue($tokenArray);
         if ($criteriaToken->expSubtype == 'Currency') {
             $value = json_decode($tokenValue);
             // in some use cases, value can be numeric instead of array
@@ -267,13 +272,13 @@ class PMSEFieldParser implements PMSEDataParserInterface
     public function getRelatedBean($link)
     {
         // If we have a related bean, send it back now
-        if (!empty($this->relatedBean)) {
-            return $this->relatedBean;
+        if (!empty($this->relatedBeans[$link])) {
+            return $this->relatedBeans[$link];
         }
 
         // Get and set the related bean since we don't have it yet
-        $this->relatedBean = $this->pmseRelatedModule->getRelatedModule($this->evaluatedBean, $link);
-        return $this->relatedBean;
+        $this->relatedBeans[$link] = $this->pmseRelatedModule->getRelatedModule($this->evaluatedBean, $link);
+        return $this->relatedBeans[$link];
     }
 
 
@@ -286,27 +291,26 @@ class PMSEFieldParser implements PMSEDataParserInterface
     public function parseTokenValue($token)
     {
         $this->pmseRelatedModule = ProcessManager\Factory::getPMSEObject('PMSERelatedModule');
-        $tokenArray = $this->decomposeToken($token);
 
         $bean = $this->evaluatedBean;
         $value = '';
-        if (!empty($tokenArray)) {
+        if (!empty($token)) {
             // This logic is a fairly bad assumption, but works in most cases. The
             // assumption is that a link name won't be in the bean list so try to load
             // a related bean instead.
-            if (!isset($this->beanList[$tokenArray[1]])) {
+            if (!isset($this->beanList[$token[0]])) {
                 // Get the related bean instead
-                $bean = $this->getRelatedBean($tokenArray[1]);
+                $bean = $this->getRelatedBean($token[0]);
             }
 
-            $field = $tokenArray[2];
+            $field = $token[1];
             if (!empty($bean) && is_object($bean)) {
-                if (isset($tokenArray[3]) &&
-                    ($tokenArray[3] == 'changes' ||
-                        $tokenArray[3] == 'changes_from' ||
-                        $tokenArray[3] == 'changes_to')) {
+                if (isset($token[2]) &&
+                    ($token[2] == 'changes' ||
+                        $token[2] == 'changes_from' ||
+                        $token[2] == 'changes_to')) {
                     if (isset($bean->dataChanges) && isset($bean->dataChanges[$field])) {
-                        if ($tokenArray[3] == 'changes_from') {
+                        if ($token[2] == 'changes_from') {
                             $value = $bean->dataChanges[$field]['before'];
                         } else {
                             $value = $bean->dataChanges[$field]['after'];

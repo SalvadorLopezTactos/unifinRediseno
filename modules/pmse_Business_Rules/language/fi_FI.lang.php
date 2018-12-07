@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Prosessiyrityssäännöt',
   'LBL_MODULE_TITLE' => 'Prosessiyrityssäännöt',
   'LBL_MODULE_NAME_SINGULAR' => 'Prosessiyrityssääntö',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Ehdot',
     'LBL_PMSE_LABEL_RETURN' => 'Palaa',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Konkluusio',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Muuta kenttä',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Palauta arvo',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Lisää ehto',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Lisää konkluusio',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Lisää rivi',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Poista sarake',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Poista ehto',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Poista päätös',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Poista sarakkeen tiedot',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Kyllä',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Ei',

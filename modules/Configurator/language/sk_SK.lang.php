@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Server aplikácie Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Položky podpanela na stránku',
 	'LOG_MEMORY_USAGE'=>'Využitie pamäte denníka',
-	'LOG_SLOW_QUERIES'=>'Zaznamenať pomalé otázky',
+    'LOG_SLOW_QUERIES' => 'Zaznamenať pomalé otázky',
     'LOCK_HOMEPAGE_HELP'=>'Toto nastavenie slúži na to, aby sa zabránilo<BR>1) pridaniu nových domovských stránok a dashletov do modulu Domov<BR>2) prispôsobeniu umiestnenia dashletov na domovských stránkach pretiahnutím.',
     'CURRENT_LOGO'=>'Aktuálne logo:',
     'CURRENT_LOGO_HELP'=>'Toto logo sa zobrazí v ľavom rohu päty aplikácie Sugar.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Toto je názov, ktorý sa zobrazí v záhlaví prehliadača.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Povoľte/blokujte zobrazenie e-mailov od súvisiacich (alebo prepojených) kontaktov na podpanely e-mailov.',
 
-    'LBL_OC_STATUS'                     => 'Predvolený stav Offline klienta',
-    'DEFAULT_OC_STATUS'                 => 'Predvolene povoliť Offline klienta',
-    'LBL_OC_STATUS_DESC' => 'Tu skontrolujte, či chcete, aby nejaký používateľ mal prístup k Offline klientovi. Prístup však môžete nastaviť aj na používateľskej úrovni.',
     'SESSION_TIMEOUT' => 'Časový limit relácie na portáli',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Časový limit relácie na portáli je dostupný pre staršie verzie Sugar portálu (6.5 a staršie).',
     'UPLOAD_MAXSIZE_UNITS' => 'bajty',
@@ -435,8 +432,17 @@ Ak chcete konfigurovať ďalšie nastavenia systému, kliknite <a href="index.ph
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'Adresa SAML Login URL nemôže byť prázdna',
     'ERR_EMPTY_SAML_CERT' => 'SAML certifikát nemôže byť prázdny',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'ID jednotky SAML nemôže zostať prázdne',
     'ERR_SAML_LOGIN_URL' => 'Adresa SAML Login URL je neplatná',
     'ERR_SAML_SLO_URL' => 'Adresa SAML SLO URL je neplatná',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM súbor by mal obsahovať súkromný kľúč',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM súbor by mal obsahovať certifikát x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Poskytnutý certifikát x.509 sa nezhoduje so súkromným kľúčom',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
 );
 
 

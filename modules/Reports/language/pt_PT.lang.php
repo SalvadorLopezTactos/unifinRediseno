@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Por Trimestre',
     'LBL_BY_FISCAL_YEAR' => 'Por Ano Fiscal',
     'LBL_BY_FISCAL_QUARTER' => 'Por Trimestre Fiscal',
+    'LBL_AMOUNT' => 'Valor',
     'LBL_COUNT' => 'Contador',
+    'LBL_PERCENT' => 'Percentagem',
     'LBL_SUM' => 'Somatório',
     'LBL_AVG' => 'Média',
     'LBL_MAX' => 'Máximo',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Mês',
     'LBL_YEAR' => 'Ano',
     'LBL_QUARTER' => 'Trimestre',
+    'LBL_FISCAL' => 'Fiscal',
     'LBL_FISCAL_YEAR' => 'Ano Fiscal',
     'LBL_FISCAL_QUARTER' => 'Trimestre Fiscal',
 	'LBL_YESTERDAY'=>'Ontem',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Próximo Trimestre',
     'LBL_ADD_RELATE' => "Adicionar Relacionado",
     'LBL_DEL_THIS' => "Remover",
-    'LBL_ALERT_CANT_ADD' => 'Não pode adicionar um módulo relacionado antes de ter selecionado uma tabela que possa relacionar.\nSelecione um módulo na lista dropdown à esquerda do botão &#39;Adicionar Relacionado&#39; que clicou.',
+    'LBL_ALERT_CANT_ADD' => 'Não pode adicionar um módulo relacionado antes de ter selecionado uma tabela que possa relacionar.\\nSelecione um módulo na lista dropdown à esquerda do botão &#39;Adicionar Relacionado&#39; que clicou.',
     'LBL_BY_DAY' => 'Por Dia',
     'LBL_DAY' => 'Dia',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Módulos Relacionados Opcionais',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Maior ou Igual a',
 
     'LBL_FILTER_BY_MODULE' => 'Por módulo',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Com Gráficos',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Erro ao recuperar os dados do Relatório de Drillthrough para esta ação. Contacte o titular do relatório para obter assistência.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Drill through não disponível',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'A exibição da lista exibe todos os relatórios que cumprem os critérios de pesquisa atuais e aos quais os utilizadores têm acesso. Pode ver os detalhes básicos de cada relatório dentro das colunas de campo da exibição de lista e na pré-visualização. Pode definir etiquetas para relatórios e criar filtros. Clique no nome do relatório ou selecione "Editar Relatório" no menu de ação para modificar o relatório.',
+  );

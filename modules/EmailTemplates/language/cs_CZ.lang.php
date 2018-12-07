@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Označit' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Smazat' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Typ',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Šablony e-mailu',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Šablony e-mailů',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Proměnné',
 );

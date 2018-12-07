@@ -742,8 +742,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'您确定要删除这种关系？<br>注意：此操作可能无法几分钟内完成。',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'将使这种关系永久化，您确定要部署这种关系吗？',
 'LBL_CONFIRM_DONT_SAVE' => '自上次保存已做更改，您想要保存吗？',
@@ -755,6 +755,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => '配置字段为可全文搜索。',
 'LBL_POPHELP_FTS_FIELD_BOOST' => '增强 (Boosting) 是加强记录的字段关联的过程。<br />进行搜索时，增强水平较高的字段将获得更大的权重。当执行搜索时，将含有字段的记录与更大的权重匹配，则显示更高的搜索结果。<br />默认值为 1.0，代表中性增强。如要应用正增强，可接受任何高于 1 的浮点值。对于负增强，则使用低于 1 的值。例如，数值 1.35 会将字段增强 135%。使用数值 0.60，则应用负增强。<br />请注意，在以前的版本中，要求执行全文搜索索引命令。这不再是必需的。',
 'LBL_POPHELP_IMPORTABLE'=>'<b>是</b> ：导入操作将加入该字段。<br><b>否</b> ：导入操作不会加入该字段。<br><b>必要</b>：任何导入操作必须提供该字段数值。',
+'LBL_POPHELP_PII'=>'此字段将自动标记用于审计，可在“个人信息”视图中查看。<br>如果记录与“数据隐私”删除请求相关，还可以永久删除“个人信息”字段。<br>删除操作将通过“数据隐私”模块进行，可由角色为“数据隐私管理员”的管理员或用户执行。',
 'LBL_POPHELP_IMAGE_WIDTH'=>'输入一个以像素为单位的宽度值。<br> 上传的图像将被缩放到这个宽度。',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'输入一个以像素为单位的高度值。<br> 上传的图像将被缩放到这个高度。',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Коммерческие предложения: Фактический адрес',
 	'LNK_ACCOUNT_REPORTS' => 'Просмотр отчёта по контрагентам',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Документы',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Информационная панель списка контрагентов',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Информационная панель записей контрагентов',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Графики',
 	'LBL_DEFAULT' => 'Обзоры',
@@ -45,7 +49,7 @@ $mod_strings = array (
 	'LBL_ASSIGNED_TO_NAME' => 'Ответственный (ая):',
 	'LBL_ASSIGNED_TO_ID' => 'Ответственный (ая):',
 	'LBL_BILLING_ADDRESS_CITY' => 'Юридический адрес - город:',
-	'LBL_BILLING_ADDRESS_COUNTRY' => 'Юридический адрес - страна:',
+	'LBL_BILLING_ADDRESS_COUNTRY' => 'Страна выставления счета:',
 	'LBL_BILLING_ADDRESS_POSTALCODE' => 'Юридический адрес - индекс:',
 	'LBL_BILLING_ADDRESS_STATE' => 'Юридический адрес - область:',
 	'LBL_BILLING_ADDRESS_STREET_2' =>'Юридический адрес - улица 2',
@@ -104,7 +108,7 @@ $mod_strings = array (
 	'LBL_PARENT_ACCOUNT_ID' => 'Родительский контрагент',
 	'LBL_PHONE_ALT' => 'Доп. тел.:',
 	'LBL_PHONE_FAX' => 'Тел. (факс):',
-	'LBL_PHONE_OFFICE' => 'Тел. (раб.):',
+	'LBL_PHONE_OFFICE' => 'Рабочий телефон:',
 	'LBL_PHONE' => 'Тел.:',
 	'LBL_POSTAL_CODE' => 'Индекс:',
 	'LBL_PRODUCTS_TITLE'=>'Продукты',

@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Mērķu sarakstu saraksta instrumentu panelis',
+
   'LBL_MODULE_NAME' => 'Mērķu saraksts',
   'LBL_MODULE_NAME_SINGULAR' => 'Mērķu saraksts',
   'LBL_MODULE_ID'   => 'Mērķu saraksts',

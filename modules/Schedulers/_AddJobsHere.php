@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Job\RebuildJob;
+
 /**
  * Set up an array of Jobs with the appropriate metadata
  * 'jobName' => array (
@@ -51,7 +53,7 @@ $job_strings = array (
     23 => 'class::\Sugarcrm\Sugarcrm\Elasticsearch\Queue\Scheduler',
     24 => 'class::SugarJobRemoveDiagnosticFiles',
     25 => 'class::SugarJobRemoveTmpFiles',
-
+    26 => 'class::' . RebuildJob::class,
 );
 
 /**
@@ -305,7 +307,7 @@ function pruneDatabase() {
 
             if (in_array($table . '_cstm', $tables)) {
 			    $custom_columns = $db->get_columns($table.'_cstm');
-			    if(empty($custom_columns['id_c'])) {
+                if (!empty($custom_columns['id_c'])) {
                     $db->query('DELETE FROM ' . $table . '_cstm WHERE id_c IN'
                         . ' (SELECT id FROM ' . $table . ' WHERE deleted = 1)');
 			    }

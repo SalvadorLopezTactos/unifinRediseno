@@ -43,7 +43,6 @@ class aCase extends Basic
     var $email_id;
     var $assigned_user_name;
     var $team_name;
-    var $system_id;
 
     var $table_name = "cases";
     var $rel_account_table = "accounts_cases";
@@ -152,20 +151,6 @@ class aCase extends Basic
         $this->contacts->add($contact_id, array('contact_role'=>$default));
     }
 
-    function fill_in_additional_detail_fields()
-    {
-        parent::fill_in_additional_detail_fields();
-
-        if (!empty($this->id)) {
-            $account_info = $this->getAccount($this->id);
-            if (!empty($account_info)) {
-                $this->account_name = $account_info['account_name'];
-                $this->account_id = $account_info['account_id'];
-            }
-        }
-    }
-
-
     /**
      * Returns a list of the associated contacts
      */
@@ -205,7 +190,7 @@ class aCase extends Basic
         $temp_array['ENCODED_NAME'] = $this->name;
         $temp_array['CASE_NUMBER'] = $this->case_number;
         $temp_array['SET_COMPLETE'] =  "<a href='index.php?return_module=Home&return_action=index&action=EditView&module=Cases&record=$this->id&status=Closed'>".SugarThemeRegistry::current()->getImage("close_inline", "title=".translate('LBL_LIST_CLOSE', 'Cases')." border='0'", null, null, '.gif', translate('LBL_LIST_CLOSE', 'Cases'))."</a>";
-        $temp_array['CASE_NUMBER'] = format_number_display($this->case_number, $this->system_id);
+        $temp_array['CASE_NUMBER'] = format_number_display($this->case_number);
         return $temp_array;
     }
 
@@ -263,19 +248,6 @@ class aCase extends Basic
         return false;
     }
 
-    function save($check_notify = false)
-    {
-        if (!isset($this->system_id) || empty($this->system_id)) {
-            $admin = Administration::getSettings();
-            $system_id = $admin->settings['system_system_id'];
-            if (!isset($system_id)) {
-                $system_id = 1;
-            }
-            $this->system_id = $system_id;
-        }
-        return parent::save($check_notify);
-    }
-
     /**
      * retrieves the Subject line macro for InboundEmail parsing
      * @return string
@@ -285,27 +257,5 @@ class aCase extends Basic
         global $sugar_config;
         return (isset($sugar_config['inbound_email_case_subject_macro']) && !empty($sugar_config['inbound_email_case_subject_macro'])) ?
             $sugar_config['inbound_email_case_subject_macro'] : $this->emailSubjectMacro;
-    }
-
-    function getAccount($case_id)
-    {
-        if (empty($case_id)) {
-            return array();
-        }
-        $ret_array = array();
-        $query = "SELECT acc.id, acc.name from accounts  acc, cases  where acc.id = cases.account_id and cases.id = '" . $case_id . "' and cases.deleted=0 and acc.deleted=0";
-        $result = $this->db->query($query, true, " Error filling in additional detail fields: ");
-
-        // Get the id and the name.
-        $row = $this->db->fetchByAssoc($result);
-
-        if ($row != null) {
-            $ret_array['account_name'] = stripslashes($row['name']);
-            $ret_array['account_id']    = $row['id'];
-        } else {
-            $ret_array['account_name'] = '';
-            $ret_array['account_id']    = '';
-        }
-        return $ret_array;
     }
 }

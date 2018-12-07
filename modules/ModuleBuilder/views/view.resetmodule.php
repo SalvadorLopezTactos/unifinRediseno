@@ -158,9 +158,6 @@ class ViewResetmodule extends SugarView
         $platforms = MetaDataManager::getPlatformList();
         array_unshift($platforms, '');
 
-        // Flag to tell the autoloader whether to save itself or not when done
-        $saveMap = false;
-
         foreach($sources as $view)
         {
             foreach ($platforms as $platform) {
@@ -171,17 +168,9 @@ class ViewResetmodule extends SugarView
                     $platform
                 );
 
-                // Ensure we are working on files that the autoloader knows about
-                if (SugarAutoLoader::fileExists($file)) {
-                    // Since we are in a loop inside of a loop do NOT send the
-                    // save flag as true to unlink() but be sure to save the file
-                    // map after the process is finished so that all changes to
-                    // the map are saved.
-                    SugarAutoLoader::unlink($file);
+                if (file_exists($file)) {
+                    unlink($file);
                     $out .= "Removed layout {$view['type']}.php<br/>";
-
-                    // Tell the autoloader to save itself
-                    $saveMap = true;
                 }
             }
         }
@@ -189,11 +178,6 @@ class ViewResetmodule extends SugarView
         // now clear the cache
         include_once ('include/TemplateHandler/TemplateHandler.php') ;
         TemplateHandler::clearCache ( $this->module ) ;
-
-        // If the file map needs saving, handle that now
-        if ($saveMap) {
-            SugarAutoLoader::saveMap();
-        }
 
         return $out;
     }
@@ -233,7 +217,7 @@ class ViewResetmodule extends SugarView
                 foreach ($files as $langFile) {
                     if (substr($langFile, 0 ,1) == '.') continue;
                     $language = substr($langFile, 0, strlen($langFile) - 9);
-                    SugarAutoLoader::unlink($languageDir . "/" . $langFile, true);
+                    unlink($languageDir . "/" . $langFile);
 
                     LanguageManager::clearLanguageCache($this->module, $language);
                     $out .= "Removed language file $langFile<br/>";

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Kontrolna tabla liste predmeta',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa predmeta',
+
 	'ERR_DELETE_RECORD'					=> 'Morate navesti broj zapisa da bi obrisali kompaniju.',
 	'LBL_ACCOUNT_ID'					=> 'ID broj kompanije',
 	'LBL_ACCOUNT_NAME'					=> 'Naziv kompanije:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Status:',
     'LBL_SOURCE' => 'Izvor:',
 	'LBL_SUBJECT'						=> 'Naslov:',
-	'LBL_SYSTEM_ID'						=> 'ID broj sistema',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Naziv kompanije',
 	'LBL_LIST_ASSIGNED'					=> 'Dodeljeno',
 	'LBL_LIST_CLOSE'					=> 'Zatvori',

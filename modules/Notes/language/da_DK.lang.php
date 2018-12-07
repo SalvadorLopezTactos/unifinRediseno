@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Noteliste-dashboard',
+
     'ERR_DELETE_RECORD' => 'Du skal angive et postnummer for at slette virksomheden.',
     'LBL_ACCOUNT_ID' => 'Virksomheds-id:',
     'LBL_CASE_ID' => 'Sags-id:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Note',
     'LBL_EMAIL_ADDRESS' => 'E-mail-adresse:',
     'LBL_EMAIL_ATTACHMENT' => 'Vedhæftet fil til e-mail',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Vedhæftet fil til',
     'LBL_FILE_MIME_TYPE' => 'Mime-type',
+    'LBL_FILE_EXTENSION' => 'Filtype',
+    'LBL_FILE_SOURCE' => 'Filkilde',
+    'LBL_FILE_SIZE' => 'Filstørrelse',
     'LBL_FILE_URL' => 'Fil-URL',
     'LBL_FILENAME' => 'Vedhæftet fil:',
     'LBL_LEAD_ID' => 'Kundeemne-id:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Salgsmuligheds-id:',
     'LBL_PARENT_ID' => 'Overordnet id:',
     'LBL_PARENT_TYPE' => 'Overordnet type',
+    'LBL_EMAIL_TYPE' => 'E-mailtype',
+    'LBL_EMAIL_ID' => 'E-mail-ID',
     'LBL_PHONE' => 'Telefon:',
     'LBL_PORTAL_FLAG' => 'Vis i portal?',
     'LBL_EMBED_FLAG' => 'Indsæt i e-mail?',

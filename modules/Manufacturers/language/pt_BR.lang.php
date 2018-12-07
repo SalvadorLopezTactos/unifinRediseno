@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'É necessário especificar um número de registro para excluir este Fabricante.',
   'NTC_STATUS' => 'Defina o estado como inativo para remover este fabricante das listas suspensas de Fabricante',
   'NTC_LIST_ORDER' => 'Defina a ordem pela qual este Fabricante aparecerá nas listas suspensas de Fabricante',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Ativo',
-    'Inactive' => 'Inativo',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Importar Fabricantes',
 	'LBL_EDITLAYOUT' => 'Editar Layout' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Itens da linha de receita',

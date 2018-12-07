@@ -18,10 +18,22 @@
  */
 class ServiceDictionaryRest extends ServiceDictionary
 {
+    // definition of score weight
+    const SCORE_WILDCARD = 0.75;
+    const SCORE_MODULE = 1;
+    const SCORE_EXACTMATCH = 1.75;
+    const SCORE_CUSTOMEXTRA = 0.5;
+
+    const WEIGHT_MINVERSION = 0.02;
+    const WEIGHT_MAXVERSION = 0.02;
+    const WEIGHT_MINMAXVERSION_MATCH = 0.02;
+    const WEIGHT_BASE = 100000;
+
     /**
      * Loads the dictionary so it can be searche
      */
-    public function loadDictionary() {
+    public function loadDictionary()
+    {
         $this->dict = $this->loadDictionaryFromStorage('rest');
     }
 
@@ -33,26 +45,27 @@ class ServiceDictionaryRest extends ServiceDictionary
      * @param srting $platform The platform for the API request
      * @return array The best-match path element
      */
-    public function lookupRoute($path, $version, $requestType, $platform) {
+    public function lookupRoute($path, $version, $requestType, $platform)
+    {
         $pathLength = count($path);
 
         // Put the request type on the front of the path, it is how it is indexed
-        array_unshift($path,$requestType);
+        array_unshift($path, $requestType);
 
         // The first element (path length) we can find on our own, but the request type will need to be hunted normally
-        if ( !isset($this->dict[$pathLength]) ) {
+        if (!isset($this->dict[$pathLength])) {
             // There is no route with the same number of /'s as the requested route, send them on their way
             throw new SugarApiExceptionNoMethod('Could not find a route with '.$pathLength.' elements');
         }
 
-        if ( isset($this->dict[$pathLength][$platform]) ) {
+        if (isset($this->dict[$pathLength][$platform])) {
             $route = $this->lookupChildRoute($this->dict[$pathLength][$platform], $path, $version);
         }
 
         // If we didn't find a route and we are on a non-base platform, see if we find one
         // in base. Using empty here because if platform route wasn't found then $route
         // will not yet be defined.
-        if (empty($route) && $platform != 'base' && isset($this->dict[$pathLength]['base']) ) {
+        if (empty($route) && $platform != 'base' && isset($this->dict[$pathLength]['base'])) {
             $route = $this->lookupChildRoute($this->dict[$pathLength]['base'], $path, $version);
         }
 
@@ -70,10 +83,11 @@ class ServiceDictionaryRest extends ServiceDictionary
      * @param float $version The API version you are looking for
      * @return array The best-match path element
      */
-    protected function lookupChildRoute($routeBase, $path, $version) {
-        if ( count($path) == 0 ) {
+    protected function lookupChildRoute($routeBase, $path, $version)
+    {
+        if (count($path) == 0) {
             // We are at the end of the lookup, the elements here are actual paths, we need to return the best one
-            return $this->getBestEnding($routeBase,$version);
+            return $this->getBestEnding($routeBase, $version);
         }
 
         // Grab the element of the path we are actually looking at
@@ -82,27 +96,27 @@ class ServiceDictionaryRest extends ServiceDictionary
         $bestScore = 0.0;
         $bestRoute = false;
         // Try to match it against all of the options at this level
-        foreach ( $routeBase as $routeKey => $subRoute ) {
+        foreach ($routeBase as $routeKey => $subRoute) {
             $match = false;
 
-            if ( substr($routeKey,0,1) == '<' ) {
+            if (substr($routeKey, 0, 1) == '<') {
                 // It's a data-specific function match
-                switch ( $routeKey ) {
+                switch ($routeKey) {
                     case '<module>':
                         $match = $this->matchModule($pathElement);
                         break;
                 }
-            } else if ( $routeKey == '?' ) {
+            } elseif ($routeKey == '?') {
                 // Wildcard, matches everything
                 $match = true;
-            } else if ( $routeKey == $pathElement ) {
+            } elseif ($routeKey == $pathElement) {
                 // Direct string match
                 $match = true;
             }
 
-            if ( $match ) {
+            if ($match) {
                 $route = $this->lookupChildRoute($subRoute, $path, $version);
-                if ( $route != false && $route['score'] > $bestScore ) {
+                if ($route != false && $route['score'] > $bestScore) {
                     $bestRoute = $route;
                     $bestScore = $route['score'];
                 }
@@ -124,25 +138,59 @@ class ServiceDictionaryRest extends ServiceDictionary
         $bestScore = 0.0;
         $bestRoute = false;
 
-        foreach ( $routes as $route ) {
-            if ( isset($route['minVersion']) && $route['minVersion'] > $version ) {
+        foreach ($routes as $route) {
+            if (isset($route['minVersion']) && $route['minVersion'] > $version) {
                 // Min version is too low, look for another route
                 continue;
             }
-            if ( isset($route['maxVersion']) && $route['maxVersion'] < $version ) {
+            if (isset($route['maxVersion']) && $route['maxVersion'] < $version) {
                 // Max version is too high, look for another route
                 continue;
             }
-            if ( $route['score'] > $bestScore ) {
+
+            // calculate extra weight for version
+            $routeScore = $route['score'] + $this->getScoreWeightForVersion($route, $version);
+            if ($routeScore > $bestScore) {
                 $bestRoute = $route;
-                $bestScore = $route['score'];
+                $bestRoute['score'] = $routeScore;
+                $bestScore = $bestRoute['score'];
             }
         }
 
         return $bestRoute;
     }
 
-    protected function matchModule( $pathElement ) {
+    /**
+     * get extra score weight based on version
+     * @param array $route The current candidate route
+     * @param float $version The API version you are looking for
+     * @return float
+     */
+    protected function getScoreWeightForVersion($route, $version)
+    {
+        $extraScore = 0.0;
+        if (isset($route['minVersion']) && version_compare($route['minVersion'], $version, '<=')) {
+            // normalize MAJOR.MINOR version
+            $v = explode('.', $route['minVersion']);
+            $majorVer = (int) $v[0];
+            $minorVer = empty($v[1]) ? 0 : (int) $v[1];
+            $wt = round(($majorVer*100 + $minorVer)/self::WEIGHT_BASE, 5);
+            $extraScore += self::WEIGHT_MINVERSION + $wt;
+        }
+
+        if (isset($route['maxVersion']) && version_compare($route['maxVersion'], $version, '>=')) {
+            $extraScore += self::WEIGHT_MAXVERSION;
+        }
+
+        if (isset($route['minVersion']) && isset($route['maxVersion']) && version_compare($route['maxVersion'], $version, '==')) {
+            $extraScore += self::WEIGHT_MINMAXVERSION_MATCH;
+        }
+
+        return $extraScore;
+    }
+
+    protected function matchModule($pathElement)
+    {
         return isset($GLOBALS['beanList'][$pathElement]);
     }
 
@@ -169,7 +217,6 @@ class ServiceDictionaryRest extends ServiceDictionary
         }
 
         foreach ($newEndpoints as $endpoint) {
-
             /*
              * Every endpoint can have one or more request types. This will mostly not be
              * the case, however in certain situations we wish to perform a GET using a
@@ -180,7 +227,6 @@ class ServiceDictionaryRest extends ServiceDictionary
             $reqTypes = is_array($endpoint['reqType']) ? $endpoint['reqType'] : array($endpoint['reqType']);
 
             foreach ($reqTypes as $reqType) {
-
                 // We use the path length, platform, and request type as the first three keys to search by
                 $path = $endpoint['path'];
                 array_unshift($path, count($endpoint['path']), $platform, $reqType);
@@ -192,7 +238,7 @@ class ServiceDictionaryRest extends ServiceDictionary
 
                 if ($isCustom) {
                     // Give some extra weight to custom endpoints so they can override built in endpoints
-                    $endpointScore = $endpointScore + 0.5;
+                    $endpointScore = $endpointScore + self::SCORE_CUSTOMEXTRA;
                 }
 
                 $endpoint['file'] = $file;
@@ -225,13 +271,13 @@ class ServiceDictionaryRest extends ServiceDictionary
 
         if ($currPath === '?') {
             // This matches anything
-            $myScore = 0.75;
+            $myScore = self::SCORE_WILDCARD;
         } elseif ($currPath[0] === '<') {
             // This is looking for a specfic data type
-            $myScore = 1.0;
+            $myScore = self::SCORE_MODULE;
         } else {
             // This is looking for a specific string
-            $myScore = 1.75;
+            $myScore = self::SCORE_EXACTMATCH;
         }
 
 

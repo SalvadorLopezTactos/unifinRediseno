@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Gebruikersgegevens niet gevonden',
     'ERR_USER_NAME_EXISTS'              => 'De gebruikersnaam {0} bestaat al. Dubbele gebruikersnamen zijn niet toegestaan. Wijzig de gebruikersnaam zodat deze uniek is.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Deze gebruiker is heeft geen toegang tot Sugar en kan niet inloggen met zijn/ haar huidige wachtwoord.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Gebruiker met alleen externe auth mag niet aanmelden met inloggegevens van Sugar',
 
 	'LBL_PASSWORD_SENT'                => 'Wachtwoord bijgewerkt.',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Kan geen wachtwoord sturen',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'E-mailadres van de ontvanger',
 	'ERR_SERVER_STATUS'					=> 'Uw Server status',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Het systeem kan geen e-mail versturen naar de gebruiker. Controleer de uitgaande e-mail instellingen in <a href="index.php?module=EmailMan&action=config">e-mailinstellingen</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'De gebruiker kan alleen worden aangemaakt in in <a href="{0}" target="_blank">Cloud console</a> voor de IDM-mode.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Het primaire e-mailadres kan alleen worden bijgewerkt in <a href="{0}" target="_blank">Cloud console</a> voor IDM-modus.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-mailadres:',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Bevestig wachtwoord',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'U heeft het gebruikerstype gewijzigd van systeem administrator naar normale gebruiker. Als u deze wijziging opslaat, zal de gebruiker niet langer administrator rechten hebben. \n\nKlik op OK om door te gaan.\nKlik op annuleren om terug te gaan.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'U heeft het gebruikerstype gewijzigd van systeem administrator naar normale gebruiker. Als u deze wijziging opslaat, zal de gebruiker niet langer administrator rechten hebben. \\n\\nKlik op OK om door te gaan.\\nKlik op annuleren om terug te gaan.',
 	'LBL_COUNTRY'						=> 'Land',
 	'LBL_CURRENCY_TEXT'					=> 'Kies de standaard valuta',
 	'LBL_CURRENCY'						=> 'Valuta',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'sec.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Gelieve contact op te nemen met de system administator.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Installeer de GMP PHP-extensie voor authenticatie met OpenID Connect (OIDC) in IDM-modus.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'U bent afgemeld. Klik aub om opnieuw aan te melden.',
     'LBL_LOGGED_OUT_2' => 'hier',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Gebruikersrapportages',
     'LBL_CONTACTS_SYNC' => 'Contactpersonen',
     'LBL_DETAIL' => 'Gebruikersprofiel',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Als bepaalde velden niet bewerkt kunnen worden, meldt u zich aan bij uw Cloud Console om deze velden te beheren',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Als u bepaalde velden wilt wijzigen die niet bewerkt kunnen worden, ' .
+        'neem dan contact op met het Beheer om deze wijzigingen door te voeren',
 ); // END STRINGS DEFS
 
 ?>

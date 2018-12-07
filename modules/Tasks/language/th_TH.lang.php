@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'แดชบอร์ดรายการปัญหา',
+
   'LBL_MODULE_NAME' => 'งาน',
   'LBL_MODULE_NAME_SINGULAR' => 'งาน',
   'LBL_TASK' => 'งาน: ',

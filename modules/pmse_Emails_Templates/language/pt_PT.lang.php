@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_PMSE_MY_EMAIL_TEMPLATES' => 'Os Meus Modelos de E-mail de Processos',
     'LBL_PMSE_ALL_EMAIL_TEMPLATES' => 'Todos os Modelos E-mail de Processos',
 
-    'LBL_PMSE_EMAIL_TEMPLATES_IMPORT_TEXT' => 'Criar automaticamente um novo registo de Modelo de E-mail do Processo importando um ficheiro *.pet a partir do seu sistema de ficheiros.',
+    'LBL_PMSE_EMAIL_TEMPLATES_IMPORT_TEXT' => 'Crie automaticamente um novo registo de Modelo de E-mail do Processo importando um ficheiro *.pet a partir do seu sistema de ficheiros.',
     'LBL_PMSE_EMAIL_TEMPLATES_IMPORT_SUCCESS' => 'O Modelo de E-mail do Processo foi importado com êxito para o sistema.',
     'LBL_PMSE_EMAIL_TEMPLATES_EMPTY_WARNING' => 'Selecione um ficheiro *.pet válido.',
 

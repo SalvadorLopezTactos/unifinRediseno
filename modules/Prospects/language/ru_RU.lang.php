@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Информационная панель списка адресатов',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Информационная панель записей адресатов',
+
   'LBL_MODULE_NAME' => 'Потенциальные клиенты',
   'LBL_MODULE_NAME_SINGULAR' => 'Адресат',
   'LBL_MODULE_ID'   => 'Потенциальные клиенты',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Обращение',
   'LBL_SAVE_PROSPECT' => 'Сохранить потенциального клиента',
   'LBL_CREATED_OPPORTUNITY' =>'Создана новая сделка',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Для создания сделки необходим контрагент.\n Пожалуйста, или создайте новый контрагент или выберите один из уже существующих.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Для создания сделки необходим контрагент.\\n Пожалуйста, или создайте новый контрагент или выберите один из уже существующих.',
   'LNK_SELECT_ACCOUNT' => "Выбрать контрагента",
   'LNK_NEW_PROSPECT' => 'Создать потенциального клиента',
   'LNK_PROSPECT_LIST' => 'Обзор потенциальных клиентов',
@@ -195,4 +199,6 @@ $mod_strings = array (
 2. Нажмите "Сохранить", чтобы завершить создание новой записи и вернуться на предыдущую страницу.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Отчёты по потенциальным клиентам',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Согласованные бизнес-цели',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Последнее обновление согласия',
 );

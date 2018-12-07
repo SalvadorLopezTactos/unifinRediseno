@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë prodhuesin',
   'NTC_STATUS' => 'Vendos statusin në pasiv për heqje të këtij prodhuesi prej listës së poshtme të prodhuesve',
   'NTC_LIST_ORDER' => 'Përcakto porosinë që ky publikim do të shfaq në listën e poshtme të publikimeve',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'aktive',
-    'Inactive' => 'pasive',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Prodhuesit e importit',
 	'LBL_EDITLAYOUT' => 'Ndrysho formatin' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Rreshti i llojeve të të ardhurave',

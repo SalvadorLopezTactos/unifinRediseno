@@ -719,6 +719,7 @@
                 break;
             case 'teamset':
                 fieldDef.type = 'relate';
+                fieldDef.isMultiSelect = true;
                 break;
             case 'datetimecombo':
             case 'date':

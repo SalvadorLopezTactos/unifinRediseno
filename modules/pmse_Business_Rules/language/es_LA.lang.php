@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Proceso de Reglas Empresariales',
   'LBL_MODULE_TITLE' => 'Proceso de Reglas Empresariales',
   'LBL_MODULE_NAME_SINGULAR' => 'Proceso de Regla Empresarial',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Condiciones',
     'LBL_PMSE_LABEL_RETURN' => 'Volver',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Conclusiones',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Cambiar Campo',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Valor de Retorno',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Añadir condición',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Añadir conclusión',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Agregar fila',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Eliminar columna',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Eliminar condición',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Eliminar conclusión',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Eliminar datos de columna',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Sí',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'No',

@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'You must specify a record number to delete the shipper.',
   'NTC_STATUS' => 'Set status to Inactive to remove this shipping provider from the Shipping Provider dropdown lists',
   'NTC_LIST_ORDER' => 'Set the order in which this shipping provider will appear in the Shipping Provider dropdown lists',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Active',
-    'Inactive' => 'Inactive',
-),
-	'LBL_EDITLAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
 );
-
 
 ?>

@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Paneli i listës së drejtuesve',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të drejtuesve',
+
     'ERR_DELETE_RECORD' => 'en_us Duhet përcaktuar numrin e regjistrimit për të fshirëudhëheqjen',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Përshkrimi i llogarisë',
     'LBL_ACCOUNT_ID'=>'ID e Llogarisë',
@@ -91,7 +96,7 @@ $mod_strings = array (
     'LBL_DEPARTMENT' => 'Departamenti',
     'LBL_DESCRIPTION_INFORMATION' => 'Informacioni përshkrues',
     'LBL_DESCRIPTION' => 'Përshkrim:',
-    'LBL_DO_NOT_CALL' => 'Mos lajmëroheni',
+    'LBL_DO_NOT_CALL' => 'Mos telefono:',
     'LBL_DUPLICATE' => 'Udhëheqje të ngjashme',
     'LBL_EMAIL_ADDRESS' => 'Email adresa',
     'LBL_EMAIL_OPT_OUT' => 'Email i zgjedhur jashtë:',
@@ -106,7 +111,7 @@ $mod_strings = array (
     'LBL_IMPORT_VCARD' => 'Importo vCard',
     'LBL_IMPORT_VCARD_SUCCESS' => 'Kontakti nga vKarta është krijuar me sukses',
     'LBL_VCARD' => 'vCard',
-    'LBL_IMPORT_VCARDTEXT' => 'Krijjo automatikisht kontakt të ri duke importuar vCard-ën nga systemi i dosjeve të tua',
+    'LBL_IMPORT_VCARDTEXT' => 'Krijo automatikisht kontakt të ri duke importuar vCard nga systemi i dosjeve të tua.',
     'LBL_INVALID_EMAIL'=>'Email Jo Valid',
     'LBL_INVITEE' => 'Raportet direkte',
     'LBL_LAST_NAME' => 'Mbiemri',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Sasia e mundësisë',
     'LBL_OPPORTUNITY_ID'=>'ID e mundësisë',
     'LBL_OPPORTUNITY_NAME' => 'Emri i mundësisë',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Email tjetër',
     'LBL_OTHER_PHONE' => 'Telefon tjetër',
     'LBL_PHONE' => 'Telefoni',
@@ -179,11 +185,11 @@ $mod_strings = array (
     'LBL_TITLE' => 'Titulli',
     'LBL_UNCONVERTED'=> 'E pakonvertuar',
     'LNK_IMPORT_VCARD' => 'Krijo udhëheqje nga vCard',
-    'LNK_LEAD_LIST' => 'Shih udhëheqjet',
+    'LNK_LEAD_LIST' => 'Shiko udhëheqjet',
     'LNK_NEW_ACCOUNT' => 'krijo llogari',
     'LNK_NEW_APPOINTMENT' => 'krijo takim',
     'LNK_NEW_CONTACT' => 'krijo kontaktet',
-    'LNK_NEW_LEAD' => 'krijo udhëheqje',
+    'LNK_NEW_LEAD' => 'Krijo udhëheqje',
     'LNK_NEW_NOTE' => 'Krijo shënim',
     'LNK_NEW_TASK' => 'Krijo detyrë',
     'LNK_NEW_CASE' => 'Krijo rast',
@@ -208,7 +214,7 @@ $mod_strings = array (
     'LBL_PROSPECT_LIST' => 'lista e prospektit',
     'LBL_PROSPECT' => 'Synim',
     'LBL_CAMPAIGN_LEAD' => 'fushatat',
-	'LNK_LEAD_REPORTS' => 'Shih raportet e udhëheqjes',
+	'LNK_LEAD_REPORTS' => 'Shiko raportet e udhëheqjes',
     'LBL_BIRTHDATE' => 'Ditëlindja:',
     'LBL_THANKS_FOR_SUBMITTING_LEAD' =>'Faleminderit për paraqitjen tuaj.',
     'LBL_SERVER_IS_CURRENTLY_UNAVAILABLE' =>'Na vjen keq, serveri aktualisht është në dispozicion, ju lutem provoni përsëri më vonë.',
@@ -233,7 +239,7 @@ $mod_strings = array (
     'LBL_CONVERT_EDIT_LAYOUT' => 'Ndrysho konvertimin e formatit',
     'LBL_CREATE' => 'Krijo',
     'LBL_SELECT' => 'ose Selekto',
-	'LBL_WEBSITE' => 'ueb faqja',
+	'LBL_WEBSITE' => 'Faqja e internetit',
 	'LNK_IMPORT_LEADS' => 'Importo udhëheqjet',
 	'LBL_NOTICE_OLD_LEAD_CONVERT_OVERRIDE' => 'Shënim: Konvertimi aktual i Klientit Potencial të ekranit përmban fushat me porosi. Kur ju rregulloni Konvertimin e ekranit të Klientit Potencial në studio për herë të parë, ju do të duhet të shtoni fushat e porositura për paraqitjen, si të nevojshme. Fushat me porosi nuk do të shfaqen automatikisht në paraqitjen, ashtu siç kanë bërë më parë.',
 //Convert lead tooltips
@@ -302,4 +308,6 @@ Për të krijuar një {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Pikët e kontaktit',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Raportet e kontaktit',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Qëllimet e biznesit u miratuan për',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Miratimi i përditësuar së fundi',
 );

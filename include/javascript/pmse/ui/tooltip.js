@@ -8,18 +8,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 /**
- * @class Tooltip
+ * @class PMSE.Tooltip
  * Handle tool tip messages
- * @extend Element
+ * @extends PMSE.Element
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
  * @param {Object} parent
  */
-var Tooltip = function (options, parent) {
-    Element.call(this, options);
+PMSE.Tooltip = function(options, parent) {
+    PMSE.Element.call(this, options);
     this.icon =  null;
     this.css = null;
     this.message = null;
@@ -27,16 +28,16 @@ var Tooltip = function (options, parent) {
     this.messageObject = null;
     this.hoverParent = null;
     this.hoverClass = null;
-    Tooltip.prototype.initObject.call(this, options, parent);
+    PMSE.Tooltip.prototype.initObject.call(this, options, parent);
 };
 
-Tooltip.prototype = new Element();
+PMSE.Tooltip.prototype = new PMSE.Element();
 
-Tooltip.prototype.type = 'Tooltip';
+PMSE.Tooltip.prototype.type = 'PMSE.Tooltip';
 
-Tooltip.prototype.family = 'Tooltip';
+PMSE.Tooltip.prototype.family = 'PMSE.Tooltip';
 
-Tooltip.prototype.initObject = function (options, parent) {
+PMSE.Tooltip.prototype.initObject = function(options, parent) {
     var defaults = {
         message: null,
         icon: 'adam-tooltip-icon-default',
@@ -54,38 +55,38 @@ Tooltip.prototype.initObject = function (options, parent) {
         .setHoverParent(defaults.hoverParent);
 };
 
-Tooltip.prototype.setIcon = function (icon) {
+PMSE.Tooltip.prototype.setIcon = function(icon) {
     this.icon = icon;
     return this;
 };
 
-Tooltip.prototype.setMessage = function (msg) {
+PMSE.Tooltip.prototype.setMessage = function(msg) {
     this.message = msg;
     return this;
 };
 
-Tooltip.prototype.setParent = function (parent) {
+PMSE.Tooltip.prototype.setParent = function(parent) {
     this.parent = parent;
     return this;
 };
 
 
-Tooltip.prototype.setCss = function (value) {
+PMSE.Tooltip.prototype.setCss = function(value) {
     this.css = value;
     return this;
 };
 
-Tooltip.prototype.setHoverParent = function (value) {
+PMSE.Tooltip.prototype.setHoverParent = function(value) {
     this.hoverParent = value;
     return this;
 };
 
-Tooltip.prototype.setHoverClass = function (css) {
+PMSE.Tooltip.prototype.setHoverClass = function(css) {
     this.hoverClass = css;
     return this;
 };
 
-Tooltip.prototype.createHTML = function () {
+PMSE.Tooltip.prototype.createHTML = function() {
     var msgDiv, iconSpan, tooltipAnchor;
 
     tooltipAnchor = this.createHTMLElement('a');
@@ -110,23 +111,23 @@ Tooltip.prototype.createHTML = function () {
     return this.html;
 };
 
-Tooltip.prototype.attachListeners = function () {
+PMSE.Tooltip.prototype.attachListeners = function() {
     var self = this;
-    $(this.html).click(function (e) {
+    $(this.html).click(function(e) {
             e.preventDefault();
         })
-        .mouseover(function (e) {
+        .mouseover(function(e) {
             e.stopPropagation();
             //console.log(e);
             self.show(e.pageX, e.pageY);
         })
-        .mouseout(function (e) {
+        .mouseout(function(e) {
             e.stopPropagation();
             self.hide();
         });
 };
 
-Tooltip.prototype.show = function (x, y) {
+PMSE.Tooltip.prototype.show = function(x, y) {
     var msgDiv;
 
     if (!this.messageObject) {
@@ -147,7 +148,7 @@ Tooltip.prototype.show = function (x, y) {
     }
 };
 
-Tooltip.prototype.hide = function () {
+PMSE.Tooltip.prototype.hide = function() {
     document.body.removeChild(this.messageObject);
     this.messageObject = null;
     if (this.hoverParent && this.parent) {

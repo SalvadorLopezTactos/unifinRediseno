@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\Security\Context;
+use Sugarcrm\Sugarcrm\Security\Subject\LogicHook as Subject;
+
 /**
  * Predefined logic hooks
  * after_ui_frame
@@ -37,6 +41,9 @@
  */
 class LogicHook{
 
+    /**
+     * @var SugarBean
+     */
 	var $bean = null;
 
 	/**
@@ -133,32 +140,33 @@ class LogicHook{
 	 * @param string $module_dir
 	 * @param string $event
 	 * @param array $arguments
-	 * @param SugarBean $bean
-	 */
-	function call_custom_logic($module_dir, $event, $arguments = array()){
+     */
+    public function call_custom_logic($module_dir, $event, $arguments = array())
+    {
         $origBean = $this->bean;
+
         if ($origBean === null) {
             $bean = BeanFactory::newBean($module_dir);
             if ($bean instanceOf SugarBean) {
                 $this->setBean($bean);
             }
         }
-		// declare the hook array variable, it will be defined in the included file.
-		$hook_array = null;
-        if(isset($GLOBALS['log'])){
+
+        if (isset($GLOBALS['log'])) {
             $GLOBALS['log']->debug("Hook called: $module_dir::$event");
         }
-		if(!empty($module_dir)){
-			// This will load an array of the hooks to process
-			$hooks = $this->getHooks($module_dir);
-			if(!empty($hooks)) {
-			    $this->process_hooks($hooks, $event, $arguments);
-			}
-		}
-		$hooks = $this->getHooks('');
-		if(!empty($hooks)) {
-		    $this->process_hooks($hooks, $event, $arguments);
-		}
+
+        $modules = array(null);
+
+        if ($module_dir) {
+            array_unshift($modules, $module_dir);
+        }
+
+        foreach ($modules as $module) {
+            $hooks = $this->getHooks($module);
+            $this->process_hooks($hooks, $event, $arguments);
+        }
+
         if ($origBean === null) {
             $this->setBean($origBean);
         }
@@ -228,7 +236,6 @@ class LogicHook{
 	 * @param array $hookArray
 	 * @param string $event
 	 * @param array $arguments
-	 * @param SugarBean $bean
 	 */
     public function process_hooks($hookArray, $event, $arguments)
     {
@@ -241,7 +248,6 @@ class LogicHook{
         $processOrder = $this->getProcessOrder($hookArray[$event]);
 
         foreach ($processOrder as $hookIndex) {
-
             $hookDetails = $hookArray[$event][$hookIndex];
             $hookFile = $hookDetails[2];
             $hookClass = $hookDetails[3];
@@ -252,25 +258,36 @@ class LogicHook{
                 continue;
             }
 
-            if ($hookClass == $hookFunc) {
-                $this->log("debug", "Creating new instance of hook class '$hookClass' with parameters");
-                if (!is_null($this->bean)) {
-                    $hookObject = new $hookClass($this->bean, $event, $arguments);
+            $context = Container::getInstance()->get(Context::class);
+            $subject = new Subject($hookClass, $hookFunc);
+            $context->activateSubject($subject);
+
+            try {
+                if (strcasecmp($hookClass, $hookFunc) === 0) {
+                    $this->log("debug", "Creating new instance of hook class '$hookClass' with parameters");
+                    if (!is_null($this->bean)) {
+                        new $hookClass($this->bean, $event, $arguments);
+                    } else {
+                        new $hookClass($event, $arguments);
+                    }
                 } else {
-                    $hookObject = new $hookClass($event, $arguments);
+                    $this->log("debug", "Creating new instance of hook class '$hookClass' without parameters");
+                    $hookObject = new $hookClass();
+
+                    if (!is_null($this->bean)) {
+                        // & is here because of BR-1345 and old broken hooks that use &$bean in args
+                        $params = array_merge([&$this->bean, $event, $arguments], array_slice($hookDetails, 5));
+                        call_user_func_array([$hookObject, $hookFunc], $params);
+                    } else {
+                        $hookObject->$hookFunc($event, $arguments);
+                    }
                 }
-            } else {
-                $this->log("debug", "Creating new instance of hook class '$hookClass' without parameters");
-                $hookObject = new $hookClass();
-                if (!is_null($this->bean)) {
-                    $callback = array($hookObject, $hookFunc);
-                    // & is here because of BR-1345 and old broken hooks
-                    // that use &$bean in args.
-                    $params = array_merge(array(&$this->bean, $event, $arguments), array_slice($hookDetails, 5));
-                    call_user_func_array($callback, $params);
-                } else {
-                    $hookObject->$hookFunc($event, $arguments);
-                }
+            } finally {
+                $context->deactivateSubject($subject);
+            }
+
+            if ($this->bean && $event === 'before_save') {
+                $this->bean->commitAuditedStateChanges($subject);
             }
         }
     }

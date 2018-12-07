@@ -33,6 +33,7 @@ class DocumentRevision extends SugarBean {
 	var $created_by;
 	var $filename;
 	var $file_mime_type;
+    public $file_size;
 	var $revision;
 	var $change_log;
 	var $document_name;
@@ -92,7 +93,11 @@ class DocumentRevision extends SugarBean {
 		$this->disable_row_level_security =true; //no direct access to this module. 
 	}
 
-	function save($check_notify = false){	
+    public function save($check_notify = false)
+    {
+        $filePath = "upload://{$this->id}";
+        $this->file_size = file_exists($filePath) ? filesize($filePath) : 0;
+
 		$saveRet = parent::save($check_notify);
 
 		//update documents table. (not through save, because it causes a loop)
@@ -141,9 +146,12 @@ class DocumentRevision extends SugarBean {
         }
 
 		//find the document name and current version.
-		$query = "SELECT document_name, revision, document_revision_id FROM documents, document_revisions where documents.id = '".$this->db->quote($this->document_id)."' AND document_revisions.id = documents.document_revision_id";
-		$result = $this->db->query($query,true,"Error fetching document details...:");
-		$row = $this->db->fetchByAssoc($result);
+        $query = 'SELECT document_name, revision, document_revision_id 
+                  FROM documents, document_revisions WHERE documents.id = ? 
+                  AND document_revisions.id = documents.document_revision_id';
+        $conn = $this->db->getConnection();
+        $stmt = $conn->executeQuery($query, array($this->document_id));
+        $row = $stmt->fetch();
 		if ($row != null) {
 			$this->document_name = $row['document_name'];
             $this->name = $this->document_name;
@@ -274,7 +282,18 @@ class DocumentRevision extends SugarBean {
 			}
 		}
 		return $return_array;
-	}	
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @uses UploadFile::unlink_file()
+     */
+    public function mark_deleted($id)
+    {
+        UploadFile::unlink_file($id);
+        parent::mark_deleted($id);
+    }
 }
 
 require_once('modules/Documents/DocumentExternalApiDropDown.php');

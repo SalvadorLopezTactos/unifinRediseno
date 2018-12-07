@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'لوحة معلومات قائمة الحالات',
+    'LBL_CASES_RECORD_DASHBOARD' => 'لوحة معلومات سجل الحالات',
+
 	'ERR_DELETE_RECORD'					=> 'يجب تحديد رقم السجل لحذف الحساب.',
 	'LBL_ACCOUNT_ID'					=> 'معرّف الحساب',
 	'LBL_ACCOUNT_NAME'					=> 'اسم الحساب:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'الحالة:',
     'LBL_SOURCE' => 'المصدر:',
 	'LBL_SUBJECT'						=> 'الموضوع:',
-	'LBL_SYSTEM_ID'						=> 'معرّف النظام',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'اسم الحساب',
 	'LBL_LIST_ASSIGNED'					=> 'تعيين إلى',
 	'LBL_LIST_CLOSE'					=> 'إغلاق',

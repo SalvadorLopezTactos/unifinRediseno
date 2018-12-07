@@ -63,7 +63,7 @@ class SidecarView extends SugarView
         // TODO: come up with a better way to deal with the various JS files
         // littered in sidecar.tpl.
         $voodooFile = 'custom/include/javascript/voodoo.js';
-        if (SugarAutoLoader::fileExists($voodooFile)) {
+        if (file_exists($voodooFile)) {
             $this->ss->assign('voodooFile', $voodooFile);
         }
 

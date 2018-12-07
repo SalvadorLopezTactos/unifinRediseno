@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => '사용가능한 필드에서 선택하십시오.',
     'LBL_DESCRIPTION_LEAD_FORM' => '양식 설명',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => '이 양식제출은 신규 관심고객을 만들며 캠페인과 연결됩니다.',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => '이 확인란을 선택하면 향후 마케팅 이메일 수신에 동의하게 됩니다',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'귀하의 웹에서 웹투리드 양식을 다운로드 하십시오,',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'웹투리드 양식',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'모든 필수항목 필드를 입력하십시오.',

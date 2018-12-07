@@ -1,10 +1,11 @@
 // Portal local
 ul.nav.nav-tabs li.activity {
   > p {
-    display:inline-block;
+    display: inline-block;
   }
+
   > .label {
-    display:inline-block;
+    display: inline-block;
     min-width: 32px;
     margin: 8px 8px 6px 12px;
     font-weight: 500;
@@ -15,9 +16,10 @@ ul.nav.nav-tabs li.activity {
   * Portal Dashboard
   * Overrides normal list view styling to make them 'dashlet-like'
   **/
-#content > .row-fluid > .dashboard.main-pane  {
+#content > .row-fluid > .dashboard.main-pane {
   top: 0;
 }
+
 #portal .touch .dashboard {
   padding-top: 0 !important;
 }
@@ -26,26 +28,27 @@ ul.nav.nav-tabs li.activity {
   top: 0;
 
   .thumbnail {
-    padding: 0 0 1px 0;
+    padding: 0 0 1px;
     border: 0;
-    @shadow: 0 2px 1px rgba(0,0,0,.1), 0 0 1px rgba(0,0,0,.4), -1px -1px 2px rgba(0,0,0,.1), 1px 1px 2px rgba(0,0,0,.1);
-    .box-shadow(@shadow);
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1), 0 0 1px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(0, 0, 0, 0.1), 1px 1px 2px rgba(0, 0, 0, 0.1);
     position: relative;
     margin: 20px !important;
     background: @white;
-    .transition(0);
+    transition: 0;
 
-    .headerpane{
+    .headerpane {
       height: auto;
       position: static;
       min-height: 0;
-      .border-radius(3px);
+      border-radius: 3px;
       border-bottom: 0;
+
       h1 {
         color: @tableHeader;
         line-height: @baseLineHeight;
-        .border-radius(3px 3px 0 0);
+        border-radius: 3px 3px 0 0;
         #gradient > .vertical(@grayLighter, darken(@grayLighter, 2%));
+
         border-bottom: @borderWidgetLight;
         margin: 0;
         font-weight: 600;
@@ -53,28 +56,34 @@ ul.nav.nav-tabs li.activity {
         height: auto;
         padding: 8px 0 0 10px;
         display: table-cell;
+
         a {
           color: lighten(@gray, 20%);
         }
       }
-      .btn-toolbar{
+
+      .btn-toolbar {
         height: 32px;
         padding: 5px 5px 0 0;
         margin: 0;
         #gradient > .vertical(@grayLighter, darken(@grayLighter, 2%));
+
         border-bottom: @borderWidgetLight;
-        .border-radius(0 4px 0 0);
+        border-radius: 0 4px 0 0;
       }
     }
+
     .list-view {
       width: 100%;
       overflow: auto;
-      .border-radius(0 0 3px 3px);
+      border-radius: 0 0 3px 3px;
     }
   }
+
   .cols {
     .thumbnail {
       padding-bottom: 0;
+
       .dataTable {
         tbody {
           tr:last-child {
@@ -94,17 +103,21 @@ ul.nav.nav-tabs li.activity {
 
 #moduleActivity {
   margin-bottom: 0;
+
   h4 {
     text-indent: 20px;
     margin-bottom: 0;
   }
+
   .actions {
     right: 20px;
     top: 0;
   }
+
   ul.results {
     margin: 0;
-    &> li {
+
+    & > li {
       margin-bottom: 0;
       margin-top: 10px;
       padding-left: 9px;
@@ -122,7 +135,9 @@ ul.nav.nav-tabs li.activity {
   margin: 0;
   text-align: center;
   #gradient > .vertical(darken(@grayLighter, 4%), @grayLighter);
-  .box-shadow(~"none");
+
+  box-shadow: none;
+
   input {
     width: 100%;
     margin: 0;

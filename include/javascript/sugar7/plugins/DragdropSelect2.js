@@ -239,10 +239,11 @@
                     activeClass: 'drop-highlight',
                     hoverClass: 'drop-hover',
                     drop: function(event, ui) {
-                        var sourceField = $(ui.helper).data('sourceField'),
-                            sourceCollection = self.model.get(sourceField),
-                            targetCollection = self.model.get(self.name),
-                            draggedItems = [];
+                        var sourceField = $(ui.helper).data('sourceField');
+                        var sourceCollection = self.model.get(sourceField);
+                        var targetCollection = self.model.get(self.name);
+                        var draggedItems = [];
+                        var droppedItems;
 
                         //if drag/drop within same field, no work to do
                         if (sourceField === self.name) {
@@ -256,8 +257,16 @@
                             }
                         });
 
-                        sourceCollection.remove(draggedItems);
-                        targetCollection.add(draggedItems);
+                        droppedItems = _.map(draggedItems, function(model) {
+                            return model.clone();
+                        });
+
+                        if (_.isFunction(self.dropDraggedItems)) {
+                            self.dropDraggedItems(sourceCollection, targetCollection, draggedItems, droppedItems);
+                        } else {
+                            sourceCollection.remove(draggedItems);
+                            targetCollection.add(droppedItems);
+                        }
                     }
                 });
             },

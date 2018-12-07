@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Brukerinformasjon ikke funnet',
     'ERR_USER_NAME_EXISTS'              => 'Brukernavnet {0} finnes allerede. Dubpliserte brukernavn er ikke tillatt. Endre brukernavnet slik at det blir unikt.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Denne brukeren er stengt ute av Sugar og kan ikke logge inn med sitt eksisterende passord.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Kun ekstern auth-bruker har ikke tillatelse til å logge på med Sugar-legitimasjon',
 
 	'LBL_PASSWORD_SENT'                => 'Passord oppdatert',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Kan ikke sende passord',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Mottakers e-postadresse',
 	'ERR_SERVER_STATUS'					=> 'Din server status',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Systemet kan ikke sende en epost til brukeren. Vennligst sjekk konfigurasjinen for utgående e-post  i<a href="index.php?module=EmailMan&action=config">e-post innstillinger</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Brukeren kan bare opprettes i <a href="{0}" target="_blank">Cloud-konsoll</a> for IDM-modus.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Den primære e-postadressen kan bare oppdateres i <a href="{0}" target="_blank">Cloud-konsoll</a> for IDM-modus.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-postadresse',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Bekreft passord',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Du har endret brukertype fra System Administrator Bruker til vanlig bruker. Når du har lagret denne endringen vil brukeren ikke lenger ha systemadministrator rettigheter. \n\nClick OK for å fortsette. \\ nClick Cancel for å gå tilbake til posten.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Du har endret brukertype fra System Administrator Bruker til vanlig bruker. Når du har lagret denne endringen vil brukeren ikke lenger ha systemadministrator rettigheter. \\n\\nClick OK for å fortsette. \\ nClick Cancel for å gå tilbake til posten.',
 	'LBL_COUNTRY'						=> 'Land',
 	'LBL_CURRENCY_TEXT'					=> 'Velg forhåndsinnstilt valuta',
 	'LBL_CURRENCY'						=> 'Valuta',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'sek.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Vennligst kontakt systemadministrator.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'For autentisering med OpenID Connect (OIDC) i IDM-modus må du installere GMP PHP-utvidelse.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Du har blitt logget av. For å logge inn igjen vennligst klikk',
     'LBL_LOGGED_OUT_2' => 'her',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Brukernes rapporter',
     'LBL_CONTACTS_SYNC' => 'Kontakter',
     'LBL_DETAIL' => 'Brukerprofil',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Hvis bestemte felt ikke kan redigeres, vennligst logg inn til Cloud-konsollen for å administrere disse feltene',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Hvis du vil endre visse felt som ikke kan redigeres. ' .
+        'kontakt administrator for å varsle om disse endringene',
 ); // END STRINGS DEFS
 
 ?>

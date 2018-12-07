@@ -12,13 +12,12 @@
 
 
 $mod_strings = array (
-
-  'LBL_MODULE_NAME' => 'Rregulla biznes procesi',
+  'LBL_MODULE_NAME' => 'Rregullat e procesit të biznesit',
   'LBL_MODULE_TITLE' => 'Rregulla biznes procesi',
   'LBL_MODULE_NAME_SINGULAR' => 'Rregulla biznes procesi',
 
   'LBL_RST_UID' => 'ID e biznes rregullave',
-  'LBL_RST_TYPE' => 'Lloji i biznes rregullave',
+  'LBL_RST_TYPE' => 'Lloji i rregullit të biznesit',
   'LBL_RST_DEFINITION' => 'Definimi i biznes rregullave',
   'LBL_RST_EDITABLE' => 'Biznes rregull i edituar',
   'LBL_RST_SOURCE' => 'Burimi i biznes rregullave',
@@ -28,7 +27,7 @@ $mod_strings = array (
   'LBL_RST_CREATE_DATE' => 'Data e krijimit të biznes rregullave',
   'LBL_RST_UPDATE_DATE' => 'Data e përditësimit të biznes rregullave',
 
-    'LNK_LIST' => 'Shiko proceset e biznes rregullave',
+    'LNK_LIST' => 'Shiko rregullat e biznesit të procesit',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Krijo rregullat e procesit të biznesit',
     'LNK_IMPORT_PMSE_BUSINESS_RULES' => 'Importo rregullat e procesit të biznesit',
 
@@ -47,7 +46,7 @@ $mod_strings = array (
 
     'LBL_PMSE_BUSINESS_RULES_SINGLE_HIT' => 'Goditje e vetme e proceseve të biznes rregullave',
 
-    'LBL_PMSE_BUSINESS_RULES_IMPORT_TEXT' => 'Automatikisht krijoni një proces të biznes rregullave duke importuar *.pbr fajl nga sistemi juaj i fajllave.',
+    'LBL_PMSE_BUSINESS_RULES_IMPORT_TEXT' => 'Krijoni automatikisht një regjistrim të ri rregulli biznesi procesi duke importuar një skedar *.pbr nga sistemi i skedarëve tuaj.',
     'LBL_PMSE_BUSINESS_RULES_IMPORT_SUCCESS' => 'Procesimi i email templejtit u importua me sukses në sistem.',
     'LBL_PMSE_BUSINESS_RULES_EMPTY_WARNING' => 'Ju lutemi selektoni *.pbr fajl valid.',
 
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Kushtet',
     'LBL_PMSE_LABEL_RETURN' => 'Kthe',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Konkluzione',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Ndrysho fushën',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Vlera e kthyer',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Shto kusht',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Shto kusht',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Shtoni rresht',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Hiq kolonën',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Hiq kushtin',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Hiq rezultatin',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Hiq të dhënat e kolonës',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Po',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Jo',

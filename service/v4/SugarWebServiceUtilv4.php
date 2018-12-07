@@ -78,7 +78,8 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
         $max = -1,
         $show_deleted = 0,
         $favorites = false,
-        $singleSelect = false
+        $singleSelect = false,
+        $fields = []
     ) {
 		$GLOBALS['log']->debug("get_list:  order_by = '$order_by' and where = '$where' and limit = '$limit'");
 		if(isset($_SESSION['show_deleted']))
@@ -92,7 +93,8 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
 		  $params['favorites'] = 2;
 		}
 
-		$query = $seed->create_new_list_query($order_by, $where,array(),$params, $show_deleted);
+        $query = $seed->create_new_list_query($order_by, $where, $fields, $params, $show_deleted, '', true);
+
 		return $seed->process_list_query($query, $row_offset, $limit, $max, $where);
 	}
 
@@ -384,8 +386,13 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
                 }
                 else if($name === 'id' ){
                     $seed->retrieve($value);
+                    break;
                 }
 			}
+
+            if ($this->isIDMMode() && $this->isIDMModeModule($module_name) && !$seed->isUpdate()) {
+                continue;
+            }
 
 			foreach($name_value_list as $name => $value) {
 			    //Normalize the input
@@ -412,6 +419,11 @@ class SugarWebServiceUtilv4 extends SugarWebServiceUtilv3_1
                 if (!empty($seed->field_defs[$field_name]['sensitive'])) {
 					continue;
 				}
+
+                if ($this->isIDMMode() && $this->isIDMModeModule($module_name) && $this->isIDMModeField($field_name)) {
+                    continue;
+                }
+
 				$seed->$field_name = $val;
 			}
 

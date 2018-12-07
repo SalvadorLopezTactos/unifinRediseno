@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Verkrijg een consumentensleutel bij LgMeIn door een nieuwe GoToMeeting-toepassing te registreren.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Registratiestappen:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Meld u aan bij uw LegMeIn Developer Center-account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Klik op Mijn Apps</li>
+    <li>Klik op Een nieuwe app toevoegen</li>
+    <li>Vul alle velden in op het formulier App toevoegen:</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>Naam App</li>
+            <li>Beschrijving</li>
+            <li>Product-API: Selecteer GoToMeeting</li>
+            <li>URL toepassing: Voer de URL van uw toepassing in</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Klik op de knop App maken</li>
+    <li>Klik vanuit de lijst met apps op de naam van uw app</li>
+    <li>Klik op het tabblad Sleutels</li>
+    <li>Kopieer de waarde van de consumentensleutel en voer deze hieronder in</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Consumentensleutel',
 );

@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Dashboard notitielijst',
+
     'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om de organisatie te verwijderen.',
     'LBL_ACCOUNT_ID' => 'Organisatie ID:',
     'LBL_CASE_ID' => 'Casus-ID:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Notitie',
     'LBL_EMAIL_ADDRESS' => 'E-mailadres:',
     'LBL_EMAIL_ATTACHMENT' => 'E-mailbijlage',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'E-mailbijlage voor',
     'LBL_FILE_MIME_TYPE' => 'Mime type',
+    'LBL_FILE_EXTENSION' => 'Bestandsextensie',
+    'LBL_FILE_SOURCE' => 'Bron bestand',
+    'LBL_FILE_SIZE' => 'Bestandsgrootte',
     'LBL_FILE_URL' => 'Bestand URL',
     'LBL_FILENAME' => 'Bijlage:',
     'LBL_LEAD_ID' => 'Lead ID:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Opportunity-ID:',
     'LBL_PARENT_ID' => 'Parent ID:',
     'LBL_PARENT_TYPE' => 'Type bovenliggend',
+    'LBL_EMAIL_TYPE' => 'Type e-mail',
+    'LBL_EMAIL_ID' => 'E-mail-ID',
     'LBL_PHONE' => 'Telefoon:',
     'LBL_PORTAL_FLAG' => 'Weergeven in portal?',
     'LBL_EMBED_FLAG' => 'Invoegen in e-mail?',

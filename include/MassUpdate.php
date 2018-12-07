@@ -10,10 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
-
 require_once 'include/EditView/EditView2.php';
 
 /**
@@ -38,6 +38,11 @@ class MassUpdate
     protected $request;
 
     /**
+     * @var IdmConfig
+     */
+    protected $idmConfig;
+
+    /**
      * Constructor for Mass Update
      *
      * @param Request $request
@@ -48,6 +53,7 @@ class MassUpdate
         //TODO: It will be turned on when job queue, asynchronous processing, activity Stream performance has been handled after 7.0
         Activity::disable();
         $this->request = $request ?: InputValidation::getService();
+        $this->idmConfig =  new IdmConfig(\SugarConfig::getInstance());
     }
 
 	/**
@@ -328,14 +334,6 @@ class MassUpdate
 
 					$this->sugarbean->retrieve($id);
 
-					////////////////////////
-					//IS USER OFFLINE CLIENT ENABLED
-					if($this->sugarbean->object_name == 'User' && isset($_POST['oc_status'])){
-						$this->sugarbean->setPreference('OfflineClientStatus',$_POST['oc_status']);
-					}
-					//
-					////////////////////////
-
 					if($this->sugarbean->ACLAccess('Save', array("massupdate" => true))) {
 						$_POST['record'] = $id;
 						$_GET['record'] = $id;
@@ -349,10 +347,10 @@ class MassUpdate
                                 continue;
                             }
                             if (isset($_POST['UserType'])) {
-                                if ($_POST['UserType'] == "Administrator") { 
+                                if ($_POST['UserType'] == "Administrator") {
                                     $newbean->is_admin = 1;
                                 }
-                                else if ($_POST['UserType'] == "RegularUser") { 
+                                elseif ($_POST['UserType'] == "RegularUser") {
                                     $newbean->is_admin = 0;
                                 }
                             }
@@ -400,11 +398,9 @@ class MassUpdate
 
 							} // if
 	                    } // if
-
                         // Before calling save, we need to clear out any existing registered AWF
                         // triggered start events so they can continue to trigger.
                         Registry\Registry::getInstance()->drop('triggered_starts');
-
 						$newbean->save($check_notify);
 						if (!empty($email_address_id)) {
 	    					$query = "UPDATE email_addresses SET opt_out = {$optout_flag_value} where id = '{$emailAddressRow['email_address_id']}'";
@@ -441,7 +437,7 @@ class MassUpdate
                 // Then massupdate has to be false
                 $def['massupdate'] = false;
             } elseif (isset($def['massupdate'])) {
-                // The massupdate value has to be boolean so the client can properly 
+                // The massupdate value has to be boolean so the client can properly
                 // handle it. A "0" false renders as a true to the client.
                 if (self::isTrue($def['massupdate'])) {
                     $def['massupdate'] = true;
@@ -522,7 +518,6 @@ class MassUpdate
 		$lang_update = translate('LBL_UPDATE');
 		$lang_confirm= translate('NTC_DELETE_CONFIRMATION_MULTIPLE');
 		$lang_sync = translate('LBL_SYNC_CONTACT');
-		$lang_oc_status = translate('LBL_OC_STATUS');
 		$lang_unsync = translate('LBL_UNSYNC');
 		$lang_archive = translate('LBL_ARCHIVE');
 		$lang_optout_primaryemail = $app_strings['LBL_OPT_OUT_FLAG_PRIMARY'];
@@ -549,6 +544,12 @@ class MassUpdate
 
 		//These fields should never appear on mass update form
 		static $banned = array('date_modified'=>1, 'date_entered'=>1, 'created_by'=>1, 'modified_user_id'=>1, 'deleted'=>1,'modified_by_name'=>1,);
+
+        if (in_array($this->sugarbean->module_name, $this->idmConfig->getIDMModeDisabledModules())
+            && $this->idmConfig->isIDMModeEnabled()
+        ) {
+            $banned += $this->idmConfig->getIDMModeDisabledFields();
+        }
 
 		foreach($this->sugarbean->field_defs as $field)
 		{
@@ -1520,7 +1521,7 @@ EOQ;
                 }
             }
         }
-        
+
         if ( $relationship == '' ) {
             return false;
         }
@@ -1530,7 +1531,7 @@ EOQ;
             $focus->load_relationship($relationship);
             $focus->$relationship->delete($id, $prospect_list_id);
         }
-        
+
         return true;
     }
 
@@ -1562,15 +1563,15 @@ EOQ;
         }
         return new $searchFormClass($bean, $module);
     }
-    
+
     /**
      * Boolean converter that returns whether the value is boolean true. This is
      * static because it is consumed from internal static methods.
-     * 
+     *
      * @param mixed $val Value to check boolean on
-     * @return boolean 
+     * @return boolean
      */
-    protected static function isTrue($val) 
+    protected static function isTrue($val)
     {
         return $val === true || $val === 1 || $val === "true" || $val === "1";
     }
@@ -1578,11 +1579,11 @@ EOQ;
     /**
      * Boolean converter that returns whether the value is boolean false. This is
      * static because it is consumed from internal static methods.
-     * 
+     *
      * @param mixed $val Value to check boolean on
-     * @return boolean 
+     * @return boolean
      */
-    protected static function isFalse($val) 
+    protected static function isFalse($val)
     {
         return $val === false || $val === 0 || $val === "false" || $val === "0";
     }

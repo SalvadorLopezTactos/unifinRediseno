@@ -67,6 +67,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Nenašla sa informácia o používateľovi.',
     'ERR_USER_NAME_EXISTS'              => 'Meno používateľa {0} už existuje. Duplikované mená používateľa nie sú povolené. Zmeňte meno používateľa tak, aby bolo jedinečné.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Tento používateľ má zablokovaný prístup do aplikácie Sugar a nemôže sa prihlásiť pomocou svojho hesla.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Používateľ len s externým overením nemá povolenie na prihlásenie pomocou poverení Sugar',
 
 	'LBL_PASSWORD_SENT'                => 'Heslo zmenené',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Nemožno zaslať heslo',
@@ -76,6 +77,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'E-mailová adresa príjemcu',
 	'ERR_SERVER_STATUS'					=> 'Stav vášho servera',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Systém nemôže odoslať e-mail tomuto používateľovi. Skontrolujte konfiguráciu odchádzajúcej pošty v <a href="index.php?module=EmailMan&action=config">Nastavenia e-mailu</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Používateľ môže byť vytvorený iba v <a href="{0}" target="_blank">konzole Cloud Console</a> pre režim IDM.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Primárnu e-mailovú adresu je možné aktualizovať iba v <a href="{0}" target="_blank">konzole Cloud Console</a> pre režim IDM.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-mailová adresa',
 
@@ -112,7 +115,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Potvrdiť heslo',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Zmenili ste typ používateľa zo systémového administrátora na bežného používateľa. Po uložení tejto zmeny tento používateľ už nebude mať naďalej povolenia systémového administrátora. \n\nKliknite na OK, ak chcete pokračovať.\n Kliknite na možnosť Zrušiť, ak sa chcete vrátiť k záznamu.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Zmenili ste typ používateľa zo systémového administrátora na bežného používateľa. Po uložení tejto zmeny tento používateľ už nebude mať naďalej povolenia systémového administrátora. \\n\\nKliknite na OK, ak chcete pokračovať.\\n Kliknite na možnosť Zrušiť, ak sa chcete vrátiť k záznamu.',
 	'LBL_COUNTRY'						=> 'Krajina',
 	'LBL_CURRENCY_TEXT'					=> 'Vyberte menu použitú v zozname a zobrazení záznamov, ak je povolená možnosť Zobraziť predvolenú menu. Je to takisto mena, ktorá sa bude zobrazovať ako predvolená pri vytváraní nových záznamov.',
 	'LBL_CURRENCY'						=> 'Predvolená mena',
@@ -225,6 +228,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'sek.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Kontaktujte svojho systémového administrátora.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Na overenie pomocou OpenID Connect (OIDC) v režime IDM si nainštalujte rozšírenie GMP PHP.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Prebehlo odhlásenie. Ak sa chcete prihlásiť znovu, kliknite',
     'LBL_LOGGED_OUT_2' => 'tu',
@@ -625,6 +630,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Hlásenia používateľov',
     'LBL_CONTACTS_SYNC' => 'Kontakty',
     'LBL_DETAIL' => 'Profil používateľa',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Ak nie je možné niektoré polia upraviť, prihláste sa do konzoly Cloud Console, aby ste mohli tieto polia spravovať',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Ak chcete zmeniť niektoré polia, ktoré nie sú editovateľné, ' .
+        'kontaktujte administrátora a oznámte mu tieto zmeny',
 ); // END STRINGS DEFS
 
 ?>

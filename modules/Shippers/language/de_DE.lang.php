@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Es muss die Datensatznummer angegeben werden, um das Transportunternehmen zu löschen.',
   'NTC_STATUS' => 'Zum Entfernen dieses Transportunternehmens aus der Auswahlliste, setzen Sie den Status auf "inaktiv"',
   'NTC_LIST_ORDER' => 'Legen Sie die Reihenfolge fest, in der dieses Transportunternehmen in der Auswahlliste erscheinen soll',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Inaktiv',
-),
-	'LBL_EDITLAYOUT' => 'Layout bearbeiten' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Layout bearbeiten' /*for 508 compliance fix*/,
 );
-
 
 ?>

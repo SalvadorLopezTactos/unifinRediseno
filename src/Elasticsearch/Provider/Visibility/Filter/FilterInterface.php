@@ -30,7 +30,7 @@ interface FilterInterface
     /**
      * Build filter
      * @param array $options
-     * @return \Elastica\Filter\AbstractFilter
+     * @return \Elastica\Query\AbstractQuery
      */
     public function buildFilter(array $options = array());
 }

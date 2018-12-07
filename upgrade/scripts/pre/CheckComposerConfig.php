@@ -472,7 +472,7 @@ class SugarUpgradeCheckComposerConfig extends UpgradeScript
      */
     protected function saveToFile($file, array $content)
     {
-        $mask = version_compare(PHP_VERSION, '5.4.0', '>=') ? JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES: 0;
+        $mask = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES;
         $json = json_encode($content, $mask);
         if (json_last_error() !== JSON_ERROR_NONE) {
             $this->log("JSON encode error '" . json_last_error_msg() . "' for $file");

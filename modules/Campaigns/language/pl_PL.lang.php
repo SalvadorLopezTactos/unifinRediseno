@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Wybierz z dostępnych pól',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Opis formularza:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Wysłanie tego formularza spowoduje utworzenie namiaru i połączenie z kampanią',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Zaznaczając to pole wyrażasz zgodę na otrzymywanie wiadomości reklamowych w przyszłości',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Pobierz swój formularz Web-To-Lead',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Formularz Web-To-Lead',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Wypełnij wszystkie wymagane pola',

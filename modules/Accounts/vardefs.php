@@ -289,6 +289,13 @@ $dictionary['Account'] = array(
             'source' => 'non-db',
             'vname' => 'LBL_CONTRACTS',
         ),
+        'dataprivacy' => array(
+            'name' => 'dataprivacy',
+            'type' => 'link',
+            'relationship' => 'accounts_dataprivacy',
+            'source' => 'non-db',
+            'vname' => 'LBL_DATAPRIVACY',
+        ),
         'campaign_id' => array(
             'name' => 'campaign_id',
             'comment' => 'Campaign that generated Account',

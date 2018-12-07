@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML-сообщение',
 	'COLUMN_TITLE_URL'=>'URL по умолчанию',
 	'COLUMN_TITLE_AUDIT' =>'Аудит',
+    'COLUMN_TITLE_PII' => 'Личные сведения',
     'COLUMN_TITLE_FTS' =>'Доступен к полнотекстовому поиску',
     'COLUMN_TITLE_FTS_BOOST' => 'Boost value',
 	'COLUMN_TITLE_REPORTABLE' => 'Доступен для сообщения',

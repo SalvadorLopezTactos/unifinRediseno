@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Painel da lista de potenciais',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Painel de registro de potenciais',
+
     'ERR_DELETE_RECORD' => 'Um número de registro deve ser especificado para excluir Potencial.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Descrição da conta',
     'LBL_ACCOUNT_ID'=>'ID da conta',
@@ -126,7 +131,7 @@ $mod_strings = array (
     'LBL_LIST_LEAD_SOURCE' => 'Origem do potencial',
     'LBL_LIST_MY_LEADS' => 'Meus Potenciais',
     'LBL_LIST_NAME' => 'Nome',
-    'LBL_LIST_PHONE' => 'Telefone Comercial',
+    'LBL_LIST_PHONE' => 'Telefone da empresa',
     'LBL_LIST_REFERED_BY' => 'Indicado Por',
     'LBL_LIST_STATUS' => 'Estado',
     'LBL_LIST_TITLE' => 'Título',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Valor da Oportunidade:',
     'LBL_OPPORTUNITY_ID'=>'ID da Oportunidade',
     'LBL_OPPORTUNITY_NAME' => 'Nome da Oportunidade:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Outro E-mail:',
     'LBL_OTHER_PHONE' => 'Outro Telefone:',
     'LBL_PHONE' => 'Telefone:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Copiar endereço alternativo para endereço principal',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Copiar endereço principal para endereço alternativo',
     'NTC_DELETE_CONFIRMATION' => 'Tem certeza de que deseja excluir este registro?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'A criação de uma Oportunidade requer uma conta.\n Crie uma nova ou Selecione uma já existente.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'A criação de uma Oportunidade requer uma conta.\\n Crie uma nova ou Selecione uma já existente.',
     'NTC_REMOVE_CONFIRMATION' => 'Tem certeza de que pretende remover este potencial desta ocorrência?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Tem certeza de que deseja remover este registro como um relatório direto?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Registro de Campanha',
@@ -314,4 +320,6 @@ Após confirmar cada módulo obrigatório e desejado, clique no botão Salvar e 
     'LBL_MKTO_LEAD_SCORE' => 'Pontuação do Potencial',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Relatórios dos Potenciais',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objetivos Comerciais autorizados para',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Autorização atualizada pela última vez',
 );

@@ -18,10 +18,14 @@ $mod_strings = array (
     'db_email1' => 'LBL_LISTA_EMAIL_ADRESA',
     'db_email2' => 'LBL_LISTA_ALT_EMAIL_ADRESA',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Tabloul de bord Listă contacte',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare contacte',
+
     'LNK_CONTACT_REPORTS' => 'Vezi Rapoarte Contact',
     'ERR_DELETE_RECORD' => 'Specifcați numărul înregistrării pentru a sterge contactul.',
     'LBL_ACCOUNT_ID' => 'ID Cont:',
-    'LBL_ACCOUNT_NAME' => 'Nume Cont:',
+    'LBL_ACCOUNT_NAME' => 'Nume cont:',
     'LBL_CAMPAIGN'     => 'Campanie:',
     'LBL_ACTIVITIES_SUBPANEL_TITLE'=>'Activitati',
     'LBL_ADD_BUSINESSCARD' => 'Introduceti Carte de Vizita',
@@ -36,7 +40,7 @@ $mod_strings = array (
     'LBL_ALT_ADDRESS_STREET' => 'Strada Adresei Alternative:',
     'LBL_ALTERNATE_ADDRESS' => 'Alta Adresa:',
     'LBL_ANY_ADDRESS' => 'Orice Adresa:',
-    'LBL_ANY_EMAIL' => 'Orice Email:',
+    'LBL_ANY_EMAIL' => 'Email:',
     'LBL_ANY_PHONE' => 'Orice Telefon:',
     'LBL_ASSIGNED_TO_NAME' => 'Atribuit lui:',
     'LBL_ASSIGNED_TO_ID' => 'Utilizator Atribuit',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Copiaza adresa alternativa la adresa principala',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Copiaza adresa principala la adresa alternativa',
     'NTC_DELETE_CONFIRMATION' => 'Sunteti sigur ca doriti sa stergeti aceasta inregistrare?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Crearea unei oportunitati necesita un cont.\n Va rugam, fie sa creati un cont nou, fie sa selectati unul deja existent.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Crearea unei oportunitati necesita un cont.\\n Va rugam, fie sa creati un cont nou, fie sa selectati unul deja existent.',
     'NTC_REMOVE_CONFIRMATION' => 'Sunteţi sigur că doriţi să inlaturati acest contact din caz?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Sunteţi sigur că doriţi să inlaturati aceasta inregistrare ca un raport direct?',
 
@@ -267,4 +271,6 @@ Pentru a crea {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Punctaj responsabil',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Rapoarte contacte',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Scopuri comerciale permise pentru',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ultima actualizare a consimțământului',
 );

@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Árajánlati sorelemek listája műszerfal',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampány termék',
     'LBL_MODULE_NAME' => 'Megajánlott Tételek',
     'LBL_MODULE_NAME_SINGULAR' => 'Megajánlott Tétel',
@@ -166,4 +169,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Ajánlat sorelemei, ajánlat adatlista',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Új ajánlott sorelem)',
     'LBL_DISCOUNT_PERCENT' => '% százalék',
+    'LBL_DISCOUNT_TYPE' => 'Kedvezmény típusa',
 );

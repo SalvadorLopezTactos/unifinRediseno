@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Pulpit list bazy wiedzy',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Pulpit rekordów bazy wiedzy',
+
     'LBL_MODULE_NAME' => 'Baza wiedzy',
     'LBL_MODULE_NAME_SINGULAR' => 'Artykuł bazy wiedzy',
     'LBL_MODULE_TITLE' => 'Artykuł bazy wiedzy',

@@ -137,7 +137,7 @@ $mod_strings = array (
 
     'LBL_FORECAST' => 'Previsão',
     'LBL_COMMIT_STAGE' => 'Etapa de Registo',
-    'LBL_SALES_STAGE' => 'Etapa',
+    'LBL_SALES_STAGE' => 'Fase',
     'LBL_AMOUNT' => 'Valor',
     'LBL_PERCENT' => 'Percentagem',
     'LBL_DATE_CLOSED' => 'Data de Fecho Esperada',

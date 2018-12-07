@@ -129,7 +129,8 @@ class SugarFavorites extends Basic
 		$queryResult = $db->query($query);
 		$assigned_user_ids = array();
 		while($row = $db->fetchByAssoc($queryResult)) {
-			$assigned_user_ids[] = $row['assigned_user_id'];
+            $id = $db->fromConvert($row['assigned_user_id'], 'id');
+            $assigned_user_ids[] = $id;
 		}
 		return $assigned_user_ids;
 	}

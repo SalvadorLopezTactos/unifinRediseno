@@ -8,39 +8,41 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 /**
- * @class Layout
+ * @class PMSE.Layout
  * Handle the layout for panels
- * @extend Base
+ * @extends PMSE.Base
  *
  * @constructor
  * Creates a new instance of this class
  * @param {Object} options
  */
-var Layout = function (options) {
-    Base.call(this, options);
+PMSE.Layout = function(options) {
+    PMSE.Base.call(this, options);
 
-    Layout.prototype.initObject.call(this, options);
+    PMSE.Layout.prototype.initObject.call(this, options);
 };
 
-Layout.prototype = new Base();
+PMSE.Layout.prototype = new PMSE.Base();
 
 /**
  * Defines the object's type
  * @type {String}
  */
-Layout.prototype.type = 'Layout';
+PMSE.Layout.prototype.type = 'PMSE.Layout';
 
 /**
  * Defines the object's family
  * @type {String}
  */
-Layout.prototype.family = 'Layout';
+PMSE.Layout.prototype.family = 'PMSE.Layout';
 
 /**
  * Initializes the object with default values
  * @param {Object} options
  */
-Layout.prototype.initObject = function (options) {
+PMSE.Layout.prototype.initObject = function(options) {
 
 };

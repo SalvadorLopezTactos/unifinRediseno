@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> 'Šis vaicājums tiks pievienots zem atskaites pirmā vaicājuma',
     'ERR_DB_VERSION_FAILURE'			=> 'Nevar noteikt datu bāzes versiju.',
 
-
-	'ERR_OC_PASSWORD'					=> 'Nepieciešama parole.',
-	'ERR_OC_SERVER_URL'					=> 'Nepieciešams Sugar servera URL.',
-	'ERR_OC_USERNAME'					=> 'Nepieciešams servera lietotāja lietotājvārds.',
-	'LBL_INSTALL_OC'					=> 'Instalēt bezsaistes klientu',
-    'LBL_OC_ADMIN'                      => 'Lai atrisinātu problēmu sazinieties ar jūsu sistēmas administratoru.',
-    'LBL_OC_SUCCESS'                    => 'Bezsaistes klienta instalēšana ir pabeigta. Lūdzu, nospiediet uz zemāk esošās pogas, lai pārietu pie instalācijas.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'Administratora lietotājvārds',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'Lai pienācīgi instalētu un sinhronizētu offline klientu, zemāk ievadiet detalizētu informāciju.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'Sugar servera URL',
-	'LBL_OC_INSTALL_PASS'				=> 'Servera lietotāja parole',
-	'LBL_OC_INSTALL_TITLE'				=> 'Bezsaistes klienta instalācija',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'Izmantojiet šo lietotājvārdu, lai pieslēgtos Sugar serverim.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'Lietotājvārds',
-	'LBL_PERFORM_OC_INSTALL'			=> 'Inicializē bezsaistes klienta instalāciju',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'Lai pienācīgi instalētu un sinhronizētu offline klientu, zemāk ievadiet detalizētu informāciju.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Norādiet Sugar administratora lietotājvārdu.',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Norādiet Sugar administratora paroli.',
@@ -76,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Savietojamības pārbaudes laikā atklātas kļūdas.  Lai SugarCRM instalācija funkcionētu korekti, veic atbilstošus pasākumus, lai atrisinātu zemāk esošās problēmas vai spied pogu Atkārtoti pārbaudīt, vai mēģini instalēt no jauna.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference ir stāvoklī On (šo vajadzētu uzstādīt stāvoklī Off failā php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nav atrasts: Sugar Plānotājs darbosies ar ierobežotu funkcionalitāti. E-pastu arhivēšanas pakalpojums nedarbosies.',
+	'ERR_CHECKSYS_CURL'					=> 'Nav atrasts: Sugar plānotājs darbosies ar ierobežotu funkcionalitāti. E-pastu arhivēšanas pakalpojums nedarbosies.',
     'ERR_CHECKSYS_IMAP'					=> 'Netika atrasts: Ienākošajiem e-pastiem un Kampaņām (E-pasta) nepieciešamas IMAP bibliotēkas. Pretējā gadījumā funkcionalitāte nedarbosies.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC nevar uzstādīt "On" stāvoklī, ja lieto MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Brīdinājums:',
@@ -92,7 +75,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Optimālai IIS/FastCGI sapi lietošanai php.ini datnē parametram fastcgi.logging uzstādiet vērtību 0.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Instalēta neatbalstīta PHP versija: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Datubāze nav pieejama',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Datu bāzes atbalsts netika atrasts. Pārliecinieties, ka ir uzstādīti nepieciešamie draiveri kādai no šādām atbalstītajām datu bāzēm: MySQL, MS SQLServer, Oracle vai DB2. Iespējams, atkarībā no PHP versijas, ir jānoņem komentārs paplašinājumam php.ini failā vai jāpārkompilē, izmantojot pareizu bināro failu. Sīkāka informācija par to, kā nodrošināt datu bāzes atbalstu, pieejama PHP rokasgrāmatā.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Datubāzes atbalsts netika atrasts. Pārliecinieties, ka ir nepieciešamie draiveri kādam no šādiem atbalstītajiem datubāžu tipiem: MySQL, MS SQLServer, Oracle vai DB2. Iespējams, ka atkarībā no jūsu PHP versijas ir jānoņem komentārs paplašinājumam php.ini failā vai jāpārkompilē, izmantojot pareizo bināro failu. Plašāka informācija par to, kā iespējot datubāzes atbalstu, pieejama PHP rokasgrāmatā.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Nav atrastas Sugar nepieciešamās XML Parser Libraries funkcijas.  Iespējams, ka atkarībā no izmantotās PHP versijas, jānoņem komentārs paplašinājumam php.ini datnē, vai jāpārkompilē ar pareizu bināro failu.  Detalizētaka informācija pieejama PHP rokasgrāmatā.',
     'LBL_CHECKSYS_CSPRNG' => 'Nejaušu skaitļu ģenerators',
     'ERR_CHECKSYS_MBSTRING'             => 'Nav atrastas funkcijas, kas nepieciešamas, lai Sugar  varētu izmantot PHP  Multibyte Strings paplašinājumu (mbstring). <br/><br/>Parasti pēc noklusējuma PHP mbstring modulis nav spējīgots un tā aktivizēšanai jāveic PHP būvējums, izmantojot  --enable-mbstring. Detalizētāka informācija par mbstring atbalstu pieejama PHP rokasgrāmatā.',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'Augšupielādes faila izmērs',
 	'ERR_URL_BLANK'						=> 'Piedāvāt pamata URL Sugar eksemplāram.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'Nevar izvietot instalācijas failu no',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'Augšupielādētais fails nav saderīgs ar šo Sugar( Community Edition, Professional vai Enterprise) versiju.',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'Augšupielādētais fails nav saderīgs ar šo Sugar paveidu (Professional, Enterprise vai Ultimate versiju): ',
 	'ERROR_LICENSE_EXPIRED'				=> "Kļūda: Jūsu licence ir beigusies",
 	'ERROR_LICENSE_EXPIRED2'			=> "pirms dienas(ām). Lūdzu dodies uz <a href=\"index.php?action=LicenseSettings&module=Administration\">\"Licences vadība\"</a>  Administrēšanas sadaļu, lai ievadītu jauno licences atslēgu. Ja licences atslēga netiks ievadīta 30 dienu laikā pēc tās beigšanās, šajā programmā vairs ielogoties nebūs iespējams.",
 	'ERROR_MANIFEST_TYPE'				=> 'Manifesta failā jābūt norādītam pakotnes veidam.',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'Derīgs līdz',
 	'LBL_LICENSE_I_ACCEPT'				=> 'Apstiprinu',
 	'LBL_LICENSE_NUM_USERS'				=> 'Lietotāju skaits',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'Lūdzu ievadiet bezsaistes klientu skaitu.',
-	'LBL_LICENSE_OC_NUM'				=> 'Bezsaistes klientu skaits',
-	'LBL_LICENSE_OC'					=> 'Bezsaistes klienta licenzes',
 	'LBL_LICENSE_PRINTABLE'				=> 'Drukāšanas skatījums',
     'LBL_PRINT_SUMM'                    => 'Drukāt kopsavilkumu',
 	'LBL_LICENSE_TITLE_2'				=> 'SugarCRM licence',
@@ -496,10 +476,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'Salīdzināšanas iestatījumi',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Ievadiet sistēmas vārdu Sugar instancei.',
 	'LBL_PATCH_UPLOAD' => 'Izvēlieties ielāpa failu Jūsu datorā',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'Nepieciešama PHP versija 5 vai jaunāka.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(Jūsu pašreizējā php versija ir',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php saderības režīms ir ieslēgts. Iestatiet zend.ze1_compatibility_mode uz Izslēgts, lai turpinātu',
 
     'advanced_password_new_account_email' => array(
@@ -531,5 +507,3 @@ $contact_user_link_guid',
         'name' => 'Aizmirsāt E-pasta paroli?',
         ),
 );
-
-?>

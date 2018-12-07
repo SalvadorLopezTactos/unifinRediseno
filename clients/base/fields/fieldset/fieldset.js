@@ -207,6 +207,7 @@
                 var field = app.view.createField({
                     def: fieldDef,
                     view: this.view,
+                    nested: true,
                     viewName: this.options.viewName,
                     model: this.model
                 });

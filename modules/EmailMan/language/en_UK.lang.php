@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'click here',
 	'TXT_REMOVE_ME'								=> 'To remove yourself from this email list',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Send notification from assigning user&#39;s e-mail address',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Opt-out new email addresses by default',
 
 	'LBL_SECURITY_TITLE'						=> 'Email Security Settings',
 	'LBL_SECURITY_DESC'							=> 'Check the following that should NOT be allowed in via InboundEmail or displayed in the Emails module.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Allow users to use this account for outgoing email:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'When this option is selected, all users will be able to send emails using the same outgoing<br> mail account used to send system notifications and alerts.  If the option is not selected,<br> users can still use the outgoing mail server after providing their own account information.',
     'LBL_FROM_ADDRESS_HELP'                     => 'When enabled, the assigning user\\\'s name and email address will be included in the From field of the email. This feature might not work with SMTP servers that do not allow sending from a different email account than the server account.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'When a new email address is added, it will automatically be opted out. Campaign emails cannot be delivered to opted out addresses. Changing this setting will not affect existing email addresses.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

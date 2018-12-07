@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'プロセス定義',
   'LBL_MODULE_TITLE' => 'プロセス定義',
   'LBL_MODULE_NAME_SINGULAR' => 'プロセス定義',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => '次と一致しない',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'は以下ではない',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => '等しくない',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'ランタイム',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => '追加',
     'LBL_PMSE_FORMPANEL_CLOSE' => '閉じる',

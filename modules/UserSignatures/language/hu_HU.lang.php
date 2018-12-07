@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'Felhasználói aláírások',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'Felhasználói aláírás',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Az aláíráshoz szükséges egy név.',
-    'LBL_SIGNATURE_NAME'         => 'Név',
-    'LBL_SIGNATURE'              => 'Aláírás',
-    'LBL_SIGNATURE_HTML'         => 'HTML aláírás',
-    'LBL_SIGNATURE_DEFAULT'      => 'Használjon aláírást?',
-    'LBL_SIGNATURE_PREPEND'      => 'Aláírás a válasz felett?',
-    'LBL_SIGNATURES'             => 'Aláírások',
+    'LBL_DEFAULT_SIGNATURE' => 'Alapértelmezett',
+    'LBL_MODULE_NAME' => 'E-mail aláírások',
+    'LBL_MODULE_NAME_SINGULAR' => 'E-mail aláírás',
+    'LBL_SIGNATURE_NAME' => 'Név',
+    'LBL_SIGNATURE' => 'Aláírás',
+    'LBL_SIGNATURE_HTML' => 'HTML aláírás',
+    'LBL_SIGNATURE_DEFAULT' => 'Használjon aláírást?',
+    'LBL_SIGNATURE_PREPEND' => 'Aláírás a válasz felett?',
+    'LBL_SIGNATURES' => 'Aláírások',
 );

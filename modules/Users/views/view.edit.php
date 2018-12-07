@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
+
 class UsersViewEdit extends ViewEdit {
 var $useForSubpanel = true;
 
@@ -41,6 +43,10 @@ var $useForSubpanel = true;
     function display() {
         global $current_user, $app_list_strings;
 
+        $idpConfig = new IdmConfig(\SugarConfig::getInstance());
+        if ($idpConfig->isIDMModeEnabled() && !$this->bean->isUpdate()) {
+            $this->showRedirectToCloudConsole($idpConfig->buildCloudConsoleUrl('userCreate'));
+        }
 
         //lets set the return values
         $return_module = $this->request->getValidInputRequest('return_module', 'Assert\Bean\ModuleName');
@@ -103,7 +109,7 @@ var $useForSubpanel = true;
         $admin = Administration::getSettings();
 
         if((isset($sugar_flavor) && $sugar_flavor != null) &&
-           ($sugar_flavor=='CE' || isset($admin->settings['license_enforce_user_limit']) && $admin->settings['license_enforce_user_limit'] == 1)){
+           (isset($admin->settings['license_enforce_user_limit']) && $admin->settings['license_enforce_user_limit'] == 1)) {
             if (empty($this->bean->id)) {
                 $license_users = $admin->settings['license_users'];
                 if ($license_users != '') {
@@ -212,6 +218,16 @@ EOD
         if(!empty($_REQUEST['scrollToCal'])){
             $this->ss->assign('scroll_to_cal', true);
         }
+
+        // Check for IDM mode.
+        $this->ss->assign('SHOW_NON_EDITABLE_FIELDS_ALERT', $idpConfig->isIDMModeEnabled());
+        if ($GLOBALS['current_user']->isAdminForModule('Users') && $this->bean->id !== $GLOBALS['current_user']->id) {
+            $label = 'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER';
+        } else {
+            $label = 'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER';
+        }
+        $this->ss->assign('NON_EDITABLE_FIELDS_MSG', translate($label, 'Users'));
+
         $this->ev->process($processSpecial,$processFormName);
 
 		echo $this->ev->display($this->showTitle);
@@ -253,5 +269,18 @@ EOD
 EOHTML;
         }
         return $theTitle;
+    }
+
+    /**
+     * Show redirect to cloud console
+     * @param string $url cloud console url
+     */
+    protected function showRedirectToCloudConsole($url)
+    {
+        $ss = new Sugar_Smarty();
+        $error = string_format($GLOBALS['mod_strings']['ERR_CREATE_USER_FOR_IDM_MODE'], [$url]);
+        $ss->assign("error", $error);
+        $ss->display('modules/Users/tpls/errorMessage.tpl');
+        sugar_cleanup(true);
     }
 }

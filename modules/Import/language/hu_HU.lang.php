@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Több oszlop került meghatározásra egyező mezőnévvel.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Kötelező mezők hiányoznak:',
     'ERR_MISSING_MAP_NAME' => 'Hiányzik az egyéni leképezés neve',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'A felhasználók importálása IDM módban letiltott.',
     'ERR_SELECT_FULL_NAME' => 'Nem jelölhető ki a teljes név, ha a keresztnév és vezetéknév ki vannak jelölve.',
     'ERR_SELECT_FILE' => 'Válassza ki a feltölteni kívánt fájlt!',
     'LBL_SELECT_FILE' => 'Válasszon fájlt:',

@@ -10,11 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Bean\Visibility\Strategy;
+
 /**
  * Base class for visibility implementations
  * @api
  */
-abstract class SugarVisibility
+abstract class SugarVisibility implements Strategy
 {
     /**
      * Bean context
@@ -107,6 +109,33 @@ abstract class SugarVisibility
     {
         $this->addVisibilityFromQuery($query);
         $this->addVisibilityWhereQuery($query);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function applyToFrom(DBManager $db, $query, $table)
+    {
+        $this->options['table_alias'] = $table;
+        return $this->addVisibilityFrom($query);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function applyToWhere(DBManager $db, $query, $table)
+    {
+        $this->options['table_alias'] = $table;
+        return $this->addVisibilityWhere($query);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function applyToQuery(SugarQuery $query, $table)
+    {
+        $this->options['table_alias'] = $table;
+        $this->addVisibilityQuery($query);
     }
 
     /**

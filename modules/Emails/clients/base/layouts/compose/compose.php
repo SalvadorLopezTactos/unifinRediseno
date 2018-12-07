@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Your installation or use of this SugarCRM file is subject to the applicable
  * terms available at
@@ -25,7 +24,7 @@ $viewdefs['Emails']['base']['layout']['compose'] = array(
                             'css_class' => 'main-pane span8',
                             'components' => array(
                                 array(
-                                    'view' => 'compose',
+                                    'view' => 'compose-email',
                                 ),
                             ),
                         ),
@@ -35,4 +34,3 @@ $viewdefs['Emails']['base']['layout']['compose'] = array(
         ),
     ),
 );
-

@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Інформаційна панель списку інтересів',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Інформаційна панель записів інтересів',
+
     'ERR_DELETE_RECORD' => 'Необхідно вказати номер запису, щоб видалити інтерес.<br />.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Опис контрагента',
     'LBL_ACCOUNT_ID'=>'Контрагент (ID)',
@@ -117,7 +122,7 @@ $mod_strings = array (
     'LBL_LIST_CONTACT_NAME' => 'Назва інтересу',
     'LBL_LIST_CONTACT_ROLE' => 'Роль',
     'LBL_LIST_DATE_ENTERED' => 'Дата створення',
-    'LBL_LIST_EMAIL_ADDRESS' => 'Email',
+    'LBL_LIST_EMAIL_ADDRESS' => 'Ел. пошта',
     'LBL_LIST_FIRST_NAME' => 'Ім&#39;я',
     'LBL_VIEW_FORM_TITLE' => 'Переглянути інтерес',
     'LBL_LIST_FORM_TITLE' => 'Список інтересів',
@@ -131,7 +136,7 @@ $mod_strings = array (
     'LBL_LIST_STATUS' => 'Статус',
     'LBL_LIST_TITLE' => 'Посада',
     'LBL_MOBILE_PHONE' => 'Телефон (моб.):',
-    'LBL_MODULE_NAME' => 'Інтереси',
+    'LBL_MODULE_NAME' => 'інтереси',
     'LBL_MODULE_NAME_SINGULAR' => 'Інтерес',
     'LBL_MODULE_TITLE' => 'Інтереси: Головна',
     'LBL_NAME' => 'Назва:',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Сума угоди:',
     'LBL_OPPORTUNITY_ID'=>'Угода (ID)',
     'LBL_OPPORTUNITY_NAME' => 'Назва угоди',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Інший Email:',
     'LBL_OTHER_PHONE' => 'Інший телефон:',
     'LBL_PHONE' => 'Телефон:',
@@ -314,4 +320,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Звіти по інтересам',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Узгоджені бізнес-цілі',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Останнє оновлення погодження',
 );

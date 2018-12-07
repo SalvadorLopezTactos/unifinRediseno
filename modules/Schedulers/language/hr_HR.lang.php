@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Ažurirajte članke sadržaja baze znanja.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Objavite odobrene članke i istekle članke baze znanja.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Ponovna izgradnja denormaliziranih sigurnosnih podataka o timovima',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Planer reda čekanja za Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Ukloni datoteke dijagnostičkog alata',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Ukloni privremene datoteke',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Ponovna izgradnja denormaliziranih sigurnosnih podataka o timovima',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Pokreni noćno slanje masovne e-pošte kampanje',
 'LBL_ASYNCMASSUPDATE' => 'Izvrši asinkrona masovna ažuriranja',

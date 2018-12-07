@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Lütfen mevcut alanlardan seçin',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Form Tanımı:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Bu formu gönderdiğinizde bir potansiyel oluşturup kampanya ile ilişkilendirecek',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Bu kutuyu işaretleyerek bundan sonra pazarlama e-postalarını almayı kabul etmiş olursunuz',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Lütfen Web den Potansiyel Formunu indirin',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Web den Potansiyel Formu',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Lütfen tüm gerekli alanları giriniz',

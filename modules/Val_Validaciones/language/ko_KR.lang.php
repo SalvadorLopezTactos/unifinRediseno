@@ -1,5 +1,5 @@
 <?php
-// created: 2018-02-16 20:37:54
+// created: 2018-12-06 16:40:01
 $mod_strings = array (
   'LBL_ASSIGNED_TO_ID' => '지정 사용자 ID',
   'LBL_ASSIGNED_TO_NAME' => '지정자',

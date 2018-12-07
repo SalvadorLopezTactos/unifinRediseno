@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Error: No s´ha mapejat cap camp de mòdul per ser mostrat com part dels resultats.  Si us plau, contacti amb el administrador del sistema.',
     'LBL_INFO_INLINE' => 'Info' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Tancar' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No s&#39;ha trobat cap connector per aquest ID de font.',
+    'ERROR_NO_CONNECTOR' => 'No s&#39;ha trobat cap connector per a la ID d&#39;origen indicada.',
 );
 

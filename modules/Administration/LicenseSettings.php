@@ -133,18 +133,6 @@ if(!empty($focus->settings['license_last_validation']) && $focus->settings['lice
 
 }
 $xtpl->assign("LICENSE_VALIDATION_STATUS"	, $status);
-if(isset($focus->settings['license_num_lic_oc']))
-{
-	$license_num_lic_oc = $focus->settings['license_num_lic_oc'];
-}
-else
-{
-	$license_num_lic_oc = 0;
-}
-
-$xtpl->assign("LICENSE_NUM_LIC_OC", $license_num_lic_oc);
-
-
 if(isset($focus->settings['license_num_portal_users']))
 {
     $license_num_portal_users = $focus->settings['license_num_portal_users'];

@@ -19,7 +19,7 @@ require_once 'modules/Studio/config.php';
 
 $wizard = InputValidation::getService()->getValidInputRequest('wizard', null, 'StudioWizard');
 
-if (SugarAutoLoader::fileExists('modules/Studio/wizards/'. $wizard . '.php')) {
+if (file_exists('modules/Studio/wizards/'. $wizard . '.php')) {
     require_once FileLoader::validateFilePath('modules/Studio/wizards/'. $wizard . '.php');
     $thewiz = new $wizard();
 } else {

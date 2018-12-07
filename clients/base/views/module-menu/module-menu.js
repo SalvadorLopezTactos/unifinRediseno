@@ -225,7 +225,8 @@
      */
     getCollection: function(tplName) {
         if (!this._collections[tplName]) {
-            this._collections[tplName] = app.data.createBeanCollection(this.module);
+            this._collections[tplName] =
+                app.data.createBeanCollection(this.module, [], {params: {erased_fields: true}});
             // TODO SC-3696 create the initial filter based on metadata for the
             // partials
         }
@@ -243,32 +244,38 @@
      * @protected
      */
     _renderPartial: function(tplName, options) {
-        var tpl, $placeholder, $old, focusedRoute, focusSelector, $new, $newFocus;
-
         if (this.disposed || !this.isOpen()) {
             return;
         }
-
         options = options || {};
-        tpl = app.template.getView(this.name + '.' + tplName, this.module) ||
+
+        var tpl = app.template.getView(this.name + '.' + tplName, this.module) ||
             app.template.getView(this.name + '.' + tplName);
-        $placeholder = this.$('[data-container="' + tplName + '"]');
-        $old = $placeholder.nextUntil('.divider');
+
+        var self = this;
+        var collection = this.getCollection(tplName);
+        _.each(collection.models, function(model) {
+            if (app.utils.isNameErased(model)) {
+                model.set('erased', true);
+                model.set('erasedText', app.lang.get('LBL_VALUE_ERASED'));
+            }
+        });
+
+        var $placeholder = this.$('[data-container="' + tplName + '"]');
+        var $old = $placeholder.nextUntil('.divider');
 
         //grab the focused element's route (if exists) for later re-focusing
-        focusedRoute = $old.find(document.activeElement).data('route');
+        var focusedRoute = $old.find(document.activeElement).data('route');
 
         //replace the partial using newly updated collection
         $old.remove();
-        $placeholder.after(tpl(_.extend({
-            'collection': this.getCollection(tplName)
-        }, options)));
+        $placeholder.after(tpl(_.extend({'collection': collection}, options)));
 
         //if there was a focused element previously, restore its focus
         if (focusedRoute) {
-            $new = $placeholder.nextUntil('.divider');
-            focusSelector = '[data-route="' + focusedRoute + '"]';
-            $newFocus = $new.find(focusSelector);
+            var $new = $placeholder.nextUntil('.divider');
+            var focusSelector = '[data-route="' + focusedRoute + '"]';
+            var $newFocus = $new.find(focusSelector);
             if ($newFocus.length > 0) {
                 $newFocus.focus();
             }

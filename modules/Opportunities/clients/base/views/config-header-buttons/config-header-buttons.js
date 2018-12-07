@@ -81,7 +81,7 @@
      * Overriding the default saveConfig to display the warning alert first, then on confirm of the
      * warning alert, save the config settings. Reloads metadata.
      *
-     * @override
+     * @inheritdoc
      */
     saveConfig: function() {
         if (this.isForecastsSetup && this.currentOppsViewBySetting !== this.model.get('opps_view_by')) {

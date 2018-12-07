@@ -26,16 +26,8 @@ if( !isset($_SESSION['licenseKey_submitted']) || !$_SESSION['licenseKey_submitte
     $_SESSION['setup_license_key_users']        = 0;
     $_SESSION['setup_license_key_expire_date']  = "";
     $_SESSION['setup_license_key']              = "";
-    $_SESSION['setup_num_lic_oc']              = 0;
 
 } else {
-
-}
-
-//php 521 suggestion
-$php_521 = '';
-if(version_compare(phpversion(),'5.2.0') < 0){
-	$php_521=$mod_strings['LBL_YOUR_PHP_VERSION'].phpversion().$mod_strings['LBL_RECOMMENDED_PHP_VERSION'];
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -113,7 +105,6 @@ $out .= <<<EOQ2
 
       </td>
     </tr>
-	<tr><td width='1000'><b><i>{$php_521}</i></b></td></tr>
     <tr>
       <td align="right" colspan="2" height="20">
         <hr>

@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Інформаційна панель списку контактів',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Інформаційна панель записів контактів',
+
     'LNK_CONTACT_REPORTS' => 'Переглянути звіти по контакту',
     'ERR_DELETE_RECORD' => 'Необхідно вказати номер запису, щоб видалити контакт.',
     'LBL_ACCOUNT_ID' => 'Контрагент (ID):',
@@ -36,7 +40,7 @@ $mod_strings = array (
     'LBL_ALT_ADDRESS_STREET' => 'Альтернативна адреса - Вулиця:',
     'LBL_ALTERNATE_ADDRESS' => 'Інша адреса:',
     'LBL_ANY_ADDRESS' => 'Адреса:',
-    'LBL_ANY_EMAIL' => 'Email:',
+    'LBL_ANY_EMAIL' => 'Ел. пошта:',
     'LBL_ANY_PHONE' => 'Телефон:',
     'LBL_ASSIGNED_TO_NAME' => 'Відповідальний (-а)',
     'LBL_ASSIGNED_TO_ID' => 'Відповідальний (-а)',
@@ -273,4 +277,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Звіти по контактам',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Узгоджені бізнес-цілі',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Останнє оновлення погодження',
 );

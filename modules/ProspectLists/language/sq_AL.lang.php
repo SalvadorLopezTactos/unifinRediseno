@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Paneli i listës së listave të objektivave',
+
   'LBL_MODULE_NAME' => 'Listat e synuara',
   'LBL_MODULE_NAME_SINGULAR' => 'Lista e synuar',
   'LBL_MODULE_ID'   => 'Listat e synuara',
@@ -20,12 +23,12 @@ $mod_strings = array (
   'LBL_PROSPECT_LIST_NAME' => 'Lista e synuar',
   'LBL_NAME' => 'Emri',
   'LBL_ENTRIES' => 'të hyrat e përgjithshme',
-  'LBL_LIST_PROSPECT_LIST_NAME' => 'lista e synuar',
+  'LBL_LIST_PROSPECT_LIST_NAME' => 'Lista e synimeve',
   'LBL_LIST_ENTRIES' => 'objektivat në list',
   'LBL_LIST_DESCRIPTION' => 'Përshkrim',
   'LBL_LIST_TYPE_NO' => 'Lloji',
   'LBL_LIST_END_DATE' => 'pëfrundimi i të dhënës',
-  'LBL_DATE_ENTERED' => 'krijim i të dhënës',
+  'LBL_DATE_ENTERED' => 'Data e krijimit',
   'LBL_MARKETING_ID' => 'Marketingu i identifikimit',
   'LBL_DATE_MODIFIED' => 'Të dhënat e modifikuara',
   'LBL_MODIFIED' => 'Modifikuar nga',
@@ -35,8 +38,8 @@ $mod_strings = array (
   'LBL_DESCRIPTION' => 'Përshkrim',
   'LNK_NEW_CAMPAIGN' => 'krijo fushatë',
   'LNK_CAMPAIGN_LIST' => 'fushatat',
-  'LNK_NEW_PROSPECT_LIST' => 'krijo list të synuar',
-  'LNK_PROSPECT_LIST_LIST' => 'shiko listat e synuar',
+  'LNK_NEW_PROSPECT_LIST' => 'Krijo listë synimesh',
+  'LNK_PROSPECT_LIST_LIST' => 'Shiko listat e synimeve',
   'LBL_MODIFIED_BY' => 'Modifikuar nga',
   'LBL_CREATED_BY' => 'Krijuar nga',
   'LBL_DATE_CREATED' => 'të dhëna të krijuara',

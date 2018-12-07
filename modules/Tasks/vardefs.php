@@ -165,6 +165,8 @@ $dictionary['Task'] = array(
             'type' => 'relate',
             'source' => 'non-db',
             'link' => 'contacts',
+            'module' => 'Contacts',
+            'table' => 'contacts',
             'id_name' => 'contact_id',
             'rname' => 'phone_work',
             'vname' => 'LBL_CONTACT_PHONE',
@@ -229,6 +231,13 @@ $dictionary['Task'] = array(
             'relationship' => 'bug_tasks',
             'source' => 'non-db',
             'vname' => 'LBL_BUGS',
+        ),
+        'emails' => array(
+            'name' => 'emails',
+            'type' => 'link',
+            'relationship' => 'emails_tasks_rel',
+            'source' => 'non-db',
+            'vname' => 'LBL_EMAILS',
         ),
         'leads' => array(
             'name' => 'leads',

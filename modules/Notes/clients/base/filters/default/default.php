@@ -18,8 +18,11 @@ $viewdefs['Notes']['base']['filter']['default'] = array(
             'name' => 'LBL_CREATED_BY_ME',
             'filter_definition' => array(
                 '$creator' => '',
+                'email_id' => array(
+                    '$empty' => '',
+                ),
             ),
-            'editable' => false
+            'editable' => false,
         ),
     ),
     'fields' => array(

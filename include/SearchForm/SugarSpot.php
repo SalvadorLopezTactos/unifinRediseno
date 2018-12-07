@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\DataPrivacy\Erasure\Repository;
+
 /**
  * Global search
  * @api
@@ -652,6 +654,7 @@ class SugarSpot
 
             $data = array();
             $count = 0;
+            $ids = [];
             while ($count < $limit && ($row = $seed->db->fetchByAssoc($result))) {
                 $temp = $seed->getCleanCopy();
                 $temp->setupCustomFields($temp->module_dir);
@@ -664,6 +667,7 @@ class SugarSpot
                 } else {
                     $data[] = $temp->get_list_view_data($return_fields);
                 }
+                $ids[] = $temp->id;
                 if (isset($options['limitPerModule'])) {
                     // Don't keep track of the counted records if we are already applying per-module limits
                     $count = 0;
@@ -695,6 +699,14 @@ class SugarSpot
                     }
                 } else {
                     $totalCount = $count + $offset;
+                }
+            }
+
+            // add erased_fields
+            if (!empty($options['erased_fields'])) {
+                $erasedFields = $this->getModuleErasedFields($moduleName, $ids);
+                foreach ($data as $bean) {
+                    $bean->erased_fields = $erasedFields[$bean->id]?? null;
                 }
             }
 
@@ -791,4 +803,36 @@ class SugarSpot
         return true;
     }
 
+    /**
+     * to get erased_fields for list of ids for a module
+     * @param string $module
+     * @param array $ids
+     * @return array
+     */
+    protected function getModuleErasedFields(string $module, array $ids) : array
+    {
+        $erasedFields = [];
+        if (count($ids) === 0) {
+            return $erasedFields;
+        }
+
+        $seed = BeanFactory::newBean($module);
+        if (!$seed->hasPiiFields()) {
+            return $erasedFields;
+        }
+        $tableName = $seed->db->quoted($seed->getTableName());
+        array_walk($ids, function (&$val, $key, $seed) {
+            $val = $seed->db->quoted($val);
+        }, $seed);
+        $query = "SELECT data, bean_id FROM " .  Repository::DB_TABLE .
+            " WHERE table_name = $tableName AND bean_id IN (" . implode(", ", $ids) . ")";
+
+        $result = $seed->db->query($query);
+
+        while ($row = $seed->db->fetchByAssoc($result, false)) {
+            $erasedFields[$row['bean_id']] = json_decode($row['data'], true);
+        }
+
+        return $erasedFields;
+    }
 }

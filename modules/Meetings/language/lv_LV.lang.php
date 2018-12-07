@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Tikšanos saraksta instrumentu panelis',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Tikšanos ierakstu instrumentu panelis',
+
 	'ERR_DELETE_RECORD' => 'Jānorāda ieraksta numurs, lai izdzēstu tikšanos.',
 	'LBL_ACCEPT_THIS'=>'Apstiprināt?',
 	'LBL_ADD_BUTTON'=> 'Pievienot',

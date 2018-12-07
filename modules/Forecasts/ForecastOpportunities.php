@@ -229,18 +229,16 @@ class ForecastOpportunities extends SugarBean {
     //have an date entered.
     function get_opportunity_account_name ($opportunity_id) {
 
-        $query = "SELECT name from accounts, accounts_opportunities";
-        $query .= " WHERE accounts.id  = accounts_opportunities.account_id";
-        $query .= " AND  accounts_opportunities.opportunity_id = '$opportunity_id' AND accounts_opportunities.deleted=0";
+        $query = "SELECT name FROM accounts, accounts_opportunities";
+        $query .= " WHERE accounts.id = accounts_opportunities.account_id";
+        $query .= " AND accounts_opportunities.opportunity_id = ? AND accounts_opportunities.deleted = 0";
 
-        $result = $this->db->query($query,true,"Error fetching account for an opportunity:");
+        $conn = $this->db->getConnection();
+        $stmt = $conn->executeQuery($query, array($opportunity_id));
+        $row = $stmt->fetch();
 
-        if ($result != null)
-        {
-            $row = $this->db->fetchByAssoc($result);
-            if ($row != null) {
-                return $row['name'];
-            }
+        if ($row) {
+            return $row['name'];
         }
 
         return "";

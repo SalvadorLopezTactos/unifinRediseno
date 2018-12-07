@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'YNT:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Kullanıcı Adı veya Şifre Hatalı',
-	'ERR_BODY_TOO_LONG'		=> '\rBÜTÜN e-postanın alınması için, İçerik metni çok uzun. Kesildi.',
+	'ERR_BODY_TOO_LONG'		=> '\\rBÜTÜN e-postanın alınması için, İçerik metni çok uzun. Kesildi.',
 	'ERR_INI_ZLIB'			=> 'Zlib sıkıştırması geçici süre durdurulamadı.  "Test Ayarları" çalışmayabilir.',
 	'ERR_MAILBOX_FAIL'		=> 'Herhangi bir posta hesabı getirilemedi.',
 	'ERR_NO_IMAP'			=> 'IMAP kütüphanesi bulunamadı.  Gelen Posta ile devam etmeden önce, bu problemi çözün',

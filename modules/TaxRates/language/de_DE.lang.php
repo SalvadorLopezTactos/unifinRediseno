@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Es muss eine Datensatznummer angegeben werden, um den Steuersatz zu löschen.',
   'NTC_STATUS' => 'Zum Entfernen dieses Steuersatzes aus der Auswahlliste, setzen Sie den Status auf "inaktiv"',
   'NTC_LIST_ORDER' => 'Legen Sie die Reihenfolge fest, in der dieser Steuersatz in der Auswahlliste erscheinen soll',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Inaktiv',
-  ),
   'LBL_EDITLAYOUT' => 'Layout bearbeiten' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Ersteller',
   'LBL_MODIFIED_ID'=>'Geändert von ID',

@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Opdatér KBContent artikler.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Udgiv godkendte artikler & udløb KB-artikler.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow planlagt Job',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Genopbyg unormale team-sikkerhedsdata',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch kø-planlægger',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Fjern diagnosticeringsværktøjsfiler',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Fjern midlertidige filer',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Genopbyg unormale team-sikkerhedsdata',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Kør hver nat kampagner med masse-e-mails',
 'LBL_ASYNCMASSUPDATE' => 'Udfør Asynchronous masse opdateringer',

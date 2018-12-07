@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'אנא בחר מהשדות הזמינים',
     'LBL_DESCRIPTION_LEAD_FORM' => 'תיאור טופס:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'שליחת טופס זה תיצור ליד ותקשר לקמפיין',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'על ידי סימון תיבה זו, אתה מסכים לקבל בעתיד הודעות שיווק בדוא"ל',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'אנא הורד את הטופס Web to Lead שלך',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'טופס Web to Lead',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'אנא הזן את כל השדות הדרושים',

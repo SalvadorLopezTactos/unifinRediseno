@@ -138,10 +138,6 @@
      */
     setFilterName: function(name) {
         var input = this.$('input').val(name);
-        //Call placeholder() because IE9 does not support placeholders.
-        if (_.isFunction(input.placeholder)) {
-            input.placeholder();
-        }
         // We have this.context.editingFilter if we're setting the name.
         this.toggleDelete(!_.isUndefined(this.context.get('currentFilterId')));
     },

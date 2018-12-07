@@ -8,16 +8,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 /**
- * @class Base
- * Base Class
+ * @class PMSE.Base
+ * PMSE.Base Class
  *
  *
  * @constructor
  * Create a new instance of the class
  * @param {Object} options
  */
-var Base = function (options) {
+PMSE.Base = function(options) {
     var defaults = {
         id : (options && options.id) || 'base-ui-' + UITools.getIndex()
     };
@@ -36,7 +38,7 @@ var Base = function (options) {
  * Sets the id property
  * @return {String}
  */
-Base.prototype.setId = function (value) {
+PMSE.Base.prototype.setId = function(value) {
     this.id = value;
     return this;
 };
@@ -46,20 +48,20 @@ Base.prototype.setId = function (value) {
  * @type {String}
  * @private
  */
-Base.prototype.type = "Core";
+PMSE.Base.prototype.type = 'Core';
 
 /**
  * Object Family
  * @type {String}
  * @private
  */
-Base.prototype.family = "Core";
+PMSE.Base.prototype.family = 'Core';
 
 /**
  * Returns the object type
  * @return {String}
  */
-Base.prototype.getType = function () {
+PMSE.Base.prototype.getType = function() {
     return this.type;
 };
 
@@ -67,19 +69,19 @@ Base.prototype.getType = function () {
  * Returns the object family
  * @return {String}
  */
-Base.prototype.getFamily = function () {
+PMSE.Base.prototype.getFamily = function() {
     return this.family;
 };
 
 /**
  * Destroys the fields ob the object
  */
-Base.prototype.dispose = function () {
+PMSE.Base.prototype.dispose = function() {
     var key;
     for (key in this) {
         this[key] = null;
     }
 };
 if (typeof exports !== "undefined") {
-    module.exports = Base;
+    module.exports = PMSE.Base;
 }

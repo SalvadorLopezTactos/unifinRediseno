@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Viaceré stĺpce sú označené rovnakým názvom poľa.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Chýbajú povinné polia:',
     'ERR_MISSING_MAP_NAME' => 'Chýba vlastný názov mapovania',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Importovanie používateľov je v režime IDM zakázané.',
     'ERR_SELECT_FULL_NAME' => 'Nemôžete vybrať celé meno, keď je už vybraté krstné meno a priezvisko.',
     'ERR_SELECT_FILE' => 'Vyberte súbor na nahratie.',
     'LBL_SELECT_FILE' => 'Vyberte súbor:',

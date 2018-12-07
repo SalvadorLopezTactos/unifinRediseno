@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Jūs turite nurodyti įrašo numerį, kad galėtumėte ištrinti vežėją.',
   'NTC_STATUS' => 'Padarykite statusą neaktyvų, jei norite išimti šį vežėją iš iššokančio sąrašo',
   'NTC_LIST_ORDER' => 'Nustatykite kokia tvarka norite matyti iššokančiame sąraše vežėjų galimas reikšmes.',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Aktyvus',
-    'Inactive' => 'Neaktyvus',
-),
-	'LBL_EDITLAYOUT' => 'Redaguoti išdėstymą' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Redaguoti išdėstymą' /*for 508 compliance fix*/,
 );
-
 
 ?>

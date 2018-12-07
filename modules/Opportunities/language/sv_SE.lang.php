@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Instrumentpanel med lista över möjligheter',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Instrumentpanel med poster över möjligheter',
+
     'LBL_MODULE_NAME' => 'Affärsmöjligheter',
     'LBL_MODULE_NAME_SINGULAR' => 'Affärsmöjlighet',
     'LBL_MODULE_TITLE' => 'Affärsmöjligheter: Hem',
@@ -182,25 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Efter att förändringen påbörjas kommer Inkomstposter att skapas för varje {{module_name}} i bakgrunden. När de är klara och tillgängliga kommer du att få ett meddelande till mailadressen på din profil. Obs. att din instans måste vara inställd på att skicka email via Admin -> Emailinställningar för att meddelanden ska kunna skickas.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Med modulen {{plural_module_name}} kan du spåra enskilda försäljningar från början till slut. Varje {{module_name}} post representerar en framtida försäljning och inkluderar relevanta försäljningsdata samt andra viktiga poster såsom {{quotes_module}}, {{contacts_module}}, etc. En sådan modul {{module_name}} ger normalt framsteg genom flera försäljningssteg tills det markeras antingen "Stängt vann" eller "Stängd förlorat". {{plural_module_name}} kan utnyttjas ytterligare genom att använda Sugars {{forecasts_singular_module}}ing modul för att förstå och förutsäga försäljningstrender samt fokusera arbetet på att uppnå säljbudget.',
+    'LBL_HELP_RECORDS' => 'Modulen {{plural_module_name}} låter dig spåra enskilda affärer från början till slut. Varje {{module_name}}-post representerar en potentiell affär och innehåller relevant försäljningsdata samt relaterar till andra viktiga poster som {{quotes_module}}, {{contacts_module}}, etc. En {{module_name}} kommer vanligtvis framskrida genom flera försäljningssteg tills det markeras antingen "Stängd vunnen" eller "Stängd förlorad". {{plural_module_name}} kan utnyttjas ännu mer genom att använda Sugars {{forecasts_singular_module}}-modul för att förstå och förutsäga försäljningstrender samt fokusera arbetet för att uppnå säljmål.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} Denna modul tillåter Dig att spåra enskilda försäljningar och radartiklar som tillhör dessa från start till mål. Alla {{module_name}} data representerar en prospekterad försäljning och inkluderar relevanta försäljningsdata liksom relaterar till viktiga data så som {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => '{{plural_module_name}}-modulen låter dig spåra individuella affärer och innehållet i dem från början till slut. Varje {{module_name}}-post representerar en potentiell affär och innehåller relevant försäljningsdata samt relaterar till andra viktiga poster som {{quotes_module}},{{contacts_module}}, etc.
 
-- Redigera detta datafält genom att klicka på respektive fält eller använd Edit-knappen.
-- Granska eller ändra länkar till andra data i underpanelerna genom att dra i den nedre vänstra panelen för "Datavy".
-- Lägg upp och granska användarkommentarer och datahistoriken i {{activitystream_singular_module}} genom att dra i den nedre vänstra panelen för "Aktivitetsflöde".
-- Följ eller lägg till som favorit dessa data genom att använda ikonerna till höger om datanamnet.
-- Ytterligare åtgärder är tillgänglig i rullgardinsmenyn till höger om Edit-knappen.',
+- Redigera postens fält genom att klicka på dem eller på knappen Redigera.
+- Visa eller redigera länkar till andra poster i underpanelerna genom att växla den nedre vänstra panelen till "Datavy".
+- Skapa och visa kommentarer, och håll koll på användningshistoriken i {{activitystream_singular_module}} genom att växla den nedre vänstra panelen till "Aktivitetsström".
+- Följ eller favoritmarkera posten med ikonerna till höger om postnamnet.
+- Ytterligare åtgärder hittar du i menyn Åtgärder till höger om knappen Redigera.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} modulen tillåter spårning av individuella försäljningar och alla detaljer som tillhör dessa från start till må. Alla {{module_name}} data representerar en förväntad försäljning och inkluderar relevanta försäljningsdata liksom relaterar till andra viktiga data såsom {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => '{{plural_module_name}}-modulen låter dig spåra individuella affärer och innehållet i dem från början till slut. Varje {{module_name}}-post representerar en potentiell affär och innehåller relevant försäljningsdata samt relaterar till andra viktiga poster som {{quotes_module}},{{contacts_module}}, etc.
 
-För att skapa ett {{module_name}}:
-1. Skriv in värden för önskat fält.
- - Fält markerade med "Obligatoriskt" måste fyllas i innan man sparar.
- - Klicka "Visa mer" för att se tilläggsfält om så är nödvändigt.
-2. Klicka "Spara" för att spara nya data oh återvända till föregående sida.',
+För att skapa en {{module_name}}:
+1. Fyll i fälten med aktuella värden.
+- Fält markerade som "Obligatoriska" måste fyllas i innan du sparar.
+- Klicka på "Visa fler" för att få fler fält om det behövs.
+2. Klicka på "Spara" för att färdigställa posten och gå tillbaks till den förra sidan.',
 
 // END ENT/ULT
 

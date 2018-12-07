@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Feil: Det finnes ingen modul felt som er knyttet til resultatvisning. Vennligst kontakt systemadministrator.',
     'LBL_INFO_INLINE' => 'Info' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Lukk' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'Ingen konnektor ble funnet for den gitte kilde-ID.',
 );
 

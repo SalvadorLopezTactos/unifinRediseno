@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> '此查詢將排列於報表第一個查詢下方',
     'ERR_DB_VERSION_FAILURE'			=> '無法檢查資料庫版本',
 
-
-	'ERR_OC_PASSWORD'					=> '密碼不能為空。',
-	'ERR_OC_SERVER_URL'					=> 'Sugar 伺服器 URL 不能為空。',
-	'ERR_OC_USERNAME'					=> '伺服器使用者的使用者名稱不能為空。',
-	'LBL_INSTALL_OC'					=> '安裝離線用戶端',
-    'LBL_OC_ADMIN'                      => '請聯絡管理員以解決這個問題。',
-    'LBL_OC_SUCCESS'                    => '已完成離線用戶端安裝。請按一下下方按鈕轉到您的安裝。',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> '管理員使用者名稱',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> '請在下方輸入詳情以正確安裝並同步離線用戶端。',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'Sugar 伺服器 URL',
-	'LBL_OC_INSTALL_PASS'				=> '伺服器使用者密碼',
-	'LBL_OC_INSTALL_TITLE'				=> '離線用戶端安裝',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> '這是用於連接 Sugar 伺服器的使用者名稱。',
-	'LBL_OC_INSTALL_USERNAME'			=> '使用者名稱',
-	'LBL_PERFORM_OC_INSTALL'			=> '初始化離線用戶端安裝',
-    'LBL_OC_INSTALL_DIRECTIONS'         => '請在下方輸入詳情以正確安裝並同步離線用戶端。',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => '請提供 Sugar 管理員使用者的使用者名稱。',
 	'ERR_ADMIN_PASS_BLANK'				=> '請提供 Sugar 管理員使用者的密碼。',
@@ -76,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => '相容性檢查時偵測到錯誤。為確保 SugarCRM 安裝正常工作，請採取適當步驟解決下列問題，然後按一下「重新檢查」按鈕或嘗試重新安裝。',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference 已開啟（在 php.ini 中此選項應設定為關閉）',
 
-	'ERR_CHECKSYS_CURL'					=> '未找到︰Sugar 排程器將在功能受限的條件下運行。電子郵件封存服務不會運行。',
+	'ERR_CHECKSYS_CURL'					=> '未找到: Sugar 計畫程式將運行有限的功能。電子郵件存檔服務將無法運行。',
     'ERR_CHECKSYS_IMAP'					=> '未找到：輸入電子郵件和宣傳活動（電子郵件）要求使用 IMAP 庫。兩者均不能正常工作。',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> '使用 MS SQL Server 時，Magic Quotes GPC 不能轉為「On」。',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> '警告：',
@@ -92,7 +75,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => '如需獲得最佳體驗，請使用 IIS/FastCGI sapi，並在 php.ini 檔案中將 fastcgi.logging 設定為 0。',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> '已安裝不支援的 PHP 版本：（版本',
     'LBL_DB_UNAVAILABLE'                => '資料庫不可用',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '未找到資料庫支援。請確保以下其中一種支援的資料庫類型擁有必要的驅動程式：MySQL、MS SQLServer、Oracle 或 DB2。您可能需要根據您的 PHP 版本，取消註解 php.ini 檔案的擴充，或使用正確的二進位檔案重新編譯。請參考 PHP 手冊了解如何啟用資料庫支援的更多資訊。',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '未找到數據庫支援。請確認您已為所支援的以下任一數據庫類型安裝所需的驅動程式：MySQL、MS SQLServer、Oracle，或 DB2。您可能需要移除 php.ini 文件中有關擴展的註解，或使用正確的二進制文件重新編譯，具體視您的 PHP 版本而定。更多關於如何啟用數據庫支援的資訊，請參考您的PHP手冊。',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => '未找到 Sugar 應用程式需要的與 XML 剖析器程式庫關聯的函數。您可能需要根據您的 PHP 版本，取消註解 php.ini 檔案的擴充，或使用正確的二進位檔案重新編譯。請參考 PHP 手冊了解更多資訊。',
     'LBL_CHECKSYS_CSPRNG' => '亂數產生器',
     'ERR_CHECKSYS_MBSTRING'             => '未找到 Sugar 應用程式需要的與多位元組字串 PHP 擴充 (mbstring) 關聯的函數。<br/><br/>一般，mbstring 模組在 PHP 中預設為不啟用，它必須在建立 PHP 二進位時用 --enable-mbstring 啟用。請參考 PHP 手冊了解如何啟用 mbstring 支援的更多資訊。',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => '上載檔案大小',
 	'ERR_URL_BLANK'						=> '為 Sugar 實例提供基礎 URL。',
 	'ERR_UW_NO_UPDATE_RECORD'			=> '無法尋找安裝記錄',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> '上載的檔案與此 Sugar 類別（社群版本，專業級或企業級）不相容：',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => '所上傳的文件不兼容此 Sugar 版本（專業版、企業版或旗艦版）： ',
 	'ERROR_LICENSE_EXPIRED'				=> "錯誤：授權已到期",
 	'ERROR_LICENSE_EXPIRED2'			=> " 天前。請前往位於管理員螢幕的<a href='index.php?action=LicenseSettings&module=Administration'>「授權管理」</a>輸入新的授權金鑰。如果您沒有在授權金鑰過期 30 天內輸入新的授權金鑰，您將無法登入此應用程式。",
 	'ERROR_MANIFEST_TYPE'				=> '資訊清單檔必須指定封裝類型。',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> '到期日',
 	'LBL_LICENSE_I_ACCEPT'				=> '我接受',
 	'LBL_LICENSE_NUM_USERS'				=> '使用者數量',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> '請輸入已購買離線用戶端的編號。',
-	'LBL_LICENSE_OC_NUM'				=> '離線用戶端授權數',
-	'LBL_LICENSE_OC'					=> '離線用戶端授權',
 	'LBL_LICENSE_PRINTABLE'				=> '可列印檢視表',
     'LBL_PRINT_SUMM'                    => '列印摘要',
 	'LBL_LICENSE_TITLE_2'				=> 'SugarCRM 授權',
@@ -570,10 +550,6 @@ $mod_strings = array(
     'LBL_COLLATION' => '定序設定',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'請提供 Sugar 實例的系統名稱',
 	'LBL_PATCH_UPLOAD' => '請從本機電腦選取一個修補檔。',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => '要求使用 PHP 版本 5 或以上版本。',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '（您目前的 php 版本是',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => '「Php 回溯相容模式」已開啟。請將 zend.ze1_compatibility_mode 設定為「關閉」以繼續',
 
     'advanced_password_new_account_email' => array(
@@ -605,5 +581,3 @@ $contact_user_link_guid',
         'name' => '忘記密碼電子郵件',
         ),
 );
-
-?>

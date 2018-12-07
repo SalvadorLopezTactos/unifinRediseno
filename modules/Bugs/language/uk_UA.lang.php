@@ -11,7 +11,11 @@
  */
 
 $mod_strings = array (
-  'LBL_MODULE_NAME' => 'Помилки',
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Інформаційна панель списку помилок',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Інформаційна панель записів помилок',
+
+  'LBL_MODULE_NAME' => 'помилки',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Помилка',
   'LBL_MODULE_TITLE' => 'Відстеження помилок: Головна',
   'LBL_MODULE_ID' => 'Помилки',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Звернення',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Проекти',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Документи',
-  'LBL_SYSTEM_ID' => 'Система (ID)',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Відповідальний (-а)',
 	'LBL_ASSIGNED_TO_NAME' => 'Відповідальний (-а)',
 

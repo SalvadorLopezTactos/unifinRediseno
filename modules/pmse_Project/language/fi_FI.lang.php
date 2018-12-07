@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Prosessimääritelmät',
   'LBL_MODULE_TITLE' => 'Prosessimääritelmät',
   'LBL_MODULE_NAME_SINGULAR' => 'Prosessimääritelmä',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'ei ole yhtä kuin',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'ei ole',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'ei',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Ajonaikainen',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Lisää',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Sulje',

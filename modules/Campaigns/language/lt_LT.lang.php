@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Prašome pasirinkti iš galimų laukų',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Formos aprašymas:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Užpildžius šią formą susikurs potencialus kontaktas susietas su kampanija',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Pažymėdami šį langelį, sutinkate ateityje gauti rinkodaros el. laiškus',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Prašome nusikrauti registracijos formą',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Registracijos forma',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Prašome užpildyti visus privalomus laukus',

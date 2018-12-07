@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'ข้อผิดพลาด: ไม่มีฟิลด์ของโมดูลที่แมปสำหรับแสดงในผลลัพธ์ โปรดติดต่อผู้ดูแลระบบ',
     'LBL_INFO_INLINE' => 'ข้อมูล' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'ปิด' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'ไม่พบการเชื่อมต่อของ ID แหล่งที่ให้มา',
 );
 

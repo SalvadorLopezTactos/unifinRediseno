@@ -10,6 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\Exception\ViolationException;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Language;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 
 class ParserLabel extends ModuleBuilderParser
 {
@@ -121,17 +124,25 @@ class ParserLabel extends ModuleBuilderParser
         if (is_null($basepath)) {
             $deployedModule = true ;
             $basepath = "custom/Extension/modules/$moduleName/Ext/Language";
-            if (!SugarAutoLoader::fileExists($basepath)) {
+            if (!file_exists($basepath)) {
                 $GLOBALS['log']->debug("$basepath is not a directory.");
                 return false;
             }
         }
 
+        $violations = Validator::getService()->validate($language, new Language());
+        if ($violations->count() > 0) {
+            throw new ViolationException(
+                'Violation for language value',
+                $violations
+            );
+        }
+
         $filename = "$basepath/$language.lang.php";
         $mod_strings = array();
 
-        if (SugarAutoLoader::fileExists($basepath)) {
-            if (SugarAutoLoader::fileExists($filename)) {
+        if (file_exists($basepath)) {
+            if (file_exists($filename)) {
                 // Get current $mod_strings
                 include $filename;
             } else {
@@ -152,10 +163,11 @@ class ParserLabel extends ModuleBuilderParser
         if ($changed) {
             $write  = "<?php\n// WARNING: The contents of this file are auto-generated.\n";
             foreach ($mod_strings as $k => $v) {
-                $write .= "\$mod_strings['$k'] = " . var_export($v, 1) . ";\n";
+                $ek = var_export($k, 1);
+                $write .= "\$mod_strings[$ek] = " . var_export($v, 1) . ";\n";
             }
             
-            if (!SugarAutoLoader::put($filename, $write, true)) {
+            if (file_put_contents($filename, $write) == false) {
                 $GLOBALS['log']->fatal("Could not write $filename");
             } else {
                 // if we have a cache to worry about, then clear it now
@@ -189,17 +201,25 @@ class ParserLabel extends ModuleBuilderParser
         if (is_null($basepath)) {
             $deployedModule = true ;
             $basepath = "custom/Extension/modules/$moduleName/Ext/Language";
-            if (!SugarAutoLoader::fileExists($basepath)) {
+            if (!file_exists($basepath)) {
                 mkdir_recursive($basepath);
             }
+        }
+
+        $violations = Validator::getService()->validate($language, new Language());
+        if ($violations->count() > 0) {
+            throw new ViolationException(
+                'Violation for language value',
+                $violations
+            );
         }
 
         $filename = "$basepath/$language.lang.php";
         $mod_strings = array();
         $changed = false;
         
-        if (SugarAutoLoader::fileExists($basepath)) {
-            if (SugarAutoLoader::fileExists($filename)) {
+        if (file_exists($basepath)) {
+            if (file_exists($filename)) {
                 // Get the current $mod_strings
                 include $filename;
             }
@@ -223,10 +243,11 @@ class ParserLabel extends ModuleBuilderParser
             // We can't use normal array writing here since multiple files can be
             // structured differently. This is dirty, yes, but necessary.
             foreach ($mod_strings as $k => $v) {
-                $write .= "\$mod_strings['$k'] = " . var_export($v, 1) . ";\n";
+                $ek = var_export($k, 1);
+                $write .= "\$mod_strings[$ek] = " . var_export($v, 1) . ";\n";
             }
 
-            if (!SugarAutoLoader::put($filename, $write, true)) {
+            if (file_put_contents($filename, $write) === false) {
                 $GLOBALS['log']->fatal("Could not write $filename");
             } else {
                 // if we have a cache to worry about, then clear it now

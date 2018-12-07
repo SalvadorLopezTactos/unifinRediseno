@@ -160,7 +160,7 @@ class EmailReminder
         $object = strtoupper($bean->object_name);
 
         $xtpl->assign("{$object}_SUBJECT", $bean->name);
-        $date = $GLOBALS['timedate']->fromUser($bean->date_start,$GLOBALS['current_user']);
+        $date = $GLOBALS['timedate']->fromDB($bean->date_start);
         $xtpl->assign("{$object}_STARTDATE", $GLOBALS['timedate']->asUser($date, $user)." ".TimeDate::userTimezoneSuffix($date, $user));
         if ( isset($bean->location) ) {
             $xtpl->assign("{$object}_LOCATION", $bean->location);

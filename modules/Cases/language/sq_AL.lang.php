@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Paneli i listës së rasteve',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të rasteve',
+
 	'ERR_DELETE_RECORD'					=> 'Duhet përcaktuar numrin e regjistrimit për të fshirë llogarinë',
 	'LBL_ACCOUNT_ID'					=> 'ID e Llogarisë',
 	'LBL_ACCOUNT_NAME'					=> 'Emri i llogarisë:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Statusi',
     'LBL_SOURCE' => 'Burimi',
 	'LBL_SUBJECT'						=> 'Subjekti',
-	'LBL_SYSTEM_ID'						=> 'ID e sistemit',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Emri i llogarisë:',
 	'LBL_LIST_ASSIGNED'					=> 'Drejtuar deri te',
 	'LBL_LIST_CLOSE'					=> 'Mbyll:',

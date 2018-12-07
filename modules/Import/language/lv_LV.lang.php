@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Vairāku kolonnu lauku nosaukumi ir vienādi.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Iztrūkst obligātie lauki:',
     'ERR_MISSING_MAP_NAME' => 'Nav norādīts pielāgotās kartēšanas nosaukums',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'IDM režīmā lietotāju imports ir atspējots.',
     'ERR_SELECT_FULL_NAME' => 'Jūs nevarat izvēlēties pilnu vārdu, kad izvēlēts Vārds un Uzvārds.',
     'ERR_SELECT_FILE' => 'Izvēlieties failu augšupielādei.',
     'LBL_SELECT_FILE' => 'Izvēlieties failu:',

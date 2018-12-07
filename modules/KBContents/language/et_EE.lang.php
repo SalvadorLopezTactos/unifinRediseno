@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Teabebaasi loendi töölaud',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Teabebaasi kirjete töölaud',
+
     'LBL_MODULE_NAME' => 'Teadmusbaas',
     'LBL_MODULE_NAME_SINGULAR' => 'Teadmusbaasi artikkel',
     'LBL_MODULE_TITLE' => 'Teadmusbaasi artikkel',

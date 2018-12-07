@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Selecteaza' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Ștergere' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Tip',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Şabloane pentru Email',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Șabloane e-mail',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Variabile',
 );

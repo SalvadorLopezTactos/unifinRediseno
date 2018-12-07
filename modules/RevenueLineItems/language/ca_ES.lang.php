@@ -11,8 +11,12 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Quadre de comandament del llistat d&#39;elements de línia d&#39;ingressos',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Quadre de comandament del registre d&#39;elements de línia d&#39;ingressos',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Producte de Campanya',
-    'LBL_MODULE_NAME' => 'Línia d&#39;impostos articles',
+    'LBL_MODULE_NAME' => 'Elements de línia d&#39;ingressos',
     'LBL_MODULE_NAME_SINGULAR' => 'Element de la línia d&#39;impostos',
     'LBL_MODULE_TITLE' => 'Elements de la línia d&#39;impostos: inici',
     'LBL_SEARCH_FORM_TITLE' => 'Cerca d&#39;elements de la línia d&#39;ingressos',
@@ -78,7 +82,7 @@ $mod_strings = array(
     'LBL_PRICING_FORMULA' => 'Fórmula de Valoració:',
     'LBL_ACCOUNT_NAME' => 'Nom del compte:',
     'LNK_REVENUELINEITEM_LIST' => 'Veure elements de línies d&#39;ingressos',
-    'LNK_NEW_REVENUELINEITEM' => 'Crear element de línia d&#39;ingressos',
+    'LNK_NEW_REVENUELINEITEM' => 'Crea element de línia d&#39;ingressos',
     'NTC_DELETE_CONFIRMATION' => 'Esteu segur que voleu suprimir aquest registre?',
     'NTC_REMOVE_CONFIRMATION' => 'Està segur que desitja treure aquesta relació entre productes?',
     'ERR_DELETE_RECORD' => 'Per suprimir el producte, heu d&#39;especificar un número de registre.',

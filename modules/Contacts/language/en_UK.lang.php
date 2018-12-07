@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Contacts List Dashboard',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Contacts Record Dashboard',
+
     'LNK_CONTACT_REPORTS' => 'View Contact Reports',
     'ERR_DELETE_RECORD' => 'Specify the record number to delete the contact.',
     'LBL_ACCOUNT_ID' => 'Account ID:',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Copy alternate address to primary address',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Copy primary address to alternate address',
     'NTC_DELETE_CONFIRMATION' => 'Are you sure you want to delete this record?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Creating an opportunity requires an account.\n Please either create a new account or select an existing one.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Creating an opportunity requires an account.\\n Please either create a new account or select an existing one.',
     'NTC_REMOVE_CONFIRMATION' => 'Are you sure you want to remove this contact from the case?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Are you sure you want to remove this record as a direct report?',
 
@@ -273,4 +277,6 @@ To create a {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Contacts&#39; reports',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Business Purposes Consented for',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consent Last Updated',
 );

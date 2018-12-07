@@ -104,6 +104,7 @@ $last_name_max = $last_name_count - 1;
 function create_product($category_id)
 {
     global $sugar_demodata;
+    global $app_list_strings;
     $first_name_array = $sugar_demodata['first_name_array'];
     $first_name_count = count($sugar_demodata['first_name_array']);
     $company_name_array = $sugar_demodata['company_name_array'];
@@ -118,6 +119,7 @@ function create_product($category_id)
     $cost = rand(300, 600);
     $list = rand(700, 1000);
     $discount = rand($list - 200, $list - 50);
+    $pricingFormulas = array_keys($app_list_strings['pricing_formula_dom']);
 
     $template = new ProductTemplate();
     $template->name = $first_name_array[mt_rand(0, $first_name_max)] . $sugar_demodata['product_ext_name'];
@@ -130,7 +132,7 @@ function create_product($category_id)
     $template->list_usdollar = $list;
     $template->discount_price = $discount;
     $template->discount_usdollar = $discount;
-    $template->pricing_formula = "IsList";
+    $template->pricing_formula = $pricingFormulas[array_rand($pricingFormulas, 1)];
     $template->mft_part_num = $company_name_array[mt_rand(0, $company_name_count - 1)] . ' ' . mt_rand(
             1,
             1000000
@@ -141,6 +143,7 @@ function create_product($category_id)
     $template->date_available = "2004-10-15";
     $template->qty_in_stock = rand(0, 150);
     $template->category_id = $category_id;
+    $template->calculateDiscountPrice();
     $template->save();
 
     unset($template);

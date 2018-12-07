@@ -121,13 +121,6 @@ function sugar_file_put_contents($filename, $data, $flags=null, $context=null){
         $return = file_put_contents($filename, $data, $flags, $context);
 	}
 
-    // Add to the file loader cache if it isn't there
-    if ($return) {
-        if (!SugarAutoLoader::fileExists($filename)) {
-            SugarAutoLoader::addToMap($filename);
-        }
-    }
-
     return $return;
 }
 
@@ -146,7 +139,7 @@ function sugar_file_put_contents($filename, $data, $flags=null, $context=null){
 function sugar_file_put_contents_atomic($filename, $data, $mode='wb', $use_include_path=false, $context=null){
 
     $dir = dirname($filename);
-    $temp = tempnam($dir, 'temp');
+    $temp = @tempnam($dir, 'temp');
 
     if ($temp === false || !($f = @fopen($temp, $mode))) {
         // delete the file created by tempnam
@@ -176,11 +169,6 @@ function sugar_file_put_contents_atomic($filename, $data, $mode='wb', $use_inclu
 
     if(file_exists($filename))
     {
-        // Add to the file loader cache
-        if (!SugarAutoLoader::fileExists($filename)) {
-            SugarAutoLoader::addToMap($filename);
-        }
-
         return sugar_chmod($filename);
     }
 
@@ -196,7 +184,7 @@ function sugar_file_put_contents_atomic($filename, $data, $mode='wb', $use_inclu
  * @return string|boolean - Returns a file data on success, false otherwise
  */
 function sugar_file_get_contents($filename, $use_include_path=false, $context=null){
-	if(!SugarAutoLoader::fileExists($filename)){
+    if (!file_exists($filename)) {
         $GLOBALS['log']->error("File $filename does not exist");
         return false;
 	}
@@ -284,11 +272,6 @@ function sugar_touch($filename, $time=null, $atime=null) {
 	if(!empty($GLOBALS['sugar_config']['default_permissions']['group'])){
 		sugar_chgrp($filename);
 	}
-
-    // Add this to the file loader cache
-    if (!SugarAutoLoader::fileExists($filename)) {
-        SugarAutoLoader::addToMap($filename);
-    }
 
     return true;
 }

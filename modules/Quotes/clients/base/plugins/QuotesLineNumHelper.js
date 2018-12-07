@@ -63,7 +63,7 @@
                     this.lineNumGroupIdMap = {};
 
                     if (ctx.has('model') && ctx.get('model').has('show_line_nums')) {
-                        this.onShowLineNumsChanged(ctx.get('model').get('show_line_nums'));
+                        this.onShowLineNumsChanged(ctx.get('model').get('show_line_nums'), false);
                     }
                 }, this);
             },
@@ -93,11 +93,15 @@
              * Handles when the show_line_nums var changes on the model
              *
              * @param {boolean} showLineNums If we should show line numbers or not
+             * @param {boolean} [doRender] If we should allow render on option changed
              */
-            onShowLineNumsChanged: function(showLineNums) {
+            onShowLineNumsChanged: function(showLineNums, doRender) {
                 var changed = false;
                 var isBundle = this.model.module === 'ProductBundles' && this.collection.length;
                 this.showLineNums = showLineNums;
+
+                // default to true if not passed
+                doRender = _.isUndefined(doRender) ? true : false;
 
                 if (this.showLineNums && !this.hasLineNumField) {
                     this._addLineNumFieldDef();
@@ -113,7 +117,7 @@
                     changed = true;
                 }
 
-                if (changed) {
+                if (changed && doRender) {
                     this.render();
                 }
             },

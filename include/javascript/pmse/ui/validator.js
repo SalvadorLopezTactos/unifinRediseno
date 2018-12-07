@@ -8,21 +8,22 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 /**
- * @class Validator
+ * @class PMSE.Validator
  * Handles the validations of the fields
- * @extend Base
+ * @extends PMSE.Base
  *
  * @constructor
  * Create a new instance of the class
  * @param {Object} options
- * @param {Field} parent
+ * @param {PMSE.Field} parent
  */
-var Validator = function (options, parent) {
-    Base.call(this, options);
+PMSE.Validator = function(options, parent) {
+    PMSE.Base.call(this, options);
     /**
-     * Defines the Field parent
-     * @type {Field}
+     * Defines the PMSE.Field parent
+     * @type {PMSE.Field}
      */
     this.parent = null;
     /**
@@ -45,28 +46,28 @@ var Validator = function (options, parent) {
      * @type {null/Boolean}
      */
     this.errorMessage = null;
-    Validator.prototype.initObject.call(this, options, parent);
+    PMSE.Validator.prototype.initObject.call(this, options, parent);
 };
-Validator.prototype = new Base();
+PMSE.Validator.prototype = new PMSE.Base();
 
 /**
  * Defines the object's type
  * @type {String}
  */
-Validator.prototype.type = 'Validator';
+PMSE.Validator.prototype.type = 'PMSE.Validator';
 
 /**
  * Defines the object's family
  * @type {String}
  */
-Validator.prototype.family = 'Validator';
+PMSE.Validator.prototype.family = 'PMSE.Validator';
 
 /**
  * Initializes the object with default values
  * @param {Object} options
- * @param {Field} parent
+ * @param {PMSE.Field} parent
  */
-Validator.prototype.initObject = function (options, parent) {
+PMSE.Validator.prototype.initObject = function(options, parent) {
     var defaults = {
         criteria: null,
         errorMessage: 'the validation has failed'
@@ -82,7 +83,7 @@ Validator.prototype.initObject = function (options, parent) {
  * @param {String} errorMessage
  * @return {*}
  */
-Validator.prototype.setErrorMessage = function (errorMessage) {
+PMSE.Validator.prototype.setErrorMessage = function(errorMessage) {
     this.errorMessage = errorMessage;
     return this;
 };
@@ -92,7 +93,7 @@ Validator.prototype.setErrorMessage = function (errorMessage) {
  * @param {String} errorMessage
  * @return {*}
  */
-Validator.prototype.getErrorMessage = function () {
+PMSE.Validator.prototype.getErrorMessage = function() {
     return this.errorMessage;
 };
 
@@ -101,17 +102,17 @@ Validator.prototype.getErrorMessage = function () {
  * @param {Object} criteria
  * @return {*}
  */
-Validator.prototype.setCriteria = function (criteria) {
+PMSE.Validator.prototype.setCriteria = function(criteria) {
     this.criteria = criteria;
     return this;
 };
 
 /**
  * Sets the parent field
- * @param {Field} parent
+ * @param {PMSE.Field} parent
  * @return {*}
  */
-Validator.prototype.setParent = function (parent) {
+PMSE.Validator.prototype.setParent = function(parent) {
     this.parent = parent;
     return this;
 };
@@ -119,7 +120,7 @@ Validator.prototype.setParent = function (parent) {
 /**
  * Evaluates the validator
  */
-Validator.prototype.validate = function () {
+PMSE.Validator.prototype.validate = function() {
     this.valid = true;
 };
 
@@ -127,7 +128,7 @@ Validator.prototype.validate = function () {
  * Returns the validation response
  * @return {*}
  */
-Validator.prototype.isValid = function () {
+PMSE.Validator.prototype.isValid = function() {
     this.validate();
     return this.valid;
 };

@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Pulpit listy uwag',
+
     'ERR_DELETE_RECORD' => 'Aby usunąć Kontrahenta, musisz podać numer rekordu.',
     'LBL_ACCOUNT_ID' => 'ID kontrahenta:',
     'LBL_CASE_ID' => 'ID zgłoszenia:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Opis',
     'LBL_EMAIL_ADDRESS' => 'Adres e-mail:',
     'LBL_EMAIL_ATTACHMENT' => 'Załącznik wiadomości',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Załącznik wiadomości e-mail',
     'LBL_FILE_MIME_TYPE' => 'Typ Mime',
+    'LBL_FILE_EXTENSION' => 'Rozszerzenie pliku',
+    'LBL_FILE_SOURCE' => 'Źródło pliku',
+    'LBL_FILE_SIZE' => 'Rozmiar pliku',
     'LBL_FILE_URL' => 'Adres URL pliku',
     'LBL_FILENAME' => 'Załącznik:',
     'LBL_LEAD_ID' => 'ID Namiaru:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'ID szansy:',
     'LBL_PARENT_ID' => 'ID elementu nadrzędnego:',
     'LBL_PARENT_TYPE' => 'Typ nadrzędny',
+    'LBL_EMAIL_TYPE' => 'Typ wiadomości e-mail',
+    'LBL_EMAIL_ID' => 'Identyfikator wiadomości e-mail',
     'LBL_PHONE' => 'Telefon:',
     'LBL_PORTAL_FLAG' => 'Wyświetlić w portalu?',
     'LBL_EMBED_FLAG' => 'Umieścić w wiadomości?',

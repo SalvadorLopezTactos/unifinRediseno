@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Pulpit listy zgloszeń',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Pulpit listy zgłoszeń',
+
 	'ERR_DELETE_RECORD'					=> 'Aby usunąć Kontrahenta, musisz podać numer rekordu.',
 	'LBL_ACCOUNT_ID'					=> 'ID kontrahenta',
 	'LBL_ACCOUNT_NAME'					=> 'Nazwa kontrahenta:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Status:',
     'LBL_SOURCE' => 'Źródło:',
 	'LBL_SUBJECT'						=> 'Temat:',
-	'LBL_SYSTEM_ID'						=> 'ID systemu',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Nazwa kontrahenta',
 	'LBL_LIST_ASSIGNED'					=> 'Przydzielono do',
 	'LBL_LIST_CLOSE'					=> 'Zamknij',

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Dashboard de lista de erros',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Dashboard de registo de erros',
+
   'LBL_MODULE_NAME' => 'Erros',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Erro',
   'LBL_MODULE_TITLE' => 'Bug Tracker: Ecrã Principal',
@@ -54,7 +58,7 @@ $mod_strings = array (
   'LBL_FOUND_IN_RELEASE' => 'Encontrado na versão:',
   'LBL_FIXED_IN_RELEASE' => 'Corrigido na versão:',
   'LBL_LIST_FIXED_IN_RELEASE' => 'Corrigido na versão',
-  'LBL_WORK_LOG' => 'Log de trabalho:',
+  'LBL_WORK_LOG' => 'Registo de Trabalho:',
   'LBL_SOURCE' => 'Origem:',
   'LBL_PRODUCT_CATEGORY' => 'Categoria:',
 
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Ocorrências',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projetos',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documentos',
-  'LBL_SYSTEM_ID' => 'ID do Sistema',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Utilizador Atribuído',
 	'LBL_ASSIGNED_TO_NAME' => 'Atribuído a',
 

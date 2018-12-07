@@ -50,39 +50,21 @@
         this.zoomExtents = {'min': 0.25, 'max': 1.75};
         this.nodeSize = {'width': 124, 'height': 56};
 
-        this.chart = nv.models.tree()
-                .duration(300)
-                .nodeSize(this.nodeSize)
-                .nodeRenderer(self.nodeRenderer)
-                .zoomExtents(self.zoomExtents)
-                .zoomCallback(function(scale) {
-                    self.moveSlider(scale);
-                })
+        this.chart = sucrose.charts.treeChart()
+                .duration(0)
                 .horizontal(false)
                 .getId(function(d) {
-                    return d.metadata.id;
+                    var metadata = d.metadata || d.data.metadata;
+                    return metadata ? metadata.id : 0;
                 })
-                .nodeClick(function() {
-                    var route = d3.select(this).select('.nv-org-name').attr('data-url');
-                    app.router.navigate(route, {trigger: true});
+                .nodeSize(this.nodeSize)
+                .nodeRenderer(_.bind(this.nodeRenderer, this))
+                .nodeClick(function(d) {
+                    var nodeData = d.data.metadata;
+                    app.router.navigate(nodeData.url, {trigger: true});
                 })
-                .nodeCallback(function(d) {
-                    d.selectAll('text').text(function() {
-                        var text = d3.select(this).text();
-                        return nv.utils.stringEllipsify(text, self.container, 96);
-                    });
-                    d.selectAll('image')
-                        .on('error', function(d) {
-                            d3.select(this).attr('xlink:href', 'include/images/user.svg');
-                        });
-                    d.select('.nv-org-name')
-                        .on('mouseover', function(d) {
-                            d3.select(this).classed('hover', true);
-                        })
-                        .on('mouseout', function(d, i) {
-                            d3.select(this).classed('hover', false);
-                        });
-                });
+                .zoomExtents(this.zoomExtents)
+                .zoomCallback(_.bind(this.moveSlider, this));
     },
 
     /**
@@ -103,30 +85,56 @@
      * @param {Int} h tree node height.
      */
     nodeRenderer: function(content, d, w, h) {
-        if (!d.metadata.img || d.metadata.img === '') {
-            d.metadata.img = 'include/images/user.svg';
+        var nodeData = d.data.metadata;
+        var node = content.append('g').attr('class', 'sc-org-node');
+        var container = d3sugar.select('svg#' + this.cid);
+        if (!nodeData.img || nodeData.img === '') {
+            nodeData.img = 'include/images/user.svg';
         }
-        var node = content.append('g').attr('class', 'nv-org-node');
-        node.append('rect').attr('class', 'nv-org-bkgd')
+
+        node.append('rect').attr('class', 'sc-org-bkgd')
             .attr('x', 0)
             .attr('y', 0)
             .attr('rx', 2)
             .attr('ry', 2)
             .attr('width', w)
             .attr('height', h);
-        node.append('image').attr('class', 'nv-org-avatar')
-            .attr('xlink:href', d.metadata.img)
+        node.append('image').attr('class', 'sc-org-avatar')
+            .attr('xlink:href', nodeData.img)
             .attr('width', '32px')
             .attr('height', '32px')
-            .attr('transform', 'translate(3, 3)');
-        node.append('text').attr('class', 'nv-org-name')
-            .attr('data-url', d.url)
+            .attr('transform', 'translate(3, 3)')
+            .on('error', function() {
+                d3.select(this)
+                    .style('width', 'auto')
+                    .attr('x', '4')
+                    .attr('xlink:href', 'include/images/user.svg');
+            });
+        node.append('text').attr('class', 'sc-org-name')
+            .attr('data-url', d.data.url)
             .attr('transform', 'translate(38, 11)')
-            .text(d.metadata.full_name);
-        node.append('text').attr('class', 'nv-org-title')
-            .attr('data-url', d.url)
+            .text(function() {
+                return sucrose.utility.stringEllipsify(nodeData.full_name, container, 96);
+            });
+        node.append('text').attr('class', 'sc-org-title')
+            .attr('data-url', d.data.url)
             .attr('transform', 'translate(38, 21)')
-            .text(d.metadata.title);
+            .text(function() {
+                return sucrose.utility.stringEllipsify(nodeData.title, container, 96);
+            });
+
+        node
+            .on('mouseenter', function(d) {
+                d3.select(this)
+                    .select('.sc-org-name')
+                        .style('text-decoration', 'underline');
+            })
+            .on('mouseleave', function(d) {
+                d3.select(this)
+                    .select('.sc-org-name')
+                        .style('text-decoration', 'none');
+            });
+
         return node;
     },
 
@@ -135,7 +143,6 @@
      * Called by _renderHtml and loadData.
      */
     renderChart: function() {
-        var self = this;
         if (!this.isChartReady()) {
             return;
         }
@@ -143,8 +150,8 @@
         if (!this.slider) {
             // chart controls
             this.slider = this.$('.btn-slider .noUiSlider');
-            this.sliderZoomIn = this.$('.btn-slider i[data-control="zoom-in"]');
-            this.sliderZoomOut = this.$('.btn-slider i[data-control="zoom-out"]');
+            this.sliderZoomOut = this.$('.zoom-control[data-control="zoom-out"]');
+            this.sliderZoomIn = this.$('.zoom-control[data-control="zoom-in"]');
 
             //zoom slider
             this.slider.noUiSlider('init', {
@@ -152,22 +159,21 @@
                 knobs: 1,
                 scale: [this.zoomExtents.min * 100, this.zoomExtents.max * 100],
                 connect: false,
-                step: 25,
-                change: function(moveType) {
+                step: 5,
+                change: _.bind(function(moveType) {
                     var values, scale;
-                    if (!self.chart_loaded) {
+                    if (!this.chart_loaded) {
                         return;
                     }
-
                     if (moveType === 'slide') {
-                        values = self.slider.noUiSlider('value');
-                        scale = self.chart.zoomLevel(values[0] / 100);
+                        values = this.slider.noUiSlider('value');
+                        scale = this.chart.zoomLevel(values[0] / 100);
                     } else {
-                        scale = self.chart.zoomScale();
+                        scale = this.chart.zoomScale();
                     }
-                    self.sliderZoomIn.toggleClass('disabled', (scale === self.zoomExtents.max));
-                    self.sliderZoomOut.toggleClass('disabled', (scale === self.zoomExtents.min));
-                }
+                    this.sliderZoomOut.toggleClass('disabled', (scale <= this.zoomExtents.min));
+                    this.sliderZoomIn.toggleClass('disabled', (scale >= this.zoomExtents.max));
+                }, this)
             });
         }
         this.moveSlider();
@@ -177,55 +183,57 @@
         }
 
         //jsTree control for selecting root node
-        this.jsTree = this.$('div[data-control="org-jstree"]').jstree({
-            // generating tree from json data
-            'json_data': {
-                'data': this.chartCollection
-            },
-            // plugins used for this tree
-            'plugins': ['json_data', 'ui', 'types'],
-            'core': {
-                'animation': 0
-            },
-            'ui': {
-                // when the tree re-renders, initially select the root node
-                'initially_select': ['jstree_node_' + app.user.get('user_name')]
-            }
-        }).on('loaded.jstree', function(e) {
-                // do stuff when tree is loaded
-                self.$('div[data-control="org-jstree"]').addClass('jstree-sugar');
-                self.$('div[data-control="org-jstree"] > ul').addClass('list');
-                self.$('div[data-control="org-jstree"] > ul > li > a').addClass('jstree-clicked');
-        }).on('click.jstree', function(e) {
-                e.stopPropagation();
-                e.preventDefault();
-        }).on('select_node.jstree', function(event, data) {
-                var jsData = data.inst.get_json();
+        this.jsTree = this.$('div[data-control="org-jstree"]')
+                .jstree({
+                    // generating tree from json data
+                    'json_data': {
+                        'data': this.chartCollection
+                    },
+                    // plugins used for this tree
+                    'plugins': ['json_data', 'ui', 'types'],
+                    'core': {
+                        'animation': 0
+                    },
+                    'ui': {
+                        // when the tree re-renders, initially select the root node
+                        'initially_select': ['jstree_node_' + app.user.get('user_name')]
+                    }
+                }).on('loaded.jstree', _.bind(function() {
+                    // do stuff when tree is loaded
+                    this.$('div[data-control="org-jstree"]').addClass('jstree-sugar');
+                    this.$('div[data-control="org-jstree"] > ul').addClass('list');
+                    this.$('div[data-control="org-jstree"] > ul > li > a').addClass('jstree-clicked');
+                }, this))
+                .on('click.jstree', function(e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                })
+                .on('select_node.jstree', _.bind(function(event, data) {
+                    var jsData = data.inst.get_json();
 
-                self.chart.filter(jQuery.data(data.rslt.obj[0], 'id'));
-                self.forceRepaint();
-                self.moveSlider();
+                    this.chart.filter(jQuery.data(data.rslt.obj[0], 'id'));
+                    this.forceRepaint();
+                    this.moveSlider();
 
-                self.$('div[data-control="org-jstree-dropdown"] .jstree-label').text(data.inst.get_text());
-                data.inst.toggle_node(data.rslt.obj);
-        });
+                    this.$('div[data-control="org-jstree-dropdown"] .jstree-label').text(data.inst.get_text());
+                    data.inst.toggle_node(data.rslt.obj);
+                }, this));
         app.accessibility.run(this.jsTree, 'click');
 
-        this.container = d3.select('svg#' + this.cid);
+        this.container = d3sugar.select('svg#' + this.cid);
 
-        d3.select('svg#' + this.cid)
+        this.container
             .datum(this.chartCollection[0])
-            .transition().duration(500)
             .call(this.chart);
 
-        this.chart.reset();
+        this.chart.resetZoom();
 
         this.forceRepaint();
 
-        this.$('.nv-expcoll').on('click', function(e) {
-            self.forceRepaint();
-            self.moveSlider();
-        });
+        this.$('.sc-expcoll').on('click', _.bind(function() {
+            this.forceRepaint();
+            this.moveSlider();
+        }, this));
 
         this.chart_loaded = _.isFunction(this.chart.resize);
         this.displayNoData(!this.chart_loaded);
@@ -240,9 +248,9 @@
             $(this).removeClass('loaded').addClass('loaded');
         });
 
-        this.$('img').on('error', function() {
-            $(this).attr('src', 'include/images/user.svg');
-        });
+        // this.$('img').on('error', function() {
+        //     $(this).attr('src', 'include/images/user.svg');
+        // });
     },
 
     /**
@@ -266,7 +274,7 @@
 
     /**
      * Override the chartResize method in Chart plugin because
-     * orgchart nvd3 model uses resize instead of update.
+     * orgchart sucrose model uses resize instead of update.
      */
     chartResize: function() {
         this.moveSlider();
@@ -282,8 +290,7 @@
      * @private
      */
     _postProcessTree: function(data) {
-        var root = [],
-            self = this;
+        var root = [];
 
         if (_.isArray(data) && data.length == 2) {
             root.push(data[0]);
@@ -305,7 +312,7 @@
                 return;
             }
 
-            entry.metadata.url = self._buildUserUrl(entry.metadata.id);
+            entry.metadata.url = this._buildUserUrl(entry.metadata.id);
 
             if (!entry.metadata.picture || entry.metadata.picture === '') {
                 entry.metadata.img = 'include/images/user.svg';
@@ -325,7 +332,7 @@
             _.each(entry.children, function(childEntry) {
                 var newChild;
                 if (entry.metadata.id !== childEntry.metadata.id) {
-                    newChild = self._postProcessTree(childEntry);
+                    newChild = this._postProcessTree(childEntry);
                     if (!_.isEmpty(newChild)) {
                         adopt.push(newChild[0]);
                     }
@@ -394,15 +401,13 @@
      * @inheritdoc
      */
     loadData: function(options) {
-        var self = this;
-
         app.api.call('get', this.reporteesEndpoint, null, {
-            success: function(data) {
-                self.chartCollection = self._postProcessTree(data);
-                if (!self.disposed) {
-                    self.renderChart();
+            success: _.bind(function(data) {
+                this.chartCollection = this._postProcessTree(data);
+                if (!this.disposed) {
+                    this.renderChart();
                 }
-            },
+            }, this),
             complete: options ? options.complete : null
         });
     },

@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Kontrolna tabla liste napomena',
+
     'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da bi obrisali kompaniju.',
     'LBL_ACCOUNT_ID' => 'ID broj kompanije:',
     'LBL_CASE_ID' => 'ID broj slučaja:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Beleška',
     'LBL_EMAIL_ADDRESS' => 'Email adresa:',
     'LBL_EMAIL_ATTACHMENT' => 'Email prilog',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Prilog e-poruke za',
     'LBL_FILE_MIME_TYPE' => 'MIME tip',
+    'LBL_FILE_EXTENSION' => 'Oznaka tipa datoteke',
+    'LBL_FILE_SOURCE' => 'Izvor datoteke',
+    'LBL_FILE_SIZE' => 'Veličina datoteke',
     'LBL_FILE_URL' => 'URL fajla',
     'LBL_FILENAME' => 'Prilog:',
     'LBL_LEAD_ID' => 'ID broj potencijalnog klijenta:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'ID broj prodajne prilike:',
     'LBL_PARENT_ID' => 'Matični ID broj:',
     'LBL_PARENT_TYPE' => 'Matični tip',
+    'LBL_EMAIL_TYPE' => 'Tip e-poruke',
+    'LBL_EMAIL_ID' => 'ID e-poruke',
     'LBL_PHONE' => 'Telefon:',
     'LBL_PORTAL_FLAG' => 'Da li da prikažem u portalu?',
     'LBL_EMBED_FLAG' => 'Ugradi u email?',

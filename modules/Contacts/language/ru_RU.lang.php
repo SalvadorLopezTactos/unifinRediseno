@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Информационная панель списка контактов',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Информационная панель записей контактов',
+
     'LNK_CONTACT_REPORTS' => 'Просмотреть отчеты по контакту',
     'ERR_DELETE_RECORD' => 'Вы должны указать номер записи перед удалением контакта.',
     'LBL_ACCOUNT_ID' => 'Контрагент:',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Копировать дополнительный адрес в основной',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Копировать основной адрес в дополнительный',
     'NTC_DELETE_CONFIRMATION' => 'Вы действительно хотите удалить эту запись?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Для создания сделки необходим контрагент.\n Пожалуйста, или создайте новый контрагент или выберите один из уже существующих.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Для создания сделки необходим контрагент.\\n Пожалуйста, или создайте новый контрагент или выберите один из уже существующих.',
     'NTC_REMOVE_CONFIRMATION' => 'Вы действительно хотите удалить этот контакт из данного обращения?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Вы уверены, что хотите удалить эту запись из подчинённых?',
 
@@ -273,4 +277,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Отчёты по контактам',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Согласованные бизнес-цели',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Последнее обновление согласия',
 );

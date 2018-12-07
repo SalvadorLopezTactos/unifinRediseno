@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => '최종 수정자:',
   'LBL_ASSIGNED_USER' => '담당자:',
   'LBL_ASSIGNED_USER_NAME' => '담당자',
-  'LBL_SYSTEM_ID' =>'시스템 ID',
   'LBL_TEAM_NAME' =>'팀명:',
   'LBL_TYPE'=>'종류:',
   'LBL_SUBJECT' => '제목:',

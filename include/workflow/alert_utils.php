@@ -154,6 +154,7 @@ function get_user_alert_details(& $focus, $user_meta_array, & $address_array){
 
 	    if( ! empty($focus->team_set_id) )
 	    {
+            /** @var TeamSet $ts */
     	    $ts = BeanFactory::newBean('TeamSets');
     	    $teams = $ts->getTeams($focus->team_set_id);
 	    }
@@ -653,7 +654,8 @@ function fill_mail_object(&$mail_object, &$focus, $template_id, $source_field, $
     $mail_object->setSubject(parse_alert_template($focus, $template->subject, $notify_user_id, $alert_user_array));
     // Adding attachments if they exist
     $note = BeanFactory::newBean('Notes');
-    $notes = $note->get_full_list("notes.name", "notes.parent_id=" . $GLOBALS['db']->quoted($template_id), true);
+    //FIXME: notes.email_type should be EmailTemplates
+    $notes = $note->get_full_list("notes.name", "notes.email_id=" . $GLOBALS['db']->quoted($template_id), true);
     handle_email_attachments($mail_object, $notes);
     return false; // false=no errors
 }

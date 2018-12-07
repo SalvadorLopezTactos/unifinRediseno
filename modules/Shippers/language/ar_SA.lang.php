@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'يجب عليك تحديد رقم السجل لحذف جهة الشحن.',
   'NTC_STATUS' => 'قم بتعيين الحالة على "غير نشط" لإزالة مزود الشحن هذا من القوائم المنسدلة لمزودي الشحن',
   'NTC_LIST_ORDER' => 'قم بتعيين الترتيب الذي سيظهر به مزود الشحن هذا في القوائم المنسدلة لمزودي الشحن',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'نشط',
-    'Inactive' => 'غير نشط',
-),
-	'LBL_EDITLAYOUT' => 'تعديل المخطط' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'تعديل المخطط' /*for 508 compliance fix*/,
 );
-
 
 ?>

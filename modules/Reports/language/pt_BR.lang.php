@@ -37,7 +37,7 @@ $mod_strings = array (
   'LNK_NEW_EMAIL' => 'Arquivar e-mail',
   'LNK_NEW_MEETING' => 'Agendar reunião',
   'LNK_NEW_TASK' => 'Criar Tarefa',
-  'LNK_ADVANCED_REPORTING' => 'Gerenciar Relatórios avançados',
+  'LNK_ADVANCED_REPORTING' => 'Gerenciar relatórios avançados',
   'LBL_REPORTS' => 'Relatórios',
   'LBL_TITLE' => 'Título',
   'LBL_UNTITLED' => 'sem título',
@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Por trimestre',
     'LBL_BY_FISCAL_YEAR' => 'Por ano fiscal',
     'LBL_BY_FISCAL_QUARTER' => 'Por trimestre fiscal',
+    'LBL_AMOUNT' => 'Valor',
     'LBL_COUNT' => 'Contador',
+    'LBL_PERCENT' => 'Percentual',
     'LBL_SUM' => 'SOMA',
     'LBL_AVG' => 'MÉDIA',
     'LBL_MAX' => 'MÁX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Mês',
     'LBL_YEAR' => 'Ano',
     'LBL_QUARTER' => 'Trimestre',
+    'LBL_FISCAL' => 'Fiscal',
     'LBL_FISCAL_YEAR' => 'Ano Fiscal',
     'LBL_FISCAL_QUARTER' => 'Trimestre fiscal',
 	'LBL_YESTERDAY'=>'Ontem',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Próximo trimestre',
     'LBL_ADD_RELATE' => "Adicionar relacionado",
     'LBL_DEL_THIS' => "Remover",
-    'LBL_ALERT_CANT_ADD' => 'Não é possível adicionar um módulo relacionado antes de selecionar uma tabela para relacionar.\nSelecione um módulo na lista suspensa à esquerda do botão &#39;Adicionar Relacionado&#39; no qual você clicou.',
+    'LBL_ALERT_CANT_ADD' => 'Não é possível adicionar um módulo relacionado antes de selecionar uma tabela para relacionar.\\nSelecione um módulo na lista suspensa à esquerda do botão &#39;Adicionar Relacionado&#39; no qual você clicou.',
     'LBL_BY_DAY' => 'Por dia',
     'LBL_DAY' => 'Dia',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Módulos opcionais relacionados',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Maior ou igual a',
 
     'LBL_FILTER_BY_MODULE' => 'Por módulo',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Com Gráficos',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Erro ao recuperar os dados do Relatório de Drillthrough para esta ação. Entre em contato com o proprietário do relatório para receber assistência.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Drill through não disponível',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'A visualização da lista exibe todos os relatórios que satisfazem os critérios de pesquisa atuais e aos quais os usuários têm acesso. Você pode ver os detalhes básicos de cada relatório dentro das colunas de campo da visualização de lista e na pré-visualização. É possível definir etiquetas para relatórios e criar filtros. Clique no nome do relatório ou selecione "Editar Relatório" no menu de ação para modificar o relatório.',
+  );

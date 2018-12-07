@@ -82,7 +82,7 @@ $viewdefs['ProjectTask']['EditView'] = array(
         'type' => 'readonly',
       ),
     ),
-	
+
     array (
     	array(
 			'name' => 'status',

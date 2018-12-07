@@ -9,8 +9,17 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
 /**
  * Log management
+ *
+ * @method void debug(string $message)
+ * @method void info(string $message)
+ * @method void warn(string $message)
+ * @method void deprecated(string $message)
+ * @method void error(string $message)
+ * @method void fatal(string $message)
+ * @method void security(string $message)
  * @api
  */
 class LoggerManager
@@ -18,7 +27,11 @@ class LoggerManager
 	//this the the current log level
 	private $_level = 'fatal';
 
-	//this is a list of different loggers that have been loaded
+    /**
+     * List of different loggers that have been loaded
+     *
+     * @var LoggerTemplate[]
+     */
 	protected static $_loggers = array();
 
 	//this is the instance of the LoggerManager
@@ -131,7 +144,7 @@ class LoggerManager
  	}
 
  	/**
- 	 * Returns a logger instance
+     * @return LoggerManager
  	 */
  	public static function getLogger()
 	{

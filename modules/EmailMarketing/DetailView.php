@@ -37,6 +37,9 @@ if(!empty($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);
 }
 
+$dateStartFormatted = ViewDateFormatter::format('datetime', $focus->date_start);
+list($dateStart, $timeStart) = TimeDate::getInstance()->split_date_time($dateStartFormatted);
+
 global $theme;
 
 
@@ -84,8 +87,8 @@ $xtpl->assign("FROM_NAME", $focus->from_name);
 $xtpl->assign("FROM_ADDR", $focus->from_addr);
 $xtpl->assign("REPLY_TO_NAME", $focus->reply_to_name);
 $xtpl->assign("REPLY_TO_ADDR", $focus->reply_to_addr);
-$xtpl->assign("DATE_START", $focus->date_start);
-$xtpl->assign("TIME_START", $focus->time_start);
+$xtpl->assign("DATE_START", $dateStart);
+$xtpl->assign("TIME_START", $timeStart);
 
 $email_templates_arr = get_bean_select_array(true, 'EmailTemplate','name');
 if($focus->template_id) {
@@ -146,5 +149,3 @@ else {
 }
 
 echo $subpanel->display();
-
-?>

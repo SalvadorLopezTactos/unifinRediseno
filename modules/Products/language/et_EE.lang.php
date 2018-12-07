@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Noteeritud reaüksuste loendi töölaud',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Campaign Quoted Line Item',
     'LBL_MODULE_NAME' => 'Pakkumuse artiklid',
     'LBL_MODULE_NAME_SINGULAR' => 'Quoted Line Item',
@@ -172,4 +175,5 @@ To create a {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Pakkumuse reaüksuste pakkumuse andmeloend',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => '(Uus pakkumuse reaüksus)',
     'LBL_DISCOUNT_PERCENT' => '% protsenti',
+    'LBL_DISCOUNT_TYPE' => 'Allahindluse tüüp',
 );

@@ -734,9 +734,9 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Pašalinus šį pasirinktinį lauką bus pašalintas ir laukas, ir visi su pasirinktiniu lauku susiję duomenys duomenų bazėje. Laukas nebebus rodomas nė viename modulio makete.'
         . ' Jei šis laukas bus įtrauktas į formulę skaičiuoti bet kurių laukų vertėms, formulė nebeveiks.'
-        . '\n\nLauko nebebus galima naudoti ataskaitose; šis pakeitimas įsigalios atsijungus ir vėl prisijungus prie programos. Visos ataskaitos, kuriose yra laukas, turės būti atnaujintos, kad būtų galima jas vykdyti.'
-        . '\n\nAr norite tęsti?',
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ar tikrai norite panaikinti šį ryšį?<br>Pastaba: ši operacija gali trukti keletą minučių.',
+        . '\\n\\nLauko nebebus galima naudoti ataskaitose; šis pakeitimas įsigalios atsijungus ir vėl prisijungus prie programos. Visos ataskaitos, kuriose yra laukas, turės būti atnaujintos, kad būtų galima jas vykdyti.'
+        . '\\n\\nAr norite tęsti?',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ar tikrai norite naikinti šį ryšį?<br>Pastaba. Ši operacija gali užtrukti ilgiau nei kelias minutes.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Tai padarys šį ryšį pastovų. Ar tikrai norite sukurti šį ryšį?',
 'LBL_CONFIRM_DONT_SAVE' => 'pakeitimai buvo atlikti nuo paskutinio išsaugojimo, ar norėtumėte išsaugoti?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Išsaugoti pakeitimus?',
@@ -747,22 +747,23 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Konfigūruokite lauką, kad būtų galima ieškoti viso teksto.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Padidinimas yra įrašo laukų tinkamumo padidinimo procesas.<br />Vykdant iešką suteikiama pirmenybė laukams, kurių padidinimo lygis yra didesnis. Vykdant iešką laukai, kuriuose yra atitinkančių įrašų ir kurių svoris didesnis, bus rodomi ieškos rezultatų viršuje.<br />Numatytoji reikšmė yra 1,0, tai reiškia neutralų padidinimą. Norėdami didinti pasirinkite bet kokią už 1 didesnę srauto reikšmę. Norėdami mažinti didinimą pasirinkite bet kokią už 1 mažesnę reikšmę. Pavyzdžiui, reikšmė 1,35 teigiamai padidina lauką iki 135 %. Naudojant reikšmę 0,60 didinimas mažinamas.<br />Nepamirškite, kad ankstesnėse versijose reikėjo iš naujo sukurti viso teksto ieškos rodyklę. Dabar to nebereikia.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Taip</b>: Laukas bus įtrauktas importavimui.<br><b>Ne</b>: Laukas nebus įtrauktas importavimui.<br><b>Privalomas</b>: reikšmė importavimui privalo būti pateikta visiems importavimams.',
+'LBL_POPHELP_PII'=>'Šis laukas bus automatiškai pažymėtas tikrinti ir prieinamas asmeninės informacijos rodinyje.<br>Asmeninės informacijos laukus taip pat galima ištrinti visam laikui, kai įrašas susijęs su duomenų privatumo trynimo užklausa.<br>Trynimas atliekamas naudojant duomenų privatumo modulį; šią operaciją vykdyti gali administratoriai arba duomenų privatumo vadovo vaidmenį atliekantys vartotojai.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Įveskite plotį pikseliais.<br> Užkraunamas paveiksliukas bus sumažintas iki tokio pločio.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Įveskite aukštį pikseliais.<br> Užkraunamas paveiksliukas bus sumažintas iki tokio aukščio.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: laukas rodomas dublikatų suliejimo funkcijoje, tačiau jo negalima naudoti filtro sąlygai dublikatų ieškos funkcijoje.<br><b>Disabled</b>: laukas nerodomas dublikatų suliejimo funkcijoje ir jo negalima naudoti filtro sąlygai dublikatų ieškos funkcijoje.'
 . '<br><b>In Filter</b>: laukas rodomas dublikatų suliejimo funkcijoje ir galima jį naudoti dublikatų ieškos funkcijoje.<br><b>Filter Only</b>: laukas neveikia dublikatų suliejimo funkcijoje, tačiau jį galima naudoti dublikatų ieškos funkcijoje.<br><b>Default Selected Filter</b>: laukas pagal numatytuosius parametrus naudojamas filtro sąlygai dublikatų ieškos puslapyje, jis rodomas ir dublikatų suliejimo funkcijoje.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Sukurkite formulę, pagal kurią būtų apskaičiuota šio lauko reikšmė.<br>"
-   . "Darbo eigos apibrėžimai, kuriuose yra veiksmas ir kurie nustatyti atnaujinti šį lauką, daugiau nebevykdys to veiksmo.<br>"
-   . "Laukai, kuriuose naudojamos formulės, nebus apskaičiuoti realiuoju laiku "
+'LBL_POPHELP_CALCULATED'=>"Sukurkite formulę šio lauko vertei apibrėžti.<br>"
+   . "Darbo eigos apibrėžimai nebevykdys veiksmo, kuriuo atnaujinamas šis laukas.<br>"
+   . "Laukai, naudojantys formules, esamu laiku nebus skaičiuojami "
    . "„Sugar“ savitarnos portale arba "
-   . "Mobilieji EditView išdėstymai.",
+   . "Mobiliuosiuose redagavimo rodinio maketuose.",
 
-'LBL_POPHELP_DEPENDENT'=>"Sukurkite formulę, pagal kurią būtų nustatyta, ar šis laukas turi būti matomas išdėstymuose.<br/>"
-        . "Naršyklės mobiliajame rodinyje priklausomi laukai eis po priklausomybės formulės, <br/>"
-        . "tačiau vietinėse programose, pvz., „Sugar Mobile“, skirtoje „iPhone“, jų po formulės nebus. <br/>"
-        . "Jie neis po formulės ir „Sugar“ savitarnos portale.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Pasirinkite naudoti šį lauką, kai ieškote įrašų naudodami šio modulio visuotinės ieškos funkciją.',
+'LBL_POPHELP_DEPENDENT'=>"Sukurkite formulę, kad nustatytumėte, ar šis laukas matomas maketuose.<br/>"
+        . "Priklausomi laukai naršyklės pagrindu sukurtame mobiliajame rodinyje bus nustatyti pagal priklausomybės formulę,<br/>"
+        . "tačiau pagal formulę nebus nustatyti vietinėse programose, pvz., „iPhone“ skirtame „Sugar Mobile“.<br/>"
+        . "Pagal formulę jie nebus nustatyti „Sugar“ savitarnos portale.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Pasirinkite naudoti šį lauką, kai šiame modulyje ieškosite įrašų naudodami visuotinės ieškos funkciją.',
 //Revert Module labels
 'LBL_RESET' => 'Atstatyti',
 'LBL_RESET_MODULE' => 'Atstatyti modulį',

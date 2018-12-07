@@ -181,7 +181,7 @@ class SugarUpgradeClearVarDefs extends UpgradeScript
                     if ($this->checkRelationshipDef($field['name'], $seed)) {
                         // Need to delete cache of TableDictionary to avoid inclusion of deleted files.
                         if (file_exists('custom/application/Ext/TableDictionary/tabledictionary.ext.php')) {
-                            SugarAutoLoader::unlink('custom/application/Ext/TableDictionary/tabledictionary.ext.php');
+                            unlink('custom/application/Ext/TableDictionary/tabledictionary.ext.php');
                         }
                         SugarRelationshipFactory::deleteCache();
                         SugarRelationshipFactory::rebuildCache();

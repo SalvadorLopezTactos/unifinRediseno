@@ -11,7 +11,7 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'                   => 'Aktivitäten',
+    'LBL_MODULE_NAME'                   => 'Aktivitäten-Stream',
     'LBL_MODULE_NAME_SINGULAR'          => 'Aktivitäten-Stream',
     'LBL_MODULE_TITLE'                  => 'Aktivitäten-Stream: Startseite',
     'LBL_SEARCH_FORM_TITLE'             => 'Aktivitäten-Stream: Suche',

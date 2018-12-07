@@ -81,8 +81,8 @@ if(!empty($_REQUEST['load_id']) && !empty($beanList[$_REQUEST['load_module']])) 
 		$parentType = $request->getValidInputRequest('parent_type', 'Assert\Mvc\ModuleName');
 		$loadModule = $request->getValidInputRequest('load_module', 'Assert\Mvc\ModuleName');
 
-    	if(!empty($parentType) && empty($app_list_strings['record_type_display'][$parentType])){
-    		if(!empty($app_list_strings['record_type_display'][$loadModule])){
+        if (!empty($parentType) && empty($app_list_strings['record_type_display'][$parentType])) {
+            if (!empty($app_list_strings['record_type_display'][$loadModule])) {
     			$_REQUEST['parent_type'] = $loadModule;
     			$_REQUEST['parent_id'] = $focus->contact_id;
     			$_REQUEST['parent_name'] = $focus->to_addrs_names;
@@ -448,7 +448,7 @@ $xtpl->assign('TIME_FORMAT', '('. $timedate->get_user_time_format().')');
 $xtpl->assign('TIME_START', substr($focus->time_start,0,5));
 $xtpl->assign('TIME_MERIDIEM', $timedate->AMPMMenu('',$focus->time_start));
 
-$parent_types = $app_list_strings['record_type_display'];
+    $parent_types = $app_list_strings['record_type_display'];
 $disabled_parent_types = SugarACL::disabledModuleList($parent_types);
 
 foreach($disabled_parent_types as $disabled_parent_type){
@@ -600,7 +600,9 @@ if(!empty($focus->id) || (!empty($_REQUEST['record']) && $_REQUEST['type'] == 'f
 
         $focusId = empty($focus->id) ? $recordId : $focus->id;
         $note = BeanFactory::newBean('Notes');
-        $where = sprintf('notes.parent_id = %s AND notes.filename IS NOT NULL', $focus->db->quoted($focusId));
+        //FIXME: notes.email_type should be Emails
+        //FIXME: notes.filename IS NOT NULL is probably not necessary
+        $where = sprintf('notes.email_id = %s AND notes.filename IS NOT NULL', $focus->db->quoted($focusId));
         $notes_list = $note->get_full_list("", $where, true);
 
 	if(!isset($notes_list)) {

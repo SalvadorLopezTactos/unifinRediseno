@@ -220,7 +220,7 @@ $viewdefs['Products']['base']['view']['record'] = array(
                     'name' => 'discount',
                     'type' => 'fieldset',
                     'css_class' => 'quote-discount-percent',
-                    'label' => 'LBL_DISCOUNT_AMOUNT',
+                    'label' => 'LBL_DISCOUNT_TYPE',
                     'fields' => array(
                         array(
                             'type' => 'discount-select',

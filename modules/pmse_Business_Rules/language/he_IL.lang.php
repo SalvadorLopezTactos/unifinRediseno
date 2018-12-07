@@ -12,13 +12,12 @@
 
 
 $mod_strings = array (
-
-  'LBL_MODULE_NAME' => 'תהליך כללים עסקיים',
+  'LBL_MODULE_NAME' => 'תהליך- כללים עסקיים',
   'LBL_MODULE_TITLE' => 'תהליך כללים עסקיים',
   'LBL_MODULE_NAME_SINGULAR' => 'תהליך כלל עסקי',
 
   'LBL_RST_UID' => 'ID כלי עסקיים',
-  'LBL_RST_TYPE' => 'סוג כלי עסקיים',
+  'LBL_RST_TYPE' => 'סוג כלל עסקי',
   'LBL_RST_DEFINITION' => 'הגדרות כלי עסקיים',
   'LBL_RST_EDITABLE' => 'כלל עסקי ניתן לעריכה',
   'LBL_RST_SOURCE' => 'מקור כלל עסקי',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'תנאים',
     'LBL_PMSE_LABEL_RETURN' => 'חזרה',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'מסקנות',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'שנה שדה',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'ערך ההחזרה',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'הוסף מצב',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'הוסף מצב',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'הוסף שורה',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'הסר עמודה',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'הסר המצב',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'הסר סיום',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'הסר עמודת נתונים',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'כן',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'לא',

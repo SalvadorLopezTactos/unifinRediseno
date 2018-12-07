@@ -62,6 +62,10 @@ class TemplateAddress extends TemplateField
             // Maintain unified search setting for 'Street'
             $addressField->supports_unified_search = $addressField == 'Street';
 
+            // audit and pii should be in sync whith this address
+            $addressField->audited = $this->audited;
+            $addressField->pii = $this->pii;
+
             $addressField->save ( $df ) ;
         }
 

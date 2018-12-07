@@ -16,12 +16,12 @@ $mod_strings = array (
     'LBL_BASE_MODULE' => '대상 모듈',
 
     'LBL_MODULE_TITLE' => '공정 이메일 템플릿',
-    'LBL_MODULE_NAME' => '공정 이메일 템플릿',
+    'LBL_MODULE_NAME' => '프로세스 이메일 템플릿',
     'LBL_MODULE_NAME_SINGULAR' => '공정 이메일 템플릿',
 
     'LNK_LIST' => '보기 프로세스 이메일 템플릿',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => '프로세스 이메일 템플릿 만들기',
-    'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => '가져 오기 프로세스 이메일 템플릿',
+    'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => '프로세스 이메일 템플릿 가져오기',
 
     'LBL_PMSE_SHOW_MORE_VARIABLES' => '추가 변수 보기…',
 

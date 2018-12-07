@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Трябва да определите номер на записа, за да изтриете тази ставка.',
   'NTC_STATUS' => 'Изберет статус НЕАКТИВЕН, за да премахнете тази ставка от списъка',
   'NTC_LIST_ORDER' => 'Определете поредността на тази ставка в списъка',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Активен',
-    'Inactive' => 'Неактивен',
-  ),
   'LBL_EDITLAYOUT' => 'Редактиране на подредби' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Създадено от',
   'LBL_MODIFIED_ID'=>'Модифицирано от',

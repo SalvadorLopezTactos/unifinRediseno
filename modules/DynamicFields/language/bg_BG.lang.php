@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'URL',
 	'COLUMN_TITLE_AUDIT' =>'История на промените',
+    'COLUMN_TITLE_PII' => 'Лични данни',
     'COLUMN_TITLE_FTS' =>'Достъпно за пълнотекстово търсене',
     'COLUMN_TITLE_FTS_BOOST' => 'Увеличи стойността',
 	'COLUMN_TITLE_REPORTABLE' => 'Използва се в справки:',

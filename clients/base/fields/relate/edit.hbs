@@ -10,5 +10,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<input type="hidden" name="{{name}}" class="select2 inherit-width" value="{{formattedIds}}"{{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}} data-rname="{{formattedRname}}">
-{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
+<input type="hidden"
+    name="{{name}}"
+    class="select2 inherit-width"
+    value="{{formattedIds}}"
+    {{#if def.tabindex}} tabindex="{{def.tabindex}}"{{/if}}
+    data-rname="{{#if hasErasedPlaceholder}}{{str 'LBL_VALUE_ERASED' module}}{{else}}{{formattedRname}}{{/if}}">
+{{#unless hideHelp}}
+    {{#if def.help}}
+        <p class="help-block">{{str def.help module}}</p>
+    {{/if}}
+{{/unless}}

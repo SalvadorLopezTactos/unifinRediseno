@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om deze fabrikant te verwijderen.',
   'NTC_STATUS' => 'Zet de status op Inactief om deze fabrikant uit de dropdownlijst te verwijderen',
   'NTC_LIST_ORDER' => 'Geef de volgorde aan hoe deze Fabrikant in de Fabrikant dropdownlijst wordt getoond',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Actief',
-    'Inactive' => 'Inactief',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Importeer Fabrikanten',
 	'LBL_EDITLAYOUT' => 'Wijzig Lay-out' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Opportunityregels',

@@ -35,7 +35,7 @@ class SearchReindexCommand extends Command implements InstanceModeInterface
     {
         $this
             ->setName('search:reindex')
-            ->setDescription('Schedule SearchEngine reindex')
+            ->setDescription('Create mappings and schedule a reindex')
             ->addOption(
                 'modules',
                 null,

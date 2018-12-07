@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'Izveidots',
     'LBL_DATE_MODIFIED' => 'Modificēšanas datums',
     'LBL_DELETED' => 'Dzēsts',
+    'LBL_MODULE_NAME' => 'E-pasta adreses',
+    'LBL_MODULE_NAME_SINGULAR' => 'E-pasta adrese',
 );

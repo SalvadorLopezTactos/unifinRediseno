@@ -10,7 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+/**
+ * This engine is now deprecated. Use the sucrose chart engine instead.
+ * @deprecated This file will removed in a future release.
+ */
 class nvd3Reports extends nvd3
 {
 
@@ -113,7 +116,7 @@ class nvd3Reports extends nvd3
     }
 
     /**
-     * Handle sorting for special field types on grouped data. 
+     * Handle sorting for special field types on grouped data.
      *
      * @param array &$super_set Grouped data
      */
@@ -282,13 +285,13 @@ class nvd3Reports extends nvd3
      */
     function display($name, $xmlFile, $width = '320', $height = '480', $resize = false)
     {
+        $GLOBALS['log']->deprecated('The nvd3 chart engine is deprecated.');
+
         if (empty($name)) {
             $name = "unsavedReport";
         }
 
-        parent::display($name, $xmlFile, $width, $height, $resize = false);
-
-        return $this->ss->fetch('include/SugarCharts/nvd3/tpls/chart.tpl');
+        return parent::display($name, $xmlFile, $width, $height, $resize = false);
 
     }
 }

@@ -13,9 +13,14 @@
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 use Doctrine\DBAL\Connection;
+use Sugarcrm\IdentityProvider\Srn;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
 
 class SugarEmailAddress extends SugarBean
 {
+    // max number of legacy emails
+    const MAX_LEGACY_EMAILS = 10;
+
     var $table_name = 'email_addresses';
     var $module_name = "EmailAddresses";
     var $module_dir = 'EmailAddresses';
@@ -26,10 +31,11 @@ class SugarEmailAddress extends SugarBean
     public $addresses = array(); // array of emails
     public $hasFetched = false; // Set to true when the emails have been fetched
     var $view = '';
-    private $stateBeforeWorkflow;
 
     public $email_address;
     public $dontLegacySave = false;
+    public $opt_out;
+    public $invalid_email;
 
     static $count = 0;
 
@@ -45,6 +51,7 @@ class SugarEmailAddress extends SugarBean
     public function __construct() {
         parent::__construct();
         $this->index = self::$count;
+        $this->opt_out = !empty($GLOBALS['sugar_config']['new_email_addresses_opted_out']);
         self::$count++;
     }
 
@@ -123,9 +130,11 @@ class SugarEmailAddress extends SugarBean
                 if (!empty($bean->email) && is_array($bean->email)) {
                     foreach ($bean->email as $emailAddr) {
                         $address = $emailAddr['email_address'];
-                        $optO = (isset($emailAddr['opt_out']) && $emailAddr['opt_out'] == "1") ? true : false;
-                        $invalidE = (isset($emailAddr['invalid_email']) && $emailAddr['invalid_email'] == "1") ? true : false;
-                        $primaryE = (isset($emailAddr['primary_address']) && $emailAddr['primary_address'] == "1") ? true : false;
+                        $optO = $this->getEmailAddressOptoutValue($emailAddr);
+                        $invalidE = (isset($emailAddr['invalid_email'])) ?
+                            $this->boolVal($emailAddr['invalid_email']) : false;
+                        $primaryE = (isset($emailAddr['primary_address'])) ?
+                            $this->boolVal($emailAddr['primary_address']) : false;
                         $this->addAddress($address, $primaryE, false, $invalidE, $optO);
                     }
                 }
@@ -140,7 +149,7 @@ class SugarEmailAddress extends SugarBean
                 $this->addresses = array();
                 $isPrimary = true;
                 // Special case if not bean->email - removing results in legacy breakage, broken tests, and general sadness.
-                for ($i = 1; $i <= 10; $i++) {
+                for ($i = 1; $i <= self::MAX_LEGACY_EMAILS; $i++) {
                     $email = 'email' . $i;
                     $handleField = true;
                     // When sending a request to modify email1, if there are more
@@ -152,8 +161,13 @@ class SugarEmailAddress extends SugarBean
                     //$colIndex = $i - 1;
                     //$handleField = (!isset($collection[$colIndex]) || $collection[$colIndex]['email_address'] != $bean->$email);
                     if (isset($bean->$email) && !empty($bean->$email) && $handleField) {
-                        $optOut = isset($bean->email[$i-1]['opt_out']) && $bean->email[$i-1]['opt_out'] == "1";
-                        $invalid = isset($bean->email[$i-1]['invalid_email']) && $bean->email[$i-1]['invalid_email'] == "1";
+                        $emailAddr = array();
+                        if (isset($bean->email[$i-1]['opt_out'])) {
+                            $emailAddr = $bean->email[$i-1];
+                        }
+                        $optOut = $this->getEmailAddressOptoutValue($emailAddr);
+                        $invalid = isset($bean->email[$i-1]['invalid_email'])
+                            && $this->boolVal($bean->email[$i-1]['invalid_email']);
                         $opt_out_field = $email . '_opt_out';
                         $invalid_field = $email . '_invalid';
                         $field_optOut = (isset($bean->$opt_out_field)) ? $bean->$opt_out_field : $optOut;
@@ -208,6 +222,7 @@ class SugarEmailAddress extends SugarBean
     function handleLegacyRetrieve(&$bean)
     {
         $this->addresses = $this->getAddressesForBean($bean, true);
+        $this->hasFetched = true;
         $this->populateLegacyFields($bean);
         if (isset($bean->email1) && !isset($bean->fetched_row['email1'])) {
             $bean->fetched_row['email1'] = $bean->email1;
@@ -306,12 +321,15 @@ class SugarEmailAddress extends SugarBean
                     $guid = create_guid();
 
                     $emailId = isset($address['email_address_id'])
-                        && isset($current_links[$address['email_address_id']])
+                    && isset($current_links[$address['email_address_id']])
                         ? $address['email_address_id'] : null;
-                    $emailId = $this->AddUpdateEmailAddress($address['email_address'],
-                                                            $address['invalid_email'],
-                                                            $address['opt_out'],
-                                                            $emailId);// this will save the email address if not found
+                    $optOut = $this->getEmailAddressOptoutValue($address);
+                    $emailId = $this->AddUpdateEmailAddress(
+                        $address['email_address'],
+                        $address['invalid_email'],
+                        $optOut,
+                        $emailId
+                    ); // this will save the email address if not found
 
                     //verify linkage and flags.
                     if (isset($current_links[$emailId])) {
@@ -380,7 +398,6 @@ class SugarEmailAddress extends SugarBean
                 array(Connection::PARAM_STR_ARRAY)
             );
         }
-        $this->stateBeforeWorkflow = null;
         $this->hasFetched = true;
         return;
     }
@@ -474,6 +491,36 @@ class SugarEmailAddress extends SugarBean
             if(empty($bean)) continue;
 
             $ret[] = $bean;
+        }
+
+        return $ret;
+    }
+
+    /**
+     * returns a collection of beans matching the $this id
+     * @param string $emailId
+     * @return array
+     */
+    public function getRelatedBeansById($emailId)
+    {
+        $ret = [];
+
+        if (empty($emailId)) {
+            return $ret;
+        }
+
+        $query = "SELECT * FROM email_addr_bean_rel WHERE email_address_id = ? AND deleted = 0";
+        $conn = $this->db->getConnection();
+        $stmt = $conn->executeQuery($query, [$emailId]);
+
+        while ($row = $stmt->fetch()) {
+            if (empty($row['bean_module'])) {
+                continue;
+            }
+            $bean = BeanFactory::retrieveBean($row['bean_module'], $row['bean_id']);
+            if (!empty($bean)) {
+                $ret[] = $bean;
+            }
         }
 
         return $ret;
@@ -666,11 +713,11 @@ class SugarEmailAddress extends SugarBean
 
         $new_address = array(
             'email_address' => $addr,
-            'primary_address' => ($primary) ? '1' : '0',
-            'reply_to_address' => ($replyTo) ? '1' : '0',
-            'invalid_email' => ($invalid) ? '1' : '0',
-            'opt_out' => ($optOut) ? '1' : '0',
-            'email_address_id' => $email_id,
+            'primary_address' => $this->boolVal($primary),
+            'reply_to_address' => $this->boolVal($replyTo),
+            'invalid_email' => $this->boolVal($invalid),
+            'opt_out' => $this->boolVal($optOut),
+            'email_address_id' => $email_id?? $this->getEmailGUID($addr),
         );
 
         $key = false;
@@ -679,7 +726,7 @@ class SugarEmailAddress extends SugarBean
                 $key = $k;
 
                 $diffCount = array_diff_assoc($new_address, $address);
-                if ($address['primary_address'] === '1' && !empty($diffCount)) {
+                if ($this->boolVal($address['primary_address']) && !empty($diffCount)) {
                     $GLOBALS['log']->fatal("SUGAREMAILADDRESS: Existing primary address could not be overriden [ {$addr} ]");
                     return false;
                 }
@@ -691,6 +738,99 @@ class SugarEmailAddress extends SugarBean
         } else {
             $this->addresses[$key] = $new_address;
         }
+    }
+
+    /**
+     * Removes a given email address from this set of addresses.
+     * @param string $addr
+     *
+     * @return bool false if the given address was not found
+     */
+    public function removeAddress(string $addr)
+    {
+        $address = $this->getAddressEntry($addr);
+        if (!empty($address['email_address_id'])) {
+            return $this->removeAddressById($address['email_address_id']);
+        }
+
+        return false;
+    }
+
+    /**
+     * Removes legacy email address entry for bean
+     * @param SugarBean $bean
+     * @param string $addr
+     * @return bool
+     */
+    public function removeLegacyAddressForBean(SugarBean $bean, ?string $addr)
+    {
+        $found = false;
+        for ($i = 1; $i <= self::MAX_LEGACY_EMAILS; $i++) {
+            $email = 'email' . $i;
+            if (!empty($bean->$email) && $bean->$email === $addr) {
+                unset($bean->$email);
+                $found = true;
+            }
+        }
+        return $found;
+    }
+
+    /**
+     * Removes a given email address by id from this set of addresses.
+     * @param string $id
+     *
+     * @return bool false if the given address was not found
+     */
+    public function removeAddressById(string $id)
+    {
+        foreach ($this->addresses as $k => $address) {
+            if ($address['email_address_id'] === $id) {
+                $wasPrimary = $address['primary_address'];
+                array_splice($this->addresses, $k, 1);
+                //If the removed address was primary, need to mark another email primary
+                if ($wasPrimary) {
+                    $this->findAndMarkNewPrimaryEmail();
+                }
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private function findAndMarkNewPrimaryEmail()
+    {
+        if (empty($this->addresses)) {
+            return;
+        }
+        //First find a valid email address
+        foreach ($this->addresses as $i => $address) {
+            if (!$address['invalid_email']) {
+                $this->addresses[$i]['primary_address'] = true;
+
+                return;
+            }
+        }
+        //Otherwise just mark the first one.
+        $this->addresses[0]['primary_address'] = true;
+    }
+
+    /**
+     * Given an email address, returns the matching entry from the addresses array.
+     * @param string $addr
+     *
+     * @return mixed|null
+     */
+    private function getAddressEntry(string $addr)
+    {
+        foreach ($this->addresses as $address) {
+            if ($address['email_address'] === $addr) {
+                return $address;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -752,7 +892,41 @@ class SugarEmailAddress extends SugarBean
      */
     function getEmailGUID($addr)
     {
-        $address = $this->db->quote($this->_cleanAddress($addr));
+        $guid = $this->getGuid($addr);
+
+        if (empty($guid)) {
+            $address = $this->db->quote($this->_cleanAddress($addr));
+            $addressCaps = strtoupper($address);
+
+            if (!empty($address)) {
+                $guid = create_guid();
+                $now = TimeDate::getInstance()->nowDb();
+
+                $fieldDefs = $this->getFieldDefinitions();
+                $this->db->insertParams($this->table_name, $fieldDefs, array(
+                    'id' => $guid,
+                    'email_address' => $address,
+                    'email_address_caps' => $addressCaps,
+                    'opt_out' => $this->opt_out,
+                    'date_created' => $now,
+                    'date_modified' => $now,
+                    'deleted' => 0,
+                ));
+            }
+        }
+
+        return $guid;
+    }
+
+    /**
+     * Returns the ID of an email address or an empty string if the email address is not found.
+     *
+     * @param string $address
+     * @return string
+     */
+    public function getGuid($address)
+    {
+        $address = $this->db->quote($this->_cleanAddress($address));
         $addressCaps = strtoupper($address);
 
         //use email address in captial letters for query
@@ -761,26 +935,7 @@ class SugarEmailAddress extends SugarBean
         $stmt = $conn->executeQuery($q, array($addressCaps));
         $id = $stmt->fetchColumn();
 
-        if (!empty($id)) {
-            return $id;
-        } else {
-            $guid = '';
-            if (!empty($address)) {
-                $guid = create_guid();
-                $now = TimeDate::getInstance()->nowDb();
-
-                $fieldDefs = $GLOBALS['dictionary'][$this->table_name]['fields'];
-                $this->db->insertParams($this->table_name, $fieldDefs, array(
-                    'id' => $guid,
-                    'email_address' => $address,
-                    'email_address_caps' => $addressCaps,
-                    'date_created' => $now,
-                    'date_modified' => $now,
-                    'deleted' => 0,
-                ));
-            }
-            return $guid;
-        }
+        return empty($id) ? '' : $id;
     }
 
     /**
@@ -794,88 +949,76 @@ class SugarEmailAddress extends SugarBean
      *        to propagate to the new SugarEmailAddress - see bug 39188
      * @return String GUID of Email Address or '' if cleaned address was empty.
      */
-    public function AddUpdateEmailAddress($addr,$invalid=0,$opt_out=0,$id=null)
+    public function AddUpdateEmailAddress($addr, $invalid = null, $opt_out = null, $id = null)
     {
-        // sanity checks to avoid SQL injection.
-        $invalid = intval($invalid);
-        $opt_out = intval($opt_out);
-
-        // Trim the address
-        $addr = trim($addr);
-
         $address = self::_cleanAddress($addr);
         $addressCaps = strtoupper($address);
 
-        $conn = $this->db->getConnection();
-        // determine if we have a matching email address
-        $stmt = $conn->executeQuery(
-            sprintf('SELECT * FROM %s WHERE email_address_caps = ? and deleted = ?', $this->table_name),
-            array($addressCaps, 0)
-        );
-        $duplicate_email = $stmt->fetch();
+        $addrBean = BeanFactory::newBean('EmailAddresses');
+        $existingBean = $this->getEmailAddrBean($addrBean, $addressCaps, $id);
 
-        // check if we are changing an email address, where workflow might be in play
-        if ($id) {
-            $stmt = $conn->executeQuery(sprintf('SELECT * FROM %s WHERE id = ?', $this->table_name), array($id));
-            $current_email = $stmt->fetch();
-        }
-        else {
-            $current_email = null;
-        }
-
-        // unless workflow made changes, assume parameters are what to use.
-        $new_opt_out = $opt_out;
-        $new_invalid = $invalid;
-        if (!empty($current_email['id']) && isset($this->stateBeforeWorkflow[$current_email['id']])) {
-            if ($current_email['invalid_email'] != $invalid ||
-                $current_email['opt_out'] != $opt_out) {
-
-                // workflow could be in play
-                $before_email = $this->stateBeforeWorkflow[$current_email['id']];
-
-                // our logic is as follows: choose from parameter, unless workflow made a change to the value, then choose final value
-                if (intval($before_email['opt_out']) != intval($current_email['opt_out'])) {
-                    $new_opt_out = intval($current_email['opt_out']);
+        if (!empty($address) || !empty($existingBean)) {
+            if (!empty($existingBean)) {
+                if (!$this->didEmailAddressChange($existingBean, $address, $invalid, $opt_out)) {
+                    return $existingBean->id;
                 }
-                if (intval($before_email['invalid_email']) != intval($current_email['invalid_email'])) {
-                    $new_invalid = intval($current_email['invalid_email']);
-                }
+                //update the existing bean address
+                $addrBean = $existingBean;
             }
+            $addrBean->email_address = $address;
+            $addrBean->email_address_caps = $addressCaps;
+            if (!is_null($invalid)) {
+                $addrBean->invalid_email = boolval($invalid);
+            }
+            if (!is_null($opt_out)) {
+                $addrBean->opt_out = boolval($opt_out);
+            }
+
+            return $addrBean->save();
         }
 
-        $now = TimeDate::getInstance()->nowDb();
-        // determine how we are going to put in this address - UPDATE or INSERT
-        if (!empty($duplicate_email['id'])) {
-            $guid =  $duplicate_email['id'];
-            // address_caps matches - see if we're changing fields
-            if ($duplicate_email['invalid_email'] != $new_invalid ||
-                $duplicate_email['opt_out'] != $new_opt_out ||
-                (trim($duplicate_email['email_address']) != $address)) {
-                $this->db->updateParams($this->table_name, $this->field_defs, array(
-                    'email_address' => $address,
-                    'invalid_email' => $new_invalid,
-                    'opt_out' => $new_opt_out,
-                    'date_modified' => $now,
-                ), array('id' => $guid));
-            }
-        } elseif (!empty($address)) {
-            // no case-insensitive address match - it's new, or undeleted.
-            $guid = create_guid();
-            $this->db->insertParams($this->table_name, $this->field_defs, array(
-                'id' => $guid,
-                'email_address' => $address,
-                'email_address_caps' => $addressCaps,
-                'date_created' => $now,
-                'date_modified' => $now,
-                'deleted' => 0,
-                'invalid_email' => $new_invalid,
-                'opt_out' => $new_opt_out,
-            ));
+        return '';
+    }
+
+    /**
+     * Given an EmailAddress bean, returns true if the address or it's properties do not match the given parameters
+     * @param SugarEmailAddress $addrBean
+     * @param string $address
+     * @param string|null $invalid
+     * @param string|null $opt_out
+     *
+     * @return bool
+     */
+    private function didEmailAddressChange(SugarEmailAddress $addrBean, string $address, $invalid, $opt_out)
+    {
+        return (!is_null($invalid) && $addrBean->invalid_email != $invalid) ||
+               (!is_null($opt_out) && $addrBean->opt_out != $opt_out) ||
+               ($addrBean->email_address != $address);
+    }
+
+    /**
+     * Retrieve an existing EmailAddress bean by either ID or email_address_caps
+     *
+     * @param SugarEmailAddress $seed
+     * @param string $addressCaps
+     * @param string|null $id
+     *
+     * @return null|SugarEmailAddress
+     */
+    private function getEmailAddrBean(SugarEmailAddress $seed, $addressCaps, $id)
+    {
+        if (!empty($id)) {
+            return BeanFactory::retrieveBean('EmailAddresses', $id);
         } else {
-            $guid = '';
+            $q = new SugarQuery();
+            $q->from($seed)->where()->equals('email_address_caps', $addressCaps);
+            $matches = $seed->fetchFromQuery($q);
+            if (!empty($matches)) {
+                return reset($matches);
+            }
         }
-        
-        return $guid;
+
+        return null;
     }
 
     /**
@@ -980,9 +1123,18 @@ class SugarEmailAddress extends SugarBean
      */
     public function getEmailsQuery($module)
     {
+        $select = [
+            'id',
+            'email_address',
+            'opt_out',
+            'invalid_email',
+            'ear.primary_address',
+            'ear.reply_to_address',
+        ];
+
         $q = new SugarQuery();
         $q->from($this);
-        $q->select(array('email_address', 'opt_out', 'invalid_email', 'ear.primary_address', 'ear.reply_to_address'));
+        $q->select($select);
         $q->joinTable("email_addr_bean_rel", array('alias'=>"ear", 'joinType'=>"LEFT", "linkingTable" => true))
             ->on()->equalsField('id', 'ear.email_address_id', $this)->equals('ear.deleted', 0);
         $q->where()->equals('deleted', 0)->equals('ear.bean_module', $this->getCorrectedModule($module));
@@ -1003,6 +1155,26 @@ class SugarEmailAddress extends SugarBean
             $this->smarty = new Sugar_Smarty();
 
         global $app_strings, $dictionary, $beanList;
+
+        $idmConfig = new IdmConfig(\SugarConfig::getInstance());
+        $disabledForModule = $idmConfig->isIDMModeEnabled()
+            && in_array($module, $idmConfig->getIDMModeDisabledModules());
+        $cloudConsoleUrl = '';
+        if ($disabledForModule) {
+            $idmModeConfig = $idmConfig->getIDMModeConfig();
+            $tenantSrn = Srn\Converter::fromString($idmModeConfig['tid']);
+            $srnManagerConfig = [
+                'partition' => $tenantSrn->getPartition(),
+                'region' => $tenantSrn->getRegion(),
+            ];
+            $srnManager = new Srn\Manager($srnManagerConfig);
+            $userSrn = $srnManager->createUserSrn($tenantSrn->getTenantId(), $id);
+            $cloudConsoleUrl = $idmConfig->buildCloudConsoleUrl('userProfile', [Srn\Converter::toString($userSrn)]);
+        }
+        $this->smarty->assign('idmMode', json_encode([
+            'disabledForModule' => $disabledForModule,
+            'cloudConsoleUrl' => $cloudConsoleUrl,
+        ]));
 
         // SugarBean shouldn't rely on any request parameters, needs refactoring ...
         $request = InputValidation::getService();
@@ -1318,25 +1490,49 @@ class SugarEmailAddress extends SugarBean
         return ($module == "Employees") ? "Users" : $module;
     }
 
-    public function stash($parentBeanId, $moduleName)
+    /**
+     * @deprecated stash was only created as a crutch for legacy workflow and is no longer required.
+     */
+    public function stash()
     {
-        $conn = $this->db->getConnection();
-        $qb = $conn->createQueryBuilder();
-        $qbSubquery = $conn->createQueryBuilder();
-        $qbSubquery->select('email_address_id')
-            ->from('email_addr_bean_rel')
-            ->where($qbSubquery->expr()->eq('bean_id', $qbSubquery->createPositionalParameter($parentBeanId)))
-            ->andWhere($qbSubquery->expr()->eq('bean_module', $qbSubquery->createPositionalParameter($moduleName)))
-            ->andWhere($qbSubquery->expr()->eq('deleted', 0));
-        $query = $qb->select('id', 'email_address', 'invalid_email', 'opt_out')
-            ->from($this->table_name)
-            ->where($qb->expr()->in('id', $qb->importSubQuery($qbSubquery)))
-            ->andWhere($qb->expr()->eq('deleted', 0));
-        $stmt = $query->execute();
-        $this->stateBeforeWorkflow = array();
-        while ($row = $stmt->fetch()) {
-            $this->stateBeforeWorkflow[$row['id']] = array_diff_key($row, array('id' => null));
+        $GLOBALS['log']->deprecated('EmailAddress::stash is deprecated !');
+    }
+
+    /**
+     * Return the opt_out setting from the Email Address record supplied as a boolean. If the Email address Record
+     * does not contain an opt_out value, the local opt_out value, initialized using the System configuration
+     * default opt_out setting, is returned.
+     * @param array $emailAddr
+     * @return bool
+     */
+    protected function getEmailAddressOptoutValue($emailAddr = array())
+    {
+        if (isset($emailAddr['opt_out'])) {
+            $optOut = $this->boolVal($emailAddr['opt_out']);
+        } else {
+            $optOut = $this->opt_out;
         }
+        return $optOut;
+    }
+
+    /**
+     * Returns the boolean representation of possible sugar email address DB values.
+     * Should either be a string, integer or boolean.
+     * @param $val value to convert to a boolean
+     *
+     * @return bool
+     */
+    private function boolVal($val)
+    {
+        if (is_string($val)) {
+            return $val === '1';
+        }
+
+        if (is_numeric($val)) {
+            return $val === 1;
+        }
+
+        return boolval($val);
     }
 } // end class def
 

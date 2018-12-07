@@ -12,19 +12,28 @@
 
 namespace Sugarcrm\Sugarcrm\Console;
 
+use Sugarcrm\Sugarcrm\Console\Command\Elasticsearch\ExplainCommand;
+use Sugarcrm\Sugarcrm\Console\Command\Password\PasswordConfigCommand;
+use Sugarcrm\Sugarcrm\Console\Command\Password\PasswordResetCommand;
+use Sugarcrm\Sugarcrm\Console\Command\Password\WeakHashesCommand;
 use Sugarcrm\Sugarcrm\Console\CommandRegistry\CommandRegistry;
 use Sugarcrm\Sugarcrm\Console\Command\Api\ElasticsearchIndicesCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Api\ElasticsearchQueueCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Api\ElasticsearchRoutingCommand;
+use Sugarcrm\Sugarcrm\Console\Command\Api\ElasticsearchRefreshStatusCommand;
+use Sugarcrm\Sugarcrm\Console\Command\Api\ElasticsearchRefreshEnableCommand;
+use Sugarcrm\Sugarcrm\Console\Command\Api\ElasticsearchRefreshTriggerCommand;
+use Sugarcrm\Sugarcrm\Console\Command\Api\ElasticsearchReplicasStatusCommand;
+use Sugarcrm\Sugarcrm\Console\Command\Api\ElasticsearchReplicasEnableCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Api\SearchFieldsCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Api\SearchReindexCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Api\SearchStatusCommand;
-use Sugarcrm\Sugarcrm\Console\Command\Password\WeakHashesCommand;
-use Sugarcrm\Sugarcrm\Console\Command\Password\PasswordConfigCommand;
-use Sugarcrm\Sugarcrm\Console\Command\Password\PasswordResetCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Elasticsearch\CleanupQueueCommand;
 use Sugarcrm\Sugarcrm\Console\Command\Elasticsearch\ModuleCommand;
-use Sugarcrm\Sugarcrm\Console\Command\Elasticsearch\ExplainCommand;
+use Sugarcrm\Sugarcrm\Console\Command\Elasticsearch\SilentReindexCommand;
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Console\RebuildCommand;
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Console\StatusCommand;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -71,6 +80,8 @@ class Application extends BaseApplication
      */
     public static function create($mode)
     {
+        $container = Container::getInstance();
+
         $registry = CommandRegistry::getInstance();
 
         $registry->addCommands(array(
@@ -79,8 +90,16 @@ class Application extends BaseApplication
             new ElasticsearchQueueCommand(),
             new ElasticsearchRoutingCommand(),
             new ExplainCommand(),
+            new ElasticsearchRefreshStatusCommand(),
+            new ElasticsearchRefreshEnableCommand(),
+            new ElasticsearchRefreshTriggerCommand(),
+            new ElasticsearchReplicasStatusCommand(),
+            new ElasticsearchReplicasEnableCommand(),
+            new CleanupQueueCommand(),
+            new ModuleCommand(),
+            new SilentReindexCommand(),
 
-            // Generic Search
+            // Genreric Search
             new SearchFieldsCommand(),
             new SearchReindexCommand(),
             new SearchStatusCommand(),
@@ -89,8 +108,10 @@ class Application extends BaseApplication
             new WeakHashesCommand(),
             new PasswordConfigCommand(),
             new PasswordResetCommand(),
-            new CleanupQueueCommand(),
-            new ModuleCommand(),
+
+            //Team Security
+            new RebuildCommand(),
+            new StatusCommand(),
         ));
 
         $app = new Application();
@@ -174,7 +195,7 @@ class Application extends BaseApplication
             if (empty($sugar_version) ||
                 empty($sugar_flavor)  ||
                 empty($sugar_build)   ||
-                strpos($sugar_version, '7.9.3.0') === 0
+                strpos($sugar_version, '8.0.2') === 0
             ) {
                 return $default;
             }

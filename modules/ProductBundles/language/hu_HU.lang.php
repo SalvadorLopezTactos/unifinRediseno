@@ -39,7 +39,7 @@ $mod_strings = array (
     'LBL_DELETE_BUNDLE_BUTTON_TOOLTIP' => 'Csoport törlése',
     'LBL_DELETE_GROUP_BUTTON' => 'Csoport törlése',
     'LBL_QUOTE_DATA_EMPTY_ROW_WITH_GROUP' => 'A + menü létrehozásával hozzáadhat ehhez a csoporthoz egy sorelemet vagy megjegyzést.',
-    'LBL_QUOTE_DATA_EMPTY_ROW_DEFAULT_GROUP' => 'A + menü létrehozásával hozzáadhat egy sorelemet, megjegyzést vagy csoportot ehhez az '
+    'LBL_QUOTE_DATA_EMPTY_ROW_DEFAULT_GROUP' => 'A + létrehozás menüvel hozzáadhat egy sorelemet, megjegyzést vagy csoportot ehhez az '
         . 'ajánlathoz.',
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Az ajánlat alapértelmezett termékkötege',
     'LBL_ALERT_DELETING_ITEM' => 'Sorelem(ek) törlése',

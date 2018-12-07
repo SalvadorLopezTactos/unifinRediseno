@@ -11,8 +11,11 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Řídicí panel seznamu nabízených řádkových položek',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Řádek kampaně',
-    'LBL_MODULE_NAME' => 'Položky nabídky',
+    'LBL_MODULE_NAME' => 'Položky nabídek',
     'LBL_MODULE_NAME_SINGULAR' => 'Produkt',
     'LBL_MODULE_TITLE' => 'Verze: Domů',
     'LBL_SEARCH_FORM_TITLE' => 'Vyhledávání produktů',
@@ -35,7 +38,7 @@ $mod_strings = array(
     'LBL_LIST_QUOTE_NAME' => 'Název nabídky',
     'LBL_LIST_DATE_PURCHASED' => 'Zakoupeno',
     'LBL_LIST_SUPPORT_EXPIRES' => 'Končí',
-    'LBL_NAME' => 'Název',
+    'LBL_NAME' => 'Název:',
     'LBL_URL' => 'URL produktu:',
     'LBL_QUOTE_NAME' => 'Předmět nabídky:',
     'LBL_ASSOCIATED_QUOTE' => 'Předmět nabídky:',
@@ -123,7 +126,7 @@ $mod_strings = array(
     'LBL_SUBTOTAL' => 'Mezisoučet',
     'LBL_CONTACT' => 'Kontakt',
     'LBL_DISCOUNT_TOTAL' => 'Celková sleva',
-    'LBL_DISCOUNT_AMOUNT' => 'Výše slevy',
+    'LBL_DISCOUNT_AMOUNT' => 'Výše slevy:',
     'LBL_EXT_PRICE' => 'Rozšířená cena',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Symbol měny',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Položky nabídky',
@@ -172,4 +175,5 @@ Vytvoření {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Seznam údajů nabídky a nabízené řádkové položky',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nová nabízená řádková položka)',
     'LBL_DISCOUNT_PERCENT' => '% procent',
+    'LBL_DISCOUNT_TYPE' => 'Typ slevy',
 );

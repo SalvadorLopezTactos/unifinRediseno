@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Ieņēmumu posteņu saraksta instrumentu panelis',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Ieņēmumu posteņu ierakstu instrumentu panelis',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampaņas produkts',
     'LBL_MODULE_NAME' => 'Ieņēmumu posteņi',
     'LBL_MODULE_NAME_SINGULAR' => 'Ieņēmumu postenis',

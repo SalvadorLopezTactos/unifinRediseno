@@ -18,7 +18,11 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
-    'LNK_CONTACT_REPORTS' => 'Ver Informes de Contactos',
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Tablero de Lista de Contactos',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Tablero de Registro de Contactos',
+
+    'LNK_CONTACT_REPORTS' => 'Ver informes de contactos',
     'ERR_DELETE_RECORD' => 'Especifique el número de registro para eliminar el contacto.',
     'LBL_ACCOUNT_ID' => 'ID de la Cuenta:',
     'LBL_ACCOUNT_NAME' => 'Cuenta:',
@@ -36,7 +40,7 @@ $mod_strings = array (
     'LBL_ALT_ADDRESS_STREET' => 'Calle de dirección alternativa:',
     'LBL_ALTERNATE_ADDRESS' => 'Dirección alternativa:',
     'LBL_ANY_ADDRESS' => 'Cualquier dirección:',
-    'LBL_ANY_EMAIL' => 'Correo Electrónio:',
+    'LBL_ANY_EMAIL' => 'Correo electrónico:',
     'LBL_ANY_PHONE' => 'Cualquier Teléfono:',
     'LBL_ASSIGNED_TO_NAME' => 'Asignado a',
     'LBL_ASSIGNED_TO_ID' => 'Usuario Asignado',
@@ -147,13 +151,13 @@ $mod_strings = array (
     'LBL_TEAM_ID' => 'ID de equipo:',
     'LBL_TITLE' => 'Cargo:',
     'LNK_CREATE' => 'Crear Persona',
-    'LNK_CONTACT_LIST' => 'Ver Contactos',
-    'LNK_IMPORT_VCARD' => 'Crear Contacto desde vCard',
+    'LNK_CONTACT_LIST' => 'Ver contactos',
+    'LNK_IMPORT_VCARD' => 'Crear contacto desde vCard',
     'LNK_NEW_ACCOUNT' => 'Crear Cuenta',
     'LNK_NEW_APPOINTMENT' => 'Crear Cita',
     'LNK_NEW_CALL' => 'Registrar Llamada',
     'LNK_NEW_CASE' => 'Crear Caso',
-    'LNK_NEW_CONTACT' => 'Crear Contacto',
+    'LNK_NEW_CONTACT' => 'Crear contacto',
     'LNK_NEW_EMAIL' => 'Archivar Correo Electrónico',
     'LNK_NEW_MEETING' => 'Programar Reunión',
     'LNK_NEW_NOTE' => 'Crear Nota',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Copiar dirección alternativa a dirección principal',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Copiar dirección principal a dirección alternativa',
     'NTC_DELETE_CONFIRMATION' => '¿Está seguro de que quiere eliminar este registro?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'La creación de una oportunidad requiere una Cuenta.\n Por favor, cree una nueva Cuenta o seleccione una existente.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'La creación de una oportunidad requiere una Cuenta.\\n Por favor, cree una nueva Cuenta o seleccione una existente.',
     'NTC_REMOVE_CONFIRMATION' => '¿Está seguro de que desea eliminar este Contacto del Caso?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '¿Está seguro de que desea eliminar este registro como un informador directo?',
 
@@ -202,7 +206,7 @@ $mod_strings = array (
     'LBL_CONTACTS_SUBPANEL_TITLE' => 'Contactos',
     'LBL_PROJECT_SUBPANEL_TITLE' => 'Proyectos',
     'LBL_CAMPAIGNS_SUBPANEL_TITLE' => 'Campañas',
-    'LNK_IMPORT_CONTACTS' => 'Importar Contactos',
+    'LNK_IMPORT_CONTACTS' => 'Importar contactos',
 
     //For export labels
     'LBL_PHONE_HOME' => 'Teléfono Particular',
@@ -273,4 +277,6 @@ Para crear un {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Puntuación del Prospecto',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Informes de contactos',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Ha consentido los fines comerciales',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consentimiento actualizado por última vez',
 );

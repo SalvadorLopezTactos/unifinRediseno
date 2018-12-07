@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Fel: Det finns inga modulfält som har kopplats för visning på resultatet. Var snäll och kontakta din system administratör.',
     'LBL_INFO_INLINE' => 'Info' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Stäng' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'Ingen anslutning hittades för det angivna käll-ID: t.',
 );
 

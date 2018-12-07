@@ -553,7 +553,7 @@ class VardefManager{
             $cache = self::$cache ?: self::$cache = new MetaDataCache(DBManagerFactory::getInstance());
             $cache->set(static::getCacheKey($module, $object), $GLOBALS['dictionary'][$object]);
         } else {
-            $file = self::getCacheFileName($module, $object);
+            $file = create_cache_directory(self::getCacheFileName($module, $object));
 
             $out="<?php \n \$GLOBALS[\"dictionary\"][\"". $object . "\"]=" . var_export($GLOBALS['dictionary'][$object], true) .";";
             sugar_file_put_contents_atomic($file, $out);
@@ -624,7 +624,7 @@ class VardefManager{
                 $cache = self::$cache ?: self::$cache = new MetaDataCache(DBManagerFactory::getInstance());
                 $cache->set(static::getCacheKey($module_dir, $object_name), null);
             } else {
-                $file = self::getCacheFileName($module_dir, $object_name);
+                $file = sugar_cached(self::getCacheFileName($module_dir, $object_name));
                 if (file_exists($file)) {
                     unlink($file);
                 }
@@ -711,6 +711,20 @@ class VardefManager{
             $df->buildCache($module, false);
         }
 
+        if (!isset($GLOBALS['dictionary'][$object]['has_pii_fields'])
+            && !empty($GLOBALS['dictionary'][$object]['fields'])) {
+            $hasPiiFields = false;
+
+            foreach ($GLOBALS['dictionary'][$object]['fields'] as $definition) {
+                if (!empty($definition['pii'])) {
+                    $hasPiiFields = true;
+                    break;
+                }
+            }
+
+            $GLOBALS['dictionary'][$object]['has_pii_fields'] = $hasPiiFields;
+        }
+
         // if we are currently rebuilding the relationships, we don't want `updateRelCFModules` to be called
         // as it will fail when trying to look up relationships as they my have not been loaded into the
         // cache yet
@@ -765,7 +779,7 @@ class VardefManager{
      * @param  $object
      * @return array|bool  returns a list of all fields in the module of type 'link'.
      */
-    protected static function getLinkFieldsForModule($module, $object)
+    public static function getLinkFieldsForModule($module, $object)
     {
         global $dictionary;
         //Some modules like cases have a bean name that doesn't match the object name
@@ -862,23 +876,60 @@ class VardefManager{
     }
 
     /**
+     * Returns a list of link names for the collection field.
+     *
+     * @param string $module
+     * @param string $objectName
+     * @param string $collectionName The name of the collection field.
+     * @return array
+     */
+    public static function getLinkFieldsForCollection($module, $objectName, $collectionName)
+    {
+        $cacheKey = "LFC{$module}{$objectName}{$collectionName}";
+        $cacheValue = sugar_cache_retrieve($cacheKey);
+
+        if (!empty($cacheValue)) {
+            return $cacheValue;
+        }
+
+        $links = array();
+
+        if (empty($GLOBALS['dictionary'][$objectName])) {
+            static::loadVardef($module, $objectName, false, array('ignore_rel_calc_fields' => true));
+        }
+
+        if (!empty($GLOBALS['dictionary'][$objectName]['fields'][$collectionName]) &&
+            $GLOBALS['dictionary'][$objectName]['fields'][$collectionName]['type'] === 'collection' &&
+            !empty($GLOBALS['dictionary'][$objectName]['fields'][$collectionName]['links'])
+        ) {
+            foreach ($GLOBALS['dictionary'][$objectName]['fields'][$collectionName]['links'] as $def) {
+                $links[] = is_array($def) ? $def['name'] : $def;
+            }
+        }
+
+        return $links;
+    }
+
+    /**
      * @static
      * @param  $module String name of module.
      * @param  $object String name of module Bean.
      * Updates a list of link fields which have relationships to modules with calculated fields
      * that use this module. Needed to cause an update to those modules when this module is updated.
-     * @return bool
      */
-    protected static function updateRelCFModules($module, $object){
+    protected static function updateRelCFModules($module, $object)
+    {
         global $dictionary, $beanList;
-        if (empty($dictionary[$object]) || empty($dictionary[$object]['fields']))
-            return false;
+
+        if (!isset($dictionary[$object]['fields'])) {
+            return;
+        }
 
         $linkFields = self::getLinkFieldsForModule($module, $object);
-        if (empty($linkFields))
-        {
+
+        if (empty($linkFields)) {
             $dictionary[$object]['related_calc_fields'] = array();
-            return false;
+            return;
         }
 
         $linksWithCFs = array();
@@ -888,7 +939,6 @@ class VardefManager{
             $relName = $def['relationship'];
 
             //Start by getting the relation
-            $relDef = false;
             if (!empty($def['module']))
                 $relMod = $def['module'];
             else {
@@ -928,8 +978,6 @@ class VardefManager{
 
         $dictionary[$object]['related_calc_fields'] = array_keys($linksWithCFs);
     }
-
-
 
     /**
      * @static
@@ -1073,11 +1121,9 @@ class VardefManager{
             $cache = self::$cache ?: self::$cache = new MetaDataCache(DBManagerFactory::getInstance());
             $GLOBALS['dictionary'][$object] = $cache->get(static::getCacheKey($module, $object));
         } else {
-            $cachedfile = self::getCacheFileName($module, $object);
-            if(file_exists($cachedfile)){
-                if(file_exists($cachedfile)) {
-                    @include($cachedfile);
-                }
+            $cachedfile = sugar_cached(self::getCacheFileName($module, $object));
+            if (file_exists($cachedfile)) {
+                include $cachedfile;
             }
         }
     }
@@ -1114,10 +1160,10 @@ class VardefManager{
     static function getCacheFileName($module, $object){
         global $beanList, $beanFiles;
         if (isset($beanList[$module]) && isset($beanFiles[$beanList[$module]])) {
-            $pi = pathinfo($beanFiles[$beanList[$module]]);
-            return create_cache_directory($pi['dirname'] . "/" . $object . 'vardefs.php');
+            $dirname = dirname($beanFiles[$beanList[$module]]);
+            return $dirname . "/" . $object . 'vardefs.php';
         } else {
-            return create_cache_directory('modules/' . $module . '/' . $object . 'vardefs.php');
+            return 'modules/' . $module . '/' . $object . 'vardefs.php';
         }
     }
 
@@ -1126,4 +1172,31 @@ class VardefManager{
         return "vardefs::{$module}_{$object}";
     }
 
+    /**
+     * Does the specified module use the specified templates?
+     *
+     * @param string $module
+     * @param string|array $templates
+     * @return bool The module must use all of the specified templates to return true.
+     */
+    public static function usesTemplate($module, $templates)
+    {
+        if (!is_array($templates)) {
+            $templates = array($templates);
+        }
+
+        $objectName = BeanFactory::getObjectName($module);
+
+        if (empty($GLOBALS['dictionary'][$objectName])) {
+            static::loadVardef($module, $objectName);
+        }
+
+        foreach ($templates as $template) {
+            if (empty($GLOBALS['dictionary'][$objectName]['templates'][$template])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

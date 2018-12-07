@@ -43,6 +43,7 @@
                 if (!_.isEmpty(relatedFields)) {
                     model.relatedAttributes = model.relatedAttributes || {};
                     _.each(relatedFields, function(field) {
+                        var attrs = {};
                         var parentValue = parentModel.get(field.rname);
                         if (!parentValue && parentModel.fields[field.rname] &&
                             parentModel.fields[field.rname].type == 'fullname'
@@ -50,8 +51,12 @@
                             parentValue = parentModel.get('full_name')
                                 || app.utils.formatNameLocale(parentModel.attributes);
                         }
-                        model.set(field.name, parentValue);
-                        model.set(field.id_name, parentModel.get('id'));
+                        attrs[field.name] = parentValue;
+                        attrs[field.id_name] = parentModel.get('id');
+                        if (field.link) {
+                            attrs[field.link] = parentModel.toJSON();
+                        }
+                        model.set(attrs);
                         model.relatedAttributes[field.name] = parentModel.get(field.rname);
                         model.relatedAttributes[field.id_name] = parentModel.get('id');
 
@@ -161,21 +166,17 @@
             //default to populating the parent field as that record
             populateParentFields: function(model, parentModel) {
                 var parentModule = parentModel.module || parentModel.get("module") || parentModel.get("_module");
-                _.each(model.fields, function(def, name) {
-                    if (def.type && def.type == "parent") {
+                _.each(model.fields, function(def) {
+                    if (def.type && def.type === 'parent') {
                         if (app.lang.getAppListStrings(def.options)[parentModule]) {
-                            model.set(def.type_name, parentModule);
-                            if (parentModel.get("id")) {
-                                model.set(def.id_name, parentModel.get("id"));
-                                //parent_name is hard coded server side to map to these three name fields
-                                model.set(def.name,
-                                    parentModel.get("full_name")
-                                        || parentModel.get("document_name")
-                                        || parentModel.get("name")
-                                        || app.utils.formatNameLocale(parentModel.attributes)
-                                        || ""
-                                );
+                            var attributes = {};
+                            attributes[def.type_name] = parentModule;
+                            if (parentModel.get('id')) {
+                                attributes[def.id_name] = parentModel.get('id');
+                                attributes[def.name] = app.utils.getRecordName(parentModel);
+                                attributes.parent = parentModel.toJSON();
                             }
+                            model.set(attributes);
                         }
                     }
                 });

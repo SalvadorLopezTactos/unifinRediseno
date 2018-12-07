@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LISTA_E-MAIL_ADRESA',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Kontrolna tabla liste potencijalnih klijenata',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa potencijalnih klijenata',
+
     'ERR_DELETE_RECORD' => 'en_us Morate navesti broj zapisa da bi obrisali potencijalnog klijenta.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Opis kompanije',
     'LBL_ACCOUNT_ID'=>'ID broj kompanije',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Iznos prodajne prilike:',
     'LBL_OPPORTUNITY_ID'=>'ID broj Prodajne prilike:',
     'LBL_OPPORTUNITY_NAME' => 'Ime prodajne prilike:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Drugi Email:',
     'LBL_OTHER_PHONE' => 'Drugi telefon:',
     'LBL_PHONE' => 'Telefon:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiraj alternativnu adresu u primarnu adresu',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiraj primarnu u alternativnu adresu',
     'NTC_DELETE_CONFIRMATION' => 'Da li ste sigurni da želite da obrišete ovaj zapis?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Za kreiranje prodajne prilike neophodna je kompanija.\n Molim, kreirajte novu kompaniju ili odaberite neku postojeću.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Za kreiranje prodajne prilike neophodna je kompanija.\\n Molim, kreirajte novu kompaniju ili odaberite neku postojeću.',
     'NTC_REMOVE_CONFIRMATION' => 'Da li ste sigurni da želite da obrišete ovog potencijalnog klijenta iz ovog slučaja?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Da li ste sigurni da želite da uklonite ovaj zapis kao direktni izveštaj?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Kampanje',
@@ -314,4 +320,6 @@ After confirming each required and desired module, click the Save and Convert bu
     'LBL_MKTO_LEAD_SCORE' => 'Vodeći Rezultat',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Vodeći izveštaji',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Pristanak u poslovne svrhe za',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Poslednje ažuriranje pristanka',
 );

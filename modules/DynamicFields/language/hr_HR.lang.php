@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'Zadani URL',
 	'COLUMN_TITLE_AUDIT' =>'Nadzor',
+    'COLUMN_TITLE_PII' => 'Osobni podaci',
     'COLUMN_TITLE_FTS' =>'Cijeli tekst koji je moguće pretraživati',
     'COLUMN_TITLE_FTS_BOOST' => 'Pojačaj vrijednost',
 	'COLUMN_TITLE_REPORTABLE' => 'Izvještajno',

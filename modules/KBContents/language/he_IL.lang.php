@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'לוח המחוונים של רשימת מאגר המידע',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'לוח המחוונים של רשומת מאגר המידע',
+
     'LBL_MODULE_NAME' => 'מרכז מידע',
     'LBL_MODULE_NAME_SINGULAR' => 'מאמר במרכז המידע',
     'LBL_MODULE_TITLE' => 'מאמר במרכז המידע',

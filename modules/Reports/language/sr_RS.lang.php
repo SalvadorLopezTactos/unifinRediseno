@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Po kvartalu',
     'LBL_BY_FISCAL_YEAR' => 'Po fiskalnoj godini',
     'LBL_BY_FISCAL_QUARTER' => 'Po fiskalnom kvartalu',
+    'LBL_AMOUNT' => 'Iznos',
     'LBL_COUNT' => 'Broj',
+    'LBL_PERCENT' => 'Procenat',
     'LBL_SUM' => 'SUM',
     'LBL_AVG' => 'AVG',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Mesec',
     'LBL_YEAR' => 'Godina',
     'LBL_QUARTER' => 'Kvartal',
+    'LBL_FISCAL' => 'Fiskalno',
     'LBL_FISCAL_YEAR' => 'Fiskalna godina',
     'LBL_FISCAL_QUARTER' => 'Fiskalni kvartal',
 	'LBL_YESTERDAY'=>'Juče',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Sledećeg kvartala',
     'LBL_ADD_RELATE' => "Dodaj povezani",
     'LBL_DEL_THIS' => "Ukloni",
-    'LBL_ALERT_CANT_ADD' => 'Ne možete dodati povezane module dok ne označite tabelu za koju su vezani. \nIzaberite modul iz padajućeg menija sa leve strane dugmeta &#39;Dodaj povezane&#39; na koje ste kliknuli.',
+    'LBL_ALERT_CANT_ADD' => 'Ne možete dodati povezane module dok ne označite tabelu za koju su vezani. \\nIzaberite modul iz padajućeg menija sa leve strane dugmeta &#39;Dodaj povezane&#39; na koje ste kliknuli.',
     'LBL_BY_DAY' => 'Po danu',
     'LBL_DAY' => 'Dan',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Opcioni povezani moduli',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Veće od jednako',
 
     'LBL_FILTER_BY_MODULE' => 'Po Modulu',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Sa grafikonima',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Greška pri preuzimanju izveštaja o detaljnoj analizi za ovu radnju. Kontaktirajte vlasnika izveštaja za pomoć.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Detaljna analiza nije dostupna',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'Prikaz liste prikazuje sve izveštaje koji odgovaraju trenutnim kriterijumima pretraživanja i kojima korisnici imaju pristup. Možete da vidite osnovne detalje o svakom izveštaju unutar kolona polja prikaza liste i u pregledu. Možete da postavite oznake za izveštaj i da kreirate filtere. Kliknite na naziv izveštaja da bi se prikazao ili odaberite „Uredi izveštaj” u meniju radnji da biste izmenili izveštaj.',
+  );

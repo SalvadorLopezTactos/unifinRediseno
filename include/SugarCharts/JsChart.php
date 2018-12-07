@@ -82,16 +82,17 @@ class JsChart extends SugarChart {
 		$dimensions = $this->getChartDimensions($xmlStr);
 		$this->ss->assign("width", $dimensions['width']);
 		$this->ss->assign("height", $dimensions['height']);
-		$config = $this->getConfigProperties();
-		$style['gridLineColor'] = str_replace("0x","#",$config->gridLines);
-		$style['font-family'] = $config->labelFontFamily;
-		$style['color'] = str_replace("0x","#",$config->labelFontColor);
+        $xmlStyles = $this->getConfigProperties();
+        $style['gridLineColor'] = str_replace("0x", "#", $xmlStyles->gridLines);
+        $style['font-family'] = $xmlStyles->labelFontFamily;
+        $style['color'] = str_replace("0x", "#", $xmlStyles->labelFontColor);
 		$this->ss->assign("css", $style);
 		foreach($this->getChartConfigParams($xmlStr) as $key => $value) {
 			$chartConfig[$key] = $value;
 		}
 		$chartConfig['imageExportType'] = $this->image_export_type;
 		$this->ss->assign("config", $chartConfig);
+        $this->ss->assign("params", $this->chart_properties);
 		if($json == "No Data") {
 			$this->ss->assign("error", $app_strings['LBL_NO_DATA']);
 		}
@@ -169,7 +170,7 @@ class JsChart extends SugarChart {
 		if($chartType == "pie chart") {
 			return array ("pieType" => "basic","tip" => "name","chartType" => "pieChart");
 		} elseif($chartType == "line chart") {
-			return array ("lineType" => "basic","tip" => "name","chartType" => "lineChart");
+            return array ("lineType" => "grouped","tip" => "name","chartType" => "lineChart");
 		} elseif($chartType == "funnel chart 3D") {
 			return array ("funnelType" => "basic","tip" => "name","chartType" => "funnelChart");
 		} elseif($chartType == "gauge chart") {
@@ -545,7 +546,7 @@ class JsChart extends SugarChart {
 			$content .= "\n}";
 
             // fix-up the json since it's not valid json for JS or PHP
-            $content = str_replace(array("\t", "\n", "'"), array("","",'"'), $content);
+            $content = str_replace(array("\t", "\n", "\'"), array("","","'"), $content);
 
 			return $content;
 		} else {

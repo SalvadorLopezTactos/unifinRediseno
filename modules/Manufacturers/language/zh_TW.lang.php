@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => '您必須指定記錄編號才能刪除製造商。',
   'NTC_STATUS' => '將狀態設為「非使用」，從「製造商」下拉式清單中移除此製造商',
   'NTC_LIST_ORDER' => '設定此製造商在「製造商」下拉式清單中的顯示順序',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => '使用中',
-    'Inactive' => '非使用中',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'匯入製造商',
 	'LBL_EDITLAYOUT' => '編輯配置' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => '營收項目',

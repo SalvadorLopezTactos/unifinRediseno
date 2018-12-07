@@ -3,6 +3,8 @@
 /*
 Modification information for LGPL compliance
 
+[BR-5942] Removed the PHP proxy objects generation functionality as vulnerable to RCE
+
 commit 1144e041b6075ac46197dbd601998f7977e84d91
 Author: csezheng <ezheng@sugarcrm.com>
 Date:   Wed Sep 2 23:45:08 2015 -0700
@@ -304,24 +306,6 @@ http://www.nusphere.com
  *	RFC 2068 Hypertext Transfer Protocol -- HTTP/1.1
  *	RFC 2617 HTTP Authentication: Basic and Digest Access Authentication
  */
-
-/* load classes
-
-// necessary classes
-require_once('class.soapclient.php');
-require_once('class.soap_val.php');
-require_once('class.soap_parser.php');
-require_once('class.soap_fault.php');
-
-// transport classes
-require_once('class.soap_transport_http.php');
-
-// optional add-on classes
-require_once('class.xmlschema.php');
-require_once('class.wsdl.php');
-
-// server class
-require_once('class.soap_server.php');*/
 
 // class variable emulation
 // cf. http://www.webkreator.com/php/techniques/php-static-class-variables.html
@@ -9789,125 +9773,6 @@ class nusoap_client extends nusoap_base  {
 	*/
 	function setDefaultRpcParams($rpcParams) {
 		$this->defaultRpcParams = $rpcParams;
-	}
-
-	/**
-	* dynamically creates an instance of a proxy class,
-	* allowing user to directly call methods from wsdl
-	*
-	* @return   object soap_proxy object
-	* @access   public
-	*/
-	function getProxy() {
-		$r = rand();
-		$evalStr = $this->_getProxyClassCode($r);
-		//$this->debug("proxy class: $evalStr");
-		if ($this->getError()) {
-			$this->debug("Error from _getProxyClassCode, so return NULL");
-			return null;
-		}
-		// eval the class
-		eval($evalStr);
-		// instantiate proxy object
-		eval("\$proxy = new nusoap_proxy_$r('');");
-		// transfer current wsdl data to the proxy thereby avoiding parsing the wsdl twice
-		$proxy->endpointType = 'wsdl';
-		$proxy->wsdlFile = $this->wsdlFile;
-		$proxy->wsdl = $this->wsdl;
-		$proxy->operations = $this->operations;
-		$proxy->defaultRpcParams = $this->defaultRpcParams;
-		// transfer other state
-		$proxy->soap_defencoding = $this->soap_defencoding;
-		$proxy->username = $this->username;
-		$proxy->password = $this->password;
-		$proxy->authtype = $this->authtype;
-		$proxy->certRequest = $this->certRequest;
-		$proxy->requestHeaders = $this->requestHeaders;
-		$proxy->endpoint = $this->endpoint;
-		$proxy->forceEndpoint = $this->forceEndpoint;
-		$proxy->proxyhost = $this->proxyhost;
-		$proxy->proxyport = $this->proxyport;
-		$proxy->proxyusername = $this->proxyusername;
-		$proxy->proxypassword = $this->proxypassword;
-		$proxy->http_encoding = $this->http_encoding;
-		$proxy->timeout = $this->timeout;
-		$proxy->response_timeout = $this->response_timeout;
-		$proxy->persistentConnection = &$this->persistentConnection;
-		$proxy->decode_utf8 = $this->decode_utf8;
-		$proxy->curl_options = $this->curl_options;
-		$proxy->bindingType = $this->bindingType;
-		$proxy->use_curl = $this->use_curl;
-		return $proxy;
-	}
-
-	/**
-	* dynamically creates proxy class code
-	*
-	* @return   string PHP/NuSOAP code for the proxy class
-	* @access   private
-	*/
-	function _getProxyClassCode($r) {
-		$this->debug("in getProxy endpointType=$this->endpointType");
-		$this->appendDebug("wsdl=" . $this->varDump($this->wsdl));
-		if ($this->endpointType != 'wsdl') {
-			$evalStr = 'A proxy can only be created for a WSDL client';
-			$this->setError($evalStr);
-			$evalStr = "echo \"$evalStr\";";
-			return $evalStr;
-		}
-		if ($this->endpointType == 'wsdl' && is_null($this->wsdl)) {
-			$this->loadWSDL();
-			if ($this->getError()) {
-				return "echo \"" . $this->getError() . "\";";
-			}
-		}
-		$evalStr = '';
-		foreach ($this->operations as $operation => $opData) {
-			if ($operation != '') {
-				// create param string and param comment string
-				if (sizeof($opData['input']['parts']) > 0) {
-					$paramStr = '';
-					$paramArrayStr = '';
-					$paramCommentStr = '';
-					foreach ($opData['input']['parts'] as $name => $type) {
-						$paramStr .= "\$$name, ";
-						$paramArrayStr .= "'$name' => \$$name, ";
-						$paramCommentStr .= "$type \$$name, ";
-					}
-					$paramStr = substr($paramStr, 0, strlen($paramStr)-2);
-					$paramArrayStr = substr($paramArrayStr, 0, strlen($paramArrayStr)-2);
-					$paramCommentStr = substr($paramCommentStr, 0, strlen($paramCommentStr)-2);
-				} else {
-					$paramStr = '';
-					$paramArrayStr = '';
-					$paramCommentStr = 'void';
-				}
-				$opData['namespace'] = !isset($opData['namespace']) ? 'http://testuri.com' : $opData['namespace'];
-				$evalStr .= "// $paramCommentStr
-	function " . str_replace('.', '__', $operation) . "($paramStr) {
-		\$params = array($paramArrayStr);
-		return \$this->call('$operation', \$params, '".$opData['namespace']."', '".(isset($opData['soapAction']) ? $opData['soapAction'] : '')."');
-	}
-	";
-				unset($paramStr);
-				unset($paramCommentStr);
-			}
-		}
-		$evalStr = 'class nusoap_proxy_'.$r.' extends nusoap_client {
-	'.$evalStr.'
-}';
-		return $evalStr;
-	}
-
-	/**
-	* dynamically creates proxy class code
-	*
-	* @return   string PHP/NuSOAP code for the proxy class
-	* @access   public
-	*/
-	function getProxyClassCode() {
-		$r = rand();
-		return $this->_getProxyClassCode($r);
 	}
 
 	/**

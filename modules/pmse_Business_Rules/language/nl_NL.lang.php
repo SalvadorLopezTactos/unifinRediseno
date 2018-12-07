@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Proces bedrijfsregels',
   'LBL_MODULE_TITLE' => 'Proces bedrijfsregels',
   'LBL_MODULE_NAME_SINGULAR' => 'Proces bedrijfsregel',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Voorwaarden',
     'LBL_PMSE_LABEL_RETURN' => 'Terug',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Gevolgen',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Veld veranderen',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Retourwaarde',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Voeg conditie toe',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Voeg Gevolg toe',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Voeg rij toe',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Kolom verwijderen',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Vereiste verwijderen',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Conclusie verwijderen',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Kolomgegevens verwijderen',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Ja',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Nee',

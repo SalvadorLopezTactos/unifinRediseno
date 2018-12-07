@@ -8,25 +8,27 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*globals Panel, $, Proxy, TextField, ComboboxField, HiddenField, EmailPickerField, ItemMatrixField, MultipleItemField,
-    CriteriaField, ItemUpdaterField, ExpressionField, TextareaField, CheckboxField, Button, RadiobuttonField */
+// jscs:disable
+/*globals PMSE.Panel, $, PMSE.Proxy, TextField, ComboboxField, HiddenField, EmailPickerField, ItemMatrixField, MultipleItemField,
+    CriteriaField, ItemUpdaterField, ExpressionField, TextareaField, CheckboxField, PMSE.Button, RadiobuttonField */
+var PMSE = PMSE || {};
 /**
  * @class ReassignForm
  * Handles form panels
- * @extend Panel
+ * @extends PMSE.Panel
  *
  * @constructor
  * Creates a new instance of the object
  * @param {Object} options
  */
 var ReassignForm = function (options) {
-    Form.call(this, options);
+    PMSE.Form.call(this, options);
 
 
     ReassignForm.prototype.initObject.call(this, options);
 };
 
-ReassignForm.prototype = new Form();
+ReassignForm.prototype = new PMSE.Form();
 
 /**
  * Defines the object's type

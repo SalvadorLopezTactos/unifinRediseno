@@ -94,7 +94,7 @@ class SearchForm {
                                   'link'   => $module . '|advanced_search',
                                   'key'    => $module . '|advanced_search'));
 
-        if(SugarAutoLoader::fileExists('modules/'.$this->module.'/index.php')){
+        if (file_exists('modules/'.$this->module.'/index.php')) {
             $this->tabs[] = array('title'  => $app_strings['LNK_SAVED_VIEWS'],
                                   'link'   => $module . '|saved_views',
                                   'key'    => $module . '|saved_views');

@@ -122,23 +122,27 @@
 
     /**
      * Executes assigned handlers when user clicks `cancel`.
+     *
+     * @param {Event} [event]
      */
-    cancelClicked: function() {
+    cancelClicked: function(event) {
         this.cancel();
         app.events.trigger('alert:cancel:clicked');
         if (_.isFunction(this.onCancel)) {
-            this.onCancel();
+            this.onCancel(event);
         }
     },
 
     /**
      * Executes assigned handlers when user clicks `confirm`.
+     *
+     * @param {Event} [event]
      */
-    confirmClicked: function() {
+    confirmClicked: function(event) {
         this.cancel();
         app.events.trigger('alert:confirm:clicked');
         if (_.isFunction(this.onConfirm)) {
-            this.onConfirm();
+            this.onConfirm(event);
         }
     },
 
@@ -159,7 +163,7 @@
      */
     closeClicked: function(event) {
         if (_.isFunction(this.onClose)) {
-            this.onClose();
+            this.onClose(event);
         }
         app.alert.dismiss(this.key);
     },

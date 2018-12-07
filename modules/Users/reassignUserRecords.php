@@ -56,7 +56,6 @@ if(empty($fromuser) && !isset($_GET['execute'])){
 	$exclude_modules = array(
 		"ImportMap",
 		"UsersLastImport",
-		"Dashboard",
 		"SavedSearch",
 		"UserPreference",
 	    "SugarFavorites",
@@ -382,8 +381,13 @@ else if(!isset($_GET['execute'])){
                             continue;
                         }
 
-                        //Also check condition where default selected was the only thing and set to none
-                        if(count($_POST[$metaName]) == 1 && empty($_POST[$metaName][0])) {
+                        // Also check condition where default selected was the
+                        // only thing and set to none. However, we need to
+                        // exclude '0', since '0' is considered by php
+                        // to be empty, but in our logic, it is a valid value.
+                        if (count($_POST[$metaName]) == 1 &&
+                            empty($_POST[$metaName][0]) &&
+                            $_POST[$metaName][0] !== '0') {
                             continue;
                         }
 
@@ -537,7 +541,7 @@ else if(isset($_GET['execute']) && $_GET['execute'] == true) {
 		}
 		echo "</td></tr></table>\n";
 	}
-	Activity::enable();
+    Activity::restoreToPreviousState();
 	echo "<BR><input type=button class=\"button\" value=\"{$mod_strings_users['LBL_REASS_BUTTON_RETURN']}\" onclick='document.location=\"index.php?module=Users&action=reassignUserRecords\"'>\n";
 
 /////////////////// END STEP 3 - Execute reassignment ///////////////////////

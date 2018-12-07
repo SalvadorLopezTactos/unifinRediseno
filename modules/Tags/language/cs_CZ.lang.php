@@ -13,9 +13,9 @@ $mod_strings = array(
     'LBL_MODULE_NAME' => 'Tagy',
     'LBL_GENERIC_LINK' => 'Související objekty',
     'LBL_NAME_LOWER' => 'Název značky malými písmeny',
-    'LNK_NEW_TAG' => 'Vytvořit značku',
-    'LNK_TAG_LIST' => 'Zobrazit značky',
-    'LNK_IMPORT_TAGS' => 'Importovat značky',
+    'LNK_NEW_TAG' => 'Vytvořit tag',
+    'LNK_TAG_LIST' => 'Zobrazit tagy',
+    'LNK_IMPORT_TAGS' => 'Importovat tagy',
     'LBL_DUPLICATES_FOUND' => 'Nalezena duplicitní značka. Opakujte akci vybráním položky Storno, nebo níže vyberte existující značku.',
     'LBL_EDIT_DUPLICATE_FOUND' => 'Nalezena duplicitní značka. Přejmenujte značku nebo opakujte akci.',
     // Dynamic subpanels, OOTB

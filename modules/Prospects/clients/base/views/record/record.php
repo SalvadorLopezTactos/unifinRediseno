@@ -113,6 +113,13 @@ $viewdefs['Prospects']['base']['view']['record'] = array(
                     'acl_action' => 'view',
                 ),
                 array(
+                    'type' => 'rowaction',
+                    'event' => 'button:audit_button:click',
+                    'name' => 'audit_button',
+                    'label' => 'LNK_VIEW_CHANGE_LOG',
+                    'acl_action' => 'view',
+                ),
+                array(
                     'type' => 'divider',
                 ),
                 array(
@@ -141,7 +148,7 @@ $viewdefs['Prospects']['base']['view']['record'] = array(
                     'dismiss_label' => true,
                 ),
                 array(
-                    'name' => 'full_name',
+                    'name' => 'name',
                     'type' => 'fullname',
                     'label' => 'LBL_NAME',
                     'dismiss_label' => true,

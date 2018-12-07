@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Dashboard elenco lead',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Dashboard record lead',
+
     'ERR_DELETE_RECORD' => 'Per eliminare il lead deve essere specificato il numero del record.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Descrizione Azienda',
     'LBL_ACCOUNT_ID'=>'ID Azienda',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Valore Opportunità:',
     'LBL_OPPORTUNITY_ID'=>'ID Opportunità',
     'LBL_OPPORTUNITY_NAME' => 'Nome Opportunità:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Altra Email:',
     'LBL_OTHER_PHONE' => 'Altro Telefono:',
     'LBL_PHONE' => 'Telefono:',
@@ -307,4 +313,6 @@ Per creare un {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Punteggio Lead',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Report Lead',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Scopi commerciali consentiti per',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ultimo aggiornamento consenso',
 );

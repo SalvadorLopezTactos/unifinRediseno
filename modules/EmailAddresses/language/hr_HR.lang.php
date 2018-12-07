@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'Datum stvaranja',
     'LBL_DATE_MODIFIED' => 'Datum izmjene',
     'LBL_DELETED' => 'Izbriši',
+    'LBL_MODULE_NAME' => 'Adrese e-pošte',
+    'LBL_MODULE_NAME_SINGULAR' => 'Adresa e-pošte',
 );

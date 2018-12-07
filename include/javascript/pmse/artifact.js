@@ -8,8 +8,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*global jCore, AdamShape, AdamArtifactResizeBehavior, $, Action
+/*global jCore, AdamShape, AdamArtifactResizeBehavior, $, PMSE.Action
  */
+var PMSE = PMSE || {};
 /**
  * @class AdamArtifact
  * Handle BPMN Text Annotations
@@ -171,7 +172,7 @@ AdamArtifact.prototype.getContextMenu = function () {
     var deleteAction,
         self = this;
 
-    deleteAction = new Action({
+    deleteAction = new PMSE.Action({
         text: 'Delete',
         cssStyle: 'adam-menu-icon-delete',
         handler: function () {

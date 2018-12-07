@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'AW:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Benutzername oder Passwort inkorrekt',
-	'ERR_BODY_TOO_LONG'		=> '\rTextkörper zu lang, um die GANZE E-Mail zu speichern. Abgeschnitten.',
+	'ERR_BODY_TOO_LONG'		=> '\\rTextkörper zu lang, um die GANZE E-Mail zu speichern. Abgeschnitten.',
 	'ERR_INI_ZLIB'			=> 'Konnte Zlib-Komprimierung nicht ausschalten. "Einstellungen testen" könnte fehlschlagen.',
 	'ERR_MAILBOX_FAIL'		=> 'Konnte keine E-Mail-Konten finden.',
 	'ERR_NO_IMAP'			=> 'Keine IMAP-Bibliotheken gefunden. Bitte korrigieren Sie das, bevor Sie mit eingehenden E-Mails weiterarbeiten',

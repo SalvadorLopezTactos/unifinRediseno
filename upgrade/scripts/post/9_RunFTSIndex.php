@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Elastica\Exception\ResponseException;
+use Elastica\Request;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\Engine\Elastic;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Index;
@@ -27,9 +29,21 @@ class SugarUpgradeRunFTSIndex extends UpgradeScript
      */
     public function run()
     {
-        if (version_compare($this->from_version, '7.7', '<')) {
+        $esVersion = $this->getEsVersion();
+        if (empty($esVersion)) {
+            return;
+        }
+
+        if (version_compare($this->from_version, '7.10', '<')
+            || (version_compare($this->from_version, '8.0.0', '<=') && version_compare($esVersion, '6.0', '>='))
+        ) {
+            // do full elastic index if
+            // old sugar version < 7.10
+            // or old sugar version <=8.0.0 and Elastic version is 6.x
             $this->dropExistingIndex();
             $this->runFTSIndex();
+        } elseif (version_compare($this->from_version, '8.0.0', '<')) {
+            $this->updateIndexMapping();
         }
     }
 
@@ -54,23 +68,63 @@ class SugarUpgradeRunFTSIndex extends UpgradeScript
      */
     public function dropExistingIndex()
     {
-        //the old index name is unique_key from sugar config
-        $name = \SugarConfig::getInstance()->get('unique_key', 'sugarcrm');
-
         $engine = SearchEngine::getInstance()->getEngine();
         if ($engine instanceof Elastic) {
+            //the old index name is unique_key from sugar config
+            $name = \SugarConfig::getInstance()->get('unique_key', 'sugarcrm');
             try {
                 $client = $engine->getContainer()->client;
                 $index = new Index($client, $name);
-                if ($index->exists()) {
-                    $index->delete();
-                    $this->log("SugarUpgradeRunFTSIndex: the existing index {$name} is deleted.");
-                } else {
-                    $this->log("SugarUpgradeRunFTSIndex: the index {$name} does not exist.");
-                }
+                $index->delete();
+                $this->log("SugarUpgradeRunFTSIndex: the existing index {$name} is deleted.");
             } catch (Exception $e) {
-                $this->log("SugarUpgradeRunFTSIndex: deleting the existing index {$name} got exceptions!");
+                if ($e instanceof ResponseException && strpos($e->getMessage(), "no such index") !== false) {
+                    $this->log("SugarUpgradeRunFTSIndex: the index {$name} does not exist.");
+                } else {
+                    $this->log("SugarUpgradeRunFTSIndex: deleting the existing index {$name} got exceptions!");
+                }
             }
         }
+    }
+
+    /**
+     * Update Mapping
+     */
+    protected function updateIndexMapping()
+    {
+        $engine = SearchEngine::getInstance()->getEngine();
+        if ($engine instanceof Elastic) {
+            try {
+                $handler = new ErasedFieldsHandler();
+                // update mapping
+                $engine->getContainer()->indexManager->updateIndexMappings([], $handler);
+
+                $this->log("SugarUpgradeRunFTSIndex: mappings on Elastic server have been updated.");
+            } catch (Exception $e) {
+                $this->log("SugarUpgradeRunFTSIndex: updating index mapping got exceptions!");
+            }
+        }
+    }
+
+    /**
+     * @return string elasticsearch version
+     * @throws \Exception
+     */
+    protected function getEsVersion() : string
+    {
+        $esVersion = null;
+        $engine = SearchEngine::getInstance()->getEngine();
+        if ($engine instanceof Elastic) {
+            try {
+                $result = $engine->getContainer()->client->request('', Request::GET);
+                if ($result->isOk()) {
+                    $data = $result->getData();
+                    $esVersion = $data['version']['number']?? null;
+                }
+            } catch (Exception $e) {
+                $this->log("getEsVersion: get ES version got exceptions: " . $e->getMessage());
+            }
+        }
+        return $esVersion;
     }
 }

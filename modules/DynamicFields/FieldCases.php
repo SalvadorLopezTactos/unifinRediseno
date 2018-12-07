@@ -11,10 +11,12 @@
  */
 
 
-
+/**
+ * @param string $type
+ * @return TemplateField|null
+ */
 function get_widget($type)
 {
-
 	$local_temp = null;
 	switch(strtolower($type)){
 			case 'char':

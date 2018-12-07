@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'לוח מחוונים של רשימת מקרים',
+    'LBL_CASES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת מקרים',
+
 	'ERR_DELETE_RECORD'					=> 'You must specify a record number to delete the account.',
 	'LBL_ACCOUNT_ID'					=> 'זהות חשבון',
 	'LBL_ACCOUNT_NAME'					=> 'שם חשבון:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'מצב:',
     'LBL_SOURCE' => 'מקור:',
 	'LBL_SUBJECT'						=> 'נושא:',
-	'LBL_SYSTEM_ID'						=> 'זהות מערכת',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'שם חשבון',
 	'LBL_LIST_ASSIGNED'					=> 'הוקצה עבור',
 	'LBL_LIST_CLOSE'					=> 'סגור',

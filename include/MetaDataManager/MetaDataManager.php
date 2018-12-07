@@ -16,6 +16,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Sugarcrm\Sugarcrm\MetaData\RefreshQueue;
 use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 
 require_once 'soap/SoapHelperFunctions.php';
 require_once 'include/SugarObjects/LanguageManager.php';
@@ -227,8 +228,8 @@ class MetaDataManager implements LoggerAwareInterface
      * @var array
      */
     protected static $cacheParts = array(
-        'modules' => 'refreshModulesCache',
-        'languages' => 'refreshLanguagesCache',
+        self::MM_MODULES => 'refreshModulesCache',
+        self::MM_LANGUAGES => 'refreshLanguagesCache',
         'section' => 'refreshSectionCache',
     );
 
@@ -293,6 +294,9 @@ class MetaDataManager implements LoggerAwareInterface
             'enabled_modules' => true,
         ),
         'preview_edit' => true,
+        'max_aggregate_email_attachments_bytes' => true,
+        'new_email_addresses_opted_out' => true,
+        'activity_streams_enabled' => true,
     );
 
     /**
@@ -521,29 +525,29 @@ class MetaDataManager implements LoggerAwareInterface
         }
         $platform = (array) $platform;
 
-        // Get the platform metadata class name
-        $class = self::getManagerClassName(''); // MetaDataManager
-        $path  = 'include/MetaDataManager/';
-        $found = false;
-        foreach ($platform as $type) {
-            $mmClass = self::getManagerClassName($type);
-            $file = $path . $mmClass . '.php';
-            if (SugarAutoLoader::requireWithCustom($file)) {
-                $class = SugarAutoLoader::customClass($mmClass);
-                $found = true;
-                break;
-            }
-        }
-
-        if (!$found) {
-            SugarAutoLoader::requireWithCustom($path . $class . '.php');
-            $class = SugarAutoLoader::customClass($class);
-        }
-
         // Build a simple key
         $key = implode(':', $platform) . ':' . intval($public);
 
         if ($fresh || empty(self::$managers[$key])) {
+            // Get the platform metadata class name
+            $class = self::getManagerClassName(''); // MetaDataManager
+            $path  = 'include/MetaDataManager/';
+            $found = false;
+            foreach ($platform as $type) {
+                $mmClass = self::getManagerClassName($type);
+                $file = $path . $mmClass . '.php';
+                if (SugarAutoLoader::requireWithCustom($file)) {
+                    $class = SugarAutoLoader::customClass($mmClass);
+                    $found = true;
+                    break;
+                }
+            }
+
+            if (!$found) {
+                SugarAutoLoader::requireWithCustom($path . $class . '.php');
+                $class = SugarAutoLoader::customClass($class);
+            }
+
             $manager = new $class($platform, $public);
 
             $manager->setLogger(LoggerFactory::getLogger('metadata'));
@@ -1006,6 +1010,17 @@ class MetaDataManager implements LoggerAwareInterface
                 // Currently create just uses the edit permission, but there is probably a need for a separate permission for create
                 $outputAcl['create'] = $outputAcl['edit'];
 
+                // Custom ACL strategies may have special rules around "create". Try to respect them.
+                if ($outputAcl['edit'] === 'yes') {
+                    $createAcl = SugarACL::getUserAccess($module, ['create' => true], $context);
+
+                    // Only change it if we're taking the permission away. Otherwise, the permission for "edit" is a
+                    // reasonable default.
+                    if (!$createAcl['create']) {
+                        $outputAcl['create'] = 'no';
+                    }
+                }
+
                 if ($bean === false) {
                     $bean = BeanFactory::newBean($module);
                 }
@@ -1256,7 +1271,9 @@ class MetaDataManager implements LoggerAwareInterface
             self::getPlatformsWithCachesInDatabase()
         );
 
-        return $platforms;
+        // TODO - Re-Filter the list by known platforms to prevent builds of dead or invalid platforms
+        // once unknown platforms are no longer allowed across the board
+        return array_unique($platforms);
     }
 
     /**
@@ -1280,15 +1297,17 @@ class MetaDataManager implements LoggerAwareInterface
             }
         }
 
-        return $platforms;
+        return array_values($platforms);
     }
 
     /**
      * Returns list of platforms that have cached metadata in database cache.
      *
+     * @param MetaDataCache $cache (optional)
+     *
      * @return array
      */
-    protected static function getPlatformsWithCachesInDatabase()
+    protected static function getPlatformsWithCachesInDatabase(MetaDataCache $cache = null)
     {
         $platforms = array();
 
@@ -1296,23 +1315,25 @@ class MetaDataManager implements LoggerAwareInterface
             return $platforms;
         }
 
-        // Get the listing of files in the cache directory
-        $db = DBManagerFactory::getInstance();
-        $cache = static::newCache($db);
+        if (!$cache) {
+            $db = DBManagerFactory::getInstance();
+            $cache = static::newCache($db);
+        }
+
         $types = $cache->getKeys();
-        foreach($types as $type) {
+        foreach ($types as $type) {
             // If the cache key fits the pattern of a metadata cache key get the
             // platforms for the cache entry
             // @see static::getCachedMetadataHashKey()
-            if (preg_match('/^meta_hash(_public)?_(.*)$/', $type, $matches)) {
-                $key_platforms = explode('_', $matches[2]);
+            if (preg_match('/^meta:hash(:public)?:(.*)$/', $type, $matches)) {
+                $key_platforms = explode(',', substr($type, strrpos($type, ':') + 1));
                 foreach ($key_platforms as $platform) {
                     $platforms[$platform] = $platform;
                 }
             }
         }
 
-        return $platforms;
+        return array_values($platforms);
     }
 
     /**
@@ -1663,9 +1684,7 @@ class MetaDataManager implements LoggerAwareInterface
         if (($force || $deleted) && static::$isCacheEnabled) {
             // Clear the module client cache first
             MetaDataFiles::clearModuleClientCache(array(), '', array($this->platforms[0]));
-
-            $data = $this->loadMetadata(array(), $context);
-            $this->putMetadataCache($data, $context);
+            $this->getMetadataInternal(array(), $context, true);
         }
     }
 
@@ -1847,11 +1866,24 @@ class MetaDataManager implements LoggerAwareInterface
                 foreach (array(true, false) as $public) {
                     $mm = MetaDataManager::getManager($platform, $public, true);
                     if (method_exists($mm, $method)) {
-                        $contexts = static::getMetadataContexts($public, $params);
+                        $sections = ($part == 'section') ? (is_array($items) ? $items : [$items]) : [$part]  ;
+                        $contextSections = array_intersect($sections, $mm->getContextAwareSections());
+                        $baseOnly = empty($contextSections);
 
-                        // When a change occurs in the base metadata, we need to clear the cache for all contexts
+                        if ($baseOnly) {
+                            $contexts = array($mm->getDefaultContext());
+                        } else {
+                            $contexts = static::getMetadataContexts($public, $params);
+                        }
+                        //Always build the base partial if we are rebuilding any non-context aware section
+                        if (!$public && sizeof($sections) !== sizeof($contextSections)) {
+                            $contexts[] = new MetaDataContextPartial();
+                        }
+
+                        // When a change occurs in the base metadata which is filtered/modified by contexts,
+                        // we need to clear the cache for all contexts
                         // except the ones we are going to rebuild in this request
-                        if (empty($params)) {
+                        if (empty($params) && !$baseOnly) {
                             $allContexts = array_filter(
                                 static::getAllMetadataContexts($public),
                                 function ($context) use ($contexts) {
@@ -1919,7 +1951,7 @@ class MetaDataManager implements LoggerAwareInterface
                 // Handle the refreshing of the cache and emptying of the queue
                 self::refreshCache(self::$fullRefresh['platforms']);
                 if (self::$queue) {
-                    self::$queue->clear();
+                    self::$queue->clear(self::$fullRefresh['platforms']);
                 }
             }
 
@@ -2060,6 +2092,7 @@ class MetaDataManager implements LoggerAwareInterface
         $administration = new Administration();
         $administration->retrieveSettings();
 
+        $idpConfig = new Authentication\Config(\SugarConfig::getInstance());
         $properties = $this->getConfigProperties();
         $properties = $this->parseConfigProperties($sugarConfig, $properties);
         $configs = $this->handleConfigPropertiesExceptions($properties);
@@ -2116,6 +2149,19 @@ class MetaDataManager implements LoggerAwareInterface
         if (isset($sugarConfig['sugar_max_int']) && is_numeric($sugarConfig['sugar_max_int'])) {
             $configs['sugarMaxInt'] = $sugarConfig['sugar_max_int'];
         }
+
+        // IDM mode
+        $configs['idmModeEnabled'] = $idpConfig->isIDMModeEnabled();
+        if ($configs['idmModeEnabled']) {
+            $idmModeConfig = $idpConfig->getIDMModeConfig();
+            $configs['cloudConsoleForgotPasswordUrl'] = $idpConfig->buildCloudConsoleUrl(
+                'forgotPassword',
+                [$idmModeConfig['tid']]
+            );
+            $configs['stsUrl'] = $idmModeConfig['stsUrl'];
+            $configs['tenant'] = $idmModeConfig['tid'];
+        }
+
         return $configs;
     }
 
@@ -2345,14 +2391,55 @@ class MetaDataManager implements LoggerAwareInterface
      */
     public function getMetadata($args = array(), MetaDataContextInterface $context = null)
     {
+        $data =  $this->getMetadataInternal($args, $context);
+        //update the hash before returning to ensure the base and context hashes are incorperated.
+        //Internally this hash is not stored with a context cache.
+        $data['_hash'] = $this->getMetadataHash(false, $context);
+
+        return $data;
+    }
+
+    protected function getMetadataInternal($args, MetaDataContextInterface $context = null, $ignoreCache = false)
+    {
         if (!$context) {
             $context = $this->getCurrentUserContext();
         }
 
-        // Get our metadata
-        $data = $this->getMetadataCache(false, $context);
-        $oldHash = !empty($data['_hash']) ? $data['_hash'] : null;
+        $defaultContext = $this->getDefaultContext();
+        $partialContext = new MetaDataContextPartial();
+        $isDefaultContext = $context->getHash() == $defaultContext->getHash();
 
+        $intialContext = ($isDefaultContext || $this->public) ? $defaultContext : $partialContext;
+
+        //Start with the default metadata
+        $data = $this->loadAndCacheMetadata($args, $intialContext, $isDefaultContext && $ignoreCache);
+
+        // Get our metadata if a users specific context was provided
+        if (!$this->public && !$isDefaultContext) {
+            $contextData = $this->loadAndCacheMetadata(false, $context, $ignoreCache, $data['_hash']);
+            $data = array_merge($data, $contextData);
+        }
+
+        // We need to see if we need to send any warnings down to the user
+        $systemStatus = apiCheckSystemStatus();
+        if ($systemStatus !== true) {
+            // Something is up with the system status
+            // We need to tack it on and refresh the hash
+            $data['config']['system_status'] = $systemStatus;
+        }
+
+        return $data;
+    }
+
+    protected function loadAndCacheMetadata($args, MetaDataContextInterface $context, $ignoreCache = false)
+    {
+        if ($ignoreCache) {
+            $data = [];
+        } else {
+            $data = $this->getMetadataCache(false, $context);
+        }
+
+        $oldHash = !empty($data['_hash']) ? $data['_hash'] : null;
         //If we failed to load the metadata from cache, load it now the hard way.
         if (empty($data) || !$this->verifyJSSource($data, $context)) {
             // Allow more time for private metadata builds since it is much heavier
@@ -2368,17 +2455,8 @@ class MetaDataManager implements LoggerAwareInterface
             $this->putMetadataCache($data, $context);
         }
         //Ensure that the metadata hashes is up to date
-        else if ($this->getCachedMetadataHash($context) != $data['_hash']) {
+        elseif ($this->getCachedMetadataHash($context, false) != $data['_hash']) {
             $this->cacheMetadataHash($data['_hash'], $context);
-        }
-
-        // We need to see if we need to send any warnings down to the user
-        $systemStatus = apiCheckSystemStatus();
-        if ($systemStatus !== true) {
-            // Something is up with the system status
-            // We need to tack it on and refresh the hash
-            $data['config']['system_status'] = $systemStatus;
-            $data['_hash'] = md5($data['_hash'].serialize($systemStatus));
         }
 
         return $data;
@@ -2410,7 +2488,7 @@ class MetaDataManager implements LoggerAwareInterface
      * @return bool true if the js-component file for this metadata call exists, false otherwise
      */
     protected function verifyJSSource($data, MetaDataContextInterface $context = null) {
-        if (!empty($data['jssource']) && !SugarAutoLoader::fileExists($data['jssource'])) {
+        if (!empty($data['jssource']) && !file_exists($data['jssource'])) {
             //The jssource file is invalid, we need to invalidate the hash as well.
             return false;
         }
@@ -2421,7 +2499,7 @@ class MetaDataManager implements LoggerAwareInterface
                 $context = $this->getDefaultContext();
             }
             $publicJsSource = $this->getPublicJsSource($context);
-            if ($data['jssource_public'] != $publicJsSource || !SugarAutoLoader::fileExists($publicJsSource)) {
+            if ($data['jssource_public'] != $publicJsSource || !file_exists($publicJsSource)) {
                 return false;
             }
         }
@@ -2442,7 +2520,16 @@ class MetaDataManager implements LoggerAwareInterface
         // Start collecting data
         $this->data = array();
 
-        foreach ($this->sections as $section) {
+        $defaultContext = $this->getDefaultContext();
+        $sections = $this->sections;
+
+        if ($context instanceof MetaDataContextPartial) {
+            $sections = array_diff($this->sections, $this->getContextAwareSections());
+        } elseif ($context->getHash() != $defaultContext->getHash()) {
+            $sections = $this->getContextAwareSections();
+        }
+
+        foreach ($sections as $section) {
             // Overrides are handled at the end because they are "special"
             // full_module_list and module_info are handled by the modules section
             // handler and is only found in private metadata
@@ -3145,7 +3232,7 @@ class MetaDataManager implements LoggerAwareInterface
     {
         sugar_mkdir(sugar_cached('api/metadata'), null, true);
         $filePath = $this->getLangUrl($language, $ordered);
-        if (SugarAutoLoader::fileExists($filePath)) {
+        if (file_exists($filePath)) {
             // Get the contents of the file so that we can get the hash
             $data = file_get_contents($filePath);
 
@@ -3273,7 +3360,7 @@ class MetaDataManager implements LoggerAwareInterface
             return $args['override_values'];
         }
 
-        return array_intersect(array_keys($data), self::$defaultOverrides);
+        return self::$defaultOverrides;
     }
 
     /**
@@ -3294,14 +3381,28 @@ class MetaDataManager implements LoggerAwareInterface
      * @param MetaDataContextInterface|null $context Metadata context
      * @return string A metadata cache file hash or false if not found
      */
-    public function getCachedMetadataHash(MetaDataContextInterface $context = null)
+    public function getCachedMetadataHash(MetaDataContextInterface $context = null, $includeBase = true)
     {
         if (!$context) {
             $context = $this->getCurrentUserContext();
         }
 
         $key = $this->getCachedMetadataHashKey($context);
-        return $this->getFromHashCache($key);
+        $hash = $this->getFromHashCache($key);
+
+        if (!$hash) {
+            return false;
+        }
+
+        if ($includeBase) {
+            $baseHash = $this->getFromHashCache($this->getCachedMetadataHashKey($this->getDefaultContext()));
+
+            if ($hash != $baseHash) {
+                return md5($hash . $baseHash);
+            }
+        }
+
+        return $hash;
     }
 
     /**
@@ -3446,6 +3547,22 @@ class MetaDataManager implements LoggerAwareInterface
         );
     }
 
+    protected function getContextAwareSections()
+    {
+        return array(
+            self::MM_MODULES,
+            self::MM_FULLMODULELIST,
+            self::MM_MODULESINFO,
+            self::MM_FIELDS,
+            self::MM_FILTERS,
+            self::MM_VIEWS,
+            self::MM_LAYOUTS,
+            self::MM_DATA,
+            self::MM_JSSOURCE,
+            self::MM_EDITDDFILTERS,
+        );
+    }
+
     /**
      * Gets the user bean for this request
      *
@@ -3516,17 +3633,17 @@ class MetaDataManager implements LoggerAwareInterface
     protected function getCachedMetadataHashKey(MetaDataContextInterface $context)
     {
         if ($this->public) {
-            $prefix = 'public_';
+            $prefix = 'public:';
         } else {
             $hash = $context->getHash();
             if ($hash) {
-                $prefix = $hash . '_';
+                $prefix = $hash . ':';
             } else {
                 $prefix = '';
             }
         }
 
-        $key = "meta_hash_$prefix" . implode("_", $this->platforms);
+        $key = "meta:hash:$prefix" . implode(",", $this->platforms);
         return $key;
     }
 
@@ -3896,7 +4013,7 @@ class MetaDataManager implements LoggerAwareInterface
     protected function getRawFilter($fieldName, $role)
     {
         $path = 'custom/application/Ext/DropdownFilters/roles/' . $role . '/dropdownfilters.ext.php';
-        if (SugarAutoLoader::fileExists($path)) {
+        if (file_exists($path)) {
             $filters = $this->readDropdownFilterFile($path);
             if (isset($filters[$fieldName])) {
                 return $filters[$fieldName];

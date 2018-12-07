@@ -27,7 +27,7 @@ $app_list_strings = array (
     'Meetings' => 'Mbledhjet',
     'Tasks' => 'Detyrat',
     'Calendar' => 'Kalendari',
-    'Leads' => 'Klientet potencial',
+    'Leads' => 'Udhëheqjet',
     'Currencies' => 'Monedhat',
     'Contracts'=>'Kontaktet',
     'Quotes' => 'Kuotat',
@@ -94,7 +94,7 @@ $app_list_strings = array (
     'UpgradeWizard' => 'Rindërto wizardin',
     'Trackers' => 'Gjurmuesit',
     'TrackerPerfs' => 'Performanca e gjurmuesit',
-    'TrackerSessions' => 'sesionet e gjurmuesit',
+    'TrackerSessions' => 'Seancat e gjurmuesit',
     'TrackerQueries' => 'Pyetjet e gjurmuesit',
     'FAQ' => 'Pyetje të shpeshta',
     'Newsletters' => 'Buletinet',
@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'Çelësat OAuth të konsumatorit',
     'OAuthTokens' => 'OAuth Shenjat',
     'Filters' => 'filterë',
-    'UserSignatures' => 'Nënshkrimet e përdoruesit',
+    'UserSignatures' => 'Nënshkrimet e emaileve',
     'Shippers' => 'Ofruesit e transportit',
     'Styleguide' => 'Udhëheqës stil',
     'Feedbacks' => 'Vërejtje',
     'Tags' => 'Etiketat',
     'Categories' => 'Kategoritë',
     'Dashboards' => 'Panelet',
+    'OutboundEmail' => 'Cilësimet e emailit',
+    'EmailParticipants' => 'Pjesëmarrësit me email',
+    'DataPrivacy' => 'Privatësia e të dhënave',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'Fo',
         'Tasks' => 'Ts',
-        'Dashboards' => 'Databaza',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => 'DP',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => 'Lloji i produktit',
     'Shippers' => 'transportues mallrash',
     'Subscriptions' => 'Abonim',
-    'UserSignatures' => 'Nënshkrimi i përdoruesit',
+    'UserSignatures' => 'Nënshkrimi i emailit',
     'Feedbacks' => 'Vërejtje',
     'Tags' => 'Ngjitje',
     'Categories' => 'Kategoria',
+    'OutboundEmail' => 'Cilësimi i emailit',
+    'EmailParticipants' => 'Pjesëmarrës me email',
+    'DataPrivacy' => 'Privatësia e të dhënave',
   ),
 
 /*
@@ -329,6 +336,11 @@ $app_list_strings = array (
     'Existing Business' => 'Biznes ekzistues',
     'New Business' => 'Biznes i ri',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => 'Aktiv',
+            'Inactive' => 'Joaktiv',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => 'Të ardhurat',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => 'Influencues',
     'Other' => 'Tjetër',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => 'Aktiv',
+            'Inactive' => 'Joaktiv',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => 'Aktiv',
+            'Inactive' => 'Joaktiv',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => 'Kontakt kryesor',
@@ -513,17 +536,17 @@ $app_list_strings = array (
   'call_direction_default' => 'Drejtuar nga jashtë',
   'call_direction_dom' =>
   array (
-    'Inbound' => 'përbrenda',
-    'Outbound' => 'Drejtuar nga jashtë',
+    'Inbound' => 'Përbrenda',
+    'Outbound' => 'Përjashtë',
   ),
   'lead_status_dom' =>
   array (
     '' => '',
     'New' => 'E re',
-    'Assigned' => 'Drejtuar',
+    'Assigned' => 'Caktuar',
     'In Process' => 'Në proces e sipër',
     'Converted' => 'I konvertuar',
-    'Recycled' => 'ricikluar',
+    'Recycled' => 'Ricikluar',
     'Dead' => 'Vdekur',
   ),
    'gender_list' =>
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => 'Detyrë',
       'KBContents' => 'baza e njohurisë',
+      'Notes' => 'Shënim',
   ),
 
   'record_type_display_notes' =>
@@ -656,29 +680,37 @@ $app_list_strings = array (
     'Leads' => 'udhëheqje',
 
     'Meetings' => 'Mbledhje',
-    'Calls' => 'Telefoni',
+    'Calls' => 'Thirrje',
       'KBContents' => 'baza e njohurisë',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => 'Llogaria',
+        'Contacts' => 'Kontakti',
+        'Employees' => 'Punonjësi',
+        'Leads' => 'Drejtues',
+        'Prospects' => 'Objektiv',
+        'Users' => 'Përdorues',
+    ),
 
   'parent_type_display' =>
   array (
-    'Accounts' => 'llogaritë',
+    'Accounts' => 'Llogaria',
     'Contacts' => 'Kontakt',
     'Tasks' => 'Detyrë',
     'Opportunities' => 'Mundësi:',
-    'Products' => 'Produkti',
+    'Products' => 'Artikulli i rreshtit të cituar',
     'Quotes' => 'Kuota',
 
     'Bugs' => 'Gabimet',
     'Cases' => 'Rast',
-    'Leads' => 'udhëheqje',
+    'Leads' => 'Udhëheqje',
 
     'Project' => 'Projekti',
-    'ProjectTask' => 'Detyrat projektuese',
+    'ProjectTask' => 'Detyrat e projektit',
 
     'Prospects' => 'Synim',
-      'KBContents' => 'baza e njohurisë',
-
+      'KBContents' => 'Baza e njohurisë',
+      'Notes' => 'Shënim',
   ),
 
   'product_status_default_key' => 'Dërgo',
@@ -832,7 +864,6 @@ $app_list_strings = array (
     'Product' => 'Produkti',
     'User' => 'Përdorues',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => 'Email',
     'Twitter' => 'Twitter'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => 'Kërko politikën e privatësisë të të dhënave',
+        'Send Personal Information being processed' => 'Dërgo të dhënat personal që po përpunohen',
+        'Rectify Information' => 'Redakto të dhënat',
+        'Request to Erase Information' => 'Kërko fshirjen e të dhënave',
+        'Export Information' => 'Eksporto të dhënat',
+        'Restrict Processing' => 'Kufizo përpunimin',
+        'Object to Processing' => 'Kundërshto përpunimin',
+        'Consent to Process' => 'Mirato përpunimin',
+        'Withdraw Consent' => 'Tërhiq miratimin',
+        'Other' => 'Tjetër',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => 'Komunikime biznesi',
+        'Marketing Communications by company' => 'Komunikime marketingu nga kompania',
+        'Marketing Communications by partners' => 'Komunikime marketingu nga partnerë',
+    ),
+    'dataprivacy_status_default_key' => 'Hap',
+    'dataprivacy_status_dom' => array(
+        'Open' => 'Hap',
+        'Closed' => 'Përfunduar',
+        'Rejected' => 'Refuzuar',
+    ),
+    'dataprivacy_priority_default_key' => 'I ulët',
+    'dataprivacy_priority_dom' => array(
+        'Low' => 'I ulët',
+        'Medium' => 'Mesatar',
+        'High' => 'I lartë',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => 'Studio',
     'Upgrade' => 'Rindërto',
     'Users' => 'përdoruesit',
+    'OutboundEmail' => 'Cilësimet e emailit',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => 'dështuar',
                                         'completed'     => 'Ka përfunduar',
                                         'no curl'       => 'Nuk është drejtuar: Nuk ka asnjë URL të disponueshëm',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => 'Draft',
+        'Archived' => 'Arkivuar',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => 'Shtypja e listës - Nga identifikimi',
     'test' => 'Test [Alt+T]',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => 'Aktiv',
+             'Inactive' => 'Joaktiv',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3 javë',
         '31' => '1 muaj',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => 'aktive',
-    'Inactive' => 'pasive',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => 'I lartë',
         'medium'    => 'Mesatar',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => 'Asnjë',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'Google',
+        'exchange' => 'Exchange',
+        'outlook' => 'Outlook',
+        'other' => 'Tjetër',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2032,22 +2099,27 @@ $app_list_strings = array (
         'ACTIVE' => 'e mundur',
         'INACTIVE' => 'E pamundur',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => 'Regjistrim',
+        'records' => 'Listë',
+        'activities' => 'Fluksi i veprimeve',
+    ),
 );
 
 $app_strings = array (
   'LBL_RECORD_HEADER' => 'Regjistrim i lartë', // Studio editing of record views
   'LBL_RECORD_BODY' => 'Biznes Karta', // Studio editing of record views
   'LBL_RECORD_SHOWMORE' => 'Trego më shumë', // Studio editing of record views
-  'LBL_FAVORITE' => 'Favoritë', // Record view header panel element
+  'LBL_FAVORITE' => 'I preferuar', // Record view header panel element
   'LBL_FOLLOW' => 'Ndiq', // Record view header panel element
   'LBL_FOLLOW_LINK' => 'Ndiq linkun',
   'LBL_TOGGLE_VISIBILITY' => 'Njyjëzo shfaqjen', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivitetet',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. Të gjitha të drejtat të rezervuara.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. Të gjitha të drejtat të rezervuara.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar dhe kubi 3-D janë marka të regjistruara tregtare të SugarCRM Inc. '.
         'Të gjithë emrat e kompanive dhe produkteve të tjera që përdoren ose shfaqen në këtë produkt mund të jenë marka tregtare të '.
         'SugarCRM ®, Sugar Enterprise™ dhe Sugar™ janë marka tregtare të SugarCRM Inc.',
-    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ dhe Sugar™ janë marka tregtare të SugarCRM Inc.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ dhe Sugar™ janë marka tregtare të "SugarCRM Inc.".',
     'LBL_SEND_INVITE' => 'Dërgo ftesë',
   'LBL_INVITEES' => 'Të ftuarit',
     'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Të ftuarit nuk do ta marrin ftesën tënde',
@@ -2116,6 +2188,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => 'Mundëso SMTP gjatë SSL ose TLS?',
     'LBL_NO_ACTION'                         => 'Nuk ekziston veprim me atë emër',
     'LBL_NO_DATA'                           => 'Nuk ka të dhëna',
+    'LBL_NOT_APPLICABLE'                    => 'Nuk zbatohet',
     'LBL_ROUTING_ADD_RULE'                  => 'Shto regull',
     'LBL_ROUTING_ALL'                       => 'Më së paku',
     'LBL_ROUTING_ANY'                       => 'Çdonjë',
@@ -2320,7 +2393,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Ruaj',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Shtoja këtë folderin',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Ky folder nuk mund të ndryshojë',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'A jeni të sigurt që dëshironi të fshini këtë folder? Ky proces nuk mund të ndryshohet. Fshirjet e \nFolderave do të kaskadojnë tek të gjitha folderët e përfshira.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'A jeni të sigurt që dëshironi të fshini këtë folder? Ky proces nuk mund të ndryshohet. Fshirjet e \\nFolderave do të kaskadojnë tek të gjitha folderët e përfshira.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'emri i ri i folderit',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Ju lutemi selektoni një folder para se të perfomoni veprimin.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Menaxhmenti i Folderit',
@@ -2479,7 +2552,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Sinkronizo të gjithë mail llogaritë',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'Një email është dërguar në adresën e specifikuar të emailit duke përdorur parametrat e ofruara të postës dalëse. Ju lutemi kontrolloni për të parë nëse emaili është pranuar për të verifikuar a janë parametrat e sakta.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Performimi i këtij veprimi do të sinkronizojë mail llogaritë dhe përmbajtjet e tyre.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Performo sinkronizim të plotë? \n Mail llogaritë e mëdha mund të zgjasin disa minuta.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Performo sinkronizim të plotë? \\n Mail llogaritë e mëdha mund të zgjasin disa minuta.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Klikoni butonin Shift ose butonin Ctrl për të selektuar dosje të shumta.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'E përgjithëshme',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Foldera të grupit të disponieshëm',
@@ -2493,7 +2566,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_REQUIRE_REFRESH'    => 'Selektoni numrin e emailave për faqë në postë. Kjo mund të kërkojë vendosjen e rifreskimit të faqës në mënyrë që të ketë efekt.',
     'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => 'Rigjetja e Mail llogarive',
     'LBL_EMAIL_SETTINGS_RULES'              => 'Regullat',
-    'LBL_EMAIL_SETTINGS_SAVED'              => 'Parametrat janë ruajtur. \n\n Duhet të ringarkoni faqen për parametra të reja për të pasur efekt.',
+    'LBL_EMAIL_SETTINGS_SAVED'              => 'Parametrat janë ruajtur. \\n\\n Duhet të ringarkoni faqen për parametra të reja për të pasur efekt.',
     'LBL_EMAIL_SETTINGS_MUST_RELOAD'        => 'Ju duhet ringarkoni faqen per kushtet e reja të hyjnë në fuqi.',
     'LBL_EMAIL_SETTINGS_SEND_EMAIL_AS'      => 'Dërgoni vetëm emailat e tekstit të thjeshtë',
     'LBL_EMAIL_SETTINGS_SHOW_IN_FOLDERS'    => 'aktive',
@@ -2547,6 +2620,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'Importo fjalëkaliminRe',
     'LBL_EMAIL_IMPORT_FAIL'                 => 'Importi dështoi sepse ose mesazhi është tashmë i importuar ose fshihet nga serveri',
 
+    'LBL_EMAILS_FROM' => 'Emaile të dërguara',
+    'LBL_EMAILS_RECEIVED' => 'Emaile të marra',
+    'LBL_EMAIL_ADDRESSES_USED' => 'Adresa emaili të përdorura në emaile',
+    'LBL_EMAIL_ADDRESS' => 'Adresa e emailit',
+    'LBL_FROM' => 'Nga',
+    'LBL_TO' => 'Për',
+    'LBL_CC' => 'Kopje',
+    'LBL_BCC' => 'Kopje e fshehtë',
+
     'LBL_LINK_NONE'=> 'Asnjëra',
     'LBL_LINK_ALL'=> 'Të gjitha',
     'LBL_LINK_RECORDS'=> 'Regjistrimet',
@@ -2588,7 +2670,9 @@ $app_strings = array (
     'ERR_AJAX_LOAD_FOOTER' => 'Nëse ky gabim vazhdon, ju lutemi të keni administratori tuaj disaktivizuar Ajax për këtë modul',
     'ERR_CREATING_FIELDS' => 'Gabim gjatë mbushjes së fushave shtesë të detajuara',
     'ERR_CREATING_TABLE' => 'Gabim gjatë krijimit të tabelës',
-    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "Ndarësi decimal nuk mund të përdorë karakterin e njëjtë si mijëra ndarës.\n\n Ju lutemi ndryshoni vlerat.",
+    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "Ndarësi decimal nuk mund të përdorë karakterin e njëjtë si mijëra ndarës.
+
+ Ju lutemi ndryshoni vlerat.",
     'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë konaktin',
     'ERR_EXPORT_DISABLED' => 'eksportimi i çaktivizuar',
     'ERR_EXPORT_TYPE' => 'gabim gjatë eksportim',
@@ -2605,6 +2689,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Sesion aktiv është i nevojshëm për të eksportuar përmbajtien.',
     'ERR_NO_HEADER_ID' => 'Ky funksion është i padisponueshëm në këtë temë.',
     'ERR_NOT_ADMIN' => "Qasje të paautorizuar në administratë.",
+    'ERR_DISABLED_FOR_IDM_MODE' => "Ky opsion është çaktivizuar në SugarCRM për modalitetin IDM dhe ofrohet në Cloud Console.",
+    'ERR_GOTO_CLOUD_CONSOLE' => "Shko te <a href=\"%s\" target=\"_blank\">Cloud Console</a>.",
     'ERR_MISSING_REQUIRED_FIELDS' => 'Mungojnë fushat e nevojshme:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Fushë  e nevojshme jo valide',
     'ERR_INVALID_VALUE' => 'Vlerë jo valide:',
@@ -2743,7 +2829,7 @@ $app_strings = array (
     'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'Arkiva',
     'LBL_ASSIGNED_TO_USER'=>'Drejtuar përdoruesit',
-    'LBL_ASSIGNED_TO' => 'drejtuar',
+    'LBL_ASSIGNED_TO' => 'Caktuar për:',
     'LBL_BACK' => 'Kthe',
     'LBL_BASE_RATE'=>'Rata bazë',
     'LBL_BILL_TO_ACCOUNT'=>'Llogaria për faturën',
@@ -2823,7 +2909,7 @@ $app_strings = array (
     'LBL_EDIT_AS_NEW_BUTTON_LABEL' => 'Ndrysho si e re',
     'LBL_EDIT_AS_NEW_BUTTON_TITLE' => 'Ndrysho si e re',
     'LBL_FAVORITES' => 'Favoritet',
-    'LBL_FILTER' => 'Filtri',
+    'LBL_FILTER' => 'Filtro',
     'LBL_DEFAULT_DATA_FILTER' => 'Filtri i parazgjedhur i të dhënave',
     'LBL_FILTER_MENU_BY' => 'Filtro menynë sipas',
     'LBL_FILTER_SELECT_FIELD' => 'Selekto fushën...',
@@ -2934,7 +3020,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Mass përditësimi dështoi. Inicimi i përpjekjes të re ({{num}} nga {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Mass përditësimi jo i kompletuar. {{num}} regjistrimet ngelin të pandryshuara.',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => 'Mass përditësimi jo i kompletuar. {{num}} regjistrimet ngelin të pandryshuara.',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} regjistrimet janë injoruar për shkak të lejes.',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} regjistrime u shpërfillën për shkak të lejeve ose gabimeve.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} të dhënat u përditësuan me sukses.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} Mass përditësim',
     'TPL_MASSDELETE_PROGRESS_STATUS' => 'Fshirja e {{num}} nga {{total}}.',
@@ -3006,6 +3092,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'përdoruesi i parazgjedhur',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => 'llogaria e përdoruesit',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'llogari grupore',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => 'Emri',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => 'Krijo',
@@ -3218,7 +3305,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Të gjitha të drejtat të rezervuara.<br />SugarCRM, Sugar dhe kubi 3-D janë marka të regjistruara tregtare të SugarCRM Inc. '.
         'Të gjithë emrat e kompanive dhe produkteve të tjera që përdoren ose shfaqen në këtë produkt mund të jenë marka tregtare të '.
         'kompanive përkatëse me të cilat lidhen.',
@@ -3256,7 +3343,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => 'Fjalëkalimi',
     'LBL_LOGGED_OUT' => 'Ju jeni loguar',
     'LBL_LOGIN_FORM_LABEL' => 'Trego formën e logimit',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => 'Kthehu te identifikimi',
+    'LBL_LOGIN_INACTIVE_USER' => 'Përdorues joaktiv',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => 'Përdoruesi i portalit ose i grupit nuk identifikohet dot.',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => 'Ballina',
@@ -3323,8 +3412,9 @@ $app_strings = array (
     'LNK_BACKTOTOP' => 'Mbrapsht në krye',
     'LNK_REMOVE' => 'largo',
     'LNK_RESUME' => 'Rifillo',
-    'LNK_VIEW_CHANGE_LOG' => 'Shih ndryshimin e hyrjes',
-
+    'LNK_VIEW_CHANGE_LOG' => 'Shiko evidencën e auditimit',
+    'TPL_AUDIT_LOG_TITLE' => 'Evidencë auditimi për {{{name}}}',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => 'Ju lutem klikoni butonin mbrapa shfletuesit dhe rregulloni gabimin.',
     'NTC_DATE_FORMAT' => '(vvvvv-mm-dd)',
@@ -3358,7 +3448,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "Licenca SugarCRM e kompanisë suaj do të përfundojë së shpejti.",
     'ERROR_LICENSE_VALIDATION'=> "Licenca e kompanisë suaj për SugarCRM duhet të jetë valide.Vetëm administratorët mund të identifikohen",
     'WARN_LICENSE_VALIDATION'=> "Licenca SugarCRM e kompanisë suaj duhet të validohet shpejti.",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"Numri i mundësuar klientëve jashtë linje aktualisht e tejkalon numrin e përcaktuar në licencën tuaj.",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "Paralajmërim: Shfletuesi juaj është në funksion të pajtueshëm me IE e cila nuk është e mbështetur.",
     'WARN_LICENSE_SEATS'=>  "Paralajmërim: Numri i përdoruesve aktivë tashmë është numri maksimal i licencave të lejuara.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Paralajmërim: Numri i përdoruesve aktivë e tejkalon numrin maksimal të licencave të lejuara:",
@@ -3412,7 +3501,7 @@ $app_strings = array (
     'LBL_LINK_FROM_REPORT_WRONG_MODULE' => 'Raporti i zgjedhur nuk është i bazuar në llojin e saktë të modulit.',
     'ERROR_EMPTY_LINK_MODULE' => 'Ju lutemi zgjidhni para marrëdhënien.',
     // Ajax status strings
-    'LBL_LOADING' => 'Ngarkimi...',
+    'LBL_LOADING' => 'Duke ngarkuar...',
     'LBL_LOADING_NO_DOTS' => 'ngarkimi...',
     'LBL_SEARCHING' => 'Kërkim...',
     'LBL_SEARCH_UNDERWAY' => 'Po kërkon',
@@ -3428,9 +3517,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'Procesimi...',
     'LBL_REQUEST_PROCESSED'=>'SE bërë',
     'LBL_AJAX_FAILURE' => 'Dështimi i Ajaxit',
-    'LBL_OC_STATUS' => 'Statusi i klinetëve jashtë linje',
-    'LBL_OC_STATUS_TEXT' => 'Tregoni nëse është apo nuk është përdoruesi aktual në gjendje që të përdorë nje klient jashtë linje.',
-    'LBL_OC_DEFAULT_STATUS' => 'pasive',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => 'Kërkim ...',
     'LBL_SAVED_SEARCH_SHORTCUT' => 'Kërkimet e ruajtura',
     'LBL_SEARCH_POPULATE_ONLY'=> 'Kryeni një kërkim duke përdorur formularin e kërkimit më lart',
@@ -3439,7 +3525,7 @@ $app_strings = array (
     'LBL_SEARCH_FOR_MORE' => 'Kërko më shumë...',
     'LBL_SEARCH_SELECT' => 'Selekto...',
     'LBL_SEARCH_AND_SELECT_ELLIPSIS' => 'Kërko dhe zgjidh...',
-    'LBL_SEARCH_SELECT_MODULE' => 'Selekto {{module}}...',
+    'LBL_SEARCH_SELECT_MODULE' => 'Zgjidh {{module}}...',
     'LBL_DETAILVIEW'=>'Shikim i detajuar',
     'LBL_LISTVIEW'=>'Pamje në formë liste',
     'LBL_EDITVIEW'=>'Ndrysho pamje',
@@ -3531,6 +3617,7 @@ $app_strings = array (
     'LBL_COLLAPSE_ALL' => 'shemb të gjitha',
     'LBL_EXPAND_ALL' => 'Zgjero të gjitha',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => 'Ndrysho',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => 'Shih raportin',
     'LBL_DASHLET_REFRESH_LABEL' => 'Fresko',
     'LBL_DASHLET_REMOVE_LABEL' => 'Hiqe',
     'LBL_DASHLET_DROP_HERE' => 'Hudhe këtu',
@@ -4199,7 +4286,9 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Konfirmo',
     'LBL_NO_ACCESS' => 'Nuk keni qasje',
     'LBL_NO_ACCESS_LOWER' => 'Ska qasje',
-    'LBL_NO_FIELD_ACCESS' => 'Ska qasje',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => 'Vlera u fshi',
+    'LBL_VALUE_ERASED_TOOLTIP' => 'Të dhënat u fshinë përmes kërkesës për privatësinë e të dhënave',
     'LBL_CREATE_RELATED_RECORD' => 'Krijo të dhëna të lidhura',
     'LBL_ASSOC_RELATED_RECORD' => 'Asocio të dhëna ekzistuese',
     'LBL_CHOOSE_LINK' => 'Zgjidh llojin e linkut',
@@ -4268,7 +4357,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => 'Më e madhe',
     'LBL_FONTSIZE_HUGE' => 'Gjigant',
     'LBL_FONTSIZE_EXTRA_HUGE' => 'Stër madhe',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => 'Shkarkimi dështoi\r\n{{{this}}}',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "Shkarkimi nuk u krye\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => 'Më tepër...',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => 'Më pak...',
     'LBL_OFFLINE_MODE' => 'Moduli jo në linjë',
@@ -4337,6 +4426,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => 'Detaj transakcioni',
     'LBL_RECORD_DELETED' => '(regjistrimi u fshi)',
     'LBL_NOT_AVAILABLE' => 'Nuk disponohet',
+    'LBL_FILE_SIZE' => 'Madhësia e skedarit',
     'LBL_FILE_SIZE_UNITS_B' => 'Bite',
     'LBL_FILE_SIZE_UNITS_KB' => 'kB',
     'LBL_FILE_SIZE_UNITS_MB' => 'MB',
@@ -4460,6 +4550,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => 'Shikimi i detajuar hapet në anën e djathtë të ekranit tuaj.',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => 'Përdor shigjetat më poshtë për një turë të shpejtë përgjatë komponentave kyçe të kësaj menyje.',
 
+    'LBL_COMMENT_ADD' => 'Shto koment',
+    'LBL_REQUIRED' => 'E nevojshme',
+    'LBL_MORE_BUTTON' => 'Të tjera',
+    'LBL_TRY_AGAIN' => 'Provo sërish',
+    'LBL_NEW_RECORDS' => 'Krijuar së fundi',
+    'LBL_ASSIGNED_TO_ME' => '{{{module}}} e mia',
+    'LBL_LISTVIEW_FILTER_ALL' => 'Të gjitha {{{module}}}',
+    'LBL_UNFAVORITE' => 'Hiq nga preferencat',
+    'LBL_ACTIVITY_CREATE' => 'U krijua {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UPDATE' => 'U përditësua {{{changes}}} në {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_LINK' => 'U lidh {{{relatedRecord}}} me {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UNLINK' => 'U shkëput {{{relatedRecord}}} nga {{{record}}} {{{module}}}',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{relationship}} për {{parentModule}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => 'Shkarko të dhënat përkatëse...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => 'Konfigurimi i panelit ka ndryshuar. Dëshiron ta ringarkosh?',
+    'LBL_RECORDS' => 'Të dhëna',
+    'LBL_DASHBOARDS' => 'Panele',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => 'Kërko {{searchCriteria}}...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => 'Menyja kryesore',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => 'Krijo shpejt të dhëna të reja',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => 'Rrëshqit për opsione të tjera',
+    'LBL_DETAILS' => 'Detaje',
+    'LBL_DETAIL_RELATED' => 'Të ngjashme',
+    'LBL_CREATE_RELATED_MODULE_WARN' => 'Ky {{module}} kërkon {{relatedModule}}. <a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>Krijo të dhëna në {{relatedModule}} record</a>.',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => 'Modifiko të dhënat',
+    'LBL_OFFLINE_MENU_SETTINGS' => 'Të dhëna jashtë linje',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => 'Cilësimet e korrigjimit',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED" : "Enkriptimi i të dhënave aktiv.',
+    'LBL_OFFLINE_TOTAL_RECORDS' => 'Të dhëna gjithsej',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => 'Shkarkimi i fundit',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => 'Skedari nuk mund të shkarkohet dot.',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => 'Panelet nuk u ngarkuan dot nga serveri',
+    'ERR_FILTERS_FETCHING' => 'Filtrat nuk u gjetën dot',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => 'Enkriptimi i hapësirës ruajtëse nuk u krye dot',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => 'Duke enkriptuar të dhënat jashtë linje. Kjo gjë mund të zgjasë disa minuta.',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => 'Enkriptimi i të dhënave jashtë linje përfundoi.',
+    'ERR_ACCESS_SPECIFIC_MODULE' => 'Nuk ke qasje në modulin {{{module}}}.',
+    'LBL_SKIP' => 'Anashkalo',
+    'LBL_CONTINUE' => 'Vazhdo',
+    'LBL_ENABLE' => 'Aktivizo',
+    'LBL_MOBILE_TRIAL_UNTIL' => 'Provë deri',
+    'LBL_MOBILE_SDK_VERSION' => 'Versioni SDK',
+    'LBL_LOG_LEVEL' => 'Niveli i identifikimit',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => 'Cilësimet e identifikimit u rikonfiguruan.',
+    'LBL_TRIAL_PERIOD_EXPIRED' => 'Periudha e provës ka skaduar.',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => 'Serveri nuk mbështet lidhje të sigurt. Çaktivizo lidhjen e sigurt.',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => 'Serveri mbështet lidhje të sigurt. Aktivizo lidhjen e sigurt.',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => 'Lidhja jote nuk është e sigurt. Kontakto me administratorin.',
+    'LBL_LOGIN_SETTINGS_HEADER' => 'Cilësimet e identifikimit',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => 'Konfiguro shembujt e {{{brandName}}}',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => 'Në mënyrë që aplikacioni të funksionojë, do të të duhet të shkruash URL-në e shembullit të {{{brandName}}}. Nëse nuk e ke URL-në e shembullit, kontakto me administratorin.',
+    'LBL_FACEID' => 'ID-ja e fytyrës',
+    'LBL_TOUCHID' => 'ID me prekje',
+    'LBL_ENABLE_TOUCHID' => 'Aktivizo {{{biometryType}}}',
+    'LBL_SETUP_TOUCHID' => 'Konfigurim {{{biometryType}}}',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => 'Identifikohu duke përdorur gishtin',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "{{{biometryType}}} is not set up on your device. \n\nShko te cilësimet e pajisjes për të konfiguruar {{{biometryType}}}. Më pas, aktivizo {{{biometryType}}} për {{{brandName}}} te \"Menyja kryesore\" > \"Cilësimet\".",
+    'LBL_TOUCH_ID_DISCLAIMER' => 'Përdorimi i {{{biometryType}}} me {{{brandName}}} do të të lejojë të përdorësh identifikuesin biometrik në vend të shkrimit të fjalëkalimit për të përfituar qasje në {{{brandName}}}.',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => 'Dëshiron të vazhdosh me {{{biometryType}}}?    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => 'Vendos fjalëkalimin e {{{brandName}}} për të aktivizuar {{{biometryType}}}',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => 'Konfigurim',
+    'LBL_MDM_CONFIRM_CHANGE' => 'Konfigurimi i aplikacionit u ndryshua nga menaxheri i pajisjes celulare. Identifikohu sërish për të zbatuar ndryshimet.',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => 'Mundësoji {{{brandName}}} qasje në vendndodhjen tënde përmes cilësimeve të pajisjes.',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => 'Vendndodhja aktuale nuk ofrohet',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "Koha për rigjetjen e vendndodhjes aktuale përfundoi. \nProvo sërish.",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => 'Piketat e vendndodhjes nuk ofrohen',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => 'Koordinatat e vendndodhjes janë të pavlefshme',
+    'ERR_MOBILE_INVALID_PASSWORD' => 'Fjalëkalim i pavlefshëm.',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => 'Aplikacioni nuk është përditësuar, si dhe nuk përputhet më me shembullin {{{brandName}}} me të cilin po lidhesh. Dëshiron ta përditësosh?',
+    'LBL_MOBILE_BY' => 'Sipas',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => 'Filtri nuk ofrohet jashtë linje',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => 'Të dhëna jashtë linje',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => 'Shkarko cilësimet',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => 'Shkarko të dhënat e caktuara, të preferuara dhe të ndjekura për qasje jashtë linje. Preferencat mund t&#39;i përditësosh te cilësimet jashtë linje.',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "Të dhënat u shkarkuan. Tani mund t'i hapësh në modalitetin jashtë linje.",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "Nuk janë shkarkuar të gjitha të dhënat.\n Dëshiron të provosh sërish?",
+    'LBL_BULK_LOAD_USE_CELLULAR' => 'Përdor të dhënat celulare',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => 'Jo tani',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => 'Shkarkimi u ndërpre dhe do të rinisë kur të hapësh sërish aplikacionin.',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => 'Duke shkarkuar {{{module}}}: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => 'Përditëso të dhënat më të fundit',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => 'Duke pritur lidhjen',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => 'Ndërprerë',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => 'Duke ndaluar',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => 'Shkarko',
+    'LBL_BULK_LOAD_BTN_PAUSE' => 'Ndërprit',
+    'LBL_BULK_LOAD_BTN_RESUME' => 'Rinis',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => 'Vetëm lidhja me WiFi përdoret si parazgjedhje',
+    'LBL_NPS_RATING_MSG' => "Si do ta vlerësojë përvojën me \n{{{productName}}}?",
+    'LBL_NPS_THANKS_MSG' => 'Faleminderit për komentin!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => 'A mund ta vlerësosh në App Store?',
+    'LBL_NPS_NO_THANKS' => 'Jo, faleminderit',
+    'LBL_NPS_NOT_NOW' => 'Jo tani',
+    'LBL_NPS_RATE_NOW' => 'Vlerëso tani',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => 'Nuk ka rrjet. Aplikacioni mund të përdoret edhe jashtë linje',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => 'Ndryshimet do të ruhen kur të jesh në linje. <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>Shih detajet</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => 'Ka të dhëna të pasinkronizuara. Kontrollo <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>evidencën e transaksionit</a>',
+    'LBL_CONVERT' => 'Konverto',
+    'LBL_CONVERT_LEAD' => 'Konverto udhëheqjen',
+    'LBL_SEARCH_EXISTING_RECORD' => 'Kërko {{{this}}} ekzistues',
+    'LBL_DUPLICATES_CHECK_FAILED' => 'Kontrolli i dublikatave nuk u krye',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => 'Dëshiron të kalosh veprimtaritë përkatëse tek të dhënat e kontaktit?',
+    'LBL_LEAD_CONVERSION_SUCCESS' => 'Ke konvertuar me sukses {{{name}}} kryesor',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => 'Nuk u gjetën dublikate.',
+    'ERR_LEAD_CONVERSION_FAIL' => 'Konvertimi kryesor nuk u krye',
+    'LBL_SELECT_DUPLICATE_RECORD' => 'Zgjidh nga dublikati {{{modulePlural}}}',
+    'LBL_SELECTED_EXISTING_RECORD' => '{{{moduleSingular}}} i zgjedhur',
+    'LBL_CREATED_NEW_RECORD' => 'U krijua {{{moduleSingular}}} modul i ri',
+    'LBL_VO_BACK_BTN' => 'Butoni "Prapa"',
+    'LBL_VO_HOME_BTN' => 'Butoni i faqes kryesore',
+    'LBL_VO_DASHBOARD_BTN' => 'Butoni i panelit',
+    'LBL_VO_SEARCH_BTN' => 'Butoni i kërkimit',
+    'LBL_VO_RIGHT_MENU_BTN' => 'Butoni i menysë së djathtë',
+    'LBL_VO_ADD_BTN' => 'Butoni i shtimit',
+
     //begin portal
 
     //portal record tutorial
@@ -4571,6 +4777,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => 'Selekto raport',
     'LBL_REPORT_AUTO_REFRESH' => 'Auto përditësim',
     'LBL_REPORT_EDIT' => 'Edito raportin e selektuar',
+    'LBL_REFRESH_LIST_AND_CHART' => 'Fresko listën dhe grafikun',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => 'E panjohur',
@@ -4632,6 +4839,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'Gabimi ndodhi gjatë veprimit AssignTo.',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => 'Nuk ke të drejtë hyrjeje te "{{name}}". Kontakto me administratorin.',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => 'viti {0}',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} Q{0}',
@@ -4643,6 +4853,11 @@ $app_strings = array (
     'LBL_MESSAGE_BOX_TITLE' => 'Alarm',
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => 'Injoro duplifikimin dhe ruaj',
     'LBL_RESTORE' => 'Kthehu tek origjinali',
+
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => 'Të dhënat e shënuara për fshirje',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => 'Shfaq të dhënat e lidhura me kërkesën e privatësisë të të dhënave për '
+        . 'Fshi informacionin.',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'RSS Lajme',
@@ -4666,6 +4881,7 @@ $app_strings = array (
     'LBL_UNASSIGNED' => 'E pacaktuar',
     'LBL_ARCHIVE_EMAIL' => 'Emaili i arkivuar',
     'LBL_EMAIL_ARCHIVED' => 'Email i arkivuar',
+    'LBL_CREATE_ARCHIVED_EMAIL' => 'Krijo email të arkivuar',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => 'Aktivitete të planifikuara',
@@ -4697,6 +4913,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Detyrat e mia',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Detyrat e ekipit',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Rrjedhë punë e përparuar',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP ose Old REST API',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'Cron Job',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => 'Logic Hook',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'Rrjedha e punës në Sugar',
+    'LBL_AUDIT_SUBJECT_USER' => 'Përdoruesi',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Webistä liidiksi',
+
     //common chart strings
     'LBL_CHART' => 'Diagra,',
     'LBL_CHART_NO_DATA' => 'Nuk disponohen të dhëna.',
@@ -4705,6 +4934,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => 'Fshih kontollat',
     'LBL_CHART_CONTROLS_OPEN' => 'Shiko kontrollet',
     'LBL_CHART_UNDEFINED' => 'E papërcaktuar',
+    'LBL_CHART_NO_LABEL' => 'E papërcaktuar',
+    'LBL_CHART_AMOUNT' => 'Shuma',
+    'LBL_CHART_COUNT' => 'Numri',
+    'LBL_CHART_PERCENT' => 'Përqindja',
+    'LBL_CHART_GROUP' => 'Grupi',
+    'LBL_CHART_DATE' => 'Data',
+    'LBL_CHART_KEY' => 'Kryesore',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => 'Lloji diagrami',
@@ -4776,6 +5012,10 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'Filter i paracaktuar i datës',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => 'Paracaktim i vendosjes së datës',
 
+    'LBL_PRODUCT_CATALOG_NAME' => 'Katalogu i produkteve',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => 'Katalogu i produkteve',
+    'LBL_PRODUCT_CATALOG_DESC' => 'Shih dhe shto artikuj nga katalogu yt i produkteve.',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => 'Shih dhe shto artikuj nga katalogu yt i produkteve.',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}} në {{date}} më {{time}}',
@@ -4788,6 +5028,7 @@ $app_strings = array (
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => 'në',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'Lumi i aktiviteteve të mia',
     'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'Shiko një listë të aktiviteteve të performuara në regjistrime dhe krijo dhe posto komente.',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => 'Transmetimi i aktiviteteve është joaktiv',
 
     'LBL_DATA_VIEW' => 'Shikim i të dhënave',
     'LBL_COMMENT' => 'Koment',
@@ -4795,6 +5036,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Pati një gabim gjatë lidhjes me serverin. Ju lutemi provoni përsëri.',
     'ERR_RESOLVE_ERRORS' => 'Ju lutemi zgjidhni ndonjë gabim para se të vazhdoni.',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => 'Për t&#39;u miratuar, të gjitha fushat duhet të jenë të plotësuara; megjithatë, të dhënat mund edhe të refuzohen apo delegohen.',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => 'Për të refuzuar/deleguar, të gjitha fushat duhet të jenë të plotësuara.',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Fresko listën',
@@ -4822,6 +5067,7 @@ $app_strings = array (
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => 'Diagrami i panelit të raporteve të ruajtura',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'Shfaq çdo diagram nga raporti i ruajtur.',
+
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => 'Artikuj të botuar të ngjashëm',
@@ -4829,7 +5075,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Përmbledhje historike',
-    'TPL_HISTORICAL_SUMMARY' => 'Përmbledhje historike për {{name}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => 'Më shumë histori...',
     'LBL_RELATED_CONTACT' => 'Kontakt i ndërlidhur',
     'LBL_MODULE_TYPE' => 'Lloji:',
@@ -4840,7 +5086,7 @@ $app_strings = array (
     //SFA
     'LBL_BEST' => 'Më i miri',
     'LBL_WORST' => 'Më i keq',
-    'LBL_LIKELY' => 'I përshtatshëm',
+    'LBL_LIKELY' => 'E mundshme',
     'LBL_BEST_ADJUSTED' => 'Më mirë (e rregulluar)',
     'LBL_WORST_ADJUSTED' => 'Më keq (e rregulluar)',
     'LBL_LIKELY_ADJUSTED' => 'Gjasa (e rregulluar)',
@@ -5076,6 +5322,29 @@ $app_strings = array (
 
     'LBL_FIELD_TRIMMED' => 'Fusha u shkurtua, për shkak të kufirit maksimal të karaktereve.',
     'LBL_FIELDSIZE_OVERFLOW' => 'Fusha tejkalon kufirin maksimal të karaktereve.',
+    'LBL_TINYMCE_TARGET_SAME' => 'E njëjta dritare',
+    'LBL_TINYMCE_TARGET_NEW' => 'Dritare e re',
+
+    'LBL_OUTBOUND_EMAILS' => 'Cilësimet e emailit',
+    'LBL_OUTBOUND_EMAIL' => 'Cilësimi i emailit',
+
+    'LBL_EMAIL_PARTICIPANTS' => 'Pjesëmarrësit me email',
+    'LBL_EMAIL_PARTICIPANT' => 'Pjesëmarrës me email',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => 'Privatësia e të dhënave',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'Privatësia e të dhënave',
+    'LBL_DATAPRIVACY_VIEW_PII' => 'Shih të dhënat personale',
+    'LBL_DATAPRIVACY_MARKFORERASE' => 'Shëno për të fshirë',
+    'LBL_DATAPRIVACY_FIELDNAME' => 'Fusha',
+    'LBL_DATAPRIVACY_VALUE' => 'Vlera',
+    'LBL_DATAPRIVACY_CHANGED_BY' => 'Ndryshuar nga',
+    'LBL_DATAPRIVACY_SOURCE' => 'Burimi',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => 'Burimi',
+    'LBL_DATAPRIVACY_PII' => 'Të dhëna personale',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Shëno për të fshirë',
+    'TPL_DATAPRIVACY_PII_TITLE' => 'Të dhëna personale për {{{name}}}',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5940,6 +6209,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => 'Fushata' ,
     'email' => 'Email',
     'workflow' => 'Rrjedha e punës',
+    'system' => 'Sistemi',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5958,7 +6228,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -6021,6 +6290,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = 'Shablloni i bazës së 
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'Shablloni i bazës së njohurisë';
 $app_list_strings['moduleList']['EmbeddedFiles'] = 'Skedalë të integruar';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Skedar i integruar';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'Lek',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'P',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lei',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'Lekë',
+    'USD' => 'Dollarë',
+    'AFN' => 'Afganis',
+    'ARS' => 'Pezos',
+    'AWG' => 'Guilder',
+    'AUD' => 'Dollarë',
+    'AZN' => 'Manate të reja',
+    'BSD' => 'Dollarë',
+    'BBD' => 'Dollarë',
+    'BYR' => 'Rubla',
+    'EUR' => 'Euro',
+    'BZD' => 'Dollarë',
+    'BMD' => 'Dollarë',
+    'BOB' => 'Bolivianos',
+    'BAM' => 'Marka të këmbyeshme',
+    'BWP' => 'Pulas',
+    'BGN' => 'Leva',
+    'BRL' => 'Reais',
+    'GBP' => 'Funt',
+    'BND' => 'Dollarë',
+    'KHR' => 'Riel',
+    'CAD' => 'Dollarë',
+    'KYD' => 'Dollarë',
+    'CLP' => 'Pezos',
+    'CNY' => 'Juan Renminbi',
+    'COP' => 'Pezos',
+    'CRC' => 'ColÃ³n',
+    'HRK' => 'Kuna',
+    'CUP' => 'Pezos',
+    'CZK' => 'Koronë',
+    'DKK' => 'Koronë',
+    'DOP' => 'Pezos',
+    'XCD' => 'Dollarë',
+    'EGP' => 'Funt',
+    'SVC' => 'Kolonë',
+    'EEK' => 'Koronë',
+    'FKP' => 'Funt',
+    'FJD' => 'Dollarë',
+    'GHC' => 'Cedis',
+    'GIP' => 'Funt',
+    'GTQ' => 'Quetzales',
+    'GGP' => 'Funt',
+    'GYD' => 'Dollarë',
+    'HNL' => 'Lempira',
+    'HKD' => 'Dollarë',
+    'HUF' => 'Forintë',
+    'ISK' => 'Koronë',
+    'INR' => 'Rupi',
+    'IDR' => 'Rupi',
+    'IRR' => 'Rial',
+    'IMP' => 'Funt',
+    'ILS' => 'Shekel',
+    'JMD' => 'Dollar',
+    'JPY' => 'Jen',
+    'JEP' => 'Funt',
+    'KZT' => 'Tenge',
+    'KPW' => 'Uon',
+    'KRW' => 'Uon',
+    'KGS' => 'Som',
+    'LAK' => 'Kip',
+    'LVL' => 'Lati',
+    'LBP' => 'Funt',
+    'LRD' => 'Dollarë',
+    'CHF' => 'Frangë zvicerane',
+    'LTL' => 'Litai',
+    'MKD' => 'Dinar',
+    'MYR' => 'Ringit',
+    'MUR' => 'Rupi',
+    'MXN' => 'Pezos',
+    'MNT' => 'Tugrik',
+    'MZN' => 'Metikai',
+    'NAD' => 'Dollarë',
+    'NPR' => 'Rupi',
+    'ANG' => 'Guilder',
+    'NZD' => 'Dollarë',
+    'NIO' => 'Kordoba',
+    'NGN' => 'Naira',
+    'NOK' => 'Koronë',
+    'OMR' => 'Rial',
+    'PKR' => 'Rupi',
+    'PAB' => 'Balboa',
+    'PYG' => 'Guarani',
+    'PEN' => 'Nuevos soles',
+    'PHP' => 'Pezos',
+    'PLN' => 'Zlloti',
+    'QAR' => 'Rial',
+    'RON' => 'Lei i ri',
+    'RUB' => 'Rubël',
+    'SHP' => 'Funt',
+    'SAR' => 'Rial',
+    'RSD' => 'Dinar',
+    'SCR' => 'Rupi',
+    'SGD' => 'Dollarë',
+    'SBD' => 'Dollarë',
+    'SOS' => 'Shilingë',
+    'ZAR' => 'Rand',
+    'LKR' => 'Rupi',
+    'SEK' => 'Koronë',
+    'SRD' => 'Dollarë',
+    'SYP' => 'Funt',
+    'TWD' => 'Dollarë i ri',
+    'THB' => 'Baht',
+    'TTD' => 'Dollarë',
+    'TRY' => 'Lira',
+    'TRL' => 'Lira',
+    'TVD' => 'Dollarë',
+    'UAH' => 'Hryvnia',
+    'UYU' => 'Pezos',
+    'UZS' => 'Sums',
+    'VEF' => 'Bolivares Fuertes',
+    'VND' => 'Dong',
+    'YER' => 'Rial',
+    'ZWD' => 'Dollarë zimbabvian',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => 'Gjuajtje e vetme',

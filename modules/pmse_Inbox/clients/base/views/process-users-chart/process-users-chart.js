@@ -10,7 +10,6 @@
  */
 ({
     plugins: ['Dashlet', 'Chart'],
-    //className: 'process-users-chart',
     processCollection: null,
     currentValue: null,
     chartCollection: null,
@@ -24,13 +23,10 @@
     initialize: function(options) {
         this._super('initialize', [options]);
 
-        this.chart = nv.models.pieChart()
-            .x(function(d) {
-                return d.key;
-            })
-            .y(function(d) {
-                return d.value;
-            })
+        this.locale = SUGAR.charts.getUserLocale();
+        this.tooltipTemplate = app.template.getField('chart', 'singletooltiptemplate', 'Reports');
+
+        this.chart = sucrose.charts.pieChart()
             .margin({top: 5, right: 20, bottom: 20, left: 20})
             .donut(true)
             .donutLabelsOutside(true)
@@ -40,12 +36,25 @@
             .tooltips(true)
             .showLegend(true)
             .colorData('class')
-            .tooltipContent(function(key, x, y, e, graph) {
-                return '<p><b>' + key + '</b></p><p><b>' + parseInt(y, 10) + '</b></p>';
-            })
+            .tooltipContent(_.bind(function(eo, properties) {
+                var point = {};
+                point.key = eo.key;
+                point.label = app.lang.get('LBL_CHART_COUNT');
+                point.value = sucrose.utility.numberFormat(eo.value, this.locality.precision, false, this.locality);
+                return this.tooltipTemplate(point).replace(/(\r\n|\n|\r)/gm, '');
+            }, this))
             .strings({
-                noData: app.lang.get('LBL_CHART_NO_DATA')
-            });
+                legend: {
+                    close: app.lang.get('LBL_CHART_LEGEND_CLOSE'),
+                    open: app.lang.get('LBL_CHART_LEGEND_OPEN'),
+                    noLabel: app.lang.get('LBL_CHART_UNDEFINED')
+                },
+                noData: app.lang.get('LBL_CHART_NO_DATA'),
+                noLabel: app.lang.get('LBL_CHART_UNDEFINED')
+            })
+            .locality(this.locale);
+
+        this.locality = this.chart.locality();
     },
 
     initDashlet: function (view) {

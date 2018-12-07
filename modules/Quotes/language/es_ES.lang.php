@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Cuadro de mando de presupuestos',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Cuadro de mando del registro de presupuestos',
+
     'LBL_CONTRACTS'=>'Contratos',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contratos',
     'ERR_DELETE_RECORD' => 'Debe especificar un número de registro para eliminar el presupuesto.',
@@ -77,7 +81,7 @@ $mod_strings = array (
     'LBL_INVOICE'=>'Factura',
     'LBL_LEAD_SOURCE'=>'Toma de contacto',
     'LBL_LINE_ITEM_INFORMATION' => 'Línea de Detalle',
-    'LBL_LIST_ACCOUNT_NAME' => 'Nombre de Cuenta',
+    'LBL_LIST_ACCOUNT_NAME' => 'Nombre de la Cuenta',
     'LBL_LIST_AMOUNT' => 'Cantidad del Presupuesto',
     'LBL_LIST_AMOUNT_USDOLLAR' => 'Cantidad convertida',
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Usuario Asignado',
@@ -106,7 +110,7 @@ $mod_strings = array (
     'LBL_NEW_FORM_TITLE' => 'Crear Presupuesto',
     'LBL_NEXT_STEP'=>'Siguiente Paso',
     'LBL_NOT_CONVERTED' => 'Sin convertir',
-    'LBL_OPPORTUNITY_NAME' => 'Nombre de Oportunidad:',
+    'LBL_OPPORTUNITY_NAME' => 'Nombre de la Oportunidad:',
     'LBL_ORDER_STAGE'=>'Etapa del Pedido',
     'LBL_ORIGINAL_PO_DATE' =>  'Fecha Original Pedido:',
     'LBL_PAYMENT_TERMS' =>  'Forma de Pago:',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Subtotal (Dólares EEUU)',
     'LBL_SUBTOTAL' => 'Subtotal:',
     'LBL_TAXABLE_SUBTOTAL' => 'Subtotal imponible',
-    'LBL_SYSTEM_ID' => 'ID Sistema',
     'LBL_TAX_USDOLLAR'=>'Impuestos (Dólares EEUU)',
     'LBL_TAX' => 'Impuestos:',
     'LBL_TAX_TOTAL' => 'Impuesto total',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Eliminar la selección',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Eliminar los elementos seleccionados',
     'LBL_SAVE_LINE_ITEMS' => 'Guarde los elementos de la línea activa haciendo clic en la marca de verificación azul al lado de cada uno de ellos antes de guardar este presupuesto.',
+    'LBL_COPY_LINE_ITEMS' => 'Guarde los elementos de la línea activa haciendo clic en la marca de verificación azul al lado de cada uno de ellos antes de copiar este presupuesto.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Buscar en el Catálogo de productos',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'No hay datos disponibles',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Copiando elementos de la línea de presupuesto al nuevo presupuesto.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Copiando elementos de la línea de presupuesto al nuevo presupuesto. Este proceso puede tardar un tiempo.',
 );

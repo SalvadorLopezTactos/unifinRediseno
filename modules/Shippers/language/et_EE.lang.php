@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Vedaja kustutamiseks täpsustage kirje numbrit.',
   'NTC_STATUS' => 'Selle vedaja eemaldamiseks Vedaja ripploenditest määrake olekuks Inaktiivne',
   'NTC_LIST_ORDER' => 'Määrake järjekord, milles see vedaja Vedaja ripploendites kuvatakse',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Aktiivne',
-    'Inactive' => 'Inaktiivne',
-),
-	'LBL_EDITLAYOUT' => 'Muuda paigutust' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Muuda paigutust' /*for 508 compliance fix*/,
 );
-
 
 ?>

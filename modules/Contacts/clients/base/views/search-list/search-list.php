@@ -22,7 +22,7 @@ $viewdefs['Contacts']['base']['view']['search-list'] = array(
                     'css_class' => 'pull-left',
                 ),
                 array(
-                    'name' => 'full_name',
+                    'name' => 'name',
                     'type' => 'fullname',
                     'fields' => array(
                         'salutation',

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => '버그 목록 대시보드',
+  'LBL_BUGS_RECORD_DASHBOARD' => '버그 기록 대시보드',
+
   'LBL_MODULE_NAME' => '버그',
   'LBL_MODULE_NAME_SINGULAR'	=> '버그',
   'LBL_MODULE_TITLE' => '버그 트래커:홈',
@@ -22,7 +26,7 @@ $mod_strings = array (
   'LBL_SUBJECT' => '제목',
   'LBL_BUG' => '버그',
   'LBL_BUG_NUMBER' => '버그 번호',
-  'LBL_NUMBER' => '번호:',
+  'LBL_NUMBER' => '번호',
   'LBL_STATUS' => '상태',
   'LBL_PRIORITY' => '중요도',
   'LBL_DESCRIPTION' => '설명',
@@ -52,7 +56,7 @@ $mod_strings = array (
   'LBL_LIST_MY_BUGS' => '나에게 배정된 버그',
   'LNK_IMPORT_BUGS' => '버그내역 가져오기',
   'LBL_FOUND_IN_RELEASE' => '다음 릴리즈에서 발견',
-  'LBL_FIXED_IN_RELEASE' => '다음 릴리즈에서 수정',
+  'LBL_FIXED_IN_RELEASE' => '다음에 수정',
   'LBL_LIST_FIXED_IN_RELEASE' => '다음 릴리즈에서 수정',
   'LBL_WORK_LOG' => '활동 로그',
   'LBL_SOURCE' => '출처',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => '사례',
   'LBL_PROJECTS_SUBPANEL_TITLE' => '프로젝트',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => '문서',
-  'LBL_SYSTEM_ID' => '시스템 ID',
   'LBL_LIST_ASSIGNED_TO_NAME' => '담당자',
 	'LBL_ASSIGNED_TO_NAME' => '담당자',
 

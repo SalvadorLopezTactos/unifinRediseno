@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Per Trimestre',
     'LBL_BY_FISCAL_YEAR' => 'Per any fiscal',
     'LBL_BY_FISCAL_QUARTER' => 'Per trimestre fiscal',
+    'LBL_AMOUNT' => 'Quantitat',
     'LBL_COUNT' => 'Compte',
+    'LBL_PERCENT' => 'Percentatge',
     'LBL_SUM' => 'SUM',
     'LBL_AVG' => 'AVG',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Mes',
     'LBL_YEAR' => 'Any',
     'LBL_QUARTER' => 'Trimestre',
+    'LBL_FISCAL' => 'Fiscal',
     'LBL_FISCAL_YEAR' => 'Any Fiscal',
     'LBL_FISCAL_QUARTER' => 'Trimestre Fiscal',
 	'LBL_YESTERDAY'=>'Ahir',
@@ -541,4 +544,13 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Major o igual que',
 
     'LBL_FILTER_BY_MODULE' => 'Per Mòdul',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Amb gràfics',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Error de recuperació de les dades de l&#39;informe Drillthrough per a aquesta acció. Contacteu el propietari de l&#39;informe per obtenir assistència.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Drill through no està disponible',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'La vista de llista mostra tots els informes que cumpleixen amb el criteri de búsqueda actual i als
+quals els usuàris tenen accés. Podeu veure els detalls bàsics de cada informe en les columnes de la llista i en la vista prèvia. Podeu establir etiquetes per als informes i crear filtres. Feu clic en el nom de l&#39;informe per a veure&#39;l, o seleccioneu "Editar informe" en el menú d&#39;accions per a modificar-lo.',
+  );

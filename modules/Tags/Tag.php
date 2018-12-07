@@ -201,19 +201,13 @@ class Tag extends Basic
         parent::mark_deleted($id);
     }
 
+
     /**
-    * @inheritDoc
-    */
+     * @inheritDoc
+     */
     public function ACLAccess($view, $context = null)
     {
-        if ($view === 'ListView') {
-            // ListView is the view used in global search, so if we are hitting
-            // a global search request, we need to allow this no matter what or
-            // global search will break
-            if (is_array($context) && isset($context['source']) && $context['source'] === 'search_engine') {
-                return true;
-            }
-        } else if ($view === 'list' || $view === 'view') {
+        if ($view === 'list' || $view === 'view') {
             // for Filters we have 2 values for view - `list` for new tags and
             // `view` for existing tags and we want Tags to be searchable and
             // creatable when creating a new record for any module

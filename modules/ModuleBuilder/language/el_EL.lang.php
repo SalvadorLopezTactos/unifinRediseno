@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή τη σχέση;',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Αυτό θα κάνει αυτή η σχέση μόνιμη. Είστε βέβαιοι ότι θέλετε να αναπτύξετε αυτήν την σχέση;',
 'LBL_CONFIRM_DONT_SAVE' => 'Αλλαγές έχουν γίνει από την τελευταία σας αποθήκευση, θα θέλατε να αποθηκεύσετε;',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Configure the field to be full text searchable.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Τόνωση είναι η διαδικασία ενίσχυσης της σχετικότητας των πεδίων αρχείου/ων.<br />Πεδία με υψηλότερο επίπεδο τόνωσης θα λάβουν υψηλότερη βαρύτητα όταν εκτελεστεί η αναζήτηση. Όταν εκτελείται αναζήτηση, τα ταυτόσημα αρχεία που περιέχουν πεδία με υψηλότερη βαρύτητα θα εμφανίζονται υψηλότερα στα αποτελέσματα αναζήτησης.<br />Η τιμή προεπιλογής είναι 1.0, κάτι που συμβολίζιει ουδέτερη τόνωση. Για να εφαρμόσετε θετική τόνωση, οποιαδήποτε μεταβλητή τιμή υψηλότερη του 1 είναι αποδεκτή. Για αρνητική τόνωση, χρησιμοποιήστε τιμές χαμηλότερες του 1. Για παράδειγμα, τιμή 1.35 θα τονώσει θετικά ένα πεδίο επί 135%. Η χρήση τιμής 0.60 θα εφαρμόσει αρνητική τόνωση.<br />Σημειώστε ότι σε προηγούμενες εκδόσεις υπήρχε η απαίτηση εκτέλεσης εκ νέου ομαδοποίησης έρευνας πλήρους κειμένου. Κάτι τέτοιο δεν απαιτείται πλέον.',
 'LBL_POPHELP_IMPORTABLE'=>'Ναι: Το πεδίο θα πρέπει να περιλαμβάνεται στην εισαγωγή εφαρμογής. <br />Όχι: Το πεδίο δεν θα συμπεριληφθεί στην εισαγωγή. <br />Υποχρεωτικό: Η αξία για το πεδίο πρέπει να παρέχεται σε κάθε εισαγωγή.',
+'LBL_POPHELP_PII'=>'Αυτό το πεδίο θα σημειώνονται αυτόματα για έλεγχο και ως διαθέσιμο στην προβολή προσωπικών πληροφοριών.<br>Πεδία προσωπικών πληροφοριών μπορούν επίσης να σβηστούν μόνιμα όταν η εγγραφή σχετίζεται με αίτημα διαγραφήςγια την προστασία προσωπικών δεδομένων.<br>Η διαγραφή εκτελείται μέσα από την μονάδα προστασία προσωπικών δεδομένων και μπορεί να εκτελεστεί από τους διαχειριστές ή τους χρήστες στο ρόλο τους ως υπεύθυνοι προστασίας προσωπικών δεδομένων.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Πληκτρολογήστε έναν αριθμό για το Πλάτος, όπως μετριέται σε pixels. Η εικόνα που αποστέλετε θα κλιμακωθεί σε αυτό το Πλάτος.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Πληκτρολογήστε έναν αριθμό για το Ύψος, όπως μετριέται σε pixels. Η εικόνα που αποστέλετε θα κλιμακωθεί σε αυτό το Ύψος.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

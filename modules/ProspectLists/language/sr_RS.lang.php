@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Kontrolna tabla liste ciljnih listi',
+
   'LBL_MODULE_NAME' => 'Liste ciljeva',
   'LBL_MODULE_NAME_SINGULAR' => 'Lista ciljeva',
   'LBL_MODULE_ID'   => 'Liste ciljeva',

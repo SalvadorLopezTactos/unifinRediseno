@@ -10,8 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-define('TEAM_SET_CACHE_KEY', 'TeamSetsCache');
-define('TEAM_SET_MD5_CACHE_KEY', 'TeamSetsMD5Cache');
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\Security\Teams\TeamSet;
 
 class TeamSetManager {
 
@@ -121,9 +124,6 @@ class TeamSetManager {
                 'team_set_id' => $team_set_id,
             ));
 		}
-
-		//clear out the cache
-		self::flushBackendCache();
 	}
 
 	/**
@@ -159,23 +159,21 @@ class TeamSetManager {
      */
     public static function doesRecordWithTeamSetExist($moduleTableName, $teamSetId, $beanId = null)
     {
-        $whereStmt = 'team_set_id = ? AND deleted = 0';
-        $params = array($teamSetId);
-
-        if ($beanId) {
-            $whereStmt .= ' AND id != ?';
-            $params[] = $beanId;
-        }
-        $connection = DBManagerFActory::getConnection();
-        $queryBuilder = $connection->createQueryBuilder();
-        $queryBuilder->select('id')
-            ->from($moduleTableName)
-            ->where($whereStmt);
-
-        // set the maximum number of records to be 1 to avoid scanning extra records in database
-        $query = $queryBuilder->setMaxResults(1)->getSQL();
-        $numRows = $connection->executeQuery($query, $params)->rowCount();
-        return ($numRows == 1);
+		$whereStmt = 'team_set_id = ? AND deleted = 0';
+		$params = array($teamSetId);
+		if ($beanId) {
+			$whereStmt .= ' AND id != ?';
+			$params[] = $beanId;
+		}
+		$connection = DBManagerFActory::getConnection();
+		$queryBuilder = $connection->createQueryBuilder();
+		$queryBuilder->select('id')
+				->from($moduleTableName)
+				->where($whereStmt);
+		// set the maximum number of records to be 1 to avoid scanning extra records in database
+		$query = $queryBuilder->setMaxResults(1)->getSQL();
+		$numRows = $connection->executeQuery($query, $params)->rowCount();
+		return ($numRows == 1);
     }
 
     /**
@@ -197,8 +195,6 @@ class TeamSetManager {
         $query = 'DELETE FROM team_sets_modules WHERE team_set_id = ? AND module_table_name = ?';
         DBManagerFactory::getConnection()
             ->executeQuery($query, array($teamSetId, $focus->table_name));
-
-        self::flushBackendCache();
     }
 
 	/**
@@ -240,113 +236,27 @@ class TeamSetManager {
 	}
 
 	/**
-	 * Check if we have an md5 relationship to a team set id
-	 *
-	 * @param unknown_type $md5
-	 * @return unknown
-	 */
-	public static function getTeamSetIdFromMD5($md5){
-		$teamSetsMD5 = sugar_cache_retrieve(TEAM_SET_MD5_CACHE_KEY);
-        if ( $teamSetsMD5 != null && !empty($teamSetsMD5[$md5])) {
-            return $teamSetsMD5[$md5];
-        }
-
-	 	if ( file_exists($cachefile = sugar_cached('modules/Teams/TeamSetMD5Cache.php') )) {
-            require_once($cachefile);
-            sugar_cache_put(TEAM_SET_MD5_CACHE_KEY,$teamSetsMD5);
-            if(!empty($teamSetsMD5[$md5])){
-            	return $teamSetsMD5[$md5];
-            }
-        }
-        return null;
-	}
-
-	public static function addTeamSetMD5($team_set_id, $md5){
-		$teamSetsMD5 = sugar_cache_retrieve(TEAM_SET_MD5_CACHE_KEY);
-		if(empty($teamSetsMD5) || !is_array($teamSetsMD5)){
-			$teamSetsMD5 = array();
-		}
-        if ( $teamSetsMD5 != null && !empty($teamSetsMD5[$md5])) {
-            return;
-        }
-
-	 	if ( file_exists($cachefile = sugar_cached('modules/Teams/TeamSetMD5Cache.php')) ) {
-            require_once($cachefile);
-            sugar_cache_put(TEAM_SET_MD5_CACHE_KEY,$teamSetsMD5);
-            if(!empty($teamSetsMD5[$md5])){
-            	return;
-            }
-        }
-
-        $teamSetsMD5[$md5] = $team_set_id;
-        sugar_cache_put(TEAM_SET_MD5_CACHE_KEY,$teamSetsMD5);
-
-        if ( ! file_exists($cachefile) ) {
-            mkdir_recursive(dirname($cachefile));
-        }
-
-        if(sugar_file_put_contents_atomic($cachefile, "<?php\n\n".'$teamSetsMD5 = '.var_export($teamSetsMD5,true).";\n ?>") === false)
-        {
-            $GLOBALS['log']->error("File $cachefile could not be written");
-        }
-	}
-
-	/**
-	 * Retrieve a list of team associated with a set
+     * Retrieve a list of team associated with a set ordered by name
 	 *
 	 * @param $team_set_id string
 	 * @return array of teams array('id', 'name');
 	 */
 	public static function getUnformattedTeamsFromSet($team_set_id){
 		if(empty($team_set_id)) return array();
-		// Stored in a cache somewhere
-        $teamSets = sugar_cache_retrieve(TEAM_SET_CACHE_KEY);
-        if ( $teamSets != null && !empty($teamSets[$team_set_id])) {
-            return $teamSets[$team_set_id];
+
+        /** @var TeamSet $teamSet */
+        $teamSet = BeanFactory::newBean('TeamSets');
+
+        $teams = [];
+        foreach ($teamSet->getTeams($team_set_id) as $team) {
+            $teams[] = [
+                'id' => $team->id,
+                'name' => $team->name,
+                'name_2' => $team->name_2,
+            ];
         }
 
-        // Already stored in a file
-        if ( file_exists($cachefile = sugar_cached('modules/Teams/TeamSetCache.php')) ) {
-            require_once($cachefile);
-
-            if(!empty($teamSets[$team_set_id])){
-            	sugar_cache_put(TEAM_SET_CACHE_KEY,$teamSets);
-            	return $teamSets[$team_set_id];
-            }
-        }
-
-
-		$teamSet = BeanFactory::newBean('TeamSets');
-		$teams = $teamSet->getTeams($team_set_id);
-		$team_names = array();
-		foreach($teams as $id => $team){
-			$team_names[$id] = $team->name;
-		}
-		asort($team_names);
-		if(!is_array($teamSets)){
-			$teamSets = array();
-		}
-        foreach ($team_names as $team_id => $team_name) {
-            $tm = $teams[$team_id];
-            $teamSets[$team_set_id][] = array(
-                'id' => (string) $team_id,
-                'name' => $team_name,
-                'name_2' => $tm->name_2,
-            );
-        }
-
-	 	sugar_cache_put(TEAM_SET_CACHE_KEY,$teamSets);
-
-        if ( ! file_exists($cachefile) ) {
-            mkdir_recursive(dirname($cachefile));
-        }
-
-        if(sugar_file_put_contents_atomic($cachefile, "<?php\n\n".'$teamSets = '.var_export($teamSets,true).";\n ?>") === false)
-        {
-            $GLOBALS['log']->error("File $cachefile could not be written");
-        }
-
-        return isset($teamSets[$team_set_id])?$teamSets[$team_set_id]:'';
+        return $teams;
 	}
 
 	/**
@@ -445,51 +355,28 @@ class TeamSetManager {
 	 *
 	 */
 	public static function flushBackendCache( ) {
-        // This function will flush the cache files used for the module list and the link type lists
-
-        // TeamSetCache
-        sugar_cache_clear(TEAM_SET_CACHE_KEY);
-        $cachefile = sugar_cached('modules/Teams/TeamSetCache.php');
-        if(sugar_file_put_contents_atomic($cachefile, "<?php\n\n".'$teamSets = array();'."\n ?>") === false) {
-            $GLOBALS['log']->error("File $cachefile could not be written (flush)");
-        }
-
-        // TeamSetMD5Cache
-        sugar_cache_clear(TEAM_SET_MD5_CACHE_KEY);
-        $cachefile = sugar_cached('modules/Teams/TeamSetMD5Cache.php');
-        if(sugar_file_put_contents_atomic($cachefile, "<?php\n\n".'$teamSetsMD5 = array();'."\n ?>") === false) {
-            $GLOBALS['log']->error("File $cachefile could not be written (flush)");
-        }
     }
 
     /**
      * Given a particular team id, remove the team from all team sets that it belongs to
      *
      * @param string $team_id The team's id to remove from the team sets
-     * @return Array of team_set ids that were affected
+     * @throws DBALException
      */
     public static function removeTeamFromSets($team_id)
     {
         $conn = DBManagerFactory::getConnection();
 
-        $query = 'SELECT tsm.team_set_id, tsm.module_table_name
-FROM team_sets_modules tsm
-INNER JOIN team_sets_teams tst
-ON tsm.team_set_id = tst.team_set_id
-WHERE tst.team_id = ?';
-        $stmt = $conn->executeQuery($query, array($team_id));
-
-        $affectedTeamSets = array();
-        $team_set_id_modules = array();
-
-        while (($row = $stmt->fetch())) {
-    		  $team_set_id_modules[$row['team_set_id']][] = $row['module_table_name'];
-    	}
-
         $teamSet = BeanFactory::newBean('TeamSets');
+        $listener = Container::getInstance()->get(Listener::class);
 
-        foreach ($team_set_id_modules as $team_set_id => $tables) {
-            $teamSet->id = $team_set_id;
+        $query = 'SELECT team_set_id
+FROM team_sets_teams
+WHERE team_id = ?';
+        $stmt1 = $conn->executeQuery($query, array($team_id));
+
+        while (($teamSetId = $stmt1->fetchColumn())) {
+            $teamSet->id = $teamSetId;
             $teamSet->removeTeamFromSet($team_id);
 
             // Now check if the new team_md5 value already exists.  If it does, we have to go and
@@ -498,35 +385,246 @@ WHERE tst.team_id = ?';
             $query = 'SELECT id FROM team_sets WHERE team_md5 = ? AND id != ?';
             $stmt = $conn->executeQuery($query, array($teamSet->team_md5, $teamSet->id));
 
-            while (($existing_team_set_id = $stmt->fetchColumn())) {
-                //Update the records
-                foreach ($tables as $table) {
-                    $conn->update($table, array(
-                        'team_set_id' => $existing_team_set_id,
-                    ), array(
-                        'team_set_id' => $teamSet->id,
-                    ));
-                }
+            if (!($existing_team_set_id = $stmt->fetchColumn())) {
+                continue;
+            }
 
-                //Remove the team set entry
-                $conn->delete('team_sets', array(
-                    'id' => $teamSet->id,
-                ));
+            $query = <<<SQL
+SELECT module_table_name
+ FROM team_sets_modules
+ WHERE team_set_id = ?
+SQL;
+            $stmt2 = $conn->executeQuery($query, [$teamSetId]);
 
-                //Remove the team_sets_teams entries
-                $conn->delete('team_sets_teams', array(
-                    'team_set_id' => $teamSet->id,
-                ));
-
-                //Remove the team_sets_modules entries
-                $conn->delete('team_sets_modules', array(
+            //Update the records
+            while (($table = $stmt2->fetchColumn())) {
+                $conn->update($table, array(
+                    'team_set_id' => $existing_team_set_id,
+                ), array(
                     'team_set_id' => $teamSet->id,
                 ));
             }
 
-    	      $affectedTeamSets[$team_set_id] = $row[$team_set_id];
-    	}
+            //Remove the team set entry
+            $conn->delete('team_sets', array(
+                'id' => $teamSetId,
+            ));
 
-	    return $affectedTeamSets;
+            //Remove the team_sets_teams entries
+            $conn->delete('team_sets_teams', array(
+                'team_set_id' => $teamSetId,
+            ));
+
+            //Remove the team_sets_modules entries
+            $conn->delete('team_sets_modules', array(
+                'team_set_id' => $teamSetId,
+            ));
+
+            $listener->teamSetDeleted($teamSetId);
+        }
+    }
+
+    public static function reassignRecords(array $oldTeams, Team $newTeam)
+    {
+        if (!count($oldTeams)) {
+            return;
+        }
+
+        $conn = DBManagerFactory::getConnection();
+
+        $query = <<<SQL
+SELECT DISTINCT
+       tst1.team_set_id,
+       tst1.team_id
+  FROM team_sets_teams tst1
+ INNER JOIN team_sets_teams tst2
+    ON tst2.team_set_id = tst1.team_set_id
+ WHERE tst2.team_id IN(?)
+SQL;
+
+        $oldTeamIds = array_map(function (Team $team) {
+            return $team->id;
+        }, $oldTeams);
+
+        $stmt = $conn->executeQuery($query, [$oldTeamIds], [Connection::PARAM_STR_ARRAY]);
+        $data = [];
+
+        $db = DBManagerFactory::getInstance();
+
+        while (($row = $stmt->fetch())) {
+            $data[
+                $db->fromConvert($row['team_set_id'], 'id')
+            ][] = $db->fromConvert($row['team_id'], 'id');
+        }
+
+        if (!count($data)) {
+            return;
+        }
+
+        $query = <<<SQL
+SELECT DISTINCT tsm.module_table_name
+  FROM team_sets_modules tsm
+ INNER JOIN team_sets_teams tst
+    ON tst.team_set_id = tsm.team_set_id
+ WHERE tst.team_id IN(?)
+   AND tsm.module_table_name != 'users'
+SQL;
+
+        $stmt = $conn->executeQuery($query, [$oldTeamIds], [Connection::PARAM_STR_ARRAY]);
+        $modules = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        foreach ($data as $oldTeamSetId => $teamIds) {
+            $teamSetTeams = array_map(function ($id) {
+                $team = BeanFactory::newBean('Teams');
+                $team->id = $id;
+
+                return $team;
+            }, $teamIds);
+
+            $teamSet = new TeamSet(...$teamSetTeams);
+
+            foreach ($oldTeams as $oldTeam) {
+                $teamSet = $teamSet->withoutTeam($oldTeam);
+            }
+
+            $teamSet = $teamSet->withTeam($newTeam);
+            $newTeamSetId = $teamSet->persist();
+
+            self::replaceTeamSet($oldTeamSetId, $newTeamSetId, $modules);
+        }
+
+        foreach ($oldTeams as $oldTeam) {
+            self::replaceRecordTeam($oldTeam, $newTeam, $modules);
+            self::replaceUserTeam($oldTeam, $newTeam);
+        }
+    }
+
+    /**
+     * Replaces old team set with the new one in the records of the given modules
+     *
+     * @param string $oldTeamSetId
+     * @param string$newTeamSetId
+     * @param array $modules
+     */
+    private static function replaceTeamSet($oldTeamSetId, $newTeamSetId, array $modules)
+    {
+        $conn = DBManagerFactory::getConnection();
+
+        // udpate module tables
+        foreach ($modules as $module) {
+            // update team sets in module records
+            $conn->update($module, array(
+                'team_set_id' => $newTeamSetId,
+            ), array(
+                'team_set_id' => $oldTeamSetId,
+            ));
+        }
+
+        // select the records with the old team set for which the one with the new team set already exists
+        // with the same module so that when we don't create duplicates
+        $stmt = $conn->executeQuery(<<<SQL
+SELECT module_table_name
+  FROM team_sets_modules t1
+ WHERE team_set_id = ?
+   AND EXISTS (
+       SELECT NULL
+         FROM team_sets_modules t2
+        WHERE t2.module_table_name = t1.module_table_name
+          AND t2.team_set_id = ?
+)
+SQL
+            , [
+                $oldTeamSetId,
+                $newTeamSetId,
+            ]);
+
+        // delete the records which would produce duplicates after update
+        while (($module = $stmt->fetchColumn())) {
+            $conn->executeUpdate(<<<SQL
+DELETE FROM team_sets_modules
+ WHERE team_set_id = ?
+   AND module_table_name = ?
+SQL
+                , [$oldTeamSetId, $module]);
+        }
+
+        $conn->update('team_sets_modules', array(
+            'team_set_id' => $newTeamSetId,
+        ), array(
+            'team_set_id' => $oldTeamSetId,
+        ));
+
+        Container::getInstance()->get(Listener::class)
+            ->teamSetDeleted($oldTeamSetId);
+    }
+
+    /**
+     * Replaces old team with the new one in the records of the given modules
+     *
+     * @param Team $oldTeam
+     * @param Team $newTeam
+     * @param array $modules
+     *
+     * @throws DBALException
+     */
+    private static function replaceRecordTeam(Team $oldTeam, Team $newTeam, array $modules)
+    {
+        $conn = DBManagerFactory::getConnection();
+        $logger = LoggerManager::getLogger();
+
+        foreach ($modules as $module) {
+            $logger->debug(sprintf(
+                "Updating team_id column values in %s table from '%s' to '%s'",
+                $module,
+                $oldTeam->id,
+                $newTeam->id
+            ));
+
+            $conn->update($module, array(
+                'team_id' => $newTeam->id,
+            ), array(
+                'team_id' => $oldTeam->id,
+            ));
+        }
+    }
+
+    /**
+     * Reassigns users from the old team to the new one
+     *
+     * @param Team $oldTeam
+     * @param Team $newTeam
+     *
+     * @throws DBALException
+     */
+    private static function replaceUserTeam(Team $oldTeam, Team $newTeam)
+    {
+        $conn = DBManagerFactory::getConnection();
+        $logger = LoggerManager::getLogger();
+
+        // find affected users
+        $query = 'SELECT id FROM users WHERE default_team = ?';
+        $userIds = $conn->executeQuery($query, array($oldTeam->id))
+            ->fetchAll(PDO::FETCH_COLUMN);
+
+        // for User bean team_id is default_team
+        $logger->debug(sprintf(
+            "Updating default_team column values in users table from '%s' to '%s'",
+            $oldTeam->id,
+            $newTeam->id
+        ));
+
+        $conn->update('users', array(
+            'default_team' => $newTeam->id,
+        ), array(
+            'default_team' => $oldTeam->id,
+        ));
+
+        /** @var Team $newTeam */
+        $newTeam = BeanFactory::retrieveBean('Teams', $newTeam->id);
+
+        // make sure users are members of the assigned team
+        foreach ($userIds as $userId) {
+            $newTeam->add_user_to_team($userId);
+        }
     }
 }

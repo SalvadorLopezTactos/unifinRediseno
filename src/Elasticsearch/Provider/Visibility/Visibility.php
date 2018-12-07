@@ -21,6 +21,9 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Document;
 use Sugarcrm\Sugarcrm\Elasticsearch\Container;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\Filter\FilterInterface;
 use Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
+use SugarAutoLoader;
+use SugarBean;
+use User;
 
 /**
  *
@@ -67,7 +70,7 @@ class Visibility extends AbstractProvider implements ContainerAwareInterface
     /**
      * {@inheritdoc}
      */
-    public function processDocumentPreIndex(Document $document, \SugarBean $bean)
+    public function processDocumentPreIndex(Document $document, SugarBean $bean)
     {
         foreach ($this->getModuleStrategies($document->getType()) as $strategy) {
             $strategy->elasticProcessDocumentPreIndex($document, $bean, $this);
@@ -96,12 +99,12 @@ class Visibility extends AbstractProvider implements ContainerAwareInterface
     public function buildVisibilityFilters(QueryBuilder $builder, array $modules)
     {
         // main filter object
-        $main = new \Elastica\Filter\BoolFilter();
+        $main = new \Elastica\Query\BoolQuery();
 
         foreach ($modules as $module) {
 
             // main module filter
-            $modFilter = new \Elastica\Filter\BoolFilter();
+            $modFilter = new \Elastica\Query\BoolQuery();
             $modFilter->addMust($this->createFilter('Type', array('module' => $module)));
 
             // now add filters from different strategies
@@ -119,7 +122,7 @@ class Visibility extends AbstractProvider implements ContainerAwareInterface
      * Create filter
      * @param string $name
      * @param array $options
-     * @return \Elastica\Filter\AbstractFilter
+     * @return \Elastica\Query\AbstractQuery
      */
     public function createFilter($name, array $options = array())
     {
@@ -135,7 +138,7 @@ class Visibility extends AbstractProvider implements ContainerAwareInterface
     public function getFilter($name)
     {
         if (!isset($this->filters[$name])) {
-            $class = \SugarAutoLoader::customClass(sprintf(
+            $class = SugarAutoLoader::customClass(sprintf(
                 'Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\Filter\%sFilter',
                 $name
             ));
@@ -147,11 +150,11 @@ class Visibility extends AbstractProvider implements ContainerAwareInterface
 
     /**
      * Add visibility filters on top of given filter
-     * @param \User $user User context
-     * @param \Elastica\Filter\BoolFilter $filter
+     * @param User $user User context
+     * @param mixed $filter
      * @param string $module
      */
-    protected function addVisibilityFilters(\User $user, \Elastica\Filter\BoolFilter $filter, $module)
+    protected function addVisibilityFilters(User $user, $filter, $module)
     {
         foreach ($this->getModuleStrategies($module) as $strategy) {
             $strategy->elasticAddFilters($user, $filter, $this);
@@ -172,7 +175,7 @@ class Visibility extends AbstractProvider implements ContainerAwareInterface
 
     /**
      * Get visibility strategies for given module
-     * @param \SugarBean $bean
+     * @param SugarBean $bean
      * @return StrategyCollection
      */
     protected function getModuleStrategies($module)

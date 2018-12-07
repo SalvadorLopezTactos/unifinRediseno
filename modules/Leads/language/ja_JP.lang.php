@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'リードリストのダッシュ ボード',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'リードレコードのダッシュ ボード',
+
     'ERR_DELETE_RECORD' => 'リードを削除するにはレコード番号を指定する必要があります。',
     'LBL_ACCOUNT_DESCRIPTION'=> '取引先情報',
     'LBL_ACCOUNT_ID'=>'取引先ID',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => '商談規模:',
     'LBL_OPPORTUNITY_ID'=>'商談ID',
     'LBL_OPPORTUNITY_NAME' => '商談名:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'その他のEメール:',
     'LBL_OTHER_PHONE' => 'その他の電話:',
     'LBL_PHONE' => '電話:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => '別の住所を主となる住所にコピー',
     'NTC_COPY_PRIMARY_ADDRESS' => '主となる住所を別の住所にコピー',
     'NTC_DELETE_CONFIRMATION' => '本当にこのレコードを削除してよいですか？',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '商談を作成するためには取引先が必要です。\n新しい取引先を作成するか、既存の取引先を選択してください。',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '商談を作成するためには取引先が必要です。\\n新しい取引先を作成するか、既存の取引先を選択してください。',
     'NTC_REMOVE_CONFIRMATION' => '本当にこのリードをこのケースからはずしてよいですか？',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '本当にこのレコードを直属の部下としてはずしてよいですか？',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'キャンペーン',
@@ -308,4 +314,6 @@ Sugarがあなたの{{module_name}}の情報と一致する既存のレコード
     'LBL_MKTO_LEAD_SCORE' => 'リードソース',
 
     'LBL_FILTER_LEADS_REPORTS' => 'リードのレポート',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '以下のことに同意したビジネス目的:',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '最後に更新された同意',
 );

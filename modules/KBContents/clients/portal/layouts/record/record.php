@@ -48,7 +48,7 @@ $viewdefs['KBContents']['portal']['layout']['record'] = array(
                             'css_class' => 'dashboard-pane',
                             'components' => array(
                                 array(
-                                    'layout' => 'list-dashboard',
+                                    'layout' => 'rhs-pane',
                                 ),
                             ),
                         ),

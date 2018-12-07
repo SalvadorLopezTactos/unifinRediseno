@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Přidat úkol',
   'NTC_DELETE_CONFIRMATION' => 'Opravdu chete smazat tento záznam? Může být lepší změnit status na neaktivní, v opačném případě jakýkoli záznam používající tuto měnu bude v případě přístupu převeden do USD.',
   'LBL_BELOW_MIN' => 'Koeficient musí být větší než 0.',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktivní',
-    'Inactive' => 'Neaktivní',
-  ),
   'LBL_CREATED_BY' => 'Vytvořil:',
   'LBL_EDIT_LAYOUT' => 'Úprava rozvržení' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Pouze pro administrátory',
+  'LBL_CURRENCY_DEFAULT' => 'Americké dolary (výchozí)',
+
 );
 ?>

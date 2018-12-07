@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Cuadro de mando de lista de contactos',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Cuadro de mando del registro de contactos',
+
     'LNK_CONTACT_REPORTS' => 'Ver Informes de Contactos',
     'ERR_DELETE_RECORD' => 'Especifique el número de registro para eliminar el contacto.',
     'LBL_ACCOUNT_ID' => 'ID de Cuenta:',
@@ -36,7 +40,7 @@ $mod_strings = array (
     'LBL_ALT_ADDRESS_STREET' => 'Calle de dirección alternativa:',
     'LBL_ALTERNATE_ADDRESS' => 'Dirección alternativa:',
     'LBL_ANY_ADDRESS' => 'Cualquier dirección:',
-    'LBL_ANY_EMAIL' => 'Cualquier email:',
+    'LBL_ANY_EMAIL' => 'Correo electrónico:',
     'LBL_ANY_PHONE' => 'Cualquier Teléfono:',
     'LBL_ASSIGNED_TO_NAME' => 'Asignado a',
     'LBL_ASSIGNED_TO_ID' => 'Usuario Asignado',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Copiar dirección alternativa a dirección principal',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Copiar dirección principal a dirección alternativa',
     'NTC_DELETE_CONFIRMATION' => '¿Está seguro de que quiere eliminar este registro?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'La creación de una oportunidad requiere una cuenta.\n Cree una nueva cuenta o seleccione una existente.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'La creación de una oportunidad requiere una cuenta.\\n Cree una nueva cuenta o seleccione una existente.',
     'NTC_REMOVE_CONFIRMATION' => '¿Está seguro de que desea eliminar este contacto del caso?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '¿Está seguro que desea quitar este registro como informador directo?',
 
@@ -273,4 +277,6 @@ Para crear un {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Clasificación del cliente potencial',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Informe de contactos',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Consentimiento para fines comerciales',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consentimiento actualizado por última vez',
 );

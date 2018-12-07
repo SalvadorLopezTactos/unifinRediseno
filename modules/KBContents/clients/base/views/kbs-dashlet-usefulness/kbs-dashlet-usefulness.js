@@ -66,10 +66,6 @@
                         properties: [
                             {
                                 labels: 'value',
-                                print: '',
-                                subtitle: '',
-                                thousands: '',
-                                title: '',
                                 type: 'pie chart'
                             }
                         ],
@@ -89,11 +85,12 @@
                     chartParams = {
                         donut: true,
                         donutRatio: 0.45,
-                        hole: parseInt(useful * 100 / (notuseful + useful)) + ' %',
+                        hole: parseInt(useful * 100 / (notuseful + useful)) + '%',
                         donutLabelsOutside: true,
                         colorData: 'data',
                         chart_type: 'pie chart',
-                        show_legend: false
+                        show_legend: false,
+                        show_title: false
                     };
                 _.defer(_.bind(function() {
                     self.chartData.set({rawChartData: chartData, rawChartParams: chartParams});

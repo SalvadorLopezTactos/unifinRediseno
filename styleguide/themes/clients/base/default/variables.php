@@ -25,7 +25,7 @@ $lessdefs = array(
          * -------------------------
          * was @primary
          */
-        'BorderColor' => '#E61718',
+        'BorderColor' => '#d3dbe1',
 
         /**
          * Secondary Color:
@@ -33,7 +33,7 @@ $lessdefs = array(
          * -------------------------
          * was @secondary
          */
-        'NavigationBar' => '#282828',
+        'NavigationBar' => '#fff',
 
         /**
          * Primary Button Color:
@@ -41,6 +41,6 @@ $lessdefs = array(
          * -------------------------
          * was @primaryBtn
          */
-        'PrimaryButton' => '#176de5',
+        'PrimaryButton' => '#0679c8',
     ),
 );

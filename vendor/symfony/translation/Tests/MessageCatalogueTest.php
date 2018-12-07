@@ -82,10 +82,10 @@ class MessageCatalogueTest extends \PHPUnit_Framework_TestCase
 
     public function testAddCatalogue()
     {
-        $r = $this->getMock('Symfony\Component\Config\Resource\ResourceInterface');
+        $r = $this->getMockBuilder('Symfony\Component\Config\Resource\ResourceInterface')->getMock();
         $r->expects($this->any())->method('__toString')->will($this->returnValue('r'));
 
-        $r1 = $this->getMock('Symfony\Component\Config\Resource\ResourceInterface');
+        $r1 = $this->getMockBuilder('Symfony\Component\Config\Resource\ResourceInterface')->getMock();
         $r1->expects($this->any())->method('__toString')->will($this->returnValue('r1'));
 
         $catalogue = new MessageCatalogue('en', array('domain1' => array('foo' => 'foo'), 'domain2' => array('bar' => 'bar')));
@@ -104,36 +104,57 @@ class MessageCatalogueTest extends \PHPUnit_Framework_TestCase
 
     public function testAddFallbackCatalogue()
     {
-        $r = $this->getMock('Symfony\Component\Config\Resource\ResourceInterface');
+        $r = $this->getMockBuilder('Symfony\Component\Config\Resource\ResourceInterface')->getMock();
         $r->expects($this->any())->method('__toString')->will($this->returnValue('r'));
 
-        $r1 = $this->getMock('Symfony\Component\Config\Resource\ResourceInterface');
+        $r1 = $this->getMockBuilder('Symfony\Component\Config\Resource\ResourceInterface')->getMock();
         $r1->expects($this->any())->method('__toString')->will($this->returnValue('r1'));
 
-        $catalogue = new MessageCatalogue('en_US', array('domain1' => array('foo' => 'foo'), 'domain2' => array('bar' => 'bar')));
+        $r2 = $this->getMockBuilder('Symfony\Component\Config\Resource\ResourceInterface')->getMock();
+        $r2->expects($this->any())->method('__toString')->will($this->returnValue('r2'));
+
+        $catalogue = new MessageCatalogue('fr_FR', array('domain1' => array('foo' => 'foo'), 'domain2' => array('bar' => 'bar')));
         $catalogue->addResource($r);
 
-        $catalogue1 = new MessageCatalogue('en', array('domain1' => array('foo' => 'bar', 'foo1' => 'foo1')));
+        $catalogue1 = new MessageCatalogue('fr', array('domain1' => array('foo' => 'bar', 'foo1' => 'foo1')));
         $catalogue1->addResource($r1);
 
+        $catalogue2 = new MessageCatalogue('en');
+        $catalogue2->addResource($r2);
+
         $catalogue->addFallbackCatalogue($catalogue1);
+        $catalogue1->addFallbackCatalogue($catalogue2);
 
         $this->assertEquals('foo', $catalogue->get('foo', 'domain1'));
         $this->assertEquals('foo1', $catalogue->get('foo1', 'domain1'));
 
-        $this->assertEquals(array($r, $r1), $catalogue->getResources());
+        $this->assertEquals(array($r, $r1, $r2), $catalogue->getResources());
     }
 
     /**
      * @expectedException \LogicException
      */
-    public function testAddFallbackCatalogueWithCircularReference()
+    public function testAddFallbackCatalogueWithParentCircularReference()
     {
         $main = new MessageCatalogue('en_US');
         $fallback = new MessageCatalogue('fr_FR');
 
         $fallback->addFallbackCatalogue($main);
         $main->addFallbackCatalogue($fallback);
+    }
+
+    /**
+     * @expectedException \LogicException
+     */
+    public function testAddFallbackCatalogueWithFallbackCircularReference()
+    {
+        $fr = new MessageCatalogue('fr');
+        $en = new MessageCatalogue('en');
+        $es = new MessageCatalogue('es');
+
+        $fr->addFallbackCatalogue($en);
+        $es->addFallbackCatalogue($en);
+        $en->addFallbackCatalogue($fr);
     }
 
     /**
@@ -148,11 +169,11 @@ class MessageCatalogueTest extends \PHPUnit_Framework_TestCase
     public function testGetAddResource()
     {
         $catalogue = new MessageCatalogue('en');
-        $r = $this->getMock('Symfony\Component\Config\Resource\ResourceInterface');
+        $r = $this->getMockBuilder('Symfony\Component\Config\Resource\ResourceInterface')->getMock();
         $r->expects($this->any())->method('__toString')->will($this->returnValue('r'));
         $catalogue->addResource($r);
         $catalogue->addResource($r);
-        $r1 = $this->getMock('Symfony\Component\Config\Resource\ResourceInterface');
+        $r1 = $this->getMockBuilder('Symfony\Component\Config\Resource\ResourceInterface')->getMock();
         $r1->expects($this->any())->method('__toString')->will($this->returnValue('r1'));
         $catalogue->addResource($r1);
 
@@ -178,10 +199,10 @@ class MessageCatalogueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(array(), $catalogue->getMetadata('key2', 'messages'), 'Metadata key2 is array');
 
         $catalogue->deleteMetadata('key2', 'messages');
-        $this->assertEquals(null, $catalogue->getMetadata('key2', 'messages'), 'Metadata key2 should is deleted.');
+        $this->assertNull($catalogue->getMetadata('key2', 'messages'), 'Metadata key2 should is deleted.');
 
         $catalogue->deleteMetadata('key2', 'domain');
-        $this->assertEquals(null, $catalogue->getMetadata('key2', 'domain'), 'Metadata key2 should is deleted.');
+        $this->assertNull($catalogue->getMetadata('key2', 'domain'), 'Metadata key2 should is deleted.');
     }
 
     public function testMetadataMerge()

@@ -66,7 +66,7 @@ class OAuth2Api extends SugarApi
     protected function getOAuth2Server(array $args)
     {
         $platform = empty($args['platform']) ? 'base' : $args['platform'];
-        $oauth2Server = SugarOAuth2Server::getOAuth2Server();
+        $oauth2Server = SugarOAuth2Server::getOAuth2Server($platform);
         $oauth2Server->setPlatform($platform);
 
         return $oauth2Server;
@@ -142,6 +142,7 @@ class OAuth2Api extends SugarApi
 
     public function logout(ServiceBase $api, array $args)
     {
+        $externalLogin = !empty($_SESSION['externalLogin']) ? $_SESSION['externalLogin'] : false;
         $oauth2Server = $this->getOAuth2Server($args);
         if(!empty($api->user)) {
             $api->user->call_custom_logic('before_logout');
@@ -167,7 +168,7 @@ class OAuth2Api extends SugarApi
 
         $auth = AuthenticationController::getInstance();
         $res = array('success'=>true);
-        if ($auth->isExternal()) {
+        if ($externalLogin && $auth->isExternal()) {
             $logout = $auth->getLogoutUrl();
             if ($logout) {
                 $res['url'] = $logout;
@@ -195,6 +196,7 @@ class OAuth2Api extends SugarApi
         // cookie lets check if the user matches the current user. If so we
         // do not need to send the BWC session cookie again.
         if (isset($_COOKIE[$sessionName]) && !empty($_COOKIE[$sessionName])) {
+
             // close current session
             $tokenSession = session_id();
             session_write_close();

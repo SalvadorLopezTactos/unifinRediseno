@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Atvejų sąrašo ataskaitų sritis',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Atvejų duomenų ataskaitų sritis',
+
 	'ERR_DELETE_RECORD'					=> 'Privalote nurodyti įrašo numerį, kad būtų galima ištrinti klientą.',
 	'LBL_ACCOUNT_ID'					=> 'Kliento ID',
 	'LBL_ACCOUNT_NAME'					=> 'Kliento vardas:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Statusas:',
     'LBL_SOURCE' => 'Šaltinis:',
 	'LBL_SUBJECT'						=> 'Tema:',
-	'LBL_SYSTEM_ID'						=> 'Sistemos ID',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Kliento vardas',
 	'LBL_LIST_ASSIGNED'					=> 'Atsakingas',
 	'LBL_LIST_CLOSE'					=> 'Užbaigti',

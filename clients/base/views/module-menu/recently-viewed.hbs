@@ -11,5 +11,14 @@
  */
 --}}
 {{#each collection.models}}
-    <li><a class="ellipsis_inline" tabindex="-1" href="#{{buildRoute model=this}}" data-route="#{{buildRoute model=this}}" title="{{fieldValue this 'name'}}"><i class="fa fa-clock-o active"></i>{{fieldValue this 'name'}}</a></li>
+    <li>
+        <a class="ellipsis_inline" tabindex="-1" href="#{{buildRoute model=this}}" data-route="#{{buildRoute model=this}}" title="{{fieldValue this 'name'}}">
+            <i class="fa fa-clock-o active"></i>
+            {{#if attributes.erased}}
+                <span class="label">{{fieldValue this 'erasedText'}}</span>
+            {{else}}
+                {{fieldValue this 'name'}}
+            {{/if}}
+        </a>
+    </li>
 {{/each}}

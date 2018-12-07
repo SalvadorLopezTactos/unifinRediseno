@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => '선택하기' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => '비우기' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => '종류',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => '이메일 형식',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => '이메일 템플릿',
+    'LBL_TEMPLATE_HAS_VARIABLES' => '변수',
 );

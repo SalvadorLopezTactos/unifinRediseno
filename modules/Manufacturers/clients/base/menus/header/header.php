@@ -26,7 +26,7 @@ $viewdefs[$module_name]['base']['menu']['header'] = array(
         'icon' => 'fa-list',
     ),
     array(
-        'route'=>'#bwc/index.php?module=Manufacturers&action=EditView&return_module=Manufacturers&return_action=DetailView',
+        'route'=>'#Manufacturers',
         'label' =>'LNK_NEW_MANUFACTURER',
         'acl_action'=>'',
         'acl_module'=>'',

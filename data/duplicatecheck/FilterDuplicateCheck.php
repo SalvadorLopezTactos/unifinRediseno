@@ -93,7 +93,7 @@ class FilterDuplicateCheck extends DuplicateCheckStrategy
                             $inField = $this->getIncomingFieldFromPlaceholder($value);
                             if ($inField !== false) {
                                 if (isset($this->bean->$inField) && !empty($this->bean->$inField)) {
-                                    $value = $this->bean->$inField;
+                                    $value = $this->getValueFromField($inField);
                                 } else {
                                     unset($filterDef[$field]);
                                 }
@@ -107,6 +107,16 @@ class FilterDuplicateCheck extends DuplicateCheckStrategy
         }
         $dupeCheckFilterTemplate = array_filter($dupeCheckFilterTemplate);
         return $dupeCheckFilterTemplate;
+    }
+
+    /**
+     * Gets a value from a field on a bean
+     * @param string $inField The field to get the value from
+     * @return string
+     */
+    public function getValueFromField($inField)
+    {
+        return $this->bean->$inField;
     }
 
     /**

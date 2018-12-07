@@ -145,23 +145,10 @@ class PMSEStartEvent extends PMSEEvent
         // of method calls and could pose a problem in comparison beyond this point.
         $assigned_user_id = $bean->db->fromConvert($assigned_user_id, 'id');
 
-        // Get the name of the record
-        $cas_title = $bean->getRecordName();
-
-        // Used later to determine if we need to add a case number to the title
-        $addCaseNumber = empty($cas_title);
-
-        // If there is no record name, use a generic value because this is required
-        if ($addCaseNumber) {
-            $cas_title = "Case without name";
-        }
-
         //create a ProcessMaker row
         $case = BeanFactory::newBean('pmse_Inbox'); //new BpmInbox();
-        $case->name = $cas_title;
         $case->cas_parent = 0;
         $case->cas_status = 'IN PROGRESS';
-        $case->cas_title = $cas_title;
         $case->pro_id = $pro_id;
         $case->pro_title = $pro_title;
         $case->cas_custom_status = '';
@@ -175,22 +162,9 @@ class PMSEStartEvent extends PMSEEvent
 
         $case->save();
 
-        $cas_id = $case->db->getOne(sprintf(
-            'SELECT cas_id FROM %s WHERE id = %s',
-            $case->getTableName(),
-            $case->db->quoted($case->id)
-        ));
-        $case->cas_id = $cas_id;
-
-        if (!$case->in_save && $addCaseNumber) {
-            $case->cas_title = "Process # $cas_id";
-            $case->new_with_id = false;
-            $case->save();
-        }
-
         $flowData = array();
 
-        $flowData['cas_id'] = $cas_id;
+        $flowData['cas_id'] = $case->cas_id;
         $flowData['cas_index'] = 1;
         $flowData['cas_previous'] = 0;
         $flowData['pro_id'] = $pro_id;

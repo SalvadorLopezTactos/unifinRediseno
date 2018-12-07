@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'ケースリストのダッシュ ボード',
+    'LBL_CASES_RECORD_DASHBOARD' => 'ケースレコードのダッシュ ボード',
+
 	'ERR_DELETE_RECORD'					=> 'あなたがアカウントを削除するには、レコード番号を指定する必要があります。',
 	'LBL_ACCOUNT_ID'					=> '取引先ID',
 	'LBL_ACCOUNT_NAME'					=> '取引先:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'ステータス:',
     'LBL_SOURCE' => 'ソース:',
 	'LBL_SUBJECT'						=> '件名:',
-	'LBL_SYSTEM_ID'						=> 'システムID',
 	'LBL_LIST_ACCOUNT_NAME'				=> '取引先',
 	'LBL_LIST_ASSIGNED'					=> 'アサイン先',
 	'LBL_LIST_CLOSE'					=> '完了',

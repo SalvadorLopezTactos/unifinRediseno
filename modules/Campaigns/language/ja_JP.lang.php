@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => '利用可能フィールドから選択してください。',
     'LBL_DESCRIPTION_LEAD_FORM' => '詳細情報の設定:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'このフォームを送信するとキャンペーンに紐付けられたリードが生成されます。',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'このボックスをチェックすることで、マーケティングメールを今後受信することに同意することになります。',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Web To Leadフォームをダウンロードしてください。',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Web To Leadフォーム',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'必須情報を入力してください。',

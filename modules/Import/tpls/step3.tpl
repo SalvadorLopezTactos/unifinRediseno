@@ -21,6 +21,7 @@
 <input type="hidden" name="module" value="Import">
 <input type="hidden" name="previous_action" value="Confirm">
 <input type="hidden" name="custom_delimiter" value="{$CUSTOM_DELIMITER}">
+<input type="hidden" name="custom_delimiter_other" value="{$CUSTOM_DELIMITER_OTHER}">
 <input type="hidden" name="custom_enclosure" value="{$CUSTOM_ENCLOSURE}">
 <input type="hidden" name="import_type" value="{$TYPE}">
 <input type="hidden" name="source" value="{$smarty.request.source}">

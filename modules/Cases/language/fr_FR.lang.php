@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Tableau de bord de la liste de Tickets',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement de Tickets',
+
 	'ERR_DELETE_RECORD'					=> 'Vous devez spécifier un ID pour toute suppression.',
 	'LBL_ACCOUNT_ID'					=> 'Compte (ID)',
 	'LBL_ACCOUNT_NAME'					=> 'Nom du Compte:',
@@ -44,8 +48,7 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Statut :',
     'LBL_SOURCE' => 'Source :',
 	'LBL_SUBJECT'						=> 'Sujet :',
-	'LBL_SYSTEM_ID'						=> 'ID',
-	'LBL_LIST_ACCOUNT_NAME'				=> 'Nom Compte',
+	'LBL_LIST_ACCOUNT_NAME'				=> 'Nom du compte',
 	'LBL_LIST_ASSIGNED'					=> 'Assigné à',
 	'LBL_LIST_CLOSE'					=> 'Fermer',
 	'LBL_LIST_FORM_TITLE'				=> 'Liste des Tickets',

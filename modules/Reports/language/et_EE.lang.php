@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Kvartali järgi',
     'LBL_BY_FISCAL_YEAR' => 'By Fiscal Year',
     'LBL_BY_FISCAL_QUARTER' => 'By Fiscal Quarter',
+    'LBL_AMOUNT' => 'Summa',
     'LBL_COUNT' => 'Arvuta',
+    'LBL_PERCENT' => 'Protsent',
     'LBL_SUM' => 'SUM',
     'LBL_AVG' => 'AVG',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Kuu',
     'LBL_YEAR' => 'Aasta',
     'LBL_QUARTER' => 'Kvartal',
+    'LBL_FISCAL' => 'Rahandus',
     'LBL_FISCAL_YEAR' => 'Eelarveaasta',
     'LBL_FISCAL_QUARTER' => 'Fiscal Quarter',
 	'LBL_YESTERDAY'=>'Eile',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Järgmine kvartal',
     'LBL_ADD_RELATE' => "Lisa seotud",
     'LBL_DEL_THIS' => "Eemalda",
-    'LBL_ALERT_CANT_ADD' => 'Seotud moodulit ei saa lisada seni, kuni valite tabeli sidumiseks. \nVali mooduli rippmenüüst vasakul &#39;Lisa seotud&#39; nupp.',
+    'LBL_ALERT_CANT_ADD' => 'Seotud moodulit ei saa lisada seni, kuni valite tabeli sidumiseks. \\nVali mooduli rippmenüüst vasakul &#39;Lisa seotud&#39; nupp.',
     'LBL_BY_DAY' => 'Päeva järgi',
     'LBL_DAY' => 'Päev',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Vabalt valitud moodulid',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Greater Than Equal To',
 
     'LBL_FILTER_BY_MODULE' => 'By Module',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Diagrammidega',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Selle toimingu jaoks Drillthrough-aruande andmete hankimisel tekkis tõrge. Abi saamiseks võtke ühendust aruande omanikuga.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Drill through ei ole saadaval',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'Loendi vaates kuvatakse kõik aruanded, mis vastavad praeguse otsingu kriteeriumidele ja millele kasutajatel on juurdepääs. Saate vaadata iga aruande põhiandmeid loendivaate välja veergudes ja eelvaates. Saate aruannetele määrata silte ja luua filtreid. Aruande vaatamiseks klõpsake aruande nimel või valige aruande muutmiseks toimingumenüüs suvand Redigeeri aruannet.',
+  );

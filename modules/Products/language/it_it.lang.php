@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Dashboard elenco articoli nell&#39;offerta',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Elemento della Campagna Riportato',
     'LBL_MODULE_NAME' => 'Prodotti',
     'LBL_MODULE_NAME_SINGULAR' => 'Prodotto',
@@ -171,4 +174,5 @@ Per creare un {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Voci quotate Elenco dati dell&#39;offerta',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nuova voce quotata)',
     'LBL_DISCOUNT_PERCENT' => '% percentuale',
+    'LBL_DISCOUNT_TYPE' => 'Tipo di sconto',
 );

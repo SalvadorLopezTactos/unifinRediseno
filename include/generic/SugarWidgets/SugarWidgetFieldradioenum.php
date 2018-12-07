@@ -14,5 +14,3 @@
 class SugarWidgetFieldRadioEnum extends SugarWidgetFieldEnum {
 
 }
-?>
-

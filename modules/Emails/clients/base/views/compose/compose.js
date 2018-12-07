@@ -12,6 +12,7 @@
  * @class View.Views.Base.Emails.ComposeView
  * @alias SUGAR.App.view.views.BaseEmailsComposeView
  * @extends View.Views.Base.RecordView
+ * @deprecated Use {@link View.Views.Base.Emails.ComposeEmailView} instead.
  */
 ({
     extendsFrom: 'RecordView',
@@ -21,6 +22,7 @@
     ATTACH_TYPE_TEMPLATE: 'template',
     MIN_EDITOR_HEIGHT: 300,
     EDITOR_RESIZE_PADDING: 5,
+    ATTACHMENT_FIELD_HEIGHT: 44,
     FIELD_PANEL_BODY_SELECTOR: '.row-fluid.panel_body',
 
     sendButtonName: 'send_button',
@@ -31,13 +33,15 @@
      * @inheritdoc
      */
     initialize: function(options) {
+        app.logger.warn('View.Views.Base.Emails.ComposeView is deprecated. Use ' +
+            'View.Views.Base.Emails.ComposeEmailView instead.');
+
         this._super('initialize', [options]);
         this.events = _.extend({}, this.events, {
             'click [data-toggle-field]': '_handleSenderOptionClick'
         });
-        this.context.on('actionbar:template_button:clicked', this.launchTemplateDrawer, this);
-        this.context.on('actionbar:attach_sugardoc_button:clicked', this.launchDocumentDrawer, this);
-        this.context.on('actionbar:signature_button:clicked', this.launchSignatureDrawer, this);
+        this.context.on('email_attachments:file', this.launchFilePicker, this);
+        this.context.on('email_attachments:document', this.documentDrawerCallback, this);
         this.context.on('attachments:updated', this.toggleAttachmentVisibility, this);
         this.context.on('tinymce:oninit', this.handleTinyMceInit, this);
         this.on('more-less:toggled', this.handleMoreLessToggled, this);
@@ -59,22 +63,24 @@
      * @inheritdoc
      */
     _render: function() {
+        var prepopulateValues;
+        var $controls;
+
         this._super('_render');
-        if (this.createMode) {
-            this.setTitle(app.lang.get('LBL_COMPOSEEMAIL', this.module));
+
+        $controls = this.$('.control-group:not(.hide) .control-label');
+        if ($controls.length) {
+            $controls.first().addClass('begin-fieldgroup');
+            $controls.last().addClass('end-fieldgroup');
         }
 
-        if (this.model.isNotEmpty) {
-            var prepopulateValues = this.context.get('prepopulate');
-            if (!_.isEmpty(prepopulateValues)) {
-                this.prepopulate(prepopulateValues);
-            }
-            this.addSenderOptions();
+        this.setTitle(app.lang.get('LBL_COMPOSEEMAIL', this.module));
 
-            if (this.model.isNew()) {
-                this._updateEditorWithSignature(this._lastSelectedSignature);
-            }
+        prepopulateValues = this.context.get('prepopulate');
+        if (!_.isEmpty(prepopulateValues)) {
+            this.prepopulate(prepopulateValues);
         }
+        this.addSenderOptions();
 
         this.notifyConfigurationStatus();
     },
@@ -148,7 +154,7 @@
             subject = caseMacro + ' ' + relatedModel.get('name');
 
         subject = subject.replace(keyMacro, relatedModel.get('case_number'));
-        this.model.set('subject', subject);
+        this.model.set('name', subject);
         if (!this.isFieldPopulated('to_addresses')) {
             // no addresses, attempt to populate from contacts relationship
             var contacts = relatedModel.getRelatedCollection('contacts');
@@ -376,6 +382,8 @@
             to_addresses: this.model.get('to_addresses'),
             cc_addresses: this.model.get('cc_addresses'),
             bcc_addresses: this.model.get('bcc_addresses'),
+            subject: this.model.get('name'),
+            html_body: this.model.get('description_html'),
             attachments: this.getAttachmentsForApi(),
             related: this.getRelatedForApi(),
             teams: this.getTeamsForApi()
@@ -417,19 +425,19 @@
                 level: 'error',
                 messages: 'LBL_EMAIL_COMPOSE_ERR_NO_RECIPIENTS'
             });
-        } else if (!this.isFieldPopulated('subject') && !this.isFieldPopulated('html_body')) {
+        } else if (!this.isFieldPopulated('name') && !this.isFieldPopulated('description_html')) {
             app.alert.show('send_confirmation', {
                 level: 'confirmation',
                 messages: app.lang.get('LBL_NO_SUBJECT_NO_BODY_SEND_ANYWAYS', this.module),
                 onConfirm: sendEmail
             });
-        } else if (!this.isFieldPopulated('subject')) {
+        } else if (!this.isFieldPopulated('name')) {
             app.alert.show('send_confirmation', {
                 level: 'confirmation',
                 messages: app.lang.get('LBL_SEND_ANYWAYS', this.module),
                 onConfirm: sendEmail
             });
-        } else if (!this.isFieldPopulated('html_body')) {
+        } else if (!this.isFieldPopulated('description_html')) {
             app.alert.show('send_confirmation', {
                 level: 'confirmation',
                 messages: app.lang.get('LBL_NO_BODY_SEND_ANYWAYS', this.module),
@@ -585,14 +593,14 @@
             subject = template.get('subject');
 
             if (subject) {
-                this.model.set('subject', subject);
+                this.model.set('name', subject);
             }
 
             //TODO: May need to move over replaces special characters.
             if (template.get('text_only') === 1) {
-                this.model.set('html_body', template.get('body'));
+                this.model.set('description_html', template.get('body'));
             } else {
-                this.model.set('html_body', template.get('body_html'));
+                this.model.set('description_html', template.get('body_html'));
             }
 
             notes = app.data.createBeanCollection('Notes');
@@ -600,7 +608,8 @@
             notes.fetch({
                 'filter': {
                     'filter': [
-                        {'parent_id': {'$equals': template.id}}
+                        //FIXME: email_type should be EmailTemplates
+                        {'email_id': {'$equals': template.id}}
                     ]
                 },
                 success: _.bind(function(data) {
@@ -637,6 +646,13 @@
                 type: this.ATTACH_TYPE_TEMPLATE
             });
         }, this);
+    },
+
+    /**
+     * Launch the file upload picker on the attachments field.
+     */
+    launchFilePicker: function() {
+        this.context.trigger('attachment:filepicker:launch');
     },
 
     /**
@@ -746,7 +762,7 @@
     _insertSignature: function(signature) {
         if (_.isObject(signature) && signature.get('signature_html')) {
             var signatureContent = this._formatSignature(signature.get('signature_html')),
-                emailBody = this.model.get('html_body') || '',
+                emailBody = this.model.get('description_html') || '',
                 signatureOpenTag = '<br class="signature-begin" />',
                 signatureCloseTag = '<br class="signature-end" />',
                 signatureOpenTagForRegex = '(<br\ class=[\'"]signature\-begin[\'"].*?\/?>)',
@@ -769,7 +785,7 @@
                     (app.user.getPreference('signature_prepend') == 'true'));
             }
 
-            this.model.set('html_body', emailBody.replace(regex, '$1' + signatureContent + '$2'));
+            this.model.set('description_html', emailBody.replace(regex, '$1' + signatureContent + '$2'));
 
             return true;
         }
@@ -906,7 +922,8 @@
         editorHeight = $editor.height();
 
         //calculate the space left to fill - subtracting padding to prevent scrollbar
-        diffHeight = drawerHeight - headerHeight - recordHeight - showHideHeight - this.EDITOR_RESIZE_PADDING;
+        diffHeight = drawerHeight - headerHeight - recordHeight - showHideHeight -
+            this.ATTACHMENT_FIELD_HEIGHT - this.EDITOR_RESIZE_PADDING;
 
         //add the space left to fill to the current height of the editor to get a new height
         newEditorHeight = editorHeight + diffHeight;

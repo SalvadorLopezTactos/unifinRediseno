@@ -344,17 +344,13 @@ function readfile_chunked($filename,$retbytes=true)
 function sugar_rename( $old_filename, $new_filename){
 	if (empty($old_filename) || empty($new_filename)) return false;
 	$success = false;
-	if(SugarAutoLoader::fileExists($new_filename)) {
-    	SugarAutoLoader::unlink($new_filename);
+    if (file_exists($new_filename)) {
+        unlink($new_filename);
     	$success = rename($old_filename, $new_filename);
 	}
 	else {
 		$success = rename($old_filename, $new_filename);
 	}
-
-    if ($success) {
-        SugarAutoLoader::addToMap($new_filename);
-    }
 
 	return $success;
 }

@@ -21,7 +21,6 @@
      * contrary to everywhere else in the app
      *
      * @inheritdoc
-     * @override
      */
     setMode: function(name) {
         // skip textarea's setMode and call straight to Field.setMode

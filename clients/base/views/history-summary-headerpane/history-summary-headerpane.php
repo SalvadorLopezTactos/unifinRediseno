@@ -22,7 +22,7 @@ $viewdefs['base']['view']['history-summary-headerpane'] = array(
         array(
             'name' => 'title',
             'type' => 'label',
-            'default_value' => 'TPL_HISTORICAL_SUMMARY',
+            'default_value' => 'LBL_HISTORICAL_SUMMARY',
         ),
     ),
     'buttons' => array(

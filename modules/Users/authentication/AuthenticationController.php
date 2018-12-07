@@ -10,8 +10,29 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class AuthenticationController
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\TemporaryLockedUserException;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\PermanentLockedUserException;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\InactiveUserException;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\InvalidUserException;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Exception\ExternalAuthUserException;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
+
+use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
+
+use Sugarcrm\IdentityProvider\Authentication\Exception\SAMLRequestException;
+use Sugarcrm\IdentityProvider\Authentication\Exception\SAMLResponseException;
+use Sugarcrm\IdentityProvider\Authentication\Exception\InvalidIdentifier\InvalidIdentifierException;
+
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\Security\Core\Exception\AuthenticationServiceException;
+
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
+
+class AuthenticationController implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
 	public $loggedIn = false; //if a user has attempted to login
 	public $authenticated = false;
 	public $loginSuccess = false;// if a user has successfully logged in
@@ -36,9 +57,22 @@ class AuthenticationController
         }
 
         // check in custom dir first, in case someone want's to override an auth controller
-        if(!SugarAutoLoader::requireWithCustom('modules/Users/authentication/'.$type.'/' . $type . '.php')) {
+        $customFile = SugarAutoLoader::requireWithCustom('modules/Users/authentication/' . $type . '/' . $type . '.php');
+        if (!$customFile) {
             $type = 'SugarAuthenticate';
         }
+
+        $authUserPath = sprintf('custom/modules/Users/authentication/%1$s/%1$sUser.php', $type);
+        if (!preg_match('|^custom/|', $customFile) && !file_exists($authUserPath)) {
+            // if there's no customization we can safely use IdM glue
+            $idmGlueClass = 'IdM' . $type;
+            $idmGluePath = 'modules/Users/authentication/' . $idmGlueClass . '/' . $idmGlueClass . '.php';
+            if (file_exists($idmGluePath)) {
+                $type = $idmGlueClass;
+            }
+        }
+
+        $this->setLogger(LoggerFactory::getLogger('authentication'));
 
         $this->authController = new $type();
 	}
@@ -52,9 +86,13 @@ class AuthenticationController
      */
     public static function getInstance($type = null)
     {
-        global $sugar_config;
         if (empty($type)) {
-            $type = !empty($sugar_config['authenticationClass']) ? $sugar_config['authenticationClass'] : 'SugarAuthenticate';
+            $idpConfig = new Config(\SugarConfig::getInstance());
+            if ($idpConfig->isIDMModeEnabled()) {
+                $type = 'OAuth2Authenticate';
+            } else {
+                $type = $idpConfig->get('authenticationClass', 'SugarAuthenticate');
+            }
         }
         if (empty(static::$authcontrollerinstance)) {
             SugarAutoLoader::requireWithCustom('modules/Users/authentication/AuthenticationController.php');
@@ -89,22 +127,56 @@ class AuthenticationController
 	public function login($username, $password, $params = array())
 	{
 		//kbrill bug #13225
-		$_SESSION['loginAttempts'] = (isset($_SESSION['loginAttempts']))? $_SESSION['loginAttempts'] + 1: 1;
 		unset($GLOBALS['login_error']);
 
 		if($this->loggedIn)return $this->loginSuccess;
 		if(empty($params['noHooks'])) {
 		    LogicHook::initialize()->call_custom_logic('Users', 'before_login');
 		}
-
-		$this->loginSuccess = $this->authController->loginAuthenticate($username, $password, false, $params);
-		$this->loggedIn = true;
+        $_SESSION['externalLogin'] = false;
+        $this->loggedIn = false;
+        $this->loginSuccess = false;
+        try {
+            $this->loginSuccess = $this->authController->loginAuthenticate($username, $password, false, $params);
+            $this->loggedIn = true;
+        } catch (TemporaryLockedUserException $e) {
+            $_SESSION['login_error'] = $e->getMessage();
+        } catch (PermanentLockedUserException $e) {
+            $_SESSION['login_error'] = $e->getMessage();
+            $_SESSION['waiting_error'] = $e->getWaitingErrorMessage();
+        } catch (BadCredentialsException $e) {
+            $_SESSION['login_error'] = translate('ERR_INVALID_PASSWORD', 'Users');
+        } catch (InvalidIdentifierException $e) {
+            $_SESSION['login_error'] = translate('EXCEPTION_FATAL_ERROR', 'Users');
+            $this->logger->error($e->getMessage());
+        } catch (SAMLRequestException $e) {
+            $this->logger->error($e->getMessage());
+            $_SESSION['login_error'] = translate('ERR_INVALID_PASSWORD', 'Users');
+        } catch (SAMLResponseException $e) {
+            $this->logger->error($e->getMessage());
+            $_SESSION['login_error'] = translate('ERR_INVALID_PASSWORD', 'Users');
+        } catch (AuthenticationServiceException $e) {
+            $this->logger->error($e->getMessage());
+            $_SESSION['login_error'] = $this->getMessageForProviderException($e->getPrevious());
+        } catch (InactiveUserException $e) {
+            $this->logger->error($e->getMessage());
+            $_SESSION['login_error'] = $this->getMessageForProviderException($e);
+        } catch (InvalidUserException $e) {
+            $this->logger->error($e->getMessage());
+            $_SESSION['login_error'] = $this->getMessageForProviderException($e);
+        } catch (ExternalAuthUserException $e) {
+            $this->logger->error($e->getMessage());
+            $_SESSION['login_error'] = $this->getMessageForProviderException($e);
+        } catch (\Exception $e) {
+            $this->logger->error($e->getMessage());
+            $_SESSION['login_error'] = translate('ERR_INVALID_PASSWORD', 'Users');
+        }
 
 		if($this->loginSuccess){
 			loginLicense();
 			if(!empty($GLOBALS['login_error'])){
 				unset($_SESSION['authenticated_user_id']);
-				$GLOBALS['log']->fatal('FAILED LOGIN: potential hack attempt:'.$GLOBALS['login_error']);
+                $this->logger->fatal('FAILED LOGIN: potential hack attempt:' . $GLOBALS['login_error']);
 				$this->loginSuccess = false;
 				return false;
 			}
@@ -150,7 +222,6 @@ class AuthenticationController
 			    LogicHook::initialize();
 			    $GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
 			}
-			$GLOBALS['log']->fatal('FAILED LOGIN:attempts[' .$_SESSION['loginAttempts'] .'] - '. $username);
 		}
 		// if password has expired, set a session variable
 
@@ -215,7 +286,12 @@ class AuthenticationController
 	public function logout()
 	{
 		$GLOBALS['current_user']->call_custom_logic('before_logout');
-		$this->authController->logout();
+        try {
+            $this->authController->logout();
+        } catch (SAMLResponseException $e) {
+            $this->logger->error($e->getMessage());
+            throw $e;
+        }
 		LogicHook::initialize();
 		$GLOBALS['logic_hook']->call_custom_logic('Users', 'after_logout');
 	}
@@ -226,7 +302,8 @@ class AuthenticationController
 	 */
 	public function isExternal()
 	{
-	    return $this->authController instanceof SugarAuthenticateExternal;
+        return $this->authController instanceof SugarAuthenticateExternal
+            || $this->authController instanceof ExternalLoginInterface;
 	}
 
 	/**
@@ -245,7 +322,7 @@ class AuthenticationController
 
 	/**
 	 * Get URL for external login
-	 * @return string
+     * @return string|array
 	 */
 	public function getLogoutUrl()
 	{
@@ -254,4 +331,23 @@ class AuthenticationController
 	    }
 	    return false;
 	}
+
+    /**
+     * return translated error message
+     * @param InvalidUserException|InactiveUserException $exception
+     * @return string return translated error message
+     */
+    protected function getMessageForProviderException($exception)
+    {
+        if ($exception instanceof InvalidUserException) {
+            return translate('LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN');
+        } elseif ($exception instanceof ExternalAuthUserException) {
+            return translate('ERR_INVALID_PASSWORD', 'Users') . ' ' .
+                translate('LBL_EXTERNAL_USER_CANT_LOGIN', 'Users');
+        } elseif ($exception instanceof InactiveUserException) {
+            return translate('LBL_LOGIN_INACTIVE_USER');
+        } else {
+            return translate('ERR_INVALID_PASSWORD', 'Users');
+        }
+    }
 }

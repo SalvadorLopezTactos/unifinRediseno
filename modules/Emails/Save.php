@@ -87,6 +87,7 @@ if(!empty($_REQUEST['type'])) {
 	$focus->type = $_REQUEST['type'];
 } elseif(empty($focus->type)) { // cn: from drafts/quotes
 	$focus->type = 'archived';
+    $focus->state = Email::STATE_ARCHIVED;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -127,8 +128,10 @@ $focus->handleAttachments();
 ////	END ATTACHMENT HANDLING
 ///////////////////////////////////////////////////////////////////////////////
 $focus->status = 'draft';
+$focus->state = Email::STATE_DRAFT;
 if($focus->type == 'archived' ) {
 	$focus->status= 'archived';
+    $focus->state = Email::STATE_ARCHIVED;
 	$focus->date_start = $_REQUEST['date_start'];
 	$focus->time_start = $_REQUEST['time_start'] . $_REQUEST['meridiem'];
 } elseif(($focus->type == 'out' || $focus->type == 'forward') && isset($_REQUEST['send']) && $_REQUEST['send'] == '1') {
@@ -156,8 +159,10 @@ if($focus->type == 'archived' ) {
 	///////////////////////////////////////////////////////////////////////////
 	if($focus->send()) {
         $focus->status = 'sent';
+        $focus->state = Email::STATE_ARCHIVED;
 	} else {
 		$focus->status = 'send_error';
+        $focus->state = Email::STATE_DRAFT;
 	}
 }
 $focus->to_addrs = $_REQUEST['to_addrs'];

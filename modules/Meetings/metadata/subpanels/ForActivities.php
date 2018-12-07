@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: ForActivities.php 13782 2006-06-06 17:58:55Z majed $
 $subpanel_layout = array(
 	//Removed button because this layout def is a component of
 	//the activities sub-panel.

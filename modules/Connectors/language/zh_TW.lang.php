@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => '錯誤︰在結果中沒有已經對應的模組欄位以供顯示。請連絡系統管理員。',
     'LBL_INFO_INLINE' => '資訊' /*for 508 compliance fix*/,
     'LBL_CLOSE' => '關閉' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => '未發現給定的資源ID的連接器。',
 );
 

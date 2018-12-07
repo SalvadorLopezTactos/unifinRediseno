@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Nadzorna ploča za popis ponuda',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o ponudama',
+
     'LBL_CONTRACTS'=>'Ugovori',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Ugovori',
     'ERR_DELETE_RECORD' => 'Broj zapisa mora biti naveden za brisanje ponude.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Podzbroj (američki dolar)',
     'LBL_SUBTOTAL' => 'Podzbroj:',
     'LBL_TAXABLE_SUBTOTAL' => 'Oporezivi podzbroj',
-    'LBL_SYSTEM_ID' => 'ID sustava',
     'LBL_TAX_USDOLLAR'=>'Porez (američki dolar)',
     'LBL_TAX' => 'Porez:',
     'LBL_TAX_TOTAL' => 'Ukupni porez',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Izbriši odabrano',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Izbriši odabrane stavke',
     'LBL_SAVE_LINE_ITEMS' => 'Spremite sve aktivne stavke tako da kliknete na plavu oznaku potvrde pored svake stavke prije nego što spremite ovu ponudu.',
+    'LBL_COPY_LINE_ITEMS' => 'Spremite sve aktivne stavke tako da kliknete na plavu kvačicu pokraj svake stavke prije nego što kopirate ovu ponudu.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Pretraži katalog proizvoda',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Nema dostupnih podataka',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Kopiranje prodanih stavki u novu ponudu.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Kopiranje prodanih stavki u novu ponudu. Ovaj proces može potrajati.',
 );

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Vigade loendi töölaud',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Veakirjete töölaud',
+
   'LBL_MODULE_NAME' => 'Vead',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Viga',
   'LBL_MODULE_TITLE' => 'Vigade otsija: avaleht',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Juhtumid',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projektid',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumendid',
-  'LBL_SYSTEM_ID' => 'Süsteemi ID',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Määratud kasutaja',
 	'LBL_ASSIGNED_TO_NAME' => 'Määratud kasutajale',
 

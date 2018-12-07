@@ -593,7 +593,7 @@
 
         app.alert.show('delete_confirmation', {
             level: 'confirmation',
-            messages: app.lang.get('NTC_DELETE_CONFIRMATION_MULTIPLE'),
+            messages: app.lang.get('NTC_DELETE_CONFIRMATION_MULTIPLE', this.module),
             onConfirm: _.bind(this.deleteModels, this),
             onCancel: _.bind(function() {
                 app.analytics.trackEvent('click', 'mass_delete_cancel');

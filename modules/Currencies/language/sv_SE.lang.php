@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Skapa uppgift',
   'NTC_DELETE_CONFIRMATION' => 'Är du säker på att du vill radera posten? Alla poster som använder denna valuta kommer bli konverterade till systemet standardvaluta när de blir accessade. Det kan vara bättre att sätta statusen till inaktiv.',
   'LBL_BELOW_MIN' => 'Omräkningskursen måste vara över 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Inaktiv',
-  ),
   'LBL_CREATED_BY' => 'Skapad av',
   'LBL_EDIT_LAYOUT' => 'Redigera layout' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Endast administratörer',
+  'LBL_CURRENCY_DEFAULT' => 'US-dollar (standard)',
+
 );
 ?>

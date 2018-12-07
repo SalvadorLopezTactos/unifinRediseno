@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Описание используемых процессов',
   'LBL_MODULE_TITLE' => 'Описание используемых процессов',
   'LBL_MODULE_NAME_SINGULAR' => 'Описание используемых технологических процессов',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'не равный',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'не является',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'не равно',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Время запуска',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Добавить',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Закрыть',

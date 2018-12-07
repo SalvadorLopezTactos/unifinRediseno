@@ -21,6 +21,7 @@ $dictionary['TaxRate'] = array(
             'len' => '26,6',
             'importable' => 'required',
             'required' => true,
+            'massupdate' => true,
         ),
         'list_order' => array(
             'name' => 'list_order',
@@ -63,7 +64,7 @@ $dictionary['TaxRate'] = array(
             'lhs_key' => 'id',
             'rhs_module' => 'Quotes',
             'rhs_table' => 'quotes',
-            'rhs_key' => 'quote_id',
+            'rhs_key' => 'taxrate_id',
             'relationship_type' => 'one-to-many',
         ),
     ),
@@ -77,3 +78,5 @@ VardefManager::createVardef(
         'default'
     )
 );
+
+$dictionary['TaxRate']['fields']['tag']['massupdate'] = false;

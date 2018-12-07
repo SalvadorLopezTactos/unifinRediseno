@@ -308,6 +308,12 @@ class SugarFieldRelate extends SugarFieldBase {
 
                 $mm = MetaDataManager::getManager($service->platform);
                 $data[$link]['_acl'] = $mm->getAclForModule($relate->module_dir, $service->user, $relate);
+
+                $linkErasedFields = $link . '_erased_fields';
+
+                if (isset($bean->$linkErasedFields)) {
+                    $data[$link]['_erased_fields'] = $bean->$linkErasedFields;
+                }
             }
         }
     }

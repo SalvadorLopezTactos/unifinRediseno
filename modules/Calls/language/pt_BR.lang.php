@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Painel de lista de chamadas',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Painel de registro de chamadas',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Chamadas',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Chamada',

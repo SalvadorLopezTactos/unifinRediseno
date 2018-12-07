@@ -9,6 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Elastica\Client as Client;
+use Elastica\Request as Request;
+
 /**
  * Check that the Sugar FTS Engine configuration is valid
  */
@@ -16,6 +20,21 @@ class SugarUpgradeCheckFTSConfig extends UpgradeScript
 {
     public $order = 200;
     public $version = '7.1.5';
+
+    /**
+     * User-agent settings
+     */
+    const USER_AGENT = 'SugarCRM';
+    const VERSION_UNKNOWN = 'unknown';
+
+    /**
+     * ES supported versions. Same as the version checking in src/Elasticsearch/Adapter/Client.php.
+     * @var array
+     */
+    protected $supportedVersions = array(
+        array('version' =>'5.4', 'operator' => '>='),
+        array('version' => '7.0', 'operator' => '<'),
+    );
 
     public function run()
     {
@@ -31,10 +50,9 @@ class SugarUpgradeCheckFTSConfig extends UpgradeScript
             $this->error('Access Full Text Search configuration under Administration > Search.');
         } else {
             // Test Elastic FTS connection
-            $searchEngine = SugarSearchEngineFactory::getInstance('Elastic', $ftsConfig['Elastic']);
-            $status = $this->getServerStatusElastic($searchEngine, $ftsConfig['Elastic']);
+            $ftsStatus = $this->getServerStatusElastic($ftsConfig['Elastic']);
 
-            if (!$status['valid']) {
+            if (!$ftsStatus['valid']) {
                 $this->error('Connection test for Elastic Full Text Search engine failed.  Check your FTS configuration.');
                 $this->error('Access Full Text Search configuration under Administration > Search.');
             }
@@ -42,22 +60,34 @@ class SugarUpgradeCheckFTSConfig extends UpgradeScript
     }
 
     /**
-     * The older versions of getServerStatus may be broken, so we need to re-implement this to have it pass
+     * Get the status of the Elastic server before the upgrade, using the raw Elastica library calls.
      *
+     * Here we don't use src/Elasticsearch/Adapter/Client.php::verifyConnectivity() directly,
+     * because the version checking there is tied to the from version of the upgrade. However, the Elastic
+     * version may be changed during the upgrade. For instance, from Sugar 7.9 to 7.10, Elastic is
+     * upgraded from 1.x to 5.x).
+     *
+     * @param array $config the Elastic server's host and port.
      * @return array
      */
-    protected function getServerStatusElastic($searchEngine, $config)
+    protected function getServerStatusElastic($config)
     {
-        $this->_client = $this->getElasticaClient($config);
         global $app_strings;
         $isValid = false;
+
         try {
-            $results = $this->_client->request('', $this->getElasticaRequestConstant('GET'))->getData();
-            if (!empty($results['status']) && $results['status'] === 200) {
+            //add config for sugar version
+            $config = $this->setSugarVersion($config);
+
+            $client = new Client($config);
+            $data = $client->request('', Request::GET)->getData();
+
+            if (!empty($data['version']['number']) && $this->isSupportedVersion($data['version']['number'])) {
                 $isValid = true;
                 $displayText = $app_strings['LBL_EMAIL_SUCCESS'];
             } else {
                 $displayText = $app_strings['ERR_ELASTIC_TEST_FAILED'];
+                $this->error("Elastic version is unknown or unsupported!");
             }
         } catch (Exception $e) {
             $displayText = $e->getMessage();
@@ -68,42 +98,40 @@ class SugarUpgradeCheckFTSConfig extends UpgradeScript
     }
 
     /**
-     * Wrapper to instantiate Elastica Client object
+     * Verify if Elasticsearch version meets the supported list.
      *
-     * @param array $config
-     * @return mixed \Elastica\Client|Elastica_Client
+     * @param string $version Elasticsearch version to be checked
+     * @return boolean
      */
-    protected function getElasticaClient($config)
+    protected function isSupportedVersion($version)
     {
-        $class = $this->getElasticaFQClassName('Client');
-        return new $class($config);
-    }
-
-    /**
-     * Wrapper to get constant values from Elastica Request
-     *
-     * @param string $name
-     * @return string
-     */
-    protected function getElasticaRequestConstant($name)
-    {
-        $class = $this->getElasticaFQClassName('Request');
-        return constant($class.'::'.$name);
-    }
-
-    /**
-     * Get fully qualified Elastica class name based on the available Elastica library
-     *
-     * @param string $class Base Elastica class name (i.e. Client, Request, ...)
-     * @return string
-     */
-    protected function getElasticaFQClassName($class)
-    {
-        if (class_exists('Elastica_'.$class)) {
-            $prefix =  'Elastica_';
-        } else {
-            $prefix = '\\Elastica\\';
+        $result = true;
+        foreach ($this->supportedVersions as $check) {
+            $result = $result && version_compare($version, $check['version'], $check['operator']);
         }
-        return $prefix.$class;
+        return $result;
+    }
+
+    /**
+     * Add the upgrade-to-version of sugar instance to the client header "User-Agent".
+     *
+     * @param array $config the Elastic server's configuration.
+     * @return array
+     */
+    protected function setSugarVersion(array $config)
+    {
+        $config = empty($config)? array(): $config;
+        $config['curl'][CURLOPT_USERAGENT] = self::USER_AGENT . '/' . $this->getSugarVersion();
+        return $config;
+    }
+
+    /**
+     * Get the upgrade-to-version of sugar instance, returns "unknown" if not available.
+     * @return string
+     */
+    protected function getSugarVersion()
+    {
+        $version = $this->to_version;
+        return empty($version) ? self::VERSION_UNKNOWN : $version;
     }
 }

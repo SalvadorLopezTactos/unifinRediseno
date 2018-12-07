@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Un ID doit être spécifié pour toute suppression.',
   'NTC_STATUS' => 'Utiliser le statut "Inactif" pour supprimer ce Taux de taxe',
   'NTC_LIST_ORDER' => 'Ordre dans lequel ce Taux de taxe apparaîtra dans la liste',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Actif',
-    'Inactive' => 'Inactif',
-  ),
   'LBL_EDITLAYOUT' => 'Éditer la mise en page' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Créé par (ID)',
   'LBL_MODIFIED_ID'=>'Modifié par (ID)',

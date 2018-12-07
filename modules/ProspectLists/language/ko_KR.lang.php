@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => '목표고객 목록 대시보드',
+
   'LBL_MODULE_NAME' => '목표고객 목록',
   'LBL_MODULE_NAME_SINGULAR' => '목표고객 목록',
   'LBL_MODULE_ID'   => '목표고객 목록',
@@ -22,7 +25,7 @@ $mod_strings = array (
   'LBL_ENTRIES' => '최종 항목',
   'LBL_LIST_PROSPECT_LIST_NAME' => '목표고객 목록',
   'LBL_LIST_ENTRIES' => '목록의 목표고객',
-  'LBL_LIST_DESCRIPTION' => '설명:',
+  'LBL_LIST_DESCRIPTION' => '설명',
   'LBL_LIST_TYPE_NO' => '유형',
   'LBL_LIST_END_DATE' => '완료일',
   'LBL_DATE_ENTERED' => '생성일',

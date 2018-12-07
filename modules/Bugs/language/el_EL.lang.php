@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Σφαλμάτων',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφών Σφαλμάτων',
+
   'LBL_MODULE_NAME' => 'Σφάλματα',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Σφάλμα',
   'LBL_MODULE_TITLE' => 'Σφάλμα Σημείου Εντοπισμού: Αρχή',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Υποθέσεις',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Έργα',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Έγγραφα',
-  'LBL_SYSTEM_ID' => 'Ταυτότητα Συστήματος',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Ανατεθειμένος Χειριστής',
 	'LBL_ASSIGNED_TO_NAME' => 'Ανατέθηκε σε',
 

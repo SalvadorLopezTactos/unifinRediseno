@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Definicija procesa',
   'LBL_MODULE_TITLE' => 'Definicija procesa',
   'LBL_MODULE_NAME_SINGULAR' => 'Definicija procesa',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'različito je',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'nije',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nije jednako sa',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Vreme izvršavanja',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Dodaj',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Zatvori',

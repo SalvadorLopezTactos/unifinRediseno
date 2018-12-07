@@ -55,7 +55,7 @@ $mod_strings = array(
     'ERROR_MANIFEST_TYPE'                       => 'Manifestitiedoston tulee määrittää pakkaustyyppi.',
     'ERROR_PACKAGE_TYPE'                        => 'Manifestitiedosto määrittää tuntemattoman pakkaustyypin ‘%s’',
     'ERROR_VERSION_INCOMPATIBLE'                => 'Ladattu tiedosto ei ole yhteensopiva tämän Sugarin version kanssa:&nbsp;%s',
-    'ERROR_FLAVOR_INCOMPATIBLE'                 => 'Ladattu tiedosto ei ole yhteensopiva tämän Sugarin version (Community Edition, Professional tai Enterprise) kanssa:&nbsp;%s',
+    'ERROR_FLAVOR_INCOMPATIBLE'                 => 'Ladattu tiedosto ei ole yhteensopiva tämän Sugar-version kanssa (Professional-, Enterprise- tai Ultimate-versio): %s',
 
     'ERROR_UW_CONFIG_DB'                        => 'Tapahtui virhe tallennettaessa konfigurointiarvoa %s tietokantaan (avain %s, arvo %s).',
     'ERR_NOT_ADMIN'                             => "Ylläpitoliittymään pääsy estetty.",
@@ -98,7 +98,7 @@ $mod_strings = array(
 	'LBL_UW_COMPLIANCE_MYSQL'					=> 'Minimi MySQL-versio',
     'LBL_UW_COMPLIANCE_DB'                      => 'Minimi tietokantaversio',
 	'LBL_UW_COMPLIANCE_PHP_INI'					=> 'php.ini -tiedoston sijainti',
-	'LBL_UW_COMPLIANCE_PHP_VERSION'				=> 'PHP:n minimiversio',
+    'LBL_UW_COMPLIANCE_PHP_VERSION'             => 'PHP:n versio',
 	'LBL_UW_COMPLIANCE_SAFEMODE'				=> 'PHP-asetus: vikasietotila',
 	'LBL_UW_COMPLIANCE_TITLE'					=> 'Palvelimen asetusten tarkistus',
 	'LBL_UW_COMPLIANCE_TITLE2'					=> 'Havaittiin asetukset',
@@ -243,7 +243,6 @@ $mod_strings = array(
 	'LBL_UW_DROP_SCHEMA_METHOD'					=> 'Vanha skeeman pudottamismenetelmä',
 	'LBL_UW_SHOW_OLD_SCHEMA_TO_DROP'			=> 'Näytä vanhat skeemat, jotka voitaisiin poistaa',
 	'LBL_UW_SKIPPED_QUERIES_ALREADY_EXIST'      => 'Ohitetut kyselyt',
-	'LBL_INCOMPATIBLE_PHP_VERSION'              => 'PHP:n versio 5 tai uudempi vaaditaan.',
 	'ERR_CHECKSYS_PHP_INVALID_VER'      => 'Sugar ei tue PHP-versiotasi. Sinun pitää asentaa versio Sugarin kanssa yhteensopiva versio. Katso julkaisutiedoissa olevaa yhteensopivuusmatriisia tuetuille PHP-versioille. Sinun versiosi on',
 	'LBL_BACKWARD_COMPATIBILITY_ON' 			=> 'PHP:n taaksepäin-yhteensopivuustila on päällä. Aseta zend.ze1_compatibility_mode arvoon Off, jotta voit jatkaa',
 	//including some strings from moduleinstall that are used in Upgrade
@@ -260,8 +259,6 @@ $mod_strings = array(
 	'LBL_ML_INSTALL'=>'Asenna',
 	//adding the string used in tracker. copying from homepage
 	'LBL_HOME_PAGE_4_NAME' => 'Seuraaja',
-	'LBL_CURRENT_PHP_VERSION' => '(Nykyinen PHP-versiosi on',
-	'LBL_RECOMMENDED_PHP_VERSION' => '. Suositeltu PHP:n versio on 5.2.1 tai uudempi)',
 	'LBL_MODULE_NAME' => 'Päivitystyökalu',
 	'LBL_MODULE_NAME_SINGULAR' => 'Päivitystyökalu',
 	'LBL_UPLOAD_SUCCESS' => 'Päivityspakkaus ladattiin. Klikkaa Seuraava suorittaaksesi viimeisen tarkistuksen.',

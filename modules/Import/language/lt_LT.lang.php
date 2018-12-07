@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Keli stulpeliai buvo pavadinti tuo pačiu lauko pavadinimu.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Trūksta reikiamų laukų:',
     'ERR_MISSING_MAP_NAME' => 'Trūksta susijusio pavadinimo',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'IDM režimu vartotojų importavimas išjungtas.',
     'ERR_SELECT_FULL_NAME' => 'Negalima pasirinkti pilno vardo, kai vardas ir pavardė yra jau pasirinkti.',
     'ERR_SELECT_FILE' => 'Pasirinkite failą užkrovimui.',
     'LBL_SELECT_FILE' => 'Pasirinkite failą:',

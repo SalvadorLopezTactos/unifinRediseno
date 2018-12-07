@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Podľa štvrťroka',
     'LBL_BY_FISCAL_YEAR' => 'Podľa fiškálneho roka',
     'LBL_BY_FISCAL_QUARTER' => 'Podľa fiškálneho štvrťroka',
+    'LBL_AMOUNT' => 'Suma',
     'LBL_COUNT' => 'Počet',
+    'LBL_PERCENT' => 'Percento',
     'LBL_SUM' => 'SÚČET',
     'LBL_AVG' => 'PRIEMER',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Mesiac',
     'LBL_YEAR' => 'Rok',
     'LBL_QUARTER' => 'Štvrťrok',
+    'LBL_FISCAL' => 'Fiškálny',
     'LBL_FISCAL_YEAR' => 'Fiškálny rok',
     'LBL_FISCAL_QUARTER' => 'Fiškálny štvrťrok',
 	'LBL_YESTERDAY'=>'Včera',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Nasledujúci štvrťrok',
     'LBL_ADD_RELATE' => "Pridať súvisiace",
     'LBL_DEL_THIS' => "Odstrániť",
-    'LBL_ALERT_CANT_ADD' => 'Nemôžete pridať súvisiaci modul, pokiaľ neoznačíte súvisiacu tabuľku.\nVyberte modul v rozbaľovacom zozname naľavo od možnosti &#39;Pridať súvisiace&#39;, na ktorú ste klikli.',
+    'LBL_ALERT_CANT_ADD' => 'Nemôžete pridať súvisiaci modul, pokiaľ neoznačíte súvisiacu tabuľku.\\nVyberte modul v rozbaľovacom zozname naľavo od možnosti &#39;Pridať súvisiace&#39;, na ktorú ste klikli.',
     'LBL_BY_DAY' => 'Podľa dňa',
     'LBL_DAY' => 'Deň',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Súvisiace voliteľné moduly',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Viac ako rovná sa',
 
     'LBL_FILTER_BY_MODULE' => 'Podľa modulu',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'S grafmi',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Chyba pri získavaní dát správy preskúmania pre túto akciu. Obráťte sa na vlastníka správy.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Preskúmanie nie je k dispozícií',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'V zobrazení zoznamu sa zobrazia všetky správy, ktoré spĺňajú aktuálne kritériá vyhľadávania a ku ktorým majú používatelia prístup. Môžete zobraziť základné detaily každého záznamu v stĺpcoch polí zobrazenia zoznamu. Tiež môžete nastaviť tagy pre správy a vytvoriť filtre. Kliknite na názov správy a otvorte zobrazenie správy alebo vyberte „Upraviť správu“ v menu akcií a upravte správu.',
+  );

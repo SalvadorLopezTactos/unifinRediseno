@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Musite zadat záznam, abyste mohl vymazat tohoto doručovatele.',
   'NTC_STATUS' => 'Nastavte status na NEAKTIVNÍ, abyste mohl odstranit tohoto doručovatele',
   'NTC_LIST_ORDER' => 'Nastavit umístění doručovatele v dropdownu v objednávce',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Aktivní',
-    'Inactive' => 'Neaktivní',
-),
-	'LBL_EDITLAYOUT' => 'Úprava rozvržení' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Úprava rozvržení' /*for 508 compliance fix*/,
 );
-
 
 ?>

@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Dashboard previsioni',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Previsioni',
     'LBL_MODULE_NAME_SINGULAR' => 'Previsione',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'ID Prodotto',
     'LBL_QUOTA_ID' => 'ID Budget',
     'LBL_VERSION' => 'Versione',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Nascondi legenda barra',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Mostra legenda barra',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Nascondi legenda riga',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Mostra legenda riga',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Errore: l´utente {0} non i permessi per richiedere previsioni per {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Data inizio anno fiscale:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configura l´arco temporale che verrà utilizzato nel modulo Previsioni.<br><br>Inizia selezionando la Data Inizio del tuo anno fiscale. Poi seleziona il tipo di arco temporale per il quale vuoi fare la previsione. L´intervallo di tempo per l´arco temporale verrà calcolato automaticamente in base alle tue selezioni. Il Sotto-Arco temporale è la base della matrice della Previsione.<br><br>Gli archi temporali visibili futuri e passati determineranno il numero di sotto-periodi visibili nel modulo Previsioni. Gli utenti possono visualizzare e modificare i numeri previsti nei sotto-periodi visibili.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configurare come effettuare la categorizzazione {{forecastByModule}}. <br><br>Tenere presente che le impostazioni relative all&#39;intervallo non possono essere modificate dopo la prima conferma. Per le istanze aggiornate, l’impostazione dell’intervallo è bloccata insieme ai dati di previsione esistenti.<br><br>È possibile selezionare due o più categorie in base agli intervalli di probabilità oppure crearne delle altre non basate sulla probabilità.<br><br>Alla sinistra delle categorie personalizzate sono presenti delle caselle: utilizzarle per decidere quali intervalli saranno inclusi nella quantità prevista confermata e segnalata ai responsabili.<br><br>L’utente può cambiare manualmente lo stato di inclusione/esclusione e la categoria di {{forecastByModule}} dal proprio foglio di lavoro.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configurare la modalità di categorizzazione di {{forecastByModule}}. <br><br>Tenere presente che le impostazioni dell&#39;Intervallo non possono essere modificate dopo aver eseguito la prima conferma. Per le istanze aggiornate, l&#39;impostazione di Intervallo viene bloccata con i dati sulle Previsioni esistenti.<br><br>È possibile selezionare due o più categorie in base agli intervalli di probabilità oppure creare categorie non basate sulla probabilità. <br><br>A sinistra delle categorie personalizzate, sono presenti delle caselle di controllo; utilizzarle per stabilire gli intervalli da includere all&#39;interno degli Importi previsti confermati e segnalati ai responsabili. <br><br>Un utente può modificare lo stato di inclusione/esclusione e la categoria di {{forecastByModule}} manualmente dal proprio foglio di lavoro.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Seleziona le colonne che vuoi che gli utenti possano compilare per le loro previsioni di ciascuna {{forecastByModuleSingular}}.Si prega di notare che l´importo Probabile è legato all´importo mostrato in {{forecastByModule}}; per questo motivo la colonna Probabile non può essere nascosta.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Seleziona le colonne da visualizzare nel modulo Previsioni. L´elenco di campi costituirà la matrice e consentirà all´utente di scegliere come configurare la sua vista.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Sono un segnaposto per il testo Forecast By how-to!',

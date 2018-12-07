@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Інформаційна панель списку задач',
+
   'LBL_MODULE_NAME' => 'Задачі',
   'LBL_MODULE_NAME_SINGULAR' => 'Задача',
   'LBL_TASK' => 'Задачі:',

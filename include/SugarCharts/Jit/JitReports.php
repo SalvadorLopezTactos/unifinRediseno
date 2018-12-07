@@ -13,23 +13,27 @@
 // $Id$
 
 
+/**
+ * This chart engine is now deprecated. Use the sucrose chart engine instead.
+ * @deprecated This file will removed in a future release.
+ */
 class JitReports extends Jit {
-	
+
 	private $processed_report_keys = array();
-	
+
 	function __construct() {
 		parent::__construct();
 	}
-	
+
 		function calculateReportGroupTotal($dataset){
-		$total = 0;				
+		$total = 0;
 		foreach ($dataset as $value){
 			$total += $value['numerical_value'];
 		}
-		
+
 		return $total;
-	}	
-	
+	}
+
     /**
      * Method checks is our dataset from currency field or not
      *
@@ -52,20 +56,20 @@ class JitReports extends Jit {
 
 	function processReportData($dataset, $level=1, $first=false){
 		$data = '';
-		
+
 		// rearrange $dataset to get the correct order for the first row
 		if ($first){
 			$temp_dataset = array();
 			foreach ($this->super_set as $key){
 				$temp_dataset[$key] = (isset($dataset[$key])) ? $dataset[$key] : array();
 			}
-			$dataset = $temp_dataset;			
+			$dataset = $temp_dataset;
 		}
-		
+
 		foreach ($dataset as $key=>$value){
 			if ($first && empty($value)){
 				$data .= $this->processDataGroup(4, $key, 'NULL', '', '');
-			}			
+			}
 			else if (array_key_exists('numerical_value', $dataset)){
 				$link = (isset($dataset['link'])) ? '#'.$dataset['link'] : '';
 				$data .= $this->processDataGroup($level, $dataset['group_base_text'], $dataset['numerical_value'], $dataset['numerical_value'], $link);
@@ -76,10 +80,10 @@ class JitReports extends Jit {
 				$data .= $this->processReportData($value, $level+1);
 			}
 		}
-		
+
 		return $data;
 	}
-	
+
 	function processReportGroup($dataset){
 		$super_set = array();
         $super_set_data = array();
@@ -94,17 +98,17 @@ class JitReports extends Jit {
                 foreach($prev_super_set as $prev_group){
                     if (!in_array($prev_group, $groups)){
                         array_push($super_set, $prev_group);
-                    }       
-                }       
-            }       
-            else{ 
+                    }
+                }
+            }
+            else{
                 foreach($groups as $group => $groupData){
-                    if (!in_array($group, $super_set)){ 
+                    if (!in_array($group, $super_set)){
                         array_push($super_set, $group);
-                    }       
-                }       
-            }       
-        }     
+                    }
+                }
+            }
+        }
         $super_set = array_unique($super_set);
         $this->super_set_data = $super_set_data;
 
@@ -112,9 +116,9 @@ class JitReports extends Jit {
 
 		return $super_set;
 	}
-	
+
     /**
-     * Handle sorting for special field types on grouped data. 
+     * Handle sorting for special field types on grouped data.
      *
      * @param array &$super_set Grouped data
      */
@@ -153,10 +157,10 @@ class JitReports extends Jit {
     }
 
 	function xmlDataReportSingleValue(){
-		$data = '';		
+		$data = '';
 		foreach ($this->data_set as $key => $dataset){
 			$total = $this->calculateReportGroupTotal($dataset);
-			$this->checkYAxis($total);						
+			$this->checkYAxis($total);
 
 			$data .= $this->tab('<group>', 2);
 			$data .= $this->tabValue('title',$key, 3);
@@ -167,20 +171,20 @@ class JitReports extends Jit {
 			$data .= $this->tabValue('label',$key,5);
 			$data .= $this->tab('<link></link>',5);
 			$data .= $this->tab('</group>',4);
-			$data .= $this->tab('</subgroups>', 3);				
-			$data .= $this->tab('</group>', 2);			
+			$data .= $this->tab('</subgroups>', 3);
+			$data .= $this->tab('</group>', 2);
 		}
 		return $data;
 	}
-	
+
     function xmlDataReportChart()
     {
         global $app_strings;
 		$data = '';
 		// correctly process the first row
-		$first = true;	
+		$first = true;
 		foreach ($this->data_set as $key => $dataset){
-			
+
 			$total = $this->calculateReportGroupTotal($dataset);
 			$this->checkYAxis($total);
 
@@ -201,7 +205,7 @@ class JitReports extends Jit {
             $data .= $this->tabValue('label', $label, 3);
 
             $data .= $this->tab('<subgroups>', 3);
-			
+
 			if (count($this->group_by) > 1){
 					$data .= $this->processReportData($dataset, 4, $first);
 			}
@@ -212,9 +216,9 @@ class JitReports extends Jit {
 			            $data .= $this->processDataGroup(4, $k, $v['numerical_value'], $v['numerical_value'], '');
 			        }
 			    }
-			}			
+			}
 
-			if (!$first){											
+			if (!$first){
 				$not_processed = array_diff($this->super_set, $this->processed_report_keys);
 				$processed_diff_count = count($this->super_set) - count($not_processed);
 
@@ -224,19 +228,19 @@ class JitReports extends Jit {
 					}
 				}
 			}
-			
-			$data .= $this->tab('</subgroups>', 3);				
-			$data .= $this->tab('</group>', 2);				
+
+			$data .= $this->tab('</subgroups>', 3);
+			$data .= $this->tab('</group>', 2);
 			$this->processed_report_keys = array();
 			// we're done with the first row!
 			//$first = false;
 		}
-		return $data;		
+		return $data;
 	}
-	
+
 	public function processXmlData(){
 		$data = '';
-		
+
 		$this->super_set = $this->processReportGroup($this->data_set);
 		$single_value = false;
 
@@ -254,26 +258,25 @@ class JitReports extends Jit {
 		else{
 			$data .= $this->xmlDataReportChart();
 		}
-		
-		return $data;		
-	}	
-		
+
+		return $data;
+	}
+
 	/**
      * wrapper function to return the html code containing the chart in a div
-	 * 
+	 *
      * @param 	string $name 	name of the div
 	 *			string $xmlFile	location of the XML file
 	 *			string $style	optional additional styles for the div
      * @return	string returns the html code through smarty
      */
 	function display($name, $xmlFile, $width='320', $height='480', $resize=false){
+        $GLOBALS['log']->deprecated('The Jit chart engine is deprecated.');
+
 		if(empty($name)) {
 			$name = "unsavedReport";
 		}
-		
-		parent::display($name, $xmlFile, $width, $height, $resize=false);			
-		
-		return $this->ss->fetch('include/SugarCharts/Jit/tpls/chart.tpl');	
 
+                return parent::display($name, $xmlFile, $width, $height, $resize = false);
 	}
 }

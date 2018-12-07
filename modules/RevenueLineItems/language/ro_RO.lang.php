@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Tabloul de bord Listă elemente linie venituri',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare elemente linie venituri',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Produs campanie',
     'LBL_MODULE_NAME' => 'Linii de venit',
     'LBL_MODULE_NAME_SINGULAR' => 'Linie de venit',
@@ -78,7 +82,7 @@ $mod_strings = array(
     'LBL_PRICING_FORMULA' => 'Formula de calcul a pretului:',
     'LBL_ACCOUNT_NAME' => 'Nume cont:',
     'LNK_REVENUELINEITEM_LIST' => 'Vizualizare linii de venit',
-    'LNK_NEW_REVENUELINEITEM' => 'Creeaza linie de venit',
+    'LNK_NEW_REVENUELINEITEM' => 'Creează linie de venit',
     'NTC_DELETE_CONFIRMATION' => 'Esti sigur ca vrei sa stergi aceasta inregistrare?',
     'NTC_REMOVE_CONFIRMATION' => 'Esti sigur ca vrei sa elimini relatia cu acest produs?',
     'ERR_DELETE_RECORD' => 'Trebuie să specifici un număr de înregistrare pentru a șterge produsul.',
@@ -139,12 +143,12 @@ $mod_strings = array(
     'LBL_EXT_PRICE' => 'Preţ ext.',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Nume simbol valuta',
     'LBL_RLI_SUBPANEL_TITLE' => 'Linii de venit',
-    'LNK_IMPORT_REVENUELINEITEMS' => 'Importa linii de venit',
+    'LNK_IMPORT_REVENUELINEITEMS' => 'Importă linii de venit',
     'LBL_EDITLAYOUT' => 'Modificare Layout' /*for 508 compliance fix*/,
     //For export labels
     'LBL_EXPORT_CURRENCY_ID' => 'ID valuta',
     'LBL_CURRENCY_RATE' => 'Curs de schimb',
-    'LBL_DATE_CLOSED' => 'Data estimata de inchidere',
+    'LBL_DATE_CLOSED' => 'Data de închidere estimată',
     'LBL_DATE_CLOSED_TIMESTAMP' => 'Data estimata de inchidere (data si ora)',
     'LBL_COMMIT_STAGE' => 'Stadiu asumare',
     'LBL_COMMIT_STAGE_FORECAST' => 'Previziune',

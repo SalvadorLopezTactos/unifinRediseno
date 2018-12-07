@@ -16,10 +16,12 @@ $dictionary['audit'] =
 		array ( 'table' => 'audit',
               	'fields' => array (
               	      'id'=> array('name' =>'id', 'type' =>'id', 'len'=>'36','required'=>true), 
-              	      'parent_id'=>array('name' =>'parent_id', 'type' =>'id', 'len'=>'36','required'=>true),               	                   	
-				      'date_created'=>array('name' =>'date_created','type' => 'datetime'),
-				      'created_by'=>array('name' =>'created_by','type' => 'id','len' => 36),				
-					  'field_name'=>array('name' =>'field_name','type' => 'varchar','len' => 100),
+                      'parent_id'=>array('name' =>'parent_id', 'type' =>'id', 'len'=>'36','required'=>true),
+                      'event_id'=>array('name' =>'event_id', 'type' =>'id', 'required'=>true),
+                      'date_created'=>array('name' =>'date_created','type' => 'datetime'),
+                      'created_by'=>array('name' =>'created_by','type' => 'id','len' => 36),
+                      'date_updated'=>array('name' =>'date_updated','type' => 'datetime'),
+                      'field_name'=>array('name' =>'field_name','type' => 'varchar','len' => 100),
 					  'data_type'=>array('name' =>'data_type','type' => 'varchar','len' => 100),
 					  'before_value_string'=>array('name' =>'before_value_string','type' => 'varchar'),
 					  'after_value_string'=>array('name' =>'after_value_string','type' => 'varchar'),
@@ -29,7 +31,10 @@ $dictionary['audit'] =
 				'indices' => array (
 				      //name will be re-constructed adding idx_ and table name as the prefix like 'idx_accounts_'
 				      array ('name' => 'pk', 'type' => 'primary', 'fields' => array('id')),
-				      array ('name' => 'parent_id', 'type' => 'index', 'fields' => array('parent_id'))
+                      array ('name' => 'parent_id', 'type' => 'index', 'fields' => array('parent_id')),
+                      array ('name' => 'event_id', 'type' => 'index', 'fields' => array('event_id')),
+                      array ('name' => 'pa_ev_id', 'type' => 'index', 'fields' => array('parent_id', 'event_id')),
+                      array ('name' => 'after_value', 'type' => 'index', 'fields' => array('after_value_string')),
 				)
 		)
 ?>

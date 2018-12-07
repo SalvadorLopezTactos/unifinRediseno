@@ -8,8 +8,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 var ErrorMessageItem = function (options) {
-	Element.call(this, jQuery.extend(true, options , {
+	PMSE.Element.call(this, jQuery.extend(true, options , {
 		/*width : 200,
 		height : 20,*/
 		position : "relative"
@@ -21,7 +23,7 @@ var ErrorMessageItem = function (options) {
 	ErrorMessageItem.prototype.initObject.call(this, options);
 };
 
-ErrorMessageItem.prototype = new Element();
+ErrorMessageItem.prototype = new PMSE.Element();
 
 ErrorMessageItem.prototype.type = "ErrorMessageItem";
 

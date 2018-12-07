@@ -54,7 +54,7 @@ $mod_strings = array (
   'LBL_MANUFACTURER_NAME'=>'Όνομα Κατασκευαστή:',
   'LBL_MANUFACTURER' => 'Κατασκευαστής:',
   'LBL_MFT_PART_NUM' => 'Αριθμός Παραγωγής:',
-  'LBL_MODULE_NAME' => 'Κατάλογος Προϊόντος',
+  'LBL_MODULE_NAME' => 'Κατάλογος προϊόντων',
   'LBL_MODULE_NAME_SINGULAR' => 'Κατάλογος Προϊόντος',
   'LBL_MODULE_ID' => 'Πρότυπα Προϊόντων',
   'LBL_MODULE_TITLE' => 'Κατάλογος Προϊόντος: Αρχή',
@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => 'Πάροχοι Αποστολής',
   'LNK_PRODUCT_LIST' => 'Προβολή Καταλόγου Προϊόντος',
   'NTC_DELETE_CONFIRMATION' => 'Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτή την εγγραφή;',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => 'Προσθήκη',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Όνομα Ανατεθειμένου Χειριστή',

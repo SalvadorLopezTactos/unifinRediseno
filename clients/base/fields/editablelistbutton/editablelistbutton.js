@@ -54,14 +54,21 @@
         this._save();
     },
 
+    /**
+     * Called when the model is successfully saved
+     *
+     * @param {Data.Bean} model The updated model
+     * @private
+     */
+    _onSaveSuccess: function(model) {
+        this.changed = false;
+        this.view.toggleRow(model.id, false);
+    },
+
     _save: function() {
         var self = this,
-            successCallback = function(model) {
-                self.changed = false;
-                self.view.toggleRow(model.id, false);
-            },
             options = {
-                success: successCallback,
+                success: _.bind(this._onSaveSuccess, this),
                 error: function(model, error) {
                     if (error.status === 409) {
                         app.utils.resolve409Conflict(error, self.model, function(model, isDatabaseData) {
@@ -113,10 +120,11 @@
         this.setDisabled(true);
 
         var fieldsToValidate = this.view.getFields(this.module, this.model);
-        fieldsToValidate = _.pick(fieldsToValidate, function(vardef, fieldName) {
-            return app.acl.hasAccessToModel('edit', this.model, fieldName);
+        var erasedFields = this.model.get('_erased_fields');
+        fieldsToValidate = _.pick(fieldsToValidate, function(fieldInfo, fieldName) {
+            return app.acl.hasAccessToModel('edit', this.model, fieldName) &&
+                (!_.contains(erasedFields, fieldName) || this.model.get(fieldName) || fieldInfo.id_name);
         }, this);
-
         this.model.doValidate(fieldsToValidate, _.bind(this._validationComplete, this));
     },
 

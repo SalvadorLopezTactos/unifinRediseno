@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Kontaktiluettelon työpöytä',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kontaktitietueiden työpöytä',
+
     'LNK_CONTACT_REPORTS' => 'Näytä kontaktiraportit',
     'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta kontakti voidaan poistaa.',
     'LBL_ACCOUNT_ID' => 'Asiakkaan ID:',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopioi vaihtoehtoinen osoite ensisijaiseksi osoitteeksi',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopioi ensisijainen osoite vaihtoehtoiseksi osoitteeksi',
     'NTC_DELETE_CONFIRMATION' => 'Haluatko poistaa tämän tietueen?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Myyntimahdollisuuden luominen vaatii asiakkaan.\n Luo asiakas tai valitse olemassa oleva asiakas.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Myyntimahdollisuuden luominen vaatii asiakkaan.\\n Luo asiakas tai valitse olemassa oleva asiakas.',
     'NTC_REMOVE_CONFIRMATION' => 'Haluatko poistaa tämän kontaktin tapauksesta?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Oletko varma, että haluat poistaa tämän tietueen suorana raporttina?',
 
@@ -278,4 +282,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'Liidin pisteet',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontaktien raportit',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Suostumus liiketoimintatarkoituksiin kohteelle',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Suostumus päivitetty viimeksi',
 );

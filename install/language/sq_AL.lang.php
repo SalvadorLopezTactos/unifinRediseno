@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> 'Kjo pyetje do të afishohet nën pyetjen e parë në raportin',
     'ERR_DB_VERSION_FAILURE'			=> 'Çmundëso të kontrollohet versioni i bazës së të dhënave',
 
-
-	'ERR_OC_PASSWORD'					=> 'Është e nevojshme fjalëkalimi',
-	'ERR_OC_SERVER_URL'					=> 'Sugar Server URL është e nevojshme',
-	'ERR_OC_USERNAME'					=> 'Emri i përdoruesit ose emri i serverit është i nevojshëm.',
-	'LBL_INSTALL_OC'					=> 'Instalo klientin jashtë linje',
-    'LBL_OC_ADMIN'                      => 'Ju lutemi kontaktojeni administratorin tuaj për të zgjidhur këtë problem.',
-    'LBL_OC_SUCCESS'                    => 'Instalimi i klientit jashtë linje ka përfunduar. Ju lutemi shtypni butonin më poshtë për tju çuar në instalimin tuaj.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'Emri i përdoruesit të admin',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'Ju lutemi shkruani detajet më poshtë për të instaluar siç duhet dhe sinkronizuar klientin tuaj jashtë linje.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'URL e Sugar Serverit',
-	'LBL_OC_INSTALL_PASS'				=> 'Fjalëkalimi i përdoruesit të serverit.',
-	'LBL_OC_INSTALL_TITLE'				=> 'Instalimi i klinetit jashtë linje',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'Ky është emri i përdorimit me të cilin do të lidheni në serverin tuaj të Sugar-it.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'Emri i përdoruesit',
-	'LBL_PERFORM_OC_INSTALL'			=> 'Instalimi i instalimit të klientit jashtë linje',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'Ju lutemi shkruani detajet më poshtë për të instaluar siç duhet dhe sinkronizuar klientin tuaj jashtë linje.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Mundësoni emrin e përdorimit për admin përdoruesin e Sugar.',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Mundësoni fjalëkalimin për admin përdoruesin e Sugar.',
@@ -76,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Gabimet janë zbuluar gjatë kontrollit të pajtueshmërisë. Me qëllim që instalimi juaj SugarCRM të funksionije sic duhet, ju lutem të merni hapat e duhura për të trajtuar cështjet e listuara më poshtë ose të shtypni butonin edhe njëherë të verifikoni apo të provoni ta instaloni përsëri.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Lejoni thirrjet në kohë të kalojnë ku Referenca është Aktive (kjo duhet të bëhet Off në php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nuk u gjet: Sugar Scheduler do të ekzekutohet me funksione të kufizuara. Shërbimi i arkivimit të emaileve nuk do të ekzekutohet.',
+	'ERR_CHECKSYS_CURL'					=> 'Nuk u gjet: Planifikuesi "Sugar" do të ekzekutohet me funksionalitet të kufizuar. Shërbimi i arkivimit të emaileve nuk do të ekzekutohet.',
     'ERR_CHECKSYS_IMAP'					=> 'Nuk gjendet:Emaill-at hyrse dhe Fushatat (Email) do të kërkojnë bibliotekat IMAP. Asnjëra nuk do të funksionojë.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Kuotat Magjike GPC nuk mund të shëndrrohen "Aktive" kur përdorni MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Paralajmërim:',
@@ -92,7 +75,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Për eksperiencën optimale duhet përdorur IIS/FastCGI sapi, të vendosur fastcgi.kycu në 0 te skedari juaj php.ini',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Version PHP i pambështetur i instaluar',
     'LBL_DB_UNAVAILABLE'                => 'Baza e të dhënave e padisponueshme',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Mbështetja e bazës së të dhënave nuk u gjet.  Sigurohu të kesh njësitë e nevojshme për një nga llojet e mëposhtme të bazave të të dhënave: MySQL, MS SQLServer, Oracle ose DB2.  Mund të duhet të ndryshosh prapashtesën në skedarin php.ini ose ta ripërpilosh me skedarin e duhur binar, në varësi të versionit të PHP.  Referoju manualit të PHP për më shumë informacion mbi mënyrën e aktivizimit të mbështetjes së bazës së të dhënave.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Nuk u gjet mbështetje për bazën e të dhënave. Sigurohu që të kesh njësitë e nevojshme për një nga llojet e mëposhtme të mbështetur të bazës së të dhënave: MySQL, MS SQLServer, Oracle ose DB2. Mund të të duhet të shkomentosh mbaresën përkatëse në skedarin php.ini ose të rikompilosh skedarin e përshtatshëm binar, në varësi të versionit tënd të PHP. Shih manualin përkatës të PHP për informacionin rreth mënyrës së aktivizimit të mbështetjes për bazën e të dhënave.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funksionet që lidhen me XML bibliotekat Parser që janë të nevojshme nga ana aplikimit Sugar nuk janë gjetur. Ju mund të keni nevojë të pa pakoment në shtrirjen e dosjes php.ini, ose të përpiloni dosjen binare të drejtë në varësi të versionit tuaj të PHP. Ju lutemi referojuni në PHP manualin tuaj për më shumë informacione.',
     'LBL_CHECKSYS_CSPRNG' => 'Gjeneruesi i numrave të rastësishëm',
     'ERR_CHECKSYS_MBSTRING'             => 'Funksionet lidhur me zgjerimin e funksionit Strings PHP (mbstring) që janë të nevojshmë nga ana e aplikimit Sugar nuk u gjetën.<br /><br />Në përgjithësi, moduli mbstring nuk është i aktivizuar nga default në PHP dhe duhet të aktivizoni llogarinë tuaj me --aktivizo--mbstring kur PHP është ndërtuar binare.',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'Ngarko madhësinë e dosjes',
 	'ERR_URL_BLANK'						=> 'Mundëso URL e bazës për shemuj të Sugar.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'Nuk mundej të gjente regjistrimin e instalimit',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'Dosja e ngarkuar nuk është e përshtashme me shijen (Edicioni bashkues, profesional ose i ndërmarrjes ) e Sugar.',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'Skedari i ngarkuar nuk përputhet me shijen (edicioni profesional, i ndërmarrjes ose final) e Sugar: ',
 	'ERROR_LICENSE_EXPIRED'				=> "Gabim: licenca juaj ka skaduar",
 	'ERROR_LICENSE_EXPIRED2'			=> "ditë më parë. Ju lutemi shkoni në Licence Menaxhment në ekranin e admin për të shtypur çelësin e ri të licencimit. Në qoftë se nuk shtypni një çelës të ri të licencimit, nuk do të mundeni më të keni qasje në këtë aplikim.",
 	'ERROR_MANIFEST_TYPE'				=> 'Dosja e manifestuar duhet të përcaktoj llojin e paketit.',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'data e skadimit',
 	'LBL_LICENSE_I_ACCEPT'				=> 'Pranoj',
 	'LBL_LICENSE_NUM_USERS'				=> 'Numri i përdoruesve',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'Ju lutem shkruani numrin e klientëve të blerë të jashtë linjes.',
-	'LBL_LICENSE_OC_NUM'				=> 'Numri i licencës të klientit jashtë linjës',
-	'LBL_LICENSE_OC'					=> 'Licenca e klientit jashtë linjës',
 	'LBL_LICENSE_PRINTABLE'				=> 'Grafikë e printueshme',
     'LBL_PRINT_SUMM'                    => 'Përmbledhje të shtypura',
 	'LBL_LICENSE_TITLE_2'				=> 'SugarCRM Licenca',
@@ -496,10 +476,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'Cilësimet e Krahasimit',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Sigurimi i Emrit të Sistemit për rastin Sugar.',
 	'LBL_PATCH_UPLOAD' => 'Zgjidh pjesën e dosjes nga kompjuteri yt lokal',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'Php versioni 5 ose më lartë është i nevojshëm.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(Versioni php i juaji aktual është',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php prapa mënyrës së përputhueshmërise është kthyer në aktive. Vendosni ze1_përputheshmëria_mënyra në Joaktive për vazhdimin më tej.',
 
     'advanced_password_new_account_email' => array(
@@ -519,5 +495,3 @@ $mod_strings = array(
         'name' => 'Harove fjalëkalimin e emailit',
         ),
 );
-
-?>

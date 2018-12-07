@@ -22,8 +22,12 @@ $mod_strings = array (
 	'LBL_QUOTES_SUBPANEL_TITLE' => 'Ofertat',
     'LBL_QUOTES_BILLTO' => 'Quotes (Bill To)',
     'LBL_QUOTES_SHIPTO' => 'Quotes (Ship To)',
-	'LNK_ACCOUNT_REPORTS' => 'Shih raportet e llogarive',
+	'LNK_ACCOUNT_REPORTS' => 'Shiko raportet e llogarive',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentacionet',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Paneli i listës së llogarive',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të llogarive',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafiket',
 	'LBL_DEFAULT' => 'Pamjet',

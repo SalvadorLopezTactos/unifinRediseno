@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Quotes List Dashboard',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Quotes Record Dashboard',
+
     'LBL_CONTRACTS'=>'Contracts',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contracts',
     'ERR_DELETE_RECORD' => 'A record number must be specified to delete the quote.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Subtotal (Default Currency)',
     'LBL_SUBTOTAL' => 'Subtotal:',
     'LBL_TAXABLE_SUBTOTAL' => 'Taxable Subtotal',
-    'LBL_SYSTEM_ID' => 'System ID',
     'LBL_TAX_USDOLLAR'=>'Tax (Default Currency)',
     'LBL_TAX' => 'VAT:',
     'LBL_TAX_TOTAL' => 'Total Tax',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Delete Selected',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Delete selected items',
     'LBL_SAVE_LINE_ITEMS' => 'Please save any active line items by clicking the blue tick next to each one before saving this Quote.',
+    'LBL_COPY_LINE_ITEMS' => 'Please save any active line items by clicking the blue check mark next to each one before copying this Quote.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Search the Product Catalogue',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'No data available',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Copying Quoted Line Items to new Quote.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Copying Quoted Line Items to new Quote. This process may take some time.',
 );

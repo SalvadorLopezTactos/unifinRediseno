@@ -91,7 +91,7 @@ class ImportViewConfirm extends ImportView
 
 
         // Now parse the file and look for errors
-        $customDelimiter = $this->request->getValidInputRequest('custom_delimiter', array('Assert\Type' => array('type' => 'string'), 'Assert\Length' => array('min' => 0, 'max' => 1)), '');
+        $customDelimiter = $this->getDelimiterValue();
         $customEnclosure = $this->request->getValidInputRequest('custom_enclosure', array('Assert\Type' => array('type' => 'string'), 'Assert\Length' => array('min' => 0, 'max' => 1)), '');
 
         $importFile = new ImportFile( $uploadFileName, $customDelimiter, html_entity_decode($customEnclosure,ENT_QUOTES), FALSE);
@@ -139,11 +139,9 @@ class ImportViewConfirm extends ImportView
             $encodeOutput = FALSE;
             $importFileMap = $this->overloadImportFileMapFromRequest($importFileMap);
 
-            $singleCharConstraints = array('Assert\Type' => array('type' => 'string'), 'Assert\Length' => array('min' => 1));
-            $previousCustomDelimiter = $this->request->getValidInputRequest('custom_delimiter', $singleCharConstraints, '');
+            $delimeter = !empty($customDelimiter) ? $customDelimiter : $delimeter;
+            $enclosure = !empty($customEnclosure) ? $customEnclosure : $enclosure;
 
-            $delimeter = !empty($previousCustomDelimiter) ? $previousCustomDelimiter : $delimeter;
-            $enclosure = $this->request->getValidInputRequest('custom_enclosure', $singleCharConstraints, $enclosure);
             $enclosure = html_entity_decode($enclosure, ENT_QUOTES);
             $hasHeader = !empty($_REQUEST['has_header']) ? $_REQUEST['has_header'] : $hasHeader;
             if ($hasHeader == 'on') {
@@ -155,7 +153,11 @@ class ImportViewConfirm extends ImportView
 
         $this->ss->assign("IMPORT_ENCLOSURE_OPTIONS",  $this->getEnclosureOptions($enclosure));
         $this->ss->assign("IMPORT_DELIMETER_OPTIONS",  $this->getDelimeterOptions($delimeter));
-        $this->ss->assign("CUSTOM_DELIMITER",  $delimeter);
+
+        $delimiters = $this->getDelimitersFromRequest();
+        $this->ss->assign("CUSTOM_DELIMITER", $delimiters['custom']);
+        $this->ss->assign("CUSTOM_DELIMITER_OTHER", $delimiters['other']);
+
         $this->ss->assign("CUSTOM_ENCLOSURE", htmlentities($enclosure, ENT_QUOTES, 'utf-8'));
         $hasHeaderFlag = $hasHeader ? " CHECKED" : "";
         $this->ss->assign("HAS_HEADER_CHECKED", $hasHeaderFlag);
@@ -501,10 +503,8 @@ YAHOO.util.Event.onDOMReady(function(){
         };
 
         var importFile = document.getElementById('importconfirm').file_name.value;
-        var fieldDelimeter = document.getElementById('custom_delimiter').value;
-        if(fieldDelimeter == 'other')
-            fieldDelimeter  = document.getElementById('custom_delimiter_other').value;
-
+        var custom_delimiter = document.getElementById('custom_delimiter').value;
+        var custom_delimiter_other = document.getElementById('custom_delimiter_other').value;        
         var fieldQualifier = document.getElementById('custom_enclosure').value;
         var hasHeader = document.getElementById('importconfirm').has_header.checked ? 'true' : '';
 
@@ -518,8 +518,18 @@ YAHOO.util.Event.onDOMReady(function(){
         }
 
         var module = document.getElementById('importconfirm').import_module.value;
-        var url = 'index.php?import_module='+module+'&action=RefreshMapping&module=Import&importFile=' + importFile
-                    + '&delim=' + fieldDelimeter + '&qualif=' + fieldQualifier + "&header=" + hasHeader;
+        
+        var urlParams = $.param({
+            'import_module': module,
+            'action': 'RefreshMapping',
+            'module': 'Import',
+            'importFile': importFile,
+            'custom_delimiter': custom_delimiter,
+            'custom_delimiter_other': custom_delimiter_other, 
+            'qualif': fieldQualifier,
+            'header': hasHeader
+        });
+        var url = 'index.php?' + urlParams;
 
         YAHOO.util.Connect.asyncRequest('GET', url, callback);
     }

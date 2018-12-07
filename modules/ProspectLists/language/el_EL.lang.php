@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Καταλόγων Στόχων',
+
   'LBL_MODULE_NAME' => 'Λίστες Στόχων',
   'LBL_MODULE_NAME_SINGULAR' => 'Λίστα Στόχου',
   'LBL_MODULE_ID'   => 'Λίστες Στόχων',

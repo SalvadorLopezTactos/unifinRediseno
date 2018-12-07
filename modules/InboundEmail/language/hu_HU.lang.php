@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'Válasz:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Hibás login vagy jelszó',
-	'ERR_BODY_TOO_LONG'		=> '\rA főszöveg túl hosszú a megjelenítéshez. Le lett rövidítve.',
+	'ERR_BODY_TOO_LONG'		=> '\\rA főszöveg túl hosszú a megjelenítéshez. Le lett rövidítve.',
 	'ERR_INI_ZLIB'			=> 'Átmenetileg nem lehet kikapcsolni a Zlib tömörítést. A "Teszt beállítás" végkimenetele sikertelen lehet.',
 	'ERR_MAILBOX_FAIL'		=> 'Nem sikerült letölteni mail fiókot.',
 	'ERR_NO_IMAP'			=> 'Nem található IMAP könyvtár. Kérem, orvosolja a problémát, mielőtt folytatná a bejövő emailek fogadását.',

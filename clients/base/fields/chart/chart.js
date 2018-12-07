@@ -15,11 +15,16 @@
  */
 ({
     /**
-     * Contains the actual chart being displayed
+     * @inheritdoc
      */
-    chart_loaded: false,
-    chart: null,
-    chartType: '',
+    initialize: function(options) {
+        this._super('initialize', [options]);
+
+        this.chart = null;
+        this.chart_loaded = false;
+        this.chartType = '';
+        this.locale = SUGAR.charts.getSystemLocale();
+    },
 
     /**
      * @inheritdoc
@@ -30,7 +35,6 @@
             // the newChartData (data set for the model's rawChartData) is not null
             if (newChartData && this.model.get('rawChartData').values.length > 0) {
                 this.displayNoData(false);
-                this.$('.nv-chart').attr('class', 'nv-chart nv-' + this.chartType);
                 // if the chart already exists, remove it before we generate the new one
                 if (this.chart_loaded) {
                     this.$('#d3_' + this.cid + ' svg').remove();
@@ -47,40 +51,39 @@
             return $(this).css('overflow-y') === 'auto' || $(this).css('overflow-y') === 'scroll';
         }).first();
 
-        b.scrollTop(b.scrollTop() + distance);
+        b.scrollTop(b.scrollTop() - distance);
+    },
+
+    /**
+     * Callback function on chart render complete.
+     *
+     * @param {Function} chart sucrose chart instance
+     * @param {Object} params chart display parameters
+     * @param {Object} data report data with properties and data array
+     */
+    chartComplete: function(chart, params, reportData, chartData) {
+        this.chart = chart;
+        this.chart_loaded = _.isFunction(chart.update);
+
+        if (!this.chart_loaded) {
+            return;
+        }
+
+        this.view.trigger('chart:complete', chart, params, reportData, chartData);
     },
 
     /**
      * Generate the D3 Chart Object
      */
     generateD3Chart: function() {
-        var self = this,
-            chart,
-            chartId = this.cid,
-            chartData = this.model.get('rawChartData'),
-            chartParams = this.model.get('rawChartParams') || {},
-            chartConfig = this.getChartConfig(chartData),
-            reportData = this.model.get('rawReportData'),
-            params = {
-                contentEl: chartId,
-                minColumnWidth: 120,
-                margin: {top: 0, right: 10, bottom: 10, left: 10},
-                allowScroll: true,
-                overflowHandler: _.bind(this.overflowHandler, this)
-            };
+        var id = this.cid;
+        var reportData = this.model.get('rawReportData');
+        var chartData = this.model.get('rawChartData');
+        var params = this.getChartParams(chartData); //NOTE: This is where groupType comes from
+        var config = this.getChartConfig(chartData, params);
 
-        if (!_.isEmpty(chartParams)) {
-            params = _.extend(params, chartParams);
-            chartData.properties[0].type = chartParams.chart_type;
-            // allow override of chart type
-            chartConfig = this.getChartConfig(chartData);
-        }
-
-        chartConfig['direction'] = app.lang.direction;
-
-        chart = new loadSugarChart(chartId, chartData, [], chartConfig, params, _.bind(function(chart) {
-            self.chart = chart;
-            self.chart_loaded = _.isFunction(this.chart.update);
+        var sugarChart = new loadSugarChart(id, chartData, [], config, params, _.bind(function(chart) {
+            this.chartComplete(chart, params, reportData, chartData);
         }, this));
 
         // This event fires when a preview is closed.
@@ -113,20 +116,55 @@
         // Resize chart on print.
         this.handlePrinting('on');
         // This on click event is required to dismiss the dropdown legend
-        this.$('.nv-chart').on('click', _.bind(function(e){
-          this.chart.dispatch.chartClick();
+        this.$('.sc-chart').on('click', _.bind(function() {
+            this.chart.dispatch.call('chartClick', this);
         }, this));
+    },
+
+    getChartParams: function(chartData) {
+        var chartId = this.cid;
+        var chartParams = this.model.get('rawChartParams') || {};
+        // Get properties from rawChartData
+        var properties = !_.isUndefined(chartData.properties) && Array.isArray(chartData.properties) ?
+                chartData.properties[0] :
+                {};
+        // These params will be overriden the SugarCharts defaults
+        var params = {
+                chart_type: 'multibar',
+                margin: {top: 0, right: 10, bottom: 10, left: 10},
+                allowScroll: true,
+                module: properties.base_module,
+                overflowHandler: _.bind(this.overflowHandler, this),
+                baseModule: properties.base_module
+            };
+        var state = this.context.get('chartState');
+
+        if (!_.isEmpty(chartParams)) {
+            params = _.extend(params, chartParams);
+        }
+        if (!_.isEmpty(state)) {
+            params.state = state;
+        }
+
+        return params;
     },
 
     /**
      * Builds the chart config based on the type of chart
      * @return {Mixed}
      */
-    getChartConfig: function(chartData) {
-        var chartConfig,
-            chartData = chartData || this.model.get('rawChartData');
+    getChartConfig: function(chartData, chartParams) {
+        var data = chartData || this.model.get('rawChartData');
+        var params = chartParams || this.model.get('rawChartParams');
+        var chartConfig;
+        var chartGroupType;
 
-        switch (chartData.properties[0].type) {
+        // chartData artifact
+        if (!_.isEmpty(chartData) && !_.isUndefined(chartData.properties)) {
+            data.properties[0].type = params.chart_type;
+        }
+
+        switch (params.chart_type) {
             case 'pie chart':
                 chartConfig = {
                     pieType: 'basic',
@@ -136,7 +174,7 @@
 
             case 'line chart':
                 chartConfig = {
-                    lineType: 'basic',
+                    lineType: 'grouped',
                     chartType: 'lineChart'
                 };
                 break;
@@ -206,6 +244,16 @@
                 break;
         }
 
+        chartConfig.direction = app.lang.direction;
+
+        // chartParams artifact
+        chartGroupType = chartConfig.barType ||
+            chartConfig.lineType ||
+            chartConfig.pieType ||
+            chartConfig.funnelType ||
+            'basic';
+        chartParams.dataType = chartGroupType === 'stacked' ? 'grouped' : chartGroupType;
+
         this.chartType = chartConfig.chartType;
 
         return chartConfig;
@@ -215,6 +263,7 @@
      * Checks to see if the chart is available and is displayed before resizing
      */
     resize: function() {
+        // If (this.chart_loaded && !this.sidebar_closed && !this.preview_open && !this.dashlet_collapsed) {
         if (!this.chart_loaded) {
             return;
         }
@@ -225,7 +274,11 @@
         if (!this.view.$el || !this.view.$el.is(':visible')) {
             return;
         }
-        this.chart.update();
+        if (this.chart.render) {
+            this.chart.render();
+        } else {
+            this.chart.update();
+        }
     },
 
     /**
@@ -303,7 +356,7 @@
         if (this.view && this.view.layout) {
             this.view.layout.context.off(null, null, this);
         }
-        this.$('.nv-chart').off('click');
+        this.$('.sc-chart').off('click');
         $(window).off('resize.' + this.sfId);
         this.handlePrinting('off');
 

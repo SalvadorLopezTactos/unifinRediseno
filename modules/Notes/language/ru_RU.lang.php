@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Информационная панель списка заметок',
+
     'ERR_DELETE_RECORD' => 'Вам следует указать номер записи перед удалением контрагента.',
     'LBL_ACCOUNT_ID' => 'Контрагент:',
     'LBL_CASE_ID' => 'Обращение:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Раздел для заметок',
     'LBL_EMAIL_ADDRESS' => 'Адрес электронной почты:',
     'LBL_EMAIL_ATTACHMENT' => 'Вложение',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Вложение электронной почты для',
     'LBL_FILE_MIME_TYPE' => 'Тип MIME',
+    'LBL_FILE_EXTENSION' => 'Расширение файла',
+    'LBL_FILE_SOURCE' => 'Источник файла',
+    'LBL_FILE_SIZE' => 'Размер файла',
     'LBL_FILE_URL' => 'Адрес файла',
     'LBL_FILENAME' => 'Вложение:',
     'LBL_LEAD_ID' => 'Предварительный контакт:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'ID Сделки:',
     'LBL_PARENT_ID' => 'Код изначальной записи:',
     'LBL_PARENT_TYPE' => 'Тип изначальной записи',
+    'LBL_EMAIL_TYPE' => 'Тип электронной почты',
+    'LBL_EMAIL_ID' => 'Идентификатор электронной почты',
     'LBL_PHONE' => 'Телефон:',
     'LBL_PORTAL_FLAG' => 'Отобразить в портале?',
     'LBL_EMBED_FLAG' => 'Вставить в Е-mail?',
@@ -64,7 +73,7 @@ $mod_strings = array(
     'LBL_OC_FILE_NOTICE' => 'Пожалуйста, войдите в систему для просмотра файла',
     'LBL_REMOVING_ATTACHMENT' => 'Удаление вложения...',
     'ERR_REMOVING_ATTACHMENT' => 'Ошибка: не удалось удалить вложение...',
-    'LBL_CREATED_BY' => 'Создано',
+    'LBL_CREATED_BY' => 'Автор',
     'LBL_MODIFIED_BY' => 'Автор изменений',
     'LBL_SEND_ANYWAYS' => 'У этого e-mail-сообщения нет темы. Отправить/сохранить все равно?',
     'LBL_LIST_EDIT_BUTTON' => 'Правка',

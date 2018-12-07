@@ -744,8 +744,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Jste si jisti, že chcete smazat tento vztah?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Toto vytvoří tento vztah trvalím. Jste si jisti, že chcete nasadit tento vztah?',
 'LBL_CONFIRM_DONT_SAVE' => 'Byly provedeny změny od posledního uložení, chcete je uložit?',
@@ -757,6 +757,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Konfigurujte pole, aby bylo fulltextově prohledávatelné.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Posilování je proces vylepšování relevance polí záznamu.<br />Pole s vyšší úrovní posílení budou mít při vyhledávání větší váhu. Při vyhledávání se výše v seznamu výsledků zobrazí odpovídající záznamy obsahující pole s vyšší váhou.<br />Výchozí hodnota je 1,0, což značí neutrální posílení. Chcete-li aplikovat kladné posílení, je přijímána jakýkoli hodnota s plovoucí desetinnou čárkou vyšší než 1. V případě záporného posílení používejte hodnoty menší než 1. Například hodnota 1,35 kladně posílá pole na 135 %. Použití hodnoty 0,60 způsobí záporné posílení.<br />Nezapomeňte, že v předchozích verzích bylo nezbytné provést opětovnou indexaci fulltextového hledání. To již nyní není potřeba.',
 'LBL_POPHELP_IMPORTABLE'=>'Ano: Pole bude zahrnuto do operace importu.<br><br />Ne.: Pole nebudou zahrnuta do operace importu.<br><br />Požadováno: Hodnota pole musí být v každé operaci importu.',
+'LBL_POPHELP_PII'=>'Toto pole bude automaticky označeno pro audit a bude k dispozici v zobrazení osobních informací.<br>Pole osobních informací lze také trvale vymazat, pokud se záznamu týká požadavek na vymazání údajů na základě ochrany osobních údajů.<br>Vymazání se provádí pomocí modulu Ochrana osobních údajů a mohou ho provádět správci nebo uživatelé v roli Správce ochrany osobních údajů.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Zadejte šířku v pixelech.<br><br />Nahraný obrázek bude změněn do tohoto rozměru.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Zadejte výšku v pixelech.<br><br />Nahraný obrázek bude změněn do tohoto rozměru.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

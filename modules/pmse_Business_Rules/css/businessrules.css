@@ -9,20 +9,22 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 #businessrulecontainer {
-  padding: 5px;
+
+  // conflicts with businessrules.less
+  /*padding: 5px;*/
 }
 
 #businessruleheader {
   display: block;
   padding: 5px;
+  white-space: nowrap;
   width: auto;
-  background-color: #dfdfdf;
 }
 
 #businessruledesigner {
-  display: block;
-  background-color: #efefef;
-  border: solid 1px #dfdfdf;
+
+  // conflicts with businessrules.less
+  /*background-color: #efefef;*/
 }
 
 .brTitle {
@@ -33,7 +35,6 @@
 }
 
 .brModule {
-  float: right;
   padding: 5px 12px;
   font-weight: normal;
   font-size: 13px;
@@ -49,7 +50,10 @@
 }
 
 .decision-table {
-  background: #ebebeb;
+
+  // conflicts with businessrules.less
+  /*background: #ebebeb;*/
+
   /*margin-bottom: 2em;*/
   /*-webkit-box-shadow: #999999 0px 2px 10px;*/
   /*-moz-box-shadow: #999999 0px 2px 10px;*/
@@ -63,7 +67,10 @@
 
 .decision-table th,
 .decision-table td {
-  border: 1px solid #cccccc !important;
+  border: 1px solid #cccccc;
+
+  // conflicts with businessrules.less
+  /*border: 1px solid #cccccc !important;*/
 }
 
 .decision-table thead tr {
@@ -81,7 +88,6 @@
   text-align: center;
   width: auto;
   padding: 0px;
-  vertical-align: top;
 }
 
 .decision-table th > * {
@@ -149,11 +155,15 @@
 }
 
 .decision-table table tr:nth-child(even) {
-  background: #F6F6F6;
+
+  // conflicts with businessrules.less
+  /*background: #F6F6F6;*/
 }
 
 .decision-table table tr:nth-child(odd) {
-  background: #FFF;
+
+  // conflicts with businessrules.less
+  /*background: #FFF;*/
 }
 
 .decision-table table tr > *:first-child {
@@ -225,6 +235,7 @@ th.decision-table-title {
 
 div.decision-table-conditions-header,
 div.decision-table-conclusions-header {
+  float: left;
   padding: 0px;
   overflow: hidden;
 }
@@ -373,6 +384,12 @@ table.decision-table-index span {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  /*
+    Since we moved to templates we need to set this
+    so that inner hidden elements get an appropriate
+    width to set themselves to.
+  */
+  width: 100%;
 }
 
 .expression-container-input {
@@ -877,4 +894,40 @@ table.decision-table-index span {
 
 .adam.single-item:hover .single-item-remove {
   color: #555555;
+}
+
+.close-list-item {
+  text-align: center;
+}
+
+.decision-table tfoot tr {
+  height: 30px;
+}
+
+td.decision-table-conclusion-column {
+  // conflicts with businessrules.less
+  /*background: #fff;*/
+
+  min-width: 200px;
+}
+
+.ui-sortable tr {
+  cursor: pointer;
+}
+
+.ui-sortable tr:hover {
+  // conflicts with businessrules.less
+  /*background-color: #ff9;*/
+}
+
+.index {
+  width: 20px;
+}
+
+span.remove-index, span.checkbox-index {
+  width: 1.5em;
+}
+
+.decision-table-btn-hidden {
+  display: none;
 }

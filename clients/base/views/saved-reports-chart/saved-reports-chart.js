@@ -27,7 +27,6 @@
         // check if we're on the config screen
         if (this.meta.config) {
             this.meta.panels = this.dashletConfig.dashlet_config_panels;
-            this.getAllSavedReports();
         } else {
             var autoRefresh = this.settings.get('auto_refresh');
             if (autoRefresh > 0) {
@@ -62,16 +61,21 @@
      */
     initialize: function(options) {
         // Holds report data from the server's endpoint once we fetch it
-        this.reportData = new Backbone.Model();
+        this.reportData = app.data.createBean();
         this.reportOptions = [];
         this._super('initialize', [options]);
+        this.on('chart:complete', this.chartComplete, this);
     },
 
     /**
      * Route to the bwc edit view of the currently selected Saved Report. If User clicks 'save' or 'cancel' or 'delete'
      * from there, return the user to the current page.
+     *
+     * @deprecated
      */
     editSavedReport: function() {
+        app.logger.warn('View.Views.Base.SavedReportsChartView#editSavedReport' +
+            'has been deprecated since 8.0.0.0 and will be removed in a future release');
         var currentTargetId = this.dashModel.get('saved_report_id'),
             params = {
                 dashletEdit: 1
@@ -118,7 +122,7 @@
      * Call after the user is done editing the saved report. Return the user to the page that was stored when the
      * event was set
      *
-     * @param {object} jquery event
+     * @param {Object} jquery event
      */
     postEditListener: function(event) {
         //Go back from whence we came
@@ -134,22 +138,38 @@
         if (this.meta.config) {
             this.settings.on('change:saved_report_id', function(model) {
                 var reportId = model.get('saved_report_id');
-
+                var options;
                 if (_.isEmpty(reportId)) {
                     return;
                 }
-
-                this.getSavedReportById(reportId, {
-                    success: _.bind(function(data) {
+                options = {
+                    success: function(data) {
+                        var label;
                         this.setChartParams(data, true);
-                    }, this)
-                });
-
-                // show or hide 'Edit Selected Report' link
-                this.updateEditLink(reportId);
+                        // set the title of the dashlet to the report title
+                        label = this.$('[name="label"]');
+                        if (label.length) {
+                            label.val(this.settings.get('label'));
+                        }
+                    }
+                };
+                this.getSavedReportById(reportId, options);
             }, this);
 
             this.settings.on('change:chart_type', function(model) {
+                // reset settings xAxisLabel because of line chart
+                var reportData = this.reportData.get('rawReportData');
+                var chartData = this.reportData.get('rawChartData');
+                var axisLabel;
+                // report might no be loaded yet
+                if (reportData && chartData) {
+                    axisLabel = this._getXaxisLabel(
+                        reportData.group_defs,
+                        chartData.properties[0],
+                        model.get('chart_type')
+                    );
+                    model.set('x_axis_label', axisLabel);
+                }
                 // toggle display of chart display option controls based on chart type
                 this._toggleChartFields();
             }, this);
@@ -158,8 +178,13 @@
 
     /**
      * Check acls to show/hide 'Edit Selected Report' link
+     *
+     * @deprecated
      */
     updateEditLink: function(reportId) {
+        app.logger.warn('View.Views.Base.SavedReportsChartView#updateEditLink' +
+            'has been deprecated since 8.0.0.0 and will be removed in a future release');
+
         var acls = this.reportAcls[reportId || this.settings.get('saved_report_id')],
             showEditLink = !acls || acls['edit'] !== 'no';
         this.$('[name="editReport"]').toggle(showEditLink);
@@ -170,34 +195,40 @@
      */
     loadData: function(options) {
         options = options || {};
-        if (!_.isEmpty(this.settings.get('saved_report_id'))) {
+        var reportId = this.settings.get('saved_report_id');
+
+        if (!_.isEmpty(reportId)) {
+            // set callback for successful get of report data in getSavedReportById()
             _.extend(options, {
                 success: _.bind(function(data) {
                     this.setChartParams(data, false);
                 }, this)
             });
-            this.getSavedReportById(this.settings.get('saved_report_id'), options);
+            this.getSavedReportById(reportId, options);
         }
     },
 
     getDefaultSettings: function() {
         // By default, settings only has: label, type, config, module
         // Module is normally null so we want to rehit that
-        var settings = _.clone(this.settings.attributes),
-            defaults = {
-                module:          this.layout.module,
-                auto_refresh:    0,
-                show_title:      false,
-                show_y_label:    false,
-                y_axis_label:    '',
-                show_x_label:    false,
-                x_axis_label:    '',
+        var settings = _.clone(this.settings.attributes);
+        var defaults = {
                 allowScroll:     true,
-                showValues:      0,
+                auto_refresh:    0,
+                colorData:       'class',
+                config:          true,
                 hideEmptyGroups: true,
-                wrapTicks:       true,
+                reduceXTicks:    true,
+                rotateTicks:     true,
+                show_controls:   false,
+                show_title:      false,
+                show_x_label:    false,
+                show_y_label:    false,
+                showValues:      0,
                 staggerTicks:    true,
-                rotateTicks:     true
+                wrapTicks:       true,
+                x_axis_label:    '',
+                y_axis_label:    ''
             };
         return _.defaults(settings, defaults);
     },
@@ -209,6 +240,14 @@
      * @param {Boolean} [update] Is this an update to the report?
      */
     setChartParams: function(serverData, update) {
+        var updated;
+        var data;
+        var properties;
+        var config;
+        var params;
+        var settings;
+        var chartType;
+
         // only called by bindDataChange when the report id is changed in config panel
         if (!serverData.reportData || !serverData.chartData) {
             if (!this.meta.config && this.chartField) {
@@ -216,42 +255,139 @@
             }
             return;
         }
-        update = _.isUndefined(update) ? false : update;
+        updated = _.isUndefined(update) ? false : update;
+        data = serverData.reportData;
+        properties = serverData.chartData.properties[0];
 
-        var data = serverData.reportData,
-            properties = serverData.chartData.properties[0],
-            config = this.getChartConfig(properties.type),
-            params = this.getDefaultSettings(),
-            defaults = {
-                label: data.name,
-                chart_type: config.chartType || properties.type,
-                report_title: properties.title,
-                show_legend: properties.legend === 'on' ? true : false,
-                stacked: config.barType === 'stacked' || config.barType === 'basic' ? true : false,
-                x_axis_label: this._getXaxisLabel(data),
-                y_axis_label: this._getYaxisLabel(data)
-            };
+        config = this.getChartConfig(properties.type); // this is chart type in Report
+
+        // default settings is current settings with defaults
+        settings = this.getDefaultSettings();
+
+        // this does what extend/defaults does but we need it for x_axis_label before
+        chartType = updated ? config.chartType : settings.chart_type || config.chartType;
+
+        params = {
+            label: data.label,
+            chart_type: chartType, // this is renamed chart type from Report
+            report_title: properties.title,
+            show_legend: properties.legend === 'on' ? true : false,
+            stacked: config.barType === 'stacked' || config.barType === 'basic' ? true : false,
+            x_axis_label: this._getXaxisLabel(data.group_defs, properties, chartType),
+            y_axis_label: this._getYaxisLabel(data),
+            module: properties.base_module,
+            allow_drillthru: properties.allow_drillthru,
+            vertical: config.orientation === 'vertical' ? true : false,
+            direction: app.lang.direction
+        };
 
         // override settings when new report is selected
-        if (update) {
-            _.extend(params, defaults);
+        if (updated) {
+            _.extend(settings, params);
         } else {
-            _.defaults(params, defaults);
+            _.defaults(settings, params);
         }
 
         // persist the chart settings for use by SugarCharts
-        this.reportData.set({
-            rawChartParams: params
-        });
+        this.reportData.set('rawChartParams', settings);
 
         // update the settings model for use by chart field
-        this.settings.set(params);
+        this.settings.set(settings);
+
+        // update chart state for drillthru
+        if (this.context && this.context.get('chartState') && this.context.get('chartLabels')) {
+            var newState = this.getChartState(serverData.chartData);
+            if (newState) {
+                this.context.set('chartState', newState);
+            } else {
+                this.context.unset('chartState');
+                this.context.unset('chartLabels');
+            }
+        }
 
         // toggle display of chart display option controls based on chart type
         this._toggleChartFields();
+    },
 
-        // set the title of the dashlet to the report title
-        this.$('[name="label"]').val(this.settings.get('label'));
+    /**
+     * Gets chart state
+     * @param {Object} chartData chart data
+     * @return {Object} chart state
+     */
+    getChartState: function(chartData) {
+        var chartState = null;
+        var chartLabels = this.context.get('chartLabels');
+        var config = this.context.get('dashConfig');
+        var reportData = this.context.get('reportData');
+        switch (config.chart_type) {
+            case 'funnel chart':
+            case 'pie chart':
+                if (reportData.group_defs.length > 1) {
+                    var seriesIndex = _.findIndex(chartData.values, function(value) {
+                        return value.label === chartLabels.seriesLabel;
+                    });
+                    if (seriesIndex >= 0) {
+                        chartState = {seriesIndex: chartData.values.length - seriesIndex - 1};
+                    }
+                } else {
+                    var seriesIndex = _.indexOf(chartData.label, chartLabels.seriesLabel);
+                    if (seriesIndex >= 0) {
+                        chartState = {seriesIndex: chartData.label.length - seriesIndex - 1};
+                    }
+                }
+                break;
+            case 'horizontal bar chart':
+            case 'bar chart':
+                if (reportData.group_defs.length > 1) {
+                    var seriesIndex = _.findIndex(chartData.values, function(value) {
+                        return value.label === chartLabels.seriesLabel;
+                    });
+                    if (seriesIndex >= 0) {
+                        chartState = {groupIndex: seriesIndex, pointIndex: seriesIndex, seriesIndex: seriesIndex};
+                    }
+                } else {
+                    var groupIndex = _.indexOf(chartData.label, chartLabels.groupLabel);
+                    if (groupIndex >= 0) {
+                        chartState = {groupIndex: groupIndex, pointIndex: groupIndex, seriesIndex: 0};
+                    }
+                }
+                break;
+            case 'horizontal group by chart':
+            case 'group by chart':
+            case 'stacked group by chart':
+                if (reportData.group_defs.length > 1) {
+                    var groupIndex = _.findIndex(chartData.values, function(value) {
+                        return value.label === chartLabels.groupLabel;
+                    });
+                    var seriesIndex = _.indexOf(chartData.label, chartLabels.seriesLabel);
+                    if (groupIndex >= 0 && seriesIndex >= 0) {
+                        chartState = {groupIndex: groupIndex, pointIndex: groupIndex, seriesIndex: seriesIndex};
+                    }
+                } else {
+                    var groupIndex = _.indexOf(chartData.label, chartLabels.groupLabel);
+                    if (groupIndex >= 0) {
+                        chartState = {groupIndex: groupIndex, pointIndex: groupIndex, seriesIndex: groupIndex};
+                    }
+                }
+                break;
+            case 'line chart':
+                if (reportData.group_defs.length > 1) {
+                    var seriesIndex = _.findIndex(chartData.values, function(value) {
+                        return value.label === chartLabels.groupLabel;
+                    });
+                    var groupIndex = _.indexOf(chartData.label, chartLabels.seriesLabel);
+                    if (groupIndex >= 0 && seriesIndex >= 0) {
+                        chartState = {groupIndex: groupIndex, pointIndex: groupIndex, seriesIndex: seriesIndex};
+                    }
+                } else {
+                    var groupIndex = _.indexOf(chartData.label, chartLabels.groupLabel);
+                    if (groupIndex >= 0) {
+                        chartState = {groupIndex: groupIndex, pointIndex: 0, seriesIndex: groupIndex};
+                    }
+                }
+                break;
+        }
+        return chartState;
     },
 
     /**
@@ -270,6 +406,7 @@
 
             case 'line chart':
                 chartConfig = {
+                    lineType: 'grouped',
                     chartType: 'line chart'
                 };
                 break;
@@ -306,7 +443,7 @@
                 chartConfig = {
                     orientation: 'vertical',
                     barType: 'basic',
-                    chartType: 'bar chart'
+                    chartType: 'group by chart'
                 };
                 break;
 
@@ -323,7 +460,7 @@
                 chartConfig = {
                     orientation: 'horizontal',
                     barType: 'basic',
-                    chartType: 'horizontal bar chart'
+                    chartType: 'horizontal group by chart'
                 };
                 break;
 
@@ -340,15 +477,149 @@
     },
 
     /**
+     * Callback function on chart render complete.
+     *
+     * @param {Function} chart sucrose chart instance
+     * @param {Object} params chart display parameters
+     * @param {Object} reportData report data with properties and data array
+     */
+    chartComplete: function(chart, params, reportData, chartData) {
+        if (!_.isFunction(chart.seriesClick) || !params.allow_drillthru) {
+            return;
+        }
+
+        // This seriesClick callback overrides the default set
+        // in sugarCharts for use in the Report module charts
+        chart.seriesClick(_.bind(function(data, eo, chart, labels) {
+            var state = SUGAR.charts.buildChartState(eo, labels);
+            if (!_.isFinite(state.seriesIndex)) {
+                return;
+            }
+
+            if (params.chart_type === 'line chart') {
+                params.groupLabel = SUGAR.charts.extractSeriesLabel(state, data);
+                params.seriesLabel = SUGAR.charts.extractGroupLabel(state, labels);
+            } else {
+                params.seriesLabel = SUGAR.charts.extractSeriesLabel(state, data);
+                params.groupLabel = SUGAR.charts.extractGroupLabel(state, labels);
+            }
+
+            chart.clearActive();
+            if (chart.cellActivate) {
+                chart.cellActivate(state);
+            } else if (chart.seriesActivate) {
+                chart.seriesActivate(state);
+            } else {
+                chart.dataSeriesActivate(eo);
+            }
+            // keep track of chart state for refresh
+            // needed for drillthru chart only
+            if (this.context.get('chartState')) {
+                this.context.set('chartState', state);
+                var chartLabels = {
+                    groupLabel: params.groupLabel,
+                    seriesLabel: params.seriesLabel
+                };
+                this.context.set('chartLabels', chartLabels);
+            }
+            chart.dispatch.call('tooltipHide', this);
+
+            this._handleFilter(chart, params, state, reportData, chartData);
+        }, this));
+    },
+
+    /**
+     * Handle either navigating to target module or update list view filter.
+     *
+     * @param {Function} chart sucrose chart instance
+     * @param {Object} params chart display parameters
+     * @param {Object} state chart display and data state
+     * @param {Object} reportData report data as returned from API
+     * @param {Object} chartData chart data with properties and data array
+     * @protected
+     */
+    _handleFilter: function(chart, params, state, reportData, chartData) {
+        var module = params.baseModule;
+        var reportId = this.settings.get('saved_report_id');
+
+        var enums;
+        var groupDefs;
+        var drawerContext;
+
+        app.alert.show('listfromreport_loading', {level: 'process', title: app.lang.get('LBL_LOADING')});
+
+        if (this.$el.parents('.drawer.active').length === 0) {
+            enums = SUGAR.charts.getEnums(reportData);
+            groupDefs = SUGAR.charts.getGrouping(reportData);
+            drawerContext = {
+                chartData: chartData,
+                chartModule: module,
+                chartState: state,
+                dashModel: null,
+                dashConfig: params,
+                enumsToFetch: enums,
+                filterOptions: {
+                    auto_apply: false
+                },
+                groupDefs: groupDefs,
+                layout: 'drillthrough-drawer',
+                module: 'Reports',
+                reportData: reportData,
+                reportId: reportId,
+                skipFetch: true,
+                useSavedFilters: true
+            };
+
+            chart.clearActive();
+            this.openDrawer(drawerContext);
+        } else {
+            this.updateList(params, state);
+        }
+    },
+
+    /**
+     * Open a drill through drawer with list and dashlet replica.
+     *
+     * @param {Object} drawerContext drillthrough content and display parameters
+     */
+    openDrawer: function(drawerContext) {
+        var currentModule = app.drawer.context.get('module');
+
+        // This needs to set to target module for Merge to show the target module fields
+        app.drawer.context.set('module', drawerContext.chartModule);
+
+        app.drawer.open({
+            layout: 'drillthrough-drawer',
+            context: drawerContext
+        }, _.bind(function() {
+            if (currentModule) {
+                // reset the drawer module
+                app.drawer.context.set('module', currentModule);
+            }
+        }, this, currentModule));
+    },
+
+    /**
+     * Update the record list in drill through drawer.
+     *
+     * @param {Object} params chart display parameters
+     * @param {Object} state chart display and data state
+     */
+    updateList: function(params, state) {
+        var drawer = this.closestComponent('drawer').getComponent('drillthrough-drawer');
+        drawer.context.set('dashConfig', params);
+        drawer.context.set('chartState', state);
+        drawer.updateList();
+    },
+
+    /**
      * Returns the x-axis label based on report data
      * @return {String}
      */
-    _getXaxisLabel: function(data) {
-        var label = '';
-        if (data && data.group_defs) {
-            label = _.first(data.group_defs).label;
-        }
-        return label;
+    _getXaxisLabel: function(groups, properties, chartType) {
+        return chartType === 'line chart' ?
+            properties.seriesName || _.last([].concat(groups)).label :
+            properties.groupName || _.first([].concat(groups)).label;
     },
 
     /**
@@ -368,13 +639,21 @@
     },
 
     /**
-     * Makes a call to Reports/saved_reports to get any items stored in the saved_reports table
+     * Makes a call to filter api to get all reports with chart stored in the saved_reports table
+     *
+     * @deprecated
      */
-    getAllSavedReports: function() {
+    getAllReportsWithCharts: function() {
+        app.logger.warn('View.Views.Base.SavedReportsChartView#getAllReportsWithCharts' +
+            'has been deprecated since 8.0.0.0 and will be removed in a future release');
         var params = {
-                has_charts: true
+                fields: 'id,name,module,report_type,content,chart_type,assigned_user_id',
+                order_by: 'name:asc',
+                filter: [{chart_type: {$not_equals: 'none'}}],
+                // get all reports with charts
+                max_num: -1
             },
-            url = app.api.buildURL('Reports/saved_reports', null, null, params);
+            url = app.api.buildURL('Reports', null, null, params);
 
         app.api.call('read', url, null, {
             success: _.bind(this.parseAllSavedReports, this)
@@ -382,18 +661,25 @@
     },
 
     /**
-     * Parses items passed back from Reports/saved_reports endpoint into enum options
+     * Parses items passed back from filter api endpoint into enum options
      *
      * @param {Array} reports an array of saved reports returned from the endpoint
+     * @deprecated
      */
     parseAllSavedReports: function(reports) {
+        app.logger.warn('View.Views.Base.SavedReportsChartView#parseAllSavedReports' +
+            'has been deprecated since 8.0.0.0 and will be removed in a future release');
+
+        reports = reports.records || [];
         this.reportOptions = {};
         this.reportAcls = {};
 
         _.each(reports, function(report) {
-            // build the reportOptions key/value pairs
-            this.reportOptions[report.id] = report.name;
-            this.reportAcls[report.id] = report._acl;
+            if (app.acl.hasAccess('view', report.module)) {
+                // build the reportOptions key/value pairs
+                this.reportOptions[report.id] = report.name;
+                this.reportAcls[report.id] = report._acl;
+            }
         }, this);
 
         // find the saved_report_id field
@@ -419,7 +705,7 @@
     },
 
     /**
-     * Makes a call to Reports/saved_reports/:id to fetch specific saved report data
+     * Makes a call to Reports/:id/chart to fetch specific saved report data
      *
      * @param {String} reportId the ID for the report we're looking for
      */
@@ -429,19 +715,20 @@
             // manually set the icon class to spiny
             this.$('[data-action=loading]').removeClass(dt.cssIconDefault).addClass(dt.cssIconRefresh);
         }
-
-        app.api.call('create', app.api.buildURL('Reports/chart/' + reportId), {'ignore_datacheck': true}, {
+        var useSavedFilters = this.context && this.context.get('useSavedFilters') ? 'true' : 'false';
+        var url = app.api.buildURL('Reports/' + reportId + '/chart?use_saved_filters=' + useSavedFilters);
+        app.api.call('read', url, null, {
             success: _.bind(function(serverData) {
                 if (options && options.success) {
+                    // options.success is usually setChartParams()
+                    // defines this.reportData 'rawChartParams';
                     options.success.apply(this, arguments);
                 }
 
+                this.reportData.set('rawReportData', serverData.reportData);
                 // set reportData's rawChartData to the chartData from the server
                 // this will trigger chart.js' change:rawChartData and the chart will update
-                this.reportData.set({
-                    rawReportData: serverData.reportData,
-                    rawChartData: serverData.chartData
-                });
+                this.reportData.set('rawChartData', serverData.chartData);
             }, this),
             complete: options ? options.complete : null
         });
@@ -525,7 +812,7 @@
                         yOptionsLabel = app.lang.get('LBL_CHART_CONFIG_SHOW_XAXIS_LABEL');
                         break;
                     case 'line chart':
-                        showTickOptions = false;
+                        showTickOptions = true;
                         break;
                     default:
                         showTickOptions = true;

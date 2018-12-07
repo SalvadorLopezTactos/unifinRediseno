@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Tabloul de bord Prognoze',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Previziuni',
     'LBL_MODULE_NAME_SINGULAR' => 'Previziune',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'ID produs',
     'LBL_QUOTA_ID' => 'ID obiectiv',
     'LBL_VERSION' => 'Versiune',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Ascundere legendă în bară',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Afișare legendă în bară',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Ascundere legendă pe rând',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Afișare legendă pe rând',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Eroare: utilizatorul {0} nu are acces de manager pentru a solicita previziuni pentru {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Data de incepere a anului fiscal:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configureaza perioada de timp care va fi folosita in modulul Previziuni. <br><br>Atentie: Setarile pentru perioada de timp nu pot fi schimbate dupa setarea initiala.<br><br>Incepe prin a alege data de start a anului fiscal. Apoi alege tipul de perioada de timp pentru previziuni. Marja datelor pentru perioadele de timp va fi calculata automat pe baza selectiilor tale. Perioada de timp secundara este baza pentru tabelul de previziuni. <br><br>Perioada viitoare ce poate fi vizualizata si perioadele de timp trecute vor determina numarul de perioade secundare din modulul Previziuni. Utilizatorii pot vedea si modifica cifrele din previziuni in perioadele secundare vizibile.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configuraţi cum aţi dori să clasificați {{forecastByModule}}. <br><br>Rețineți că setările de Interval nu pot fi modificate după prima trimitere. Pentru instanțe pentru care s-a făcut upgrade, setarea Interval este blocată cu datele de Previziune existente. <br><br>Puteți selecta una sau mai multe categorii în funcție de intervalele de probabilitate sau puteți crea categorii care nu se bazează pe probabilitate. <br><br>Există casete de selectare în stânga categoriilor personalizate: utilizați-le pentru a decide ce intervale vor fi incluse în suma de Previziune trimisă și raportată managerilor. <br><br>Un utilizator poate schimba manual starea de includere/excludere și categoria de {{forecastByModule}} din foaia sa de lucru.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configurați modul în care doriți să clasificați {{forecastByModule}}. <br><br>Rețineți că setările Interval nu pot fi modificate după prima trimitere. Pentru instanțe cu upgrade, setarea Interval este blocată cu datele de Previziune existente.<br><br>Puteți selecta două sau mai multe categorii în funcție de intervalele de probabilitate sau puteți crea categorii care nu se bazează pe probabilitate. <br><br>Există casete de selectare în stânga categoriilor personalizate: utilizați-le pentru a decide ce intervale vor fi incluse în valoarea Previziunii trimisă și raportată managerilor. <br><br>Un utilizator poate opta să includă/excludă starea și categoria de {{forecastByModule}} în mod manual din foaia de lucru.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Selecteaza coloana pe care vrei ca utilizatorul sa o completeze pentru previziunile fiecarei {{forecastByModuleSingular}}. Atentie: Suma Previzibila este legata de suma afisata in {{forecastByModule}}; din acest motiv coloana Previzibil nu poate fi ascunsa.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Selecteaza coloanele pe care vrei sa le vizualizezi in modulul Previziuni. Lista campurilor va combina tabelul si va permite utilizatorilor sa aleaga felul in care vor sa isi configureze forma.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Sunt un substituent pentru Previziune după cum se trimit mesaje text!',
@@ -402,7 +409,7 @@ $mod_strings = array (
     'LBL_FORECAST_DETAILS_SURPLUS' => 'Surplus',
     'LBL_FORECAST_DETAILS_SHORT' => 'Mai putin cu',
     'LBL_FORECAST_DETAILS_EXCEED' => 'Mai mare cu',
-    'LBL_FORECAST_DETAILS_NO_DATA' => 'Lipsa date',
+    'LBL_FORECAST_DETAILS_NO_DATA' => 'Lipsă date',
     'LBL_FORECAST_DETAILS_MEETING_QUOTA' => 'Obiectiv atins',
 
     'LBL_ASSIGN_QUOTA_BUTTON' => 'Aloca obiectiv',

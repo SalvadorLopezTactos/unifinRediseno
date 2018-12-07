@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Instrumentpanel med lista över möjliga kunder',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Instrumentpaneler med poster över möjliga kunder',
+
     'ERR_DELETE_RECORD' => 'Ett objektnummer måste specificeras för att kunna radera leadet.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Organisationsbeskrivning',
     'LBL_ACCOUNT_ID'=>'Konto-ID',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Affärsmöjlighet summa',
     'LBL_OPPORTUNITY_ID'=>'Affärsmöjlighet ID',
     'LBL_OPPORTUNITY_NAME' => 'Namn på affärsmöjligheten:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Annan email:',
     'LBL_OTHER_PHONE' => 'Annan telefon:',
     'LBL_PHONE' => 'Telefon:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiera alternativ adress till primär adress',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiera primär adress till alternativ adress',
     'NTC_DELETE_CONFIRMATION' => 'Är du säker på att du vill radera posten?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'När en affärsmöjlighet skapas krävs en organisation.\n Var god skapa en ny organisation eller välj en existerande.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'När en affärsmöjlighet skapas krävs en organisation.\\n Var god skapa en ny organisation eller välj en existerande.',
     'NTC_REMOVE_CONFIRMATION' => 'Är du säker på att du vill ta bort leadet från ärendet?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Är du säker på att du vill ta bort det här objektet som en direkt rapport?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Kampanjer',
@@ -303,4 +309,6 @@ För att skapa en {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Lead score',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Leads&#39; rapporter',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Affärsändamål som samtyckts till',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Samtycke uppdaterades senast',
 );

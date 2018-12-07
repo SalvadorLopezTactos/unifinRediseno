@@ -19,6 +19,8 @@ function checkDBSettings($silent=false) {
 
     installLog("Begin DB Check Process *************");
     global $mod_strings;
+    global $sugar_config;
+
     $errors = array();
     copyInputsIntoSession();
 

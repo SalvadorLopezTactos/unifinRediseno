@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Por favor selecione a partir dos campos disponíveis',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Descrição do Formulário:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Submeter este formulário irá criar um cliente potencial e uma ligação com a campanha',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Ao marcar esta caixa, significa que aceita receber e-mails de marketing no futuro',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Por favor transfira o seu formulário Web To Lead',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Formulário Web To Lead',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Por favor forneça todos os campos requeridos',

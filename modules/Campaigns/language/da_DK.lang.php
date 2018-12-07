@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Vælg fra tilgængelige felter',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Formularbeskrivelse:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Når du indsender denne formular, oprettes et kundeemne og et link til kampagnen',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Ved at sætte kryds i dette felt, accepterer du fremsendelse af fremtidige marketing e-mails',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Download din formular Internettet til kundeemne',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Formularen Internettet til kundeemne',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Angiv alle obligatoriske felter',

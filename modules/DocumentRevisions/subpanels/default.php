@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id: default.php 52533 2009-11-18 01:32:20Z clee $
 $subpanel_layout = array(
 	'top_buttons' => array(
         array('widget_class' => 'SubPanelTopCreateRevisionButton'),
@@ -62,7 +62,7 @@ $subpanel_layout = array(
 		  array (
 		    'usage' => 'query_only',
 		  ),
-		  'doc_type' => 
+          'doc_type' =>
 		  array (
 		    'usage' => 'query_only',
 		  ),

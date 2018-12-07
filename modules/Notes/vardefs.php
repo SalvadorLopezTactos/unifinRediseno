@@ -41,7 +41,36 @@ $dictionary['Note'] = array(
     'len' => '100',
     'comment' => 'Attachment MIME type',
     'importable' => false,
+            'duplicate_on_record_copy' => 'always',
   ),
+        'file_ext' => array(
+            'name' => 'file_ext',
+            'vname' => 'LBL_FILE_EXTENSION',
+            'type' => 'varchar',
+            'len' => 100,
+            'duplicate_on_record_copy' => 'always',
+            'massupdate' => false,
+        ),
+        'file_source' => array(
+            'name' => 'file_source',
+            'vname' => 'LBL_FILE_SOURCE',
+            'type' => 'varchar',
+            'len' => '32',
+            'comment' => 'The name of the module where the attachment originated',
+            'importable' => false,
+            'duplicate_on_record_copy' => 'always',
+            'massupdate' => false,
+        ),
+        'file_size' => array(
+            'name' => 'file_size',
+            'vname' => 'LBL_FILE_SIZE',
+            'type' => 'int',
+            'comment' => 'Attachment File Size',
+            'importable' => false,
+            'default' => 0,
+            'duplicate_on_record_copy' => 'always',
+            'massupdate' => false,
+        ),
   'file_url'=>
   array(
   	'name'=>'file_url',
@@ -62,6 +91,7 @@ $dictionary['Note'] = array(
     'reportable'=>true,
     'comment' => 'File name associated with the note (attachment)',
     'importable' => false,
+            'duplicate_on_record_copy' => 'always',
   ),
     'upload_id' => array(
         'name' => 'upload_id',
@@ -69,7 +99,30 @@ $dictionary['Note'] = array(
         'required' => false,
         'reportable' => false,
         'comment' => 'File id under uploads/ dir. Set only for email attachments',
+            'duplicate_on_record_copy' => 'always',
     ),
+        'email_type' => array(
+            'comment' => "The module of the record to which this note's file is attached (Emails or EmailTemplates)",
+            'name' => 'email_type',
+            'reportable' => false,
+            'required' => false,
+            'studio' => false,
+            'massupdate' => false,
+            'duplicate_on_record_copy' => 'always',
+            'type' => 'varchar',
+            'vname' => 'LBL_EMAIL_TYPE',
+        ),
+        'email_id' => array(
+            'comment' => 'Email or EmailTemplate ID to which this note is attached',
+            'name' => 'email_id',
+            'reportable' => false,
+            'required' => false,
+            'studio' => false,
+            'massupdate' => false,
+            'duplicate_on_record_copy' => 'always',
+            'type' => 'id',
+            'vname' => 'LBL_EMAIL_ID',
+        ),
   'parent_type'=>
   array(
   	'name'=>'parent_type',
@@ -152,16 +205,17 @@ $dictionary['Note'] = array(
 		'module'=>'Contacts',
 		'source'=>'non-db',
 		),
-
-  'contact_phone'=>
-    array(
+    'contact_phone' => array(
         'name'=>'contact_phone',
         'vname' => 'LBL_PHONE',
-        'type'=>'phone',
-        'vname' => 'LBL_PHONE',
-        'source'=>'non-db'
+        'type' => 'relate',
+        'source'=>'non-db',
+        'link' => 'contact',
+        'module' => 'Contacts',
+        'table' => 'contacts',
+        'id_name' => 'contact_id',
+        'rname' => 'phone_work',
     ),
-
  'contact_email'=>
     array(
         'name'=>'contact_email',
@@ -324,6 +378,15 @@ $dictionary['Note'] = array(
     'relationship'=> 'emails_notes_rel',
     'source'=> 'non-db',
   ),
+        'email_attachment_for' => array(
+            'bean_name' => 'Email',
+            'module' => 'Emails',
+            'name' => 'email_attachment_for',
+            'relationship' => 'emails_attachments',
+            'source' => 'non-db',
+            'type' => 'link',
+            'vname' => 'LBL_EMAIL_ATTACHMENT_FOR',
+        ),
   'projects' =>
   array (
     'name' => 'projects',
@@ -395,6 +458,24 @@ $dictionary['Note'] = array(
        array('name' =>'idx_note_name', 'type'=>'index', 'fields'=>array('name')),
        array('name' =>'idx_notes_parent', 'type'=>'index', 'fields'=>array('parent_id', 'parent_type')),
        array('name' =>'idx_note_contact', 'type'=>'index', 'fields'=>array('contact_id')),
+        array(
+            'name' =>'idx_note_email_id',
+            'type'=>'index',
+            'fields' => array('email_id'),
+        ),
+        array(
+            'name' => 'idx_note_email_type',
+            'type' => 'index',
+            'fields' => array('email_type'),
+        ),
+        array(
+            'name' => 'idx_note_email',
+            'type' => 'index',
+            'fields' => array(
+                'email_id',
+                'email_type',
+            ),
+        ),
     )
 
     //This enables optimistic locking for Saves From EditView
@@ -409,8 +490,3 @@ VardefManager::createVardef('Notes','Note', array('default', 'assignable',
 'team_security',
 ));
 
-// Temporary disable Note description field indexing until the analyzers are sorted out
-// to properly cope with larger fields. This impacts indexing performance and additional
-// adds a heavy taxation on the required disk space usage as well.
-$dictionary['Note']['fields']['description']['full_text_search']['enabled'] = false;
-$dictionary['Note']['fields']['description']['full_text_search']['searchable'] = false;

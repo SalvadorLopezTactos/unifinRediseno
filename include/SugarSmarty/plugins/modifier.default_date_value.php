@@ -76,7 +76,6 @@ Touched:
 - modules/ACLRoles/ACLRole.php
 - modules/Meetings/MeetingsQuickCreate.php
 - modules/Meetings/Meeting.php
-- modules/Sync/syncconnect.php
 - modules/Administration/CreateImportAction.php
 - modules/Administration/RebuildRelationship.php
 - modules/Administration/SessionManager.php
@@ -135,7 +134,6 @@ Touched:
 - include/MVC/View/SugarView.php
 - include/MVC/SugarApplication.php
 - include/ListView/ListViewData.php
-- soap/SoapSync.php
 - soap/SoapPortalUsers.php
 - install/populateSeedData.php
 - install/seed_data/dceSeedData.php

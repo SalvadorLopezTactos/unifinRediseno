@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => 'Kas paskutinį kartą modifikavo:',
   'LBL_ASSIGNED_USER' => 'Priskirtas vartotojas:',
   'LBL_ASSIGNED_USER_NAME' => 'Kam priskirta',
-  'LBL_SYSTEM_ID' =>'Sistemos ID',
   'LBL_TEAM_NAME' =>'Komanda:',
   'LBL_TYPE'=>'Tipas:',
   'LBL_SUBJECT' => 'Tema:',

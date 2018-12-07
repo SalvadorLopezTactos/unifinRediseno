@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Virhe: Ei ole moduulikenttiä, joita olisi kartoitettu näytettäväksi hakutuloksissa. Ota yhteyttä järjestelmänvalvojaan.',
     'LBL_INFO_INLINE' => 'Info' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Sulje' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'Annetulle lähteen tunnukselle ei löytynyt vastaavaa liitintä.',
 );
 

@@ -17,6 +17,12 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 class TemplateInt extends TemplateRange
 {
 	var $type = 'int';
+
+    /**
+     * @var int|null
+     */
+    public $len = null;
+
     var $supports_unified_search = true;
 
 	public function __construct(){

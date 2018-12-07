@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Електронно табло със списък на приходните позиции',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Електронно табло със запис на приходните позиции',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Продукт към кампания',
     'LBL_MODULE_NAME' => 'Приходни позиции',
     'LBL_MODULE_NAME_SINGULAR' => 'Приходна позиция',

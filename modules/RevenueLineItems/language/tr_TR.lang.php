@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Gelir Kalemleri Listesi Panosu',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Gelir Kalemleri Kaydı Panosu',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampanya Ürünü',
     'LBL_MODULE_NAME' => 'Gelir Kalemleri',
     'LBL_MODULE_NAME_SINGULAR' => 'Gelir Kalemi',

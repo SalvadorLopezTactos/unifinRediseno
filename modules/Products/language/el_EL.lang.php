@@ -11,8 +11,11 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Γραμμής Στοιχείων Προσφοράς',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Εισηγμένα Στοιχεία Γραμμής, Εκστρατεία',
-    'LBL_MODULE_NAME' => 'Εισηγμένα Στοιχεία Γραμμής',
+    'LBL_MODULE_NAME' => 'Στοιχεία Γραμμής με Προσφορά',
     'LBL_MODULE_NAME_SINGULAR' => 'Εισηγμένα Στοιχεία Γραμμής',
     'LBL_MODULE_TITLE' => 'Εισηγμένα Στοιχεία Γραμμής: Αρχή',
     'LBL_SEARCH_FORM_TITLE' => 'Εισηγμένα Στοιχεία Γραμμής, Αναζήτηση Προϊόντων',
@@ -173,4 +176,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Λίστα Δεδομένων Γραμμής Εισηγμένων Ειδών',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Νέα Γραμμή Εισηγμένων Ειδών)',
     'LBL_DISCOUNT_PERCENT' => 'Ποσοστό %',
+    'LBL_DISCOUNT_TYPE' => 'Τύπος έκπτωσης',
 );

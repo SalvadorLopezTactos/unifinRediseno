@@ -76,6 +76,7 @@ class Scheduler implements \RunnableSchedulerJob
             $message = 'Created consumers for: '.implode(', ', $list);
         } else {
             $message = 'No records currently in queue - nothing to do';
+            $this->reportIndexingDone();
         }
 
         return $this->job->succeedJob($message);
@@ -106,5 +107,13 @@ class Scheduler implements \RunnableSchedulerJob
     protected function getQueuedModules()
     {
         return $this->engine->getContainer()->queueManager->getQueuedModules();
+    }
+
+    /**
+     * Wrapper to report that we are done processing our queue
+     */
+    protected function reportIndexingDone()
+    {
+        return $this->engine->getContainer()->queueManager->reportIndexingDone();
     }
 }

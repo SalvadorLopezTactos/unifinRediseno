@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Dashboard für Liste der angebotenen Produkte',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampagnen-Produkt',
     'LBL_MODULE_NAME' => 'Produkte',
     'LBL_MODULE_NAME_SINGULAR' => 'Produkt',
@@ -38,7 +41,7 @@ $mod_strings = array(
     'LBL_NAME' => 'Name',
     'LBL_URL' => 'Produkt-URL:',
     'LBL_QUOTE_NAME' => 'Angebotsname:',
-    'LBL_ASSOCIATED_QUOTE' => 'Name:',
+    'LBL_ASSOCIATED_QUOTE' => 'Angebotenes Produkt:',
     'LBL_CONTACT_NAME' => 'Kontaktname:',
     'LBL_DATE_PURCHASED' => 'Eingekauft:',
     'LBL_DATE_SUPPORT_EXPIRES' => 'Support endet:',
@@ -171,4 +174,5 @@ So erstellen Sie ein Modul {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Angebotene Produkte Angebotsdatenliste',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Neues angebotenes Produkt)',
     'LBL_DISCOUNT_PERCENT' => '% Prozent',
+    'LBL_DISCOUNT_TYPE' => 'Rabatt-Typ',
 );

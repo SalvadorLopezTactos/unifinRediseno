@@ -18,6 +18,7 @@ use Elastica\Request;
 use Elastica\Response;
 use Elastica\Connection;
 use Elastica\JSON;
+use SugarXHprof;
 
 /**
  *
@@ -26,6 +27,21 @@ use Elastica\JSON;
  */
 class Logger extends BaseLogger
 {
+    /**
+     * XHProf
+     * @var SugarXHprof
+     */
+    protected $xhProf;
+
+    /**
+     * Set xhProf tracker
+     * @param SugarXHProf $xhProf
+     */
+    public function setXhProf(SugarXHProf $xhProf)
+    {
+        $this->xhProf = $xhProf;
+    }
+
     /**
      * Handle request logging on success.
      * @param \Elastica\Request $request
@@ -42,7 +58,7 @@ class Logger extends BaseLogger
                 "Elasticsearch response failure: code %s [%s] %s",
                 $response->getStatus(),
                 $request->getMethod(),
-                $info['url']
+                $info['url'] ?? $request->getPath()
             );
             $this->log(LogLevel::CRITICAL, $msg);
         }
@@ -53,7 +69,7 @@ class Logger extends BaseLogger
             $msg = sprintf(
                 "Elasticsearch request debug: [%s] %s %s",
                 $request->getMethod(),
-                $info['url'],
+                $info['url'] ?? $request->getPath(),
                 $this->encodeData($request->getData())
             );
             $this->log(LogLevel::DEBUG, $msg);
@@ -65,10 +81,11 @@ class Logger extends BaseLogger
             $this->log(LogLevel::DEBUG, $msg);
         }
 
-        if (!empty($GLOBALS['sugar_config']['xhprof_config'])) {
-            \SugarXHprof::getInstance()->trackElasticQuery(array(
+        // xhprof tracking
+        if (null !== $this->xhProf) {
+            $this->xhProf->trackElasticQuery(array(
                 $request->getMethod(),
-                $info['url'],
+                $info['url'] ?? $request->getPath() ,
             ), $request->getData(), $response->getQueryTime());
         }
     }
@@ -84,9 +101,9 @@ class Logger extends BaseLogger
             $method = $e->getRequest()->getMethod();
             $expMsg = $e->getMessage();
 
-            // Method expected to be "DELETE" and contains IndexMissingException
-            // example: "IndexMissingException[[0e787f44c65e77fc6ac2c4fac1a01c65_shared] missing]"
-            if ($method === Request::DELETE && strpos($expMsg, "IndexMissingException") !== false) {
+            // Method expected to be "DELETE" and contains msg as 'no such index'
+            // example: "no such index [index: ee8562926e4403e4d990035a1b1e407d_shared]"
+            if ($method === Request::DELETE && strpos($expMsg, "no such index") !== false) {
                 return true;
             }
         }
@@ -143,7 +160,7 @@ class Logger extends BaseLogger
     protected function encodeData($data)
     {
         if (is_array($data)) {
-            $data = str_replace('\/', '/', JSON::stringify($data, 'JSON_ELASTICSEARCH'));
+            $data = str_replace('\/', '/', JSON::stringify($data));
         }
         return $data;
     }

@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Normas empresariales de procesos',
   'LBL_MODULE_TITLE' => 'Normas empresariales de procesos',
   'LBL_MODULE_NAME_SINGULAR' => 'Norma empresarial de procesos',
@@ -23,7 +22,7 @@ $mod_strings = array (
   'LBL_RST_EDITABLE' => 'Norma empresarial editable',
   'LBL_RST_SOURCE' => 'Origen de norma empresarial',
   'LBL_RST_SOURCE_DEFINITION' => 'Definición de origen de norma empresarial',
-  'LBL_RST_MODULE' => 'Módulo Objetivo',
+  'LBL_RST_MODULE' => 'Módulo de destino',
   'LBL_RST_FILENAME' => 'Nombre de archivo de norma empresarial',
   'LBL_RST_CREATE_DATE' => 'Fecha de creación de norma empresarial',
   'LBL_RST_UPDATE_DATE' => 'Fecha de actualización de norma empresarial',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Condiciones',
     'LBL_PMSE_LABEL_RETURN' => 'Volver',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Conclusiones',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Cambiar campo',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Valor de retorno',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Añadir condición',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Añadir conclusión',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Añadir fila',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Eliminar columna',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Eliminar condición',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Eliminar condición',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Eliminar datos de la columna',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Sí',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'No',

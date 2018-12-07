@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => '必须指定记录编号才能删除托运人。',
   'NTC_STATUS' => '将状态设置为禁用，从而将该运输供应商从运输供应商下拉列表中移出。',
   'NTC_LIST_ORDER' => '设置运输供应商在下拉列表中的显示顺序',
-  'shipper_status_dom' => 
-  array (
-    'Active' => '启用',
-    'Inactive' => '停用',
-),
-	'LBL_EDITLAYOUT' => '编辑布局' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => '编辑布局' /*for 508 compliance fix*/,
 );
-
 
 ?>

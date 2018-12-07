@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => '選擇' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => '清除' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => '類型',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => '郵件範本',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => '電子郵件範本',
+    'LBL_TEMPLATE_HAS_VARIABLES' => '變數',
 );

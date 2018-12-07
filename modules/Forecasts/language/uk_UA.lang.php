@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Інформаційна панель прогнозів',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Прогнози',
     'LBL_MODULE_NAME_SINGULAR' => 'Прогноз',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'Продукт (ID)',
     'LBL_QUOTA_ID' => 'Квота (ID)',
     'LBL_VERSION' => 'Версія',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Сховати панель умовних позначень',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Показати панель умовних позначень',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Сховати рядок умовних позначень',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Показати рядок умовних позначень',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Помилка: у користувача (0) немає доступу для запиту прогнозів для (1)',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Дата початку фінансового року',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Conﬁgure the Time Period that will be used in the Forecasts module. <br><br>Please note that Time Period settings cannot be changed after initial setup.<br><br>Start by choosing the Start Date of your ﬁscal year. Then choose the type of Time Period for the Forecast. The date range for the Time Periods will be automatically calculated based on your selections. The Sub Time Period is the base for the Forecast worksheet. <br><br>The viewable future and past Time Periods will determine the number of visible sub-periods in the Forecasts module. The users are able to view and edit the Forecast numbers in the visible sub-periods.<br /><br /><br /><br />Налаштуйте часовий діапазон, який буде використовуватися в модулі Прогнозів.<br><br>Будь ласка, зверніть увагу, що параметри  не можуть бути змінені після початкового налаштування.<br><br> Почніть з вибору Дати початку Вашого фінансового року. Потім виберіть тип діапазону, в рамках якого хочете робити прогноз. Діапазон дат для тимчасового діапазону автоматично вирахується на підставі обраного вибору. Додатковий часовий діапазон використовується в якості основи для роботи з листом прогнозів. Можливість перегляду майбутнього і минулого тимчасового діапазону визначить кількість видимих ​​додаткових діапазонів в модулі Прогнозів. Користувачам буде доступний перегляд і редагування даних прогнозу в рамках відомого тимчасового діапазону',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Укажіть, яким чином ви будете маркувати {{forecastByModule}}. <br><br>Зверніть увагу, що після першого маркування не можна змінювати настройки діапазону. Для оновлений версій настройки діапазону блокуються разом із наявними даними прогнозу.<br><br>Можна вибрати дві або кілька категорій на основі діапазонів імовірності або створити категорії, які не базуються на ймовірності. <br><br>Ліворуч від користувацьких категорій є прапорці. Установіть їх біля діапазонів, які потрібно включити в прогноз щодо використаної суми та надіслати керівникам. <br><br>Користувач може вручну змінити статус «Включити/Виключити» та категорію {{forecastByModule}} зі свого листа.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Налаштуйте класифікацію {{forecastByModule}}. <br><br>Зверніть увагу, що налаштування діапазону не можна змінити після їх застосування. Для оновлених екземплярів налаштування діапазону заблоковано з використанням наявних даних прогнозу.<br><br>Можна вибрати дві або більше категорій на основі діапазонів імовірності або створити категорії, які не ґрунтуються на ймовірності. <br><br>Зліва від налаштовуваних категорій є прапорці – використовуйте їх для вибору діапазонів, які буде включено до значення прогнозу, що застосовується та повідомляється менеджерам. <br><br>Користувачі можуть вручну змінювати статус включення/виключення та категорію {{forecastByModule}} зі своїх робочих листків.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Виберіть колонки, які будуть потрібні користувачеві для заповнення при складанні прогнозів {{forecastByModuleSingular}}. Зауважте, ймовірна сума прив&#39;язана до суми, показаної в {{forecastByModule}}; з цієї причини колонка зі значенням ймовірної суми не може бути прихована.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Виберіть колонки для перегляду в модулі прогнозів. Перелік полів буде містити лист прогнозів і дозволить користувачеві вибрати те, яким чином налаштувати його вид / перегляд.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Вказівник місця заповнення в модулі Прогнозів для тексту пошуку довідки',

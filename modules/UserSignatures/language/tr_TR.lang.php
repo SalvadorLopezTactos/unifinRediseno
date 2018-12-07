@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'Kullanıcı İmzaları',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'Kullanıcı İmzası',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Bu imza bir isim gerektiriyor.',
-    'LBL_SIGNATURE_NAME'         => 'İsim',
-    'LBL_SIGNATURE'              => 'İmza',
-    'LBL_SIGNATURE_HTML'         => 'HTML İmza',
-    'LBL_SIGNATURE_DEFAULT'      => 'İmza kullanılsın mı?',
-    'LBL_SIGNATURE_PREPEND'      => 'İmza yanıt üzerinde mi olacak?',
-    'LBL_SIGNATURES'             => 'İmzalar',
+    'LBL_DEFAULT_SIGNATURE' => 'Varsayılan',
+    'LBL_MODULE_NAME' => 'E-posta imzaları',
+    'LBL_MODULE_NAME_SINGULAR' => 'E-posta İmzası',
+    'LBL_SIGNATURE_NAME' => 'İsim',
+    'LBL_SIGNATURE' => 'İmza',
+    'LBL_SIGNATURE_HTML' => 'HTML İmza',
+    'LBL_SIGNATURE_DEFAULT' => 'İmza kullanılsın mı?',
+    'LBL_SIGNATURE_PREPEND' => 'İmza yanıt üzerinde mi olacak?',
+    'LBL_SIGNATURES' => 'İmzalar',
 );

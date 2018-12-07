@@ -21,6 +21,8 @@
     </select>
 </div>
 <div class="flex-relate-record">
-    <input type="hidden" name="{{name}}" class="select2 select2-parent inherit-width" value="{{fieldValue this.model "parent_id"}}" data-rname="{{value}}">
+    <input type="hidden" name="{{name}}" class="select2 select2-parent inherit-width" value="{{fieldValue this.model "parent_id"}}"
+           data-rname="{{#if hasErasedPlaceholder}}{{str 'LBL_VALUE_ERASED' module}}{{else}}{{value}}{{/if}}"
+        >
 </div>
 {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

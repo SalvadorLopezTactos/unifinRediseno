@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'عنوان URL الافتراضي',
 	'COLUMN_TITLE_AUDIT' =>'التدقيق',
+    'COLUMN_TITLE_PII' => 'المعلومات الشخصية',
     'COLUMN_TITLE_FTS' =>'نص كامل قابل للبحث فيه',
     'COLUMN_TITLE_FTS_BOOST' => 'تعزيز القيمة',
 	'COLUMN_TITLE_REPORTABLE' => 'يمكن إرسال تقرير عنه',

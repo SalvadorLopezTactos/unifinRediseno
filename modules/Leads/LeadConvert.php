@@ -92,6 +92,10 @@ class LeadConvert
                 $this->lead->account_name = $modules['Accounts']->name;
             }
 
+            if ($moduleName === 'Opportunities' && $this->lead->opportunity_name !== $modules['Opportunities']->name) {
+                $this->lead->opportunity_name = $modules['Opportunities']->name;
+            }
+
             $this->setAssignedForModulesToLeads($moduleDef);
             $this->setRelationshipForModulesToLeads($moduleDef);
 
@@ -113,11 +117,11 @@ class LeadConvert
         }
 
         $this->performLeadActivitiesTransfer($transferActivitiesAction, $transferActivitiesModules);
+        $this->performDataPrivacyTransfer();
 
         $this->lead->status = LeadConvert::STATUS_CONVERTED;
         $this->lead->converted = 1;
         $this->lead->in_workflow = true;
-        $this->lead->get_Opportunity();
         $this->lead->save();
 
         //IF beans have calculated fields, re-save now  so calculated values can be updated
@@ -128,6 +132,45 @@ class LeadConvert
         }
 
         return $this->modules;
+    }
+
+    /**
+     * Links DP records to Contact and/or other modules related to DP module
+     * and copy dp-related fields (business purpose, consent date etc) to Contact.
+     * Only out-of-box DP relationships are handled.
+     */
+    public function performDataPrivacyTransfer()
+    {
+        $dprs = $this->lead->get_linked_beans('dataprivacy', 'DataPrivacy');
+        if (!empty($dprs)) {
+            foreach ($dprs as $dpr) {
+                foreach ($this->modules as $module => $bean) {
+                    if ($module !== 'Leads') {
+                        if ($bean->load_relationship('dataprivacy')) {
+                            $bean->dataprivacy->add($dpr);
+                        } elseif ($rel = $this->findRelationship($bean, $dpr)) {
+                            // custom module may have different link name
+                            if ($bean->load_relationship($rel)) {
+                                // left side rel
+                                $bean->$rel->add($dpr);
+                            } elseif ($dpr->load_relationship($rel)) {
+                                // right side rel
+                                $dpr->$rel->add($bean);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (!empty($this->lead->dp_business_puspose)) {
+            $this->contact->dp_business_puspose = $this->lead->dp_business_puspose;
+        }
+        if (!empty($this->lead->dp_consent_last_updated)) {
+            $this->contact->dp_consent_last_updated = $this->lead->dp_consent_last_updated;
+        }
+        if (isset($this->contact->dp_business_puspose) || isset($this->contact->dp_consent_last_updated)) {
+            $this->contact->save();
+        }
     }
 
     /**
@@ -165,7 +208,7 @@ class LeadConvert
                     $this->lead,
                     $this->contact
                 );
-                Activity::enable();
+                Activity::restoreToPreviousState();
             }
         }
     }

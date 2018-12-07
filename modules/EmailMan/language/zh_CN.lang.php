@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> '点击此处',
 	'TXT_REMOVE_ME'								=> '把自己从电子邮件列表中移除',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> '给负责人的电子邮件地址发送通知？',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => '默认选中退出新电子邮件地址',
 
 	'LBL_SECURITY_TITLE'						=> '电子邮件安全设置',
 	'LBL_SECURITY_DESC'							=> '不允许进入收件箱，或者不允许显示电子邮件模块。',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => '允许用户使用此帐户发送电子邮件:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => '选中这个选项时，所有用户将能够使用相同的发送电子邮件帐户发送系统通知和警报。 如果选项未选中，用户仍然可以使用自己的账户信息设置自己的邮件发送服务器。',
     'LBL_FROM_ADDRESS_HELP'                     => '当启用时，用户指定的名字和电子邮件地址将被包括在电子邮件发件人中。如果 SMTP 服务器不允许从一个比服务器帐户不同的电子邮件帐户发送邮件，此功能可能无法正常使用。',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => '当添加新电子邮件地址时, 它将自动被选择退出。市场活动电子邮件将无法发送到已选择退出的地址。更改此设置不会影响现有的电子邮件地址。',
 	'LBL_GMAIL_LOGO' => '谷歌邮箱' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo电邮' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => '交换' /*for 508 compliance fix*/,

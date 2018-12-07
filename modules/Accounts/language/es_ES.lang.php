@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Presupuestos (Enviar a)',
 	'LNK_ACCOUNT_REPORTS' => 'Ver Informes de Cuentas',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documentos',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Panel de lista de cuentas',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Panel de registros de cuentas',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Gráficos',
 	'LBL_DEFAULT' => 'Vistas',

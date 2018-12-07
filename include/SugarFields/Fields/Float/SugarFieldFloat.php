@@ -82,18 +82,11 @@ class SugarFieldFloat extends SugarFieldInt
      * For Floats we need to round down to the precision of the passed in value, since the db's could be showing
      * something different
      *
-     * @param Number $value                         The value for which we are trying to filter
-     * @param String $fieldName                     What field we are trying to modify
-     * @param SugarBean $bean                       The associated SugarBean
-     * @param SugarQuery $q                         The full query object
-     * @param SugarQuery_Builder_Where $where       The where object for the filter
-     * @param String $op                            The filter operation we are trying to do
-     * @return bool
-     * @throws SugarApiExceptionInvalidParameter
+     * {@inheritdoc}
      */
     public function fixForFilter(
         &$value,
-        $fieldName,
+        $columnName,
         SugarBean $bean,
         SugarQuery $q,
         SugarQuery_Builder_Where $where,
@@ -113,7 +106,7 @@ class SugarFieldFloat extends SugarFieldInt
             return true;
         }
         // ROUND(<value>, <precision>) is the standard across all DB's we support
-        $field = "ROUND($fieldName, ". strlen($decimal_separator_location) . ")";
+        $field = "ROUND($columnName, ". strlen($decimal_separator_location) . ")";
 
         switch($op){
             case '$equals':

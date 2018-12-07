@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => '運送会社を削除するにはレコード番号を指定する必要があります。',
   'NTC_STATUS' => '運送会社ドロップダウンリストからこの運送会社を削除するにはステータスを非アクティブにしてください。',
   'NTC_LIST_ORDER' => '運送会社ドロップダウンに表示される運送会社の順番を指定してください。',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'アクティブ',
-    'Inactive' => '非アクティブ',
-),
-	'LBL_EDITLAYOUT' => 'レイアウト編集' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'レイアウト編集' /*for 508 compliance fix*/,
 );
-
 
 ?>

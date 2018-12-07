@@ -8,11 +8,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*global FieldOption, Field, Element, OptionTextField, $, document, OptionSelectField,
+/*global FieldOption, PMSE.Field, PMSE.Element, OptionTextField, $, document, OptionSelectField,
  getRelativePosition, OptionCheckBoxField, OptionDateField, replaceExpression, editorWindow,
  translate, MultipleItemPanel, PROJECT_MODULE, CriteriaField, PMSE_DECIMAL_SEPARATOR, TextAreaUpdaterItem, OptionNumberField
  */
-
+var PMSE = PMSE || {};
 /**
  * @class UpdaterField
  * Creates an object that can in order to illustrate a group of fields,
@@ -34,14 +34,14 @@
  *                  fieldHeight: 260
  *              });
  *
- * @extends Field
+ * @extends PMSE.Field
  *
  * @param {Object} options configuration options for the field object
  * @param {Object} parent
  * @constructor
  */
 var UpdaterField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     this.fields = [];
     this.options = [];
     this.fieldHeight = null;
@@ -56,7 +56,7 @@ var UpdaterField = function (options, parent) {
     UpdaterField.prototype.initObject.call(this, options);
 };
 
-UpdaterField.prototype = new Field();
+UpdaterField.prototype = new PMSE.Field();
 
 /**
  * Type of all updater field instances
@@ -201,7 +201,7 @@ UpdaterField.prototype.getObjectValue = function () {
         }
     }
     this.value = JSON.stringify(auxValue);
-    return Field.prototype.getObjectValue.call(this);
+    return PMSE.Field.prototype.getObjectValue.call(this);
 };
 
 UpdaterField.prototype._parseSettings = function (settings) {
@@ -391,7 +391,7 @@ UpdaterField.prototype.attachListeners = function () {
  */
 UpdaterField.prototype.createHTML = function () {
     var fieldLabel, required = '', criteriaContainer, insert, i, style;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     if (this.required) {
         required = '<i>*</i> ';
@@ -492,7 +492,7 @@ UpdaterField.prototype.isValid = function () {
         field.decorateValid(field_valid);
     }
     if (valid) {
-        valid = Field.prototype.isValid.call(this);
+        valid = PMSE.Field.prototype.isValid.call(this);
     }
     return valid;
 };
@@ -629,7 +629,8 @@ UpdaterField.prototype.setOperatorPanelForm = function(self, field, fieldType, c
                 };
             }
             self._datePanel.setOperators({
-                arithmetic: ['+', '-']
+                arithmetic: ['+', '-'],
+                runTime: true
             }).setConstantPanel(constantPanelCfg);
         } else {
             self._datePanel.setOperators({
@@ -733,7 +734,7 @@ UpdaterField.prototype.openPanelOnItem = function (field) {
                 decimalSeparator: this._decimalSeparator,
                 numberGroupingSeparator: this._numberGroupingSeparator,
                 dateFormat: App.date.getUserDateFormat(),
-                timeFormat: SUGAR.App.user.getPreference("timepref"),
+                timeFormat: App.user.getPreference('timepref'),
                 currencies: project.getMetadata("currencies"),
                 onOpen: function () {
                     jQuery(that.currentField.html).addClass("opened");
@@ -775,7 +776,7 @@ UpdaterField.prototype.setVariables = function (variables) {
 
 //UpdaterItem
 var UpdaterItem = function (settings) {
-    Element.call(this, settings);
+    PMSE.Element.call(this, settings);
     this._parent = null;
     this._name = null;
     this._label = null;
@@ -796,7 +797,7 @@ var UpdaterItem = function (settings) {
     UpdaterItem.prototype.init.call(this, settings);
 };
 
-UpdaterItem.prototype = new Element();
+UpdaterItem.prototype = new PMSE.Element();
 UpdaterItem.prototype.constructor = UpdaterItem;
 UpdaterItem.prototype.type = "UpdaterItem";
 
@@ -1095,7 +1096,7 @@ UpdaterItem.prototype.createHTML = function () {
         messageContainer;
 
     if (!this.html) {
-        Element.prototype.createHTML.call(this);
+        PMSE.Element.prototype.createHTML.call(this);
         jQuery(this.html).addClass("updaterfield-item");
         this.style.removeProperties(['width', 'height', 'position', 'top', 'left', 'z-index']);
 
@@ -1910,18 +1911,20 @@ DateUpdaterItem.prototype._setValueToControl = function (value) {
     var friendlyValue = "", i, dateFormat, timeFormat;
     value.forEach(function(value, index, arr) {
         if (value && value.expType === 'CONSTANT') {
-            if (!dateFormat) {
-                dateFormat = SUGAR.App.date.convertFormat(SUGAR.App.user.getPreference("datepref"));
-            }
-            if (value.expSubtype === "datetime") {
-                if (!timeFormat) {
-                    timeFormat = SUGAR.App.date.convertFormat(SUGAR.App.user.getPreference("timepref"));
+            if (value.expValue != 'now') {
+                if (!dateFormat) {
+                    dateFormat = App.date.convertFormat(App.user.getPreference('datepref'));
                 }
-                aux = App.date(value.expValue);
-                value.expLabel = aux.format(dateFormat + " " + timeFormat);
-            } else if (value.expSubtype === "date") {
-                aux = App.date(value.expValue);
-                value.expLabel = aux.format(dateFormat);
+                if (value.expSubtype === 'datetime') {
+                    if (!timeFormat) {
+                        timeFormat = App.date.convertFormat(App.user.getPreference('timepref'));
+                    }
+                    aux = App.date(value.expValue);
+                    value.expLabel = aux.format(dateFormat + ' ' + timeFormat);
+                } else if (value.expSubtype === 'date') {
+                    aux = App.date(value.expValue);
+                    value.expLabel = aux.format(dateFormat);
+                }
             }
         }
         friendlyValue += " " + value.expLabel;

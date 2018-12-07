@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Kullanıcı Bilgisi bulunamadı',
     'ERR_USER_NAME_EXISTS'              => '{0} kullanıcı adı zaten var. Yinelenen kullanıcı adlarına izin verilmiyor. Kullanıcı adını benzersiz olacak şekilde değiştirin.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Bu kullanıcının Sugar uygulamasına girişi engellenmekte olup, var olan şifresi ile bağlanamaz.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Sadece yabancı yazar kullanıcısının Sugar kimlik bilgilerini kullanarak oturum açmasına izin verilmiyor',
 
 	'LBL_PASSWORD_SENT'                => 'Şifre Güncellendi',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Şifre gönderilemiyor',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Alıcı E-Posta Adresi',
 	'ERR_SERVER_STATUS'					=> 'Sunucunuzun Durumu',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistem kullanıcıya E-Posta gönderemiyor. Lütfen <a href="index.php?module=EmailMan&action=config">E-Posta Ayarları</a> sayfasındaki Giden E-Posta Yapılandırma değerlerini kontrol ediniz.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Kullanıcı sadece <a href="{0}" target="_blank">Cloud console</a> içerisinde IDM modu için oluşturulabilir.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Birincil e-posta adresi sadece <a href="{0}" target="_blank">Cloud console</a> içerisinde IDM modu için güncellenebilir.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-Posta Adresi',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Şifreyi Onaylayın',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Kullanıcı tipini, Sistem Yöneticisi Kullanıcısından, Normal Kullanıcıya çevirdiniz. Bu değişikliği kaydettikten sonra, sistem yöneticisi yetkileriniz kalmayacak.\n\nDevam için Tamam tıklayın.\nKayda dönmek için İptal seçin.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Kullanıcı tipini, Sistem Yöneticisi Kullanıcısından, Normal Kullanıcıya çevirdiniz. Bu değişikliği kaydettikten sonra, sistem yöneticisi yetkileriniz kalmayacak.\\n\\nDevam için Tamam tıklayın.\\nKayda dönmek için İptal seçin.',
 	'LBL_COUNTRY'						=> 'Ülke',
 	'LBL_CURRENCY_TEXT'					=> 'Tercih Edilen Para Birimini Göster işaretlendiyse, liste veya kayıt görünümünde, bu para birimi kullanılacak. Ayrıca yeni kayıtlarınız için varsayılan para birimidir.',
 	'LBL_CURRENCY'						=> 'Tercih edilen Para Birimi',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'dak.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'sn.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Lütfen sistem yöneticisi ile iletişime geçiniz.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'IDM modunda OpenID Connect (OIDC) ile doğrulama için lütfen GMP PHP uzantısını yükleyin.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Oturumunuz kapanmış. Tekrar giriş yapmak için lütfen tıklayın',
     'LBL_LOGGED_OUT_2' => 'burada',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Kullanıcıların raporları',
     'LBL_CONTACTS_SYNC' => 'Kontaklar',
     'LBL_DETAIL' => 'Kullanıcı Profili',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Belirli alanlar, düzenlenebilir değilse bu alanları yönetmek için lütfen Cloud Console&#39;unuzda oturum açın',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Düzenlenebilir olmayan belirli alanları değiştirmek istiyorsanız ' .
+        'lütfen bu değişiklikler  ',
 ); // END STRINGS DEFS
 
 ?>

@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => 'Silindi',
   'LBL_EMAIL_ADDRESS'=>'E-Posta Adresi',
   'LBL_CONTACTS_SYNC' => 'Kontaklar',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        'Çalışan sadece <a href="{0}" target="_blank">Cloud console</a> içerisinde IDM modu için oluşturulabilir.',
 );
 
 

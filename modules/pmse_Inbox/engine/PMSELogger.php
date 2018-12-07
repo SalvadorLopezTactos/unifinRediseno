@@ -229,31 +229,50 @@ class PMSELogger extends AbstractLogger
     }
 
     /**
-     *
-     * @param type $message
-     * @param type $params
-     * @codeCoverageIgnore
+     * Creates a message string that looks something like:
+     * @[Users:seed_sally_id:Sally Bronsen] messaged @[Users:seed_sarah_id:Sarah Smith]\
+     *  for record: @[Leads:52f46f19-7a10-4dd5-28ed-53b4671f964d:Stephanie Plunk]
+     * @param string $message The message to parse
+     * @param array $params The array of values to parse into the message
+     * @return stdClass
      */
-    public function activity($message, $params = array())
+    public function prepareActivityData(string $message, array $params = [])
     {
         $data = new stdClass();
-        $data->value = $message; //"This a message user: @[Users:seed_sally_id:Sally Bronsen] whit @[Users:seed_sarah_id:Sarah Smith] for the record: @[Leads:52f46f19-7a10-4dd5-28ed-53b4671f964d:Stephanie Plunk] end of the message.";
-        $module_id = isset($params['module_id']) ? $params['module_id'] : null;
-        $module_name = isset($params['module_name']) ? $params['module_name'] : 'pmse_Inbox';
-        if (isset($params['tags']) && !empty($params['tags']) && is_array($params['tags'])) {
+        $data->value = $message;
+        
+        // If there are tags, parse them
+        if (!empty($params['tags']) && is_array($params['tags'])) {
             $data->tags = $params['tags'];
             $i = 0;
             foreach ($params['tags'] as $value) {
                 if (empty($value['name'])) {
                     $value = $this->getNameField($value);
                 }
-                $patterns[] = "/&" . $i . "/";
-                $substitutions[] = "@[{$value['module']}:{$value['id']}:{$value['name']}]";
+                $find[] = '&' . $i;
+                $repl[] = "@[{$value['module']}:{$value['id']}:{$value['name']}]";
                 $i++;
             }
-            $data->value = preg_replace($patterns, $substitutions, $message);
+            $data->value = str_replace($find, $repl, $message);
         }
 
+        return $data;
+    }
+    /**
+     * Creates an activity entry from a message
+     * @param string $message The string to massage
+     * @param array $params The values to inject into the message
+     * @codeCoverageIgnore
+     */
+    public function activity($message, $params = array())
+    {
+        // Handle the assembly of the data for the activity
+        $data = $this->prepareActivityData($message, $params);
+
+        // Get data we need for the activity record
+        $module_id = isset($params['module_id']) ? $params['module_id'] : null;
+        $module_name = isset($params['module_name']) ? $params['module_name'] : 'pmse_Inbox';
+        
         $beanActivity = new Activity();
         $beanActivity->parent_id = $module_id;
         $beanActivity->parent_type = $module_name;

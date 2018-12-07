@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Dashboard prognoses',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Forecasts',
     'LBL_MODULE_NAME_SINGULAR' => 'Forecast',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'Product-ID',
     'LBL_QUOTA_ID' => 'Quota ID',
     'LBL_VERSION' => 'Versie',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Balklegenda verbergen',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Balklegenda tonen',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Regellegenda verbergen',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Regellegenda tonen',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Error: gebruiker {0} heeft geen toegang om forecasts aan te vragen voor {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Begindatum van fiscaal jaar:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configureer de periode die gebruikt zal worden in de forecast module.<br><br>Let op dat de gekozen instellingen voor de perioden niet gewijzigd kunnen worden.<br><br>Begin door de begindatum van uw fiscale jaar te kiezen. Kies vervolgens de periode voor de forecast. Het bereik van de perioden zal automatisch berekend worden op basis van uw selecties. De onderliggende periode is de basis voor het forecastwerkblad.<br><br>De zichtbare toekomstige en historische perioden zullen het aantal van zichtbare onderliggende perioden bepalen in de forecast module. Gebruikers zijn in staat om de waarden te tonen en aan te passen in de zichtbare onderliggende perioden.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configureer hoe u {{forecastByModule}} wilt categoriseren. <br><br>Houd er rekening mee dat de bereikinstellingen na de eerste toewijzing niet meer kunnen worden gewijzigd. Voor bijgewerkte instanties is de bereikinstelling vergrendeld in de huidige Forecast gegevens.<br><br>U kunt twee of meer categorieën selecteren op basis van waarschijnlijkheidsbereik of u kunt categorieën aanmaken die niet op waarschijnlijkheid zijn gebaseerd <br><br>Er zijn selectievakjes links van uw aangepaste categorieën; gebruik deze om te beslissen welk bereik wordt inbegrepen in het Forecast bedrag dat is toegewezen en wordt gerapporteerd aan managers. <br><br>Een gebruiker kan de status insluiten/uitsluiten en categorie van de {{forecastByModule}} handmatig veranderen vanuit het werkblad.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configureer hoe u {{forecastByModule}} wilt indelen. <br><br>Houd er rekening mee dat de bereikinstellingen na de eerste toewijzing niet kunnen worden gewijzigd. Voor bijgewerkte gevallen is de bereikinstelling vergrendeld in de huidige voorspellingsgegevens.<br><br>U kunt twee of meer categorieën selecteren op basis van waarschijnlijkheidsbereik of u kunt categorieën aanmaken die niet zijn gebaseerd op waarschijnlijkheid. <br><br>Er zijn selectievakjes links van uw aangepaste categorieën. Deze kunt u gebruiken om te bepalen welk bereik wordt opgenomen in het gebruikte bedrag van de voorspelling en aan managers wordt gerapporteerd. <br><br>Een gebruiker kan de status insluiten/uitsluiten en de categorie {{forecastByModule}} handmatig aanpassen vanuit zijn/haar worksheet.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Kies de kolommen die de gebruiker in moet vullen voor elke forecast van elke bij het voorspellen van {{forecastByModuleSingular}}. Let hierbij op dat de "Meest waarschijnlijke" waarde gekoppeld is aan de getoonde waarde bij {{forecastByModule}}; Vandaar dat de "Meest waarschijnlijke" kolom niet verborgen kan worden.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Kies de kolommen die u wil zien in de forecast module. Het werkblad zal samengesteld worden uit de lijst met velden, waarbij de gebruiker kan kiezen hoe deze getoond wordt.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Ik ben een placeholder voor "Hoe werkt &#39;Forecast door&#39;!"',

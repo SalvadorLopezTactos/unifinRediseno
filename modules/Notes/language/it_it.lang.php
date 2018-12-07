@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Dashboard elenco note',
+
     'ERR_DELETE_RECORD' => 'Per eliminare l´azienda deve essere specificato il numero del record.',
     'LBL_ACCOUNT_ID' => 'ID Azienda:',
     'LBL_CASE_ID' => 'ID Reclamo:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Note',
     'LBL_EMAIL_ADDRESS' => 'Indirizzo Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Allegato Email',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Allegato e-mail per',
     'LBL_FILE_MIME_TYPE' => 'Tipo Mime',
+    'LBL_FILE_EXTENSION' => 'Estensione file',
+    'LBL_FILE_SOURCE' => 'Origine file',
+    'LBL_FILE_SIZE' => 'Dimensione file',
     'LBL_FILE_URL' => 'URL File',
     'LBL_FILENAME' => 'Allegato:',
     'LBL_LEAD_ID' => 'ID Lead:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'ID Opportunità:',
     'LBL_PARENT_ID' => 'ID Padre:',
     'LBL_PARENT_TYPE' => 'Tipo Padre',
+    'LBL_EMAIL_TYPE' => 'Tipo e-mail',
+    'LBL_EMAIL_ID' => 'ID e-mail',
     'LBL_PHONE' => 'Telefono:',
     'LBL_PORTAL_FLAG' => 'Mostra nel Portale?',
     'LBL_EMBED_FLAG' => 'Inserisci nell´email?',

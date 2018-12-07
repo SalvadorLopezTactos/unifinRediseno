@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => 'Promenio:',
   'LBL_ASSIGNED_USER' => 'Dodeljen korisnik:',
   'LBL_ASSIGNED_USER_NAME' => 'Dodeljeno',
-  'LBL_SYSTEM_ID' =>'ID broj sistema:',
   'LBL_TEAM_NAME' =>'Ime tima:',
   'LBL_TYPE'=>'Tip:',
   'LBL_SUBJECT' => 'Naslov:',

@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Definiţii proces',
   'LBL_MODULE_TITLE' => 'Definiţii proces',
   'LBL_MODULE_NAME_SINGULAR' => 'Definiţie proces',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'nu este egal cu',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'nu este',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nu este egal cu',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Timp de rulare',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Adăugare',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Închidere',

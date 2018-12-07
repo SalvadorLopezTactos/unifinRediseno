@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Pulpit list namiarów',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Pulpit rekordów namiarów',
+
     'ERR_DELETE_RECORD' => 'Należy podać numer rekordu, aby usunąć namiar.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Opis kontrahenta',
     'LBL_ACCOUNT_ID'=>'ID kontrahenta',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Kwota szansy:',
     'LBL_OPPORTUNITY_ID'=>'ID szansy',
     'LBL_OPPORTUNITY_NAME' => 'Nazwa szansy:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Inny e-mail:',
     'LBL_OTHER_PHONE' => 'Inny telefon:',
     'LBL_PHONE' => 'Telefon:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiuj adres alternatywny do adresu podstawowego',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiuj adres podstawowy do adresu alternatywnego',
     'NTC_DELETE_CONFIRMATION' => 'Czy na pewno chcesz usunąć ten rekord?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Utworzenie szansy wymaga kontrahenta.\n Utwórz nowego kontrahenta lub skorzystaj z już istniejącego.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Utworzenie szansy wymaga kontrahenta.\\n Utwórz nowego kontrahenta lub skorzystaj z już istniejącego.',
     'NTC_REMOVE_CONFIRMATION' => 'Czy na pewno chcesz usunąć ten namiar z tego zgłoszenia?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Czy na pewno chcesz usunąć ten rekord jako raport bezpośredni?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Dziennik kampanii',
@@ -314,4 +320,6 @@ Po potwierdzeniu wprowadzonych zmian w modułach kliknij przycisk Zapisz i przek
     'LBL_MKTO_LEAD_SCORE' => 'Kwalifikacja namiarów',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Raporty dotyczące namiarów',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Wyrażono zgodę na cele biznesowe dla',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ostatnia aktualizacja zgody',
 );

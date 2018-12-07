@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => 'Suprimit',
   'LBL_EMAIL_ADDRESS'=>'Adreça electrònica',
   'LBL_CONTACTS_SYNC' => 'Contactes',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        'L&#39;empleat només es pot crear en la <a href="{0}" target="_blank">Consola del núvol</a> per al mode IDM.',
 );
 
 

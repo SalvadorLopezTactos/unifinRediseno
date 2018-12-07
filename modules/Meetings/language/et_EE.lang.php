@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Koosolekute loendi töölaud',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Koosolekute kirjete töölaud',
+
 	'ERR_DELETE_RECORD' => 'Kohtumise kustutamiseks täpsusta kirje numbrit.',
 	'LBL_ACCEPT_THIS'=>'Kinnitada?',
 	'LBL_ADD_BUTTON'=> 'Lisa',

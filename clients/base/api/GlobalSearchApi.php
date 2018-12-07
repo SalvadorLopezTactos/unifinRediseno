@@ -17,6 +17,7 @@ use Sugarcrm\Sugarcrm\SearchEngine\Capability\GlobalSearch\ResultInterface;
 use Sugarcrm\Sugarcrm\SearchEngine\Capability\Aggregation\AggregationCapable;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Result;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\TagsHandler;
+use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
 
 /**
  *
@@ -177,7 +178,7 @@ class GlobalSearchApi extends SugarApi
             'next_offset' => $this->getNextOffset($resultSet->getTotalHits(), $this->limit, $this->offset),
             'total' => $resultSet->getTotalHits(),
             'query_time' => $resultSet->getQueryTime(),
-            'records' => $this->formatResults($api, $resultSet),
+            'records' => $this->formatResults($api, $args, $resultSet),
         );
 
         // cross module aggregation results
@@ -193,7 +194,9 @@ class GlobalSearchApi extends SugarApi
         // Search the tag module
         if ($this->getTags == true && !empty($this->term)) {
             $resultSet = $globalSearch->searchTags();
-            $response['tags'] = $this->formatTagResults($resultSet);
+            if (!empty($resultSet)) {
+                $response['tags'] = $this->formatTagResults($resultSet);
+            }
         }
         return $response;
     }
@@ -312,12 +315,15 @@ class GlobalSearchApi extends SugarApi
     {
         // Compose the term filter for the tags
         if (!empty($this->tagFilters)) {
-            $this->filters[] = new \Elastica\Filter\Terms(TagsHandler::TAGS_FIELD, $this->tagFilters);
+            $this->filters[] = new \Elastica\Query\Terms(
+                Mapping::PREFIX_COMMON .TagsHandler::TAGS_FIELD .'.tags',
+                $this->tagFilters
+            );
         }
 
         // Compose the bool and term filter to exclude the tag module
-        $tagFilter = new \Elastica\Filter\Terms("_type", array("Tags"));
-        $boolFilter = new \Elastica\Filter\BoolFilter();
+        $tagFilter = new \Elastica\Query\Terms("_type", ["Tags"]);
+        $boolFilter = new \Elastica\Query\BoolQuery();
         $boolFilter->addMustNot($tagFilter);
         $this->filters[] = $boolFilter;
     }
@@ -401,10 +407,11 @@ class GlobalSearchApi extends SugarApi
      * Format result set
      *
      * @param ServiceBase $api
+     * @param array $args
      * @param ResultSetInterface $results
      * @return array
      */
-    protected function formatResults(ServiceBase $api, ResultSetInterface $results)
+    protected function formatResults(ServiceBase $api, array $args, ResultSetInterface $results)
     {
         $formatted = array();
 
@@ -412,7 +419,7 @@ class GlobalSearchApi extends SugarApi
         foreach ($results as $result) {
 
             // get bean data based on available fields in the result
-            $data = $this->formatBeanFromResult($api, $result);
+            $data = $this->formatBeanFromResult($api, $args, $result);
 
             // set score
             if ($score = $result->getScore()) {
@@ -421,6 +428,15 @@ class GlobalSearchApi extends SugarApi
 
             // add highlights if available
             if ($highlights = $result->getHighlights()) {
+
+                // Filter out fields from highlights which are not present
+                // on our bean. This is to ensure we never return any fields
+                // which are not avialable due to ACL's.
+                foreach ($highlights as $field => $highlight) {
+                    if (!isset($data[$field])) {
+                        unset($highlights[$field]);
+                    }
+                }
                 $data['_highlights'] = $highlights;
             }
 
@@ -456,13 +472,17 @@ class GlobalSearchApi extends SugarApi
     /**
      * Wrapper around formatBean based on Result
      * @param ServiceBase $api
+     * @param array $args
      * @param Result $result
      * @return array
      */
-    protected function formatBeanFromResult(ServiceBase $api, Result $result)
+    protected function formatBeanFromResult(ServiceBase $api, array $args, Result $result)
     {
         // pass in field list from available data fields on result
-        $args = array('fields' => $result->getDataFields());
+        $args = array(
+            'fields' => $result->getDataFields(),
+            'erased_fields' => $args['erased_fields']?? null,
+        );
         $bean = $result->getBean();
 
         // Load email information directly from search backend if available

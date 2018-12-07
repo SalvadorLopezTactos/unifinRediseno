@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => '見積（出荷先）',
 	'LNK_ACCOUNT_REPORTS' => '取引先レポート',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'ドキュメント',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'アカウント一覧のダッシュ ボード',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'アカウント レコードのダッシュ ボード',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'チャート',
 	'LBL_DEFAULT' => 'ビュー',

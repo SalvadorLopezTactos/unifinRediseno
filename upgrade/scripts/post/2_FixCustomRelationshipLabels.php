@@ -67,7 +67,7 @@ class SugarUpgradeFixCustomRelationshipLabels extends UpgradeScript
                 $this->upgrader->log(
                     sprintf('FixCustomLabels: removing "%s"', $file)
                 );
-                SugarAutoLoader::unlink($file);
+                unlink($file);
             }
         }
     }

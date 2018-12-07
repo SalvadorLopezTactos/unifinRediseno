@@ -12,7 +12,9 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\Filter;
 
-use Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\Visibility;
+use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
+use TeamSet;
+use User;
 
 /**
  *
@@ -26,7 +28,7 @@ class TeamSetFilter implements FilterInterface
     /**
      * @var string
      */
-    protected $defaultField = 'team_set_id';
+    protected $defaultField = 'team_set_id.set';
 
     /**
      * {@inheritdoc}
@@ -35,16 +37,17 @@ class TeamSetFilter implements FilterInterface
     {
         $teamSetIds = $this->getTeamSetIds($options['user']);
         $field = !empty($options['field']) ? $options['field'] : $this->defaultField;
-        return new \Elastica\Filter\Terms($field, $teamSetIds);
+        $field = $options['module'] . Mapping::PREFIX_SEP . $field;
+        return new \Elastica\Query\Terms($field, $teamSetIds);
     }
 
     /**
      * Get team set ids for given user
-     * @param \User $user
+     * @param User $user
      * @return array
      */
-    protected function getTeamSetIds(\User $user)
+    protected function getTeamSetIds(User $user)
     {
-        return \TeamSet::getTeamSetIdsForUser($user->id);
+        return TeamSet::getTeamSetIdsForUser($user->id);
     }
 }

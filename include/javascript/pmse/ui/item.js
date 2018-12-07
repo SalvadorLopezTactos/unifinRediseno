@@ -8,18 +8,20 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 /**
- * @class Item
+ * @class PMSE.Item
  * Handles a menu item
- * @extend Element
+ * @extends PMSE.Element
  *
  * @constructor
  * Creates a new instance of the class
- * @param {Object/Action} options
- * @param {Menu} [parent]
+ * @param {(Object|PMSE.Action)} options
+ * @param {PMSE.Menu} [parent]
  */
-var Item = function (options, parent) {
-    Element.call(this, options);
+PMSE.Item = function(options, parent) {
+    PMSE.Element.call(this, options);
     /**
      * Defines the Label of the item
      * @type {String}
@@ -27,17 +29,17 @@ var Item = function (options, parent) {
     this.label = null;
     /**
      * Defines the action associated
-     * @type {Action}
+     * @type {PMSE.Action}
      */
     this.action = null;
     /**
      * Defines the parent menu associated
-     * @type {Menu}
+     * @type {PMSE.Menu}
      */
     this.parentMenu = null;
     /**
      * Defines the child menu associated
-     * @type {Menu}
+     * @type {PMSE.Menu}
      */
     this.menu = null;
     /**
@@ -62,27 +64,27 @@ var Item = function (options, parent) {
 
     this.icon = null;
 
-    Item.prototype.initObject.call(this, options, parent);
+    PMSE.Item.prototype.initObject.call(this, options, parent);
 };
-Item.prototype = new Element();
+PMSE.Item.prototype = new PMSE.Element();
 
 /**
  * Defines the object's type
  * @type {String}
  */
-Item.prototype.type = "Item";
+PMSE.Item.prototype.type = 'PMSE.Item';
 
 /**
  * Defines the object's family
  * @type {String}
  */
-Item.prototype.family = "Item";
+PMSE.Item.prototype.family = 'PMSE.Item';
 
 /**
  * Initialize the object with the default values
- * @param {Object/Action} options
+ * @param {(Object|PMSE.Action)} options
  */
-Item.prototype.initObject = function (options, parent) {
+PMSE.Item.prototype.initObject = function(options, parent) {
 
     var defaults = {
         label: null,
@@ -106,7 +108,7 @@ Item.prototype.initObject = function (options, parent) {
             .setIcon(defaults.icon)
             .setFocused(defaults.focused);
         if (!defaults.action) {
-            this.action = new Action({
+            this.action = new PMSE.Action({
                 text: defaults.label,
                 cssStyle: defaults.icon,
                 handler: defaults.handler
@@ -120,9 +122,9 @@ Item.prototype.initObject = function (options, parent) {
 
 /**
  * Loads the action to the item
- * @param {Action} action
+ * @param {PMSE.Action} action
  */
-Item.prototype.loadAction = function (action, parent) {
+PMSE.Item.prototype.loadAction = function(action, parent) {
     this.action = action;
     this.setLabel(this.action.text);
     this.setIcon(this.action.cssStyle);
@@ -141,7 +143,7 @@ Item.prototype.loadAction = function (action, parent) {
  * @param {String} text
  * @return {*}
  */
-Item.prototype.setLabel = function (text) {
+PMSE.Item.prototype.setLabel = function(text) {
     this.label = text;
     if (this.action) {
         this.action.setText(text);
@@ -149,7 +151,7 @@ Item.prototype.setLabel = function (text) {
     return this;
 };
 
-Item.prototype.setIcon = function (icon) {
+PMSE.Item.prototype.setIcon = function(icon) {
     this.icon = icon;
     if (this.action) {
         this.action.setCssClass(icon);
@@ -162,27 +164,27 @@ Item.prototype.setIcon = function (icon) {
 /**
  * Defines the way to paint this item
  */
-Item.prototype.paint = function () {
+PMSE.Item.prototype.paint = function() {
     //TODO Implement this class
 };
 
 /**
  * Sets the parent menu
- * @param {Menu} parent
+ * @param {PMSE.Menu} parent
  * @return {*}
  */
-Item.prototype.setParentMenu = function (parent) {
+PMSE.Item.prototype.setParentMenu = function(parent) {
     this.parentMenu = parent;
     return this;
 };
 
 /**
- * Sets the child Menu
- * @param {Menu} child
+ * Sets the child PMSE.Menu
+ * @param {PMSE.Menu} child
  * @return {*}
  */
-Item.prototype.setChildMenu = function (child) {
-    if (child instanceof Menu) {
+PMSE.Item.prototype.setChildMenu = function(child) {
+    if (child instanceof PMSE.Menu) {
         //child.setParentMenu(this.parentMenu);
         child.setCanvas(this.parentMenu.canvas);
         child.setParent(this);
@@ -191,17 +193,17 @@ Item.prototype.setChildMenu = function (child) {
         //child.parentMenu = this.parentMenu;
         child.canvas = this.parentMenu.canvas;
         child.parent = this;
-        this.menu = new Menu(child);
+        this.menu = new PMSE.Menu(child);
     }
     return this;
 };
 
-Item.prototype.setDisabled = function (value) {
+PMSE.Item.prototype.setDisabled = function(value) {
     this.disabled = value;
     return this;
 };
 
-Item.prototype.setFocused = function (value) {
+PMSE.Item.prototype.setFocused = function(value) {
     this.focused = value;
     return this;
 };
@@ -211,7 +213,7 @@ Item.prototype.setFocused = function (value) {
  * @param {String} value
  * @return {*}
  */
-Item.prototype.setToolTip = function (value) {
+PMSE.Item.prototype.setToolTip = function(value) {
     this.toolTip = value;
     return this;
 };
@@ -221,12 +223,12 @@ Item.prototype.setToolTip = function (value) {
  * @param {Boolean} value
  * @return {*}
  */
-Item.prototype.setSelected = function (value) {
+PMSE.Item.prototype.setSelected = function(value) {
     this.selected = value;
     return this;
 };
 
-Item.prototype.createHTML = function () {
+PMSE.Item.prototype.createHTML = function() {
     var li;
     li = this.createHTMLElement('li');
     li.className = 'adam-item';
@@ -240,10 +242,10 @@ Item.prototype.createHTML = function () {
     return this.html;
 };
 
-Item.prototype.attachListeners = function () {
+PMSE.Item.prototype.attachListeners = function() {
 
 };
-Item.prototype.closeMenu = function () {
+PMSE.Item.prototype.closeMenu = function() {
     if (this.parentMenu && this.parentMenu.canvas && this.parentMenu.canvas.currentMenu) {
         this.parentMenu.canvas.currentMenu.hide();
     }

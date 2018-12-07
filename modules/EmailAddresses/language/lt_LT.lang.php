@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'Sukūrimo data',
     'LBL_DATE_MODIFIED' => 'Redagavimo data',
     'LBL_DELETED' => 'Trinti',
+    'LBL_MODULE_NAME' => 'El. pašto adresai',
+    'LBL_MODULE_NAME_SINGULAR' => 'El. pašto adresas',
 );

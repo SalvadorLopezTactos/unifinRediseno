@@ -65,6 +65,7 @@ $viewdefs[$module_name]['base']['view']['unattendedCases-list'] = array(
                     'enabled' => true,
                     'link' => true,
                     'type' => 'pmse-link',
+                    'sortable' => false,
                 ),
                 array(
                     'name' => 'cas_status',

@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => 'Vedajad',
   'LNK_PRODUCT_LIST' => 'Vaata tootekataloogi',
   'NTC_DELETE_CONFIRMATION' => 'Kas olete kindel, et soovite selle kirje kustutada?',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => 'Lisa',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Määratud kasutaja nimi',

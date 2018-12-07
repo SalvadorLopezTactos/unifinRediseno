@@ -11,10 +11,25 @@
  */
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 
 class ViewModulefields extends SugarView
 {
     var $mbModule;
+
+    /**
+     * @var Authentication\Config
+     */
+    protected $idpConfig;
+
+    /**
+     * @inheritdoc
+     */
+    public function __construct($bean = null, $view_object_map = array(), Request $request = null)
+    {
+        $this->idpConfig = new Authentication\Config(\SugarConfig::getInstance());
+        parent::__construct($bean, $view_object_map, $request);
+    }
 
     /**
 	 * @see SugarView::_getModuleTitleParams()
@@ -228,6 +243,10 @@ class ViewModulefields extends SugarView
         $def
         )
 	{
+        if ($this->idpConfig->isIDMModeEnabled() && !empty($def['idm_mode_disabled'])) {
+            return false;
+        }
+
     	if (isset($def['studio'])) {
             if (is_array($def [ 'studio' ]))
             {

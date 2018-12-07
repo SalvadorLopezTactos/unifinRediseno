@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Aufgabenlisten-Dashboard',
+
   'LBL_MODULE_NAME' => 'Aufgaben',
   'LBL_MODULE_NAME_SINGULAR' => 'Aufgabe',
   'LBL_TASK' => 'Aufgaben:',
@@ -60,7 +63,7 @@ $mod_strings = array (
   'LBL_DEFAULT_PRIORITY' => 'Mittel',
   'LBL_LIST_MY_TASKS' => 'Meine offenen Aufgaben',
   'LNK_NEW_TASK' => 'Neue Aufgabe',
-  'LNK_TASK_LIST' => 'Aufgaben',
+  'LNK_TASK_LIST' => 'Aufgaben anzeigen',
   'LNK_IMPORT_TASKS' => 'Aufgaben importieren',
   'LBL_CONTACT_FIRST_NAME'=>'Kontakt Vorname',
   'LBL_CONTACT_LAST_NAME'=>'Kontakt Nachname',

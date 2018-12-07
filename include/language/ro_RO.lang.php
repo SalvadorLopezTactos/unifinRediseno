@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'Chei OAuth Consumator',
     'OAuthTokens' => 'Simboluri OAuth',
     'Filters' => 'Filtre',
-    'UserSignatures' => 'Semnatura utilizator',
+    'UserSignatures' => 'Semnături e-mail',
     'Shippers' => 'Furnizori Transport',
     'Styleguide' => 'Manual de stil',
     'Feedbacks' => 'Feedbackuri',
     'Tags' => 'Etichete',
     'Categories' => 'Categorii',
     'Dashboards' => 'Tablouri de bord',
+    'OutboundEmail' => 'Setări e-mail',
+    'EmailParticipants' => 'Participanți e-mail',
+    'DataPrivacy' => 'Confidențialitate date',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'Fo',
         'Tasks' => 'Ts',
-        'Dashboards' => 'Db',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => 'DP',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => 'Tipul produsului',
     'Shippers' => 'Transportator',
     'Subscriptions' => 'Abonament',
-    'UserSignatures' => 'Semnatura utilizator',
+    'UserSignatures' => 'Semnătură e-mail',
     'Feedbacks' => 'Feedback',
     'Tags' => 'Eticheta',
     'Categories' => 'Categorie',
+    'OutboundEmail' => 'Setare e-mail',
+    'EmailParticipants' => 'Participant e-mail',
+    'DataPrivacy' => 'Confidențialitate date',
   ),
 
 /*
@@ -329,6 +336,11 @@ $app_list_strings = array (
     'Existing Business' => 'Activitate existentă',
     'New Business' => 'Activitate nouă',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => 'Activ',
+            'Inactive' => 'Inactiv',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => 'Venituri',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => 'Influentator',
     'Other' => 'Altul',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => 'Activ',
+            'Inactive' => 'Inactiv',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => 'Activ',
+            'Inactive' => 'Inactiv',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => 'Contact principal',
@@ -393,7 +416,7 @@ $app_list_strings = array (
     ),
     'sales_status_dom' => array(
         'New' => 'Nou',
-        'In Progress' => 'In progres',
+        'In Progress' => 'În desfăşurare',
         'Closed Won' => 'Castigat',
         'Closed Lost' => 'Pierdut',
     ),
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => 'Sarcina',
       'KBContents' => 'Baza de cunostinte',
+      'Notes' => 'Notă',
   ),
 
   'record_type_display_notes' =>
@@ -659,6 +683,14 @@ $app_list_strings = array (
     'Calls' => 'Apel',
       'KBContents' => 'Baza de cunostinte',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => 'Cont',
+        'Contacts' => 'Contact',
+        'Employees' => 'Angajat',
+        'Leads' => 'Client potențial',
+        'Prospects' => 'Țintă',
+        'Users' => 'Utilizator',
+    ),
 
   'parent_type_display' =>
   array (
@@ -678,7 +710,7 @@ $app_list_strings = array (
 
     'Prospects' => 'Tinta:',
       'KBContents' => 'Baza de cunostinte',
-
+      'Notes' => 'Notă',
   ),
 
   'product_status_default_key' => 'Expediat',
@@ -726,7 +758,7 @@ $app_list_strings = array (
   'default_quote_stage_key' => 'Draft',
   'quote_stage_dom' =>
   array (
-    'Draft' => 'Schita',
+    'Draft' => 'Draft',
     'Negotiation' => 'Negociere',
     'Delivered' => 'Livrat',
     'On Hold' => 'Suspendat',
@@ -832,7 +864,6 @@ $app_list_strings = array (
     'Product' => 'Produs',
     'User' => 'Utilizator',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => 'Oricare Email:',
     'Twitter' => 'Twitter'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => 'Solicitare Politică de confidențialitate a datelor',
+        'Send Personal Information being processed' => 'Trimitere informații personale în curs de procesare',
+        'Rectify Information' => 'Rectificare informații',
+        'Request to Erase Information' => 'Solicitare de ștergere informații',
+        'Export Information' => 'Export informații',
+        'Restrict Processing' => 'Restricționare procesare',
+        'Object to Processing' => 'Obiecție la procesare',
+        'Consent to Process' => 'Consimțământ pentru procesare',
+        'Withdraw Consent' => 'Retragere consimțământ',
+        'Other' => 'Altul',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => 'Comunicări de afaceri',
+        'Marketing Communications by company' => 'Comunicări de marketing după companie',
+        'Marketing Communications by partners' => 'Comunicări de marketing după parteneri',
+    ),
+    'dataprivacy_status_default_key' => 'Deschis',
+    'dataprivacy_status_dom' => array(
+        'Open' => 'Deschis',
+        'Closed' => 'Finalizat',
+        'Rejected' => 'Respins',
+    ),
+    'dataprivacy_priority_default_key' => 'Scăzut',
+    'dataprivacy_priority_dom' => array(
+        'Low' => 'Scăzut',
+        'Medium' => 'Mediu',
+        'High' => 'Ridicat',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => 'Studio',
     'Upgrade' => 'Actualizeaza:',
     'Users' => 'Utilizatori',
+    'OutboundEmail' => 'Setări e-mail',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -996,7 +1058,7 @@ $app_list_strings = array (
         ),
 
     'dom_report_types'=>array(
-                'tabular'=>'Randuri si coloane',
+                'tabular'=>'Rânduri și coloane',
                 'summary'=>'Centralizat',
                 'detailed_summary'=>'Centralizat cu detalii',
                 'Matrix' => 'Matrice',
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => 'Esuat',
                                         'completed'     => 'Finalizata',
                                         'no curl'       => 'Procesul nu a fost executat: Nu exista cURL disponibil',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => 'Schiță',
+        'Archived' => 'Arhivat',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => 'Lista adrese excluse - dupa Id',
     'test' => 'Test [Alt+T]',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => 'Activ',
+             'Inactive' => 'Inactiv',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3 Saptamani',
         '31' => '1 Luna',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => 'Activ',
-    'Inactive' => 'Inactiv',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => 'Ridicat',
         'medium'    => 'Mediu',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => 'Niciunul',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'Google',
+        'exchange' => 'Schimb',
+        'outlook' => 'Outlook',
+        'other' => 'Altele',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2032,22 +2099,27 @@ $app_list_strings = array (
         'ACTIVE' => 'Activat',
         'INACTIVE' => 'Dezactivat',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => 'Înregistrare',
+        'records' => 'Listă',
+        'activities' => 'Flux de activități',
+    ),
 );
 
 $app_strings = array (
   'LBL_RECORD_HEADER' => 'Antet inregistrare', // Studio editing of record views
-  'LBL_RECORD_BODY' => 'Carte de vizita', // Studio editing of record views
+  'LBL_RECORD_BODY' => 'Carte de vizită', // Studio editing of record views
   'LBL_RECORD_SHOWMORE' => 'Afiseaza mai mult', // Studio editing of record views
   'LBL_FAVORITE' => 'Favorit', // Record view header panel element
   'LBL_FOLLOW' => 'Urmareste', // Record view header panel element
   'LBL_FOLLOW_LINK' => 'Urmareste linkul',
   'LBL_TOGGLE_VISIBILITY' => 'Modifica vizibilitatea', // Record view header panel element
   'LBL_ACTIVITIES' => 'Flux de activităţi',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. Toate drepturile rezervate.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. Toate drepturile rezervate.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar şi Cubul 3-D sunt mărci comerciale înregistrate ale SugarCRM Inc. '.
         'Toate celelalte denumiri de companii şi produse care sunt utilizate sau care apar în acest produs pot fi mărci comerciale ale '.
         'SugarCRM ®, Sugar Enterprise™ si Sugar™ sunt marci inregistrate ale SugarCRM Inc.',
-    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ si Sugar™ sunt marci inregistrate ale SugarCRM Inc.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ și Sugar™ sunt mărci comerciale ale SugarCRM Inc.',
     'LBL_SEND_INVITE' => 'Trimite invitatie',
   'LBL_INVITEES' => 'Invitati',
     'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Invitatul nu va primi invitaţia dvs.',
@@ -2072,7 +2144,7 @@ $app_strings = array (
   'LBL_EDIT_INLINE' => 'Modifica pe loc' /*for 508 compliance fix*/,
   'LBL_VIEW_INLINE' => 'Vizualizeaza' /*for 508 compliance fix*/,
   'LBL_BASIC_SEARCH' => 'Cauta' /*for 508 compliance fix*/,
-  'LBL_BASIC_QUICK_SEARCH' => 'Cautare...' /*for 508 compliance fix*/,
+  'LBL_BASIC_QUICK_SEARCH' => 'Căutare...' /*for 508 compliance fix*/,
   'LBL_PROJECT_MINUS' => 'Eliminare' /*for 508 compliance fix*/,
   'LBL_PROJECT_PLUS' => 'Adauga' /*for 508 compliance fix*/,
   'LBL_Blank' => ' ' /*for 508 compliance fix*/,
@@ -2115,7 +2187,8 @@ $app_strings = array (
     'LBL_OUTBOUND_EMAIL_ADD_SERVER'         => 'Adauga Server...',
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => 'Activezi SMTP over SSL sau TLS?',
     'LBL_NO_ACTION'                         => 'Nu exista nicio actiune cu acest nume.',
-    'LBL_NO_DATA'                           => 'Nu exista date',
+    'LBL_NO_DATA'                           => 'Nu există date',
+    'LBL_NOT_APPLICABLE'                    => 'Nu este cazul',
     'LBL_ROUTING_ADD_RULE'                  => 'Adauga regula',
     'LBL_ROUTING_ALL'                       => 'Cel putin',
     'LBL_ROUTING_ANY'                       => 'Oricare',
@@ -2479,7 +2552,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Sincronizeaza toate conturile de email',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'Un mesaj a fost trimis catre adresa de email specificata folosind setarile specificate pentru trimitere mesaje. Verifica daca mesajul a fost primit pentru a verifica daca setarile sunt corecte.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Aceasta actiune va sincroniza conturile de email si continutul lor.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Vrei sa executi o sincronizare totala?\nPentru conturile mari de email aceasta actiune poate dura cateva minute.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Vrei sa executi o sincronizare totala?\\nPentru conturile mari de email aceasta actiune poate dura cateva minute.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Apasa tasta Shift sau Ctrl pentru a selecta mai multe foldere.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Generalităţi',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Grup Foldere disponibile',
@@ -2547,6 +2620,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'Import reusit',
     'LBL_EMAIL_IMPORT_FAIL'                 => 'Import esuat deoarece mesajul este fie deja importat, fie a fost sters de pe server',
 
+    'LBL_EMAILS_FROM' => 'E-mail trimis',
+    'LBL_EMAILS_RECEIVED' => 'E-mailuri primite',
+    'LBL_EMAIL_ADDRESSES_USED' => 'Adrese de e-mail folosite în e-mailuri',
+    'LBL_EMAIL_ADDRESS' => 'Adresă de e-mail',
+    'LBL_FROM' => 'De la',
+    'LBL_TO' => 'Către',
+    'LBL_CC' => 'CC',
+    'LBL_BCC' => 'BCC',
+
     'LBL_LINK_NONE'=> 'Nicio optiune',
     'LBL_LINK_ALL'=> 'Toate optiunile',
     'LBL_LINK_RECORDS'=> 'Inregistrari',
@@ -2605,6 +2687,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Este necesara o sesiune activa pentru exportul de continut.',
     'ERR_NO_HEADER_ID' => 'Aceasta functie nu este disponibila in aceasta tema.',
     'ERR_NOT_ADMIN' => "Acces neautorizat in zona de administrare.",
+    'ERR_DISABLED_FOR_IDM_MODE' => "Această opțiune este dezactivată în SugarCRM pentru modul IDM și este disponibilă în Consola cloud.",
+    'ERR_GOTO_CLOUD_CONSOLE' => "Accesați <a href=\"%s\" target=\"_blank\">Consola cloud</a>.",
     'ERR_MISSING_REQUIRED_FIELDS' => 'Camp obligatoriu lipsa:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Camp obligatoriu invalid:',
     'ERR_INVALID_VALUE' => 'Valoare invalida:',
@@ -2823,7 +2907,7 @@ $app_strings = array (
     'LBL_EDIT_AS_NEW_BUTTON_LABEL' => 'Modifica ca inregistrare noua',
     'LBL_EDIT_AS_NEW_BUTTON_TITLE' => 'Modifica ca inregistrare noua',
     'LBL_FAVORITES' => 'Favorite',
-    'LBL_FILTER' => 'Filtreaza',
+    'LBL_FILTER' => 'Filtrează',
     'LBL_DEFAULT_DATA_FILTER' => 'Filtru implicit de date',
     'LBL_FILTER_MENU_BY' => 'Filtreaza meniul dupa',
     'LBL_FILTER_SELECT_FIELD' => 'Alege campul...',
@@ -2831,7 +2915,7 @@ $app_strings = array (
     'LBL_FILTER_CREATE_NEW' => 'Creează',
     'LBL_FILTER_CREATE_FILTER' => 'Creare filtru nou',
     'LBL_FILTER_EDIT_FILTER' => 'Editare filtru',
-    'LBL_FILTER_ALL_RECORDS' => 'Toate inregistrarile',
+    'LBL_FILTER_ALL_RECORDS' => 'Toate înregistrările',
     'TPL_FILTER_SAVE' => 'Ai creat cu succes filtrul {{name}}.',
     'LBL_FILTER_BETWEEN_FROM' => 'De la',
     'LBL_FILTER_BETWEEN_TO' => 'Catre',
@@ -2910,7 +2994,7 @@ $app_strings = array (
     'LBL_LIST_NAME' => 'Nume',
     'LBL_LIST_OF' => 'sau',
     'LBL_LIST_PHONE' => 'Telefon',
-    'LBL_LIST_RELATED_TO' => 'Relationat cu',
+    'LBL_LIST_RELATED_TO' => 'Asociat cu',
     'LBL_LIST_USER_NAME' => 'Nume utilizator',
     'LBL_LISTVIEW_MASS_UPDATE_CONFIRM' => 'Esti sigur ca vrei sa actualizezi intreaga lista?',
     'LBL_LISTVIEW_NO_SELECTED' => 'Selecteaza cel putin o inregistrare pentru a continua.',
@@ -2934,7 +3018,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Actualizare in masa esuata. Se initiaza o noua incercare ({{num}} din {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Actualizare in masa incompleta. {{num}} inregistrari au ramas nemodificate.',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => 'Actualizare in masa incompleta. {{num}} inregistrari au ramas nemodificate.',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} inregistrari au fost ignorate datorita drepturilor.',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} înregistrare (înregistrări) a(u) fost ignorată(e) din cauza permisiunilor sau a erorilor.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} inregistrari au fost actualizate cu succes.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} Actualizare in masa',
     'TPL_MASSDELETE_PROGRESS_STATUS' => 'Se sterg {{num}} din {{total}}.',
@@ -2960,7 +3044,7 @@ $app_strings = array (
     'TPL_MASSLINK_TITLE' => 'Legare în masă {{module}} ',
 
     'LBL_LISTVIEW_SELECT_AND_EDIT' => 'Selecteaza',
-    'LBL_LISTVIEW_ACTIONS' => 'Actiuni',
+    'LBL_LISTVIEW_ACTIONS' => 'Acțiuni',
 
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
@@ -3006,6 +3090,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'setari standard utilizator',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => 'cont utilizator',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'cont grup',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => 'Nume',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => 'Creează',
@@ -3098,7 +3183,7 @@ $app_strings = array (
     'LBL_SWEETSPOT_THEME' => 'Tema',
     'LBL_SWEETSPOT_THEME_SELECT' => 'Selectaţi tema',
 
-    'LBL_RELATED' => 'Relationat',
+    'LBL_RELATED' => 'Asociat',
     'LBL_RELATED_INFORMATION' => 'Informatii relationate',
     'LBL_RELATED_RECORDS' => 'Inregistrari relationate',
     'LBL_REPORTS_TO' => 'Raporteaza catre',
@@ -3203,7 +3288,7 @@ $app_strings = array (
     'LBL_SHIP_TO_ACCOUNT'=>'Expediaza catre cont',
     'LBL_SHIP_TO_CONTACT'=>'Expediaza catre contact',
     'LBL_SHIPPING_ADDRESS'=>'Adresa de livrare',
-    'LBL_SHORTCUTS' => 'Scurtaturi',
+    'LBL_SHORTCUTS' => 'Scurtături',
     'LBL_SHOW'=>'Afiseaza',
     'LBL_SQS_INDICATOR' => '',
     'LBL_STATE' => 'Judet:',
@@ -3218,7 +3303,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Toate drepturile rezervate.<br />SugarCRM, Sugar şi Cubul 3-D sunt mărci comerciale înregistrate ale SugarCRM Inc. '.
         'Toate celelalte denumiri de companii şi produse care sunt utilizate sau care apar în acest produs pot fi mărci comerciale ale '.
         'companiilor respective cu care sunt asociate.',
@@ -3256,7 +3341,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => 'Parola',
     'LBL_LOGGED_OUT' => 'Ai fost delogat.',
     'LBL_LOGIN_FORM_LABEL' => 'Arata formularul de logare',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => 'Reveniți la conectare',
+    'LBL_LOGIN_INACTIVE_USER' => 'Utilizator inactiv',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => 'Utilizatorul de portal sau grup nu se poate conecta.',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => 'Tablou de lucru',
@@ -3323,16 +3410,16 @@ $app_strings = array (
     'LNK_BACKTOTOP' => 'Inapoi in partea de sus',
     'LNK_REMOVE' => 'elimina',
     'LNK_RESUME' => 'Reluare',
-    'LNK_VIEW_CHANGE_LOG' => 'Vizualizeaza registrul de modificari',
-
+    'LNK_VIEW_CHANGE_LOG' => 'Vizualizare jurnal de audit',
+    'TPL_AUDIT_LOG_TITLE' => 'Jurnal de audit pentru {{{name}}}',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => 'Apasa butonul Inapoi al browser-ului pentru a corecta eroarea.',
     'NTC_DATE_FORMAT' => '(aaaa-ll-zz)',
     'NTC_DATE_TIME_FORMAT' => '(aaaa-ll-zz 24:00)',
     'NTC_DELETE_CONFIRMATION_MULTIPLE' => 'Esti sigur ca vrei sa stergi inregistrarile selectate?',
     'NTC_TEMPLATE_IS_USED' => 'Modelul este folosit in cel putin o campanie de email marketing. Esti sigur ca vrei sa il stergi?',
-    'NTC_TEMPLATES_IS_USED' => "Urmatoarele modele sunt folosite in campanii de email marketing. Esti sigur ca vrei sa le stergi?
-",
+    'NTC_TEMPLATES_IS_USED' => "Urmatoarele modele sunt folosite in campanii de email marketing. Esti sigur ca vrei sa le stergi?\n",
     'NTC_DELETE_CONFIRMATION' => 'Esti sigur ca vrei sa stergi aceasta inregistrare?',
     'NTC_DELETE_CONFIRMATION_FORMATTED' => 'Esti sigur ca vrei sa stergi {0}?',
     'NTC_DELETE_CONFIRMATION_NUM' => 'Esti sigur ca vrei sa stergi ',
@@ -3359,7 +3446,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "Licenta companiei tale pentru SugarCRM va expira in curand.",
     'ERROR_LICENSE_VALIDATION'=> "Licenta companiei tale pentru SugarCRM trebuie validata. Doar administratorii se pot loga.",
     'WARN_LICENSE_VALIDATION'=> "Licenta companiei tale pentru SugarCRM trebuie validata curand.",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"Numarul de clienti offline activi depaseste in acest moment numarul specificat in licenta ta.",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Atentie:</b> Browser-ul tau functioneaza in modul compatibility view care nu este recomandat.",
     'WARN_LICENSE_SEATS'=>  "Atentie: Numarul de utilizatori activi este deja egal cu numarul maxim de licente permis.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Atentie: Numarul de utilizatori activi depaseste numarul maxim de licente permis.",
@@ -3429,9 +3515,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'Se proceseaza..',
     'LBL_REQUEST_PROCESSED'=>'Finalizat',
     'LBL_AJAX_FAILURE' => 'Eroare Ajax',
-    'LBL_OC_STATUS' => 'Status client offline',
-    'LBL_OC_STATUS_TEXT' => 'Indică dacă utilizatorul curent poate sau nu să utilizeze un client offline.',
-    'LBL_OC_DEFAULT_STATUS' => 'Inactive',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => 'Se caută ...',
     'LBL_SAVED_SEARCH_SHORTCUT' => 'Căutări salvate',
     'LBL_SEARCH_POPULATE_ONLY'=> 'Efectuaţi o căutare folosind formularul de căutare de mai sus',
@@ -3532,6 +3615,7 @@ $app_strings = array (
     'LBL_COLLAPSE_ALL' => 'Collapse All',
     'LBL_EXPAND_ALL' => 'Expand All',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => 'Edit',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => 'Vizualizare raport',
     'LBL_DASHLET_REFRESH_LABEL' => 'Refresh',
     'LBL_DASHLET_REMOVE_LABEL' => 'Eliminare',
     'LBL_DASHLET_DROP_HERE' => 'Fixaţi aici',
@@ -3567,7 +3651,7 @@ $app_strings = array (
     'LBL_DASHLET_NO_RECORDS' => 'Nu s-a găsit nicio înregistrare moemntan.',
     'LBL_DASHLET_CASES_SUMMARY_NAME' => 'Sumar tichete',
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Interacţiuni',
-    'LBL_DASHLET_ATTACHMENTS_NAME' => 'Note & Atasamente',
+    'LBL_DASHLET_ATTACHMENTS_NAME' => 'Note și atașări',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Notele & Atasamentele apartin inregistrarii',
     'LBL_DASHLET_PIPLINE_NAME' => 'Ansamblu',
 
@@ -3683,7 +3767,7 @@ $app_strings = array (
     'LBL_SELECT_MODULE' => 'Selectaţi un modul:',
     'LBL_USER_ID' => 'ID utilizator',
     'LBL_MODULE_NAME' => 'Module Name',
-    'LBL_MODULE_ALL' => 'All',
+    'LBL_MODULE_ALL' => 'Toate',
     'LBL_ITEM_ID' => 'ID element',
     'LBL_ITEM_SUMMARY' => 'Rezumat elemente',
     'LBL_ACTION' => 'Action',
@@ -3953,10 +4037,10 @@ $app_strings = array (
     'LBL_DELETE_BUTTON_LABEL' => 'Ștergere',
     'LBL_DELETE_BUTTON_TITLE' => 'Ștergere',
     'LBL_SAVE_BUTTON_KEY' => 'a',
-    'LBL_SAVE_BUTTON_LABEL' => 'Save',
+    'LBL_SAVE_BUTTON_LABEL' => 'Salveaza',
     'LBL_SAVE_BUTTON_TITLE' => 'Save',
     'LBL_CANCEL_BUTTON_KEY' => 'l',
-    'LBL_CANCEL_BUTTON_LABEL' => 'Cancel',
+    'LBL_CANCEL_BUTTON_LABEL' => 'Anulează',
     'LBL_CANCEL_BUTTON_LABEL_CONT' => 'pentru a opri.',
     'LBL_CANCEL_BUTTON_LABEL_UNSAVED_CONT' => 'pentru a rămâne pe pagină.',
     'LBL_CANCEL_BUTTON_TITLE' => 'Cancel',
@@ -4013,7 +4097,7 @@ $app_strings = array (
     'LBL_DETAILVIEW_NO_RECORDS' => 'Această înregistrare nu a putut fi randată în acest moment.',
     'LBL_REFINE_LIST' => 'Rafinare listă',
     'LBL_SEARCH_BY' => 'Căutare după',
-    'LBL_PREVIEW' => 'Preview',
+    'LBL_PREVIEW' => 'Previzualizare',
     'LBL_COLUMNS' => 'Columns',
     'LBL_PREVIEW_DISABLED_NO_RECORD' => 'Previzualizare dezactivată: Nu există date disponibile',
     'LBL_PREVIEW_DISABLED_NO_ACCESS' => 'Previzualizare dezactivată: Nu există acces la înregistrare',
@@ -4187,7 +4271,7 @@ $app_strings = array (
 
 
     'LBL_FUTURE' => 'Viitor',
-    'LBL_REQUIRED_FIELD' => 'Required',
+    'LBL_REQUIRED_FIELD' => 'Obligatoriu',
     // for nomad mobile
     'LBL_OPTIONAL' => 'Opţional',
     'LBL_RELATED_MODULE' => '{{{this}}} asociat',
@@ -4218,7 +4302,9 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Confirm',
     'LBL_NO_ACCESS' => '(Fără acces)',
     'LBL_NO_ACCESS_LOWER' => 'Fără acces',
-    'LBL_NO_FIELD_ACCESS' => 'Fără acces',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => 'Valoare ștearsă',
+    'LBL_VALUE_ERASED_TOOLTIP' => 'Aceste informații au fost șterse prin solicitarea de confidențialitate a datelor',
     'LBL_CREATE_RELATED_RECORD' => 'Creare înregistrare asociată',
     'LBL_ASSOC_RELATED_RECORD' => 'Legare înregistrare existentă',
     'LBL_CHOOSE_LINK' => 'Alegeţi tipul de link',
@@ -4233,10 +4319,10 @@ $app_strings = array (
     'LBL_UPCOMING' => 'Evenimentele mele următoare',
     'LBL_RECENTLY_UPDATED' => 'Actualizate recent',
     'LBL_NOTES_SUBPANEL_TITLE' => 'Note',
-    'LBL_MEETINGS_SUBPANEL_TITLE' => 'Intalniri',
+    'LBL_MEETINGS_SUBPANEL_TITLE' => 'Întâlniri',
     'LBL_TASKS_SUBPANEL_TITLE' => 'Task-uri',
     'LBL_CALLS_SUBPANEL_TITLE' => 'Apeluri',
-    'LBL_EMAILS_SUBPANEL_TITLE' => 'Emails',
+    'LBL_EMAILS_SUBPANEL_TITLE' => 'Email-uri',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Produse din ofertă',
     'LNK_SETTINGS' => 'Settings',
     'LBL_MOBILE_SUPPORT' => 'Support',
@@ -4287,7 +4373,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => 'Mai mare',
     'LBL_FONTSIZE_HUGE' => 'Imens',
     'LBL_FONTSIZE_EXTRA_HUGE' => 'Extra-mare',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => 'Descărcare eşuată\r\n{{{this}}}',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "Descărcare eșuată\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => 'More...',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => '...Mai puţin',
     'LBL_OFFLINE_MODE' => 'Mod Offline',
@@ -4356,6 +4442,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => 'Detaliu tranzacţie',
     'LBL_RECORD_DELETED' => '(Înregistrare ştearsă)',
     'LBL_NOT_AVAILABLE' => 'Nu este cazul',
+    'LBL_FILE_SIZE' => 'Dimensiune fișier',
     'LBL_FILE_SIZE_UNITS_B' => 'Biţi',
     'LBL_FILE_SIZE_UNITS_KB' => 'kB',
     'LBL_FILE_SIZE_UNITS_MB' => 'MB',
@@ -4479,6 +4566,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => 'Fereastra de vizualizare detalii se deschide pe partea dreaptă a ecranului dvs.',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => 'Utilizaţi săgeţile de jos pentru un tur rapid prin componentele principale ale acestui meniu.',
 
+    'LBL_COMMENT_ADD' => 'Adăugați un comentariu',
+    'LBL_REQUIRED' => 'Necesar',
+    'LBL_MORE_BUTTON' => 'Mai mult',
+    'LBL_TRY_AGAIN' => 'Încercați din nou',
+    'LBL_NEW_RECORDS' => 'Create recent',
+    'LBL_ASSIGNED_TO_ME' => '{{{module}}} meu',
+    'LBL_LISTVIEW_FILTER_ALL' => 'Toate {{{module}}}',
+    'LBL_UNFAVORITE' => 'Nefavorit',
+    'LBL_ACTIVITY_CREATE' => 'S-a creat {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UPDATE' => 'S-a actualizat {{{changes}}} în {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_LINK' => 'S-a conectat {{{relatedRecord}}} la {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UNLINK' => 'S-a deconectat {{{relatedRecord}}} de la {{{record}}} {{{module}}}',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{relationship}} pentru {{parentModule}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => 'Descărcați înregistrări conexe...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => 'Configurația tabloului dvs. de bord s-a schimbat. Doriți să reîncărcați?',
+    'LBL_RECORDS' => 'Înregistrări',
+    'LBL_DASHBOARDS' => 'Tablouri de bord',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => 'Căutați {{searchCriteria}}...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => 'Meniu principal',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => 'Creare rapidă înregistrare nouă',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => 'Trageți cu degetul pentru mai multe opțiuni',
+    'LBL_DETAILS' => 'Detalii',
+    'LBL_DETAIL_RELATED' => 'Conexe',
+    'LBL_CREATE_RELATED_MODULE_WARN' => 'Acest {{module}} necesită un {{relatedModule}}. <a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>Creați o înregistrare {{relatedModule}}</a>.',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => 'Editare înregistrare',
+    'LBL_OFFLINE_MENU_SETTINGS' => 'Setări offline',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => 'Setări depanare',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED" : "Criptarea datelor este activată.',
+    'LBL_OFFLINE_TOTAL_RECORDS' => 'Total înregistrări',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => 'Ultima descărcare',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => 'Imposibil de descărcat fișierul.',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => 'Încărcarea tablourilor de bord de pe server a eșuat',
+    'ERR_FILTERS_FETCHING' => 'Imposibil de preluat filtrele',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => 'Imposibil de criptat spațiul de stocare local',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => 'Se criptează datele offline. Acest lucru poate dura câteva minute.',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => 'Criptarea datelor offline a fost finalizată.',
+    'ERR_ACCESS_SPECIFIC_MODULE' => 'Nu aveți acces la modulul {{{module}}}.',
+    'LBL_SKIP' => 'Ignorare',
+    'LBL_CONTINUE' => 'Continuare',
+    'LBL_ENABLE' => 'Activare',
+    'LBL_MOBILE_TRIAL_UNTIL' => 'Versiune de încercare gratuită până la',
+    'LBL_MOBILE_SDK_VERSION' => 'Versiune SDK',
+    'LBL_LOG_LEVEL' => 'Nivel jurnal',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => 'Setările de conectare au fost reconfigurate.',
+    'LBL_TRIAL_PERIOD_EXPIRED' => 'Perioada dvs. de încercare gratuită a expirat.',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => 'Serverul nu acceptă conexiunea securizată. Dezactivați conexiunea securizată.',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => 'Serverul acceptă conexiunea securizată. Activați conexiunea securizată.',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => 'Conexiunea dvs. nu este securizată. Contactați administratorul.',
+    'LBL_LOGIN_SETTINGS_HEADER' => 'Setări de conectare',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => 'Configurați instanța {{{brandName}}}',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => 'Pentru ca aplicația să funcționeze, va trebui să tastați adresa URL a instanței {{{brandName}}}. Dacă nu aveți adresa URl a instanței, contactați administratorul.',
+    'LBL_FACEID' => 'ID față',
+    'LBL_TOUCHID' => 'ID atingere',
+    'LBL_ENABLE_TOUCHID' => 'Activare {{{biometryType}}}',
+    'LBL_SETUP_TOUCHID' => 'Configurare {{{biometryType}}}',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => 'Conectați-vă folosind degetul',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "{{{biometryType}}} nu este configurat pe dispozitivul dvs. \n\nAccesați setările dispozitivului pentru a configura {{{biometryType}}}. După configurare, activați {{{biometryType}}} pentru {{{brandName}}} în Meniu principal > Setări.",
+    'LBL_TOUCH_ID_DISCLAIMER' => 'Dacă folosiți {{{biometryType}}} cu {{{brandName}}}, puteți utiliza identificatorul biometric în loc să introduceți parola pentru a accesa {{{brandName}}}.',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => 'Doriți să continuați cu {{{biometryType}}}?    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => 'Introduceți parola {{{brandName}}} pentru a activa {{{biometryType}}}',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => 'Configurare',
+    'LBL_MDM_CONFIRM_CHANGE' => 'Configurarea aplicației s-a modificat de la Manager dispozitiv mobil. Conectați-vă din nou pentru a aplica modificările.',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => 'Oferiți {{{brandName}}} acces la locația dvs. din setările dispozitivului.',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => 'Locația curentă nu este disponibilă',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "Timpul de recuperare a locației curente a expirat. \nÎncercați din nou.",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => 'Marcajele locației nu sunt disponibile',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => 'Coordonatele locației nu sunt valide',
+    'ERR_MOBILE_INVALID_PASSWORD' => 'Parolă incorectă.',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => 'Aplicația dvs. este învechită și nu mai este compatibilă cu instanța {{{brandName}}} la care vă conectați. Doriți să o actualizați?',
+    'LBL_MOBILE_BY' => 'De',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => 'Acest filtru nu este disponibil offline',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => 'Înregistrări offline',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => 'Setări de descărcare',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => 'Descărcați înregistrările alocate, preferate și urmărite pentru acces offline. Vă puteți actualiza preferințele în setările offline.',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "Descărcarea înregistrărilor dvs. s-a finalizat. Le puteți accesa acum în modul offline.",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "Nu s-au descărcat toate înregistrările dvs.\n Doriți să încercați din nou?",
+    'LBL_BULK_LOAD_USE_CELLULAR' => 'Utilizați datele celulare',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => 'Nu acum',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => 'Descărcarea s-a întrerupt și va fi reluată când deschideți din nou aplicația.',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => 'Se descarcă {{{module}}}: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => 'Actualizare ultimele înregistrări',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => 'Se așteaptă conexiunea',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => 'Întreruptă',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => 'Se oprește',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => 'Descărcare',
+    'LBL_BULK_LOAD_BTN_PAUSE' => 'Pauză',
+    'LBL_BULK_LOAD_BTN_RESUME' => 'Reluare',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => 'Numai conexiunea Wi-Fi este utilizată în mod implicit',
+    'LBL_NPS_RATING_MSG' => "Cum ați evalua experiența \n{{{productName}}}?",
+    'LBL_NPS_THANKS_MSG' => 'Vă mulțumim pentru feedback!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => 'Ați vrea să o evaluați în App Store?',
+    'LBL_NPS_NO_THANKS' => 'Nu, mulțumesc',
+    'LBL_NPS_NOT_NOW' => 'Nu acum',
+    'LBL_NPS_RATE_NOW' => 'Evaluați acum',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => 'Rețeaua nu este disponibilă. Puteți utiliza în continuare aplicația în modul offline',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => 'Modificările dvs. vor fi sincronizate când sunteți online. <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>Vizualizați detaliile</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => 'Există date nesincronizate. Verificați <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>jurnalul de tranzacții</a>',
+    'LBL_CONVERT' => 'Convertire',
+    'LBL_CONVERT_LEAD' => 'Convertire client potențial',
+    'LBL_SEARCH_EXISTING_RECORD' => 'Căutare {{{this}}} existent',
+    'LBL_DUPLICATES_CHECK_FAILED' => 'Verificarea duplicatelor a eșuat',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => 'Doriți să mutați activitățile conexe în înregistrarea contactului?',
+    'LBL_LEAD_CONVERSION_SUCCESS' => 'Ați convertit cu succes clientul potențial {{{name}}}',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => 'Nu s-au găsit duplicate.',
+    'ERR_LEAD_CONVERSION_FAIL' => 'Conversia clientului potențial a eșuat',
+    'LBL_SELECT_DUPLICATE_RECORD' => 'Selectați din duplicatul {{{modulePlural}}}',
+    'LBL_SELECTED_EXISTING_RECORD' => '{{{moduleSingular}}} selectat',
+    'LBL_CREATED_NEW_RECORD' => 'S-a creat un nou {{{moduleSingular}}}',
+    'LBL_VO_BACK_BTN' => 'Buton Înapoi',
+    'LBL_VO_HOME_BTN' => 'Buton de pornire',
+    'LBL_VO_DASHBOARD_BTN' => 'Buton Tablou de bord',
+    'LBL_VO_SEARCH_BTN' => 'Buton Căutare',
+    'LBL_VO_RIGHT_MENU_BTN' => 'Buton meniu dreapta',
+    'LBL_VO_ADD_BTN' => 'Adăugare buton',
+
     //begin portal
 
     //portal record tutorial
@@ -4590,6 +4793,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => 'Selectaţi un raport',
     'LBL_REPORT_AUTO_REFRESH' => 'Reîmprospătare automată',
     'LBL_REPORT_EDIT' => 'Editare raport selectat',
+    'LBL_REFRESH_LIST_AND_CHART' => 'Reîmprospătare listă şi diagramă',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => 'Unknown',
@@ -4651,6 +4855,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'A survenit o eroare în timpul acţiunii AtribuireCătre.',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => 'Nu aveți acces la "{{name}}". Contactați administratorul.',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => 'Anul {0}',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} Q{0}',
@@ -4662,6 +4869,11 @@ $app_strings = array (
     'LBL_MESSAGE_BOX_TITLE' => 'Alert',
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => 'Ignorare duplicate şi salvare',
     'LBL_RESTORE' => 'Resetaţi la originale',
+
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => 'Înregistrări marcate pentru ștergere',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => 'Afișează înregistrările conexe unei solicitări de confidențialitate a datelor în '
+        . 'Ștergeți informațiile.',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'Flux RSS',
@@ -4685,11 +4897,12 @@ $app_strings = array (
     'LBL_UNASSIGNED' => 'Nealocat',
     'LBL_ARCHIVE_EMAIL' => 'Archive Email',
     'LBL_EMAIL_ARCHIVED' => 'E-mail arhivat',
+    'LBL_CREATE_ARCHIVED_EMAIL' => 'Creare e-mail arhivat',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => 'Activităţi planificate',
     'LBL_PLANNED_ACTIVITIES_DASHLET_DESCRIPTION' => 'Dashlet-ul Activitati planificate afiseaza intalnirile si apelurile programate.',
-    'LBL_PLANNED_ACTIVITIES_DASHLET_TODAY_BUTTON_LABEL' => 'Today',
+    'LBL_PLANNED_ACTIVITIES_DASHLET_TODAY_BUTTON_LABEL' => 'Azi',
     'LBL_PLANNED_ACTIVITIES_DASHLET_FUTURE_BUTTON_LABEL' => 'Viitor',
     'LBL_PLANNED_ACTIVITIES_DASHLET_USER_BUTTON_LABEL' => 'Activităţile mele',
     'LBL_PLANNED_ACTIVITIES_DASHLET_GROUP_BUTTON_LABEL' => 'Activităţi echipă',
@@ -4700,7 +4913,7 @@ $app_strings = array (
     'LBL_ACTIVE_TASKS_DASHLET' => 'Task-uri active',
     'LBL_ACTIVE_TASKS_DASHLET_DESCRIPTION' => 'Dashletul Sarcini active afişează sarcinile scadente şi viitoare.',
     'LBL_ACTIVE_TASKS_DASHLET_DUE_NOW' => 'Dată limită acum',
-    'LBL_ACTIVE_TASKS_DASHLET_UPCOMING' => 'Upcoming',
+    'LBL_ACTIVE_TASKS_DASHLET_UPCOMING' => 'Viitoare',
     'LBL_ACTIVE_TASKS_DASHLET_TODO' => 'De făcut',
     'LBL_ACTIVE_TASKS_DASHLET_COMPLETE_TASK' => 'Completed',
     'LBL_ACTIVE_TASKS_DASHLET_CONFIRM_CLOSE' => 'Sigur doriţi să închideţi {0} ca finalizat?',
@@ -4716,6 +4929,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Task-urile mele',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Task-uri echipa',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Flux de lucru avansat',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'UI BWC',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'API REST',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'API SOAP sau Old REST',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'Activitate Cron',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => 'Cârlig logic',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'Flux de lucru Sugar',
+    'LBL_AUDIT_SUBJECT_USER' => 'Utilizator',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Web către clientul potențial',
+
     //common chart strings
     'LBL_CHART' => 'Diagramă',
     'LBL_CHART_NO_DATA' => 'Nu există date disponibile.',
@@ -4724,6 +4950,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => 'Ascundere comenzi',
     'LBL_CHART_CONTROLS_OPEN' => 'Afişare coemnzi',
     'LBL_CHART_UNDEFINED' => 'Undefined',
+    'LBL_CHART_NO_LABEL' => 'Nedefinit',
+    'LBL_CHART_AMOUNT' => 'Valoare',
+    'LBL_CHART_COUNT' => 'Număr',
+    'LBL_CHART_PERCENT' => 'Procentaj',
+    'LBL_CHART_GROUP' => 'Grup',
+    'LBL_CHART_DATE' => 'Dată',
+    'LBL_CHART_KEY' => 'Cheie',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => 'Tip diagramă',
@@ -4795,18 +5028,23 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'Filtru dată implicit',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => 'Set de date implicit',
 
+    'LBL_PRODUCT_CATALOG_NAME' => 'Catalog de produse',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => 'Catalog de produse',
+    'LBL_PRODUCT_CATALOG_DESC' => 'Vizualizați şi adăugați elemente din Catalogul de produse.',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => 'Vizualizați şi adăugați elemente din Catalogul de produse.',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}} în data {{date}} la ora {{time}}',
     'LBL_ACTIVITYSTREAM_POST_PLACEHOLDER' => 'Introdu o nota sau adauga un atasament. Foloseste @ pentru a mentiona un utilizator. Foloseste # pentru a face referinta la o inregistrare.',
     'LBL_ACTIVITYSTREAM_COMMENT_PLACEHOLDER' => 'Adăugaţi comentariul dvs.&hellip; Tastaţi @ pentru a menţiona un utilizator. Tastaţie # pentru a face trimitere la o înregistrare.',
-    'LBL_ACTIVITY_STREAM' => 'Activity Stream',
+    'LBL_ACTIVITY_STREAM' => 'Flux de activităţi',
     'LBL_ACTIVITY_STREAM_DISABLED' => 'Fluxul de activităţi nu este activat',
     'LBL_ACTIVITY_STREAM_DISABLED_MODULE' => 'Fluxul de activităţi nu este activat pentru acest modul',
     'LBL_ACTIVTY_STREAM_SHOW_MORE' => 'More posts...',
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => ' la ',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'Fluxul meu de activităţi',
     'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'Vizualizaţi o listă de activităţi efectuate pe înregistrări şi creaţi şi publicaţi comentarii.',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => 'Fluxurile de activități sunt dezactivate',
 
     'LBL_DATA_VIEW' => 'Vizualizare date',
     'LBL_COMMENT' => 'Comment',
@@ -4814,6 +5052,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'A existat o eroare în momentul conectării la server. Încercaţi din nou.',
     'ERR_RESOLVE_ERRORS' => 'Remediaţi toate erorile înainte de a continua.',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => 'Pentru aprobare, trebuie completate toate câmpurile obligatorii; totuși, puteți respinge sau direcționa în continuare această înregistrare.',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => 'Pentru respingere/direcționare, trebuie completate toate câmpurile obligatorii.',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Reîmprospătaţi lista',
@@ -4841,6 +5083,7 @@ $app_strings = array (
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => 'Tablou tabel rapoarte salvate',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'Afişează orice tabel dintr-un raport salvat.',
+
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => 'Articole conexe publicate',
@@ -4848,7 +5091,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Rezumat istoric',
-    'TPL_HISTORICAL_SUMMARY' => 'Rezumat istoric pentru {{name}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => 'Mai mult istoric...',
     'LBL_RELATED_CONTACT' => 'Contact corelat',
     'LBL_MODULE_TYPE' => 'Type',
@@ -4857,9 +5100,9 @@ $app_strings = array (
     'LBL_PREVIEW_BWC_TOOLTIP' => 'Modulele moştenite nu pot fi previzualizate',
 
     //SFA
-    'LBL_BEST' => 'Best',
-    'LBL_WORST' => 'Worst',
-    'LBL_LIKELY' => 'Likely',
+    'LBL_BEST' => 'Ideal',
+    'LBL_WORST' => 'Pesimist',
+    'LBL_LIKELY' => 'Probabil',
     'LBL_BEST_ADJUSTED' => 'Cel mai bun (ajustat)',
     'LBL_WORST_ADJUSTED' => 'Cel mai rău (ajustat)',
     'LBL_LIKELY_ADJUSTED' => 'Probabil (ajustat)',
@@ -5101,6 +5344,29 @@ Pentru a crea o înregistrare nouă folosind valorile pe care le-aţi introdus, 
 
     'LBL_FIELD_TRIMMED' => 'Câmpul a fost scurtat din cauza depăşirii limitei maxime de caractere.',
     'LBL_FIELDSIZE_OVERFLOW' => 'Câmpul depăşeşte limita maximă de caractere.',
+    'LBL_TINYMCE_TARGET_SAME' => 'Aceeași fereastră',
+    'LBL_TINYMCE_TARGET_NEW' => 'Fereastră nouă',
+
+    'LBL_OUTBOUND_EMAILS' => 'Setări e-mail',
+    'LBL_OUTBOUND_EMAIL' => 'Setare e-mail',
+
+    'LBL_EMAIL_PARTICIPANTS' => 'Participanți e-mail',
+    'LBL_EMAIL_PARTICIPANT' => 'Participant e-mail',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => 'Confidențialitate date',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'Confidențialitate date',
+    'LBL_DATAPRIVACY_VIEW_PII' => 'Vizualizare informații personale',
+    'LBL_DATAPRIVACY_MARKFORERASE' => 'Marcare pentru ștergere',
+    'LBL_DATAPRIVACY_FIELDNAME' => 'Câmp',
+    'LBL_DATAPRIVACY_VALUE' => 'Valoare',
+    'LBL_DATAPRIVACY_CHANGED_BY' => 'Modificat de',
+    'LBL_DATAPRIVACY_SOURCE' => 'Sursă',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => 'Ultima actualizare',
+    'LBL_DATAPRIVACY_PII' => 'Informații personale',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Marcare pentru ștergere',
+    'TPL_DATAPRIVACY_PII_TITLE' => 'Informații personale pentru {{{name}}}',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5965,6 +6231,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => 'Campanie' ,
     'email' => 'Oricare Email:',
     'workflow' => 'Flux de lucru',
+    'system' => 'Sistem',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5983,7 +6250,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -6046,6 +6312,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = 'Model bază de cunoşti
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'Model bază de cunoştinţe';
 $app_list_strings['moduleList']['EmbeddedFiles'] = 'Câmpuri încorporate';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Fişier încorporat';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'Lek',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'P',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lei',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'Lek',
+    'USD' => 'Dolari',
+    'AFN' => 'Afgani',
+    'ARS' => 'Pesos',
+    'AWG' => 'Guilders',
+    'AUD' => 'Dolari',
+    'AZN' => 'Manați noi',
+    'BSD' => 'Dolari',
+    'BBD' => 'Dolari',
+    'BYR' => 'Ruble',
+    'EUR' => 'Euro',
+    'BZD' => 'Dolari',
+    'BMD' => 'Dolari',
+    'BOB' => 'Bolivianos',
+    'BAM' => 'Marca convertibilă',
+    'BWP' => 'Pulas',
+    'BGN' => 'Leva',
+    'BRL' => 'Reais',
+    'GBP' => 'Lire sterline',
+    'BND' => 'Dolari',
+    'KHR' => 'Riels',
+    'CAD' => 'Dolari',
+    'KYD' => 'Dolari',
+    'CLP' => 'Pesos',
+    'CNY' => 'Yuan Renminbi',
+    'COP' => 'Pesos',
+    'CRC' => 'ColÃ³n',
+    'HRK' => 'Kuna',
+    'CUP' => 'Pesos',
+    'CZK' => 'Koruny',
+    'DKK' => 'Coroane',
+    'DOP' => 'Pesos',
+    'XCD' => 'Dolari',
+    'EGP' => 'Lire sterline',
+    'SVC' => 'Colones',
+    'EEK' => 'Krooni',
+    'FKP' => 'Lire sterline',
+    'FJD' => 'Dolari',
+    'GHC' => 'Cedis',
+    'GIP' => 'Lire sterline',
+    'GTQ' => 'Quetzales',
+    'GGP' => 'Lire sterline',
+    'GYD' => 'Dolari',
+    'HNL' => 'Lempiras',
+    'HKD' => 'Dolari',
+    'HUF' => 'Forint',
+    'ISK' => 'Kronur',
+    'INR' => 'Rupii',
+    'IDR' => 'Rupie',
+    'IRR' => 'Riali',
+    'IMP' => 'Lire',
+    'ILS' => 'Shekel nou',
+    'JMD' => 'Dolari',
+    'JPY' => 'Yen',
+    'JEP' => 'Lire',
+    'KZT' => 'Tenge',
+    'KPW' => 'Won',
+    'KRW' => 'Won',
+    'KGS' => 'Soms',
+    'LAK' => 'Kips',
+    'LVL' => 'Lati',
+    'LBP' => 'Lire',
+    'LRD' => 'Dolari',
+    'CHF' => 'Franci elvețieni',
+    'LTL' => 'Litas',
+    'MKD' => 'Dinari',
+    'MYR' => 'Ringgit',
+    'MUR' => 'Rupii',
+    'MXN' => 'Pesos',
+    'MNT' => 'Tugriks',
+    'MZN' => 'Meticais',
+    'NAD' => 'Dolari',
+    'NPR' => 'Rupii',
+    'ANG' => 'Guldeni',
+    'NZD' => 'Dolari',
+    'NIO' => 'Cordobas',
+    'NGN' => 'Nairas',
+    'NOK' => 'Coroană',
+    'OMR' => 'Riali',
+    'PKR' => 'Rupii',
+    'PAB' => 'Balboa',
+    'PYG' => 'Guarani',
+    'PEN' => 'Nuevos Soles',
+    'PHP' => 'Pesos',
+    'PLN' => 'Zlotych',
+    'QAR' => 'Riali',
+    'RON' => 'Lei noi',
+    'RUB' => 'Ruble',
+    'SHP' => 'Lire',
+    'SAR' => 'Riyali',
+    'RSD' => 'Dinari',
+    'SCR' => 'Rupii',
+    'SGD' => 'Dolari',
+    'SBD' => 'Dolari',
+    'SOS' => 'Şilingi',
+    'ZAR' => 'Rand',
+    'LKR' => 'Rupii',
+    'SEK' => 'Coroane',
+    'SRD' => 'Dolari',
+    'SYP' => 'Lire',
+    'TWD' => 'Dolari noi',
+    'THB' => 'Baht',
+    'TTD' => 'Dolari',
+    'TRY' => 'Liră',
+    'TRL' => 'Lire',
+    'TVD' => 'Dolari',
+    'UAH' => 'Hryvnia',
+    'UYU' => 'Pesos',
+    'UZS' => 'Sum',
+    'VEF' => 'Bolivares Fuertes',
+    'VND' => 'Dong',
+    'YER' => 'Riali',
+    'ZWD' => 'Dolari din Zimbabwe',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => 'Verificare unică',

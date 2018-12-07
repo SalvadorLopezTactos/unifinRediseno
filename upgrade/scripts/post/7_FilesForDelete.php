@@ -63,13 +63,6 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             'modules/Connectors/connectors/sources/ext/rest/insideview',
             'modules/Connectors/connectors/sources/ext/eapm/facebook',
             'modules/Connectors/connectors/sources/ext/soap/hoovers',
-            //remove old sidecar files
-            'sidecar/lib/chosen',
-            'sidecar/lib/handlebars/handlebars-1.0.rc.1.js',
-            'sidecar/lib/handlebars/handlebars.runtime-1.0.rc.1.js',
-            'sidecar/lib/jquery-timepicker',
-            'sidecar/lib/twitterbootstrap',
-            'sidecar/src/view/hbt-helpers.js',
             // Remove old less files from styleguide
             'styleguide/less/clients/mobile/fixed_variables.less',
             'styleguide/less/clients/mobile/font-awesome.less',
@@ -216,7 +209,6 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
         $this->upgrader->fileToDelete($this->getStaleFilesBy7220(), $this);
 
         if (version_compare($this->from_version, '7.5', '<=')) {
-            $files[] = 'sidecar/lib/jquery/jquery.placeholder.min.js';
             $files[] = 'modules/Home/clients/base/views/about-source-code/about-source-code.php';
             $files[] = 'portal2/portal-ui.js';
         }
@@ -290,10 +282,6 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
         if (version_compare($this->from_version, '7.7', '<')) {
             $files[] = 'clients/base/views/interactionschart';
             $files[] = 'include/javascript/sugar7/plugins/Timeago.js';
-            $files[] = 'sidecar/lib/sugar/sugar.timeago.js';
-            $files[] = 'sidecar/lib/jquery-ui/css/smoothness/images/calendar.gif';
-            $files[] = 'sidecar/lib/jquery-ui/css/smoothness/jquery-ui-1.8.18.custom.css';
-            $files[] = 'sidecar/lib/jquery-ui/js/jquery-ui-1.8.18.custom.min.js';
             $files[] = 'modules/Accounts/clients/base/layouts/create-actions';
             $files[] = 'modules/Accounts/clients/base/views/create-actions';
             $files[] = 'modules/Calls/clients/base/views/create-actions';
@@ -372,25 +360,6 @@ class SugarUpgradeFilesForDelete extends UpgradeScript
             $files[] = 'styleguide/less/sugar-specific/rtl.less';
             $files[] = 'styleguide/less/twitter-bootstrap/alerts.less';
             $files[] = 'themes/default/css/ie.css';
-            $files[] = 'sidecar/build.php';
-            $files[] = 'sidecar/construct';
-            $files[] = 'sidecar/grunt';
-            $files[] = 'sidecar/Gruntfile.js';
-            $files[] = 'sidecar/lib/jquery/jquery.tinymce.js';
-            $files[] = 'sidecar/lib/momentjs/lang';
-            $files[] = 'sidecar/lib/momentjs/min/langs.js';
-            $files[] = 'sidecar/lib/momentjs/min/langs.min.js';
-            $files[] = 'sidecar/lib/momentjs/min/moment-with-langs.js';
-            $files[] = 'sidecar/lib/momentjs/min/moment-with-langs.min.js';
-            $files[] = 'sidecar/lib/mousetrap';
-            $files[] = 'sidecar/lib/sugaraccessibility';
-            $files[] = 'sidecar/minified/sidecar.js';
-            $files[] = 'sidecar/minified/sidecar.lite.js';
-            $files[] = 'sidecar/minified/sidecar.lite.min.js';
-            $files[] = 'sidecar/src/include-manifest.php';
-            $files[] = 'sidecar/src/sample-config.js';
-            $files[] = 'sidecar/src/utils/shortcuts.js';
-            $files[] = 'sidecar/src/view/tutorial.js';
             $files[] = 'jssource/src_files';
             $files[] = 'clients/base/layouts/create-dupecheck/create-dupecheck.js';
             $files[] = 'clients/base/layouts/dashlet-preview/dashlet-preview.js';

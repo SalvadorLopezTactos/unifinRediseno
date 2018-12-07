@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Prihlásenie alebo heslo nie je správne',
-	'ERR_BODY_TOO_LONG'		=> '\rText v tele je príliš dlhý na zaznamenanie CELÉHO e-mailu. Nadbytočný text bol odstránený.',
+	'ERR_BODY_TOO_LONG'		=> '\\rText v tele je príliš dlhý na zaznamenanie CELÉHO e-mailu. Nadbytočný text bol odstránený.',
 	'ERR_INI_ZLIB'			=> 'Dočasne sa nepodarilo vypnúť Zlib kompresiu. "Nastavenia testu" môžu zlyhať.',
 	'ERR_MAILBOX_FAIL'		=> 'Nepodarilo sa načítať žiadne e-mailové účty.',
 	'ERR_NO_IMAP'			=> 'Nepodarilo sa nájsť žiadne IMAP knižnice. Vyriešte tento problém pred tým, ako budete pokračovať s prichádzajúcimi e-mailami',

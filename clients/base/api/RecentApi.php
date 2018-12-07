@@ -147,7 +147,10 @@ class RecentApi extends SugarApi
                 $data['next_offset'] = (int) ($options['limit'] + $options['offset']);
                 break;
             }
-            $seed = BeanFactory::getBean($recent['module_name'], $recent['id']);
+
+            $seed = BeanFactory::getBean($recent['module_name'], $recent['id'], array(
+                'erased_fields' => !empty($args['erased_fields']),
+            ));
             $lastViewedDates[$seed->id] = $db->fromConvert($recent['last_viewed_date'], 'datetime');
             $beans[$seed->id] = $seed;
         }

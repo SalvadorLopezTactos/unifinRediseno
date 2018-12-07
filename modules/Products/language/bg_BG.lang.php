@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Електронно табло със списък на оферирани продукти',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Офериран продукт по кампания',
     'LBL_MODULE_NAME' => 'Оферирани продукти',
     'LBL_MODULE_NAME_SINGULAR' => 'Офериран продукт',
@@ -172,4 +175,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Списък с данни за оферираните продукти',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Нов офериран продукт)',
     'LBL_DISCOUNT_PERCENT' => '% Процент',
+    'LBL_DISCOUNT_TYPE' => 'Вид отстъпка',
 );

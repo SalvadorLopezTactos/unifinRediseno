@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> 'Ez a lekérdezés a jelentés első lekérdezése alatt fog szerepelni',
     'ERR_DB_VERSION_FAILURE'			=> 'A rendszer nem tudja ellenőrizni az adatbázis verzióját.',
 
-
-	'ERR_OC_PASSWORD'					=> 'Jelszó szükséges.',
-	'ERR_OC_SERVER_URL'					=> 'Sugar szerver URL-jére van szükség.',
-	'ERR_OC_USERNAME'					=> 'Szerver oldali felhasználó név megadása kötelező.',
-	'LBL_INSTALL_OC'					=> 'Offline kliens telelpítése',
-    'LBL_OC_ADMIN'                      => 'Kérem, forduljon a rendszergazdához annak érdekében, hogy megoldja ezt a problémát!',
-    'LBL_OC_SUCCESS'                    => 'Az offline kliens telepítése kész. Kérem, kattintson az alábbi gombra a telepítés befejezéséhez!',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'Admin felhasználónév',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'Kérem, adja meg az alábbi adatokat annak érdekében, hogy megfelelően kerüljön telepítésre és szinkronizálásra az offline kliens!',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'Sugar szerver URL-je',
-	'LBL_OC_INSTALL_PASS'				=> 'A felhasználó szerver jelszava',
-	'LBL_OC_INSTALL_TITLE'				=> 'Offline kliens telepítése',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'Ezzel a felhasználó névvel fog csatlakozni a Sugar szerverhez.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'Felhasználónév',
-	'LBL_PERFORM_OC_INSTALL'			=> 'Offline kliens telepítésének inicalizálása',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'Kérem, adja meg az alábbi adatokat annak érdekében, hogy megfelelően kerüljön telepítésre és szinkronizálásra az offline kliens!',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Adja meg a felhasználónevet a Sugar admin felhasználóhoz!',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Adja meg a jelszót a SugarCRM admin felhasználóhoz!',
@@ -76,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'A kompatibilitás ellenőrzése során a rendszer hibákat talált. A hibátlan telepítés érdekében kérem, tekintse át az alább felsorolt problémákat és orvosolja őket, majd ellenőrizze az elemeket újra, esetleg ismételje meg a telepítést!',
     'ERR_CHECKSYS_CALL_TIME'            => 'Hívásidő referencia engedélyezése bekapcsolva (kikapcsolása a php.ini fájlban történik)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nem található: A Sugar Ütemező korlátozott funkcionalitással fog működni. Az E-mail archiválási szolgáltatás nem fut.',
+	'ERR_CHECKSYS_CURL'					=> 'Nem található: a Sugar Ütemező korlátozott funkcionalitással fog működni. Az E-mail archiválás nem fog működni.',
     'ERR_CHECKSYS_IMAP'					=> 'Nincs találat: a bejövő emailek és az email kampányok megkövetelik az IMAP könyvtárak használatát. Egyik sem fog működni.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'A Magic Quotes GPC nem kapcsolható be az MS SQL szerver használatakor.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Figyelmeztetés:',
@@ -92,7 +75,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Az optimális élmény érdekében használjon IIS/FastCGI sapi-t; állítsa 0-ra a fastcgi.logging paramétert a php.ini fájl-ban!',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Nem támogatott PHP verzió van telepítve: (ver',
     'LBL_DB_UNAVAILABLE'                => 'Adatbázis nem elérhető',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Adatbázis-támogatás nem található. Kérem, győződjön meg arról, hogy rendelkezik a megfelelő meghajtóval a következő adatbázis típusok legalább egyikére vonatkozóan: MySQL, MS SQLServer, Oracle vagy DB2. Az Ön PHP verziójától függően vagy a php-ini fájlban kell módosításokat végezni, vagy a vonatkozó bináris fájlt kell ismételten összeállítani. Kérem, olvasson utána a PHP felhasználói kézikönyvében, hogy lehet bekapcsolni az adatbázis-támogatást.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Az adatbázis támogatása nem érhető el. Bizonyosodjon meg arról, hogy adottak a szükséges illesztőprogramok az alábbi támogatott adatbázistípusok egyikéhez: MySQL, MS SQLServer, Oracle vagy DB2.  Előfordulhat, hogy szükséges törölnie a kiterjesztéshez tartozó megjegyzést a php.ini fájlban, vagy szükség lehet a megfelelő bináris fájllal való újrafordításra, a PHP verzió függvényében. Az adatbázis támogatás engedélyezésének módja ügyében tájékozódjon a PHP kézikönyvből.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Egyes XML-feldolgozó könyvtárakhoz kapcsolódó funkciók, amelyek szükségesek a SugarCRM-hez, nem találhatók. Az Ön PHP verziójától függően vagy a php-ini fájlban kell módosításokat végezni, vagy a vonatkozó bináris fájlt kell ismételten összeállítani. Kérem, olvasson utána a PHP felhasználói kézikönyvében!',
     'LBL_CHECKSYS_CSPRNG' => 'Véletlenszerű számgenerátor',
     'ERR_CHECKSYS_MBSTRING'             => 'Egyes Multibyte Strings (mbstring) PHP kiterjesztéshez kapcsolódó funkciók, amelyek szükségesek a SugarCRM-hez, nem találhatók. <br /><br />Az alapértelmezett beállítások szerint az mbstring modul le van tiltva a PHP-ben, amit aktiválni kell az --enable-mbstring kifejezéssel. Kérem, olvasson utána a PHP felhasználói kézikönyvében, hogy lehet bekapcsolni az mbstring támogatást!',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'Feltöltési fájlméret',
 	'ERR_URL_BLANK'						=> 'Adja meg az alap URL címet a SugarCRM-hez.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'A rendszer nem találja a telepítő rekordot:',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'A feltöltött fájl nem kompatibilis a SugarCRM használt verziójával (Community Edition, Professional, vagy Enterprise):',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'A feltöltött fájl nem kompatibilis a Sugar használt verziójával (Professional, Enterprise vagy Ultimate): ',
 	'ERROR_LICENSE_EXPIRED'				=> "Hiba: a licenc lejárt",
 	'ERROR_LICENSE_EXPIRED2'			=> "napja. Kérem, menjen az admin felület Licenc Menedzsment oldalára és gépelje be az új licenc kulcsot. Amennyiben 30 napon belül nem ad meg új kulcsot, többé nem fog tudni belépni az alkalmazásba.",
 	'ERROR_MANIFEST_TYPE'				=> 'A manifest fájlnak meg kell határoznia a csomag típusát.',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'Lejárat dátuma',
 	'LBL_LICENSE_I_ACCEPT'				=> 'Elfogadom',
 	'LBL_LICENSE_NUM_USERS'				=> 'Felhasználók száma',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'Kérem, adja meg a megvásárolt offline kliensek számát!',
-	'LBL_LICENSE_OC_NUM'				=> 'Offline kliens licencek száma',
-	'LBL_LICENSE_OC'					=> 'Offline ügyfél licencek',
 	'LBL_LICENSE_PRINTABLE'				=> 'Nyomtatási nézet',
     'LBL_PRINT_SUMM'                    => 'Összesítő nyomtatása',
 	'LBL_LICENSE_TITLE_2'				=> 'SugarCRM licenc',
@@ -496,10 +476,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'Egybevetési beállítások',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Adja meg a SugarCRM példányának rendszer nevét.',
 	'LBL_PATCH_UPLOAD' => 'Válasszon ki egy javító csomagot a számítógépéről!',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'Php 5-ös verzió vagy újabb szükséges.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(Az Ön által használt PHP verzió',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php visszamenőleges kompatibilitási mód be van kapcsolva. A folytatáshoz állítsa a zend.ze1_compatibility_mode -ot  "off"-ra',
 
     'advanced_password_new_account_email' => array(
@@ -519,5 +495,3 @@ $mod_strings = array(
         'name' => 'Elfelejtett jelszó email',
         ),
 );
-
-?>

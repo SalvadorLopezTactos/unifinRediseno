@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Електронно табло със списък на бележките',
+
     'ERR_DELETE_RECORD' => 'Трябва да определите номер, за да изтриете този запис.',
     'LBL_ACCOUNT_ID' => 'Идентификатор на организацията:',
     'LBL_CASE_ID' => 'Казус:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Описание',
     'LBL_EMAIL_ADDRESS' => 'Електронна поща:',
     'LBL_EMAIL_ATTACHMENT' => 'Приложения',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Прикачен файл към писмото за',
     'LBL_FILE_MIME_TYPE' => 'Mime тип',
+    'LBL_FILE_EXTENSION' => 'Разширение на файла',
+    'LBL_FILE_SOURCE' => 'Източник на файла',
+    'LBL_FILE_SIZE' => 'Размер на файла',
     'LBL_FILE_URL' => 'Адрес на файла (URL)',
     'LBL_FILENAME' => 'Приложение:',
     'LBL_LEAD_ID' => 'Потенциален клиент:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Възможност:',
     'LBL_PARENT_ID' => 'Родителско ID:',
     'LBL_PARENT_TYPE' => 'Parent тип',
+    'LBL_EMAIL_TYPE' => 'Тип на електронната поща',
+    'LBL_EMAIL_ID' => 'Идентификатор на електронната поща',
     'LBL_PHONE' => 'Телефон:',
     'LBL_PORTAL_FLAG' => 'Визуализиране в портала?',
     'LBL_EMBED_FLAG' => 'Прикрепи към електронно писмо?',

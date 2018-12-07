@@ -12,6 +12,7 @@
 
 $dictionary['Prospect'] = array(
     'table' => 'prospects',
+    'audited' => true,
     'unified_search' => true,
     'full_text_search' => true,
     'fields' => array(
@@ -31,6 +32,8 @@ $dictionary['Prospect'] = array(
             'vname' => 'LBL_BIRTHDATE',
             'massupdate' => false,
             'type' => 'date',
+            'audited' => true,
+            'pii' => true,
         ),
         'do_not_call' => array(
             'name' => 'do_not_call',
@@ -121,6 +124,34 @@ $dictionary['Prospect'] = array(
             'relationship' => 'prospect_notes',
             'source' => 'non-db',
             'vname' => 'LBL_NOTES',
+        ),
+        'dataprivacy' => array(
+            'name' => 'dataprivacy',
+            'type' => 'link',
+            'relationship' => 'prospects_dataprivacy',
+            'source' => 'non-db',
+            'vname' => 'LBL_DATAPRIVACY',
+        ),
+        'dp_business_purpose' => array (
+            'name' => 'dp_business_purpose',
+            'vname' => 'LBL_DATAPRIVACY_BUSINESS_PURPOSE',
+            'type' => 'multienum',
+            'isMultiSelect' => true,
+            'audited' => true,
+            'options' => 'dataprivacy_business_purpose_dom',
+            'default' => '',
+            'len' => 255,
+            'comment' => 'Business purposes consented for',
+        ),
+        'dp_consent_last_updated' => array(
+            'name' => 'dp_consent_last_updated',
+            'vname' => 'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED',
+            'type' => 'date',
+            'display_default' => 'now',
+            'audited' => true,
+            'enable_range_search' => true,
+            'options' => 'date_range_search_dom',
+            'comment' => 'Date consent last updated',
         ),
         //d&b principal id, a unique id assigned to a contact by D&B API
         //this contact is used for dupe check

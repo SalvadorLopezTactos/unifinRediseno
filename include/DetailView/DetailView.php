@@ -228,8 +228,7 @@ class DetailView
 
 		$row_count = $this->getListViewRowCount();
 
-        if($display_audit_link && (!isset($sugar_config['disc_client']) || $sugar_config['disc_client'] == false))
-        {
+        if ($display_audit_link) {
             //Audit link
             $popup_request_data = array(
 		        'call_back_function' => 'set_return',

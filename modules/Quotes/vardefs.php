@@ -122,7 +122,7 @@ $dictionary['Quote'] = array(
         'quote_type' => array(
             'name' => 'quote_type',
             'vname' => 'LBL_QUOTE_TYPE',
-            'type' => 'radioenum',
+            'type' => 'enum',
             'dbtype' => 'varchar',
             'options' => 'quote_type_dom',
         ),
@@ -324,7 +324,7 @@ $dictionary['Quote'] = array(
             'name' => 'deal_tot_discount_percentage',
             'vname' => 'LBL_DEAL_TOT_PERCENTAGE',
             'dbType' => 'decimal',
-            'type' => 'currency',
+            'type' => 'float',
             'len' => '26,2',
             'formula' => 'ifElse(not(equal($subtotal_usdollar, 0)), mul(divide($deal_tot_usdollar, $subtotal_usdollar),100), 0)',
             'default' => '0',
@@ -568,11 +568,6 @@ $dictionary['Quote'] = array(
             'group' => 'shipping_address',
             'len' => '100',
         ),
-        'system_id' => array(
-            'name' => 'system_id',
-            'vname' => 'LBL_SYSTEM_ID',
-            'type' => 'int',
-        ),
         'shipping_account_name' => array(
             'name' => 'shipping_account_name',
             'rname' => 'name',
@@ -618,7 +613,7 @@ $dictionary['Quote'] = array(
         ),
         'shipping_contact_id' => array(
             'name' => 'shipping_contact_id',
-            'rname' => 'last_name',
+            'rname' => 'id',
             'id_name' => 'shipping_contact_id',
             'vname' => 'LBL_SHIPPING_CONTACT_ID',
             'type' => 'relate',
@@ -706,7 +701,7 @@ $dictionary['Quote'] = array(
         ),
         'billing_contact_id' => array(
             'name' => 'billing_contact_id',
-            'rname' => 'last_name',
+            'rname' => 'id',
             'id_name' => 'billing_contact_id',
             'vname' => 'LBL_BILLING_CONTACT_ID',
             'type' => 'relate',
@@ -878,9 +873,13 @@ $dictionary['Quote'] = array(
         ),
         'opportunity_id' => array(
             'name' => 'opportunity_id',
-            'type' => 'id',
-            'vname' => 'LBL_BILLING_ACCOUNT_NAME',
+            'type' => 'relate',
             'source' => 'non-db',
+            'rname' => 'id',
+            'id_name' => 'id',
+            'table' => 'opportunities',
+            'module' => 'Opportunities',
+            'link' => 'opportunities',
         ),
         'documents' => array(
             'name' => 'documents',
@@ -902,7 +901,9 @@ $dictionary['Quote'] = array(
         array(
             'name' => 'quote_num',
             'type' => 'unique',
-            'fields' => array('quote_num', 'system_id')
+            'fields' => array(
+                'quote_num',
+            ),
         ),
         array(
             'name' => 'idx_qte_name',
@@ -1025,15 +1026,7 @@ $dictionary['Quote'] = array(
         ),
     ),
     'duplicate_check' => array(
-        'enabled' => true,
-        'FilterDuplicateCheck' => array(
-            'filter_template' => array(
-                array('name' => array('$starts' => '$name')),
-            ),
-            'ranking_fields' => array(
-                array('in_field_name' => 'name', 'dupe_field_name' => 'name'),
-            )
-        )
+        'enabled' => false,
     ),
 );
 VardefManager::createVardef(

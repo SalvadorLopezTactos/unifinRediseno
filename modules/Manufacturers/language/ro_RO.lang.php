@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Trebuie să specifici un număr de înregistrare pentru a șterge producătorul.',
   'NTC_STATUS' => 'Setare Starea Inactiv pentru a elimina acest producător din lista abandonata',
   'NTC_LIST_ORDER' => 'Setaţi ordinea în care acest tip vor fi afişate în listele Producatorului abandonate',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Activ',
-    'Inactive' => 'Inactiv',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Producatori de import',
 	'LBL_EDITLAYOUT' => 'Editeaza Plan General' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Elemente venit',

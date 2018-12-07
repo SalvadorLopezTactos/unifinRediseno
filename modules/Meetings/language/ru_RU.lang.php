@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Информационная панель списка встреч',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Информационная панель записей встреч',
+
 	'ERR_DELETE_RECORD' => 'Вы должны указать номер записи перед удалением.',
 	'LBL_ACCEPT_THIS'=>'Принять?',
 	'LBL_ADD_BUTTON'=> 'Добавить',

@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Комерційні пропозиції (Фактична адреса)',
 	'LNK_ACCOUNT_REPORTS' => 'Переглянути звіти по контрагентах',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Документи',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Інформаційна панель списку контрагентів',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Інформаційна панель записів контрагентів',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Графіки',
 	'LBL_DEFAULT' => 'Перегляди',
@@ -91,7 +95,7 @@ $mod_strings = array (
 	'LBL_MEMBER_OF' => 'Учасник',
 	'LBL_MEMBER_ORG_FORM_TITLE' => 'Організації-учасники',
 	'LBL_MEMBER_ORG_SUBPANEL_TITLE'=>'Організації-учасники',
-	'LBL_MODULE_NAME' => 'Контрагенти',
+	'LBL_MODULE_NAME' => 'контрагенти',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Контрагент',
     'LBL_MODULE_TITLE' => 'Контрагенти: Головна',
 	'LBL_MODULE_ID'=> 'Контрагенти',

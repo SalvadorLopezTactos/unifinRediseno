@@ -10,5 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $viewdefs['UserSignatures']['base']['filter']['default'] = array(
-    'default_filter' => 'created_by_me',
+    'default_filter' => 'all_records',
+    'fields' => array(
+        'name' => array(),
+        'date_modified' => array(),
+    ),
 );

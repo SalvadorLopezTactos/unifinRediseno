@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus serveris',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Maksimalus panelių skaičius puslapyje',
 	'LOG_MEMORY_USAGE'=>'Sekti atminties vartojimą',
-	'LOG_SLOW_QUERIES'=>'Sekti lėtas užklausas',
+    'LOG_SLOW_QUERIES' => 'Sekti lėtas užklausas',
     'LOCK_HOMEPAGE_HELP'=>'Šis nustatymas neleis<BR> 1) įdėti naujų panelių į pradinį puslapį ir <BR>2) keisti panelių padėti pradiniame puslapyje.',
     'CURRENT_LOGO'=>'Dabartinis logotipas',
     'CURRENT_LOGO_HELP'=>'Šis logotipas yra atvaizduojamas Sugar programoje viršuj kairėje.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Šis pavadinimas matysis Jūsų Interneto naršyklės antraštės pavadinime.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Enable/Disable emails from related (or linked) contacts to show in Email Subpanel.',
 
-    'LBL_OC_STATUS'                     => 'Klientinės versijos numatytas statusas',
-    'DEFAULT_OC_STATUS'                 => 'Įjungti klientinės versiją pagal nutylėjimą',
-    'LBL_OC_STATUS_DESC' => 'Čia galite nurodyti kurie vartotojai turės prisijungimą prie klientinės versijos. Tą taip pat galėsite padaryti individualiai redaguojant vartotojo nustatymus.',
     'SESSION_TIMEOUT' => 'Baigėsi portalo sesija',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Portalo sesijos laiko limitas yra susijęs su portalo 6.5 ir senesnioms versijomis.',
     'UPLOAD_MAXSIZE_UNITS' => 'bait.',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML Login URL can not be empty',
     'ERR_EMPTY_SAML_CERT' => 'SAML certificate can not be empty',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'Reikia nurodyti SAML subjekto ID',
     'ERR_SAML_LOGIN_URL' => 'SAML Login URL is not valid',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL is not valid',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM faile turi būti privatusis raktas',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM failas turi turėti x.509 sertifikatą',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Pateiktas x.509 sertifikatas neatitinka privačiojo rakto.',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Veiklos srautai',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Įgalinti veiklos srautus',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Įjungiami programos veiklos srautus',
 );
 
 

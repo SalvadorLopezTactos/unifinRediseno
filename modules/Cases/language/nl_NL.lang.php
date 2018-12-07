@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Dashboard caselijst',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Dashboard caserecord',
+
 	'ERR_DELETE_RECORD'					=> 'U dient een record te selecteren om de organisatie te verwijderen.',
 	'LBL_ACCOUNT_ID'					=> 'Organisatie ID',
 	'LBL_ACCOUNT_NAME'					=> 'Organisatienaam:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Status:',
     'LBL_SOURCE' => 'Bron:',
 	'LBL_SUBJECT'						=> 'Onderwerp:',
-	'LBL_SYSTEM_ID'						=> 'Systeem ID',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Organisatienaam',
 	'LBL_LIST_ASSIGNED'					=> 'Toegewezen aan',
 	'LBL_LIST_CLOSE'					=> 'Sluiten',

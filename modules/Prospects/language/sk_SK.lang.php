@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Informačný panel so zoznamom cieľov',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Informačný panel so záznamom cieľov',
+
   'LBL_MODULE_NAME' => 'Ciele',
   'LBL_MODULE_NAME_SINGULAR' => 'Cieľ',
   'LBL_MODULE_ID'   => 'Ciele',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Oslovenie:',
   'LBL_SAVE_PROSPECT' => 'uložiť cieľ',
   'LBL_CREATED_OPPORTUNITY' =>'Vytvorená nová obchodná príležitosť',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Vytvorenie obchodnej príležitosti vyžaduje účet. \n Prosím, buď vytvoríte nový účet alebo vyberiete existujúci.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Vytvorenie obchodnej príležitosti vyžaduje účet. \\n Prosím, buď vytvoríte nový účet alebo vyberiete existujúci.',
   'LNK_SELECT_ACCOUNT' => "Výber účtu",
   'LNK_NEW_PROSPECT' => 'Vytvoriť cieľ',
   'LNK_PROSPECT_LIST' => 'Zobraziť ciele',
@@ -195,4 +199,6 @@ To create a {{module_name}}:
 2. Click "Save" to finalize the new record and return to the previous page.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Targets&#39; reports',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Odsúhlasené podnikateľské účely',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Posledná aktualizácia súhlasu',
 );

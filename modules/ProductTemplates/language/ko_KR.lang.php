@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => '배송 공급자',
   'LNK_PRODUCT_LIST' => '상품 책자 보기',
   'NTC_DELETE_CONFIRMATION' => '이 기록을 삭제하시겠습니까?',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => '추가',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => '지정 사용자명',

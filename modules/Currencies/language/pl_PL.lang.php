@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Utwórz zadanie',
   'NTC_DELETE_CONFIRMATION' => 'Czy na pewno chcesz usunąć ten rekord? Każdy rekord używający tej waluty zostanie w przypadku uzyskania dostępu przekonwertowany na walutę domyślną systemu. Lepszą opcją może być ustawienie statusu na nieaktywny.',
   'LBL_BELOW_MIN' => 'Kurs wymiany musi być wyższy od 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktywny',
-    'Inactive' => 'Nieaktywny',
-  ),
   'LBL_CREATED_BY' => 'Utworzono przez',
   'LBL_EDIT_LAYOUT' => 'Edytuj układ' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Tylko dla Administratorów',
+  'LBL_CURRENCY_DEFAULT' => 'Dolary amerykańskie (domyślnie)',
+
 );
 ?>

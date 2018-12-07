@@ -217,6 +217,14 @@ $renamedefs = array(
             array('name' => 'LBL_DOC_URL', 'type' => 'singular', 'source' => 'Documents'),
             array('name' => 'LBL_BUGS_SUBPANEL_TITLE', 'type' => 'plural', 'source' => 'Bugs'),
         ),
+        'EmailAddresses' => array(
+            array('name' => 'LBL_MODULE_NAME', 'type' => 'singular', 'source' => 'EmailAddresses'),
+            array('name' => 'LBL_MODULE_NAME_SINGULAR', 'type' => 'singular', 'source' => 'EmailAddresses'),
+        ),
+        'EmailParticipants' => array(
+            array('name' => 'LBL_MODULE_NAME', 'type' => 'singular', 'source' => 'EmailParticipants'),
+            array('name' => 'LBL_MODULE_NAME_SINGULAR', 'type' => 'singular', 'source' => 'EmailParticipants'),
+        ),
         'Forecasts' => array(
             array('name' => 'LNK_NEW_OPPORTUNITY', 'type' => 'singular', 'source' => 'Opportunities'),
             array('name' => 'LBL_MODULE_TITLE', 'type' => 'plural', 'source' => 'Forecasts'),
@@ -625,6 +633,10 @@ $renamedefs = array(
             array('name' => 'LBL_HELP_CONFIG_RLIS', 'type' => 'plural', 'source' => 'RevenueLineItems'),
             array('name' => 'LBL_HELP_CONFIG_RLIS', 'type' => 'singular', 'source' => 'RevenueLineItems'),
         ),
+        'OutboundEmail' => array(
+            array('name' => 'LBL_MODULE_NAME', 'type' => 'singular', 'source' => 'OutboundEmail'),
+            array('name' => 'LBL_MODULE_NAME_SINGULAR', 'type' => 'singular', 'source' => 'OutboundEmail'),
+        ),
         'PdfManager' => array(
             array('name' => 'LBL_TPL_RLI', 'type' => 'plural', 'source' => 'RevenueLineItems'),
         ),
@@ -701,6 +713,16 @@ $renamedefs = array(
             array('name' => 'LBL_QUOTE_DATA_GRAND_TOTALS_FOOTER', 'type' => 'singular', 'source' => 'Quotes'),
             array('name' => 'LBL_CREATE_QLI_BUTTON_LABEL', 'type' => 'singular', 'source' => 'Products'),
             array('name' => 'LBL_CREATE_QLI_BUTTON_TOOLTIP', 'type' => 'singular', 'source' => 'Products'),
+            array('name' => 'LBL_SEARCH_CATALOG_PLACEHOLDER', 'type' => 'singular', 'source' => 'ProductTemplates'),
+            array('name' => 'LBL_NO_PRODUCT_CATALOG_RESULTS', 'type' => 'singular', 'source' => 'ProductTemplates'),
+            array('name' => 'LBL_PRODUCT_CATALOG_NAME', 'type' => 'singular', 'source' => 'ProductTemplates'),
+            array('name' => 'LBL_PRODUCT_CATALOG_DASHLET_NAME', 'type' => 'singular', 'source' => 'ProductTemplates'),
+            array('name' => 'LBL_PRODUCT_CATALOG_DESC', 'type' => 'singular', 'source' => 'ProductTemplates'),
+            array('name' => 'LBL_PRODUCT_CATALOG_DASHLET_DESC', 'type' => 'singular', 'source' => 'ProductTemplates'),
+            array('name' => 'LBL_QUOTE_COPY_ALERT_MESSAGE', 'type' => 'plural', 'source' => 'Products'),
+            array('name' => 'LBL_QUOTE_COPY_ALERT_MESSAGE', 'type' => 'singular', 'source' => 'Quote'),
+            array('name' => 'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME', 'type' => 'plural', 'source' => 'Products'),
+            array('name' => 'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME', 'type' => 'singular', 'source' => 'Quote'),
         ),
         'Quotas' => array(
             array('name' => 'LNK_FORECAST_LIST', 'type' => 'singular', 'source' => 'Forecasts'),
@@ -996,6 +1018,10 @@ $renamedefs = array(
         array('name' => 'LBL_HISTORY_DASHLET_EMAIL_SINGULAR', 'type' => 'singular', 'source' => 'Emails'),
         array('name' => 'LBL_HISTORY_DASHLET_EMAIL_PLURAL', 'type' => 'plural', 'source' => 'Emails'),
 
+        // Email Participants
+        array('name' => 'LBL_EMAIL_PARTICIPANTS', 'type' => 'plural', 'source' => 'EmailParticipants'),
+        array('name' => 'LBL_EMAIL_PARTICIPANT', 'type' => 'singular', 'source' => 'EmailParticipants'),
+
         // Forecasts
         array('name' => 'LBL_TOUR_SCREEN_2_DESCRIPTION_670', 'type' => 'singular', 'source' => 'Forecasts'),
         array('name' => 'LBL_TOUR_SCREEN_2_DESCRIPTION_670', 'type' => 'plural', 'source' => 'TimePeriods'),
@@ -1039,6 +1065,10 @@ $renamedefs = array(
         array('name' => 'LBL_CREATE_NOTE', 'type' => 'singular', 'source' => 'Notes'),
         array('name' => 'LBL_DASHLET_ATTACHMENTS_NAME', 'type' => 'plural', 'source' => 'Notes'),
         array('name' => 'LBL_DASHLET_ATTACHMENTS_DESCRIPTION', 'type' => 'plural', 'source' => 'Notes'),
+
+        // Outbound Email
+        array('name' => 'LBL_OUTBOUND_EMAIL', 'type' => 'plural', 'source' => 'OutboundEmail'),
+        array('name' => 'LBL_OUTBOUND_EMAIL', 'type' => 'singular', 'source' => 'OutboundEmail'),
 
         // Opportunities
         array('name' => 'ERR_OPPORTUNITY_NAME_DUPE', 'type' => 'plural', 'source' => 'Opportunities'),

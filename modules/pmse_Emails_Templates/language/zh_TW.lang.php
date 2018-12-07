@@ -16,12 +16,12 @@ $mod_strings = array (
     'LBL_BASE_MODULE' => '目標模組',
 
     'LBL_MODULE_TITLE' => '流程電子郵件範本',
-    'LBL_MODULE_NAME' => '流程電子郵件範本',
+    'LBL_MODULE_NAME' => '處理程序電子郵件範本',
     'LBL_MODULE_NAME_SINGULAR' => '流程電子郵件範本',
 
-    'LNK_LIST' => '檢視流程電子郵件範本',
-    'LNK_NEW_PMSE_EMAILS_TEMPLATES' => '建立流程電子郵件範本',
-    'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => '匯入流程電子郵件範本',
+    'LNK_LIST' => '檢視處理程序電子郵件範本',
+    'LNK_NEW_PMSE_EMAILS_TEMPLATES' => '建立處理程序電子郵件範本',
+    'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => '匯入處理程序電子郵件範本',
 
     'LBL_PMSE_SHOW_MORE_VARIABLES' => '顯示更多變數...',
 

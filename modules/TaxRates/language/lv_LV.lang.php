@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Jānorāda ieraksta numurs, lai dzēstu nodokļa likmi.',
   'NTC_STATUS' => 'Nomainiet statusu uz Neaktīvs, lai izņemtu nodokļa likmi no Nodokļu likmju nolaižamā saraksta',
   'NTC_LIST_ORDER' => 'Norādiet secību, kādā nodoklis parādīsies Nodokļu likmju nolaižamajos sarakstos',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktīvs',
-    'Inactive' => 'Neaktīvs',
-  ),
   'LBL_EDITLAYOUT' => 'Rediģēt izkārtojumu' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Izveidotāja ID',
   'LBL_MODIFIED_ID'=>'Modificētāja ID',

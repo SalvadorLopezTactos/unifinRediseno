@@ -69,6 +69,10 @@ class ActivityQueueManager
      */
     public static function isEnabledForModule($moduleName)
     {
+        if (!Activity::isEnabled()) {
+            return false;
+        }
+
         if (in_array($moduleName, self::$moduleBlacklist)) {
             return false;
         }
@@ -291,7 +295,7 @@ class ActivityQueueManager
     public static function getBeanAttributes(SugarBean $bean)
     {
         return array(
-            'name'   => $bean->get_summary_text(),
+            'name'   => static::getDisplayName($bean),
             'type'   => $bean->object_name,
             'module' => $bean->module_name,
             'id'     => $bean->id,
@@ -535,5 +539,41 @@ class ActivityQueueManager
     {
         $subs = BeanFactory::getBeanClass('Subscriptions');
         $subs::subscribeUserToRecord($user, $bean, array('disable_row_level_security' => true));
+    }
+
+    /**
+     * Get a bean's name. Returns `LBL_VALUE_ERASED` if the bean's name has been erased.
+     *
+     * @param  SugarBean $bean
+     * @return string
+     */
+    protected static function getDisplayName(SugarBean $bean)
+    {
+        // We need erased fields for the bean because they may not have been loaded already. We don't want to
+        // re-retrieve the bean because it can have nasty side effects within a logic hook. Instead, we simply ask for
+        // the erased fields separately and patch them onto the bean.
+        $bean->erased_fields = $bean->getErasedFields();
+
+        // Temporarily unset the current user so that the application's default name format is used for person modules.
+        // The default format needs to be used because we're writing the compiled name to the database and can't use
+        // run-time formatting that is different for each user.
+        $user = $GLOBALS['current_user'];
+        unset($GLOBALS['current_user']);
+
+        // Get the bean's name using the application's default name format for person modules.
+        $name = $bean->getRecordName();
+
+        // Check if the name has been erased, also using the application's default name format in the determination.
+        $fieldDef = $bean->getFieldDefinition('name');
+        $field = SugarFieldHandler::getSugarField($fieldDef['type']);
+
+        if ($field->isErased($bean, 'name')) {
+            $name = 'LBL_VALUE_ERASED';
+        }
+
+        // Restore the current user.
+        $GLOBALS['current_user'] = $user;
+
+        return $name;
     }
 }

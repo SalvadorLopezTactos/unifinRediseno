@@ -42,27 +42,39 @@ class SmtpMailer extends BaseMailer
     const MailTransmissionProtocol = "smtp";
 
     /**
+     * Internal PHPMailer instance
+     */
+    protected $mailer;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function connect()
+    {
+        $this->mailer = $this->generateMailer(); // get a fresh PHPMailer object
+        $this->transferConfigurations($this->mailer);
+        // connect to the SMTP server
+        $this->connectToHost($this->mailer);
+    }
+
+    /**
      * Sends email using PHPMailer.
      *
      * {@inheritDoc}
      */
     public function send()
     {
-        $mailer = $this->generateMailer(); // get a fresh PHPMailer object
-
         try {
-            // transfer the configurations to set up the PHPMailer object before attempting to send with it
-            $this->transferConfigurations($mailer);
-            // connect to the SMTP server
-            $this->connectToHost($mailer);
+            // create internal PHPMailer instance and connect to the SMTP server
+            $this->connect();
             // transfer the email headers to PHPMailer
-            $this->transferHeaders($mailer);
+            $this->transferHeaders($this->mailer);
             // transfer the recipients to PHPMailer
-            $this->transferRecipients($mailer);
+            $this->transferRecipients($this->mailer);
             // transfer the message to PHPMailer
-            $this->transferBody($mailer);
+            $this->transferBody($this->mailer);
             // transfer the attachments to PHPMailer
-            $this->transferAttachments($mailer);
+            $this->transferAttachments($this->mailer);
         } catch (MailerException $me) {
             $GLOBALS["log"]->fatal($me->getLogMessage());
             $GLOBALS["log"]->info($me->getTraceMessage());
@@ -72,13 +84,13 @@ class SmtpMailer extends BaseMailer
 
         try {
             // send the email with PHPMailer
-            $mailer->send();
+            $this->mailer->send();
             $messageId = $this->headers->getMessageId();
 
             // Capture the Message-ID set by PHPMailer if the caller didn't supply one.
             // This allows callers to use the Message-ID after the email has been sent.
             if (empty($messageId)) {
-                $messageId = $mailer->getLastMessageID();
+                $messageId = $this->mailer->getLastMessageID();
                 $this->headers->setHeader(EmailHeaders::MessageId, $messageId);
             }
 
@@ -94,7 +106,7 @@ class SmtpMailer extends BaseMailer
             $GLOBALS["log"]->debug($message);
             /*--- Debug Only ----------------------------------------------------*/
 
-            return $mailer->getSentMIMEMessage();
+            return $this->mailer->getSentMIMEMessage();
         } catch (Exception $e) {
             // eat the phpmailerException but use it's message to provide context for the failure
             $me = new MailerException($e->getMessage(), MailerException::FailedToSend);
@@ -157,7 +169,11 @@ class SmtpMailer extends BaseMailer
     {
         try {
             // have PHPMailer attempt to connect to the SMTP server
-            $mailer->smtpConnect();
+            $result = $mailer->smtpConnect();
+            // returns true if connection is successful
+            if (!$result) {
+                throw new Exception('Connection Failed');
+            }
         } catch (Exception $e) {
             //TODO: it would be better if the caller added the details to the message so that the mailer has no
             // knowledge of what it means to be a system or personal configuration

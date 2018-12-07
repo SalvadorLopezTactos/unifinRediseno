@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Leadliste-dashboard',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Leadoptegnelses-dashboard',
+
     'ERR_DELETE_RECORD' => 'Der skal angives et postnummer for at slette kundeemnet.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Kontobeskrivelse',
     'LBL_ACCOUNT_ID'=>'Virksomheds-id',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Salgsmulighedsbeløb:',
     'LBL_OPPORTUNITY_ID'=>'Salgsmuligheds-id',
     'LBL_OPPORTUNITY_NAME' => 'Salgsmuligheds navn:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Anden e-mail:',
     'LBL_OTHER_PHONE' => 'Anden telefon:',
     'LBL_PHONE' => 'Telefon:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiér alternativ adresse til primær adresse',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiér primær adresse til alternativ adresse',
     'NTC_DELETE_CONFIRMATION' => 'Er du sikker på, at du vil slette denne post?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Oprettelse af en salgsmulighed kræver en virksomhed.\n Opret en ny virksomhed, eller vælg en eksisterende.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Oprettelse af en salgsmulighed kræver en virksomhed.\\n Opret en ny virksomhed, eller vælg en eksisterende.',
     'NTC_REMOVE_CONFIRMATION' => 'Er du sikker på, at du vil fjerne dette kundeemne fra denne sag?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Er du sikker på, at du vil fjerne denne post som en direkte rapport?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Kampagner',
@@ -314,4 +320,6 @@ Efter bekræftelse af hvert enkelt påkrævet og ønsket modul, skal du klikke p
     'LBL_MKTO_LEAD_SCORE' => 'Lead Resultat',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Lead rapporter',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Forretningsformål samtykke givet til',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Samtykke sidst opdateret',
 );

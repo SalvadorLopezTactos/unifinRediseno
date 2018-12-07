@@ -9,7 +9,7 @@ use Elastica\Request;
  *
  * @author   Nicolas Ruflin <spam@ruflin.com>
  *
- * @link     http://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-update-settings.html
+ * @link     https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-update-settings.html
  */
 class Settings
 {
@@ -55,9 +55,9 @@ class Settings
         if (!empty($setting)) {
             if (isset($settings[$setting])) {
                 return $settings[$setting];
-            } else {
-                return;
             }
+
+            return;
         }
 
         return $settings;
@@ -80,23 +80,23 @@ class Settings
         if (!empty($setting)) {
             if (isset($settings[$setting])) {
                 return $settings[$setting];
-            } else {
-                if (strpos($setting, '.') !== false) {
-                    // convert dot notation to nested arrays
-                    $keys = explode('.', $setting);
-                    foreach ($keys as $key) {
-                        if (isset($settings[$key])) {
-                            $settings = $settings[$key];
-                        } else {
-                            return;
-                        }
-                    }
+            }
 
-                    return $settings;
+            if (strpos($setting, '.') !== false) {
+                // convert dot notation to nested arrays
+                $keys = explode('.', $setting);
+                foreach ($keys as $key) {
+                    if (isset($settings[$key])) {
+                        $settings = $settings[$key];
+                    } else {
+                        return;
+                    }
                 }
 
-                return;
+                return $settings;
             }
+
+            return;
         }
 
         return $settings;
@@ -113,11 +113,11 @@ class Settings
     public function setPersistent($key, $value)
     {
         return $this->set(
-            array(
-                'persistent' => array(
+            [
+                'persistent' => [
                     $key => $value,
-                ),
-            )
+                ],
+            ]
         );
     }
 
@@ -132,11 +132,11 @@ class Settings
     public function setTransient($key, $value)
     {
         return $this->set(
-            array(
-                'transient' => array(
+            [
+                'transient' => [
                     $key => $value,
-                ),
-            )
+                ],
+            ]
         );
     }
 
@@ -154,13 +154,9 @@ class Settings
     {
         $key = 'cluster.blocks.read_only';
 
-        if ($persistent) {
-            $response = $this->setPersistent($key, $readOnly);
-        } else {
-            $response = $this->setTransient($key, $readOnly);
-        }
-
-        return $response;
+        return $persistent
+            ? $this->setPersistent($key, $readOnly)
+            : $this->setTransient($key, $readOnly);
     }
 
     /**
@@ -193,7 +189,7 @@ class Settings
      *
      * @return \Elastica\Response Response object
      */
-    public function request(array $data = array(), $method = Request::GET)
+    public function request(array $data = [], $method = Request::GET)
     {
         $path = '_cluster/settings';
 

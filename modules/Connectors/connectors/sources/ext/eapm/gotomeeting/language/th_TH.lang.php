@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+รับคีย์ผู้บริโภคจาก LogMeIn โดยลงทะเบียนแอปพลิเคชั่น GoToMeeting ใหม่<br> 
 &nbsp;<br>
-Steps to register your instance:<br>
+ขั้นตอนการลงทะเบียนอินซแตนซ์ของคุณ:<br> 
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>ล็อกอินบัญชีศูนย์นักพัฒนา LogMeIn ของคุณ: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li> 
+    <li>คลิกแอปของฉัน</li>
+    <li>คลิกเพิ่มแอปใหม่</li>
+    <li>ลงข้อมูลให้ครบในฟอร์มการเพิ่มแอป:</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>ชื่อแอป</li>
+            <li>คำอธิบาย</li>
+            <li>API ผลิตภัณฑ์: เลือก GoToMeeting</li>
+            <li>URL แอปพลิเคชั่น: ใส่ URL อินสแตนซ์ของคุณ</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
-</ol>
+    <li>คลิกปุ่มสร้างแอป</li>
+    <li>จากรายการแอป ให้คลิกชื่อแอปของคุณ</li>
+    <li>คลิกแถบคีย์</li>
+    <li>คัดลอกค่าคีย์ผู้บริโภคและใส่เข้าไปด้านล่าง</li>
+</ol> 
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'คีย์ผู้บริโภค',
 );

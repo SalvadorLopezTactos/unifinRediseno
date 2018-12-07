@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plusi server',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Alampaneeli üksused lehe kaupa',
 	'LOG_MEMORY_USAGE'=>'Logi mälu kasutamine',
-	'LOG_SLOW_QUERIES'=>'Logi aeglased päringud',
+    'LOG_SLOW_QUERIES' => 'Logi aeglased päringud',
     'LOCK_HOMEPAGE_HELP'=>'See säte on järgmise vältimiseks:<BR> 1) uute kodulehtede ja dashlettide lisamine moodulisse Kodu; <BR>2) dashleti paigutuse kohandamine avalehtedel pukseerimisel.',
     'CURRENT_LOGO'=>'Praegune logo:',
     'CURRENT_LOGO_HELP'=>'See logo kuvatakse Sugari rakenduse jaluse vasakpoolses nurgas.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'See on nimi, mis kuvatakse teie brauseri tiitliribal.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Luba/keela seotud (või lingitud) kontaktide e-kirjade kuvamine e-kirja alampaneelil.',
 
-    'LBL_OC_STATUS'                     => 'Ühenduseta kliendi vaikeolek',
-    'DEFAULT_OC_STATUS'                 => 'Luba ühenduseta klient vaikimisi',
-    'LBL_OC_STATUS_DESC' => 'Märkige siin, kui soovite, et mõnel kasutajal oleks juurdepääs ühenduseta kliendile. Vastasel korral saate juurdepääsu konfigureerida kasutaja tasemel.',
     'SESSION_TIMEOUT' => 'Portaali seansi ajalõpp',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Portaali seansi ajalõpp on Sugar Portali pärandi versioonideks, mis on saadaval 6.5 ja vanemates versioonides.',
     'UPLOAD_MAXSIZE_UNITS' => 'baidid',
@@ -435,8 +432,17 @@ Täiendavate süsteemi sätete konfigureerimiseks klõpsake <a href="index.php?m
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML-i sisselogimise URL ei saa olla tühi',
     'ERR_EMPTY_SAML_CERT' => 'SAML-i sert ei saa olla tühi',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML-i olemi ID ei saa olla tühi',
     'ERR_SAML_LOGIN_URL' => 'SAML-i sisselogimise URL ei ole kehtiv',
     'ERR_SAML_SLO_URL' => 'SAML-i SLO URL ei ole kehtiv',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM-fail peab sisaldama privaatvõtit',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM-fail peab sisaldama x.509 sertifikaati',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Üleslaaditud x.509 sertifikaat ei ühti privaatvõtmega',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Tegevusvood',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Luba tegevusvood',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Lülitab tegevusvood rakenduse jaoks sisse',
 );
 
 

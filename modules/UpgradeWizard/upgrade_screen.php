@@ -20,7 +20,6 @@ $step = isset($_REQUEST['confirm_id']) ? 2 : 0;
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <link rel="stylesheet" href="styleguide/assets/css/upgrade.css?v=<?php echo time();?>"/>
 <script src='include/javascript/jquery/jquery-min.js'></script>
-<script src='sidecar/lib/jquery/jquery.iframe.transport.js'></script>
 <script type="text/javascript" src="<?php echo getJSPath('cache/include/javascript/sugar_grp1.js'); ?>"></script>
 
 <script>
@@ -254,12 +253,16 @@ $(window).bind("load", function () {
 
             $('#upload-indicator').show();
 
+            var formData = new FormData();
+            var $form = $('#uploadForm');
+            formData.append('zip', $form.find('input[type=file]')[0].files[0]);
+            formData.append('action', $form.find(':hidden[name=action]').val());
+            formData.append('token', $form.find(':hidden[name=token]').val());
             $.ajax('UpgradeWizard.php', {
-                    data: $("#uploadForm :hidden").serialize(),
-                    files: $("#uploadForm :file"),
-                    iframe: true,
+                    data: formData,
+                    type: 'POST',
+                    contentType: false,
                     processData: false,
-                    dataType: 'json',
                     error: function (e) {
                         uploader.displayError("A server error occurred, please check your logs");
                     }

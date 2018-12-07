@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Prognosen-Dashboard',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Prognosen',
     'LBL_MODULE_NAME_SINGULAR' => 'Prognose',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'Produkt-ID',
     'LBL_QUOTA_ID' => 'Anteils-ID',
     'LBL_VERSION' => 'Version',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Leistenlegende ausblenden',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Leistenlegende anzeigen',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Zeilenlegende ausblenden',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Zeilenlegende anzeigen',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Fehler: Benutzer {0} hat keinen Managerzugriff auf die angeforderten Prognosen für {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Startdatum für Geschäftsjahr:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigurieren Sie die Zeitspanne, die im Prognosemodul verwedet wird.<br><br>Beachten Sie, dass die Zeitspanne-Einstellungen nach der anfänglichen Einrichtung nicht mehr geändert werden können.<br><br>Für den Anfang wählen Sie das Anfangsdatum des Geschäftsjahres. Dann wählen Sie den Typ der Zeitspanne, über die Sie die Prognose erhalten möchten. Die Datumsabgrenzung wird automatisch kalkuliert, basierend auf Ihrer Auswahl. Die untergeordneten Zeitspannen sind die Basis für das Prognose-Arbeitsblatt.<br><br>Die darstellbaren zukünftigen und vergangenen Zeitspannen bestimmen die Anzahl der sichtbaren untergeordneten Zeitspannen im Prognosemodul.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurieren Sie, wie Sie {{forecastByModule}} kategorisieren möchten. <br><br>Beachten Sie, dass die Bereichseinstellungen nach der ersten Bestätigung nicht mehr geändert werden können. Bei aktualisierten Instanzen ist die Bereichseinstellung basierend auf bestehenden Prognosedaten gesperrt.<br><br>Sie können basierend auf den Wahrscheinlichkeitsbereichen zwei oder drei Kategorien auswählen oder Kategorien erstellen, die nicht auf der Wahrscheinlichkeit basieren.<br><br>Es gibt auf der linken Seite der benutzerdefinierten Kategorien Kontrollkästchen. Verwenden Sie diese, um festzulegen, welche Bereich im Prognosenbetrag bestätigt und den Managern berichtet wird.<br><br>Ein Benutzer kann den inkludierten/exkludierten Status und die Kategorie von {{forecastByModule}} manuell von dem Arbeitsblatt aus ändern.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurieren Sie, wie Sie {{forecastByModule}} kategorisieren möchten. <br><br>Beachten Sie dabei, dass die Bereichseinstellungen nach der ersten Bestätigung nicht mehr geändert werden können. Bei aktualisierten Instanzen ist die Bereichseinstellung basierend auf bestehenden Prognosedaten gesperrt.<br><br>Sie können basierend auf den Wahrscheinlichkeitsbereichen zwei oder mehr Kategorien auswählen oder Kategorien erstellen, die nicht auf Wahrscheinlichkeit basieren.<br><br> Auf der linken Seite Ihrer benutzerdefinierten Kategorien finden Sie Kontrollkästchen. Verwenden Sie diese, um festzulegen, welche Bereiche in den Betrag der Prognose eingeschlossen und den Managern übergeben werden sollen.<br><br>Ein Benutzer kann den Status „inkludiert/exkludiert“ und die Kategorie von {{forecastByModule}} manuell vom Arbeitsblatt aus ändern.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Wählen Sie die Spalten, welche die Benutzer für Prognosen für jedes {{forecastByModuleSingular}} ausfüllen müssen. Beachten Sie, dass die "wahrscheinliche" Summe mit der unter {{forecastByModule}} angezeigten Summe verbunden ist; deshalb kann diese Spalte nicht ausgeblendet werden.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Wahlen Sie die Spalten, die Sie im Prognose-Modul anzeigen möchten. Der Benutzer kann die Sicht des Arbeitsblatts mit der Liste von Feldern konfigurieren.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Ich bin ein Platzhalter für Prognosen!',

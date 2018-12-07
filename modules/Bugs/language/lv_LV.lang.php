@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Kļūdu saraksta instrumentu panelis',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Kļūdu ierakstu instrumentu panelis',
+
   'LBL_MODULE_NAME' => 'Kļūdas',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Kļūda',
   'LBL_MODULE_TITLE' => 'Kļūdu sekotājs: Sākums',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Pieteikumi',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projekti',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenti',
-  'LBL_SYSTEM_ID' => 'Sistēmas ID',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Piešķirtais lietotājs',
 	'LBL_ASSIGNED_TO_NAME' => 'Piešķirts lietotājam',
 

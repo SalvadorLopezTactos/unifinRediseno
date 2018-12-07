@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Vă rugăm să selectaţi din câmpurile disponibile',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Descriere forma:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Trimiterea acestui formular va crea o conduce şi legătură cu campania',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Bifând această casetă, sunteți de acord să primiți e-mailuri viitoare de marketing',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Vă rugăm să descărcaţi formularul de la Web la Conducator',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Formular de la Web la conducator',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Vă rugăm să furnizaţi toate câmpurile necesare',

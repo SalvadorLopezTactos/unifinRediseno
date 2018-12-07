@@ -10,9 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => '전화 목록 대시보드',
+    'LBL_CALLS_RECORD_DASHBOARD' => '전화 기록 대시보드',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => '전화상담',
-    'LBL_MODULE_NAME_SINGULAR'	=> '전화상담',
+    'LBL_MODULE_NAME_SINGULAR'	=> '전화',
     'LBL_MODULE_TITLE' => '전화 상담:홈',
     'LBL_SEARCH_FORM_TITLE' => '전화상담 검색',
     'LBL_LIST_FORM_TITLE' => '전화 상담 목록',
@@ -32,7 +36,7 @@ $mod_strings = array (
     'LBL_DESCRIPTION_INFORMATION' => '설명',
     'LBL_DESCRIPTION' => '설명',
     'LBL_STATUS' => '상태',
-    'LBL_DIRECTION' => '방향',
+    'LBL_DIRECTION' => '전화 종류',
     'LBL_DATE' => '시작일',
     'LBL_DURATION' => '기간',
     'LBL_DURATION_HOURS' => '시간',
@@ -44,7 +48,7 @@ $mod_strings = array (
     'LBL_HOURS_ABBREV' => '시',
     'LBL_MINSS_ABBREV' => '분',
     'LBL_COLON' => ':',
-    'LNK_NEW_CALL' => '통화일지',
+    'LNK_NEW_CALL' => '통화기록',
     'LNK_NEW_MEETING' => '회의 일정잡기',
     'LNK_CALL_LIST' => '전화상담 보기',
     'LNK_IMPORT_CALLS' => '전화상담내역 가져오기',

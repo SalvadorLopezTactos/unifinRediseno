@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => 'modifikim i fundit nga',
   'LBL_ASSIGNED_USER' => 'drejtuar:',
   'LBL_ASSIGNED_USER_NAME' => 'Drejtuar për',
-  'LBL_SYSTEM_ID' =>'ID e sistemit',
   'LBL_TEAM_NAME' =>'Emri i grupit',
   'LBL_TYPE'=>'Lloji',
   'LBL_SUBJECT' => 'Subjekti',

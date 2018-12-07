@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Angebotslisten-Dashboard',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Angebotsbericht-Dashboard',
+
     'LBL_CONTRACTS'=>'Verträge',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Verträge',
     'ERR_DELETE_RECORD' => 'Um das Angebot zu löschen, muss eine Datensatznummer angegeben werden.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Zwischensumme (US-Dollar)',
     'LBL_SUBTOTAL' => 'Zwischensumme:',
     'LBL_TAXABLE_SUBTOTAL' => 'Steuerpflichtige Zwischensumme',
-    'LBL_SYSTEM_ID' => 'System-ID',
     'LBL_TAX_USDOLLAR'=>'Steuer (US-Dollar)',
     'LBL_TAX' => 'Steuer:',
     'LBL_TAX_TOTAL' => 'Gesamtsumme Steuer',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Ausgewählte löschen',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Ausgewählte Elemente löschen',
     'LBL_SAVE_LINE_ITEMS' => 'Bitte alle aktiven Produkte durch Anklicken der blauen Häkchen neben den Produkten speichern, bevor dieses Angebot gespeichert wird.',
+    'LBL_COPY_LINE_ITEMS' => 'Bitte alle aktiven Produkte durch Anklicken der blauen Häkchen neben den Produkten speichern, bevor dieses Angebot kopiert wird.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Produktkatalog durchsuchen',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Keine Daten verfügbar',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Angebotene Produkte werden in neues Angebot kopiert.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Angebotene Produkte werden in neues Angebot kopiert. Dieser Vorgang kann etwas dauern.',
 );

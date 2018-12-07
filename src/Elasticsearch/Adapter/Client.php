@@ -12,6 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Adapter;
 
+use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\Elasticsearch\Exception\ConnectionException;
 use Elastica\Client as BaseClient;
 use Elastica\Connection;
@@ -41,21 +42,34 @@ class Client extends BaseClient
     const CONN_FAILURE = -99;
 
     /**
+     * User-agent settings
+     */
+    const USER_AGENT = 'SugarCRM';
+    const VERSION_UNKNOWN = 'unknown';
+
+    /**
+     * @var string, current installed elastic version
+     */
+    protected $version;
+
+    /**
      * Return allowed versions array
      * @var array
      */
-    protected $allowedVersions = [
-        '1.4',
-        '1.7',
-    ];
+    protected $allowedVersions = array(
+        '5.4',
+        '5.6',
+        '6.x',
+    );
 
     /**
-     * Return ES version checks for version_compare
+     * supported ES versions
      * @var array
      */
-    protected $supportedVersionsCheck = [
-        ['version' => '2.0.0', 'operator' => '<'],
-    ];
+    protected static $supportedVersions = array(
+        array('version' =>'5.4', 'operator' => '>='),
+        array('version' => '7.0', 'operator' => '<'),
+    );
 
     /**
      * List of supported $sugar_config Elastic configuration options
@@ -70,6 +84,11 @@ class Client extends BaseClient
         'curl',
         'headers',
         'url',
+        'persistent',
+        'aws_access_key_id',
+        'aws_secret_access_key',
+        'aws_session_token',
+        'aws_region',
     );
 
     /**
@@ -90,7 +109,28 @@ class Client extends BaseClient
     {
         $this->setLogger($logger);
         $config = $this->parseConfig($config);
-        parent::__construct($config, array($this, 'onConnectionFailure'));
+        parent::__construct($config, array($this, 'onConnectionFailure'), $logger);
+    }
+
+    /**
+     * @return string elasticsearch version
+     * @throws \Exception
+     */
+    public function getVersion() : string
+    {
+        if (empty($this->version)) {
+            $result = $this->ping();
+            if ($result->isOk()) {
+                $data = $result->getData();
+                $this->version = $data['version']['number']?? null;
+            }
+        }
+
+        if (empty($this->version)) {
+            $this->_logger->critical("Elasticsearch: not able to get ES version");
+            throw new \Exception('Elasticsearch: not able to get ES version');
+        }
+        return $this->version;
     }
 
     /**
@@ -125,7 +165,8 @@ class Client extends BaseClient
             $status = self::CONN_NO_VERSION_AVAILABLE;
             $this->_logger->critical("Elasticsearch verify conn: No valid version string available");
         } else {
-            if ($this->isVersionCompatible($data['version']['number'])) {
+            $this->version = $data['version']['number'];
+            if ($this->checkEsVersion($this->version)) {
                 $status = self::CONN_SUCCESS;
             } else {
                 $status = self::CONN_VERSION_NOT_SUPPORTED;
@@ -141,7 +182,7 @@ class Client extends BaseClient
      * called during install/upgrade and the search admin section. The usage
      * of `$this->isAvailable` is preferred.
      *
-     * @param boolean Update cached availability flag
+     * @param boolean $updateAvailability, Update cached availability flag
      * @return integer Connection status, see declared CONN_ constants
      */
     public function verifyConnectivity($updateAvailability = true)
@@ -205,10 +246,11 @@ class Client extends BaseClient
      * @param array $version Elasticsearch version array
      * @return boolean
      */
-    protected function isVersionCompatible($version)
+    protected function checkEsVersion($version)
     {
         $result = true;
-        foreach ($this->supportedVersionsCheck as $check) {
+        // verify supported versions
+        foreach (self::$supportedVersions as $check) {
             $result = $result && version_compare($version, $check['version'], $check['operator']);
         }
         return $result;
@@ -233,8 +275,7 @@ class Client extends BaseClient
         $currentStatus = $this->loadAvailability();
 
         if ($status !== $currentStatus) {
-            $admin = \BeanFactory::newBean('Administration');
-            $admin->saveSetting(self::STATUS_CATEGORY, self::STATUS_KEY, ($status ? 0 : 1));
+            $this->saveAdminStatus($status);
             $this->available = $status;
             if ($status) {
                 $this->_logger->info("Elasticsearch promoted as available");
@@ -246,16 +287,36 @@ class Client extends BaseClient
     }
 
     /**
+     * save status for Administration
+     * @param boolean $status
+     */
+    protected function saveAdminStatus($status)
+    {
+        $admin = \BeanFactory::getBean('Administration');
+        $admin->saveSetting(self::STATUS_CATEGORY, self::STATUS_KEY, ($status ? 0 : 1));
+    }
+
+    /**
      * Load the current availability
      * @return boolean
      */
     protected function loadAvailability()
     {
         if ($this->available === null) {
-            $settings = \Administration::getSettings();
-            $this->available = empty($settings->settings['info_fts_down']);
+            $this->available = $this->isSearchEngineAvailable();
         }
         return $this->available;
+    }
+
+    /**
+     * check if search engine is available using
+     * Administration settings for key=info_fts_down
+     * @return boolean
+     */
+    protected function isSearchEngineAvailable()
+    {
+        $settings = \Administration::getSettings();
+        return empty($settings->settings['info_fts_down']);
     }
 
     /**
@@ -274,6 +335,10 @@ class Client extends BaseClient
                 $connection[$k] = $v;
             }
         }
+
+        // Force the user-agent header to match SugarCRM's version
+        $connection['curl'][CURLOPT_USERAGENT] = self::USER_AGENT . '/' . $this->getSugarVersion();
+
         return array('connections' => array($connection));
     }
 
@@ -288,7 +353,7 @@ class Client extends BaseClient
      * @throws \Exception
      * @throws \Sugarcrm\Sugarcrm\Elasticsearch\Exception\ConnectionException
      */
-    public function request($path, $method = Request::GET, $data = array(), array $query = array())
+    public function request($path, $method = Request::GET, $data = array(), array $query = array(), $contentType = Request::DEFAULT_CONTENT_TYPE)
     {
         // Enforce cached availability
         if (!$this->isAvailable()) {
@@ -339,5 +404,14 @@ class Client extends BaseClient
     protected function _log($context)
     {
         return;
+    }
+
+    /**
+     * Get sugar version number, returns "unknown" if not available.
+     * @return string
+     */
+    protected function getSugarVersion()
+    {
+        return empty($GLOBALS['sugar_version']) ? self::VERSION_UNKNOWN : $GLOBALS['sugar_version'];
     }
 }

@@ -31,6 +31,7 @@ class EmailTemplate extends SugarBean {
 	var $body_html;
     var $subject;
 	var $attachments;
+    public $has_variables;
 	var $from_name;
 	var $from_address;
 	var $team_id;
@@ -725,8 +726,10 @@ class EmailTemplate extends SugarBean {
         $template = BeanFactory::newBean('EmailTemplates');
         $optionKey = $template->field_defs['type']['options'];
         $options = $GLOBALS['app_list_strings'][$optionKey];
-        if( ! is_admin($GLOBALS['current_user']) && isset($options['workflow']))
+        if (!is_admin($GLOBALS['current_user'])) {
             unset($options['workflow']);
+            unset($options['system']);
+        }
 
         return $options;
     }
@@ -763,5 +766,28 @@ class EmailTemplate extends SugarBean {
             $this->storedVariables[$text[0]] = md5($text[0]);
         }
         return $this->storedVariables[$text[0]];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function save($check_notify = false)
+    {
+        // check if email has dynamic variables
+        $templateData = $this->subject . ' ' . $this->body . ' ' . $this->body_html;
+        $this->has_variables = static::checkStringHasVariables($templateData);
+        return parent::save($check_notify);
+    }
+
+    /**
+     * Checks a template string and returns true if the template has dynamic variables added
+     *
+     * @param string $tplStr The template string to check for dynamic variables
+     * @return bool True if string has variables, false if no variables detected
+     */
+    public static function checkStringHasVariables($tplStr)
+    {
+        $pattern = '/\$[a-zA-Z]+_[a-zA-Z0-9_]+/';
+        return !!preg_match($pattern, $tplStr);
     }
 }

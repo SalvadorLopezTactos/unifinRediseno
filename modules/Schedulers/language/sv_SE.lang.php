@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Uppdatera KBContent-artiklar.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicera godkända artiklar och inaktuella kunskapsbas-artiklar.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Schemalagt jobb för avancerat arbetsflöde',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Återskapa denormaliserad gruppsäkerhetsdata',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Schemaläggare för Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Ta bort diagnostikfiler',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Ta bort temporära filer',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Återskapa denormaliserad gruppsäkerhetsdata',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Kör nattliga mass-mailkampanjer',
 'LBL_ASYNCMASSUPDATE' => 'Utför asynkron mäss uppdateringar',

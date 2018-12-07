@@ -13,8 +13,8 @@
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Adapter;
 
 use Sugarcrm\Sugarcrm\SearchEngine\Capability\Aggregation\ResultSetInterface;
-use Sugarcrm\Sugarcrm\Elasticsearch\Query\Highlighter\HighlighterInterface;
 use Sugarcrm\Sugarcrm\Elasticsearch\Query\Aggregation\AggregationStack;
+use Sugarcrm\Sugarcrm\Elasticsearch\Query\Result\ParserInterface;
 
 /**
  *
@@ -29,9 +29,9 @@ class ResultSet implements \Iterator, \Countable, ResultSetInterface
     protected $resultSet;
 
     /**
-     * @var HighlighterInterface
+     * @var ParserInterface
      */
-    protected $highlighter;
+    protected $resultParser;
 
     /**
      * @var AggregationStack
@@ -48,23 +48,22 @@ class ResultSet implements \Iterator, \Countable, ResultSetInterface
     }
 
     /**
-     * Set highlighter
-     * @param HighlighterInterface $highlighter
+     * Set result parser
+     * @param ParserInterface $parser
      */
-    public function setHighlighter(HighlighterInterface $highlighter)
+    public function setResultParser(ParserInterface $parser)
     {
-        $this->highlighter = $highlighter;
+        $this->resultParser = $parser;
     }
 
     /**
-     * Get highlighter
-     * @return HighlighterInterface
+     * Get result parser
+     * @return ParserInterface $parser
      */
-    public function getHighlighter()
+    public function getResultParser()
     {
-        return $this->highlighter;
+        return $this->resultParser;
     }
-
 
     /**
      * Set aggregation stack
@@ -92,8 +91,8 @@ class ResultSet implements \Iterator, \Countable, ResultSetInterface
     public function current()
     {
         $current = new Result($this->resultSet->current());
-        if ($this->highlighter) {
-            $current->setHighlighter($this->highlighter);
+        if ($this->resultParser) {
+            $current->setResultParser($this->resultParser);
         }
         return $current;
     }

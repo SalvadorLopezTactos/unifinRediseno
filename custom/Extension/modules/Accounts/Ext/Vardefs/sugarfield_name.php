@@ -1,5 +1,5 @@
 <?php
- // created: 2018-02-16 16:59:02
+ // created: 2018-12-05 18:17:34
 $dictionary['Account']['fields']['name']['len'] = '200';
 $dictionary['Account']['fields']['name']['massupdate'] = false;
 $dictionary['Account']['fields']['name']['importable'] = 'false';
@@ -13,5 +13,5 @@ $dictionary['Account']['fields']['name']['enforced'] = true;
 $dictionary['Account']['fields']['name']['comments'] = 'Name of the Company';
 $dictionary['Account']['fields']['name']['full_text_search']['enabled'] = true;
 $dictionary['Account']['fields']['name']['full_text_search']['searchable'] = true;
-$dictionary['Account']['fields']['name']['full_text_search']['boost'] = 1.91;
+$dictionary['Account']['fields']['name']['full_text_search']['boost'] = 1.9099999999999999;
 

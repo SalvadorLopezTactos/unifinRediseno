@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => '您必須指定記錄編號才能刪除運輸服務供應商。',
   'NTC_STATUS' => '將狀態設為「非使用」，從「運輸服務供應商」下拉式清單中移除此運輸服務供應商',
   'NTC_LIST_ORDER' => '設定此運輸服務供應商在「運輸服務供應商」下拉式清單中的顯示順序',
-  'shipper_status_dom' => 
-  array (
-    'Active' => '使用中',
-    'Inactive' => '非使用中',
-),
-	'LBL_EDITLAYOUT' => '編輯配置' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => '編輯配置' /*for 508 compliance fix*/,
 );
-
 
 ?>

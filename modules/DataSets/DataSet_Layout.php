@@ -75,19 +75,12 @@ class DataSet_Layout extends SugarBean {
         ,"start_axis" => "x"
         );
 
-
-    public function __construct() {
-        global $dictionary;
-        if(isset($this->module_dir) && isset($this->object_name) && !isset($dictionary[$this->object_name])){
-            require('metadata/dataset_layoutsMetaData.php');
-        }
+    public function __construct()
+    {
         parent::__construct();
 
-        $this->disable_row_level_security =true;
-
+        $this->disable_row_level_security = true;
     }
-
-
 
     function get_summary_text()
     {
@@ -177,18 +170,20 @@ class DataSet_Layout extends SugarBean {
 
 	function clear_all_layout($data_set_id){
 		//Select all layout records
-		$query = 	"SELECT * from $this->table_name
-					 where $this->table_name.parent_id='$data_set_id'
-				 	";
-		$result = $this->db->query($query,true," Error retrieving layout records for this data set: ");
+        $qb = $this->db->getConnection()->createQueryBuilder();
+        $qb->select('id')
+            ->from($this->table_name)
+            ->where($qb->expr()->eq('parent_id', $qb->createPositionalParameter($data_set_id)));
+
+        $stmt = $qb->execute();
 
 			// Print out the calculation column info
-			while (($row = $this->db->fetchByAssoc($result)) != null) {
+        while ($beanId = $stmt->fetchColumn()) {
 				//Mark all attributes deleted
-				BeanFactory::deleteBean('DataSet_Attribute', $row['id']);
+            BeanFactory::deleteBean('DataSet_Attribute', $beanId);
 
 				//Remove the layout records
-				$this->mark_deleted($row['id']);
+            $this->mark_deleted($beanId);
 
 			//end while
 			}

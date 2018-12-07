@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Ole hyvä ja valitse kentät',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Lomakkeen kuvaus:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Tämän lomakkeen lähtettäminen luo liidin ja linkin kampanjaan',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Rastittamalla tämän ruudun hyväksyt markkinointiviestit jatkossa',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Lataa webistä liidiksi -lomakkeesi',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Webistä liidiksi -lomake',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Täyttäkää kaikki vaaditut kentät',

@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Valitse' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Tyhjennä' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Tyyppi',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Malleja sähköposteille',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Sähköpostimallit',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Muuttujat',
 );

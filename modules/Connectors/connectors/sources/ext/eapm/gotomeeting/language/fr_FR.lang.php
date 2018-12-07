@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Obtenir une clé client de LogMeIn en enregistrant une nouvelle application GoToMeeting.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Étapes pour enregistrer votre instance :<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Connectez-vous à votre compte de Centre pour Developeurs LogMeIn : <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Cliquez sur Mes Applications</li>
+    <li>Cliquez sur Ajouter une nouvelle Application</li>
+    <li>Remplissez tous les champs dans le formulaire d\'ajout d\'application :</li>
         <ul>
-            <li>App Name</li>
+            <li>Nom de l\'application</li>
             <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>API de produit : Selectionnez GoToMeeting</li>
+            <li>URL de l\'application : Saisissez l\'URL de votre instance</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Cliquer sur le bouton Créer Application</li>
+    <li>Dans la liste d\'applications, cliquez sur le nom de votre application</li>
+    <li>Cliquez sur l\'onglet Clés</li>
+    <li>Copiez la valeur de la clé client et saisissez-la ci-dessous</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Clé client',
 );

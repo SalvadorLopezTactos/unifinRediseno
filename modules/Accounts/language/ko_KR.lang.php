@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => '견적서 (배송지 주소)',
 	'LNK_ACCOUNT_REPORTS' => '거래처와 관련된 보고서 보기',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => '문서',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => '계정 목록 대시보드',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => '계정 기록 대시보드',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => '차트',
 	'LBL_DEFAULT' => '화면뷰',
@@ -75,12 +79,12 @@ $mod_strings = array (
 	'LBL_FAX' => '팩스번호',
 	'LBL_HISTORY_SUBPANEL_TITLE'=>'완료된 활동',
 	'LBL_HOMEPAGE_TITLE' => '내 거래처',
-	'LBL_INDUSTRY' => '산업군',
+	'LBL_INDUSTRY' => '산업 분야',
 	'LBL_INVALID_EMAIL'=>'유효하지 않은 이메일',
 	'LBL_INVITEE' => '연락처',
 	'LBL_LEADS_SUBPANEL_TITLE' => '관심고객',
 	'LBL_LIST_ACCOUNT_NAME' => '거래처명',
-	'LBL_LIST_CITY' => '시',
+	'LBL_LIST_CITY' => '도시',
 	'LBL_LIST_CONTACT_NAME' => '연락처',
 	'LBL_LIST_EMAIL_ADDRESS' => '이메일',
 	'LBL_LIST_FORM_TITLE' => '거래처 목록',

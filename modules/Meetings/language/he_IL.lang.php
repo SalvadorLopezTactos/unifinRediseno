@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת פגישות',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת פגישות',
+
 	'ERR_DELETE_RECORD' => 'למחיקת הרשומה יש לציין מספר רשומה',
 	'LBL_ACCEPT_THIS'=>'לקבל',
 	'LBL_ADD_BUTTON'=> 'הוסף',

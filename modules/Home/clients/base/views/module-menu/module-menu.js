@@ -183,12 +183,20 @@
         this.$('.active').removeClass('active');
         this.dashboards.fetch({
             'limit': this._settings['dashboards'],
+            'filter': [{
+                'dashboard_module': 'Home',
+                '$or': [
+                    {'$favorite': ''},
+                    {'default_dashboard': 1}
+                ]
+            }],
+            'order_by': {'date_modified': 'DESC'},
             'showAlerts': false,
             'success': _.bind(function(data) {
-
+                var module = this.module;
                 _.each(data.models, function(model) {
                     if (pattern.test(model.get('name'))) {
-                        model.set('name', app.lang.get(model.get('name'), model.module));
+                        model.set('name', app.lang.get(model.get('name'), module));
                     }
                     // hardcode the module to `Home` due to different link that
                     // we support

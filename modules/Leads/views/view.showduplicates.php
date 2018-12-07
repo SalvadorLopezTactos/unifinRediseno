@@ -27,6 +27,8 @@ class ViewShowDuplicates extends SugarView
         global $current_language;
         global $mod_strings;
 
+        $db = DBManagerFactory::getInstance();
+
         if(!isset($_SESSION['SHOW_DUPLICATES']))
         {
             $GLOBALS['log']->error("Unauthorized access to this area.");
@@ -56,13 +58,13 @@ class ViewShowDuplicates extends SugarView
             {
                 if (!$first) $query .= ' OR ';
                 $first = false;
-                $query .= "id='$duplicate_id' ";
+                $query .= "id=".$db->quoted($duplicate_id)." ";
             }
             $query .= ')';
         }
 
         $duplicateLeads = array();
-        $db = DBManagerFactory::getInstance();
+
         $result = $db->query($query);
         $i=0;
         while (($row=$db->fetchByAssoc($result)) != null) {

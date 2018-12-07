@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Adresatų sąrašo ataskaitų sritis',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Adresatų duomenų ataskaitų sritis',
+
   'LBL_MODULE_NAME' => 'Adresatai',
   'LBL_MODULE_NAME_SINGULAR' => 'Adresatas',
   'LBL_MODULE_ID'   => 'Adresatai',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Sveikinimas',
   'LBL_SAVE_PROSPECT' => 'Išsaugoti adresatą',
   'LBL_CREATED_OPPORTUNITY' =>'Sukūrė naują pardavimą',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Kuriant pardavimą reikia kliento.\n  Prašome sukurti naują klientą arba pasirinkite jau esamą.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Kuriant pardavimą reikia kliento.\\n  Prašome sukurti naują klientą arba pasirinkite jau esamą.',
   'LNK_SELECT_ACCOUNT' => "Pasirinkite klientą",
   'LNK_NEW_PROSPECT' => 'Sukurti adresatą',
   'LNK_PROSPECT_LIST' => 'Adresatai',
@@ -195,4 +199,6 @@ To create a {{module_name}}:
 2. Click "Save" to finalize the new record and return to the previous page.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Targets&#39; reports',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Verslo tikslais sutikote su',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Sutikimas paskutinį kartą atnaujintas',
 );

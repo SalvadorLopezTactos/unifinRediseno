@@ -168,7 +168,7 @@
         // if we find one and it has the loadData method, call that method to
         // force the subpanel to load the data.
         var rli_ctx = _.find(ctx.children, function(child) {
-            return (child.get('module') == 'RevenueLineItems');
+            return child.get('module') === 'RevenueLineItems';
         }, this);
         if (!_.isUndefined(rli_ctx) && _.isFunction(rli_ctx.loadData)) {
             rli_ctx.loadData();

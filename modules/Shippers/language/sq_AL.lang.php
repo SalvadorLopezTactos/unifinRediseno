@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Duhet që të përcaktoni numrin e regjistrimit për të fshirë dërgim',
   'NTC_STATUS' => 'Vendos statusin në pasiv për heqje të këtij ofruesi të dërgimit prej listës së poshtme të ofruesve të dërgesava',
   'NTC_LIST_ORDER' => 'Përcakto porosinë që ky ofruesi të dërgimit do të shfaq në listën e poshtme të ofruesve të dërgimit',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'aktive',
-    'Inactive' => 'pasive',
-),
-	'LBL_EDITLAYOUT' => 'Ndrysho formatin' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Ndrysho formatin' /*for 508 compliance fix*/,
 );
-
 
 ?>

@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'تحديد' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'مسح' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'النوع',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'قوالب للبريد الإلكتروني',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'قوالب البريد الإلكتروني',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'المتغيرات',
 );

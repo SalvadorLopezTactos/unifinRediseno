@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Det er definert flere kolonner med samme feltnavn.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Mangler påkrevede felt::',
     'ERR_MISSING_MAP_NAME' => 'Savner tilpassede mapping- navn',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Brukerimport er deaktivert for IDM-modus.',
     'ERR_SELECT_FULL_NAME' => 'Du kan ikke velge Fullstendig navn når fornavn og etternavn er valgt.',
     'ERR_SELECT_FILE' => 'Velg fil som skal lastes opp.',
     'LBL_SELECT_FILE' => 'Velg fil:',

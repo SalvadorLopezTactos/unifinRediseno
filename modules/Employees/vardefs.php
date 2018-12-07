@@ -34,21 +34,23 @@ $dictionary['Employee']['fields']['email']['full_text_search']['boost'] = 1.67;
 $dictionary['Employee']['fields']['date_entered']['full_text_search'] = array(
     'enabled' => true,
     'searchable' => false,
-    'aggregations' => array(
-        'date_entered' => array(
-            'type' => 'DateRange',
-        ),
-    ),
+    // Disabled until UX component is available
+    //'aggregations' => array(
+    //    'date_entered' => array(
+    //        'type' => 'DateRange',
+    //    ),
+    //),
 );
 
 $dictionary['Employee']['fields']['date_modified']['full_text_search'] = array(
     'enabled' => true,
     'searchable' => false,
-    'aggregations' => array(
-        'date_modified' => array(
-            'type' => 'DateRange',
-        ),
-    ),
+    // Disabled until UX component is available
+    //'aggregations' => array(
+    //    'date_modified' => array(
+    //        'type' => 'DateRange',
+    //    ),
+    //),
 );
 
 $dictionary['Employee']['fields']['modified_user_id']['full_text_search'] = array(

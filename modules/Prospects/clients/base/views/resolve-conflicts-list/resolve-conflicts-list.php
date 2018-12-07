@@ -14,7 +14,7 @@ $viewdefs['Prospects']['base']['view']['resolve-conflicts-list'] = array(
         array(
             'fields' => array(
                 array(
-                    'name' => 'full_name',
+                    'name' => 'name',
                     'type' => 'fullname',
                     'fields' => array(
                         'salutation',

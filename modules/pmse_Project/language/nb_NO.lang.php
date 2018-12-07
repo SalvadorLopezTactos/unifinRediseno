@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Prosessdefinisjoner',
   'LBL_MODULE_TITLE' => 'Prosessdefinisjoner',
   'LBL_MODULE_NAME_SINGULAR' => 'Prosessdefinisjoner',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'er ikke lik med',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'er ikke',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'ikke lik',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Kjøretid',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Legg til',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Lukk',

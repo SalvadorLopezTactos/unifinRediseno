@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => 'Speditører',
   'LNK_PRODUCT_LIST' => 'Produktkatalog',
   'NTC_DELETE_CONFIRMATION' => 'Er du sikker på, at du vil slette denne post?',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => 'Tilføj',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tildelt brugernavn',

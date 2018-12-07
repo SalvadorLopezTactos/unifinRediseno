@@ -21,8 +21,6 @@
 ({
     extendsFrom: 'EmailactionField',
 
-    plugins: ['EmailClientLaunch'],
-
     /**
      * Share template for subject.
      *
@@ -47,15 +45,16 @@
     /**
      * @inheritdoc
      *
-     * Adds the share options for use when launching the email client and
-     * refreshes the share options if the model data changes. The contents
+     * Adds the share options for use when launching the email client.
      */
     initialize: function(options) {
         this._super('initialize', [options]);
         this.type = 'emailaction';
         this._initShareTemplates();
-        this._setShareOptions();
-        this.model.on('change', this._setShareOptions, this);
+
+        // If there is a default signature in email compose, it should be
+        // placed below the share content in the email body.
+        this.addEmailOptions({signature_location: 'below'});
     },
 
     /**
@@ -86,21 +85,63 @@
     },
 
     /**
+     * Returns the subject to use in the email.
+     *
+     * @see EmailClientLaunch plugin.
+     * @param {Data.Bean} model Use this model when constructing the subject.
+     * @return {undefined|string}
+     */
+    emailOptionSubject: function(model) {
+        var shareParams = this._getShareParams(model);
+        var subject = this.shareTplSubject(shareParams);
+
+        return subject;
+    },
+
+    /**
+     * Returns the plain-text body to use in the email.
+     *
+     * @see EmailClientLaunch plugin.
+     * @param {Data.Bean} model Use this model when constructing the body.
+     * @return {undefined|string}
+     */
+    emailOptionDescription: function(model) {
+        var shareParams = this._getShareParams(model);
+        var description = this.shareTplBody(shareParams);
+
+        return description;
+    },
+
+    /**
+     * Returns the HTML body to use in the email.
+     *
+     * @see EmailClientLaunch plugin.
+     * @param {Data.Bean} model Use this model when constructing the body.
+     * @return {undefined|string}
+     */
+    emailOptionDescriptionHtml: function(model) {
+        var shareParams = this._getShareParams(model);
+        var description = this.shareTplBody(shareParams);
+        var descriptionHtml = this.shareTplBodyHtml(shareParams);
+
+        return descriptionHtml || description;
+    },
+
+    /**
      * Set subject and body settings for the EmailClientLaunch plugin to use
      *
      * @protected
+     * @deprecated Use
+     * View.Fields.Base.ShareactionField#emailOptionSubject,
+     * View.Fields.Base.ShareactionField#emailOptionDescription, and
+     * View.Fields.Base.ShareactionField#emailOptionDescriptionHtml
+     * instead.
      */
     _setShareOptions: function() {
-        var shareParams = this._getShareParams(),
-            subject = this.shareTplSubject(shareParams),
-            body = this.shareTplBody(shareParams),
-            bodyHtml = this.shareTplBodyHtml(shareParams);
-
-        this.addEmailOptions({
-            subject: subject,
-            html_body: bodyHtml || body,
-            text_body: body
-        });
+        app.logger.warn('View.Fields.Base.ShareactionField#_setShareOptions is deprecated. Use ' +
+            'View.Fields.Base.ShareactionField#emailOptionSubject, ' +
+            'View.Fields.Base.ShareactionField#emailOptionDescription, and ' +
+            'View.Fields.Base.ShareactionField#emailOptionDescriptionHtml instead.');
     },
 
     /**
@@ -112,15 +153,18 @@
      *
      * @template
      * @protected
+     * @param {Data.Bean} model The params come from this model's attributes.
+     * EmailClientLaunch plugin should dictate the model based on the context.
      */
-    _getShareParams: function() {
-        var moduleString = app.lang.getModuleName(this.module);
+    _getShareParams: function(model) {
+        // Falls back to the `this.model` for backward compatibility.
+        model = model || this.model;
 
-        return _.extend({}, this.model.attributes, {
-            module: moduleString,
+        return _.extend({}, model.attributes, {
+            module: app.lang.getModuleName(model.module),
             appId: app.config.appId,
             url: window.location.href,
-            name: new Handlebars.SafeString(app.utils.getRecordName(this.model))
+            name: new Handlebars.SafeString(app.utils.getRecordName(model))
         });
     },
 
@@ -130,6 +174,20 @@
      */
     shareWithSugarEmailClient: function() {
         this.launchSugarEmailClient(this.emailOptions);
+    },
+
+    /**
+     * If there is a default signature in email compose, it should be placed
+     * below the share content in the email body.
+     *
+     * @return {Object}
+     * @protected
+     * @deprecated The signature location option is set during initialization.
+     */
+    _retrieveEmailOptionsFromLink: function() {
+        app.logger.warn('View.Fields.Base.ShareactionField#_retrieveEmailOptionsFromLink is deprecated. ' +
+            'The signature location option is set during initialization.');
+        return {};
     },
 
     /**

@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'Crează data',
     'LBL_DATE_MODIFIED' => 'Data Modificata',
     'LBL_DELETED' => 'Ștergere',
+    'LBL_MODULE_NAME' => 'Adrese de e-mail',
+    'LBL_MODULE_NAME_SINGULAR' => 'Adresă de e-mail',
 );

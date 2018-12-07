@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Si us plau, seleccioni d´entre els camps disponibles',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Descripció del Formulari:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'En enviar aquest formulari es crearà un client potencial vinculat amb la campanya',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Si marqueu aquesta casella, accepteu rebre correus electrònics de màrqueting en el futur',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Si us plau, descarregui el seu formulari web a client potencial',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Formulari Web A Client Potencial',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Si us plau, indiqui tots els camps requerits',

@@ -15,6 +15,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\Visibility;
 use Sugarcrm\Sugarcrm\Elasticsearch\Analysis\AnalysisBuilder;
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Document;
+use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Property\MultiFieldProperty;
 
 /**
  * Class KBVisibility
@@ -86,7 +87,17 @@ class KBVisibility extends SugarVisibility implements StrategyInterface
      */
     public function elasticBuildMapping(Mapping $mapping, Visibility $provider)
     {
-        $mapping->addNotAnalyzedField('status');
+        $property = new MultiFieldProperty();
+        $property->setType('keyword');
+        $mapping->addModuleField('status', 'kbvis', $property);
+
+        $property = new MultiFieldProperty();
+        $property->setType('integer');
+        $mapping->addModuleField('active_rev', 'kbvis', $property);
+
+        $property = new MultiFieldProperty();
+        $property->setType('keyword');
+        $mapping->addModuleField('language', 'kbvis', $property);
     }
 
     /**
@@ -108,29 +119,30 @@ class KBVisibility extends SugarVisibility implements StrategyInterface
     /**
      * {@inheritdoc}
      */
-    public function elasticAddFilters(\User $user, \Elastica\Filter\BoolFilter $filter, Visibility $provider)
+    public function elasticAddFilters(User $user, \Elastica\Query\BoolQuery $filter, Visibility $provider)
     {
         if (!$this->shouldCheckVisibility()) {
             return;
         }
 
         // create owner filter
-        $options = array(
-            'bean' => $this->bean,
-            'user' => $user,
-        );
-        $ownerFilter = $provider->createFilter('Owner', $options);
+        $ownerFilter = $provider->createFilter('Owner', ['user' => $user]);
 
         if ($statuses = $this->getPublishedStatuses()) {
-            $combo = new \Elastica\Filter\BoolFilter();
-            $combo->addShould($provider->createFilter('KBStatus', array('published_statuses' => $statuses)));
+            $combo = new \Elastica\Query\BoolQuery();
+            $combo->addShould($provider->createFilter('KBStatus', [
+                'published_statuses' => $statuses,
+                'module' => $this->bean->module_name,
+            ]));
             $combo->addShould($ownerFilter);
             $filter->addMust($combo);
         } else {
             $filter->addMust($ownerFilter);
         }
 
-        $filter->addShould($provider->createFilter('KBActiveRevision'));
+        $filter->addShould($provider->createFilter('KBActiveRevision', [
+            'module' => $this->bean->module_name,
+        ]));
     }
 
     /**

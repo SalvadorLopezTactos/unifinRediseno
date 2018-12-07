@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Procesu definīcijas',
   'LBL_MODULE_TITLE' => 'Procesu definīcijas',
   'LBL_MODULE_NAME_SINGULAR' => 'Procesu definīcijas',
@@ -37,7 +36,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_DISABLE' => 'Deaktivizēt',
 
     'LBL_PMSE_SAVE_DESIGN_BUTTON_LABEL' => 'Saglabāt un izvietot',
-    'LBL_PMSE_IMPORT_BUTTON_LABEL' => 'Importēšana',
+    'LBL_PMSE_IMPORT_BUTTON_LABEL' => 'Importēt',
 
     'LBL_PMSE_MY_PROCESS_DEFINITIONS' => 'Manu procesu definīcijas',
     'LBL_PMSE_ALL_PROCESS_DEFINITIONS' => 'Visu procesu definīcijas',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'nav vienāds ar',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'nav',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nav vienāds ar',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Izpildes laiks',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Pievienot',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Aizvērt',

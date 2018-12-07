@@ -29,7 +29,6 @@
             context: this.context,
             module: this.module,
             model: this.model,
-            meta: app.metadata.getField('range')
         },
         rangeField = app.view.createField(fieldSettings);
 

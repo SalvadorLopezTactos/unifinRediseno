@@ -15,6 +15,7 @@ include("metadata/accounts_bugsMetaData.php");
 include("metadata/accounts_casesMetaData.php");
 include("metadata/accounts_contactsMetaData.php");
 include("metadata/accounts_opportunitiesMetaData.php");
+include "metadata/audit_eventsMetaData.php";
 include("metadata/calls_contactsMetaData.php");
 include("metadata/calls_usersMetaData.php");
 include("metadata/calls_leadsMetaData.php");
@@ -26,6 +27,7 @@ include("metadata/contacts_usersMetaData.php");
 include("metadata/custom_fieldsMetaData.php");
 include("metadata/email_addressesMetaData.php");
 include("metadata/emails_beansMetaData.php");
+include 'metadata/erased_fieldsMetaData.php';
 include("metadata/foldersMetaData.php");
 include("metadata/import_mapsMetaData.php");
 include("metadata/meetings_contactsMetaData.php");
@@ -40,8 +42,6 @@ include("metadata/prospect_lists_prospectsMetaData.php");
 include("metadata/roles_modulesMetaData.php");
 include("metadata/roles_usersMetaData.php");
 include("metadata/acl_role_sets_acl_rolesMetaData.php");
-//include("metadata/project_relationMetaData.php");
-include("metadata/outboundEmailMetaData.php");
 include("metadata/addressBookMetaData.php");
 include("metadata/recordListMetaData.php");
 include("metadata/project_bugsMetaData.php");
@@ -75,9 +75,11 @@ include("metadata/contracts_productsMetaData.php");
 include("metadata/projects_quotesMetaData.php");
 include("metadata/projects_revenuelineitemsMetaData.php");
 include("metadata/users_holidaysMetaData.php");
+include 'metadata/contacts_dataprivacyMetaData.php';
+include 'metadata/leads_dataprivacyMetaData.php';
+include 'metadata/prospects_dataprivacyMetaData.php';
+include 'metadata/accounts_dataprivacyMetaData.php';
 
-include("metadata/dataset_layoutsMetaData.php");
-include("metadata/dataset_attributesMetaData.php");
 //ACL RELATIONSHIPS
 include("metadata/acl_roles_actionsMetaData.php");
 include("metadata/acl_roles_usersMetaData.php");
@@ -110,8 +112,12 @@ include("metadata/kbusefulnessMetaData.php");
 // SugarCacheDb
 include "metadata/key_value_cacheMetaData.php";
 
+// TeamSecurity Denormalization tables
+include "metadata/team_sets_usersMetaData.php";
+
 // Locked fields
 include "metadata/locked_field_bean_relMetaData.php";
+
 
 $defs = SugarAutoLoader::loadExtension('tabledictionary');
 if($defs) {

@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Tabloul de bord Listă elemente linie oferte',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Element inclus în oferta campaniei',
     'LBL_MODULE_NAME' => 'Produse din ofertă',
     'LBL_MODULE_NAME_SINGULAR' => 'Element din ofertă',
@@ -39,7 +42,7 @@ $mod_strings = array(
     'LBL_URL' => 'URL produs',
     'LBL_QUOTE_NAME' => 'Nume ofertă:',
     'LBL_ASSOCIATED_QUOTE' => 'Subiect ofertă:',
-    'LBL_CONTACT_NAME' => 'Nume Contact:',
+    'LBL_CONTACT_NAME' => 'Nume persoană de contact:',
     'LBL_DATE_PURCHASED' => 'Achizitionat:',
     'LBL_DATE_SUPPORT_EXPIRES' => 'Expira Suport:',
     'LBL_DATE_SUPPORT_STARTS' => 'Incepe Suport:',
@@ -50,7 +53,7 @@ $mod_strings = array(
     'LBL_DISCOUNT_RATE_USDOLLAR' => 'Rata discount(US Dolar)',
     'LBL_DISCOUNT_TOTAL_USDOLLAR' => 'Reducere(USD)',
     'LBL_SELECT_DISCOUNT' => 'Reducere in %',
-    'LBL_LIST_PRICE' => 'Lista preturi:',
+    'LBL_LIST_PRICE' => 'Preț de listă:',
     'LBL_VENDOR_PART_NUM' => 'Nume parte furnizor:',
     'LBL_MFT_PART_NUM' => 'Număr componentă:',
     'LBL_NEXT_STEP' => 'Pasul următor:',
@@ -60,7 +63,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Tip',
     'LBL_CATEGORY' => 'Categorie',
     'LBL_QUANTITY' => 'Cantitate',
-    'LBL_STATUS' => 'Status:',
+    'LBL_STATUS' => 'Stare:',
     'LBL_TAX_CLASS' => 'Clasa de taxe:',
     'LBL_MANUFACTURER' => 'Producator',
     'LBL_MANUFACTURER_NAME' => 'Nume producător:',
@@ -172,4 +175,5 @@ Pentru a crea {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Listă date ofertă articole de linie ofertate',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Articol de linie nou ofertat)',
     'LBL_DISCOUNT_PERCENT' => 'Procentaj %',
+    'LBL_DISCOUNT_TYPE' => 'Tip de reducere',
 );

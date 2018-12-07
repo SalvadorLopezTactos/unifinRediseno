@@ -8,9 +8,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
 //This is an abstract class
+var PMSE = PMSE || {};
 var DataItem = function(settings) {
-	Element.call(this, settings);
+    PMSE.Element.call(this, settings);
 	this._parent = null;
 	this._data = {};
 	this._text = null;
@@ -21,7 +23,7 @@ var DataItem = function(settings) {
 	DataItem.prototype.init.call(this, settings);
 };
 
-DataItem.prototype = new Element();
+DataItem.prototype = new PMSE.Element();
 DataItem.prototype.constructor = DataItem;
 DataItem.prototype.type = "DataItem";
 

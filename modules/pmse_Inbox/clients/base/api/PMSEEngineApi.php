@@ -57,7 +57,8 @@ class PMSEEngineApi extends SugarApi
                 'jsonParams' => array('filter'),
                 'method' => 'engineRoute',
                 'keepSession' => true,
-//                'shortHelp' => 'Evaluates the response of the user form Show Process [Approve, Reject, Route]',
+                'shortHelp' => 'Evaluates the response of the user form Show Process [Approve, Reject, Route]',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_engine_route_help.html',
             ),
             'engineClaim' => array(
                 'reqType' => 'PUT',
@@ -65,7 +66,8 @@ class PMSEEngineApi extends SugarApi
                 'pathVars' => array('module', ''),
                 'method' => 'engineClaim',
                 'keepSession' => true,
-//                'shortHelp' => 'Claims the processes to the current user',
+                'shortHelp' => 'Claims the processes to the current user',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_engine_claim_help.html',
             ),
             'historyLogList' => array(
                 'reqType' => 'GET',
@@ -73,7 +75,8 @@ class PMSEEngineApi extends SugarApi
                 'pathVars' => array('module','','filter'),
                 'method' => 'retrieveHistoryLog',
                 'keepSession' => true,
-//                'shortHelp' => 'Returns the history log for a process',
+                'shortHelp' => 'Returns the history log for a process',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_retrieve_history_log_help.html',
             ),
             'noteList' => array(
                 'reqType' => 'GET',
@@ -81,7 +84,8 @@ class PMSEEngineApi extends SugarApi
                 'pathVars' => array('module','','cas_id'),
                 'method' => 'getNotes',
                 'keepSession' => true,
-//                'shortHelp' => 'Returns the notes list for a process',
+                'shortHelp' => 'Returns the notes list for a process',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_get_notes_help.html',
             ),
             'savenoteList' => array(
                 'reqType' => 'POST',
@@ -89,7 +93,8 @@ class PMSEEngineApi extends SugarApi
                 'pathVars' => array('module',''),
                 'method' => 'saveNotes',
                 'keepSession' => true,
-//                'shortHelp' => 'Creates a new note for a process',
+                'shortHelp' => 'Creates a new note for a process',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_save_notes_help.html',
             ),
             'deletenoteList' => array(
                 'reqType' => 'DELETE',
@@ -97,7 +102,8 @@ class PMSEEngineApi extends SugarApi
                 'pathVars' => array('module', '', 'id'),
                 'method' => 'deleteNotes',
                 'keepSession' => true,
-//                'shortHelp' => 'Deletes a note for a process',
+                'shortHelp' => 'Deletes a note for a process',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_delete_notes_help.html',
             ),
             'saveReassignRecord' => array(
                 'reqType' => 'PUT',
@@ -105,7 +111,8 @@ class PMSEEngineApi extends SugarApi
                 'pathVars' => array('module', ''),
                 'method' => 'reassignRecord',
                 'keepSession' => true,
-//                'shortHelp' => 'Update the user assigned to the record associated to the process',
+                'shortHelp' => 'Update the user assigned to the record associated to the process. DEPRECATED',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_deprecate.html',
             ),
             'saveAdhocReassign' => array(
                 'reqType' => 'PUT',
@@ -113,7 +120,8 @@ class PMSEEngineApi extends SugarApi
                 'pathVars' => array('module', ''),
                 'method' => 'adhocReassign',
                 'keepSession' => true,
-//                'shortHelp' => 'Update the process user associated to the process',
+                'shortHelp' => 'Update the process user associated to the process. DEPRECATED',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_deprecate.html',
             ),
             'getReassignRecord' => array(
                 'reqType' => 'GET',
@@ -121,7 +129,8 @@ class PMSEEngineApi extends SugarApi
                 'pathVars' => array('module', '', 'data', 'flowId'),
                 'method' => 'getReassign',
                 'keepSession' => true,
-//                'shortHelp' => 'Retrieve information for Assign to new user window',
+                'shortHelp' => 'Retrieve information for Assign to new user window. DEPRECATED',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_deprecate.html',
             ),
             'getAdhocReassign' => array(
                 'reqType' => 'GET',
@@ -129,7 +138,8 @@ class PMSEEngineApi extends SugarApi
                 'pathVars' => array('module', '', 'data', 'flowId'),
                 'method' => 'getAdhoc',
                 'keepSession' => true,
-//                'shortHelp' => 'Retrieve information for Change Process User window',
+                'shortHelp' => 'Retrieve information for Change Process User window. DEPRECATED',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_deprecate.html',
             ),
             'getChangeCaseUser' => array(
                 'reqType' => 'GET',
@@ -137,7 +147,8 @@ class PMSEEngineApi extends SugarApi
                 'pathVars' => array('module', '', 'cas_id'),
                 'method' => 'changeCaseUser',
                 'keepSession' => true,
-//                'shortHelp' => 'Retrieve information for Change Process User window',
+                'shortHelp' => 'Retrieve information for Change Process User window. DEPRECATED',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_deprecate.html',
             ),
             'getUserListByTeam' => array(
                 'reqType' => 'GET',
@@ -145,7 +156,8 @@ class PMSEEngineApi extends SugarApi
                 'pathVars' => array('module', '', 'id'),
                 'method' => 'userListByTeam',
                 'keepSession' => true,
-//                'shortHelp' => 'Retrieve users associated to a Team',
+                'shortHelp' => 'Retrieve users associated to a Team. DEPRECATED',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_deprecate.html',
             ),
             'reactivateFlows' => array(
                 'reqType' => 'PUT',
@@ -155,7 +167,8 @@ class PMSEEngineApi extends SugarApi
                 'method' => 'reactivateFlows',
                 'keepSession' => true,
                 'acl' => 'adminOrDev',
-//                'shortHelp' => 'Call methods to re-execute processes',
+                'shortHelp' => 'Call methods to re-execute processes. DEPRECATED',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_deprecate.html',
             ),
             'reassignFlows' => array(
                 'reqType' => 'PUT',
@@ -165,7 +178,8 @@ class PMSEEngineApi extends SugarApi
                 'method' => 'reassignFlows',
                 'keepSession' => true,
                 'acl' => 'adminOrDev',
-//                'shortHelp' => 'Call methods to reassign processes',
+                'shortHelp' => 'Call methods to reassign processes',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_reassign_flows_help.html',
             ),
             'getReassignFlows' => array(
                 'reqType' => 'GET',
@@ -175,7 +189,8 @@ class PMSEEngineApi extends SugarApi
                 'method' => 'getReassignFlows',
                 'keepSession' => true,
                 'acl' => 'adminOrDev',
-//                'shortHelp' => 'Retrieve information to reassign processes',
+                'shortHelp' => 'Retrieve information to reassign processes',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_get_reassign_flows_help.html',
             ),
             'getModuleCase' => array(
                 'reqType' => 'GET',
@@ -183,7 +198,8 @@ class PMSEEngineApi extends SugarApi
                 'pathVars' => array('module', 'case', 'id', 'idflow'),
                 'method' => 'selectCase',
                 'keepSession' => true,
-//                'shortHelp' => 'Retrieve information of the process record',
+                'shortHelp' => 'Retrieve information of the process record',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_select_case_help.html',
             ),
             // PMSE specific endpoint that allows bypassing of locked field ACLs
             'getCaseRecord' => array(
@@ -200,7 +216,8 @@ class PMSEEngineApi extends SugarApi
                 'method' => 'cancelCase',
                 'keepSession' => true,
                 'acl' => 'adminOrDev',
-//                'shortHelp' => 'Call methods to cancel a process',
+                'shortHelp' => 'Call methods to cancel a process',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_cancel_case_help.html',
             ),
             'getUnattendedCases' => array(
                 'reqType' => 'GET',
@@ -209,7 +226,8 @@ class PMSEEngineApi extends SugarApi
                 'method' => 'getUnattendedCases',
                 'keepSession' => true,
                 'acl' => 'adminOrDev',
-//                'shortHelp' => 'Retrieves the processes to show on Unattended Process view',
+                'shortHelp' => 'Retrieves the processes to show on Unattended Process view',
+                'longHelp' =>  'modules/pmse_Inbox/clients/base/api/help/process_get_unattended_cases_help.html',
             ),
             'getSettingsEngine' => array(
                 'reqType' => 'GET',
@@ -218,7 +236,8 @@ class PMSEEngineApi extends SugarApi
                 'method' => 'getSettingsEngine',
                 'keepSession' => true,
                 'acl' => 'adminOrDev',
-//                'shortHelp' => 'Retrieve settings for the PA engine',
+                'shortHelp' => 'Retrieve settings for the PA engine',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_get_settings_engine_help.html',
             ),
             'putSettingsEngine' => array(
                 'reqType' => 'PUT',
@@ -227,7 +246,8 @@ class PMSEEngineApi extends SugarApi
                 'method' => 'putSettingsEngine',
                 'keepSession' => true,
                 'acl' => 'adminOrDev',
-//                'shortHelp' => 'Update settings for the PA engine',
+                'shortHelp' => 'Update settings for the PA engine',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_put_settings_engine_help.html',
             ),
         );
     }
@@ -378,6 +398,7 @@ class PMSEEngineApi extends SugarApi
 
     public function reassignRecord(ServiceBase $api, array $args)
     {
+        PMSEEngineUtils::logDeprecated(__METHOD__);
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $case = $args['data'];
 
@@ -396,6 +417,7 @@ class PMSEEngineApi extends SugarApi
 
     public function adhocReassign(ServiceBase $api, array $args)
     {
+        PMSEEngineUtils::logDeprecated(__METHOD__);
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $case = $args['data'];
         $result = array('success' => true);
@@ -411,6 +433,7 @@ class PMSEEngineApi extends SugarApi
 
     public function getReassign(ServiceBase $api, array $args)
     {
+        PMSEEngineUtils::logDeprecated(__METHOD__);
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $flowBeanObject = BeanFactory::getBean('pmse_BpmFlow', $args['flowId']);
         $args['cas_id'] = $flowBeanObject->cas_id;
@@ -507,6 +530,7 @@ class PMSEEngineApi extends SugarApi
      */
     public function getAdhoc(ServiceBase $api, array $args)
     {
+        PMSEEngineUtils::logDeprecated(__METHOD__);
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $flowBeanObject = BeanFactory::getBean('pmse_BpmFlow', $args['flowId']);
         $args['cas_id'] = $flowBeanObject->cas_id;
@@ -600,6 +624,7 @@ class PMSEEngineApi extends SugarApi
      */
     public function changeCaseUser(ServiceBase $api, array $args)
     {
+        PMSEEngineUtils::logDeprecated(__METHOD__);
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $time_data = $GLOBALS['timedate'];
         global $current_user;
@@ -613,7 +638,7 @@ class PMSEEngineApi extends SugarApi
                         WHERE pmse_inbox.cas_id = " . $args['cas_id'] . " AND cas_flow_status = 'FORM';";
         $result = $db->query($get_actIds);
         $tmpArray = array();
-//        $tmpArray[] = array ('value'=>'is_admin', 'text'=>translate('LBL_PMSE_FORM_OPTION_ADMINISTRATOR'));
+
         while ($row = $db->fetchByAssoc($result)) {
             $time = json_decode(base64_decode($row['act_expected_time']));
             $tmpArray[] = array(
@@ -639,6 +664,7 @@ class PMSEEngineApi extends SugarApi
      */
     public function userListByTeam(ServiceBase $api, array $args)
     {
+        PMSEEngineUtils::logDeprecated(__METHOD__);
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         global $db;
         $res = array(); //new stdClass();
@@ -650,9 +676,8 @@ class PMSEEngineApi extends SugarApi
                         WHERE private = 0 " . $teams;
         $result = $db->query($get_actIds);
         $tmpArray = array();
-//        $tmpArray[] = array ('value'=>'is_admin', 'text'=>translate('LBL_PMSE_FORM_OPTION_ADMINISTRATOR'));
+
         while ($row = $db->fetchByAssoc($result)) {
-//            $tmpArray[] = array( 'value' => $row['id'], 'text' => $row['first_name'] . ' ' . $row['last_name'] );
             $tmpArray[$row['id']] = $row['first_name'] . ' ' . $row['last_name'];
         }
         $res['result'] = $tmpArray;
@@ -677,19 +702,17 @@ class PMSEEngineApi extends SugarApi
         $today = TimeDate::getInstance()->nowDb();
         foreach ($args['data'] as $value) {
             if (is_array($value)) {
-//                $update_activity = "update bpm_flow set cas_user_id = '".$value['cas_user_id']."' where cas_id = ".$value['cas_id']." and cas_index = ".$value['cas_index'].";";
-//                $resultUpdate = $db->Query($update_activity);
                 $to = $value['cas_user_id'];
                 $from = $value['old_cas_user_id'];
                 $cas_id = $value['cas_id'];
                 $cas_index = $value['cas_index'];
-                //$cas_index = $value['cas_index'];
+
 
                 $flowBean = BeanFactory::newBean('pmse_BpmFlow'); //new BpmFlow();
                 //$flows = $flowBean->getSelectRows('', "cas_id = '$cas_id' and cas_index = '$cas_index'");
+
                 $flows = $this->wrapper->getSelectRows($flowBean, '', "cas_id = '$cas_id' and cas_index = '$cas_index'",
                     0, -1, -1);
-                //
                 $update_activity = "update pmse_bpm_flow set cas_flow_status = 'CLOSED', cas_user_id = $current_user->id where cas_id = " . $value['cas_id'] . " and cas_index = " . $value['cas_index'] . ";";
                 $resultUpdate = $db->Query($update_activity);
 
@@ -745,6 +768,7 @@ class PMSEEngineApi extends SugarApi
      */
     public function reactivateFlows(ServiceBase $api, array $args)
     {
+        PMSEEngineUtils::logDeprecated(__METHOD__);
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $h = ProcessManager\Factory::getPMSEObject('RequestHandler', 'Engine');
         foreach ($args['cas_id'] as $value) {
@@ -944,7 +968,7 @@ class PMSEEngineApi extends SugarApi
         $q->select($fields);
         if ($args['module_list'] == 'all' && !empty($args['q'])) {
             $q->where()->queryAnd()
-                ->addRaw("pmse_inbox.cas_title LIKE '%" . $args['q'] . "%' OR pmse_inbox.pro_title LIKE '%" . $args['q'] . "%' ");
+                ->addRaw("pmse_inbox.pro_title LIKE '%" . $args['q'] . "%' ");
         } else if (!empty($args['q'])){
             switch($args['module_list']){
                 case translate('LBL_CAS_ID', 'pmse_Inbox'):
@@ -954,10 +978,6 @@ class PMSEEngineApi extends SugarApi
                 case translate('LBL_PROCESS_DEFINITION_NAME', 'pmse_Inbox'):
                 $q->where()->queryAnd()
                     ->addRaw("pmse_inbox.pro_title LIKE '%" . $args['q'] . "%'");
-                    break;
-                case translate('LBL_RECORD_NAME', 'pmse_Inbox'):
-                    $q->where()->queryAnd()
-                        ->addRaw("pmse_inbox.cas_title LIKE '%" . $args['q'] . "%'");
                     break;
                 case translate('LBL_OWNER', 'pmse_Inbox'):
                     $q->where()->queryAnd()
@@ -989,7 +1009,10 @@ class PMSEEngineApi extends SugarApi
                     // Get the assigned bean early. This allows us to check for a bean
                     // id to determine if the bean has been deleted or not. This bean
                     // will also be used later to get the assigned user of the record.
-                    $assignedBean = BeanFactory::getBean($arrayCases[$arrayId]['cas_sugar_module'], $arrayCases[$arrayId]['cas_sugar_object_id']);
+                    $params = array('erased_fields' => true);
+                    $assignedBean = BeanFactory::getBean($arrayCases[$arrayId]['cas_sugar_module'], $arrayCases[$arrayId]['cas_sugar_object_id'], $params);
+
+                    $row = PMSEEngineUtils::appendNameFields($assignedBean, $row);
 
                     $usersBean = BeanFactory::getBean('Users', $arrayCases[$arrayId]['cas_user_id']);
                     $row['cas_user_full_name'] = $usersBean->full_name;
@@ -1131,8 +1154,6 @@ class PMSEEngineApi extends SugarApi
         $returnArray['case']['title']['time'] = $this->caseWrapper->processDueDateTime($returnArray['case']['flow']['cas_due_date']);
         $bpmnProcess = BeanFactory::retrieveBean('pmse_BpmnProcess', $bpmFlow->pro_id);
         $returnArray['case']['title']['process'] = $bpmnProcess->name;
-        $bpmInbox = BeanFactory::retrieveBean('pmse_Inbox', $args['id']);
-        $returnArray['case']['title']['rec_name'] = $bpmInbox->name;
         $bpmnActivity = BeanFactory::retrieveBean('pmse_BpmnActivity', $bpmFlow->bpmn_id);
         $returnArray['case']['title']['activity'] = $bpmnActivity->name;
         $returnArray['case']['inboxId'] = $bpmnActivity->name;
@@ -1270,12 +1291,6 @@ class PMSEEngineApi extends SugarApi
                         'label' => translate('LBL_PMSE_LABEL_STATUS', $module_name),
                         'event' => 'case:status',
                     ),
-//                    array(
-//                        'type' => 'rowaction',
-//                        'name' => 'add-notes',
-//                        'label' => 'Add notes',
-//                        'event' => 'case:add:notes',
-//                    ),
                 ),
             ),
             'edit' => array(

@@ -209,247 +209,6 @@ SUGAR.isIECompatibilityMode = function(){
     return mode;
 }
 
-SUGAR.tour = function() {
-    var tourModal;
-    var screenShotModal;
-    return {
-        init: function(params) {
-            var modals = params.modals;
-
-            tourModal = $('<div id="'+params.id+'" class="modal '+params.className+' tour slides"></div>').modal({backdrop: false}).draggable({handle: ".modal-header"});
-            tourModal.modal("hide");
-
-            screenShotModal = $('<div id="'+params.id+'_screenshot" class="modal '+params.className+' tour screenshot"><div class="modal-header"><a class="close" data-dismiss="modal">×</a><h3>Screen Shot</h3></div><div class="modal-body"></div></div>').modal();
-            screenShotModal.modal("hide");
-
-            var tourIdSel = "#"+params.id;
-            var screenShotIdSel = "#"+params.id+"_screenshot";
-
-            $.ajax({
-                url: params.modalUrl,
-                success: function(data){
-                    $(tourIdSel).html(data);
-                    tourModal.modal("show");
-                    $(tourIdSel+'Start a.btn.btn-primary').on("click",function(e){
-                        $(tourIdSel+'Start').css("display","none");
-                        $(tourIdSel+'End').css("display","block");
-                        tourModal.modal("hide");
-                        modalArray[0].modal('show');
-                        $(modals[0].target).popoverext('show');
-                        centerModal();
-                    });
-                    $(tourIdSel+'Start a.btn').not('.btn-primary').on("click",function(e){
-                        $(tourIdSel+'Start').css("display","none");
-                        $(tourIdSel+'End').css("display","block");
-                        centerModal();
-                    });
-                    $(tourIdSel+'End a.btn.btn-primary').on("click",function(e){
-                        tourModal.modal("hide");
-                        $(tourIdSel+'Start').css("display","block");
-                        $(tourIdSel+'End').css("display","none");
-                        centerModal();
-                        SUGAR.tour.saveUserPref(params.prefUrl);
-                        params.onTourFinish();
-                    });
-                    $(tourIdSel+'End a.btn').not('.btn-primary').on("click",function(e){
-                        tourModal.modal("hide");
-                        var lastModal = modals.length-1;
-                        modalArray[lastModal].modal('show');
-                        $(modals[lastModal].target).popoverext('show');
-                        centerModal();
-                    });
-
-                    $('div.modal.'+params.className+'.tour.slides a.close').live("click",function(e){
-                        closeTour();
-                    });
-
-                    centerModal();
-
-                    $('<div style="position: absolute;" id="tourArrow">arrow</div>');
-                    var modalArray = new Array();
-
-                    for(var i=0; i<modals.length; i++) {
-                        var modalId =  (modals[i].target == undefined)? "tour_"+i+"_modal" : modals[i].target.replace("#","")+"_modal";
-                        modalArray[i] = $('<div id="'+modalId+'" class="modal '+params.className+' tour slides"></div>').modal({backdrop: false}).draggable({handle: ".modal-header"});
-                        var modalContent = "<div class=\"modal-header\"><a class=\"close\" data-dismiss=\"modal\">×</a><h3>"+modals[i].title+"</h3></div>";
-
-                        modalContent += "<div class=\"modal-body\">"+modals[i].content+"</div>" ;
-
-                        modalContent += footerTemplate(i,modals);
-                        $('#'+modalId).html(modalContent);
-                        modalArray[i].modal("hide");
-
-
-                        $(modals[i].target).ready(function(){
-
-                            var direction,bounce;
-                            if (modals[i].placement == "top right") {
-                                bounce = "up right";
-                                direction = "down right";
-                            } else if (modals[i].placement == "top left") {
-                                bounce = "up left";
-                                direction = "down left";
-                            } else if(modals[i].placement == "top") {
-                                bounce = "up";
-                                direction = "down";
-                            } else if (modals[i].placement == "bottom right") {
-                                bounce = "down right";
-                                direction = "up right";
-                            } else if (modals[i].placement == "bottom left") {
-                                bounce = "down left";
-                                direction = "up left";
-                            } else {
-                                bounce = "down";
-                                direction = "right";
-                            }
-
-                            screenshot(i);
-                            $(modals[i].target).popoverext({
-                                title: "",
-                                content: "arrow",
-                                footer: "",
-                                placement: modals[i].placement,
-                                id: true,
-                                fixed: true,
-                                trigger: 'manual',
-                                template: '<div class="popover arrow"><div class="pointer ' +direction+'"></div></div>',
-                                onShow:  function(){
-                                    $('.pointer').css('top','0px');
-
-                                    $(".popover .pointer")
-                                        .effect("custombounce", { times:1000, direction: bounce, distance: 50, gravity: false }, 2000,
-                                        function(){
-                                        }
-                                    );
-                                },
-                                leftOffset: modals[i].leftOffset ? modals[i].leftOffset : 0,
-                                topOffset: modals[i].topOffset ? modals[i].topOffset : 0,
-                                hideOnBlur: true
-
-                            });
-                        });
-                        //empty popover div and insert arrow
-                        $(modals[i].target+"Popover").empty().html("arrow");
-
-                    }
-
-                    $(window).resize(function() {
-                        centerModal();
-                    });
-
-                    function screenshot(i){
-                        var thumb = i+1;
-                        if(modals[i].screenShotUrl != undefined) {
-                            $('#thumbnail_'+thumb).live("click", function(){
-                                $(screenShotIdSel+ " .modal-header h3").html(modals[i].title);
-                                $(screenShotIdSel+ " .modal-body").html("<img src='"+modals[i].screenShotUrl+"' width='600'>");
-                                screenShotModal.modal("show");
-                                centerModal();
-                            });
-                        }
-
-                    }
-
-                    function centerModal() {
-                        $(".tour").each(function(){
-                            $(this).css("left",$(window).width()/2 - $(this).width()/2);
-                            $(this).css("margin-top",-$(this).height()/2);
-                        });
-
-                    }
-
-                    function closeTour() {
-                        tourModal.modal("hide");
-                        $(tourIdSel+'Start').css("display","block");
-                        $(tourIdSel+'End').css("display","none");
-                        centerModal();
-                        SUGAR.tour.saveUserPref(params.prefUrl);
-                        $('.popover').blur();
-                        params.onTourFinish();
-                    }
-
-                    function nextModal (i) {
-
-
-                        if(modals.length - 1 != i) {
-                            $(modals[i].target).popoverext('hide');
-                            $(modals[i+1].target).popoverext('show');
-                            modalArray[i].modal('hide');
-                            modalArray[i+1].modal('show');
-                            centerModal();
-
-                        } else {
-                            $(modals[i].target).popoverext('hide');
-                            modalArray[i].modal('hide');
-                            tourModal.modal("show");
-                            centerModal();
-                        }
-
-                    }
-
-                    function prevModal (i){
-
-                        $(modals[i].target).popoverext('hide');
-                        $(modals[i-1].target).popoverext('show');
-                        modalArray[i].modal('hide');
-                        modalArray[i-1].modal('show');
-                    }
-
-
-                    function skipTour (i) {
-                        $(modals[i].target).popoverext('hide');
-                        modalArray[i].modal('hide');
-                        $(tourIdSel+'End').css("display","block");
-                        $(tourIdSel+'Start').css("display","none");
-                        tourModal.modal("show");
-                        centerModal();
-                    }
-
-                    function footerTemplate (i,modals) {
-                        var content = $('<div></div>')
-                        var footer = $("<div class=\"modal-footer\"></div>");
-
-                        var skip = $("<a href=\"#\" class=\"btn btn-invisible\" id=\"skipTour\">"+SUGAR.language.get('app_strings', 'LBL_TOUR_SKIP')+"</a>");
-                        var next = $('<a class="btn btn-primary" id="nextModal'+i+'" href="#">'+SUGAR.language.get('app_strings', 'LBL_TOUR_NEXT')+' <i class="icon-play icon-xsm"></i></a>');
-                        content.append(footer);
-                        footer.append(skip).append(next);
-
-                        var back = $('<a class="btn" href="#" id="prevModal'+i+'">'+SUGAR.language.get('app_strings', 'LBL_TOUR_BACK')+'</a>');
-
-
-                        $('#nextModal'+i).live("click", function(){
-                            nextModal(i);
-                        });
-
-                        $('#prevModal'+i).live("click", function(){
-                            prevModal(i);
-                        });
-
-                        $('#skipTour').live("click", function(){
-                            skipTour(i);
-                        });
-
-
-
-                        if(i != 0) {
-                            footer.append(back);
-                        }
-
-                        return content.html();
-                    }
-
-                }
-            });
-        },
-        saveUserPref: function(url) {
-            $.ajax({
-                type: "GET",
-                url: url
-            });
-        }
-    };
-}();
-
 SUGAR.isIE = isSupportedIE();
 var isSafari = (navigator.userAgent.toLowerCase().indexOf('safari')!=-1);
 
@@ -2402,7 +2161,16 @@ sugarListView.prototype.send_form = function(select, currentModule, action, no_r
 
 	sugarListView.get_checks();
 	// create new form to post (can't access action property of MassUpdate form due to action input)
-	var newForm = document.createElement('form');
+    var exportFrame = document.getElementById('export_frame');
+    if (!exportFrame) {
+        exportFrame = document.createElement('iframe');
+        exportFrame.style.display = 'none';
+        exportFrame.id = 'export_frame';
+        exportFrame.name = 'export_frame';
+        document.MassUpdate.parentNode.appendChild(exportFrame);
+    }
+
+    var newForm = document.createElement('form');
 	newForm.method = 'post';
 	newForm.action = action;
 	newForm.name = 'newForm';
@@ -2458,6 +2226,7 @@ sugarListView.prototype.send_form = function(select, currentModule, action, no_r
 	}
 
 	document.MassUpdate.parentNode.appendChild(newForm);
+    newForm.target = 'export_frame';
 
 	newForm.submit();
 	// awu Bug 18624: Fixing issue where a canceled Export and unselect of row will persist the uid field, clear the field
@@ -3789,7 +3558,7 @@ SUGAR.searchForm = function() {
                 }else{
                     adv.setAttribute('accesskey',a_key);
                 }
-                
+
 				// show the good search form.
 				document.getElementById(module + theView + 'SearchForm').style.display = '';
                 //if its not the first tab show there is a previous tab.
@@ -4104,7 +3873,7 @@ SUGAR.tabChooser = function () {
 			    }
 
 			    if(max_left != '' && (display_columns_ref.length + selected_right.length) > max_left) {
-                    alert(SUGAR.language.get('app_strings','LBL_MAXIMUM_OF') + max_left + SUGAR.language.get('app_strings','LBL_COLUMNS_CAN_BE_DISPLAYED')); 
+                    alert(SUGAR.language.get('app_strings','LBL_MAXIMUM_OF') + max_left + SUGAR.language.get('app_strings','LBL_COLUMNS_CAN_BE_DISPLAYED'));
 					return;
 			    }
 

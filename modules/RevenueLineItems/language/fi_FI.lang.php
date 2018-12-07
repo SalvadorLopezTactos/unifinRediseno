@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Tarjottujen tuoterivien luettelon työpöytä',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Tarjottujen tuoterivien tietueiden työpöytä',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampanjan tuote',
     'LBL_MODULE_NAME' => 'Tuoterivit',
     'LBL_MODULE_NAME_SINGULAR' => 'Tuoterivi',

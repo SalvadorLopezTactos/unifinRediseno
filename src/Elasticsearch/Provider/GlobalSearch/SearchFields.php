@@ -12,14 +12,12 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch;
 
-use Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
-
 /**
  *
- * SearchFields builder
+ * SearchFields collection
  *
  */
-class SearchFields
+class SearchFields implements \IteratorAggregate
 {
     /**
      * @var Booster
@@ -28,9 +26,9 @@ class SearchFields
 
     /**
      * List of search fields
-     * @var array
+     * @var SearchField[]
      */
-    protected $searchFields = array();
+    protected $searchFields = [];
 
     /**
      * Ctor
@@ -42,29 +40,25 @@ class SearchFields
     }
 
     /**
-     * Return search fields
-     * @return array
+     * {@inheritdoc}
+     * @return SearchField[]
      */
-    public function getSearchFields()
+    public function getIterator()
     {
-        return $this->searchFields;
+        return new \ArrayIterator($this->searchFields);
     }
 
     /**
      * Add search field to the stack
-     * @param string $module Module name
-     * @param array $path Field path
-     * @param array $defs Field definitions
-     * @param string $weightId Identifier to apply weighted boost
-     * @return string
+     * @param SearchField $field
+     * @param string $boostWeightId
      */
-    public function addSearchField($module, array $path, array $defs, $weightId)
+    public function addSearchField(SearchField $field, $boostWeightId = null)
     {
-        $searchField = implode(QueryBuilder::FIELD_SEP, $path);
-        if ($this->booster) {
-            $searchField = $this->booster->getBoostedField($searchField, $defs, $weightId);
+        // apply weighted boost value
+        if ($this->booster && $boostWeightId !== null) {
+            $field->setBoost($this->booster->getBoostValue($field->getDefs(), $boostWeightId));
         }
-        $this->searchFields[] = $searchField;
-        return $searchField;
+        $this->searchFields[] = $field;
     }
 }

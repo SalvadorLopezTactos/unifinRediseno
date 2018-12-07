@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Dashboard elenco casi',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Dashboard record casi',
+
 	'ERR_DELETE_RECORD'					=> 'Per eliminare l´azienda deve essere specificato il numero del record.',
 	'LBL_ACCOUNT_ID'					=> 'ID Azienda',
 	'LBL_ACCOUNT_NAME'					=> 'Nome azienda:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Stato:',
     'LBL_SOURCE' => 'Fonte:',
 	'LBL_SUBJECT'						=> 'Oggetto:',
-	'LBL_SYSTEM_ID'						=> 'ID Sistema',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Nome Azienda',
 	'LBL_LIST_ASSIGNED'					=> 'Assegnato A',
 	'LBL_LIST_CLOSE'					=> 'Chiuso',

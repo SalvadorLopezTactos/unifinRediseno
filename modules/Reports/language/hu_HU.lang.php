@@ -224,7 +224,7 @@ $mod_strings = array (
   'LBL_TOTAL' => 'Összesen',
   'LBL_MODULE_NAME_SAVED' => 'Modul név',
   'LBL_REPORT_TYPE' => 'Jelentés típusa',
-  'LBL_REPORT_LAST_RUN_DATE' => 'Hozzárférés ideje',
+  'LBL_REPORT_LAST_RUN_DATE' => 'Hozzáférés ideje',
   'LBL_REPORT__ATT_TYPE' => 'Típus',
   'LBL_REPORT_RUN_WITH_FILTER' => 'Alkalmaz',
   'LBL_REPORT_RESET_FILTER' => 'Alapbeállítás',
@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Negyedév szerint',
     'LBL_BY_FISCAL_YEAR' => 'Üzleti év alapján',
     'LBL_BY_FISCAL_QUARTER' => 'Üzleti negyedév alapján',
+    'LBL_AMOUNT' => 'Összeg',
     'LBL_COUNT' => 'Számlálás',
+    'LBL_PERCENT' => 'Százalék',
     'LBL_SUM' => 'ÖSSZ.',
     'LBL_AVG' => 'ÁTL.',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Hónap',
     'LBL_YEAR' => 'Év',
     'LBL_QUARTER' => 'Negyed',
+    'LBL_FISCAL' => 'Adóügyi',
     'LBL_FISCAL_YEAR' => 'Üzleti év',
     'LBL_FISCAL_QUARTER' => 'Üzleti negyedév',
 	'LBL_YESTERDAY'=>'Tegnap',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Következő negyed',
     'LBL_ADD_RELATE' => "Összekapcsolás hozzáadása",
     'LBL_DEL_THIS' => "Eltávolítás",
-    'LBL_ALERT_CANT_ADD' => 'Nem tud hozzáadni egy kapcsolódó modult, amíg ki nem választ egy táblát, amitől az függ.\nVálasszon egy modult az Összekapcsolás hozzáadása gomb baloldalán található lenyíló menüből.',
+    'LBL_ALERT_CANT_ADD' => 'Nem tud hozzáadni egy kapcsolódó modult, amíg ki nem választ egy táblát, amitől az függ.\\nVálasszon egy modult az Összekapcsolás hozzáadása gomb baloldalán található lenyíló menüből.',
     'LBL_BY_DAY' => 'Napok szerint',
     'LBL_DAY' => 'Nap',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Választható kapcsolódó modulok',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'egyenlőnél többet',
 
     'LBL_FILTER_BY_MODULE' => 'Modul alapján',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Diagramokkal',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Hiba a műveletre vonatkozó böngészési jelentés adatainak a lekérésekor. Segítségnyújtás ügyében vegye fel a kapcsolatot a jelentés tulajdonosával.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Böngészési adatok nem elérhetők',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'A listanézet megjeleníti a jelenlegi keresési kritériumoknak megfelelő összes jelentést, amelyekhez a felhasználók hozzáférhetnek. Az egyes jelentések alapvető részleteit megtekintheti a lista nézet és az előnézet mező oszlopaiban. A jelentésekhez címkéket rendelhet, illetve szűrőket hozhat létre. A jelentés megtekintéséhez kattintson a jelentésnévre, illetve a jelentés módosításához kattinthat a műveletek menü „Jelentés szerkesztése” parancsára.',
+  );

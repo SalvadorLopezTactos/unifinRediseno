@@ -53,8 +53,7 @@
     /**
      * We override this so we can always disable the field
      *
-     * @override
-     * @private
+     * @inheritdoc
      */
     _render: function() {
         this._super('_render');
@@ -68,8 +67,7 @@
     /**
      * Only show this if the current user is a manager and we are on their manager view
      *
-     * @override
-     * @return {boolean|*|boolean|boolean}
+     * @inheritdoc
      */
     hasAccess: function() {
         var su = (this.context.get('selectedUser')) || app.user.toJSON(),

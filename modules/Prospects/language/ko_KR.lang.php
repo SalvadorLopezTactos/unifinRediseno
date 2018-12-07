@@ -11,7 +11,11 @@
  */
 
 $mod_strings = array (
-  'LBL_MODULE_NAME' => '목표고객 목록',
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => '목표고객 목록 대시보드',
+  'LBL_TARGETS_RECORD_DASHBOARD' => '목표고객 기록 대시보드',
+
+  'LBL_MODULE_NAME' => '목표고객',
   'LBL_MODULE_NAME_SINGULAR' => '목표고객',
   'LBL_MODULE_ID'   => '목표고객 목록',
   'LBL_INVITEE' => '직속 보고서',
@@ -24,10 +28,10 @@ $mod_strings = array (
   'LBL_LIST_NAME' => '이름',
   'LBL_LIST_LAST_NAME' => '성:',
   'LBL_LIST_PROSPECT_NAME' => '목표고객명',
-  'LBL_LIST_TITLE' => '직함:',
+  'LBL_LIST_TITLE' => '직책',
   'LBL_LIST_EMAIL_ADDRESS' => '이메일',
   'LBL_LIST_OTHER_EMAIL_ADDRESS' => '기타 이메일:',
-  'LBL_LIST_PHONE' => '전화번호:',
+  'LBL_LIST_PHONE' => '전화번호',
   'LBL_LIST_PROSPECT_ROLE' => '역할:',
   'LBL_LIST_FIRST_NAME' => '이름:',
   'LBL_ASSIGNED_TO_NAME' => '담당자:',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => '경칭',
   'LBL_SAVE_PROSPECT' => '목표고객 저장하기',
   'LBL_CREATED_OPPORTUNITY' =>'새로운 영업기회를 추가하였습니다.',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '영업기회를 생성하시려면 거래처를 기입하셔야 합니다.\n 새로운 거래처를 생성하시거나 기존 자료에서 선택해 주세요.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '영업기회를 생성하시려면 거래처를 기입하셔야 합니다.\\n 새로운 거래처를 생성하시거나 기존 자료에서 선택해 주세요.',
   'LNK_SELECT_ACCOUNT' => "거래처 선택하기",
   'LNK_NEW_PROSPECT' => '신규 목표 만들기',
   'LNK_PROSPECT_LIST' => '목표고객 보기',
@@ -189,4 +193,6 @@ $mod_strings = array (
 2. “저장하기”를 클릭하여 새 기록을 완성하고 이전 페이지로 돌아갑니다.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => '대상 보고서',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '동의한 사업 목적',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '동의서 최종 업데이트',
 );

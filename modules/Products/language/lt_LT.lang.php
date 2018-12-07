@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Įvykdyto pasiūlymo eilutės prekių sąrašo ataskaitų sritis',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Campaign Quoted Line Item',
     'LBL_MODULE_NAME' => 'Quoted Line Items',
     'LBL_MODULE_NAME_SINGULAR' => 'Quoted Line Item',
@@ -60,7 +63,7 @@ $mod_strings = array(
     'LBL_TYPE' => 'Tipas:',
     'LBL_CATEGORY' => 'Kategorija:',
     'LBL_QUANTITY' => 'Kiekis:',
-    'LBL_STATUS' => 'Statusas:',
+    'LBL_STATUS' => 'Būsena',
     'LBL_TAX_CLASS' => 'Apmokestinimas:',
     'LBL_MANUFACTURER' => 'Gamintojas:',
     'LBL_MANUFACTURER_NAME' => 'Manufacturer Name:',
@@ -172,4 +175,5 @@ To create a {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Įvykdyto pasiūlymo eilučių prekių ir pasiūlymo duomenų sąrašas',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nauja įvykdyto pasiūlymo eilutės prekė)',
     'LBL_DISCOUNT_PERCENT' => '% Procentai',
+    'LBL_DISCOUNT_TYPE' => 'Nuolaidos tipas',
 );

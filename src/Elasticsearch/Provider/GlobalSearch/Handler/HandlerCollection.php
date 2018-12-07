@@ -13,6 +13,7 @@
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler;
 
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\GlobalSearch;
+use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Exception\HandlerCollectionException;
 
 /**
  *
@@ -49,12 +50,51 @@ class HandlerCollection implements \IteratorAggregate
     }
 
     /**
-     * Add handler
+     * Add handler. Every handler is identified by its name. When adding
+     * a handler which already exists with the same name, the previous
+     * one is replaced by the one which is passed in.
+     *
      * @param HandlerInterface $handler
      */
     public function addHandler(HandlerInterface $handler)
     {
         $handler->setProvider($this->provider);
-        $this->handlers[] = $handler;
+        $this->handlers[$handler->getName()] = $handler;
+    }
+
+    /**
+     * Check if given handler exists
+     * @param string $name
+     */
+    public function hasHandler($name)
+    {
+        return isset($this->handlers[$name]);
+    }
+
+    /**
+     * Remove handler from collection
+     * @param string $name
+     * @throws HandlerCollectionException
+     */
+    public function removeHandler($name)
+    {
+        if (!$this->hasHandler($name)) {
+            throw new HandlerCollectionException("Cannot remove non-existing handler $name");
+        }
+        unset($this->handlers[$name]);
+    }
+
+    /**
+     * Get handler by name
+     * @param string $name
+     * @throws HandlerCollectionException
+     * @return HandlerInterface
+     */
+    public function getHandler($name)
+    {
+        if (!$this->hasHandler($name)) {
+            throw new HandlerCollectionException("Handler $name does not exist");
+        }
+        return $this->handlers[$name];
     }
 }

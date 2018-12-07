@@ -54,8 +54,8 @@ class ElasticsearchIndicesCommand extends Command implements InstanceModeInterfa
 
         if ($result) {
             foreach ($result as $index => $status) {
-                $docs = $status['indices'][$index]['docs']['num_docs'];
-                $size = $status['indices'][$index]['index']['size_in_bytes'];
+                $docs = $status['indices'][$index]['total']['docs']['count'];
+                $size = $status['indices'][$index]['total']['store']['size_in_bytes'];
                 $shards = $status['_shards']['total'];
                 $table->addRow(array($index, $docs, $size, $shards));
             }

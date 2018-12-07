@@ -14,6 +14,8 @@
  * Description:
  ********************************************************************************/
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 global $theme;
 
 
@@ -48,8 +50,9 @@ if(!empty($_REQUEST['parent_id']) && $_REQUEST['parent_id']!="") {
 	sugar_die("You shouldn't be here");
 }
 
-if(!empty($_REQUEST['base_module']) && $_REQUEST['base_module']!="") {
-   $focus->base_module = $_REQUEST['base_module'];
+$base_module = InputValidation::getService()->getValidInputRequest('base_module', 'Assert\Mvc\ModuleName');
+if (!empty($base_module)) {
+    $focus->base_module = $base_module;
 }
 if(!empty($_REQUEST['rel_module1']) && $_REQUEST['rel_module1']!="") {
    $focus->rel_module1 = $_REQUEST['rel_module1'];

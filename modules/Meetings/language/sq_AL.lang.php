@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Paneli i listës së takimeve',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të takimeve',
+
 	'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë mbledhjen',
 	'LBL_ACCEPT_THIS'=>'Prano?',
 	'LBL_ADD_BUTTON'=> 'Shto',
@@ -48,13 +52,13 @@ $mod_strings = array (
 	'LBL_LIST_DUE_DATE'=>'Data e caktuar',
 	'LBL_LIST_FORM_TITLE' => 'Lista e mbledhjeve',
 	'LBL_LIST_MY_MEETINGS' => 'Mbledhjet e mia',
-    'LBL_MY_SCHEDULED_MEETINGS' => 'Takimet e mia të skeduluara',
-	'LBL_LIST_RELATED_TO' => 'në lidhje me',
+    'LBL_MY_SCHEDULED_MEETINGS' => 'Mbledhjet e mia të programuara',
+	'LBL_LIST_RELATED_TO' => 'Në lidhje me',
 	'LBL_LIST_STATUS'=>'Statusi',
 	'LBL_LIST_SUBJECT' => 'Subjekti',
 	'LBL_LIST_TIME' => 'Ora e nisjes',
 	'LBL_LEADS_SUBPANEL_TITLE' => 'Udhëheqjet',
-	'LBL_LOCATION' => 'Lokacioni',
+	'LBL_LOCATION' => 'Vendndodhja:',
 	'LBL_MEETING' => 'Mbledhje',
 	'LBL_MINSS_ABBREV' => 'm',
 	'LBL_MODIFIED_BY'=>'Modifikuar nga',

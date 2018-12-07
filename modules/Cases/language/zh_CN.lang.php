@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => '客户反馈列表仪表板',
+    'LBL_CASES_RECORD_DASHBOARD' => '客户反馈记录仪表板',
+
 	'ERR_DELETE_RECORD'					=> '必须指定记录编号才能删除帐户。',
 	'LBL_ACCOUNT_ID'					=> '帐户 ID',
 	'LBL_ACCOUNT_NAME'					=> '客户名称:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> '状态:',
     'LBL_SOURCE' => '来源:',
 	'LBL_SUBJECT'						=> '主题:',
-	'LBL_SYSTEM_ID'						=> '系统编号',
 	'LBL_LIST_ACCOUNT_NAME'				=> '账户名称',
 	'LBL_LIST_ASSIGNED'					=> '负责人',
 	'LBL_LIST_CLOSE'					=> '关闭',

@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
+
 class EmployeesViewDetail extends ViewDetail {
    /**
     * Return the "breadcrumbs" to display at the top of the page
@@ -67,10 +69,11 @@ EOHTML;
     }
 
  	function display() {
+        $idpConfig = new IdmConfig(\SugarConfig::getInstance());
        	if(is_admin($GLOBALS['current_user']) || $_REQUEST['record'] == $GLOBALS['current_user']->id) {
 			 $this->ss->assign('DISPLAY_EDIT', true);
         }
-        if(is_admin($GLOBALS['current_user'])){
+        if (is_admin($GLOBALS['current_user']) && !$idpConfig->isIDMModeEnabled()) {
  			$this->ss->assign('DISPLAY_DUPLICATE', true);
  		}
 

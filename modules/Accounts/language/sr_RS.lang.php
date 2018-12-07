@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Ponude (za isporuku)',
 	'LNK_ACCOUNT_REPORTS' => 'Prikaži izveštaje kompanije',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenta',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Kontrolna tabla liste naloga',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa naloga',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Dijagrami',
 	'LBL_DEFAULT' => 'Pregledi',

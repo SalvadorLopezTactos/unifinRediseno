@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Tableau de bord de la liste d&#39;affaires',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement d&#39;affaires',
+
     'LBL_MODULE_NAME' => 'Affaires',
     'LBL_MODULE_NAME_SINGULAR' => 'Affaire',
     'LBL_MODULE_TITLE' => 'Affaires',
@@ -182,25 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Une fois que vous avez lancé cette modification, des enregistrements de ligne de revenu seront créés pour chaque module {{module_name}} existant en tâche de fond. Lorsque les lignes de revenu seront complètes et disponibles, une notification sera envoyée à l&#39;adresse email de votre profil utilisateur. Veuillez noter que votre instance doit être configurée pour envoyer un email via Admin > Configuration email pour que la notification soit envoyée.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Le module {{plural_module_name}} vous permet de suivre les ventes individuelles de bout en bout. Chaque enregistrement de {{module_name}} représente une vente future et inclut les données de vente correspondantes et associées à d&#39;autres documents importants tels que {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} progressera normalement parmi diverses étapes de vente jusqu&#39;à ce qu&#39;elles soient marquées comme « Ventes clôturées et gagnées » ou « Ventes clôturées et perdues ». {{plural_module_name}} peuvent être exploitées encore davantage à l&#39;aide du module {{forecasts_singular_module}} de Sugar pour comprendre et prédire l&#39;évolution des ventes et pour mieux cibler les efforts afin d&#39;atteindre les quotas de vente.',
+    'LBL_HELP_RECORDS' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles du début jusqu&#39;à la fin. Chaque enregistrement de {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} progressera typiquement à travers plusieurs phases de vente jusqu&#39;à être marqué « Gagné » ou « Perdu ». {{plural_module_name}} peut être exploité encore d&#39;avantage en utilisant le module de {{forecasts_singular_module}} de Sugar pour comprendre et prédire des tendances de vente ainsi que pour axer le travail sur l&#39;atteinte de quotas de vente.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre les ventes individuelles ainsi que les articles associés à ces ventes de bout en bout. Chaque enregistrement de {{module_name}} représente une vente future et inclut les données de vente correspondantes et associées à d&#39;autres documents importants tels que {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les articles associés à celles-ci depuis le début jusqu&#39;à la fin. Chaque enregistrement {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. 
 
- - Modifier les champs de l&#39;enregistrement en cliquant sur un champ individuel ou sur la touche Éditer. 
-- Afficher ou modifier des liens vers d&#39;autres enregistrements dans les sous-panels en activant/désactivant le volet en bas à gauche sur « Voir les données ». 
-- Saisir et voir les commentaires des utilisateurs et l&#39;historique des modifications de l&#39;enregistrement dans {{activitystream_singular_module}} en activant/désactivant le volet en bas à gauche sur « Flux d&#39;activités ». 
-- Suivre ou mettre en favori cet enregistrement à l&#39;aide des icônes à droite du nom de l&#39;enregistrement. 
-- D&#39;autres actions sont disponibles dans le menu déroulant Actions à droite de la touche Éditer.',
+- Éditez les champs de cet enregistrement en cliquant sur un champ individuel ou sur le bouton Éditer.
+- Visualisez ou modifiez des liens à d&#39;autres enregistrements dans les sous-panneaux en changeant le panneau en bas à gauche à « Vue des données ».
+- Créez et visualisez des commentaires d&#39;utilisateur et enregistrez l&#39;historique de changements dans le {{activitystream_singular_module}} en changeant le panneau en bas à gauche à « Flux d&#39;activité ».
+- Suivez ou ajoutez à favoris cet enregistrement à l&#39;aide des icônes à la droite du nom de l&#39;enregistrement.
+- Des actions supplémentaires sont disponibles dans le menu déroulant d&#39;Actions à la droite du bouton Éditer.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre les ventes individuelles ainsi que les articles associés à ces ventes de bout en bout. Chaque enregistrement de {{module_name}} représente une vente future et inclut les données de vente correspondantes et associées à d&#39;autres documents importants tels que {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'Le module {{plural_module_name}} vous permet de suivre des ventes individuelles et les articles associés à celles-ci depuis le début jusqu&#39;à la fin. Chaque enregistrement {{module_name}} représente une vente potentielle et inclut des données de vente pertinentes ainsi que des données liées à d&#39;autres enregistrements importants tels que {{quotes_module}}, {{contacts_module}}, etc. 
 
-Pour créer un enregistrement {{module_name}}, les étapes suivantes sont nécessaires :
-1. Remplir les champs souhaités.
- - Les champs identifiés comme "Obligatoire" doivent être complétés avant la sauvegarde.
- - Cliquer sur "Voir plus" pour afficher plus de champs, si nécessaire.
-2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
+Pour créer un {{module_name}} :
+1. Remplissez les champs souhaités.
+- Les champs marqués « Obligatoire » doivent être remplis avant la sauvegarde.
+- Cliquez sur « Voir plus » pour afficher des champs supplémentaires, si nécessaire.
+2. Cliquez sur « Sauvegarder » pour finaliser le nouvel enregistrement et retourner à la page précédente.',
 
 // END ENT/ULT
 

@@ -8,19 +8,20 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*global Field, $, document, Element*/
+/*global PMSE.Field, $, document, PMSE.Element*/
+var PMSE = PMSE || {};
 /**
  * @class TextField
  * Handle text input fields
- * @extend Field
+ * @extends PMSE.Field
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
 var TextField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     /**
      * Defines the maximum number of characters supported
      * @type {Number}
@@ -28,7 +29,7 @@ var TextField = function (options, parent) {
     this.maxCharacters = null;
     TextField.prototype.initObject.call(this, options);
 };
-TextField.prototype = new Field();
+TextField.prototype = new PMSE.Field();
 
 /**
  * Defines the object's type
@@ -69,7 +70,7 @@ TextField.prototype.setMaxCharacters = function (value) {
  */
 TextField.prototype.createHTML = function () {
     var fieldLabel, textInput, required = '', readAtt;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     if (this.required) {
         required = '<i>*</i> ';
@@ -132,15 +133,15 @@ TextField.prototype.attachListeners = function () {
 /**
  * @class ComboboxField
  * Handles drop down fields
- * @extend Field
+ * @extends PMSE.Field
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
 var ComboboxField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     /**
      * Defines the combobox options
      * @type {Array}
@@ -150,7 +151,7 @@ var ComboboxField = function (options, parent) {
     this._isValid = true;
     ComboboxField.prototype.initObject.call(this, options);
 };
-ComboboxField.prototype = new Field();
+ComboboxField.prototype = new PMSE.Field();
 
 /**
  * Defines the object's type
@@ -222,7 +223,7 @@ ComboboxField.prototype.setRelated = function (data) {
  */
 ComboboxField.prototype.createHTML = function () {
     var fieldLabel, selectInput, required = '', opt, i, disableAtt;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     if (this.required) {
         required = '<i>*</i> ';
@@ -343,19 +344,19 @@ ComboboxField.prototype.decorateValid = function() {
 /**
  * @class TextareaField
  * Handles TextArea fields
- * @extend Field
+ * @extends PMSE.Field
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
 var TextareaField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     this.fieldHeight = null;
     TextareaField.prototype.initObject.call(this, options);
 };
-TextareaField.prototype = new Field();
+TextareaField.prototype = new PMSE.Field();
 
 /**
  * Defines the object's type
@@ -387,7 +388,7 @@ TextareaField.prototype.setFieldHeight = function (height) {
  */
 TextareaField.prototype.createHTML = function () {
     var fieldLabel, textInput, required = '', readAtt;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     if (this.required) {
         required = '<i>*</i> ';
@@ -462,15 +463,15 @@ TextareaField.prototype.attachListeners = function () {
 /**
  * @class CheckboxField
  * Handles the checkbox fields
- * @extend Field
+ * @extends PMSE.Field
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
 var CheckboxField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     this.defaults = {
         //options: {},
         onClick: function (e, ui) {}
@@ -478,7 +479,7 @@ var CheckboxField = function (options, parent) {
     $.extend(true, this.defaults, options);
 };
 
-CheckboxField.prototype = new Field();
+CheckboxField.prototype = new PMSE.Field();
 
 /**
  * Defines the object's type
@@ -491,7 +492,7 @@ CheckboxField.prototype.type = 'CheckboxField';
  */
 CheckboxField.prototype.createHTML = function () {
     var fieldLabel, textInput, required = '', readAtt;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     if (this.required) {
         required = '<i>*</i> ';
@@ -581,26 +582,22 @@ CheckboxField.prototype.evalRequired = function () {
     var response = true;
     if (this.required) {
         response = this.value;
-        if (!response) {
-            $(this.controlObject).addClass('required');
-        } else {
-            $(this.controlObject).removeClass('required');
-        }
+        this.markFieldError(!response);
     }
     return response;
 };
 /**
  * @class RadiobuttonField
  * Handles the radio button fields
- * @extend Field
+ * @extends PMSE.Field
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
 var RadiobuttonField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     this.defaults = {
         options: {},
         onClick: function (e, ui) {}
@@ -608,7 +605,7 @@ var RadiobuttonField = function (options, parent) {
     $.extend(true, this.defaults, options);
     //RadiobuttonField.prototype.initObject.call(this, options);
 };
-RadiobuttonField.prototype = new Field();
+RadiobuttonField.prototype = new PMSE.Field();
 
 /**
  * Defines the object's type
@@ -623,7 +620,7 @@ RadiobuttonField.prototype.type = 'RadiobuttonField';
  */
 RadiobuttonField.prototype.createHTML = function () {
     var fieldLabel, textInput, required = '', readAtt;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     if (this.required) {
         required = '<i>*</i> ';
@@ -724,11 +721,7 @@ RadiobuttonField.prototype.evalRequired = function () {
     var response = true;
     if (this.required) {
         response = this.value;
-        if (!response) {
-            $(this.controlObject).addClass('required');
-        } else {
-            $(this.controlObject).removeClass('required');
-        }
+        this.markFieldError(!response);
     }
     return response;
 };
@@ -743,15 +736,15 @@ RadiobuttonField.prototype._setValueToControl = function (value) {
 /**
  * @class LabelField
  * Handles the Label fields
- * @extend Field
+ * @extends PMSE.Field
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
 var LabelField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     this.submit = false;
     this.defaults = {
         options: {
@@ -760,7 +753,7 @@ var LabelField = function (options, parent) {
     };
     $.extend(true, this.defaults, options);
 };
-LabelField.prototype = new Field();
+LabelField.prototype = new PMSE.Field();
 
 /**
  * Defines the object's type
@@ -775,7 +768,7 @@ LabelField.prototype.type = 'LabelField';
  */
 LabelField.prototype.createHTML = function () {
     var fieldLabel;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     fieldLabel = this.createHTMLElement('span');
 //    fieldLabel.className = 'adam-form-label';
@@ -790,17 +783,17 @@ LabelField.prototype.createHTML = function () {
 /**
  * @class HiddenField
  * Handle the hidden fields
- * @extend Field
+ * @extends PMSE.Field
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
 var HiddenField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
 };
-HiddenField.prototype = new Field();
+HiddenField.prototype = new PMSE.Field();
 
 /**
  * Defines the object's type
@@ -814,32 +807,32 @@ HiddenField.prototype.type = 'HiddenField';
  * @return {HTMLElement}
  */
 HiddenField.prototype.createHTML = function () {
-    Element.prototype.createHTML.call(this);
+    PMSE.Element.prototype.createHTML.call(this);
     return this.html;
 };
 
 //
 
 var EmailGroupField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
 };
 
-EmailGroupField.prototype = new Field();
+EmailGroupField.prototype = new PMSE.Field();
 
 EmailGroupField.prototype.type = 'EmailGroupField';
 
 /**
  * @class DateField
  * Handle text input fields
- * @extend Field
+ * @extends PMSE.Field
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
 var DateField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     /**
      * Defines the maximum number of characters supported
      * @type {Number}
@@ -847,7 +840,7 @@ var DateField = function (options, parent) {
     this.maxCharacters = null;
     DateField.prototype.initObject.call(this, options);
 };
-DateField.prototype = new Field();
+DateField.prototype = new PMSE.Field();
 
 /**
  * Defines the object's type
@@ -884,7 +877,7 @@ DateField.prototype.setMaxCharacters = function (value) {
  */
 DateField.prototype.createHTML = function () {
     var fieldLabel, textInput, required = '', readAtt;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     if (this.required) {
         required = '<i>*</i> ';
@@ -950,7 +943,7 @@ DateField.prototype.attachListeners = function () {
     return this;
 };
 DateField.prototype.disable = function () {
-    Field.prototype.disable.call(this);
+    PMSE.Field.prototype.disable.call(this);
     $(this.controlObject).datepicker('hide');
     return this;
 };
@@ -958,15 +951,15 @@ DateField.prototype.disable = function () {
 /**
  * @class NumberField
  * Handle text input fields
- * @extend Field
+ * @extends PMSE.Field
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
 var NumberField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     /**
      * Defines the maximum number of characters supported
      * @type {Number}
@@ -974,7 +967,7 @@ var NumberField = function (options, parent) {
     this.maxCharacters = null;
     NumberField.prototype.initObject.call(this, options);
 };
-NumberField.prototype = new Field();
+NumberField.prototype = new PMSE.Field();
 
 /**
  * Defines the object's type
@@ -1011,7 +1004,7 @@ NumberField.prototype.setMaxCharacters = function (value) {
  */
 NumberField.prototype.createHTML = function () {
     var fieldLabel, textInput, required = '', readAtt;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     if (this.required) {
         required = '<i>*</i> ';
@@ -1068,47 +1061,39 @@ NumberField.prototype.attachListeners = function () {
             .change(function () {
                 self.setValue(this.value, true);
                 self.onChange();
-            })
-            .keydown(function (e) {
-                e.stopPropagation();
             });
     }
-
-    $(this.controlObject).on('keydown', function (event) {
-        event.stopPropagation();
-        // Allow: backspace, delete, tab, escape, and enter
-        if (event.keyCode === 46 || event.keyCode === 8 || event.keyCode === 9 || event.keyCode === 27 || event.keyCode === 13 ||
-            // Allow: Ctrl+A
-            (event.keyCode === 65 && event.ctrlKey === true) ||
-            // Allow: home, end, left, right
-            (event.keyCode >= 35 && event.keyCode <= 39)) {
-            // let it happen, don't do anything
-
-            return;
-        } else {
-            // Ensure that it is a number and stop the keypress
-            if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105)) {
-                event.preventDefault();
-            }
-        }
-    }).on('keyup', function (e) {
-        e.stopPropagation();
-    });
     return this;
+};
+
+/**
+ * Validates a number field
+ * @return {boolean}
+ */
+NumberField.prototype.isValid = function() {
+    // Start with a true return
+    var valid = true;
+    // If this field is required, check whether it is numeric
+    if (this.required && !$.isNumeric(this.value)) {
+        // If not, mark it invalid and mark a field error
+        valid = false;
+        this.markFieldError(!valid);
+    }
+    return valid;
 };
 
 /**
  * @class CheckboxGroup
  * Handles the checkbox fields
- * @extend Field
+ * @extends PMSE.Field
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
 var CheckboxGroup = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
 //    this.defaults = {
 //        options: {},
 //        onClick: function (e, ui) {}
@@ -1118,7 +1103,7 @@ var CheckboxGroup = function (options, parent) {
     CheckboxGroup.prototype.initObject.call(this, options);
 };
 
-CheckboxGroup.prototype = new Field();
+CheckboxGroup.prototype = new PMSE.Field();
 
 /**
  * Defines the object's type
@@ -1145,7 +1130,7 @@ CheckboxGroup.prototype.initObject = function (options) {
 CheckboxGroup.prototype.createHTML = function () {
     var fieldLabel, input, required = '', readAtt, div, i, text, ul, li, root = this, object;
     //this.controlObject.control = [];
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     if (this.required) {
         required = '<i>*</i> ';
@@ -1276,17 +1261,13 @@ CheckboxGroup.prototype.getObjectValue = function () {
 CheckboxGroup.prototype.evalRequired = function () { var response = true;
     if (this.required) {
         response = this.value;
-        if (!response) {
-            $(this.controlObject).addClass('required');
-        } else {
-            $(this.controlObject).removeClass('required');
-        }
+        this.markFieldError(!response);
     }
     return response;
 };
 
 var SearchableCombobox = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     this._placeholder = null;
     this._pageSize = null;
     this._valueField = null;
@@ -1303,7 +1284,7 @@ var SearchableCombobox = function (options, parent) {
     SearchableCombobox.prototype.initObject.call(this, options, parent);
 };
 
-SearchableCombobox.prototype = new Field();
+SearchableCombobox.prototype = new PMSE.Field();
 SearchableCombobox.prototype.constructor = SearchableCombobox;
 SearchableCombobox.prototype.type = "SearchableCombobox";
 
@@ -1671,7 +1652,7 @@ SearchableCombobox.prototype.attachListeners = function () {
 
 SearchableCombobox.prototype.createHTML = function () {
     var fieldLabel, textInput, required = '', readAtt;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     if (this.required) {
         required = '<i>*</i> ';

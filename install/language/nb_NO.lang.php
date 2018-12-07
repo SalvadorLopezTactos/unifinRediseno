@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> 'Denne spørringen vil stables under den første spørringen i rapporten',
     'ERR_DB_VERSION_FAILURE'			=> 'Kan ikke sjekke databaseversjonen.',
 
-
-	'ERR_OC_PASSWORD'					=> 'Passord kreves.',
-	'ERR_OC_SERVER_URL'					=> 'Sugar serveradresse kreves.',
-	'ERR_OC_USERNAME'					=> 'Brukernavnet til serverbrukeren kreves.',
-	'LBL_INSTALL_OC'					=> 'Installer offline-klient',
-    'LBL_OC_ADMIN'                      => 'Kontakt administrator for å løse dette problemet.',
-    'LBL_OC_SUCCESS'                    => 'Installasjon av offline-klienten er fullført. Klikk på knappen nedenfor for å bli tatt til installasjonen.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'Administrators brukernavn',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'Angi informasjonen nedenfor for å riktig installere og synkronisere offline-klienten din.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'Sugar-serveradressen',
-	'LBL_OC_INSTALL_PASS'				=> 'Passord for serverbrukeren',
-	'LBL_OC_INSTALL_TITLE'				=> 'Installasjon av offline-klient',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'Dette er brukernavnet du vil koble til Sugar-serveren din med.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'Brukernavn',
-	'LBL_PERFORM_OC_INSTALL'			=> 'Starter installasjon av offline-klienten',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'Angi informasjonen nedenfor for å riktig installere og synkronisere offline-klienten din.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Oppgi brukernavn for Sugar-administratoren. ',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Oppgi passordet for Sugar-administratoren. ',
@@ -76,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Feil ble funnet under kompatibilitetskontrollen.  For at SugarCRM-installasjonenen skal fungere riktig, utfører du de passende tiltakene for å løse problemene nedenfor, og trykker enten på knappe «sjekk på nytt» eller prøv å installere på nytt.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Tillat Call Time Pass Reference er på (dette bør settes til av i php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Finner ikke: Sugar Scheduler vil kjøres med begrenset funksjonalitet. Tjenesten for e-postarkivering vil ikke kjøre.',
+	'ERR_CHECKSYS_CURL'					=> 'Ikke funnet: Sugar Scheduler vil kjøre med begrenset funksjonalitet. E-postarkiveringstjenesten vil ikke kjøre.',
     'ERR_CHECKSYS_IMAP'					=> 'Finner ikke: InnkommendeE-post og kampanjer (e-post) krever IMAP-bibliotek. Ingen av dem kommer til å være funksjonell.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC kan ikke slås «På» når du bruker MS SQL Server.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Advarsel: ',
@@ -92,7 +75,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'For den optimale bruken av IIS/FastCGI sapi, angi fastcgi.logging til 0 i php.ini-filen.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Ikke-støttet PHP-versjon installert: (ver',
     'LBL_DB_UNAVAILABLE'                => 'Databasen er utilgjengelig',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Finner ikke databasestøtte.  Kontroller at du har de nødvendige driverne for en av følgende støttede databasetyper: MySQL, MS SQLServer, Oracle eller DB2.  Du må kanskje fjerne utvidelsen i filen php.ini eller rekompilere med riktig binærfil, avhengig av din versjon av PHP.  Se PHP-brukerhåndboken for mer informasjon om hvordan du aktiverer databasestøtte.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databasestøtte ble ikke funnet. Sørg for at du har nødvendige drivere for en av følgende støttede databasetyper: MySQL, MS SQLServer, Oracle eller DB2. Du må kanskje fjerne kommentering av utvidelsen i php.ini-filen, eller rekompilere med rett binær fil, avhengig av din versjon av PHP. Se din PHP-håndbok for mer informasjon om hvordan du aktiverer databasestøtte.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Finner ikke funksjonene tilknyttet XML-analysebibliotekene som Sugar-programmet trenger. Du må kanskje avkommentere utvidelsen i php.ini-filen, eller omkompilere med rett binærfil, avhengig av din  PHP-versjon. Se PHP-veiledningen for mer informasjon.',
     'LBL_CHECKSYS_CSPRNG' => 'Slumptallsgeneratoren',
     'ERR_CHECKSYS_MBSTRING'             => 'Funksjoner knyttet til Multibyte Strings PHP-forlengelsen (mbstring) som Sugar-programmet trenger ble ikke funnet. <br/> <br/> Vanligvis er ikke mbstring-modulen aktivert som standard i PHP, og må aktiveres med --enable-mbstring når PHP binære bygges. Se PHP-veiledningen for mer informasjon om hvordan du aktiverer mbstring-støtte.',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'Filstørrelse for opplasting',
 	'ERR_URL_BLANK'						=> 'Angi den grunnleggende URL-en for Sugar-instansen.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'Kunne ikke finne installasjonsregistreringen for',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'Den oppladede filen er ikke kompatibel med denne flavor (Samfunnsutgave, Profesjonell eller Virksomhet) av Sugar:',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'Den opplastede filen med denne smaken (Professional, Enterprise eller Ultimate-utgave) av sukker: ',
 	'ERROR_LICENSE_EXPIRED'				=> "Feil: Din lisens har utgått",
 	'ERROR_LICENSE_EXPIRED2'			=> " dag(er) siden.  Gå til <a href='index.php?action=LicenseSettings&module=Administration'>'«Lisensbehandling»</a> på Admin-skjermen for å angi den nye lisensnøkkelen. Hvis du ikke angir en ny lisensnøkkel innen 30 dager etter lisensnøkkelens utløpsdato, vil du ikke lenger kunne logge på dette programmet.",
 	'ERROR_MANIFEST_TYPE'				=> 'Manifest-filen må angi pakketypen.',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'Utløpsdato',
 	'LBL_LICENSE_I_ACCEPT'				=> 'Jeg godtar',
 	'LBL_LICENSE_NUM_USERS'				=> 'Antall brukere',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'Angi antall kjøpte offline-klienter.',
-	'LBL_LICENSE_OC_NUM'				=> 'Antall lisenser for Offline-klienter',
-	'LBL_LICENSE_OC'					=> 'Offline-klientlisenser',
 	'LBL_LICENSE_PRINTABLE'				=> ' Utskriftsvennlig visning ',
     'LBL_PRINT_SUMM'                    => 'Skriv ut sammendraget',
 	'LBL_LICENSE_TITLE_2'				=> 'SugarCRM-lisens',
@@ -496,10 +476,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'Sammenligningsinnstillinger',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Angi et systemnavn for Sugar-instansen.',
 	'LBL_PATCH_UPLOAD' => 'Velg en oppdateringsfil fra den lokale datamaskinen',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'PHP versjon 5 eller nyere er nødvendig.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(Din nåværende php versjon er',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP-bakoverkompatibilitetsmodus er aktivert. Angi zend.ze1_compatibility_mode til Av for å fortsette',
 
     'advanced_password_new_account_email' => array(
@@ -531,5 +507,3 @@ $contact_user_link_guid',
         'name' => 'E-post om glemt passord',
         ),
 );
-
-?>

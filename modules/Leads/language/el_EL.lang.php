@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Δυνητικών Πελατών',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Δυνητικών Πελατών',
+
     'ERR_DELETE_RECORD' => 'Πρέπει να προσδιορίσετε αριθμό εγγραφής για να διαγράψετε τον δυνητικό πελάτη.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Περιγραφή Λογαριασμού',
     'LBL_ACCOUNT_ID'=>'Ταυτότητα Λογαριασμού',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Ποσό Ευκαιρίας:',
     'LBL_OPPORTUNITY_ID'=>'Ταυτότητα Ευκαιρίας',
     'LBL_OPPORTUNITY_NAME' => 'Όνομα Ευκαιρίας:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Άλλο Email:',
     'LBL_OTHER_PHONE' => 'Άλλο Τηλέφωνο:',
     'LBL_PHONE' => 'Τηλέφωνο:',
@@ -314,4 +320,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'Αποτέλεσμα Δυνητικού',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Αναφορές Δυνητικών Πελατών',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Επαγγελματικοί σκοποί για τους οποίους δώσατε τη συγκατάθεσή σας',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Τελευταία ανανέωση συγκατάθεσης',
 );

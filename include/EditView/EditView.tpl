@@ -194,7 +194,7 @@ class="yui-navset"
 
 		{{$colData.field.prefix}}
 		{{if !empty($colData.field.name)}}
-			{if $fields.{{$colData.field.name}}.acl > 1 && $fields.{{$colData.field.name}}.locked == false}
+            {if $fields.{{$colData.field.name}}.acl > 1 && $fields.{{$colData.field.name}}.locked == false && $fields.{{$colData.field.name}}.disabled == false}
 		{{/if}}
 
 			{{if $fields[$colData.field.name] && !empty($colData.field.fields) }}

@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Dashboard Offertelijst',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Dashboard Offerterecord',
+
     'LBL_CONTRACTS'=>'Contracten',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contracten',
     'ERR_DELETE_RECORD' => 'U dient een record te selecteren om de offerte te kunnen verwijderen.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Subtotaal (USD)',
     'LBL_SUBTOTAL' => 'Subtotaal:',
     'LBL_TAXABLE_SUBTOTAL' => 'Belastbaar subtotaal',
-    'LBL_SYSTEM_ID' => 'Systeem ID',
     'LBL_TAX_USDOLLAR'=>'BTW (USD)',
     'LBL_TAX' => 'BTW:',
     'LBL_TAX_TOTAL' => 'Totaal BTW',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Selectie verwijderen',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Geselecteerde items verwijderen',
     'LBL_SAVE_LINE_ITEMS' => 'Sla eventuele actieve regelitems op door op het blauwe vinkje te klikken naast elk selectievakje voordat u deze offerte opslaat.',
+    'LBL_COPY_LINE_ITEMS' => 'Sla eventuele actieve regelitems op door op het blauwe vinkje te klikken naast elk selectievakje voordat u deze offerte kopieert.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Zoeken in de productcatalogus',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Geen gegevens beschikbaar',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Geoffreerde regelitems gekopieerd naar nieuwe offerte.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Geoffreerde regelitems kopiëren naar nieuwe offerte. Dit proces kan enige tijd in beslag nemen.',
 );

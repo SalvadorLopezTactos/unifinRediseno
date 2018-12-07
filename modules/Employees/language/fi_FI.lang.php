@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => 'Poistettu',
   'LBL_EMAIL_ADDRESS'=>'Sähköpostiosoite',
   'LBL_CONTACTS_SYNC' => 'Kontaktit',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        'Työntekijän voi luoda vain <a href="{0}" target="_blank">Cloud-konsolissa</a> IDM-tilaa varten.',
 );
 
 

@@ -12,7 +12,7 @@
 --}}
 <div class="block preview-data">
     <!-- Preview -->
-    <div style="padding-bottom: 30px">
+    <div class="process-design">
         <div class="thumbnail dashlet ui-draggable" data-type="dashlet" data-action="droppable">
             <div data-dashlet="toolbar"><div class="dashlet-header">
                 <div class="btn-toolbar pull-right">
@@ -44,7 +44,7 @@
 
 {{#each meta.panels}}
 {{#each fields}}
-    <div class="field-row{{#if ../hide}}{{#if ../../../hidePanel}} hide{{/if}} panel_hidden{{/if}}">
+    <div class="record-cell field-row{{#if ../hide}}{{#if ../../../hidePanel}} hide{{/if}} panel_hidden{{/if}}">
         <div class="field-label ellipsis_inline" data-name="{{name}}">{{str  label ../../model.module}}</div>
         <div class="field-value record-cell" data-type="{{type}}" name="{{name}}" data-name="{{name}}">
             {{field ../../this model=../../model template="preview"}}

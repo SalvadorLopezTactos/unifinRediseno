@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Süreç Tanımı',
   'LBL_MODULE_TITLE' => 'Süreç Tanımı',
   'LBL_MODULE_NAME_SINGULAR' => 'Süreç Tanımı',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'eşit değil:',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'değildir',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'eşit değil',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Çalışma Zamanı',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Ekle',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Kapat',

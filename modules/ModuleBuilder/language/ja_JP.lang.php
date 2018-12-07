@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'本当にこの関連を削除してよいですか？',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'この関連付けを永続化します。本当にこの関連付けを配置してよいですか？',
 'LBL_CONFIRM_DONT_SAVE' => '最後に保存された状態から変更が加えられています。保存しますか？',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'フィールドを全文検索可能に設定します。',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'ブースティングとは、レコード\\のフィールドの関連性を強化するプロセスです。 <br /> 高いブーストレベルのフィールドは検索が実行される際に、より重きを置かれます。検索が実行される際、より重きを置かれたフィールドを含む一致レコードは検索結果での表示順が上になります。<br /> デフォルト値は 1.0 で、これは中間のブーストを示します。プラスのブーストを適用するには、1 より大きい浮動小数点値が許容されます。マイナスのブーストを適用するには、1 より小さい値を使用します。例として、1.35 の値はフィールドに 135% プラスのブーストを与えます。0.60 の値を使用すると、マイナスのブーストが適用されます。 <br /> これまでのバージョンでは全文検索のインデックス再生成が必要だったことに注意してください。これはもう必要ありません。',
 'LBL_POPHELP_IMPORTABLE'=>'<b>はい</b>: インポート時にこのフィールドを含めます。<br><b>いいえ</b>: インポート時にこのフィールドを含めません。<br><b>必須</b>: フィールドの値はどのようなインポートでも入力しなければいけません。',
+'LBL_POPHELP_PII'=>'このフィールドは自動的に監査用にマークされ、個人情報ビューで利用できます。<br>個人情報フィールドは、レコードがデータプライバシー消去要求に関連付けられているときにも永続的に消去される可能性があります。<br>消去はデータプライバシーモジュールを介して実行され、データプライバシーマネージャー役割の管理者またはユーザが実行できます。',
 'LBL_POPHELP_IMAGE_WIDTH'=>'幅をピクセルで入力してください。<br>アップロードした画像はこの数値で伸縮されます。',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'高さをピクセルで入力してください。<br>アップロードした画像はこの数値で伸縮されます。',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

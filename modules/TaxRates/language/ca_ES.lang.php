@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Per suprimir el tipus d&#39;impost, heu d&#39;especificar un número de registre.',
   'NTC_STATUS' => 'Estableixi l´estat a Inactiu per eliminar aquest tipus d´impost de les llistes desplegables de Tipus d´Impost',
   'NTC_LIST_ORDER' => 'Estableixi l´ordre en el qual aquest tipus d´impost apareixerà en les llistes desplegables de Tipus d´Impost',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Actiu',
-    'Inactive' => 'Inactiu',
-  ),
   'LBL_EDITLAYOUT' => 'Editar disseny' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Creat per ID',
   'LBL_MODIFIED_ID'=>'Modificat per ID',

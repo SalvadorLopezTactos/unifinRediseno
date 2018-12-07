@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Un ID doit être spécifié pour toute suppression.',
   'NTC_STATUS' => 'Utilisez le status à "Inactif" pour supprimer ce transporteur',
   'NTC_LIST_ORDER' => 'Ordre dans lequel ce transporteur va apparaîtra dans la liste des transporteurs',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Actif',
-    'Inactive' => 'Inactif',
-),
-	'LBL_EDITLAYOUT' => 'Éditer la mise en page' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Éditer la mise en page' /*for 508 compliance fix*/,
 );
-
 
 ?>

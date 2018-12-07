@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Audit\EventRepository;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
+use Sugarcrm\Sugarcrm\Security\Subject\Formatter;
 
 class ModuleApi extends SugarApi {
 
@@ -25,6 +29,28 @@ class ModuleApi extends SugarApi {
     protected $disabledUpdateFields = array(
         'deleted',
     );
+
+    /**
+     * is IDM mode auth provider enabled?
+     * @var bool
+     */
+    protected $isIDMModeEnabled;
+
+    /**
+     * What modules will be filtered if IDM mode is enabled?
+     * @var array
+     */
+    protected $idmModeDisabledModules;
+
+    /**
+     * constructor
+     */
+    public function __construct()
+    {
+        $idpConfig =  new Config(\SugarConfig::getInstance());
+        $this->isIDMModeEnabled = $idpConfig->isIDMModeEnabled();
+        $this->idmModeDisabledModules = $idpConfig->getIDMModeDisabledModules();
+    }
 
     public function registerApiRest() {
         return array(
@@ -92,7 +118,155 @@ class ModuleApi extends SugarApi {
                 'shortHelp' => 'This method returns enum values for a specified field',
                 'longHelp' => 'include/api/help/module_enum_get_help.html',
             ),
+            'pii' => array(
+                'reqType' => 'GET',
+                'path' => array('<module>','?', 'pii'),
+                'pathVars' => array('module','record', 'pii'),
+                'minVersion' => '11.1',
+                'method' => 'getPiiFields',
+                'shortHelp' => 'Returns pii fields',
+                'longHelp' => 'include/api/help/module_record_pii_help.html',
+            ),
         );
+    }
+
+    /**
+     * This method returns the pii fields of a given record
+     *
+     * @param ServiceBase $api
+     * @param array $args
+     * @return array
+     */
+    public function getPiiFields(ServiceBase $api, array $args)
+    {
+        $this->requireArgs($args, array('module','record'));
+
+        $bean = $this->loadBean($api, $args, 'view');
+        //get the list of pii fields
+        $piiFields = array_keys($bean->getFieldDefinitions('pii', array(true)));
+        $filter = $this->getFieldsFromArgs($api, $args);
+        if (count($filter) > 0) {
+            $piiFields = array_intersect($piiFields, $filter);
+        }
+        $args['fields'] = $piiFields;
+
+        $data = $this->formatBeanAfterSave($api, $args, $bean);
+
+        $eventRepo = Container::getInstance()->get(EventRepository::class);
+        $events = $this->formatSourceSubject(
+            $eventRepo->getLatestBeanEvents(
+                $bean,
+                $piiFields
+            )
+        );
+
+        $fields = [];
+
+        $eventsByField = array_combine(array_column($events, 'field_name'), $events);
+        foreach ($piiFields as $field) {
+            if ($field !== 'email' && isset($data[$field])) {
+                $fields[] = $this->mergeFieldWithEvent($field, $data[$field], $eventsByField[$field] ?? null);
+            }
+        }
+
+        if (in_array('email', $piiFields)) {
+            $fields = array_merge($fields, $this->mergeEmailFieldsWithEvents($data['email'] ?? null, $events));
+        }
+
+        $return = ['fields' => $fields, '_acl' => $data['_acl'],];
+        if (isset($data['_erased_fields'])) {
+            $return['_erased_fields'] = $data['_erased_fields'];
+        }
+
+        return $return;
+    }
+
+    private function mergeFieldWithEvent($field, $value, $event)
+    {
+        global $timedate;
+        $item = [
+            'field_name' => $field,
+            'value' => $value,
+            'date_modified' => null,
+            'event_type' => null,
+            'source' => null,
+        ];
+
+        if ($event !== null) {
+            $dateModified = $timedate->asIso(
+                $timedate->fromDbType($event['date_created'], 'datetime')
+            );
+            $item = array_merge(
+                $item,
+                [
+                    'date_modified' => $dateModified,
+                    'event_type' => $event['type'],
+                    'source' => $event['source'],
+                ]
+            );
+        }
+        return $item;
+    }
+
+    private function mergeEmailFieldsWithEvents($emails, $events)
+    {
+        if (empty($emails)) {
+            return [[
+                'field_name' => 'email',
+                'value' => null,
+                'date_modified' => null,
+                'event_type' => null,
+                'source' => null,
+            ]];
+        }
+
+        $emailEvents = array_filter($events, function ($v) {
+            return $v['field_name'] === 'email';
+        });
+        $emailEventsById = array_combine(array_column($emailEvents, 'after_value_string'), $emailEvents);
+        $fields = [];
+        foreach ($emails as $email) {
+            $value = [
+                'id' => $email['email_address_id'],
+                'email_address' => $email['email_address'],
+                'opt_out' => (bool) $email['opt_out'],
+                'invalid_email' => (bool) $email['invalid_email'],
+                'primary_address' => (bool) $email['primary_address'],
+            ];
+            $fields[] = $this->mergeFieldWithEvent(
+                'email',
+                $value,
+                $emailEventsById[$email['email_address_id']] ?? null
+            );
+        }
+
+        return $fields;
+    }
+
+    private function formatSourceSubject($rows)
+    {
+        $subjects = array();
+        // gather all subjects
+        foreach ($rows as $k => $v) {
+            if (!empty($v['source']['subject'])) {
+                $subjects[$k] = $v['source']['subject'];
+            }
+        }
+
+        $formatter = $this->getFormatter();
+        $formattedSubjects = $formatter->formatBatch($subjects);
+
+        // merge formatted subjects into rows
+        foreach ($formattedSubjects as $k => $v) {
+            $rows[$k]['source']['subject'] = $v;
+        }
+
+        return $rows;
+    }
+
+    protected function getFormatter()
+    {
+        return Container::getInstance()->get(Formatter::class);
     }
 
     /**
@@ -109,7 +283,7 @@ class ModuleApi extends SugarApi {
         $bean = BeanFactory::newBean($args['module']);
 
         if(!isset($bean->field_defs[$args['field']])) {
-           throw new SugarApiExceptionNotFound('field not found');
+            throw new SugarApiExceptionNotFound('field not found');
         }
 
         $vardef = $bean->field_defs[$args['field']];
@@ -170,6 +344,11 @@ class ModuleApi extends SugarApi {
     {
         $api->action = 'save';
         $this->requireArgs($args,array('module'));
+
+        // Users can be created only in cloud console for IDM mode mode.
+        if (in_array($args['module'], $this->idmModeDisabledModules) && $this->isIDMModeEnabled()) {
+            throw new SugarApiExceptionNotAuthorized();
+        }
 
         $bean = BeanFactory::newBean($args['module']);
 
@@ -291,7 +470,7 @@ class ModuleApi extends SugarApi {
         $this->requireArgs($args,array('module','record'));
 
         $bean = $this->loadBean($api, $args, 'view');
-        
+
         // formatBean is soft on view so that creates without view access will still work
         if (!$bean->ACLAccess('view', $this->aclCheckOptions)) {
             throw new SugarApiExceptionNotAuthorized('SUGAR_API_EXCEPTION_RECORD_NOT_AUTHORIZED',array('view'));
@@ -306,6 +485,11 @@ class ModuleApi extends SugarApi {
     public function deleteRecord(ServiceBase $api, array $args)
     {
         $this->requireArgs($args,array('module','record'));
+
+        // Users can be deleted only in cloud console for IDM mode mode.
+        if (in_array($args['module'], $this->idmModeDisabledModules) && $this->isIDMModeEnabled()) {
+            throw new SugarApiExceptionNotAuthorized();
+        }
 
         $bean = $this->loadBean($api, $args, 'delete', $this->aclCheckOptions);
         $bean->mark_deleted($args['record']);
@@ -333,7 +517,7 @@ class ModuleApi extends SugarApi {
         }
 
         $this->toggleFavorites($bean, true);
-        $bean = BeanFactory::getBean($bean->module_dir, $bean->id, array('use_cache' => false));        
+        $bean = BeanFactory::getBean($bean->module_dir, $bean->id, array('use_cache' => false));
         $api->action = 'view';
         $data = $this->formatBean($api, $args, $bean);
         return $data;
@@ -359,7 +543,7 @@ class ModuleApi extends SugarApi {
         }
 
         $this->toggleFavorites($bean, false);
-        $bean = BeanFactory::getBean($bean->module_dir, $bean->id, array('use_cache' => false));        
+        $bean = BeanFactory::getBean($bean->module_dir, $bean->id, array('use_cache' => false));
         $api->action = 'view';
         $data = $this->formatBean($api, $args, $bean);
         return $data;
@@ -426,7 +610,7 @@ class ModuleApi extends SugarApi {
                 $filename = $bean->id;
                 $mimeType = get_file_mime_type($filepath, 'application/octet-stream');
                 $sf = $sfh->getSugarField($def['type']);
-                $extension = pathinfo($fieldName, PATHINFO_EXTENSION);
+                $extension = pathinfo($bean->$fieldName, PATHINFO_EXTENSION);
 
                 if (in_array($mimeType, $sf::$imageFileMimeTypes) &&
                     !verify_image_file($filepath)
@@ -610,12 +794,14 @@ class ModuleApi extends SugarApi {
     ) {
         $api = $this->getRelateRecordApi();
         foreach ($ids as $linkName => $items) {
-            $api->createRelatedLinks($service, array(
-                'module' => $bean->module_name,
-                'record' => $bean->id,
-                'link_name' => $linkName,
-                'ids' => $items,
-            ), $securityTypeLocal, $securityTypeRemote);
+            if (!empty($items)) {
+                $api->createRelatedLinks($service, array(
+                    'module' => $bean->module_name,
+                    'record' => $bean->id,
+                    'link_name' => $linkName,
+                    'ids' => $items,
+                ), $securityTypeLocal, $securityTypeRemote);
+            }
         }
     }
 
@@ -676,5 +862,14 @@ class ModuleApi extends SugarApi {
         }
 
         return $this->relateRecordApi;
+    }
+
+    /**
+     * Is IDM mode enabled?
+     * @return bool
+     */
+    protected function isIDMModeEnabled()
+    {
+        return $this->isIDMModeEnabled;
     }
 }

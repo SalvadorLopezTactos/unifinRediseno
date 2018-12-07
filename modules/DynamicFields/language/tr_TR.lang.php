@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'Varsayılan URL',
 	'COLUMN_TITLE_AUDIT' =>'Değişiklik Tarihçesi',
+    'COLUMN_TITLE_PII' => 'Kişisel Bilgiler',
     'COLUMN_TITLE_FTS' =>'Tam-Metin Arama Yapılabilir',
     'COLUMN_TITLE_FTS_BOOST' => 'Yükseltme değeri',
 	'COLUMN_TITLE_REPORTABLE' => 'Raporlanabilir',

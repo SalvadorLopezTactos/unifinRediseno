@@ -1686,9 +1686,10 @@ class TimeDate
     /**
      * Create regexp from datetime format
      * @param string $format
+     * @param bool $oneDigitAllowed
      * @return string Regular expression string
      */
-    public static function get_regular_expression($format)
+    public static function get_regular_expression($format, $oneDigitAllowed = false)
     {
         $newFormat = '';
         $regPositions = array();
@@ -1696,7 +1697,11 @@ class TimeDate
         $count = 1;
         foreach (str_split($format) as $char) {
             if (! $ignoreNextChar && isset(self::$format_to_regexp[$char])) {
-                $newFormat .= '(' . self::$format_to_regexp[$char] . ')';
+                $oldFormat = self::$format_to_regexp[$char];
+                if ($oneDigitAllowed && ($char == "m" || $char == "d")) {
+                    $oldFormat = str_replace("0[1-9]", "0?[1-9]", $oldFormat);
+                }
+                $newFormat .= '(' . $oldFormat . ')';
                 $regPositions[$char] = $count;
                 $count ++;
             } else {
@@ -1986,11 +1991,6 @@ class TimeDate
 		$result = array();
         $transitions = $tz->getTransitions($year_date->ts, $year_end->ts);
         $idx = 0;
-        if(version_compare(PHP_VERSION, '5.3.0', '<')) {
-        	// <5.3.0 ignores parameters, advance manually to current year
-        	$start_ts = $year_date->ts;
-        	while(isset($transitions[$idx]) && $transitions[$idx]["ts"] < $start_ts) $idx++;
-        }
         // get DST start
         while (isset($transitions[$idx]) && !$transitions[$idx]["isdst"]) $idx++;
         if(isset($transitions[$idx])) {

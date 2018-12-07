@@ -743,8 +743,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Sigur stergeti aceasta relatie?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Aceasta va determina ca relatia sa devina permanenta. Sunteti sigur ca doriti sa desfasurati aceasta  relatie?',
 'LBL_CONFIRM_DONT_SAVE' => 'S-au facut modificari de cand ati salvat ultima oara, doriti sa salvati?',
@@ -756,6 +756,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Configuraţi câmpul pentru a oferi posibilitatea de căutare completă a textelor.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Amplificarea este procesul de îmbunătăţire a relevanţei câmpurilor unei înregistrări.<br />Câmpurile cu un nivel mai mare de amplificare vor avea o importanţă mai mare când se efectuează căutarea. Când se efectuează o căutare, înregistrările care se potrivesc şi care conţin câmpuri cu o importanţă mai mare vor apărea mai sus în rezultatele de căutare.<br />Valoarea implicită este 1.0, ceea ce înseamnă o amplificare neutră. Pentru a aplica o amplificare pozitivă, se acceptă orice valoare flotantă mai mare ca 1. Pentru o amplificare negativă, utilizaţi valori mai mici ca 1. De exemplu, o valoare de 1,35 va amplifica pozitiv un câmp cu 135%. Utilizarea unei valori de 0,60 va aplica o amplificare negativă.<br />Reţineţi că în versiunile anterioare era necesară efectuarea unei reindexări complete a căutărilor. Acest lucru nu mai este necesar.',
 'LBL_POPHELP_IMPORTABLE'=>'Da: Campul va fi inclus intr-o operatiune de import.<br />No: Campul nu va fi inclus intr-un import.<br />Necesar: O valoare pentru acest camp trebuie asigurata in orice import.',
+'LBL_POPHELP_PII'=>'Acest câmp va fi marcat automat pentru audit și va fi disponibil în vizualizarea Informații personale.<br>Câmpurile cu informații personale pot fi, de asemenea, șterse definitiv, atunci când înregistrarea este legată de solicitarea de ștergere pentru Confidențialitatea datelor.<br>Ștergerea se realizează prin modulul Confidențialitate date și poate fi executată de către administratorii sau utilizatorii cu rol de Manager de confidențialitate a datelor.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Introduceti un numar pentru Latime, masurat in pixeli.<br />Imaginea incarcata va fi scalata la aceasta Latime.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Introduceti un numar pentru Inaltime, masurat in pixeli.<br />Imaginea incarcata va fi scalata la aceasta Inaltime.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

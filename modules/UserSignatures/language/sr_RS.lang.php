@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'Potpisi korisnika',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'Potpis korisnika',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Ovaj potpis zahteva ime.',
-    'LBL_SIGNATURE_NAME'         => 'Ime',
-    'LBL_SIGNATURE'              => 'Potpis',
-    'LBL_SIGNATURE_HTML'         => 'HTML potpis',
-    'LBL_SIGNATURE_DEFAULT'      => 'Koristi potpis?',
-    'LBL_SIGNATURE_PREPEND'      => 'Potpis iznad odgovora?',
-    'LBL_SIGNATURES'             => 'Potpisi',
+    'LBL_DEFAULT_SIGNATURE' => 'Podrazumevano',
+    'LBL_MODULE_NAME' => 'Potpisi e-pošte',
+    'LBL_MODULE_NAME_SINGULAR' => 'Potpis e-pošte',
+    'LBL_SIGNATURE_NAME' => 'Ime',
+    'LBL_SIGNATURE' => 'Potpis',
+    'LBL_SIGNATURE_HTML' => 'HTML potpis',
+    'LBL_SIGNATURE_DEFAULT' => 'Koristi potpis?',
+    'LBL_SIGNATURE_PREPEND' => 'Potpis iznad odgovora?',
+    'LBL_SIGNATURES' => 'Potpisi',
 );

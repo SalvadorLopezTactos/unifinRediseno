@@ -9,8 +9,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 // jscs:disable
+var PMSE = PMSE || {};
 var ExpressionControl = function (settings) {
-    Element.call(this, settings);
+    PMSE.Element.call(this, settings);
+    this._name = null;
     this._panel = null;
     this._operatorSettings = {};
     this._operatorPanel = null;
@@ -44,10 +46,12 @@ var ExpressionControl = function (settings) {
     this._parent = null;
     this.onOpen = null;
     this.onClose = null;
+    this._useOffsetLeft = false;
+    this._offsetLeft = 0;
     ExpressionControl.prototype.init.call(this, settings);
 };
 
-ExpressionControl.prototype = new Element();
+ExpressionControl.prototype = new PMSE.Element();
 ExpressionControl.prototype.constructor = ExpressionControl;
 ExpressionControl.prototype.type = "ExpressionControl";
 ExpressionControl.prototype._regex = {
@@ -85,49 +89,57 @@ ExpressionControl.prototype._typeToControl = {
     "user": "friendlydropdown"
 };
 
-ExpressionControl.prototype.OPERATORS  = {
-    "arithmetic": [
-        {
-            text: "+",
-            value: "addition"
-        },
-        {
-            text: "-",
-            value: "substraction"
-        },
-        {
-            text: "x",
-            value: "multiplication"
-        },
-        {
-            text: "/",
-            value: "division"
-        }
-    ],
-    "logic": [
-        {
-            text: "AND",
-            value: "AND"
-        },
-        {
-            text: "OR",
-            value:  "OR"
-        },
-        {
-            text: "NOT",
-            value: "NOT"
-        }
-    ],
-    'group': [
-        {
-            text: '(',
-            value: '('
-        },
-        {
-            text: ')',
-            value: ')'
-        }
-    ]
+ExpressionControl.prototype.initOperators = function () {
+    ExpressionControl.prototype.OPERATORS  = {
+        'runTime': [
+            {
+                text: translate('LBL_PMSE_RUNTIME_BUTTON'),
+                value: 'Run Time'
+            }
+        ],
+        "arithmetic": [
+            {
+                text: "+",
+                value: "addition"
+            },
+            {
+                text: "-",
+                value: "substraction"
+            },
+            {
+                text: "x",
+                value: "multiplication"
+            },
+            {
+                text: "/",
+                value: "division"
+            }
+        ],
+        "logic": [
+            {
+                text: "AND",
+                value: "AND"
+            },
+            {
+                text: "OR",
+                value:  "OR"
+            },
+            {
+                text: "NOT",
+                value: "NOT"
+            }
+        ],
+        'group': [
+            {
+                text: '(',
+                value: '('
+            },
+            {
+                text: ')',
+                value: ')'
+            }
+        ]
+    };
 };
 
 ExpressionControl.prototype.initComparisonOperators = function(module) {
@@ -210,8 +222,10 @@ ExpressionControl.prototype.EXTRA_OPERATORS = {};
 
 ExpressionControl.prototype.init = function(settings) {
     var module = 'pmse_Project';
+    ExpressionControl.prototype.initOperators();
     ExpressionControl.prototype.initComparisonOperators(module);
     var defaults = {
+        name: null,
         width: 200,
         itemContainerHeight: 80, //only applicable when it is not external
         height: 'auto',
@@ -235,10 +249,13 @@ ExpressionControl.prototype.init = function(settings) {
         onClose: null,
         className: "",
         panelContext: document.body,
-        currencies: []
+        currencies: [],
+        useOffsetLeft: false
     };
 
     jQuery.extend(true, defaults, settings);
+
+    this._name = defaults.name;
 
     this._proxy = new SugarProxy();
     if (defaults.itemContainer instanceof ItemContainer) {
@@ -259,7 +276,8 @@ ExpressionControl.prototype.init = function(settings) {
         onItemValueAction: this._onPanelValueGeneration(),
         width: this.width,
         context: defaults.panelContext,
-        className: defaults.className || ""
+        className: defaults.className || "",
+        useOffsetLeft: defaults.useOffsetLeft
     });
 
     this._itemContainer.setOnAddItemHandler(this._onChange())
@@ -285,7 +303,8 @@ ExpressionControl.prototype.init = function(settings) {
         .setAlignWithOwner(defaults.alignWithOwner)
         .setMatchOwnerWidth(defaults.matchOwnerWidth)
         .setOnOpenHandler(defaults.onOpen)
-        .setOnCloseHandler(defaults.onClose);
+        .setOnCloseHandler(defaults.onClose)
+        .setUseOffsetLeft(defaults.useOffsetLeft);
 
     if (defaults.expressionVisualizer) {
         this.showExpressionVisualizer();
@@ -296,6 +315,25 @@ ExpressionControl.prototype.init = function(settings) {
     if (defaults.parent) {
         this._parent = defaults.parent;
     }
+};
+
+/**
+ * Sets the left offset value to use when needed
+ * @param {integer} offsetLeft pixel measurement of the left offset when needed
+ */
+ExpressionControl.prototype.setOffsetLeft = function(offsetLeft) {
+    this._offsetLeft = offsetLeft;
+    this._panel.setOffsetLeft(offsetLeft);
+    return this;
+}
+
+/**
+ * Sets the flag on whether to use a left offset when rendering the field panel
+ * @param {boolean} useOffsetLeft
+ */
+ExpressionControl.prototype.setUseOffsetLeft = function(useOffsetLeft) {
+    this._useOffsetLeft = useOffsetLeft;
+    return this;
 };
 
 ExpressionControl.prototype.setAlignWithOwner = function (alignment) {
@@ -1091,6 +1129,13 @@ ExpressionControl.prototype._onPanelValueGeneration = function () {
                 case "button-panel-operators":
                     if (data.value == 'close') {
                         that._closeParentPanels();
+                    } else if (data.value === 'Run Time') {
+                        itemData = {
+                            expType: 'CONSTANT',
+                            expSubtype: "date",
+                            expLabel: translate('LBL_PMSE_RUNTIME_BUTTON'),
+                            expValue: 'now'
+                        };
                     } else {
                         itemData = {
                             expType: that._getOperatorType(data.value),
@@ -1658,11 +1703,15 @@ ExpressionControl.prototype._createModulePanel = function () {
                                 if (that.EXTRA_OPERATORS[labelField]) {
                                     operators = operators.concat(that.EXTRA_OPERATORS[labelField]);
                                 }
-                                if (selVal == 'updated' || selVal == 'allupdates') {
-                                    var url = parentField._dataURL,
-                                        base = parentField._attributes ? parentField._attributes.base_module : false;
-                                    if (url && base && url.endsWith(base)) {
+                                if (that._name == 'evn_criteria') {
+                                    if (!selVal) {
                                         operators = operators.concat(that.OPERATORS.changes);
+                                    } else if (selVal == 'updated' || selVal == 'allupdates') {
+                                        var url = parentField._dataURL,
+                                            base = parentField._attributes ? parentField._attributes.base_module : false;
+                                        if (url && base && url.endsWith(base)) {
+                                            operators = operators.concat(that.OPERATORS.changes);
+                                        }
                                     }
                                 }
                                 operatorField.setLabelField(labelField);
@@ -2436,8 +2485,12 @@ ExpressionControl.prototype.isValid = function() {
                 (current.expOperator == 'changes' ||
                     current.expOperator == 'changes_from' ||
                     current.expOperator == 'changes_to')) {
-                var selVal = $('#evn_params').val();
-                valid = selVal == 'updated' || selVal == 'allupdates';
+                if (this._name == 'evn_criteria') {
+                    var selVal = $('#evn_params').val();
+                    valid = !selVal || selVal == 'updated' || selVal == 'allupdates';
+                } else {
+                    valid = false;
+                }
             }
         } else {
             valid = prev && ((prev.expType === "GROUP" && prev.expValue === ")") || (pIsEval || cIsEval));

@@ -12,6 +12,7 @@
  * @class View.Fields.Base.Emails.SenderField
  * @alias SUGAR.App.view.fields.BaseEmailsSenderField
  * @extends View.Fields.Base.BaseField
+ * @deprecated Use {@link View.Fields.Base.Emails.OutboundEmailField} instead.
  */
 ({
     fieldTag: 'input.select2',
@@ -20,6 +21,9 @@
      * @inheritdoc
      */
     initialize: function(options) {
+        app.logger.warn('View.Fields.Base.Emails.SenderField is deprecated. Use ' +
+            'View.Fields.Base.Emails.OutboundEmailField instead.');
+
         this._super('initialize', [options]);
         this.endpoint = this.def.endpoint;
     },
@@ -69,6 +73,7 @@
 
             if (!this.model.has(this.name)) {
                 this.model.set(this.name, defaultValue.id);
+                this.model.setDefault(this.name, defaultValue.id);
             }
         }
 

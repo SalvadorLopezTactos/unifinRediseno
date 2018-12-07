@@ -22,7 +22,7 @@ $viewdefs['Styleguide']['base']['view']['record'] = array(
                     'dismiss_label' => true,
                 ),
                 array(
-                    'name' => 'full_name',
+                    'name' => 'name',
                     'label' => 'LBL_NAME',
                     'dismiss_label' => true,
                     'type' => 'fullname',

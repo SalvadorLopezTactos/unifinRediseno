@@ -21,10 +21,12 @@ nv.models.legend = function() {
       collapsed = false,
       rowsCount = 3, //number of rows to display if showAll = false
       enabled = false,
-      strings = {close: 'Hide legend', type: 'Show legend'},
+      strings = {close: 'Hide legend', type: 'Show legend', noText: 'Undefined'},
       id = Math.floor(Math.random() * 10000), //Create semi-unique ID in case user doesn't select one
       getKey = function(d) {
-        return d.key.length > 0 || (!isNaN(parseFloat(d.key)) && isFinite(d.key)) ? d.key : 'undefined';
+        return (d.key && d.key.toString().length > 0) ?
+                d.key :
+                strings.noText;
       },
       color = function(d, i) { return nv.utils.defaultColor()(d, i); },
       classes = function(d, i) { return ''; },

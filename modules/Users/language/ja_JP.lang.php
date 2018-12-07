@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'ユーザ情報が見つかりません',
     'ERR_USER_NAME_EXISTS'              => 'ユーザー名 {0} は既に存在します。重複するユーザー名は使用できません。一意のユーザー名に変更してください。',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'ユーザはロックアウトされていますので、既存のパスワードを用いてログインすることはできません。',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => '外部認証のみユーザは、Sugar認証情報を使ってログインすることは許可されません。',
 
 	'LBL_PASSWORD_SENT'                => 'パスワードが更新されました',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'パスワードを送信できません',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> '受信者のEメールアドレス',
 	'ERR_SERVER_STATUS'					=> 'サーバの状態',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'システムはユーザにEメールを送信することができません。<a href="index.php?module=EmailMan&amp;amp;action=config">Eメールの設定</a>で送信用の設定を確認してください。',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'このユーザは<a href="{0}" target="_blank">クラウドコンソール</a>内でIDMモードの場合にのみ作成できます。',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => '主のEメールアドレスは<a href="{0}" target="_blank">クラウドコンソール</a>内でIDMモードの場合にのみ更新できます。',
 
     'LBL_EMAIL_ADDRESS'                 => 'Eメールアドレス',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'パスワードの確認',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'ユーザのタイプをシステム管理者から一般ユーザに変更しました。変更を保存すると、ユーザはシステム管理者としての権限を失います。\n\n「OK」をクリックして処理を進めるか\n「キャンセル」をクリックしてレコードに戻ってください。',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'ユーザのタイプをシステム管理者から一般ユーザに変更しました。変更を保存すると、ユーザはシステム管理者としての権限を失います。\\n\\n「OK」をクリックして処理を進めるか\\n「キャンセル」をクリックしてレコードに戻ってください。',
 	'LBL_COUNTRY'						=> '国',
 	'LBL_CURRENCY_TEXT'					=> '新しいレコードを作成する際にデフォルトで表示される通貨を選択してください。この通貨は商談一覧で金額カラムに表示される通貨となります。',
 	'LBL_CURRENCY'						=> '通貨',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => '分後です。',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => '秒後です。',
     'LBL_LOGIN_ADMIN_CALL'              => 'システム管理者に連絡してください。',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'IDMモードのOpenID Connect (OIDC)を使用した認証の場合は、GMP PHPエクステンションをインストールしてください。',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'ログアウトされました。再ログインするにはクリックしてください。',
     'LBL_LOGGED_OUT_2' => 'ここ',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'ユーザーズレポート',
     'LBL_CONTACTS_SYNC' => '取引先担当者',
     'LBL_DETAIL' => 'ユーザプロフィール',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        '特定のフィールドを編集できない場合は、クラウドコンソールにログインしてこれらのフィールドを管理してください。',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        '編集できないフィールドを変更したい場合は、 ' .
+        '管理者に連絡してそれらの変更について伝えてください。',
 ); // END STRINGS DEFS
 
 ?>

@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => '创建任务',
   'NTC_DELETE_CONFIRMATION' => '您确定要删除这条记录?建议您可以先停用这条记录，否则所有的记录在存取时都会转换为美元。',
   'LBL_BELOW_MIN' => '汇率必须大于0',
-  'currency_status_dom' => 
-  array (
-    'Active' => '启用',
-    'Inactive' => '停用',
-  ),
   'LBL_CREATED_BY' => '创建人',
   'LBL_EDIT_LAYOUT' => '编辑布局' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => '仅限管理员',
+  'LBL_CURRENCY_DEFAULT' => '美元 (默认)',
+
 );
 ?>

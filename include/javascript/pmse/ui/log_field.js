@@ -8,18 +8,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 /**
  * @class LabelField
  * Handles the Label fields
- * @extend Field
+ * @extends PMSE.Field
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
 var LogField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     this.submit = false;
     this.items = [];
     this.deleteBtn = false;
@@ -27,7 +28,7 @@ var LogField = function (options, parent) {
     LogField.prototype.initObject.call(this, options);
     //$.extend(true, this.defaults, options);
 };
-LogField.prototype = new Field();
+LogField.prototype = new PMSE.Field();
 
 /**
  * Defines the object's type
@@ -41,6 +42,7 @@ LogField.prototype.initObject = function (options) {
         timeTextSize: 11,
         picture : '/img/default_user.png',
         user: '',
+        showUser: true,
         message: 'default message',
         items : [],
         startDate: '3 July 2013',
@@ -51,16 +53,17 @@ LogField.prototype.initObject = function (options) {
     };
     $.extend(true, defaults, options);
     this.setMarginLeft(defaults.marginLeft)
-           .setPicture(defaults.picture)
-           .setUser(defaults.user)
-           .setTimeTextSize(defaults.timeTextSize)
-           .setStartDate(defaults.startDate)
-           .setMessage(defaults.message)
-           .setDuration(defaults.duration)
-           .setItems(defaults.items)
-           .setCompleted(defaults.completed)
-           .setDeleteBtn(defaults.deleteBtn)
-           .setScript(defaults.script);
+        .setPicture(defaults.picture)
+        .setUser(defaults.user)
+        .setShowUser(defaults.showUser)
+        .setTimeTextSize(defaults.timeTextSize)
+        .setStartDate(defaults.startDate)
+        .setMessage(defaults.message)
+        .setDuration(defaults.duration)
+        .setItems(defaults.items)
+        .setCompleted(defaults.completed)
+        .setDeleteBtn(defaults.deleteBtn)
+        .setScript(defaults.script);
 };
 
 LogField.prototype.setMarginLeft = function (marginLeft) {
@@ -77,6 +80,10 @@ LogField.prototype.setPicture = function (picture) {
 };
 LogField.prototype.setUser = function (user) {
     this.user = user;
+    return this;
+};
+LogField.prototype.setShowUser = function(showUser) {
+    this.showUser = showUser;
     return this;
 };
 LogField.prototype.setTimeTextSize = function (size) {
@@ -112,7 +119,7 @@ LogField.prototype.setDeleteBtn = function (val) {
  */
 LogField.prototype.createHTML = function () {
     var fieldLabel, logPicture, newsItem, datetime, detailDiv, durationDiv,buttonAnchor, labelSpan, that = this;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
     this.html.style.fontSize = "12px";
     this.html.style.display = 'table';
     this.html.style.width = '98%';
@@ -141,7 +148,10 @@ LogField.prototype.createHTML = function () {
     newsItem = this.createHTMLElement('p');
 //    fieldLabel.className = 'adam-form-label';
 
-    newsItem.innerHTML = '<strong>' + this.user + '</strong> ' + this.label;
+    if (this.showUser) {
+        newsItem.innerHTML = '<strong>' + this.user + '</strong> ';
+    }
+    newsItem.innerHTML += this.label;
     //fieldLabel.style.verticalAlign = 'top';
     newsItem.style.marginLeft = this.marginLeft + 'px';
     newsItem.style.display = "block";

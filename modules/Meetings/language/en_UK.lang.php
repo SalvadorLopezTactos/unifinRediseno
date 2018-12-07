@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Meetings List Dashboard',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Meetings Record Dashboard',
+
 	'ERR_DELETE_RECORD' => 'A record number must be specified to delete the meeting.',
 	'LBL_ACCEPT_THIS'=>'Accept?',
 	'LBL_ADD_BUTTON'=> 'Add [Alt+C]',

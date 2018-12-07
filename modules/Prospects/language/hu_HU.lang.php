@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Célok listája műszerfal',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Célbejegyzések műszerfal',
+
   'LBL_MODULE_NAME' => 'Célok',
   'LBL_MODULE_NAME_SINGULAR' => 'Cél',
   'LBL_MODULE_ID'   => 'Célok',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Megszólítás',
   'LBL_SAVE_PROSPECT' => 'Cél mentése',
   'LBL_CREATED_OPPORTUNITY' =>'Új lehetőség létrehozva',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'A lehetőségek létrehozása klienshez kötött.\n Kérem, hozzon létre egy klienst, vagy válasszon a meglévők közül!',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'A lehetőségek létrehozása klienshez kötött.\\n Kérem, hozzon létre egy klienst, vagy válasszon a meglévők közül!',
   'LNK_SELECT_ACCOUNT' => "Kliens kiválsztása",
   'LNK_NEW_PROSPECT' => 'Cél létrehozása',
   'LNK_PROSPECT_LIST' => 'Célok megtekintése',
@@ -194,4 +198,6 @@ $mod_strings = array (
 2. Kattintson a "Mentés" gombra a rekord mentéséhez és a korábbi nézetre való visszatéréshez.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Célok jelentései',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Hozzájárulás üzleti célokhoz a következőhöz',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Hozzájárulás utolsó frissítése',
 );

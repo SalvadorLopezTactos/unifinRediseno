@@ -10,4 +10,4 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 --}}
-<span class="label label-module label-module-mini label-{{module}}" title="{{getModuleName module plural=true}}">{{moduleIconLabel module}}</span> {{name}}{{#if field_name}}, {{field_name}}: {{field_value}}{{/if}}{{#unless email}} <span class="select2-result-status"><span class="flag error"><i class="fa fa-times"></i><i class="fa fa-envelope"></i></span> {{str "LBL_GUEST_WILL_NOT_RECEIVE_INVITE" module}}</span>{{/unless}}
+<span class="label label-module label-module-mini label-{{module}}" title="{{getModuleName module plural=true}}">{{moduleIconLabel module}}</span> {{#if name_is_erased}}<span class="label">{{/if}}{{name}}{{#if name_is_erased}}</span>{{/if}}{{#if field_name}}, {{field_name}}: {{field_value}}{{/if}}{{#unless email}} <span class="select2-result-status"><span class="flag error"><i class="fa fa-times"></i><i class="fa fa-envelope"></i></span> {{str "LBL_GUEST_WILL_NOT_RECEIVE_INVITE" module}}</span>{{/unless}}

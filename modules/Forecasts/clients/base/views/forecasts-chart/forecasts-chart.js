@@ -326,7 +326,7 @@
     /**
      * When loadData is called, find the paretoChart field, if it exist, then have it render the chart
      *
-     * @override
+     * @inheritdoc
      */
     loadData: function(options) {
         var field = this.getField('paretoChart');

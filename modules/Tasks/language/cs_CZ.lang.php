@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Řídicí panel seznamu úkolů',
+
   'LBL_MODULE_NAME' => 'Úkoly',
   'LBL_MODULE_NAME_SINGULAR' => 'Úkol',
   'LBL_TASK' => 'Úkoly:',

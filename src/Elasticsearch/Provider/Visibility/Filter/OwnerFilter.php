@@ -12,7 +12,7 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\Filter;
 
-use Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\Visibility;
+use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
 
 /**
  *
@@ -28,24 +28,10 @@ class OwnerFilter implements FilterInterface
      */
     public function buildFilter(array $options = array())
     {
-        $ownerField = $this->getOwnerField($options['bean']);
-        $filter = new \Elastica\Filter\Term();
+        // Create the field name
+        $ownerField = Mapping::PREFIX_COMMON . 'owner_id.owner';
+        $filter = new \Elastica\Query\Term();
         $filter->setTerm($ownerField, $options['user']->id);
         return $filter;
-    }
-
-    /**
-     * Determine which field to use as owner field. By default assigned user
-     * is being used with fallback to created_by if the first is not defined.
-     *
-     * @param \SugarBean $bean
-     * @return string
-     */
-    public function getOwnerField(\SugarBean $bean)
-    {
-        if (isset($bean->field_defs['assigned_user_id'])) {
-            return 'assigned_user_id';
-        }
-        return 'created_by';
     }
 }

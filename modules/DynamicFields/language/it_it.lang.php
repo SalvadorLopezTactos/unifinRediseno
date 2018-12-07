@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'URL Predefinito',
 	'COLUMN_TITLE_AUDIT' =>'Revisione',
+    'COLUMN_TITLE_PII' => 'Informazioni personali',
     'COLUMN_TITLE_FTS' =>'Ricercabile Full Text',
     'COLUMN_TITLE_FTS_BOOST' => 'Valore di spinta',
 	'COLUMN_TITLE_REPORTABLE' => 'Riportabile',

@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Er zijn meerdere kolommen gedefinieerd met dezelfde veldnaam .',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Er ontbreken vereiste velden:',
     'ERR_MISSING_MAP_NAME' => 'Custom veld naam ontbreekt',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Gebruikers importeren is uitgeschakeld voor de IDM-modus.',
     'ERR_SELECT_FULL_NAME' => 'U kunt &#39;Volledige naam&#39; niet selecteren als &#39;Voornaam&#39; en &#39;Achternaam&#39; zijn geselecteerd.',
     'ERR_SELECT_FILE' => 'Selecteer het te importeren bestand.',
     'LBL_SELECT_FILE' => 'Selecteer bestand:',

@@ -84,7 +84,7 @@ class Tracker extends SugarBean
             $qb->select(array('id', 'item_id', 'item_summary', 'module_name'))
                 ->from($this->table_name)
                 ->setMaxResults($history_max_viewed)
-                ->where('id IN (' . $qb->importSubQuery($qbSubquery) . ')');
+                ->where('id = (' . $qb->importSubQuery($qbSubquery) . ')');
 
             $stmt = $qb->execute();
 

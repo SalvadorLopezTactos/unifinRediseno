@@ -72,6 +72,19 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    _render: function() {
+        this._super('_render');
+
+        if (!app.config.activityStreamsEnabled) {
+            this.$el.addClass('hide');
+        }
+
+        return this;
+    },
+
+    /**
      * Creates a new post.
      */
     addPost: function() {

@@ -1,6 +1,6 @@
 <?php
-$listViewDefs['Documents'] = 
-array (
+// created: 2018-12-06 16:05:35
+$listViewDefs['Documents'] = array (
   'document_name' => 
   array (
     'width' => '20',

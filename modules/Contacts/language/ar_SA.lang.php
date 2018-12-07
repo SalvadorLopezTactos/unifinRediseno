@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'لوحة معلومات قائمة جهات الاتصال',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'لوحة معلومات سجل جهات الاتصال',
+
     'LNK_CONTACT_REPORTS' => 'عرض تقارير جهة الاتصال',
     'ERR_DELETE_RECORD' => 'تحديد رقم السجل لحذف جهة الاتصال:',
     'LBL_ACCOUNT_ID' => 'معرّف الحساب:',
@@ -80,7 +84,7 @@ $mod_strings = array (
     'LBL_IMPORT_VCARD' => 'استيراد vCard',
     'LBL_IMPORT_VCARD_SUCCESS' => 'تم إنشاء جهة اتصال من vCard بنجاح',
     'LBL_VCARD' => 'vCard',
-    'LBL_IMPORT_VCARDTEXT' => 'إنشاء جهة اتصال جديدة تلقائيًا من خلال استيراد vCard من ملف النظام الخاص بك.',
+    'LBL_IMPORT_VCARDTEXT' => 'إنشاء جهة اتصال جديدة تلقائيًا من خلال استيراد vCard من نظام الملفات الخاص بك.',
     'LBL_INVALID_EMAIL'=>'بريد إلكتروني غير صحيح:',
     'LBL_INVITEE' => 'التقارير المباشرة',
     'LBL_LAST_NAME' => 'الاسم الأخير:',
@@ -142,10 +146,10 @@ $mod_strings = array (
     'LBL_SELECT_CHECKED_BUTTON_LABEL' => 'تحديد جهات الاتصال المحددة',
     'LBL_SELECT_CHECKED_BUTTON_TITLE' => 'تحديد جهات الاتصال المحددة',
     'LBL_STATE' => 'الولاية:',
-    'LBL_SYNC_CONTACT' => 'المزامنة لبريد العميل:',
+    'LBL_SYNC_CONTACT' => 'المزامنة لعميل البريد:',
     'LBL_PROSPECT_LIST' => 'قائمة العملاء المتوقعين',
     'LBL_TEAM_ID' => 'معرّف الفريق:',
-    'LBL_TITLE' => 'العنوان:',
+    'LBL_TITLE' => 'المسمى الوظيفي:',
     'LNK_CREATE' => 'إنشاء شخص',
     'LNK_CONTACT_LIST' => 'عرض جهات الاتصال',
     'LNK_IMPORT_VCARD' => 'إنشاء جهة اتصال من vCard',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'نسخ العنوان البديل إلى العنوان الرئيسي',
     'NTC_COPY_PRIMARY_ADDRESS' => 'نسخ العنوان الرئيسي إلى العنوان البديل',
     'NTC_DELETE_CONFIRMATION' => 'هل تريد بالتأكيد حذف هذا السجل؟',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'يحتاج إنشاء فرصة إلى توفر حساب.\n يرجى إنشاء حساب جديد أو تحديد حساب حالي.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'يحتاج إنشاء فرصة إلى توفر حساب.\\n يرجى إنشاء حساب جديد أو تحديد حساب حالي.',
     'NTC_REMOVE_CONFIRMATION' => 'هل تريد بالتأكيد إزالة جهة الاتصال هذه من الحالة؟',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'هل تريد بالتأكيد إزالة هذا السجل كتقرير مباشر؟',
 
@@ -273,4 +277,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'عدد نقاط العميل المتوقع',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'تقارير جهات الاتصال',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'الأغراض التجارية التي تمت الموافقة عليها',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'آخر تحديث للموافقة',
 );

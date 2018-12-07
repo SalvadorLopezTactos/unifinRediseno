@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Error: Nejsou žádné modulové pole, které byly zmapovány. Prosím kontaktujte systémového administrátora.',
     'LBL_INFO_INLINE' => 'Informace' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Zavřít' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'Pro daný ID zdroje nebyl nalezen konektor.',
 );
 

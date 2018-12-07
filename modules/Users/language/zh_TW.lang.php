@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> '未找到使用者資訊',
     'ERR_USER_NAME_EXISTS'              => '使用者名稱 {0} 已存在。使用者名稱不允許重複。變更使用者名稱，使其為唯一的名稱。',
 	'ERR_USER_IS_LOCKED_OUT'			=> '此使用者已鎖定，無法存取 Sugar 應用程式，使用其現有密碼無法登入。',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => '僅允許使用者使用Sugar憑證登錄',
 
 	'LBL_PASSWORD_SENT'                => '密碼已更新',
 	'LBL_CANNOT_SEND_PASSWORD'         => '無法傳送密碼',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> '收件者電子郵件地址',
 	'ERR_SERVER_STATUS'					=> '您的伺服器狀態',
 	'ERR_SERVER_SMTP_EMPTY'				=> '系統無法向使用者傳送電子郵件。請檢查<a href="index.php?module=EmailMan&action=config">「電子郵件設定」</a>中的「外寄郵件設定」。',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => '只能在 <a href="{0}" target="_blank">雲端主控台</a> 中為 IDM 模式創建使用者。',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => '只能在 <a href="{0}" target="_blank">雲端主控台</a>中為 IDM 模式更新主要電子郵件地址。',
 
     'LBL_EMAIL_ADDRESS'                 => '電子郵件地址',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> '確認密碼',
-	'LBL_CONFIRM_REGULAR_USER'			=> '您已將使用者類型從「系統管理員使用者」變更為「常規使用者」。儲存此變更后，使用者將不再擁有系統管理員權限。\n\n按一下「確定」以繼續。\n按一下「取消」以返回記錄。',
+	'LBL_CONFIRM_REGULAR_USER'			=> '您已將使用者類型從「系統管理員使用者」變更為「常規使用者」。儲存此變更后，使用者將不再擁有系統管理員權限。\\n\\n按一下「確定」以繼續。\\n按一下「取消」以返回記錄。',
 	'LBL_COUNTRY'						=> '國家',
 	'LBL_CURRENCY_TEXT'					=> '若啟用「顯示偏好貨幣」，則此貨幣是清單和記錄檢視中使用的貨幣。此貨幣同樣是新記錄的預設貨幣。',
 	'LBL_CURRENCY'						=> '偏好貨幣',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => '分鐘',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => '秒',
     'LBL_LOGIN_ADMIN_CALL'              => '請連絡系統管理員。',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        '要在 IDM 模式下使用 OpenID 連接 (OIDC) 進行身份驗證，請安裝 GMP PHP 擴展。',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => '您已登出。如需重新登入，請按一下',
     'LBL_LOGGED_OUT_2' => '此處',
@@ -627,6 +632,12 @@ SugarCRM 支援部提供的有關在 Sugar 中執行常見工作和流程的提�
     'LBL_FILTER_USERS_REPORTS' => '使用者報表',
     'LBL_CONTACTS_SYNC' => '連絡人',
     'LBL_DETAIL' => '使用者設定檔',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        '如果某些欄位不可編輯，請登錄到雲端主控台以管理這些欄位',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        '如果希望更改某些不可編輯的欄位， ' .
+        '請與管理員聯繫以通知這些更改',
 ); // END STRINGS DEFS
 
 ?>

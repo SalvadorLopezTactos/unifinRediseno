@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Vär vennelig å velg fra tilgjengelige felt',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Beskrivelse av skjemaet:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Innsendelse av dette skjemat vil opprette et lead og en link',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Ved å merke av denne boksen godtar du å motta markedsførings-e-post',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Vennligst last ned din Web til førerskjemaet',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Web til førerskjemaet',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Vennligst oppgi alle de nødvendige feltene',

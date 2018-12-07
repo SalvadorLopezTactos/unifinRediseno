@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Panel för kontaktlistor',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Panel för kontaktposter',
+
     'LNK_CONTACT_REPORTS' => 'Kontaktrapporter',
     'ERR_DELETE_RECORD' => 'Ett objektnummer måste specificeras för att kunna radera kontakten.',
     'LBL_ACCOUNT_ID' => 'Organisations ID:',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiera alternativ adress till primär adress',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiera primär adress till alternativ adress',
     'NTC_DELETE_CONFIRMATION' => 'Är du säker på att du vill radera posten?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'När en affärsmöjlighet skapas krävs en organisation.\n Var god skapa en ny organisation eller välj en existerande.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'När en affärsmöjlighet skapas krävs en organisation.\\n Var god skapa en ny organisation eller välj en existerande.',
     'NTC_REMOVE_CONFIRMATION' => 'Är du säker på att du vill ta bort kontakten från ärendet?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Är du säker på att du vill ta bort det här objektet som en direktrapport?',
 
@@ -273,4 +277,6 @@ För att skapa en {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontakternas rapporter',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Affärsändamål som samtyckts till',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Samtycke uppdaterades senast',
 );

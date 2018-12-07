@@ -17,6 +17,8 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 global $current_user;
 $workflow_modules = get_workflow_admin_modules_for_user($current_user);
 if (!is_admin($current_user) && empty($workflow_modules))
@@ -116,7 +118,9 @@ if (!empty($focus->id)) {
 }
 if(!empty($etid)) {
     $note = BeanFactory::newBean('Notes');
-    $notes_list = $note->get_full_list("", "notes.parent_id=" . $GLOBALS['db']->quoted($etid) . " AND notes.filename IS NOT NULL", true);
+    //FIXME: notes.email_type should be EmailTemplates
+    //FIXME: notes.filename IS NOT NULL is probably not necessary
+    $notes_list = $note->get_full_list("", "notes.email_id=" . $GLOBALS['db']->quoted($etid) . " AND notes.filename IS NOT NULL", true);
     if (!empty($notes_list)) {
         for ($i = 0; $i < count($notes_list); $i++) {
             $the_note = $notes_list[$i];
@@ -142,10 +146,9 @@ $xtpl->assign('ATTACHMENTS_JAVASCRIPT', $attJs);
 
 
 
-
-if(!empty($_REQUEST['base_module']) && $_REQUEST['base_module']!=""){
-
-	$focus->base_module = $_REQUEST['base_module'];
+$base_module = InputValidation::getService()->getValidInputRequest('base_module', 'Assert\Mvc\ModuleName');
+if (!empty($base_module)) {
+    $focus->base_module = $base_module;
 }
 //
 $xtpl->assign("BASE_MODULE", $focus->base_module);

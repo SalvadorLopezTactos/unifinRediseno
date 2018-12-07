@@ -92,9 +92,9 @@ class BasicTerms
      */
     public function toArray()
     {
-        // ignore the first operator if is single next structure
-        if (count($this->terms) === 1) {
-            if (!is_string($this->terms[0])) {
+        // ignore the first operator if is single node and is not 'NOT' operator
+        if (count($this->terms) === 1 && !TermParserHelper::isNotOperator($this->operator)) {
+            if ($this->terms[0] instanceof BasicTerms) {
                 return $this->terms[0]->toArray();
             }
         }

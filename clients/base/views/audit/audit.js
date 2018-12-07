@@ -16,7 +16,7 @@
 ({
     extendsFrom: 'FilteredListView',
 
-    fallbackFieldTemplate: 'list-header',
+    fallbackFieldTemplate: 'list',
 
     /**
      * @inheritdoc
@@ -44,10 +44,13 @@
      * @private
      */
     _initCollection: function() {
+        var self = this;
         var AuditCollection = app.BeanCollection.extend({
             module: 'audit',
             baseModule: this.baseModule,
             baseRecordId: this.baseRecord,
+
+            // FIXME PX-46: remove this function
             buildURL: function(params) {
                 params = params || {};
 
@@ -65,12 +68,56 @@
                 return url;
             },
             sync: function(method, model, options) {
-                var url = this.buildURL(options.params),
-                    callbacks = app.data.getSyncCallbacks(method, model, options);
+                var auditedModel = self.context.get('model');
+                var url = this.buildURL(options.params);
+                var callbacks = app.data.getSyncCallbacks(method, model, options);
+                var defaultSuccessCallback = app.data.getSyncSuccessCallback(method, model, options);
+                callbacks.success = function(data, request) {
+                    self._applyModelDataOnRecords(auditedModel, data.records);
+                    return defaultSuccessCallback(data, request);
+                };
                 app.api.call(method, url, options.attributes, callbacks);
             }
         });
         this.collection = new AuditCollection();
+    },
+
+    /**
+     * Apply erased field information from the model to records.
+     *
+     * @private
+     */
+    _applyModelDataOnRecords: function(model, records) {
+        var erasedFields = model.get('_erased_fields');
+        _.each(erasedFields, function(erasedField) {
+            // Apply erased fields only for records that are marked
+            var erasedFieldName = erasedField.field_name || erasedField;
+
+            var properties;
+            var recordsRequiringErasedFields;
+            if (erasedField.field_name) {
+                // email and other non-scalar erased fields
+                // check both the before and after fields
+                // of each record to see if it matches up with
+                // an erased email's ID, and if so mark that field as erased
+                var fieldsToCheck = ['before', 'after'];
+                _.each(fieldsToCheck, function(fieldToCheck) {
+                    properties = {field_name: erasedFieldName};
+                    properties[fieldToCheck] = erasedField.id;
+                    recordsRequiringErasedFields = _.where(records, properties);
+                    _.each(recordsRequiringErasedFields, function(record) {
+                        record._erased_fields = record._erased_fields || [];
+                        record._erased_fields.push(fieldToCheck);
+                    });
+                });
+            } else {
+                properties = {field_name: erasedFieldName};
+                recordsRequiringErasedFields = _.where(records, properties);
+                _.each(recordsRequiringErasedFields, function(record) {
+                    record._erased_fields = ['before', 'after'];
+                });
+            }
+        });
     },
 
     /**

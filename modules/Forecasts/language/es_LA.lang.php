@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Tablero de Pronósticos',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Previsiones',
     'LBL_MODULE_NAME_SINGULAR' => 'Pronóstico',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'ID de Producto',
     'LBL_QUOTA_ID' => 'ID de Cotización',
     'LBL_VERSION' => 'Versión',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Ocultar la barra de leyenda',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Mostrar la barra de leyenda',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Ocultar la línea de leyenda',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Mostrar la línea de leyenda',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Error: usuario {0} no tiene acceso de administrador para solicitar Pronósticos de {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Fecha de inicio del ejercicio:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configurar el Período de Tiempo que se usará en el módulo de Pronósticos. <br><br>Por favor tenga en cuenta que la configuración de Período de Tiempo no podrá modificarse luego de la configuración inicial.<br><br>Comience eligiendo la fecha de inicio de su ejercicio. A continuación, seleccione el tipo de Período de Tiempo que desea para el Pronóstico. El rango de fechas para los Períodos de Tiempo será automáticamente calculado en base a sus selecciones. El Sub-Período de Tiempo es la base para la hoja de trabajo de Pronóstico.<br><br>Los Períodos de Tiempo futuro y Períodos de Tiempo pasados visibles determinarán el número de sub-períodos visibles en el módulo de Pronósticos. Los usuarios pueden ver y editar los números de Pronósticos en los sub-períodos visibles.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configure cómo quiere categorizar {{forecastByModule}}. <br><br>Tenga en cuenta que los ajustes de rango no se pueden cambiar después de proceder por primera vez. En instancias actualizadas, el ajuste de rango se bloquea con los datos de previsión existentes.<br><br>Podrá seleccionar dos o más categorías en base a los rangos de probabilidad, o crear categorías que no estén basadas en la probabilidad.<br><br>Hay casillas de verificación a la izquierda de sus categorías personalizadas; utilícelas para decidir qué rangos se incluirán en la cantidad prevista entregada y de los que se informará a los responsables.<br><br>Un usuario podrá cambiar manualmente el estado de inclusión/exclusión y la categoría de {{forecastByModule}} desde su hoja de cálculo.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configure como desearía categorizar {{forecastByModule}}. <br><br>Tenga en cuenta que la Configuración de rango no se puede cambiar después de confirmar por primera vez. En las instancias actualizadas, la Configuración de rango se bloquea con los datos de previsión existentes.<br><br>Puede seleccionar dos o más categorías en base a los rangos de probabilidad o crear categorías no basadas en la probabilidad.<br><br>Hay casillas de verificación a la izquierda de sus categorías personalizadas; utilícelas para decidir qué rangos se incluirán en la cantidad de la Previsión que se ha enviado y notificado a los administradores.<br><br>Los usuarios pueden cambiar manualmente el estado de inclusión/exclusión y la categoría de {{forecastByModule}} desde su hoja de cálculo.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Seleccione las columnas que desea que el usuario complete para sus Pronósticos de cada {{forecastByModuleSingular}}. Por favor, tenga en cuenta que la cantidad probable está ligada a la cantidad indicada en {{forecastByModule}}; por esta razón la columna Probable no se puede esconder.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Seleccione las columnas que desee ver en el módulo de Pronósticos. La lista de campos combinará  la hoja de trabajo y permitirá al usuario elegir cómo configurar su vista.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Soy un marcador de posición para Pronósticos de How-to text!',

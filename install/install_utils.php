@@ -897,16 +897,39 @@ function handleSidecarConfig()
 }
 
 /**
+ * Returns regular expressin patterns of the paths which should be forbidden to access form the web
+ *
+ * @return string[]
+ */
+function getForbiddenPaths()
+{
+    return [
+        '\.git',
+        '\.log$',
+        '^bin/',
+        '^cache/diagnostic/',
+        '^composer\.(json|lock)$',
+        '^cron\.php$',
+        '^custom/blowfish/',
+        '^dist/',
+        '^emailmandelivery\.php$',
+        '^files\.md5$',
+        '^src/',
+        '^upload/',
+        '^vendor/(?!ytree.*\.(css|gif|js|png)$)',
+// @codingStandardsIgnoreStart
+        '^(cache|clients|data|examples|include|jssource|log4php|metadata|ModuleInstall|modules|soap|xtemplate)/.*\.(php|tpl)$',
+// @codingStandardsIgnoreEnd
+    ];
+}
+
+/**
  * Set up proper .htaccess content
  */
 function getHtaccessData($htaccess_file)
 {
     global $sugar_config;
-    if(!empty($_SERVER['SERVER_SOFTWARE'])) {
-        $ignoreCase = (substr_count(strtolower($_SERVER['SERVER_SOFTWARE']), 'apache/2') > 0)?'(?i)':'';
-    } else {
-        $ignoreCase = '';
-    }
+
     $contents = '';
 
     // Adding RewriteBase path for vhost and alias configurations
@@ -914,7 +937,6 @@ function getHtaccessData($htaccess_file)
     if(empty($basePath)) $basePath = '/';
 
     $restrict_str = <<<EOQ
-
 # BEGIN SUGARCRM RESTRICTIONS
 
 EOQ;
@@ -923,22 +945,7 @@ EOQ;
         $restrict_str .= "php_value suhosin.executor.include.whitelist upload\n";
     }
 
-    // @codingStandardsIgnoreStart
     $restrict_str .= <<<EOQ
-RedirectMatch 403 {$ignoreCase}.*\.log$
-RedirectMatch 403 {$ignoreCase}/+not_imported_.*\.txt
-RedirectMatch 403 {$ignoreCase}/+(soap|cache|xtemplate|data|examples|include|log4php|metadata|modules|clients|jssource|ModuleInstall)/+.*\.(php|tpl)
-RedirectMatch 403 {$ignoreCase}/+emailmandelivery\.php
-RedirectMatch 403 {$ignoreCase}/+upload/
-RedirectMatch 403 {$ignoreCase}/+custom/+blowfish
-RedirectMatch 403 {$ignoreCase}/+cache/+diagnostic
-RedirectMatch 403 {$ignoreCase}/+files\.md5$
-RedirectMatch 403 {$ignoreCase}/+composer\.(json|lock)
-RedirectMatch 403 {$ignoreCase}/+vendor/(?!ytree.*\.(css|js|gif|png))
-RedirectMatch 403 {$ignoreCase}/+bin/
-RedirectMatch 403 {$ignoreCase}/+src/
-RedirectMatch 403 {$ignoreCase}.*/\.git
-
 # Fix mimetype for logo.svg (SP-1395)
 AddType     image/svg+xml     .svg
 AddType     application/json  .json
@@ -948,6 +955,16 @@ AddType     application/javascript  .js
     Options +FollowSymLinks
     RewriteEngine On
     RewriteBase {$basePath}
+
+EOQ;
+
+    foreach (getForbiddenPaths() as $path) {
+        $restrict_str .= sprintf('    RewriteRule (?i)%s - [F]', $path) . PHP_EOL;
+    }
+
+// @codingStandardsIgnoreStart
+    $restrict_str .= <<<EOQ
+
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^rest/(.*)$ api/rest.php?__sugar_url=$1 [L,QSA]
@@ -1025,6 +1042,7 @@ function handleHtaccess()
  * (re)write the web.config file to prevent browser access to the log file
  *
  * @param bool $iisCheck If upgrade running from CLI IIS_UrlRewriteModule not set. So for CliUpgrader can skip it
+ * @link https://docs.microsoft.com/en-us/iis/extensions/url-rewrite-module/url-rewrite-module-configuration-reference
  */
 function handleWebConfig($iisCheck = true)
 {
@@ -1032,49 +1050,7 @@ function handleWebConfig($iisCheck = true)
         return;
     }
 
-    global $setup_site_log_dir;
-    global $setup_site_log_file;
-    global $sugar_config;
-
-    // Bug 36968 - Fallback to using $sugar_config values when we are not calling this from the installer
-    if (empty($setup_site_log_file)) {
-        $setup_site_log_file = $sugar_config['log_file'];
-        if ( empty($sugar_config['log_file']) ) {
-            $setup_site_log_file = 'sugarcrm.log';
-        }
-    }
-    if (empty($setup_site_log_dir)) {
-        $setup_site_log_dir = $sugar_config['log_dir'];
-        if ( empty($sugar_config['log_dir']) ) {
-            $setup_site_log_dir = '.';
-        }
-    }
-
-    $prefix = $setup_site_log_dir.empty($setup_site_log_dir)?'':'/';
-
-
     $redirect_config_array = array(
-    array('1'=> $prefix.str_replace('.','\\.',$setup_site_log_file).'\\.*' ,'2'=>'log_file_restricted.html'),
-    array('1'=> $prefix.'install\.log' ,'2'=>'log_file_restricted.html'),
-    array('1'=> $prefix.'upgradeWizard\.log' ,'2'=>'log_file_restricted.html'),
-    array('1'=> $prefix.'emailman\.log' ,'2'=>'log_file_restricted.html'),
-    array('1'=>'not_imported_.*\.txt' ,'2'=>'log_file_restricted.html'),
-    array('1'=>'vendor/XTemplate/(.*)/(.*)\.php$' ,'2'=>'index.php'),
-    array('1'=>'data/(.*)\.php$' ,'2'=>'index.php'),
-    array('1'=>'examples/(.*)\.php$' ,'2'=>'index.php'),
-    array('1'=>'include/(.*)\.php$' ,'2'=>'index.php'),
-    array('1'=>'include/(.*)/(.*)\.php$' ,'2'=>'index.php'),
-    array('1'=>'vendor/log4php/(.*)\.php$' ,'2'=>'index.php'),
-    array('1'=>'vendor/log4php/(.*)/(.*)' ,'2'=>'index.php'),
-    array('1'=>'metadata/(.*)/(.*)\.php$' ,'2'=>'index.php'),
-    array('1'=>'modules/(.*)/(.*)\.php$' ,'2'=>'index.php'),
-    array('1'=>'clients/(.*)/(.*)\.php$' ,'2'=>'index.php'),
-    array('1'=>'jssource/(.*)/(.*)\.php$' ,'2'=>'index.php'),
-    array('1'=>'ModuleInstall/(.*)/(.*)\.php$' ,'2'=>'index.php'),
-    array('1'=>'soap/(.*)\.php$' ,'2'=>'index.php'),
-    array('1'=>'emailmandelivery\.php' ,'2'=>'index.php'),
-    array('1'=>'cron\.php' ,'2'=>'index.php'),
-    array('1'=> $sugar_config['upload_dir'].'.*' ,'2'=>'index.php'),
     array('1' => '^portal$', '2' => 'portal/'),
     );
 
@@ -1142,6 +1118,24 @@ function handleWebConfig($iisCheck = true)
             $xmldoc->startElement('rewrite');
             echo "<p>Rebuilding rewrite element</p>\n";
                 $xmldoc->startElement('rules');
+
+    $i = 0;
+
+    foreach (getForbiddenPaths() as $path) {
+        $xmldoc->startElement('rule');
+        $xmldoc->writeAttribute('name', sprintf('forbid-%02d', ++$i));
+        $xmldoc->writeAttribute('stopProcessing', 'true');
+        $xmldoc->startElement('match');
+        $xmldoc->writeAttribute('url', $path);
+        $xmldoc->endElement();
+        $xmldoc->startElement('action');
+        $xmldoc->writeAttribute('type', 'CustomResponse');
+        $xmldoc->writeAttribute('statusCode', '403');
+        $xmldoc->writeAttribute('statusReason', 'Forbidden by SugarCRM');
+        $xmldoc->endElement();
+        $xmldoc->endElement();
+    }
+
                 for ($i = 0; $i < count($redirect_config_array); $i++) {
                     $xmldoc->startElement('rule');
                         $xmldoc->writeAttribute('name', "redirect$i");
@@ -1338,16 +1332,6 @@ function insert_default_settings(){
     $db->query("INSERT INTO config (category, name, value) VALUES ('tracker', 'tracker_sessions', '1')");
     $db->query("INSERT INTO config (category, name, value) VALUES ('tracker', 'tracker_queries', '1')");
 
-    //systems data
-    global $sugar_config;
-
-    $system = new System();
-    $system->system_key = $sugar_config['unique_key'];
-    $system->user_id = 1;
-    $system->last_connect_date = create_current_date_time();
-    $system_id = $system->retrieveNextKey(false, true);
-    $db->query( "INSERT INTO config (category, name, value) VALUES ( 'system', 'system_id', '" . $system_id . "')" );
-
     $db->query( "INSERT INTO config (category, name, value) VALUES ( 'system', 'skypeout_on', '1')" );
     $db->query( "INSERT INTO config (category, name, value) VALUES ( 'system', 'tweettocase_on', '0' )");
 
@@ -1355,7 +1339,8 @@ function insert_default_settings(){
 
 
 
-function update_license_settings( $users, $expire_date, $key, $num_lic_oc ){
+function update_license_settings($users, $expire_date, $key)
+{
     global $db;
 
     $query = "DELETE FROM config WHERE category='license' AND name='users'";
@@ -1371,11 +1356,6 @@ function update_license_settings( $users, $expire_date, $key, $num_lic_oc ){
     $query = "DELETE FROM config WHERE category='license' AND name='key'";
     $db->query($query);
     $query = "INSERT INTO config (value, category, name) VALUES ('$key', 'license', 'key')";
-    $db->query($query);
-
-    $query = "DELETE FROM config WHERE category='license' AND name='num_lic_oc'";
-    $db->query($query);
-    $query = "INSERT INTO config (value, category, name) VALUES ('$num_lic_oc', 'license', 'num_lic_oc')";
     $db->query($query);
 }
 
@@ -1679,24 +1659,17 @@ function pullSilentInstallVarsIntoSession() {
     $derived = array (
         'setup_site_admin_password_retype'      => $sugar_config_si['setup_site_admin_password'],
         'setup_db_sugarsales_password_retype'   => $config_subset['setup_db_sugarsales_password'],
-        'oc_run' => 'convert',
     );
-    if(isset($sugar_config_si['oc_server_url']))
-        $derived['oc_server_url'] = $sugar_config_si['oc_server_url'];
-    if(isset($sugar_config_si['oc_username']))
-        $derived['oc_username'] = $sugar_config_si['oc_username'];
-    if(isset($sugar_config_si['oc_password']))
-        $derived['oc_password'] = $sugar_config_si['oc_password'];
+
     if(isset($sugar_config_si['install_method']))
         $derived['install_method'] = $sugar_config_si['install_method'];
-    
+
     $needles = array(
         'setup_db_create_database',
         'setup_db_create_sugarsales_user',
         'setup_license_key_users',
         'setup_license_key_expire_date',
         'setup_license_key',
-        'setup_num_lic_oc',
         'default_currency_iso4217',
         'default_currency_name',
         'default_currency_significant_digits',
@@ -1757,22 +1730,6 @@ function copyFromArray($input_array, $needles, $output_array){
          }
     }
 }
-
-function validate_offlineClientConfig() {
-    global $mod_strings;
-    $errors = array();
-    if(empty($_SESSION['oc_server_url']) || $_SESSION['oc_server_url'] == 'http://'){
-         $errors[] = '<span class="error"> Sugar Server Url is required.</span>';
-    }
-    if(empty($_SESSION['oc_username'])){
-         $errors[] = '<span class="error"> Username of server user is required.</span>';
-    }
-    if(empty($_SESSION['oc_password'])){
-         $errors[] = '<span class="error"> Password is required.</span>';
-    }
-    return $errors;
-}
-
 
 /**
  * handles language pack uploads - code based off of upload_file->final_move()
@@ -2088,13 +2045,6 @@ function getInstallType( $type_string ){
 }
 }
 
-function removeConfig_SIFile(){
-    if(file_exists('config_si.php')){
-       unlink('config_si.php');
-    }
-}
-
-
 //mysqli connector has a separate parameter for port.. We need to separate it out from the host name
 function getHostPortFromString($hostname=''){
 
@@ -2262,7 +2212,6 @@ function post_install_modules(){
 }
 
 function get_help_button_url(){
-    $help_url = 'http://support.sugarcrm.com/02_Documentation/01_Sugar_Editions/05_Sugar_Community_Edition';
     $help_url = 'http://support.sugarcrm.com/02_Documentation/01_Sugar_Editions/04_Sugar_Professional';
     $help_url = 'http://support.sugarcrm.com/02_Documentation/01_Sugar_Editions/02_Sugar_Enterprise';
 

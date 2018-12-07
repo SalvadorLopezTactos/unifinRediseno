@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Muistiinpanoluettelon työpöytä',
+
     'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa asiakkaan.',
     'LBL_ACCOUNT_ID' => 'Asiakkaan ID:',
     'LBL_CASE_ID' => 'Palvelupyynnön ID:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Kuvaus',
     'LBL_EMAIL_ADDRESS' => 'Sähköpostiosoite:',
     'LBL_EMAIL_ATTACHMENT' => 'Sähköpostin liite',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Sähköpostin liite',
     'LBL_FILE_MIME_TYPE' => 'Mime-tyyppi',
+    'LBL_FILE_EXTENSION' => 'Tiedostotunniste',
+    'LBL_FILE_SOURCE' => 'Lähdetiedosto',
+    'LBL_FILE_SIZE' => 'Tiedoston koko',
     'LBL_FILE_URL' => 'Tiedoston URL',
     'LBL_FILENAME' => 'Liite:',
     'LBL_LEAD_ID' => 'Liidin ID:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Myyntimahdollisuuden ID:',
     'LBL_PARENT_ID' => 'Vanhemman ID:',
     'LBL_PARENT_TYPE' => 'Kannan tyyppi',
+    'LBL_EMAIL_TYPE' => 'Sähköpostin tyyppi',
+    'LBL_EMAIL_ID' => 'Sähköpostin tunnus',
     'LBL_PHONE' => 'Puhelin:',
     'LBL_PORTAL_FLAG' => 'Näytä Portalissa?',
     'LBL_EMBED_FLAG' => 'Upota sähköpostiin?',

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Řídicí panel cílové skupiny',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Řídicí panel záznamů cílové skupiny',
+
   'LBL_MODULE_NAME' => 'Seznam adresátů',
   'LBL_MODULE_NAME_SINGULAR' => 'Kontakt',
   'LBL_MODULE_ID'   => 'Seznam adresátů',
@@ -195,4 +199,6 @@ Vytvoření modulu {{module_name}}:
 2. Kliknutím na tlačítko „Uložit“ dokončete nový záznam a vraťte se na předchozí stránku.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Reporty adresátů',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Se souhlasem pro obchodní účely',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Poslední aktualizace souhlasu',
 );

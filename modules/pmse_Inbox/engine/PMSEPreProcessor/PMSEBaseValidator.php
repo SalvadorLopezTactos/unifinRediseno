@@ -214,6 +214,8 @@ class PMSEBaseValidator
         $validatorKey = $this->getCacheKey();
         $keys = $registry->get($validatorKey, []);
 
+        $keys = is_array($keys) ? $keys : [$keys];
+
         // The other is to be able to loop and drop
         foreach ($keys as $key) {
             $registry->drop($key);

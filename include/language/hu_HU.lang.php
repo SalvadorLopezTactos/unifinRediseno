@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'OAuth fogyasztói kulcsok',
     'OAuthTokens' => 'Szerzői kulcs',
     'Filters' => 'Szűrők',
-    'UserSignatures' => 'Felhasználói aláírások',
+    'UserSignatures' => 'E-mail aláírások',
     'Shippers' => 'Szállítási szolgáltatók',
     'Styleguide' => 'Stílus kézikönyv',
     'Feedbacks' => 'Visszajelzések',
     'Tags' => 'Címkék',
     'Categories' => 'Kategóriák',
     'Dashboards' => 'Műszerfalak',
+    'OutboundEmail' => 'E-mail beállítások',
+    'EmailParticipants' => 'E-mail résztvevők',
+    'DataPrivacy' => 'Adatvédelem',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'Előírás',
         'Tasks' => 'Fe',
-        'Dashboards' => 'Mf',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => 'AV',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => 'Terméktípus',
     'Shippers' => 'Beszállító',
     'Subscriptions' => 'Feliratkozás',
-    'UserSignatures' => 'Felhasználói aláírás',
+    'UserSignatures' => 'E-mail aláírás',
     'Feedbacks' => 'Visszajelzés',
     'Tags' => 'Címke',
     'Categories' => 'Kategória',
+    'OutboundEmail' => 'E-mail beállítás',
+    'EmailParticipants' => 'E-mail résztvevő',
+    'DataPrivacy' => 'Adatvédelem',
   ),
 
 /*
@@ -329,6 +336,11 @@ $app_list_strings = array (
     'Existing Business' => 'Meglévő üzlet',
     'New Business' => 'Új üzlet',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => 'Aktív',
+            'Inactive' => 'Inaktív',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => 'Bevétel',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => 'Befolyásoló',
     'Other' => 'Egyéb',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => 'Aktív',
+            'Inactive' => 'Inaktív',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => 'Aktív',
+            'Inactive' => 'Inaktív',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => 'Elsődleges kapcsolat',
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => 'Feladat',
       'KBContents' => 'Tudásbázis',
+      'Notes' => 'Megjegyzés',
   ),
 
   'record_type_display_notes' =>
@@ -659,6 +683,14 @@ $app_list_strings = array (
     'Calls' => 'Hívás',
       'KBContents' => 'Tudásbázis',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => 'Kliens',
+        'Contacts' => 'Kapcsolat',
+        'Employees' => 'Alkalmazott',
+        'Leads' => 'Ajánlás',
+        'Prospects' => 'Cél',
+        'Users' => 'Felhasználó',
+    ),
 
   'parent_type_display' =>
   array (
@@ -678,7 +710,7 @@ $app_list_strings = array (
 
     'Prospects' => 'Cél',
       'KBContents' => 'Tudásbázis',
-
+      'Notes' => 'Megjegyzés',
   ),
 
   'product_status_default_key' => 'Szállítás',
@@ -832,7 +864,6 @@ $app_list_strings = array (
     'Product' => 'Termék',
     'User' => 'Felhasználó',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => 'E-mail:',
     'Twitter' => 'Twitter'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => 'Adatvédelmi politikára vonatkozó kérelem',
+        'Send Personal Information being processed' => 'Feldolgozás alatt lévő személyes adatok küldése',
+        'Rectify Information' => 'Adatok helyesbítése',
+        'Request to Erase Information' => 'Információtörlés kérése',
+        'Export Information' => 'Információ exportálása',
+        'Restrict Processing' => 'Feldolgozás korlátozása',
+        'Object to Processing' => 'Tiltakozás a feldolgozással szemben',
+        'Consent to Process' => 'Hozzájárulás a feldolgozáshoz',
+        'Withdraw Consent' => 'Hozzájárulás visszavonása',
+        'Other' => 'Egyéb',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => 'Üzleti kommunikáció',
+        'Marketing Communications by company' => 'Marketing kommunikáció vállalat alapján',
+        'Marketing Communications by partners' => 'Marketing kommunikáció partner alapján',
+    ),
+    'dataprivacy_status_default_key' => 'Megnyitás',
+    'dataprivacy_status_dom' => array(
+        'Open' => 'Megnyitás',
+        'Closed' => 'Befejezve',
+        'Rejected' => 'Elutasítva',
+    ),
+    'dataprivacy_priority_default_key' => 'Alacsony',
+    'dataprivacy_priority_dom' => array(
+        'Low' => 'Alacsony',
+        'Medium' => 'Közepes',
+        'High' => 'Magas',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => 'Stúdió',
     'Upgrade' => 'Frissítés',
     'Users' => 'Felhasználók',
+    'OutboundEmail' => 'Email beállítások',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => 'Sikertelen',
                                         'completed'     => 'Befejezett',
                                         'no curl'       => 'Nem fut: nincs elérhető cURL',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => 'Piszkozat',
+        'Archived' => 'Archiválva',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => 'Elfojtási lista - azonosító alapján',
     'test' => 'Teszt [Alt+T]',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => 'Aktív',
+             'Inactive' => 'Inaktív',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3 hét',
         '31' => '1 hónap',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => 'Aktív',
-    'Inactive' => 'Inaktív',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => 'Magas',
         'medium'    => 'Közepes',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => 'Nincs',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'Google',
+        'exchange' => 'Exchange',
+        'outlook' => 'Outlook',
+        'other' => 'Egyéb',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => 'I',
@@ -2032,6 +2099,11 @@ $app_list_strings = array (
         'ACTIVE' => 'Engedélyezett',
         'INACTIVE' => 'Tiltott',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => 'Rekord',
+        'records' => 'Lista',
+        'activities' => 'Tevékenységfolyam',
+    ),
 );
 
 $app_strings = array (
@@ -2043,11 +2115,11 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Követő link',
   'LBL_TOGGLE_VISIBILITY' => 'Láthatóság szabályozása', // Record view header panel element
   'LBL_ACTIVITIES' => 'Tevékenységek',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. Minden jog fenntartva.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. Minden jog fenntartva.',
     'LBL_TRADEMARK' => 'A SugarCRM, a Sugar és a 3-D kocka a SugarCRM Inc. bejegyzett védjegyei. '.
         'A termékben használt vagy abban megjelenő minden más cég- és terméknév az adott, '.
         'A SugarCRM ®, a Sugar Enterprise™ és a  Sugar™ SugarCRM Inc. védjegyek.',
-    'LBL_TRADEMARK2' => 'A SugarCRM ®, a Sugar Enterprise™ és a  Sugar™ SugarCRM Inc. védjegyek.',
+    'LBL_TRADEMARK2' => 'A SugarCRM®, a Sugar Enterprise™ és a Sugar™ a SugarCRM Inc. védjegyei.',
     'LBL_SEND_INVITE' => 'Meghívó küldése',
   'LBL_INVITEES' => 'Meghívottak',
     'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'A vendégek nem fogják megkapni a meghívóját',
@@ -2116,6 +2188,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => 'SMTP engedélyezése SSL vagy TLS felett?',
     'LBL_NO_ACTION'                         => 'Ehhez a névhez fűződően nincs tevékenység.',
     'LBL_NO_DATA'                           => 'Nincs adat',
+    'LBL_NOT_APPLICABLE'                    => 'Nem vonatkozik',
     'LBL_ROUTING_ADD_RULE'                  => 'Szabály hozzáadása',
     'LBL_ROUTING_ALL'                       => 'Legalább',
     'LBL_ROUTING_ANY'                       => 'Valami',
@@ -2320,7 +2393,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Mentés',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Mappa hozzáadása',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Ez a mappa nem módosítható',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Biztos benne, hogy törölni kívánja ezt a mappát?\nA folyamat nem visszafordítható.\nA törlés a mappa teljes tartalmát érinti.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Biztos benne, hogy törölni kívánja ezt a mappát?\\nA folyamat nem visszafordítható.\\nA törlés a mappa teljes tartalmát érinti.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'Új mappa neve',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'A feladat végrehajtása előtt, kérem, válasszon egy mappát!',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Mappák kezelése',
@@ -2479,7 +2552,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Minden Postafiók szinkronizálása',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'Az email elküldése megtörtént a megadott email címre, a kimenő levelek beállításait használva. Kérem, ellenőrizze hogy a levél megérkezett.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'A parancs végrehajtása szinkronizálni fogja a postafiókokat és azok tartalmát.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Végrehajtja a teljes szinkronizálást?\nA nagyméretű postafiókoknál ez eltarthat néhány percig.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Végrehajtja a teljes szinkronizálást?\\nA nagyméretű postafiókoknál ez eltarthat néhány percig.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Nyomja meg a Shift vagy a Ctrl billentyűket, több mappa kiválasztásához!',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Általános',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Elérhetó Csoport mappák',
@@ -2493,7 +2566,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_REQUIRE_REFRESH'    => 'Válassza ki az egy oldalon megjelenő emailek számát a Beérkező leveleknél. A változtatás megjelenítéséhez adott esetben szükség lehet egy oldalfrissítésre.',
     'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => 'Postafiók lekérése',
     'LBL_EMAIL_SETTINGS_RULES'              => 'Szabályok',
-    'LBL_EMAIL_SETTINGS_SAVED'              => 'A beállítások mentésre kerültek.\n\nAz új beállítások életbe léptetéséhez frissítse az oldalt!',
+    'LBL_EMAIL_SETTINGS_SAVED'              => 'A beállítások mentésre kerültek.\\n\\nAz új beállítások életbe léptetéséhez frissítse az oldalt!',
     'LBL_EMAIL_SETTINGS_MUST_RELOAD'        => 'Az új beállítások élesítéséhez frissítenie kell az oldalt.',
     'LBL_EMAIL_SETTINGS_SEND_EMAIL_AS'      => 'Csak egyszerű szöveges emailek küldése',
     'LBL_EMAIL_SETTINGS_SHOW_IN_FOLDERS'    => 'Aktív',
@@ -2547,6 +2620,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'Az importálás sikeres',
     'LBL_EMAIL_IMPORT_FAIL'                 => 'Az importálás sikertelen, mivel az üzenetet már importálták vagy törölték a szerverről',
 
+    'LBL_EMAILS_FROM' => 'Elküldött e-mailek',
+    'LBL_EMAILS_RECEIVED' => 'Fogadott e-mailek',
+    'LBL_EMAIL_ADDRESSES_USED' => 'E-mailekben használt e-mail címek',
+    'LBL_EMAIL_ADDRESS' => 'E-mail cím',
+    'LBL_FROM' => 'Feladó',
+    'LBL_TO' => 'Címzett',
+    'LBL_CC' => 'CC',
+    'LBL_BCC' => 'BCC',
+
     'LBL_LINK_NONE'=> 'Egyik sem',
     'LBL_LINK_ALL'=> 'Mind',
     'LBL_LINK_RECORDS'=> 'Rekordok',
@@ -2588,7 +2670,9 @@ $app_strings = array (
     'ERR_AJAX_LOAD_FOOTER' => 'Ha a hiba továbbra is fennáll, kérem, lépjen kapcsolatba az adminisztrátorral, hogy letiltsa az Ajax engedélyeket erre a modulra nézve!',
     'ERR_CREATING_FIELDS' => 'Hiba kiegészítő mezők kitöltésekor:',
     'ERR_CREATING_TABLE' => 'Hiba a tábla létrehozásakor:',
-    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "A tizedesjel nem egyezhet meg az ezreselválasztóval.\n\n Kérem, módosítsa!",
+    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "A tizedesjel nem egyezhet meg az ezreselválasztóval.
+
+ Kérem, módosítsa!",
     'ERR_DELETE_RECORD' => 'Adjon meg egy rekord azonosítót a kapcsolat törléséhez!',
     'ERR_EXPORT_DISABLED' => 'Export letiltva.',
     'ERR_EXPORT_TYPE' => 'Hiba az exportálásnál',
@@ -2605,6 +2689,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Egy aktív munkamenet szükséges a tartalom exportálásához..',
     'ERR_NO_HEADER_ID' => 'Ez a funkció nem elérhető ebben a témában.',
     'ERR_NOT_ADMIN' => "Nincs jogosultsága az adminisztrációba lépéshez.",
+    'ERR_DISABLED_FOR_IDM_MODE' => "Az opció letiltott a SugarCRM felületen IDM módban, és elérhető a Felhőkonzol felületen.",
+    'ERR_GOTO_CLOUD_CONSOLE' => "Nyissa meg a <a href=\"%s\" target=\"_blank\">Felhőkonzol</a> felületet.",
     'ERR_MISSING_REQUIRED_FIELDS' => 'Kötelező mezők hiányoznak:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Érvénytelen kötelező mező:',
     'ERR_INVALID_VALUE' => 'Érvénytelen érték:',
@@ -2910,7 +2996,7 @@ $app_strings = array (
     'LBL_LIST_NAME' => 'Név',
     'LBL_LIST_OF' => 'a',
     'LBL_LIST_PHONE' => 'Telefon',
-    'LBL_LIST_RELATED_TO' => 'Hozzárendelve ehhez:',
+    'LBL_LIST_RELATED_TO' => 'A következővel kapcsolatban',
     'LBL_LIST_USER_NAME' => 'Felhasználónév',
     'LBL_LISTVIEW_MASS_UPDATE_CONFIRM' => 'Biztos benne, hogy frissíti a teljes listát?',
     'LBL_LISTVIEW_NO_SELECTED' => 'Kérjük, válasszon legalább 1 rekordot a folytatáshoz!',
@@ -2934,7 +3020,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Sikertelen tömeges frissítés. Ismételt próbálkozás ({{num}} / {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Befejezetlen tömeges frissítés. {{num}} rekord változatlan maradt.',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => 'Befejezetlen tömeges frissítés. {{num}} rekord változatlan maradt',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} rekord(ok) érintetlenül maradt(ak) az engedély miatt.',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} rekord figyelmen kívül hagyva engedélyek vagy hibák miatt.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} sikeresen frissítve.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} modul tömeges frissítése',
     'TPL_MASSDELETE_PROGRESS_STATUS' => 'Törlés {{num}} / {{total}}.',
@@ -3006,6 +3092,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'felhasználó által alapértelmezett',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => 'felhasználói kliens',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'csoport fiók',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => 'Név',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => 'Létrehozás',
@@ -3218,7 +3305,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Minden jog fenntartva.<br />A SugarCRM, a Sugar és a 3-D kocka a SugarCRM Inc. bejegyzett védjegyei. '.
         'A termékben használt vagy abban megjelenő minden más cég- és terméknév az adott, '.
         'hozzá kapcsolódó vállalat védjegye lehet.',
@@ -3256,7 +3343,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => 'Jelszó',
     'LBL_LOGGED_OUT' => 'Önt kijelentkeztette a rendszer.',
     'LBL_LOGIN_FORM_LABEL' => 'Bejelentkezési űrlap megjelenítése',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => 'Vissza a bejelentkezéshez',
+    'LBL_LOGIN_INACTIVE_USER' => 'Inaktív felhasználó',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => 'Portál vagy csoportos felhasználó bejelentkezése nem megengedett.',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => 'Műszerfal',
@@ -3323,8 +3412,9 @@ $app_strings = array (
     'LNK_BACKTOTOP' => 'Vissza az elejére',
     'LNK_REMOVE' => 'eltávolítás',
     'LNK_RESUME' => 'Folytatás',
-    'LNK_VIEW_CHANGE_LOG' => 'Változásnapló megtekintése',
-
+    'LNK_VIEW_CHANGE_LOG' => 'Auditnapló megtekintés',
+    'TPL_AUDIT_LOG_TITLE' => 'Auditnapló {{{name}}} számára',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => 'Kérem, kattintson a böngésző Vissza gombjára, és javítsa a hibát!',
     'NTC_DATE_FORMAT' => '(éééé-hh-nn)',
@@ -3358,7 +3448,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "Cégének SugarCRM licencét hamarosan érvényesítenie kell.",
     'ERROR_LICENSE_VALIDATION'=> "Vállalatának SugarCRM licencét érvényesíteni kell. Ezt csak adminisztrátorok tehetik meg.",
     'WARN_LICENSE_VALIDATION'=> "Cégének SugarCRM licencét hamarosan érvényesíteni kell.",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"Az offline kliensek száma jelenleg meghaladja a licencben rögzített korlátot.",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "Az Ön böngészője IE kompatibilis módban fut, amely nem támogatott.",
     'WARN_LICENSE_SEATS'=>  "Figyelem: az aktív felhasználók száma elérte a licencben foglalt maximumot.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Figyelem: az aktív felhasználók száma túllépte a licencben foglalt maximumot.",
@@ -3428,9 +3517,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'Folyamatban...',
     'LBL_REQUEST_PROCESSED'=>'Kész',
     'LBL_AJAX_FAILURE' => 'Ajax hiba',
-    'LBL_OC_STATUS' => 'Offline kliens állapota',
-    'LBL_OC_STATUS_TEXT' => 'Jelzi, hogy a felhasználó képes-e offline kliens használatára.',
-    'LBL_OC_DEFAULT_STATUS' => 'Inaktív',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => 'Keresés...',
     'LBL_SAVED_SEARCH_SHORTCUT' => 'Mentett keresések',
     'LBL_SEARCH_POPULATE_ONLY'=> 'Keresés végrehajtása a fenti keresési űrlap használatával',
@@ -3531,6 +3617,7 @@ $app_strings = array (
     'LBL_COLLAPSE_ALL' => 'Az összes bezárása',
     'LBL_EXPAND_ALL' => 'Az összes kibontása',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => 'Szerkeszt',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => 'Jelentés megtekintése',
     'LBL_DASHLET_REFRESH_LABEL' => 'Frissít',
     'LBL_DASHLET_REMOVE_LABEL' => 'Eltávolít',
     'LBL_DASHLET_DROP_HERE' => 'Húzza be ide',
@@ -4199,7 +4286,9 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Megerősítés',
     'LBL_NO_ACCESS' => '(Nincs hozzáférés)',
     'LBL_NO_ACCESS_LOWER' => 'A felhasználó nem fér hozzá a rekordhoz',
-    'LBL_NO_FIELD_ACCESS' => 'Nincs hozzáférés',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => 'Érték törölve',
+    'LBL_VALUE_ERASED_TOOLTIP' => 'Az információt töröltük adatvédelmi kérés nyomán',
     'LBL_CREATE_RELATED_RECORD' => 'Kapcsolódó rekord létrehozása',
     'LBL_ASSOC_RELATED_RECORD' => 'Létező rekord társítása',
     'LBL_CHOOSE_LINK' => 'Kapcsolódás kiválasztása',
@@ -4268,7 +4357,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => 'Nagyobb',
     'LBL_FONTSIZE_HUGE' => 'Még nagyobb',
     'LBL_FONTSIZE_EXTRA_HUGE' => 'Hatalmas',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => 'Letöltés sikertelen: {{{this}}}',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "Letöltés sikertelen\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => 'Még több...',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => '...Kevesebb',
     'LBL_OFFLINE_MODE' => 'Kapcsolat nélküli üzemmód',
@@ -4337,6 +4426,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => 'Tranzakció részletei',
     'LBL_RECORD_DELETED' => '(Rekord törölve)',
     'LBL_NOT_AVAILABLE' => 'N/A',
+    'LBL_FILE_SIZE' => 'Fájlméret',
     'LBL_FILE_SIZE_UNITS_B' => 'Bájt',
     'LBL_FILE_SIZE_UNITS_KB' => 'kB',
     'LBL_FILE_SIZE_UNITS_MB' => 'MB',
@@ -4460,6 +4550,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => 'A részletes nézet az Ön képernyőjének jobb oldalán nyílik meg.',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => 'Használja a lenti nyilakat ahhoz, hogy egy gyors körutat tegyen ezen menű fő komponensei között.',
 
+    'LBL_COMMENT_ADD' => 'Megjegyzés hozzáadása',
+    'LBL_REQUIRED' => 'Szükséges',
+    'LBL_MORE_BUTTON' => 'További',
+    'LBL_TRY_AGAIN' => 'Próbálja újra',
+    'LBL_NEW_RECORDS' => 'Utoljára létrehozott',
+    'LBL_ASSIGNED_TO_ME' => 'Saját {{{module}}}',
+    'LBL_LISTVIEW_FILTER_ALL' => 'Összes {{{module}}}',
+    'LBL_UNFAVORITE' => 'Nem kedvenc',
+    'LBL_ACTIVITY_CREATE' => '{{{record}}} {{{module}}} létrehozva',
+    'LBL_ACTIVITY_UPDATE' => '{{{changes}}} frissítés itt: {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_LINK' => '{{{relatedRecord}}} hozzákapcsolva: {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UNLINK' => '{{{relatedRecord}}} leválasztva: {{{record}}} {{{module}}}',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{relationship}} következő számára: {{parentModule}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => 'Kapcsolódó rekordok letöltése...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => 'A műszerfal konfiguráció változott. Meg kívánja ismételni a betöltést?',
+    'LBL_RECORDS' => 'Rekordok',
+    'LBL_DASHBOARDS' => 'Műszerfalak',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => '{{searchCriteria}} keresése...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => 'Főmenü',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => 'Új rekord gyors létrehozása',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => 'Pöccintsen további opciókhoz',
+    'LBL_DETAILS' => 'Részletek',
+    'LBL_DETAIL_RELATED' => 'Kapcsolódó',
+    'LBL_CREATE_RELATED_MODULE_WARN' => 'A(z) {{module}} modul igényli a(z) {{relatedModule}} modult. <a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>Hozzon létre {{relatedModule}} rekordot</a>.',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => 'Rekord szerkesztése',
+    'LBL_OFFLINE_MENU_SETTINGS' => 'Kapcsolat nélküli beállítások',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => 'Hibakereső beállítások',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED" : "Az adattitkosítás engedélyezett.',
+    'LBL_OFFLINE_TOTAL_RECORDS' => 'Összes rekord',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => 'Utolsó letöltés',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => 'A fájl letöltése nem lehetséges.',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => 'A műszerfalak betöltése sikertelen a kiszolgálóról',
+    'ERR_FILTERS_FETCHING' => 'A szűrők lekérése sikertelen',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => 'Helyi tárhely titkosítása sikertelen',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => 'Kapcsolat nélküli adatok titkosítása folyamatban. Ez eltarthat néhány percig.',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => 'A kapcsolat nélküli adatok titkosítása befejeződött.',
+    'ERR_ACCESS_SPECIFIC_MODULE' => 'A(z) {{{module}}} modulhoz nem rendelkezik hozzáféréssel.',
+    'LBL_SKIP' => 'Kihagy',
+    'LBL_CONTINUE' => 'Folytatás',
+    'LBL_ENABLE' => 'Engedélyezés',
+    'LBL_MOBILE_TRIAL_UNTIL' => 'Próba határideje',
+    'LBL_MOBILE_SDK_VERSION' => 'SDK verzió',
+    'LBL_LOG_LEVEL' => 'Napló szintje',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => 'A bejelentkezési beállítások újrakonfigurálása befejeződött.',
+    'LBL_TRIAL_PERIOD_EXPIRED' => 'A próba időszak lejárt.',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => 'A kiszolgáló nem támogatja a biztonságos csatlakozást. Kapcsolja ki a biztonságos csatlakozást.',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => 'A kiszolgáló támogatja a biztonságos csatlakozást. Kapcsolja be a biztonságos csatlakozást.',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => 'A kapcsolat nem biztonságos. Vegye fel a kapcsolatot a rendszergazdával.',
+    'LBL_LOGIN_SETTINGS_HEADER' => 'Bejelentkezési beállítások',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => 'Állítsa be a(z) {{{brandName}}} példányt',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => 'Az alkalmazás működéséhez meg kell adnia a(z) {{{brandName}}} példány URL-címét. Amennyiben nem rendelkezik a példány URL-címével, vegye fel a kapcsolatot a rendszergazdával.',
+    'LBL_FACEID' => 'Arcazonosító',
+    'LBL_TOUCHID' => 'Érintés alapú azonosítás',
+    'LBL_ENABLE_TOUCHID' => '{{{biometryType}}} engedélyezése',
+    'LBL_SETUP_TOUCHID' => '{{{biometryType}}} beállítása',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => 'Jelentkezzen be ujjával',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "{{{biometryType}}} nincs beállítva a készüléken. \n\n{{{biometryType}}} beálításához nyissa meg a készülékbeállításokat. A beállítást követően engedélyezze a(z) {{{biometryType}}} funkciót a(z) {{{brandName}}} számára a Főmenü > Beállítások részben.",
+    'LBL_TOUCH_ID_DISCLAIMER' => 'A(z) {{{brandName}}} termék {{{biometryType}}} funkciójának az engedélyezése esetén a(z) {{{brandName}}} eléréséhez jelszó helyett biometrikus azonosítóját használhatja.',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => 'Szeretné folytatni a(z) {{{biometryType}}} engedélyezését?    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => '{{{biometryType}}} engedélyezéséhez adja meg a(z) {{{brandName}}} jelszót',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => 'Beállítás',
+    'LBL_MDM_CONFIRM_CHANGE' => 'Az alkalmazáskonfiguráció változott a Mobile Device Manager részéről. A módosítások alkalmazásához jelentkezzen be újra.',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => 'A készülék beállításaiban adjon hozzáférést a(z) {{{brandName}}} példánynak a helyszín lekéréséhez.',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => 'Az aktuális helyszín nem elérhető',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "Az aktuális helyszín lekérésekor időtúllépés történt. \nPróbálkozzon újra.",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => 'A helyszínre vonatkozó helyjelzők nem elérhetők',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => 'A helykoordináták érvénytelenek',
+    'ERR_MOBILE_INVALID_PASSWORD' => 'Érvénytelen jelszó.',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => 'Az Ön alkalmazása idejétmúlt, és már nem kompatibilis a csatlakozáshoz használt {{{brandName}}} példánnyal. Kívánja frissíteni az alkalmazást?',
+    'LBL_MOBILE_BY' => 'Készítette',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => 'Ez a szűrő nem érhető el offline',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => 'Kapcsolat nélküli rekordok',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => 'Letöltési beállítások',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => 'Kapcsolat nélküli hozzáféréshez töltse le a hozzárendelt, kedvenc és követett rekordokat. A beállítások frissítése a kapcsolat nélküli beállításokban végezhető el.',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "A rekordok letöltése befejeződött. Most már kapcsolat nélküli módban is hozzáférhet ezekehez.",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "Nem történt meg az összes rekord letöltése.\n Kíván újrapróbálkozni?",
+    'LBL_BULK_LOAD_USE_CELLULAR' => 'Mobilhálózati adatkapcsolat használata',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => 'Nem most',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => 'A letöltés szüneteltetett állapotban van, és az alkalmazás ismételt megnyitásakor folytatódik.',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => '{{{module}}} letöltése: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => 'Legújabb rekordok frissítése',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => 'Kapcsolatra várakozás',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => 'Szüneteltetve',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => 'Leállítás folyamatban',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => 'Letöltés',
+    'LBL_BULK_LOAD_BTN_PAUSE' => 'Szünet',
+    'LBL_BULK_LOAD_BTN_RESUME' => 'Folytatás',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => 'Alapértelmezetten csak a WiFi kapcsolatot használja az alkalmazás',
+    'LBL_NPS_RATING_MSG' => "Hogyan értékelné a(z) \n{{{productName}}} használati élményét?",
+    'LBL_NPS_THANKS_MSG' => 'Köszönjük a visszajelzést!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => 'Megkérhetjük, hogy értékelje az App Store áruházban?',
+    'LBL_NPS_NO_THANKS' => 'Nem, köszönöm',
+    'LBL_NPS_NOT_NOW' => 'Nem most',
+    'LBL_NPS_RATE_NOW' => 'Értékelés most',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => 'A hálózat nem elérhető. Az alkalmazást továbbra is használhatja kapcsolat nélküli módban',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => 'A díjak szinkronizálására online módban kerül majd sor. <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>Részletek megtekintése</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => 'Szinkronizálatlan adatok érzékelhetők. Tekintse meg a <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>tranzakciós naplót</a>',
+    'LBL_CONVERT' => 'Konvertálás',
+    'LBL_CONVERT_LEAD' => 'Ajánlás konvertálása',
+    'LBL_SEARCH_EXISTING_RECORD' => 'Létező {{{this}}} keresése',
+    'LBL_DUPLICATES_CHECK_FAILED' => 'Ismétlődések ellenőrzése sikertelen',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => 'Át kívánja helyezni a kapcsolódó tevékenységeket a kapcsolattartó rekordhoz?',
+    'LBL_LEAD_CONVERSION_SUCCESS' => 'Sikeresen konvertálta a(z) {{{name}}} ajánlást',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => 'Nem találhatók ismétlődések.',
+    'ERR_LEAD_CONVERSION_FAIL' => 'Ajánlás konvertálása sikertelen',
+    'LBL_SELECT_DUPLICATE_RECORD' => 'Válasszon az ismétlődő {{{modulePlural}}} közül',
+    'LBL_SELECTED_EXISTING_RECORD' => '{{{moduleSingular}}} kiválasztva',
+    'LBL_CREATED_NEW_RECORD' => 'Új {{{moduleSingular}}} létrehozva',
+    'LBL_VO_BACK_BTN' => 'Vissza gomb',
+    'LBL_VO_HOME_BTN' => 'Kezdőlap gomb',
+    'LBL_VO_DASHBOARD_BTN' => 'Műszerfal gomb',
+    'LBL_VO_SEARCH_BTN' => 'Keresés gomb',
+    'LBL_VO_RIGHT_MENU_BTN' => 'Jobb menü gomb',
+    'LBL_VO_ADD_BTN' => 'Hozzáadás gomb',
+
     //begin portal
 
     //portal record tutorial
@@ -4571,6 +4777,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => 'Jelentés kiválasztása',
     'LBL_REPORT_AUTO_REFRESH' => 'Automatikus frissítés',
     'LBL_REPORT_EDIT' => 'Kijelölt jelentés szerkesztése',
+    'LBL_REFRESH_LIST_AND_CHART' => 'Lista és diagram frissítése',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => 'Ismeretlen',
@@ -4632,6 +4839,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'A HozzárendelésEhhez művelet során hiba lépett fel.',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => 'Nincs hozzáférése a következőhöz: „{{name}}”. Vegye fel a kapcsolatot a rendszergazdával.',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => 'Év {0}',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} Negyedév{0}',
@@ -4643,6 +4853,11 @@ $app_strings = array (
     'LBL_MESSAGE_BOX_TITLE' => 'Riasztás',
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => 'Többszörös előfordulások figyelmen kívül hagyása és mentés',
     'LBL_RESTORE' => 'Visszatérés az eredetihez',
+
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => 'Törlésre jelölt rekordok',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => 'Az adatvédelmi kérésre vonatkozó rekordok megjelenítése a következő számára '
+        . 'Információ törlése.',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'RSS hírek',
@@ -4666,6 +4881,7 @@ $app_strings = array (
     'LBL_UNASSIGNED' => 'Nem hozzárendelt',
     'LBL_ARCHIVE_EMAIL' => 'Email archiválása',
     'LBL_EMAIL_ARCHIVED' => 'Archivált email',
+    'LBL_CREATE_ARCHIVED_EMAIL' => 'Archivált e-mail létrehozása',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => 'Tervezett tevékenységek',
@@ -4697,6 +4913,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Feladataim',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Csoportfeladatok',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Fejlett munkafolyamat',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP vagy régi REST API',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'Cron munka',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => 'Logikai horog',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'Sugar munkafolyamat',
+    'LBL_AUDIT_SUBJECT_USER' => 'Felhasználó',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Web az ajánláshoz',
+
     //common chart strings
     'LBL_CHART' => 'Diagram',
     'LBL_CHART_NO_DATA' => 'Nem található adat.',
@@ -4705,6 +4934,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => 'Vezérlők elrejtése',
     'LBL_CHART_CONTROLS_OPEN' => 'Vezérlők mutatása',
     'LBL_CHART_UNDEFINED' => 'Nem definiált',
+    'LBL_CHART_NO_LABEL' => 'Nem definiált',
+    'LBL_CHART_AMOUNT' => 'Mennyiség',
+    'LBL_CHART_COUNT' => 'Számlálás',
+    'LBL_CHART_PERCENT' => 'Százalék',
+    'LBL_CHART_GROUP' => 'Csoport',
+    'LBL_CHART_DATE' => 'Dátum',
+    'LBL_CHART_KEY' => 'Kulcs',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => 'Diagram típusa',
@@ -4776,6 +5012,10 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'Alapértelmezett dátumszűrő',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => 'Alapértelmezett adatkészlet',
 
+    'LBL_PRODUCT_CATALOG_NAME' => 'Termékkatalógus',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => 'Termékkatalógus',
+    'LBL_PRODUCT_CATALOG_DESC' => 'Tekintsen meg és adjon hozzá tételeket a termékkatalógusból.',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => 'Tekintsen meg és adjon hozzá tételeket a termékkatalógusból.',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}}, ezen a napon: {{date}}, ekkor: {{time}}',
@@ -4788,6 +5028,7 @@ $app_strings = array (
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => 'itt',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'Tevékenységi folyamatom',
     'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'Tekintse meg az adatokon elvégzett tevékenységek egy listáját, és hozzon létre és küldjön el megjegyzéseket.',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => 'Az aktivitási adatfolyam letiltott',
 
     'LBL_DATA_VIEW' => 'Adatnézet',
     'LBL_COMMENT' => 'Megjegyzés',
@@ -4795,6 +5036,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Hiba merült fel a szerverre való csatlakozás során. Próbálja újra!',
     'ERR_RESOLVE_ERRORS' => 'Oldja meg a problémákat a folytatás előtt!',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => 'A jóváhagyáshoz az összes szükséges mezőt ki kell töltenie; mindazonáltal a rekordot továbbra is elutasíthatja vagy átirányíthatja.',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => 'Az elutasításhoz/átirányításhoz az összes szükséges mezőt ki kell töltenie.',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Lista frissítése',
@@ -4822,6 +5067,7 @@ $app_strings = array (
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => 'Mentett jelentésdiagramok dashlet',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'Megjeleníti a mentett jelentések diagramjait.',
+
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => 'Megjelent kapcsolódó cikkek',
@@ -4829,7 +5075,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Előzmények összefoglalója',
-    'TPL_HISTORICAL_SUMMARY' => 'Előzmények Összefoglalása erre  {{name}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => 'Még több előzmény...',
     'LBL_RELATED_CONTACT' => 'Kapcsolódó kapcsolat',
     'LBL_MODULE_TYPE' => 'Típus',
@@ -5070,6 +5316,29 @@ $app_strings = array (
 
     'LBL_FIELD_TRIMMED' => 'A mező kiemelésre került, mert meghaladja a maximális karakterszámot.',
     'LBL_FIELDSIZE_OVERFLOW' => 'A mező meghaladja a maximális karakterszámot.',
+    'LBL_TINYMCE_TARGET_SAME' => 'Ugyanabban az ablakban',
+    'LBL_TINYMCE_TARGET_NEW' => 'Új ablak',
+
+    'LBL_OUTBOUND_EMAILS' => 'E-mail beállítások',
+    'LBL_OUTBOUND_EMAIL' => 'E-mail beállítás',
+
+    'LBL_EMAIL_PARTICIPANTS' => 'E-mail résztvevők',
+    'LBL_EMAIL_PARTICIPANT' => 'E-mail résztvevő',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => 'Adatvédelem',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'Adatvédelem',
+    'LBL_DATAPRIVACY_VIEW_PII' => 'Személyes adatok megtekintése',
+    'LBL_DATAPRIVACY_MARKFORERASE' => 'Megjelölés törléshez',
+    'LBL_DATAPRIVACY_FIELDNAME' => 'Mező',
+    'LBL_DATAPRIVACY_VALUE' => 'Érték',
+    'LBL_DATAPRIVACY_CHANGED_BY' => 'Módosította',
+    'LBL_DATAPRIVACY_SOURCE' => 'Forrás',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => 'Utolsó frissítés',
+    'LBL_DATAPRIVACY_PII' => 'Személyes adatok',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Megjelölés törléshez',
+    'TPL_DATAPRIVACY_PII_TITLE' => 'Személyes adatok, {{{name}}}',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5934,6 +6203,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => 'Kampány' ,
     'email' => 'E-mail:',
     'workflow' => 'Munkafolyamat',
+    'system' => 'Rendszer',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5952,7 +6222,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -6015,6 +6284,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = 'Tudásbázis-sablon';
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'Tudásbázis-sablon';
 $app_list_strings['moduleList']['EmbeddedFiles'] = 'Beágyazott fájlok';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Beágyazott fájl';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'Lek',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'P',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lej',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'Lek',
+    'USD' => 'Dollár',
+    'AFN' => 'Afgáni',
+    'ARS' => 'Pezó',
+    'AWG' => 'Gulden',
+    'AUD' => 'Dollár',
+    'AZN' => 'Új manat',
+    'BSD' => 'Dollár',
+    'BBD' => 'Dollár',
+    'BYR' => 'Rubel',
+    'EUR' => 'Euró',
+    'BZD' => 'Dollár',
+    'BMD' => 'Dollár',
+    'BOB' => 'Boliviano',
+    'BAM' => 'Konvertibilis márka',
+    'BWP' => 'Pula',
+    'BGN' => 'Leva',
+    'BRL' => 'Real',
+    'GBP' => 'Font',
+    'BND' => 'Dollár',
+    'KHR' => 'Riel',
+    'CAD' => 'Dollár',
+    'KYD' => 'Dollár',
+    'CLP' => 'Pezó',
+    'CNY' => 'Kínai renminbi',
+    'COP' => 'Pezó',
+    'CRC' => 'Colón',
+    'HRK' => 'Kuna',
+    'CUP' => 'Pezó',
+    'CZK' => 'Korona',
+    'DKK' => 'Korona',
+    'DOP' => 'Pezó',
+    'XCD' => 'Dollár',
+    'EGP' => 'Font',
+    'SVC' => 'Colón',
+    'EEK' => 'Korona',
+    'FKP' => 'Font',
+    'FJD' => 'Dollár',
+    'GHC' => 'Cedi',
+    'GIP' => 'Font',
+    'GTQ' => 'Quetzal',
+    'GGP' => 'Font',
+    'GYD' => 'Dollár',
+    'HNL' => 'Lempira',
+    'HKD' => 'Dollár',
+    'HUF' => 'Forint',
+    'ISK' => 'Korona',
+    'INR' => 'Rúpia',
+    'IDR' => 'Rúpia',
+    'IRR' => 'Riál',
+    'IMP' => 'Font',
+    'ILS' => 'Új sékel',
+    'JMD' => 'Dollár',
+    'JPY' => 'Jen',
+    'JEP' => 'Font',
+    'KZT' => 'Tenge',
+    'KPW' => 'Von',
+    'KRW' => 'Von',
+    'KGS' => 'Szom',
+    'LAK' => 'Kip',
+    'LVL' => 'Lat',
+    'LBP' => 'Font',
+    'LRD' => 'Dollár',
+    'CHF' => 'Svájci frank',
+    'LTL' => 'Litas',
+    'MKD' => 'Dinár',
+    'MYR' => 'Ringgit',
+    'MUR' => 'Rúpia',
+    'MXN' => 'Pezó',
+    'MNT' => 'Tugrik',
+    'MZN' => 'Metical',
+    'NAD' => 'Dollár',
+    'NPR' => 'Rúpia',
+    'ANG' => 'Gulden',
+    'NZD' => 'Dollár',
+    'NIO' => 'Córdoba',
+    'NGN' => 'Naira',
+    'NOK' => 'Korona',
+    'OMR' => 'Riál',
+    'PKR' => 'Rúpia',
+    'PAB' => 'Balboa',
+    'PYG' => 'Guaraní',
+    'PEN' => 'Új sol',
+    'PHP' => 'Pezó',
+    'PLN' => 'Złoty',
+    'QAR' => 'Riál',
+    'RON' => 'Új lej',
+    'RUB' => 'Rúbel',
+    'SHP' => 'Font',
+    'SAR' => 'Riál',
+    'RSD' => 'Dinár',
+    'SCR' => 'Rúpia',
+    'SGD' => 'Dollár',
+    'SBD' => 'Dollár',
+    'SOS' => 'Schilling',
+    'ZAR' => 'Rand',
+    'LKR' => 'Rúpia',
+    'SEK' => 'Korona',
+    'SRD' => 'Dollár',
+    'SYP' => 'Font',
+    'TWD' => 'Új dollár',
+    'THB' => 'Bát',
+    'TTD' => 'Dollár',
+    'TRY' => 'Líra',
+    'TRL' => 'Líra',
+    'TVD' => 'Dollár',
+    'UAH' => 'Hrivnya',
+    'UYU' => 'Pezó',
+    'UZS' => 'Szom',
+    'VEF' => 'Bolívar',
+    'VND' => 'Dong',
+    'YER' => 'Riál',
+    'ZWD' => 'Zimbabwei dollár',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => 'Egyedüli-Nyerő',

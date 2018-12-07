@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => 'Laatst gewijzigd door:',
   'LBL_ASSIGNED_USER' => 'Toegewezen aan:',
   'LBL_ASSIGNED_USER_NAME' => 'Toegewezen aan',
-  'LBL_SYSTEM_ID' =>'Systeem Id:',
   'LBL_TEAM_NAME' =>'Team Naam:',
   'LBL_TYPE'=>'Type:',
   'LBL_SUBJECT' => 'Onderwerp:',

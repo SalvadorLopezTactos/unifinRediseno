@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om dit BTW-tarief te kunnen verwijderen.',
   'NTC_STATUS' => 'Zet de status op Inactief om dit BTW-tarief te verwijderen uit de BTW-tarief dropdownlijst',
   'NTC_LIST_ORDER' => 'Bepaal de volgorde hoe dit BTW-tarief in de BTW-tarief dropdownlijst wordt getoond',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Actief',
-    'Inactive' => 'Inactief',
-  ),
   'LBL_EDITLAYOUT' => 'Wijzig Lay-out' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Gemaakt Door ID',
   'LBL_MODIFIED_ID'=>'Gewijzigd door ID',

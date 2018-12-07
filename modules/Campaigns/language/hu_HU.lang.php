@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Kérem, válasszon a rendelkezésre álló mezőkből',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Űrlap leírása:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Az űrlap kitöltése egy kampányhoz kapcsolódó ajánlás létrehozását eredményezi',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'A négyzet bejelölésével beleegyezik jövőbeli marketing e-mailek fogadásába',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Kérem, töltse le az "Ajánlás a webről" űrlapot',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'"Ajánlás a webről" űrlap',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Kérem, adja meg az összes szükséges mezőt',

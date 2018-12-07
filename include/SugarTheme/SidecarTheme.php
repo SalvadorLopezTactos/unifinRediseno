@@ -47,7 +47,7 @@ class SidecarTheme
     /**
      * @var array Less files to compile
      */
-    public $lessFilesToCompile = array('bootstrap', 'sugar');
+    public $lessFilesToCompile = array('sugar');
 
 
     /**
@@ -180,7 +180,7 @@ class SidecarTheme
             //Load and set variables
             $this->loadVariables();
             if (!isset($this->variables['baseUrl'])) {
-                //Relative path from /cache/themes/clients/PLATFORM/THEMENAME/bootstrap.css
+                //Relative path from /cache/themes/clients/PLATFORM/THEMENAME/FILE.css
                 //              to   /styleguide/assets/
                 $this->setVariable('baseUrl', '"../../../../styleguide/assets"');
             }
@@ -202,7 +202,7 @@ class SidecarTheme
             }
             //Otherwise write file and return hash
             $hash = md5($css);
-            // Write bootstrap.css on the file system
+            // Write CSS file on the file system
             sugar_mkdir($this->paths['cache'], null, true);
             sugar_file_put_contents($this->getCssFileLocation($lessFile, $hash), $css);
             return $hash;
@@ -221,7 +221,7 @@ class SidecarTheme
         // We compile expected theme by if we found variables.php in the file system (in /custom/themes or /themes)
         $customThemeVars = $this->paths['custom'] . 'variables.php';
         $baseThemeVars = $this->paths['base'] . 'variables.php';
-        return SugarAutoLoader::fileExists($customThemeVars) || SugarAutoLoader::fileExists($baseThemeVars);
+        return file_exists($customThemeVars) || file_exists($baseThemeVars);
     }
 
     /**

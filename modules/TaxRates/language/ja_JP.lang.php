@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => '税率を削除するにはレコード番号を指定してください。',
   'NTC_STATUS' => '税率ドロップダウンリストからこの税率を削除するにはステータスを非アクティブにしてください。',
   'NTC_LIST_ORDER' => 'この税率が税率ドロップダウンで表示される順番を指定してください。',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'アクティブ',
-    'Inactive' => '非アクティブ',
-  ),
   'LBL_EDITLAYOUT' => 'レイアウト編集' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'作成者ID',
   'LBL_MODIFIED_ID'=>'更新者ID',

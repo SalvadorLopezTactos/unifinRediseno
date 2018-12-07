@@ -1,5 +1,5 @@
 <?php
- // created: 2018-02-16 16:59:03
+ // created: 2018-12-05 18:17:34
 $dictionary['Rel_Relaciones']['fields']['consumo_mensual_c']['labelValue'] = 'Consumo Mensual';
 $dictionary['Rel_Relaciones']['fields']['consumo_mensual_c']['enforced'] = '';
 $dictionary['Rel_Relaciones']['fields']['consumo_mensual_c']['dependency'] = '';

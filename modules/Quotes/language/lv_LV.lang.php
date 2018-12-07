@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Piedāvājumu saraksta instrumentu panelis',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Piedāvājumu ierakstu instrumentu panelis',
+
     'LBL_CONTRACTS'=>'Līgumi',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Līgumi',
     'ERR_DELETE_RECORD' => 'Lai dzēstu piedāvājumu, jānorāda ieraksta numurs.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Starpsumma (pamatvalūtā)',
     'LBL_SUBTOTAL' => 'Starpsumma:',
     'LBL_TAXABLE_SUBTOTAL' => 'Ar nodokļiem apliekama starpsumma',
-    'LBL_SYSTEM_ID' => 'Sistēmas ID',
     'LBL_TAX_USDOLLAR'=>'Nodoklis (pamatvalūtā)',
     'LBL_TAX' => 'Nodoklis:',
     'LBL_TAX_TOTAL' => 'Nodokļu kopsumma',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Dzēst atlasītos',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Dzēst atlasītos vienumus',
     'LBL_SAVE_LINE_ITEMS' => 'Saglabājiet jebkādus aktīvos rindas produktus, uzklikšķinot uz zilās atzīmes, kas atrodas blakus katram no tiem, pirms šā piedāvājuma saglabāšanas.',
+    'LBL_COPY_LINE_ITEMS' => 'Saglabājiet jebkādus aktīvos rindas produktus, uzklikšķinot uz zilās atzīmes, kas atrodas blakus katram no tiem, pirms šā piedāvājuma kopēšanas.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Meklēt produktu katalogā',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Dati nav pieejami',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Piedāvāto posteņu kopēšana uz jaunu piedāvājumu.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Piedāvāto posteņu kopēšana uz jaunu piedāvājumu. Šis process var aizņemt kādu laiku.',
 );

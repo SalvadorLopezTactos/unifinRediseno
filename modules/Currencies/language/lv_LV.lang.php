@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Izveidot uzdevumu',
   'NTC_DELETE_CONFIRMATION' => 'Vai tiešām vēlies dzēst šo ierakstu? Jebkurš ieraksts, kurš izmanto šo valūtu tiks konvertēts uz sistēmas noklusēto valūtu, kad tam piekļūs. Labāk uzstādīt statusu uz - neaktīvs',
   'LBL_BELOW_MIN' => 'Valūtas kursam jābūt lielākam par 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktīvs',
-    'Inactive' => 'Neaktīvs',
-  ),
   'LBL_CREATED_BY' => 'Izveidoja',
   'LBL_EDIT_LAYOUT' => 'Rediģēt izkārtojumu' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Tikai administratoriem',
+  'LBL_CURRENCY_DEFAULT' => 'ASV dolāri (noklusējums)',
+
 );
 ?>

@@ -76,9 +76,15 @@ if(!isset($_SESSION['LICENSE_EXPIRES_IN'])){
 	checkSystemLicenseStatus();
 }
 
-if(!ocLicense() && isset($_SESSION['LICENSE_EXPIRES_IN']) && $_SESSION['LICENSE_EXPIRES_IN'] != 'valid' && $_SESSION['LICENSE_EXPIRES_IN'] < -1 ) {
+if (isset($_SESSION['LICENSE_EXPIRES_IN'])
+    && $_SESSION['LICENSE_EXPIRES_IN'] != 'valid'
+    && $_SESSION['LICENSE_EXPIRES_IN'] < -1
+) {
 	echo  " <p align='center' class='error' >". $GLOBALS['app_strings']['ERROR_FULLY_EXPIRED']. "</p>";
-} elseif(!ocLicense() && isset($_SESSION['VALIDATION_EXPIRES_IN']) && $_SESSION['VALIDATION_EXPIRES_IN'] != 'valid' && $_SESSION['VALIDATION_EXPIRES_IN'] < -1 ) {
+} elseif (isset($_SESSION['VALIDATION_EXPIRES_IN'])
+    && $_SESSION['VALIDATION_EXPIRES_IN'] != 'valid'
+    && $_SESSION['VALIDATION_EXPIRES_IN'] < -1
+) {
 	echo "<p align='center' class='error' > ". $GLOBALS['app_strings']['ERROR_LICENSE_EXPIRED']. "</p>";
 }
 //END REQUIRED CODE  DO NOT MODIFY
@@ -86,8 +92,7 @@ if(!ocLicense() && isset($_SESSION['LICENSE_EXPIRES_IN']) && $_SESSION['LICENSE_
 // BEGIN CE-OD License User Limit Enforcement
 global $sugar_flavor;
 if((isset($sugar_flavor) && $sugar_flavor != null) &&
-	($sugar_flavor=='CE' || isset($admin->settings['license_enforce_user_limit']) && $admin->settings['license_enforce_user_limit'] == 1)){
-
+    (isset($admin->settings['license_enforce_user_limit']) && $admin->settings['license_enforce_user_limit'] == 1)) {
 	global $db;
 	$result = $db->query($query, true, "Error filling in user array: ");
 	$row = $db->fetchByAssoc($result);
@@ -219,4 +224,4 @@ if ( !empty($logindisplay) )
 		</script>";
 	}
 
-$sugar_smarty->display('modules/Users/login.tpl'); ?>
+    $sugar_smarty->display('modules/Users/login.tpl');

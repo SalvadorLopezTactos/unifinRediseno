@@ -11,9 +11,14 @@
 
 // $Id: customSugarCharts.js 2010-12-01 23:11:36Z lhuynh $
 
+/**
+ * This chart engine is now deprecated. Use the sucrose chart engine instead.
+ * @deprecated This file will removed in a future release.
+ */
 function loadSugarChart (chartId, jsonFilename, css, chartConfig, params, callback) {
-    this.chartObject = "";
+    (app || SUGAR.App).logger.warn('The Jit chart engine is deprecated.');
 
+    this.chartObject = "";
     if(document.getElementById(chartId) == null) {
         return false;
     }

@@ -10,7 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 /**
  *  Dashboards is used to store dashboard configuration data.
  */
@@ -21,12 +20,6 @@ class Dashboard extends Basic
     public $module_dir = 'Dashboards';
     public $object_name = "Dashboard";
     
-    public function __construct() 
-    {
-        parent::__construct();
-        $this->addVisibilityStrategy("OwnerVisibility");
-    }
-
     /**
      * This overrides the default retrieve function setting the default to encode to false
      */
@@ -126,12 +119,28 @@ class Dashboard extends Basic
      */
     function save($check_notify = FALSE)
     {
-        $this->assigned_user_id = $GLOBALS['current_user']->id;
+        if (empty($this->assigned_user_id)) {
+            $this->assigned_user_id = $GLOBALS['current_user']->id;
+        }
+
+        if (empty($this->team_id)) {
+            $this->team_id = $GLOBALS['current_user']->getPrivateTeamID();
+        }
+
+        if (empty($this->team_set_id)) {
+            $this->load_relationship('teams');
+            $this->teams->add(array($this->team_id));
+        }
+
+        if (empty($this->acl_team_set_id)) {
+            $this->acl_team_set_id = '';
+        }
+
         if (isset($this->view) && !isset($this->view_name)) {
             $this->view_name = $this->view;
         }
-        // never send assignment notifications for dashboards
-        return parent::save(false);
+
+        return parent::save($check_notify);
     }
 
     /**

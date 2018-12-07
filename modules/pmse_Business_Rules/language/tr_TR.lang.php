@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'İş Kuralını İşlet',
   'LBL_MODULE_TITLE' => 'İş Kuralını İşlet',
   'LBL_MODULE_NAME_SINGULAR' => 'İş Kuralını İşlet',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Koşullar',
     'LBL_PMSE_LABEL_RETURN' => 'Dönüş',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Sonuçlar',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Alanı Değiştir',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'İade Değeri',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Koşul ekle',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Sonuç ekle',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Satır Ekle',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Sütünu sil',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Koşulu kaldır',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Sonucu kaldır',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Sütun verisini sil',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Evet',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Hayır',

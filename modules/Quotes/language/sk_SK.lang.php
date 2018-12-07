@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Informačný panel so zoznamom ponúk',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Informačný panel so záznamom ponúk',
+
     'LBL_CONTRACTS'=>'Kontrakty',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Kontrakty',
     'ERR_DELETE_RECORD' => 'K odstráneniu ponuky musíte zadať číslo záznamu.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Medzisúčet (US Dollar)',
     'LBL_SUBTOTAL' => 'Medzisúčet:',
     'LBL_TAXABLE_SUBTOTAL' => 'Zdaniteľný medzisúčet',
-    'LBL_SYSTEM_ID' => 'Systém ID',
     'LBL_TAX_USDOLLAR'=>'DPH (US Dollar)',
     'LBL_TAX' => 'DPH:',
     'LBL_TAX_TOTAL' => 'Celková daň',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Vymazať vybraté',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Vymazať vybraté položky',
     'LBL_SAVE_LINE_ITEMS' => 'Pred uložením tejto ponuky uložte všetky aktívne položky kliknutím na modrú značku začiarknutia vedľa jednotlivých položiek.',
+    'LBL_COPY_LINE_ITEMS' => 'Pred skopírovaním tejto ponuky uložte všetky aktívne položky kliknutím na modrú značku začiarknutia vedľa jednotlivých položiek.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Prehľadávať katalóg produktov',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Žiadne údaje nie sú k dispozícii',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Kopírujú sa riadkové položky ponuky do novej ponuky.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Kopírujú sa riadkové položky ponuky do novej ponuky. Môže to chvíľu trvať.',
 );

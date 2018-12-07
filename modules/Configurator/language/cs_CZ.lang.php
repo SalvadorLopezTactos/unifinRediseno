@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Server Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Subpanelových položek na stránku',
 	'LOG_MEMORY_USAGE'=>'Logovat využití paměti',
-	'LOG_SLOW_QUERIES'=>'Logovat pomalé dotazy',
+    'LOG_SLOW_QUERIES' => 'Logovat pomalé dotazy',
     'LOCK_HOMEPAGE_HELP'=>'Toto nastavení zabraňuje <br /> 1) přidání nových dashletů a domácích stránek na Úvodní stránku, <br /> 2) přetažením dashletu na úvodní stránce',
     'CURRENT_LOGO'=>'Aktuánlí používané logo',
     'CURRENT_LOGO_HELP'=>'Toto logo se zobrazí v levém horním rohu aplikace SugarCRM',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Toto jméno se zobrazí v záhlaví prohlížeče.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Povolit/Zakázat zobrazení e-mailů ze souvisejících (nebo propojených) kontaktů v subpanelu E-mail.',
 
-    'LBL_OC_STATUS'                     => 'Výchozí status offline klienta',
-    'DEFAULT_OC_STATUS'                 => 'Povolit offline klienat pro výchozí nastavení',
-    'LBL_OC_STATUS_DESC' => 'Zaškrtnutím zvolíte, že každý uživatel bude mít přístup k offline klientovi. V opačném případě můžete přístup nastavit v uživatelském nastavení.',
     'SESSION_TIMEOUT' => 'Vypršení session portálu',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Časový limit portalu pro staršií verze je dostupný od verze 6.5.',
     'UPLOAD_MAXSIZE_UNITS' => 'bajtů',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML Login URL nemůže být prázdná',
     'ERR_EMPTY_SAML_CERT' => 'SAML certifikát nemůže být prázdný',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'ID entity SAML nemůže být prázdné',
     'ERR_SAML_LOGIN_URL' => 'SAML Login URL není platné',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL není platné',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'Soubor PEM by měl obsahovat soukromý klíč',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'Soubor PEM by měl obsahovat certifikát x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Poskytnutý certifikát x.509 neodpovídá soukromému klíči',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Toky aktivit',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Povolit toky aktivit',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Zapne toky aktivit pro aplikaci',
 );
 
 

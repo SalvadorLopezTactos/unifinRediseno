@@ -16,32 +16,16 @@
 ({
     plugins: ['Dashlet', 'Chart'],
 
-    tooltiptemplate: null,
-    params: null,
-
-    /**
-     * Track if current user is manager.
-     */
-    isManager: false,
-
-    /**
-     * What module are we forecasting by
-     */
-    forecastBy: null,
-
-    /**
-     * Which field holds the likely case value
-     */
-    likelyField: null,
-
     /**
      * @inheritdoc
      */
     initialize: function(options) {
+        // Track if current user is manager
         this.isManager = app.user.get('is_manager');
         this._initPlugins();
 
         var config = app.metadata.getModule('Forecasts', 'config');
+        // What module are we forecasting by?
         this.forecastBy = config && config.forecast_by || 'Opportunities';
 
         // set the title label in meta the same way the dashlet title is set on render
@@ -64,6 +48,7 @@
         ];
 
         var orderBy = '';
+        // Which field holds the likely case value?
         if (this.forecastBy === 'Opportunities') {
             fields.push('amount');
             orderBy = 'amount:desc';
@@ -80,7 +65,14 @@
             'order_by': orderBy
         };
 
-        this.tooltiptemplate = app.template.getView(this.name + '.tooltiptemplate');
+        // get the locale settings for the active user
+        // this.locale is stored by reference in the chart model
+        this.locale = SUGAR.charts.getUserLocale();
+        // create deep copy for tooltip temp use, etc.
+        // it will be set to chart.locality() after instantiation
+        this.locality = {};
+
+        this.tooltipTemplate = app.template.getView(this.name + '.tooltiptemplate');
     },
 
     /**
@@ -90,7 +82,7 @@
         var self = this;
 
         if (this.settings.get('filter_duration') == 0) {
-            this.settings.set({'filter_duration':'current'}, {'silent':true});
+            this.settings.set({'filter_duration': 'current'}, {'silent': true});
         }
 
         this.setDateRange();
@@ -104,26 +96,28 @@
             }).value();
         }
 
-        this.chart = nv.models.bubbleChart()
+        this.chart = sucrose.charts.bubbleChart()
             .x(function(d) {
-                return d3.time.format('%Y-%m-%d').parse(d.x);
+                return d3sugar.timeParse('%Y-%m-%d')(d.x);
             })
             .y(function(d) {
                 return d.y;
             })
             .margin({top: 0})
-            .tooltipContent(function(key, x, y, e, graph) {
-                e.point.close_date = d3.time.format('%x')(d3.time.format('%Y-%m-%d').parse(e.point.x));
-                e.point.amount = app.currency.formatAmountLocale(e.point.base_amount, e.point.currency_id);
-                return self.tooltiptemplate(e.point).replace(/(\r\n|\n|\r)/gm, '');
-            })
+            .tooltipContent(_.bind(function(eo, properties) {
+                var point = eo.point;
+                var value = this.chart.x()(point);
+                point.close_date = sucrose.utility.dateFormat(value, this.locality.date, this.locality);
+                point.likely = app.currency.formatAmountLocale(point.base_amount, point.currency_id);
+                return self.tooltipTemplate(point).replace(/(\r\n|\n|\r)/gm, '');
+            }, this))
             .showTitle(false)
             .tooltips(true)
             .showLegend(true)
             .direction(app.lang.direction)
-            .bubbleClick(function(e) {
-                self.chart.dispatch.tooltipHide(e);
-                app.router.navigate(app.router.buildRoute(self.forecastBy, e.point.id), {trigger: true});
+            .seriesClick(function(data, eo, chart) {
+                self.chart.dispatch.call('tooltipHide', this);
+                app.router.navigate(app.router.buildRoute(self.forecastBy, eo.point.id), {trigger: true});
             })
             .colorData('class', {step: 2})
             .groupBy(function(d) {
@@ -139,8 +133,13 @@
                     close: app.lang.get('LBL_CHART_LEGEND_CLOSE'),
                     open: app.lang.get('LBL_CHART_LEGEND_OPEN')
                 },
-                noData: app.lang.get('LBL_CHART_NO_DATA')
-            });
+                noData: app.lang.get('LBL_CHART_NO_DATA'),
+                noLabel: app.lang.get('LBL_CHART_NO_LABEL')
+            })
+            .locality(this.locale);
+
+        // create deep copy for tooltip temp use
+        this.locality = sucrose.utility.buildLocality(this.chart.locality(), true);
 
         this.on('data-changed', function() {
             this.renderChart();
@@ -183,7 +182,7 @@
         this.$('svg#' + this.cid).children().remove();
 
         // Load data into chart model and set reference to chart
-        d3.select('svg#' + this.cid)
+        d3sugar.select('svg#' + this.cid)
             .datum(this.chartCollection)
             .transition().duration(500)
             .call(this.chart);
@@ -194,7 +193,7 @@
 
     /**
      * Override the chartResize method in Chart plugin because
-     * bubblechart nvd3 model uses render instead of update.
+     * bubblechart sucrose model uses render instead of update.
      */
     chartResize: function() {
         this.chart.render();
@@ -245,7 +244,9 @@
             }, this),
             properties: {
                 title: app.lang.get('LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME'),
-                value: data.records.length
+                value: data.records.length,
+                xDataType: 'datetime',
+                yDataType: 'numeric'
             }
         };
     },

@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'kliknite tu',
 	'TXT_REMOVE_ME'								=> 'Ak sa chcete odstrániť zo zoznamu tejto správy',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Poslať upozornenia z priradenej užívateľovej adresy',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Predvolene odhlásiť nové e-mailové adresy',
 
 	'LBL_SECURITY_TITLE'						=> 'Bezpečnostné nastavenia správy',
 	'LBL_SECURITY_DESC'							=> 'Skontrolujte nasledujúce nastavenia, ktoré by mali byť zakázané cez prichádzajúce e-maily alebo zobrazené v module E-maily.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Povoliť užívateľom používať tento účet pre odchádzajúce správy:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Pokiaľ je vybraná táto možnosť, všetci užívatelia budú môcť posielať správy pomocou jedného účtu odchádzajúcej pošty, používaného pre odosielanie systémových  hlásení a upozornení. Ak možnosť nie je vybraná, užívatelia stále môžu používať server pre odchádzajúcu poštu po poskytnutí ich vlastných informácii o účte.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Ak je povolené, bude priradenie používateľa \\ &#39;s meno a e-mailovú adresu zahrnuté v poli Od e-mailu. Táto funkcia nemusí pracovať s SMTP serverov, ktoré neumožňujú zaslanie z iného e-mailového konta, než na serveri účet.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Keď sa pridá nová e-mailová adresa, automaticky sa odhlási. E-maily kampane nie je možné doručiť na odhlásené adresy. Zmena tohto nastavenia neovplyvní existujúce e-mailové adresy.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo pošta' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Zmena' /*for 508 compliance fix*/,

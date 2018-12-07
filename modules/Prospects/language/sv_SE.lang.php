@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Instrumentpanel med mållista',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Instrumentpanel med målposter',
+
   'LBL_MODULE_NAME' => 'Targets',
   'LBL_MODULE_NAME_SINGULAR' => 'Target',
   'LBL_MODULE_ID'   => 'Mål',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Hälsning:',
   'LBL_SAVE_PROSPECT' => 'Spara target',
   'LBL_CREATED_OPPORTUNITY' =>'Skapade ny affärsmöjlighet',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'För att skapa en affärsmöjlighet krävs en organisation.\n Var god skapa antingen en ny organisation eller välj en en existerande.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'För att skapa en affärsmöjlighet krävs en organisation.\\n Var god skapa antingen en ny organisation eller välj en en existerande.',
   'LNK_SELECT_ACCOUNT' => "Välj organisation",
   'LNK_NEW_PROSPECT' => 'Skapa target',
   'LNK_PROSPECT_LIST' => 'Targets',
@@ -195,4 +199,6 @@ För att skapa en {{module_name}}:
 2. Klicka på "Spara" för att spara den nya posten och återgå till föregående sida.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Targets&#39; rapporter',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Affärsändamål som samtyckts till',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Samtycke uppdaterades senast',
 );

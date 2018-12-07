@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'توقيعات المستخدم',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'توقيع المستخدم',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'يحتاج هذا التوقيع إلى اسم.',
-    'LBL_SIGNATURE_NAME'         => 'الاسم',
-    'LBL_SIGNATURE'              => 'التوقيع',
-    'LBL_SIGNATURE_HTML'         => 'توقيع HTML',
-    'LBL_SIGNATURE_DEFAULT'      => 'استخدام توقيع؟',
-    'LBL_SIGNATURE_PREPEND'      => 'هل تريد التوقيع على الرد السابق؟',
-    'LBL_SIGNATURES'             => 'التوقيعات',
+    'LBL_DEFAULT_SIGNATURE' => 'افتراضي',
+    'LBL_MODULE_NAME' => 'توقيعات البريد الإلكتروني',
+    'LBL_MODULE_NAME_SINGULAR' => 'توقيع البريد الإلكتروني',
+    'LBL_SIGNATURE_NAME' => 'الاسم',
+    'LBL_SIGNATURE' => 'التوقيع',
+    'LBL_SIGNATURE_HTML' => 'توقيع HTML',
+    'LBL_SIGNATURE_DEFAULT' => 'استخدام توقيع؟',
+    'LBL_SIGNATURE_PREPEND' => 'هل تريد التوقيع على الرد السابق؟',
+    'LBL_SIGNATURES' => 'التوقيعات',
 );

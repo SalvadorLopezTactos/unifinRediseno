@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Create Task',
   'NTC_DELETE_CONFIRMATION' => 'Are you sure you want to delete this record? Any record using this currency will be converted to the system default currency when they are accessed. It may be better to set the status to inactive.',
   'LBL_BELOW_MIN' => 'Conversion rate has to be above 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Active',
-    'Inactive' => 'Inactive',
-  ),
   'LBL_CREATED_BY' => 'Created By',
   'LBL_EDIT_LAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Administrators Only',
+  'LBL_CURRENCY_DEFAULT' => 'US Dollars (Default)',
+
 );
 ?>

@@ -15,80 +15,132 @@
  */
 ({
     extendsFrom: 'FlexListView',
-    plugins: ['ListColumnEllipsis', 'ListRemoveLinks', 'Pagination', 'MassCollection'],
+
+    /**
+     * Changed the address book view to use an independent mass collection
+     *
+     * The address book collection is not the same as the list view
+     * collection and therefore we need to preserve the state of the address
+     * book collection through changes to the list view collection.
+     * `independentMassCollection: true` allows us to indicate that the
+     * collections should not be treated as the same so that we are always
+     * adding to the collection instead of resetting with completely new data.
+     *
+     * @property {boolean}
+     */
+    independentMassCollection: true,
+
+    /**
+     * @inheritdoc
+     */
+    initialize: function(options) {
+        var plugins = [
+            'ListColumnEllipsis',
+            'Pagination',
+            'MassCollection'
+        ];
+
+        this.plugins = _.union(this.plugins || [], plugins);
+        this._super('initialize', [options]);
+    },
+
     /**
      * Removes the event listeners that were added to the mass collection.
+     *
+     * @inheritdoc
      */
     unbindData: function() {
         var massCollection = this.context.get('mass_collection');
+
         if (massCollection) {
-            massCollection.off(null, null, this);
+            this.stopListening(massCollection);
         }
-        this._super("unbindData");
+
+        this._super('unbindData');
     },
+
     /**
-     * Override to inject field names into the request when fetching data for the list.
+     * Listens for changes to the list's mass collection. Anytime new rows are
+     * selected or deselected, those models are synchronized in the selected
+     * recipients collection (`this.model.get('to_collection')`).
      *
-     * @param module
-     * @returns {Array}
-     */
-    getFieldNames: function(module) {
-        // id and module always get returned, so name and email just need to be added
-        return ['name', 'email'];
-    },
-    /**
-     * Override to hook in additional triggers as the mass collection is updated (rows are checked on/off in
-     * the actionmenu field). Also attempts to pre-check any rows when the list is refreshed and selected recipients
-     * are found within the new result set (this behavior occurs when the user searches the address book).
+     * When the user enters a search term, the list is re-rendered with the
+     * results of the search. Any recipients in the result set that have
+     * already been selected are checked automatically.
      *
-     * @private
+     * @inheritdoc
      */
     _render: function() {
-        this._super("_render");
-        var massCollection              = this.context.get('mass_collection'),
-            selectedRecipientsFieldName = 'compose_addressbook_selected_recipients';
+        var massCollection = this.context.get('mass_collection');
+        var selectedRecipients;
+        var selectedRecipientsInList;
+
+        /**
+         * Models in the mass collection may be beans for Contacts, Leads, etc.
+         * Those beans need to be converted to EmailParticipants beans when
+         * they are added to the selected recipients collection.
+         *
+         * @param {Data|Bean} model
+         * @return {Data|Bean}
+         */
+        function convertModelToEmailParticipant(model) {
+            return app.data.createBean('EmailParticipants', {
+                _link: 'to',
+                parent: {
+                    _acl: model.get('_acl') || {},
+                    _erased_fields: model.get('_erased_fields') || [],
+                    type: model.module,
+                    id: model.get('id'),
+                    name: model.get('name')
+                },
+                parent_type: model.module,
+                parent_id: model.get('id'),
+                parent_name: model.get('name')
+            });
+        }
+
+        this._super('_render');
+
+        selectedRecipients = this.model.get('to_collection');
+
         if (massCollection) {
-            // get rid of any old event listeners on the mass collection
-            massCollection.off(null, null, this);
-            // add a new recipient to the selected recipients field as recipients are added to the mass collection
-            massCollection.on('add', function(model) {
-                var existingRecipients = this.model.get(selectedRecipientsFieldName);
-                if (model.id && existingRecipients instanceof Backbone.Collection) {
-                    existingRecipients.add(model);
-                }
-            }, this);
-            // remove a recipient from the selected recipients field as recipients are removed from the mass collection
-            massCollection.on('remove', function(model) {
-                var existingRecipients = this.model.get(selectedRecipientsFieldName);
-                if (model.id && existingRecipients instanceof Backbone.Collection) {
-                    existingRecipients.remove(model);
-                }
-            }, this);
-            // remove from the selected recipients field all recipients found in the current collection
-            massCollection.on('reset', function(newCollection, prevCollection) {
-                var existingRecipients = this.model.get(selectedRecipientsFieldName);
-                if (existingRecipients instanceof Backbone.Collection) {
-                    if (newCollection.length > 0) {
-                        //select all should be cumulative
-                        newCollection.add(prevCollection.previousModels);
-                    } else {
-                        //remove all should only remove models that are visible in the list
-                        newCollection.add(_.difference(prevCollection.previousModels, this.collection.models));
-                    }
-                    existingRecipients.reset(newCollection.models);
-                }
-            }, this);
-            // find any currently selected recipients and add them to mass_collection so the checkboxes on the
-            // corresponding rows are pre-selected
-            var existingRecipients = this.model.get(selectedRecipientsFieldName);
-            if (existingRecipients instanceof Backbone.Collection && existingRecipients.length > 0) {
-                // only bother with adding, to mass_collection, recipients that are visible in the list view
-                var recipientsToPreselect = existingRecipients.filter(_.bind(function(recipient) {
-                    return (this.collection.where({id: recipient.get('id')}).length > 0);
-                }, this));
-                if (recipientsToPreselect.length > 0) {
-                    massCollection.add(recipientsToPreselect);
-                }
+            // Stop listening to changes on the mass collection. Those event
+            // handlers will be recreated.
+            this.stopListening(massCollection);
+
+            // A single row was checked or all rows were checked.
+            this.listenTo(massCollection, 'add', function(model) {
+                var ep = convertModelToEmailParticipant(model);
+
+                selectedRecipients.add(ep);
+            });
+
+            // A single row was unchecked or all rows were unchecked.
+            this.listenTo(massCollection, 'remove', function(model) {
+                var existingRecipient = selectedRecipients.findWhere({parent_id: model.get('id')});
+
+                selectedRecipients.remove(existingRecipient);
+            });
+
+            // The mass collection was cleared. Only remove the recipients from
+            // the selected recipients collection that are visible in the list
+            // view.
+            this.listenTo(massCollection, 'reset', function(newCollection, prevCollection) {
+                var resetRecipients;
+                var selectedRecipientsNotInList = _.difference(prevCollection.previousModels, this.collection.models);
+
+                newCollection.add(selectedRecipientsNotInList);
+                resetRecipients = _.map(newCollection.models, convertModelToEmailParticipant);
+                selectedRecipients.reset(resetRecipients);
+            });
+
+            if (selectedRecipients.length > 0) {
+                // Only add, to the mass collection, recipients that are
+                // visible in the list view.
+                selectedRecipientsInList = this.collection.filter(function(model) {
+                    return !!selectedRecipients.findWhere({parent_id: model.get('id')});
+                });
+                massCollection.add(selectedRecipientsInList);
             }
         }
     }

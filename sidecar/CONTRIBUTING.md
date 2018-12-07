@@ -8,8 +8,9 @@ $ npm install -g gulp-cli
 
 ## Building
 
-You can build Sidecar by running `gulp`. This will minify all the JavaScript and output it in the minified
+You can build Sidecar by running `gulp build` (or simply `gulp` since `build` is the default task). This will minify all the JavaScript and output it in the minified
 folder.
+If you need to debug in sidecar it is preferable to use `gulp build --dev`. This way, the output will not be mangled and using breakpoints in the dev tools works better.
 
 Additionally, to ease development, you can run `gulp watch` in the built folder in background and whenever
 a change is done in any of the sidecarFiles, sidecar will be automatically rebuilt.
@@ -40,7 +41,7 @@ You'll also have to click the "Debug" button and then open up your developer too
 If you are worried that your code might fail in certain browsers, you can run the test suite in them:
 
 ```bash
-$ gulp karma --browsers Firefox,Chrome # PhantomJS is also an option
+$ gulp karma --browsers Firefox,Chrome,Safari
 ```
 
 If you need to run in browsers that you don't have installed, please use the `--sauce` options to run:
@@ -52,10 +53,9 @@ $ SAUCE_USERNAME=<user> SAUCE_ACCESS_KEY=<access_key> gulp karma --sauce --brows
 Note that SAUCE_ACCESS_KEY is NOT the password, it's a token.
 
 The browsers `sl_ie`, `sl_safari` and `sl_firefox` map to IE 11 (on Windows 7), Safari 9 (on OS X 10.11) and
-Firefox 44 (on Linux) respectively.
+Firefox 54 (on Linux) respectively.
 
 If you don't specify `--browsers` to use, it will default to `sl_ie` (IE 11 on Windows 7).
-
 
 If you are developing a new module, please ensure your unit tests give decent code coverage for it.
 To test:
@@ -81,26 +81,13 @@ With this option, you can trigger the tests by launching any browser and visitin
 
 ## Linting
 
-You should also run jscs and jshint:
+We use [ESlint][eslint] and follow [the SugarCRM JavaScript style][sugarcrm-javascript-style].
+
+To check that your code complies, run:
 
 ```bash
 $ gulp lint
 ```
-
-Our code is not yet completely compliant with jscs yet. Until all of our files are completely compliant, this is
-the recommended procedure to ensure that your changes are as compliant as possible:
-
-```bash
-# make your changes
-$ gulp jscs # count the number of errors reported
-$ git stash
-$ gulp jscs # verify that the numbers of errors are greater than the numbers from before
-$ git stash pop
-```
-### Don't commit new jshint violations
-As of 7.9, Sidecar is completely jshint-compliant (although it is not compliant at this time on 7.7 or 7.8).
-So please ensure any new code you commit on 7.7 or 7.8 is jshint-compliant, because otherwise it will fail the build
-when it is merged into 7.9. (The existing violations do not cause a problem because they have already been fixed on 7.9)
 
 ## Documentation
 
@@ -109,22 +96,23 @@ We use [JSDoc][jsdoc] to write our API documentation.
 ### Generating the Documentation
 
 ```bash
-$ gulp doc
+$ gulp jsdoc
 ```
 
 There should NOT be any JSDoc errors. Please use the following command to check for them:
 
 ```bash
-$ gulp doc 2>&1 | grep <file-you-changed>
+$ gulp jsdoc --verbose 2>&1 | grep <file-you-changed>
 ```
 
-If you see any errors, please fix them before submitting your PR. Also note that jscs also checks for jsdoc violations
-and finds more problems than JSDoc itself does so please run that as well.
+If you see any errors, please fix them before submitting your PR.
 
 ### Read the Documentation
 
 Please ensure that you view the documentation after you generate it - documentation that does not generate any warnings
 may nevertheless be visually unappealing or semantically incorrect.
 
+[eslint]: http://eslint.org
 [gulp-cli]: https://github.com/gulpjs/gulp-cli
 [jsdoc]: http://usejsdoc.org
+[sugarcrm-javascript-style]: https://github.com/sugarcrm/javascript

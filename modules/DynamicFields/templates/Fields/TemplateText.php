@@ -10,10 +10,17 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-class TemplateText extends TemplateField{
+class TemplateText extends TemplateField
+{
 	var $type='varchar';
+
+    /**
+     * {@inheritDoc}
+     */
+    public $len = 255;
+
     var $supports_unified_search = true;
-		
+
 	function get_xtpl_edit(){
 		$name = $this->name;
 		$returnXTPL = array();
@@ -31,14 +38,13 @@ class TemplateText extends TemplateField{
 		}
 		return $returnXTPL;
 	}
+
 	function get_xtpl_search(){
 		if(!empty($_REQUEST[$this->name])){
 			return $_REQUEST[$this->name];
 		}	
 	}
-	
-	
-	
+
 	function get_xtpl_detail(){
 		$name = $this->name;
 		if(isset($this->bean->$name)){
@@ -47,9 +53,4 @@ class TemplateText extends TemplateField{
 		return '';
 		
 	}
-    
-	
 }
-
-
-?>

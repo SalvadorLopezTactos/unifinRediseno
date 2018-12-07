@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'คุณต้องระบุเลขที่ระเบียนเพื่อลบอัตราภาษี',
   'NTC_STATUS' => 'ตั้งค่าสถานะเป็นไม่ใช้งาน เพื่อลบอัตราภาษีนี้ออกจากรายการแบบดรอปดาวน์ของอัตราภาษี',
   'NTC_LIST_ORDER' => 'กำหนดลำดับที่อัตราภาษีนี้จะแสดงในรายการแบบดรอปดาวน์ของอัตราภาษี',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'ใช้งาน',
-    'Inactive' => 'ไม่ใช้งาน',
-  ),
   'LBL_EDITLAYOUT' => 'แก้ไขเลย์เอาต์' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'สร้างโดย ID',
   'LBL_MODIFIED_ID'=>'แก้ไขโดย ID',

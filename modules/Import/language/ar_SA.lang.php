@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'تم تحديد أعمدة متعددة تحمل نفس اسم الحقل.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'هناك حقول ضرورية مفقودة:',
     'ERR_MISSING_MAP_NAME' => 'اسم التعيين المخصص مفقود',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'تم تعطيل استيراد المستخدمين لوضع IDM.',
     'ERR_SELECT_FULL_NAME' => 'لا يمكنك اختيار الاسم الكامل أثناء تحديد الاسم الأول والاسم الأخير.',
     'ERR_SELECT_FILE' => 'حدد ملف لتحميله.',
     'LBL_SELECT_FILE' => 'تحديد الملف:',

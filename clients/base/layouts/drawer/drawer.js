@@ -20,7 +20,7 @@
 
     scrollTopPositions: [], //stores scroll positions for main and side pane
 
-    pixelsFromFooter: 80, //how many pixels from the footer the drawer will drop down to
+    pixelsFromFooter: 69, //how many pixels from the footer the drawer will drop down to
 
     initialize: function(options) {
         var self = this;
@@ -650,8 +650,13 @@
      */
     _afterCloseActions: function(callbackArgs) {
         var layout;
+        var topDrawer;
+        var closeCallback;
 
-        this._components.pop().dispose(); //dispose top-most drawer
+        topDrawer = this._components.pop();
+        if (topDrawer) {
+            topDrawer.dispose(); //dispose top-most drawer
+        }
 
         layout = _.last(this._components);
         if (layout) { // still have layouts in the drawer
@@ -665,7 +670,10 @@
 
         app.shortcuts.restoreSession();
 
-        (this.onCloseCallback.pop()).apply(window, callbackArgs); //execute callback
+        closeCallback = this.onCloseCallback.pop();
+        if (closeCallback) {
+            closeCallback.apply(window, callbackArgs); //execute callback
+        }
     },
 
     /**
@@ -815,6 +823,10 @@
      */
     _scrollBackToOriginal: function($drawer) {
         var scrollPositions = this.scrollTopPositions.pop();
+
+        if (!scrollPositions || !scrollPositions.length) {
+            return;
+        }
 
         if ($drawer) {
             $drawer.scrollTop(scrollPositions.drawer);

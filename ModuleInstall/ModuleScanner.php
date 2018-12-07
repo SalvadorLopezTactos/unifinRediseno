@@ -379,8 +379,13 @@ class ModuleScanner{
 	    // unzip
 	    'unzip',
 	    'unzip_file',
+
+        // sugar vulnerable functions, need to be lower case
+        'getfunctionvalue',
 );
     private $methodsBlackList = array('setlevel', 'put' => array('sugarautoloader'), 'unlink' => array('sugarautoloader'));
+
+    protected $installdefs;
 
 	public function printToWiki(){
 		echo "'''Default Extensions'''<br>";
@@ -486,6 +491,63 @@ class ModuleScanner{
 	}
 
     /**
+     * check if it is a vardef file
+     * @param string $file
+     * @return bool
+     */
+    protected function isVardefFile($file)
+    {
+        if ($this->isVardefsFileNameOrDir($file)) {
+            return true;
+        }
+        
+        // check manifest file
+        if (isset($this->installdefs['vardefs'])) {
+            foreach ($this->installdefs['vardefs'] as $pack) {
+                $pack['from'] = str_replace('<basepath>', '', $pack['from']);
+                if ($pack['from'] == str_replace($this->baseDir, '', $file)) {
+                    return true;
+                }
+            }
+        }
+
+        // check distination
+        if (isset($this->installdefs['copy'])) {
+            foreach ($this->installdefs['copy'] as $pack) {
+                $pack['from'] = str_replace('<basepath>', '', $pack['from']);
+                if ($pack['from'] == str_replace($this->baseDir, '', $file)) {
+                    // check target file or dir
+                    if (isset($pack['to'])) {
+                        return $this->isVardefsFileNameOrDir($pack['to']);
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * check if vardefs file name and parent dir
+     * @param $file
+     * @return bool
+     */
+    protected function isVardefsFileNameOrDir($file)
+    {
+        $fileInfo = pathinfo($file);
+        if ($fileInfo['basename'] === 'vardefs.php' || $fileInfo['basename'] === 'vardefs.ext.php') {
+            return true;
+        }
+
+        // check if parent dir is 'Vardefs'
+        if (basename($fileInfo['dirname']) === 'Vardefs') {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
      * Scans a directory and calls on scan file for each file
      * @param string $path path of the directory to be scanned
      * @param string $sugarFileAllowed whether should allow to override core files
@@ -508,9 +570,14 @@ class ModuleScanner{
                 }
                 $this->scanDir($next, $sugarFileAllowed);
             } else {
-                $this->scanFile($next, $sugarFileAllowed);
+                $issues = $this->scanFile($next, $sugarFileAllowed);
                 if ($this->isLanguageFile($next)) {
                     $this->checkLanguageFileKeysValidity($next);
+                }
+
+                // scan vardef file
+                if (empty($issues) && $this->isVardefFile($next)) {
+                    $this->scanVardefFile($next);
                 }
             }
         }
@@ -524,10 +591,14 @@ class ModuleScanner{
     private function isLanguageFile($file)
     {
         $isLanguageFile = false;
+        if (!isset($this->installdefs['language'])) {
+            return $isLanguageFile;
+        }
         foreach ($this->installdefs['language'] as $pack) {
             $pack['from'] = str_replace('<basepath>', '', $pack['from']);
             if ($pack['from'] == str_replace($this->baseDir, '', $file)) {
                 $isLanguageFile = true;
+                break;
             }
         }
         return $isLanguageFile;
@@ -695,6 +766,51 @@ class ModuleScanner{
 
 		return $issues;
 	}
+
+    /**
+     * scan vardef file, make sure the function used are not in black list
+     * @param $file
+     * @return array
+     */
+    protected function scanVardefFile($file)
+    {
+        $issues = [];
+        if (!$this->isVardefFile($file)) {
+            return $issues;
+        }
+
+        $dictionary = [];
+        include $file;
+
+        if (empty($dictionary)) {
+            return $issues;
+        }
+        foreach ($dictionary as $module => $vardefs) {
+            // check 'function' attribute
+            if (isset($vardefs['fields'])) {
+                foreach ($vardefs['fields'] as $field => $def) {
+                    $function = '';
+                    if (isset($def['function_name'])) {
+                        $function = $def['function_name'];
+                    } elseif (isset($def['function'])) {
+                        $function = is_string($def['function']) ? $def['function'] : $def['function']['name'];
+                    }
+                    if (!empty($function)) {
+                        if (!in_array(strtolower($function), $this->blackListExempt)
+                            && in_array(strtolower($function), $this->blackList)
+                        ) {
+                            $issues[] = translate('ML_INVALID_FUNCTION') . ' ' . $function . '()';
+                        }
+                    }
+                }
+            }
+        }
+
+        if (!empty($issues)) {
+            $this->issues['file'][$file] = $issues;
+        }
+        return $issues;
+    }
 
     /**
      * checks files.md5 file to see if the file is from sugar

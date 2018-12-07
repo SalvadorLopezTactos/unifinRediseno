@@ -12,7 +12,11 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME' => 'Pardavimai',
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Pardavimų sąrašo ataskaitų sritis',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Pardavimų duomenų ataskaitų sritis',
+
+    'LBL_MODULE_NAME' => 'Pardavimas',
     'LBL_MODULE_NAME_SINGULAR' => 'Pardavimas',
     'LBL_MODULE_TITLE' => 'Pardavimai: Pradžia',
     'LBL_SEARCH_FORM_TITLE' => 'Pardavimų paieška',
@@ -24,7 +28,7 @@ $mod_strings = array(
     'LBL_INVITEE' => 'Kontaktas',
     'LBL_CURRENCIES' => 'Valiutos',
     'LBL_LIST_OPPORTUNITY_NAME' => 'Pavadinimas',
-    'LBL_LIST_ACCOUNT_NAME' => 'Kliento vardas',
+    'LBL_LIST_ACCOUNT_NAME' => 'Kliento pavadinimas',
     'LBL_LIST_DATE_CLOSED' => 'Sandorio data',
     'LBL_LIST_AMOUNT' => 'Suma',
     'LBL_LIST_AMOUNT_USDOLLAR' => 'Suma',
@@ -182,25 +186,24 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'After you initiate this change, Revenue Line Item records will be created for each existing {{module_name}} in the background. When the Revenue Line Items are complete and available, a notification will be sent to the email address on your user profile. Please note that your instance must be configured to send email via Admin > Email Settings in order for the notification to be sent.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modulis {{plural_module_name}} jums leidžia nuo pradžios iki pabaigos sekti atskirus pardavimus. Kiekviename {{module_name}} įraše nurodomas perspektyvus pardavimas ir jame pateikiami aktualūs pardavimo duomenys; įrašas taip pat susijęs su kitais svarbiais įrašais, pvz., {{quotes_module}}, {{contacts_module}} ir pan. {{module_name}} paprastai pereis keletą pardavimo etapų ir galiausiai bus pažymėtas kaip „Uždaryta kaip laimėta“ arba „Uždaryta kaip nelaimėta“. Naudojant „Sugar“ modulį {{forecasts_singular_module}}, {{plural_module_name}} galima panaudoti dar plačiau – siekiant suprasti ir prognozuoti pardavimo tendencijas bei, telkiant darbą, siekti pardavimo kvotų.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} modulis suteikia jums galimybę sekti atskiras pardavimo operacijas nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas pateikia numatomą pardavimą ir apima reikšmingą pardavimo informaciją tuo pat metu nustatydamas ryšį su kitais svarbiais įrašais kaip {{quotes_module}}, {{contacts_module}} ir t. t. {{module_name}} paprastai pereis per keletą pardavimo etapų, kol bus pažymėtas kaip Užbaigtas sėkmingas arba Užbaigtas nesėkmingas. {{plural_module_name}} gali būti naudojamas pakartotinai, naudojant „Sugar“ {{forecasts_singular_module}} modulį pardavimo tendencijoms suprasti ir prognozuoti, o taip pat ir siekiant įvykdyti pardavimo kvotas.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} jums leidžia nuo pradžios iki pabaigos sekti atskirus pardavimus ir tiems pardavimams priklausančias eilučių prekes. Kiekviename {{module_name}} įraše nurodomas perspektyvus pardavimas ir jame pateikiami aktualūs pardavimo duomenys; įrašas taip pat susijęs su kitais svarbiais įrašais, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
-
-- Šio įrašo laukus redaguoti galite spustelėję atskirą lauką arba mygtuką Redaguoti.
-- Apatinę kairiąją sritį perjungę į „Duomenų rodinys“, galite peržiūrėti ar modifikuoti saitus su kitais subpanelių įrašais.
-- Apatinę kairiąją sritį perjungę į „Veiklos“, galite komentuoti ar peržiūrėti vartotojų komentarus bei {{activitystream_singular_module}} įrašyti keitimų istoriją.
-- Naudodami įrašo pavadinimo dešinėje esančias piktogramas, galite šį įrašą sekti ar įtraukti prie mėgstamiausių.
-- Mygtuko Redaguoti dešinėje esančiame iškylančiajame meniu Veiksmai prieinami papildomi veiksmai.',
+    'LBL_HELP_RECORD' => 'Modulis {{plural_module_name}} suteikia jums galimybę sekti atskiras pardavimo operacijas ir tam pardavimui priklausančias prekes nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą ir apima susijusius pardavimo duomenis bei su kitais svarbiais įrašais susijusią informaciją, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
+- Redaguokite šio įrašo laukus spustelėdami atskirą lauką arba mygtuką Redaguoti.
+- Peržiūrėkite arba keiskite kitų įrašų saitus antriniuose skydeliuose perjungdami apatinę kairiąją sritį į Duomenų rodinys.
+- Komentuokite ir peržiūrėkite vartotojų komentarus ir įrašų keitimo retrospektyvą {{activitystream_singular_module}} perjungdami apatinę kairiąją sritį į Veiklos srautas.
+- Stebėkite arba įtraukite į parankinius šį įrašą naudodami įrašo autoriaus vardo dešinėje esančias piktogramas.
+- Mygtuko Redaguoti dešinėje esančiame išplečiamajame meniu Veiksmai rodomi papildomi galimi veiksmai.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} jums leidžia nuo pradžios iki pabaigos sekti atskirus pardavimus ir tiems pardavimams priklausančias eilučių prekes. Kiekviename {{module_name}} įraše nurodomas perspektyvus pardavimas ir jame pateikiami aktualūs pardavimo duomenys; įrašas taip pat susijęs su kitais svarbiais įrašais, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
+    'LBL_HELP_CREATE' => 'Modulis {{plural_module_name}} suteikia jums galimybę sekti atskiras pardavimo operacijas ir tam pardavimui priklausančias prekes nuo pradžios iki pabaigos. Kiekvienas {{module_name}} įrašas reiškia galimą pardavimą ir apima susijusius pardavimo duomenis bei su kitais svarbiais įrašais susijusią informaciją, pvz., {{quotes_module}}, {{contacts_module}} ir pan.
 
-Norėdami sukurti {{module_name}}, atlikite tolesnius veiksmus.
-1. Nurodykite norimas laukų reikšmes.
- - Laukus, pažymėtus „Reikiamas“, prieš įrašant reikia užpildyti.
- - Jei reikia, spustelėję „Rodyti daugiau“ galite matyti papildomų laukų.
-2. Spustelėję „Įrašyti“, baigsite naująjį įrašą ir grįšite į ankstesnį puslapį.',
+Norėdami sukurti {{module_name}}:
+1. Pateikite pageidaujamų laukų reikšmes.
+ - Laukai, pažymėti Būtinas, prieš įrašant turi būti užpildyti.
+ - Jei reikia, kad būtų parodyti papildomi laukai, spustelėkite Rodyti daugiau.
+2. Spustelėję Įrašyti užbaigsite naują įrašą ir grįšite į ankstesnį puslapį.',
 
 // END ENT/ULT
 

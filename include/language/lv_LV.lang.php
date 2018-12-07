@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'OAuth patērētāja atslēgas',
     'OAuthTokens' => 'OAuth atslēgas',
     'Filters' => 'Filtri',
-    'UserSignatures' => 'Lietotāja paraksti',
+    'UserSignatures' => 'E-pasta paraksti',
     'Shippers' => 'Piegādātāji',
     'Styleguide' => 'Styleguide',
     'Feedbacks' => 'Atsauksmes',
     'Tags' => 'Birkas',
     'Categories' => 'Kategorijas',
     'Dashboards' => 'Instrumentu paneļi',
+    'OutboundEmail' => 'E-pasta iestatījumi',
+    'EmailParticipants' => 'E-pasta dalībnieki',
+    'DataPrivacy' => 'Datu privātums',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'Fo',
         'Tasks' => 'Uz',
-        'Dashboards' => 'Ip',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => 'DP',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => 'Produkta veids',
     'Shippers' => 'Piegādātājs',
     'Subscriptions' => 'Pierakstīšanās',
-    'UserSignatures' => 'Lietotāja paraksts',
+    'UserSignatures' => 'E-pasta paraksts',
     'Feedbacks' => 'Atsauksme',
     'Tags' => 'Birka',
     'Categories' => 'Kategorija',
+    'OutboundEmail' => 'E-pasta iestatījums',
+    'EmailParticipants' => 'E-pasta dalībnieks',
+    'DataPrivacy' => 'Datu privātums',
   ),
 
 /*
@@ -329,6 +336,11 @@ $app_list_strings = array (
     'Existing Business' => 'Esošs uzņēmums',
     'New Business' => 'Jauns uzņēmums',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => 'Aktīvs',
+            'Inactive' => 'Neaktīvs',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => 'Ieņēmumi',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => 'Ietekmētājs',
     'Other' => 'Cits',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => 'Aktīvs',
+            'Inactive' => 'Neaktīvs',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => 'Aktīvs',
+            'Inactive' => 'Neaktīvs',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => 'Galvenā kontaktpersona',
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => 'Uzdevums',
       'KBContents' => 'Zināšanu bāze',
+      'Notes' => 'Piezīme',
   ),
 
   'record_type_display_notes' =>
@@ -659,6 +683,14 @@ $app_list_strings = array (
     'Calls' => 'Zvans',
       'KBContents' => 'Zināšanu bāze',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => 'Klients',
+        'Contacts' => 'Kontakts',
+        'Employees' => 'Darbinieks',
+        'Leads' => 'Interesents',
+        'Prospects' => 'Mērķis',
+        'Users' => 'Lietotājs',
+    ),
 
   'parent_type_display' =>
   array (
@@ -678,7 +710,7 @@ $app_list_strings = array (
 
     'Prospects' => 'Mērķis',
       'KBContents' => 'Zināšanu bāze',
-
+      'Notes' => 'Piezīme',
   ),
 
   'product_status_default_key' => 'Nosūtīts',
@@ -825,14 +857,13 @@ $app_list_strings = array (
   'bug_type_default_key' => 'Kļūda',
   'bug_type_dom' => array (
     'Defect' => 'Defekts',
-    'Feature' => 'Īpašība',
+    'Feature' => 'Funkcija',
   ),
  'case_type_dom' => array (
     'Administration' => 'Administrēšana',
     'Product' => 'Produkts',
     'User' => 'Lietotājs',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => 'Jebkāds e-pasts',
     'Twitter' => 'Twitter'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => 'Datu privātuma politikas pieprasījums',
+        'Send Personal Information being processed' => 'Sūtīt apstrādāto personisko informāciju',
+        'Rectify Information' => 'Koriģēt informāciju',
+        'Request to Erase Information' => 'Pieprasīt informācijas dzēšanu',
+        'Export Information' => 'Eksportēt informāciju',
+        'Restrict Processing' => 'Ierobežot apstrādi',
+        'Object to Processing' => 'Iebilst pret apstrādi',
+        'Consent to Process' => 'Piekrišana apstrādei',
+        'Withdraw Consent' => 'Atsaukt piekrišanu',
+        'Other' => 'Cits',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => 'Biznesa sakari',
+        'Marketing Communications by company' => 'Uzņēmuma mārketinga sakari',
+        'Marketing Communications by partners' => 'Partneru mārketinga sakari',
+    ),
+    'dataprivacy_status_default_key' => 'Atvērt',
+    'dataprivacy_status_dom' => array(
+        'Open' => 'Atvērt',
+        'Closed' => 'Pabeigts',
+        'Rejected' => 'Noraidīts',
+    ),
+    'dataprivacy_priority_default_key' => 'Zema',
+    'dataprivacy_priority_dom' => array(
+        'Low' => 'Zema',
+        'Medium' => 'Vidēja',
+        'High' => 'Augsta',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => 'Studio',
     'Upgrade' => 'Atjaunināšana',
     'Users' => 'Lietotāji',
+    'OutboundEmail' => 'E-pasta iestatījumi',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => 'Neveiksmīgi',
                                         'completed'     => 'Pabeigts',
                                         'no curl'       => 'Nav palaists: nav pieejams cURL',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => 'Uzmetums',
+        'Archived' => 'Arhivēts',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => 'Noklusētais saraksts pēc ID',
     'test' => 'Tests',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => 'Aktīvs',
+             'Inactive' => 'Neaktīvs',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3 nedēļas',
         '31' => '1 mēnesis',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => 'Aktīvs',
-    'Inactive' => 'Neaktīvs',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => 'Augsta',
         'medium'    => 'Vidējs',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => 'Neviens',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'Google',
+        'exchange' => 'Exchange',
+        'outlook' => 'Outlook',
+        'other' => 'Cits',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2032,6 +2099,11 @@ $app_list_strings = array (
         'ACTIVE' => 'Aktivizēts',
         'INACTIVE' => 'Izslēgts',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => 'Ieraksts',
+        'records' => 'Saraksts',
+        'activities' => 'Darbību plūsma',
+    ),
 );
 
 $app_strings = array (
@@ -2043,11 +2115,11 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Sekot saitei',
   'LBL_TOGGLE_VISIBILITY' => 'Pārslēgt redzamību', // Record view header panel element
   'LBL_ACTIVITIES' => 'Darbības',
-  'LBL_COPYRIGHT' => 'Autortiesības © 2004-2017. SugarCRM Inc. Visas tiesības aizsargātas.',
+  'LBL_COPYRIGHT' => 'Autortiesības © 2004-2018. SugarCRM Inc. Visas tiesības aizsargātas.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar un 3-D kubs ir SugarCRM Inc. reģistrētas preču zīmes. '.
         'Visi citi uzņēmumu un produktu nosaukumi, kas tiek izmantoti vai parādās šajā produktā, var būt preču zīmes, '.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ ir SugarCRM Inc preču zīmes.',
-    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ ir SugarCRM Inc preču zīmes.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ un Sugar™ ir SugarCRM Inc. preču zīmes.',
     'LBL_SEND_INVITE' => 'Sūtīt ielūgumu',
   'LBL_INVITEES' => 'Viesi',
     'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Viesis nesaņems jūsu uzaicinājumu',
@@ -2116,6 +2188,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => 'Aktivizēt STMP pa SSL vai TLS?',
     'LBL_NO_ACTION'                         => 'Nav darbības ar tādu nosaukumu.',
     'LBL_NO_DATA'                           => 'Dati nav atrasti',
+    'LBL_NOT_APPLICABLE'                    => 'Nav piemērojams',
     'LBL_ROUTING_ADD_RULE'                  => 'Pievienot likumu',
     'LBL_ROUTING_ALL'                       => 'vismaz',
     'LBL_ROUTING_ANY'                       => 'jebkurš',
@@ -2320,7 +2393,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Saglabāt',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Pievienot šo katalogu',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Šo katalogu nevar izmainīt',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Vai tiešām vēlaties dzēst šo katalogu?\nProcess ir neatgriežams.\nKataloga dzēšana tiks attiecināta uz visiem tajā esošajiem katalogiem.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Vai tiešām vēlaties dzēst šo katalogu?\\nProcess ir neatgriežams.\\nKataloga dzēšana tiks attiecināta uz visiem tajā esošajiem katalogiem.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'Jauns kataloga nosaukums',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Pirms šīs darbības veikšanas izvēlieties katalogu.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Kataloga pārvaldība',
@@ -2479,7 +2552,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Sinhronizēt visus pasta kontus',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'E-pasts aizsūtīts uz norādīto adresi, izmantojot piedāvātos izejošā pasta iestatījumus. Lūdzu pārbaudiet, vai e-pasts tika saņemts, lai pārbaudītu vai iestatījumi ir pareizi.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Veicot šo darbību, tiks sinhronizēti pasta konti un to saturs.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Vai vēlaties veikt pilnu sinhronizāciju?\nApjomīgi pasta konti var aizņemt vairākas minūtes.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Vai vēlaties veikt pilnu sinhronizāciju?\\nApjomīgi pasta konti var aizņemt vairākas minūtes.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Nospiediet Shift pogu vai Ctrl pogu, lai izvēlētos vairākus katalogus.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Vispārīgi',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Pieejamie grupas katalogi',
@@ -2547,6 +2620,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'Importēšana pabeigta',
     'LBL_EMAIL_IMPORT_FAIL'                 => 'Importēšana neveiksmīga. Ziņojums jau ir importēts vai izdzēsts no servera.',
 
+    'LBL_EMAILS_FROM' => 'Nosūtītie epasti',
+    'LBL_EMAILS_RECEIVED' => 'Saņemtie epasti',
+    'LBL_EMAIL_ADDRESSES_USED' => 'E-pastos izmantotās e-pasta adreses',
+    'LBL_EMAIL_ADDRESS' => 'E-pasta adrese',
+    'LBL_FROM' => 'No',
+    'LBL_TO' => 'Kam',
+    'LBL_CC' => 'Kopija',
+    'LBL_BCC' => 'Slēptā kopija',
+
     'LBL_LINK_NONE'=> 'Neviens',
     'LBL_LINK_ALL'=> 'Viss',
     'LBL_LINK_RECORDS'=> 'Ieraksti',
@@ -2588,7 +2670,9 @@ $app_strings = array (
     'ERR_AJAX_LOAD_FOOTER' => 'Ja kļūda atkārtojas, palūdziet administratoru, lai deaktivizē Ajax šim modulim',
     'ERR_CREATING_FIELDS' => 'Kļūda aizpildot papildus informācijas laukus:',
     'ERR_CREATING_TABLE' => 'Kļūda veidojot tabulu:',
-    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "Decimālais atdalītājs nevar būt tāds pats kā tūkstošu atdalītājs. \n\n  Lūdzu nomainiet to vērtības.",
+    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "Decimālais atdalītājs nevar būt tāds pats kā tūkstošu atdalītājs. 
+
+  Lūdzu nomainiet to vērtības.",
     'ERR_DELETE_RECORD' => 'Lai dzēstu kontaktpersonu, jānorāda ieraksta numurs.',
     'ERR_EXPORT_DISABLED' => 'Eksporta funkcija izslēgta',
     'ERR_EXPORT_TYPE' => 'Kļūdas eksportēšana',
@@ -2605,6 +2689,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Lai eksportētu saturu, nepieciešama aktīva sesija.',
     'ERR_NO_HEADER_ID' => 'Šajā motīvā šī iespēja nav pieejama.',
     'ERR_NOT_ADMIN' => "Neautorizēta piekļuve administratora funkcijām.",
+    'ERR_DISABLED_FOR_IDM_MODE' => "Šī opcija sistēmā SugarCRM IDM režīmam ir atspējota un pieejama mākoņa konsolē.",
+    'ERR_GOTO_CLOUD_CONSOLE' => "Lūdzu, pārejiet uz <a href=\"%s\" target=\"_blank\">mākoņa konsoli</a>.",
     'ERR_MISSING_REQUIRED_FIELDS' => 'Nav pieejams obligātais lauks:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Nederīgs obligātais lauks',
     'ERR_INVALID_VALUE' => 'Nederīga vērtība:',
@@ -2886,7 +2972,7 @@ $app_strings = array (
     'LBL_SHOW_MORE_RECENTS' => 'Vairāk neseno...',
     'LBL_SHOW_LESS_RECENTS' => 'Mazāk neseno',
     'LBL_SHOW_MORE_RESULTS' => 'Vairāk meklēšanas rezultātu...',
-    'TPL_SHOW_MORE_MODULE' => 'Vairāk {{module}}...',
+    'TPL_SHOW_MORE_MODULE' => 'Vēl {{module}}...',
     'LBL_SHOW_MORE_GENERIC' => 'Vairāk {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Šodienas darbības',
     'LBL_LEADS'=>'Interesenti',
@@ -2910,7 +2996,7 @@ $app_strings = array (
     'LBL_LIST_NAME' => 'Nosaukums',
     'LBL_LIST_OF' => 'no',
     'LBL_LIST_PHONE' => 'Tālrunis',
-    'LBL_LIST_RELATED_TO' => 'Saistīts ar',
+    'LBL_LIST_RELATED_TO' => 'Atteicas uz',
     'LBL_LIST_USER_NAME' => 'Lietotāja vārds',
     'LBL_LISTVIEW_MASS_UPDATE_CONFIRM' => 'Vai jūs esat pārliecināts, ka vēlaties atjaunināt visu sarakstu?',
     'LBL_LISTVIEW_NO_SELECTED' => 'Lūdzu, izvēlieties vismaz vienu ierakstu, ko apstrādāt.',
@@ -2934,7 +3020,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Masveida atjaunināšana neveiksmīga. Veiciet jaunu mēģinājumu ({{num}} no {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Masveida atjaunināšana nepabeigta. {{num}} ieraksti palika neizmainīti.',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => 'Masveida atjaunināšana nepabeigta. {{num}} ieraksti palika neizmainīti.',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} ieraksti(-s) tika ignorēti(-s) dēl tiesībām.',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} ieraksts(-i) tika ignorēts(-i) tiesību vai kļūdu dēļ.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} ieraksti tika atjaunināti veiksmīgi.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} Masveida atkjaunināšana',
     'TPL_MASSDELETE_PROGRESS_STATUS' => 'Dzēš {{num}} no {{total}}.',
@@ -2965,7 +3051,7 @@ $app_strings = array (
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
     'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} no {{total}}',
-    'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Noklikšķiniet, lai atvērtu kopējo',
+    'TPL_LIST_HEADER_COUNT_TOOLTIP' => 'Noklikšķiniet, lai atvērtu visu',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => 'Jānis',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => 'Bērziņš',
@@ -3006,6 +3092,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'lietotāja noklusējums',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => 'lietotāja konts',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'grupas konts',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => 'Vārds',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => 'Izveidot',
@@ -3218,7 +3305,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Visas tiesības aizsargātas.<br />SugarCRM, Sugar un 3-D kubs ir SugarCRM Inc. reģistrētas preču zīmes. '.
         'Visi citi uzņēmumu un produktu nosaukumi, kas tiek izmantoti vai parādās šajā produktā, var būt preču zīmes, '.
         'kas pieder atbilstošiem uzņēmumiem, ar kuriem tie ir saistīti.',
@@ -3256,7 +3343,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => 'Parole',
     'LBL_LOGGED_OUT' => 'Jūs esat izrakstījies.',
     'LBL_LOGIN_FORM_LABEL' => 'Parādīt pieteikšanās formu',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => 'Atgriezties pie pieteikšanās',
+    'LBL_LOGIN_INACTIVE_USER' => 'Neaktīvs lietotājs',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => 'Portāla vai grupas lietotājs nevar pieteikties.',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => 'Instrumentu panelis',
@@ -3323,8 +3412,9 @@ $app_strings = array (
     'LNK_BACKTOTOP' => 'Atpakaļ uz augšu',
     'LNK_REMOVE' => 'noņemt',
     'LNK_RESUME' => 'Atsākt',
-    'LNK_VIEW_CHANGE_LOG' => 'Apskatīt izmaiņu žurnālu',
-
+    'LNK_VIEW_CHANGE_LOG' => 'Skatīt audita žurnālu',
+    'TPL_AUDIT_LOG_TITLE' => 'Audita žurnāls vienumam {{{name}}}',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => 'Klikšķiniet pārlūka pogu &amp;amp;#39;Back&amp;amp;#39; un izlabojiet kļūdu.',
     'NTC_DATE_FORMAT' => '(yyyy-mm-dd)',
@@ -3358,7 +3448,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "Jūsu uzņēmuma licencei drīz beigsies derīguma termiņš.",
     'ERROR_LICENSE_VALIDATION'=> "Jūsu uzņēmuma SugarCRM licence ir jāvalidē. Tikai administrators varēs pieslēgties sistēmai.",
     'WARN_LICENSE_VALIDATION'=> "Jūsu uzņēmuma SugarCRM licencei drīz būs nepieciešama validēšana.",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"Aktivēto bezsaistes lietotāju skaits pašlaik pārsniedz Jūsu licencē norādīto.",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Uzmanību:</b> Jūsu pārlūks darbojas IE compatibility skatā, kas netiek atbalstīts.",
     'WARN_LICENSE_SEATS'=>  "Brīdinājums: Atļautais lietotāju skaits jau ir sasniedzis maksimumu. Visas licenzes ir izmantotas.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Brīdinājums: Aktīvo lietotāju skaits pārsniedz pieļaujamo licenžu skaitu.",
@@ -3428,9 +3517,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'Apstrādā...',
     'LBL_REQUEST_PROCESSED'=>'Izdarīts',
     'LBL_AJAX_FAILURE' => 'Ajax kļūda',
-    'LBL_OC_STATUS' => 'Bezsaistes klienta statuss',
-    'LBL_OC_STATUS_TEXT' => 'Norāda vai pašreizējais lietotājs var izmantot Bezsaistes klienta funkciju.',
-    'LBL_OC_DEFAULT_STATUS' => 'Neaktīvs',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => 'Meklēt...',
     'LBL_SAVED_SEARCH_SHORTCUT' => 'Saglabātie meklējumi',
     'LBL_SEARCH_POPULATE_ONLY'=> 'Veiciet meklēšanu, izmantojot augstāk esošo meklēšanas formu',
@@ -3439,9 +3525,9 @@ $app_strings = array (
     'LBL_SEARCH_FOR_MORE' => 'Meklēt vairāk...',
     'LBL_SEARCH_SELECT' => 'Atlasīt...',
     'LBL_SEARCH_AND_SELECT_ELLIPSIS' => 'Meklēt un atlasīt...',
-    'LBL_SEARCH_SELECT_MODULE' => 'Atlasīt {{module}}...',
+    'LBL_SEARCH_SELECT_MODULE' => 'Atlasīt moduli {{module}}...',
     'LBL_DETAILVIEW'=>'Detalizēts skatījums',
-    'LBL_LISTVIEW'=>'Saraksta skatījums',
+    'LBL_LISTVIEW'=>'Saraksta skats',
     'LBL_EDITVIEW'=>'Rediģēt skatījumu',
     'LBL_SEARCHFORM'=>'Mekēšanas forma',
     'LBL_SAVED_SEARCH_ERROR' => 'Lūdzu ievadiet šī skatījuma nosaukumu.',
@@ -3531,6 +3617,7 @@ $app_strings = array (
     'LBL_COLLAPSE_ALL' => 'Savērst visus',
     'LBL_EXPAND_ALL' => 'Izvērst visus',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => 'Rediģēt',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => 'Visas atskaiti',
     'LBL_DASHLET_REFRESH_LABEL' => 'Atjaunot',
     'LBL_DASHLET_REMOVE_LABEL' => 'Izņemt',
     'LBL_DASHLET_DROP_HERE' => 'Nomest šeit',
@@ -3558,7 +3645,7 @@ $app_strings = array (
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Jums piesaistīto ierakstu saraksts',
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
-    'TPL_DASHLET_MY_MODULE' => 'Manas {{module}}',
+    'TPL_DASHLET_MY_MODULE' => 'Mani {{module}}',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Iespēju metrikas',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Darījuma rādītāji saistītajam klientam.',
@@ -4200,7 +4287,9 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Apstiprināt',
     'LBL_NO_ACCESS' => '(Nav pieejas)',
     'LBL_NO_ACCESS_LOWER' => 'Lietotājam nav piekļuves ierakstam',
-    'LBL_NO_FIELD_ACCESS' => 'Nav piekļuves',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => 'Vērtība izdzēsta',
+    'LBL_VALUE_ERASED_TOOLTIP' => 'Šī informācija tika izdzēsta, izmantojot datu privātuma piepresījumu',
     'LBL_CREATE_RELATED_RECORD' => 'Izveidot saistītu ierakstu',
     'LBL_ASSOC_RELATED_RECORD' => 'Piesaistīt esošu ierakstu',
     'LBL_CHOOSE_LINK' => 'Izvēlieties saites veidu',
@@ -4269,7 +4358,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => 'Lielāks',
     'LBL_FONTSIZE_HUGE' => 'Milzīgs',
     'LBL_FONTSIZE_EXTRA_HUGE' => 'Īpaši liels',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => 'Lejupielāde neizdevās\r\n{{{this}}}',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "Neizdevās lejupielādēt\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => 'Vairāk...',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => '...Mazāk',
     'LBL_OFFLINE_MODE' => 'Bezsaistes režīms',
@@ -4338,6 +4427,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => 'Transakcijas detaļas',
     'LBL_RECORD_DELETED' => '(Ieraksts dzēsts)',
     'LBL_NOT_AVAILABLE' => 'N/A',
+    'LBL_FILE_SIZE' => 'Faila izmērs',
     'LBL_FILE_SIZE_UNITS_B' => 'Baiti',
     'LBL_FILE_SIZE_UNITS_KB' => 'kB',
     'LBL_FILE_SIZE_UNITS_MB' => 'MB',
@@ -4461,6 +4551,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => 'Detaļu skatā atver labajā ekrāna pusē.',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => 'Izmantojiet šīs bultiņas, lai ātri apskatītu izvēlnes galvenās sastāvdaļas.',
 
+    'LBL_COMMENT_ADD' => 'Pievienot komentāru',
+    'LBL_REQUIRED' => 'Obligāts',
+    'LBL_MORE_BUTTON' => 'Vairāk',
+    'LBL_TRY_AGAIN' => 'Mēģināt vēlreiz',
+    'LBL_NEW_RECORDS' => 'Nesen izveidots',
+    'LBL_ASSIGNED_TO_ME' => 'Mans {{{module}}}',
+    'LBL_LISTVIEW_FILTER_ALL' => 'Visi {{{module}}}',
+    'LBL_UNFAVORITE' => 'Nevēlams',
+    'LBL_ACTIVITY_CREATE' => 'Izveidots {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UPDATE' => 'Atjaunināts {{{changes}}} uz {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_LINK' => 'Saistīts {{{relatedRecord}}} ar {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UNLINK' => 'Atsaistīts {{{relatedRecord}}} no {{{record}}} {{{module}}}',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{relationship}} priekš {{parentModule}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => 'Lejupielādēt saistītos ierakstus...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => 'Jūsu informācijas paneļa konfigurācija ir mainīta. Vai vēlaties pārlādēt?',
+    'LBL_RECORDS' => 'Ieraksti',
+    'LBL_DASHBOARDS' => 'Informācijas paneļi',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => 'Meklēt {{searchCriteria}}...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => 'Galvenā izvēlne',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => 'Ātri izveidot jaunu ierakstu',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => 'Velciet, lai redzētu papildu iespējas',
+    'LBL_DETAILS' => 'Papildinformācija',
+    'LBL_DETAIL_RELATED' => 'Saistītais',
+    'LBL_CREATE_RELATED_MODULE_WARN' => 'Šim {{module}} nepieciešams {{relatedModule}}. <a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>Izveidot {{relatedModule}} ierakstu</a>.',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => 'Rediģēt ierakstu',
+    'LBL_OFFLINE_MENU_SETTINGS' => 'Bezsaistes iestatījumi',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => 'Atkļūdošanas iestatījumi',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED" : "Datu šifrēšana ir iespējota.',
+    'LBL_OFFLINE_TOTAL_RECORDS' => 'Kopā ieraksti',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => 'Pēdējā lejupielāde',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => 'Šo failu nevar lejupielādēt.',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => 'Neizdevās no servera lejupielādēt informācijas paneļus',
+    'ERR_FILTERS_FETCHING' => 'Nevar ienest jūsu filtrus',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => 'Neizdevās nošifrēt lokālo atmiņu',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => 'Bezsaistes datu šifrēšana. Tas var aizņemt vairākas minūtes.',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => 'Bezsaistes datu šifrēšana pabeigta.',
+    'ERR_ACCESS_SPECIFIC_MODULE' => 'Jums nav piekļuves {{{module}}} modulim.',
+    'LBL_SKIP' => 'Izlaist',
+    'LBL_CONTINUE' => 'Turpināt',
+    'LBL_ENABLE' => 'Iespējot',
+    'LBL_MOBILE_TRIAL_UNTIL' => 'Izmēģinājumversija līdz',
+    'LBL_MOBILE_SDK_VERSION' => 'SDK versija',
+    'LBL_LOG_LEVEL' => 'Reģistrācijas līmenis',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => 'Pieteikšanās iestatījumi ir pārkonfigurēti.',
+    'LBL_TRIAL_PERIOD_EXPIRED' => 'Jūsu bezmaksas izmēģinājuma periods ir beidzies.',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => 'Serveris neatbalsta drošu savienojumu. Lūdzu, izslēdziet drošu savienojumu.',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => 'Serveris atbalsta drošu savienojumu. Lūdzu, ieslēdziet drošu savienojumu.',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => 'Jūsu savienojums nav drošs. Sazinieties ar administratoru.',
+    'LBL_LOGIN_SETTINGS_HEADER' => 'Pieteikšanās iestatījumi',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => 'Iestatīt {{{brandName}}} instanci',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => 'Lai lietotne darbotos, ir jāievada {{{brandName}}} instances URL. Ja jums nav instances URL, lūdzu, sazinieties ar administratoru.',
+    'LBL_FACEID' => 'Sejas ID',
+    'LBL_TOUCHID' => 'Pirksta nospieduma ID',
+    'LBL_ENABLE_TOUCHID' => 'Iespējot {{{biometryType}}}',
+    'LBL_SETUP_TOUCHID' => 'Uzstādīt {{{biometryType}}}',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => 'Pieteikties, izmantojot savu pirkstu',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "{{{biometryType}}} nav uzstādīts jūsu ierīcē. \n\nDodieties uz savas ierīces iestatījumiem, lai uzstādītu {{{biometryType}}}. Kad tas ir izdarīts, iespējojiet {{{brandName}}} {{{biometryType}}} sadaļā Galvenā izvēlne > Iestatījumi.",
+    'LBL_TOUCH_ID_DISCLAIMER' => 'Izmantojot {{{biometryType}}} ar {{{brandName}}}, jūs varat izmantot savu biometrisko identifikatoru, tā vietā lai ievadītu paroli piekļuvei {{{brandName}}}.',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => 'Vai vēlaties turpināt ar {{{biometryType}}}?    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => 'Ievadiet {{{brandName}}} paroli, lai iespējotu {{{biometryType}}}',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => 'Iestatīšana',
+    'LBL_MDM_CONFIRM_CHANGE' => 'Lietotnes konfigurācija ir izmainīta no mobilo ierīču pārvaldnieka. Lai saglabātu izmaiņas, lūdzu, piesakieties vēlreiz.',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => 'Lūdzu, sniedziet {{{brandName}}} piekļuvi jūsu atrašanās vietai, izmantojot jūsu iestatījumus.',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => 'Pašreizējā atrašanās vieta nav pieejama',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "Pašreizējās atrašanās vietas izgūšanai iestājies noilgums. \nLūdzu, mēģiniet vēlreiz.",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => 'Atrašanās vietas atzīmes nav pieejamas',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => 'Atrašanās vietas koordinātas ir nederīgas',
+    'ERR_MOBILE_INVALID_PASSWORD' => 'Nederīga parole.',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => 'Jūsu lietotne ir novecojusi un vairs nav saderīga ar {{{brandName}}} instanci, kurai esiet pieslēdzies. Vai vēlaties to atjaunināt?',
+    'LBL_MOBILE_BY' => 'Ar',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => 'Šis filtrs tiešsaistē nav pieejams',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => 'Bezsaistes ieraksti',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => 'Lejupielādes iestatījumi',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => 'Lejupielādējiet savus piešķirtos, izlasē ietvertos un sekotos ierakstus bezsaistes piekļuvei. Savas preferences varat atjaunināt bezsaistes iestatījumos.',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "Jūsu ierakstu lejupielāde ir pabeigta. Tagad varat tiem piekļūt bezsaistes režīmā.",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "Netika lejupielādēti visi jūsu ieraksti.\n Vai vēlaties mēģināt vēlreiz?",
+    'LBL_BULK_LOAD_USE_CELLULAR' => 'Izmantot mobilos datus',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => 'Ne tagad',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => 'Lejupielāde ir apturēta, un tā atsāksies, vēlreiz atverot lietotni.',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => 'Lejupielādē {{{module}}}: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => 'Atjaunināt jaunākos ierakstus',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => 'Gaida savienojuma izveidošanu',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => 'Apturēts',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => 'Apturēšana',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => 'Lejupielāde',
+    'LBL_BULK_LOAD_BTN_PAUSE' => 'Pauze',
+    'LBL_BULK_LOAD_BTN_RESUME' => 'Atsākt',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => 'Tikai Wi--Fi savienojums tiek izmantots pēc noklusējuma',
+    'LBL_NPS_RATING_MSG' => "Kā jūs vērtētu savu \n{{{productName}}} pieredzi?",
+    'LBL_NPS_THANKS_MSG' => 'Pateicamies par atsauksmēm!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => 'Varbūt jūs varētu to novērtēt lietotnē App Store?',
+    'LBL_NPS_NO_THANKS' => 'Nē, paldies',
+    'LBL_NPS_NOT_NOW' => 'Ne tagad',
+    'LBL_NPS_RATE_NOW' => 'Vērtēt tagad',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => 'Tīkls nav pieejams. Šo lietotni joprojām varat lietot bezsaistē',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => 'Veiktās izmaiņas tiks saglabātas, kad būsiet tiešsaistē. <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>Skatiet papildinformāciju</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => 'Ir nesaglabāti dati. Lūdzu, pārbaudiet <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>transakciju žurnālu</a>',
+    'LBL_CONVERT' => 'Konvertēt',
+    'LBL_CONVERT_LEAD' => 'Konvertēt interesentu',
+    'LBL_SEARCH_EXISTING_RECORD' => 'Meklēt esošo {{{this}}}',
+    'LBL_DUPLICATES_CHECK_FAILED' => 'Dublikātu pārbaude neizdevās',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => 'Vai vēlaties pārvietot saistītās aktivitātes uz kontaktpersonu ierakstu?',
+    'LBL_LEAD_CONVERSION_SUCCESS' => 'Jūs veiksmīgi konvertējāt interesentu {{{name}}}',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => 'Dublikāti nav atrasti.',
+    'ERR_LEAD_CONVERSION_FAIL' => 'Interesenta konvertēšana neizdevās',
+    'LBL_SELECT_DUPLICATE_RECORD' => 'Atlasīt no dublikāta {{{modulePlural}}}',
+    'LBL_SELECTED_EXISTING_RECORD' => 'Atlasīts {{{moduleSingular}}}',
+    'LBL_CREATED_NEW_RECORD' => 'Izveidots jauns {{{moduleSingular}}}',
+    'LBL_VO_BACK_BTN' => 'Poga Atpakaļ',
+    'LBL_VO_HOME_BTN' => 'Poga Sākums',
+    'LBL_VO_DASHBOARD_BTN' => 'Poga Informācijas panelis',
+    'LBL_VO_SEARCH_BTN' => 'Poga Meklēt',
+    'LBL_VO_RIGHT_MENU_BTN' => 'Labā izvēlnes poga',
+    'LBL_VO_ADD_BTN' => 'Pievienot pogu',
+
     //begin portal
 
     //portal record tutorial
@@ -4572,6 +4778,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => 'Izvēlieties atskaiti',
     'LBL_REPORT_AUTO_REFRESH' => 'Automātiska atjaunināšana',
     'LBL_REPORT_EDIT' => 'Labot izvēlēto atskaiti',
+    'LBL_REFRESH_LIST_AND_CHART' => 'Atsvaidzināt sarakstu un diagrammu',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => 'Nezināms',
@@ -4633,6 +4840,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'Radās kļūda piešķiršanas darbībā.',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => 'Jums nav piekļuves tiesību modulim „{{name}}”. Sazinieties ar Administratoru.',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => 'Gads {0}',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} Q{0}',
@@ -4644,6 +4854,11 @@ $app_strings = array (
     'LBL_MESSAGE_BOX_TITLE' => 'Brīdinājums',
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => 'Ignorēt dublikātus un saglabāt',
     'LBL_RESTORE' => 'Atiestatīt uz oriģinālu',
+
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => 'Dzēšanai atzīmēti ieraksti',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => 'Parāda ierakstus, kuri saistīti ar datu privātuma pieprasījumu '
+        . 'Dzēst informāciju.',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'RSS barotne',
@@ -4667,6 +4882,7 @@ $app_strings = array (
     'LBL_UNASSIGNED' => 'Nepiešķirts',
     'LBL_ARCHIVE_EMAIL' => 'Arhivēt E-pastu [Alt+K]',
     'LBL_EMAIL_ARCHIVED' => 'E-pasts arhivēts',
+    'LBL_CREATE_ARCHIVED_EMAIL' => 'Izveidot arhivēto e-pastu',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => 'Ieplānotās aktivitātes',
@@ -4698,6 +4914,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Mani uzdevumi',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Darba grupas uzdevumi',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Paplašinātā darbplūsma',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC lietotāja saskarne',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP vai vecs REST API',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'Cron uzdevums',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => 'Logic Hook',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'Sugar darbplūsma',
+    'LBL_AUDIT_SUBJECT_USER' => 'Liietotājs',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Web to Lead',
+
     //common chart strings
     'LBL_CHART' => 'Diagramma',
     'LBL_CHART_NO_DATA' => 'Dati nav atrasti.',
@@ -4706,6 +4935,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => 'Slēpt kontroles',
     'LBL_CHART_CONTROLS_OPEN' => 'Rādīt kontroles',
     'LBL_CHART_UNDEFINED' => 'Nenoteikts',
+    'LBL_CHART_NO_LABEL' => 'Nenoteikts',
+    'LBL_CHART_AMOUNT' => 'Summa',
+    'LBL_CHART_COUNT' => 'Skaits',
+    'LBL_CHART_PERCENT' => 'Procenti',
+    'LBL_CHART_GROUP' => 'Grupa',
+    'LBL_CHART_DATE' => 'Datums',
+    'LBL_CHART_KEY' => 'Atslēga',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => 'Diagrammas veids',
@@ -4777,6 +5013,10 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'Noklusētais datuma filtrs',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => 'Noklusētā datu kopa.',
 
+    'LBL_PRODUCT_CATALOG_NAME' => 'Produktu katalogs',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => 'Produktu katalogs',
+    'LBL_PRODUCT_CATALOG_DESC' => 'Skatīt un pievienot vienumus no jūsu Produktu kataloga.',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => 'Skatīt un pievienot vienumus no jūsu Produktu kataloga.',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}} {{date}} plkst. {{time}}',
@@ -4789,6 +5029,7 @@ $app_strings = array (
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => 'on',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'Mana aktivitāšu plūsma',
     'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'Skatīt ar ierakstiem veikto darbību sarakstu, izveidot un publicēt komentārus.',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => 'Darbību plūsmas ir atspējotas',
 
     'LBL_DATA_VIEW' => 'Datu skatījums',
     'LBL_COMMENT' => 'Komentārs',
@@ -4796,6 +5037,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'kļūda pieslēdzoties serverim. Mēģiniet vēlreiz..',
     'ERR_RESOLVE_ERRORS' => 'Pirms turpināt, izlabojiet kļūdas',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => 'Lai apstiprinātu, visiem obligātajiem laukiem jābūt aizpildītiem; tomēr jūs joprojām varat noraidīt vai pārsūtīt šo ierakstu.',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => 'Lai noraidītu/pārsūtītu, visiem obligātajiem laukiem jābūt aizpildītiem.',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Atjaunināt sarakstu',
@@ -4823,6 +5068,7 @@ $app_strings = array (
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => 'Saglabāto atskaišu diagrammu informatīvie lauciņi',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'Paāda jebkuru diagrammas no saglabātās atskaites.',
+
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => 'Publicētie saistītie raksti',
@@ -4830,7 +5076,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Vēsturiskais apkopojums',
-    'TPL_HISTORICAL_SUMMARY' => 'Vēstures kopsavilkums priekš {{name}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => 'Vairāk vēstures...',
     'LBL_RELATED_CONTACT' => 'Saistītā kontaktpersona',
     'LBL_MODULE_TYPE' => 'Veids',
@@ -5083,6 +5329,29 @@ Lai izveidotu jaunu ierakstu, izmantojot ievadītās vērtības, uzklikšķiniet
 
     'LBL_FIELD_TRIMMED' => 'Lauks tika apgriezts, jo tika pārsniegts maksimālais simbolu limits.',
     'LBL_FIELDSIZE_OVERFLOW' => 'Lauks pārsniedz maksimāli pieļaujamo simbolu skaitu.',
+    'LBL_TINYMCE_TARGET_SAME' => 'Esošais logs',
+    'LBL_TINYMCE_TARGET_NEW' => 'Jauns logs',
+
+    'LBL_OUTBOUND_EMAILS' => 'E-pasta iestatījumi',
+    'LBL_OUTBOUND_EMAIL' => 'E-pasta iestatījums',
+
+    'LBL_EMAIL_PARTICIPANTS' => 'E-pasta dalībnieki',
+    'LBL_EMAIL_PARTICIPANT' => 'E-pasta dalībnieks',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => 'Datu privātums',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'Datu privātums',
+    'LBL_DATAPRIVACY_VIEW_PII' => 'Skatīt personisko informāciju',
+    'LBL_DATAPRIVACY_MARKFORERASE' => 'Atzīmēt dzēšanai',
+    'LBL_DATAPRIVACY_FIELDNAME' => 'Lauks',
+    'LBL_DATAPRIVACY_VALUE' => 'Vērtība',
+    'LBL_DATAPRIVACY_CHANGED_BY' => 'Izmainīja',
+    'LBL_DATAPRIVACY_SOURCE' => 'Avots',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => 'Pēdējoreiz atjaunināts',
+    'LBL_DATAPRIVACY_PII' => 'Personiskā informācija',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Atzīmēt dzēšanai',
+    'TPL_DATAPRIVACY_PII_TITLE' => 'Personiskā informācija, paredzēta {{{name}}}',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5150,7 +5419,7 @@ $app_list_strings['list_visibility_options'] = array(
 
 $app_list_strings['generic_timeperiod_options'] = array (
     'current' => 'Šajā ceturksnī',
-    'next' => 'Nākošais kvartāls',
+    'next' => 'Nākamajā ceturksnī',
     'year' => 'Šajā gadā',
 );
 
@@ -5947,6 +6216,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => 'Kampaņa' ,
     'email' => 'Jebkāds e-pasts',
     'workflow' => 'Darbplūsma',
+    'system' => 'Sistēma',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5965,7 +6235,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -6028,6 +6297,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = 'Zināšanu bāzes veidn
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'Zināšanu bāzes veidnis';
 $app_list_strings['moduleList']['EmbeddedFiles'] = 'Iegultie faili';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Iegultais fails';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'Leks',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'P',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lei',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'Leki',
+    'USD' => 'Dolāri',
+    'AFN' => 'Afgāns',
+    'ARS' => 'Peso',
+    'AWG' => 'Guldeņi',
+    'AUD' => 'Dolāri',
+    'AZN' => 'Jaunie manati',
+    'BSD' => 'Dolāri',
+    'BBD' => 'Dolāri',
+    'BYR' => 'Rubļi',
+    'EUR' => 'Eiro',
+    'BZD' => 'Dolāri',
+    'BMD' => 'Dolāri',
+    'BOB' => 'Boliviano',
+    'BAM' => 'Konvertējama marka',
+    'BWP' => 'Pulas',
+    'BGN' => 'Leva',
+    'BRL' => 'Reāli',
+    'GBP' => 'Mārciņas',
+    'BND' => 'Dolāri',
+    'KHR' => 'Riēli',
+    'CAD' => 'Dolāri',
+    'KYD' => 'Dolāri',
+    'CLP' => 'Peso',
+    'CNY' => 'Ķīnas juaņas',
+    'COP' => 'Peso',
+    'CRC' => 'ColÃ³n',
+    'HRK' => 'Kuna',
+    'CUP' => 'Peso',
+    'CZK' => 'Čehijas kronas',
+    'DKK' => 'Kronas',
+    'DOP' => 'Peso',
+    'XCD' => 'Dolāri',
+    'EGP' => 'Mārciņas',
+    'SVC' => 'Koloni',
+    'EEK' => 'Igaunijas kronas',
+    'FKP' => 'Mārciņas',
+    'FJD' => 'Dolāri',
+    'GHC' => 'Cedis',
+    'GIP' => 'Mārciņas',
+    'GTQ' => 'Kvetsali',
+    'GGP' => 'Mārciņas',
+    'GYD' => 'Dolāri',
+    'HNL' => 'Lempiras',
+    'HKD' => 'Dolāri',
+    'HUF' => 'Forinti',
+    'ISK' => 'Islandes kronas',
+    'INR' => 'Rūpijas',
+    'IDR' => 'Indonēzijas rūpijas',
+    'IRR' => 'Riāli',
+    'IMP' => 'Mārciņas',
+    'ILS' => 'Jaunie šekeļi',
+    'JMD' => 'Dolāri',
+    'JPY' => 'Jēnas',
+    'JEP' => 'Mārciņas',
+    'KZT' => 'Tenge',
+    'KPW' => 'Vona',
+    'KRW' => 'Vona',
+    'KGS' => 'Somi',
+    'LAK' => 'Kipi',
+    'LVL' => 'Lati',
+    'LBP' => 'Mārciņas',
+    'LRD' => 'Dolāri',
+    'CHF' => 'Šveices franki',
+    'LTL' => 'Liti',
+    'MKD' => 'Denāri',
+    'MYR' => 'Ringiti',
+    'MUR' => 'Rūpijas',
+    'MXN' => 'Peso',
+    'MNT' => 'Tugriki',
+    'MZN' => 'Metikali',
+    'NAD' => 'Dolāri',
+    'NPR' => 'Rūpijas',
+    'ANG' => 'Guldeņi',
+    'NZD' => 'Dolāri',
+    'NIO' => 'Kordobas',
+    'NGN' => 'Nairas',
+    'NOK' => 'Krona',
+    'OMR' => 'Riāli',
+    'PKR' => 'Rūpijas',
+    'PAB' => 'Balboa',
+    'PYG' => 'Gvarani',
+    'PEN' => 'Jaunie soli',
+    'PHP' => 'Peso',
+    'PLN' => 'Zloti',
+    'QAR' => 'Riāli',
+    'RON' => 'Jaunās lejas',
+    'RUB' => 'Rubļi',
+    'SHP' => 'Mārciņas',
+    'SAR' => 'Riāli',
+    'RSD' => 'Dināri',
+    'SCR' => 'Rūpijas',
+    'SGD' => 'Dolāri',
+    'SBD' => 'Dolāri',
+    'SOS' => 'Šiliņi',
+    'ZAR' => 'Rands',
+    'LKR' => 'Rūpijas',
+    'SEK' => 'Zviedru krona',
+    'SRD' => 'Dolāri',
+    'SYP' => 'Mārciņas',
+    'TWD' => 'Jaunie dolāri',
+    'THB' => 'Bati',
+    'TTD' => 'Dolāri',
+    'TRY' => 'Lira',
+    'TRL' => 'Liras',
+    'TVD' => 'Dolāri',
+    'UAH' => 'Grivnas',
+    'UYU' => 'Peso',
+    'UZS' => 'Sumi',
+    'VEF' => 'Venecuēlas bolivāri',
+    'VND' => 'Dongs',
+    'YER' => 'Riāli',
+    'ZWD' => 'Zimbabves dolāri',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => 'Viena soļa',

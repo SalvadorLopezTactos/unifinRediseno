@@ -12,13 +12,28 @@
 $viewdefs['UserSignatures']['base']['view']['list'] = array(
     'panels' => array(
         array(
-            'label'  => 'LBL_PANEL_1',
             'fields' => array(
                 array(
-                    "name"    => "name",
-                    "label"   => "LBL_NAME",
-                    "link"    => false,
-                    "default" => true,
+                    'name' => 'name',
+                    'link' => true,
+                    'enabled' => true,
+                    'default' => true,
+                ),
+                array(
+                    'name' => 'is_default',
+                    'type' => 'bool',
+                    'enabled' => true,
+                    'default' => true,
+                ),
+                array (
+                    'name'  => 'date_entered',
+                    'enabled' => true,
+                    'default' => true,
+                ),
+                array(
+                    'name' => 'date_modified',
+                    'enabled' => true,
+                    'default' => true,
                 ),
             ),
         ),

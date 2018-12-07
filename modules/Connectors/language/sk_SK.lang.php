@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Chyba: Žiadne zmapované polia modulu, pre zobrazenie vo výsledkoch. Prosím, kontaktujte správcu systému/Administrátora.',
     'LBL_INFO_INLINE' => 'Info' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Zavrieť' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'Pre dané zdrojové ID nebol nájdený žiaden konektor.',
 );
 

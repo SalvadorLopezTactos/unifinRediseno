@@ -49,7 +49,6 @@
      * quote data group list rows
      *
      * @inheritdoc
-     * @override
      */
     _renderHtml: function() {
         var $els = this.$('tr.quote-data-group-list');

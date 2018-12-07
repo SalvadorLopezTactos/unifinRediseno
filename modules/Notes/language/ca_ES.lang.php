@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Quadre de comandament del llistat de notas',
+
     'ERR_DELETE_RECORD' => 'Per suprimir el compte, heu d&#39;especificar un número de registre.',
     'LBL_ACCOUNT_ID' => 'ID del compte:',
     'LBL_CASE_ID' => 'ID Cas:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Descripció',
     'LBL_EMAIL_ADDRESS' => 'Adreça electrònica:',
     'LBL_EMAIL_ATTACHMENT' => 'Fitxer adjunt de correu electrònic',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Fitxer adjunt de correu electrònic per',
     'LBL_FILE_MIME_TYPE' => 'Tipus MIME',
+    'LBL_FILE_EXTENSION' => 'Extensió d&#39;arxiu',
+    'LBL_FILE_SOURCE' => 'Arxiu font',
+    'LBL_FILE_SIZE' => 'Mida de l&#39;arxiu',
     'LBL_FILE_URL' => 'URL d´Arxiu',
     'LBL_FILENAME' => 'Adjunt:',
     'LBL_LEAD_ID' => 'ID Client Potencial:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'ID d&#39;oportunitat:',
     'LBL_PARENT_ID' => 'ID principal:',
     'LBL_PARENT_TYPE' => 'Tipus d&#39;element principal',
+    'LBL_EMAIL_TYPE' => 'Tipus de correu electrònic',
+    'LBL_EMAIL_ID' => 'ID del correu electrònic',
     'LBL_PHONE' => 'Telèfon:',
     'LBL_PORTAL_FLAG' => 'Mostrar en el Portal?',
     'LBL_EMBED_FLAG' => 'Incloure en correu?',

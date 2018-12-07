@@ -12,14 +12,14 @@
 
 
 $mod_strings = array (
-    'LBL_MODULE_NAME' => 'תהליך',
+    'LBL_MODULE_NAME' => 'תהליכים',
     'LBL_MODULE_TITLE' => 'תהליך',
     'LBL_MODULE_NAME_SINGULAR' => 'תהליך',
     'LNK_LIST' => 'צפה בתהליכים',
     'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => 'רשימת תהליכים',
     'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => 'תהליך ללא השגחה',
 
-    'LBL_CAS_ID' => 'תהליך ID',
+    'LBL_CAS_ID' => 'מספר תהליך',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "לא ידוע (לפי ID מתמש s%)",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "המשימה",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "המשימה",
@@ -39,6 +39,23 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_NOT_REGISTERED_ACTION'  => "פעולה לא רשומה",
     'LBL_PMSE_HISTORY_LOG_NO_YET_STARTED' => '(עוד לא התחילו)',
     'LBL_PMSE_HISTORY_LOG_FLOW' => 'הוקצתה כדי להמשיך את המשימה',
+
+    'LBL_PMSE_HISTORY_LOG_START_EVENT' => "%s רשומה %s, שגרמה ל'זרימת עבודה מתקדמת' להפעיל תהליך '#%s'",
+    'LBL_PMSE_HISTORY_LOG_GATEWAY'  => "שער %s %s %s הוערך ונותב למשימה (משימות) הבאות",
+    'LBL_PMSE_HISTORY_LOG_EVENT'  => "אירוע %s %s %s",
+    'LBL_PMSE_HISTORY_LOG_END_EVENT'  => "סיום",
+    'LBL_PMSE_HISTORY_LOG_CREATED'  => "נוצר/ה",
+    'LBL_PMSE_HISTORY_LOG_MODIFIED'  => "שונה/שונתה",
+    'LBL_PMSE_HISTORY_LOG_STARTED'  => "התחיל/ה",
+    'LBL_PMSE_HISTORY_LOG_PROCESSED'  => "עובד/ה",
+    'LBL_PMSE_HISTORY_LOG_ACTIVITY_SELF_SERVICE'  => "פעילות ה%s על הרשומה %s הייתה זמינה ל'שירות עצמי'",
+    'LBL_PMSE_HISTORY_LOG_ACTIVITY'  => "%s פעילות %s על הרשומה %s",
+    'LBL_PMSE_HISTORY_LOG_ASSIGNED'  => "הוקצה/הוקצתה",
+    'LBL_PMSE_HISTORY_LOG_ROUTED'  => "נותב/ה",
+    'LBL_PMSE_HISTORY_LOG_ACTION'  => "פעולת %s %s עובדה ברשומת %s",
+    'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "הוקצה תהליך #%s %s רשומת %s באמצעות פעולת %s%s",
+    'LBL_PMSE_HISTORY_LOG_ON'  => "על",
+    'LBL_PMSE_HISTORY_LOG_AND'  => "וגם",
 
     'LBL_PMSE_LABEL_APPROVE' => 'אישור',
     'LBL_PMSE_LABEL_REJECT' => 'דחיה',

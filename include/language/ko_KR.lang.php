@@ -27,7 +27,7 @@ $app_list_strings = array (
     'Meetings' => '회의 목록',
     'Tasks' => '업무내역',
     'Calendar' => '캘린더',
-    'Leads' => '관심고객목록',
+    'Leads' => '관심고객',
     'Currencies' => '통화',
     'Contracts'=>'계약목록',
     'Quotes' => '견적 목록',
@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'OAuth Key 인증',
     'OAuthTokens' => '인증 표시',
     'Filters' => '필터',
-    'UserSignatures' => '사용자 서명',
+    'UserSignatures' => '이메일 서명',
     'Shippers' => '배송자',
     'Styleguide' => '스타일 가이드',
     'Feedbacks' => '피드백',
     'Tags' => '태그',
     'Categories' => '범주',
     'Dashboards' => '대시보드',
+    'OutboundEmail' => '이메일 설정',
+    'EmailParticipants' => '이메일 참가자',
+    'DataPrivacy' => '데이터 프라이버시',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'FO',
         'Tasks' => '작업',
-        'Dashboards' => 'Db',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => '데이터 프라이버시',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => '제품 유형',
     'Shippers' => '배송자',
     'Subscriptions' => '구독',
-    'UserSignatures' => '사용자 서명',
+    'UserSignatures' => '이메일 서명',
     'Feedbacks' => '피드백',
     'Tags' => '태그',
     'Categories' => '범주',
+    'OutboundEmail' => '이메일 설정',
+    'EmailParticipants' => '이메일 참가자',
+    'DataPrivacy' => '데이터 프라이버시',
   ),
 
 /*
@@ -329,6 +336,11 @@ $app_list_strings = array (
     'Existing Business' => '기존 비즈니스',
     'New Business' => '새로운 비즈니스',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => '작동중',
+            'Inactive' => '비활성화',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => '매출',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => '영향권자',
     'Other' => '기타',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => '작동중',
+            'Inactive' => '비활성화',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => '작동중',
+            'Inactive' => '비활성화',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => '주요 연락처',
@@ -377,8 +400,8 @@ $app_list_strings = array (
     'Qualification' => '자격조건',
     'Needs Analysis' => '수요분석',
     'Value Proposition' => '초기영업',
-    'Id. Decision Makers' => '의사결정권자확인',
-    'Perception Analysis' => '고객요구사항분석',
+    'Id. Decision Makers' => '결정권자확인',
+    'Perception Analysis' => '고객요구분석',
     'Proposal/Price Quote' => '제안및견적',
     'Negotiation/Review' => '협상 및 검토',
     'Closed Won' => '계약 성공',
@@ -463,7 +486,7 @@ $app_list_strings = array (
                                   300=> '5 분 전에',
                                   600=> '10 분 전에',
                                   900=> '15 분 전에',
-                                  1800=> '30 분 전에',
+                                  1800=> '30 분 전',
                                   3600=> '1 시간 전에',
                                   7200 => '2 시간 전에',
                                   10800 => '3 시간 전에',
@@ -481,7 +504,7 @@ $app_list_strings = array (
   'task_status_default' => '시작하지 않았음',
   'task_status_dom' =>
   array (
-    'Not Started' => '시작하지 않았음',
+    'Not Started' => '시작 전',
     'In Progress' => '진행중',
     'Completed' => '완료',
     'Pending Input' => '응답대기',
@@ -491,7 +514,7 @@ $app_list_strings = array (
   'meeting_status_dom' =>
   array (
     'Planned' => '예정',
-    'Held' => '개최',
+    'Held' => '완료',
     'Not Held' => '취소',
   ),
   'extapi_meeting_password' =>
@@ -507,7 +530,7 @@ $app_list_strings = array (
   'call_status_dom' =>
   array (
     'Planned' => '예정',
-    'Held' => '개최',
+    'Held' => '완료',
     'Not Held' => '취소',
   ),
   'call_direction_default' => '발신',
@@ -520,10 +543,10 @@ $app_list_strings = array (
   array (
     '' => '',
     'New' => '신규',
-    'Assigned' => '배정',
+    'Assigned' => '배정완료',
     'In Process' => '진행중',
     'Converted' => '변환됨',
-    'Recycled' => '다시할당됨(Recycled)',
+    'Recycled' => '재할당',
     'Dead' => '만료됨',
   ),
    'gender_list' =>
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => '과제',
       'KBContents' => '지식 기반',
+      'Notes' => '메모',
   ),
 
   'record_type_display_notes' =>
@@ -659,26 +683,34 @@ $app_list_strings = array (
     'Calls' => '전화상담',
       'KBContents' => '지식 기반',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => '거래처',
+        'Contacts' => '연락처',
+        'Employees' => '직원',
+        'Leads' => '관심고객',
+        'Prospects' => '목표고객',
+        'Users' => '사용자',
+    ),
 
   'parent_type_display' =>
   array (
     'Accounts' => '거래처',
     'Contacts' => '연락처',
-    'Tasks' => '과제',
+    'Tasks' => '업무',
     'Opportunities' => '예비고객',
     'Products' => '견적 라인아이템',
     'Quotes' => '견적',
 
     'Bugs' => '버그',
     'Cases' => '사례',
-    'Leads' => '관심고객:',
+    'Leads' => '관심고객',
 
     'Project' => '프로젝트',
     'ProjectTask' => '프로젝트 과제',
 
     'Prospects' => '목표고객',
-      'KBContents' => '지식 기반',
-
+      'KBContents' => '지식 베이스',
+      'Notes' => '메모',
   ),
 
   'product_status_default_key' => '배송',
@@ -832,7 +864,6 @@ $app_list_strings = array (
     'Product' => '제품',
     'User' => '사용자',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => '다른 이메일:',
     'Twitter' => '트위터'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => '데이터 프라이버시 정책 요청',
+        'Send Personal Information being processed' => '처리 중인 개인 정보 전송',
+        'Rectify Information' => '정보 수정',
+        'Request to Erase Information' => '정보 삭제 요청',
+        'Export Information' => '정보 내보내기',
+        'Restrict Processing' => '처리 제한',
+        'Object to Processing' => '처리 거절',
+        'Consent to Process' => '처리 동의',
+        'Withdraw Consent' => '동의 철회',
+        'Other' => '기타',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => '비즈니스 커뮤니케이션',
+        'Marketing Communications by company' => '회사의 마케팅 커뮤니케이션',
+        'Marketing Communications by partners' => '파트너 별 마케팅 커뮤니케이션',
+    ),
+    'dataprivacy_status_default_key' => '오픈',
+    'dataprivacy_status_dom' => array(
+        'Open' => '오픈',
+        'Closed' => '완료',
+        'Rejected' => '거부',
+    ),
+    'dataprivacy_priority_default_key' => '낮음',
+    'dataprivacy_priority_dom' => array(
+        'Low' => '낮음',
+        'Medium' => '보통',
+        'High' => '높음',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => '작업실',
     'Upgrade' => '업그레이드',
     'Users' => '사용자',
+    'OutboundEmail' => '이메일 설정',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -996,7 +1058,7 @@ $app_list_strings = array (
         ),
 
     'dom_report_types'=>array(
-                'tabular'=>'열과 행',
+                'tabular'=>'행렬',
                 'summary'=>'요약',
                 'detailed_summary'=>'설명 및 요약',
                 'Matrix' => '매트릭스',
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => '실패',
                                         'completed'     => '완료',
                                         'no curl'       => '사용가능한 cURL 없음',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => '임시 보관',
+        'Archived' => '보관됨',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => '거부 목록 - 고유번호',
     'test' => '테스트',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => '작동중',
+             'Inactive' => '비활성화',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3 주',
         '31' => '1 달',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => '작동중',
-    'Inactive' => '중지',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => '높음',
         'medium'    => '보통',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => '없음',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => '구글',
+        'exchange' => '교환',
+        'outlook' => '아웃룩',
+        'other' => '기타',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2032,6 +2099,11 @@ $app_list_strings = array (
         'ACTIVE' => '작동',
         'INACTIVE' => '중지',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => '기록',
+        'records' => '목록',
+        'activities' => '활동흐름',
+    ),
 );
 
 $app_strings = array (
@@ -2042,14 +2114,14 @@ $app_strings = array (
   'LBL_FOLLOW' => '팔로잉', // Record view header panel element
   'LBL_FOLLOW_LINK' => '링크 팔로잉',
   'LBL_TOGGLE_VISIBILITY' => '토글 가시성', // Record view header panel element
-  'LBL_ACTIVITIES' => '활동흐름',
-  'LBL_COPYRIGHT' => '저작권 © 2004-2017 SugarCRM Inc. 모든 권리 보유.',
+  'LBL_ACTIVITIES' => '액티비티 스트림',
+  'LBL_COPYRIGHT' => '저작권 © 2004-2018 SugarCRM Inc. 모든 권리 보유.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar 및 3-D 큐브는 SugarCRM Inc. 등록상표입니다. '.
         '이 제품에 사용되거나 나타난 모든 여타 기업 및 상품명은 '.
         'SugarCRM ®, Sugar Enterprise™ 및 Sugar™는 SugarCRM, Inc.의 상표입니다.',
-    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ 및 Sugar™는 SugarCRM, Inc.의 상표입니다.',
+    'LBL_TRADEMARK2' => 'SugarCRM®, Sugar Enterprise™, Sugar™는 SugarCRM Inc.의 상표입니다.',
     'LBL_SEND_INVITE' => '초대하기',
-  'LBL_INVITEES' => '초대자 목록',
+  'LBL_INVITEES' => '게스트',
     'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => '손님이 당신의 초대를 받지 않습니다.',
   'LBL_SELECT_ACTION_LABEL' => '액션 선택',
   'LBL_TOGGLE_DRAWER' => '토글 서랍',
@@ -2107,7 +2179,7 @@ $app_strings = array (
     'LBL_PRINT' => "인쇄하기",
     'LBL_HELP' => "도움말",
     'LBL_TOUR' => "둘러보기",
-    'LBL_TOUR_LINK' => '투어 - 기능 하이라이트 투어 보기',
+    'LBL_TOUR_LINK' => '투어 - 투어로 주요 기능 보기',
     'LBL_MOBILE' => "휴대폰",
     'LBL_ID_FF_SELECT' => "선택하기",
     'DEFAULT'                              => '기본',
@@ -2116,6 +2188,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => 'SMTP서버를 SSL 혹은 TLS중에 선택해주십시오',
     'LBL_NO_ACTION'                         => '올바르지 않은 주소입니다.',
     'LBL_NO_DATA'                           => '자료가 없습니다.',
+    'LBL_NOT_APPLICABLE'                    => '해당 사항 없음',
     'LBL_ROUTING_ADD_RULE'                  => '역할 추가',
     'LBL_ROUTING_ALL'                       => '최소한',
     'LBL_ROUTING_ANY'                       => '모든',
@@ -2188,7 +2261,7 @@ $app_strings = array (
     'LBL_EMAIL_POP3_REMOVE_MESSAGE'         => 'POP3는 지원하지 않습니다. IMAP만 지원됩니다.',
     'LBL_EMAIL_ACCOUNTS_SUBTITLE'           => '귀하의 이메일 계정으로부터 수신 이메일을 보기위한 메일 계정을 설정합니다.',
     'LBL_EMAIL_ACCOUNTS_OUTBOUND_SUBTITLE'  => '메일계정에서 발신 이메일을 위해 사용할 SMTP메일 서버를 입력합니다.',
-    'LBL_EMAIL_ADD'                         => '이메일을 추가하십시오',
+    'LBL_EMAIL_ADD'                         => '이메일 추가',
 
     'LBL_EMAIL_ADDRESS_BOOK_ADD'            => '완료',
     'LBL_EMAIL_ADDRESS_BOOK_CLEAR'          => '비우기',
@@ -2547,6 +2620,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => '가져오기가 성공했습니다.',
     'LBL_EMAIL_IMPORT_FAIL'                 => '이미 가져온 메세지이거나 서버에서 삭제되어 가져오기가 실패했습니다.',
 
+    'LBL_EMAILS_FROM' => '전송된 이메일',
+    'LBL_EMAILS_RECEIVED' => '수신한 이메일',
+    'LBL_EMAIL_ADDRESSES_USED' => '이메일에서 사용되는 이메일 주소',
+    'LBL_EMAIL_ADDRESS' => '이메일 주소:',
+    'LBL_FROM' => '발신인',
+    'LBL_TO' => '수신인',
+    'LBL_CC' => '참조',
+    'LBL_BCC' => '숨은 참조',
+
     'LBL_LINK_NONE'=> '없음',
     'LBL_LINK_ALL'=> '전부',
     'LBL_LINK_RECORDS'=> '자료',
@@ -2570,7 +2652,7 @@ $app_strings = array (
     'LBL_SEARCH_UNAVAILABLE' => '검색기능을 사용할수 없습니다. 나중에 다시 시도해주십시오.',
     'ERR_NO_PRIMARY_TEAM_SPECIFIED' => '명시된 기본 팀이 없습니다.',
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => '아이디 [{2}] 모듈 [{1}] 에 대한 기본팀 아이디 [{0}] 제거를 시도하는 중 오류가 발생했습니다.',
-    'LBL_TEAM_ADD' => '팀 추가하기',
+    'LBL_TEAM_ADD' => '팀&nbsp;추가',
     'LBL_TEAM_REMOVE' => '팀 제거하기',
     'LBL_TEAM_PRIMARY' => '기본팀으로 설정',
 
@@ -2605,6 +2687,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => '작동중인 세션의 내용물 보내기가 필요합니다.',
     'ERR_NO_HEADER_ID' => '현재 항목은 선택된 테마에서는 작동하지 않습니다.',
     'ERR_NOT_ADMIN' => "관리자모드 접속 승인이 필요합니다.",
+    'ERR_DISABLED_FOR_IDM_MODE' => "이 옵션은 SugarCRM에서 IDM 모드로 사용할 수 없으며 클라우드 콘솔에서 사용할 수 있습니다.",
+    'ERR_GOTO_CLOUD_CONSOLE' => "<a href=\"%s\" target=\"_blank\">클라우드 콘솔</a>로 이동하십시오.",
     'ERR_MISSING_REQUIRED_FIELDS' => '다음의 필수 항목을 입력하셔합니다:',
     'ERR_INVALID_REQUIRED_FIELDS' => '올바르지 않은 필수 항목을 입력하셨습니다:',
     'ERR_INVALID_VALUE' => '올바르지 않은 값을 입력하셨습니다:',
@@ -2794,7 +2878,7 @@ $app_strings = array (
     'LBL_CONTRACTS'=>'연락처',
     'LBL_COUNTRY' => '국가:',
     'LBL_RESET_BUTTON_LABEL' => '재설정',
-    'LBL_CREATE_BUTTON_LABEL' => '생성하기',
+    'LBL_CREATE_BUTTON_LABEL' => '만들기',
     'LBL_CREATED_BY_USER'=>'생성자',
     'LBL_CREATED_USER'=>'생성자',
     'LBL_CREATED_ID' => '생성 ID',
@@ -2828,8 +2912,8 @@ $app_strings = array (
     'LBL_FILTER_MENU_BY' => '다음에 의한 메뉴 필터',
     'LBL_FILTER_SELECT_FIELD' => '필드를 선택하십시오',
     'LBL_FILTER_SELECT_OPERATOR' => '작업자를 선택하십시오',
-    'LBL_FILTER_CREATE_NEW' => '신규 필터 말들기',
-    'LBL_FILTER_CREATE_FILTER' => '새로운 필터 생성',
+    'LBL_FILTER_CREATE_NEW' => '만들기',
+    'LBL_FILTER_CREATE_FILTER' => '새 필터 생성',
     'LBL_FILTER_EDIT_FILTER' => '필터 편집',
     'LBL_FILTER_ALL_RECORDS' => '전체 기록',
     'TPL_FILTER_SAVE' => '성공적으로 필터 {{name}} 만들었습니다.',
@@ -2867,7 +2951,7 @@ $app_strings = array (
     'LBL_FAVORITES_FILTER' => '내 즐겨찾기 목록:',
     'LBL_GLOBAL_SEARCH' => '글로벌 검색',
     'LBL_GLOBAL_SEARCH_MODULE_FILTER' => '글로벌 검색 모듈 필터',
-    'LBL_GLOBAL_SEARCH_RUN' => '실행 글로벌 검색',
+    'LBL_GLOBAL_SEARCH_RUN' => '글로벌 검색 실행',
     'LBL_GO_BUTTON_LABEL' => '이동하기',
     'LBL_GS_HELP' => '이 모듈의 필드는 위에 보이는 검색에 사용되었습니다. 강조된 문자는 검색 조건에 일치합니다.',
     'LBL_HIDE'=>'숨김',
@@ -2881,12 +2965,12 @@ $app_strings = array (
     'TPL_MORE_RECORDS' => '{{recordsLeft}} 추가 레코드가 선택되었습니다.',
     'TPL_RECORDS_SELECTED' => '{{recordsLeft}} 레코드가 선택되었습니다.',
     'LBL_SHOW_LESS' => '메뉴 접기',
-    'LBL_SHOW_MORE' => '메뉴 열기',
+    'LBL_SHOW_MORE' => '더보기',
     'LBL_SHOW_MORE_MODULE' => '더 보기',
     'LBL_SHOW_MORE_RECENTS' => '더 최근 사용 ...',
     'LBL_SHOW_LESS_RECENTS' => '보다 적은 최근 사용 ...',
     'LBL_SHOW_MORE_RESULTS' => '더 많은 검색 결과...',
-    'TPL_SHOW_MORE_MODULE' => '더 {{module}} …',
+    'TPL_SHOW_MORE_MODULE' => '더 많은 {{module}}…',
     'LBL_SHOW_MORE_GENERIC' => '추가 {{name}}…',
     'LBL_TODAYS_ACTIVITIES' => '오늘의 활동',
     'LBL_LEADS'=>'관심고객',
@@ -2910,7 +2994,7 @@ $app_strings = array (
     'LBL_LIST_NAME' => '이름',
     'LBL_LIST_OF' => '/',
     'LBL_LIST_PHONE' => '전화번호',
-    'LBL_LIST_RELATED_TO' => '관련된 정보',
+    'LBL_LIST_RELATED_TO' => '관련된 자료',
     'LBL_LIST_USER_NAME' => '사용자명',
     'LBL_LISTVIEW_MASS_UPDATE_CONFIRM' => '선택된 모든 레코드를 변경하겠습니까?',
     'LBL_LISTVIEW_NO_SELECTED' => '한개 이상의 레코드를 선택해주십시오.',
@@ -2934,7 +3018,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => '대량 업데이트가 실패했습니다. 00개의 레코드가 변경되지 않았습니다.',
     'TPL_MASSUPDATE_WARNING_CLOSE' => '대량 업데이트가 완료되지 않았습니다. 00개의 레코드가 변경되지 않았습니다.',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => '대량 업데이트가 완료되지 않았습니다. 00개의 레코드가 변경되지 않았습니다.',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => '남겨진 레코드가 허가에 의해 무시되었습니다.',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} 레코드가 허가 또는 오류로 인해 무시되었습니다.',
     'TPL_MASSUPDATE_SUCCESS' => '00개의 레코드가 성공적으로 업데이트 되었습니다.',
     'TPL_MASSUPDATE_TITLE' => '전체 업데이트',
     'TPL_MASSDELETE_PROGRESS_STATUS' => '삭제중입니다.',
@@ -2964,8 +3048,8 @@ $app_strings = array (
 
     'TPL_LIST_HEADER_COUNT' => '{{num}}',
     'TPL_LIST_HEADER_COUNT_PARTIAL' => '{{num}}+',
-    'TPL_LIST_HEADER_COUNT_TOTAL' => '{{num}} 의 {{total}}',
-    'TPL_LIST_HEADER_COUNT_TOOLTIP' => '전체에 대해 클릭',
+    'TPL_LIST_HEADER_COUNT_TOTAL' => '전체 {{total}} 중 {{num}}',
+    'TPL_LIST_HEADER_COUNT_TOOLTIP' => '클릭하여 전체보기',
 
     'LBL_LOCALE_NAME_EXAMPLE_FIRST' => '길동',
     'LBL_LOCALE_NAME_EXAMPLE_LAST' => '홍',
@@ -2973,7 +3057,7 @@ $app_strings = array (
     'LBL_LOCALE_NAME_EXAMPLE_TITLE' => 'Code Monkey Extraordinaire',
     'LBL_LOGIN_TO_ACCESS' => '이 페이지를 열기 위해서는 로그인이 필요합니다.',
     'LBL_LOGOUT' => '로그아웃',
-    'LBL_PROFILE' => '개인설정관리',
+    'LBL_PROFILE' => '개인 프로필',
     'LBL_MAILMERGE_KEY' => 'M',
     'LBL_MAILMERGE' => '메일머지',
     'LBL_MASS_UPDATE' => '전체 수정하기',
@@ -3006,6 +3090,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => '사용자 초기설정',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => '사용자 계정',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => '그룹 계정',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => '이름',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => '신규자료 추가하기',
@@ -3218,9 +3303,9 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         '판권 소유.<br />SugarCRM, Sugar 및 3-D 큐브는 SugarCRM Inc. 등록 상표입니다. '.
-        '이 제품에 사용되거나 나타난 여타 모든 기업 및 상품명은 '.
+        '이 제품에 사용되거나 등장하는 모든 기업 및 상품명은 '.
         '상품과 관련된 각 기업의 상표일 수 있습니다.',
 
     // GENERIC JOB NOTIFICATIONS LABELS
@@ -3256,7 +3341,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => '비밀번호:',
     'LBL_LOGGED_OUT' => '로그아웃되었습니다.',
     'LBL_LOGIN_FORM_LABEL' => '로그인 양식 보기',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => '로그인으로 돌아가기',
+    'LBL_LOGIN_INACTIVE_USER' => '비활성 사용자',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => '포털 또는 그룹 사용자가 로그인 할 수 없습니다.',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => '대시보드',
@@ -3323,8 +3410,9 @@ $app_strings = array (
     'LNK_BACKTOTOP' => '맨처음으로',
     'LNK_REMOVE' => '제거',
     'LNK_RESUME' => '재개',
-    'LNK_VIEW_CHANGE_LOG' => '변경기록 확인하기',
-
+    'LNK_VIEW_CHANGE_LOG' => '감사 로그 보기',
+    'TPL_AUDIT_LOG_TITLE' => '{{{name}}}의 감사 로그',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => '브라우저 뒤로 버튼을 클릭하여 오류를 수정하십시오.',
     'NTC_DATE_FORMAT' => '(연도-월-일)',
@@ -3358,13 +3446,12 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "귀사의 라이센스가 곧 만료됩니다.",
     'ERROR_LICENSE_VALIDATION'=> "라이센스 갱신이 필요합니다. 현재 관리자만 접속가능합니다.",
     'WARN_LICENSE_VALIDATION'=> "귀사의 SugarCRM라이센스를 빠른 시일내에 확인(Valication)하신시오.",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"유효한 오프라인 고객의 수가 현재 라이센스에 명시된 수를 초과합니다.",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "경고: 귀하의 브라우저가 지원되지 않는 호환성(IE compatibility) 모드로 설정되어 있습니다.",
     'WARN_LICENSE_SEATS'=>  "경고: 적용된 라이센스의 최대 허용 사용자 수를 초과하였습니다. 라이센스로 갱신이 필요합니다.",
     'WARN_LICENSE_SEATS_MAXED'=>  "경고: 라이센스가 허용하는 사용자 수를 초과하였습니다.",
     'WARN_ONLY_ADMINS'=> "관리자만 접속가능합니다.",
     'WARN_UNSAVED_CHANGES'=> "입력한 정보를 저장하지 않은 상태에서 페이지를 이동하려합니다. 자료를 잃어버릴 수 있습니다. 정말 이동하시겠습니까?",
-    'LBL_WARN_UNSAVED_CHANGES' => '저장되지 않은 변경 사항이 있습니다. 페이지를 떠나 변경 사항을 취소하시겠습니까?',
+    'LBL_WARN_UNSAVED_CHANGES' => '저장되지 않은 변경 사항이 있습니다. 변경 사항을 취소하고 페이지를 벗어나시겠습니까?',
     'LBL_NAVIGATE_TO_REPORTS' => '보고서 모듈로 이동하고 있습니다. 대시렛창(dashlet)에 대한 변경 사항이 저장되지 않습니다. 계속하시겠습니까?',
     'ERROR_NO_RECORD' => '자료를 가져오기를 실패하였습니다. 이 자료는 지워졌거나 읽기권한이 변경된 상태일 수 있습니다.',
     'ERROR_TYPE_NOT_VALID' => '에러. 형식이 올바르지 않습니다.',
@@ -3428,20 +3515,17 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'처리중 ...',
     'LBL_REQUEST_PROCESSED'=>'완료됨',
     'LBL_AJAX_FAILURE' => '로딩실패',
-    'LBL_OC_STATUS' => '오프라인 클라이언트 상태',
-    'LBL_OC_STATUS_TEXT' => '사용자가 오프라인 클라이언트를 사용할수 있는지의 여부를 나타냅니다',
-    'LBL_OC_DEFAULT_STATUS' => '비활성화',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => '검색중',
     'LBL_SAVED_SEARCH_SHORTCUT' => '저장된 검색옵션',
     'LBL_SEARCH_POPULATE_ONLY'=> '위의 검색 기능을 사용해 검색을 실시합니다.',
     'LBL_SEARCH_NO_RESULTS' => '결과가 없습니다.',
     'LBL_SEARCH_FOR' => '검색',
     'LBL_SEARCH_FOR_MORE' => '더 검색합니다.',
-    'LBL_SEARCH_SELECT' => '선택합니다.',
+    'LBL_SEARCH_SELECT' => '선택하기',
     'LBL_SEARCH_AND_SELECT_ELLIPSIS' => '검색 및 선택 중...',
-    'LBL_SEARCH_SELECT_MODULE' => '선택합니다.',
+    'LBL_SEARCH_SELECT_MODULE' => '{{module}} 선택',
     'LBL_DETAILVIEW'=>'상세화면',
-    'LBL_LISTVIEW'=>'목록화면',
+    'LBL_LISTVIEW'=>'목록보기',
     'LBL_EDITVIEW'=>'수정화면',
     'LBL_SEARCHFORM'=>'검색양식',
     'LBL_SAVED_SEARCH_ERROR' => '이 화면의 이름을 입력하십시오.',
@@ -3531,15 +3615,16 @@ $app_strings = array (
     'LBL_COLLAPSE_ALL' => '전체 접기',
     'LBL_EXPAND_ALL' => '전체 확장',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => '편집하기',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => '보고서 보기',
     'LBL_DASHLET_REFRESH_LABEL' => '새로고침',
     'LBL_DASHLET_REMOVE_LABEL' => '제거',
     'LBL_DASHLET_DROP_HERE' => '여기에 끌어서 내립니다.',
-    'LBL_DASHLET_MINIMIZE_ALL' => '모두 최소화',
-    'LBL_DASHLET_MAXIMIZE_ALL' => '모두 최대화',
+    'LBL_DASHLET_MINIMIZE_ALL' => '모두 닫기',
+    'LBL_DASHLET_MAXIMIZE_ALL' => '모두 열기',
     'LBL_DASHLET_MINIMIZE' => '최소화',
     'LBL_DASHLET_MAXIMIZE' => '최대화',
-    'LBL_DASHLET_CONFIGURE' => '구성합니다.',
-    'LBL_DASHLET_TOGGLE' => '대시보드 가시성 토글(Toggle)',
+    'LBL_DASHLET_CONFIGURE' => '구성',
+    'LBL_DASHLET_TOGGLE' => '열기/닫기',
     'LBL_SIDEPANE_TOGGLE' => '작업창 열기/닫기',
 
     /* Sugar7 Help Component */
@@ -3555,7 +3640,7 @@ $app_strings = array (
     'LBL_FACET_NO_DATA' => '이 측면에 대한 데이터 없음.',
 
     'LBL_DASHLET_LISTVIEW_NAME' => '목록보기',
-    'LBL_DASHLET_LISTVIEW_DESCRIPTION' => '모듈의 레코드를 지정한 분류대로 목록으로 표시',
+    'LBL_DASHLET_LISTVIEW_DESCRIPTION' => '지정된 분류대로 특정 모듈의 기록을 표시합니다.',
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
     'TPL_DASHLET_MY_MODULE' => '내 {{module}}',
@@ -3582,7 +3667,7 @@ $app_strings = array (
     'LBL_TWITTER_RETWEET' => '리트윗',
     'LBL_TWITTER_FAVORITE' => '즐겨찾기',
     'LBL_TWITTER_FOLLOW' => '팔로우',
-    'LBL_TWITTER_DESCRIPTION' => '관련 트위터사용자의 바이오와 트위트, 리트윗 그리고 대답과 트위트를 봅니다.',
+    'LBL_TWITTER_DESCRIPTION' => '관련 트위터사용자의 바이오와 트위트, 리트윗, 그리고 대답과 트위트를 봅니다.',
     'LBL_TWITTER_ID' =>  '트위터 아이디',
     'LBL_TWITTER_DISPLAY_ROWS' => '줄 표시',
     'LBL_TWITTER_MY_ACCOUNT' => '내 계정',
@@ -3608,8 +3693,8 @@ $app_strings = array (
     'LBL_DASHLET_LOCALIZATIONS_DESCRIPTION' => 'Displays a list of published, localized knowledge base articles',
 
     // Most Useful Knowledge Base Articles dashlet
-    'LBL_DASHLET_MOST_USEFUL_NAME' => '가장 유용한 게시된 지식 기반 기사',
-    'LBL_DASHLET_MOST_USEFUL_DESC' => '가장 선호되었고, 많이 읽혔던 기사를 보여줍니다',
+    'LBL_DASHLET_MOST_USEFUL_NAME' => '게시된 지식 기반 기사 중 가장 유용한 내용',
+    'LBL_DASHLET_MOST_USEFUL_DESC' => '지식 베이스 기사 중 가장 인기있고 많이 읽은 것을 보여줍니다',
 
     'LBL_FILTERED_LIST_BY_FIELD' => '{{module}} filtered by {{label}} "{{value}}"',
 
@@ -3913,7 +3998,7 @@ $app_strings = array (
     'LBL_TEAM_SELECT_AS_PRIM_TITLE' => '이팀을 기본으로 설정하기위해 선택합니다.',
     'LBL_TEAM_TBSELECTED_TITLE' => '부서 기반 선택됨',
     'LBL_TEAM_SELECT_AS_TBSELECTED_TITLE' => '부서 기반 선택하기',
-    'LBL_SEARCH_AND_SELECT' => '검색후 선택',
+    'LBL_SEARCH_AND_SELECT' => '검색 및 선택 {{module}}',
     'TPL_SEARCH_AND_ADD' => '{{module}} 검색 및 추가',
 
     //for upload errors
@@ -3948,7 +4033,7 @@ $app_strings = array (
     'LBL_START_BUTTON_TITLE' => '시작',
     'LBL_FINISH_BUTTON_LABEL' => '완료',
     'LBL_FINISH_BUTTON_TITLE' => '완료',
-    'LBL_CONFIRM_BUTTON_LABEL' => '예',
+    'LBL_CONFIRM_BUTTON_LABEL' => '확인',
     'LBL_CONFIRM_BUTTON_LABEL_CONT' => '계속',
     'LBL_CONFIRM_BUTTON_LABEL_UNSAVED_CONT' => '이 페이지를 종료하며 변경내용을 취소',
     'LBL_FIRST_INPUT_EDIT_VIEW_KEY' => '7',
@@ -3995,7 +4080,7 @@ $app_strings = array (
     'LBL_REFINE_LIST' => '교정 목록',
     'LBL_SEARCH_BY' => '검색인',
     'LBL_PREVIEW' => '미리 보기',
-    'LBL_COLUMNS' => '열',
+    'LBL_COLUMNS' => '세로줄(열)',
     'LBL_PREVIEW_DISABLED_NO_RECORD' => '미리보기 불가. 데이터가 없습니다.',
     'LBL_PREVIEW_DISABLED_NO_ACCESS' => '미리보기 불가. 레코드에 접근이 불가능합니다',
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => '미리보기 불가. 데이터가 없습니다.',
@@ -4182,7 +4267,7 @@ $app_strings = array (
     'LBL_ASSOC_EXISTING' => '기존{{{this}}}와 관련',
     'LBL_SEARCH_ALL' => '모든 검색 {{{this}}}',
     'LBL_SEARCH_ALL_RECORDS' => '모든 레코드를 검색 ...',
-    'LBL_SEARCH_ALL_MODULES' => '모두 검색합니다.',
+    'LBL_SEARCH_ALL_MODULES' => '모두 검색',
     'LBL_OK' => '예',
     'LBL_YES' => '예',
     'LBL_NO' => '아니요',
@@ -4199,7 +4284,9 @@ $app_strings = array (
     'LBL_CONFIRM' => '확인',
     'LBL_NO_ACCESS' => '접속할수 없습니다.',
     'LBL_NO_ACCESS_LOWER' => '레코드에접근 불가한 사용자',
-    'LBL_NO_FIELD_ACCESS' => '접근 불가',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => '값 삭제',
+    'LBL_VALUE_ERASED_TOOLTIP' => '이 정보는 데이터 프라이버시 요청을 통해 삭제되었습니다.',
     'LBL_CREATE_RELATED_RECORD' => '관련 기록 생성하기',
     'LBL_ASSOC_RELATED_RECORD' => '기존 기록과 연결됩니다.',
     'LBL_CHOOSE_LINK' => '연결 형식을 선택하십시오',
@@ -4268,7 +4355,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => '큰',
     'LBL_FONTSIZE_HUGE' => '거대한',
     'LBL_FONTSIZE_EXTRA_HUGE' => '추가 거대한',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => '\r\n{{{this}}} 다운로드 실패',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "다운로드 실패 {{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => '더보기',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => '축소보기 ...',
     'LBL_OFFLINE_MODE' => '오프라인 모드',
@@ -4337,6 +4424,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => '트랜잭션 세부 사항',
     'LBL_RECORD_DELETED' => '(기록 삭제)',
     'LBL_NOT_AVAILABLE' => 'N/A',
+    'LBL_FILE_SIZE' => '파일 크기',
     'LBL_FILE_SIZE_UNITS_B' => '바이트',
     'LBL_FILE_SIZE_UNITS_KB' => 'kB',
     'LBL_FILE_SIZE_UNITS_MB' => 'MB',
@@ -4460,6 +4548,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => '상세보기 화면의 오른쪽에 열립니다.',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => '이 메뉴의 주요 구성 요소를 둘러보기 위해 아래 화살표를 사용하십시오.',
 
+    'LBL_COMMENT_ADD' => '의견 추가하기',
+    'LBL_REQUIRED' => '필수항목',
+    'LBL_MORE_BUTTON' => '더보기',
+    'LBL_TRY_AGAIN' => '다시 시도',
+    'LBL_NEW_RECORDS' => '최근 생성 항목',
+    'LBL_ASSIGNED_TO_ME' => '내 {{module}}',
+    'LBL_LISTVIEW_FILTER_ALL' => '모든 {{{module}}}',
+    'LBL_UNFAVORITE' => '즐겨찾기 해제',
+    'LBL_ACTIVITY_CREATE' => '생성된 {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UPDATE' => '{{{record}}} {{{module}}}에 {{{changes}}} 업데이트 됨',
+    'LBL_ACTIVITY_LINK' => '{{{record}}} {{{module}}}에 {{{relatedRecord}}} 연결 됨',
+    'LBL_ACTIVITY_UNLINK' => '{{{record}}} {{{module}}}에서 {{{relatedRecord}}} 링크 해제됨',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{parentModule}}에 대한 {{relationship}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => '관련 기록 다운로드...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => '대시 보드 구성이 변경되었습니다. 다시 로드하시겠습니까?',
+    'LBL_RECORDS' => '기록',
+    'LBL_DASHBOARDS' => '대시보드',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => '검색 {{searchCriteria}}...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => '메인 메뉴',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => '간단히 새로운 기록 생성',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => '다른 옵션을 보려면 스와이프',
+    'LBL_DETAILS' => '세부사항',
+    'LBL_DETAIL_RELATED' => '관련',
+    'LBL_CREATE_RELATED_MODULE_WARN' => '이 {{module}}에는 {{relatedModule}}이 (가) 필요합니다. <a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>{{relatedModule}} 레코드를 만들기</a>.',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => '기록 편집',
+    'LBL_OFFLINE_MENU_SETTINGS' => '오프라인 설정',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => '디버그 설정',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED" : "데이터 암호화가 활성화되었습니다.',
+    'LBL_OFFLINE_TOTAL_RECORDS' => '최종 기록',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => '마지막 다운로드',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => '파일을 다운로드할 수 없습니다.',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => '서버에서 대시보드 불러오기 실패',
+    'ERR_FILTERS_FETCHING' => '필터를 가져올 수 없습니다',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => '로컬 저장소를 암호화할 수 없습니다',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => '오프라인 데이터 암호화 중. 몇 분 걸릴 것입니다.',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => '오프라인 데이터 암호화가 완료되었습니다.',
+    'ERR_ACCESS_SPECIFIC_MODULE' => '{{{module}}} 모듈에 접근할 수 없습니다.',
+    'LBL_SKIP' => '생략',
+    'LBL_CONTINUE' => '계속합니다.',
+    'LBL_ENABLE' => '작동',
+    'LBL_MOBILE_TRIAL_UNTIL' => '트라이얼 기한',
+    'LBL_MOBILE_SDK_VERSION' => 'SDK 버전',
+    'LBL_LOG_LEVEL' => '접속 단계',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => '로그인 설정이 다시 구성되었습니다.',
+    'LBL_TRIAL_PERIOD_EXPIRED' => '트라이얼 기간이 만료되었습니다.',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => '서버가 보안 연결을 지원하지 않습니다. 보안 연결을 해제하십시오.',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => '서버는 보안 연결을 지원합니다. 보안 연결을 켜십시오.',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => '연결이 안전하지 않습니다. 관리자에게 문의하십시오.',
+    'LBL_LOGIN_SETTINGS_HEADER' => '로그인 설정',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => '{{{brandName}}} 인스턴스 설정',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => '앱이 작동하려면 {{{brandName}} 인스턴스의 URL을 입력해야 합니다. 인스턴스 URL이 없으면 관리자에게 문의하십시오.',
+    'LBL_FACEID' => 'Face ID',
+    'LBL_TOUCHID' => '터치 ID',
+    'LBL_ENABLE_TOUCHID' => '켜기 {{{biometryType}}}',
+    'LBL_SETUP_TOUCHID' => '설정 {{{biometryType}}}',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => '손가락으로 터치해서 로그인',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "{{{biometryType}}} 설정이 장치에 활성화되지 않았습니다.\n\n장치 설정에서 {{{biometryType}}} 설정을 하십시오. 설정 이후에는 메인 메뉴 > 설정에서 {{{brandName}}}의 {{{biometryType}}} 활성화를 하여 주십시오.",
+    'LBL_TOUCH_ID_DISCLAIMER' => '{{{brandName}}}의 {{{biometryType}}} 사용시 {{{brandName}}} 액세스할 때 패스워드 대신 생체 인식수단을 활용합니다.',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => '{{{biometryType}}}(으)로 계속하시겠습니까?    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => '{{{brandName}}} 패스워드를 입력하여 {{{biometryType}}} 활성화를 하십시오',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => '설정',
+    'LBL_MDM_CONFIRM_CHANGE' => '어플리케이션 구성이 모바일 장치 관리자에서 변경되었습니다. 변경 사항을 적용하려면 다시 로그인하십시오.',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => '기기 설정을 통해 {{{brandName}}}에 내 위치에 대한 접근 권한을 허가하십시오.',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => '현재 위치를 이용할 수 없습니다.',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "현재 장소 불러오기 시간이 지났습니다. 다시 시도해 주십시오.",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => '위치 아이콘을 사용할 수 없습니다.',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => '위치 좌표가 잘못되었습니다.',
+    'ERR_MOBILE_INVALID_PASSWORD' => '유효하지 않은 비밀번호입니다.',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => '귀하의 어플리케이션의 버전이 연결중인 SugarCRM과 호환되지 않습니다. 업데이트하시겠습니까?',
+    'LBL_MOBILE_BY' => '의한',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => '이 필터는 오프라인 모드에서 이용 불가능합니다.',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => '오프라인 레코드',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => '설정 다운로드',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => '오프라인 액세스를 위해 지정하고, 즐겨 찾기에 등록한, 후속 레코드를 다운로드하십시오. 오프라인 설정에서 사용자 선호를 업데이트 할 수 있습니다.',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "기록 다운로드가 종료되었습니다. 오프라인 모드에서 접속 가능합니다.",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "모든 기록을 다운로드하지 못했습니다. 다시 시도하겠습니까?",
+    'LBL_BULK_LOAD_USE_CELLULAR' => '셀룰러 데이터 사용',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => '나중에',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => '다운로드가 일시 중지되었으며 앱을 다시 열면 다시 시작됩니다.',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => '{{{module}}} 다운로드 중: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => '최신 레코드 업데이트',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => '연결 대기 중',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => '일시 중지됨',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => '중지 중',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => '다운로드',
+    'LBL_BULK_LOAD_BTN_PAUSE' => '일시 중지',
+    'LBL_BULK_LOAD_BTN_RESUME' => '다시 시작',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => '기본적으로 WiFi 연결에서 만 사용됩니다.',
+    'LBL_NPS_RATING_MSG' => "{{{productName}}} 평가를 해 주시겠습니까?",
+    'LBL_NPS_THANKS_MSG' => '감사합니다!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => '앱 스토어에서 평가해 주시겠습니까?',
+    'LBL_NPS_NO_THANKS' => '앱 스토어에서 평가해 주시겠습니까?',
+    'LBL_NPS_NOT_NOW' => '나중에',
+    'LBL_NPS_RATE_NOW' => '지금 평가하기',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => '네트워크를 사용할 수 없습니다. 오프라인에서도 앱을 사용할 수 있습니다.',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => '온라인 상태일 때 변경 사항이 동기화됩니다. <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>자세히 보기</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => '동기화되지 않은 데이터가 있습니다. <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>트랜잭션 로그를</a> 확인하십시오.',
+    'LBL_CONVERT' => '변환',
+    'LBL_CONVERT_LEAD' => '리드 변환',
+    'LBL_SEARCH_EXISTING_RECORD' => '기존 {{{this}}} 검색',
+    'LBL_DUPLICATES_CHECK_FAILED' => '중복 검사 실패',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => '관련 활동을 연락처 기록으로 이동하시겠습니까?',
+    'LBL_LEAD_CONVERSION_SUCCESS' => '{{{name}}}리드를 성공적으로 변환했습니다.',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => '중복이 없습니다.',
+    'ERR_LEAD_CONVERSION_FAIL' => '리드 변환 실패',
+    'LBL_SELECT_DUPLICATE_RECORD' => '중복 {{{modulePlural}}}에서 선택',
+    'LBL_SELECTED_EXISTING_RECORD' => '선택된 {{{moduleSingular}}}',
+    'LBL_CREATED_NEW_RECORD' => '생성된 새 {{{moduleSingular}}}',
+    'LBL_VO_BACK_BTN' => '뒤로 버튼',
+    'LBL_VO_HOME_BTN' => '홈 버튼',
+    'LBL_VO_DASHBOARD_BTN' => '대시 보드 버튼',
+    'LBL_VO_SEARCH_BTN' => '검색 버튼',
+    'LBL_VO_RIGHT_MENU_BTN' => '오른쪽 메뉴 버튼',
+    'LBL_VO_ADD_BTN' => '추가 버튼',
+
     //begin portal
 
     //portal record tutorial
@@ -4571,6 +4775,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => '보고서 선택',
     'LBL_REPORT_AUTO_REFRESH' => '자동 새로 고침',
     'LBL_REPORT_EDIT' => '선택한 보고서 편집',
+    'LBL_REFRESH_LIST_AND_CHART' => '목록 및 차트 새로고침',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => '알수 없음',
@@ -4632,6 +4837,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'AssignTo action 동안 오류가 발생했습니다.',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => '"{{name}}"의 접속권한이 없습니다. 관리자에게 문의하십시오.',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => '연',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '분기',
@@ -4643,6 +4851,11 @@ $app_strings = array (
     'LBL_MESSAGE_BOX_TITLE' => '알림',
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => '중복 무시하고 저장',
     'LBL_RESTORE' => '기본으로 재설정',
+
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => '삭제된 것으로 표시된 기록',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => '데이터 프라이버시 요청과 관련된 기록을 표시합니다.'
+        . '정보 삭제.',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'RSS 피드',
@@ -4666,6 +4879,7 @@ $app_strings = array (
     'LBL_UNASSIGNED' => '미지정',
     'LBL_ARCHIVE_EMAIL' => '아카이브 이메일',
     'LBL_EMAIL_ARCHIVED' => '이메일 보관',
+    'LBL_CREATE_ARCHIVED_EMAIL' => '보관 이메일 새로 만들기',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => '예정된 활동',
@@ -4697,6 +4911,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => '내 과제 목록',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => '팀 작업',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => '고급 워크 플로우',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP 또는 이전 REST API',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => '크론 작업',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => '로직 후크',
+    'LBL_AUDIT_SUBJECT_MARKETO' => '마케토',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => '슈가 워크 플로우',
+    'LBL_AUDIT_SUBJECT_USER' => '사용자',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => '리드할 웹',
+
     //common chart strings
     'LBL_CHART' => '차트',
     'LBL_CHART_NO_DATA' => '이용 가능한 데이터 없음',
@@ -4705,6 +4932,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => '컨트롤 숨기기',
     'LBL_CHART_CONTROLS_OPEN' => '컨트롤 표시',
     'LBL_CHART_UNDEFINED' => '정의되지 않은',
+    'LBL_CHART_NO_LABEL' => '정의되지 않음',
+    'LBL_CHART_AMOUNT' => '수량',
+    'LBL_CHART_COUNT' => '개',
+    'LBL_CHART_PERCENT' => '퍼센트',
+    'LBL_CHART_GROUP' => '그룹',
+    'LBL_CHART_DATE' => '날짜',
+    'LBL_CHART_KEY' => '키',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => '차트 유형',
@@ -4776,10 +5010,14 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => '기본 데이터 필터',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => '기본 데이터 세트',
 
+    'LBL_PRODUCT_CATALOG_NAME' => '제품 카탈로그',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => '제품 카탈로그',
+    'LBL_PRODUCT_CATALOG_DESC' => '제품 카탈로그에서 항목을 보고 추가합니다.',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => '제품 카탈로그에서 항목을 보고 추가합니다.',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}} {{date}}자 {{time}}시',
-    'LBL_ACTIVITYSTREAM_POST_PLACEHOLDER' => '노트를 작성하거나 첨부를 드래그 앤 드롭합니다. @ 다음에 멘션(Mention)을 작성합니다. # 를 입력하여 레코드를 참고(Reference)합니다.',
+    'LBL_ACTIVITYSTREAM_POST_PLACEHOLDER' => '노트를 작성하거나 첨부 파일을 가져옵니다. @ 다음에 멘션(Mention) 을 작성합니다. # 를 입력하여 참고할 기록을 추가합니다.',
     'LBL_ACTIVITYSTREAM_COMMENT_PLACEHOLDER' => '의견을 추가하십시오. @ 다음에 멘션(Mention)을 작성합니다. # 를 입력하여 레코드를 참고(Reference)합니다.',
     'LBL_ACTIVITY_STREAM' => '활동흐름',
     'LBL_ACTIVITY_STREAM_DISABLED' => '활동흐름이 비활성 상태입니다.',
@@ -4788,6 +5026,7 @@ $app_strings = array (
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => '에',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => '내 활동 스트림',
     'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => '레코드에 수행된 활동 목록을 표시하고 코멘트를 생성하고 게시하십시오.',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => '활동 스트림이 비활성화되었습니다',
 
     'LBL_DATA_VIEW' => '데이터보기',
     'LBL_COMMENT' => '의견',
@@ -4795,6 +5034,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => '서버 연결중 오류가 발생했습니다. 다시 시도해주십시오.',
     'ERR_RESOLVE_ERRORS' => '진행전 오류를 해결하십시오.',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => '승인하려면 필수 입력란을 모두 작성해야합니다. 그러나 이 기록을 거부하거나 전달할 수 있습니다.',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => '거부/전달하려면 모든 필수 입력란을 작성해야합니다.',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => '목록 새로고침',
@@ -4810,18 +5053,19 @@ $app_strings = array (
     'LBL_DASHLET_MOVE' => '이동',
     'LBL_DASHLET_CLOSE' => '닫기',
 
-    'LBL_DASHLET_FORECAST_NAME' => '예측',
+    'LBL_DASHLET_FORECAST_NAME' => '예측 내용',
     'LBL_DASHLET_FORECASTS_CHART_NAME' => '예측 막대형 차트',
     'LBL_DASHLET_FORECAST_PARETO_CHART_NAME' => '예측 파레토 차트',
     'LBL_DASHLET_FORECASTS_FOR_CHART_NAME' => '에 대한 예측',
-    'LBL_DASHLET_FORECASTS_CHART_DESC' => '특정 시간 기간에 대한 예측 막대 차트를 표시합니다',
+    'LBL_DASHLET_FORECASTS_CHART_DESC' => '특정 시간 동안의 예측 내용을 막대 차트로 표시합니다',
     'LBL_DASHLET_FORECASTS_GROUPBY' => '다음에 따른 그룹',
     'LBL_DASHLET_FORECASTS_DATASET' => '데이터세트',
     'LBL_DASHLET_FORECASTS_DETAILS' => '예측 세부사항',
-    'LBL_DASHLET_FORECASTS_DETAILS_DESC' => '현재 예측 세부사항 보기',
+    'LBL_DASHLET_FORECASTS_DETAILS_DESC' => '현재 예측 세부사항을 보여줍니다',
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => '저장된 보고서 차트 대쉬릿',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => '저장된 보고서의 차트를 봅니다.',
+
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => '게시된관련문서',
@@ -4829,7 +5073,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => '기록 요약',
-    'TPL_HISTORICAL_SUMMARY' => '{{name}}의 맞춤형 요약',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => '더 많은 기록을 ...',
     'LBL_RELATED_CONTACT' => '관련 문의',
     'LBL_MODULE_TYPE' => '유형',
@@ -4840,7 +5084,7 @@ $app_strings = array (
     //SFA
     'LBL_BEST' => '최고',
     'LBL_WORST' => '최하',
-    'LBL_LIKELY' => '가능',
+    'LBL_LIKELY' => '예상',
     'LBL_BEST_ADJUSTED' => '최상',
     'LBL_WORST_ADJUSTED' => '최하(조정됨)',
     'LBL_LIKELY_ADJUSTED' => '가능',
@@ -4862,7 +5106,7 @@ $app_strings = array (
     'LBL_RESOLVE_CONFLICT' => '{{name}}에 대해 충돌을 해결합니다',
 
     // Generic Help Strings
-    'LBL_HELP_MORE_INFO' => '자세한 내용은 문서{{{more_info_url}}} {{plural_module_name}}를 참조하십시오. {{{more_info_url_close}}}',
+    'LBL_HELP_MORE_INFO' => '자세한 내용은 문서{{{more_info_url}}} {{plural_module_name}} 을 참조하십시오. {{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => '이용 가능한 데이터 없음',
 
     // Dashlet Preview Help String
@@ -4893,17 +5137,17 @@ $app_strings = array (
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => '이메일 설정',
 
     // shortcut keys help
-    'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM은 파워 사용자들이 생산성을 향상시키기 위해 키보드 숏컷으로 특정한 작업을 빠르게 수행하도록 가능하게 합니다. 오른쪽에 있는 도표는 그것들이 수행하는 키들 및 작업들과 함께 사용 가능한 숏컷을 기술합니다.',
+    'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM은 파워 유저의 생산성 향상을 위해 키보드 단축키로 특정한 작업을 빠르게 수행할 수 있도록 만들었습니다. 오른쪽의 표에서 관련 키와 효능에과 함께 사용 가능한 단축기를 확인해 보세요.',
     'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>지원 키</h1><ul><li>모든 영문, 숫자 및 기호</li><li>shift, ctrl, alt, command, mod (Windows/Linux의 ctrl, Mac의 command)</li><li>enter, esc, space, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>지원 기능</h1><ul><li>키 조합: ctrl+m</li><li>복수 키: m,ctrl+m</li><li>키 시퀀스: m a</li></ul>",
-    'LBL_GLOBAL_SHORTCUTS' => '글로벌 숏컷',
-    'LBL_CONTEXTUAL_SHORTCUTS' => '상황 숏컷',
+    'LBL_GLOBAL_SHORTCUTS' => '글로벌 바로가기',
+    'LBL_CONTEXTUAL_SHORTCUTS' => '상황별 바로가기',
     'LBL_SHORTCUT_KEY_KEY' => '키',
     'LBL_SHORTCUT_FUNCTION' => '기능',
     'LBL_SHORTCUT_CONFIG_HEADERPANE' => '상황별 구성 바로가기',
     'LBL_SHORTCUT_CONFIG_DISABLED' => '구성할 &#39;상황별 바로가기&#39;가 없음',
-    'LBL_SHORTCUT_HELP' => '숏컷 도움 페이지 보여주기',
-    'LBL_SHORTCUT_QUICK_CREATE' => '빠른 생성 메뉴 토글',
-    'LBL_SHORTCUT_SEARCH' => '글로벌 겁색 필드 포커스온',
+    'LBL_SHORTCUT_HELP' => '단축키 도움 페이지 보여주기',
+    'LBL_SHORTCUT_QUICK_CREATE' => '빠른 생성 메뉴',
+    'LBL_SHORTCUT_SEARCH' => '글로벌 검색 필드에 집중',
     'LBL_SHORTCUT_SIDEBAR_TOGGLE' => '사이드바 토글',
     'LBL_SHORTCUT_CREATE_RECORD' => '새로운 기록 생성',
     'LBL_SHORTCUT_NAVIGATE_DOWN' => '목록에서 다음 기록 선택',
@@ -4964,7 +5208,7 @@ $app_strings = array (
     // duration field
     'LBL_START_AND_END_DATE' => '{{start}} - {{end}} ({{duration}})',
     'LBL_START_AND_END_DATE_SAME_DAY' => '{{date}} {{start}} - {{end}} ({{duration}})',
-    'LBL_START_AND_END_DATE_TO' => '에',
+    'LBL_START_AND_END_DATE_TO' => '~',
     'LBL_START_AND_END_DATE_DETAIL_VIEW' => '시작 및 종료 날짜',
 
     'LBL_CALENDAR_START_DATE' => "시작 날짜",
@@ -5000,23 +5244,23 @@ $app_strings = array (
 
     //PMSE Processes
     'LBL_PMSE_PROCESSES_DASHLET' => '프로세스',
-    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => 'Processes dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_PROCESSES_DASHLET_DESCRIPTION' => '프로세스 대쉬릿으로 고급 작업흐름에 사용된 템플릿을 보여줍니다.',
 
     //PMSE Process Definitions Dashlet
     'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET' => '프로세스 정의',
-    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => 'Process Definitions dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_PROCESS_DEFINITIONS_DASHLET_DESCRIPTION' => '프로세스 정의 대쉬릿으로 고급 작업흐름에 사용된 템플릿을 보여줍니다.',
     'LNK_PMSE_PROCESS_DEFINITIONS_NEW_RECORD' => '프로세스 정의 만들기',
     'LNK_PMSE_PROCESS_DEFINITIONS_IMPORT_RECORD' => '가져 오기 프로세스 정의',
 
     //PMSE Process Business Rules
     'LBL_PMSE_BUSINESS_RULES_DASHLET' => '프로세스 비즈니스 규칙',
-    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => 'Process Business Rules dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_BUSINESS_RULES_DASHLET_DESCRIPTION' => '프로세스 비즈니스 규칙 대쉬릿으로 고급 작업흐름에 사용된 템플릿을 보여줍니다.',
     'LNK_PMSE_BUSINESS_RULES_NEW_RECORD' => '프로세스 업무 규칙 생성',
     'LNK_PMSE_BUSINESS_RULES_IMPORT_RECORD' => '가져 오기 프로세스 비즈니스 규칙',
 
     //PMSE Email Templates Dashlet
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => '공정 이메일 템플릿',
-    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => 'Process Email Templates dashlet displays the templates that can be used inside of Advanced Workflow.',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET' => '프로세스 이메일 템플릿',
+    'LBL_PMSE_EMAIL_TEMPLATES_DASHLET_DESCRIPTION' => '프로세스 이메일 템플릿 대쉬릿으로 고급 작업흐름에 사용된 템플릿을 보여줍니다.',
     'LNK_PMSE_EMAIL_TEMPLATES_NEW_RECORD' => '프로세스 이메일 템플릿 만들기',
     'LNK_PMSE_EMAIL_TEMPLATES_IMPORT_RECORD' => '가져 오기 프로세스 이메일 템플릿',
 
@@ -5070,6 +5314,29 @@ $app_strings = array (
 
     'LBL_FIELD_TRIMMED' => '최대 문자 한도를 초과하여 필드를 줄였습니다.',
     'LBL_FIELDSIZE_OVERFLOW' => '필드가 최대 문자수 제한을 초과합니다.',
+    'LBL_TINYMCE_TARGET_SAME' => '같은 창',
+    'LBL_TINYMCE_TARGET_NEW' => '새 창',
+
+    'LBL_OUTBOUND_EMAILS' => '이메일 설정',
+    'LBL_OUTBOUND_EMAIL' => '이메일 설정',
+
+    'LBL_EMAIL_PARTICIPANTS' => '이메일 참가자',
+    'LBL_EMAIL_PARTICIPANT' => '이메일 참가자',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => '데이터 프라이버시',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => '데이터 프라이버시',
+    'LBL_DATAPRIVACY_VIEW_PII' => '데이터 프라이버시',
+    'LBL_DATAPRIVACY_MARKFORERASE' => '삭제하기로 표시',
+    'LBL_DATAPRIVACY_FIELDNAME' => '필드',
+    'LBL_DATAPRIVACY_VALUE' => '값',
+    'LBL_DATAPRIVACY_CHANGED_BY' => '변경됨',
+    'LBL_DATAPRIVACY_SOURCE' => '소스',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => '마지막 업데이트',
+    'LBL_DATAPRIVACY_PII' => '개인 정보',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => '삭제하기로 표시',
+    'TPL_DATAPRIVACY_PII_TITLE' => '{{{name}}}의 개인 정보',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5934,6 +6201,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => '캠페인' ,
     'email' => '다른 이메일:',
     'workflow' => '작업흐름',
+    'system' => '시스템',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5952,7 +6220,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -6015,6 +6282,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = '지식 기반 템플릿
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = '지식 기반 템플릿';
 $app_list_strings['moduleList']['EmbeddedFiles'] = '임베드된 파일';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '임베드된 파일';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => '렉',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'П',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lei',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'Албански лек',
+    'USD' => '달러',
+    'AFN' => '아프가니스탄',
+    'ARS' => '페소',
+    'AWG' => '길더',
+    'AUD' => '달러',
+    'AZN' => '뉴 마나트',
+    'BSD' => '달러',
+    'BBD' => '달러',
+    'BYR' => '루블',
+    'EUR' => '유로',
+    'BZD' => '달러',
+    'BMD' => '달러',
+    'BOB' => '볼리비아노',
+    'BAM' => '컨버터블 마카',
+    'BWP' => '풀라스',
+    'BGN' => '레바',
+    'BRL' => '헤알',
+    'GBP' => '파운드',
+    'BND' => '달러',
+    'KHR' => '리엘스',
+    'CAD' => '달러',
+    'KYD' => '달러',
+    'CLP' => '페소',
+    'CNY' => '위안',
+    'COP' => '페소',
+    'CRC' => '콜론',
+    'HRK' => '쿠나',
+    'CUP' => '페소',
+    'CZK' => '코루니',
+    'DKK' => '크로네',
+    'DOP' => '페소',
+    'XCD' => '달러',
+    'EGP' => '파운드',
+    'SVC' => '콜로네',
+    'EEK' => '크로니',
+    'FKP' => '파운드',
+    'FJD' => '달러',
+    'GHC' => '세디스',
+    'GIP' => '파운드',
+    'GTQ' => '케찰',
+    'GGP' => '파운드',
+    'GYD' => '달러',
+    'HNL' => '렘피라',
+    'HKD' => '달러',
+    'HUF' => '포린트',
+    'ISK' => '크로눌르',
+    'INR' => '루피',
+    'IDR' => '루피아',
+    'IRR' => '리알',
+    'IMP' => '파운드',
+    'ILS' => '뉴 셰켈',
+    'JMD' => '달러',
+    'JPY' => '엔',
+    'JEP' => '파운드',
+    'KZT' => '텡게',
+    'KPW' => '획득 성공',
+    'KRW' => '획득 성공',
+    'KGS' => '솜스',
+    'LAK' => '킵스',
+    'LVL' => '라티',
+    'LBP' => '파운드',
+    'LRD' => '달러',
+    'CHF' => '스위스 프랑',
+    'LTL' => '리타이',
+    'MKD' => '디나르',
+    'MYR' => '링깃',
+    'MUR' => '루피',
+    'MXN' => '페소',
+    'MNT' => '투그리크',
+    'MZN' => '메티칼',
+    'NAD' => '달러',
+    'NPR' => '루피',
+    'ANG' => '길더',
+    'NZD' => '달러',
+    'NIO' => '코르도바',
+    'NGN' => '나이라',
+    'NOK' => '크로네',
+    'OMR' => '리알',
+    'PKR' => '루피',
+    'PAB' => '발보아',
+    'PYG' => '구아라니',
+    'PEN' => '누에보 솔',
+    'PHP' => '페소',
+    'PLN' => '즐로티크',
+    'QAR' => '리알',
+    'RON' => '뉴 레이',
+    'RUB' => '루블',
+    'SHP' => '파운드',
+    'SAR' => '리얄',
+    'RSD' => '디나르',
+    'SCR' => '루피',
+    'SGD' => '달러',
+    'SBD' => '달러',
+    'SOS' => '실링',
+    'ZAR' => '랜드',
+    'LKR' => '루피',
+    'SEK' => '크로노',
+    'SRD' => '달러',
+    'SYP' => '파운드',
+    'TWD' => '뉴 달러',
+    'THB' => '바트',
+    'TTD' => '달러',
+    'TRY' => '리라',
+    'TRL' => '리라스',
+    'TVD' => '달러',
+    'UAH' => '흐리브냐',
+    'UYU' => '페소',
+    'UZS' => '섬',
+    'VEF' => '볼리바르 푸에르테',
+    'VND' => '동',
+    'YER' => '리알',
+    'ZWD' => '짐바브웨 달러',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => '단일 히트',

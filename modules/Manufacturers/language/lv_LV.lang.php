@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Lai dzēstu ražotāju, jānorāda ieraksta numurs.',
   'NTC_STATUS' => 'Nomainiet statusu uz Neaktīvs, lai izņemtu ražotāju no ražotāju nolaižamās izvēlnes',
   'NTC_LIST_ORDER' => 'Uzstādiet secību, kādā ražotāji parādīsies nolaižamajos sarakstos',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Aktīvs',
-    'Inactive' => 'Neaktīvs',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Importēt ražotājus',
 	'LBL_EDITLAYOUT' => 'Rediģēt izkārtojumu' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Ieņēmumu posteņi',

@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Vali' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Tühjenda' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Tüüp',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'E-kirja mallid',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'E-posti mallid',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Muutujad',
 );

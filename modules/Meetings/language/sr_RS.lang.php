@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Kontrolna tabla liste sastanaka',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa sastanaka',
+
 	'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da bi obrisali sastanak.',
 	'LBL_ACCEPT_THIS'=>'Prihvati?',
 	'LBL_ADD_BUTTON'=> 'Dodaj',

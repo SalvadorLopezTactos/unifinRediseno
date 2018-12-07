@@ -191,7 +191,7 @@ class SubPanel
 	{
 		$modules = array();
 		foreach(SugarAutoLoader::getDirFiles("modules", true) as $dir) {
-		    if(SugarAutoLoader::fileExists("$dir/layout_defs.php")) {
+            if (file_exists("$dir/layout_defs.php")) {
 		        $entry = basename($dir);
 		        $modules[$entry] = $entry;
 		    }

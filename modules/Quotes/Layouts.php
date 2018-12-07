@@ -20,10 +20,10 @@ global $mod_strings;
 global $layouts;
 $layouts = array();
 
-if (SugarAutoLoader::fileExists('custom/modules/Quotes/sugarpdf/sugarpdf.standard.php')) {
+if (file_exists('custom/modules/Quotes/sugarpdf/sugarpdf.standard.php')) {
     $layouts['Standard'] = 'custom/modules/Quotes/sugarpdf/sugarpdf.standard.php';
 }
-if (SugarAutoLoader::fileExists('custom/modules/Quotes/sugarpdf/sugarpdf.invoice.php')) {
+if (file_exists('custom/modules/Quotes/sugarpdf/sugarpdf.invoice.php')) {
 	$layouts['Invoice'] = 'custom/modules/Quotes/sugarpdf/sugarpdf.invoice.php';
 }
 

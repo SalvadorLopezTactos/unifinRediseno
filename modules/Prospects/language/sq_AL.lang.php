@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Paneli i listës së objektivave',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të objektivave',
+
   'LBL_MODULE_NAME' => 'Synimet',
   'LBL_MODULE_NAME_SINGULAR' => 'Synim',
   'LBL_MODULE_ID'   => 'synimet',
@@ -110,7 +114,7 @@ $mod_strings = array (
   'LNK_NEW_MEETING' => 'Cakto mbledhje',
   'LNK_NEW_TASK' => 'Krijo detyrë',
   'LNK_NEW_APPOINTMENT' => 'krijo mbledhje',
-  'LNK_IMPORT_PROSPECTS' => 'Importo prospektet',
+  'LNK_IMPORT_PROSPECTS' => 'Importo synimet',
   'NTC_DELETE_CONFIRMATION' => 'A jeni të sigurtë që dëshironi të fshini këtë regjistrim?',
   'NTC_REMOVE_CONFIRMATION' => 'A jeni të sigurt që dëshironi të largoni këtë  kontakt nga rasti?',
   'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'A jeni të sigurt që dëshironi të largoni këtë regjistrim si regjistrim direkt?',
@@ -122,8 +126,8 @@ $mod_strings = array (
   'LBL_CREATED_OPPORTUNITY' =>'Krijimi i mundësisë së re',
   'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Krijimi i një mundësie kërkon një llogari. Ju lutemi ose krijoni një të re ose selektoni një ekzistuese.',
   'LNK_SELECT_ACCOUNT' => "Zgjidh llogarinë",
-  'LNK_NEW_PROSPECT' => 'krijo synim',
-  'LNK_PROSPECT_LIST' => 'shih synimet',
+  'LNK_NEW_PROSPECT' => 'Krijo synim',
+  'LNK_PROSPECT_LIST' => 'Shiko synimet',
   'LNK_NEW_CAMPAIGN' => 'krijo fushatë',
   'LNK_CAMPAIGN_LIST' => 'fushatat',
   'LNK_NEW_PROSPECT_LIST' => 'krijo list të synimeve',
@@ -189,4 +193,6 @@ Për të krijuar një {{module_name}}:
 2. Kliko "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Raportet e kontakteve',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Qëllimet e biznesit u miratuan për',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Miratimi i përditësuar së fundi',
 );

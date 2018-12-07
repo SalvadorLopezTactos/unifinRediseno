@@ -11,8 +11,12 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Bevételi sor tételek listája műszerfal',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Bevételi sor tételek bejegyzése műszerfal',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampány termék',
-    'LBL_MODULE_NAME' => 'Bevétel sorok',
+    'LBL_MODULE_NAME' => 'Bevételi sorok',
     'LBL_MODULE_NAME_SINGULAR' => 'Bevételi sor tétel',
     'LBL_MODULE_TITLE' => 'Termékek: Főoldal',
     'LBL_SEARCH_FORM_TITLE' => 'Termékek keresése',
@@ -190,7 +194,7 @@ $mod_strings = array(
 - Ha hiányzó mezőt talál, kattintson a "Több mutatása" opcióra a további mezők felfedéséhez! 
 2. Kattintson a "Mentés" gombra a rekord mentéséhez és a korábbi nézethez való visszatéréshez.',
 
-    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => 'Tíz legjobb Eladási Lehetőség Termékei',
+    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => 'Tíz legjobb eladási lehetőség termékei',
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'A tíz legjobb Eladási Lehetőség Termékeit jeleníti meg egy diagramon.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Bevételi Sor Tételeim',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Csapatom Bevételi Sor Tételei",

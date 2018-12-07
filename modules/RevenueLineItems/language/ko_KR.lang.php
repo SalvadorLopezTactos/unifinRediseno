@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => '수익 라인 상품 목록 대시보드',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => '수익 라인 상품 기록 대시보드',
+
     'LBL_CAMPAIGN_PRODUCT' => '캠페인 상품',
     'LBL_MODULE_NAME' => '매출 라인 품목',
     'LBL_MODULE_NAME_SINGULAR' => '매출라인 품목',
@@ -64,7 +68,7 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => '설명:',
     'LBL_TYPE' => '유형',
     'LBL_PRODUCT_TYPE' => '상품 형식',
-    'LBL_CATEGORY' => '범주',
+    'LBL_CATEGORY' => '상품 카테고리',
     'LBL_CATEGORY_ID' => '제품 카테고리 ID:',
     'LBL_QUANTITY' => '분량',
     'LBL_STATUS' => '상태',
@@ -77,8 +81,8 @@ $mod_strings = array(
     'LBL_SUPPORT_CONTACT' => '지원 연락처',
     'LBL_PRICING_FORMULA' => '가격공식',
     'LBL_ACCOUNT_NAME' => '고객명',
-    'LNK_REVENUELINEITEM_LIST' => '수익상품 보기',
-    'LNK_NEW_REVENUELINEITEM' => '신규 수익상품 만들기',
+    'LNK_REVENUELINEITEM_LIST' => '매출 라인 품목 보기',
+    'LNK_NEW_REVENUELINEITEM' => '매출 라인 품목 만들기',
     'NTC_DELETE_CONFIRMATION' => '이 기록을 삭제하시겠습니까?',
     'NTC_REMOVE_CONFIRMATION' => '이 상품 관계를 제거하시겠습니까?',
     'ERR_DELETE_RECORD' => '상품을 삭제하려면 정확한 자료 고유번호를 입력하셔야 합니다.',
@@ -144,7 +148,7 @@ $mod_strings = array(
     //For export labels
     'LBL_EXPORT_CURRENCY_ID' => '화폐 ID',
     'LBL_CURRENCY_RATE' => '환율',
-    'LBL_DATE_CLOSED' => '예상 수주일:',
+    'LBL_DATE_CLOSED' => '예상 마감일:',
     'LBL_DATE_CLOSED_TIMESTAMP' => '예상 마감 날짜 타임스탬프',
     'LBL_COMMIT_STAGE' => '약속 단계',
     'LBL_COMMIT_STAGE_FORECAST' => '예상',
@@ -190,7 +194,7 @@ $mod_strings = array(
 - 필요한경우추가필드를노출하려면 "더보기"를클릭합니다. 
 2. “저장하기”를 클릭하여 새 기록을 완성하고 이전 페이지로 돌아갑니다.',
 
-    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => '상위 10 영업선 항목',
+    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => '상위 10 매출라인 항목',
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => '버블차트에 상위 10 영업선 항목 표시.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => '내 영업선 항목',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "우리 팀의 영업선 항목",

@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 class FilterApi extends SugarApi
 {
     public function registerApiRest()
@@ -67,6 +66,8 @@ class FilterApi extends SugarApi
                     'SugarApiExceptionError',
                     // Thrown in filterListSetup and getPredefinedFilterById
                     'SugarApiExceptionNotAuthorized',
+                    // Thrown in filterListSetup
+                    'SugarApiExceptionInvalidParameter',
                 ),
             ),
             'filterModulePost' => array(
@@ -119,25 +120,6 @@ class FilterApi extends SugarApi
                     'SugarApiExceptionInvalidParameter'
                 ),
             ),
-            // filterModuleById is deprecated. Please use filterModuleGet and pass a filter_id instead
-            'filterModuleById' => array(
-                'reqType' => 'GET',
-                'path' => array('<module>', 'filter', '?'),
-                'pathVars' => array('module', '', 'record'),
-                'method' => 'filterById',
-                'shortHelp' => 'Filter records for a module by a predefined filter id.',
-                'longHelp' => 'include/api/help/module_filter_record_get_help.html',
-                'exceptions' => array(
-                    // Thrown in filterById and getPredefinedFilterById
-                    'SugarApiExceptionNotFound',
-                    // Thrown in filterList and filterListSetup
-                    'SugarApiExceptionInvalidParameter',
-                    // Thrown in filterListSetup and parseArguments
-                    'SugarApiExceptionNotAuthorized',
-                    // Thrown in getPredefinedFilterById
-                    'SugarApiExceptionError',
-                ),
-            ),
         );
     }
 
@@ -170,44 +152,6 @@ class FilterApi extends SugarApi
     {
         global $current_user;
         self::$current_user = $current_user;
-    }
-
-    /**
-     * filterById retrieves records based on the module and a preexisting
-     * filter set id.
-     *
-     * @param ServiceBase $api The REST API object.
-     * @param array $args REST API arguments.
-     * @return array The results of the REST call.
-     * @throws SugarApiExceptionInvalidParameter If any parameters are invalid.
-     * @throws SugarApiExceptionNotFound If we cannot find the requested filter.
-     * @deprecated 7.8.0 This function does not work correctly and will be
-     *   removed in 7.9.0.
-     * @see FilterApi::filterList() Please use filterList and supply
-     *   $args['filter_id'] instead.
-     * FIXME: TY-928 Remove this as the filterModuleById endpoint is
-     * deprecated and will be removed
-     */
-    public function filterById(ServiceBase $api, array $args)
-    {
-        LoggerManager::getLogger()->deprecated('GET /<module>/filter/? has been deprecated as of 7.8.0 and will be ' .
-            'removed in 7.9.0. Please use GET /<module>/filter and supply a filter_id instead.');
-        $filter = BeanFactory::getBean('Filters', $args['record']);
-
-        // Bad filter ID in request
-        if (empty($filter->id)) {
-            throw new SugarApiExceptionNotFound("Could not find filter: {$args['record']}");
-        }
-
-        if (empty($filter->filter_definition)) {
-            $filter_definition = array();
-        } else {
-            $filter_definition = json_decode($filter->filter_definition, true);
-        }
-
-        $args = array_merge($args, $filter_definition);
-        unset($args['record']);
-        return $this->filterList($api, $args);
     }
 
     protected function parseArguments(ServiceBase $api, array $args, SugarBean $seed = null)
@@ -277,6 +221,10 @@ class FilterApi extends SugarApi
         }
 
         $options['action'] = $api->action;
+
+        if (!empty($args['erased_fields'])) {
+            $options['erased_fields'] = true;
+        }
 
         return $options;
     }
@@ -369,8 +317,6 @@ class FilterApi extends SugarApi
             $args['fields'] = $options['select'];
         }
 
-        $q = self::getQueryObject($seed, $options);
-
         // Relate collections should not be in the select clause of the query
         // since we have trouble doing group bys on certain databases. We should
         // be getting the relate collection values later anyways.
@@ -405,21 +351,39 @@ class FilterApi extends SugarApi
             $args['filter'] = $predefinedFilter;
         }
 
-        static::addFilters($args['filter'], $q->where(), $q);
+        $q = $this->createQuery($seed, $args, $options);
+
+        if (count($q->join) > 0) {
+            $options['id_query'] = $this->createQuery($seed, $args, array_merge($options, [
+                'select' => ['id'],
+                'erased_fields' => false,
+            ]));
+        }
+
+        return array($args, $q, $options, $seed);
+    }
+
+    private function createQuery(SugarBean $seed, array $args, array $options) : SugarQuery
+    {
+        $query = self::getQueryObject($seed, $options);
+
+        if (!empty($args['filter'])) {
+            static::addFilters($args['filter'], $query->where(), $query);
+        }
 
         if (!empty($args['my_items'])) {
-            static::addOwnerFilter($q, $q->where(), '_this');
+            static::addOwnerFilter($query, $query->where(), '_this');
         }
 
         if (!empty($args['favorites'])) {
-            self::$isFavorite = true;
-            static::addFavoriteFilter($q, $q->where(), '_this', 'INNER');
+            static::addFavoriteFilter($query, $query->where(), '_this', 'INNER');
         }
 
-        if (!sizeof($q->order_by)) {
-            self::addOrderBy($q, $this->defaultOrderBy);
+        if (count($query->order_by) < 1) {
+            self::addOrderBy($query, $this->defaultOrderBy);
         }
-        return array($args, $q, $options, $seed);
+
+        return $query;
     }
 
     /**
@@ -447,9 +411,8 @@ class FilterApi extends SugarApi
         }
 
         $api->action = 'list';
-        list($args, $q, $options, $seed) = $this->filterListSetup($api, $args, $acl);
 
-        return $this->runQuery($api, $args, $q, $options, $seed);
+        return $this->runQuery($api, ...$this->filterListSetup($api, $args, $acl));
     }
 
     /**
@@ -516,11 +479,17 @@ class FilterApi extends SugarApi
         if (empty($options['select'])) {
             $options['select'] = self::$mandatory_fields;
         }
+
         $queryOptions = array(
-            'add_deleted' => (!isset($options['add_deleted']) || $options['add_deleted']) ? true : false
+            'add_deleted' => !isset($options['add_deleted']) || $options['add_deleted'],
         );
+
         if ($queryOptions['add_deleted'] == false) {
             $options['select'][] = 'deleted';
+        }
+
+        if (!empty($options['erased_fields'])) {
+            $queryOptions['erased_fields'] = true;
         }
 
         $q = static::newSugarQuery(DBManagerFactory::getInstance('listviews'));
@@ -684,6 +653,27 @@ class FilterApi extends SugarApi
             'returnRawRows' => true,
             'compensateDistinct' => true,
         );
+
+        if (isset($options['id_query'])) {
+            $ids = $options['id_query']
+                ->compile()
+                ->execute()
+                ->fetchAll(PDO::FETCH_COLUMN);
+
+            if (count($ids) < 1) {
+                return [
+                    'records' => [],
+                    'next_offset' => -1,
+                ];
+            }
+
+            $q->where()
+                ->in('id', $ids);
+            $q->offset(null);
+            $q->limit(null);
+            $queryOptions['skipFixQuery'] = true;
+        }
+
         $fetched = $seed->fetchFromQuery($q, $fields, $queryOptions);
 
         list($beans, $rows, $distinctCompensation) = $this->parseQueryResults($fetched);
@@ -901,11 +891,6 @@ class FilterApi extends SugarApi
      */
     protected static function addFilters(array $filterDefs, SugarQuery_Builder_Where $where, SugarQuery $q)
     {
-        static $sfh;
-        if (!isset($sfh)) {
-            $sfh = new SugarFieldHandler();
-        }
-
         foreach ($filterDefs as $filterDef) {
             if (!is_array($filterDef)) {
                 throw new SugarApiExceptionInvalidParameter(
@@ -916,131 +901,181 @@ class FilterApi extends SugarApi
                 );
             }
             foreach ($filterDef as $field => $filter) {
-                if ($field == '$or') {
-                    static::addFilters($filter, $where->queryOr(), $q);
-                } elseif ($field == '$and') {
-                    static::addFilters($filter, $where->queryAnd(), $q);
-                } elseif ($field == '$favorite') {
-                    static::addFavoriteFilter($q, $where, $filter);
-                } elseif ($field == '$owner') {
-                    static::addOwnerFilter($q, $where, $filter);
-                } elseif ($field == '$creator') {
-                    static::addCreatorFilter($q, $where, $filter);
-                } elseif ($field == '$tracker') {
-                    static::addTrackerFilter($q, $where, $filter);
-                } elseif ($field == '$following') {
-                    static::addFollowFilter($q, $where, $filter);
+                static::addFilter($field, $filter, $where, $q);
+            }
+        }
+    }
+
+    /**
+     * Add an individual filter part to the query
+     *
+     * @param string $field name of the field or shorcut to operate on. Ex. 'name' , '$owner'
+     * @param array|string $filter filter definition. Ex. {'$equals':'foo'}
+     * @param SugarQuery_Builder_Where $where
+     * @param SugarQuery $q
+     *
+     * This function should be considered internal to sugar and not extended by external customizations.
+     *
+     * @throws SugarApiExceptionInvalidParameter
+     */
+    protected static function addFilter($field, $filter, SugarQuery_Builder_Where $where, SugarQuery $q)
+    {
+        if ($field == '$or') {
+            static::addFilters($filter, $where->queryOr(), $q);
+        } elseif ($field == '$and') {
+            static::addFilters($filter, $where->queryAnd(), $q);
+        } elseif ($field == '$favorite') {
+            static::addFavoriteFilter($q, $where, $filter);
+        } elseif ($field == '$owner') {
+            static::addOwnerFilter($q, $where, $filter);
+        } elseif ($field == '$creator') {
+            static::addCreatorFilter($q, $where, $filter);
+        } elseif ($field == '$tracker') {
+            static::addTrackerFilter($q, $where, $filter);
+        } elseif ($field == '$following') {
+            static::addFollowFilter($q, $where, $filter);
+        } else {
+            static::addFieldFilter($q, $where, $filter, $field);
+        }
+    }
+
+    /**
+     * Processes filter parts that operate on standard (non-macro) fields
+     *
+     * @param SugarQuery_Builder_Where $where
+     * @param SugarQuery $q
+     * @param array $filter
+     * @param string  $field
+     *
+     * @throws SugarApiExceptionInvalidParameter
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    private static function addFieldFilter(SugarQuery $q, SugarQuery_Builder_Where $where, $filter, $field)
+    {
+        static $sfh;
+        if (!isset($sfh)) {
+            $sfh = new SugarFieldHandler();
+        }
+
+        // Looks like just a normal field, parse its options
+        $fieldInfo = self::verifyField($q, $field);
+
+        // If the field was a related field and we added a join, we need to adjust the table name used
+        // to get the right join table alias
+        if (!empty($fieldInfo['field'])) {
+            $field = $fieldInfo['field'];
+        }
+        $fieldType = !empty($fieldInfo['def']['custom_type']) ? $fieldInfo['def']['custom_type'] :
+            $fieldInfo['def']['type'];
+        $sugarField = $sfh->getSugarField($fieldType);
+        if (!is_array($filter)) {
+            $value = $filter;
+            $filter = array();
+            $filter['$equals'] = $value;
+        }
+        foreach ($filter as $op => $value) {
+            /*
+             * occasionally fields may need to be fixed up for the Filter, for instance if you are
+             * doing an operation on a datetime field and only send in a date, we need to fix that field to
+             * be a dateTime then unFormat it so that its in GMT ready for DB use
+             */
+
+            if (strpos($field, '.') === false) {
+                if (isset($fieldInfo['def']['source']) && $fieldInfo['def']['source'] === 'custom_fields') {
+                    $tableName = $fieldInfo['bean']->get_custom_table_name();
                 } else {
-                    // Looks like just a normal field, parse its options
-                    $fieldInfo = self::verifyField($q, $field);
-
-                    // If the field was a related field and we added a join, we need to adjust the table name used
-                    // to get the right join table alias
-                    if (!empty($fieldInfo['field'])) {
-                        $field = $fieldInfo['field'];
-                    }
-                    $fieldType = !empty($fieldInfo['def']['custom_type']) ? $fieldInfo['def']['custom_type'] :
-                        $fieldInfo['def']['type'];
-                    $sugarField = $sfh->getSugarField($fieldType);
-                    if (!is_array($filter)) {
-                        $value = $filter;
-                        $filter = array();
-                        $filter['$equals'] = $value;
-                    }
-                    foreach ($filter as $op => $value) {
-                        /*
-                         * occasionally fields may need to be fixed up for the Filter, for instance if you are
-                         * doing an operation on a datetime field and only send in a date, we need to fix that field to
-                         * be a dateTime then unFormat it so that its in GMT ready for DB use
-                         */
-                        if ($sugarField->fixForFilter($value, $field, $fieldInfo['bean'], $q, $where, $op) == false) {
-                            continue;
-                        }
-
-                        if (is_array($value)) {
-                            foreach ($value as $i => $val) {
-                                // FIXME: BR-4063 apiUnformat() is deprecated, this will change to apiUnformatField() in
-                                // next API version
-                                $value[$i] = $sugarField->apiUnformat($val);
-                            }
-                        } else {
-                            // FIXME: BR-4063 apiUnformat() is deprecated, this will change to apiUnformatField() in
-                            // next API version
-                            $value = $sugarField->apiUnformat($value);
-                        }
-
-                        switch ($op) {
-                            case '$equals':
-                                $where->equals($field, $value);
-                                break;
-                            case '$not_equals':
-                                $where->notEquals($field, $value);
-                                break;
-                            case '$starts':
-                                $where->starts($field, $value);
-                                break;
-                            case '$ends':
-                                $where->ends($field, $value);
-                                break;
-                            case '$contains':
-                                $where->contains($field, $value);
-                                break;
-                            case '$not_contains':
-                                $where->notContains($field, $value);
-                                break;
-                            case '$in':
-                                if (!is_array($value)) {
-                                    throw new SugarApiExceptionInvalidParameter('$in requires an array');
-                                }
-                                $where->in($field, $value);
-                                break;
-                            case '$not_in':
-                                if (!is_array($value)) {
-                                    throw new SugarApiExceptionInvalidParameter('$not_in requires an array');
-                                }
-                                $where->notIn($field, $value);
-                                break;
-                            case '$dateBetween':
-                            case '$between':
-                                if (!is_array($value) || count($value) != 2) {
-                                    throw new SugarApiExceptionInvalidParameter(
-                                        '$between requires an array with two values.'
-                                    );
-                                }
-                                $where->between($field, $value[0], $value[1]);
-                                break;
-                            case '$is_null':
-                                $where->isNull($field);
-                                break;
-                            case '$not_null':
-                                $where->notNull($field);
-                                break;
-                            case '$empty':
-                                $where->isEmpty($field);
-                                break;
-                            case '$not_empty':
-                                $where->isNotEmpty($field);
-                                break;
-                            case '$lt':
-                                $where->lt($field, $value);
-                                break;
-                            case '$lte':
-                                $where->lte($field, $value);
-                                break;
-                            case '$gt':
-                                $where->gt($field, $value);
-                                break;
-                            case '$gte':
-                                $where->gte($field, $value);
-                                break;
-                            case '$dateRange':
-                                $where->dateRange($field, $value, $fieldInfo['bean']);
-                                break;
-                            default:
-                                throw new SugarApiExceptionInvalidParameter('Did not recognize the operand: ' . $op);
-                        }
-                    }
+                    $tableName = $fieldInfo['bean']->getTableName();
                 }
+                $columnName = $tableName . '.' . $field;
+            } else {
+                $columnName = $field;
+            }
+
+            if ($sugarField->fixForFilter($value, $columnName, $fieldInfo['bean'], $q, $where, $op) == false) {
+                continue;
+            }
+
+            if (is_array($value)) {
+                foreach ($value as $i => $val) {
+                    // FIXME: BR-4063 apiUnformat() is deprecated, this will change to apiUnformatField() in
+                    // next API version
+                    $value[$i] = $sugarField->apiUnformat($val);
+                }
+            } else {
+                // FIXME: BR-4063 apiUnformat() is deprecated, this will change to apiUnformatField() in
+                // next API version
+                $value = $sugarField->apiUnformat($value);
+            }
+
+            switch ($op) {
+                case '$equals':
+                    $where->equals($field, $value);
+                    break;
+                case '$not_equals':
+                    $where->notEquals($field, $value);
+                    break;
+                case '$starts':
+                    $where->starts($field, $value);
+                    break;
+                case '$ends':
+                    $where->ends($field, $value);
+                    break;
+                case '$contains':
+                    $where->contains($field, $value);
+                    break;
+                case '$not_contains':
+                    $where->notContains($field, $value);
+                    break;
+                case '$in':
+                    if (!is_array($value)) {
+                        throw new SugarApiExceptionInvalidParameter('$in requires an array');
+                    }
+                    $where->in($field, $value);
+                    break;
+                case '$not_in':
+                    if (!is_array($value)) {
+                        throw new SugarApiExceptionInvalidParameter('$not_in requires an array');
+                    }
+                    $where->notIn($field, $value);
+                    break;
+                case '$dateBetween':
+                case '$between':
+                    if (!is_array($value) || count($value) != 2) {
+                        throw new SugarApiExceptionInvalidParameter(
+                            '$between requires an array with two values.'
+                        );
+                    }
+                    $where->between($field, $value[0], $value[1]);
+                    break;
+                case '$is_null':
+                    $where->isNull($field);
+                    break;
+                case '$not_null':
+                    $where->notNull($field);
+                    break;
+                case '$empty':
+                    $where->isEmpty($field);
+                    break;
+                case '$not_empty':
+                    $where->isNotEmpty($field);
+                    break;
+                case '$lt':
+                    $where->lt($field, $value);
+                    break;
+                case '$lte':
+                    $where->lte($field, $value);
+                    break;
+                case '$gt':
+                    $where->gt($field, $value);
+                    break;
+                case '$gte':
+                    $where->gte($field, $value);
+                    break;
+                case '$dateRange':
+                    $where->dateRange($field, $value, $fieldInfo['bean']);
+                    break;
+                default:
+                    throw new SugarApiExceptionInvalidParameter('Did not recognize the operand: ' . $op);
             }
         }
     }

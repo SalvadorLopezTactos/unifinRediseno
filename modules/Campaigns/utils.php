@@ -347,10 +347,12 @@ function get_campaign_urls($campaign_id) {
 
         $db = DBManagerFactory::getInstance();
 
-        $query1="select * from campaign_trkrs where campaign_id='$campaign_id' and deleted=0";
-        $current=$db->query($query1);
-        while (($row=$db->fetchByAssoc($current)) != null) {
-            $return_array['{'.$row['tracker_name'].'}']=$row['tracker_name'] . ' : ' . $row['tracker_url'];
+        $query = "SELECT * FROM campaign_trkrs WHERE campaign_id = ? AND deleted = 0";
+        $conn = $db->getConnection();
+        $stmt = $conn->executeQuery($query, array($campaign_id));
+
+        while ($row = $stmt->fetch()) {
+            $return_array['{'.$row['tracker_name'].'}'] = $row['tracker_name'] . ' : ' . $row['tracker_url'];
         }
     }
     return $return_array;

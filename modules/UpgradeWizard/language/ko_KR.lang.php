@@ -55,7 +55,7 @@ $mod_strings = array(
     'ERROR_MANIFEST_TYPE'                       => '현재 파일이 반드시 패키지형식을 지정해야합니다.',
     'ERROR_PACKAGE_TYPE'                        => '현재 파일이 확인되지 않은 패키지형식을 포함하고 있습니다.',
     'ERROR_VERSION_INCOMPATIBLE'                => '전송된 파일이 Sugar버전에 적용할수 없습니다.',
-    'ERROR_FLAVOR_INCOMPATIBLE'                 => '전송된 파일이 Sugar의 커뮤니티 에디션, 프로페셔널 또는 엔터프라이즈에 적용할수 없습니다.',
+    'ERROR_FLAVOR_INCOMPATIBLE'                 => '전송된 파일은 Sugar의 프로페셔널, 엔터프라이즈, 얼티메이트 에디션에 적용할 수 없습니다.%s',
 
     'ERROR_UW_CONFIG_DB'                        => 'db에 %의 구성 var (key %s, value %s) 저장 오류',
     'ERR_NOT_ADMIN'                             => "관리자에 승인되지 않은 접근입니다",
@@ -98,7 +98,7 @@ $mod_strings = array(
 	'LBL_UW_COMPLIANCE_MYSQL'					=> '최소 MySQL 버전',
     'LBL_UW_COMPLIANCE_DB'                      => '최소 데이타 버전',
 	'LBL_UW_COMPLIANCE_PHP_INI'					=> 'php.ini 위치',
-	'LBL_UW_COMPLIANCE_PHP_VERSION'				=> '최소 PHP 버전',
+    'LBL_UW_COMPLIANCE_PHP_VERSION'             => 'PHP 버전',
 	'LBL_UW_COMPLIANCE_SAFEMODE'				=> 'PHP설정:안전 모드',
 	'LBL_UW_COMPLIANCE_TITLE'					=> '서버 설정 확인',
 	'LBL_UW_COMPLIANCE_TITLE2'					=> '발견된 설정',
@@ -243,7 +243,6 @@ $mod_strings = array(
 	'LBL_UW_DROP_SCHEMA_METHOD'					=> '예전 개요 내리기 방법',
 	'LBL_UW_SHOW_OLD_SCHEMA_TO_DROP'			=> '내릴수 있는 예전 개요 보이기',
 	'LBL_UW_SKIPPED_QUERIES_ALREADY_EXIST'      => '생략된 문의사항',
-	'LBL_INCOMPATIBLE_PHP_VERSION'              => 'PHP버전 5나 그 상위 버전이 필요합니다.',
 	'ERR_CHECKSYS_PHP_INVALID_VER'      => '귀하의 PHP버전은 Sugar에 의해 지원되지 않습니다. Sugar어플리케이션에 적합한 버전을 설치해야 합니다. 지원되는 PHP버전 발표노트의 Compatibility Matrix과 문의하시기 바랍니다. 귀하의 버전은',
 	'LBL_BACKWARD_COMPATIBILITY_ON' 			=> 'PHP 역방향 적합성 모드가 작동중입니다. 계속 진행하려면 zend.ze1_compatibility_mode 를 작동을 중지하십시오.',
 	//including some strings from moduleinstall that are used in Upgrade
@@ -260,8 +259,6 @@ $mod_strings = array(
 	'LBL_ML_INSTALL'=>'설치',
 	//adding the string used in tracker. copying from homepage
 	'LBL_HOME_PAGE_4_NAME' => '추적기',
-	'LBL_CURRENT_PHP_VERSION' => '귀하의 현재 php버전은 다음과 같습니다.',
-	'LBL_RECOMMENDED_PHP_VERSION' => '권장 PHP버전은 5.2.x입니다.',
 	'LBL_MODULE_NAME' => '업그레이드 마법사',
 	'LBL_MODULE_NAME_SINGULAR' => '업그레이드 마법사',
 	'LBL_UPLOAD_SUCCESS' => '패키지 업그레이드가 성공적으로 전송되었습니다. 최종 확인을 위한 다음 버튼을 클릭하십시오,',

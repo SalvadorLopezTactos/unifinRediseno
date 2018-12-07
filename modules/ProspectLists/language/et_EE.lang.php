@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Sihtmärgiloendite loendi töölaud',
+
   'LBL_MODULE_NAME' => 'Eesmärgiloendid',
   'LBL_MODULE_NAME_SINGULAR' => 'Eesmärgiloend',
   'LBL_MODULE_ID'   => 'Eesmärgiloendid',

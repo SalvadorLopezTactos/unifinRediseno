@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus-Server',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Subpanel-Objekte per Seite (Handy)',
 	'LOG_MEMORY_USAGE'=>'Arbeitsspeicher-Verbrauch protokollieren',
-	'LOG_SLOW_QUERIES'=>'Langsame Abfragen protokollieren',
+    'LOG_SLOW_QUERIES' => 'Langsame Abfragen protokollieren',
     'LOCK_HOMEPAGE_HELP'=>'Diese Einstellung verhindert<BR> 1) Das Hinzufügen neuer Homepages und Dashlets auf der Startseite <BR>2) Die Anpassung von Dashlets durch Ziehen und Ablegen.',
     'CURRENT_LOGO'=>'Derzeitiges Logo:',
     'CURRENT_LOGO_HELP'=>'Dieses Logo wird im Footer der Sugar-Anwendung links angezeigt.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Dieser Wert wird in der Titelleiste Ihres Browsers dargestellt.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Aktiviere/Deaktivere E-Mails von verbundenen (oder verknüpften) Kontakten, die im E-Mail-Sub-Panel angezeigt werden.',
 
-    'LBL_OC_STATUS'                     => 'Standardstatus Offline-Client',
-    'DEFAULT_OC_STATUS'                 => 'Offline-Client standardmäßig aktivieren',
-    'LBL_OC_STATUS_DESC' => 'Markieren Sie diese Option, wenn Sie jedem Benutzer den Zugriff auf den Offline-Client gewähren möchten. Andernfalls können Sie den Zugriff auf Benutzerebene konfigurieren.',
     'SESSION_TIMEOUT' => 'Portal-Sitzungs-Zeitüberschreitung',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Die Portal-Sitzungs-Zeitüberschreitung ist bei älteren Versionen des Sugar-Portals ab 6.5 verfügbar.',
     'UPLOAD_MAXSIZE_UNITS' => 'Bytes',
@@ -435,8 +432,17 @@ Um zusätzliche Systemeinstellungen zu konfigurieren, klicken Sie <a href="index
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML-Login-URL darf nicht leer sein',
     'ERR_EMPTY_SAML_CERT' => 'SAML-Zertifikat darf nicht leer sein',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML-Einheits-ID darf nicht leer sein',
     'ERR_SAML_LOGIN_URL' => 'SAML-Login-URL ist ungültig',
     'ERR_SAML_SLO_URL' => 'SAML SLO-URL ist ungültig',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM-Datei muss privaten Schlüssel enthalten',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM-Datei muss x.509-Zertifikat enthalten',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Bereitgestelltes x. 509-Zertifikat stimmt nicht mit privatem Schlüssel überein',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Activity Streams aktivieren',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Aktiviert Activity Streams für die Anwendung',
 );
 
 

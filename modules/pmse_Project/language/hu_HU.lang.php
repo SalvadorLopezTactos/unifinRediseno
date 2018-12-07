@@ -12,17 +12,16 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Folyamatdefiníciók',
   'LBL_MODULE_TITLE' => 'Folyamatdefiníciók',
   'LBL_MODULE_NAME_SINGULAR' => 'Folyamatdefiníció',
 
-  'LNK_LIST' => 'Folyamatdefiníciók Megtekintése',
-  'LNK_NEW_PMSE_PROJECT' => 'Folymatdefiníciók Létrehozása',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Folymatdefiníciók Importálása',
+  'LNK_LIST' => 'Folyamatdefiníciók megtekintése',
+  'LNK_NEW_PMSE_PROJECT' => 'Folyamatdefiníciók létrehozása',
+  'LNK_IMPORT_PMSE_PROJECT' => 'Folyamatdefiníciók importálása',
 
   'LBL_PRJ_STATUS' => 'Állapot',
-  'LBL_PRJ_MODULE' => 'Cél Modul',
+  'LBL_PRJ_MODULE' => 'Célmodul',
   'LBL_PMSE_BUTTON_SAVE' => 'Mentés',
   'LBL_PMSE_BUTTON_CANCEL' => 'Mégsem',
   'LBL_PMSE_BUTTON_YES' => 'Igen',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'nem egyenlő ezzel:',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'nem ez:',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nem egyenlő ezzel',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Futtatás',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Hozzáadás',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Bezárás',

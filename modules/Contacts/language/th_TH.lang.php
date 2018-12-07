@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'แดชบอร์ดรายการผู้ติดต่อ',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกผู้ติดต่อ',
+
     'LNK_CONTACT_REPORTS' => 'ดูรายงานที่อยู่ติดต่อ',
     'ERR_DELETE_RECORD' => 'ระบุเลขที่ระเบียนเพื่อลบที่อยู่ติดต่อ',
     'LBL_ACCOUNT_ID' => 'ID บัญชี:',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'คัดลอกที่อยู่รองไปยังที่อยู่หลัก',
     'NTC_COPY_PRIMARY_ADDRESS' => 'คัดลอกที่อยู่หลักไปยังที่อยู่รอง',
     'NTC_DELETE_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการลบระเบียนนี้',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'การสร้างโอกาสทางการขายจะต้องมีบัญชี\n โปรดสร้างบัญชีใหม่หรือเลือกบัญชีที่มีอยู่',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'การสร้างโอกาสทางการขายจะต้องมีบัญชี\\n โปรดสร้างบัญชีใหม่หรือเลือกบัญชีที่มีอยู่',
     'NTC_REMOVE_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการย้ายที่อยู่ติดต่อนี้ออกจากเคส',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการยกเลิกระเบียนนี้ในฐานะผู้ใต้บังคับบัญชา',
 
@@ -273,4 +277,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'คะแนนของผู้สนใจ',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'รายงานของที่อยู่ติดต่อ',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'ยอมรับจุดประสงค์ต่าง ๆ ทางธุรกิจเพื่อ',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'ยอมรับการปรับปรุงครั้งล่าสุด',
 );

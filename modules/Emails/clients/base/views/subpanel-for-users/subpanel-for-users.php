@@ -28,7 +28,7 @@ $viewdefs['Emails']['base']['view']['subpanel-for-users'] = array(
           'label' => 'LBL_LIST_STATUS',
           'enabled' => true,
           'default' => true,
-          'name' => 'status',
+          'name' => 'state',
         ),
         array(
           'target_record_key' => 'contact_id',

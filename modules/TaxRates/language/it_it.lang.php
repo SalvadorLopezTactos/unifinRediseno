@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Per eliminare il tasso di imposta deve essere specificato il numero del record.',
   'NTC_STATUS' => 'Configura lo stato su Inattivo per rimuovere questo tasso di imposta dall´elenco dei tassi di imposta',
   'NTC_LIST_ORDER' => 'Configura l´ordine con cui appariranno i tassi di imposta nell´elenco dei tassi di imposta',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Attivo',
-    'Inactive' => 'Inattivo',
-  ),
   'LBL_EDITLAYOUT' => 'Modifica Layout' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Creato da Id',
   'LBL_MODIFIED_ID'=>'Modificato Da Id',

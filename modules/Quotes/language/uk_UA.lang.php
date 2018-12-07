@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Інформаційна панель списку комерційних пропозицій',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Інформаційна панель записів комерційних пропозицій',
+
     'LBL_CONTRACTS'=>'Контракти',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Контракти',
     'ERR_DELETE_RECORD' => 'Вам слід вказати номер запису перед видаленням.',
@@ -151,7 +155,7 @@ $mod_strings = array (
     'LBL_QUOTE_LAYOUT_DOES_NOT_EXIST_ERROR' => 'файл макета комерційної пропозиції не знайдений: $layout',
     'LBL_QUOTE_LAYOUT_REGISTERED_ERROR' => 'макет комерційної пропозиції не знайдений в modules / Quotes / Layouts.php',
     'LBL_QUOTED' => 'Комерційну пропозицію сформовано',
-    'LBL_QUOTESETTINGS' => 'Настройки комерційної пропозиції',
+    'LBL_QUOTESETTINGS' => 'Налаштування комерційної пропозиції',
     'LBL_REMOVE_COMMENT' => 'Видалити коментар',
     'LBL_REMOVE_ROW' => 'Видалити позицію',
     'LBL_RENAME_ERROR' => 'ПОМИЛКА: неможливо move_pdf в $destination. Спробуйте зробити директорію доступною для запису через веб-сервер.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Загальна сума (Долари США)',
     'LBL_SUBTOTAL' => 'Підсумок:',
     'LBL_TAXABLE_SUBTOTAL' => 'Сума без урахування ПДВ, що підлягає оподаткуванню',
-    'LBL_SYSTEM_ID' => 'Система (ID)',
     'LBL_TAX_USDOLLAR'=>'Податок (у доларах США)',
     'LBL_TAX' => 'Податок:',
     'LBL_TAX_TOTAL' => 'Загальна сума податку',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Видалити вибране',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Видалити вибрані елементи',
     'LBL_SAVE_LINE_ITEMS' => 'Збережіть усі активні елементи рядка, клацнувши синю позначку біля кожного із них, перш ніж зберегти цю комерційну пропозицію.',
+    'LBL_COPY_LINE_ITEMS' => 'Перш ніж скопіювати цю комерційну пропозицію, збережіть усі активні елементи рядка, клацнувши синю позначку біля кожного з них.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Пошук у каталозі продуктів',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Немає доступних даних',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Копіювання продуктів у нову комерційну пропозицію.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Копіювання продуктів у нову комерційну пропозицію. Цей процес може зайняти деякий час.',
 );

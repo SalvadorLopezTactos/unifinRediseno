@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => '多个列被定义了相同的字段名称。',
     'ERR_MISSING_REQUIRED_FIELDS' => '缺少必填字段：',
     'ERR_MISSING_MAP_NAME' => '缺少自定义映射名称',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => '已对 IDM 模式禁用用户导入。',
     'ERR_SELECT_FULL_NAME' => '在选择姓和名后，您就无法选择全名了。',
     'ERR_SELECT_FILE' => '选择一个要上传的文件。',
     'LBL_SELECT_FILE' => '选择文件：',

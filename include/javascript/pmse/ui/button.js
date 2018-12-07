@@ -8,32 +8,33 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 /**
- * @class Button
+ * @class PMSE.Button
  * Handles buttons
- * @extend Element
+ * @extends PMSE.Element
  *
  * @constructor
  * Create a new instance of the class
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
-var Button = function (options, parent) {
-    Element.call(this, options);
+PMSE.Button = function(options, parent) {
+    PMSE.Element.call(this, options);
     this.parent = null;
     this.caption = null;
     this.action = null;
     this.icon = null;
     this.cssClasses = [];
-    Button.prototype.initObject.call(this, options, parent);
+    PMSE.Button.prototype.initObject.call(this, options, parent);
 };
 
-Button.prototype = new Element();
+PMSE.Button.prototype = new PMSE.Element();
 
-Button.prototype.type = 'Button';
-Button.prototype.family = 'Button';
+PMSE.Button.prototype.type = 'PMSE.Button';
+PMSE.Button.prototype.family = 'PMSE.Button';
 
-Button.prototype.initObject = function (options, parent) {
+PMSE.Button.prototype.initObject = function(options, parent) {
     var defaults, self = this;
     if (options.isAction) {
         this.loadAction(options, parent);
@@ -43,7 +44,7 @@ Button.prototype.initObject = function (options, parent) {
             caption: null,
             parent: parent || null,
             jtype: 'normal',
-            handler: function () {},
+            handler: function() {},
             icon: null,
             cssClasses: []
         };
@@ -54,25 +55,25 @@ Button.prototype.initObject = function (options, parent) {
             .setCssClasses(defaults.cssClasses);
         switch (defaults.jtype) {
         case 'reset':
-            this.action = new Action({
+            this.action = new PMSE.Action({
                 text: this.caption,
-                handler: function () {
+                handler: function() {
                     self.parent.reset();
                 },
                 cssStyle: this.icon
             });
             break;
         case 'submit':
-            this.action = new Action({
+            this.action = new PMSE.Action({
                 text: this.caption,
-                handler: function () {
+                handler: function() {
                     self.parent.submit();
                 },
                 cssStyle: this.icon
             });
             break;
         case 'normal':
-            this.action = new Action({
+            this.action = new PMSE.Action({
                 text: this.caption,
                 handler: defaults.handler,
                 cssStyle: this.icon
@@ -82,7 +83,7 @@ Button.prototype.initObject = function (options, parent) {
     }
 };
 
-Button.prototype.setCssClasses = function (cssClasses) {
+PMSE.Button.prototype.setCssClasses = function(cssClasses) {
     var oldClasses = this.cssClasses.join(" "),
         newClasses = cssClasses.join(" ");
     this.cssClasses = cssClasses;
@@ -90,29 +91,29 @@ Button.prototype.setCssClasses = function (cssClasses) {
     return this;
 };
 
-Button.prototype.loadAction = function (action, parent) {
+PMSE.Button.prototype.loadAction = function(action, parent) {
     this.action = action;
     this.setCaption(this.action.text);
     this.setIcon(this.action.cssStyle);
     this.setParent(parent);
 };
 
-Button.prototype.setCaption = function (text) {
+PMSE.Button.prototype.setCaption = function(text) {
     this.caption = text;
     return this;
 };
 
-Button.prototype.setIcon = function (value) {
+PMSE.Button.prototype.setIcon = function(value) {
     this.icon = value;
     return this;
 };
 
-Button.prototype.setParent = function (parent) {
+PMSE.Button.prototype.setParent = function(parent) {
     this.parent = parent;
     return this;
 };
 
-Button.prototype.createHTML = function () {
+PMSE.Button.prototype.createHTML = function() {
     var buttonAnchor, iconSpan, labelSpan;
 
     buttonAnchor = this.createHTMLElement('a');
@@ -138,17 +139,17 @@ Button.prototype.createHTML = function () {
     return this.html;
 };
 
-Button.prototype.attachListeners = function () {
+PMSE.Button.prototype.attachListeners = function() {
     var self = this;
     $(this.html)
-        .click(function (e) {
+        .click(function(e) {
             e.stopPropagation();
             e.preventDefault();
             if (self.action.handler) {
                 self.action.handler();
             }
         })
-        .mousedown(function (e) {
+        .mousedown(function(e) {
             e.stopPropagation();
         });
 };

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'แดชบอร์ดรายการเป้าหมาย',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกเป้าหมาย',
+
   'LBL_MODULE_NAME' => 'เป้าหมาย',
   'LBL_MODULE_NAME_SINGULAR' => 'เป้าหมาย',
   'LBL_MODULE_ID'   => 'เป้าหมาย',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'คำนำหน้า',
   'LBL_SAVE_PROSPECT' => 'บันทึกเป้าหมาย',
   'LBL_CREATED_OPPORTUNITY' =>'สร้างโอกาสทางการขายใหม่แล้ว',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'การสร้างโอกาสทางการขายจะต้องมีบัญชี\n โปรดสร้างบัญชีใหม่หรือเลือกบัญชีที่มีอยู่',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'การสร้างโอกาสทางการขายจะต้องมีบัญชี\\n โปรดสร้างบัญชีใหม่หรือเลือกบัญชีที่มีอยู่',
   'LNK_SELECT_ACCOUNT' => "เลือกบัญชี",
   'LNK_NEW_PROSPECT' => 'สร้างเป้าหมาย',
   'LNK_PROSPECT_LIST' => 'ดูเป้าหมาย',
@@ -195,4 +199,6 @@ $mod_strings = array (
 2. คลิก "บันทึก" เพื่อสิ้นสุดการสร้างระเบียนใหม่ และกลับสู่เพจก่อนหน้า',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'รายงานของเป้าหมาย',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'ยอมรับจุดประสงค์ต่าง ๆ ทางธุรกิจเพื่อ',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'ยอมรับการปรับปรุงครั้งล่าสุด',
 );

@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'haga clic aquí',
 	'TXT_REMOVE_ME'								=> 'Para borrar su suscripción a esta lista de correo',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Enviar notificación usando como remitente la dirección de email del usuario asignador',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Dar de baja las nuevas direcciones de correo electrónico por defecto',
 
 	'LBL_SECURITY_TITLE'						=> 'Configuración de Seguridad de Email',
 	'LBL_SECURITY_DESC'							=> 'Marque aquello NO permitido en el Email entrante ni mostrado en el módulo de Emails.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Permitir a los usuarios utilizar esta cuenta para correo saliente:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Cuando esta opción está seleccionada, todos los usuarios podrán enviar correos utilizando la misma<br> cuenta de correo saliente para enviar notificaciones del sistema y alertas.  Si la opción no está seleccionada,<br> los usuarios podrán utilizar el servidor de correo saliente una vez proporcionen la información sobre su propia cuenta.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Cuando está activado, el nombre y dirección de email del usuario de Email que asigna se incluirá en el campo De del Email. Es posible que esta funcionalidad no funcione con servidores SMTP que no permiten el envío desde una dirección de Email diferente a la de la cuenta del servidor.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Cuando se añada una nueva dirección de correo electrónico, automáticamente se dará de baja. No se enviarán correos electrónicos de campañas a las direcciones que se han dado de baja. El cambio de este ajuste no afectará a las direcciones de correo electrónico existentes.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

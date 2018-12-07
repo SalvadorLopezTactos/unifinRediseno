@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Błąd: brak zdefiniowanych pól modułu, które zostały zmapowane do wyświetlenia w wynikach. Skontaktuj się z administratorem systemu.',
     'LBL_INFO_INLINE' => 'Informacje' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Zamknij' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'Stwierdzono brak złącza dla identyfikatora danego źródła.',
 );
 

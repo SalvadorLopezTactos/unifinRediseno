@@ -88,6 +88,7 @@ $viewdefs[$module_name]['base']['view']['casesList-list'] = array(
                     'enabled' => true,
                     'type' => 'pmse-link',
                     'link' => true,
+                    'sortable' => false,
                 ),
                 array(
                     'name' => 'cas_status',

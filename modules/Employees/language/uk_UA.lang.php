@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => 'Видалено',
   'LBL_EMAIL_ADDRESS'=>'Адреса Email',
   'LBL_CONTACTS_SYNC' => 'Контакти',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        'Співробітника можна створити лише в <a href="{0}" target="_blank">хмарній консолі</a> для режиму IDM.',
 );
 
 

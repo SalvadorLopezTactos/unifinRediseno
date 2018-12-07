@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Informačný panel so zoznamom chýb',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Informačný panel so záznamom chýb',
+
   'LBL_MODULE_NAME' => 'Chyby',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Chyba',
   'LBL_MODULE_TITLE' => 'Stopovač chýb: Hlavná stránka',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Prípady',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projekty',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenty',
-  'LBL_SYSTEM_ID' => 'ID systému',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Priradený používateľ',
 	'LBL_ASSIGNED_TO_NAME' => 'Priradené k',
 

@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Util\Uuid;
+
 class EmailTemplateFormBase
 {
 
@@ -162,28 +164,19 @@ EOQ;
 
 		///////////////////////////////////////////////////////////////////////////
 		////	ADDING NEW ATTACHMENTS
-
-		$max_files_upload = count($_FILES);
-
 		if(!empty($focus->id)) {
 			$note = BeanFactory::newBean('Notes');
-            $where = sprintf(' notes.parent_id = %s', $focus->db->quoted($focus->id));
+            //FIXME: notes.email_type should be EmailTemplates
+            $where = sprintf(' notes.email_id = %s', $focus->db->quoted($focus->id));
 			if(!empty($_REQUEST['old_id'])) { // to support duplication of email templates
-                $where .= sprintf(' OR notes.parent_id = %s', $focus->db->quoted($_REQUEST['old_id']));
+                $where .= sprintf(' OR notes.email_id = %s', $focus->db->quoted($_REQUEST['old_id']));
 			}
-			$notes_list = $note->get_full_list("", $where, true);
+            $attachments = $note->get_full_list("", $where, true);
 		}
 
-		if(!isset($notes_list)) {
-			$notes_list = array();
+		if(!isset($attachments)) {
+			$attachments = array();
 		}
-
-		if(!is_array($focus->attachments)) { // PHP5 does not auto-create arrays(). Need to initialize it here.
-			$focus->attachments = array();
-		}
-		$focus->attachments = array_merge($focus->attachments, $notes_list);
-
-
 
 		foreach ($_FILES as $key => $file)
 		{
@@ -214,13 +207,13 @@ EOQ;
                   	$note->embed_flag =false;
                   }
 				}
-				array_push($focus->attachments, $note);
+				array_push($attachments, $note);
 			}
 
 		}
 
 		$focus->saved_attachments = array();
-		foreach($focus->attachments as $note)
+		foreach($attachments as $note)
 		{
 			if( !empty($note->id) && $note->new_with_id === FALSE)
 			{
@@ -232,18 +225,22 @@ EOQ;
 					// dupe the file, create a new note, assign the note to the new template
 					$newNote = BeanFactory::getBean('Notes', $note->id);
 					$newNote->id = create_guid();
-					$newNote->parent_id = $focus->id;
+					$newNote->email_id = $focus->id;
+                    //FIXME: Should email_type be set to Emails or EmailTemplates ($focus->module_name)?
 					$newNote->new_with_id = true;
 					$newNote->date_modified = '';
 					$newNote->date_entered = '';
-					$newNoteId = $newNote->save();
 
-					UploadFile::duplicate_file($note->id, $newNoteId, $note->filename);
+                    // Duplicate the file before saving so that the file size is captured during save.
+                    UploadFile::duplicate_file($note->id, $newNote->id, $note->filename);
+                    $newNote->save();
 				}
 				continue;
 			}
-			$note->parent_id = $focus->id;
-			$note->parent_type = 'Emails';
+			$note->email_id = $focus->id;
+            //FIXME: Is this code used for anything other than saving a template? If no, then email_type should be
+            // EmailTemplates. If yes, then email_type may be Emails or EmailTemplates depending on the use.
+			$note->email_type = 'Emails';
 			$note->file_mime_type = $note->file->mime_type;
 			$note_id = $note->save();
 			array_push($focus->saved_attachments, $note);
@@ -273,18 +270,23 @@ EOQ;
 			$docRev = BeanFactory::retrieveBean('DocumentRevisions', $doc->document_revision_id);
 			if(empty($docRev)) continue;
 			$docNote = BeanFactory::newBean('Notes');
+            $docNote->id = Uuid::uuid1();
+            $docNote->new_with_id = true;
 
 			array_push($focus->saved_attachments, $docRev);
 
 			$docNote->name = $doc->document_name;
 			$docNote->filename = $docRev->filename;
 			$docNote->description = $doc->description;
-			$docNote->parent_id = $focus->id;
-			$docNote->parent_type = 'Emails';
+			$docNote->email_id = $focus->id;
+            //FIXME: Is this code used for anything other than saving a template? If no, then email_type should be
+            // EmailTemplates. If yes, then email_type may be Emails or EmailTemplates depending on the use.
+			$docNote->email_type = 'Emails';
 			$docNote->file_mime_type = $docRev->file_mime_type;
-			$docId = $docNote = $docNote->save();
 
-			UploadFile::duplicate_file($docRev->id, $docId, $docRev->filename);
+            // Duplicate the file before saving so that the file size is captured during save.
+            UploadFile::duplicate_file($docRev->id, $docNote->id, $docRev->filename);
+            $docNote->save();
 		}
 
 	}
@@ -297,8 +299,9 @@ EOQ;
 
 		if(isset($_REQUEST['remove_attachment']) && !empty($_REQUEST['remove_attachment'])) {
 			foreach($_REQUEST['remove_attachment'] as $noteId) {
-				$q = 'UPDATE notes SET deleted = 1 WHERE id = \''.$noteId.'\'';
-				$focus->db->query($q);
+                $query = 'UPDATE notes SET deleted = 1 WHERE id = ?';
+                $conn = $focus->db->getConnection();
+                $conn->executeQuery($query, array($noteId));
 			}
 
 		}

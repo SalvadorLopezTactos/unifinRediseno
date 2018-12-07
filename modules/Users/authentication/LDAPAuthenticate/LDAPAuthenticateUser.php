@@ -14,7 +14,8 @@
 
 /**
  * This file is where the user authentication occurs. No redirection should happen in this file.
- *
+ * @deprecated Will be removed in 7.11. IDM-46
+ * @deprecated Please use new idM Mango library Glue \IdMLDAPAuthenticate
  */
 require_once('modules/Users/authentication/LDAPAuthenticate/LDAPConfigs/default.php');
 
@@ -35,6 +36,13 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
 	 */
     public function authenticateUser($name, $password, $fallback = false)
     {
+        global $log;
+        $log->deprecated(sprintf(
+            'The %s in %s was called. Please see \IdMLDAPAuthenticate',
+            __METHOD__,
+            __CLASS__
+        ));
+
         $server = isset($GLOBALS['ldap_config']->settings['ldap_hostname']) ? $GLOBALS['ldap_config']->settings['ldap_hostname'] : '';
         $port = isset($GLOBALS['ldap_config']->settings['ldap_port']) ? $GLOBALS['ldap_config']->settings['ldap_port'] : '';
 		if(!$port)
@@ -66,14 +74,14 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
 		$bind_password = html_entity_decode($password,ENT_QUOTES);
 
         $GLOBALS['log']->info("ldapauth: Binding user " . $bind_user);
-        $bind = ldap_bind($ldapconn, $bind_user, $bind_password);
+        $bind = $this->bindToLdap($ldapconn, $bind_user, $bind_password);
         $error = ldap_errno($ldapconn);
         if ($this->loginError($error)) {
             $full_user = $GLOBALS['ldap_config']->settings['ldap_bind_attr'] . "=" . $bind_user
                 . "," . $GLOBALS['ldap_config']->settings['ldap_base_dn'];
 
             $GLOBALS['log']->info("ldapauth: Binding user " . $full_user);
-            $bind = ldap_bind($ldapconn, $full_user, $bind_password);
+            $bind = $this->bindToLdap($ldapconn, $full_user, $bind_password);
             $error = ldap_errno($ldapconn);
             if ($this->loginError($error)) {
                 return '';
@@ -93,7 +101,7 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
                 && !empty($GLOBALS['ldap_config']->settings['ldap_group_user_attr'])
                 && !empty($GLOBALS['ldap_config']->settings['ldap_group_attr'])) {
 
-                if (!in_array($attrs, $GLOBALS['ldap_config']->settings['ldap_group_user_attr'])) {
+                if (!in_array($GLOBALS['ldap_config']->settings['ldap_group_user_attr'], $attrs)) {
                     $attrs[] = $GLOBALS['ldap_config']->settings['ldap_group_user_attr'];
                 }
             }
@@ -183,10 +191,13 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
 
 
 			ldap_close($ldapconn);
-			$dbresult = $GLOBALS['db']->query("SELECT id, status FROM users WHERE user_name='" . $name . "' AND deleted = 0");
+
+            $conn = DBManagerFactory::getInstance()->getConnection();
+            $stmt = $conn->executeQuery('SELECT id, status FROM users WHERE user_name=? AND deleted=0', array($name));
+            $row = $stmt->fetch();
 
 			//user already exists use this one
-			if($row = $GLOBALS['db']->fetchByAssoc($dbresult)){
+            if (!empty($row)) {
 				if($row['status'] != 'Inactive')
 					return $row['id'];
 				else
@@ -208,12 +219,36 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
 		}
 	}
 
+    /**
+     * Filter username and perform ldap_bind with filtered value
+     * @param resource $ldapconn
+     * @param string $user
+     * @param string $password
+     * @return bool
+     */
+    protected function bindToLdap($ldapconn, $user, $password)
+    {
+        $user = $this->escapeLdapFilter($user);
+        return ldap_bind($ldapconn, $user, $password);
+    }
+
+    /**
+     * Escape special characters in LDAP filter, RFC-2254
+     * @param string $value
+     * @return string
+     */
+    protected function escapeLdapFilter($value)
+    {
+        return ldap_escape($value, null, LDAP_ESCAPE_FILTER);
+    }
+
 	/**
 	 * takes in a name and creates the appropriate search filter for that user name including any additional filters specified in the system settings page
 	 * @param $name
 	 * @return String
 	 */
 	function getUserNameFilter($name){
+        $name = $this->escapeLdapFilter($name);
 			$name_filter = "(" . $GLOBALS['ldap_config']->settings['ldap_login_attr']. "=" . $name . ")";
 			//add the additional user filter if it is specified
 			if(!empty($GLOBALS['ldap_config']->settings['ldap_login_filter'])){
@@ -251,8 +286,12 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
 
     public function loadUserOnLogin($name, $password, $fallback = false, array $params = array())
     {
-
-	    global $mod_strings;
+        global $mod_strings, $log;
+        $log->deprecated(sprintf(
+            'The %s in %s was called. Please see \IdMLDAPAuthenticate',
+            __METHOD__,
+            __CLASS__
+        ));
 
 	    // Check if the LDAP extensions are loaded
 	    if(!function_exists('ldap_connect')) {
@@ -333,11 +372,11 @@ class LDAPAuthenticateUser extends SugarAuthenticateUser{
         ldap_set_option($ldapconn, LDAP_OPT_REFERRALS, 0); // required for AD
         //if we are going to connect anonymously lets at least try to connect with the user connecting
         if(empty($admin_user)){
-			$bind = @ldap_bind($ldapconn, $user_name, $password);
+            $bind = $this->bindToLdap($ldapconn, $user_name, $password);
         	$error = ldap_errno($ldapconn);
         }
         if(empty($bind)){
-        	$bind = @ldap_bind($ldapconn, $admin_user, $admin_password);
+            $bind = $this->bindToLdap($ldapconn, $admin_user, $admin_password);
         	$error = ldap_errno($ldapconn);
         }
 

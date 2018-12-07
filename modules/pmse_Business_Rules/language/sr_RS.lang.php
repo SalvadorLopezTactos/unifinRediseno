@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Pravila procesnog poslovanja',
   'LBL_MODULE_TITLE' => 'Pravila procesnog poslovanja',
   'LBL_MODULE_NAME_SINGULAR' => 'Pravila procesnog poslovanja',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Uslovi',
     'LBL_PMSE_LABEL_RETURN' => 'Povratak',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Zaključci',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Promeni polje',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Povratna vrednost',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Dodati uslov',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Dodati zaključak',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Dodati red',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Uklonite stubac',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Ukloni uslov',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Ukloni zaključak',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Ukloni podatak kolone',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Da',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Ne',

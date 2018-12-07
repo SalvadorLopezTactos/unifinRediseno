@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Çeyrek bazında',
     'LBL_BY_FISCAL_YEAR' => 'Mali Yıla Göre',
     'LBL_BY_FISCAL_QUARTER' => 'Mali Çeyreğe göre',
+    'LBL_AMOUNT' => 'Tutar',
     'LBL_COUNT' => 'Sayı',
+    'LBL_PERCENT' => 'Yüzde',
     'LBL_SUM' => 'TOPLAM',
     'LBL_AVG' => 'ORTALAMA',
     'LBL_MAX' => 'MAKS.',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Ay',
     'LBL_YEAR' => 'Yıl',
     'LBL_QUARTER' => 'Çeyrek',
+    'LBL_FISCAL' => 'Mali',
     'LBL_FISCAL_YEAR' => 'Mali Yıl',
     'LBL_FISCAL_QUARTER' => 'Mali Çeyrek',
 	'LBL_YESTERDAY'=>'Dün',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Gelecek Çeyrek',
     'LBL_ADD_RELATE' => "İlişkili Ekle",
     'LBL_DEL_THIS' => "Sil",
-    'LBL_ALERT_CANT_ADD' => 'İlişkili bir tablo seçmeden ilişkili bir modül ekleyemezsiniz.\nTıkladığınız &#39;İlişki ekle&#39; butonunun solundaki açılır-listeden bir modül seçiniz.',
+    'LBL_ALERT_CANT_ADD' => 'İlişkili bir tablo seçmeden ilişkili bir modül ekleyemezsiniz.\\nTıkladığınız &#39;İlişki ekle&#39; butonunun solundaki açılır-listeden bir modül seçiniz.',
     'LBL_BY_DAY' => 'Günlük',
     'LBL_DAY' => 'Gün',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Opsiyonel İlişkili Modüller',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Eşit veya Daha Büyük',
 
     'LBL_FILTER_BY_MODULE' => 'Modüle Göre',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Grafiklerle',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Bu eylemin Drillthrough Rapor verisi alınırken hata oluştu. Destek için rapor sahibiyle iletişime geçin.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Drill through kullanılamıyor',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'Bir liste görünümü, mevcut arama kriterlerine uyan ve kullanıcıların erişim hakkı olan bütün raporları gösterir. Her raporun temel ayrıntılarını liste görünümünün alan sütunlarında veya ön izlemede görebilirsiniz. Raporu görmek için raporun adına tıklayın veya rapor üzerinde değişiklik yapmak için aksiyon menüsünde &#39;Raporu Düzenle&#39; seçeneğini seçin.  ',
+  );

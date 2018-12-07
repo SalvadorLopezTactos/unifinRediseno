@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Ketvirčiais',
     'LBL_BY_FISCAL_YEAR' => 'By Fiscal Year',
     'LBL_BY_FISCAL_QUARTER' => 'By Fiscal Quarter',
+    'LBL_AMOUNT' => 'Suma',
     'LBL_COUNT' => 'Skaičiuoti',
+    'LBL_PERCENT' => 'Procentai',
     'LBL_SUM' => 'SUMA',
     'LBL_AVG' => 'VIDURKIS',
     'LBL_MAX' => 'MAKSIMUMAS',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Mėnuo',
     'LBL_YEAR' => 'Metai',
     'LBL_QUARTER' => 'Ketvirtis',
+    'LBL_FISCAL' => 'Finansinis',
     'LBL_FISCAL_YEAR' => 'Finansiniai metai',
     'LBL_FISCAL_QUARTER' => 'Fiscal Quarter',
 	'LBL_YESTERDAY'=>'Vakar',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Kitas ketvirtis',
     'LBL_ADD_RELATE' => "Įdėti susijusį",
     'LBL_DEL_THIS' => "Išimti",
-    'LBL_ALERT_CANT_ADD' => 'Prieš įdedant susijusį modulį, pasirinkite pradinį modulį.\n Pasirinkite modulį iš lentelės šalia mygtuko &#39;Įdėti susijusį&#39;.',
+    'LBL_ALERT_CANT_ADD' => 'Prieš įdedant susijusį modulį, pasirinkite pradinį modulį.\\n Pasirinkite modulį iš lentelės šalia mygtuko &#39;Įdėti susijusį&#39;.',
     'LBL_BY_DAY' => 'Dienomis',
     'LBL_DAY' => 'Diena',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Papildomi susiję moduliai',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Daugiau lygu nei',
 
     'LBL_FILTER_BY_MODULE' => 'By Module',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Su diagramomis',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Nepavyko gauti šio veiksmo analizės ataskaitos duomenų. Kreipkitės į ataskaitos kūrėją.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Analizė negalima',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'Sąrašo rodinyje rodomos visos dabartinius ieškos kriterijus atitinkančios ataskaitos, prie kurių vartotojai turi prieigą. Sąrašo rodinio lauko stulpeliuose ir peržiūroje galite peržiūrėti kiekvienos ataskaitos pagrindinius duomenis. Ataskaitoms galite priskirti žymes ir sukurti filtrus. Norėdami peržiūrėti ataskaitą spustelėkite jos pavadinimą, veiksmų meniu pasirinkite Redaguoti ataskaitą, kad galėtumėte ją modifikuoti.',
+  );

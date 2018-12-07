@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Instrumentpanel för uppgiftslista',
+
   'LBL_MODULE_NAME' => 'Uppgifter',
   'LBL_MODULE_NAME_SINGULAR' => 'Uppgift',
   'LBL_TASK' => 'Uppgifter:',

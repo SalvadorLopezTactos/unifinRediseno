@@ -100,6 +100,8 @@ class AnnotationReader implements Reader
         'package_version' => true,
         // PlantUML
         'startuml' => true, 'enduml' => true,
+        // Symfony 3.3 Cache Adapter
+        'experimental' => true
     );
 
     /**
@@ -172,6 +174,8 @@ class AnnotationReader implements Reader
      * Initializes a new AnnotationReader.
      *
      * @param DocParser $parser
+     *
+     * @throws AnnotationException
      */
     public function __construct(DocParser $parser = null)
     {
@@ -307,7 +311,8 @@ class AnnotationReader implements Reader
      */
     private function getIgnoredAnnotationNames(ReflectionClass $class)
     {
-        if (isset($this->ignoredAnnotationNames[$name = $class->getName()])) {
+        $name = $class->getName();
+        if (isset($this->ignoredAnnotationNames[$name])) {
             return $this->ignoredAnnotationNames[$name];
         }
 
@@ -325,7 +330,8 @@ class AnnotationReader implements Reader
      */
     private function getClassImports(ReflectionClass $class)
     {
-        if (isset($this->imports[$name = $class->getName()])) {
+        $name = $class->getName();
+        if (isset($this->imports[$name])) {
             return $this->imports[$name];
         }
 

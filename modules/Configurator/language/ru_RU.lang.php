@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Сервер Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Количество отображаемых субпанелей на странице (мобильная версия)',
 	'LOG_MEMORY_USAGE'=>'Вести журнал использования памяти',
-	'LOG_SLOW_QUERIES'=>'Вести журнал медленных запросов',
+    'LOG_SLOW_QUERIES' => 'Вести журнал медленных запросов',
     'LOCK_HOMEPAGE_HELP'=>'Данный параметр запрещает:<br />1) добавлять Разделы на главную страницу системы <br />2) перемещать Разделы мышью на главной странице системы',
     'CURRENT_LOGO'=>'Текущий логотип:',
     'CURRENT_LOGO_HELP'=>'Данный логотип отображается в левом верхнем углу приложения Sugar.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Данное название отображается в заголовке браузера.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Разрешить/Запретить отображение электронных писем от связанных контактов на субпанели Email.',
 
-    'LBL_OC_STATUS'                     => 'Статус оффлайн клиента по умолчанию',
-    'DEFAULT_OC_STATUS'                 => 'Активировать Оффлайн клиент по умолчанию',
-    'LBL_OC_STATUS_DESC' => 'Нажмите здесь, если хотите, чтоб у всех пользователей был доступ к Оффлайн клиенту. Вы также можете настроить доступ на уровне пользователя.',
     'SESSION_TIMEOUT' => 'Истечение времени ожидания ответа от Портала',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Время ожидания сессии портала установлено для действующих версий портала Sugar, доступных для Sugar 6.5 и выше.',
     'UPLOAD_MAXSIZE_UNITS' => 'байты',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'URL-адрес входа SAML не может быть пустым',
     'ERR_EMPTY_SAML_CERT' => 'SAML сертификат не может быть пустым',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'Идентификатор компании SAML не может быть пустым',
     'ERR_SAML_LOGIN_URL' => 'Недопустимый URL-адрес входа SAML',
     'ERR_SAML_SLO_URL' => 'Недопустимый URL-адрес SLO SAML',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'Файл PEM должен содержать закрытый ключ',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'Файл PEM должен содержать сертификат x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Предоставленный сертификат x.509 не совпадает с закрытым ключом',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Мероприятия',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Активация ленты мероприятий',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Активация ленты мероприятий для приложения',
 );
 
 

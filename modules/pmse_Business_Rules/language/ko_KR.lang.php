@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => '프로세스 비즈니스 규칙',
   'LBL_MODULE_TITLE' => '프로세스 비즈니스 규칙',
   'LBL_MODULE_NAME_SINGULAR' => '프로세스 비즈니스 규칙',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => '조건',
     'LBL_PMSE_LABEL_RETURN' => '되돌아옴',
     'LBL_PMSE_LABEL_CONCLUSIONS' => '결론',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => '변경 필드',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => '반환 값',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => '조건을 추가',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => '결론 추가',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => '열 추가',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => '열 제거',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => '조건 제거',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => '결론 제거',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => '열 데이터 제거',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => '예',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => '아니요',

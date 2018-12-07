@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Panel de lista de llamadas',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Panel de registros de llamadas',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Llamadas',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Llamada',
@@ -22,7 +26,7 @@ $mod_strings = array (
     'LBL_LIST_CONTACT' => 'Contacto',
     'LBL_LIST_RELATED_TO' => 'Relacionado con',
     'LBL_LIST_RELATED_TO_ID' => 'Relacionado con ID',
-    'LBL_LIST_DATE' => 'Fecha Inicio',
+    'LBL_LIST_DATE' => 'Fecha de inicio',
     'LBL_LIST_TIME' => 'Hora Inicio',
     'LBL_LIST_DURATION' => 'Duración',
     'LBL_LIST_DIRECTION' => 'Dirección',

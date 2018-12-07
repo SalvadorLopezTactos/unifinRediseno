@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Erreur : Il n&#39;y a pas de champ de module défini pour afficher les résultats. Veuillez contacter votre administrateur système.',
     'LBL_INFO_INLINE' => 'Info' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Fermer' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'Aucun connecteur n&#39;a été trouvé pour l&#39;ID source fourni.',
 );
 

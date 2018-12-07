@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Επαφών',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Επαφών',
+
     'LNK_CONTACT_REPORTS' => 'Αναφορές Επαφών',
     'ERR_DELETE_RECORD' => 'Καθορίστε αριθμό εγγραφής προκειμένου να διαγράψετε αυτή την επαφή.',
     'LBL_ACCOUNT_ID' => 'Ταυτότητα Λογαριασμού',
@@ -273,4 +277,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'Αποτέλεσμα Δυνητικού',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Αναφορές Επαφών',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Επαγγελματικοί σκοποί για τους οποίους δώσατε τη συγκατάθεσή σας',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Τελευταία ανανέωση συγκατάθεσης',
 );

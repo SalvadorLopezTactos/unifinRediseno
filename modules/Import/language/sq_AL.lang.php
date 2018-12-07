@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Disa kolona janë të definuara me emër fushe të njejtë',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Mungojnë fushat e nevojshme:',
     'ERR_MISSING_MAP_NAME' => 'Mungon emri i përshtatur të hartave',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Importimi i përdoruesve është joaktiv për modalitetin IDM.',
     'ERR_SELECT_FULL_NAME' => 'Nuk mund të selektoni Emër të plotë kur emri dhe mbiemri janë selektuar.',
     'ERR_SELECT_FILE' => 'Zgjidh skedar për ta ngarkua.',
     'LBL_SELECT_FILE' => 'Zgjidh skedar:',

@@ -43,6 +43,12 @@ $viewdefs['base']['view']['audit'] = array(
                     'sortable' => true,
                     ),
                 array(
+                    'type' => 'source',
+                    'name' => 'source',
+                    'label' => 'LBL_SOURCE_FIELD',
+                    'sortable' => false,
+                ),
+                array(
                     'type' => 'datetimecombo',
                     'name' => 'date_created',
                     'label' => 'LBL_LIST_DATE',

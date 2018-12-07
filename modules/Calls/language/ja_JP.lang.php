@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => '電話リストのダッシュ ボード',
+    'LBL_CALLS_RECORD_DASHBOARD' => '電話レコードのダッシュ ボード',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => '電話',
     'LBL_MODULE_NAME_SINGULAR'	=> '電話',
@@ -32,7 +36,7 @@ $mod_strings = array (
     'LBL_DESCRIPTION_INFORMATION' => '詳細情報',
     'LBL_DESCRIPTION' => '詳細:',
     'LBL_STATUS' => 'ステータス:',
-    'LBL_DIRECTION' => '方向:',
+    'LBL_DIRECTION' => '受信/送信',
     'LBL_DATE' => '開始日:',
     'LBL_DURATION' => '時間:',
     'LBL_DURATION_HOURS' => '時間:',
@@ -46,7 +50,7 @@ $mod_strings = array (
     'LBL_COLON' => ':',
     'LNK_NEW_CALL' => '電話作成',
     'LNK_NEW_MEETING' => '会議作成',
-    'LNK_CALL_LIST' => '電話一覧',
+    'LNK_CALL_LIST' => '発着信履歴',
     'LNK_IMPORT_CALLS' => '電話のインポ－ト',
     'ERR_DELETE_RECORD' => '取引先を削除するにはレコード番号を指定する必要があります。',
     'NTC_REMOVE_INVITEE' => '本当にこの参加者を電話からはずしてよいですか？',

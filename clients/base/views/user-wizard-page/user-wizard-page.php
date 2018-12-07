@@ -35,6 +35,9 @@ $viewdefs['base']['view']['user-wizard-page'] = array(
                     'type' => 'email-text',
                     'label' => "LBL_WIZ_EMAIL",
                     'required' => true,
+                    // disable this field only for user wizard view
+                    // because email field is complex and has personal save/update server behavior
+                    'idm_mode_disabled' => true,
                 ),
                 array(
                     'name' => 'phone_work',

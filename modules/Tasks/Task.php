@@ -87,84 +87,18 @@ class Task extends SugarBean {
 	function fill_in_additional_detail_fields()
 	{
         parent::fill_in_additional_detail_fields();
-		global $app_strings;
 
 		if (isset($this->contact_id)) {
-
 			$contact = BeanFactory::getBean('Contacts', $this->contact_id);
 
 			if($contact->id != "") {
-				$this->contact_name = $contact->full_name;
-				$this->contact_name_owner = $contact->assigned_user_id;
-				$this->contact_name_mod = 'Contacts';
-				$this->contact_phone = $contact->phone_work;
 				$this->contact_email = $contact->emailAddress->getPrimaryAddress($contact);
 			} else {
-				$this->contact_name_mod = '';
-				$this->contact_name_owner = '';
-				$this->contact_name='';
 				$this->contact_email = '';
 				$this->contact_id='';
 			}
-
-		}
-
-		$this->fill_in_additional_parent_fields();
-	}
-
-	function fill_in_additional_parent_fields()
-	{
-
-		$this->parent_name = '';
-		global $app_strings, $locale;
-
-		$parent = BeanFactory::newBean($this->parent_type);
-		if ( empty($parent))
-		{
-			return;
-		}
-
-		if (is_subclass_of($parent, 'Person')) {
-			$query = "SELECT first_name, last_name, assigned_user_id parent_name_owner from $parent->table_name where id = '$this->parent_id'";
-		}
-		else if (is_subclass_of($parent, 'File') || $parent->module_dir == 'Documents') {
-			$query = "SELECT document_name, assigned_user_id parent_name_owner from $parent->table_name where id = '$this->parent_id'";
-		}
-		else {
-
-			$query = "SELECT name ";
-			if(isset($parent->field_defs['assigned_user_id'])){
-				$query .= " , assigned_user_id parent_name_owner ";
-			}else{
-				$query .= " , created_by parent_name_owner ";
-			}
-			$query .= " from $parent->table_name where id = '$this->parent_id'";
-		}
-		$result = $this->db->query($query,true," Error filling in additional detail fields: ");
-
-		// Get the id and the name.
-		$row = $this->db->fetchByAssoc($result);
-
-		if ($row && !empty($row['parent_name_owner'])){
-			$this->parent_name_owner = $row['parent_name_owner'];
-			$this->parent_name_mod = $this->parent_type;
-		}
-		if (is_subclass_of($parent, 'Person') and $row != null)
-		{
-            $this->parent_name = $locale->formatName($this->parent_type, $row);
-		}
-		else if ((is_subclass_of($parent, 'File') || $parent->module_dir == 'Documents') && $row != null) {
-			$this->parent_name = $row['document_name'];
-		}
-		elseif($row != null)
-		{
-			$this->parent_name = stripslashes($row['name']);
-		}
-		else {
-			$this->parent_name = '';
 		}
 	}
-
 
     protected function formatStartAndDueDates(&$task_fields, $dbtime, $override_date_for_subpanel)
     {

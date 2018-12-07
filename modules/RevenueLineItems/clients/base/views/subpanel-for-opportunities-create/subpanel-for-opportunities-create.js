@@ -19,21 +19,27 @@
     extendsFrom: 'SubpanelListCreateView',
 
     /**
-     * @inheritdoc
-     *
      * Overriding to add the commit_stage field to the bean
      *
-     * @override
+     * @inheritdoc
      */
-    _addCustomFieldsToBean: function(bean) {
+    _addCustomFieldsToBean: function(bean, skipCurrency) {
+        var dom;
+        var attrs;
+        var userCurrencyId;
+
         if (bean.has('sales_stage')) {
-            var dom = app.lang.getAppListStrings('sales_probability_dom'),
-                userCurrencyId = app.user.getPreference('currency_id') || app.currency.getBaseCurrencyId(),
-                attrs = {
-                    probability: dom[bean.get('sales_stage')],
-                    currency_id: userCurrencyId,
-                    base_rate: app.metadata.getCurrency(userCurrencyId).conversion_rate
-                };
+            dom = app.lang.getAppListStrings('sales_probability_dom');
+            attrs = {
+                probability: dom[bean.get('sales_stage')]
+            };
+
+            if (!skipCurrency) {
+                userCurrencyId = app.user.getPreference('currency_id') || app.currency.getBaseCurrencyId();
+                attrs.currency_id = userCurrencyId;
+                attrs.base_rate = app.metadata.getCurrency(userCurrencyId).conversion_rate;
+            }
+
             // we need to set the defaults
             bean.setDefault(attrs);
             // just to make sure that any attributes that were already set, are set again.

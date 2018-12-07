@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'Létrehozás dátuma',
     'LBL_DATE_MODIFIED' => 'Módosítás dátuma',
     'LBL_DELETED' => 'Törlés',
+    'LBL_MODULE_NAME' => 'E-mail címek',
+    'LBL_MODULE_NAME_SINGULAR' => 'E-mail cím',
 );

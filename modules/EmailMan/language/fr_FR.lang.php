@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'cliquez ici',
 	'TXT_REMOVE_ME'								=> 'Si vous ne souhaitez plus recevoir d&#39;email de notre par ',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'L&#39;expéditeur des notifications est l&#39;utilisateur qui assigne',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Exclusion de nouvelles adresses email par défaut',
 
 	'LBL_SECURITY_TITLE'						=> 'Sécurité',
 	'LBL_SECURITY_DESC'							=> 'Les tags sélectionnés dans la liste ci-dessous ne seront PAS acceptés ni affichés dans les Emails entrants ou dans le module "Emails".',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Sélectionnez le serveur SMTP pour tous les Utilisateurs :',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Quand cette option est activée, tous les utilisateurs utilisent le même serveur SMTP<br>pour les notifications et les alertes par email. Sinon chaque utilisateur peut<br>définir et choisir son propre serveur SMTP.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Si activé, le nom de l utilisateur assigné ainsi que son email seront utilisés pour le champ "From" de l email. Cela ne peut fonctionner que si le serveur SMTP utilisé autorise la surcharge de cette information, pas gmail par exemple.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Lorsqu&#39;une nouvelle adresse email est ajoutée, elle sera automatiquement exclue. Des emails de campagne ne peuvent pas être livrés à des adresses exclues. Le changement de ce paramètre n&#39;affectera pas les adresses emails déjà existantes.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Echanger' /*for 508 compliance fix*/,

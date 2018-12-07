@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Informačný panel so zoznamom kontaktov',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Informačný panel so záznamom kontaktov',
+
     'LNK_CONTACT_REPORTS' => 'Zobraziť hlásenia kontaktov',
     'ERR_DELETE_RECORD' => 'Ak chcete odstrániť kontakt, musíte zadať číslo záznamu.',
     'LBL_ACCOUNT_ID' => 'ID účtu:',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopírovať alternatívnu adresu do primárnej',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopírovať primárnu adresu do alternatívnej',
     'NTC_DELETE_CONFIRMATION' => 'Naozaj chcete vymazať tento záznam?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Vytvorenie príležitosti vyžaduje účet.\n Buď vytvorte nový účet alebo vyberte existujúci.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Vytvorenie príležitosti vyžaduje účet.\\n Buď vytvorte nový účet alebo vyberte existujúci.',
     'NTC_REMOVE_CONFIRMATION' => 'Naozaj chcete odstrániť tento kontakt z prípadu?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Naozaj chcete odstrániť tento záznam zo zoznamu priamych podriadených?',
 
@@ -273,4 +277,6 @@ Ak chcete vytvoriť modul {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Hodnotenie záujemcu',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Hlásenia kontaktov',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Odsúhlasené podnikateľské účely',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Posledná aktualizácia súhlasu',
 );

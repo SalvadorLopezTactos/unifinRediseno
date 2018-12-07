@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobil Plus sunucusu',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Her sayfa için alt panel öğeleri',
 	'LOG_MEMORY_USAGE'=>'Hafıza kullanımını kaydet',
-	'LOG_SLOW_QUERIES'=>'Yavaş sorguları kaydet',
+    'LOG_SLOW_QUERIES' => 'Yavaş sorguları kaydet',
     'LOCK_HOMEPAGE_HELP'=>'Bu ayarlar <br>1)yeni ana sayfalarını ve Ana sayfa modülündeki dashlet&#39;leri,<br>2)ana sayfadaki dashlet yerleşimini sürükle bırak yöntemiyle özelleştirmeyi engellemek içindir.',
     'CURRENT_LOGO'=>'Mevcut Logo:',
     'CURRENT_LOGO_HELP'=>'Bu logo Sugar uygulamasının en üst sol köşesinde görünür.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Tarayıcınızın başlık çubuğunda görünen isim budur.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'İlişkili (veya bağlantılı) kontakların e-postalarını altpanelde görmek için Aktif Ediniz/Kapatınız.',
 
-    'LBL_OC_STATUS'                     => 'Çevrimdışı İstemci Durumu',
-    'DEFAULT_OC_STATUS'                 => 'Çevrimdışı İstemcisini varsayılan olarak etkinleştir',
-    'LBL_OC_STATUS_DESC' => 'Herhangi bir kullanıcının Çevrimdışı İstemciye erişim sahibi olması için buraya tıklayınız. Ya da bu değişikliği kullanıcı seviyesinde gerçekleştirebilirsiniz.',
     'SESSION_TIMEOUT' => 'Portal Oturum Zaman Aşımı',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Portal Oturum Zaman Aşımı (Portal Session Timeout), 6.5 versiyonunda yer alan Sugar Portal ve daha eskiler içindir.',
     'UPLOAD_MAXSIZE_UNITS' => 'byte',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML bağlantı URL boş olamaz',
     'ERR_EMPTY_SAML_CERT' => 'SAML sertifika boş olamaz',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML Şirket Kimliği boş bırakılamaz',
     'ERR_SAML_LOGIN_URL' => 'SAML Bağlantı URL geçerli değil',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL geçerli değil',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM dosyası, özel anahtarı içermelidir',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM dosyası x.509 sertifikasını içermelidir',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Sağlanan x.509 sertifikası özel anahtarla eşleşmiyor',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Aktivite Akışları',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Aktivite Akışlarını Etkinleştir',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Uygulama için Aktivite Akışlarını açar',
 );
 
 

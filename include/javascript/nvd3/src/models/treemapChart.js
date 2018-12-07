@@ -1,5 +1,6 @@
 
 nv.models.treemapChart = function() {
+  if (SUGAR.App) SUGAR.App.logger.warn('The nvd3 chart library is deprecated. Use sucrose chart library.');
 
   //============================================================
   // Public Variables with Default Settings

@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Seleccionar' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Borrar' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Tipo',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Plantillas para Correo Electrónico',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Plantillas de Correo Electrónico',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Variables',
 );

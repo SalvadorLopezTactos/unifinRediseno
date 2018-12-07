@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> 'Tämä query pinotaan ensimmäisen queryn alle raportissa',
     'ERR_DB_VERSION_FAILURE'			=> 'Ei voida tarkistaa tietokannan versiota.',
 
-
-	'ERR_OC_PASSWORD'					=> 'Salasana vaaditaan.',
-	'ERR_OC_SERVER_URL'					=> 'Sugar-palvelimen URL vaaditaan.',
-	'ERR_OC_USERNAME'					=> 'Palvelinkäyttäjän käyttäjänimi vaaditaan.',
-	'LBL_INSTALL_OC'					=> 'Asenna offline client',
-    'LBL_OC_ADMIN'                      => 'Ota yhteyttä järjestelmänvalvojaasi ongelman ratkeamiseksi.',
-    'LBL_OC_SUCCESS'                    => 'Offline clientin asennus on päättynyt. Klikkaa alla olevaa painiketta palataksesi asennukseesi.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'Admin-käyttäjänimi',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'Syötä alla pyydetyt tiedot asentaaksesi ja konfiguroidaksesi offline client.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'Sugar-palvelimen URL',
-	'LBL_OC_INSTALL_PASS'				=> 'Palvelinkäyttäjän salasana',
-	'LBL_OC_INSTALL_TITLE'				=> 'Offline clientin asennus',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'Tämä on käyttäjänimi jolla yhdistät Sugar-palvelimeen.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'Käyttäjätunnus',
-	'LBL_PERFORM_OC_INSTALL'			=> 'Alustetaan offline client -asennus',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'Syötä alla pyydetyt tiedot asentaaksesi ja konfiguroidaksesi offline client.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Anna käyttäjätunnus Sugarin järjestelmänvalvojakäyttäjälle.',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Anna salasana Sugarin järjestelmänvalvojakäyttäjälle.',
@@ -76,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Havaittiin virheitä yhteensopivuustarkistuksen aikana. Jotta SugarCRM-asennus toimisi kunnolla, suorita tarvittavat toimet korjataksesi alla listatut ongelmat ja paina <i>Tarkista uudelleen</i>-painiketta, tai yritä asennusta uudelleen.',
     'ERR_CHECKSYS_CALL_TIME'            => '<code>Allow Call Time Pass Reference</code> on <code>On</code> (tämä piäisi asettaa <code>Off</code>:iksi <code>php.ini</code>-tiedostossa)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Ei löydy: Sugar Scheduler toimii rajallisilla toiminnoilla. Sähköpostien arkistointipalvelu ei toimi.',
+	'ERR_CHECKSYS_CURL'					=> 'Ei löydy: Sugarin aikatauluttaja toimii rajoitetuin toiminnoin. Sähköpostien arkistointipalvelu ei toimi.',
     'ERR_CHECKSYS_IMAP'					=> 'Ei löydetty: InboundEmail ja kampanjat (Sähköposti) vaativat IMAP kirjastot. Kumpikaan ei toimi.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC ei voi olla ‘On’ kun käytetään MS SQL Serveriä.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Varoitus:',
@@ -92,7 +75,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Jotta saisit optimaalisen kokemuksen käyttäessäsi IIS/FastCGI sapi:a, aseta <code>fastcgi.logging</code> arvoon <code>0</code> <code>php.ini</code>-tiedostossa.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Tukematon PHP versio asennettuna: (versio&nbsp;',
     'LBL_DB_UNAVAILABLE'                => 'Tietokanta ei ole käytettävissä',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Tietokantaa ei löydy. Varmista, että sinulla on jonkin seuraavan tuetun tietokannan tarvittavat ohjaimet: MySQL, MS SQLServer, Oracle tai DB2. Tarvittaessa poista laajennuksen kommentointi tiedostosta php.ini tai käännä uudelleen PHP-versiotasi vastaavalla oikealla binaaritiedostolla. Katso lisätietoa tietokantatuen käyttöönotosta PHP-oppaastasi.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Tietokantatukea ei löytynyt. Varmista, että sinulla on tarvittavat ajurit jollekin seuraavista tuetuista tietokantatyypeistä: MySQL, MS SQLServer, Oracle tai DB2. Joudut mahdollisesti poistamaan kommenttimerkinnän PHP.ini-tiedoston laajennuksesta tai kääntää uudelleen oikealla binääritiedostolla riippuen käyttämästäsi PHP-versiosta. Katso PHP-oppaasta lisätietoja tietokantatuen käyttöönotosta.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'XML-jäsenninkirjastoja käyttäviä Sugarin tarvitsemia funktioita ei löydetty. Sinun pitää ehkä poistaa kommenttimerkintä lisäosan edestä <code>php.ini</code>-tiedostossa, tai kääntää uudelleen oikealla binääritiedostolla, PHP-versiostasi riippuen. Katso lisätietoja PHP-manuaalista.',
     'LBL_CHECKSYS_CSPRNG' => 'Satunnaislukugeneraattori',
     'ERR_CHECKSYS_MBSTRING'             => 'Multibyte Strings PHP -lisäosaan (<code>mbstring</code>) liittyviä Sugarin tarvitsemia funktioita ei löydetty.<br /><br />Usein mbstring-moduuli ei ole käytössä oletuksena ja pitää aktivoida --enable-mbstring -komennolla kun PHPn binääritiedostoa käännetään. Katso PHP-manuaalista lisätietoja miten mbstring-tuki saadaan käyttöön.',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'Lataa tiedosto koko',
 	'ERR_URL_BLANK'						=> 'Tarjota Sugar-instanssin perus-URL.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'Ei löydetty tämän asennuslokia:',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'Ladattu tiedosto ei ole yhteensopiva tämän Sugarin version (Community Edition, Professional tai Enterprise) kanssa:',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'Ladattu tiedosto ei ole yhteensopiva tämän Sugar-version kanssa (Professional-, Enterprise- tai Ultimate-versio): ',
 	'ERROR_LICENSE_EXPIRED'				=> "Virhe: lisenssisi umpeutui",
 	'ERROR_LICENSE_EXPIRED2'			=> "päivää sitten. Mene <a href='index.php?action=LicenseSettings&module=Administration'>lisenssinhallintasivulle</a> (järjestelmänhallinnan kautta) syöttääksesi uuden lisenssiavaimen. Jos et syötä uutta lisenssiavainta 30 päivän sisällä lisenssiavaimesi umpeutumisesta, et pääse enää kirjautumaan tähän sovellukseen.",
 	'ERROR_MANIFEST_TYPE'				=> 'Manifestitiedoston tulee määrittää pakkaustyyppi.',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'Erääntymispäivä',
 	'LBL_LICENSE_I_ACCEPT'				=> 'Hyväksyn',
 	'LBL_LICENSE_NUM_USERS'				=> 'Käyttäjien määrä',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'Anna ostettujen offline-asiakkaiden määrä.',
-	'LBL_LICENSE_OC_NUM'				=> 'Offline-asiakaslisenssien määrä',
-	'LBL_LICENSE_OC'					=> 'Offline-asiakaslisenssit',
 	'LBL_LICENSE_PRINTABLE'				=> 'Tulostettava näkymä',
     'LBL_PRINT_SUMM'                    => 'Tulosta Yhteenveto',
 	'LBL_LICENSE_TITLE_2'				=> 'SugarCRM lisenssi',
@@ -496,10 +476,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'Lajitteluasetukset',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Tarjoa järjestelmänimi Sugar-instanssille.',
 	'LBL_PATCH_UPLOAD' => 'Valitse korjaustiedosto paikalliselta koneelta',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'PHP-versio 5 tai uudempi vaaditaan.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(Nykyinen PHP-versiosi on',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP taaksepäin-yhteensopivuustila on päällä. Aseta <code>zend.ze1_compatibility_mode</code> arvoon <code>Off</code>, jotta voit jatkaa',
 
     'advanced_password_new_account_email' => array(
@@ -519,5 +495,3 @@ $mod_strings = array(
         'name' => 'Määrittele nimi',
         ),
 );
-
-?>

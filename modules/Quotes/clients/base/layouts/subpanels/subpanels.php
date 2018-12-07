@@ -55,5 +55,12 @@ $viewdefs['Quotes']['base']['layout']['subpanels'] = array(
                 'link' => 'documents',
             ),
         ),
+        array(
+            'layout' => 'subpanel',
+            'label' => 'LBL_CONTRACTS_SUBPANEL_TITLE',
+            'context' => array(
+                'link' => 'contracts',
+            ),
+        ),
     ),
 );

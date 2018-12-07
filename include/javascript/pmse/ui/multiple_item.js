@@ -8,8 +8,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 var MultipleItemField = function (settings, parent) {
-	Field.call(this, settings, parent);
+	PMSE.Field.call(this, settings, parent);
 	this._panel = null;
 	this._fieldHeight = null;
 	this._onValueAction = null;
@@ -19,7 +21,7 @@ var MultipleItemField = function (settings, parent) {
 	MultipleItemField.prototype.init.call(this, settings);
 };
 
-MultipleItemField.prototype = new Field();
+MultipleItemField.prototype = new PMSE.Field();
 MultipleItemField.prototype.constructor = MultipleItemField;
 MultipleItemField.prototype.type = "MultipleItemField";
 
@@ -272,7 +274,7 @@ MultipleItemField.prototype._createItemContainer = function (settings) {
 MultipleItemField.prototype.createHTML = function () {
 	var fieldLabel, required = '', readAtt, that = this, divControlObjectContainer;
 	if (!this.html) {
-	    Field.prototype.createHTML.call(this);
+	    PMSE.Field.prototype.createHTML.call(this);
 
 	    if (this.required) {
 	        required = '<i>*</i> ';

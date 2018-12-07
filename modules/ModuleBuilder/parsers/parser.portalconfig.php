@@ -52,7 +52,8 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
      */
     protected function refreshCache()
     {
-        MetaDataManager::refreshCache(array('base', 'portal'));
+        MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_SERVERINFO), ['base']);
+        MetaDataManager::refreshCache(array('portal'));
     }
 
     /**
@@ -66,6 +67,7 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
         );
         $this->savePortalSettings($portalConfig);
         $this->removeOAuthForPortalUser();
+        MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_SERVERINFO), ['base']);
     }
 
     /**
@@ -150,8 +152,9 @@ class ParserModifyPortalConfig extends ModuleBuilderParser
             }
             // TODO: category should be `support`, platform should be `portal`
             $admin = $this->getAdministrationBean();
-            if (!$admin->saveSetting('portal', $fieldKey, $fieldValue, 'support')) {
-                $GLOBALS['log']->fatal("Error saving portal config var $fieldKey, orig: $fieldValue , json:".json_encode($fieldValue));
+            if ($admin->saveSetting('portal', $fieldKey, $fieldValue, 'support') === false) {
+                $GLOBALS['log']->fatal("Error saving portal config var $fieldKey, orig: "
+                    . print_r($fieldValue, true) . " , json:".json_encode($fieldValue));
             }
         }
 

@@ -142,23 +142,23 @@ $mod_strings = array (
 $mod_list_strings = array(
 	'dom_cal_weekdays'=>
 		array(
-			"Sun",
-			"Mon",
-			"Tue",
-			"Wed",
-			"Thu",
-			"Fri",
-			"Sat",
+			"Ne",
+			"Po",
+			"Út",
+			"St",
+			"Čt",
+			"Pá",
+			"So",
 		),
 	'dom_cal_weekdays_long'=>
 		array(
-			"Sunday",
-			"Monday",
-			"Tuesday",
-			"Wednesday",
-			"Thursday",
-			"Friday",
-			"Saturday",
+			"Neděle",
+			"Pondělí",
+			"Úterý",
+			"Středa",
+			"Čtvrtek",
+			"Pátek",
+			"Sobota",
 		),
 	'dom_cal_month'=>
 		array(

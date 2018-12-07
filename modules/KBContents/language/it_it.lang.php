@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Dashboard elenco Knowledge Base',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Dashboard record Knowledge Base',
+
     'LBL_MODULE_NAME' => 'Knowledge Base',
     'LBL_MODULE_NAME_SINGULAR' => 'Articolo Knowledge Base',
     'LBL_MODULE_TITLE' => 'Articolo Knowledge Base',

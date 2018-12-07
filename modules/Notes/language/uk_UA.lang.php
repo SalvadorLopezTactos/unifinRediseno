@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Інформаційна панель списку приміток',
+
     'ERR_DELETE_RECORD' => 'Необхідно вказати номер запису перед видаленням.',
     'LBL_ACCOUNT_ID' => 'Контрагент (ID):',
     'LBL_CASE_ID' => 'Звернення (ID):',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Опис',
     'LBL_EMAIL_ADDRESS' => 'Адреса Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Вкладення Email-повідомлення',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Вкладення електронної пошти для',
     'LBL_FILE_MIME_TYPE' => 'Тип Mime',
+    'LBL_FILE_EXTENSION' => 'Розширення файлу',
+    'LBL_FILE_SOURCE' => 'Джерело файлу',
+    'LBL_FILE_SIZE' => 'Розмір файлу',
     'LBL_FILE_URL' => 'URL файлу',
     'LBL_FILENAME' => 'Вкладення:',
     'LBL_LEAD_ID' => 'Інтерес (ID):',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Угода (ID):',
     'LBL_PARENT_ID' => 'ID батьківського запису:',
     'LBL_PARENT_TYPE' => 'Тип батьківського запису',
+    'LBL_EMAIL_TYPE' => 'Тип електронної пошти',
+    'LBL_EMAIL_ID' => 'Ідентифікатор електронної пошти',
     'LBL_PHONE' => 'Телефон:',
     'LBL_PORTAL_FLAG' => 'Відображати на порталі?',
     'LBL_EMBED_FLAG' => 'Вставити в email?',

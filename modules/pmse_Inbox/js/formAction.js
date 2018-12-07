@@ -20,6 +20,9 @@ else{
     App = parent.SUGAR.App;
 }
 
+// Get the global PMSE classes variable.
+var PMSE = PMSE || {};
+
 var confirmAdhocReassign = function()
 {
     $.ajax({
@@ -305,7 +308,7 @@ var showModalWindow = function (casId, casIndex, wtype, flowId, pmseInboxId,task
         uid : '',
         callback: null
     });
-    f = new Form({
+    f = new PMSE.Form({
         items: items,
         closeContainerOnSubmit: true,
         buttons: [
@@ -384,7 +387,7 @@ var showModalWindow = function (casId, casIndex, wtype, flowId, pmseInboxId,task
             }
         }
     });
-    w = new Window({
+    w = new PMSE.Window({
         width: wWidth,
         height: wHeight,
         modal: true,

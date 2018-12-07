@@ -74,6 +74,17 @@ class PhpSerializedValidator extends ConstraintValidator
             return;
         }
 
+        // detect any references
+        preg_match('/r:[^:]*\d+;/i', $value, $matches);
+        if (count($matches)) {
+            $this->context->buildViolation($constraint->message)
+                ->setParameter('%msg%', 'reference(s) not allowed')
+                ->setInvalidValue($value)
+                ->setCode(PhpSerialized::ERROR_REFERENCE_NOT_ALLOWED)
+                ->addViolation();
+            return;
+        }
+
         // validate unserialize operation
         $unserialized = @unserialize($value);
         if ($unserialized === false && $value !== 'b:0;') {

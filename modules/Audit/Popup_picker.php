@@ -64,7 +64,7 @@ EOHTML;
 		$params = array();
 		$params[] = translate('LBL_MODULE_NAME', $focus->module_dir);
 		$params[] = $focus->get_summary_text();
-		$params[] = translate('LBL_CHANGE_LOG', 'Audit');
+        $params[] = translate('LBL_CHANGE_LOG', 'Audit');
 		echo str_replace('</div>',"<span class='utils'>$titleExtra</span></div>",getClassicModuleTitle($focus->module_dir, $params, false));
 
 		$oddRow = true;

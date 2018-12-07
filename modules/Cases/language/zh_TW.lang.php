@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => '案件清單儀表板',
+    'LBL_CASES_RECORD_DASHBOARD' => '案件紀錄儀表板',
+
 	'ERR_DELETE_RECORD'					=> '您必須指定記錄編號才能刪除「帳戶」。',
 	'LBL_ACCOUNT_ID'					=> '帳戶 ID',
 	'LBL_ACCOUNT_NAME'					=> '帳戶名稱：',
@@ -31,7 +35,7 @@ $mod_strings = array (
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> '歷史',
 	'LBL_INVITEE'						=> '連絡人',
 	'LBL_MEMBER_OF'						=> '帳戶',
-    'LBL_MODULE_NAME'					=> '實例',
+    'LBL_MODULE_NAME'					=> '案件',
     'LBL_MODULE_NAME_SINGULAR'			=> '實例',
 	'LBL_MODULE_TITLE'					=> '實例：首頁',
 	'LBL_NEW_FORM_TITLE'				=> '新實例',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> '狀態：',
     'LBL_SOURCE' => '來源：',
 	'LBL_SUBJECT'						=> '主題：',
-	'LBL_SYSTEM_ID'						=> '系統 ID',
 	'LBL_LIST_ACCOUNT_NAME'				=> '帳戶名稱',
 	'LBL_LIST_ASSIGNED'					=> '指派至',
 	'LBL_LIST_CLOSE'					=> '關閉',
@@ -54,11 +57,11 @@ $mod_strings = array (
 	'LBL_LIST_NUMBER'					=> '數字',
 	'LBL_LIST_PRIORITY'					=> '優先順序',
 	'LBL_LIST_STATUS'					=> '狀態',
-	'LBL_LIST_SUBJECT'					=> '主題',
+	'LBL_LIST_SUBJECT'					=> '主旨',
 	'LBL_LIST_ASSIGNED_TO_NAME'   		=> '指派的使用者',
 	'LBL_SHOW_MORE'				        => '顯示更多實例',
-	'LNK_CASE_LIST'						=> '檢視實例',
-    'LNK_NEW_CASE'						=> '建立實例',
+	'LNK_CASE_LIST'						=> '檢視案件',
+    'LNK_NEW_CASE'						=> '建立案件',
     'LBL_CASE_FROM_TWITTER_TITLE'		=> '推文',
     'LNK_CREATE'                        => '建立實例',
     'LNK_CREATE_WHEN_EMPTY'             => '馬上建立「實例」。',
@@ -68,8 +71,8 @@ $mod_strings = array (
 	'LBL_ASSIGNED_TO_NAME' => '已指派至',
 	'LBL_TYPE' => '類型',
 	'LBL_WORK_LOG' => '工作記錄',
-	'LNK_IMPORT_CASES' => '匯入實例',
-	'LNK_CASE_REPORTS' => '檢視實例報表',
+	'LNK_IMPORT_CASES' => '匯入案件',
+	'LNK_CASE_REPORTS' => '檢視案件報表',
 	'LBL_SHOW_IN_PORTAL' => '在「入口網站」中顯示',
 	'LBL_CREATE_KB_DOCUMENT' => '建立文章',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => '知識庫',

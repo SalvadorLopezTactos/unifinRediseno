@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'แดชบอร์ดรายการประชุม',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกการประชุม',
+
 	'ERR_DELETE_RECORD' => 'ต้องระบุเลขที่ระเบียนเพื่อลบการประชุม',
 	'LBL_ACCEPT_THIS'=>'ยอมรับหรือไม่',
 	'LBL_ADD_BUTTON'=> 'เพิ่ม',

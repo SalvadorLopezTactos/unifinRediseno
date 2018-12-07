@@ -14,17 +14,27 @@
     /**
      * @inheritdoc
      */
-    initialize: function(options){
-        this._super("initialize", [options]);
+    initialize: function(options) {
+        var userACLs;
 
-        if (this.parentModule == "Accounts") {
+        this._super('initialize', [options]);
+
+        if (this.parentModule === 'Accounts') {
             this.context.parent.on('editablelist:save', this._reloadOpportunities, this);
-            this.meta.buttons = _.filter(this.meta.buttons, function(item){
-                if (item.type != "actiondropdown") {
-                    return true;
-                }
-                return false;
+            this.meta.buttons = _.filter(this.meta.buttons, function(item) {
+                return item.type !== 'actiondropdown';
             });
+        }
+
+        userACLs = app.user.getAcls();
+
+        if (!(_.has(userACLs.Opportunities, 'edit') ||
+                _.has(userACLs.RevenueLineItems, 'access') ||
+                _.has(userACLs.RevenueLineItems, 'edit'))) {
+            // need to trigger on app.controller.context because of contexts changing between
+            // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
+            // app.controller.context is the only consistent context to use
+            app.controller.context.on('productCatalogDashlet:add', this.openRLICreate, this);
         }
     },
 
@@ -68,6 +78,81 @@
         // close RLI warning alert
         app.alert.dismiss('opp-rli-create');
 
-        this._super("createRelatedClicked", [event]);
+        this._super('createRelatedClicked', [event]);
+    },
+
+    /**
+     * Open a new Drawer with the RLI Create Form
+     */
+    openRLICreate: function(data) {
+        var routerFrags = app.router.getFragment().split('/');
+        var parentModel;
+        var model;
+
+        if (routerFrags[1] === 'create') {
+            // if panel-top has been initialized on a record, but we're currently in create, ignore the event
+            return;
+        }
+
+        parentModel = this.context.parent.get('model');
+        model = this.createLinkModel(parentModel, 'revenuelineitems');
+
+        data.likely_case = data.discount_price;
+        data.best_case = data.discount_price;
+        data.worst_case = data.discount_price;
+        data.assigned_user_id = app.user.get('id');
+        data.assigned_user_name = app.user.get('name');
+
+        model.set(data);
+        model.ignoreUserPrefCurrency = true;
+
+        app.drawer.open({
+            layout: 'create',
+            context: {
+                create: true,
+                module: 'RevenueLineItems',
+                model: model
+            }
+        }, _.bind(this.rliCreateClose, this));
+    },
+
+    /**
+     * Callback for when the create drawer closes
+     *
+     * @param {Data.Bean} model
+     */
+    rliCreateClose: function(model) {
+        var rliCtx;
+        var ctx;
+
+        if (!model) {
+            return;
+        }
+
+        ctx = this.context;
+        ctx.resetLoadFlag();
+        ctx.set('skipFetch', false);
+        ctx.loadData();
+
+        // find the child collection for the RLI subpanel
+        // if we find one and it has the loadData method, call that method to
+        // force the subpanel to load the data.
+        rliCtx = _.find(ctx.children, function(child) {
+            return child.get('module') === 'RevenueLineItems';
+        }, this);
+        if (!_.isUndefined(rliCtx) && _.isFunction(rliCtx.loadData)) {
+            rliCtx.loadData();
+        }
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _dispose: function() {
+        if (app.controller && app.controller.context) {
+            app.controller.context.off('productCatalogDashlet:add', null, this);
+        }
+
+        this._super('_dispose');
     }
 })

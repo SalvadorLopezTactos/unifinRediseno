@@ -104,7 +104,6 @@
 
     /**
      * @inheritdoc
-     * @override
      */
     _updateTitleValues: function() {
         var forecastRanges = this.model.get('forecast_ranges'),
@@ -141,7 +140,6 @@
 
     /**
      * @inheritdoc
-     * @override
      */
     _updateTitleTemplateVars: function() {
         this.titleTemplateVars = {
@@ -257,7 +255,7 @@
                     context: this.context,
                     module: this.module,
                     model: model,
-                    meta: app.metadata.getField('range')
+                    meta: app.metadata.getField({name: 'range', module: this.module})
                 };
 
                 rangeField = app.view.createField(fieldSettings);
@@ -417,7 +415,7 @@
             context: this.context,
             module: this.module,
             model: model,
-            meta: app.metadata.getField('range')
+            meta: app.metadata.getField({name: 'range', module: this.module})
         };
         // set up real range name
         fieldSettings.def.name = key;

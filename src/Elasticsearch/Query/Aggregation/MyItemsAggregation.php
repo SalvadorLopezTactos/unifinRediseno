@@ -25,7 +25,7 @@ class MyItemsAggregation extends FilterAggregation
      */
     protected function getAggFilter($field)
     {
-        $termFilter = new \Elastica\Filter\Terms();
+        $termFilter = new \Elastica\Query\Terms();
         $termFilter->setTerms($field, array($this->user->id));
         return $termFilter;
     }

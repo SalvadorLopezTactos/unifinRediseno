@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Um número de registo necessita ser especificado para eliminar o Transportador.',
   'NTC_STATUS' => 'Definir o Estado como Inativo para remover este Transportador da lista de entradas possíveis para o campo Transportadores',
   'NTC_LIST_ORDER' => 'Definir a ordem pela qual esta Transportador aparece na lista de entradas possíveis do campo Transportadores',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Ativo',
-    'Inactive' => 'Inativo',
-),
-	'LBL_EDITLAYOUT' => 'Editar Layout' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Editar Layout' /*for 508 compliance fix*/,
 );
-
 
 ?>

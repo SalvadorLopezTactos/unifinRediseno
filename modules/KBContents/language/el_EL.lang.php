@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Γνωσιακής Βάσης',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Γνωσιακής Βάσης',
+
     'LBL_MODULE_NAME' => 'Βάση Γνώσεων',
     'LBL_MODULE_NAME_SINGULAR' => 'Άρθρο Βάσης Γνώσεων',
     'LBL_MODULE_TITLE' => 'Άρθρο Βάσης Γνώσεων',

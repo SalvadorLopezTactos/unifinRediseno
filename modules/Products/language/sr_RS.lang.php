@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Kontrolna tabla liste ponuđenih stavki',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Proizvod kampanje',
     'LBL_MODULE_NAME' => 'Proizvodi',
     'LBL_MODULE_NAME_SINGULAR' => 'Proizvod',
@@ -172,4 +175,5 @@ Da bi {{module_name}} bio kreiran:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Spisak podataka o ponudama sa ponuđenim stavkama',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (nova ponuđena stavka)',
     'LBL_DISCOUNT_PERCENT' => '% Procenat',
+    'LBL_DISCOUNT_TYPE' => 'Vrsta popusta',
 );

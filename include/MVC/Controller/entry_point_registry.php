@@ -30,7 +30,6 @@ $entry_point_registry = array(
     'get_url' => array('file' => 'get_url.php', 'auth' => true),
 	'HandleAjaxCall' => array('file' => 'HandleAjaxCall.php', 'auth' => true),
 	'TreeData' => array('file' => 'TreeData.php', 'auth' => true),
-	'oc_convert' => array('file' => 'oc_convert.php', 'auth' => false),
     'image' => array('file' => 'modules/Campaigns/image.php', 'auth' => false),
     'campaign_trackerv2' => array('file' => 'modules/Campaigns/Tracker.php', 'auth' => false),
     'WebToLeadCapture' => array('file' => 'modules/Campaigns/WebToLeadCapture.php', 'auth' => false),
@@ -50,4 +49,3 @@ $entry_point_registry = array(
     'tinymce_spellchecker_rpc' => array('file' => 'include/javascript/tiny_mce/plugins/spellchecker/rpc.php', 'auth' => true),
     'jslang'=>  array('file' => 'include/language/getJSLanguage.php', 'auth' => true),
 );
-?>

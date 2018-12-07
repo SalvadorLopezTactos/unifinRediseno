@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Tableau de bord de prévisions',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Prévisions',
     'LBL_MODULE_NAME_SINGULAR' => 'Prévision',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'Produit (ID) :',
     'LBL_QUOTA_ID' => 'ID Objectif',
     'LBL_VERSION' => 'Version',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Cacher la légende de barre',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Afficher la légende de barre',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Cacher la légende de ligne',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Afficher la légende de ligne',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Erreur : Cet utilisateur {0} doit avoir un accès manager pour demander des prévisions pour {1}',
@@ -249,7 +256,7 @@ $mod_strings = array (
     'LBL_DISTANCE_LEFT_BEST_TO_QUOTA' => 'Réaliste sous Objectif',
     'LBL_DISTANCE_ABOVE_WORST_FROM_QUOTA' => 'Pire sur Objectif',
     'LBL_DISTANCE_LEFT_WORST_TO_QUOTA' => 'Pire sous Objectif',
-    'LBL_CLOSED' => 'Fermé',
+    'LBL_CLOSED' => 'Gagné',
     'LBL_DISTANCE_ABOVE_LIKELY_FROM_CLOSED' => 'Réaliste sur Fermé',
     'LBL_DISTANCE_LEFT_LIKELY_TO_CLOSED' => 'Réaliste sous Fermé',
     'LBL_DISTANCE_ABOVE_BEST_FROM_CLOSED' => 'Meilleur sur Fermé',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Année fiscale de démarrage :',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configurez les périodes de temps utilisables dans le module de prévision.<br><br>Commencez par choisir l&#39;année fiscale de démarrage. Après choisissez le type de période que vous souhaitez utiliser pour vos prévisions. L&#39;intervalle pour les périodes de temps sera automatiquement calculé en fonction de vos sélections.<br><br>Le nombre de périodes de temps futures et passées affichables sont les périodes de temps disponibles dans le module de prévisions. Les utilisateurs pourront afficher ces périodes là sur leurs écrans de prévisions.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configurez la catégorisation de {{forecastByModule}} que vous souhaitez.<br><br>Veuillez noter que les réglages de plage ne peuvent pas être changés après la première soumission. Pour des instances mises à jour, le réglage de plage est verrouillé avec les données de Prévision existantes<br><br>Vous pouvez sélectionner deux ou plus catégories basées sur des plages de probabilité ou créer des catégories qui ne sont pas basées sur la probabilité.<br><br>À gauche de vos catégories se trouvent des cases ; utilisez-les pour décider quelles plages seront incluent dans le Montant Prévision soumis et reporté aux gestionnaires.<br><br>Un utilisateur peut changer manuellement, à partir de sa feuille de travail, le statut inclue/exclue et la catégorie de {{forecastByModule}}.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configurez comment vous souhaitez catégoriser {{forecastByModule}}. <br><br>Veuillez noter que les paramètres de plage ne peuvent pas être modifiés après la première soumission. Pour des instances mises à jour, le paramètre de plage est verrouillé avec les données de prévision existantes.<br><br>Vous pouvez sélectionner deux ou plusieurs catégories basées sur des plages de probabilités ou créer des catégories qui ne sont pas basées sur la probabilité.<br><br>Des cases à cocher se trouvent à gauche de vos catégories personnalisées : utilisez-les pour décider quelles plages seront inclues dans le montant de prévision soumis et reporté aux responsables.<br><br>Un utilisateur peut changer le statut inclure/exclure et la catégorie de {{forecastByModule}} manuellement à partir de sa feuille de travail.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Choisissez les colonnes que vous souhaitez que les utilisateurs renseignent pour leurs prévisions pour chaque {{forecastByModuleSingular}}. Veuillez noter que le montant réaliste est relié au montant affiché sur les {{forecastByModuleSingular}}; Pour cette raison la colonne réaliste ne peut pas être masquées.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Choisissez les colonnes que vous souhaitez afficher dans le module de prévision. La liste des champs sera disponible sur chaque prévisions et l&#39;utilisateur pour choisir de configurer les colonnes qu&#39;il souhaite afficher.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Je suis un espace réservé pour l&#39;aide sur les prévisions',

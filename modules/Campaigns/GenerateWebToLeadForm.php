@@ -31,6 +31,7 @@ global $app_list_strings, $app_strings,$mod_strings;
 $site_url = $sugar_config['site_url'];
 $web_form_header = $mod_strings['LBL_LEAD_DEFAULT_HEADER'];
 $web_form_description = $mod_strings['LBL_DESCRIPTION_TEXT_LEAD_FORM'];
+$webFormEmailOptinText = $mod_strings['LBL_EMAIL_OPTIN_TEXT_LEAD_FORM'];
 $web_form_submit_label = $mod_strings['LBL_DEFAULT_LEAD_SUBMIT'];
 $web_form_required_fileds_msg = $mod_strings['LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS'];
 $web_required_symbol = $app_strings['LBL_REQUIRED_SYMBOL'];
@@ -106,6 +107,7 @@ if(isset($_REQUEST['team_name']) && !empty($_REQUEST['team_name'])){
  $Web_To_Lead_Form_html .= "<script type=\"text/javascript\" src='" . getJSPath($site_url.'/cache/include/javascript/sugar_grp1.js') . "'></script>";
 
  $Web_To_Lead_Form_html .="<form action='$web_post_url' name='WebToLeadForm' method='POST' id='WebToLeadForm'>";
+$Web_To_Lead_Form_html .= '<input id="email_opt_in" type="hidden" name="email_opt_in" value="off" />';
  $Web_To_Lead_Form_html .= "<table width='100%' style='border-top: 1px solid;
 border-bottom: 1px solid;
 padding: 10px 6px 12px 10px;
@@ -136,7 +138,7 @@ else if(!empty($_REQUEST['colsSecond'])){
  $columns= count($_REQUEST['colsSecond']);
 }
 
-
+$emailFieldPresent = false;
 $required_fields = array();
 $bool_fields = array();
 for($i= 0; $i<$columns;$i++){
@@ -324,6 +326,7 @@ for($i= 0; $i<$columns;$i++){
                 $Web_To_Lead_Form_html .= "<td width='15%' style='text-align: left; font-size: 12px; font-weight: normal;'><span sugar='slot'>$field_label</span sugar='slot'></td>";
              }
              if ( $field_name=='email1'||$field_name=='email2' ){
+                 $emailFieldPresent = true;
                  $Web_To_Lead_Form_html .= "<td width='35%' style='font-size: 12px; font-weight: normal;'><span sugar='slot'><input id=$field_name name=$field_name type='text' onchange='validateEmailAdd();'></span sugar='slot'></td>";
              } else {
                 $Web_To_Lead_Form_html .= "<td width='35%' style='font-size: 12px; font-weight: normal;'><span sugar='slot'><input id=$field_name name=$field_name type='text'></span sugar='slot'></td>";
@@ -338,6 +341,7 @@ for($i= 0; $i<$columns;$i++){
 	            $Web_To_Lead_Form_html .= "<td width='35%' style='font-size: 12px; font-weight: normal;'><span sugar='slot'><input id=$field_name name=$field_name type='text'></span sugar='slot'></td>";
            }
           if($field_type=='email'){
+              $emailFieldPresent = true;
             if($field_required){
                 $Web_To_Lead_Form_html .= "<td width='15%' style='text-align: left; font-size: 12px; font-weight: normal;'><span sugar='slot'>$field_label</span sugar='slot'><span class='required' style='color: rgb(255, 0, 0);'>$web_required_symbol</span></td>";
               }
@@ -452,6 +456,7 @@ for($i= 0; $i<$columns;$i++){
                 $Web_To_Lead_Form_html .= "<td width='15%' style='text-align: left; font-size: 12px; font-weight: normal;'><span sugar='slot'>$field1_label</span sugar='slot'></td>";
              }
              if ( $field1_name=='email1'||$field1_name=='email2' ){
+                 $emailFieldPresent = true;
                  $Web_To_Lead_Form_html .= "<td width='35%' style='font-size: 12px; font-weight: normal;'><span sugar='slot'><input id=$field1_name name=$field1_name type='text' onchange='validateEmailAdd();'></span sugar='slot'></td>";
              } else {
                 $Web_To_Lead_Form_html .= "<td width='35%' style='font-size: 12px; font-weight: normal;'><span sugar='slot'><input id=$field1_name name=$field1_name type='text'></span sugar='slot'></td>";
@@ -467,6 +472,7 @@ for($i= 0; $i<$columns;$i++){
 	            $Web_To_Lead_Form_html .= "<td width='35%' style='font-size: 12px; font-weight: normal;'><span sugar='slot'><input id=$field1_name name=$field1_name type='text'></span sugar='slot'></td>";
            }
            if($field1_type=='email'){
+               $emailFieldPresent = true;
            	if($field1_required){
                 $Web_To_Lead_Form_html .= "<td width='15%' style='text-align: left; font-size: 12px; font-weight: normal;'><span sugar='slot'>$field1_label</span sugar='slot'><span class='required' style='color: rgb(255, 0, 0);'>$web_required_symbol</span></td>";
               }
@@ -481,6 +487,13 @@ for($i= 0; $i<$columns;$i++){
             $Web_To_Lead_Form_html .= "<td width='35%' style='font-size: 12px; font-weight: normal;'><span sugar='slot'>&nbsp</span sugar='slot'></td>";
        }
        $Web_To_Lead_Form_html .= "</tr>";
+}
+
+if ($emailFieldPresent) {
+    $Web_To_Lead_Form_html .= "<tr><td colspan=4 style='font-size: 12px; font-weight: normal;' width='100%'>";
+    $Web_To_Lead_Form_html .= $webFormEmailOptinText;
+    $Web_To_Lead_Form_html .= "<span sugar='slot'>:&nbsp;&nbsp;<input id='email_opt_in' name='email_opt_in' type='checkbox'></span sugar='slot'>";
+    $Web_To_Lead_Form_html .= "</td></tr>";
 }
 
 $Web_To_Lead_Form_html .= "<tr align='center' style='color: rgb(0, 105, 225); font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 18px; font-weight: bold; margin-bottom: 0px; margin-top: 0px;'><TD COLSPAN='4'>&nbsp</TD></tr>";

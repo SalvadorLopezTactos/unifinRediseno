@@ -20,8 +20,6 @@
      * Override so we can have a custom hasAccess for forecast to check on the header-pane buttons
      *
      * @inheritdoc
-     * @override
-     * @returns {*}
      */
     hasAccess: function() {
         // this is a special use case for forecasts

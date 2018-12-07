@@ -16,6 +16,198 @@
 
         var $tooltipTemplate = $(tooltipTemplate());
 
+        /**
+         * Sets the `parent_type`, `parent_id`, and `parent_name` attributes of
+         * the model using the data from the parent.
+         *
+         * The attributes are updated asynchronously if the parent's name isn't
+         * known and must be retrieved. The attributes cannot be set if the
+         * user does not have `list` access to the parent's module.
+         *
+         * @param {Data.Bean} model
+         * @param {Data.Bean} parent
+         */
+        function setParentAttributes(model, parent) {
+            var fields = app.metadata.getModule(model.module, 'fields');
+            var modules;
+            var name;
+
+            modules = _.chain(app.lang.getAppListStrings(fields.parent_type.options))
+                .keys()
+                .filter(function(module) {
+                    return app.acl.hasAccess('list', module);
+                })
+                .value();
+
+            if (!_.contains(modules, parent.module)) {
+                return;
+            }
+
+            function setAttributes(parent) {
+                model.set('parent', _.extend({type: parent.module}, parent.toJSON()));
+                model.set('parent_type', parent.module);
+                model.set('parent_id', parent.get('id'));
+                model.set('parent_name', parent.get('name'));
+            }
+
+            if (_.isEmpty(parent.get('id'))) {
+                return;
+            }
+
+            if (_.isEmpty(parent.get('name')) && !app.utils.isNameErased(parent)) {
+                // If the name field is empty but other fields are present,
+                // then it may be possible to construct the name. We try to
+                // do that before making an unnecessary request.
+                name = app.utils.getRecordName(parent);
+
+                if (!_.isEmpty(name)) {
+                    // We were able to determine the name.
+                    parent.set('name', name);
+                    setAttributes(parent);
+                } else {
+                    // We need more data from this record.
+                    parent.fetch({
+                        showAlerts: false,
+                        success: setAttributes,
+                        fields: ['name']
+                    });
+                }
+            } else {
+                setAttributes(parent);
+            }
+        }
+
+        /**
+         * Populates an email with data from a case. This is used when
+         * composing an email that is related to a case.
+         *
+         * The subject of the email becomes "[CASE:<case_number>] <case_name>".
+         * Contacts related to the case are added as recipients in the To
+         * field.
+         *
+         * @param {Data.Bean} email
+         * @param {Data.Bean} aCase
+         */
+        function prepopulateEmailWithCase(email, aCase) {
+            var config;
+            var keyMacro = '%1';
+            var caseMacro;
+            var subject;
+            var contacts;
+
+            if (aCase.module !== 'Cases') {
+                return;
+            }
+
+            config = app.metadata.getConfig();
+            caseMacro = config.inboundEmailCaseSubjectMacro;
+            subject = caseMacro + ' ' + aCase.get('name');
+            subject = subject.replace(keyMacro, aCase.get('case_number'));
+
+            email.set('name', subject);
+
+            if (email.get('to_collection').length === 0) {
+                // no addresses, attempt to populate from contacts relationship
+                contacts = aCase.getRelatedCollection('contacts');
+                contacts.fetch({
+                    relate: true,
+                    success: function(data) {
+                        var records = data.map(function(record) {
+                            var parentName = app.utils.getRecordName(record);
+
+                            // Don't set email_address_id. It will be set when
+                            // the email is archived.
+                            return app.data.createBean('EmailParticipants', {
+                                _link: 'to',
+                                parent: _.extend({type: record.module}, app.utils.deepCopy(record.attributes)),
+                                parent_type: record.module,
+                                parent_id: record.get('id'),
+                                parent_name: parentName
+                            });
+                        });
+
+                        email.get('to_collection').add(records);
+                    },
+                    fields: ['id', 'full_name', 'email']
+                });
+            }
+        }
+
+        /**
+         * Populates attributes on an email from the data provided.
+         *
+         * @param {Date.Bean} email
+         * @param {Object} data Attributes to set on the email.
+         * @param {string} [data.name] Sets the subject of the email.
+         * @param {string} [data.description_html] Sets the HTML body of the
+         * email.
+         * @param {Array|Data.BeanCollection|Data.Bean} [data.from_collection]
+         * The sender to add to the From field.
+         * @param {Array|Data.BeanCollection|Data.Bean} [data.from] A more
+         * convenient alternative name for the sender.
+         * @param {Array|Data.BeanCollection|Data.Bean} [data.to_collection]
+         * The recipients to add to the To field.
+         * @param {Array|Data.BeanCollection|Data.Bean} [data.to] A more
+         * convenient alternative name for the To recipients.
+         * @param {Array|Data.BeanCollection|Data.Bean} [data.cc_collection]
+         * The recipients to add to the CC field.
+         * @param {Array|Data.BeanCollection|Data.Bean} [data.cc] A more
+         * convenient alternative name for the CC recipients.
+         * @param {Array|Data.BeanCollection|Data.Bean} [data.bcc_collection]
+         * The recipients to add to the BCC field.
+         * @param {Array|Data.BeanCollection|Data.Bean} [data.bcc] A more
+         * convenient alternative name for the BCC recipients.
+         * @param {Array|Data.BeanCollection|Data.Bean} [data.attachments_collection]
+         * The attachments to attach to the email.
+         * @param {Array|Data.BeanCollection|Data.Bean} [data.attachments] A
+         * more convenient alternative name for the attachments.
+         * @param {Data.Bean} [data.related] A convenience for relating a
+         * parent record to the email.
+         * @param {boolean} [data.skip_prepopulate_with_case] Prevent
+         * prepopulating case data in the email.
+         * @return {Object} Any key-values pairs that could not be assigned are
+         * returned so the caller can decide what to do with them.
+         */
+        function prepopulateEmailForCreate(email, data) {
+            var fields = app.metadata.getModule('Emails', 'fields');
+            var fieldNames = _.keys(fields);
+            var fieldMap = {
+                attachments: 'attachments_collection',
+                from: 'from_collection',
+                to: 'to_collection',
+                cc: 'cc_collection',
+                bcc: 'bcc_collection'
+            };
+            var nonFieldData = {};
+
+            _.each(data, function(value, fieldName) {
+                var fieldDefs;
+
+                fieldName = fieldMap[fieldName] || fieldName;
+                fieldDefs = fields[fieldName] || {};
+
+                if (fieldName === 'related') {
+                    if (data.skip_prepopulate_with_case !== true) {
+                        prepopulateEmailWithCase(email, value);
+                    }
+
+                    setParentAttributes(email, value);
+                } else if (fieldDefs.type === 'collection') {
+                    if (value instanceof app.BeanCollection) {
+                        value = value.models;
+                    }
+
+                    email.get(fieldName).add(value);
+                } else if (_.contains(fieldNames, fieldName)) {
+                    email.set(fieldName, value);
+                } else {
+                    nonFieldData[fieldName] = value;
+                }
+            });
+
+            return nonFieldData;
+        }
+
         app.utils = _.extend(app.utils, {
             /**
              * If Forecasts is not setup, it will convert commit_stage into a spacer field and show no-data
@@ -639,26 +831,20 @@
              * @return {string} The record name.
              */
             getRecordName: function(model) {
-                // Special case for `Documents`
-                if (model.module === 'Documents' && model.has('document_name')) {
-                    return model.get('document_name');
+                var metadata = app.metadata.getModule(model.module) || {};
+                var format;
+                var name;
 
-                // Special case for `Person` type modules
-                } else if (model.has('full_name')) {
-                    return model.get('full_name');
-
-                // Special case for `Person` type modules
-                } else if (model.has('first_name') && model.has('last_name')) {
-                    return model.get('first_name') + ' ' + model.get('last_name');
-
-                // Special case for `Person` type modules
-                } else if (model.has('last_name')) {
-                    return model.get('last_name');
-
-                // Default behavior
-                } else {
-                    return model.get('name') || '';
+                if (!_.isEmpty(metadata.nameFormat)) {
+                    // Defaulting the format avoids having to fix numerous
+                    // tests because the preference isn't set.
+                    format = app.user.getPreference('default_locale_name_format') || 's f l';
+                    name = app.utils.formatNameModel(model.module, model.attributes, format);
+                } else if (model.module === 'Documents' && model.has('document_name')) {
+                    name = model.get('document_name');
                 }
+
+                return name || model.get('full_name') || model.get('name') || '';
             },
 
             /**
@@ -736,6 +922,32 @@
 
                 return msg;
             },
+
+            /**
+             * Convert a raw file size into a human readable size
+             *
+             * @param {int} size
+             * @return {string}
+             */
+            getReadableFileSize: function(size) {
+                var i = -1;
+                var units = ['K', 'M', 'G', 'T'];
+
+                if (_.isEmptyValue(size) || size < 1) {
+                    size = 0;
+                } else if (size < 1000) {
+                    //Not displaying bytes, round up to 1K
+                    size = 1000;
+                }
+
+                do {
+                    size = Math.round(size / 1000);
+                    i++;
+                } while (size >= 1000 && i < (units.length - 1));
+
+                return size + units[i];
+            },
+
             /**
              * gets window location parameters by name regardless of case
              * @param {String} name name of parameter being searched for
@@ -769,6 +981,138 @@
                     || value === '1'
                     || value === 'on'
                     || value === 'yes';
+            },
+
+            /**
+             * Returns the set of fields on a model that are components of the name field.
+             * @param {app.data.Bean} model
+             * @param {string} (optional) format "s f l t" style name format string.
+             * @return Array names of fields that make up the user formated name for this model.
+             */
+            getFullnameFieldComponents: function(model, format) {
+                var components = [];
+                var nameDef = model.fields.name;
+
+                if (!nameDef) {
+                    return components;
+                }
+
+                if (nameDef.type === 'fullname') {
+                    format = format || app.user.getPreference('default_locale_name_format');
+                    var metadata = app.metadata.getModule(model.module) || {fields: {}};
+                    var formatMap = metadata.nameFormat || {};
+
+                    if (_.isEmpty(formatMap)) {
+                        return ['name'];
+                    }
+                    _.each(format.split(''), function(letter) {
+                        if (formatMap[letter]) {
+                            components.push(formatMap[letter]);
+                        }
+                    });
+
+                    return components;
+                } else if (nameDef.fields) {
+                    return nameDef.fields;
+                }
+
+                return ['name'];
+            },
+
+            /**
+             * Returns true if the name or fields that make up the name have been erased
+             * and all name components are empty
+             * @param model
+             * @return {boolean}
+             */
+            isNameErased: function(model) {
+                var erasedFields = model.get('_erased_fields');
+
+                if (_.isEmpty(erasedFields)) {
+                    return false;
+                }
+
+                //Otherwise check for the name/fullname components
+                var nameComponents = this.getFullnameFieldComponents(model);
+                var anyNameFieldErased =  _.some(nameComponents, function(field) {
+                    return _.contains(erasedFields, field);
+                });
+
+                //Ensure that the name is empty before marking it erased
+                return anyNameFieldErased && _.every(nameComponents.concat('name'), function(field) {
+                    return !model.get(field);
+                });
+            },
+
+            /**
+             * Populates the data on the email and then opens the specified
+             * Emails layout in a drawer.
+             *
+             * @param {string} layout Use `create` for creating an archived
+             * email and `compose-email` for creating a draft/sending an email.
+             * @param {Object} [data] Any data to populate on the model before
+             * opening the drawer. The keys `create` and `module` are reserved.
+             * Any key-value pairs that can't be populated on the model will
+             * become attributes on the drawer's context.
+             * @param {Data.Bean} [data.model] Can be used to specify a model
+             * for the drawer's context. The model must be an Emails model. If
+             * not specified, a new Emails model will be created for the
+             * context and the data will be populated on that new model.
+             * @param {Function} [onClose] The callback that is called when the
+             * drawer closes.
+             */
+            openEmailCreateDrawer: function(layout, data, onClose) {
+                var context = {
+                    create: true,
+                    module: 'Emails'
+                };
+
+                data = data || {};
+
+                if (data.model && data.model instanceof app.Bean && data.model.module === context.module) {
+                    // Use the provided model for the context.
+                    context.model = data.model;
+                } else {
+                    // Create a new model for the context.
+                    context.model = app.data.createBean(context.module);
+                }
+
+                // We're done with the provided model. Remove it so nothing
+                // funky happens while populating the email.
+                data = _.omit(data, 'model');
+
+                // Populate the email with the rest of the data. Any data that
+                // can't be mapped to an Emails field will be returned so it
+                // can become an attribute on the context.
+                data = prepopulateEmailForCreate(context.model, data);
+
+                // Merge context over the remaining data so that it is
+                // impossible for anyone to override `create` and `module`.
+                context = _.extend(data, context);
+
+                app.drawer.open({
+                    layout: layout,
+                    context: context
+                }, onClose);
+            },
+
+            /**
+             * Get all of the links on the primary module that relate records
+             * to the related module.
+             *
+             * @param {string} primaryModule The module with the link fields.
+             * @param {string} relatedModule The module on the other side of
+             * the link fields we care about.
+             * @return {Array}
+             */
+            getLinksBetweenModules: function(primaryModule, relatedModule) {
+                var fields = app.metadata.getModule(primaryModule).fields;
+
+                return _.chain(fields).filter(function(field) {
+                    return field.type && field.type === 'link';
+                }).filter(function(link) {
+                    return app.data.getRelatedModule(primaryModule, link.name) === relatedModule;
+                }, this).value();
             }
         });
     });

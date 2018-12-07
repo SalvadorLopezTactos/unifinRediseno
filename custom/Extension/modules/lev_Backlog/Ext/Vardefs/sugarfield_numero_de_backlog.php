@@ -1,7 +1,7 @@
 <?php
- // created: 2018-02-16 16:59:03
+ // created: 2018-12-05 18:17:34
 $dictionary['lev_Backlog']['fields']['numero_de_backlog']['audited'] = true;
 $dictionary['lev_Backlog']['fields']['numero_de_backlog']['full_text_search']['boost'] = 1;
 $dictionary['lev_Backlog']['fields']['numero_de_backlog']['full_text_search']['enabled'] = true;
-$dictionary['lev_Backlog']['fields']['numero_de_backlog']['full_text_search']['searchable'] = false;
+$dictionary['lev_Backlog']['fields']['numero_de_backlog']['full_text_search']['searchable'] = true;
 

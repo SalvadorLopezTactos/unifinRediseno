@@ -59,7 +59,18 @@ class ReportsApiHelper extends SugarBeanApiHelper
      */
     public function sanitizeSubmittedData($data)
     {
-        unset($data['module']);
+        // to use the original posted module instead of the one from api path
+        if (!empty($GLOBALS['HTTP_RAW_POST_DATA'])) {
+            $postContents = $GLOBALS['HTTP_RAW_POST_DATA'];
+        } else {
+            $postContents = file_get_contents('php://input');
+        }
+        if ($postContents) {
+            $postArray = json_decode($postContents, true);
+            if (!empty($postArray['module'])) {
+                $data['module'] = $postArray['module'];
+            }
+        }
         return $data;
     }
 }

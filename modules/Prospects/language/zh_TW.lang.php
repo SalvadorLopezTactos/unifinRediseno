@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => '目標清單儀表板',
+  'LBL_TARGETS_RECORD_DASHBOARD' => '目標紀錄儀表板',
+
   'LBL_MODULE_NAME' => '目標',
   'LBL_MODULE_NAME_SINGULAR' => '目標',
   'LBL_MODULE_ID'   => '目標',
@@ -24,7 +28,7 @@ $mod_strings = array (
   'LBL_LIST_NAME' => '名稱',
   'LBL_LIST_LAST_NAME' => '姓氏',
   'LBL_LIST_PROSPECT_NAME' => '目標名稱',
-  'LBL_LIST_TITLE' => '標題',
+  'LBL_LIST_TITLE' => '職稱',
   'LBL_LIST_EMAIL_ADDRESS' => '電子郵件',
   'LBL_LIST_OTHER_EMAIL_ADDRESS' => '其他電子郵件',
   'LBL_LIST_PHONE' => '電話',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => '稱呼',
   'LBL_SAVE_PROSPECT' => '儲存目標',
   'LBL_CREATED_OPPORTUNITY' =>'建立新商機',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '建立商機要求使用帳戶。\n請建立新帳戶或選取現有帳戶。',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '建立商機要求使用帳戶。\\n請建立新帳戶或選取現有帳戶。',
   'LNK_SELECT_ACCOUNT' => "選取帳戶",
   'LNK_NEW_PROSPECT' => '建立目標',
   'LNK_PROSPECT_LIST' => '檢視目標',
@@ -195,4 +199,6 @@ $mod_strings = array (
 2. 按一下「儲存」以完成新記錄並返回至上一頁。',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => '目標報表',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '業務目的同意',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '同意上次更新',
 );

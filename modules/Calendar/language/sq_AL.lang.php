@@ -165,7 +165,7 @@ $mod_list_strings = array(
 			"",
 			"Jan",
 			"Feb",
-			"Mar",
+			"Mars",
 			"Apr",
 			"May",
 			"Jun",

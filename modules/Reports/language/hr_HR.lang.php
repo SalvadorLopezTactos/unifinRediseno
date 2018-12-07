@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Po tromjesečju',
     'LBL_BY_FISCAL_YEAR' => 'Po fiskalnoj godini',
     'LBL_BY_FISCAL_QUARTER' => 'Po fiskalnom tromjesečju',
+    'LBL_AMOUNT' => 'Iznos',
     'LBL_COUNT' => 'Broj',
+    'LBL_PERCENT' => 'Postotak',
     'LBL_SUM' => 'ZBROJ',
     'LBL_AVG' => 'PROSJ.',
     'LBL_MAX' => 'MAKS.',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Mjesec',
     'LBL_YEAR' => 'Godina',
     'LBL_QUARTER' => 'Tromjesečje',
+    'LBL_FISCAL' => 'Fiskalno',
     'LBL_FISCAL_YEAR' => 'Fiskalna godina',
     'LBL_FISCAL_QUARTER' => 'Fiskalno tromjesečje',
 	'LBL_YESTERDAY'=>'Jučer',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Sljedeće tromjesečje',
     'LBL_ADD_RELATE' => "Dodaj povezano",
     'LBL_DEL_THIS' => "Ukloni",
-    'LBL_ALERT_CANT_ADD' => 'Ne možete dodati povezani modul dok ne odaberete tablicu iz koje će se povezivati.\nOdaberite modul u padajućem izborniku lijevo od gumba „Dodaj povezano” na koji ste kliknuli.',
+    'LBL_ALERT_CANT_ADD' => 'Ne možete dodati povezani modul dok ne odaberete tablicu iz koje će se povezivati.\\nOdaberite modul u padajućem izborniku lijevo od gumba „Dodaj povezano” na koji ste kliknuli.',
     'LBL_BY_DAY' => 'Po danu',
     'LBL_DAY' => 'Dan',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Neobavezni povezani moduli',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Veće od jednako',
 
     'LBL_FILTER_BY_MODULE' => 'Po modulu',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'S grafikonima',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Pogreška pri dohvaćanju podataka iz izvješća detaljne analize za ovu radnju. Pomoć zatražite od vlasnika izvješća.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Detaljna analiza nije dostupna',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'Prikaz popisa pokazuje sva izvješća koja odgovaraju trenutačnim kriterijima pretraživanja i kojima korisnici imaju pristup. Možete vidjeti osnovne detalje o svakom izvješću unutar stupaca polja prikaza popisa i na pregledu. Možete postaviti oznake za izvješća i stvoriti filtre. Kliknite na naziv izvješća da bi se ono prikazalo ili odaberite „Uredi izvješće” u izborniku radnji da biste izmijenili izvješće.',
+  );

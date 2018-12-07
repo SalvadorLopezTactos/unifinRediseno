@@ -217,33 +217,14 @@ SUGAR.quickCompose = function() {
 		 * @return {} none
 		 **/
 		init: function(o) {
+            var app = parent.SUGAR.App;
+            var view = app.controller.layout.getComponent('bwc');
 
-			  if(typeof o.menu_id != 'undefined') {
-			     this.dceMenuPanel = o.menu_id;
-			  } else {
-			     this.dceMenuPanel = null;
-			  }
+            if (view) {
+                view.openComposeEmailDrawer(o.composePackage || {});
+            }
 
-              loadingMessgPanl = new YAHOO.widget.SimpleDialog('loading', {
-        			width: '200px',
-        			close: true,
-        			modal: true,
-        			visible:  true,
-        			fixedcenter: true,
-        	        constraintoviewport: true,
-        	        draggable: false
-		      });
-
-              loadingMessgPanl.setHeader(SUGAR.language.get('app_strings','LBL_EMAIL_PERFORMING_TASK'));
-		      loadingMessgPanl.setBody(SUGAR.language.get('app_strings','LBL_EMAIL_ONE_MOMENT'));
-		      loadingMessgPanl.render(document.body);
-		      loadingMessgPanl.show();
-
-		      //If JS files havn't been loaded, perform the load.
-		      if(! SUGAR.quickCompose.resourcesLoaded )
-		          this.loadResources(o);
-		      else
-		          this.initUI(o);
+            return false;
 		},
 		/**
 		 * Pull in all the required js files.

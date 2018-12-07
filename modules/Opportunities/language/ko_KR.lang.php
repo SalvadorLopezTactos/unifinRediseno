@@ -12,7 +12,11 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME' => '영업기회관리',
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '영업기회 목록 대시보드',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '영업기회 기록 대시보드',
+
+    'LBL_MODULE_NAME' => '영업기회',
     'LBL_MODULE_NAME_SINGULAR' => '영업기회',
     'LBL_MODULE_TITLE' => '영업기회관리: 홈',
     'LBL_SEARCH_FORM_TITLE' => '영업기회 검색',
@@ -66,7 +70,7 @@ $mod_strings = array(
     'UPDATE_MERGE_TXT' => '여러 통화를 하나의 통화값으로 병합합니다. 현재 병합하려는 통화값을이 사용된 레코드들이 있으면 모든 레코드의 통화가 병합된 통화값으로 변경됩니다. 통화값 병합은 모든 모듈에 적용됩니다.',
     'LBL_ACCOUNT_NAME' => '거래처명',
     'LBL_CURRENCY' => '통화',
-    'LBL_DATE_CLOSED' => '예정 마감일',
+    'LBL_DATE_CLOSED' => '마감 예정일',
     'LBL_DATE_CLOSED_TIMESTAMP' => '예상 마감일 타임스탬프',
     'LBL_TYPE' => '종류',
     'LBL_CAMPAIGN' => '캠페인',
@@ -182,25 +186,26 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => '이 변화를 시작한 후에, 영업선 항목 기록이기존의 각  {{module_name}}을 위해 백그라운드에 생성됩니다. 영업선 항목이 완전하고 사용할 수있는 경우, 알림이 사용자 프로필의 이메일 주소로 전송됩니다. 알림이 전송되도록하려면 관리자>이메일 설정을 통해  이메일을 보내도록 인스턴스가 설정되어야 함을 주의하십시오.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 모듈은 시작부터 끝까지 개별 판매를 추적할 수 있습니다. 각 {{module_name}} 기록은 잠재적인 판매 기록을 나타내고 관련 판매 데이터를 포함할 뿐만 아니라, {{quotes_module}}, {{contacts_module}} 등의 다른 중요한 기록과 연관됩니다. {{module_name}}은 보통 "완료" 혹은 "계약실패"로 표시될 때 까지 여러 판매 단계를 거치며 진행됩니다. 판매 추세 이해 및 예측과 판매 할당량 달성을 위한 작업 집중을 위해 Sugar의 {{forecasts_singular_module}} 예측 모듈을 사용함으로써 {{plural_module_name}}은 더욱 넓은 범위에서 활용될 수 있습니다.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 모듈로 개별 판매를 처음부터 끝까지 추적할 수 있습니다. 각 {{module_name}} 레코드는 잠재 판매를 나타내며 관련 판매 데이터는 물론 {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 레코드와 관련이
+ 있습니다. {{module_name}}은 일반적으로 여러 판매 단계가 있으며 최종적으로 "Closed Won" 또는 "Closed Lost"로 표시됩니다. {{plural_module_name}}은 Sugar의 {{forecasts_singular_module}} 모듈을 사용하여 판매 추세를 이해하고 예측하며 판매 할당량 달성에 중점을 둡니다.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} 모듈은 시작부터 끝까지 개별 판매를 추적할 수 있습니다. 각 {{module_name}} 기록은 잠재적인 판매 기록을 나타내고 관련 판매 데이터를 포함할 뿐만 아니라, {{quotes_module}}, {{contacts_module}} 등의 다른 중요한 기록과 연관됩니다.
+    'LBL_HELP_RECORD' => '{{plural_module_name}} 모듈을 통해 개별 판매 및 그 판매에 속한 라인 항목을 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 레코드는 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 레코드와 관련된 것을 포함합니다. 
 
-- 개별 필드 또는 수정 버튼을 클릭하여 이 기록의 필드를 수정하십시오.
-- 좌측 하단 메뉴를 "데이터 보기"로 전환하여 서브패널 내 다른 기록 링크를 보기 또는 수정하십시오.
-- 좌측 하단 메뉴를 "활동 스트림"으로 전환하여 {{activitystream_singular_module}} 내 사용자 코멘트를 생성 및 수정하고 변경 기록을 남기십시오.
-- 기록명 우측에 위치한 아이콘을 사용하여 이 기록을 팔로우 혹은 즐겨찾기에 추가하십시오.
-- 수정 버튼 우측에 위치한 드롭다운 메뉴에서 추가적인 명령을 실행할 수 있습니다.',
+- 개별 필드 또는 편집 버튼을 클릭하여 이 레코드의 필드를 편집합니다.
+- 아래 왼쪽 창을 "데이터 보기"로 토글하여 하위패널 내의 다른 기록으로의 링크를 보거나 수정합니다.
+- 아래 왼쪽 창을 "활동 흐름"으로 토글하여 {{activitystream_singular_module}} 내의 사용자 의견 및 레코드 변경 이력을 작성하고 봅니다.
+- 레코드 이름 오른쪽의 아이콘을 사용하여 이 레코드를 추적하거나 즐겨찾기로 찾아봅니다.
+- 편집 버튼 오른쪽의 드롭다운 작업 메뉴에서 추가 작업이 가능합니다.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} 모듈은 시작부터 끝까지 개별 판매를 추적할 수 있습니다. 각 {{module_name}} 기록은 잠재적인 판매 기록을 나타내고 관련 판매 데이터를 포함할 뿐만 아니라, {{quotes_module}}, {{contacts_module}} 등의 다른 중요한 기록과 연관됩니다. 
+    'LBL_HELP_CREATE' => '{{plural_module_name}} 모듈을 통해 개별 판매 및 그 판매에 속한 라인 항목을 시작부터 끝까지 추적할 수 있습니다. 각각의 {{module_name}} 레코드는 예상 판매를 나타내며 관련 판매 데이터는 물론, {{quotes_module}}, {{contacts_module}} 등과 같은 다른 중요한 레코드와 관련된 것을 포함합니다.
 
-{{module_name}} 생성 절차:
-1. 원하는 필드 값을 입력하십시오.
- - "필수"로 표시된 필드는 저장 이전에 작성 완료해야 합니다.
- - 추가 필드를 보려면 "더 보기"를 클릭하십시오.
-2. 신규 생성된 기록을 마무리하고 이전 페이지로 돌아가려면 "저장"을 클릭하십시오.',
+{{module_name}}을 생성하려면:
+1. 원하는 필드 값을 제공합니다.
+ - 저장하기 전에 "필수 항목"으로 표시된 필드를 완성해야 합니다.
+ - 필요한 경우 추가 필드가 보이도록 "더 보기"를 클릭하십시오.
+2. 새 기록을 완료하고 이전 페이지로 돌아가려면 "저장"을 클릭하십시오.',
 
 // END ENT/ULT
 

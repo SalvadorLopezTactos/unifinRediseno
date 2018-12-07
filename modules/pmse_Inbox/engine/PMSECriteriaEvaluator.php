@@ -49,7 +49,7 @@ class PMSECriteriaEvaluator
         $resultToken = new stdClass();
         $resultToken->expType = 'CONSTANT';
         $operationGroup = 'relation';
-        $expSubtype = PMSEEngineUtils::getExpressionSubtype($criteriaToken);
+        $expSubtype = $this->getSubtype($criteriaToken);
         if (!isset($expSubtype)) {
             $criteriaToken->expSubtype = '';
         }
@@ -72,5 +72,15 @@ class PMSECriteriaEvaluator
             }
         }
         return $tokenArray;
+    }
+
+    /**
+     * helper function for test mocks
+     * @param stdClass object
+     * @return string || null
+     */
+    public function getSubtype($criteriaToken)
+    {
+        return PMSEEngineUtils::getExpressionSubtype($criteriaToken);
     }
 }

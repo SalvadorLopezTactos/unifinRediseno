@@ -51,10 +51,9 @@ class XhprofLogger implements SQLLogger
      * @param \SugarXhprof $xhprof instance of SugarXhprof class
      * @param SQLLogger $logger instance of SQLLogger class
      */
-    public function __construct(\SugarXHprof $xhprof, SQLLogger $logger)
+    public function __construct(\SugarXHprof $xhprof)
     {
         $this->xhprof = $xhprof;
-        $this->logger = $logger;
     }
 
     /**
@@ -62,8 +61,6 @@ class XhprofLogger implements SQLLogger
      */
     public function startQuery($sql, array $params = null, array $types = null)
     {
-        $this->logger->startQuery($sql, $params, $types);
-
         $this->start = microtime(true);
         $this->currentQuery = array('sql' => $sql, 'params' => $params, 'types' => $types);
     }
@@ -83,8 +80,6 @@ class XhprofLogger implements SQLLogger
 
         $this->start = 0;
         $this->currentQuery = null;
-
-        $this->logger->stopQuery();
     }
 
     /**

@@ -39,7 +39,7 @@ $mod_strings = array (
     'LBL_DELETE_BUNDLE_BUTTON_TOOLTIP' => 'Naikinti grupę',
     'LBL_DELETE_GROUP_BUTTON' => 'Naikinti grupę',
     'LBL_QUOTE_DATA_EMPTY_ROW_WITH_GROUP' => 'Norėdami į šią grupę įtraukti eilutės elementą arba komentarą, naudokite mygtuką + (meniu kūrimas).',
-    'LBL_QUOTE_DATA_EMPTY_ROW_DEFAULT_GROUP' => 'Norėdami įtraukti eilutės elementą, komentarą arba grupę, naudokite mygtuką + (meniu kūrimas) '
+    'LBL_QUOTE_DATA_EMPTY_ROW_DEFAULT_GROUP' => 'Norėdami įtraukti eilutės elementą, komentarą arba grupę, naudokite mygtuką + (meniu kūrimas). '
         . 'Pasiūlymas.',
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'Numatytoji pasiūlymo gaminio paketo grupė',
     'LBL_ALERT_DELETING_ITEM' => 'Eilutės elemento (-ų) naikinimas',

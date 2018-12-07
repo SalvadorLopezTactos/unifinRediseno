@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Tabloul de bord Listă note',
+
     'ERR_DELETE_RECORD' => 'Trebuie să specifici un număr de înregistrare pentru a șterge contul.',
     'LBL_ACCOUNT_ID' => 'Identitate Cont',
     'LBL_CASE_ID' => 'Identitate caseta:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Nota',
     'LBL_EMAIL_ADDRESS' => 'Adresa Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Atasare email',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Atașament e-mail pentru',
     'LBL_FILE_MIME_TYPE' => 'Tipul de mima',
+    'LBL_FILE_EXTENSION' => 'Extensie fișier',
+    'LBL_FILE_SOURCE' => 'Sursă fișier',
+    'LBL_FILE_SIZE' => 'Dimensiune fișier',
     'LBL_FILE_URL' => 'Fisier URL',
     'LBL_FILENAME' => 'Atasament',
     'LBL_LEAD_ID' => 'Identitate Lead',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Identitate Oportunitate',
     'LBL_PARENT_ID' => 'parent id',
     'LBL_PARENT_TYPE' => 'Tip Parinte',
+    'LBL_EMAIL_TYPE' => 'Tip e-mail',
+    'LBL_EMAIL_ID' => 'ID e-mail',
     'LBL_PHONE' => 'Telefon',
     'LBL_PORTAL_FLAG' => 'Arata in portal?',
     'LBL_EMBED_FLAG' => 'Incorporat in email?',

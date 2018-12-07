@@ -8,17 +8,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 /**
- * @class Proxy
+ * @class PMSE.Proxy
  * Handles the proxy connections
- * @extend Base
+ * @extends PMSE.Base
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
  */
-var Proxy = function (options) {
-    Base.call(this, options);
+PMSE.Proxy = function(options) {
+    PMSE.Base.call(this, options);
     /**
      * Defines the URL to connect
      * @type {String}
@@ -26,27 +27,27 @@ var Proxy = function (options) {
     this.url = null;
     this.callback = null;
     this.attributes = null;
-    Proxy.prototype.initObject.call(this, options);
+    PMSE.Proxy.prototype.initObject.call(this, options);
 };
-Proxy.prototype = new Base();
+PMSE.Proxy.prototype = new PMSE.Base();
 
 /**
  * Defines the object's type
  * @type {String}
  */
-Proxy.prototype.type = 'Proxy';
+PMSE.Proxy.prototype.type = 'PMSE.Proxy';
 
 /**
  * Defines the object's family
  * @type {String}
  */
-Proxy.prototype.family = 'Proxy';
+PMSE.Proxy.prototype.family = 'PMSE.Proxy';
 
 /**
  * Initializes the object with default values
  * @param {Object} options
  */
-Proxy.prototype.initObject = function (options) {
+PMSE.Proxy.prototype.initObject = function(options) {
     var defaults = {
         url: null,
         callback: null,
@@ -63,17 +64,17 @@ Proxy.prototype.initObject = function (options) {
  * @param {String} url
  * @return {*}
  */
-Proxy.prototype.setUrl = function (url) {
+PMSE.Proxy.prototype.setUrl = function(url) {
     this.url = url;
     return this;
 };
 
-Proxy.prototype.setCallback = function (callback) {
+PMSE.Proxy.prototype.setCallback = function(callback) {
     this.callback = callback;
     return this;
 };
 
-Proxy.prototype.setAttributes = function(attributes) {
+PMSE.Proxy.prototype.setAttributes = function(attributes) {
     this.attributes = attributes;
     return this;
 };
@@ -81,7 +82,7 @@ Proxy.prototype.setAttributes = function(attributes) {
 /**
  * Obtains the data
  */
-Proxy.prototype.getData = function () {
+PMSE.Proxy.prototype.getData = function() {
 
 };
 
@@ -90,6 +91,6 @@ Proxy.prototype.getData = function () {
  * @param {Object} data
  * @param {Object} [callback]
  */
-Proxy.prototype.sendData = function (data, callback) {
+PMSE.Proxy.prototype.sendData = function(data, callback) {
 
 };

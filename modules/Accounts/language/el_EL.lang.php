@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Προσφορές (Αποστολή σε)',
 	'LNK_ACCOUNT_REPORTS' => 'Προβολή Αναφορών Λογαριασμών',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Έγγραφα',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Πίνακας λίστας λογαριασμών',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Πίνακας Εγγραφής Λογαριασμών',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Γραφήματα',
 	'LBL_DEFAULT' => 'Προβολές',

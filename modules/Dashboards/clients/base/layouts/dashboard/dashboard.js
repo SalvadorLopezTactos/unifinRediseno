@@ -140,6 +140,23 @@
     },
 
     /**
+     * Get the dashboard model attributes.
+     *
+     * @return {Object} Dashboard model fields to save.
+     * @private
+     */
+    _getDashboardModelAttributes: function() {
+        var ctx = this.context && this.context.parent || this.context;
+        var dashboardModule = ctx.get('module');
+
+        return {
+            'assigned_user_id': app.user.id,
+            'dashboard_module': dashboardModule,
+            'view_name': dashboardModule === 'Home' ? '' : ctx.get('layout')
+        };
+    },
+
+    /**
      * Binds the button events that are specific to the record pane.
      *
      * @protected
@@ -190,7 +207,7 @@
     /**
      * @inheritdoc
      */
-    loadData: function(options, setFields) {
+    loadData: function(options) {
         // Dashboards store their own metadata as part of their model.
         // For search facet dashboard, we do not want to load the dashboard
         // metadata from the database. Instead, we build the metadata below.
@@ -215,11 +232,11 @@
 
             if (parent) {
                 parent.once('sync', function() {
-                    this._super('loadData', [options, setFields]);
+                    this._super('loadData', [options]);
                 }, this);
             }
         } else {
-            this._super('loadData', [options, setFields]);
+            this._super('loadData', [options]);
         }
     },
 
@@ -295,15 +312,17 @@
     },
 
     /**
-     * Build the default dashboard metadata only if dashboards are empty.
+     * Set or render the appropriate dashboard for display.
      *
-     * Default dashboard metadata are stored in the following layout metadata
-     * <pre>
-     * listview - list-dashboard
-     * recordview - record-dashboard
-     * </pre>
-     * If the default dashboard is not assigned,
-     * the layout will render dashboard-empty template.
+     * The appropriate dashboard is selected using this order of preference:
+     * 1. The last viewed dashboard
+     * 2. The last modified default dashboard
+     * 3. The last modified favorite dashboard
+     * 4. Create a new dashboard from metadata
+     * 5. Render dashboard-empty template
+     *
+     *  Generating dashboards from metadata is deprecated and will be removed
+     *  in an upcoming version. Please create the appropriate default dashboards.
      */
     setDefaultDashboard: function() {
         if (this.disposed) {
@@ -318,20 +337,36 @@
         var hasParentContext = this.context && this.context.parent;
         var parentModule = hasParentContext && this.context.parent.get('module') || 'Home';
 
+        // this.collection contains all the default and favorited dashboards
+        // ordered by date modified (descending).
         if (this.collection.length > 0) {
             var currentModule = this.context.get('module');
-            model = _.first(this.collection.models);
 
+            // Use the last viewed dashboard.
             if (lastViewed) {
                 var lastVisitedModel = this.collection.get(lastViewed);
-                //if last visited dashboard not in the fetching list,
-                //it should navigate to the first searched dashboard.
-                //And it should clean out the previous last visited dashboard,
-                //since it is no longer existed.
+                // It should navigate to the last viewed dashboard if available,
+                // and it should clean out the cached record in lastState
                 if (!_.isEmpty(lastVisitedModel)) {
                     app.user.lastState.set(lastVisitedStateKey, '');
                     model = lastVisitedModel;
                 }
+            }
+
+            // If there is no dashboard found yet,
+            // use the last modified default dashboard.
+            if (!model) {
+                model = _.find(this.collection.models, function(model) {
+                    return model.get('default_dashboard');
+                });
+            }
+
+            // If there is no dashboard found yet,
+            // use the last modified favorite dashboard.
+            if (!model) {
+                // If we get in here, there are no default dashboards in the
+                // collection, so the collection only has favorite dashboards.
+                model = _.first(this.collection.models);
             }
 
             if (currentModule == 'Home' && _.isString(lastViewed) && lastViewed.indexOf('bwc_dashboard') !== -1) {
@@ -340,6 +375,8 @@
                 // use the _navigate helper
                 this._navigate(model);
             }
+            // There are no favorite or default dashboards, so the collection
+            // is empty.
         } else {
             var _initDashboard = this._getInitialDashboardMetadata();
 
@@ -348,6 +385,9 @@
                 this._renderEmptyTemplate();
                 return;
             }
+
+            app.logger.warn('Generating dashboards from metadata is deprecated and ' +
+                'will be removed in an upcoming version. Please create the appropriate default dashboards.');
 
             // Since we have an initial dashboard,
             // Drill-down to the dashlet level to check permissions for that module.
@@ -374,9 +414,11 @@
             if (this.context.get('modelId')) {
                 model.set('id', this.context.get('modelId'), {silent: true});
             }
-            // make sure that the model actually has some metadata
+
             if (!_.isUndefined(model.get('metadata'))) {
-                model.save({}, this._getDashboardModelSaveParams());
+                var attributes = this._getDashboardModelAttributes();
+                attributes.my_favorite = true;
+                model.save(attributes, this._getDashboardModelSaveParams());
                 this.collection.add(model);
             }
         }
@@ -543,7 +585,7 @@
         layout.initComponents([component]);
 
         layout.removeComponent(0);
-        layout.loadData({}, false);
+        layout.loadData({});
         layout.render();
     },
 
@@ -583,25 +625,69 @@
         var ctx = context && context.parent || context;
         var module = ctx.get('module') || context.get('module');
         var layoutName = ctx.get('layout') || '';
+
+        /**
+         * Overrides the datamanager sync with dashboard specific functionality.
+         *
+         * sync overrides {@link Data.DataManager#sync}.
+         */
         var sync = function(method, model, options) {
+            var callbacks = app.data.getSyncCallbacks(method, model, options);
+
+            var getEditableFields = function() {
+                var fieldNames = _.keys(model.attributes);
+
+                var editableFields = _.filter(fieldNames, function(fieldName) {
+                    return app.acl.hasAccess('edit', 'Dashboards', {field: fieldName});
+                });
+
+                if (editableFields.indexOf('id') < 0) {
+                    editableFields.push('id');
+                }
+
+                return model.toJSON({
+                    fields: editableFields
+                });
+            };
+
+            // When favoriting, use the favorite endpoint to be consistent
+            // with the rest of sidecar.
+            if (options.favorite) {
+                return app.api.favorite(
+                    'Dashboards',
+                    model.id,
+                    model.isFavorite(),
+                    callbacks,
+                    options.apiOptions
+                );
+            }
 
             options = app.data.parseOptionsForSync(method, model, options);
-            // there is no max limit for number of dashboards permodule view
+            // There is no max limit for number of dashboards per module view.
             if (options && options.params) {
                 options.params.max_num = -1;
             }
+            if (_.isEmpty(options.params)) {
+                options.params = {};
+            }
+            options.params.filter = [{
+                'dashboard_module': module,
+                '$or': [
+                    {'$favorite': ''},
+                    {'default_dashboard': 1}
+                ]
+            }];
 
-            var callbacks = app.data.getSyncCallbacks(method, model, options);
-            var path = (this.dashboardModule === 'Home' || model.id) ?
-                this.apiModule : this.apiModule + '/' + this.dashboardModule;
-            if (method === 'read') {
-                options.params.view_name = layoutName;
+            options.order_by = {'date_modified': 'DESC'};
+            if (module !== 'Home') {
+                options.params.filter.push({view_name: layoutName});
             }
 
             app.data.trigger('data:sync:start', method, model, options);
             model.trigger('data:sync:start', method, options);
 
-            app.api.records(method, path, model.attributes, options.params, callbacks);
+            // Only update the fields that the current user is allowed to modify
+            app.api.records(method, model.apiModule, getEditableFields(), options.params, callbacks);
         };
 
         if (module === 'Home') {
@@ -621,7 +707,7 @@
     },
 
     /**
-     * Returns a new Dashboard Bean with proper view_name and sync function set
+     * Returns a new Dashboard Bean with proper view_name and sync function set.
      *
      * @param {string} module The name of the module we're in
      * @param {string} layoutName The name of the layout
@@ -642,7 +728,8 @@
             minColumnSpanSize: (module === 'Home') ? 4 : 12,
             defaults: {
                 view_name: layoutName
-            }
+            },
+            fields: {}
         });
         return (getNew) ? new Dashboard() : Dashboard;
     },
@@ -727,8 +814,14 @@
      * Saves the dashboard to the server.
      */
     handleSave: function() {
-        this.model.save({}, {
-            //Show alerts for this request
+        var attributes = this._getDashboardModelAttributes();
+
+        // Favorite new dashboards by default
+        if (!this.model.get('id')) {
+            attributes.my_favorite = true;
+        }
+
+        this.model.save(attributes, {
             showAlerts: true,
             fieldsToValidate: {
                 'name': {

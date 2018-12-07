@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Lūdzu izvēlieties no pieejamajiem laukiem',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Formas apraksts:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Iesniedzot šo formu, tiks izveidots interesents un saite ar kampaņu',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Atzīmējot šo lodziņu, jūs piekrītat turpmāk saņemt mārketinga e-pastus',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Lūdzu lejuplādējiet savu Web To Lead formu',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Web to Lead forma',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Lūdzu aizpildiet visus obligātos laukus',

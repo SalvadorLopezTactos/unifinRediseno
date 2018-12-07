@@ -65,7 +65,7 @@ $viewdefs['KBContents']['base']['layout']['record-dashboard'] = array(
                                                 'module' => 'KBContents',
                                                 'filter' => array(
                                                     'module' => array(
-                                                        'KBContents'
+                                                        'KBContents',
                                                     ),
                                                     'view' => 'record',
                                                 ),
@@ -78,5 +78,5 @@ $viewdefs['KBContents']['base']['layout']['record-dashboard'] = array(
                     ),
                 ),
         ),
-    'name' => 'LBL_DEFAULT_DASHBOARD_TITLE',
+    'name' => 'LBL_KBCONTENTS_RECORD_DASHBOARD',
 );

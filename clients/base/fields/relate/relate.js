@@ -249,6 +249,7 @@
      */
     _render: function() {
         var searchModule = this.getSearchModule();
+        this._updateErasedPlaceholder();
 
         this._super('_render');
 
@@ -390,7 +391,7 @@
             // if we have search results use that to set new values
             var model = collection.get(id);
             attributes.id = model.id;
-            attributes.value = model.get('name');
+            attributes.value = model.get(this.getRelatedModuleField());
             _.each(model.attributes, function(value, field) {
                 if (app.acl.hasAccessToModel('view', model, field)) {
                     attributes[field] = attributes[field] || model.get(field);
@@ -611,6 +612,7 @@
             this.formattedRname = value;
             this.formattedIds = idList;
         }
+
         return value;
     },
 
@@ -623,6 +625,7 @@
         if (!models) {
             return;
         }
+        var isErased = false;
         var updateRelatedFields = true,
             values = {};
         if (_.isArray(models)) {
@@ -635,36 +638,58 @@
 
         values[this.def.id_name] = [];
         values[this.def.name] = [];
+        if (this.fieldDefs.link) {
+            values[this.fieldDefs.link] = [];
+        }
 
         _.each(models, _.bind(function(model) {
             values[this.def.id_name].push(model.id);
             //FIXME SC-4196 will fix the fallback to `formatNameLocale` for person type models.
             values[this.def.name].push(model[this.getRelatedModuleField()] ||
                 app.utils.formatNameLocale(model) || model.value);
+            if (this.fieldDefs.link) {
+                values[this.fieldDefs.link].push(model);
+            } else {
+                isErased = app.utils.isNameErased(app.data.createBean(model._module, model));
+            }
         }, this));
 
         // If it's not a multiselect relate, we get rid of the array.
         if (!this.def.isMultiSelect) {
             values[this.def.id_name] = values[this.def.id_name][0];
             values[this.def.name] = values[this.def.name][0];
+            if (this.fieldDefs.link) {
+                values[this.fieldDefs.link] = values[this.fieldDefs.link][0];
+            } else {
+                this._nameIsErased = isErased;
+            }
         }
+
+        //In case of selecting an erased value twice, we need to force a re-render to show the erased placeolder.
+        var forceUpdate = _.isEmpty(this.model.get(this.def.name)) && _.isEmpty(values[this.def.name]);
+
         this.model.set(values);
 
         if (updateRelatedFields) {
-            // TODO: move this to SidecarExpressionContext
-            // check if link field is currently populated
-            if (this.model.get(this.fieldDefs.link)) {
-                // unset values of related bean fields in order to make the model load
-                // the values corresponding to the currently selected bean
-                this.model.unset(this.fieldDefs.link);
-            } else {
-                // unsetting what is not set won't trigger "change" event,
-                // we need to trigger it manually in order to notify subscribers
-                // that another related bean has been chosen.
-                // the actual data will then come asynchronously
+            //Force an update to the link field as well so that SugarLogic and other listeners can react
+            if (this.fieldDefs.link && _.isEmpty(values[this.fieldDefs.link]) && forceUpdate) {
                 this.model.trigger('change:' + this.fieldDefs.link);
             }
             this.updateRelatedFields(models[0]);
+        }
+
+        if (forceUpdate) {
+            this._updateField();
+        }
+    },
+
+    _updateErasedPlaceholder: function() {
+        //Handle erased field placehilders
+        // Show a custom placeholder if the field's content has been erased
+        if (this._isErasedField()) {
+            this.hasErasedPlaceholder = true;
+        } else {
+            this.hasErasedPlaceholder = false;
         }
     },
 
@@ -744,6 +769,33 @@
                 self.model.set(newData);
             }
         });
+    },
+
+    /**
+     * @override
+     */
+    _isErasedField: function() {
+        if (!this.model) {
+            return false;
+        }
+
+        var def = this.fieldDefs;
+        var link = this.model.get(def.link);
+
+        if (link) {
+            var recordField = app.metadata.getField({
+                module: def.module,
+                name: def.rname
+            });
+
+            if (recordField && recordField.type === 'fullname') {
+                return app.utils.isNameErased(app.data.createBean(def.module, link));
+            } else {
+                return _.contains(link._erased_fields, def.rname);
+            }
+        } else {
+            return this._nameIsErased || this._super('_isErasedField');
+        }
     },
 
     /**
@@ -974,31 +1026,37 @@
                 this.getFilterOptions(true);
             }, this);
 
-            this.model.on('change:' + this.name, function() {
-                if (this.disposed) {
-                    return;
-                }
-                var $dropdown = this.$(this.fieldTag);
-                if (!_.isEmpty($dropdown.data('select2'))) {
-                    var value = this.model.get(this.def.name);
-                    value = _.isArray(value) ? value.join(this._separator) : value;
-                    value = value ? value.trim() : value;
-
-                    $dropdown.data('rname', value);
-
-                    // `id` can be an array of ids if the field is a multiselect.
-                    var id = this.model.get(this.def.id_name);
-                    if (_.isEqual($dropdown.select2('val'), id)) {
-                        return;
-                    }
-
-                    $dropdown.select2('val', id);
-                } else {
-                    this.render();
-                }
-            }, this);
+            this.model.on('change:' + this.name, this._updateField, this);
         }
     },
+
+    _updateField: function() {
+        if (this.disposed) {
+            return;
+        }
+        var $dropdown = this.$(this.fieldTag);
+        if (!_.isEmpty($dropdown.data('select2'))) {
+            var value = this.model.get(this.def.name);
+            value = _.isArray(value) ? value.join(this._separator) : value;
+            value = value ? value.trim() : value;
+            if (this._isErasedField()) {
+                value = app.lang.getAppString('LBL_VALUE_ERASED');
+            }
+
+            $dropdown.data('rname', value);
+
+            // `id` can be an array of ids if the field is a multiselect.
+            var id = this.model.get(this.def.id_name);
+            if (_.isEqual($dropdown.select2('val'), id)) {
+                return;
+            }
+
+            $dropdown.select2('val', id);
+        } else {
+            this.render();
+        }
+    },
+
 
     unbindDom: function() {
         this.$(this.fieldTag).select2('destroy');

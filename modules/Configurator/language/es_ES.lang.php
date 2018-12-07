@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Servidor Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Elementos de subpanel por página',
 	'LOG_MEMORY_USAGE'=>'Registrar utilización de memoria',
-	'LOG_SLOW_QUERIES'=>'Registrar consultas lentas',
+    'LOG_SLOW_QUERIES' => 'Registrar consultas lentas',
     'LOCK_HOMEPAGE_HELP'=>'Esta opción sirve para prevenir<BR> 1) la creación de nuevas páginas de inicio y dashlets en el módulo Inicio, y <BR>2) la personalización de la ubicación del dashlet en las páginas de inicio usando arrastrar y soltar.',
     'CURRENT_LOGO'=>'Logotipo Actual:',
     'CURRENT_LOGO_HELP'=>'Este logotipo se muestra en la esquina superior izquierda del pie de página de la aplicación Sugar.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Éste es el nombre mostrado en la barra de título de su navegador.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Activar/Desactivar emails desde contactos relacionados (o enlazados) para mostrar en Subpanel Email.',
 
-    'LBL_OC_STATUS'                     => 'Estado por defecto de Cliente sin conexión',
-    'DEFAULT_OC_STATUS'                 => 'Habilitar Cliente sin conexión por defecto',
-    'LBL_OC_STATUS_DESC' => 'Aquí puede comprobar si desea que cualquier usuario pueda tener acceso a un Cliente sin conexión.  En otro caso, puede configurar el acceso a nivel de usuario.',
     'SESSION_TIMEOUT' => 'Caducidad de la Sesión del Portal',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'El tiempo de caducidad de sesión del portal es para las versiones anteriores de Sugar Portal, disponible en la version 6.5 o anterior.',
     'UPLOAD_MAXSIZE_UNITS' => 'bytes',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'La URL de inicio de sesión de SAML no puede estar vacía',
     'ERR_EMPTY_SAML_CERT' => 'El certificado de SAML no puede estar vacío',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'El ID de la entidad de SAML no puede estar vacío',
     'ERR_SAML_LOGIN_URL' => 'La URL de inicio de sesión de SAML no es válido',
     'ERR_SAML_SLO_URL' => 'La URL SLO de SAML no es válida',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'El archivo PEM debe contener la clave privada',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'El archivo PEM debe contener el certificado x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'El certificado x.509 proporcionado no coincide con la clave privada',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Flujos de actividad',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Habilitar los flujos de actividad',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Activa los flujos de actividad para la aplicación',
 );
 
 

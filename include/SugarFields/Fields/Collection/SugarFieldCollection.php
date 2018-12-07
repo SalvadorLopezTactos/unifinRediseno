@@ -245,6 +245,10 @@ class SugarFieldCollection extends SugarFieldBase {
             $displayParams = array();
         }
 
+        if (!empty($args['args']['erased_fields'])) {
+            $displayParams['erased_fields'] = true;
+        }
+
         $data[$fieldName] = $this->getBeanCollection($bean, $properties, $displayParams, $service);
     }
 

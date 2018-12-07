@@ -310,7 +310,7 @@ SEE.prototype.evaluate = function() {
  */
 SEE.prototype.getClass = function(exp) {
 	for (var i in SUGAR.FunctionMap){
-		if (typeof SUGAR.FunctionMap[i] == "function" && SUGAR.FunctionMap[i].prototype 
+		if (typeof SUGAR.FunctionMap[i] == "function" && SUGAR.FunctionMap[i].prototype
 			&& this instanceof SUGAR.FunctionMap[i])
 			return i;
 	}
@@ -784,7 +784,7 @@ SEP.prototype.tokenize = function(expr)
 	// now check to make sure all the parantheses opened were closed
 	if ( level != 0 )	 throw ("Syntax Error (Incorrectly Matched Parantheses)");
 
-	//If we hit a comma, but no paramter follows, we shoudl throw an error. 
+	//If we hit a comma, but no paramter follows, we shoudl throw an error.
 	if ( justReadComma ) throw ("Syntax Error (No parameter after comma near <b>" + func + "</b>)");
 
 	// require and return the appropriate expression object
@@ -900,7 +900,7 @@ SEP.prototype.evaluate = function(expr, context)
 
 		if (isInVar && (currChar == " " || currChar == "," ))
 			isInVar = false;
-		
+
 		// check for quotes
 		if ( currChar == '"' && !isPrevCharBK && level == 0 )
 		{
@@ -996,10 +996,10 @@ SEP.prototype.toConstant = function(expr) {
 
 	// a date
 	if ( (/^(0[0-9]|1[0-2])\/([0-2][0-9]|3[0-1])\/[0-3][0-9]{3,3}$/).exec(expr) != null ) {
-		var day   = parseFloat(expr.substring(0, 2));
-		var month = parseFloat(expr.substring(3, 2));
+		var month = parseFloat(expr.substring(0, 2));
+		var day = parseFloat(expr.substring(3, 2));
 		var year  = parseFloat(expr.substring(6, 4));
-		return new SUGAR.DateExpression([day, month, year]);
+		return new SUGAR.expressions.DateExpression([month, day, year]);
 	}
 
 	// a time
@@ -1007,7 +1007,7 @@ SEP.prototype.toConstant = function(expr) {
 		var hour   = parseFloat(expr.substring(0, 2));
 		var minute = parseFloat(expr.substring(3, 2));
 		var second = parseFloat(expr.substring(6, 2));
-		return new SUGAR.TimeExpression([hour, minute, second]);
+		return new SUGAR.expressions.TimeExpression([hour, minute, second]);
 	}
 
 	// neither
@@ -1180,9 +1180,9 @@ SUGAR.expressions.replaceAll = function(haystack, needle, rpl) {
 };
 
 /**
- * 
+ *
  */
- 
+
 SUGAR.util.DateUtils = {
 	/**
  	 * Converts a date string to a new format.
@@ -1280,12 +1280,12 @@ SUGAR.util.DateUtils = {
 		else if (date.indexOf("-") != -1)
 		{
 			dateSep = "-";
-		} 
+		}
 		else if (date.indexOf(".") != -1)
 		{
 			dateSep = ".";
 		}
-		else 
+		else
 		{
 		 	return false;
 		}
@@ -1300,7 +1300,7 @@ SUGAR.util.DateUtils = {
 		{
 			dateFormat = "m" + dateSep + "d" + dateSep + "Y";
 		}
-		else 
+		else
 		{
 			return false;
 		}
@@ -1319,9 +1319,9 @@ SUGAR.util.DateUtils = {
                     return dateFormat + dateTimeSep + "h" + timeSep + "i a";
 				} else if (timeParts[1] == "AM" || timeParts[1] == "PM") {
                     return dateFormat + dateTimeSep + "h" + timeSep + "i A";
-				}	
+				}
 			}
-			else 
+			else
 			{
 				var timeEnd = time.substring(time.length - 2, time.length);
 				if (timeEnd == "AM" || timeEnd == "PM") {
@@ -1351,7 +1351,7 @@ SUGAR.util.DateUtils = {
 			var c = format.charAt(i);
 			switch (c) {
                 case 'm':
-                    var m= date.getMonth() + 1; 
+                    var m= date.getMonth() + 1;
                     out += m < 10 ? "0" + m : m;
                     break;
                 case 'd':

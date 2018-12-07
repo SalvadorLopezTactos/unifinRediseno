@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Morate navesti odgovarajući broj zapisa da bi obrisali dostavljača.',
   'NTC_STATUS' => 'Podesi status na Neaktivno da bi se ovaj dostavljač uklonio iz padajuće liste dostavljača',
   'NTC_LIST_ORDER' => 'Postavi redosled po kome će se ovaj dostavljač prikazati u padajućoj listi dostavljača',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Aktivan',
-    'Inactive' => 'Neaktivan',
-),
-	'LBL_EDITLAYOUT' => 'Izmeni raspored' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Izmeni raspored' /*for 508 compliance fix*/,
 );
-
 
 ?>

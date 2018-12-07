@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Cuadro de mando de la lista de oportunidades',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Cuadro de mando de la lista de oportunidades',
+
     'LBL_MODULE_NAME' => 'Oportunidades',
     'LBL_MODULE_NAME_SINGULAR' => 'Oportunidad',
     'LBL_MODULE_TITLE' => 'Oportunidades: Inicio',
@@ -182,25 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Tras iniciar este cambio, se crearán registros de las líneas de ingresos para cada {{module_name}} existente en segundo plano. Cuando los Elementos de las líneas de ingresos se completen y estén disponibles, se enviará una notificación a la dirección de correo electrónico de su perfil de usuario. Tenga en cuenta que su instancia se debe configurar para enviar correos electrónicos en Admin > Configuración de correo electrónico para que se envíen las notificaciones.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite seguir ventas individuales de principio a fin. Cada registro {{module_name}} representa una venta prospectiva e incluye los datos relevantes de venta, además de relacionarse con otros registros importantes como el {{quotes_module}}, el {{contacts_module}}, etc. Normalmente un {{module_name}} pasará a través de varias etapas de venta hasta que se marque como "Cerrado" o "Perdida". {{plural_module_name}} puede sacar más provecho mediante el uso del módulo de Sugar {{forecasts_singular_module}} para comprender y predecir tendencias de ventas, así como para concentrar sus esfuerzos y lograr las cuotas de ventas.',
+    'LBL_HELP_RECORDS' => 'El módulo {{plural_module_name}} le permite monitorizar las ventas individuales de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes de la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc. Un {{module_name}} normalmente progresará por las distintas etapas de venta, hasta que se marque como "Ganada" o "Perdida". Los {{plural_module_name}} se pueden aprovechar aun más utilizando el módulo de {{forecasts_singular_module}} de Sugar para entender y predecir tendencias de ventas, además de dirigir el trabajo para conseguir las cuotas de venta.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y los artículos pertenecientes a esas ventas de principio a fin. Cada registro {{module_name}} representa una venta futura e incluye datos de venta relevantes, además de relacionarse con otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'El módulo {{plural_module_name}} le permite monitorizar ventas individuales y elementos de línea que pertenecen a dichas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes de la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
--Edite los campos de este registro haciendo clic en un campo individual o en el botón Editar. 
-- Vea o modifique enlaces a otros registros en los subpaneles cambiando el panel inferior izquierdo a "Vista de Datos". 
-- Haga y vea los comentarios de los usuarios y el historial de cambios del registro en el {{activitystream_singular_module}} cambiando el panel inferior izquierdo a "Flujo de actividades". 
-- Siga o añada a favoritos este registro utilizando los iconos a la derecha del nombre del registro. 
-- Las acciones adicionales se encuentran disponibles en el menú desplegable Acciones a la derecha del botón Editar.',
+- Para editar los campos de este registro haga clic en un campo individual o en el botón Editar.
+- Vea o modifique los enlaces con otros registros en los subpaneles cambiando el panel izquierdo inferior a "Vista de datos".
+- Escriba y vea comentarios de usuarios y el historial de cambios del registro en el {{activitystream_singular_module}} cambiando el panel izquierdo inferior a "Flujo de Actividades".
+- Siga o marque como favorito este registro mediante los iconos a la derecha del nombre del registro.
+- Hay acciones adicionales en el menú desplegable de acciones a la derecha del botón de Editar.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'El módulo {{plural_module_name}} le permite realizar un seguimiento de las ventas individuales y los artículos pertenecientes a esas ventas de principio a fin. Cada registro {{module_name}} representa una venta futura e incluye datos de venta relevantes, además de relacionarse con otros registros importantes como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'El módulo {{plural_module_name}} le permite monitorizar ventas individuales y las líneas relacionadas con esas ventas de principio a fin. Cada registro de {{module_name}} representa una venta potencial e incluye datos relevantes para la venta, así como otros registros importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
 Para crear un {{module_name}}:
-1. Introduzca los valores para los campos según su preferencia.
-- Los campos marcados como "requeridos" deben completarse antes de guardar.
-- Haga clic en "Mostrar más" para exponer campos adicionales si fuese necesario.
-2. Haga clic en "Guardar" para finalizar el registro nuevo y volver a la página anterior.',
+1. Proporcione valores para los campos tal y como desee.
+ - Los campos marcados como "Obligatorios" se deben completar antes de guardar.
+ - Haga clic en "Mostrar más" para mostrar campos adicionales si fuera necesario.
+2. Haga clic en "Guardar" para finalizar el nuevo registro y volver a la página anterior.',
 
 // END ENT/ULT
 

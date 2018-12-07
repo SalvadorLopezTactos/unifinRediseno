@@ -10,58 +10,71 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 -->
-<div class="longHelpTitle">
-    Gets current user's dashboards.
-</div>
-<div class="summary">
-<h2>Summary:</h2>
-  This endpoint returns a list of dashboards.
-</div>
-<div class="params">
-<h2>Query Parameters:</h2>
+<h2>Overview</h2>
+<span class="lead">
+    List current user's filtered dashboards.
+</span>
+
+<h2>Summary</h2>
+<span class="lead">
+    This endpoint will return a set of dashboards filtered by an expression. The filter can be applied to multiple
+    fields and have multiple and/or conditions in it. Alternatively, you may use an existing filter by specifying its
+    id. If both a filter definition and a filter id are passed, currently the definition will override the id,
+    <strong>but please do not rely on this behavior as it is subject to change</strong>. Care will need to be
+    taken to make sure that any filters used have appropriate indexes on the server side otherwise the runtime of the
+    endpoint will be very long.
+</span>
+
+<h2>Notice</h2>
+<span class="lead">
+    <strong>This endpoint is not supported in v11.</strong> If you continue to use v10 of the API, your
+    REST calls should behave as below. But, it is advisable to upgrade to v11.<br/>
+    <strong>Migrating to v11:</strong><br/>
+    For more information on behavior in v11, refer to <a href="module_filter_get_help.html">GET /&lt;module&gt;</a>.
+    <br/>
+    Recommended Replacement:
+    <code class="codesample">GET /Dashboards</code><br/><br/>
+    The module name is no longer part of the path. To specify a module name, include it as a filter
+    parameter. For example, to retrieve all dashboards from the Accounts module, use<br/>
+    <strong>v11: </strong>
+    <code class="codesample">GET /Dashboards?filter[0][dashboard_module]=Accounts</code><br/><br/>
+    name, id. etc. are no longer specified as default fields. To retain the default fields, use<br/>
+    <strong>v11: </strong>
+    <code class="codesample">
+        GET /Dashboards?filter[0][dashboard_module]=Accounts&amp;fields=id,name,view_name
+    </code>
+</span>
+
+<h2>Request Arguments</h2>
 <table class="table table-hover">
+    <thead>
     <tr>
-        <th>Param</th>
+        <th>Name</th>
         <th>Type</th>
         <th>Description</th>
         <th>Required</th>
     </tr>
+    </thead>
+    <tbody>
     <tr>
-        <td>
-            filter
-        </td>
-        <td>
-            String
-        </td>
-        <td>
-            The filter expression. See the <a href="module_filter_get_help.html">Filter API</a> for more information.
-        </td>
-        <td>
-            False
-        </td>
+        <td>filter</td>
+        <td>String</td>
+        <td>See <a href="module_filter_get_help.html">Filter API</a>.</td>
+        <td>False</td>
     </tr>
     <tr>
+        <td>filter_id</td>
+        <td>String</td>
         <td>
-            filter_id
+            Identifier for a preexisting filter. See <a href="module_filter_get_help.html">
+            the Filter API</a> for details.
         </td>
-        <td>
-            String
-        </td>
-        <td>
-            Identifier for a preexisting filter. If filter is also set, the two
-            filters are joined with an <code>AND</code>.
-        </td>
-        <td>
-            False
-        </td>
+        <td>False</td>
     </tr>
     <tr>
         <td>max_num</td>
         <td>Integer</td>
-        <td>
-            Max number of records that can be returned. Default is 20, unless
-            overruled by your Sugar configuration.
-        </td>
+        <td>Max number of records that can be returned. Default is 20.</td>
         <td>False</td>
     </tr>
     <tr>
@@ -95,41 +108,82 @@
         <td>Boolean to show deleted records in the result set.</td>
         <td>False</td>
     </tr>
+    </tbody>
 </table>
-</div>
-<div class="input">
 
-<h2>Request</h2>
-    <code class="codesample">
-        GET Dashboards/:
-        "offset":0,
-        "limit":3,
-        "order_by":"date_entered desc"
-    </code>
-</div>
-<div class="output">
-  <h2>Response</h2>
-    <code class="codesample">
-        {
-            "next_offset" : 3
-            "records" :
-            [
-                {
-                    id: "1848af4f-bdde-810d-c121-511e7da454c6"
-                    name: "Dashboard1"
-                    url: "http://localhost/ult/sugarcrm/rest/v10/Dashboards/1848af4f-bdde-810d-c121-511e7da454c6"
-                },
-                {
-                    id: "2c17875e-57f1-a2dd-f9cb-511d7192c65e"
-                    name: "Dashboard2"
-                    url: "http://localhost/ult/sugarcrm/rest/v10/Dashboards/2c17875e-57f1-a2dd-f9cb-511d7192c65e"
-                },
-                {
-                    id: "bb0e2c83-660a-1fd7-fb69-511e7d6b05bd"
-                    name: "Dashboard3"
-                    url: "http://localhost/ult/sugarcrm/rest/v10/Dashboards/bb0e2c83-660a-1fd7-fb69-511e7d6b05bd"
-                }
-            ]
-        }
-    </code>
-</div>
+<h2>Response Arguments</h2>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>next_offset</td>
+        <td>Integer</td>
+        <td>
+            Displays the next offset for retrieval of additional results. -1 will be returned when there are no more
+            records.
+        </td>
+    </tr>
+    <tr>
+        <td>records</td>
+        <td>Array</td>
+        <td>An array of results containing matched records.</td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Response</h3>
+<pre class="pre-scrollable">
+{
+  "next_offset": -1,
+  "records": [
+    {
+      "id": "d509b3da-29f6-7b23-7cce-56fab1a6335b",
+      "name": "Accounts Dashboard",
+      "date_modified": "2016-03-29T09:46:00-07:00",
+      "view_name": "records",
+      "_acl": {
+        "fields": {}
+      },
+      "view": "records",
+      "_module": "Dashboards"
+    },
+    {
+      "id": "cc4982cd-0bdf-bad4-d079-56fab4bdddf1",
+      "name": "Contacts Dashboard",
+      "date_modified": "2016-03-29T09:57:58-07:00",
+      "view_name": "records",
+      "_acl": {
+        "fields": {}
+      },
+      "view": "records",
+      "_module": "Dashboards"
+    }
+  ]
+}
+</pre>
+
+<h2>Change Log</h2>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Version</th>
+        <th>Change</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>v11</td>
+        <td>No longer supported. Please use <a href="module_filter_get_help.html">GET /Dashboards</a> instead.</td>
+    </tr>
+    <tr>
+        <td>v10</td>
+        <td>Added <code>/Dashboards/&lt;module&gt;</code> GET endpoint.</td>
+    </tr>
+    </tbody>
+</table>

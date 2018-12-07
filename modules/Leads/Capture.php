@@ -26,7 +26,7 @@ $app_list_strings['record_type_module'] = array('Contact'=>'Contacts', 'Account'
 $users = array(
 	'PUT A RANDOM KEY FROM THE WEBSITE HERE' => array('name'=>'PUT THE USER_NAME HERE', 'pass'=>'PUT THE USER_HASH FOR THE RESPECTIVE USER HERE'),
 );
-if(SugarAutoLoader::fileExists('leadCapture_override.php')){
+if (file_exists('leadCapture_override.php')) {
 	include('leadCapture_override.php');
 }
 
@@ -105,4 +105,3 @@ if (!empty($redirect)) {
 	echo '</form><script language="javascript" type="text/javascript">document.redirect.submit();</script>';
 	echo '</body></html>';
 }
-?>

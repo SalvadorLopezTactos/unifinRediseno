@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'צור משימה',
   'NTC_DELETE_CONFIRMATION' => 'האם אתה בטוח שברצונך למחוק רישום זה? כל רישום המשתמש במטבע זה יומר למטבע ברירת המחדל של המערכת בעת הגישה אליו. ייתכן ומוטב להגדיר את מצבו כלא פעיל.',
   'LBL_BELOW_MIN' => 'שער המרה חייב להיות גבוה מ-0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'פעיל',
-    'Inactive' => 'לא פעיל',
-  ),
   'LBL_CREATED_BY' => 'נוצר על ידי',
   'LBL_EDIT_LAYOUT' => 'ערוך תצורה' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'מנהלים בלבד',
+  'LBL_CURRENCY_DEFAULT' => 'דולר ארה"ב (ברירת מחדל)',
+
 );
 ?>

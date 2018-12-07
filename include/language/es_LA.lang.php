@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'Claves del Consumidor OAuth',
     'OAuthTokens' => 'Tokens OAuth',
     'Filters' => 'Filtros',
-    'UserSignatures' => 'Firmas de Usuario',
+    'UserSignatures' => 'Firmas de Correo Electrónico',
     'Shippers' => 'Proveedores de Transporte',
     'Styleguide' => 'Guía de estilo',
     'Feedbacks' => 'Retroalimentaciones',
     'Tags' => 'Etiquetas',
     'Categories' => 'Categorías',
     'Dashboards' => 'Tableros',
+    'OutboundEmail' => 'Opciones de Correo Electrónico',
+    'EmailParticipants' => 'Participantes del Correo Electrónico',
+    'DataPrivacy' => 'Privacidad de datos',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'Fo',
         'Tasks' => 'Ts',
-        'Dashboards' => 'Db',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => 'DP',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => 'Tipo de Producto',
     'Shippers' => 'Proveedor de Transporte',
     'Subscriptions' => 'Suscripción',
-    'UserSignatures' => 'Firma de Usuario',
+    'UserSignatures' => 'Firma de Correo Electrónico',
     'Feedbacks' => 'Retroalimentación',
     'Tags' => 'Etiqueta',
     'Categories' => 'Categoría',
+    'OutboundEmail' => 'Opciones de Correo Electrónico',
+    'EmailParticipants' => 'Participante del Correo Electrónico',
+    'DataPrivacy' => 'Privacidad de datos',
   ),
 
 /*
@@ -329,6 +336,11 @@ $app_list_strings = array (
     'Existing Business' => 'Negocios Existentes',
     'New Business' => 'Nuevo Negocio',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => 'Activo',
+            'Inactive' => 'Inactivo',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => 'Ingresos',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => 'Persona influyente',
     'Other' => 'Otro',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => 'Activo',
+            'Inactive' => 'Inactivo',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => 'Activo',
+            'Inactive' => 'Inactivo',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => 'Contacto principal',
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => 'Tarea',
       'KBContents' => 'Base de Conocimiento',
+      'Notes' => 'Nota',
   ),
 
   'record_type_display_notes' =>
@@ -659,6 +683,14 @@ $app_list_strings = array (
     'Calls' => 'Llamada',
       'KBContents' => 'Base de Conocimiento',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => 'Cuenta',
+        'Contacts' => 'Contacto',
+        'Employees' => 'Empleado',
+        'Leads' => 'Cliente potencial',
+        'Prospects' => 'Objetivo',
+        'Users' => 'Usuario',
+    ),
 
   'parent_type_display' =>
   array (
@@ -678,7 +710,7 @@ $app_list_strings = array (
 
     'Prospects' => 'Público Objetivo',
       'KBContents' => 'Base de Conocimiento',
-
+      'Notes' => 'Nota',
   ),
 
   'product_status_default_key' => 'Enviar',
@@ -832,7 +864,6 @@ $app_list_strings = array (
     'Product' => 'Producto',
     'User' => 'Usuario',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => 'Correo Electrónico',
     'Twitter' => 'Twitter'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => 'Solicitud de la política de privacidad de datos',
+        'Send Personal Information being processed' => 'Se está procesando el envío de información personal',
+        'Rectify Information' => 'Rectificar información',
+        'Request to Erase Information' => 'Solicitud para borrar información',
+        'Export Information' => 'Exportar información',
+        'Restrict Processing' => 'Restringir el tratamiento',
+        'Object to Processing' => 'Oponerse al tratamiento',
+        'Consent to Process' => 'Consentir el tratamiento',
+        'Withdraw Consent' => 'Retirar el consentimiento',
+        'Other' => 'Otro',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => 'Comunicaciones comerciales',
+        'Marketing Communications by company' => 'Comunicaciones de marketing por empresa',
+        'Marketing Communications by partners' => 'Comunicaciones de marketing por socio',
+    ),
+    'dataprivacy_status_default_key' => 'Abrir',
+    'dataprivacy_status_dom' => array(
+        'Open' => 'Abrir',
+        'Closed' => 'Completada',
+        'Rejected' => 'Rechazado',
+    ),
+    'dataprivacy_priority_default_key' => 'Bajo',
+    'dataprivacy_priority_dom' => array(
+        'Low' => 'Baja',
+        'Medium' => 'Medio',
+        'High' => 'Alto',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => 'Studio',
     'Upgrade' => 'Actualización:',
     'Users' => 'Usuarios',
+    'OutboundEmail' => 'Opciones de Correo Electrónico',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => 'Falló',
                                         'completed'     => 'Completada',
                                         'no curl'       => 'No ejecutado: cURL no está disponible',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => 'Borrador',
+        'Archived' => 'Archivado',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => 'Lista de Exclusión - Por Id',
     'test' => 'Prueba',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => 'Activo',
+             'Inactive' => 'Inactivo',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3 Semanas',
         '31' => '1 Mes',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => 'Activo',
-    'Inactive' => 'Inactivo',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => 'Alta',
         'medium'    => 'Media',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => 'Ninguno',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'Google',
+        'exchange' => 'Intercambio',
+        'outlook' => 'Outlook',
+        'other' => 'Otro',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2032,6 +2099,11 @@ $app_list_strings = array (
         'ACTIVE' => 'Habilitado',
         'INACTIVE' => 'Deshabilitado',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => 'Registro',
+        'records' => 'Lista',
+        'activities' => 'Flujo de Actividades',
+    ),
 );
 
 $app_strings = array (
@@ -2043,11 +2115,11 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Seguir el enlace',
   'LBL_TOGGLE_VISIBILITY' => 'Alternar Visibilidad', // Record view header panel element
   'LBL_ACTIVITIES' => 'Flujo de Actividad',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. Todos los derechos reservados.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. All Rights Reserved.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugae y el Cubo 3-D son marcas registradas de SugarCRM Inc. '.
         'Todos los demás nombres de compañías y productos que se utilicen o aparezcan en este producto pueden ser marcas registradas de las '.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ son marcas registradas de SugarCRM Inc.',
-    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ son marcas registradas de SugarCRM Inc.',
+    'LBL_TRADEMARK2' => 'SugarCRM®, Sugar Enterprise™ y Sugar™ son marcas registradas de SugarCRM Inc.',
     'LBL_SEND_INVITE' => 'Enviar invitación',
   'LBL_INVITEES' => 'Invitados',
     'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Los invitados no recibirán su invitación',
@@ -2116,6 +2188,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => '¿Habilitar SMTP sobre SSL o TLS?',
     'LBL_NO_ACTION'                         => 'No hay ninguna acción con ese nombre.',
     'LBL_NO_DATA'                           => 'Sin Datos',
+    'LBL_NOT_APPLICABLE'                    => 'No aplicable',
     'LBL_ROUTING_ADD_RULE'                  => 'Agregar Regla',
     'LBL_ROUTING_ALL'                       => 'Al menos',
     'LBL_ROUTING_ANY'                       => 'Cualquiera',
@@ -2320,7 +2393,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Guardar',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Agregar esta carpeta a',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Esta carpeta no puede ser cambiada',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => '¿Está seguro de que quiere eliminar esta carpeta?\nEste proceso no puede revertirse.\nLa eliminación de carpetas se aplicará en cascada a todas las carpetas contenidas.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => '¿Está seguro de que quiere eliminar esta carpeta?\\nEste proceso no puede revertirse.\\nLa eliminación de carpetas se aplicará en cascada a todas las carpetas contenidas.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'Nombre de la Nueva Carpeta',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Por favor, seleccione una carpeta antes de realizar esta acción.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Administración de Carpetas',
@@ -2479,7 +2552,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Sincronizar Todas las Cuentas de Correo',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'Se ha enviado un correo electrónico a la dirección  utilizando la configuración de correo saliente proporcionada. Por favor, compruebe si ha recibido el correo para verificar que la configuración es correcta.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Esta acción sincronizará las cuentas de correo y su contenido.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => '¿Realizar una sincronización completa?\nPara cuentas de correo grandes, puede durar varios minutos.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => '¿Realizar una sincronización completa?\\nPara cuentas de correo grandes, puede durar varios minutos.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Haga clic en la Tecla Shift o en la tecla Ctrl para seleccionar carpetas múltiples.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'General',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Carpetas de Grupo Disponibles',
@@ -2547,6 +2620,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'Importación Existosa',
     'LBL_EMAIL_IMPORT_FAIL'                 => 'Importación Fallida debido a que el mensaje ya ha sido importado o eliminado del servidor',
 
+    'LBL_EMAILS_FROM' => 'Correos Electrónicos Enviados',
+    'LBL_EMAILS_RECEIVED' => 'Correos Electrónicos Recibidos',
+    'LBL_EMAIL_ADDRESSES_USED' => 'Direcciones de correo electrónico utilizadas en mensajes de correo electrónico',
+    'LBL_EMAIL_ADDRESS' => 'Dirección de Correo Electrónico',
+    'LBL_FROM' => 'De',
+    'LBL_TO' => 'Para',
+    'LBL_CC' => 'CC',
+    'LBL_BCC' => 'CCO',
+
     'LBL_LINK_NONE'=> 'Ninguno',
     'LBL_LINK_ALL'=> 'Todos',
     'LBL_LINK_RECORDS'=> 'Registros',
@@ -2588,7 +2670,9 @@ $app_strings = array (
     'ERR_AJAX_LOAD_FOOTER' => 'Si persiste el error, por favor solicite al administrador que deshabilite Ajax para este módulo',
     'ERR_CREATING_FIELDS' => 'Error al rellenar los campos adicionales de detalle:',
     'ERR_CREATING_TABLE' => 'Error al crear la tabla:',
-    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "No puede utilizarse el mismo carácter como separador decimal que el utilizado como separador de miles.\n\n  Por favor, cambie los valores.",
+    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "No puede utilizarse el mismo carácter como separador decimal que el utilizado como separador de miles.
+
+  Por favor, cambie los valores.",
     'ERR_DELETE_RECORD' => 'Debe especificar un número de registro para eliminar el contacto.',
     'ERR_EXPORT_DISABLED' => 'Exportación deshabilitada.',
     'ERR_EXPORT_TYPE' => 'Error exportando',
@@ -2605,6 +2689,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Debe tener una sesión activa para exportar el contenido.',
     'ERR_NO_HEADER_ID' => 'Esta funcionalidad no está disponible con este tema.',
     'ERR_NOT_ADMIN' => "Acceso a administración no autorizado.",
+    'ERR_DISABLED_FOR_IDM_MODE' => "Esta opción está deshabilitada en SugarCRM para el modo IDM y disponible en Cloud Console.",
+    'ERR_GOTO_CLOUD_CONSOLE' => "Vaya a <a href=\"%s\" target=\"_blank\">Cloud Console</a>.",
     'ERR_MISSING_REQUIRED_FIELDS' => 'Falta campo requerido:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Campo requerido no válido:',
     'ERR_INVALID_VALUE' => 'Valor no válido:',
@@ -2828,8 +2914,8 @@ $app_strings = array (
     'LBL_FILTER_MENU_BY' => 'Filtrar menú por',
     'LBL_FILTER_SELECT_FIELD' => 'Seleccione el campo...',
     'LBL_FILTER_SELECT_OPERATOR' => 'Seleccione operador...',
-    'LBL_FILTER_CREATE_NEW' => 'Crear Filtro',
-    'LBL_FILTER_CREATE_FILTER' => 'Crear Filtro nuevo',
+    'LBL_FILTER_CREATE_NEW' => 'Crear',
+    'LBL_FILTER_CREATE_FILTER' => 'Crear filtro nuevo',
     'LBL_FILTER_EDIT_FILTER' => 'Editar filtro',
     'LBL_FILTER_ALL_RECORDS' => 'Todos los registros',
     'TPL_FILTER_SAVE' => 'Ha creado con éxito el filtro {{name}}.',
@@ -2934,7 +3020,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Error de la actualización masiva. Iniciando nuevo intento({{num}} e {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Actualización masiva incompleta. {{num}} registro(s) permanecen sin cambios.',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => 'Actualización masiva incompleta. {{num}} registro(s) permanecen sin cambios.',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} registro(s) fueron ignorados por el permiso.',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} registros(s) han sido ignorados debido a permisos o errores.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} registro(s) se han actualizado correctamente.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} Actualización Masiva',
     'TPL_MASSDELETE_PROGRESS_STATUS' => 'Eliminado {{num}} de {{total}}.',
@@ -3006,6 +3092,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'usuario predeterminado',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => 'cuenta de usuario',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'cuenta de grupo',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => 'Nombre',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => 'Nuevo',
@@ -3218,7 +3305,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004 – 2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Todos los derechos reservados.<br />SugarCRM, Sugae y el Cubo 3-D son marcas registradas de SugarCRM Inc. '.
         'Todos los demás nombres de compañías y productos que se utilicen o aparezcan en este producto pueden ser marcas registradas de las '.
         'respectivas compañías con las que están asociados.',
@@ -3256,7 +3343,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => 'Contraseña:',
     'LBL_LOGGED_OUT' => 'Se ha cerrado la sesión.',
     'LBL_LOGIN_FORM_LABEL' => 'Mostrar el formulario de inicio de sesión',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => 'Volver al inicio de sesión',
+    'LBL_LOGIN_INACTIVE_USER' => 'Usuario inactivo',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => 'Un usuario del portal o grupo no puede iniciar sesión.',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => 'Inicio',
@@ -3323,8 +3412,9 @@ $app_strings = array (
     'LNK_BACKTOTOP' => 'Volver a la parte superior',
     'LNK_REMOVE' => 'quitar',
     'LNK_RESUME' => 'Continuar',
-    'LNK_VIEW_CHANGE_LOG' => 'Ver Registro de Cambios',
-
+    'LNK_VIEW_CHANGE_LOG' => 'Ver el registro de auditoría',
+    'TPL_AUDIT_LOG_TITLE' => 'Registro de auditoría para {{{name}}}',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => 'Por favor, presione el botón atrás del navegador y corrija el error.',
     'NTC_DATE_FORMAT' => '(aaaa-mm-dd)',
@@ -3358,7 +3448,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "La licencia de su compañía para SugarCRM caducará pronto.",
     'ERROR_LICENSE_VALIDATION'=> "La licencia de su compañía para SugarCRM tiene que ser validada. Sólo los administradores pueden iniciar la sesión.",
     'WARN_LICENSE_VALIDATION'=> "La licencia de su compañía para SugarCRM debe ser validada pronto.",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"El número de Clientes Desconectados habilitados actualmente supera el número especificado de su licencia.",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Aviso:</b>: Su navegador esta en vista de compatibilidad IE el cual no es compatible.",
     'WARN_LICENSE_SEATS'=>  "Aviso: El número de usuarios activos ha alcanzado el número máximo de licencias permitidas.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Aviso: El número de usuarios activos supera el número máximo de licencias permitidas.",
@@ -3428,9 +3517,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'Procesando...',
     'LBL_REQUEST_PROCESSED'=>'Hecho',
     'LBL_AJAX_FAILURE' => 'Fallo de Ajax',
-    'LBL_OC_STATUS' => 'Estado de Cliente Desconectado:',
-    'LBL_OC_STATUS_TEXT' => 'Indica si el usuario actual puede o no usar un Cliente Desconectado.',
-    'LBL_OC_DEFAULT_STATUS' => 'Inactivo',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => 'Búsqueda..',
     'LBL_SAVED_SEARCH_SHORTCUT' => 'Búsquedas Guardadas',
     'LBL_SEARCH_POPULATE_ONLY'=> 'Realizar una búsqueda utilizando el formulario de búsqueda anterior',
@@ -3527,10 +3613,11 @@ $app_strings = array (
     /* Sugar7 Dashboard */
     'LBL_DASHBOARD' => 'Tablero',
     'LBL_DASHBOARD_BWC' => 'Mi Tablero de Legado',
-    'LBL_DEFAULT_DASHBOARD_TITLE' => 'Mi Tablero',
+    'LBL_DEFAULT_DASHBOARD_TITLE' => 'Mi tablero',
     'LBL_COLLAPSE_ALL' => 'Contraer Todo',
     'LBL_EXPAND_ALL' => 'Expandir Todo',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => 'Editar',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => 'Ver informe',
     'LBL_DASHLET_REFRESH_LABEL' => 'Actualizar',
     'LBL_DASHLET_REMOVE_LABEL' => 'Quitar',
     'LBL_DASHLET_DROP_HERE' => 'Coloque aquí',
@@ -3558,7 +3645,7 @@ $app_strings = array (
     'LBL_DASHLET_LISTVIEW_DESCRIPTION' => 'Lista de registros de un módulo en particular de acuerdo con los criterios que usted defina.',
     'LBL_DASHLET_MODULE_UNAVAILABLE' => 'Data not available. You do not have permission to access this module.' .
         " \nPlease update or remove this dashlet.",
-    'TPL_DASHLET_MY_MODULE' => 'Mi {{module}}',
+    'TPL_DASHLET_MY_MODULE' => 'Mis {{module}}',
 
     'LBL_DASHLET_OPPORTUNITY_NAME' => 'Métricas de Oportunidad',
     'LBL_DASHLET_OPPORTUNITY_DESCRIPTION' => 'Métrica de Oportunidad para Cuenta Relacionada.',
@@ -4215,7 +4302,9 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Confirmar',
     'LBL_NO_ACCESS' => '(Sin Acceso)',
     'LBL_NO_ACCESS_LOWER' => 'El usuario no tiene acceso al registro.',
-    'LBL_NO_FIELD_ACCESS' => 'Sin acceso',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => 'Valor borrado',
+    'LBL_VALUE_ERASED_TOOLTIP' => 'Esta información se ha borrado mediante una solicitud de privacidad de datos',
     'LBL_CREATE_RELATED_RECORD' => 'Crear Registro Relacionado',
     'LBL_ASSOC_RELATED_RECORD' => 'Vincular registro existente',
     'LBL_CHOOSE_LINK' => 'Elija Tipo de enlace',
@@ -4257,7 +4346,7 @@ $app_strings = array (
     'LBL_MOBILE_DESKTOP' => 'Versión de Escritorio',
     'LBL_MOBILE_DELETE_CONFIRM' => '¿Está seguro de que desea eliminar este registro?',
     'LBL_MOBILE_UNLINK_CONFIRM' => '¿Está seguro de que desea desvincular el registro?',
-    'LBL_MOBILE_LOG_CALL_CONFIRM' => '¿Desea guardar el registro de la llamada?',
+    'LBL_MOBILE_LOG_CALL_CONFIRM' => '¿Le gustaría acceder a su última Llamada?',
     'LBL_MOBILE_CHOOSE_RECIPIENT' => 'Seleccione un destinatario',
     'LBL_MOBILE_CHOOSE_PHONE' => 'Seleccione el número de teléfono',
     'LBL_MOBILE_CHOOSE_URL' => 'Seleccione URL',
@@ -4284,7 +4373,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => 'Grande',
     'LBL_FONTSIZE_HUGE' => 'Enorme',
     'LBL_FONTSIZE_EXTRA_HUGE' => 'Extra enorme',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => 'Fallo la Descarga\r\n{{{this}}}',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "Download failed\r\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => 'Más...',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => '...Menos',
     'LBL_OFFLINE_MODE' => 'Modo offline',
@@ -4353,6 +4442,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => 'Detalle de Transacción',
     'LBL_RECORD_DELETED' => '(Registro borrado)',
     'LBL_NOT_AVAILABLE' => 'No Disponible',
+    'LBL_FILE_SIZE' => 'Tamaño del Archivo',
     'LBL_FILE_SIZE_UNITS_B' => 'Bytes',
     'LBL_FILE_SIZE_UNITS_KB' => 'kB',
     'LBL_FILE_SIZE_UNITS_MB' => 'MB',
@@ -4476,6 +4566,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => 'La vista de detalles se muestra en el lado izquierdo de tu pantalla.',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => 'Usa las flechas de abajo hacer un tour a través de los componentes del menú.',
 
+    'LBL_COMMENT_ADD' => 'Añadir un comentario',
+    'LBL_REQUIRED' => 'Requerido',
+    'LBL_MORE_BUTTON' => 'Más',
+    'LBL_TRY_AGAIN' => 'Intente de nuevo',
+    'LBL_NEW_RECORDS' => 'Creado Recientemente',
+    'LBL_ASSIGNED_TO_ME' => 'Mi {{{module}}}',
+    'LBL_LISTVIEW_FILTER_ALL' => 'Todos los {{{module}}}',
+    'LBL_UNFAVORITE' => 'Eliminar de favoritos',
+    'LBL_ACTIVITY_CREATE' => '{{{record}}} {{{module}}} creado',
+    'LBL_ACTIVITY_UPDATE' => 'Se han actualizado los {{{changes}}} en {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_LINK' => 'Se ha vinculado el {{{relatedRecord}}} al {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UNLINK' => 'Se ha desvinculado el {{{relatedRecord}}} del {{{record}}} {{{module}}}',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{relationship}} para {{parentModule}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => 'Descargar los registros relacionados...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => 'Ha cambiado la configuración de su cuadro de mando. ¿Desea volver a cargar?',
+    'LBL_RECORDS' => 'Registros',
+    'LBL_DASHBOARDS' => 'Tableros',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => 'Buscar {{searchCriteria}}...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => 'Menú principal',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => 'Crear rápidamente un nuevo registro',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => 'Deslice para ver más opciones',
+    'LBL_DETAILS' => 'Detalles',
+    'LBL_DETAIL_RELATED' => 'Relacionado',
+    'LBL_CREATE_RELATED_MODULE_WARN' => 'Este {{module}} requiere un {{relatedModule}}.<a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>Cree un registro de {{relatedModule}}</a>.',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => 'Editar registro',
+    'LBL_OFFLINE_MENU_SETTINGS' => 'Configuración sin conexión',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => 'Eliminación de incidencias de configuraciones',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED" : "El cifrado de datos está habilitado.',
+    'LBL_OFFLINE_TOTAL_RECORDS' => 'Registros totales',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => 'Última descarga',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => 'No se ha podido descargar el archivo.',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => 'No se han podido cargar cuadros de mando del servidor',
+    'ERR_FILTERS_FETCHING' => 'No se pueden recuperar sus filtros',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => 'No se ha podido encriptar el almacenamiento local',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => 'Encriptando los datos sin conexión. Esto puede tardar varios minutos.',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => 'Encriptación de datos sin conexión completada.',
+    'ERR_ACCESS_SPECIFIC_MODULE' => 'No tiene acceso al módulo {{{module}}}.',
+    'LBL_SKIP' => 'Omitir',
+    'LBL_CONTINUE' => 'Continuar',
+    'LBL_ENABLE' => 'Habilitar',
+    'LBL_MOBILE_TRIAL_UNTIL' => 'Prueba hasta',
+    'LBL_MOBILE_SDK_VERSION' => 'Versión de SDK',
+    'LBL_LOG_LEVEL' => 'Nivel de Registro',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => 'Se han reconfigurado los ajustes de inicio de sesión.',
+    'LBL_TRIAL_PERIOD_EXPIRED' => 'Su período de prueba ha caducado.',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => 'El servidor no es compatible con la conexión segura. Desactive la conexión segura.',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => 'El servidor es compatible con la conexión segura. Active la conexión segura.',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => 'Su conexión no es segura. Póngase en contacto con su administrador.',
+    'LBL_LOGIN_SETTINGS_HEADER' => 'Ajustes de inicio de sesión',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => 'Configure su instancia de {{{brandName}}}',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => 'Para que la aplicación funcione, deberá introducir la URL de la instancia de {{{brandName}}}. Si no tiene la URL de la instancia, póngase en contacto con su administrador.',
+    'LBL_FACEID' => 'Face ID',
+    'LBL_TOUCHID' => 'ID de contacto',
+    'LBL_ENABLE_TOUCHID' => 'Enable {{{biometryType}}}',
+    'LBL_SETUP_TOUCHID' => 'Setup {{{biometryType}}}',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => 'Inicie sesión con el dedo',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "{{{biometryType}}} is not set up on your device. \n\nGo to your device settings to set up {{{biometryType}}}. Once set up, enable {{{biometryType}}} for {{{brandName}}} in Main Menu > Settings.",
+    'LBL_TOUCH_ID_DISCLAIMER' => 'Using {{{biometryType}}} with {{{brandName}}} will allow you to use your biometric identifier instead of entering your password to access {{{brandName}}}.',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => 'Would you like to proceed with {{{biometryType}}}?    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => 'Enter {{{brandName}}} Password to Enable {{{biometryType}}}',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => 'Configuración',
+    'LBL_MDM_CONFIRM_CHANGE' => 'La configuración de la aplicación ha cambiado desde el Administrador de dispositivos móviles. Inicie sesión de nuevo para aplicar los cambios.',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => 'Permita el acceso de {{{brandName}}} a su ubicación desde los ajustes de su dispositivo.',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => 'La ubicación actual no está disponible',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "Current location retrieval timed out. \nPlease try again.",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => 'Los marcadores de ubicación no están disponibles',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => 'Las coordenadas de ubicación no son válidas',
+    'ERR_MOBILE_INVALID_PASSWORD' => 'Contraseña no válida.',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => 'Su aplicación no está actualizada, y ya no es compatible con la instancia de {{{brandName}}} a la que está conectado. ¿Desea actualizarla?',
+    'LBL_MOBILE_BY' => 'Por',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => 'Este filtro no está disponible sin conexión',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => 'Registros sin conexión',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => 'Ajustes de descarga',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => 'Descargue sus registros asignados, favoritos y seguidos para acceder a ellos sin conexión. Puede actualizar sus preferencias en ajustes sin conexión.',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "Your records have finished downloading. You can now access them in offline mode.",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "Not all your records were downloaded.\n Do you want to try again?",
+    'LBL_BULK_LOAD_USE_CELLULAR' => 'Usar datos móviles',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => 'No en este momento',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => 'La descarga se ha pausado y continuará cuando vuelva a abrir la aplicación.',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => 'Descargando {{{module}}}: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => 'Actualizar los últimos registros',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => 'Esperando conexión',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => 'Pausado',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => 'Detenido',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => 'Descargar',
+    'LBL_BULK_LOAD_BTN_PAUSE' => 'Pausar',
+    'LBL_BULK_LOAD_BTN_RESUME' => 'Continuar',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => 'Por defecto solo se usa la conexión WiFi',
+    'LBL_NPS_RATING_MSG' => "How would you rate your \n{{{productName}}} experience?",
+    'LBL_NPS_THANKS_MSG' => '¡Gracias por sus comentarios!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => '¿Le importaría valorarla en la App Store?',
+    'LBL_NPS_NO_THANKS' => 'No, gracias',
+    'LBL_NPS_NOT_NOW' => 'Ahora no',
+    'LBL_NPS_RATE_NOW' => 'Valorar ahora',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => 'La red no está disponible. Puede seguir usando la aplicación mientras está sin conexión',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => 'Sus cambios se sincronizarán cuando esté conectado. <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>Consulte los detalles</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => 'Hay datos sin sincronizar. Consulte el <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>registro de transacciones</a>',
+    'LBL_CONVERT' => 'Convertir',
+    'LBL_CONVERT_LEAD' => 'Convertir Cliente Potencial',
+    'LBL_SEARCH_EXISTING_RECORD' => 'Buscar {{{this}}} existente',
+    'LBL_DUPLICATES_CHECK_FAILED' => 'Ha fallado la comprobación de duplicados',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => '¿Desea mover las actividades relacionadas al registro de contacto?',
+    'LBL_LEAD_CONVERSION_SUCCESS' => 'Ha convertido correctamente el cliente potencial {{{name}}}',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => 'No se han encontrado duplicados.',
+    'ERR_LEAD_CONVERSION_FAIL' => 'Ha fallado la conversión de duplicados',
+    'LBL_SELECT_DUPLICATE_RECORD' => 'Seleccione entre los {{{modulePlural}}} duplicados',
+    'LBL_SELECTED_EXISTING_RECORD' => '{{{moduleSingular}}} seleccionado',
+    'LBL_CREATED_NEW_RECORD' => 'Se ha creado un nuevo {{{moduleSingular}}}',
+    'LBL_VO_BACK_BTN' => 'Botón Atrás',
+    'LBL_VO_HOME_BTN' => 'Botón de Inicio',
+    'LBL_VO_DASHBOARD_BTN' => 'Botón de cuadro de mando',
+    'LBL_VO_SEARCH_BTN' => 'Botón de búsqueda',
+    'LBL_VO_RIGHT_MENU_BTN' => 'Botón derecho del menú',
+    'LBL_VO_ADD_BTN' => 'Añadir botón',
+
     //begin portal
 
     //portal record tutorial
@@ -4587,6 +4793,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => 'Seleccionar un Informe',
     'LBL_REPORT_AUTO_REFRESH' => 'Actualización automática',
     'LBL_REPORT_EDIT' => 'Editar Informe Selccionado',
+    'LBL_REFRESH_LIST_AND_CHART' => 'Actualizar lista y tabla',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => 'Desconocido',
@@ -4648,6 +4855,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'Error durante la acción Asignar a.',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => 'Usted no tiene acceso a {{name}}. Por favor, póngase en contacto con el administrador.',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => 'Año {0}',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} Q{0}',
@@ -4659,6 +4869,11 @@ $app_strings = array (
     'LBL_MESSAGE_BOX_TITLE' => 'Alerta',
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => 'Ignorar Duplicados y Guardar',
     'LBL_RESTORE' => 'Restablecer a original',
+
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => 'Registros marcados para borrar',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => 'Muestra los registros relacionados con una solicitud de privacidad de datos para '
+        . 'Borrar información.',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'Fuente RSS',
@@ -4682,6 +4897,7 @@ $app_strings = array (
     'LBL_UNASSIGNED' => 'Sin asignar',
     'LBL_ARCHIVE_EMAIL' => 'Archivar Correo Electrónico',
     'LBL_EMAIL_ARCHIVED' => 'Correo Electrónico Archivado',
+    'LBL_CREATE_ARCHIVED_EMAIL' => 'Crear Correo Electrónico Archivado',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => 'Actividades planificadas',
@@ -4713,6 +4929,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Mis Tareas',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Tareas de Equipo',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Advanced Workflow',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP o REST API antiguo',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'Cron Job',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => 'Logic Hook',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'Flujo de trabajo de Sugar',
+    'LBL_AUDIT_SUBJECT_USER' => 'Usuario',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Web para el cliente potencial',
+
     //common chart strings
     'LBL_CHART' => 'Gráfico',
     'LBL_CHART_NO_DATA' => 'No hay datos disponibles.',
@@ -4721,6 +4950,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => 'Ocultar controles',
     'LBL_CHART_CONTROLS_OPEN' => 'Mostrar controles',
     'LBL_CHART_UNDEFINED' => 'No definido',
+    'LBL_CHART_NO_LABEL' => 'No definido',
+    'LBL_CHART_AMOUNT' => 'Cantidad',
+    'LBL_CHART_COUNT' => 'Cuenta',
+    'LBL_CHART_PERCENT' => 'Porcentaje',
+    'LBL_CHART_GROUP' => 'Grupo',
+    'LBL_CHART_DATE' => 'Fecha',
+    'LBL_CHART_KEY' => 'Clave',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => 'Tipo de gráfico',
@@ -4745,7 +4981,7 @@ $app_strings = array (
 
     //record save
     'LBL_RECORD_SAVED' => 'Registro guardado.', // use when there is no information about the record
-    'LBL_RECORD_SAVED_SUCCESS' => 'Ha creado con éxito {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.', // use when a model is available
+    'LBL_RECORD_SAVED_SUCCESS' => 'Ha creado con éxit {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.', // use when a model is available
     'LBL_RECORD_SAVED_ACCESS_DENIED' => 'Usted ha creado con éxito este registro, pero usted no tiene permiso para acceder a este registro.', // use when user has no access to the model
     'LBL_VALIDATING' => 'Validando...',
 
@@ -4792,6 +5028,10 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'Filtro de fecha predeterminada',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => 'Conjunto de datos predeterminados',
 
+    'LBL_PRODUCT_CATALOG_NAME' => 'Catálogo de Productos',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => 'Catálogo de Productos',
+    'LBL_PRODUCT_CATALOG_DESC' => 'Ver y añadir elementos de su catálogo de productos.',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => 'Ver y añadir elementos de su catálogo de productos.',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}} en {{date}} a {{time}}',
@@ -4804,6 +5044,7 @@ $app_strings = array (
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => 'Encendido',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'Mi Flujo de Actividades',
     'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'Ver una lista de actividades realizadas en los registros y crear y colocar comentarios.',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => 'Activity Streams is disabled',
 
     'LBL_DATA_VIEW' => 'Vista de datos',
     'LBL_COMMENT' => 'Comentario',
@@ -4811,6 +5052,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Se produjo un error al conectar con el servidor. Por favor, inténtalo de nuevo',
     'ERR_RESOLVE_ERRORS' => 'Por favor, resuelva los errores antes de continuar.',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => 'Para poder Aprobar, debe haber rellenado todos los campos obligatorios; sin embargo, aún puede Rechazar o Dirigir este registro.',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => 'Para Rechazar/Dirigir debe haber rellenado todos los campos obligatorios.',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Actualizar lista',
@@ -4838,6 +5083,7 @@ $app_strings = array (
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => 'Informes guardados de Gráfico Dashlet',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'Muestra cualquier gráfico de un informe guardado.',
+
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => 'Artículos relacionados publicados',
@@ -4845,7 +5091,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Resumen Histórico',
-    'TPL_HISTORICAL_SUMMARY' => 'Historial Resumido para {{name}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => 'Más historial...',
     'LBL_RELATED_CONTACT' => 'Contacto Relacionado',
     'LBL_MODULE_TYPE' => 'Tipo',
@@ -4992,11 +5238,11 @@ Para crear un nuevo registro utilizando los valores que ha introducido, haga cli
     // duration field
     'LBL_START_AND_END_DATE' => '{{start}} - {{end}} ({{duration}})',
     'LBL_START_AND_END_DATE_SAME_DAY' => '{{date}} {{start}} - {{end}} ({{duration}})',
-    'LBL_START_AND_END_DATE_TO' => 'para',
+    'LBL_START_AND_END_DATE_TO' => 'hasta',
     'LBL_START_AND_END_DATE_DETAIL_VIEW' => 'Fecha de Inicio y Fin',
 
-    'LBL_CALENDAR_START_DATE' => "Fecha Inicio",
-    'LBL_CALENDAR_END_DATE' => "Fecha Fin",
+    'LBL_CALENDAR_START_DATE' => "Fecha de inicio",
+    'LBL_CALENDAR_END_DATE' => "Fecha de fin",
     'LBL_CALENDAR_DURATION' => "Duración",
     'LBL_CALENDAR_RECURRENCE' => "Repetición",
     'LBL_CALENDAR_REMINDERS' => "Recordatorios",
@@ -5019,7 +5265,7 @@ Para crear un nuevo registro utilizando los valores que ha introducido, haga cli
     'LBL_CALENDAR_EVENT_RESPONSE_ACCEPT' => 'Atendiendo',
     'LBL_CALENDAR_EVENT_RESPONSE_DECLINE' => 'Rechazada',
     'LBL_CALENDAR_EVENT_RESPONSE_TENTATIVE' => 'Tentativa',
-    'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'No Replicar',
+    'LBL_CALENDAR_EVENT_RESPONSE_NONE' => 'Sin respuesta',
     'LBL_CALENDAR_EVENT_SCHEDULE_UNAVAILABLE' => 'Planificación No Disponible',
 
     'LBL_ERROR_RETRIEVING_FREE_BUSY' => 'Ha ocurrido un error mientras se recuperaba el plan.',
@@ -5098,6 +5344,29 @@ Para crear un nuevo registro utilizando los valores que ha introducido, haga cli
 
     'LBL_FIELD_TRIMMED' => 'El campo se ha recortado porque excede el límite máximo de caracteres.',
     'LBL_FIELDSIZE_OVERFLOW' => 'El campo excede el límite máximo de caracteres.',
+    'LBL_TINYMCE_TARGET_SAME' => 'Misma ventana',
+    'LBL_TINYMCE_TARGET_NEW' => 'Nueva ventana',
+
+    'LBL_OUTBOUND_EMAILS' => 'Opciones de Correo Electrónico',
+    'LBL_OUTBOUND_EMAIL' => 'Opciones de Correo Electrónico',
+
+    'LBL_EMAIL_PARTICIPANTS' => 'Participantes del Correo Electrónico',
+    'LBL_EMAIL_PARTICIPANT' => 'Participante del Correo Electrónico',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => 'Privacidad de datos',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'Privacidad de datos',
+    'LBL_DATAPRIVACY_VIEW_PII' => 'Ver información personal',
+    'LBL_DATAPRIVACY_MARKFORERASE' => 'Marcar para borrar',
+    'LBL_DATAPRIVACY_FIELDNAME' => 'Campo',
+    'LBL_DATAPRIVACY_VALUE' => 'Valor',
+    'LBL_DATAPRIVACY_CHANGED_BY' => 'Modificado Por',
+    'LBL_DATAPRIVACY_SOURCE' => 'Origen',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => 'Última actualización',
+    'LBL_DATAPRIVACY_PII' => 'Información personal',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Marcar para borrar',
+    'TPL_DATAPRIVACY_PII_TITLE' => 'Información personal de {{{name}}}',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5962,6 +6231,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => 'Campaña' ,
     'email' => 'Correo Electrónico',
     'workflow' => 'Flujo de Actividad',
+    'system' => 'Sistema',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5980,7 +6250,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -6043,6 +6312,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = 'Plantilla de Base de Co
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'Plantilla de Base de Conocimientos';
 $app_list_strings['moduleList']['EmbeddedFiles'] = 'Archivos Incrustados';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Archivo Incrustado';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'Lek',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'P',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lei',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'Leke',
+    'USD' => 'Dollars',
+    'AFN' => 'Dólares',
+    'ARS' => 'Pesos',
+    'AWG' => 'Florines',
+    'AUD' => 'Dólares',
+    'AZN' => 'Nuevos Manats',
+    'BSD' => 'Dólares',
+    'BBD' => 'Dólares',
+    'BYR' => 'Rublos',
+    'EUR' => 'Euros',
+    'BZD' => 'Dólares',
+    'BMD' => 'Dólares',
+    'BOB' => 'Bolivianos',
+    'BAM' => 'Marco Convertible',
+    'BWP' => 'Pulas',
+    'BGN' => 'Leva',
+    'BRL' => 'Reales',
+    'GBP' => 'Libras',
+    'BND' => 'Dólares',
+    'KHR' => 'Rieles',
+    'CAD' => 'Dólares',
+    'KYD' => 'Dólares',
+    'CLP' => 'Pesos',
+    'CNY' => 'Yuan Renminbi',
+    'COP' => 'Pesos',
+    'CRC' => 'Colón',
+    'HRK' => 'Kuna',
+    'CUP' => 'Pesos',
+    'CZK' => 'Coronas',
+    'DKK' => 'Coronas',
+    'DOP' => 'Pesos',
+    'XCD' => 'Dólares',
+    'EGP' => 'Libras',
+    'SVC' => 'Colones',
+    'EEK' => 'Coronas',
+    'FKP' => 'Libras',
+    'FJD' => 'Dólares',
+    'GHC' => 'Cedis',
+    'GIP' => 'Libras',
+    'GTQ' => 'Quetzales',
+    'GGP' => 'Libras',
+    'GYD' => 'Dólares',
+    'HNL' => 'Lempiras',
+    'HKD' => 'Dólares',
+    'HUF' => 'Florínes',
+    'ISK' => 'Coronas',
+    'INR' => 'Rupias',
+    'IDR' => 'Rupias',
+    'IRR' => 'Riales',
+    'IMP' => 'Libras',
+    'ILS' => 'Nuevos Shekels',
+    'JMD' => 'Dólares',
+    'JPY' => 'Yen',
+    'JEP' => 'Libras',
+    'KZT' => 'Tenge',
+    'KPW' => 'Ganada',
+    'KRW' => 'Ganada',
+    'KGS' => 'Soms',
+    'LAK' => 'Kips',
+    'LVL' => 'Lati',
+    'LBP' => 'Libras',
+    'LRD' => 'Dólares',
+    'CHF' => 'Francos suizos',
+    'LTL' => 'Litas',
+    'MKD' => 'Dinares',
+    'MYR' => 'Ringgits',
+    'MUR' => 'Rupias',
+    'MXN' => 'Pesos',
+    'MNT' => 'Tugriks',
+    'MZN' => 'Meticales',
+    'NAD' => 'Dólares',
+    'NPR' => 'Rupias',
+    'ANG' => 'Florines',
+    'NZD' => 'Dólares',
+    'NIO' => 'Córdobas',
+    'NGN' => 'Nairas',
+    'NOK' => 'Coronas',
+    'OMR' => 'Riales',
+    'PKR' => 'Rupias',
+    'PAB' => 'Balboa',
+    'PYG' => 'Guaraní',
+    'PEN' => 'Nuevos Soles',
+    'PHP' => 'Pesos',
+    'PLN' => 'Zlotych',
+    'QAR' => 'Riales',
+    'RON' => 'Nuevo Leu',
+    'RUB' => 'Rublos',
+    'SHP' => 'Libras',
+    'SAR' => 'Riales',
+    'RSD' => 'Dinares',
+    'SCR' => 'Rupias',
+    'SGD' => 'Dólares',
+    'SBD' => 'Dólares',
+    'SOS' => 'Chelines',
+    'ZAR' => 'Rand',
+    'LKR' => 'Rupias',
+    'SEK' => 'Coronas suecas',
+    'SRD' => 'Dólares',
+    'SYP' => 'Libras',
+    'TWD' => 'Nuevos dólares',
+    'THB' => 'Baht',
+    'TTD' => 'Dólares',
+    'TRY' => 'Lira',
+    'TRL' => 'Liras',
+    'TVD' => 'Dólares',
+    'UAH' => 'Hryvnia',
+    'UYU' => 'Pesos',
+    'UZS' => 'Sums',
+    'VEF' => 'Bolivares Fuertes',
+    'VND' => 'Dong',
+    'YER' => 'Riales',
+    'ZWD' => 'Dólares de Zimbabwe',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => 'Single-Hit',

@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'แดชบอร์ดรายการโน้ต',
+
     'ERR_DELETE_RECORD' => 'คุณต้องระบุเลขที่ระเบียนเพื่อลบบัญชี',
     'LBL_ACCOUNT_ID' => 'ID บัญชี:',
     'LBL_CASE_ID' => 'ID เคส:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'คำอธิบาย',
     'LBL_EMAIL_ADDRESS' => 'ที่อยู่อีเมล:',
     'LBL_EMAIL_ATTACHMENT' => 'ไฟล์แนบของอีเมล',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'การแนบอีเมลสำหรับ',
     'LBL_FILE_MIME_TYPE' => 'ประเภท Mime',
+    'LBL_FILE_EXTENSION' => 'การขยายไฟล์',
+    'LBL_FILE_SOURCE' => 'แหล่งของไฟล์',
+    'LBL_FILE_SIZE' => 'ขนาดไฟล์',
     'LBL_FILE_URL' => 'URL ของไฟล์',
     'LBL_FILENAME' => 'ไฟล์แนบ:',
     'LBL_LEAD_ID' => 'ID ผู้สนใจ:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'ID โอกาสทางการขาย:',
     'LBL_PARENT_ID' => 'ID หลัก:',
     'LBL_PARENT_TYPE' => 'ประเภทหลัก',
+    'LBL_EMAIL_TYPE' => 'ประเภทอีเมล',
+    'LBL_EMAIL_ID' => 'ID อีเมล',
     'LBL_PHONE' => 'โทรศัพท์:',
     'LBL_PORTAL_FLAG' => 'แสดงในพอร์ทัลหรือไม่',
     'LBL_EMBED_FLAG' => 'รวมในอีเมลหรือไม่',

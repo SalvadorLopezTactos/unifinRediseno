@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Informació d&#39;Usuari no trobada',
     'ERR_USER_NAME_EXISTS'              => 'El nom d&#39;usuari {0} ja existeix. No es permeten noms d&#39;usuari duplicats. Canviï el nom d&#39;usuari, ha de ser únic.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Aquest usuari ha estat bloquejat a l&#39;aplicació Sugar i no pot iniciar la sessió utilitzant la seva contrasenya actual.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Usuaris autoritzats només externament no tenen permès iniciar sessió amb les credencials de Sugar',
 
 	'LBL_PASSWORD_SENT'                => 'Contrasenya Actualitzada',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'No ha pogut enviar-se la contrasenya',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Correu electrònic del Destinatari',
 	'ERR_SERVER_STATUS'					=> 'L&#39;estat del seu servidor',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'El sistema no pot enviar correu a l&#39;usuari. Si us plau, comprovi la Configuració´de Correu sortint en la <a href="index.php?module=EmailMan&action=config">Configuració de Correu</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'L&#39;usuari només es pot crear en la <a href="{0}" target="_blank">Consola del núvol</a> per al mode IDM.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'L&#39;adreça de correu electrònic principal només es pot actualitzar en la <a href="{0}" target="_blank">Consola del núvol</a> per al mode IDM.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Adreça electrònica',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Confirmar clau de pas',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Ha canviat el tipus d\\&#39;usuari d\\&#39;Usuari Administrador del Sistema a Usuari Normal. Després de guardar aquest canvi, l\\&#39;usuari ja no tindrà privilegis d\\&#39;administrador del sistema.\n\n Faci clic a "OK" per a procedir.\n Faci clic a "Cancelar" per a tornar al registre.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Ha canviat el tipus d\\&#39;usuari d\\&#39;Usuari Administrador del Sistema a Usuari Normal. Després de guardar aquest canvi, l\\&#39;usuari ja no tindrà privilegis d\\&#39;administrador del sistema.\\n\\n Faci clic a "OK" per a procedir.\\n Faci clic a "Cancelar" per a tornar al registre.',
 	'LBL_COUNTRY'						=> 'País',
 	'LBL_CURRENCY_TEXT'					=> 'Estableix la moneda per defecte',
 	'LBL_CURRENCY'						=> 'Moneda',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'seg.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Si us plau, posis en contacte amb l&#39;adminiatrador del sistema.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Per autenticar amb OpenID (OIDC) en el mode IDM instal·leu l&#39;extensió GMP PHP.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Vostè ha estat desconnectat. Per iniciar sessió de nou si us plau faci clic a',
     'LBL_LOGGED_OUT_2' => 'aquí',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Reports d&#39;usuari',
     'LBL_CONTACTS_SYNC' => 'Contactes',
     'LBL_DETAIL' => 'Perfil d&#39;usuari',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Si certs camps no són editables, connecteu-vos a la vostra Consola de núvol per gestionar aquests camps',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Si voleu canviar determinats camps que no són editables, ' .
+        'contacteu amb l&#39;administrador per notificar-li aquests canvis',
 ); // END STRINGS DEFS
 
 ?>

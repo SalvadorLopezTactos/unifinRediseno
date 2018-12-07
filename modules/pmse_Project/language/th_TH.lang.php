@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'การกำหนดกระบวนการ',
   'LBL_MODULE_TITLE' => 'การกำหนดกระบวนการ',
   'LBL_MODULE_NAME_SINGULAR' => 'การกำหนดกระบวนการ',
@@ -47,7 +46,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'มีกระบวนการที่ทำงานกับการกำหนดกระบวนการนี้อยู่ การอัปเดตจะมีผลกับกระบวนการเหล่านี้ คุณยังต้องการแก้ไขการกำหนดกระบวนการนี้หรือไม่',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'มีกระบวนการที่ทำงานกับการกำหนดกระบวนการนี้อยู่ การอัปเดตจะมีผลกับกระบวนการเหล่านี้ คุณยังต้องการปิดใช้งานการกำหนดกระบวนการนี้หรือไม่',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'สร้างระเบียนการกำหนดกระบวนการใหม่โดยอัตโนมัติด้วยการนำเข้าไฟล์ *.bpm จากระบบไฟล์ของคุณ',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'สร้างระเบียนการกำหนดกระบวนการใหม่โดยการอืมพอร์ทไฟล์ *.bpm จากระบบไฟล์ของคุณ',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'นำเข้าการกำหนดกระบวนการเข้าสู่ระบบสำเร็จแล้ว',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'โปรดเลือกไฟล์ *.bpm ที่ถูกต้อง',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'นำเข้าการกำหนดกระบวนการแล้ว แต่มีการดำเนินการกับกฎทางธุรกิจอย่างน้อยหนึ่งรายการที่ไม่ได้เลือกกฎทางธุรกิจไว้',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'ไม่เท่ากับ',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'ไม่ใช่',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'ไม่เท่ากับ',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'ระยะเวลาดำเนินการ',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'เพิ่ม',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'ปิด',

@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Bitte wählen Sie aus den verfügbaren Feldern',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Formular-Beschreibung:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Beim Abschicken dieses Formulars wird ein Interessent erstellt und mit der Kampagne verlinkt.',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Durch Markieren dieses Kontrollkästchens erklären Sie Ihre Einwilligung, zukünftige Marketing-e-Mails zu erhalten',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Bitte laden Sie das Web-2-Lead-Formular herunter',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Web-2-Lead-Formular',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Bitte geben Sie alle erforderlichen Felder an',

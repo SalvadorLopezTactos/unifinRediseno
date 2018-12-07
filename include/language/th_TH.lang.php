@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'คีย์ผู้ใช้ OAuth',
     'OAuthTokens' => 'โทเค็น OAuth',
     'Filters' => 'ตัวกรอง',
-    'UserSignatures' => 'ลายเซ็นของผู้ใช้',
+    'UserSignatures' => 'ลายเซ็นอีเมล',
     'Shippers' => 'ผู้ให้บริการการส่งสินค้า',
     'Styleguide' => 'สไตล์ไกด์',
     'Feedbacks' => 'ฟีดแบ็ก',
     'Tags' => 'แท็ก',
     'Categories' => 'หมวดหมู่',
     'Dashboards' => 'แดชบอร์ด',
+    'OutboundEmail' => 'การตั้งค่าอีเมล',
+    'EmailParticipants' => 'ผู้มีส่วนร่วมในอีเมล',
+    'DataPrivacy' => 'การคุ้มครองข้อมูลส่วนบุคคล (Data Privacy)',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'Fo',
         'Tasks' => 'Ts',
-        'Dashboards' => 'Db',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => 'DP',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => 'ประเภทผลิตภัณฑ์',
     'Shippers' => 'ผู้ให้บริการการส่งสินค้า',
     'Subscriptions' => 'การสมัคร',
-    'UserSignatures' => 'ลายเซ็นของผู้ใช้',
+    'UserSignatures' => 'ลายเซ็นอีเมล',
     'Feedbacks' => 'ฟีดแบ็ก',
     'Tags' => 'แท็ก',
     'Categories' => 'หมวดหมู่',
+    'OutboundEmail' => 'การตั้งค่าอีเมล',
+    'EmailParticipants' => 'ผู้มีส่วนร่วมในอีเมล',
+    'DataPrivacy' => 'การคุ้มครองข้อมูลส่วนบุคคล (Data Privacy)',
   ),
 
 /*
@@ -329,6 +336,11 @@ $app_list_strings = array (
     'Existing Business' => 'ธุรกิจที่มีอยู่',
     'New Business' => 'ธุรกิจใหม่',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => 'ใช้งาน',
+            'Inactive' => 'ไม่ใช้งาน',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => 'รายได้',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => 'ผู้มีอำนาจโน้มน้าว',
     'Other' => 'อื่นๆ',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => 'ใช้งาน',
+            'Inactive' => 'ไม่ใช้งาน',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => 'ใช้งาน',
+            'Inactive' => 'ไม่ใช้งาน',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => 'ผู้ติดต่อหลัก',
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => 'งาน',
       'KBContents' => 'ฐานความรู้',
+      'Notes' => 'หมายเหตุ',
   ),
 
   'record_type_display_notes' =>
@@ -659,6 +683,14 @@ $app_list_strings = array (
     'Calls' => 'การโทร',
       'KBContents' => 'ฐานความรู้',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => 'บัญชี',
+        'Contacts' => 'ที่อยู่ติดต่อ',
+        'Employees' => 'พนักงาน',
+        'Leads' => 'ผู้สนใจ',
+        'Prospects' => 'เป้าหมาย',
+        'Users' => 'ผู้ใช้',
+    ),
 
   'parent_type_display' =>
   array (
@@ -678,7 +710,7 @@ $app_list_strings = array (
 
     'Prospects' => 'เป้าหมาย',
       'KBContents' => 'ฐานความรู้',
-
+      'Notes' => 'หมายเหตุ',
   ),
 
   'product_status_default_key' => 'ส่ง',
@@ -832,7 +864,6 @@ $app_list_strings = array (
     'Product' => 'ผลิตภัณฑ์',
     'User' => 'ผู้ใช้',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => 'อีเมล',
     'Twitter' => 'Twitter'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => 'ร้องขอการคุ้มครองข้อมูลส่วนบุคคล',
+        'Send Personal Information being processed' => 'ดำเนินการส่งข้อมูลส่วนบุคคลแล้ว',
+        'Rectify Information' => 'แก้ไขข้อมูล',
+        'Request to Erase Information' => 'ร้องขอให้ลบข้อมูล',
+        'Export Information' => 'ข้อมูลที่ส่งออก',
+        'Restrict Processing' => 'การประมวลผลที่จำกัดขอบเขต',
+        'Object to Processing' => 'คัดค้านการประมวลผล',
+        'Consent to Process' => 'ยินยอมให้ดำเนินการ',
+        'Withdraw Consent' => 'ถอดถอนความยินยอม',
+        'Other' => 'อื่น ๆ',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => 'การสื่อสารทางธุรกิจ',
+        'Marketing Communications by company' => 'การสื่อสารทางด้านการตลาดของบริษัท',
+        'Marketing Communications by partners' => 'การสื่อสารทางด้านการตลาดของคู่ค้า',
+    ),
+    'dataprivacy_status_default_key' => 'เปิด',
+    'dataprivacy_status_dom' => array(
+        'Open' => 'เปิด',
+        'Closed' => 'เสร็จสมบูรณ์',
+        'Rejected' => 'ปฏิเสธ',
+    ),
+    'dataprivacy_priority_default_key' => 'ต่ำ',
+    'dataprivacy_priority_dom' => array(
+        'Low' => 'ต่ำ',
+        'Medium' => 'ปานกลาง',
+        'High' => 'สูง',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => 'Studio',
     'Upgrade' => 'อัปเกรด',
     'Users' => 'ผู้ใช้',
+    'OutboundEmail' => 'การตั้งค่าอีเมล',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => 'ล้มเหลว',
                                         'completed'     => 'เสร็จสมบูรณ์',
                                         'no curl'       => 'ไม่ได้ทำงาน: ไม่มี cURL',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => 'ร่าง',
+        'Archived' => 'เก็บถาวร',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => 'รายการระงับ - แยกตาม ID',
     'test' => 'การทดสอบ',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => 'ใช้งาน',
+             'Inactive' => 'ไม่ใช้งาน',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3 สัปดาห์',
         '31' => '1 เดือน',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => 'ใช้งาน',
-    'Inactive' => 'ไม่ใช้งาน',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => 'สูง',
         'medium'    => 'ปานกลาง',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => 'ไม่มี',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'Google',
+        'exchange' => 'Exchange',
+        'outlook' => 'Outlook',
+        'other' => 'อื่นๆ',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2032,6 +2099,11 @@ $app_list_strings = array (
         'ACTIVE' => 'เปิดใช้งาน',
         'INACTIVE' => 'ปิดใช้งาน',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => 'ระเบียน',
+        'records' => 'รายการ',
+        'activities' => 'สตรีมกิจกรรม',
+    ),
 );
 
 $app_strings = array (
@@ -2043,7 +2115,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'เปิดลิงก์',
   'LBL_TOGGLE_VISIBILITY' => 'สลับการแสดงผล', // Record view header panel element
   'LBL_ACTIVITIES' => 'สตรีมกิจกรรม',
-  'LBL_COPYRIGHT' => 'ลิขสิทธิ์ © 2004-2017 SugarCRM Inc. สงวนลิขสิทธิ์',
+  'LBL_COPYRIGHT' => 'ลิขสิทธิ์ © 2004-2018 SugarCRM Inc. ห้ามนำส่วนหนึ่งส่วนใดหรือทั้งหมด ไปใช้ ทำซ้ำ ดัดแปลง แก้ไข ก่อนได้รับอนุญาต',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar และลูกบาศก์ 3-D เป็นเครื่องหมายการค้าจดทะเบียนของ SugarCRM Inc. '.
         'ชื่อบริษัทและผลิตภัณฑ์อื่นๆ ทั้งหมดที่ใช้หรือปรากฏในผลิตภัณฑ์นี้อาจเป็นเครื่องหมายการค้าของ'.
         'SugarCRM ®, Sugar Enterprise™ และ Sugar™ เป็นเครื่องหมายการค้าของ SugarCRM Inc.',
@@ -2116,6 +2188,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => 'เปิดใช้ SMTP ผ่าน SSL หรือ TLS?',
     'LBL_NO_ACTION'                         => 'ไม่มีการดำเนินการชื่อนี้',
     'LBL_NO_DATA'                           => 'ไม่มีข้อมูล',
+    'LBL_NOT_APPLICABLE'                    => 'ใช้งานไม่ได้',
     'LBL_ROUTING_ADD_RULE'                  => 'เพิ่มกฎ',
     'LBL_ROUTING_ALL'                       => 'อย่างน้อย',
     'LBL_ROUTING_ANY'                       => 'ไม่ระบุ',
@@ -2479,7 +2552,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'ซิงโครไนซ์บัญชีอีเมลทั้งหมด',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'ระบบส่งอีเมลไปยังที่อยู่อีเมลที่ระบุโดยใช้การตั้งค่าอีเมลขาออกที่กำหนดไว้แล้ว โปรดตรวจสอบว่าอีเมลนั้นส่งถึงปลายทางหรือไม่ เพื่อยืนยันว่าการตั้งค่าถูกต้อง',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'การดำเนินการนี้จะซิงโครไนซ์บัญชีอีเมลและเนื้อหาในบัญชี',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'ดำเนินการซิงโครไนซ์แบบเต็มหรือไม่\nบัญชีอีเมลขนาดใหญ่อาจใช้เวลาสักครู่',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'ดำเนินการซิงโครไนซ์แบบเต็มหรือไม่\\nบัญชีอีเมลขนาดใหญ่อาจใช้เวลาสักครู่',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'กดปุ่ม Shift หรือ Ctrl เพื่อเลือกหลายโฟลเดอร์',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'ทั่วไป',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'โฟลเดอร์กลุ่มที่ใช้ได้',
@@ -2547,6 +2620,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'ส่งการนำเข้าแล้ว',
     'LBL_EMAIL_IMPORT_FAIL'                 => 'นำเข้าไม่สำเร็จเนื่องจากข้อความมีการนำเข้าแล้วหรือถูกลบออกจากเซิร์ฟเวอร์',
 
+    'LBL_EMAILS_FROM' => 'อีเมลที่ส่งแล้ว',
+    'LBL_EMAILS_RECEIVED' => 'อีเมลที่ได้รับ',
+    'LBL_EMAIL_ADDRESSES_USED' => 'ที่อยู่อีเมลที่ใช้ในอีเมล',
+    'LBL_EMAIL_ADDRESS' => 'ที่อยู่อีเมล',
+    'LBL_FROM' => 'จาก',
+    'LBL_TO' => 'ถึง',
+    'LBL_CC' => 'สำเนาถึง',
+    'LBL_BCC' => 'สำเนาลับถึง',
+
     'LBL_LINK_NONE'=> 'ไม่มี',
     'LBL_LINK_ALL'=> 'ทั้งหมด',
     'LBL_LINK_RECORDS'=> 'ระเบียน',
@@ -2605,6 +2687,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'ต้องมีเซสชันที่ใช้งานเพื่อส่งออกเนื้อหา',
     'ERR_NO_HEADER_ID' => 'คุณลักษณะนี้ไม่สามารถใช้ได้ในธีมนี้',
     'ERR_NOT_ADMIN' => "ไม่มีสิทธิ์ในการเข้าถึงการดูแลระบบ",
+    'ERR_DISABLED_FOR_IDM_MODE' => "ตัวเลือกนี้ได้รับการปิดการใช้งานในโหมด IDM ของ SugarCRM และพร้อมใช้งานได้ในคอนโซลระบบคลาวด์",
+    'ERR_GOTO_CLOUD_CONSOLE' => "กรุณาไปที่ <a href=\"%s\" target=\"_blank\">คอนโซลระบบคลาวด์</a>",
     'ERR_MISSING_REQUIRED_FIELDS' => 'ไม่มีข้อมูลในฟิลด์ที่ต้องระบุ',
     'ERR_INVALID_REQUIRED_FIELDS' => 'ฟิลด์ที่ต้องระบุไม่ถูกต้อง:',
     'ERR_INVALID_VALUE' => 'ค่าไม่ถูกต้อง:',
@@ -2743,7 +2827,7 @@ $app_strings = array (
     'LBL_ALT_HOT_KEY' => '',
     'LBL_ARCHIVE' => 'เก็บถาวร',
     'LBL_ASSIGNED_TO_USER'=>'ระบุให้ผู้ใช้',
-    'LBL_ASSIGNED_TO' => 'ระบุให้:',
+    'LBL_ASSIGNED_TO' => 'มอบหมายให้:',
     'LBL_BACK' => 'ย้อนกลับ',
     'LBL_BASE_RATE'=>'อัตราฐาน',
     'LBL_BILL_TO_ACCOUNT'=>'บัญชีที่เรียกเก็บเงิน',
@@ -2934,7 +3018,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'การอัปเดตเป็นกลุ่มล้มเหลว กำลังเริ่มต้นการลองซ้ำ ({{num}} จาก {{total}})',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'การอัปเดตเป็นกลุ่มไม่สมบูรณ์ {{num}} ระเบียนไม่มีการเปลี่ยนแปลง',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => 'การอัปเดตเป็นกลุ่มไม่สมบูรณ์ {{num}} ระเบียนไม่มีการเปลี่ยนแปลง',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => 'ไม่ได้ประมวลผล {{remain}} ระเบียนเนื่องจากสิทธิ์',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => 'การบันทึก{{remain}} ถูกละเลยเนื่องจากการอนุญาตหรือข้อผิดพลาด',
     'TPL_MASSUPDATE_SUCCESS' => 'อัปเดต {{num}} ระเบียนสำเร็จแล้ว',
     'TPL_MASSUPDATE_TITLE' => 'การอัปเดตเป็นกลุ่มสำหรับ {{module}}',
     'TPL_MASSDELETE_PROGRESS_STATUS' => 'กำลังลบ {{num}} จาก {{total}}',
@@ -3006,6 +3090,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'ค่าเริ่มต้นของผู้ใช้',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => 'บัญชีผู้ใช้',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'บัญชีกลุ่ม',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => 'ชื่อ',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => 'สร้าง',
@@ -3218,7 +3303,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'สงวนลิขสิทธิ์<br />SugarCRM, Sugar และลูกบาศก์ 3-D เป็นเครื่องหมายการค้าจดทะเบียนของ SugarCRM Inc. '.
         'ชื่อบริษัทและผลิตภัณฑ์อื่นๆ ทั้งหมดที่ใช้หรือปรากฏในผลิตภัณฑ์นี้อาจเป็นเครื่องหมายการค้าของ'.
         'บริษัทที่เกี่ยวข้องนั้นๆ',
@@ -3262,7 +3347,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => 'รหัสผ่าน',
     'LBL_LOGGED_OUT' => 'คุณออกจากระบบแล้ว',
     'LBL_LOGIN_FORM_LABEL' => 'แสดงฟอร์มล็อกอิน',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => 'กลับไปหน้าล็อกอิน',
+    'LBL_LOGIN_INACTIVE_USER' => 'ผู้ใช้งานที่มีสถานะไม่ใช้งาน',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => 'ผู้ใช้พอร์ทัลหรือผู้ใช้กลุ่มไม่สามารถล็อกอินได้',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => 'แดชบอร์ด',
@@ -3329,8 +3416,9 @@ $app_strings = array (
     'LNK_BACKTOTOP' => 'กลับไปที่ด้านบน',
     'LNK_REMOVE' => 'นำออก',
     'LNK_RESUME' => 'ทำงานต่อ',
-    'LNK_VIEW_CHANGE_LOG' => 'ดูล็อกการเปลี่ยนแปลง',
-
+    'LNK_VIEW_CHANGE_LOG' => 'ดูรายงาน Audit Log',
+    'TPL_AUDIT_LOG_TITLE' => 'รายงาน Audit Log สำหรับ {{{name}}}',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => 'โปรดคลิกปุ่มย้อนกลับของเบราว์เซอร์และแก้ไขข้อผิดพลาด',
     'NTC_DATE_FORMAT' => '(yyyy-mm-dd)',
@@ -3364,7 +3452,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "ใบอนุญาตของบริษัทคุณสำหรับ SugarCRM ใกล้หมดอายุแล้ว",
     'ERROR_LICENSE_VALIDATION'=> "ใบอนุญาตของบริษัทคุณสำหรับ SugarCRM ต้องมีการตรวจสอบ มีเพียงผู้ดูแลระบบเท่านั้นที่สามารถล็อกอิน",
     'WARN_LICENSE_VALIDATION'=> "ใบอนุญาตของบริษัทคุณสำหรับ SugarCRM จะเป็นต้องมีผ่านการตรวจสอบในเร็วๆ นี้",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"จำนวนไคลเอนต์แบบออฟไลน์ที่เปิดใช้งานในขณะนี้เกินจำนวนที่ระบุในใบอนุญาตของคุณ",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>คำเตือน:</b> เบราว์เซอร์ของคุณอยู่ในมุมมองความเข้ากันได้กับ IE ซึ่งระบบไม่สนับสนุน",
     'WARN_LICENSE_SEATS'=>  "คำเตือน: จำนวนผู้ใช้ที่ใช้งานเท่ากับจำนวนใบอนุญาตสูงสุดที่ใช้ได้แล้ว",
     'WARN_LICENSE_SEATS_MAXED'=>  "คำเตือน: จำนวนผู้ใช้ที่ใช้งานเกินจำนวนใบอนุญาตสูงสุดที่ใช้ได้แล้ว",
@@ -3434,9 +3521,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'กำลังประมวลผล..',
     'LBL_REQUEST_PROCESSED'=>'เสร็จสิ้น',
     'LBL_AJAX_FAILURE' => 'Ajax ทำงานล้มเหลว',
-    'LBL_OC_STATUS' => 'สถานะของไคลเอนต์แบบออฟไลน์',
-    'LBL_OC_STATUS_TEXT' => 'ระบุว่าผู้ใช้ปัจจุบันสามารถใช้ไคลเอนต์แบบออฟไลน์หรือไม่',
-    'LBL_OC_DEFAULT_STATUS' => 'ไม่ใช้งาน',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => 'ค้นหา...',
     'LBL_SAVED_SEARCH_SHORTCUT' => 'การค้นหาที่บันทึกไว้',
     'LBL_SEARCH_POPULATE_ONLY'=> 'ดำเนินการค้นหาโดยใช้ฟอร์มการค้นหาด้านบน',
@@ -3537,6 +3621,7 @@ $app_strings = array (
     'LBL_COLLAPSE_ALL' => 'ยุบทั้งหมด',
     'LBL_EXPAND_ALL' => 'ขยายทั้งหมด',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => 'แก้ไข',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => 'ดูรายงาน',
     'LBL_DASHLET_REFRESH_LABEL' => 'รีเฟรช',
     'LBL_DASHLET_REMOVE_LABEL' => 'นำออก',
     'LBL_DASHLET_DROP_HERE' => 'วางที่นี่',
@@ -4222,7 +4307,9 @@ $app_strings = array (
     'LBL_CONFIRM' => 'ยืนยัน',
     'LBL_NO_ACCESS' => '(ไม่มีสิทธิ์เข้าถึง)',
     'LBL_NO_ACCESS_LOWER' => 'ไม่มีสิทธิ์เข้าถึง',
-    'LBL_NO_FIELD_ACCESS' => 'ไม่มีสิทธิ์เข้าถึง',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => 'ลบค่าแล้ว',
+    'LBL_VALUE_ERASED_TOOLTIP' => 'ลบข้อมูลนี้ตามการร้องขอการคุ้มครองข้อมูลส่วนบุคคลแล้ว',
     'LBL_CREATE_RELATED_RECORD' => 'สร้างระเบียนที่เกี่ยวข้อง',
     'LBL_ASSOC_RELATED_RECORD' => 'เชื่อมโยงระเบียนที่มีอยู่',
     'LBL_CHOOSE_LINK' => 'เลือกประเภทลิงก์',
@@ -4291,7 +4378,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => 'ใหญ่กว่า',
     'LBL_FONTSIZE_HUGE' => 'ใหญ่มาก',
     'LBL_FONTSIZE_EXTRA_HUGE' => 'ใหญ่พิเศษ',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => 'ดาวน์โหลดไม่สำเร็จ\r\n{{{this}}}',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "การดาวน์โหลดล้มเหลว\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => 'เพิ่มเติม...',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => '...น้อยลง',
     'LBL_OFFLINE_MODE' => 'โหมดออฟไลน์',
@@ -4360,6 +4447,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => 'รายละเอียดการทำรายการ',
     'LBL_RECORD_DELETED' => '(ลบระเบียนแล้ว)',
     'LBL_NOT_AVAILABLE' => 'N/A',
+    'LBL_FILE_SIZE' => 'ขนาดไฟล์',
     'LBL_FILE_SIZE_UNITS_B' => 'ไบต์',
     'LBL_FILE_SIZE_UNITS_KB' => 'kB',
     'LBL_FILE_SIZE_UNITS_MB' => 'MB',
@@ -4483,6 +4571,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => 'มุมมองรายละเอียดจะเปิดที่ด้านขวาของหน้าจอ',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => 'ใช้ลูกศรด้านล่างเพื่อทัวร์ชมส่วนต่างๆ ในองค์ประกอบหลักของเมนูนี้',
 
+    'LBL_COMMENT_ADD' => 'ใส่ความคิดเห็น',
+    'LBL_REQUIRED' => 'ต้องระบุ',
+    'LBL_MORE_BUTTON' => 'เพิ่มเติม',
+    'LBL_TRY_AGAIN' => 'ลองใหม่อีกครั้ง',
+    'LBL_NEW_RECORDS' => 'สร้างล่าสุด',
+    'LBL_ASSIGNED_TO_ME' => '{{{module}}} ของฉัน',
+    'LBL_LISTVIEW_FILTER_ALL' => '{{{module}}} ทังหมด',
+    'LBL_UNFAVORITE' => 'เลิกโปรดปราณ',
+    'LBL_ACTIVITY_CREATE' => 'สร้าง {{{record}}} {{{module}}} แล้ว',
+    'LBL_ACTIVITY_UPDATE' => 'อัปเดต {{{changes}}} บน {{{record}}} {{{module}}} แล้ว',
+    'LBL_ACTIVITY_LINK' => 'เชื่อมต่อ {{{relatedRecord}}} กับ {{{record}}} {{{module}}} แล้ว',
+    'LBL_ACTIVITY_UNLINK' => 'เลิกเชื่อมต่อ {{{relatedRecord}}} จาก {{{record}}} {{{module}}} แล้ว',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{relationship}} สำหรับ {{parentModule}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => 'ดาวน์โหลดข้อความบันทึกที่เกี่ยวข้อง...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => 'การตั้งค่าแดชบอร์ดได้รับการเปลี่ยนแปลง คุณต้องการโหลดใหม่อีกครั้งหรือไม่',
+    'LBL_RECORDS' => 'ข้อความบันทึก',
+    'LBL_DASHBOARDS' => 'แดชบอร์ด',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => 'ค้นหา {{searchCriteria}}...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => 'เมนูหลัก',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => 'สร้างข้อความบันทึกใหม่ฉับพลัน',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => 'ปัดเพื่อดูตัวเลือกเพิ่มเติม',
+    'LBL_DETAILS' => 'รายละเอียด',
+    'LBL_DETAIL_RELATED' => 'เกี่ยวข้อง',
+    'LBL_CREATE_RELATED_MODULE_WARN' => '{{module}} นี้ต้องใช้ {{relatedModule}} <a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;> สร้างบันทึก {{relatedModule}} </a>',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => 'แก้ไขข้อความบันทึก',
+    'LBL_OFFLINE_MENU_SETTINGS' => 'การตั้งค่าแบบออฟไลน์',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => 'การตั้งค่าแก้ไขจุดบกพร่อง',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED" : "เป็นใช้งานข้อมูลเข้ารหัสแล้ว',
+    'LBL_OFFLINE_TOTAL_RECORDS' => 'จำนวนวินาทีทั้งหมด',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => 'การดาวน์โหลดครั้งล่าสุด',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => 'ไม่สามารถดาวน์โหลดไฟล์ได้',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => 'การดาวน์โหลดแดชบอร์ดจากเซิร์ฟเวอร์ล้มเหลว',
+    'ERR_FILTERS_FETCHING' => 'ไม่สามารถดึงตัวกรองของคุณมาได้',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => 'การเข้ารหัสลับพื้นที่เก็บข้อมูลระยะยาวล้มเหลว',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => 'กำลังเข้ารหัสข้อมูลออฟไลน์ การดำเนินการนี้อาจใช้เวลานานหลายนาที',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => 'การเข้ารหัสข้อมูลออฟไลน์เสร็จสมบูรณ์',
+    'ERR_ACCESS_SPECIFIC_MODULE' => 'คุณไม่มีสิทธิ์ในการเข้าถึงโมดูล {{{module}}}',
+    'LBL_SKIP' => 'ข้าม',
+    'LBL_CONTINUE' => 'ดำเนินการต่อ',
+    'LBL_ENABLE' => 'เปิดใช้งาน',
+    'LBL_MOBILE_TRIAL_UNTIL' => 'ทดลองจนถึง',
+    'LBL_MOBILE_SDK_VERSION' => 'เวอร์ชัน SDK',
+    'LBL_LOG_LEVEL' => 'ระดับล็อก',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => 'มีการกำหนดค่าการตั้งค่าการลงชื่อเข้าใช้',
+    'LBL_TRIAL_PERIOD_EXPIRED' => 'หมดระยะเวลาการทดลองใช้ของคุณแล้ว',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => 'เซิร์ฟเวอร์ไม่รองรับการเชื่อมต่อแบบปลอดภัย กรุณาปิดการเชื่อมต่อแบบปลอดภัย',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => 'เซิร์ฟเวอร์รองรับการเชื่อมต่อแบบปลอดภัย กรุณาเปิดการเชื่อมต่อแบบปลอดภัย',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => 'การเชื่อมต่อของคุณไม่ปลอดภัย กรุณาติดต่อผู้ดูแลระบบของคุณ',
+    'LBL_LOGIN_SETTINGS_HEADER' => 'การตั้งค่าการลงชื่อเข้าใช้',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => 'ตั้งค่าอินสแตนซ์ {{{brandName}}} ของคุณ',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => 'เพื่อให้แอปทำงานได้ คุณจะต้องพิมพ์ URL ของอินสแตนซ์ {{{brandName}}} หากคุณไม่มี URL ของอินสแตนซ์นั้น ๆ กรุณาติดต่อผู้ดูแลระบบของคุณ',
+    'LBL_FACEID' => 'ระบบ Face ID',
+    'LBL_TOUCHID' => 'ระบบ Touch ID',
+    'LBL_ENABLE_TOUCHID' => 'เปิดใช้งาน {{{biometryType}}}',
+    'LBL_SETUP_TOUCHID' => 'ติดตั้ง {{{biometryType}}}',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => 'ลงชื่อเข้าใช้ด้วยนิ้วของคุณ',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "ยังไม่มีการติดตั้ง {{{biometryType}}} บนอุปกรณ์ของคุณ\n\nไปยังการตั้งค่าในอุปกรณ์ของคุณเพื่อติดตั้ง {{{biometryType}}} เมื่อทำการติดตั้งแล้ว ให้เปิดการใช้งาน {{{biometryType}}} สำหรับ {{{brandName}}} ในเมนูหลัก > การตั้งค่า",
+    'LBL_TOUCH_ID_DISCLAIMER' => 'การใช้ {{{biometryType}}} กับ {{{brandName}}} จะช่วยให้คุณได้ใช้การระบุตัวตนทางชีวภาพแทนการใส่รหัสผ่านเพื่อเข้าถึง {{{brandName}}}',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => 'คุณต้องการดำเนินการ {{{biometryType}}} ต่อหรือไม่    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => 'กรอกรหัสผ่านของ {{{brandName}}} เพื่อเปิดการใช้งาน {{{biometryType}}}',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => 'ตั้งค่า',
+    'LBL_MDM_CONFIRM_CHANGE' => 'มีการเปลี่ยนแปลงการกำหนดค่าแอปพลิเคชันจากตัวจัดการอุปกรณ์โทรศัพท์มือถือ กรุณาลงชื่อเข้าใช้ใหม่เพื่อใช้งานการเปลี่ยนแปลงนั้น ๆ',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => 'กรุณาให้สิทธิ์ {{{brandName}}} ในการเข้าถึงตำแหน่งของคุณผ่านทางการตั้งค่าอุปกรณ์ของคุณ',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => 'ไม่มีตำแหน่งปัจจุบัน',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "การค้นคืนตำแหน่งปัจจุบันใช้เวลานานเกินไป \nกรุณาลองใหม่อีกครั้ง",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => 'ไม่มีหมุดแสดงตำแหน่ง',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => 'พิกัดตำแหน่งไม่ถูกต้อง',
+    'ERR_MOBILE_INVALID_PASSWORD' => 'รหัสผ่านไม่ถูกต้อง',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => 'แอปของคุณล้าสมัย และไม่สามารถใช้ได้กับอินสแตนซ์ของ {{{brandName}}} ที่คุณกำลังเชื่อมต่ออีกต่อไป คุณต้องการอัปเดตแอปหรือไม่',
+    'LBL_MOBILE_BY' => 'โดย',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => 'ตัวกรองนี้ไม่พร้อมใช้งานในแบบออฟไลน์',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => 'ข้อความบันทึกแบบออฟไลน์',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => 'ดาวน์โหลดการตั้งค่าต่าง ๆ',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => 'ดาวน์โหลดข้อความบันทึกที่คุณได้รับมอบหมาย โปรดปราน และติดตาม เพื่อให้สามารถเข้าถึงได้แบบออฟไลน์ ทั้งนี้คุณสามารถอัปเดตการกำหนดค่าตามความต้องการต่าง ๆ ในการตั้งค่าออฟไลน์',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "ข้อความบันทึกของคุณเสร็จสิ้นกระบวนการดาวน์โหลดแล้ว ขณะนี้คุณสามารถเข้าถึงข้อมูลเหล่านั้นในโหมดออฟไลน์แล้ว",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "ข้อความบันทึกของคุณไม่ได้รับการดาวน์โหลดทั้งหมด \n คุณต้องการลองใหม่หรือไม่",
+    'LBL_BULK_LOAD_USE_CELLULAR' => 'ใช้ข้อมูลเซลลูลาร์',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => 'ไม่ดำเนินการตอนนี้',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => 'หยุดการดาวน์โหลดชั่วคราว และจะดาวน์โหลดอีกครั้งเมื่อคุณเปิดแอปครั้งต่อไป',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => 'กำลังดาวน์โหลด {{{module}}}: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => 'อัปเดตข้อความบันทึกล่าสุด',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => 'กำลังรอการเชื่อมต่อ',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => 'หยุดชั่วคราว',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => 'กำลังหยุด',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => 'ดาวน์โหลด',
+    'LBL_BULK_LOAD_BTN_PAUSE' => 'หยุดชั่วคราว',
+    'LBL_BULK_LOAD_BTN_RESUME' => 'ทำงานต่อ',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => 'ใช้การเชื่อมต่อ WiFi เท่านั้นในค่าเริ่มต้น',
+    'LBL_NPS_RATING_MSG' => "คุณจะให้คะแนนประสบการณ์การใช้ {{{productName}}} อย่างไร",
+    'LBL_NPS_THANKS_MSG' => 'ขอบคุณสำหรับคำติชม!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => 'คุณสะดวกที่จะให้คะแนนแอปที่ App Store หรือไม่',
+    'LBL_NPS_NO_THANKS' => 'ไม่ ขอบคุณ',
+    'LBL_NPS_NOT_NOW' => 'ไม่ใช่ตอนนี้',
+    'LBL_NPS_RATE_NOW' => 'ให้คะแนนตอนนี้',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => 'เครือข่ายไม่พร้อมใช้งาน คุณยังสามารถใช้แอปขณะออฟไลน์ได้',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => 'การเปลี่ยนแปลงต่าง ๆ จะได้รับการซิงค์เมื่อคุณออนไลน์ <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>ดูรายละเอียด</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => 'มีข้อมูลที่ไม่ได้ซิงค์ กรุณาตรวจสอบ <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>บันทึกธุรกรรม</a>',
+    'LBL_CONVERT' => 'แปลงค่า',
+    'LBL_CONVERT_LEAD' => 'แปลงผู้สนใจ',
+    'LBL_SEARCH_EXISTING_RECORD' => 'ค้นหา {{{this}}} ที่มีอยู่',
+    'LBL_DUPLICATES_CHECK_FAILED' => 'การตรวจสอบซ้ำล้มเหลว',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => 'คุณต้องการย้ายกิจกรรมที่เกี่ยวข้องไปยังข้อมูลบันทึกผู้ติดต่อหรือไม่',
+    'LBL_LEAD_CONVERSION_SUCCESS' => 'คุณแปลงผู้สนใจ {{{name}}} สำเร็จแล้ว',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => 'ไม่พบข้อมูลซ้ำ',
+    'ERR_LEAD_CONVERSION_FAIL' => 'การแปลงผู้สนใจล้มเหลว',
+    'LBL_SELECT_DUPLICATE_RECORD' => 'เลือกจาก {{{modulePlural}}} ซ้ำ',
+    'LBL_SELECTED_EXISTING_RECORD' => '{{{moduleSingular}}} ที่เลือก',
+    'LBL_CREATED_NEW_RECORD' => 'สร้าง {{{moduleSingular}}} ใหม่แล้ว',
+    'LBL_VO_BACK_BTN' => 'ปุ่มย้อนกลับ',
+    'LBL_VO_HOME_BTN' => 'ปุ่มหน้าแรก',
+    'LBL_VO_DASHBOARD_BTN' => 'ปุ่มแดชบอร์ด',
+    'LBL_VO_SEARCH_BTN' => 'ปุ่มค้นหา',
+    'LBL_VO_RIGHT_MENU_BTN' => 'ปุ่มเมนูด้านขวา',
+    'LBL_VO_ADD_BTN' => 'เพิ่มปุ่ม',
+
     //begin portal
 
     //portal record tutorial
@@ -4594,6 +4798,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => 'เลือกรายงาน',
     'LBL_REPORT_AUTO_REFRESH' => 'รีเฟรชอัตโนมัติ',
     'LBL_REPORT_EDIT' => 'แก้ไขรายงานที่เลือก',
+    'LBL_REFRESH_LIST_AND_CHART' => 'รีเฟรชรายการและชาร์ต',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => 'ไม่ทราบ',
@@ -4655,6 +4860,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'เกิดข้อผิดพลาดระหว่างการดำเนินการ AssignTo',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => 'คุณไม่สามารถเข้าถึง "{{name}}" ได้ กรุณาติดต่อผู้ดูแลระบบของคุณ',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => 'ปี {0}',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} ไตรมาส {0}',
@@ -4666,6 +4874,11 @@ $app_strings = array (
     'LBL_MESSAGE_BOX_TITLE' => 'การเตือน',
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => 'ไม่สนใจรายการซ้ำและบันทึก',
     'LBL_RESTORE' => 'รีเซ็ตเป็นค่าดั้งเดิม',
+
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => 'ข้อมูลบันทึกที่ทำเครื่องหมายไว้เพื่อลบออก',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => 'ข้อความบันทึกที่แสดงอยู่เกี่ยวข้องกับการร้องขอการคุมครองข้อมูลส่วนบุคคลแก่ '
+        . 'ลบข้อมูล',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'ฟีด RSS',
@@ -4689,6 +4902,7 @@ $app_strings = array (
     'LBL_UNASSIGNED' => 'ไม่ได้ระบุ',
     'LBL_ARCHIVE_EMAIL' => 'เก็บถาวรอีเมล',
     'LBL_EMAIL_ARCHIVED' => 'การเก็บถาวรอีเมลแล้ว',
+    'LBL_CREATE_ARCHIVED_EMAIL' => 'สร้างอีเมลที่เก็บถาวร',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => 'กิจกรรมที่วางแผนไว้',
@@ -4720,6 +4934,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'งานของฉัน',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'งานของทีม',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'หลักการทำงานขั้นสูง',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP หรือ Old REST API',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'Cron Job',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => 'Logic Hook',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'เวิร์กโฟลว์ Sugar',
+    'LBL_AUDIT_SUBJECT_USER' => 'ผู้ใช้',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Web to Lead',
+
     //common chart strings
     'LBL_CHART' => 'แผนภูมิ',
     'LBL_CHART_NO_DATA' => 'ไม่มีข้อมูล',
@@ -4728,6 +4955,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => 'ซ่อนตัวควบคุม',
     'LBL_CHART_CONTROLS_OPEN' => 'แสดงตัวควบคุม',
     'LBL_CHART_UNDEFINED' => 'ไม่ได้กำหนด',
+    'LBL_CHART_NO_LABEL' => 'ไม่ได้กำหนด',
+    'LBL_CHART_AMOUNT' => 'จำนวน',
+    'LBL_CHART_COUNT' => 'นับ',
+    'LBL_CHART_PERCENT' => 'ร้อยละ',
+    'LBL_CHART_GROUP' => 'กลุ่ม',
+    'LBL_CHART_DATE' => 'วันที่',
+    'LBL_CHART_KEY' => 'หลัก',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => 'ประเภทแผนภูมิ',
@@ -4799,6 +5033,10 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'ตัวกรองวันที่เริ่มต้น',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => 'ชุดข้อมูลเริ่มต้น',
 
+    'LBL_PRODUCT_CATALOG_NAME' => 'แคตตาล็อกผลิตภัณฑ์',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => 'แคตตาล็อกผลิตภัณฑ์',
+    'LBL_PRODUCT_CATALOG_DESC' => 'ดูและเพิ่มรายการจากแคตตาล็อกสินค้าของคุณ',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => 'ดูและเพิ่มรายการจากแคตตาล็อกสินค้าของคุณ',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}} เมื่อ {{date}} เวลา {{time}}',
@@ -4811,6 +5049,7 @@ $app_strings = array (
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => ' ที่ ',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'สตรีมกิจกรรมของฉัน',
     'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'ดูรายการกิจกรรมที่ดำเนินการกับระเบียน จากนั้นสร้างและโพสต์ความคิดเห็น',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => 'สตรีมกิจกรรมถูกปิดการใช้งาน',
 
     'LBL_DATA_VIEW' => 'มุมมองข้อมูล',
     'LBL_COMMENT' => 'ความคิดเห็น',
@@ -4818,6 +5057,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'เกิดข้อผิดพลาดขณะเชื่อมต่อกับเซิร์ฟเวอร์ โปรดลองอีกครั้ง',
     'ERR_RESOLVE_ERRORS' => 'โปรดแก้ไขข้อผิดพลาดก่อนที่จะดำเนินการต่อ',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => 'เพื่อให้สามารถอนุมัติได้ จะต้องกรอกข้อมูลลงในช่องว่างทั้งหมดที่จำเป็น อย่างไรก็ตาม คุณยังคงสามารถเลือกที่จะปฏิเสธข้อความบันทึกหรือดำเนินการต่อ',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => 'ในการที่จะปฏิเสธ/ดำเนินการต่อนั้น จะต้องกรอกข้อมูลลงในทุกช่องที่จำเป็น',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'รีเฟรชรายการ',
@@ -4845,6 +5088,7 @@ $app_strings = array (
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => 'ส่วนข้อมูลแผนภูมิของรายงานที่บันทึกไว้',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'แสดงแผนภูมิทั้งหมดจากรายงานที่บันทึกไว้',
+
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => 'บทความที่เกี่ยวข้องที่เผยแพร่ไว้',
@@ -4852,7 +5096,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'สรุปข้อมูลประวัติ',
-    'TPL_HISTORICAL_SUMMARY' => 'สรุปข้อมูลประวัติสำหรับ {{name}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => 'ประวัติเพิ่มเติม...',
     'LBL_RELATED_CONTACT' => 'ที่อยู่ติดต่อที่เกี่ยวข้อง',
     'LBL_MODULE_TYPE' => 'ประเภท',
@@ -4863,7 +5107,7 @@ $app_strings = array (
     //SFA
     'LBL_BEST' => 'ดีที่สุด',
     'LBL_WORST' => 'แย่ที่สุด',
-    'LBL_LIKELY' => 'เป็นไปได้',
+    'LBL_LIKELY' => 'ความเป็นไปได้',
     'LBL_BEST_ADJUSTED' => 'ดีที่สุด (ปรับค่า)',
     'LBL_WORST_ADJUSTED' => 'แย่ที่สุด (ปรับค่า)',
     'LBL_LIKELY_ADJUSTED' => 'เป็นไปได้ (ปรับค่า)',
@@ -5105,6 +5349,29 @@ $app_strings = array (
 
     'LBL_FIELD_TRIMMED' => 'ฟิลด์ถูกตัด เนื่องจากมีอักขระเกินจำนวนสูงสุด',
     'LBL_FIELDSIZE_OVERFLOW' => 'ฟิลด์มีอักขระเกินจำนวนสูงสุด',
+    'LBL_TINYMCE_TARGET_SAME' => 'หน้าต่างเดียวกัน',
+    'LBL_TINYMCE_TARGET_NEW' => 'หน้าต่างใหม่',
+
+    'LBL_OUTBOUND_EMAILS' => 'การตั้งค่าอีเมล',
+    'LBL_OUTBOUND_EMAIL' => 'การตั้งค่าอีเมล',
+
+    'LBL_EMAIL_PARTICIPANTS' => 'ผู้มีส่วนร่วมในอีเมล',
+    'LBL_EMAIL_PARTICIPANT' => 'ผู้มีส่วนร่วมในอีเมล',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => 'การคุ้มครองข้อมูลส่วนบุคคล (Data Privacy)',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'การคุ้มครองข้อมูลส่วนบุคคล (Data Privacy)',
+    'LBL_DATAPRIVACY_VIEW_PII' => 'ดูข้อมูลส่วนตัว',
+    'LBL_DATAPRIVACY_MARKFORERASE' => 'ทำเครื่องหมายเพื่อลบออก',
+    'LBL_DATAPRIVACY_FIELDNAME' => 'ช่องว่าง',
+    'LBL_DATAPRIVACY_VALUE' => 'ค่า',
+    'LBL_DATAPRIVACY_CHANGED_BY' => 'เปลี่ยนแปลงโดย',
+    'LBL_DATAPRIVACY_SOURCE' => 'ที่มา',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => 'การอัปเดตล่าสุด',
+    'LBL_DATAPRIVACY_PII' => 'ข้อมูลส่วนตัว',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'ทำเครื่องหมายเพื่อลบออก',
+    'TPL_DATAPRIVACY_PII_TITLE' => 'ข้อมูลส่วนตัวสำหรับ {{{name}}}',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5969,6 +6236,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => 'แคมเปญ' ,
     'email' => 'อีเมล',
     'workflow' => 'เวิร์กโฟลว์',
+    'system' => 'ระบบ',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5987,7 +6255,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -6050,6 +6317,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = 'เทมเพลท�
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'เทมเพลทฐานความรู้';
 $app_list_strings['moduleList']['EmbeddedFiles'] = 'ไฟล์ที่รวม';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'ไฟล์ที่รวม';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'Lek',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'P',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lei',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'เลค',
+    'USD' => 'ดอลลาร์',
+    'AFN' => 'อัฟกานี',
+    'ARS' => 'เปโซ',
+    'AWG' => 'กิลเดอร์',
+    'AUD' => 'ดอลลาร์',
+    'AZN' => 'มานัตใหม่',
+    'BSD' => 'ดอลลาร์',
+    'BBD' => 'ดอลลาร์',
+    'BYR' => 'รูเบิล',
+    'EUR' => 'ยูโร',
+    'BZD' => 'ดอลลาร์',
+    'BMD' => 'ดอลลาร์',
+    'BOB' => 'โบลิเบียโน',
+    'BAM' => 'มาร์คที่เปลี่ยนแปลงได้',
+    'BWP' => 'ปูลา',
+    'BGN' => 'เลฟ',
+    'BRL' => 'เรียล',
+    'GBP' => 'ปอนด์',
+    'BND' => 'ดอลลาร์',
+    'KHR' => 'เรียล',
+    'CAD' => 'ดอลลาร์',
+    'KYD' => 'ดอลลาร์',
+    'CLP' => 'เปโซ',
+    'CNY' => 'หยวนเหรินหมินปี้',
+    'COP' => 'เปโซ',
+    'CRC' => 'โคลน',
+    'HRK' => 'คูนา',
+    'CUP' => 'เปโซ',
+    'CZK' => 'โครูนา',
+    'DKK' => 'โครน',
+    'DOP' => 'เปโซ',
+    'XCD' => 'ดอลลาร์',
+    'EGP' => 'ปอนด์',
+    'SVC' => 'โคลอน',
+    'EEK' => 'ครูนี',
+    'FKP' => 'ปอนด์',
+    'FJD' => 'ดอลลาร์',
+    'GHC' => 'ซีดี',
+    'GIP' => 'ปอนด์',
+    'GTQ' => 'เกตซัล',
+    'GGP' => 'ปอนด์',
+    'GYD' => 'ดอลลาร์',
+    'HNL' => 'เลมปีรา',
+    'HKD' => 'ดอลลาร์',
+    'HUF' => 'โฟรินท์',
+    'ISK' => 'โครนา',
+    'INR' => 'รูปี',
+    'IDR' => 'รูเปีย',
+    'IRR' => 'รีอัล',
+    'IMP' => 'ปอนด์',
+    'ILS' => 'เชเกลใหม่',
+    'JMD' => 'ดอลลาร์',
+    'JPY' => 'เยน',
+    'JEP' => 'ปอนด์',
+    'KZT' => 'เตงเก',
+    'KPW' => 'วอน',
+    'KRW' => 'วอน',
+    'KGS' => 'ซอม',
+    'LAK' => 'กีบ',
+    'LVL' => 'ลาติ',
+    'LBP' => 'ปอนด์',
+    'LRD' => 'ดอลลาร์',
+    'CHF' => 'ฟรังก์สวิตเซอร์แลนด์',
+    'LTL' => 'ลิไต',
+    'MKD' => 'ดีนาร์',
+    'MYR' => 'ริงกิต',
+    'MUR' => 'รูปี',
+    'MXN' => 'เปโซ',
+    'MNT' => 'ทูกรุก',
+    'MZN' => 'เมตีกาล',
+    'NAD' => 'ดอลลาร์',
+    'NPR' => 'รูปี',
+    'ANG' => 'กิลเดอร์',
+    'NZD' => 'ดอลลาร์',
+    'NIO' => 'กอร์โดบา',
+    'NGN' => 'ไนร่า',
+    'NOK' => 'โครน',
+    'OMR' => 'รีอัล',
+    'PKR' => 'รูปี',
+    'PAB' => 'บัลโบอา',
+    'PYG' => 'กวารานี',
+    'PEN' => 'นีโว โซล',
+    'PHP' => 'เปโซ',
+    'PLN' => 'ซวอตี',
+    'QAR' => 'รีอัล',
+    'RON' => 'ลิวใหม่',
+    'RUB' => 'รูเบิล',
+    'SHP' => 'ปอนด์',
+    'SAR' => 'ริยาล',
+    'RSD' => 'ดีนาร์',
+    'SCR' => 'รูปี',
+    'SGD' => 'ดอลลาร์',
+    'SBD' => 'ดอลลาร์',
+    'SOS' => 'ชิลลิง',
+    'ZAR' => 'แรนด์',
+    'LKR' => 'รูปี',
+    'SEK' => 'โครนา',
+    'SRD' => 'ดอลลาร์',
+    'SYP' => 'ปอนด์',
+    'TWD' => 'ดอลลาร์ใหม่',
+    'THB' => 'บาท',
+    'TTD' => 'ดอลลาร์',
+    'TRY' => 'ลีร์',
+    'TRL' => 'ลีร์',
+    'TVD' => 'ดอลลาร์',
+    'UAH' => 'ฮรีฟเนีย',
+    'UYU' => 'เปโซ',
+    'UZS' => 'ซอม',
+    'VEF' => 'บอลวาร์ โฟร์ติ',
+    'VND' => 'ดง',
+    'YER' => 'รีอัล',
+    'ZWD' => 'ดอลลาร์ซิมบับเว',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => 'รายการที่พบครั้งเดียว',

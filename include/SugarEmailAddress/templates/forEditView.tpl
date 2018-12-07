@@ -78,6 +78,7 @@ function init{$module}Email{$index}(){ldelim}
 	    var addDefaultAddress = '{$addDefaultAddress}';
 	    var prefillEmailAddress = '{$prefillEmailAddresses}';
 	    var prefillData = {$prefillData};
+        eaw.idmMode = {$idmMode};
 	    if(prefillEmailAddress == 'true') {ldelim}
 	        eaw.prefillEmailAddresses('{$module}emailAddressesTable{$index}', prefillData);
 		{rdelim} else if(addDefaultAddress == 'true') {ldelim}

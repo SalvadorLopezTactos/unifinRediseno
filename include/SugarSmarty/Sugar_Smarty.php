@@ -40,10 +40,10 @@ class Sugar_Smarty extends Smarty
 
         if(empty(self::$_plugins_dir)) {
             self::$_plugins_dir = array();
-            if (SugarAutoLoader::fileExists('custom/include/SugarSmarty/plugins')) {
+            if (file_exists('custom/include/SugarSmarty/plugins')) {
                 self::$_plugins_dir[] = 'custom/include/SugarSmarty/plugins';
             }
-            if (SugarAutoLoader::fileExists('custom/vendor/Smarty/plugins')) {
+            if (file_exists('custom/vendor/Smarty/plugins')) {
                 self::$_plugins_dir[] = 'custom/vendor/Smarty/plugins';
             }
             self::$_plugins_dir[] = 'include/SugarSmarty/plugins';

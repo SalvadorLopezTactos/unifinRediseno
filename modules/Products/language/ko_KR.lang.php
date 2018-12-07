@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => '견적 라인 상품 목록 대시보드',
+
     'LBL_CAMPAIGN_PRODUCT' => '견적라인 품목 캠페인',
     'LBL_MODULE_NAME' => '견적 라인아이템',
     'LBL_MODULE_NAME_SINGULAR' => '견적 라인아이템',
@@ -166,4 +169,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => '견적 상품 견적 데이터 목록',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (새 견적 상품)',
     'LBL_DISCOUNT_PERCENT' => '% 퍼센트',
+    'LBL_DISCOUNT_TYPE' => '할인 유형',
 );

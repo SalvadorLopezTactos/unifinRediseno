@@ -11,8 +11,8 @@
 ({
     initialize: function(options) {
         app.view.View.prototype.initialize.call(this, options);
-        this.context.off("emailtemplates:import:finish", null, this);
-        this.context.on("emailtemplates:import:finish", this.warnImportEmailTemplates, this);
+        this.context.off('emailtemplates:import:finish', null, this);
+        this.context.on('emailtemplates:import:finish', this.warnImportEmailTemplates, this);
     },
 
     /**
@@ -30,24 +30,40 @@
         }
     },
 
-    warnImportEmailTemplates: function () {
+    warnImportEmailTemplates: function() {
         var that = this;
-        if (app.cache.get("show_emailtpl_import_warning")) {
+        if (app.cache.get('show_emailtpl_import_warning')) {
             app.alert.show('emailtpl-import-confirmation', {
                 level: 'confirmation',
-                messages: app.lang.get('LBL_PMSE_IMPORT_EXPORT_WARNING') + "<br/><br/>"
-                    + app.lang.get('LBL_PMSE_IMPORT_CONFIRMATION'),
-                onConfirm: function () {
-                    app.cache.set("show_emailtpl_import_warning", false);
-                    that.importEmailTemplates();
-                },
-                onCancel: function () {
-                    app.router.goBack();
-                }
+                messages: app.lang.get('LBL_PMSE_IMPORT_EXPORT_WARNING') +
+                '<br/><br/>' + app.lang.get('LBL_PMSE_IMPORT_CONFIRMATION'),
+                onConfirm: _.bind(that._onWarnImportEmailTemplatesConfirm, that),
+                onCancel: _.bind(that._onWarnImportEmailTemplatesCancel, that)
             });
         } else {
             that.importEmailTemplates();
         }
+    },
+
+    /**
+     * onConfirm callback for warnImportEmailTemplates alert.
+     * Set the cache so the warning isn't sent again and start the import.
+     *
+     * @private
+     */
+    _onWarnImportEmailTemplatesConfirm: function() {
+        app.cache.set('show_emailtpl_import_warning', false);
+        this.importEmailTemplates();
+    },
+
+    /**
+     * onCancel callback for warnImportEmailTemplates alert.
+     * Navigate the user back to where they were before.
+     *
+     * @private
+     */
+    _onWarnImportEmailTemplatesCancel: function() {
+        app.router.goBack();
     },
 
     /**
@@ -60,34 +76,54 @@
         // Check if a file was chosen
         if (_.isEmpty(projectFile.val())) {
             app.alert.show('error_validation_emailtemplates', {
-                level:'error',
+                level: 'error',
                 messages: app.lang.get('LBL_PMSE_EMAIL_TEMPLATES_EMPTY_WARNING', self.module),
                 autoClose: false
             });
         } else {
             app.alert.show('upload', {level: 'process', title: 'LBL_UPLOADING', autoclose: false});
 
-            var callbacks = {
-                success: function (data) {
-                    app.alert.dismiss('upload');
-                    app.router.goBack();
-                    app.alert.show('process-import-saved', {
-                        level: 'success',
-                        messages: app.lang.get('LBL_PMSE_EMAIL_TEMPLATES_IMPORT_SUCCESS', self.module),
-                        autoClose: true
-                    });
-                },
-                error: function (error) {
-                    app.alert.dismiss('upload');
-                    app.alert.show('process-import-saved', {
-                        level: 'error',
-                        messages: error.error_message,
-                        autoClose: false
-                    });
-                }
-            };
+            var callbacks =
+                {
+                    success: _.bind(self._onImportEmailTemplatesSuccess, self),
+                    error:  self._onImportEmailTemplatesError
+                };
 
-            this.model.uploadFile('emailtemplates_import', projectFile, callbacks, {deleteIfFails: true, htmlJsonFormat: true});
+            this.model.uploadFile('emailtemplates_import',
+                projectFile,
+                callbacks,
+                {deleteIfFails: true, htmlJsonFormat: true});
         }
+    },
+
+    /**
+     * success callback for template import.
+     * @param {Object} data: response data.
+     *
+     * @private
+     */
+    _onImportEmailTemplatesSuccess: function(data) {
+        app.alert.dismiss('upload');
+        app.router.goBack();
+        app.alert.show('process-import-saved', {
+            level: 'success',
+            messages: app.lang.get('LBL_PMSE_EMAIL_TEMPLATES_IMPORT_SUCCESS', this.module),
+            autoClose: true
+        });
+    },
+
+    /**
+     * error callback for template import.
+     * @param {Object} error: response data.
+     *
+     * @private
+     */
+    _onImportEmailTemplatesError: function(error) {
+        app.alert.dismiss('upload');
+        app.alert.show('process-import-saved', {
+            level: 'error',
+            messages: error.error_message,
+            autoClose: false
+        });
     }
-})
+});

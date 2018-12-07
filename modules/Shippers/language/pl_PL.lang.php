@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Aby usunąć spedytora, należy podać numer rekordu.',
   'NTC_STATUS' => 'Ustaw status na nieaktywny aby usunąć tego spedytora z listy spedytorów.',
   'NTC_LIST_ORDER' => 'Ustaw kolejność w jakiej ten spedytor będzie wyświetlany na liście rozwijanej spedytorów',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Aktywny',
-    'Inactive' => 'Nieaktywny',
-),
-	'LBL_EDITLAYOUT' => 'Edytuj układ' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Edytuj układ' /*for 508 compliance fix*/,
 );
-
 
 ?>

@@ -17,7 +17,7 @@ $viewdefs['Leads']['base']['view']['list'] = array(
             'label' => 'LBL_PANEL_1',
             'fields' => array(
                 array (
-                    'name' => 'full_name',
+                    'name' => 'name',
                     'type' => 'fullname',
                     'fields' => array(
                         'salutation',

@@ -23,7 +23,6 @@
      * Overriding to create a Quote from a Subpanel using the Quotes create view not a drawer
      *
      * @inheritdoc
-     * @override
      */
     createRelatedClicked: function(event) {
         var massCollection = this.context.get('mass_collection');

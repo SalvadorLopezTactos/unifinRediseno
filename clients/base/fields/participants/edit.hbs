@@ -36,7 +36,11 @@
                     {{/if}}
                 </div>
                 <div class="name">
-                    <span class="ellipsis_inline" title="{{name}}">{{name}}</span>
+                    {{#if isNameErased}}
+                        {{partial 'erased' ../../this this fallbackTemplate='erased'}}
+                    {{else}}
+                        <span class="ellipsis_inline" title="{{name}}">{{name}}</span>
+                    {{/if}}
                     {{#unless email}}
                     <span class="flag error">
                         <i class="fa fa-times"></i><i class="fa fa-envelope"></i>

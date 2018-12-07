@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Painel da lista de Itens de linha de receita',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Painel de registo de Itens de linha de receita',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Campanha de produtos',
     'LBL_MODULE_NAME' => 'Itens da linha de receita',
     'LBL_MODULE_NAME_SINGULAR' => 'Item da linha de receita',

@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Selecione a partir dos campos disponíveis',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Descrição do Formulário:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Enviar este formulário criará um potencial e uma ligação com a campanha',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Marque esta caixa para aceitar receber e-mails de marketing no futuro',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Faça download do seu formulário web para potencial',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Formulário web para potencial',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Forneça todos os campos obrigatórios',

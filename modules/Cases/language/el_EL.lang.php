@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Υποθέσεων',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφών Υποθέσεων',
+
 	'ERR_DELETE_RECORD'					=> 'Πρέπει να προσδιορίσετε έναν αριθμό εγγραφής για να διαγράψετε τον λογαριασμό.',
 	'LBL_ACCOUNT_ID'					=> 'Ταυτότητα Λογαριασμού',
 	'LBL_ACCOUNT_NAME'					=> 'Όνομα Λογαριασμού:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Κατάσταση:',
     'LBL_SOURCE' => 'Πηγή:',
 	'LBL_SUBJECT'						=> 'Θέμα:',
-	'LBL_SYSTEM_ID'						=> 'Ταυτότητα Συστήματος',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Όνομα Λογαριασμού',
 	'LBL_LIST_ASSIGNED'					=> 'Ανατέθηκε Σε',
 	'LBL_LIST_CLOSE'					=> 'Κλείσιμο',

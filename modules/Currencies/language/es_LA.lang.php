@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Crear Tarea',
   'NTC_DELETE_CONFIRMATION' => '¿Está seguro de que desea eliminar este registro? Todo registro que use esta moneda será convertido a la moneda predeterminada del sistema cuando sea accedido. Le recomendamos establecer el estado como Inactiva.',
   'LBL_BELOW_MIN' => 'La tasa de cambio debe ser mayor que 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Activo',
-    'Inactive' => 'Inactivo',
-  ),
   'LBL_CREATED_BY' => 'Creado por',
   'LBL_EDIT_LAYOUT' => 'Editar diseño' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Sólo Administradores',
+  'LBL_CURRENCY_DEFAULT' => 'Dolares Americanos (Por Defecto)',
+
 );
 ?>

@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'מפתחי לקוח OAuth',
     'OAuthTokens' => 'אסימוני OAuth',
     'Filters' => 'מסננים',
-    'UserSignatures' => 'חותמות משתמש',
+    'UserSignatures' => 'חתימות דוא"ל',
     'Shippers' => 'חברות שילוח',
     'Styleguide' => 'מדריך סגנון',
     'Feedbacks' => 'משובים',
     'Tags' => 'תגיות',
     'Categories' => 'קטגוריות',
     'Dashboards' => 'לוחות מחוונים',
+    'OutboundEmail' => 'הגדרות דוא"ל',
+    'EmailParticipants' => 'המשתתפים בדוא"ל',
+    'DataPrivacy' => 'פרטיות נתונים',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'עבור',
         'Tasks' => 'משימות',
-        'Dashboards' => 'ל"מ',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => 'פ"נ',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => 'סוג מוצר',
     'Shippers' => 'ספק משלוח',
     'Subscriptions' => 'מנוי',
-    'UserSignatures' => 'חותמת משתמש',
+    'UserSignatures' => 'חתימת דוא"ל',
     'Feedbacks' => 'משוב',
     'Tags' => 'תגית',
     'Categories' => 'קטגוריה',
+    'OutboundEmail' => 'הגדרת דוא"ל',
+    'EmailParticipants' => 'המשתתף בדוא"ל',
+    'DataPrivacy' => 'פרטיות נתונים',
   ),
 
 /*
@@ -320,7 +327,7 @@ $app_list_strings = array (
     'Word of mouth' => 'שמועה',
     'Email' => 'Any Email',
     'Campaign'=>'קמפיין',
-    'Support Portal User Registration' => 'תמיכה בהרשמת משתמש לפורטל',
+    'Support Portal User Registration' => 'רישום משתמש בפורטל התמיכה',
     'Other' => 'אחר',
   ),
   'opportunity_type_dom' =>
@@ -329,6 +336,11 @@ $app_list_strings = array (
     'Existing Business' => 'עסקים קיימים',
     'New Business' => 'עסקים חדשים',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => 'פעיל',
+            'Inactive' => 'לא פעיל',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => 'הכנסה',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => 'משפיע',
     'Other' => 'אחר',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => 'פעיל',
+            'Inactive' => 'לא פעיל',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => 'פעיל',
+            'Inactive' => 'לא פעיל',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => 'איש קשר ראשי',
@@ -376,9 +399,9 @@ $app_list_strings = array (
     'Prospecting' => 'הערכת קשר פוטנציאלי',
     'Qualification' => 'מגבלות',
     'Needs Analysis' => 'מצריך אנליזה',
-    'Value Proposition' => 'ערך תחזית',
+    'Value Proposition' => 'ערך מוסף ללקוח',
     'Id. Decision Makers' => 'זהות מקבל ההחלטות',
-    'Perception Analysis' => 'אנליזה לתפיסה',
+    'Perception Analysis' => 'ניתוח תפיסת לקוח',
     'Proposal/Price Quote' => 'הצעת מחיר',
     'Negotiation/Review' => 'משא ומתן',
     'Closed Won' => 'נסגר בהצלחה',
@@ -400,7 +423,7 @@ $app_list_strings = array (
 
   'commit_stage_binary_dom' => array (
     'include' => 'כלול',
-    'exclude' => 'החסר',
+    'exclude' => 'אל תכלול',
   ),
   'commit_stage_dom' =>
   array (
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => 'משימה',
       'KBContents' => 'מרכז מידע',
+      'Notes' => 'הערה',
   ),
 
   'record_type_display_notes' =>
@@ -659,6 +683,14 @@ $app_list_strings = array (
     'Calls' => 'שיחת טלפון',
       'KBContents' => 'מרכז מידע',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => 'חשבון',
+        'Contacts' => 'איש קשר',
+        'Employees' => 'עובד',
+        'Leads' => 'ליד',
+        'Prospects' => 'מטרה',
+        'Users' => 'משתמש',
+    ),
 
   'parent_type_display' =>
   array (
@@ -678,7 +710,7 @@ $app_list_strings = array (
 
     'Prospects' => 'מטרה',
       'KBContents' => 'מרכז מידע',
-
+      'Notes' => 'הערה',
   ),
 
   'product_status_default_key' => 'משלוח',
@@ -832,7 +864,6 @@ $app_list_strings = array (
     'Product' => 'מוצר',
     'User' => 'משתמש',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => 'Any Email',
     'Twitter' => 'טוויטר'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => 'שלח בקשה לקבלת המדיניות של פרטיות הנתונים',
+        'Send Personal Information being processed' => 'שלח מידע אישי בתהליך עיבוד',
+        'Rectify Information' => 'ערוך מידע',
+        'Request to Erase Information' => 'שלח בקשה למחיקת מידע',
+        'Export Information' => 'ייצא מידע',
+        'Restrict Processing' => 'הגבל עיבוד',
+        'Object to Processing' => 'התנגד לעיבוד',
+        'Consent to Process' => 'הסכם לעיבוד',
+        'Withdraw Consent' => 'הסר הסכמה',
+        'Other' => 'אחר',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => 'תקשורת עסקית',
+        'Marketing Communications by company' => 'תקשורת שיווקית על ידי החברה',
+        'Marketing Communications by partners' => 'תקשורת שיווקית על ידי שותפים',
+    ),
+    'dataprivacy_status_default_key' => 'פתוח',
+    'dataprivacy_status_dom' => array(
+        'Open' => 'פתוח',
+        'Closed' => 'הושלם',
+        'Rejected' => 'נדחה',
+    ),
+    'dataprivacy_priority_default_key' => 'נמוך',
+    'dataprivacy_priority_dom' => array(
+        'Low' => 'נמוך',
+        'Medium' => 'בינוני',
+        'High' => 'גבוה',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => 'סטודיו',
     'Upgrade' => 'שידרוג',
     'Users' => 'משתמשים',
+    'OutboundEmail' => 'הגדרות דוא"ל',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => 'נכשל',
                                         'completed'     => 'הושלם',
                                         'no curl'       => 'לא הופעל: CURL איננו זמין',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => 'טיוטה',
+        'Archived' => 'בארכיון',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => 'הדחק רשימה - לפי זהות',
     'test' => 'Test [Alt+T]',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => 'פעיל',
+             'Inactive' => 'לא פעיל',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3 שבועות',
         '31' => 'חודש',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => 'פעיל',
-    'Inactive' => 'לא פעיל',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => 'גבוה',
         'medium'    => 'בינוני',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => 'כלום',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'גוגל',
+        'exchange' => 'Exchange',
+        'outlook' => 'Outlook',
+        'other' => 'אחר',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -1985,7 +2052,7 @@ $app_list_strings = array (
     ),
 
   'opportunity_metrics_dom' => array(
-      'won' => 'נצחון',
+      'won' => 'זכייה',
       'lost' => 'הפסד',
       'active' => 'פעיל',
   ),
@@ -2032,6 +2099,11 @@ $app_list_strings = array (
         'ACTIVE' => 'פעיל',
         'INACTIVE' => 'מושבת',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => 'רשומה',
+        'records' => 'רשימה',
+        'activities' => 'תזרים פעילויות',
+    ),
 );
 
 $app_strings = array (
@@ -2043,11 +2115,11 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'עקוב אחר קישור',
   'LBL_TOGGLE_VISIBILITY' => 'החלף נראות', // Record view header panel element
   'LBL_ACTIVITIES' => 'תזרים פעילויות',
-  'LBL_COPYRIGHT' => 'זכויות יוצרים © 2004-2017. SugarCRM Inc. כל הזכויות שמורות.',
+  'LBL_COPYRIGHT' => 'זכויות יוצרים © 2004-2018. SugarCRM Inc. כל הזכויות שמורות.',
     'LBL_TRADEMARK' => 'SugarCRM‏, Sugar וקוביית ‎3-D הם סימנים מסחריים רשומים של .SugarCRM Inc.'.
         'כל יתר השמות של חברות ומוצרים הנמצאים בשימוש במוצר זה או מופיעים בו עשויים להיות סימנים מסחריים של '.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ הם סימנים מסחריים של SugarCRM Inc.',
-    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ הם סימנים מסחריים של SugarCRM Inc.',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ ו- Sugar™ הם סימנים מסחריים של SugarCRM Inc.',
     'LBL_SEND_INVITE' => 'שלח הזמנה',
   'LBL_INVITEES' => 'אורחים',
     'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'האורח לא יקבל את ההזמנה שלך',
@@ -2116,6 +2188,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => 'להפעיל SMTP על SSL או TLS?',
     'LBL_NO_ACTION'                         => 'אין פעילות בשם זה.',
     'LBL_NO_DATA'                           => 'אין נתונים',
+    'LBL_NOT_APPLICABLE'                    => 'לא ישים',
     'LBL_ROUTING_ADD_RULE'                  => 'הוסף כלל',
     'LBL_ROUTING_ALL'                       => 'לפחות',
     'LBL_ROUTING_ANY'                       => 'כלשהו',
@@ -2320,7 +2393,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'שמירה',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'הוסף ספריה זו אל',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'לא ניתן לשנות ספריה זוd',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'אתה בטוח שברצונך למחוק ספריה זו?\nתהליך זה לא ניתן לאאחזר.\nהספריה כולל תת הספריות ימחקו לעד.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'אתה בטוח שברצונך למחוק ספריה זו?\\nתהליך זה לא ניתן לאאחזר.\\nהספריה כולל תת הספריות ימחקו לעד.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'שם לספריה חדשה',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'לפני ביצוע פעולה זו בחר ספריה.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'ניהול ספריות',
@@ -2479,7 +2552,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'סנכרן כל חשבונות הדוא"ל',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'הודעת דוא"ל נשלחה לכתובת שצויינה באמצעות הגדרות דואר יוצא שהוגדרו. בדוק בבקשה שהדוא"ל הגיע על מנת לוודא שההגדרות נכונות.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'ביצוע פעולה זו יגרום לסינכרון חשבונות הדוא"ל ותוכנם.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'לבצע סינכרון מלא?\nחשבונות דוא"ל גדולים יקחו כמה דקות.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'לבצע סינכרון מלא?\\nחשבונות דוא"ל גדולים יקחו כמה דקות.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'לבחירת מספר ספריות בבת אחת לחץ על שיפט או קונטרול במקלדת שלך.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'כללי',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'ספריות קבוצה זמינות',
@@ -2493,7 +2566,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_REQUIRE_REFRESH'    => 'בחר במספר ההודעות לעמוד בתיבת דואר נכנס. כדי להבחירה תקורן יש לרענן את הספריות.',
     'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => 'מאחזר חשבונות דואר',
     'LBL_EMAIL_SETTINGS_RULES'              => 'כללים',
-    'LBL_EMAIL_SETTINGS_SAVED'              => 'ההגדרות נשמרו.\n\nכדי שהשינויים כנסו לתוקף עליך להעלות שוב את הדף הזה.',
+    'LBL_EMAIL_SETTINGS_SAVED'              => 'ההגדרות נשמרו.\\n\\nכדי שהשינויים כנסו לתוקף עליך להעלות שוב את הדף הזה.',
     'LBL_EMAIL_SETTINGS_MUST_RELOAD'        => 'יש לרענן את הדף על מנת שההגדרות החדשות יכנסו לפעולה',
     'LBL_EMAIL_SETTINGS_SEND_EMAIL_AS'      => 'שלח הודעות בטקסט פשוט בלבד',
     'LBL_EMAIL_SETTINGS_SHOW_IN_FOLDERS'    => 'פעיל',
@@ -2547,6 +2620,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'ייבוא עבר',
     'LBL_EMAIL_IMPORT_FAIL'                 => 'יבוא ההודעה נכשל כי או שההודעה כבר יובאה או שהיא נמחקה מהשרת',
 
+    'LBL_EMAILS_FROM' => 'המיילים נשלחו',
+    'LBL_EMAILS_RECEIVED' => 'המיילים התקבלו',
+    'LBL_EMAIL_ADDRESSES_USED' => 'כתובות דוא"ל המשומשות בדוא"ל',
+    'LBL_EMAIL_ADDRESS' => 'כתובת דוא"ל',
+    'LBL_FROM' => 'מאת',
+    'LBL_TO' => 'אל',
+    'LBL_CC' => 'CC',
+    'LBL_BCC' => 'BCC',
+
     'LBL_LINK_NONE'=> 'אין',
     'LBL_LINK_ALL'=> 'הכל',
     'LBL_LINK_RECORDS'=> 'רשומות',
@@ -2588,7 +2670,9 @@ $app_strings = array (
     'ERR_AJAX_LOAD_FOOTER' => 'במידה ושגיאה זו מופיעה שוב, אנא בקש ממנהל המערכת שלך להשבית Ajax עבור מודול זה',
     'ERR_CREATING_FIELDS' => 'שגיאה במלוי שדות המידע הנוספים האלה:',
     'ERR_CREATING_TABLE' => 'שגיאה ביצירת טבלה:',
-    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "מפריד העשרות לא יכול להכיל את אותו הסימן כמו מפריד המיאות.\n\n  שנה את הערך בבקשה.",
+    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "מפריד העשרות לא יכול להכיל את אותו הסימן כמו מפריד המיאות.
+
+  שנה את הערך בבקשה.",
     'ERR_DELETE_RECORD' => 'למחיקת איש הקשר הזה יש לציין מספר רשומה.',
     'ERR_EXPORT_DISABLED' => 'לא ניתן לייצא.',
     'ERR_EXPORT_TYPE' => 'שגיאה בייצוא',
@@ -2605,6 +2689,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'לייצוא התוכן חייבת להיות פעילות חוקית.',
     'ERR_NO_HEADER_ID' => 'תכונה זו אינה זמינה בערכת נושא זו.',
     'ERR_NOT_ADMIN' => "גישה לא מורשית למערכת ניהול.",
+    'ERR_DISABLED_FOR_IDM_MODE' => "הפעלת אפשרות זו בוטלה ב- SugarCRM עבור מצב IDM והיא זמינה ב- Cloud Console.",
+    'ERR_GOTO_CLOUD_CONSOLE' => "אנא עבור אל <a href=\"%s\" target=\"_blank\">Cloud Console</a>.",
     'ERR_MISSING_REQUIRED_FIELDS' => 'חסר שדה נדרש:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'שדה נדרש איננו חוקי:',
     'ERR_INVALID_VALUE' => 'ערך חוקי:',
@@ -2823,7 +2909,7 @@ $app_strings = array (
     'LBL_EDIT_AS_NEW_BUTTON_LABEL' => 'ערוך כחדש',
     'LBL_EDIT_AS_NEW_BUTTON_TITLE' => 'ערוך כחדש',
     'LBL_FAVORITES' => 'מועדפים',
-    'LBL_FILTER' => 'פילטר',
+    'LBL_FILTER' => 'מסנן',
     'LBL_DEFAULT_DATA_FILTER' => 'מסנן נתונים ברירת מחדל',
     'LBL_FILTER_MENU_BY' => 'סנן תפריט על ידי',
     'LBL_FILTER_SELECT_FIELD' => 'בחר קובץ...',
@@ -2910,7 +2996,7 @@ $app_strings = array (
     'LBL_LIST_NAME' => 'שם',
     'LBL_LIST_OF' => 'של',
     'LBL_LIST_PHONE' => 'טלפון',
-    'LBL_LIST_RELATED_TO' => 'קשור אל',
+    'LBL_LIST_RELATED_TO' => 'קשור ל-',
     'LBL_LIST_USER_NAME' => 'שם משתמש',
     'LBL_LISTVIEW_MASS_UPDATE_CONFIRM' => 'אתה בטוח שברצונך לעדכן את כל הרשימה הזו?',
     'LBL_LISTVIEW_NO_SELECTED' => 'כדי להמשיך בחר לפחות רשומה אחת.',
@@ -2934,7 +3020,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'עדכון גורף נכשל. מנסה שוב ({{num}} of {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'עדכון גורף לא הושלם. {{num}} רשומות נותרו ללא שינוי',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => 'עדכון גורף לא הושלם. {{num}} רשומות נותרו ללא שינוי',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} רשומות לא שונו בגלל ההרשאה',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} רשומה(ות) זכו להתעלמות עקב הרשאות או שגיאות.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} רשומות עודכנו בהצלחה',
     'TPL_MASSUPDATE_TITLE' => '{{module}} עדכון גורף',
     'TPL_MASSDELETE_PROGRESS_STATUS' => 'מוחק {{num}} מתוך {{total}}.',
@@ -3006,6 +3092,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'ברירת מחדל משתמש',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => 'חשבון משתמש',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'חשבון קבוצה',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => 'שם',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => 'צור',
@@ -3218,7 +3305,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'כל הזכויות שמורות.br />SugarCRM>‏, Sugar וקוביית ‎3-D הם סימנים מסחריים רשומים של .SugarCRM Inc.'.
         'כל יתר השמות של חברות ומוצרים הנמצאים בשימוש במוצר זה או מופיעים בו עשויים להיות סימנים מסחריים של '.
         'החברות שאליהן הם משויכים.',
@@ -3256,7 +3343,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => 'סיסמה',
     'LBL_LOGGED_OUT' => 'יצאת מהמערכת',
     'LBL_LOGIN_FORM_LABEL' => 'הצג טופס לוגין',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => 'חזרה לכניסה',
+    'LBL_LOGIN_INACTIVE_USER' => 'משתמש לא פעיל',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => 'הפורטל או המשתמש בקבוצה לא יכול להיכנס.',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => 'דף בית',
@@ -3323,8 +3412,9 @@ $app_strings = array (
     'LNK_BACKTOTOP' => 'חזרה למהעלה',
     'LNK_REMOVE' => 'הסר',
     'LNK_RESUME' => 'המשך',
-    'LNK_VIEW_CHANGE_LOG' => 'צפה ביומן שינויים',
-
+    'LNK_VIEW_CHANGE_LOG' => 'הצג יומן ביקורת',
+    'TPL_AUDIT_LOG_TITLE' => 'יומן ביקורת עבור {{{name}}}',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => 'הקש על כפתור אחורה בדפדפן על מנת לתקן שגיאה זו.',
     'NTC_DATE_FORMAT' => '(yyyy-mm-dd)',
@@ -3358,7 +3448,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "הרשיון של החברה שלך לשוגר יפוג בקרוב",
     'ERROR_LICENSE_VALIDATION'=> "יש צורך לאשרר את רישיונות הגישה שלך למערכת. רק מנהל המערכת יכול להכנס",
     'WARN_LICENSE_VALIDATION'=> "יש לחדש את הרשיון של החברה שלך לשוגר בקרוב",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"מספר הלקוחות הפעילים אוף-ליין חורג מהמספר המצויין ברשיון שלך",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>אזהרה:</b> הדפדפן שלך במצב IE compatibility view שאינו נתמך",
     'WARN_LICENSE_SEATS'=>  "אזהרה: מספר המתמשים הפעילים עבר את מספר הרישיונות שבבעלותכם.",
     'WARN_LICENSE_SEATS_MAXED'=>  "אזהרה: מספר המשתמשים הפעילים עבר את מספר רישיונות הגישה שבידכם.",
@@ -3428,9 +3517,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'מעבד..',
     'LBL_REQUEST_PROCESSED'=>'בוצע',
     'LBL_AJAX_FAILURE' => 'Ajax נכשל',
-    'LBL_OC_STATUS' => 'סטאטוס לקוחות לא מקוונים',
-    'LBL_OC_STATUS_TEXT' => 'מצביע האם הלקוח הזה יכול להשתמש בלקוח לא מקוון.',
-    'LBL_OC_DEFAULT_STATUS' => 'לא פעיל',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => 'מחפש...',
     'LBL_SAVED_SEARCH_SHORTCUT' => 'חיפושים שנשמרו',
     'LBL_SEARCH_POPULATE_ONLY'=> 'בצע חיפוש תוך כדי שימוש בטופס החיפוש הרשום מעלה',
@@ -3531,6 +3617,7 @@ $app_strings = array (
     'LBL_COLLAPSE_ALL' => 'סגור הכל',
     'LBL_EXPAND_ALL' => 'הרחב הכל',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => 'ערוך',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => 'הצג דוח',
     'LBL_DASHLET_REFRESH_LABEL' => 'רענן',
     'LBL_DASHLET_REMOVE_LABEL' => 'הסר',
     'LBL_DASHLET_DROP_HERE' => 'הורד כאן',
@@ -3570,7 +3657,7 @@ $app_strings = array (
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'הודעות וצרופות השייכות לרשומה',
     'LBL_DASHLET_PIPLINE_NAME' => 'צינור',
 
-    'LBL_DASHLET_RECENT_TWEETS_SUGARCRM_NAME' => 'טוייוים אחרונים - @{{twitter}}',
+    'LBL_DASHLET_RECENT_TWEETS_SUGARCRM_NAME' => 'טוויטים אחרונים - @{{twitter}}',
 
     'LBL_DASHBOARD_NO_RECORDS' => 'אין לוחות מחוונים שנשמרו',
 
@@ -4199,7 +4286,9 @@ $app_strings = array (
     'LBL_CONFIRM' => 'אשר',
     'LBL_NO_ACCESS' => '(אין גישה)',
     'LBL_NO_ACCESS_LOWER' => 'אין גישה',
-    'LBL_NO_FIELD_ACCESS' => 'אין גישה',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => 'הערך נמחק',
+    'LBL_VALUE_ERASED_TOOLTIP' => 'מידע זה נמחק באמצעות בקשת פרטיות נתונים',
     'LBL_CREATE_RELATED_RECORD' => 'צור רשומה קשורה',
     'LBL_ASSOC_RELATED_RECORD' => 'קשר רשימה מקושרת',
     'LBL_CHOOSE_LINK' => 'בחר סוג קישור',
@@ -4268,7 +4357,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => 'גדול',
     'LBL_FONTSIZE_HUGE' => 'ענק',
     'LBL_FONTSIZE_EXTRA_HUGE' => 'ענק במיוחד',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => 'הורדה נכשלה\r\n{{{this}}}',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "ההורדה נכשלה\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => 'עוד...',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => 'פחות...',
     'LBL_OFFLINE_MODE' => 'מצב לא מקוון',
@@ -4337,6 +4426,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => 'פרטי טרנזקציה',
     'LBL_RECORD_DELETED' => 'הקלטה נמחקה',
     'LBL_NOT_AVAILABLE' => 'לא זמין',
+    'LBL_FILE_SIZE' => 'גודל הקובץ',
     'LBL_FILE_SIZE_UNITS_B' => 'ביטים',
     'LBL_FILE_SIZE_UNITS_KB' => 'ק"ב',
     'LBL_FILE_SIZE_UNITS_MB' => 'מ"ב',
@@ -4460,6 +4550,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => 'הפרטים נפתחים בצד הימיני של המסך',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => 'השתמש בחצים למטה שסיור מהיר באפשרויות של תפריט זה',
 
+    'LBL_COMMENT_ADD' => 'הוסף הערה',
+    'LBL_REQUIRED' => 'חובה',
+    'LBL_MORE_BUTTON' => 'עוד',
+    'LBL_TRY_AGAIN' => 'נסה שוב',
+    'LBL_NEW_RECORDS' => 'נוצרו לאחרונה',
+    'LBL_ASSIGNED_TO_ME' => '{{{module}}} שלי',
+    'LBL_LISTVIEW_FILTER_ALL' => 'כל {{{module}}}',
+    'LBL_UNFAVORITE' => 'הסר מהמועדפים',
+    'LBL_ACTIVITY_CREATE' => 'יצירה של {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UPDATE' => 'עדכון של {{{changes}}} במיקום &#39;{{{record}}} {{{module}}}&#39;',
+    'LBL_ACTIVITY_LINK' => 'קישור של {{{relatedRecord}}} במיקום &#39;{{{record}}} {{{module}}}&#39;',
+    'LBL_ACTIVITY_UNLINK' => 'הסרת קישור לרשומה/ות &#39;{{{relatedRecord}}}&#39; מתוך &#39;{{{record}}} {{{module}}}&#39;',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{relationship}} עבור {{parentModule}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => 'מוריד רשומות קשורות...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => 'תצורת לוח המחוונים שלך השתנתה. האם ברצונך לטעון מחדש?',
+    'LBL_RECORDS' => 'רשומות',
+    'LBL_DASHBOARDS' => 'לוחות מחוונים',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => 'חפש {{searchCriteria}}...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => 'תפריט ראשי',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => 'יצירה מהירה של רשומה חדשה',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => 'החלק במהירות לקבלת אפשרויות נוספות',
+    'LBL_DETAILS' => 'פרטים',
+    'LBL_DETAIL_RELATED' => 'קשור אל',
+    'LBL_CREATE_RELATED_MODULE_WARN' => 'המודול {{module}} מחייב {{relatedModule}}. <a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>צור רשומת {{relatedModule}} </a>.',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => 'ערוך רשומה',
+    'LBL_OFFLINE_MENU_SETTINGS' => 'הגדרות למצב לא מקוון',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => 'הגדרות לפתרון באגים',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED":"מופעלת הצפנת נתונים.',
+    'LBL_OFFLINE_TOTAL_RECORDS' => 'סך רשומות',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => 'הורדה אחרונה',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => 'אין אפשרות להוריד את הקובץ.',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => 'טעינת לוחות המחוונים מהשרת נכשלה',
+    'ERR_FILTERS_FETCHING' => 'לא ניתן להביא את המסננים',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => 'הצפנת אחסון מקומי נכשלה',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => 'מצפין נתונים לא מקוונים. פעולה זו עשויה להימשך מספר דקות.',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => 'הצפנת נתונים לא מקוונים הושלמה.',
+    'ERR_ACCESS_SPECIFIC_MODULE' => 'אין לך הרשאה למודול &#39;{{{module}}}&#39;.',
+    'LBL_SKIP' => 'דלג',
+    'LBL_CONTINUE' => 'המשך',
+    'LBL_ENABLE' => 'הפעל',
+    'LBL_MOBILE_TRIAL_UNTIL' => 'ניסיון עד',
+    'LBL_MOBILE_SDK_VERSION' => 'גרסת SDK',
+    'LBL_LOG_LEVEL' => 'רמת תיעוד',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => 'תצורת ההתחברות הוגדרה מחדש.',
+    'LBL_TRIAL_PERIOD_EXPIRED' => 'תקופת הניסיון שלך הגיעה לסיומה.',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => 'השרת אינו תומך בחיבור מאובטח. אנא כבה חיבור מאובטח.',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => 'השרת תומך בחיבור מאובטח. אנא הפעל חיבור מאובטח.',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => 'החיבור שלך אינו מאובטח. פנה למנהל המערכת.',
+    'LBL_LOGIN_SETTINGS_HEADER' => 'הגדרות התחברות',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => 'הגדר את מופע &#39;{{{brandName}}}&#39;',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => 'כדי שהיישום יוכל לעבוד, עליך להקליד את כתובת ה- URL של מופע &#39;{{{brandName}}}&#39;. אם ברשותך את כתובת ה- URL של המופע, אנא פנה למנהל המערכת.',
+    'LBL_FACEID' => 'מזהה פנים',
+    'LBL_TOUCHID' => 'מזהה מגע',
+    'LBL_ENABLE_TOUCHID' => 'הפעל את &#39;{{{biometryType}}}&#39;',
+    'LBL_SETUP_TOUCHID' => 'הגדר את &#39;{{{biometryType}}}&#39;',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => 'התחבר בנגיעת אצבע',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "אין הגדרה ל'{{{biometryType}}}' במכשירך. \n\nעבור אל הגדרות המכשיר כדי להגדיר את '{{{biometryType}}}'. לאחר ההתקנה, הפעל את '{{{biometryType}}}' עבור {{{brandName}}} ב'תפריט ראשי' > 'הגדרות'.",
+    'LBL_TOUCH_ID_DISCLAIMER' => 'השימוש ב&#39;{{{biometryType}}}&#39; עם {{{brandName}}} יאפשר לך להשתמש במזהה הביומטרי שלך במקום להזין ססמה כדי לגשת ל{{{brandName}}}.',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => 'האם ברצונך להמשיך עם &#39;{{{biometryType}}}&#39;?    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => 'הזן ססמה עבור {{{brandName}}} כדי להפעיל את &#39;{{{biometryType}}}&#39;',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => 'התקנה',
+    'LBL_MDM_CONFIRM_CHANGE' => 'הגדרת התצורה של היישום השתנתה מ&#39;מנהל מכשיר נייד&#39;. אנא התחבר מחדש כדי להחיל את השינויים.',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => 'אנא תן ל{{{brandName}}} גישה למיקומך באמצעות הגדרות המכשיר.',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => 'המיקום הנוכחי אינו זמין',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "תם הזמן הקצוב לאחזור במיקום הנוכחי. \n נסה שוב.",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => 'סמני האתר אינם זמינים',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => 'הקואורדינטות של האתר אינן חוקיות',
+    'ERR_MOBILE_INVALID_PASSWORD' => 'ססמה לא חוקית.',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => 'היישום שלך מיושן ולא תואם יותר למופע {{{brandName}}} שאליו אתה מתחבר. האם ברצונך לעדכן אותו?',
+    'LBL_MOBILE_BY' => 'על ידי',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => 'מסנן זה אינו זמין במצב לא מקוון',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => 'רשומות לא מקוונות',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => 'הורד הגדרות',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => 'הורד את הרשומות המוקצות, המועדפות ואלו שאחריהן אתה עוקב לגישה לא מקוונת. תוכל לעדכן את העדפותיך בהגדרות הלא מקוונות.',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "הורדת הרשומות שלך הסתיימה. כעת תוכל לגשת אליהן במצב לא מקוון.",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "לא כל הרשומות שלך הורדו. \n האם ברצונך לנסות שוב?",
+    'LBL_BULK_LOAD_USE_CELLULAR' => 'השתמש בנתונים סלולריים',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => 'לא כרגע',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => 'ההורדה הושהתה ותחודש כשתפתח שוב את היישום.',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => 'מוריד {{{module}}}: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => 'עדכן רשומות אחרונות',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => 'מחכה לחיבור',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => 'מושהה',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => 'עוצר',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => 'הורד',
+    'LBL_BULK_LOAD_BTN_PAUSE' => 'השהה',
+    'LBL_BULK_LOAD_BTN_RESUME' => 'המשך',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => 'רק חיבור WiFi משמש כברירת מחדל',
+    'LBL_NPS_RATING_MSG' => "איך היית מדרג את החוויה שלך עם \n{{{productName}}}?",
+    'LBL_NPS_THANKS_MSG' => 'תודה על המשוב ששלחת!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => 'אכפת לך לדרג את המוצר ב- App Store?',
+    'LBL_NPS_NO_THANKS' => 'לא, תודה',
+    'LBL_NPS_NOT_NOW' => 'לא כרגע',
+    'LBL_NPS_RATE_NOW' => 'דרג עכשיו',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => 'הרשת אינה זמינה. ניתן להשתמש ביישום גם במצב לא מקוון',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => 'השינויים שביצעת יסונכרנו כשתתחבר לרשת.<a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>הצג פרטים</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => 'קיימים נתונים לא מסונכרנים. אנא בדוק את <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>יומן הרישום של הצעות המחיר</a>',
+    'LBL_CONVERT' => 'המר',
+    'LBL_CONVERT_LEAD' => 'המר ליד',
+    'LBL_SEARCH_EXISTING_RECORD' => 'חפש {{{this}}} קיים/ת',
+    'LBL_DUPLICATES_CHECK_FAILED' => 'בדיקת כפילויות נכשלה',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => 'האם ברצונך להעביר את הפעילויות הקשורות לרשומת איש הקשר?',
+    'LBL_LEAD_CONVERSION_SUCCESS' => 'המרת בהצלחה את הליד &#39;{{{name}}}&#39;',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => 'לא נמצאו כפילויות.',
+    'ERR_LEAD_CONVERSION_FAIL' => 'המרת הליד נכשלה',
+    'LBL_SELECT_DUPLICATE_RECORD' => 'בחר מתוך &#39;{{{modulePlural}}}&#39; כפולים/ות',
+    'LBL_SELECTED_EXISTING_RECORD' => '&#39;{{{moduleSingular}}}&#39; נבחר/ה',
+    'LBL_CREATED_NEW_RECORD' => 'צור &#39;{{{moduleSingular}}}&#39; חדש/ה',
+    'LBL_VO_BACK_BTN' => 'לחצן &#39;חזור&#39;',
+    'LBL_VO_HOME_BTN' => 'לחצן &#39;בית&#39;',
+    'LBL_VO_DASHBOARD_BTN' => 'לחצן &#39;לוח מחוונים&#39;',
+    'LBL_VO_SEARCH_BTN' => 'לחצן &#39;חיפוש&#39;',
+    'LBL_VO_RIGHT_MENU_BTN' => 'לחצן &#39;תפריט ימני&#39;',
+    'LBL_VO_ADD_BTN' => 'לחצן &#39;הוסף&#39;',
+
     //begin portal
 
     //portal record tutorial
@@ -4571,6 +4777,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => 'בחר דוח',
     'LBL_REPORT_AUTO_REFRESH' => 'רענן באופן אוטומטי',
     'LBL_REPORT_EDIT' => 'ערוך דוח נבחר',
+    'LBL_REFRESH_LIST_AND_CHART' => 'רענן רשימה ותרשים',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => 'לא ידוע',
@@ -4632,6 +4839,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'שגיאה קרתה עקב פעולת AssignTo.',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => 'אין לך גישה ל-"{{name}}". אנא צור קשר עם מנהל המערכת שלך.',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => 'שנה {0}',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} Q{0}',
@@ -4643,6 +4853,11 @@ $app_strings = array (
     'LBL_MESSAGE_BOX_TITLE' => 'אזהרה',
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => 'התעלם מכפילות ושמור',
     'LBL_RESTORE' => 'אפס מקורי',
+
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => 'רשומות שסומנו למחיקה',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => 'מציג רשומות הקשורות לבקשת פרטיות נתונים לפעולת '
+        . 'מחק מידע.',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'RSS פיד',
@@ -4666,6 +4881,7 @@ $app_strings = array (
     'LBL_UNASSIGNED' => 'לא מוקצה',
     'LBL_ARCHIVE_EMAIL' => 'ארכב דואר אלקטרוני',
     'LBL_EMAIL_ARCHIVED' => 'ארכיון מייל',
+    'LBL_CREATE_ARCHIVED_EMAIL' => 'צור דוא"ל לארכיון',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => 'פעילויות מתוכננות',
@@ -4697,6 +4913,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'המשימות שלי',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'משימות צוות',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'זרימת עבודה מתקדמת',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP או Old REST API',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'Cron Job',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => 'Logic Hook',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'Sugar Workflow',
+    'LBL_AUDIT_SUBJECT_USER' => 'משתמש',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Web to Lead',
+
     //common chart strings
     'LBL_CHART' => 'תרשים',
     'LBL_CHART_NO_DATA' => 'אין נתונים זמינים',
@@ -4705,6 +4934,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => 'הסתר פקדים',
     'LBL_CHART_CONTROLS_OPEN' => 'הצג פקדים',
     'LBL_CHART_UNDEFINED' => 'לא מוגדר',
+    'LBL_CHART_NO_LABEL' => 'לא מוגדר',
+    'LBL_CHART_AMOUNT' => 'סכום',
+    'LBL_CHART_COUNT' => 'מנה',
+    'LBL_CHART_PERCENT' => 'אחוז',
+    'LBL_CHART_GROUP' => 'קבוצה',
+    'LBL_CHART_DATE' => 'תאריך',
+    'LBL_CHART_KEY' => 'מפתח',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => 'סוג תרשים',
@@ -4776,6 +5012,10 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'פילטר תאריך מחדל',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => 'בסיס נתונים ברירת מחדל',
 
+    'LBL_PRODUCT_CATALOG_NAME' => 'קטלוג מוצרים',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => 'קטלוג מוצרים',
+    'LBL_PRODUCT_CATALOG_DESC' => 'הצג והוסף פריטים מקטלוג המוצרים שלך.',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => 'הצג והוסף פריטים מקטלוג המוצרים שלך.',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}} ב {{date}} ב {{time}}',
@@ -4788,6 +5028,7 @@ $app_strings = array (
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => 'ב',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'זרם פעילות שלי',
     'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'צפה ברשימת פעולות שמבוצעות על רשומות ופרסם תגובות',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => '&#39;זרמי פעילות&#39; אינו זמין',
 
     'LBL_DATA_VIEW' => 'תצוגת תאריך',
     'LBL_COMMENT' => 'תגובה',
@@ -4795,6 +5036,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'שגיאה בהתחברות לשרת. אנא נסה שוב',
     'ERR_RESOLVE_ERRORS' => 'נא לפתור בעיות לפני שתמשיך',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => 'לצורך האישור, יש למלא את כל שדות החובה; עם זאת, תוכל עדיין לדחות או לנתב רשומה זו.',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => 'כדי לדחות/לנתב, יש למלא את כל שדות החובה.',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'רענן רשימה',
@@ -4822,6 +5067,7 @@ $app_strings = array (
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => 'דשלט תרשים דוחות שמורים',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'מציג תרשים כלשהו מדוחות שמורים',
+
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => 'מאמרים קשורים שפורסמו',
@@ -4829,7 +5075,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'סיכום היסטורי',
-    'TPL_HISTORICAL_SUMMARY' => 'סיכום היסטורי עבור {{name}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => 'עוד סיסטוריה...',
     'LBL_RELATED_CONTACT' => 'איש קשר קשור',
     'LBL_MODULE_TYPE' => 'סוג',
@@ -4838,9 +5084,9 @@ $app_strings = array (
     'LBL_PREVIEW_BWC_TOOLTIP' => 'לא ניתן לצפות במודולים היסטוריים',
 
     //SFA
-    'LBL_BEST' => 'הכי טוב',
+    'LBL_BEST' => 'הטוב ביותר',
     'LBL_WORST' => 'הגרוע ביותר',
-    'LBL_LIKELY' => 'סביר להניח',
+    'LBL_LIKELY' => 'הסביר ביותר',
     'LBL_BEST_ADJUSTED' => 'הטוב ביותר (מותאם)',
     'LBL_WORST_ADJUSTED' => 'הגרוע ביותר (מותאם)',
     'LBL_LIKELY_ADJUSTED' => 'הסביר ביותר (מותאם)',
@@ -4862,7 +5108,7 @@ $app_strings = array (
     'LBL_RESOLVE_CONFLICT' => 'פתור קונפליקט עבור  {{name}}',
 
     // Generic Help Strings
-    'LBL_HELP_MORE_INFO' => 'לעזרה נוספת פנה ל {{{more_info_url}}} {{plural_module_name}} תיעוד.{{{more_info_url_close}}}',
+    'LBL_HELP_MORE_INFO' => 'לקבלת עזרה נוספת פנה לתיעוד הבא: {{{more_info_url}}} {{plural_module_name}}.{{{more_info_url_close}}}',
     'LBL_HELP_NO_HELP' => 'אין נתונים זמינים',
 
     // Dashlet Preview Help String
@@ -5082,6 +5328,29 @@ $app_strings = array (
 
     'LBL_FIELD_TRIMMED' => 'השדה נחתך עקב חריגה ממגבלת מספר התווים המרבי.',
     'LBL_FIELDSIZE_OVERFLOW' => 'השדה חורג ממגבלת התווים המרבית.',
+    'LBL_TINYMCE_TARGET_SAME' => 'באותו חלון',
+    'LBL_TINYMCE_TARGET_NEW' => 'חלון חדש',
+
+    'LBL_OUTBOUND_EMAILS' => 'הגדרות דוא"ל',
+    'LBL_OUTBOUND_EMAIL' => 'הגדרת דוא"ל',
+
+    'LBL_EMAIL_PARTICIPANTS' => 'המשתתפים בדוא"ל',
+    'LBL_EMAIL_PARTICIPANT' => 'המשתתף בדוא"ל',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => 'פרטיות נתונים',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'פרטיות נתונים',
+    'LBL_DATAPRIVACY_VIEW_PII' => 'הצג מידע אישי',
+    'LBL_DATAPRIVACY_MARKFORERASE' => 'סמן למחיקה',
+    'LBL_DATAPRIVACY_FIELDNAME' => 'שדה',
+    'LBL_DATAPRIVACY_VALUE' => 'ערך',
+    'LBL_DATAPRIVACY_CHANGED_BY' => 'שונה על ידי',
+    'LBL_DATAPRIVACY_SOURCE' => 'מקור',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => 'עודכן לאחרונה בתאריך',
+    'LBL_DATAPRIVACY_PII' => 'מידע אישי',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'סמן למחיקה',
+    'TPL_DATAPRIVACY_PII_TITLE' => 'מידע אישי עבור {{{name}}}',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5946,6 +6215,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => 'קמפיין' ,
     'email' => 'Any Email',
     'workflow' => 'זרימת עבודה',
+    'system' => 'מערכת',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5964,7 +6234,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -6027,6 +6296,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = 'תבנית בסיס י�
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'תבנית בסיס ידע';
 $app_list_strings['moduleList']['EmbeddedFiles'] = 'קבצים מוטמעים';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'קובץ מוטמע';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'Lek',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'P',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'ליי',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'Leke',
+    'USD' => 'דולר',
+    'AFN' => 'אפגנים',
+    'ARS' => 'פסו',
+    'AWG' => 'גילדן',
+    'AUD' => 'דולר',
+    'AZN' => 'מאנאט חדש',
+    'BSD' => 'דולר',
+    'BBD' => 'דולר',
+    'BYR' => 'רובל',
+    'EUR' => 'אירו',
+    'BZD' => 'דולר',
+    'BMD' => 'דולר',
+    'BOB' => 'בוליביאנו',
+    'BAM' => 'מארק סחיר',
+    'BWP' => 'פולס',
+    'BGN' => 'לב',
+    'BRL' => 'ריאל ברזילאי',
+    'GBP' => 'פאונד',
+    'BND' => 'דולר',
+    'KHR' => 'ריאל',
+    'CAD' => 'דולר',
+    'KYD' => 'דולר',
+    'CLP' => 'פסו',
+    'CNY' => 'רנמינבי',
+    'COP' => 'פסו',
+    'CRC' => 'ColÃ³n',
+    'HRK' => 'קונה',
+    'CUP' => 'פסו',
+    'CZK' => 'קורונה',
+    'DKK' => 'כתר',
+    'DOP' => 'פסו',
+    'XCD' => 'דולר',
+    'EGP' => 'פאונד',
+    'SVC' => '	קולון',
+    'EEK' => 'קרון',
+    'FKP' => 'פאונד',
+    'FJD' => 'דולר',
+    'GHC' => 'סדי',
+    'GIP' => 'פאונד',
+    'GTQ' => 'קצאל',
+    'GGP' => 'פאונד',
+    'GYD' => 'דולר',
+    'HNL' => 'למפירה',
+    'HKD' => 'דולר',
+    'HUF' => '	פורינט',
+    'ISK' => 'קרונה',
+    'INR' => 'רופי',
+    'IDR' => 'רופיה',
+    'IRR' => 'ריאל',
+    'IMP' => 'פאונד',
+    'ILS' => 'שקל חדש',
+    'JMD' => 'דולר',
+    'JPY' => 'ין',
+    'JEP' => 'פאונד',
+    'KZT' => 'טנגה',
+    'KPW' => 'ווֹן',
+    'KRW' => 'ווֹן',
+    'KGS' => 'סומס',
+    'LAK' => 'Kips',
+    'LVL' => 'לט',
+    'LBP' => 'פאונד',
+    'LRD' => 'דולר',
+    'CHF' => 'פרנק שווייצרי',
+    'LTL' => 'ליטאס',
+    'MKD' => 'דינר',
+    'MYR' => 'רינגיט',
+    'MUR' => 'רופי',
+    'MXN' => 'פסו',
+    'MNT' => 'טוגרוג',
+    'MZN' => '	מטיקל',
+    'NAD' => 'דולר',
+    'NPR' => 'רופי',
+    'ANG' => 'גילדן',
+    'NZD' => 'דולר',
+    'NIO' => 'קורדובה',
+    'NGN' => 'נאירה',
+    'NOK' => 'כתר',
+    'OMR' => 'ריאל',
+    'PKR' => 'רופי',
+    'PAB' => 'בלבואה',
+    'PYG' => 'גואראני',
+    'PEN' => 'סול חדש',
+    'PHP' => 'פסו',
+    'PLN' => 'זלוטי',
+    'QAR' => 'ריאל',
+    'RON' => '	לאו חדש',
+    'RUB' => 'רובל',
+    'SHP' => 'פאונד',
+    'SAR' => 'ריאל',
+    'RSD' => 'דינר',
+    'SCR' => 'רופי',
+    'SGD' => 'דולר',
+    'SBD' => 'דולר',
+    'SOS' => 'שילינג',
+    'ZAR' => '	ראנד',
+    'LKR' => 'רופי',
+    'SEK' => '	קרונה',
+    'SRD' => 'דולר',
+    'SYP' => 'פאונד',
+    'TWD' => 'דולר חדש',
+    'THB' => 'באט',
+    'TTD' => 'דולר',
+    'TRY' => 'לירה',
+    'TRL' => 'לירה',
+    'TVD' => 'דולר',
+    'UAH' => '	הריבניה',
+    'UYU' => 'פסו',
+    'UZS' => 'סכומים',
+    'VEF' => 'בוליבר ונצואליני',
+    'VND' => 'דונג',
+    'YER' => 'ריאל',
+    'ZWD' => 'דולר זימבבואי',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => 'Single-Hit',

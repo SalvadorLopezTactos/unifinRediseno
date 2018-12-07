@@ -44,7 +44,9 @@ class AbstractRelationships
     protected $specialCaseBaseNames = array( 'quotes_accounts',
                                              'quotes_contacts',
                                              'emails_beans',
+        'emails_email_addr_rel',
                                              'linked_documents',
+        'OutboundEmail',
                                              'project_relation',
                                              'prospect_lists_prospects',
                                              'queues_beans',
@@ -203,11 +205,9 @@ class AbstractRelationships
             }
 
             // in order to create consistent relationship name,
-            // blank it out from definition for factory to create a name.
+            // blank out old name from definition for factory to create a name.
             unset($definition['relationship_name']);
             $this->add(RelationshipFactory::newRelationship($definition));
-            // remove relationship with old name
-            $this->remove($relationshipName);
         }
 
     }

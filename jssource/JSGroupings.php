@@ -73,7 +73,6 @@
                             'include/javascript/jquery/jquery.dataTables.min.js'         =>   $target,
                             'include/javascript/jquery/jquery.dataTables.customSort.js'  =>   $target,
                             'include/javascript/jquery/jquery.jeditable.js'              =>   $target,
-                            'include/javascript/jquery/jquery.effects.custombounce.js'   =>   $target,
                         );
                         break;
                     default:
@@ -81,7 +80,7 @@
                 }
             }
         }
-        $calendarJSFileName = SugarAutoLoader::fileExists('custom/include/javascript/calendar.js') ?
+        $calendarJSFileName = file_exists('custom/include/javascript/calendar.js') ?
             'custom/include/javascript/calendar.js' : 'include/javascript/calendar.js';
         $js_groupings = array(
            $sugar_grp1 = array(
@@ -223,14 +222,19 @@
             'modules/Emails/javascript/complexLayout.js' => 'include/javascript/sugar_grp_quickcomp.js',
             ),
            $sugar_grp_sidecar = array_merge(
-                array('include/javascript/phpjs/base64_encode.js' => 'include/javascript/sugar_sidecar.min.js',
-               'sidecar/lib/jquery-placeholder/jquery.placeholder.js' => 'include/javascript/sugar_sidecar.min.js'),
-                getSubgroupForTarget('bootstrap', 'include/javascript/sugar_sidecar.min.js'),
                array(
-                   // D3 library
+                   'include/javascript/phpjs/base64_encode.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/jquery/jquery-ui-min.js' => 'include/javascript/sugar_sidecar.min.js',
+               ),
+               getSubgroupForTarget('bootstrap', 'include/javascript/sugar_sidecar.min.js'),
+               array(
+                   // D3 (version 4.x) library custom bundle
+                   // with only modules for main sugar chart types
+                   'include/javascript/d3-sugar/d3-sugar.min.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sucrose/sucrose.min.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/SugarCharts/sucrose/js/sugarCharts.js' => 'include/javascript/sugar_sidecar.min.js',
+                   // D3 (version 3.x) entire library
                    'include/javascript/nvd3/lib/d3.min.js' => 'include/javascript/sugar_sidecar.min.js',
-                   'include/SugarCharts/nvd3/js/sugarCharts.js' => 'include/javascript/sugar_sidecar.min.js',
-                   // To add more models to NV D3, run the makefile in include/javascript/nvd3.
                    'include/javascript/nvd3/nv.d3.min.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/sugar7/error.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/sugar7/touch.js' => 'include/javascript/sugar_sidecar.min.js',
@@ -241,7 +245,6 @@
                    'include/javascript/jquery/jquery.jstree.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/jquery/jstree.state.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/jquery/jquery.popoverext.js'           => 'include/javascript/sugar_sidecar.min.js',
-                   'include/javascript/jquery/jquery.effects.custombounce.js'           => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/jquery/jquery.nouislider.js' => 'include/javascript/sugar_sidecar.min.js',
                    'include/javascript/nprogress/nprogress.js' => 'include/javascript/sugar_sidecar.min.js',
 
@@ -266,6 +269,7 @@
                     'include/javascript/sugar7/plugins/Dropdown.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ListColumnEllipsis.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/MassCollection.js'  => 'include/javascript/sugar_sidecar.min.js',
+                    'include/javascript/sugar7/plugins/Pii.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ReorderableColumns.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/jquery/jquery.rtl-scroll.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/jquery/sugar.resizableColumns.js'  => 'include/javascript/sugar_sidecar.min.js',
@@ -297,6 +301,7 @@
                     'include/javascript/sugar7/plugins/ToggleVisibility.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/Pagination.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ShortcutSession.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/plugins/CanvasDataRenderer.js' => 'include/javascript/sugar_sidecar.min.js',
                     'modules/Categories/clients/base/plugins/JSTree.js'  => 'include/javascript/sugar_sidecar.min.js',
                     // Support Portal features for Sugar7
                     'modules/Contacts/clients/base/lib/bean.js' => 'include/javascript/sugar_sidecar.min.js',
@@ -315,6 +320,8 @@
                     'include/javascript/sugar7/plugins/AddAsInvitee.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/DragdropSelect2.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/sugar7/plugins/ReminderTimeDefaults.js' => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/plugins/CollectionFieldLoadAll.js'  => 'include/javascript/sugar_sidecar.min.js',
+                   'include/javascript/sugar7/plugins/EmailParticipants.js'  => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/fuse/fuse.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/tinymce4/jquery.tinymce.min.js' => 'include/javascript/sugar_sidecar.min.js',
                     'include/javascript/mousetrap/mousetrap.min.js' => 'include/javascript/sugar_sidecar.min.js',

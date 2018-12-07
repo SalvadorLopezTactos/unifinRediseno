@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Tarjousluettelon työpöytä',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Tarjoustietueen työpöytä',
+
     'LBL_CONTRACTS'=>'Sopimukset',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Sopimukset',
     'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa tarjouksen.',
@@ -63,7 +67,7 @@ $mod_strings = array (
     'LBL_CURRENCY' => 'Valuutta:',
     'LBL_CURRENCY_RATE' => 'Valuuttakurssi',
     'LBL_DATE_QUOTE_CLOSED' => 'Todellinen sulkupäivämäärä:',
-    'LBL_DATE_QUOTE_EXPECTED_CLOSED' => 'Validi kunnes:',
+    'LBL_DATE_QUOTE_EXPECTED_CLOSED' => 'Voimassa:',
     'LBL_DEFAULT_SUBPANEL_TITLE' => 'Tarjoukset',
     'LBL_DELETE_GROUP' => 'Poista ryhmä',
     'LBL_DESCRIPTION_INFORMATION' => 'Kuvauksen tiedot',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Välisumma (Yhdysvaltain dollari)',
     'LBL_SUBTOTAL' => 'Välisumma:',
     'LBL_TAXABLE_SUBTOTAL' => 'Verotettava välisumma',
-    'LBL_SYSTEM_ID' => 'Järjestelmän ID',
     'LBL_TAX_USDOLLAR'=>'Vero (Yhdysvaltain dollari)',
     'LBL_TAX' => 'Vero:',
     'LBL_TAX_TOTAL' => 'Verot yhteensä',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Poista valitut',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Poista valitut kohteet',
     'LBL_SAVE_LINE_ITEMS' => 'Tallenna aktiiviset tuoterivit napsauttamalla sinistä valintamerkkiä kunkin tuoteirivin vieressä ennen tämän tarjouksen tallentamista.',
+    'LBL_COPY_LINE_ITEMS' => 'Tallenna aktiiviset tuoterivit napsauttamalla sinistä valintamerkkiä kunkin tuoterivin vieressä ennen tämän tarjouksen kopioimista.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Hae Tuoteluettelosta',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Tietoja ei löydy',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Kopioidaan tarjotut tuoterivit uuteen tarjoukseen.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Kopioidaan tarjotut tuoterivit uuteen tarjoukseen. Tämä saattaa kestää jonkin aikaa.',
 );

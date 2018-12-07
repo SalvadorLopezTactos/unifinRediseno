@@ -72,11 +72,7 @@ class PMSEUserTask extends PMSEActivity
             case 'ASSIGN':
                 $userId = $this->userAssignmentHandler->taskAssignment($flowData);
                 $activityDefinitionBean = $this->retrieveBean('pmse_BpmActivityDefinition', $flowData['bpmn_id']);
-                if ($activityDefinitionBean->act_response_buttons == 'ROUTE') {
-                    $flowData['cas_adhoc_actions'] = json_encode(array('link_cancel', 'route', 'edit', 'continue'));
-                } else {
-                    $flowData['cas_adhoc_actions'] = json_encode(array('link_cancel', 'approve', 'reject', 'edit'));
-                }
+                $flowData['cas_adhoc_actions'] = $this->getActionButtons($activityDefinitionBean);
                 $flowData['cas_flow_status'] = 'FORM';
                 $flowData['cas_assignment_method'] = $activityDefinitionBean->act_assignment_method;
                 $flowAction = 'CREATE';
@@ -91,8 +87,12 @@ class PMSEUserTask extends PMSEActivity
                 $flowData['taskName'] = isset($arguments['taskName']) ? $arguments['taskName'] : '';
                 $flowData['evn_type'] = 'REASSIGN';
                 $flowData['idInbox'] = isset($arguments['flow_id']) ? $arguments['flow_id'] : '';
-                $isFormRequest= isset($arguments['reassign_form']) ? true : false;
-                $this->userAssignmentHandler->adhocReassign($flowData, $arguments['adhoc_user'], false, $isFormRequest);
+                $this->userAssignmentHandler->adhocReassign(
+                    $flowData,
+                    $arguments['adhoc_user'],
+                    false,
+                    isset($arguments['reassign_form'])
+                );
                 $userId = $flowData['cas_user_id'];
                 $flowData['cas_flow_status'] = 'FORM';
                 $flowAction = 'CLOSE';
@@ -144,11 +144,7 @@ class PMSEUserTask extends PMSEActivity
                 $action = 'REASSIGN';
                 break;
             case 'ROUTE':
-                if (!empty($arguments['taskContinue']) && $arguments['taskContinue']) {
-                    $action = 'ROUTE';
-                } else {
-                    $action = $this->processUserAction($flowData);
-                }
+                $action = !empty($arguments['taskContinue']) ? 'ROUTE' : $this->processUserAction($flowData);
                 break;
             case 'APPROVE':
             case 'REJECT':
@@ -235,7 +231,7 @@ class PMSEUserTask extends PMSEActivity
 
         //If a module includes custom save/editview logic in Save.php, use that instead of a direct save.
         if (isModuleBWC($beanObject->module_dir) &&
-            SugarAutoLoader::fileExists("modules/{$beanObject->module_dir}/Save.php")
+            file_exists("modules/{$beanObject->module_dir}/Save.php")
         ) {
             foreach ($fields as $key => $value) {
                 $historyData->lock(!array_key_exists($key, $beanObject->fetched_row));
@@ -327,5 +323,20 @@ class PMSEUserTask extends PMSEActivity
 
         // Reregister the locked_flows, or set it fresh depending on state
         $registry->set('locked_flows', $flows, true);
+    }
+
+    /**
+     * Get the action buttons for the pmse_BpmActivityDefinition bean
+     * @param pmse_BpmActivityDefinition $bean
+     * @return string
+     */
+    public function getActionButtons(pmse_BpmActivityDefinition $bean)
+    {
+        if ($bean->act_response_buttons == 'ROUTE') {
+            $buttons = json_encode(array('link_cancel', 'route', 'edit', 'continue'));
+        } else {
+            $buttons = json_encode(array('link_cancel', 'approve', 'reject', 'edit'));
+        }
+        return $buttons;
     }
 }

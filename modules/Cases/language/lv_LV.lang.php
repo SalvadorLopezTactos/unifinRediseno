@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Pieteikumu saraksta instrumentu panelis',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Pieteikumu ierakstu instrumentu panelis',
+
 	'ERR_DELETE_RECORD'					=> 'Jums ir jānorāda ieraksta numurs, lai dzēstu uzņēmumu.',
 	'LBL_ACCOUNT_ID'					=> 'Uzņēmuma ID',
 	'LBL_ACCOUNT_NAME'					=> 'Uzņēmuma nosaukums:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Statuss',
     'LBL_SOURCE' => 'Avots:',
 	'LBL_SUBJECT'						=> 'Temats:',
-	'LBL_SYSTEM_ID'						=> 'Sistēmas ID',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Uzņēmuma nosaukums',
 	'LBL_LIST_ASSIGNED'					=> 'Piešķirts lietotājam',
 	'LBL_LIST_CLOSE'					=> 'Aizvērt',

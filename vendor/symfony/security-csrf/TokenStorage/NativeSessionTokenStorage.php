@@ -16,13 +16,13 @@ use Symfony\Component\Security\Csrf\Exception\TokenNotFoundException;
 /**
  * Token storage that uses PHP's native session handling.
  *
- * @since  2.4
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class NativeSessionTokenStorage implements TokenStorageInterface
 {
     /**
      * The namespace used to store values in the session.
+     *
      * @var string
      */
     const SESSION_NAMESPACE = '_csrf';
@@ -108,11 +108,7 @@ class NativeSessionTokenStorage implements TokenStorageInterface
 
     private function startSession()
     {
-        if (PHP_VERSION_ID >= 50400) {
-            if (PHP_SESSION_NONE === session_status()) {
-                session_start();
-            }
-        } elseif (!session_id()) {
+        if (PHP_SESSION_NONE === session_status()) {
             session_start();
         }
 

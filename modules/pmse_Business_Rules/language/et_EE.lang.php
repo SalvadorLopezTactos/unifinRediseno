@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Protsessi ärireeglid',
   'LBL_MODULE_TITLE' => 'Protsessi ärireeglid',
   'LBL_MODULE_NAME_SINGULAR' => 'Protsessi ärireegel',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Tingimused',
     'LBL_PMSE_LABEL_RETURN' => 'Tagasi',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Järeldused',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Muuda välja',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Tagastatav väärtus',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Lisa tingimus',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Lisa järeldus',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Lisa rida',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Eemalda veerg',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Eemalda tingimus',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Eemalda järeldus',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Eemalda veeru andmed',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Jah',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Ei',

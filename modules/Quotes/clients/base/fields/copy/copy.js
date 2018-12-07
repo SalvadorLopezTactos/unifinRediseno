@@ -22,11 +22,23 @@
     isConvertingFromShipping: undefined,
 
     /**
+     * If this is a Quote Record Copy
+     */
+    isCopy: undefined,
+
+    /**
+     * Is this the first time the Copy field has run
+     */
+    firstRun: undefined,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
         this._super('initialize', [options]);
 
+        this.firstRun = true;
+        this.isCopy = this.context.get('copy') || false;
         this.isConvertingFromShipping = this.view.isConvertFromShippingOrBilling === 'shipping';
     },
 
@@ -37,12 +49,19 @@
      */
     sync: function(enable) {
         var shippingAcctNameField;
+        var isChecked = this._isChecked();
+
+        // do not sync field mappings if this is a quote record copy
+        if (this.isCopy && this.firstRun) {
+            enable = false;
+            this.firstRun = false;
+        }
 
         this._super('sync', [enable]);
 
         // if this is coming from a Ship To subpanel and the Copy Billing to Shipping box
         // is not checked then re-enable the Shipping Account Name field so it can be canceled
-        if (this.isConvertingFromShipping && !this._isChecked()) {
+        if (!isChecked) {
             shippingAcctNameField = this.getField('shipping_account_name');
             if (shippingAcctNameField) {
                 shippingAcctNameField.setDisabled(false);

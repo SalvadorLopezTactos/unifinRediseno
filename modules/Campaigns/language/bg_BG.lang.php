@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Моля, изберете от наличните полета',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Текст в горна секция:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Попълването на тази форма ще генерира потенциален клиент и препратка към кампанията',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Чрез поставяне на отметка в това поле се съгласявате да получавате бъдещи маркетингови имейли',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Моля, изтеглете Вашата Уеб форма',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Уеб форма',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Моля, попълнете всички налични полета',

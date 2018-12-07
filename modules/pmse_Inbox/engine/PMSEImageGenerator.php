@@ -828,10 +828,6 @@ class PMSEImageGenerator
                         $figure[5]);
                     break; //this break wasn't here ...
                 case 'bpmnFlow':
-                    $X1 = $figure[1] - $x1;
-                    $Y1 = $figure[2] - $y1;
-                    $X2 = $X1 + $figure[3];
-                    $Y2 = $Y1 + $figure[4];
                     imagesetthickness($img, 1);
                     $lines = json_decode($figure[9]);
 

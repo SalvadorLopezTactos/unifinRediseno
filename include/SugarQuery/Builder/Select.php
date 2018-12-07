@@ -21,19 +21,21 @@ class SugarQuery_Builder_Select
 
     protected $countQuery = false;
 
-    protected $selectedFields = array();
+    /**
+     * Selected field names indexed by table
+     *
+     * @var true[][]
+     */
+    private $fieldsByTable = [];
 
     /**
      * Create Select Object
-     * @param $columns
+     *
+     * @param SugarQuery $query
      */
-    public function __construct(SugarQuery $query, $columns)
+    public function __construct(SugarQuery $query)
     {
-        if (!is_array($columns)) {
-            $columns = array_slice(func_get_args(), 1);
-        }
         $this->query = $query;
-        $this->field($columns);
     }
 
     /**
@@ -52,10 +54,7 @@ class SugarQuery_Builder_Select
             $key = empty($field->alias) ? $field->field : $field->alias;
             if(!$field->isNonDb()) {
                 $this->select[$key] = $field;
-                if (!isset($this->selectedFields[$field->table])) {
-                    $this->selectedFields[$field->table] = array();
-                }
-                $this->selectedFields[$field->table][] = $field->field;
+                $this->fieldsByTable[$field->table][$field->field] = true;
             }
         }
         return $this;
@@ -95,15 +94,7 @@ class SugarQuery_Builder_Select
      */
     public function checkField($field, $table)
     {
-        if (!isset($this->selectedFields[$table])) {
-            return false;
-        }
-
-        if (!in_array($field, $this->selectedFields[$table])) {
-            return false;
-        }
-
-        return true;
+        return isset($this->fieldsByTable[$table][$field]);
     }
 
     /**
@@ -113,7 +104,8 @@ class SugarQuery_Builder_Select
      */
     public function selectReset()
     {
-        $this->select = array();
+        $this->select = $this->fieldsByTable = [];
+
         return $this;
     }
 
@@ -145,5 +137,20 @@ class SugarQuery_Builder_Select
     public function getCountQuery()
     {
         return $this->countQuery;
+    }
+
+    /**
+     * Returns names of the fields selected from the given table
+     *
+     * @param string $table
+     * @return string[]
+     */
+    public function getSelectedFieldsByTable(string $table) : array
+    {
+        if (!isset($this->fieldsByTable[$table])) {
+            return [];
+        }
+
+        return array_keys($this->fieldsByTable[$table]);
     }
 }

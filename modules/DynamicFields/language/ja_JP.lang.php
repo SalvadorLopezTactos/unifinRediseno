@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'デフォルトURL',
 	'COLUMN_TITLE_AUDIT' =>'監査',
+    'COLUMN_TITLE_PII' => '個人情報',
     'COLUMN_TITLE_FTS' =>'フルテキスト検索可',
     'COLUMN_TITLE_FTS_BOOST' => 'Boost value',
 	'COLUMN_TITLE_REPORTABLE' => 'レポート可',

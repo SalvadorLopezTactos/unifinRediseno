@@ -10,7 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-    'LBL_MODULE_NAME' => '지식 기반',
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => '지식 기반 목록 대시보드',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => '지식 기반 기록 대시보드',
+
+    'LBL_MODULE_NAME' => '지식 베이스',
     'LBL_MODULE_NAME_SINGULAR' => '지식기반 조항',
     'LBL_MODULE_TITLE' => '지식기반 조항',
     'LNK_NEW_ARTICLE' => '신규 기사 새로 만들기',

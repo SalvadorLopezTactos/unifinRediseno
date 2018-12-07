@@ -8,18 +8,19 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*globals Container, $, Modal, TabPanelElement, Panel, Base*/
+/*globals PMSE.Container, $, PMSE.Modal, TabPanelElement, PMSE.Panel, PMSE.Base*/
+var PMSE = PMSE || {};
 /**
- * @class Window
+ * @class PMSE.Window
  * Handle window objects
- * @extend Container
+ * @extends PMSE.Container
  *
  * @constructor
  * Creates a new instance of the window's class
  * @param {Object} options
  */
-var Window = function (options) {
-    Container.call(this, options);
+PMSE.Window = function(options) {
+    PMSE.Container.call(this, options);
     /**
      * Defines the window's title
      * @type {String}
@@ -31,8 +32,8 @@ var Window = function (options) {
      */
     this.modal = null;
     /**
-     * Defines the Modal Object to handle modal windows
-     * @type {Modal}
+     * Defines the PMSE.Modal Object to handle modal windows
+     * @type {AdamModal}
      */
     this.modalObject = null;
     /**
@@ -76,7 +77,7 @@ var Window = function (options) {
     this.closeButton = null;
     /**
      * Defines the window's panel objects
-     * @type {Array<Panel>}
+     * @type {Array<AdamPanel>}
      */
     this.panels = [];
     /**
@@ -95,21 +96,21 @@ var Window = function (options) {
      * @type {[TabPanelElement]}
      */
     this.selectedTab = null;
-    Window.prototype.initObject.call(this, options);
+    PMSE.Window.prototype.initObject.call(this, options);
 };
 
-Window.prototype = new Container();
+PMSE.Window.prototype = new PMSE.Container();
 
 /**
  * Defines the object's type
  * @type {String}
  */
-Window.prototype.type = "Window";
+PMSE.Window.prototype.type = 'PMSE.Window';
 
 /**
  * Initialize the object with the default values
  */
-Window.prototype.initObject = function (options) {
+PMSE.Window.prototype.initObject = function(options) {
     var defaults = {
         title: 'No Title',
         modal: true,
@@ -134,7 +135,7 @@ Window.prototype.initObject = function (options) {
  * Sets the window's title
  * @param {String} text
  */
-Window.prototype.setTitle = function (text) {
+PMSE.Window.prototype.setTitle = function(text) {
     this.title = text;
     if (this.titleLabelObject) {
         this.titleLabelObject.innerHTML = text;
@@ -147,7 +148,7 @@ Window.prototype.setTitle = function (text) {
  * @param {Function} fn
  * @return {*}
  */
-Window.prototype.setModalHandler = function (fn) {
+PMSE.Window.prototype.setModalHandler = function(fn) {
     this.modalHandler = fn;
     return this;
 };
@@ -156,9 +157,9 @@ Window.prototype.setModalHandler = function (fn) {
  * Sets the window's modal property
  * @param {Boolean} value
  */
-Window.prototype.setModal = function (value) {
+PMSE.Window.prototype.setModal = function(value) {
     if (value) {
-        this.modalObject = new Modal({
+        this.modalObject = new PMSE.Modal({
             clickHandler: this.modalHandler
         });
     } else {
@@ -173,7 +174,7 @@ Window.prototype.setModal = function (value) {
  * @param {Boolean} value
  * @return {*}
  */
-Window.prototype.setDestroyOnHide = function (value) {
+PMSE.Window.prototype.setDestroyOnHide = function(value) {
     this.destroyOnHide = value;
     return this;
 };
@@ -183,12 +184,12 @@ Window.prototype.setDestroyOnHide = function (value) {
  * @param {Boolean} value
  * @return {*}
  */
-Window.prototype.setCloseButton = function (value) {
+PMSE.Window.prototype.setCloseButton = function(value) {
     this.closeButton = value;
     return this;
 };
 
-Window.prototype.onTabSelectedHandler = function() {
+PMSE.Window.prototype.onTabSelectedHandler = function() {
     var that = this;
     return function() {
         var newContent;
@@ -205,7 +206,7 @@ Window.prototype.onTabSelectedHandler = function() {
     };
 };
 
-Window.prototype.clearPanels = function() {
+PMSE.Window.prototype.clearPanels = function() {
     var i;
     for(i = 0; i < this.panels.length; i += 1) {
         $(this.panels[i].getTab()).remove();
@@ -215,7 +216,7 @@ Window.prototype.clearPanels = function() {
     return this;
 };
 
-Window.prototype.setPanels = function(panels) {
+PMSE.Window.prototype.setPanels = function(panels) {
     var i;
     if(!(panels.hasOwnProperty("length") && typeof panels.push === 'function')) {
         return this;
@@ -231,19 +232,19 @@ Window.prototype.setPanels = function(panels) {
 
 /**
  * Adds a panel to the container window
- * @param {Panel} p
+ * @param {AdamPanel} p
  */
-Window.prototype.addPanel = function (panel) {
+PMSE.Window.prototype.addPanel = function(panel) {
     var p = panel.panel, tabPanelElement;
 
     if(panel instanceof TabPanelElement) {
         tabPanelElement = panel;
-    } else if(panel instanceof Panel) {
+    } else if (panel instanceof PMSE.Panel) {
         p = panel;
         tabPanelElement = new TabPanelElement({
             content: panel
         });
-    } else if(p instanceof Panel) {
+    } else if (p instanceof PMSE.Panel) {
         tabPanelElement = new TabPanelElement({
             title: panel.title,
             content: p
@@ -269,11 +270,11 @@ Window.prototype.addPanel = function (panel) {
     return this;
 };
 
-Window.prototype.getPanel = function(i) {
+PMSE.Window.prototype.getPanel = function(i) {
     return this.panels[i];
 };
 
-Window.prototype.getPanels = function() {
+PMSE.Window.prototype.getPanels = function() {
     return this.panels;
 };
 
@@ -281,9 +282,9 @@ Window.prototype.getPanels = function() {
  * Creates the HTML Element fot the object
  * @return {*}
  */
-Window.prototype.createHTML = function () {
+PMSE.Window.prototype.createHTML = function() {
     var marginProps, closeBtn, titleLabel, windowHeader, tabsContainer, i;
-    Container.prototype.createHTML.call(this);
+    PMSE.Container.prototype.createHTML.call(this);
     marginProps = '-' + parseInt(this.height / 2, 10) + 'px 0 0 -' + parseInt(this.width / 2, 10) + 'px';
     this.style.addClasses(['adam-window']);
     this.style.addProperties({
@@ -341,7 +342,7 @@ Window.prototype.createHTML = function () {
 /**
  * Shows the window
  */
-Window.prototype.show = function () {
+PMSE.Window.prototype.show = function() {
     var panel;
     if (!this.loaded) {
         this.load();
@@ -369,7 +370,7 @@ Window.prototype.show = function () {
  * Opens/Creates the windows object
  * @private
  */
-Window.prototype.load = function () {
+PMSE.Window.prototype.load = function() {
     if (!this.html) {
         this.createHTML();
         this.attachListeners();
@@ -381,7 +382,7 @@ Window.prototype.load = function () {
 /**
  * Close the window and destroy the object
  */
-Window.prototype.close = function () {
+PMSE.Window.prototype.close = function() {
     if (this.visible) {
         this.hide();
     }
@@ -394,7 +395,7 @@ Window.prototype.close = function () {
  * Hides the window
  * @param {Boolean} [destroy]
  */
-Window.prototype.hide = function (destroy) {
+PMSE.Window.prototype.hide = function(destroy) {
     if (this.modal) {
         this.modalObject.hide();
     } else {
@@ -409,7 +410,7 @@ Window.prototype.hide = function (destroy) {
 /**
  * Sets the window listeners
  */
-Window.prototype.attachListeners = function () {
+PMSE.Window.prototype.attachListeners = function() {
     var self = this;
     $(this.html).draggable({
         cursor: "move",
@@ -420,7 +421,7 @@ Window.prototype.attachListeners = function () {
         e.stopPropagation();
     });
     if (this.closeButton && this.closeButtonObject) {
-        $(this.closeButtonObject).click(function (e) {
+        $(this.closeButtonObject).click(function(e) {
             e.stopPropagation();
             self.hide();
         });
@@ -429,7 +430,7 @@ Window.prototype.attachListeners = function () {
 
 //TabPanelElement
     var TabPanelElement = function(settings) {
-        Base.call(this, settings);
+        PMSE.Base.call(this, settings);
         this.title = null;
         this.tab = null;
         this.content = null;
@@ -466,7 +467,7 @@ Window.prototype.attachListeners = function () {
     };
 
     TabPanelElement.prototype.setContent = function(content) {
-        if(content instanceof Panel) {
+        if (content instanceof PMSE.Panel) {
             this.content = content;
         }
 

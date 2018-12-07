@@ -26,8 +26,7 @@ if(!empty($_SESSION['display_lotuslive_alert'])){
     displayAdminError(translate('MSG_RECONNECT_LOTUSLIVE', 'Administration'));
 }
 
-if( is_admin($current_user) && SugarAutoLoader::fileExists('include/SugarSearchEngine/SugarSearchEngineFactory.php') )
-{
+if (is_admin($current_user) && file_exists('include/SugarSearchEngine/SugarSearchEngineFactory.php')) {
     $ftsType = SugarSearchEngineFactory::getFTSEngineNameFromConfig();
     if(!empty($ftsType) && isset($GLOBALS['sugar_config']['full_text_engine'][$ftsType]['valid']) && !$GLOBALS['sugar_config']['full_text_engine'][$ftsType]['valid'])
     {
@@ -50,13 +49,13 @@ if (!isset($_SESSION['LICENSE_EXPIRES_IN'])) {
     checkSystemLicenseStatus();
 }
 
-if (!ocLicense() && isset($_SESSION['LICENSE_EXPIRES_IN']) && $_SESSION['LICENSE_EXPIRES_IN'] != 'valid') {
+if (isset($_SESSION['LICENSE_EXPIRES_IN']) && $_SESSION['LICENSE_EXPIRES_IN'] != 'valid') {
     if ($_SESSION['LICENSE_EXPIRES_IN'] < -1) {
         setSystemState('LICENSE_KEY');
     }
 }
 
-if (!ocLicense() && isset($_SESSION['VALIDATION_EXPIRES_IN']) && $_SESSION['VALIDATION_EXPIRES_IN'] != 'valid') {
+if (isset($_SESSION['VALIDATION_EXPIRES_IN']) && $_SESSION['VALIDATION_EXPIRES_IN'] != 'valid') {
     if ($_SESSION['VALIDATION_EXPIRES_IN'] < -1) {
         setSystemState('LICENSE_KEY');
     }
@@ -78,9 +77,7 @@ if(is_admin($current_user)){
 if(!empty($_SESSION['COULD_NOT_CONNECT'])){
 	displayAdminError(translate('LBL_COULD_NOT_CONNECT', 'Administration') . ' '. $timedate->to_display_date_time($_SESSION['COULD_NOT_CONNECT']));
 }
-if(!empty($_SESSION['EXCEEDING_OC_LICENSES']) && $_SESSION['EXCEEDING_OC_LICENSES'] == true){
-    displayAdminError(translate('LBL_EXCEEDING_OC_LICENSES', 'Administration'));
-}
+
 if(isset($license) && !empty($license->settings['license_msg_admin'])){
     // UUDDLRLRBA
 	$GLOBALS['log']->fatal(base64_decode($license->settings['license_msg_admin']));
@@ -124,7 +121,7 @@ if($smtp_error) {
 // License Agreement.  Neither the Company nor the Users
 // may modify any portion of the Critical Control Software.
 
-        if(  !ocLicense() && isset($_SESSION['LICENSE_EXPIRES_IN']) && strcmp($_SESSION['LICENSE_EXPIRES_IN'], 'valid') != 0){
+    if (isset($_SESSION['LICENSE_EXPIRES_IN']) && strcmp($_SESSION['LICENSE_EXPIRES_IN'], 'valid') != 0) {
         	 if(strcmp($_SESSION['LICENSE_EXPIRES_IN'], 'REQUIRED') == 0){
         	 		setSystemState('LICENSE_KEY');
 	         			displayAdminError( translate('FATAL_LICENSE_REQUIRED', 'Administration') );
@@ -142,7 +139,7 @@ if($smtp_error) {
 
 	           displayAdminError( translate('WARN_LICENSE_EXPIRED', 'Administration'). $_SESSION['LICENSE_EXPIRES_IN'] . translate('WARN_LICENSE_EXPIRED2', 'Administration') );
 	        }
-        }elseif(!ocLicense() && strcmp($_SESSION['VALIDATION_EXPIRES_IN'], 'valid') != 0){
+    } elseif (strcmp($_SESSION['VALIDATION_EXPIRES_IN'], 'valid') != 0) {
          	 if(strcmp($_SESSION['VALIDATION_EXPIRES_IN'], 'REQUIRED') == 0){
         	 		setSystemState('LICENSE_KEY');
 	         		displayAdminError( translate('FATAL_VALIDATION_REQUIRED', 'Administration'));
@@ -158,7 +155,7 @@ if($smtp_error) {
 	        else if( $_SESSION['VALIDATION_EXPIRES_IN'] >= 0 ){
 	           displayAdminError(  translate('WARN_VALIDATION_EXPIRED', 'Administration'). $_SESSION['VALIDATION_EXPIRES_IN'] .translate('WARN_VALIDATION_EXPIRED2', 'Administration')  );
 	        }
-        }
+    }
 
         if( !isset($_SESSION['license_seats_needed']) ){
             $focus = Administration::getSettings();

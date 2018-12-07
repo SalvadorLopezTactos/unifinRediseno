@@ -8,25 +8,26 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 /**
  * @class LabelField
  * Handles the Label fields
- * @extend Field
+ * @extends PMSE.Field
  *
  * @constructor
  * Creates a new instance of the class
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
 var ReassignField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     this.submit = false;
     this.items = [];
     this.comboId = null;
     ReassignField.prototype.initObject.call(this, options);
     $.extend(true, this.defaults, options);
 };
-ReassignField.prototype = new Field();
+ReassignField.prototype = new PMSE.Field();
 
 /**
  * Defines the object's type
@@ -147,7 +148,7 @@ ReassignField.prototype.createTableHeaders = function () {
  */
 ReassignField.prototype.createHTML = function () {
     var fieldLabel, logPicture, newsItem, datetime, detailDiv, selectDiv, selectInput, i, table;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     if (!this.parent.hasHeaders) {
         this.createTableHeaders();

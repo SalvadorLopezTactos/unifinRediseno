@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Árajánlatok listája műszerfal',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Hiba bejegyzések műszerfal',
+
   'LBL_MODULE_NAME' => 'Hibák',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Hiba',
   'LBL_MODULE_TITLE' => 'Hibakereső: Főoldal',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Esetek',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projektek',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentumok',
-  'LBL_SYSTEM_ID' => 'Rendszer azonosító',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Hozzárendelt felhasználó',
 	'LBL_ASSIGNED_TO_NAME' => 'Felelős',
 

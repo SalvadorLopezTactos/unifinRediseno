@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Nadzorna ploča za popis meta',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o metama',
+
   'LBL_MODULE_NAME' => 'Mete',
   'LBL_MODULE_NAME_SINGULAR' => 'Meta',
   'LBL_MODULE_ID'   => 'Mete',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Oslovljavanje',
   'LBL_SAVE_PROSPECT' => 'Spremi metu',
   'LBL_CREATED_OPPORTUNITY' =>'Stvorena je nova prilika',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Da biste stvorili priliku, morate imati račun.\n Stvorite novi račun ili odaberite postojeći.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Da biste stvorili priliku, morate imati račun.\\n Stvorite novi račun ili odaberite postojeći.',
   'LNK_SELECT_ACCOUNT' => "Odaberi račun",
   'LNK_NEW_PROSPECT' => 'Stvori metu',
   'LNK_PROSPECT_LIST' => 'Prikaži mete',
@@ -195,4 +199,6 @@ Da biste stvorili {{module_name}}:
 2. Kliknite na „Spremi” da biste završili novi zapis i vratili se na prethodnu stranicu.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Izvješća o metama',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Privola dana za poslovne svrhe',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Posljednje ažuriranje privole',
 );

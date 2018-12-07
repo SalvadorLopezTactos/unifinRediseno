@@ -26,13 +26,14 @@
     /**
      * Calls the custom Mail API endpoint to search for email addresses.
      *
-     * @param method
-     * @param model
-     * @param options
+     * @param {string} method
+     * @param {Data.Bean} model
+     * @param {Object} options
      */
     sync: function(method, model, options) {
-        var callbacks,
-            url;
+        var callbacks;
+        var url;
+        var success;
 
         options = options || {};
 
@@ -49,7 +50,43 @@
         app.config.maxQueryResult = app.config.maxQueryResult || 20;
         options.limit = options.limit || app.config.maxQueryResult;
 
+        // Is there already a success callback?
+        if (options.success) {
+            success = options.success;
+        }
+
+        // Map the response so that the email field data is packaged as an
+        // array of objects. The email field component expects the data to be
+        // in that format.
+        options.success = function(data) {
+            if (_.isArray(data)) {
+                data = _.map(data, function(row) {
+                    row.email = [{
+                        email_address: row.email,
+                        email_address_id: row.email_address_id,
+                        opt_out: row.opt_out,
+                        // The email address must be seen as the primary email
+                        // address to be shown in a list view.
+                        primary_address: true
+                    }];
+
+                    // Remove the properties that are now stored in the nested
+                    // email array.
+                    delete row.opt_out;
+                    delete row.email_address_id;
+
+                    return row;
+                });
+            }
+
+            // Call the original success callback.
+            if (success) {
+                success(data);
+            }
+        };
+
         options = app.data.parseOptionsForSync(method, model, options);
+        options.params.erased_fields = true;
 
         callbacks = app.data.getSyncCallbacks(method, model, options);
         this.trigger('data:sync:start', method, model, options);

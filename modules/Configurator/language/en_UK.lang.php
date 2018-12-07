@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus server',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Subpanel items per page',
 	'LOG_MEMORY_USAGE'=>'Log memory usage',
-	'LOG_SLOW_QUERIES'=>'Log slow queries',
+    'LOG_SLOW_QUERIES' => 'Log slow queries',
     'LOCK_HOMEPAGE_HELP'=>'This setting is to prevent<BR> 1) the addition of new home pages and dashlets in the Home module, <BR>2) customisation of dashlet placement in the home pages by dragging and dropping.',
     'CURRENT_LOGO'=>'Current Logo:',
     'CURRENT_LOGO_HELP'=>'This logo is displayed at the top left-hand corner of the Sugar application.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'This is the name that displays in the title bar of your browser.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Enable/Disable emails from related (or linked) contacts to show in Email Subpanel.',
 
-    'LBL_OC_STATUS'                     => 'Default Offline Client Status',
-    'DEFAULT_OC_STATUS'                 => 'Enable Offline Client by default',
-    'LBL_OC_STATUS_DESC' => 'Check here if you would like any user to have access to Offline Client.  Otherwise you can configure access at the user level.',
     'SESSION_TIMEOUT' => 'Portal Session Timeout',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'The Portal Session Timeout is for legacy versions of Sugar Portal available in 6.5 and older.',
     'UPLOAD_MAXSIZE_UNITS' => 'bytes',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML Login URL can not be empty',
     'ERR_EMPTY_SAML_CERT' => 'SAML certificate can not be empty',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML Entity ID cannot be empty',
     'ERR_SAML_LOGIN_URL' => 'SAML Login URL is not valid',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL is not valid',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM file should contain private key',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM file should contain x.509 certificate',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Provided x.509 certificate doesn&#39;t match private key',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
 );
 
 

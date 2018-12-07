@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Interessentenlisten-Dashboard',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Interessentenbericht-Dashboard',
+
     'ERR_DELETE_RECORD' => 'Die Datensatznummer muss angegeben werden, um diesen Datensatz löschen zu können.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Firma-Beschreibung',
     'LBL_ACCOUNT_ID'=>'Firmen-ID',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Verkaufschance Betrag:',
     'LBL_OPPORTUNITY_ID'=>'Verkaufschance-ID',
     'LBL_OPPORTUNITY_NAME' => 'Verkaufschance-Name:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Alternative E-Mail:',
     'LBL_OTHER_PHONE' => 'Weiteres Telefon:',
     'LBL_PHONE' => 'Telefon:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternative Adresse in Hauptadresse kopieren',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Hauptadresse in alternative Adresse kopieren',
     'NTC_DELETE_CONFIRMATION' => 'Sind Sie sicher, dass Sie diesen Eintrag löschen möchten?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Zum Erstellen einer Verkaufschance benötigen Sie eine Firma.\n Bitte erstellen Sie eine neue Firma oder wählen Sie eine bestehende Firma aus.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Zum Erstellen einer Verkaufschance benötigen Sie eine Firma.\\n Bitte erstellen Sie eine neue Firma oder wählen Sie eine bestehende Firma aus.',
     'NTC_REMOVE_CONFIRMATION' => 'Möchten Sie diesen Interessenten wirklich von diesem Ticket entfernen?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Möchten Sie diesen Eintrag wirklich als direkten Bericht entfernen?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Kampagnen-Protokoll',
@@ -314,4 +320,6 @@ Nach der Bestätigung der einzelnen gewünschten Module klicken Sie auf "Speiche
     'LBL_MKTO_LEAD_SCORE' => 'Interessenten-Bewertung',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Interessenten-Berichte',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Geschäftszwecke, zugestimmt für',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Zustimmung zuletzt aktualisiert',
 );

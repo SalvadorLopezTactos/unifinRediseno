@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Painel de lista de reuniões',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Painel de registro de reuniões',
+
 	'ERR_DELETE_RECORD' => 'Um número de registro deve ser especificado para excluir a reunião.',
 	'LBL_ACCEPT_THIS'=>'Aceitar?',
 	'LBL_ADD_BUTTON'=> 'Adicionar',
@@ -43,12 +47,12 @@ $mod_strings = array (
 	'LBL_LIST_CLOSE' => 'Fechar',
 	'LBL_LIST_CONTACT' => 'Contato',
 	'LBL_LIST_DATE_MODIFIED'=>'Data da modificação',
-	'LBL_LIST_DATE' => 'Data de Início',
+	'LBL_LIST_DATE' => 'Data de início',
 	'LBL_LIST_DIRECTION' => 'Direção',
 	'LBL_LIST_DUE_DATE'=>'Data Limite',
 	'LBL_LIST_FORM_TITLE' => 'Lista de Reuniões',
 	'LBL_LIST_MY_MEETINGS' => 'Minhas Reuniões',
-    'LBL_MY_SCHEDULED_MEETINGS' => 'Minhas Reuniões Agendadas',
+    'LBL_MY_SCHEDULED_MEETINGS' => 'Minhas reuniões agendadas',
 	'LBL_LIST_RELATED_TO' => 'Referente a',
 	'LBL_LIST_STATUS'=>'Estado',
 	'LBL_LIST_SUBJECT' => 'Assunto',
@@ -97,7 +101,7 @@ $mod_strings = array (
 	'LBL_ACTIVITIES_REPORTS' => 'Relatório de Atividades',
     'LBL_PARENT_TYPE' => 'Tipo de Origem:',
     'LBL_PARENT_ID' => 'ID da Origem',
-	'LNK_MEETING_LIST'=>'Exibir Reuniões',
+	'LNK_MEETING_LIST'=>'Exibir reuniões',
 	'LNK_NEW_APPOINTMENT' => 'Criar Compromisso',
 	'LNK_NEW_MEETING'=>'Agendar reunião',
 	'LNK_IMPORT_MEETINGS' => 'Importar Reuniões',

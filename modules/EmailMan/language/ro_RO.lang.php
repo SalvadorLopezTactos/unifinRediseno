@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'dati click aici',
 	'TXT_REMOVE_ME'								=> 'Pentru a va inlatura din aceasta lista de email-uri',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Expediaza notificare din alocare adrese email pentru utilizatori',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Renunțare opțiune adrese de e-mail noi în mod implicit',
 
 	'LBL_SECURITY_TITLE'						=> 'Setari de Securitate Email',
 	'LBL_SECURITY_DESC'							=> 'Verificati ca urmatoarelor sa NU li se permita accesul prin Email de Intrare sau sa fie afisate in modulul de Email-uri.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Permite utilizatorilor sa foloseasca acest cont pentru email-uri de expediat:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Cand aceasta optiune este selectata, toti utilizatorii vor fi in masura sa expedieze email-uri prin intermediul aceluiasi cont de email ca cel utilizat pentru transmiterea notificarilor si alertelor. Daca optiunea nu este selectata, utilizatorii pot totusi sa foloseasca serverul de email dupa ce furnizeaza informatiile referitoare la propriul cont.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Cand este activata, numele utilizatorilor si adresele de email vor fi incluse in campul De la: al email-ului. Aceasta facilitate este posibil sa nu functioneze cu serverele SMTP care nu permit transmierea de pe un cont de email diferit de cel al contului de server.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Atunci când se adaugă o adresă de e-mail nouă, se va renunța automat la opțiunea pentru aceasta. E-mailurile campaniilor nu pot fi trimise la adresele pentru care s-a renunțat la opțiune. Modificarea acestei setări nu va afecta adresele de e-mail existente.',
 	'LBL_GMAIL_LOGO' => 'Gmail Logo' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'schimba' /*for 508 compliance fix*/,

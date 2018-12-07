@@ -15,6 +15,9 @@ $viewdefs['Employees']['EditView'] = array(
                                             array('label' => '10', 'field' => '30'), 
                                             array('label' => '10', 'field' => '30')
                                             ),
+                            'form' => array(
+                                'headerTpl'=>'modules/Employees/tpls/EditViewHeader.tpl',
+                            ),
                             ),
  'panels' =>array (
 

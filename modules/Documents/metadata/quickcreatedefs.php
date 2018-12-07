@@ -31,7 +31,7 @@ $viewdefs['Documents']['QuickCreate'] = array(
   array (
     
     array (
-      'doc_type', 
+      'doc_type',
       'status_id',
     ),
     array (

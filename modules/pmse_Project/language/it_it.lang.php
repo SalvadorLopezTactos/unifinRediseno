@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Definizioni Flusso',
   'LBL_MODULE_TITLE' => 'Definizioni Flusso',
   'LBL_MODULE_NAME_SINGULAR' => 'Definizione Flusso',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'è uguale a',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'non è',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'non uguale a',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Tempo di esecuzione',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Aggiungi',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Chiudi',

@@ -11,8 +11,11 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => '已報價單項清單儀表板',
+
     'LBL_CAMPAIGN_PRODUCT' => '推廣活動報價項目',
-    'LBL_MODULE_NAME' => '報價項目',
+    'LBL_MODULE_NAME' => '已報價項目',
     'LBL_MODULE_NAME_SINGULAR' => '報價項目',
     'LBL_MODULE_TITLE' => '報價項目：首頁',
     'LBL_SEARCH_FORM_TITLE' => '報價項目搜尋',
@@ -38,7 +41,7 @@ $mod_strings = array(
     'LBL_NAME' => '名稱',
     'LBL_URL' => '產品 URL：',
     'LBL_QUOTE_NAME' => '報價名稱：',
-    'LBL_ASSOCIATED_QUOTE' => '報價主題：',
+    'LBL_ASSOCIATED_QUOTE' => '報價主旨：',
     'LBL_CONTACT_NAME' => '連絡人姓名：',
     'LBL_DATE_PURCHASED' => '已購：',
     'LBL_DATE_SUPPORT_EXPIRES' => '支援過期：',
@@ -172,4 +175,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => '已報價項目報價資料清單',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' （新報價項目）',
     'LBL_DISCOUNT_PERCENT' => '百分比',
+    'LBL_DISCOUNT_TYPE' => '折扣類型',
 );

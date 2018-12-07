@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Notizenlisten-Dashboard',
+
     'ERR_DELETE_RECORD' => 'Zum Löschen der Firma muss eine Datensatznummer angegeben werden.',
     'LBL_ACCOUNT_ID' => 'Firmen-ID:',
     'LBL_CASE_ID' => 'Ticket-ID:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Beschreibung',
     'LBL_EMAIL_ADDRESS' => 'E-Mail-Adresse:',
     'LBL_EMAIL_ATTACHMENT' => 'E-Mail-Anhang',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'E-Mail-Anhang für',
     'LBL_FILE_MIME_TYPE' => 'Mime-Typ',
+    'LBL_FILE_EXTENSION' => 'Dateinamenerweiterung',
+    'LBL_FILE_SOURCE' => 'Dateiquelle',
+    'LBL_FILE_SIZE' => 'Dateigröße',
     'LBL_FILE_URL' => 'Datei-URL',
     'LBL_FILENAME' => 'Anlage:',
     'LBL_LEAD_ID' => 'Interessenten-ID:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Verkaufschance-ID:',
     'LBL_PARENT_ID' => 'Parent-ID:',
     'LBL_PARENT_TYPE' => 'Eltern-Typ',
+    'LBL_EMAIL_TYPE' => 'E-Mail-Typ',
+    'LBL_EMAIL_ID' => 'E-Mail',
     'LBL_PHONE' => 'Telefon:',
     'LBL_PORTAL_FLAG' => 'Im Portal anzeigen?',
     'LBL_EMBED_FLAG' => 'In E-Mail einfügen?',

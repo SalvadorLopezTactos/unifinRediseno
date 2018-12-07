@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => '会議リストのダッシュ ボード',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => '会議レコードのダッシュ ボード',
+
 	'ERR_DELETE_RECORD' => '会議を削除するにはレコード番号を指定する必要があります。',
 	'LBL_ACCEPT_THIS'=>'出欠確認',
 	'LBL_ADD_BUTTON'=> '追加',

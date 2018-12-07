@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => '已刪除',
   'LBL_EMAIL_ADDRESS'=>'電子郵件地址',
   'LBL_CONTACTS_SYNC' => '連絡人',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        '只能在 <a href="{0}" target="_blank">雲端主控台</a> 中為 IDM 模式創建員工。',
 );
 
 

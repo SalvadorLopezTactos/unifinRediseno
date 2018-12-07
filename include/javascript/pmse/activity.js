@@ -9,13 +9,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /*global AdamShape, jCore, $, AdamActivityContainerBehavior, AdamActivityResizeBehavior,
- Action, translate, AdamMarker, CommandDefaultFlow,
- AdamShapeMarkerCommand, AdamShapeLayerCommand, RestProxy, SUGAR_URL, Window, PMSE_DESIGNER_FORM_TRANSLATIONS,
- Form, ItemMatrixField, HiddenField, LabelField, TextField, ComboboxField, adamUID,
+ PMSE.Action, translate, AdamMarker, CommandDefaultFlow,
+ AdamShapeMarkerCommand, AdamShapeLayerCommand, RestProxy, SUGAR_URL, PMSE.Window, PMSE_DESIGNER_FORM_TRANSLATIONS,
+ PMSE.Form, ItemMatrixField, HiddenField, LabelField, TextField, ComboboxField, adamUID,
  CheckboxField, CommandAdam, ItemUpdaterField, PROJECT_MODULE, FieldOption, MessagePanel, RestClient,
  NumberField, CheckboxGroup
  */
 // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+var PMSE = PMSE || {};
 /**
  * @class AdamActivity
  * Handle BPMN Activities (Tasks)
@@ -1012,7 +1013,7 @@ AdamActivity.prototype.getContextMenu = function () {
         addRelatedRecordAction,
         businessRuleAction,
         defaultflowAction;
-    deleteAction = new Action({
+    deleteAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_DELETE'),
         cssStyle: 'adam-menu-icon-delete',
         handler: function () {
@@ -1026,35 +1027,35 @@ AdamActivity.prototype.getContextMenu = function () {
         }
     });
 
-    noneAction = new Action({
+    noneAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_UNASSIGNED'),
         cssStyle: 'adam-menu-script-none',
         handler: self._getScriptTypeActionHandler('NONE'),
         selected: (this.act_script_type === 'NONE')
     });
 
-    assignUserAction = new Action({
+    assignUserAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_ASSIGN_USER'),
         cssStyle: 'adam-menu-script-assign_user',
         handler: self._getScriptTypeActionHandler('ASSIGN_USER'),
         selected: (this.act_script_type === 'ASSIGN_USER')
     });
 
-    assignTeamAction = new Action({
+    assignTeamAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_ASSIGN_TEAM'),
         cssStyle: 'adam-menu-script-assign_team',
         handler: self._getScriptTypeActionHandler('ASSIGN_TEAM'),
         selected: (this.act_script_type === 'ASSIGN_TEAM')
     });
 
-    changeFieldAction = new Action({
+    changeFieldAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_CHANGE_FIELD'),
         cssStyle: 'adam-menu-script-change_field',
         handler: self._getScriptTypeActionHandler('CHANGE_FIELD'),
         selected: (this.act_script_type === 'CHANGE_FIELD')
     });
 
-    addRelatedRecordAction = new Action({
+    addRelatedRecordAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_ADD_RELATED_RECORD'),
         cssStyle: 'adam-menu-script-add_related_record',
         toolTip: _.isEmpty(this.canvas.project.script_tasks.add_related_record) ? translate('LBL_PMSE_CANNOT_CONFIGURE_ADD_RELATED_RECORD') : null,
@@ -1063,7 +1064,7 @@ AdamActivity.prototype.getContextMenu = function () {
         selected: (this.act_script_type === 'ADD_RELATED_RECORD')
     });
 
-    businessRuleAction = new Action({
+    businessRuleAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_BUSINESS_RULE'),
         cssStyle: 'adam-menu-script-business_rule',
         handler: self._getScriptTypeActionHandler('BUSINESS_RULE'),
@@ -1085,7 +1086,7 @@ AdamActivity.prototype.getContextMenu = function () {
                 self.canvas.commandStack.add(cmd);
             };
         };
-        defaultflownoneAction = new Action({
+        defaultflownoneAction = new PMSE.Action({
             text: translate('LBL_PMSE_CONTEXT_MENU_NONE'),
             cssStyle : 'adam-menu-icon-none',
             handler: handle(""),
@@ -1112,7 +1113,7 @@ AdamActivity.prototype.getContextMenu = function () {
                         break;
                 }
                 defaultflowItems.push(
-                    new Action({
+                    new PMSE.Action({
                         text: name,
                         cssStyle : self.getCanvas().getTreeItem(shape).icon,
                         handler: handle(connection.getID()),
@@ -1143,12 +1144,12 @@ AdamActivity.prototype.getContextMenu = function () {
         actionItems.push(businessRuleAction);
         actionItems.push(assignUserAction, assignTeamAction, changeFieldAction, addRelatedRecordAction);
 
-        // For custom actions to appear as Action Types in the Action menu,
+        // For custom actions to appear as PMSE.Action Types in the PMSE.Action menu,
         // create AdamActivity.prototype.customContextMenuActions and make it
         // return an array with objects defining the action's properties
         if (_.isFunction(AdamActivity.prototype.customContextMenuActions)) {
             _.each(this.customContextMenuActions(), function(action) {
-                actionItems.push(new Action({
+                actionItems.push(new PMSE.Action({
                     text: action.text,
                     cssStyle: action.cssStyle,
                     handler: self._getScriptTypeActionHandler(action.name),
@@ -1271,7 +1272,7 @@ AdamActivity.prototype.createConfigurateAction = function () {
         wtype: 'Confirm',
         message: translate('LBL_PMSE_MESSAGE_CANCEL_CONFIRM')
     });
-    w = new Window({
+    w = new PMSE.Window({
         width: wWidth,
         height: this.act_task_type === 'USERTASK' ? 340 : wHeight,
         modal: true,
@@ -1298,7 +1299,7 @@ AdamActivity.prototype.createConfigurateAction = function () {
             nColumns: 2
         });
 
-        f2 = new Form({
+        f2 = new PMSE.Form({
             items: [ itemMatrix ],
             closeContainerOnSubmit: true,
             labelWidth: '16%',
@@ -1351,7 +1352,7 @@ AdamActivity.prototype.createConfigurateAction = function () {
             visualStyle : 'table',
             nColumns: 2
         });
-        requiredForm = new Form({
+        requiredForm = new PMSE.Form({
             items: [ requiredFields ],
             closeContainerOnSubmit: true,
             labelWidth: '16%',
@@ -1393,7 +1394,7 @@ AdamActivity.prototype.createConfigurateAction = function () {
             ]
         });
 
-        relatedForm = new Form({
+        relatedForm = new PMSE.Form({
             closeContainerOnSubmit: true,
             labelWidth: '100%',
             buttons: [
@@ -1480,7 +1481,7 @@ AdamActivity.prototype.createConfigurateAction = function () {
             expTimeCombo
         ];
 
-        f3 = new Form({
+        f3 = new PMSE.Form({
             items: itemsF3,
             closeContainerOnSubmit: true,
             buttons: [
@@ -1806,7 +1807,7 @@ AdamActivity.prototype.createConfigurateAction = function () {
 
     }
 
-    f = new Form({
+    f = new PMSE.Form({
         items: items,
         closeContainerOnSubmit: true,
         buttons: [
@@ -1874,7 +1875,7 @@ AdamActivity.prototype.createConfigurateAction = function () {
         });
     }
 
-    action = new Action({
+    action = new PMSE.Action({
         text: actionName,
         cssStyle : actionCSS,
         handler: function () {
@@ -2093,7 +2094,7 @@ AdamActivity.prototype.createAssignUsersAction = function () {
         }
     };
 
-    f = new Form({
+    f = new PMSE.Form({
         items: [combo_method, combo_teams, combo_users, assignUserField, assignTeamField],
         closeContainerOnSubmit: true,
         buttons: [
@@ -2135,7 +2136,7 @@ AdamActivity.prototype.createAssignUsersAction = function () {
         callback: callback,
         language: PMSE_DESIGNER_FORM_TRANSLATIONS
     });
-    w = new Window({
+    w = new PMSE.Window({
         width: 500,
         height: 350,
         title: translate('LBL_PMSE_FORM_TITLE_USER_DEFINITION') + ': ' + this.getName(),
@@ -2143,7 +2144,7 @@ AdamActivity.prototype.createAssignUsersAction = function () {
     });
     w.addPanel(f);
 
-    action = new Action({
+    action = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_USERS'),
         cssStyle : 'adam-menu-icon-user',
         handler: function () {
@@ -2157,7 +2158,7 @@ AdamActivity.prototype.createAssignUsersAction = function () {
 /**
  * Creates the action's modal
  * @param {string} type The name of the action
- * @return {Action} The action object
+ * @return {AdamAction} The action object
  */
 AdamActivity.prototype.actionFactory = function(type) {
     var self = this;
@@ -2171,7 +2172,7 @@ AdamActivity.prototype.actionFactory = function(type) {
 
     var windowDef = this.getWindowDef(type);
 
-    var w = new Window({
+    var w = new PMSE.Window({
         width: windowDef.wWidth || 0,
         height: windowDef.wHeight || 0,
         title: windowDef.wTitle || '',
@@ -2180,7 +2181,7 @@ AdamActivity.prototype.actionFactory = function(type) {
 
     var actionDef = this.getAction(type, w);
 
-    var f = new Form({
+    var f = new PMSE.Form({
         proxy: actionDef.proxy,
         items: actionDef.items || [],
         closeContainerOnSubmit: true,
@@ -2242,7 +2243,7 @@ AdamActivity.prototype.actionFactory = function(type) {
 
     w.addPanel(f);
 
-    var action = new Action({
+    var action = new PMSE.Action({
         text: actionDef.actionText || '',
         cssStyle: actionDef.actionCSS || '',
         handler: function() {
@@ -2261,7 +2262,7 @@ AdamActivity.prototype.actionFactory = function(type) {
  * Gets an action's properties. Also checks for custom action properties defined by the end user
  *
  * @param {string} type The name of the action
- * @param {Window} w The Window object that will eventually become the modal (not to be confused
+ * @param {AdamWindow} w The PMSE.Window object that will eventually become the modal (not to be confused
  * with the javascript window)
  * @return {Object} Object containing an action's properties
  */

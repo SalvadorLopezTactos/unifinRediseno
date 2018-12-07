@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Quadre de comandament del llistat de pressupostos',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de pressupostos',
+
     'LBL_CONTRACTS'=>'Contractes',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contractes',
     'ERR_DELETE_RECORD' => 'Per suprimir el pressupost, heu d&#39;especificar un número de registre.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Subtotal (Euros)',
     'LBL_SUBTOTAL' => 'Subtotal:',
     'LBL_TAXABLE_SUBTOTAL' => 'Subtotal sotmés a impostos',
-    'LBL_SYSTEM_ID' => 'ID Sistema',
     'LBL_TAX_USDOLLAR'=>'Impostos (Euros)',
     'LBL_TAX' => 'Impostos:',
     'LBL_TAX_TOTAL' => 'Total impostos',
@@ -194,7 +197,7 @@ $mod_strings = array (
     'LBL_TOTAL_USDOLLAR'=>'Total (Dòlars EEUU)',
     'LBL_TOTAL' => 'Total:',
     'LBL_TYPE'=>'Tipus',
-    'LNK_NEW_QUOTE' => 'Crear pressupost',
+    'LNK_NEW_QUOTE' => 'Crea pressupost',
     'LNK_QUOTE_LIST' => 'Pressuposts',
     'MSG_DUPLICATE' => 'Està creant un pressupost duplicat. Pot seleccionar un pressupost de la següent llista o fer clic en Guardar per duplicar el pressupost .',
     'NTC_COPY_BILLING_ADDRESS' => 'Copiar la direcció de cobrament a la direcció d&#39;enviament',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Suprimeix la selecció',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Suprimeix els elements seleccionats',
     'LBL_SAVE_LINE_ITEMS' => 'Deseu els elements de línia actius fent clic a la marca de verificació de color blau situada al costat de cadascun abans de desar el pressupost.',
+    'LBL_COPY_LINE_ITEMS' => 'Deseu els elements de línia actius fent clic a la marca de verificació de color blau situada al costat de cadascun abans de desar el pressupost.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Cerca al catàleg de productes',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'No hi ha dades disponibles',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Copia elements de línies de pressupostos a un pressupost nou.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Copia elements de línies de pressupostos a un pressupost nou. Aquest procés pot trigar una estona.',
 );

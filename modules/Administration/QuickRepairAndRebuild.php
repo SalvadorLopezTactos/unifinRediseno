@@ -58,6 +58,8 @@ class RepairAndClear
         $this->clearVardefs();
         $this->clearLanguageCache();
 
+        ACLField::clearACLCache();
+
         // Enable the metadata manager cache refresh to queue. This allows the
         // cache refresh processes in metadata manager to be carried out one time
         // at the end of the rebuild instead of continual processing during the
@@ -516,54 +518,74 @@ class RepairAndClear
     }
 
 
-	//////////////////////////////////////////////////////////////
-	/////REPAIR AUDIT TABLES
-	public function rebuildAuditTables()
-	{
-		global $mod_strings;
-		include('include/modules.php');	//bug 15661
-		if($this->show_output) echo "<h3> {$mod_strings['LBL_QR_REBUILDAUDIT']}</h3>";
+    //////////////////////////////////////////////////////////////
+    /////REPAIR AUDIT TABLES
+    public function rebuildAuditTables()
+    {
+        global $mod_strings;
+        include 'include/modules.php';    //bug 15661
+        if ($this->show_output) {
+            echo "<h3> {$mod_strings['LBL_QR_REBUILDAUDIT']}</h3>";
+        }
 
-		if(!in_array( translate('LBL_ALL_MODULES'), $this->module_list) && !empty($this->module_list))
-		{
+        if (!in_array(translate('LBL_ALL_MODULES'), $this->module_list) && !empty($this->module_list)) {
             foreach ($this->module_list as $module_name) {
                 $bean = BeanFactory::newBean($module_name);
-				if(!empty($bean)) {
-				    $this->_rebuildAuditTablesHelper($bean);
-				}
-			}
-		} else if(in_array(translate('LBL_ALL_MODULES'), $this->module_list)) {
-			foreach ($beanFiles as $bean => $file){
-			    $bean_instance = BeanFactory::newBeanByName($bean);
-				if(!empty($bean_instance)) {
-				    $this->_rebuildAuditTablesHelper($bean_instance);
-				}
-			}
-		}
-		if($this->show_output) echo $mod_strings['LBL_DONE'];
-	}
+                if (!empty($bean)) {
+                    $this->rebuildAuditTablesHelper($bean);
+                }
+            }
+        } elseif (in_array(translate('LBL_ALL_MODULES'), $this->module_list)) {
+            foreach ($beanFiles as $bean => $file) {
+                $bean_instance = BeanFactory::newBeanByName($bean);
+                if (!empty($bean_instance)) {
+                    $this->rebuildAuditTablesHelper($bean_instance);
+                }
+            }
+        }
+        if ($this->show_output) {
+            echo $mod_strings['LBL_DONE'];
+        }
+    }
 
-	private function _rebuildAuditTablesHelper($focus)
-	{
-		global $mod_strings;
+    private function rebuildAuditTablesHelper($focus)
+    {
+        global $mod_strings;
 
-		// skip if not a SugarBean object
-		if ( !($focus instanceOf SugarBean) )
-		    return;
+        // skip if not a SugarBean object
+        if (!($focus instanceof SugarBean)) {
+            return;
+        }
 
-		if ($focus->is_AuditEnabled()) {
-			if (!$focus->db->tableExists($focus->get_audit_table_name())) {
-				if($this->show_output) echo $mod_strings['LBL_QR_CREATING_TABLE']." ".$focus->get_audit_table_name().' '.$mod_strings['LBL_FOR'].' '. $focus->object_name.'.<br/>';
-				$focus->create_audit_table();
-			} else {
-				if($this->show_output){
-					$echo=str_replace('%1$',$focus->object_name,$mod_strings['LBL_REBUILD_AUDIT_SKIP']);
-					echo $echo;
-				}
-			}
-		}else
-			if($this->show_output) echo $focus->object_name.$mod_strings['LBL_QR_NOT_AUDIT_ENABLED'];
-	}
+        if ($focus->is_AuditEnabled()) {
+            $tableName = $focus->get_audit_table_name();
+            if (!$focus->db->tableExists($tableName)) {
+                if ($this->show_output) {
+                    echo $mod_strings['LBL_QR_CREATING_TABLE'] . " " . $focus->get_audit_table_name() . ' ' .
+                        $mod_strings['LBL_FOR'] . ' ' . $focus->object_name . '.<br/>';
+                }
+                $focus->create_audit_table();
+            } else {
+                $defs = $focus->get_audit_table_defs();
+                $sql = $focus->db->repairTableParams(
+                    $defs['table'],
+                    $defs['fields'],
+                    $defs['indices'],
+                    true,
+                    $defs['engine'] ?? null
+                );
+                if ($this->show_output) {
+                    if (empty($sql)) {
+                        echo str_replace('%1$', $focus->object_name, $mod_strings['LBL_REBUILD_AUDIT_SKIP']);
+                    } else {
+                        echo str_replace('%1$', $focus->object_name, $mod_strings['LBL_REBUILD_AUDIT_REPAIR']);
+                    }
+                }
+            }
+        } elseif ($this->show_output) {
+            echo $focus->object_name . $mod_strings['LBL_QR_NOT_AUDIT_ENABLED'];
+        }
+    }
 
 	///////////////////////////////////////////////////////////////
 	////END REPAIR AUDIT TABLES

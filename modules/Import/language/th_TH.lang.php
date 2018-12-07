@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'มีการกำหนดคอลัมน์ที่ใช้ชื่อฟิลด์เดียวกันไว้หลายคอลัมน์',
     'ERR_MISSING_REQUIRED_FIELDS' => 'ไม่มีข้อมูลในฟิลด์ที่ต้องระบุ:',
     'ERR_MISSING_MAP_NAME' => 'ไม่มีชื่อการแมปที่กำหนดเอง',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'ปิดการใช้งานการนำเข้าของผู้ใช้สำหรับโหมด IDM',
     'ERR_SELECT_FULL_NAME' => 'คุณไม่สามารถเลือกชื่อเต็ม เมื่อมีการเลือกชื่อและนามสกุลไว้',
     'ERR_SELECT_FILE' => 'เลือกไฟล์ที่จะอัปโหลด',
     'LBL_SELECT_FILE' => 'เลือกไฟล์:',

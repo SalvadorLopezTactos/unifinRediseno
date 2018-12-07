@@ -25,5 +25,18 @@ $viewdefs['Reports']['base']['filter']['reports'] = array(
             'editable' => true,
             'is_template' => true,
         ),
+        array(
+            'id' => 'with_charts',
+            'name' => 'LBL_FILTER_WITH_CHARTS',
+            'filter_definition' => array(
+                array(
+                    'chart_type' => array(
+                        '$not_equals' => 'none',
+                    ),
+                ),
+            ),
+            'editable' => false,
+            'is_template' => true,
+        ),
     ),
 );

@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus server',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Υποκατηγορία στοιχείων ανά σελίδα',
 	'LOG_MEMORY_USAGE'=>'Καταγραφή χρήσης μνήμης',
-	'LOG_SLOW_QUERIES'=>'Καταγραφή αργών ερωτημάτων',
+    'LOG_SLOW_QUERIES' => 'Καταγραφή αργών ερωτημάτων',
     'LOCK_HOMEPAGE_HELP'=>'Αυτή η ρύθμιση είναι για να προστατέψει  <br />1) την προσθήκη νέων σελίδων στις αρχικές σελίδες και πινάκων στοιχείων στην ενότητα Αρχή, <br />2) την προσαρμογή της τοποθέτησης του πίνακα στοιχείων στις αρχικές σελίδες με μεταφορά και απόθεση.',
     'CURRENT_LOGO'=>'Τρέχον Λογότυπο:',
     'CURRENT_LOGO_HELP'=>'Αυτό το λογότυπο εμφανίζεται στην αριστερή γωνία του υποσέλιδου της εφαρμογής Sugar.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Αυτό είναι το όνομα που εμφανίζεται στη γραμμή τίτλου της μηχανής αναζήτησης σας.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Ενεργοποίηση/Απενεργοποίηση των emails από σχετικές (ή συνδεδεμένες) επαφές για να δείξει στον Υποπίνακα Email.',
 
-    'LBL_OC_STATUS'                     => 'Προεπιλογή Κατάστασης Offline Client',
-    'DEFAULT_OC_STATUS'                 => 'Ενεργοποίηση Offline Client από προεπιλογή',
-    'LBL_OC_STATUS_DESC' => 'Ελέγξτε εδώ, αν θέλετε οποιοσδήποτε χρήστης να έχει πρόσβαση σε  Offline Client. Διαφορετικά, μπορείτε να ρυθμίσετε την πρόσβαση σε επίπεδο χρήστη.',
     'SESSION_TIMEOUT' => 'Χρονική Περίοδος Λειτουργίας Portal',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Η Λήξη Χρονικής Περιόδου της Συνεδρίας του Portal, είναι για τις εκδόσεις του Sugar Portal, διαθέσιμες σε 6.5 και παλαιότερες.',
     'UPLOAD_MAXSIZE_UNITS' => 'bytes',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'Η διεύθυνση URL Σύνδεσης SAML δεν μπορεί να είναι άδεια',
     'ERR_EMPTY_SAML_CERT' => 'Το πιστοποιητικό SAML δεν μπορεί να είναι άδειο',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'Η Ταυτότητα Οντότητας SAML δεν μπορεί να είναι κενή',
     'ERR_SAML_LOGIN_URL' => 'SAML URL Σύνδεσης δεν είναι έγκυρο',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL δεν είναι έγκυρο',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'Το αρχείο PEM πρέπει να περιέχει ιδιωτικό κλειδί',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'Το αρχείο PEM πρέπει να περιέχει πιστοποιητικό x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Το πιστοποιητικό x.509 που δόθηκε δεν ταιριάζει με το ιδιωτικό κλειδί',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Ροές δραστηριότητας',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Ενεργοποίηση ροών δραστηριοτήτων',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Ενεργοποιεί τις Ροές δραστηριοτήτων για την εφαρμογή',
 );
 
 

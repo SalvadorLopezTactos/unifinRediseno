@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Flera kolumner har definierats till samma fältnamn.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Saknar obligatoriska fälten:',
     'ERR_MISSING_MAP_NAME' => 'Saknar custom mappningsnamn',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Användarens import är inaktiverad för IDM-läge.',
     'ERR_SELECT_FULL_NAME' => 'Du kan inte välja Fullständigt namn när Förnamn och Efternamn är valt.',
     'ERR_SELECT_FILE' => 'Välj en fil att ladda upp.',
     'LBL_SELECT_FILE' => 'Välj fil:',

@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Uzdevumu saraksta instrumentu panelis',
+
   'LBL_MODULE_NAME' => 'Uzdevumi',
   'LBL_MODULE_NAME_SINGULAR' => 'Uzdevums',
   'LBL_TASK' => 'Uzdevumi:',

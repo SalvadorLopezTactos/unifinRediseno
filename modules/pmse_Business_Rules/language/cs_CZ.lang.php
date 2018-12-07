@@ -12,8 +12,7 @@
 
 
 $mod_strings = array (
-
-  'LBL_MODULE_NAME' => 'Pravidla obchodních procesů.',
+  'LBL_MODULE_NAME' => 'Pravidla obchodních procesů',
   'LBL_MODULE_TITLE' => 'Pravidla obchodních procesů.',
   'LBL_MODULE_NAME_SINGULAR' => 'Pravidla obchodních procesů.',
 
@@ -39,7 +38,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_DELETE' => 'Smazat',
 
     'LBL_PMSE_SAVE_EXIT_BUTTON_LABEL' => 'Uložit a zavřít',
-    'LBL_PMSE_SAVE_DESIGN_BUTTON_LABEL' => 'Uložit a design',
+    'LBL_PMSE_SAVE_DESIGN_BUTTON_LABEL' => 'Uložit a sestavit',
     'LBL_PMSE_IMPORT_BUTTON_LABEL' => 'Importovat',
 
     'LBL_PMSE_MY_BUSINESS_RULES' => 'Můj proces obchodních pravidel',
@@ -47,7 +46,7 @@ $mod_strings = array (
 
     'LBL_PMSE_BUSINESS_RULES_SINGLE_HIT' => 'Single hit proces obchodních pravidel',
 
-    'LBL_PMSE_BUSINESS_RULES_IMPORT_TEXT' => 'Automaticky vytvořir novou procesovou emailovou šablonu importováním *.pet soubor z Vašeho souborového systému.',
+    'LBL_PMSE_BUSINESS_RULES_IMPORT_TEXT' => 'Automaticky vytvořit nové Pravidlo obchodního procesu importováním *.pbr souboru z vašeho souborového systému.',
     'LBL_PMSE_BUSINESS_RULES_IMPORT_SUCCESS' => 'Proces emailové šablony byl úspěšně importován do systému.',
     'LBL_PMSE_BUSINESS_RULES_EMPTY_WARNING' => 'Prosím vyberte platný *.pbr soubor.',
 
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Podmínky',
     'LBL_PMSE_LABEL_RETURN' => 'Zpátky',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Závěr',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Změnit pole',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Vrátit hodnotu',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'přidat podmínku',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Přidat závěr',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'přidat řádek',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Odebrat sloupec',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Odebrat podmínku',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Odebrat závěr',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Odebrat data ve sloupci',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Ano',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Ne',

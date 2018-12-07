@@ -24,7 +24,6 @@ $names = ACLAction::setupCategoriesMatrix($categories);
 // Skipping modules that have 'hidden_to_role_assignment' property
 $hidden_categories = array(
     "Campaigns",
-    "Emails",
     "EmailTemplates",
     "EmailMarketing",
     "Forecasts",
@@ -32,11 +31,12 @@ $hidden_categories = array(
     "Reports"
 );
 foreach ($categories as $name => $category) {
-    if (isset($dictionary[$name])) {
-        if (!empty($dictionary[$name]['hidden_to_role_assignment'])) {
+    $objName = BeanFactory::getObjectName($name) ?: $name;
+    if (isset($dictionary[$objName])) {
+        if (!empty($dictionary[$objName]['hidden_to_role_assignment'])) {
             unset($categories[$name]);
         }
-        if (!empty($dictionary[$name]['hide_fields_to_edit_role'])) {
+        if (!empty($dictionary[$objName]['hide_fields_to_edit_role'])) {
             $hidden_categories[] = $name;
         }
     }

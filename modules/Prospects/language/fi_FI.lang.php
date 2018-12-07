@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Tavoiteluettelojen työpöytä',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Tavoitetietueiden työpöytä',
+
   'LBL_MODULE_NAME' => 'Tavoitteet',
   'LBL_MODULE_NAME_SINGULAR' => 'Tavoite',
   'LBL_MODULE_ID'   => 'Tavoitteet',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Tervehdys',
   'LBL_SAVE_PROSPECT' => 'Tallenna tavoite',
   'LBL_CREATED_OPPORTUNITY' =>'Luotu uusi myyntimahdollisuus',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Uuden myyntimahdollisuuden luominen vaatii asiakkaan. \n Luo joko uusi asiakas tai valitse jo olemassa oleva.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Uuden myyntimahdollisuuden luominen vaatii asiakkaan. \\n Luo joko uusi asiakas tai valitse jo olemassa oleva.',
   'LNK_SELECT_ACCOUNT' => "Valitse asiakas",
   'LNK_NEW_PROSPECT' => 'Luo tavoite',
   'LNK_PROSPECT_LIST' => 'Näytä tavoitteet',
@@ -199,4 +203,6 @@ $mod_strings = array (
 2. Napsauta Tallenna uuden tietueen viimeistelemiseksi ja palataksesi edelliselle sivulle.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Kohteiden raportit',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Suostumus liiketoimintatarkoituksiin kohteelle',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Suostumus päivitetty viimeksi',
 );

@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Du må oppgi et registreringsnummer for å slette denne avsenderen.',
   'NTC_STATUS' => 'Sett status til Passiv for å slette denne avsenderleverandøren fra Avsenderleverandørs-rullelisten',
   'NTC_LIST_ORDER' => 'Velg rekkefølgen for hvordan avsenderleverandørene vises i Avsenderleverandørs-rullelisten',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Passiv',
-),
-	'LBL_EDITLAYOUT' => 'Redigér oppsett' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Redigér oppsett' /*for 508 compliance fix*/,
 );
-
 
 ?>

@@ -13,14 +13,12 @@
 
        $installer_defaults = array(
             'language' => 'en_us',
-            'oc_install' => '',
             'setup_license_accept' => false,
             'test_session' => 'sessions are available',
             'license_submitted' => false,
             'setup_license_key_users' => '0',
             'setup_license_key_expire_date' => '',
             'setup_license_key' => '',
-            'setup_num_lic_oc' => '0',
             'install_type' => 'typical',
             'setup_db_type' => 'mysql',
             'setup_db_host_name' => '',
@@ -37,7 +35,6 @@
             'setup_db_admin_password' => '',
             'setup_db_provide_own_user' => false,
             'dbConfig_submitted' => false,
-            'demoData' => 'no',
             'setup_site_url' => '',
             'setup_system_name' => 'SugarCRM',
             'setup_site_sugarbeet' => true,
@@ -69,5 +66,3 @@
             'siteConfig_submitted' => false,
             'dbUSRData' => 'same',
         );
-
-?>

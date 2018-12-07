@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'Datum vytvoření',
     'LBL_DATE_MODIFIED' => 'Datum poslední úpravy',
     'LBL_DELETED' => 'Smazat',
+    'LBL_MODULE_NAME' => 'E-mailové adresy',
+    'LBL_MODULE_NAME_SINGULAR' => 'E-mailová adresa',
 );

@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót a gyártó törléséhez!',
   'NTC_STATUS' => 'Ahhoz, hogy eltávolítsa a gyártót a legördülő listából, állítsa annak állapotát inaktívra',
   'NTC_LIST_ORDER' => 'Állítsa be a sorrendet, ahogy a gyártó meg fog jelenni a gyártók legördülő listájában',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Aktív',
-    'Inactive' => 'Inaktív',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Gyártók importálása',
 	'LBL_EDITLAYOUT' => 'Elrendezés szerkesztése' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Bevételi Sor Tételek',

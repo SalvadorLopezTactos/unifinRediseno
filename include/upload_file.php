@@ -252,6 +252,7 @@ class UploadFile
 		$this->stored_file_name = $this->create_stored_filename();
 		$this->temp_file_location = $_FILES[$this->field_name]['tmp_name'];
 		$this->uploaded_file_name = $_FILES[$this->field_name]['name'];
+        $this->file_size = $_FILES[$this->field_name]['size'];
 
 		return true;
 	}
@@ -483,17 +484,36 @@ class UploadFile
 		return "upload://$ret_file_name";
 	}
 
-	/**
-	 * deletes a file
-	 * @param string $bean_id ID of the parent bean
-	 * @param string $file_name File's name
-	 * @return bool Success?
-	 */
-	static public function unlink_file($bean_id,$file_name = '')
-	{
-	    if(file_exists("upload://$bean_id$file_name")) {
-            return unlink("upload://$bean_id$file_name");
-	    }
+    /**
+     * Deletes a file from the file system unless the file is being shared by multiple records.
+     *
+     * @param string $beanId ID of the parent bean
+     * @param string $filename The name of the file in the event that it has been appended to ID.
+     * @return bool
+     */
+    public static function unlink_file($beanId, $filename = '')
+    {
+        $path = "upload://{$beanId}{$filename}";
+        $db = DBManagerFactory::getInstance();
+        $sql = 'SELECT upload_id FROM notes WHERE upload_id=' . $db->quoted($beanId);
+        $uploadId = $db->getOne($sql);
+
+        if (empty($uploadId)) {
+            if (file_exists($path)) {
+                if (unlink($path)) {
+                    $GLOBALS['log']->info("File at {$path} was removed");
+                    return true;
+                } else {
+                    $GLOBALS['log']->error("Failed to remove file at {$path}");
+                }
+            } else {
+                $GLOBALS['log']->error("File at {$path} does not exist");
+            }
+        } else {
+            $GLOBALS['log']->info("File at {$path} is shared by multiple records and cannot be removed");
+        }
+
+        return false;
     }
 
     /**

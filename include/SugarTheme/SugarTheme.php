@@ -882,7 +882,7 @@ EOHTML;
      */
     protected function checkAllExts($imageName)
     {
-        if(SugarAutoLoader::fileExists($imageName)) {
+        if (file_exists($imageName)) {
             return $imageName;
         }
         $pathParts = pathinfo($imageName);
@@ -892,7 +892,7 @@ EOHTML;
         foreach ( $this->imageExtensions as $extension ) {
         	if($pathParts['extension'] == $extension) continue;
         	$imageName = $pathParts['dirname'].'/'.$pathParts['filename'].'.'.$extension;
-        	if(SugarAutoLoader::fileExists($imageName)) {
+            if (file_exists($imageName)) {
         		return $imageName;
         	}
         }

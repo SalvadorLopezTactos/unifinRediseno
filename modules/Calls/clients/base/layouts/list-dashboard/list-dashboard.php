@@ -39,6 +39,5 @@ $viewdefs['Calls']['base']['layout']['list-dashboard'] = array(
             ),
         ),
     ),
-    'name' => 'LBL_DEFAULT_DASHBOARD_TITLE',
+    'name' => 'LBL_CALLS_LIST_DASHBOARD',
 );
-

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Esetek listája műszerfal',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Eset bejegyzések műszerfal',
+
 	'ERR_DELETE_RECORD'					=> 'Adjon meg egy azonosítót a kliens törléséhez!',
 	'LBL_ACCOUNT_ID'					=> 'Kliens azonosító',
 	'LBL_ACCOUNT_NAME'					=> 'Kliensnév:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Állapot:',
     'LBL_SOURCE' => 'Forrás:',
 	'LBL_SUBJECT'						=> 'Tárgy:',
-	'LBL_SYSTEM_ID'						=> 'Rendszer azonosító',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Kliens neve',
 	'LBL_LIST_ASSIGNED'					=> 'Felelős',
 	'LBL_LIST_CLOSE'					=> 'Zárás',

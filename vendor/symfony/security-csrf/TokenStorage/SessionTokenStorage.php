@@ -15,21 +15,22 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Csrf\Exception\TokenNotFoundException;
 
 /**
- * Token storage that uses a Symfony2 Session object.
+ * Token storage that uses a Symfony Session object.
  *
- * @since  2.4
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 class SessionTokenStorage implements TokenStorageInterface
 {
     /**
      * The namespace used to store values in the session.
+     *
      * @var string
      */
     const SESSION_NAMESPACE = '_csrf';
 
     /**
-     * The user session from which the session ID is returned
+     * The user session from which the session ID is returned.
+     *
      * @var SessionInterface
      */
     private $session;

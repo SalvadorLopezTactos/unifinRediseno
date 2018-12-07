@@ -1,4 +1,5 @@
 nv.models.paretoChart = function() {
+    if (SUGAR.App) SUGAR.App.logger.warn('The nvd3 chart library is deprecated. Use sucrose chart library.');
     //'use strict';
     //============================================================
     // Public Variables with Default Settings

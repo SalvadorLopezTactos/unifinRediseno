@@ -18,7 +18,7 @@
  ********************************************************************************/
 
 $mod_strings = array (
-  'LBL_MODULE_NAME' => 'Categorias de Produto',
+  'LBL_MODULE_NAME' => 'Categorias de produto',
   'LBL_MODULE_NAME_SINGULAR' => 'Categoria de Produtos',
   'LBL_MODULE_TITLE' => 'Categorias de Produtos: Tela Principal',
   'LBL_SEARCH_FORM_TITLE' => 'Pesquisa de Tipo de Produto',

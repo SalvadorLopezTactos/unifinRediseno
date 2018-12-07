@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Dashbord for muligheterliste',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Dashbord for muligheteroppføring',
+
     'LBL_MODULE_NAME' => 'Muligheter',
     'LBL_MODULE_NAME_SINGULAR' => 'Salgsmulighet',
     'LBL_MODULE_TITLE' => 'Muligheter: Hjem',
@@ -182,25 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Etter du starte denne endringen , vil Revenue linjeelement poster opprettes for hver eksisterende { { module_name } } i bakgrunnen . Når Revenue Linjeelementer er komplett og tilgjengelig, vil en melding bli sendt til e-postadressen på din brukerprofil. Vær oppmerksom på at forekomsten må konfigureres til å sende e-post via Admin > E-postinnstillinger for at varsling skal sendes.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}}-modulen lar deg spore salget fra start til slutt. Hver {{module_name}} representerer et potensielt salg og inkluderer relevante salgsdata og er knyttet til andre viktige registreringer som {{quotes_module}}, {{contacts_module}} osv. En {{module_name}} vil vanligvis gå gjennom flere salgstrinn før den er merket "Lukket vant" eller "Lukket mistet". {{plural_module_name}} kan utnyttes ytterligere med Sugars {{forecasts_singular_module}}ing-modul å forstå og forutsi salgstrender samt fokusarbeid for å oppnå salgsbudsjetter.',
+    'LBL_HELP_RECORDS' => 'Med modulen {{plural_module_name}} kan du spore individuelt salg fra start til slutt. Hver {{module_name}}-oppføring representerer et potensielt salg, inkluderer relevante salgsdata og er også relaterte til andre viktige oppføringer som {{quotes_module}}, {{contacts_module}} osv. En {{module_name}} vil vanligvis gå gjennom flere salgstrinn før den enten merkes som "Lukket vunnet" eller "Lukket tapt". {{plural_module_name}} kan brukes ytterligere sammen med Sugars {{forecasts_singular_module}}-modul for å forstå og forutsi salgstrender samt for å fokusere arbeidet på å oppnå salgskvoter.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}}-modulen lar deg spore individuelle salg og poster som tilhører dette salget fra start til slutt. Hver {{module_name}} representerer et potensielt salg og inkluderer relevante salgsdata og er knyttet til andre viktige registreringer som {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_RECORD' => 'Med {{plural_module_name}}-modulen kan du følge individuelle salg og produktene som hører til salgene fra begynnelse til slutt. Hver {{module_name}}-post representerer en et forestående salg, inkluderer relevante salgsdata og knyttes til andre viktige poster som {{quotes_module}}, {{contacts_module}} osv.
 
-- Rediger postens felter ved å klikke på et individuelt felt eller Rediger-knappen.
-- Vis eller endre koblinger til andre poster i delpanelene ved å vise/skjule "Datavisning" i ruten nederst til venstre.
-- Skriv og vis brukerkommentarer og registrer endringshistorikk i {{activitystream_singular_module}} ved å vise/skjule "Aktivitetsstrøm" nederst til venstre.
-- Følg posten eller merk den som favoritt med ikonene til høre for postens navn.
-- Flere handlinger er tilgjengelige i rullegardinmenyen Handlinger til høre for Rediger-knappen.',
+– Rediger postfeltet ved å klikke på et enkeltfelt eller Rediger-knappen.
+– Vis eller rediger lenker til andre poster i underpanelene ved å endre panelet nede til venstre til «Datavisning».
+– Lag og se endringslogg for brukerkommentarer og -poster i {{activitystream_singular_module}} ved å endre panelet nede til venstre til «Aktivitetstrøm».
+– Følg eller merk posten som favoritt ved bruk av ikonene til høyre for postnavnet.
+– Ytterlighere handlinger er tilgjengelige i rullegardinmenyen for Handlinger til høyre for Rediger-knappen.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}}-modulen lar deg spore individuelle salg og poster som tilhører dette salget fra start til slutt. Hver {{module_name}} representerer et potensielt salg og inkluderer relevante salgsdata og er knyttet til andre viktige registreringer som {{quotes_module}}, {{contacts_module}} osv.
+    'LBL_HELP_CREATE' => 'Med {{plural_module_name}}-modulen kan du følge individuelle salg og produktene som hører til salgene fra begynnelse til slutt. Hver {{module_name}}-post representerer en et forestående salg, inkluderer relevante salgsdata og knyttes til andre viktige poster som {{quotes_module}}, {{contacts_module}} osv.
 
-For å opprette {{module_name}}:
-1. Angi verdier for feltene etter behov.
- - Felter merket "Obligatorisk" må fullføres før lagring.
- - Klikk på "Vis flere" for å vise flere felt.
-2. Klikk på "Lagre" for å fullføre den nye posten og gå tilbake til forrige side.',
+Slik oppretter du {{module_name}}:
+1. Angi verdiene for feltene som ønsket.
+– Felt merket med "Obligatorisk" må fullføres før du lagrer.
+– Klikk på "Vis mer" for å se ytterligere felt ved behov.
+2. Klikk på "Lagre" for å ferdigstille den nye posten og gå tilbake til den forrige siden.',
 
 // END ENT/ULT
 

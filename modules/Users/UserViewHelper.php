@@ -9,6 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
+
 /**
  * This helper handles the rest of the fields for the Users Edit and Detail views.
  * There are a lot of fields on those views that do not map directly to being used on the metadata based UI, so they are handled here.
@@ -295,7 +298,18 @@ class UserViewHelper {
         }
 
         // If my account page or portal only user or regular user without system generated password or a duplicate user
-        if((($current_user->id == $this->bean->id) || $this->usertype=='PORTAL_ONLY' || (($this->usertype=='REGULAR' || $this->usertype == 'Administrator' || (isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] == 'true' && $this->usertype!='GROUP')) && !$enable_syst_generate_pwd)) && !$this->bean->external_auth_only ) {
+        $idpConfig = new Authentication\Config(\SugarConfig::getInstance());
+        if ((($current_user->id == $this->bean->id)
+                        || $this->usertype=='PORTAL_ONLY'
+                        || (($this->usertype=='REGULAR'
+                            || $this->usertype == 'Administrator'
+                            || (isset($_REQUEST['isDuplicate'])
+                                && $_REQUEST['isDuplicate'] == 'true'
+                                && $this->usertype!='GROUP'))
+                            && !$enable_syst_generate_pwd)
+                )
+                && !$this->bean->external_auth_only
+                && !$idpConfig->isIDMModeEnabled()) {
             $this->ss->assign('CHANGE_PWD', '1');
         } else {
             $this->ss->assign('CHANGE_PWD', '0');

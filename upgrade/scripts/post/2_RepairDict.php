@@ -78,6 +78,7 @@ class SugarUpgradeRepairDict extends UpgradeScript
                 basename($included)
             );
         }
-        return SugarAutoLoader::fileExists($included);
+
+        return file_exists($included);
     }
 }

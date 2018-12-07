@@ -10,6 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 require_once 'modules/Administration/Common.php';
@@ -31,7 +32,7 @@ class ParserDropDown extends ModuleBuilderParser
         $emptyMarker = translate('LBL_BLANK');
 
         if (!empty($_REQUEST['dropdown_lang'])) {
-            $selected_lang = $_REQUEST['dropdown_lang'];
+            $selected_lang = InputValidation::getService()->getValidInputRequest('dropdown_lang', 'Assert\Language');
         } else {
             $selected_lang = $locale->getAuthenticatedUserLanguage();
         }
@@ -107,7 +108,10 @@ class ParserDropDown extends ModuleBuilderParser
                 if (!empty($app_list_strings[$dropdown_name])) {
                     $contents = "<?php\n //created: " . date('Y-m-d H:i:s') . "\n";
                     foreach($app_list_strings[$dropdown_name] as $key => $value) {
-                        $contents .= "\n\$app_list_strings['$dropdown_name']['$key']=" . var_export_helper($value) . ";";
+                        $edropdownName = var_export($dropdown_name, 1);
+                        $ekey = var_export($key, 1);
+                        $contents .= "\n\$app_list_strings[$edropdownName][$ekey]="
+                            . var_export($value, 1) . ";";
                     }
                     $this->saveContents($dropdown_name, $contents, $selected_lang);
                 }
@@ -141,7 +145,7 @@ class ParserDropDown extends ModuleBuilderParser
     {
         $fileName = $this->getExtensionFilePath($dropdownName, $lang);
         if ($fileName) {
-            if (SugarAutoLoader::put($fileName, $contents, true)) {
+            if (file_put_contents($fileName, $contents) !== false) {
                 return true;
             }
             $GLOBALS['log']->fatal("Unable to write edited dropdown language to file: $fileName");
@@ -280,7 +284,8 @@ class ParserDropDown extends ModuleBuilderParser
         $contents = str_replace("?>", '', $contents);
         if (empty($contents)) $contents = "<?php";
         $contents = preg_replace($this->getPatternMatch($dropdown_name), "\n\n", $contents);
-        $contents .= "\n\n\$app_list_strings['$dropdown_name']=" . var_export_helper($dropdown) . ";";
+        $edropdownName = var_export($dropdown_name, 1);
+        $contents .= "\n\n\$app_list_strings[$edropdownName]=" . var_export($dropdown, 1) . ";";
         return $contents;
     }
 
@@ -293,8 +298,9 @@ class ParserDropDown extends ModuleBuilderParser
      */
     protected function getExtensionContents($dropdown_name, $dropdown)
     {
+        $edropdownName = var_export($dropdown_name, 1);
         $contents = "<?php\n // created: " . date('Y-m-d H:i:s') . "\n";
-        $contents .= "\n\$app_list_strings['$dropdown_name']=" . var_export_helper($dropdown) . ";";
+        $contents .= "\n\$app_list_strings[$edropdownName]=" . var_export($dropdown, 1) . ";";
 
         return $contents;
     }

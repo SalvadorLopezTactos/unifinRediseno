@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => '任務清單儀表板',
+
   'LBL_MODULE_NAME' => '工作',
   'LBL_MODULE_NAME_SINGULAR' => '工作',
   'LBL_TASK' => '工作：',
@@ -27,7 +30,7 @@ $mod_strings = array (
   'LBL_LIST_CONTACT' => '連絡人',
   'LBL_LIST_PRIORITY' => '優先順序',
   'LBL_LIST_RELATED_TO' => '關聯至',
-  'LBL_LIST_DUE_DATE' => '到期日',
+  'LBL_LIST_DUE_DATE' => '期限',
   'LBL_LIST_DUE_TIME' => '到期時間',
   'LBL_SUBJECT' => '主題：',
   'LBL_STATUS' => '狀態：',

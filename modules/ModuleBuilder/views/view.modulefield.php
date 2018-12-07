@@ -108,6 +108,14 @@ class ViewModulefield extends SugarView
             $module->mbvardefs->vardefs =  $dictionary[$objectName];
 
             $module->name = $moduleName;
+
+            // hide audited and pii fields if the module is not 'audited'
+            if ($module->is_AuditEnabled()) {
+                $this->fv->ss->assign('auditable', true);
+            } else {
+                $this->fv->ss->assign('auditable', false);
+            }
+
             if(!$ac){
                 $ac = new AjaxCompose();
             }
@@ -221,11 +229,12 @@ class ViewModulefield extends SugarView
             $tf->populateFromRow($vardef);
             $vardef = array_merge($vardef, $tf->get_field_def());
 
-
-
             $this->fv->ss->assign('module', $module);
             $this->fv->ss->assign('package', $package);
             $this->fv->ss->assign('MB', '1');
+
+            // always show audited and pii field in module build
+            $this->fv->ss->assign('auditable', true);
 
             if(isset($vardef['vname']))
                 $this->fv->ss->assign(

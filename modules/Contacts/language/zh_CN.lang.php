@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => '联系人列表仪表板',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => '联系人记录仪表板',
+
     'LNK_CONTACT_REPORTS' => '查看联系人报表',
     'ERR_DELETE_RECORD' => '必须指定记录编号才能删除客户。',
     'LBL_ACCOUNT_ID' => '帐户 ID：',
@@ -145,7 +149,7 @@ $mod_strings = array (
     'LBL_SYNC_CONTACT' => '同步Outlook&reg;:',
     'LBL_PROSPECT_LIST' => '潜在客户列表',
     'LBL_TEAM_ID' => '团队编号：',
-    'LBL_TITLE' => '职称：',
+    'LBL_TITLE' => '职位：',
     'LNK_CREATE' => '创建客户反馈',
     'LNK_CONTACT_LIST' => '查看联系人',
     'LNK_IMPORT_VCARD' => '从 vCard新增联系人',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => '复制备用地址到主要地址',
     'NTC_COPY_PRIMARY_ADDRESS' => '复制主要地址到备用地址',
     'NTC_DELETE_CONFIRMATION' => '您确定要删除这条记录吗？',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '新建商业机会需要账户。\n 您可以新建账户或选择现有账户。',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '新建商业机会需要账户。\\n 您可以新建账户或选择现有账户。',
     'NTC_REMOVE_CONFIRMATION' => '您确定要将联系人从这个事件中删除吗?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '您确定要将作为直接报告的此记录移除吗?',
 
@@ -273,4 +277,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => '潜在客户评分',
 
     'LBL_FILTER_CONTACTS_REPORTS' => '联系人报告',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '许可的商业目的',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '上次更新的许可',
 );

@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Podaci o korisniku nisu pronađeni',
     'ERR_USER_NAME_EXISTS'              => 'Korisničko ime {0} već postoji. Duplikati korisničkih imena nisu dozvoljeni. Promijenite korisničko ime da bi bilo jedinstveno.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Korisniku je blokiran pristup aplikaciji Sugar i ne može se prijaviti s pomoću svoje postojeće lozinke.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Korisniku sa samo vanjskom provjerom autentičnosti nije dozvoljena prijava korištenjem Sugar vjerodajnica',
 
 	'LBL_PASSWORD_SENT'                => 'Lozinka ažurirana',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Nije moguće poslati lozinku',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Adresa e-pošte primatelja',
 	'ERR_SERVER_STATUS'					=> 'Vaš status poslužitelja',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sustav ne može poslati e-poštu korisniku. Provjerite konfiguraciju za odlaznu poštu u <a href="index.php?module=EmailMan&action=config">Postavkama e-pošte</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Korisnika je moguće stvoriti samo na <a href="{0}" target="_blank">Cloud konzoli</a> za IDM način rada.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Primarnu adresu e-pošte je moguće ažurirati samo na <a href="{0}" target="_blank">Cloud konzoli</a> za IDM način rada.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Adresa e-pošte',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Potvrdi lozinku',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Promijenili ste vrstu korisnika s korisnika administratora sustava na redovnog korisnika. Nakon spremanja ove promjene korisnik više neće imati administratorske povlastice.\n\nZa nastavak kliknite na U redu.\nKliknite na Odustani da biste se vratili na zapis.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Promijenili ste vrstu korisnika s korisnika administratora sustava na redovnog korisnika. Nakon spremanja ove promjene korisnik više neće imati administratorske povlastice.\\n\\nZa nastavak kliknite na U redu.\\nKliknite na Odustani da biste se vratili na zapis.',
 	'LBL_COUNTRY'						=> 'Zemlja',
 	'LBL_CURRENCY_TEXT'					=> 'Ova se valuta upotrebljava na prikazu popisa i zapisa ako je uključena opcija Prikaži željenu valutu. To je također vaša zadana valuta za nove zapise.',
 	'LBL_CURRENCY'						=> 'Željena valuta',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 's',
     'LBL_LOGIN_ADMIN_CALL'              => 'Obratite se administratoru sustava.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Za provjeru autentičnosti s OpenID Connectom (OIDC) u IDM načinu rada, instalirajte proširenje GMP PHP.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Odjavili ste se. Da biste se ponovno prijavili, kliknite ',
     'LBL_LOGGED_OUT_2' => 'ovdje',
@@ -626,6 +631,12 @@ Kliknite na Odustani da biste izašli sa stranice bez preraspodjele zapisa.',
     'LBL_FILTER_USERS_REPORTS' => 'Izvješća korisnika',
     'LBL_CONTACTS_SYNC' => 'Kontakti',
     'LBL_DETAIL' => 'Korisnički profil',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Ako određena polja nije moguće urediti, prijavite se na Cloud konzolu kako biste mogli upravljati ovim poljima',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Ako želite promijeniti određena polja koja nije moguće urediti, ' .
+        'obratite se administratoru da biste prijavili te izmjene',
 ); // END STRINGS DEFS
 
 ?>

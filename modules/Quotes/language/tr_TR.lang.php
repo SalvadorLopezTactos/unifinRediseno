@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Teklifler Listesi Panosu',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Teklifler Kaydı Panosu',
+
     'LBL_CONTRACTS'=>'Kontratlar',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Kontratlar',
     'ERR_DELETE_RECORD' => 'Teklifi silmek için bir kayıt numarası belirlemelisiniz.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Alt Toplam (US Dolar)',
     'LBL_SUBTOTAL' => 'Alt toplam:',
     'LBL_TAXABLE_SUBTOTAL' => 'Vergiye Tabi Alt Toplam',
-    'LBL_SYSTEM_ID' => 'Sistem ID',
     'LBL_TAX_USDOLLAR'=>'Vergi (US Dolar)',
     'LBL_TAX' => 'Vergi:',
     'LBL_TAX_TOTAL' => 'Toplam Vergi',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Seçili Olanı Sil',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Seçili öğeleri sil',
     'LBL_SAVE_LINE_ITEMS' => 'Lütfen bu Teklifi kaydetmeden önceki her birinin yanında bulunan mavi onay işaretine tıklayarak tüm aktif kalemleri kaydedin.',
+    'LBL_COPY_LINE_ITEMS' => 'Lütfen bu Teklifi kopyalamadan önceki her birinin yanında bulunan mavi onay işaretine tıklayarak tüm aktif kalemleri kaydedin.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Ürün Kataloğu Ara',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Mevcut veri yok',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Teklif Kalemleri yeni Teklife kaydediliyor.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Teklif Kalemleri yeni Teklife kaydediliyor. Bu işlem biraz zaman alabilir.',
 );

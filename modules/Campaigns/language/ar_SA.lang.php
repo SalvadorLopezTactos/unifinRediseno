@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'يُرجى الاختيار من الحقول المتاحة',
     'LBL_DESCRIPTION_LEAD_FORM' => 'وصف النموذج:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'تسليم هذا النموذج سوف ينشئ عميلاً متوقعًا ويربطه بالحملة',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'بتحديدك لهذا المربع، فأنت توافق على تلقي رسائل تسويقية مستقبلية عبر البريد الإلكتروني',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'يُرجى تنزيل نموذج Web To Lead الخاص بك',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'نموذج Web To Lead',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'يُرجى توفير جميع الحقول المطلوبة',

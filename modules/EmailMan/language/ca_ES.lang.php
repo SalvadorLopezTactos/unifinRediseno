@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'faci clic aquí',
 	'TXT_REMOVE_ME'								=> 'Per borrar la subscripció a aquesta llista de correu',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Enviar notificació usant com a remitent la direcció d´email de l´usuari assignador?',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Noves adreces de correu electrònic predeterminades per refusar',
 
 	'LBL_SECURITY_TITLE'						=> 'Configuració de Seguretat de Correu',
 	'LBL_SECURITY_DESC'							=> 'Marqui allò que NO hauria de ser permès a Email entrant o mostrades en el mòdul d´Emails.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Permetre que els usuaris facin servir aquest compte per al correu electrònic sortint:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Quan aquesta opció està seleccionada, tots els usuaris podran enviar correus utilitzant el mateix compte de correu sortint per enviar notificacions del sistema i alertes. Si l&#39;opció no està seleccionada, els usuaris podran utilitzar el servidor de correu sortint un cop proporcionin la informació sobre el seu propi compte.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Quan s&#39;activa, el nom de l&#39;usuari assignar, i l&#39;adreça de correu electrònic s&#39;inclourà en el camp del correu electrònic. Aquesta característica podria no funcionar amb servidors SMTP que no permeten l&#39;enviament d&#39;un compte de correu electrònic diferent al compte del servidor.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Quan s&#39;afegeix una nova adreça de corre electrònic, automàticament refusarà els correus electrònics de campanyes. Aquests tipus de correus electrònics no es podran enviar a adreces que els han refusat. Canviar aquesta configuració no afectarà a les adreces de correu electrònic existents.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

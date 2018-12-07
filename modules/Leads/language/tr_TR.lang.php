@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Potansiyeller Listesi Panosu',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Potansiyeller Kaydı Panosu',
+
     'ERR_DELETE_RECORD' => 'Potansiyeli silmek için bir kayıt numarası belirtilmelidir.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Müşteri Tanımı',
     'LBL_ACCOUNT_ID'=>'Müşteri ID',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Fırsat Miktarı:',
     'LBL_OPPORTUNITY_ID'=>'Fırsat ID',
     'LBL_OPPORTUNITY_NAME' => 'Fırsat İsmi:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Diğer E-Posta:',
     'LBL_OTHER_PHONE' => 'Diğer Telefon:',
     'LBL_PHONE' => 'Telefon:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternatif adresi birincil adrese kopyala',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Birincil adresi alternatif adrese kopyala',
     'NTC_DELETE_CONFIRMATION' => 'Bu kaydı silmek istediğinizden emin misiniz?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Bir Fırsat oluşturulabilmesi için Müşteri kaydı olması gerekir.\nLütfen yeni bir Müşteri oluşturun veya var olan Müşteri kaydını seçin.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Bir Fırsat oluşturulabilmesi için Müşteri kaydı olması gerekir.\\nLütfen yeni bir Müşteri oluşturun veya var olan Müşteri kaydını seçin.',
     'NTC_REMOVE_CONFIRMATION' => 'Bu talepten bu potansiyeli silmek istediğinize emin misiniz?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Doğrudan raporlanan kişi olarak bu kaydı silmek istediğinizden emin misiniz?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Kampanyalar',
@@ -314,4 +320,6 @@ Her zorunlu ve istenen modülü onayladıktan sonra, üstteki Kaydet ve Dönüş
     'LBL_MKTO_LEAD_SCORE' => 'Potansiyel Skoru',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Potansiyel Raporları',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Şunun İçin İç Amaçlı Onaylı:',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Son Güncellemeye Onay Verin',
 );

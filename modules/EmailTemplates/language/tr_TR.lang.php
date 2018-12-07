@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Seç' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Temizle' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Tipi',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Email için Şablonlar',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'E-Posta Şablonları',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Değişkenler',
 );

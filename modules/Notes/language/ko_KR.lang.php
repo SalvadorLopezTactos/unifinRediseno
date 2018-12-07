@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => '노트 목록 대시보드',
+
     'ERR_DELETE_RECORD' => '거래처를 삭제하시려면 정확한 자료 고유번호를 입력하셔야합니다.',
     'LBL_ACCOUNT_ID' => '거래처 ID',
     'LBL_CASE_ID' => '사례ID',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => '설명',
     'LBL_EMAIL_ADDRESS' => '이메일 주소',
     'LBL_EMAIL_ATTACHMENT' => '이메일 첨부',
+    'LBL_EMAIL_ATTACHMENT_FOR' => '이메일 첨부:',
     'LBL_FILE_MIME_TYPE' => 'Mime유형',
+    'LBL_FILE_EXTENSION' => '파일 확장',
+    'LBL_FILE_SOURCE' => '파일 소스',
+    'LBL_FILE_SIZE' => '파일 크기',
     'LBL_FILE_URL' => '파일URL',
     'LBL_FILENAME' => '첨부파일',
     'LBL_LEAD_ID' => '관심고객 ID',
@@ -35,7 +42,7 @@ $mod_strings = array(
     'LBL_LIST_SUBJECT' => '제목',
     'LBL_LIST_STATUS' => '상태',
     'LBL_LIST_CONTACT' => '연락처',
-    'LBL_MODULE_NAME' => '메모 목록',
+    'LBL_MODULE_NAME' => '메모',
     'LBL_MODULE_NAME_SINGULAR' => '메모',
     'LBL_MODULE_TITLE' => '메모관리:홈',
     'LBL_NEW_FORM_TITLE' => '새 메모 생성 혹은 첨부 추가하기',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => '영업기회 ID',
     'LBL_PARENT_ID' => '상위 ID:',
     'LBL_PARENT_TYPE' => '상위 유형:',
+    'LBL_EMAIL_TYPE' => '이메일 유형',
+    'LBL_EMAIL_ID' => '이메일 ID',
     'LBL_PHONE' => '전화번호:',
     'LBL_PORTAL_FLAG' => '포탈에 게시하시겠습니까?',
     'LBL_EMBED_FLAG' => '이메일에 삽입하시겠습니까?',
@@ -57,7 +66,7 @@ $mod_strings = array(
     'LBL_STATUS' => '상태',
     'LBL_SUBJECT' => '제목',
     'LNK_IMPORT_NOTES' => '메모내역 가져오기',
-    'LNK_NEW_NOTE' => '새 메모 생성 혹은 첨부 추가하기',
+    'LNK_NEW_NOTE' => '메모 생성 및 파일 첨부',
     'LNK_NOTE_LIST' => '메모 보기',
     'LBL_MEMBER_OF' => '다음의 구성원',
     'LBL_LIST_ASSIGNED_TO_NAME' => '담당자',

@@ -109,66 +109,6 @@ class Lead extends Person {
 	var $additional_column_fields = Array('assigned_user_name', 'task_id', 'note_id', 'meeting_id', 'call_id', 'email_id');
 	var $relationship_fields = Array('email_id'=>'emails','call_id'=>'calls','meeting_id'=>'meetings','task_id'=>'tasks',);
 
-	function get_account()
-	{
-		if(isset($this->account_id) && !empty($this->account_id)){
-            $query = "SELECT name , assigned_user_id account_name_owner FROM accounts WHERE id=" .
-                $this->db->quoted($this->account_id);
-
-	        //requireSingleResult has beeen deprecated.
-			//$result = $this->db->requireSingleResult($query);
-			$result = $this->db->limitQuery($query,0,1,true, "Want only a single row");
-
-			if(!empty($result)){
-				$row = $this->db->fetchByAssoc($result);
-				if(!empty($row)) {
-    				$this->account_name = $row['name'];
-    				$this->account_name_owner = $row['account_name_owner'];
-    				$this->account_name_mod = 'Accounts';
-				}
-			}
-
-	}}
-	function get_opportunity()
-	{
-		if(isset($this->opportunity_id) && !empty($this->opportunity_id)){
-			$query = "SELECT name, assigned_user_id opportunity_name_owner FROM opportunities WHERE id='{$this->opportunity_id}'";
-
-	        //requireSingleResult has beeen deprecated.
-			//$result = $this->db->requireSingleResult($query);
-			$result = $this->db->limitQuery($query,0,1,true, "Want only a single row");
-
-			if(!empty($result)){
-				$row = $this->db->fetchByAssoc($result);
-				if(!empty($row)) {
-    				$this->opportunity_name = $row['name'];
-    				$this->opportunity_name_owner = $row['opportunity_name_owner'];
-    				$this->opportunity_name_mod = 'Opportunities';
-				}
-			}
-
-	   }
-	}
-
-	function get_contact()
-	{
-		global $locale;
-		if(isset($this->contact_id) && !empty($this->contact_id)){
-			$query = "SELECT first_name, last_name, assigned_user_id contact_name_owner FROM contacts WHERE id='{$this->contact_id}'";
-
-			$result = $this->db->limitQuery($query,0,1,true, "Want only a single row");
-			if(!empty($result)){
-				$row= $this->db->fetchByAssoc($result);
-				if(!empty($row)) {
-                    $this->contact_name = $locale->formatName('Contacts', $row);
-    				$this->contact_name_owner = $row['contact_name_owner'];
-    				$this->contact_name_mod = 'Contacts';
-				}
-			}
-
-	   }
-	}
-
 	function create_list_query($order_by, $where, $show_deleted=0)
 	{
         $custom_join = $this->getCustomJoin();
@@ -248,32 +188,6 @@ class Lead extends Person {
 		$lead->status='Converted';
 		$lead->save();
     }
-
-	function fill_in_additional_list_fields()
-	{
-		parent::fill_in_additional_list_fields();
-		$this->_create_proper_name_field();
-		$this->get_account();
-
-	}
-
-	function fill_in_additional_detail_fields()
-	{
-	    parent::fill_in_additional_detail_fields();
-	    $this->_create_proper_name_field();
-		$this->get_contact();
-		$this->get_opportunity();
-		$this->get_account();
-
-		if(!empty($this->campaign_id)){
-
-			$camp = BeanFactory::newBean('Campaigns');
-			$where = "campaigns.id='$this->campaign_id'";
-			$campaign_list = $camp->get_full_list("campaigns.name", $where, true);
-			if(!empty($campaign_list))
-				$this->campaign_name = $campaign_list[0]->name;
-		}
-	}
 
 	function get_list_view_data()
 	{

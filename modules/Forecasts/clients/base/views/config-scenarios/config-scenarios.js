@@ -76,12 +76,10 @@
     },
 
     /**
-     * @inheritdoc
-     *
      * Empty function as the title values have already been set properly
      * with the change:scenarios event handler
      *
-     * @override
+     * @inheritdoc
      */
     _updateTitleValues: function() {
     },

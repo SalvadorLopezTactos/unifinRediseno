@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë normën tatimore',
   'NTC_STATUS' => 'Vendos statusin në pasiv për heqje të kësaj norme tatimore prej listës së poshtme të normave tatimore',
   'NTC_LIST_ORDER' => 'Përcakto urdhërin që kjo normë tatimore do të shfaq në listën e poshtme të normave tatimore',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'aktive',
-    'Inactive' => 'pasive',
-  ),
   'LBL_EDITLAYOUT' => 'Ndrysho formatin' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Krijuar nga Id',
   'LBL_MODIFIED_ID'=>'Modifikuar nga Id',

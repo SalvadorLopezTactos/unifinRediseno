@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Serveur Sugar Mobile Edge',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Nombre maximum d&#39;élements affichés dans les "Sous-Panels"',
 	'LOG_MEMORY_USAGE'=>'Tracer l&#39;utilisation de la mémoire',
-	'LOG_SLOW_QUERIES'=>'Tracer les requêtes considérées comme lentes',
+    'LOG_SLOW_QUERIES' => 'Tracer les requêtes considérées comme lentes',
     'LOCK_HOMEPAGE_HELP'=>'Cochez cette case afin d&#39;empêcher les utilisateurs :<br /> 1) d&#39;ajouter de nouveaux onglets et dashlets sur la page d&#39;accueil (Pro et Entreprise).<br />2) de modifier la disposition des Dashlets par glisser-déposer.<br />',
     'CURRENT_LOGO'=>'Logo actuel',
     'CURRENT_LOGO_HELP'=>'Ce logo est affiché dans le coin en haut à gauche de votre application SugarCRM.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'C&#39;est le nom qui s&#39;affiche dans la barre de titre de votre navigateur.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Active/Désactive l&#39;affichage consolidé des emails en relation avec les contacts liés.',
 
-    'LBL_OC_STATUS'                     => 'Statut par défaut d&#39;Offline Client',
-    'DEFAULT_OC_STATUS'                 => 'Activer Offline Client par défaut',
-    'LBL_OC_STATUS_DESC' => 'Cochez cette case si vous souhaitez que tous les utilisateurs actifs aient accès à Offline Client.<br />Vous pouvez aussi configurer les accès au niveau de l&#39;utilisateur.<br />Note : vous devez acquérir Offline Client pour pouvoir utiliser cette option.',
     'SESSION_TIMEOUT' => 'Timeout de session sur le Portail',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'La durée de session pour le Portail est valable uniquement pour les anciennes version du Portail SugarCRM 6.5 et précédentes',
     'UPLOAD_MAXSIZE_UNITS' => 'octets',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'L&#39;URL de login SAML ne peut pas être vide',
     'ERR_EMPTY_SAML_CERT' => 'Le certificat SAML ne peut être vide',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'L&#39;ID d&#39;entité SAML ne peut pas être vide',
     'ERR_SAML_LOGIN_URL' => 'L&#39;URL de login SAML n&#39;est pas valide',
     'ERR_SAML_SLO_URL' => 'L&#39;URL SLO SAML n&#39;est pas vallide',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'Le fichier PEM devrait contenir une clé privée',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'Le fichier PEM devrait contenir un certificat x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Le certificat x.509 fournit ne correspond pas à la clé privée',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Flux d&#39;activité',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Activer les flux d&#39;activité',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Active les flux d&#39;activité pour l&#39;application',
 );
 
 

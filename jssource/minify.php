@@ -196,10 +196,5 @@ if(isset($_REQUEST['root_directory'])){
         $minifyUtils->BackUpAndCompressScriptFiles($from, '', true, true);
         $minifyUtils->ConcatenateFiles($from,true);
     }
-
-    //Using the autoloader will create the file_map file. We do not want to preserve this file if we ran from the command line.
-    $fileMap = sugar_cached(SugarAutoLoader::CACHE_FILE);
-    if (file_exists($fileMap))
-        unlink($fileMap);
 }
 

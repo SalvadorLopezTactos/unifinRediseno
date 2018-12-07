@@ -12,6 +12,8 @@
 require_once 'modules/ModuleBuilder/parsers/MetaDataFiles.php';
 require_once 'modules/UpgradeWizard/SidecarUpdate/SidecarSubpanelMetaDataUpgrader.php';
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 /**
  * Handles migration of wireless and portal metadata for pre-6.6 modules into 6.6+
  * formats. Looks for the following metadata to migrate and remove legacy versions of:
@@ -545,9 +547,9 @@ class SidecarMetaDataUpgrader
     {
         $viewdefs = array();
         if (file_exists("custom/{$quickCreateFile}")) {
-            include "custom/{$quickCreateFile}";
+            include FileLoader::validateFilePath("custom/{$quickCreateFile}");
         } elseif (file_exists($quickCreateFile)) {
-            include "{$quickCreateFile}";
+            include FileLoader::validateFilePath($quickCreateFile);
         } else {
             return $default;
         }

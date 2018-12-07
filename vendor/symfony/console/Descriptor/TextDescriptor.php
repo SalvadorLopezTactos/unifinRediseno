@@ -13,6 +13,8 @@ namespace Symfony\Component\Console\Descriptor;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Formatter\OutputFormatter;
+use Symfony\Component\Console\Helper\Helper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputOption;
@@ -37,14 +39,14 @@ class TextDescriptor extends Descriptor
             $default = '';
         }
 
-        $totalWidth = isset($options['total_width']) ? $options['total_width'] : strlen($argument->getName());
-        $spacingWidth = $totalWidth - strlen($argument->getName()) + 2;
+        $totalWidth = isset($options['total_width']) ? $options['total_width'] : Helper::strlen($argument->getName());
+        $spacingWidth = $totalWidth - strlen($argument->getName());
 
-        $this->writeText(sprintf("  <info>%s</info>%s%s%s",
+        $this->writeText(sprintf('  <info>%s</info>  %s%s%s',
             $argument->getName(),
             str_repeat(' ', $spacingWidth),
-            // + 17 = 2 spaces + <info> + </info> + 2 spaces
-            preg_replace('/\s*\R\s*/', PHP_EOL.str_repeat(' ', $totalWidth + 17), $argument->getDescription()),
+            // + 4 = 2 spaces before <info>, 2 spaces after </info>
+            preg_replace('/\s*[\r\n]\s*/', "\n".str_repeat(' ', $totalWidth + 4), $argument->getDescription()),
             $default
         ), $options);
     }
@@ -75,13 +77,13 @@ class TextDescriptor extends Descriptor
             sprintf('--%s%s', $option->getName(), $value)
         );
 
-        $spacingWidth = $totalWidth - strlen($synopsis) + 2;
+        $spacingWidth = $totalWidth - Helper::strlen($synopsis);
 
-        $this->writeText(sprintf("  <info>%s</info>%s%s%s%s",
+        $this->writeText(sprintf('  <info>%s</info>  %s%s%s%s',
             $synopsis,
             str_repeat(' ', $spacingWidth),
-            // + 17 = 2 spaces + <info> + </info> + 2 spaces
-            preg_replace('/\s*\R\s*/', "\n".str_repeat(' ', $totalWidth + 17), $option->getDescription()),
+            // + 4 = 2 spaces before <info>, 2 spaces after </info>
+            preg_replace('/\s*[\r\n]\s*/', "\n".str_repeat(' ', $totalWidth + 4), $option->getDescription()),
             $default,
             $option->isArray() ? '<comment> (multiple values allowed)</comment>' : ''
         ), $options);
@@ -94,7 +96,7 @@ class TextDescriptor extends Descriptor
     {
         $totalWidth = $this->calculateTotalWidthForOptions($definition->getOptions());
         foreach ($definition->getArguments() as $argument) {
-            $totalWidth = max($totalWidth, strlen($argument->getName()));
+            $totalWidth = max($totalWidth, Helper::strlen($argument->getName()));
         }
 
         if ($definition->getArguments()) {
@@ -156,7 +158,7 @@ class TextDescriptor extends Descriptor
             $this->writeText("\n");
             $this->writeText('<comment>Help:</comment>', $options);
             $this->writeText("\n");
-            $this->writeText(' '.str_replace("\n", "\n ", $help), $options);
+            $this->writeText('  '.str_replace("\n", "\n  ", $help), $options);
             $this->writeText("\n");
         }
     }
@@ -173,7 +175,7 @@ class TextDescriptor extends Descriptor
             $width = $this->getColumnWidth($description->getCommands());
 
             foreach ($description->getCommands() as $command) {
-                $this->writeText(sprintf("%-${width}s %s", $command->getName(), $command->getDescription()), $options);
+                $this->writeText(sprintf("%-{$width}s %s", $command->getName(), $command->getDescription()), $options);
                 $this->writeText("\n");
             }
         } else {
@@ -206,8 +208,8 @@ class TextDescriptor extends Descriptor
 
                 foreach ($namespace['commands'] as $name) {
                     $this->writeText("\n");
-                    $spacingWidth = $width - strlen($name);
-                    $this->writeText(sprintf("  <info>%s</info>%s%s", $name, str_repeat(' ', $spacingWidth), $description->getCommand($name)->getDescription()), $options);
+                    $spacingWidth = $width - Helper::strlen($name);
+                    $this->writeText(sprintf('  <info>%s</info>%s%s', $name, str_repeat(' ', $spacingWidth), $description->getCommand($name)->getDescription()), $options);
                 }
             }
 
@@ -235,11 +237,17 @@ class TextDescriptor extends Descriptor
      */
     private function formatDefaultValue($default)
     {
-        if (PHP_VERSION_ID < 50400) {
-            return str_replace('\/', '/', json_encode($default));
+        if (is_string($default)) {
+            $default = OutputFormatter::escape($default);
+        } elseif (is_array($default)) {
+            foreach ($default as $key => $value) {
+                if (is_string($value)) {
+                    $default[$key] = OutputFormatter::escape($value);
+                }
+            }
         }
 
-        return json_encode($default, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        return str_replace('\\\\', '\\', json_encode($default, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
     }
 
     /**
@@ -249,12 +257,16 @@ class TextDescriptor extends Descriptor
      */
     private function getColumnWidth(array $commands)
     {
-        $width = 0;
+        $widths = array();
+
         foreach ($commands as $command) {
-            $width = strlen($command->getName()) > $width ? strlen($command->getName()) : $width;
+            $widths[] = Helper::strlen($command->getName());
+            foreach ($command->getAliases() as $alias) {
+                $widths[] = Helper::strlen($alias);
+            }
         }
 
-        return $width + 2;
+        return max($widths) + 2;
     }
 
     /**
@@ -266,10 +278,11 @@ class TextDescriptor extends Descriptor
     {
         $totalWidth = 0;
         foreach ($options as $option) {
-            $nameLength = 4 + strlen($option->getName()) + 2; // - + shortcut + , + whitespace + name + --
+            // "-" + shortcut + ", --" + name
+            $nameLength = 1 + max(strlen($option->getShortcut()), 1) + 4 + Helper::strlen($option->getName());
 
             if ($option->acceptValue()) {
-                $valueLength = 1 + strlen($option->getName()); // = + value
+                $valueLength = 1 + Helper::strlen($option->getName()); // = + value
                 $valueLength += $option->isValueOptional() ? 2 : 0; // [ + ]
 
                 $nameLength += $valueLength;

@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Debe especificar un número de registro para eliminar el impuesto.',
   'NTC_STATUS' => 'Establezca el estado a Inactivo para eliminar este impuesto de las listas desplegables de Impuesto',
   'NTC_LIST_ORDER' => 'Establezca el orden en que este impuesto aparecerá en las listas desplegables de Impuesto',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Activo',
-    'Inactive' => 'Inactivo',
-  ),
   'LBL_EDITLAYOUT' => 'Editar diseño' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Creado por Id',
   'LBL_MODIFIED_ID'=>'Modificado por Id',

@@ -29,6 +29,7 @@
         'GridBuilder',
         'Editable',
         'Audit',
+        'Pii',
         'FindDuplicates',
         'ToggleMoreLess'
     ],
@@ -92,6 +93,20 @@
         this.buttons = {};
         //Adding the favorite and follow fields.
         this.context.addFields(this._getDataFields());
+
+        // FIXME: SC-5650 will handle removing these deprecation warnings in 7.10+
+        _.each(this.meta.panels, function(panel) {
+            _.each(panel.fields, function(field) {
+                if (field.label_css_class) {
+                    app.logger.warn('Warning: metadata property "label_css_class" found on field with name "' +
+                        field.name + '" is deprecated and will be removed in a future release.');
+                }
+                if (field.cell_css_class) {
+                    app.logger.warn('Warning: metadata property "cell_css_class" found on field with name "' +
+                        field.name + '" is deprecated and will be removed in a future release.');
+                }
+            }, this);
+        }, this);
 
         /**
          * An array of the {@link #alerts alert} names in this view.
@@ -160,6 +175,7 @@
         this.on('editable:mousedown', this.handleMouseDown, this);
         this.on('field:error', this.handleFieldError, this);
         this.model.on('acl:change', this.handleAclChange, this);
+        this.context.on('field:disabled', this._togglePencil, this);
 
         //event register for preventing actions
         // when user escapes the page without confirming deleting
@@ -221,6 +237,23 @@
                 $pencilEl.closest('.record-cell').toggleClass('edit', isEditable);
             }
         }, this);
+    },
+
+    /**
+     * Shows or hides the edit pencil icon for a field.
+     *
+     * @param {string} fieldName The field name.
+     * @param {boolean} hide `true` to hide the pencil, `false` to show it.
+     * @private
+     */
+    _togglePencil: function(fieldName, hide) {
+        var isEditable = !_.contains(this.noEditFields, fieldName) && app.acl.hasAccessToModel('edit', this.model);
+
+        if (!hide && !isEditable) {
+            return;
+        }
+
+        this.$('span.record-edit-link-wrapper[data-name=' + fieldName + ']').toggleClass('hide', hide);
     },
 
     /**
@@ -647,13 +680,33 @@
         this.editableFields = this.getEditableFields(this._getNonButtonFields(), this.noEditFields);
     },
 
+    /**
+     * Registers fields as buttons.
+     *
+     * @deprecated Since 7.10.
+     */
     initButtons: function() {
+        app.logger.warn('`BaseRecordView#initButtons` is deprecated since 7.10 and will be ' +
+            'removed in a future release.');
         if (this.options.meta && this.options.meta.buttons) {
             _.each(this.options.meta.buttons, function(button) {
                 this.registerFieldAsButton(button.name);
             }, this);
         }
     },
+
+    /**
+     * Registers fields as buttons.
+     *
+     * @protected
+     */
+    _initButtons: function() {
+        buttons = this.meta.buttons;
+        _.each(buttons, function(button) {
+            this.registerFieldAsButton(button.name);
+        }, this);
+    },
+
     showPreviousNextBtnGroup: function() {
         var listCollection = this.context.get('listCollection') || new app.data.createBeanCollection(this.module);
         var recordIndex = listCollection.indexOf(listCollection.get(this.model.id));
@@ -678,7 +731,7 @@
     _renderHtml: function() {
         this.showPreviousNextBtnGroup();
         app.view.View.prototype._renderHtml.call(this);
-        this.initButtons();
+        this._initButtons();
         this.setEditableFields();
         this.adjustHeaderpane();
     },
@@ -842,8 +895,10 @@
         this.toggleButtons(false);
         var allFields = this.getFields(this.module, this.model);
         var fieldsToValidate = {};
+        var erasedFields = this.model.get('_erased_fields');
         for (var fieldKey in allFields) {
-            if (app.acl.hasAccessToModel('edit', this.model, fieldKey)) {
+            if (app.acl.hasAccessToModel('edit', this.model, fieldKey) &&
+                (!_.contains(erasedFields, fieldKey) || this.model.get(fieldKey) || allFields[fieldKey].id_name)) {
                 _.extend(fieldsToValidate, _.pick(allFields, fieldKey));
             }
         }
@@ -1071,12 +1126,25 @@
     getDeleteMessages: function() {
         var messages = {};
         var model = this.model;
-        var name = Handlebars.Utils.escapeExpression(app.utils.getRecordName(model)).trim();
-        var context = app.lang.getModuleName(model.module).toLowerCase() + ' ' + name;
+        var name = Handlebars.Utils.escapeExpression(this._getNameForMessage(model)).trim();
+        var context = app.lang.getModuleName(model.module).toLowerCase() + ' "' + name + '"';
 
-        messages.confirmation = app.utils.formatString(app.lang.get('NTC_DELETE_CONFIRMATION_FORMATTED'), [context]);
+        messages.confirmation = app.utils.formatString(
+            app.lang.get('NTC_DELETE_CONFIRMATION_FORMATTED', this.module),
+            [context]
+        );
         messages.success = app.utils.formatString(app.lang.get('NTC_DELETE_SUCCESS'), [context]);
         return messages;
+    },
+
+    /**
+     * Retrieves the name of a record
+     *
+     * @param {Data.Bean} model The model concerned.
+     * @return {string} name of the record.
+     */
+    _getNameForMessage: function(model) {
+        return app.utils.getRecordName(model);
     },
 
     /**

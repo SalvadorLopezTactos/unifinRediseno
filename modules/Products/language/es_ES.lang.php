@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Cuadro de mando de la lista de partidas presupuestadas',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Línea de presupuesto de campaña',
     'LBL_MODULE_NAME' => 'Elementos presupuestados',
     'LBL_MODULE_NAME_SINGULAR' => 'Línea de Presupuesto',
@@ -38,7 +41,7 @@ $mod_strings = array(
     'LBL_NAME' => 'Nombre',
     'LBL_URL' => 'URL Producto:',
     'LBL_QUOTE_NAME' => 'Nombre de Presupuesto:',
-    'LBL_ASSOCIATED_QUOTE' => 'Asunto de la Oferta:',
+    'LBL_ASSOCIATED_QUOTE' => 'Asunto del Presupuesto:',
     'LBL_CONTACT_NAME' => 'Nombre de Contacto:',
     'LBL_DATE_PURCHASED' => 'Comprado:',
     'LBL_DATE_SUPPORT_EXPIRES' => 'Caducidad del Servicio de Asistencia:',
@@ -172,4 +175,5 @@ Para crear un {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Lista de datos de presupuesto de los elementos de la línea de presupuesto',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nuevo elemento de las líneas de presupuesto)',
     'LBL_DISCOUNT_PERCENT' => '% Porcentaje',
+    'LBL_DISCOUNT_TYPE' => 'Tipo de descuento',
 );

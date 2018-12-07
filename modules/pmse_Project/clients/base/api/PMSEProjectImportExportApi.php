@@ -30,7 +30,8 @@ class PMSEProjectImportExportApi extends vCardApi
                 'method' => 'projectImport',
                 'rawPostContents' => true,
                 'acl' => 'create',
-//                'shortHelp' => 'Imports a Process Definition from a .bpm file',
+                'shortHelp' => 'Imports a Process Definition from a .bpm file',
+                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_import_help.html',
             ),
             'projectDownload' => array(
                 'reqType' => 'GET',
@@ -40,7 +41,8 @@ class PMSEProjectImportExportApi extends vCardApi
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
                 'acl' => 'view',
-//                'shortHelp' => 'Exports a .bpm file with a Process Definition',
+                'shortHelp' => 'Exports a .bpm file with a Process Definition',
+                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_export_help.html',
             ),
         );
     }
@@ -98,9 +100,9 @@ class PMSEProjectImportExportApi extends vCardApi
                     try {
                         $data = $importerObject->importProject($_FILES[$first_key]['tmp_name']);
                     } catch (SugarApiExceptionNotAuthorized $e) {
-                        $sugarApiExceptionNotAuthorized = new SugarApiExceptionNotAuthorized('ERROR_UPLOAD_ACCESS_PD');
-                        PMSELogger::getInstance()->alert($sugarApiExceptionNotAuthorized->getMessage());
-                        throw $sugarApiExceptionNotAuthorized;
+                        $e->setMessage('ERROR_UPLOAD_ACCESS_PD');
+                        PMSELogger::getInstance()->alert($e->getMessage());
+                        throw $e;
                     }
                     $results = array('project_import' => $data);
                 } else  {

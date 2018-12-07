@@ -13,11 +13,14 @@
 /**
  * Implements the calendar quarter representation of a time period where the monthly
  * leaves are split by the calendar month
+ *
  * @api
  */
-class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface {
+class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         //Override module_name to distinguish bean for BeanFactory
         $this->module_name = 'QuarterTimePeriods';
 
@@ -67,7 +70,7 @@ class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface {
      * Returns the timeperiod name
      *
      * @param integer $count int value of the time period count (not used in MonthTimePeriod class)
-     * @param Timeperiod|null $timeperiod       The Parent TimePeriod
+     * @param Timeperiod|null $timeperiod The Parent TimePeriod
      * @return string The formatted name of the timeperiod
      */
     public function getTimePeriodName($count, $timeperiod = null)
@@ -75,15 +78,26 @@ class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface {
         $timedate = TimeDate::getInstance();
         $start_date = $this->start_date;
 
+        $startMonthDt = $timedate->fromDbDate($start_date)->format('m-d');
+
+        if (!is_null($this->currentSettings)) {
+            $tpStMonthDt = $timedate->fromDbDate($this->currentSettings['timeperiod_start_date'])->format('m-d');
+        }
+
         if (!is_null($timeperiod)) {
             $start_date = $timeperiod->start_date;
         }
 
         $start_year = $timedate->fromDbDate($start_date);
 
-        if(isset($this->currentSettings['timeperiod_fiscal_year']) &&
-            $this->currentSettings['timeperiod_fiscal_year'] == 'next_year') {
-            $start_year->modify('+1 year');
+        if (isset($this->currentSettings['timeperiod_fiscal_year'])) {
+            if ($this->currentSettings['timeperiod_fiscal_year'] === 'next_year') {
+                $start_year->modify('+1 year');
+            }
+
+            if (($startMonthDt < $tpStMonthDt) && ($this->currentSettings['timeperiod_interval'] !== 'Annual')) {
+                $start_year->modify('-1 year');
+            }
         }
 
         return string_format($this->name_template, array($count, $start_year->format('Y')));
@@ -149,11 +163,11 @@ class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface {
         $timedate = TimeDate::getInstance();
         $ts = $timedate->fromDbDate($dateClosed)->getTimestamp();
 
-        if(!empty($keys)) {
-            foreach($keys as $timestamp=>$count) {
-               if($ts <= $timestamp) {
-                   return $count;
-               }
+        if (!empty($keys)) {
+            foreach ($keys as $timestamp => $count) {
+                if ($ts <= $timestamp) {
+                    return $count;
+                }
             }
             return 2;
         }
@@ -166,20 +180,20 @@ class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface {
         $isLastDayOfMonth = $startDay == $startDate->format('t');
         $count = 0;
 
-        while($count < 3) {
+        while ($count < 3) {
             $nextDate->modify($this->chart_data_modifier);
             $startDay = $startDate->format('j');
             $nextDay = $nextDate->format('j');
 
             //If the startDay was greater than the 28th and the nextDay is less than the 4th we know we have skipped a month
             //and so we subtract out the number of days we have gone over
-            if($startDay > 28 && $nextDay < 4) {
+            if ($startDay > 28 && $nextDay < 4) {
                 $nextDate->modify("-{$nextDay} day");
-            } else if($isLastDayOfMonth) {
+            } elseif ($isLastDayOfMonth) {
                 $nextDate->setDate($nextDate->format('Y'), $nextDate->format('n'), $endDate->format('t'));
             }
 
-            if($count == 2) {
+            if ($count == 2) {
                 $tsKey = $timedate->fromDbDate($this->end_date)->getTimestamp();
             } else {
                 $tsKey = $timedate->fromDbDate($nextDate->asDbDate())->modify('-1 day')->getTimestamp();
@@ -191,8 +205,8 @@ class QuarterTimePeriod extends TimePeriod implements TimePeriodInterface {
         }
 
         sugar_cache_put($key, $keys);
-        foreach($keys as $tsKey=>$count) {
-            if($ts <= $tsKey) {
+        foreach ($keys as $tsKey => $count) {
+            if ($ts <= $tsKey) {
                 return $count;
             }
         }

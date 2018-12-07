@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Kontaktide loendi töölaud',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kontaktikirjete töölaud',
+
     'LNK_CONTACT_REPORTS' => 'Vaata kontakti aruandeid',
     'ERR_DELETE_RECORD' => 'Kontakti kustutamiseks täpsustage kirje numbrit.',
     'LBL_ACCOUNT_ID' => 'Konto ID:',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopeeri alternatiivne aadress esmaseks aadressiks',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopeeri esmane aadress alternatiivseks aadressiks',
     'NTC_DELETE_CONFIRMATION' => 'Kas olete kindel, et soovite selle kirje kustutada?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Müügivõimaluse loomine eeldab kontot.\n Looge kas uus konto või valige olemasolev.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Müügivõimaluse loomine eeldab kontot.\\n Looge kas uus konto või valige olemasolev.',
     'NTC_REMOVE_CONFIRMATION' => 'Kas olete kindel, et soovite selle kontakti juhtumist eemaldada?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Kas olete kindel, et soovite selle kirje eemaldada otsese aruandena?',
 
@@ -273,4 +277,6 @@ Mooduli {{module_name}} loomiseks tehke järgmist.
     'LBL_MKTO_LEAD_SCORE' => 'Müügivihje skoor',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontaktide aruanded',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Nõustutud ärieesmärgid:',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Nõusoleku viimane värskendus',
 );

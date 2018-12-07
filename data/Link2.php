@@ -444,9 +444,6 @@ class Link2 {
         $result = array();
         if(!$this->beansAreLoaded() || !empty($params))
         {
-            if (!is_array($this->beans))
-                $this->beans = array();
-
             $rel_module = $this->getRelatedModuleName();
 
             //If there are any relationship fields, we need to figure out the mapping from the relationship fields to the

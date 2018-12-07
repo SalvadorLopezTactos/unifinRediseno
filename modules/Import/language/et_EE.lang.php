@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Mitmel veerul on sama välja nimi.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Puuduvad nõutavad väljad:',
     'ERR_MISSING_MAP_NAME' => 'Puudub kohandatud kaardistamisnimi',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Kasutajate importimine on IDM-režiimi jaoks keelatud.',
     'ERR_SELECT_FULL_NAME' => 'Te ei saa valida täisnime, kui valitud on eesnimi ning perekonnanimi.',
     'ERR_SELECT_FILE' => 'Valige üleslaaditav fail.',
     'LBL_SELECT_FILE' => 'Vali fail:',

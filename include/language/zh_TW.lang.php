@@ -20,8 +20,8 @@ $app_list_strings = array (
     'Contacts' => '連絡人',
     'Accounts' => '帳戶',
     'Opportunities' => '商機',
-    'Cases' => '實例',
-    'Notes' => '附註',
+    'Cases' => '案件',
+    'Notes' => '筆記',
     'Calls' => '通話',
     'Emails' => '電子郵件',
     'Meetings' => '會議',
@@ -92,10 +92,10 @@ $app_list_strings = array (
     'ProspectLists' => '目標清單',
     'SavedSearch' => '已儲存搜尋',
     'UpgradeWizard' => '升級精靈',
-    'Trackers' => '追蹤器',
-    'TrackerPerfs' => '追蹤器效能',
-    'TrackerSessions' => '追蹤器工作階段',
-    'TrackerQueries' => '追蹤器查詢',
+    'Trackers' => '追蹤',
+    'TrackerPerfs' => '追蹤履行',
+    'TrackerSessions' => '追蹤工作階段',
+    'TrackerQueries' => '追蹤查詢',
     'FAQ' => '常見問題集',
     'Newsletters' => '新聞稿',
   	'SugarFavorites'=>'最愛',
@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'OAuth 使用者金鑰',
     'OAuthTokens' => 'OAuth 權杖',
     'Filters' => '篩選器',
-    'UserSignatures' => '使用者簽名',
+    'UserSignatures' => '電子郵件簽名',
     'Shippers' => '運輸服務供應商',
     'Styleguide' => '風格指南',
     'Feedbacks' => '回饋',
     'Tags' => '標籤',
     'Categories' => '類別',
     'Dashboards' => '儀表板',
+    'OutboundEmail' => '電子郵件設定',
+    'EmailParticipants' => '電子郵件的參與者',
+    'DataPrivacy' => '數據隱私',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'Fo',
         'Tasks' => 'Ts',
-        'Dashboards' => '儀表板',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => 'DP',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => '產品類型',
     'Shippers' => '運輸服務供應商',
     'Subscriptions' => '訂閱',
-    'UserSignatures' => '使用者簽名',
+    'UserSignatures' => '電子郵件簽名',
     'Feedbacks' => '回饋',
     'Tags' => '標籤',
     'Categories' => '類別',
+    'OutboundEmail' => '電子郵件設定',
+    'EmailParticipants' => '電子郵件的參與者',
+    'DataPrivacy' => '數據隱私',
   ),
 
 /*
@@ -307,17 +314,17 @@ $app_list_strings = array (
   'lead_source_dom' =>
   array (
     '' => '',
-    'Cold Call' => '電話銷售',
+    'Cold Call' => '電話推銷',
     'Existing Customer' => '現有客戶',
-    'Self Generated' => '自我產生式',
+    'Self Generated' => '自己產生',
     'Employee' => '員工',
     'Partner' => '合作夥伴',
     'Public Relations' => '公共關係',
-    'Direct Mail' => '直接郵寄',
-    'Conference' => '會議',
+    'Direct Mail' => '直接郵遞',
+    'Conference' => '會商',
     'Trade Show' => '商展',
     'Web Site' => '網站',
-    'Word of mouth' => '口耳傳播',
+    'Word of mouth' => '口碑',
     'Email' => '電子郵件',
     'Campaign'=>'宣傳活動',
     'Support Portal User Registration' => '支援入口網站使用者註冊',
@@ -326,9 +333,14 @@ $app_list_strings = array (
   'opportunity_type_dom' =>
   array (
     '' => '',
-    'Existing Business' => '現有企業',
-    'New Business' => '新企業',
+    'Existing Business' => '現成事業',
+    'New Business' => '新事業',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => '啟用',
+            'Inactive' => '停用',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => '營收',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => '影響者',
     'Other' => '其他',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => '啟用',
+            'Inactive' => '停用',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => '啟用',
+            'Inactive' => '停用',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => '主要連絡人',
@@ -373,13 +396,13 @@ $app_list_strings = array (
   ),
   'sales_stage_dom' =>
   array (
-    'Prospecting' => '潛在客戶',
+    'Prospecting' => '勘查',
     'Qualification' => '資格',
     'Needs Analysis' => '需求分析',
     'Value Proposition' => '價值主張',
     'Id. Decision Makers' => 'ID 決策者',
-    'Perception Analysis' => '感知分析資料',
-    'Proposal/Price Quote' => '提議/報價',
+    'Perception Analysis' => '認知分析',
+    'Proposal/Price Quote' => '提案/報價',
     'Negotiation/Review' => '交涉檢閱',
     'Closed Won' => '結束並贏得客戶',
     'Closed Lost' => '結束但客戶流失',
@@ -514,7 +537,7 @@ $app_list_strings = array (
   'call_direction_dom' =>
   array (
     'Inbound' => '傳入',
-    'Outbound' => '外寄',
+    'Outbound' => '外撥',
   ),
   'lead_status_dom' =>
   array (
@@ -524,7 +547,7 @@ $app_list_strings = array (
     'In Process' => '處理中',
     'Converted' => '已轉換',
     'Recycled' => '已回收',
-    'Dead' => '無法使用',
+    'Dead' => '失效',
   ),
    'gender_list' =>
   array (
@@ -539,15 +562,15 @@ $app_list_strings = array (
     'New' => '新',
     'Assigned' => '已指派',
     'Closed' => '已關閉',
-    'Pending Input' => '暫止的輸入',
+    'Pending Input' => '擱置輸入',
     'Rejected' => '已拒絕',
-    'Duplicate' => '複製',
+    'Duplicate' => '重複',
   ),
   'case_priority_default_key' => 'P2',
   'case_priority_dom' =>
   array (
     'P1' => '高',
-    'P2' => '媒體',
+    'P2' => '中',
     'P3' => '低',
   ),
   'user_type_dom' =>
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => '工作',
       'KBContents' => '知識庫',
+      'Notes' => '附註',
   ),
 
   'record_type_display_notes' =>
@@ -659,6 +683,14 @@ $app_list_strings = array (
     'Calls' => '通話',
       'KBContents' => '知識庫',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => '帳戶',
+        'Contacts' => '連絡人',
+        'Employees' => '員工',
+        'Leads' => '潛在客戶',
+        'Prospects' => '目標',
+        'Users' => '使用者',
+    ),
 
   'parent_type_display' =>
   array (
@@ -678,7 +710,7 @@ $app_list_strings = array (
 
     'Prospects' => '目標',
       'KBContents' => '知識庫',
-
+      'Notes' => '附註',
   ),
 
   'product_status_default_key' => '運送',
@@ -726,7 +758,7 @@ $app_list_strings = array (
   'default_quote_stage_key' => '草稿',
   'quote_stage_dom' =>
   array (
-    'Draft' => '草稿',
+    'Draft' => '草案',
     'Negotiation' => '交涉',
     'Delivered' => '已交付',
     'On Hold' => '保留中',
@@ -799,7 +831,7 @@ $app_list_strings = array (
   array (
     'Urgent' => '緊急',
     'High' => '高',
-    'Medium' => '媒體',
+    'Medium' => '中',
     'Low' => '低',
   ),
    'bug_resolution_default_key' => '',
@@ -816,7 +848,7 @@ $app_list_strings = array (
   'bug_status_default_key' => '新',
   'bug_status_dom' =>
   array (
-    'New' => '新',
+    'New' => '新的',
     'Assigned' => '已指派',
     'Closed' => '已關閉',
     'Pending' => '擱置中',
@@ -825,14 +857,13 @@ $app_list_strings = array (
   'bug_type_default_key' => '錯誤',
   'bug_type_dom' => array (
     'Defect' => '缺陷',
-    'Feature' => '特色',
+    'Feature' => '功能',
   ),
  'case_type_dom' => array (
     'Administration' => '管理',
     'Product' => '產品',
     'User' => '使用者',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => '電子郵件',
     'Twitter' => 'Twitter'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => '請求數據隱私政策',
+        'Send Personal Information being processed' => '發送正在處理的個人資訊',
+        'Rectify Information' => '糾正資訊',
+        'Request to Erase Information' => '請求擦去資訊',
+        'Export Information' => '出口資訊',
+        'Restrict Processing' => '限制處理',
+        'Object to Processing' => '要處理的物件',
+        'Consent to Process' => '同意處理',
+        'Withdraw Consent' => '撤回同意',
+        'Other' => '其他',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => '商務溝通',
+        'Marketing Communications by company' => '由公司營銷傳播',
+        'Marketing Communications by partners' => '由合作夥伴營銷傳播',
+    ),
+    'dataprivacy_status_default_key' => '打開',
+    'dataprivacy_status_dom' => array(
+        'Open' => '打開',
+        'Closed' => '已完成',
+        'Rejected' => '已拒絕',
+    ),
+    'dataprivacy_priority_default_key' => '低',
+    'dataprivacy_priority_dom' => array(
+        'Low' => '低',
+        'Medium' => '中',
+        'High' => '高',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => '工作室',
     'Upgrade' => '升級',
     'Users' => '使用者',
+    'OutboundEmail' => '電子郵件設定',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -997,8 +1059,8 @@ $app_list_strings = array (
 
     'dom_report_types'=>array(
                 'tabular'=>'列和欄',
-                'summary'=>'總合',
-                'detailed_summary'=>'包含詳細資料的總合',
+                'summary'=>'總和',
+                'detailed_summary'=>'總和附明細',
                 'Matrix' => '矩陣',
         ),
 
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => '失敗',
                                         'completed'     => '已完成',
                                         'no curl'       => '未執行：沒有可用 cURL',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => '草案',
+        'Archived' => '已存檔',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => '隱藏清單－按 ID',
     'test' => '測試',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => '啟用',
+             'Inactive' => '停用',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3 週',
         '31' => '1 個月',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => '使用中',
-    'Inactive' => '非使用中',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => '高',
         'medium'    => '媒體',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => '無',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'Google',
+        'exchange' => '交流',
+        'outlook' => 'Outlook',
+        'other' => '其他',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '。',
         ':' => '：',
         '|' => '|',
@@ -2032,6 +2099,11 @@ $app_list_strings = array (
         'ACTIVE' => '已啟用',
         'INACTIVE' => '已停用',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => '記錄',
+        'records' => '清單',
+        'activities' => '活動流',
+    ),
 );
 
 $app_strings = array (
@@ -2043,11 +2115,11 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => '關注連結',
   'LBL_TOGGLE_VISIBILITY' => '切換可見度', // Record view header panel element
   'LBL_ACTIVITIES' => '活動流',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. 版權所有。保留所有權利。',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. 版權所有。保留所有權利。',
     'LBL_TRADEMARK' => 'SugarCRM、Sugar 和 3-D 立方體是 SugarCRM Inc. 的註冊商標。 '.
         '該產品中使用或出現的所有其他公司和產品的名稱可能是'.
         'SugarCRM ®、Sugar Enterprise™ 和 Sugar™ 是 SugarCRM 公司的商標。',
-    'LBL_TRADEMARK2' => 'SugarCRM ®、Sugar Enterprise™ 和 Sugar™ 是 SugarCRM 公司的商標。',
+    'LBL_TRADEMARK2' => 'SugarCRM®、 Sugar Enterprise™ 和 Sugar™ 是 SugarCRM Inc的商標。',
     'LBL_SEND_INVITE' => '傳送邀請',
   'LBL_INVITEES' => '客人',
     'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => '訪客將不會收到您的邀請',
@@ -2116,6 +2188,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => '透過 SSL 或 TLS 啟用 SMTP？',
     'LBL_NO_ACTION'                         => '沒有該名稱的操作。',
     'LBL_NO_DATA'                           => '無資料',
+    'LBL_NOT_APPLICABLE'                    => '不適用',
     'LBL_ROUTING_ADD_RULE'                  => '新增規則',
     'LBL_ROUTING_ALL'                       => '至少',
     'LBL_ROUTING_ANY'                       => '任何',
@@ -2479,7 +2552,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => '同步所有郵件帳戶',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => '已使用外寄郵件設定將電子郵件傳送至指定電子郵件地址。請查看能否收到郵件以驗證設定是否正確。',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => '執行此動作將同步郵件帳戶及其內容。',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => '執行完全同步？\n較大的郵件帳戶可能需要幾分鐘時間。',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => '執行完全同步？\\n較大的郵件帳戶可能需要幾分鐘時間。',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => '按一下 Shift 鍵或 Ctrl 鍵以選取多個資料夾。',
     'LBL_EMAIL_SETTINGS_GENERAL'            => '一般',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => '可用群組資料夾',
@@ -2547,6 +2620,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => '已通過匯入',
     'LBL_EMAIL_IMPORT_FAIL'                 => '匯入失敗，因為訊息已匯入或已從伺服器刪除。',
 
+    'LBL_EMAILS_FROM' => '已傳送電子郵件',
+    'LBL_EMAILS_RECEIVED' => '電子郵件已接收',
+    'LBL_EMAIL_ADDRESSES_USED' => '在電子郵件中使用的電子郵件地址',
+    'LBL_EMAIL_ADDRESS' => '電子郵件地址',
+    'LBL_FROM' => '發件者',
+    'LBL_TO' => '收件者',
+    'LBL_CC' => 'CC',
+    'LBL_BCC' => '密件副本',
+
     'LBL_LINK_NONE'=> '無',
     'LBL_LINK_ALL'=> '所有',
     'LBL_LINK_RECORDS'=> '記錄',
@@ -2605,6 +2687,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => '需要一個使用中工作階段才能匯出內容。',
     'ERR_NO_HEADER_ID' => '該功能在此主題中不可用。',
     'ERR_NOT_ADMIN' => "未經授權存取管理。",
+    'ERR_DISABLED_FOR_IDM_MODE' => "此選項已在 SugarCRM 中為 IDM 模式禁用，但在雲端主控制台中可用。",
+    'ERR_GOTO_CLOUD_CONSOLE' => "請前往<a href=\"%s\" target=\"_blank\">雲端主控台</a>。",
     'ERR_MISSING_REQUIRED_FIELDS' => '缺少必填欄位：',
     'ERR_INVALID_REQUIRED_FIELDS' => '無效的必填欄位：',
     'ERR_INVALID_VALUE' => '無效值：',
@@ -2823,13 +2907,13 @@ $app_strings = array (
     'LBL_EDIT_AS_NEW_BUTTON_LABEL' => '編輯時新建',
     'LBL_EDIT_AS_NEW_BUTTON_TITLE' => '編輯時新建',
     'LBL_FAVORITES' => '最愛',
-    'LBL_FILTER' => '篩選器',
+    'LBL_FILTER' => '篩選條件',
     'LBL_DEFAULT_DATA_FILTER' => '預設資料篩選器',
     'LBL_FILTER_MENU_BY' => '篩選功能表',
     'LBL_FILTER_SELECT_FIELD' => '選取欄位...',
     'LBL_FILTER_SELECT_OPERATOR' => '選取操作員...',
     'LBL_FILTER_CREATE_NEW' => '建立',
-    'LBL_FILTER_CREATE_FILTER' => '建立新的篩選器',
+    'LBL_FILTER_CREATE_FILTER' => '建立新的篩選條件',
     'LBL_FILTER_EDIT_FILTER' => '編輯篩選器',
     'LBL_FILTER_ALL_RECORDS' => '所有記錄',
     'TPL_FILTER_SAVE' => '您已成功建立篩選器 {{name}}。',
@@ -2934,7 +3018,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => '大量更新失敗。啟動新的嘗試 ({{total}} 項中的 {{num}} 項)。',
     'TPL_MASSUPDATE_WARNING_CLOSE' => '未完成大量更新。{{num}} 記錄保持不變。',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => '未完成大量更新。{{num}} 記錄保持不變。',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} 記錄因權限問題而被忽略。',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} 個記錄因權限或錯誤而被忽略。',
     'TPL_MASSUPDATE_SUCCESS' => '已成功更新 {{num}} 項記錄。',
     'TPL_MASSUPDATE_TITLE' => '{{module}} 大量更新',
     'TPL_MASSDELETE_PROGRESS_STATUS' => '正在刪除 {{total}} 項中的第 {{num}} 項',
@@ -3006,6 +3090,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => '使用者預設',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => '使用者帳戶',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => '群組帳戶',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => '名稱',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => '建立',
@@ -3218,7 +3303,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         '保留所有權利。<br />SugarCRM、Sugar 和 3-D 立方體是 SugarCRM Inc. 的註冊商標。 '.
         '該產品中使用或出現的所有其他公司和產品的名稱可能是'.
         '與此類名稱有關的公司的商標。',
@@ -3259,7 +3344,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => '密碼',
     'LBL_LOGGED_OUT' => '您已經登出。',
     'LBL_LOGIN_FORM_LABEL' => '在表單中顯示記錄',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => '返回到登入',
+    'LBL_LOGIN_INACTIVE_USER' => '停用用戶',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => '門戶或團隊使用者不能登入。',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => '儀表板',
@@ -3326,8 +3413,9 @@ $app_strings = array (
     'LNK_BACKTOTOP' => '返回頂部',
     'LNK_REMOVE' => '移除',
     'LNK_RESUME' => '繼續',
-    'LNK_VIEW_CHANGE_LOG' => '檢視變更記錄',
-
+    'LNK_VIEW_CHANGE_LOG' => '查看稽核紀錄',
+    'TPL_AUDIT_LOG_TITLE' => '{{{name}}} 稽核記錄',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => '請按一下瀏覽器返回按鈕，並修復此錯誤。',
     'NTC_DATE_FORMAT' => '(yyyy-mm-dd)',
@@ -3361,7 +3449,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "貴公司的 SugarCRM 授權很快就將過期。",
     'ERROR_LICENSE_VALIDATION'=> "貴公司的 SugarCRM 授權需要驗證。只有管理員能夠登入。",
     'WARN_LICENSE_VALIDATION'=> "貴公司的 SugarCRM 授權很快需要驗證。",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"已啟用的離線用戶端數量目前已超過您在授權中指定的數量。",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>警告：</b>您的瀏覽器在 IE 相容性檢視中是不支援的。",
     'WARN_LICENSE_SEATS'=>  "警告：現用使用者的數量已超過授權允許的最大數量。",
     'WARN_LICENSE_SEATS_MAXED'=>  "警告：現用使用者的數量超過了授權允許的最大數量。",
@@ -3431,9 +3518,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'正在處理..',
     'LBL_REQUEST_PROCESSED'=>'已完成',
     'LBL_AJAX_FAILURE' => 'Ajax 失敗',
-    'LBL_OC_STATUS' => '離線用戶端狀態',
-    'LBL_OC_STATUS_TEXT' => '指示當前使用者是否能夠使用離線用戶端。',
-    'LBL_OC_DEFAULT_STATUS' => '非使用中',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => '搜尋 ...',
     'LBL_SAVED_SEARCH_SHORTCUT' => '已儲存搜尋',
     'LBL_SEARCH_POPULATE_ONLY'=> '使用上述搜尋表單執行搜尋',
@@ -3444,7 +3528,7 @@ $app_strings = array (
     'LBL_SEARCH_AND_SELECT_ELLIPSIS' => '搜尋並選取...',
     'LBL_SEARCH_SELECT_MODULE' => '選取{{module}}...',
     'LBL_DETAILVIEW'=>'詳細資料檢視表',
-    'LBL_LISTVIEW'=>'清單檢視表',
+    'LBL_LISTVIEW'=>'清單檢視',
     'LBL_EDITVIEW'=>'編輯檢視表',
     'LBL_SEARCHFORM'=>'搜尋表單',
     'LBL_SAVED_SEARCH_ERROR' => '請為此檢視表提供名稱。',
@@ -3534,16 +3618,17 @@ $app_strings = array (
     'LBL_COLLAPSE_ALL' => '摺疊所有',
     'LBL_EXPAND_ALL' => '展開所有',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => '編輯',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => '查看報告',
     'LBL_DASHLET_REFRESH_LABEL' => '重新整理',
     'LBL_DASHLET_REMOVE_LABEL' => '移除',
     'LBL_DASHLET_DROP_HERE' => '放置於此處',
-    'LBL_DASHLET_MINIMIZE_ALL' => '關閉所有',
-    'LBL_DASHLET_MAXIMIZE_ALL' => '打開所有',
+    'LBL_DASHLET_MINIMIZE_ALL' => '關閉全部',
+    'LBL_DASHLET_MAXIMIZE_ALL' => '開啟全部',
     'LBL_DASHLET_MINIMIZE' => '關閉',
     'LBL_DASHLET_MAXIMIZE' => '打開',
     'LBL_DASHLET_CONFIGURE' => '設定',
-    'LBL_DASHLET_TOGGLE' => '打開/關閉',
-    'LBL_SIDEPANE_TOGGLE' => '打開/關閉側窗格',
+    'LBL_DASHLET_TOGGLE' => '開啟/關閉',
+    'LBL_SIDEPANE_TOGGLE' => '開啟/關閉側窗格',
 
     /* Sugar7 Help Component */
     'LBL_DEFAULT_HELP_COMPONENT_TITLE' => '說明',
@@ -4215,7 +4300,9 @@ $app_strings = array (
     'LBL_CONFIRM' => '確認',
     'LBL_NO_ACCESS' => '（無存取權限）',
     'LBL_NO_ACCESS_LOWER' => '沒有存取權限',
-    'LBL_NO_FIELD_ACCESS' => '沒有存取權限',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => '值已刪除',
+    'LBL_VALUE_ERASED_TOOLTIP' => '此資訊已通過資料隱私請求刪除',
     'LBL_CREATE_RELATED_RECORD' => '建立關聯記錄',
     'LBL_ASSOC_RELATED_RECORD' => '連結現有記錄',
     'LBL_CHOOSE_LINK' => '選擇連結類型',
@@ -4284,7 +4371,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => '很大',
     'LBL_FONTSIZE_HUGE' => '非常大',
     'LBL_FONTSIZE_EXTRA_HUGE' => '巨大',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => '下載失敗\r\n{{{this}}}',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "下載失敗\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => '更多...',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => '...小於',
     'LBL_OFFLINE_MODE' => '離線模式',
@@ -4353,6 +4440,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => '交易詳細資料',
     'LBL_RECORD_DELETED' => '(已刪除記錄)',
     'LBL_NOT_AVAILABLE' => 'N/A',
+    'LBL_FILE_SIZE' => '檔案大小',
     'LBL_FILE_SIZE_UNITS_B' => '位元',
     'LBL_FILE_SIZE_UNITS_KB' => 'kB',
     'LBL_FILE_SIZE_UNITS_MB' => 'MB',
@@ -4476,6 +4564,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => '詳情檢視表在螢幕右側打開。',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => '使用下方的箭頭快速瀏覽此功能表的關鍵元件。',
 
+    'LBL_COMMENT_ADD' => '添加注釋',
+    'LBL_REQUIRED' => '必填',
+    'LBL_MORE_BUTTON' => '更多',
+    'LBL_TRY_AGAIN' => '再試一次',
+    'LBL_NEW_RECORDS' => '最近建立',
+    'LBL_ASSIGNED_TO_ME' => '我的 {{{module}}}',
+    'LBL_LISTVIEW_FILTER_ALL' => '所有 {{{module}}}',
+    'LBL_UNFAVORITE' => '不喜愛的',
+    'LBL_ACTIVITY_CREATE' => '已創建 {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UPDATE' => '更新 {{{changes}}} {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_LINK' => '連結 {{{relatedRecord}}} 到 {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UNLINK' => '取消 {{{relatedRecord}}} 到 {{{record}}} {{{module}}} 的連結',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{relationship}} 對 {{parentModule}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => '下載相關記錄...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => '您的儀表板配置已更改。是否要重新載入？',
+    'LBL_RECORDS' => '記錄',
+    'LBL_DASHBOARDS' => '儀表板',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => '搜尋 {{searchCriteria}}...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => '主功能表',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => '快速建立新記錄',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => '刷卡以瞭解更多選項',
+    'LBL_DETAILS' => '詳細資料',
+    'LBL_DETAIL_RELATED' => '相關',
+    'LBL_CREATE_RELATED_MODULE_WARN' => '這個 {{module}} 需要 {{relatedModule}}。 <a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>創建一個 {{relatedModule}} 記錄</a>。',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => '編輯記錄',
+    'LBL_OFFLINE_MENU_SETTINGS' => '離線設定',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => '偵錯設定',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED ":" 資料加密已啟用。',
+    'LBL_OFFLINE_TOTAL_RECORDS' => '總記錄',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => '上次下載',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => '無法下載該檔。',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => '無法從伺服器載入儀表板',
+    'ERR_FILTERS_FETCHING' => '無法獲取篩選器',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => '無法加密本地儲存體',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => '加密離線資料。這可能需要幾分鐘時間。',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => '已完成離線資料加密。',
+    'ERR_ACCESS_SPECIFIC_MODULE' => '您沒有訪問 {{{module}}} 模組的許可權。',
+    'LBL_SKIP' => '跳過',
+    'LBL_CONTINUE' => '繼續',
+    'LBL_ENABLE' => '啟用',
+    'LBL_MOBILE_TRIAL_UNTIL' => '試用直到',
+    'LBL_MOBILE_SDK_VERSION' => '試用直到',
+    'LBL_LOG_LEVEL' => '記錄層級',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => '登錄設定已重新配置。',
+    'LBL_TRIAL_PERIOD_EXPIRED' => '您的試用期已過期。',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => '伺服器不支援安全連線。請關閉安全連線。',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => '伺服器支援安全連線。請打開安全連線。',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => '您的連接不安全。請與管理員聯繫。',
+    'LBL_LOGIN_SETTINGS_HEADER' => '登錄設定',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => '設置您的 {{{brandName}}} 實例',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => '為了確保應用程式正常作業，您需要输入 {{{brandName}}} 實例的 URL。如果您沒有實例 URL，請聯絡管理員。',
+    'LBL_FACEID' => 'Face ID',
+    'LBL_TOUCHID' => 'Touch ID',
+    'LBL_ENABLE_TOUCHID' => '啟用 {{{biometryType}}}',
+    'LBL_SETUP_TOUCHID' => '設定 {{{biometryType}}}',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => '使用手指登錄',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "您的設備上未設置{{{biometryType}}} 。 轉到設備設置以設置 {{{biometryType}}}。設置後，在主功能表 >> 設置中啟用 {{{brandName}}} {{{biometryType}}}。",
+    'LBL_TOUCH_ID_DISCLAIMER' => '使用 {{{biometryType}}} 與 {{{brandName}}} 將允許您使用您的生物識別識別碼，而不是輸入您的密碼來訪問 {{{brandName}}}。',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => '你想繼續進行 {{{biometryType}}} 嗎？    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => '輸入 {{{brandName}}} 密碼以啟用 {{{biometryType}}}',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => '設置',
+    'LBL_MDM_CONFIRM_CHANGE' => '已通過移動設備管理器更改應用程式配置。請重新登錄已應用變更。',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => '請通過設備設定為 {{{brandName}}} 授予訪問您所在位置的權限。',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => '當前位置不可用',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "當前位置搜尋超時。\n請再試一次。",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => '位置地標不可用',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => '位置座標無效',
+    'ERR_MOBILE_INVALID_PASSWORD' => '無效的密碼。',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => '您的應用程式已過期，且不再與您正在連接的 {{{brandName}}} 實例相容。您要更新嗎？',
+    'LBL_MOBILE_BY' => '透過',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => '此篩選器在離線時不可用。',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => '離線記錄',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => '下載設置',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => '下載已分配、已收藏和已關注的紀錄以便離線訪問。您可以在離線設置中更新首選項。',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "您的記錄已下載完畢。現在您可以在離線模式下訪問它們。",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "未下载完所有紀錄。\n是否要重試一次？",
+    'LBL_BULK_LOAD_USE_CELLULAR' => '使用蜂窩數據',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => '不是現在',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => '已暂停下載，您再次打開應用程式時會繼續下載。',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => '正在下載 {{{module}}}: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => '更新最新記錄',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => '正在等待連接',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => '暫停',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => '停止',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => '下載',
+    'LBL_BULK_LOAD_BTN_PAUSE' => '暫停',
+    'LBL_BULK_LOAD_BTN_RESUME' => '繼續',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => '預設情況下僅使用 WiFi 連接',
+    'LBL_NPS_RATING_MSG' => "你如何對你的 \n{{{productName}}} 經驗進行評分？",
+    'LBL_NPS_THANKS_MSG' => '感謝您的回饋!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => '你介意在App商店評分嗎？',
+    'LBL_NPS_NO_THANKS' => '不，謝謝',
+    'LBL_NPS_NOT_NOW' => '不是現在',
+    'LBL_NPS_RATE_NOW' => '現在',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => '網路不可用。您仍可以在離線時使用該應用程式',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => '您的更改將在連線時同步。 <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>查看詳細資訊</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => '有未同步的資料。請檢查 <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>事務日誌</a>',
+    'LBL_CONVERT' => '轉換',
+    'LBL_CONVERT_LEAD' => '轉換潛在客戶',
+    'LBL_SEARCH_EXISTING_RECORD' => '搜尋現有 {{{this}}}',
+    'LBL_DUPLICATES_CHECK_FAILED' => '重複確認失敗',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => '您希望移動關聯活動至連絡人記錄嗎?',
+    'LBL_LEAD_CONVERSION_SUCCESS' => '您已成功轉換潛在客戶 {{{name}}}',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => '未找到重複項。',
+    'ERR_LEAD_CONVERSION_FAIL' => '潛在客戶轉換失敗',
+    'LBL_SELECT_DUPLICATE_RECORD' => '從重複 {{{modulePlural}}} 中選擇',
+    'LBL_SELECTED_EXISTING_RECORD' => '已選取 {{{moduleSingular}}}',
+    'LBL_CREATED_NEW_RECORD' => '新建 {{{moduleSingular}}}',
+    'LBL_VO_BACK_BTN' => '後退按鈕',
+    'LBL_VO_HOME_BTN' => '首頁按鈕',
+    'LBL_VO_DASHBOARD_BTN' => '儀表板按鈕',
+    'LBL_VO_SEARCH_BTN' => '搜尋按鈕',
+    'LBL_VO_RIGHT_MENU_BTN' => '右功能表按鈕',
+    'LBL_VO_ADD_BTN' => '添加按鈕',
+
     //begin portal
 
     //portal record tutorial
@@ -4587,6 +4791,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => '選取一個報表',
     'LBL_REPORT_AUTO_REFRESH' => '自動重新整理',
     'LBL_REPORT_EDIT' => '編輯已選取報表',
+    'LBL_REFRESH_LIST_AND_CHART' => '刷新列表和圖表',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => '未知',
@@ -4648,6 +4853,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => '執行AssignTo 動作過程中出錯。',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => '您無法訪問“{{name}}”。請聯繫您的管理員。',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => '年 {0}',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} 季度{0}',
@@ -4659,6 +4867,11 @@ $app_strings = array (
     'LBL_MESSAGE_BOX_TITLE' => '警示',
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => '忽略重複並儲存',
     'LBL_RESTORE' => '重置為初始值',
+
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => '標記為擦除的記錄',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => '顯示與資料隱私請求相關的記錄， '
+        . '擦除資訊。',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'RSS 訂閱',
@@ -4682,6 +4895,7 @@ $app_strings = array (
     'LBL_UNASSIGNED' => '未指派',
     'LBL_ARCHIVE_EMAIL' => '封存電子郵件',
     'LBL_EMAIL_ARCHIVED' => '已封存電子郵件',
+    'LBL_CREATE_ARCHIVED_EMAIL' => '建立已存檔的電子郵件',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => '已規劃活動',
@@ -4713,6 +4927,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => '我的工作',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => '小組工作',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Advanced Workflow',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP 或舊 REST API',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'Cron Job',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => '邏輯掛鉤',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'Sugar 工作流',
+    'LBL_AUDIT_SUBJECT_USER' => '使用者',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Web to Lead',
+
     //common chart strings
     'LBL_CHART' => '圖表',
     'LBL_CHART_NO_DATA' => '沒有可用資料。',
@@ -4721,6 +4948,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => '隱藏控制項',
     'LBL_CHART_CONTROLS_OPEN' => '顯示控制項',
     'LBL_CHART_UNDEFINED' => '未定義',
+    'LBL_CHART_NO_LABEL' => '未定義',
+    'LBL_CHART_AMOUNT' => '金額',
+    'LBL_CHART_COUNT' => '計數',
+    'LBL_CHART_PERCENT' => '百分比',
+    'LBL_CHART_GROUP' => '群組',
+    'LBL_CHART_DATE' => '日期',
+    'LBL_CHART_KEY' => '金鑰',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => '圖表類型',
@@ -4792,6 +5026,10 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => '預設日期篩選器',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => '預設資料集',
 
+    'LBL_PRODUCT_CATALOG_NAME' => '產品目錄',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => '產品目錄',
+    'LBL_PRODUCT_CATALOG_DESC' => '從您的產品目錄查看和添加項目。',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => '從您的產品目錄查看和添加項目。',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}} 於 {{date}} 的 {{time}}',
@@ -4804,6 +5042,7 @@ $app_strings = array (
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => '於',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => '我的活動流',
     'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => '檢視對記錄執行的活動清單，並建立和發佈註解。',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => '活動流已禁用',
 
     'LBL_DATA_VIEW' => '資料檢視表',
     'LBL_COMMENT' => '註解',
@@ -4811,6 +5050,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => '連接伺服器時出錯。請再試一次。',
     'ERR_RESOLVE_ERRORS' => '繼續前請修正任何錯誤。',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => '為了批准，必須填寫所有必要欄位；但是，您仍然可以拒絕或路由此記錄。',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => '為了拒絕/路由所有必需的欄位必須填寫。',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => '重新整理清單',
@@ -4827,7 +5070,7 @@ $app_strings = array (
     'LBL_DASHLET_CLOSE' => '關閉',
 
     'LBL_DASHLET_FORECAST_NAME' => '預測',
-    'LBL_DASHLET_FORECASTS_CHART_NAME' => '預測橫條圖',
+    'LBL_DASHLET_FORECASTS_CHART_NAME' => '預測長條圖',
     'LBL_DASHLET_FORECAST_PARETO_CHART_NAME' => '預測橫條圖',
     'LBL_DASHLET_FORECASTS_FOR_CHART_NAME' => '預測目的',
     'LBL_DASHLET_FORECASTS_CHART_DESC' => '顯示特定時間週期內的預測橫條圖',
@@ -4838,6 +5081,7 @@ $app_strings = array (
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => '已儲存報告圖表 Dashlet',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => '顯示來自已儲存報表的任意圖表。',
+
     'LBL_QUESTION_MARK' => '？',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => '已發佈的相關文章',
@@ -4845,7 +5089,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => '歷史摘要',
-    'TPL_HISTORICAL_SUMMARY' => '{{name}} 的歷史摘要',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => '更多歷史...',
     'LBL_RELATED_CONTACT' => '相關連絡人',
     'LBL_MODULE_TYPE' => '類型',
@@ -4856,7 +5100,7 @@ $app_strings = array (
     //SFA
     'LBL_BEST' => '最佳',
     'LBL_WORST' => '最差',
-    'LBL_LIKELY' => '近似金額',
+    'LBL_LIKELY' => '可能金額',
     'LBL_BEST_ADJUSTED' => '最好（已調整）',
     'LBL_WORST_ADJUSTED' => '最差（已調整）',
     'LBL_LIKELY_ADJUSTED' => '可能（已調整）',
@@ -5098,6 +5342,29 @@ $app_strings = array (
 
     'LBL_FIELD_TRIMMED' => '由於超過最大字元限制，欄位已被修剪。',
     'LBL_FIELDSIZE_OVERFLOW' => '欄位超出最大字元限制。',
+    'LBL_TINYMCE_TARGET_SAME' => '相同視窗',
+    'LBL_TINYMCE_TARGET_NEW' => '新視窗',
+
+    'LBL_OUTBOUND_EMAILS' => '電子郵件設定',
+    'LBL_OUTBOUND_EMAIL' => '電子郵件設定',
+
+    'LBL_EMAIL_PARTICIPANTS' => '電子郵件的參與者',
+    'LBL_EMAIL_PARTICIPANT' => '電子郵件的參與者',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => '數據隱私',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => '數據隱私',
+    'LBL_DATAPRIVACY_VIEW_PII' => '查看個人資訊',
+    'LBL_DATAPRIVACY_MARKFORERASE' => '標記擦除',
+    'LBL_DATAPRIVACY_FIELDNAME' => '欄位',
+    'LBL_DATAPRIVACY_VALUE' => '值',
+    'LBL_DATAPRIVACY_CHANGED_BY' => '變更人',
+    'LBL_DATAPRIVACY_SOURCE' => '來源',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => '最近更新',
+    'LBL_DATAPRIVACY_PII' => '個人資訊',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => '標記擦除',
+    'TPL_DATAPRIVACY_PII_TITLE' => '{{{name}}} 的個人資訊',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5201,7 +5468,7 @@ $app_list_strings['moduleListSingular']['EmailAddresses'] = '電子郵件地址'
 
 $app_list_strings['kbdocument_status_dom'] = array(
     'draft' => '草稿',
-    'in-review' => '檢閱中',
+    'in-review' => '審查中',
     'approved' => '已核准',
     'published' => '已發佈',
     'expired' => '已過期',
@@ -5962,6 +6229,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => '宣傳活動' ,
     'email' => '電子郵件',
     'workflow' => '工作流程',
+    'system' => '系統',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5980,7 +6248,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -6043,6 +6310,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = '知識庫範本';
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = '知識庫範本';
 $app_list_strings['moduleList']['EmbeddedFiles'] = '已嵌入檔案';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '已嵌入檔案';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'Lek',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'P',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J $',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => '瑞士法郎',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lei',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => '列克',
+    'USD' => '美元',
+    'AFN' => '阿富汗尼',
+    'ARS' => '比索',
+    'AWG' => '荷蘭盾',
+    'AUD' => '美元',
+    'AZN' => '新馬納特',
+    'BSD' => '美元',
+    'BBD' => '美元',
+    'BYR' => '盧布',
+    'EUR' => '歐元',
+    'BZD' => '美元',
+    'BMD' => '美元',
+    'BOB' => '玻利維亞諾',
+    'BAM' => '可兌換馬克',
+    'BWP' => '普拉',
+    'BGN' => '列弗',
+    'BRL' => '雷亞爾',
+    'GBP' => '英鎊',
+    'BND' => '美元',
+    'KHR' => '瑞爾',
+    'CAD' => '美元',
+    'KYD' => '美元',
+    'CLP' => '比索',
+    'CNY' => '人民幣元',
+    'COP' => '比索',
+    'CRC' => 'ColÃ³n',
+    'HRK' => '庫納',
+    'CUP' => '比索',
+    'CZK' => '克朗',
+    'DKK' => '克朗納',
+    'DOP' => '比索',
+    'XCD' => '美元',
+    'EGP' => '英鎊',
+    'SVC' => '科朗',
+    'EEK' => '克朗',
+    'FKP' => '英鎊',
+    'FJD' => '美元',
+    'GHC' => '塞地',
+    'GIP' => '英鎊',
+    'GTQ' => '格查爾',
+    'GGP' => '英鎊',
+    'GYD' => '美元',
+    'HNL' => '倫皮拉',
+    'HKD' => '美元',
+    'HUF' => '福林',
+    'ISK' => '克朗',
+    'INR' => '盧比',
+    'IDR' => '盧比',
+    'IRR' => '裡亞爾',
+    'IMP' => '英鎊',
+    'ILS' => '新謝克爾',
+    'JMD' => '美元',
+    'JPY' => '日元',
+    'JEP' => '英鎊',
+    'KZT' => '堅戈',
+    'KPW' => '韓元',
+    'KRW' => '韓元',
+    'KGS' => '索姆',
+    'LAK' => '基普',
+    'LVL' => '拉特',
+    'LBP' => '英鎊',
+    'LRD' => '美元',
+    'CHF' => '瑞士法郎',
+    'LTL' => '立特',
+    'MKD' => '第納爾',
+    'MYR' => '林吉特',
+    'MUR' => '盧比',
+    'MXN' => '比索',
+    'MNT' => '圖格裡克',
+    'MZN' => '梅蒂卡爾',
+    'NAD' => '美元',
+    'NPR' => '盧比',
+    'ANG' => '荷蘭盾',
+    'NZD' => '美元',
+    'NIO' => '科多巴',
+    'NGN' => '奈拉',
+    'NOK' => '克朗',
+    'OMR' => '裡亞爾',
+    'PKR' => '盧比',
+    'PAB' => '巴爾博亞',
+    'PYG' => '瓜拉尼',
+    'PEN' => '索爾',
+    'PHP' => '比索',
+    'PLN' => '茲羅提',
+    'QAR' => '裡亞爾',
+    'RON' => '新雷',
+    'RUB' => '盧布',
+    'SHP' => '英鎊',
+    'SAR' => '裡亞爾',
+    'RSD' => '第納爾',
+    'SCR' => '盧比',
+    'SGD' => '美元',
+    'SBD' => '美元',
+    'SOS' => '先令',
+    'ZAR' => '蘭德',
+    'LKR' => '盧比',
+    'SEK' => '克朗',
+    'SRD' => '美元',
+    'SYP' => '英鎊',
+    'TWD' => '新美元',
+    'THB' => '泰銖',
+    'TTD' => '美元',
+    'TRY' => '里拉',
+    'TRL' => '里拉',
+    'TVD' => '美元',
+    'UAH' => '格里夫尼亞',
+    'UYU' => '比索',
+    'UZS' => '索姆',
+    'VEF' => '玻利瓦',
+    'VND' => '盾',
+    'YER' => '裡亞爾',
+    'ZWD' => '辛巴威元',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => '按一下',

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Yazılım Hataları Listesi Panosu',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Yazılım Hataları Kaydı Panosu',
+
   'LBL_MODULE_NAME' => 'Hatalar',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Hata',
   'LBL_MODULE_TITLE' => 'Hata İzleme : Ana Sayfa',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Talepler',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projeler',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokümanlar',
-  'LBL_SYSTEM_ID' => 'Sistem ID',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Atanan Kullanıcı',
 	'LBL_ASSIGNED_TO_NAME' => 'Atanan Kişi',
 

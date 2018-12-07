@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Quadre de comandament del llistat de casos',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Quadre de comandament del registre de casos',
+
 	'ERR_DELETE_RECORD'					=> 'Per suprimir el compte, heu d&#39;especificar un número de registre.',
 	'LBL_ACCOUNT_ID'					=> 'ID del compte',
 	'LBL_ACCOUNT_NAME'					=> 'Nom del compte:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Estat:',
     'LBL_SOURCE' => 'Origen:',
 	'LBL_SUBJECT'						=> 'Assumpte:',
-	'LBL_SYSTEM_ID'						=> 'ID Sistema',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Nom del compte',
 	'LBL_LIST_ASSIGNED'					=> 'Assignat a',
 	'LBL_LIST_CLOSE'					=> 'Tancar',

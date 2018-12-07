@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
+
 use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Platform as PlatformConstraint;
 use Psr\Log\LoggerAwareInterface;
@@ -142,6 +144,7 @@ abstract class ServiceBase implements LoggerAwareInterface
      * Handle the situation where the API needs login
      * @param Exception $e Exception that caused the login problem, if any
      * @throws SugarApiExceptionNeedLogin
+     * @throws SugarApiExceptionError
      */
     public function needLogin(Exception $e = null)
     {
@@ -151,14 +154,18 @@ abstract class ServiceBase implements LoggerAwareInterface
            // @TODO Localize exception strings
            $message = "No valid authentication for user.";
        }
-       $login_exc = new SugarApiExceptionNeedLogin($message);
-       $auth = AuthenticationController::getInstance();
-       if($auth->isExternal()) {
-            $login_exc->setExtraData("url", $auth->getLoginUrl(array(
-                'platform' => $this->platform,
-            )))->setExtraData('platform', $this->platform);
-       }
-       throw $login_exc;
+        $isIDMModeEnabled = (new Config(\SugarConfig::getInstance()))->isIDMModeEnabled();
+        if ($isIDMModeEnabled && !extension_loaded('gmp')) {
+            throw new SugarApiExceptionError('ERR_FOR_IDM_MODE_GMP_REQUIRED', null, 'Users');
+        }
+        $loginExc = new SugarApiExceptionNeedLogin($message);
+        $auth = AuthenticationController::getInstance();
+        if ($auth->isExternal()) {
+            $loginExc
+                ->setExtraData("url", $auth->getLoginUrl(['platform' => $this->platform]))
+                ->setExtraData('platform', $this->platform);
+        }
+        throw $loginExc;
     }
 
     /**
@@ -186,7 +193,7 @@ abstract class ServiceBase implements LoggerAwareInterface
         }
 
         $raiseException = false;
-        $strict = (bool) SugarConfig::getInstance()->get('disable_unknown_platforms', false);
+        $strict = (bool) SugarConfig::getInstance()->get('disable_unknown_platforms', true);
 
         foreach ($violations as $violation) {
             switch ($violation->getCode()) {

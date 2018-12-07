@@ -18,7 +18,7 @@ class SugarUpgradeRemoveMyForecastingChartDashlet extends UpgradeScript
 
     public function run()
     {
-        if (SugarAutoLoader::fileExists(
+        if (file_exists(
             'modules/Charts/Dashlets/MyForecastingChartDashlet/MyForecastingChartDashlet.php'
         )) {
             $this->upgrader->fileToDelete('modules/Charts/Dashlets/MyForecastingChartDashlet', $this);

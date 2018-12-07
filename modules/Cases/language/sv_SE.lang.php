@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Panel för fallistor',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Panel för fallposter',
+
 	'ERR_DELETE_RECORD'					=> 'Ett objektnummer måste specificeras för att kunna radera organisationen.',
 	'LBL_ACCOUNT_ID'					=> 'Konto-ID',
 	'LBL_ACCOUNT_NAME'					=> 'Organisationsnamn:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Status:',
     'LBL_SOURCE' => 'Källa:',
 	'LBL_SUBJECT'						=> 'Ämne',
-	'LBL_SYSTEM_ID'						=> 'System-ID',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Organisationsnamn',
 	'LBL_LIST_ASSIGNED'					=> 'Tilldelad till',
 	'LBL_LIST_CLOSE'					=> 'Stäng',

@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Process Definitions',
   'LBL_MODULE_TITLE' => 'Proceso apibrėžimai',
   'LBL_MODULE_NAME_SINGULAR' => 'Process Definition',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'is not equal to',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'is not',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'not equal to',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Vykdymo laikas',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Pridėti',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Uždaryti',

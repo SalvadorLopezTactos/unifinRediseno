@@ -107,12 +107,10 @@
     },
 
     /**
-     * @inheritdoc
-     *
      * Empty function as the title values have already been set properly
      * with the change:worksheet_columns event handler
      *
-     * @override
+     * @inheritdoc
      */
     _updateTitleValues: function() {
     },

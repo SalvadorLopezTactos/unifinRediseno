@@ -1,121 +1,86 @@
 <?php
- // created: 2018-11-07 19:57:59
-$dictionary['Account']['fields']['sectoreconomico_c']['labelValue']='Sector Económico';
-$dictionary['Account']['fields']['sectoreconomico_c']['dependency']='';
-$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']=array (
-  'trigger' => 'tct_macro_sector_ddw_c',
-  'values' => 
-  array (
-    1 => 
-    array (
-      0 => '0100008',
-      1 => '0200006',
-      2 => '0400002',
-      3 => '0300004',
-    ),
-    2 => 
-    array (
-      0 => '9300005',
-      1 => '8400002',
-      2 => '8400001',
-      3 => '9501009',
-      4 => '9800000',
-      5 => '8800002',
-      6 => '9900909',
-      7 => '8400003',
-      8 => '9300001',
-      9 => '8700008',
-      10 => '4200002',
-      11 => '6800003',
-      12 => '8400004',
-      13 => '8500002',
-      14 => '8600000',
-      15 => '8800006',
-      16 => '8900004',
-      17 => '9100009',
-      18 => '9200007',
-      19 => '9400003',
-    ),
-    3 => 
-    array (
-      0 => '6100002',
-      1 => '6300008',
-      2 => '6900006',
-      3 => '6800008',
-      4 => '6700000',
-      5 => '6600002',
-      6 => '6800010',
-      7 => '6200000',
-      8 => '6400006',
-      9 => '6800001',
-      10 => '6800002',
-    ),
-    4 => 
-    array (
-      0 => '6500004',
-      1 => '3800001',
-      2 => '1100007',
-      3 => '1200005',
-      4 => '1300003',
-      5 => '1400001',
-      6 => '2000008',
-      7 => '2100006',
-      8 => '2200004',
-      9 => '2400000',
-      10 => '2500008',
-      11 => '2700004',
-      12 => '3300001',
-      13 => '3200003',
-      14 => '3500007',
-      15 => '3600005',
-      16 => '3700003',
-      17 => '5000005',
-      18 => '2300002',
-      19 => '2600006',
-      20 => '2800002',
-      21 => '2900000',
-      22 => '3000007',
-      23 => '3400009',
-      24 => '3900009',
-      25 => '3100005',
-    ),
-    5 => 
-    array (
-      0 => '7600001',
-      1 => '7400005',
-      2 => '7500003',
-      3 => '7100001',
-      4 => '7200009',
-      5 => '7300007',
-    ),
-    6 => 
-    array (
-      0 => '4100004',
-      1 => '8300006',
-    ),
-    7 => 
-    array (
-      0 => '9999999',
-    ),
-    8 => 
-    array (
-      0 => '8200008',
-      1 => '8100000',
-      2 => '9503005',
-    ),
-    9 => 
-    array (
-      0 => '9506009',
-      1 => '9900904',
-      2 => '9900905',
-      3 => '9900906',
-      4 => '9900907',
-    ),
-    '' => 
-    array (
-      0 => '',
-    ),
-  ),
-);
+ // created: 2018-12-05 18:17:34
+$dictionary['Account']['fields']['sectoreconomico_c']['labelValue'] = 'Sector Económico';
+$dictionary['Account']['fields']['sectoreconomico_c']['dependency'] = '';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['trigger'] = 'tct_macro_sector_ddw_c';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][1][0] = '0100008';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][1][1] = '0200006';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][1][2] = '0400002';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][1][3] = '0300004';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][0] = '9300005';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][1] = '8400002';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][2] = '8400001';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][3] = '9501009';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][4] = '9800000';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][5] = '8800002';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][6] = '9900909';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][7] = '8400003';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][8] = '9300001';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][9] = '8700008';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][10] = '4200002';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][11] = '6800003';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][12] = '8400004';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][13] = '8500002';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][14] = '8600000';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][15] = '8800006';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][16] = '8900004';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][17] = '9100009';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][18] = '9200007';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][2][19] = '9400003';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][3][0] = '6100002';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][3][1] = '6300008';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][3][2] = '6900006';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][3][3] = '6800008';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][3][4] = '6700000';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][3][5] = '6600002';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][3][6] = '6800010';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][3][7] = '6200000';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][3][8] = '6400006';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][3][9] = '6800001';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][3][10] = '6800002';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][0] = '6500004';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][1] = '3800001';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][2] = '1100007';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][3] = '1200005';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][4] = '1300003';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][5] = '1400001';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][6] = '2000008';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][7] = '2100006';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][8] = '2200004';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][9] = '2400000';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][10] = '2500008';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][11] = '2700004';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][12] = '3300001';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][13] = '3200003';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][14] = '3500007';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][15] = '3600005';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][16] = '3700003';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][17] = '5000005';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][18] = '2300002';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][19] = '2600006';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][20] = '2800002';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][21] = '2900000';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][22] = '3000007';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][23] = '3400009';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][24] = '3900009';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][4][25] = '3100005';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][5][0] = '7600001';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][5][1] = '7400005';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][5][2] = '7500003';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][5][3] = '7100001';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][5][4] = '7200009';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][5][5] = '7300007';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][6][0] = '4100004';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][6][1] = '8300006';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][7][0] = '9999999';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][8][0] = '8200008';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][8][1] = '8100000';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][8][2] = '9503005';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][9][0] = '9506009';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][9][1] = '9900904';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][9][2] = '9900905';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][9][3] = '9900906';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][9][4] = '9900907';
+$dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['values'][''][0] = '';
+$dictionary['Account']['fields']['sectoreconomico_c']['full_text_search']['boost'] = 1;
 
- ?>

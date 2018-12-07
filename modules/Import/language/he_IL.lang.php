@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'עמודות רבות הוגדרו עם אותו שם שדה.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'שדות חובה חסרים:',
     'ERR_MISSING_MAP_NAME' => 'חסר שם מיפוי מותאם אישית',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'יבוא המשתמשים אינו זמין במצב IDM.',
     'ERR_SELECT_FULL_NAME' => 'אתה לא יכול לבחור שם מלא כאשר שם פרטי ושם משפחה נבחרו.',
     'ERR_SELECT_FILE' => 'בחר קובץ להעלאה.',
     'LBL_SELECT_FILE' => 'בחר קובץ:',

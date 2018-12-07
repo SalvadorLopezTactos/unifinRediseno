@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Više je stupaca definirano s istim nazivom polja.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Nedostaju obavezna polja:',
     'ERR_MISSING_MAP_NAME' => 'Nedostaje naziv prilagođenog mapiranja',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Uvoz korisnika onemogućen je za IDM način rada.',
     'ERR_SELECT_FULL_NAME' => 'Ne možete odabrati Puno ime kad su odabrani Ime i Prezime.',
     'ERR_SELECT_FILE' => 'Odaberite datoteku koju želite učitati.',
     'LBL_SELECT_FILE' => 'Odaberite datoteku:',

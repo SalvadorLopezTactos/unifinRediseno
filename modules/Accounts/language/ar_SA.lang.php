@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'عروض الأسعار (شحن إلى)',
 	'LNK_ACCOUNT_REPORTS' => 'عرض تقارير الحساب',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'المستندات',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'لوحة معلومات قائمة الحسابات',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'لوحة معلومات سجل الحسابات',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'المخططات',
 	'LBL_DEFAULT' => 'طرق العرض',

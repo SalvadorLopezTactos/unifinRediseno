@@ -49,6 +49,7 @@
                 forceSSL: true,
             });
             ga('create', id, options.gaOptions);
+            this.enableIPAnonymization();
             optOut = options.optOut;
             if (optOut) {
                 window['ga-disable-' + id] = true;
@@ -86,6 +87,17 @@
          */
         set: function(key, value) {
             ga('set', key, value);
+        },
+
+        /**
+         * Enable IP anonymization on tracker.
+         *
+         * The last octet of client's (sender) IPv4 will be set to 0 (or the
+         * last 80 bits of IPv6 will be set to 0)
+         * Reference: https://support.google.com/analytics/answer/2763052
+         */
+        enableIPAnonymization: function() {
+            this.set('anonymizeIp', true);
         }
     };
 })(SUGAR.App);

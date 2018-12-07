@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Інформаційна панель списку списків цільових аудиторій споживачів',
+
   'LBL_MODULE_NAME' => 'Списки цільових аудиторій споживачів',
   'LBL_MODULE_NAME_SINGULAR' => 'Список цільових аудиторій споживачів',
   'LBL_MODULE_ID'   => 'Списки цільових аудиторій споживачів',

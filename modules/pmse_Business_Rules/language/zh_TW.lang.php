@@ -12,8 +12,7 @@
 
 
 $mod_strings = array (
-
-  'LBL_MODULE_NAME' => '流程商務規則',
+  'LBL_MODULE_NAME' => '處理程序商務規則',
   'LBL_MODULE_TITLE' => '流程商務規則',
   'LBL_MODULE_NAME_SINGULAR' => '流程商務規則',
 
@@ -28,9 +27,9 @@ $mod_strings = array (
   'LBL_RST_CREATE_DATE' => '商務規則建立日期',
   'LBL_RST_UPDATE_DATE' => '商務規則更新日期',
 
-    'LNK_LIST' => '檢視流程商務規則',
-    'LNK_NEW_PMSE_BUSINESS_RULES' => '建立流程商務規則',
-    'LNK_IMPORT_PMSE_BUSINESS_RULES' => '匯入流程商務規則',
+    'LNK_LIST' => '檢視處理程序商務規則',
+    'LNK_NEW_PMSE_BUSINESS_RULES' => '建立處理程序商務規則',
+    'LNK_IMPORT_PMSE_BUSINESS_RULES' => '匯入處理程序商務規則',
 
     'LBL_PMSE_TITLE_BUSINESS_RULES_BUILDER' => '商務規則建立器',
 
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => '條件',
     'LBL_PMSE_LABEL_RETURN' => '返回',
     'LBL_PMSE_LABEL_CONCLUSIONS' => '結論',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => '更改欄位',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => '回傳值',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => '新增條件',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => '新增結論',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => '新增列',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => '移除欄',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => '刪除條件',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => '刪除結論',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => '刪除列數據',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => '是',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => '否',

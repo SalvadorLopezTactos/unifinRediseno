@@ -54,7 +54,7 @@ $mod_strings = array (
   'LBL_MANUFACTURER_NAME'=>'Nome do fabricante:',
   'LBL_MANUFACTURER' => 'Fabricante:',
   'LBL_MFT_PART_NUM' => 'Número da peça:',
-  'LBL_MODULE_NAME' => 'Catálogo de Produtos',
+  'LBL_MODULE_NAME' => 'Catálogo de produtos',
   'LBL_MODULE_NAME_SINGULAR' => 'Catálogo de Produto',
   'LBL_MODULE_ID' => 'Modelos de Produtos',
   'LBL_MODULE_TITLE' => 'Catálogo de Produtos: Tela Principal',
@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => 'Transportadoras',
   'LNK_PRODUCT_LIST' => 'Visualizar Catálogo de Produto',
   'NTC_DELETE_CONFIRMATION' => 'Tem certeza de que deseja excluir este registro?',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => 'Adicionar',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Nome de usuário atribuído',

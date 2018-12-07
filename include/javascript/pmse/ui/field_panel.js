@@ -8,12 +8,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 var FieldPanel = function (settings) {
-    Element.call(this, settings);
+    PMSE.Element.call(this, settings);
     this._open = null;
     this._massiveAction = false;
     this._onItemValueAction = null;
-    this._items = new ArrayList();
+    this._items = new PMSE.ArrayList();
     this._open = false;
     this._owner = null;
     this._matchOwnerWidth = true;
@@ -22,12 +24,14 @@ var FieldPanel = function (settings) {
     this._attachedListeners = false;
     this._className = null;
     this._context = null;
+    this._useOffsetLeft = false;
+    this._offsetLeft = 0;
     this.onOpen = null;
     this.onClose = null;
     FieldPanel.prototype.init.call(this, settings);
 };
 
-FieldPanel.prototype = new Element();
+FieldPanel.prototype = new PMSE.Element();
 FieldPanel.prototype.constructor = FieldPanel;
 
 FieldPanel.prototype.init = function (settings) {
@@ -42,7 +46,8 @@ FieldPanel.prototype.init = function (settings) {
         className: "",
         context: document.body,
         onOpen: null,
-        onClose: null
+        onClose: null,
+        useOffsetLeft: false
     };
 
     jQuery.extend(true, defaults, settings);
@@ -54,6 +59,7 @@ FieldPanel.prototype.init = function (settings) {
         .setOnItemValueActionHandler(defaults.onItemValueAction)
         .setAlignWithOwner(defaults.alignWithOwner)
         .setClassName(defaults.className)
+        .setUseOffsetLeft(defaults.useOffsetLeft)
         ._setContext(defaults.context);
 
     if (defaults.open) {
@@ -64,6 +70,24 @@ FieldPanel.prototype.init = function (settings) {
 
     this.setOnOpenHandler(defaults.onOpen)
         .setOnCloseHandler(defaults.onClose);
+};
+
+/**
+ * Sets the left offset value to use when needed
+ * @param {integer} offsetLeft pixel measurement of the left offset when needed
+ */
+FieldPanel.prototype.setOffsetLeft = function(offsetLeft) {
+    this._offsetLeft = offsetLeft;
+    return this;
+};
+
+/**
+ * Sets the flag on whether to use a left offset when rendering the field panel
+ * @param {boolean} useOffsetLeft
+ */
+FieldPanel.prototype.setUseOffsetLeft = function(useOffsetLeft) {
+    this._useOffsetLeft = useOffsetLeft;
+    return this;
 };
 
 FieldPanel.prototype._setContext = function (context) {
@@ -128,8 +152,8 @@ FieldPanel.prototype.setMatchOwnerWidth = function (match) {
 };
 
 FieldPanel.prototype.setAppendTo = function (appendTo) {
-    if (!(isHTMLElement(appendTo) || typeof appendTo === 'function' || appendTo instanceof Base)) {
-        throw new Error("setAppendTo(): The parameter must be an HTML element or an instance of Base.");
+    if (!(isHTMLElement(appendTo) || typeof appendTo === 'function' || appendTo instanceof PMSE.Base)) {
+        throw new Error("setAppendTo(): The parameter must be an HTML element or an instance of PMSE.Base.");
     }
     this._appendTo = appendTo;
     if (this.isOpen()) {
@@ -139,7 +163,7 @@ FieldPanel.prototype.setAppendTo = function (appendTo) {
 };
 
 FieldPanel.prototype.setWidth = function (w) {
-    Element.prototype.setWidth.call(this, w);
+    PMSE.Element.prototype.setWidth.call(this, w);
     if (this.html && typeof w === "number") {
         this.style.addProperties({"min-width": this.width});
     }
@@ -226,7 +250,13 @@ FieldPanel.prototype._append = function () {
         this.setWidth(this._matchOwnerWidth ? owner.offsetWidth : this.width);
         position = getRelativePosition(owner, appendTo);
         if (this._alignWithOwner === 'right') {
-            position.left -= this.width - owner.offsetWidth;
+            // In some cases, a right alignment means an offset jog instead of a
+            // full movement by the width of the element
+            if (this._useOffsetLeft) {
+                position.left -= this._offsetLeft;
+            } else {
+                position.left -= this.width - owner.offsetWidth;
+            }
         }
     } else {
         this.setWidth(this.width);
@@ -237,8 +267,8 @@ FieldPanel.prototype._append = function () {
 };
 
 FieldPanel.prototype.setOwner = function (owner) {
-    if(!(owner === null || owner instanceof Element || isHTMLElement(owner))) {
-        throw new Error("setOwner(): The parameter must be an instance of Element or null.");
+    if(!(owner === null || owner instanceof PMSE.Element || isHTMLElement(owner))) {
+        throw new Error("setOwner(): The parameter must be an instance of PMSE.Element or null.");
     }
 
     this._owner = owner;
@@ -347,7 +377,7 @@ FieldPanel.prototype.attachListeners = function () {
 
 FieldPanel.prototype.createHTML = function () {
     if(!this.html) {
-        Element.prototype.createHTML.call(this);
+        PMSE.Element.prototype.createHTML.call(this);
         this.html.className = 'adam field-panel';
         this._paintItems();
 

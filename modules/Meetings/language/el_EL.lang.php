@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Συναντήσεων',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Συναντήσεων',
+
 	'ERR_DELETE_RECORD' => 'Πρέπει να προσδιορίσετε αριθμό εγγραφής για να διαγράψετε αυτήν την Συνάντηση.',
 	'LBL_ACCEPT_THIS'=>'Αποδοχή;',
 	'LBL_ADD_BUTTON'=> 'Προσθήκη',
@@ -73,7 +77,7 @@ $mod_strings = array (
 	'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Αποστολή Email υπενθύμισης σε όλους τους προσκεκλημένους',
     'LBL_POPUP_REMINDER' => 'Popup Υπενθύμιση',
-    'LBL_POPUP_REMINDER_TIME' => 'Ώρα υπενθύμισης αναδυόμενου',
+    'LBL_POPUP_REMINDER_TIME' => 'Αναδυόμενο ώρας υπενθύμισης',
     'LBL_EMAIL_REMINDER' => 'Email Υπενθύμισης',
     'LBL_EMAIL_REMINDER_TIME' => 'Ώρα υπενθύμισης ηλεκτρονικού ταχυδρομείου',
     'LBL_REMOVE' => 'αφαίρ.',

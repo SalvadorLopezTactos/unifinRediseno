@@ -9,8 +9,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
+const devMode = process.env.DEV;
 
 module.exports = {
     devtool: 'source-map',
@@ -22,45 +23,47 @@ module.exports = {
     },
 
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
                 exclude: /(node_modules|lib)/,
-                loader: 'babel',
-                query: {
-                    presets: ['es2015']
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015'],
+                    },
                 },
             },
         ],
     },
 
     output: {
-        path: __dirname + '/minified',
+        path: path.resolve(__dirname, 'minified'),
         filename: '[name].min.js',
         sourceMapFilename: '[name].min.js.map',
+
         // map the path correctly to avoid being inside of webpack://
-        devtoolModuleFilenameTemplate: "sidecar:///[resourcePath]",
-        devtoolFallbackModuleFilenameTemplate: "sidecar:///[resourcePath]?[hash]",
+        devtoolModuleFilenameTemplate: 'sidecar:///[resourcePath]',
+        devtoolFallbackModuleFilenameTemplate: 'sidecar:///[resourcePath]?[hash]',
     },
 
     plugins: [
+        new webpack.DefinePlugin({
+            ZEPTO: JSON.stringify(false),
+        }),
+
         new webpack.optimize.UglifyJsPlugin({
-            compress: false, // FIXME SC-4953 - compressor disabled for now for performance reasons
-            mangle: false, // Do not disable - without this, source maps break
+            compress: !devMode,
+            mangle: devMode ? false : true,
+            sourceMap: true,
         }),
     ],
 
     resolve: {
-        root: [
-            path.resolve(__dirname, 'src'),
-            path.resolve(__dirname, 'lib'),
-            path.resolve(__dirname, 'node_modules')
-        ],
-        modulesDirectories: [
-            'node_modules'
-        ],
-        extensions: [
-            '', '.js', '.json'
+        modules: [
+            path.join(__dirname, 'src'),
+            path.join(__dirname, 'lib'),
+            path.join(__dirname, 'node_modules'),
         ],
     },
-}
+};

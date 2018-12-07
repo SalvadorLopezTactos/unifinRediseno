@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'דואר אלקטרוני',
     'db_email2' => 'כתובות דואר אלקטרוני נוספות',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת אנשי קשר',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת אנשי קשר',
+
     'LNK_CONTACT_REPORTS' => 'צפה בדוחות על אנשי קשר',
     'ERR_DELETE_RECORD' => 'Specify the record number to delete the contact.',
     'LBL_ACCOUNT_ID' => 'זהות חשבון:',
@@ -36,7 +40,7 @@ $mod_strings = array (
     'LBL_ALT_ADDRESS_STREET' => 'רחוב משני:',
     'LBL_ALTERNATE_ADDRESS' => 'כתובת אחרת:',
     'LBL_ANY_ADDRESS' => 'כל כתובת:',
-    'LBL_ANY_EMAIL' => 'דואר אלקטרוני כלשהו:',
+    'LBL_ANY_EMAIL' => 'דוא"ל:',
     'LBL_ANY_PHONE' => 'טלפון כלשהו:',
     'LBL_ASSIGNED_TO_NAME' => 'הוקצה עבורAssigned to:',
     'LBL_ASSIGNED_TO_ID' => 'משתמש שהוקצה',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'העתק כתובת משית לראשית',
     'NTC_COPY_PRIMARY_ADDRESS' => 'העתק כתובת משנית לראשית',
     'NTC_DELETE_CONFIRMATION' => 'אתה בטוח בשברצונך למחוק רשומה זו?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Creating an opportunity requires an account.\n Please either create a new account or select an existing one.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Creating an opportunity requires an account.\\n Please either create a new account or select an existing one.',
     'NTC_REMOVE_CONFIRMATION' => 'Are you sure you want to remove this contact from the case?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'אתה בטוח שברצונך להסיר רשומה זו כדוח ישיר?',
 
@@ -267,4 +271,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'ציון ליד',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'דוחות של אנשי קשר',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'הסכמה למטרות עסקיות עבור',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'ההסכמה עודכנה לאחרונה בתאריך',
 );

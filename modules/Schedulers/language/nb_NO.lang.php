@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Oppdater KBContent-artikler.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publiser godkjente artikler og KB-artikler som utløper.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Gjenoppbygg demormaliserte sikkerhetsdata for team',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch Queue Scheduler',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Fjern filer av diagnostikkverktøy',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Fjern midlertidige filer',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Gjenoppbygg demormaliserte sikkerhetsdata for team',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Kjør nattlige masseutsendelser av e-post-kampanje',
 'LBL_ASYNCMASSUPDATE' => 'Utfør asynkrone masseoppdateringer',

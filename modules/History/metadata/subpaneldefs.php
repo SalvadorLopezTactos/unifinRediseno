@@ -135,7 +135,7 @@ $layout_defs['History'] = array(
 		 		 		'width' => '4%',
 					),
 				),
-				'where' => "(emails.status='sent')",
+                'where' => "(emails.state='Archived')",
 				'order_by' => 'emails.date_modified',
 			),
 			'Notes' => array(
@@ -312,4 +312,3 @@ $layout_defs['History'] = array(
 		),
 	),
 );
-?>

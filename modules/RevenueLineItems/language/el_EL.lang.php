@@ -11,8 +11,12 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Γραμμής Εσόδων Στοιχείων',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Γραμμής Εσόδων Στοιχείων',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Εκστρατεία Προϊόντος',
-    'LBL_MODULE_NAME' => 'Γραμμή Εσόδων',
+    'LBL_MODULE_NAME' => 'Στοιχεία γραμμής εσόδων',
     'LBL_MODULE_NAME_SINGULAR' => 'Γραμμή Εσόδων',
     'LBL_MODULE_TITLE' => 'Γραμμή Εσόδων: Αρχή',
     'LBL_SEARCH_FORM_TITLE' => 'Γραμμή Εσόδων, Αναζήτηση',
@@ -196,7 +200,7 @@ $mod_strings = array(
  - Κάντε κλικ στην επιλογή "Εμφάνιση Περισσότερων" για να εμφανιστούν πρόσθετα πεδία, εάν είναι απαραίτητο.
 2. Κάντε κλικ στην επιλογή "Αποθήκευση" για να οριστικοποιήσετε τη νέα εγγραφή και να επιστρέψετε στην προηγούμενη σελίδα.',
 
-    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => 'Γραμμή Ειδών 10 Κορυφαίων Εσόδων από Πωλήσεις',
+    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => 'Κορυφαία 10 στοιχεία γραμμής εσόδων από πωλήσεις',
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Εμφανίζει τα 10 καλύτερα Έσοδα στη Γραμμή Ειδών σε γράφημα φυσαλίδας.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Γραμμή Εσόδων, Δικά Μου',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Γραμμή Εσόδων Ειδών, Ομάδας Μου",

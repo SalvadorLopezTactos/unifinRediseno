@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Servidor Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Elements de subplafó per pàgina (Mòbil)',
 	'LOG_MEMORY_USAGE'=>'Registrar utilització de memòria',
-	'LOG_SLOW_QUERIES'=>'Registrar consultes lentas',
+    'LOG_SLOW_QUERIES' => 'Registrar consultes lentas',
     'LOCK_HOMEPAGE_HELP'=>'Aquesta opció serveix per <BR> 1) la creació de noves pàgines d´inici en el mòdul Inici, i <BR>2) la personalització de la ubicació del dashlet en les pàgines d´inici usant arrosegar i soltar.',
     'CURRENT_LOGO'=>'Logo actual',
     'CURRENT_LOGO_HELP'=>'Aquest logo es mostra a la cantonada superior esquerra de l&#39;aplicació Sugar.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Aquest és el nom mostrat a la barra de títol del seu navegador.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Activar/desactivar emails de contactes relacionats (o linkats) per mostrar en el subpanel d&#39;emails.',
 
-    'LBL_OC_STATUS'                     => 'Estat per defecte de Client Desconectat:',
-    'DEFAULT_OC_STATUS'                 => 'Habilitar Client Desconectat per defecte',
-    'LBL_OC_STATUS_DESC' => 'Aquí pot comprovar si desitja que qualsevol usuari pugui tenir accés a un Client Desconnectat. En un altre cas, pot configurar l´acess a nivell d´usuari.',
     'SESSION_TIMEOUT' => 'Caducitat de la Sessió del Portal',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'El temps d&#39;espera de sessió del portal és disponible per Sugar Portal 6.5 i les versions anteriors.',
     'UPLOAD_MAXSIZE_UNITS' => 'bytes',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'L&#39;URL d&#39;inici de sessió a SAML no pot esta buida',
     'ERR_EMPTY_SAML_CERT' => 'El certificat de SAML no pot estar buit',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'L&#39;ID de SAML no pot estar buit',
     'ERR_SAML_LOGIN_URL' => 'L&#39;URL d&#39;inici de sessió a SAML no és vàlida',
     'ERR_SAML_SLO_URL' => 'L&#39;URL d&#39;SSO a SAML no és vàlida',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'L&#39;arxiu PEM hauria de contenir clau privada',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'L&#39;arxiu PEM hauria de contenir un certificat x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'El certificat x.509 proporcionat no coincideix amb la clau privada',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Seqüències d&#39;activitats',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Habilita les seqüències d&#39;activitats',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Activa les seqüències d&#39;activitats per a les aplicación',
 );
 
 

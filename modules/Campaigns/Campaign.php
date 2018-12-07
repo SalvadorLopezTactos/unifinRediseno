@@ -97,11 +97,12 @@ class Campaign extends SugarBean {
 	function clear_campaign_prospect_list_relationship($campaign_id, $prospect_list_id='')
 	{
 		if(!empty($prospect_list_id))
-			$prospect_clause = " and prospect_list_id = '$prospect_list_id' ";
+            $prospect_clause = " and prospect_list_id = " . $this->db->quoted($prospect_list_id);
 		else
 			$prospect_clause = '';
 
-		$query = "DELETE FROM $this->rel_prospect_list_table WHERE campaign_id='$campaign_id' AND deleted = '0' " . $prospect_clause;
+        $query = "DELETE FROM $this->rel_prospect_list_table WHERE campaign_id = " . $this->db->quoted($campaign_id) .
+            " AND deleted = 0 " . $prospect_clause;
 	 	$this->db->query($query, true, "Error clearing campaign to prospect_list relationship: ");
 	}
 
@@ -112,17 +113,6 @@ class Campaign extends SugarBean {
 		$this->clear_campaign_prospect_list_relationship($id);
         parent::mark_relationships_deleted($id);
 	}
-
-	function fill_in_additional_list_fields()
-	{
-		parent::fill_in_additional_list_fields();
-	}
-
-	function fill_in_additional_detail_fields()
-	{
-        parent::fill_in_additional_detail_fields();
-	}
-
 
 	function update_currency_id($fromid, $toid){
 	}

@@ -11,7 +11,11 @@
  */
 
 $mod_strings = array (
-  'LBL_MODULE_NAME' => 'Pogreške',
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Nadzorna ploča za popis pogrešaka',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o pogreškama',
+
+  'LBL_MODULE_NAME' => 'pogreške',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Pogreška',
   'LBL_MODULE_TITLE' => 'Pratitelj pogrešaka: Poč. stranica',
   'LBL_MODULE_ID' => 'Pogreške',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Slučajevi',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projekti',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenti',
-  'LBL_SYSTEM_ID' => 'ID sustava',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Dodijeljeni korisnik',
 	'LBL_ASSIGNED_TO_NAME' => 'Dodijeljeno',
 

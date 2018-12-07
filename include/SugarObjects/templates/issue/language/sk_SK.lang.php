@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => 'Naposledy upravil:',
   'LBL_ASSIGNED_USER' => 'Priradený používateľ:',
   'LBL_ASSIGNED_USER_NAME' => 'Pridelený k',
-  'LBL_SYSTEM_ID' =>'ID systému:',
   'LBL_TEAM_NAME' =>'Názov tímu:',
   'LBL_TYPE'=>'Typ:',
   'LBL_SUBJECT' => 'Predmet:',

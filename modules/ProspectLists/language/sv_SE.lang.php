@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Instrumentpanel med lista över mållistor',
+
   'LBL_MODULE_NAME' => 'Targetlistor',
   'LBL_MODULE_NAME_SINGULAR' => 'Target List',
   'LBL_MODULE_ID'   => 'Prospekt listor',

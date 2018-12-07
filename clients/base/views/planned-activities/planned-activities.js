@@ -292,11 +292,11 @@
      */
     _getFilters: function(index) {
 
-        var today = app.date().format('YYYY-MM-DD'),
-            tab = this.tabs[index],
-            filter = {},
-            filters = [],
-            defaultFilters = {
+        var today = app.date().formatServer(true);
+        var tab = this.tabs[index];
+        var filter = {};
+        var filters = [];
+        var defaultFilters = {
                 today: {$lte: today},
                 future: {$gt: today}
             };

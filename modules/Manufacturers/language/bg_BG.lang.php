@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Трябва да определите номер на записа, за да изтриете този производител.',
   'NTC_STATUS' => 'Изберете статус НЕАКТИВЕН, за да премахнете този производител от списъка',
   'NTC_LIST_ORDER' => 'Определете поредността на този производител в списъка с производители',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Активен',
-    'Inactive' => 'Неактивен',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Импортиране на производители',
 	'LBL_EDITLAYOUT' => 'Редактиране на подредби' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Приходни позиции',

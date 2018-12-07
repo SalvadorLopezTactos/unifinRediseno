@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'Lietotāja paraksti',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'Lietotāja paraksts',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Parakstam nepieciešams vārds.',
-    'LBL_SIGNATURE_NAME'         => 'Vārds',
-    'LBL_SIGNATURE'              => 'Paraksts',
-    'LBL_SIGNATURE_HTML'         => 'HTML paraksts',
-    'LBL_SIGNATURE_DEFAULT'      => 'Lietot parakstu?',
-    'LBL_SIGNATURE_PREPEND'      => 'Paraksts virs atbildes?',
-    'LBL_SIGNATURES'             => 'Paraksti',
+    'LBL_DEFAULT_SIGNATURE' => 'Pēc noklusējuma',
+    'LBL_MODULE_NAME' => 'E-pasta paraksti',
+    'LBL_MODULE_NAME_SINGULAR' => 'E-pasta paraksts',
+    'LBL_SIGNATURE_NAME' => 'Vārds',
+    'LBL_SIGNATURE' => 'Paraksts',
+    'LBL_SIGNATURE_HTML' => 'HTML paraksts',
+    'LBL_SIGNATURE_DEFAULT' => 'Lietot parakstu?',
+    'LBL_SIGNATURE_PREPEND' => 'Paraksts virs atbildes?',
+    'LBL_SIGNATURES' => 'Paraksti',
 );

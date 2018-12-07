@@ -14,7 +14,8 @@
 
 /**
  * This file is where the user authentication occurs. No redirection should happen in this file.
- *
+ * @deprecated Will be removed in 7.11. IDM-46
+ * @deprecated Please use new idM Mango library Glue \IdMSugarAuthenticate
  */
 class SugarAuthenticateUser{
 
@@ -66,6 +67,13 @@ class SugarAuthenticateUser{
      */
     public function loadUserOnLogin($name, $password, $fallback = false, array $params = array())
     {
+        global $log;
+        $log->deprecated(sprintf(
+            'The %s in %s was called. Please see \IdMSugarAuthenticate',
+            __METHOD__,
+            __CLASS__
+        ));
+
         $passwordEncrypted = false;
         if (empty($name) && empty($password) && !empty($_REQUEST['MSID'])) {
             $user_id = $this->checkForSeamlessLogin($_REQUEST['MSID']);

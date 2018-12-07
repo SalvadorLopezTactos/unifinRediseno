@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'URL-ul prestabilit',
 	'COLUMN_TITLE_AUDIT' =>'Bilant',
+    'COLUMN_TITLE_PII' => 'Informații personale',
     'COLUMN_TITLE_FTS' =>'Cautare full text',
     'COLUMN_TITLE_FTS_BOOST' => 'Amplificare valoare',
 	'COLUMN_TITLE_REPORTABLE' => 'Raportabil',

@@ -10,15 +10,19 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Paneli i listës së thirrjeve',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të thirrjeve',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Thirrjet',
-    'LBL_MODULE_NAME_SINGULAR'	=> 'Telefoni',
+    'LBL_MODULE_NAME_SINGULAR'	=> 'Thirrje',
     'LBL_MODULE_TITLE' => 'Thirrjet: Ballina',
     'LBL_SEARCH_FORM_TITLE' => 'Kërkimi i thirrjeve',
     'LBL_LIST_FORM_TITLE' => 'Lista e thirrjeve',
     'LBL_NEW_FORM_TITLE' => 'Krijo takim',
     'LBL_LIST_CLOSE' => 'Mbyll',
-    'LBL_LIST_SUBJECT' => 'Subjekti (Tema)',
+    'LBL_LIST_SUBJECT' => 'Subjekti',
     'LBL_LIST_CONTACT' => 'Kontakt',
     'LBL_LIST_RELATED_TO' => 'Në lidhje me',
     'LBL_LIST_RELATED_TO_ID' => 'Në lidhje me ID',
@@ -65,8 +69,8 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'Email',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'Dërgoni një email të gjithë ftuarit',
     'LBL_EMAIL_REMINDER' => 'Përkujtuesi i Emailit',
-    'LBL_EMAIL_REMINDER_TIME' => 'Ora e rikujtesës me email',
-    'LBL_POPUP_REMINDER_TIME' => 'Ora e shfaqjes së rikujtesës',
+    'LBL_EMAIL_REMINDER_TIME' => 'Koha e rikujtesës me email',
+    'LBL_POPUP_REMINDER_TIME' => 'Koha e shfaqjes së rikujtesës',
     'LBL_SEND_BUTTON_TITLE'=>'Dërgo ftesat [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',
     'LBL_SEND_BUTTON_LABEL'=>'Dërgo ftesat',
@@ -91,7 +95,7 @@ $mod_strings = array (
     'LBL_HISTORY_SUBPANEL_TITLE' => 'Shënimet',
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Drejtuar',
     'LBL_LIST_MY_CALLS' => 'Thirrjet e mia',
-    'LBL_MY_SCHEDULED_CALLS' => 'Telefonatat e mia te skeduluara',
+    'LBL_MY_SCHEDULED_CALLS' => 'Thirrjet e mia të programuara',
     'LBL_SELECT_FROM_DROPDOWN' => 'Ju lutemi selektoni një nga Në lidhje me në listën e parë të poshtme',
 	'LBL_ASSIGNED_TO_NAME' => 'Drejtuar',
 	'LBL_ASSIGNED_TO_ID' => 'Përdorues i caktuar',

@@ -13,6 +13,7 @@
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Query\Aggregation;
 
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
+use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Property\MultiFieldProperty;
 
 /**
  *
@@ -78,8 +79,9 @@ abstract class AbstractAggregation implements AggregationInterface
      */
     public function buildMapping(Mapping $mapping, $field, array $defs)
     {
-        // apply not analyzed value by default
-        $mapping->addNotAnalyzedField($field);
+        $property = new MultiFieldProperty();
+        $property->setType('keyword');
+        $mapping->addCommonField($field, 'agg', $property);
     }
 
     /**
@@ -122,12 +124,12 @@ abstract class AbstractAggregation implements AggregationInterface
 
     /**
      * Build boolean filter for given filters
-     * @param \Elastica\Filter\AbstractFilter[] $filters
-     * @return \Elastica\Filter\BoolFilter
+     * @param \Elastica\Query\AbstractQuery[] $filters
+     * @return \Elastica\Query\BoolQuery
      */
     protected function buildFilters(array $filters)
     {
-        $result = new \Elastica\Filter\BoolFilter();
+        $result = new \Elastica\Query\BoolQuery();
         foreach ($filters as $filter) {
             $result->addMust($filter);
         }

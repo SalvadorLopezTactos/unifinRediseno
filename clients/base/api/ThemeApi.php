@@ -72,7 +72,7 @@ class ThemeApi extends SugarApi
 
         $theme = new SidecarTheme($platform, $themeName);
         // Otherwise we just return the CSS Url so the application can load the CSS file.
-        // getCSSURL method takes of generating bootstrap.css if it doesn't exist in cache.
+        // getCSSURL method takes care of generating CSS file(s) if it doesn't exist in cache.
         return array("url" => array_values($theme->getCSSURL()));
     }
 
@@ -169,7 +169,7 @@ class ThemeApi extends SugarApi
             $theme->saveThemeVariables();
         }
 
-        // saves the bootstrap.css URL in the portal settings
+        // saves the CSS file URL in the portal settings
         $urls = $theme->getCSSURL();
         foreach ($urls as $key => $url) {
             $urls[$key] = $GLOBALS['sugar_config']['site_url'] . '/' . $url;

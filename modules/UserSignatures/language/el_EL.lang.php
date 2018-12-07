@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'Υπογραφές Χειριστή',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'Υπογραφή Χειριστή',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Αυτή η υπογραφή απαιτεί ένα όνομα.',
-    'LBL_SIGNATURE_NAME'         => 'Όνομα',
-    'LBL_SIGNATURE'              => 'Υπογραφή',
-    'LBL_SIGNATURE_HTML'         => 'Υπογραφή HTML',
-    'LBL_SIGNATURE_DEFAULT'      => 'Χρήση υπογραφής;',
-    'LBL_SIGNATURE_PREPEND'      => 'Υπογραφή στην απάντηση;',
-    'LBL_SIGNATURES'             => 'Υπογραφές',
+    'LBL_DEFAULT_SIGNATURE' => 'Προεπιλογή',
+    'LBL_MODULE_NAME' => 'Υπογραφές Email',
+    'LBL_MODULE_NAME_SINGULAR' => 'Υπογραφή Email',
+    'LBL_SIGNATURE_NAME' => 'Όνομα',
+    'LBL_SIGNATURE' => 'Υπογραφή',
+    'LBL_SIGNATURE_HTML' => 'Υπογραφή HTML',
+    'LBL_SIGNATURE_DEFAULT' => 'Χρήση υπογραφής;',
+    'LBL_SIGNATURE_PREPEND' => 'Υπογραφή στην απάντηση;',
+    'LBL_SIGNATURES' => 'Υπογραφές',
 );

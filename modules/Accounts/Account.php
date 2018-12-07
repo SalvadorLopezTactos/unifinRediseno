@@ -145,46 +145,6 @@ class Account extends Company {
 		$this->db->query($query,true,"Error clearing account to case relationship: ");
 	}
 
-	/**
-	* This method is used to provide backward compatibility with old data that was prefixed with http://
-	* We now automatically prefix http://
-	* @deprecated.
- 	*/
-    public function remove_redundant_http()
-    {
-    }
-
-	function fill_in_additional_detail_fields()
-	{
-        parent::fill_in_additional_detail_fields();
-
-        //rrs bug: 28184 - instead of removing this code altogether just adding this check to ensure that if the parent_name
-        //is empty then go ahead and fill it.
-        if(empty($this->parent_name) && !empty($this->id)){
-			$query = "SELECT a1.name from accounts a1, accounts a2 where a1.id = a2.parent_id and a2.id = '$this->id' and a1.deleted=0";
-			$row = $this->db->fetchOne($query,true," Error filling in additional detail fields: ");
-
-			if($row != null)
-			{
-				$this->parent_name = $row['name'];
-			}
-			else
-			{
-				$this->parent_name = '';
-			}
-        }
-
-
-        // Set campaign name if there is a campaign id
-		if(!empty($this->campaign_id)) {
-            $camp = BeanFactory::getBean("Campaigns", $this->campaign_id);
-            if(!empty($camp)) {
-                $this->campaign_name = $camp->name;
-            }
-		}
-
-	}
-
 	function get_list_view_data(){
 
 		$temp_array = parent::get_list_view_data();

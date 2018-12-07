@@ -324,7 +324,7 @@ class ConnectorUtils
             $directory = self::$sourcePaths['base'];
         }
 
-        if (SugarAutoLoader::fileExists($directory)) {
+        if (file_exists($directory)) {
             $files = findAllFiles($directory, array(), false, 'config\.php');
             $start = strrpos($directory, '/') == strlen($directory)-1 ? strlen($directory) : strlen($directory) + 1;
             $sources = array();
@@ -394,7 +394,7 @@ class ConnectorUtils
      */
     public static function getDisplayConfig($refresh = false)
     {
-        if(!SugarAutoLoader::fileExists(CONNECTOR_DISPLAY_CONFIG_FILE) || $refresh) {
+        if (!file_exists(CONNECTOR_DISPLAY_CONFIG_FILE) || $refresh) {
             $sources = self::getConnectors();
             $modules_sources = array();
 

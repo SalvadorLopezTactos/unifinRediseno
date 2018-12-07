@@ -11,6 +11,8 @@
  */
 $dictionary['UserSignature'] = array(
     'table' => 'users_signatures',
+    'hidden_to_role_assignment' => true,
+    'favorites' => false,
     'fields' => array(
         'user_id' => array(
             'name' => 'user_id',
@@ -43,6 +45,15 @@ $dictionary['UserSignature'] = array(
             'type' => 'text',
             'reportable' => false,
         ),
+        'is_default' => array(
+            'name' => 'is_default',
+            'vname' => 'LBL_DEFAULT_SIGNATURE',
+            'type' => 'bool',
+            'sortable' => false,
+            'source' => 'non-db',
+            'duplicate_on_record_copy' => 'no',
+            'massupdate' => false,
+        ),
     ),
     'indices' => array(
         array(
@@ -56,5 +67,6 @@ $dictionary['UserSignature'] = array(
             'fields' => array('created_by'),
         ),
     ),
+    'visibility' => array('OwnerVisibility' => true),
 );
 VardefManager::createVardef('UserSignatures', 'UserSignature', array('default'));

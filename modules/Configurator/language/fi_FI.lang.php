@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus -palvelin',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Alapaneelin kohteita per sivu',
 	'LOG_MEMORY_USAGE'=>'Kirjaa muistin käyttö',
-	'LOG_SLOW_QUERIES'=>'Kirjaa hitaat kyselyt',
+    'LOG_SLOW_QUERIES' => 'Kirjaa hitaat kyselyt',
     'LOCK_HOMEPAGE_HELP'=>'Tällä asetuksella ehkäistään<ol><li>dashletien lisäämisen etusivulle,</li><li>dashletien sijoittelun räätälöinnin etusivulla vetämällä ja pudottamalla.</li></ol>',
     'CURRENT_LOGO'=>'Nykyinen logo:',
     'CURRENT_LOGO_HELP'=>'Tämä logo näkyy Sugarin alapalkin vasemmassa reunassa.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Tämä on nimi, joka näkyy selaimen otsikkorivillä.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Ota tai poista käytöstä sähköpostit liittyviltä (tai linkitetyiltä) kontakteilta. Sähköpostit näkyvät Sähköpostit-alipaneelissa.',
 
-    'LBL_OC_STATUS'                     => 'Offline clientin oletusstatus',
-    'DEFAULT_OC_STATUS'                 => 'Salli offline client oletuksena',
-    'LBL_OC_STATUS_DESC' => 'Valitse tämä jos haluat kaikkien käyttäjien käyttää offline clientia. Muuten voit konfiguroida pääsyn offline clienteihin käyttäjäkohtaisesti.',
     'SESSION_TIMEOUT' => 'Portaali-istunnon aikakatkaisu',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Portal-session timeout on Sugar Portalin legacy-versioille, saatavilla 6.5:ssä ja vanhemmissa.',
     'UPLOAD_MAXSIZE_UNITS' => 'tavua',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML-sisäänkirjautumisen URL ei voi olla tyhjä',
     'ERR_EMPTY_SAML_CERT' => 'SAML-sertifikaatti ei voi olla tyhjä',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML-entiteetin tunnus ei voi olla tyhjä',
     'ERR_SAML_LOGIN_URL' => 'SAML-sisäänkirjautumisen URL ei kelpaa',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL ei kelpaa',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM-tiedostossa on oltava yksityinen avain',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM-tiedostossa on oltava x.509-varmenne',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Annettu x.509-varmenne ei vastaa yksityistä avainta',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
 );
 
 

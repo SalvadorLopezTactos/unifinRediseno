@@ -18,7 +18,11 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
-    'LNK_CONTACT_REPORTS' => 'Shih raportet e kontakteve',
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Paneli i listës së kontakteve',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të kontakteve',
+
+    'LNK_CONTACT_REPORTS' => 'Shiko raportet e kontakteve',
     'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë konaktin',
     'LBL_ACCOUNT_ID' => 'ID e Llogarisë',
     'LBL_ACCOUNT_NAME' => 'Emri i llogarisë:',
@@ -36,7 +40,7 @@ $mod_strings = array (
     'LBL_ALT_ADDRESS_STREET' => 'Adresa alternative e rrugës',
     'LBL_ALTERNATE_ADDRESS' => 'Adresë tjetër',
     'LBL_ANY_ADDRESS' => 'çdo adresë',
-    'LBL_ANY_EMAIL' => 'çdo email',
+    'LBL_ANY_EMAIL' => 'Email:',
     'LBL_ANY_PHONE' => 'çdo numër telefoni',
     'LBL_ASSIGNED_TO_NAME' => 'Drejtuar:',
     'LBL_ASSIGNED_TO_ID' => 'Përdorues i caktuar',
@@ -107,7 +111,7 @@ $mod_strings = array (
     'LBL_NEW_FORM_TITLE' => 'Kontakt i ri',
     'LBL_NEW_PORTAL_PASSWORD' => 'Fajlëkalim i ri i portalit',
     'LBL_NOTE_SUBJECT' =>'shënim subjekti',
-    'LBL_OFFICE_PHONE' => 'telefoni i zyrës',
+    'LBL_OFFICE_PHONE' => 'Telefoni i zyrës:',
     'LBL_OPP_NAME' => 'Emri i mundësisë',
     'LBL_OPPORTUNITY_ROLE_ID'=>'ID e rolit të mundësisë',
     'LBL_OPPORTUNITY_ROLE'=>'Roli i mundësisë',
@@ -145,9 +149,9 @@ $mod_strings = array (
     'LBL_SYNC_CONTACT' => 'Sync në Outlook®:',
     'LBL_PROSPECT_LIST' => 'lista e prospektit',
     'LBL_TEAM_ID' => 'Id e grupit',
-    'LBL_TITLE' => 'Titulli',
+    'LBL_TITLE' => 'Titulli:',
     'LNK_CREATE' => 'Krijo person',
-    'LNK_CONTACT_LIST' => 'Shih kontaktet',
+    'LNK_CONTACT_LIST' => 'Shiko kontaktet',
     'LNK_IMPORT_VCARD' => 'Krijo kontakt nga vCard',
     'LNK_NEW_ACCOUNT' => 'krijo llogari',
     'LNK_NEW_APPOINTMENT' => 'krijo takim',
@@ -267,4 +271,6 @@ Për të krijuar një {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Pikët e kontaktit',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Raportet e kontaktit',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Qëllimet e biznesit u miratuan për',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Miratimi i përditësuar së fundi',
 );

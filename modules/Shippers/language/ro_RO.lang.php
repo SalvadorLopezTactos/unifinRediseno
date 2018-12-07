@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Trebuie să specifici un număr de înregistrare pentru a șterge transportatorul.',
   'NTC_STATUS' => 'Setare Starea Inactiv pentru a elimina acest transportator din lista abandonata',
   'NTC_LIST_ORDER' => 'Setaţi ordinea în care acest transport va fi afişat în listele de transportatori abandonate',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Activ',
-    'Inactive' => 'Inactiv',
-),
-	'LBL_EDITLAYOUT' => 'Editeaza Plan General' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Editeaza Plan General' /*for 508 compliance fix*/,
 );
-
 
 ?>

@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Kreiraj zadatak',
   'NTC_DELETE_CONFIRMATION' => 'Da li ste sigurni da želite da obrišete ovaj zapis? Svaki zapis koji koristi ovu valutu će biti konvertovan u podrazumevanu valutu sistema kada mu se pristupi. Možda je bolje da samo stavite status na "Neaktivno".',
   'LBL_BELOW_MIN' => 'Stopa konverzije mora da bude iznad 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktivan',
-    'Inactive' => 'Neaktivan',
-  ),
   'LBL_CREATED_BY' => 'Autor',
   'LBL_EDIT_LAYOUT' => 'Izmeni raspored' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Samo za administratore',
+  'LBL_CURRENCY_DEFAULT' => 'Američki dolari (podrazumevano)',
+
 );
 ?>

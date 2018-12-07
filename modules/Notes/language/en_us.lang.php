@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Notes List Dashboard',
+
     'ERR_DELETE_RECORD' => 'You must specify a record number to delete the Account.',
     'LBL_ACCOUNT_ID' => 'Account ID:',
     'LBL_CASE_ID' => 'Case ID:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Description',
     'LBL_EMAIL_ADDRESS' => 'Email Address:',
     'LBL_EMAIL_ATTACHMENT' => 'Email Attachment',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Email Attachment For',
     'LBL_FILE_MIME_TYPE' => 'Mime Type',
+    'LBL_FILE_EXTENSION' => 'File Extension',
+    'LBL_FILE_SOURCE' => 'File Source',
+    'LBL_FILE_SIZE' => 'File Size',
     'LBL_FILE_URL' => 'File URL',
     'LBL_FILENAME' => 'Attachment:',
     'LBL_LEAD_ID' => 'Lead ID:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Opportunity ID:',
     'LBL_PARENT_ID' => 'Parent ID:',
     'LBL_PARENT_TYPE' => 'Parent Type',
+    'LBL_EMAIL_TYPE' => 'Email Type',
+    'LBL_EMAIL_ID' => 'Email ID',
     'LBL_PHONE' => 'Phone:',
     'LBL_PORTAL_FLAG' => 'Display in Portal?',
     'LBL_EMBED_FLAG' => 'Embed in email?',

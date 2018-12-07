@@ -170,6 +170,7 @@ class PMSEHistoryLogWrapper
             'id',
             'date_entered',
             'date_modified',
+            'created_by',
             'cas_id',
             'cas_index',
             'pro_id',
@@ -177,6 +178,7 @@ class PMSEHistoryLogWrapper
             'cas_reassign_level',
             'bpmn_id',
             'bpmn_type',
+            'cas_assignment_method',
             'cas_user_id',
             'cas_thread',
             'cas_flow_status',
@@ -210,9 +212,17 @@ class PMSEHistoryLogWrapper
         $caseDerivations = $q->execute();
 
         foreach ($caseDerivations as $key => $caseData) {
-            $entry = $this->fetchUserType($caseData);
+            if ($caseData['bpmn_type'] == 'bpmnFlow') {
+                // flow arrow
+                continue;
+            }
 
-            $currentDate = new DateTime();
+            if ($caseData['cas_previous'] == 0) {
+                // start event, use the modifying user instead of the process user
+                $caseData['cas_user_id'] = $caseData['created_by'];
+            }
+
+            $entry = $this->fetchUserType($caseData);
 
             $entry['due_date'] = !empty($caseData['cas_due_date']) ? PMSEEngineUtils::getDateToFE($caseData['cas_due_date'], 'datetime'): '';
             $entry['end_date'] = !empty($caseData['cas_finish_date']) ? PMSEEngineUtils::getDateToFE($caseData['cas_finish_date'], 'datetime'): '';
@@ -222,114 +232,200 @@ class PMSEHistoryLogWrapper
             $entry['completed'] = true;
             $entry['cas_user_id'] = $caseData['cas_user_id'];
 
-            if ($caseData['cas_previous'] == 0) {
-                //cas_flow_status field should set something instead be empty.
-                $dataString = sprintf(translate('LBL_PMSE_HISTORY_LOG_CREATED_CASE', 'pmse_Inbox'), $caseData['cas_id']);
-            } else if ($caseData['bpmn_type'] === 'bpmnFlow') {
-                $dataString = translate('LBL_PMSE_HISTORY_LOG_FLOW', 'pmse_Inbox');
-            } else {
-                if ($caseData['cas_flow_status'] == 'CLOSED') {
-                    $dataString = sprintf(translate('LBL_PMSE_HISTORY_LOG_DERIVATED_CASE', 'pmse_Inbox'),
-                        $caseData['cas_id']);
-                } else {
-                    $dataString = sprintf(translate('LBL_PMSE_HISTORY_LOG_CURRENTLY_HAS_CASE', 'pmse_Inbox'),
-                        $caseData['cas_id']);
-                }
-            }
+            $dataString = '';
 
-            $action = '';
-            if ($caseData['bpmn_type'] == 'bpmnActivity') {
-                $currentCaseState = $this->getActionStatusAndAction($caseData['cas_flow_status'],
-                    $caseData['cas_sugar_action']);
-                $dataString .= sprintf(translate('LBL_PMSE_HISTORY_LOG_ACTIVITY_NAME', 'pmse_Inbox'),
-                    $this->getActivityName($caseData['bpmn_id']));
-                if ($caseData['cas_flow_status'] != 'FORM') {
-                    $dataString .= sprintf(translate('LBL_PMSE_HISTORY_LOG_MODULE_ACTION', 'pmse_Inbox'),
-                        $this->getActivityModule($caseData), $currentCaseState);
-                    $res = $this->formAction->retrieve_by_string_fields(array(
-                        'cas_id' => $caseData['cas_id'],
-                        'act_id' => $caseData['bpmn_id'],
-                        'user_id' => $caseData['cas_user_id']
-                    ));
-                    if (isset($this->formAction->frm_action) && !empty($this->formAction->frm_action)) {
-                        // frm_action can contains action strings such as "Approved" or json return values (in 
-                        // case of Business Rules). We want to skip json return values from appearing in the 
-                        // Process History 
-                        if (json_decode($this->formAction->frm_action) == null) {
-                            $action = strtoupper($this->formAction->frm_action);
+            switch ($caseData['bpmn_type']) {
+                case 'bpmnActivity':
+                    $activityBean = BeanFactory::getBean('pmse_BpmnActivity', $caseData['bpmn_id']);
+                    $name = sprintf(
+                        translate('LBL_PMSE_HISTORY_LOG_ACTIVITY_NAME', 'pmse_Inbox'),
+                        $activityBean->name
+                    );
+                    if ($activityBean->act_task_type == 'USERTASK') {
+                        // activity
+                        if ($caseData['cas_assignment_method'] == 'selfservice') {
+                            $this->setProcessUser($entry);
+                            $dataString .= sprintf(
+                                translate('LBL_PMSE_HISTORY_LOG_ACTIVITY_SELF_SERVICE', 'pmse_Inbox'),
+                                $name,
+                                $this->getActivityModule($caseData)
+                            );
+                        } else {
+                            if ($caseData['cas_flow_status'] == 'CLOSED') {
+                                $formActionBean = BeanFactory::getBean('pmse_BpmFormAction');
+                                $formActionBean->retrieve_by_string_fields(array('cas_id' => $caseData['cas_id'], 'act_id' => $caseData['bpmn_id']));
+                                if ($formActionBean->frm_action) {
+                                    $action = $formActionBean->frm_action;
+                                } else {
+                                    $action = translate('LBL_PMSE_HISTORY_LOG_ROUTED', 'pmse_Inbox');
+                                }
+                            } else {
+                                $action = translate('LBL_PMSE_HISTORY_LOG_ASSIGNED', 'pmse_Inbox');
+                            }
+                            $dataString .= sprintf(
+                                translate('LBL_PMSE_HISTORY_LOG_ACTIVITY', 'pmse_Inbox'),
+                                $action,
+                                $name,
+                                $this->getActivityModule($caseData)
+                            );
                         }
                     } else {
-                        $action = translate('LBL_PMSE_HISTORY_LOG_NOT_REGISTERED_ACTION', 'pmse_Inbox');
+                        // action
+                        switch ($activityBean->act_script_type) {
+                            case 'ADD_RELATED_RECORD':
+                                $type = translate('LBL_PMSE_CONTEXT_MENU_ADD_RELATED_RECORD', 'pmse_Project');
+                                break;
+                            case 'ASSIGN_TEAM':
+                                $type = translate('LBL_PMSE_CONTEXT_MENU_ASSIGN_TEAM', 'pmse_Project');
+                                break;
+                            case 'ASSIGN_USER':
+                                $type = translate('LBL_PMSE_CONTEXT_MENU_ASSIGN_USER', 'pmse_Project');
+                                break;
+                            case 'BUSINESS_RULE':
+                                $type = translate('LBL_PMSE_CONTEXT_MENU_BUSINESS_RULE', 'pmse_Project');
+                                break;
+                            case 'CHANGE_FIELD':
+                                $type = translate('LBL_PMSE_CONTEXT_MENU_CHANGE_FIELD', 'pmse_Project');
+                                break;
+                            default:
+                                $type = $activityBean->act_script_type;
+                        }
+                        switch ($activityBean->act_script_type) {
+                            case 'ASSIGN_USER':
+                            case 'ASSIGN_TEAM':
+                                $activityDefBean = BeanFactory::getBean('pmse_BpmActivityDefinition', $caseData['bpmn_id']);
+                                if ($activityDefBean->act_update_record_owner == 1) {
+                                    $action = translate('LBL_PMSE_HISTORY_LOG_AND', 'pmse_Inbox');
+                                } else {
+                                    $action = translate('LBL_PMSE_HISTORY_LOG_ON', 'pmse_Inbox');
+                                }
+                                $dataString .= sprintf(
+                                    translate('LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION', 'pmse_Inbox'),
+                                    $caseData['cas_id'],
+                                    $action,
+                                    $this->getActivityModule($caseData),
+                                    $type,
+                                    $name
+                                );
+                                break;
+                            default:
+                                $this->setProcessUser($entry);
+                                $dataString .= sprintf(
+                                    translate('LBL_PMSE_HISTORY_LOG_ACTION', 'pmse_Inbox'),
+                                    $type,
+                                    $name,
+                                    $this->getActivityModule($caseData)
+                                );
+                        }
                     }
-                    if (!empty($action)) {
-                        $dataString .= sprintf(translate('LBL_PMSE_HISTORY_LOG_ACTION_PERFORMED', 'pmse_Inbox'), $action);
+                    break;
+                case 'bpmnEvent':
+                    $eventBean = BeanFactory::getBean('pmse_BpmnEvent', $caseData['bpmn_id']);
+                    $name = sprintf(
+                        translate('LBL_PMSE_HISTORY_LOG_ACTIVITY_NAME', 'pmse_Inbox'),
+                        $eventBean->name
+                    );
+                    if ($caseData['cas_flow_status'] == 'CLOSED') {
+                        $action = translate('LBL_PMSE_HISTORY_LOG_PROCESSED', 'pmse_Inbox');
+                    } else {
+                        $action = translate('LBL_PMSE_HISTORY_LOG_STARTED', 'pmse_Inbox');
                     }
-                } else {
-                    $dataString .= sprintf(translate('LBL_PMSE_HISTORY_LOG_ACTION_STILL_ASSIGNED', 'pmse_Inbox'));
-                    $entry['completed'] = false;
-                }
-            } else {
-                if ($caseData['bpmn_type'] == 'bpmnEvent') {
-                    $name = sprintf(translate('LBL_PMSE_HISTORY_LOG_ACTIVITY_NAME', 'pmse_Inbox'),
-                        $this->getEventName($caseData['bpmn_id']));
-                    $currentCaseState = sprintf(translate('LBL_PMSE_HISTORY_LOG_WITH_EVENT', 'pmse_Inbox'), $name);
-                    $dataString .= sprintf(translate('LBL_PMSE_HISTORY_LOG_MODULE_ACTION', 'pmse_Inbox'),
-                        $this->getActivityModule($caseData), $currentCaseState);
-                } else {
-                    if ($caseData['bpmn_type'] == 'bpmnGateway') {
-                        $name = sprintf(translate('LBL_PMSE_HISTORY_LOG_ACTIVITY_NAME', 'pmse_Inbox'),
-                            $this->getGatewayName($caseData['bpmn_id']));
-                        $currentCaseState = sprintf(translate('LBL_PMSE_HISTORY_LOG_WITH_GATEWAY', 'pmse_Inbox'),
-                            $name);
-                        $dataString .= sprintf(translate('LBL_PMSE_HISTORY_LOG_MODULE_ACTION', 'pmse_Inbox'),
-                            $this->getActivityModule($caseData), $currentCaseState);
+                    switch ($eventBean->evn_type) {
+                        case 'INTERMEDIATE':
+                            if ($eventBean->evn_marker == 'TIMER') {
+                                // wait event
+                                $type = translate('LBL_PMSE_ADAM_DESIGNER_WAIT', 'pmse_Project');
+                            } else {
+                                if ($eventBean->evn_behavior == 'CATCH') {
+                                    // receive message event
+                                    $type = translate('LBL_PMSE_ADAM_DESIGNER_RECEIVE_MESSAGE', 'pmse_Project');
+                                } else {
+                                    // send message event
+                                    $type = translate('LBL_PMSE_ADAM_DESIGNER_SEND_MESSAGE', 'pmse_Project');
+                                }
+                            }
+                            $dataString .= sprintf(
+                                translate('LBL_PMSE_HISTORY_LOG_EVENT', 'pmse_Inbox'),
+                                $type,
+                                $name,
+                                $action
+                            );
+                            break;
+                        case 'START':
+                            // start event
+                            $eventBean = BeanFactory::getBean('pmse_BpmEventDefinition', $caseData['bpmn_id']);
+                            if ($eventBean->evn_params == 'new') {
+                                $action = translate('LBL_PMSE_HISTORY_LOG_CREATED', 'pmse_Inbox');
+                            } else {
+                                $action = translate('LBL_PMSE_HISTORY_LOG_MODIFIED', 'pmse_Inbox');
+                            }
+                            $dataString .= sprintf(
+                                translate('LBL_PMSE_HISTORY_LOG_START_EVENT', 'pmse_Inbox'),
+                                $action,
+                                $this->getActivityModule($caseData),
+                                $caseData['cas_id']
+                            );
+                            break;
+                        case 'END':
+                            // end event
+                            $type = translate('LBL_PMSE_HISTORY_LOG_END_EVENT', 'pmse_Inbox');
+                            $dataString .= sprintf(
+                                translate('LBL_PMSE_HISTORY_LOG_EVENT', 'pmse_Inbox'),
+                                $type,
+                                $name,
+                                $action
+                            );
+                            break;
+                        default:
                     }
-                }
+                    break;
+                case 'bpmnGateway':
+                    $gatewayBean = BeanFactory::getBean('pmse_BpmnGateway', $caseData['bpmn_id']);
+                    switch ($gatewayBean->gat_direction) {
+                        case 'CONVERGING':
+                            $direction = translate('LBL_PMSE_CONTEXT_MENU_CONVERGING', 'pmse_Project');
+                            break;
+                        case 'DIVERGING':
+                            $direction = translate('LBL_PMSE_CONTEXT_MENU_DIVERGING', 'pmse_Project');
+                            break;
+                        default:
+                            $direction = $gatewayBean->gat_direction;
+                    }
+                    switch ($gatewayBean->gat_type) {
+                        case 'EVENTBASED':
+                            $type = translate('LBL_PMSE_CONTEXT_MENU_EVENT_BASED_GATEWAY', 'pmse_Project');
+                            break;
+                        case 'EXCLUSIVE':
+                            $type = translate('LBL_PMSE_CONTEXT_MENU_EXCLUSIVE_GATEWAY', 'pmse_Project');
+                            break;
+                        case 'INCLUSIVE':
+                            $type = translate('LBL_PMSE_CONTEXT_MENU_INCLUSIVE_GATEWAY', 'pmse_Project');
+                            break;
+                        case 'PARALLEL':
+                            $type = translate('LBL_PMSE_CONTEXT_MENU_PARELLEL_GATEWAY', 'pmse_Project');
+                            break;
+                        default:
+                            $type = $gatewayBean->gat_type;
+                    }
+                    $name = sprintf(
+                        translate('LBL_PMSE_HISTORY_LOG_ACTIVITY_NAME', 'pmse_Inbox'),
+                        $gatewayBean->name
+                    );
+                    $dataString .= sprintf(
+                        translate('LBL_PMSE_HISTORY_LOG_GATEWAY', 'pmse_Inbox'),
+                        $direction,
+                        $type,
+                        $name
+                    );
+                    break;
+                default:
             }
+
             $dataString .= '.';
             $entry['data_info'] = $dataString;
             $entries[] = $entry;
         }
         return $entries;
-    }
-
-    /**
-     * Get Activity name by id. make the query and return the name of an activity
-     * @param integer $id
-     * @return string
-     */
-    private function getActivityName($id)
-    {
-        //$query = "select name from pmse_bpmn_activity where id = '" . $id . "'";
-        //$result = $this->db->Query($query);
-        //$row = $this->db->fetchByAssoc($result);
-        $activityBean = BeanFactory::getBean('pmse_BpmnActivity', $id);
-        return $activityBean->name; //$row['name'];
-    }
-
-    /**
-     * Get Event name by id. make the query and return the name of an event
-     * @param integer $id
-     * @return string
-     */
-    private function getEventName($id)
-    {
-        //$query = "select name from pmse_bpmn_event where id = '" . $id . "'";
-        //$result = $this->db->Query($query);
-        //$row = $this->db->fetchByAssoc($result);
-        $eventBean = BeanFactory::getBean('pmse_BpmnEvent', $id);
-        return $eventBean->name; //$row['name'];
-    }
-
-    /**
-     * Get Gateway name by id. make the query and return the name of an gateway
-     * @param integer $id
-     * @return string
-     */
-    private function getGatewayName($id)
-    {
-        $gatewayBean = BeanFactory::getBean('pmse_BpmnGateway', $id);
-        return $gatewayBean->name;
     }
 
     /**
@@ -343,26 +439,38 @@ class PMSEHistoryLogWrapper
 
         $activityDefinitionBean = BeanFactory::getBean('pmse_BpmActivityDefinition', $caseData['bpmn_id']);
 
-        if (empty($activityDefinitionBean) || empty($activityDefinitionBean->act_field_module)) {
+        if (empty($activityDefinitionBean) ||
+            empty($activityDefinitionBean->act_field_module) ||
+            $activityDefinitionBean->act_field_module == $caseData['cas_sugar_module']) {
             return PMSEEngineUtils::getModuleLabelFromModuleName($beanList[$caseData['cas_sugar_module']]);
         }
 
-        $related_module_data = $this->getRelationshipData($activityDefinitionBean->act_field_module);
+        $relatedModule = $activityDefinitionBean->act_field_module;
 
-        if ($related_module_data == null) {
-            return PMSEEngineUtils::getModuleLabelFromModuleName($activityDefinitionBean->act_field_module);
+        $sugarModuleBean = BeanFactory::getBean($caseData['cas_sugar_module'], $caseData['cas_sugar_object_id']);
+
+        if ($sugarModuleBean == null) {
+            return PMSEEngineUtils::getModuleLabelFromModuleName($relatedModule);
         }
-        return PMSEEngineUtils::getModuleLabelFromModuleName($related_module_data['rhs_module']);
-    }
 
+        if (!$sugarModuleBean->load_relationship($relatedModule)) {
+            return PMSEEngineUtils::getModuleLabelFromModuleName($relatedModule);
+        }
+
+        return PMSEEngineUtils::getModuleLabelFromModuleName($sugarModuleBean->$relatedModule->getRelatedModuleName());
+    }
+    
     /**
-     * Get the relationship data name by relation name. make the query and return the object
-     * @param string $relationName
-     * @return array of fields
+     * Get the relevant fields in the result array to the proper values
+     * in the case of a generic Advanced Workflow user
+     * @param array &$entry
      */
-    private function getRelationshipData($relationName)
+    private function setProcessUser(&$entry)
     {
-        return SugarRelationshipFactory::getInstance()->getRelationshipDef($relationName);
+        $entry['image'] = "label label-module label-pmse_Inbox pull-left";
+        $entry['user'] = translate('LBL_PMSE_LABEL_PROCESS_AUTHOR', 'pmse_Inbox');
+        $entry['script'] = true;
+        $entry['show_user'] = false;
     }
 
     /**
@@ -372,13 +480,11 @@ class PMSEHistoryLogWrapper
      */
     private function fetchUserType($caseData)
     {
-        $entry = array();
+        $entry = array('show_user' => true);
 
         $this->currentUser->retrieve($caseData['cas_user_id']);
         if ($caseData['cas_sugar_action'] == 'SCRIPTTASK') {
-            $entry['image'] = "label label-module label-pmse_Inbox pull-left";
-            $entry['user'] = translate('LBL_PMSE_LABEL_PROCESS_AUTHOR', 'pmse_Inbox');
-            $entry['script'] = true;
+            $this->setProcessUser($entry);
         } else {
             if ($caseData['bpmn_type'] == 'bpmnActivity' ||
                 $caseData['cas_sugar_action'] == 'DetailView' ||
@@ -399,9 +505,7 @@ class PMSEHistoryLogWrapper
                 $entry['current_user'] = $current_user->full_name;
             } else {
                 //TODO check if there is other conditions to set.
-                $entry['image'] = "label label-module label-pmse_Inbox pull-left";
-                $entry['user'] = translate('LBL_PMSE_LABEL_PROCESS_AUTHOR', 'pmse_Inbox');
-                $entry['script'] = true;
+                $this->setProcessUser($entry);
             }
         }
         // @codeCoverageIgnoreStart

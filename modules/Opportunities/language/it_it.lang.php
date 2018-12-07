@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Dashboard elenco opportunità',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Dashboard record opportunità',
+
     'LBL_MODULE_NAME' => 'Opportunità',
     'LBL_MODULE_NAME_SINGULAR' => 'Opportunità',
     'LBL_MODULE_TITLE' => 'Opportunità: Home',
@@ -182,24 +186,24 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Dopo aver avviato questa modifica, gli Elementi dell´Opportunità saranno creati per ogni {{module_name}} esistente in background. Quando gli Elementi dell´Opportunità sono completi e disponibili, sarà inviata una notifica all´indirizzo email del tuo profilo utente. Si prega di notare che la tua istanza deve essere configurata per inviare email via Admin > Impostazioni Email in modo tale che le notifiche vengano inviate.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} permette di tenere traccia delle vendite individuali, dall&#39;inizio alla fine. Ciascun record {{module_name}} rappresenta una probabile vendita e comprende i dati rilevanti alla vendita e ad altri record importanti quali {{quotes_module}}, {{contacts_module}}, ecc. Un {{module_name}} progredirà tipicamente passando per diverse fasi della vendita, fino a che acquisirà lo stato di "Chiuso vinto" o "Chiuso perso". {{plural_module_name}} può essere ulteriormente sfruttato utilizzando il modulo {{forecasts_singular_module}} di Sugar per capire e prevedere le tendenze di vendita e concentrare il lavoro sul raggiungimento delle quote di vendita.',
+    'LBL_HELP_RECORDS' => 'Il modulo {{plural_module_name}} permette di tracciare le vendite individuali dall&#39;inizio alla fine. Ciascun record contenuto in {{module_name}} rappresenta una potenziale vendita e comprende dati attinenti ad essa e ad altri importanti record quali {{quotes_module}}, {{contacts_module}}, ecc. Un {{module_name}} si svilupperà in genere lungo diverse fasi di vendita fino ad assumere lo stato di "Chiuso Vinto" o "Chiuso Perso". {{plural_module_name}} può essere sfruttato ulteriormente utilizzando il modulo {{forecasts_singular_module}} di Sugar per capire e prevedere le tendenze di vendita nonché per organizzare il lavoro in maniera specifica per ottenere le quote di vendita.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} permette di tenere traccia delle vendite individuali e dei prodotti che appartengono a quelle vendite, dall&#39;inizio alla fine. Ciascun record {{module_name}} rappresenta una probabile vendita e comprende i dati rilevanti alla vendita e ad altri record importanti quali {{quotes_module}}, {{contacts_module}}, ecc.
+    'LBL_HELP_RECORD' => 'Il modulo {{plural_module_name}} consente di tenere traccia delle vendite individuali e delle voci appartenenti a quelle vendite, dall&#39;inizio alla fine. Ciascun record di {{module_name}} rappresenta una potenziale vendita e comprende dati attinenti ad essa e ad altri importanti record quali {{quotes_module}}, {{contacts_module}}, ecc.
 
-- Modificare i campi di questo record facendo clic sul singolo cambio o sul pulsante Modifica.
-- Visualizzare o modificare i collegamenti agli altri record presenti nei sotto-pannelli attivando e disattivando il pannello in basso a sinistra su "Visualizza dati".
-- Fare e visualizzare i commenti degli utenti e registrare lo storico dei cambiamenti nel {{activitystream_singular_module}} attivando e disattivando il pannello in basso a sinistra su "Activity Stream".
-- Seguire o mettere tra i preferiti questo record utilizzando le icone a destra del nome del record.
-- Nel menu a discesa Azioni, a destra del pulsante Modifica sono disponibili ulteriori azioni.',
+- Modificare i campi di questo record facendo clic su ciascuno di essi o sul pulsante Modifica.
+- Visualizzare o modificare i collegamenti agli altri record nei sottopannelli spostando la visualizzazione del riquadro in basso a sinistra su "Vista dati".
+- Creare e visualizzare i commenti degli utenti e registrare la cronologia delle modifiche nel {{activitystream_singular_module}} spostando la visualizzazione del riquadro in basso a sinistra su "Activity Stream".
+- Seguire o impostare come preferito questo record usando le icone alla destra del nome del record.
+- Nel menu a discesa Azioni, alla destra del pulsante Modifica, sono disponibili azioni aggiuntive.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Il modulo {{plural_module_name}} permette di tenere traccia delle vendite individuali e dei prodotti che appartengono a quelle vendite, dall&#39;inizio alla fine. Ciascun record {{module_name}} rappresenta una probabile vendita e comprende i dati rilevanti alla vendita e ad altri record importanti quali {{quotes_module}}, {{contacts_module}}, ecc.
+    'LBL_HELP_CREATE' => 'Il modulo {{plural_module_name}} consente di tenere traccia delle vendite individuali e delle voci appartenenti a quelle vendite, dall&#39;inizio alla fine. Ciascun record di {{module_name}} rappresenta una potenziale vendita e comprende dati attinenti ad essa e ad altri importanti dati quali {{quotes_module}}, {{contacts_module}}, ecc.
 
 Per creare un {{module_name}}:
-1. Fornire i valori dei campi desiderati.
- - I campi contrassegnati con "Richiesti" devono essere completati prima del salvataggio.
- - Fare clic su "Mostra più" per visualizzare ulteriori campi se necessario. 
+1. Fornire i valori desiderati per i campi.
+ - I campi contrassegnati con "Richiesto" devono essere compilati prima del salvataggio.
+ - Fare clic su "Altri dettagli" per visualizzare ulteriori campi, se necessario.
 2. Fare clic su "Salva" per finalizzare il nuovo record e tornare alla pagina precedente.',
 
 // END ENT/ULT

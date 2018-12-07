@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Procesa biznesa lomas',
   'LBL_MODULE_TITLE' => 'Procesa biznesa lomas',
   'LBL_MODULE_NAME_SINGULAR' => 'Procesa biznesa lomas',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Nosacījumi',
     'LBL_PMSE_LABEL_RETURN' => 'Atgriezties',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Noslēgumi',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Mainīt lauku',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Atgriežamā vērtība',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Pievienot nosacījumu',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Pievienot noslēgumu',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Pievienot rindu',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Dzēst kolonnu',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Dzēst nosacījumu',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Dzēst slēdzienu',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Dzēst kolonnas datus',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Jā',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Nē',

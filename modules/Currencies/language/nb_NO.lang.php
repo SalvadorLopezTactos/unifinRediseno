@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Opprett oppgave',
   'NTC_DELETE_CONFIRMATION' => 'Er du sikker på at du vil slette denne registreringen? De registre som bruker denne valutaen vil bli konvertert til å bruke den forhåndsinnstilte valutaen når det kreves. Det kan være bedre å istedet endre statusen til passiv.',
   'LBL_BELOW_MIN' => 'Konverteringskursen må være større enn 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Passiv',
-  ),
   'LBL_CREATED_BY' => 'Opprettet av',
   'LBL_EDIT_LAYOUT' => 'Redigér Oppsett' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Kun administratorer',
+  'LBL_CURRENCY_DEFAULT' => 'Amerikanske dollar (standard)',
+
 );
 ?>

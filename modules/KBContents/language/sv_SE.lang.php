@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Instrumentpanel med lista över kunskapsbas',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Instrumentpanel med poster över kunskapsbas',
+
     'LBL_MODULE_NAME' => 'Kunskapsbas',
     'LBL_MODULE_NAME_SINGULAR' => 'Kunskapsbasartikel',
     'LBL_MODULE_TITLE' => 'Kunskapsbasartikel',

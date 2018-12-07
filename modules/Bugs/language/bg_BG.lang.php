@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Електронно табло със списък на проблемите',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Електронно табло със запис на проблемите',
+
   'LBL_MODULE_NAME' => 'Проблеми',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Проблем',
   'LBL_MODULE_TITLE' => 'Проблеми',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Казуси',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Проекти',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Документи',
-  'LBL_SYSTEM_ID' => 'ID на системата',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Отговорник',
 	'LBL_ASSIGNED_TO_NAME' => 'Отговорник',
 

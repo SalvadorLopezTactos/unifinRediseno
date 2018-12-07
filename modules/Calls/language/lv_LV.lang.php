@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Zvanu saraksta instrumentu panelis',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Zvanu ierakstu instrumentu panelis',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Zvani',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Zvans',

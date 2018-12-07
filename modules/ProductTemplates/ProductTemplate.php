@@ -227,4 +227,50 @@ class ProductTemplate extends SugarBean {
 
         return $the_where;
     }
+
+    /**
+     * This function calculates any requested discount from the various formulas
+     */
+    public function calculateDiscountPrice()
+    {
+        if (!empty($this->pricing_formula)
+            || !empty($this->cost_price)
+            || !empty($this->list_price)
+            || !empty($this->discount_price)
+            || !empty($this->pricing_factor)) {
+            $formula = $this->getPriceFormula($this->pricing_formula);
+
+            if ($formula) {
+                $this->discount_price = $formula->calculate_price(
+                    $this->cost_price,
+                    $this->list_price,
+                    $this->discount_price,
+                    $this->pricing_factor
+                );
+            }
+        }
+    }
+
+    /**
+     * Utiltity method to get the Pricing Formual Class
+     *
+     * @param string $formula
+     * @param bool|false $refresh
+     * @return bool|Object
+     */
+    protected function getPriceFormula($formula, $refresh = false)
+    {
+        if (!isset($GLOBALS['price_formulas']) || $refresh) {
+            SugarAutoLoader::load('modules/ProductTemplates/Formulas.php');
+            refresh_price_formulas();
+        }
+
+
+        if (!isset($GLOBALS['price_formulas'][$formula])) {
+            return false;
+        }
+
+        SugarAutoLoader::load($GLOBALS['price_formulas'][$formula]);
+        return new $formula;
+    }
 }

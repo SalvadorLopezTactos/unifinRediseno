@@ -12,6 +12,8 @@
 
 require_once 'modules/ModuleBuilder/parsers/constants.php';
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 class UndeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementation implements MetaDataImplementationInterface
 {
 
@@ -71,7 +73,7 @@ class UndeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementa
         $this->sidecarFile = $this->module->getSubpanelFilePath($subpanelName, $this->client);
 
         if (file_exists($this->sidecarFile)) {
-            include $this->sidecarFile;
+            include FileLoader::validateFilePath($this->sidecarFile);
         }
         $viewdefs = empty($viewdefs) ? array() : $viewdefs;
 

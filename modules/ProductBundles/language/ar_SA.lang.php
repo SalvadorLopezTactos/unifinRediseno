@@ -39,8 +39,8 @@ $mod_strings = array (
     'LBL_DELETE_BUNDLE_BUTTON_TOOLTIP' => 'حذف المجموعة',
     'LBL_DELETE_GROUP_BUTTON' => 'حذف مجموعة',
     'LBL_QUOTE_DATA_EMPTY_ROW_WITH_GROUP' => 'استخدم + لإنشاء القائمة لإضافة بند، أو تعليق إلى هذه المجموعة.',
-    'LBL_QUOTE_DATA_EMPTY_ROW_DEFAULT_GROUP' => 'استخدم + لإنشاء قائمة لإضافة بند، أو تعليق، أو مجموعة إلى هذا '
-        . 'عرض السعر.',
+    'LBL_QUOTE_DATA_EMPTY_ROW_DEFAULT_GROUP' => 'استخدم قائمة الإنشاء + لإضافة بند، أو تعليق، أو مجموعة إلى '
+        . 'عرض السعر هذا.',
     'LBL_QUOTE_BUNDLE_DEFAULT_GROUP' => 'مجموعة حزم المنتجات الافتراضية لعرض السعر',
     'LBL_ALERT_DELETING_ITEM' => 'حذف بند (بنود)',
     'LBL_DELETED_LINE_ITEM_SUCCESS_MSG' => 'تم حذف البند بنجاح',

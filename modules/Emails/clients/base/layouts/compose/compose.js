@@ -8,13 +8,22 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+/**
+ * @class View.Layouts.Base.Emails.ComposeLayout
+ * @alias SUGAR.App.view.layouts.BaseEmailsComposeLayout
+ * @extends View.Layouts.Base.Emails.CreateLayout
+ * @deprecated Use {@link View.Layouts.Base.Emails.ComposeEmailLayout} instead.
+ */
 ({
-    plugins: ['ShortcutSession'],
+    extendsFrom: 'EmailsCreateLayout',
 
-    shortcuts: [
-        'Sidebar:Toggle',
-        'Record:Cancel',
-        'Compose:Action:More',
-        'DragdropSelect2:SelectAll'
-    ]
+    /**
+     * @inheritdoc
+     */
+    initialize: function(options) {
+        app.logger.warn('View.Layouts.Base.Emails.ComposeLayout is deprecated. ' +
+            'Use View.Layouts.Base.Emails.ComposeEmailLayout instead.');
+
+        this._super('initialize', [options]);
+    }
 })

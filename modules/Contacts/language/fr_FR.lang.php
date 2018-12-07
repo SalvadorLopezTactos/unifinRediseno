@@ -18,10 +18,14 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Tableau de bord de la liste de contacts',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement de contacts',
+
     'LNK_CONTACT_REPORTS' => 'Rapports sur Contact',
     'ERR_DELETE_RECORD' => 'Un ID doit être spécifié pour toute suppression.',
     'LBL_ACCOUNT_ID' => 'Compte (ID) :',
-    'LBL_ACCOUNT_NAME' => 'Compte:',
+    'LBL_ACCOUNT_NAME' => 'Nom du compte :',
     'LBL_CAMPAIGN'     => 'Campagne :',
     'LBL_ACTIVITIES_SUBPANEL_TITLE'=>'Activités à réaliser',
     'LBL_ADD_BUSINESSCARD' => 'Saisir une carte de visite',
@@ -273,4 +277,6 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
     'LBL_MKTO_LEAD_SCORE' => 'Score du Lead',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Rapports sur les contacts',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objectifs commerciaux auxquels un consentement a été donné',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Dernière mise à jour de consentement',
 );

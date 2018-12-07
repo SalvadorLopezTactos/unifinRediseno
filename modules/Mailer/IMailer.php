@@ -203,6 +203,15 @@ interface IMailer
     public function clearAttachments();
 
     /**
+     * Connects to the mail provider using the package that is being used to deliver email.
+     *
+     * @abstract
+     * @access public
+     * @throws MailerException
+     */
+    public function connect();
+
+    /**
      * Performs the send of an email using the package that is being used to deliver email.
      *
      * @abstract

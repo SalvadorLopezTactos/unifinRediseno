@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'エラー: 結果に表示するモジュールフィールドが関連付けられていません。システム管理者に連絡してください。',
     'LBL_INFO_INLINE' => '情報' /*for 508 compliance fix*/,
     'LBL_CLOSE' => '完了' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => '指定されたソース ID のコネクタが見つかりませんでした。',
 );
 

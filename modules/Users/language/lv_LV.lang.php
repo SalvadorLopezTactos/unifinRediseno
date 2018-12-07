@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Lietotāja informācija nav atrasta',
     'ERR_USER_NAME_EXISTS'              => 'Lietotājvārds {0} jau pastāv. Vienādi lietotājvārdi nav pieļaujami. Mainiet lietotājvārdu, lai tas būtu unikāls.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Lietotājs ir nobloķēts Sugar programmā un nevar pieteikties ar savu esošo paroli.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Lietotājam ar tikai ārēju autentifikāciju nav ļauts pieteikties, izmantojot Sugar akreditācijas datus',
 
 	'LBL_PASSWORD_SENT'                => 'Parole atjaunota',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Nevar nosūtīt paroli',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Saņēmēja e-pasts',
 	'ERR_SERVER_STATUS'					=> 'Jūsu servera statuss',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistēma nevar nosūtīt lietotājam e-pastu. Pārbaudiet izejošo e-pastu konfigurāciju <a href="index.php?module=EmailMan&action=config">E-pasta uzstādījumos</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Lietotāju IDM režīmā var izveidot tikai <a href="{0}" target="_blank">mākoņa konsolē</a>.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Primāro e-pasta adresi IDM režīmā var izveidot tikai <a href="{0}" target="_blank">mākoņa konsolē</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-pasta adrese',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Apstiprināt paroli',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Jūs nomainījāt lietotāja tipu no Sistēmas administrators uz Parasts lietotājs. Pēc šīs izmaiņas saglabāšanas lietotājam vairs nebūs sistēmas administratora tiesības.\n\n Spied OK, lai turpinātu.\n Spied Atcelt, lai atgrieztos pie ieraksta.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Jūs nomainījāt lietotāja tipu no Sistēmas administrators uz Parasts lietotājs. Pēc šīs izmaiņas saglabāšanas lietotājam vairs nebūs sistēmas administratora tiesības.\\n\\n Spied OK, lai turpinātu.\\n Spied Atcelt, lai atgrieztos pie ieraksta.',
 	'LBL_COUNTRY'						=> 'Valsts',
 	'LBL_CURRENCY_TEXT'					=> 'Norādiet valūtu, kas tiks norādīta pēc noklusējuma, veidojot jaunus ierakstus. Šajā valūtā tiks attēlotas arī darījuma iespēju summas sarakstā.',
 	'LBL_CURRENCY'						=> 'Valūta',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'sek.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Sazinieties ar sistēmas administratoru',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Autentifikācijai ar OpenID Connect (OIDC) IDM režīmā instalējiet GMP PHP paplašinājumu.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Jūs esat izrakstīts no sistēmas. Lai atkal pieteiktos spiediet',
     'LBL_LOGGED_OUT_2' => 'šeit',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Lietotāja atskaites',
     'LBL_CONTACTS_SYNC' => 'Kontaktpersonas',
     'LBL_DETAIL' => 'Lietotāja profils',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Ja noteikti tā lauki nav rediģējami, šo lauku pārvaldīšanai piesakieties savā mākoņa konsolē',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Ja vēlaties manīt noteiktus laukus, kuri nav rediģējami, ' .
+        'lūdzu, sazinieties ar administratoru, lai informētu par šīm izmaiņām',
 ); // END STRINGS DEFS
 
 ?>

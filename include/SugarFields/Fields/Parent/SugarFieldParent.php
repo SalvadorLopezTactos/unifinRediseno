@@ -247,6 +247,10 @@ class SugarFieldParent extends SugarFieldRelate {
                 'type' => $bean->parent_type,
                 'name' => $data[$fieldName],
             );
+
+            if (isset($bean->parent_erased_fields)) {
+                $data['parent']['_erased_fields'] = $bean->parent_erased_fields;
+            }
         } else {
             $data['parent'] = array();
         }
@@ -269,9 +273,7 @@ class SugarFieldParent extends SugarFieldRelate {
                 $child_info[$bean->parent_type][] = array(
                     'child_id' => $bean->id,
                     'parent_id' => $bean->parent_id,
-                    'parent_type' => $bean->parent_type,
-                    'type' => 'parent'
-                    );
+                );
             }
         }
 
@@ -287,4 +289,3 @@ class SugarFieldParent extends SugarFieldRelate {
         }
     }
 }
-

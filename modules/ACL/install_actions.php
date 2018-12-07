@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+require_once 'modules/ACLRoles/SeedRoles.php';
 
 global $current_user,$beanList, $beanFiles, $mod_strings;
 
@@ -108,59 +108,35 @@ if($installActions || $missingAclRolesActions) {
     } //foreach
 }
 //Check for the existence of MLA roles
-$installActions = false;
-$missingAclRolesActions = false;
-
 
 $role1 = BeanFactory::newBean('ACLRoles');
 
-$result = $GLOBALS['db']->query("SELECT id FROM acl_roles where name = 'Sales Administrator'");
-$role_id = $GLOBALS['db']->fetchByAssoc($result, true, true);
-if(!empty($role_id['id'])) {
-   $role_id = $role_id['id'];
-   $role1->retrieve($role_id);
-   $count = $GLOBALS['db']->fetchOne("SELECT count(role_id) as count FROM acl_roles_actions where role_id = '{$role_id}'");
-   // If there are no corresponding entries in acl_roles_actions, then we need to add it
-   if(empty($count['count'])) {
-      $missingAclRolesActions = true;
-   }
-}
-else {
-   $installActions = true;
-}
-
-if($installActions || $missingAclRolesActions) {
-// Adding MLA Roles
-    $mlaRoles = array(
-     'Sales Administrator'=>array(
-         'Accounts'=>array('admin'=>100, 'access'=>89),
-         'Contacts'=>array('admin'=>100, 'access'=>89),
-         'Forecasts'=>array('admin'=>100, 'access'=>89),
-         'Leads'=>array('admin'=>100, 'access'=>89),
-         'Opportunities'=>array('admin'=>100, 'access'=>89),
-         'Quotes'=>array('admin'=>100, 'access'=>89),
-
-     ),
-     'Marketing Administrator'=>array(
-         'Accounts'=>array('admin'=>100, 'access'=>89),
-         'Contacts'=>array('admin'=>100, 'access'=>89),
-         'Campaigns'=>array('admin'=>100, 'access'=>89),
-         'ProspectLists'=>array('admin'=>100, 'access'=>89),
-         'Leads'=>array('admin'=>100, 'access'=>89),
-         'Prospects'=>array('admin'=>100, 'access'=>89),
-
-     ),
-     'Customer Support Administrator'=>array(
-         'Accounts'=>array('admin'=>100, 'access'=>89),
-         'Contacts'=>array('admin'=>100, 'access'=>89),
-         'Bugs'=>array('admin'=>100, 'access'=>89),
-         'Cases'=>array('admin'=>100, 'access'=>89),
-         'KBContents'=>array('admin'=>100, 'access'=>89),
-        )
-    );
-
+    $mlaRoles = getMLARoles();
+    $rolesToAdd = array_keys($mlaRoles);
+    $sql = "SELECT id, name FROM acl_roles WHERE name IN ('";
+    $sql .= implode("', '", $rolesToAdd);
+    $sql .= "') AND deleted = 0";
+    $db = DBManagerFactory::getInstance();
+    $result = $db->query($sql);
+    $roles = array();
+    while ($row = $db->fetchByAssoc($result)) {
+        $roles[$row['id']] = $row['name'];
+    }
+    foreach ($roles as $id => $name) {
+        $count = $db->fetchOne("SELECT count(role_id) as count FROM acl_roles_actions where role_id = " . $db->quoted($id));
+        // If there are no corresponding entries in acl_roles_actions, then we need to add it
+        if (!empty($count['count'])) {
+            $key = array_search($name, $rolesToAdd);
+            if ($key !== false) {
+                unset($rolesToAdd[$key]); // this role ok, no need to add
+            }
+        }
+    }
 
     foreach($mlaRoles as $roleName=>$role){
+        if (!in_array($roleName, $rolesToAdd)) {
+            continue;
+        }
         $role1 = BeanFactory::newBean('ACLRoles');
         $role1->name = $roleName;
         $role1->description = $roleName." Role";
@@ -181,6 +157,5 @@ if($installActions || $missingAclRolesActions) {
             }
         }
     }
-}
 }
 ?>

@@ -30,11 +30,9 @@
     },
 
     /**
-     * @inheritdoc
-     *
      * Overriding to add the custom validation handler to the dom change event
      *
-     * @override
+     * @inheritdoc
      */
     bindDomChange: function() {
         if (!(this.model instanceof Backbone.Model)) {

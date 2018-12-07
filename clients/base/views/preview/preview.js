@@ -48,7 +48,6 @@
         this.meta = _.extend(this.meta, this._previewifyMetadata(_.extend({}, recordMeta, previewMeta)));
         this.action = 'detail';
         this._delegateEvents();
-        this.delegateButtonEvents();
 
         /**
          * An array of the {@link #alerts alert} names in this view.

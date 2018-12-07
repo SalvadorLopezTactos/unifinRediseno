@@ -744,8 +744,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Er du sikker på, at du vil slette denne relation?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Derved bliver denne relation permanent. Er du sikker på, at du vil installere denne relation?',
 'LBL_CONFIRM_DONT_SAVE' => 'Der er foretaget ændringer, siden du sidst gemte. Vil du gemme?',
@@ -757,6 +757,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Konfigurér feltet, så der kan søges på al tekst.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Boosting er processen med at forbedre relevansen for en posts felter.<br/>Felter med et højere boost-niveau vil få større vægt, når søgningen er udført. Når en søgning er udført, vil matchende poster, der indeholder felter med en større vægt blive vist højere i søgeresultaterne.<br/>Standardværdien er 1,0 som står for et neutralt løft. Hvis du vil anvende et positivt løft vil enhver værdi højere end 1 blive accepteret. For et negativ boost bruges værdier lavere end 1. For eksempel En værdi på 01:35 vil positivt styrke et felt med 135 %. Med en værdi på 0,60 anvendes et negativt løft.<br/>Bemærk at i tidligere versioner var det nødvendigt at udføre en fuldtekstsøgning reindeds. Dette er ikke længere nødvendigt.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Ja</b>: Feltet medtages i en importhandling.<br><b>Nej</b>: Feltet medtages ikke i en import.<br><b>Obligatorisk</b>: En værdi for feltet skal angives ved alle importer.',
+'LBL_POPHELP_PII'=>'Feltet krydses automatisk af med henblik på revision, og er tilgængeligt i visning af personlige oplysninger.<br>Felter under personlige oplysninger kan også slettes permanent, når posten er relateret til en anmodning om sletning af Data Privacy.<br>Sletning sker via Data Privacy modulet, og kan udføres af administratorer eller brugere som har Data Privacy Manager stilling.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Indtast et tal for bredden, målt i pixel.<br><br />Det uploadede billede vil blive skaleret til denne bredde.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Indtast et tal for højden, målt i pixel.<br><br />Det uploadede billede vil blive skaleret til denne højde.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

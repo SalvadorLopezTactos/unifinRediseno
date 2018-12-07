@@ -259,7 +259,7 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
             @include $file;
         }
         $extension = "custom/modules/{$this->loadedModule}/Ext/clients/$client/layouts/subpanels/subpanels.ext.php";
-        if (SugarAutoLoader::fileExists($extension)){
+        if (file_exists($extension)) {
             @include $extension;
         }
 
@@ -468,7 +468,7 @@ class DeployedSidecarSubpanelImplementation extends AbstractMetaDataImplementati
             if (!empty($viewdefs[$this->loadedModule][$client]['layout']['subpanels']['components'][0]['override_subpanel_list_view']['link'])
                 && $viewdefs[$this->loadedModule][$client]['layout']['subpanels']['components'][0]['override_subpanel_list_view']['link'] == $this->linkName
             ) {
-                SugarAutoLoader::unlink($override);
+                unlink($override);
             }
         }
     }

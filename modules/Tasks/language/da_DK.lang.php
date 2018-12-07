@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Opgaveliste-dashboard',
+
   'LBL_MODULE_NAME' => 'Opgaver',
   'LBL_MODULE_NAME_SINGULAR' => 'Opgave',
   'LBL_TASK' => 'Opgaver:',

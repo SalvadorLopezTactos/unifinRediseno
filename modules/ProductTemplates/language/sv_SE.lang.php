@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => 'Leverantörer',
   'LNK_PRODUCT_LIST' => 'Produktkatalog',
   'NTC_DELETE_CONFIRMATION' => 'Är du säker på att du vill radera posten?',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => 'Lägg till',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Tilldelat Användarnamn',

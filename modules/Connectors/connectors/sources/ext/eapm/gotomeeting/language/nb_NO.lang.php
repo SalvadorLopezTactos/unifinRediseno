@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Skaff en forbrukernøkkel fra LogMeIn ved å registrere en ny GoToMeeting-applikasjon.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Trinn for å registrere instansen din:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Logg på LogMeIn Developer Center-kontoen din: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Klikk på Mine apper</li>
+    <li>Klikk på Legg til ny app</li>
+    <li>Fyll ut alle felter i skjemaet Legg til app:</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>Appnavn</li>
+            <li>Beskrivelse</li>
+            <li>Produkt-API: VelgGoToMeeting</li>
+            <li>Applikasjons-URL: Angi instans-URLen</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Klikk på knappen Opprett app</li>
+    <li>Fra listen med apper klikker du på navnet til appen din</li>
+    <li>Klkk på fanen Nøkler</li>
+    <li>Kopier verdien til forbrukernøkkelen og angi den nedenfor</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Forbrukernøkkel',
 );

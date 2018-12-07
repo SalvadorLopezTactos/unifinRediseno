@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Několik sloupců bylo definováno se stejným názvem pole.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Chybějící požadovaná pole:',
     'ERR_MISSING_MAP_NAME' => 'Chybí název vlastního mapování',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Import uživatelů je v režimu IDM zakázán.',
     'ERR_SELECT_FULL_NAME' => 'Nemůžete zvolit Plné jméno pokud křestní jméno a příjmení jsou označeny.',
     'ERR_SELECT_FILE' => 'Zvolte soubor pro nahrání.',
     'LBL_SELECT_FILE' => 'Vyberte soubor:',

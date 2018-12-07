@@ -13,27 +13,6 @@
 
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
-'<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
-&nbsp;<br>
-Steps to register your instance:<br>
-&nbsp;<br>
-<ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
-        <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
-        </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
-</ol>
-</td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+'<table border="0" cellspacing="1"> <tr><td valign="top" width="35%" class="dataLabel"> Αποκτήσετε ένα κλειδί καταναλωτή από το LogMeIn καταχωρώντας μια νέα εφαρμογή GoToMeeting. <br>Βήματα για να καταχωρήσετε το υποδείγμά σας <br>: <br><br><ol><li>Συνδεθείτε στον λογαριασμό LogMeIn Developer Center σας: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'> https://goto-developer.logmein.com/</a></li> <li>Κάντε κλικ στο Οι Εφαρμογές μου</li> <li>Κάντε κλικ στο Προσθήκη νέας Εφαρμογής</li> <li>Συμπληρώστε όλα τα πεδία στη φόρμα Προσθήκη Εφαρμογής: </li> <ul><li>Όνομα Εφαρμογής</li> <li>Περιγραφή</li> <li>API προϊόντος: Επιλέξτε GoToMeeting</li> <li>Διεύθυνση URL της εφαρμογής: Εισάγετε τη διεύθυνση URL του υποείγματος</li></ul> <li>Κάντε κλικ στο Κουμπί Δημιουργία Εφαρμογής</li> <li>Από τη λίστα εφαρμογών, κάντε κλικ στο όνομα της εφαρμογής σας</li> <li>Κάντε κλικ στην καρτέλα Κλειδιά</li> <li>Αντιγράψτε την τιμή Κλειδιού Καταναλωτή και επικολλήστε την παρακάτω</li></ol></td></tr></table>',
+    'oauth_consumer_key' => 'Κλειδί Καταναλωτή',
 );

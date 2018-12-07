@@ -8,12 +8,14 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 var ListContainer = function (options) {
-	Container.call(this, options);
+	PMSE.Container.call(this, options);
 	ListContainer.prototype.initObject.call(this, options);
 };
 
-ListContainer.prototype = new Container();
+ListContainer.prototype = new PMSE.Container();
 
 ListContainer.prototype.type = 'ListContainer';
 
@@ -79,7 +81,7 @@ ListContainer.prototype.paintItems = function () {
 
 ListContainer.prototype.createHTML = function () {
 	if(!this.html){
-		Container.prototype.createHTML.call(this);
+		PMSE.Container.prototype.createHTML.call(this);
 		this.html.style.position = "relative"
 	}
 	return this.html;

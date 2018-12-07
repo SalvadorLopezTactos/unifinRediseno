@@ -8,6 +8,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// Get the global PMSE classes variable.
+var PMSE = PMSE || {};
 var showNotes,
     addNotes,
     deleteNotes,
@@ -71,7 +73,7 @@ showNotes = function (caseId, caseIndex, noEdit) {
                 });
             }}
     });
-    w = new Window({
+    w = new PMSE.Window({
         width: 800,
         height: 380,
         modal: true,

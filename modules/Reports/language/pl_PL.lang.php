@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Po kwartałach',
     'LBL_BY_FISCAL_YEAR' => 'Wg roku podatkowego',
     'LBL_BY_FISCAL_QUARTER' => 'Wg kwartału podatkowego',
+    'LBL_AMOUNT' => 'Ilość',
     'LBL_COUNT' => 'Zlicz',
+    'LBL_PERCENT' => 'Procent',
     'LBL_SUM' => 'Sumuj',
     'LBL_AVG' => 'Średnia',
     'LBL_MAX' => 'Maksymalna',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Miesiąc',
     'LBL_YEAR' => 'Rok',
     'LBL_QUARTER' => 'Kwartał',
+    'LBL_FISCAL' => 'Podatkowe',
     'LBL_FISCAL_YEAR' => 'Rok podatkowy',
     'LBL_FISCAL_QUARTER' => 'Kwartał podatkowy',
 	'LBL_YESTERDAY'=>'Wczoraj',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Następny kwartał',
     'LBL_ADD_RELATE' => "Dodaj powiązane",
     'LBL_DEL_THIS' => "Usuń",
-    'LBL_ALERT_CANT_ADD' => 'Nie możesz dodać powiązanych modułów, dopóki nie wybierzesz tabeli do połączenia.\nWybierz moduł z listy rozwijanej po lewej stronie przycisku Dodaj powiązane, który kliknąłeś.',
+    'LBL_ALERT_CANT_ADD' => 'Nie możesz dodać powiązanych modułów, dopóki nie wybierzesz tabeli do połączenia.\\nWybierz moduł z listy rozwijanej po lewej stronie przycisku Dodaj powiązane, który kliknąłeś.',
     'LBL_BY_DAY' => 'Wg dni',
     'LBL_DAY' => 'Dzień',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Wyświetl, gdy nie istnieją rekordy powiązane',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Większe lub równe',
 
     'LBL_FILTER_BY_MODULE' => 'Wg modułów',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Z wykresami',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Błąd podczas pobierania danych raportu szczegółowego dla tej działania. Aby uzyskać pomoc, skontaktuj się z właścicielem raportu.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Raport szczegółowy jest niedostępny',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'Widok listy wyświetla wszystkie raporty spełniające kryteria określonego wyszukiwania i do których użytkownicy mają dostęp. Możesz zobaczyć podstawowe dane każdego raportu w kolumnach widoku listy lub w widoku podglądu. Możesz ustawić znaczniki dla raportów i tworzyć filtry. Kliknij nazwę raportu, aby go wyświetlić lub wybierz Edytuj raport w menu działań, aby zmodyfikować raport.',
+  );

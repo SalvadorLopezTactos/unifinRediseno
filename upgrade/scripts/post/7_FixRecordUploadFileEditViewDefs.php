@@ -104,10 +104,10 @@ class SugarUpgradeFixRecordUploadFileEditViewDefs extends UpgradeScript
      */
     protected function processFile($path, $key, MBmodule $module)
     {
-        if (!SugarAutoLoader::fileExists($path)) {
+        if (!file_exists($path)) {
             return;
         }
-        
+
         $changed = false;
         $viewdefs = array();
         require $path;

@@ -18,7 +18,6 @@
 
     /**
      * @inheritdoc
-     * @override
      */
     _updateTitleValues: function() {
         this.titleSelectedValues = this.model.get('forecast_by');

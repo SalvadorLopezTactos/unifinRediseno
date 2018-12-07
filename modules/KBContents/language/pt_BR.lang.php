@@ -10,7 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
-    'LBL_MODULE_NAME' => 'Base de Conhecimento',
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Painel da lista da base de conhecimento',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Painel do registro da base de conhecimento',
+
+    'LBL_MODULE_NAME' => 'Base de conhecimento',
     'LBL_MODULE_NAME_SINGULAR' => 'Artigo da Base de Conhecimento',
     'LBL_MODULE_TITLE' => 'Artigo da Base de Conhecimento',
     'LNK_NEW_ARTICLE' => 'Criar Artigo',

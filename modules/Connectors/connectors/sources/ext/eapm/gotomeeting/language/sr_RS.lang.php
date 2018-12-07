@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Preuzmite ključ potrošača od LogMeIn-a registrovanjem nove GoToMeeting aplikacije.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Koraci registrovanja instance:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Prijavite se na LogMeIn Developer Center nalog: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Kliknite na Moje aplikacije</li>
+    <li>Kliknite na Dodaj novu aplikaciju</li>
+    <li>Popunite sva polja u obrascu Dodaj aplikaciju:</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>Naziv aplikacije</li>
+            <li>Opis</li>
+            <li>API proizvoda: izaberite GoToMeeting</li>
+            <li>URL aplikacije: unesite URL instance</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Kliknite na dugme Kreiraj aplikaciju</li>
+    <li>Kliknite na naziv vaše aplikacije na listi aplikacija</li>
+    <li>Kliknite na karticu Ključevi</li>
+    <li>Kopirajte vrednost ključa potrošača i unesite je u nastavku</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Ključ potrošača',
 );

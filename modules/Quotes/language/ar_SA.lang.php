@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'لوحة معلومات قائمة عروض الأسعار',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'لوحة معلومات سجل عروض الأسعار',
+
     'LBL_CONTRACTS'=>'العقود',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'العقود',
     'ERR_DELETE_RECORD' => 'يجب تحديد رقم للسجل لحذف عرض الأسعار.',
@@ -166,7 +170,7 @@ $mod_strings = array (
     'LBL_SHIPPING_ADDRESS_STATE' => 'حالة الشحن',
     'LBL_SHIPPING_ADDRESS_STREET' => 'عنوان الشحن',
     'LBL_SHIPPING_ADDRESS' => 'عنوان الشحن:',
-    'LBL_SHIPPING_BODY' => 'إعداد الفاتورة والشحن',
+    'LBL_SHIPPING_BODY' => 'الفوترة والشحن',
     'LBL_SHIPPING_CONTACT_ID' => 'معرّف جهة اتصال الشحن:',
     'LBL_SHIPPING_CONTACT_NAME' => 'اسم جهة اتصال الشحن:',
     'LBL_SHIPPING_CONTACT' => 'جهة الاتصال:',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'الإجمالي الفرعي (بالدولار الأمريكي)',
     'LBL_SUBTOTAL' => 'الإجمالي الفرعي:',
     'LBL_TAXABLE_SUBTOTAL' => 'الإجمالي الفرعي القابل لتطبيق الضريبة',
-    'LBL_SYSTEM_ID' => 'معرّف النظام',
     'LBL_TAX_USDOLLAR'=>'الضريبة (بالدولار الأمريكي)',
     'LBL_TAX' => 'الضريبة:',
     'LBL_TAX_TOTAL' => 'إجمالي الضريبة',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'حذف المحدد',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'حذف البنود المحددة',
     'LBL_SAVE_LINE_ITEMS' => 'برجاء حفظ أي بنود نشطة بواسطة النقر فوق خانة الاختيار الزرقاء الموجودة بجانب كل منها قبل حفظ عرض السعر هذا.',
+    'LBL_COPY_LINE_ITEMS' => 'الرجاء حفظ أي بنود نشطة بالنقر فوق خانة الاختيار الزرقاء الموجودة بجانب كل منها قبل نسخ هذا العرض السعري.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'بحث في كتالوج المنتج',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'لا تتوفر بيانات',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'يجري نسخ البنود السعرية إلى سعر جديد.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'يجري نسخ البنود السعرية إلى سعر جديد. هذه العملية قد تستغرق بعض الوقت.',
 );

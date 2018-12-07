@@ -100,70 +100,64 @@ class SumConditionalRelatedExpression extends NumericExpression
                 condition_values = [condition_values];
             }
 
-        var model = this.context.relatedModel || App.data.createRelatedBean(this.context.model, null, relationship),
-            model_id = model.id || model.cid,
-            precision = model.fields[rel_field].precision || 6,
-            // has the model been removed from it's collection
-            hasModelBeenRemoved = this.context.isRemoveEvent || false,
-            // is this being fired for the condition field or the rel_field?
-            currentFieldIsConditionField = (this.context.changingField === condition_field),
-            // did the condition field change at some point?
-            conditionChanged = _.has(model.changed, condition_field),
-            // is the condition field valid?
-            conditionValid = _.contains(condition_values, model.get(condition_field));
-        if (conditionValid || conditionChanged) {
-            var isCurrency = (model.fields[rel_field].type === 'currency'),
-                current_value = this.context.getRelatedField(relationship, 'rollupConditionalSum', rel_field) || '0',
-                related_collection = this.context.model.getRelatedCollection(relationship),
-                rollup_value = '0';
-
-
-            if (!_.isUndefined(this.context.relatedModel)) {
-                this.context.updateRelatedCollectionValues(
-                    this.context.model,
-                    relationship,
-                    'rollupConditionalSum',
-                    rel_field,
-                    model,
-                    (hasModelBeenRemoved ? 'remove' : 'add')
-                );
-            }
-
-            var all_values = this.context.getRelatedCollectionValues(this.context.model, relationship, 'rollupConditionalSum', rel_field) || {};
-
-            if (_.size(all_values) > 0) {
-                rollup_value = _.reduce(all_values, function(memo, number, key) {
-                    // Check the condition against the live model value
-                    // or assume the model is valid if the server included it.
-                    var rel_model = related_collection.get(key);
-                    if (!rel_model || _.contains(condition_values, rel_model.get(condition_field))) {
-                        return App.math.add(memo, number, precision, true);
-                    }
-
-                    return memo;
-                }, '0');
-
-                if (isCurrency) {
-                    rollup_value = App.currency.convertFromBase(
-                        rollup_value,
-                        this.context.model.get('currency_id')
-                    );
-                }
-            }
-
-            if (!_.isEqual(rollup_value, current_value)) {
-                this.context.model.set(target, rollup_value);
-                this.context.updateRelatedFieldValue(
-                    relationship,
-                    'rollupConditionalSum',
-                    rel_field,
-                    rollup_value,
-                    this.context.model.isNew()
-                );
-            }
-
-            return rollup_value;
+        var model = this.context.relatedModel || App.data.createRelatedBean(this.context.model, null, relationship);
+        var precision = model.fields[rel_field].precision || 6;
+        // has the model been removed from it's collection
+        var hasModelBeenRemoved = this.context.isRemoveEvent || false;
+        // did the condition field change at some point?
+        var conditionChanged = _.has(model.changed, condition_field);
+        
+        var isCurrency = (model.fields[rel_field].type === 'currency');
+        var current_value = this.context.getRelatedField(relationship, 'rollupConditionalSum', rel_field) || '0';
+        var related_collection = this.context.model.getRelatedCollection(relationship);
+        var rollup_value = '0';
+        
+        if (!_.isUndefined(this.context.relatedModel)) {
+            this.context.updateRelatedCollectionValues(
+                this.context.model,
+                relationship,
+                'rollupConditionalSum',
+                rel_field,
+                model,
+                (hasModelBeenRemoved)? 'remove' : 'add'
+            );
         }
+
+        var all_values = this.context.getRelatedCollectionValues(this.context.model, relationship, 'rollupConditionalSum', rel_field) || {};
+
+        if (_.size(all_values) > 0) {
+            rollup_value = _.reduce(all_values, function(memo, number, key) {
+                // Check the condition against the live model value
+                // or assume the model is valid if the server included it.
+                var rel_model = related_collection.get(key);
+                if (!rel_model || _.contains(condition_values, rel_model.get(condition_field))) {
+                    return App.math.add(memo, number, precision, true);
+                }
+
+                return memo;
+            }, '0');
+
+            if (isCurrency) {
+                rollup_value = App.currency.convertFromBase(
+                    rollup_value,
+                    this.context.model.get('currency_id')
+                );
+            }
+        }
+
+        if (!_.isEqual(rollup_value, current_value)) {
+            this.context.model.set(target, rollup_value);
+            this.context.updateRelatedFieldValue(
+                relationship,
+                'rollupConditionalSum',
+                rel_field,
+                rollup_value,
+                this.context.model.isNew()
+            );
+        }
+
+        return rollup_value;
+        
 JS;
 
     }

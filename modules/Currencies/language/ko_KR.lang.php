@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => '신규 업무 추가하기',
   'NTC_DELETE_CONFIRMATION' => '이 기록을 삭제하시겠습니까? 이 화폐를 사용하는 모든 기록은 접속시 시스템 초기설정 화폐로 전환됩니다. 설정에서 실행정지를 시키는것이 좋습니다.',
   'LBL_BELOW_MIN' => '환전 비율은 0이상이여야 합니다.',
-  'currency_status_dom' => 
-  array (
-    'Active' => '작동중',
-    'Inactive' => '중지',
-  ),
   'LBL_CREATED_BY' => '생성자',
   'LBL_EDIT_LAYOUT' => '지면 배치 편집하기' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => '관리자만 가능합니다.',
+  'LBL_CURRENCY_DEFAULT' => '미국 달러 (기본값)',
+
 );
 ?>

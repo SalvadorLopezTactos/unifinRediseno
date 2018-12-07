@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => '이메일',
     'db_email2' => '다른 이메일',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => '연락처 목록 대시보드',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => '연락처 기록 대시보드',
+
     'LNK_CONTACT_REPORTS' => '연락처와 관련된 보고서 보기',
     'ERR_DELETE_RECORD' => '연락처를 삭제하기 위해선 정확한 고유번호를 입력하셔야합니다.',
     'LBL_ACCOUNT_ID' => '거래처 ID',
@@ -36,7 +40,7 @@ $mod_strings = array (
     'LBL_ALT_ADDRESS_STREET' => '나머지 주소',
     'LBL_ALTERNATE_ADDRESS' => '보조 주소',
     'LBL_ANY_ADDRESS' => '다른 주소',
-    'LBL_ANY_EMAIL' => '다른 이메일',
+    'LBL_ANY_EMAIL' => '이메일',
     'LBL_ANY_PHONE' => '다른 전화번호',
     'LBL_ASSIGNED_TO_NAME' => '담당자',
     'LBL_ASSIGNED_TO_ID' => '담당자',
@@ -80,7 +84,7 @@ $mod_strings = array (
     'LBL_IMPORT_VCARD' => 'vCard 가져오기',
     'LBL_IMPORT_VCARD_SUCCESS' => '전자명함으로부터의 연락처가 성공적으로 생성되었습니다.',
     'LBL_VCARD' => 'vCard',
-    'LBL_IMPORT_VCARDTEXT' => '현재 vCard파일로 부터 자동으로 새로운 연락처를 추가합니다.',
+    'LBL_IMPORT_VCARDTEXT' => '현재 vCard파일로부터 자동으로 새로운 연락처를 추가합니다.',
     'LBL_INVALID_EMAIL'=>'올바르지 않은 이메일',
     'LBL_INVITEE' => '직속 보고자',
     'LBL_LAST_NAME' => '성',
@@ -100,7 +104,7 @@ $mod_strings = array (
     'LBL_LIST_TITLE' => '직급',
     'LBL_MOBILE_PHONE' => '휴대폰',
     'LBL_MODIFIED' => '수정자',
-    'LBL_MODULE_NAME' => '연락처 목록',
+    'LBL_MODULE_NAME' => '연락처',
     'LBL_MODULE_NAME_SINGULAR' => '연락처',
     'LBL_MODULE_TITLE' => '연락처:홈',
     'LBL_NAME' => '이름',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => '보조 주소를 기본 주소로 복사하기',
     'NTC_COPY_PRIMARY_ADDRESS' => '기본 주소를 대체 주소로 복사히기',
     'NTC_DELETE_CONFIRMATION' => '정말로 현재 자료를 삭제하시겠습니까?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '영업기회를 생성하시려면 거래처를 기입하셔야 합니다.\n 새로운 거래처를 생성하시거나 기존 자료에서 선택해 주세요.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '영업기회를 생성하시려면 거래처를 기입하셔야 합니다.\\n 새로운 거래처를 생성하시거나 기존 자료에서 선택해 주세요.',
     'NTC_REMOVE_CONFIRMATION' => '정말로 현재 연락처를 선택된 요청사례에서 제거하시겠습니까?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '정말로 현재 자료를 자동 보고 목록에서 제외하시겠습니까?',
 
@@ -267,4 +271,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => '리드 점수(성과)',
 
     'LBL_FILTER_CONTACTS_REPORTS' => '연락처 보고서',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '동의한 사업 목적',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '동의서 최종 업데이트',
 );

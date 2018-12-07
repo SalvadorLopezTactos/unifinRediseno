@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Créer Tâche',
   'NTC_DELETE_CONFIRMATION' => 'Êtes-vous sûr de vouloir supprimer cette devise ? Il serait peut être préférable de passer son statut à "inactif" car tous les enregistrements utilisant cette devise seront convertis en devise par défaut quand ils seront consultés.',
   'LBL_BELOW_MIN' => 'Le taux de conversion doit être supérieure à 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Actif',
-    'Inactive' => 'Inactif',
-  ),
   'LBL_CREATED_BY' => 'Créé par',
   'LBL_EDIT_LAYOUT' => 'Éditer la mise en page' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Seulement les admin',
+  'LBL_CURRENCY_DEFAULT' => 'Dollars US (par défaut)',
+
 );
 ?>

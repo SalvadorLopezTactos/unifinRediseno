@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> 'This query will be stacked below the first query in the report',
     'ERR_DB_VERSION_FAILURE'			=> 'Unable to check database version.',
 
-
-	'ERR_OC_PASSWORD'					=> 'Password is required.',
-	'ERR_OC_SERVER_URL'					=> 'Sugar Server URL is required.',
-	'ERR_OC_USERNAME'					=> 'Username of server user is required.',
-	'LBL_INSTALL_OC'					=> 'Install Offline Client',
-    'LBL_OC_ADMIN'                      => 'Please contact your Administrator in order to resolve this problem.',
-    'LBL_OC_SUCCESS'                    => 'Offline Client Installation has completed. Please click the button below in order to be taken to your installation.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'Admin Username',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'Please enter the details below in order to properly install and sync your offline client.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'URL of Sugar Server',
-	'LBL_OC_INSTALL_PASS'				=> 'Password for server user',
-	'LBL_OC_INSTALL_TITLE'				=> 'Offline Client Installation',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'This is the username you will connect to your Sugar server with.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'Username',
-	'LBL_PERFORM_OC_INSTALL'			=> 'Initialising Offline Client Installation',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'Please enter the details below in order to properly install and sync your offline client.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Provide the username for the Sugar admin user.',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Provide the password for the Sugar admin user.',
@@ -92,7 +75,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'For optimal experience using IIS/FastCGI sapi, set fastcgi.logging to 0 in your php.ini file.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Unsupported PHP Version Installed: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Database unavailable',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Database Support was not found.  Please make sure you have the necessary drivers for one of the following supported Database Types: MySQL, MS SQLServer, Oracle, or DB2.  You might need to uncomment the extension in the php.ini file, or recompile with the right binary file, depending on your version of PHP.  Please refer to your PHP Manual for more information on how to enable Database Support.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Database Support was not found.  Please make sure you have the necessary drivers for one of the following supported Database Types: MySQL, MS SQLServer, Oracle or DB2.  You might need to uncomment the extension in the php.ini file or recompile with the right binary file, depending on your version of PHP.  Please refer to your PHP Manual for more information on how to enable Database Support.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Functions associated with XML Parser Libraries that are needed by the Sugar application were not found.  You might need to uncomment the extension in the  php.ini file, or recompile with the right binary file, depending on your version of PHP.  Please refer to your PHP Manual for more information.',
     'LBL_CHECKSYS_CSPRNG' => 'Random number generator',
     'ERR_CHECKSYS_MBSTRING'             => 'Functions associated with the Multibyte Strings PHP extension (mbstring) that are needed by the Sugar application were not found. <br/><br/>Generally, the mbstring module is not enabled by default in PHP and must be activated with --enable-mbstring when the PHP binary is built. Please refer to your PHP Manual for more information on how to enable mbstring support.',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'Upload File Size',
 	'ERR_URL_BLANK'						=> 'Provide the base URL for the Sugar instance.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'Could not locate installation record of',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'The uploaded file is not compatible with this flavour (Community Edition, Professional, or Enterprise) of Sugar: ',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'The uploaded file is not compatible with this flavour (Professional, Enterprise or Ultimate edition) of Sugar: ',
 	'ERROR_LICENSE_EXPIRED'				=> "Error: Your licence expired",
 	'ERROR_LICENSE_EXPIRED2'			=> " day(s) ago.   Please go to the <a href='index.php?action=LicenseSettings&module=Administration'>'\"Licence Management\"</a>  in the Admin screen to enter your new licence key.  If you do not enter a new licence key within 30 days of your licence key expiration, you will no longer be able to log in to this application.",
 	'ERROR_MANIFEST_TYPE'				=> 'Manifest file must specify the package type.',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'Expiration Date',
 	'LBL_LICENSE_I_ACCEPT'				=> 'I Accept',
 	'LBL_LICENSE_NUM_USERS'				=> 'Number of Users',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'Please enter the number of purchased offline clients.',
-	'LBL_LICENSE_OC_NUM'				=> 'Number of Offline Client Licences',
-	'LBL_LICENSE_OC'					=> 'Offline Client Licences',
 	'LBL_LICENSE_PRINTABLE'				=> 'Printable View',
     'LBL_PRINT_SUMM'                    => 'Print Summary',
 	'LBL_LICENSE_TITLE_2'				=> 'SugarCRM Licence',
@@ -567,10 +547,6 @@ For more detailed information, please consult the Installation Guide.           
     'LBL_COLLATION' => 'Collation Settings',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Provide a System Name for the Sugar instance.',
 	'LBL_PATCH_UPLOAD' => 'Select a patch file from your local computer',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'Php version 5 or above is required.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(Your current php version is',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php Backward Compatibility mode is turned on. Set zend.ze1_compatibility_mode to Off for proceeding further',
 
     'advanced_password_new_account_email' => array(
@@ -590,5 +566,3 @@ For more detailed information, please consult the Installation Guide.           
         'name' => 'Forgot Password email',
         ),
 );
-
-?>

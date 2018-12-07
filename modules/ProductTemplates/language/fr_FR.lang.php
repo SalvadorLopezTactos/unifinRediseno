@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => 'Transporteurs',
   'LNK_PRODUCT_LIST' => 'Catalogue Produits',
   'NTC_DELETE_CONFIRMATION' => 'Êtes-vous sûr de vouloir supprimer cet enregistrement ?',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => 'Ajouter',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Assigné à',

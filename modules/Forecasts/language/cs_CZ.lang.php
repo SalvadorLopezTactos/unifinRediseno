@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Řídicí panel předpovědí',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Předpovědi',
     'LBL_MODULE_NAME_SINGULAR' => 'Předpověď',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'ID produktu',
     'LBL_QUOTA_ID' => 'ID kvóty',
     'LBL_VERSION' => 'Verze',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Skrýt panel legendy',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Zobrazit panel legendy',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Skrýt řádek legendy',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Zobrazit řádek legendy',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Chyba: uživatel {0} nemá přístupk předpovědi {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Datum začátku fiskálního roku:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Nastavte časové období, které bude použité v modulu předpovědí.<br /><br />Začněte výběrem počátečního data vašeho fiskálního roku. Pak vyberte typ časového období, přes které chcete předpovídat. Rozpětí data časových období bude automaticky vypočítáno na základě vašeho výběru. Sub-časové období je základem pro předpovědní list.<br /><br />Zobrazitelná budoucnost a minulá časová období určí počet viditelných sub-období v modulu předpovědí. Uživatelé mohou zobrazit a upravit čísla předpovědí ve viditelných sub-obdobích.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Nastavte, jak byste chtěli kategorizovat {{forecastByModule}}. <br><br>Upozorňujeme, že Nastavení rozsahu nelze po prvním potvrzení změnit. U upgradovaných instancí je Nastavení rozsahu uzamčeno se stávajícími údaji Předpovědi.<br><br>Můžete si vybrat dvě nebo více kategorií na základě rozsahů pravděpodobnosti nebo vytvořit kategorie, které nejsou založeny na pravděpodobnosti. <br><br>Vlevo od vašich vlastních kategorií jsou k dispozici zaškrtávací políčka; používejte tyto políčka, abyste rozhodli, které rozsahy budou zahrnuty do částky Předpovědi potvrzené a nahlášené manažerům. <br><br>Uživatel může změnit stav zahrnout/vyloučit a kategorii {{forecastByModule}} ze svého listu ručně.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Nakonfigurujte, jak chcete kategorizovat {{forecastByModule}}. <br><br>Vezměte prosím na vědomí, že nastavení rozsahu nelze po prvním potvrzení změnit. U upgradovaných instancí je nastavení rozsahu uzamčeno s existujícími údaji o předpovědi.<br><br>Můžete vybrat dvě nebo více kategorií na základě rozsahů pravděpodobnosti, nebo vytvořit kategorie, které nejsou založeny na pravděpodobnosti.<br><br>Vlevo od vašich vlastních kategorií jsou zaškrtávací políčka. Použijte je k tomu, abyste rozhodli, které rozsahy budou zahrnuty do schválené částky předpovědi a oznámeny manažerům.<br><br>Uživatel může změnit status zařadit/vyloučit a kategorii {{forecastByModule}} ručně ze svého listu.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Vyberte sloupce, které chcete, aby uživatelé vyplnili pro jejich předpovědi každého {{forecastByModuleSingular}}. Prosím mějte na paměti, že pravděpodobná částka je svázaná s částkou zobrazenou v {{forecastByModule}}; z toho důvodu nemůže být sloupec Pravděpodobná částka skryt.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Vyberte, které sloupce byste chtěli zobrazit v modulu předpovědí. Seznam polí bude kombinovat list a umožní uživateli vybrat, jak nakonfigurovat jeho pohled.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Jsem zástupným textem pro text Předpověď podle how-to!',

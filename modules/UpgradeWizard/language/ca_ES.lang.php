@@ -55,7 +55,7 @@ $mod_strings = array(
     'ERROR_MANIFEST_TYPE'                       => 'El fitxer del manifest ha d&#39;especificar el tipus de paquet.',
     'ERROR_PACKAGE_TYPE'                        => 'L´arxiu de manifest deu especificar un tipus de paquet no reconegut',
     'ERROR_VERSION_INCOMPATIBLE'                => 'L´arxiu pujat no és compatible amb aquesta versió de Sugar:',
-    'ERROR_FLAVOR_INCOMPATIBLE'                 => 'L´arxiu pujat no és compatible amb aquesta edició (Community Edition, Professional, o Enterprise) de Sugar:',
+    'ERROR_FLAVOR_INCOMPATIBLE'                 => 'L&#39;arxiu pujat no és compatible amb aquesta edició (Professional, Enterprise o Ultimate) de Sugar: %s',
 
     'ERROR_UW_CONFIG_DB'                        => 'Error guardant %s config var a la db (clau %s, valor %s).',
     'ERR_NOT_ADMIN'                             => "Accés no autoritzat a l´administració.",
@@ -98,7 +98,7 @@ $mod_strings = array(
 	'LBL_UW_COMPLIANCE_MYSQL'					=> 'Versió Mínima de MySQL',
     'LBL_UW_COMPLIANCE_DB'                      => 'Versió de base de dades mínima',
 	'LBL_UW_COMPLIANCE_PHP_INI'					=> 'Ruta de php.ini',
-	'LBL_UW_COMPLIANCE_PHP_VERSION'				=> 'Versió Mínima de PHP',
+    'LBL_UW_COMPLIANCE_PHP_VERSION'             => 'Versió de PHP',
 	'LBL_UW_COMPLIANCE_SAFEMODE'				=> 'Configuració de PHP: Manera Segura',
 	'LBL_UW_COMPLIANCE_TITLE'					=> 'Comprobació de Configuració del Servidor',
 	'LBL_UW_COMPLIANCE_TITLE2'					=> 'Configuració Detectada',
@@ -243,7 +243,6 @@ $mod_strings = array(
 	'LBL_UW_DROP_SCHEMA_METHOD'					=> 'Mètode d´Eliminació d´Antic Esquema',
 	'LBL_UW_SHOW_OLD_SCHEMA_TO_DROP'			=> 'Mostrar l´Antic Esquema que seria eliminat',
 	'LBL_UW_SKIPPED_QUERIES_ALREADY_EXIST'      => 'Consultes Saltades',
-	'LBL_INCOMPATIBLE_PHP_VERSION'              => 'Es requereix la versió de PHP 5 o superior.',
 	'ERR_CHECKSYS_PHP_INVALID_VER'      => 'La seva versió de PHP no està soportada per Sugar. Necessitarà instalar una versió que sigui compatible amb l&#39;aplicació Sugar. Si us plau,consulti la Matriu de Compatibilitat de les Notes de Llançament per a informació sobre les Versions de PHP soportades. La seva versió és la',
 	'LBL_BACKWARD_COMPATIBILITY_ON' 			=> 'La manera de compatibilitat cap a enrere de PHP està habilitada. Estableixi zend.ze1_compatibility_mode Off abans de continuar',
 	//including some strings from moduleinstall that are used in Upgrade
@@ -260,8 +259,6 @@ $mod_strings = array(
 	'LBL_ML_INSTALL'=>'Instal·lar',
 	//adding the string used in tracker. copying from homepage
 	'LBL_HOME_PAGE_4_NAME' => 'Monitorització',
-	'LBL_CURRENT_PHP_VERSION' => '(La seva versió actual de PHP és',
-	'LBL_RECOMMENDED_PHP_VERSION' => 'La versió recomanada de PHP és 5.2.1 o superior)',
 	'LBL_MODULE_NAME' => 'Assistent d&#39;actualitzacions',
 	'LBL_MODULE_NAME_SINGULAR' => 'Assistent d&#39;actualitzacions',
 	'LBL_UPLOAD_SUCCESS' => 'Actualització d&#39;un paquet carregat amb èxit. Feu clic a Següent per realitzar una comprovació final.',

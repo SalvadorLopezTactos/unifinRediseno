@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'OAuth потребителски ключове',
     'OAuthTokens' => 'Символи за отворено удостоверяване',
     'Filters' => 'Филтри',
-    'UserSignatures' => 'Потребителски подпис',
+    'UserSignatures' => 'Подписи на електронната поща',
     'Shippers' => 'Транспортни фирми',
     'Styleguide' => 'Ръководство за разработка',
     'Feedbacks' => 'Обратна връзка',
     'Tags' => 'Етикети',
     'Categories' => 'Категории',
     'Dashboards' => 'Електронни табла',
+    'OutboundEmail' => 'Настройки на електронната поща',
+    'EmailParticipants' => 'Адресати на електронно писмо',
+    'DataPrivacy' => 'Поверителност на личните данни',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'Оф',
         'Tasks' => 'З',
-        'Dashboards' => 'Db',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => 'DP (ПЛД)',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => 'Тип на продукт',
     'Shippers' => 'Транспортна фирма',
     'Subscriptions' => 'Абонамент',
-    'UserSignatures' => 'Потребителски подпис',
+    'UserSignatures' => 'Подпис на електронната поща',
     'Feedbacks' => 'Обратна връзка',
     'Tags' => 'Етикет',
     'Categories' => 'Категория',
+    'OutboundEmail' => 'Настройка на електронната поща',
+    'EmailParticipants' => 'Адресат на електронно писмо',
+    'DataPrivacy' => 'Поверителност на личните данни',
   ),
 
 /*
@@ -329,6 +336,11 @@ $app_list_strings = array (
     'Existing Business' => 'Съществуваща фирма',
     'New Business' => 'Нова фирма',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => 'Активен',
+            'Inactive' => 'Неактивен',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => 'Приход',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => 'Лобист',
     'Other' => 'Други',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => 'Активен',
+            'Inactive' => 'Неактивен',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => 'Активен',
+            'Inactive' => 'Неактивен',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => 'Основен контакт',
@@ -506,7 +529,7 @@ $app_list_strings = array (
   'call_status_default' => 'Планирана',
   'call_status_dom' =>
   array (
-    'Planned' => 'Отложено изпълнение на',
+    'Planned' => 'насрочено',
     'Held' => 'проведено',
     'Not Held' => 'отменено',
   ),
@@ -523,7 +546,7 @@ $app_list_strings = array (
     'Assigned' => 'Разпределена',
     'In Process' => 'В опашката?',
     'Converted' => 'Преобразуван:',
-    'Recycled' => 'Възобновен',
+    'Recycled' => 'Премахнат',
     'Dead' => 'Загубен',
   ),
    'gender_list' =>
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => 'Задача',
       'KBContents' => 'База от знания',
+      'Notes' => 'Бележка',
   ),
 
   'record_type_display_notes' =>
@@ -659,6 +683,14 @@ $app_list_strings = array (
     'Calls' => 'Обаждане',
       'KBContents' => 'База от знания',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => 'Oрганизация',
+        'Contacts' => 'Контакт',
+        'Employees' => 'Служител',
+        'Leads' => 'Потенциален клиент',
+        'Prospects' => 'Целеви клиент',
+        'Users' => 'Потребител',
+    ),
 
   'parent_type_display' =>
   array (
@@ -678,7 +710,7 @@ $app_list_strings = array (
 
     'Prospects' => 'Целеви клиент',
       'KBContents' => 'База от знания',
-
+      'Notes' => 'Бележка',
   ),
 
   'product_status_default_key' => 'Изпрати',
@@ -832,7 +864,6 @@ $app_list_strings = array (
     'Product' => 'Продукт',
     'User' => 'Потребител',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => 'Електронна поща',
     'Twitter' => 'Туитър'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => 'Молба за политика относно Поверителност на личните данни',
+        'Send Personal Information being processed' => 'Изпрати Личните данни се обработват',
+        'Rectify Information' => 'Коригиране на данните',
+        'Request to Erase Information' => 'Заявка за изтриване на данните',
+        'Export Information' => 'Експортиране на данните',
+        'Restrict Processing' => 'Ограничаване на обработката',
+        'Object to Processing' => 'Не разрешавай обработване',
+        'Consent to Process' => 'Одобрение за обработване',
+        'Withdraw Consent' => 'Оттегли одобрението',
+        'Other' => 'Друго',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => 'Бизнес комуникации',
+        'Marketing Communications by company' => 'Маркетингови комуникации по компании',
+        'Marketing Communications by partners' => 'Маркетингови комуникации по партньори',
+    ),
+    'dataprivacy_status_default_key' => 'Отворен',
+    'dataprivacy_status_dom' => array(
+        'Open' => 'Отворен',
+        'Closed' => 'Приключена',
+        'Rejected' => 'Отхвърлена',
+    ),
+    'dataprivacy_priority_default_key' => 'Ниска',
+    'dataprivacy_priority_dom' => array(
+        'Low' => 'Ниска',
+        'Medium' => 'Средна',
+        'High' => 'Висока',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => 'Студио',
     'Upgrade' => 'Актуализация',
     'Users' => 'Потребители',
+    'OutboundEmail' => 'Настройки на електронната поща',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => 'Завършил неуспешно',
                                         'completed'     => 'Приключена',
                                         'no curl'       => 'Не е извършен: Няма cURL',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => 'Работен вариант',
+        'Archived' => 'Архивни',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => 'Блокиращ - по идентификатор',
     'test' => 'Проверка [Alt+T]',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => 'Активен',
+             'Inactive' => 'Неактивен',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3 седмици',
         '31' => '1 месец',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => 'Активен',
-    'Inactive' => 'Неактивен',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => 'Висока',
         'medium'    => 'Средна',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => 'Няма',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'Google Docs',
+        'exchange' => 'Обмени',
+        'outlook' => 'Outlook',
+        'other' => 'Друг',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2032,6 +2099,11 @@ $app_list_strings = array (
         'ACTIVE' => 'Разрешен',
         'INACTIVE' => 'Забранени модули',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => 'Запис',
+        'records' => 'Списък',
+        'activities' => 'Хронология',
+    ),
 );
 
 $app_strings = array (
@@ -2043,7 +2115,7 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Следвай линка',
   'LBL_TOGGLE_VISIBILITY' => 'Промяна на статуса за визуализация', // Record view header panel element
   'LBL_ACTIVITIES' => 'Хронология',
-  'LBL_COPYRIGHT' => '© 2004-2017 SugarCRM Inc. Всички права запазени.',
+  'LBL_COPYRIGHT' => '© 2004-2018 SugarCRM Inc. Всички права запазени.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar и 3-D кубът са регистрирани търговски марки на SugarCRM Inc. '.
         'Всички други наименования на фирми и продукти, използвани или упоменати в този продукт е възможно да са търговски марки на '.
         'SugarCRM ®, Sugar Enterprise™ и Sugar™ са търговски марки на SugarCRM Inc.',
@@ -2116,6 +2188,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => 'Използване на SSL или TLS',
     'LBL_NO_ACTION'                         => 'Няма действие с посоченото име.',
     'LBL_NO_DATA'                           => 'Няма въведени данни',
+    'LBL_NOT_APPLICABLE'                    => 'Не е приложимо',
     'LBL_ROUTING_ADD_RULE'                  => 'Добави правило',
     'LBL_ROUTING_ALL'                       => 'Най-малко',
     'LBL_ROUTING_ANY'                       => 'Всеки',
@@ -2320,7 +2393,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Съхрани',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Добавяне на папката към',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Тази папка не може да бъде променена',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Сигурни ли сте, че искате да изтриете тази папка?\nПроцесът е необратим.\\С изтриването на папката ще бъдат изтрити и всички включени към нея папки.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Сигурни ли сте, че искате да изтриете тази папка?\\nПроцесът е необратим.\\С изтриването на папката ще бъдат изтрити и всички включени към нея папки.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'Нова папка',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Моля, изберете папка преди да продължите.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Управление на папките',
@@ -2547,6 +2620,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'Импортиране: извършено',
     'LBL_EMAIL_IMPORT_FAIL'                 => 'Грешка при импортиране: съобщението вече е било импортирано или е изтрито от пощенския сървър',
 
+    'LBL_EMAILS_FROM' => 'Изпратени електронни писма',
+    'LBL_EMAILS_RECEIVED' => 'Получени електронни писма',
+    'LBL_EMAIL_ADDRESSES_USED' => 'Адреси на електронна поща, използвани в електронни писма',
+    'LBL_EMAIL_ADDRESS' => 'Адрес на електронна поща',
+    'LBL_FROM' => 'От',
+    'LBL_TO' => 'До',
+    'LBL_CC' => 'СС',
+    'LBL_BCC' => 'Скрито копие до',
+
     'LBL_LINK_NONE'=> 'няма',
     'LBL_LINK_ALL'=> 'Всички',
     'LBL_LINK_RECORDS'=> 'Записи',
@@ -2605,6 +2687,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Необходимо е активна сесия, за да бъде експортирано съдържанието.',
     'ERR_NO_HEADER_ID' => 'Тази опция не се поддържа от текущата визуализация.',
     'ERR_NOT_ADMIN' => "Достъпът до панел &quot;Администриране&quot; не е разрешен.",
+    'ERR_DISABLED_FOR_IDM_MODE' => "Тази опция е деактивирана в SugarCRM за режим IDM и налична в конзолата Cloud.",
+    'ERR_GOTO_CLOUD_CONSOLE' => "Моля, отидете до <a href=\"%s\" target=\"_blank\">конзолата Cloud</a>.",
     'ERR_MISSING_REQUIRED_FIELDS' => 'Липсва задължително поле:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Липсва задължително поле:',
     'ERR_INVALID_VALUE' => 'Невалидна стойност:',
@@ -2934,7 +3018,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Грешка при масова актуализация. Иницииране на нова актуализация: ({{num}} от {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Масовата актуализация не е приключила. {{num}} записа остават непроменени.',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => 'Масовата актуализация не е приключила. {{num}} записа остават непроменени.',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} бяха игнорирани поради правата на достъп до тях.',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} записът(ите) бяха игнорирани поради разрешения или грешки.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} записа бяха успешно актуализирани.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} Масова Актуализация',
     'TPL_MASSDELETE_PROGRESS_STATUS' => 'изтриване на {{num}} от {{total}}.',
@@ -3006,6 +3090,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'потребителски настройки по подразбиране',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => 'потребителски профил',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'групов профил',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => 'Име',
     'LBL_NEW_BUTTON_KEY' => 'Н',
     'LBL_NEW_BUTTON_LABEL' => 'Създай',
@@ -3218,7 +3303,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Всички права запазени.<br />SugarCRM, Sugar и 3-D кубът са регистрирани търговски марки на SugarCRM Inc. '.
         'Всички други наименования на фирми и продукти, използвани или упоменати в този продукт е възможно да са търговски марки на '.
         'съответните компании, с които те са свързани.',
@@ -3256,7 +3341,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => 'Парола',
     'LBL_LOGGED_OUT' => 'Вие излязохте от системата.',
     'LBL_LOGIN_FORM_LABEL' => 'Покажи формата за вход в системата',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => 'Върни се на екрана за влизане',
+    'LBL_LOGIN_INACTIVE_USER' => 'Неактивен потребител',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => 'Потребителят на портала или групата не може да влезе.',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => 'Начало',
@@ -3323,8 +3410,9 @@ $app_strings = array (
     'LNK_BACKTOTOP' => 'Начало на страницата',
     'LNK_REMOVE' => 'изтрий',
     'LNK_RESUME' => 'Поднови',
-    'LNK_VIEW_CHANGE_LOG' => 'Разгледай направените промени',
-
+    'LNK_VIEW_CHANGE_LOG' => 'Преглед на Дневника на одитите',
+    'TPL_AUDIT_LOG_TITLE' => 'Дневник на одитите за {{{name}}}',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => 'Натиснете бутонът за предишен екран в браузъра и отстранете проблема.',
     'NTC_DATE_FORMAT' => '(гггг-мм-дд)',
@@ -3358,7 +3446,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "Лицензът на SugarCRM ще изтече скоро.",
     'ERROR_LICENSE_VALIDATION'=> "Лицензът Ви следва да се поднови. Достъпът е разрешен единствено за администратора",
     'WARN_LICENSE_VALIDATION'=> "Лицензът на SugarCRM трябва да бъде ревалидиран скоро.",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"Разрешените Offline клиенти надхвърлят броя посочен в лиценза.",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Внимание:</b> Вашият браузър е в режим IE compatibility view, който се поддържа.",
     'WARN_LICENSE_SEATS'=>  "Внимание: Броят на потребителите е достигнал максимално разрешения от лиценза",
     'WARN_LICENSE_SEATS_MAXED'=>  "Внимание: Броят на потребителите надхвърля разрешените от лиценза.",
@@ -3428,9 +3515,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'В процес на изпълнение..',
     'LBL_REQUEST_PROCESSED'=>'Добави',
     'LBL_AJAX_FAILURE' => 'Грешка в интерфейса Ajax',
-    'LBL_OC_STATUS' => 'Статус на Offline Client',
-    'LBL_OC_STATUS_TEXT' => 'Задаване на права на потребителя за ползване на Offline Client.',
-    'LBL_OC_DEFAULT_STATUS' => 'Неактивен',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => 'Търсене...',
     'LBL_SAVED_SEARCH_SHORTCUT' => 'Съхранени критерии за търсене',
     'LBL_SEARCH_POPULATE_ONLY'=> 'Търсене с използване на критериите горе',
@@ -3531,6 +3615,7 @@ $app_strings = array (
     'LBL_COLLAPSE_ALL' => 'Свиване на всички',
     'LBL_EXPAND_ALL' => 'Показване на всички',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => 'Редактирай',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => 'Списък със справки',
     'LBL_DASHLET_REFRESH_LABEL' => 'Обнови',
     'LBL_DASHLET_REMOVE_LABEL' => 'Премахни',
     'LBL_DASHLET_DROP_HERE' => 'Позтави тук',
@@ -4215,7 +4300,9 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Потвърди',
     'LBL_NO_ACCESS' => '(липса на достъп)',
     'LBL_NO_ACCESS_LOWER' => 'Потребителят няма достъп до записа',
-    'LBL_NO_FIELD_ACCESS' => 'Липса на права на достъп',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => 'Стойността е изтрита',
+    'LBL_VALUE_ERASED_TOOLTIP' => 'Тези данни бяха изтрити поради заявка за защита на данните',
     'LBL_CREATE_RELATED_RECORD' => 'Създай свързан запис',
     'LBL_ASSOC_RELATED_RECORD' => 'Свържете съществуващ запис',
     'LBL_CHOOSE_LINK' => 'Избере тип на връзката',
@@ -4284,7 +4371,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => 'По-голям',
     'LBL_FONTSIZE_HUGE' => 'Още по-голям',
     'LBL_FONTSIZE_EXTRA_HUGE' => 'Огромен',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => 'Неуспешно сваляне\r\n{{{this}}}',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "Неуспешно изтегляне\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => 'Още...',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => '.. по-малко',
     'LBL_OFFLINE_MODE' => 'Режим Offline',
@@ -4353,6 +4440,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => 'Детайли за транзакцията',
     'LBL_RECORD_DELETED' => '(Записът е изтрит)',
     'LBL_NOT_AVAILABLE' => 'липсва',
+    'LBL_FILE_SIZE' => 'Размер на файла',
     'LBL_FILE_SIZE_UNITS_B' => 'Байта',
     'LBL_FILE_SIZE_UNITS_KB' => 'kB',
     'LBL_FILE_SIZE_UNITS_MB' => 'MB',
@@ -4476,6 +4564,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => 'Екранът с информация за обектите се отваря в дясната страна на вашия екран.',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => 'Използвайте стрелките за кратка презентация на ключовите компоненти в това меню.',
 
+    'LBL_COMMENT_ADD' => 'Вмъкване на коментар',
+    'LBL_REQUIRED' => 'Задължително',
+    'LBL_MORE_BUTTON' => 'Още',
+    'LBL_TRY_AGAIN' => 'Опитайте отново',
+    'LBL_NEW_RECORDS' => 'Създадени скоро',
+    'LBL_ASSIGNED_TO_ME' => 'Моят {{{module}}}',
+    'LBL_LISTVIEW_FILTER_ALL' => 'Всички {{{module}}}',
+    'LBL_UNFAVORITE' => 'Премахване на предпочитание',
+    'LBL_ACTIVITY_CREATE' => 'Създаден {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UPDATE' => 'Актуализирани {{{changes}}} в {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_LINK' => 'Свързан {{{relatedRecord}}} с {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UNLINK' => 'Запис с премахната връзка {{{relatedRecord}}} от {{{record}}} {{{module}}}',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{relationship}} за {{parentModule}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => 'Изтегляне на свързани записи...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => 'Конфигурацията на електронното Ви табло е променена. Искате ли да презаредите?',
+    'LBL_RECORDS' => 'Записи',
+    'LBL_DASHBOARDS' => 'Електронни табла',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => 'Търсене на {{searchCriteria}}...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => 'Основно меню',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => 'Бързо създаване на нов запис',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => 'Плъзнете за повече опции',
+    'LBL_DETAILS' => 'Допълнителна информация',
+    'LBL_DETAIL_RELATED' => 'Относно',
+    'LBL_CREATE_RELATED_MODULE_WARN' => 'Модулът {{module}} изиксва {{relatedModule}}. <a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>Създай {{relatedModule}} запис</a>.',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => 'Редактирай записа',
+    'LBL_OFFLINE_MENU_SETTINGS' => 'Офлайн настройки',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => 'Настройки за тестване',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED" : "Криптирането на данни е активирано.',
+    'LBL_OFFLINE_TOTAL_RECORDS' => 'Общ брой записи',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => 'Последно изтегляне',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => 'Грешка при изтеглянето на файла.',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => 'Неуспешно зареждане на електронните табла от сървъра',
+    'ERR_FILTERS_FETCHING' => 'Грешка при зареждането на филтрите',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => 'Грешка при криптирането на локалната база данни',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => 'Криптиране на офлайн данните. Може да отнеме няколко минути.',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => 'Криптирането на офлайн данните е завършено.',
+    'ERR_ACCESS_SPECIFIC_MODULE' => 'Нямате достъп до модула {{{module}}}.',
+    'LBL_SKIP' => 'Пропусни',
+    'LBL_CONTINUE' => 'Продължи',
+    'LBL_ENABLE' => 'Активирай',
+    'LBL_MOBILE_TRIAL_UNTIL' => 'Проба до',
+    'LBL_MOBILE_SDK_VERSION' => 'Версия на SDK',
+    'LBL_LOG_LEVEL' => 'Ниво на входа',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => 'Настройките за влизане са преконфигурирани.',
+    'LBL_TRIAL_PERIOD_EXPIRED' => 'Пробният ви период е изтекъл.',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => 'Сървърът не поддържа криптирана връзка. Моля, изключете криптираната връзка.',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => 'Сървърът поддържа криптирана връзка. Моля, включете криптираната връзка.',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => 'Връзката ви не е криптирана. Обърнете се към вашия администратор.',
+    'LBL_LOGIN_SETTINGS_HEADER' => 'Настройки за влизане',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => 'Настройте инсталацията си на {{{brandName}}}',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => 'За да работи приложението трябва да напишете URL на инсталацията на {{{brandName}}}. Ако нямате URL на инсталацията, моля свържете се с вашия администратор.',
+    'LBL_FACEID' => 'Лицева идентификация',
+    'LBL_TOUCHID' => 'Идентификация с докосване',
+    'LBL_ENABLE_TOUCHID' => 'Активирай {{{biometryType}}}',
+    'LBL_SETUP_TOUCHID' => 'Настрой {{{biometryType}}}',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => 'Влезте като използвате пръста си',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "{{{biometryType}}} не е настроен на вашето устройство. \n\nОтидете в настройките на устройството си за да настроите {{{biometryType}}}. След като е настроен, активирайте {{{biometryType}}} за {{{brandName}}} в Основното меню > Настройки.",
+    'LBL_TOUCH_ID_DISCLAIMER' => 'Използването на {{{biometryType}}} с {{{brandName}}} ще ви позволи да използвате биометричния си идентификатор вместо да въвеждате паролата си за достъп {{{brandName}}}.',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => 'Желаете ли да продължите с {{{biometryType}}}?    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => 'Въведете паролата на {{{brandName}}} за да активирате {{{biometryType}}}',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => 'Настрой',
+    'LBL_MDM_CONFIRM_CHANGE' => 'Конфигурацията на приложението е променена от мениджъра на мобилното устройство. Моля, влезте отново за да приложите промените.',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => 'Моля, дайте на {{{brandName}}} достъп до вашето местонахождение чрез настройките на устройството си.',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => 'Текущото местонахождение не е налично',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "Изтеглянето на текущото местонахождение изтече. \nМоля, опитайте отново.",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => 'Показалците за място не са налични',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => 'Координатите на мястото са невалидни',
+    'ERR_MOBILE_INVALID_PASSWORD' => 'Невалидна парола.',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => 'Вашето приложение не е актуално и е несъвместимо с инсталацията {{{brandName}}}, с която се свързвате. Искате ли да го актуализирате?',
+    'LBL_MOBILE_BY' => 'От',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => 'Този филтър не е наличен в офлайн',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => 'Офлайн записи',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => 'Настройки за изтегляне',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => 'Изтеглете Вашите разпределени, предпочитани и следвани записи за достъп в офлайн режим. Можете да актуализирате предпочитанията си в настройките за режим офлайн.',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "Записите Ви се изтеглиха. Вече имате достъп до тях в офлайн режим.",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "Не всички записи бяха изтеглени.\n Искате ли да опитате отново?",
+    'LBL_BULK_LOAD_USE_CELLULAR' => 'Използвайте клетъчни данни',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => 'Не точно сега',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => 'Изтеглянето прекъсна и ще се възобнови когато отворите приложението отново.',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => 'Изтегляне {{{module}}}: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => 'Актуализиране на най-новите записи',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => 'Изчакване за свързване',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => 'Спряно',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => 'Спира',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => 'Изтегли',
+    'LBL_BULK_LOAD_BTN_PAUSE' => 'Пауза',
+    'LBL_BULK_LOAD_BTN_RESUME' => 'Поднови',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => 'По подразбиране се използва само WiFi връзка',
+    'LBL_NPS_RATING_MSG' => "Как бихте оценили опита си с \n{{{productName}}}?",
+    'LBL_NPS_THANKS_MSG' => 'Благодарим за мнението!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => 'Бихте ли го оценили в App Store?',
+    'LBL_NPS_NO_THANKS' => 'Не, благодаря',
+    'LBL_NPS_NOT_NOW' => 'Не сега',
+    'LBL_NPS_RATE_NOW' => 'Оцени сега',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => 'Мрежата е недостъпна. Можете да използвате приложението и в офлайн режим',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => 'Промените ще се синхронизират когато сте онлайн. <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>Вижте подробностите</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => 'Има несинхронизирани данни. Моля, проверете <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>дневника на транзакциите</a>',
+    'LBL_CONVERT' => 'Преобразувай',
+    'LBL_CONVERT_LEAD' => 'Преобразуване в контакт',
+    'LBL_SEARCH_EXISTING_RECORD' => 'Търси съществуващ запис за {{{this}}}',
+    'LBL_DUPLICATES_CHECK_FAILED' => 'Неуспешна проверка за дублирани записи',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => 'Искате ли да преместете подобните дейности в записа на контакта?',
+    'LBL_LEAD_CONVERSION_SUCCESS' => 'Успешно преобразувахте потенциалния клиент {{{name}}}',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => 'Не са намерени дублирани записи.',
+    'ERR_LEAD_CONVERSION_FAIL' => 'Неуспешно преобразуване на Потенциални клиенти',
+    'LBL_SELECT_DUPLICATE_RECORD' => 'Изберете от дублираните {{{modulePlural}}}',
+    'LBL_SELECTED_EXISTING_RECORD' => 'Избран {{{moduleSingular}}}',
+    'LBL_CREATED_NEW_RECORD' => 'Създаден нов {{{moduleSingular}}}',
+    'LBL_VO_BACK_BTN' => 'Бутон за връщане назад',
+    'LBL_VO_HOME_BTN' => 'Бутон за начало',
+    'LBL_VO_DASHBOARD_BTN' => 'Бутон за електронното табло',
+    'LBL_VO_SEARCH_BTN' => 'Бутон за търсене',
+    'LBL_VO_RIGHT_MENU_BTN' => 'Десен бутон за менюто',
+    'LBL_VO_ADD_BTN' => 'Бутон за добавяне',
+
     //begin portal
 
     //portal record tutorial
@@ -4587,6 +4791,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => 'Избери справка',
     'LBL_REPORT_AUTO_REFRESH' => 'Автоматична актуализация',
     'LBL_REPORT_EDIT' => 'Редактирай маркираната справка',
+    'LBL_REFRESH_LIST_AND_CHART' => 'Обнови списъка и графиката',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => 'Неизвестен',
@@ -4648,6 +4853,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'Възникна грешка по време на действието AssignTo.',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => 'Нямате достът до "{{name}}". Моля, свържете се с администратор.',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => 'Година {0}',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} Q{0}',
@@ -4659,6 +4867,11 @@ $app_strings = array (
     'LBL_MESSAGE_BOX_TITLE' => 'Предупреждение',
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => 'Игнорирай дублиращия запис и съхрани',
     'LBL_RESTORE' => 'Възстанови оригинала',
+
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => 'Маркирани за изтриване записи',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => 'Показва записи, свързани със Заявка за поверителност на данните до '
+        . 'Изтрий информацията.',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'RSS новини',
@@ -4682,6 +4895,7 @@ $app_strings = array (
     'LBL_UNASSIGNED' => 'Неприсвоена',
     'LBL_ARCHIVE_EMAIL' => 'Създаване на запис за изпратена електронна поща',
     'LBL_EMAIL_ARCHIVED' => 'Архивирана електронна поща',
+    'LBL_CREATE_ARCHIVED_EMAIL' => 'Създаване на запис за изпратена електронна поща',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => 'Планирани дейности',
@@ -4713,6 +4927,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Моите задачи',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Задачи на екипа',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Advanced Workflow',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP или Old REST API',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'Cron Job',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => 'Logic Hook',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'Работен процес на Sugar',
+    'LBL_AUDIT_SUBJECT_USER' => 'Потребител',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Уеб до Потенциален клиент',
+
     //common chart strings
     'LBL_CHART' => 'Графика',
     'LBL_CHART_NO_DATA' => 'Липсват данни.',
@@ -4721,6 +4948,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => 'Скрий контролите',
     'LBL_CHART_CONTROLS_OPEN' => 'Покажи контролите',
     'LBL_CHART_UNDEFINED' => 'Недефиниран',
+    'LBL_CHART_NO_LABEL' => 'Недефиниран',
+    'LBL_CHART_AMOUNT' => 'Сума',
+    'LBL_CHART_COUNT' => 'Брой',
+    'LBL_CHART_PERCENT' => 'Процент',
+    'LBL_CHART_GROUP' => 'Група',
+    'LBL_CHART_DATE' => 'Дата',
+    'LBL_CHART_KEY' => 'Ключ',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => 'Тип на графиката',
@@ -4792,6 +5026,10 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'Филтър за дата по подразбиране',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => 'Набор от данни по подразбиране',
 
+    'LBL_PRODUCT_CATALOG_NAME' => 'Продуктов каталог',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => 'Продуктов каталог',
+    'LBL_PRODUCT_CATALOG_DESC' => 'Разгледайте и добавете артикули от вашия Продуктов каталог.',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => 'Разгледайте и добавете артикули от вашия Продуктов каталог.',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}} на {{date}} в {{time}}',
@@ -4804,6 +5042,7 @@ $app_strings = array (
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => 'на',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'Моята хронология на дейностите',
     'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'Визуализация на извършените дейности по отношение на записи и публикувани коментари.',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => 'Хронологията на дейностите е деактивирана',
 
     'LBL_DATA_VIEW' => 'Данни',
     'LBL_COMMENT' => 'Коментар',
@@ -4811,6 +5050,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Възникна грешка при опита за връзка със сървъра. Моля опитайте отново.',
     'ERR_RESOLVE_ERRORS' => 'Отстранете възникналите грешки преди да продължите.',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => 'Всички задължителни полета трябва да са попълнени за да одобрите записа; но все пак можете да го отхвърлите или маршрутизирате.',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => 'Всички задължителни полета трябва да са попълнени за да отхвърлите/маршрутизирате записа.',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Обновяване на списъка',
@@ -4838,6 +5081,7 @@ $app_strings = array (
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => 'Запазени справки',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'Визуализира графики от запазени справки.',
+
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => 'Публикувани Свързани статии',
@@ -4845,7 +5089,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Резюме на историята',
-    'TPL_HISTORICAL_SUMMARY' => 'Рез&#39;ме на историята за {{name}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => 'Повече история...',
     'LBL_RELATED_CONTACT' => 'Свързан контакт',
     'LBL_MODULE_TYPE' => 'Тип',
@@ -4921,7 +5165,7 @@ $app_strings = array (
     'LBL_MISSING_SMPT_SERVER_SETTINGS_NOTIFICATION_LINK_TEXT' => 'Настройки на електронна поща',
 
     // shortcut keys help
-    'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM позволява на потребителите да подобрят своята производителност чрез изпълнение на определени операции с помощта на клавишни комбинации. Таблиците в дясно описват съществуващите клавични комбинации заедно с действията, които изпълняват.',
+    'LBL_SHORTCUT_KEYS_HELP_ABOUT' => 'SugarCRM позволява на потребителите да подобрят своята производителност чрез изпълнение на определени операции с помощта на клавишни комбинации. Таблиците в дясно описват съществуващите клавишни комбинации заедно с действията, които изпълняват.',
     'LBL_SHORTCUT_KEYS_CONFIG_HELP' => "<h1>Поддържани клавиши</h1><ul><li>всички буквено-цифрови знаци и символи,</li> <li>shift, ctrl, alt, command, mod (ctrl в Windows/Linux и command в Macs)</li> <li>enter, esc, space, tab, pageup, pagedown, end, home, ins, del, backspace</li></ul><h1>Поддържани функции</h1><ul><li>Комбинация от клавиши: ctrl+m</li><li>Няколко клавиша: m,ctrl+m</li><li>Последователност от клавиши: m a</li></ul>",
     'LBL_GLOBAL_SHORTCUTS' => 'Глобални клавишни комбинации',
     'LBL_CONTEXTUAL_SHORTCUTS' => 'Контекстни клавишни комбинации',
@@ -5098,6 +5342,29 @@ $app_strings = array (
 
     'LBL_FIELD_TRIMMED' => 'Полето беше намалено поради надвишаване на лимита за максимален брой знаци.',
     'LBL_FIELDSIZE_OVERFLOW' => 'Полето надвишава ограничението за максимален брой знаци.',
+    'LBL_TINYMCE_TARGET_SAME' => 'Същият прозорец',
+    'LBL_TINYMCE_TARGET_NEW' => 'Нов прозорец',
+
+    'LBL_OUTBOUND_EMAILS' => 'Настройки на електронната поща',
+    'LBL_OUTBOUND_EMAIL' => 'Настройка на електронната поща',
+
+    'LBL_EMAIL_PARTICIPANTS' => 'Адресати на електронно писмо',
+    'LBL_EMAIL_PARTICIPANT' => 'Адресат на електронно писмо',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => 'Поверителност на данните',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'Поверителност на данните',
+    'LBL_DATAPRIVACY_VIEW_PII' => 'Преглед на личната информация',
+    'LBL_DATAPRIVACY_MARKFORERASE' => 'Маркирай за изтриване',
+    'LBL_DATAPRIVACY_FIELDNAME' => 'Поле',
+    'LBL_DATAPRIVACY_VALUE' => 'Стойност',
+    'LBL_DATAPRIVACY_CHANGED_BY' => 'Променено от',
+    'LBL_DATAPRIVACY_SOURCE' => 'Източник',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => 'Последна актуализация',
+    'LBL_DATAPRIVACY_PII' => 'Лична информация',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Маркирай за изтриване',
+    'TPL_DATAPRIVACY_PII_TITLE' => 'Лична информация за {{{name}}}',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5962,6 +6229,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => 'Кампания' ,
     'email' => 'Електронна поща',
     'workflow' => 'Работен процес',
+    'system' => 'Системни настройки',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5980,7 +6248,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -6043,6 +6310,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = 'Шаблони на Б�
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'Шаблони на Базата от знания';
 $app_list_strings['moduleList']['EmbeddedFiles'] = 'Вградени файлове';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Вграден файл';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'Lek',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'П',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lei',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'Албански лек',
+    'USD' => 'Долари',
+    'AFN' => 'Афганистански афган',
+    'ARS' => 'Песос',
+    'AWG' => 'Гулдени',
+    'AUD' => 'Долари',
+    'AZN' => 'Нови азербайджански манати',
+    'BSD' => 'Долари',
+    'BBD' => 'Долари',
+    'BYR' => 'Рубли',
+    'EUR' => 'Евро',
+    'BZD' => 'Долари',
+    'BMD' => 'Долари',
+    'BOB' => 'Боливийско боливиано',
+    'BAM' => 'Конвертируема марка',
+    'BWP' => 'Ботсванска пула',
+    'BGN' => 'Лева',
+    'BRL' => 'Бразилски реали',
+    'GBP' => 'Британски лири',
+    'BND' => 'Долари',
+    'KHR' => 'Камбоджански риел',
+    'CAD' => 'Долари',
+    'KYD' => 'Долари',
+    'CLP' => 'Песос',
+    'CNY' => 'Юан ренминби',
+    'COP' => 'Песос',
+    'CRC' => 'Колон',
+    'HRK' => 'Хърватска куна',
+    'CUP' => 'Песос',
+    'CZK' => 'Чешка крона',
+    'DKK' => 'Норвежка крона',
+    'DOP' => 'Песос',
+    'XCD' => 'Долари',
+    'EGP' => 'Британски лири',
+    'SVC' => 'Колони',
+    'EEK' => 'Естонски крони',
+    'FKP' => 'Британски лири',
+    'FJD' => 'Долари',
+    'GHC' => 'Гански седи',
+    'GIP' => 'Британски лири',
+    'GTQ' => 'Гватемалски кетцал',
+    'GGP' => 'Британски лири',
+    'GYD' => 'Долари',
+    'HNL' => 'Хондураски лемпири',
+    'HKD' => 'Долари',
+    'HUF' => 'Форинт',
+    'ISK' => 'Исландска крона',
+    'INR' => 'Рупии',
+    'IDR' => 'Индонезийска рупия',
+    'IRR' => 'Ирански риал',
+    'IMP' => 'Британски лири',
+    'ILS' => 'Израелска нова шекел',
+    'JMD' => 'Долари',
+    'JPY' => 'Йени',
+    'JEP' => 'Британски лири',
+    'KZT' => 'Казахстански тенге',
+    'KPW' => 'Спечелена',
+    'KRW' => 'Спечелена',
+    'KGS' => 'Узбекистански сом',
+    'LAK' => 'Кип',
+    'LVL' => 'Лати',
+    'LBP' => 'Британски лири',
+    'LRD' => 'Долари',
+    'CHF' => 'Швейцарски франкове',
+    'LTL' => 'Литовски литас',
+    'MKD' => 'Македонски денар',
+    'MYR' => 'Малайзийски рингит',
+    'MUR' => 'Рупии',
+    'MXN' => 'Песос',
+    'MNT' => 'Монголски тугрик',
+    'MZN' => 'Мозамбикски метикал',
+    'NAD' => 'Долари',
+    'NPR' => 'Рупии',
+    'ANG' => 'Гулдени',
+    'NZD' => 'Долари',
+    'NIO' => 'Никарагуанска кордоба',
+    'NGN' => 'Нигерийски наира',
+    'NOK' => 'Крона',
+    'OMR' => 'Ирански риал',
+    'PKR' => 'Рупии',
+    'PAB' => 'Панамски балбоа',
+    'PYG' => 'Парагвайски гуарани',
+    'PEN' => 'Перуански нуево сол',
+    'PHP' => 'Песос',
+    'PLN' => 'Полска злота',
+    'QAR' => 'Ирански риал',
+    'RON' => 'Нови леи',
+    'RUB' => 'Рубли',
+    'SHP' => 'Британски лири',
+    'SAR' => 'Саудитски риал',
+    'RSD' => 'Динари',
+    'SCR' => 'Рупии',
+    'SGD' => 'Долари',
+    'SBD' => 'Долари',
+    'SOS' => 'Шилинги',
+    'ZAR' => 'Южноафрикански ранд',
+    'LKR' => 'Рупии',
+    'SEK' => 'Шведска крона',
+    'SRD' => 'Долари',
+    'SYP' => 'Британски лири',
+    'TWD' => 'Нови долари',
+    'THB' => 'Тайландски бат',
+    'TTD' => 'Долари',
+    'TRY' => 'Турска лира',
+    'TRL' => 'Турски лири',
+    'TVD' => 'Долари',
+    'UAH' => 'Гривна',
+    'UYU' => 'Песос',
+    'UZS' => 'Суми',
+    'VEF' => 'Венецуелски боливар',
+    'VND' => 'Виетнамски донг',
+    'YER' => 'Ирански риал',
+    'ZWD' => 'Зимбабвийски долари',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => 'С едно натискане',

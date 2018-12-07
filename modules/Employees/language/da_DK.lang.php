@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => 'Slettet',
   'LBL_EMAIL_ADDRESS'=>'E-mail-adresse',
   'LBL_CONTACTS_SYNC' => 'Kontakter',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        'Medarbejderen kan kun oprettes i <a href="{0}" target="_blank">Cloud konsol</a> for IDM tilstand.',
 );
 
 

@@ -300,7 +300,9 @@ if(true) {
 	}
 	if(!empty($etid)) {
 	    $note = BeanFactory::newBean('Notes');
-	    $where = "notes.parent_id='{$etid}' AND notes.filename IS NOT NULL";
+        //FIXME: notes.email_type should be EmailTemplates
+        //FIXME: notes.filename IS NOT NULL is probably not necessary
+        $where = 'notes.email_id=' . $GLOBALS['db']->quoted($etid) . ' AND notes.filename IS NOT NULL';
 	    $notes_list = $note->get_full_list("", $where,true);
 
 	    if(!isset($notes_list)) {
@@ -341,12 +343,13 @@ if(true) {
         // if the type is workflow, we will show it
         // otherwise we don't allow user to select workflow type because workflow type email template
         // should be created from within workflow module because it requires more fields (such as base module, etc)
-        if ($templateType == 'workflow')
-        {
+        if ($templateType == 'workflow') {
             $xtpl->assign("TYPEDROPDOWN", get_select_options_with_id($app_list_strings['emailTemplates_type_list'],$templateType));
-        }
-        else
-        {
+        } elseif ($templateType === 'system') {
+            // if the type is system, the type cannot be changed, the dropdown should contain 'system' only
+            $availableOptions = array('system' => $app_list_strings['emailTemplates_type_list']['system']);
+            $xtpl->assign("TYPEDROPDOWN", get_select_options_with_id($availableOptions, $templateType));
+        } else {
             $xtpl->assign("TYPEDROPDOWN", get_select_options_with_id($app_list_strings['emailTemplates_type_list_no_workflow'],$templateType));
         }
     }

@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => 'Furnizori Transport',
   'LNK_PRODUCT_LIST' => 'Vezi catalog produse',
   'NTC_DELETE_CONFIRMATION' => 'Esti sigur ca vrei sa stergi aceasta inregistrare?',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => 'Adăugare',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Alocat utilizatorului',

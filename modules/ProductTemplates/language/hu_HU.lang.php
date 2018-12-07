@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => 'Szállítási szolgáltatók',
   'LNK_PRODUCT_LIST' => 'Termékkatalógus megtekintése',
   'NTC_DELETE_CONFIRMATION' => 'Biztos benne, hogy törölni kívánja ezt rekordot?',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => 'Hozzáadás',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Felelős felhasználó',

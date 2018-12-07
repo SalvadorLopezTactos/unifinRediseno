@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Árajánlatok (Szállítási cím)',
 	'LNK_ACCOUNT_REPORTS' => 'Kliensjelentések megtekintése',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentumok',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Kliensek listája műszerfal',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Kliensek bejegyzés műszerfal',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagramok',
 	'LBL_DEFAULT' => 'Nézetek',

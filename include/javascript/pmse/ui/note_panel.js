@@ -8,17 +8,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 /**
- * @class Form
+ * @class PMSE.Form
  * Handles form panels
- * @extend Panel
+ * @extends PMSE.Panel
  *
  * @constructor
  * Creates a new instance of the object
  * @param {Object} options
  */
 var NotePanel = function (options) {
-    Panel.call(this, options);
+    PMSE.Panel.call(this, options);
 
     /**
      * Defines if the form has a proxy
@@ -34,7 +35,7 @@ var NotePanel = function (options) {
 
     /**
      * Defines the form's proxy object
-     * @type {Proxy}
+     * @type {PMSE.Proxy}
      */
     this.proxy = null;
     /**
@@ -77,7 +78,7 @@ var NotePanel = function (options) {
     NotePanel.prototype.initObject.call(this, options);
 };
 
-NotePanel.prototype = new Panel();
+NotePanel.prototype = new PMSE.Panel();
 
 /**
  * Defines the object's type
@@ -142,11 +143,11 @@ NotePanel.prototype.setUrl = function (url) {
 
 /**
  * Defines the proxy object
- * @param {Proxy} proxy
+ * @param {PMSE.Proxy} proxy
  * @return {*}
  */
 //NotePanel.prototype.setProxy = function (proxy) {
-//    if (proxy && proxy.family && proxy.family === 'Proxy') {
+//    if (proxy && proxy.family && proxy.family === 'PMSE.Proxy') {
 //        this.proxy = proxy;
 //        this.url = proxy.url;
 //        this.proxyEnabled = true;
@@ -156,10 +157,10 @@ NotePanel.prototype.setUrl = function (url) {
 //                if (!proxy.url) {
 //                    proxy.url = this.url;
 //                }
-//                this.proxy = new Proxy(proxy);
+//                this.proxy = new PMSE.Proxy(proxy);
 //            } else {
 //                if (this.url) {
-//                    this.proxy = new Proxy({url: this.url});
+//                    this.proxy = new PMSE.Proxy({url: this.url});
 //                }
 //            }
 //        }
@@ -237,7 +238,7 @@ NotePanel.prototype.load = function () {
 
 /**
  * Add Fields Items
- * @param {Object/Field}item
+ * @param {(Object|PMSE.Field)}item
  */
 NotePanel.prototype.addLog = function (options) {
     var html,
@@ -374,7 +375,7 @@ NotePanel.prototype.attachListeners = function () {
 
 NotePanel.prototype.setHeight = function (height) {
     var bodyHeight;
-    Panel.prototype.setHeight.call(this, height);
+    PMSE.Panel.prototype.setHeight.call(this, height);
     bodyHeight = this.height - this.footerHeight - this.headerHeight;
     this.setBodyHeight(bodyHeight);
     return this;
@@ -382,7 +383,7 @@ NotePanel.prototype.setHeight = function (height) {
 
 NotePanel.prototype.createHTML = function () {
     var i, footerHeight, html, buttonAnchor, labelSpan;
-    Panel.prototype.createHTML.call(this);
+    PMSE.Panel.prototype.createHTML.call(this);
     this.footer.style.textAlign = this.footerAlign;
     for (i = 0; i < this.items.length; i += 1) {
         this.items[i].setParent(this);

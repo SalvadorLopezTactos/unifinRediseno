@@ -63,11 +63,6 @@ ini_set("max_execution_time", "3600");
 
 // ensure we have enough memory
 $memory_needed  = 256;
-// all version below 5.3.0, the memory usage needs to be 1 GIG for demo data
-if(version_compare(PHP_VERSION, '5.3.0', '<'))
-{
-	$memory_needed = 1024;
-}
 
 $memory_limit   = ini_get('memory_limit');
 if( $memory_limit != "" && $memory_limit != "-1" ){ // if memory_limit is set
@@ -219,8 +214,8 @@ for($i = 0; $i < $number_companies; $i++) {
     if (count($accounts_companies_list) > 0) {
         // De-populate a copy of the company name list
         // as each name is used to prevent duplication.
-	    $account_num = array_rand($accounts_companies_list);
-	    $account_name = $accounts_companies_list[$account_num];
+        $account_num = array_rand($accounts_companies_list);
+        $account_name = $accounts_companies_list[$account_num];
 	    unset($accounts_companies_list[$account_num], $account_num);
     } else {
         // We've run out of preset company names so start generating new ones.
@@ -238,8 +233,9 @@ for($i = 0; $i < $number_companies; $i++) {
 	$account->emailAddress->addAddress(createEmailAddress(), true);
 	$account->emailAddress->addAddress(createEmailAddress());
 	$account->website = createWebAddress();
-	$account->billing_address_street = $sugar_demodata['street_address_array'][mt_rand(0,$street_address_count-1)];
-	$account->billing_address_city = $sugar_demodata['city_array'][mt_rand(0,$city_array_count-1)];
+    $account->billing_address_street = $sugar_demodata['street_address_array'][mt_rand(0, $street_address_count-1)];
+    $account->billing_address_city = $sugar_demodata['city_array'][mt_rand(0, $city_array_count-1)];
+
 	if($i % 3 == 1)	{
 		$account->billing_address_state = "NY";
 		$assigned_user_id = mt_rand(9,11);
@@ -296,8 +292,8 @@ for($i = 0; $i < $number_companies; $i++) {
 	$account->shipping_address_state = $account->billing_address_state;
 	$account->shipping_address_postalcode = $account->billing_address_postalcode;
 	$account->shipping_address_country = $account->billing_address_country;
-	$account->industry = array_rand($app_list_strings['industry_dom']);
-	$account->account_type = "Customer";
+    $account->industry = array_rand($app_list_strings['industry_dom']);
+    $account->account_type = "Customer";
 
     $account->save();
     addTagsToBean($account);
@@ -333,18 +329,18 @@ for($i = 0; $i < $number_companies; $i++) {
     $contacts[] = $contact->id;
 
     for($c = 0; $c < $number_cases; $c++) {
-	// Create a case for the account
-	$case = new aCase();
-	$case->account_id = $account->id;
-	$case->priority = array_rand($app_list_strings['case_priority_dom']);
-	$case->status = array_rand($app_list_strings['case_status_dom']);
-	$case->type = array_rand($app_list_strings['case_type_dom']);
-	$case->name = $sugar_demodata['case_seed_names'][mt_rand(0,4)];
-	$case->assigned_user_id = $account->assigned_user_id;
-	$case->assigned_user_name = $account->assigned_user_name;
-	$case->team_id = $account->team_id;
-	$case->team_set_id = $account->team_set_id;
-    $case->portal_viewable = 1;
+        // Create a case for the account
+        $case = new aCase();
+        $case->account_id = $account->id;
+        $case->priority = array_rand($app_list_strings['case_priority_dom']);
+        $case->status = array_rand($app_list_strings['case_status_dom']);
+        $case->type = array_rand($app_list_strings['case_type_dom']);
+        $case->name = $sugar_demodata['case_seed_names'][mt_rand(0, 4)];
+        $case->assigned_user_id = $account->assigned_user_id;
+        $case->assigned_user_name = $account->assigned_user_name;
+        $case->team_id = $account->team_id;
+        $case->team_set_id = $account->team_set_id;
+        $case->portal_viewable = 1;
         $case->save();
         $case->load_relationship('tag_link');
         addTagsToBean($case);
@@ -423,9 +419,9 @@ for($i=0; $i<$number_contacts; $i++) {
 	$contact->first_name = $sugar_demodata['first_name_array'][mt_rand(0,$first_name_max)];
 	$contact->last_name = $sugar_demodata['last_name_array'][mt_rand(0,$last_name_max)];
 	$contact->assigned_user_id = $account->assigned_user_id;
-	$contact->primary_address_street = $sugar_demodata['street_address_array'][mt_rand(0,$street_address_max)];
-	$contact->primary_address_city = $sugar_demodata['city_array'][mt_rand(0,$city_array_max)];
-	$contact->lead_source = array_rand($app_list_strings['lead_source_dom']);
+    $contact->primary_address_street = $sugar_demodata['street_address_array'][mt_rand(0, $street_address_max)];
+    $contact->primary_address_city = $sugar_demodata['city_array'][mt_rand(0, $city_array_max)];
+    $contact->lead_source = array_rand($app_list_strings['lead_source_dom']);
 	$contact->title = $titles[mt_rand(0,$title_max)];
 	$contact->emailAddress->addAddress(createEmailAddress(), true, true);
 	$contact->emailAddress->addAddress(createEmailAddress(), false, false, false, true);
@@ -486,7 +482,7 @@ for($i=0; $i<$number_contacts; $i++) {
 	$key = array_rand($sugar_demodata['meeting_seed_data_names']);
 	$meeting->name = $sugar_demodata['meeting_seed_data_names'][$key];
 	$meeting->date_start = create_date(). ' ' . create_time();
-	$meeting->duration_hours = array_rand($possible_duration_hours_arr);
+    $meeting->duration_hours = array_rand($possible_duration_hours_arr);
 	$meeting->duration_minutes = array_rand($possible_duration_minutes_arr);
 	$meeting->assigned_user_id = $assigned_user_id;
 	$meeting->team_id = $contacts_account->team_id;
@@ -512,10 +508,15 @@ for($i=0; $i<$number_contacts; $i++) {
 
 	//Create new emails
 	$email = new Email();
+    $email->id = \Sugarcrm\Sugarcrm\Util\Uuid::uuid1();
+    $email->new_with_id = true;
+    BeanFactory::registerBean($email);
+
 	$key = array_rand($sugar_demodata['email_seed_data_subjects']);
 	$email->name = $sugar_demodata['email_seed_data_subjects'][$key];
 	$email->date_start = create_date();
 	$email->time_start = create_time();
+    $email->date_sent = create_past_date() . ' ' . create_time();
 	$email->duration_hours = array_rand($possible_duration_hours_arr);
 	$email->duration_minutes = array_rand($possible_duration_minutes_arr);
 	$email->assigned_user_id = $assigned_user_id;
@@ -524,23 +525,49 @@ for($i=0; $i<$number_contacts; $i++) {
 	$email->assigned_user_id = $contacts_account->assigned_user_id;
 	$email->assigned_user_name = $contacts_account->assigned_user_name;
 	$email->description = $sugar_demodata['email_seed_data_descriptions'];
+    $email->description_html = $sugar_demodata['email_seed_data_description_html'];
 	$email->status = 'sent';
+    $email->state = $i % 2 === 0 ? 'Draft' : 'Archived';
 	$email->parent_id = $account_id;
 	$email->parent_type = 'Accounts';
-	$email->to_addrs = $contact->emailAddress->getPrimaryAddress($contact);
-	$email->from_addr = $assignedUser->emailAddress->getPrimaryAddress($assignedUser);
-	$email->from_addr_name = $email->from_addr;
-	$email->to_addrs_names = $email->to_addrs;
     if (key($sugar_demodata['email_seed_data_types']) === null) {
         reset($sugar_demodata['email_seed_data_types']);
     }
     $email->type = current($sugar_demodata['email_seed_data_types']);
     next($sugar_demodata['email_seed_data_types']);
-	$email->save();
+
 	$email->load_relationship('contacts');
 	$email->contacts->add($contact);
 	$email->load_relationship('accounts');
 	$email->accounts->add($contacts_account);
+
+    if ($email->state === 'Archived') {
+        $from = BeanFactory::newBean('EmailParticipants');
+        $from->new_with_id = true;
+        $from->id = \Sugarcrm\Sugarcrm\Util\Uuid::uuid1();
+        BeanFactory::registerBean($from);
+        $from->parent_type = 'Users';
+        $from->parent_id = $contacts_account->assigned_user_id;
+        $email->load_relationship('from');
+        $email->from->add($from);
+    }
+
+    $to = BeanFactory::newBean('EmailParticipants');
+    $to->new_with_id = true;
+    $to->id = \Sugarcrm\Sugarcrm\Util\Uuid::uuid1();
+    BeanFactory::registerBean($to);
+    $to->parent_type = $contact->getModuleName();
+    $to->parent_id = $contact->id;
+    $email->load_relationship('to');
+    $email->to->add($to);
+
+    // Add $email to the resave queue to force it to be saved now that all of the relationships have been saved. The
+    // email won't be added to the queue twice. This guarantees that the email will only be saved once.
+    SugarRelationship::addToResaveList($email);
+
+    // The relationship between Emails and EmailParticipants requires that we resave the beans. Just in case something
+    // prevented them from being resaved already, try it one last time.
+    SugarRelationship::resaveRelatedBeans();
 
     if ($i % 10 === 0) {
         echo '.';
@@ -555,8 +582,8 @@ for($i=0; $i<$number_leads; $i++)
 	$lead->account_name = $sugar_demodata['company_name_array'][mt_rand(0,$company_name_count-1)];
 	$lead->first_name = $sugar_demodata['first_name_array'][mt_rand(0,$first_name_max)];
 	$lead->last_name = $sugar_demodata['last_name_array'][mt_rand(0,$last_name_max)];
-	$lead->primary_address_street = $sugar_demodata['street_address_array'][mt_rand(0,$street_address_max)];
-	$lead->primary_address_city = $sugar_demodata['city_array'][mt_rand(0,$city_array_max)];
+    $lead->primary_address_street = $sugar_demodata['street_address_array'][mt_rand(0, $street_address_max)];
+    $lead->primary_address_city = $sugar_demodata['city_array'][mt_rand(0, $city_array_max)];
 	$lead->lead_source = array_rand($app_list_strings['lead_source_dom']);
 	$lead->title = $sugar_demodata['titles'][mt_rand(0,$title_max)];
 	$lead->phone_work = create_phone_number();
@@ -641,6 +668,7 @@ for($i=0; $i<$number_leads; $i++)
 	$lead->primary_address_postalcode = mt_rand(10000,99999);
 	$lead->primary_address_country = $sugar_demodata['primary_address_country'];
 	$lead->save();
+    $leads[] = $lead->id;
 
     if ($i % 10 === 0) {
         echo '.';
@@ -931,6 +959,63 @@ $GLOBALS['mod_strings']  = $installerStrings;
     installLog("DemoData: Done Forecasts");
 
     echo '.';
+
+installLog("DemoData: Data Privacy");
+
+$userSally = BeanFactory::getBean('Users', 'seed_sally_id');
+
+foreach ($sugar_demodata['dataprivacy_seed_data'] as $i => $seedDp) {
+    $dp = BeanFactory::newBean('DataPrivacy');
+    $status = 'Open';
+    foreach ($seedDp as $field => $value) {
+        if ($field == 'status') {
+            $status = $value;
+            $dp->status = 'Open'; // can not create a non Open record
+            continue;
+        }
+        $dp->$field = $value;
+    }
+    $randomUser = $i % count($sugar_demodata['users']);
+    $randomUser = $sugar_demodata['users'][$randomUser]['id'];
+    $dp->assigned_user_id = $randomUser;
+    $dp->set_created_by = false;
+    $dp->created_by = $randomUser;
+    $dp->update_modified_by = false;
+    $dp->modified_user_id = 'seed_sally_id'; // always sally
+    $dp->date_opened = $timedate->nowDbDate();
+    if ($dp->status && ($dp->status == 'Closed' || $dp->status == 'Rejected')) {
+        $dp->date_closed = $timedate->nowDbDate();
+    }
+    $dp->save();
+    if ($status != 'Open') {
+        $dp->retrieve();
+        $dp->status = $status; // real status we want
+        $dp->save();
+    }
+
+    // relate to either contact or lead
+    switch ($i % 2) {
+        case 0:
+            $dp->set_relationship(
+                'contacts_dataprivacy',
+                array('dataprivacy_id' => $dp->id, 'contact_id' => $contacts[$i]),
+                false
+            );
+            break;
+        case 1:
+            $dp->set_relationship(
+                'leads_dataprivacy',
+                array('dataprivacy_id' => $dp->id, 'lead_id' => $leads[$i]),
+                false
+            );
+            break;
+    }
+
+    if ($i % 10 === 0) {
+        echo '.';
+    }
+}
+installLog("DemoData: Done Data Privacy");
 
     installLog("DemoData: Ent Reports");
     include('install/seed_data/entreport_SeedData.php');

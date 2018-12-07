@@ -665,8 +665,8 @@ function generateSearchWhere($module, $query)
 {
     // this function is similar to the function prepareSearchForm() in view.list.php
     $seed = BeanFactory::newBean($module);
-    if (SugarAutoLoader::fileExists('modules/' . $module . '/SearchForm.html')) {
-        if (SugarAutoLoader::fileExists('modules/' . $module . '/metadata/SearchFields.php')) {
+    if (file_exists('modules/' . $module . '/SearchForm.html')) {
+        if (file_exists('modules/' . $module . '/metadata/SearchFields.php')) {
             require_once('include/SearchForm/SearchForm.php');
             $searchForm = new SearchForm($module, $seed);
         } elseif (!empty($_SESSION['export_where'])) {
@@ -1119,7 +1119,7 @@ function get_field_order_mapping($name = '', $reorderArr = '', $exclude = true, 
         'resolution' => 'Resolution', 'work_log' => 'Work Log', 'found_in_release' => 'Found In Release',
         'fixed_in_release' => 'Fixed In Release', 'found_in_release_name' => 'Found In Release Name',
         'fixed_in_release_name' => 'Fixed In Release', 'product_category' => 'Category', 'source' => 'Source',
-        'portal_viewable' => 'Portal Viewable', 'system_id' => 'System ID', 'assigned_user_id' => 'Assigned User ID',
+        'portal_viewable' => 'Portal Viewable', 'assigned_user_id' => 'Assigned User ID',
         'assigned_user_name' => 'Assigned User Name', 'team_name'=>'Teams', 'team_id' => 'Team id',
         'team_set_id' => 'Team Set ID', 'date_entered' =>'Date Created', 'date_modified' =>'Date Modified',
         'modified_by_name' => 'Modified By User Name', 'modified_user_id' =>'Modified By',
@@ -1197,8 +1197,7 @@ function get_field_order_mapping($name = '', $reorderArr = '', $exclude = true, 
 
     $fields_to_exclude = array();
     $fields_to_exclude['accounts'] = array('account_name');
-    $fields_to_exclude['bugs'] = array('system_id');
-    $fields_to_exclude['cases'] = array('system_id', 'modified_by_name', 'modified_by_name_owner',
+    $fields_to_exclude['cases'] = array('modified_by_name', 'modified_by_name_owner',
         'modified_by_name_mod', 'created_by_name', 'created_by_name_owner', 'created_by_name_mod',
         'assigned_user_name_owner', 'assigned_user_name_mod', 'team_count', 'team_count_owner', 'team_count_mod',
         'team_name_owner', 'team_name_mod', 'account_name_owner', 'account_name_mod', 'modified_user_name',
@@ -1393,7 +1392,7 @@ function get_field_order_mapping2($name, $reorderArr = '', $exclude = true, $for
         'resolution' => 'Resolution', 'work_log' => 'Work Log', 'found_in_release' => 'Found In Release',
         'fixed_in_release' => 'Fixed In Release', 'found_in_release_name' => 'Found In Release Name',
         'fixed_in_release_name' => 'Fixed In Release', 'product_category' => 'Category', 'source' => 'Source',
-        'portal_viewable' => 'Portal Viewable', 'system_id' => 'System ID', 'assigned_user_id' => 'Assigned User ID',
+        'portal_viewable' => 'Portal Viewable', 'assigned_user_id' => 'Assigned User ID',
         'assigned_user_name' => 'Assigned User Name', 'team_name'=>'Teams', 'team_id' => 'Team id',
         'team_set_id' => 'Team Set ID', 'date_entered' =>'Date Created', 'date_modified' =>'Date Modified',
         'modified_by_name' => 'Modified By User Name', 'modified_user_id' =>'Modified By',
@@ -1470,8 +1469,7 @@ function get_field_order_mapping2($name, $reorderArr = '', $exclude = true, $for
 
     $fields_to_exclude = array();
     $fields_to_exclude['accounts'] = array('account_name');
-    $fields_to_exclude['bugs'] = array('system_id');
-    $fields_to_exclude['cases'] = array('system_id', 'modified_by_name', 'modified_by_name_owner',
+    $fields_to_exclude['cases'] = array('modified_by_name', 'modified_by_name_owner',
         'modified_by_name_mod', 'created_by_name', 'created_by_name_owner', 'created_by_name_mod',
         'assigned_user_name', 'assigned_user_name_owner', 'assigned_user_name_mod', 'team_count', 'team_count_owner',
         'team_count_mod', 'team_name_owner', 'team_name_mod', 'account_name_owner', 'account_name_mod',

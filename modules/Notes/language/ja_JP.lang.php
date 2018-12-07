@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'メモリストのダッシュ ボード',
+
     'ERR_DELETE_RECORD' => 'あなたがアカウントを削除するには、レコード番号を指定する必要があります。',
     'LBL_ACCOUNT_ID' => '取引先ID:',
     'LBL_CASE_ID' => 'ケースID',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => '詳細',
     'LBL_EMAIL_ADDRESS' => 'Eメールアドレス:',
     'LBL_EMAIL_ATTACHMENT' => 'Eメール添付',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Eメール添付',
     'LBL_FILE_MIME_TYPE' => 'Mimeタイプ',
+    'LBL_FILE_EXTENSION' => 'ファイル拡張子',
+    'LBL_FILE_SOURCE' => 'ファイル ソース',
+    'LBL_FILE_SIZE' => 'ファイルのサイズ',
     'LBL_FILE_URL' => 'ファイルURL',
     'LBL_FILENAME' => '添付ファイル:',
     'LBL_LEAD_ID' => 'リードID:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => '商談ID:',
     'LBL_PARENT_ID' => '親ID:',
     'LBL_PARENT_TYPE' => '親タイプ',
+    'LBL_EMAIL_TYPE' => 'Eメールのタイプ',
+    'LBL_EMAIL_ID' => 'Eメール ID',
     'LBL_PHONE' => '電話:',
     'LBL_PORTAL_FLAG' => 'ポータルで表示？',
     'LBL_EMBED_FLAG' => 'Eメールに埋め込み？',

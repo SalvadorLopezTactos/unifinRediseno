@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Електронно табло със списък на контактите',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Електронно табло със запис на контактите',
+
     'LNK_CONTACT_REPORTS' => 'Справки за контакти',
     'ERR_DELETE_RECORD' => 'Посочете номер на записа, за да изтриете контакта.',
     'LBL_ACCOUNT_ID' => 'Идентификатор на организацията:',
@@ -273,4 +277,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'Източник на потенциалния клиент',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Справки за контакти',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Одобрени бизнес цели',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Последна актуализация на одобрението',
 );

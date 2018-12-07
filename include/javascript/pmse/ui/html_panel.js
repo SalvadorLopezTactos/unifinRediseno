@@ -8,15 +8,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 var HtmlPanel = function (options) {
-    Panel.call(this, options);
+    PMSE.Panel.call(this, options);
     this.source = this;
     this.scroll = null;
     this.parent = null;
     HtmlPanel.prototype.initObject.call(this, options);
 };
 
-HtmlPanel.prototype = new Panel();
+HtmlPanel.prototype = new PMSE.Panel();
 
 HtmlPanel.prototype.type = "HtmlPanel";
 
@@ -43,7 +44,7 @@ HtmlPanel.prototype.setScroll = function (value) {
 HtmlPanel.prototype.createHTML = function () {
     var HPDiv,
         scrollMode;
-    Panel.prototype.createHTML.call(this);
+    PMSE.Panel.prototype.createHTML.call(this);
     if (this.source) {
         scrollMode = (this.scroll) ? 'auto' : 'none';
         HPDiv = this.createHTMLElement('div');

@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => '製造元を削除するにはレコード番号を指定してください。',
   'NTC_STATUS' => '製造元ドロップダウンリストからこの製造元を削除するにはステータスを非アクティブにしてください。',
   'NTC_LIST_ORDER' => 'この製造元の順序の変更は、製造元ドロップダウンリストに反映されます。',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'アクティブ',
-    'Inactive' => '非アクティブ',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'製造元のインポート',
 	'LBL_EDITLAYOUT' => 'レイアウト編集' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => '商談品目',

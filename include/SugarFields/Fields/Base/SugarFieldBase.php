@@ -16,6 +16,7 @@
  * including DetailView, ListView, EditView. It also provides Search Inputs and database queries
  * to handle searching
  *
+ * @property Sugar_Smarty $ss
  */
 class SugarFieldBase {
     /**
@@ -26,10 +27,10 @@ class SugarFieldBase {
      * @var string
      */
     public $error;
-    var $ss; // Sugar Smarty Object
     var $hasButton = false;
     protected static $base = array();
-    public $needsSecondaryQuery = false;
+
+    protected $needsSecondaryQuery = false;
 
     /**
      * The name of the module the field belongs to
@@ -48,7 +49,16 @@ class SugarFieldBase {
     public function __construct($type)
     {
     	$this->type = $type;
-        $this->ss = new Sugar_Smarty();
+    }
+
+    public function __get($name)
+    {
+        if ($name == 'ss') {
+            $this->ss = new Sugar_Smarty();
+            return $this->ss;
+        }
+
+        return null;
     }
 
     /**
@@ -760,9 +770,22 @@ class SugarFieldBase {
             $vardef['size'] = $this->normalizeNumeric($vardef['size']);
         }
 
-        // Bug 57890 - Required values should be boolean
-        if (isset($vardef['required'])) {
-            $vardef['required'] = $this->normalizeBoolean($vardef['required']);
+        $attributeNameWithBoolValue = [
+            'audited',
+            'exportable',
+            'massupdate',
+            'pii',
+            'readonly',
+            'reportable',
+            'required',
+            'sortable',
+        ];
+
+        // normalize bool value
+        foreach ($attributeNameWithBoolValue as $attributeName) {
+            if (isset($vardef[$attributeName])) {
+                $vardef[$attributeName] = $this->normalizeBoolean($vardef[$attributeName]);
+            }
         }
 
         // Handle normalizations that need to be applied
@@ -870,14 +893,14 @@ class SugarFieldBase {
     /**
      * Fix a value(s) for a Filter statement
      * @param $value - the value that needs fixing
-     * @param $fieldName - the field we are fixing
+     * @param $columnName - the column name we are fixing
      * @param SugarBean $bean - the Bean
      * @param SugarQuery $q - the Query
      * @param SugarQuery_Builder_Where $where - the Where statement
      * @param $op - the filter operand
      * @return bool - true if everything can pass as normal, false if new filters needed to be added to override the existing $op
      */
-    public function fixForFilter(&$value, $fieldName, SugarBean $bean, SugarQuery $q, SugarQuery_Builder_Where $where, $op)
+    public function fixForFilter(&$value, $columnName, SugarBean $bean, SugarQuery $q, SugarQuery_Builder_Where $where, $op)
     {
         return true;
     }
@@ -943,5 +966,21 @@ class SugarFieldBase {
         foreach ($fieldSets as $fieldSet) {
             $iterator->apply($fieldSet, $callback);
         }
+    }
+
+    /**
+     * Returns true if the field has been erased from the bean.
+     *
+     * @param SugarBean $bean
+     * @param string $fieldName
+     * @return bool
+     */
+    public function isErased(SugarBean $bean, $fieldName)
+    {
+        if (empty($bean->erased_fields)) {
+            return false;
+        }
+
+        return in_array($fieldName, $bean->erased_fields);
     }
 }

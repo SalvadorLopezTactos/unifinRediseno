@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'spauskite čia',
 	'TXT_REMOVE_ME'								=> 'Mes gerbiame Jūsų privatumą. Jei šį laišką gavote per klaidą ar nenorite gauti naujienų ir specialių pasiūlymų elektroniniu paštu, spauskite apačioje esančią nuorodą',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Siųsti perspėjimą nuo to vartotojo, kuris paskyrė, el. pašto adreso',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Atsisakyti naujų el. pašto adresų pagal numatytuosius nustatymus',
 
 	'LBL_SECURITY_TITLE'						=> 'Pašto saugumo nustatymai',
 	'LBL_SECURITY_DESC'							=> 'Pažymėkite ko nerodyti pašto modulyje.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Leisti vartotojams išsiųsti el. laiškus pasinaudojant šios pašto dėžutės prisijungimu:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Kai pasirinksite šią opciją, visi vartotojai galės siųsti laiškus naudodamiesi bendru sistemos išeinančiu pašto klientu. Kitu atveju vartotojai turės siųsti laiškus per savo nustatytą išeinantį pašto klientą.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Kai įjungta nuostata, priskiriamo vartotojo vardas ir jo pašto adresas bus įtrauktas į Siuntėjo lauką. Šis pasirinkimas gali neveikti su SMTP serveriu tam tikrose situacijose.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Pridėjus naują el. pašto adresą, siuntimas šiuo adresu bus automatiškai išjungtas. Kampanijų el. laiškai autonominiais adresais nesiunčiami. Šio parametro keitimas esamų el. pašto adresų nustatymų nekeičia.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo paštas' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Painel da lista de alvos',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Painel de registro de alvos',
+
   'LBL_MODULE_NAME' => 'Alvos',
   'LBL_MODULE_NAME_SINGULAR' => 'Alvo',
   'LBL_MODULE_ID'   => 'Alvos',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Saudação',
   'LBL_SAVE_PROSPECT' => 'Salvar o alvo',
   'LBL_CREATED_OPPORTUNITY' =>'Criada uma nova oportunidade',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Criar uma Oportunidade requer uma Conta.\n Crie uma nova ou selecione uma existente.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Criar uma Oportunidade requer uma Conta.\\n Crie uma nova ou selecione uma existente.',
   'LNK_SELECT_ACCOUNT' => "Selecionar uma Conta",
   'LNK_NEW_PROSPECT' => 'Criar alvo',
   'LNK_PROSPECT_LIST' => 'Visualizar alvos',
@@ -195,4 +199,6 @@ Para criar um {{module_name}}:
 2. Clique em "Salvar" para finalizar o novo registro e voltar para a página anterior.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Relatório de alvos',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objetivos Comerciais autorizados para',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Autorização atualizada pela última vez',
 );

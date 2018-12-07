@@ -8,6 +8,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// To access the global variable containing PMSE classes.
+var PMSE = PMSE || {};
 (function(app) {
     app.events.on('app:init', function() {
 
@@ -67,6 +69,7 @@
                                                 name: 'log' + i,
                                                 label: label,
                                                 user: log.user,
+                                                showUser: log.show_user,
                                                 startDate: app.date(delegate_date).formatUser(),
                                                 picture: (log.script) ? log.image : pictureUrl,
                                                 duration: duration,
@@ -93,7 +96,7 @@
                     }
                 });
 
-                w2 = new Window({
+                w2 = new PMSE.Window({
                     width: 800,
                     height: 350,
                     modal: true,
@@ -137,7 +140,7 @@
                         scroll: ((ih + 45) > 400)
                     });
 
-                    w = new Window({
+                    w = new PMSE.Window({
                         width: iw + 40,
                         height: ((ih + 45) < 400) ? ih + 45 : 400,
                         modal: true,
@@ -215,7 +218,7 @@
                         }
                     }
                 });
-                w = new Window({
+                w = new PMSE.Window({
                     width: 800,
                     height: 380,
                     modal: true,

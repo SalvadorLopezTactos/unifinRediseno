@@ -179,9 +179,6 @@ class aSubPanel
             // action was looking at the module list and Emails are in the exempt list.
 			if (
                 (isset($modListHeader) && (!(array_key_exists('Emails', $modListHeader) || array_key_exists('Emails', $modules_exempt_from_availability_check))))
-                ||
-                // Checks for offline client
-                (!empty($sugar_config['disc_client']) && !empty($sugar_config['oc_converted']))
             )
 			{
 				foreach ( $buttons as $key => $button )

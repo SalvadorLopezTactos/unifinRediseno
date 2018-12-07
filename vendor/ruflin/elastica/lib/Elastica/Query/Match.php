@@ -7,12 +7,17 @@ namespace Elastica\Query;
  * @author F21
  * @author WONG Wing Lun <luiges90@gmail.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
  */
 class Match extends AbstractQuery
 {
+    const OPERATOR_OR = 'or';
+    const OPERATOR_AND = 'and';
+
     const ZERO_TERM_NONE = 'none';
     const ZERO_TERM_ALL = 'all';
+
+    const FUZZINESS_AUTO = 'AUTO';
 
     /**
      * @param string $field
@@ -50,7 +55,7 @@ class Match extends AbstractQuery
     public function setFieldParam($field, $key, $value)
     {
         if (!isset($this->_params[$field])) {
-            $this->_params[$field] = array();
+            $this->_params[$field] = [];
         }
 
         $this->_params[$field][$key] = $value;
@@ -72,19 +77,6 @@ class Match extends AbstractQuery
     }
 
     /**
-     * Set field type.
-     *
-     * @param string $field
-     * @param string $type
-     *
-     * @return $this
-     */
-    public function setFieldType($field, $type)
-    {
-        return $this->setFieldParam($field, 'type', $type);
-    }
-
-    /**
      * Set field operator.
      *
      * @param string $field
@@ -92,7 +84,7 @@ class Match extends AbstractQuery
      *
      * @return $this
      */
-    public function setFieldOperator($field, $operator)
+    public function setFieldOperator($field, $operator = self::OPERATOR_OR)
     {
         return $this->setFieldParam($field, 'operator', $operator);
     }
@@ -133,7 +125,7 @@ class Match extends AbstractQuery
      *
      * @return $this
      *
-     * @link Possible values for minimum_should_match http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
+     * @link Possible values for minimum_should_match https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-minimum-should-match.html
      */
     public function setFieldMinimumShouldMatch($field, $minimumShouldMatch)
     {
@@ -202,7 +194,7 @@ class Match extends AbstractQuery
      *
      * @return $this
      */
-    public function setFieldZeroTermsQuery($field, $zeroTermQuery = 'none')
+    public function setFieldZeroTermsQuery($field, $zeroTermQuery = self::ZERO_TERM_NONE)
     {
         return $this->setFieldParam($field, 'zero_terms_query', $zeroTermQuery);
     }

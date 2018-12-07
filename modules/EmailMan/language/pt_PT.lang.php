@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'clique aqui',
 	'TXT_REMOVE_ME'								=> 'Para se remover desta lista de e-mails',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Enviar notificação do endereço de e-mail do Utilizador atribuído?',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Optar por abandonar novos endereços de e-mail por predefinição',
 
 	'LBL_SECURITY_TITLE'						=> 'Definições de Segurança do E-mail',
 	'LBL_SECURITY_DESC'							=> 'Verificar o seguinte que NÃO deve ser permitido via E-mail de Entrada ou exibido no módulo de E-mails',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Permitir que utilizadores usem esta conta para enviar e-mail:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Quando esta opção for selecionada, todos os utilizadores serão capazes de enviar e-mails utilizando a mesma conta de correio de saída<br> utilizada para enviar notificações e alertas do sistema. Se a opção não estiver selecionada,<br> os utilizadores podem, mesmo assim, utilizar o servidor de correio de saída depois de fornecerem as respetivas informações da conta.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Quando ativado, o nome do utilizador será incluído no campo do e-mail. Este recurso pode não funcionar com servidores SMTP que não permitem o envio de uma conta de e-mail diferente da conta do servidor.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Quando se adiciona um novo endereço de e-mail, será automaticamente abandonado. Não serão enviados e-mails de campanhas para os endereços que se tenham abandonado. A alteração desta definição não afetará os endereços de e-mail existentes.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

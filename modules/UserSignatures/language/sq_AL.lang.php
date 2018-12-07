@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'Nënshkrimet e përdoruesit',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'Nënshkrimi i përdoruesit',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Ky nënshkrim kërkon një emër.',
-    'LBL_SIGNATURE_NAME'         => 'Emri',
-    'LBL_SIGNATURE'              => 'Nënshkrimi',
-    'LBL_SIGNATURE_HTML'         => 'HTML nënshkrimi',
-    'LBL_SIGNATURE_DEFAULT'      => 'Përdor nënshkrimin?',
-    'LBL_SIGNATURE_PREPEND'      => 'Nënshkrim mbi përgjigjen',
-    'LBL_SIGNATURES'             => 'Nënshkrimet',
+    'LBL_DEFAULT_SIGNATURE' => 'Standard',
+    'LBL_MODULE_NAME' => 'Nënshkrimet e emaileve',
+    'LBL_MODULE_NAME_SINGULAR' => 'Nënshkrimi i emailit',
+    'LBL_SIGNATURE_NAME' => 'Emri',
+    'LBL_SIGNATURE' => 'Nënshkrimi',
+    'LBL_SIGNATURE_HTML' => 'HTML nënshkrimi',
+    'LBL_SIGNATURE_DEFAULT' => 'Përdor nënshkrimin?',
+    'LBL_SIGNATURE_PREPEND' => 'Nënshkrim mbi përgjigjen',
+    'LBL_SIGNATURES' => 'Nënshkrimet',
 );

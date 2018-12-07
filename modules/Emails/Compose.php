@@ -79,6 +79,36 @@ function initFullCompose($ret)
  */
 function generateComposeDataPackage($data,$forFullCompose = TRUE, $bean = null)
 {
+    $to = [];
+
+    /**
+     * Returns an array of email addresses extracted from a string of delimited email addresses.
+     *
+     * The delimiter may be a comma or semi-colon. The email address may include the name associated with it, in which
+     * case < and > will be present. Each email address is extracted from those strings using
+     * {@see SugarEmailAddress::splitEmailAddress}.
+     *
+     * @param string $str
+     * @return array The keys are the IDs of the email addresses and the values are the email addresses themselves.
+     */
+    $getEmailAddresses = function ($str) {
+        $addresses = [];
+        $ea = BeanFactory::newBean('EmailAddresses');
+        $str = str_replace([',', ';'], '::', $str);
+        $arr = explode('::', $str);
+
+        foreach ($arr as $address) {
+            $parts = $ea->splitEmailAddress($address);
+
+            if (!empty($parts['email'])) {
+                $id = $ea->getGuid($parts['email']);
+                $addresses[$id] = $parts['email'];
+            }
+        }
+
+        return $addresses;
+    };
+
 	// we will need the following:
 	if( isset($data['parent_type']) && !empty($data['parent_type']) &&
 	isset($data['parent_id']) && !empty($data['parent_id']) &&
@@ -99,12 +129,34 @@ function generateComposeDataPackage($data,$forFullCompose = TRUE, $bean = null)
 		if (isset($data['to_email_addrs'])) {
 			$namePlusEmail = $data['to_email_addrs'];
 			$namePlusEmail = from_html(str_replace("&nbsp;", " ", $namePlusEmail));
-		} else {
-			if (isset($bean->full_name)) {
-				$namePlusEmail = from_html($bean->full_name) . " <". from_html($bean->emailAddress->getPrimaryAddress($bean)).">";
-			} else  if(isset($bean->emailAddress)){
-				$namePlusEmail = "<".from_html($bean->emailAddress->getPrimaryAddress($bean)).">";
-			}
+
+            // Get the IDs for each email address found in the string.
+            $addresses = $getEmailAddresses($namePlusEmail);
+
+            foreach ($addresses as $id => $address) {
+                $to[] = [
+                    'email_address_id' => $id,
+                    'email_address' => $address,
+                ];
+            }
+        } elseif (isset($bean->emailAddress)) {
+            $primaryAddress = $bean->emailAddress->getPrimaryAddress($bean);
+            $recipient = [
+                'email_address_id' => $bean->emailAddress->getGuid($primaryAddress),
+                'email_address' => $primaryAddress,
+                'parent_type' => $bean->getModuleName(),
+                'parent_id' => $bean->id,
+            ];
+
+            if (isset($bean->full_name)) {
+                $namePlusEmail = from_html($bean->full_name) . ' <' . from_html($primaryAddress) . '>';
+                $recipient['parent_name'] = from_html($bean->full_name);
+            } else {
+                $namePlusEmail = '<' . from_html($primaryAddress) . '>';
+                $recipient['parent_name'] = '';
+            }
+
+            $to[] = $recipient;
 		}
 
 		$subject = "";
@@ -119,8 +171,16 @@ function generateComposeDataPackage($data,$forFullCompose = TRUE, $bean = null)
 			foreach($contact_ids as $cid)
 			{
 				$contact->retrieve($cid);
+                $primaryAddress = $contact->emailAddress->getPrimaryAddress($contact);
+                $to[] = [
+                    'email_address' => $primaryAddress,
+                    'email_address_id' => $contact->emailAddress->getGuid($primaryAddress),
+                    'parent_type' => $contact->getModuleName(),
+                    'parent_id' => $contact->id,
+                    'parent_name' => from_html($contact->full_name),
+                ];
 				$namePlusEmail .= empty($namePlusEmail) ? "" : ", ";
-				$namePlusEmail .= from_html($contact->full_name) . " <".from_html($contact->emailAddress->getPrimaryAddress($contact)).">";
+                $namePlusEmail .= from_html($contact->full_name) . ' <' . from_html($primaryAddress) . '>';
 			}
 		}
 		if ($bean->module_dir == 'Quotes' && isset($data['recordId'])) {
@@ -131,8 +191,19 @@ function generateComposeDataPackage($data,$forFullCompose = TRUE, $bean = null)
 			$body = $quotesData['body'];
 			$attachments = $quotesData['attachments'];
 			$email_id = $quotesData['email_id'];
+
+            // Get the IDs for each email address found in the string.
+            $addresses = $getEmailAddresses($namePlusEmail);
+
+            foreach ($addresses as $id => $address) {
+                $to[] = [
+                    'email_address_id' => $id,
+                    'email_address' => $address,
+                ];
+            }
 		} // if
 		$ret = array(
+        'to' => $to,
 		'to_email_addrs' => $namePlusEmail,
 		'parent_type'	 => $data['parent_type'],
 		'parent_id'	     => $data['parent_id'],
@@ -147,7 +218,19 @@ function generateComposeDataPackage($data,$forFullCompose = TRUE, $bean = null)
 
 	$email = BeanFactory::newBean('Emails');
 	$namePlusEmail = $email->getNamePlusEmailAddressesForCompose($_REQUEST['action_module'], (explode(",", $_REQUEST['uid'])));
+
+        // Get the IDs for each email address found in the string.
+        $addresses = $getEmailAddresses($namePlusEmail);
+
+        foreach ($addresses as $id => $address) {
+            $to[] = [
+                'email_address_id' => $id,
+                'email_address' => $address,
+            ];
+        }
+
 	$ret = array(
+        'to' => $to,
 		'to_email_addrs' => $namePlusEmail,
 		);
 	} else if (isset($data['replyForward'])) {
@@ -196,7 +279,19 @@ function generateComposeDataPackage($data,$forFullCompose = TRUE, $bean = null)
 				$return['to'] = from_html($ie->email->from_addr);
 			}
 		} // else
+
+        // Get the IDs for each email address found in the string.
+        $addresses = $getEmailAddresses($return['to']);
+
+        foreach ($addresses as $id => $address) {
+            $to[] = [
+                'email_address_id' => $id,
+                'email_address' => $address,
+            ];
+        }
+
 		$ret = array(
+        'to' => $to,
 		'to_email_addrs' => $return['to'],
 		'parent_type'	 => $return['parent_type'],
 		'parent_id'	     => $return['parent_id'],
@@ -218,8 +313,18 @@ function generateComposeDataPackage($data,$forFullCompose = TRUE, $bean = null)
                 $cc_addrs = $cc_addrs . ", " . $to_addrs;
             }
             $ret['cc_addrs'] = $cc_addrs;
-        }
+            $ret['cc'] = [];
 
+            // Get the IDs for each email address found in the string.
+            $addresses = $getEmailAddresses($cc_addrs);
+
+            foreach ($addresses as $id => $address) {
+                $ret['cc'][] = [
+                    'email_address_id' => $id,
+                    'email_address' => $address,
+                ];
+            }
+        }
 	} else {
 		$ret = array(
 		'to_email_addrs' => '',

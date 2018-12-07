@@ -1432,7 +1432,8 @@ class ModuleInstaller{
                 $table = $rel_data['table'];
 
                 if (!$this->db->tableExists($table)) {
-                    $this->db->createTableParams($table, $rel_data['fields'], $rel_data['indices']);
+                    $indices = isset($rel_data['indices']) ? $rel_data['indices'] : [];
+                    $this->db->createTableParams($table, $rel_data['fields'], $indices);
                 }
             }
 
@@ -1467,7 +1468,8 @@ class ModuleInstaller{
                 $field['name'] = $db->getValidDBName($field['name']);
             }
         }
-        if (is_array($item['indices'])) {
+
+        if (isset($item['indices']) && is_array($item['indices'])) {
             foreach ($item['indices'] as &$index) {
                 $index['name'] = $db->getValidDBName($index['name'], false, 'index');
             }
@@ -1971,7 +1973,7 @@ class ModuleInstaller{
                     if (!is_dir($cachePath)) {
                         sugar_mkdir($cachePath, null, true);
                     }
-                    SugarAutoLoader::put("{$cachePath}/{$subLayoutFileName}.ext.php", $extension, true);
+                    file_put_contents("{$cachePath}/{$subLayoutFileName}.ext.php", $extension);
                 }
             }
         }
@@ -2039,10 +2041,10 @@ class ModuleInstaller{
             if (!file_exists($dirName)) {
                 mkdir_recursive($dirName, true);
             }
-            SugarAutoLoader::put($cacheFile, $contents, true);
+            file_put_contents($cacheFile, $contents);
         } else {
             if (file_exists($cacheFile)) {
-                SugarAutoLoader::unlink($cacheFile, true);
+                unlink($cacheFile);
             }
         }
     }
@@ -2971,7 +2973,7 @@ class ModuleInstaller{
             ),
             'alertsEl' => '#alerts',
             'alertAutoCloseDelay' => 2500,
-            'serverUrl' => $config->get('site_url') . '/rest/v10',
+            'serverUrl' => $config->get('site_url') . '/rest/v11_1',
             'siteUrl' => $config->get('site_url'),
             'unsecureRoutes' => array('signup', 'error'),
             'loadCss' => 'url',
@@ -3026,9 +3028,9 @@ class ModuleInstaller{
             ),
             'alertsEl' => '#alerts',
             'alertAutoCloseDelay' => 2500,
-            'serverUrl' => 'rest/v10',
+            'serverUrl' => 'rest/v11_1',
             'siteUrl' => '',
-            'unsecureRoutes' => array('login', 'logout', 'error', 'forgotpassword'),
+            'unsecureRoutes' => array('login', 'logout', 'error', 'forgotpassword', 'externalAuthError'),
             'loadCss' => false,
             'themeName' => 'default',
             'clientID' => 'sugar',
@@ -3212,10 +3214,8 @@ class ModuleInstaller{
         foreach ($copyList as $to => $from) {
             $contents = file_get_contents($from);
             SugarAutoLoader::ensureDir(dirname($to));
-            SugarAutoLoader::put($to, $contents, false);
+            file_put_contents($to, $contents);
         }
-
-        SugarAutoLoader::saveMap();
     }
 
     /**
@@ -3532,11 +3532,15 @@ class ModuleInstaller{
      */
     public function setup_elastic_mapping()
     {
+        if (!isset($this->installdefs['beans'])) {
+            return;
+        }
         foreach ($this->installdefs['beans'] as $beanDefs) {
             $modules[] = $beanDefs['module'];
         }
         $engine = SearchEngine::getInstance()->getEngine();
-        if (isset($engine) && isset($modules)) {
+        if (isset($engine) && !empty($modules)) {
+            // create indices if those don't exist and add mappings
             $engine->addMappings($modules);
         }
     }

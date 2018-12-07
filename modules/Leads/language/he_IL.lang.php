@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת לידים',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת לידים',
+
     'ERR_DELETE_RECORD' => 'יש לספק מספר רשומה על מנת למחוק את הליד.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'תיאור החשבון',
     'LBL_ACCOUNT_ID'=>'חשבון זהות',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'ערך ההזדמנות:',
     'LBL_OPPORTUNITY_ID'=>'הזדמנות זהות',
     'LBL_OPPORTUNITY_NAME' => 'שם ההזדמנות:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'דואר אלקטרוני אחר:',
     'LBL_OTHER_PHONE' => 'טלפון אחר:',
     'LBL_PHONE' => 'טלפון:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'העתק כתובת משנית לכתובת ראשית',
     'NTC_COPY_PRIMARY_ADDRESS' => 'העתק כתובת ראשית לכתובת משנית',
     'NTC_DELETE_CONFIRMATION' => 'אתה בטוח בשברצונך למחוק רשומה זו?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'יצירת הזדמנות דורשת חשבון.\n אנא צור חשבון חדש או בחר חשבון קיים.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'יצירת הזדמנות דורשת חשבון.\\n אנא צור חשבון חדש או בחר חשבון קיים.',
     'NTC_REMOVE_CONFIRMATION' => 'אתה בטוח שברצונך להסיר ליד זה מאירוע זה?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'האם אתה בטוח שברצונך להסיר רשומה זו מדוח ישיר?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'קמפיינים',
@@ -314,4 +320,6 @@ After confirming each required and desired module, click the Save and Convert bu
     'LBL_MKTO_LEAD_SCORE' => 'ציון ליד',
 
     'LBL_FILTER_LEADS_REPORTS' => 'דוחות לליד',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'הסכמה למטרות עסקיות עבור',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'ההסכמה עודכנה לאחרונה בתאריך',
 );

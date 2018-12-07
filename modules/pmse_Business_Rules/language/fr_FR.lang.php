@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Règles de gestion',
   'LBL_MODULE_TITLE' => 'Règles de gestion',
   'LBL_MODULE_NAME_SINGULAR' => 'Règle de gestion',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Conditions',
     'LBL_PMSE_LABEL_RETURN' => 'Retour',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Conclusions',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Changer le champ',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Retourner la valeur',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Ajouter condition',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Ajouter conclusion',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Ajouter une ligne',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Supprimer la colonne',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Supprimer la condition',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Supprimer la conclusion',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Supprimer les données de colonne',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Oui',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Non',

@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Zdefiniowano kilka kolumn z tą samą nazwą pola.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Brak wymaganych pól:',
     'ERR_MISSING_MAP_NAME' => 'Nie odnaleziono niestandardowej nazwy mapowania',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Import użytkowników dla trybu IDM jest wyłączony.',
     'ERR_SELECT_FULL_NAME' => 'Nie możesz wybrać opcji Imię i nazwisko, gdy wybrano opcje Imię i Nazwisko.',
     'ERR_SELECT_FILE' => 'Wybierz plik do wysłania.',
     'LBL_SELECT_FILE' => 'Wybierz plik:',

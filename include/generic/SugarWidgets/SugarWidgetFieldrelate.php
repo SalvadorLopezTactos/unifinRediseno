@@ -150,6 +150,56 @@ class SugarWidgetFieldRelate extends SugarWidgetReportField
         return $this->_get_column_select($layout_def) . " IN ('" . implode("', '", $ids) . "')";
     }
 
+    /**
+     * Method returns part of where in style table_alias.id IN (...) because we can't join of relation
+     *
+     * @param array $layout_def definition of a field
+     * @param bool $rename_columns unused
+     * @return string SQL where part
+     */
+    public function queryFilterEquals($layout_def, $rename_columns = true)
+    {
+        $reporter = $this->layout_manager->getAttribute("reporter");
+        $field_def = $reporter->all_fields[$layout_def['column_key']];
+        $module = isset($field_def['ext2']) ? $field_def['ext2'] : $field_def['module'];
+        $seed = BeanFactory::newBean($module);
+        $rvalue = $layout_def['input_name0'];
+        $rname = isset($field_def['rname']) ? $field_def['rname'] : 'name';
+        $ids = $this->getRelateIds($seed, $rname, $rvalue);
+        if (!empty($ids)) {
+            return $this->_get_column_select($layout_def) . " IN ('" . implode("', '", $ids) . "')";
+        } else {
+            // nothing found
+            return '1=0';
+        }
+    }
+
+    /**
+     * Returns list of relate record ids by a field value
+     * @param SugarBean $seed
+     * @param string $rname
+     * @param string $rvalue
+     * @return string
+     */
+    protected function getRelateIds($seed, $rname, $rvalue)
+    {
+        $ids = array();
+        if (isset($seed->field_defs[$rname]['db_concat_fields'])) {
+            $rname = $seed->db->concat($seed->table_name, $seed->field_defs[$rname]['db_concat_fields']);
+        }
+        $query = new SugarQuery();
+        $query->from($seed, ['add_deleted' => true, 'team_security' => false]);
+        $query->select('id');
+        $query->whereRaw("$rname = " . $seed->db->quoted($rvalue));
+        $rows = $query->execute();
+        if ($rows) {
+            foreach ($rows as $row) {
+                $ids[] = $row['id'];
+            }
+        }
+        return array_unique($ids);
+    }
+
 	//for to_pdf/to_csv
 	function displayListPlain($layout_def) {
 	    $reporter = $this->layout_manager->getAttribute("reporter");

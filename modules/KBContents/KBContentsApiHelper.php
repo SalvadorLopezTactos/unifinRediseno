@@ -127,9 +127,13 @@ class KBContentsApiHelper extends SugarBeanApiHelper {
             if (!isset($ftsFields[$fieldName])) {
                 continue;
             }
-            $sf = new SearchFields();
-            $fieldHandler->buildSearchFields($sf, 'KBContents', $fieldName, $ftsFields[$fieldName]);
-            $result[$fieldName] = $sf->getSearchFields();
+            $sfs = new SearchFields();
+            $fieldHandler->buildSearchFields($sfs, 'KBContents', $fieldName, $ftsFields[$fieldName]);
+            $sfList = [];
+            foreach ($sfs as $sf) {
+                $sfList[] = $sf->compile();
+            }
+            $result[$fieldName] = $sfList;
         }
         return $result;
     }

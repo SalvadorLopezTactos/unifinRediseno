@@ -130,9 +130,7 @@ class Factory
         }
 
         // we will remove this wrapper once we drop support for old levels
-        return new BackwardCompatibleAdapter(
-            new Logger($channel, $handlers, $processors)
-        );
+        return new Logger($channel, $handlers, $processors);
     }
 
     /**

@@ -220,6 +220,13 @@ $dictionary['InboundEmail'] = array('table' => 'inbound_email', 'comment' => 'In
 			'reportable'=>false,
 			'comment' => 'Unique identifier'
 		),
+        'emails' => array(
+            'name' => 'emails',
+            'type' => 'link',
+            'relationship' => 'inbound_email_emails',
+            'source' => 'non-db',
+            'vname' => 'LBL_EMAILS',
+        ),
 	), /* end fields() */
 	'indices' => array (
 		array(
@@ -229,6 +236,11 @@ $dictionary['InboundEmail'] = array('table' => 'inbound_email', 'comment' => 'In
 				'id'
 			)
 		),
+        array(
+            'name' => 'idx_deleted',
+            'type' => 'index',
+            'fields' => array('deleted'),
+        ),
 	), /* end indices */
 	'relationships' => array (
 		'inbound_email_created_by' => array(
@@ -249,6 +261,15 @@ $dictionary['InboundEmail'] = array('table' => 'inbound_email', 'comment' => 'In
 			'rhs_key' => 'modified_user_id',
 			'relationship_type' => 'one-to-one'
 		),
+        'inbound_email_emails' => array(
+            'lhs_module' => 'InboundEmail',
+            'lhs_table' => 'inbound_email',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Emails',
+            'rhs_table' => 'emails',
+            'rhs_key' => 'mailbox_id',
+            'relationship_type' => 'one-to-many',
+        ),
 	), /* end relationships */
 );
 

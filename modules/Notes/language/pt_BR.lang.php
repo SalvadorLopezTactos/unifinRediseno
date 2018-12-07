@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Painel de lista de notas',
+
     'ERR_DELETE_RECORD' => 'Um número de registro deve ser especificado para excluir a Conta.',
     'LBL_ACCOUNT_ID' => 'ID da Conta',
     'LBL_CASE_ID' => 'ID da Ocorrência',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Descrição',
     'LBL_EMAIL_ADDRESS' => 'E-mail',
     'LBL_EMAIL_ATTACHMENT' => 'Anexo do E-mail',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Anexo de e-mail para',
     'LBL_FILE_MIME_TYPE' => 'Tipo de Mime',
+    'LBL_FILE_EXTENSION' => 'Extensão do arquivo',
+    'LBL_FILE_SOURCE' => 'Origem do arquivo',
+    'LBL_FILE_SIZE' => 'Tamanho do arquivo',
     'LBL_FILE_URL' => 'URL do Arquivo',
     'LBL_FILENAME' => 'Anexo:',
     'LBL_LEAD_ID' => 'ID do Potencial:',
@@ -35,7 +42,7 @@ $mod_strings = array(
     'LBL_LIST_SUBJECT' => 'Assunto',
     'LBL_LIST_STATUS' => 'Estado',
     'LBL_LIST_CONTACT' => 'Contato',
-    'LBL_MODULE_NAME' => 'Notas ou Anexos',
+    'LBL_MODULE_NAME' => 'Notas ou anexos',
     'LBL_MODULE_NAME_SINGULAR' => 'Nota',
     'LBL_MODULE_TITLE' => 'Notas: Tela Principal',
     'LBL_NEW_FORM_TITLE' => 'Criar Nota ou Adicionar Anexo',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'ID da Oportunidade:',
     'LBL_PARENT_ID' => 'ID pai:',
     'LBL_PARENT_TYPE' => 'Tipo de Referência',
+    'LBL_EMAIL_TYPE' => 'Tipo de e-mail',
+    'LBL_EMAIL_ID' => 'ID de e-mail',
     'LBL_PHONE' => 'Telefone',
     'LBL_PORTAL_FLAG' => 'Exibir no Portal?',
     'LBL_EMBED_FLAG' => 'Embutido no E-mail?',
@@ -56,9 +65,9 @@ $mod_strings = array(
     'LBL_SEARCH_FORM_TITLE' => 'Pesquisar Notas',
     'LBL_STATUS' => 'Estado',
     'LBL_SUBJECT' => 'Assunto',
-    'LNK_IMPORT_NOTES' => 'Importar Notas',
+    'LNK_IMPORT_NOTES' => 'Importar notas',
     'LNK_NEW_NOTE' => 'Criar nota ou anexo',
-    'LNK_NOTE_LIST' => 'Ver Notas',
+    'LNK_NOTE_LIST' => 'Ver notas',
     'LBL_MEMBER_OF' => 'Membro de:',
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Usuário Designado',
     'LBL_OC_FILE_NOTICE' => 'Faça log-in no servidor para ver o arquivo',

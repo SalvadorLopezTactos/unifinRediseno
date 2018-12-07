@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Login of wachtwoord onjuist',
-	'ERR_BODY_TOO_LONG'		=> '\rBody tekst is te lang voor de volledige e-mail. Derhalve ingekort.',
+	'ERR_BODY_TOO_LONG'		=> '\\rBody tekst is te lang voor de volledige e-mail. Derhalve ingekort.',
 	'ERR_INI_ZLIB'			=> 'Kon de Zlib-compressie niet tijdelijk uitzetten. "Test Settings" zouden kunnen mislukken.',
 	'ERR_MAILBOX_FAIL'		=> 'Het is niet mogelijk om mailboxen te ontvangen.',
 	'ERR_NO_IMAP'			=> 'Geen IMAP bibliotheken gevonden. U dient dit eerst op te lossen alvorens verder te gaan met de inkomende e-mail.',

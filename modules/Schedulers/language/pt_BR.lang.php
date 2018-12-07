@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Atualizar artigos KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicar artigos aprovados e expirar artigos KB.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Tarefas agendadas do Advanced Workflow',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Reconstruir os dados de segurança não normalizados da equipe',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervalo:',
@@ -118,8 +119,12 @@ $mod_strings = array (
 'LNK_NEW_SCHEDULER' => 'Criar agendador',
 'LNK_LIST_SCHEDULED' => 'Tarefas agendadas',
 // Messages
-'SOCK_GREETING' => "\nEsta é a interface para o Serviço de agendadores do SugarCRM. \n[ Comandos daemon disponíveis:
-start|restart|shutdown|status ]\nPara sair, digite 'quit'. Para desligar o serviço, 'shutdown'.\n",
+'SOCK_GREETING' => "
+Esta é a interface para o Serviço de agendadores do SugarCRM. 
+[ Comandos daemon disponíveis:
+start|restart|shutdown|status ]
+Para sair, digite 'quit'. Para desligar o serviço, 'shutdown'.
+",
 'ERR_DELETE_RECORD' => 'Um número de registro deve ser especificado para excluir o agendamento.',
 'ERR_CRON_SYNTAX' => 'Sintaxe Cron inválida',
 'NTC_DELETE_CONFIRMATION' => 'Tem certeza de que deseja excluir este registro?',
@@ -143,6 +148,7 @@ start|restart|shutdown|status ]\nPara sair, digite 'quit'. Para desligar o servi
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Agendador de fila Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Remover arquivos da ferramenta de diagnóstico',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Remover arquivos temporários',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Reconstruir os dados de segurança não normalizados da equipe',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Executar envio noturno de campanhas de massa por e-mail',
 'LBL_ASYNCMASSUPDATE' => 'Realizar atualizações em massa assíncronos',

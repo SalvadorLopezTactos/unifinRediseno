@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus server',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Podpanela po stranici',
 	'LOG_MEMORY_USAGE'=>'Log korišćenja memorije',
-	'LOG_SLOW_QUERIES'=>'Log sporih upita',
+    'LOG_SLOW_QUERIES' => 'Log sporih upita',
     'LOCK_HOMEPAGE_HELP'=>'Ovo podešavanje je da onemogući<BR> 1) dodavanje novih početnih strana i dašleta unutar modula Početna, <BR>2) kastomizaciju položaja dashleta na početnim stranama prevlačenjem i spuštanjem.',
     'CURRENT_LOGO'=>'Trenutni logo:',
     'CURRENT_LOGO_HELP'=>'Ovaj logo je prikazan u gornjem levom uglu Sugar aplikacije.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Ovo je naziv koji se prikazuje u naslovnoj traci vašeg web čitača.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Uključivanje/isključivanje prikaza e-poruka od povezanih konatakata u podtabli za e-poštu.',
 
-    'LBL_OC_STATUS'                     => 'Podrazumevani status Offline klijenta',
-    'DEFAULT_OC_STATUS'                 => 'Omogući Offline klijenta po podrazumevanoj vrednosti.',
-    'LBL_OC_STATUS_DESC' => 'Označite ovu opciju ako želite da svaki korisnik može da pristupi Offline klijentu. U suprotnom možete da konfigurišete pristup na nivou korisnika.',
     'SESSION_TIMEOUT' => 'Isticanje sesija Portala',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Prekid sesije portala je raspoloziv u starim verzijama Sugar Portala, pre verzije  6.5',
     'UPLOAD_MAXSIZE_UNITS' => 'bajtova',
@@ -161,7 +158,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_USER_ATTR_DESC'=>'Jedinstveni identifikator osobe koji će se koristiti za proveravanje da li je osoba član grupe Primer: <em>uid</em>',
 	'LBL_LDAP_GROUP_ATTR_DESC'=>'Atribut grupe koji će se koristiti za filtriranje atributa korisnika Primer:<em>memberUid</em>',
 	'LBL_LDAP_GROUP_ATTR'=>'Atribut grupe:',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Svi dodatni parametri filtera za primenu pri autentifikaciji korisnika npr.\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Svi dodatni parametri filtera za primenu pri autentifikaciji korisnika npr.\\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Atributi prijave:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Atribut Povezivanja:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Za vezivanje LDAP Korisnika<br>Primeri: <b>AD:</b> userPrincipalName, <b>openLDAP:</b> userPrincipalName, <b>Mac OS X:</b> uid',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML prijava URL ne može biti prazna',
     'ERR_EMPTY_SAML_CERT' => 'SAML sertifikat ne može biti prazan',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'ID SAML entiteta ne može da bude prazan',
     'ERR_SAML_LOGIN_URL' => 'SAML prijava URL nije tačan',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL nije tačan',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM datoteka mora da sardži privatni ključ',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM datoteka mora da sadrži x.509 sertifikat',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Dati x.509 sertifikat se ne podudara sa privatnim ključem',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Pregledi aktivnosti',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Omogući preglede aktivnosti',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Uključuje preglede aktivnosti za aplikaciju',
 );
 
 

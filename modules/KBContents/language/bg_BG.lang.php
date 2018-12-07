@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Електронно табло със списък на Базата от знания',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Електронно табло със запис на Базата от знания',
+
     'LBL_MODULE_NAME' => 'База от знания',
     'LBL_MODULE_NAME_SINGULAR' => 'Материал',
     'LBL_MODULE_TITLE' => 'Материал',

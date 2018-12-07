@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'โปรดเลือกจากฟิลด์ที่ใช้ได้',
     'LBL_DESCRIPTION_LEAD_FORM' => 'คำอธิบายฟอร์ม:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'การส่งฟอร์มนี้จะสร้างผู้สนใจและเชื่อมโยงกับแคมเปญ',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'การทำเครื่องหมายลงบนช่องนี้ เป็นการตกลงที่จะรับอีเมลการตลาดในอนาคต',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'โปรดดาวน์โหลดเว็บไปยังฟอร์มของผู้สนใจ',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'เว็บไปยังฟอร์มของผู้สนใจ',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'โปรดระบุข้อมูลในฟิลด์ที่ต้องระบุทั้งหมด',

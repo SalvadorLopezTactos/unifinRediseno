@@ -34,9 +34,7 @@ $viewdefs['Contacts']['EditView'] = array(
             'customCode' => '{html_options name="salutation" id="salutation" options=$fields.salutation.options selected=$fields.salutation.value}' 
 	      . '&nbsp;<input name="first_name"  id="first_name" size="25" maxlength="25" type="text" value="{$fields.first_name.value}">',
 	      ),
-          
 	      'picture',
-
         ),
         array (
           array (

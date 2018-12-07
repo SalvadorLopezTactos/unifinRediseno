@@ -27,6 +27,9 @@ if(!empty($_REQUEST['record'])) {
     $focus->retrieve($_REQUEST['record']);
 }
 
+$dateStartFormatted = ViewDateFormatter::format('datetime', $focus->date_start);
+list($dateStart, $timeStart) = $timedate->split_date_time($dateStartFormatted);
+
 if(isset($_REQUEST['isDuplicate']) && $_REQUEST['isDuplicate'] == 'true') {
 	$focus->id = "";
 }
@@ -48,7 +51,7 @@ $xtpl->assign("THEME", SugarThemeRegistry::current()->__toString());
 $xtpl->assign("CALENDAR_LANG", "en");
 $xtpl->assign("USER_DATEFORMAT", '('. $timedate->get_user_date_format().')');
 $xtpl->assign("CALENDAR_DATEFORMAT", $timedate->get_cal_date_format());
-$time_ampm = $timedate->AMPMMenu('', $focus->time_start);
+$time_ampm = $timedate->AMPMMenu('', $timeStart);
 $xtpl->assign("TIME_MERIDIEM", $time_ampm);
 
 if (isset($_REQUEST['return_module'])) {
@@ -76,11 +79,10 @@ if($focus->campaign_id) {
 }
 $xtpl->assign("CAMPAIGN_ID", $campaign_id);
 
-if(empty($time_ampm) || empty($focus->time_start)) {
-    $time_start = $focus->time_start;
-} else {
-    $split = $timedate->splitTime($focus->time_start, $timedate->get_time_format());
-    $time_start = $split['h'].$timedate->timeSeparator().$split['m'];
+// Remove the meridiem from the time since it is edited in a different field.
+if (!empty($time_ampm) && !empty($timeStart)) {
+    $split = $timedate->splitTime($timeStart, $timedate->get_time_format());
+    $timeStart = $split['h'] . $timedate->timeSeparator() . $split['m'];
 }
 
 $xtpl->assign("JAVASCRIPT", get_set_focus_js().get_validate_record_js());
@@ -92,8 +94,8 @@ $xtpl->assign("FROM_NAME", $focus->from_name);
 $xtpl->assign("FROM_ADDR", $focus->from_addr);
 $xtpl->assign("REPLY_NAME", $focus->reply_to_name);
 $xtpl->assign("REPLY_ADDR", $focus->reply_to_addr);
-$xtpl->assign("DATE_START", $focus->date_start);
-$xtpl->assign("TIME_START", $time_start);
+$xtpl->assign("DATE_START", $dateStart);
+$xtpl->assign("TIME_START", $timeStart);
 $xtpl->assign("TIME_FORMAT", '('. $timedate->get_user_time_format().')');
 
 $email_templates_arr = get_bean_select_array(true, 'EmailTemplate','name',"(type IS NULL OR type='' OR type='campaign')",'name');

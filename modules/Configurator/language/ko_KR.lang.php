@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar 모바일 플러스 서버',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => '페이지당 하위 패널 아이템',
 	'LOG_MEMORY_USAGE'=>'메모리 사용 일지',
-	'LOG_SLOW_QUERIES'=>'문의 일지',
+    'LOG_SLOW_QUERIES' => '문의 일지',
     'LOCK_HOMEPAGE_HELP'=>'이 설정은 1. 새 홈페이지와 홈모듈의 대쉬릿추가 2. 끌어 넣기로 주문형 홈페이지 대쉬릿 배치<br />를 방지합니다.',
     'CURRENT_LOGO'=>'현재 로고',
     'CURRENT_LOGO_HELP'=>'이 로고는 Sugar어플리케이션의 바닥글 왼쪽 코너에 나타납니다.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'이는 귀하의 브라우저 제목칸에 나타납니다.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => '이메일 서브패널에서 보여지는 관련된 (또는 링크된) 연락처를 활성화/비 활성화하십시오.',
 
-    'LBL_OC_STATUS'                     => '오프라인 고객 상태 초기설정',
-    'DEFAULT_OC_STATUS'                 => '오프라인 고객 초기화 작동',
-    'LBL_OC_STATUS_DESC' => '다른 사용자가 오프라인 고객에 접속하도록 하려면 이곳을 확인하십시오. 아니면 사용자 단계를 설정할수 있습니다.',
     'SESSION_TIMEOUT' => '포탈 세션 시간 초과',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => '포털 세션 만료시간설정은 슈가버젼 6.5이전버젼에서만 가능합니다.',
     'UPLOAD_MAXSIZE_UNITS' => '바이트',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML 로그인 URL을 비워 들 수 없음',
     'ERR_EMPTY_SAML_CERT' => 'SAML 인증을 비워 둘 수 없음',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML 엔티티 ID를 비워 둘 수 없음',
     'ERR_SAML_LOGIN_URL' => 'SAML 로그인 URL이 유효하지 않습니다',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL이 유효하지 않습니다',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM 파일에는 개인키가 포함되어 있어야 합니다',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM 파일에는 x.509 인증서가 포함되어 있어야 합니다',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => '제공된 x.509 인증서가 개인키와 일치하지 않습니다',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => '활동 스트림',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => '활동 스트림 활성화',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => '이 앱에서 활동 스트림 켜기',
 );
 
 

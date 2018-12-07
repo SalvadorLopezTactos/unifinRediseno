@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Instrumentpanel med offertlista',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Instrumentpanel med offertposter',
+
     'LBL_CONTRACTS'=>'Kontrakt',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Kontrakt',
     'ERR_DELETE_RECORD' => 'Ett objektnummer måste specificeras för att radera offerten.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Totalsumma',
     'LBL_SUBTOTAL' => 'Totalsumma',
     'LBL_TAXABLE_SUBTOTAL' => 'Delsumma, brutto',
-    'LBL_SYSTEM_ID' => 'System-ID',
     'LBL_TAX_USDOLLAR'=>'Moms',
     'LBL_TAX' => 'Moms',
     'LBL_TAX_TOTAL' => 'Total skatt',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Ta bort markerade',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Ta bort markerade objekt',
     'LBL_SAVE_LINE_ITEMS' => 'Spara alla aktiva radartiklar genom att klicka på den blå bocken bredvid varje innan Offerten sparas.',
+    'LBL_COPY_LINE_ITEMS' => 'Spara alla aktiva radartiklar genom att klicka på den blå bocken bredvid varje innan Offerten kopieras.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Sök i produktkatalogen',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Inga data tillgängliga',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Kopierar valt radföremål till ny offert.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Kopierar valt radföremål till ny offert. Den här processen kan ta en stund.',
 );

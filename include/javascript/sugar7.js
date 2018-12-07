@@ -55,6 +55,23 @@
                 }
             },
             {
+                name: 'externalAuthError',
+                route: 'externalAuthError',
+                callback: function() {
+                    app.controller.loadView({
+                        module: 'Login',
+                        layout: 'login',
+                        create: true
+                    });
+                    app.alert.show('needs_login_error', {
+                        level: 'error',
+                        messages: app.lang.getAppString('LBL_LOGIN_INACTIVE_USER'),
+                        title: app.lang.get('LBL_INVALID_CREDS_TITLE')
+                    });
+                    app.router.redirect('/');
+                }
+            },
+            {
                 name: 'about',
                 route: 'about',
                 callback: function() {
@@ -390,11 +407,25 @@
             template = Handlebars.compile(app.lang.get(titles[context.get('layout')], module) || ''),
             moduleName = app.lang.getModuleName(module, {plural: true}),
             title;
-        //pass current translated module name and current page's model data
-        title = template(_.extend({
+        var titleInfo = _.extend({
             module: moduleName,
             appId: app.config.systemName || app.config.appId
-        }, model ? model.attributes : {}));
+        }, model ? model.attributes : {});
+
+        // If the model has a name attached (in model.attributes),
+        // we want to check if it's translatable.
+        if (titleInfo.name) {
+            // In the case of Dashboards record view page,
+            // the translation is not stored in the current module,
+            // and we want to look up from the module that dashboard is for
+            if (moduleName === 'Dashboards' && titleInfo.dashboard_module) {
+                titleInfo.name = app.lang.get(titleInfo.name, titleInfo.dashboard_module);
+            } else {
+                titleInfo.name = app.lang.get(titleInfo.name, moduleName);
+            }
+        }
+        title = template(titleInfo);
+
         // title may contain XML entities because Handlebars escapes characters
         // by replacing them for use in HTML, so the true text needs to be
         // lifted before it can be set on the title
@@ -622,14 +653,28 @@
     app.events.on("app:logout:success", function(data) {
         if (app.config && app.config.externalLogin && data && data.url) {
             if (!$('#logoutframe').length) {
-                $("#sugarcrm").append('<iframe id="logoutframe" />');
+                $('#sugarcrm').append('<iframe id="logoutframe" name="logoutframe" />');
                 $('#logoutframe').hide();
             }
             $('#logoutframe').load(function() {
                 $('#logoutframe').off('load');
                 $('#logoutframe').attr('src','');
             });
-            $('#logoutframe').attr('src',data.url);
+
+            if (typeof data.url == 'string') { // HTTP-Redirect binding
+                $('#logoutframe').attr('src',data.url);
+            } else if (typeof data.url == 'object') { // HTTP-POST binding
+                var formHTML = '<form id="externalLogoutForm" method="POST" target="logoutframe" action="' +
+                    data.url.url + '">';
+                _.each(data.url.params, function(value, key, list) {
+                    formHTML += '<input type="hidden" name="' + _.escape(key) + '" value="' + _.escape(value) + '" />';
+                });
+                formHTML += '</form>' +
+                    '<script type="text/javascript">document.getElementById("externalLogoutForm").submit();</script>';
+
+                $('#sugarcrm').append(formHTML);
+            }
+
         }
     });
 

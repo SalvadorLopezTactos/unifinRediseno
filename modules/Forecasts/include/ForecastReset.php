@@ -300,8 +300,8 @@ class ForecastReset
 
             sugar_file_put_contents($this->module_ext_path . DIRECTORY_SEPARATOR . $this->columns_ext_file, $contents);
         } else {
-            if (SugarAutoLoader::fileExists($this->module_ext_path . DIRECTORY_SEPARATOR . $this->columns_ext_file)) {
-                SugarAutoLoader::unlink($this->module_ext_path . DIRECTORY_SEPARATOR . $this->columns_ext_file);
+            if (file_exists($this->module_ext_path . DIRECTORY_SEPARATOR . $this->columns_ext_file)) {
+                unlink($this->module_ext_path . DIRECTORY_SEPARATOR . $this->columns_ext_file);
             }
         }
 

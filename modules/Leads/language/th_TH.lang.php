@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'แดชบอร์ดรายการข้อสำคัญ',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกข้อสำคัญ',
+
     'ERR_DELETE_RECORD' => 'ต้องระบุเลขที่ระเบียนเพื่อลบผู้สนใจ',
     'LBL_ACCOUNT_DESCRIPTION'=> 'คำอธิบายบัญชี',
     'LBL_ACCOUNT_ID'=>'ID บัญชี',
@@ -91,7 +96,7 @@ $mod_strings = array (
     'LBL_DEPARTMENT' => 'แผนก:',
     'LBL_DESCRIPTION_INFORMATION' => 'ข้อมูลคำอธิบาย',
     'LBL_DESCRIPTION' => 'คำอธิบาย:',
-    'LBL_DO_NOT_CALL' => 'ไม่ติดต่อ:',
+    'LBL_DO_NOT_CALL' => 'ห้ามโทร',
     'LBL_DUPLICATE' => 'ผู้สนใจที่คล้ายกัน',
     'LBL_EMAIL_ADDRESS' => 'ที่อยู่อีเมล:',
     'LBL_EMAIL_OPT_OUT' => 'ปฏิเสธการรับอีเมล:',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'จำนวนเงินของโอกาสทางการขาย:',
     'LBL_OPPORTUNITY_ID'=>'ID โอกาสทางการขาย',
     'LBL_OPPORTUNITY_NAME' => 'ชื่อโอกาสทางการขาย:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'อีเมลอื่น:',
     'LBL_OTHER_PHONE' => 'โทรศัพท์อื่น:',
     'LBL_PHONE' => 'โทรศัพท์:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'คัดลอกที่อยู่รองไปยังที่อยู่หลัก',
     'NTC_COPY_PRIMARY_ADDRESS' => 'คัดลอกที่อยู่หลักไปยังที่อยู่รอง',
     'NTC_DELETE_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการลบระเบียนนี้',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'การสร้างโอกาสทางการขายจะต้องมีบัญชี\n โปรดสร้างบัญชีใหม่หรือเลือกบัญชีที่มีอยู่',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'การสร้างโอกาสทางการขายจะต้องมีบัญชี\\n โปรดสร้างบัญชีใหม่หรือเลือกบัญชีที่มีอยู่',
     'NTC_REMOVE_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการย้ายผู้สนใจนี้ออกจากเคสนี้',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'คุณแน่ใจหรือไม่ว่าต้องการยกเลิกระเบียนนี้ในฐานะผู้ใต้บังคับบัญชา',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'ล็อกของแคมเปญ',
@@ -314,4 +320,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'คะแนนของผู้สนใจ',
 
     'LBL_FILTER_LEADS_REPORTS' => 'รายงานของผู้ใช้สนใจ',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'ยอมรับจุดประสงค์ต่าง ๆ ทางธุรกิจเพื่อ',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'ยอมรับการปรับปรุงครั้งล่าสุด',
 );

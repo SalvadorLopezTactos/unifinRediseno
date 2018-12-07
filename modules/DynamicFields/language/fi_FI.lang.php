@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'Oletus-URL',
 	'COLUMN_TITLE_AUDIT' =>'Tarkistus',
+    'COLUMN_TITLE_PII' => 'Henkilötiedot',
     'COLUMN_TITLE_FTS' =>'Haettava kokotekstihaussa',
     'COLUMN_TITLE_FTS_BOOST' => 'Boost-arvo',
 	'COLUMN_TITLE_REPORTABLE' => 'Raportoitava',

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Dashboard Lijst regelitems omzet',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Dashboard Record regelitems omzet',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Campagne Product',
     'LBL_MODULE_NAME' => 'Opportunityregels',
     'LBL_MODULE_NAME_SINGULAR' => 'Opportunityregel',

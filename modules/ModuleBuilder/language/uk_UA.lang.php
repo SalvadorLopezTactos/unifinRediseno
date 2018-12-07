@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Ви впевнені, що хочете видалити цей зв&#39;язок?<br />Примітка: Ця операція не може завершити протягом декількох хвилин.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Це зробить зв&#39;язок постійним. Ви впевнені, що хочете встановити цей зв&#39;язок?',
 'LBL_CONFIRM_DONT_SAVE' => 'З моменту останнього збереження були внесені зміни. Хочете зберегти зміни зараз?',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Configure the field to be full text searchable.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Boosting is the process of enhancing the relevancy of a record\\\'s fields.<br />Fields with a higher boost level will be given greater weight when the search is performed. When a search is performed, matching records containing fields with a greater weight will be appear higher in the search results.<br />The default value is 1.0 which stands for a neutral boost. To apply a positive boost any float value higher than 1 is accepted. For a negative boost use values lower than 1. For example a value of 1.35 will positively boost a field by 135%. Using a value of 0.60 will apply a negative boost.<br />Note that in previous versions it was required to perform a full text search reindex. This is no longer required.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Так</b>: Поле буде включене в операцію імпорту.<br><b>Ні</b>:Поле не буде включене в операцію імпорту<br><b>Необхідно</b>: Значення для поля повинно бути забезпечене в будь-якому імпорті.',
+'LBL_POPHELP_PII'=>'Це поле буде автоматично відмічено для аудиту та доступне під час перегляду особистих відомостей.<br>Також поля з особистими відомостями можна повністю видалити, якщо подано запит на видалення запису, що містить конфіденційну інформацію.<br>Видалення виконують адміністратори чи користувачі в ролі менеджера захисту даних за допомогою модуля захисту даних.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Введіть число для ширини, що виміряна в пікселях.<br> Завантажене зображення буде масштабуватися до цієї ширини.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Введіть номер для висоти, виміряної в пікселях.<br> Завантажене зображення буде масштабуватися до цієї висоти.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

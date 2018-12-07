@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Інформаційна панель списку дзвінків',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Інформаційна панель записів дзвінків',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Дзвінки',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Дзвінок',

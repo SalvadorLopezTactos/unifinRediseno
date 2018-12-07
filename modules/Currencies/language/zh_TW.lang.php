@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => '建立工作',
   'NTC_DELETE_CONFIRMATION' => '確定要刪除此記錄嗎？任何使用此貨幣的紀錄在存取時都將轉換為系統預設貨幣。建議您先將狀態設置為停用。',
   'LBL_BELOW_MIN' => '轉換比率必須大於 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => '使用中',
-    'Inactive' => '非使用中',
-  ),
   'LBL_CREATED_BY' => '建立人',
   'LBL_EDIT_LAYOUT' => '編輯配置' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => '僅限管理員',
+  'LBL_CURRENCY_DEFAULT' => '美元 (預設值)',
+
 );
 ?>

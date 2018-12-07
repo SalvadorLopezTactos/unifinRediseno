@@ -8,16 +8,17 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-var RegExpValidator = function (options, parent) {
-    Validator.call(this, options, parent);
-    RegExpValidator.prototype.initObject.call(this, options);
+var PMSE = PMSE || {};
+PMSE.RegExpValidator = function(options, parent) {
+    PMSE.Validator.call(this, options, parent);
+    PMSE.RegExpValidator.prototype.initObject.call(this, options);
 };
 
-RegExpValidator.prototype = new Validator();
+PMSE.RegExpValidator.prototype = new PMSE.Validator();
 
-RegExpValidator.prototype.type = "RegExpValidator";
+PMSE.RegExpValidator.prototype.type = 'PMSE.RegExpValidator';
 
-RegExpValidator.prototype.initObject = function (options) {
+PMSE.RegExpValidator.prototype.initObject = function(options) {
     var defaults = {
         errorMessage: "The text pattern doesn't match"
     };
@@ -27,7 +28,7 @@ RegExpValidator.prototype.initObject = function (options) {
     this.setErrorMessage(defaults.errorMessage);
 };
 
-RegExpValidator.prototype.validate = function () {
+PMSE.RegExpValidator.prototype.validate = function() {
     var res = false;
     if (this.criteria instanceof RegExp && this.parent && this.parent.value) {
         this.valid = this.criteria.test(this.parent.value);
@@ -36,16 +37,16 @@ RegExpValidator.prototype.validate = function () {
     }
 };
 
-var TextLengthValidator = function (options, parent) {
-    Validator.call(this, options, parent);
-    TextLengthValidator.prototype.initObject(this, options);
+PMSE.TextLengthValidator = function(options, parent) {
+    PMSE.Validator.call(this, options, parent);
+    PMSE.TextLengthValidator.prototype.initObject(this, options);
 };
 
-TextLengthValidator.prototype = new Validator();
+PMSE.TextLengthValidator.prototype = new PMSE.Validator();
 
-TextLengthValidator.prototype.type = 'TextLengthValidator';
+PMSE.TextLengthValidator.prototype.type = 'PMSE.TextLengthValidator';
 
-TextLengthValidator.prototype.initObject = function (options) {
+PMSE.TextLengthValidator.prototype.initObject = function(options) {
     var defaults = {
         errorMessage: "The text length doesn't match with the specified one"
     };
@@ -55,7 +56,7 @@ TextLengthValidator.prototype.initObject = function (options) {
     this.setErrorMessage(defaults.errorMessage);
 };
 
-TextLengthValidator.prototype.validate = function () {
+PMSE.TextLengthValidator.prototype.validate = function() {
     var res = false,
         value = this.criteria.trim ? $.trim(this.parent.value) : this.parent.value;
 
@@ -69,15 +70,15 @@ TextLengthValidator.prototype.validate = function () {
     }
 };
 
-var CustomValidator = function (options, parent) {
-    Validator.call(this, options, parent);
+PMSE.CustomValidator = function(options, parent) {
+    PMSE.Validator.call(this, options, parent);
 };
 
-CustomValidator.prototype = new Validator();
+PMSE.CustomValidator.prototype = new PMSE.Validator();
 
-CustomValidator.prototype.type = "CustomValidator";
+PMSE.CustomValidator.prototype.type = 'PMSE.CustomValidator';
 
-CustomValidator.prototype.validate = function () {
+PMSE.CustomValidator.prototype.validate = function() {
     if (typeof this.criteria.validationFunction === 'function') {
         this.valid = this.criteria.validationFunction.call(this.parent, this.parent.parent);
     }
@@ -86,15 +87,15 @@ CustomValidator.prototype.validate = function () {
     }
 };
 
-var NumberValidator = function (options, parent) {
-    Validator.call(this, options, parent);
+PMSE.NumberValidator = function(options, parent) {
+    PMSE.Validator.call(this, options, parent);
 
-    NumberValidator.prototype.initObject.call(this, options);
+    PMSE.NumberValidator.prototype.initObject.call(this, options);
 };
 
-NumberValidator.prototype = new Validator();
+PMSE.NumberValidator.prototype = new PMSE.Validator();
 
-NumberValidator.prototype.initObject = function (options) {
+PMSE.NumberValidator.prototype.initObject = function(options) {
     var defaults = {
         criteria: {
             decimalSeparator: ".",
@@ -107,11 +108,11 @@ NumberValidator.prototype.initObject = function (options) {
         .setErrorMessage(defaults.errorMessage);
 };
 
-NumberValidator.prototype.setDecimalSeparator = function (separator) {
+PMSE.NumberValidator.prototype.setDecimalSeparator = function(separator) {
     this.criteria.decimalSeparator = separator;
 };
 
-NumberValidator.prototype.validate = function () {
+PMSE.NumberValidator.prototype.validate = function() {
     var evaluate, n, aux,
         intValid = false,
         decValid = false,
@@ -177,16 +178,16 @@ NumberValidator.prototype.validate = function () {
     }
 };
 
-var ComparisonValidator = function (options, parent) {
-    Validator.call(this, options, parent);
-    ComparisonValidator.prototype.initObject(this, options);
+PMSE.ComparisonValidator = function(options, parent) {
+    PMSE.Validator.call(this, options, parent);
+    PMSE.ComparisonValidator.prototype.initObject(this, options);
 };
 
-ComparisonValidator.prototype = new Validator();
+PMSE.ComparisonValidator.prototype = new PMSE.Validator();
 
-ComparisonValidator.prototype.type = "ComparisonValidator";
+PMSE.ComparisonValidator.prototype.type = 'PMSE.ComparisonValidator';
 
-ComparisonValidator.prototype.initObject = function (options) {
+PMSE.ComparisonValidator.prototype.initObject = function(options) {
     var defaults = {
         errorMessage: "The comparison failed"
     };
@@ -196,21 +197,21 @@ ComparisonValidator.prototype.initObject = function (options) {
     this.setErrorMessage(defaults.errorMessage);
 };
 
-ComparisonValidator.prototype.validate = function () {
+PMSE.ComparisonValidator.prototype.validate = function() {
     var evaluate, i, operators = {
-        '==': function (a, b) {
+        '==': function(a, b) {
             return a === b;
         },
-        '>': function (a, b) {
+        '>': function(a, b) {
             return a > b;
         },
-        '>=': function (a, b) {
+        '>=': function(a, b) {
             return a >= b;
         },
-        '<': function (a, b) {
+        '<': function(a, b) {
             return a < b;
         },
-        '<=': function (a, b) {
+        '<=': function(a, b) {
             return a <= b;
         }
     }, fields = this.parent.parent.items.slice(0), currentField, j;
@@ -270,14 +271,14 @@ ComparisonValidator.prototype.validate = function () {
     this.valid = true;
 };
 
-var RangeValidator = function (options, parent) {
-    Validator.call(this, options, parent);
-    RangeValidator.prototype.initObject.call(this, options);
+PMSE.RangeValidator = function(options, parent) {
+    PMSE.Validator.call(this, options, parent);
+    PMSE.RangeValidator.prototype.initObject.call(this, options);
 };
 
-RangeValidator.prototype = new Validator();
+PMSE.RangeValidator.prototype = new PMSE.Validator();
 
-RangeValidator.prototype.initObject = function (options) {
+PMSE.RangeValidator.prototype.initObject = function(options) {
     var defaults = {
         criteria: {
             type: "string",
@@ -292,23 +293,23 @@ RangeValidator.prototype.initObject = function (options) {
         .setErrorMessage(defaults.errorMessage);
 };
 
-RangeValidator.prototype.validate = function () {
+PMSE.RangeValidator.prototype.validate = function() {
     var that = this,
         options = [
             "minValue",
             "maxValue"
         ],
         parser = {
-            string: function (val) {
+            string: function(val) {
                 return val.toString();
             },
-            numeric: function (val) {
+            numeric: function(val) {
                 if (isNaN(val)) {
                     return NaN;
                 }
                 return parseFloat(val);
             },
-            date: function (val) {
+            date: function(val) {
                 var i, date, aux = {}, dateParts = {}, length,
                     indexes = ["yyyy", "mm", "dd", "hh", "ii", "ss"];
                 if (typeof val === 'object') {

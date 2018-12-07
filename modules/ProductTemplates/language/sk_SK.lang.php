@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => 'Prepravcovia',
   'LNK_PRODUCT_LIST' => 'Zobrazenie katalógu produktov',
   'NTC_DELETE_CONFIRMATION' => 'Skutočne, chcete vymazať tento záznam?',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => 'Pridať',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Pridelené meno užívateľa',

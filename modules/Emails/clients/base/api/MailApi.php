@@ -11,7 +11,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
 class MailApi extends ModuleApi
 {
     /*-- API Argument Constants --*/
@@ -64,6 +63,9 @@ class MailApi extends ModuleApi
 
     private $emailRecipientsService;
 
+    /**
+     * {@inheritdoc}
+     */
     public function registerApiRest()
     {
         $api = array(
@@ -75,15 +77,6 @@ class MailApi extends ModuleApi
                 'shortHelp' => 'Create Mail Item',
                 'longHelp' => 'modules/Emails/clients/base/api/help/mail_post_help.html',
             ),
-            //TODO: Implement updateMail fully
-//            'updateMail'      => array(
-//                'reqType'   => 'PUT',
-//                'path'      => array('Mail', '?'),
-//                'pathVars'  => array('', 'email_id'),
-//                'method'    => 'updateMail',
-//                'shortHelp' => 'Update Mail Item',
-//                'longHelp'  => 'modules/Emails/clients/base/api/help/mail_record_put_help.html',
-//            ),
             'archiveMail' => array(
                 'reqType' => 'POST',
                 'path' => array('Mail', 'archive'),
@@ -149,22 +142,39 @@ class MailApi extends ModuleApi
     }
 
     /**
+     * @deprecated POST /Mail has been deprecated and will not be available after v11. Use POST /Emails instead.
+     * @see EmailsApi::createRecord()
      * @param ServiceBase $api
      * @param array $args
      * @return array
      */
     public function createMail(ServiceBase $api, array $args)
     {
+        LoggerManager::getLogger()->deprecated(
+            'POST /Mail has been deprecated and will not be available after v11. Use POST /Emails instead.'
+        );
+
         return $this->handleMail($api, $args);
     }
 
     /**
+     * @deprecated PUT /Mail/:record has been deprecated and will not be available after v11. Use PUT /Emails/:record
+     * instead.
+     * @see EmailsApi::updateRecord()
      * @param ServiceBase $api
      * @param array $args
      * @return array
+     * @throws SugarApiExceptionMissingParameter
+     * @throws SugarApiExceptionRequestMethodFailure
+     * @throws SugarApiExceptionInvalidParameter
      */
     public function updateMail(ServiceBase $api, array $args)
     {
+        LoggerManager::getLogger()->deprecated(
+            'PUT /Mail/:record has been deprecated and will not be available after v11. Use PUT /Emails/:record ' .
+            'instead.'
+        );
+
         $email = new Email();
 
         if (isset($args['email_id']) && !empty($args['email_id'])) {
@@ -172,7 +182,7 @@ class MailApi extends ModuleApi
                 throw new SugarApiExceptionMissingParameter();
             }
 
-            if ($email->status != 'draft') {
+            if ($email->state !== Email::STATE_DRAFT) {
                 throw new SugarApiExceptionRequestMethodFailure();
             }
         } else {
@@ -185,12 +195,20 @@ class MailApi extends ModuleApi
     /**
      * Archive email.
      *
+     * @deprecated POST /Mail/archive has been deprecated and will not be available after v11. Use POST /Emails with
+     * `{"state": "Archived"}` instead.
+     * @see EmailsApi::createRecord()
      * @param ServiceBase $api
      * @param array $args
      * @return array
      */
     public function archiveMail(ServiceBase $api, array $args)
     {
+        LoggerManager::getLogger()->deprecated(
+            'POST /Mail/archive has been deprecated and will not be available after v11. Use POST /Emails with ' .
+            '{"state": "Archived"} instead.'
+        );
+
         // Perform Front End argument validation per the Mail API architecture
         // Non-compliant arguments will result in an Invalid Parameter Exception Thrown
         $this->validateArguments($args);
@@ -199,12 +217,18 @@ class MailApi extends ModuleApi
     }
 
     /**
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailApi::createMail()
+     * @see MailApi::updateMail()
      * @param ServiceBase $api
      * @param array $args
      * @return array
+     * @throws SugarApiExceptionRequestMethodFailure
      */
     protected function handleMail(ServiceBase $api, array $args)
     {
+        LoggerManager::getLogger()->deprecated('MailApi::handleMail() has been deprecated.');
+
         // Perform Front End argument validation per the Mail API architecture
         // Non-compliant arguments will result in an Invalid Parameter Exception Thrown
         $this->validateArguments($args);
@@ -232,12 +256,17 @@ class MailApi extends ModuleApi
      * This endpoint accepts an array of one or more recipients and tries to resolve unsupplied arguments.
      * EmailRecipientsService::lookup contains the lookup and resolution rules.
      *
+     * @deprecated POST /Mail/recipients/lookup has been deprecated and will not be available after v11.
      * @param ServiceBase $api
      * @param array $args
      * @return array
      */
     public function recipientLookup(ServiceBase $api, array $args)
     {
+        LoggerManager::getLogger()->deprecated(
+            'POST /Mail/recipients/lookup has been deprecated and will not be available after v11.'
+        );
+
         $recipients = $args;
         unset($recipients['__sugar_url']);
 
@@ -339,6 +368,22 @@ class MailApi extends ModuleApi
                 $nextOffset = $offset + $limit;
                 array_pop($records);
             }
+
+            $apiHelpers = array();
+            $retrieveOptions = array();
+            if (!empty($args['erased_fields'])) {
+                $retrieveOptions = ['erased_fields' => true, 'encode' => false, 'use_cache' => false];
+            }
+            foreach ($records as $idx => $record) {
+                $bean = BeanFactory::retrieveBean($record['_module'], $record['id'], $retrieveOptions);
+                if (!isset($apiHelpers[$record['_module']])) {
+                    $apiHelpers[$record['_module']] = ApiHelper::getHelper($api, $bean);
+                }
+                if (isset($bean->erased_fields)) {
+                    $records[$idx]['_erased_fields'] = $bean->erased_fields;
+                }
+                $records[$idx]['_acl'] = $apiHelpers[$record['_module']]->getBeanAcl($bean, array_keys($record));
+            }
         }
 
         return array(
@@ -350,12 +395,18 @@ class MailApi extends ModuleApi
     /**
      * Perform Audit Validation on Input Arguments and normalize
      *
-     * @param array  - $args
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailApi::archiveMail()
+     * @see MailApi::handleMail()
+     * @param array $args
      */
     public function validateArguments(array &$args)
     {
-        global $app_list_strings;
-        $relatedToModules = array_keys($app_list_strings['parent_type_display']);
+        LoggerManager::getLogger()->deprecated('MailApi::validateArguments() has been deprecated.');
+
+        $bean = BeanFactory::getBean('Emails');
+        $relatedToOptions = $bean->field_defs['parent_name']['options'];
+        $relatedToModules = array_keys($GLOBALS['app_list_strings'][$relatedToOptions]);
 
         /*--- Validate status value ---*/
         if (empty($args[self::STATUS]) || !in_array($args[self::STATUS], self::$apiStatusValues)) {
@@ -512,11 +563,16 @@ class MailApi extends ModuleApi
     /**
      * Validate Recipient List
      *
-     * @param array $args - array
-     * @param $argName - string
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailApi::validateArguments()
+     * @param array $args
+     * @param string $argName
+     * @param bool $isRequired
      */
     protected function validateRecipients(array $args, $argName, $isRequired = false)
     {
+        LoggerManager::getLogger()->deprecated('MailApi::validateRecipients() has been deprecated.');
+
         $recipientCount = 0;
         if (isset($args[$argName])) {
             if (!is_array($args[$argName])) {
@@ -543,21 +599,33 @@ class MailApi extends ModuleApi
     /**
      * Log Audit Errors and Throw Appropriate Exception
      *
-     * @param $message - string
-     * @param $msgArgs - array
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailApi::validateArguments()
+     * @see MailApi::validateRecipients()
+     * @param string $message
+     * @param null|array $msgArgs
+     * @throws SugarApiExceptionInvalidParameter
      */
     protected function invalidParameter($message, $msgArgs = null)
     {
+        LoggerManager::getLogger()->deprecated('MailApi::invalidParameter() has been deprecated.');
+
         throw new SugarApiExceptionInvalidParameter($message, $msgArgs, 'Emails');
     }
 
     /**
      * Instantiate and initialize the MaiRecord from the incoming api arguments
      *
-     * @param string  - $message
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailApi::archiveMail()
+     * @see MailApi::handleMail()
+     * @param array $args
+     * @return MailRecord
      */
     protected function initMailRecord(array $args)
     {
+        LoggerManager::getLogger()->deprecated('MailApi::initMailRecord() has been deprecated.');
+
         $mailRecord = new MailRecord();
         $mailRecord->mailConfig = $args[self::EMAIL_CONFIG];
         $mailRecord->toAddresses = $args[self::TO_ADDRESSES];
@@ -584,6 +652,7 @@ class MailApi extends ModuleApi
      * Validates email addresses. The return value is an array of key-value pairs where the keys are the email
      * addresses and the values are booleans indicating whether or not the email address is valid.
      *
+     * @deprecated POST /Mail/address/validate has been deprecated and will not be available after v11.
      * @param ServiceBase $api
      * @param array $args
      * @return array
@@ -591,6 +660,10 @@ class MailApi extends ModuleApi
      */
     public function validateEmailAddresses(ServiceBase $api, array $args)
     {
+        LoggerManager::getLogger()->deprecated(
+            'POST /Mail/address/validate has been deprecated and will not be available after v11.'
+        );
+
         $validatedEmailAddresses = array();
         unset($args["__sugar_url"]);
         if (!is_array($args)) {
@@ -606,6 +679,11 @@ class MailApi extends ModuleApi
         return $validatedEmailAddresses;
     }
 
+    /**
+     * @see MailApi::recipientLookup()
+     * @see MailApi::findRecipients()
+     * @return EmailRecipientsService
+     */
     protected function getEmailRecipientsService()
     {
         if (!($this->emailRecipientsService instanceof EmailRecipientsService)) {
@@ -618,12 +696,21 @@ class MailApi extends ModuleApi
     /**
      * Saves an email attachment using the POST method
      *
+     * @deprecated POST /Mail/attachment has been deprecated and will not be available after v11. Use POST
+     * /Notes/temp/file/filename to upload an attachment and POST /Emails/:record/link/attachments to link it to an
+     * email.
      * @param ServiceBase $api The service base
      * @param array $args Arguments array built by the service base
      * @return array metadata about the attachment including name, guid, and nameForDisplay
      */
     public function saveAttachment(ServiceBase $api, array $args)
     {
+        LoggerManager::getLogger()->deprecated(
+            'POST /Mail/attachment has been deprecated and will not be available after v11. Use POST ' .
+            '/Notes/temp/file/filename to upload an attachment and POST /Emails/:record/link/attachments to link it ' .
+            'to an email.'
+        );
+
         $this->checkPostRequestBody();
         $email = $this->getEmailBean();
         $email->email2init();
@@ -634,6 +721,10 @@ class MailApi extends ModuleApi
     /**
      * Removes an email attachment
      *
+     * @deprecated DELETE /Mail/attachment/:id has been deprecated and will not be available after v11. Use DELETE
+     * /Notes/:record/file/filename to delete an uploaded file from the filesystem. Use DELETE
+     * /Emails/:record/link/attachments/:remote_id to remove an attachment from an email. Note that removing an
+     * attachment from an email will also delete it from the filesystem.
      * @param ServiceBase $api The service base
      * @param array $args The request args
      * @return bool
@@ -641,6 +732,13 @@ class MailApi extends ModuleApi
      */
     public function removeAttachment(ServiceBase $api, array $args)
     {
+        LoggerManager::getLogger()->deprecated(
+            'DELETE /Mail/attachment/:id has been deprecated and will not be available after v11. Use DELETE ' .
+            '/Notes/:id/file/filename to delete a file from the filesystem. Use DELETE ' .
+            '/Emails/:id/link/attachments/:remote_id to remove an attachment from an email. Note that removing an ' .
+            'attachment from an email will also delete it from the filesystem.'
+        );
+
         $email = $this->getEmailBean();
         $email->email2init();
         $fileGUID = $args['file_guid'];
@@ -655,6 +753,8 @@ class MailApi extends ModuleApi
     /**
      * Clears the user's attachment cache directory
      *
+     * @deprecated DELETE /Mail/attachment/cache has been deprecated and will not be available after v11. Attachments
+     * are no longer written as temporary files to the current user's cache directory.
      * @param ServiceBase $api The service base
      * @param array $args The request args
      * @return bool
@@ -662,6 +762,10 @@ class MailApi extends ModuleApi
      */
     public function clearUserCache(ServiceBase $api, array $args)
     {
+        LoggerManager::getLogger()->deprecated(
+            'DELETE /Mail/attachment/cache has been deprecated and will not be available after v11.'
+        );
+
         $em = new EmailUI();
         $em->preflightUserCache();
         return true;
@@ -670,6 +774,9 @@ class MailApi extends ModuleApi
     /**
      * Returns a new Email bean, used for testing purposes
      *
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailApi::saveAttachment()
+     * @see MailApi::removeAttachment()
      * @return Email
      */
     protected function getEmailBean()

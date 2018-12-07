@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => '建立日期',
     'LBL_DATE_MODIFIED' => '修改日期',
     'LBL_DELETED' => '刪除',
+    'LBL_MODULE_NAME' => '電子郵件地址',
+    'LBL_MODULE_NAME_SINGULAR' => '電子郵件地址',
 );

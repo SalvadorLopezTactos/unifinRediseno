@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Несколько колонок имеют одно и то же название поля.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Missing required fields:',
     'ERR_MISSING_MAP_NAME' => 'Отсутствует название кастомизированного сопоставления',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Функция импорта пользователей недоступна в режиме IDM.',
     'ERR_SELECT_FULL_NAME' => 'Вы не можете выбрать полное имя, когда выбраны имя и фамилия.',
     'ERR_SELECT_FILE' => 'Выбрать файл для загрузки.',
     'LBL_SELECT_FILE' => 'Выбрать файл:',

@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Leads List Dashboard',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Leads Record Dashboard',
+
     'ERR_DELETE_RECORD' => 'A record number must be specified to delete the lead.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Account Description',
     'LBL_ACCOUNT_ID'=>'Account ID',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Opportunity Amount:',
     'LBL_OPPORTUNITY_ID'=>'Opportunity ID',
     'LBL_OPPORTUNITY_NAME' => 'Opportunity Name:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Other Email:',
     'LBL_OTHER_PHONE' => 'Other Phone:',
     'LBL_PHONE' => 'Phone:',
@@ -314,4 +320,6 @@ After confirming each required and desired module, click the Save and Convert bu
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Leads\' reports',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Business Purposes Consented for',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consent Last Updated',
 );

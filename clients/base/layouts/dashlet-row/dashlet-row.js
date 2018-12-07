@@ -275,21 +275,27 @@
             this._components.splice(sourceIndex, 1);
         }
 
-        _.each(this._components, function(component, index){
+        _.each(this._components, function(component, index) {
             component.index = this.index + '' + index;
         }, this);
 
-        this.model.set("metadata", app.utils.deepCopy(metadata), {silent: true});
-        this.model.trigger("change:layout");
+        this.model.set('metadata', app.utils.deepCopy(metadata), {silent: true});
+        this.model.trigger('change:layout');
     },
 
     /**
      * @inheritdoc
      */
     _dispose: function() {
-        this.$el.children(".dashlet-row").sortable("destroy");
-        this.model.off("applyDragAndDrop", null, this);
-        this.model.off("setMode", null, this);
+        var $dashletRowChildren = this.$el.children('.dashlet-row');
+        _.each($dashletRowChildren, function(child) {
+            var $child = $(child);
+            if (!_.isUndefined($child.sortable('instance'))) {
+                $child.sortable('destroy');
+            }
+        });
+        this.model.off('applyDragAndDrop', null, this);
+        this.model.off('setMode', null, this);
         this._super('_dispose');
     }
 })

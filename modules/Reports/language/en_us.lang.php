@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'By Quarter',
     'LBL_BY_FISCAL_YEAR' => 'By Fiscal Year',
     'LBL_BY_FISCAL_QUARTER' => 'By Fiscal Quarter',
+    'LBL_AMOUNT' => 'Amount',
     'LBL_COUNT' => 'Count',
+    'LBL_PERCENT' => 'Percent',
     'LBL_SUM' => 'SUM',
     'LBL_AVG' => 'AVG',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Month',
     'LBL_YEAR' => 'Year',
     'LBL_QUARTER' => 'Quarter',
+    'LBL_FISCAL' => 'Fiscal',
     'LBL_FISCAL_YEAR' => 'Fiscal Year',
     'LBL_FISCAL_QUARTER' => 'Fiscal Quarter',
 	'LBL_YESTERDAY'=>'Yesterday',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Greater Than Equal To',
 
     'LBL_FILTER_BY_MODULE' => 'By Module',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'With Charts',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Error retrieving Drillthrough Report data for this action. Contact the report owner for assistance.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Drill through not available',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'The list view displays all reports meeting the current search criteria and to which users have access. You can view the basic details of each report within the field columns of the list view and in the preview. You can set tags for reports and create filters. Click the report\'s name to view the report or select \'Edit Report\' in the action menu to modify the report.',
+  );

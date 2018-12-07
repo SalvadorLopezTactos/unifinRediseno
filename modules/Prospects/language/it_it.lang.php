@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Dashboard elenco obiettivi',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Dashboard record obiettivi',
+
   'LBL_MODULE_NAME' => 'Obiettivi',
   'LBL_MODULE_NAME_SINGULAR' => 'Obiettivo',
   'LBL_MODULE_ID'   => 'Obiettivi',
@@ -195,4 +199,6 @@ Per creare un {{module_name}}:
 2. Cliccare "Salva" per finalizzare il nuovo record e ritornare alla pagina precedenter.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Report degli obiettivi',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Scopi commerciali consentiti per',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ultimo aggiornamento consenso',
 );

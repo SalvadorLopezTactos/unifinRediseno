@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> 'Tento dotaz se bude stohovat pod první dotaz v Reporte',
     'ERR_DB_VERSION_FAILURE'			=> 'Nelze zjistit verzi databáze.',
 
-
-	'ERR_OC_PASSWORD'					=> 'Je vyžadováno heslo.',
-	'ERR_OC_SERVER_URL'					=> 'URL Sugar Serveru je vyžadována.',
-	'ERR_OC_USERNAME'					=> 'Uživatelské jméno uživatele serveru  je požadováno.',
-	'LBL_INSTALL_OC'					=> 'Nainstalovat Offline klienta',
-    'LBL_OC_ADMIN'                      => 'Obraťte se na správce pokud chcete vyřešit tento problém.',
-    'LBL_OC_SUCCESS'                    => 'Offline instalace klienta byla dokončena. Prosím, klikněte na tlačítko níže, pro pristup k instalaci.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'Administrátorské uživatelské jméno',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'Prosím, zadejte podrobnosti níže, aby se správně nainstaloval a synchronizoval offline klient.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'URL Sugar Serveru',
-	'LBL_OC_INSTALL_PASS'				=> 'Heslo pro uživatele serveru',
-	'LBL_OC_INSTALL_TITLE'				=> 'Offline instalace klienta',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'Tohle je uživatelské jméno se kterým se budete přihlašovat k Sugar serveru.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'Uživ.jméno',
-	'LBL_PERFORM_OC_INSTALL'			=> 'Inicializuju instalaci Offline klienta',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'Prosím, zadejte podrobnosti níže, aby se správně nainstaloval a synchronizoval offline klient.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Zadejte uživatelské jméno pro administrátorského uživatele Sugaru.',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Zadejte heslo pro administrátorského uživatele Sugaru.',
@@ -76,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Chyby byly zjištěny při kontrole kompatibility. Aby se vaše SugarCRM instalace mohla správně fungovat, prosim, vykonejte správné kroky k řešení problémů uvedených níže, a pak pokračujte stisknutím tlačítka překontrolovat, nebo zkuste nainstalovat znovu.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Položka Povolit času volání předat referenci je zapnuta (mělo by být vypnuto v souboru php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Nenalezeno: Plánovač Sugar bude spuštěn s omezenou funkčností. Nebude možné spustit službu Archivace e-mailu.',
+	'ERR_CHECKSYS_CURL'					=> 'Nenalezeno: Plánovač systému Sugar se spustí s omezenou funkčností. Služba Archivování e-mailů nebude spuštěna.',
     'ERR_CHECKSYS_IMAP'					=> 'Nenaleyeno: Prichodzí Email a kampaně (e-mail) vyžadují IMAP knihovny. Ani jedno nebude funkční.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC nemůže být "On" při použití MS SQL Serveru.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Varování:',
@@ -92,7 +75,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Pro optimální vzužití pomocí IIS / FastCGI SAPI, nastavte fastcgi.logging na 0 v souboru php.ini.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Nepodporovaná PHP verze nainstalovaná: (ver',
     'LBL_DB_UNAVAILABLE'                => 'Databáze není k dispozici',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podpora databáze nenalezena. Zkontrolujte, zda máte potřebné ovladače pro jeden z následujících podporovaných typů databáze: MySQL, MS SQLServer, Oracle nebo DB2. Možná budete muset v závislosti na verzi PHP odkomentovat rozšíření v souboru php.ini, nebo překompilovat správný binární soubor. Více informací o tom, jak povolit podporu databáze, naleznete v příručce PHP.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Podpora databáze nebyla nalezena. Zkontrolujte, zda máte potřebné ovladače pro jeden z následujících podporovaných typů databáze: MySQL, MS SQL Server, Oracle nebo DB2. Možná bude v závislosti na verzi PHP potřeba odkomentovat rozšíření v souboru php.ini, nebo překompilovat správný binární soubor. Více informací o povolení podpory databáze naleznete v příručce PHP.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Funkce spojené s XML Parser Knihovami, které jsou potřebné pro aplikaci Sugar nebyly nalezeny. Možná bude nutné odkomentovat rozšíření v souboru php.ini, nebo překompilovat s právami binární soubor, v závislosti na verzi PHP. Podívejte se do vašeho PHP Manuálu pro více informací.',
     'LBL_CHECKSYS_CSPRNG' => 'Generátor náhodných čísel',
     'ERR_CHECKSYS_MBSTRING'             => 'Funkce spojené s Multibyte Strings PHP rozšířením (mbstring), které jsou potřebné pro aplikaci Sugar nebyly nalezeny.<br /><br />Obecně platí, že je modul mbstring není povolen ve výchozím nastavení v PHP a musí být aktivován pomocí - enable-mbstring, když je compilovaný binární PHP. Podívejte se do vašeho PHP Manuálu pro více informací o tom, jak povolit mbstring podporu.',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'Velikost nahraného souboru',
 	'ERR_URL_BLANK'						=> 'Vložte základní adresu instance SugarCRM.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'Nebyl nalezen instalační záznam k',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'Nahraný soubor není s vaším druhem Sugar kompatibilní:',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'Nahraný soubor není kompatibilní s touto verzí systému Sugar (edice Professional, Enterprise nebo Ultimate): ',
 	'ERROR_LICENSE_EXPIRED'				=> "Chyba: Vaše licence vyexpirovala",
 	'ERROR_LICENSE_EXPIRED2'			=> "dny.Prosím jděte na stránky <a href=\\\"index.php?action=LicenseSettings&module=Administration\\\"> Správa licencí</a> v sekci ADMINISTRACE a vložte nový licenční klíč. Jesliže tak neučiníte během 30 dnů, nebudete schopni se na systém přihlásit.",
 	'ERROR_MANIFEST_TYPE'				=> 'Soubor manifestu musí specifikovat typ balíčku.',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'Expirace',
 	'LBL_LICENSE_I_ACCEPT'				=> 'Přijmout',
 	'LBL_LICENSE_NUM_USERS'				=> 'Počet uživatelů',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'Prosím, zadejte počet zakoupených offline klientů.',
-	'LBL_LICENSE_OC_NUM'				=> 'Počet licencí k offline klientovi',
-	'LBL_LICENSE_OC'					=> 'Licence Offline Client',
 	'LBL_LICENSE_PRINTABLE'				=> 'Tisknutelný náhled',
     'LBL_PRINT_SUMM'                    => 'Vytisknout souhrn',
 	'LBL_LICENSE_TITLE_2'				=> 'License SugarCRM',
@@ -496,10 +476,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'Nastavení kódování',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Poskytuje název SugarCRM systému',
 	'LBL_PATCH_UPLOAD' => 'Vyberete soubor z vašeho počítače',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'Php verze 5 nebo vyšší je vyžadována.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(Tvoje php verze is',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Mód zpětné kompatibility PHP je zapnut. Nastavte zend.ze1_compatibility_mode na Off pro pokračování.',
 
     'advanced_password_new_account_email' => array(
@@ -519,5 +495,3 @@ $mod_strings = array(
         'name' => 'Poslat zapomenuté heslo',
         ),
 );
-
-?>

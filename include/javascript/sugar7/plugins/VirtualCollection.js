@@ -639,6 +639,7 @@
                 options || (options = {});
 
                 params = {};
+                params.erased_fields = true;
                 params.fields = options.fields ? options.fields : ['name'];
                 params.order_by = options.order_by || this.parent.fields[this.fieldName].order_by;
 
@@ -713,7 +714,9 @@
              * all records have been retrieved.
              */
             fetchAll: function(options) {
-                var self, success;
+                var self;
+                var success;
+                var complete;
 
                 /**
                  * Paginate through the collection until all records have been
@@ -728,6 +731,9 @@
                         if (success) {
                             success(self, options);
                         }
+                        if (complete) {
+                            complete(self, options);
+                        }
                     }
                 }
 
@@ -738,6 +744,10 @@
                 if (options.success) {
                     success = options.success;
                     delete options.success;
+                }
+                if (options.complete) {
+                    complete = options.complete;
+                    delete options.complete;
                 }
 
                 options.success = paginate;
@@ -830,6 +840,7 @@
                 params.max_num = options.limit;
                 params.search_fields = options.search_fields? options.search_fields.join(',') : 'name';
                 params.fields = options.fields ? options.fields.join(',') : 'name';
+                params.erased_fields = true;
 
                 if (this.links) {
                     params.module_list = _.map(this.links, function(link) {
@@ -1335,7 +1346,16 @@
                  * {@link BeanOverrides#changedAttributes}.
                  */
                 this.changedAttributes = _.wrap(this.changedAttributes, function(_super, diff) {
-                    var changed = _.extend(_super.call(this, diff) || {}, overrides.changedAttributes(diff));
+                    var fromOverrides = overrides.changedAttributes();
+                    var nonCollectionFields;
+                    var changed;
+
+                    if (diff) {
+                        fromOverrides = _.pick(fromOverrides, _.keys(diff));
+                    }
+
+                    nonCollectionFields = _super.call(this, diff) || {};
+                    changed = _.extend(nonCollectionFields, fromOverrides);
 
                     return _.isEmpty(changed) ? false : changed;
                 });
@@ -1354,7 +1374,17 @@
                  * {@link BeanOverrides#getSynced}.
                  */
                 this.getSynced = _.wrap(this.getSynced, function(_super, key) {
-                    return _.extend(app.utils.deepCopy(_super.call(this, key) || {}), overrides.getSynced(key));
+                    var fromOverrides = overrides.getSynced(key);
+                    var fromSuper = _super.call(this, key);
+
+                    if (key) {
+                        // Let super return its value if the key isn't for a
+                        // collection.
+                        return _.contains(this.getCollectionFieldNames(), key) ? fromOverrides : fromSuper;
+                    }
+
+                    // Merge the collection fields onto the object from super.
+                    return _.extend(app.utils.deepCopy(fromSuper || {}), fromOverrides);
                 });
             },
 

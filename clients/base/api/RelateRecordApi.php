@@ -185,12 +185,17 @@ class RelateRecordApi extends SugarApi
         
         list($linkName, $relatedBean) = $this->checkRelatedSecurity($api, $args, $primaryBean, 'view', 'view');
 
-        $related = array_values($primaryBean->$linkName->getBeans(array(
+        /** @var Link2 $link */
+        $link = $primaryBean->$linkName;
+
+        $related = array_values($link->getBeans(array(
             'where' => array(
                 'lhs_field' => 'id',
                 'operator' => '=',
                 'rhs_value' => $args['remote_id'],
             )
+        ), array(
+            'erased_fields' => !empty($args['erased_fields']),
         )));
 
         if (!empty($related[0]->id)) {
@@ -488,7 +493,7 @@ class RelateRecordApi extends SugarApi
 
         SugarRelationship::resaveRelatedBeans();
 
-        Activity::enable();
+        Activity::restoreToPreviousState();
         $result['record'] = $this->formatBean($api, $args, $primaryBean);
 
         return $result;

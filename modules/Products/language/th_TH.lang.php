@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'แดชบอร์ดรายการไอเท็มไลน์ที่อ้างมา',
+
     'LBL_CAMPAIGN_PRODUCT' => 'รายการบรรทัดการเสนอราคาของแคมเปญ',
     'LBL_MODULE_NAME' => 'รายการบรรทัดการเสนอราคา',
     'LBL_MODULE_NAME_SINGULAR' => 'รายการบรรทัดการเสนอราคา',
@@ -123,7 +126,7 @@ $mod_strings = array(
     'LBL_SUBTOTAL' => 'ผลรวมย่อย',
     'LBL_CONTACT' => 'ที่อยู่ติดต่อ',
     'LBL_DISCOUNT_TOTAL' => 'ยอดรวมส่วนลด',
-    'LBL_DISCOUNT_AMOUNT' => 'จำนวนเงินส่วนลด',
+    'LBL_DISCOUNT_AMOUNT' => 'ส่วนลด',
     'LBL_EXT_PRICE' => 'ราคารวม',
     'LBL_CURRENCY_SYMBOL_NAME' => 'ชื่อสัญลักษณ์สกุลเงิน',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'รายการบรรทัดการเสนอราคา',
@@ -172,4 +175,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'รายการข้อมูลการเสนอราคาของรายการบรรทัดการเสนอราคา',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (รายการบรรทัดการเสนอราคาใหม่)',
     'LBL_DISCOUNT_PERCENT' => '% เปอร์เซ็นต์',
+    'LBL_DISCOUNT_TYPE' => 'ประเภทส่วนลด',
 );

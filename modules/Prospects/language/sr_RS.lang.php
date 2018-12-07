@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Kontrolna tabla liste ciljeva',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa ciljeva',
+
   'LBL_MODULE_NAME' => 'Ciljevi',
   'LBL_MODULE_NAME_SINGULAR' => 'Cilj',
   'LBL_MODULE_ID'   => 'Ciljevi',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Titula',
   'LBL_SAVE_PROSPECT' => 'Sačuvaj cilj',
   'LBL_CREATED_OPPORTUNITY' =>'Kreirana nova prodajna prilika',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Za kreiranje prodajne prilike neophodna je kompanija.\n Molim, kreirajte novu kompaniju ili odaberite neku postojeću.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Za kreiranje prodajne prilike neophodna je kompanija.\\n Molim, kreirajte novu kompaniju ili odaberite neku postojeću.',
   'LNK_SELECT_ACCOUNT' => "Izaberi Kompaniju",
   'LNK_NEW_PROSPECT' => 'Kreiranje cilja',
   'LNK_PROSPECT_LIST' => 'Pregled ciljeva',
@@ -195,4 +199,6 @@ Da bi {{module_name}} bio kreiran:
 2. Kliknite na "Sačuvaj" da dovršite novi zapis i povratak na predhodnu stranu.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Izveštaji ciljeva',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Pristanak u poslovne svrhe za',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Poslednje ažuriranje pristanka',
 );

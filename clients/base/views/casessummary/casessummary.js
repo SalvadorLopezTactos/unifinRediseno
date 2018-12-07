@@ -30,13 +30,10 @@
     initialize: function(options) {
         this._super('initialize', [options]);
 
-        this.chart = nv.models.pieChart()
-                .x(function(d) {
-                    return d.key;
-                })
-                .y(function(d) {
-                    return d.value;
-                })
+        this.tooltipTemplate = app.template.getField('chart', 'singletooltiptemplate', this.module);
+        this.locale = SUGAR.charts.getSystemLocale();
+
+        this.chart = sucrose.charts.pieChart()
                 .margin({top: 0, right: 0, bottom: 0, left: 0})
                 .donut(true)
                 .donutLabelsOutside(true)
@@ -50,13 +47,21 @@
                 .showLegend(false)
                 .direction(app.lang.direction)
                 .colorData('data')
-                .tooltipContent(function(key, x, y, e, graph) {
-                    return '<p><b>' + key + ' ' + parseInt(y, 10) + '</b></p>';
-                })
+                .tooltipContent(_.bind(function(eo, properties) {
+                    var point = {};
+                    point.key = this.chart.getKey()(eo);
+                    point.label = app.lang.get('LBL_CHART_COUNT');
+                    point.value = this.chart.getValue()(eo);
+                    point.percent = sucrose.utility.numberFormatPercent(point.value, properties.total, this.locality);
+                    return this.tooltipTemplate(point).replace(/(\r\n|\n|\r)/gm, '');
+                }, this))
                 .strings({
-                    noData: app.lang.get('LBL_CHART_NO_DATA')
-                });
+                    noData: app.lang.get('LBL_CHART_NO_DATA'),
+                    noLabel: app.lang.get('LBL_CHART_NO_LABEL')
+                })
+                .locality(this.locale);
 
+        this.locality = this.chart.locality();
     },
 
     /**
@@ -70,7 +75,7 @@
 
         // Set value of label inside donut chart
         this.chart.hole(this.total);
-        d3.select(this.el).select('svg#' + this.cid)
+        d3sugar.select(this.el).select('svg#' + this.cid)
             .datum(this.chartCollection)
             .transition().duration(500)
             .call(this.chart);
@@ -123,12 +128,12 @@
         };
         this.chartCollection.data.push({
             key: app.lang.get('LBL_DASHLET_CASESSUMMARY_CLOSE_CASES'),
-            classes: 'nv-fill-green',
+            classes: 'sc-fill-green',
             value: countClosedCases
         });
         this.chartCollection.data.push({
             key: app.lang.get('LBL_DASHLET_CASESSUMMARY_OPEN_CASES'),
-            classes: 'nv-fill-red',
+            classes: 'sc-fill-red',
             value: countOpenCases
         });
 

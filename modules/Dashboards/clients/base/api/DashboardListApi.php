@@ -29,6 +29,8 @@ class DashboardListApi extends FilterApi
         return array(
             'getDashboardsForModule' => array(
                 'reqType' => 'GET',
+                'minVersion' => '10',
+                'maxVersion' => '10',
                 'path' => array('Dashboards', '<module>'),
                 'pathVars' => array('', 'module'),
                 'method' => 'getDashboards',
@@ -43,11 +45,13 @@ class DashboardListApi extends FilterApi
             ),
             'getDashboardsForHome' => array(
                 'reqType' => 'GET',
+                'minVersion' => '10',
+                'maxVersion' => '10',
                 'path' => array('Dashboards'),
                 'pathVars' => array(''),
                 'method' => 'getDashboards',
                 'shortHelp' => 'Get dashboards for home',
-                'longHelp' => 'include/api/help/get_dashboards.html',
+                'longHelp' => 'include/api/help/get_home_dashboards.html',
                 'exceptions' => array(
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionError',
@@ -56,11 +60,13 @@ class DashboardListApi extends FilterApi
             ),
             'getDashboardsForActivities' => array(
                 'reqType' => 'GET',
+                'minVersion' => '10',
+                'maxVersion' => '10',
                 'path' => array('Dashboards', 'Activities'),
                 'pathVars' => array('', 'module'),
                 'method' => 'getDashboards',
-                'shortHelp' => 'Get dashboards for home',
-                'longHelp' => 'include/api/help/get_dashboards.html',
+                'shortHelp' => 'Get dashboards for activity stream',
+                'longHelp' => 'include/api/help/get_activities_dashboards.html',
                 'cacheEtag' => true,
                 'exceptions' => array(
                     'SugarApiExceptionInvalidParameter',

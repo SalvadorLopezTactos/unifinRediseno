@@ -148,6 +148,11 @@ $dictionary['TeamMembership'] = array(
             'fields' => array('user_id', 'team_id'),
         ),
         array(
+            'name' => 'idx_del_team_user',
+            'type' => 'index',
+            'fields' => array('deleted', 'team_id', 'user_id'),
+        ),
+        array(
             'name' => 'idx_teammemb_team_user',
             'type' => 'alternate_key',
             'fields' => array('team_id', 'user_id'),

@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Tarjottujen tuoterivien luettelon työpöytä',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampanjan tarjottu tuoterivi',
     'LBL_MODULE_NAME' => 'Tarjotut tuoterivit',
     'LBL_MODULE_NAME_SINGULAR' => 'Tarjottu tuoterivi',
@@ -123,7 +126,7 @@ $mod_strings = array(
     'LBL_SUBTOTAL' => 'Välisumma',
     'LBL_CONTACT' => 'Kontakti',
     'LBL_DISCOUNT_TOTAL' => 'Diskontto yhteensä',
-    'LBL_DISCOUNT_AMOUNT' => 'Diskonttomäärä',
+    'LBL_DISCOUNT_AMOUNT' => 'Alennus',
     'LBL_EXT_PRICE' => 'Ulk. hinta',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Valuuttasymbolin nimi',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Tarjotut tuoterivit',
@@ -176,4 +179,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Tarjottujen tuoterivien tarjouksen dataluettelo',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Uusi tarjottu tuoterivi)',
     'LBL_DISCOUNT_PERCENT' => '% Prosenttia',
+    'LBL_DISCOUNT_TYPE' => 'Alennustyyppi',
 );

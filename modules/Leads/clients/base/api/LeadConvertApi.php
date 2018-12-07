@@ -66,7 +66,7 @@ class LeadConvertApi extends ModuleApi
      */
     protected function loadModule(ServiceBase $api, $module, $data)
     {
-        $version = $api->getRequest()->getVersion();
+        $version = $api->getRequest()->getUrlVersion();
         $moduleDef = array (
             'module' => $module,
         );
@@ -77,9 +77,9 @@ class LeadConvertApi extends ModuleApi
         else {
             $request = array(
                 array(
-                    'url'    => "/{$version}/{$module}",
+                    'url' => "/{$version}/{$module}",
                     'method' => 'POST',
-                    'data'   => json_encode($data),
+                    'data' => json_encode($data),
                 )
             );
             $apiClass = new BulkApi();

@@ -54,4 +54,6 @@ $defaultTrackingDashlets = array('TrackerDashlet'=>'Trackers',
 							    
 $defaultTrackingReportDashlets =  array(translate('DEFAULT_REPORT_TITLE_27', 'Reports')=>'Trackers');
 
-if (SugarAutoLoader::fileExists('custom/modules/Home/dashlets.php')) include_once('custom/modules/Home/dashlets.php');
+if (file_exists('custom/modules/Home/dashlets.php')) {
+    include_once 'custom/modules/Home/dashlets.php';
+}

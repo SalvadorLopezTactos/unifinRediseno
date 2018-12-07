@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Сервер Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Кількість відображуваних субпанелей на сторінці',
 	'LOG_MEMORY_USAGE'=>'Вести журнал використання пам&#39;яті',
-	'LOG_SLOW_QUERIES'=>'Вести журнал повільних запитів',
+    'LOG_SLOW_QUERIES' => 'Вести журнал повільних запитів',
     'LOCK_HOMEPAGE_HELP'=>'Даний параметр забороняє: <br/> 1) додавати Розділи на головну сторінку системи <br/> 2) переміщати Розділи на головній сторінці системи',
     'CURRENT_LOGO'=>'Поточний логотип:',
     'CURRENT_LOGO_HELP'=>'Даний логотип відображається в лівому верхньому кутку додатка Sugar.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Дана назва відображається в заголовку браузера.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Дозволити / Заборонити відображення електронних листів від пов&#39;язаних контактів на субпанелі Email.',
 
-    'LBL_OC_STATUS'                     => 'Статус автономного клієнта',
-    'DEFAULT_OC_STATUS'                 => 'Активувати автономного клієнт за замовчуванням',
-    'LBL_OC_STATUS_DESC' => 'Натисніть тут, якщо хочете, щоб у всіх користувачів був доступ до Оффлайн клієнту. Ви також можете налаштувати доступ на рівні користувача.',
     'SESSION_TIMEOUT' => 'Закінчення часу очікування відповіді від Порталу',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Час очікування сесії порталу встановлено для діючих версій порталу Sugar, доступних для Sugar 6.5 і вище.',
     'UPLOAD_MAXSIZE_UNITS' => 'байти',
@@ -161,7 +158,7 @@ $mod_strings = array (
 	'LBL_LDAP_GROUP_USER_ATTR_DESC'=>'Унікальний ідентифікатор користувача, який використовується для перевірки належності користувача до певної групи, наприклад <em>uid</em>',
 	'LBL_LDAP_GROUP_ATTR_DESC'=>'Унікальний атрибут групи, наприклад: <em>memberUid</em>',
 	'LBL_LDAP_GROUP_ATTR'=>'Атрибут групи:',
-	'LBL_LDAP_USER_FILTER_DESC'=>'Будь-які додаткові параметри, застосовувані в процесі авторизації користувачів, наприклад:  \nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
+	'LBL_LDAP_USER_FILTER_DESC'=>'Будь-які додаткові параметри, застосовувані в процесі авторизації користувачів, наприклад:  \\nis_sugar_user=1 or (is_sugar_user=1)(is_sales=1)',
     'LBL_LDAP_LOGIN_ATTRIBUTE'=>'Login-атрибут:',
     'LBL_LDAP_BIND_ATTRIBUTE'=>'Bind-атрибут:',
     'LBL_LDAP_BIND_ATTRIBUTE_DESC'=>'Авторизація користувача LDAP <br> наприклад : <b>AD:</b> userPrincipalName, <b>openLDAP:</b> userPrincipalName, <b>Mac OS X:</b> uid',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'URL-адреса входу SAML не може бути порожньою',
     'ERR_EMPTY_SAML_CERT' => 'SAML сертифікат не може бути порожнім',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'Ідентифікатор компанії SAML не може бути порожнім',
     'ERR_SAML_LOGIN_URL' => 'Неприпустима URL-адреса входу SAML',
     'ERR_SAML_SLO_URL' => 'Неприпустима URL адреса SLO SAML',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'Файл PEM повинен містити закритий ключ',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'Файл PEM повинен містити сертифікат x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Наданий сертифікат x.509 не збігається із закритим ключем',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Активності',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Активація стрічки активностей',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Активація стрічки активностей для додатку',
 );
 
 

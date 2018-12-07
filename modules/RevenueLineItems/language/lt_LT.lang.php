@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Pajamų eilutės prekių sąrašo ataskaitų sritis',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Pajamų eilutės prekių duomenų ataskaitų sritis',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampanijos prekė',
     'LBL_MODULE_NAME' => 'Pajamų eilutės prekės',
     'LBL_MODULE_NAME_SINGULAR' => 'Revenue Line Item',

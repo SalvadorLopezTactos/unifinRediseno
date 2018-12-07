@@ -44,6 +44,7 @@ $viewdefs['pmse_Inbox']['base']['view']['list'] = array(
                     'enabled' => true,
                     'link' => true,
                     'type' => 'pmse-link',
+                    'sortable' => false,
                 ),
                 array(
                     'name' => 'assigned_user_name',

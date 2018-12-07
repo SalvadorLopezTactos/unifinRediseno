@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'לוח מחוונים של רשימת הצעות מחיר',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת הצעות מחיר',
+
     'LBL_CONTRACTS'=>'חוזים',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'חוזים',
     'ERR_DELETE_RECORD' => 'יש לציין מספר רשומה על מנת למחוק הצעת מחיר זו.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'סיכום ביניים (בשקלים)',
     'LBL_SUBTOTAL' => 'סיכום ביניים:',
     'LBL_TAXABLE_SUBTOTAL' => 'סיכום ביניים חייב במס',
-    'LBL_SYSTEM_ID' => 'זהות מערכתי',
     'LBL_TAX_USDOLLAR'=>'מס (בשקלים)',
     'LBL_TAX' => 'מס:',
     'LBL_TAX_TOTAL' => 'סך המס',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'מחק את הנבחר',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'מחק פריטים נבחרים',
     'LBL_SAVE_LINE_ITEMS' => 'שמור את כל שורות הפריטים הפעילות, בלחיצה על סימן הביקורת הכחול בסמוך לכל אחת מהן, לפני שתשמור את הצעת המחיר.',
+    'LBL_COPY_LINE_ITEMS' => 'אנא שמור כל פריטי הקו הפעיל על ידי לחיצה על הסימון הכחול ליד כל אחד לפני העתקת הצעת מחיר זו.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'חפש בקטלוג המוצרים',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'אין נתונים זמינים',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'מעתיק &#39;שורות הצעות מחיר&#39; ל&#39;הצעת מחיר&#39; חדשה.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'מעתיק &#39;שורות הצעות מחיר&#39; ל&#39;הצעת מחיר&#39; חדשה. תהליך זה עשוי להימשך זמן מה.',
 );

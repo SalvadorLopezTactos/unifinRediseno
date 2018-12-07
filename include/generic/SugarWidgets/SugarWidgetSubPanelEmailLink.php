@@ -62,30 +62,37 @@ class SugarWidgetSubPanelEmailLink extends SugarWidgetField {
 				$client = $defaultPref;
 			}
 
-			if($client == 'sugar')
-			{
-			    $composeData = array(
-			        'load_id' => $layout_def['fields']['ID'],
-                    'load_module' => $this->layout_manager->defs['module_name'],
-                    'parent_type' => $this->layout_manager->defs['module_name'],
-                    'parent_id' => $layout_def['fields']['ID'],
-			        'return_module' => $module,
-			        'return_action' => $action,
-			        'return_id' => $record
-			    );
-                if(isset($layout_def['fields']['FULL_NAME'])){
-                    $composeData['parent_name'] = $layout_def['fields']['FULL_NAME'];
-                    $composeData['to_email_addrs'] = sprintf("%s <%s>", $layout_def['fields']['FULL_NAME'], $layout_def['fields']['EMAIL']);
-                } else {
-                    $composeData['to_email_addrs'] = $layout_def['fields']['EMAIL'];
-                }
-                $eUi = new EmailUI();
-                $j_quickComposeOptions = $eUi->generateComposePackageForQuickCreate($composeData, http_build_query($composeData), true);
+        if ($client === 'sugar' && ACLController::checkAccess('Emails', 'edit')) {
+            $composeData = array(
+                'load_id' => $layout_def['fields']['ID'],
+                'load_module' => $this->layout_manager->defs['module_name'],
+                'parent_type' => $this->layout_manager->defs['module_name'],
+                'parent_id' => $layout_def['fields']['ID'],
+                'return_module' => $module,
+                'return_action' => $action,
+                'return_id' => $record,
+            );
+            if (isset($layout_def['fields']['FULL_NAME'])) {
+                $composeData['parent_name'] = $layout_def['fields']['FULL_NAME'];
+                $composeData['to_email_addrs'] = sprintf(
+                    '%s <%s>',
+                    $layout_def['fields']['FULL_NAME'],
+                    $layout_def['fields']['EMAIL']
+                );
+            } else {
+                $composeData['to_email_addrs'] = $layout_def['fields']['EMAIL'];
+            }
+            $eUi = new EmailUI();
+            $j_quickComposeOptions = $eUi->generateComposePackageForQuickCreate(
+                $composeData,
+                http_build_query($composeData),
+                true
+            );
 
-                $link = "<a href='javascript:void(0);' onclick='SUGAR.quickCompose.init($j_quickComposeOptions);'>";
-			} else {
-				$link = '<a href="mailto:' . $value .'" >';
-			}
+            $link = "<a href='javascript:void(0);' onclick='SUGAR.quickCompose.init($j_quickComposeOptions);'>";
+        } else {
+            $link = '<a href="mailto:' . $value . '" >';
+        }
 
 			return $link.$value.'</a>';
 

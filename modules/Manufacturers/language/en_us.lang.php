@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'You must specify a record number to delete the manufacturer.',
   'NTC_STATUS' => 'Set status to Inactive to remove this manufacturer from the Manufacturer dropdown lists',
   'NTC_LIST_ORDER' => 'Set the order this manufacturer will appear in the Manufacturer dropdown lists',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Active',
-    'Inactive' => 'Inactive',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Import Manufacturers',
 	'LBL_EDITLAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Revenue Line Items',

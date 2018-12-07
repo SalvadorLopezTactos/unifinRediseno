@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Êtes-vous sûr(e) de vouloir supprimer cette relation ?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Cela rendra votre relation permanente. Êtes-vous sûr(e) de vouloir déployer cette relation ?',
 'LBL_CONFIRM_DONT_SAVE' => 'Attention vous avez fait des modifications depuis votre dernière sauvegarde, voulez-vous sauvegarder ces modifications ?',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Configurer le champ pour pouvoir faire des recherches sur tout le texte.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Le Boosting consiste à augmenter la pertinence d&#39;un champ.<br />Les champs qui ont un "niveau de boosting" plus élevé auront un poids supérieur en cas de recherche. Lors d&#39;une recherche, les enregistrements correspondants contenant des champs de poids supérieur apparaîtront en tête des résultats de la recherche. <br />La valeur par défaut est 1,0, ce qui signifie un "Boosting" neutre (pas de modification de poids). Pour appliquer un boosting positif, toute valeur décimale supérieure à 1 est acceptée. Pour un boosting négatif (diminution de poids), saisir une valeur inférieure à 1,0. Par exemple, une valeur de 1,35 va augmenter le poids d&#39;un champ de 135%. Une valeur de 0,60 diminuera le poids du champ dans les recherches.<br />Notez que dans les versions précédentes, il était obligatoire de lancer une rechercher sur le texte complet. Ceci n&#39;est plus requis.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Oui</b> : Le champ sera importable.<br><b>Non</b> : Le champ ne sera pas importable.<br><b>Requis</b> : Le champ sera obligatoire lors des imports.',
+'LBL_POPHELP_PII'=>'Ce champ sera automatiquement marqué pour audit et sera disponible dans la vue de données personnelles.<br>Des champs de données personnelles peuvent aussi être effacés de manière permanente, lorsque l&#39;enregistrement est lié à une demande d&#39;effacement de confidentialité des données.<br>L&#39;effacement est réalisé via le module de confidentialité des données et peut être exécuté par des administrateurs ou des utilisateurs dans le rôle de Gestionnaire de confidentialité des données.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Entrez un nombre pour la largeur, mesurée en pixels.<br> L&#39;image téléchargée sera réduite à cette largeur.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Entrez un nombre pour la hauteur, mesurée en pixels.<br> L&#39;image téléchargée sera réduite à cette hauteur.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

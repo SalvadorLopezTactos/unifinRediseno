@@ -172,14 +172,19 @@ AND deleted = 0';
     }
 
     /**
-     * Load user ACLs from the DB
+     * Load user field ACL data
+     *
      * @internal
-     * @param string $category Module name
+     * @param string $module_name Module name
      * @param string $object
      * @param string $user_id
      * @param bool $refresh
+     * @return array
      */
-    static function loadUserFields($module_name,$object, $user_id, $refresh=false){
+    public static function loadUserFields($module_name, $object, $user_id, $refresh = false)
+    {
+        global $dictionary;
+
         if(empty($user_id)) {
             return array();
         }
@@ -204,6 +209,16 @@ AND deleted = 0';
             if(isset(self::$acl_fields[$user_id][$module_name])) {
                 return self::$acl_fields[$user_id][$module_name];
             }
+        }
+
+        // do not fetch data for field ACL if it's disabled
+        // we need to use $dictionary directly instead of SugarBean as its constructor calls this method,
+        // and creating a new bean instance to access the dictionary data will create endless recursion
+        if (isset($dictionary[$object]['acl_fields']) && !$dictionary[$object]['acl_fields']) {
+            self::$acl_fields[$user_id][$module_name] = array();
+            self::storeToCache($user_id, 'fields', self::$acl_fields[$user_id]);
+
+            return array();
         }
 
         $query = 'SELECT af.name, af.aclaccess FROM acl_fields af '

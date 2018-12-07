@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'แดชบอร์ดรายการจุดบกพร่อง',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกจุดบกพร่อง',
+
   'LBL_MODULE_NAME' => 'บัก',
   'LBL_MODULE_NAME_SINGULAR'	=> 'บัก',
   'LBL_MODULE_TITLE' => 'เครื่องมือติดตามบัก: หน้าแรก',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'เคส',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'โครงการ',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'เอกสาร',
-  'LBL_SYSTEM_ID' => 'ID ระบบ',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'ผู้ใช้ที่ระบุ',
 	'LBL_ASSIGNED_TO_NAME' => 'ระบุให้',
 

@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
 class Team extends SugarBean
 {
@@ -24,6 +26,12 @@ class Team extends SugarBean
 	var $associated_user_id;
 
 	var $name;
+
+    /**
+     * @var string
+     */
+    public $name_2;
+
 	var $description;
 	var $description_head;
 	var $private;
@@ -60,8 +68,6 @@ class Team extends SugarBean
 
 	function save($check_notify = false)
 	{
-		require_once('modules/Teams/TeamSetManager.php');
-		TeamSetManager::flushBackendCache();
 		sugar_cache_put("teamname_{$this->id}",$this->name);
 		return parent::save($check_notify);
 	}
@@ -317,6 +323,8 @@ class Team extends SugarBean
             return false;
 		}
 
+        $this->getListener()->teamDeleted($this->id);
+
 		// Update team_memberships table and set deleted = 1
         $query = "UPDATE team_memberships SET deleted = 1 WHERE team_id = ?";
         $conn = $this->db->getConnection();
@@ -326,8 +334,6 @@ class Team extends SugarBean
 		$this->deleted = 1;
 		$this->save();
 
-		require_once('modules/Teams/TeamSetManager.php');
-		TeamSetManager::flushBackendCache();
 		//clean up any team sets that use this team id
 		TeamSetManager::removeTeamFromSets($this->id);
 
@@ -432,6 +438,7 @@ class Team extends SugarBean
             $membership->team_id = $this->id;
             $membership->explicit_assign = 1;
             $membership->save();
+            $this->getListener()->userAddedToTeam($user_id, $this->id);
             $GLOBALS['log']->debug("Creating new explicit team memberhsip $user_id is a member of $this->id");
         }
 
@@ -454,7 +461,12 @@ class Team extends SugarBean
      */
     public function addManagerToTeam($manager_id)
     {
-        $manager = BeanFactory::getBean('Users', $manager_id);
+        $manager = BeanFactory::retrieveBean('Users', $manager_id);
+
+        if (!$manager) {
+            return;
+        }
+
         $managers_membership = BeanFactory::newBean('TeamMemberships');
         $result = $managers_membership->retrieve_by_user_and_team($manager->id, $this->id);
 
@@ -486,6 +498,7 @@ class Team extends SugarBean
             $managers_membership->implicit_assign = true;
             $managers_membership->team_id = $this->id;
             $managers_membership->save();
+            $this->getListener()->userAddedToTeam($manager->id, $this->id);
             $GLOBALS['log']->debug("Creating new team memberhsip $manager->id is a member of $this->id");
         }
 
@@ -571,7 +584,8 @@ class Team extends SugarBean
                 //delete   explcit implicit
                 //             1     0
                 //             0     0
-                $this->users->delete($this->id,$user_id);
+                $this->getListener()->userRemovedFromTeam($user_id, $this->id);
+                $this->users->delete($this->id, $user_id);
             }
             $manager = BeanFactory::newBean('Users');
             $manager->reports_to_id = $focus->reports_to_id;
@@ -590,8 +604,8 @@ class Team extends SugarBean
                         }else{
                              $GLOBALS['log']->debug("Remove membership record {$manager->user_name} from {$this->name}");
                              $this->users->delete($this->id, $manager->id);
+                            $this->getListener()->userRemovedFromTeam($manager->id, $this->id);
                         }
-
                     }
                 }
             }
@@ -785,80 +799,21 @@ AND team_id = ?';
 	 * This function accepts an Array of team ids that have records that should be reassigned
 	 * to the team instance.
 	 *
-	 * @param $old_teams Array of team ids whose records will be reassigned to the team instance id
+     * @param array $oldTeamIds Team ids whose records will be reassigned to the team instance id
 	 */
-	function reassign_team_records($old_teams = array())
-	{
-		$logger = \LoggerManager::getLogger();
-        $conn = $this->db->getConnection();
+    public function reassign_team_records(array $oldTeamIds = array())
+    {
+        /** @var Team[] $oldTeams */
+        $oldTeams = array_map(function ($id) {
+            return BeanFactory::retrieveBean('Teams', $id);
+        }, $oldTeamIds);
 
-		foreach ($old_teams as $old_team_id) {
-            $query = 'SELECT tsm.module_table_name
-FROM team_sets_modules tsm
-INNER JOIN team_sets_teams tst
-ON tst.team_set_id = tsm.team_set_id
-WHERE tst.team_id = ?';
+        TeamSetManager::reassignRecords($oldTeams, $this);
 
-            $modules_with_team = $conn->executeQuery($query, array($old_team_id))
-                ->fetchAll(PDO::FETCH_COLUMN);
-            $modules_with_team = array_unique($modules_with_team);
-
-            foreach ($modules_with_team as $module) {
-                // skip users module, will process it below
-                if ($module === 'users') {
-                    continue;
-                }
-
-                $logger->info(sprintf(
-                    "Updating team_id column values in %s table from '%s' to '%s'",
-                    $module,
-                    $old_team_id,
-                    $this->id
-                ));
-                $conn->update($module, array(
-                    'team_id' => $this->id,
-                ), array(
-                    'team_id' => $old_team_id,
-                ));
-
-                $logger->info(sprintf(
-                    "Updating team_id column values in team_sets_teams table from '%s' to '%s'",
-                    $old_team_id,
-                    $this->id
-                ));
-                $conn->update('team_sets_teams', array(
-                    'team_id' => $this->id,
-                ), array(
-                    'team_id' => $old_team_id,
-                ));
-            }
-
-            // find affected users
-            $query = 'SELECT id FROM users WHERE default_team = ?';
-            $userIds = $conn->executeQuery($query, array($old_team_id))
-                ->fetchAll(PDO::FETCH_COLUMN);
-
-            // for User bean team_id is default_team
-            $logger->info(sprintf(
-                "Updating default_team column values in users table from '%s' to '%s'",
-                $old_team_id,
-                $this->id
-            ));
-            $conn->update('users', array(
-                'default_team' => $this->id,
-            ), array(
-                'default_team' => $old_team_id,
-            ));
-
-            // make sure users are members of the assigned team
-            foreach ($userIds as $userId) {
-                $this->add_user_to_team($userId);
-            }
-
-            $old_team = BeanFactory::getBean('Teams', $old_team_id);
-            $old_team->delete_team();
-		}
-	}
+        foreach ($oldTeams as $oldTeam) {
+            $oldTeam->delete_team();
+        }
+    }
 
 	/**
 	 * Return the proper display name of the team given the user's preferred format.
@@ -992,5 +947,13 @@ ORDER BY t.private, t.name';
     public function isGlobalTeam()
     {
         return ($this->id == $this->global_team);
+    }
+
+    /**
+     * @return Listener
+     */
+    private function getListener()
+    {
+        return Container::getInstance()->get(Listener::class);
     }
 }

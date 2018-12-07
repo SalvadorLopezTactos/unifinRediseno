@@ -224,12 +224,12 @@ class MBLanguage{
     public function delete($module)
     {
         $header = file_get_contents('modules/ModuleBuilder/MB/header.php');
-        $app_save_path = $this->path . '/../../language/application';
+        $app_save_path = $this->packagePath . '/language/application';
         foreach ($this->appListStrings as $lang => $values) {
             $file = $app_save_path . '/' . $lang;
             if (file_exists($file)) {
                 $app_list_strings = array();
-                include $file;
+                include FileLoader::validateFilePath($file);
                 unset(
                     $app_list_strings['moduleList'][$module],
                     $app_list_strings['moduleListSingular'][$module]

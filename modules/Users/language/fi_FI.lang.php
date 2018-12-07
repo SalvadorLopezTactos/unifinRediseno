@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Käyttäjän tietoja ei löydy',
     'ERR_USER_NAME_EXISTS'              => 'Käyttäjänimi {0} on jo olemassa. Päällekkäisiä käyttäjänimiä ei hyväksytä. Muuta käyttäjänimi yksilölliseksi.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Tämä käyttäjä lukittiin ulos Sugar sovelluksesta eikä voi kirjautua sisään käyttäen hänen nykyistä salasanaansa.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Käyttäjä, jolla on vain ulkoiset tunnukset, ei voi kirjautua Sugar-tunnuksilla',
 
 	'LBL_PASSWORD_SENT'                => 'Salasana päivitetty',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Ei voida lähettää salasanaa',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Vastaanottajan sähköpostiosoite',
 	'ERR_SERVER_STATUS'					=> 'Palvelimesi tila',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Järjestelmä ei pysty lähettämään sähköpostia käyttäjälle. Tarkista lähtevän postin asetukset <a href=&#39;index.php?module=EmailMan&action=config&#39;>sähköpostiasetuksissa</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Käyttäjän voi luoda vain <a href="{0}" target="_blank">Cloud-konsolissa</a> IDM-tilaa varten.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Ensisijaisen sähköpostiosoitteen voi päivittää vain <a href="{0}" target="_blank">Cloud-konsolissa</a> IDM-tilaa varten.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Sähköpostiosoite',
 
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'sek.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Ota yhteyttä järjestelmänvalvojaan.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Asenna GMP PHP -laajennus OpenID Connect (OIDC) -tunnistusta varten IDM-tilassa.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Olet kirjautunut ulos. Kirjautuaksesi uudelleen klikkaa',
     'LBL_LOGGED_OUT_2' => 'tästä',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Käyttäjien raportit',
     'LBL_CONTACTS_SYNC' => 'Kontaktit',
     'LBL_DETAIL' => 'Käyttäjäprofiili',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Jos joitakin kenttiä ei voi muokata, voit hallita näitä kenttiä kirjautumalla Cloud-konsoliin',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Jos haluat muuttaa kenttiä jotka eivät ole muokattavissa, ' .
+        'ota yhteyttä järjestelmänvalvojaan ja ilmoita näistä muutoksista',
 ); // END STRINGS DEFS
 
 ?>

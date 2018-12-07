@@ -443,12 +443,25 @@
      */
     getDeleteMessages: function(model) {
         var messages = {};
-        var name = Handlebars.Utils.escapeExpression(app.utils.getRecordName(model)).trim();
-        var context = app.lang.getModuleName(model.module).toLowerCase() + ' ' + name;
+        var name = Handlebars.Utils.escapeExpression(this._getNameForMessage(model)).trim();
+        var context = app.lang.getModuleName(model.module).toLowerCase() + ' "' + name + '"';
 
-        messages.confirmation = app.utils.formatString(app.lang.get('NTC_DELETE_CONFIRMATION_FORMATTED'), [context]);
+        messages.confirmation = app.utils.formatString(
+            app.lang.get('NTC_DELETE_CONFIRMATION_FORMATTED', this.module),
+            [context]
+        );
         messages.success = app.utils.formatString(app.lang.get('NTC_DELETE_SUCCESS'), [context]);
         return messages;
+    },
+
+    /**
+     * Retrieves the name of a record
+     *
+     * @param {Data.Bean} model The model concerned.
+     * @return {string} name of the record.
+     */
+    _getNameForMessage: function(model) {
+        return app.utils.getRecordName(model);
     },
 
     /**

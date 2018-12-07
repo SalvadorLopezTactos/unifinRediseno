@@ -42,6 +42,8 @@ interface AggregationInterface
 
     /**
      * Build mapping
+     * @param Mapping $mapping
+     * @param string $field
      * @param array $defs
      */
     public function buildMapping(Mapping $mapping, $field, array $defs);
@@ -57,7 +59,7 @@ interface AggregationInterface
     /**
      * Build aggregation filter
      * @param array|boolean $options
-     * @return \Elastica\Filter\AbstractFilter
+     * @return mixed
      */
     public function buildFilter($filterDefs);
 

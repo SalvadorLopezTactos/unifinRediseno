@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Tehtäväluettelon työpöytä',
+
   'LBL_MODULE_NAME' => 'Tehtävät',
   'LBL_MODULE_NAME_SINGULAR' => 'Tehtävä',
   'LBL_TASK' => 'Tehtävät:',

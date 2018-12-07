@@ -9,6 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
+
 global $current_user,$admin_group_header;
 
 //users and security.
@@ -16,7 +19,32 @@ $admin_option_defs=array();
 $admin_option_defs['Users']['user_management']= array('Users','LBL_MANAGE_USERS_TITLE','LBL_MANAGE_USERS','./index.php?module=Users&action=index');
 $admin_option_defs['Users']['roles_management']= array('Roles','LBL_MANAGE_ROLES_TITLE','LBL_MANAGE_ROLES','./index.php?module=ACLRoles&action=index');
 $admin_option_defs['Users']['teams_management']= array('Teams','LBL_MANAGE_TEAMS_TITLE','LBL_MANAGE_TEAMS','./index.php?module=Teams&action=index');
-$admin_option_defs['Administration']['password_management']= array('Password','LBL_MANAGE_PASSWORD_TITLE','LBL_MANAGE_PASSWORD','./index.php?module=Administration&action=PasswordManager');
+
+$idpConfig = new Authentication\Config(\SugarConfig::getInstance());
+$idmModeConfig = $idpConfig->getIDMModeConfig();
+if ($idpConfig->isIDMModeEnabled()) {
+    $passwordManagerUrl = $idpConfig->buildCloudConsoleUrl('passwordManagement');
+    $passwordManagerTarget = '_blank';
+    $passwordManagerOnClick = sprintf(
+        'onclick = "app.alert.show(\'disabled-for-idm-mode\', {level: \'warning\', messages: \'%s\'});"',
+        $GLOBALS['app_strings']['ERR_DISABLED_FOR_IDM_MODE']
+    );
+} else {
+    $passwordManagerUrl = './index.php?module=Administration&action=PasswordManager';
+    $passwordManagerTarget = '_self';
+    $passwordManagerOnClick = null;
+}
+
+$admin_option_defs['Administration']['password_management'] = array(
+    'Password',
+    'LBL_MANAGE_PASSWORD_TITLE',
+    'LBL_MANAGE_PASSWORD',
+    $passwordManagerUrl,
+    null,
+    $passwordManagerOnClick,
+    $passwordManagerTarget,
+);
+
 $admin_option_defs['Users']['tba_management'] = array('TbACLs', 'LBL_TBA_CONFIGURATION', 'LBL_TBA_CONFIGURATION_DESC', './index.php?module=Teams&action=tba');
 $admin_group_header[]= array('LBL_USERS_TITLE','',false,$admin_option_defs, 'LBL_USERS_DESC');
 $license_management = false;
@@ -67,7 +95,7 @@ if (!isset($GLOBALS['sugar_config']['disable_uw_upload']) || !$GLOBALS['sugar_co
     $admin_option_defs['Administration']['upgrade_wizard']= array('Upgrade','LBL_UPGRADE_WIZARD_TITLE','LBL_UPGRADE_WIZARD','./UpgradeWizard.php');
 }
 
-$admin_option_defs['Administration']['currencies_management']= array('Currencies','LBL_MANAGE_CURRENCIES','LBL_CURRENCY','./index.php?module=Currencies&action=index');
+$admin_option_defs['Administration']['currencies_management']= array('Currencies','LBL_MANAGE_CURRENCIES','LBL_CURRENCY','javascript:parent.SUGAR.App.router.navigate("Currencies", {trigger: true});');
 
 if (!isset($GLOBALS['sugar_config']['hide_admin_backup']) || !$GLOBALS['sugar_config']['hide_admin_backup'])
 {
@@ -146,6 +174,12 @@ $admin_option_defs['Administration']['sugarportal']= array('SugarPortal','LBL_SU
 //$admin_option_defs['migrate_custom_fields']= array('MigrateFields','LBL_EXTERNAL_DEV_TITLE','LBL_EXTERNAL_DEV_DESC','./index.php?module=Administration&action=Development');
 
 $admin_option_defs['any']['workflow_management']= array('WorkFlow','LBL_MANAGE_WORKFLOW','LBL_WORKFLOW_DESC','./index.php?module=WorkFlow&action=ListView');
+$admin_option_defs['Administration']['api_platforms'] = [
+    'Administration',
+    'LBL_CONFIGURE_CUSTOM_API_PLATFORMS',
+    'LBL_CUSTOM_API_PLATFORMS_DESC',
+    './index.php?module=Administration&action=apiplatforms',
+];
 
 $admin_option_defs['Administration']['styleguide'] = array(
     'Documents',
@@ -161,12 +195,12 @@ $admin_group_header[]= array('LBL_STUDIO_TITLE','',false,$admin_option_defs, 'LB
 
 $admin_option_defs=array();
 $admin_option_defs['Products']['product_catalog']= array('Products','LBL_PRODUCTS_TITLE','LBL_PRODUCTS','javascript:parent.SUGAR.App.router.navigate("ProductTemplates", {trigger: true});');
-$admin_option_defs['Products']['manufacturers']= array('Manufacturers','LBL_MANUFACTURERS_TITLE','LBL_MANUFACTURERS','./index.php?module=Manufacturers&action=index');
+$admin_option_defs['Products']['manufacturers']= array('Manufacturers','LBL_MANUFACTURERS_TITLE','LBL_MANUFACTURERS','javascript:parent.SUGAR.App.router.navigate("Manufacturers", {trigger: true});');
 $admin_option_defs['Products']['product_categories']= array('Product_Categories','LBL_PRODUCT_CATEGORIES_TITLE','LBL_PRODUCT_CATEGORIES','javascript:parent.SUGAR.App.router.navigate("ProductCategories", {trigger: true});');
-$admin_option_defs['Products']['shipping_providers']= array('Shippers','LBL_SHIPPERS_TITLE','LBL_SHIPPERS','./index.php?module=Shippers&action=index');
+$admin_option_defs['Products']['shipping_providers']= array('Shippers','LBL_SHIPPERS_TITLE','LBL_SHIPPERS','javascript:parent.SUGAR.App.router.navigate("Shippers", {trigger: true});');
 $admin_option_defs['Products']['product_types']= array('Product_Types','LBL_PRODUCT_TYPES_TITLE','LBL_PRODUCT_TYPES','javascript:parent.SUGAR.App.router.navigate("ProductTypes", {trigger: true});');
 
-$admin_option_defs['Quotes']['tax_rates']= array('TaxRates','LBL_TAXRATES_TITLE','LBL_TAXRATES','./index.php?module=TaxRates&action=index');
+$admin_option_defs['Quotes']['tax_rates']= array('TaxRates','LBL_TAXRATES_TITLE','LBL_TAXRATES','javascript:parent.SUGAR.App.router.navigate("TaxRates", {trigger: true});');
 
 $admin_group_header[]= array('LBL_PRICE_LIST_TITLE','',false,$admin_option_defs, 'LBL_PRICE_LIST_DESC');
 //bug tracker.
@@ -186,7 +220,7 @@ $admin_group_header[]= array('LBL_MANAGE_OPPORTUNITIES_TITLE', '', false, $admin
 
 //Contracts
 $admin_option_defs=array();
-$admin_option_defs['Contracts']['contract_type_management']= array('Contracts','LBL_MANAGE_CONTRACTEMPLATES_TITLE','LBL_CONTRACT_TYPES','./index.php?module=ContractTypes&action=index');
+$admin_option_defs['Contracts']['contract_type_management']= array('Contracts','LBL_MANAGE_CONTRACTEMPLATES_TITLE','LBL_CONTRACT_TYPES','javascript:parent.SUGAR.App.router.navigate("ContractTypes", {trigger: true});');
 
 // fetch "Contracts" module name from localization data (bug #46740)
 $admin_group_header[]= array($app_list_strings['moduleList']['Contracts'],'',false,$admin_option_defs, 'LBL_CONTRACT_DESC');

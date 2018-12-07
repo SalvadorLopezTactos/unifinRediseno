@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Інформаційна панель списку продуктів комерційної пропозиції',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Продукт маркетингової кампанії',
     'LBL_MODULE_NAME' => 'Продукти комерційної пропозиції',
     'LBL_MODULE_NAME_SINGULAR' => 'Продукт комерційної пропозиції',
@@ -172,4 +175,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Список даних комерційної пропозиції продуктів',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Новий продукт)',
     'LBL_DISCOUNT_PERCENT' => '%, відсотки',
+    'LBL_DISCOUNT_TYPE' => 'Тип знижки',
 );

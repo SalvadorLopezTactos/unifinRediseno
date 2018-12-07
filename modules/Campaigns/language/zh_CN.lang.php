@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => '请从有效字段中选择',
     'LBL_DESCRIPTION_LEAD_FORM' => '表单说明：',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => '提交这个表单将会新增一个潜在客户和一个市场活动的链接。',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => '选中此框，即表示您同意接受未来的营销电子邮件',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'请下载潜在客户表单的页面',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'到潜在客户表单的网页',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'请提供所有必需字段',

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת באגים',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת באגים',
+
   'LBL_MODULE_NAME' => 'באגים',
   'LBL_MODULE_NAME_SINGULAR'	=> 'באג',
   'LBL_MODULE_TITLE' => 'מעקב אחר באגים: דף ראשי',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'אירועים',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'פרויקטים',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'מסמכים',
-  'LBL_SYSTEM_ID' => 'זהוי מערכת',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'משתמשים שהוקצו',
 	'LBL_ASSIGNED_TO_NAME' => 'הוקצה עבור',
 

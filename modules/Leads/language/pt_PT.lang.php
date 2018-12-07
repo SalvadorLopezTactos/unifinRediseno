@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Dashboard da Lista de Clientes Potenciais',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Dashboard do Registo de Clientes Potenciais',
+
     'ERR_DELETE_RECORD' => 'Um número de registo deve ser especificado para eliminar o cliente potencial.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Descrição da Conta',
     'LBL_ACCOUNT_ID'=>'ID da Entidade',
@@ -106,7 +111,7 @@ $mod_strings = array (
     'LBL_IMPORT_VCARD' => 'Importar a partir de um vCard',
     'LBL_IMPORT_VCARD_SUCCESS' => 'Cliente Potencial criado com sucesso a partir de um vCard',
     'LBL_VCARD' => 'vCard',
-    'LBL_IMPORT_VCARDTEXT' => 'Criar novo cliente potencial automaticamente importando um vCard do seu sistema de ficheiros.',
+    'LBL_IMPORT_VCARDTEXT' => 'Crie um novo cliente potencial automaticamente importando um vCard do seu sistema de ficheiros.',
     'LBL_INVALID_EMAIL'=>'E-mail Inválido:',
     'LBL_INVITEE' => 'Relatórios',
     'LBL_LAST_NAME' => 'Apelido:',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Valor da Oportunidade:',
     'LBL_OPPORTUNITY_ID'=>'ID da Oportunidade',
     'LBL_OPPORTUNITY_NAME' => 'Nome da Oportunidade:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Outro E-mail:',
     'LBL_OTHER_PHONE' => 'Outro Telefone:',
     'LBL_PHONE' => 'Telefone:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Copiar endereço alternativo para endereço principal',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Copiar endereço principal para endereço alternativo',
     'NTC_DELETE_CONFIRMATION' => 'Tem a certeza que pretende eliminar este registo?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'A criação de uma Oportunidade requer uma conta.\n Por favor crie uma nova ou selecione uma já existente.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'A criação de uma Oportunidade requer uma conta.\\n Por favor crie uma nova ou selecione uma já existente.',
     'NTC_REMOVE_CONFIRMATION' => 'Tem a certeza de que pretende remover este cliente potencial desta ocorrência?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Tem a certeza que pretende remover este registo como um relatório?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Registos de Campanha',
@@ -314,4 +320,6 @@ Depois de confirmar cada módulo pretendido, clique no botão Gravar e Converter
     'LBL_MKTO_LEAD_SCORE' => 'Pontuação do Cliente Potencial',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Relatórios de clientes potenciais',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objetivos Comerciais autorizados para',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Autorização atualizada pela última vez',
 );

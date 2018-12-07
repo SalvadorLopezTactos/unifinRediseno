@@ -28,8 +28,8 @@ class MultiFieldBaseProperty extends RawProperty implements PropertyInterface
      * {@inheritdoc}
      */
     protected $mapping = array(
-        'type' => 'string',
-        'index' => 'not_analyzed',
+        'type' => 'keyword',
+        'index' => false,
     );
 
     /**

@@ -35,34 +35,6 @@ class MemberMetadataTest extends \PHPUnit_Framework_TestCase
         $this->metadata = null;
     }
 
-    /**
-     * @group legacy
-     */
-    public function testLegacyAddValidSetsMemberToCascaded()
-    {
-        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
-
-        $result = $this->metadata->addConstraint(new Valid());
-
-        $this->assertEquals(array(), $this->metadata->getConstraints());
-        $this->assertEquals($result, $this->metadata);
-        $this->assertTrue($this->metadata->isCascaded());
-    }
-
-    /**
-     * @group legacy
-     */
-    public function testLegacyAddOtherConstraintDoesNotSetMemberToCascaded()
-    {
-        $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
-
-        $result = $this->metadata->addConstraint($constraint = new ConstraintA());
-
-        $this->assertEquals(array($constraint), $this->metadata->getConstraints());
-        $this->assertEquals($result, $this->metadata);
-        $this->assertFalse($this->metadata->isCascaded());
-    }
-
     public function testAddConstraintRequiresClassConstraints()
     {
         $this->setExpectedException('Symfony\Component\Validator\Exception\ConstraintDefinitionException');
@@ -81,18 +53,6 @@ class MemberMetadataTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testSerializeCollectionCascaded()
-    {
-        $this->metadata->addConstraint(new Valid(array('traverse' => true)));
-
-        $metadata = unserialize(serialize($this->metadata));
-
-        $this->assertEquals($this->metadata, $metadata);
-    }
-
-    /**
-     * @group legacy
-     */
-    public function testLegacySerializeCollectionCascadedDeeply()
     {
         $this->metadata->addConstraint(new Valid(array('traverse' => true)));
 

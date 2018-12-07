@@ -30,30 +30,33 @@ class SugarUpgradeRebuild extends UpgradeScript
         $GLOBALS['reload_vardefs'] = true;
         $repairedTables = array();
         foreach ($beanFiles as $bean => $file) {
-    	    if(file_exists($file)){
-		        unset($GLOBALS['dictionary'][$bean]);
-		        require_once($file);
-		        $focus = new $bean ();
-		        if(empty($focus->table_name) || isset($repairedTables[$focus->table_name])) {
-		           continue;
-		        }
+            if (file_exists($file)) {
+                unset($GLOBALS['dictionary'][$bean]);
+                require_once $file;
+                $focus = new $bean ();
+                if (empty($focus->table_name) || isset($repairedTables[$focus->table_name])) {
+                    continue;
+                }
 
-        		if (($focus instanceOf SugarBean)) {
-		        	if(!isset($repairedTables[$focus->table_name])) {
-				            $sql = $this->db->repairTable($focus, true);
-                            if(trim($sql) != '') {
-				                $this->log('Running sql: ' . $sql);
-                            }
-				            $repairedTables[$focus->table_name] = true;
-			        }
-
-        			//Check to see if we need to create the audit table
-		            if($focus->is_AuditEnabled() && !$focus->db->tableExists($focus->get_audit_table_name())){
-                        $this->log('Creating audit table:' . $focus->get_audit_table_name());
-		                $focus->create_audit_table();
+                if (($focus instanceof SugarBean)) {
+                    if (!isset($repairedTables[$focus->table_name])) {
+                        $sql = $this->db->repairTable($focus, true);
+                        if (trim($sql) != '') {
+                            $this->log('Running sql: ' . $sql);
+                        }
+                        $repairedTables[$focus->table_name] = true;
                     }
-		        }
-	        }
+
+                    //Check to see if we need to create the audit table
+                    if ($focus->is_AuditEnabled()) {
+                        $rac->module_list[] = $focus->module_name;
+                    }
+                }
+            }
+        }
+        if (!empty($rac->module_list)) {
+            $this->log('Verifying audit tables for modules: ' . implode(',', $rac->module_list));
+            $rac->rebuildAuditTables();
         }
 
         unset ($dictionary);
@@ -65,7 +68,7 @@ class SugarUpgradeRebuild extends UpgradeScript
 
             $tablename = $meta['table'];
             $fielddefs = $meta['fields'];
-	        $indices = $meta['indices'];
+            $indices = isset($meta['indices']) ? $meta['indices'] : [];
 	        $sql = $this->db->repairTableParams($tablename, $fielddefs, $indices, true);
 	        if(!empty($sql)) {
 	            $this->log('Running sql: '. $sql);

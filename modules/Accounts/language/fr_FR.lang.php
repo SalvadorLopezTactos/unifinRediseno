@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Devis (expédié à)',
 	'LNK_ACCOUNT_REPORTS' => 'Rapports Comptes',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documents',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Tableau de bord de la liste des comptes',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrement de comptes',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Graphiques',
 	'LBL_DEFAULT' => 'Vues',
@@ -79,7 +83,7 @@ $mod_strings = array (
 	'LBL_INVALID_EMAIL'=>'Email non Valide :',
 	'LBL_INVITEE' => 'Contacts',
 	'LBL_LEADS_SUBPANEL_TITLE' => 'Leads',
-	'LBL_LIST_ACCOUNT_NAME' => 'Nom Compte',
+	'LBL_LIST_ACCOUNT_NAME' => 'Nom',
 	'LBL_LIST_CITY' => 'Ville',
 	'LBL_LIST_CONTACT_NAME' => 'Nom Contact',
 	'LBL_LIST_EMAIL_ADDRESS' => 'Adresse Email',

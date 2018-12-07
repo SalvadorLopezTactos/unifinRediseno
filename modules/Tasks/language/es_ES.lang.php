@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Cuadro de mando de la lista de tareas',
+
   'LBL_MODULE_NAME' => 'Tareas',
   'LBL_MODULE_NAME_SINGULAR' => 'Tarea',
   'LBL_TASK' => 'Tareas:',

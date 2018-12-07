@@ -235,23 +235,7 @@ class Opportunity extends SugarBean
                 $this->currency_id = $currency->id;
             }
         }
-        //get campaign name
-        if (!empty($this->campaign_id)) {
-            $camp = BeanFactory::getBean('Campaigns', $this->campaign_id);
-            $this->campaign_name = $camp->name;
-        }
-        $this->account_name = '';
-        $this->account_id = '';
-        if (!empty($this->id)) {
-            $ret_values = Opportunity::get_account_detail($this->id);
-            if (!empty($ret_values)) {
-                $this->account_name = $ret_values['name'];
-                $this->account_id = $ret_values['id'];
-                $this->account_id_owner = $ret_values['assigned_user_id'];
-            }
-        }
     }
-
 
     /**
      * Returns a list of the associated contacts

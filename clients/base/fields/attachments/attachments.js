@@ -12,6 +12,7 @@
  * @class View.Fields.Base.AttachmentsField
  * @alias SUGAR.App.view.fields.BaseAttachmentsField
  * @extends View.Fields.Base.BaseField
+ * @deprecated Use {@link View.Fields.Base.EmailAttachmentsField} instead.
  */
 ({
     fieldSelector: '.attachments',
@@ -23,12 +24,16 @@
      * @inheritdoc
      */
     initialize: function(options) {
+        app.logger.warn('View.Fields.Base.AttachmentsField is deprecated. Use ' +
+            'View.Fields.Base.EmailAttachmentsField instead.');
+
         this.events = _.extend({}, this.events, options.def.events, {
             'change .fileinput': 'uploadFile'
         });
         app.view.Field.prototype.initialize.call(this, options);
 
         this.context.on('attachment:add', this.addAttachment, this);
+        this.context.on('attachment:filepicker:launch', this.launchFilePicker, this);
         this.context.on('attachment:upload:remove', this.removeUploadedAttachment, this);
         this.context.on('attachments:remove-by-tag', this.removeAttachmentsByTag, this);
         this.context.on('attachments:remove-by-id', this.removeAttachmentsById, this);
@@ -90,6 +95,14 @@
         this.refreshFromModel();
 
         return result;
+    },
+
+    /**
+     * Launch the file input picker.
+     */
+    launchFilePicker: function() {
+        var $fileInput = this.$(this.fileInputSelector);
+        $fileInput.click();
     },
 
     /**

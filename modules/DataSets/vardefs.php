@@ -131,15 +131,6 @@ $dictionary['DataSet'] = array('table' => 'data_sets'
 	    'duplicate_merge'=>'disabled',
 	    'comment' => 'Custom Queries for the data sets (Meta-data only)',
  ),
-
-'child_name' =>
-array (
-        'name' => 'child_name',
-        'vname' => 'LBL_CHILD_NAME',
-        'source'=>'non-db',
-        'type' => 'relate',
-),
-
   'name' =>
   array (
     'name' => 'name',
@@ -287,4 +278,263 @@ array (
 VardefManager::createVardef('DataSets','DataSet', array(
 'team_security',
 ));
-?>
+
+$dictionary['DataSet_Layout'] = array(
+    'table' => 'dataset_layouts',
+    'fields' => array(
+        'id' => array(
+            'name' => 'id',
+            'vname' => 'LBL_NAME',
+            'type' => 'id',
+            'required' => true,
+            'reportable' => false,
+        ),
+        'deleted' => array(
+            'name' => 'deleted',
+            'vname' => 'LBL_DELETED',
+            'type' => 'bool',
+            'required' => true,
+            'default' => '0',
+            'reportable' => false,
+        ),
+        'date_entered' => array(
+            'name' => 'date_entered',
+            'vname' => 'LBL_DATE_ENTERED',
+            'type' => 'datetime',
+            'required' => true,
+        ),
+        'date_modified' => array(
+            'name' => 'date_modified',
+            'vname' => 'LBL_DATE_MODIFIED',
+            'type' => 'datetime',
+            'required' => true,
+        ),
+        'modified_user_id' => array(
+            'name' => 'modified_user_id',
+            'rname' => 'user_name',
+            'id_name' => 'modified_user_id',
+            'vname' => 'LBL_ASSIGNED_TO',
+            'type' => 'assigned_user_name',
+            'table' => 'users',
+            'isnull' => false,
+            'dbType' => 'id',
+            'reportable' => true,
+        ),
+        'created_by' => array(
+            'name' => 'created_by',
+            'rname' => 'user_name',
+            'id_name' => 'modified_user_id',
+            'vname' => 'LBL_ASSIGNED_TO',
+            'type' => 'assigned_user_name',
+            'table' => 'users',
+            'isnull' => false,
+            'dbType' => 'id',
+        ),
+        'parent_value' => array(
+            'name' => 'parent_value',
+            'vname' => 'LBL_PARENT_VALUE',
+            'type' => 'varchar',
+            'len' => '50',
+        ),
+        'layout_type' => array(
+            'name' => 'layout_type',
+            'vname' => 'LBL_LAYOUT_TYPE',
+            'type' => 'enum',
+            'required' => true,
+            'options' => 'dataset_layout_type_dom',
+            'len' => 25,
+        ),
+        'parent_id' => array(
+            'name' => 'parent_id',
+            'type' => 'id',
+            'required' => false,
+            'reportable' => false,
+        ),
+        'list_order_x' => array(
+            'name' => 'list_order_x',
+            'vname' => 'LBL_LIST_ORDER_X',
+            'type' => 'int',
+            'len' => '4',
+        ),
+        'list_order_z' => array(
+            'name' => 'list_order_z',
+            'vname' => 'LBL_LIST_ORDER_Z',
+            'type' => 'int',
+            'len' => '4',
+        ),
+        'row_header_id' => array(
+            'name' => 'row_header_id',
+            'vname' => 'LBL_ROW_HEADER_ID',
+            'type' => 'id',
+        ),
+        'hide_column' => array(
+            'name' => 'hide_column',
+            'vname' => 'LBL_HIDE_COLUMN',
+            'type' => 'bool',
+            'dbType' => 'varchar',
+            'len' => '3',
+        ),
+    ),
+    'indices' => array(
+        array(
+            'name' => 'datasetlayout_k',
+            'type' => 'primary',
+            'fields' => array('id'),
+        ),
+        array(
+            'name' => 'idx_datasetlayout',
+            'type' => 'index',
+            'fields' => array('parent_value', 'deleted'),
+        ),
+    ),
+);
+
+$dictionary['DataSet_Attribute'] = array(
+    'table' => 'dataset_attributes',
+    'fields' => array(
+        'id' => array(
+            'name' => 'id',
+            'vname' => 'LBL_NAME',
+            'type' => 'id',
+            'required' => true,
+            'reportable' => false,
+        ),
+        'deleted' => array(
+            'name' => 'deleted',
+            'vname' => 'LBL_DELETED',
+            'type' => 'bool',
+            'required' => true,
+            'default' => '0',
+            'reportable' => false,
+        ),
+        'date_entered' => array(
+            'name' => 'date_entered',
+            'vname' => 'LBL_DATE_ENTERED',
+            'type' => 'datetime',
+            'required' => true,
+        ),
+        'date_modified' => array(
+            'name' => 'date_modified',
+            'vname' => 'LBL_DATE_MODIFIED',
+            'type' => 'datetime',
+            'required' => true,
+        ),
+        'modified_user_id' => array(
+            'name' => 'modified_user_id',
+            'rname' => 'user_name',
+            'id_name' => 'modified_user_id',
+            'vname' => 'LBL_ASSIGNED_TO',
+            'type' => 'assigned_user_name',
+            'table' => 'users',
+            'isnull' => false,
+            'dbType' => 'id',
+            'reportable' => true,
+        ),
+        'created_by' => array(
+            'name' => 'created_by',
+            'rname' => 'user_name',
+            'id_name' => 'modified_user_id',
+            'vname' => 'LBL_ASSIGNED_TO',
+            'type' => 'assigned_user_name',
+            'table' => 'users',
+            'isnull' => false,
+            'dbType' => 'id',
+        ),
+        'display_type' => array(
+            'name' => 'display_type',
+            'vname' => 'LBL_DISPLAY_TYPE',
+            'type' => 'enum',
+            'required' => true,
+            'options' => 'dataset_att_display_type_dom',
+            'len' => 25,
+        ),
+        'display_name' => array(
+            'name' => 'display_name',
+            'vname' => 'LBL_DISPLAY_NAME',
+            'type' => 'varchar',
+            'len' => '50',
+        ),
+        'attribute_type' => array(
+            'name' => 'attribute_type',
+            'vname' => 'LBL_ATT_TYPE',
+            'type' => 'varchar',
+            'required' => true,
+            'len' => 8,
+        ),
+        'parent_id' => array(
+            'name' => 'parent_id',
+            'type' => 'id',
+            'required' => false,
+            'reportable' => false,
+        ),
+        'font_size' => array(
+            'name' => 'font_size',
+            'vname' => 'LBL_FONT_SIZE',
+            'type' => 'enum',
+            'options' => 'font_size_dom',
+            'len' => 8,
+            'default' => '0',
+        ),
+        'cell_size' => array(
+            'name' => 'cell_size',
+            'vname' => 'LBL_CELL_SIZE',
+            'type' => 'varchar',
+            'len' => '3',
+        ),
+        'size_type' => array(
+            'name' => 'size_type',
+            'vname' => 'LBL_SIZE_TYPE',
+            'type' => 'enum',
+            'options' => 'width_type_dom',
+            'len' => 3,
+        ),
+        'bg_color' => array(
+            'name' => 'bg_color',
+            'vname' => 'LBL_BG_COLOR',
+            'type' => 'enum',
+            'options' => 'report_color_dom',
+            'len' => 25,
+        ),
+        'font_color' => array(
+            'name' => 'font_color',
+            'vname' => 'LBL_FONT_COLOR',
+            'type' => 'enum',
+            'options' => 'report_color_dom',
+            'len' => 25,
+        ),
+        'wrap' => array(
+            'name' => 'wrap',
+            'vname' => 'LBL_WRAP',
+            'type' => 'bool',
+            'dbType' => 'varchar',
+            'len' => '3',
+        ),
+        'style' => array(
+            'name' => 'style',
+            'vname' => 'LBL_STYLE',
+            'type' => 'enum',
+            'options' => 'dataset_style_dom',
+            'len' => 25,
+        ),
+        'format_type' => array(
+            'name' => 'format_type',
+            'vname' => 'LBL_FORMAT_TYPE',
+            'type' => 'enum',
+            'required' => true,
+            'options' => 'dataset_att_format_type_dom',
+            'len' => 25,
+        ),
+    ),
+    'indices' => array(
+        array(
+            'name' => 'datasetatt_k',
+            'type' => 'primary',
+            'fields' => array('id'),
+        ),
+        array(
+            'name' => 'idx_datasetatt',
+            'type' => 'index',
+            'fields' => array('parent_id', 'deleted'),
+        ),
+    ),
+);

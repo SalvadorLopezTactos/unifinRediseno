@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Üreticiyi silmek için kayıt numarası belirtmeniz gerekmektedir.',
   'NTC_STATUS' => 'Bu üreticinin durumunu, İnaktif olarak belirleyerek Üretici açılır-listesinden kaldırın',
   'NTC_LIST_ORDER' => 'Bu üreticinin, Üretici açılır-listesinde görünmesini istediğiniz sırayı belirleyin',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Aktif',
-    'Inactive' => 'İnaktif',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Üretici Verilerini Yükle',
 	'LBL_EDITLAYOUT' => 'Yerleşimi Değiştir' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Gelir Satır Kalemleri',

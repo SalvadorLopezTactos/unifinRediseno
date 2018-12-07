@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => '運輸服務供應商',
   'LNK_PRODUCT_LIST' => '檢視產品目錄',
   'NTC_DELETE_CONFIRMATION' => '確定要刪除此記錄嗎？',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => '添加',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => '指派的使用者名稱',

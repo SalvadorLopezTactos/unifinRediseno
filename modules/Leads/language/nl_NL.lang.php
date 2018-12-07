@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Dashboard leadlijst',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Dashboard leadrecord',
+
     'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om deze lead te verwijderen.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Account Beschrijving',
     'LBL_ACCOUNT_ID'=>'Account ID',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Opportunityomvang:',
     'LBL_OPPORTUNITY_ID'=>'Opportunity-ID',
     'LBL_OPPORTUNITY_NAME' => 'Opportunitynaam:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Alternatief e-mailadres:',
     'LBL_OTHER_PHONE' => 'Bgg:',
     'LBL_PHONE' => 'Telefoon:',
@@ -179,7 +185,7 @@ $mod_strings = array (
     'LBL_TITLE' => 'Titel:',
     'LBL_UNCONVERTED'=> 'Niet geconverteerd',
     'LNK_IMPORT_VCARD' => 'Aanmaken vanaf vCard',
-    'LNK_LEAD_LIST' => 'Leads',
+    'LNK_LEAD_LIST' => 'Leads bekijken',
     'LNK_NEW_ACCOUNT' => 'Nieuwe Organisatie',
     'LNK_NEW_APPOINTMENT' => 'Nieuwe Afspraak',
     'LNK_NEW_CONTACT' => 'Nieuw Persoon',
@@ -314,4 +320,6 @@ Na het bevestigen van elke vereiste en gewenste module, klikt u op de "Opslaan e
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Lead rapporten',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Toestemming zakelijke doeleinden voor',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Toestemming voor het laatst bijgewerkt',
 );

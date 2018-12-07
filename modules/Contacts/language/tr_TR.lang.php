@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Kişiler Listesi Panosu',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kişiler Kaydı Panosu',
+
     'LNK_CONTACT_REPORTS' => 'Kontak Raporlarını Görüntüle',
     'ERR_DELETE_RECORD' => 'Kontağı silmek için bir kayıt numarası belirtiniz.',
     'LBL_ACCOUNT_ID' => 'Müşteri ID:',
@@ -100,7 +104,7 @@ $mod_strings = array (
     'LBL_LIST_TITLE' => 'Başlık',
     'LBL_MOBILE_PHONE' => 'Cep Telefonu:',
     'LBL_MODIFIED' => 'Değiştiren Kişi:',
-    'LBL_MODULE_NAME' => 'Kontaklar',
+    'LBL_MODULE_NAME' => 'Kontaklarım',
     'LBL_MODULE_NAME_SINGULAR' => 'Kontak',
     'LBL_MODULE_TITLE' => 'Kontaklar: Ana Sayfa',
     'LBL_NAME' => 'İsim:',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternatif adresi birincil adrese kopyala',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Birincil adresi alternatif adrese kopyala',
     'NTC_DELETE_CONFIRMATION' => 'Bu kaydı silmek istediğinizden emin misiniz?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Fırsat oluşturulması için müşteri kaydının olması gerekir.\n Lütfen yeni bir müşteri oluşturun veya var olan müşterilerden birini seçin.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Fırsat oluşturulması için müşteri kaydının olması gerekir.\\n Lütfen yeni bir müşteri oluşturun veya var olan müşterilerden birini seçin.',
     'NTC_REMOVE_CONFIRMATION' => 'Talepten bu kontağı silmek istediğinizden emin misiniz?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Doğrudan raporlanan kişi olarak bu kaydı silmek istediğinizden emin misiniz?',
 
@@ -273,4 +277,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'Potansiyel Skoru',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontak Raporları',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Şunun İçin İç Amaçlı Onaylı:',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Son Güncellemeye Onay Verin',
 );

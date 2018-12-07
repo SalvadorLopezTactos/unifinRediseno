@@ -18,10 +18,14 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Kontaktų sąrašo ataskaitų sritis',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kontaktų duomenų ataskaitų sritis',
+
     'LNK_CONTACT_REPORTS' => 'Kontaktų ataskaitos',
     'ERR_DELETE_RECORD' => 'Nurodykite įrašą, kad ištrinti kontaktą.',
     'LBL_ACCOUNT_ID' => 'Kliento ID:',
-    'LBL_ACCOUNT_NAME' => 'Kliento pavadinimas:',
+    'LBL_ACCOUNT_NAME' => 'Kliento pavadinimas',
     'LBL_CAMPAIGN'     => 'Kampanija:',
     'LBL_ACTIVITIES_SUBPANEL_TITLE'=>'Priminimai',
     'LBL_ADD_BUSINESSCARD' => 'Įvesti vizitinę kortelę',
@@ -36,7 +40,7 @@ $mod_strings = array (
     'LBL_ALT_ADDRESS_STREET' => 'Kita adreso gatvė:',
     'LBL_ALTERNATE_ADDRESS' => 'Kitas adresas:',
     'LBL_ANY_ADDRESS' => 'Bet koks adresas:',
-    'LBL_ANY_EMAIL' => 'Bet koks el. paštas:',
+    'LBL_ANY_EMAIL' => 'El. paštas',
     'LBL_ANY_PHONE' => 'Bet koks telefonas:',
     'LBL_ASSIGNED_TO_NAME' => 'Atsakingas:',
     'LBL_ASSIGNED_TO_ID' => 'Atsakingas',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopijuoti kitą adresą į pagrindinį',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopijuoti pagrindinį adresą į kitą adresą',
     'NTC_DELETE_CONFIRMATION' => 'Ar tikrai norite ištrinti šį įrašą?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Kuriant pardavimus reikalingas klientas.\n Prašome sukurti naują klientą arba pasirinkite jau esamą.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Kuriant pardavimus reikalingas klientas.\\n Prašome sukurti naują klientą arba pasirinkite jau esamą.',
     'NTC_REMOVE_CONFIRMATION' => 'Ar tikrai norite išmesti šį kontaktą iš aptarnavimo ?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Ar tikrai norite išmesti šį įrašą kaip pavaldinį?',
 
@@ -273,4 +277,6 @@ To create a {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Contacts&#39; reports',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Verslo tikslais sutikote su',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Sutikimas paskutinį kartą atnaujintas',
 );

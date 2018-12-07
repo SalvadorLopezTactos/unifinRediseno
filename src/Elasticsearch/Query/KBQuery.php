@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Query;
 
+use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
+
 /**
  *
  * The Knowledge Base specific query using More_Like_This this query.
@@ -54,8 +56,7 @@ class KBQuery implements QueryInterface
     }
 
     /**
-     * Create a multi-match query.
-     * @return \Elastica\Query\BoolQuery
+     * {@inheritdoc}
      */
     public function build()
     {
@@ -70,29 +71,34 @@ class KBQuery implements QueryInterface
     /**
      * Create the filter.
      * @param bool $addLangFilter a flag indicate if a lang filter is needed
-     * @return \Elastica\Filter\BoolFilter
+     * @return \Elastica\Query\BoolQuery
      */
-    public function createFilter($addLangFilter)
+    public function createFilter($addLangFilter = false)
     {
-        $mainFilter = new \Elastica\Filter\BoolFilter();
+        $mainFilter = new \Elastica\Query\BoolQuery();
 
-        $currentIdFilter = new \Elastica\Filter\Term();
+        $currentIdFilter = new \Elastica\Query\Term();
         $currentIdFilter->setTerm('_id', $this->bean->id);
         $mainFilter->addMustNot($currentIdFilter);
 
-        $activeRevFilter = new \Elastica\Filter\Term();
-        $activeRevFilter->setTerm('active_rev', 1);
+        $activeRevFilter = new \Elastica\Query\Term();
+        $activeRevFilter->setTerm($this->bean->module_name . Mapping::PREFIX_SEP . 'active_rev.kbvis', 1);
         $mainFilter->addMust($activeRevFilter);
 
         if ($addLangFilter === true) {
-            $langFilter = new \Elastica\Filter\Term();
-            $langFilter->setTerm('language', $this->bean->language);
+            $langFilter = new \Elastica\Query\Term();
+            $langFilter->setTerm(
+                $this->bean->module_name . Mapping::PREFIX_SEP . 'language.kbvis',
+                $this->bean->language
+            );
             $mainFilter->addMust($langFilter);
         }
 
-        $statusFilterOr = new \Elastica\Filter\BoolOr();
+        $statusFilterOr = new \Elastica\Query\BoolQuery();
         foreach ($this->bean->getPublishedStatuses() as $status) {
-            $statusFilterOr->addFilter(new \Elastica\Filter\Term(array('status' => $status)));
+            $statusFilterOr->addFilter(new \Elastica\Query\Term([
+                $this->bean->module_name . Mapping::PREFIX_SEP . 'status.kbvis' => $status,
+            ]));
         }
         $mainFilter->addMust($statusFilterOr);
         return $mainFilter;
@@ -108,10 +114,9 @@ class KBQuery implements QueryInterface
     {
         $mlt = new \Elastica\Query\MoreLikeThis();
         $mlt->setFields($fields);
-        $mlt->setLikeText($text);
+        $mlt->setLike($text);
         $mlt->setMinTermFrequency(1);
         $mlt->setMinDocFrequency(1);
         return $mlt;
     }
-
 }

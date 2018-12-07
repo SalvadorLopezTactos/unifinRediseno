@@ -32,6 +32,7 @@ class EmailManController extends SugarController
         // save Outbound settings  #Bug 20033 Ensure data for Outbound email exists before trying to update the system mailer.
         if(isset($_REQUEST['mail_sendtype']) && empty($_REQUEST['campaignConfig'])) {
             $oe = new OutboundEmail();
+            $oe = $oe->getSystemMailerSettings();
             $oe->populateFromPost();
             $oe->saveSystem();
         }
@@ -53,15 +54,15 @@ class EmailManController extends SugarController
             }
         }
 
+        $optOutConfigName = 'new_email_addresses_opted_out';
+        $configurator->config[$optOutConfigName] = isset($_REQUEST[$optOutConfigName]) && $_REQUEST[$optOutConfigName];
+
         $focus->saveConfig();
 
         // mark user metadata changed so the user preferences get refreshed
         // (user preferences contain email client preference)
         $mm = MetaDataManager::getManager();
         $mm->setUserMetadataHasChanged($current_user);
-
-        // save User defaults for emails
-        $configurator->config['email_default_delete_attachments'] = (isset($_REQUEST['email_default_delete_attachments'])) ? true : false;
 
         ///////////////////////////////////////////////////////////////////////////////
         ////	SECURITY
@@ -92,5 +93,8 @@ class EmailManController extends SugarController
         ksort($sugar_config);
 
         $configurator->handleOverride();
+
+        // Refresh the cache after we've had a chance to write to config_override.php.
+        MetaDataManager::refreshSectionCache([MetaDataManager::MM_CONFIG]);
     }
 }

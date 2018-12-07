@@ -13,7 +13,7 @@
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Adapter;
 
 use Sugarcrm\Sugarcrm\SearchEngine\Capability\Aggregation\ResultInterface;
-use Sugarcrm\Sugarcrm\Elasticsearch\Query\Highlighter\HighlighterInterface;
+use Sugarcrm\Sugarcrm\Elasticsearch\Query\Result\ParserInterface;
 
 /**
  *
@@ -28,9 +28,9 @@ class Result implements ResultInterface
     protected $result;
 
     /**
-     * @var HighlighterInterface
+     * @var ParserInterface
      */
-    protected $highlighter;
+    protected $resultParser;
 
     /**
      * Ctor
@@ -42,12 +42,12 @@ class Result implements ResultInterface
     }
 
     /**
-     * Set highlighter
-     * @param HighlighterInterface $highlighter
+     * Set result parser
+     * @param ParserInterface $parser
      */
-    public function setHighlighter(HighlighterInterface $highlighter)
+    public function setResultParser(ParserInterface $parser)
     {
-        $this->highlighter = $highlighter;
+        $this->resultParser = $parser;
     }
 
     /**
@@ -59,15 +59,6 @@ class Result implements ResultInterface
     public function __call($method, array $args = array())
     {
         return call_user_func_array(array($this->result, $method), $args);
-    }
-
-    /**
-     * Set highlight remap fields
-     * @param array $remap
-     */
-    public function setHighlightRemap(array $remap)
-    {
-        $this->highlightRemap = $remap;
     }
 
     //// ResultInterface ////
@@ -93,6 +84,9 @@ class Result implements ResultInterface
      */
     public function getData()
     {
+        if ($this->resultParser) {
+            return $this->resultParser->parseSource($this->result);
+        }
         return $this->result->getSource();
     }
 
@@ -101,7 +95,7 @@ class Result implements ResultInterface
      */
     public function getDataFields()
     {
-        return array_keys($this->result->getSource());
+        return array_keys($this->getData());
     }
 
     /**
@@ -117,11 +111,10 @@ class Result implements ResultInterface
      */
     public function getHighlights()
     {
-        if (!$this->highlighter) {
-            return array();
+        if ($this->resultParser) {
+            return $this->resultParser->parseHighlights($this->result);
         }
-
-        return $this->highlighter->parseResults($this->result->getHighlights());
+        return $this->result->getHighlights();
     }
 
     /**
@@ -135,8 +128,7 @@ class Result implements ResultInterface
             $bean = \BeanFactory::getBean($this->getModule(), $this->getId());
         } else {
             $bean = \BeanFactory::newBean($this->getModule());
-            $bean->populateFromRow($this->getData(), true);
-            $bean->id = $this->getId();
+            $bean->populateFromRow(array_merge(['id' => $this->getId()], $this->getData()), true);
         }
 
         // Dispatch event for logic hook framework

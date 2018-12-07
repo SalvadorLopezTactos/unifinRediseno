@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Не е намерена информация за потребителя',
     'ERR_USER_NAME_EXISTS'              => 'Потребителското име {0} вече съществува. Не се допуска дублиране на имената на потребителите. Въведете уникално потребителско име.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Потребителят е блокиран от системата и не може да се идентифицира с неговата/нейната съществуваща парола.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Потребители само с външна оторизация нямат право да влизат с идентификационните данни на Sugar',
 
 	'LBL_PASSWORD_SENT'                => 'Паролата е променена',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Паролата не може да бъде изпратена',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Е-мейл адрес на получателя',
 	'ERR_SERVER_STATUS'					=> 'Статус на сървъра',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Системата не може да изпрати електронна поща на потребителя. Моля проверете настройките в секция <a href="index.php?module=EmailMan&action=config">Настройка на електронна поща</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Потребителят може да бъде създаден само в <a href="{0}" target="_blank">раздела Cloud</a> за режим IDM.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Основният имейл адрес може да се актуализира само в <a href="{0}" target="_blank">раздела Cloud</a> за режим IDM.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Електронна поща',
 
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'мин.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'сек.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Свържете се със Системния администратор.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'За идентификация с OpenID Connect (OIDC) в режим IDM, моля инсталирайте разширението GMP PHP.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'You have been logged out. To login again please click',
     'LBL_LOGGED_OUT_2' => 'тук',
@@ -626,6 +631,12 @@ Click Cancel to exit the page without reassigning any records.',
     'LBL_FILTER_USERS_REPORTS' => 'Справки за потребители',
     'LBL_CONTACTS_SYNC' => 'Контакти',
     'LBL_DETAIL' => 'Профил на потребителя',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Ако някои от полетата не могат да бъдат редактирани, моля влезте във вашата Cloud конзола за да управлявате тези полета',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Ако искате да промените някои полета, които не могат да се редактират, ' .
+        'моля, свържете се с Администратора, за да уведомите за тези промени',
 ); // END STRINGS DEFS
 
 ?>

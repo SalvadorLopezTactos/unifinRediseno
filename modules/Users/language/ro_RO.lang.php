@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Informaţii utilizator nu au fost găsite',
     'ERR_USER_NAME_EXISTS'              => 'Numele de utilizator {0} există deja. Numele de utilizator duplicate nu sunt permise. Modificaţi numele de utilizator pentru a fi unic.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Acest utilizator este blocat din aplicatia Sugar şi nu se poate autentifica folosind  parola lui / ei existent.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Utilizatorul cu drepturi exclusiv de autor extern nu are permisiunea de a se autentifica folosind acreditări Sugar',
 
 	'LBL_PASSWORD_SENT'                => 'Parola actualizata',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Nu se poate trimite parola',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Adresa de email destinatar',
 	'ERR_SERVER_STATUS'					=> 'Server-ul dvs. de stare',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistemul este în imposibilitatea de a trimite un e-mail pentru utilizator. Vă rugăm să verificaţi Outgoing Mail Configuration în Setări e-mail.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Utilizatorul poate fi creat doar în <a href="{0}" target="_blank">Consola cloud</a> pentru modul IDM.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Adresa de e-mail principală poate fi actualizată doar în <a href="{0}" target="_blank">Consola cloud</a> pentru modul IDM.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Adresă Email',
 
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'sec.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Vă rugăm să contactaţi administratorul de sistem.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Pentru autentificarea cu OpenID Connect (OIDC) în modul IDM, instalați extensia GMP PHP.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Aţi fost deconectat. Pentru a va loga din nou vă rugăm să faceţi clic pe',
     'LBL_LOGGED_OUT_2' => 'aici',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Rapoarte utilizator',
     'LBL_CONTACTS_SYNC' => 'Contacte',
     'LBL_DETAIL' => 'Profil utilizator',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Dacă anumite câmpuri nu sunt editabile, autentificați-vă în Consola cloud pentru a administra aceste câmpuri',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Dacă doriți să modificați anumite câmpuri care nu sunt editabile, ' .
+        'contactați Administratorul pentru a notifica aceste modificări',
 ); // END STRINGS DEFS
 
 ?>

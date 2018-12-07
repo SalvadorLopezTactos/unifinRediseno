@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Ved kvartal',
     'LBL_BY_FISCAL_YEAR' => 'Ved regnskapsåret',
     'LBL_BY_FISCAL_QUARTER' => 'Ved regnskapskvartalet',
+    'LBL_AMOUNT' => 'Beløp',
     'LBL_COUNT' => 'Tell',
+    'LBL_PERCENT' => 'Prosent',
     'LBL_SUM' => 'Sum',
     'LBL_AVG' => 'Gjennomsnittlig',
     'LBL_MAX' => 'Maksimalt',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Måned',
     'LBL_YEAR' => 'År',
     'LBL_QUARTER' => 'Kvartal',
+    'LBL_FISCAL' => 'Fiskal',
     'LBL_FISCAL_YEAR' => 'Regnskapsår',
     'LBL_FISCAL_QUARTER' => 'Regnskapskvartal',
 	'LBL_YESTERDAY'=>'I går',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Neste kvartal',
     'LBL_ADD_RELATE' => "Legg til beslektet",
     'LBL_DEL_THIS' => "Fjern",
-    'LBL_ALERT_CANT_ADD' => 'Du kan ikke legge til en beslektet modul før du har valgt en tabell som du vil knytte den til.\nVelg en modul i rullelisten til venstre for \\"Legg til beslektet\\"-knappen du klikket på.',
+    'LBL_ALERT_CANT_ADD' => 'Du kan ikke legge til en beslektet modul før du har valgt en tabell som du vil knytte den til.\\nVelg en modul i rullelisten til venstre for \\"Legg til beslektet\\"-knappen du klikket på.',
     'LBL_BY_DAY' => 'Ved dag',
     'LBL_DAY' => 'Dag',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Valgbart',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Større enn eller lik med',
 
     'LBL_FILTER_BY_MODULE' => 'Etter modul',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Med diagrammer',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Feil under henting av gjennomgående rapportdata for denne handlingen. Kontakt eieren av rapporten for å få hjelp.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Gjennomgang er ikke tilgjengelig',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'Listevisning viser alle rapporter som oppfyller aktuelle søkekriterier og som brukere har tilgang til. Du kan se detaljer om hver rapport i feltkolonnene i listevisning og i forhåndsvisningen. Du kan angi tagger for rapporter og opprette filtre. Klikk på rapportens navn for å vise rapporten eller velg "Rediger rapport" i handlingsmenyen for å modifisere rapporten.',
+  );

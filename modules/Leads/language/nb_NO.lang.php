@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Dashbord for emneliste',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Dashbord for emneoppføring',
+
     'ERR_DELETE_RECORD' => 'en_us A record number must be specified to delete the lead.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Bedriftbeskrivelse',
     'LBL_ACCOUNT_ID'=>'Bedrift-ID',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Mulighetsmengde:',
     'LBL_OPPORTUNITY_ID'=>'Mulighets-ID:',
     'LBL_OPPORTUNITY_NAME' => 'Mulighetsnavn:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Annen e-postadresse:',
     'LBL_OTHER_PHONE' => 'Annet telefonnummer:',
     'LBL_PHONE' => 'Telefonnummer:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopier alternativ adresse til hovedadresse',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopier hovedadresse til alternativ adresse',
     'NTC_DELETE_CONFIRMATION' => 'Er du sikker på at du vil slette denne oppføringen?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'For å opprette en mulighet kreves en bedrift.\n Vennligst opprett en ny bedrift eller velg en som allerede finnes.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'For å opprette en mulighet kreves en bedrift.\\n Vennligst opprett en ny bedrift eller velg en som allerede finnes.',
     'NTC_REMOVE_CONFIRMATION' => 'Er du sikker på at du vil fjerne lead fra denne sak?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Er du sikker på at du vil fjerne denne oppføringen som en direkterapport?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Kampanjer',
@@ -302,4 +308,6 @@ For å opprette {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Lead-resultat',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Emner-rapporter',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Business Purposes Consented for',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consent Last Updated',
 );

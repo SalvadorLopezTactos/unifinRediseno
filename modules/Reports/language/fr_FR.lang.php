@@ -223,7 +223,7 @@ $mod_strings = array (
   'LBL_NOTHING_WAS_SELECTED' => 'Aucune sélection.',
   'LBL_TOTAL' => 'Total',
   'LBL_MODULE_NAME_SAVED' => 'Nom du Module',
-  'LBL_REPORT_TYPE' => 'Type de Rapport',
+  'LBL_REPORT_TYPE' => 'Type de rapport',
   'LBL_REPORT_LAST_RUN_DATE' => 'Dernier accès',
   'LBL_REPORT__ATT_TYPE' => 'Type',
   'LBL_REPORT_RUN_WITH_FILTER' => 'Appliquer les filtres',
@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Par Trimestre',
     'LBL_BY_FISCAL_YEAR' => 'Par année fiscale',
     'LBL_BY_FISCAL_QUARTER' => 'Par trimestre fiscal',
+    'LBL_AMOUNT' => 'Montant',
     'LBL_COUNT' => 'COMPTEUR',
+    'LBL_PERCENT' => 'Pourcentage',
     'LBL_SUM' => 'SOMME',
     'LBL_AVG' => 'MOYENNE',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Mois',
     'LBL_YEAR' => 'Année',
     'LBL_QUARTER' => 'Trimestre',
+    'LBL_FISCAL' => 'Fiscal',
     'LBL_FISCAL_YEAR' => 'Année Fiscale',
     'LBL_FISCAL_QUARTER' => 'Trimestre fiscal',
 	'LBL_YESTERDAY'=>'Hier',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Trim. Suivant',
     'LBL_ADD_RELATE' => "Ajouter une Liaison",
     'LBL_DEL_THIS' => "Supprimer",
-    'LBL_ALERT_CANT_ADD' => 'Vous ne pouvez pas ajouter un module lié sans avoir sélectionné une table de liaison.\nSélectionnez un module dans la liste à gauche du bouton &#39;Ajouter une Liaison&#39;.',
+    'LBL_ALERT_CANT_ADD' => 'Vous ne pouvez pas ajouter un module lié sans avoir sélectionné une table de liaison.\\nSélectionnez un module dans la liste à gauche du bouton &#39;Ajouter une Liaison&#39;.',
     'LBL_BY_DAY' => 'Par Jour',
     'LBL_DAY' => 'Jour',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Modules liés facultatifs ?',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Supérieur strict à',
 
     'LBL_FILTER_BY_MODULE' => 'Par module',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Avec des graphiques',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Erreur lors de la récupération des données de rapport d&#39;exploration pour cette action. Contactez le propriétaire du rapport pour obtenir de l&#39;assistance.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Exploration non-disponible',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'La vue liste affiche l&#39;ensemble des rapports correspondant aux critères de recherche actuels et accessibles par l&#39;utilisateur connecté. Vous pouvez afficher les détails de base de chaque rapport dans les colonnes de la vue liste et dans l&#39;aperçu. Vous pouvez définir des balises pour les rapports et créer des filtres. Cliquez sur le nom du rapport pour afficher le rapport ou sélectionnez « Éditer rapport » dans le menu d&#39;action pour modifier le rapport.',
+  );

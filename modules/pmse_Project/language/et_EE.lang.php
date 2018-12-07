@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Protsessi määratlused',
   'LBL_MODULE_TITLE' => 'Protsessi määratlused',
   'LBL_MODULE_NAME_SINGULAR' => 'Process Definition',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'is not equal to',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'is not',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'not equal to',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Käivitusaeg',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Lisa',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Sulge',

@@ -20,6 +20,7 @@ $dictionary['ProductType'] = array(
             'type' => 'text',
             'comment' => 'Product type description',
             'massupdate' => true,
+            'sortable' => false,
         ),
         'list_order' => array (
             'name' => 'list_order',

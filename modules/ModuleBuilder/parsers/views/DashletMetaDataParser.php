@@ -142,9 +142,6 @@
     		$out .= "\$dashletData['$writeTodashletName']['columns'] = " . var_export_helper ($dashletData[$dashletName]['columns']) . ";\n";
     		fputs ( $fh, $out) ;
     		fclose ( $fh ) ;
-            
-            // Add this to the autoloader so that it gets picked up when needed
-            SugarAutoLoader::addToMap($writeFile, true);
     	}
     }
  }

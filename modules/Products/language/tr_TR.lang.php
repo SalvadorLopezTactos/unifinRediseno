@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Teklif Edilen Kalemler Listesi Panosu',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampanyada Teklif Edilen Kalem',
     'LBL_MODULE_NAME' => 'Teklif Kalemleri',
     'LBL_MODULE_NAME_SINGULAR' => 'Teklif Kalemi',
@@ -172,4 +175,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Teklif Kalemleri Teklif Veri Listesi',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Yeni Kalem)',
     'LBL_DISCOUNT_PERCENT' => 'Yüzde % ',
+    'LBL_DISCOUNT_TYPE' => 'İndirim Türü',
 );

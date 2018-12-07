@@ -16,6 +16,9 @@
 $fields = array(
     array(
         'name' => 'opportunity_name',
+        'filter_relate' => array(
+            'account_id' => 'account_id',
+        ),
     ),
     array(
         'name' => 'account_name',

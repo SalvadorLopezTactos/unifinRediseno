@@ -19,6 +19,7 @@ if (!$GLOBALS['current_user']->isAdminForModule('Users')) sugar_die("Unauthorize
 $error_message = '';
 
 if(isset($_REQUEST['team_id']) && isset($_REQUEST['teams'])) {
+    /** @var Team $new_team */
 	$new_team = BeanFactory::getBean('Teams', $_REQUEST['team_id']);
 	
 	//Grab the list of teams to reassign
@@ -81,5 +82,3 @@ if(empty($teams) && !isset($error_message)) {
   $ss->assign("APP_STRINGS", $app_strings);
   $ss->display("modules/Teams/tpls/ReassignTeam.tpl");
 }
-
-?>

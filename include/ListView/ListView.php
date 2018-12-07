@@ -32,6 +32,10 @@ class ListView
     var $local_current_module = null;
     var $local_mod_strings = null;
     var $records_per_page = 20;
+
+    /**
+     * @var XTemplate
+     */
     var $xTemplate = null;
     var $xTemplatePath = null;
     var $seed_data = null;
@@ -248,310 +252,340 @@ function process_dynamic_listview($source_module, $sugarbean,$subpanel_def)
         return true;
     }
 
-/**
- * @return void
- * @param unknown $data
- * @param unknown $xTemplateSection
- * @param unknown $html_varName
- * @desc INTERNAL FUNCTION handles the rows
- */
- function process_dynamic_listview_rows($data,$parent_data, $xtemplateSection, $html_varName, $subpanel_def)
- {
-    global $subpanel_item_count;
-    global $odd_bg;
-    global $even_bg;
-    global $hilite_bg;
-    global $click_bg;
-
-    $this->xTemplate->assign("BG_HILITE", $hilite_bg);
-    $this->xTemplate->assign('CHECKALL', SugarThemeRegistry::current()->getImage('blank', '', 1, 1, ".gif", ''));
-    //$this->xTemplate->assign("BG_CLICK", $click_bg);
-    $subpanel_item_count = 0;
-    $oddRow = true;
-    $count = 0;
-    reset($data);
-
-    //GETTING OFFSET
-    $offset = $this->getOffset($html_varName);
-    //$totaltime = 0;
-    $processed_ids = array();
-
-    $fill_additional_fields = array();
-    //Either retrieve the is_fill_in_additional_fields property from the lone
-    //subpanel or visit each subpanel's subpanels to retrieve the is_fill_in_addition_fields
-    //property
-    $subpanel_list=array();
-    if($subpanel_def->isCollection()) {
-        $subpanel_list=$subpanel_def->sub_subpanels;
-    } else {
-        $subpanel_list[]= $subpanel_def;
-    }
-
-    foreach($subpanel_list as $this_subpanel)
+    /**
+     * @param array $data
+     * @param array $parent_data
+     * @param string $xTemplateSection
+     * @param string $html_varName
+     * @param aSubPanel $subpanel_def
+     * @desc INTERNAL FUNCTION handles the rows
+     */
+    public function process_dynamic_listview_rows($data, $parent_data, $xTemplateSection, $html_varName, $subpanel_def)
     {
-        if($this_subpanel->is_fill_in_additional_fields())
-        {
-            $fill_additional_fields[] = $this_subpanel->bean_name;
-            $fill_additional_fields[$this_subpanel->bean_name] = true;
+        global $subpanel_item_count;
+        global $odd_bg;
+        global $even_bg;
+        global $hilite_bg;
+
+        $this->xTemplate->assign('BG_HILITE', $hilite_bg);
+        $this->xTemplate->assign('CHECKALL', SugarThemeRegistry::current()->getImage('blank', '', 1, 1, ".gif", ''));
+
+        $subpanel_item_count = 0;
+        $oddRow = true;
+        $count = 0;
+        reset($data);
+
+        //GETTING OFFSET
+        $offset = $this->getOffset($html_varName);
+
+        $processed_ids = array();
+
+        $fill_additional_fields = array();
+        //Either retrieve the is_fill_in_additional_fields property from the lone
+        //subpanel or visit each subpanel's subpanels to retrieve the is_fill_in_addition_fields
+        //property
+        $subpanel_list = array();
+
+        if ($subpanel_def->isCollection()) {
+            $subpanel_list = $subpanel_def->sub_subpanels;
+        } else {
+            $subpanel_list[] = $subpanel_def;
         }
-    }
 
-    if ( empty($data) ) {
-        $this->xTemplate->assign("ROW_COLOR", 'oddListRow');
-        $thepanel=$subpanel_def;
-        if($subpanel_def->isCollection())
-            $thepanel=$subpanel_def->get_header_panel_def();
-        $this->xTemplate->assign("COL_COUNT", count($thepanel->get_list_fields()));
-        $this->xTemplate->parse($xtemplateSection.".nodata");
-    }
-	$module_name = '';
-    while(list($aVal, $aItem) = each($data))
-    {
-        $subpanel_item_count++;
-        $aItem->check_date_relationships_load();
-        // TODO: expensive and needs to be removed and done better elsewhere
-
-        if(!empty($fill_additional_fields[$aItem->object_name])
-        || ($aItem->object_name == 'Case' && !empty($fill_additional_fields['aCase']))
-        )
-        {
-            $aItem->fill_in_additional_list_fields();
-            //$aItem->fill_in_additional_detail_fields();
+        foreach ($subpanel_list as $this_subpanel) {
+            if ($this_subpanel->is_fill_in_additional_fields()) {
+                $fill_additional_fields[] = $this_subpanel->bean_name;
+                $fill_additional_fields[$this_subpanel->bean_name] = true;
+            }
         }
-        //rrs bug: 25343
-        $aItem->call_custom_logic("process_record");
 
-        if(isset($parent_data[$aItem->id])) {
+        if (empty($data)) {
+            $this->xTemplate->assign("ROW_COLOR", 'oddListRow');
+            $thepanel = $subpanel_def;
 
-            $aItem->parent_name = $parent_data[$aItem->id]['parent_name'];
-            if(!empty($parent_data[$aItem->id]['parent_name_owner'])) {
-            $aItem->parent_name_owner =  $parent_data[$aItem->id]['parent_name_owner'];
-            $aItem->parent_name_mod =  $parent_data[$aItem->id]['parent_name_mod'];
-        }}
-		if (isset($subpanel_list[strtolower($aItem->module_name)]))
-        {
-            if ($module_name != $aItem->module_name)
-            {
-                $subpanel_list_fields = $subpanel_list[strtolower($aItem->module_name)]->get_list_fields();
-                if (($keyindex = array_search('edit_button', array_keys($subpanel_list_fields))) !== FALSE)
-                {
-                    $subpanel_list_fields = array_slice($subpanel_list_fields, 0, $keyindex, true);
+            if ($subpanel_def->isCollection()) {
+                $thepanel = $subpanel_def->get_header_panel_def();
+            }
+
+            $this->xTemplate->assign("COL_COUNT", count($thepanel->get_list_fields()));
+            $this->xTemplate->parse($xTemplateSection . ".nodata");
+        }
+
+        $module_name = '';
+
+        while (list($aVal, $aItem) = each($data)) {
+            $subpanel_item_count++;
+            $aItem->check_date_relationships_load();
+            // TODO: expensive and needs to be removed and done better elsewhere
+
+            if (!empty($fill_additional_fields[$aItem->object_name])
+                || ($aItem->object_name == 'Case' && !empty($fill_additional_fields['aCase']))
+            ) {
+                $aItem->fill_in_additional_list_fields();
+            }
+
+            //rrs bug: 25343
+            $aItem->call_custom_logic("process_record");
+
+            if (isset($parent_data[$aItem->id])) {
+                $aItem->parent_name = $parent_data[$aItem->id]['parent_name'];
+
+                if (!empty($parent_data[$aItem->id]['parent_name_owner'])) {
+                    $aItem->parent_name_owner = $parent_data[$aItem->id]['parent_name_owner'];
+                    $aItem->parent_name_mod = $parent_data[$aItem->id]['parent_name_mod'];
                 }
             }
-            $aItem->updateDependentFieldForListView($subpanel_list_fields);
-        } else
-        {
-            $aItem->updateDependentField();
-        }
-        $fields = $aItem->get_list_view_data();
 
-        $aItem->ACLFilterFieldList($fields);
-        if(isset($processed_ids[$aItem->id])) {
-            continue;
+            if (isset($subpanel_list[strtolower($aItem->module_name)])) {
+                if ($module_name != $aItem->module_name) {
+                    $subpanel_list_fields = $subpanel_list[strtolower($aItem->module_name)]->get_list_fields();
+                    $keyindex = array_search('edit_button', array_keys($subpanel_list_fields));
 
-        } else {
+                    if ($keyindex !== false) {
+                        $subpanel_list_fields = array_slice($subpanel_list_fields, 0, $keyindex, true);
+                    }
+                }
+
+                $aItem->updateDependentFieldForListView($subpanel_list_fields);
+            } else {
+                $aItem->updateDependentField();
+            }
+
+            $fields = $aItem->get_list_view_data();
+            $fields = $this->formatRowDates($aItem, $fields);
+
+            $aItem->ACLFilterFieldList($fields);
+
+            if (isset($processed_ids[$aItem->id])) {
+                continue;
+            }
+
             $processed_ids[$aItem->id] = 1;
-        }
 
+            //ADD OFFSET TO ARRAY
+            $fields['OFFSET'] = ($offset + $count + 1);
 
-        //ADD OFFSET TO ARRAY
-        $fields['OFFSET'] = ($offset + $count + 1);
-
-        if($this->shouldProcess) {
-            if($aItem->ACLAccess('EditView')) {
-            $this->xTemplate->assign('PREROW', "<input type='checkbox' class='checkbox' name='mass[]' value='". $fields['ID']. "' />");
-            } else {
-                $this->xTemplate->assign('PREROW', '');
-
-            }
-            if($aItem->ACLAccess('DetailView')) {
-                $this->xTemplate->assign('TAG_NAME','a');
-            } else {
-                $this->xTemplate->assign('TAG_NAME','span');
-            }
-            $this->xTemplate->assign('CHECKALL', "<input type='checkbox'  title='".$GLOBALS['app_strings']['LBL_SELECT_ALL_TITLE']."' class='checkbox' name='massall' id='massall' value='' onclick='sListView.check_all(document.MassUpdate, \"mass[]\", this.checked);' />");
-        }
-
-        if($oddRow)
-        {
-            $ROW_COLOR = 'oddListRow';
-            $BG_COLOR =  $odd_bg;
-        }
-        else
-        {
-            $ROW_COLOR = 'evenListRow';
-            $BG_COLOR =  $even_bg;
-        }
-        $oddRow = !$oddRow;
-		$button_contents = array();
-        $this->xTemplate->assign("ROW_COLOR", $ROW_COLOR);
-        $this->xTemplate->assign("BG_COLOR", $BG_COLOR);
-        $layout_manager = $this->getLayoutManager();
-        $layout_manager->setAttribute('context','List');
-        $layout_manager->setAttribute('image_path',$this->local_image_path);
-        $layout_manager->setAttribute('module_name', $subpanel_def->_instance_properties['module']);
-        if(!empty($this->child_focus))
-            $layout_manager->setAttribute('related_module_name',$this->child_focus->module_dir);
-
-        //AG$subpanel_data = $this->list_field_defs;
-        //$bla = array_pop($subpanel_data);
-        //select which sub-panel to display here, the decision will be made based on the type of
-        //the sub-panel and panel in the bean being processed.
-        if($subpanel_def->isCollection()) {
-            $thepanel=$subpanel_def->sub_subpanels[$aItem->panel_name];
-        } else {
-            $thepanel=$subpanel_def;
-        }
-        //get data source name
-        $linked_field=$thepanel->get_data_source_name();
-        $linked_field_set=$thepanel->get_data_source_name(true);
-        static $count;
-        if(!isset($count))$count = 0;
-
-        $field_acl['DetailView'] = $aItem->ACLAccess('DetailView');
-        $field_acl['ListView'] = $aItem->ACLAccess('ListView');
-        $field_acl['EditView'] = $aItem->ACLAccess('EditView');
-        $field_acl['Delete'] = $aItem->ACLAccess('Delete');
-        $field_acl['field_edit_relate'] = $this->checkUnlinkPermission($linked_field, $aItem, $thepanel->parent_bean);
-        foreach($thepanel->get_list_fields() as $field_name=>$list_field)
-        {
-            //add linked field attribute to the array.
-            $list_field['linked_field']=$linked_field;
-            $list_field['linked_field_set']=$linked_field_set;
-
-            $usage = empty($list_field['usage']) ? '' : $list_field['usage'];
-            if($usage != 'query_only')
-            {
-                $list_field['name']=$field_name;
-
-                $module_field = $field_name.'_mod';
-                $owner_field = $field_name.'_owner';
-                if(!empty($aItem->$module_field)) {
-
-                    $list_field['owner_id'] = $aItem->$owner_field;
-                    $list_field['owner_module'] = $aItem->$module_field;
-
+            if ($this->shouldProcess) {
+                if ($aItem->ACLAccess('EditView')) {
+                    $this->xTemplate->assign(
+                        'PREROW',
+                        "<input type='checkbox' class='checkbox' name='mass[]' value='" . $fields['ID'] . "' />"
+                    );
                 } else {
-                    $list_field['owner_id'] = false;
-                    $list_field['owner_module'] = false;
-                }
-                if(isset($list_field['alias'])) $list_field['name'] = $list_field['alias'];
-                else $list_field['name']=$field_name;
-                $list_field['fields'] = $fields;
-                $list_field['module'] = $aItem->module_dir;
-                $list_field['start_link_wrapper'] = $this->start_link_wrapper;
-                $list_field['end_link_wrapper'] = $this->end_link_wrapper;
-                $list_field['subpanel_id'] = $this->subpanel_id;
-                $list_field['parent_bean'] = $aItem;
-                $list_field = array_merge($list_field, $field_acl);
-
-                if ( isset($aItem->field_defs[strtolower($list_field['name'])])) {
-                    // We need to see if a sugar field exists for this field type first,
-                    // if it doesn't, toss it at the old sugarWidgets. This is for
-                    // backwards compatibility and will be removed in a future release
-                    $vardef = $aItem->field_defs[strtolower($list_field['name'])];
-                    if ( isset($vardef['type']) ) {
-                        $fieldType = isset($vardef['custom_type'])?$vardef['custom_type']:$vardef['type'];
-                        $tmpField = SugarFieldHandler::getSugarField($fieldType,true);
-                    } else {
-                        $tmpField = NULL;
-                    }
-
-                    if ( $tmpField != NULL ) {
-                        $widget_contents = SugarFieldHandler::displaySmarty($list_field['fields'],$vardef,'ListView',$list_field);
-                    } else {
-                        // No SugarField for this particular type
-                        // Use the old, icky, SugarWidget for now
-                        $widget_contents = $layout_manager->widgetDisplay($list_field);
-                    }
-
-                    if ( isset($list_field['widget_class']) && $list_field['widget_class'] == 'SubPanelDetailViewLink' ) {
-                        // We need to call into the old SugarWidgets for the time being, so it can generate a proper link with all the various corner-cases handled
-                        // So we'll populate the field data with the pre-rendered display for the field
-                        $list_field['fields'][$field_name] = $widget_contents;
-                        if('full_name' == $field_name){//bug #32465
-                           $list_field['fields'][strtoupper($field_name)] = $widget_contents;
-                        }
-
-                        //vardef source is non db, assign the field name to varname for processing of column.
-                        if(!empty($vardef['source']) && $vardef['source']=='non-db'){
-                            $list_field['varname'] = $field_name;
-
-                        }
-                        $widget_contents = $layout_manager->widgetDisplay($list_field);
-                    } else if(isset($list_field['widget_class']) && $list_field['widget_class'] == 'SubPanelEmailLink' ) {
-                        $widget_contents = $layout_manager->widgetDisplay($list_field);
-                    }
-
-                 $count++;
-                $this->xTemplate->assign('CELL_COUNT', $count);
-                $this->xTemplate->assign('CLASS', "");
-                if ( empty($widget_contents) ) $widget_contents = '&nbsp;';
-                $this->xTemplate->assign('CELL', $widget_contents);
-                $this->xTemplate->parse($xtemplateSection.".row.cell");
-                } else {
-                    // This handles the edit and remove buttons and icon widget
-                	if( isset($list_field['widget_class']) && $list_field['widget_class'] == "SubPanelIcon") {
-		                $count++;
-		                $widget_contents = $layout_manager->widgetDisplay($list_field);
-		                $this->xTemplate->assign('CELL_COUNT', $count);
-		                $this->xTemplate->assign('CLASS', "");
-		                if ( empty($widget_contents) ) $widget_contents = '&nbsp;';
-		                $this->xTemplate->assign('CELL', $widget_contents);
-		                $this->xTemplate->parse($xtemplateSection.".row.cell");
-                	} elseif (preg_match("/button/i", $list_field['name'])) {
-                        if ((($list_field['name'] === 'edit_button' && $field_acl['EditView']) || ($list_field['name'] === 'close_button' && $field_acl['EditView']) || ($list_field['name'] === 'remove_button' && $field_acl['field_edit_relate'])) && '' != ($_content = $layout_manager->widgetDisplay($list_field)) )
-                        {
-                            $button_contents[] = $_content;
-                            unset($_content);
-                        }
-                	} else {
-               			$count++;
-               			$this->xTemplate->assign('CLASS', "");
-               			$widget_contents = $layout_manager->widgetDisplay($list_field);
-		                $this->xTemplate->assign('CELL_COUNT', $count);
-		                if ( empty($widget_contents) ) $widget_contents = '&nbsp;';
-		                $this->xTemplate->assign('CELL', $widget_contents);
-		                $this->xTemplate->parse($xtemplateSection.".row.cell");
-                	}
+                    $this->xTemplate->assign('PREROW', '');
                 }
 
+                if ($aItem->ACLAccess('DetailView')) {
+                    $this->xTemplate->assign('TAG_NAME', 'a');
+                } else {
+                    $this->xTemplate->assign('TAG_NAME', 'span');
+                }
+
+                $this->xTemplate->assign('CHECKALL', "<input type='checkbox'  title='" . $GLOBALS['app_strings']['LBL_SELECT_ALL_TITLE'] . "' class='checkbox' name='massall' id='massall' value='' onclick='sListView.check_all(document.MassUpdate, \"mass[]\", this.checked);' />");
             }
+
+            if ($oddRow) {
+                $ROW_COLOR = 'oddListRow';
+                $BG_COLOR = $odd_bg;
+            } else {
+                $ROW_COLOR = 'evenListRow';
+                $BG_COLOR = $even_bg;
+            }
+
+            $oddRow = !$oddRow;
+            $button_contents = array();
+            $this->xTemplate->assign("ROW_COLOR", $ROW_COLOR);
+            $this->xTemplate->assign("BG_COLOR", $BG_COLOR);
+            $layout_manager = $this->getLayoutManager();
+            $layout_manager->setAttribute('context', 'List');
+            $layout_manager->setAttribute('image_path', $this->local_image_path);
+            $layout_manager->setAttribute('module_name', $subpanel_def->_instance_properties['module']);
+
+            if (!empty($this->child_focus)) {
+                $layout_manager->setAttribute('related_module_name', $this->child_focus->module_dir);
+            }
+
+            //select which sub-panel to display here, the decision will be made based on the type of
+            //the sub-panel and panel in the bean being processed.
+            if ($subpanel_def->isCollection()) {
+                $thepanel = $subpanel_def->sub_subpanels[$aItem->panel_name];
+            } else {
+                $thepanel = $subpanel_def;
+            }
+
+            //get data source name
+            $linked_field = $thepanel->get_data_source_name();
+            $linked_field_set = $thepanel->get_data_source_name(true);
+
+            static $count;
+
+            if (!isset($count)) {
+                $count = 0;
+            }
+
+            $field_acl['DetailView'] = $aItem->ACLAccess('DetailView');
+            $field_acl['ListView'] = $aItem->ACLAccess('ListView');
+            $field_acl['EditView'] = $aItem->ACLAccess('EditView');
+            $field_acl['Delete'] = $aItem->ACLAccess('Delete');
+            $field_acl['field_edit_relate'] = $this->checkUnlinkPermission($linked_field, $aItem, $thepanel->parent_bean);
+
+            foreach ($thepanel->get_list_fields() as $field_name => $list_field) {
+                //add linked field attribute to the array.
+                $list_field['linked_field'] = $linked_field;
+                $list_field['linked_field_set'] = $linked_field_set;
+
+                $usage = empty($list_field['usage']) ? '' : $list_field['usage'];
+
+                if ($usage != 'query_only') {
+                    $list_field['name'] = $field_name;
+                    $module_field = $field_name . '_mod';
+                    $owner_field = $field_name . '_owner';
+
+                    if (!empty($aItem->$module_field)) {
+                        $list_field['owner_id'] = $aItem->$owner_field;
+                        $list_field['owner_module'] = $aItem->$module_field;
+                    } else {
+                        $list_field['owner_id'] = false;
+                        $list_field['owner_module'] = false;
+                    }
+
+                    if (isset($list_field['alias'])) {
+                        $list_field['name'] = $list_field['alias'];
+                    } else {
+                        $list_field['name'] = $field_name;
+                    }
+
+                    $list_field['fields'] = $fields;
+                    $list_field['module'] = $aItem->module_dir;
+                    $list_field['start_link_wrapper'] = $this->start_link_wrapper;
+                    $list_field['end_link_wrapper'] = $this->end_link_wrapper;
+                    $list_field['subpanel_id'] = $this->subpanel_id;
+                    $list_field['parent_bean'] = $aItem;
+                    $list_field = array_merge($list_field, $field_acl);
+
+                    if (isset($aItem->field_defs[strtolower($list_field['name'])])) {
+                        // We need to see if a sugar field exists for this field type first,
+                        // if it doesn't, toss it at the old sugarWidgets. This is for
+                        // backwards compatibility and will be removed in a future release
+                        $vardef = $aItem->field_defs[strtolower($list_field['name'])];
+
+                        if (isset($vardef['type'])) {
+                            $fieldType = isset($vardef['custom_type']) ? $vardef['custom_type'] : $vardef['type'];
+                            $tmpField = SugarFieldHandler::getSugarField($fieldType, true);
+                        } else {
+                            $tmpField = null;
+                        }
+
+                        if ($tmpField !== null) {
+                            $widget_contents = SugarFieldHandler::displaySmarty($list_field['fields'], $vardef, 'ListView', $list_field);
+                        } else {
+                            // No SugarField for this particular type
+                            // Use the old, icky, SugarWidget for now
+                            $widget_contents = $layout_manager->widgetDisplay($list_field);
+                        }
+
+                        if (isset($list_field['widget_class']) && $list_field['widget_class'] == 'SubPanelDetailViewLink') {
+                            // We need to call into the old SugarWidgets for the time being, so it can generate a proper link with all the various corner-cases handled
+                            // So we'll populate the field data with the pre-rendered display for the field
+                            $list_field['fields'][$field_name] = $widget_contents;
+                            if ('full_name' == $field_name) {//bug #32465
+                                $list_field['fields'][strtoupper($field_name)] = $widget_contents;
+                            }
+
+                            // vardef source is non db, assign the field name to varname for processing of column.
+                            if (!empty($vardef['source']) && $vardef['source'] == 'non-db') {
+                                $list_field['varname'] = $field_name;
+                            }
+
+                            $widget_contents = $layout_manager->widgetDisplay($list_field);
+                        } elseif (isset($list_field['widget_class'])
+                            && $list_field['widget_class'] == 'SubPanelEmailLink'
+                        ) {
+                            $widget_contents = $layout_manager->widgetDisplay($list_field);
+                        }
+
+                        $count++;
+                        $this->xTemplate->assign('CELL_COUNT', $count);
+                        $this->xTemplate->assign('CLASS', "");
+
+                        if (empty($widget_contents)) {
+                            $widget_contents = '&nbsp;';
+                        }
+
+                        $this->xTemplate->assign('CELL', $widget_contents);
+                        $this->xTemplate->parse($xTemplateSection . ".row.cell");
+                    } else {
+                        // This handles the edit and remove buttons and icon widget
+                        if (isset($list_field['widget_class']) && $list_field['widget_class'] == "SubPanelIcon") {
+                            $count++;
+                            $widget_contents = $layout_manager->widgetDisplay($list_field);
+                            $this->xTemplate->assign('CELL_COUNT', $count);
+                            $this->xTemplate->assign('CLASS', "");
+
+                            if (empty($widget_contents)) {
+                                $widget_contents = '&nbsp;';
+                            }
+
+                            $this->xTemplate->assign('CELL', $widget_contents);
+                            $this->xTemplate->parse($xTemplateSection . ".row.cell");
+                        } elseif (preg_match("/button/i", $list_field['name'])) {
+                            if ((($list_field['name'] === 'edit_button' && $field_acl['EditView']) || ($list_field['name'] === 'close_button' && $field_acl['EditView']) || ($list_field['name'] === 'remove_button' && $field_acl['field_edit_relate'])) && '' != ($_content = $layout_manager->widgetDisplay($list_field))) {
+                                $button_contents[] = $_content;
+                                unset($_content);
+                            }
+                        } else {
+                            $count++;
+                            $this->xTemplate->assign('CLASS', "");
+                            $widget_contents = $layout_manager->widgetDisplay($list_field);
+                            $this->xTemplate->assign('CELL_COUNT', $count);
+
+                            if (empty($widget_contents)) {
+                                $widget_contents = '&nbsp;';
+                            }
+
+                            $this->xTemplate->assign('CELL', $widget_contents);
+                            $this->xTemplate->parse($xTemplateSection . ".row.cell");
+                        }
+                    }
+                }
+            }
+
+            // Make sure we have at least one button before rendering a column for
+            // the action buttons in a list view. Relevant bugs: #51647 and #51640.
+            if (isset($button_contents[0])) {
+                // this is for inline buttons on listviews
+                // bug#51275: smarty widget to help provide the action menu functionality as it is currently sprinkled throughout the app with html
+                require_once 'include/SugarSmarty/plugins/function.sugar_action_menu.php';
+
+                $tempid = create_guid();
+                $button_contents[0] = "<div style='display: inline' id='$tempid'>" . $button_contents[0] . "</div>";
+                $action_button = smarty_function_sugar_action_menu(array(
+                    'id' => $tempid,
+                    'buttons' => $button_contents,
+                    'class' => 'clickMenu subpanel records fancymenu button',
+
+                    // assign flat value as false to display dropdown menu at any other preferences
+                    'flat' => false,
+                ), $this->xTemplate);
+
+                $this->xTemplate->assign('CLASS', "inlineButtons");
+                $this->xTemplate->assign('CELL_COUNT', ++$count);
+
+                //Bug#51275 for beta3 pre_script is not required any more
+                $this->xTemplate->assign('CELL', $action_button);
+                $this->xTemplate->parse($xTemplateSection . ".row.cell");
+            }
+
+            $aItem->setupCustomFields($aItem->module_dir);
+            $aItem->custom_fields->populateAllXTPL($this->xTemplate, 'detail', $html_varName, $fields);
+
+            $count++;
+
+            $this->xTemplate->parse($xTemplateSection . ".row");
         }
 
-
-        // Make sure we have at least one button before rendering a column for
-        // the action buttons in a list view. Relevant bugs: #51647 and #51640.
-        if(isset($button_contents[0])) {
-            // this is for inline buttons on listviews
-            // bug#51275: smarty widget to help provide the action menu functionality as it is currently sprinkled throughout the app with html
-            require_once('include/SugarSmarty/plugins/function.sugar_action_menu.php');
-            $tempid = create_guid();
-            $button_contents[0] = "<div style='display: inline' id='$tempid'>".$button_contents[0]."</div>";
-            $action_button = smarty_function_sugar_action_menu(array(
-                'id' => $tempid,
-                'buttons' => $button_contents,
-                'class' => 'clickMenu subpanel records fancymenu button',
-                'flat' => false //assign flat value as false to display dropdown menu at any other preferences.
-            ), $this->xTemplate);
-            $this->xTemplate->assign('CLASS', "inlineButtons");
-            $this->xTemplate->assign('CELL_COUNT', ++$count);
-            //Bug#51275 for beta3 pre_script is not required any more
-            $this->xTemplate->assign('CELL', $action_button);
-            $this->xTemplate->parse($xtemplateSection.".row.cell");
-        }
-
-
-        $aItem->setupCustomFields($aItem->module_dir);
-        $aItem->custom_fields->populateAllXTPL($this->xTemplate, 'detail', $html_varName, $fields);
-
-        $count++;
-
-        $this->xTemplate->parse($xtemplateSection.".row");
+        $this->xTemplate->parse($xTemplateSection);
     }
-
-    $this->xTemplate->parse($xtemplateSection);
-}
 
 /**sets whether or not to display the xtemplate header and footer
  * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
@@ -2032,4 +2066,18 @@ function getUserVariable($localVarName, $varName) {
     $this->_additionalDetails = $value;
  }
 
+    private function formatRowDates(SugarBean $bean, array $row) : array
+    {
+        foreach ($bean->field_defs as $name => $field_def) {
+            $nameUpper = strtoupper($name);
+
+            if (!isset($row[$nameUpper])) {
+                continue;
+            }
+
+            $row[$nameUpper] = ViewDateFormatter::format($field_def['type'], $row[$nameUpper]);
+        }
+
+        return $row;
+    }
 }

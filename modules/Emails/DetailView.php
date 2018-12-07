@@ -444,11 +444,12 @@ if ($do_open) {
 ///////////////////////////////////////////////////////////////////////////////
 
 $note = BeanFactory::newBean('Notes');
-$where = "notes.parent_id='{$focus->id}'";
+//FIXME: notes.email_type should be Emails
+$where = 'notes.email_id=' . $GLOBALS['db']->quoted($focus->id);
 //take in account if this is from campaign and the template id is stored in the macros.
 
 if(isset($macro_values) && isset($macro_values['email_template_id'])){
-    $where = "notes.parent_id='{$macro_values['email_template_id']}'";
+    $where = 'notes.email_id=' . $GLOBALS['db']->quoted($macro_values['email_template_id']);
 }
 $notes_list = $note->get_full_list("notes.name", $where, true);
 

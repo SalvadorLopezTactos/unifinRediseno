@@ -51,7 +51,7 @@
 
  	function build(){
  		//we will assume that if the ListView.html file exists we will want to use that one
- 		if(SugarAutoLoader::fileExists('modules/'.$this->module.'/ListView.html')){
+        if (file_exists('modules/'.$this->module.'/ListView.html')) {
  			$this->type = 1;
  			$this->lv = new ListView();
  			$this->template = 'modules/'.$this->module.'/ListView.html';

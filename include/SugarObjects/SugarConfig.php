@@ -13,9 +13,24 @@
  * Config manager
  * @api
  */
-class SugarConfig
+class SugarConfig implements SplSubject
 {
     public $_cached_values = array();
+
+    /**
+     * Observers of the configuration changes
+     *
+     * @var SplObjectStorage|SplObserver[]
+     */
+    private $observers;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->observers = new SplObjectStorage();
+    }
 
     static function getInstance() {
         static $instance = null;
@@ -40,6 +55,33 @@ class SugarConfig
         } else {
             unset($this->_cached_values[$key]);
         }
+
+        $this->notify();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function attach(SplObserver $observer)
+    {
+        $this->observers->attach($observer);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function detach(SplObserver $observer)
+    {
+        $this->observers->detach($observer);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function notify()
+    {
+        foreach ($this->observers as $observer) {
+            $observer->update($this);
+        }
     }
 }
-

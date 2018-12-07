@@ -55,7 +55,7 @@ $mod_strings = array(
     'ERROR_MANIFEST_TYPE'                       => 'Le fichier Manifest doit spécifier le type du package.',
     'ERROR_PACKAGE_TYPE'                        => 'Le fichier Manifest spécifie un type de package non reconnu : %s',
     'ERROR_VERSION_INCOMPATIBLE'                => 'Le fichier uploadé n&#39; est pas compatible avec cette version de Sugar :',
-    'ERROR_FLAVOR_INCOMPATIBLE'                 => 'Le fichier uploadé n&#39; est pas compatible avec cette version (Community Édition, Professional, ou Enterprise) de SugarCRM :',
+    'ERROR_FLAVOR_INCOMPATIBLE'                 => 'Le fichier chargé n&#39;est pas compatible avec cette version (édition Professional, Enterprise ou Ultimate) de Sugar : %s',
 
     'ERROR_UW_CONFIG_DB'                        => 'Erreur lors de la sauvegarde de la variable de configuration %s en base de donnée (clé %s, valeur %s).',
     'ERR_NOT_ADMIN'                             => "Accès non autorisé à l'administration.",
@@ -98,7 +98,7 @@ $mod_strings = array(
 	'LBL_UW_COMPLIANCE_MYSQL'					=> 'Version minimale de MySQL',
     'LBL_UW_COMPLIANCE_DB'                      => 'Version minimum de la base de données',
 	'LBL_UW_COMPLIANCE_PHP_INI'					=> 'Chemin du fichier php.ini',
-	'LBL_UW_COMPLIANCE_PHP_VERSION'				=> 'Version minimale de PHP',
+    'LBL_UW_COMPLIANCE_PHP_VERSION'             => 'Version de PHP',
 	'LBL_UW_COMPLIANCE_SAFEMODE'				=> 'Paramètre PHP : Safe Mode',
 	'LBL_UW_COMPLIANCE_TITLE'					=> 'Verification des paramètres serveur',
 	'LBL_UW_COMPLIANCE_TITLE2'					=> 'Paramètres détectés',
@@ -243,7 +243,6 @@ $mod_strings = array(
 	'LBL_UW_DROP_SCHEMA_METHOD'					=> 'Méthode de suppression de l&#39;ancien schéma',
 	'LBL_UW_SHOW_OLD_SCHEMA_TO_DROP'			=> 'Afficher l&#39;ancien schéma qui doit être supprimé',
 	'LBL_UW_SKIPPED_QUERIES_ALREADY_EXIST'      => 'Requêtes ignorées',
-	'LBL_INCOMPATIBLE_PHP_VERSION'              => 'Php version 5 ou supérieur est requis.',
 	'ERR_CHECKSYS_PHP_INVALID_VER'      => 'Votre version de PHP n&#39; est pas supportée par SugarCRM. Vous devez installer une version de PHP compatible avec SugarCRM. Merci de consulter la matrice de compatibilté disponible dans le document "Release Notes" pour voir quelle versions de PHP sont supportées par SugarCRM. Votre version actuelle est',
 	'LBL_BACKWARD_COMPATIBILITY_ON' 			=> 'Php Backward Compatibility mode est positionné à on. Mettre zend.ze1_compatibility_mode à Off pour pouvoir continuer',
 	//including some strings from moduleinstall that are used in Upgrade
@@ -260,8 +259,6 @@ $mod_strings = array(
 	'LBL_ML_INSTALL'=>'Installation',
 	//adding the string used in tracker. copying from homepage
 	'LBL_HOME_PAGE_4_NAME' => 'Module de suivi',
-	'LBL_CURRENT_PHP_VERSION' => '(Votre version courrante de PHP est la',
-	'LBL_RECOMMENDED_PHP_VERSION' => '. La version de PHP recommandée est la 5.2.1 ou supérieure)',
 	'LBL_MODULE_NAME' => 'Assistant de mise à jour',
 	'LBL_MODULE_NAME_SINGULAR' => 'Assistant de mise à jour',
 	'LBL_UPLOAD_SUCCESS' => 'Package de mise à jour correctement transféré. Cliquez sur Suivant pour réaliser une dernière vérification.',

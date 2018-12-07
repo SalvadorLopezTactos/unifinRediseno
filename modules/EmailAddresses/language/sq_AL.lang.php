@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'krijim i të dhënës',
     'LBL_DATE_MODIFIED' => 'Të dhëna të modifikuara',
     'LBL_DELETED' => 'Fshi',
+    'LBL_MODULE_NAME' => 'Adresat e emailit',
+    'LBL_MODULE_NAME_SINGULAR' => 'Adresa e emailit',
 );

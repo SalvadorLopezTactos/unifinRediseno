@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Získajte zákaznícky kľúč z LogMeIn registráciou do novej aplikácie GoToMeeting.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Kroky pre registrovanie vašej inštancie:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Prihláste sa do svojho účtu vývojového centra LogMeIn: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Kliknite na Moje aplikácie</li>
+    <li>Kliknite na Pridať novú aplikáciu</li>
+    <li>Vyplňte všetky políčka na formulári Pridať aplikáciu:</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>Názov aplikácie</li>
+            <li>Popis</li>
+            <li>API produktu: vyberte GoToMeeting</li>
+            <li>URL aplikácie: Zadajte URL vašej inštancie</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Kliknite na tlačidlo Vytvoriť aplikáciu</li>
+    <li>Zo zoznamu aplikácií kliknite na názov vašej aplikácie</li>
+    <li>Kliknite na Záložku kľúčov</li>
+    <li>Skopírujte hodnotu Zákazníckeho kľúča a zadajte ju nižšie</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Zákaznícky Kľúč',
 );

@@ -27,5 +27,7 @@
             <i class="fa {{def.icon}}"></i>
         {{/if}}
     {{/if}}
-    {{str label}}
+    {{#unless def.dismiss_label}}
+        {{str label}}
+    {{/unless}}
 </a>

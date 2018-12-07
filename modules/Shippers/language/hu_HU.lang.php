@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Adjon meg egy rekordot a szállítási szolgáltató törléséhez!',
   'NTC_STATUS' => 'Állítsa inaktív állapotba ezt a szállítási szolgáltatót mielőtt eltávolítja a legördülő listából',
   'NTC_LIST_ORDER' => 'Állítsa be a sorrendet, ahogy a szállítási szolgáltató meg fog jelenni a legördülő listában',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Aktív',
-    'Inactive' => 'Inaktív',
-),
-	'LBL_EDITLAYOUT' => 'Elrendezés szerkesztése' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Elrendezés szerkesztése' /*for 508 compliance fix*/,
 );
-
 
 ?>

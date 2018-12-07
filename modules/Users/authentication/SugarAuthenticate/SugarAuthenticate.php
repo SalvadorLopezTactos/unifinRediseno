@@ -16,7 +16,8 @@ use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
  * This file is used to control the authentication process.
  * It will call on the user authenticate and controll redirection
  * based on the users validation
- *
+ * @deprecated Will be removed in 7.11. IDM-46
+ * @deprecated Please use new idM Mango library Glue \IdMSugarAuthenticate
  */
 class SugarAuthenticate{
 	var $userAuthenticateClass = 'SugarAuthenticateUser';
@@ -44,7 +45,13 @@ class SugarAuthenticate{
 	 * @return boolean
 	 */
 	function loginAuthenticate($username, $password, $fallback=false, $PARAMS = array ()){
-		global $app_strings;
+        global $app_strings, $log;
+        $log->deprecated(sprintf(
+            'The %s in %s was called. Please see \IdMSugarAuthenticate',
+            __METHOD__,
+            __CLASS__
+        ));
+
 		unset($_SESSION['login_error']);
 		$res = $GLOBALS['sugar_config']['passwordsetting'];
         $usr = BeanFactory::newBean('Users');

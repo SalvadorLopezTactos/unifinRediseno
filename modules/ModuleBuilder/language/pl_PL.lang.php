@@ -117,11 +117,11 @@ $mod_strings = array(
         'defaultdetailview'=>'Obszar <b>Układ</b> zawiera pola, które są aktualnie wyświetlane w ramach formularza <b>Widok szczegółowy</b>.<br/><br/>Obszar <b>Narzędzia</b> zawiera <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je pomiędzy obszarami <b>Narzędzia</b> i <b>Układ</b> oraz z samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Określa pole zależne, które może być widoczne lub niewidoczne w zależności od wartości wzoru.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Określa obliczone pole, którego wartość zostanie automatycznie określona na podstawie wzoru.'
     ,
-        'defaultquickcreate'=>'Obszar <b>Układ</b> zawiera pola aktualnie wyświetlane w ramach formularza <b>Szybkie tworzenie</b>.<br><br>Formularz Szybkie tworzenie jest wyświetlany w panelach podrzędnych dla modułu po naciśnięciu przycisku Utwórz.<br/><br/>W obszarze <b>Narzędzia</b> znajduje się <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je pomiędzy obszarami <b>Narzędzia</b> i <b>Układ</b> oraz z samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
+        'defaultquickcreate'=>'Obszar <b>Układ</b> zawiera pola, które są aktualnie wyświetlane w ramach formularza <b>QuickCreate<b>.<br><br> Formularz QuickCreate pojawia się w panelach podrzędnych dla modułu po kliknięciu przycisku Utwórz.<br/><br/>Obszar <b>Narzędzia</b> zawiera <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się przeciągając elementy i upuszczając je pomiędzy obszarami <b>Narzędzia</b> i <b>Układ</b> oraz w obrębie samego układu.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Określa pole zależne, które może być widoczne lub niewidoczne w zależności od wartości wzoru.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Określa obliczone pole, którego wartość zostanie automatycznie określona na podstawie wzoru.'
     ,
         //this defualt will be used for edit view
-        'default'	=> 'Obszar <b>Układ</b> zawiera pola, które są aktualnie wyświetlane w ramach formularza <b>Widok edycji</b>.<br/><br/>Obszar <b>Narzędzia</b> zawiera <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je pomiędzy obszarami <b>Narzędzia</b> i <b>Układ</b> oraz z samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
+        'default'	=> 'Obszar <b>Układ</b> zawiera pola, które są aktualnie wyświetlane w ramach <b>Widoku edycji</b>.<br/><br/>Obszar <b>Narzędzia</b> zawiera <b>Kosz</b> oraz pola i elementy układu, które można dodać do układu.<br><br>Zmiany w układzie wprowadza się, przeciągając elementy i upuszczając je pomiędzy obszarami <b>Narzędzia</b> i <b>Układ</b> oraz z samym układzie.<br><br>Aby usunąć pole z układu, przeciągnij pole do <b>Kosza</b>. Pole będzie wówczas dostępne w obszarze Narzędzia do dodania do układu.'
     . '<br/><br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_dependent.png"/>Określa pole zależne, które może być widoczne lub niewidoczne w zależności od wartości wzoru.<br/><!--not_in_theme!--><img src="themes/default/images/SugarLogic/icon_calculated.png" /> Określa obliczone pole, którego wartość zostanie automatycznie określona na podstawie wzoru.'
     ,
         //this defualt will be used for edit view
@@ -743,9 +743,9 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Usunięcie tego pola niestandardowego spowoduje usunięcie zarówno pola niestandardowego, jak i danych powiązanych z polem niestandardowym w bazie danych. Pole nie będzie dłużej wyświetlane w żadnym układzie modułu.'
         . ' Jeśli to pole jest uwzględnione we wzorze obliczania wartości dla jakichkolwiek pól, wzór tej przestanie działać.'
-        . '\n\nTo pole nie będzie już dostępne do użycia w Raportach; ta zmiana będzie obowiązywać od wylogowania i ponownego zalogowania do aplikacji. Wszelkie raporty zawierające to pole należy zaktualizować, aby można je było uruchomić.'
-        . '\n\nCzy chcesz kontynuować?',
-'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Czy na pewno chcesz usunąć tę relację?<br>Uwaga: Ta operacja może zakończyć się przez kilka minut.',
+        . '\\n\\nTo pole nie będzie już dostępne do użycia w Raportach; ta zmiana będzie obowiązywać od wylogowania i ponownego zalogowania do aplikacji. Wszelkie raporty zawierające to pole należy zaktualizować, aby można je było uruchomić.'
+        . '\\n\\nCzy chcesz kontynuować?',
+'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Czy na pewno chcesz usunąć to powiązanie?<br>Uwaga: ta operacja może potrwać wiele minut.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Spowoduje to ustawienie relacji jako trwałej. Czy na pewno chcesz zamieścić tę relację?',
 'LBL_CONFIRM_DONT_SAVE' => 'Od ostatniego zapisu zostały wprowadzone zmiany. Czy chcesz zapisać je teraz?',
 'LBL_CONFIRM_DONT_SAVE_TITLE' => 'Zapisać zmiany?',
@@ -756,22 +756,23 @@ Jeśli Szanse są uwzględnione, moduł Kontrahenci musi być wymagany lub usuni
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Skonfiguruj pole, aby można było przeprowadzać w nim wyszukiwanie pełnotekstowe.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Zwiększanie poziomu istotności to proces zwiększania znaczenia pól rekordu.<br />Pola o większym poziomie istotności będą miały większą wagę przy wyszukiwaniu. Przy przeprowadzaniu wyszukiwania zgodne rekordy z polami o większej wadze będą wyświetlane wyżej w wynikach wyszukiwania.<br />Domyślna wartość wynosi 1,0 i oznacza neutralny poziom istotności. Aby zwiększyć poziom istotności, można zastosować dowolną wartość zmiennoprzecinkową większą od 1. Zmniejszenie poziomu istotności można uzyskać, stosując wartości niższe niż 1. Na przykład wartość 1,35 spowoduje zwiększenie istotności pola o 135%. Użycie wartości 0,60 spowoduje zmniejszenie poziomu istotności.<br />Uwaga: w poprzednich wersjach wymagane było przeprowadzenie ponownego indeksowania dla wyszukiwania pełnotekstowego. Teraz nie jest to konieczne.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Tak</b>: Pole będzie zawarte w imporcie.<br><b>Nie</b>: Pole nie będzie zawarte w imporcie.<br><b>Wymagane</b>: Wartość pola musi być wypełniona w każdym imporcie.',
+'LBL_POPHELP_PII'=>'To pole zostanie automatycznie oznaczone do inspekcji i dostępne w widoku Informacji osobowych.<br>Pola Informacji osobowych można również usunąć na stałe, gdy rekord jest powiązany z żądaniem usunięcia danych osobowych.<br>Usunięcie zostaje wykonane za pośrednictwem modułu Ochrona danych osobowych i mogą je wykonać administratorzy lub użytkownicy pełniący rolę menedżera ochrony danych osobowych.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Wprowadź szerokość w pikselach. <br> Załadowany obrazek zostanie wyskalowany do takiej szerokości.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Wprowadź wysokość w pikselach. <br> Załadowany obrazek zostanie wyskalowany do takiej wysokości.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Włączone</b>: to pole będzie wyświetlane w funkcji Scalanie duplikatów, ale nie będzie go można użyć dla warunków filtra w funkcji Znajdź duplikaty.<br><b>Wyłączone</b>: to pole nie będzie wyświetlane w funkcji Scalanie duplikatów i nie będzie dostępne do użycia dla warunków filtra w funkcji Znajdź duplikaty.'
 . '<br><b>W filtrze</b>: pole będzie wyświetlane w funkcji Scalanie duplikatów, a także będzie dostępne w funkcji Znajdź duplikaty.<br><b>Tylko filtr</b>: pole nie będzie wyświetlane w funkcji Scalanie duplikatów, ale będzie dostępne w funkcji Znajdź duplikaty.<br><b>Domyślny wybrany filtr</b>: pole będzie użyte dla warunku filtra domyślnie na stronie Znajdź duplikaty i będzie również wyświetlane w funkcji Scalanie duplikatów.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Utwórz wzór określający wartość w tym polu.<br>"
-   . "Definicje przepływu pracy zawierające czynność ustawioną tak, aby aktualizować to pole, nie będą już wykonywać tej czynności. <br>"
-   . "Pola, w których zastosowano wzory, nie będą obliczane w czasie rzeczywistym w "
-   . "Portalu samoobsługowym Sugar lub "
-   . "Mobilne układy EditView.",
+'LBL_POPHELP_CALCULATED'=>"Utwórz formułę do określenia wartości w tym polu.<br>"
+   . "Definicje Workflow zawierające czynność, które zostały ustawione do aktualizacji tego pola przestaną wykonywać tę czynność.<br>"
+   . "Pola wykorzystujące tę formułę nie będą obliczane w czasie rzeczywistym w "
+   . "portal Self-Service Sugar lub "
+   . "Układy Mobile EditView.",
 
-'LBL_POPHELP_DEPENDENT'=>"Utwórz wzór do określania, czy to pole jest widoczne w układach.<br/>"
-        . "Pola zależne będą uwzględniać wzór zależności w widoku mobilnym na podstawie przeglądarki,<br/>"
-        . "ale nie będą uwzględniać wzoru w aplikacjach natywnych, takich jak Sugar Mobile for iPhone.<br/>"
-        . "Nie będą uwzględniać wzoru w portalu Sugar Self-Service Portal.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Zaznacz, aby użyć tego pola podczas wyszukiwania rekordów przy użyciu wyszukiwania globalnego w module.',
+'LBL_POPHELP_DEPENDENT'=>"Utwórz formułę, aby ustalić, czy to pole jest widoczne w układach.<br/>"
+        . "Pola zależne będą podlegały formule zależności w mobilnym widoku opartym na przeglądarce, <br/>"
+        . "ale nie będą podlegały tej formule w natywnych aplikacjach, takich jak Sugar Mobile dla iPhone. <br/>"
+        . "Nie będą podlegały tej formule w portalu Sugar Self-Service.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Zaznacz, aby użyć tego pola podczas wyszukiwania rekordów za pomocą funkcji Wyszukiwanie globalne w tym module.',
 //Revert Module labels
 'LBL_RESET' => 'Resetuj',
 'LBL_RESET_MODULE' => 'Przywróć moduł',

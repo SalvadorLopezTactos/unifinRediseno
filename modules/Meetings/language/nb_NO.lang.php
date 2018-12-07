@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Dashbord for møteliste',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Dashbord for møteoppføring',
+
 	'ERR_DELETE_RECORD' => 'Et registreringsnummer må oppgis for å kunne slette møtet.',
 	'LBL_ACCEPT_THIS'=>'Godta?',
 	'LBL_ADD_BUTTON'=> 'Tilføy',

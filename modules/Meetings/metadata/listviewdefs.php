@@ -23,7 +23,7 @@ array (
       0 => 'status',
     ),
   ),
-  'JOIN_MEETING' => 
+  'JOIN_MEETING' =>
   array (
     'width' => '1',
     'label' => 'LBL_LIST_JOIN_MEETING',
@@ -34,7 +34,7 @@ array (
     array('join_url', 'host_url'),
     'noHeader' => true,
   ),
-  'NAME' => 
+  'NAME' =>
   array (
     'width' => '40',
     'label' => 'LBL_LIST_SUBJECT',

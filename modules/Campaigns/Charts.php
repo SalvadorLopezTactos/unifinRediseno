@@ -133,12 +133,24 @@ class campaign_charts {
             // Since this isn't a standard report chart (with report defs), set the group_by manually so the chart bars show properly
             $sugarChart->group_by = array('activity_type', 'target_type');
 
-			if($camp_data)
-			$sugarChart->setData($camp_data);
-			else
-			$sugarChart->setData(array());
+            if ($camp_data) {
+                $sugarChart->setData($camp_data);
+            } else {
+                $sugarChart->setData(array());
+            }
 
-			$sugarChart->setProperties($mod_strings['LBL_CAMPAIGN_RESPONSE_BY_RECIPIENT_ACTIVITY'], "", 'horizontal group by chart');
+            $sugarChart->setProperties(
+                $mod_strings['LBL_CAMPAIGN_RESPONSE_BY_RECIPIENT_ACTIVITY'],
+                "",
+                'horizontal group by chart',
+                'on', // legend
+                'value', // labels
+                'off', // print
+                false, // thousands
+                'Campaigns',
+                'Campaign Response Status'
+            );
+
 			$sugarChart->saveXMLFile($xmlFile, $sugarChart->generateXML());
 		}
 
@@ -284,7 +296,21 @@ class campaign_charts {
 	 		$sugarChart->setData($opp_data1);
 		else
 			$sugarChart->setData(array());
-		$sugarChart->setProperties($mod_strings['LBL_CAMPAIGN_RETURN_ON_INVESTMENT'], $mod_strings['LBL_AMOUNT_IN'].$currency_symbol, 'bar chart');
+
+        $sugarChart->setProperties(
+            $mod_strings['LBL_CAMPAIGN_RETURN_ON_INVESTMENT'], // title
+            $mod_strings['LBL_AMOUNT_IN'].$currency_symbol, // subtitle
+            'bar chart',
+            'on', // legend
+            'value', // labels
+            'off', // print
+            false, // thousands
+            'Campaigns',
+            'Campaign ROI chart'
+        );
+
+        $sugarChart->setDisplayProperty('xDataType', 'ordinal');
+        $sugarChart->setDisplayProperty('yDataType', 'currency');
 
     	if (!$is_dashlet){
 			$xmlFile = $sugarChart->getXMLFileName('roi_details_chart');

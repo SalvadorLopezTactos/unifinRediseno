@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Megjegyzések listája műszerfal',
+
     'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót a kliens törléséhez!',
     'LBL_ACCOUNT_ID' => 'Kliens azonosító:',
     'LBL_CASE_ID' => 'Eset azonosító:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Feljegyzés',
     'LBL_EMAIL_ADDRESS' => 'Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Email melléklet',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'E-mail melléklet a következő számára:',
     'LBL_FILE_MIME_TYPE' => 'Mime típus',
+    'LBL_FILE_EXTENSION' => 'Fájl kiterjesztése',
+    'LBL_FILE_SOURCE' => 'Fájl forrása',
+    'LBL_FILE_SIZE' => 'Fájlméret',
     'LBL_FILE_URL' => 'Fájl URL',
     'LBL_FILENAME' => 'Melléklet:',
     'LBL_LEAD_ID' => 'Ajánlás azonosítója:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Lehetőség azonosítója:',
     'LBL_PARENT_ID' => 'Szülő azonosítója:',
     'LBL_PARENT_TYPE' => 'Szülő típus',
+    'LBL_EMAIL_TYPE' => 'E-mail típusa',
+    'LBL_EMAIL_ID' => 'E-mail azonosítója',
     'LBL_PHONE' => 'Telefon:',
     'LBL_PORTAL_FLAG' => 'Megjelenjen a portálon?',
     'LBL_EMBED_FLAG' => 'Beágyazza emailbe?',

@@ -10,11 +10,20 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
+
 class EmployeesViewEdit extends ViewEdit {
     var $useForSubpanel = true;
 
  	function display() {
        	if(is_admin($GLOBALS['current_user'])) {
+
+            $idpConfig = new IdmConfig(\SugarConfig::getInstance());
+            if ($idpConfig->isIDMModeEnabled() && !$this->bean->isUpdate()) {
+                $this->showRedirectToCloudConsole($idpConfig->buildCloudConsoleUrl('userCreate'));
+            }
+
             $json = getJSONobj();
             $qsd = QuickSearchDefaults::getQuickSearchDefaults();
             $sqs_objects = array('EditView_reports_to_name' => $qsd->getQSUser());
@@ -51,6 +60,29 @@ class EmployeesViewEdit extends ViewEdit {
             }
         }
 
+        // Check for IDM mode.
+        $idpConfig = new Authentication\Config(\SugarConfig::getInstance());
+        $this->ss->assign('SHOW_NON_EDITABLE_FIELDS_ALERT', $idpConfig->isIDMModeEnabled());
+        if ($GLOBALS['current_user']->isAdminForModule('Users') && $this->bean->id !== $GLOBALS['current_user']->id) {
+            $label = 'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER';
+        } else {
+            $label = 'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER';
+        }
+        $this->ss->assign('NON_EDITABLE_FIELDS_MSG', translate($label, 'Users'));
+
  		parent::display();
  	}
+
+    /**
+     * Show redirect to cloud console
+     * @param string $url cloud console url
+     */
+    protected function showRedirectToCloudConsole($url)
+    {
+        $ss = new Sugar_Smarty();
+        $error = string_format($GLOBALS['mod_strings']['ERR_CREATE_EMPLOYEE_FOR_IDM_MODE'], [$url]);
+        $ss->assign("error", $error);
+        $ss->display('modules/Users/tpls/errorMessage.tpl');
+        sugar_cleanup(true);
+    }
 }

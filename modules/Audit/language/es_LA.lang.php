@@ -10,14 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array(
-    'LBL_AUDIT_TITLE' => 'Ver Registro de Cambios',
+    'LBL_AUDIT_TITLE' => 'Registro de auditoría',
     'LBL_FIELD_NAME' => 'Campo',
     'LBL_OLD_NAME' => 'Valor Anterior',
     'LBL_NEW_VALUE' => 'Valor Nuevo',
     'LBL_CREATED_BY' => 'Modificado Por',
+    'LBL_SOURCE_FIELD' => 'Fuente',
     'LBL_LIST_DATE' => 'Fecha de Modificación',
     'LBL_AUDITED_FIELDS' => 'Campos auditados en este módulo:',
     'LBL_NO_AUDITED_FIELDS_TEXT' => 'No hay campos auditados en este módulo',
-    'LBL_CHANGE_LOG' => 'Registro de Cambios',
+    'LBL_CHANGE_LOG' => 'Registro de auditoría',
     'LBL_CURRENCY_CONVERSION_TEXT' => 'Cuando los campos de moneda auditados se guardan en una moneda no predeterminada por el sistema, el registro de cambios mostrará los valores antiguos y nuevos en la moneda convertida, definida por el sistema.'
 );

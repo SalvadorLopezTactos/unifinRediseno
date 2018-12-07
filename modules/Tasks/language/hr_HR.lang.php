@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Nadzorna ploča za popis zadataka',
+
   'LBL_MODULE_NAME' => 'Zadaci',
   'LBL_MODULE_NAME_SINGULAR' => 'Zadatak',
   'LBL_TASK' => 'Zadaci: ',

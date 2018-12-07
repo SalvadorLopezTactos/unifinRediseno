@@ -16,16 +16,17 @@
  * Variables to customize the look and feel of Bootstrap
  */
 
-$lessdefs = array(
 
-    'colors' => array(
+//$lessdefs = array(
+
+    //'colors' => array(
         /**
          * Primary Color:
          * 3 pixel line on the navbar
          * -------------------------
          * was @primary
          */
-        'BorderColor' => '#e7ebf2',
+        //'BorderColor' => '#e7ebf2',
 
         /**
          * Secondary Color:
@@ -33,7 +34,7 @@ $lessdefs = array(
          * -------------------------
          * was @secondary
          */
-        'NavigationBar' => '#000042',
+        //'NavigationBar' => '#000042',
 
         /**
          * Primary Button Color:
@@ -41,6 +42,6 @@ $lessdefs = array(
          * -------------------------
          * was @primaryBtn
          */
-        'PrimaryButton' => '#2F5085',
-    ),
-);
+        //'PrimaryButton' => '#2F5085',
+    //),
+//);

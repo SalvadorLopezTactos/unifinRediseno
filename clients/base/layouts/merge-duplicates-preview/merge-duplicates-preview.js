@@ -18,6 +18,5 @@
 
     initialize: function(options) {
         this._super('initialize', [options]);
-        this.context.set('skipFetch', true);
     }
 });

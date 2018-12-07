@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Találkozók listája műszerfal',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Találkozó bejegyzések műszerfal',
+
 	'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót a találkozó törléséhez!',
 	'LBL_ACCEPT_THIS'=>'Elfogadja?',
 	'LBL_ADD_BUTTON'=> 'Hozzáadás',

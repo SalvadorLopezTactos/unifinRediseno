@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Dashboard Doellijsten',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Dashboard Doelrecord',
+
   'LBL_MODULE_NAME' => 'Targets',
   'LBL_MODULE_NAME_SINGULAR' => 'Target',
   'LBL_MODULE_ID'   => 'Targets',
@@ -195,4 +199,6 @@ Om een {{module_name}} aan te maken:
 2. Klik op "Opslaan" om het nieuwe record op te slaan en terug te keren naar de voorgaande pagina.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Targetrapportages',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Toestemming zakelijke doeleinden voor',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Toestemming voor het laatst bijgewerkt',
 );

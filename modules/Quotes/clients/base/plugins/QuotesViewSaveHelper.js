@@ -125,7 +125,7 @@
                             }
                             changedFieldsList = changedFields(item);
                             // omit any sugarlogic items that might be flagged as changed
-                            changedFieldsList = _.omit(changedFieldsList, '_-rel_exp_values');
+                            changedFieldsList = _.omit(changedFieldsList, '_-rel_exp_values', 'position');
                             return !_.isEmpty(
                                 _.omit(changedFieldsList, itemCalculatedFields[item.module])
                             );

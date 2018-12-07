@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Are you sure you wish to delete this relationship?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Detta kommer att göra relationen permanent. Är du säker på att du vill rulla ut relationen?',
 'LBL_CONFIRM_DONT_SAVE' => 'Ändringar har gjorts sedan du sparade senast, vill du spara?',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Anpassa fältet för fulltextsökning.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => '"Boosting" eller förstärkning är en metod för att göra fälten i en post mer relevanta.<br />Fält med högre boostnivå får mer vikt i en sökning. När resultaten från en sökning visas kommer träffar med större vikt att visas högre i resultaten.<br />Grundvärdet är 1,0 vilket är ett neutralt boostvärde. Alla boostvärden över 1 representerar positiv boost, och alla under 1 är negativa. Exempelvis representerar boostvärdet 1,35 en förstärkning på 135%, och 0,6 representerar 60%.<br />Obs. att en fulltext-omindexering inte längre är nödvändig.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Ja</b>: Fältet kommer att inkluderas i en import.<br><b>Nej</b>: Fältet kommer inte att inkluderas i en import.<br><b>Obligatorisk</b>: Ett värde måste inkluderas i en import.',
+'LBL_POPHELP_PII'=>'Det här fältet kommer automatiskt att markeras för granskning och är tillgängligt i vyn för personliga information.<br>Fälten med personlig information kan även raderas permanent när posten är relaterad till en datasekretess raderingsförfrågan.<br>Radering sker via modulen för datasekretess och kan utföras av administratörer eller användare i rollen chef för datasekretess.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Ange ett värde för Bredd, mätt i pixlar.<br />Den uppladdade bilden skalas till denna bredd.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Ange ett värde för Höjd, mätt i pixlar.<br />Den uppladdade bilden skalas till denna höjd.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

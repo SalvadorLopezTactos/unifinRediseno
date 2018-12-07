@@ -11,8 +11,12 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Информационная панель списка доходов по продуктам',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Информационная панель записей доходов по продуктам',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Продукт кампании',
-    'LBL_MODULE_NAME' => 'Доход по продуктам',
+    'LBL_MODULE_NAME' => 'Доходные продукты',
     'LBL_MODULE_NAME_SINGULAR' => 'Доход по продукту',
     'LBL_MODULE_TITLE' => 'Доход по продуктам: Главная',
     'LBL_SEARCH_FORM_TITLE' => 'Поиск дохода по продукту',
@@ -21,7 +25,7 @@ $mod_strings = array(
     'LBL_PRODUCT' => 'Продукт:',
     'LBL_RELATED_PRODUCTS' => 'Связанный доход по продукту',
     'LBL_LEAD_SOURCE' => 'Источник предварительного контакта',
-    'LBL_LIST_NAME' => 'Доход по продукту',
+    'LBL_LIST_NAME' => 'Доходный продукт',
     'LBL_LIST_MANUFACTURER' => 'Производитель',
     'LBL_LIST_LBL_MFT_PART_NUM' => 'Номер части',
     'LBL_LIST_QUANTITY' => 'Количество',

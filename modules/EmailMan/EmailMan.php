@@ -304,7 +304,7 @@ class EmailMan extends SugarBean{
            if (empty($this->ref_email->id) or $upd_ref_email) {
                 //create email record.
                 $this->ref_email->id=$marketing_id;
-                $this->ref_email->date_sent = '';
+                $this->ref_email->date_sent = $timedate->nowDb();
 
                 if ($upd_ref_email==false) {
                     $this->ref_email->new_with_id=true;
@@ -330,17 +330,16 @@ class EmailMan extends SugarBean{
                     $this->ref_email->parent_type = '';
                     $this->ref_email->parent_id =  '';
                 }
-                $this->ref_email->date_start = $timedate->nowDate();
-                $this->ref_email->time_start = $timedate->asUserTime($timedate->getNow(true));
 
                 $this->ref_email->status='sent';
+                $this->ref_email->state = Email::STATE_ARCHIVED;
                 $retId = $this->ref_email->save();
 
                 foreach($notes as $note) {
                     list($filename, $mime_type) = $this->getFileInfo($note);
                     $noteAudit = BeanFactory::newBean('Notes');
-                    $noteAudit->parent_id = $retId;
-                    $noteAudit->parent_type = $this->ref_email->module_dir;
+                    $noteAudit->email_id = $retId;
+                    $noteAudit->email_type = $this->ref_email->module_dir;
                     $noteAudit->description = "[".$note->filename."] ".$mod_strings['LBL_ATTACHMENT_AUDIT'];
                     $noteAudit->name = $note->name;
                     $noteAudit->filename=$filename;
@@ -439,9 +438,9 @@ class EmailMan extends SugarBean{
         $email->assigned_user_id = $this->user_id;
         $email->parent_type      = $this->related_type;
         $email->parent_id        = $this->related_id;
-        $email->date_start       = $timedate->nowDbDate();
-        $email->time_start       = $timedate->asDbTime($timedate->getNow());
+        $email->date_sent = $timedate->nowDb();
         $email->status           = 'sent';
+        $email->state = Email::STATE_ARCHIVED;
         $email->message_id = $mail->getHeader(EmailHeaders::MessageId);
         $retId                   = $email->save();
 
@@ -449,8 +448,8 @@ class EmailMan extends SugarBean{
             list($filename, $mime_type) = $this->getFileInfo($note);
             // create "audit" email without duping off the file to save on disk space
             $noteAudit              = BeanFactory::newBean('Notes');
-            $noteAudit->parent_id   = $retId;
-            $noteAudit->parent_type = $email->module_dir;
+            $noteAudit->email_id = $retId;
+            $noteAudit->email_type = $email->module_dir;
             $noteAudit->name        = $note->name;
             $noteAudit->description = "[{$note->filename}] {$mod_strings['LBL_ATTACHMENT_AUDIT']}";
             $noteAudit->filename=$filename;
@@ -644,15 +643,16 @@ class EmailMan extends SugarBean{
 				$this->current_emailtemplate->body_html=from_html($this->current_emailtemplate->body_html);
 				$this->current_emailtemplate->body=from_html($this->current_emailtemplate->body);
 
-				$q = "SELECT * FROM notes WHERE parent_id = '".$this->current_emailtemplate->id."' AND deleted = 0";
-				$r = $this->db->query($q);
+                //FIXME: notes.email_type should be EmailTemplates
+                $stmt = $this->db->getConnection()->executeQuery(
+                    'SELECT id FROM notes WHERE email_id = ? AND deleted = 0',
+                    [$this->current_emailtemplate->id]
+                );
 
 				// cn: bug 4684 - initialize the notes array, else old data is still around for the next round
 				$this->notes_array = array();
-                if (!class_exists('Note')){
-				}
-				while($a = $this->db->fetchByAssoc($r)) {
-					$noteTemplate = BeanFactory::getBean('Notes', $a['id']);
+                while ($noteId = $stmt->fetchColumn()) {
+                    $noteTemplate = BeanFactory::getBean('Notes', $noteId);
 					$this->notes_array[] = $noteTemplate;
 				}
 			}

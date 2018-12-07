@@ -22,7 +22,13 @@ class temp {
 }
 
 class InboundEmail extends SugarBean {
-	// module specific
+
+    /**
+     * @var EmailUI
+     */
+    private $ui;
+
+    // module specific
 	var $conn;
 	var $purifier; // HTMLPurifier object placeholder
 	var $email;
@@ -485,14 +491,7 @@ class InboundEmail extends SugarBean {
 		$cacheUIDLs = $this->pop3_getCacheUidls();
 		foreach($cacheUIDLs as $msgNo => $msgId) {
 			if (!in_array($msgId, $UIDLs)) {
-				$md5msgIds = md5($msgId);
-				$file = "{$this->EmailCachePath}/{$this->id}/messages/INBOX{$md5msgIds}.PHP";
-				$GLOBALS['log']->debug("INBOUNDEMAIL: deleting file [ {$file} ] ");
-				if(file_exists($file)) {
-					if(!unlink($file)) {
-						$GLOBALS['log']->debug("INBOUNDEMAIL: Could not delete [ {$file} ] ");
-					} // if
-				} // if
+                $this->getEmailUI()->deleteMboxCache($this->id, 'INBOX', $msgId);
                 $q = "DELETE from email_cache where imap_uid = {$msgNo} AND msgno = {$msgNo} AND ie_id = " .
                     $this->db->quoted($this->id) . " AND message_id = " . $this->db->quoted($msgId);
 				$r = $this->db->query($q);
@@ -1073,8 +1072,7 @@ class InboundEmail extends SugarBean {
 				// new email cache values we should deal with
 				$diff = array_diff_assoc($UIDLs, $cacheUIDLs);
 				$diff = $this->pop3_shiftCache($diff, $cacheUIDLs);
-                $ui = new EmailUI();
-                $ui->preflightEmailCache("{$this->EmailCachePath}/{$this->id}");
+                $this->getEmailUI()->preflightEmailCache("{$this->EmailCachePath}/{$this->id}");
 
 				if (count($diff)> 50) {
                 	$newDiff = array_slice($diff, 50, count($diff), true);
@@ -1753,20 +1751,10 @@ class InboundEmail extends SugarBean {
 	function deleteCachedMessages($uids, $fromFolder) {
 		global $sugar_config;
 
-		if(!isset($this->email) && !isset($this->email->et)) {
-			$this->email = BeanFactory::newBean('Emails');
-			$this->email->email2init();
-		}
-
-		$uids = $this->email->et->_cleanUIDList($uids);
+        $uids = $this->getEmailUI()->_cleanUIDList($uids);
 
 		foreach($uids as $uid) {
-            $fileName = "{$this->EmailCachePath}/{$this->id}/messages/{$fromFolder}{$uid}.php";
-            $file = FileLoader::validateFilePath($fileName);
-
-            if (!unlink($file)) {
-                $GLOBALS['log']->debug("INBOUNDEMAIL: Could not delete [ {$file} ]");
-            }
+            $this->getEmailUI()->deleteMboxCache($this->id, $fromFolder, $uid);
 		}
 	}
 
@@ -1780,12 +1768,8 @@ class InboundEmail extends SugarBean {
 	 */
 	function getOverviewsFromCacheFile($uids, $mailbox='', $remove=false) {
 		global $app_strings;
-		if(!isset($this->email) && !isset($this->email->et)) {
-			$this->email = BeanFactory::newBean('Emails');
-			$this->email->email2init();
-		}
 
-		$uids = $this->email->et->_cleanUIDList($uids, true);
+        $uids = $this->getEmailUI()->_cleanUIDList($uids, true);
 
 		// load current cache file
 		$mailbox = empty($mailbox) ? $this->mailbox : $mailbox;
@@ -1870,18 +1854,11 @@ class InboundEmail extends SugarBean {
 				if($overview->size < 10000) {
 
 					$uid = $overview->imap_uid;
-
 					if(!empty($uid)) {
-						$file = "{$this->mailbox}{$uid}.php";
-						$cacheFile = clean_path("{$this->EmailCachePath}/{$this->id}/messages/{$file}");
-
-						if(!file_exists($cacheFile)) {
-							$GLOBALS['log']->info("INBOUNDEMAIL: Prefetching email [ {$file} ]");
+                        if (!$this->getEmailUI()->mboxCacheExists($this->id, $this->mailbox, $uid)) {
 							$this->setEmailForDisplay($uid);
 							$out = $this->displayOneEmail($uid, $this->mailbox);
-							$this->email->et->writeCacheFile('out', $out, $this->id, 'messages', "{$this->mailbox}{$uid}.php");
-						} else {
-							$GLOBALS['log']->debug("INBOUNDEMAIL: Trying to prefetch an email we already fetched! [ {$cacheFile} ]");
+                            $this->getEmailUI()->writeMboxCacheValue($this->id, $this->mailbox, $uid, $out);
 						}
 					} else {
 						$GLOBALS['log']->debug("*** INBOUNDEMAIL: prefetch has a message with no UID");
@@ -2722,6 +2699,7 @@ class InboundEmail extends SugarBean {
 
 				$reply = BeanFactory::newBean('Emails');
 				$reply->type				= 'out';
+                $reply->state = Email::STATE_ARCHIVED;
 				$reply->to_addrs			= $to[0]['email'];
 				$reply->to_addrs_arr		= $to;
 				$reply->cc_addrs_arr		= array();
@@ -2923,6 +2901,7 @@ class InboundEmail extends SugarBean {
 
 				$reply = BeanFactory::newBean('Emails');
 				$reply->type				= 'out';
+                $reply->state = Email::STATE_ARCHIVED;
 				$reply->to_addrs			= $to[0]['email'];
 				$reply->to_addrs_arr		= $to;
 				$reply->cc_addrs_arr		= array();
@@ -3378,47 +3357,49 @@ class InboundEmail extends SugarBean {
 		}
 	}
 
-	/**
-	 * tries to figure out what character set a given filename is using and
-	 * decode based on that
-	 *
-	 * @param string name Name of attachment
-	 * @return string decoded name
-	 */
-	function handleEncodedFilename($name) {
-		$imapDecode = imap_mime_header_decode($name);
-		/******************************
-		$imapDecode => stdClass Object
-			(
-				[charset] => utf-8
-				[text] => wï¿½hlen.php
-			)
+    /**
+     * Decodes the filename using whatever encodings are found in it.
+     *
+     * @param string $encodedName
+     * @return string
+     */
+    public function handleEncodedFilename($encodedName)
+    {
+        $decodedName = '';
+        $imapDecodedName = imap_mime_header_decode($encodedName);
 
-					OR
+        foreach ($imapDecodedName as $element) {
+            $encoding = strtolower($element->charset);
+            $text = $element->text;
 
-		$imapDecode => stdClass Object
-			(
-				[charset] => default
-				[text] => UTF-8''%E3%83%8F%E3%82%99%E3%82%A4%E3%82%AA%E3%82%AF%E3%82%99%E3%83%A9%E3%83%95%E3%82%A3%E3%83%BC.txt
-			)
-		*******************************/
-		if($imapDecode[0]->charset != 'default') { // mime-header encoded charset
-			$encoding = $imapDecode[0]->charset;
-			$name = $imapDecode[0]->text; // encoded in that charset
-		} else {
-			/* encoded filenames are formatted as [encoding]''[filename] */
-			if(strpos($name, "''") !== false) {
+            if ($encoding === 'default') {
+                // Use UTF-8 as the default.
+                $encoding = 'utf-8';
 
-				$encoding = substr($name, 0, strpos($name, "'"));
+                // Encoded file names are formatted as [encoding]''[filename].
+                if (strpos($text, "''") !== false) {
+                    $encoding = strtolower(substr($text, 0, strpos($text, "'")));
 
-				while(strpos($name, "'") !== false) {
-					$name = trim(substr($name, (strpos($name, "'")+1), strlen($name)));
-				}
-			}
-			$name = urldecode($name);
-		}
-		return (strtolower($encoding) == 'utf-8') ? $name : $GLOBALS['locale']->translateCharset($name, $encoding, 'UTF-8');
-	}
+                    while (strpos($text, "'") !== false) {
+                        $text = trim(substr($text, (strpos($text, "'") + 1), strlen($text)));
+                    }
+                }
+
+                $text = urldecode($text);
+            }
+
+            // Need to trim the encoding so we don't end up with something like " utf-8".
+            $encoding = trim($encoding);
+
+            if ($encoding !== 'utf-8') {
+                $text = $GLOBALS['locale']->translateCharset($text, strtoupper($encoding), 'UTF-8');
+            }
+
+            $decodedName .= $text;
+        }
+
+        return $decodedName;
+    }
 
 	/*
 		Primary body types for a part of a mail structure (imap_fetchstructure returned object)
@@ -3573,8 +3554,8 @@ class InboundEmail extends SugarBean {
 	function getNoteBeanForAttachment($emailId)
 	{
 	    $attach = BeanFactory::newBean('Notes');
-	    $attach->parent_id = $emailId;
-	    $attach->parent_type = 'Emails';
+	    $attach->email_id = $emailId;
+	    $attach->email_type = 'Emails';
 	    // Check whether it is from Email Module Import or from CheckInboundEmail
 	    if(isset($_REQUEST['primary_team_id']) && !empty($_REQUEST['primary_team_id'])) {
 	        $attach->team_id = $_REQUEST['primary_team_id'];
@@ -3646,6 +3627,13 @@ class InboundEmail extends SugarBean {
 
 			if(file_put_contents($uploadDir.$fileName, $msgPart)) {
 				$GLOBALS['log']->debug('InboundEmail saved attachment file: '.$attach->filename);
+
+                // When $forDisplay is false, the attachment has been saved as a Notes record. However, the file size
+                // would not have been captured because the file did not exist. Resave the bean to guarantee that the
+                // file size is stored.
+                if (!$forDisplay) {
+                    $attach->save();
+                }
 			} else {
                 $GLOBALS['log']->debug('InboundEmail could not create attachment file: '.$attach->filename ." - temp file target: [ {$uploadDir}{$fileName} ]");
                 return;
@@ -4025,6 +4013,9 @@ class InboundEmail extends SugarBean {
 			$message = array();
 			$email->id = create_guid();
 			$email->new_with_id = true; //forcing a GUID here to prevent double saves.
+
+            // Don't assign the email to the current user by default.
+            $email->assigned_user_id = null;
 			////	END CREATE SEED EMAIL
 			///////////////////////////////////////////////////////////////////
 
@@ -4078,6 +4069,7 @@ class InboundEmail extends SugarBean {
 			// handle UTF-8/charset encoding in the ***headers***
 			global $db;
 			$email->name			= $this->handleMimeHeaderDecode($header->subject);
+            $email->state = Email::STATE_ARCHIVED;
 			$email->type = 'inbound';
 			if(!empty($unixHeaderDate)) {
 			    $email->date_sent = $timedate->asUser($unixHeaderDate);
@@ -4185,13 +4177,23 @@ class InboundEmail extends SugarBean {
 	        if (!empty($_REQUEST['parent_id']) && !empty($_REQUEST['parent_type'])) {
                 $email->parent_id = $_REQUEST['parent_id'];
                 $email->parent_type = $_REQUEST['parent_type'];
+                $parent = BeanFactory::retrieveBean(
+                    $email->parent_type,
+                    $email->parent_id,
+                    [
+                        'disable_row_level_security' => true,
+                    ]
+                );
 
-                $mod = strtolower($email->parent_type);
-                $rel = array_key_exists($mod, $email->field_defs) ? $mod : $mod . "_activities_emails"; //Custom modules rel name
+                if ($parent) {
+                    $linkName = $email->findEmailsLink($parent);
 
-                if(! $email->load_relationship($rel) )
-                    return FALSE;
-                $email->$rel->add($email->parent_id);
+                    if ($parent->load_relationship($linkName)) {
+                        $parent->$linkName->add($email);
+                    } else {
+                        return false;
+                    }
+                }
 	        }
 
 			// override $forDisplay w/user pref
@@ -4345,8 +4347,8 @@ class InboundEmail extends SugarBean {
 		require_once('include/PHP_Compat/convert_uudecode.php');
 
 		$attach = BeanFactory::newBean('Notes');
-		$attach->parent_id = $id;
-		$attach->parent_type = 'Emails';
+		$attach->email_id = $id;
+		$attach->email_type = 'Emails';
 		$attach->team_id = $this->team_id;
 		$attach->team_set_id = $this->team_set_id;
 		//$attach
@@ -4378,8 +4380,8 @@ class InboundEmail extends SugarBean {
 				break; // no need to look for more
 			}
 		}
-		$attach->save();
 
+        // Write the file before saving so that the file size is captured during save.
 		$bin = convert_uudecode($UUEncode);
 		$filename = "upload://{$attach->id}";
 		if(file_put_contents($filename, $bin)) {
@@ -4387,6 +4389,8 @@ class InboundEmail extends SugarBean {
 		} else {
     		$GLOBALS['log']->debug('InboundEmail could not create attachment file: '.$filename);
 		}
+
+        $attach->save();
 	}
 
 	/**
@@ -4892,11 +4896,6 @@ eoq;
      */
     protected function getImapConnection($mailbox, $username, $password, $options = 0)
     {
-        // if php is prior to 5.3.2, then return call without disable parameters as they are not supported yet
-        if (version_compare(phpversion(), '5.3.2', '<')) {
-            return imap_open($mailbox, $username, $password, $options);
-        }
-
         $connection = null;
         $authenticators = array('', 'GSSAPI', 'NTLM');
 
@@ -5272,14 +5271,17 @@ eoq;
 						$email->save();
                         $email->revertFieldNullable('assigned_user_id');
                         // End fix 50972
-						$email->getNotes($id);
-                        if(!empty($email->attachments)) {
-                            foreach($email->attachments as $note) {
-                                $note->team_id = $toSugarFolder->team_id;
-                                $note->team_set_id = $toSugarFolder->team_set_id;
-                                $note->save();
-                            }
+
+                        //FIXME: notes.email_type should be Emails
+                        $where = 'notes.email_id=' . $this->db->quoted($id);
+                        $attachments = BeanFactory::getBean('Notes')->get_full_list('', $where, true);
+
+                        foreach ($attachments as $note) {
+                            $note->team_id = $toSugarFolder->team_id;
+                            $note->team_set_id = $toSugarFolder->team_set_id;
+                            $note->save();
                         }
+
 						if (!$toSugarFolder->checkEmailExistForFolder($id)) {
 							$fromSugarFolder->deleteEmailFromAllFolder($id);
 							$toSugarFolder->addBean($email);
@@ -5332,7 +5334,7 @@ eoq;
 					$_REQUEST['showTeam'] = false;
 					$_REQUEST['showAssignTo'] = false;
 				}
-	            $ret = $this->email->et->getImportForm($_REQUEST, $this->email);
+                $ret = $this->getEmailUI()->getImportForm($_REQUEST, $this->email);
 	            $ret['move'] = true;
 	            $ret['srcFolder'] = $fromFolder;
 	            $ret['srcIeId']   = $fromIe;
@@ -5382,13 +5384,14 @@ eoq;
 								$this->deleteMessageFromCache($uid);
 							} // if
                             if ($sugarFolder->is_group) {
-                                $this->email->getNotes($this->email->id);
-                                if(!empty($this->email->attachments)) {
-                                    foreach($this->email->attachments as $note) {
-                                        $note->team_id = $sugarFolder->team_id;
-                                        $note->team_set_id = $sugarFolder->team_set_id;
-                                        $note->save();
-                                    }
+                                //FIXME: notes.email_type should be Emails
+                                $where = 'notes.email_id=' . $this->db->quoted($this->email->id);
+                                $attachments = BeanFactory::getBean('Notes')->get_full_list('', $where, true);
+
+                                foreach ($attachments as $note) {
+                                    $note->team_id = $sugarFolder->team_id;
+                                    $note->team_set_id = $sugarFolder->team_set_id;
+                                    $note->save();
                                 }
                             }
 						}
@@ -5585,21 +5588,10 @@ eoq;
 		global $app_strings;
 
 		// if its a pop3 then get the UIDL and see if this file name exist or not
-		if ($this->isPop3Protocol()) {
-			// get the UIDL from database;
-			$cachedUIDL = md5($uid);
-			$cache = "{$this->EmailCachePath}/{$this->id}/messages/{$this->mailbox}{$cachedUIDL}.php";
-		} else {
-			$cache = "{$this->EmailCachePath}/{$this->id}/messages/{$this->mailbox}{$uid}.php";
-		}
 
-		if(file_exists($cache) && !$forceRefresh) {
+        if ($this->getEmailUI()->mboxCacheExists($this->id, $this->mailbox, $uid) && !$forceRefresh) {
 			$GLOBALS['log']->info("INBOUNDEMAIL: Using cache file for setEmailForDisplay()");
-
-			include($cache); // profides $cacheFile
-            /** @var $cacheFile array */
-
-            $metaOut = Serialized::unserialize($cacheFile['out']);
+            $metaOut = $this->getEmailUI()->getMboxCacheValue($this->id, $this->mailbox, $uid);
 			$meta = $metaOut['meta']['email'];
 			$email = BeanFactory::newBean('Emails');
 
@@ -5720,12 +5712,8 @@ eoq;
 			if ($this->isPop3Protocol()) {
 				$uid = md5($uid);
 			} // if
-            $fileName = "{$this->EmailCachePath}/{$this->id}/messages/{$this->mailbox}{$uid}.php";
-            $msgCacheFile = FileLoader::validateFilePath($fileName);
 
-            if (!unlink($msgCacheFile)) {
-                $GLOBALS['log']->error("***ERROR: InboundEmail could not delete the cache file [ {$msgCacheFile} ]");
-            }
+            $this->getEmailUI()->deleteMboxCache($this->id, $this->mailbox, $uid);
 		}
 	}
 
@@ -5806,7 +5794,8 @@ eoq;
 		$attachments = '';
 		if ($mbox == "sugar::Emails") {
 
-            $q = "SELECT id, filename, file_mime_type FROM notes WHERE parent_id = " .
+            //FIXME: notes.email_type should be Emails
+            $q = "SELECT id, filename, file_mime_type FROM notes WHERE email_id = " .
                 $this->db->quoted($uid) . " AND deleted = 0";
 			$r = $this->db->query($q);
 			$i = 0;
@@ -6080,7 +6069,9 @@ eoq;
 
 		// save sort order
 		if(!empty($_REQUEST['sort']) && !empty($_REQUEST['dir'])) {
-			$this->email->et->saveListViewSortOrder($_REQUEST['ieId'], $_REQUEST['mbox'], $_REQUEST['sort'], $_REQUEST['dir']);
+            $ieId = InputValidation::getService()->getValidInputRequest('ieId', 'Assert\Guid');
+            $mbox = InputValidation::getService()->getValidInputRequest('mbox');
+            $this->getEmailUI()->saveListViewSortOrder($ieId, $mbox, $_REQUEST['sort'], $_REQUEST['dir']);
 			$sort = $_REQUEST['sort'];
 			$direction = $_REQUEST['dir'];
 		} else {
@@ -6596,6 +6587,19 @@ eoq;
                 $html = "<style>p.MsoNormal {margin: 0;}</style>\n" . $html;
         }
         return $html;
+    }
+
+    /**
+     * Returns an instance of EmailUI
+     * @return EmailUI
+     */
+    public function getEmailUI()
+    {
+        if (empty($this->ui)) {
+            $this->ui = new EmailUI();
+        }
+
+        return $this->ui;
     }
 
 } // end class definition

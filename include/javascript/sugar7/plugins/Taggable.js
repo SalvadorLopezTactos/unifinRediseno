@@ -112,6 +112,11 @@
 
                 if (text && (text.length > 0)) {
                     html = text.replace(tagRegExp, function(str, module, id, name) {
+                        // Use "Value erased" if the name has been erased.
+                        if (name === 'LBL_VALUE_ERASED') {
+                            name = app.lang.get('LBL_VALUE_ERASED', module);
+                        }
+
                         // The backend mangles special characters, so we must
                         // tell Handlebars that the string is safe.
                         name = new Handlebars.SafeString(name);

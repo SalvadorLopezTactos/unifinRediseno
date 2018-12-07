@@ -367,7 +367,7 @@
             var message = app.lang.get(this.LABELSET['SUCCESS'], this.module, {
                 num: this.totalRecord - discardSize - failed
             });
-            message += app.lang.get('TPL_MASSUPDATE_WARNING_PERMISSION', this.module, {
+            message += ' ' + app.lang.get('TPL_MASSUPDATE_WARNING_PERMISSION', this.module, {
                 remain: discardSize + failed
             });
             app.alert.show('massupdate_final_notice', {

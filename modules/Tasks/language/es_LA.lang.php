@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Tablero de Lista de Tareas',
+
   'LBL_MODULE_NAME' => 'Tareas',
   'LBL_MODULE_NAME_SINGULAR' => 'Tarea',
   'LBL_TASK' => 'Tareas:',
@@ -27,7 +30,7 @@ $mod_strings = array (
   'LBL_LIST_CONTACT' => 'Contacto',
   'LBL_LIST_PRIORITY' => 'Prioridad',
   'LBL_LIST_RELATED_TO' => 'Relacionada con',
-  'LBL_LIST_DUE_DATE' => 'Fecha de Vencimiento',
+  'LBL_LIST_DUE_DATE' => 'Fecha de vencimiento',
   'LBL_LIST_DUE_TIME' => 'Hora de Vencimiento',
   'LBL_SUBJECT' => 'Asunto:',
   'LBL_STATUS' => 'Estado:',
@@ -59,9 +62,9 @@ $mod_strings = array (
   'ERR_INVALID_HOUR' => 'Por favor, introduzca una hora entre 0 y 24',
   'LBL_DEFAULT_PRIORITY' => 'Media',
   'LBL_LIST_MY_TASKS' => 'Mis Tareas Abiertas',
-  'LNK_NEW_TASK' => 'Nueva Tarea',
-  'LNK_TASK_LIST' => 'Ver Tareas',
-  'LNK_IMPORT_TASKS' => 'Importar Tareas',
+  'LNK_NEW_TASK' => 'Crear tarea',
+  'LNK_TASK_LIST' => 'Ver tareas',
+  'LNK_IMPORT_TASKS' => 'Importar tareas',
   'LBL_CONTACT_FIRST_NAME'=>'Nombre del Contacto',
   'LBL_CONTACT_LAST_NAME'=>'Apellido del Contacto',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Usuario Asignado',

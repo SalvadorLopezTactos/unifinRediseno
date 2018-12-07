@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus-tjener',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Antall poster pr side i underpanel (trådløs)',
 	'LOG_MEMORY_USAGE'=>'Logg minneforbruk',
-	'LOG_SLOW_QUERIES'=>'Logg sene forespørsler',
+    'LOG_SLOW_QUERIES' => 'Logg sene forespørsler',
     'LOCK_HOMEPAGE_HELP'=>'This setting is to prevent<BR> 1) the addition of new home pages in the Home module, and <BR>2) customization of dashlet placement in the home pages by dragging and dropping.',
     'CURRENT_LOGO'=>'Logo i bruk',
     'CURRENT_LOGO_HELP'=>'Denne logoen vises øverst i venstre hjørne i Sugar.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Dette er navnet som vises i tittellinjen i nettleseren.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Aktiver/deaktiver e-poster fra relaterte (eller koblede) kontakter skal vises i e-post underpanelet.',
 
-    'LBL_OC_STATUS'                     => 'Forhåndsinnstilt status for Offline-klient',
-    'DEFAULT_OC_STATUS'                 => 'Aktivér Offline-klient som innstilt',
-    'LBL_OC_STATUS_DESC' => 'Klikk her hvis du vil at alle brukere skal ha tilgang til Offline-klienten. Hvis du velger å ikke gjøre det kan du tilpasse tilgjengeligheten på brukernivå.',
     'SESSION_TIMEOUT' => 'Portalsesjonen ble avbrutt',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Portal Session Timeout er for legacy versjoner av Sugar Portalen tilgjengelig i 6.5 og eldre.',
     'UPLOAD_MAXSIZE_UNITS' => 'bytes',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML innloggings-URL kan ikke være tom',
     'ERR_EMPTY_SAML_CERT' => 'SAML-sertifikatet kan ikke være tomt',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML enhets-ID kan ikke være tom',
     'ERR_SAML_LOGIN_URL' => 'SAML innloggings-URL-en er ikke gyldig',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL-en er ikke gyldig',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM-fil skal inneholde privatnøkkel',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM-film skal inneholde x.509-sertifikat',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Medfølgende x.509-sertifikat samsvarer ikke med privatnøkkel',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Enable Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Turns on Activity Streams for the application',
 );
 
 

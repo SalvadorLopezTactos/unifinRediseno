@@ -11,10 +11,17 @@ if(!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
+
 global $disable_date_format;
 $disable_date_format = true;
 
 class SoapHelperWebServices {
+
+    /**
+     * @var IdmConfig
+     */
+    protected $idmConfig = null;
 
 	function get_field_list($value, $fields, $translate=true)
 	{
@@ -745,6 +752,10 @@ function validate_user($user_name, $password){
 				}
 			}
 
+            if ($this->isIDMMode() && $this->isIDMModeModule($module_name) && !$seed->isUpdate()) {
+                continue;
+            }
+
 			foreach($name_value_list as $value) {
 				$val = $value['value'];
                 if ($seed->field_defs[$value['name']]['type'] == 'enum') {
@@ -761,6 +772,13 @@ function validate_user($user_name, $password){
                 if (!empty($seed->field_defs[$value['name']]['sensitive'])) {
                     continue;
                 }
+
+                if ($this->isIDMMode()
+                        && $this->isIDMModeModule($module_name)
+                        && $this->isIDMModeField($value['name'])) {
+                    continue;
+                }
+
                 $seed->{$value['name']} = $val;
 			}
 
@@ -1220,7 +1238,48 @@ function validate_user($user_name, $password){
         return $select_fields;
     }
 
+    /**
+     * Is instance working in IDM mode
+     *
+     * @return boolean
+     */
+    public function isIDMMode()
+    {
+        return $this->getIDMConfig()->isIDMModeEnabled();
+    }
 
+    /**
+     * Is module controlled by IDM mode. Should return `true` for `Users` and `Employees`
+     *
+     * @param string $module
+     * @return boolean
+     */
+    public function isIDMModeModule($module)
+    {
+        return in_array($module, $this->getIDMConfig()->getIDMModeDisabledModules());
+    }
+
+    /**
+     * Checks if this field is managed by IDM
+     *
+     * @param string $name
+     * @return boolean
+     */
+    public function isIDMModeField($name)
+    {
+        return array_key_exists($name, $this->getIDMConfig()->getIDMModeDisabledFields());
+    }
+
+    /**
+     * Returns IDM config
+     *
+     * @return IdmConfig
+     */
+    protected function getIDMConfig()
+    {
+        if (is_null($this->idmConfig)) {
+            $this->idmConfig = new IdmConfig(\SugarConfig::getInstance());
+        }
+        return $this->idmConfig;
+    }
 } // clazz
-
-?>

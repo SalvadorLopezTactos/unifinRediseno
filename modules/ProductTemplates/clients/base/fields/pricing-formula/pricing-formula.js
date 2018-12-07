@@ -85,7 +85,8 @@
 
     /**
      * Override to remove default DOM change listener so we can listen for the pricing factor change if it's visible
-     * @override
+     *
+     * @inheritdoc
      */
     bindDomChange: function() {
         if (this.showFactorField) {
@@ -101,7 +102,8 @@
 
     /**
      * Override so we can stop listening to the pricing factor field if it's visible
-     * @override
+     *
+     * @inheritdoc
      */
     unbindDom: function() {
         if (this.showFactorField) {

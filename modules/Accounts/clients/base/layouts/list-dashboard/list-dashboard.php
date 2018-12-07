@@ -38,6 +38,5 @@ $viewdefs['Accounts']['base']['layout']['list-dashboard'] = array(
             ),
         ),
     ),
-    'name' => 'LBL_DEFAULT_DASHBOARD_TITLE',
+    'name' => 'LBL_ACCOUNTS_LIST_DASHBOARD',
 );
-

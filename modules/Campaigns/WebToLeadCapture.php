@@ -11,6 +11,9 @@
  */
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\Security\Context;
+use Sugarcrm\Sugarcrm\Security\Subject\WebToLead;
 
 require_once('include/formbase.php');
 
@@ -53,6 +56,11 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
 	    //adding the client ip address
 	    $_POST['client_id_address'] = query_client_ip();
 		$campaign_id=$_POST['campaign_id'];
+        // create and activate subject for audit
+        $subject = new WebToLead();
+        $context = Container::getInstance()->get(Context::class);
+        $context->activateSubject($subject);
+        $context->setAttribute('campaign_id', $campaign_id);
 		$campaign = BeanFactory::newBean('Campaigns');
         $camp_query  = 'SELECT name, id FROM campaigns WHERE id = ' . $campaign->db->quoted($campaign_id);
 		$camp_query .= " and deleted=0";
@@ -146,25 +154,30 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
                 
 		        $lead->load_relationship('campaigns');
 		        $lead->campaigns->add($camplog->id);
+
+            // Set the default treatment of email opt_out if no explicit actions are present in form data
+            // The presence of the email_opt_in form variable supersedes any presence of the email_opt_out or
+            // webtolead_email_opt_out form variables, which are supported primarily for legacy compatibility.
+            $optOut = !empty($GLOBALS['sugar_config']['new_email_addresses_opted_out']);
+            if (isset($_POST['email_opt_in'])) {
+                $optIn = ($_POST['email_opt_in'] == 'on');
+                $optOut = !$optIn;
+            } elseif (isset($_POST['webtolead_email_opt_out']) || isset($_POST['email_opt_out'])) {
+                $optOut = true;
+            }
+
+            if (isset($lead->email1) && !empty($lead->email1)) {
+                _setDefaultEmailProperties($lead, 'email1', $optOut);
+            }
+            if (isset($lead->email2) && !empty($lead->email2)) {
+                _setDefaultEmailProperties($lead, 'email2', $optOut);
+            }
+
                 if(!empty($GLOBALS['check_notify'])) {
                     $lead->save($GLOBALS['check_notify']);
                 }
                 else {
                     $lead->save(FALSE);
-                }
-            }
-
-            //in case there are forms out there still using email_opt_out
-            if(isset($_POST['webtolead_email_opt_out']) || isset($_POST['email_opt_out'])){
-                    
-                if(isset ($lead->email1) && !empty($lead->email1)){
-                    $sea = BeanFactory::newBean('EmailAddresses');
-                    $sea->AddUpdateEmailAddress($lead->email1,0,1);
-                }   
-                if(isset ($lead->email2) && !empty($lead->email2)){
-                    $sea = BeanFactory::newBean('EmailAddresses');
-                    $sea->AddUpdateEmailAddress($lead->email2,0,1);
-                    
                 }
             }
 
@@ -181,7 +194,11 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
             if ($redirect_url !== null) {
                 $params = array();
                 foreach ($_REQUEST as $param => $_) {
-                    $params[$param] = $request->getValidInputRequest($param);
+                    if (is_array($_)) {
+                        $params[$param] = $request->getValidInputRequest($param, 'Assert\ArrayRecursive');
+                    } else {
+                        $params[$param] = $request->getValidInputRequest($param);
+                    }
                 }
                 unset($params['redirect_url'], $params['submit']);
                 if (empty($lead)) {
@@ -207,7 +224,8 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
                         $delimiter = strpos($redirect_url, '?') === false ? '?' : '&';
                         $redirect_url .= $delimiter . $query_string;
                     }
-
+                    // deactivate the subject for audit
+                    $context->deactivateSubject($subject);
     				header("Location: {$redirect_url}");
     				die();
 			    }
@@ -215,6 +233,8 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
 			else{
 				echo $mod_strings['LBL_THANKS_FOR_SUBMITTING_LEAD'];
 			}
+            // deactivate the subject for audit
+            $context->deactivateSubject($subject);
 			sugar_cleanup();
 			// die to keep code from running into redirect case below
 			die();
@@ -222,6 +242,8 @@ if (isset($_POST['campaign_id']) && !empty($_POST['campaign_id'])) {
 	   else{
 	  	  echo $mod_strings['LBL_SERVER_IS_CURRENTLY_UNAVAILABLE'];
 	  }
+    // deactivate the subject for audit
+    $context->deactivateSubject($subject);
 }
 
 if (!empty($redirect)) {
@@ -239,4 +261,50 @@ if (!empty($redirect)) {
 
 echo $mod_strings['LBL_SERVER_IS_CURRENTLY_UNAVAILABLE'];
 
+/**
+ * Get Email Address record from Database or return empty array if not found
+ * @param string $emailAddress
+ * @return array
+ * @throws SugarQueryException
+ */
+function _fetchEmailAddress($emailAddress = '')
+{
+    $sea = BeanFactory::newBean('EmailAddresses');
+    $q = new SugarQuery();
+    $q->select(array('*'));
+    $q->from($sea);
+    $q->where()->queryAnd()
+        ->equals('email_address_caps', strtoupper($emailAddress))
+        ->equals('deleted', 0);
+    $q->limit(1);
+    $rows = $q->execute();
+    if (is_array($rows) && count($rows) > 0) {
+        return $rows[0];
+    }
+    return array();
+}
+
+/**
+ * Set the Email properties on the supplied lead. If email address already exists, use existing Email address
+ * 'invalid_email' and 'primary' properties.
+ * @param SugarBean $lead
+ * @param string $emailField
+ * @param bool $optOut
+ */
+function _setDefaultEmailProperties(SugarBean $lead, $emailField, $optOut = false)
+{
+    $ea = _fetchEmailAddress($lead->$emailField);
+    $invalidEmail = empty($ea) ? false : $ea['invalid_email'];
+    $primary = empty($ea) ? true : $ea['primary_address'];
+
+    if (empty($lead->email) || !is_array($lead->email)) {
+        $lead->email = array();
+    }
+    $lead->email[] = array(
+        'email_address' => $lead->$emailField,
+        'primary_address' => $primary,
+        'opt_out' => $optOut,
+        'invalid_email' => $invalidEmail,
+    );
+}
 ?>

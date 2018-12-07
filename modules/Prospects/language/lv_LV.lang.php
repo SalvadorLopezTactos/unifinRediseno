@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Mērķu saraksta instrumentu panelis',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Mērķu ierakstu instrumentu panelis',
+
   'LBL_MODULE_NAME' => 'Mērķi',
   'LBL_MODULE_NAME_SINGULAR' => 'Mērķis',
   'LBL_MODULE_ID'   => 'Mērķi',
@@ -195,4 +199,6 @@ Lai izveidotu {{module_name}}:
 2. Spiediet "Saglabāt", lai pabeigtu jauna ieraksta izveidi un atgrieztos iepriekšējā lapā.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Mērķu atsaites',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Ir piekrišana biznesa mērķiem',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Piekrišana pēdējoreiz atjaunināta',
 );

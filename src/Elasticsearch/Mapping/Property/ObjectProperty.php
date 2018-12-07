@@ -47,6 +47,7 @@ class ObjectProperty extends RawProperty implements PropertyInterface
     /**
      * include_in_all
      * @var boolean
+     * @deprecated
      */
     protected $includeInall = false;
 
@@ -61,7 +62,6 @@ class ObjectProperty extends RawProperty implements PropertyInterface
                 'type' => $this->type,
                 'dynamic' => $this->dynamic,
                 'enabled' => $this->enabled,
-                'include_in_all' => $this->includeInall,
             )
         );
 
@@ -100,6 +100,7 @@ class ObjectProperty extends RawProperty implements PropertyInterface
     /**
      * Set include_in_all flag
      * @param boolean $toggle
+     * @deprecated
      */
     public function setIncludeInAll($toggle)
     {

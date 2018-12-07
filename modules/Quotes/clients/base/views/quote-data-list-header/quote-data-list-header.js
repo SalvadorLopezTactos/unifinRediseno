@@ -107,31 +107,23 @@
     },
 
     /**
-     * Called when items are added or removed from the massCollection
+     * Called when items are added or removed from the massCollection. Handles checking or
+     * unchecking the CheckAll checkbox as well as calls _checkMassActions to set button states
      *
      * @param {Data.Bean} model The model that was added or removed
      * @param {Data.MixedBeanCollection} massCollection The mass collection on the context
      * @private
      */
     _massCollectionChange: function(model, massCollection) {
-        var setDisabled = true;
-        var groupBtn = _.find(this.fields, function(field) {
-            return field.name === 'group_button';
-        });
-        var massDeleteBtn = _.find(this.fields, function(field) {
-            return field.name === 'massdelete_button';
-        });
+        var $checkAllField = this.$('[data-check=all]');
 
-        if (massCollection.length) {
-            setDisabled = false;
+        if (massCollection.length === 0 && $checkAllField.length) {
+            // uncheck the check-all box if there are no more items
+            $checkAllField.prop('checked', false);
         }
 
-        if (groupBtn) {
-            groupBtn.setDisabled(setDisabled);
-        }
-        if (massDeleteBtn) {
-            massDeleteBtn.setDisabled(setDisabled);
-        }
+        // check to see if we need mass actions available as well
+        _.delay(_.bind(this._checkMassActions, this), 25);
     },
 
     /**
@@ -175,15 +167,48 @@
      * @private
      */
     _checkMassActions: function() {
-        var massActionsField = this.getField('quote-data-mass-actions');
-        var disableMassActions = false;
+        var massActionsField;
+        var groupBtn;
+        var massDeleteBtn;
+        var disableMassActions;
+        var quoteModel;
 
-        if (massActionsField) {
-            if (this._bundlesAreEmpty()) {
-                disableMassActions = true;
+        if (this.disposed) {
+            return;
+        }
+
+        massActionsField = this.getField('quote-data-mass-actions');
+        groupBtn = this.getField('group_button');
+        massDeleteBtn = this.getField('massdelete_button');
+        disableMassActions = false;
+
+        quoteModel = _.find(this.massCollection.models, function(model) {
+            return model.get('_module') === 'Quotes';
+        });
+
+        if (quoteModel) {
+            // get rid of any Quotes models from the mass collection
+            this.massCollection.remove(quoteModel, {silent: true});
+        }
+
+        if (this._bundlesAreEmpty()) {
+            if (massActionsField) {
+                massActionsField.setDisabled(true);
+            }
+        } else {
+            // qlis exist
+            if (massActionsField) {
+                massActionsField.setDisabled(false);
             }
 
-            massActionsField.setDisabled(disableMassActions);
+            disableMassActions = this.massCollection.models.length === 0;
+
+            if (groupBtn) {
+                groupBtn.setDisabled(disableMassActions);
+            }
+            if (massDeleteBtn) {
+                massDeleteBtn.setDisabled(disableMassActions);
+            }
         }
     },
 

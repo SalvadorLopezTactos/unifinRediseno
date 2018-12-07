@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Cuadro de mando de la lista de partidas de ingresos',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Cuadro de mando del registro de partidas de ingresos',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Producto de Campaña',
     'LBL_MODULE_NAME' => 'Líneas de Ingreso',
     'LBL_MODULE_NAME_SINGULAR' => 'Línea de Ingreso',

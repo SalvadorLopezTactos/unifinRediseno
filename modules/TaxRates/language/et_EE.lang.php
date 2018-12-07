@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Maksumäära kustutamiseks täpsustage kirje numbrit.',
   'NTC_STATUS' => 'Selle maksumäära eemaldamiseks Maksumäära ripploenditest määrake selle olekuks Inaktiivne',
   'NTC_LIST_ORDER' => 'Määrake järjekord, milles see maksumäär ripploendites Maksumäär kuvatakse',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktiivne',
-    'Inactive' => 'Inaktiivne',
-  ),
   'LBL_EDITLAYOUT' => 'Muuda paigutust' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Looja ID',
   'LBL_MODIFIED_ID'=>'Muutja ID',

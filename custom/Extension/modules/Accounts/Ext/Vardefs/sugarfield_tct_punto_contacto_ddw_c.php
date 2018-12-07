@@ -1,107 +1,57 @@
 <?php
- // created: 2018-07-11 14:11:13
-$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['labelValue']='Punto de Contacto';
-$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['dependency']='';
-$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']=array (
-  'trigger' => 'medio_digital_c',
-  'values' => 
-  array (
-    'Facebook' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-      3 => 'Chat',
-      4 => 'Publicacion',
-    ),
-    'Twitter' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-      3 => 'Chat',
-      4 => 'Publicacion',
-    ),
-    'Instagram' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-      3 => 'Chat',
-      4 => 'Publicacion',
-    ),
-    'Web' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-    ),
-    'LinkedIn' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-      3 => 'Chat',
-      4 => 'Publicacion',
-    ),
-    'Radio Online' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-    ),
-    'Prensa Online' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-    ),
-    'TV Online' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-    ),
-    'Revistas Online' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-    ),
-    'TV' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-    ),
-    'Radio' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-    ),
-    'Prensa' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-    ),
-    'Revistas' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-    ),
-    'Espectaculares' => 
-    array (
-      0 => '',
-      1 => 'Portal',
-      2 => 'Telefono',
-    ),
-    '' => 
-    array (
-    ),
-  ),
-);
+ // created: 2018-12-05 18:17:34
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['labelValue'] = 'Punto de Contacto';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['dependency'] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['trigger'] = 'medio_digital_c';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Facebook'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Facebook'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Facebook'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Facebook'][3] = 'Chat';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Facebook'][4] = 'Publicacion';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Twitter'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Twitter'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Twitter'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Twitter'][3] = 'Chat';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Twitter'][4] = 'Publicacion';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Instagram'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Instagram'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Instagram'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Instagram'][3] = 'Chat';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Instagram'][4] = 'Publicacion';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Web'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Web'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Web'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['LinkedIn'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['LinkedIn'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['LinkedIn'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['LinkedIn'][3] = 'Chat';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['LinkedIn'][4] = 'Publicacion';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Radio Online'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Radio Online'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Radio Online'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Prensa Online'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Prensa Online'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Prensa Online'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['TV Online'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['TV Online'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['TV Online'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Revistas Online'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Revistas Online'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Revistas Online'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['TV'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['TV'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['TV'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Radio'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Radio'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Radio'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Prensa'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Prensa'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Prensa'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Revistas'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Revistas'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Revistas'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Espectaculares'][0] = '';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Espectaculares'][1] = 'Portal';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['visibility_grid']['values']['Espectaculares'][2] = 'Telefono';
+$dictionary['Account']['fields']['tct_punto_contacto_ddw_c']['full_text_search']['boost'] = 1;
 
- ?>

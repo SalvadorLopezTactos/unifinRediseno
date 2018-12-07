@@ -60,7 +60,7 @@ class SugarACLUsers extends SugarACLStrategy
      * @param string $module
      * @param string $view
      * @param array $context
-     * @return bool|void
+     * @return bool
      */
     public function checkAccess($module, $view, $context)
     {
@@ -77,6 +77,10 @@ class SugarACLUsers extends SugarACLStrategy
         }
 
         $current_user = $this->getCurrentUser($context);
+
+        if (!$current_user) {
+            return false;
+        }
 
         // Deny access to export if it disabled globally or user is not an admin
         if ($view == 'export' && (!empty($sugar_config['disable_export'])
@@ -253,17 +257,15 @@ class SugarACLUsers extends SugarACLStrategy
     }
 
     /**
-     * Check if the User and the Bean are the same
-     * @param object|bool $bean
-     * @param object $current_user
-     * @return type
+     * Check if the user is the current user
+     *
+     * @param User|null $user
+     * @param User|null $current_user
+     *
+     * @return bool
      */
-    public function myselfCheck($bean, $current_user)
+    public function myselfCheck($user, $current_user)
     {
-        $myself = false;
-        if($bean !== false) {
-            $myself = !empty($bean->id) && $bean->id == $current_user->id;
-        }
-        return $myself;
+        return $user && $current_user && $user->id == $current_user->id;
     }
 }

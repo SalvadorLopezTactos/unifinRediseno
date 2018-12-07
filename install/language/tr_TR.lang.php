@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> 'Bu sorgu, rapordaki ilk sorgunun altında sıralanacak',
     'ERR_DB_VERSION_FAILURE'			=> 'Veritabanı versiyonunu kontrol edilemiyor.',
 
-
-	'ERR_OC_PASSWORD'					=> 'Şifre gerekli.',
-	'ERR_OC_SERVER_URL'					=> 'Sugar Sunucu URL adresi gerekli.',
-	'ERR_OC_USERNAME'					=> 'Sunucu için kullanıcı ismi gereklidir.',
-	'LBL_INSTALL_OC'					=> 'Çevrimdışı İstemci Kur',
-    'LBL_OC_ADMIN'                      => 'Bu problemi çözmek için Sistem Yöneticinize başvurun.',
-    'LBL_OC_SUCCESS'                    => 'Çevrimdışı istemci yüklemesi tamamlandı. Lütfen kurulumuza alınması için aşağıdaki butona tıklayın.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'Yönetici Kullanıcı İsmi',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'Doğru kurulum ve çevrimdışı istemcileri eşitlemek için aşağıdaki detayları giriniz.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'Sugar Sunucusunun URL Adresi',
-	'LBL_OC_INSTALL_PASS'				=> 'Sunucu kullanıcısı için Şifre',
-	'LBL_OC_INSTALL_TITLE'				=> 'Çevrimdışı İstemci Yüklemesi',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'Bu Sugar sunucusuna bağlanacağınız kullanıcı ismidir.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'Kullanıcı İsmi',
-	'LBL_PERFORM_OC_INSTALL'			=> 'Çevrimdışı İstemci Yüklemesi Başlatılıyor',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'Doğru kurulum ve çevrimdışı istemcileri eşitlemek için aşağıdaki detayları giriniz.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Sugar yönetici kullanıcısı için kullanıcı ismi belirtin.',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Sugar yönetici kullanıcısı için parola verin.',
@@ -76,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Uyumluluk denetimi sırasında hatalar tespit edildi. SugarCRM Kurulum işleminin düzgün çalışması için, lütfen aşağıda sıralanan problemleri gidermek için gerekli adımları atıp, yeniden kontrol butonuna basın ya da yeniden yüklemeyi deneyin.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference değeri On (php.ini içinde Off yapılmalıdır)',
 
-	'ERR_CHECKSYS_CURL'					=> 'Bulunamadı: Sugar Zamanlayıcı, sınırlı işlevler ile çalışacak. E-posta arşivleme hizmeti çalışmayacak.',
+	'ERR_CHECKSYS_CURL'					=> 'Bulunamadı: Sugar Planlayıcı, sınırlı işlevlerle çalışacak. E-posta Arşivleme hizmeti çaılşamayacak.',
     'ERR_CHECKSYS_IMAP'					=> 'Bulunamadı : Gelen E-Posta ve Kampanyalar (E-Posta) için  IMAP kütüphaneleri gerekiyor. İkisi de çalışmayacak.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'MS SQL Server kullanırken, Magic Quotes GPC "On" olarak değiştirilemez.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Uyarı:',
@@ -92,7 +75,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'IIS/FastCGI sapi kullanımının optimal performansı için, php.ini dosyasında fastcgi.logging değerini 0 olarak belirtin.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Desteklenmeyen PHP Versiyonu Yüklendi: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Veritabanı kullanılamaz',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Veritabanı Desteği bulunamadı. Lütfen desteklenen şu Veritabanı Türlerinden biri için gerekli sürücülere sahip olduğunuzdan emin olun: MySQL, MS SQL Server, Oracle veya DB2. Php.ini dosyasındaki uzantı açıklamasını kaldırmanız veya PHP sürümünüze bağlı olarak doğru ikili dosya ile tekrar derlemeniz gerekebilir. Lütfen Veritabanı Desteği Etkinleştirme ile ilgili daha fazla bilgi için PHP Kılavuzuna başvurun.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Veri Tabanı Desteği bulunamadı. Lütfen aşağıdaki desteklenen Veri Tabanı Türlerinden biri için gerekli sürücülere sahip olduğunuzdan emin olun: MySQL, MS SQLServer, Oracle veya DB2.  PHP sürümünüze bağlı olarak php.ini dosyasındaki uzantı açıklamasını kaldırmanız veya  doğru ikili dosya ile yeniden derlemeniz gerekebilir.  Veri Tabanı Desteğinin nasıl etkinleştirildiğiyle ilgili daha fazla bilgi için lütfen PHP Kılavuzuna bakın.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Sugar uygulaması tarafından ihtiyaç duyulan XML Ayrıştırıcı Kütüphaneleri fonksiyonları bulunamadı. PHP versiyonun bağlı olarak, php.ini dosyasında eklentileri aktive etmeniz veya doğru seçenekler ile tekrar derlemeniz gerekebilir. Daha fazla bilgi için PHP Kılavuzuna bakınız.',
     'LBL_CHECKSYS_CSPRNG' => 'Rasgele sayı üretici',
     'ERR_CHECKSYS_MBSTRING'             => 'Sugar uygulaması tarafından ihtiyaç duyulan Multibyte Strings PHP eki (mbstring) ile ilişkili fonksiyonlar bulunamadı.<br/><br/><br />Genellikle mbstring modülü varsayılan olarak PHP içinde etkin olmayıp, PHP programı oluşturulurken --enable-mbstring seçeneği ile etkinleştirilmelidir. <br /> Mbstring desteğini etkinleştirmek ile ilgili daha fazla bilgi için PHP Kılavuzuna bakınız.',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'Yükleme Dosya Boyutu',
 	'ERR_URL_BLANK'						=> 'Sugar kurulumu için temel URL adresini girin.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'Kurma kaydı bulunamıyor:',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'Aktarılan dosya Sugar türü ile uyumlu değil (Community Edition, Professional, veya Enterprise):',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'Yüklenen dosya, Sugar\'ın bu sürümüyle (Professional, Enterprise or Ultimate edition) uyumlu değil: ',
 	'ERROR_LICENSE_EXPIRED'				=> "Hata: Lisansınızın zamanı geçmiş",
 	'ERROR_LICENSE_EXPIRED2'			=> "gün önce (s). Gidiniz <a href=\"index.php?action=LicenseSettings&module=Administration\"Lisans Yönetimi\"</ a> Yönetici ekranından yeni lisans anahtarını girin. Eğer lisans anahtarını son 30 gün içinde yeni bir lisans anahtarı ile değiştirmezseniz, bu uygulamaya girişiniz mümkün olmayacaktır.",
 	'ERROR_MANIFEST_TYPE'				=> 'Bildirim dosyası paket türü belirtmelisiniz.',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'Son Geçerlilik Tarihi',
 	'LBL_LICENSE_I_ACCEPT'				=> 'Kabul Ediyorum',
 	'LBL_LICENSE_NUM_USERS'				=> 'Kullanıcı Sayısı',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'Lütfen satın alınan çevrimdışı istemci adedini girin.',
-	'LBL_LICENSE_OC_NUM'				=> 'Çevrimdışı İstemci Lisans Sayısı',
-	'LBL_LICENSE_OC'					=> 'Çevrimdışı istemci lisansları',
 	'LBL_LICENSE_PRINTABLE'				=> 'Yazdırılabilir Görünüm',
     'LBL_PRINT_SUMM'                    => 'Özeti Yazdır',
 	'LBL_LICENSE_TITLE_2'				=> 'SugarCRM Lisansı',
@@ -496,10 +476,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'Karşılaştırma Ayarları',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Sugar kurulumu için Sistem İsmini girin.',
 	'LBL_PATCH_UPLOAD' => 'Yerel bilgisayarınızdan bir yama dosyası seçin',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'Php versiyon 5 veya üstü gerekmekte.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(Mevcut php versiyonunuz',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php Geri Uyumluluk modu açık. Devam etmek için zend.ze1_compatibility_mod u kapalı duruma getirin',
 
     'advanced_password_new_account_email' => array(
@@ -519,5 +495,3 @@ $mod_strings = array(
         'name' => 'Unutulan Şifre e-postası',
         ),
 );
-
-?>

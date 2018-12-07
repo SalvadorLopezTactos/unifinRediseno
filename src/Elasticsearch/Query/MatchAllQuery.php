@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Query;
 
+use Elastica\Query\MatchAll;
+
 /**
  *
  * The match all query without search terms
@@ -21,10 +23,10 @@ class MatchAllQuery implements QueryInterface
 {
     /**
      * Create a match all query
-     * @return \Elastica\Query\MatchAll
+     * @return MatchAll
      */
     public function build()
     {
-        return new \Elastica\Query\MatchAll();
+        return new MatchAll();
     }
 }

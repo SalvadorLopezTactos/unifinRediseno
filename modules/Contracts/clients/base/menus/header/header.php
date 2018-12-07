@@ -12,14 +12,14 @@
 $module_name = 'Contracts';
 $viewdefs[$module_name]['base']['menu']['header'] = array(
     array(
-        'route' => '#bwc/index.php?module=Contracts&action=EditView&return_module=Contracts&return_action=DetailView',
+        'route' => '#Contracts/create',
         'label' =>'LNK_NEW_CONTRACT',
         'acl_action'=>'create',
         'acl_module'=>$module_name,
         'icon' => 'fa-plus',
     ),
     array(
-        'route'=>'#bwc/index.php?module=Contracts&action=index',
+        'route'=>'#Contracts',
         'label' =>'LNK_CONTRACT_LIST',
         'acl_action'=>'list',
         'acl_module'=>$module_name,

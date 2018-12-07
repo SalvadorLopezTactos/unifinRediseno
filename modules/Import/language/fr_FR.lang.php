@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Plusieurs colonnes ont étés définies avec le même nom de champ en sortie.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Champ(s) obligatoire(s) manquant :',
     'ERR_MISSING_MAP_NAME' => 'Nom de mapping manquant',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'L&#39;import d&#39;utilisateurs est désactivé pour le mode IDM.',
     'ERR_SELECT_FULL_NAME' => 'Vous ne pouvez pas sélectionner le nom lorsque le nom et le prénom sont sélectionnés.',
     'ERR_SELECT_FILE' => 'Vous devez sélectionner un fichier à importer.',
     'LBL_SELECT_FILE' => 'Sélectionnez le fichier que vous voulez importer dans SugarCRM :',

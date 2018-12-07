@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'อัปเดตบทความ KBContent',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'เผยแพร่บทความที่อนุมัติและกำหนดให้บทความ KB หมดอายุ',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'งานที่จัดลำดับไว้ของ Advanced Workflow',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'สร้างข้อมูลความปลอดภัยของทีมที่ถูกดีนอร์มัลไลซ์ใหม่',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'ช่วงเวลา:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'เครื่องมือวางกำหนดการคิว Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'นำไฟล์ของเครื่องมือวินิจฉัยออก',
 'LBL_SUGARJOBREMOVETMPFILES' => 'นำไฟล์ชั่วคราวออก',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'สร้างข้อมูลความปลอดภัยของทีมที่ถูกดีนอร์มัลไลซ์ใหม่',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'เรียกใช้แคมเปญของอีเมลเป็นกลุ่มในช่วงกลางคืน',
 'LBL_ASYNCMASSUPDATE' => 'ดำเนินการอัปเดตเป็นกลุ่มแบบอะซิงโครนัส',

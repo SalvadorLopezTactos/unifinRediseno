@@ -280,27 +280,10 @@ class Call extends SugarBean {
 
 	function fill_in_additional_detail_fields()
 	{
-		global $locale;
-
 		if ($this->fill_additional_column_fields) {
 			parent::fill_in_additional_detail_fields();
 		}
 
-		if (!empty($this->contact_id)) {
-			$query  = "SELECT first_name, last_name FROM contacts ";
-            $query .= "WHERE id=" . $this->db->quoted($this->contact_id) . " AND deleted=0";
-			$result = $this->db->limitQuery($query,0,1,true," Error filling in additional detail fields: ");
-
-			// Get the contact name.
-			$row = $this->db->fetchByAssoc($result);
-			$GLOBALS['log']->info("additional call fields $query");
-			if($row != null)
-			{
-                $this->contact_name = $locale->formatName('Contacts', $row);
-				$GLOBALS['log']->debug("Call($this->id): contact_name = $this->contact_name");
-				$GLOBALS['log']->debug("Call($this->id): contact_id = $this->contact_id");
-			}
-		}
 		if (!isset($this->duration_minutes)) {
 			$this->duration_minutes = $this->minutes_value_default;
 		}
@@ -734,12 +717,6 @@ class Call extends SugarBean {
 
         if (isset($this->assigned_user_id) && !in_array($this->assigned_user_id, $existingUsers)) {
             $this->users->add($this->assigned_user_id);
-        }
-
-        if (!$isUpdate && isset($GLOBALS['current_user']->id) &&
-            $this->assigned_user_id !== $GLOBALS['current_user']->id &&
-            !in_array($GLOBALS['current_user']->id, $existingUsers)) {
-            $this->users->add($GLOBALS['current_user']->id);
         }
     }
 }

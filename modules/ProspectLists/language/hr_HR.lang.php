@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Nadzorna ploča za popis meta',
+
   'LBL_MODULE_NAME' => 'Popisi meta',
   'LBL_MODULE_NAME_SINGULAR' => 'Popis meta',
   'LBL_MODULE_ID'   => 'Popisi meta',

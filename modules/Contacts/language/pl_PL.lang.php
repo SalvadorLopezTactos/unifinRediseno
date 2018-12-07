@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Pulpit listy kontaktów',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Pulpit rekordów kontaktów',
+
     'LNK_CONTACT_REPORTS' => 'Wyświetl raporty kontaktu',
     'ERR_DELETE_RECORD' => 'Należy podać numer rekordu, aby usunąć kontakt.',
     'LBL_ACCOUNT_ID' => 'ID kontrahenta:',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiuj adres alternatywny do adresu podstawowego',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiuj adres podstawowy do adresu alternatywnego',
     'NTC_DELETE_CONFIRMATION' => 'Czy na pewno chcesz usunąć ten rekord?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Utworzenie szansy wymaga kontrahenta.\n Utwórz nowego kontrahenta lub skorzystaj z już istniejącego.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Utworzenie szansy wymaga kontrahenta.\\n Utwórz nowego kontrahenta lub skorzystaj z już istniejącego.',
     'NTC_REMOVE_CONFIRMATION' => 'Czy na pewno chcesz usunąć ten kontakt ze zgłoszenia?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Czy na pewno chcesz usunąć ten rekord jako raport bezpośredni?',
 
@@ -273,4 +277,6 @@ Aby utworzyć {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Kwalifikacja namiarów',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Raporty Kontaktów',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Wyrażono zgodę na cele biznesowe dla',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ostatnia aktualizacja zgody',
 );

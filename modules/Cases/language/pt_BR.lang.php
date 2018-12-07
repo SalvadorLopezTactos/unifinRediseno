@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Painel de lista de casos',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Painel de registro de casos',
+
 	'ERR_DELETE_RECORD'					=> 'Um número de registro deve ser especificado para excluir a Conta.',
 	'LBL_ACCOUNT_ID'					=> 'ID da Conta',
 	'LBL_ACCOUNT_NAME'					=> 'Nome da conta:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Estado:',
     'LBL_SOURCE' => 'Origem:',
 	'LBL_SUBJECT'						=> 'Assunto:',
-	'LBL_SYSTEM_ID'						=> 'ID do Sistema',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Nome da Conta',
 	'LBL_LIST_ASSIGNED'					=> 'Atribuído a',
 	'LBL_LIST_CLOSE'					=> 'Fechar',
@@ -57,7 +60,7 @@ $mod_strings = array (
 	'LBL_LIST_SUBJECT'					=> 'Assunto',
 	'LBL_LIST_ASSIGNED_TO_NAME'   		=> 'Usuário Designado',
 	'LBL_SHOW_MORE'				        => 'Exibir mais ocorrências',
-	'LNK_CASE_LIST'						=> 'Visualizar Ocorrências',
+	'LNK_CASE_LIST'						=> 'Visualizar ocorrências',
     'LNK_NEW_CASE'						=> 'Criar ocorrência',
     'LBL_CASE_FROM_TWITTER_TITLE'		=> 'Tweet',
     'LNK_CREATE'                        => 'Criar ocorrência',
@@ -69,7 +72,7 @@ $mod_strings = array (
 	'LBL_TYPE' => 'Tipo',
 	'LBL_WORK_LOG' => 'Registro de Trabalho',
 	'LNK_IMPORT_CASES' => 'Importar Ocorrências',
-	'LNK_CASE_REPORTS' => 'Visualizar Relatórios de Ocorrências',
+	'LNK_CASE_REPORTS' => 'Visualizar relatórios de ocorrências',
 	'LBL_SHOW_IN_PORTAL' => 'Mostrar no Portal',
 	'LBL_CREATE_KB_DOCUMENT' => 'Criar Artigo',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'Base de Conhecimento',

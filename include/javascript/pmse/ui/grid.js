@@ -8,8 +8,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-var Grid = function (options) {
-    Container.call(this, options);
+// jscs:disable
+var PMSE = PMSE || {};
+PMSE.Grid = function (options) {
+    PMSE.Container.call(this, options);
 
     /**
      * Array of JS objects describing all the columns of this grid
@@ -28,23 +30,23 @@ var Grid = function (options) {
      */
     this.store = null;
 
-    Grid.prototype.initObject.call(this, options);
+    PMSE.Grid.prototype.initObject.call(this, options);
 };
 
-Grid.prototype = new Container();
+PMSE.Grid.prototype = new PMSE.Container();
 
 /**
  * The type of each instance of this class
  * @property {string}
  */
-Grid.prototype.type = 'Grid';
-Grid.prototype.family = 'Panel';
+PMSE.Grid.prototype.type = 'PMSE.Grid';
+PMSE.Grid.prototype.family = 'PMSE.Panel';
 
 /**
  * Initializes the element with the options given
  * @param {Object} options options for initializing the object
  */
-Grid.prototype.initObject = function (options) {
+PMSE.Grid.prototype.initObject = function (options) {
     var defaults = {
         store: null,
         columns: []
@@ -57,12 +59,12 @@ Grid.prototype.initObject = function (options) {
 /**
  * TODO: ADD COMMENTS HERE
  */
-Grid.prototype.createHTML = function () {
+PMSE.Grid.prototype.createHTML = function () {
     var i,
         table,
         record;
-    //Grid.superclass.prototype.createHTML.call(this);
-    Container.prototype.createHTML.call(this);
+    //PMSE.Grid.superclass.prototype.createHTML.call(this);
+    PMSE.Container.prototype.createHTML.call(this);
     // create the table
     table = document.createElement('table');
     // header
@@ -83,7 +85,7 @@ Grid.prototype.createHTML = function () {
  * @param {Array} headers Array of JSON, each contains a property called 'text' used
  * to create the header of the table
  */
-Grid.prototype.createTableHeaders = function (table, headers) {
+PMSE.Grid.prototype.createTableHeaders = function (table, headers) {
     var row = document.createElement('tr'),
         th,
         i;
@@ -98,10 +100,10 @@ Grid.prototype.createTableHeaders = function (table, headers) {
 
 /**
  * Sets the parent object
- * @param {Panel} parent
+ * @param {PMSE.Panel} parent
  * @return {*}
  */
-Grid.prototype.setParent = function (parent) {
+PMSE.Grid.prototype.setParent = function (parent) {
     this.parent = parent;
     return this;
 }
@@ -112,7 +114,7 @@ Grid.prototype.setParent = function (parent) {
  * @param columns
  * @param record
  */
-Grid.prototype.createTableRow = function (table, columns, record) {
+PMSE.Grid.prototype.createTableRow = function (table, columns, record) {
     var i,
         td,
         row = document.createElement('tr');
@@ -130,7 +132,7 @@ Grid.prototype.createTableRow = function (table, columns, record) {
  * @param {JCore.data.Store} newStore
  * @chainable
  */
-Grid.prototype.setStore = function (newStore) {
+PMSE.Grid.prototype.setStore = function (newStore) {
     this.store = newStore;
     return this;
 };
@@ -139,7 +141,7 @@ Grid.prototype.setStore = function (newStore) {
  * Getter of the store of this object
  * @return {JCore.data.Store}
  */
-Grid.prototype.getStore = function () {
+PMSE.Grid.prototype.getStore = function () {
     return this.store;
 };
 
@@ -148,7 +150,7 @@ Grid.prototype.getStore = function () {
  * @param {Array} newColumns
  * @chainable
  */
-Grid.prototype.setColumns = function (newColumns) {
+PMSE.Grid.prototype.setColumns = function (newColumns) {
     this.columns = newColumns;
     return this;
 };
@@ -157,6 +159,6 @@ Grid.prototype.setColumns = function (newColumns) {
  * Getter of the columns of this object
  * @return {Array}
  */
-Grid.prototype.getColumns = function () {
+PMSE.Grid.prototype.getColumns = function () {
     return this.columns;
 };

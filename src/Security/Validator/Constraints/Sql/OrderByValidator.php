@@ -42,8 +42,8 @@ class OrderByValidator extends ConstraintValidator
 
         $value = (string) $value;
 
-        // validate using regex
-        $regex = '/^[A-Z0-9_.]+$/i';
+        // validate using regex:
+        $regex = '/^((?=[0-9_]*[a-z])[a-z0-9_]+)(\.(?=[0-9_]*[a-z])[a-z0-9_]+)?$/i';
         if (!preg_match($regex, $value)) {
             $this->context->buildViolation($constraint->message)
                 ->setInvalidValue($value)

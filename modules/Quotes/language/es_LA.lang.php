@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Tablero de Lista de Cotizaciones',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Tablero de Registro de Cotizaciones',
+
     'LBL_CONTRACTS'=>'Contratos',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contratos',
     'ERR_DELETE_RECORD' => 'Debe especificar un número de registro para eliminar el presupuesto.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Subtotal (Dólares EEUU)',
     'LBL_SUBTOTAL' => 'Subtotal:',
     'LBL_TAXABLE_SUBTOTAL' => 'Subtotal Imponible',
-    'LBL_SYSTEM_ID' => 'ID de Sistema',
     'LBL_TAX_USDOLLAR'=>'Impuestos (Dólares EEUU)',
     'LBL_TAX' => 'Impuestos:',
     'LBL_TAX_TOTAL' => 'Total del impuesto',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Eliminar Selección',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Eliminar Artículos Seleccionados',
     'LBL_SAVE_LINE_ITEMS' => 'Guarde cualquier artículo activo haciendo clic en la casilla de verificación azul contigua a cada uno, antes de guardar esta Cotización.',
+    'LBL_COPY_LINE_ITEMS' => 'Guarde los elementos de la línea activa haciendo clic en la marca de verificación azul al lado de cada uno de ellos antes de copiar este presupuesto.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Buscar en el Catálogo de productos',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'No hay datos disponibles',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Copiando elementos de la línea de presupuesto al nuevo presupuesto.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Copiando elementos de la línea de presupuesto al nuevo presupuesto. Este proceso puede tardar un tiempo.',
 );

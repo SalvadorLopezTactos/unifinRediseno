@@ -22,7 +22,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\AbstractHandle
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\AnalysisHandlerInterface;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\MappingHandlerInterface;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\SearchFieldsHandlerInterface;
-use Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
+use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\SearchField;
 
 /**
  *
@@ -49,7 +49,8 @@ class MultiFieldHandler extends AbstractHandler implements
         ),
         'text' => array(
             'gs_string',
-            'gs_text_wildcard',
+            // Disable wildcard search awaiting optimization
+            //'gs_text_wildcard',
         ),
         'datetime' => array(
             'gs_datetime',
@@ -66,7 +67,7 @@ class MultiFieldHandler extends AbstractHandler implements
             'gs_string_wildcard',
         ),
         'phone' => array(
-            'not_analyzed',
+            'gs_not_analyzed',
             'gs_phone_wildcard',
         ),
         'url' => array(
@@ -74,179 +75,23 @@ class MultiFieldHandler extends AbstractHandler implements
             'gs_url_wildcard',
         ),
         'id' => array(
-            'not_analyzed',
+            'gs_not_analyzed',
         ),
         'exact' => array(
             'gs_string_exact',
         ),
         'longtext' => array(
             'gs_string',
-            'gs_text_wildcard',
+            // Disable wildcard search awaiting optimization
+            //'gs_text_wildcard',
         ),
         'htmleditable_tinymce' => array(
             'gs_string',
-            'gs_text_wildcard',
+            // Disable wildcard search awaiting optimization
+            //'gs_text_wildcard',
         ),
         'enum' => array(
-            'not_analyzed',
-        ),
-    );
-
-    /**
-     * By default this handler creates not_analyzed multi field base to stack
-     * the different mappings on top of it. However for fields which contain
-     * long texts, we will hit the term limit of 32'766 bytes. Therefor for the
-     * listed fields a non-indexed multi field base will be created instead.
-     *
-     * @var array
-     */
-    protected $longFieldTypes = array(
-        'text',
-        'longtext',
-        'htmleditable_tinymce',
-    );
-
-    /**
-     * Multi field definitions
-     * @var array
-     */
-    protected $multiFieldDefs = array(
-
-        /*
-         * This is a special analyzer to be able to use fields with
-         * not_analyzed values only. This is part of the multi field
-         * definition as every multi field is not_analyzed by default.
-         */
-        'not_analyzed' => array(),
-
-        /*
-         * Default string analyzer with full word matching base ond
-         * the standard analyzer. This will generate hits on the full
-         * words tokenized by the standard analyzer.
-         */
-        'gs_string' => array(
-            'type' => 'string',
-            'index' => 'analyzed',
-            'index_analyzer' => 'gs_analyzer_string',
-            'search_analyzer' => 'gs_analyzer_string',
-            'store' => true,
-        ),
-
-        /*
-         * String analyzer using ngrams for wildcard matching. The
-         * weighting of the hits on this mapping are less than full
-         * matches using the default string mapping.
-         */
-        'gs_string_wildcard' => array(
-            'type' => 'string',
-            'index' => 'analyzed',
-            'index_analyzer' => 'gs_analyzer_string_ngram',
-            'search_analyzer' => 'gs_analyzer_string',
-            'store' => true,
-        ),
-
-        /*
-         * Wildcard analyzer for text fields. Because they can become
-         * big we use a text_ngram definition.
-         */
-        'gs_text_wildcard' => array(
-            'type' => 'string',
-            'index' => 'analyzed',
-            'index_analyzer' => 'gs_analyzer_text_ngram',
-            'search_analyzer' => 'gs_analyzer_string',
-            'store' => true,
-        ),
-
-        /*
-         * Date field mapping. Date fields are not searchable but are
-         * needed to be returned as part of the dataset and to be able
-         * to perform facets on. Note that the index cannot be 'no' to
-         * return the fields of 'gs_datetime' type in the facets.
-         */
-        'gs_datetime' => array(
-            'type' => 'date',
-            'format' => 'YYYY-MM-dd HH:mm:ss',
-            'store' => false,
-        ),
-        'gs_date' => array(
-            'type' => 'date',
-            'format' => 'YYYY-MM-dd',
-            'store' => false,
-        ),
-
-        /*
-         * Integer mapping.
-         */
-        'gs_integer' => array(
-            'type' => 'integer',
-            'index' => 'no',
-            'store' => false,
-        ),
-
-        /*
-         * Phone mapping. The analyzer supports partial matches using
-         * ngrams and transforms every phone number in pure numbers
-         * only to be able to search for different formats and still
-         * get hits. For example the data source for +32 (475)61.64.28
-         * will be stored and analyzed as 32475616428 including ngrams
-         * based on this result. When phone number fields are included
-         * in the search matching will happen when searching for:
-         *      +32 475 61.64.28
-         *      (32)475-61-64-28
-         *      ...
-         */
-        'gs_phone_wildcard' => array(
-            'type' => 'string',
-            'index' => 'analyzed',
-            'index_analyzer' => 'gs_analyzer_phone_ngram',
-            'search_analyzer' => 'gs_analyzer_phone',
-            'store' => true,
-        ),
-
-        /*
-         * URL analyzer
-         */
-        'gs_url' => array(
-            'type' => 'string',
-            'index' => 'analyzed',
-            'index_analyzer' => 'gs_analyzer_url',
-            'search_analyzer' => 'gs_analyzer_url',
-            'store' => false,
-        ),
-
-        /*
-         * Wildcard matching for URLs.
-         */
-        'gs_url_wildcard' => array(
-            'type' => 'string',
-            'index' => 'analyzed',
-            'index_analyzer' => 'gs_analyzer_url_ngram',
-            'search_analyzer' => 'gs_analyzer_url',
-            'store' => false,
-        ),
-
-        /*
-         * String analyzer with full word matching base ond
-         * the whitespace analyzer. This will generate hits on the full
-         * words tokenized by the whitespace analyzer.
-         */
-        'gs_string_exact' => array(
-            'type' => 'string',
-            'index' => 'analyzed',
-            'index_analyzer' => 'gs_analyzer_string_exact',
-            'search_analyzer' => 'gs_analyzer_string_exact',
-            'store' => true,
-        ),
-
-        /*
-         * Analyzer for html
-         */
-        'gs_string_html' => array(
-            'type' => 'string',
-            'index' => 'analyzed',
-            'index_analyzer' => 'gs_analyzer_string_html',
-            'search_analyzer' => 'gs_analyzer_string_html',
-            'store' => true,
+            'gs_not_analyzed',
         ),
     );
 
@@ -266,6 +111,7 @@ class MultiFieldHandler extends AbstractHandler implements
      * @var array
      */
     protected $highlighterFields = array(
+        '*.gs_not_analyzed' => array(),
         '*.gs_string' => array(),
         '*.gs_string_exact' => array(),
         '*.gs_string_html' => array(),
@@ -273,6 +119,150 @@ class MultiFieldHandler extends AbstractHandler implements
         '*.gs_text_wildcard' => array(),
         '*.gs_phone_wildcard' => array(),
     );
+
+    /**
+     * Multi field definitions
+     * @var array
+     */
+    protected $multiFieldDefs = [
+
+        /*
+         * Mapping which stores the values as a single term. This
+         * is the equivalent to the old Elasticsearch behavior for
+         * `index: not_analyzed` which is no longer supported.
+         */
+        'gs_not_analyzed' => [
+            'type' => 'keyword',
+            'index' => true,
+            'store' => true,
+        ],
+
+        /*
+         * Default string analyzer with full word matching base ond
+         * the standard analyzer. This will generate hits on the full
+         * words tokenized by the standard analyzer.
+         */
+        'gs_string' => [
+            'type' => 'text',
+            'index' => true,
+            'analyzer' => 'gs_analyzer_string',
+            'store' => true,
+        ],
+
+        /*
+         * String analyzer using ngrams for wildcard matching. The
+         * weighting of the hits on this mapping are less than full
+         * matches using the default string mapping.
+         */
+        'gs_string_wildcard' => [
+            'type' => 'text',
+            'index' => true,
+            'analyzer' => 'gs_analyzer_string_ngram',
+            'search_analyzer' => 'gs_analyzer_string',
+            'store' => true,
+        ],
+
+        /*
+         * Wildcard analyzer for text fields. Because they can become
+         * big we use a text_ngram definition.
+         */
+        'gs_text_wildcard' => [
+            'type' => 'text',
+            'index' => true,
+            'analyzer' => 'gs_analyzer_text_ngram',
+            'search_analyzer' => 'gs_analyzer_string',
+            'store' => true,
+        ],
+
+        /*
+         * Date field mapping. Date fields are not searchable but are
+         * needed to be returned as part of the dataset and to be able
+         * to perform facets on. Note that the index cannot be 'no' to
+         * return the fields of 'gs_datetime' type in the facets.
+         */
+        'gs_datetime' => [
+            'type' => 'date',
+            'format' => 'YYYY-MM-dd HH:mm:ss',
+            'store' => false,
+        ],
+        'gs_date' => [
+            'type' => 'date',
+            'format' => 'YYYY-MM-dd',
+            'store' => false,
+        ],
+
+        /*
+         * Integer mapping.
+         */
+        'gs_integer' => [
+            'type' => 'integer',
+            'index' => false,
+            'store' => false,
+        ],
+
+        /*
+         * Phone mapping. The analyzer supports partial matches using
+         * ngrams and transforms every phone number in pure numbers
+         * only to be able to search for different formats and still
+         * get hits. For example the data source for +32 (475)61.64.28
+         * will be stored and analyzed as 32475616428 including ngrams
+         * based on this result. When phone number fields are included
+         * in the search matching will happen when searching for:
+         *      +32 475 61.64.28
+         *      (32)475-61-64-28
+         *      ...
+         */
+        'gs_phone_wildcard' => [
+            'type' => 'text',
+            'index' => true,
+            'analyzer' => 'gs_analyzer_phone_ngram',
+            'search_analyzer' => 'gs_analyzer_phone',
+            'store' => true,
+        ],
+
+        /*
+         * URL analyzer
+         */
+        'gs_url' => [
+            'type' => 'text',
+            'index' => true,
+            'analyzer' => 'gs_analyzer_url',
+            'store' => false,
+        ],
+
+        /*
+         * Wildcard matching for URLs.
+         */
+        'gs_url_wildcard' => [
+            'type' => 'text',
+            'index' => true,
+            'analyzer' => 'gs_analyzer_url_ngram',
+            'search_analyzer' => 'gs_analyzer_url',
+            'store' => false,
+        ],
+
+        /*
+         * String analyzer with full word matching base ond
+         * the whitespace analyzer. This will generate hits on the full
+         * words tokenized by the whitespace analyzer.
+         */
+        'gs_string_exact' => [
+            'type' => 'text',
+            'index' => true,
+            'analyzer' => 'gs_analyzer_string_exact',
+            'store' => true,
+        ],
+
+        /*
+         * Analyzer for html
+         */
+        'gs_string_html' => [
+            'type' => 'text',
+            'index' => true,
+            'analyzer' => 'gs_analyzer_string_html',
+            'store' => true,
+        ],
+    ];
 
     /**
      * {@inheritdoc}
@@ -402,88 +392,33 @@ class MultiFieldHandler extends AbstractHandler implements
         $fieldType = $defs['type'];
 
         foreach ($this->typesMultiField[$fieldType] as $multiField) {
-            /*
-             * When a field is searchable we want to add a module prefix to the
-             * field name to ensure disambigious field names during query time.
-             * In certain case (i.e. MultiMatch query) Elasticsearch does not
-             * properly resolve qualified field names removing the type prefix.
-             * Because of this we can get hits on fields we didn't ask for and
-             * hence we want to ensure the searchable field names are unique.
-             *
-             * 1. Create a not analyzed field for the regular field name with
-             * an additional copy_to to the unique field name.
-             * 2. Create the actual mapping on the new unique field. Because of
-             * the copy_to functionality there is no need to add additional
-             * logic during indexing.
-             */
-            if ($this->isFieldSearchable($defs)) {
-                $realField = $mapping->getModule() . QueryBuilder::PREFIX_SEP . $field;
-                $this->createMultiFieldBase($mapping, $realField, $fieldType);
-            } else {
-                $realField = $field;
-            }
-
-            // create multi field base for primary field
-            $copyTo = $realField === $field ? array() : array($realField);
-            $this->createMultiFieldBase($mapping, $field, $fieldType, $copyTo);
-
-            // add multi field mapping if available
             if ($property = $this->getMultiFieldProperty($multiField)) {
-                $mapping->addMultiField($realField, $multiField, $property);
+                $mapping->addModuleField($field, $multiField, $property);
+
+                // Sortable fields also receive a common field to make sorting
+                // possible when querying multiple modules at once.
+                if ($field === 'date_modified' || !empty($defs['full_text_search']['sortable'])) {
+                    $mapping->addCommonField($field, $multiField, $property);
+                }
             }
         }
-    }
-
-    /**
-     * Create multi field base
-     * @param string $field
-     * @param string $fieldType
-     * @param array $copyTo
-     */
-    protected function createMultiFieldBase(Mapping $mapping, $field, $fieldType, array $copyTo = array())
-    {
-        if ($this->isLongFieldType($fieldType)) {
-            $mapping->addNotIndexedField($field, $copyTo);
-        } else {
-            $mapping->addNotAnalyzedField($field, $copyTo);
-        }
-    }
-
-    /**
-     * Check if given field type is defined as a long field
-     * @param string $fieldType
-     * @return boolean
-     */
-    protected function isLongFieldType($fieldType)
-    {
-        return in_array($fieldType, $this->longFieldTypes);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildSearchFields(SearchFields $sf, $module, $field, array $defs)
+    public function buildSearchFields(SearchFields $sfs, $module, $field, array $defs)
     {
         // Skip field if no multi field mapping has been defined or no type available
         if (!isset($defs['type']) || !isset($this->typesMultiField[$defs['type']])) {
             return;
         }
 
-        // Use prefixed field name
-        $field = $module . QueryBuilder::PREFIX_SEP . $field;
-
         // Add fields which are based on strings
         foreach ($this->getStringFieldsForType($defs['type']) as $searchField) {
-            if ($searchField === 'not_analyzed') {
-                $path = array($field);
-                $weightId = $field;
-                // add explicit field to highlighter
-                $this->addHighlighterField($module, $field, array('number_of_fragments' => 0));
-            } else {
-                $path = array($field, $searchField);
-                $weightId = $searchField;
-            }
-            $sf->addSearchField($module, $path, $defs, $weightId);
+            $sf = new SearchField($module, $field, $defs);
+            $sf->setPath([$field, $searchField]);
+            $sfs->addSearchField($sf, $searchField);
         }
     }
 
@@ -503,8 +438,7 @@ class MultiFieldHandler extends AbstractHandler implements
      */
     protected function addHighlighterField($module, $field, array $settings = array())
     {
-        //$highlightField = $module . QueryBuilder::PREFIX_SEP . $field;
-        $this->provider->addHighlighterFields(array($field => $settings));
+        $this->provider->addHighlighterFields([$field => $settings]);
     }
 
     /**
@@ -530,13 +464,8 @@ class MultiFieldHandler extends AbstractHandler implements
      */
     protected function isStringBased($multiFieldDef)
     {
-        // special case for not_analyzed fields
-        if ($multiFieldDef === 'not_analyzed') {
-            return true;
-        }
-
         $defs = $this->multiFieldDefs[$multiFieldDef];
-        if (isset($defs['type']) && $defs['type'] === 'string') {
+        if (isset($defs['type']) && in_array($defs['type'], ['text', 'keyword'])) {
             return true;
         }
 
@@ -569,15 +498,5 @@ class MultiFieldHandler extends AbstractHandler implements
         $multiField->setMapping($this->multiFieldDefs[$name]);
 
         return $multiField;
-    }
-
-    /**
-     * Wrapper for field searchable check
-     * @param array $defs
-     * @return boolean
-     */
-    protected function isFieldSearchable(array $defs)
-    {
-        return $this->provider->getContainer()->metaDataHelper->isFieldSearchable($defs);
     }
 }

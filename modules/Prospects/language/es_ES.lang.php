@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Cuadro de mando de la lista de objetivos',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Cuadro de mando del registro de objetivos',
+
   'LBL_MODULE_NAME' => 'Público Objetivo',
   'LBL_MODULE_NAME_SINGULAR' => 'Público Objetivo',
   'LBL_MODULE_ID'   => 'Público Objetivo',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Saludo',
   'LBL_SAVE_PROSPECT' => 'Guardar Público Objetivo',
   'LBL_CREATED_OPPORTUNITY' =>'Crear una nueva oportunidad',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'La creación de una oportunidad requiere una cuenta.\n Cree una cuenta nueva o seleccione una existente.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'La creación de una oportunidad requiere una cuenta.\\n Cree una cuenta nueva o seleccione una existente.',
   'LNK_SELECT_ACCOUNT' => "Seleccionar Cuenta",
   'LNK_NEW_PROSPECT' => 'Crear Público Objetivo',
   'LNK_PROSPECT_LIST' => 'Ver Público Objetivo',
@@ -195,4 +199,6 @@ Para crear un {{module_name}}:
 2. Haga clic en "Guardar" para finalizar el nuevo registro y volver a la página anterior.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Informes de Público Objetivo',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Consentimiento para fines comerciales',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Última actualización del consentimiento',
 );

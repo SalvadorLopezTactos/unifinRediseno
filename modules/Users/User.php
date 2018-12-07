@@ -12,7 +12,8 @@
 
 use \Sugarcrm\Sugarcrm\Security\Password\Hash;
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
-
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
 /**
  * User is used to store customer information.
@@ -70,6 +71,7 @@ class User extends Person {
 	var $table_name = "users";
 	var $module_dir = 'Users';
 	var $object_name = "User";
+    public $module_name = 'Users';
 	var $user_preferences;
 
 	var $importable = true;
@@ -574,8 +576,7 @@ class User extends Person {
 		global $sugar_flavor;
         $admin = Administration::getSettings();
 		if((isset($sugar_flavor) && $sugar_flavor != null) &&
-			($sugar_flavor=='CE' || isset($admin->settings['license_enforce_user_limit']) && $admin->settings['license_enforce_user_limit'] == 1)){
-
+            (isset($admin->settings['license_enforce_user_limit']) && $admin->settings['license_enforce_user_limit'] == 1)) {
 	        // Begin Express License Enforcement Check
 			// this will cause the logged in admin to have the licensed user count refreshed
 				if( isset($_SESSION['license_seats_needed']))
@@ -688,6 +689,16 @@ class User extends Person {
         $this->savePreferencesToDB();
         //CurrentUserApi needs a consistent timestamp/format of the data modified for hash purposes.
         $this->hashTS = $this->date_modified;
+
+        $oe = BeanFactory::newBean('OutboundEmail');
+        $oeSystemOverride = $oe->getUsersMailerForSystemOverride($this->id);
+
+        if ($oeSystemOverride) {
+            $oeSystemOverride->populateFromUser($this);
+            $oeSystemOverride->save();
+        } elseif (!$oe->isAllowUserAccessToSystemDefaultOutbound()) {
+            $oe->createUserSystemOverrideAccount($this->id);
+        }
 
         // In case this new/updated user changes the system status, reload it here
         apiLoadSystemStatus(true);
@@ -810,7 +821,7 @@ class User extends Person {
                   WHERE ea.email_address_caps = ? AND eabr.bean_module = ? AND ea.deleted = 0 AND eabr.deleted = 0 ';
         $stmt = $this->db->getConnection()->executeQuery(
             $query,
-            [strtoupper($this->db->quote($email)), $this->module_name]
+            [strtoupper($email), $this->module_name]
         );
         $id = $stmt->fetchColumn();
         // retrieve returns User or null so keep null instead of FALSE for compatibility
@@ -1098,23 +1109,6 @@ class User extends Person {
         // jmorais@dri Bug #56269
         parent::fill_in_additional_detail_fields();
         // ~jmorais@dri
-		global $locale;
-
-        $query = 'SELECT u1.first_name, u1.last_name
-            FROM users u1, users u2
-            WHERE u1.id = u2.reports_to_id
-                AND u2.id = ?
-                AND u1.deleted = 0';
-        $stmt = $this->db->getConnection()->executeQuery($query, [$this->id]);
-        $row = $stmt->fetch();
-
-		if ($row != null) {
-            global $locale;
-            $this->reports_to_name = $locale->formatName('Users', $row);
-		} else {
-			$this->reports_to_name = '';
-		}
-
 
         // Must set team_id for team widget purposes (default_team is primary team id)
         if (empty($this->team_id))
@@ -1272,9 +1266,10 @@ class User extends Person {
 
 		if(isset($_REQUEST['module']) && $_REQUEST['module'] == 'Teams' &&
 			(isset($_REQUEST['record']) && !empty($_REQUEST['record'])) ) {
-			$q = "SELECT count(*) c FROM team_memberships WHERE deleted=0 AND user_id = '{$this->id}' AND team_id = '{$_REQUEST['record']}' AND explicit_assign = 1";
-			$r = $this->db->query($q);
-			$a = $this->db->fetchByAssoc($r);
+            $query = "SELECT COUNT(*) c FROM team_memberships WHERE deleted=0 AND user_id = ? AND team_id = ? AND explicit_assign = 1";
+            $conn = $this->db->getConnection();
+            $stmt = $conn->executeQuery($query, array($this->id, $_REQUEST['record']));
+            $a = $stmt->fetch();
 
 			$user_fields['UPLINE'] = translate('LBL_TEAM_UPLINE','Users');
 
@@ -1573,116 +1568,132 @@ class User extends Person {
 		$emailLink = '';
         $client    = $this->getEmailClientPreference();
 
-		if($client == 'sugar') {
-			$email = '';
-			$to_addrs_ids = '';
-			$to_addrs_names = '';
-			$to_addrs_emails = '';
-
-			$fullName = !empty($focus->name) ? $focus->name : '';
-
-			if(empty($ret_module)) $ret_module = $focus->module_dir;
-			if(empty($ret_id)) $ret_id = $focus->id;
-			if($focus->object_name == 'Contact') {
-				$contact_id = $focus->id;
-				$to_addrs_ids = $focus->id;
-				// Bug #48555 Not User Name Format of User's locale.
-				$focus->_create_proper_name_field();
-			    $fullName = $focus->name;
-			    $to_addrs_names = $fullName;
-				$to_addrs_emails = $focus->email1;
-			}
-
-			$emailLinkUrl = 'contact_id='.$contact_id.
-				'&parent_type='.$focus->module_dir.
-				'&parent_id='.$focus->id.
-				'&parent_name='.urlencode($fullName).
-				'&to_addrs_ids='.$to_addrs_ids.
-				'&to_addrs_names='.urlencode($to_addrs_names).
-				'&to_addrs_emails='.urlencode($to_addrs_emails).
-				'&to_email_addrs='.urlencode($fullName . '&nbsp;&lt;' . $emailAddress . '&gt;').
-				'&return_module='.$ret_module.
-				'&return_action='.$ret_action.
-				'&return_id='.$ret_id;
-
-            $eUi = new EmailUI();
-            $j_quickComposeOptions = $eUi->generateComposePackageForQuickCreateFromComposeUrl($emailLinkUrl, true);
-
-    		$emailLink = "<a href='javascript:void(0);' onclick='SUGAR.quickCompose.init($j_quickComposeOptions);' class='$class'>";
-
-		} else {
-			// straight mailto:
-			$emailLink = '<a href="mailto:'.$emailAddress.'" class="'.$class.'">';
-		}
-
-		return $emailLink;
-	}
-
-	/**
-	 * returns opening <a href=xxxx for a contact, account, etc
-	 * cascades from User set preference to System-wide default
-	 * @return string	link
-	 * @param attribute the email addy
-	 * @param focus the parent bean
-	 * @param contact_id
-	 * @param return_module
-	 * @param return_action
-	 * @param return_id
-	 * @param class
-	 */
-	function getEmailLink($attribute, &$focus, $contact_id='', $ret_module='', $ret_action='DetailView', $ret_id='', $class='') {
-	    $emailLink = '';
-        $client    = $this->getEmailClientPreference();
-
-		if($client == 'sugar') {
-			$email = '';
-			$to_addrs_ids = '';
-			$to_addrs_names = '';
-			$to_addrs_emails = '';
+        if ($client === 'sugar' && ACLController::checkAccess('Emails', 'edit')) {
+            $email = '';
+            $to_addrs_ids = '';
+            $to_addrs_names = '';
+            $to_addrs_emails = '';
 
             $fullName = !empty($focus->name) ? $focus->name : '';
 
-			if(!empty($focus->$attribute)) {
-				$email = $focus->$attribute;
-			}
+            if (empty($ret_module)) {
+                $ret_module = $focus->module_dir;
+            }
+            if (empty($ret_id)) {
+                $ret_id = $focus->id;
+            }
+            if ($focus->object_name == 'Contact') {
+                $contact_id = $focus->id;
+                $to_addrs_ids = $focus->id;
+                // Bug #48555 Not User Name Format of User's locale.
+                $focus->_create_proper_name_field();
+                $fullName = $focus->name;
+                $to_addrs_names = $fullName;
+                $to_addrs_emails = $focus->email1;
+            }
 
+            $emailLinkUrl = 'contact_id=' . $contact_id .
+                '&parent_type=' . $focus->module_dir .
+                '&parent_id=' . $focus->id .
+                '&parent_name=' . urlencode($fullName) .
+                '&to_addrs_ids=' . $to_addrs_ids .
+                '&to_addrs_names=' . urlencode($to_addrs_names) .
+                '&to_addrs_emails=' . urlencode($to_addrs_emails) .
+                '&to_email_addrs=' . urlencode($fullName . '&nbsp;&lt;' . $emailAddress . '&gt;') .
+                '&return_module=' . $ret_module .
+                '&return_action=' . $ret_action .
+                '&return_id=' . $ret_id;
 
-			if(empty($ret_module)) $ret_module = $focus->module_dir;
-			if(empty($ret_id)) $ret_id = $focus->id;
-			if($focus->object_name == 'Contact') {
-				// Bug #48555 Not User Name Format of User's locale.
-				$focus->_create_proper_name_field();
-			    $fullName = $focus->name;
-			    $contact_id = $focus->id;
-				$to_addrs_ids = $focus->id;
-				$to_addrs_names = $fullName;
-				$to_addrs_emails = $focus->email1;
-			}
-
-			$emailLinkUrl = 'contact_id='.$contact_id.
-				'&parent_type='.$focus->module_dir.
-				'&parent_id='.$focus->id.
-				'&parent_name='.urlencode($fullName).
-				'&to_addrs_ids='.$to_addrs_ids.
-				'&to_addrs_names='.urlencode($to_addrs_names).
-				'&to_addrs_emails='.urlencode($to_addrs_emails).
-				'&to_email_addrs='.urlencode($fullName . '&nbsp;&lt;' . $email . '&gt;').
-				'&return_module='.$ret_module.
-				'&return_action='.$ret_action.
-				'&return_id='.$ret_id;
-
-			//Generate the compose package for the quick create options.
             $eUi = new EmailUI();
             $j_quickComposeOptions = $eUi->generateComposePackageForQuickCreateFromComposeUrl($emailLinkUrl, true);
-    		$emailLink = "<a href='javascript:void(0);' onclick='SUGAR.quickCompose.init($j_quickComposeOptions);' class='$class'>";
 
-		} else {
-			// straight mailto:
-			$emailLink = '<a href="mailto:'.$focus->$attribute.'" class="'.$class.'">';
-		}
+            $emailLink = "<a href='javascript:void(0);' onclick='SUGAR.quickCompose.init($j_quickComposeOptions);' class='$class'>";
+
+        } else {
+            // straight mailto:
+            $emailLink = '<a href="mailto:' . $emailAddress . '" class="' . $class . '">';
+        }
 
 		return $emailLink;
 	}
+
+    /**
+     * returns opening <a href=xxxx for a contact, account, etc
+     * cascades from User set preference to System-wide default
+     * @return string    link
+     * @param attribute the email addy
+     * @param focus the parent bean
+     * @param contact_id
+     * @param return_module
+     * @param return_action
+     * @param return_id
+     * @param class
+     */
+    function getEmailLink(
+        $attribute,
+        &$focus,
+        $contact_id = '',
+        $ret_module = '',
+        $ret_action = 'DetailView',
+        $ret_id = '',
+        $class = ''
+    ) {
+        $emailLink = '';
+        $client = $this->getEmailClientPreference();
+
+        if ($client === 'sugar' && ACLController::checkAccess('Emails', 'edit')) {
+            $email = '';
+            $to_addrs_ids = '';
+            $to_addrs_names = '';
+            $to_addrs_emails = '';
+
+            $fullName = !empty($focus->name) ? $focus->name : '';
+
+            if (!empty($focus->$attribute)) {
+                $email = $focus->$attribute;
+            }
+
+
+            if (empty($ret_module)) {
+                $ret_module = $focus->module_dir;
+            }
+            if (empty($ret_id)) {
+                $ret_id = $focus->id;
+            }
+            if ($focus->object_name == 'Contact') {
+                // Bug #48555 Not User Name Format of User's locale.
+                $focus->_create_proper_name_field();
+                $fullName = $focus->name;
+                $contact_id = $focus->id;
+                $to_addrs_ids = $focus->id;
+                $to_addrs_names = $fullName;
+                $to_addrs_emails = $focus->email1;
+            }
+
+            $emailLinkUrl = 'contact_id=' . $contact_id .
+                '&parent_type=' . $focus->module_dir .
+                '&parent_id=' . $focus->id .
+                '&parent_name=' . urlencode($fullName) .
+                '&to_addrs_ids=' . $to_addrs_ids .
+                '&to_addrs_names=' . urlencode($to_addrs_names) .
+                '&to_addrs_emails=' . urlencode($to_addrs_emails) .
+                '&to_email_addrs=' . urlencode($fullName . '&nbsp;&lt;' . $email . '&gt;') .
+                '&return_module=' . $ret_module .
+                '&return_action=' . $ret_action .
+                '&return_id=' . $ret_id;
+
+            //Generate the compose package for the quick create options.
+            $eUi = new EmailUI();
+            $j_quickComposeOptions = $eUi->generateComposePackageForQuickCreateFromComposeUrl($emailLinkUrl, true);
+            $emailLink = "<a href='javascript:void(0);' onclick='SUGAR.quickCompose.init($j_quickComposeOptions);' class='$class'>";
+
+        } else {
+            // straight mailto:
+            $emailLink = '<a href="mailto:' . $focus->$attribute . '" class="' . $class . '">';
+        }
+
+        return $emailLink;
+    }
 
 
 	/**
@@ -2482,7 +2493,7 @@ class User extends Person {
         //Add the tab hash to include the change of tabs (e.g. module order) as a part of the user hash
         $tabs = new TabController();
         $tabHash = $tabs->getMySettingsTabHash();
-        return md5($this->hashTS . $tabHash);
+        return md5($this->id . $this->hashTS . $tabHash);
     }
 
     public function setupSession() {
@@ -2707,5 +2718,15 @@ class User extends Person {
             $tz = $gmtTZ;
         }
         return $tz;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function mark_deleted($id)
+    {
+        parent::mark_deleted($id);
+
+        Container::getInstance()->get(Listener::class)->userDeleted($id);
     }
 }

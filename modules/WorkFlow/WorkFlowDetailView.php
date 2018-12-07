@@ -103,7 +103,8 @@ $xtpl->assign("PUBLISHED","CHECKED");
 ///////////////////////////////////////////////////////////////////////////////
 $attachments = '';
 $note = BeanFactory::newBean('Notes');
-$notes_list = $note->get_full_list("notes.name", "notes.parent_id=" . $GLOBALS['db']->quoted($focus->id), true);
+//FIXME: notes.email_type should be EmailTemplates
+$notes_list = $note->get_full_list("notes.name", "notes.email_id=" . $GLOBALS['db']->quoted($focus->id), true);
 if(!empty($notes_list)) {
     for($i=0; $i<count($notes_list); $i++) {
         $the_note = $notes_list[$i];

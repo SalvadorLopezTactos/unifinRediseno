@@ -19,6 +19,8 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\ResultSet;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Client;
 use Sugarcrm\Sugarcrm\Elasticsearch\Exception\QueryBuilderException;
 use Sugarcrm\Sugarcrm\Elasticsearch\Query\Aggregation\AggregationStack;
+use User;
+use Sugarcrm\Sugarcrm\Elasticsearch\Query\Result\ParserInterface;
 
 /**
  *
@@ -29,11 +31,13 @@ class QueryBuilder
 {
     /**
      * Field separator
+     * @deprecated
      */
     const FIELD_SEP = '.';
 
     /**
      * Module name prefix separator
+     * @deprecated Use Mapping::PREFIX_SEP
      */
     const PREFIX_SEP = '__';
 
@@ -43,13 +47,13 @@ class QueryBuilder
     const BOOST_SEP = '^';
 
     /**
-     * @var \Sugarcrm\Sugarcrm\Elasticsearch\Container
+     * @var Container
      */
     protected $container;
 
     /**
      * User context
-     * @var \User
+     * @var User
      */
     protected $user;
 
@@ -83,13 +87,13 @@ class QueryBuilder
 
     /**
      * List of query filters
-     * @var \Elastica\Filter\AbstractFilter[]
+     * @var \Elastica\Query\AbstractQuery[]
      */
     protected $filters = array();
 
     /**
      * List of post filters
-     * @var \Elastica\Filter\AbstractFilter[]
+     * @var \Elastica\Query\AbstractQuery[]
      */
     protected $postFilters = array();
 
@@ -97,6 +101,11 @@ class QueryBuilder
      * @var HighlighterInterface
      */
     protected $highlighter;
+
+    /**
+     * @var ParserInterface
+     */
+    protected $resultParser;
 
     /**
      * @var integer
@@ -121,6 +130,7 @@ class QueryBuilder
 
     /**
      * Ctor
+     * @param Container $container
      */
     public function __construct(Container $container)
     {
@@ -129,10 +139,10 @@ class QueryBuilder
 
     /**
      * Set user context
-     * @param \User $user
+     * @param User $user
      * @return QueryBuilder
      */
-    public function setUser(\User $user)
+    public function setUser(User $user)
     {
         $this->user = $user;
         return $this;
@@ -202,6 +212,17 @@ class QueryBuilder
     }
 
     /**
+     * Set result parser
+     * @param ParserInterface $parser
+     * @return QueryBuilder
+     */
+    public function setResultParser(ParserInterface $parser)
+    {
+        $this->resultParser = $parser;
+        return $this;
+    }
+
+    /**
      * Add aggregation
      * @param string $id
      * @param AggregationInterface
@@ -220,10 +241,10 @@ class QueryBuilder
 
     /**
      * Add query filter
-     * @param \Elastica\Filter\AbstractFilter $filter
+     * @param \Elastica\Query\AbstractQuery $filter
      * @return QueryBuilder
      */
-    public function addFilter(\Elastica\Filter\AbstractFilter $filter)
+    public function addFilter(\Elastica\Query\AbstractQuery $filter)
     {
         $this->filters[] = $filter;
         return $this;
@@ -231,10 +252,10 @@ class QueryBuilder
 
     /**
      * Add query filter
-     * @param \Elastica\Filter\AbstractFilter $postFilter
+     * @param \Elastica\Query\AbstractQuery $postFilter
      * @return QueryBuilder
      */
-    public function addPostFilter(\Elastica\Filter\AbstractFilter $postFilter)
+    public function addPostFilter(\Elastica\Query\AbstractQuery $postFilter)
     {
         $this->postFilters[] = $postFilter;
         return $this;
@@ -295,9 +316,9 @@ class QueryBuilder
 
     /**
      * Add settings after building query.
-     * @param $query object the query object
+     * @param \Elastica\Query $query object the query object
      */
-    protected function addSettingsAfterBuild($query)
+    protected function addSettingsAfterBuild(\Elastica\Query $query)
     {
         // Set limit
         if (isset($this->limit)) {
@@ -337,8 +358,8 @@ class QueryBuilder
     public function build()
     {
         // Wrap query in a filtered query
-        $query = new \Elastica\Query\Filtered();
-        $query->setQuery($this->query->build());
+        $query = new \Elastica\Query\BoolQuery();
+        $query->addMust($this->query->build());
 
         // Apply visibility filtering
         if ($this->applyVisibility) {
@@ -346,7 +367,7 @@ class QueryBuilder
         }
 
         // Add all filters to query
-        $query->setFilter($this->buildFilters($this->filters));
+        $query->addFilter($this->buildFilters($this->filters));
 
         // Wrap again in our main query object
         $query = $this->buildQuery($query);
@@ -359,7 +380,7 @@ class QueryBuilder
 
     /**
      * Execute query against search API
-     * @return \Sugarcrm\Sugarcrm\Elasticsearch\Adapter\ResultSet
+     * @return ResultSet
      */
     public function executeSearch()
     {
@@ -385,22 +406,6 @@ class QueryBuilder
     }
 
     /**
-     * Build module filter
-     * @param array $modules
-     * @return \Elastica\Filter\BoolFilter
-     */
-    protected function buildModuleFilter(array $modules)
-    {
-        $modules = new \Elastica\Filter\BoolFilter();
-        foreach ($this->modules as $module) {
-            $filter = new \Elastica\Filter\Term();
-            $filter->setTerm('_type', $module);
-            $modules->addShould($filter);
-        }
-        return $modules;
-    }
-
-    /**
      * Prepare result set
      * @param \Elastica\ResultSet $resultSet
      * @return ResultSet
@@ -409,9 +414,9 @@ class QueryBuilder
     {
         $resultSet = new ResultSet($resultSet);
 
-        // attach highlighter to resultset
-        if ($this->highlighter) {
-            $resultSet->setHighlighter($this->highlighter);
+        // attach result parser
+        if ($this->resultParser) {
+            $resultSet->setResultParser($this->resultParser);
         }
 
         // attach aggregation stack
@@ -435,11 +440,11 @@ class QueryBuilder
 
     /**
      * Build filters
-     * @return \Elastica\Filter\BoolFilter
+     * @return \Elastica\Query\BoolQuery
      */
     protected function buildFilters(array $filters)
     {
-        $result = new \Elastica\Filter\BoolFilter();
+        $result = new \Elastica\Query\BoolQuery();
         foreach ($filters as $filter) {
             $result->addMust($filter);
         }
@@ -448,11 +453,11 @@ class QueryBuilder
 
     /**
      * Build post filters
-     * @return \Elastica\Filter\BoolFilter
+     * @return \Elastica\Query\BoolQuery
      */
     protected function buildPostFilters(array $postFilters)
     {
-        $result = new \Elastica\Filter\BoolFilter();
+        $result = new \Elastica\Query\BoolQuery();
         foreach ($postFilters as $postFilter) {
             $result->addMust($postFilter);
         }
@@ -494,10 +499,10 @@ class QueryBuilder
      * indices depending on the index pool strategies.
      *
      * @param array $modules
-     * @param \User $user
+     * @param User $user
      * @return array
      */
-    protected function getReadIndices(array $modules, \User $user = null)
+    protected function getReadIndices(array $modules, User $user = null)
     {
         $context = empty($user) ? array() : array('user' => $user);
         $collection = $this->container->indexPool->getReadIndices($modules, $context);

@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => '必须指定记录编号才能删除制造商。',
   'NTC_STATUS' => '设置状态为“停用”以从下拉列表中移除制造商',
   'NTC_LIST_ORDER' => '设置这个制造商在制造商下拉列表中的显示顺序',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => '启用',
-    'Inactive' => '停用',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'导入制造商',
 	'LBL_EDITLAYOUT' => '编辑布局' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => '营收单项',

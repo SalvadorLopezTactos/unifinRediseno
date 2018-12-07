@@ -11,6 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
 class SugarFieldFullname extends SugarFieldBase
 {
@@ -102,5 +103,34 @@ class SugarFieldFullname extends SugarFieldBase
                 }
             }
         }
+    }
+
+    /**
+     * Returns true if at least one name field is erased and all name fields are empty.
+     *
+     * {@inheritdoc}
+     */
+    public function isErased(SugarBean $bean, $fieldName)
+    {
+        if (empty($bean->erased_fields)) {
+            return false;
+        }
+
+        $isAnyNameFieldErased = false;
+        $isEveryNameFieldEmpty = true;
+
+        $locale = Container::getInstance()->get(Localization::class);
+        $fieldNames = $locale->getNameFormatFields($bean);
+
+        foreach ($fieldNames as $field) {
+            if (in_array($field, $bean->erased_fields)) {
+                $isAnyNameFieldErased = true;
+            }
+            if (!empty($bean->{$field})) {
+                $isEveryNameFieldEmpty = false;
+            }
+        }
+
+        return $isAnyNameFieldErased && $isEveryNameFieldEmpty;
     }
 }

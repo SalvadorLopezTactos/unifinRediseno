@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Informačný panel so zoznamom prípadov',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Informačný panel so záznamom prípadov',
+
 	'ERR_DELETE_RECORD'					=> 'Ak chcete zmazať účet, musíte zadať číslo záznamu.',
 	'LBL_ACCOUNT_ID'					=> 'ID účtu',
 	'LBL_ACCOUNT_NAME'					=> 'Názov účtu:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Stav:',
     'LBL_SOURCE' => 'Zdroj:',
 	'LBL_SUBJECT'						=> 'Predmet:',
-	'LBL_SYSTEM_ID'						=> 'ID systému',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Názov účtu',
 	'LBL_LIST_ASSIGNED'					=> 'Priradené k',
 	'LBL_LIST_CLOSE'					=> 'Zavrieť',

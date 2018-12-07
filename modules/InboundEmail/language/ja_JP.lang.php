@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'ログインIDかパスワードが不正です',
-	'ERR_BODY_TOO_LONG'		=> '\r本文が長すぎてEメール全体を取り込めません。整形されました。',
+	'ERR_BODY_TOO_LONG'		=> '\\r本文が長すぎてEメール全体を取り込めません。整形されました。',
 	'ERR_INI_ZLIB'			=> 'Zlibコンプレッションを一時的に無効にできませんでした。設定テストが失敗する可能性があります。',
 	'ERR_MAILBOX_FAIL'		=> 'メールアカウントを検索できませんでした。',
 	'ERR_NO_IMAP'			=> 'IMAPライブラリが見つかりませんでした。インバウンドEメールを継続する前に解決してください。',

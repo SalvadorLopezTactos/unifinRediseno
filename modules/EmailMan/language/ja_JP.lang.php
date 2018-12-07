@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'ここをクリック',
 	'TXT_REMOVE_ME'								=> 'このEメールリストからあなた自身を除外するには',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'アサインしたユーザのメールアドレスで送信',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => '新しいEメールアドレスをデフォルトで除外',
 
 	'LBL_SECURITY_TITLE'						=> 'Eメールのセキュリティ設定',
 	'LBL_SECURITY_DESC'							=> 'Eメール表示時に無効にするタグをチェックしてください。',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'ユーザがこのアカウントを送信用に利用可能とする:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'このオプションが選択された場合、すべてのユーザは同じ送信アカウントから<br>通知や通知を送信することが可能になります。このオプションを選択しない場合でも、<br>ユーザは自身の送信アカウントを設定することによって当該送信サーバからEメールを送信できます。',
     'LBL_FROM_ADDRESS_HELP'                     => '有効の場合、アサイン先ユーザの名前とEメールアドレスがFromにセットされます。ただし、Eメールアカウントと異なるアドレスからEメールを送信できないSMTPでは利用できません。',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => '新しく追加されたEメールアドレスは自動的に除外されます。キャンペーンEメールは除外されたアドレスには配信できません。この設定を変更しても既存のEメールアドレスには影響しません。',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo メール' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

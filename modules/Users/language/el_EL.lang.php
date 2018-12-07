@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Δεν βρέθηκαν Πληροφορίες Χρήστη',
     'ERR_USER_NAME_EXISTS'              => 'Το όνομα χρήστη {0} ήδη χρησιμοποιείται. Διπλότυπα ονόματα χρήστη δεν επιτρέπονται. Αλλάξτε το όνομα χρήστη ώστε να είνια μοναδικό.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Αυτός ο χρήστης έχει κλειδωθεί από την εφαρμογή του Sugar και δεν μπορεί να συνδεθεί χρησιμοποιώντας τον υφιστάμενο κωδικό πρόσβασης.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Χρήστης με εξωτερική εξουσιοδότηση μόνο δεν επιτρέπεται να συνδεθεί χρησιμοποιώντας τα διαπιστευτήρια Sugar',
 
 	'LBL_PASSWORD_SENT'                => 'Ενημερωμένος Κωδικός Πρόσβασης',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Δεν μπορεί να στείλει τον κωδικό πρόσβασης',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Διεύθυνση Email Παραλήπτη',
 	'ERR_SERVER_STATUS'					=> 'Η κατάσταση του διακομιστή σας',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Το σύστημα δεν είναι σε θέση να στείλει email στον χρήστη. Παρακαλώ ελέγξτε τη Διαμόρφωση του Εξερχόμενου Ταχυδρομείου στις <a href="index.php?module=EmailMan&amp;action=config">Ρυθμίσεις Email</a><div>',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Ο χρήστης μπορεί να δημιουργηθεί μόνο στο <a href="{0}" target="_blank">Κονσόλα cloud</a> για λειτουργία IDM.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Η κύρια διεύθυνση ηλεκτρονικού ταχυδρομείου μπορεί να ενημερωθεί μόνο στο <a href="{0}" target="_blank"></a> Κονσόλα cloud για IDM λειτουργία.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Διεύθυνση Email',
 
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'λεπ.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'δευ.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Παρακαλώ επικοινωνήστε με τον Διαχειρστή του συστήματος.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Για έλεγχο ταυτότητας με το OpenID Connect (OIDC) σε λειτουργία IDM, παρακαλούμε εγκαταστήστε την επέκταση GMP PHP.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Έχετε αποσυνδεθεί. Για να συνδεθείτε ξανά, πατήστε',
     'LBL_LOGGED_OUT_2' => 'εδώ',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Αναφορές Χρηστών',
     'LBL_CONTACTS_SYNC' => 'Επαφές',
     'LBL_DETAIL' => 'Προφίλ Χειριστή',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Εάν ορισμένα πεδία δεν είναι επεξεργάσιμα, παρακαλώ συνδεθείτε στην Κονσόλα cloud για τη διαχείριση αυτών των πεδίων',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Αν επιθυμείτε να αλλάξετε ορισμένα πεδία που δεν είναι επεξεργάσιμα, ' .
+        'παρακαλώ επικοινωνήστε με το διαχειριστή για να κοινοποιήσει αυτές τις αλλαγές',
 ); // END STRINGS DEFS
 
 ?>

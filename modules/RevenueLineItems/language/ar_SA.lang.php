@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'لوحة معلومات قائمة البنود للعائد',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'لوحة معلومات سجل البنود للعائد',
+
     'LBL_CAMPAIGN_PRODUCT' => 'منتج الحملة',
     'LBL_MODULE_NAME' => 'بنود العائدات',
     'LBL_MODULE_NAME_SINGULAR' => 'بند العائد',
@@ -77,7 +81,7 @@ $mod_strings = array(
     'LBL_SUPPORT_CONTACT' => 'جهة اتصال الدعم:',
     'LBL_PRICING_FORMULA' => 'صيغة التسعير:',
     'LBL_ACCOUNT_NAME' => 'اسم الحساب:',
-    'LNK_REVENUELINEITEM_LIST' => 'عرض بند العائد',
+    'LNK_REVENUELINEITEM_LIST' => 'عرض بنود العائد',
     'LNK_NEW_REVENUELINEITEM' => 'إنشاء بند العائد',
     'NTC_DELETE_CONFIRMATION' => 'هل تريد بالتأكيد حذف هذا السجل؟',
     'NTC_REMOVE_CONFIRMATION' => 'هل تريد بالتأكيد حذف علاقة هذا المنتج؟',

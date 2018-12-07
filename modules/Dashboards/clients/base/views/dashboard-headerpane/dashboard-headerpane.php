@@ -24,6 +24,14 @@ $viewdefs['Dashboards']['base']['view']['dashboard-headerpane'] = array(
                     'name' => 'edit_button',
                     'type' => 'rowaction',
                     'label' => 'LBL_EDIT_BUTTON',
+                    'acl_action' => 'edit',
+                ),
+                array(
+                    'type' => 'rowaction',
+                    'name' => 'duplicate_button',
+                    'label' => 'LBL_DUPLICATE_BUTTON',
+                    'acl_module' => 'Dashboards',
+                    'acl_action' => 'create',
                 ),
                 array(
                     'name' => 'collapse_button',
@@ -88,6 +96,12 @@ $viewdefs['Dashboards']['base']['view']['dashboard-headerpane'] = array(
                     'type' => 'dashboardtitle',
                     'name' => 'name',
                     'placeholder' => 'LBL_DASHBOARD_TITLE',
+                ),
+                array(
+                    'name' => 'my_favorite',
+                    'label' => 'LBL_FAVORITE',
+                    'type' => 'favorite',
+                    'dismiss_label' => true,
                 ),
                 array(
                     'type' => 'layoutbutton',

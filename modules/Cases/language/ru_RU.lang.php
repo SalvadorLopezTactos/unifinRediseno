@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Информационная панель списка обращений',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Информационная панель записей обращений',
+
 	'ERR_DELETE_RECORD'					=> 'Вы должны указать номер записи перед удалением контрагента.',
 	'LBL_ACCOUNT_ID'					=> 'Контрагент',
 	'LBL_ACCOUNT_NAME'					=> 'Контрагент',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Статус:',
     'LBL_SOURCE' => 'Источник:',
 	'LBL_SUBJECT'						=> 'Тема:',
-	'LBL_SYSTEM_ID'						=> 'Системный ID',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Контрагент',
 	'LBL_LIST_ASSIGNED'					=> 'Ответственный (-ая):',
 	'LBL_LIST_CLOSE'					=> 'Закрыть',
@@ -70,7 +73,7 @@ $mod_strings = array (
 	'LBL_WORK_LOG' => 'Рабочий лог:',
 	'LNK_IMPORT_CASES' => 'Импорт обращений',
 	'LNK_CASE_REPORTS' => 'Просмотр отчетов по обращениям',
-	'LBL_SHOW_IN_PORTAL' => 'Обзор в портале',
+	'LBL_SHOW_IN_PORTAL' => 'Показать в портале',
 	'LBL_CREATE_KB_DOCUMENT' => 'Добавить статью в Базе знаний',
     'LBL_KBCONTENTS_SUBPANEL_TITLE' => 'База знаний',
 

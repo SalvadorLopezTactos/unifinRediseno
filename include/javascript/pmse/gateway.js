@@ -8,9 +8,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*global AdamShape, $, CommandDefaultFlow, Action, translate, Window, PMSE_DECIMAL_SEPARATOR,
- PROJECT_MODULE, Form, MessagePanel, CommandSingleProperty, PMSE_DESIGNER_FORM_TRANSLATIONS,AdamShapeLayerCommand
+/*global AdamShape, $, CommandDefaultFlow, PMSE.Action, translate, PMSE.Window, PMSE_DECIMAL_SEPARATOR,
+ PROJECT_MODULE, PMSE.Form, MessagePanel, CommandSingleProperty, PMSE_DESIGNER_FORM_TRANSLATIONS,AdamShapeLayerCommand
 */
+var PMSE = PMSE || {};
 /**
  * @class AdamGateway
  * Class to handle gateways
@@ -274,7 +275,7 @@ AdamGateway.prototype.getContextMenu = function () {
             };
         };
 
-    deleteAction = new Action({
+    deleteAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_DELETE'),
         cssStyle: 'adam-menu-icon-delete',
         handler: function () {
@@ -290,7 +291,7 @@ AdamGateway.prototype.getContextMenu = function () {
 
     configurateAction  = this.createConfigureAction();
 
-    exclusiveAction = new Action({
+    exclusiveAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_EXCLUSIVE_GATEWAY'),
         cssStyle : 'adam-menu-icon-gateway-exclusive',
         handler: function () {
@@ -299,7 +300,7 @@ AdamGateway.prototype.getContextMenu = function () {
         selected: exclusiveActive
     });
 
-    parallelAction = new Action({
+    parallelAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_PARELLEL_GATEWAY'),
         cssStyle : 'adam-menu-icon-gateway-parallel',
         handler: function () {
@@ -308,7 +309,7 @@ AdamGateway.prototype.getContextMenu = function () {
         selected: parallelActive
     });
 
-    inclusiveAction = new Action({
+    inclusiveAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_INCLUSIVE_GATEWAY'),
         cssStyle : 'adam-menu-icon-gateway-inclusive',
         handler: function () {
@@ -317,7 +318,7 @@ AdamGateway.prototype.getContextMenu = function () {
         selected: inclusiveActive
     });
 
-    eventbasedAction = new Action({
+    eventbasedAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_EVENT_BASED_GATEWAY'),
         cssStyle : 'adam-menu-icon-gateway-eventbase',
         handler: function () {
@@ -326,7 +327,7 @@ AdamGateway.prototype.getContextMenu = function () {
         selected: eventbasedActive
     });
     if (elements.length > 1) {
-        defaultflownoneAction = new Action({
+        defaultflownoneAction = new PMSE.Action({
             text: translate('LBL_PMSE_CONTEXT_MENU_NONE'),
             cssStyle : 'adam-menu-icon-none',
             handler: handle(''),
@@ -353,7 +354,7 @@ AdamGateway.prototype.getContextMenu = function () {
                     break;
                 }
                 defaultflowItems.push(
-                    new Action({
+                    new PMSE.Action({
                         text: name,
                         cssStyle: self.getCanvas().getTreeItem(shape).icon,
                         handler: handle(connection.getID()),
@@ -393,7 +394,7 @@ AdamGateway.prototype.getContextMenu = function () {
     };
     items = [];
     directionActive = (this.gat_direction);
-    noneDirectionAction = new Action({
+    noneDirectionAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_UNSPECIFIED'),
         cssStyle : 'adam-menu-icon-none',
         handler: function () {
@@ -401,7 +402,7 @@ AdamGateway.prototype.getContextMenu = function () {
         },
         selected: unspecifiedDirectionActive
     });
-    convergingDirectionAction = new Action({
+    convergingDirectionAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_CONVERGING'),
         cssStyle : 'adam-menu-icon-gateway-converging',
         handler: function () {
@@ -411,7 +412,7 @@ AdamGateway.prototype.getContextMenu = function () {
         },
         selected: convergingDirectionActive
     });
-    divergingDirectionAction = new Action({
+    divergingDirectionAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_DIVERGING'),
         cssStyle : 'adam-menu-icon-gateway-diverging',
         handler: function () {
@@ -419,7 +420,7 @@ AdamGateway.prototype.getContextMenu = function () {
         },
         selected: divergingDirectionActive
     });
-    mixedDirectionAction = new Action({
+    mixedDirectionAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_MIXED'),
         cssStyle : 'adam-menu-icon-gateway-mixed',
         handler: function () {
@@ -526,7 +527,7 @@ AdamGateway.prototype.createConfigureAction = function () {
         uid: this.id,
         callback: null
     });
-    w = new Window({
+    w = new PMSE.Window({
         width: wWidth,
         height: wHeight,
         modal: true,
@@ -542,7 +543,7 @@ AdamGateway.prototype.createConfigureAction = function () {
         }
     }
 
-    f = new Form({
+    f = new PMSE.Form({
         //items: criteriaItems,
         proxy: proxy,
         buttons: [
@@ -723,7 +724,7 @@ AdamGateway.prototype.createConfigureAction = function () {
     disabled = (this.gat_type === 'PARALLEL'
         || this.gat_type === 'EVENTBASED' || this.gat_direction === 'CONVERGING') ? true : false;
 
-    action = new Action({
+    action = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_SETTINGS'),
         cssStyle: 'adam-menu-icon-configure',
         handler: function () {

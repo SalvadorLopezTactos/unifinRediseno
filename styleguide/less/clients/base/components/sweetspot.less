@@ -1,8 +1,8 @@
 @sweetspotWidth: 500px;
 @sweetspotHalfWidth: 50px;
 @sweetspotHeight: 60px;
-@sweetspotGrey: #DBDBDB;
-@sweetspotDarkText: #E5E5E5;
+@sweetspotGrey: #dbdbdb;
+@sweetspotDarkText: #e5e5e5;
 
 .noselect {
   -webkit-touch-callout: none;
@@ -15,6 +15,7 @@
 #sweetspot {
   max-height: 520px;
   .noselect();
+
   display: none;
   position: fixed;
   width: @sweetspotWidth;
@@ -27,15 +28,15 @@
   left: ~'calc(50% - 250px)';
   margin: 0 auto;
   border-radius: 10px;
-  border: 6px solid rgba(0,0,0,.5);
+  border: 6px solid rgba(0, 0, 0, 0.5);
 
   &[data-theme=light] {
     border-radius: 2px;
-    border: 1px solid #DDDDDD;
+    border: 1px solid #ddd;
     box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.5);
 
     input[type=text] {
-      color: #333333;
+      color: #333;
       background-color: transparent;
     }
 
@@ -46,14 +47,15 @@
     .sweetspot-results {
       p {
         margin: 0 10px;
-        padding: 2px 0px 0px;
+        padding: 2px 0 0;
         background-color: transparent;
         color: @gray;
-        border-bottom: 1px solid #C5C5C5;
+        border-bottom: 1px solid #c5c5c5;
       }
 
       li[data-sweetaction] {
         border-radius: 0;
+
         &.active {
           background-color: rgba(0, 0, 0, 0.07);
         }
@@ -86,6 +88,7 @@
 
     i {
       color: rgba(255, 255, 255, 0.8);
+
       &:hover {
         color: @sweetspotDarkText;
         cursor: pointer;
@@ -95,10 +98,10 @@
     .sweetspot-results {
       p {
         margin: 0 10px;
-        padding: 2px 0px 0px;
+        padding: 2px 0 0;
         background-color: transparent;
         color: @sweetspotDarkText;
-        border-bottom: 1px solid #6C6C6C;
+        border-bottom: 1px solid #6c6c6c;
       }
 
       li[data-sweetaction] {
@@ -106,6 +109,7 @@
 
         a {
           color: @sweetspotDarkText;
+
           > div.result-text {
             div.result-keyword.label {
               background-color: rgba(255, 255, 255, 0.8);
@@ -125,6 +129,7 @@
 
         &.active {
           background-color: rgba(255, 255, 255, 0.07);
+
           .fa-mail-forward {
             color: rgba(255, 255, 255, 0.8);
           }
@@ -134,32 +139,16 @@
           background-color: rgba(255, 255, 255, 0.07);
         }
       }
-
-      // custom scrollbar
-      &::-webkit-scrollbar {
-        width: 4px;
-
-        &-thumb {
-          &:vertical {
-            background-color: rgba(255, 255, 255, 0.6);
-            -webkit-border-radius: 4px;
-            &:hover {
-              background-color: rgba(255, 255, 255, 0.8);
-            }
-          }
-        }
-      }
     }
   }
 
   input[type=text] {
     display: block;
-    height: inherit;
     border: 0;
     padding: 0 5px;
     margin: 0;
     position: absolute;
-    .calcWidth(~"100% - 75px");
+    width: calc(~"100% - 75px");
     color: @grayDark;
     background-color: @sweetspotGrey;
     font-size: 34px;
@@ -180,6 +169,7 @@
 
   i {
     margin: 3px 3px 0 0;
+
     &:hover {
       color: #333;
       cursor: pointer;
@@ -189,13 +179,13 @@
   .sweetspot-searchbar {
     height: @sweetspotHeight;
   }
+
   .sweetspot-results {
     position: relative;
     width: 100%;
     padding: 0;
     margin: 0;
     overflow-y: auto;
-
     list-style-type: none;
 
     > li {
@@ -208,114 +198,98 @@
       list-style-type: none;
 
       li[data-sweetaction] {
-          height: 50px;
-          margin: 5px 5px;
-          background-color: transparent;
-          border-radius: 3px;
+        height: 50px;
+        margin: 5px;
+        background-color: transparent;
+        border-radius: 3px;
+        position: relative;
+
+        span.label {
+          position: absolute;
+          top: 9px;
+          left: 6px;
+        }
+
+        a {
+          color: @grayDark;
           position: relative;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          display: block;
+          height: 100%;
+          outline: 0;
 
-          span.label {
-            position: absolute;
-            top: 9px;
-            left: 6px;
-          }
-
-          a {
-            color: @grayDark;
-            position: relative;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            display: block;
-            height: 100%;
-            outline: 0;
-
-            > div.result-text {
-
-              div.result-keyword.label {
-                display: block;
-                float: right;
-                margin: 6px 0 0 3px;
-              }
-
-              div.result-name {
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                display: block;
-              }
-              position: absolute;
-              white-space: nowrap;
-              left: 50px;
-              font-size: 24px;
-              top: 9px;
-              line-height: 36px;
-              text-overflow: ellipsis;
-              overflow: hidden;
-              bottom: 9px;
-              right: 50px;
-              padding: 0;
-              margin: 0;
-            }
-          }
-
-          &.active {
-            background-color: @sweetspotGrey;
-
-            .fa-mail-forward {
+          > div.result-text {
+            div.result-keyword.label {
               display: block;
-              color: rgba(0,0,0,.7);
+              float: right;
+              margin: 6px 0 0 3px;
             }
 
-            .result-icon {
-              display: none;
+            div.result-name {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              display: block;
             }
-          }
 
-          &:hover {
-            background-color: @sweetspotGrey;
-          }
-
-          .fa-mail-forward {
-            display: none;
-          }
-
-          .sweetspot-icon {
             position: absolute;
-            right: 20px;
-            top: 12px;
-            font-size: 20px;
-            color: rgba(0,0,0,.2);
+            white-space: nowrap;
+            left: 50px;
+            font-size: 24px;
+            top: 9px;
+            line-height: 36px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            bottom: 9px;
+            right: 50px;
+            padding: 0;
+            margin: 0;
           }
         }
+
+        &.active {
+          background-color: @sweetspotGrey;
+
+          .fa-mail-forward {
+            display: block;
+            color: rgba(0, 0, 0, 0.7);
+          }
+
+          .result-icon {
+            display: none;
+          }
+        }
+
+        &:hover {
+          background-color: @sweetspotGrey;
+        }
+
+        .fa-mail-forward {
+          display: none;
+        }
+
+        .sweetspot-icon {
+          position: absolute;
+          right: 20px;
+          top: 12px;
+          font-size: 20px;
+          color: rgba(0, 0, 0, 0.2);
+        }
       }
+    }
 
     p {
       height: 18px;
       margin: 0;
-      padding: 2px 10px 0px;
+      padding: 2px 10px 0;
       background-color: rgba(0, 0, 0, 0.5);
       color: @sweetspotGrey;
-      border-radius: 0px;
+      border-radius: 0;
       font-size: 11px;
       font-variant: small-caps;
-    }
-
-
-    // custom scrollbar
-    &::-webkit-scrollbar {
-      width: 4px;
-
-      &-thumb {
-        &:vertical {
-          background-color: rgba(0, 0, 0, 0.2);
-          -webkit-border-radius: 4px;
-          &:hover {
-            background-color: rgba(0, 0, 0, 0.4);
-          }
-        }
-      }
     }
   }
 }

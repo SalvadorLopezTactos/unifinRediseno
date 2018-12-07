@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Tableau de bord de la liste de cibles',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement de cibles',
+
   'LBL_MODULE_NAME' => 'Cibles',
   'LBL_MODULE_NAME_SINGULAR' => 'Cible',
   'LBL_MODULE_ID'   => 'Cibles',
@@ -195,4 +199,6 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
 2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Rapports sur les cibles',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objectifs commerciaux auxquels un consentement a été donné',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Dernière mise à jour de consentement',
 );

@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Řídicí panel seznamu schůzek',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Řídicí panel záznamů schůzek',
+
 	'ERR_DELETE_RECORD' => 'Pro odstranění',
 	'LBL_ACCEPT_THIS'=>'Přijmout?',
 	'LBL_ADD_BUTTON'=> 'Vlož [Alt+C]',
@@ -54,7 +58,7 @@ $mod_strings = array (
 	'LBL_LIST_SUBJECT' => 'Předmět',
 	'LBL_LIST_TIME' => 'Počáteční čas',
 	'LBL_LEADS_SUBPANEL_TITLE' => 'Zájemci',
-	'LBL_LOCATION' => 'Umístění:',
+	'LBL_LOCATION' => 'Místo:',
 	'LBL_MEETING' => 'Schůzka:',
 	'LBL_MINSS_ABBREV' => 'm',
 	'LBL_MODIFIED_BY'=>'Změnil',

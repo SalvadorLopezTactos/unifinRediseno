@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'Skapat datum',
     'LBL_DATE_MODIFIED' => 'Senast ändrad',
     'LBL_DELETED' => 'Radera',
+    'LBL_MODULE_NAME' => 'E-postadresser',
+    'LBL_MODULE_NAME_SINGULAR' => 'E-postadress',
 );

@@ -165,12 +165,12 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
      */
     protected function fixOpportunityModule()
     {
-        if (SugarAutoLoader::fileExists($this->moduleExtFolder . '/Vardefs/' . $this->dupeCheckExtFile)) {
-            SugarAutoLoader::unlink($this->moduleExtFolder . '/Vardefs/' . $this->dupeCheckExtFile);
+        if (file_exists($this->moduleExtFolder . '/Vardefs/' . $this->dupeCheckExtFile)) {
+            unlink($this->moduleExtFolder . '/Vardefs/' . $this->dupeCheckExtFile);
         }
 
-        if (SugarAutoLoader::fileExists($this->moduleExtFolder . '/Dependencies/' . $this->oppModuleDependencyFile)) {
-            SugarAutoLoader::unlink($this->moduleExtFolder . '/Dependencies/' . $this->oppModuleDependencyFile);
+        if (file_exists($this->moduleExtFolder . '/Dependencies/' . $this->oppModuleDependencyFile)) {
+            unlink($this->moduleExtFolder . '/Dependencies/' . $this->oppModuleDependencyFile);
         }
     }
 
@@ -203,16 +203,16 @@ class OpportunityWithOutRevenueLineItem extends OpportunitySetup
             $GLOBALS['dictionary']['RevenueLineItem']['unified_search'] = false;
         }
 
-        if (SugarAutoLoader::fileExists($this->appExtFolder . '/Include/' . $this->rliModuleExtFile)) {
-            SugarAutoLoader::unlink($this->appExtFolder . '/Include/' . $this->rliModuleExtFile);
+        if (file_exists($this->appExtFolder . '/Include/' . $this->rliModuleExtFile)) {
+            unlink($this->appExtFolder . '/Include/' . $this->rliModuleExtFile);
         }
 
-        if (SugarAutoLoader::fileExists($this->rliStudioFile)) {
-            SugarAutoLoader::unlink($this->rliStudioFile);
+        if (file_exists($this->rliStudioFile)) {
+            unlink($this->rliStudioFile);
         }
 
-        if (SugarAutoLoader::fileExists($this->rliModuleExtFolder . '/Vardefs/' . $this->rliModuleExtVardefFile)) {
-            SugarAutoLoader::unlink($this->rliModuleExtFolder . '/Vardefs/' . $this->rliModuleExtVardefFile);
+        if (file_exists($this->rliModuleExtFolder . '/Vardefs/' . $this->rliModuleExtVardefFile)) {
+            unlink($this->rliModuleExtFolder . '/Vardefs/' . $this->rliModuleExtVardefFile);
         }
 
         $this->cleanupUnifiedSearchCache();

@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Řídicí panel seznamu znalostní báze',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Řídicí panel záznamů znalostní báze',
+
     'LBL_MODULE_NAME' => 'Znalostní báze',
     'LBL_MODULE_NAME_SINGULAR' => 'Článek znalostní báze',
     'LBL_MODULE_TITLE' => 'Článek znalostní báze',

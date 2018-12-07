@@ -17,10 +17,23 @@
 class RestRequest
 {
     /**
+     * request version pattern, for getting the API version
+     */
+    const VERSION_PATTERN = '/^\d\d(\.\d{1,2})?$/';
+    const PATH_VERSION_PATTERN = '/^v\d\d(_\d{1,2})?$/';
+
+    /**
+     * request version pattern in Accept header
+     * sample accept header: application/vnd.sugarcrm.core+json; version=11.3
+     */
+    const ACCEPT_HEADER_VERSION_PATTERN =
+        '/^application\/vnd\.sugarcrm\.core(\+?(xml|json))?\s*\;\s*version=([^;,\s]+)/';
+
+    /**
      * The request headers
      * @var array
      */
-    public $request_headers = array();
+    protected $request_headers = array();
 
     /**
      * REST platform
@@ -42,26 +55,49 @@ class RestRequest
      * @var string
      */
     public $rawPath;
+
     /**
-     * API version
+     * requested response type
      * @var string
      */
-    public $version;
+    protected $requestedResponseType;
+
+    /**
+     * version in request URL
+     * @var
+     */
+    protected $urlVersion;
+
+    /**
+     * version in accept header
+     * @var
+     */
+    protected $headerVersion;
+
+    /**
+     * requested API version
+     * @var
+     */
+    protected $version;
+
     /**
      * Parsed path components
      * @var array
      */
     public $path;
+
     /**
      * Request method
      * @var string
      */
     public $method;
+
     /**
      * REST route chosen by the controller
      * @var array
      */
     public $route;
+
     /**
      * Arguments for REST method call
      * @var array
@@ -69,11 +105,9 @@ class RestRequest
     public $args;
 
     /**
-     * The leading portion of the URI for building request URIs with in the API
+     * post body
      * @var string
      */
-    protected $resourceURIBase;
-
     protected $postContents = null;
 
     /**
@@ -104,12 +138,92 @@ class RestRequest
     }
 
     /**
-     * Get API version
+     * get API version for this request
      * @return string
+     * @throws SugarApiExceptionIncorrectVersion
      */
     public function getVersion()
     {
-    	return $this->version;
+        if (!empty($this->version)) {
+            return $this->version;
+        }
+
+        if (empty($this->headerVersion) && empty($this->urlVersion)) {
+            // invalid if version is neither in Accept Header nor URL
+            throw new SugarApiExceptionIncorrectVersion(
+                "No version provided in either Accept Header or URL!"
+            );
+        }
+
+        // invalid if both header and url have version
+        if (!empty($this->headerVersion) && !empty($this->urlVersion)) {
+            throw new SugarApiExceptionIncorrectVersion(
+                "Version must be specified in either Accept Header or URL, not both."
+            );
+        }
+
+        // validate version string
+        if (!empty($this->headerVersion) && !$this->isValidHeaderVersionString($this->headerVersion)) {
+            throw new SugarApiExceptionIncorrectVersion(
+                'Invalid Accept Header version format: ' . $this->headerVersion . '.'
+            );
+        }
+
+        if (!empty($this->urlVersion) && !$this->isValidUrlVersionString($this->urlVersion)) {
+            throw new SugarApiExceptionIncorrectVersion(
+                'Invalid url version format: ' . $this->urlVersion . '.'
+            );
+        }
+
+        // setup version
+        if (!empty($this->urlVersion)) {
+            $this->version = str_replace('_', '.', substr($this->urlVersion, 1));
+        } elseif (!empty($this->headerVersion)) {
+            $this->version = $this->headerVersion;
+        }
+
+        return $this->version;
+    }
+
+    /**
+     * verify the version string make sure it is 2-digit major version
+     * optionally followed by  '.' and 1 or 2 digit minor version
+     * @param string $versionString
+     * @return bool
+     */
+    protected function isValidHeaderVersionString($versionString)
+    {
+        if (is_string($versionString) && preg_match(self::VERSION_PATTERN, $versionString)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * verify the URL version string make sure it is 'v' followed by
+     * 2-digit major version optionally followed by  '_' and 1 or 2 digit minor version
+     * @param string $versionString
+     * @return bool
+     */
+    protected function isValidUrlVersionString($versionString)
+    {
+        if (is_string($versionString) && preg_match(self::PATH_VERSION_PATTERN, $versionString)) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * get API version for this request in URL version format
+     * @return string
+     * @throws SugarApiExceptionIncorrectVersion
+     */
+    public function getUrlVersion()
+    {
+        if (empty($this->urlVersion)) {
+            $this->urlVersion = 'v' . str_replace('.', '_', $this->getVersion());
+        }
+        return $this->urlVersion;
     }
 
     /**
@@ -165,17 +279,6 @@ class RestRequest
     }
 
     /**
-     * Set API version
-     * @param string $version
-     * @return RestRequest
-     */
-    public function setVersion($version)
-    {
-    	$this->version = $version;
-    	return $this;
-    }
-
-    /**
      * Set HTTP method
      * @param string $method
      * @return RestRequest
@@ -195,11 +298,10 @@ class RestRequest
     {
         $this->server = $server;
         $this->request = $request;
-        $this->getRequestHeaders();
+        $this->parseRequestHeaders();
         $this->rawPath = $this->getRawPath();
         $this->parsePath($this->rawPath);
         $this->method = isset($server['REQUEST_METHOD'])?$server['REQUEST_METHOD']:'GET';
-        $this->setResourceURIBase();
     }
 
     /**
@@ -224,16 +326,28 @@ class RestRequest
      * @return array
      */
     public function getRequestHeaders() {
+        return $this->request_headers;
+    }
+
+    /**
+     * parse and set the Request headers in an array
+     * @return array
+     */
+    protected function parseRequestHeaders()
+    {
         $headers = array();
-        foreach($this->server as $key => $value) {
+        foreach ($this->server as $key => $value) {
             if (substr($key, 0, 5) <> 'HTTP_') {
                 continue;
             }
-            $header = str_replace('HTTP_', '', $key);
-            $headers[$header] = $value;
+            $key = str_replace('HTTP_', '', $key);
+            $headers[$key] = $value;
         }
         $this->request_headers = $headers;
-        return $headers;
+        if (!empty($this->request_headers['ACCEPT'])) {
+            $this->parseAcceptHeader($this->request_headers['ACCEPT']);
+        }
+
     }
 
     /**
@@ -246,14 +360,51 @@ class RestRequest
     public function parsePath($rawPath)
     {
         $pathBits = explode('/',trim($rawPath,'/'));
+        $versionBit = $pathBits[0];
 
-        $versionBit = array_shift($pathBits);
+        // API version supports format: v{xx_yy}, MAJOR_MINOR
+        if (preg_match(self::PATH_VERSION_PATTERN, $versionBit)) {
+            $this->urlVersion = $versionBit;
 
-        $version = (float)ltrim($versionBit,'v');
+            // shift out the version part of the request URI
+            array_shift($pathBits);
+        }
 
-        $this->version = $version;
         $this->path = $pathBits;
         return $this;
+    }
+
+    /**
+     * parse accept header to set request API version and request response type
+     * valid formats:
+     * application/vnd.sugarcrm.mobile+json; version=11
+     * application/vnd.sugarcrm.base; version=99            // requested format is optional
+     * application/vnd.sugarcrm.base+xml; version=99
+     * application/vnd.sugarcrm.base+xml; version=12.2
+     *
+     * invalid format:
+     * application/vnd.sugarcrm.mobile+json; version=11.123   // minor version is 3 digits
+     * application/vnd.sugarcrm.base; version=111           // major version is not 2-digit
+     *
+     * @param string $acceptData, value of accept data
+     * @return string/null, the version string
+     */
+
+    protected function parseAcceptHeader($acceptData)
+    {
+        $acceptItems = explode(',', $acceptData);
+        foreach ($acceptItems as $item) {
+            $matches = array();
+            if (preg_match(self::ACCEPT_HEADER_VERSION_PATTERN, trim($item), $matches)) {
+                // requested response type
+                $this->requestedResponseType = $matches[2];
+
+                // requested API version
+                $this->headerVersion = $matches[3];
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -276,17 +427,16 @@ class RestRequest
      */
     public function getPathVars($route)
     {
-    	$outputVars = array();
-    	if(empty($route['pathVars'])) {
-    	    return $outputVars;
-    	}
-    	foreach ( $route['pathVars'] as $i => $varName ) {
-    		if ( !empty($varName)  && !empty($this->path[$i])) {
-    			$outputVars[$varName] = $this->path[$i];
-    		}
-    	}
-
-    	return $outputVars;
+        $outputVars = array();
+        if (empty($route['pathVars'])) {
+            return $outputVars;
+        }
+        foreach ($route['pathVars'] as $i => $varName) {
+            if (!empty($varName) && !empty($this->path[$i])) {
+                $outputVars[$varName] = $this->path[$i];
+            }
+        }
+        return $outputVars;
     }
 
     /**
@@ -303,41 +453,39 @@ class RestRequest
     }
 
     /**
-     * Sets the leading portion of any request URI for this API instance
+     * to get resource URL base,
+     * the leading portion of the URI for building request URIs with in the API
+     *
+     * @param $version
+     * @return string
      *
      */
-    protected function setResourceURIBase()
+    public function getResourceURIBase($version)
     {
-        // Only do this if it hasn't been done already
-        if (empty($this->resourceURIBase)) {
-            // Default the base part of the request URI
-            $apiBase = '/api/rest.php/';
-
-            // Check rewritten URLs AND request uri vs script name
-            if (isset($this->request['__sugar_url']) &&
-                (empty($this->server['REQUEST_URI']) || empty($this->server['SCRIPT_NAME']) || strpos($this->server['REQUEST_URI'], $this->server['SCRIPT_NAME']) === false)) {
-                // This is a forwarded rewritten URL
-                $apiBase = '/rest/';
-            }
-
-            // Get our version
-            $apiBase .= "v".$this->version;
-
-            // This is for our URI return value
-            $siteUrl = SugarConfig::getInstance()->get('site_url');
-
-            // Get the file uri bas
-            $this->resourceURIBase = $siteUrl . $apiBase .'/';
+        if (empty($version)) {
+            throw new SugarApiExceptionIncorrectVersion("missing version!");
         }
-    }
 
-    /**
-     * Get base URI for resources
-     * @return string
-     */
-    public function getResourceURIBase()
-    {
-        return $this->resourceURIBase;
+        // Default the base part of the request URI
+        $apiBase = '/api/rest.php/';
+
+        // Check rewritten URLs AND request uri vs script name
+        if (isset($this->request['__sugar_url'])
+            && (empty($this->server['REQUEST_URI'])
+                || empty($this->server['SCRIPT_NAME'])
+                || strpos($this->server['REQUEST_URI'], $this->server['SCRIPT_NAME']) === false)) {
+            // This is a forwarded rewritten URL
+            $apiBase = '/rest/';
+        }
+
+        // Get our version
+        $apiBase .= $version;
+
+        // This is for our URI return value
+        $siteUrl = SugarConfig::getInstance()->get('site_url');
+
+        // Get the file uri bas
+        return $siteUrl . $apiBase . '/';
     }
 
     /**

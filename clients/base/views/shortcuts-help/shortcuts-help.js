@@ -97,7 +97,7 @@
         _.each(shortcuts, function(shortcut) {
             help.push({
                 keys: this.getKeyString(shortcut.keys),
-                help: app.lang.get(shortcut.description)
+                help: app.lang.get(shortcut.description, this.module)
             });
         }, this);
 

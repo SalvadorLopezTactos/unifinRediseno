@@ -157,7 +157,7 @@
             });
             if (this.isFetchingOptions){
                 // Set loading message in place of empty DIV while options are loaded via API
-                this.$el.html(app.lang.get('LBL_LOADING'));
+                this.$el.html('<div class="select2-loading">' + app.lang.get('LBL_LOADING') + '</div>');
                 return this;
             }
         }
@@ -285,7 +285,7 @@
      * @param {Boolean} fetch (optional) Force use of Enum API to load options.
      * @param {Function} callback (optional) Called when enum options are available.
      */
-    loadEnumOptions: function(fetch, callback) {
+    loadEnumOptions: function(fetch, callback, error) {
         var self = this;
         var _module = this.getLoadEnumOptionsModule();
         var _itemsKey = 'cache:' + _module + ':' + this.name + ':items';
@@ -313,11 +313,30 @@
                         if (self.items !== o) {
                             self.items = o;
                             self.context.set(_itemsKey, self.items);
+                        }
+                    },
+                    error: function(e) {
+                        if (self.disposed) {
+                            return;
+                        }
+
+                        if (error) {
+                            error(e);
+                        }
+
+                        // Continue to use Sugar7's default error handler.
+                        if (_.isFunction(app.api.defaultErrorHandler)) {
+                            app.api.defaultErrorHandler(e);
+                        }
+
+                        self.items = {'': app.lang.get('LBL_NO_DATA', self.module)};
+                    },
+                    complete: function() {
+                        if (!self.disposed) {
                             self.context.unset(_key);
                             callback.call(self);
                         }
                     }
-                    // Use Sugar7's default error handler
                 });
                 this.context.set(_key, request);
             }
@@ -426,7 +445,7 @@
     },
 
     /**
-     * Returns dropdown list options which can be used for editing 
+     * Returns dropdown list options which can be used for editing
      *
      * @param {Object} Dropdown list options
      * @return {Object}

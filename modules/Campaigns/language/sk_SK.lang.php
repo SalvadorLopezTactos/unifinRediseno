@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Vyberte z dostupných polí',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Popis formulára:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Odoslaním tohto formulára sa vytvorí záujemca a prepojenie s kampaňou',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Začiarknutím tohto políčka súhlasíte so zasielaním budúcich marketingových e-mailov',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Prevezmite svoj formulár Web To Lead',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Formulár Web To Lead',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Vyplňte všetky povinné polia',

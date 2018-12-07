@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => '見積リストのダッシュボード',
+    'LBL_QUOTES_RECORD_DASHBOARD' => '見積レコードのダッシュボード',
+
     'LBL_CONTRACTS'=>'契約',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'契約',
     'ERR_DELETE_RECORD' => 'レコード番号は、引用符を削除するために指定する必要があります。',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'小計（USドル）',
     'LBL_SUBTOTAL' => '小計:',
     'LBL_TAXABLE_SUBTOTAL' => '課税小計',
-    'LBL_SYSTEM_ID' => 'システムID',
     'LBL_TAX_USDOLLAR'=>'税金（USドル）',
     'LBL_TAX' => '税金:',
     'LBL_TAX_TOTAL' => '合計税額',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => '選択項目を削除',
     'LBL_DELETE_SELECTED_TOOLTIP' => '選択された項目を削除します',
     'LBL_SAVE_LINE_ITEMS' => 'この見積を保存する前に、アクティブな商品それぞれの隣にある青いチェックマークをクリックして保存しておいてください。',
+    'LBL_COPY_LINE_ITEMS' => 'この見積りをコピーする前に、各商品の隣のチェックマークをクリックすることにより、アクティブな商品を保存してください。',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => '製品カタログを検索',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => '利用可能なデータがありません',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => '見積済商品を新しい見積にコピー中です。',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => '見積済商品を新しい見積にコピー中です。この処理には時間がかかることがあります。',
 );

@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Citerede linjeelementer-liste dashboard',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampagne noteret Line Item',
     'LBL_MODULE_NAME' => 'Produkter',
     'LBL_MODULE_NAME_SINGULAR' => 'Angiven linjepost',
@@ -172,4 +175,5 @@ For at oprette en {{module_name}}:.
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Angivne linjepunkter tilbudsdataliste',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nyt angivet linjepunkt)',
     'LBL_DISCOUNT_PERCENT' => '% procent',
+    'LBL_DISCOUNT_TYPE' => 'Rabattype',
 );

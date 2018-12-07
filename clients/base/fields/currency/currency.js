@@ -187,25 +187,7 @@
         // if the current_user doesn't have edit access to the field
         // don't add these listeners
         if (this.hasEditAccess && this.view.action !== 'list') {
-            // if the base rate changes, it should trigger a field re-render
-            this.model.on('change:' + baseRateField, function(model, baseRate, options) {
-
-                var prevBaseRate = model.previous(baseRateField);
-                if (!_.isUndefined(prevBaseRate)) { // it is undefined, of course, at first load
-
-                    var precision = this.def && this.def.precision || 6;
-                    // lets actually make sure this really changed before triggering the deferModelChange method.
-                    // that way if base_rate is a integer we can actually make sure it didn't change
-                    // eg: 1 to "1.000000"
-                    var newValue = app.math.round(baseRate, precision, true),
-                        previousValue = app.math.round(prevBaseRate, precision, true);
-                    if (!_.isEqual(newValue, previousValue)) {
-                        if (options && _.isUndefined(options.revert)) {
-                            this._deferModelChange();
-                        }
-                    }
-                }
-            }, this);
+            this.model.on('change:' + baseRateField, this.handleBaseRateFieldChange, this);
             this.model.on('change:' + currencyField, function(model, currencyId, options) {
                 //When model is reset, it should not be called
                 if (!currencyId || !this._lastCurrencyId || options.revert === true) {
@@ -251,6 +233,37 @@
                 this._lastCurrencyId = currencyId;
             }, this);
         }
+    },
+
+    /**
+     * handles when the base rate changes.  Defers model changes and re-renders the field
+     * so that the currency symbol changes when a 0 amount is switched between currencies.
+     * @private
+     */
+    handleBaseRateFieldChange: function(model, currencyId, options) {
+        var baseRateField = this.def.base_rate_field || 'base_rate';
+        var prevBaseRate = model.previous(baseRateField);
+        var baseRate = model.get(baseRateField);
+        var precision;
+        var newValue;
+        var previousValue;
+
+        if (!_.isUndefined(prevBaseRate)) { // it is undefined, of course, at first load
+            precision = this.def && this.def.precision || 6;
+            // lets actually make sure this really changed before triggering the deferModelChange method.
+            // that way if base_rate is a integer we can actually make sure it didn't change
+            // eg: 1 to "1.000000"
+            newValue = app.math.round(baseRate, precision, true);
+            previousValue = app.math.round(prevBaseRate, precision, true);
+            if (!_.isEqual(newValue, previousValue)) {
+                if (options && _.isUndefined(options.revert)) {
+                    this._deferModelChange();
+                }
+            }
+        }
+        //rerender the currency field. This is needed if a currency field is 0, but changes currencies.  Since
+        //$0 and 0 EUR are the same, it doesn't detect the switch and 0 fields can show the wrong currency symbol.
+        this._render();
     },
 
     /**

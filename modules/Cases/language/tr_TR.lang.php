@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Talepler Listesi Panosu',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Talepler Kaydı Panosu',
+
 	'ERR_DELETE_RECORD'					=> 'Müşteriyi silmek için bir kayıt numarası girmelisiniz.',
 	'LBL_ACCOUNT_ID'					=> 'Müşteri ID',
 	'LBL_ACCOUNT_NAME'					=> 'Müşteri İsmi:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Durum:',
     'LBL_SOURCE' => 'Kaynak:',
 	'LBL_SUBJECT'						=> 'Konusu:',
-	'LBL_SYSTEM_ID'						=> 'Sistem ID',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Müşteri İsmi',
 	'LBL_LIST_ASSIGNED'					=> 'Atanan Kişi',
 	'LBL_LIST_CLOSE'					=> 'Kapat',

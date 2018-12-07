@@ -118,6 +118,19 @@ class UserDemoData {
                 }
             }
         }
+        if ($id == "seed_sally_id") {
+            // add to Data Privacy Manager Role
+            $arrRoles = ACLRole::getAllRoles(true);
+
+            foreach ($arrRoles as $role) {
+                if ($role['name'] == "Data Privacy Manager") {
+                    $u->load_relationship('aclroles');
+                    $u->aclroles->add($role['id']);
+                    $u->save();
+                    break;
+                }
+            }
+        }
 	}
 
 	/**

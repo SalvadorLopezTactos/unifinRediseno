@@ -17,6 +17,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\AbstractHandler;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\MappingHandlerInterface;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\ProcessDocumentHandlerInterface;
+use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Property\MultiFieldProperty;
 
 /**
  *
@@ -72,6 +73,8 @@ class TagsHandler extends AbstractHandler implements
         }
 
         // we just need an not_analyzed field here
-        $mapping->addNotAnalyzedField(self::TAGS_FIELD);
+        $property = new MultiFieldProperty();
+        $property->setType('keyword');
+        $mapping->addCommonField(self::TAGS_FIELD, 'tags', $property);
     }
 }

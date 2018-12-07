@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'Email',
     'db_email2' => 'Andere Email',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Kontaktlisten-Dashboard',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kontaktbericht-Dashboard',
+
     'LNK_CONTACT_REPORTS' => 'Kontaktberichte anzeigen',
     'ERR_DELETE_RECORD' => 'Bitte geben Sie die Datensatznummer an, um den Kontakt zu löschen.',
     'LBL_ACCOUNT_ID' => 'Firmen-ID:',
@@ -77,7 +81,7 @@ $mod_strings = array (
     'LBL_HISTORY_SUBPANEL_TITLE'=>'Verlauf',
     'LBL_HOME_PHONE' => 'Privat:',
     'LBL_ID' => 'ID:',
-    'LBL_IMPORT_VCARD' => 'vCard importieren',
+    'LBL_IMPORT_VCARD' => 'VCard importieren',
     'LBL_IMPORT_VCARD_SUCCESS' => 'Kontakt von vCard erfolgreich erstellt',
     'LBL_VCARD' => 'vCard',
     'LBL_IMPORT_VCARDTEXT' => 'Durch Importieren einer vCard einen neuen Kontakt automatisch anlegen.',
@@ -107,7 +111,7 @@ $mod_strings = array (
     'LBL_NEW_FORM_TITLE' => 'Neuer Kontakt',
     'LBL_NEW_PORTAL_PASSWORD' => 'Neues Portal-Passwort:',
     'LBL_NOTE_SUBJECT' =>'Notiz-Betreff',
-    'LBL_OFFICE_PHONE' => 'Bürotelefon:',
+    'LBL_OFFICE_PHONE' => 'Telefon Büro:',
     'LBL_OPP_NAME' => 'Verkaufschance-Name:',
     'LBL_OPPORTUNITY_ROLE_ID'=>'Verkaufschance Rollen ID:',
     'LBL_OPPORTUNITY_ROLE'=>'Verkaufschancen-Rolle',
@@ -145,7 +149,7 @@ $mod_strings = array (
     'LBL_SYNC_CONTACT' => 'Synchronisierung mit E-Mail-Client:',
     'LBL_PROSPECT_LIST' => 'Zielkontaktliste',
     'LBL_TEAM_ID' => 'Team ID',
-    'LBL_TITLE' => 'Name:',
+    'LBL_TITLE' => 'Bezeichnung:',
     'LNK_CREATE' => 'Person erstellen',
     'LNK_CONTACT_LIST' => 'Kontakte anzeigen',
     'LNK_IMPORT_VCARD' => 'Kontakt von vCard erstellen',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Alternative Adresse in Hauptadresse kopieren',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Hauptadresse in alternative Adresse kopieren',
     'NTC_DELETE_CONFIRMATION' => 'Sind Sie sicher, dass Sie diesen Eintrag löschen möchten?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Zum Erstellen einer Verkaufschance benötigen Sie eine Firma.\n Bitte erstellen Sie eine neue Firma oder wählen Sie eine bestehende Firma aus.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Zum Erstellen einer Verkaufschance benötigen Sie eine Firma.\\n Bitte erstellen Sie eine neue Firma oder wählen Sie eine bestehende Firma aus.',
     'NTC_REMOVE_CONFIRMATION' => 'Möchten Sie diesen Kontakt wirklich von diesem Ticket entfernen?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Möchten Sie diesen Kontakt wirklich entfernen?',
 
@@ -273,4 +277,6 @@ So erstellen Sie ein {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Interessenten-Bewertung',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontakte-Berichte',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Geschäftszwecke, zugestimmt für',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Zustimmung zuletzt aktualisiert',
 );

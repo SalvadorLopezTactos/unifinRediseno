@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Szerezzen be egy fogyasztói kulcsot a LogMeIn rendszerből egy új GoToMeeting alkalmazás regisztrálásával.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+A példány regisztrálásának a lépései:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Jelentkezzen be a LogMeIn fejlesztőközpont fiókkal: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Kattintson a My Apps (Saját alkalmazások) lehetőségre</li>
+    <li>Kattintson az Add a new App (Új alkalmazás hozzáadása) lehetőségre</li>
+    <li>Töltse ki az összes mezőt az Add App (Alkalmazás hozzáadása) űrlapban:</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>App Name (Alkalmazás neve)</li>
+            <li>Description (Leírás)</li>
+            <li>Product API (Termék API): Válassza a GoToMeeting lehetőséget</li>
+            <li>Application URL (Alkalmazás URL-cím): Adja meg a példány URL-címét</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Kattintson a Create App Button (Alkalmazás létrehozása) gombra</li>
+    <li>Az alkalmazások listájában kattintson az alkalmazás nevére</li>
+    <li>Kattintson a Keys (Kulcsok) fülre</li>
+    <li>Másolja le a Consumer Key (Fogyasztói kulcs) értéket, és adja meg alább</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Fogyasztói kulcs',
 );

@@ -224,7 +224,7 @@ $mod_strings = array (
   'LBL_TOTAL' => 'الإجمالي',
   'LBL_MODULE_NAME_SAVED' => 'اسم الوحدة',
   'LBL_REPORT_TYPE' => 'نوع التقرير',
-  'LBL_REPORT_LAST_RUN_DATE' => 'تم الدخول',
+  'LBL_REPORT_LAST_RUN_DATE' => 'تاريخ الوصول إليه',
   'LBL_REPORT__ATT_TYPE' => 'النوع',
   'LBL_REPORT_RUN_WITH_FILTER' => 'تطبيق',
   'LBL_REPORT_RESET_FILTER' => 'إعادة تعيين',
@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'ربع سنوي',
     'LBL_BY_FISCAL_YEAR' => 'بواسطة السنة المالية',
     'LBL_BY_FISCAL_QUARTER' => 'ربع سنوي مالي',
+    'LBL_AMOUNT' => 'المبلغ',
     'LBL_COUNT' => 'حساب',
+    'LBL_PERCENT' => 'النسبة المئوية',
     'LBL_SUM' => 'مبلغ',
     'LBL_AVG' => 'متوسط',
     'LBL_MAX' => 'أقصى',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'شهر',
     'LBL_YEAR' => 'سنة',
     'LBL_QUARTER' => 'ربع سنة',
+    'LBL_FISCAL' => 'المالي',
     'LBL_FISCAL_YEAR' => 'السنة المالية',
     'LBL_FISCAL_QUARTER' => 'ربع سنوي مالي',
 	'LBL_YESTERDAY'=>'أمس',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'أكبر من مساوٍ لـ',
 
     'LBL_FILTER_BY_MODULE' => 'حسب الوحدة',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'مع مخططات',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'خطا أثناء استرداد بيانات تقرير استخلاص البيانات لهذا الإجراء. اتصل بمالك التقرير للمساعدة.',
+    'LBL_CHART_NO_DRILLTHRU' => 'استخلاص البيانات غير متوفر',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'تعرض طريقة عرض القائمة جميع التقارير التي تلبي معيار البحث الحالي والمستخدمين الذين لهم حق الوصول إليها. يمكنك عرض التفاصيل الأساسية لكل تقرير داخل أعمدة الحقل في طريقة عرض القائمة وفي المعاينة. يمكنك تعيين علامات للتقارير وإنشاء عوامل تصفية. انقر فوق اسم التقرير لعرض التقرير أو اختر "تعديل التقرير" في قائمة الإجراءات لتعديل التقرير.',
+  );

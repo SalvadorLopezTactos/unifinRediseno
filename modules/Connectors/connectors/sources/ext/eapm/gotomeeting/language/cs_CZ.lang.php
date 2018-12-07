@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Získejte spotřebitelský klíč od společnosti LogMeIn registrací nové aplikace GoToMeeting.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Kroky k registraci vaší instance:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Přihlaste se ke svému účtu v LogMeIn Developer Center: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Klikněte na My Apps (Moje aplikace)</li>
+    <li>Klikněte na Add a new App (Přidat novou aplikaci)</li>
+    <li>Vyplňte všechna pole na formuláři pro přidání aplikace:</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>Název aplikace</li>
+            <li>Popis</li>
+            <li>API produktu: vyberte GoToMeeting</li>
+            <li>URL aplikace: zadejte adresu URL vaší instance</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Klikněte na tlačítko Create App  (Vytvořit aplikaci)</li>
+    <li>V seznamu aplikací klikněte na název své aplikace</li>
+    <li>Klikněte na záložku Keys (Klíče)</li>
+    <li>Zkopírujte hodnotu spotřebitelského klíče a zadejte ji níže</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Spotřebitelský klíč',
 );

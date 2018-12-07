@@ -70,7 +70,7 @@ abstract class FilterAggregation extends AbstractAggregation
     /**
      * Get aggregation filter definition
      * @param string $field
-     * @return \Elastica\Filter\AbstractFilter
+     * @return \Elastica\Query\AbstractQuery
      */
     abstract protected function getAggFilter($field);
 }

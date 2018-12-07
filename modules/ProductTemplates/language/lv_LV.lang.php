@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => 'Piegādātāji',
   'LNK_PRODUCT_LIST' => 'Produktu katalogs',
   'NTC_DELETE_CONFIRMATION' => 'Vai tiešām vēlaties dzēst šo ierakstu?',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => 'Pievienot',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Piešķirts lietotājam',

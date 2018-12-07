@@ -35,7 +35,8 @@ class PMSEImageGeneratorApi extends FileTempApi
                 'method' => 'getFile',
                 'rawReply' => true,
                 'allowDownloadCookie' => true,
-//                'shortHelp' => 'Returns the process status image file',
+                'shortHelp' => 'Returns the process status image file',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_get_file_help.html',
             ),
             'getTempImage' => array(
                 'reqType' => 'GET',
@@ -91,6 +92,7 @@ class PMSEImageGeneratorApi extends FileTempApi
      */
     public function getTempImage(ServiceBase $api, array $args)
     {
+        PMSEEngineUtils::logDeprecated(__METHOD__);
         parent::getTempImage($api, $args);
     }
 
@@ -104,6 +106,7 @@ class PMSEImageGeneratorApi extends FileTempApi
      */
     public function getProjectFile(ServiceBase $api, array $args)
     {
+        PMSEEngineUtils::logDeprecated(__METHOD__);
         $args['_project'] = true;
         $this->getProcessImage($api, $args);
         $args['temp_id'] = $args['record'];

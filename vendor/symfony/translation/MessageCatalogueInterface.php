@@ -17,8 +17,6 @@ use Symfony\Component\Config\Resource\ResourceInterface;
  * MessageCatalogueInterface.
  *
  * @author Fabien Potencier <fabien@symfony.com>
- *
- * @api
  */
 interface MessageCatalogueInterface
 {
@@ -26,8 +24,6 @@ interface MessageCatalogueInterface
      * Gets the catalogue locale.
      *
      * @return string The locale
-     *
-     * @api
      */
     public function getLocale();
 
@@ -35,8 +31,6 @@ interface MessageCatalogueInterface
      * Gets the domains.
      *
      * @return array An array of domains
-     *
-     * @api
      */
     public function getDomains();
 
@@ -48,8 +42,6 @@ interface MessageCatalogueInterface
      * @param string $domain The domain name
      *
      * @return array An array of messages
-     *
-     * @api
      */
     public function all($domain = null);
 
@@ -59,8 +51,6 @@ interface MessageCatalogueInterface
      * @param string $id          The message id
      * @param string $translation The messages translation
      * @param string $domain      The domain name
-     *
-     * @api
      */
     public function set($id, $translation, $domain = 'messages');
 
@@ -71,8 +61,6 @@ interface MessageCatalogueInterface
      * @param string $domain The domain name
      *
      * @return bool true if the message has a translation, false otherwise
-     *
-     * @api
      */
     public function has($id, $domain = 'messages');
 
@@ -83,8 +71,6 @@ interface MessageCatalogueInterface
      * @param string $domain The domain name
      *
      * @return bool true if the message has a translation, false otherwise
-     *
-     * @api
      */
     public function defines($id, $domain = 'messages');
 
@@ -95,8 +81,6 @@ interface MessageCatalogueInterface
      * @param string $domain The domain name
      *
      * @return string The message translation
-     *
-     * @api
      */
     public function get($id, $domain = 'messages');
 
@@ -105,8 +89,6 @@ interface MessageCatalogueInterface
      *
      * @param array  $messages An array of translations
      * @param string $domain   The domain name
-     *
-     * @api
      */
     public function replace($messages, $domain = 'messages');
 
@@ -115,8 +97,6 @@ interface MessageCatalogueInterface
      *
      * @param array  $messages An array of translations
      * @param string $domain   The domain name
-     *
-     * @api
      */
     public function add($messages, $domain = 'messages');
 
@@ -125,9 +105,7 @@ interface MessageCatalogueInterface
      *
      * The two catalogues must have the same locale.
      *
-     * @param MessageCatalogueInterface $catalogue A MessageCatalogueInterface instance
-     *
-     * @api
+     * @param self $catalogue
      */
     public function addCatalogue(MessageCatalogueInterface $catalogue);
 
@@ -137,18 +115,14 @@ interface MessageCatalogueInterface
      *
      * This is used to provide default translations when they do not exist for the current locale.
      *
-     * @param MessageCatalogueInterface $catalogue A MessageCatalogueInterface instance
-     *
-     * @api
+     * @param self $catalogue
      */
     public function addFallbackCatalogue(MessageCatalogueInterface $catalogue);
 
     /**
      * Gets the fallback catalogue.
      *
-     * @return MessageCatalogueInterface|null A MessageCatalogueInterface instance or null when no fallback has been set
-     *
-     * @api
+     * @return self|null A MessageCatalogueInterface instance or null when no fallback has been set
      */
     public function getFallbackCatalogue();
 
@@ -156,8 +130,6 @@ interface MessageCatalogueInterface
      * Returns an array of resources loaded to build this collection.
      *
      * @return ResourceInterface[] An array of resources
-     *
-     * @api
      */
     public function getResources();
 
@@ -165,8 +137,6 @@ interface MessageCatalogueInterface
      * Adds a resource for this collection.
      *
      * @param ResourceInterface $resource A resource instance
-     *
-     * @api
      */
     public function addResource(ResourceInterface $resource);
 }

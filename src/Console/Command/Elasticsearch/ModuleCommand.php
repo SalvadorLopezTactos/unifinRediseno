@@ -67,7 +67,7 @@ class ModuleCommand extends Command implements InstanceModeInterface
         $module = $input->getArgument('module');
         $action = $input->getArgument('action');
 
-        if (!in_array($action, array('enable', 'disable'))) {
+        if (!in_array($action, array('enable', 'disable'), true)) {
             throw new RuntimeException("Please specify a proper action: 'enable' or 'disable'");
         }
 

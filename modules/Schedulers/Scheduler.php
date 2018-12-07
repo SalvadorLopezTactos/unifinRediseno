@@ -9,6 +9,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Job\RebuildJob;
+
 require_once 'install/install_utils.php';
 
 class Scheduler extends SugarBean {
@@ -1008,6 +1011,19 @@ class Scheduler extends SugarBean {
         $scheduler->created_by         = '1';
         $scheduler->modified_user_id   = '1';
         $scheduler->catch_up           = '1';
+        $schedulers[$scheduler->job] = $scheduler;
+
+        //Handle the rebuild of Team Security denormalized table
+        $scheduler = BeanFactory::newBean('Schedulers');
+        $scheduler->name = $mod_strings['LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD'];
+        $scheduler->job = 'class::' . RebuildJob::class;
+        $scheduler->date_time_start = create_date(2005, 1, 1) . ' ' . create_time(0, 0, 1);
+        $scheduler->date_time_end = create_date(2030, 12, 31) . ' ' . create_time(23, 59, 59);
+        $scheduler->job_interval = '*/15::*::*::*::*';
+        $scheduler->status = 'Inactive';
+        $scheduler->created_by = '1';
+        $scheduler->modified_user_id = '1';
+        $scheduler->catch_up = '0';
         $schedulers[$scheduler->job] = $scheduler;
 
         return $schedulers;

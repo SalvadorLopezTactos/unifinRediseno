@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => '错误：在结果中没有映射好的模块字段以供显示。请联系系统管理员。',
     'LBL_INFO_INLINE' => '信息' /*for 508 compliance fix*/,
     'LBL_CLOSE' => '关闭' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => '未发现给定的资源编号的连接器。',
 );
 

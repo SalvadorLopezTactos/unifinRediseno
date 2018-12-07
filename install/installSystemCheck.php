@@ -100,10 +100,10 @@ if(strpos($server_software,'Microsoft-IIS') !== false)
 }
 
 // PHP VERSION
-$php_version = constant('PHP_VERSION');
-$check_php_version_result = check_php_version($php_version);
+    $check_php_version_result = check_php_version();
 
 if($check_php_version_result == -1) {
+        $php_version = constant('PHP_VERSION');
         installLog($mod_strings['ERR_CHECKSYS_PHP_INVALID_VER'].'  '.$php_version);
         $phpVersion = "<b><span class=stop>{$mod_strings['ERR_CHECKSYS_PHP_INVALID_VER']} {$php_version} )</span></b>";
         $error_found = true;

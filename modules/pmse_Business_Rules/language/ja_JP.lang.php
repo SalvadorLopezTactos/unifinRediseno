@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'プロセスビジネスルール',
   'LBL_MODULE_TITLE' => 'プロセスビジネスルール',
   'LBL_MODULE_NAME_SINGULAR' => 'プロセスビジネス定義',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => '条件',
     'LBL_PMSE_LABEL_RETURN' => '返り値',
     'LBL_PMSE_LABEL_CONCLUSIONS' => '結果',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'フィールドを変更',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => '戻り値',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => '条件追加',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => '結果を追加',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => '列を追加',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => '列を削除',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => '条件を削除します。',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => '結果を削除します。',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'カラムデータを削除します。',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'はい',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'いいえ',

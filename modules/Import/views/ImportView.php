@@ -18,6 +18,7 @@ class ImportView extends SugarView
     protected $currentStep;
     protected $pageTitleKey;
     protected $instruction;
+    protected $defaultDelimiter;
 
     /**
      * @var Request
@@ -39,7 +40,7 @@ class ImportView extends SugarView
             $this->currentStep = isset($_REQUEST['current_step']) ? ($_REQUEST['current_step'] + 1) : 1;
         }
         $this->importModule = isset($_REQUEST['import_module']) ? $_REQUEST['import_module'] : '';
-        
+        $this->defaultDelimiter = SugarConfig::getInstance()->get('export_delimiter', ',');
     }
 
     /**
@@ -58,6 +59,80 @@ class ImportView extends SugarView
         $mod_strings = $old_mod_strings;
 
         return $returnMenu;
+    }
+
+    /**
+     * Return available import delimiters
+     * @return array Delimiters
+     */
+    protected function getImportDelimiters()
+    {
+        return array_keys($GLOBALS['app_list_strings']['import_delimeter_options']);
+    }
+
+    /**
+     * Get "custom_delimiter" from request with optional "other" delimiter
+     * @return array Delimiters
+     */
+    protected function getDelimitersFromRequest()
+    {
+        $delimiters = array();
+
+        $delimiters['custom'] = $this->request->getValidInputRequest(
+            'custom_delimiter',
+            array(
+                'Assert\Choice' => array(
+                    'choices' => $this->getImportDelimiters(),
+                ),
+            ),
+            $this->getDefaultDelimiter()
+        );
+
+        $delimiters['other'] = $this->request->getValidInputRequest(
+            'custom_delimiter_other',
+            array(
+                'Assert\Type' => array(
+                    'type' => 'string',
+                ),
+                'Assert\Length' => array(
+                    'max' => 1,
+                ),
+            ),
+            $this->getDefaultDelimiter()
+        );
+
+        return $delimiters;
+    }
+
+    /**
+     * Resolves delimiter value based on user's selection
+     * @return string
+     */
+    public function getDelimiterValue()
+    {
+        $delimiters = $this->getDelimitersFromRequest();
+        $delimiter = $delimiters['custom'];
+
+        switch ($delimiter) {
+            case "other":
+                $delimiter = $delimiters['other'];
+                break;
+
+            case '\t':
+                $delimiter = "\t";
+                break;
+        }
+
+        return $delimiter;
+    }
+
+    /**
+     * Return default delimiter
+     * @return string Delimiter
+     */
+    public function getDefaultDelimiter()
+    {
+        return $this->defaultDelimiter;
     }
 
  	/**

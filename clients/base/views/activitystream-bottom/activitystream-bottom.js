@@ -28,6 +28,19 @@
     },
 
     /**
+     * @inheritdoc
+     */
+    _render: function() {
+        this._super('_render');
+
+        if (!app.config.activityStreamsEnabled) {
+            this.$el.addClass('hide');
+        }
+
+        return this;
+    },
+
+    /**
      * Display appropriate label depending on the state of activity stream collection.
      * @inheritdoc
      */

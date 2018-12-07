@@ -111,11 +111,11 @@ class CampaignTracker extends SugarBean {
         global $sugar_config;
 
         //setup campaign name.
-        $query = "SELECT name from campaigns where id = '$this->campaign_id'";
-        $result =$this->db->query($query,true," Error filling in additional detail fields: ");
+        $query = 'SELECT name from campaigns where id = ?';
+        $conn = $this->db->getConnection();
+        $stmt = $conn->executeQuery($query, array($this->campaign_id));
+        $row = $stmt->fetch();
 
-        // Get the id and the name.
-        $row = $this->db->fetchByAssoc($result);
         if($row != null) {
             $this->campaign_name=$row['name'];
         }

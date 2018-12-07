@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Quadre de comandament del llistat d&#39;objectius',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Quadre de comandament del registre d&#39;objectius',
+
   'LBL_MODULE_NAME' => 'Objectius',
   'LBL_MODULE_NAME_SINGULAR' => 'Objectiu',
   'LBL_MODULE_ID'   => 'Objectius',
@@ -195,4 +199,6 @@ Per crear un {{module_name}}:
 2. Feu clic a "Desa" per finalitzar el nou registre i tornar a la pàgina anterior.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Informe de l&#39;objectiu',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objectius empresarials consentits',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Darrera actualització del consetiment',
 );

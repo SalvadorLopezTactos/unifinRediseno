@@ -15,6 +15,11 @@
  */
 
 use Sugarcrm\Sugarcrm\ProcessManager;
+use Sugarcrm\Sugarcrm\ProcessManager\Registry;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
+use Sugarcrm\Sugarcrm\Security\Context;
+use Sugarcrm\Sugarcrm\Security\Subject\AdvancedWorkflow;
 
 /**
  * Class contains utilities as encoder and decoders for codes url, remove bound fields,
@@ -36,13 +41,17 @@ class PMSEEngineUtils
     public static $uploadObject;
 
     /**
+     * @var Authentication\Config
+     */
+    protected static $idmConfig;
+
+    /**
      * List of fields across all modules that should always be blacklisted
      * @var array
      */
     protected static $blacklistedFields = array(
         'ALL' => array(
             'deleted',
-            'system_id',
             'mkto_sync',
             'mkto_id',
             'mkto_lead_score',
@@ -113,13 +122,16 @@ class PMSEEngineUtils
     public static $targetBlacklistedModules = array(
         'Users',
         'Employees',
+        'DataPrivacy',
     );
 
     /**
      * PA related blacklisted modules
      * @var array
      */
-    public static $relatedBlacklistedModules = array();
+    public static $relatedBlacklistedModules = array(
+        'DataPrivacy',
+    );
 
     /**
      * PA related blacklisted links
@@ -186,6 +198,33 @@ class PMSEEngineUtils
      * @var array
      */
     protected static $parentBeanCache = [];
+
+    /**
+     * Method to append the name fields from a bean to an array
+     * @param SugarBean $bean
+     * @param array $result
+     * @return array
+     */
+    public static function appendNameFields($bean, $result)
+    {
+        if ($bean instanceof Person) {
+            $result['is_a_person'] = true;
+            $result['salutation'] = $bean->salutation;
+            $result['first_name'] = $bean->first_name;
+            $result['last_name'] = $bean->last_name;
+            $result['cas_title'] = null;
+            $result['name'] = null;
+        } else {
+            $result['is_a_person'] = false;
+            $result['salutation'] = null;
+            $result['first_name'] = null;
+            $result['last_name'] = null;
+            $result['cas_title'] = $bean->name;
+            $result['name'] = $bean->name;
+        }
+        $result['_erased_fields'] = $bean->erased_fields;
+        return $result;
+    }
 
     /**
      * Method get key fields
@@ -1298,6 +1337,15 @@ class PMSEEngineUtils
      */
     public static function isValidStudioField($def)
     {
+
+        if (is_null(static::$idmConfig)) {
+            static::$idmConfig = new Authentication\Config(\SugarConfig::getInstance());
+        }
+
+        if (static::$idmConfig->isIDMModeEnabled() && !empty($def['idm_mode_disabled'])) {
+            return false;
+        }
+
         if (isset($def['studio'])) {
             if (is_array($def ['studio'])) {
                 if (isset($def['studio']['editField']) && $def['studio']['editField'] == true) {
@@ -1474,7 +1522,47 @@ class PMSEEngineUtils
     public static function saveAssociatedBean(SugarBean $bean)
     {
         $bean->isPASaveRequest = true;
-        return $bean->save();
+        $check_notify = false;
+        // There are three checks performed here
+        // 1) notification is not turned off in the settings
+        // 2) it is not part of a mass update
+        // 3) assigned user has changed to other than the current user
+        if ((empty($GLOBALS['sugar_config']['exclude_notifications'][$bean->module_dir]) ||
+                $GLOBALS['sugar_config']['exclude_notifications'][$bean->module_dir] != true) &&
+            (empty($_REQUEST['__sugar_url']) ||
+                substr($_REQUEST['__sugar_url'], -10) != 'MassUpdate') &&
+            (isset($bean->assigned_user_id) &&
+                $bean->assigned_user_id != $GLOBALS['current_user']->id &&
+                (empty($bean->fetched_row['assigned_user_id']) ||
+                    $bean->fetched_row['assigned_user_id'] != $bean->assigned_user_id))) {
+            $check_notify = true;
+        }
+
+        // Get the source information that is needed
+        $attrs = Registry\Registry::getInstance()->get('process_attributes');
+
+        // Get the context object to set the Subject into
+        $context = Container::getInstance()->get(Context::class);
+
+        // Create the AdvancedWorkflow subject based on its properties
+        $subject = new AdvancedWorkflow(
+            BeanFactory::getBean(
+                'pmse_Project',
+                empty($attrs['project_id']) ? null : $attrs['project_id']
+            )
+        );
+
+        // Activate the subject
+        $context->activateSubject($subject);
+
+        // Save the id since we need to return it later once subject's been deactivated
+        $id = $bean->save($check_notify);
+
+        // Deactivate the subject for the current context
+        $context->deactivateSubject($subject);
+
+        // now return the id
+        return $id;
     }
 
     /**
@@ -1833,7 +1921,6 @@ class PMSEEngineUtils
         return "pmse_{$moduleName}_module_has_records_with_locked_fields";
     }
 
-
     /**
      * Because we used expSubType property prior to 7.9 instead of expSubtype,
      * we need to make sure BRs still work after upgrade that's why this hack
@@ -1855,6 +1942,17 @@ class PMSEEngineUtils
             // Nothing found so return a null
             return null;
         }
+    }
+
+    /*
+     * Logs Deprecated functions
+     * @param $method method to be deprecated
+     * @param $version sugar version
+     */
+    public static function logDeprecated($method, $version = '7.10')
+    {
+        $msg = "$method is deprecated as of $version and will be removed in a future release";
+        LoggerManager::getLogger()->deprecated($msg);
     }
 
     /**

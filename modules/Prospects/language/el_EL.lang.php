@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Στόχων',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Στόχων',
+
   'LBL_MODULE_NAME' => 'Στόχοι',
   'LBL_MODULE_NAME_SINGULAR' => 'Στόχος',
   'LBL_MODULE_ID'   => 'Στόχοι',
@@ -195,4 +199,6 @@ $mod_strings = array (
 2. Κάντε κλικ στην επιλογή "Αποθήκευση" για να οριστικοποιήσετε τη νέα εγγραφή και να επιστρέψετε στην προηγούμενη σελίδα.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Αναφορές Στόχων',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Επαγγελματικοί σκοποί για τους οποίους δώσατε τη συγκατάθεσή σας',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Τελευταία ανανέωση συγκατάθεσης',
 );

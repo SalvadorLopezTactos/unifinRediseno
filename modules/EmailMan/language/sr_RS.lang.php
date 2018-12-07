@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'kliknite ovde',
 	'TXT_REMOVE_ME'								=> 'Da bi sebe ukloniti sa ove email liste',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Pošalji obaveštenje sa email adrese dodeljenog korisnika',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Podrazumevano izuzimanje novih e-adresa',
 
 	'LBL_SECURITY_TITLE'						=> 'Podešavanja sigurnosti za Email',
 	'LBL_SECURITY_DESC'							=> 'Proverite sledeće što NE SME biti dozvoljeno kod dolazne Email pošte ili prikazano u Email modulu.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Dozvoli korisnicima da koriste ovaj nalog za odlazne email poruke:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Kada je ova opcija odabrana, svi korisnici će biti u mogućnosti da šalju email poruke koristeći isti<br>nalog za odlazne email poruke koji se koristi za upozorenja i obaveštenja. Ako ova opcija nije odabrana,<br>korisnici mogu da koriste server za odlazne email poruke kada obezebede informacije o njihovom nalogu.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Kada je omogućeno, korisničko ime i email adresa dodeljenog korisnika će biti dodati u polje "Od:" email-a. Ova funkcionalnost možda neće raditi sa SMTP serverima koji ne dozvoljavaju slanje sa drugog email naloga koji nije nalog servera.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Kada se doda nova e-adresa, automatski će biti izuzeta. E-poruke kampanje ne mogu da se dostavljaju na izuzete adrese. Promena ovog podešavanja neće uticati na postojeće e-adrese.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Razmeni' /*for 508 compliance fix*/,

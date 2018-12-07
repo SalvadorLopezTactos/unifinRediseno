@@ -143,6 +143,12 @@ class SugarUpgradeClearHooks extends UpgradeScript
                         $namespace = $this->findNamespace($tokens, $ind);
                         break;
                     case T_CLASS:
+                        if (isset($tokens[$ind - 1])) {
+                            $previousToken = $tokens[$ind - 1];
+                            if (is_array($previousToken) && $previousToken[0] === T_DOUBLE_COLON) {
+                                break;
+                            }
+                        }
                         $current = $this->findName($tokens, $ind, T_STRING);
                         if ($namespace != '') {
                             $current = $namespace.'\\'.$current;

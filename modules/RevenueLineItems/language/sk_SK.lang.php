@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Informačný panel so zoznamom položiek riadkov výnosov',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Informačný panel so záznamom položiek riadkov výnosov',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampaň produktu',
     'LBL_MODULE_NAME' => 'Položky krivky výnosu',
     'LBL_MODULE_NAME_SINGULAR' => 'Položka krivky výnosu',

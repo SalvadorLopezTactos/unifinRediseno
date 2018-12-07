@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Var god välj från befintliga fält',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Formulärbeskrivning:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Genom att spara detta formulär kommer ett lead skapas med en koppling till en kampanj',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Genom att markera den här boxen, samtycker du till att erhålla marknadsföring via e-post i framtiden',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Var god ladda ner webb till lead formuläret',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Webb till lead-formulär',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Vänligen fyll i alla obligatoriska fält',

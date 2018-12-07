@@ -19,7 +19,7 @@ Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.
 Steps to register your instance:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Log in to your LogMeIn Developer Centre account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
     <li>Click on My Apps</li>
     <li>Click on Add a new App</li>
     <li>Complete all fields on the Add App form:</li>

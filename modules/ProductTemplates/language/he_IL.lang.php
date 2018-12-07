@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => 'ספקי שילוח',
   'LNK_PRODUCT_LIST' => 'צפייה בקטלוג מוצרים',
   'NTC_DELETE_CONFIRMATION' => 'אתה בטוח בשברצונך למחוק רשומה זו?',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => 'הוסף',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'הוקצה למשתמש ששמו',

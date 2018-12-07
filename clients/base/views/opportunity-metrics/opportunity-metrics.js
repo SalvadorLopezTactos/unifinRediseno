@@ -25,13 +25,10 @@
     initialize: function(options) {
         this._super('initialize', [options]);
 
-        this.chart = nv.models.pieChart()
-                .x(function(d) {
-                    return d.key;
-                })
-                .y(function(d) {
-                    return d.value;
-                })
+        this.tooltipTemplate = app.template.getField('chart', 'singletooltiptemplate', this.module);
+        this.locale = SUGAR.charts.getSystemLocale();
+
+        this.chart = sucrose.charts.pieChart()
                 .margin({top: 0, right: 0, bottom: 5, left: 0})
                 .donut(true)
                 .donutLabelsOutside(true)
@@ -45,12 +42,27 @@
                 .showLegend(false)
                 .colorData('data')
                 .direction(app.lang.direction)
-                .tooltipContent(function(key, x, y, e, graph) {
-                    return '<p><b>' + key + ' ' + parseInt(y, 10) + '</b></p>';
-                })
+                .tooltipContent(_.bind(function(eo, properties) {
+                    var point = {};
+                    point.key = this.chart.getKey()(eo);
+                    point.label = app.lang.get('LBL_CHART_COUNT');
+                    point.value = this.chart.getValue()(eo);
+                    point.percent = sucrose.utility.numberFormatPercent(point.value, properties.total, this.locality);
+                    return this.tooltipTemplate(point).replace(/(\r\n|\n|\r)/gm, '');
+                }, this))
+                .fmtValue(_.bind(function(d) {
+                    return this._valueFormat(d);
+                }, this))
+                .fmtKey(_.bind(function(d) {
+                    return this._labelFormat(d);
+                }, this))
                 .strings({
-                    noData: app.lang.get('LBL_CHART_NO_DATA')
-                });
+                    noData: app.lang.get('LBL_CHART_NO_DATA'),
+                    noLabel: app.lang.get('LBL_CHART_NO_LABEL')
+                })
+                .locality(this.locale);
+
+        this.locality = this.chart.locality();
     },
 
     /**
@@ -65,7 +77,7 @@
         // Set value of label inside donut chart
         this.chart.hole(this.total);
 
-        d3.select(this.el).select('svg#' + this.cid)
+        d3sugar.select(this.el).select('svg#' + this.cid)
             .datum(this.chartCollection)
             .transition().duration(500)
             .call(this.chart);
@@ -80,14 +92,18 @@
     evaluateResult: function(data) {
         var total = 0,
             userConversionRate = 1 / app.metadata.getCurrency(app.user.getPreference('currency_id')).conversion_rate,
-            userCurrencyPreference = app.user.getPreference('currency_id');
+            userCurrencyPreference = app.user.getPreference('currency_id'),
+            stageLabels = app.lang.getAppListStrings('opportunity_metrics_dom'),
+            convertedAmount;
+
         _.each(data, function(value, key) {
+            convertedAmount = app.currency.convertWithRate(value.amount_usdollar, userConversionRate);
             // parse currencies, format to user preference and attach the correct delimiters/symbols etc
-            data[key].formattedAmount = app.currency.formatAmountLocale(app.currency.convertWithRate(value.amount_usdollar, userConversionRate), userCurrencyPreference, 0);
+            data[key].formattedAmount = app.currency.formatAmountLocale(convertedAmount, userCurrencyPreference, 0);
             data[key].icon = key === 'won' ? 'caret-up' : (key === 'lost' ? 'caret-down' : 'minus');
             data[key].cssClass = key === 'won' ? 'won' : (key === 'lost' ? 'lost' : 'active');
             data[key].dealLabel = key;
-            data[key].stageLabel = app.lang.getAppListStrings('opportunity_metrics_dom')[key];
+            data[key].stageLabel = stageLabels[key] || key;
             total += value.count;
         });
 
@@ -97,15 +113,17 @@
         this.chartCollection = {
             data: _.map(this.metricsCollection, function(value, key) {
                 return {
-                    'key': value.stageLabel,
-                    'value': value.count,
-                    'classes': key
+                    key: value.stageLabel,
+                    value: value.count,
+                    classes: key
                 };
             }),
             properties: {
                 title: app.lang.get('LBL_DASHLET_OPPORTUNITY_NAME'),
                 value: 3,
-                label: total
+                label: total,
+                yDataType: 'numeric',
+                xDataType: 'string'
             }
         };
     },
@@ -136,5 +154,29 @@
             }, this),
             complete: options ? options.complete : null
         });
+    },
+
+    /**
+     * This method is called by the chart model in initialize
+     *
+     * @param {number} d  The numeric value to be formatted
+     * @return {string}  A number formatted with SI units if needed
+     * @private
+     */
+    _valueFormat: function(d) {
+        var val = d.series ? this.chart.getValue()(d.series) : d;
+        return sucrose.utility.numberFormatSI(val, 2, false);
+    },
+
+    /**
+     * This method is called by the chart model in initialize
+     *
+     * @param {Object|string} d  The data to extract the label from
+     * @return {string}  A label formatted as needed
+     * @private
+     */
+    _labelFormat: function(d) {
+        var val = d.series ? this.chart.getKey()(d.series) : d;
+        return val;
     }
 })

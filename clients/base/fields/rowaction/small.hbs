@@ -30,4 +30,4 @@
         {{#if ariaLabel}}aria-label="{{ariaLabel}}"{{/if}}
     {{/if}}
 {{/if}}
-    role="button" tabindex="{{tabIndex}}" name="{{name}}" track="click:{{#if name}}{{name}}{{else}}{{label}}{{/if}}"><i class="fa {{def.icon}}"></i></a>
+    role="button" tabindex="{{tabIndex}}" name="{{name}}" track="click:{{#if module}}{{module}}_{{/if}}{{#if name}}{{name}}{{else}}{{label}}{{/if}}"><i class="fa {{def.icon}}"></i></a>

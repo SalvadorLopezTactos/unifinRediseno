@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent cikkek frissítése.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Jóváhagyott cikkek közzététele és KB cikkek lejárttá tétele.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow ütemezett feladat',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Denormalizált csapat biztonsági adatok újraépítése',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervallum:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch sorütemező',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Diagnosztikai eszközfájlok törlése',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Ideiglenes fájlok törlése',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Denormalizált csapat biztonsági adatok újraépítése',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Tömeges kampány emailek éjszakai kiküldése',
 'LBL_ASYNCMASSUPDATE' => 'Aszinkron tömeges frissítések végrehajtása',

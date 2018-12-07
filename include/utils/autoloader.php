@@ -19,7 +19,6 @@ require_once 'include/utils/sugar_file_utils.php';
  */
 class SugarAutoLoader
 {
-    const CACHE_FILE = "file_map.php";
     const CLASS_CACHE_FILE = "class_map.php";
 
     /**
@@ -171,13 +170,6 @@ class SugarAutoLoader
     );
 
     /**
-     * File map
-     * @var array
-     */
-    public static $filemap = array();
-    public static $memmap = array();
-
-    /**
      * Copy of extension map
      * @var array
      */
@@ -222,7 +214,6 @@ class SugarAutoLoader
              */
             self::$devMode = $config->get('developerMode', false);
             if (self::$devMode) {
-                @unlink(sugar_cached(self::CACHE_FILE));
                 @unlink(sugar_cached(self::CLASS_CACHE_FILE));
             }
 
@@ -241,9 +232,6 @@ class SugarAutoLoader
             // since we are ignoring the config, we have to use DevMode
             self::$devMode = true;
         }
-
-        // Create file map
-        self::loadFileMap();
 
         // Composer integration
         self::loadComposerIncludePaths();
@@ -329,7 +317,7 @@ class SugarAutoLoader
      */
     protected static function getIncludeReturn($file, $default = array())
     {
-        if (self::fileExists($file)) {
+        if (file_exists($file)) {
             $return = @include $file;
         }
         return (!isset($return) ? $default : $return);
@@ -499,7 +487,7 @@ class SugarAutoLoader
                     } else {
                         $path .= str_replace('_', '/', $class) . '.php';
                     }
-                    if (self::fileExists($path)) {
+                    if (file_exists($path)) {
                         return $path;
                     }
                 }
@@ -521,7 +509,7 @@ class SugarAutoLoader
                 if (strpos($class, $prefix) === 0) {
                     $path = empty($path) ? '' : $path . '/';
                     $path .= str_replace('\\', '/', str_replace($prefix, '', $class)) . '.php';
-                    if (self::fileExists($path)) {
+                    if (file_exists($path)) {
                         return $path;
                     }
                 }
@@ -661,7 +649,7 @@ class SugarAutoLoader
      */
     public static function load($file)
     {
-        if(self::fileExists($file)) {
+        if (file_exists($file)) {
             require_once $file;
             return true;
         }
@@ -676,18 +664,18 @@ class SugarAutoLoader
      */
     public static function requireWithCustom($file, $both = false)
     {
-        if(self::fileExists("custom/$file")) {
+        if (file_exists("custom/$file")) {
             if($both) {
                 // when loading both, core file goes first so custom can override it
                 // however we check for custom first and if $both not set load only it
-                if(self::fileExists($file)) {
+                if (file_exists($file)) {
                     require_once $file;
                 }
             }
             require_once "custom/$file";
             return "custom/$file";
         } else {
-            if(self::fileExists($file)) {
+            if (file_exists($file)) {
                 require_once $file;
                 return $file;
             }
@@ -710,7 +698,7 @@ class SugarAutoLoader
                 $out += call_user_func_array(array("SugarAutoLoader", "existing"), $file);
                 continue;
             }
-            if(self::fileExists($file)) {
+            if (file_exists($file)) {
                 $out[] = $file;
             }
         }
@@ -732,10 +720,10 @@ class SugarAutoLoader
                 $out += call_user_func_array(array("SugarAutoLoader", "existingCustom"), $file);
                 continue;
             }
-            if(self::fileExists($file)) {
+            if (file_exists($file)) {
                 $out[] = $file;
             }
-            if(substr($file, 0, 7) != 'custom/' && self::fileExists("custom/$file")) {
+            if (substr($file, 0, 7) != 'custom/' && file_exists("custom/$file")) {
                 $out[] = "custom/$file";
             }
         }
@@ -769,10 +757,10 @@ class SugarAutoLoader
     {
         foreach($paths as $path) {
             $fullname = "$path/$file";
-            if(self::fileExists("custom/$fullname")) {
+            if (file_exists("custom/$fullname")) {
                 return "custom/$fullname";
             }
-            if(self::fileExists($fullname)) {
+            if (file_exists($fullname)) {
                 return $fullname;
             }
         }
@@ -953,7 +941,7 @@ class SugarAutoLoader
 	    } else {
 	        $file = "custom/modules/{$module}/Ext/{$ext["extdir"]}/{$ext["file"]}";
 	    }
-	    if(self::fileExists($file)) {
+        if (file_exists($file)) {
 	        return $file;
 	    }
         return false;
@@ -963,57 +951,12 @@ class SugarAutoLoader
      * Check if file exists in the cache
      * @param string $filename
      * @return boolean
+     * @deprecated use file_exists() instead
      */
     public static function fileExists($filename)
     {
-        $filename = self::normalizeFilePath($filename);
-
-        // See if this filename would have been skipped by the cache creator. This
-        // addresses situations like module loader that call sugar_* file functions
-        // that use the autoloader on files that are in cache, etc.
-        $excluded = false;
-        foreach (self::$exclude as $path) {
-            if (strpos($filename, $path) === 0) {
-                $excluded = true;
-                break;
-            }
-        }
-
-        if ($excluded) {
-            // This is a filename that would have been skipped, so check the file
-            // system for existence
-            return file_exists($filename);
-        }
-
-        if(isset(self::$memmap[$filename])) {
-            return (bool)self::$memmap[$filename];
-        }
-
-        // Remember the file_exist calls in dev mode directly
-        // without traversing the filemap as it's empty. This
-        // will safe us multiple calls to file_exist within
-        // the same page.
-        if (self::$devMode) {
-            self::$memmap[$filename] = file_exists($filename);
-            return (bool)self::$memmap[$filename];
-        }
-
-        $parts = explode('/', $filename);
-        $data = self::$filemap;
-        foreach($parts as $part) {
-            if(empty($part)) continue; // allow sequences of /s
-            if(!isset($data[$part])) {
-                self::$memmap[$filename] = false;
-                return false;
-            }
-            $data = $data[$part];
-        }
-        if($data || $data == array()) {
-            self::$memmap[$filename] = true;
-            return true;
-        }
-        self::$memmap[$filename] = false;
-        return false;
+        $GLOBALS['log']->deprecated('\SugarAutoLoader::fileExists is deprecated, use file_exists()');
+        return file_exists($filename);
     }
 
     /**
@@ -1026,17 +969,7 @@ class SugarAutoLoader
      */
     public static function getDirFiles($dir, $get_dirs = false, $extension = null, $recursive = false)
     {
-        // In development mode we don't have the filemap available. To avoid
-        // full rebuilds on every page load, only load what we need at this
-        // point.
-        if (self::$devMode) {
-            $data = self::scanSubDir($dir);
-        } else {
-            if (empty(self::$filemap)) {
-                self::init();
-            }
-            $data = self::$filemap;
-        }
+        $data = self::scanSubDir($dir);
 
         // remove leading . if present
         $extension = ltrim($extension, ".");
@@ -1111,38 +1044,17 @@ class SugarAutoLoader
      */
 	public static function buildCache()
 	{
-        $data = self::scanDir("");
-        write_array_to_file("existing_files", $data, sugar_cached(self::CACHE_FILE));
-        self::$filemap = $data;
-        self::$memmap = array();
         // Rebuild the class cache so that it can find any new classes in the file map
         self::buildClassCache();
 	}
 
     /**
      * Load cached file map
+     * @deprecated
      */
     public static function loadFileMap()
     {
-        $existing_files = array();
-
-        /*
-         * In development mode we can skip loading/building
-         * the file_map as we will revert back to pure file_exists
-         * and not make use of this mapping.
-         */
-        if (!self::$devMode) {
-            @include sugar_cached(self::CACHE_FILE);
-            if (empty($existing_files)) {
-                // oops, something happened to cache
-                // try to rebuild
-                self::buildCache();
-                @include sugar_cached(self::CACHE_FILE);
-            }
-        }
-
-        self::$filemap = $existing_files;
-        self::$memmap = array();
+        $GLOBALS['log']->deprecated('\SugarAutoLoader::loadFileMap is deprecated');
     }
 
     /**
@@ -1215,39 +1127,11 @@ class SugarAutoLoader
 	 * @param string $filename
 	 * @param bool $save should we save it to file?
 	 * @param bool $dir should it be empty directory?
+     * @deprecated
 	 */
 	public static function addToMap($filename, $save = true, $dir = false)
 	{
-        // Normalize filename
-        $filename = self::normalizeFilePath($filename);
-
-	    if(self::fileExists($filename))
-	        return;
-        foreach(self::$exclude as $exclude_pattern) {
-            if(substr($filename, 0, strlen($exclude_pattern)) == $exclude_pattern) {
-                return;
-            }
-        }
-
-        self::$memmap[$filename] = 1;
-
-        $parts = explode('/', $filename);
-	    $filename = array_pop($parts);
-	    $data =& self::$filemap;
-	    foreach($parts as $part) {
-            if(empty($part)) continue; // allow sequences of /s
-	        if(!isset($data[$part])) {
-                $data[$part] = array();
-	        }
-	        $data =& $data[$part];
-	    }
-	    if(!is_array($data)) {
-	        $data = array();
-	    }
-	    $data[$filename] = $dir?array():1;
-	    if($save) {
-	        write_array_to_file("existing_files", self::$filemap, sugar_cached(self::CACHE_FILE));
-	    }
+        $GLOBALS['log']->deprecated('\SugarAutoLoader::addToMap is deprecated');
 	}
 
 	/**
@@ -1255,30 +1139,11 @@ class SugarAutoLoader
 	 * Mainly for use in tests
 	 * @param string $filename
 	 * @param bool $save should we save it to file?
+     * @deprecated
 	 */
 	public static function delFromMap($filename, $save = true)
 	{
-	    // Normalize directory separators
-        $filename = self::normalizeFilePath($filename);
-
-	    // we have to reset here since we could delete a directory
-        // and memmap is not hierarchical. It may be a performance hit
-        //
-	    self::$memmap = array();
-        $parts = explode('/', $filename);
-	    $filename = array_pop($parts);
-	    $data =& self::$filemap;
-	    foreach($parts as $part) {
-            if(empty($part)) continue; // allow sequences of /s
-	        if(!isset($data[$part])) {
-	    	  return;
-	    	}
-	    	$data =& $data[$part];
-	    }
-	    unset($data[$filename]);
-	    if($save) {
-	        write_array_to_file("existing_files", self::$filemap, sugar_cached(self::CACHE_FILE));
-	    }
+        $GLOBALS['log']->deprecated('\SugarAutoLoader::delFromMap is deprecated');
 	}
 
     /**
@@ -1330,7 +1195,7 @@ class SugarAutoLoader
         $data = self::scanDir($path);
 
         // append base path structure
-        $subDirs = array_reverse(explode('/', $path));
+        $subDirs = array_reverse(array_filter(explode('/', $path)));
         $data = array_reduce($subDirs, function ($c, $i) use ($data) {
             return array($i => (empty($c) ? $data : $c));
         });
@@ -1381,10 +1246,11 @@ class SugarAutoLoader
 	 * @param string $filename
 	 * @param bool $save Save map to file?
 	 * @return bool Success?
+     * @deprecated use unlink() instead
 	 */
 	public static function unlink($filename, $save = false)
 	{
-	    self::delFromMap($filename, $save);
+        $GLOBALS['log']->deprecated('\SugarAutoLoader::unlink is deprecated, use unlink()');
 	    unlink($filename);
 	}
 
@@ -1394,14 +1260,12 @@ class SugarAutoLoader
 	 * @param string $filename
 	 * @param bool $save Save map to file?
 	 * @return bool Success?
+     * @deprecated use sugar_touch() instead
 	 */
 	public static function touch($filename, $save = false)
 	{
-	    if(sugar_touch($filename)) {
-	        self::addToMap($filename, $save);
-	        return true;
-	    }
-	    return false;
+        $GLOBALS['log']->deprecated('\SugarAutoLoader::touch is deprecated, use sugar_touch()');
+        return sugar_touch($filename);
 	}
 
 	/**
@@ -1410,14 +1274,12 @@ class SugarAutoLoader
 	 * @param string $filename
 	 * @param bool $save Save map to file?
 	 * @return bool Success?
+     * @deprecated use file_put_contents() instead
 	 */
 	public static function put($filename, $data, $save = false)
 	{
-	    if(file_put_contents($filename, $data) !== false) {
-	        self::addToMap($filename, $save);
-	        return true;
-	    }
-	    return false;
+        $GLOBALS['log']->deprecated('\SugarAutoLoader::put is deprecated, use file_put_contents()');
+        return file_put_contents($filename, $data) !== false;
 	}
 
 	/**
@@ -1427,22 +1289,19 @@ class SugarAutoLoader
 	 */
 	public static function ensureDir($dir)
 	{
-	    if(self::fileExists($dir)) {
+        if (file_exists($dir)) {
 	        return true;
 	    }
-	    if(sugar_mkdir($dir, null, true)) {
-	        self::addToMap($dir, true, true);
-	        return true;
-	    }
-	    return false;
+        return sugar_mkdir($dir, null, true);
 	}
 
 	/**
 	 * Save the file map to disk
+     * @deprecated
 	 */
 	public static function saveMap()
 	{
-	    write_array_to_file("existing_files", self::$filemap, sugar_cached(self::CACHE_FILE));
+        $GLOBALS['log']->deprecated('\SugarAutoLoader::saveMap is deprecated');
 	}
 
     /**

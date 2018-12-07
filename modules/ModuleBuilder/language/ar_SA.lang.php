@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'هل أنت متأكد من رغبتك في حذف هذه العلاقة؟<br>ملاحظة: قد لا تكتمل هذه العملية لعدة دقائق.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'وسيجعل ذلك هذه العلاقة دائمة. هل أنت متأكد من رغبتك في توزيع هذه العلاقة؟',
 'LBL_CONFIRM_DONT_SAVE' => 'تم إجراء تغييرات منذ أن قمت بحفظها، هل ترغب في حفظ تلك التغييرات؟',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'قم بتكوين الحقل حتى يمكن البحث عن النص الكامل.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'التعزيز عبارة عن عملية تحسين ارتباط حقول السجل.<br />سيتم منح الحقول ذات مستوى تعزيز أعلى قيمة أكبر عندما يتم إجراء البحث. وعندما يتم إجراء البحث، ستظهر السجلات المطابقة، التي تتضمن الحقول التي تكون بقيمة أكبر، أعلى نتائج البحث.<br />القيمة الافتراضية تكون 1.0 التي تعني تعزيز محايد. لتطبيق تعزيز موجب، فإن أي قيمة تعويم أكبر من 1 تكون مقبولة. لتعزيز سلبي، استخدم القيم التي تكون أقل من 1. على سبيل المثال، قيمة 1.35 ستعزز الحقل بمقدار 135% بشكل إيجابي. استخدام قيمة تصل إلى 0.60 ستطبق تعزيز سلبي.<br />لاحظ أنه في الإصدارات السابقة، كان من الضروري إجراء إعادة فهرسة لبحث نص كامل. لم يعد هذا الأمر ضروريًا.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>نعم</b>: يتم تضمين الحقل في عملية الاستيراد.<br><b>لا</b>: لن يتم تضمين الحقل في عملية الاستيراد.<br><b>ضروري</b>: يجب أن يتم توفير قيمة لهذا الحقل في أي عملية استيراد.',
+'LBL_POPHELP_PII'=>'سوف يتم تعليم هذا الحقل للتدقيق وإتاحته في طريقة عرض المعلومات الشخصية.<br>يمكن أيضًا المسح الكامل لحقول المعلومات الشخصية عندما يكون السجل مرتبطًا بطلب مسح خصوصية بيانات.<br>يتم المسح عبر وحدة خصوصية البيانات ويمكن تنفيذه من المسؤولين أو المستخدمين الذين يقومون بدور مدير خصوصية البيانات.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'أدخل رقمًا للعرض، بالبكسل.<br> يتم تحديد حجم الصورة التي يتم تحميلها وفقًا لهذا العرض.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'أدخل رقمًا للارتفاع، بالبكسل.<br> يتم تحديد حجم الصورة التي يتم تحميلها وفقًا لهذا الارتفاع.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

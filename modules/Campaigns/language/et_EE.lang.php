@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Valige saadaolevatest väljadest',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Vormi kirjeldus:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Selle vormi esitamine loob müügivihje ja lingi kampaniaga',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Selle ruudu märkimisel nõustute saama tulevasi turunduse meile',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Laadige alla veebi müügivihje vorm',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Veebi müügivihje vorm',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Esitage kõik kohustuslikud väljad',

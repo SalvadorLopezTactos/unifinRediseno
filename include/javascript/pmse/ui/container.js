@@ -8,17 +8,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 /**
- * @class Container
+ * @class PMSE.Container
  * Handle Containers
- * @extend Element
+ * @extends PMSE.Element
  *
  * @constructor
  * Create a new instance of the container class
  * @param {Object} options
  */
-var Container = function (options) {
-    Element.call(this, options);
+PMSE.Container = function(options) {
+    PMSE.Element.call(this, options);
     /**
      * Defines the items part of the container
      * @type {Array}
@@ -34,25 +35,25 @@ var Container = function (options) {
      * @type {Number}
      */
     this.bodyHeight = null;
-    Container.prototype.initObject.call(this, options);
+    PMSE.Container.prototype.initObject.call(this, options);
 };
 
-Container.prototype = new Element();
+PMSE.Container.prototype = new PMSE.Element();
 /**
  * Defines the object's type
  * @type {String}
  */
-Container.prototype.type = "Container";
+PMSE.Container.prototype.type = 'PMSE.Container';
 /**
  * Defines the object's family
  * @type {String}
  */
-Container.prototype.family = "Container";
+PMSE.Container.prototype.family = 'PMSE.Container';
 
 /**
  * Initialize the object with the default values
  */
-Container.prototype.initObject = function (options) {
+PMSE.Container.prototype.initObject = function(options) {
     var defaults = {
         items: [],
         body: null
@@ -67,12 +68,12 @@ Container.prototype.initObject = function (options) {
  * Sets the items property
  * @param {Array}
  */
-Container.prototype.setItems = function (items) {
+PMSE.Container.prototype.setItems = function(items) {
     this.items = items;
     return this;
 };
 
-Container.prototype.setBodyHeight = function(height) {
+PMSE.Container.prototype.setBodyHeight = function(height) {
     this.bodyHeight = height;
     if(this.body) {
         if(typeof height === 'number') {
@@ -90,7 +91,7 @@ Container.prototype.setBodyHeight = function(height) {
  * Sets the body HTML Element
  * @param {HTMLElement} html
  */
-Container.prototype.setBody = function (html) {
+PMSE.Container.prototype.setBody = function(html) {
     this.body = html;
     return this;
 };
@@ -98,16 +99,16 @@ Container.prototype.setBody = function (html) {
 /**
  * Returns the body HTML Element
  */
-Container.prototype.getBody = function () {
+PMSE.Container.prototype.getBody = function() {
     return this.body;
 };
 
 /**
  * Creates the HTML Element
  */
-Container.prototype.createHTML = function () {
+PMSE.Container.prototype.createHTML = function() {
     var body;
-    Element.prototype.createHTML.call(this);
+    PMSE.Element.prototype.createHTML.call(this);
     body = this.createHTMLElement('div');
     body.className = 'j-container';
     this.html.appendChild(body);

@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'hier klicken',
 	'TXT_REMOVE_ME'								=> 'Um sich von der E-Mail-Liste abzumelden ',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Benachrichtigung senden, wenn E-Mail-Adresse zugewiesen wurde?',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Neue E-Mail-Adressen standardmäßig abwählen',
 
 	'LBL_SECURITY_TITLE'						=> 'E-Mail-Sicherheitseinstellungen',
 	'LBL_SECURITY_DESC'							=> 'Wählen Sie, was NICHT erlaubt sein soll bei eingehenden E-Mails oder im E-Mail Modul angezeigt werden soll.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Dieses Konto kann auch von anderen Benutzern zum Versenden von E-Mails verwendet werden können:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Wenn diese Option ausgewählt wird, können alle Benutzer zum Versenden von E-Mails<br> das Konto zum Versenden von E-Mail-Benachrichtigungen und Workflow-Alarmen verwenden.<br> Wenn die Option nicht ausgewählt ist, können die Benutzer nur dann E-Mails versenden, wenn sie ihre eigenen Kontodaten eingerichtet haben.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Wenn diese Option aktiviert ist, werden der zugewiesene Benutzername und die E-Mail-Adresse im "Von"-Feld der E-Mail angegeben. Diese Funktion funktioniert möglicherweise nicht mit SMTP-Servern, die das Senden von anderen E-Mail-Konten als dem Serverkonto nicht erlauben.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Wenn eine neue E-Mail-Adresse hinzugefügt wird, wird sie automatisch abgewählt. Kampagnen-E-Mails können nicht an abgewählte Adressen gesendet werden. Das Ändern dieser Einstellung wirkt sich nicht auf vorhandene E-Mail-Adressen aus.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

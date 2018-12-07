@@ -299,46 +299,7 @@ class Contact extends Person {
 		parent::fill_in_additional_detail_fields();
         if(empty($this->id)) return;
 
-        global $locale, $app_list_strings, $current_user;
-
-		// retrieve the account information and the information about the person the contact reports to.
-		$query = "SELECT acc.id, acc.name, con_reports_to.first_name, con_reports_to.last_name
-		from contacts
-        left join accounts_contacts a_c on a_c.contact_id = ".$this->db->quoted($this->id)." and a_c.deleted=0
-		left join accounts acc on a_c.account_id = acc.id and acc.deleted=0
-		left join contacts con_reports_to on con_reports_to.id = contacts.reports_to_id
-        where contacts.id = ".$this->db->quoted($this->id);
-		// Bug 43196 - If a contact is related to multiple accounts, make sure we pull the one we are looking for
-		// Bug 44730  was introduced due to this, fix is to simply clear any whitespaces around the account_id first
-
-        $clean_account_id = trim($this->account_id);
-
-        if ( !empty($clean_account_id) ) {
-            $query .= " and acc.id = ".$this->db->quoted($this->account_id);
-		}
-        else { // get primary account
-            $query .= " and a_c.primary_account = 1";
-        }
-
-        $query .= " ORDER BY a_c.date_modified DESC";
-
-		$result = $this->db->query($query,true," Error filling in additional detail fields: ");
-
-		// Get the id and the name.
-		$row = $this->db->fetchByAssoc($result);
-
-		if($row != null)
-		{
-			$this->account_name = $row['name'];
-			$this->account_id = $row['id'];
-            $this->report_to_name = $locale->formatName($this->module_name, $row);
-		}
-		else
-		{
-			$this->account_name = '';
-			$this->account_id = '';
-			$this->report_to_name = '';
-		}
+        global $locale;
 
 		$this->load_relationship('user_sync');
         if ($this->user_sync->_relationship->relationship_exists($GLOBALS['current_user'], $this)) {
@@ -355,17 +316,6 @@ class Contact extends Person {
 		 * Notes, etc.
 		 */
         $this->name = $locale->formatName($this);
-		if(!empty($this->portal_active) && $this->portal_active == 1) {
-		   $this->portal_active = true;
-		}
-        // Set campaign name if there is a campaign id
-		if( !empty($this->campaign_id)){
-
-			$camp = BeanFactory::newBean('Campaigns');
-		    $where = "campaigns.id='{$this->campaign_id}'";
-		    $campaign_list = $camp->get_full_list("campaigns.name", $where, true);
-		    $this->campaign_name = $campaign_list[0]->name;
-		}
 	}
 
     function get_list_view_data($filter_fields = array())

@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Cotizaciones (Enviar a)',
 	'LNK_ACCOUNT_REPORTS' => 'Visualizar Informes de Cuentas',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documentos',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Tablero de Lista de Cuentas',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Tablero de Registro de Cuentas',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Gráficos',
 	'LBL_DEFAULT' => 'Vistas',
@@ -45,7 +49,7 @@ $mod_strings = array (
 	'LBL_ASSIGNED_TO_NAME' => 'Asignado a:',
 	'LBL_ASSIGNED_TO_ID' => 'Usuario Asignado:',
 	'LBL_BILLING_ADDRESS_CITY' => 'Ciudad de Facturación:',
-	'LBL_BILLING_ADDRESS_COUNTRY' => 'País de Facturación:',
+	'LBL_BILLING_ADDRESS_COUNTRY' => 'País de facturación:',
 	'LBL_BILLING_ADDRESS_POSTALCODE' => 'Código Postal de Facturación:',
 	'LBL_BILLING_ADDRESS_STATE' => 'Estado de Facturación:',
 	'LBL_BILLING_ADDRESS_STREET_2' =>'Calle de Facturación 2',
@@ -140,7 +144,7 @@ $mod_strings = array (
 	'LBL_CAMPAIGNS' =>'Campañas',
 	'LNK_CREATE' => 'Crear Compañía',
 	'LNK_ACCOUNT_LIST' => 'Visualizar Cuentas',
-	'LNK_NEW_ACCOUNT' => 'Nueva Cuenta',
+	'LNK_NEW_ACCOUNT' => 'Crear cuenta',
 	'LNK_IMPORT_ACCOUNTS' => 'Importar Cuentas',
 	'MSG_DUPLICATE' => 'La Cuenta que está a punto de crear podría ser un duplicado de una Cuenta ya existente. Las Cuenta con nombres similares se incluyen a continuación.<br>Haga clic en Crear Cuenta para continuar con la creación de esta nueva Cuenta, o seleccione una Cuenta existente de la lista a continuación.',
 	'MSG_SHOW_DUPLICATES' => 'La Cuenta que está a punto de crear podría ser un duplicado de otra Cuenta existente. Los registros de Cuentas con nombres similares se enumeran a continuación.<br>Haga clic en Guardar para continuar con la creación de esta nueva Cuenta, o en Cancelar para volver al módulo sin crear la Cuenta.',

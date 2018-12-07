@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Paneli i listës së detyrave',
+
   'LBL_MODULE_NAME' => 'Detyrat',
   'LBL_MODULE_NAME_SINGULAR' => 'Detyrë',
   'LBL_TASK' => 'Detyrat',
@@ -33,7 +36,7 @@ $mod_strings = array (
   'LBL_STATUS' => 'Statusi',
   'LBL_DUE_DATE' => 'Data e caktuar',
   'LBL_DUE_TIME' => 'Ora e caktuar',
-  'LBL_PRIORITY' => 'priorieti',
+  'LBL_PRIORITY' => 'Priorieti:',
   'LBL_COLON' => ':',
   'LBL_DUE_DATE_AND_TIME' => 'Data dhe ora e caktuar',
   'LBL_START_DATE_AND_TIME' => 'Data dhe ora e nisjes',

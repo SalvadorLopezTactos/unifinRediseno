@@ -41,17 +41,6 @@ function check_now($send_usage_info=true, $get_request_data=false, $response_dat
 	global $sugar_config, $timedate;
 	global $db, $license;
 
-
-	// This section of code is a portion of the code referred
-	// to as Critical Control Software under the End User
-	// License Agreement.  Neither the Company nor the Users
-	// may modify any portion of the Critical Control Software.
-	if(ocLicense()){
-		return array();
-	}
-	// END REQUIRED CODE
-
-
 	$return_array=array();
     if(!$from_install && empty($license))loadLicense(true);
 
@@ -331,9 +320,6 @@ function authenticateDownloadKey()
         'license_users' => array(
             'type' => 'int',
         ),
-        'license_num_lic_oc' => array(
-            'type' => 'int',
-        ),
         'license_num_portal_users' => array(
             'type' => 'int',
         ),
@@ -372,17 +358,18 @@ function authenticateDownloadKey()
     $og = unserialize(sugarDecode('validation', $licenseSettings['license_validation_key']));
 
     foreach ($og as $name => $value) {
+        if ($name === 'license_num_lic_oc') {
+            // temporarily ignore for compatibility with existing licenses
+            // as part of Offline Client support removal
+            continue;
+        }
+
         if (!isset($data[$name]) || $data[$name] != $value) {
             return false;
         }
     }
 
     return true;
-}
-
-function ocLicense(){
-	global $sugar_config;
-	return isset( $sugar_config['disc_client']) && $sugar_config['disc_client'];
 }
 
 function checkDownloadKey($data){
@@ -408,7 +395,6 @@ function checkDownloadKey($data){
 			return 'Invalid Download Key';
 		}
 		if($data == 'expired' || $data == 'closed'){
-			$GLOBALS['license']->saveSetting('license', 'num_lic_oc', 0);
 			$GLOBALS['license']->saveSetting('license', 'validation_notice', 'expired');
 			if($data == 'closed'){
 				$GLOBALS['license']->saveSetting('license', 'users', 1);
@@ -523,9 +509,6 @@ function setSystemState($state){
  */
 function checkSystemState()
 {
-    if (ocLicense()) {
-        return;
-    }
     if ($_SESSION['LICENSE_EXPIRES_IN'] === 'REQUIRED') {
         die('LICENSE INFORMATION IS REQUIRED PLEASE CONTACT A SYSTEM ADMIN ');
     }
@@ -548,10 +531,6 @@ function checkSystemLicenseStatus()
     global $license;
     loadLicense(true);
 
-    if (ocLicense()) {
-        return;
-    }
-
     if (!empty($license->settings)) {
 
         if (isset($license->settings['license_vk_end_date'])) {
@@ -565,13 +544,6 @@ function checkSystemLicenseStatus()
         } else {
             $_SESSION['LICENSE_EXPIRES_IN'] = 'REQUIRED';
         }
-
-        if (isset($license->settings['license_num_lic_oc'])) {
-            $_SESSION['EXCEEDING_OC_LICENSES'] = hasExceededOfflineClientLicenses($license->settings['license_num_lic_oc']);
-        } else {
-            $_SESSION['EXCEEDING_OC_LICENSES'] = false;
-        }
-
     } else {
         $_SESSION['INVALID_LICENSE'] = true;
     }
@@ -598,7 +570,6 @@ function apiCheckSystemStatus($forceReload = false)
     $sessionCheckNotExists = array(
         'VALIDATION_EXPIRES_IN',
         'LICENSE_EXPIRES_IN',
-        'EXCEEDING_OC_LICENSES',
     );
     $sessionCheckExists = array(
         'HomeOnly',
@@ -697,9 +668,8 @@ function apiActualLoadSystemStatus()
     checkSystemLicenseStatus();
     if (!isset($_SESSION['LICENSE_EXPIRES_IN'])) {
         // BEGIN CE-OD License User Limit Enforcement
-        if (isset($sugar_flavor)
-            && ($sugar_flavor=='CE' || !empty($admin->settings['license_enforce_user_limit']))) {
-
+        if (isset($sugar_flavor) &&
+            (!empty($admin->settings['license_enforce_user_limit']))) {
             $query = "SELECT count(id) as total from users WHERE ".User::getLicensedUsersWhere();
             $result = $db->query($query, true, "Error filling in user array: ");
             $row = $db->fetchByAssoc($result);
@@ -727,7 +697,6 @@ function apiActualLoadSystemStatus()
         );
     }
 
-    if (!ocLicense()) {
         if (!empty($_SESSION['INVALID_LICENSE'])) {
             return array(
                 'level'  =>'admin_only',
@@ -770,15 +739,6 @@ function apiActualLoadSystemStatus()
                 );
             }
         }
-    }
-
-    if (!empty($_SESSION['EXCEEDING_OC_LICENSES'])) {
-        return array(
-            'level'  =>'admin_only',
-            'message'=>'ERROR_EXCEEDING_OC_LICENSES',
-            'url'    =>'#bwc/index.php?module=Administration&action=ListViewOfflineClient',
-        );
-    }
 
     return true;
 }
@@ -822,19 +782,6 @@ function isAboutToExpire($expire_date, $days_before_warning = 7){
 	else {
 		return 'valid';
 	}
-}
-
-function hasExceededOfflineClientLicenses($num_oc_lic){
-    if (class_exists('System')) {
-	    $system = new System();
-	    $where = "systems.system_id != 1 AND systems.deleted = 0";
-	    $GLOBALS['log']->debug("CHECKING SYSTEMS TABLE");
-	    $system_count = $system->getEnabledOfflineClients($system->create_new_list_query("",$where));
-	    if(isset($system_count) && isset($num_oc_lic) && !empty($num_oc_lic) && $system_count > $num_oc_lic){
-	        return true;
-	    }
-	}
-	return false;
 }
 //END REQUIRED CODE
 
@@ -906,8 +853,7 @@ function loginLicense(){
 	// License Agreement.  Neither the Company nor the Users
 	// may modify any portion of the Critical Control Software.
 
-	if(!authenticateDownloadKey() && !ocLicense()){
-
+    if (!authenticateDownloadKey()) {
 	   if(is_admin($current_user)){
 		  $_SESSION['HomeOnly'] = true;
 	    }else{

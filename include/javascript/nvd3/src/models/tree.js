@@ -1,5 +1,6 @@
 
 nv.models.tree = function() {
+  if (SUGAR.App) SUGAR.App.logger.warn('`The nvd3 chart library is deprecated. Use sucrose chart library.');
 
   // issues: 1. zoom slider doesn't zoom on chart center
   // orientation

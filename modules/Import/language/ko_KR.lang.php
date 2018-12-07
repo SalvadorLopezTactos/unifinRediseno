@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => '여러개의 칸이 같은 필드명으로 정의되었습니다.',
     'ERR_MISSING_REQUIRED_FIELDS' => '다음의 필수 항목을 입력하셔합니다:',
     'ERR_MISSING_MAP_NAME' => '다음 고객 지도명을 입력하셔야합니다.',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'IDM 모드에서는 사용자 가져오기가 비활성화됩니다.',
     'ERR_SELECT_FULL_NAME' => '이름과 성이 선택되었을 때에는 전체 이름을 선택할수 없습니다.',
     'ERR_SELECT_FILE' => '전송할 파일을 선택하십시오.',
     'LBL_SELECT_FILE' => '파일을 선택하십시오',

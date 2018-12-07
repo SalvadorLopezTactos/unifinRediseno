@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Ajánlások listája műszerfal',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Ajánlás bejegységek műszerfal',
+
     'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót az ajánlás törléséhez!',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Kliens leírása',
     'LBL_ACCOUNT_ID'=>'Kliensazonosító',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Lehetőség összege:',
     'LBL_OPPORTUNITY_ID'=>'Lehetőség azonosítója',
     'LBL_OPPORTUNITY_NAME' => 'Lehetőség neve:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Egyéb email:',
     'LBL_OTHER_PHONE' => 'Egyéb telefon:',
     'LBL_PHONE' => 'Telefon:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Másodlagos cím másolása az elsődleges címbe',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Elsődleges cím másolása a másodlagos címbe',
     'NTC_DELETE_CONFIRMATION' => 'Biztosan törölni kívánja ezt a rekordot?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Ajánlás létrehozásához rendelkezni kell egy klienssel.\n Kérem, hozzon létre egy új klienst, vagy válasszon a meglévők közül!',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Ajánlás létrehozásához rendelkezni kell egy klienssel.\\n Kérem, hozzon létre egy új klienst, vagy válasszon a meglévők közül!',
     'NTC_REMOVE_CONFIRMATION' => 'Biztosan el akarja távolítani az ajánlást az esettől?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Biztosan el akarja távolítani ezt a közvetlen jelentést?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Kampányok',
@@ -302,4 +308,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Ajánlások jelentései',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Hozzájárulás üzleti célokhoz a következőhöz',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Hozzájárulás utolsó frissítése',
 );

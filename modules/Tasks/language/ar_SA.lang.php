@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'لوحة معلومات قائمة المهام',
+
   'LBL_MODULE_NAME' => 'المهام',
   'LBL_MODULE_NAME_SINGULAR' => 'المهمة',
   'LBL_TASK' => 'المهام: ',

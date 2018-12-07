@@ -161,7 +161,7 @@ abstract class source{
         if(!file_exists("custom/modules/Connectors/connectors/sources/{$dir}")) {
             mkdir_recursive("custom/modules/Connectors/connectors/sources/{$dir}");
         }
-        SugarAutoLoader::put("custom/modules/Connectors/connectors/sources/{$dir}/config.php", $config_str, true);
+        file_put_contents("custom/modules/Connectors/connectors/sources/{$dir}/config.php", $config_str);
 
         // Rebuild the connector cache now
         ConnectorUtils::getConnectors(true);

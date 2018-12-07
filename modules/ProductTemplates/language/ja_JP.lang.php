@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => '運送会社',
   'LNK_PRODUCT_LIST' => '商品カタログ',
   'NTC_DELETE_CONFIRMATION' => '本当にこのレコードを削除してよいですか？',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => '追加',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'アサイン先',

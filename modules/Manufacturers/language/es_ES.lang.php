@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Debe especificar un número de registro para eliminar el fabricante.',
   'NTC_STATUS' => 'Establezca el estado a Inactivo para quitar a este fabricante de las listas desplegables de Fabricantes',
   'NTC_LIST_ORDER' => 'Establezca el orden en que este fabricante aparecerá en las listas desplegables de Fabricantes',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Activo',
-    'Inactive' => 'Inactivo',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Importar fabricantes',
 	'LBL_EDITLAYOUT' => 'Editar diseño' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Elementos de línea de ingresos',

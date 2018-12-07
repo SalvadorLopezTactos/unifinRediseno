@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'Vartotojų parašai',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'Vartotojo parašas',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'This signature requires a name.',
-    'LBL_SIGNATURE_NAME'         => 'Pavadinimas',
-    'LBL_SIGNATURE'              => 'Signature',
-    'LBL_SIGNATURE_HTML'         => 'HTML signature',
-    'LBL_SIGNATURE_DEFAULT'      => 'Use signature?',
-    'LBL_SIGNATURE_PREPEND'      => 'Signature above reply?',
-    'LBL_SIGNATURES'             => 'Signatures',
+    'LBL_DEFAULT_SIGNATURE' => 'Numatytasis',
+    'LBL_MODULE_NAME' => 'Skaitmeniniai el. pašto parašai',
+    'LBL_MODULE_NAME_SINGULAR' => 'Skaitmeninis el. pašto parašas',
+    'LBL_SIGNATURE_NAME' => 'Pavadinimas',
+    'LBL_SIGNATURE' => 'Signature',
+    'LBL_SIGNATURE_HTML' => 'HTML signature',
+    'LBL_SIGNATURE_DEFAULT' => 'Use signature?',
+    'LBL_SIGNATURE_PREPEND' => 'Signature above reply?',
+    'LBL_SIGNATURES' => 'Signatures',
 );

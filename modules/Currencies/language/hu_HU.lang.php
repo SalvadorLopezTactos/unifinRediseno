@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Feladat létrehozása',
   'NTC_DELETE_CONFIRMATION' => 'Biztos benne, hogy törölni kívánja a rekordot? Minden olyan tételt, ami ezt a pénznemet használja, a hozzáférés során a rendszer át fog váltani az alapértelmezett pénznemre. Elképzelhető, hogy praktikus lenne az állapotot inaktívra állítani.',
   'LBL_BELOW_MIN' => 'Váltószámnak 0-nál nagyobbnak kell lennie',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktív',
-    'Inactive' => 'Inaktív',
-  ),
   'LBL_CREATED_BY' => 'Létrehozva',
   'LBL_EDIT_LAYOUT' => 'Elrendezés szerkesztése' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Csak rendszergazdáknak',
+  'LBL_CURRENCY_DEFAULT' => 'USA dollár (alapértelmezett)',
+
 );
 ?>

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => '目标列表仪表板',
+  'LBL_TARGETS_RECORD_DASHBOARD' => '目标记录仪表板',
+
   'LBL_MODULE_NAME' => '目标',
   'LBL_MODULE_NAME_SINGULAR' => '目标',
   'LBL_MODULE_ID'   => '目标',
@@ -24,7 +28,7 @@ $mod_strings = array (
   'LBL_LIST_NAME' => '名称',
   'LBL_LIST_LAST_NAME' => '姓',
   'LBL_LIST_PROSPECT_NAME' => '目标姓名',
-  'LBL_LIST_TITLE' => '职称',
+  'LBL_LIST_TITLE' => '职位',
   'LBL_LIST_EMAIL_ADDRESS' => '电子邮件',
   'LBL_LIST_OTHER_EMAIL_ADDRESS' => '其他电子邮件',
   'LBL_LIST_PHONE' => '电话',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => '称谓',
   'LBL_SAVE_PROSPECT' => '保存目标',
   'LBL_CREATED_OPPORTUNITY' =>'创建新的商业机会',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '新建商业机会需要账户。\n 您可以新建账户或选择现有账户。',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '新建商业机会需要账户。\\n 您可以新建账户或选择现有账户。',
   'LNK_SELECT_ACCOUNT' => "选择账户",
   'LNK_NEW_PROSPECT' => '创建目标',
   'LNK_PROSPECT_LIST' => '查看目标',
@@ -196,4 +200,6 @@ $mod_strings = array (
 2. 点击“保存”以完成新纪录，并返回至上一页。',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => '目标报告',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '许可的商业目的',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '上次更新的许可',
 );

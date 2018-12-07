@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Választ' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Töröl' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Típus',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Email sablonok',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'E-mail sablonok',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Változók',
 );

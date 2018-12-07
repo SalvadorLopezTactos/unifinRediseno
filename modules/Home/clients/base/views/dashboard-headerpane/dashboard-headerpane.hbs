@@ -14,7 +14,7 @@
     <h1>
         {{#each meta.panels}}
             {{#each fields}}
-                <span class="record-cell">
+                <span class="record-cell" data-type="{{type}}" data-name="{{name}}">
                     {{field ../../this model=../../this.model template=../../this.action}}
                 </span>
             {{/each}}

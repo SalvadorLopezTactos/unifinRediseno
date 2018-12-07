@@ -651,10 +651,10 @@ EOL;
 
                     sugar_file_put_contents($folder . '/Vardefs/' . $file, $file_contents);
                 } else {
-                    if (SugarAutoLoader::fileExists($folder . '/Vardefs/' . $file)) {
+                    if (file_exists($folder . '/Vardefs/' . $file)) {
                         // since we don't what to show it, just remove the file as it defaults
                         // to false out of the box.
-                        SugarAutoLoader::unlink($folder . '/Vardefs/' . $file);
+                        unlink($folder . '/Vardefs/' . $file);
                     }
                 }
 
@@ -672,13 +672,13 @@ EOL;
     {
         // since we changed the unified search setting remove the cache file
         $file = sugar_cached('modules/unified_search_modules.php');
-        if (SugarAutoLoader::fileExists($file)) {
-            SugarAutoLoader::unlink($file);
+        if (file_exists($file)) {
+            unlink($file);
         }
         // remove the unified search display settings
         $file = 'custom/modules/unified_search_modules_display.php';
-        if (SugarAutoLoader::fileExists($file)) {
-            SugarAutoLoader::unlink($file);
+        if (file_exists($file)) {
+            unlink($file);
         }
     }
 

@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Loo ülesanne',
   'NTC_DELETE_CONFIRMATION' => 'Kas olete kindel, et soovite selle kirje kustutada? Iga seda valuutat kasutav kirje konverteeritakse süsteemi vaikevaluutasse nende juurde pääsemisel. Oleku võib olla parem määrata inaktiivseks.',
   'LBL_BELOW_MIN' => 'Ümberarvestuskurss peab olema üle 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktiivne',
-    'Inactive' => 'Inaktiivne',
-  ),
   'LBL_CREATED_BY' => 'Looja',
   'LBL_EDIT_LAYOUT' => 'Muuda paigutust' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Ainult administraatorid',
+  'LBL_CURRENCY_DEFAULT' => 'USA dollarid (vaikimisi)',
+
 );
 ?>

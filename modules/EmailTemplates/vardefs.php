@@ -160,46 +160,6 @@ $dictionary['EmailTemplate'] = array(
 			'reportable'=>false,
 			'comment' => 'Record deletion indicator'
 		),
-		'assigned_user_id' => array (
-			'name' => 'assigned_user_id',
-			'vname' => 'LBL_ASSIGNED_TO_ID',
-			'group'=>'assigned_user_name',
-            'type' => 'id',
-			'reportable'=>false,
-			'isnull' => 'false',
-			'audited'=>true,
-			'comment' => 'User ID assigned to record',
-            'duplicate_merge'=>'disabled'
-		),
-    	 'assigned_user_name' => array (
-        	 'name' => 'assigned_user_name',
-        	 'link'=>'assigned_user_link' ,
-        	 'vname' => 'LBL_ASSIGNED_TO_NAME',
-        	 'rname' => 'user_name',
-        	 'type' => 'relate',
-        	 'reportable'=>false,
-        	 'source'=>'non-db',
-        	 'table' => 'users',
-        	 'id_name' => 'assigned_user_id',
-        	 'module'=>'Users',
-        	 'duplicate_merge'=>'disabled',
-             'exportable'=> true,
-    	 ),
-		 'assigned_user_link' => array (
-    		 'name' => 'assigned_user_link',
-    		 'type' => 'link',
-    		 'relationship' => 'emailtemplates_assigned_user',
-    		 'vname' => 'LBL_ASSIGNED_TO_USER',
-    		 'link_type' => 'one',
-    		 'module'=>'Users',
-    		 'bean_name'=>'User',
-    		 'source'=>'non-db',
-    		 'duplicate_merge'=>'enabled',
-    		 'rname' => 'user_name',
-    		 'id_name' => 'assigned_user_id',
-    		 'table' => 'users',
-          ),
-
 		'base_module' => array(
 			'name' => 'base_module',
 			'vname' => 'LBL_BASE_MODULE',
@@ -235,9 +195,29 @@ $dictionary['EmailTemplate'] = array(
             'type' => 'enum',
             'required' => false,
             'reportable'=> false,
+            'default'=> 'email',
             'options' => 'emailTemplates_type_list',
             'comment' => 'Type of the email template'
        ),
+        'attachments' => array(
+            'bean_name' => 'Note',
+            'module' => 'Notes',
+            'name' => 'attachments',
+            'relationship' => 'emailtemplates_attachments',
+            'source' => 'non-db',
+            'type' => 'link',
+            'vname' => 'LBL_ATTACHMENTS',
+        ),
+        'has_variables' => array(
+            'name' => 'has_variables',
+            'vname' => 'LBL_TEMPLATE_HAS_VARIABLES',
+            'type' => 'bool',
+            'default' => '0',
+            'readonly' => true,
+            'duplicate_on_record_copy' => 'no',
+            'massupdate' => false,
+            'importable' => false,
+        ),
 	),
 	'indices' => array(
 		array(
@@ -282,10 +262,23 @@ $dictionary['EmailTemplate'] = array(
             'rhs_key' => 'created_by',
             'relationship_type' => 'one-to-many'
         ),
+        'emailtemplates_attachments' => array(
+            'lhs_module' => 'EmailTemplates',
+            'lhs_table' => 'email_templates',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Notes',
+            'rhs_table' => 'notes',
+            'rhs_key' => 'email_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_role_column' => 'email_type',
+            'relationship_role_column_value' => 'EmailTemplates',
+        ),
     ),
+    'uses' => array(
+        'assignable',
+        'team_security',
+    ),
+    'acls' => array('SugarACLStatic' => true),
 );
 
-VardefManager::createVardef('EmailTemplates','EmailTemplate', array(
-
-'team_security',
-));
+VardefManager::createVardef('EmailTemplates', 'EmailTemplate', array());

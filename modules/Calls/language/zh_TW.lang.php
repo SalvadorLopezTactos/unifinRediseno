@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => '電話清單儀表板',
+    'LBL_CALLS_RECORD_DASHBOARD' => '電話紀錄儀表板',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => '通話',
     'LBL_MODULE_NAME_SINGULAR'	=> '通話',
@@ -18,7 +22,7 @@ $mod_strings = array (
     'LBL_LIST_FORM_TITLE' => '通話清單',
     'LBL_NEW_FORM_TITLE' => '建立預約',
     'LBL_LIST_CLOSE' => '關閉',
-    'LBL_LIST_SUBJECT' => '主題',
+    'LBL_LIST_SUBJECT' => '主旨',
     'LBL_LIST_CONTACT' => '連絡人',
     'LBL_LIST_RELATED_TO' => '關聯至',
     'LBL_LIST_RELATED_TO_ID' => '關聯至 ID',

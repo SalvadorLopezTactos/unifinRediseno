@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => '笔记列表仪表板',
+
     'ERR_DELETE_RECORD' => '必须指定记录编号才能删除帐户。',
     'LBL_ACCOUNT_ID' => '帐户 ID：',
     'LBL_CASE_ID' => '客户反馈编号：',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => '备忘录',
     'LBL_EMAIL_ADDRESS' => '电子邮件地址：',
     'LBL_EMAIL_ATTACHMENT' => '电子邮件附件',
+    'LBL_EMAIL_ATTACHMENT_FOR' => '电子邮件附件用于',
     'LBL_FILE_MIME_TYPE' => 'Mime 类型',
+    'LBL_FILE_EXTENSION' => '文件扩展名',
+    'LBL_FILE_SOURCE' => '文件来源',
+    'LBL_FILE_SIZE' => '文件大小',
     'LBL_FILE_URL' => '文件 URL',
     'LBL_FILENAME' => '附件：',
     'LBL_LEAD_ID' => '潜在客户编号：',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => '商业机会编号：',
     'LBL_PARENT_ID' => '父级编号：',
     'LBL_PARENT_TYPE' => '原始类型',
+    'LBL_EMAIL_TYPE' => '电子邮件类型',
+    'LBL_EMAIL_ID' => '电子邮件编号',
     'LBL_PHONE' => '电话：',
     'LBL_PORTAL_FLAG' => '在门户中显示？',
     'LBL_EMBED_FLAG' => '嵌入到电子邮件中？',

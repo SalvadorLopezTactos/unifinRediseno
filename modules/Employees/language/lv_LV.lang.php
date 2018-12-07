@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => 'Dzēsts',
   'LBL_EMAIL_ADDRESS'=>'E-pasta adrese',
   'LBL_CONTACTS_SYNC' => 'Kontaktpersonas',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        'Darbinieks IDM režīmam var veidot tikai <a href="{0}" target="_blank">mākoņa konsole</a>.',
 );
 
 

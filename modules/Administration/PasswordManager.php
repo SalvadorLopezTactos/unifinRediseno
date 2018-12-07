@@ -12,7 +12,19 @@
 
 
 use Sugarcrm\Sugarcrm\Util\Serialized;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
+$idpConfig = new Authentication\Config(\SugarConfig::getInstance());
+if ($idpConfig->isIDMModeEnabled()) {
+    sugar_die(
+        sprintf(
+            $GLOBALS['app_strings']['ERR_DISABLED_FOR_IDM_MODE'] . ' ' .
+            $GLOBALS['app_strings']['ERR_GOTO_CLOUD_CONSOLE'],
+            $idpConfig->buildCloudConsoleUrl('passwordManagement')
+        )
+    );
+}
 
 if(!is_admin($current_user)){
     sugar_die($GLOBALS['app_strings']['ERR_NOT_ADMIN']);
@@ -27,6 +39,8 @@ function clearPasswordSettings() {
 }
 
 require_once('modules/Administration/Forms.php');
+require_once 'include/upload_file.php';
+
 echo getClassicModuleTitle(
         "Administration",
         array(
@@ -41,6 +55,10 @@ $focus = BeanFactory::newBean('Administration');
 $configurator->parseLoggerSettings();
 $config_strings = return_module_language($GLOBALS['current_language'], 'Configurator');
 $valid_public_key = true;
+$samlSigningAlgos = [
+    XMLSecurityKey::RSA_SHA256 => 'RSA-SHA256',
+    XMLSecurityKey::RSA_SHA512 => 'RSA-SHA512',
+];
 if (!empty($_POST['saveConfig'])) {
     do {
         if ($_POST['captcha_on'] == '1') {
@@ -110,6 +128,10 @@ if (!empty($_POST['saveConfig'])) {
                     break;
                 }
             }
+            if (empty(InputValidation::getService()->getValidInputPost('SAML_idp_entityId'))) {
+                $configurator->addError($config_strings['ERR_EMPTY_SAML_IDP_ENTITY_ID']);
+                break;
+            }
             if (!empty($_POST['SAML_SLO'])) {
                 $_POST['SAML_SLO'] = trim($_POST['SAML_SLO']);
                 if (!filter_var($_POST['SAML_SLO'], FILTER_VALIDATE_URL)) {
@@ -125,7 +147,65 @@ if (!empty($_POST['saveConfig'])) {
                 $_POST['SAML_SAME_WINDOW'] = true;
             } else {
                 $_POST['SAML_SAME_WINDOW'] = false;
-            }            
+            }
+            $provisionUserInput = InputValidation::getService()->getValidInputRequest('SAML_provisionUser');
+            if (!is_null($provisionUserInput)) {
+                $_POST['SAML_provisionUser'] = true;
+            } else {
+                $_POST['SAML_provisionUser'] = false;
+            }
+
+            // try to read PEM file with private key
+            $pkey = null;
+            if (!empty($_FILES['SAML_request_signing_pkey_file'])) {
+                $keyUpload = new \UploadFile('SAML_request_signing_pkey_file');
+                if ($keyUpload->confirm_upload()) {
+                    $pemContents = $keyUpload->get_file_contents();
+
+                    $privateKey = openssl_get_privatekey($pemContents);
+                    if (!$privateKey) {
+                        $configurator->addError($config_strings['ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY']);
+                        break;
+                    }
+                    openssl_pkey_export($privateKey, $pkey);
+
+                    $_POST['SAML_request_signing_pkey_name'] = $keyUpload->original_file_name;
+                    $_POST['SAML_request_signing_pkey'] = $pkey;
+                }
+            }
+
+            // try to read PEM file with x509 certificate
+            if (!empty($_FILES['SAML_request_signing_cert_file'])) {
+                $keyUpload = new \UploadFile('SAML_request_signing_cert_file');
+                if ($keyUpload->confirm_upload()) {
+                    $pemContents = $keyUpload->get_file_contents();
+
+                    $x509CertRes = @openssl_x509_read($pemContents);
+                    if (!$x509CertRes) {
+                        $configurator->addError($config_strings['ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE']);
+                        break;
+                    }
+                    openssl_x509_export($x509CertRes, $x509cert);
+                    $certData = openssl_x509_parse($x509cert);
+
+                    if (openssl_x509_check_private_key(
+                        $certData,
+                        $pkey ?: $sugarConfig->get('SAML_request_signing_pkey')
+                    )) {
+                        $configurator->addError($config_strings['ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH']);
+                        break;
+                    }
+
+                    // everything is fine
+                    $_POST['SAML_request_signing_cert_name'] = $certData['name'] ?: $keyUpload->original_file_name;
+                    $_POST['SAML_request_signing_x509'] = $x509cert;
+                }
+            }
+
+            foreach (['SAML_sign_authn', 'SAML_sign_logout_request', 'SAML_sign_logout_response'] as $signOption) {
+                $signOptionInput = InputValidation::getService()->getValidInputRequest($signOption);
+                $_POST[$signOption] = !is_null($signOptionInput);
+            }
         }
 
 		$configurator->saveConfig();
@@ -136,9 +216,15 @@ if (!empty($_POST['saveConfig'])) {
 
         die("
             <script>
-            var app = window.parent.SUGAR.App;
-            app.api.call('read', app.api.buildURL('ping'));
-            app.router.navigate('#bwc/index.php?module=Administration&action=index', {trigger:true, replace:true});
+                var app = window.parent.SUGAR.App;
+                app.api.call('read', app.api.buildURL('ping'), null, {
+                    'complete': function () {
+                        app.router.navigate('#bwc/index.php?module=Administration&action=index', {
+                            trigger:true, 
+                            replace:true
+                        });        
+                    }
+                });
             </script>"
         );
 	} while (false);
@@ -148,6 +234,11 @@ if (!empty($_POST['saveConfig'])) {
 }
 
 $focus->retrieveSettings();
+
+// Force sync LDAP flag if form errors were found.
+if (isset($_POST['system_ldap_enabled'])) {
+    $focus->settings['system_ldap_enabled'] = $_POST['system_ldap_enabled'];
+}
 
 if (!empty($focus->settings['ldap_admin_password'])) {
     $focus->settings['ldap_admin_password'] = Administration::$passwordPlaceholder;
@@ -168,6 +259,9 @@ $sugar_smarty->assign('LANGUAGES', get_languages());
 $sugar_smarty->assign("settings", $focus->settings);
 
 $sugar_smarty->assign('saml_enabled_checked', false);
+$sugar_smarty->assign('SAML_AVAILABLE_SIGNING_ALGOS', $samlSigningAlgos);
+
+$sugar_smarty->assign('csrf_field_name', \Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator::FORM_TOKEN_FIELD);
 
 if (!extension_loaded('mcrypt')) {
 	$sugar_smarty->assign("LDAP_ENC_KEY_READONLY", 'readonly');

@@ -10,6 +10,11 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+/**
+ * @deprecated Will be removed in 7.11. IDM-46
+ * @deprecated Please use new idM Mango library Glue \IdMSAMLAuthenticate
+ */
+
 $settings                           = new OneLogin_Saml_Settings();
 
 // when using Service Provider Initiated SSO (starting at index.php), this URL asks the IdP to authenticate the user.
@@ -41,6 +46,7 @@ $settings->spIssuer                         = isset($GLOBALS['sugar_config']['SA
 $settings->requestedNameIdFormat = OneLogin_Saml_Settings::NAMEID_EMAIL_ADDRESS;
 
 // Should new users be provisioned?
+// True by default.
 $settings->provisionUsers = isset($GLOBALS['sugar_config']['SAML_provisionUser']) ? $GLOBALS['sugar_config']['SAML_provisionUser'] : true;
 
 // Available settings other than above:

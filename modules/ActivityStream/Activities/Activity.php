@@ -41,6 +41,8 @@ class Activity extends Basic
 
     public static $enabled = true;
 
+    private static $previousStates = [];
+
     /**
      * Constructor for the Activity bean.
      *
@@ -122,6 +124,10 @@ class Activity extends Basic
      */
     public function save($check_notify = false)
     {
+        if (!Activity::isEnabled()) {
+            return $this->id;
+        }
+
         $isUpdate = !(empty($this->id) || $this->new_with_id);
 
         $this->data = $this->getDataArray();
@@ -391,16 +397,33 @@ class Activity extends Basic
 
     public static function enable()
     {
-        self::$enabled = true;
+        static::$previousStates[] = static::$enabled;
+        static::$enabled = true;
     }
 
     public static function disable()
     {
-        self::$enabled = false;
+        static::$previousStates[] = static::$enabled;
+        static::$enabled = false;
     }
 
     public static function isEnabled()
     {
         return self::$enabled;
+    }
+
+    /*
+     * Resets the state of Activity Streams to the previous state.
+     * If no previous state then it resets to the activity_streams_enabled configuration
+     */
+    public static function restoreToPreviousState()
+    {
+        $state = array_pop(static::$previousStates);
+
+        if (!is_null($state)) {
+            static::$enabled = $state;
+        } else {
+            static::$enabled = $GLOBALS['sugar_config']['activity_streams_enabled'];
+        }
     }
 }

@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => '机会列表仪表板',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => '机会记录仪表板',
+
     'LBL_MODULE_NAME' => '商业机会',
     'LBL_MODULE_NAME_SINGULAR' => '商业机会',
     'LBL_MODULE_TITLE' => '商业机会：首页',
@@ -24,7 +28,7 @@ $mod_strings = array(
     'LBL_INVITEE' => '联系人',
     'LBL_CURRENCIES' => '货币',
     'LBL_LIST_OPPORTUNITY_NAME' => '名称',
-    'LBL_LIST_ACCOUNT_NAME' => '账户名称',
+    'LBL_LIST_ACCOUNT_NAME' => '客户名称',
     'LBL_LIST_DATE_CLOSED' => '预期结束日期',
     'LBL_LIST_AMOUNT' => '可能',
     'LBL_LIST_AMOUNT_USDOLLAR' => '折算金额',
@@ -182,25 +186,13 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => '在您第一次执行此变更之后，系统会为每个现有的 {{module_name}} 在背景中创建营收单项记录。营收单项完成并可用后，系统会发送通知至您保存在用户资料中的电子邮件地址。请注意：您的实例必须通过“管理 > 电子邮件设置”配置为可发送电子邮件，才可能完成发送通知的动作。',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模块可以让您全程跟踪个人销售。每个{{module_name}} 都代表一次未来的销售，并包含相关销售数据，且与其他重要记录有关，如{{quotes_module}}、{{contacts_module}}等等。{{module_name}} 通常经过几个销售阶段实现进步，直到被标记为”谈成结束“或者”丢单结束“。甚至可以使用Sugar 的{{forecasts_singular_module}}ing 模块进一步调节{{plural_module_name}}，以便于理解和预测销售趋势，以及集中精力达到销售定额。',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} 模块允许您全程追踪个人销售。每个 {{module_name}} 记录都代表一次预期销售，包含相关销售数据且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。{{module_name}} 一般会经历几个销售阶段，直到被标记为“谈成结束”或“丢单结束”。通过 Sugar 的 {{forecasts_singular_module}}ing 模块可以进一步利用{{plural_module_name}} 来了解和预测销售趋势，并着力于达到销售定额。',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} 允许您从始至终地追踪个人销售和这些销售的明细项目。 每个 {{module_name}} 记录都代表一次未来销售，包括相关销售数据，并和 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。
-
-- 点击单一字段或“编辑”按钮，对记录的字段进行编辑。
-- 将左下角的窗格切换至“数据视图”以查看或修改子面板中其他记录的链接。
-- 将左下角的窗格切换至“活动流”，以在 {{activitystream_singular_module}} 中创建和查看用户评论以及记录更改历史。
-- 使用记录名称右侧的图标，关注或收藏此记录。
-- 使用“编辑”按钮右方的下拉操作菜单，可执行其他操作。',
+    'LBL_HELP_RECORD' => '{{plural_module_name}} 模块允许您全程追踪个人销售和这些销售的明细项目。每个{{module_name}} 记录都代表一次预期销售，包含相关销售数据，且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。 - 通过点击单个字段或“编辑”按钮，编辑此记录的字段。 - 通过切换左下角窗格至“数据视图”，查看或修改子面板其它记录的链接。- 通过切换左下角窗格至“数据视图”，查看或修改子面板其它记录的链接。- 通过切换左下角窗格至“活动流”，在 {{activitystream_singular_module}} 中执行和查看用户注释以及记录更改历史。 - 使用记录名称右侧的图标关注此记录或将此记录新增至收藏夹。 - “编辑”按钮右侧的下拉“操作”菜单提供其它操作选项。',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} 允许您全程追踪个人销售和这些销售的明细项目。 每个 {{module_name}} 记录都代表一次未来的销售，包括相关销售数据，且和 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。
-
-创建 {{module_name}}：
-1. 按需提供字段值。 
- - 标记为“必填”的字段在保存前必须先填写完整。
- - 如有需要，点击“显示更多”以显示其他字段。
-2. 点击“保存”以完成新纪录，并返回至上一页。',
+    'LBL_HELP_CREATE' => '{{plural_module_name}} 模块允许您全程追踪个人销售和这些销售的明细项目。 每个 {{module_name}} 记录都代表一次预期销售，包含相关销售数据，且与 {{quotes_module}}、{{contacts_module}} 等其他重要记录相关。创建 {{module_name}}：1. 按需提供字段值。 - 标记为“必填”的字段在保存前必须先填写完整。 - 如有需要，点击“显示更多”以显示其它字段。 2. 点击“保存”以完成新纪录，并返回至上一页。',
 
 // END ENT/ULT
 

@@ -49,7 +49,13 @@
 
         if (!_.isUndefined(percent)) {
             //clean up precision
-            percent = app.utils.formatNumber(percent, false, app.user.getPreference('decimal_precision'));
+            percent = app.utils.formatNumber(
+                percent,
+                false,
+                app.user.getPreference('decimal_precision'),
+                app.user.getPreference('number_grouping_separator'),
+                app.user.getPreference('decimal_separator')
+            );
 
             if (app.lang.direction === 'rtl') {
                 this.valuePercent = '%' + percent;

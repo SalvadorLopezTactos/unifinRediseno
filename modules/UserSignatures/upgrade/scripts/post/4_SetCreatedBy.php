@@ -29,7 +29,7 @@ class SugarUpgradeSetCreatedBy extends UpgradeScript
             . $GLOBALS['db']->quoted($GLOBALS['current_user']->id)
             . ", date_modified="
             . $GLOBALS['db']->quoted($GLOBALS['timedate']->nowDb())
-            . " WHERE " . $this->db->convert('created_by', 'ifnull') . "<>user_id";
+            . " WHERE created_by IS NULL OR created_by = '' OR created_by <> user_id";
         $GLOBALS['db']->query($sql);
     }
 }

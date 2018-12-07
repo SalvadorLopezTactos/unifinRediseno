@@ -10,9 +10,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
 
 class UsersApiHelper extends SugarBeanApiHelper
 {
+    /**
+     * @var Config
+     */
+    protected $idpConfig = null;
+
     /**
      * Formats the bean so it is ready to be handed back to the API's client.
      * Checks if user has access to a given record (if record module/id is specified in the api args)
@@ -52,6 +58,9 @@ class UsersApiHelper extends SugarBeanApiHelper
 
     public function populateFromApi(SugarBean $bean, array $submittedData, array $options = array())
     {
+        if ($this->getIdpConfig()->isIDMModeEnabled()) {
+            $submittedData = $this->filterIDMModeDisabledFields($bean, $submittedData);
+        }
         parent::populateFromApi($bean, $submittedData, $options);
         if (!$bean->new_with_id && !empty($bean->id)) {
             return true;
@@ -62,5 +71,90 @@ class UsersApiHelper extends SugarBeanApiHelper
         }
 
         return true;
+    }
+
+    /**
+     * deny edit non-editable fields
+     * @param SugarBean $bean
+     * @param array $submittedData
+     * @return array
+     */
+    protected function filterIDMModeDisabledFields(SugarBean $bean, array $submittedData)
+    {
+        $submittedData = array_diff_key($submittedData, $this->getIdpConfig()->getIDMModeDisabledFields());
+        if (!empty($submittedData['email'])) {
+            $submittedData['email'] = $this->filterEmailField($bean, $submittedData['email']);
+        }
+        return $submittedData;
+    }
+
+    /**
+     * filter emails
+     * @param SugarBean $bean
+     * @param array $emails
+     * @return array
+     */
+    protected function filterEmailField(SugarBean $bean, array $emails)
+    {
+        /** @var User $bean */
+        if (!is_array($emails)) {
+            return [];
+        }
+        $primaryAddress = $bean->emailAddress->getPrimaryAddress($bean);
+        $primaryAddressExists = false;
+        foreach ($emails as $key => $email) {
+            if (empty($email['email_address'])) {
+                unset($emails[$key]);
+                continue;
+            }
+
+            if (!empty($email['primary_address']) && strcasecmp($primaryAddress, $email['email_address']) != 0) {
+                unset($emails[$key]);
+                continue;
+            }
+
+            $emails[$key]['primary_address'] = false;
+            if (strcasecmp($primaryAddress, $email['email_address']) == 0) {
+                $emails[$key]['primary_address'] = true;
+                $primaryAddressExists = true;
+            }
+        }
+        if (!$primaryAddressExists) {
+            $emails[] = $this->getPrimaryEmailAddressInApiFormat($bean);
+        }
+        return $emails;
+    }
+
+    /**
+     * return user primary address in API format
+     * @param SugarBean $bean
+     * @return array
+     */
+    protected function getPrimaryEmailAddressInApiFormat(SugarBean $bean)
+    {
+        $bean->load_relationship('email_addresses_primary');
+        $primaryEmailAddresses = $bean->email_addresses_primary->getBeans();
+        $primaryEmailAddress = array_pop($primaryEmailAddresses);
+        $rawData = array_pop($bean->email_addresses_primary->rows);
+        return [
+            'email_address_id' => $primaryEmailAddress->id,
+            'email_address' => $primaryEmailAddress->email_address,
+            'invalid_email' => (bool) $primaryEmailAddress->invalid_email,
+            'opt_out' => (bool) $primaryEmailAddress->opt_out,
+            'reply_to_address' => (bool) $rawData['reply_to_address'],
+            'primary_address' => true,
+        ];
+    }
+
+    /**
+     * Return idp config
+     * @return Config
+     */
+    protected function getIdpConfig()
+    {
+        if (is_null($this->idpConfig)) {
+            $this->idpConfig = new Config(\SugarConfig::getInstance());
+        }
+        return $this->idpConfig;
     }
 }

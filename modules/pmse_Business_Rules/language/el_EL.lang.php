@@ -12,8 +12,7 @@
 
 
 $mod_strings = array (
-
-  'LBL_MODULE_NAME' => 'Διεργασίες Επιχειρησιακών Κανόνων',
+  'LBL_MODULE_NAME' => 'Επιχειρησιακοί κανόνες διεργασιών',
   'LBL_MODULE_TITLE' => 'Διεργασίες Επιχειρησιακών Κανόνων',
   'LBL_MODULE_NAME_SINGULAR' => 'Διεργασίες Επιχειρησιακών Κανόνων',
 
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Συνθήκες',
     'LBL_PMSE_LABEL_RETURN' => 'Επιστροφή',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Συμπεράσματα',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Αλλαγή Πεδίου',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Τιμή Επιστροφής',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Προσθήκη Κατάστασης',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Εισαγωγή συμπεράσματος',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Εισαγωγή σειράς',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Αφαίρεση στήλης',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Αφαιρέστε την κατάσταση',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Αφαιρέστε το συμπέρασμα',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Κατάργηση στήλης δεδομένων',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Ναι',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Όχι',

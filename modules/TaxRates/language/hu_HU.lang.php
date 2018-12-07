@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót az adókulcs törléséhez!',
   'NTC_STATUS' => 'Hogy eltávolítsa az adót a legördülő listából, állítsa állapotát inaktívra',
   'NTC_LIST_ORDER' => 'Állítsa be a sorrendet, ahogy az adó meg fog jelenni az adókulcs legördülő listájában',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktív',
-    'Inactive' => 'Inaktív',
-  ),
   'LBL_EDITLAYOUT' => 'Elrendezés szerkesztése' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Létrehozó azonosítója',
   'LBL_MODIFIED_ID'=>'Módosító azonosítója',

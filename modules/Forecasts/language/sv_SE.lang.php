@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Instrumentpanel för prognoser',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Prognoser',
     'LBL_MODULE_NAME_SINGULAR' => 'Prognos',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'Produkt ID',
     'LBL_QUOTA_ID' => 'Budget ID',
     'LBL_VERSION' => 'Version',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Dölj bar legend',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Visa bar legend',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Dölj line legend',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Visa line legend',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Fel: Användaren {0} har inte manager tillgång till begäran prognoser för {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Räkenskapsår startdatum:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigurer den tidsperiod som kommer att användas i Prognos modulen.<br /><br />Observera att tidsinställnings period inte kan ändras efter installationen.<br /><br />Börja med att välja startdatum för din finansår. Välj sedan den typ av tidsperiod för prognos. Datumintervall för de tidsperioder beräknas automatiskt baserat på dina val. Undertidsperioden är basen för prognos arbetsark.<br /><br />Den synliga framtid och tidigare tidsperioder kommer att avgöra antalet synliga delperioder i prognos modulen. Användarna har möjlighet att visa och redigera prognos nummer i de synliga delperioder.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Välj hur du vill kategorisera {{forecastByModule}}. <br><br>Notera att Intervall-inställningen inte kan ändras efter första commit. För uppgraderade instanser är intervallinställningen låst med befintlig prognosdata. <br><br>Du kan välja två eller fler kategorier baserade på sannolikhetsintervall eller skapa kategorier som inte baseras på sannolikhet. <br><br>Det finns kryssrutor till vänster om dina anpassade kategorier; använd dessa för att bestämma vilka serier som kommer att inkluderas inom Prognos-beloppet som commitas och rapporteras till chefer. <br><br>En användare kan välja att inkludera/utesluta status och kategori för {{forecastByModule}} manuellt från sina kalkylblad.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurera hur du skulle vilja kategorisera {{forecastByModule}}. <br><br>Vänligen notera att urvalsinställningarna inte kan ändras efter den första utförandet. För uppgraderade instanser, är urvalsinställningarna låsta och har befintliga prognosdata.<br><br>Du kan välja två eller fler kategorier baserat på urvalssannolikhet eller skapa kategorier som inte baseras på sannolikhet. <br><br>Det finns kryssrutor till vänster av dina standardkategorier; använd dessa för att avgöra vilka urval som ska inkluderas i prognosen och som ska rapporteras till cheferna. <br><br>En användare kan ändra sin inkludera/uteslut status och kategori för {{forecastByModule}} manuellt direkt från deras arbetsblad.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Välj de kolumner som du vill att användaren att fylla ut för sina prognoser för varje {{forecastByModuleSingular}}. Observera att de sannolika belopp är knutet till dom belopp som anges i  {{forecastByModule}}; av denna anledning kan inte sannolik kolumnen döljas.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Välj vilka kolumner du vill visa i prognos-modulen. Listan över fälter kommer att kombinera arbetsarket och låter användaren välja hur man konfigurerar sin vy.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Jag är en platshållare för prognos av how-to text!',

@@ -80,6 +80,19 @@
         enable_favicon: true
     },
 
+    /**
+     * The Maximum delay in minutes
+     * Max 32bit Integer size is 2147483647 so this delayMax value prevents any
+     * user-added custom delay values from overflowing the max size of the variable.
+     */
+    delayMax: 35791,
+
+    /**
+     * The Minimum delay in minutes.
+     * Setting to <= 0 results in infinite polling.
+     */
+    delayMin: 1,
+
     events: {
         'click [data-action=is-read-handler]': 'isReadHandler'
     },
@@ -124,6 +137,15 @@
      */
     _initOptions: function() {
         var options = _.extend({}, this._defaultOptions, this.meta || {});
+
+        // doing some simple bounds checking to make sure
+        // delay is within the values that we're expecting.
+        // Delay must be between 1 and 35791 minutes
+        if (options.delay > this.delayMax) {
+            options.delay = this.delayMax;
+        } else if (options.delay < this.delayMin) {
+            options.delay = this.delayMin;
+        }
 
         this.delay = options.delay * 60 * 1000;
         this.limit = options.limit;

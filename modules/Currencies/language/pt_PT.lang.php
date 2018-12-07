@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Criar Nova Tarefa',
   'NTC_DELETE_CONFIRMATION' => 'Tem a certeza que deseja eliminar este registo? Poderá ser melhor alterar o estado para inativo, pois de outra forma qualquer registo utilizando essa moeda será convertido para U. S. Dollars quando for acedido.',
   'LBL_BELOW_MIN' => 'O rácio de conversão tem que ser superior a 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Ativo',
-    'Inactive' => 'Inativo',
-  ),
   'LBL_CREATED_BY' => 'Criado por',
   'LBL_EDIT_LAYOUT' => 'Editar Layout' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Apenas para Administradores',
+  'LBL_CURRENCY_DEFAULT' => 'Dólares dos EUA (Predefinição)',
+
 );
 ?>

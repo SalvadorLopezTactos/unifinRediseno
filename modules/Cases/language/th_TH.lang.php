@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'แดชบอร์ดรายการปัญหา',
+    'LBL_CASES_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกปัญหา',
+
 	'ERR_DELETE_RECORD'					=> 'คุณต้องระบุเลขที่ระเบียนเพื่อลบบัญชี',
 	'LBL_ACCOUNT_ID'					=> 'ID บัญชี',
 	'LBL_ACCOUNT_NAME'					=> 'ชื่อบัญชี:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'สถานะ:',
     'LBL_SOURCE' => 'ที่มา:',
 	'LBL_SUBJECT'						=> 'เรื่อง:',
-	'LBL_SYSTEM_ID'						=> 'ID ระบบ',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'ชื่อบัญชี',
 	'LBL_LIST_ASSIGNED'					=> 'ระบุให้',
 	'LBL_LIST_CLOSE'					=> 'ปิด',

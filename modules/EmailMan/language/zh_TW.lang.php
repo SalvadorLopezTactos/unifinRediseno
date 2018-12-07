@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> '按一下此處',
 	'TXT_REMOVE_ME'								=> '要將自己從電子郵件清單中移除',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> '傳送來自指派使用者的電子郵件地址的通知',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => '預設情況下退出新電子郵件地址',
 
 	'LBL_SECURITY_TITLE'						=> '電子郵件安全設定',
 	'LBL_SECURITY_DESC'							=> '請查看下列項目，包括不允許透過輸入電子郵件進入，或不允許在電子郵件模組中顯示。',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => '允許使用者將此帳戶用作外寄電子郵件：',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => '選取此選項後，所有使用者均能使用與傳送系統通知和警示相同的外寄郵件帳戶<br>傳送電子郵件。如未選取該選項，<br>使用者仍可透過提供自己的帳戶資訊來使用外寄郵件伺服器。',
     'LBL_FROM_ADDRESS_HELP'                     => '啟用後，指派使用者的姓名和郵件位址都將包含在電子郵件的發件者欄位。該功能可能不適用於 SMTP 伺服器，因為 SMTP 伺服器不允許從伺服器帳戶以外的郵件帳戶傳送電子郵件。',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => '當添加新的電子郵件地址時, 它將自動被選擇出來。無法將廣告電子郵件傳遞給選擇的位址。更改此設置不會影響現有的電子郵件地址。',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo 郵件' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Poslužitelj za Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Stavke podploče po stranici',
 	'LOG_MEMORY_USAGE'=>'Upotreba memorije zapisnika',
-	'LOG_SLOW_QUERIES'=>'Zabilježi spore upite',
+    'LOG_SLOW_QUERIES' => 'Zabilježi spore upite',
     'LOCK_HOMEPAGE_HELP'=>'Ova postavka sprečava<BR> 1.) dodavanje novih početnih stranica i dashleta u početni modul; <BR>2.) prilagodbu rasporeda dashleta na početnim stranicama povlačenjem i ispuštanjem.',
     'CURRENT_LOGO'=>'Trenutačni logotip:',
     'CURRENT_LOGO_HELP'=>'Ovaj logotip prikazuje se u lijevom kutu podnožja aplikacije Sugar.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'To je naziv koji se prikazuje na naslovnoj traci preglednika.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Omogućite/onemogućite prikaz poruka e-pošte od povezanih kontakata u podploči za e-poštu.',
 
-    'LBL_OC_STATUS'                     => 'Zadani status izvanmrežnog klijenta',
-    'DEFAULT_OC_STATUS'                 => 'Zadano omogući izvanmrežni klijent',
-    'LBL_OC_STATUS_DESC' => 'Označite ovdje ako želite da neki korisnik ima pristup izvanmrežnom klijentu. Inače možete konfigurirati pristup na razini korisnika.',
     'SESSION_TIMEOUT' => 'Vremensko ograničenje sesije portala',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Vremensko ograničenje sesije portala dostupno je za verzije nasljeđa Sugar Portala u 6.5. i starijim verzijama.',
     'UPLOAD_MAXSIZE_UNITS' => 'bajtovi',
@@ -435,8 +432,17 @@ Da biste konfigurirali dodatne postavke sustava, kliknite <a href="index.php?mod
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'URL adresa za prijavu u SAML ne može biti prazna',
     'ERR_EMPTY_SAML_CERT' => 'Certifikat za SAML ne može biti prazan',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'ID entiteta u SAML-u ne može biti prazan',
     'ERR_SAML_LOGIN_URL' => 'URL adresa za prijavu u SAML nije ispravna',
     'ERR_SAML_SLO_URL' => 'URL adresa za odjavu iz SAML-a nije ispravna',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM datoteka treba sadržavati privatni ključ',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM datoteka treba sadržavati certifikat x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Učitani certifikat x.509 ne podudara se s privatnim ključem',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Pregled aktivnosti',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Omogući pregled aktivnosti',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Uključuje pregled aktivnosti za aplikaciju',
 );
 
 

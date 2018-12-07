@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Правила бізнес-процесів',
   'LBL_MODULE_TITLE' => 'Правила бізнес-процесів',
   'LBL_MODULE_NAME_SINGULAR' => 'Правило бізнес-процесу',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Умови',
     'LBL_PMSE_LABEL_RETURN' => 'Повернення',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Висновки',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Змінити поле',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Повернути значення',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Додати умову',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Додати висновок',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Додати рядок',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Вилучити стовпець',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Видалити умову',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Видалити висновок',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Видалити дані в стовпці',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Так',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Ні',

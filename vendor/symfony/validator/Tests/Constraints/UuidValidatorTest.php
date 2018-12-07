@@ -13,18 +13,12 @@ namespace Symfony\Component\Validator\Tests\Constraints;
 
 use Symfony\Component\Validator\Constraints\Uuid;
 use Symfony\Component\Validator\Constraints\UuidValidator;
-use Symfony\Component\Validator\Validation;
 
 /**
  * @author Colin O'Dell <colinodell@gmail.com>
  */
 class UuidValidatorTest extends AbstractConstraintValidatorTest
 {
-    protected function getApiVersion()
-    {
-        return Validation::API_VERSION_2_5;
-    }
-
     protected function createValidator()
     {
         return new UuidValidator();
@@ -42,6 +36,16 @@ class UuidValidatorTest extends AbstractConstraintValidatorTest
         $this->validator->validate('', new Uuid());
 
         $this->assertNoViolation();
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Validator\Exception\UnexpectedTypeException
+     */
+    public function testExpectsUuidConstraintCompatibleType()
+    {
+        $constraint = $this->getMockForAbstractClass('Symfony\\Component\\Validator\\Constraint');
+
+        $this->validator->validate('216fff40-98d9-11e3-a5e2-0800200c9a66', $constraint);
     }
 
     /**

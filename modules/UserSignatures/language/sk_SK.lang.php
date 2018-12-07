@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'Podpisy používateľov',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'Podpis používateľa',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Tento podpis vyžaduje meno.',
-    'LBL_SIGNATURE_NAME'         => 'Meno',
-    'LBL_SIGNATURE'              => 'Podpis',
-    'LBL_SIGNATURE_HTML'         => 'HTML podpis',
-    'LBL_SIGNATURE_DEFAULT'      => 'Použiť podpis?',
-    'LBL_SIGNATURE_PREPEND'      => 'Zopakovať predchádzajúci podpis?',
-    'LBL_SIGNATURES'             => 'Podpisy',
+    'LBL_DEFAULT_SIGNATURE' => 'Prednastavenie',
+    'LBL_MODULE_NAME' => 'E-mailové podpisy',
+    'LBL_MODULE_NAME_SINGULAR' => 'E-mailový podpis',
+    'LBL_SIGNATURE_NAME' => 'Meno',
+    'LBL_SIGNATURE' => 'Podpis',
+    'LBL_SIGNATURE_HTML' => 'HTML podpis',
+    'LBL_SIGNATURE_DEFAULT' => 'Použiť podpis?',
+    'LBL_SIGNATURE_PREPEND' => 'Zopakovať predchádzajúci podpis?',
+    'LBL_SIGNATURES' => 'Podpisy',
 );

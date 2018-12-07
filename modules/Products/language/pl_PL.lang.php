@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Pulpit pozycji wiersza ofert',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Pozycje oferty kampanii',
     'LBL_MODULE_NAME' => 'Pozycje oferty',
     'LBL_MODULE_NAME_SINGULAR' => 'Pozycja oferty',
@@ -172,4 +175,5 @@ Aby utworzyć {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Lista danych ofert dla pozcyzji linii oferty',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nowa pozycja oferty)',
     'LBL_DISCOUNT_PERCENT' => '% procent',
+    'LBL_DISCOUNT_TYPE' => 'Typ rabatu',
 );

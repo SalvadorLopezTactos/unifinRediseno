@@ -36,7 +36,7 @@ class QuickSearchDefaults
         $lookup['custom/include/QuickSearchDefaults.php'] = 'QuickSearchDefaultsCustom';
 
         foreach ($lookup as $file => $klass) {
-            if (SugarAutoLoader::fileExists($file)) {
+            if (file_exists($file)) {
                 require_once($file);
                 return new $klass();
             }

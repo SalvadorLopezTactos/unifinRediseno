@@ -35,10 +35,9 @@ $viewdefs['Opportunities']['base']['layout']['create'] = array(
                         'layout' => array(
                             'type' => 'base',
                             'name' => 'preview-pane',
-                            'css_class' => 'preview-pane',
                             'components' => array(
                                 array(
-                                    'layout' => 'preview',
+                                    'layout' => 'create-preview',
                                 ),
                             ),
                         ),

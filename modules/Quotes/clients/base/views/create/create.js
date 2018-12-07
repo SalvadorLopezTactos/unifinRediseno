@@ -215,14 +215,16 @@
         modMeta = app.metadata.getModule(moduleName);
         viewMeta = app.metadata.getView(moduleName, viewName);
 
-        _.each(viewMeta.panels, function(panel) {
-            _.each(panel.fields, function(field) {
-                modMetaField = modMeta.fields[field.name];
-                metaFields[field.name] = _.extend({}, modMetaField, field);
+        if (modMeta && viewMeta) {
+            _.each(viewMeta.panels, function(panel) {
+                _.each(panel.fields, function(field) {
+                    modMetaField = modMeta.fields[field.name];
+                    metaFields[field.name] = _.extend({}, modMetaField, field);
+                }, this);
             }, this);
-        }, this);
 
-        this.moduleFieldsMeta[moduleName] = metaFields;
+            this.moduleFieldsMeta[moduleName] = metaFields;
+        }
     },
 
     /**
@@ -341,7 +343,6 @@
      * Overriding to make the router go back to previous view, not Quotes module list
      *
      * @inheritdoc
-     * @override
      */
     cancel: function() {
         //Clear unsaved changes on cancel.

@@ -16,7 +16,7 @@ $mod_strings = array (
     'LBL_BASE_MODULE' => 'Основний модуль',
 
     'LBL_MODULE_TITLE' => 'Процес обробки шаблонів Email',
-    'LBL_MODULE_NAME' => 'Процес обробки шаблонів Email',
+    'LBL_MODULE_NAME' => 'Процес обробки шаблонів електронних листів',
     'LBL_MODULE_NAME_SINGULAR' => 'Процес обробки шаблону Email',
 
     'LNK_LIST' => 'Переглянути процес обробки шаблонів Email',

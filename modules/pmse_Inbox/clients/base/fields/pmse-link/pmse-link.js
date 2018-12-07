@@ -29,6 +29,27 @@
     },
 
 
+    _isErasedField: function() {
+        var erased = false;
+        if (this.def.name == 'cas_title') {
+            var module;
+            if (this.model.attributes.is_a_person) {
+                module = this.model.module;
+                this.model.module = this.model.attributes.cas_sugar_module;
+                this.model.fields.name.type = 'fullname';
+                this.model.attributes.cas_title = app.utils.formatNameModel(
+                    this.model.attributes.cas_sugar_module,
+                    this.model.attributes
+                );
+            }
+            erased = app.utils.isNameErased(this.model);
+            if (this.model.attributes.is_a_person) {
+                this.model.module = module;
+            }
+        }
+        return erased;
+    },
+
     buildHref: function() {
         var defRoute = this.def.route ? this.def.route : {},
             module = this.model.module || this.context.get('module');

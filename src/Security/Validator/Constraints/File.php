@@ -38,18 +38,22 @@ class File extends Constraint implements ConstraintReturnValueInterface
     );
 
     public $message = 'File name violation: %msg%';
-    public $baseDirs = array(SUGAR_BASE_DIR);
+    public $baseDirs = array();
 
     /**
      * {@inheritdoc}
      */
     public function __construct($options = null)
     {
-        parent::__construct($options);
+        if (!isset($options['baseDirs'])) {
+            $options['baseDirs'][] = realpath(SUGAR_BASE_DIR);
 
-        // add additional base directory when shadow is enabled
-        if (defined('SHADOW_INSTANCE_DIR')) {
-            $this->baseDirs[] = SHADOW_INSTANCE_DIR;
+            // add additional base directory when shadow is enabled
+            if (defined('SHADOW_INSTANCE_DIR')) {
+                $options['baseDirs'][] = SHADOW_INSTANCE_DIR;
+            }
         }
+
+        parent::__construct($options);
     }
 }

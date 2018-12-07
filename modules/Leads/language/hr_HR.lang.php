@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Nadzorna ploča za popis pot. klijenata',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapis o pot. klijentima',
+
     'ERR_DELETE_RECORD' => 'Broj zapisa mora biti naveden za brisanje potencijalnog klijenta.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Opis računa',
     'LBL_ACCOUNT_ID'=>'ID računa',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Količina prilika:',
     'LBL_OPPORTUNITY_ID'=>'ID prilike',
     'LBL_OPPORTUNITY_NAME' => 'Naziv prilike:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Druga adresa e-pošte:',
     'LBL_OTHER_PHONE' => 'Drugi telefon:',
     'LBL_PHONE' => 'Telefon:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiraj zamjensku adresu u primarnu adresu',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiraj primarnu adresu u zamjensku adresu',
     'NTC_DELETE_CONFIRMATION' => 'Jeste li sigurni da želite izbrisati ovaj zapis?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Da biste stvorili priliku, morate imati račun.\n Stvorite novi ili odaberite postojeći.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Da biste stvorili priliku, morate imati račun.\\n Stvorite novi ili odaberite postojeći.',
     'NTC_REMOVE_CONFIRMATION' => 'Jeste li sigurni da želite ukloniti ovog potencijalnog klijenta iz slučaja?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Jeste li sigurni da želite ukloniti ovaj zapis kao izravno izvješće?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Zapisnik kampanje',
@@ -314,4 +320,6 @@ Nakon potvrđivanja svakog obaveznog i željenog modula kliknite na gumb Spremi 
     'LBL_MKTO_LEAD_SCORE' => 'Rezultat pot. klij.',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Izvješća pot. klijenata',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Privola dana za poslovne svrhe',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Posljednje ažuriranje privole',
 );

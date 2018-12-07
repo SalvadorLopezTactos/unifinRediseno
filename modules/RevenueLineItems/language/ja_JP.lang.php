@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => '商談品目リストのダッシュ ボード',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => '商談品目レコードのダッシュ ボード',
+
     'LBL_CAMPAIGN_PRODUCT' => 'キャンペーン商品',
     'LBL_MODULE_NAME' => '商談品目',
     'LBL_MODULE_NAME_SINGULAR' => '商談品目',

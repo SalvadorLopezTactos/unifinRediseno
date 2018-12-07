@@ -72,8 +72,10 @@ if(isset( $_POST['Users0emailAddress0'])){
     		}
     	}
 
-    	// Check if current_user is admin or the same user
-    	if(empty($current_user->id) || empty($usr->id) || ($usr->id != $current_user->id && !$current_user->is_admin)) {
+        // Check if current_user is admin for current module or the same user
+    if (empty($current_user->id)
+        || empty($usr->id)
+        || ($usr->id != $current_user->id && !$current_user->isAdminForModule($GLOBALS['currentModule']))) {
     	    echo  $mod_strings['LBL_PROVIDE_USERNAME_AND_EMAIL'];
     	    return;
     	}

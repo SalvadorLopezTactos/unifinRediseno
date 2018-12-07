@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Reguli operative de proces',
   'LBL_MODULE_TITLE' => 'Reguli operative de proces',
   'LBL_MODULE_NAME_SINGULAR' => 'Regulă operativă de proces',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Conditii',
     'LBL_PMSE_LABEL_RETURN' => 'Intoarce-te',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Concluzii',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Schimbare câmp',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Valoare de returnare',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Adauga conditie',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Adauga concluzie',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Adăugare rând',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Eliminare coloană',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Eliminare condiție',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Eliminare concluzie',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Eliminare date coloană',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Da',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Nu',

@@ -11,8 +11,12 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => '營收單項清單儀表板',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => '營收單項紀錄儀表板',
+
     'LBL_CAMPAIGN_PRODUCT' => '推廣活動產品',
-    'LBL_MODULE_NAME' => '營收項目',
+    'LBL_MODULE_NAME' => '收入項目',
     'LBL_MODULE_NAME_SINGULAR' => '營收項目',
     'LBL_MODULE_TITLE' => '營收項目：首頁',
     'LBL_SEARCH_FORM_TITLE' => '營收項目搜尋',
@@ -21,7 +25,7 @@ $mod_strings = array(
     'LBL_PRODUCT' => '產品：',
     'LBL_RELATED_PRODUCTS' => '相關營收項目',
     'LBL_LEAD_SOURCE' => '潛在客戶來源',
-    'LBL_LIST_NAME' => '營收項目',
+    'LBL_LIST_NAME' => '收入項目',
     'LBL_LIST_MANUFACTURER' => '製造商',
     'LBL_LIST_LBL_MFT_PART_NUM' => '部件編號',
     'LBL_LIST_QUANTITY' => '數量',
@@ -77,8 +81,8 @@ $mod_strings = array(
     'LBL_SUPPORT_CONTACT' => '支援連絡人：',
     'LBL_PRICING_FORMULA' => '定價公式：',
     'LBL_ACCOUNT_NAME' => '帳戶名稱：',
-    'LNK_REVENUELINEITEM_LIST' => '檢視營收項目',
-    'LNK_NEW_REVENUELINEITEM' => '建立營收項目',
+    'LNK_REVENUELINEITEM_LIST' => '檢視收入項目',
+    'LNK_NEW_REVENUELINEITEM' => '建立收入項目',
     'NTC_DELETE_CONFIRMATION' => '確定要刪除此記錄嗎？',
     'NTC_REMOVE_CONFIRMATION' => '確定要移除此產品關係嗎？',
     'ERR_DELETE_RECORD' => '必須指定記錄編號才能刪除產品。',
@@ -139,7 +143,7 @@ $mod_strings = array(
     'LBL_EXT_PRICE' => '附加價',
     'LBL_CURRENCY_SYMBOL_NAME' => '貨幣符號名稱',
     'LBL_RLI_SUBPANEL_TITLE' => '營收項目',
-    'LNK_IMPORT_REVENUELINEITEMS' => '匯入營收項目',
+    'LNK_IMPORT_REVENUELINEITEMS' => '匯入收入項目',
     'LBL_EDITLAYOUT' => '編輯配置' /*for 508 compliance fix*/,
     //For export labels
     'LBL_EXPORT_CURRENCY_ID' => '貨幣 ID',
@@ -196,7 +200,7 @@ $mod_strings = array(
  - 按一下「顯示更多」以顯示更多欄位（若需）。
 2. 按一下「儲存」以完成新記錄並返回至上一頁。',
 
-    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => '銷售排名前 10 的營收項目',
+    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => '銷售收入排名前 10 的項目',
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => '在泡泡圖中顯示前十個「營收項目」。',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => '我的營收項目',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "我的小組的營收項目",

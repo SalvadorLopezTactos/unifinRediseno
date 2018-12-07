@@ -37,7 +37,9 @@ class SugarQuery_Compiler_Doctrine
      * Build out the Query in SQL
      *
      * @param SugarQuery $query The query being compiled
+     *
      * @return QueryBuilder
+     * @throws SugarQueryException
      */
     public function compile(SugarQuery $query)
     {
@@ -191,6 +193,7 @@ class SugarQuery_Compiler_Doctrine
 
         $alias = $query->getFromAlias();
         $table = $bean->getTableName();
+
         if ($alias == $table) {
             $alias = null;
         }
@@ -199,6 +202,10 @@ class SugarQuery_Compiler_Doctrine
 
         // SugarQuery will determine if we actually need to add the table or not.
         $query->joinCustomTable($bean, $alias);
+
+        if ($query->shouldFetchErasedFields()) {
+            $this->joinErasedFields($builder, $query, $bean, $alias ?: $table, 'erased_fields');
+        }
     }
 
     /**
@@ -206,6 +213,8 @@ class SugarQuery_Compiler_Doctrine
      *
      * @param QueryBuilder $builder Query builder
      * @param SugarQuery $query The query being compiled
+     *
+     * @throws SugarQueryException
      */
     protected function compileJoins(QueryBuilder $builder, SugarQuery $query)
     {
@@ -219,6 +228,8 @@ class SugarQuery_Compiler_Doctrine
      *
      * @param QueryBuilder $builder Query builder
      * @param SugarQuery_Builder_Join $join Join specification
+     *
+     * @throws SugarQueryException
      */
     protected function compileJoin(QueryBuilder $builder, SugarQuery_Builder_Join $join)
     {
@@ -238,6 +249,7 @@ class SugarQuery_Compiler_Doctrine
 
         $fromAlias = $join->query->getFromAlias();
         $alias = $join->joinName();
+
         switch (strtolower($join->options['joinType'])) {
             case 'left':
                 $builder->leftJoin($fromAlias, $table, $alias, $condition);
@@ -246,6 +258,90 @@ class SugarQuery_Compiler_Doctrine
                 $builder->join($fromAlias, $table, $alias, $condition);
                 break;
         }
+
+        if ($join->bean && $join->query->shouldFetchErasedFields()) {
+            $columnAlias = $join->query->getValidColumnAlias($join->linkName . '_erased_fields');
+            $this->joinErasedFields($builder, $join->query, $join->bean, $alias, $columnAlias);
+        }
+    }
+
+    /**
+     * Compiles additional SELECTed fields and JOINed tables which represent erased bean fields
+     *
+     * @param QueryBuilder $builder
+     * @param SugarQuery $query
+     * @param SugarBean $bean The bean whose erased fields need to be retrieved
+     * @param string $tableAlias The alias of the table which the erased fields need to be joined to
+     * @param string $columnAlias The alias for the column containing the erased fields data
+     */
+    protected function joinErasedFields(
+        QueryBuilder $builder,
+        SugarQuery $query,
+        SugarBean $bean,
+        string $tableAlias,
+        string $columnAlias
+    ) {
+        if (!$this->isPiiFieldsSelected($bean, $query, $tableAlias)) {
+            return false;
+        }
+
+        $erasedAlias = $bean->db->getValidDBName($tableAlias . '_erased', true, 'alias');
+
+        $builder->leftJoin(
+            $query->getFromAlias(),
+            'erased_fields',
+            $erasedAlias,
+            sprintf(
+                '%1$s.bean_id = %2$s.id AND %1$s.table_name = ' . $builder->createPositionalParameter(
+                    $bean->getTableName()
+                ),
+                $erasedAlias,
+                $tableAlias
+            )
+        )->addSelect(sprintf('%s.data %s', $erasedAlias, $columnAlias));
+    }
+
+    /**
+     * check if any Pii field is selected
+     * @param SugarBean $bean
+     * @param SugarQuery $query
+     * @param string $tableAlias
+     * @return bool
+     */
+    protected function isPiiFieldsSelected(SugarBean $bean, SugarQuery $query, string $tableAlias) : bool
+    {
+        if (!$bean->hasPiiFields()) {
+            return false;
+        }
+
+        $selectedFields = $this->getSelectFieldsByTable($bean, $query, $tableAlias);
+
+        if (!count($selectedFields)) {
+            return false;
+        }
+
+        $piiFields = $bean->getFieldDefinitions('pii', [true]);
+
+        if (!array_intersect($selectedFields, array_keys($piiFields))) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * get selected fields
+     * @param SugarBean $bean
+     * @param SugarQuery $query
+     * @param string $tableAlias
+     * @return array
+     */
+    protected function getSelectFieldsByTable(SugarBean $bean, SugarQuery $query, string $tableAlias) : array
+    {
+        return array_merge(
+            $query->select->getSelectedFieldsByTable($tableAlias),
+            $query->select->getSelectedFieldsByTable($query->getCustomTableAlias($bean, $tableAlias))
+        );
     }
 
     /**
@@ -253,10 +349,13 @@ class SugarQuery_Compiler_Doctrine
      *
      * @param QueryBuilder $builder Query builder
      * @param SugarQuery $query The query being compiled
+     *
+     * @throws SugarQueryException
      */
     protected function compileWhere(QueryBuilder $builder, SugarQuery $query)
     {
-        if ($query->shouldSkipDeletedRecords()) {
+        $del = $query->getFromBean()->getFieldDefinition('deleted');
+        if (!empty($del) && $query->shouldSkipDeletedRecords()) {
             $where = new SugarQuery_Builder_Andwhere($query);
             if ($query->where) {
                 $where->add($query->where);
@@ -451,6 +550,8 @@ class SugarQuery_Compiler_Doctrine
      * @param QueryBuilder $builder Query builder
      * @param SugarQuery_Builder_Condition $condition Condition
      * @return string|null
+     *
+     * @throws SugarQueryException
      */
     protected function compileCondition(QueryBuilder $builder, SugarQuery_Builder_Condition $condition)
     {
@@ -535,6 +636,8 @@ class SugarQuery_Compiler_Doctrine
      * @param SugarQuery|QueryBuilder|array|string $set
      * @param array $fieldDef Field definition
      * @return string
+     *
+     * @throws SugarQueryException
      */
     protected function compileIn(QueryBuilder $builder, $field, $operator, $set, array $fieldDef)
     {
@@ -555,6 +658,8 @@ class SugarQuery_Compiler_Doctrine
      * @param SugarQuery|QueryBuilder|array|string $set
      * @param array $fieldDef Field definition
      * @return string
+     *
+     * @throws SugarQueryException
      */
     protected function compileSet(QueryBuilder $builder, $set, array $fieldDef)
     {

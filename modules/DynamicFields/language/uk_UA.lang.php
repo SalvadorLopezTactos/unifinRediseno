@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'URL за умовчанням',
 	'COLUMN_TITLE_AUDIT' =>'Аудит',
+    'COLUMN_TITLE_PII' => 'Особисті відомості',
     'COLUMN_TITLE_FTS' =>'Достпний  до повнотекстового пошуку',
     'COLUMN_TITLE_FTS_BOOST' => 'Boost value',
 	'COLUMN_TITLE_REPORTABLE' => 'Доступний для створення звітів',

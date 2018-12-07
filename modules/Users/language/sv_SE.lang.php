@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Användarinformation kunde ej hittas',
     'ERR_USER_NAME_EXISTS'              => 'Användarnamnet {0} finns redan. Du får inte ha samma som någon annan, så ändra det till nåt unikt.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Denna användare har låsts ute av Sugar applikation och kan inte logga in genom att använda existerande lösenord.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Enadast externa godkända användare är tillåtna att logga in med Sugar-autentiseringsuppgifter',
 
 	'LBL_PASSWORD_SENT'                => 'Lösenord uppdaterat',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Kan inte skicka lösenord',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Mottagarens emailadress',
 	'ERR_SERVER_STATUS'					=> 'Din serverstatus',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Systemet kan inte skicka ett email till användaren. Var god kontrollera konfigurationen för utgående email under <a href="index.php?module=EmailMan&action=config">Emailinställningar</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Användaren kan endast skapas i <a href="{0}" target="_blank">Cloud konsolen</a> för IDM-läget.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Den primära e-postadressen kan endast uppdateras i<a href="{0}" target="_blank">Cloud konsolen</a> för IDM-läget.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Emailadress',
 
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'sek.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Var god kontakta system administratören.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Vänligen installera GMP PHP extension för autentisering med OpenID Connect (OIDC) i IDM-läge.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Du har blivit utloggad. För att logga in igen vänligen klicka',
     'LBL_LOGGED_OUT_2' => 'här',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Användarnas rapporter',
     'LBL_CONTACTS_SYNC' => 'Kontakter',
     'LBL_DETAIL' => 'Användarprofil',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Om en del fält inte kan redigeras, vänligen logga in på din Cloud-konsol för att hantera fälten',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Om du vill ändra vissa fält som inte är redigerbara, ' .
+        'vänligen kontakta Administratör för att meddela dessa ändringar',
 ); // END STRINGS DEFS
 
 ?>

@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Luo tehtävä',
   'NTC_DELETE_CONFIRMATION' => 'Haluatko poistaa tämän tietueen?',
   'LBL_BELOW_MIN' => 'Muuntokurssin on oltava yli 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktiivinen',
-    'Inactive' => 'Epäaktiivinen',
-  ),
   'LBL_CREATED_BY' => 'Luoja',
   'LBL_EDIT_LAYOUT' => 'Muokkaa asettelua' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Vain administraattoreille',
+  'LBL_CURRENCY_DEFAULT' => 'Yhdysvaltain dollaria (oletus)',
+
 );
 ?>

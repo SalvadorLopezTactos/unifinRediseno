@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Tablero de Lista de Base de Conocimiento',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Tablero de Registro de Base de Conocimiento',
+
     'LBL_MODULE_NAME' => 'Base de Conocimiento',
     'LBL_MODULE_NAME_SINGULAR' => 'Artículo de Base de Conocimiento',
     'LBL_MODULE_TITLE' => 'Artículo de Base de Conocimiento',

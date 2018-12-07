@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Pribavite korisnički ključ od aplikacije LogMeIN tako da registrirate novu aplikaciju GoToMeeting.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Koraci za registraciju instance:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Prijavite se u svoj račun u centru za razvojne inženjere LogMeIn: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Kliknite na Moje aplikacije</li>
+    <li>Kliknite na Dodaj novu aplikaciju</li>
+    <li>Ispunite sva polja na obrascu Dodavanje aplikacije:</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>Naziv aplikacije</li>
+            <li>Opis</li>
+            <li>API proizvoda: odaberite GoToMeeting</li>
+            <li>URL aplikacije: unesite URL vaše instance</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Kliknite na gumb Stvori aplikaciju</li>
+    <li>Na popisu aplikacija kliknite na naziv vaše aplikacije</li>
+    <li>Kliknite na karticu Ključevi</li>
+    <li>Kopirajte vrijednost iz polja Korisnički ključ i unesite ga u nastavku</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Korisnički ključ',
 );

@@ -37,7 +37,7 @@ $mod_strings = array (
   'LNK_NEW_EMAIL' => 'Archivar Correo Electrónico',
   'LNK_NEW_MEETING' => 'Programar Reunión',
   'LNK_NEW_TASK' => 'Nueva Tarea',
-  'LNK_ADVANCED_REPORTING' => 'Administrar Informes Avanzados',
+  'LNK_ADVANCED_REPORTING' => 'Administrar informes avanzados',
   'LBL_REPORTS' => 'Informes',
   'LBL_TITLE' => 'Título',
   'LBL_UNTITLED' => 'sin título',
@@ -80,7 +80,7 @@ $mod_strings = array (
   'LBL_CHANGE' => 'Cambiar',
   'LBL_REMOVE' => 'Quitar',
   'LBL_CREATE_CUSTOM_REPORT' => 'Asistente de Informes',
-  'LBL_CREATE_REPORT' => 'Nuevo Informe',
+  'LBL_CREATE_REPORT' => 'Crear informe',
   'LBL_MY_SAVED_REPORTS' => 'Mis Informes',
   'LBL_MY_TEAMS_REPORTS' => 'Los Informes de mi equipo',
   'LBL_REPORT_NAME' => 'Nombre de Informe',
@@ -223,8 +223,8 @@ $mod_strings = array (
   'LBL_NOTHING_WAS_SELECTED' => 'no hay nada seleccionado.',
   'LBL_TOTAL' => 'Total',
   'LBL_MODULE_NAME_SAVED' => 'Nombre de Módulo',
-  'LBL_REPORT_TYPE' => 'Tipo de Informe',
-  'LBL_REPORT_LAST_RUN_DATE' => 'Accedido En',
+  'LBL_REPORT_TYPE' => 'Tipo de informe',
+  'LBL_REPORT_LAST_RUN_DATE' => 'Consultado el',
   'LBL_REPORT__ATT_TYPE' => 'Tipo',
   'LBL_REPORT_RUN_WITH_FILTER' => 'Aplicar',
   'LBL_REPORT_RESET_FILTER' => 'Restablecer',
@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Por Trimestre',
     'LBL_BY_FISCAL_YEAR' => 'Por Año Fiscal',
     'LBL_BY_FISCAL_QUARTER' => 'Por Trimestre Fiscal',
+    'LBL_AMOUNT' => 'Cantidad',
     'LBL_COUNT' => 'Cuenta',
+    'LBL_PERCENT' => 'Porcentaje',
     'LBL_SUM' => 'SUM',
     'LBL_AVG' => 'AVG',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Mes',
     'LBL_YEAR' => 'Año',
     'LBL_QUARTER' => 'Trimestre',
+    'LBL_FISCAL' => 'Fiscal',
     'LBL_FISCAL_YEAR' => 'Año Fiscal',
     'LBL_FISCAL_QUARTER' => 'Trimestre Fiscal',
 	'LBL_YESTERDAY'=>'Ayer',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Siguiente Trimestre',
     'LBL_ADD_RELATE' => "Añadir Relacionado",
     'LBL_DEL_THIS' => "Quitar",
-    'LBL_ALERT_CANT_ADD' => 'No puede añadir un módulo relacionado hasta que no seleccione una tabla sobre la cual relacionarlo.\n Seleccione un módulo de la lista desplegable situada a la izquierda del botón &#39;Añadir Relacionado&#39;; que acaba de pulsar.',
+    'LBL_ALERT_CANT_ADD' => 'No puede añadir un módulo relacionado hasta que no seleccione una tabla sobre la cual relacionarlo.\\n Seleccione un módulo de la lista desplegable situada a la izquierda del botón &#39;Añadir Relacionado&#39;; que acaba de pulsar.',
     'LBL_BY_DAY' => 'Por Día',
     'LBL_DAY' => 'Día',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Módulos Relacionados Opcionales',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Mayor que Igual a',
 
     'LBL_FILTER_BY_MODULE' => 'Por Módulo',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Con gráficos',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Error al recuperar la información de la simulación a través de los datos de informe para esta acción. Contacte al propietario del reporte para obtener asistencia.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Profundización no disponible',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'La vista de lista muestra todos los informes que cumplen con el criterio de búsqueda actual y a los cuales tienen acceso los usuarios. Puede ver los detalles básicos de cada informe en las columnas de la lista y en la vista previa. Puede establecer etiquetas para los informes y crear filtros. Haga clic en el nombre del informe para verlo, o seleccione &#39;Editar informe&#39; en el menú de acciones para modificarlo.',
+  );

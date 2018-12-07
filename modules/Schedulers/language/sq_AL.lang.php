@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Përditëso artikujt KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publiko artikujt e miratuar dhe artikujt e përfunduar të bazës së njohurive.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Punë e planifikuar e "Advanced Workflow"',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Rindërto të dhënat e denormalizuara të sigurisë së ekipit',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervali',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Planifikuesi i radhës së kërkimit elastik',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Hiq skedarët e mjetit diagnostikues',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Hiq skedarët e përkohshëm',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Rindërto të dhënat e denormalizuara të sigurisë së ekipit',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Drejtimi i natës së Emailave masive të Kampanjës',
 'LBL_ASYNCMASSUPDATE' => 'Kryeni përditësim masive të josinkronik',

@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Keine Benutzerinformationen gefunden',
     'ERR_USER_NAME_EXISTS'              => 'Diesen Benutzernamen {0} gibt es bereits. Doppelte Benutzernamen sind nicht zulässig. Ändern Sie den Benutzernamen.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Dieser Benutzer ist in der Sugar-Anwendung gesperrt und kann sich mit seinem aktuellen Passwort nicht anmelden.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Nur extern autorisierter Benutzer ist nicht berechtigt, sich mit Sugar-Anmeldeinformationen anzumelden',
 
 	'LBL_PASSWORD_SENT'                => 'Das Passwort wurde aktualisiert.',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Das Passwort konnte nicht gesendet werden',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'E-Mail-Adresse Empfänger',
 	'ERR_SERVER_STATUS'					=> 'Ihr Serverstatus',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Das System kann keine E-Mail an den Benutzder senden. Bitte die Konfiguration für ausgehende E-Mails unter <a href="index.php?module=EmailMan&action=config">E-Mail Einstellungen</a> prüfen.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Der Benutzer wurde nur in der <a href="{0}" target="_blank">Cloud-Konsole</a> für den IDM-Modus erstellt.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Die primäre E-Mail-Adresse kann nur in der <a href="{0}" target="_blank">Cloud-Konsole</a> für den IDM-Modus aktualisiert werden.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-Mail-Adresse',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Passwort bestätigen',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Sie haben den Benutzertyp von Systemadministrator auf normalen Benutzer geändert. Wenn Sie diese Änderung speichern, hat der Benutzer keine Administratorrechte mehr.\n\nKlicken Sie auf OK, um fortzufahren.\n\nKlicken Sie auf "Abbrechen", um zum Datensatz zurückzukehren.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Sie haben den Benutzertyp von Systemadministrator auf normalen Benutzer geändert. Wenn Sie diese Änderung speichern, hat der Benutzer keine Administratorrechte mehr.\\n\\nKlicken Sie auf OK, um fortzufahren.\\n\\nKlicken Sie auf "Abbrechen", um zum Datensatz zurückzukehren.',
 	'LBL_COUNTRY'						=> 'Land',
 	'LBL_CURRENCY_TEXT'					=> 'Dies ist die in den Listen- und Datensatzansichten verwendete Währung, wenn "Bevorzugte Währung anzeigen" aktiviert ist. Dies ist auch die Standardwährung für neue Einträge.',
 	'LBL_CURRENCY'						=> 'Bevorzugte Währung',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'Minuten',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'Sekunden',
     'LBL_LOGIN_ADMIN_CALL'              => 'Bitte kontaktieren Sie den Systemadministrator',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Für die Authentifizierung mit OpenID Connect (OIDC) im IDM-Modus muss die GMP-PHP-Erweiterung installiert werden.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Sie wurden abgemeldet. Um sich erneut anzumelden, klicken Sie',
     'LBL_LOGGED_OUT_2' => 'hier',
@@ -626,6 +631,12 @@ Klicken Sie aus "Abbrechen", um die Seite zu schließen, ohne Datensätze zu ver
     'LBL_FILTER_USERS_REPORTS' => 'Benutzerberichte',
     'LBL_CONTACTS_SYNC' => 'Kontakte',
     'LBL_DETAIL' => 'Benutzerprofil',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Wenn bestimmte Felder nicht bearbeitbar sind, melden Sie sich in Ihrer Cloud-Konsole an, um diese Felder zu verwalten',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Falls Sie bestimmte Felder ändern möchten, die nicht bearbeitbar sind, ' .
+        'kontaktieren Sie bitte den Administrator, um diese Änderungen zu melden',
 ); // END STRINGS DEFS
 
 ?>

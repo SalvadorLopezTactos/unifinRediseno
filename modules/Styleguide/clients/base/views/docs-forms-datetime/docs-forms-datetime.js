@@ -30,7 +30,6 @@
             context: this.context,
             module: this.module,
             model: this.model,
-            meta: app.metadata.getField('date')
         },
         dateField = app.view.createField(fieldSettingsDate);
         this.$('#sugar7_date').append(dateField.el);
@@ -50,7 +49,6 @@
             context: this.context,
             module: this.module,
             model: this.model,
-            meta: app.metadata.getField('datetimecombo')
         },
         datetimecomboField = app.view.createField(fieldSettingsCombo);
         this.$('#sugar7_datetimecombo').append(datetimecomboField.el);

@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Teklifler (Gönderim Yeri)',
 	'LNK_ACCOUNT_REPORTS' => 'Müşteri Raporlarını Gör',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokümanlar',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Hesaplar Listesi Panosu',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Hesaplar Kaydı Panosu',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafikler',
 	'LBL_DEFAULT' => 'Görünümler',

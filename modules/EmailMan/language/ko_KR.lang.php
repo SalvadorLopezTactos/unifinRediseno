@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> '이곳을 클릭하십시오',
 	'TXT_REMOVE_ME'								=> '이 이메일 목록에서 본인을 제거하려면',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> '지정 사용자의 이메일 주소에서 알림 보내기',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => '기본적으로 새 이메일 수신 거부',
 
 	'LBL_SECURITY_TITLE'						=> '이메일 보안 설정',
 	'LBL_SECURITY_DESC'							=> '다음 수신 이메일이나 전시된 이메일 모듈을 통해 허용되지 않는지 확인하십시오.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => '사용자가 이 계정을 이용해 이메일 발신을 허용',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => '이 항목이 선택되었을때 모든 사용자자 동일 발신 계정을 이용해 시스템 공지나 알림을 보낼수 있습니다. 만약 항목이 선택되지 않았다면 각자의 계정이 입력된후 발신메일 서버를 이용할수 있습니다.',
     'LBL_FROM_ADDRESS_HELP'                     => '작동시 지정 사용자명과 이메일 주소는 이메일의 발신자 필드에 포함됩니다. 이 기능은 서버계정이 이 아닌 다른 이메일 계정에서의 발송을 허용하지 않는 SMTP서버와 같이 작동하지 않을수도 있습니다.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => '새 이메일 주소가 추가되면 자동으로 수신 거부됩니다. 수신 거부된 주소에는 캠페인 이메일을 전송할 수 없습니다. 이 설정을 변경해도 기존 이메일 주소에는 영향을 주지 않습니다.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo 메일' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => '교환' /*for 508 compliance fix*/,

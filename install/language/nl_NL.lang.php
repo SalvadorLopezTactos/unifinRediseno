@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> 'Deze query zal worden gestapeld onder de eerste query in het rapport',
     'ERR_DB_VERSION_FAILURE'			=> 'Versie database controleren mislukt.',
 
-
-	'ERR_OC_PASSWORD'					=> 'Wachtwoord is verplicht.',
-	'ERR_OC_SERVER_URL'					=> 'Sugar Server URL is verplicht.',
-	'ERR_OC_USERNAME'					=> 'Gebruikersnaam of server gebruiker is verplicht.',
-	'LBL_INSTALL_OC'					=> 'Installeer Offline Client',
-    'LBL_OC_ADMIN'                      => 'Neem a.u.b. contact op met uw administrator om dit probleem op te lossen.',
-    'LBL_OC_SUCCESS'                    => 'Offline Client Installatie is afgerond. Klik op de button hieronder om naar uw installatie te gaan.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'Admin Gebruikersnaam',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'Vul de gegevens hieronder in om uw offline client goed te kunnen installeren en synchroniseren.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'URL van Sugar Server',
-	'LBL_OC_INSTALL_PASS'				=> 'Wachtwoord voor server gebruiker',
-	'LBL_OC_INSTALL_TITLE'				=> 'Offline Client Installatie',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'Met deze gebruikersnaam maak je verbinding met de Sugar server.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'Gebruikersnaam',
-	'LBL_PERFORM_OC_INSTALL'			=> 'Initialiseren Installatie Offline Client',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'Vul de gegevens hieronder in om uw offline client goed te kunnen installeren en synchroniseren.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Geef de gebruikersnaam van de Sugar admin gebruiker',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Vul het wachtwoord in van de Sugar Admin gebruiker.',
@@ -76,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'Er zijn fouten ontdekt tijdens de compatibiliteitscheck. Om uw SugarCRM installatie goed te laten functioneren, dienen onderstaande issues te worden opgelost, druk daarna op de recheck-button of probeer opnieuw te installeren.',
     'ERR_CHECKSYS_CALL_TIME'            => 'Parameter &#39;Allow Call Time Pass Reference&#39; heeft de waarde &#39;On&#39;  en deze moet &#39;Off&#39; zijn de php.ini',
 
-	'ERR_CHECKSYS_CURL'					=> 'Niet gevonden: suiker Scheduler wordt uitgevoerd met beperkte functionaliteit. De e-mailarchiveringsservice wordt niet uitgevoerd.',
+	'ERR_CHECKSYS_CURL'					=> 'Niet gevonden: Sugar Scheduler zal beperkt werken. De e-mailarchiveringsdienst zal niet worden uitgevoerd.',
     'ERR_CHECKSYS_IMAP'					=> 'Niet gevonden: Inkomende E-mail en Campagnes (E-mail) vereisen de IMAP-bibliotheken. Geen van beiden zullen functioneel zijn.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'Magic Quotes GPC kan niet  "On" zijn als  MS SQL Server wordt gebruikt.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'Waarschuwing:',
@@ -92,7 +75,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'Voor een optimale ervaring met IIS / FastCGI sapi, stel fastcgi.logging op 0 in je php.ini bestand.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'Niet ondersteunde PHP versie geinstalleerd: ( ver',
     'LBL_DB_UNAVAILABLE'                => 'Database niet beschikbaar',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Databaseondersteuning werd niet gevonden.  Zorg ervoor dat u de benodigde stuurprogramma\'s hebt voor een van de volgende ondersteunde databasetypen: MySQL, MS SQLServer, Oracle en DB2.  U moet, afhankelijk van uw versie van PHP, mogelijk de extensie niet langer noemen in het php.ini-bestand of opnieuw samenstellen met het juiste binaire bestand, Raadpleeg uw PHP-handleiding voor meer informatie over het inschakelen van databaseondersteuning.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'Database-ondersteuning niet gevonden. Controleer of u de nodige drivers voor een van de volgende ondersteunde soorten databases hebt: MySQL, MS SQLServer, Oracle of DB2. Mogelijk moe u de extensie uit het php.ini bestand verwijderen of moet u, afhankelijk van uw versie van PHP, opnieuw compileren met het juiste binaire bestand. Raadpleeg uw PHP-handleiding voor meer informatie over het inschakelen van database-ondersteuning.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'Functies behorende bij "XML Parser Libraries" benodigd door SugarCRM zijn niet gevonden. Controleer php.ini of de regels nog als commentaar zijn opgevoerd of hercompileer de binary file, afhankelijk van uw PHP versie. Raadpleeg de PHP handleiding voor meer informatie.',
     'LBL_CHECKSYS_CSPRNG' => 'Willekeurige nummergenerator',
     'ERR_CHECKSYS_MBSTRING'             => 'Functies behorende bij "Multibyte Strings PHP Extension" benodigd door SugarCRM zijn niet gevonden. N.B. Standaard wordt de module niet geinstalleerd in PHP, om deze alsnog te activeren dient deze met "--enable-mbstring" te worden meegegeven als de PHP Binary wordt opgebouwd. Raadpleeg de PHP handleiding voor meer informatie.',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'Afmetingen uploadbestand',
 	'ERR_URL_BLANK'						=> 'Geef de standaard URL in voor deze Sugar instantie.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'Kan het installatierecord niet vinden',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'Dit bestand is niet compatible met deze uitvoering van de Sugar Suite:',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'Het geüploade bestand is niet compatibel met deze versie (Professional, Enterprise of Ultimate editie) van Sugar: ',
 	'ERROR_LICENSE_EXPIRED'				=> "Waarschuwing: Je licentie is verlopen.",
 	'ERROR_LICENSE_EXPIRED2'			=> "dag(en) geleden. Ga naar <a href=\"index.php?action=LicenseSettings&module=Administration\">\"License Management\"</a>  in het Admin-scherm om een nieuwe liceniesleutel op te voeren. U dient binnen 30 dagen na het verlopen van de licentie een nieuwe op te voeren anders kunt u niet meer inloggen.",
 	'ERROR_MANIFEST_TYPE'				=> 'Het Manifest bestand moet het type van dit package aangeven',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'Expiratiedatum',
 	'LBL_LICENSE_I_ACCEPT'				=> 'Ik ga akkoord',
 	'LBL_LICENSE_NUM_USERS'				=> 'Aantal gebruikers',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'Geef het aantal gekochte off-line cliënts in',
-	'LBL_LICENSE_OC_NUM'				=> 'Aantal Offline Client Licenties',
-	'LBL_LICENSE_OC'					=> 'Offline Client Licenties',
 	'LBL_LICENSE_PRINTABLE'				=> 'Afdrukvoorbeeld',
     'LBL_PRINT_SUMM'                    => 'Samenvatting afdrukken',
 	'LBL_LICENSE_TITLE_2'				=> 'SugarCRM Licentie',
@@ -496,10 +476,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'Sorteringsinstellingen',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Geef een naam op voor de Sugar instance.',
 	'LBL_PATCH_UPLOAD' => 'Selecteer een patch bestand (op uw eigen computer)',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'Php versie 5 of hoger is vereist.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(Uw huidige php versie is',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'Php Backward Compatibility modus is ingeschakeld. Zet zend.ze1_compatibility_mode op uitgeschakeld alvorens verder te gaan',
 
     'advanced_password_new_account_email' => array(
@@ -519,5 +495,3 @@ $mod_strings = array(
         'name' => 'Vergeten wachtwoord e-mail',
         ),
 );
-
-?>

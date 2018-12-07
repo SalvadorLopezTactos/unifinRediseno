@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת רשימות מטרות',
+
   'LBL_MODULE_NAME' => 'רשימת מטרות',
   'LBL_MODULE_NAME_SINGULAR' => 'רשימת מטרות',
   'LBL_MODULE_ID'   => 'רשימת מטרות',

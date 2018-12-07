@@ -19,9 +19,14 @@
 		function(){
 			{/literal}
 			var css = [];
-			var chartConfig = [];
+			var chartConfig = {ldelim}{rdelim};
+			var chartParams = {ldelim}{rdelim};
+			// chartParams["label"] = "{$label}";
 			{foreach from=$config key=name item=value}
 				chartConfig["{$name}"] = '{$value}';
+			{/foreach}
+			{foreach from=$params key=name item=value}
+				chartParams["{$name}"] = '{$value}';
 			{/foreach}
 			{if $height > 480}
 				chartConfig["scroll"] = true;
@@ -29,7 +34,7 @@
 			chartConfig["ReportModule"] = true;
 			chartConfig["direction"] = $('html', window.parent.document).hasClass('rtl') ? 'rtl' : 'ltr';
 			loadCustomChartForReports = function(){ldelim}
-				loadSugarChart('{$chartId}', '{$filename}', css, chartConfig);
+				loadSugarChart('{$chartId}', '{$filename}', css, chartConfig, chartParams);
 			{rdelim};
 			// bug51857: fixed issue on report running in a loop when clicking on hide chart then run report in IE8 only
 			// When hide chart button is clicked, the value of element showHideChartButton is set to $showchart.

@@ -198,7 +198,7 @@ foreach ($dictionary as $meta) {
 	}
 
 	$fielddefs = $meta['fields'];
-	$indices = $meta['indices'];
+    $indices = isset($meta['indices']) ? $meta['indices'] : [];
 	$sql = $db->repairTableParams($tablename, $fielddefs, $indices, true);
 	if(!empty($sql)) {
 	    logThis($sql, $path);

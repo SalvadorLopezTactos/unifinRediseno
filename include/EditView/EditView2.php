@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
 
 /**
  * New EditView
@@ -64,6 +64,19 @@ class EditView
     * @var array
     */
     protected $tpl_vars = array();
+
+    /**
+     * @var IdmConfig
+     */
+    protected $idpConfig;
+
+    /**
+     * constructor
+     */
+    public function __construct()
+    {
+        $this->idpConfig =  new IdmConfig(\SugarConfig::getInstance());
+    }
 
     /**
      * EditView constructor
@@ -499,7 +512,8 @@ class EditView
 	       	 	}
 
 	       	 	if(!$valueFormatted) {
-                   $value = isset($this->focus->$name) ? $this->focus->$name : '';
+                    $value = isset($this->focus->$name) ? $this->focus->$name : '';
+                    $value = ViewDateFormatter::format($this->fieldDefs[$name]['type'], $value);
                 }
 
                 if (empty($this->fieldDefs[$name]['value']))
@@ -547,6 +561,11 @@ class EditView
                 }
             }
             $this->focus->ACLFilterFieldList($this->fieldDefs, array(), array("add_acl" => true));
+            if (in_array($this->focus->module_name, $this->idpConfig->getIDMModeDisabledModules())
+                && $this->idpConfig->isIDMModeEnabled()
+            ) {
+                $this->disableIDMModeFields();
+            }
         }
 
         if (isset($this->focus->additional_meta_fields))
@@ -958,6 +977,18 @@ class EditView
         }
 
         return $return;
+    }
+
+    /**
+     * Mark disabled IDM mode fields
+     */
+    protected function disableIDMModeFields()
+    {
+        $idmModeDisabledFields = $this->idpConfig->getIDMModeDisabledFields();
+        $this->fieldDefs = array_map(function ($field) use ($idmModeDisabledFields) {
+            $field['disabled'] = isset($field['name']) && array_key_exists($field['name'], $idmModeDisabledFields);
+            return $field;
+        }, $this->fieldDefs);
     }
 }
 

@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Електронно табло със списък на срещите',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Електронно табло със запис на срещите',
+
 	'ERR_DELETE_RECORD' => 'Трябва да определите номер на записа, за да изтриете тази среща.',
 	'LBL_ACCEPT_THIS'=>'Приемате ли?',
 	'LBL_ADD_BUTTON'=> 'Добави',

@@ -14,15 +14,10 @@
  * @extends View.Views.Base.RecordView
  */
 ({
-    extendsFrom:         "RecordView",
+    extendsFrom: 'RecordView',
     enableHeaderButtons: false,
-    enableHeaderPane:    false,
-    events:              {},
-
-    initialize: function(options) {
-        this._super("initialize", [options]);
-        this.model.isNotEmpty = true;
-    },
+    enableHeaderPane: false,
+    events: {},
 
     /**
      * Override to remove unwanted functionality.
@@ -39,7 +34,7 @@
     /**
      * Override to remove unwanted functionality.
      */
-    initButtons: function() {
+    _initButtons: function() {
         this.buttons = {};
     },
 
@@ -65,7 +60,7 @@
      *
      * @param field
      */
-    toggleLabelByField: function (field) {},
+    toggleLabelByField: function(field) {},
 
     /**
      * Override to remove unwanted functionality.

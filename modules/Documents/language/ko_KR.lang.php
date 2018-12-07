@@ -19,10 +19,10 @@
 
 $mod_strings = array (
     //module
-    'LBL_MODULE_NAME' => '문서 목록',
+    'LBL_MODULE_NAME' => '문서',
     'LBL_MODULE_NAME_SINGULAR' => '문서',
     'LBL_MODULE_TITLE' => '문서목록:홈',
-    'LNK_NEW_DOCUMENT' => '문서 작성',
+    'LNK_NEW_DOCUMENT' => '문서 추가하기',
     'LNK_DOCUMENT_LIST'=> '문서목록 보기',
     'LBL_DOC_REV_HEADER' => '문서 개정',
     'LBL_SEARCH_FORM_TITLE'=> '문서 검색',

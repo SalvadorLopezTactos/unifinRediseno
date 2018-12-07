@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'klikšķiniet šeit',
 	'TXT_REMOVE_ME'								=> 'Lai izņemtu sevi no e-pasta saņēmēju saraksta,',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Sūtīt notifikācijas no piešķīrēja e-pasta adreses?',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Atteikties no jaunām e-pasta adresēm pēc noklusējuma',
 
 	'LBL_SECURITY_TITLE'						=> 'E-pasta drošības uzstādījumi',
 	'LBL_SECURITY_DESC'							=> 'Pārbaudiet sekojošo, kas var nebūt atļauts ienākošajiem e-pastiem vai attēlošanai e-pastu modulī.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Atļaut lietotājiem lietot šo kontu izejošiem e-pastiem',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Ja šī opcija ir atzīmēta, visi lietotāji var sūtīt e-pastus, izejošām e-pastam lietojot to pašu kontu, kas izmantots sistēmas ziņojumu un brīdinājumu sūtīšanai. Ja opcija netiek atzīmēta, lietotājs var izmantot to pašu izejošā e-pasta serveri, kad ir norādījis sava e-pasta konta informāciju.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Pēc aktivizēšanas lietotāja vārds un e-pasta adrese tiks norādīta e-pasta sūtītāja lauciņā. Šī funkcija var nestrādāt ar SMTP serveriem, kas neatbalsta e-pasta sūtīšanu cita e-pasta konta vārdā.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Kad tiek pievienota jauna e-pasta adrese, tā tiek automātiski atteikta. Uz adresēm ar atteikšanos nevar nosūtīt kampaņas e-pastus. Šī iestatījuma izmaiņa neietekmē esošās e-pasta adreses.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo pasts' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => 'ลบ',
   'LBL_EMAIL_ADDRESS'=>'ที่อยู่อีเมล',
   'LBL_CONTACTS_SYNC' => 'ที่อยู่ติดต่อ',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        'สำหรับโหมด IDM สามารถสร้างพนักงานใน<a href="{0}" target="_blank">ระบบคอนโซลคลาวด์</a>เท่านั้น',
 );
 
 

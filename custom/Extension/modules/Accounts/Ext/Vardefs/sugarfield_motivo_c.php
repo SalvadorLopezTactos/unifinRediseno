@@ -1,5 +1,5 @@
 <?php
- // created: 2018-02-16 16:59:02
+ // created: 2018-12-05 18:17:34
 $dictionary['Account']['fields']['motivo_c']['labelValue'] = 'Motivo (No Interesado)';
 $dictionary['Account']['fields']['motivo_c']['dependency'] = '';
 $dictionary['Account']['fields']['motivo_c']['visibility_grid']['trigger'] = 'tipodemotivo_c';

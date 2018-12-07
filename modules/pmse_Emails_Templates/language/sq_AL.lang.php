@@ -16,10 +16,10 @@ $mod_strings = array (
     'LBL_BASE_MODULE' => 'Moduli i synimit',
 
     'LBL_MODULE_TITLE' => 'Proceso email templejtat',
-    'LBL_MODULE_NAME' => 'Proceso email templejtat',
+    'LBL_MODULE_NAME' => 'Modelet e emaileve të proceseve',
     'LBL_MODULE_NAME_SINGULAR' => 'Proceso email templejtat',
 
-    'LNK_LIST' => 'Shiko procesimin e email templejtave',
+    'LNK_LIST' => 'Shiko modelet e emaileve të proceseve',
     'LNK_NEW_PMSE_EMAILS_TEMPLATES' => 'Krijo procesimin e email templejtave',
     'LNK_IMPORT_PMSE_EMAILS_TEMPLATES' => 'Importo templejtat e emailave të procesuar',
 
@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_PMSE_MY_EMAIL_TEMPLATES' => 'Procesimet e mia të email templejtave',
     'LBL_PMSE_ALL_EMAIL_TEMPLATES' => 'Proceso të gjitha email templejtat',
 
-    'LBL_PMSE_EMAIL_TEMPLATES_IMPORT_TEXT' => 'Automatikisht krijo regjistrim proces email templejti të ri duke importuar fajll *.pet nga sistemi juaj i fajlit.',
+    'LBL_PMSE_EMAIL_TEMPLATES_IMPORT_TEXT' => 'Krijo automatikisht një regjistrim të ri modeli emaili procesi duke importuar një skedar *.pet nga sistemi i skedarëve tuaj.',
     'LBL_PMSE_EMAIL_TEMPLATES_IMPORT_SUCCESS' => 'Procesimi i email templejtit u importua me sukses në sistem.',
     'LBL_PMSE_EMAIL_TEMPLATES_EMPTY_WARNING' => 'Ju lutemi selektoni fajl *.pet valid.',
 

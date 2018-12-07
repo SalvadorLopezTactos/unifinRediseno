@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Gabim: nuk ka fusha të modulit të gjetura për të shfaqur rezultate. Ju lutemi kontaktoni administratorin e sistemit.',
     'LBL_INFO_INLINE' => 'Info' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Mbyll' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'Nuk u gjet bashkues për identifikuesin e dhënë të burimit.',
 );
 

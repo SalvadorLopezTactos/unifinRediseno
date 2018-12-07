@@ -8,8 +8,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 var ItemUpdaterField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     this.fields = [];
     this.options = [];
     this.fieldHeight = null;
@@ -18,7 +20,7 @@ var ItemUpdaterField = function (options, parent) {
     ItemUpdaterField.prototype.initObject.call(this, options);
 };
 
-ItemUpdaterField.prototype = new Field();
+ItemUpdaterField.prototype = new PMSE.Field();
 ItemUpdaterField.prototype.type = 'ItemUpdaterField';
 
 ItemUpdaterField.prototype.initObject = function (options){
@@ -62,7 +64,7 @@ ItemUpdaterField.prototype.getObjectValue = function () {
         auxValue.push(this.fields[f].getJSONObject());
     }
     this.value = JSON.stringify(auxValue);
-    return Field.prototype.getObjectValue.call(this);
+    return PMSE.Field.prototype.getObjectValue.call(this);
 };
 
 ItemUpdaterField.prototype.getJsonValue = function () {
@@ -125,7 +127,7 @@ ItemUpdaterField.prototype.setOptions = function (data) {
 
 ItemUpdaterField.prototype.createHTML = function () {
     var fieldLabel, required = '', criteriaContainer;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     if (this.required) {
         required = '<i>*</i> ';
@@ -220,7 +222,7 @@ ItemUpdaterField.prototype.isValid = function() {
     }
 
     if (valid) {
-        valid = valid && Field.prototype.isValid.call(this);
+        valid = valid && PMSE.Field.prototype.isValid.call(this);
     } else {
         this.visualObject.scrollTop += getRelativePosition(field.getHTML(), this.visualObject).top;
     }
@@ -243,7 +245,7 @@ ItemUpdaterField.prototype.validate = function () {
 //
 
 var FieldUpdater = function (options, parent) {
-    Base.call(this, options);
+    PMSE.Base.call(this, options);
     this.field = null;
     this.fieldName = null;
     this.value = null;
@@ -253,7 +255,7 @@ var FieldUpdater = function (options, parent) {
     FieldUpdater.prototype.initObject.call(this, options, parent);
 };
 
-FieldUpdater.prototype = new Base();
+FieldUpdater.prototype = new PMSE.Base();
 FieldUpdater.prototype.type = "FieldUpdater";
 FieldUpdater.prototype.initObject = function (options, parent) {
     if (options && options.type === 'FieldOption') {
@@ -332,10 +334,10 @@ FieldUpdater.prototype.getJSONObject = function() {
 
 //FieldOption
     var FieldOption = function (options, parent) {
-        Element.call(this, options);
+        PMSE.Element.call(this, options);
         /**
-         * Defines the parent Form
-         * @type {Form}
+         * Defines the parent PMSE.Form
+         * @type {PMSE.Form}
          */
         this.parent = null;
         this.active = null;
@@ -353,7 +355,7 @@ FieldUpdater.prototype.getJSONObject = function() {
         FieldOption.prototype.initObject.call(this, options, parent);
     };
 
-    FieldOption.prototype = new Element();
+    FieldOption.prototype = new PMSE.Element();
     FieldOption.prototype.type = 'FieldOption';
 
     FieldOption.prototype.initObject = function (options, parent) {
@@ -467,7 +469,7 @@ FieldUpdater.prototype.getJSONObject = function() {
             readAtt,
             disabledValue, 
             span;
-        Element.prototype.createHTML.call(this);
+        PMSE.Element.prototype.createHTML.call(this);
         this.style.removeProperties(['width', 'height', 'position', 'top', 'left', 'z-index']);
         this.style.width = '100%';
         this.style.addClasses(['row']);

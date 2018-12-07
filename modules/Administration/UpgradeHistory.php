@@ -159,8 +159,9 @@ class UpgradeHistory extends SugarBean
             //or the unique_keys do not match
             $patch_to_check_backup_path    = clean_path(remove_file_extension(from_html($patch_to_check->filename))).'-restore';
             $more_recent_patch_backup_path = clean_path(remove_file_extension(from_html($more_recent_patch->filename))).'-restore';
-            $patch_to_check_timestamp = TimeDate::getInstance()->fromUser($patch_to_check->date_entered)->getTimestamp();
-            $more_resent_patch_timestamp = TimeDate::getInstance()->fromUser($more_recent_patch->date_entered)->getTimestamp();
+            $patch_to_check_timestamp = TimeDate::getInstance()->fromDb($patch_to_check->date_entered)->getTimestamp();
+            $more_resent_patch_timestamp =
+                TimeDate::getInstance()->fromDb($more_recent_patch->date_entered)->getTimestamp();
             if (
             ($more_resent_patch_timestamp >= $patch_to_check_timestamp)
             && $this->foundConflict($patch_to_check_backup_path, $more_recent_patch_backup_path)

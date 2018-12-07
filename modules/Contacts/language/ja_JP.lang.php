@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => '連絡先リストのダッシュ ボード',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => '連絡先レコードのダッシュ ボード',
+
     'LNK_CONTACT_REPORTS' => '取引先担当者レポート',
     'ERR_DELETE_RECORD' => '取引先担当者を削除するにはレコード番号を指定する必要があります。',
     'LBL_ACCOUNT_ID' => '取引先ID:',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => '別の住所を主となる住所にコピー',
     'NTC_COPY_PRIMARY_ADDRESS' => '主となる住所を別の住所にコピー',
     'NTC_DELETE_CONFIRMATION' => '本当にこのレコードを削除してよいですか？',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '商談の作成には取引先が必要です。\n 取引先を新しく作るか、既存の取引先を選択してください。',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '商談の作成には取引先が必要です。\\n 取引先を新しく作るか、既存の取引先を選択してください。',
     'NTC_REMOVE_CONFIRMATION' => '本当にこの取引先担当者をケースからはずしてよいですか？',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '本当にこの報告先をはずしてよいですか？',
 
@@ -267,4 +271,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'リードソース',
 
     'LBL_FILTER_CONTACTS_REPORTS' => '取引先担当者のレポート',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '以下のことに同意したビジネス目的:',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '最後に更新された同意',
 );

@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Du skal angive et postnummer for at slette producenten.',
   'NTC_STATUS' => 'Angiv status til Inaktiv for at fjerne denne producent fra rullelisterne med producenter',
   'NTC_LIST_ORDER' => 'Angiv den rækkefølge, som denne producent vises i på rullelisterne med producenter',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Inaktiv',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Importér producenter',
 	'LBL_EDITLAYOUT' => 'Rediger layout' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Omsætningsposter',

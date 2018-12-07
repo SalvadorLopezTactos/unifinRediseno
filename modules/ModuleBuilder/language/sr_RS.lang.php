@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Da li ste sigurni da želite da obrišete ovu vezu?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Ova veza će postati trajna. Da li ste sigurni da želite da rasporedite ovu vezu?',
 'LBL_CONFIRM_DONT_SAVE' => 'Da li želite da sačuvate promene koje su nastale nakon poslednjeg čuvanja?',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Konfiguriši polje tako da se tekst u potpunosti može pretražiti.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Uvećanje je postupak povećanja relevantnosti polja zapisa.<br />Polja sa višim nivoom uvećanja imaće značajnu prednost kada se obavlja pretraga. Kada se obavlja pretraga, uparivi zapisi koji sadrže polja sa većom težinom pojaviće se među prvima u rezultatima pretrage.<br />Podrazumevana vrednost je 1,0 koja predstavlja neutralno uvećanje. Da biste primenili pozitivno uvećanje prihvata se svaka lebdeća vrednost koja je veća od 1. Za upotrebu negativnog uvećanja koristite vrednosti manje od 1. Na primer, vrednost od 1,35 će pozitivno uvećati polje za 135%. Upotrebom vrednosti od 0,60 primeniće se negativno uvećanje.<br />Zapamtite da je u prethodnim verzijama bilo neophodno da se obavi reindeksiranje pune pretrage teksta. Ovo više nije potrebno.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Da</b>: Polje će biti uključeno u operaciju uvoza.<br><b>Ne</b>: Polje neće biti uključeno u uvoz.<br><b>Zahtevano</b>: Vrednost polja mora biti uneta pri svakom uvozu.',
+'LBL_POPHELP_PII'=>'Ovo polje će biti automatski označeno za nadzor i biće dostupno u prikazu Lične informacije.<br>Polja za Lične informacije takođe mogu trajno da se izbrišu kada je zapis povezan sa zahtevom za brisanje Privatnosti podataka.<br>Brisanje se vrši putem modula Privatnost podataka i mogu ga izvršiti administratori ili korisnici u ulozi Menadžer privatnosti podataka.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Unesite broj za širinu, merenu u pikselima.<br> Učitana slika će biti smanjena prema ovoj širini.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Unesite broj za visinu, merenu u pikselima.<br> Učitana slika će biti smanjena prema ovoj visini.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

@@ -19,7 +19,7 @@ $viewdefs['Contacts']['base']['view']['subpanel-for-accounts'] = array(
       'fields' =>
       array(
         array(
-            'name' => 'full_name',
+            'name' => 'name',
             'type' => 'fullname',
             'fields' => array(
                 'salutation',

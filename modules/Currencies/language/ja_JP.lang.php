@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'タスク作成',
   'NTC_DELETE_CONFIRMATION' => '本当にこのレコードを削除してよいですか？ この通貨を用いていたデータはシステムデフォルトの通貨に変換されます。ステータスを非アクティブにする方法を推奨します。',
   'LBL_BELOW_MIN' => '換算レートは0以上である必要があります。',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'アクティブ',
-    'Inactive' => '非アクティブ',
-  ),
   'LBL_CREATED_BY' => '作成者',
   'LBL_EDIT_LAYOUT' => 'レイアウト編集' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => '管理者のみ',
+  'LBL_CURRENCY_DEFAULT' => '米ドル (デフォルト)',
+
 );
 ?>

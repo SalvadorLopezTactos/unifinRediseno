@@ -8,7 +8,7 @@ This is an example of a config that can be used in a sidecar application.
      * Application configuration.
      */
     app.augment('config', {
-    
+
         /**
          * Application identifier.
          * @type {string}
@@ -28,22 +28,19 @@ This is an example of a config that can be used in a sidecar application.
         debugSugarApi: true,
 
         /**
-         * Logging level.
-         * @type {Object} [logger.level=Utils.Logger.Levels.DEBUG]
+         * Logger configuration.
+         * @type {Object} logger
+         * @property {string} logger.level The logger level
+         * @property {string} logger.formatter The formatter to use. Defaults to
+         *   `SimpleFormatter`.
+         * @property {string} logger.consoleWriter The writer to use for the client
+         *   side. Defaults to `ConsoleWriter`.
+         * @property {string} logger.serverWriter The writer to use for the server
+         *  side. Defaults to `ServerWriter`.
          */
-        logger: {level: 'DEBUG'},
-
-        /**
-         * Logging writer.
-         * @type [logWrtiter=Utils.Logger.ConsoleWriter]
-         */
-        logWriter: 'ConsoleWriter',
-
-        /**
-         * Logging formatter.
-         * @type [logFormatter=Utils.Logger.SimpleFormatter]
-         */
-        logFormatter: 'SimpleFormatter',
+        logger: {
+            level: 'DEBUG',
+        },
 
         /**
          * Sugar REST server URL.
@@ -263,7 +260,7 @@ This is an example of a config that can be used in a sidecar application.
              * Defines configuration for the 'static' data pre-fetching.
              */
             prefetch: {
-            
+
                 /**
                  * Flag indicating if prefetching is enabled during app.sync.
                  */
@@ -324,12 +321,12 @@ This is an example of a config that can be used in a sidecar application.
              * Synchronization configuration.
              */
             syncManager: {
-            
+
                 /**
                  * Flag indicating if synchronization is enabled.
                  */
                 enabled: true,
-                
+
                 /**
                  * Period of synchronization iteration (seconds).
                  */
@@ -370,7 +367,7 @@ This is an example of a config that can be used in a sidecar application.
                          */
                         preSyncPageSize: 20,
                     },
-                    
+
                     /**
                      * Transaction Log synchronization.
                      */

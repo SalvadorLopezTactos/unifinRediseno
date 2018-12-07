@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Ülesannete loendi töölaud',
+
   'LBL_MODULE_NAME' => 'Ülesanded',
   'LBL_MODULE_NAME_SINGULAR' => 'Ülesanne',
   'LBL_TASK' => 'Ülesanded:',

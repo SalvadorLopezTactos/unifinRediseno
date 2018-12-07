@@ -16,7 +16,7 @@ $mod_strings = array (
     'LBL_BASE_MODULE' => 'מודול מטרה',
 
     'LBL_MODULE_TITLE' => 'תבניות מייל תהליך',
-    'LBL_MODULE_NAME' => 'תבניות מייל תהליך',
+    'LBL_MODULE_NAME' => 'תבניות של דוא"ל של תהליכים',
     'LBL_MODULE_NAME_SINGULAR' => 'תבנית מייל תהליך',
 
     'LNK_LIST' => 'צפה בתבניות מייל תהליך',

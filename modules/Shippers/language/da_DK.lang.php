@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Du skal angive et postnummer for at slette afsenderen.',
   'NTC_STATUS' => 'Angiv status til Inaktiv for at fjerne denne speditør fra rullelisterne med speditører',
   'NTC_LIST_ORDER' => 'Angiv den rækkefølge, som denne speditør vises i på rullelisterne med speditører',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Inaktiv',
-),
-	'LBL_EDITLAYOUT' => 'Rediger layout' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Rediger layout' /*for 508 compliance fix*/,
 );
-
 
 ?>

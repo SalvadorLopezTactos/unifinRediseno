@@ -1284,6 +1284,7 @@ if (typeof(ModuleBuilder) == 'undefined') {
 			ModuleBuilder.requestElements.url = cUrl;
 			ModuleBuilder.requestElements.callbacks = {success: callback, failure: ModuleBuilder.failed};
 
+
             if (typeof(showLoading) == 'undefined' || showLoading == true) {
                 ajaxStatus.showStatus(SUGAR.language.get('app_strings', 'LBL_LOADING_PAGE'));
             }
@@ -1587,6 +1588,19 @@ if (typeof(ModuleBuilder) == 'undefined') {
             if (rel)
                 tmpElem.rel = rel;
             headElem.appendChild(tmpElem);
+        },
+        enforceAuditPii: function() {
+            var piiCheckBox = document.getElementById("piiCheckbox");
+            var auditCheckBox = document.getElementById("auditedCheckbox");
+            if (piiCheckBox && auditCheckBox) {
+                if (piiCheckBox.checked) {
+                    auditCheckBox.checked = true;
+                    auditCheckBox.disabled = true;
+                    auditCheckBox.value = 1;
+                } else {
+                    auditCheckBox.disabled = false;
+                }
+            }
         }
         ,switchLayoutRole: function(element) {
             var $select = $(element);

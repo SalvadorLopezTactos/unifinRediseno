@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plusサーバ',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'サブパネルで表示するページごとのアイテム数',
 	'LOG_MEMORY_USAGE'=>'メモリ使用状況のログ',
-	'LOG_SLOW_QUERIES'=>'遅延クエリのログ',
+    'LOG_SLOW_QUERIES' => '遅延クエリのログ',
     'LOCK_HOMEPAGE_HELP'=>'この設定は以下を非許可にします。<BR> 1) ホームで新規ホームページとダッシュレットを追加 <BR>2) ドラッグアンドドロップによるホームのダッシュレットの配置のカスタマイズ',
     'CURRENT_LOGO'=>'現在のロゴ',
     'CURRENT_LOGO_HELP'=>'このロゴはSugarアプリケーションのフッタの左端に表示されます。',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'この名称はブラウザのタイトルバーに表示されます。',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => '関連（またはリンク）する取引先からのメールの、Eメールサブパネルにおける表示を設定',
 
-    'LBL_OC_STATUS'                     => 'デフォルトのオフラインクライアントステータス',
-    'DEFAULT_OC_STATUS'                 => 'デフォルトでオフラインクライアントを有効化',
-    'LBL_OC_STATUS_DESC' => 'オフラインクライアントへのアクセスをユーザに許可する場合はここをクリックします。この設定が無効の場合、ユーザごとに設定を行う必要があります。',
     'SESSION_TIMEOUT' => 'ポータルセッションタイムアウト(秒)',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'セッションタイムアウト値はバージョン6.5以前のポータル向けの設定です。',
     'UPLOAD_MAXSIZE_UNITS' => 'バイト',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAMLログインURLは空白であってはなりません',
     'ERR_EMPTY_SAML_CERT' => 'SAML認証は空白であってはなりません',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML エンティティ ID を空にすることはできません。',
     'ERR_SAML_LOGIN_URL' => 'SAMLログインURLが有効ではありません',
     'ERR_SAML_SLO_URL' => 'SAML SLO URLが有効ではありません',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM ファイルは、秘密キーを含める必要があります。',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM ファイルは x.509 証明書を含める必要があります。',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => '提供された x.509 証明書は、秘密キーと一致しません。',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'アクティビティストリーム',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'アクティビティストリームを有効にする',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'アプリケーション用のアクティビティストリームをオンにする',
 );
 
 

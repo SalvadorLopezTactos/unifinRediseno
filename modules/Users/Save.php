@@ -10,21 +10,22 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-/**
- * Verifies the given user's data, sends the result as JSON, and then exits
- * @param User $user The user whose data you want to verify
- */
-function verifyAndCleanup($user)
-{
-    $status = $user->verify_data();
-    $data = array(
-        'status' => $status,
-        'error_string' => $user->error_string
-    );
-    header('Content-Type: application/json');
-    echo json_encode($data);
-    sugar_cleanup(true);
+if (!function_exists('verifyAndCleanup')) {
+    /**
+     * Verifies the given user's data, sends the result as JSON, and then exits
+     * @param User $user The user whose data you want to verify
+     */
+    function verifyAndCleanup($user)
+    {
+        $status = $user->verify_data();
+        $data = array(
+            'status' => $status,
+            'error_string' => $user->error_string,
+        );
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        sugar_cleanup(true);
+    }
 }
 
 $display_tabs_def = isset($_REQUEST['display_tabs_def']) ? html_entity_decode($_REQUEST['display_tabs_def']) : '';
@@ -480,8 +481,15 @@ if (!$focus->verify_data()) {
         $userOverrideOE = $sysOutboundAccunt->getUsersMailerForSystemOverride($focus->id);
         if ($userOverrideOE != null) {
             // User is allowed to clear username and pass so no need to check for blanks.
-            $userOverrideOE->mail_smtpuser = $_REQUEST['mail_smtpuser'];
-            $userOverrideOE->mail_smtppass = $_REQUEST['mail_smtppass'];
+            if (isset($_REQUEST['mail_smtpuser'])) {
+                $userOverrideOE->mail_smtpuser = $_REQUEST['mail_smtpuser'];
+            }
+
+            if (isset($_REQUEST['mail_smtppass'])) {
+                $userOverrideOE->mail_smtppass = $_REQUEST['mail_smtppass'];
+            }
+
+            $userOverrideOE->populateFromUser($focus);
             $userOverrideOE->save();
         } else {
             // If a user name and password for the mail account is set, create the users override account.

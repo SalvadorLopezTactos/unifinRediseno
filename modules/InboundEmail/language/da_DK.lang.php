@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'SV:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Brugernavn eller adgangskode er forkert',
-	'ERR_BODY_TOO_LONG'		=> '\rBrødteksten er for lang til at fange hele e-mailen. Trimmes.',
+	'ERR_BODY_TOO_LONG'		=> '\\rBrødteksten er for lang til at fange hele e-mailen. Trimmes.',
 	'ERR_INI_ZLIB'			=> '"Zlib-komprimeringen kunne ikke slukkes midlertidigt. ""Testindstillinger"" kan fejle."',
 	'ERR_MAILBOX_FAIL'		=> 'Ingen e-mail-konti kunne hentes.',
 	'ERR_NO_IMAP'			=> 'Ingen IMAP-biblioteker blev fundet. Løs dette problem, før du fortsætter med Indgående e-mail',

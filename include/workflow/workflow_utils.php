@@ -216,6 +216,9 @@ function translate_label($label_tag){
 function write_workflow(& $workflow_object){
 	global $beanlist;
 	$module = $workflow_object->base_module;
+    if (!\BeanFactory::getBeanClass($module)) {
+        throw new \RuntimeException(sprintf('Invalid module %s', $module));
+    }
 
 		$file = "modules/".$module . '/workflow/workflow.php';
 		$file = create_custom_directory($file);
@@ -247,7 +250,6 @@ include_once("include/workflow/custom_utils.php");
 
 		fwrite($fp, "\n?>");
 		fclose($fp);
-        SugarAutoLoader::addToMap($file);
 //end function write_triggers
 }
 

@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => 'Vymazaný',
   'LBL_EMAIL_ADDRESS'=>'Emailová adresa',
   'LBL_CONTACTS_SYNC' => 'Kontakty',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        'Zamestnanec môže byť vytvorený iba v <a href="{0}" target="_blank">konzole Cloud console</a> pre režim IDM.',
 );
 
 

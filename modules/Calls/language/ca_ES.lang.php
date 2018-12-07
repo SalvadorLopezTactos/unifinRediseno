@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Quadre de comandament del llistat de trucades',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Quadre de comandament del registre de trucades',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Trucades',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Trucada',

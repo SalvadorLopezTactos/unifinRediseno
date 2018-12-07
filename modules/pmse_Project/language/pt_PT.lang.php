@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Definições do Processo',
   'LBL_MODULE_TITLE' => 'Definições do Processo',
   'LBL_MODULE_NAME_SINGULAR' => 'Definição do Processo',
@@ -47,7 +46,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Existem processos ativos em execução nesta Definição de processo. A atualização poderia ter impacto nesses processos. Ainda pretende editar esta Definição de processo?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Existem processos ativos em execução nesta Definição de processo. A atualização poderia ter impacto nesses processos. Ainda pretende desativar esta Definição de processo?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Criar automaticamente um novo registo Definições do Processo importando um arquivo *.bpm a partir do seu sistema de arquivos.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Criar automaticamente um novo registo Definições do Processo importando um ficheiro *.bpm a partir do seu sistema de ficheiros.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'A Definição do Processo foi importado com êxito para o sistema.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Selecione um ficheiro *.bpm válido.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'A Definição de processo foi importada mas contém uma ou mais ações de Regras empresariais para as quais as regras empresariais não foram selecionadas.',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'não é igual é',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'não é',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'diferente de',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Tempo de execução',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Adicionar',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Fechar',

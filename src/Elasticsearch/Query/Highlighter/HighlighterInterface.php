@@ -24,11 +24,4 @@ interface HighlighterInterface
      * @return array
      */
     public function build();
-
-    /**
-     * Parse highlighter results
-     * @param array $highlights
-     * @return array
-     */
-    public function parseResults(array $highlights);
 }

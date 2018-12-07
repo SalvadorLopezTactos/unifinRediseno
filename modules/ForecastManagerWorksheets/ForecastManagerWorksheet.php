@@ -416,7 +416,7 @@ class ForecastManagerWorksheet extends SugarBean
     protected function _assignQuota($quota, $type, $user_id, $timeperiod_id, $disableActivityStream = false)
     {
         if ($disableActivityStream) {
-            $this->toggleActivityStream(false);
+            Activity::disable();
             $current_quota = $this->getQuota($user_id, $timeperiod_id, $type);
         }
 
@@ -432,7 +432,7 @@ class ForecastManagerWorksheet extends SugarBean
         $new_quota = $this->recalcQuotas($user_id, $timeperiod_id, true);
 
         if ($disableActivityStream) {
-            $this->toggleActivityStream(true);
+            Activity::restoreToPreviousState();
 
             if ($new_quota !== $current_quota->amount) {
                 $args = array(
@@ -978,19 +978,5 @@ class ForecastManagerWorksheet extends SugarBean
     {
         SugarAutoLoader::load('modules/ActivityStream/Activities/ActivityQueueManager.php');
         return new ActivityQueueManager();
-    }
-
-    /**
-     * Utility method to handle enabling and disabling of the Activity Stream
-     *
-     * @param bool|true $enable
-     */
-    protected function toggleActivityStream($enable = true)
-    {
-        if ($enable === true) {
-            Activity::enable();
-        } else {
-            Activity::disable();
-        }
     }
 }

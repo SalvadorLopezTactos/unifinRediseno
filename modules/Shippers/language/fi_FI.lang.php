@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa toimittajan.',
   'NTC_STATUS' => 'Aseta statukseksi Epäaktiivinen poistaaksesi tämän toimittajan Toimituksen tarjoajat -pudotusvalikoista',
   'NTC_LIST_ORDER' => 'Aseta järjestys, jossa tämä toimituksen tarjoaja näkyy Toimituksen tarjoajat -pudotusvalikoissa',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Aktiivinen',
-    'Inactive' => 'Epäaktiivinen',
-),
-	'LBL_EDITLAYOUT' => 'Muokkaa asettelua' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Muokkaa asettelua' /*for 508 compliance fix*/,
 );
-
 
 ?>

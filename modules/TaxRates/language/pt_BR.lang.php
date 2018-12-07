@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Um número de registro deverá ser especificado para eliminar esta taxa de imposto.',
   'NTC_STATUS' => 'Defina o status como Inativo para remover esta taxa de câmbio da lista de entradas possíveis do campo Taxa de Imposto',
   'NTC_LIST_ORDER' => 'Indique a ordem pela qual pretende que esta taxa de câmbio apareça na lista de entradas possíveis do campo Taxa de Imposto',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Ativo',
-    'Inactive' => 'Inativo',
-  ),
   'LBL_EDITLAYOUT' => 'Editar Layout' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Criado por Id',
   'LBL_MODIFIED_ID'=>'Modificado por Id',

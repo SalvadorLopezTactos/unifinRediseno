@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Tarjoukset (Toimitusosoite)',
 	'LNK_ACCOUNT_REPORTS' => 'Näytä asiakasraportit',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentit',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Asiakasluettelon työpöytä',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Asiakastietueiden työpöytä',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Kaaviot',
 	'LBL_DEFAULT' => 'Näkymät',

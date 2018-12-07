@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Вибрати' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Очистити' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Тип',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Шаблони для Email-повідомлень',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Шаблони повідомлень електронної пошти',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Змінні',
 );

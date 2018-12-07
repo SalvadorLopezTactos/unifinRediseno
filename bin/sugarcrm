@@ -13,6 +13,9 @@
 
 use Sugarcrm\Sugarcrm\Console\Application;
 use Sugarcrm\Sugarcrm\Console\CommandRegistry\CommandRegistry;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\Security\Context;
+use Sugarcrm\Sugarcrm\Security\Subject\Cli;
 
 if (PHP_SAPI !== 'cli') {
     die('This command can only be invoked from the command line.' . PHP_EOL);
@@ -48,6 +51,11 @@ if (!empty($sugar_config['dbconfig']['db_name'])) {
     define('ENTRY_POINT_TYPE', 'api');
     require_once 'include/entryPoint.php';
     $GLOBALS['current_user']->getSystemUser();
+
+    $context = Container::getInstance()->get(Context::class);
+    $subject = new Cli();
+    $context->activateSubject($subject);
+
     $mode = CommandRegistry::MODE_INSTANCE;
 } else {
     define('SUGAR_BASE_DIR', $sugarBaseDir);
@@ -61,5 +69,10 @@ if ($extension = SugarAutoLoader::loadExtension('console')) {
     require $extension;
 }
 
-// execute console application
-Application::create($mode)->run();
+$application = Application::create($mode);
+$application->setAutoExit(false);
+$exitCode = $application->run();
+
+if (isset($context, $subject)) {
+    $context->deactivateSubject($subject);
+}

@@ -89,7 +89,7 @@
     },
 
 
-    initButtons: function() {
+    _initButtons: function() {
 
         if (this.options.meta && this.options.meta.buttons) {
             _.each(this.options.meta.buttons, function(button) {

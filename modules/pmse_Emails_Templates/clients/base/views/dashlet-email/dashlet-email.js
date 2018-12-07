@@ -33,7 +33,7 @@
     initialize: function(options) {
         options.meta = options.meta || {};
         options.meta.template = 'tabbed-dashlet';
-        
+
         this.plugins = _.union(this.plugins, [
             'LinkedModel'
         ]);
@@ -44,7 +44,7 @@
     /**
      * @inheritdoc
      */
-    _initEvents: function () {
+    _initEvents: function() {
         this._super('_initEvents');
         this.on('dashlet-email:edit:fire', this.editRecord, this);
         this.on('dashlet-email:delete-record:fire', this.deleteRecord, this);
@@ -71,45 +71,71 @@
      * Fire dessigner
      */
     editRecord: function(model) {
-        var redirect = model.module + "/" + model.id + "/layout/emailtemplates";
         var verifyURL = app.api.buildURL(
                 'pmse_Project',
                 'verify',
                 {id: model.get('id')},
-                {baseModule: this.module}),
-            self = this;
+                {baseModule: this.module});
+        this._modelToEdit = model;
         app.api.call('read', verifyURL, null, {
-            success: function(data) {
-                if (!data) {
-                    app.router.navigate(redirect, {trigger: true, replace: true });
-                } else {
-                    app.alert.show('email-templates-edit-confirmation',  {
-                        level: 'confirmation',
-                        messages: App.lang.get('LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT', model.module),
-                        onConfirm: function () {
-                            app.router.navigate(redirect, {trigger: true, replace: true });
-                        },
-                        onCancel: $.noop
-                    });
-                }
-            }
+            success: _.bind(this._onEditRecordVerify, this)
         });
+    },
+
+    /**
+     * Callback after checking if the template to be edited is already in use.
+     *
+     * @param {boolean} data: True if the template is being used (e.g. in a process), false otherwise.
+     *
+     * @private
+     */
+    _onEditRecordVerify: function(data) {
+        var model = this._modelToEdit;
+        var redirect = model.module + '/' + model.id + '/layout/emailtemplates';
+        if (!data) {
+            app.router.navigate(redirect, {trigger: true, replace: true});
+        } else {
+            app.alert.show('email-templates-edit-confirmation',  {
+                level: 'confirmation',
+                messages: app.lang.get('LBL_PMSE_PROCESS_EMAIL_TEMPLATES_EDIT', model.module),
+                onConfirm: _.bind(this._onWarnEditActiveRecordConfirm, this, redirect),
+                onCancel: _.bind(this._onWarnEditActiveRecordCancel, this)
+            });
+        }
+    },
+
+    /**
+     * onConfirm callback for edit record warning.
+     * @param {string} redirect: The redirect location made in the _onEditRecordVerify call that lead to this.
+     *
+     * @private
+     */
+    _onWarnEditActiveRecordConfirm: function(redirect) {
+        app.router.navigate(redirect, {trigger: true, replace: true});
+        this._modelToEdit = null;
+    },
+
+    /**
+     * onCancel callback for edit record warning.
+     *
+     * @private
+     */
+    _onWarnEditActiveRecordCancel: function() {
+        this._modelToEdit = null;
     },
 
     /**
      * Show warning of pmse_email_templates
      */
-    warnExportEmailsTemplates: function (model) {
+    warnExportEmailsTemplates: function(model) {
         var that = this;
-        if (app.cache.get("show_emailtpl_export_warning")) {
+        if (app.cache.get('show_emailtpl_export_warning')) {
             app.alert.show('emailtpl-export-confirmation', {
                 level: 'confirmation',
-                messages: app.lang.get('LBL_PMSE_IMPORT_EXPORT_WARNING') + "<br/><br/>"
-                + app.lang.get("LBL_PMSE_EXPORT_CONFIRMATION"),
-                onConfirm: function () {
-                    app.cache.set('show_emailtpl_export_warning', false);
-                    that.exportEmailsTemplates(model);
-                },
+                messages: app.lang.get('LBL_PMSE_IMPORT_EXPORT_WARNING') +
+                '<br/><br/>' + app.lang.get('LBL_PMSE_EXPORT_CONFIRMATION'),
+                //model is passed to _.bind to pass it as a parameter to _onWarnExportEmailsTemplatesConfirm
+                onConfirm: _.bind(this._onWarnExportEmailsTemplatesConfirm, this, model),
                 onCancel: $.noop
             });
         } else {
@@ -117,9 +143,21 @@
         }
     },
     /**
+     * onConfirm callback for warnExportEmailsTemplates call.
+     * Set the cache so the warning isn't sent again and start the download.
+     *
+     * @param {Object} model: The model passed to the warnExportsEmailsTemplates call
+     *
+     * @private
+     */
+    _onWarnExportEmailsTemplatesConfirm: function(model) {
+        app.cache.set('show_emailtpl_export_warning', false);
+        this.exportEmailsTemplates(model);
+    },
+    /**
      * Download record of table pmse_emails_templates
      */
-    exportEmailsTemplates: function (model) {
+    exportEmailsTemplates: function(model) {
         var url = app.api.buildURL(model.module, 'etemplate', {id: model.id}, {platform: app.config.platform});
 
         if (_.isEmpty(url)) {
@@ -128,11 +166,18 @@
         }
 
         app.api.fileDownload(url, {
-            error: function(data) {
-                // refresh token if it has expired
-                app.error.handleHttpError(data, {});
-            }
+            error: this._onExportEmailsTemplatesDownloadError
         }, {iframe: this.$el});
+    },
+    /**
+     * error callback for exportEmailsTemplates fileDownload call.
+     * @param {Object} data: The data from the api call
+     *
+     * @private
+     */
+    _onExportEmailsTemplatesDownloadError: function(data) {
+        // refresh token if it has expired
+        app.error.handleHttpError(data, {});
     },
 
     /**
@@ -143,21 +188,6 @@
      */
     _initTabs: function() {
         this._super('_initTabs');
-
-        // FIXME: since there's no way to do this metadata driven (at the
-        // moment) and for the sake of simplicity only filters with 'date_due'
-        // value 'today' are replaced by today's date
-        var today = new Date();
-        today.setHours(23, 59, 59);
-        today.toISOString();
-
-//        _.each(_.pluck(_.pluck(this.tabs, 'filters'), 'date_due'), function(filter) {
-//            _.each(filter, function(value, operator) {
-//                if (value === 'today') {
-//                    filter[operator] = today;
-//                }
-//            });
-//        });
     },
 
     /**
@@ -178,26 +208,35 @@
                     create: true,
                     module: params.module
                 }
-            }, function(context, model) {
-                if (!model) {
-                    return;
-                }
-                self.context.resetLoadFlag();
-                self.context.set('skipFetch', false);
-                if (_.isFunction(self.loadData)) {
-                    self.loadData();
-                } else {
-                    self.context.loadData();
-                }
-            });
+            }, _.bind(self._onCreateRecordDrawerClose, self));
         }
 
     },
+    /**
+     * Callback used by the createRecord call to app.drawer.open
+     *
+     * @param {Object} context: Something that app.drawer.open calls this with
+     * @param {Object} model: Model of the created record. Will be falsy if user cancels.
+     *
+     * @private
+     */
+    _onCreateRecordDrawerClose: function(context, model) {
+        if (!model) {
+            return;
+        }
+        this.context.resetLoadFlag();
+        this.context.set('skipFetch', false);
+        if (_.isFunction(this.loadData)) {
+            this.loadData();
+        } else {
+            this.context.loadData();
+        }
+    },
 
     importRecord: function(event, params) {
-        App.router.navigate(params.link , {trigger: true, replace: true });
+        app.router.navigate(params.link, {trigger: true, replace: true});
     },
-    
+
     /**
      * Delete record.
      *
@@ -210,69 +249,98 @@
                 'pmse_Project',
                 'verify',
                 {id: model.get('id')},
-                {baseModule: this.module}),
-            self = this;
+                {baseModule: this.module});
         this._modelToDelete = model;
         app.api.call('read', verifyURL, null, {
-            success: function(data) {
-                if (!data) {
-                    app.alert.show('delete_confirmation', {
-                        level: 'confirmation',
-                        messages: app.utils.formatString(app.lang.get('LBL_PRO_DELETE_CONFIRMATION', model.module)),
-                        onConfirm: function () {
-                            model.destroy({
-                                showAlerts: true,
-                                success: self._getRemoveRecord()
-                            });
-                        },
-                        onCancel: function () {
-                            self._modelToDelete = null;
-                        }
-                    });
-                } else {
-                    app.alert.show('message-id', {
-                        level: 'warning',
-                        title: app.lang.get('LBL_WARNING'),
-                        messages: app.lang.get('LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE', model.module),
-                        autoClose: false
-                    });
-                    self._modelToDelete = null;
-                }
-            }
+            success: _.bind(this._onDeleteRecordVerify, this)
         });
     },
-    
+
     /**
-     * Updating in fields delete removed
-     * @return {Function} complete callback
+     * Callback after api call to verify whether the email template is active in a process.
+     * @param {boolean} data: true if the email template is being used (e.g. in a process), false otherwise.
      * @private
      */
-    _getRemoveRecord: function() {
-        return _.bind(function(model){
-            if (this.disposed) {
-                return;
-            }
-            this.collection.remove(model);
-            this.render();
-            this.context.trigger("tabbed-dashlet:refresh", model.module);
-        }, this);
+    _onDeleteRecordVerify: function(data) {
+        var model = this._modelToDelete;
+        if (!data) { // Is NOT actively in use.
+            app.alert.show('delete_confirmation', {
+                level: 'confirmation',
+                messages: app.utils.formatString(app.lang.get('LBL_PRO_DELETE_CONFIRMATION', model.module)),
+                onConfirm: _.bind(this._onWarnDeleteInactiveRecordConfirm, this),
+                onCancel: _.bind(this._onWarnDeleteInactiveRecordCancel, this)
+            });
+        } else { // Is actively in use, do not allow deletion.
+            app.alert.show('message-id', {
+                level: 'warning',
+                title: app.lang.get('LBL_WARNING'),
+                messages: app.lang.get('LBL_PMSE_PROCESS_EMAIL_TEMPLATES_DELETE', model.module),
+                autoClose: false
+            });
+            this._modelToDelete = null;
+        }
     },
-    
+
+    /**
+     * onConfirm callback for delete record warning.
+     * Called by _onDeleteRecordVerify if the template is not active.
+     *
+     * @private
+     */
+    _onWarnDeleteInactiveRecordConfirm: function() {
+        var model = this._modelToDelete;
+        model.destroy({
+            showAlerts: true,
+            success: _.bind(this._getRemoveRecord, this)
+        });
+    },
+
+    /**
+     * onCancel callback for delete record warning.
+     * Called by _onDeleteRecordVerify if the template is not active.
+     *
+     * @private
+     */
+    _onWarnDeleteInactiveRecordCancel: function() {
+        this._modelToDelete = null;
+    },
+
+    /**
+     * Updating in fields delete removed
+     * @private
+     */
+    _getRemoveRecord: function(model) {
+        if (this.disposed) {
+            return;
+        }
+        this.collection.remove(model);
+        this.render();
+        this.context.trigger('tabbed-dashlet:refresh', model.module);
+    },
+
     /**
      * Method view alert in process with text modify
      * show and hide alert
      */
     _refresh: function(model, status) {
         app.alert.show(model.id + ':refresh', {
-            level:"process",
+            level: 'process',
             title: status,
             autoclose: false
         });
-        return _.bind(function(model){
-            var options = {};
-            this.layout.reloadDashlet(options);
-            app.alert.dismiss(model.id + ':refresh');
-        }, this);
+        return _.bind(this._refreshReturn, this);
+    },
+
+    /**
+     * Function that _refresh returns
+     *
+     * @param {Object} model: The model passed to _refresh
+     * @private
+     */
+    _refreshReturn: function(model) {
+        var options = {};
+        this.layout.reloadDashlet(options);
+        app.alert.dismiss(model.id + ':refresh');
     },
 
     /**
@@ -314,29 +382,26 @@
             return;
         }
 
-        var tab = this.tabs[this.settings.get('activeTab')];
-        
-        if (tab.overdue_badge) {
-            this.overdueBadge = tab.overdue_badge;
-        }
-
-        _.each(this.collection.models, function(model) {
-            var pictureUrl = app.api.buildFileURL({
-                module: 'Users',
-                id: model.get('assigned_user_id'),
-                field: 'picture'
-            });
-            model.set('picture_url', pictureUrl);
-            model.useRelativeTime = this._setRelativeTimeAvailable(model.attributes.date_entered);
-            // Update the triggering module names.
-            var module = model.get('base_module');
-            var label = app.lang.getModString('LBL_MODULE_NAME', module);
-            if (_.isUndefined(label)) {
-                label = module;
-            }
-            model.set('base_module_name', label);
-        }, this);
+        // Render each of the templates.
+        _.each(this.collection.models, this._renderItemHtml, this);
 
         this._super('_renderHtml');
+    },
+
+    /**
+     * Render an individual process emails template in the dashlet. Used by _renderHtml.
+     *
+     * @param {Object} model: The model object of the process emails template.
+     * @private
+     */
+    _renderItemHtml: function(model) {
+        model.useRelativeTime = this._setRelativeTimeAvailable(model.attributes.date_entered);
+        // Update the triggering module names.
+        var module = model.get('base_module');
+        var label = app.lang.getModString('LBL_MODULE_NAME', module);
+        if (_.isUndefined(label)) {
+            label = module;
+        }
+        model.set('base_module_name', label);
     }
 });

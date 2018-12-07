@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Aby usunąć stawkę podatkową, musisz podać numer rekordu.',
   'NTC_STATUS' => 'Ustaw status na Nieaktywny, aby usunąć tę stawkę podatkową z listy rozwijanej',
   'NTC_LIST_ORDER' => 'Ustaw kolejność, w której stawka podatkowa będzie wyświetlana na listach rozwijanych stawek podatkowych',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktywny',
-    'Inactive' => 'Nieaktywny',
-  ),
   'LBL_EDITLAYOUT' => 'Edytuj układ' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Utworzone przez (ID)',
   'LBL_MODIFIED_ID'=>'Zmodyfikowano przez (ID)',

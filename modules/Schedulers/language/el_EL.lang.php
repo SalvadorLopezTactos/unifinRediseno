@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Update KBContent articles.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Άρθρα εγκεκριμένα προς δημοσίευση & Άρθρα ληγμένου KB.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Προγραμματισμένη εργασία στην Advanced Workflow',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Αναδόμηση απομαλοποιημένων δεδομένων ασφαλείας ομάδας',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Διάστημα:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Προγραμματιστής σειράς προτεραιότητας του Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Κατάργηση αρχείων διαγνωστικού εργαλείου',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Κατάργηση προσωρινών αρχείων',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Αναδόμηση απομαλοποιημένων δεδομένων ασφαλείας ομάδας',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '<b>Εκτέλεση Νυχτερινών Μαζικών Emails Εκστρατείας</b>',
 'LBL_ASYNCMASSUPDATE' => 'Εκτέλεση Ασύγχρονων Μαζικών Ενημερώσεων',

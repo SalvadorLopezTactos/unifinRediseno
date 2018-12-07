@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Crea una tasca',
   'NTC_DELETE_CONFIRMATION' => 'Esteu segur que voleu suprimir aquest registre? Tots els registres que facin servir aquesta moneda es convertiran a la moneda per defecte del sistema quan s&#39;hi accedeixi. Seria millor deixar l&#39;estat com a inactiu.',
   'LBL_BELOW_MIN' => 'La ratio de conversió ha de ser major a 0.',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Actiu',
-    'Inactive' => 'Inactiu',
-  ),
   'LBL_CREATED_BY' => 'Creat per',
   'LBL_EDIT_LAYOUT' => 'Editar disseny' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Sólo administradores',
+  'LBL_CURRENCY_DEFAULT' => 'Dòlars dels EUA (per defecte)',
+
 );
 ?>

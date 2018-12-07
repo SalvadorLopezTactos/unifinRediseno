@@ -12,15 +12,15 @@
 --}}
 <div class="tabbable tabs-full {{tabClass}}" data-content="chart">
     <ul id="tab" class="nav nav-tabs">
-        <li class="active"><a class="ellipsis_inline" data-original-title="{{str "LBL_DASHLET_CASESSUMMARY_SUMMARY"}}" data-casessummary-status="Summary" href="#tab-chart" data-toggle="tab">{{str "LBL_DASHLET_CASESSUMMARY_SUMMARY"}}<br><span class="label label-important count nv-fill00">{{total}}</span></a></li>
+        <li class="active"><a class="ellipsis_inline" data-original-title="{{str "LBL_DASHLET_CASESSUMMARY_SUMMARY"}}" data-casessummary-status="Summary" href="#tab-chart" data-toggle="tab">{{str "LBL_DASHLET_CASESSUMMARY_SUMMARY"}}<br><span class="label label-important count sc-fill00">{{total}}</span></a></li>
         {{#each tabData}}
             <li><a class="ellipsis_inline" data-original-title="{{statusLabel}}" data-casessummary-status="{{status}}" href="#tab-{{index}}" data-toggle="tab">{{statusLabel}}<br><span class="label count {{cssClass}}">{{models.length}}</span></a></li>
         {{/each}}
     </ul>
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane active" id="tab-chart">
-            <div id="casesSummaryPie" class="nv-chart nv-chart-cases">
-                <svg id="{{cid}}"></svg>
+            <div id="casesSummaryPie" class="cases-summary-chart sc-chart">
+                <svg class="sucrose" id="{{cid}}"></svg>
             </div>
         </div>
         {{#each tabData}}

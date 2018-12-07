@@ -1368,13 +1368,13 @@ function validateFilterRow(filter, returnObject) {
 		}
  		if ( field.type == 'datetime' || field.type == 'date') {
 			if ( typeof(filter.input_name0) != 'undefined' && typeof(filter.input_name0) != 'array') {
-				var date_match = filter.input_name0.match(date_reg_format);
+                var date_match = filter.input_name0.match(date_reg_format_rpt);
 				if ( date_match != null) {
 					filter.input_name0 = date_match[date_reg_positions['Y']] + "-"+date_match[date_reg_positions['m']] + "-"+date_match[date_reg_positions['d']];
 				}
 			}
 			if ( typeof(filter.input_name1) != 'undefined' && typeof(filter.input_name1) != 'array') {
-				var date_match = filter.input_name1.match(date_reg_format);
+                var date_match = filter.input_name1.match(date_reg_format_rpt);
 				if ( date_match != null) {
 					filter.input_name1 = date_match[date_reg_positions['Y']] + "-"+date_match[date_reg_positions['m']] + "-"+date_match[date_reg_positions['d']];
 				} // if

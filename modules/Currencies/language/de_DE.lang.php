@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Neue Aufgabe',
   'NTC_DELETE_CONFIRMATION' => 'Möchten Sie diesen Datensatz wirklich löschen? Alle Datensätze mit dieser Währung werden zur System-Standardwährung konvertiert, wenn auf diese zugegriffen wird. Es ist möglicherweise besser, den Status auf inaktiv zu setzen.',
   'LBL_BELOW_MIN' => 'Der Wechselkurs muss größer als 0 sein',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Inaktiv',
-  ),
   'LBL_CREATED_BY' => 'Erstellt von:',
   'LBL_EDIT_LAYOUT' => 'Layout bearbeiten' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Zugriff nur für Administratoren',
+  'LBL_CURRENCY_DEFAULT' => 'US-Dollar (Standardeinstellung)',
+
 );
 ?>

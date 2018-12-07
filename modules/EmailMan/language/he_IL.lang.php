@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'לחץ כאן',
 	'TXT_REMOVE_ME'								=> 'To remove yourself from this email list',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Send notification from assigning user&#39;s e-mail address',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'בטל הצטרפות של כתובות דוא"ל חדשות כברירת מחדל',
 
 	'LBL_SECURITY_TITLE'						=> 'הגדרות אבטחה לדואר אלקטרוני',
 	'LBL_SECURITY_DESC'							=> 'בדוק את הבאים אשר לא מורשים באמצעות inboundEmail או מופיעים במודול Emails.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'הרשה למשתמשים להשתמש בחשבון זה עבור דוא"ל יוצא:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'כאשר אפשרות זו נבחרת, כל המשתמשים יוכלו לשלוח הודעות דוא"ל בעזרת אותו חשבון דואר <br>יוצא שנועד לשליחת התראות והודעות מערכת. במידה והאפשרות לא נבחרת, <br>משתמשים עדיין יוכלו להשתמש בשרת הדואר היוצא לאחר שיזינו את פרטי החשבון שלהם.',
     'LBL_FROM_ADDRESS_HELP'                     => 'When enabled, the assigning user\\&#39;s name and email address will be included in the From field of the email. This feature might not work with SMTP servers that do not allow sending from a different email account than the server account.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'בעת הוספה של כתובת דוא"ל חדשה, תבוטל הצטרפותה באופן אוטומטי. לא ניתן לשלוח הודעות דוא"ל במסגרת קמפיינים לכתובות שבוטלה הצטרפותן. שינוי הגדרה זו לא ישפיע על כתובות דוא"ל קיימות.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

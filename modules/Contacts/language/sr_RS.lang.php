@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LISTA_E-MAIL_ADRESA',
     'db_email2' => 'LBL_LISTA_DRUGIH_E-MAIL_ADRESA',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Kontrolna tabla liste kontakata',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa kontakata',
+
     'LNK_CONTACT_REPORTS' => 'Pregled izveštaja sa kontaktima',
     'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da bi obrisali kontakt.',
     'LBL_ACCOUNT_ID' => 'ID broj kompanije:',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiraj alternativnu adresu u primarnu adresu',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiraj primarnu u alternativnu adresu',
     'NTC_DELETE_CONFIRMATION' => 'Da li ste sigurni da želite da obrišete ovaj zapis?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Za kreiranje prodajne prilike neophodna je kompanija.\n Molim, kreirajte novu kompaniju ili odaberite neku postojeću.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Za kreiranje prodajne prilike neophodna je kompanija.\\n Molim, kreirajte novu kompaniju ili odaberite neku postojeću.',
     'NTC_REMOVE_CONFIRMATION' => 'Da li ste sigurni da želite da uklonite ovog kontakta iz slučaja?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Da li ste sigurni da želite da uklonite ovaj zapis kao direktni izveštaj?',
 
@@ -273,4 +277,6 @@ Da bi {{module_name}} bio kreiran:
     'LBL_MKTO_LEAD_SCORE' => 'Vodeći Rezultat',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Izveštaji kontakta',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Pristanak u poslovne svrhe za',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Poslednje ažuriranje pristanka',
 );

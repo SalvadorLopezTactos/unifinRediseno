@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Pulpit listy błędów',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Pulpit rekordów błędów',
+
   'LBL_MODULE_NAME' => 'Błędy',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Błąd',
   'LBL_MODULE_TITLE' => 'Śledzenie błędów: Strona główna',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Zgłoszenia',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projekty',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenty',
-  'LBL_SYSTEM_ID' => 'ID systemu',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Przypisano do',
 	'LBL_ASSIGNED_TO_NAME' => 'Przydzielono do',
 

@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'Odhlásit',
 	'TXT_REMOVE_ME'								=> '<br clear="all" /> <div class="footer"></div> </div> <br clear="all" /><br><DIV id="subcontainer" style="font-size: 10px; text-align: left" >Tento e-mail je v souladu se zákony ČR a Evropské Unie. Nejedná se o "spam", ale o nabídku. Kontakt na Vás byl získán na veřejně přístupném serveru. V případě, že nechcete dále dostávat naše nabídky, klikněte prosím na link na konci věty a tímto se Vám omlouváme za nevyžádané sdělení.',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Odeslat potvrzení z emailu zodpovědného uživatele ?',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Vyřadit nové e-mailové adresy ve výchozím nastavení',
 
 	'LBL_SECURITY_TITLE'						=> 'Bezpečnostní nastavení emailů.',
 	'LBL_SECURITY_DESC'							=> 'Zaklikněte na této obrazovce to, co by NEMĚLO být povoleno pro příchozí poštu a zobrazování  v modulu emaily.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Povolit uživatelům používat tento účet pro odchozí poštu:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Pokud je tato možnost vybrána, budou všichni uživatelé moci posílat e-maily pomocí stejného účtu pro odchozí poštu, což slouží k zasílání upozornění a výstrah systému. Pokud tato možnost není vybrána, mohou uživatelé nadále používat server odchozí pošty nastavený v uživatelském účtu.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Když je povolen, budou přiřazení uživatelé a jejich emailové adresy vloženi do pole Od. Toto nemusí pracovat správně spolu se SMTP servery, které neumožňují zasílání emailů z jiných emailových účtů, než které jsou na serveru.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Po přidání nové e-mailové adresy bude tato adresa automaticky vyřazena. E-maily kampaní nelze doručit na vyřazené adresy. Změna tohoto nastavení neovlivní existující e-mailové adresy.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

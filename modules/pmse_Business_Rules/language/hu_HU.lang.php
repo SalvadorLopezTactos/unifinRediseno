@@ -12,13 +12,12 @@
 
 
 $mod_strings = array (
-
-  'LBL_MODULE_NAME' => 'Üzleti Szabályok feldolgozása',
+  'LBL_MODULE_NAME' => 'Folyamat üzleti szabályai',
   'LBL_MODULE_TITLE' => 'Üzleti Szabályok feldolgozása',
   'LBL_MODULE_NAME_SINGULAR' => 'Üzleti Szabályok feldolgozása',
 
   'LBL_RST_UID' => 'Üzleti Szabályazonosító',
-  'LBL_RST_TYPE' => 'Üzleti Szabálytípus',
+  'LBL_RST_TYPE' => 'Üzleti szabály típusa',
   'LBL_RST_DEFINITION' => 'Üzleti Szabálymeghatározás',
   'LBL_RST_EDITABLE' => 'Üzleti Szabály Szerkeszthető',
   'LBL_RST_SOURCE' => 'Üzleti Szabályforrás',
@@ -28,9 +27,9 @@ $mod_strings = array (
   'LBL_RST_CREATE_DATE' => 'Üzleti Szabály Létrehozási Dátum',
   'LBL_RST_UPDATE_DATE' => 'Üzleti Szabály Aktualizálási Dátum',
 
-    'LNK_LIST' => 'Folyamati Üzleti Szabályok Megtekintése',
+    'LNK_LIST' => 'Folyamati üzleti szabályok megtekintése',
     'LNK_NEW_PMSE_BUSINESS_RULES' => 'Folyamati Üzelti Szabályok létrehozása',
-    'LNK_IMPORT_PMSE_BUSINESS_RULES' => 'Folyamati Üzelti Szabályok importálása',
+    'LNK_IMPORT_PMSE_BUSINESS_RULES' => 'Folyamati üzleti szabályok importálása',
 
     'LBL_PMSE_TITLE_BUSINESS_RULES_BUILDER' => 'Üzleti Szabály Létrehozó',
 
@@ -39,7 +38,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_DELETE' => 'Törlés',
 
     'LBL_PMSE_SAVE_EXIT_BUTTON_LABEL' => 'Mentés és Kilépés',
-    'LBL_PMSE_SAVE_DESIGN_BUTTON_LABEL' => 'Mentés és Tervezés',
+    'LBL_PMSE_SAVE_DESIGN_BUTTON_LABEL' => 'Mentés és tervezés',
     'LBL_PMSE_IMPORT_BUTTON_LABEL' => 'Importálás',
 
     'LBL_PMSE_MY_BUSINESS_RULES' => 'Folyamati Üzleti Szabályaim',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Feltételek',
     'LBL_PMSE_LABEL_RETURN' => 'Vissza',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Összegzések',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Mező módosítása',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Visszaadott érték',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Feltétel hozzáadása',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Következtetés hozzáadása',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Sor hozzáadása',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Oszlop törlése',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Feltétel eltávolítása',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Következtetés eltávolítása',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Oszlopadatok eltávolítása',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Igen',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Nem',

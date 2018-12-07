@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Para obtener una clave de consumidor en LogMeIn, regístrese una nueva aplicación GoToMeeting.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Pasos para registrar su instancia:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Inicie sesión en su cuenta del Centro de Desarrolladores LogMeIn: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Haga clic en Mis aplicaciones</li>
+    <li>Haga clic en Añadir una nueva aplicación</li>
+    <li>Complete todos los campos del formulario de Añadir una aplicación:</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>Nombre de la aplicación</li>
+            <li>Descripción</li>
+            <li>API del producto: seleccione GoToMeeting</li>
+            <li>URL de la aplicación: introduzca la URL de su instancia</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Haga clic en el botón de crear aplicación</li>
+    <li>De la lista de aplicaciones, haga clic en el nombre de su aplicación</li>
+    <li>Haga clic en la pestaña de Claves</li>
+    <li>Copie el valor de la Clave de consumidor e introdúzcalo a continuación</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Clave de Consumidor',
 );

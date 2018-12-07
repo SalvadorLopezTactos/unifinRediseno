@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Pulpit listy pozycji wiersza przychodów',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Pulpit rekordów pozycji wiersza przychodów',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Produkt kampanii',
     'LBL_MODULE_NAME' => 'Pozycje szansy',
     'LBL_MODULE_NAME_SINGULAR' => 'Pozycja szansy',

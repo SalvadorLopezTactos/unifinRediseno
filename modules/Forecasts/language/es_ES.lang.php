@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Panel de previsiones',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Previsiones',
     'LBL_MODULE_NAME_SINGULAR' => 'Previsión',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'ID de Producto',
     'LBL_QUOTA_ID' => 'ID de Cuota',
     'LBL_VERSION' => 'Versión',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Ocultar la barra de leyenda',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Mostrar la barra de leyenda',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Ocultar la línea de leyenda',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Mostrar la línea de leyenda',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Error: el usuario {0} no tiene acceso de gestión a solicitudes de previsiones para {1}',
@@ -260,7 +267,7 @@ $mod_strings = array (
     'LBL_PIPELINE_REVENUE' => 'Ingresos en Pipeline',
     'LBL_PIPELINE_OPPORTUNITIES' => 'Oportunidades en Pipeline',
     'LBL_LOADING' => 'Cargando',
-    'LBL_IN_FORECAST' => 'Incluido en la Previsión',
+    'LBL_IN_FORECAST' => 'Previsto',
 
     // Actions Dropdown
     'LBL_ACTIONS' => 'Acciones',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Fecha de inicio del año fiscal:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Configure el período de tiempo que se utilizará en el módulo de Previsión.<br><br>Tenga en cuenta que la configuración de período de tiempo no se puede cambiar después de la configuración inicial. <br><br>Comience por elegir la Fecha de Inicio de su año fiscal. A continuación, seleccione el tipo de período de tiempo que desea pronosticar. El rango de fechas para los períodos de tiempo se calculará automáticamente en base a sus selecciones. El Subperíodo de tiempo es la base de la hoja de cálculo de Previsión.<br><br>Los períodos de tiempo pasados y futuros visualizables determinarán el número de subperíodos visibles en el módulo de previsión. Los usuarios pueden ver y editar los números de previsión en los subperíodos visibles.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configure cómo quiere categorizar {{forecastByModule}}. <br><br>Tenga en cuenta que los ajustes de rango no se pueden cambiar después de proceder por primera vez. En instancias actualizadas, el ajuste de rango se bloquea con los datos de previsión existentes.<br><br>Podrá seleccionar dos o más categorías en base a los rangos de probabilidad, o crear categorías que no estén basadas en la probabilidad.<br><br>Hay casillas de verificación a la izquierda de sus categorías personalizadas; utilícelas para decidir qué rangos se incluirán en la cantidad prevista entregada y de los que se informará a los responsables.<br><br>Un usuario podrá cambiar manualmente el estado de inclusión/exclusión y la categoría de {{forecastByModule}} desde su hoja de cálculo.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configure como desearía categorizar {{forecastByModule}}. <br><br>Tenga en cuenta que la Configuración de rango no se puede cambiar después de confirmar por primera vez. En las instancias actualizadas, la Configuración de rango se bloquea con los datos de previsión existentes.<br><br>Puede seleccionar dos o más categorías en base a los rangos de probabilidad o crear categorías no basadas en la probabilidad.<br><br>Hay casillas de verificación a la izquierda de sus categorías personalizadas; utilícelas para decidir qué rangos se incluirán en la cantidad de la Previsión que se ha enviado y notificado a los administradores.<br><br>Los usuarios pueden cambiar manualmente el estado de inclusión/exclusión y la categoría de {{forecastByModule}} desde su hoja de cálculo.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Seleccione las columnas que desea que el usuario rellene con sus previsiones de cada {{forecastByModuleSingular}}. Tenga en cuenta que la cantidad Probable está ligada a la cantidad indicada en {{forecastByModule}}; por esta razón la columna Probable no puede ocultarse.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Seleccione las columnas que desea ver en el módulo de Previsiones. La lista de campos combinará la hoja de trabajo y permitirá al usuario elegir cómo configurar su vista.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Soy un marcador de posición para la guía práctica de Forecast.',

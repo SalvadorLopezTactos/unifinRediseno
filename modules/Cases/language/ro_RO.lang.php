@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Tabloul de bord Listă cazuri',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare cazuri',
+
 	'ERR_DELETE_RECORD'					=> 'Trebuie să specifici un număr de înregistrare pentru a șterge contul.',
 	'LBL_ACCOUNT_ID'					=> 'Identitate Cont',
 	'LBL_ACCOUNT_NAME'					=> 'Numele Contului',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Status:',
     'LBL_SOURCE' => 'Sursa:',
 	'LBL_SUBJECT'						=> 'subiect',
-	'LBL_SYSTEM_ID'						=> 'Identitate sistem',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Nume Cont',
 	'LBL_LIST_ASSIGNED'					=> 'Atribuit Lui:',
 	'LBL_LIST_CLOSE'					=> 'inchis',

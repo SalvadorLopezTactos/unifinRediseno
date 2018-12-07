@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Informačný panel so zoznamom položiek riadkov ponúk',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampaň ocenených položiek krivky',
     'LBL_MODULE_NAME' => 'Quoted Line Items',
     'LBL_MODULE_NAME_SINGULAR' => 'Quoted Line Item',
@@ -172,4 +175,5 @@ To create a {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Zoznam údajov ponúk pre ponúkané položky',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nová ponúkaná položka)',
     'LBL_DISCOUNT_PERCENT' => '% percent',
+    'LBL_DISCOUNT_TYPE' => 'Typ zľavy',
 );

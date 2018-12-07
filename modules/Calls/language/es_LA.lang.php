@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Tablero de Lista de Llamadas',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Tablero de Registro de Llamadas',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Llamadas',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Llamada',
@@ -22,7 +26,7 @@ $mod_strings = array (
     'LBL_LIST_CONTACT' => 'Contacto',
     'LBL_LIST_RELATED_TO' => 'Relacionado con',
     'LBL_LIST_RELATED_TO_ID' => 'Relacionado con ID',
-    'LBL_LIST_DATE' => 'Fecha de Inicio',
+    'LBL_LIST_DATE' => 'Fecha de inicio',
     'LBL_LIST_TIME' => 'Hora de Inicio',
     'LBL_LIST_DURATION' => 'Duración',
     'LBL_LIST_DIRECTION' => 'Dirección',
@@ -44,10 +48,10 @@ $mod_strings = array (
     'LBL_HOURS_ABBREV' => 'h',
     'LBL_MINSS_ABBREV' => 'm',
     'LBL_COLON' => ':',
-    'LNK_NEW_CALL' => 'Registrar Llamada',
+    'LNK_NEW_CALL' => 'Registrar llamada',
     'LNK_NEW_MEETING' => 'Programar Reunión',
     'LNK_CALL_LIST' => 'Ver Llamadas',
-    'LNK_IMPORT_CALLS' => 'Importar Llamadas',
+    'LNK_IMPORT_CALLS' => 'Importar llamadas',
     'ERR_DELETE_RECORD' => 'Debe especificar un número de registro para eliminar la Cuenta.',
     'NTC_REMOVE_INVITEE' => '¿Está seguro de que desea eliminar a este participante de la Llamada?',
     'LBL_INVITEE' => 'Participantes',
@@ -75,7 +79,7 @@ $mod_strings = array (
     'LBL_REMINDER_TIME'=>'Hora de Aviso',
     'LBL_EMAIL_REMINDER_SENT' => 'Recordatorio por correo electrónico enviado',
     'LBL_SEARCH_BUTTON'=> 'Buscar',
-    'LBL_ACTIVITIES_REPORTS' => 'Informe de Actividades',
+    'LBL_ACTIVITIES_REPORTS' => 'Informe de actividades',
     'LBL_ADD_BUTTON'=> 'Agregar',
 	'LBL_DEFAULT_SUBPANEL_TITLE' => 'Llamadas',
     'LBL_LOG_CALL'=> 'Registrar Llamada',
@@ -91,7 +95,7 @@ $mod_strings = array (
     'LBL_HISTORY_SUBPANEL_TITLE' => 'Notas',
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Usuario Asignado',
     'LBL_LIST_MY_CALLS' => 'Mis Llamadas',
-    'LBL_MY_SCHEDULED_CALLS' => 'Mis Llamadas Agendadas',
+    'LBL_MY_SCHEDULED_CALLS' => 'Mis llamadas programadas',
     'LBL_SELECT_FROM_DROPDOWN' => 'Por favor, seleccione antes un elemento de la lista desplegable Relacionado Con.',
 	'LBL_ASSIGNED_TO_NAME' => 'Asignado a',
 	'LBL_ASSIGNED_TO_ID' => 'Usuario Asignado',

@@ -112,6 +112,10 @@ class CalendarApi extends ModuleApi {
         $resultList = $searchResults['result']['list'];
         $records = array();
         foreach ($resultList as $result) {
+            if (!empty($args['erased_fields'])) {
+                $options = ['erased_fields' => true, 'use_cache' => false, 'encode' => false];
+                $result['bean'] = BeanFactory::retrieveBean($result['bean']->module_dir, $result['bean']->id, $options);
+            }
             $record = $this->formatBean($api, $args, $result['bean']);
             $highlighted = $this->getMatchedFields($args, $record, 1);
             $record['_search'] = array(

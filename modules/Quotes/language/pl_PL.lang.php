@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Pulpit listy ofert',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Pulpit listy rekordów',
+
     'LBL_CONTRACTS'=>'Umowy',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Umowy',
     'ERR_DELETE_RECORD' => 'Aby usunąć ofertę, należy podać numer rekordu.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Suma częściowa (USD)',
     'LBL_SUBTOTAL' => 'Suma częściowa:',
     'LBL_TAXABLE_SUBTOTAL' => 'Suma częściowa do opodatkowania',
-    'LBL_SYSTEM_ID' => 'ID systemu',
     'LBL_TAX_USDOLLAR'=>'Podatek (USD)',
     'LBL_TAX' => 'Podatek:',
     'LBL_TAX_TOTAL' => 'Łączna kwota podatku',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Usuń zaznaczone',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Usuń wybrane elementy',
     'LBL_SAVE_LINE_ITEMS' => 'Zapisz wszystkie aktywne pozycje, klikając niebieski znacznik wyboru obok każdej z nich przed zapisaniem tej oferty.',
+    'LBL_COPY_LINE_ITEMS' => 'Zapisz wszystkie aktywne pozycje, klikając niebieski znacznik wyboru obok każdej z nich przed skopiowaniem tej oferty.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Przeszukaj katalog produktów',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Brak dostępnych danych',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Kopiowanie pozycji wysłanej oferty do nowej oferty.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Kopiowanie pozycji wysłanej oferty do nowej oferty. Ten proces może chwilę potrwać.',
 );

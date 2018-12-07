@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'You must specify a record number to delete the tax rate.',
   'NTC_STATUS' => 'Set status to Inactive to remove this tax rate from the Tax Rate dropdown lists',
   'NTC_LIST_ORDER' => 'Set the order in which this tax rate will display in the Tax Rate dropdown lists',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Active',
-    'Inactive' => 'Inactive',
-  ),
   'LBL_EDITLAYOUT' => 'Edit Layout' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Created By Id',
   'LBL_MODIFIED_ID'=>'Modified By Id',

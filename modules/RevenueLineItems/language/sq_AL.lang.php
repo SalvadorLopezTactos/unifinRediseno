@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Paneli i listës së artikujve të linjës së të ardhurave',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të artikujve të linjës së të ardhurave',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Produkti i kampanjës',
     'LBL_MODULE_NAME' => 'Rreshti i llojeve të të ardhurave',
     'LBL_MODULE_NAME_SINGULAR' => 'Rrjeshti i të të ardhurave:',
@@ -21,7 +25,7 @@ $mod_strings = array(
     'LBL_PRODUCT' => 'Produkti',
     'LBL_RELATED_PRODUCTS' => 'Rreshti i të ardhurave të lidhura',
     'LBL_LEAD_SOURCE' => 'Burimi i udhëheqjes',
-    'LBL_LIST_NAME' => 'Rrjeshti i të të ardhurave:',
+    'LBL_LIST_NAME' => 'Artikulli i rreshtit të të ardhurave',
     'LBL_LIST_MANUFACTURER' => 'Prodhuesi',
     'LBL_LIST_LBL_MFT_PART_NUM' => 'Numri i pjesës',
     'LBL_LIST_QUANTITY' => 'Sasia',
@@ -77,7 +81,7 @@ $mod_strings = array(
     'LBL_SUPPORT_CONTACT' => 'Kontakti mbështetës',
     'LBL_PRICING_FORMULA' => 'Formula e çmimit',
     'LBL_ACCOUNT_NAME' => 'Emri i llogarisë:',
-    'LNK_REVENUELINEITEM_LIST' => 'Shiko rreshtin e të ardhurave',
+    'LNK_REVENUELINEITEM_LIST' => 'Shiko artikujt e rreshtit të të ardhurave',
     'LNK_NEW_REVENUELINEITEM' => 'Krijo rrjesht të të ardhurave:',
     'NTC_DELETE_CONFIRMATION' => 'A jeni të sigurtë që dëshironi që të fshini këtë regjistrim?',
     'NTC_REMOVE_CONFIRMATION' => 'A jeni të sigurt që dëshironi të hiqni këtë lidhje të produktit?',
@@ -139,7 +143,7 @@ $mod_strings = array(
     'LBL_EXT_PRICE' => 'Çmimi i pritur',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Emri i simbloit të monedhës',
     'LBL_RLI_SUBPANEL_TITLE' => 'Rreshti i llojeve të të ardhurave',
-    'LNK_IMPORT_REVENUELINEITEMS' => 'Importimi i rreshtave të të ardhurave',
+    'LNK_IMPORT_REVENUELINEITEMS' => 'Importo artikujt e rreshtave të të ardhurave',
     'LBL_EDITLAYOUT' => 'Ndrysho formatin' /*for 508 compliance fix*/,
     //For export labels
     'LBL_EXPORT_CURRENCY_ID' => 'ID e Monedhës',
@@ -190,7 +194,7 @@ Për të krijuar një {{module_name}}:
  - Kliko "Shfaq më shumë" për të shfaqur fusha shtesë nëse është e nevojshme.
 2. Kliko "Ruaj" për të finalizuar regjistrimin e ri dhe për t&#39;u kthyer në faqen e mëparshme.',
 
-    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => '10 rreshtat më të lartë të të ardhurave',
+    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => '10 artikujt e linjës me të ardhura shitjesh më të larta',
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Shfaq dhjetë rreshtat më të lartë në diagram fluskash',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Rrjeshti i të ardhurave të mia',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Rrjeshti i të ardhurave të ekipit tim",

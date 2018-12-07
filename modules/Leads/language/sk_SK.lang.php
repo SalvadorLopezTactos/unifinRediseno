@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Informačný panel so zoznamom záujemcov',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Informačný panel so záznamom záujemcov',
+
     'ERR_DELETE_RECORD' => 'Ak chcete odstrániť tento súbor údajov, musíte zadať číslo záznamu.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Popis účtu',
     'LBL_ACCOUNT_ID'=>'ID účtu',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Čiastka príležitosti:',
     'LBL_OPPORTUNITY_ID'=>'ID príležitosti',
     'LBL_OPPORTUNITY_NAME' => 'Názov príležitosti:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Iný e-mail:',
     'LBL_OTHER_PHONE' => 'Iný telefón:',
     'LBL_PHONE' => 'Telefón:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopírovať alternatívnu adresu do primárnej',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopírovať primárnu adresu do alternatívnej',
     'NTC_DELETE_CONFIRMATION' => 'Naozaj chcete vymazať tento záznam?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Vytvorenie obchodnej príležitosti vyžaduje účet. \n Buď vytvorte nový účet, alebo vyberte existujúci.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Vytvorenie obchodnej príležitosti vyžaduje účet. \\n Buď vytvorte nový účet, alebo vyberte existujúci.',
     'NTC_REMOVE_CONFIRMATION' => 'Naozaj chcete odstrániť tohto záujemcu z prípadu?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Naozaj chcete odstrániť tento záznam z priamych hlásení?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Denník kampane',
@@ -314,4 +320,6 @@ Po potvrdení všetkých povinných a požadovaných modulov kliknite na tlačid
     'LBL_MKTO_LEAD_SCORE' => 'Hodnotenie záujemcu',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Hlásenia záujemcov',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Odsúhlasené podnikateľské účely',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Posledná aktualizácia súhlasu',
 );

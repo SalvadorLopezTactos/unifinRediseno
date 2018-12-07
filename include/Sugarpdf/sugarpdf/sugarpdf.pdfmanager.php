@@ -11,7 +11,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+use Sugarcrm\Sugarcrm\Util\Uuid;
 
 class SugarpdfPdfmanager extends SugarpdfSmarty
 {
@@ -193,6 +193,7 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         //type is draft
         $email_object->type = "draft";
         $email_object->status = "draft";
+        $email_object->state = Email::STATE_DRAFT;
 
         $email_object->to_addrs_ids = $focus->id;
         $email_object->to_addrs_names = $focus->name.";";
@@ -215,6 +216,22 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                 $contact->retrieve($focus->billing_contact_id);
 
                 if(!empty($contact->email1) || !empty($contact->email2)) {
+                    if ($email_object->load_relationship('to')) {
+                        $ep = BeanFactory::newBean('EmailParticipants');
+                        $ep->new_with_id = true;
+                        $ep->id = Uuid::uuid1();
+                        BeanFactory::registerBean($ep);
+                        $ep->parent_type = $contact->getModuleName();
+                        $ep->parent_id = $contact->id;
+                        $ep->email_address = $contact->emailAddress->getPrimaryAddress($contact);
+
+                        if (!empty($ep->email_address)) {
+                            $ep->email_address_id = $contact->emailAddress->getEmailGUID($ep->email_address);
+                        }
+
+                        $email_object->to->add($ep);
+                    };
+
                     //contact email is set
                     $email_object->to_addrs_ids = $focus->billing_contact_id;
                     $email_object->to_addrs_names = $focus->billing_contact_name.";";
@@ -236,6 +253,22 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
                 $acct->retrieve($focus->billing_account_id);
 
                 if(!empty($acct->email1) || !empty($acct->email2)) {
+                    if ($email_object->load_relationship('to')) {
+                        $ep = BeanFactory::newBean('EmailParticipants');
+                        $ep->new_with_id = true;
+                        $ep->id = Uuid::uuid1();
+                        BeanFactory::registerBean($ep);
+                        $ep->parent_type = $acct->getModuleName();
+                        $ep->parent_id = $acct->id;
+                        $ep->email_address = $acct->emailAddress->getPrimaryAddress($acct);
+
+                        if (!empty($ep->email_address)) {
+                            $ep->email_address_id = $acct->emailAddress->getEmailGUID($ep->email_address);
+                        }
+
+                        $email_object->to->add($ep);
+                    };
+
                     //acct email is set
                     $email_object->to_addrs_ids = $focus->billing_account_id;
                     $email_object->to_addrs_names = $focus->billing_account_name.";";
@@ -275,24 +308,24 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
 
         //Handle PDF Attachment
         $note = BeanFactory::newBean("Notes");
+        $note->id = Uuid::uuid1();
+        $note->new_with_id = true;
         $note->filename = $file_name;
-        $note->file_mime_type = $email_object->email2GetMime('upload://'.$file_name);
+        $note->file_mime_type = get_file_mime_type("upload://{$file_name}", 'application/octet-stream');
         $note->name = translate('LBL_EMAIL_ATTACHMENT', "Quotes").$file_name;
 
-        $note->parent_id = $email_object->id;
-        $note->parent_type = $email_object->module_name;
-        
+        $note->email_id = $email_object->id;
+        $note->email_type = $email_object->module_name;
+
         //teams
         $note->team_id = $current_user->getPrivateTeamID();
         $noteTeamSet = BeanFactory::newBean('TeamSets');
         $noteteamIdsArray = array($current_user->getPrivateTeamID());
         $note->team_set_id = $noteTeamSet->addTeams($noteteamIdsArray);
-        
-        $note->save();
-        $note_id = $note->id;
 
+        // Copy the file before saving so that the file size is captured during save.
 	    $source = 'upload://'.$file_name;
-	    $destination = 'upload://'.$note_id;
+        $destination = "upload://{$note->id}";
         
         if (!copy($source, $destination)){
             $msg = str_replace('$destination', $destination, translate('LBL_RENAME_ERROR', "Quotes"));
@@ -300,6 +333,9 @@ class SugarpdfPdfmanager extends SugarpdfSmarty
         }
 
         @unlink($source);
+
+        $note->save();
+        $email_object->attachments->add($note);
 
         //return the email id
         return $email_id;

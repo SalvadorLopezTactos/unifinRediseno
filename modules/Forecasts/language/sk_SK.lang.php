@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Informačný panel s predpoveďami',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Prognózy',
     'LBL_MODULE_NAME_SINGULAR' => 'Prognóza',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'ID produktu',
     'LBL_QUOTA_ID' => 'ID kvóty',
     'LBL_VERSION' => 'Verzia',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Skryť lištu legendy',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Zobraziť lištu legendy',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Skryť riadok legendy',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Zobraziť riadok legendy',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Chyba: používateľ {0} nemá prístup správcu na požadovanie prognóz pre {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Začiatok fiškálneho roku:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Nastavte časové obdobie, ktoré bude použité v module Prognózy.<br><br>Upozorňujeme, že nastavenia časového obdobia po úvodnom nastavení nemožno meniť.<br><br>Začnite výberom dátumu začatia svojho fiškálneho roka. Potom zvoľte typ časového obdobia, ktoré chcete plánovať. Rozsah dát pre časové obdobie bude automaticky vypočítaný na základe vášho výberu. Čiastkové časové obdobie je základom pre prognostickú tabuľku.<br><br>Zobrazením budúcich a minulých časových období sa určí počet viditeľných čiastkových období v module Prognózy. Používatelia môžu zobraziť a upraviť prognostické čísla viditeľných čiastkových období.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Nastavte, ako by ste chceli kategorizovať {{forecastByModule}}. <br><br>Upozorňujeme, že nastavenia rozsahu po prvom schválení nemožno meniť. V prípade inovovaných inštancií je nastavenie rozsahu zamknuté s existujúcimi údajmi prognóz.<br><br>Na základe rozsahov pravdepodobnosti môžete vybrať dve alebo viac kategórií alebo môžete vytvoriť kategórie, ktoré nie sú založené na pravdepodobnosti. <br><br>Naľavo od vlastných kategórií sú začiarkavacie políčka slúžiace na výber rozsahov, ktoré sa zahrnú do sumy schválenej prognózy hlásenej manažérom. <br><br>Používateľ môže v tabuľke manuálne meniť stav zahrnuté/nezahrnuté a kategóriu modulu {{forecastByModule}}.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Nastavte, ako chcete kategorizovať {{forecastByModule}}. <br><br>Upozorňujeme, že nastavenia rozsahu po prvom schválení nemožno meniť. V prípade inovovaných inštancií je nastavenie rozsahu zamknuté s existujúcimi údajmi prognóz.<br><br>Môžete vybrať dve alebo viac kategórií založených na pravdepodobnosti alebo vytvoriť kategórie, ktoré nie sú založené na pravdepodobnosti. <br><br>Naľavo od vašich vlastných kategórií sú začiarkavacie polia, prostredníctvom ktorých môžete určiť rozsahy, ktoré budú zahrnuté v schválenom množstve prognóz a nahlásené manažérom.<br><br>Používateľ môže v tabuľke manuálne meniť stav zahrnuté/nezahrnuté a kategóriu modulu {{forecastByModule}}.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Vyberte stĺpce, ktoré chcete, aby používateľ vyplnil pre svoje prognózy v jednotlivých {{forecastByModuleSingular}}. Upozorňujeme, že pravdepodobné množstvo je viazané na množstvo uvedené v {{forecastByModule}}; z tohto dôvodu stĺpec s pravdepodobnými údajmi nesmie byť skrytý.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Vyberte stĺpce, ktoré chcete zobraziť v module Prognózy. Zoznam polí bude kombinovať tabuľku a umožní používateľovi vybrať si, ako nakonfigurovať svoje zobrazenie.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Som zástupný symbol pre text prognózy podľa metódy Ako!',

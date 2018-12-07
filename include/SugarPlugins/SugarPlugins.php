@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-require_once('vendor/nusoap//nusoap.php');
-
 /**
  * Plugin management
  * @api
@@ -21,65 +19,82 @@ class SugarPlugins
     /**
      * @const URL of the Sugar plugin server
      */
-    const SUGAR_PLUGIN_SERVER = 'https://www.sugarcrm.com/crm/plugin_service.php?wsdl';
+    private const SUGAR_PLUGIN_SERVER = 'https://www.sugarcrm.com/crm/plugin_service.php';
+
+    /**
+     * @var nusoap_client
+     */
+    private $client;
 
     /**
      * Constructor
      *
      * Initializes the SOAP session
      */
-	public function __construct()
-	{
-		$this->server = new nusoapclient(self::SUGAR_PLUGIN_SERVER, TRUE);
-		if ($this->server->getError())
-			$this->server=false;
-		else
-			$this->proxy = $this->server->getProxy();
-	}
+    public function __construct()
+    {
+        $client = new nusoap_client(self::SUGAR_PLUGIN_SERVER . '?wsdl', true);
 
-	/**
+        if ($client->getError()) {
+            return;
+        }
+
+        $this->client = $client;
+    }
+
+    /**
      * Returns an array of available plugins to download for this instance
      *
      * @return array
      */
-	public function getPluginList()
-	{
-		$plugins = array();
-		if(!$this->server)return $plugins;
-		$result = $this->proxy->get_plugin_list($GLOBALS['license']->settings['license_key'], $GLOBALS['sugar_version']);
-		if(!empty($result[0]['item'])){
-			$plugins = $result[0]['item'];
-		}
-		return $plugins;
-	}
+    public function getPluginList()
+    {
+        if (!$this->client) {
+            return [];
+        }
 
-	/**
+        $result = $this->client->call('get_plugin_list', [
+            'subscription' => $GLOBALS['license']->settings['license_key'],
+            'sugar_version' => $GLOBALS['sugar_version'],
+        ]);
+
+        if (empty($result[0]['item'])) {
+            return [];
+        }
+
+        return $result[0]['item'];
+    }
+
+    /**
      * Returns the download token for the given plugin
      *
      * @param  string $plugin_id
      * @return string token
      */
-    protected function _getPluginDownloadToken(
-	    $plugin_id
-	    )
-	{
-		$plugins = array();
-		if(!$this->server)return $plugins;
-		$result = $this->proxy->get_plugin_token($GLOBALS['license']->settings['license_key'], $GLOBALS['current_user']->id, $plugin_id);
-		return $result['token'];
-	}
+    private function getPluginDownloadToken($plugin_id)
+    {
+        if (!$this->client) {
+            return '';
+        }
 
-	/**
+        $result = $this->client->call('get_plugin_token', [
+            'subscription' => $GLOBALS['license']->settings['license_key'],
+            'user_id' => $GLOBALS['current_user']->id,
+            'raw_name' => $plugin_id,
+        ]);
+
+        return $result['token'];
+    }
+
+    /**
      * Downloads the plugin from Sugar using an HTTP redirect
      *
-     * @param  string $plugin_id
+     * @param string $plugin_id
      */
-    public function downloadPlugin(
-	    $plugin_id
-	    )
-	{
-		$token = $this->_getPluginDownloadToken($plugin_id);
-		ob_clean();
-		SugarApplication::redirect('https://www.sugarcrm.com/crm/plugin_service.php?token=' . $token );
-	}
+    public function downloadPlugin($plugin_id)
+    {
+        $token = $this->getPluginDownloadToken($plugin_id);
+        ob_clean();
+        SugarApplication::redirect(self::SUGAR_PLUGIN_SERVER . '?token=' . urlencode($token));
+    }
 }

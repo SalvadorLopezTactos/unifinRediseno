@@ -20,7 +20,11 @@
         <ul role="menu">
             {{#each actions}}
                 {{#if type}}
-                    {{field ../../this template="detail"}}
+                    {{#eq type 'divider'}}
+                        <li class="divider"></li>
+                    {{else}}
+                        {{field ../../../this template="detail"}}
+                    {{/eq}}
                 {{else}}
                     <li><a class="ellipsis_inline" tabindex="-1"
                            data-navbar-menu-item="{{label}}"

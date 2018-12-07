@@ -160,7 +160,8 @@ class PMSEChangeField extends PMSEScriptTask
                                 if (is_array($field->value)) {
                                     // Handle regular evaluation of values
                                     $newValue = $this->beanHandler->processValueExpression($field->value, $beanModule);
-                                    if (empty($newValue)) {
+                                    // For null values only
+                                    if (!isset($newValue)) {
                                         // Used to set these fields to null in db
                                         $newValue = '';
                                     } else {

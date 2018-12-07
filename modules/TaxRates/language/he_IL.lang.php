@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'על מנת למחוק שיעור מס זה עליך לספק מספר רשומה.',
   'NTC_STATUS' => 'כדי להסיר שיעור מס זה מהרשימה הנגללת הפוך אותו ללא זמין',
   'NTC_LIST_ORDER' => 'קבע את הסדר שבו יופיע שיעור המס ברשימה הנגללת',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'פעיל',
-    'Inactive' => 'לא פעיל',
-  ),
   'LBL_EDITLAYOUT' => 'ערוך תצורה' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'נוצר על ידי Id',
   'LBL_MODIFIED_ID'=>'שונה על ידי Id',

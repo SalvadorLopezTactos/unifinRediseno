@@ -36,7 +36,7 @@ class CalendarController extends SugarController
         $bean = $this->currentBean;
         
         $path = "modules/{$bean->module_dir}/{$bean->object_name}FormBase.php";
-        if (!SugarAutoLoader::fileExists($path)) {
+        if (!file_exists($path)) {
             $GLOBALS['log']->fatal("File {$bean->object_name}FormBase.php doesn't exist");
             sugar_cleanup(true);
         }

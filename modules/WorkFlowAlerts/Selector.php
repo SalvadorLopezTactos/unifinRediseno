@@ -14,6 +14,8 @@
  * Description:
  ********************************************************************************/
 
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+
 global $theme;
 
 
@@ -34,8 +36,9 @@ global $currentModule;
 $seed_object = BeanFactory::newBean('WorkFlow');
 $focus = BeanFactory::newBean('WorkFlowAlerts');
 
-if(!empty($_REQUEST['base_module']) && $_REQUEST['base_module']!="") {
-    $seed_object->base_module = $_REQUEST['base_module'];
+$base_module = InputValidation::getService()->getValidInputRequest('base_module', 'Assert\Mvc\ModuleName');
+if (!empty($base_module)) {
+    $seed_object->base_module = $base_module;
 } else {
 	sugar_die("You shouldn't be here");	
 }	

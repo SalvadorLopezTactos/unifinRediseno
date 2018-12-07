@@ -8,6 +8,8 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 //FormPanel
 var FormPanel = function (settings) {
     CollapsiblePanel.call(this, settings);
@@ -369,7 +371,7 @@ FormPanel.prototype.createHTML = function () {
 
 //FormPanelItem
 var FormPanelItem = function (settings) {
-    Element.call(this, settings);
+    PMSE.Element.call(this, settings);
     this._name = null;
     this._label = null;
     this._disabled = null;
@@ -377,7 +379,7 @@ var FormPanelItem = function (settings) {
     FormPanelItem.prototype.init.call(this, settings);
 };
 
-FormPanelItem.prototype = new Element();
+FormPanelItem.prototype = new PMSE.Element();
 FormPanelItem.prototype.constructor = FormPanelItem;
 FormPanelItem.prototype.type = "FormPanelItem";
 
@@ -1304,8 +1306,8 @@ FormPanelDate.prototype.init = function (settings) {
 };
 
 FormPanelDate.prototype.setAppendTo = function (appendTo) {
-    if (!(appendTo instanceof Element || isHTMLElement(appendTo) || typeof appendTo === 'function')) {
-        throw new Error("setAppendTo(): The parameter must be a HTMLElement, a function or an instance of Element");
+    if (!(appendTo instanceof PMSE.Element || isHTMLElement(appendTo) || typeof appendTo === 'function')) {
+        throw new Error("setAppendTo(): The parameter must be a HTMLElement, a function or an instance of PMSE.Element");
     }
     this._appendTo = appendTo;
     if (this._dateFormat) {
@@ -1316,7 +1318,7 @@ FormPanelDate.prototype.setAppendTo = function (appendTo) {
 
 FormPanelDate.prototype._getAppendToHTML = function () {
     var appendTo = this._appendTo;
-    if (appendTo instanceof Element) {
+    if (appendTo instanceof PMSE.Element) {
         return appendTo.getHTML();
     } else if (typeof appendTo === 'function') {
         return appendTo(this);
@@ -1348,7 +1350,7 @@ FormPanelDate.prototype._getValueFromControl = function () {
 //Returns a date value in ISO format
 FormPanelDate.prototype._unformat = function (value) {
     value = App.date(value, this._dateFormat, true);
-    return value.isValid() ? value.format("YYYY-MM-DD") : null;
+    return value.isValid() ? value.formatServer(true) : null;
 };
 
 FormPanelDate.prototype.getFormattedDate = function () {
@@ -1480,7 +1482,7 @@ FormPanelDatetime.prototype._setValueToControl = function (value) {
 
 FormPanelDatetime.prototype._unformat = function (value) {
     value = App.date(value, this._dateFormat, true);
-    return value.isValid() ? value.format() : null;
+    return value.isValid() ? value.formatServer() : null;
 };
 
 FormPanelDatetime.prototype._getValueFromControl = function () {
@@ -1630,7 +1632,7 @@ FormPanelDropdown.prototype.init = function (settings) {
     this._proxy = new SugarProxy();
 
     FormPanelField.prototype.setValue.call(this, defaults.value);
-    this._options = new ArrayList();
+    this._options = new PMSE.ArrayList();
 
     this.setOptionsFilter(defaults.optionsFilter)
         .setDataURL(defaults.dataURL)
@@ -2383,24 +2385,27 @@ FormPanelFriendlyDropdown.prototype._getValueFromControl = function () {
 };
 
 FormPanelFriendlyDropdown.prototype._openSearchMore = function() {
-    var that = this, zIndex;
+    var self = this;
+
     return function () {
-        zIndex = $(that.html).closest(".adam-modal").zIndex();
-        that._htmlControl[0].select2("close");
-        $(that.html).closest(".adam-modal").zIndex(-1);
+        self._htmlControl[0].select2('close');
+        $(self.html).closest('.adam-modal').hide();
+
         App.drawer.open({
-                layout: "selection-list",
-                context: that._searchMore
+                layout: 'selection-list',
+                context: self._searchMore
             },
             _.bind(function (drawerValues) {
-                var oldValue = that.getValue();
-                $(that.html).closest(".adam-modal").zIndex(zIndex);
+                var oldValue = self.getValue();
+
+                $(self.html).closest('.adam-modal').show();
+
                 if (!_.isUndefined(drawerValues)) {
-                    that.setValue({text: drawerValues.value, value: drawerValues.id}, true);
-                    if (typeof that.onChange === 'function') {
-                        that.onChange(that, newValue, oldValue);
+                    self.setValue({text: drawerValues.value, value: drawerValues.id}, true);
+                    if (typeof self.onChange === 'function') {
+                        self.onChange(self, newValue, oldValue);
                     }
-                    that.fireDependentFields();
+                    self.fireDependentFields();
                 }
             }, this));
     };

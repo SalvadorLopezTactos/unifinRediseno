@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Řídicí panel seznamu cílové skupiny',
+
   'LBL_MODULE_NAME' => 'Seznam adresátů',
   'LBL_MODULE_NAME_SINGULAR' => 'Seznam adresátů',
   'LBL_MODULE_ID'   => 'Seznam adresátů',

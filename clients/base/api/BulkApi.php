@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\ProcessManager\Registry;
+
 /**
  * Bulk API calls
  *
@@ -59,6 +61,9 @@ class BulkApi extends SugarApi
             $rest = new BulkRestService($api);
             $rest->setRequest($restReq);
             $rest->setResponse($restResp);
+
+            // Because we want to trigger processes for each save
+            Registry\Registry::getInstance()->drop('triggered_starts');
             $rest->execute();
 
         }

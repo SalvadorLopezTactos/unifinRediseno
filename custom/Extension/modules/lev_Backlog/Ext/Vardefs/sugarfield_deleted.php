@@ -1,5 +1,5 @@
 <?php
- // created: 2018-02-16 16:59:03
+ // created: 2018-12-05 18:17:34
 $dictionary['lev_Backlog']['fields']['deleted']['audited'] = true;
 $dictionary['lev_Backlog']['fields']['deleted']['massupdate'] = false;
 $dictionary['lev_Backlog']['fields']['deleted']['comments'] = 'Record deletion indicator';

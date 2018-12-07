@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Painel da lista de Itens de linha cotados',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Itens de linha Cotados da Campanha',
     'LBL_MODULE_NAME' => 'Itens de linha de cotação',
     'LBL_MODULE_NAME_SINGULAR' => 'Item de Linha de Cotação',
@@ -38,7 +41,7 @@ $mod_strings = array(
     'LBL_NAME' => 'Nome',
     'LBL_URL' => 'URL do Produto:',
     'LBL_QUOTE_NAME' => 'Nome da cotação:',
-    'LBL_ASSOCIATED_QUOTE' => 'Cotação Associada',
+    'LBL_ASSOCIATED_QUOTE' => 'Assunto da cotação:',
     'LBL_CONTACT_NAME' => 'Nome do contato:',
     'LBL_DATE_PURCHASED' => 'Comprado:',
     'LBL_DATE_SUPPORT_EXPIRES' => 'O Suporte expira em:',
@@ -172,4 +175,5 @@ Para criar um {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Lista de dados de cotação de itens de linha cotados',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Novo Item de linha cotado)',
     'LBL_DISCOUNT_PERCENT' => '% Percentual',
+    'LBL_DISCOUNT_TYPE' => 'Tipo de Desconto',
 );

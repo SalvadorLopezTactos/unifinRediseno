@@ -12,14 +12,13 @@
 
 
 $mod_strings = array (
-
-  'LBL_MODULE_NAME' => '流程定義',
+  'LBL_MODULE_NAME' => '處理程序定義',
   'LBL_MODULE_TITLE' => '流程定義',
   'LBL_MODULE_NAME_SINGULAR' => '流程定義',
 
-  'LNK_LIST' => '檢視流程定義',
-  'LNK_NEW_PMSE_PROJECT' => '建立流程定義',
-  'LNK_IMPORT_PMSE_PROJECT' => '匯入流程定義',
+  'LNK_LIST' => '檢視處理程序定義',
+  'LNK_NEW_PMSE_PROJECT' => '建立處理程序定義',
+  'LNK_IMPORT_PMSE_PROJECT' => '匯入處理程序定義',
 
   'LBL_PRJ_STATUS' => '狀態',
   'LBL_PRJ_MODULE' => '目標模組',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => '不等於',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => '不是',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => '不等於',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => '執行時間',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => '新增',
     'LBL_PMSE_FORMPANEL_CLOSE' => '關閉',

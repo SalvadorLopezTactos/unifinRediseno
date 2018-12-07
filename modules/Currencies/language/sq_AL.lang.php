@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Krijo detyrë',
   'NTC_DELETE_CONFIRMATION' => 'A jeni të sigurtë që dëshironi të fshini këtë regjistrim? Çdo regjistrim që përdor këtë monedhë do të konvertohet tek sistemi në monedhë të çaktivtuar kur do të qasen. Do të ishte më mirë të vendoset statusi në pasiv.',
   'LBL_BELOW_MIN' => 'Norma e konvertimit duhet të jetë më e madhe se 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'aktive',
-    'Inactive' => 'pasive',
-  ),
   'LBL_CREATED_BY' => 'Krijuar nga',
   'LBL_EDIT_LAYOUT' => 'Ndrysho formatin' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Vetëm administratorët',
+  'LBL_CURRENCY_DEFAULT' => 'Dollar amerikan (standard)',
+
 );
 ?>

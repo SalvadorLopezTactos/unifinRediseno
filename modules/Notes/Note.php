@@ -41,6 +41,9 @@ class Note extends SugarBean
     var $contact_phone;
     var $contact_email;
     var $file_mime_type;
+    public $file_ext;
+    public $file_source;
+    public $file_size;
     var $module_dir = "Notes";
     var $default_note_name_dom = array('Meeting notes', 'Reminder');
     var $table_name = "notes";
@@ -57,6 +60,47 @@ class Note extends SugarBean
         'first_name',
         'last_name'
     );
+
+    /**
+     * Assignment notification emails are not sent when the note is an email attachment
+     *
+     * {@inheritdoc}
+     */
+    public function send_assignment_notifications($notify_user, $admin)
+    {
+        if (empty($this->email_id)) {
+            parent::send_assignment_notifications($notify_user, $admin);
+        }
+    }
+
+    /**
+     * Get and save file size if note represents and email file attachment
+     *
+     * {@inheritdoc}
+     */
+    public function save($check_notify = false)
+    {
+        $file = $this->getUploadId();
+        $filePath = '';
+
+        if (empty($file)) {
+            // If a file has been uploaded but the note does not yet have an ID, then the upload has not yet been
+            // confirmed. The file can be found at the temporary location.
+            if ($this->file instanceof UploadFile) {
+                $filePath = $this->file->get_temp_file_location();
+            }
+        } else {
+            $filePath = "upload://{$file}";
+        }
+
+        if (file_exists($filePath)) {
+            $this->file_mime_type = get_file_mime_type($filePath, 'application/octet-stream');
+            $this->file_ext = pathinfo($this->filename, PATHINFO_EXTENSION);
+            $this->file_size = filesize($filePath);
+        }
+
+        return parent::save($check_notify);
+    }
 
     function safeAttachmentName()
     {
@@ -84,59 +128,55 @@ class Note extends SugarBean
     }
 
     /**
-     * overrides SugarBean's method.
-     * If a system setting is set, it will mark all related notes as deleted, and attempt to delete files that are
-     * related to those notes
-     * @param string id ID
+     * {@inheritdoc}
+     *
+     * @uses UploadFile::unlink_file() to delete the file as well. The file is only deleted if {@link Note::$upload_id}
+     * is empty.
      */
     function mark_deleted($id)
     {
-        global $sugar_config;
-
-        if ($this->parent_type == 'Emails') {
-            if (isset($sugar_config['email_default_delete_attachments']) &&
-                $sugar_config['email_default_delete_attachments'] == true
-            ) {
-                $removeFile = "upload://$id";
-                if (file_exists($removeFile)) {
-                    if (!unlink($removeFile)) {
-                        $GLOBALS['log']->error("*** Could not unlink() file: [ {$removeFile} ]");
-                    }
-                }
-            }
+        if (empty($this->upload_id)) {
+            UploadFile::unlink_file($id);
         }
 
         // delete note
         parent::mark_deleted($id);
     }
 
+    /**
+     * Removes the file from the filesystem and clears the file metadata from the record.
+     *
+     * @param string $isduplicate
+     * @return bool
+     */
     function deleteAttachment($isduplicate = "false")
     {
-        if ($this->ACLAccess('edit')) {
-            if ($isduplicate=="true") {
-                return true;
-            }
-            $removeFile = "upload://{$this->id}";
+        if (!$this->ACLAccess('edit')) {
+            return false;
         }
 
-        if (file_exists($removeFile)) {
-            if (!unlink($removeFile)) {
-                $GLOBALS['log']->error("*** Could not unlink() file: [ {$removeFile} ]");
-            } else {
-                $this->filename = '';
-                $this->file_mime_type = '';
-                $this->file = '';
-                $this->save();
-                return true;
-            }
-        } else {
-            $this->filename = '';
-            $this->file_mime_type = '';
-            $this->file = '';
-            $this->save();
+        if ($isduplicate == "true") {
             return true;
         }
-        return false;
+
+        // Only attempt to delete the file if there isn't an upload_id. When there is an upload_id, we just clear the
+        // file metadata from the record. When there isn't an upload_id, we attempt to delete the file and clear the
+        // file metadata.
+        if (empty($this->upload_id) && !UploadFile::unlink_file($this->id)) {
+            return false;
+        }
+
+        $this->filename = '';
+        $this->file_ext = '';
+        $this->file_mime_type = '';
+        $this->file = '';
+        $this->file_size = '';
+        $this->file_source = '';
+        $this->email_type = '';
+        $this->email_id = '';
+        $this->upload_id = '';
+        $this->save();
+        return true;
     }
 
     function get_summary_text()
@@ -152,23 +192,10 @@ class Note extends SugarBean
     function fill_in_additional_detail_fields()
     {
         parent::fill_in_additional_detail_fields();
-        // TODO: Seems odd we need to clear out these values so that list views
-        // don't show the previous rows value if current value is blank
-        $this->getRelatedFields(
-            'Contacts',
-            $this->contact_id,
-            array('name'=>'contact_name', 'phone_work'=>'contact_phone')
-        );
-        if (!empty($this->contact_name)) {
+
+        if (!empty($this->contact_id)) {
             $emailAddress = BeanFactory::newBean('EmailAddresses');
             $this->contact_email = $emailAddress->getPrimaryAddress(false, $this->contact_id, 'Contacts');
-        }
-
-        if (isset($this->contact_id) && $this->contact_id != '') {
-            $contact = BeanFactory::getBean('Contacts', $this->contact_id);
-            if (isset($contact->id)) {
-                $this->contact_name = $contact->full_name;
-            }
         }
     }
 
@@ -185,9 +212,6 @@ class Note extends SugarBean
             if (file_exists("upload://{$this->id}")) {
                 $note_fields['FILENAME'] = $this->filename;
                 $note_fields['FILE_URL'] = UploadFile::get_upload_url($this);
-            } elseif (!empty($sugar_config['disc_client']) && $sugar_config['disc_client']) {
-                $file_display = " (".$mod_strings['LBL_OC_FILE_NOTICE'].")";
-                $note_fields['FILENAME'] = $file_display;
             }
         }
         if (isset($this->contact_id) && $this->contact_id != '') {

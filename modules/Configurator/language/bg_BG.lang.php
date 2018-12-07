@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus сървър',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Subpanel items per page (Wireless)',
 	'LOG_MEMORY_USAGE'=>'Записване на използваната памет в дневника',
-	'LOG_SLOW_QUERIES'=>'Отчитане на заявките със забавяне в изпълнението',
+    'LOG_SLOW_QUERIES' => 'Отчитане на заявките със забавяне в изпълнението',
     'LOCK_HOMEPAGE_HELP'=>'This setting is to prevent<BR> 1) the addition of new home pages in the Home module, and <BR>2) customization of dashlet placement in the home pages by dragging and dropping.',
     'CURRENT_LOGO'=>'Текущо лого в употреба',
     'CURRENT_LOGO_HELP'=>'Логото се визуализира в горния ляв ъгъл на прозорците на програмата.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Името се визуализира като заглавие в използвания уеб браузър.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Разрешаване/Забраняване на писма от свързани контакти да бъдат показвани в панела с електронни писма.',
 
-    'LBL_OC_STATUS'                     => 'Статус по подразбиране на Offline клиент',
-    'DEFAULT_OC_STATUS'                 => 'Offline Client рарешен по подразбиране',
-    'LBL_OC_STATUS_DESC' => 'Проверете тук, ако искате някой потребител да има достъп до Офлайн клиент.  В противен случай можете да конфигурирате достъп на ниво потребител.',
     'SESSION_TIMEOUT' => 'Време за изтичане на сесиите в Портал',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Времето за изтичане на сесиите в Портал е за стандартни версии на Sugar Portal, налични във версия 6.5 и нагоре.',
     'UPLOAD_MAXSIZE_UNITS' => 'байта',
@@ -435,8 +432,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML Login URL не може да бъде празен линк',
     'ERR_EMPTY_SAML_CERT' => 'SAML сертификатът трябва да бъде попълнен',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'Идентификаторът на SAML лицето не може да бъде празен',
     'ERR_SAML_LOGIN_URL' => 'SAML Login URL не е валиден',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL не е валиден',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM файлът трябва да съдържа частен ключ',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM файлът трябва да съдържа x.509 сертификат',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Предоставеният x.509 сертификат не съответства на частния ключ',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Дейности',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Активирай дейностите',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Включва Дейностите за приложението',
 );
 
 

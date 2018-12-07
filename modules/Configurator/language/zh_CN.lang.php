@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar 移动增值服务',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => '每页的子面板项目',
 	'LOG_MEMORY_USAGE'=>'记录内存使用',
-	'LOG_SLOW_QUERIES'=>'慢速查询日志',
+    'LOG_SLOW_QUERIES' => '慢速查询日志',
     'LOCK_HOMEPAGE_HELP'=>'此设置用来阻止<BR> 1) 在首页模块中添加新的子页与图表 <BR>2) 通过拖拉来定制栏目在首页中的位置。',
     'CURRENT_LOGO'=>'当前使用的标识：',
     'CURRENT_LOGO_HELP'=>'本标识将显示在 Sugar 程序脚注的左上角。',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'这是显示在您的浏览器标题栏中的名称。',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => '启用/禁用电子邮件从电子邮件子面板中显示相关 (或链接) 联系人。',
 
-    'LBL_OC_STATUS'                     => '默认离线客户端的状态',
-    'DEFAULT_OC_STATUS'                 => '默认启用离线客户端',
-    'LBL_OC_STATUS_DESC' => '如果您要任何用户都可以访问离线客户端，请选中此选项。否则，在用户级别中配置访问权限。',
     'SESSION_TIMEOUT' => '门户网站会话过期时间',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => '门户会话超时用于6.5以及以前版本的历史Sugar版本门户。',
     'UPLOAD_MAXSIZE_UNITS' => '字节',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML登入链接不可以留空',
     'ERR_EMPTY_SAML_CERT' => 'SAML证书不可以留空',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML 实体 ID 不能为空',
     'ERR_SAML_LOGIN_URL' => 'SAML登入链接无效',
     'ERR_SAML_SLO_URL' => 'SAML SLO链接无效',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM 文件应含有密匙',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM 文件应该含有 x.509 证书',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => '提供的 x.509 证书不匹配密匙',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => '活动流',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => '启用活动流',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => '打开应用程序的活动流',
 );
 
 

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Електронно табло със списък на задачите',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Електронно табло със запис на Целевите клиенти',
+
   'LBL_MODULE_NAME' => 'Целеви клиенти',
   'LBL_MODULE_NAME_SINGULAR' => 'Целеви клиент',
   'LBL_MODULE_ID'   => 'Целеви клиенти',
@@ -195,4 +199,6 @@ $mod_strings = array (
 2. Натиснете "Съхрани", за да запазите новия запис и да се върнете на предходната страница.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Справки за целеви клиенти',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Одобрени бизнес цели',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Последна актуализация на одобрението',
 );

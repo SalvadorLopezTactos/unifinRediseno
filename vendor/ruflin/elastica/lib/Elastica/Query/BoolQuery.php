@@ -8,7 +8,7 @@ use Elastica\Exception\InvalidException;
  *
  * @author Nicolas Ruflin <spam@ruflin.com>
  *
- * @link http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
+ * @link https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html
  */
 class BoolQuery extends AbstractQuery
 {
@@ -49,6 +49,18 @@ class BoolQuery extends AbstractQuery
     }
 
     /**
+     * Sets the filter.
+     *
+     * @param \Elastica\Query\AbstractQuery $filter Filter object
+     *
+     * @return $this
+     */
+    public function addFilter(AbstractQuery $filter)
+    {
+        return $this->addParam('filter', $filter);
+    }
+
+    /**
      * Adds a query to the current object.
      *
      * @param string                              $type Query type
@@ -80,15 +92,15 @@ class BoolQuery extends AbstractQuery
     }
 
     /**
-     * Set the minimum number of of should match.
+     * Sets the minimum number of should clauses to match.
      *
-     * @param int $minimumNumberShouldMatch Should match minimum
+     * @param int|string $minimum Minimum value
      *
      * @return $this
      */
-    public function setMinimumNumberShouldMatch($minimumNumberShouldMatch)
+    public function setMinimumShouldMatch($minimum)
     {
-        return $this->setParam('minimum_number_should_match', $minimumNumberShouldMatch);
+        return $this->setParam('minimum_should_match', $minimum);
     }
 
     /**

@@ -11,8 +11,13 @@
  */
 
 $dictionary['Email'] = array(
+    'favorites' => true,
     'table' => 'emails',
-    'acl_fields' => false,
+    'acls' => array(
+        'SugarACLEmails' => true,
+        'SugarACLDraftEmails' => true,
+        'SugarACLArchivedEmails' => true,
+    ),
     'full_text_search' => true,
     'activity_enabled' => true,
     'comment' => 'Contains a record of emails sent to and from the Sugar application',
@@ -31,14 +36,18 @@ $dictionary['Email'] = array(
             'type' => 'datetime',
             'required' => true,
             'comment' => 'Date record created',
+            'readonly' => true,
+            'massupdate' => false,
+            'duplicate_on_record_copy' => 'no',
             'full_text_search' => array(
                 'enabled' => true,
                 'searchable' => false,
-                'aggregations' => array(
-                    'date_entered' => array(
-                        'type' => 'DateRange',
-                    ),
-                ),
+                // Disabled until UX component is available
+                //'aggregations' => array(
+                //    'date_entered' => array(
+                //        'type' => 'DateRange',
+                //    ),
+                //),
             ),
         ),
         'date_modified' => array(
@@ -47,14 +56,18 @@ $dictionary['Email'] = array(
             'type' => 'datetime',
             'required' => true,
             'comment' => 'Date record last modified',
+            'readonly' => true,
+            'massupdate' => false,
+            'duplicate_on_record_copy' => 'no',
             'full_text_search' => array(
                 'enabled' => true,
                 'searchable' => false,
-                'aggregations' => array(
-                    'date_modified' => array(
-                        'type' => 'DateRange',
-                    ),
-                ),
+                // Disabled until UX component is available
+                //'aggregations' => array(
+                //    'date_modified' => array(
+                //        'type' => 'DateRange',
+                //    ),
+                //),
             ),
         ),
         'assigned_user_id' => array(
@@ -98,6 +111,9 @@ $dictionary['Email'] = array(
             'reportable' => true,
             'dbType' => 'id',
             'comment' => 'User ID that last modified record',
+            'readonly' => true,
+            'massupdate' => false,
+            'duplicate_on_record_copy' => 'no',
             'full_text_search' => array(
                 'enabled' => true,
                 'searchable' => false,
@@ -131,6 +147,9 @@ $dictionary['Email'] = array(
             'len' => '36',
             'reportable' => false,
             'comment' => 'User name who created record',
+            'readonly' => true,
+            'massupdate' => false,
+            'duplicate_on_record_copy' => 'no',
             'full_text_search' => array(
                 'enabled' => true,
                 'searchable' => false,
@@ -169,57 +188,86 @@ $dictionary['Email'] = array(
         'from_addr_name' => array(
             'name' => 'from_addr_name',
             'type' => 'varchar',
-            'vname' => 'from_addr_name',
+            'vname' => 'LBL_FROM',
             'source' => 'non-db',
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+            ),
+            'massupdate' => false,
         ),
         'reply_to_addr' => array(
             'name' => 'reply_to_addr',
             'type' => 'varchar',
             'vname' => 'reply_to_addr',
             'source' => 'non-db',
+            'massupdate' => false,
         ),
         'to_addrs_names' => array(
             'name' => 'to_addrs_names',
             'type' => 'varchar',
-            'vname' => 'to_addrs_names',
+            'vname' => 'LBL_TO_ADDRS',
             'source' => 'non-db',
+            'reportable' => false,
+            'massupdate' => false,
         ),
         'cc_addrs_names' => array(
             'name' => 'cc_addrs_names',
             'type' => 'varchar',
-            'vname' => 'cc_addrs_names',
+            'vname' => 'LBL_CC',
             'source' => 'non-db',
+            'reportable' => false,
+            'massupdate' => false,
         ),
         'bcc_addrs_names' => array(
             'name' => 'bcc_addrs_names',
             'type' => 'varchar',
-            'vname' => 'bcc_addrs_names',
+            'vname' => 'LBL_BCC',
             'source' => 'non-db',
+            'reportable' => false,
+            'massupdate' => false,
         ),
         'raw_source' => array(
             'name' => 'raw_source',
             'type' => 'varchar',
             'vname' => 'raw_source',
             'source' => 'non-db',
+            'massupdate' => false,
         ),
         'description_html' => array(
             'name' => 'description_html',
-            'type' => 'varchar',
+            'type' => 'htmleditable_tinymce',
             'vname' => 'description_html',
             'source' => 'non-db',
+            'massupdate' => false,
+            'full_text_search' => array(
+                'enabled' => false,
+                'searchable' => false,
+                'type' => 'text',
+            ),
         ),
         'description' => array(
             'name' => 'description',
             'type' => 'varchar',
-            'vname' => 'description',
+            'vname' => 'LBL_TEXT_BODY',
             'source' => 'non-db',
-            'full_text_search' => array('enabled' => true, 'searchable' => true, 'type' => 'text'),
+            'full_text_search' => array(
+                'enabled' => false,
+                'searchable' => false,
+                'type' => 'text',
+            ),
+            'massupdate' => false,
         ),
         'date_sent' => array(
             'name' => 'date_sent',
             'vname' => 'LBL_DATE_SENT',
             'type' => 'datetime',
-            'type' => 'datetime',
+            'massupdate' => false,
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => false,
+            ),
+            'hideacl' => true,
         ),
         'message_id' => array(
             'name' => 'message_id',
@@ -227,6 +275,9 @@ $dictionary['Email'] = array(
             'type' => 'varchar',
             'len' => 255,
             'comment' => 'ID of the email item obtained from the email transport system',
+            'hideacl' => true,
+            'massupdate' => false,
+            'duplicate_on_record_copy' => 'no',
         ),
         // Bug #45395 : Deleted emails from a group inbox does not move the emails to the Trash folder for Google Apps
         'message_uid' => array(
@@ -235,6 +286,8 @@ $dictionary['Email'] = array(
             'type' => 'varchar',
             'len' => 64,
             'comment' => 'UID of the email item obtained from the email transport system',
+            'hideacl' => true,
+            'massupdate' => false,
         ),
         'name' => array(
             'name' => 'name',
@@ -244,7 +297,12 @@ $dictionary['Email'] = array(
             'required' => false,
             'len' => '255',
             'comment' => 'The subject of the email',
-            'full_text_search' => array('enabled' => true, 'searchable' => true),
+            'full_text_search' => array(
+                'enabled' => true,
+                'searchable' => true,
+            ),
+            'hideacl' => true,
+            'massupdate' => false,
         ),
         'type' => array(
             'name' => 'type',
@@ -254,6 +312,7 @@ $dictionary['Email'] = array(
             'len' => 100,
             'massupdate' => false,
             'comment' => 'Type of email (ex: draft)',
+            'hideacl' => true,
         ),
         'status' => array(
             'name' => 'status',
@@ -261,6 +320,8 @@ $dictionary['Email'] = array(
             'type' => 'enum',
             'len' => 100,
             'options' => 'dom_email_status',
+            'massupdate' => false,
+            'hideacl' => true,
         ),
         'flagged' => array(
             'name' => 'flagged',
@@ -269,6 +330,7 @@ $dictionary['Email'] = array(
             'required' => false,
             'reportable' => false,
             'comment' => 'flagged status',
+            'massupdate' => false,
         ),
         'reply_to_status' => array(
             'name' => 'reply_to_status',
@@ -276,7 +338,10 @@ $dictionary['Email'] = array(
             'type' => 'bool',
             'required' => false,
             'reportable' => false,
-            'comment' => 'I you reply to an email then reply to status of original email is set',
+            'comment' => 'If you reply to an email then reply to status of original email is set',
+            'massupdate' => false,
+            'hideacl' => true,
+            'duplicate_on_record_copy' => 'no',
         ),
         'intent' => array(
             'name' => 'intent',
@@ -285,6 +350,7 @@ $dictionary['Email'] = array(
             'len' => 100,
             'default' => 'pick',
             'comment' => 'Target of action used in Inbound Email assignment',
+            'hideacl' => true,
         ),
         'mailbox_id' => array(
             'name' => 'mailbox_id',
@@ -292,6 +358,28 @@ $dictionary['Email'] = array(
             'type' => 'id',
             'len' => '36',
             'reportable' => false,
+            'massupdate' => false,
+            'duplicate_on_record_copy' => 'no',
+        ),
+        'mailbox_name' => array(
+            'name' => 'mailbox_name',
+            'rname' => 'name',
+            'type' => 'relate',
+            'source' => 'non-db',
+            'vname' => 'LBL_MAILBOX',
+            'reportable' => false,
+            'id_name' => 'mailbox_id',
+            'link' => 'mailbox',
+            'module' => 'InboundEmail',
+            'readonly' => true,
+            'studio' => false,
+        ),
+        'mailbox' => array(
+            'name' => 'mailbox',
+            'type' => 'link',
+            'relationship' => 'inbound_email_emails',
+            'source' => 'non-db',
+            'vname' => 'LBL_MAILBOX',
         ),
         'created_by_link' => array(
             'name' => 'created_by_link',
@@ -322,6 +410,32 @@ $dictionary['Email'] = array(
             'module' => 'Users',
             'bean_name' => 'User',
             'source' => 'non-db',
+        ),
+        'state' => array(
+            'name' => 'state',
+            'vname' => 'LBL_EMAIL_STATE',
+            'type' => 'enum',
+            'options' => 'dom_email_states',
+            'len' => 100,
+            'required' => true,
+            'isnull' => false,
+            'default' => 'Archived',
+            'massupdate' => false,
+            'comment' => 'An email is either a draft or archived',
+            'reportable' => false,
+            'hideacl' => true,
+            'mandatory_fetch' => true,
+        ),
+        'reply_to_id' => array(
+            'name' => 'reply_to_id',
+            'vname' => 'LBL_EMAIL_REPLY_TO_ID',
+            'type' => 'id',
+            'len' => '36',
+            'reportable' => false,
+            'duplicate_on_record_copy' => 'no',
+            'importable' => false,
+            'comment' => 'Identifier of email record that this email was a reply to',
+            'massupdate' => false,
         ),
         'parent_name' => array(
             'name' => 'parent_name',
@@ -491,15 +605,138 @@ $dictionary['Email'] = array(
             'bean_name' => 'Note',
             'source' => 'non-db',
         ),
-        // SNIP
-        'meetings' => array(
-            'name' => 'meetings',
-            'vname' => 'LBL_EMAILS_MEETINGS_REL',
-            'type' => 'link',
-            'relationship' => 'emails_meetings_rel',
-            'module' => 'Meetings',
-            'bean_name' => 'Meeting',
+        'attachments' => array(
+            'bean_name' => 'Note',
+            'module' => 'Notes',
+            'name' => 'attachments',
+            'relationship' => 'emails_attachments',
             'source' => 'non-db',
+            'type' => 'link',
+            'vname' => 'LBL_ATTACHMENTS',
+            'reportable' => false,
+            'readonly' => true,
+        ),
+        'attachments_collection' => array(
+            'name' => 'attachments_collection',
+            'links' => array(
+                'attachments',
+            ),
+            'order_by' => 'name:asc',
+            'source' => 'non-db',
+            'studio' => false,
+            'type' => 'collection',
+            'vname' => 'LBL_ATTACHMENTS',
+            'reportable' => false,
+        ),
+        'total_attachments' => array(
+            'name' => 'total_attachments',
+            'vname' => 'LBL_TOTAL_ATTACHMENTS',
+            'type' => 'int',
+            'formula' => 'count($attachments)',
+            'calculated' => true,
+            'enforced' => true,
+            'studio' => false,
+            'workflow' => false,
+            'importable' => false,
+            'reportable' => false,
+            'massupdate' => false,
+            'hideacl' => true,
+        ),
+        'outbound_email_id' => array(
+            'name' => 'outbound_email_id',
+            'comment' => 'The configuration used to send an email, only used for emails sent using SugarCRM',
+            'type' => 'enum',
+            'dbType' => 'id',
+            'required' => false,
+            'vname' => 'LBL_OUTBOUND_EMAIL_ID',
+            'function' => 'getOutboundEmailDropdown',
+            'function_bean' => 'Emails',
+            'reportable' => false,
+            'massupdate' => false,
+        ),
+        'from_collection' => array(
+            'name' => 'from_collection',
+            'links' => array(
+                'from',
+            ),
+            'order_by' => 'parent_name:asc',
+            'source' => 'non-db',
+            'studio' => false,
+            'type' => 'collection',
+            'vname' => 'LBL_FROM',
+            'reportable' => false,
+        ),
+        'to_collection' => array(
+            'name' => 'to_collection',
+            'links' => array(
+                'to',
+            ),
+            'order_by' => 'parent_name:asc',
+            'source' => 'non-db',
+            'studio' => false,
+            'type' => 'collection',
+            'vname' => 'LBL_TO_ADDRS',
+            'reportable' => false,
+        ),
+        'cc_collection' => array(
+            'name' => 'cc_collection',
+            'links' => array(
+                'cc',
+            ),
+            'order_by' => 'parent_name:asc',
+            'source' => 'non-db',
+            'studio' => false,
+            'type' => 'collection',
+            'vname' => 'LBL_CC',
+            'reportable' => false,
+        ),
+        'bcc_collection' => array(
+            'name' => 'bcc_collection',
+            'links' => array(
+                'bcc',
+            ),
+            'order_by' => 'parent_name:asc',
+            'source' => 'non-db',
+            'studio' => false,
+            'type' => 'collection',
+            'vname' => 'LBL_BCC',
+            'reportable' => false,
+        ),
+        'from' => array(
+            'name' => 'from',
+            'relationship' => 'emails_from',
+            'source' => 'non-db',
+            'type' => 'link',
+            'vname' => 'LBL_FROM',
+            'reportable' => false,
+            'readonly' => true,
+        ),
+        'to' => array(
+            'name' => 'to',
+            'relationship' => 'emails_to',
+            'source' => 'non-db',
+            'type' => 'link',
+            'vname' => 'LBL_TO_ADDRS',
+            'reportable' => false,
+            'readonly' => true,
+        ),
+        'cc' => array(
+            'name' => 'cc',
+            'relationship' => 'emails_cc',
+            'source' => 'non-db',
+            'type' => 'link',
+            'vname' => 'LBL_CC',
+            'reportable' => false,
+            'readonly' => true,
+        ),
+        'bcc' => array(
+            'name' => 'bcc',
+            'relationship' => 'emails_bcc',
+            'source' => 'non-db',
+            'type' => 'link',
+            'vname' => 'LBL_BCC',
+            'reportable' => false,
+            'readonly' => true,
         ),
         /* end relationship collections */
     ), /* end fields() array */
@@ -531,56 +768,32 @@ $dictionary['Email'] = array(
             'rhs_key' => 'created_by',
             'relationship_type' => 'one-to-many'
         ),
+        'emails_attachments' => array(
+            'lhs_module' => 'Emails',
+            'lhs_table' => 'emails',
+            'lhs_key' => 'id',
+            'rhs_module' => 'Notes',
+            'rhs_table' => 'notes',
+            'rhs_key' => 'email_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_class' => 'EmailAttachmentRelationship',
+            'relationship_file' => 'modules/Emails/EmailAttachmentRelationship.php',
+            'relationship_role_column' => 'email_type',
+            'relationship_role_column_value' => 'Emails',
+        ),
         'emails_notes_rel' => array(
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
             'rhs_module' => 'Notes',
             'rhs_table' => 'notes',
-            'rhs_key' => 'parent_id',
-            'relationship_type' => 'one-to-many',
-        ),
-        'emails_contacts_rel' => array(
-            'lhs_module' => 'Emails',
-            'lhs_table' => 'emails',
-            'lhs_key' => 'id',
-            'rhs_module' => 'Contacts',
-            'rhs_table' => 'contacts',
             'rhs_key' => 'id',
             'relationship_type' => 'many-to-many',
             'join_table' => 'emails_beans',
             'join_key_lhs' => 'email_id',
             'join_key_rhs' => 'bean_id',
             'relationship_role_column' => 'bean_module',
-            'relationship_role_column_value' => 'Contacts',
-        ),
-        'emails_accounts_rel' => array(
-            'lhs_module' => 'Emails',
-            'lhs_table' => 'emails',
-            'lhs_key' => 'id',
-            'rhs_module' => 'Accounts',
-            'rhs_table' => 'accounts',
-            'rhs_key' => 'id',
-            'relationship_type' => 'many-to-many',
-            'join_table' => 'emails_beans',
-            'join_key_lhs' => 'email_id',
-            'join_key_rhs' => 'bean_id',
-            'relationship_role_column' => 'bean_module',
-            'relationship_role_column_value' => 'Accounts',
-        ),
-        'emails_leads_rel' => array(
-            'lhs_module' => 'Emails',
-            'lhs_table' => 'emails',
-            'lhs_key' => 'id',
-            'rhs_module' => 'Leads',
-            'rhs_table' => 'leads',
-            'rhs_key' => 'id',
-            'relationship_type' => 'many-to-many',
-            'join_table' => 'emails_beans',
-            'join_key_lhs' => 'email_id',
-            'join_key_rhs' => 'bean_id',
-            'relationship_role_column' => 'bean_module',
-            'relationship_role_column_value' => 'Leads',
+            'relationship_role_column_value' => 'Notes',
         ),
         'emails_revenuelineitems_rel' => array(
             'lhs_module' => 'Emails',
@@ -610,15 +823,61 @@ $dictionary['Email'] = array(
             'relationship_role_column' => 'bean_module',
             'relationship_role_column_value' => 'Products',
         ),
-        // SNIP
-        'emails_meetings_rel' => array(
+        'emails_from' => array(
             'lhs_module' => 'Emails',
             'lhs_table' => 'emails',
             'lhs_key' => 'id',
-            'rhs_module' => 'Meetings',
-            'rhs_table' => 'meetings',
-            'rhs_key' => 'parent_id',
+            'rhs_module' => 'EmailParticipants',
+            'rhs_table' => 'emails_email_addr_rel',
+            'rhs_key' => 'email_id',
+            'relationship_type' => 'one-to-one',
+            'relationship_class' => 'EmailSenderRelationship',
+            'relationship_file' => 'modules/Emails/EmailSenderRelationship.php',
+            'relationship_role_columns' => array(
+                'address_type' => 'from',
+            ),
+        ),
+        'emails_to' => array(
+            'lhs_module' => 'Emails',
+            'lhs_table' => 'emails',
+            'lhs_key' => 'id',
+            'rhs_module' => 'EmailParticipants',
+            'rhs_table' => 'emails_email_addr_rel',
+            'rhs_key' => 'email_id',
             'relationship_type' => 'one-to-many',
+            'relationship_class' => 'EmailRecipientRelationship',
+            'relationship_file' => 'modules/Emails/EmailRecipientRelationship.php',
+            'relationship_role_columns' => array(
+                'address_type' => 'to',
+            ),
+        ),
+        'emails_cc' => array(
+            'lhs_module' => 'Emails',
+            'lhs_table' => 'emails',
+            'lhs_key' => 'id',
+            'rhs_module' => 'EmailParticipants',
+            'rhs_table' => 'emails_email_addr_rel',
+            'rhs_key' => 'email_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_class' => 'EmailRecipientRelationship',
+            'relationship_file' => 'modules/Emails/EmailRecipientRelationship.php',
+            'relationship_role_columns' => array(
+                'address_type' => 'cc',
+            ),
+        ),
+        'emails_bcc' => array(
+            'lhs_module' => 'Emails',
+            'lhs_table' => 'emails',
+            'lhs_key' => 'id',
+            'rhs_module' => 'EmailParticipants',
+            'rhs_table' => 'emails_email_addr_rel',
+            'rhs_key' => 'email_id',
+            'relationship_type' => 'one-to-many',
+            'relationship_class' => 'EmailRecipientRelationship',
+            'relationship_file' => 'modules/Emails/EmailRecipientRelationship.php',
+            'relationship_role_columns' => array(
+                'address_type' => 'bcc',
+            ),
         ),
     ), // end relationships
     'indices' => array(
@@ -647,7 +906,27 @@ $dictionary['Email'] = array(
             'type' => 'index',
             'fields' => array('assigned_user_id', 'type', 'status')
         ),
-    ) // end indices
+        array(
+            'name' => 'idx_date_modified',
+            'type' => 'index',
+            'fields' => array('date_modified'),
+        ),
+        array(
+            'name' => 'idx_state',
+            'type' => 'index',
+            'fields' => array('state', 'id'),
+        ),
+        array(
+            'name' => 'idx_mailbox_id',
+            'type' => 'index',
+            'fields' => array('mailbox_id'),
+        ),
+    ), // end indices
+    'uses' => array(
+        'favorite',
+        'following',
+        'taggable',
+    ),
 );
 
 VardefManager::createVardef(
@@ -656,8 +935,4 @@ VardefManager::createVardef(
     array('team_security')
 );
 
-// Temporary disable Email description field indexing until the analyzers are sorted out
-// to properly cope with larger fields. This impacts indexing performance and additional
-// adds a heavy taxation on the required disk space usage as well.
-$dictionary['Email']['fields']['description']['full_text_search']['enabled'] = false;
-$dictionary['Email']['fields']['description']['full_text_search']['searchable'] = false;
+$dictionary['Email']['visibility']['EmailsVisibility'] = true;

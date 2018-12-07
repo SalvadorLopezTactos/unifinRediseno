@@ -12,6 +12,8 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Index;
 
+use Sugarcrm\Sugarcrm\Elasticsearch\Index\Strategy\OneModulePerIndexStrategy;
+use Sugarcrm\Sugarcrm\Elasticsearch\Index\Strategy\StaticStrategy;
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\MappingCollection;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Index;
 use Sugarcrm\Sugarcrm\Elasticsearch\Exception\IndexPoolStrategyException;
@@ -29,6 +31,9 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Client;
 class IndexPool
 {
     const DEFAULT_STRATEGY = 'static';
+    const SINGLE_MODULE_STRATEGY = 'single';
+
+    const MAX_ES_INDEX_NAME = 255;
 
     /**
      * @var string Prefix for every index
@@ -102,6 +107,9 @@ class IndexPool
             $name = $this->prefix . '_' . $name;
         }
 
+        if (strlen($name) > self::MAX_ES_INDEX_NAME) {
+            $name = substr($name, 0, self::MAX_ES_INDEX_NAME - 1);
+        }
         // only lowercase index names are allowed
         return strtolower($name);
     }
@@ -115,10 +123,16 @@ class IndexPool
     public function getStrategy($module)
     {
         // take strategy identifier from config or use default if not available
+        // for ES 6.x, it requires to use OneModulePerIndexStrategy strategy
+
         if (!empty($this->config[$module]) && !empty($this->config[$module]['strategy'])) {
             $id = $this->config[$module]['strategy'];
         } else {
-            $id = self::DEFAULT_STRATEGY;
+            if (version_compare($this->container->client->getVersion(), '6.0', '<')) {
+                $id = self::DEFAULT_STRATEGY;
+            } else {
+                $id = self::SINGLE_MODULE_STRATEGY;
+            }
         }
 
         if (!isset($this->loaded[$id])) {
@@ -158,6 +172,21 @@ class IndexPool
     }
 
     /**
+     * Get list of managed indices for given modules
+     * @param array $modules
+     * @return \Sugarcrm\Sugarcrm\Elasticsearch\Index\IndexCollection
+     */
+    public function getManagedIndices(array $modules)
+    {
+        $collection = new IndexCollection($this->container);
+        foreach ($modules as $module) {
+            $indices = $this->getStrategy($module)->getManagedIndices($module);
+            $collection->addIndices($indices);
+        }
+        return $collection;
+    }
+
+    /**
      * Get write index for given module. There can only be one write index at
      * any given time for a module.
      * @param string $module
@@ -186,8 +215,8 @@ class IndexPool
      */
     protected function registerStrategies()
     {
-        $nsPrefix = '\Sugarcrm\Sugarcrm\Elasticsearch\Index\Strategy';
-        $this->addStrategy('static', $nsPrefix . '\StaticStrategy');
+        $this->addStrategy(self::DEFAULT_STRATEGY, StaticStrategy::class);
+        $this->addStrategy(self::SINGLE_MODULE_STRATEGY, OneModulePerIndexStrategy::class);
     }
 
     /**

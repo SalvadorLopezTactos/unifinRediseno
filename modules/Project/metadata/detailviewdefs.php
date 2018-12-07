@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+// $Id$
 
 $viewdefs['Project']['DetailView'] = array(
 	'templateMeta' => array( 
@@ -89,8 +89,6 @@ $viewdefs['Project']['DetailView'] = array(
                         'template' => '{if $bean->aclAccess("delete")}[CONTENT]{/if}'
                     ),
 				),
-
-
 
 				array( 'customCode' =>
                         '{if $EDIT_RIGHTS_ONLY}<input title="{$MOD.LBL_VIEW_GANTT_TITLE}" '.

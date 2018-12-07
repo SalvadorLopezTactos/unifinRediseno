@@ -26,7 +26,7 @@
         editor.addButton('sugarlinkbutton', {
             title: app.lang.get('LBL_SUGAR_LINK_SELECTOR', 'pmse_Emails_Templates'),
             class: 'mce_selectfield',
-            icon: 'link',
+            image: 'styleguide/assets/img/record-link.svg',
             onclick: _.bind(this._showLinksDrawer, this)
         });
     },

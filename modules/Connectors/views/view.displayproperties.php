@@ -121,7 +121,7 @@ class ViewDisplayProperties extends ViewList
 
         // Send back our result
         return SugarAutoLoader::existingCustomOne($studioFile)
-               && SugarAutoLoader::fileExists($viewFile);
+               && file_exists($viewFile);
     }
 
     /**

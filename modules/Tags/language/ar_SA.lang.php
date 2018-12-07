@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array(
-    'LBL_MODULE_NAME' => 'العلامات',
+    'LBL_MODULE_NAME' => 'الرموز',
     'LBL_GENERIC_LINK' => 'الأشياء ذات الصلة',
     'LBL_NAME_LOWER' => 'اسم الرمز بحروف صغيرة (الإنجليزية فقط)',
     'LNK_NEW_TAG' => 'إنشاء الرمز',

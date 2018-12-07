@@ -9,6 +9,15 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+const BeforeEvent = require('core/before-event');
+const Logger = require('utils/logger');
+const Cache = require('core/cache');
+const Utils = require('utils/utils');
+const Controller = require('core/controller');
+const Language = require('core/language');
+const Routing = require('core/routing');
+const MetadataManager = require('core/metadata-manager');
+
 /**
  * SugarCRM namespace.
  *
@@ -41,6 +50,8 @@ SUGAR.App = (function() {
     };
 
     /**
+     * Constructor class for the main framework app.
+     *
      * `SUGAR.App` contains the core instance of the app. All related modules
      * can be found within the `SUGAR` namespace.
      *
@@ -50,23 +61,25 @@ SUGAR.App = (function() {
      * By default, the app uses `body` element and `div#content` as root element
      * and content element respectively.
      *
-     *     var app = SUGAR.App.init({
-     *         el: '#root',
-     *         contentEl: '#content'
-     *     });
+     * ```
+     * var app = SUGAR.App.init({
+     *     el: '#root',
+     *     contentEl: '#content'
+     * });
+     * ```
      *
      * If you want to initialize an app without initializing its modules,
      *
-     *     var app = SUGAR.App.init({el: '#root', silent: true});
+     * ```
+     * var app = SUGAR.App.init({el: '#root', silent: true});
+     * ```
      *
-     *
-     * @class App
-     * @singleton
-     * @constructor Constructor class for the main framework app.
+     * @class
+     * @name App
      * @param {Object} [opts] Configuration options. See full list of options
      *   in {@link #init}.
      * @return {App} Application instance.
-     * @private
+     * @mixes Core/BeforeEvent
      */
     function App(opts) {
         var appId = _.uniqueId('SugarApp_');
@@ -76,14 +89,18 @@ SUGAR.App = (function() {
             /**
              * Unique application ID.
              *
-             * @property {string}
+             * @type {string}
+             * @memberOf App
+             * @instance
              */
             appId: appId,
 
             /**
              * Base element to use as the root of the app.
              *
-             * @property {jQuery}
+             * @type {jQuery}
+             * @memberOf App
+             * @instance
              */
             $rootEl: _make$(opts.el || 'body'),
 
@@ -93,7 +110,9 @@ SUGAR.App = (function() {
              * The {@link Core.Controller application controller} loads layouts
              * into the content element.
              *
-             * @property {jQuery}
+             * @type {jQuery}
+             * @memberOf App
+             * @instance
              */
             $contentEl: _make$(opts.contentEl || '#content'),
 
@@ -105,6 +124,10 @@ SUGAR.App = (function() {
              *
              * Application specific code is needed for managing the components
              * after they have been put into DOM by the framework.
+             *
+             * @type {Object}
+             * @memberOf App
+             * @instance
              */
             additionalComponents: {}
 
@@ -114,10 +137,6 @@ SUGAR.App = (function() {
     return {
         /**
          * Initializes the app.
-         *
-         * - Triggers {@link #event-app:init} if `opts.silent` is not `false`.
-         * - {@link #event-app:sync:error} is fired if the public metadata could
-         * not be synced.
          *
          * @param {Object} [opts] Initialization options.
          * @param {string} [opts.el='body'] The selector for the
@@ -129,13 +148,14 @@ SUGAR.App = (function() {
          * @param {Function} [opts.defaultErrorHandler] Allows you to define a
          *   custom error handler. Defaults to
          *   {@link Core.Error#handleHttpError}.
-         *
          * @return {App} Application instance
-         * @method
+         * @fires app:init if `opts.silent` is not `false`.
+         * @fires app:sync:error if the public metadata could not be synced.
+         * @memberOf App
          */
         init: function(opts) {
             _app = _app || _.extend(this, new App(opts));
-            _.extend(_app, _app.beforeEvent);
+            _.extend(_app, BeforeEvent);
 
             // Register app specific events
             _app.events.register(
@@ -143,7 +163,8 @@ SUGAR.App = (function() {
                  * Fires when the app object is initialized. Modules bound to
                  * this event will initialize.
                  *
-                 * @event
+                 * @event app:init
+                 * @memberOf App
                  */
                 'app:init',
                 this
@@ -155,9 +176,8 @@ SUGAR.App = (function() {
                  * finished loading its dependencies and should initialize
                  * everything.
                  *
-                 *     obj.on('app:start', callback);
-                 *
-                 * @event
+                 * @event app:start
+                 * @memberOf App
                  */
                 'app:start',
                 this
@@ -168,7 +188,8 @@ SUGAR.App = (function() {
                  * Fires when the app is beginning to sync data / metadata from
                  * the server.
                  *
-                 * @event
+                 * @event app:sync
+                 * @memberOf App
                  */
                 'app:sync',
                 this
@@ -179,7 +200,8 @@ SUGAR.App = (function() {
                  * Fires when the app has finished its syncing process and is
                  * ready to proceed.
                  *
-                 * @event
+                 * @event app:sync:complete
+                 * @memberOf App
                  */
                 'app:sync:complete',
                 this
@@ -189,7 +211,8 @@ SUGAR.App = (function() {
                 /**
                  * Fires when a sync process failed.
                  *
-                 * @event
+                 * @event app:sync:error
+                 * @memberOf App
                  */
                 'app:sync:error',
                 this
@@ -200,7 +223,8 @@ SUGAR.App = (function() {
                  * Fires when a sync process failed during initialization of
                  * the app.
                  *
-                 * @event
+                 * @event app:sync:public:error
+                 * @memberOf App
                  */
                 'app:sync:public:error',
                 this
@@ -208,8 +232,10 @@ SUGAR.App = (function() {
 
             _app.events.register(
                 /**
-                 * @event
-                 * Fires when logging in.
+                 * * Fires when logging in.
+                 *
+                 * @event app:login
+                 * @memberOf App
                  */
                 'app:login',
                 this
@@ -217,8 +243,10 @@ SUGAR.App = (function() {
 
             _app.events.register(
                 /**
-                 * @event
                  * Fires when login succeeds.
+                 *
+                 * @event app:login:success
+                 * @memberOf App
                  */
                 'app:login:success',
                 this
@@ -226,8 +254,10 @@ SUGAR.App = (function() {
 
             _app.events.register(
                 /**
-                 * @event
                  * Fires when the app logs out.
+                 *
+                 * @event app:logout
+                 * @memberOf App
                  */
                 'app:logout',
                 this
@@ -237,9 +267,8 @@ SUGAR.App = (function() {
                 /**
                  * Fires when route changes a new view has been loaded.
                  *
-                 *     obj.on('app:view:change', callback);
-                 *
-                 * @event
+                 * @event app:view:change
+                 * @memberOf App
                  */
                 'app:view:change',
                 this
@@ -250,9 +279,8 @@ SUGAR.App = (function() {
                  * Fires when client application's user changes the locale, thus
                  * indicating that the application should "re-render" itself.
                  *
-                 *     obj.on('app:local:change', callback);
-                 *
-                 * @event
+                 * @event app:locale:change
+                 * @memberOf App
                  */
                 'app:locale:change',
                 this
@@ -264,28 +292,28 @@ SUGAR.App = (function() {
                  *
                  * Possible language display directions are `RTL` and `LTR`.
                  *
-                 *
-                 *     obj.on('lang:direction:change', callback);
-                 *
-                 * @event
+                 * @event lang:direction:change
+                 * @memberOf App
                  */
                 'lang:direction:change',
                 this
             );
 
-            // App cache must be inited first
+            // App cache must be initialized first
             if (_app.cache) {
                 _app.cache.init(this);
             }
 
             // Instantiate controller: <Capitalized-appId>Controller or Controller.
-            var className = _app.utils.capitalize(_app.config ? _app.config.appId : '') + 'Controller';
-            var Klass = this[className] || this.Controller;
+            var className = Utils.capitalize(_app.config ? _app.config.appId : '') + 'Controller';
+            var Klass = this[className] || Controller;
 
             /**
              * Reference to the main controller.
              *
-             * @property {Core.Controller}
+             * @type {Core.Controller}
+             * @memberOf App
+             * @instance
              */
             this.controller = new Klass();
 
@@ -293,7 +321,9 @@ SUGAR.App = (function() {
              * Reference to the API interface that the application uses to
              * request the server.
              *
-             * @property {SUGAR.Api}
+             * @type {SUGAR.Api}
+             * @memberOf App
+             * @instance
              */
             _app.api = SUGAR.Api.getInstance({
                 defaultErrorHandler: (opts && opts.defaultErrorHandler) ? opts.defaultErrorHandler : SUGAR.App.error.handleHttpError,
@@ -320,8 +350,9 @@ SUGAR.App = (function() {
          * @param {Object} opts Options.
          * @param {boolean} [opts.silent=false] Flag to indicate if modules
          *   should be initialized during application init process.
+         * @return {App} Application instance.
          * @private
-         * @chainable
+         * @memberOf App
          */
         _init: function(opts) {
             var self = this;
@@ -337,10 +368,11 @@ SUGAR.App = (function() {
                     return;
                 }
                 self._initModules();
-                self._loadConfig();
                 if (!opts.silent) {
+                    _app.controller.setElement(_app.$rootEl);
                     _app.trigger('app:init', self);
                 }
+
                 if (opts.callback && _.isFunction(opts.callback)) {
                     opts.callback(_app);
                 }
@@ -357,7 +389,7 @@ SUGAR.App = (function() {
                     getPublic: true
                 };
                 cssCallback(function() {
-                    _app.metadata.sync(syncCallback, options);
+                    MetadataManager.sync(syncCallback, options);
                 });
             } else {
                 cssCallback(function() {
@@ -371,6 +403,7 @@ SUGAR.App = (function() {
          * Initializes all modules that have an `init` function.
          *
          * @private
+         * @memberOf App
          */
         _initModules: function() {
             _.each(_modules, function(module) {
@@ -384,11 +417,36 @@ SUGAR.App = (function() {
          * Extends base settings with settings from the server.
          *
          * @private
+         * @deprecated since 7.10. Please use {@link #setConfig} instead.
+         * @memberOf App
          */
         _loadConfig: function() {
-            // extend our config with settings from local storage if we have it
+            this.logger.warn('`App._loadConfig` is deprecated since 7.10. Please use `App.setConfig` instead.');
             _app.config = _app.config || {};
-            _app.config = _.extend(_app.config, _app.metadata.getConfig());
+            _app.config = _.extend(_app.config, MetadataManager.getConfig());
+        },
+
+        /**
+         * Updates the config object based on the new metadata.
+         *
+         * Reloads modules that depend on the config.
+         *
+         * @memberOf App
+         * @param {Object} [config] The config object. If not passed, we'll grab
+         *   it using {@link Core/MetadataManager#getConfig}.
+         */
+        setConfig: function(config) {
+            // extend our config with settings from local storage if we have it
+            this.config = this.config || {};
+            this.config = _.extend(this.config, config);
+
+            // Reload the modules that depend on the configuration.
+            this.logger = Logger(this.config.logger);
+            this.cache = Cache({
+                uniqueKey: this.config.uniqueKey,
+                env: this.config.env,
+                appId: this.config.appId
+            });
         },
 
         /**
@@ -398,9 +456,9 @@ SUGAR.App = (function() {
          * load, or directly plain text css.
          *
          * @param {Function} [callback] Function called once CSS is loaded.
+         * @memberOf App
          */
         loadCss: function(callback) {
-
             _app.api.css(_app.config.platform, _app.config.themeName, {
                 success: function(rsp) {
 
@@ -409,7 +467,7 @@ SUGAR.App = (function() {
                             $('<link>')
                                 .attr({
                                     rel: 'stylesheet',
-                                    href: _app.utils.buildUrl(url)
+                                    href: Utils.buildUrl(url),
                                 })
                                 .appendTo('head');
                         });
@@ -430,18 +488,20 @@ SUGAR.App = (function() {
         /**
          * Starts the main execution phase of the application.
          *
-         * Triggers {@link #event-app:start}.
-         *
-         * @method
+         * @memberOf App
+         * @fires app:start
          */
         start: function() {
             _app.events.registerAjaxEvents();
+            _app.controller.loadAdditionalComponents(_app.config.additionalComponents);
             _app.trigger('app:start', this);
-            _app.routing.start();
+            Routing.start();
         },
 
         /**
          * Destroys the instance of the current app.
+         *
+         * @memberOf App
          */
         destroy: function() {
             // TODO: Not properly implemented
@@ -465,10 +525,15 @@ SUGAR.App = (function() {
          * @param {Object} obj Module to augment the app with.
          * @param {boolean} [init=false] Flag indicating if the module should be
          *   initialized immediately.
+         * @memberOf App
          */
         augment: function(name, obj, init) {
             this[name] = obj;
             _modules[name] = obj;
+
+            if (name === 'config') {
+                this.setConfig(obj);
+            }
 
             if (init && obj.init && _.isFunction(obj.init)) {
                 obj.init.call(obj, _app);
@@ -478,12 +543,6 @@ SUGAR.App = (function() {
         /**
          * Syncs an app.
          *
-         * - {@link #event-app:sync} event is fired when the sync process
-         * begins.
-         * - {@link #event-app:sync:complete} event is fired when the series of
-         * sync operations have finished.
-         * - {@link #event-app:sync:error} is fired if it failed.
-         *
          * The events are not fired if the sync happens for public metadata.
          *
          * @param {Object} [options] Options. See full list of options
@@ -492,7 +551,12 @@ SUGAR.App = (function() {
          *   sync operation completes.
          * @param {boolean} [options.getPublic=false] Flag indicating if only
          *   public metadata should be synced.
-         * @method
+         *
+         * @fires app:sync when the synchronization process begins.
+         * @fires app:sync:complete when the series of synchronization
+         *   operations have finished.
+         * @fires app:sync:error if synchronization fails.
+         * @memberOf App
          */
         sync: function(options) {
             var self = this;
@@ -523,9 +587,9 @@ SUGAR.App = (function() {
             async.waterfall([function(callback) {
                 self.isSynced = false;
                 self.trigger('app:sync');
-                var doUpdateLanguage = !options.noUserUpdate && (options.language || _app.cache.get('langHasChanged'));
+                var doUpdateLanguage = !options.noUserUpdate && (options.language || self.cache.get('langHasChanged'));
                 if (doUpdateLanguage) {
-                    var language = options.language || _app.lang.getLanguage();
+                    var language = options.language || Language.getLanguage();
                     self.user.updateLanguage(language, callback);
                     _app.cache.cut('langHasChanged');
                 }
@@ -565,6 +629,10 @@ SUGAR.App = (function() {
                     } else {
                         self.isSynced = true;
                         self.trigger('app:sync:complete');
+                        // TODO this will be removed by SC-5256.
+                        if (window.jQuery) {
+                            jQuery.migrateMute = self.logger.getLevel().value > self.logger.levels.WARN.value;
+                        }
                     }
 
                     _.each(_syncCallbacks, function(callback) {
@@ -584,6 +652,7 @@ SUGAR.App = (function() {
          *   you can pass to {@link Core.MetadataManager#sync}.
          * @param {Function} [options.callback] Function to be invoked when the
          *   sync operation completes.
+         * @memberOf App
          */
         syncPublic: function(options) {
             options = options || {};
@@ -594,10 +663,11 @@ SUGAR.App = (function() {
         /**
          * Navigates to a new route.
          *
-         * @param {Core.Context} [context] Context object to extract the module
+         * @param {Core/Context} [context] Context object to extract the module
          *   from.
-         * @param {Data.Bean} [model] Model object to route with.
+         * @param {Data/Bean} [model] Model object to route with.
          * @param {string} [action] Action name.
+         * @memberOf App
          */
         navigate: function(context, model, action) {
             var route, id, module;
@@ -611,9 +681,7 @@ SUGAR.App = (function() {
         },
 
         /**
-         * Logs in this app.
-         *
-         * Triggers {@link #event-app:login:success}.
+         * Logs in to the app.
          *
          * @param {Object} credentials User credentials.
          * @param {Object} credentials.username User name.
@@ -624,12 +692,14 @@ SUGAR.App = (function() {
          * @param {Function} [callbacks.success] The success callback.
          * @param {Function} [callbacks.error] The error callback.
          * @param {Function} [callbacks.complete] The complete callback.
+         * @memberOf App
+         * @fires app:login:success on successful login.
          */
         login: function(credentials, info, callbacks) {
             callbacks = callbacks || {};
 
             info = info || {};
-            info.current_language = _app.lang.getLanguage();
+            info.current_language = Language.getLanguage();
             _app.api.login(credentials, info, {
                 success: function(data) {
                     _app.trigger('app:login:success', data, credentials.username);
@@ -644,17 +714,18 @@ SUGAR.App = (function() {
         },
 
         /**
-         * Logs out this app.
-         *
-         * Triggers {@link #event-app:logout}.
+         * Logs out of this app.
          *
          * @param {Object} [callbacks] Object containing the callbacks.
          * @param {Function} [callbacks.success] The success callback.
          * @param {Function} [callbacks.error] The error callback.
          * @param {Function} [callbacks.complete] The complete callback.
-         * @param {Boolean} [clear=false] Flag indicating if user information
+         * @param {boolean} [clear=false] Flag indicating if user information
          *   must be deleted from cache.
+         * @param {Object} [options={}] jQuery/Zepto request options.
          * @return {SUGAR.HttpRequest} XHR request object.
+         * @fires app:logout
+         * @memberOf App
          */
         logout: function(callbacks, clear, options) {
             var originalComplete, originalError;
@@ -718,7 +789,7 @@ SUGAR.App = (function() {
                 if (callback) callback();
             }
             catch (e) {
-                _app.logger.fatal("Failed to compile js");
+                Logger.fatal("Failed to compile js");
                 // TODO: Consider turning off SL altogether
                 if (callback) callback(e);
                 return e;
@@ -729,8 +800,11 @@ SUGAR.App = (function() {
 
         /**
          * Checks if the server version and flavor are compatible.
+         *
          * @param {Object} data Server information.
-         * @return {Boolean|Object} `true` if server is compatible and an error object if not.
+         * @return {boolean|Object} `true` if server is compatible and an error
+         *   object if not.
+         * @memberOf App
          */
         isServerCompatible: function(data) {
             var flavors = this.config.supportedServerFlavors,
@@ -771,3 +845,56 @@ SUGAR.App = (function() {
     };
 
 }());
+
+// The assignments below are temporary since components should just require the
+// mixins/components they need instead of relying on the global variable.
+const Context = require('core/context');
+SUGAR.App.Context = Context;
+const ctxFactory = {
+    /**
+     * Gets a new instance of the context object.
+     *
+     * @param {Object} [attributes] Any parameters and state properties to
+     *   attach to the context.
+     * @return {Core/Context} New context instance.
+     * @deprecated since 7.10.
+     */
+    getContext: function (attributes) {
+        SUGAR.App.logger.warn('The function `app.context.getContext()` is deprecated in 7.10. ' +
+            'Please use the `new` keyword to create a context.');
+        return new Context(attributes);
+    }
+};
+
+SUGAR.App.augment('Bean', require('data/bean'));
+SUGAR.App.augment('BeanCollection', require('data/bean-collection'));
+SUGAR.App.augment('MixedBeanCollection', require('data/mixed-bean-collection'));
+SUGAR.App.augment('error', require('core/error'));
+SUGAR.App.augment('context', ctxFactory);
+SUGAR.App.augment('utils', Utils);
+SUGAR.App.augment('cookie', require('utils/cookie'));
+SUGAR.App.augment('Controller', Controller);
+SUGAR.App.augment('events', require('core/events'));
+SUGAR.App.augment('acl', require('core/acl'));
+SUGAR.App.augment('metadata', MetadataManager);
+SUGAR.App.augment('currency', require('utils/currency'));
+SUGAR.App.augment('date', require('utils/date'));
+SUGAR.App.augment('math', require('utils/math'));
+SUGAR.App.augment('plugins', require('core/plugin-manager'));
+_.mixin(require('utils/underscore-mixins'));
+SUGAR.App.augment('user', require('core/user'));
+Handlebars.registerHelper(require('view/hbs-helpers'));
+SUGAR.App.augment('validation', require('data/validation'));
+SUGAR.App.augment('data', require('data/data-manager'));
+SUGAR.App.augment('lang', Language);
+SUGAR.App.augment('template', require('view/template'));
+SUGAR.App.Router = require('core/router');
+SUGAR.App.augment('routing', Routing);
+const ViewManager = require('view/view-manager');
+SUGAR.App.augment('view', ViewManager);
+ViewManager.Component = require('view/component');
+SUGAR.App.augment('alert', require('view/alert'));
+ViewManager.AlertView = require('view/alert-view');
+ViewManager.Field = require('view/field');
+ViewManager.Layout = require('view/layout');
+ViewManager.View = require('view/view');

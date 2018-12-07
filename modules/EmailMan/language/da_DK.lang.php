@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'klik her',
 	'TXT_REMOVE_ME'								=> 'Hvis du vil fjerne dig selv fra denne e-mail-liste',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Send meddelelse fra tildeling af brugerens e-mail adresse',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Frameld nye e-mail-adresser som standard',
 
 	'LBL_SECURITY_TITLE'						=> 'Indstillinger for e-mail-sikkerhed',
 	'LBL_SECURITY_DESC'							=> 'Kontrollér følgende, som IKKE må være tilladt i via InboundEmail eller vises i modulet E-mails.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Tillad, at brugerne bruger denne konto til udgående e-mail:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Når denne indstilling er valgt, kan alle brugere sende e-mails ved hjælp af den samme udgående <br>e-mail-konto, som bruges til at sende systemmeddelelser og -beskeder. Hvis indstillingen ikke er valgt,<br> kan brugerne stadig bruge den udgående e-mail-server, når de har angivet deres kontooplysninger.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Når aktiveret, vil den tildelte brugers navn og email adresse være inkluderet i Fra felter i emailen. Denne funktion vil muligvis ikke virke på SMTP servere som ikke tillader afsendelse fra en anden email konto end server kontoen.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Når en ny e-mailadresse tilføjes vil den automatisk blive frameldt. Kampagnemails kan ikke leveres til adresser, der er frameldt. Ændring af denne indstilling har ingen inflydelse på eksisterende e-mailadresser.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

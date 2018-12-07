@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Tootja kustutamiseks täpsustage kirje numbrit.',
   'NTC_STATUS' => 'Selle tootja eemaldamiseks Tootja ripploenditest määra olekuks Inaktiivne',
   'NTC_LIST_ORDER' => 'Määra selle tootja kuvamise järjekord Tootja ripploendites',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Aktiivne',
-    'Inactive' => 'Inaktiivne',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Impordi tootjad',
 	'LBL_EDITLAYOUT' => 'Muuda paigutust' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Tuluartiklid',

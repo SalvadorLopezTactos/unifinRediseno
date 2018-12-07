@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Selekto' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Fshi' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Lloji',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Shablone për emaila',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Shabllonet e emailit',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Ndryshoret',
 );

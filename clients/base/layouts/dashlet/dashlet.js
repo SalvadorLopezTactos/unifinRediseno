@@ -32,10 +32,15 @@
         }
 
         //set current model draggable
-        this.on("render", function() {
-            this.model.trigger("applyDragAndDrop");
+        this.on('render', function() {
+            // If the user has write access, allow drag & drop
+            if (app.acl.hasAccessToModel('edit', this.model)) {
+                this.model.trigger('applyDragAndDrop');
+            } else {
+                this.$('[data-toggle=dashlet]').css('cursor', 'default');
+            }
         }, this);
-        this.context.on("dashboard:collapse:fire", this.collapse, this);
+        this.context.on('dashboard:collapse:fire', this.collapse, this);
     },
 
     /**
@@ -47,7 +52,11 @@
      * @return {Mixed}
      */
     findLayout: function(name, layout) {
-        return (layout.name == name || layout.type == name) ? layout : this.findLayout(name, layout.layout);
+        return (layout.name === name || layout.type === name) ?
+            layout :
+            layout.layout ?
+                this.findLayout(name, layout.layout) :
+                null;
     },
 
     /**
@@ -387,6 +396,18 @@
             dash[type] = conf;
             self.addDashlet(dash);
         });
+    },
+
+    /**
+     * Open Report detail view on a new tab
+     */
+    viewReport: function() {
+        var meta = app.utils.deepCopy(_.first(this.meta.components));
+
+        if (meta.view && meta.view.saved_report_id) {
+            var link = app.bwc.buildRoute('Reports', meta.view.saved_report_id);
+            window.open('index.php#' + link, '_blank');
+        }
     },
 
     /**

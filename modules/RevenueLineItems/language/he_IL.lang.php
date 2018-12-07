@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת פריטי שורת הכנסה',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת פריטי שורת הכנסה',
+
     'LBL_CAMPAIGN_PRODUCT' => 'מוצר קמפיין',
     'LBL_MODULE_NAME' => 'שורות פרטי הכנסה',
     'LBL_MODULE_NAME_SINGULAR' => 'שורת פריט הכנסה',

@@ -161,7 +161,6 @@ class ConnectorManager
         @include($path);
         $hashes[$key] = $hash;
         write_array_to_file("hashes", $hashes, $path);
-        SugarAutoLoader::addToMap($path);
     }
 
     /**

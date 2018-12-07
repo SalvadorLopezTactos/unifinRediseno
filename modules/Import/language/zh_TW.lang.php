@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => '多個欄被定義相同的欄位名稱。',
     'ERR_MISSING_REQUIRED_FIELDS' => '缺少必填字段：',
     'ERR_MISSING_MAP_NAME' => '缺少自訂對應名稱',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => '為 IDM 模式禁用了使用者導入。',
     'ERR_SELECT_FULL_NAME' => '選定姓氏和名字之後，您將無法選取完整姓名。',
     'ERR_SELECT_FILE' => '選取檔案以上載。',
     'LBL_SELECT_FILE' => '選取檔案：',

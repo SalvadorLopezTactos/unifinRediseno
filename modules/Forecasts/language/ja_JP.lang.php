@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => '売上予測ダッシュ ボード',
+
     //module strings.
     'LBL_MODULE_NAME' => '売上予測',
     'LBL_MODULE_NAME_SINGULAR' => '売上予測',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => '商品ID',
     'LBL_QUOTA_ID' => 'ノルマID',
     'LBL_VERSION' => 'バージョン',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'バー凡例を隠す',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'バー凡例を表示',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => '線凡例を隠す',
+    'LBL_CHART_LINE_LEGEND_OPEN' => '線凡例を表示',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'エラー:{0}は{1}の売上予測を要求するマネージャアクセスを持っていません',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => '会計年度開始日:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '売上予測モジュールで使われる期間を設定してください。<br />会計年度の開始日を選択することから始めてください。そして売上予測を設定したい期間のタイプを選択してください。その選択により、期間の日にちの範囲は自動的に計算されます。サブ期間は売上予測ワークシートに基づいています。<br />閲覧できる将来と過去の期間は売上予測モジュールのサブ期間の数を決定します。ユーザーは売上予測の数値をサブ期間で閲覧したり編集したりすることができます。',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} をどのカテゴリに入れるかを設定します。<br><br>範囲設定は初回しか変更できないことにご注意ください。アップグレードされたインスタンスでは、範囲設定が既存の売上予測データにロックされています。<br><br>確率の範囲に基づいて 2 または 3 つ以上のカテゴリを選択することができます。<br><br>カスタムカテゴリーの左側のチェックボックスは、どの範囲をマネージャーにコミットおよび報告するために売上予測の金額に含めるかを決定するために使用します。<br><br>ユーザーは {{forecastByModule}} を含む／含まないの状態とカテゴリをワークシートから手動で変更できます。',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '{{forecastByModule}} をどのように分類するかを構成します。<br><br>範囲設定は最初の確定後に変更できないことに注意してください。アップグレードされたインスタンスの場合は、範囲設定は既存の売上予測データにロックされます。<br><br>確度範囲に基づいて2つ以上のカテゴリを選択したり、確度に基づかないカテゴリを作成したりできます。<br><br>カスタムカテゴリの左にチェックボックスがあります。これらを使って、どの範囲が確定済み売上予測金額内に含まれ、マネージャーにレポートするかを判断します。<br><br>ユーザは {{forecastByModule}} の含める/除外ステータスとカテゴリをワークシートから手動で変更できます。',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'ユーザに記入させたいそれぞれの {{forecastByModuleSingular}} の売上予測のカラムを選択してください。達成可能の金額は、{{forecastByModule}} で表示される金額と結びついていますので注意してください。その理由で、達成可能のカラムは隠すことはできません。',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => '売上予測モジュールで閲覧したいカラムを選択してください。フィールドのリストがワークシートを組み合わせて、ユーザがビューをどのように設定するかを選ぶことができます。',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => '私はhow-to textによる売上予測の代理人です!',

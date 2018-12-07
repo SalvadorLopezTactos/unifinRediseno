@@ -29,7 +29,7 @@ interface GlobalSearchCapable extends EngineInterface
 
     /**
      * Execute search tags
-     * @return ResultSetInterface
+     * @return null|ResultSetInterface
      */
     public function searchTags();
 

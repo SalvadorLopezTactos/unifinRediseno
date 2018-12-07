@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'Brukerens signaturer',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'Brukerens sigantur',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Denne signaturen krever et navn.',
-    'LBL_SIGNATURE_NAME'         => 'Navn',
-    'LBL_SIGNATURE'              => 'Signatur',
-    'LBL_SIGNATURE_HTML'         => 'HTML-signatur',
-    'LBL_SIGNATURE_DEFAULT'      => 'Bruk signatur?',
-    'LBL_SIGNATURE_PREPEND'      => 'Signatur over svar?',
-    'LBL_SIGNATURES'             => 'Signaturer',
+    'LBL_DEFAULT_SIGNATURE' => 'Standard',
+    'LBL_MODULE_NAME' => 'E-postsignaturer',
+    'LBL_MODULE_NAME_SINGULAR' => 'E-postsignatur',
+    'LBL_SIGNATURE_NAME' => 'Navn',
+    'LBL_SIGNATURE' => 'Signatur',
+    'LBL_SIGNATURE_HTML' => 'HTML-signatur',
+    'LBL_SIGNATURE_DEFAULT' => 'Bruk signatur?',
+    'LBL_SIGNATURE_PREPEND' => 'Signatur over svar?',
+    'LBL_SIGNATURES' => 'Signaturer',
 );

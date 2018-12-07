@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Κλήσεων',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφών Κλήσεων',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Κλήσεις',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Κλήση',
@@ -91,7 +95,7 @@ $mod_strings = array (
     'LBL_HISTORY_SUBPANEL_TITLE' => 'Σημειώσεις',
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Ανατέθηκε σε',
     'LBL_LIST_MY_CALLS' => 'Κλήσεις Μου',
-    'LBL_MY_SCHEDULED_CALLS' => 'Προγραμματισμένες Κλήσεις Μου',
+    'LBL_MY_SCHEDULED_CALLS' => 'Οι προγραμματισμένες κλήσεις μου',
     'LBL_SELECT_FROM_DROPDOWN' => 'Παρακαλώ κάνετε μια επιλογή από την Σχετική Αναπτυσσόμενη λίστα, αρχικά.',
 	'LBL_ASSIGNED_TO_NAME' => 'Ανατέθηκε σε:',
 	'LBL_ASSIGNED_TO_ID' => 'Ανατεθειμένος Χειριστής',

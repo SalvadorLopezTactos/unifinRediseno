@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Kontrolna tabla liste stavki prihoda',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa stavki prihoda',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Proizvod kampanje',
     'LBL_MODULE_NAME' => 'Stavke prihoda',
     'LBL_MODULE_NAME_SINGULAR' => 'Stavka prihoda',

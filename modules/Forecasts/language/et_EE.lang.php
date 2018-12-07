@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Prognooside töölaud',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Prognoosid',
     'LBL_MODULE_NAME_SINGULAR' => 'Prognoos',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'Toote ID',
     'LBL_QUOTA_ID' => 'Kvoodi ID',
     'LBL_VERSION' => 'Versioon',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Peida riba legend',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Näita riba legendi',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Näita joone legendi',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Peida joone legend',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Tõrge: kasutajal {0} pole halduri juurdepääsu prognooside nõudmiseks {1} puhul',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Majandusaasta alguskuupäev:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfigureerige moodulis Prognoosid kasutatav ajaperiood. <br><br>Pange tähele, et ajaperioodi sätteid ei saa pärast algsseadistust muuta.<br><br>Esmalt valige majandusaasta alguskuupäev. Seejärel valige prognoosi ajaperioodi tüüp. Ajaperioodide kuupäevavahemik arvutatakse teie valikute põhjal automaatselt. Alam ajaperiood on prognoosi töölehe aluseks. <br><br>Kuvatavad tulevased ja möödunud ajaperioodid määratlevad prognooside mooduli nähtavad alamperioodid. Kasutajad saavad prognoosi arve nähtavates alamperioodides vaadata ja redigeerida.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Saate konfigureerida, kuidas soovite suvandi {{forecastByModule}} kategoriseerida. <br><br>Pange tähele, et vahemiku sätteid ei saa pärast esmast plaanimist muuta. Täiendatud eksemplaride puhul on vahemiku säte lukustatud koos olemasolevate prognoosi andmetega.<br><br>Võite valida kaks või rohkem kategooriat tõenäosusvahemike põhjal või luua kategooriad, mis ei põhine tõenäosusel.<br><br>Kohandatud kategooriatest vasakul asuvad märkeruudud. Kasutage neid, et otsustada, milliseid vahemikke kaasatakse plaanitavate ja haldajatele esitatavate prognooside hulka. <br><br>Kasutaja võib suvandi {{forecastByModule}} kaasamise/välistamise olekut ja kategooriat oma töölehelt käsitsi muuta.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Seadistage, kuidas soovite liigitada moodulit {{forecastByModule}}. <br><br>Pange tähele, et vahemiku sätteid pole võimalik pärast esimest kinnitamist muuta. Täiendatud olemite puhul on vahemiku säte olemasolevate prognoosiandmete sisse lukustatud.<br><br>Võite valida kaks või enam tõenäosusvahemikel põhinevat kategooriat, või luua kategooriaid muudel põhimõtetel. <br><br>Kasutage kohandatud kategooriatest vasakul asuvaid märkeruute, et otsustada, millised vahemikud lisada juhtidele saadetavaisse prognoosi aruannetesse. <br><br>Kasutajad saavad oma töölehelt sisaldamise/väljajätmise olekut ja mooduli {{forecastByModule}} kategooriat muuta.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Valige veerud, mille puhul soovite, et kasutajad need iga {{forecastByModuleSingular}} puhul oma prognoosides täidaks. Pange tähele, et summa Tõenäoline on seotud suvandis {{forecastByModule}} näidatud summaga; seetõttu ei saa veergu Tõenäoline peita.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Valige, milliseid veerge soovite moodulis Prognoos kuvada. Väljade loend ühendab töölehe ja võimaldab kasutajal valida, kuidas selle vaadet konfigureerida.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Olen prognoosimise viisi teksti Prognoosi kohatäide!',

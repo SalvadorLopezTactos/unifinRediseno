@@ -29,5 +29,5 @@ $viewdefs['Quotes']['base']['layout']['list-dashboard'] = array(
             ),
         ),
     ),
-    'name' => 'LBL_DEFAULT_DASHBOARD_TITLE',
+    'name' => 'LBL_QUOTES_LIST_DASHBOARD',
 );

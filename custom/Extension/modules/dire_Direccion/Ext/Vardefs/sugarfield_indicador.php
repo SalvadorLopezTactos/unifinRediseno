@@ -1,5 +1,5 @@
 <?php
- // created: 2018-08-31 10:45:11
-$dictionary['dire_Direccion']['fields']['indicador']['default']='1';
+ // created: 2018-12-05 18:17:34
+$dictionary['dire_Direccion']['fields']['indicador']['default'] = '1';
+$dictionary['dire_Direccion']['fields']['indicador']['full_text_search']['boost'] = 1;
 
- ?>

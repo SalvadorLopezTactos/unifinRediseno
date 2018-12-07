@@ -8,8 +8,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 var RestProxy = function (options) {
-    Proxy.call(this, options);
+    PMSE.Proxy.call(this, options);
     this.restClient = null;
     this.getMethod = null;
     this.sendMethod = null;
@@ -17,7 +18,7 @@ var RestProxy = function (options) {
     RestProxy.prototype.initObject.call(this, options);
 };
 
-RestProxy.prototype = new Proxy();
+RestProxy.prototype = new PMSE.Proxy();
 
 RestProxy.prototype.type = 'RestProxy';
 

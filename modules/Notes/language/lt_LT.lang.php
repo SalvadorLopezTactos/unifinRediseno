@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Užrašų sąrašo ataskaitų sritis',
+
     'ERR_DELETE_RECORD' => 'Jūs turite nurodyti įrašo numerį, kad galėtumėte ištrinti klientą.',
     'LBL_ACCOUNT_ID' => 'Kliento ID:',
     'LBL_CASE_ID' => 'Aptarnavimo ID:',
@@ -23,9 +26,13 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Aprašymas',
     'LBL_EMAIL_ADDRESS' => 'El. paštas:',
     'LBL_EMAIL_ATTACHMENT' => 'Prisegtukas',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'El. pašto priedas, skirtas',
     'LBL_FILE_MIME_TYPE' => 'Mime tipas',
+    'LBL_FILE_EXTENSION' => 'Failo prievardis',
+    'LBL_FILE_SOURCE' => 'Failo kilmė',
+    'LBL_FILE_SIZE' => 'Failo dydis',
     'LBL_FILE_URL' => 'Failo nuoroda',
-    'LBL_FILENAME' => 'Prisegtukas:',
+    'LBL_FILENAME' => 'Priedas',
     'LBL_LEAD_ID' => 'Potencialaus kontakto ID:',
     'LBL_LIST_CONTACT_NAME' => 'Kontaktas',
     'LBL_LIST_DATE_MODIFIED' => 'Redagavimo data',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Pardavimo ID:',
     'LBL_PARENT_ID' => 'Pagrindinis ID:',
     'LBL_PARENT_TYPE' => 'Pagrindio tipas',
+    'LBL_EMAIL_TYPE' => 'El. pašto tipas',
+    'LBL_EMAIL_ID' => 'El. pašto ID',
     'LBL_PHONE' => 'Telefonas:',
     'LBL_PORTAL_FLAG' => 'Rodyti portale?',
     'LBL_EMBED_FLAG' => 'Įterpti į laišką?',

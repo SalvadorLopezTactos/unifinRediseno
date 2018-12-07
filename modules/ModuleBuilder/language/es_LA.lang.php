@@ -745,8 +745,8 @@ Si se incluye Oportunidades, Cuentas puede requerirse o eliminarse de convertir 
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'¿Está seguro de que desea eliminar esta relación?
 <br>Nota: Esta operación puede demorar unos minutos.',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Esto hará la relación permantente. ¿Está seguro de que desea desplegar esta relación?',
@@ -759,6 +759,7 @@ Si se incluye Oportunidades, Cuentas puede requerirse o eliminarse de convertir 
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Configure el campo para búsquedas de texto completo.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Impulsar es el proceso para mejorar la pertinencia de los campos de un registro. <br /> Los campos con un nivel de impulso más alto recibirán mayor peso cuando se realiza la búsqueda. Cuando se realiza una búsqueda, la coincidencia de registros que contienen campos con un peso mayor aparecerá más arriba en los resultados de la búsqueda. <br /> El valor predeterminado es 1,0, lo que vendría a ser un impulso neutro. Para aplicar un impulso positivo se acepta cualquier valor flotante superior a 1. Para aplicar un impulso negativo utilice valores inferiores a 1. Por ejemplo, un valor de 1,35 impulsará positivamente un campo en un 135 %. Si utiliza un valor de 0,60 se aplicará un impulso negativo. <br/>Tenga en cuenta que en las versiones anteriores era necesario realizar un reindexado de búsqueda de texto completo. Esto ya no es necesario.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Sí</b>: El campo será incluido en una operación de importación.<br><b>No</b>: El campo no será incluido en una importación.<br><b>Requerido</b>: Se debe suministrar un valor para el campo en toda importación.',
+'LBL_POPHELP_PII'=>'Este campo se marcará automáticamente para realizar una auditoría y estará disponible en la visualización de Información personal.<br>Los campos de información personal se pueden borrar permanentemente cuando el registro esté relacionado con una solicitud de borrado por privacidad de datos.<br>La eliminación se realiza mediante el módulo de Privacidad de datos, y la pueden ejecutar los administradores o los usuarios con el rol de Administrador de privacidad de datos.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Introduzca un número para el Ancho, como medida en píxeles.<br> La imagen subida se ajustará a ese Ancho.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Introduzca un número para la Altura, como medida en píxeles.<br> La imagen subida se ajustará a esa Altura.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

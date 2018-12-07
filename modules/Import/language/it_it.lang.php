@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Sono state definite colonne multiple con lo stesso nome campo.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Mancano campi richiesti:',
     'ERR_MISSING_MAP_NAME' => 'Mancata mappatura del nome personalizzato',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'L&#39;importazione di utenti è disattivata per la modalità IDM.',
     'ERR_SELECT_FULL_NAME' => 'Non puoi selezionare il Nome completo quando sia Nome che cognome sono selezionati.',
     'ERR_SELECT_FILE' => 'Seleziona un file da caricare.',
     'LBL_SELECT_FILE' => 'Seleziona file:',

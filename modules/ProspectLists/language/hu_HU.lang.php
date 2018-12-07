@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Céllisták listája műszerfal',
+
   'LBL_MODULE_NAME' => 'Cél listák',
   'LBL_MODULE_NAME_SINGULAR' => 'Cél lista',
   'LBL_MODULE_ID'   => 'Cél listák',

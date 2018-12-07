@@ -1,4 +1,5 @@
 nv.models.multiBarChart = function() {
+  if (SUGAR.App) SUGAR.App.logger.warn('The nvd3 chart library is deprecated. Use sucrose chart library.');
 
   //============================================================
   // Public Variables with Default Settings
@@ -20,8 +21,8 @@ nv.models.multiBarChart = function() {
       y,
       state = {},
       strings = {
-        legend: {close: 'Hide legend', open: 'Show legend'},
-        controls: {close: 'Hide controls', open: 'Show controls'},
+        legend: {close: 'Hide legend', open: 'Show legend', noText: 'Undefined'},
+        controls: {close: 'Hide controls', open: 'Show controls', noText: 'Undefined'},
         noData: 'No Data Available.'
       },
       hideEmptyGroups = true,
@@ -51,19 +52,22 @@ nv.models.multiBarChart = function() {
         .color(['#444']),
       scroll = nv.models.scroll();
 
-  var tooltipContent = function(key, x, y, e, graph) {
+  var tooltipContent = function(key, x, y, e, graph, seriesKey) {
     return '<h3>' + key + '</h3>' +
+           (key !== seriesKey ? '<p>Group: ' + seriesKey + '</p>' : '') +
            '<p>' + y + ' on ' + x + '</p>';
   };
 
-  var showTooltip = function(eo, offsetElement, groupTotals) {
-    var key = eo.series.key,
-        x = (groupTotals) ?
+  var showTooltip = function(eo, offsetElement, groupTotals, groupLabels) {
+    var groupKey = Array.isArray(groupLabels) && groupLabels.length ?
+              groupLabels[eo.pointIndex] : eo.series.key;
+    var seriesKey = eo.series.key;
+    var x = (groupTotals) ?
               (eo.point.y * 100 / groupTotals[eo.pointIndex].t).toFixed(1) :
-              xAxis.tickFormat()(multibar.x()(eo.point, eo.pointIndex)),
-        y = multibar.y()(eo.point, eo.pointIndex),
-        content = tooltipContent(key, x, y, eo, chart),
-        gravity = eo.value < 0 ?
+              xAxis.tickFormat()(multibar.x()(eo.point, eo.pointIndex));
+    var y = multibar.y()(eo.point, eo.pointIndex);
+    var content = tooltipContent(groupKey, x, y, eo, chart, seriesKey);
+    var gravity = eo.value < 0 ?
           vertical ? 'n' : 'e' :
           vertical ? 's' : 'w';
 
@@ -718,7 +722,7 @@ nv.models.multiBarChart = function() {
 
       dispatch.on('tooltipShow', function(eo) {
         if (tooltips) {
-          showTooltip(eo, that.parentNode, groupTotals);
+          showTooltip(eo, that.parentNode, groupTotals, groupLabels);
         }
       });
 

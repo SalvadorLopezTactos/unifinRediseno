@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Are you sure you wish to delete this relationship?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Hierdoor wordt deze relatie permanent gemaakt. Weet u zeker dat u deze relatie wilt inzetten?',
 'LBL_CONFIRM_DONT_SAVE' => 'Er zijn wijzigingen doorgevoerd sinds de laatste keer dat u heeft opgeslagen. Wilt u deze opslaan?',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Configureer het veld om de volledige tekst te kunnen doorzoeken.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Door boosten wordt de relevantie van de velden in een record verbeterd.<br />Velden met een hoger boostniveau krijgen voorrang wanneer er wordt gezocht. Als er wordt gezocht zullen records die velden bevatten met meer voorrang hoger verschijnen in de zoekresultaten.<br />De standaard waarde is 1.0, wat voor een neutrale boost staat. Om een positieve boost toe te passen wordt een zwevende waarde van meer dan 1 geaccepteerd. Voor een negatieve boost gebruikt u waarden lager dan 1. Een waarde van 1.35 zorgt bijvoorbeeld voor een positieve boost van 135%. Een waarde van 0.60 leidt tot een negatieve boost.<br />Houd er rekening mee dat het in vorige versies verplicht was om een zoekopdracht in de volledige tekst opnieuw te indexeren. Dit is niet langer verplicht.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Ja</b>: het veld wordt opgenomen in een importeerhandeling.<br><b>Nee</b>: het veld wordt niet opgenomen in een importeerhandeling.<br><b>Verplicht</b>: er moet een waarde worden ingevoerd voor een importeerhandeling.',
+'LBL_POPHELP_PII'=>'Dit veld wordt automatisch gemarkeerd voor auditeren en zal beschikbaar zijn in de weergave Persoonsgegevens.<br>Velden van Persoonsgegevens kunnen ook permanent worden gewist als het record betrekking heeft op een verzoek om het wissen van Gegevensprivacy.<br>Wissen vindt plaats via de module Gegevensprivacy en kan door gebruikers of beheerders met de rol Manager Gegevensprivacy worden uitgevoerd.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Voer een nummer in voor de breedte, gemeten in pixels.<br>De geüploade afbeelding wordt tot deze breedte geschaald.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Voer een nummer in voor de hoogte, gemeten in pixels.<br>De geüploade afbeelding wordt tot deze hoogte geschaald.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

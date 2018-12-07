@@ -52,7 +52,7 @@
      * Overrides the Layout.initialize function and does not call the parent so we can defer initialization
      * until _onceInitSelectedUser is called
      *
-     * @override
+     * @inheritdoc
      */
     initialize: function(options) {
         this.initOptions = options;
@@ -62,7 +62,7 @@
     },
 
     /**
-     * @override
+     * @inheritdoc
      */
     initComponents: function() {
     },
@@ -70,7 +70,7 @@
     /**
      * Overrides loadData to defer it running until we call it in _onceInitSelectedUser
      *
-     * @override
+     * @inheritdoc
      */
     loadData: function() {
     },

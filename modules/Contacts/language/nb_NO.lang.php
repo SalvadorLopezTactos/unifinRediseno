@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Dashbord for kontaktliste',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Dashbord for kontaktoppføring',
+
     'LNK_CONTACT_REPORTS' => 'Kontaktrapport',
     'ERR_DELETE_RECORD' => 'Et registreringsnummer må oppgis for å slette denne kontakten.',
     'LBL_ACCOUNT_ID' => 'Bedrift-ID:',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiér alternativ adresse til hovedadresse',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiér hovedadresse til alternativ adresse',
     'NTC_DELETE_CONFIRMATION' => 'Vil du virkelig slette denne oppføringen?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'For å opprette en mulighet kreves det en bedrift.\n Vennligst opprett en ny bedrift eller velg å bruke en eksisterende bedrift.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'For å opprette en mulighet kreves det en bedrift.\\n Vennligst opprett en ny bedrift eller velg å bruke en eksisterende bedrift.',
     'NTC_REMOVE_CONFIRMATION' => 'Vil du virkelig fjerne kontakten fra saken?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Er du sikker på at du vil slette denne oppføringen som en direkterapport?',
 
@@ -267,4 +271,6 @@ For å opprette {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Lead-resultat',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontakters rapporter',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Forretningsformål samtykket for',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Samtykke sist oppdatert',
 );

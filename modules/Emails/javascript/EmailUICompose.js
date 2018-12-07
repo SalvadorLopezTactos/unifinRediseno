@@ -1387,7 +1387,7 @@ SE.composeLayout = {
                 AjaxObject.target = '';
                 AjaxObject.startRequest(
                     callbackLoadAttachments,
-                    urlStandard + "&emailUIAction=getTemplateAttachments&parent_id=" + id
+                    urlStandard + "&emailUIAction=getTemplateAttachments&email_id=" + id
                 );
             }, this)
         });

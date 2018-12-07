@@ -15,6 +15,16 @@
 $layout_defs['Emails'] = array(
 	// list of what Subpanels to show in the DetailView
 	'subpanel_setup' => array(
+        'attachments' => array(
+            'order' => 5,
+            'sort_order' => 'asc',
+            'sort_by' => 'name',
+            'subpanel_name' => 'default',
+            'get_subpanel_data' => 'attachments',
+            'title_key' => 'LBL_ATTACHMENTS_SUBPANEL_TITLE',
+            'module' => 'Notes',
+            'top_buttons' => array(),
+        ),
 		'notes' => array(
 			'order' => 5,
 			'sort_order' => 'asc',
@@ -23,7 +33,15 @@ $layout_defs['Emails'] = array(
 			'get_subpanel_data' => 'notes',
 			'title_key' => 'LBL_NOTES_SUBPANEL_TITLE',
 			'module' => 'Notes',
-			'top_buttons' => array(),
+			'top_buttons' => array(
+                array(
+                    'widget_class' => 'SubPanelTopCreateButton',
+                ),
+                array(
+                    'widget_class' => 'SubPanelTopSelectButton',
+                    'mode' => 'MultiSelect',
+                ),
+            ),
 		),
         'accounts' => array(
 			'order' => 10,

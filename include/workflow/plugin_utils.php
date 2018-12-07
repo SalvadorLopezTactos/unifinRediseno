@@ -323,7 +323,6 @@ class SugarWorkflowPluginList
 		$file = "workflow/plugins/plugin_list.php";
 		$file = create_custom_directory($file);
 		write_array_to_file('plugin_list', $plugin_list_dump, $file);
-        SugarAutoLoader::addToMap($file);
 	}
 
 

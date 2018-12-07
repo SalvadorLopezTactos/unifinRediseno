@@ -53,6 +53,13 @@ class PMSEPreProcessor
     protected $evaluator;
 
     /**
+     * Internal cache of flowData process ids to project ids. This will be used
+     * in setting proper source subject information.
+     * @var array
+     */
+    protected $flowProjectMap = [];
+
+    /**
      * Pre Processor constructor method
      * @codeCoverageIgnore
      */
@@ -171,6 +178,55 @@ class PMSEPreProcessor
     }
 
     /**
+     * Sets subject data into the registry so that the bean save call can use it
+     * @param array $flowData
+     */
+    private function setSubjectData(array $flowData)
+    {
+        // Store prj_id, pro_id, bpmn_id and bpmn_type in the registry for later
+        // use. prj_id is only set in flowData that comes from getAllEvents, so
+        // we will more often than not need to get it from the pro_id of the flow
+        // row
+        if (isset($flowData['prj_id'])) {
+            $project = $flowData['prj_id'];
+        } else {
+            // If we've already fetched this, don't do it again
+            // pro_id should always be set
+            if (isset($this->flowProjectMap[$flowData['pro_id']])) {
+                $project = $this->flowProjectMap[$flowData['pro_id']];
+            } else {
+                $q = $this->retrieveSugarQuery();
+                $q->from(BeanFactory::newBean('pmse_Project'), array('alias' => 'p'));
+                $q->select(array(array('id', 'p')));
+                $q->joinTable('pmse_bpm_process_definition', array('alias' => 'd'))
+                    ->on()->equalsField('d.prj_id', 'p.id');
+                $q->where()->equals('d.id', $flowData['pro_id']);
+                $projectId = $q->getOne();
+
+                if (isset($projectId)) {
+                    // Cache it and write it
+                    $project = $this->flowProjectMap[$flowData['pro_id']] = $projectId;
+                } else {
+                    // Just default to nothing... realistically, this should never
+                    // happen
+                    $project = '';
+                }
+            }
+        }
+
+        // What to store
+        $store = [
+            'project_id' => $project,
+            'definition_id' => $flowData['pro_id'],
+            'element_id' => $flowData['bpmn_id'],
+            'element_type' => str_replace('bpmn', '', $flowData['bpmn_type']),
+        ];
+
+        // Store it
+        Registry\Registry::getInstance()->set('process_attributes', $store, true);
+    }
+
+    /**
      * Processes a request
      * @param PMSERequest $request
      * @return boolean
@@ -192,6 +248,12 @@ class PMSEPreProcessor
 
             // Loop the flowdata list and handle the actions necessary
             foreach ($flowDataList as $flowData) {
+                // For handling Security Subject saving later on
+                $this->setSubjectData($flowData);
+
+                // Make sure we start fresh each time with validation and such
+                $request->reset();
+
                 // Process the flow data and also the bean object data
                 $request->setFlowData($this->processFlowData($flowData));
 
@@ -360,6 +422,8 @@ class PMSEPreProcessor
         // Default the return
         $return = [];
 
+        $db = DBManagerFactory::getInstance();
+
         // Get our related link names/module names
         $sql = "
             SELECT
@@ -370,14 +434,13 @@ class PMSEPreProcessor
                 pmse_bpm_flow flow ON rd.rel_element_id = flow.bpmn_id AND
                 (flow.cas_flow_status IS NULL OR flow.cas_flow_status='WAITING')
             WHERE
-                rd.deleted = 0 AND rd.pro_status != 'INACTIVE' AND
-                rd.rel_element_relationship <> '' AND rd.rel_element_relationship IS NOT NULL AND
+                rd.deleted = 0 AND rd.pro_status != 'INACTIVE' AND " .
+                $db->getNotEmptyFieldSQL('rd.rel_element_relationship') . " AND
                 (rd.pro_module = :module OR rd.rel_element_module = :module)
         ";
 
         // Execute
-        $stmt = DBManagerFactory::getInstance()
-                ->getConnection()
+        $stmt = $db->getConnection()
                 ->executeQuery($sql, [':module' => $module]);
 
         // Loop and compare
@@ -432,6 +495,17 @@ class PMSEPreProcessor
         return $list;
     }
 
+
+    /**
+     * Checks if a bean is new or already existed
+     * @param SugarBean $bean
+     * @return boolean
+     */
+    private function isNewBean(SugarBean $bean)
+    {
+        return $bean->isUpdate() === false || empty($bean->fetched_row);
+    }
+
     /**
      * Optimized version of get all events method.
      * @param SugarBean $bean
@@ -451,8 +525,15 @@ class PMSEPreProcessor
         $links = $this->getValidLinks($moduleName);
 
         // Build a list of object ids that will work for our flows
-        $objectIds = $this->buildLinkedObjectIdList($bean, $links);
+        $objectIds = $this->buildLinkedObjectIdList($bean, $links, false);
 
+        // Use equality only for new records, otherwise use inequality
+        // Note: this will end up caching two different prepared queries potentially, but that should not be a huge
+        // performance hit in the long run
+        $newOp = $this->isNewBean($bean) ? '=' : '!=';
+
+        // This is a DB specific handler for the event params columns. This will not cause variants of this query to be
+        // created
         $evnParamsChar = $bean->db->convert('rd.evn_params', 'text2char');
         $sql = "
         SELECT
@@ -475,25 +556,27 @@ class PMSEPreProcessor
         FROM
             pmse_bpm_related_dependency rd
         LEFT JOIN
-            pmse_bpm_flow flow ON rd.rel_element_id = flow.bpmn_id AND
-            (flow.cas_flow_status IS NULL OR flow.cas_flow_status='WAITING')
+            pmse_bpm_flow flow
+            ON
+                rd.rel_element_id = flow.bpmn_id AND
+                flow.cas_flow_status='WAITING' AND
+                flow.cas_sugar_object_id IN (?) AND
+                flow.deleted = 0 
         WHERE
             rd.deleted = 0 AND rd.pro_status != 'INACTIVE' AND (
                 (
-                    (rd.evn_type = 'START' AND rd.evn_module = :module) OR
+                    (rd.evn_type = 'START' AND rd.evn_module = ? AND $evnParamsChar $newOp 'new') OR
                     (
                         rd.evn_type = 'GLOBAL_TERMINATE' AND
                         (flow.cas_flow_status IS NULL OR flow.cas_flow_status != 'WAITING') AND
-                        rd.rel_element_module = :module AND
-                        (flow.cas_sugar_object_id IS NULL OR flow.cas_sugar_object_id IN ($objectIds))
+                        rd.rel_element_module = ?
                     ) OR
                     (
                         rd.evn_type = 'INTERMEDIATE' AND
                         rd.evn_marker = 'MESSAGE' AND
                         rd.evn_behavior = 'CATCH' AND
                         flow.cas_flow_status = 'WAITING' AND
-                        rd.rel_element_module = :module AND
-                        (flow.cas_sugar_object_id IS NULL OR flow.cas_sugar_object_id IN ($objectIds))
+                        rd.rel_element_module = ?
                     )
                 )
             )
@@ -509,7 +592,11 @@ class PMSEPreProcessor
         // Execute the query and get our results
         $stmt = DBManagerFactory::getInstance()
                 ->getConnection()
-                ->executeQuery($sql, [':module' => $moduleName]);
+                ->executeQuery(
+                    $sql,
+                    [$objectIds, $moduleName, $moduleName, $moduleName],
+                    [\Doctrine\DBAL\Connection::PARAM_STR_ARRAY]
+                );
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

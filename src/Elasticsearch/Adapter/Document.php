@@ -39,4 +39,15 @@ class Document extends BaseDocument
     {
         $this->_data[$field] = $value;
     }
+
+    /**
+     * Remove data field
+     * @param string $field
+     */
+    public function removeDataField($field)
+    {
+        if (isset($this->_data[$field])) {
+            unset($this->_data[$field]);
+        }
+    }
 }

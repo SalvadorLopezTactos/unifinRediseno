@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus 伺服器',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => '每頁子面板項目',
 	'LOG_MEMORY_USAGE'=>'記錄記憶體使用量',
-	'LOG_SLOW_QUERIES'=>'記錄慢速查詢',
+    'LOG_SLOW_QUERIES' => '記錄慢速查詢',
     'LOCK_HOMEPAGE_HELP'=>'此設定用來阻止 <BR> 1) 在首頁模組中新增新的首頁和 Dashlet，<BR>2) 透過拖放自訂 Dashlet 在首頁的位置。',
     'CURRENT_LOGO'=>'當前標誌：',
     'CURRENT_LOGO_HELP'=>'該標誌顯示於 Sugar 應用程式頁尾的左角。',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'該名稱顯示於瀏覽器的標題列。',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => '啟用/停用來自關聯（或連結）連絡人的電子郵件在郵件子面板顯示。',
 
-    'LBL_OC_STATUS'                     => '預設離線用戶端狀態',
-    'DEFAULT_OC_STATUS'                 => '預設啟用離線用戶端',
-    'LBL_OC_STATUS_DESC' => '若希望任何使用者均可存取離線用戶端，請核取此選項。否則，您可在使用者級別中配置存取權限。',
     'SESSION_TIMEOUT' => '入口網站工作階段逾時',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => '入口網站工作階段逾時適用於 6.5 及更早版本的歷史 Sugar Portal 版本。',
     'UPLOAD_MAXSIZE_UNITS' => '位元',
@@ -435,8 +432,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML Login URL 不能為空',
     'ERR_EMPTY_SAML_CERT' => 'SAML 憑證不得為空',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML 實體 ID 不能為空',
     'ERR_SAML_LOGIN_URL' => 'SAML 登入 URL 無效',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL 無效',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM 檔必須包含私密金鑰',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM 檔中應包含 x.509 證書',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => '提供的 x.509 證書與私密金鑰不匹配',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => '活動流',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => '啟用活動流',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => '打開應用程式的活動流',
 );
 
 

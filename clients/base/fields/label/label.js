@@ -45,5 +45,13 @@
             value = app.lang.get(this.def.default_value, this.module);
         }
         return value;
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _isErasedField: function() {
+        //Labels cannot be erased, they contain no data.
+        return false;
     }
 })

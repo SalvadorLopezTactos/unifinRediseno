@@ -82,6 +82,15 @@ class PMSERequest
      */
     public function __construct()
     {
+        // start clean
+        $this->reset();
+    }
+
+    /**
+     * Sets the request object to clean validation state
+     */
+    public function reset()
+    {
         $this->status = 'VALID';
         $this->validated = true;
         $this->result = '';

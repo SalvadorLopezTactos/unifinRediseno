@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Prozess-Geschäftsregeln',
   'LBL_MODULE_TITLE' => 'Prozess-Geschäftsregeln',
   'LBL_MODULE_NAME_SINGULAR' => 'Prozess-Geschäftsregel',
@@ -23,7 +22,7 @@ $mod_strings = array (
   'LBL_RST_EDITABLE' => 'Geschäftsregel bearbeitbar',
   'LBL_RST_SOURCE' => 'Geschäftsregel-Quelle',
   'LBL_RST_SOURCE_DEFINITION' => 'Geschäftsregel-Quellendefinition',
-  'LBL_RST_MODULE' => 'Ziel Modul:',
+  'LBL_RST_MODULE' => 'Zielmodul:',
   'LBL_RST_FILENAME' => 'Geschäftsregel-Dateiname',
   'LBL_RST_CREATE_DATE' => 'Geschäftsregel-Erstellungsdatum',
   'LBL_RST_UPDATE_DATE' => 'Geschäftsregel-Aktualisierungsdatum',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Bedingungen',
     'LBL_PMSE_LABEL_RETURN' => 'Zurück',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Schlussfolgerungen',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Feld ändern',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Rückgabewert',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Bedingung hinzufügen',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Schlussfolgerung hinzufügen',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Zeile hinzufügen',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Spalte entfernen',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Bedingung entfernen',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Schlussfolgerung entfernen',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Spaltendaten entfernen',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Ja',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Nein',

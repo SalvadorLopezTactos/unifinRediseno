@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => '見積り済商品一覧のダッシュ ボード',
+
     'LBL_CAMPAIGN_PRODUCT' => 'キャンペーン商品',
     'LBL_MODULE_NAME' => '見積済商品',
     'LBL_MODULE_NAME_SINGULAR' => '見積済商品',
@@ -166,4 +169,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => '見積済商品の見積データリスト',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (新規見積り済み商品)',
     'LBL_DISCOUNT_PERCENT' => '% パーセント',
+    'LBL_DISCOUNT_TYPE' => '値引タイプ',
 );

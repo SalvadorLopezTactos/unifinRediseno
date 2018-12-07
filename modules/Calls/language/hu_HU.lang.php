@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Hívások listája műszerfal',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Hívás bejegyzések műszerfal',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Hívások',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Hívás',

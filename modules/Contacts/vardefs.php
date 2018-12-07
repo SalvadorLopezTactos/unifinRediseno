@@ -162,7 +162,9 @@ $dictionary['Contact'] = array(
             'vname' => 'LBL_BIRTHDATE',
             'massupdate' => false,
             'type' => 'date',
-            'comment' => 'The birthdate of the contact'
+            'comment' => 'The birthdate of the contact',
+            'audited' => true,
+            'pii' => true,
         ),
         'portal_name' => array(
             'name' => 'portal_name',
@@ -296,6 +298,34 @@ $dictionary['Contact'] = array(
                 'account_id',
                 'account_name'
             )
+        ),
+        'dataprivacy' => array(
+            'name' => 'dataprivacy',
+            'type' => 'link',
+            'relationship' => 'contacts_dataprivacy',
+            'source' => 'non-db',
+            'vname' => 'LBL_DATAPRIVACY',
+        ),
+        'dp_business_purpose' => array (
+            'name' => 'dp_business_purpose',
+            'vname' => 'LBL_DATAPRIVACY_BUSINESS_PURPOSE',
+            'type' => 'multienum',
+            'isMultiSelect' => true,
+            'audited' => true,
+            'options' => 'dataprivacy_business_purpose_dom',
+            'default' => '',
+            'len' => 255,
+            'comment' => 'Business purposes consented for',
+        ),
+        'dp_consent_last_updated' => array(
+            'name' => 'dp_consent_last_updated',
+            'vname' => 'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED',
+            'type' => 'date',
+            'display_default' => 'now',
+            'audited' => true,
+            'enable_range_search' => true,
+            'options' => 'date_range_search_dom',
+            'comment' => 'Date consent last updated',
         ),
         'direct_reports' => array(
             'name' => 'direct_reports',

@@ -741,10 +741,15 @@ class MBModule
         $old_name = $this->key_name;
         $this->name = $new_name ;
         $this->key_name = $this->package_key . '_' . $this->name ;
+        if ($old_name === $this->key_name) {
+            return;
+        }
         $newModDir = $this->getModuleDir();
         if (file_exists($newModDir)) {
             return false ;
         }
+        // clean data based on old relationship name before dir is renamed.
+        $this->removeRelationships();
         $renamed = rename($oldModDir, $newModDir);
         if ($renamed)
         {
@@ -756,8 +761,19 @@ class MBModule
         return $renamed ;
     }
 
+    private function removeRelationships()
+    {
+        $relationships = $this->getRelationships();
+        foreach ($relationships->getRelationshipList() as $relationshipName) {
+            $relationships->delete($relationshipName);
+        }
+    }
+
     public function renameRelationships($newModDir, $oldModName, $newModName)
     {
+        if ($oldModName === $newModName) {
+            return;
+        }
         //bug 39598 Relationship Name Is Not Updated If Module Name Is Changed In Module Builder
         // and BR-4147 lhs module name was not updated when module name is changed
         $relationships = new UndeployedRelationships($newModDir);
@@ -975,7 +991,7 @@ class MBModule
         $filepath = $this->getSubpanelFilePath($subpanelName, $client, $bwc);
         $var = $bwc ? 'subpanel_layout' : 'viewdefs';
         if (file_exists($filepath)) {
-            include $filepath;
+            include FileLoader::validateFilePath($filepath);
             if (isset($$var) && is_array($$var)) {
                 return $$var;
             }

@@ -1,5 +1,5 @@
 <?php
- // created: 2018-02-16 16:59:03
+ // created: 2018-12-05 18:17:34
 $dictionary['Opportunity']['fields']['ca_valor_auto_iva_c']['labelValue'] = 'Valor de automóvil con IVA';
 $dictionary['Opportunity']['fields']['ca_valor_auto_iva_c']['enforced'] = '';
 $dictionary['Opportunity']['fields']['ca_valor_auto_iva_c']['dependency'] = '';

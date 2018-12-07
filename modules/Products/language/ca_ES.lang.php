@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Quadre de comandament del llistat d&#39;elements de línia pressupostats',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Element de línia citat a la campanya',
     'LBL_MODULE_NAME' => 'Elements de línies d&#39;oferta',
     'LBL_MODULE_NAME_SINGULAR' => 'Element de línia d&#39;oferta',
@@ -38,7 +41,7 @@ $mod_strings = array(
     'LBL_NAME' => 'Nom',
     'LBL_URL' => 'URL Producte:',
     'LBL_QUOTE_NAME' => 'Nom del Pressupost:',
-    'LBL_ASSOCIATED_QUOTE' => 'Citar subjecte',
+    'LBL_ASSOCIATED_QUOTE' => 'Assumpte de l&#39;oferta:',
     'LBL_CONTACT_NAME' => 'Nom del contacte:',
     'LBL_DATE_PURCHASED' => 'Comprat:',
     'LBL_DATE_SUPPORT_EXPIRES' => 'Caducitat del Suport:',
@@ -71,7 +74,7 @@ $mod_strings = array(
     'LBL_PRICING_FORMULA' => 'Fórmula de Valoració:',
     'LBL_ACCOUNT_NAME' => 'Nom del compte:',
     'LNK_PRODUCT_LIST' => 'Productes',
-    'LNK_NEW_PRODUCT' => 'Crear element de la línia pressupostada',
+    'LNK_NEW_PRODUCT' => 'Crea element de la línia pressupostada',
     'NTC_DELETE_CONFIRMATION' => 'Esteu segur que voleu suprimir aquest registre?',
     'NTC_REMOVE_CONFIRMATION' => 'Està segur que desitja treure aquesta relació entre productes?',
     'ERR_DELETE_RECORD' => 'Per suprimir el producte, heu d&#39;especificar un número de registre.',
@@ -127,7 +130,7 @@ $mod_strings = array(
     'LBL_EXT_PRICE' => 'Preu Ext.',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Nom del Símbol de Moneda',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Elements de línies d&#39;oferta',
-    'LNK_IMPORT_PRODUCTS' => 'Importar Productes',
+    'LNK_IMPORT_PRODUCTS' => 'Importa elements de línies d&#39;oferta',
     'LBL_EDITLAYOUT' => 'Editar disseny' /*for 508 compliance fix*/,
     //For export labels
     'LBL_EXPORT_CURRENCY_ID' => 'ID Moneda:',
@@ -172,4 +175,5 @@ Per crear un {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Llistat de dades del pressupost dels elements de línia pressupostats',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nou element de línia pressupostat)',
     'LBL_DISCOUNT_PERCENT' => '% Per cent',
+    'LBL_DISCOUNT_TYPE' => 'Tipus de descompte',
 );

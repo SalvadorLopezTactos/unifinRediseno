@@ -55,7 +55,7 @@ $mod_strings = array(
     'ERROR_MANIFEST_TYPE'                       => 'Το αρχείο δήλωσης θα πρέπει να διευκρινίζει τον τύπο πακέτου.',
     'ERROR_PACKAGE_TYPE'                        => 'Το αρχείο δήλωσης καθορίζει ένα άγνωστο τύπο πακέτου: %s',
     'ERROR_VERSION_INCOMPATIBLE'                => 'Το αρχείο δεν είναι συμβατό με αυτήν την έκδοση του Sugar:',
-    'ERROR_FLAVOR_INCOMPATIBLE'                 => 'Το αναβασμένο αρχείο δεν είναι συμβατό με αυτόν τον τύπο (Community Edition, Professional, or Enterprise) του Sugar:',
+    'ERROR_FLAVOR_INCOMPATIBLE'                 => 'Το μεταφορτωμένο αρχείο δεν είναι συμβατό με αυτή την έκδοση (Professional, Enterprise ή Ultimate edition) του Sugar: %s',
 
     'ERROR_UW_CONFIG_DB'                        => 'Σφάλμα κατά την αποθήκευση %s config var στο db (κλειδί %s, αξία %s).',
     'ERR_NOT_ADMIN'                             => "Μη εξουσιοδοτημένη πρόσβαση στη διαχείριση.",
@@ -98,7 +98,7 @@ $mod_strings = array(
 	'LBL_UW_COMPLIANCE_MYSQL'					=> 'Ελάχιστη Έκδοση MySQL',
     'LBL_UW_COMPLIANCE_DB'                      => 'Ελάχιστη Έκδοση Βάσης Δεδομένων',
 	'LBL_UW_COMPLIANCE_PHP_INI'					=> 'Τοποθεσία από php.ini',
-	'LBL_UW_COMPLIANCE_PHP_VERSION'				=> 'Ελάχιστη Έκδοση PHP',
+    'LBL_UW_COMPLIANCE_PHP_VERSION'             => 'Έκδοση PHP',
 	'LBL_UW_COMPLIANCE_SAFEMODE'				=> 'PHP Ρυθμίσεις: Ασφαλής Μέθοδος',
 	'LBL_UW_COMPLIANCE_TITLE'					=> 'Έλεγχος Ρυθμίσεων Διακομιστή',
 	'LBL_UW_COMPLIANCE_TITLE2'					=> 'Ανιχνευμένες Ρυθμίσεις',
@@ -243,7 +243,6 @@ $mod_strings = array(
 	'LBL_UW_DROP_SCHEMA_METHOD'					=> 'Παλαιά Μέθοδος Πτώση Σχημάτων',
 	'LBL_UW_SHOW_OLD_SCHEMA_TO_DROP'			=> 'Εμφάνιση Παλαιού Σχήματος που θα μπορούσε να πέσει',
 	'LBL_UW_SKIPPED_QUERIES_ALREADY_EXIST'      => 'Παραλειπόμενα Ερωτήματα',
-	'LBL_INCOMPATIBLE_PHP_VERSION'              => 'Php έκδοση 5 ή απαιτείται η παραπάνω έκδοση.',
 	'ERR_CHECKSYS_PHP_INVALID_VER'      => 'Η έκδοση του PHP δεν υποστηρίζεται από το Sugar. Θα πρέπει να εγκαταστήσετε μια έκδοση που είναι συμβατή με την εφαρμογή του Sugar. Παρακαλώ συμβουλευτείτε την Μητρική Συμβατότητα στις Σημειώσεις Αναβαθμίσεων για τις υποστηριζόμενες εκδόσεις του PHP.',
 	'LBL_BACKWARD_COMPATIBILITY_ON' 			=> 'Η Προς τα πίσω λειτουργία Συμβατότητας του Php είναι ενεργοποιημένη. Καθορίστε zzend.ze1_compatibility_mode σε ανενεργό για να προχωρήσει περαιτέρω',
 	//including some strings from moduleinstall that are used in Upgrade
@@ -260,8 +259,6 @@ $mod_strings = array(
 	'LBL_ML_INSTALL'=>'Εγκατάσταση',
 	//adding the string used in tracker. copying from homepage
 	'LBL_HOME_PAGE_4_NAME' => 'Σημείο Εντοπισμού',
-	'LBL_CURRENT_PHP_VERSION' => '(Η τρέχουσα έκδοση php είναι',
-	'LBL_RECOMMENDED_PHP_VERSION' => 'Συνιστώμενη έκδοση php είναι 5.2.1 ή πάνω)',
 	'LBL_MODULE_NAME' => 'Οδηγός Αναβάθμισης',
 	'LBL_MODULE_NAME_SINGULAR' => 'Οδηγός Αναβάθμισης',
 	'LBL_UPLOAD_SUCCESS' => 'Η αναβάθμιση πακέτου φορτώθηκε με επιτυχία. Πατήστε το κουμπί "Επόμενο" για να εκτελέσετε έναν τελικό έλεγχο.',

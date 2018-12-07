@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'Shtyp këtu',
 	'TXT_REMOVE_ME'								=> 'Për të larguar veten nga kjo listë e emaileve',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Dërgo njoftim nga adresa e emailit për caktimin e përdoruesve',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Si paracaktim, refuzo adresat e reja të emailit',
 
 	'LBL_SECURITY_TITLE'						=> 'Parametrat e sigurisë së emailit',
 	'LBL_SECURITY_DESC'							=> 'Kontrollo atë që vijon se nuk duhet të lejohet përmes emailit derjtuar përbrenda në modulën e Emailit',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Lejo përdoruesit të përdorin këtë llogari për emailet dalëse',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Kur zgjidhet ky opcion, të gjithë përdoruesit do të munden të dërgojnë emaile duke përdorur mail llogaritë e drejtuar për jashta për të dërguar lajmërime dhe alarme të sistemit. Nëse nuk selektohet opcioni, përdoruesit do të mund të përdorin ende serverin e maileve të dërguar për jashta pas sigurimit të informacionit të llogarisë së tyre.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Kur aktivizohen, caktimi i emrit përdoruesit/ve dhe adresa e emailit do të përfshihen në fushën Nga të   e-mail. Ky funksion mund të mos punoje me serverat SMTP që nuk lejojnë dërgimin nga llogari të ndryshme të emailit sesa në llogarinë server.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Kur shtohet një adresë e re emaili, do të refuzohet automatikisht. Emailet e fushatave nuk mund të dërgohen te adresat e refuzuara. Ndryshimi i këtij cilësimi nuk ndikon në adresat ekzistuese të emailit.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Këmbe' /*for 508 compliance fix*/,

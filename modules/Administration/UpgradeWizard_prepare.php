@@ -84,8 +84,6 @@ if($install_type == 'module' && $mode != 'Uninstall' && $mode != 'Disable'){
     }
     
    if(file_exists($license_file)) {
-        // Add this to the autoloader so that it gets picked up when needed
-        SugarAutoLoader::addToMap($license_file, true);
         $require_license = true;
    }
    else {

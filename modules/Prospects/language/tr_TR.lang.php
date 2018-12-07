@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Hedefler Listesi Panosu',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Hedefler Kaydı Panosu',
+
   'LBL_MODULE_NAME' => 'Hedefler',
   'LBL_MODULE_NAME_SINGULAR' => 'Hedef',
   'LBL_MODULE_ID'   => 'Hedefler',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Hitap',
   'LBL_SAVE_PROSPECT' => 'Hedef kaydet',
   'LBL_CREATED_OPPORTUNITY' =>'Yeni bir fırsat oluşturuldu',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Fırsat oluşturulması için müşteri kaydının olması gerekir.\n Lütfen yeni bir müşteri oluşturun veya var olan müşterilerden birini seçin.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Fırsat oluşturulması için müşteri kaydının olması gerekir.\\n Lütfen yeni bir müşteri oluşturun veya var olan müşterilerden birini seçin.',
   'LNK_SELECT_ACCOUNT' => "Müşteri Seç",
   'LNK_NEW_PROSPECT' => 'Hedef Oluştur',
   'LNK_PROSPECT_LIST' => 'Hedefleri Görüntüle',
@@ -195,4 +199,6 @@ $mod_strings = array (
 2. "Kaydet" tuşuna basarak yeni kaydınızı tamamlayın ve önceki sayfaya dönün.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Hedef Raporları',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Şunun İçin İç Amaçlı Onaylı:',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Son Güncellemeye Onay Verin',
 );

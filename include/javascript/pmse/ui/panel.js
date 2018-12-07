@@ -8,17 +8,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 /**
- * @class Panel
+ * @class PMSE.Panel
  * Handles panels to be inserted into containers
- * @extend Container
+ * @extends PMSE.Container
  *
  * @constructor
  * Creates a new instance of the object
  * @param {Object} options
  */
-var Panel = function (options) {
-    Container.call(this, options);
+PMSE.Panel = function(options) {
+    PMSE.Container.call(this, options);
     /**
      * Defines the header HTML element
      * @type {HTMLElement}
@@ -31,31 +32,31 @@ var Panel = function (options) {
     this.footer = null;
     /**
      * Defines the layout object
-     * @type {Layout}
+     * @type {PMSE.Layout}
      */
     this.layout = null;
 
     this.language = {};
-    Panel.prototype.initObject.call(this, options);
+    PMSE.Panel.prototype.initObject.call(this, options);
 };
 
-Panel.prototype = new Container();
+PMSE.Panel.prototype = new PMSE.Container();
 /**
  * Defines the object's type
  * @type {String}
  */
-Panel.prototype.type = 'Panel';
+PMSE.Panel.prototype.type = 'PMSE.Panel';
 
 /**
  * Defines the object's family
  * @type {String}
  */
-Panel.prototype.family = 'Panel';
+PMSE.Panel.prototype.family = 'PMSE.Panel';
 
 /**
  * Initializes the object with the default values
  */
-Panel.prototype.initObject = function (options) {
+PMSE.Panel.prototype.initObject = function(options) {
     var defaults = {
         layout: null
     };
@@ -69,7 +70,7 @@ Panel.prototype.initObject = function (options) {
  * Sets the header HTML element
  * @param {HTMLElement} h
  */
-Panel.prototype.setHeader = function (h) {
+PMSE.Panel.prototype.setHeader = function(h) {
     this.header = h;
     return this;
 };
@@ -78,27 +79,27 @@ Panel.prototype.setHeader = function (h) {
  * Sets the header HTML element
  * @param {HTMLElement} f
  */
-Panel.prototype.setFooter = function (f) {
+PMSE.Panel.prototype.setFooter = function(f) {
     this.footer = f;
     return this;
 };
 
 /**
  * Sets the header HTML element
- * @param {Layout} layout
+ * @param {PMSE.Layout} layout
  */
-Panel.prototype.setLayout = function (layout) {
-    if (layout && layout.family && layout.family === 'Layout') {
+PMSE.Panel.prototype.setLayout = function(layout) {
+    if (layout && layout.family && layout.family === 'PMSE.Layout') {
         this.layout = layout;
     } else {
-        this.layout = new Layout(layout);
+        this.layout = new PMSE.Layout(layout);
     }
     return this;
 };
 
-Panel.prototype.createHTML = function () {
+PMSE.Panel.prototype.createHTML = function() {
     var headerDiv, footerDiv;
-    Container.prototype.createHTML.call(this);
+    PMSE.Container.prototype.createHTML.call(this);
     this.style.removeProperties(['width', 'height', 'position', 'top', 'left', 'z-index']);
     this.style.addClasses(['adam-panel']);
     if (this.header) {
@@ -121,6 +122,6 @@ Panel.prototype.createHTML = function () {
     return this.html;
 };
 
-Panel.prototype.load = function () {
+PMSE.Panel.prototype.load = function() {
 
 };

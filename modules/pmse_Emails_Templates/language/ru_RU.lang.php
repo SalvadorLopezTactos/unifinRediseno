@@ -36,7 +36,7 @@ $mod_strings = array (
     'LBL_PMSE_MY_EMAIL_TEMPLATES' => 'Мой процесс обработки шаблонов Email',
     'LBL_PMSE_ALL_EMAIL_TEMPLATES' => 'Все процессы обработки шаблонов Email',
 
-    'LBL_PMSE_EMAIL_TEMPLATES_IMPORT_TEXT' => 'Автоматически создайте новую запись Процесса обработки шаблона Email шаблон путем импорта файла  *.pet из файловой системы.',
+    'LBL_PMSE_EMAIL_TEMPLATES_IMPORT_TEXT' => 'Автоматически создайте новую запись процесса обработки шаблона Email путем импорта файла *.pet из файловой системы.',
     'LBL_PMSE_EMAIL_TEMPLATES_IMPORT_SUCCESS' => 'Процесс обработки шаблона Email был успешно импортирован в систему.',
     'LBL_PMSE_EMAIL_TEMPLATES_EMPTY_WARNING' => 'Пожалуйста, выберите допустимый *.pet файл.',
 

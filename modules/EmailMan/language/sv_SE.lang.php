@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'klicka här',
 	'TXT_REMOVE_ME'								=> 'För att gå ur maillistan ',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Skicka ett meddelande från tilldelande användare',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Välja bort nya e-postadresser som standard',
 
 	'LBL_SECURITY_TITLE'						=> 'Säkerhetsinställningar för email',
 	'LBL_SECURITY_DESC'							=> 'Kryssa i de som INTE ska släppas in via inkommade email eller visas i Emailmodulen.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Låt användare använda detta konto för utgående mail:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Om detta alternativ är valt kommer alla användare kunna skicka email via samma utgående<br> mailkonto som används för att skicka systemmeddelanden och varningar. Om alternativet inte väljs,<br> kan användare fortfarande använda den utgående mailservern om de anger egen kontoinformation.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Om detta aktiveras kommer tilldelande användares namn och mailadress att finnas i fältet &#39;från&#39; i mailet. Funktionen fungerar eventuellt inte med SMTP-servrar som inte låter dig skicka från ett annat konto än serverkontot.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'När en ny e-postadress läggs till, kommer den automatiskt väljas bort. Kampanjmeddelanden kan inte levereras till bortvalda e-postadresser. De existerande e-postadresserna påverkas inte om man ändrar den här inställningen.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Utbyte' /*for 508 compliance fix*/,

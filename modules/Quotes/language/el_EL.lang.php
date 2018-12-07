@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Στόχων Προσφορών',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Πίνακας Εργαλείων Εγγραφής Στόχων Προσφορών',
+
     'LBL_CONTRACTS'=>'Συμβάσεις',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Συμβάσεις',
     'ERR_DELETE_RECORD' => 'Πρέπει να προσδιορίσετε αριθμό εγγραφής για να διαγράψετε την προσφορά.',
@@ -80,7 +84,7 @@ $mod_strings = array (
     'LBL_LIST_ACCOUNT_NAME' => 'Όνομα Λογαριασμού',
     'LBL_LIST_AMOUNT' => 'Ποσό Προσφοράς',
     'LBL_LIST_AMOUNT_USDOLLAR' => 'Συνολικό Ποσό',
-    'LBL_LIST_ASSIGNED_TO_NAME' => 'Ανατεθειμένος Χειριστής',
+    'LBL_LIST_ASSIGNED_TO_NAME' => 'Ανατεθειμένος Χρήστης',
     'LBL_LIST_COST_PRICE' => 'Κόστος',
     'LBL_LIST_DATE_QUOTE_CLOSED' => 'Ημερομηνία Αποστολής',
     'LBL_LIST_DATE_QUOTE_EXPECTED_CLOSED' => 'Ισχύει Μέχρι',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Υποσύνολο (US Δολλάριο)',
     'LBL_SUBTOTAL' => 'Υποσύνολο:',
     'LBL_TAXABLE_SUBTOTAL' => 'Μερικό Άθροισμα Φορολογητέων',
-    'LBL_SYSTEM_ID' => 'Ταυτότητα Συστήματος',
     'LBL_TAX_USDOLLAR'=>'Φόρος (US Δολλάριο)',
     'LBL_TAX' => 'Φόρος:',
     'LBL_TAX_TOTAL' => 'Συνολικός Φόρος',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Διαγραφή Επιλεγμένων',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Διαγραφή επιλεγμένων στοιχείων',
     'LBL_SAVE_LINE_ITEMS' => 'Παρακαλούμε να αποθηκεύσετε οποιαδήποτε ενεργή γραμμή στοιχείων, κάνοντας κλικ το μπλε πλαίσιο επιλογής δίπλα από κάθε στοιχείο πριν να αποθηκεύσετε αυτη την Προσφορά.',
+    'LBL_COPY_LINE_ITEMS' => 'Παρακαλούμε να αποθηκεύσετε οποιαδήποτε ενεργή γραμμή στοιχείων, κάνοντας κλικ στο μπλε πλαίσιο επιλογής δίπλα από κάθε στοιχείο πριν να αποθηκεύσετε αυτη την Προσφορά.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Εκτελέστε αναζήτηση στον κατάλογο προϊόντων',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Δεν διατίθενται δεδομένα',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Αντιγραφή γραμμής εισηγμένων ειδών σε νέα προσφορά.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Αντιγραφή γραμμής εισηγμένων ειδών σε νέα προσφορά. Αυτή η διαδικασία μπορεί να διαρκέσει λίγο.',
 );

@@ -34,9 +34,20 @@ class Configurator {
         'default_module_favicon',
         'authenticationClass',
         'SAML_loginurl',
+        'SAML_idp_entityId',
+        'SAML_issuer',
         'SAML_X509Cert',
         'SAML_SLO',
         'SAML_SAME_WINDOW',
+        'SAML_provisionUser',
+        'SAML_request_signing_method',
+        'SAML_request_signing_cert_name',
+        'SAML_request_signing_pkey',
+        'SAML_request_signing_pkey_name',
+        'SAML_request_signing_x509',
+        'SAML_sign_authn',
+        'SAML_sign_logout_request',
+        'SAML_sign_logout_response',
         'dashlet_auto_refresh_min',
         'show_download_tab',
         'enable_action_menu',
@@ -230,6 +241,12 @@ class Configurator {
     function clearCache()
     {
         global $sugar_config, $sugar_version;
+
+        $sections = [
+            MetaDataManager::MM_CONFIG,
+            MetaDataManager::MM_SERVERINFO,
+        ];
+
         list($oldConfig, $currentConfigArray) = $this->readOverride();
         foreach($currentConfigArray as $key => $val) {
             if (in_array($key, $this->allowUndefined) || isset ($sugar_config[$key])) {
@@ -241,9 +258,34 @@ class Configurator {
                 }
             }
         }
-        // Clear metadata config section only
-        MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_CONFIG));
-        MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_SERVERINFO));
+
+        //Module metadata needs to be refreshed if Activity Stream system setting is changed
+        if ((isset($currentConfigArray['activity_streams_enabled'])
+                && (!isset($oldConfig['activity_streams_enabled']) ||
+                    $currentConfigArray['activity_streams_enabled'] != $oldConfig['activity_streams_enabled'])
+            ) ||
+            (isset($oldConfig['activity_streams_enabled']) && !isset($currentConfigArray['activity_streams_enabled']))
+        ) {
+            $sections[] = MetaDataManager::MM_MODULES;
+        }
+
+        if ($sugar_config['activity_streams_enabled']) {
+            Activity::enable();
+        } else {
+            Activity::disable();
+        }
+
+        $this->updateMetadataCache($sections);
+    }
+
+    /**
+     * Refreshes the metadata cache for the specified sections.
+     *
+     * @param array $sections The sections that need to be refreshed.
+     */
+    protected function updateMetadataCache($sections)
+    {
+        MetaDataManager::refreshSectionCache($sections);
     }
 
 	function saveConfig() {
@@ -340,11 +382,10 @@ class Configurator {
     	$path = $this->checkTempImage($path);
     	$logo = create_custom_directory(SugarThemeRegistry::current()->getDefaultImagePath(). '/company_logo.png');
         copy($path, $logo);
-        SugarAutoLoader::addToMap($logo);
         sugar_cache_clear('company_logo_attributes');
         SugarThemeRegistry::clearAllCaches();
         SugarThemeRegistry::current()->clearImageCache('company_logo.png');
-        MetaDataManager::refreshSectionCache(array(MetaDataManager::MM_LOGOURL));
+        $this->updateMetadataCache(array(MetaDataManager::MM_LOGOURL));
 	}
 	/**
 	 * @params : none

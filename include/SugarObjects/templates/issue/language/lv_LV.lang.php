@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => 'Modificēja:',
   'LBL_ASSIGNED_USER' => 'Piešķirts lietotājam:',
   'LBL_ASSIGNED_USER_NAME' => 'Piešķirts',
-  'LBL_SYSTEM_ID' =>'Sistēmas ID',
   'LBL_TEAM_NAME' =>'Darba grupas nosaukums:',
   'LBL_TYPE'=>'Tips:',
   'LBL_SUBJECT' => 'Temats:',

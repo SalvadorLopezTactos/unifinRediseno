@@ -38,10 +38,6 @@ class SugarQuery_Builder_Field
     public $alias = false;
 
     /**
-     * @var bool|string field alias when returning data as an array (abstracting away database alias length)
-     */
-    public $original_alias = false;
-    /**
      * @var string the fields bean table
      */
     public $bean_table;
@@ -83,9 +79,6 @@ class SugarQuery_Builder_Field
         if (is_array($field)) {
             $this->field = $field[0];
             $this->alias = $field[1];
-            if (!empty($field[2])) {
-                $this->original_alias = $field[2];
-            }
         } else {
             $this->field = $field;
         }
@@ -188,7 +181,11 @@ class SugarQuery_Builder_Field
                 if (substr($this->table, -5) != "_cstm") {
                     $this->standardTable = $this->table;
                     $this->table = $this->table . "_cstm";
+                } else {
+                    $this->standardTable = substr($this->table, 0, -5);
                 }
+
+                $this->query->joinCustomTable($bean, $this->standardTable ?? $this->table);
             }
         }
     }
@@ -241,7 +238,6 @@ class SugarQuery_Builder_Field
                     $idField->checkCustomField();
                     if ($idField->custom) {
                         $this->custom = true;
-                        $this->query->joinCustomTable($this->query->getFromBean());
                     }
                     //Now actually join the related table
                     $jta = $this->query->getJoinTableAlias($this->def['name']);
@@ -250,6 +246,7 @@ class SugarQuery_Builder_Field
                         'bean' => $farBean,
                         'alias' => $jta,
                     ))
+                        ->addLinkName($this->def['id_name'])
                         ->on()->equalsField("{$idField->table}.{$this->def['id_name']}", "{$jta}.id")
                         ->equals("{$jta}.deleted", 0);
                 }
@@ -265,7 +262,6 @@ class SugarQuery_Builder_Field
                     $idField->checkCustomField();
                     if ($idField->custom) {
                         $this->custom = true;
-                        $this->query->joinCustomTable($this->query->getFromBean());
                     }
                 }
                 $join = $this->query->join($this->def['link'], $params);

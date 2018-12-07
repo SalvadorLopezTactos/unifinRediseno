@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => '已报价单项列表仪表板',
+
     'LBL_CAMPAIGN_PRODUCT' => '市场活动已报价单项',
     'LBL_MODULE_NAME' => '已报价单项',
     'LBL_MODULE_NAME_SINGULAR' => '已报价单项',
@@ -172,4 +175,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => '已报价单项报价数据列表',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' （新的已报价单项）',
     'LBL_DISCOUNT_PERCENT' => '百分比',
+    'LBL_DISCOUNT_TYPE' => '折扣类型',
 );

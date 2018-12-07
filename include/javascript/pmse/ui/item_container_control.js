@@ -8,20 +8,22 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 /**
  * @class ItemContainer
  * Control that will be used as a container for the SingleItems objects.
  */
 var ItemContainer = function (settings) {
-	Element.call(this, settings);
-	this._items = new ArrayList();
+	PMSE.Element.call(this, settings);
+	this._items = new PMSE.ArrayList();
 	this._massiveAction = false;
 	this.onAddItem = null;
 	this.onRemoveItem = null;
 	this.onSelect = null;
 	this.onInputChar = null;
 	this._textInputMode = null;
-	this._textInputs = new ArrayList();
+	this._textInputs = new PMSE.ArrayList();
 	this._inputValidationFunction = null;
 	this._selectedIndex = null;
 	this.onBeforeAddItemByInput = null;
@@ -35,7 +37,7 @@ var ItemContainer = function (settings) {
 	ItemContainer.prototype.init.call(this, settings);
 };
 
-ItemContainer.prototype = new  Element();
+ItemContainer.prototype = new  PMSE.Element();
 ItemContainer.prototype.constructor = ItemContainer;
 
 ItemContainer.prototype.textInputMode = {

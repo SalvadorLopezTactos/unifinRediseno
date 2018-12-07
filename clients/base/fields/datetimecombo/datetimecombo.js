@@ -427,7 +427,7 @@
             return;
         }
 
-        return value.format();
+        return value.formatServer();
     },
 
     /**

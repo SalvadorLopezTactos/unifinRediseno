@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => '배송자를 삭제하기 위해선 정확한 자료 고유번호를 입력하셔야합니다.',
   'NTC_STATUS' => '이 배송공급자를 배송공급자 내려보기 목록에서 제거하려면 상태를 정지로 설정합니다.',
   'NTC_LIST_ORDER' => '배송 공급자 내려보기 목록에 나타나도록 순서를 설정하니다.',
-  'shipper_status_dom' => 
-  array (
-    'Active' => '작동중',
-    'Inactive' => '중지',
-),
-	'LBL_EDITLAYOUT' => '지면 배치 편집하기' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => '지면 배치 편집하기' /*for 508 compliance fix*/,
 );
-
 
 ?>

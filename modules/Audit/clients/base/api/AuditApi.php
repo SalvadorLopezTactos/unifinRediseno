@@ -21,7 +21,7 @@ class AuditApi extends ModuleApi
                 'path' => array('<module>','?', 'audit'),
                 'pathVars' => array('module','record','audit'),
                 'method' => 'viewChangeLog',
-                'shortHelp' => 'View change log in record view',
+                'shortHelp' => 'View audit log in record view',
                 'longHelp' => 'include/api/help/audit_get_help.html',
             ),
         );

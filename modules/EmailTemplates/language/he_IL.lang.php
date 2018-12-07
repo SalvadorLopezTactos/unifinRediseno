@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'בחר' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'נקה' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'סוג:',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'תבניות לדואר אלקטרוני',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'תבניות דואר אלקטרוני',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'משתנים',
 );

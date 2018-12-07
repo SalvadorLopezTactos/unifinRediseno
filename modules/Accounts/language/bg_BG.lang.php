@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Оферти (Да се достави на)',
 	'LNK_ACCOUNT_REPORTS' => 'Справки за организации',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Документи',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Електронно табло на списъка на профилите',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Електронно табло на записа на профилите',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Графики',
 	'LBL_DEFAULT' => 'Визуализиране',
@@ -45,7 +49,7 @@ $mod_strings = array (
 	'LBL_ASSIGNED_TO_NAME' => 'Отговорник:',
 	'LBL_ASSIGNED_TO_ID' => 'Отговорник:',
 	'LBL_BILLING_ADDRESS_CITY' => 'Данъчен адрес град:',
-	'LBL_BILLING_ADDRESS_COUNTRY' => 'Данъчен адрес държава:',
+	'LBL_BILLING_ADDRESS_COUNTRY' => 'Фактуриране, държава:',
 	'LBL_BILLING_ADDRESS_POSTALCODE' => 'Данъчен адрес пощенски код',
 	'LBL_BILLING_ADDRESS_STATE' => 'Данъчен адрес област',
 	'LBL_BILLING_ADDRESS_STREET_2' =>'Данъчен адрес:',

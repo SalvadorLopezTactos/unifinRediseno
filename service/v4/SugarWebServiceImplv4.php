@@ -48,11 +48,17 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
         $success = false;
         $authController = AuthenticationController::getInstance();
 
-        if(!empty($user_auth['encryption']) && $user_auth['encryption'] === 'PLAIN' && $authController->authController->userAuthenticateClass != "LDAPAuthenticateUser")
-        {
+        if (!empty($user_auth['encryption']) && $user_auth['encryption'] === 'PLAIN' &&
+            $authController->authController->userAuthenticateClass != "LDAPAuthenticateUser" &&
+            !$authController->authController instanceof IdMLDAPAuthenticate &&
+            !$authController->authController instanceof OAuth2Authenticate) {
             $user_auth['password'] = md5($user_auth['password']);
         }
-        $isLoginSuccess = $authController->login($user_auth['user_name'], $user_auth['password'], array('passwordEncrypted' => true));
+        $isLoginSuccess = (bool) $authController->login(
+            $user_auth['user_name'],
+            $user_auth['password'],
+            ['passwordEncrypted' => true]
+        );
         $usr_id=$user->retrieve_user_id($user_auth['user_name']);
         if($usr_id)
             $user->retrieve($usr_id);
@@ -84,17 +90,18 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
             self::$helperObject->setFaultObject($error);
             return;
         } elseif (extension_loaded('mcrypt')
-            && $authController->authController->userAuthenticateClass == "LDAPAuthenticateUser"
+            && (!empty($authController->authController->userAuthenticateClass)
+                && $authController->authController->userAuthenticateClass == "LDAPAuthenticateUser" ||
+                $authController->authController instanceof IdMLDAPAuthenticate)
             && (empty($user_auth['encryption']) || $user_auth['encryption'] !== 'PLAIN')) {
             $password = self::$helperObject->decrypt_string($user_auth['password']);
             $authController->loggedIn = false; // reset login attempt to try again with decrypted password
             if($authController->login($user_auth['user_name'], $password) && isset($_SESSION['authenticated_user_id']))
                 $success = true;
-        }
-        else if( $authController->authController->userAuthenticateClass == "LDAPAuthenticateUser"
-                 && (empty($user_auth['encryption']) || $user_auth['encryption'] == 'PLAIN' ) )
-        {
-
+        } elseif ((!empty($authController->authController->userAuthenticateClass)
+                && $authController->authController->userAuthenticateClass == "LDAPAuthenticateUser" ||
+                $authController->authController instanceof IdMLDAPAuthenticate)
+                 && (empty($user_auth['encryption']) || $user_auth['encryption'] == 'PLAIN' )) {
         	$authController->loggedIn = false; // reset login attempt to try again with md5 password
         	if($authController->login($user_auth['user_name'], md5($user_auth['password']), array('passwordEncrypted' => true))
         		&& isset($_SESSION['authenticated_user_id']))
@@ -291,7 +298,18 @@ class SugarWebServiceImplv4 extends SugarWebServiceImplv3_1 {
             $response = $seed->retrieveTargetList($query, $select_fields, $offset,-1,-1,$deleted);
         }else
         {
-            $response = self::$helperObject->get_data_list($seed,$order_by, $query, $offset,-1,-1,$deleted,$favorites);
+            $response = self::$helperObject->get_data_list(
+                $seed,
+                $order_by,
+                $query,
+                $offset,
+                -1,
+                -1,
+                $deleted,
+                $favorites,
+                false,
+                $select_fields
+            );
         } // else
         $list = $response['list'];
 

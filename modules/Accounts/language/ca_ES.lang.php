@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Pressupostos (enviats a)',
 	'LNK_ACCOUNT_REPORTS' => 'Informes de comptes',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documents',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Quadre de comandament de llista de comptes',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Quadre de comandament de registre de comptes',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Gràfics',
 	'LBL_DEFAULT' => 'Vistes',
@@ -139,7 +143,7 @@ $mod_strings = array (
 	'LBL_CREATED_ID'=>'Creat per ID',
 	'LBL_CAMPAIGNS' =>'Campanyes',
 	'LNK_CREATE' => 'Crear empresa',
-	'LNK_ACCOUNT_LIST' => 'Veure comptes',
+	'LNK_ACCOUNT_LIST' => 'Mostra comptes',
 	'LNK_NEW_ACCOUNT' => 'Nou compte',
 	'LNK_IMPORT_ACCOUNTS' => 'Importa comptes',
 	'MSG_DUPLICATE' => 'El registre per al compte que crearà podria ser un duplicat d&#39;un altre registre de compte existent. Els registres de compte amb noms similars es llisten a continuació.<br>Faci clic en Guardar per continuar amb la creació d&#39;aquest compte, o en Cancel·la per tornar al mòdul sense crear el compte.',

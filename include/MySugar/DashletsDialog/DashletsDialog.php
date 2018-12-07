@@ -43,7 +43,7 @@ class DashletsDialog {
         asort($dashletsFiles);
 
         foreach($dashletsFiles as $className => $files) {
-            if(!empty($files['meta']) && SugarAutoLoader::fileExists($files['meta'])) {
+            if (!empty($files['meta']) && file_exists($files['meta'])) {
                 require_once($files['meta']); // get meta file
 
                 $directory = substr($files['meta'], 0, strrpos($files['meta'], '/') + 1);
@@ -124,7 +124,7 @@ class DashletsDialog {
                 }
 
                 if ($displayDashlet && isset($dashletMeta[$files['class']]['dynamic_hide']) && $dashletMeta[$files['class']]['dynamic_hide']){
-                    if ( SugarAutoLoader::fileExists($files['file']) ) {
+                    if (file_exists($files['file'])) {
                         require_once($files['file']);
                         if ( class_exists($files['class']) ) {
                             $dashletClassName = $files['class'];

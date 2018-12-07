@@ -14,7 +14,6 @@ namespace Sugarcrm\Sugarcrm\Elasticsearch\Queue;
 
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Document;
 use Sugarcrm\Sugarcrm\Elasticsearch\Container;
-use Doctrine\DBAL\Connection;
 
 /**
  *
@@ -86,15 +85,17 @@ class QueueManager
     }
 
     /**
-     * Queue all beans for given modules. If no modules are specified all
-     * enabled modules will be taken into account.
+     * Queue all beans for given modules.
      * @param array $modules
      */
-    public function reindexModules(array $modules = array())
+    public function reindexModules(array $modules)
     {
-        if (empty($modules)) {
-            $modules = $this->container->metaDataHelper->getAllEnabledModules();
-            // no module list needed to just clear everything as this is faster
+        $allModules = $this->container->metaDataHelper->getAllEnabledModules();
+        sort($allModules);
+        sort($modules);
+
+        // clear the whole queue when all modules are selected
+        if ($allModules === $modules) {
             $this->resetQueue();
         } else {
             $this->resetQueue($modules);
@@ -103,6 +104,41 @@ class QueueManager
         $this->cleanupQueue();
         $this->queueModules($modules);
         $this->createScheduler();
+    }
+
+    /**
+     * Although the queue can be used at any given point in time, we want to
+     * be able to be notified from the scheduler when nothing is left in the
+     * queue. This is our sign to do some housekeeping regarding bulk indexing
+     * operations like refresh_interval and/or replica tuning.
+     *
+     * Both the non-replica reindex settings as well as refresh_interval should
+     * be carefully configured when using live reindexing as both values will
+     * only be restored when the queue is reported as empty. Optionally if due
+     * to circumstances the queue doesn't get empty (i.e. async modules, or
+     * live reindexing) CLI commands are available for prematurely force the
+     * proper refresh_interval/replica settings.
+     */
+    public function reportIndexingDone()
+    {
+        $this->enableRefresh();
+        $this->enableReplicas();
+    }
+
+    /**
+     * Enable refresh interval
+     */
+    protected function enableRefresh()
+    {
+        $this->container->indexManager->enableRefresh();
+    }
+
+    /**
+     * Enable replicas
+     */
+    protected function enableReplicas()
+    {
+        $this->container->indexManager->enableReplicas();
     }
 
     /**
@@ -248,15 +284,12 @@ class QueueManager
      */
     public function resetQueue(array $modules = array())
     {
-        $conn = $this->db->getConnection();
-
-        $query = sprintf('DELETE FROM %s ', self::FTS_QUEUE);
-        if (!empty($modules)) {
-            $query .= ' WHERE bean_module IN (?)';
-            $conn->executeUpdate($query, array($modules), array(Connection::PARAM_STR_ARRAY));
-        } else {
-            $conn->executeUpdate($query);
+        $sql = sprintf('DELETE FROM %s ', self::FTS_QUEUE);
+        if ($modules) {
+            $modules = array_map(array($this->db, 'quoted'), $modules);
+            $sql .= sprintf(' WHERE bean_module IN (%s)', implode(',', $modules));
         }
+        $this->db->query($sql);
     }
 
     /**
@@ -265,12 +298,10 @@ class QueueManager
     public function cleanupQueue()
     {
         $remove = array();
-        $query = sprintf('SELECT DISTINCT bean_module FROM %s', self::FTS_QUEUE);
-
-        $conn = $this->db->getConnection();
-        $stmt = $conn->executeQuery($query);
-
-        while ($data = $stmt->fetchColumn()) {
+        $sql = sprintf('SELECT DISTINCT bean_module FROM %s', self::FTS_QUEUE);
+        $result = $this->db->query($sql);
+        while ($row = $this->db->fetchByAssoc($result)) {
+            $data = $row['bean_module'];
             if (empty($data)) {
                 continue;
             }
@@ -282,7 +313,6 @@ class QueueManager
         if (!empty($remove)) {
             $this->resetQueue($remove);
         }
-
     }
 
     /**
@@ -343,14 +373,14 @@ class QueueManager
     public function getQueuedModules()
     {
         $modules = array();
-        $query = sprintf(
-            'SELECT DISTINCT bean_module FROM %s WHERE processed = ?',
-            self::FTS_QUEUE
+        $sql = sprintf(
+            'SELECT DISTINCT bean_module FROM %s WHERE processed = %s',
+            self::FTS_QUEUE,
+            self::PROCESSED_NEW
         );
-        $conn = $this->db->getConnection();
-        $stmt = $conn->executeQuery($query, array(self::PROCESSED_NEW));
-
-        while ($module = $stmt->fetchColumn()) {
+        $result = $this->db->query($sql);
+        while ($row = $this->db->fetchByAssoc($result)) {
+            $module = $row['bean_module'];
             if ($this->container->metaDataHelper->isModuleEnabled($module)) {
                 $modules[] = $module;
             } else {
@@ -368,16 +398,16 @@ class QueueManager
      */
     public function getQueueCountModule($module)
     {
-        $query = sprintf(
-            "SELECT count(bean_id) FROM %s WHERE processed = ? AND bean_module = ?",
-            self::FTS_QUEUE
+        $sql = sprintf(
+            "SELECT count(bean_id) FROM %s WHERE processed = %s AND bean_module = %s",
+            self::FTS_QUEUE,
+            self::PROCESSED_NEW,
+            $this->db->quoted($module)
         );
-
-        $conn = $this->db->getConnection();
-        $stmt = $conn->executeQuery($query, array(self::PROCESSED_NEW, $module));
-
-        //expect a single column
-        return $stmt->fetchColumn();
+        if ($result = $this->db->getOne($sql)) {
+            return $result;
+        }
+        return 0;
     }
 
     /**
@@ -388,16 +418,17 @@ class QueueManager
     protected function insertRecord($id, $module)
     {
         // TODO - avoid duplicate beans for performance - upsert ?
-        $tableName = self::FTS_QUEUE;
-        $fieldDefs = $GLOBALS['dictionary'][$tableName]['fields'];
-        $data = array(
-            'id' => create_guid(),
-            'bean_id' => $id,
-            'bean_module' => $module,
-            'date_modified' => \TimeDate::getInstance()->nowDb(),
-            'date_created' => \TimeDate::getInstance()->nowDb(),
+        $sql = sprintf(
+            'INSERT INTO %s (id, bean_id, bean_module, date_modified, date_created)
+            VALUES (%s, %s, %s, %s, %s)',
+            self::FTS_QUEUE,
+            $this->db->getGuidSQL(),
+            $this->db->quoted($id),
+            $this->db->quoted($module),
+            $this->db->now(),
+            $this->db->now()
         );
-        $this->db->insertParams($tableName, $fieldDefs, $data);
+        $this->db->query($sql);
     }
 
     /**
@@ -427,36 +458,30 @@ class QueueManager
     protected function queueModules(array $modules)
     {
         foreach ($modules as $module) {
-            $this->insertModuleToQueue($module);
+            $this->db->query($this->generateQueryModuleToQueue($module));
         }
     }
 
     /**
-     * Insert records into the queue for a given module
+     * Generate SQL query to insert records into the queue for givem nodule
      * @param string $module
+     * @return string
      */
-    protected function insertModuleToQueue($module)
+    protected function generateQueryModuleToQueue($module)
     {
         $seed = $this->getNewBean($module);
-
-        $query = sprintf(
+        $sql = sprintf(
             'INSERT INTO %s (id, bean_id, bean_module, date_modified, date_created)
-            SELECT %s, m.id bean_id, ?, ?, ?
+            SELECT %s, m.id bean_id, %s, %s, %s
             FROM %s m WHERE m.deleted = 0 ',
             self::FTS_QUEUE,
             $this->db->getGuidSQL(),
+            $this->db->quoted($module),
+            $this->db->now(),
+            $this->db->now(),
             $seed->table_name
         );
-
-        $conn = $this->db->getConnection();
-        $conn->executeUpdate(
-            $query,
-            array(
-                $module,
-                \TimeDate::getInstance()->nowDb(),
-                \TimeDate::getInstance()->nowDb(),
-            )
-        );
+        return $sql;
     }
 
     /**
@@ -513,21 +538,15 @@ class QueueManager
      */
     protected function flushDeleteFromQueue($module = null)
     {
-        $builder = $this->db->getConnection()->createQueryBuilder();
-        $builder->delete(self::FTS_QUEUE);
-
-        $builder->where(
-            $builder->expr()->in(
-                'id',
-                $builder->createPositionalParameter($this->deleteFromQueue, Connection::PARAM_STR_ARRAY)
-            )
+        $moduleClause = $module ? sprintf('bean_module = %s AND', $this->db->quoted($module)) : '';
+        $idClause = implode(',', array_map(array($this->db, 'quoted'), $this->deleteFromQueue));
+        $sql = sprintf(
+            'DELETE FROM %s WHERE %s id IN (%s)',
+            self::FTS_QUEUE,
+            $moduleClause,
+            $idClause
         );
-
-        if ($module !== null) {
-            $builder->andWhere('bean_module = ' . $builder->createPositionalParameter($module));
-        }
-        $builder->execute();
-
+        $this->db->query($sql);
         $this->deleteFromQueue = array();
     }
 
@@ -554,6 +573,7 @@ class QueueManager
         foreach ($this->getQueuedModules() as $module) {
             $this->consumeModuleFromQueue($module);
         }
+        $this->reportIndexingDone();
     }
 
     /**

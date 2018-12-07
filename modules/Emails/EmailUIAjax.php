@@ -272,10 +272,10 @@ $request = InputValidation::getService();
     	break;
     case "getTemplateAttachments":
         $GLOBALS['log']->debug("********** EMAIL 2.0 - Asynchronous - at: getTemplateAttachments");
-        if(isset($_REQUEST['parent_id']) && !empty($_REQUEST['parent_id'])) {
+        if(isset($_REQUEST['email_id']) && !empty($_REQUEST['email_id'])) {
 
-
-            $where = "parent_id='{$_REQUEST['parent_id']}'";
+            //FIXME: Should notes.email_type be Emails or EmailTemplates?
+                $where = 'email_id=' . $this->db->quoted($_REQUEST['parent_id']);
             $order = "";
             $seed = BeanFactory::newBean('Notes');
             $fullList = $seed->get_full_list($order, $where, '');
@@ -817,20 +817,20 @@ eoq;
 
         $exUids = $request->getValidInputRequest('uid', array('Assert\Delimited' => array('constraints' => 'Assert\Guid')));
         $ieId = $request->getValidInputRequest('ieId', 'Assert\Guid');
-        $mbox = $request->getValidInputRequest('mbox', 'Assert\Guid');
+            $mbox = $request->getValidInputRequest('mbox');
 
         if (!empty($exUids) && !empty($ieId)) {
 
             $out = array();
             foreach($exUids as $k => $uid) {
-                if($email->et->validCacheFileExists($ieId, 'messages', $mbox.$uid.".php")) {
-                    $msg = $email->et->getCacheValue($ieId, 'messages', $mbox.$uid.".php", 'out');
+                    if ($email->et->mboxCacheExists($ieId, $mbox, $uid)) {
+                        $msg = $email->et->getMboxCacheValue($ieId, $mbox, $uid);
                 } else {
                     $ie->retrieve($ieId);
                     $ie->mailbox = $mbox;
                     $ie->setEmailForDisplay($uid, false, true);
                     $msg = $ie->displayOneEmail($uid, $mbox);
-                    $email->et->writeCacheFile('out', $msg, $ieId, 'messages', "{$mbox}{$uid}.php");
+                        $email->et->writeMboxCacheValue($ieId, $mbox, $uid, $msg);
                 }
 
                 $out[] = $msg;
@@ -1191,7 +1191,7 @@ eoq;
             $ret = array();
 
             foreach($oe->field_defs as $def) {
-                $ret[$def] = $oe->$def;
+                $ret[$def['name']] = $oe->$def['name'];
             }
             $ret['mail_smtppass']=''; // don't send back the password
             $ret['has_password'] =  isset($oe->mail_smtppass);
@@ -1264,8 +1264,7 @@ eoq;
         if(!empty($_REQUEST['mail_smtppass'])) {
             $oe->mail_smtppass = $_REQUEST['mail_smtppass'];
         }
-        $oe = $oe->save();
-		echo $oe->id;
+        echo $oe->save();
         break;
 
     case "saveDefaultOutbound":

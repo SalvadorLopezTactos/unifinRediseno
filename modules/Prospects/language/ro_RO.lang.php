@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Tabloul de bord Listă ținte',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare ținte',
+
   'LBL_MODULE_NAME' => 'Obiective',
   'LBL_MODULE_NAME_SINGULAR' => 'Tinta:',
   'LBL_MODULE_ID'   => 'Tinte',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Formula de salut',
   'LBL_SAVE_PROSPECT' => 'Salveaza Tinta',
   'LBL_CREATED_OPPORTUNITY' =>'S-a creat o oportunitate nouă',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Crearea unei oportunitati necesita un cont.\n Va rugam, fie sa creati un cont nou, fie sa selectati unul deja existent.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Crearea unei oportunitati necesita un cont.\\n Va rugam, fie sa creati un cont nou, fie sa selectati unul deja existent.',
   'LNK_SELECT_ACCOUNT' => "Selecteaza Cont",
   'LNK_NEW_PROSPECT' => 'Creează Ţintă',
   'LNK_PROSPECT_LIST' => 'Vizualizeaza Tinte',
@@ -189,4 +193,6 @@ Pentru a crea {{module_name}}:
 2. Faceţi clic pe "Salvare" pentru a finaliza noua înregistrare şi pentru a reveni la pagina anterioară.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Rapoarte ţinte',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Scopuri comerciale permise pentru',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ultima actualizare a consimțământului',
 );

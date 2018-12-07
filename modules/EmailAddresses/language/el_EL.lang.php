@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'Ημερομηνία Δημιουργίας',
     'LBL_DATE_MODIFIED' => 'Ημερομηνία Τροποποίησης',
     'LBL_DELETED' => 'Διαγραφή',
+    'LBL_MODULE_NAME' => 'Διευθύνσεις Email',
+    'LBL_MODULE_NAME_SINGULAR' => 'Διεύθυνση Email',
 );

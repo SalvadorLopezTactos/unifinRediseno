@@ -91,7 +91,7 @@ class PMSE
 //            return file_exists($file);
         } else {
             //For Sugar On-Demand
-            return SugarAutoLoader::fileExists($file);
+            return file_exists($file);
         }
 
     }

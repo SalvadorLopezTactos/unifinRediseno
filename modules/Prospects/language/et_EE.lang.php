@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Sihtmärkide loendi töölaud',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Sihtmärkide kirjete töölaud',
+
   'LBL_MODULE_NAME' => 'Eesmärgid',
   'LBL_MODULE_NAME_SINGULAR' => 'Target',
   'LBL_MODULE_ID'   => 'Eesmärgid',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Tervitus',
   'LBL_SAVE_PROSPECT' => 'Salvesta eesmärk',
   'LBL_CREATED_OPPORTUNITY' =>'Loodud uus müügivõimalus',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Müügivõimaluse loomine eeldab ettevõtte kontot. \n Palun loo kas uus ettevõte või vali olemasolev.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Müügivõimaluse loomine eeldab ettevõtte kontot. \\n Palun loo kas uus ettevõte või vali olemasolev.',
   'LNK_SELECT_ACCOUNT' => "Vali ettevõte",
   'LNK_NEW_PROSPECT' => 'Loo eesmärk',
   'LNK_PROSPECT_LIST' => 'Vaata eesmärke',
@@ -195,4 +199,6 @@ To create a {{module_name}}:
 2. Click "Save" to finalize the new record and return to the previous page.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Targets&#39; reports',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Nõustutud ärieesmärgid:',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Nõusoleku viimane värskendus',
 );

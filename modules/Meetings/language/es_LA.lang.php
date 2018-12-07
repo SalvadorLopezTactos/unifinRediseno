@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Tablero de Lista de Reuniones',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Tablero de Registro de Reuniones',
+
 	'ERR_DELETE_RECORD' => 'Debe especificar un número de registro a eliminar.',
 	'LBL_ACCEPT_THIS'=>'¿Aceptar?',
 	'LBL_ADD_BUTTON'=> 'Agregar',
@@ -43,12 +47,12 @@ $mod_strings = array (
 	'LBL_LIST_CLOSE' => 'Cerrado',
 	'LBL_LIST_CONTACT' => 'Contacto',
 	'LBL_LIST_DATE_MODIFIED'=>'Fecha de Modificación',
-	'LBL_LIST_DATE' => 'Fecha Inicio',
+	'LBL_LIST_DATE' => 'Fecha de inicio',
 	'LBL_LIST_DIRECTION' => 'Dirección',
 	'LBL_LIST_DUE_DATE'=>'Fecha de Vencimiento',
 	'LBL_LIST_FORM_TITLE' => 'Lista de Reuniones',
 	'LBL_LIST_MY_MEETINGS' => 'Mis Reuniones',
-    'LBL_MY_SCHEDULED_MEETINGS' => 'Mis Reuniones Programadas',
+    'LBL_MY_SCHEDULED_MEETINGS' => 'Mis reuniones programadas',
 	'LBL_LIST_RELATED_TO' => 'Relacionado con',
 	'LBL_LIST_STATUS'=>'Estado',
 	'LBL_LIST_SUBJECT' => 'Asunto',
@@ -84,7 +88,7 @@ $mod_strings = array (
 	'LBL_SEND_BUTTON_LABEL'=>'Guardar y Enviar Invitaciones',
 	'LBL_SEND_BUTTON_TITLE'=>'Guardar y Enviar Invitaciones',
 	'LBL_STATUS' => 'Estado:',
-    'LBL_TYPE' => 'Tipo de Reunión',
+    'LBL_TYPE' => 'Tipo de reunión',
     'LBL_PASSWORD' => 'Contraseña de la reunión',
     'LBL_URL' => 'Iniciar/Unirse a la reunión',
     'LBL_HOST_URL' => 'Anfitrión URL',
@@ -99,7 +103,7 @@ $mod_strings = array (
     'LBL_PARENT_ID' => 'ID de Registro Padre',
 	'LNK_MEETING_LIST'=>'Ver Reuniones',
 	'LNK_NEW_APPOINTMENT' => 'Crear Cita',
-	'LNK_NEW_MEETING'=>'Programar Reunión',
+	'LNK_NEW_MEETING'=>'Programar reunión',
 	'LNK_IMPORT_MEETINGS' => 'Importar Reuniones',
 
 	'NTC_REMOVE_INVITEE' => '¿Está seguro que desea quitar a este asistente de la reunión?',

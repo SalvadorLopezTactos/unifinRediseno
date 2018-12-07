@@ -11,7 +11,6 @@
 
 namespace Symfony\Component\Validator\Constraints;
 
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -24,6 +23,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
  *
  * @see http://en.wikipedia.org/wiki/Bank_card_number
  * @see http://www.regular-expressions.info/creditcard.html
+ * @see http://www.barclaycard.co.uk/business/files/Ranges_and_Rules_September_2014.pdf
  */
 class CardSchemeValidator extends ConstraintValidator
 {
@@ -64,14 +64,19 @@ class CardSchemeValidator extends ConstraintValidator
         'LASER' => array(
             '/^(6304|670[69]|6771)[0-9]{12,15}$/',
         ),
-        // Maestro cards begin with either 5018, 5020, 5038, 5893, 6304, 6759, 6761, 6762, 6763 or 0604
-        // They have between 12 and 19 digits.
+        // Maestro international cards begin with 675900..675999 and have between 12 and 19 digits.
+        // Maestro UK cards begin with either 500000..509999 or 560000..699999 and have between 12 and 19 digits.
         'MAESTRO' => array(
-            '/^(5018|5020|5038|6304|6759|6761|676[23]|0604)[0-9]{8,15}$/',
+            '/^(6759[0-9]{2})[0-9]{6,13}$/',
+            '/^(50[0-9]{4})[0-9]{6,13}$/',
+            '/^5[6-9][0-9]{10,17}$/',
+            '/^6[0-9]{11,18}$/',
         ),
         // All MasterCard numbers start with the numbers 51 through 55. All have 16 digits.
+        // October 2016 MasterCard numbers can also start with 222100 through 272099.
         'MASTERCARD' => array(
             '/^5[1-5][0-9]{14}$/',
+            '/^2(22[1-9][0-9]{12}|2[3-9][0-9]{13}|[3-6][0-9]{14}|7[0-1][0-9]{13}|720[0-9]{12})$/',
         ),
         // All Visa card numbers start with a 4. New cards have 16 digits. Old cards have 13.
         'VISA' => array(
@@ -96,17 +101,10 @@ class CardSchemeValidator extends ConstraintValidator
         }
 
         if (!is_numeric($value)) {
-            if ($this->context instanceof ExecutionContextInterface) {
-                $this->context->buildViolation($constraint->message)
-                    ->setParameter('{{ value }}', $this->formatValue($value))
-                    ->setCode(CardScheme::NOT_NUMERIC_ERROR)
-                    ->addViolation();
-            } else {
-                $this->buildViolation($constraint->message)
-                    ->setParameter('{{ value }}', $this->formatValue($value))
-                    ->setCode(CardScheme::NOT_NUMERIC_ERROR)
-                    ->addViolation();
-            }
+            $this->context->buildViolation($constraint->message)
+                ->setParameter('{{ value }}', $this->formatValue($value))
+                ->setCode(CardScheme::NOT_NUMERIC_ERROR)
+                ->addViolation();
 
             return;
         }
@@ -122,16 +120,9 @@ class CardSchemeValidator extends ConstraintValidator
             }
         }
 
-        if ($this->context instanceof ExecutionContextInterface) {
-            $this->context->buildViolation($constraint->message)
-                ->setParameter('{{ value }}', $this->formatValue($value))
-                ->setCode(CardScheme::INVALID_FORMAT_ERROR)
-                ->addViolation();
-        } else {
-            $this->buildViolation($constraint->message)
-                ->setParameter('{{ value }}', $this->formatValue($value))
-                ->setCode(CardScheme::INVALID_FORMAT_ERROR)
-                ->addViolation();
-        }
+        $this->context->buildViolation($constraint->message)
+            ->setParameter('{{ value }}', $this->formatValue($value))
+            ->setCode(CardScheme::INVALID_FORMAT_ERROR)
+            ->addViolation();
     }
 }

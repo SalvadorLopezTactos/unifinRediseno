@@ -21,9 +21,16 @@
 
 require_once 'include/utils.php';
 
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Sugarcrm\Sugarcrm\Audit\EventRepository;
+use Sugarcrm\Sugarcrm\Audit\FieldChangeList;
+use Sugarcrm\Sugarcrm\DataPrivacy\Erasure\FieldList as ErasureFieldList;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
-use Sugarcrm\Sugarcrm\ProcessManager;
+use Sugarcrm\Sugarcrm\DataPrivacy\Erasure\Repository;
 use Sugarcrm\Sugarcrm\Security\Crypto\Blowfish;
+use Sugarcrm\Sugarcrm\Security\Subject;
 
 /**
  * SugarBean is the base class for all business objects in Sugar.  It implements
@@ -71,6 +78,20 @@ class SugarBean
 	 * @var BOOL -- default false
 	 */
 	var $disable_row_level_security =false;
+
+    /**
+     * When the bean is retrieved, should the information about erased fields be retrieved as well.
+     *
+     * @var bool
+     */
+    public $retrieve_erased_fields = false;
+
+    /**
+     * List of erased fields
+     *
+     * @var array
+     */
+    public $erased_fields;
 
 	/**
 	 * Bean visibility manager
@@ -217,7 +238,12 @@ class SugarBean
     var $additional_column_fields = array();
     var $relationship_fields = array();
     var $current_notify_user;
-    var $fetched_row=false;
+
+    /**
+     * @var array|false
+     */
+    public $fetched_row = false;
+
     var $fetched_rel_row = array();
     var $layout_def;
     var $force_load_details = false;
@@ -322,23 +348,6 @@ class SugarBean
      * @var array
      */
     protected $lockedFields = null;
-
-    /**
-     * Specification of fields containing names of related users
-     *
-     * @var array
-     */
-    protected $related_user_fields = array(
-        'assigned_user_id' => array(
-            'assigned_user_name', 'au',
-        ),
-        'created_by' => array(
-            'created_by_name', 'cbu',
-        ),
-        'modified_user_id' => array(
-            'modified_by_name', 'mbu',
-        ),
-    );
 
     /**
      * to display on acl-role edit panel
@@ -473,6 +482,12 @@ class SugarBean
         throw new Exception("Bean created not via createBean!");
     }
 
+    /**
+     * The state of the bean in which the last audit record was created
+     *
+     * @var array
+     */
+    private $lastAuditedState;
 
     /**
      * Constructor for the bean, it performs following tasks:
@@ -685,6 +700,8 @@ class SugarBean
      * @param string $query
      * @param null|array $options
      * @return string
+     *
+     * @deprecated Use SugarQuery and SugarBean::addVisibilityQuery() instead
      */
     public function addVisibilityFrom(&$query, $options = null)
     {
@@ -696,6 +713,8 @@ class SugarBean
      * @param string $query
      * @param null|array $options
      * @return string
+     *
+     * @deprecated Use SugarQuery and SugarBean::addVisibilityQuery() instead
      */
     public function addVisibilityWhere(&$query, $options = null)
     {
@@ -900,36 +919,42 @@ class SugarBean
      *
      * Internal function, do not override.
      */
-    function create_audit_table()
+    public function create_audit_table()
     {
-        global $dictionary;
-        $table_name=$this->get_audit_table_name();
+        $defs = $this->get_audit_table_defs();
 
-        require('metadata/audit_templateMetaData.php');
+        $this->db->createTableParams($defs['table'], $defs['fields'], $defs['indices'], $defs['engine'] ?? null);
+    }
 
+    /**
+     * Returns the dictionary entry of the audit table for this Bean.
+     *
+     * @return array
+     */
+    public function get_audit_table_defs()
+    {
+        $dictionary = [];
+        $globalDict = $GLOBALS['dictionary'];
+
+        require 'metadata/audit_templateMetaData.php';
         // Bug: 52583 Need ability to customize template for audit tables
         $custom = 'custom/metadata/audit_templateMetaData_' . $this->getTableName() . '.php';
-        if (file_exists($custom))
-        {
+        if (file_exists($custom)) {
             require($custom);
         }
 
-        $fieldDefs = $dictionary['audit']['fields'];
-        $indices = $dictionary['audit']['indices'];
-
+        $table_name = $this->get_audit_table_name();
+        $dictionary['audit']['table'] = $table_name;
         // Renaming template indexes to fit the particular audit table (removed the brittle hard coding)
-        foreach($indices as $nr => $properties){
-            $indices[$nr]['name'] = 'idx_' . strtolower($table_name) . '_' . $properties['name'];
+        foreach ($dictionary['audit']['indices'] as $nr => $properties) {
+            $dictionary['audit']['indices'][$nr]['name'] = 'idx_' . strtolower($table_name) . '_' . $properties['name'];
         }
 
-        $engine = null;
-        if(isset($dictionary['audit']['engine'])) {
-            $engine = $dictionary['audit']['engine'];
-        } else if(isset($dictionary[$this->getObjectName()]['engine'])) {
-            $engine = $dictionary[$this->getObjectName()]['engine'];
+        if (!isset($dictionary['audit']['engine']) && isset($globalDict[$this->getObjectName()]['engine'])) {
+            $dictionary['audit']['engine'] = $globalDict[$this->getObjectName()]['engine'];
         }
 
-        $this->db->createTableParams($table_name, $fieldDefs, $indices, $engine);
+        return $dictionary['audit'];
     }
 
     /**
@@ -1137,9 +1162,9 @@ class SugarBean
                 $timeValue = $timedate->fromString($dtAry[1]);
                 $dateValue->setTime($timeValue->hour, $timeValue->min, $timeValue->sec);
             }
-            return $timedate->asUser($dateValue);
+            return $timedate->asDb($dateValue);
         } else {
-            return $timedate->asUserDate($timedate->getNow(true)->modify($value));
+            return $timedate->asDbDate($timedate->getNow(true)->modify($value));
         }
     }
 
@@ -1207,8 +1232,7 @@ class SugarBean
         if ((!isset($dictionary) or empty($dictionary)) && !empty($module_dir))
         {
             $filename='modules/'. $module_dir . '/vardefs.php';
-            if(SugarAutoLoader::fileExists($filename))
-            {
+            if (file_exists($filename)) {
                 include($filename);
             }
         }
@@ -1507,25 +1531,7 @@ class SugarBean
      */
     function get_related_fields()
     {
-
-        $related_fields=array();
-
-
-        $fieldDefs = $this->getFieldDefinitions();
-
-        //find all definitions of type link.
-        if (!empty($fieldDefs))
-        {
-            foreach ($fieldDefs as $name=>$properties)
-            {
-                if (array_search('relate',$properties) === 'type')
-                {
-                    $related_fields[$name]=$properties;
-                }
-            }
-        }
-
-        return $related_fields;
+        return $this->getFieldDefinitions('type', ['relate']);
     }
 
     /**
@@ -1557,7 +1563,6 @@ class SugarBean
         // Ensure that Activity Messages do not occur in the context of a Delete action (e.g. unlink)
         // and do so for all nested calls within the Top Level Delete Context
         $opflag = static::enterOperation('delete');
-        $aflag = Activity::isEnabled();
         Activity::disable();
         $linked_fields=$this->get_linked_fields();
         foreach ($linked_fields as $name => $value)
@@ -1571,10 +1576,8 @@ class SugarBean
                 $GLOBALS['log']->fatal("error loading relationship $name");
             }
         }
-        if(static::leaveOperation('delete', $opflag) && $aflag) {
-            Activity::enable();
-        }
-
+        static::leaveOperation('delete', $opflag);
+        Activity::restoreToPreviousState();
     }
 
     /**
@@ -1799,22 +1802,226 @@ class SugarBean
                 }
             }
 
-            if ($this->new_with_id == false) {
-                $this->id = create_guid();
+            $this->ensureHasId();
+        }
+    }
+
+    /**
+     * Makes sure the newly created bean has the ID
+     */
+    private function ensureHasId()
+    {
+        if (!$this->id) {
+            $this->id = create_guid();
+        }
+    }
+
+    private function saveLastAuditedState()
+    {
+        if ($this->lastAuditedState === null) {
+            if (is_array($this->fetched_row)) {
+                $this->lastAuditedState = array_merge($this->fetched_row, $this->fetched_rel_row);
+            } else {
+                $this->lastAuditedState = [];
             }
         }
     }
 
     /**
-    * Implements a generic insert and update logic for any SugarBean
-    * This method only works for subclasses that implement the same variable names.
-    * This method uses the presence of an id field that is not null to signify and update.
-    * The id field should not be set otherwise.
-    *
-    * @param boolean $check_notify Optional, default false, if set to true assignee of the record is notified via email.
-    * @todo Add support for field type validation and encoding of parameters.
-    */
-    function save($check_notify = false)
+     * Implements Erasure type transaction save.
+     * Erases values of fields provided then saves bean.
+     * @param FieldList $fields list of fields to be erased
+     * @param boolean $check_notify if set to true, the assignee of the record is notified via email.
+     * @throws DBALException
+     */
+    public function erase(ErasureFieldList $fields, $check_notify)
+    {
+        $this->saveLastAuditedState();
+
+        $isUpdate = true;
+        $fields->erase($this);
+
+        $this->populateFetchedEmail('bean_field');
+        $this->commitAuditedStateChanges(null);
+
+        $this->saveData($isUpdate, $check_notify);
+
+        $this->getErasedFieldsRepository()->addBeanFields(
+            $this->getTableName(),
+            $this->id,
+            $fields
+        );
+
+        if ($this->is_AuditEnabled()) {
+            $auditEventId = $this->getEventRepository()->registerErasure($this, $fields);
+            // erase fields from Audit log
+            $this->eraseAuditRecords($fields, $auditEventId);
+        }
+
+        $this->call_custom_logic('after_save', array(
+            'isUpdate' => $isUpdate,
+            'dataChanges' => $this->dataChanges,
+        ));
+    }
+
+    /**
+     * Implements a generic insert and update logic for any SugarBean
+     * This method only works for subclasses that implement the same variable names.
+     * This method uses the presence of an id field that is not null to signify and update.
+     * The id field should not be set otherwise.
+     * Audit data is saved after logic hook "after_save" is triggerred.
+     * @param boolean $check_notify Optional, default false, if set to true assignee of the record is notified via email.
+     * @todo Add support for field type validation and encoding of parameters.
+     */
+    public function save($check_notify = false)
+    {
+        $isUpdate = $this->isUpdate();
+
+        $this->saveLastAuditedState();
+
+        if (!$isUpdate) {
+            $this->ensureHasId();
+        }
+
+        $this->populateFetchedEmail('bean_field');
+        $this->commitAuditedStateChanges(null);
+        $this->saveData($isUpdate, $check_notify);
+
+        if ($isUpdate) {
+            $nonEmptyFields = array_keys(array_filter($this->toArray(true)));
+            $this->getErasedFieldsRepository()->removeBeanFields(
+                $this->getTableName(),
+                $this->id,
+                ErasureFieldList::fromArray($nonEmptyFields)
+            );
+        }
+
+        $this->call_custom_logic('after_save', array(
+            'isUpdate' => $isUpdate,
+            'dataChanges' => $this->dataChanges,
+        ));
+
+        return $this->id;
+    }
+
+    /**
+     * Generate query for audit table
+     * @param SugarBean $bean SugarBean that was changed
+     * @param array $changes List of changes, contains 'before' and 'after'
+     * @param string $event_id Audit event id
+     * @return string  Audit table INSERT query
+     * @internal This method should be marked protected as soon as audit code is removed from DBManager.
+     */
+    public function auditSQL(SugarBean $bean, $changes, $event_id)
+    {
+        global $current_user;
+        $sql = "INSERT INTO ".$bean->get_audit_table_name();
+        //get field defs for the audit table.
+        require 'metadata/audit_templateMetaData.php';
+        $fieldDefs = $dictionary['audit']['fields'];
+
+        $values=array();
+        $values['id'] = $this->db->massageValue(create_guid(), $fieldDefs['id']);
+        $values['parent_id']= $this->db->massageValue($bean->id, $fieldDefs['parent_id']);
+        $values['event_id']= $this->db->massageValue($event_id, $fieldDefs['event_id']);
+        $values['field_name']= $this->db->massageValue($changes['field_name'], $fieldDefs['field_name']);
+        $values['data_type'] = $this->db->massageValue($changes['data_type'], $fieldDefs['data_type']);
+        if ($changes['data_type']=='text') {
+            $values['before_value_text'] = $this->db->massageValue($changes['before'], $fieldDefs['before_value_text']);
+            $values['after_value_text'] = $this->db->massageValue($changes['after'], $fieldDefs['after_value_text']);
+        } else {
+            $values['before_value_string'] = $this->db->massageValue($changes['before'], $fieldDefs['before_value_string']);
+            $values['after_value_string'] = $this->db->massageValue($changes['after'], $fieldDefs['after_value_string']);
+        }
+        $values['date_created'] = $this->db->massageValue(TimeDate::getInstance()->nowDb(), $fieldDefs['date_created']);
+        if (!empty($current_user->id)) {
+            $values['created_by'] = $this->db->massageValue($current_user->id, $fieldDefs['created_by']);
+        }
+
+        $sql .= "(".implode(",", array_keys($values)).") ";
+        $sql .= "VALUES(".implode(",", $values).")";
+        return $sql;
+    }
+
+    /**
+     * Saves changes to module's audit table
+     *
+     * @param SugarBean $bean Sugarbean instance that was changed
+     * @param array $change A single change array, contains 'before' and 'after'
+     * @param string $event_id Audit event id
+     *
+     * @return bool query result
+     * @internal This method should be marked protected as soon as audit code is removed from DBManager.
+     *            It is marked public only for backward compatibility.
+     */
+    public function saveAuditRecords(SugarBean $bean, $change, $event_id)
+    {
+        return $this->db->query($this->auditSQL($bean, $change, $event_id));
+    }
+
+    /**
+     * Uses the audit enabled fields array to find fields whose value has changed.
+     * The before and after values are stored in the bean.
+     * Uses $bean->fetched_row && $bean->fetched_rel_row to compare
+     *
+     * @param SugarBean $bean Sugarbean instance that was changed
+     * @return array
+     */
+    public function getAuditDataChanges(SugarBean $bean)
+    {
+        $audit_fields = $bean->getAuditEnabledFieldDefinitions();
+        return $this->db->getDataChanges($bean, array('field_filter'=>array_keys($audit_fields)));
+    }
+
+    /**
+     * Remove audit records for given list of fields
+     *
+     * @param FieldList $fields List of fields
+     * @param string $event_id audit event id
+     * @return bool query result
+     * @throws DBALException
+     */
+    public function eraseAuditRecords(ErasureFieldList $fields, $event_id)
+    {
+        $tableName = $this->get_audit_table_name();
+        $sql = "UPDATE {$tableName} 
+                SET event_id = ?, 
+                before_value_string = ?, 
+                after_value_string = ?, 
+                before_value_text = ?, 
+                after_value_text = ?, 
+                date_updated = ? 
+                WHERE parent_id = ? 
+                AND field_name IN (?)";
+        return $this->db->getConnection()->executeUpdate(
+            $sql,
+            [
+                $event_id,
+                null,
+                null,
+                null,
+                null,
+                TimeDate::getInstance()->nowDb(),
+                $this->id,
+                array_filter(array_values($fields->jsonSerialize()), 'is_string'),
+            ],
+            [
+                null, null, null, null, null, null, null, Connection::PARAM_STR_ARRAY,
+            ]
+        );
+    }
+
+    private function getEventRepository()
+    {
+        return Container::getInstance()->get(EventRepository::class);
+    }
+
+    private function getErasedFieldsRepository()
+    {
+        return Container::getInstance()->get(Repository::class);
+    }
+
+    private function saveData($isUpdate, $check_notify)
     {
         $this->in_save = true;
         // cn: SECURITY - strip XSS potential vectors
@@ -1824,7 +2031,6 @@ class SugarBean
         global $timedate;
         global $current_user, $action;
 
-        $isUpdate = $this->isUpdate();
         $prev_date_modified = isset($this->date_modified) ? $this->date_modified : null;
         $this->setModifiedDate();
         $this->_checkOptimisticLocking($action, $isUpdate);
@@ -1833,7 +2039,6 @@ class SugarBean
             $this->deleted = 0;
         }
         $this->setCreateData($isUpdate);
-
 
         // if the module has a team_id field and no team_id is specified, set team_id as the current_user's default team
         // currently, the default_team is only enforced in the presentation layer-- this enforces it at the data layer as well
@@ -1857,18 +2062,11 @@ class SugarBean
             static::leaveOperation('updating_relationships');
         }
         $this->updateCalculatedFields();
-        if($isUpdate && !$this->update_date_entered)
-        {
-            unset($this->date_entered);
-        }
-        // call the custom business logic
-        $custom_logic_arguments = array(
+
+        $this->call_custom_logic('before_save', array(
             'check_notify' => $check_notify,
             'isUpdate' => $isUpdate,
-        );
-
-        $this->call_custom_logic("before_save", $custom_logic_arguments);
-        unset($custom_logic_arguments);
+        ));
 
         if (!$this->update_date_modified) {
             $this->date_modified = $prev_date_modified;
@@ -1893,20 +2091,8 @@ class SugarBean
             }
         }
 
-        //make sure the bean has the latest changes to the email field prior to checking for changes
-        $this->populateFetchedEmail('bean_field');
         $this->dataChanges = $this->db->getDataChanges($this);
 
-        //construct the SQL to create the audit record if auditing is enabled.
-        $auditDataChanges=array();
-        if ($this->is_AuditEnabled()) {
-            if ($isUpdate && !isset($this->fetched_row)) {
-                $GLOBALS['log']->debug('Auditing: Retrieve was not called, audit record will not be created.');
-            } else {
-                $auditFields = $this->getAuditEnabledFieldDefinitions(true);
-                $auditDataChanges = array_intersect_key($this->dataChanges, $auditFields);
-            }
-        }
         $this->_sendNotifications($check_notify);
 
         if ($isUpdate) {
@@ -1914,21 +2100,18 @@ class SugarBean
         } elseif ($this->db->insert($this)) {
             //Now that the record has been saved, we don't want to insert again on further saves
             $this->new_with_id = false;
-        }
 
-        if (!empty($auditDataChanges) && is_array($auditDataChanges))
-        {
-            foreach ($auditDataChanges as $change)
-            {
-                $this->db->save_audit_records($this,$change);
-            }
+            // We also need to get our autoincrement values if there are any
+            $this->loadAutoIncrementValues();
         }
 
         $this->updateRelatedCalcFields();
 
-        // populate fetched row with newest changes in the bean
-        foreach ($this->dataChanges as $change) {
-            $this->fetched_row[$change['field_name']] = $change['after'];
+        if (!empty($this->fetched_row)) {
+            // populate fetched row with newest changes in the bean
+            foreach ($this->dataChanges as $change) {
+                $this->fetched_row[$change['field_name']] = $change['after'];
+            }
         }
 
         // the reason we need to skip this is so that any RelatedBeans that are targeted to be saved
@@ -1947,13 +2130,78 @@ class SugarBean
             $this->track_view($current_user->id, $this->module_dir, 'save');
         }
 
-        $this->call_custom_logic('after_save', array(
-            'isUpdate' => $isUpdate,
-            'dataChanges' => $this->dataChanges,
-        ));
-
         $this->in_save = false;
         return $this->id;
+    }
+
+    /**
+     * Loads values for autoincrement fields onto the bean after a save
+     */
+    protected function loadAutoIncrementValues()
+    {
+        // We are only interested in auto_increment values
+        $fields = $this->getFieldDefinitions('auto_increment', [true]);
+
+        // This defines the list of fields that are affected. Realistically,
+        // this should be one col for any bean
+        $cols = [];
+        foreach ($fields as $field) {
+            $cols[] = $field['name'];
+        }
+
+        // We only have work to do if there are columns to work with
+        if ($cols) {
+            // Grab our values for the $cols for this bean
+            $data = $this->getDBValuesForFields($cols);
+
+            // Loop and set
+            foreach ($data as $field => $value) {
+                $this->{$field} = $value;
+            }
+        }
+    }
+
+    /**
+     * Gets a new SugarQuery object
+     * @return SugarQuery
+     */
+    protected function getSugarQueryObject()
+    {
+        return new \SugarQuery();
+    }
+
+    /**
+     * Gets DB values for a collection of fields. Used by
+     * {@see loadAutoIncrementValues} to get autoincrement field values.
+     *
+     * NOTE: This method is specific to setting auto increment values on the bean.
+     * When setting values on a bean from an array of data, the
+     * {@see populateFromRow} method should be used as it contains all logic
+     * necessary to properly set all field type data values onto the bean.
+     *
+     * @param array $fields Array of fields to get values for
+     * @return array
+     */
+    private function getDBValuesForFields(array $fields)
+    {
+        // If for some reason this is called without a set ID for the bean
+        if (empty($this->id) || empty($fields)) {
+            return [];
+        }
+
+        // Build the query that will get our auto increment field value
+        $query = $this->getSugarQueryObject();
+        $query->from($this);
+        $query->select($fields);
+        $query->where()->equals('id', $this->id);
+
+        // Run it
+        $data = $query->execute();
+
+        // Since this should be filtered to a single record we really
+        // only need to work on the first result row if there is one,
+        // otherwise return an empty array
+        return !empty($data[0]) && is_array($data[0]) ? $data[0] : [];
     }
 
     /**
@@ -2116,20 +2364,23 @@ class SugarBean
         {
             if ($this->$lname->getRelatedModuleName() == $this->fetched_row['parent_type'])
             {
-                SugarRelationship::addToResaveList(
-                    BeanFactory::getBean($this->fetched_row['parent_type'], $this->fetched_row['parent_id'])
-                );
+                $bean = BeanFactory::retrieveBean($this->fetched_row['parent_type'], $this->fetched_row['parent_id']);
+                if ($bean) {
+                    SugarRelationship::addToResaveList($bean);
+                }
             }
         }
         //If we have a new parent record that uses this link, make sure to resave that one as well
         if (!empty($this->field_defs['parent_type']) && $this->field_defs['parent_type']['type'] == 'parent_type'
             && !empty($this->field_defs['parent_id']) && $this->field_defs['parent_id']['type'] == 'id'
-            && isset($this->parent_id) && $this->parent_id != $this->fetched_row['parent_id']
+            && isset($this->parent_id) && isset($this->fetched_row['parent_id'])
+            && $this->parent_id != $this->fetched_row['parent_id']
             && isset($this->parent_type) && $this->$lname->getRelatedModuleName() == $this->parent_type
         ) {
-            SugarRelationship::addToResaveList(
-                BeanFactory::getBean($this->parent_type, $this->parent_id)
-            );
+            $bean =  BeanFactory::retrieveBean($this->parent_type, $this->parent_id);
+            if ($bean) {
+                SugarRelationship::addToResaveList($bean);
+            }
         }
     }
 
@@ -2612,6 +2863,7 @@ class SugarBean
 
                 // save the new id
                 $newIdValue = $this->$idField;
+                $newType = $this->$typeField;
                 if (in_array($idField, $exclude))
                     continue;
                 //Determine if the parent field has changed.
@@ -2661,13 +2913,19 @@ class SugarBean
                     }
 
                     // If both parent type and parent id are set, save it unless the bean is being deleted
-                    if (!empty($this->$typeField) && !empty($newIdValue) && !empty($parentLinks[$this->$typeField]['name']) && $this->deleted != 1)
-                    {
-                        //Now add the new parent
-                        $parentLink = $parentLinks[$this->$typeField]['name'];
-                        if ($this->load_relationship($parentLink))
-                        {
-                            $this->$parentLink->add($newIdValue);
+                    if (!empty($newType) && !empty($newIdValue) && $this->deleted != 1) {
+                        //Now add the parent
+                        if (!empty($parentLinks[$newType]['name'])) {
+                            //If there is a relationship to use, use it now.
+                            $parentLink = $parentLinks[$newType]['name'];
+                            if ($this->load_relationship($parentLink)) {
+                                $this->$parentLink->add($newIdValue);
+                            }
+                        } else {
+                            // Otherwise, just ensure the parent type/id fields are saved correctly.
+                            // Removing a relationship can modify these properties on a bean.
+                            $this->$typeField = $newType;
+                            $this->$idField = $newIdValue;
                         }
                     }
                 }
@@ -2754,9 +3012,6 @@ class SugarBean
 				if($field == 'date_modified' || $field == 'date_entered')
 				{
 					$this->$field = $this->db->fromConvert($this->$field, 'datetime');
-					if(empty($disable_date_format)) {
-						$this->$field = $timedate->to_display_date_time($this->$field);
-					}
                 } elseif (isset($this->field_defs[$field]['type'])) {
                     $type = $this->field_defs[$field]['type'];
 
@@ -2769,24 +3024,10 @@ class SugarBean
 						if($this->$field == '0000-00-00')
 						{
 							$this->$field = '';
-                        } elseif (!empty($this->field_defs[$field]['rel_field'])) {
-                            $rel_field = $this->field_defs[$field]['rel_field'];
-
-							if(!empty($this->$rel_field))
-							{
-								if(empty($disable_date_format)) {
-									$mergetime = $timedate->merge_date_time($this->$field,$this->$rel_field);
-									$this->$field = $timedate->to_display_date($mergetime);
-									$this->$rel_field = $timedate->to_display_time($mergetime);
-								}
-							}
 						}
 						else
 						{
                             $this->$field = $this->db->fromConvert($this->$field, 'date');
-							if (empty($disable_date_format)) {
-								$this->$field = $timedate->to_display_date($this->$field, false);
-							}
 						}
 					} elseif($type == 'datetime' || $type == 'datetimecombo')
 					{
@@ -2799,20 +3040,12 @@ class SugarBean
                             //Converting from db fields is needed
                             //Example: from "2015-01-08 22:32:00.000000" (retrieved from DB2) to "2015-01-08 22:32:00"
                             $this->$field = $this->db->fromConvert($this->$field, 'datetime');
-							if(empty($disable_date_format)) {
-								$this->$field = $timedate->to_display_date_time($this->$field, true, true);
-							}
 						}
 					} elseif($type == 'time')
 					{
 						if($this->$field == '00:00:00')
 						{
 							$this->$field = '';
-						} else
-						{
-							if (empty($this->field_defs[$field]['rel_field']) && empty($disable_date_format)) {
-								$this->$field = $timedate->to_display_time($this->$field,true, false);
-							}
 						}
 					} elseif($type == 'encrypt' && empty($disable_date_format)){
                         $this->preprocess_encrypt_before_get($field);
@@ -3045,8 +3278,6 @@ class SugarBean
     */
     public function retrieve($id = -1, $encode = true, $deleted = true)
     {
-        global $locale;
-
         // in case if a CHAR ID was fetched from database manually, we need to convert it here in order
         // to make sure it doesn't contain trailing spaces
         $id = $this->db->fromConvert($id, 'id');
@@ -3065,31 +3296,16 @@ class SugarBean
 
         // TODO: When BWC is removed, replace from here
         $query = new \SugarQuery();
-        $query->from(
-            $this,
-            ['add_deleted' => $deleted, 'team_security' => !$this->disable_row_level_security, 'action' => 'view']
-        );
-        $query->select('*');
-        $query->where()->equals("$this->table_name.id", $id);
+        $query->from($this, [
+            'add_deleted' => $deleted,
+            'team_security' => !$this->disable_row_level_security,
+            'erased_fields' => $this->retrieve_erased_fields,
+            'action' => 'view',
+        ]);
 
-        $name_format_fields = $locale->getNameFormatFields('Users');
-        if (!empty($name_format_fields)) {
-            $fields = [];
-            foreach ($this->related_user_fields as $id_field => $params) {
-                list($name_field, $alias) = $params;
-                if (isset($this->field_defs[$id_field])
-                    && isset($this->field_defs[$name_field])
-                    && ($this->field_defs[$name_field]['type'] == 'relate')
-                ) {
-                    $join = $query->join($this->field_defs[$name_field]['link'], array('joinType' => 'LEFT'));
-                    $joinAlias = $join->joinName();
-                    foreach ($name_format_fields as $field) {
-                        $fields[] = [$joinAlias . '.' . $field, $alias . '_' . $field];
-                    }
-                }
-            }
-            $query->select($fields);
-        }
+        $query->select('*');
+
+        $query->where()->equals("$this->table_name.id", $id);
 
         if (!empty($this->field_defs['team_link'])) {
             $query->join('team_link', ['joinType' => 'LEFT', 'alias' => 'teams_tn']);
@@ -3113,7 +3329,7 @@ class SugarBean
         }
         $row = $results[0];
         if ($encode && $this->db->getEncode()) {
-            $row = array_map([$this->db, 'encodeHTML'], $row);
+            $row = $this->htmlEncodeRow($row);
         }
 
         //make copy of the fetched row for construction of audit record and for business logic/workflow
@@ -3220,17 +3436,22 @@ class SugarBean
      *                         returnRawRows - Returns raw rows in the _row key, indexed by bean id
      *                         beanList - An array of beans to merge the results into
      *                         skipSecondaryQuery - Don't perform the secondary queries
-     * @return array SugarBean - An array of SugarBeans populated with the requested fields
+     * @return SugarBean[]     An array of SugarBeans populated with the requested fields
      */
     function fetchFromQuery(SugarQuery $query, array $fields = array(), array $options = array())
     {
         $beans = array();
 
+        /** @var SugarFieldBase[] $secondaryFields */
         list($queryFields, $additionalQueryFields, $secondaryFields) = $this->getQueryFields($query, $fields, $options);
 
         $query->select($queryFields);
 
-        if ($this->queryProducesDuplicates($query)) {
+        if ($query->shouldFetchErasedFields()) {
+            $this->retrieve_erased_fields = true;
+        }
+
+        if ($this->queryProducesDuplicates($query) && empty($options['skipFixQuery'])) {
             $this->fixQuery($query);
         }
 
@@ -3447,7 +3668,6 @@ class SugarBean
     }
 
     /**
-     *
      * Return count difference between an array of raw SQL rows and and array
      * of Sugarbeans. This value can be passed back to the API handling the
      * next offset calculation. In case of a difference, log more details for
@@ -3459,7 +3679,6 @@ class SugarBean
      */
     protected function computeDistinctCompensation(array $sqlRows, array $beans)
     {
-
         $compensation = 0;
         $cntDbSet = count($sqlRows);
         $cntBeanSet = count($beans);
@@ -3475,11 +3694,11 @@ class SugarBean
             $compensation = $cntDbSet - $cntBeanSet;
             $this->logDistinctMismatch($sqlRows, $beans);
         }
+
         return $compensation;
     }
 
     /**
-     *
      * Log handling for distinct compensation mismatches
      *
      * @param array $sqlRows
@@ -3529,6 +3748,15 @@ class SugarBean
     public function populateFromRow(array $row, $convert = false)
     {
         global $locale;
+
+        if (array_key_exists('erased_fields', $row)) {
+            if (is_array($row['erased_fields'])) {
+                $this->erased_fields = $row['erased_fields'];
+            } else {
+                $this->erased_fields = json_decode($row['erased_fields'], true) ?: [];
+            }
+        }
+
         foreach($this->field_defs as $field=>$field_value)
         {
             if(isset($row[$field]))
@@ -3546,11 +3774,18 @@ class SugarBean
                 $this->$owner = $row[$owner];
             }
 
+            $field_erased_fields = $field . '_erased_fields';
+
+            if (array_key_exists($field_erased_fields, $row)) {
+                $this->$field_erased_fields = json_decode($row[$field_erased_fields], true) ?: [];
+            }
+
             // check if relate field refers field of "fullname" type
             if (isset($field_value['type'], $field_value['module']) && $field_value['type'] == 'relate') {
                 $rel_mod_defs = VardefManager::getFieldDefs($field_value['module']);
                 if ($rel_mod_defs) {
                     $rname = isset($field_value['rname']) ? $field_value['rname'] : 'name';
+                    $source_fields = [$rname];
                     if (isset($rel_mod_defs[$rname])) {
                         $rname_field_def = $rel_mod_defs[$rname];
                         if (isset($rname_field_def['type']) && $rname_field_def['type'] == 'fullname') {
@@ -3560,6 +3795,7 @@ class SugarBean
                             // to contain elements like rel_{this_field_name}_{name_format_field}
                             // where {name_format_field} are names returned by Localization::getNameFormatFields()
                             $name_format_fields = $locale->getNameFormatFields($field_value['module']);
+                            $source_fields = $name_format_fields;
 
                             foreach ($name_format_fields as $name_field) {
                                 $alias = $this->getRelateAlias($field, $name_field);
@@ -3570,6 +3806,10 @@ class SugarBean
 
                             $this->$field = $locale->formatName($field_value['module'], $data);
                         }
+                    }
+
+                    if ($this->shouldRelateFieldBeMarkedErased($field, $field_value, $row, $source_fields)) {
+                        $this->erased_fields[] = $field;
                     }
                 }
             }
@@ -3588,10 +3828,47 @@ class SugarBean
         if(!empty($row['my_favorite'])) {
             $this->my_favorite = true;
         }
+
         return $row;
     }
 
+    /**
+     * Checks if a relate field without a link should be added to the list of erased fields on the primary record
+     *
+     * @param string $name Relate field name
+     * @param array $definition Field definition
+     * @param array $row The data fetched from the DB for the primary record
+     * @param array $sourceFields The fields from which the relate field's value has been built
+     * @return bool
+     */
+    private function shouldRelateFieldBeMarkedErased(
+        string $name,
+        array $definition,
+        array $row,
+        array $sourceFields
+    ) : bool {
+        // the related record's fields will be marked erased explicitly
+        if (isset($definition['link'])) {
+            return false;
+        }
 
+        if (strcmp($this->$name, '') != 0) {
+            return false;
+        }
+
+        /** @see SugarQuery_Builder_Field::getJoin() */
+        $key = $definition['id_name'] . '_erased_fields';
+
+        if (!isset($row[$key])) {
+            return false;
+        }
+
+        $erased_fields = json_decode($row[$key], true);
+
+        return count(
+            array_intersect($erased_fields, $sourceFields)
+        ) > 0;
+    }
 
     /**
     * Add any required joins to the list count query.  The joins are required if there
@@ -4672,9 +4949,7 @@ class SugarBean
                                 if(isset($rel_mod->field_defs['assigned_user_id']))
                                 {
                                     $ret_array['select'] .= ' , ' .$params['join_table_alias'] . '.assigned_user_id ' .  $field . '_owner';
-                                }
-                                else
-                                {
+                                } elseif (isset($rel_mod->field_defs['created_by'])) {
                                     $ret_array['select'] .= ' , ' .$params['join_table_alias'] . '.created_by ' .  $field . '_owner';
                                 }
                                 $ret_array['select'] .= "  , '".$rel_module  ."' " .  $field . '_mod';
@@ -4743,10 +5018,7 @@ class SugarBean
                 empty($selectedFields[$this->table_name.'.modified_user_id'])) {
                 $ret_array['select'] .= ", $this->table_name.modified_user_id ";
             }
-            if(isset($this->field_defs['system_id']) && empty($selectedFields[$this->table_name.'.system_id']))
-            {
-                $ret_array['select'] .= ", $this->table_name.system_id ";
-            }
+
             if(isset($selectedFields[$this->table_name.'.team_id']) && isset($this->field_defs['team_set_id']) && empty($selectedFields[$this->table_name.'.team_set_id']))
             {
             $ret_array['select'] .= ", $this->table_name.team_set_id ";
@@ -4813,88 +5085,70 @@ class SugarBean
      */
     function retrieve_parent_fields($type_info)
     {
-        $queries = array();
-        global $beanList, $beanFiles;
-        $templates = array();
-        $parent_child_map = array();
-        foreach($type_info as $children_info)
-        {
-            foreach($children_info as $child_info)
-            {
-                if($child_info['type'] == 'parent')
-                {
-                    if(empty($templates[$child_info['parent_type']]))
-                    {
-                        //Test emails will have an invalid parent_type, don't try to load the non-existent parent bean
-                        if ($child_info['parent_type'] == 'test') {
-                            continue;
-                        }
-                        $parent_bean = BeanFactory::newBean($child_info['parent_type']);
-                        if (empty($parent_bean)) {
-                            $GLOBALS['log']->error($this->object_name."::retrieve_parent_fields() - cannot load bean of type {$child_info['parent_type']}, skip loading.");
-                            continue;
-                        }
-                        $templates[$child_info['parent_type']] = $parent_bean;
-                    }
+        global $log;
 
-                    if(empty($queries[$child_info['parent_type']]))
-                    {
-                        $queries[$child_info['parent_type']] = "SELECT id ";
-                        $field_def = $templates[$child_info['parent_type']]->field_defs['name'];
-                        if(isset($field_def['db_concat_fields']))
-                        {
-                            $queries[$child_info['parent_type']] .= ' , ' . $this->db->concat($templates[$child_info['parent_type']]->table_name, $field_def['db_concat_fields']) . ' parent_name';
-                        }
-                        else
-                        {
-                            $queries[$child_info['parent_type']] .= ' , name parent_name';
-                        }
-                        if(isset($templates[$child_info['parent_type']]->field_defs['assigned_user_id']))
-                        {
-                            $queries[$child_info['parent_type']] .= ", assigned_user_id parent_name_owner , '{$child_info['parent_type']}' parent_name_mod";;
-                        }else if(isset($templates[$child_info['parent_type']]->field_defs['created_by']))
-                        {
-                            $queries[$child_info['parent_type']] .= ", created_by parent_name_owner, '{$child_info['parent_type']}' parent_name_mod";
-                        }
-                        $queries[$child_info['parent_type']] .= " FROM " . $templates[$child_info['parent_type']]->table_name ." WHERE id IN ('{$child_info['parent_id']}'";
-                    }
-                    else
-                    {
-                        if(empty($parent_child_map[$child_info['parent_id']]))
-                        $queries[$child_info['parent_type']] .= " ,'{$child_info['parent_id']}'";
-                    }
-                    $parent_child_map[$child_info['parent_id']][] = $child_info['child_id'];
-                }
+        $spec = array();
+        foreach ($type_info as $type => $beans) {
+            foreach ($beans as $bean) {
+                $spec[$type][$bean['parent_id']][] = $bean['child_id'];
             }
         }
+
         $results = array();
-        foreach ($queries as $query) {
-            $result = $this->db->query($query . ')');
-            while($row = $this->db->fetchByAssoc($result))
-            {
-                $results[$row['id']] = $row;
-            }
-        }
 
-        $child_results = array();
-        foreach($parent_child_map as $parent_key=>$parent_child)
-        {
-            foreach($parent_child as $child)
-            {
-                if(isset( $results[$parent_key]))
-                {
-                    $child_results[$child] = $results[$parent_key];
+        foreach ($spec as $type => $parentsToChildren) {
+            $parent = BeanFactory::newBean($type);
+
+            if (!$parent) {
+                $log->error(sprintf(
+                    '%s::retrieve_parent_fields() - cannot load bean of type %s, skip loading.',
+                    $this->object_name,
+                    $type
+                ));
+
+                continue;
+            }
+
+            $query = new SugarQuery();
+            $query->from($parent, [
+                'erased_fields' => $this->retrieve_erased_fields,
+            ]);
+
+            $ownerField = $parent->getOwnerField();
+
+            if ($ownerField) {
+                $query->select($ownerField);
+            }
+
+            $query->where()->in('id', array_keys($parentsToChildren));
+
+            foreach ($parent->fetchFromQuery($query, ['id', 'name']) as $parent) {
+                $row = [
+                    'parent_name' => $parent->name,
+                ];
+
+                if ($ownerField) {
+                    $row['parent_name_owner'] = $parent->$ownerField;
+                }
+
+                if ($this->retrieve_erased_fields) {
+                    $row['parent_erased_fields'] = $parent->erased_fields;
+                }
+
+                foreach ($parentsToChildren[$parent->id] as $child_id) {
+                    $results[$child_id] = $row;
                 }
             }
         }
-        return $child_results;
+
+        return $results;
     }
 
     /**
      * Processes the list query and return fetched row.
      *
      * Internal function, do not override.
-     * @param string $query select query to be processed.
+     * @param string|array $query Query to be processed represented as a string or as parts
      * @param int $row_offset starting position
      * @param int $limit Optioanl, default -1
      * @param int $max_per_page Optional, default -1
@@ -4904,6 +5158,11 @@ class SugarBean
      */
     function process_list_query($query, $row_offset, $limit= -1, $max_per_page = -1, $where = '')
     {
+        if (is_array($query)) {
+            $queryParts = $query;
+            $query = $query['select'] . $query['from'] . $query['where'] . $query['order_by'];
+        }
+
         global $sugar_config;
         $db = DBManagerFactory::getInstance('listviews');
         /**
@@ -4969,11 +5228,36 @@ class SugarBean
             //FIXME: Bug? we should remove the magic number -99
             //use -99 to return all
             $index = $row_offset;
-            while ($max_per_page == -99 || ($index < $row_offset + $max_per_page))
-            {
-                $row = $db->fetchByAssoc($result);
-                if (empty($row)) break;
 
+        $data = $idIndex = $quotedIds = [];
+
+        while (($max_per_page == -99 || ($index < $row_offset + $max_per_page))
+            && ($row = $db->fetchByAssoc($result)) !== false
+        ) {
+            $id = $row['id'];
+            $data[$index] = $row;
+            $idIndex[$id][] = $index;
+
+            $quotedIds[] = $db->quoted($id);
+
+            $index++;
+        }
+
+        if (count($data) > 0 && isset($queryParts['secondary_select'], $queryParts['secondary_from'])) {
+            $secondaryQuery = $queryParts['secondary_select']
+                . $queryParts['secondary_from']
+                . ' WHERE ' . $this->table_name . '.id IN (' . implode(', ', $quotedIds) . ')';
+
+            $secondaryResult = $this->db->query($secondaryQuery);
+
+            while (($row = $this->db->fetchByAssoc($secondaryResult)) !== false) {
+                foreach ($idIndex[$row['ref_id']] as $index) {
+                    $data[$index] = array_merge($data[$index], $row);
+                }
+            }
+        }
+
+        foreach ($data as $row) {
                 //instantiate a new class each time. This is because php5 passes
                 //by reference by default so if we continually update $this, we will
                 //at the end have a list of all the same objects
@@ -5005,8 +5289,6 @@ class SugarBean
                 }
 
                 $list[] = $temp;
-
-                $index++;
             }
         if (!empty($sugar_config['disable_count_query']) && !empty($limit)) {
             $rows_found = $row_offset + count($list);
@@ -5540,25 +5822,6 @@ class SugarBean
     */
     function fill_in_additional_detail_fields()
     {
-        global $locale;
-        $name_format_fields = $locale->getNameFormatFields('Users');
-
-        foreach ($this->related_user_fields as $id_field => $params) {
-            list($name_field, $alias) = $params;
-            if (!empty($this->field_defs[$name_field]) && !empty($id_field) && empty($this->$name_field)) {
-                $data = array();
-                foreach ($name_format_fields as $field) {
-                    if (isset($this->fetched_row[$alias . '_' . $field])) {
-                        $data[$field] = $this->fetched_row[$alias . '_' . $field];
-                    }
-                }
-
-                if (!empty($data)) {
-                    $this->$name_field = $locale->formatName('Users', $data);
-                }
-            }
-        }
-
         if(!empty($this->field_defs['team_name']) && !empty($this->team_id) && empty($this->team_name) && !empty($this->fetched_row['tn_name'])) {
             if(!empty($GLOBALS['current_user']) && $GLOBALS['current_user']->showLastNameFirst()) {
 		        $this->assigned_name = $this->team_name = trim($this->fetched_row['tn_name_2'] . ' ' . $this->fetched_row['tn_name']);
@@ -5567,9 +5830,10 @@ class SugarBean
 		    }
         }
 
-		if(!empty($this->field_defs['parent_name'])){
+        if (isset($this->field_defs['parent_name']) && $this->field_defs['parent_name']['type'] === 'parent') {
 			$this->fill_in_additional_parent_fields();
 		}
+
         $this->updateDependentField();
     }
 
@@ -5579,8 +5843,6 @@ class SugarBean
     */
     function fill_in_additional_parent_fields()
     {
-        global $locale;
-
         // Added empty parent name check because beans with parent_name in vardef
         // were being nullified on retrieve AFTER save but were not passing the
         // parent_id/last_parent_id conditional, so the bean was losing parent_name
@@ -5593,28 +5855,20 @@ class SugarBean
         if(!empty($this->parent_type)) {
             $this->last_parent_id = $this->parent_id;
 
-            $fields = array(
-                'name'          => 'parent_name',
-                'document_name' => 'parent_document_name',
-            );
+            $parent_data = $this->retrieve_parent_fields([
+                $this->parent_type => [
+                    [
+                        'child_id' => $this->id,
+                        'parent_id' => $this->parent_id,
+                    ],
+                ],
+            ]);
 
-            $name_format_fields = $locale->getNameFormatFields($this->parent_type);
-            foreach ($name_format_fields as $field) {
-                $fields[$field] = 'parent_' . $field;
-            }
-
-            $this->getRelatedFields($this->parent_type, $this->parent_id, $fields);
-
-            $data = array();
-            foreach ($name_format_fields as $field) {
-                $data[$field] = $this->{'parent_' . $field};
-            }
-
-            $formatted_parent_name = $locale->formatName($this->parent_type, $data);
-            if ($formatted_parent_name != '') {
-                $this->parent_name = $formatted_parent_name;
-            } elseif ($this->parent_document_name != '') {
-                $this->parent_name = $this->parent_document_name;
+            if (isset($parent_data[$this->id])) {
+                unset($parent_data[$this->id]['id']);
+                foreach ($parent_data[$this->id] as $field => $value) {
+                    $this->$field = $value;
+                }
             }
         }
     }
@@ -5644,7 +5898,8 @@ class SugarBean
     */
     function fill_in_relationship_fields()
     {
-        global $fill_in_rel_depth, $locale;
+        global $fill_in_rel_depth;
+
         if(empty($fill_in_rel_depth) || $fill_in_rel_depth < 0)
             $fill_in_rel_depth = 0;
 
@@ -5656,88 +5911,117 @@ class SugarBean
         foreach($this->field_defs as $field)
         {
             $name = $field['name'];
-            if (empty($this->$name)) {
-                if (in_array($field['type'], static::$relateFieldTypes) && !empty($field['module']) && !empty($field['id_name'])) {
-                    // set the value of this relate field in this bean ($this->$field['name']) to the value of the 'name' field in the related module for the record identified by the value of $this->$field['id_name']
-                    $related_module = $field['module'];
-                    $id_name = $field['id_name'];
 
-                    if (empty($this->$id_name) && isset($this->field_defs[$id_name]['type'])
-                        && ($this->field_defs[$id_name]['type'] == 'relate' ||
-                        ($this->field_defs[$id_name]['type'] == 'id'
-                        && isset($this->field_defs[$id_name]['source'])
-                        && $this->field_defs[$id_name]['source'] == 'non-db')))
-                    {
-                       $this->fill_in_link_field($id_name, $field);
-                    }
+            if (!empty($this->$name)) {
+                continue;
+            }
 
-                    if (!empty($this->$id_name) && ($this->object_name != $related_module
-                        || ($this->object_name == $related_module && $this->$id_name != $this->id))) {
-                        $fields = isset($field['additionalFields']) ? $field['additionalFields'] : array();
+            if (in_array($field['type'], static::$relateFieldTypes)) {
+                $this->fillInRelateField($field);
+            } elseif (!empty($field['rname_link']) && !empty($field['link'])) {
+                $link = $field['link'];
 
-                        $is_full_name_relate = false;
-                        $rel_bean = BeanFactory::newBean($field['module']);
-                        $rname = 'name';
-                        if ($rel_bean) {
-                            if (isset($field['rname'])) {
-                                $rname = $field['rname'];
-                            }
-                            $rel_mod_defs = $rel_bean->field_defs;
-                            if (isset($rel_mod_defs[$rname])) {
-                                $rname_field_def = $rel_mod_defs[$rname];
-                                if (isset($rname_field_def['type']) && $rname_field_def['type'] == 'fullname') {
-                                    $is_full_name_relate = true;
-                                }
-                            }
-                        }
+                if (isset($this->field_defs[$link]['link_type']) && $this->field_defs[$link]['link_type'] == 'one') {
+                    $rName = $field['rname_link'];
 
-                        $related_name_fields = array();
-                        if ($is_full_name_relate) {
-                            $name_format_fields = $locale->getNameFormatFields($rel_bean);
+                    if (!empty($this->$link) || $this->load_relationship($link)) {
+                        $params = $this->$link->beansAreLoaded() ? null : array('limit' => 1);
+                        $beans = $this->$link->getBeans($params);
+                        $record = reset($beans);
 
-                            // add fields like rel_{this_field_name}_{name_format_field} to $fields
-                            // that is about to be passed to SugarBean::getRelatedFields().
-                            // in this case, the latter will initialize properties
-                            // like rel_{this_field_name}_{name_format_field} in the bean
-                            foreach ($name_format_fields as $name_field) {
-                                $related_name_fields[$name_field] = $fields[$name_field]
-                                    = $this->getRelateAlias($name, $name_field);
-                            }
-                        } else {
-                            $fields[$rname] = $name;
-                        }
-
-                        $this->getRelatedFields($related_module, $this->$id_name, $fields);
-
-                        if ($is_full_name_relate) {
-                            $data = array();
-                            foreach ($related_name_fields as $name_field => $alias) {
-                                if (isset($this->$alias)) {
-                                    $data[$name_field] = $this->$alias;
-                                }
-                            }
-
-                            $this->$name = $locale->formatName($rel_bean, $data);
-                        }
-                    }
-                }
-                elseif (!empty($field['rname_link']) && !empty($field['link'])) {
-                    $link = $field['link'];
-                    if (isset($this->field_defs[$link]['link_type']) && $this->field_defs[$link]['link_type'] == 'one') {
-                        $rName = $field['rname_link'];
-                        if (!empty($this->$link) || $this->load_relationship($link)) {
-                            $params = $this->$link->beansAreLoaded() ? null : array('limit' => 1);
-                            $beans = $this->$link->getBeans($params);
-                            $record = reset($beans);
-                            if ($record) {
-                                $this->$name = $record->$rName;
-                            }
+                        if ($record) {
+                            $this->$name = $record->$rName;
                         }
                     }
                 }
             }
         }
+
         $fill_in_rel_depth--;
+    }
+
+    private function fillInRelateField(array $definition) : void
+    {
+        if (empty($definition['module']) || empty($definition['id_name'])) {
+            return;
+        }
+
+        $module = $definition['module'];
+        $id_name = $definition['id_name'];
+
+        if (empty($this->$id_name) && isset($this->field_defs[$id_name]['type'])
+            && ($this->field_defs[$id_name]['type'] == 'relate' ||
+                ($this->field_defs[$id_name]['type'] == 'id'
+                    && isset($this->field_defs[$id_name]['source'])
+                    && $this->field_defs[$id_name]['source'] == 'non-db'))) {
+            $this->fill_in_link_field($id_name, $definition);
+        }
+
+        if (empty($this->$id_name) || ($module == $this->module_name && $this->$id_name == $this->id)) {
+            return;
+        }
+
+        $relatedBean = BeanFactory::newBean($module);
+        $rName = $definition['rname'] ?? 'name';
+
+        $query = new SugarQuery();
+        $query->from($relatedBean, [
+            'erased_fields' => $this->retrieve_erased_fields,
+
+            // disable visibility filtering same as in SugarQuery_Builder_Field
+            'team_security' => false,
+        ])->select($rName);
+
+        $ownerField = $relatedBean->getOwnerField();
+
+        if ($ownerField) {
+            $query->select($ownerField);
+        }
+
+        $query->where()->equals('id', $this->$id_name);
+
+        $relatedBeans = $relatedBean->fetchFromQuery($query, [$rName]);
+
+        /** @var SugarBean $relatedBean */
+        $relatedBean = array_shift($relatedBeans);
+
+        if (!$relatedBean) {
+            return;
+        }
+
+        $name = $definition['name'];
+
+        $this->$name = $relatedBean->$rName;
+
+        if ($ownerField) {
+            $this->{$name . '_owner'} = $relatedBean->$ownerField;
+        }
+
+        if ($this->retrieve_erased_fields) {
+            if (isset($definition['link'])) {
+                $this->{$definition['link'] . '_erased_fields'} = $relatedBean->erased_fields;
+            } else {
+                if (strcmp($this->$name, '') != 0) {
+                    return;
+                }
+
+                $rNameDefinition = $relatedBean->getFieldDefinition($rName);
+
+                if ($rNameDefinition['type'] === 'fullname') {
+                    global $locale;
+
+                    $sourceFields = $locale->getNameFormatFields($relatedBean);
+                } else {
+                    $sourceFields = [$rName];
+                }
+
+                if (count(
+                    array_intersect($relatedBean->erased_fields, $sourceFields)
+                ) > 0) {
+                    $this->erased_fields[] = $name;
+                }
+            }
+        }
     }
 
     /**
@@ -5765,7 +6049,6 @@ class SugarBean
             // Ensure that Activity Messages do not occur in the context of a Delete action (e.g. unlink)
             // and do so for all nested calls within the Top Level Delete Context
             $opflag = static::enterOperation('delete');
-            $aflag = Activity::isEnabled();
             Activity::disable();
             // call the custom business logic
             $custom_logic_arguments['id'] = $id;
@@ -5829,9 +6112,8 @@ class SugarBean
 
             // call the custom business logic
             $this->call_custom_logic("after_delete", $custom_logic_arguments);
-            if(static::leaveOperation('delete', $opflag) && $aflag) {
-                Activity::enable();
-            }
+            static::leaveOperation('delete', $opflag);
+            Activity::restoreToPreviousState();
         }
     }
 
@@ -5910,18 +6192,20 @@ class SugarBean
         return $list;
     }
 
-  /**
-    * This function is used to execute the query and create an array template objects
-    * from the resulting ids from the query.
-    * It is currently used for building sub-panel arrays. It supports an additional
-    * where clause that is executed as a filter on the results
-    *
-    * @param string $query - the query that should be executed to build the list
-    * @param object $template - The object that should be used to copy the records.
-    * @deprecated Use SugarQuery instead
-    */
-  function build_related_list_where($query, $template, $where='', $in='', $order_by, $limit='', $row_offset = 0)
-  {
+    /**
+     * This function is used to execute the query and create an array template objects
+     * from the resulting ids from the query.
+     * It is currently used for building sub-panel arrays. It supports an additional
+     * where clause that is executed as a filter on the results
+     *
+     * @param string $query The query that should be executed to build the list
+     * @param SugarBean $template The object that should be used to copy the records.
+     *
+     * @return SugarBean[]
+     * @deprecated Use SugarQuery instead
+     */
+    public function build_related_list_where($query, $template, $where, $in, $order_by, $limit = '', $row_offset = 0)
+    {
     $db = DBManagerFactory::getInstance('listviews');
     // No need to do an additional query
     $GLOBALS['log']->debug("Finding linked records $this->object_name: ".$query);
@@ -5945,7 +6229,6 @@ class SugarBean
     {
         $query .= " AND $where";
     }
-
 
     if(!empty($order_by))
     {
@@ -5974,7 +6257,7 @@ class SugarBean
     }
 
     return $list;
-  }
+    }
 
     /**
      * Constructs an comma separated list of ids from passed query results.
@@ -6202,7 +6485,7 @@ class SugarBean
         }
         $row = $results[0];
         if ($encode && $this->db->getEncode()) {
-            $row = array_map([$this->db, 'encodeHTML'], $row);
+            $row = $this->htmlEncodeRow($row);
         }
         // Removed getRowCount-if-clause earlier and insert duplicates_found here as it seems that we have found something
         // if we didn't return null in the previous clause.
@@ -6282,7 +6565,6 @@ class SugarBean
             return '';
         }
 
-
         if(isset($GLOBALS['dictionary'][$object]['fields']['assigned_user_id']))
         {
             $selectFields[] = $table . '.assigned_user_id AS owner';
@@ -6312,8 +6594,6 @@ class SugarBean
             $a_mod = $alias  .'_mod';
             $this->$a_mod = $module;
         }
-
-
     }
 
     /**
@@ -6583,33 +6863,39 @@ class SugarBean
     */
     function call_custom_logic($event, $arguments = array())
     {
-        if(!isset($this->processed) || $this->processed == false){
-            //add some logic to ensure we do not get into an infinite loop
-            if(!empty($this->logicHookDepth[$event])) {
-                if($this->logicHookDepth[$event] > $this->max_logic_depth)
-                    return;
-            }else
-                $this->logicHookDepth[$event] = 0;
+        if (!empty($this->processed)) {
+            return;
+        }
 
-            //we have to put the increment operator here
-            //otherwise we may never increase the depth for that event in the case
-            //where one event will trigger another as in the case of before_save and after_save
-            //Also keeping the depth per event allow any number of hooks to be called on the bean
-            //and we only will return if one event gets caught in a loop. We do not increment globally
-            //for each event called.
-            $this->logicHookDepth[$event]++;
+        if (!isset($this->logicHookDepth[$event])) {
+            $this->logicHookDepth[$event] = 0;
+        }
 
-            //method defined in 'include/utils/LogicHook.php'
+        //add some logic to ensure we do not get into an infinite loop
+        if ($this->logicHookDepth[$event] > $this->max_logic_depth) {
+            return;
+        }
 
-            $logicHook = new LogicHook();
-            $logicHook->setBean($this);
-            $logicHook->call_custom_logic($this->module_dir, $event, $arguments);
-            $this->logicHookDepth[$event]--;
-            //Fire dependency manager dependencies here for some custom logic types.
-            if (in_array($event, array('after_relationship_add', 'after_relationship_delete', 'before_delete')))
-            {
-                $this->updateRelatedCalcFields(isset($arguments['link']) ? $arguments['link'] : "");
-            }
+        //we have to put the increment operator here
+        //otherwise we may never increase the depth for that event in the case
+        //where one event will trigger another as in the case of before_save and after_save
+        //Also keeping the depth per event allow any number of hooks to be called on the bean
+        //and we only will return if one event gets caught in a loop. We do not increment globally
+        //for each event called.
+        $this->logicHookDepth[$event]++;
+
+        $logicHook = new LogicHook();
+        $logicHook->setBean($this);
+        $logicHook->call_custom_logic($this->module_dir, $event, $arguments);
+        $this->logicHookDepth[$event]--;
+
+        //Fire dependency manager dependencies here for some custom logic types.
+        switch ($event) {
+            case 'after_relationship_add':
+            case 'after_relationship_delete':
+            case 'before_delete':
+                $this->updateRelatedCalcFields($arguments['link'] ?? null);
+                break;
         }
     }
 
@@ -7082,6 +7368,16 @@ class SugarBean
         return !empty($GLOBALS['dictionary'][$this->object_name]['custom_fields']);
     }
 
+    /**
+     * Checks whether the bean has fields containing personally identifiable information
+     *
+     * @return bool
+     */
+    public function hasPiiFields()
+    {
+        return !empty($GLOBALS['dictionary'][$this->object_name]['has_pii_fields']);
+    }
+
    /**
     * Ensure that fields within order by clauses are properly qualified with
     * their tablename.  This qualification is a requirement for sql server support.
@@ -7116,10 +7412,7 @@ class SugarBean
     *
     * @param string $street_field
     */
-
-   function add_address_streets(
-       $street_field
-       )
+    public function add_address_streets($street_field)
     {
         $street_field_2 = $street_field.'_2';
         $street_field_3 = $street_field.'_3';
@@ -7149,21 +7442,24 @@ class SugarBean
         return self::$field_key[$this->module_key];
     }
 
-/**
- * Encrpyt and base64 encode an 'encrypt' field type in the bean using Blowfish. The default system key is stored in cache/Blowfish/{keytype}
- * @param STRING value -plain text value of the bean field.
- * @return string
- */
+    /**
+     * Encrpyt and base64 encode an 'encrypt' field type in the bean using Blowfish. The default system key is stored
+     * in cache/Blowfish/{keytype}
+     *
+     * @param STRING value -plain text value of the bean field.
+     * @return string
+     */
     function encrpyt_before_save($value)
     {
         return Blowfish::encode($this->getEncryptKey(), $value);
     }
 
-/**
- * Decode and decrypt a base 64 encoded string with field type 'encrypt' in this bean using Blowfish.
- * @param STRING value - an encrypted and base 64 encoded string.
- * @return string
- */
+    /**
+     * Decode and decrypt a base 64 encoded string with field type 'encrypt' in this bean using Blowfish.
+     *
+     * @param STRING value - an encrypted and base 64 encoded string.
+     * @return string
+     */
     public function decrypt_after_retrieve($value)
     {
         if(empty($value)) return $value; // no need to decrypt empty
@@ -7322,8 +7618,7 @@ class SugarBean
             return $result;
         }
 
-        if(SugarAutoLoader::fileExists('modules/'.$module_dir.'/'.$fileName))
-        {
+        if (file_exists('modules/'.$module_dir.'/'.$fileName)) {
             // If the data was not loaded, try loading again....
             if(!isset($moduleDefs[$module]))
             {
@@ -8187,5 +8482,133 @@ class SugarBean
     public static function getMobileSupportingModules()
     {
         return array();
+    }
+
+    /**
+     * Encodes special HTML characters in the row fields which require encoding when presented in BWC views
+     *
+     * @param array $row
+     * @return array
+     */
+    private function htmlEncodeRow(array $row)
+    {
+        $link_erased_fields = array_fill_keys(array_map(function (array $definition) {
+            return sprintf('%s_erased_fields', $definition['name']);
+        }, $this->getFieldDefinitions('type', ['link'])), true);
+
+        foreach ($row as $field => $value) {
+            if ($field === 'erased_fields' || isset($link_erased_fields[$field])) {
+                continue;
+            }
+
+            if (isset($this->field_defs[$field]) && $this->field_defs[$field]['type'] === 'json') {
+                continue;
+            }
+
+            $row[$field] = $this->db->encodeHTML($value);
+        }
+
+        return $row;
+    }
+
+    /**
+     * Updates the audit log with the changes from the last audited state to the current one.
+     *
+     * @param Subject|null $overrideSubject The subject to attribute the changes to. If not provided,
+     *                                      then the one from the security context will be used.
+     * @throws DBALException
+     */
+    public function commitAuditedStateChanges(?Subject $overrideSubject) : void
+    {
+        if (!$this->is_AuditEnabled()) {
+            return;
+        }
+
+        $changes = $this->db->getStateChanges($this, $this->lastAuditedState, ['for' => 'audit']);
+
+        if (count($changes) < 1) {
+            return;
+        }
+
+        $eventRepository = $this->getEventRepository();
+        $changeList = FieldChangeList::fromChanges($changes);
+
+        if ($overrideSubject) {
+            $auditEventId = $eventRepository->registerUpdateAttributedToSubject($this, $overrideSubject, $changeList);
+        } else {
+            $auditEventId = $eventRepository->registerUpdate($this, $changeList);
+        }
+
+        foreach ($changeList->getChangesList() as $change) {
+            $this->saveAuditRecords($this, $change, $auditEventId);
+        }
+
+        $this->lastAuditedState = $this->getAuditedState();
+    }
+
+    private function getAuditedState() : array
+    {
+        $state = array();
+
+        foreach ($this->getFieldDefinitions('audited', [true]) as $name => $_) {
+            $state[$name] = $this->{$name} ?? null;
+        }
+
+        if (isset($this->emailAddress)) {
+            if (!empty($this->emailAddress->hasFetched)) {
+                $state['email'] = $this->emailAddress->addresses;
+            } else {
+                $state['email'] = $this->emailAddress->getAddressesForBean($this, true);
+            }
+        }
+
+        return $state;
+    }
+
+    /**
+     * Returns the bean's erased fields.
+     *
+     * The erased fields are always loaded from the database because we can't be certain that the bean's `erased_fields`
+     * array is up to date.
+     *
+     * Always try to use {@link SugarBean::retrieve_erased_fields} and {@link SugarBean::retrieve()} instead of this
+     * method. This method only exists for a certain use case where re-retrieving the bean would break things.
+     *
+     * @return array|null Null may be returned if the module does not have PII fields.
+     */
+    public function getErasedFields()
+    {
+        if (!$this->hasPiiFields()) {
+            return $this->erased_fields;
+        }
+
+        $erasedFields = [];
+
+        try {
+            $q = new SugarQuery();
+            $q->from($this, ['erased_fields' => true]);
+            $q->where()->equals("{$this->table_name}.id", $this->id);
+            $q->limit(1);
+
+            // Must request at least one pii field to join on erased_fields.
+            $piiFields = $this->getFieldDefinitions('pii', [true]);
+            $q->select(array_keys($piiFields)[0]);
+
+            $results = $q->execute();
+            $row = $results[0] ?? [];
+
+            if (array_key_exists('erased_fields', $row)) {
+                if (is_array($row['erased_fields'])) {
+                    $erasedFields = $row['erased_fields'];
+                } else {
+                    $erasedFields = json_decode($row['erased_fields'], true) ?: [];
+                }
+            }
+        } catch (SugarQueryException $e) {
+            // Swallow the exception.
+            LoggerManager::getLogger()->error(__METHOD__ . ': ' . $e->getMessage());
+        }
+
+        return $erasedFields;
     }
 }

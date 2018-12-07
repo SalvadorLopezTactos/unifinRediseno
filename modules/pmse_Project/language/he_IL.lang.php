@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'הגדרת תהליך',
   'LBL_MODULE_TITLE' => 'הגדרת תהליך',
   'LBL_MODULE_NAME_SINGULAR' => 'הגדרת תהליך',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'שונה מ',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'אינו',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'לא שווה ל-',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'זמן ריצה',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'הוסף',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'סגור',

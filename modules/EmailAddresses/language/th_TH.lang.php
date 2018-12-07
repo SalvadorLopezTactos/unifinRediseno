@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'วันที่สร้าง',
     'LBL_DATE_MODIFIED' => 'วันที่แก้ไข',
     'LBL_DELETED' => 'ลบ',
+    'LBL_MODULE_NAME' => 'ที่อยู่อีเมล',
+    'LBL_MODULE_NAME_SINGULAR' => 'ที่อยู่อีเมล',
 );

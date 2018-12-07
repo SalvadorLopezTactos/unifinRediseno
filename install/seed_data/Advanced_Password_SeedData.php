@@ -30,6 +30,7 @@ $EmailTemp->deleted = 0;
 
 $EmailTemp->team_id = $Team_id;
 $EmailTemp->published = 'off';
+$EmailTemp->type = 'system';
 $EmailTemp->text_only = 0;
 $id =$EmailTemp->save();
 $sugar_config['passwordsetting']['generatepasswordtmpl'] = $id;
@@ -45,6 +46,7 @@ $EmailTemp->deleted = 0;
 
 $EmailTemp->team_id = $Team_id;
 $EmailTemp->published = 'off';
+$EmailTemp->type = 'system';
 $EmailTemp->text_only = 0;
 $id =$EmailTemp->save();
 $sugar_config['passwordsetting']['lostpasswordtmpl'] = $id;
@@ -62,4 +64,4 @@ $sugar_config['passwordsetting']['oneupper'] = true;
 $sugar_config['passwordsetting']['onelower'] = true;
 $sugar_config['passwordsetting']['onenumber'] = true;
 
-write_array_to_file( "sugar_config", $sugar_config, "config.php");
+write_array_to_file("sugar_config", $sugar_config, "config.php");

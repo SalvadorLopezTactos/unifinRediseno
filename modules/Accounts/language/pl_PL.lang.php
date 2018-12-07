@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Oferty (Adres dostawy)',
 	'LNK_ACCOUNT_REPORTS' => 'Wyświetl raporty dotyczące Kontrahentów',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenty',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Pulpit listy kont',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Pulpit rekordów kont',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Wykresy',
 	'LBL_DEFAULT' => 'Widoki',

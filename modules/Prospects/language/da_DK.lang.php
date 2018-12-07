@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Målliste-dashboard',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Måloptegnelses-dashboard',
+
   'LBL_MODULE_NAME' => 'Mål',
   'LBL_MODULE_NAME_SINGULAR' => 'Mål:',
   'LBL_MODULE_ID'   => 'Mål',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Tiltaleform',
   'LBL_SAVE_PROSPECT' => 'Gem mål',
   'LBL_CREATED_OPPORTUNITY' =>'Oprettet en ny salgsmulighed',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Oprettelse af en salgsmulighed kræver en virksomhed.\n Opret en ny virksomhed, eller vælg en eksisterende.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Oprettelse af en salgsmulighed kræver en virksomhed.\\n Opret en ny virksomhed, eller vælg en eksisterende.',
   'LNK_SELECT_ACCOUNT' => "Vælg virksomhed",
   'LNK_NEW_PROSPECT' => 'Opret Mål',
   'LNK_PROSPECT_LIST' => 'Se Mål',
@@ -195,4 +199,6 @@ For at oprette en {{module_name}}:
 2. Klik på "Gem" for at færdiggøre den nye post og vende tilbage til den forrige side.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Mål rapporter',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Forretningsformål samtykke givet til',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Samtykke sidst opdateret',
 );

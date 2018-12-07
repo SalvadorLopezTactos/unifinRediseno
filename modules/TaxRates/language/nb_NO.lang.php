@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Du må oppgi et registreringsnummer for å slette denne skatteraten.',
   'NTC_STATUS' => 'Sett status til Passiv for å fjerne denne skatteraten fra Skatterate-rullelisten',
   'NTC_LIST_ORDER' => 'Bestem rekkefølgen for hvordan denne skatteraten vil vises i skatterate- rullelisten.',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Passiv',
-  ),
   'LBL_EDITLAYOUT' => 'Redigér Oppsett' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Opprettet av ID',
   'LBL_MODIFIED_ID'=>'Endret av ID',

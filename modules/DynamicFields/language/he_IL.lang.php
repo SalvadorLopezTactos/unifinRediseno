@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'ברירת מחדל URL',
 	'COLUMN_TITLE_AUDIT' =>'Audit',
+    'COLUMN_TITLE_PII' => 'מידע אישי',
     'COLUMN_TITLE_FTS' =>'ניתן לחיפוש טקסט מלא',
     'COLUMN_TITLE_FTS_BOOST' => 'הגדל ערך',
 	'COLUMN_TITLE_REPORTABLE' => 'יופיע בדוחות',

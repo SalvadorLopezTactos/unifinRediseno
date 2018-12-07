@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'Výchozí URL',
 	'COLUMN_TITLE_AUDIT' =>'Auditovat?',
+    'COLUMN_TITLE_PII' => 'Osobní informace',
     'COLUMN_TITLE_FTS' =>'Full text',
     'COLUMN_TITLE_FTS_BOOST' => 'Zvýšit hodnotu',
 	'COLUMN_TITLE_REPORTABLE' => 'Reportovatelné',

@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'Подписи пользователя',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'Подпись пользователя',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Эта подпись требует названия',
-    'LBL_SIGNATURE_NAME'         => 'Название подписи',
-    'LBL_SIGNATURE'              => 'Подпись',
-    'LBL_SIGNATURE_HTML'         => 'Подпись в HTML',
-    'LBL_SIGNATURE_DEFAULT'      => 'Использовать подпись?',
-    'LBL_SIGNATURE_PREPEND'      => 'Подпись над ответом',
-    'LBL_SIGNATURES'             => 'Подписи',
+    'LBL_DEFAULT_SIGNATURE' => 'По умолчанию',
+    'LBL_MODULE_NAME' => 'Подписи электронной почты',
+    'LBL_MODULE_NAME_SINGULAR' => 'Подпись электронной почты',
+    'LBL_SIGNATURE_NAME' => 'Название подписи',
+    'LBL_SIGNATURE' => 'Подпись',
+    'LBL_SIGNATURE_HTML' => 'Подпись в HTML',
+    'LBL_SIGNATURE_DEFAULT' => 'Использовать подпись?',
+    'LBL_SIGNATURE_PREPEND' => 'Подпись над ответом',
+    'LBL_SIGNATURES' => 'Подписи',
 );

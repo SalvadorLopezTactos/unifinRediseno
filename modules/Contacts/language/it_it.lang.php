@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Dashboard elenco contatti',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Dashboard record contatti',
+
     'LNK_CONTACT_REPORTS' => 'Visualizza il Report del Contatto',
     'ERR_DELETE_RECORD' => 'Per eliminare il contatto deve essere specificato il numero del record.',
     'LBL_ACCOUNT_ID' => 'ID Azienda:',
@@ -272,4 +276,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'Punteggio Lead',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Report Contatti',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Scopi commerciali consentiti per',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ultimo aggiornamento consenso',
 );

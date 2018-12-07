@@ -39,7 +39,7 @@ class GeoProperty extends RawProperty implements PropertyInterface
         $mapping = array_merge(
             $this->mapping,
             array(
-                'type' => $type,
+                'type' => $this->type,
             )
         );
 

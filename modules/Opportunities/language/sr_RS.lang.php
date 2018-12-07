@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Kontrolna tabla liste prodajnih prilika',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa prodajnih prilika',
+
     'LBL_MODULE_NAME' => 'Prodajne prilike',
     'LBL_MODULE_NAME_SINGULAR' => 'Prilika',
     'LBL_MODULE_TITLE' => 'Prodajne prilike: Početna strana',
@@ -182,26 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Kada pokrenete ovu promenu, zapisi o stavci prihoda će biti kreirani za svaki postojeći {{module_name}} u pozadini. Kada se stavke prihoda formiraju i kada budu dostupne, biće poslato obaveštenje na e-mail adresu sa Vašeg profila. Obratite pažnju da Vaša instanca mora da bude konfigurisana da pošalje e-mail putem Admin > E-mail postavke kako bi se obaveštenja poslala.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} vam omogućava da pratite pojedinačne prodaje od početka do kraja. Svaki zapis modula {{module_name}} predstavlja potencijalnu prodaju i obuhvata relevantne podatke o prodaji, kao i podatke u vezi sa drugim važnim zapisima kao što su {{quotes_module}}, {{contacts_module}} itd. {{module_name}} obično prolazi kroz nekoliko Faza prodaje sve dok se ne obeleži sa „Zatvoreno – dobijeno“ ili „Zatvoreno – izgubljeno“. {{plural_module_name}} može još bolje da se iskoristi korišćenjem modula {{forecasts_singular_module}} u okviru softvera Sugar, u cilju razumevanja i prognoziranja trendova prodaje, kao i usredsređivanja posla radi ostvarivanja prodajnih kvota.',
+    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} omogućava praćenje pojedinačnih prodaja od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane sa ostalim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd. Modul {{module_name}} obično prolazi kroz nekoliko faza prodaje dok ne dobije oznaku „Zatvoreno kao uspelo” ili „Zatvoreno kao neuspelo”. Modul {{plural_module_name}} može dodatno da se iskoristi upotrebom Sugar-ovog modula {{forecasts_singular_module}}ing u svrhu razumevanja i predviđanja trendova prodaje, kao i usmeravanja poslovanja prema postizanju prodajnih kvota.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} vam omogućava da pratite pojedinačne prodaje i linijske stavke koje pripadaju tim prodajama od početka do kraja. Svaki zapis modula {{module_name}} predstavlja potencijalnu prodaju i obuhvata relevantne podatke o prodaji, kao i podatke u vezi sa drugim važnim zapisima kao što su {{quotes_module}}, {{contacts_module}} itd.
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} omogućava praćenje pojedinačnih prodaja i stavki koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane sa drugim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd.
 
-- Uredite polja ovog zapisa klikom na pojedinačno polje ili na dugme „Uredi“.
-- Pregledajte ili izmenite veze ka drugim zapisima na podtablama prebacivanjem donjeg levog okna na „Prikaz podataka“.
-- Pišite ili pregledajte korisničke komentare i istoriju izmena zapisa u modulu {{activitystream_singular_module}} prebacivanjem donjeg levog okna na „Tok aktivnosti“.
-- Pratite ovaj zapis ili ga dodajte u favorite koristeći ikone sa desne strane naziva zapisa.
-- Dodatne radnje su dostupne u padajućem meniju za akcije sa desne strane dugmeta „Uredi“.',
+- Uredite polja ovog zapisa tako što ćete kliknuti na pojedinačno polje ili dugme Uredi.
+- Pogledajte ili izmenite veze sa drugim zapisima u podtablama tako što ćete prebaciti donje levo okno na „Prikaz podataka”.
+- Pišite i pregledajte komentare korisnika i beležite istoriju promena u modulu {{activitystream_singular_module}} tako što ćete prebaciti donje levo okno na „Pregled aktivnosti”. 
+- Pratite ili označite ovaj zapis kao omiljen pomoću ikona koje se nalaze desno od naziva zapisa.
+- Dodatne radnje dostupne su u padajućem meniju Radnje koji se nalazi desno od dugmeta Uredi.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} vam omogućava da pratite pojedinačne prodaje i linijske stavke koje pripadaju tim prodajama od početka do kraja. Svaki zapis modula {{module_name}} predstavlja potencijalnu prodaju i obuhvata relevantne podatke o prodaji, kao i podatke u vezi sa drugim važnim zapisima kao što su {{quotes_module}}, {{contacts_module}} itd.
+    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} omogućava praćenje pojedinačnih prodaja i stavki koje pripadaju tim prodajama od početka do kraja. Svaki zapis o modulu {{module_name}} predstavlja potencijalnu prodaju i uključuje važne podatke o prodaji, kao i podatke povezane sa drugim važnim zapisima kao što su moduli {{quotes_module}}, {{contacts_module}} itd.
 
-
-Da biste kreirali {{module_name}}:
-1. Unesite željene vrednosti za polja.
- - Polja označena kao „Obavezna“ moraju da se popune pre čuvanja.
- - Kliknite na „Prikaži više“ da biste po potrebi prikazali dodatna polja.
-2. Kliknite na „Sačuvaj“ da biste dovršili novi zapis i vratili se na prethodnu stranicu.',
+Da biste kreirali modul {{module_name}}:
+1. Unesite vrednosti polja po želji.
+ - Polja označena „Obavezno” moraju da se popune pre čuvanja.
+ - Kliknite na „Prikaži više” da biste otkrili dodatna polja ako je potrebno.
+2. Kliknite na „Sačuvaj” da biste završili novi zapis i vratili se na prethodnu stranicu.',
 
 // END ENT/ULT
 

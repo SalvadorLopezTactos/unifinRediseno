@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'Loomiskuupäev',
     'LBL_DATE_MODIFIED' => 'Muutmiskuupäev',
     'LBL_DELETED' => 'Kustuta',
+    'LBL_MODULE_NAME' => 'E-posti aadressid',
+    'LBL_MODULE_NAME_SINGULAR' => 'E-posti aadress',
 );

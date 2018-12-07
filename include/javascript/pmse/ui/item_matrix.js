@@ -8,9 +8,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*globals Field, $, document*/
+var PMSE = PMSE || {};
+/*globals PMSE.Field, $, document*/
 var ItemMatrixField = function (options, parent) {
-    Field.call(this, options, parent);
+    PMSE.Field.call(this, options, parent);
     this.moduleName = null;
     this.lockedFields = [];
     this.terminateFields = {};
@@ -26,7 +27,7 @@ var ItemMatrixField = function (options, parent) {
     ItemMatrixField.prototype.initObject.call(this, options);
 };
 
-ItemMatrixField.prototype = new Field();
+ItemMatrixField.prototype = new PMSE.Field();
 
 ItemMatrixField.prototype.initObject = function (options) {
     var defaults = {
@@ -45,7 +46,7 @@ ItemMatrixField.prototype.initObject = function (options) {
 
 ItemMatrixField.prototype.createHTML = function () {
     var fieldLabel, required = '', checkContainer, style;
-    Field.prototype.createHTML.call(this);
+    PMSE.Field.prototype.createHTML.call(this);
 
     if (this.required) {
         required = '<i>*</i> ';
@@ -237,5 +238,5 @@ ItemMatrixField.prototype.getLockedField = function () {
 
 ItemMatrixField.prototype.getObjectValue = function () {
     this.value = JSON.stringify(this.lockedFields);
-    return Field.prototype.getObjectValue.call(this);
+    return PMSE.Field.prototype.getObjectValue.call(this);
 };

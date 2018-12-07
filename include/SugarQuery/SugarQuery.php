@@ -111,9 +111,11 @@ class SugarQuery
     public $fields = array();
 
     /**
-     * @var bool True when the custom table for the current bean has already been added to the query
+     * Set of joined custom tables indexed by their primary table alias
+     *
+     * @var array
      */
-    public $customJoined = false;
+    private $joinedCustomTables = [];
 
     /**
      * Whether the query should skip deleted records
@@ -121,6 +123,20 @@ class SugarQuery
      * @var bool
      */
     protected $shouldSkipDeletedRecords = true;
+
+    /**
+     * Whether the query should skip deleted records
+     *
+     * @var bool
+     */
+    protected $shouldFetchErasedFields = false;
+
+    /**
+     * Mapping of original column aliases to their compact versions
+     *
+     * @var array
+     */
+    private $columnAliasMap = [];
 
     /**
      * This is used in Order By statements and in general is always true
@@ -176,7 +192,7 @@ class SugarQuery
     /**
      * Build the select object
      *
-     * @param array $fields
+     * @param string|string[] $fields,...
      *
      * @return null|SugarQuery_Builder_Select
      */
@@ -185,9 +201,7 @@ class SugarQuery
         if (!is_array($fields)) {
             $fields = func_get_args();
         }
-        if (!is_object($this->select)) {
-            $this->select = new SugarQuery_Builder_Select($this, array());
-        }
+
         $this->select->field($fields);
         return $this->select;
     }
@@ -254,6 +268,11 @@ class SugarQuery
         if (isset($options['add_deleted']) && !$options['add_deleted']) {
             $this->shouldSkipDeletedRecords = false;
         }
+
+        if (!empty($options['erased_fields'])) {
+            $this->shouldFetchErasedFields = true;
+        }
+
         $this->rebuildFields();
 
         return $this;
@@ -290,7 +309,7 @@ class SugarQuery
     /**
      * Build a raw where statement
      *
-     * @param $sql
+     * @param string $sql
      *
      * @return SugarQuery_Builder_Andwhere
      */
@@ -304,7 +323,6 @@ class SugarQuery
         $this->where->add($where);
         return $this->where;
     }
-
 
     /**
      * Add an Or Where Object to this query
@@ -517,7 +535,13 @@ class SugarQuery
             // get the field name from the relationship instead of just assuming it's something
             $field = $this->getJoinOnField($this->join[$this->rname_link]->linkName);
             if ($field) {
-                $this->join[$this->rname_link]->on()->addRaw("${field} = '{$options['baseBeanId']}'");
+                $targetTableJoin = $this->join[$this->rname_link];
+                $relationshipTableAlias = $targetTableJoin->relationshipTableAlias;
+                $relateTableJoinKey = $this->joinTableToKey[$relationshipTableAlias];
+                $this->join[$relateTableJoinKey]->on()->equals(
+                    $relationshipTableAlias . '.' . $field,
+                    $options['baseBeanId']
+                );
             } else {
                 throw new SugarQueryException('Relationship Field Not Found');
             }
@@ -671,14 +695,13 @@ class SugarQuery
     protected function formatRow(array $row)
     {
         //remap long aliases to thier correct output key
-        if (!empty($this->select)) {
-            foreach ($this->select->select as $field) {
-                if (!empty($field->original_alias) && isset($row[$field->alias])) {
-                    $row[$field->original_alias] = $row[$field->alias];
-                    unset($row[$field->alias]);
-                }
+        foreach ($this->columnAliasMap as $orignalAlias => $compactAlias) {
+            if (array_key_exists($compactAlias, $row)) {
+                $row[$orignalAlias] = $row[$compactAlias];
+                unset($row[$compactAlias]);
             }
         }
+
         return $row;
     }
 
@@ -980,14 +1003,6 @@ class SugarQuery
             $options['as_condition'] = true;
             $joined->addVisibilityQuery($this, $options);
         }
-
-        if ($joined->hasCustomFields()) {
-            $table_cstm = $joined->get_custom_table_name();
-            $alias_cstm = $this->db->getValidDBName($alias . '_cstm', false, 'alias');
-            $this->joinTable($table_cstm, array('alias' => $alias_cstm, 'joinType' => "LEFT", "linkingTable" => true))
-                ->on()->equalsField("$alias_cstm.id_c", "{$alias}.id");
-        }
-
     }
 
     /**
@@ -1104,30 +1119,36 @@ class SugarQuery
     }
 
     /**
-     * Joins the custom table to the current query (if possible)
+     * Joins the custom table to the current query if possible and not already joined
+     *
      * @param SugarBean $bean
-     * @param string $alias
+     * @param string $primaryTableAlias
+     *
+     * @throws SugarQueryException
      */
-    public function joinCustomTable($bean, $alias = "") {
-        if ($bean->hasCustomFields() && !$this->customJoined) {
-            $table = $bean->getTableName();
-            $table_cstm = $bean->get_custom_table_name();
-            if (!empty($table_cstm)) {
-                $options = array(
-                    'joinType' => 'left',
-                );
-                if (!empty($alias)) {
-                    $fromAlias = $alias;
-                    $joinAlias = $alias . '_c';
-                    $options['alias'] = $joinAlias;
-                } else {
-                    $fromAlias = $table;
-                    $joinAlias = $table_cstm;
-                }
-                $this->joinTable($table_cstm, $options)
-                    ->on()->equalsField($joinAlias . '.id_c', $fromAlias . '.id');
-            }
+    public function joinCustomTable($bean, $primaryTableAlias = null)
+    {
+        if (!$bean->hasCustomFields()) {
+            return;
         }
+
+        if (!$primaryTableAlias) {
+            $primaryTableAlias = $this->getFromAlias();
+        }
+
+        if (isset($this->joinedCustomTables[$primaryTableAlias])) {
+            return;
+        }
+
+        $this->joinedCustomTables[$primaryTableAlias] = true;
+
+        $joinAlias = $this->getCustomTableAlias($bean, $primaryTableAlias);
+
+        $this->joinTable($bean->get_custom_table_name(), array(
+            'joinType' => 'left',
+            'alias' => $joinAlias,
+        ))
+            ->on()->equalsField($joinAlias . '.id_c', $primaryTableAlias . '.id');
     }
 
     /**
@@ -1138,5 +1159,47 @@ class SugarQuery
     public function shouldSkipDeletedRecords()
     {
         return $this->shouldSkipDeletedRecords;
+    }
+
+    /**
+     * Returns whether the query should fetch erased fields for selected records
+     *
+     * @return mixed
+     */
+    public function shouldFetchErasedFields()
+    {
+        return $this->shouldFetchErasedFields;
+    }
+
+    /**
+     * Returns a SQL-valid version of a given column alias and registers a mapping between the two
+     *
+     * @param string $alias Original column alias
+     * @return string
+     */
+    public function getValidColumnAlias(string $alias) : string
+    {
+        $validAlias = $this->db->getValidDBName($alias, true);
+
+        if (strcasecmp($alias, $validAlias) == 0) {
+            return $alias;
+        }
+
+        $this->columnAliasMap[$alias] = $validAlias;
+
+        return $validAlias;
+    }
+
+    /**
+     * @param SugarBean $bean
+     * @param null|string $alias
+     * @return string
+     */
+    public function getCustomTableAlias(SugarBean $bean, ?string $alias) : string
+    {
+        if (!empty($alias)) {
+            return $alias . '_cstm';
+        }
+        return $bean->get_custom_table_name();
     }
 }

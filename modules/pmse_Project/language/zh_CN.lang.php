@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => '流程定义',
   'LBL_MODULE_TITLE' => '流程定义',
   'LBL_MODULE_NAME_SINGULAR' => '流程定义',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => '不等于',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => '不是',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => '不等于',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => '运行时',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => '添加',
     'LBL_PMSE_FORMPANEL_CLOSE' => '关闭',

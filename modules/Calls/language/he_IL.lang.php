@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת שיחות',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת שיחות',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'שיחות',
     'LBL_MODULE_NAME_SINGULAR'	=> 'שיחת טלפון',

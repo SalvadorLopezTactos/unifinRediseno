@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'เซิร์ฟเวอร์ Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'รายการแผงข้อมูลย่อยต่อเพจ',
 	'LOG_MEMORY_USAGE'=>'การใช้หน่วยความจำของล็อก',
-	'LOG_SLOW_QUERIES'=>'ล็อกการสืบค้นที่ทำงานช้า',
+    'LOG_SLOW_QUERIES' => 'ล็อกการสืบค้นที่ทำงานช้า',
     'LOCK_HOMEPAGE_HELP'=>'การตั้งค่านี้มีไว้เพื่อป้องกัน<BR> 1) การเพิ่มหน้าแรกและส่วนข้อมูลใหม่ในโมดูลหน้าแรก <BR>2) การปรับแต่งตำแหน่งของส่วนข้อมูลในหน้าแรกโดยการลากและวาง',
     'CURRENT_LOGO'=>'โลโก้ปัจจุบัน:',
     'CURRENT_LOGO_HELP'=>'โลโก้นี้จะปรากฎที่มุมด้านซ้ายของส่วนท้ายในแอปพลิเคชัน Sugar',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'นี่คือชื่อที่จะปรากฏในแถบชื่อเรื่องของเบราว์เซอร์',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'เปิด/ปิดใช้งานอีเมลจากที่อยู่ติดต่อที่เกี่ยวข้อง (หรือเชื่อมโยง) เพื่อแสดงในแผงข้อมูลย่อยอีเมล',
 
-    'LBL_OC_STATUS'                     => 'สถานะของไคลเอนต์แบบออฟไลน์เริ่มต้น',
-    'DEFAULT_OC_STATUS'                 => 'เปิดใช้งานไคลเอนต์แบบออฟไลน์โดยค่าเริ่มต้น',
-    'LBL_OC_STATUS_DESC' => 'เลือกตัวเลือกนี้ถ้าคุณต้องการให้ผู้ใช้ใดก็ได้มีสิทธิ์เข้าถึงไคลเอนต์แบบออฟไลน์ หรือคุณสามารถกำหนดค่าการเข้าถึงในระดับผู้ใช้',
     'SESSION_TIMEOUT' => 'หมดเวลาเซสชันของพอร์ทัล',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'การหมดเวลาเซสชันของพอร์ทัลใช้สำหรับ Sugar Portal ระบบเก่าในเวอร์ชัน 6.5 และก่อนหน้านั้น',
     'UPLOAD_MAXSIZE_UNITS' => 'ไบต์',
@@ -435,8 +432,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'URL ของล็อกอิน SAML ต้องไม่ว่างเปล่า',
     'ERR_EMPTY_SAML_CERT' => 'ใบรับรอง SAML ต้องไม่ว่างเปล่า',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'ID หน่วยงาน SAML จะว่างเปล่าไม่ได้',
     'ERR_SAML_LOGIN_URL' => 'URL ของล็อกอิน SAML ไม่ถูกต้อง',
     'ERR_SAML_SLO_URL' => 'URL ของ SAML SLO ไม่ถูกต้อง',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'ไฟล์ PEM ควรมีคีย์ส่วนตัว',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'ไฟล์ PEM ควรมีการรับรอง x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'การรับรอง x.509 ที่ให้มาไม่ตรงกับคีย์ส่วนตัว',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'สตรีมกิจกรรม',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'เปิดการใช้งานสตรีมกิจกรรม',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'เปิดสตรีมกิจกรรมสำหรับแอปพลิเคชัน',
 );
 
 

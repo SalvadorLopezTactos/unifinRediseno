@@ -119,10 +119,11 @@ class OpportunityViews
         foreach($links as $link => $def) {
             if ($this->bean->load_relationship($link) && $this->bean->$link instanceof Link2) {
                 $linkname = $this->bean->$link->getRelatedModuleLinkName();
+                $relatedmodule = $this->bean->$link->getRelatedModuleName();
 
-                if (!empty($linkname)) {
-                    $this->processListView($fieldMap, $this->bean->$link->getRelatedModuleName(), $linkname);
-                    $subpanel_modules[] = $this->bean->$link->getRelatedModuleName();
+                if (!empty($linkname) && $relatedmodule != 'Contracts') {
+                    $this->processListView($fieldMap, $relatedmodule, $linkname);
+                    $subpanel_modules[] = $relatedmodule;
                 }
             }
         }

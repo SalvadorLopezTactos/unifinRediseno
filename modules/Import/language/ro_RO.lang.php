@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Mai multe coloane au fost definite cu acelasi nume de camp.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Lipsesc campurile necesare:',
     'ERR_MISSING_MAP_NAME' => 'Lipseşte nume personalizat de cartografiere',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Importul utilizatorilor este dezactivat pentru modul IDM.',
     'ERR_SELECT_FULL_NAME' => 'Nu puteţi selecta Nume complet atunci când Prenume şi Nume sunt selectate.',
     'ERR_SELECT_FILE' => 'Alegeti un fisier pentru urcare.',
     'LBL_SELECT_FILE' => 'Selecteaza fisier',

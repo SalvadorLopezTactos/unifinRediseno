@@ -12,12 +12,11 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch;
 
-use Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
-
 /**
  *
  * This class is used to apply the different boost values on the fields
- * being queried by the GlobalSearch provider.
+ * being queried by the GlobalSearch provider. It supports weighted boost
+ * values and boost overrides from the vardefs.
  *
  */
 class Booster
@@ -50,18 +49,6 @@ class Booster
     }
 
     /**
-     * Get boosted field definition
-     * @param string $field Field name
-     * @param array $defs Field vardefs
-     * @param string $weightId Identifier to apply weighted boost
-     * @return string
-     */
-    public function getBoostedField($field, array $defs, $weightId)
-    {
-        return $field . QueryBuilder::BOOST_SEP . $this->getBoostValue($defs, $weightId);
-    }
-
-    /**
      * Get boost value from defs or use default
      * @param array $defs Field vardefs
      * @param string $weightId Identifier to apply weighted boost
@@ -83,7 +70,7 @@ class Booster
      * @param string $weightId Identifier to apply weighted boost
      * @return float
      */
-    public function normalizeBoost($boost, $weightId)
+    private function normalizeBoost($boost, $weightId)
     {
         return round($this->weight($boost, $weightId), $this->precision);
     }
@@ -94,7 +81,7 @@ class Booster
      * @param string $weightId Identifier to apply weighted boost
      * @return float
      */
-    public function weight($boost, $weightId)
+    private function weight($boost, $weightId)
     {
         if (isset($this->weighted[$weightId])) {
             $boost = $boost * $this->weighted[$weightId];

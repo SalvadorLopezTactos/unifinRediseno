@@ -9,9 +9,7 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
-
 
 /**
  * @api
@@ -276,12 +274,11 @@ class SugarJobMassUpdate implements RunnableSchedulerJob
             try {
                 $errors = $helper->populateFromApi($bean, $data, array('massUpdate'=>true));
                 $check_notify = $helper->checkNotify($bean);
-
                 // Before calling save, we need to clear out any existing AWF
                 // triggered start events so they can continue to trigger.
                 Registry\Registry::getInstance()->drop('triggered_starts');
                 $bean->save($check_notify);
-            } catch ( SugarApiExceptionNotAuthorized $e ) {
+            } catch (SugarApiException $e) {
                 // ACL's might not let them modify this bean, but we should still do the rest
                 $failed++;
                 continue;

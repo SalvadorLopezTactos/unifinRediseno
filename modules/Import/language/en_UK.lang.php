@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Multiple columns have been defined with the same field name.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Missing required fields:',
     'ERR_MISSING_MAP_NAME' => 'Missing custom mapping name',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'The users import is disabled for IDM mode.',
     'ERR_SELECT_FULL_NAME' => 'You cannot select Full Name when First Name and Last Name are selected.',
     'ERR_SELECT_FILE' => 'Select a file to upload.',
     'LBL_SELECT_FILE' => 'Select file:',

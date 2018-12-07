@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Forecasts Dashboard',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Forecasts',
     'LBL_MODULE_NAME_SINGULAR' => 'Forecast',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'Product ID',
     'LBL_QUOTA_ID' => 'Quota ID',
     'LBL_VERSION' => 'Version',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Hide bar legend',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Show bar legend',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Hide line legend',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Show line legend',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Error: user {0} does not have manager access to request forecasts for {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Fiscal year start date:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Conﬁgure the time period that will be used in the Forecasts module.<br><br>Start by choosing the Start Date of your ﬁscal year. Then choose the type of  time period that you want to forecast over. The date range for the time periods will be automatically calculated based on your selections. The Sub Time Period is the base for the Forecast worksheet.<br><br>The viewable future and past time periods will determine the number of visible sub-periods in the Forecasts module. The users are able to view and edit the forecasting numbers in the visible  sub-periods.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configure how you would like to categorise {{forecastByModule}}. <br><br>Please note that the Range settings cannot be changed after the first commit. For upgraded instances, the Range setting is locked in with existing Forecast data.<br><br>You may select two or more categories based on probability ranges or create categories which are not based on probability. <br><br>There are check-boxes to the left of your custom categories; use these to decide which ranges will be included within the Forecast amount committed and reported to managers. <br><br>A user may change the include/exclude status and category of {{forecastByModule}} manually from their worksheet.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Configure how you would like to categorize {{forecastByModule}}. <br><br>Please note that the Range settings cannot be changed after the first commit. For upgraded instances, the Range setting is locked in with existing Forecast data.<br><br>You may select two or more categories based on probability ranges or create categories which are not based on probability. <br><br>There are check-boxes to the left of your custom categories; use these to decide which ranges will be included within the Forecast amount committed and reported to managers. <br><br>A user may change the include/exclude status and category of {{forecastByModule}} manually from their worksheet.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Select the columns you would like the user to ﬁll out for their forecasts of each {{forecastByModuleSingular}}. Please note the Likely amount is tied to the amount shown in {{forecastByModule}}; for this reason the Likely column cannot be hidden.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Select which columns you would like to view in the Forecast module. The list of fields will combine the worksheet and allow the user to choose how to configure its view.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'I am a placeholder for Forecast By how-to text!',

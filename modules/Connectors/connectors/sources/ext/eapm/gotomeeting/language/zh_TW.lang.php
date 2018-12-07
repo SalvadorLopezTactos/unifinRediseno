@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+通過註冊GoToMeeting應用程式從 LogMeIn 取得用戶密鑰。<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+註冊的實際步骤：<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>登入至您的 LogMeIn 開發人員中心帳號：<a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>點擊我的應用程式</li>
+    <li>點擊添加新應用程式</li>
+    <li>填寫“添加應用程式”表格上的所有表格：</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>應用程式名稱</li>
+            <li>說明</li>
+            <li>產品 API：選擇GoToMeeting</li>
+            <li>應用程式網址：輸入您的實例網址</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>點擊“創建應用程式”按鈕</li>
+    <li>從應用程式清單中點擊您的應用程式的名稱</li>
+    <li>點擊按鍵標籤</li>
+    <li>複製消費者密鑰值並在下方輸入</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => '消費者密鑰',
 );

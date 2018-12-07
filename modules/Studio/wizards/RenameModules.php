@@ -461,7 +461,7 @@ class RenameModules
             
             // Add in any studio customizations
             $ext = 'custom/modules/' . $bean->module_dir . '/Ext/clients/base/layouts/subpanels/subpanels.ext.php';
-            if (SugarAutoLoader::fileExists($ext)) {
+            if (file_exists($ext)) {
                 require FileLoader::validateFilePath($ext);
             }
 

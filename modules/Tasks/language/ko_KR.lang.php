@@ -11,8 +11,11 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => '작업 목록 대시보드',
+
   'LBL_MODULE_NAME' => '업무내역',
-  'LBL_MODULE_NAME_SINGULAR' => '과제',
+  'LBL_MODULE_NAME_SINGULAR' => '업무',
   'LBL_TASK' => '업무내역',
   'LBL_MODULE_TITLE' => '업무내역:홈',
   'LBL_SEARCH_FORM_TITLE' => '업무내역 검색',
@@ -59,7 +62,7 @@ $mod_strings = array (
   'ERR_INVALID_HOUR' => '0에서 24까지의 유효한 시간을 입력해 주십시요',
   'LBL_DEFAULT_PRIORITY' => '보통',
   'LBL_LIST_MY_TASKS' => '나의 진행중인 업무내역목록',
-  'LNK_NEW_TASK' => '신규 업무내역 추가하기',
+  'LNK_NEW_TASK' => '업무 추가하기',
   'LNK_TASK_LIST' => '업무내역 보기',
   'LNK_IMPORT_TASKS' => '업무내역 가져오기',
   'LBL_CONTACT_FIRST_NAME'=>'연락처의 이름',

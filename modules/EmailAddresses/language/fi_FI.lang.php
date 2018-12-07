@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'Luotu',
     'LBL_DATE_MODIFIED' => 'Muokattu viimeksi',
     'LBL_DELETED' => 'Poistettu',
+    'LBL_MODULE_NAME' => 'Sähköpostiosoitteet',
+    'LBL_MODULE_NAME_SINGULAR' => 'Sähköpostiosoite',
 );

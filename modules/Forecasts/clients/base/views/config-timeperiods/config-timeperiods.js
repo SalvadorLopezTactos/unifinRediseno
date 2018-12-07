@@ -68,7 +68,6 @@
 
     /**
      * @inheritdoc
-     * @override
      */
     _updateTitleValues: function() {
         this.titleSelectedValues = (this.tpStartDate) ? this.tpStartDate.formatUser(true) : '';
@@ -136,7 +135,7 @@
                         context: this.context,
                         module: this.module,
                         model: this.model,
-                        meta: app.metadata.getField('enum')
+                        meta: app.metadata.getField({name: 'enum', module: this.module})
                     };
 
                 this.fiscalYearField = app.view.createField(fieldSettings);

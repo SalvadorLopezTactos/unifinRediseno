@@ -91,16 +91,17 @@ class KBFilterQuery implements QueryInterface
 
     /**
      * Create the filter.
-     * @param bool $addLangFilter a flag indicate if a lang filter is needed
-     * @param bool $addIdFilter a flag indicate if a id filter is needed
-     * @return \Elastica\Filter\BoolFilter
+     * @param array $params term fields
+     * @return \Elastica\Query\BoolQuery
      */
-    public function createFilter()
+    public function createFilter($params)
     {
-        $mainFilter = new \Elastica\Filter\BoolFilter();
+        $mainFilter = new \Elastica\Query\BoolQuery();
 
-        $activeRevFilter = new \Elastica\Filter\Term();
-        $activeRevFilter->setTerm('active_rev', 1);
+        $activeRevFilter = new \Elastica\Query\Term();
+        foreach ($params as $field => $value) {
+            $activeRevFilter->setTerm($field, $value);
+        }
         $mainFilter->addMust($activeRevFilter);
 
         return $mainFilter;
@@ -116,7 +117,7 @@ class KBFilterQuery implements QueryInterface
     {
         $mlt = new \Elastica\Query\MoreLikeThis();
         $mlt->setFields($fields);
-        $mlt->setLikeText($text);
+        $mlt->setLike($text);
         $mlt->setMinTermFrequency(1);
         $mlt->setMinDocFrequency(1);
         return $mlt;

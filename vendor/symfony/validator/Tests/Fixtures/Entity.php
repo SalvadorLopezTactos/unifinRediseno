@@ -12,14 +12,14 @@
 namespace Symfony\Component\Validator\Tests\Fixtures;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\ExecutionContextInterface;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @Symfony\Component\Validator\Tests\Fixtures\ConstraintA
  * @Assert\GroupSequence({"Foo", "Entity"})
  * @Assert\Callback({"Symfony\Component\Validator\Tests\Fixtures\CallbackClass", "callback"})
  */
-class Entity extends EntityParent implements EntityInterface
+class Entity extends EntityParent implements EntityInterfaceB
 {
     /**
      * @Assert\NotNull
@@ -33,6 +33,14 @@ class Entity extends EntityParent implements EntityInterface
      * @Assert\Choice(choices={"A", "B"}, message="Must be one of %choices%")
      */
     public $firstName;
+    /**
+     * @Assert\Valid
+     */
+    public $childA;
+    /**
+     * @Assert\Valid
+     */
+    public $childB;
     protected $lastName;
     public $reference;
     public $reference2;
@@ -85,7 +93,7 @@ class Entity extends EntityParent implements EntityInterface
     }
 
     /**
-     * @Assert\Callback
+     * @Assert\Callback(payload="foo")
      */
     public function validateMe(ExecutionContextInterface $context)
     {
@@ -96,5 +104,37 @@ class Entity extends EntityParent implements EntityInterface
      */
     public static function validateMeStatic($object, ExecutionContextInterface $context)
     {
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChildA()
+    {
+        return $this->childA;
+    }
+
+    /**
+     * @param mixed $childA
+     */
+    public function setChildA($childA)
+    {
+        $this->childA = $childA;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getChildB()
+    {
+        return $this->childB;
+    }
+
+    /**
+     * @param mixed $childB
+     */
+    public function setChildB($childB)
+    {
+        $this->childB = $childB;
     }
 }

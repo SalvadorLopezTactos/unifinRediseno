@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => '會議清單儀表板',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => '會議記錄儀表板',
+
 	'ERR_DELETE_RECORD' => '必須指定記錄編號才能刪除會議。',
 	'LBL_ACCEPT_THIS'=>'接受？',
 	'LBL_ADD_BUTTON'=> '新增',
@@ -51,7 +55,7 @@ $mod_strings = array (
     'LBL_MY_SCHEDULED_MEETINGS' => '我的已排程會議',
 	'LBL_LIST_RELATED_TO' => '關聯至',
 	'LBL_LIST_STATUS'=>'狀態',
-	'LBL_LIST_SUBJECT' => '主題',
+	'LBL_LIST_SUBJECT' => '主旨',
 	'LBL_LIST_TIME' => '開始時間',
 	'LBL_LEADS_SUBPANEL_TITLE' => '潛在客戶',
 	'LBL_LOCATION' => '位置：',

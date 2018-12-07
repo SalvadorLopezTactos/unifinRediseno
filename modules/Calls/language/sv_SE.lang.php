@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Panel för samtalslistor',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Panel för samtalsposter',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Telefonsamtal',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Telefonsamtal',
@@ -91,7 +95,7 @@ $mod_strings = array (
     'LBL_HISTORY_SUBPANEL_TITLE' => 'Anteckningar',
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Tilldelad användare',
     'LBL_LIST_MY_CALLS' => 'Mina telefonsamtal',
-    'LBL_MY_SCHEDULED_CALLS' => 'Mina Schemalagda Samtal',
+    'LBL_MY_SCHEDULED_CALLS' => 'Mina schemalagda samtal',
     'LBL_SELECT_FROM_DROPDOWN' => 'Var god välj först från dropdownmenyn Relaterad till.',
 	'LBL_ASSIGNED_TO_NAME' => 'Tilldelad till',
 	'LBL_ASSIGNED_TO_ID' => 'Tilldelad användare',

@@ -14,7 +14,7 @@
  * @extends View.Views.Base.ListBottomView
  */
 ({
-    extendsFrom: "ListBottomView",
+    extendsFrom: 'ListBottomView',
 
     /**
      * Assign proper label for 'show more' link.

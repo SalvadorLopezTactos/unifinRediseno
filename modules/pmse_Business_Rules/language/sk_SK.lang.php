@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Process Business Rules',
   'LBL_MODULE_TITLE' => 'Process Business Rules',
   'LBL_MODULE_NAME_SINGULAR' => 'Process Business Rule',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Podmienky',
     'LBL_PMSE_LABEL_RETURN' => 'Návrat',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Conclusions',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Zmeniť pole',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Hodnota návratu',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Add condition',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Add conclusion',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Add row',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Remove column',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Odstrániť podmienku',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Odstrániť záver',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Odstrániť stĺpec údajov',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Áno',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Nie',

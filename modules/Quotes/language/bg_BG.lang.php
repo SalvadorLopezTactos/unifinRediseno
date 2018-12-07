@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Електронно табло със списък на офертите',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Електронно табло със запис на офертите',
+
     'LBL_CONTRACTS'=>'Договори',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Договори',
     'ERR_DELETE_RECORD' => 'Трябва да определите номер на записа, за да изтриете тази оферта.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Сума (US Dollar)',
     'LBL_SUBTOTAL' => 'Сума:',
     'LBL_TAXABLE_SUBTOTAL' => 'Облагаема междинна сума',
-    'LBL_SYSTEM_ID' => 'ID на системата',
     'LBL_TAX_USDOLLAR'=>'Мита, акцизи и такси (US Dollar)',
     'LBL_TAX' => 'Мита, акцизи и такси:',
     'LBL_TAX_TOTAL' => 'Данък общо',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Избрано е изтриване',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Изтрий маркираните артикули',
     'LBL_SAVE_LINE_ITEMS' => 'Моля, съхранете активните продукти чрез щракване върху синята отметка до всеки продукт преди да съхраните тази оферта.',
+    'LBL_COPY_LINE_ITEMS' => 'Моля, съхранете активните продукти чрез щракване върху синята отметка до всеки продукт преди да копирате тази оферта.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Търсене в Продуктовия каталог',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Липсват данни',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Копиране на оферирани продукти в нова оферта.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Копиране на оферирани продукти в нова оферта. Процесът може да отнеме известно време.',
 );

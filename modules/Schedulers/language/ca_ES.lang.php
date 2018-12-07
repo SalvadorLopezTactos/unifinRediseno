@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Actualització d&#39;articles KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicar articles aprovats i fer que caduquin articles de la base de coneixement.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Tasca planifica de l&#39;Advanced Workflow',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Reconstuïu les dades de seguretat desregularitzades de l&#39;equip',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intèrval:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Planificador de tasques de cerca d&#39;Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Esborra els arxius de les eines de diagnòstic',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Esborra els arxius temporals',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Reconstuïu les dades de seguretat desregularitzades de l&#39;equip',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Executar campanyes de Correu Massiu Nocturnes',
 'LBL_ASYNCMASSUPDATE' => 'Fer actualitzacions massives asíncrones',

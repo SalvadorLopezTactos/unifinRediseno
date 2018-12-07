@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Tabloul de bord Listă erori',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare erori',
+
   'LBL_MODULE_NAME' => 'Probleme',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Problema:',
   'LBL_MODULE_TITLE' => 'Tracker erori: Acasă',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Cazuri',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Proiecte',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documente',
-  'LBL_SYSTEM_ID' => 'Identitate sistem',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Utilizator Atribuit',
 	'LBL_ASSIGNED_TO_NAME' => 'Atribuit lui',
 

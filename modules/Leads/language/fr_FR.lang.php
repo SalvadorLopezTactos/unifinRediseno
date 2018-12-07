@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Tableau de bord de la liste de leads',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrements de leads',
+
     'ERR_DELETE_RECORD' => 'Un ID doit être renseigné pour toute suppression.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Description de compte',
     'LBL_ACCOUNT_ID'=>'Compte (ID)',
@@ -117,7 +122,7 @@ $mod_strings = array (
     'LBL_LIST_CONTACT_NAME' => 'Nom du Lead',
     'LBL_LIST_CONTACT_ROLE' => 'Rôle',
     'LBL_LIST_DATE_ENTERED' => 'Date de création',
-    'LBL_LIST_EMAIL_ADDRESS' => 'Composer un email',
+    'LBL_LIST_EMAIL_ADDRESS' => 'Email',
     'LBL_LIST_FIRST_NAME' => 'Prénom',
     'LBL_VIEW_FORM_TITLE' => 'Vue Lead',
     'LBL_LIST_FORM_TITLE' => 'Liste des Leads',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Montant Affaire :',
     'LBL_OPPORTUNITY_ID'=>'Affaire (ID)',
     'LBL_OPPORTUNITY_NAME' => 'Nom Affaire :',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Email Autre :',
     'LBL_OTHER_PHONE' => 'Téléphone Autre :',
     'LBL_PHONE' => 'Téléphone :',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Copier l&#39;adresse alternative sur l&#39;adresse principale',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Copier l&#39;adresse principale sur l&#39;adresse alternative',
     'NTC_DELETE_CONFIRMATION' => 'Êtes-vous sûr de vouloir supprimer cet enregistrement ?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Créer une Affaire nécessite un Compte associé.\n Merci de le créer ou de le sélectionner.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Créer une Affaire nécessite un Compte associé.\\n Merci de le créer ou de le sélectionner.',
     'NTC_REMOVE_CONFIRMATION' => 'Êtes-vous sûr de vouloir supprimer ce lead ?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Êtes-vous sûr de vouloir supprimer cet enregistrement en tant que rapport direct ?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Logs des campagnes',
@@ -314,4 +320,6 @@ Après avoir confirmé chacun des modules souhaités, cliquez sur le bouton Enre
     'LBL_MKTO_LEAD_SCORE' => 'Score du Lead',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Rapports sur les leads',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objectifs commerciaux auxquels un consentement a été donné',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Dernière mise à jour de consentement',
 );

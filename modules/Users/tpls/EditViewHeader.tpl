@@ -57,6 +57,16 @@ var ERR_REENTER_PASSWORDS = '{$MOD.ERR_REENTER_PASSWORDS}';
 	<div id="popup_window"></div>
 
 <script type="text/javascript">
+{if $SHOW_NON_EDITABLE_FIELDS_ALERT}
+    {literal}
+        app.alert.show('non_editable_user_fields', {
+            level: 'info',
+            messages: '{/literal}{$NON_EDITABLE_FIELDS_MSG}{literal}',
+            autoClose: false
+        });
+    {/literal}
+{/if}
+
 var EditView_tabs = new YAHOO.widget.TabView("EditView_tabs");
 
 {literal}

@@ -26,6 +26,8 @@ global $app_list_strings;
 global $theme;
 
 $error_msg = '';
+
+$db = DBManagerFactory::getInstance();
 global $current_language;
 $mod_strings = return_module_language($current_language, 'Contacts');
 $moduleName = $GLOBALS['app_list_strings']['moduleList']['Contacts'];
@@ -59,14 +61,13 @@ if ($count > 0)
 	{
 		if (!$first) $query .= ' OR ';
 		$first = false;
-		$query .= "id='$duplicate_id' ";
+        $query .= "id=".$db->quoted($duplicate_id)." ";
 	}
 	$query .= ')';
 }
 
 $duplicateContacts = array();
 
-$db = DBManagerFactory::getInstance();
 $result = $db->query($query);
 $i=0;
 while (($row=$db->fetchByAssoc($result)) != null) {

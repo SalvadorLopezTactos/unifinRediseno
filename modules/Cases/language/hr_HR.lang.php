@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Nadzorna ploča za popis slučajeva',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o slučajevima',
+
 	'ERR_DELETE_RECORD'					=> 'Morate navesti broj zapisa da biste izbrisali račun.',
 	'LBL_ACCOUNT_ID'					=> 'ID računa',
 	'LBL_ACCOUNT_NAME'					=> 'Naziv računa:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Status:',
     'LBL_SOURCE' => 'Izvor:',
 	'LBL_SUBJECT'						=> 'Predmet:',
-	'LBL_SYSTEM_ID'						=> 'ID sustava',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Naziv računa',
 	'LBL_LIST_ASSIGNED'					=> 'Dodijeljeno',
 	'LBL_LIST_CLOSE'					=> 'Zatvori',

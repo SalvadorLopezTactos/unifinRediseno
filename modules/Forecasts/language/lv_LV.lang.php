@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Prognožu instrumentu panelis',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Prognozes',
     'LBL_MODULE_NAME_SINGULAR' => 'Prognoze',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'Produkta ID',
     'LBL_QUOTA_ID' => 'Kvotas ID',
     'LBL_VERSION' => 'Versija',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Slēpt joslas leģendu',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Rādīt joslas leģendu',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Slēpt rindas leģendu',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Rādīt rindas leģendu',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Kļūda: lietotājam {0} nav menedžera pieejas tiesību lai pieprasītu prognozi priekš {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Finanšu gada sākuma datums:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Conﬁgure the time period that will be used in the Forecasts module.<br><br>Start by choosing the Start Date of your ﬁscal year. Then choose the type of  time period that you want to forecast over. The date range for the time periods will be automatically calculated based on your selections. The Sub Time Period is the base for the Forecast worksheet.<br><br>The viewable future and past time periods will determine the number of visible sub-periods in the Forecasts module. The users are able to view and edit the forecasting numbers in the visible  sub-periods.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurējiet, kā vēlaties kategorizēt moduli {{forecastByModule}}. <br><br> Ņemiet vērā, ka diapazona iestatījumi nebūs rediģējami pēc to pirmās piemērošanas. Atjauninātām instancēm diapazona iestatījums ir nobloķēts ar esošajiem prognozes datiem. <br><br>Varat izvēlēties divas vai vairākas kategorijas, pamatojoties uz varbūtību diapazoniem, vai izveidot kategorijas, kas nav balstītas uz varbūtību. <br><br>Pa kreisi no lietotāja kategorijām ir izvēles rūtiņas; izmantojiet tās, lai noteiktu, kuri diapazoni tiks iekļauti iesniegtajā un vadītājiem paziņotajā prognozes apjomā.<br><br>Lietotājs var manuāli no savas darblapas mainīt iekļaušanas/neiekļaušanas statusu un moduļa {{forecastByModule}} kategoriju.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfigurējiet, kā jūs vēlaties kategorizēt {{forecastByModule}}. <br><br>. Lūdzu, ņemiet vērā, ka pēc pirmās izpildes diapazona iestatījumus nevar izmainīt. Jauninātām instancēm diapazona iestatījums ir ieslēgts esošajos prognožu datos.<br><br>Jūs varat atlasīt divas vai vairāk kategorijas, balstoties uz varbūtību diapazoniem vai arī radīt kategorijas, kuras nav balstītas uz varbūtību. <br><br>Pa kreisi no jūsu pielāgojamajām kategorijām ir izvēles rūtiņas; izmantojiet tās, lai izšķirtu, kuri diapazoni tiks iekļauti iesniedzamo un vadītājiem ziņojamo prognožu summā. <br><br>Lietotājs var manuāli mainīt {{forecastByModule}} iekļaušanas/neiekļaušanas statusu un kategoriju no to darblapas.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Atlasiet kolonnas, kuras lietotājam jāizpilda obligāti katrai Iespējai. "Ticamākā" summa, ir saistīta ar summu, kura ir redzama Iespējās; šī iemesla dēļ kolonna "Ticamākā" summa nevar būt paslēpta.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Atlasiet kolonnas kuras vēlaties aplūkot Prognožu modulī. Lauku saraksts apvienos darblapu un ļaus lietotājam konfigurēt skatījumu.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Šis ir vietturis Prognozei pēc ievades teksta!',

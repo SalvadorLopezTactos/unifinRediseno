@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Dashboard Contactenlijst',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Dashboard Contactenrecord',
+
     'LNK_CONTACT_REPORTS' => 'Bekijk Persoonsrapporten',
     'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om dit contact te verwijderen',
     'LBL_ACCOUNT_ID' => 'Organisatie ID:',
@@ -202,7 +206,7 @@ $mod_strings = array (
     'LBL_CONTACTS_SUBPANEL_TITLE' => 'Personen',
     'LBL_PROJECT_SUBPANEL_TITLE' => 'Projecten',
     'LBL_CAMPAIGNS_SUBPANEL_TITLE' => 'Campagnes',
-    'LNK_IMPORT_CONTACTS' => 'Importeer Personen',
+    'LNK_IMPORT_CONTACTS' => 'Importeer contactpersonen',
 
     //For export labels
     'LBL_PHONE_HOME' => 'Telefoon (privé)',
@@ -273,4 +277,6 @@ Om een {{module_name}} aan te maken:
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Persoonsrapportages',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Toestemming zakelijke doeleinden voor',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Toestemming voor het laatst bijgewerkt',
 );

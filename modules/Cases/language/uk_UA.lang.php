@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Інформаційна панель списку звернень',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Інформаційна панель записів звернень',
+
 	'ERR_DELETE_RECORD'					=> 'Необхідно вказати номер запису перед видаленням.',
 	'LBL_ACCOUNT_ID'					=> 'Контрагент (ID)',
 	'LBL_ACCOUNT_NAME'					=> 'Назва контрагента:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Статус:',
     'LBL_SOURCE' => 'Джерело:',
 	'LBL_SUBJECT'						=> 'Тема:',
-	'LBL_SYSTEM_ID'						=> 'Система (ID)',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Контрагент',
 	'LBL_LIST_ASSIGNED'					=> 'Відповідальний (-а)',
 	'LBL_LIST_CLOSE'					=> 'Закрити',

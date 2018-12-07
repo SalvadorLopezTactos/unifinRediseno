@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Vai tiešām vēlaties dzēst šo relāciju?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Tādejādi tiks radīta pastāvīga relācija. Vai tiešām vēlaties izvietot šo relāciju?',
 'LBL_CONFIRM_DONT_SAVE' => 'Kopš pēdējās saglabāšanas ir veiktas izmaiņas, vai vēlaties saglabāt?',
@@ -747,22 +747,23 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Konfigurēt lauku, lai tajā varētu veikt pilna teksta meklēšanu.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Palielināšana ir process, kurā tiek uzlabota ieraksta lauku atbilstība. <br />Laukiem ar lielāku palielinājuma līmeni tiks piešķirta lielāka nozīme meklēšanas laikā. Meklēšanas laikā atbilstošie ieraksti, kas satur laukus ar lielāku nozīmi, parādīsies augstāk meklēšanas rezultātos. <br />Noklusējuma vērtība ir 1,0, kas apzīmē neitrālu palielinājumu. Lai piemērotu pozitīvu palielinājumu, tiek pieņemta jebkura mainīga vērtība, kas ir lielāka par 1. Negatīvam palielinājumam izmanto vērtību, kas zemāka par 1. Piemēram, vērtība 1,35 pozitīvi palielinās lauku par 135 %. Izmantojot vērtību 0,60, tiks piemērots negatīvs palielinājums. <br />Ņemiet vērā, ka iepriekšējās versijās bija nepieciešams veikt pilna teksta meklēšanas atkārtotu indeksēšanu. Tas vairs nav nepieciešams.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Jā</b>: Lauks tiks iekļauts importēšanas operācijā.<br><b>Nē</b>: Lauks netiks iekļauts importa operācijā<br><b>Obligāts</b>: Lauka vērtībai jābūt norādītai jebkurā importa operācijā.',
+'LBL_POPHELP_PII'=>'Šis lauks tiks automātiski atzīmēts auditam un pieejams Personiskās informācijas skatam.<br>Personiskās informācijas lauki var arī tikt neatgriezeniski izdzēsti, kad ieraksts attiecas uz datu privātuma nodrošināšanas pieprasījumu.<br>Dzēšana tiek veikta, izmantojot Datu privātuma moduli, un to var izpildīt administratori vai lietotāji datu privātuma pārvaldnieka lomā.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Ievadiet platumu pikseļos. <br> Augšupielādētais attēls tiks mērogots atbilstoši šim platumam.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Ievadiet augstumu pikseļos. <br> Augšupielādētais attēls tiks mērogots atbilstoši šim augstumam.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Iespējots</b>: Lauks parādīsies Dublikātu sapludināšanas funkcijā, taču nebūs pieejams izmantošanai filtra nosacījumu noteikšanai Dublikātu meklēšanas funkcijā.<br><b>Atspējots</b>: Lauks neparādīsies Dublikātu sapludināšanas funkcijā un nebūs pieejams izmantošanai filtra nosacījumu noteikšanai Dublikātu meklēšanas funkcijā.'
 . '<br><b>Filtrā</b>: Lauks parādīsies Dublikātu sapludināšanas funkcijā un būs pieejams arī Dublikātu meklēšanas funkcijā.<br><b>Tikai filtrs</b>: Lauks neparādīsies Dublikātu sapludināšanas funkcijā, taču būs pieejams Dublikātu meklēšanas funkcijā.<br><b>Pēc noklusējuma izvēlēts filtrs</b>: Lauks tiks izmantots filtra nosacījuma noteikšanai pēc noklusējuma Dublikāta meklēšanas lapā, kā arī parādīsies Dublikātu sapludināšanas funkcijā.'
 ,
-'LBL_POPHELP_CALCULATED'=>"Izveidojiet formulu, lai noteiktu vērtību šajā laukā. <br>"
-   . "Darbplūsmas definīcijas, kas satur darbību un ir iestatītas, lai atjauninātu šo lauku, vairs neveiks šo darbību.<br>"
-   . "Lauki, kas izmanto formulas, netiks aprēķināti reālā laika režīmā "
-   . "Sugar Pašapkalpošanās portālā vai "
-   . "Mobilā rediģēšanas skatījuma izkārtojumos.",
+'LBL_POPHELP_CALCULATED'=>"Izveidojiet formulu vērtības noteikšanai šajā laukā.<br>"
+   . "Darbplūsmu definīcijas, kurās ir šī lauka atjaunināšanai iestatīta darbība, šo darbību vairs neizpildīs.<br>"
+   . "Lauki, kuros izmantotas formulas, vairs netiks aprēķināti reāllaikā "
+   . "Sugar pašapkalpošanās portāls vai "
+   . "Mobilās rediģēšanas izkārtojumi.",
 
-'LBL_POPHELP_DEPENDENT'=>"Izveidot formulu, lai noskaidrotu, vai šis lauks ir redzams izkārtojumos.<br/>"
-        . "Atkarīgie lauki ievēros atkarības formulu uz pārlūka bāzētajā mobilajā skatā, <br/>"
-        . "taču neievēros formulu vietējās lietotnēs, piemēram, Sugar Mobile tālruņiem iPhone. <br/>"
-        . "Tie neievēros formulu Sugar Pašapkalpošanās portālā.",
-'LBL_POPHELP_GLOBAL_SEARCH'=>'Izvēlieties izmantot šo lauku, lai meklētu ierakstus, izmantojot Globālo meklēšanu šajā modulī.',
+'LBL_POPHELP_DEPENDENT'=>"Izveidojiet formulu, lai noteiktu, vai šis lauks ir redzams izkārtojumos.<br/>"
+        . "Atkarīgiem laukiem uz pārlūku balstītā mobilajā skatā tiks piemērota atkarības formula, <br/>"
+        . "bet oriģinālajās lietotnēs, tādās kā Sugar Mobile for iPhone, šī formula netiks piemērota. <br/>"
+        . "Sugar pašapkalpošanās portālā tiem šī formula netiks piemērota.",
+'LBL_POPHELP_GLOBAL_SEARCH'=>'Atlasiet, lai izmantotu šo lauku, kad meklējat ierakstus, šajā modulī izmantojot globālo meklēšanu.',
 //Revert Module labels
 'LBL_RESET' => 'Atiestatīt',
 'LBL_RESET_MODULE' => 'Atiestatīt moduli',

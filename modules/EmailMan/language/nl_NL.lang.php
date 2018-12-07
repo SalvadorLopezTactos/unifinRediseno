@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'klik hier',
 	'TXT_REMOVE_ME'								=> 'Om jezelf af te melden van deze e-maillijst',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Verstuurd mededeling vanaf toegewezen gebruiker&#39;s e-mailadres',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Standaard nieuwe e-mailadressen afmelden',
 
 	'LBL_SECURITY_TITLE'						=> 'E-mail beveiligingsinstellingen',
 	'LBL_SECURITY_DESC'							=> 'Vink de tags aan die NIET toegestaan zouden moeten worden via de Inkomende E-mail of getoond worden in de e-mails module.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Sta gebruikers toe dit account te gebruiken voor uitgaande e-mail:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Als deze optie ingeschakeld is, kunnen alle gebruikers e-mails versturen met hetzelfde uitgaande e-mailaccount die gebruikt wordt voor het versturen van e-mail-mededelingen en meldingen. Is deze optie niet geselecteerd, dan kunnen gebruikers altijd nog uitgaande e-mail versturen via hun eigen ingestelde uitgaande e-mailaccount.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Wanneer ingeschakeld, zal de naam en e-mailadres van de gebruiker worden opgenomen in het Van-veld van de e-mail. Deze functie werkt mogelijk niet met SMTP-servers die niet toestaan dat e-mails verzonden worden vanuit een ander e-mailaccount dan de server account.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Als een nieuw e-mailadres wordt toegevoegd, dan is deze standaard afgemeld. Campagne e-mails kunnen niet worden afgeleverd aan afgemelde e-mailadressen. Het wijzigen van deze instelling heeft geen invloed op de bestaande e-mailadressen.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Nadzorna ploča za popis kontakata',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o kontaktima',
+
     'LNK_CONTACT_REPORTS' => 'Prikaži izvješća o kontaktu',
     'ERR_DELETE_RECORD' => 'Navedite broj zapisa da biste izbrisali kontakt.',
     'LBL_ACCOUNT_ID' => 'ID računa:',
@@ -100,7 +104,7 @@ $mod_strings = array (
     'LBL_LIST_TITLE' => 'Naslov',
     'LBL_MOBILE_PHONE' => 'Mobilni tel.:',
     'LBL_MODIFIED' => 'Izmijenio/la: ',
-    'LBL_MODULE_NAME' => 'Kontakti',
+    'LBL_MODULE_NAME' => 'kontakti',
     'LBL_MODULE_NAME_SINGULAR' => 'Kontakt',
     'LBL_MODULE_TITLE' => 'Kontakti: početno',
     'LBL_NAME' => 'Ime:',
@@ -145,7 +149,7 @@ $mod_strings = array (
     'LBL_SYNC_CONTACT' => 'Sinkroniziraj na klijent pošte:',
     'LBL_PROSPECT_LIST' => 'Popis pot. klijenata',
     'LBL_TEAM_ID' => 'ID tima:',
-    'LBL_TITLE' => 'Naslov:',
+    'LBL_TITLE' => 'Titula:',
     'LNK_CREATE' => 'Stvori osobu',
     'LNK_CONTACT_LIST' => 'Prikaži kontakte',
     'LNK_IMPORT_VCARD' => 'Stvori kontakta iz vCarda',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopiraj zamjensku adresu u primarnu adresu',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopiraj primarnu adresu u zamjensku adresu',
     'NTC_DELETE_CONFIRMATION' => 'Jeste li sigurni da želite izbrisati ovaj zapis?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Da biste stvorili priliku, morate imati račun.\n Stvorite novi račun ili odaberite postojeći.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Da biste stvorili priliku, morate imati račun.\\n Stvorite novi račun ili odaberite postojeći.',
     'NTC_REMOVE_CONFIRMATION' => 'Jeste li sigurni da želite ukloniti ovaj kontakt iz slučaja?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Jeste li sigurni da želite ukloniti ovaj zapis kao izravno izvješće?',
 
@@ -273,4 +277,6 @@ Da biste stvorili {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Rezultat pot. klij.',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Izvješća kontakta',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Privola dana za poslovne svrhe',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Posljednje ažuriranje privole',
 );

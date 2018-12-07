@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => '이 세율을 삭제하기 위해선 정확한 자료 고유번호를 입력하셔야합니다.',
   'NTC_STATUS' => '이 세율를 세율 내려보기 목록에서 제거하려면 상태를 정지로 설정합니다.',
   'NTC_LIST_ORDER' => '세율 내려보기 목록에 나타나도록 순서를 설정하니다.',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => '작동중',
-    'Inactive' => '중지',
-  ),
   'LBL_EDITLAYOUT' => '지면 배치 편집하기' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'생성자 ID',
   'LBL_MODIFIED_ID'=>'수정자 ID:',

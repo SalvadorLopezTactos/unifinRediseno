@@ -425,7 +425,7 @@ EOL;
         $ftsSearch->setForceAsyncIndex(
             SugarConfig::getInstance()->get('search_engine.force_async_index', false)
         );
-        Activity::enable();
+        Activity::restoreToPreviousState();
     }
 
     /**

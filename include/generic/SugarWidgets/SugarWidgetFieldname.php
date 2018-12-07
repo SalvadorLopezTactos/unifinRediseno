@@ -129,7 +129,7 @@ class SugarWidgetFieldName extends SugarWidgetFieldVarchar
 		            }
 		        }
 		    }
-		    $alias = $this->reporter->db->convert($name, "CONCAT");
+                    $alias = 'RTRIM(' . $this->reporter->db->convert($name, "CONCAT") . ')';
 		} elseif (! empty($layout_def['name']))	{
 			$alias = $layout_def['name'];
 		} else {

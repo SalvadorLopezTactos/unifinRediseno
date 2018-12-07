@@ -10,10 +10,11 @@
  */
 /*global jCore, $, HiddenField, TextareaField, TextField, ItemMatrixField,
  PROJECT_LOCKED_VARIABLES, SUGAR_URL, RestProxy, ComboboxField, adamUID,
- PROJECT_MODULE, project, MessagePanel, PROJECT_LOCKED_VARIABLES, Form, Window,
- Menu, AdamContainerDropBehavior, AdamProject, Tree, translate, sprintf, LabelField,
+ PROJECT_MODULE, project, MessagePanel, PROJECT_LOCKED_VARIABLES, PMSE.Form, PMSE.Window,
+ PMSE.Menu, AdamContainerDropBehavior, AdamProject, Tree, translate, sprintf, LabelField,
  PMSE_DESIGNER_FORM_TRANSLATIONS
 */
+var PMSE = PMSE || {};
 /**
  * @class AdamCanvas
  * Class to handle the designer canvas
@@ -438,7 +439,7 @@ AdamCanvas.prototype.initObject = function (options) {
     var defaultOptions = {
         projectUid : null
     };
-    this.modal = new Modal();
+    this.modal = new PMSE.Modal();
     $.extend(true, defaultOptions, options);
     this.setProjectUid(defaultOptions.projectUid)
         .setDiaUid(defaultOptions.dia_id);
@@ -804,7 +805,7 @@ AdamCanvas.prototype.getContextMenu = function () {
         ]
     });
 
-    f = new Form({
+    f = new PMSE.Form({
         items: [
             processName,
             processDescription,
@@ -864,7 +865,7 @@ AdamCanvas.prototype.getContextMenu = function () {
         language: PMSE_DESIGNER_FORM_TRANSLATIONS
     });
 
-    w = new Window({
+    w = new PMSE.Window({
         width: 690,
         height: 450,
         modal: true,
@@ -873,7 +874,7 @@ AdamCanvas.prototype.getContextMenu = function () {
     w.addPanel(f);
     /** END FORM MODULES **/
 
-    saveAction  = new Action({
+    saveAction  = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_SAVE'),
         cssStyle : 'adam-menu-icon-save',
         handler: function () {
@@ -883,7 +884,7 @@ AdamCanvas.prototype.getContextMenu = function () {
         disabled: !project.isDirty
     });
 
-    refreshAction = new Action({
+    refreshAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_REFRESH'),
         cssStyle : 'adam-menu-icon-refresh',
         handler: function () {
@@ -891,7 +892,7 @@ AdamCanvas.prototype.getContextMenu = function () {
         }
     });
 
-    zoom50Action = new Action({
+    zoom50Action = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_50'),
         cssStyle : '',
         handler: function () {
@@ -901,7 +902,7 @@ AdamCanvas.prototype.getContextMenu = function () {
         selected: (jCore.getActiveCanvas().getZoomFactor() === 0.5)
     });
 
-    zoom75Action = new Action({
+    zoom75Action = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_75'),
         cssStyle : '',
         handler: function () {
@@ -911,7 +912,7 @@ AdamCanvas.prototype.getContextMenu = function () {
         selected: (jCore.getActiveCanvas().getZoomFactor() === 0.75)
     });
 
-    zoom100Action = new Action({
+    zoom100Action = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_100'),
         cssStyle : '',
         handler: function () {
@@ -921,7 +922,7 @@ AdamCanvas.prototype.getContextMenu = function () {
         selected: (jCore.getActiveCanvas().getZoomFactor() === 1)
     });
 
-    zoom125Action = new Action({
+    zoom125Action = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_125'),
         cssStyle : '',
         handler: function () {
@@ -931,7 +932,7 @@ AdamCanvas.prototype.getContextMenu = function () {
         selected: (jCore.getActiveCanvas().getZoomFactor() === 1.25)
     });
 
-    zoom150Action = new Action({
+    zoom150Action = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_150'),
         cssStyle : '',
         handler: function () {
@@ -943,7 +944,7 @@ AdamCanvas.prototype.getContextMenu = function () {
 
     return {
         items: [
-            new Action({
+            new PMSE.Action({
                 text: translate('LBL_PMSE_CONTEXT_MENU_PROCESS_DEFINITION'),
                 cssStyle: 'adam-menu-icon-configure',
                 handler : function () {
@@ -985,7 +986,7 @@ AdamCanvas.prototype.onRightClickHandler = function (element, x, y) {
     factoryCMenu = element.getContextMenu();
     if (factoryCMenu.items) {
         factoryCMenu.canvas = this;
-        contextMenu = new Menu(factoryCMenu);
+        contextMenu = new PMSE.Menu(factoryCMenu);
         contextMenu.setParent(element);
         contextMenu.show(x, y);
     } else {

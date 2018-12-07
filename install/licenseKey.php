@@ -22,7 +22,6 @@ if( !isset($_SESSION['licenseKey_submitted']) || !$_SESSION['licenseKey_submitte
     $_SESSION['setup_license_key_users']        = 0;
     $_SESSION['setup_license_key_expire_date']  = "";
     $_SESSION['setup_license_key']              = "";
-    $_SESSION['setup_num_lic_oc']              = 0;
 }
 
 ////	errors
@@ -44,7 +43,6 @@ $javascript = "
 	requiredTxt = '".$mod_strings['ERR_LICENSE_MISSING']."'
 	addToValidate('setLicense', 'setup_license_key_users',       'int',  false,  '".$mod_strings["LBL_LICENSE_NUM_USERS"]."' );
 	addToValidate('setLicense', 'setup_license_key_expire_date', 'date', false,  '".$mod_strings["LBL_LICENSE_EXPIRY"]." (yyyy-mm-dd)' );
-	addToValidate('setLicense', 'setup_num_lic_oc',       'int',  false,  '".$mod_strings["LBL_LICENSE_OC_NUM"]."' );
 </script>";
 
 
@@ -97,11 +95,6 @@ $out =<<<EOQ
        <td><b>{$mod_strings['LBL_LICENSE_DOWNLOAD_KEY']}</td>
        <td align="left"><input type="text" name="setup_license_key"
             value="{$_SESSION['setup_license_key']}" size="20" /></td></tr>
-   <tr><td></td>
-       <td><b>{$mod_strings['LBL_LICENSE_OC']}<br/>
-       <i>&nbsp;&nbsp;{$mod_strings['LBL_LICENSE_OC_DIRECTIONS']}</i></td>
-       <td align="left"><input type="text" name="setup_num_lic_oc"
-			value="{$_SESSION['setup_num_lic_oc']}" size="6" /></td></tr>
 </table>
 </td>
 </tr>

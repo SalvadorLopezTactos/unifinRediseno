@@ -1792,10 +1792,12 @@ nv.models.legend = function() {
       collapsed = false,
       rowsCount = 3, //number of rows to display if showAll = false
       enabled = false,
-      strings = {close: 'Hide legend', type: 'Show legend'},
+      strings = {close: 'Hide legend', type: 'Show legend', noText: 'Undefined'},
       id = Math.floor(Math.random() * 10000), //Create semi-unique ID in case user doesn't select one
       getKey = function(d) {
-        return d.key.length > 0 || (!isNaN(parseFloat(d.key)) && isFinite(d.key)) ? d.key : 'undefined';
+        return (d.key && d.key.toString().length > 0) ?
+                d.key :
+                strings.noText;
       },
       color = function(d, i) { return nv.utils.defaultColor()(d, i); },
       classes = function(d, i) { return ''; },
@@ -3735,6 +3737,7 @@ nv.models.scatter = function() {
   return chart;
 };
 nv.models.bubbleChart = function() {
+  if (SUGAR.App) SUGAR.App.logger.warn('The nvd3 chart library is deprecated. Use sucrose chart library.');
 
   //============================================================
   // Public Variables with Default Settings
@@ -5445,6 +5448,7 @@ nv.models.funnel = function() {
 }
 
 nv.models.funnelChart = function() {
+  if (SUGAR.App) SUGAR.App.logger.warn('The nvd3 chart library is deprecated. Use sucrose chart library.');
 
   //============================================================
   // Public Variables with Default Settings
@@ -6478,6 +6482,7 @@ nv.models.gauge = function() {
   return chart;
 }
 nv.models.gaugeChart = function() {
+  if (SUGAR.App) SUGAR.App.logger.warn('The nvd3 chart library is deprecated. Use sucrose chart library.');
 
   //============================================================
   // Public Variables with Default Settings
@@ -7190,6 +7195,7 @@ nv.models.line = function() {
   return chart;
 };
 nv.models.lineChart = function() {
+  if (SUGAR.App) SUGAR.App.logger.warn('The nvd3 chart library is deprecated. Use sucrose chart library.');
 
   //============================================================
   // Public Variables with Default Settings
@@ -9506,6 +9512,7 @@ nv.models.multiBar = function() {
   return chart;
 };
 nv.models.multiBarChart = function() {
+  if (SUGAR.App) SUGAR.App.logger.warn('The nvd3 chart library is deprecated. Use sucrose chart library.');
 
   //============================================================
   // Public Variables with Default Settings
@@ -9527,8 +9534,8 @@ nv.models.multiBarChart = function() {
       y,
       state = {},
       strings = {
-        legend: {close: 'Hide legend', open: 'Show legend'},
-        controls: {close: 'Hide controls', open: 'Show controls'},
+        legend: {close: 'Hide legend', open: 'Show legend', noText: 'Undefined'},
+        controls: {close: 'Hide controls', open: 'Show controls', noText: 'Undefined'},
         noData: 'No Data Available.'
       },
       hideEmptyGroups = true,
@@ -9558,19 +9565,22 @@ nv.models.multiBarChart = function() {
         .color(['#444']),
       scroll = nv.models.scroll();
 
-  var tooltipContent = function(key, x, y, e, graph) {
+  var tooltipContent = function(key, x, y, e, graph, seriesKey) {
     return '<h3>' + key + '</h3>' +
+           (key !== seriesKey ? '<p>Group: ' + seriesKey + '</p>' : '') +
            '<p>' + y + ' on ' + x + '</p>';
   };
 
-  var showTooltip = function(eo, offsetElement, groupTotals) {
-    var key = eo.series.key,
-        x = (groupTotals) ?
+  var showTooltip = function(eo, offsetElement, groupTotals, groupLabels) {
+    var groupKey = Array.isArray(groupLabels) && groupLabels.length ?
+              groupLabels[eo.pointIndex] : eo.series.key;
+    var seriesKey = eo.series.key;
+    var x = (groupTotals) ?
               (eo.point.y * 100 / groupTotals[eo.pointIndex].t).toFixed(1) :
-              xAxis.tickFormat()(multibar.x()(eo.point, eo.pointIndex)),
-        y = multibar.y()(eo.point, eo.pointIndex),
-        content = tooltipContent(key, x, y, eo, chart),
-        gravity = eo.value < 0 ?
+              xAxis.tickFormat()(multibar.x()(eo.point, eo.pointIndex));
+    var y = multibar.y()(eo.point, eo.pointIndex);
+    var content = tooltipContent(groupKey, x, y, eo, chart, seriesKey);
+    var gravity = eo.value < 0 ?
           vertical ? 'n' : 'e' :
           vertical ? 's' : 'w';
 
@@ -10225,7 +10235,7 @@ nv.models.multiBarChart = function() {
 
       dispatch.on('tooltipShow', function(eo) {
         if (tooltips) {
-          showTooltip(eo, that.parentNode, groupTotals);
+          showTooltip(eo, that.parentNode, groupTotals, groupLabels);
         }
       });
 
@@ -10515,6 +10525,7 @@ nv.models.multiBarChart = function() {
   return chart;
 };
 nv.models.paretoChart = function() {
+    if (SUGAR.App) SUGAR.App.logger.warn('The nvd3 chart library is deprecated. Use sucrose chart library.');
     //'use strict';
     //============================================================
     // Public Variables with Default Settings
@@ -12394,6 +12405,7 @@ nv.models.pie = function() {
   return chart;
 }
 nv.models.pieChart = function() {
+  if (SUGAR.App) SUGAR.App.logger.warn('The nvd3 chart library is deprecated. Use sucrose chart library.');
 
   //============================================================
   // Public Variables with Default Settings
@@ -13754,6 +13766,7 @@ nv.models.stackedArea = function () {
   return chart;
 };
 nv.models.stackedAreaChart = function() {
+  if (SUGAR.App) SUGAR.App.logger.warn('The nvd3 chart library is deprecated. Use sucrose chart library.');
 
   //============================================================
   // Public Variables with Default Settings
@@ -14826,6 +14839,7 @@ nv.models.treemap = function() {
 };
 
 nv.models.treemapChart = function() {
+  if (SUGAR.App) SUGAR.App.logger.warn('The nvd3 chart library is deprecated. Use sucrose chart library.');
 
   //============================================================
   // Public Variables with Default Settings
@@ -15236,6 +15250,7 @@ nv.models.treemapChart = function() {
 };
 
 nv.models.tree = function() {
+  if (SUGAR.App) SUGAR.App.logger.warn('`The nvd3 chart library is deprecated. Use sucrose chart library.');
 
   // issues: 1. zoom slider doesn't zoom on chart center
   // orientation

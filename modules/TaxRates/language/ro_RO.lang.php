@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Trebuie să specifici un număr de înregistrare pentru a șterge rata taxei.',
   'NTC_STATUS' => 'Setare Starea Inactiv pentru a elimina acest ritm al taxelor din lista abandonata',
   'NTC_LIST_ORDER' => 'Setaţi ordinea în care acest tip vor fi afişate în listele de ritm al taxelor abandonate',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Activ',
-    'Inactive' => 'Inactiv',
-  ),
   'LBL_EDITLAYOUT' => 'Editeaza Plan General' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Creat de Id',
   'LBL_MODIFIED_ID'=>'Modificat după Id',

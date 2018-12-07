@@ -37,15 +37,10 @@ class SugarFieldDate extends SugarFieldDatetime {
     }
 
     /**
-     * @param $value
-     * @param $fieldName
-     * @param SugarBean $bean
-     * @param SugarQuery $q
-     * @param SugarQuery_Builder_Where $where
-     * @param $op
-     * @return bool
+     * {@inheritdoc}
      */
-    public function fixForFilter(&$value, $fieldName, SugarBean $bean, SugarQuery $q, SugarQuery_Builder_Where $where, $op) {
+    public function fixForFilter(&$value, $columnName, SugarBean $bean, SugarQuery $q, SugarQuery_Builder_Where $where, $op)
+    {
         return true;
     }
 

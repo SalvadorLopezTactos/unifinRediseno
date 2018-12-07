@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Piezīmju saraksta instrumentu panelis',
+
     'ERR_DELETE_RECORD' => 'Jums ir jānorāda ieraksta numurs, lai dzēstu uzņēmumu.',
     'LBL_ACCOUNT_ID' => 'Uzņēmuma ID:',
     'LBL_CASE_ID' => 'Pieteikuma ID:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Piezīme',
     'LBL_EMAIL_ADDRESS' => 'E-pasta adrese:',
     'LBL_EMAIL_ATTACHMENT' => 'E-pasta pielikums',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'E-pasta pielikums, kas paredzēts',
     'LBL_FILE_MIME_TYPE' => 'Mime veids',
+    'LBL_FILE_EXTENSION' => 'Faila paplašinājums',
+    'LBL_FILE_SOURCE' => 'Faila avots',
+    'LBL_FILE_SIZE' => 'Faila izmērs',
     'LBL_FILE_URL' => 'Faila URL',
     'LBL_FILENAME' => 'Pielikums:',
     'LBL_LEAD_ID' => 'Interesenta ID:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Darījuma ID:',
     'LBL_PARENT_ID' => 'Vecāka ID:',
     'LBL_PARENT_TYPE' => 'Vecāka veids',
+    'LBL_EMAIL_TYPE' => 'E-pasta tips',
+    'LBL_EMAIL_ID' => 'E-pasta ID',
     'LBL_PHONE' => 'Tālrunis:',
     'LBL_PORTAL_FLAG' => 'Parādīt portālā?',
     'LBL_EMBED_FLAG' => 'Iekļaut e-pastā?',

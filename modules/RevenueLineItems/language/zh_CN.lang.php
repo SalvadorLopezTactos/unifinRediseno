@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => '营收单项列表仪表板',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => '营收单项记录仪表板',
+
     'LBL_CAMPAIGN_PRODUCT' => '市场活动产品',
     'LBL_MODULE_NAME' => '营收单项',
     'LBL_MODULE_NAME_SINGULAR' => '营收单项',

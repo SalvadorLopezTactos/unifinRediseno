@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Pulpit list docelowych',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Pulpit rekordów docelowych',
+
   'LBL_MODULE_NAME' => 'Odbiorcy',
   'LBL_MODULE_NAME_SINGULAR' => 'Odbiorca',
   'LBL_MODULE_ID'   => 'Odbiorcy',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Forma grzecznościowa',
   'LBL_SAVE_PROSPECT' => 'Zapisz odbiorcę',
   'LBL_CREATED_OPPORTUNITY' =>'Utworzono nową szansę',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Utworzenie szansy wymaga kontrahenta.\n Utwórz nowego kontrahenta lub skorzystaj z już istniejącego.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Utworzenie szansy wymaga kontrahenta.\\n Utwórz nowego kontrahenta lub skorzystaj z już istniejącego.',
   'LNK_SELECT_ACCOUNT' => "Wybierz kontrahenta",
   'LNK_NEW_PROSPECT' => 'Utwórz odbiorcę',
   'LNK_PROSPECT_LIST' => 'Wyświetl odbiorców',
@@ -195,4 +199,6 @@ $mod_strings = array (
 2. Kliknij Zapisz, aby zapisać nowy rekord i powrócić do poprzedniej strony.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Raporty Odbiorców',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Wyrażono zgodę na cele biznesowe dla',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Ostatnia aktualizacja zgody',
 );

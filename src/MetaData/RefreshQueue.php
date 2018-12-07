@@ -63,10 +63,38 @@ class RefreshQueue
 
     /**
      * Clears queue
+     *
+     *
+     * @param array $platforms list of platforms to clear all tasks for.
+     * Clears for all if empty or ommited.
      */
-    public function clear()
+    public function clear(array $platforms = array())
     {
-        $this->tasks = array();
+        if (empty($platforms)) {
+            $this->tasks = array();
+        } else {
+            foreach ($this->tasks as $category => $tasks) {
+                $this->tasks[$category] = array_filter($tasks, function (Task $task) use ($platforms) {
+                    $params = $task->getParams();
+                    if (!empty($params['platforms'])) {
+                        //if all the task platforms are in the clear, drop the task
+                        if (sizeof(array_intersect($params['platforms'], $platforms)) == sizeof($params['platforms'])) {
+                            return false;
+                        }
+                        //Otherwise keep the task but update the list of platforms if required.
+                        $task->mergeParams(['platforms' => array_diff($params['platforms'], $platforms)]);
+
+                        return true;
+                    }
+                    //If the task only has one platform and it isn't being cleared, keep it.
+                    if (!empty($params['platform']) && !in_array($params['platform'], $platforms)) {
+                        return true;
+                    }
+
+                    return false;
+                });
+            }
+        }
     }
 
     /**

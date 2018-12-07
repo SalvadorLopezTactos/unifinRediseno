@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Information utilisateur non trouvée',
     'ERR_USER_NAME_EXISTS'              => 'Le nom d&#39;utilisateur {0} existe déjà. Les noms d&#39;utilisateur en double ne sont pas autorisés. Changez le nom d&#39;utilisateur afin qu&#39;il soit unique.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Compte utilisateur bloqué : cet utilisateur ne peut pas se connecter.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Un utilisateur avec auth externe uniquement n&#39;est pas autorisé à se connecter en utilisant des identifiants Sugar',
 
 	'LBL_PASSWORD_SENT'                => 'Le mot de passe a été mis à jour',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Impossible d&#39;envoyer le mot de passe',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Adresse email du destinataire',
 	'ERR_SERVER_STATUS'					=> 'Statut de votre serveur',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Le système n&#39;est pas configuré pour envoyer des emails aux utilisateurs. Veuillez valider votre configuration dans la section "Configuration Email" du paneau administration. <a href="index.php?module=EmailMan&action=config">Email Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'L&#39;utilisateur ne peut être créé que dans la <a href="{0}" target="_blank">console de nuage</a> pour le mode IDM.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'L&#39;adresse email principale ne peut être mise à jour que dans la <a href="{0}" target="_blank">console de nuage</a> pour le mode IDM.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Adresse Email',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Confirmation du mot de passe',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Vous avez changé le type d&#39;utilisateur de Administrateur vers Normal. Après la sauvegarde de cette modification, cet utilisateur n&#39;aura plus les droits pour administrer votre application.\n\nCliquez sur "OK" pour valider.\nCliquer sur "Annuler" pour revenir en arrière.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Vous avez changé le type d&#39;utilisateur de Administrateur vers Normal. Après la sauvegarde de cette modification, cet utilisateur n&#39;aura plus les droits pour administrer votre application.\\n\\nCliquez sur "OK" pour valider.\\nCliquer sur "Annuler" pour revenir en arrière.',
 	'LBL_COUNTRY'						=> 'Pays',
 	'LBL_CURRENCY_TEXT'					=> 'Sélectionnez la devise qui sera affichée par défaut lorsque vous allez créer de nouveaux enregistrements. Cette devise sera également utilisée pour afficher les montants des listes d&#39;Affaires.',
 	'LBL_CURRENCY'						=> 'Devise par défaut',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'mn',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'sec',
     'LBL_LOGIN_ADMIN_CALL'              => 'Veuillez contacter l&#39;administrateur de votre application.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Pour l&#39;authentification avec OpenID Connect (OIDC) en mode IDM, veuillez installer l&#39;extension de GMP pour PHP.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Vous avez été déconnecté. Pour vous identifier veuillez cliquer',
     'LBL_LOGGED_OUT_2' => 'ici',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Rapports Utilisateurs',
     'LBL_CONTACTS_SYNC' => 'Contacts',
     'LBL_DETAIL' => 'Profil utilisateur',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Si certains champs ne sont pas modifiables, veuillez vous connecter à votre console de nuage pour gérer ces champs',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Si vous souhaitez modifier certains champs qui ne sont pas modifiables ' .
+        'veuillez contacter l&#39;administrateur pour le notifier de ces modifications',
 ); // END STRINGS DEFS
 
 ?>

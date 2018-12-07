@@ -11,6 +11,10 @@
  */
 
 
+/**
+ * This chart engine is now deprecated. Use the sucrose chart engine instead.
+ * @deprecated This file will removed in a future release.
+ */
 class nvd3 extends JsChart
 {
 
@@ -43,6 +47,8 @@ class nvd3 extends JsChart
 
     function display($name, $xmlFile, $width = '320', $height = '480', $resize = false)
     {
+        $GLOBALS['log']->deprecated('The nvd3 chart engine is deprecated.');
+
         parent::display($name, $xmlFile, $width, $height, $resize);
 
         return $this->ss->fetch('include/SugarCharts/nvd3/tpls/chart.tpl');

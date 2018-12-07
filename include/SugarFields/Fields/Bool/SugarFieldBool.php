@@ -58,6 +58,7 @@ class SugarFieldBool extends SugarFieldBase {
 
     public function getEmailTemplateValue($inputField, $vardef, $context = null){
         global $app_list_strings;
+        $inputField = $this->normalizeBoolean($inputField);
         // This does not return a smarty section, instead it returns a direct value
         if ( $inputField == 'bool_true' || $inputField === true ) { // Note: true must be absolute true
             return $app_list_strings['checkbox_dom']['1'];

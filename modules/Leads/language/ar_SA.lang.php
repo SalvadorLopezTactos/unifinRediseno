@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'لوحة معلومات قائمة العملاء المتوقعين',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'لوحة معلومات سجل العملاء المتوقعين',
+
     'ERR_DELETE_RECORD' => 'يجب أن يتم تحديد رقم السجل لحذف العميل المتوقع.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'وصف الحساب',
     'LBL_ACCOUNT_ID'=>'معرّف الحساب',
@@ -59,7 +64,7 @@ $mod_strings = array (
     'LBL_CONVERT_SWITCH_TO_CREATE' => 'إنشاء جديد',
     'LBL_CONVERT_SWITCH_TO_SEARCH' => 'بحث',
     'LBL_CONVERT_DUPLICATES_FOUND' => '{{duplicateCount}} تم العثور على تكرارات',
-    'LBL_CONVERT_CREATE_NEW' => 'جديد {{moduleName}}',
+    'LBL_CONVERT_CREATE_NEW' => 'فرصة {{moduleName}}',
     'LBL_CONVERT_SELECT_MODULE' => 'حدد {{moduleName}}',
     'LBL_CONVERT_SELECTED_MODULE' => 'تحديد {{moduleName}}',
     'LBL_CONVERT_CREATE_MODULE' => 'إنشاء {{moduleName}}',
@@ -106,7 +111,7 @@ $mod_strings = array (
     'LBL_IMPORT_VCARD' => 'استيراد vCard',
     'LBL_IMPORT_VCARD_SUCCESS' => 'تم إنشاء العميل المتوقع من بطاقة vCard',
     'LBL_VCARD' => 'vCard',
-    'LBL_IMPORT_VCARDTEXT' => 'إنشاء عميل محتمل بشكل تلقائي من خلال استيراد بطاقة vCard من نظام الملفات الخاص بك.',
+    'LBL_IMPORT_VCARDTEXT' => 'إنشاء عميل متوقع جديد بشكل تلقائي من خلال استيراد بطاقة vCard من نظام الملفات الخاص بك.',
     'LBL_INVALID_EMAIL'=>'بريد إلكتروني غير صحيح:',
     'LBL_INVITEE' => 'التقارير المباشرة',
     'LBL_LAST_NAME' => 'الاسم الأخير:',
@@ -131,7 +136,7 @@ $mod_strings = array (
     'LBL_LIST_STATUS' => 'الحالة',
     'LBL_LIST_TITLE' => 'العنوان',
     'LBL_MOBILE_PHONE' => 'الهاتف المحمول:',
-    'LBL_MODULE_NAME' => 'العملاء المتوقعون',
+    'LBL_MODULE_NAME' => 'المتوقعون',
     'LBL_MODULE_NAME_SINGULAR' => 'العميل المتوقع',
     'LBL_MODULE_TITLE' => 'العملاء المتوقعون: الصفحة الرئيسية',
     'LBL_NAME' => 'الاسم:',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'مبلغ الفرصة:',
     'LBL_OPPORTUNITY_ID'=>'معرّف الفرصة',
     'LBL_OPPORTUNITY_NAME' => 'اسم الفرصة:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'بريد إلكتروني آخر:',
     'LBL_OTHER_PHONE' => 'رقم هاتف آخر:',
     'LBL_PHONE' => 'الهاتف:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'نسخ العنوان البديل إلى العنوان الرئيسي',
     'NTC_COPY_PRIMARY_ADDRESS' => 'نسخ العنوان الرئيسي إلى العنوان البديل',
     'NTC_DELETE_CONFIRMATION' => 'هل تريد بالتأكيد حذف هذا السجل؟',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'يتطلب إنشاء فرصة وجود حساب.\n يرجى إنشاء حساب جديد أو تحديد حساب موجود.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'يتطلب إنشاء فرصة وجود حساب.\\n يرجى إنشاء حساب جديد أو تحديد حساب موجود.',
     'NTC_REMOVE_CONFIRMATION' => 'هل أنت متأكد من رغبتك في إزالة هذا العميل المتوقع من هذه الحالة؟',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'هل تريد بالتأكيد إزالة هذا السجل كتقرير مباشر؟',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'سجل الحملة',
@@ -314,4 +320,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'عدد نقاط العميل المتوقع',
 
     'LBL_FILTER_LEADS_REPORTS' => 'تقارير العميل المتوقع',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'الأغراض التجارية التي تمت الموافقة عليها',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'آخر تحديث للموافقة',
 );

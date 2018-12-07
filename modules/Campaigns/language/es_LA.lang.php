@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Por favor, seleccione de entre los campos disponibles',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Descripción del Formulario:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Al enviar este formulario se creará un cliente potencial vinculado con la campaña',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Si marca esta casilla, acepta recibir correos electrónicos de marketing en el futuro',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Por favor, descargue su formulario Web a Cliente potencial',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Formulario Web A Cliente Potencial',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Por favor, indique todos los campos requeridos',

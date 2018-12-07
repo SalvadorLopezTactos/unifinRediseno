@@ -90,6 +90,8 @@ class SessionStorage extends TrackableArray implements SessionStorageInterface
         }
         session_destroy();
         $_SESSION = $this;
+
+        $this->getIterator()->rewind();
         foreach($this as $key => $val) {
             $this->offsetUnset($key);
         }

@@ -513,17 +513,13 @@ echo $out2;
 if ($db->supports("ssl")) {
     echo $outSSL;
 }
-if(!isset($_SESSION['oc_install']) || $_SESSION['oc_install'] == false){
-    echo $out3;
 
-    echo $outFTS;
-}
+echo $out3;
+
+echo $outFTS;
+
 echo $out4;
 
-if(!isset($_SESSION['oc_install']) || $_SESSION['oc_install'] == false){
-    echo $out_dd;
+echo $out_dd;
 
-}
 echo $out5;
-
-?>

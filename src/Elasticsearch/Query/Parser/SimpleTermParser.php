@@ -19,6 +19,9 @@ namespace Sugarcrm\Sugarcrm\Elasticsearch\Query\Parser;
  */
 class SimpleTermParser implements ParserInterface
 {
+    // tokenizer is using 1, 15 ngram, make sure the length of term is less than 15
+    const MAX_TERM_SIZE = 15;
+
     protected $defaultOperator;
     
     /**
@@ -89,7 +92,37 @@ class SimpleTermParser implements ParserInterface
             ' ' . TermParserHelper::OPERATOR_OR . ' ',
         );
 
-        return trim(preg_replace($patterns, $replacedBy, $temp));
+        $processed = trim(preg_replace($patterns, $replacedBy, $temp));
+
+        // need to split large term to small size (<= 15)
+        $splitted = explode(' ', $processed);
+        $searchString = '';
+        foreach ($splitted as $item) {
+            $item = trim($item);
+            if (!empty($item)) {
+                if (strlen($item) <= self::MAX_TERM_SIZE) {
+                    $searchString .= $item . ' ';
+                } else {
+                    $splittedItems = str_split($item, self::MAX_TERM_SIZE);
+                    $useAndOp = false;
+                    foreach ($splittedItems as $sItem) {
+                        if (!$useAndOp) {
+                            // turn on 'AND' operator
+                            $useAndOp = true;
+                            $searchString .= '(';
+                        } else {
+                            $searchString .= ' ' . TermParserHelper::OPERATOR_AND . ' ';
+                        }
+                        $searchString .= $sItem;
+                    }
+                    if ($useAndOp) {
+                        $searchString .= ') ';
+                    }
+                }
+            }
+        }
+        
+        return trim($searchString);
     }
 
     /**
@@ -167,7 +200,7 @@ class SimpleTermParser implements ParserInterface
                             }
                         }
                     } else {
-                        // strting 'OR', end of 'AND' OR 'NOT' operator sequence
+                        // starting 'OR', end of 'AND' OR 'NOT' operators
                         if (TermParserHelper::isOrOperator($nextOperator)) {
                             // a AND b OR c, => (a AND b) OR c
                             if (TermParserHelper::isAndOperator($currentOperator)) {

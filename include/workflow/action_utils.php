@@ -15,9 +15,83 @@
 include_once('include/workflow/workflow_utils.php');
 include_once('include/workflow/field_utils.php');
 include_once('include/utils/expression_utils.php');
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\Security\Context;
+use Sugarcrm\Sugarcrm\Security\Subject\Workflow;
 
-function process_workflow_actions($focus, $action_array){
+/**
+ * Adds the workflow id to the action array if it is not already there
+ * @param array $array The action array
+ */
+function addWorkflowIdToActionArray(array $array)
+{
+    // Internal cache to prevent excessive DB hits
+    static $workflowIdMap = [];
 
+    // If we already have a workflow id we have nothing to do
+    if (isset($array['workflow_id'])) {
+        return $array;
+    }
+
+    // If there is no action id then simply send back an empty value
+    if (!isset($array['action_id'])) {
+        $array['workflow_id'] = '';
+        return $array;
+    }
+
+    // If we have a cached value already, just use that
+    if (isset($workflowIdMap[$array['action_id']])) {
+        $array['workflow_id'] = $workflowIdMap[$array['action_id']];
+        return $array;
+    }
+
+    // Query to get the workflow id from the action
+    $sql = "SELECT
+                w.id
+            FROM
+                workflow w
+            INNER JOIN
+                workflow_actionshells s ON s.parent_id = w.id
+            INNER JOIN
+                workflow_actions a ON a.parent_id = s.id
+            WHERE
+                a.parent_id = :action_id
+            LIMIT 1";
+
+
+    // Execute the query and get our results
+    $stmt = DBManagerFactory::getInstance()
+            ->getConnection()
+            ->executeQuery($sql, [':action_id' => $array['action_id']]);
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Get the id from the result
+    $id = isset($data[0]['id']) ? $data[0]['id'] : '';
+
+    // Cache it and write it to our array, then send it back
+    $array['workflow_id'] = $workflowIdMap[$array['action_id']] = $id;
+
+    return $array;
+}
+
+function process_workflow_actions(SugarBean $focus, array $action_array)
+{
+    // Ensure we have our workflow id in the action data
+    $action_array = addWorkflowIdToActionArray($action_array);
+
+    // Get the context object to set the Subject into
+    $context = Container::getInstance()->get(Context::class);
+
+    // Create the Workflow subject
+    $subject = new Workflow(
+        BeanFactory::getBean(
+            'WorkFlow',
+            empty($action_array['workflow_id']) ? null : $action_array['workflow_id']
+        )
+    );
+
+    // Activate the subject
+    $context->activateSubject($subject);
 
 	if($action_array['action_type']=="update"){
 		process_action_update($focus, $action_array);
@@ -32,7 +106,10 @@ function process_workflow_actions($focus, $action_array){
 		process_action_new_rel($focus, $action_array);
 	}
 
+    // Deactivate the subject for the current context
+    $context->deactivateSubject($subject);
 
+    $focus->commitAuditedStateChanges($subject);
 //end function process_workflow_actions
 }
 

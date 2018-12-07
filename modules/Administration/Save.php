@@ -70,7 +70,7 @@ apiLoadSystemStatus(true);
 
 // Lock down access to the application for sidecar modules until
 // we have a license validation available.
-if (!authenticateDownloadKey() && !ocLicense()) {
+if (!authenticateDownloadKey()) {
     $_SESSION['HomeOnly'] = true;
 }
 

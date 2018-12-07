@@ -12,6 +12,8 @@
 
 require_once 'modules/ModuleBuilder/parsers/constants.php';
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 class ParserFactory
 {
     private static $emptyModEntries = array(
@@ -263,10 +265,11 @@ class ParserFactory
             if (!empty($def['view']) && $def['view'] == strtolower($view) && !empty($def['parser'])) {
                 $pName = $def['parser'];
                 $path = "modules/ModuleBuilder/parsers/views/{$pName}.php";
-                if (file_exists("custom/$path"))
-                    require_once("custom/$path");
-                else if (file_exists($path))
-                    require_once($path);
+                if (file_exists("custom/$path")) {
+                    require_once FileLoader::validateFilePath("custom/$path");
+                } elseif (file_exists($path)) {
+                    require_once FileLoader::validateFilePath($path);
+                }
                 if (class_exists ( $pName ))
                     return new $pName($view, $moduleName, $packageName);
                 //If it wasn't defined directly, check for a generic parser name for the view

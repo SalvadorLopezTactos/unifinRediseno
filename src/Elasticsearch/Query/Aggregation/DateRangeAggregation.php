@@ -13,6 +13,7 @@
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Query\Aggregation;
 
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
+use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Property\MultiFieldProperty;
 
 /**
  *
@@ -76,18 +77,13 @@ class DateRangeAggregation extends RangeAggregation
      */
     public function buildMapping(Mapping $mapping, $field, array $defs)
     {
-        // TODO: abstract out date handling from MultiFieldHandler
-        // We rely for now on MultiFieldHandler to set the mappings for us
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function build($id, array $filters)
-    {
-        // awaiting mapping abstraction from MultiField
-        $this->setOption('field', $id . '.gs_datetime');
-        return parent::build($id, $filters);
+        $property = new MultiFieldProperty();
+        $property->setType('date');
+        $property->setMapping([
+            'format' => 'YYYY-MM-dd HH:mm:ss',
+            'store' => false,
+        ]);
+        $mapping->addCommonField($field, 'agg', $property);
     }
 
     /**

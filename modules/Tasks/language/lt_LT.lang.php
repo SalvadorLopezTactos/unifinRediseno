@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Užduočių sąrašo ataskaitų sritis',
+
   'LBL_MODULE_NAME' => 'Užduotys',
   'LBL_MODULE_NAME_SINGULAR' => 'Užduotis',
   'LBL_TASK' => 'Užduotys:',

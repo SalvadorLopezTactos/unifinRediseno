@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+새로운 GoToMeeting 어플리케이션에 등록하여 LogMeIn에서 Consumer Key를 얻습니다.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+인스턴스를 등록하는 단계:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>LogMeIn 개발자 센터 계정 로그인: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>내 앱(My Apps) 클릭</li>
+    <li>새 앱 추가(Add a new App) 클릭</li>
+    <li>앱 추가(Add App) 양식의 모든 사항 채우기:</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>앱 이름</li>
+            <li>설명</li>
+            <li>제품 API: GoToMeeting 선택</li>
+            <li>어플리케이션 URL: 사례 URL 입력</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>앱 작성(Create App) 버튼 클릭</li>
+    <li>앱 목록에서 내 앱 선택</li>
+    <li>키 탭 선택</li>
+    <li>Consumer Key 값을 얻은 뒤 아래 입력</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => '소비자키',
 );

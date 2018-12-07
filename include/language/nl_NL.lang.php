@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'OAuth consumentsleutels',
     'OAuthTokens' => 'OAuth tokens',
     'Filters' => 'Filters',
-    'UserSignatures' => 'Gebruikers handtekeningen',
+    'UserSignatures' => 'E-mailhandtekeningen',
     'Shippers' => 'Vervoerders',
     'Styleguide' => 'Styleguide',
     'Feedbacks' => 'Feedback',
     'Tags' => 'Tags',
     'Categories' => 'Categorieën',
     'Dashboards' => 'Dashboards',
+    'OutboundEmail' => 'E-mailinstellingen',
+    'EmailParticipants' => 'E-maildeelnemers',
+    'DataPrivacy' => 'Gegevensprivacy',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'Fo',
         'Tasks' => 'Ta',
-        'Dashboards' => 'Db',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => 'DP',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => 'Producttype',
     'Shippers' => 'Vervoerder',
     'Subscriptions' => 'Abonnement',
-    'UserSignatures' => 'Gebruikers handtekening',
+    'UserSignatures' => 'E-mailhandtekening',
     'Feedbacks' => 'Feedback',
     'Tags' => 'Tag',
     'Categories' => 'Categorie',
+    'OutboundEmail' => 'E-mailinstelling',
+    'EmailParticipants' => 'E-maildeelnemer',
+    'DataPrivacy' => 'Gegevensprivacy',
   ),
 
 /*
@@ -329,6 +336,11 @@ $app_list_strings = array (
     'Existing Business' => 'Huidig bedrijf',
     'New Business' => 'Nieuw bedrijf',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => 'Actief',
+            'Inactive' => 'Inactief',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => 'Opbrengst',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => 'Beïnvloeder',
     'Other' => 'Anders',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => 'Actief',
+            'Inactive' => 'Inactief',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => 'Actief',
+            'Inactive' => 'Inactief',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => 'Primaire contactpersoon',
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => 'Taak',
       'KBContents' => 'Knowledge Base',
+      'Notes' => 'Opmerking',
   ),
 
   'record_type_display_notes' =>
@@ -659,6 +683,14 @@ $app_list_strings = array (
     'Calls' => 'Telefoongesprek',
       'KBContents' => 'Knowledge Base',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => 'Account',
+        'Contacts' => 'Persoon',
+        'Employees' => 'Medewerker',
+        'Leads' => 'Lead',
+        'Prospects' => 'Target',
+        'Users' => 'Gebruiker',
+    ),
 
   'parent_type_display' =>
   array (
@@ -678,7 +710,7 @@ $app_list_strings = array (
 
     'Prospects' => 'Target',
       'KBContents' => 'Knowledge Base',
-
+      'Notes' => 'Opmerking',
   ),
 
   'product_status_default_key' => 'Ship',
@@ -832,7 +864,6 @@ $app_list_strings = array (
     'Product' => 'Product',
     'User' => 'Gebruiker',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => 'E-mailadres',
     'Twitter' => 'Twitter'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => 'Verzoek om beleid privacygegevens',
+        'Send Personal Information being processed' => 'Persoonsgegevens worden verwerkt',
+        'Rectify Information' => 'Informatie corrigeren',
+        'Request to Erase Information' => 'Verzoek om informatie te wissen',
+        'Export Information' => 'Informatie exporteren',
+        'Restrict Processing' => 'Verwerken beperken',
+        'Object to Processing' => 'Niet akkoord met verwerking',
+        'Consent to Process' => 'Akkoord met verwerking',
+        'Withdraw Consent' => 'Toestemming intrekken',
+        'Other' => 'Anders',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => 'Zakelijke communicatie',
+        'Marketing Communications by company' => 'Marketingcommunicatie door bedrijf',
+        'Marketing Communications by partners' => 'Marketingcommunicatie door partners',
+    ),
+    'dataprivacy_status_default_key' => 'Maximaliseren',
+    'dataprivacy_status_dom' => array(
+        'Open' => 'Maximaliseren',
+        'Closed' => 'Afgerond',
+        'Rejected' => 'Afgewezen',
+    ),
+    'dataprivacy_priority_default_key' => 'Laag',
+    'dataprivacy_priority_dom' => array(
+        'Low' => 'Laag',
+        'Medium' => 'Medium',
+        'High' => 'Hoog',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => 'Studio',
     'Upgrade' => 'Upgrade',
     'Users' => 'Gebruikers',
+    'OutboundEmail' => 'E-mailinstellingen',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => 'Mislsukt',
                                         'completed'     => 'Afgerond',
                                         'no curl'       => 'Niet Uitgevoerd: Geen cURL beschikbaar',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => 'Concept',
+        'Archived' => 'Gearchiveerd',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => 'Suppression List - Per Id',
     'test' => 'Test [ALT+T]',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => 'Actie',
+             'Inactive' => 'Inactief',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3 Weken',
         '31' => '1 Maand',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => 'Actief',
-    'Inactive' => 'Inactief',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => 'Hoog',
         'medium'    => 'Middel',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => 'Geen',
         '1' => 'TLS',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'Google',
+        'exchange' => 'Exchange',
+        'outlook' => 'Outlook',
+        'other' => 'Anders',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2032,6 +2099,11 @@ $app_list_strings = array (
         'ACTIVE' => 'Ingeschakeld',
         'INACTIVE' => 'Uitgeschakeld',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => 'Record',
+        'records' => 'Lijst',
+        'activities' => 'Activity Stream',
+    ),
 );
 
 $app_strings = array (
@@ -2043,11 +2115,11 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Volg koppeling',
   'LBL_TOGGLE_VISIBILITY' => 'Toon zichtbaarheid', // Record view header panel element
   'LBL_ACTIVITIES' => 'Activity Stream',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. Alle rechten voorbehouden.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. Alle rechten voorbehouden.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar en de 3-D kubus zijn geregistreerde handelsmerken van SugarCRM Inc. '.
         'Alle andere bedrijfs- en productnamen die in dit product verschijnen, kunnen handelsmerken zijn van de'.
         'SugarCRM ®, Sugar Enterprise™ and Sugar™ zijn handelsmerken van SugarCRM Inc.',
-    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ and Sugar™ zijn handelsmerken van SugarCRM Inc.',
+    'LBL_TRADEMARK2' => 'SugarCRM®, Sugar Enterprise™ en Sugar™ zijn handelsmerken van SugarCRM Inc.',
     'LBL_SEND_INVITE' => 'Stuur uitnodiging',
   'LBL_INVITEES' => 'Genodigden',
     'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Gast ontvangt uw uitnodiging niet',
@@ -2116,6 +2188,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => 'SMTP over SSL of TLS inschakelen',
     'LBL_NO_ACTION'                         => 'Deze actie is onbekend.',
     'LBL_NO_DATA'                           => 'Geen gegevens',
+    'LBL_NOT_APPLICABLE'                    => 'Niet van toepassing',
     'LBL_ROUTING_ADD_RULE'                  => 'Voeg regel toe',
     'LBL_ROUTING_ALL'                       => 'Minstens',
     'LBL_ROUTING_ANY'                       => 'Willekeurig',
@@ -2320,7 +2393,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Opslaan',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Voeg deze map toe aan',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Deze map kan niet worden veranderd',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Weet u zeker dat u deze map wilt verwijderen?\nDit proces kan niet ongedaan gemaakt worden.\nOnderliggende mappen worden ook verwijderd.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Weet u zeker dat u deze map wilt verwijderen?\\nDit proces kan niet ongedaan gemaakt worden.\\nOnderliggende mappen worden ook verwijderd.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'Nieuwe map',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Selecteer een map voordat u deze actie uitvoert.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Mappenbeheer',
@@ -2479,7 +2552,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Synchroniseer alle mailaccounts',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'Er is een e-mail verzonden naar het opgegeven e-mailadres gebruikmakend van de opgegeven instellingen voor uitgaande e-mail. Controleer of de instellingen correct zijn door te kijken of het bericht is aangekomen.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Deze actie zorgt voor een volledige synchronisatie van de e-mailaccounts en hun inhoud.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Wilt u een volledige synchronisatie doen?\nBij grote e-mailaccounts kan dit een paar minuten duren.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Wilt u een volledige synchronisatie doen?\\nBij grote e-mailaccounts kan dit een paar minuten duren.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Klik op de Shift-toets of de Ctrl-toets om meerdere folders te selecteren.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Algemeen',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Beschikbare groepsfolders',
@@ -2547,6 +2620,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'Importeren geslaagd',
     'LBL_EMAIL_IMPORT_FAIL'                 => 'Het importeren is niet gelukt omdat of het bericht al geïmporteerd is of al verwijderd is van de server.',
 
+    'LBL_EMAILS_FROM' => 'Verzonden e-mails',
+    'LBL_EMAILS_RECEIVED' => 'Ontvangen e-mails',
+    'LBL_EMAIL_ADDRESSES_USED' => 'E-mailadressen die zijn gebruikt in e-mails',
+    'LBL_EMAIL_ADDRESS' => 'E-mailadres',
+    'LBL_FROM' => 'Van',
+    'LBL_TO' => 'Aan',
+    'LBL_CC' => 'CC',
+    'LBL_BCC' => 'BCC',
+
     'LBL_LINK_NONE'=> 'Geen',
     'LBL_LINK_ALL'=> 'Alle',
     'LBL_LINK_RECORDS'=> 'Records',
@@ -2588,7 +2670,9 @@ $app_strings = array (
     'ERR_AJAX_LOAD_FOOTER' => 'Als de fout zich blijft voordoen, laat dan uw administrator Ajax voor deze module uitschakelen.',
     'ERR_CREATING_FIELDS' => 'Foutmelding bij het invullen van aanvullende detail velden:',
     'ERR_CREATING_TABLE' => 'Foutmelding bij het maken van de tabel:',
-    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "Het decimaalteken mag niet gelijk zijn aan het scheidingsteken voor 1000-tallen.\n\nGelieve een van de waardes te wijzigen.",
+    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "Het decimaalteken mag niet gelijk zijn aan het scheidingsteken voor 1000-tallen.
+
+Gelieve een van de waardes te wijzigen.",
     'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om dit contact te verwijderen',
     'ERR_EXPORT_DISABLED' => 'Exports uitgeschakeld.',
     'ERR_EXPORT_TYPE' => 'Fout tijdens exporteren',
@@ -2605,6 +2689,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Om de inhoud te exporteren is een actieve sessie vereist.',
     'ERR_NO_HEADER_ID' => 'Deze functie is niet beschikbaar in dit thema',
     'ERR_NOT_ADMIN' => "Ongeoorloofde toegang tot beheer.",
+    'ERR_DISABLED_FOR_IDM_MODE' => "Deze optie is uitgeschakeld in SugarCRM voor IDM-modus en is beschikbaar in Cloud Console.",
+    'ERR_GOTO_CLOUD_CONSOLE' => "Ga naar het <a href=\"%s\" target=\"_blank\">Cloud Console</a>.",
     'ERR_MISSING_REQUIRED_FIELDS' => 'Vereiste velden ontbreken:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Ongeldig vereist veld:',
     'ERR_INVALID_VALUE' => 'Ongeldige waarde:',
@@ -2934,7 +3020,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Massaal wijzigen mislukt. Nieuwe poging ({{num}} van {{total}}) wordt gestart.',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Massaal wijzigen onvolledig. {{num}} records ongewijzigd gebleven.',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => 'Massaal wijzigen onvolledig. {{num}} records ongewijzigd gebleven.',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} record(s) werd(en) genegeerd wegens rechten.',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} record(s) werd(en) genegeerd wegens rechten of fouten.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} records zijn succesvol bijgewerkt.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} massaal bijwerken',
     'TPL_MASSDELETE_PROGRESS_STATUS' => 'Verwijder {{num}} van {{total}}.',
@@ -3006,6 +3092,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'gebruikersstandaard',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => 'gebruikersaccount',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'groepsaccount',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => 'Naam',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => 'Aanmaken',
@@ -3218,7 +3305,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Alle rechten voorbehouden.<br />SugarCRM, Sugar en de 3-D kubus zijn geregistreerde handelsmerken van SugarCRM Inc. '.
         'Alle andere bedrijfs- en productnamen die in dit product verschijnen, kunnen handelsmerken zijn van de'.
         'respectievelijke bedrijven waar zij aan zijn gekoppeld.',
@@ -3256,7 +3343,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => 'Wachtwoord',
     'LBL_LOGGED_OUT' => 'U bent uitgelogd.',
     'LBL_LOGIN_FORM_LABEL' => 'Toon inlogformulier',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => 'Terug naar aanmelden',
+    'LBL_LOGIN_INACTIVE_USER' => 'Inactieve gebruiker',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => 'Portaal of groepsgebruiker kan niet aanmelden.',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => 'Home',
@@ -3323,8 +3412,9 @@ $app_strings = array (
     'LNK_BACKTOTOP' => 'Terug naar boven',
     'LNK_REMOVE' => 'verwijderen',
     'LNK_RESUME' => 'Hervatten',
-    'LNK_VIEW_CHANGE_LOG' => 'Bekijk wijzigingslog',
-
+    'LNK_VIEW_CHANGE_LOG' => 'Auditlogboek bekijken',
+    'TPL_AUDIT_LOG_TITLE' => 'Auditlogboek voor {{{name}}}',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => 'Klikt u a.u.b. op de &#39;terug&#39; knop in uw browser en los het probleem op.',
     'NTC_DATE_FORMAT' => '(jjjj-mm-dd)',
@@ -3358,7 +3448,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "Uw licentie voor SugarCRM verloopt binnenkort.",
     'ERROR_LICENSE_VALIDATION'=> "Uw bedrijfslicentie voor SugarCRM moet worden gevalideerd. Alleen admins kunnen inloggen.",
     'WARN_LICENSE_VALIDATION'=> "Uw bedrijfslicentie voor SugarCRM moet binnenkort worden gevalideerd.",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"Het aantal ingestelde Offline Clients overschrijdt het aantal dat in uw licentie is vastgelegd.",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Waarschuwing:</b> Uw browser ingesteld op  &#39;IE compatibility view&#39;. Dit wordt niet ondersteund.",
     'WARN_LICENSE_SEATS'=>  "Waarschuwing: Het aantal actieve gebruikers is al gelijk aan het maximale aantal toegestane licenties.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Waarschuwing: Het aantal actieve gebruikers is hoger dan het maximale aantal toegestane licenties.",
@@ -3428,9 +3517,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'Verwerken..',
     'LBL_REQUEST_PROCESSED'=>'Gereed',
     'LBL_AJAX_FAILURE' => 'Ajax falen',
-    'LBL_OC_STATUS' => 'Offline Client Status',
-    'LBL_OC_STATUS_TEXT' => 'Geeft aan of de huidige gebruiker in staat is om een Offline Client te gebruiken.',
-    'LBL_OC_DEFAULT_STATUS' => 'Inactief',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => 'Zoeken...',
     'LBL_SAVED_SEARCH_SHORTCUT' => 'Opgeslagen zoekcriteria',
     'LBL_SEARCH_POPULATE_ONLY'=> 'Zoeken met bovenstaande zoekcriteria',
@@ -3531,6 +3617,7 @@ $app_strings = array (
     'LBL_COLLAPSE_ALL' => 'Alles inklappen',
     'LBL_EXPAND_ALL' => 'Alles uitklappen',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => 'Wijzig',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => 'Rapport bekijken',
     'LBL_DASHLET_REFRESH_LABEL' => 'Vernieuwen',
     'LBL_DASHLET_REMOVE_LABEL' => 'Verwijder',
     'LBL_DASHLET_DROP_HERE' => 'Plaats hier',
@@ -4081,7 +4168,7 @@ $app_strings = array (
     'LNK_MOBILE' => 'Mobiel',
     'LBL_FEEDBACK' => 'Feedback',
     'LBL_SUPPORT' => 'Ondersteuning',
-    'LBL_LANGUAGE' => 'Taal:',
+    'LBL_LANGUAGE' => 'Taal',
     'LBL_LOADING_LANGUAGE' => 'Taalpakket aan het laden',
     'LBL_UPLOADING' => 'Uploading',
     'LBL_IMAGE_DELETE_CONFIRM' => 'Weet u zeker dat u deze afbeelding wilt verwijderen?',
@@ -4200,7 +4287,9 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_CONFIRM' => 'Bevestig',
     'LBL_NO_ACCESS' => '(Geen toegang)',
     'LBL_NO_ACCESS_LOWER' => 'Geen toegang',
-    'LBL_NO_FIELD_ACCESS' => 'Geen toegang',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => 'Waarde gewist',
+    'LBL_VALUE_ERASED_TOOLTIP' => 'Deze informatie werd gewist via gegevensaanvraag privacy',
     'LBL_CREATE_RELATED_RECORD' => 'Maak gerelateerd record aan',
     'LBL_ASSOC_RELATED_RECORD' => 'Koppel bestaand record',
     'LBL_CHOOSE_LINK' => 'Kies koppel type',
@@ -4269,7 +4358,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_FONTSIZE_LARGER' => 'Groter',
     'LBL_FONTSIZE_HUGE' => 'Extra groot',
     'LBL_FONTSIZE_EXTRA_HUGE' => 'Enorm',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => 'Download mislukt\r\n{{{this}}}',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "Download mislukt\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => 'Meer...',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => '...minder',
     'LBL_OFFLINE_MODE' => 'Offline modus',
@@ -4338,6 +4427,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_TX_LOG_DETAIL' => 'Transactiegegevens',
     'LBL_RECORD_DELETED' => '(Record verwijderd)',
     'LBL_NOT_AVAILABLE' => 'niet beschikbaar',
+    'LBL_FILE_SIZE' => 'Bestandsgrootte',
     'LBL_FILE_SIZE_UNITS_B' => 'Bytes',
     'LBL_FILE_SIZE_UNITS_KB' => 'kB',
     'LBL_FILE_SIZE_UNITS_MB' => 'MB',
@@ -4461,6 +4551,122 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => 'De Detail View opent zich aan de rechterzijde van je scherm.',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => 'Gebruik onderstaande pijlen voor een quick tour met de meest belangrijke componenten van dit menu.',
 
+    'LBL_COMMENT_ADD' => 'Een opmerking toevoegen',
+    'LBL_REQUIRED' => 'Verplicht',
+    'LBL_MORE_BUTTON' => 'Meer',
+    'LBL_TRY_AGAIN' => 'Probeer opnieuw',
+    'LBL_NEW_RECORDS' => 'Laatst aangemaakt',
+    'LBL_ASSIGNED_TO_ME' => 'Mijn {{{module}}}',
+    'LBL_LISTVIEW_FILTER_ALL' => 'Alle {{{module}}}',
+    'LBL_UNFAVORITE' => 'Niet langer favoriet',
+    'LBL_ACTIVITY_CREATE' => '{{{record}}} {{{module}}} aangemaakt',
+    'LBL_ACTIVITY_UPDATE' => '{{{changes}}} bijgewerkt op {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_LINK' => '{{{relatedRecord}}} gekoppeld aan {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UNLINK' => '{{{relatedRecord}}} niet langer gekoppeld aan {{{record}}} {{{module}}}',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{relationship}} voor {{parentModule}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => 'Bijbehorende records downloaden...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => 'De configuratie van uw dashboard is veranderd. Wilt u deze opnieuw laden?',
+    'LBL_RECORDS' => 'Records',
+    'LBL_DASHBOARDS' => 'Dashboards',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => 'Zoek {{searchCriteria}}...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => 'Hoofdmenu',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => 'Snel nieuw record aanmaken',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => 'Veeg voor meer opties',
+    'LBL_DETAILS' => 'Details',
+    'LBL_DETAIL_RELATED' => 'Gerelateerd',
+    'LBL_CREATE_RELATED_MODULE_WARN' => 'Deze {{module}} vereist een {{relatedModule}}. <a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>Maak een {{relatedModule}} record</a> aan.',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => 'Wijzig record',
+    'LBL_OFFLINE_MENU_SETTINGS' => 'Offline instellingen',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => 'Debug instellingen',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED" : "Gegevenscodering is ingeschakeld.',
+    'LBL_OFFLINE_TOTAL_RECORDS' => 'Totaal aantal records',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => 'Laatste download',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => 'Kan het bestand niet downloaden.',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => 'Kon dashboards niet laden van server',
+    'ERR_FILTERS_FETCHING' => 'Kon uw filters niet ophalen',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => 'Coderen lokale opslag mislukt',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => 'Offline gegevens coderen. Dit kan enkele minuten in beslag nemen.',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => 'Offline gegevenscodering voltooid.',
+    'ERR_ACCESS_SPECIFIC_MODULE' => 'U hebt geen toegang tot module {{{module}}}.',
+    'LBL_SKIP' => 'Overslaan',
+    'LBL_CONTINUE' => 'Doorgaan',
+    'LBL_ENABLE' => 'Inschakelen',
+    'LBL_MOBILE_TRIAL_UNTIL' => 'Proef tot',
+    'LBL_MOBILE_SDK_VERSION' => 'SDK versie',
+    'LBL_LOG_LEVEL' => 'Logniveau',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => 'Aanmeldinstellingen zijn opnieuw geconfigureerd.',
+    'LBL_TRIAL_PERIOD_EXPIRED' => 'Uw proefperiode is verlopen.',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => 'Server ondersteunt geen beveiligde verbinding. Schakel de beveiligde verbinding uit.',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => 'Server ondersteunt beveiligde verbinding. Schakel de beveiligde verbinding in.',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => 'Uw verbinding is niet veilig. Neem contact op met uw beheerder.',
+    'LBL_LOGIN_SETTINGS_HEADER' => 'Aanmeldinstellingen',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => 'Stel uw exemplaar van {{{brandName}}} in',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => 'Om de app te doen werken, moet u de URL van dit exemplaar van {{{brandName}}} invoeren. Neem contact op met uw beheerder indien u deze URL niet hebt.',
+    'LBL_FACEID' => 'Face ID',
+    'LBL_TOUCHID' => 'Touch ID',
+    'LBL_ENABLE_TOUCHID' => '{{{biometryType}}} inschakelen',
+    'LBL_SETUP_TOUCHID' => '{{{biometryType}}} configureren',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => 'Aanmelden met uw vingerafdruk',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "{{{biometryType}}} is niet ingesteld op uw apparaat. \n\nGa naar uw apparaatinstellingen om {{{biometryType}}} te configureren. Na configuratie schakelt u {{{biometryType}}} voor {{{brandName}}} in via Hoofdmenu > Instellingen.",
+    'LBL_TOUCH_ID_DISCLAIMER' => 'Als u {{{biometryType}}} met {{{brandName}}} gebruikt, kunt u uw biometrische identificatie gebruiken in plaats van uw wachtwoord om aan te melden bij {{{brandName}}}.',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => 'Wilt u doorgaan met {{{biometryType}}}?    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => 'Voer het wachtwoord voor {{{brandName}}} in om {{{biometryType}}} in te schakelen',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => 'Configuratie',
+    'LBL_MDM_CONFIRM_CHANGE' => 'Configuratie applicatie is gewijzigd vanuit Mobile Device Manager. Meld u opnieuw aan om veranderingen door te voeren.',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => 'Geef {{{brandName}}} toegang tot uw locatie via uw apparaatinstellingen.',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => 'Huidige locatie is niet beschikbaar',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "Time-out huidige locatie ophalen.\nProbeer het later opnieuw.",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => 'Plaatsmarkeringen locatie zijn niet beschikbaar',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => 'Coördinaten locatie zijn ongeldig',
+    'ERR_MOBILE_INVALID_PASSWORD' => 'Ongeldig wachtwoord.',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => 'Uw app is verouderd en is niet geschikt voor de {{{brandName}}} omgeving waar u verbinding mee probeert te krijgen. Wilt u deze bijwerken?',
+    'LBL_MOBILE_BY' => 'Door',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => 'Dit filter is offline niet beschikbaar',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => 'Offline records',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => 'Instellingen downloaden',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => 'Download uw toegewezen, favoriete en toegestane records voor offline toegang. U kunt uw voorkeuren wijzigen in de offline instellingen.',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "Uw records zijn gedownload. U kunt ze openen in de offline modus.",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "Niet al uw records zijn gedownload.\nWilt u het opnieuw proberen?",
+    'LBL_BULK_LOAD_USE_CELLULAR' => 'Mobiele gegevens gebruiken',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => 'Nu niet',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => 'De download is gepauzeerd en wordt weer hervat zodra u de app opnieuw opent.',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => '{{{module}}} downloaden: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => 'Nieuwste records bijwerken',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => 'Wacht op verbinding',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => 'Gepauzeerd',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => 'Stoppen',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => 'Downloaden',
+    'LBL_BULK_LOAD_BTN_PAUSE' => 'Pauzeren',
+    'LBL_BULK_LOAD_BTN_RESUME' => 'Hervatten',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => 'Alleen WiFi-verbinding wordt standaard gebruikt',
+    'LBL_NPS_RATING_MSG' => "Hoe beoordeelt u uw \n{{{productName}}} ervaring?",
+    'LBL_NPS_THANKS_MSG' => 'Bedankt voor uw feedback!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => 'Wilt u een beoordeling achterlaten in de App Store?',
+    'LBL_NPS_NO_THANKS' => 'Nee, bedankt',
+    'LBL_NPS_NOT_NOW' => 'Niet nu',
+    'LBL_NPS_RATE_NOW' => 'Nu beoordelen',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => 'Netwerk is niet beschikbaar. U kunt de app blijven gebruiken terwijl u offline bent',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => 'Uw veranderingen worden geynchroniseerd als u online bent. <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>Details bekijken</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => 'Er zijn ongesynchroniseerde gegevens. Bekijk het <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>transactielogboek</a>',
+    'LBL_CONVERT' => 'Converteren',
+    'LBL_CONVERT_LEAD' => 'Lead converteren',
+    'LBL_SEARCH_EXISTING_RECORD' => '{{{this}}} bestaande zoeken',
+    'LBL_DUPLICATES_CHECK_FAILED' => 'Controle op dubbelen mislukt',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => 'Wilt u soortgelijke activiteiten naar het contactrecord verplaatsen?',
+    'LBL_LEAD_CONVERSION_SUCCESS' => 'U hebt de lead {{{name}}} met succes geconverteerd',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => 'Geen duplicaten gevonden.',
+    'ERR_LEAD_CONVERSION_FAIL' => 'Leadconversie mislukt',
+    'LBL_SELECT_DUPLICATE_RECORD' => 'Selecteren uit duplicaat {{{modulePlural}}}',
+    'LBL_SELECTED_EXISTING_RECORD' => '{{{moduleSingular}}} geselecteerd',
+    'LBL_CREATED_NEW_RECORD' => 'Nieuwe {{{moduleSingular}}} aangemaakt',
+    'LBL_VO_BACK_BTN' => 'Terugknop',
+    'LBL_VO_HOME_BTN' => 'Startknop',
+    'LBL_VO_DASHBOARD_BTN' => 'Dashboardknop',
+    'LBL_VO_SEARCH_BTN' => 'Zoekknop',
+    'LBL_VO_RIGHT_MENU_BTN' => 'Rechter menuknop',
+    'LBL_VO_ADD_BTN' => 'Knop toevoegen',
+
     //begin portal
 
     //portal record tutorial
@@ -4572,6 +4778,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_REPORT_SELECT' => 'Kies een rapport',
     'LBL_REPORT_AUTO_REFRESH' => 'Ververs automatisch',
     'LBL_REPORT_EDIT' => 'Pas het gekozen rapport aan',
+    'LBL_REFRESH_LIST_AND_CHART' => 'Lijst en grafiek vernieuwen',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => 'Onbekend',
@@ -4633,6 +4840,9 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'Fout opgetreden tijdens AssignTo-actie.',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => 'U heeft geen toegang tot"{{name}}". Neem contact op met uw administrator.',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => 'Jaar {0}',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} Q{0}',
@@ -4644,6 +4854,11 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_MESSAGE_BOX_TITLE' => 'Waarschuwing',
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => 'Negeer duplicaat en sla op',
     'LBL_RESTORE' => 'Herstel naar origineel',
+
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => 'Records die zijn gemarkeerd voor verwijdering',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => 'Geeft records weer die zijn gekoppeld aan een verzoek om privacygegevens aan '
+        . 'Informatie wissen.',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'RSS Feed',
@@ -4667,6 +4882,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_UNASSIGNED' => 'Niet toegewezen',
     'LBL_ARCHIVE_EMAIL' => 'E-mail archiveren',
     'LBL_EMAIL_ARCHIVED' => 'E-mail gearchiveerd',
+    'LBL_CREATE_ARCHIVED_EMAIL' => 'Gearchiveerde e-mail aanmaken',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => 'Geplande activiteiten',
@@ -4698,6 +4914,19 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Mijn taken',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Taken van team',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Geavanceerde Workflow',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP of oude REST API',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'Cron Job',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => 'Logic Hook',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'Sugar Workflow',
+    'LBL_AUDIT_SUBJECT_USER' => 'Gebruiker',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Web naar lead',
+
     //common chart strings
     'LBL_CHART' => 'Grafiek',
     'LBL_CHART_NO_DATA' => 'Geen gegevens gevonden.',
@@ -4706,6 +4935,13 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_CHART_CONTROLS_CLOSE' => 'Verberg opties',
     'LBL_CHART_CONTROLS_OPEN' => 'Toon opties',
     'LBL_CHART_UNDEFINED' => 'Niet ingegeven',
+    'LBL_CHART_NO_LABEL' => 'Niet gedefinieerd',
+    'LBL_CHART_AMOUNT' => 'Bedrag',
+    'LBL_CHART_COUNT' => 'Aantal',
+    'LBL_CHART_PERCENT' => 'Percentage',
+    'LBL_CHART_GROUP' => 'Groep',
+    'LBL_CHART_DATE' => 'Datum',
+    'LBL_CHART_KEY' => 'Sleutel',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => 'Grafiek type',
@@ -4777,6 +5013,10 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'Standaard datum filter',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => 'Standaard dataset',
 
+    'LBL_PRODUCT_CATALOG_NAME' => 'Productcatalogus',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => 'Productcatalogus',
+    'LBL_PRODUCT_CATALOG_DESC' => 'Bekijk items en voeg items toe vanuit uw productcatalogus.',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => 'Bekijk items en voeg items toe vanuit uw productcatalogus.',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}} op {{date}} om {{time}}',
@@ -4789,6 +5029,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => 'op',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'Mijn Activity Stream',
     'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'Toont een lijst met alle activiteiten bij records en plaats commentaar hierop.',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => 'Activity Streams zijn uitgeschakeld',
 
     'LBL_DATA_VIEW' => 'Data View',
     'LBL_COMMENT' => 'Commentaar',
@@ -4796,6 +5037,10 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Er kon geen verbinding met de server gemaakt worden. Probeer het a.u.b. opnieuw.',
     'ERR_RESOLVE_ERRORS' => 'Los eventuele fouten op voordat u verder gaat.',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => 'Om goed te keuren, moeten alle verplichte velden zijn ingevuld. U kunt dit record echter nog wel weigeren of herleiden.',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => 'Alle verplichte velden moeten zijn ingevuld om te weigeren/herleiden.',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Lijst vernieuwen',
@@ -4823,6 +5068,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => 'Opgeslagen rapportagediagrammen dashlet',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'Toont het diagram van een opgeslagen rapport.',
+
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => 'Gepubliceerde soortgelijke artikelen',
@@ -4830,7 +5076,7 @@ href="http://university.sugarcrm.com/" target="_blank">Kom meer te weten over Su
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Samenvatting historie',
-    'TPL_HISTORICAL_SUMMARY' => 'Historische samenvatting voor {{name}}',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => 'Meer historie...',
     'LBL_RELATED_CONTACT' => 'Gekoppeld contact',
     'LBL_MODULE_TYPE' => 'Type',
@@ -5083,6 +5329,29 @@ Om een nieuw record aan te maken op basis van de door u ingevoerde waarden, klik
 
     'LBL_FIELD_TRIMMED' => 'Veld was uitgedund door overschrijding van het maximale aantal tekens.',
     'LBL_FIELDSIZE_OVERFLOW' => 'Veld overschrijdt maximaal aantal tekens.',
+    'LBL_TINYMCE_TARGET_SAME' => 'Zelfde venster',
+    'LBL_TINYMCE_TARGET_NEW' => 'Nieuw venster',
+
+    'LBL_OUTBOUND_EMAILS' => 'E-mailinstellingen',
+    'LBL_OUTBOUND_EMAIL' => 'E-mailinstelling',
+
+    'LBL_EMAIL_PARTICIPANTS' => 'E-maildeelnemers',
+    'LBL_EMAIL_PARTICIPANT' => 'E-maildeelnemer',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => 'Gegevensprivacy',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'Gegevensprivacy',
+    'LBL_DATAPRIVACY_VIEW_PII' => 'Persoonsgegevens bekijken',
+    'LBL_DATAPRIVACY_MARKFORERASE' => 'Markeren voor wissen',
+    'LBL_DATAPRIVACY_FIELDNAME' => 'Veld',
+    'LBL_DATAPRIVACY_VALUE' => 'Waarde',
+    'LBL_DATAPRIVACY_CHANGED_BY' => 'Gewijzigd door',
+    'LBL_DATAPRIVACY_SOURCE' => 'Bron',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => 'Laatst bijwijzigd',
+    'LBL_DATAPRIVACY_PII' => 'Persoonsgegevens',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Markeren voor wissen',
+    'TPL_DATAPRIVACY_PII_TITLE' => 'Persoonsgegevens voor {{{name}}}',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5947,6 +6216,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => 'Campagne' ,
     'email' => 'E-mailadres',
     'workflow' => 'Workflow',
+    'system' => 'Systeem',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5965,7 +6235,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -6028,6 +6297,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = 'Sjabloon kennisdatabank
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'Sjabloon kennisdatabank';
 $app_list_strings['moduleList']['EmbeddedFiles'] = 'Ingesloten bestanden';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Ingesloten bestand';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'Lek',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'P',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lei',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'Leke',
+    'USD' => 'Dollars',
+    'AFN' => 'Afghani&#39;s',
+    'ARS' => 'Pesos',
+    'AWG' => 'Guldens',
+    'AUD' => 'Dollars',
+    'AZN' => 'Nieuw Manats',
+    'BSD' => 'Dollars',
+    'BBD' => 'Dollars',
+    'BYR' => 'Roebels',
+    'EUR' => 'Euro',
+    'BZD' => 'Dollars',
+    'BMD' => 'Dollars',
+    'BOB' => 'Boliviano&#39;s',
+    'BAM' => 'Convertibele Marka',
+    'BWP' => 'Pulas',
+    'BGN' => 'Leva',
+    'BRL' => 'Reais',
+    'GBP' => 'Ponden',
+    'BND' => 'Dollars',
+    'KHR' => 'Riels',
+    'CAD' => 'Dollars',
+    'KYD' => 'Dollars',
+    'CLP' => 'Peso&#39;s',
+    'CNY' => 'Yuan Renminbi',
+    'COP' => 'Peso&#39;s',
+    'CRC' => 'Colón',
+    'HRK' => 'Kuna',
+    'CUP' => 'Peso&#39;s',
+    'CZK' => 'Koruny',
+    'DKK' => 'Kronen',
+    'DOP' => 'Peso&#39;s',
+    'XCD' => 'Dollars',
+    'EGP' => 'Ponden',
+    'SVC' => 'Colones',
+    'EEK' => 'Krooni',
+    'FKP' => 'Ponden',
+    'FJD' => 'Dollars',
+    'GHC' => 'Cedis',
+    'GIP' => 'Ponden',
+    'GTQ' => 'Quetzales',
+    'GGP' => 'Ponden',
+    'GYD' => 'Dollars',
+    'HNL' => 'Lempira&#39;s',
+    'HKD' => 'Dollars',
+    'HUF' => 'Forint',
+    'ISK' => 'Kronen',
+    'INR' => 'Roepies',
+    'IDR' => 'Rupiahs',
+    'IRR' => 'Rials',
+    'IMP' => 'Ponden',
+    'ILS' => 'Nieuwe sikkels',
+    'JMD' => 'Dollars',
+    'JPY' => 'Yen',
+    'JEP' => 'Ponden',
+    'KZT' => 'Tenge',
+    'KPW' => 'Gewonnen',
+    'KRW' => 'Gewonnen',
+    'KGS' => 'Soms',
+    'LAK' => 'Kips',
+    'LVL' => 'Lati',
+    'LBP' => 'Ponden',
+    'LRD' => 'Dollars',
+    'CHF' => 'Zwitserland, Franken',
+    'LTL' => 'Litai',
+    'MKD' => 'Denars',
+    'MYR' => 'Ringgits',
+    'MUR' => 'Roepies',
+    'MXN' => 'Peso&#39;s',
+    'MNT' => 'Tugriks',
+    'MZN' => 'Meticais',
+    'NAD' => 'Dollars',
+    'NPR' => 'Roepies',
+    'ANG' => 'Guldens',
+    'NZD' => 'Dollars',
+    'NIO' => 'Cordobas',
+    'NGN' => 'Nairas',
+    'NOK' => 'Kroon',
+    'OMR' => 'Rials',
+    'PKR' => 'Roepies',
+    'PAB' => 'Balboa',
+    'PYG' => 'Guarani',
+    'PEN' => 'Nuevos Soles',
+    'PHP' => 'Peso&#39;s',
+    'PLN' => 'Zloty',
+    'QAR' => 'Rials',
+    'RON' => 'Nieuwe Lei',
+    'RUB' => 'Roebels',
+    'SHP' => 'Ponden',
+    'SAR' => 'Riyalen',
+    'RSD' => 'Dinars',
+    'SCR' => 'Roepies',
+    'SGD' => 'Dollars',
+    'SBD' => 'Dollars',
+    'SOS' => 'Shillings',
+    'ZAR' => 'Rand',
+    'LKR' => 'Roepies',
+    'SEK' => 'Kronen',
+    'SRD' => 'Dollars',
+    'SYP' => 'Ponden',
+    'TWD' => 'Nieuwe Dollars',
+    'THB' => 'Baht',
+    'TTD' => 'Dollars',
+    'TRY' => 'Lire',
+    'TRL' => 'Lira&#39;s',
+    'TVD' => 'Dollars',
+    'UAH' => 'Hryvnia',
+    'UYU' => 'Peso&#39;s',
+    'UZS' => 'Bedragen',
+    'VEF' => 'Bolivares Fuertes',
+    'VND' => 'Dong',
+    'YER' => 'Rials',
+    'ZWD' => 'Zimbabwaanse dollar',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => 'Single-Hit',

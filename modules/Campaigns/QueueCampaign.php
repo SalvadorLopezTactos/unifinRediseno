@@ -70,13 +70,11 @@ foreach ($_POST['mass'] as $message_id) {
 		sugar_die('');
 	}
 
+    $send_date_time = $marketing->date_start;
 
 	global $timedate;
-	$mergedvalue=$timedate->merge_date_time($marketing->date_start,$marketing->time_start);
 	if($test) {
 	    $send_date_time = $timedate->getNow()->get("-60 seconds")->asDb();
-	} else {
-	    $send_date_time = $timedate->to_db($mergedvalue);
 	}
 
 	//find all prospect lists associated with this email marketing message.

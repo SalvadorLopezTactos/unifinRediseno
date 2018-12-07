@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Du skal angive et postnummer for at slette momssatsen.',
   'NTC_STATUS' => 'Angiv status til Inaktiv for at fjerne denne momssats fra rullelisterne med momssatser.',
   'NTC_LIST_ORDER' => 'Angiv den rækkefølge, som denne momssats vises i på rullelisterne med momssatser',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Inaktiv',
-  ),
   'LBL_EDITLAYOUT' => 'Rediger layout' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Oprettet af id',
   'LBL_MODIFIED_ID'=>'Ændret af id',

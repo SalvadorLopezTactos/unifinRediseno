@@ -20,7 +20,9 @@ $vardefs =array(
 			'massupdate' => false,
 			'len' => '255',
             'duplicate_on_record_copy' => 'always',
-			'comment' => 'Contact salutation (e.g., Mr, Ms)'
+			'comment' => 'Contact salutation (e.g., Mr, Ms)',
+            'audited' => true,
+            'pii' => true,
 		),
 'first_name' =>
 		array (
@@ -37,6 +39,8 @@ $vardefs =array(
             ),
 			'comment' => 'First name of the contact',
             'merge_filter' => 'selected',
+            'audited' => true,
+            'pii' => true,
 
 		),
 	'last_name' =>
@@ -56,6 +60,8 @@ $vardefs =array(
             'merge_filter' => 'selected',
             'required'=>true,
             'importable' => 'required',
+            'audited' => true,
+            'pii' => true,
 		),
 	'name' =>
 		array (
@@ -90,7 +96,9 @@ $vardefs =array(
 			'type' => 'varchar',
 			'len' => '100',
             'duplicate_on_record_copy' => 'always',
-			'comment' => 'The title of the contact'
+			'comment' => 'The title of the contact',
+            'audited' => true,
+            'pii' => true,
 		),
     'facebook' =>
     array (
@@ -99,7 +107,9 @@ $vardefs =array(
         'type' => 'varchar',
         'len' => '100',
         'duplicate_on_record_copy' => 'always',
-        'comment' => 'The facebook name of the user'
+        'comment' => 'The facebook name of the user',
+        'audited' => true,
+        'pii' => true,
     ),
     'twitter' =>
     array (
@@ -108,7 +118,9 @@ $vardefs =array(
         'type' => 'varchar',
         'len' => '100',
         'duplicate_on_record_copy' => 'always',
-        'comment' => 'The twitter name of the user'
+        'comment' => 'The twitter name of the user',
+        'audited' => true,
+        'pii' => true,
     ),
     'googleplus' =>
     array (
@@ -117,7 +129,9 @@ $vardefs =array(
         'type' => 'varchar',
         'len' => '100',
         'duplicate_on_record_copy' => 'always',
-        'comment' => 'The google plus id of the user'
+        'comment' => 'The google plus id of the user',
+        'audited' => true,
+        'pii' => true,
     ),
 	'department' =>
 		array (
@@ -151,6 +165,8 @@ $vardefs =array(
             'full_text_search' => array('enabled' => true, 'searchable' => true,  'boost' => 0.97),
 			'comment' => 'Home phone number of the contact',
             'merge_filter' => 'enabled',
+            'audited' => true,
+            'pii' => true,
 		),
 	'phone_mobile' =>
 		array (
@@ -164,6 +180,8 @@ $vardefs =array(
 			'comment' => 'Mobile phone number of the contact',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'phone_work' =>
 		array (
@@ -178,6 +196,8 @@ $vardefs =array(
 			'comment' => 'Work phone number of the contact',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'phone_other' =>
 		array (
@@ -191,6 +211,8 @@ $vardefs =array(
 			'comment' => 'Other phone number for the contact',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'phone_fax' =>
 		array (
@@ -204,6 +226,8 @@ $vardefs =array(
 			'comment' => 'Contact fax number',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'primary_address_street' =>
 		array (
@@ -222,6 +246,8 @@ $vardefs =array(
                 'searchable' => true,
                 'boost' => 0.29,
             ),
+            'audited' => true,
+            'pii' => true,
 		),
 	'primary_address_street_2' =>
 		array (
@@ -231,6 +257,8 @@ $vardefs =array(
 			'len' => '150',
 			'source' => 'non-db',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'primary_address_street_3' =>
 		array (
@@ -240,6 +268,8 @@ $vardefs =array(
 			'len' => '150',
 			'source' => 'non-db',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'primary_address_city' =>
 		array (
@@ -251,6 +281,8 @@ $vardefs =array(
 			'comment' => 'City for primary address',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'primary_address_state' =>
 		array (
@@ -262,6 +294,8 @@ $vardefs =array(
 			'comment' => 'State for primary address',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'primary_address_postalcode' =>
 		array (
@@ -273,6 +307,8 @@ $vardefs =array(
 			'comment' => 'Postal code for primary address',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 
 		),
 	'primary_address_country' =>
@@ -284,6 +320,8 @@ $vardefs =array(
 			'comment' => 'Country for primary address',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'alt_address_street' =>
 		array (
@@ -302,6 +340,8 @@ $vardefs =array(
                 'searchable' => true,
                 'boost' => 0.28,
             ),
+            'audited' => true,
+            'pii' => true,
 		),
 	'alt_address_street_2' =>
 		array (
@@ -311,6 +351,8 @@ $vardefs =array(
 			'len' => '150',
 			'source' => 'non-db',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'alt_address_street_3' =>
 		array (
@@ -320,6 +362,8 @@ $vardefs =array(
 			'len' => '150',
 			'source' => 'non-db',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'alt_address_city' =>
 		array (
@@ -331,6 +375,8 @@ $vardefs =array(
 			'comment' => 'City for alternate address',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'alt_address_state' =>
 		array (
@@ -342,6 +388,8 @@ $vardefs =array(
 			'comment' => 'State for alternate address',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'alt_address_postalcode' =>
 		array (
@@ -353,6 +401,8 @@ $vardefs =array(
 			'comment' => 'Postal code for alternate address',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'alt_address_country' =>
 		array (
@@ -363,6 +413,8 @@ $vardefs =array(
 			'comment' => 'Country for alternate address',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 		'assistant' =>
 		array (
@@ -374,6 +426,8 @@ $vardefs =array(
 			'comment' => 'Name of the assistant of the contact',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'assistant_phone' =>
 		array (
@@ -387,6 +441,8 @@ $vardefs =array(
 			'comment' => 'Phone number of the assistant of the contact',
             'merge_filter' => 'enabled',
             'duplicate_on_record_copy' => 'always',
+            'audited' => true,
+            'pii' => true,
 		),
 	'picture' =>
 		array(

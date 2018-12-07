@@ -17,7 +17,9 @@
     {{else}}
         {{#if dropdown_buttons}}
         <div class="btn-group">
-            <button type="button" data-toggle="dropdown" rel="tooltip" title="{{str "LBL_DASHLET_CONFIGURE"}}" class="btn btn-invisible dropdown-toggle" data-placement="bottom" aria-label="{{str "LBL_DASHLET_CONFIGURE"}}" aria-haspopup="true" aria-expanded="false"><i data-action="loading" class="fa fa-cog" track="click:dashletToolbarCog"></i></button>
+            {{#if ../../../this.canEdit}}
+                <button type="button" data-toggle="dropdown" rel="tooltip" title="{{str "LBL_DASHLET_CONFIGURE"}}" class="btn btn-invisible dropdown-toggle" data-placement="bottom" aria-label="{{str "LBL_DASHLET_CONFIGURE"}}" aria-haspopup="true" aria-expanded="false"><i data-action="loading" class="fa fa-cog" track="click:dashletToolbarCog"></i></button>
+            {{/if}}
             <ul class="dropdown-menu left" role="menu">
                 {{#each dropdown_buttons}}
                     <li role="menuitem">{{field ../../../../this model=../../../../this.model}}</li>

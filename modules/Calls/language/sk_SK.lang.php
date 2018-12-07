@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Informačný panel so zoznamom volaní',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Informačný panel so záznamom volaní',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Volania',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Volanie',

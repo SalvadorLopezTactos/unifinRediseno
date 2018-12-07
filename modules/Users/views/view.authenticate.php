@@ -56,17 +56,38 @@ class UsersViewAuthenticate extends SidecarView
                 }
             }
         }
+
+        $args = array_merge($args, $this->getSAMLResponseRelayState());
+
         try {
             $this->authorization = $oapi->token($service, $args);
         } catch (Exception $e) {
             $GLOBALS['log']->error("Login exception: " . $e->getMessage());
-            sugar_die($e->getMessage());
+
+            $this->killSessionCookie();
+            if (AuthenticationController::getInstance()->isExternal()) {
+                if (!SugarConfig::getInstance()->get('SAML_SAME_WINDOW')) {
+                    // We need to render AuthenticateParent template.
+                    $this->dataOnly = true;
+                } else {
+                    // Make redirect to a special route that shows error message.
+                    // Also allows to get rid of BWC URL in browser that breaks further navigation.
+                    SugarApplication::redirect('./#externalAuthError');
+                }
+
+                parent::preDisplay($params);
+                return;
+            } else {
+                sugar_die($e->getMessage());
+            }
         }
-        if (!empty($_REQUEST['dataOnly'])) {
+
+        if (!empty($args['dataOnly'])) {
             $this->dataOnly = true;
         }
-        if (!empty($_REQUEST['platform'])) {
-            $this->platform = $_REQUEST['platform'];
+
+        if (!empty($args['platform'])) {
+            $this->platform = $args['platform'];
         }
         parent::preDisplay($params);
     }
@@ -103,5 +124,38 @@ class UsersViewAuthenticate extends SidecarView
         }
 
         return SugarAutoLoader::existingCustomOne('modules/Users/tpls/AuthenticateParent.tpl');
+    }
+
+    /**
+     * Parse RelayState parameter from SAML response and return it as array.
+     *
+     * @return array
+     */
+    protected function getSAMLResponseRelayState()
+    {
+        if (!empty($_REQUEST['RelayState']) &&
+            filter_var($_REQUEST['RelayState'], FILTER_VALIDATE_URL) === false &&
+            $decodedRelayState = json_decode(base64_decode($_REQUEST['RelayState']), true)
+        ) {
+            return $decodedRelayState;
+        }
+
+        return [];
+    }
+
+    /**
+     * Kills a session cookie for BWC
+     */
+    protected function killSessionCookie()
+    {
+        setcookie(
+            session_name(),
+            '',
+            time() - 3600,
+            ini_get('session.cookie_path'),
+            ini_get('session.cookie_domain'),
+            ini_get('session.cookie_secure'),
+            ini_get('session.cookie_httponly')
+        );
     }
 }

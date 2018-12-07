@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'חותמות משתמש',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'חותמת משתמש',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'דרוש שם עבור חתימה זו',
-    'LBL_SIGNATURE_NAME'         => 'שם',
-    'LBL_SIGNATURE'              => 'חתימה',
-    'LBL_SIGNATURE_HTML'         => 'חתימת HTML',
-    'LBL_SIGNATURE_DEFAULT'      => 'להתשמש בחתימה?',
-    'LBL_SIGNATURE_PREPEND'      => 'חתימה מעל  תגובה?',
-    'LBL_SIGNATURES'             => 'חתימות',
+    'LBL_DEFAULT_SIGNATURE' => 'ברירת מחדל',
+    'LBL_MODULE_NAME' => 'חתימות דוא"ל',
+    'LBL_MODULE_NAME_SINGULAR' => 'חתימת דוא"ל',
+    'LBL_SIGNATURE_NAME' => 'שם',
+    'LBL_SIGNATURE' => 'חתימה',
+    'LBL_SIGNATURE_HTML' => 'חתימת HTML',
+    'LBL_SIGNATURE_DEFAULT' => 'להתשמש בחתימה?',
+    'LBL_SIGNATURE_PREPEND' => 'חתימה מעל  תגובה?',
+    'LBL_SIGNATURES' => 'חתימות',
 );

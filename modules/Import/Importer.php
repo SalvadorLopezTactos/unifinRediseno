@@ -14,7 +14,6 @@
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
-
 class Importer
 {
     /**
@@ -110,7 +109,6 @@ class Importer
 
     public function import()
     {
-        $aflag = Activity::isEnabled();
         Activity::disable();
 
         // do we have a currency_id field
@@ -144,9 +142,7 @@ class Importer
         }
 
         $this->importSource->writeStatus();
-        if($aflag) {
-            Activity::enable();
-        }
+        Activity::restoreToPreviousState();
         //All done, remove file.
     }
 
@@ -234,6 +230,8 @@ class Importer
             }
         }
 
+                //flip the array so we can use it to get the key #
+        $flippedVals = array_flip($this->importColumns);
         $fields_order = $this->getImportColumnsOrder($focus->getFieldDefinitions());
         $importFields = array();
         foreach ($fields_order as $fieldNum) {
@@ -361,11 +359,12 @@ class Importer
                 {
                     $rowValue = $returnValue;
 
+                    $defaultOptout  = !empty($GLOBALS['sugar_config']['new_email_addresses_opted_out']);
                     $address = array(
                         'email_address' => $rowValue,
                         'primary_address' => $field == 'email',
                         'invalid_email' => false,
-                        'opt_out' => false,
+                        'opt_out' => $defaultOptout,
                     );
 
                     // check for current opt_out and invalid email settings for this email address
@@ -377,10 +376,6 @@ class Importer
                     }
 
                     if ($field === 'email') {
-
-                        //flip the array so we can use it to get the key #
-                        $flippedVals = array_flip($this->importColumns);
-
                         //if the opt out column is set, then attempt to retrieve the values
                         if(isset($flippedVals['email_opt_out'])){
                             //if the string for this value has a length, then use it.
@@ -404,7 +399,7 @@ class Importer
             }
 
             if ($field == 'email_addresses_non_primary') {
-                $nonPrimaryAddresses = $this->handleNonPrimaryEmails($rowValue, $defaultRowValue, $fieldTranslated);
+                $nonPrimaryAddresses = $this->handleNonPrimaryEmails($rowValue, $defaultRowValue, $fieldTranslated, $flippedVals);
                 $emailAddresses['non-primary'] = array_merge($emailAddresses['non-primary'], $nonPrimaryAddresses);
             }
 
@@ -838,11 +833,9 @@ class Importer
 
         if ( $focus->object_name == "Contact" && isset($list_of_users) )
             $focus->process_sync_to_outlook($list_of_users);
-
         // Before calling save, we need to clear out any existing registered AWF
         // triggered start events so they can continue to trigger.
         Registry\Registry::getInstance()->drop('triggered_starts');
-
         $focus->save(false);
 
         //now that save is done, let's make sure that parent and related id's were saved as relationships
@@ -1271,14 +1264,15 @@ class Importer
      * @param mixed     $rowValue        Serialized data
      * @param mixed     $defaultRowValue Default value in case if row value is empty
      * @param string    $fieldTranslated Name of CSV column
+     * @param array $columnMap array of colummn names and indices keyed by column name
      *
      * @return array                     Collection of parsed non-primary e-mails
      */
-    protected function handleNonPrimaryEmails($rowValue, $defaultRowValue, $fieldTranslated)
+    protected function handleNonPrimaryEmails($rowValue, $defaultRowValue, $fieldTranslated, $columnMap = array())
     {
-        $parsed = $this->parseNonPrimaryEmails($rowValue, $fieldTranslated);
+        $parsed = $this->parseNonPrimaryEmails($rowValue, $fieldTranslated, $columnMap);
         if (!$parsed && !empty($defaultRowValue)) {
-            $parsed = $this->parseNonPrimaryEmails($defaultRowValue, $fieldTranslated);
+            $parsed = $this->parseNonPrimaryEmails($defaultRowValue, $fieldTranslated. $columnMap);
         }
 
         return $parsed;
@@ -1331,11 +1325,12 @@ class Importer
      * @param string $value           Serialized data in the following format:
      *                                email_address1[,invalid_email1[,opt_out1]][;email_address2...]
      * @param string $fieldTranslated Name of CSV column
+     * @param array $columnMap array of colummn names and indices keyed by column name
      *
      * @return array                  Collection of address properties
      * @see serializeNonPrimaryEmails()
      */
-    protected function parseNonPrimaryEmails($value, $fieldTranslated)
+    protected function parseNonPrimaryEmails($value, $fieldTranslated, $columnMap = array())
     {
         global $mod_strings;
 
@@ -1364,11 +1359,12 @@ class Importer
                 continue;
             }
 
+            $defaultOptout  = !empty($GLOBALS['sugar_config']['new_email_addresses_opted_out']);
             $address = array(
                 'email_address' => $email_address,
                 'primary_address' => false,
                 'invalid_email' => false,
-                'opt_out' => false,
+                'opt_out' => $defaultOptout,
             );
 
             // check for current opt_out and invalid email settings for this email address
@@ -1382,34 +1378,38 @@ class Importer
                 $address = array_merge($address, $row);
             }
 
-            // check if there are elements in $attrs after $email_address was shifted from there
+            // check for invalid_email in $attrs and use its value if that column name is mapped
             if ($attrs) {
                 $invalid_email = array_shift($attrs);
-                $invalid_email = $this->ifs->bool($invalid_email, array());
-                if ($invalid_email === false) {
-                    $this->importSource->writeError(
-                        $mod_strings['LBL_ERROR_INVALID_BOOL'],
-                        $fieldTranslated,
-                        $invalid_email
-                    );
-                    continue;
+                if (isset($columnMap['invalid_email'])) {
+                    $invalid_email = $this->ifs->bool($invalid_email, array());
+                    if ($invalid_email === false) {
+                        $this->importSource->writeError(
+                            $mod_strings['LBL_ERROR_INVALID_BOOL'],
+                            $fieldTranslated,
+                            $invalid_email
+                        );
+                        continue;
+                    }
+                    $address['invalid_email'] = $invalid_email;
                 }
-                $address['invalid_email'] = $invalid_email;
             }
 
-            // check if there are elements in $attrs after $email_address and $invalid_email were shifted from there
+            // check for email_opt_out in $attrs and use its value if that column name is mapped
             if ($attrs) {
                 $opt_out = array_shift($attrs);
-                $opt_out = $this->ifs->bool($opt_out, array());
-                if ($opt_out === false) {
-                    $this->importSource->writeError(
-                        $mod_strings['LBL_ERROR_INVALID_BOOL'],
-                        $fieldTranslated,
-                        $opt_out
-                    );
-                    continue;
+                if (isset($columnMap['email_opt_out'])) {
+                    $opt_out = $this->ifs->bool($opt_out, array());
+                    if ($opt_out === false) {
+                        $this->importSource->writeError(
+                            $mod_strings['LBL_ERROR_INVALID_BOOL'],
+                            $fieldTranslated,
+                            $opt_out
+                        );
+                        continue;
+                    }
+                    $address['opt_out'] = $opt_out;
                 }
-                $address['opt_out'] = $opt_out;
             }
 
             $result[] = $address;

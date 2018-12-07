@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Інформаційна панель списку цільових аудиторій споживачів',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Інформаційна панель записів цільових аудиторій споживачів',
+
   'LBL_MODULE_NAME' => 'Цільові аудиторії споживачів',
   'LBL_MODULE_NAME_SINGULAR' => 'Цільова аудиторія споживачів',
   'LBL_MODULE_ID'   => 'Цільові аудиторії споживачів',
@@ -25,7 +29,7 @@ $mod_strings = array (
   'LBL_LIST_LAST_NAME' => 'Прізвище',
   'LBL_LIST_PROSPECT_NAME' => 'Назва цільової аудиторії споживачів',
   'LBL_LIST_TITLE' => 'Посада',
-  'LBL_LIST_EMAIL_ADDRESS' => 'Email',
+  'LBL_LIST_EMAIL_ADDRESS' => 'Ел. пошта',
   'LBL_LIST_OTHER_EMAIL_ADDRESS' => 'Інший Email',
   'LBL_LIST_PHONE' => 'Телефон',
   'LBL_LIST_PROSPECT_ROLE' => 'Роль',
@@ -77,7 +81,7 @@ $mod_strings = array (
   'LBL_BIRTHDATE' => 'Дата народження:',
   'LBL_EMAIL_ADDRESS' => 'Адреса Email:',
   'LBL_OTHER_EMAIL_ADDRESS' => 'Інший Email:',
-  'LBL_ANY_EMAIL' => 'Email:',
+  'LBL_ANY_EMAIL' => 'Ел. пошта:',
   'LBL_ASSISTANT' => 'Асистент:',
   'LBL_ASSISTANT_PHONE' => 'Телефон асистента:',
   'LBL_DO_NOT_CALL' => 'Не дзвонити:',
@@ -195,4 +199,6 @@ $mod_strings = array (
 2. Натисніть кнопку "Зберегти", щоб завершити створення нового запису й повернутися до попередньої сторінки.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Звіти по потенційним клієнтам',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Узгоджені бізнес-цілі',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Останнє оновлення погодження',
 );

@@ -82,9 +82,10 @@ $viewdefs['pmse_Emails_Templates']['base']['view']['compose'] = array(
                     'span'          => 12,
                     'tinyConfig'    => array(
                         'height' => '400',
+                        'plugins' => 'code,textcolor,link',
                         'toolbar' => 'code | bold italic underline strikethrough | bullist numlist | ' .
                             'alignleft aligncenter alignright alignjustify | forecolor backcolor | ' .
-                            'fontsizeselect formatselect | sugarfieldbutton sugarlinkbutton',
+                            'fontsizeselect formatselect | link | sugarfieldbutton sugarlinkbutton',
                     ),
                 ),
             ),

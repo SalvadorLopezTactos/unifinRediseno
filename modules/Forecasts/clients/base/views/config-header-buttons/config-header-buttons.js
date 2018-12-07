@@ -18,7 +18,6 @@
 
     /**
      * @inheritdoc
-     * @override
      */
     _beforeSaveConfig: function() {
         var ctxModel = this.context.get('model');

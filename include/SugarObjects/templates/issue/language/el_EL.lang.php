@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => 'Τροποποιήθηκε από:',
   'LBL_ASSIGNED_USER' => 'Ανατεθειμένος Χειριστής:',
   'LBL_ASSIGNED_USER_NAME' => 'Ανατέθηκε σε',
-  'LBL_SYSTEM_ID' =>'Ταυτότητα Συστήματος:',
   'LBL_TEAM_NAME' =>'Όνομα Ομάδας:',
   'LBL_TYPE'=>'Τύπος:',
   'LBL_SUBJECT' => 'Θέμα:',

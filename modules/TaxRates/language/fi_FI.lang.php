@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa verokannan.',
   'NTC_STATUS' => 'Aseta statukseksi <i>epäaktiivinen</i> poistaaksesi tämän verokannan Verokannat-pudotusvalikoista',
   'NTC_LIST_ORDER' => 'Aseta järjestys, jossa tämä verokanta näkyy Verokanta-pudotusvalikoissa',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktiivinen',
-    'Inactive' => 'Epäaktiivinen',
-  ),
   'LBL_EDITLAYOUT' => 'Muokkaa asettelua' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Luojan ID',
   'LBL_MODIFIED_ID'=>'Muokkaajan ID',

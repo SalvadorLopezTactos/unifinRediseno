@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent の記事を更新します。',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => '承認された記事を公開し、KB 記事を期限切れにします。',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflowでスケジュール済みのジョブ',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => '非正規チームのセキュリティ データを再構築',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => '間隔:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch キュー スケジューラ',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => '診断ツールファイルを削除',
 'LBL_SUGARJOBREMOVETMPFILES' => '一時ファイルを削除',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => '非正規チームのセキュリティ データを再構築',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '夜間にキャンペーンの一括Eメール送信を実行',
 'LBL_ASYNCMASSUPDATE' => '非同期一括アップデートを実行',

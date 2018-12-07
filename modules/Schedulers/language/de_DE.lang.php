@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent-Artikel aktualisieren.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Genehmigte Artikel veröffentlichen & Artikel aus der Wissensdatenbank auslaufen lassen.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Geplante Aufgaben für Advanced Workflow',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Denormalisierte Team-Sicherheitsdaten neu erstellen',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
@@ -118,7 +119,10 @@ $mod_strings = array (
 'LNK_NEW_SCHEDULER' => 'Neue Aufgabe',
 'LNK_LIST_SCHEDULED' => 'Geplante Aufgaben',
 // Messages
-'SOCK_GREETING' => "Dies ist die Oberfläche für den Sugar-Zeitplaner. \n[ Verfügbare daemon-Befehle: start|restart|shutdown|status ]\nZum Abbrechen schreiben Sie 'quit'. Um den Dienst zu stoppen, 'shutdown'.\n",
+'SOCK_GREETING' => "Dies ist die Oberfläche für den Sugar-Zeitplaner. 
+[ Verfügbare daemon-Befehle: start|restart|shutdown|status ]
+Zum Abbrechen schreiben Sie 'quit'. Um den Dienst zu stoppen, 'shutdown'.
+",
 'ERR_DELETE_RECORD' => 'Zum Löschen des Plans muss eine Datensatznummer angegeben werden.',
 'ERR_CRON_SYNTAX' => 'Ungültige Cron-Syntax',
 'NTC_DELETE_CONFIRMATION' => 'Sind Sie sicher, dass Sie diesen Eintrag löschen möchten?',
@@ -142,6 +146,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch Warteschlangen-Planer',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Diagnose-Tool-Dateien entfernen',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Temporäre Dateien entfernen',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Denormalisierte Team-Sicherheitsdaten neu erstellen',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Run Nightly Mass Email Campaigns',
 'LBL_ASYNCMASSUPDATE' => 'Asynchrone Massen-Updates durchführen',

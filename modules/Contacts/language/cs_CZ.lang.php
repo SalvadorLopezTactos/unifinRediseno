@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Řídicí panel seznamu kontaktů',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Řídicí panel záznamů kontaktů',
+
     'LNK_CONTACT_REPORTS' => 'Přehled reportů kontaktů',
     'ERR_DELETE_RECORD' => 'Pro smazání kontaktu musí být zadáno číslo záznamu.',
     'LBL_ACCOUNT_ID' => 'ID společnosti:',
@@ -94,7 +98,7 @@ $mod_strings = array (
     'LBL_LIST_FORM_TITLE' => 'Seznam kontaktů',
     'LBL_VIEW_FORM_TITLE' => 'Pohled kontakty',
     'LBL_LIST_LAST_NAME' => 'Příjmení',
-    'LBL_LIST_NAME' => 'Jméno',
+    'LBL_LIST_NAME' => 'Jméno:',
     'LBL_LIST_OTHER_EMAIL_ADDRESS' => 'Další email',
     'LBL_LIST_PHONE' => 'Telefon do práce',
     'LBL_LIST_TITLE' => 'Titul',
@@ -267,4 +271,6 @@ Chcete-li vytvořit {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Skóre leada',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Reporty kontaktů',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Se souhlasem pro obchodní účely',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Poslední aktualizace souhlasu',
 );

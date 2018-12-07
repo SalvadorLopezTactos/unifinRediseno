@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Інформаційна панель списку доходів за продуктами',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Інформаційна панель записів доходів за продуктами',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Продукт маркетингової кампанії',
     'LBL_MODULE_NAME' => 'Доходи за продукти',
     'LBL_MODULE_NAME_SINGULAR' => 'Дохід за продукт',

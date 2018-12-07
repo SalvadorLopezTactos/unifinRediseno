@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'URL 초기설정',
 	'COLUMN_TITLE_AUDIT' =>'회계감사',
+    'COLUMN_TITLE_PII' => '개인정보',
     'COLUMN_TITLE_FTS' =>'전체문장 검색가능',
     'COLUMN_TITLE_FTS_BOOST' => '부스트 값',
 	'COLUMN_TITLE_REPORTABLE' => '보고가능',

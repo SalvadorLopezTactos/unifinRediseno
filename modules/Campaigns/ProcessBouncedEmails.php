@@ -25,8 +25,8 @@ function retrieveErrorReportAttachment($email)
 {
     $contents = "";
     $db = DBManagerFactory::getInstance();
-    $query = "SELECT description FROM notes WHERE file_mime_type = 'message/rfc822' AND parent_type='Emails'
-        AND parent_id = " . $db->quoted($email->id) . " AND deleted=0";
+    $query = "SELECT description FROM notes WHERE file_mime_type = 'message/rfc822' AND email_type='Emails'
+        AND email_id = " . $db->quoted($email->id) . " AND deleted=0";
     $rs = $GLOBALS['db']->query($query);
     while ($row = $GLOBALS['db']->fetchByAssoc($rs)) 
 		$contents .= $row['description'];
@@ -83,7 +83,7 @@ function markEmailAddressInvalid($email_address)
     $rs = $sea->retrieve_by_string_fields( array('email_address_caps' => trim(strtoupper($email_address))) );
     if($rs != null)
     {
-        $sea->AddUpdateEmailAddress($email_address, 1, 0, $rs->id);
+        $sea->AddUpdateEmailAddress($email_address, 1, null, $rs->id);
     }
 }
 

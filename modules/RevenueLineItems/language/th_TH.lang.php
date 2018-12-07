@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'แดชบอร์ดรายการไอเท็มไลน์ภาษี',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกรายการไอเท็มไลน์ภาษี',
+
     'LBL_CAMPAIGN_PRODUCT' => 'ผลิตภัณฑ์ของแคมเปญ',
     'LBL_MODULE_NAME' => 'รายการบรรทัดรายได้',
     'LBL_MODULE_NAME_SINGULAR' => 'รายการบรรทัดรายได้',
@@ -131,7 +135,7 @@ $mod_strings = array(
     'LBL_MANUFACTURERS' => 'ผู้ผลิต',
     'LBL_EXPERT_ID' => 'ผู้เชี่ยวชาญด้านผลิตภัณฑ์',
     'LBL_FORECAST' => 'รวมในประมาณการ',
-    'LBL_CALCULATED_LINE_ITEM_AMOUNT' => 'จำนวนเงินของรายการบรรทัดรายได้ที่คำนวณ',
+    'LBL_CALCULATED_LINE_ITEM_AMOUNT' => 'จำนวนเงินของรายการบรรทัดรายได้ที่คำนวณแล้ว',
     'LBL_CONTACT' => 'ที่อยู่ติดต่อ',
     'LBL_DISCOUNT_TOTAL' => 'ยอดรวมส่วนลด',
     'LBL_DISCOUNT_AMOUNT' => 'จำนวนเงินส่วนลด',

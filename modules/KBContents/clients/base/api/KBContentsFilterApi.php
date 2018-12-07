@@ -138,7 +138,8 @@ class KBContentsFilterApi extends FilterApi
         $query->setTerm($operators);
 
         //set the filter
-        $filter = $query->createFilter();
+        $filterField = ApiHelper::getHelper($api, $bean)->getElasticSearchFields(array('active_rev'));
+        $filter = $query->createFilter(array($filterField['active_rev'][0] => 1));
         $builder
             ->addFilter($filter);
 

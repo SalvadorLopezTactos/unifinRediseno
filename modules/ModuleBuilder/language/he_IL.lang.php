@@ -735,8 +735,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Are you sure you wish to delete this relationship?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'זה יהפוך את מערכת היחסים לקבועה. האם אתה בטוח שברצונך לפרוש מערכת יחסים זו?',
 'LBL_CONFIRM_DONT_SAVE' => 'שינויים נעשו מאז השמירה האחרונה שלך, האם ברצונך לשמור?',
@@ -748,6 +748,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'הגדר את השדה כך שיאפשר חיפוש טקסט מלא בתוכו.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'חיזוק הוא התהליך של שיפור הרלוונטיות של שדות רישום.<br />שדות עם רמת חיזוק גבוהה יותר יקבלו משקל רב יותר כאשר מבוצע החיפוש. כאשר מבוצע חיפוש, רישומים תואמים המכילים שדות עם משקל רב יותר יופיעו במקום גבוה יותר בתוצאות החיפוש.<br />ערך ברירת המחדל הוא 1.0 ומייצג חיזוק ניטראלי. כדי להחיל חיזוק חיובי, כל ערך גבוה מ-1 יתקבל. עבור חיזוק שלילי השתמש בערך נמוך מ-1. לדוגמה ערך של 1.35 יחזק שדה חיובית ב-135%. שימוש בערך של 0.60 יחיל חיזוק שלילי.<br />שים לב שבגרסאות קודמות נדרש לבצע מפתוח חוזר של חיפוש טקסט מלא. זה כבר לא נדרש.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>כן</b>: השדה ייכלל בפעולת ייבוא.<br><b>לא</b>: השדה לא ייכלל בייבוא.<br><b>חובה</b>: ערך עבור השדה חייב להינתן בכל ייבוא.',
+'LBL_POPHELP_PII'=>'שדה זה יסומן באופן אוטומטי לביקורת ויהיה זמין בתצוגת &#39;מידע אישי&#39;.<br>ניתן למחוק לצמיתות שדות &#39;מידע אישי&#39; כשהרשומה קשורה לבקשת מחיקה של &#39;פרטיות נתונים&#39;.<br>המחיקה תתבצע דרך המודול &#39;פרטיות נתונים&#39; ועל ידי מנהלי מערכת או משתמשים בעלי התפקיד &#39;מנהל פרטיות נתונים&#39;.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'הזן מספר עבור רוחב בפיקסלים.<br> ממדי התמונה שהועלתה ישתנו לרוחב זה.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'הזן מספר עבור גובה בפיקסלים.<br> ממדי התמונה שהועלתה ישתנו לגובה זה.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

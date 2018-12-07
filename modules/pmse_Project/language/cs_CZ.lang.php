@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Definice procesu',
   'LBL_MODULE_TITLE' => 'Definice procesu',
   'LBL_MODULE_NAME_SINGULAR' => 'Definice procesu',
@@ -36,7 +35,7 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_ENABLE' => 'povoleno',
     'LBL_PMSE_LABEL_DISABLE' => 'Vypnout',
 
-    'LBL_PMSE_SAVE_DESIGN_BUTTON_LABEL' => 'Uložit a design',
+    'LBL_PMSE_SAVE_DESIGN_BUTTON_LABEL' => 'Uložit a sestavit',
     'LBL_PMSE_IMPORT_BUTTON_LABEL' => 'Importovat',
 
     'LBL_PMSE_MY_PROCESS_DEFINITIONS' => 'Moje definice procesu',
@@ -47,7 +46,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Existují aktivní procesy běžící proti definici procesu. Aktualizace definice procesu může tyto procesy ovlivnit. Opravdu chcete upravit tuto definici procesu?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Existují aktivní procesy běžící proti definici procesu. Aktualizace definice procesu může tyto procesy ovlivnit. Opravdu chcete zakázat tuto definici procesu?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Automaticky vytvořit nový záznam Definice procesu importováním .bpm soubor ze systému.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Automaticky vytvořit nový záznam Definice procesu importováním .bpm souboru ze systému.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Process Definitions byly úspěšně importovány do Vašeho systému',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Prosím, vyberte platný *.bpm soubor',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Definice procesu byla naimportována, ale obsahuje jednu nebo více akcí obchodních pravidel, pro něž nebyla vybrána obchodní pravidla.',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'nerovná se',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'není',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nerovno',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Doba spuštění',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Přidat',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Zavřít',

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Dashbord for målliste',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Dashbord for måloppføring',
+
   'LBL_MODULE_NAME' => 'Prospekter',
   'LBL_MODULE_NAME_SINGULAR' => 'Mål',
   'LBL_MODULE_ID'   => 'Prospekter',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Hilsen',
   'LBL_SAVE_PROSPECT' => 'Lagre mål',
   'LBL_CREATED_OPPORTUNITY' =>'Opprettet en ny mulighet',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Det kreves en bedrift for å opprette en mulighet.\n Vennligst opprett en ny bedrift eller velg en bedrift som allerede finnes.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Det kreves en bedrift for å opprette en mulighet.\\n Vennligst opprett en ny bedrift eller velg en bedrift som allerede finnes.',
   'LNK_SELECT_ACCOUNT' => "Velg bedrift",
   'LNK_NEW_PROSPECT' => 'Opprett mål',
   'LNK_PROSPECT_LIST' => 'Mål',
@@ -189,4 +193,6 @@ For å opprette {{module_name}}:
 2. Klikk "Lagre" for å sluttføre den nye posten og gå tilbake til forrige side.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Målets rapporter',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Forretningsformål samtykket for',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Samtykke sist oppdatert',
 );

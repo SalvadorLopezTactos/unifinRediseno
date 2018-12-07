@@ -10,8 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
+use Sugarcrm\Sugarcrm\Util\Uuid;
 use Doctrine\DBAL\Query\QueryBuilder;
 
 /**
@@ -653,7 +655,7 @@ abstract class DBManager
 		}
 	}
 
-/**
+   /**
 	* Scans order by to ensure that any field being ordered by is.
 	*
 	* It will throw a warning error to the log file - fatal if slow query logging is enabled
@@ -662,58 +664,81 @@ abstract class DBManager
 	* @param  bool   $object_name optional, object to look up indices in
 	* @return bool   true if an index is found false otherwise
 	*/
-protected function checkQuery($sql, $object_name = false)
-{
-	$match = array();
-	preg_match_all("'.* FROM ([^ ]*).* ORDER BY (.*)'is", $sql, $match);
-	$indices = false;
-	if (!empty($match[1][0]))
-		$table = $match[1][0];
-	else
-		return false;
+    protected function checkQuery($sql, $object_name = false)
+    {
+        preg_match_all("'.* FROM ([^ ]*).* ORDER BY (.*)'is", $sql, $match);
 
-	if (!empty($object_name) && !empty($GLOBALS['dictionary'][$object_name]))
-		$indices = $GLOBALS['dictionary'][$object_name]['indices'];
+        if (empty($match[1][0])) {
+            return false;
+        }
 
-	if (empty($indices)) {
-		foreach ( $GLOBALS['dictionary'] as $current ) {
-			if ($current['table'] == $table){
-				$indices = $current['indices'];
-				break;
-			}
-		}
-	}
-	if (empty($indices)) {
-		$this->log->warn('CHECK QUERY: Could not find index definitions for table ' . $table);
-		return false;
-	}
-	if (!empty($match[2][0])) {
-		$orderBys = explode(' ', $match[2][0]);
-		foreach ($orderBys as $orderBy){
-			$orderBy = trim($orderBy);
-			if (empty($orderBy))
-				continue;
-			$orderBy = strtolower($orderBy);
-			if ($orderBy == 'asc' || $orderBy == 'desc')
-				continue;
+        $indices = false;
 
-			$orderBy = str_replace(array($table . '.', ','), '', $orderBy);
+        if (!empty($object_name) && !empty($GLOBALS['dictionary'][$object_name])) {
+            $indices = $GLOBALS['dictionary'][$object_name]['indices'];
+        }
 
-			foreach ($indices as $index)
-				if (empty($index['db']) || $index['db'] == $this->dbType)
-					foreach ($index['fields'] as $field)
-						if ($field == $orderBy)
-							return true;
+        $table = $match[1][0];
 
-			$warning = 'Missing Index For Order By Table: ' . $table . ' Order By:' . $orderBy ;
-			if (!empty($GLOBALS['sugar_config']['dump_slow_queries']))
-				$this->log->fatal('CHECK QUERY:' .$warning);
-			else
-				$this->log->warn('CHECK QUERY:' .$warning);
-		}
-	}
-	return false;
-	}
+        if (empty($indices)) {
+            foreach ($GLOBALS['dictionary'] as $current) {
+                if ($current['table'] == $table) {
+                    if (isset($current['indices'])) {
+                        $indices = $current['indices'];
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        if (empty($indices)) {
+            $this->log->warn('CHECK QUERY: Could not find index definitions for table ' . $table);
+            return false;
+        }
+
+        if (empty($match[2][0])) {
+            return false;
+        }
+
+        $orderBys = explode(' ', $match[2][0]);
+
+        foreach ($orderBys as $orderBy) {
+            $orderBy = trim($orderBy);
+
+            if (empty($orderBy)) {
+                continue;
+            }
+
+            $orderBy = strtolower($orderBy);
+
+            if ($orderBy == 'asc' || $orderBy == 'desc') {
+                continue;
+            }
+
+            $orderBy = str_replace(array($table . '.', ','), '', $orderBy);
+
+            foreach ($indices as $index) {
+                if (empty($index['db']) || $index['db'] == $this->dbType) {
+                    foreach ($index['fields'] as $field) {
+                        if ($field == $orderBy) {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            $warning = 'Missing Index For Order By Table: ' . $table . ' Order By:' . $orderBy ;
+
+            if (!empty($GLOBALS['sugar_config']['dump_slow_queries'])) {
+                $this->log->fatal('CHECK QUERY:' .$warning);
+            } else {
+                $this->log->warn('CHECK QUERY:' .$warning);
+            }
+        }
+
+        return false;
+    }
 
 	/**
 	 * Returns the time the last query took to execute
@@ -864,12 +889,13 @@ protected function checkQuery($sql, $object_name = false)
                 continue;
             }
 
-            if (!isset($bean->$field)) {
-                continue;
-            }
-
-            $dataValues[$field] = $bean->$field;
+            $dataValues[$field] = $bean->$field ?? null;
             $dataFields[$field] = $fieldDef;
+        }
+
+        // prevent updates from overwriting `date_entered` unless it's allowed
+        if (!$bean->update_date_entered) {
+            unset($dataFields['date_entered']);
         }
 
         // build where clause
@@ -2553,7 +2579,7 @@ protected function checkQuery($sql, $object_name = false)
     protected function massageEmptyValue($fieldDef, $forPrepared)
     {
         // Required fields are not supposed to have NULLs in database
-        if (!empty($fieldDef['required'])) {
+        if (!$this->isNullable($fieldDef)) {
             return $this->emptyValue($this->getFieldType($fieldDef), $forPrepared);
         } else {
             return $forPrepared ? null : "NULL";
@@ -2934,7 +2960,7 @@ protected function checkQuery($sql, $object_name = false)
             if (in_array($colBaseType, array( 'nvarchar', 'nchar', 'varchar', 'varchar2', 'char',
                                           'clob', 'blob', 'text', 'binary', 'varbinary'))) {
           	    $colType = "$colBaseType({$fieldDef['len']})";
-            } elseif(($colBaseType == 'decimal' || $colBaseType == 'float')){
+            } elseif (($colBaseType == 'decimal' || $colBaseType == 'float' || $colBaseType == 'number')) {
                   if(!empty($fieldDef['precision']) && is_numeric($fieldDef['precision']))
                       if(strpos($fieldDef['len'],',') === false){
                           $colType = $colBaseType . "(".$fieldDef['len'].",".$fieldDef['precision'].")";
@@ -3256,36 +3282,13 @@ protected function checkQuery($sql, $object_name = false)
 	 * Generate query for audit table
 	 * @param SugarBean $bean SugarBean that was changed
 	 * @param array $changes List of changes, contains 'before' and 'after'
+     * @param string $event_id Audit event id
      * @return string  Audit table INSERT query
+     * @deprecated Use SugarBean::auditSQL()
      */
-	protected function auditSQL(SugarBean $bean, $changes)
+    protected function auditSQL(SugarBean $bean, $changes, $event_id)
 	{
-		global $current_user;
-		$sql = "INSERT INTO ".$bean->get_audit_table_name();
-		//get field defs for the audit table.
-		require('metadata/audit_templateMetaData.php');
-		$fieldDefs = $dictionary['audit']['fields'];
-
-		$values=array();
-		$values['id'] = $this->massageValue(create_guid(), $fieldDefs['id']);
-		$values['parent_id']= $this->massageValue($bean->id, $fieldDefs['parent_id']);
-		$values['field_name']= $this->massageValue($changes['field_name'], $fieldDefs['field_name']);
-		$values['data_type'] = $this->massageValue($changes['data_type'], $fieldDefs['data_type']);
-		if ($changes['data_type']=='text') {
-			$values['before_value_text'] = $this->massageValue($changes['before'], $fieldDefs['before_value_text']);
-			$values['after_value_text'] = $this->massageValue($changes['after'], $fieldDefs['after_value_text']);
-		} else {
-			$values['before_value_string'] = $this->massageValue($changes['before'], $fieldDefs['before_value_string']);
-			$values['after_value_string'] = $this->massageValue($changes['after'], $fieldDefs['after_value_string']);
-		}
-		$values['date_created'] = $this->massageValue(TimeDate::getInstance()->nowDb(), $fieldDefs['date_created'] );
-		if(!empty($current_user->id)) {
-		    $values['created_by'] = $this->massageValue($current_user->id, $fieldDefs['created_by']);
-		}
-
-		$sql .= "(".implode(",", array_keys($values)).") ";
-		$sql .= "VALUES(".implode(",", $values).")";
-		return $sql;
+        return $bean->auditSQL($bean, $changes, $event_id);
 	}
 
     /**
@@ -3294,24 +3297,13 @@ protected function checkQuery($sql, $object_name = false)
      * @param SugarBean $bean Sugarbean instance that was changed
      * @param array $changes List of changes, contains 'before' and 'after'
      * @return bool query result
-     *
+     * @deprecated Use SugarBean::saveAuditRecords()
      */
-	public function save_audit_records(SugarBean $bean, $changes)
+    public function save_audit_records(SugarBean $bean, $changes)
 	{
-		return $this->query($this->auditSQL($bean, $changes));
+        return $bean->saveAuditRecords($bean, $changes, Uuid::uuid1());
 	}
 
-    /**
-     * Finds fields whose value has changed.
-     * The before and after values are stored in the bean.
-     * Uses $bean->fetched_row && $bean->fetched_rel_row to compare
-     *
-     * @param SugarBean $bean Sugarbean instance that was changed
-     * @param array|null $options Array of optional arguments
-     *                   field_filter => Array of filter names to be inspected (NULL means all fields)
-     *                   for => Who are we getting the changes for, options are audit (default) and activity
-     * @return array
-     */
     /**
      * Finds fields whose value has changed.
      * The before and after values are stored in the bean.
@@ -3324,7 +3316,16 @@ protected function checkQuery($sql, $object_name = false)
      *                   excludeType => Types of fields to exclude
      * @return array
      */
-    public function getDataChanges(SugarBean &$bean, array $options = null)
+    public function getDataChanges(SugarBean &$bean, array $options = [])
+    {
+        $persistedState = is_array($bean->fetched_row)
+            ? array_merge($bean->fetched_row, $bean->fetched_rel_row)
+            : [];
+
+        return $this->getStateChanges($bean, $persistedState, $options);
+    }
+
+    public function getStateChanges(SugarBean $bean, array $prevState, array $options = [])
     {
         $changed_values=array();
 
@@ -3340,62 +3341,45 @@ protected function checkQuery($sql, $object_name = false)
             $fields = $bean->getAuditEnabledFieldDefinitions();
         }
 
-        $fetched_row = array();
-        if (is_array($bean->fetched_row)) {
-            $fetched_row = array_merge($bean->fetched_row, $bean->fetched_rel_row);
-        }
-        if (!$fetched_row) {
-            return $changed_values;
-        }
-
         if (isset($options['field_filter']) && is_array($options['field_filter'])) {
             $fields = array_intersect_key($fields, array_flip($options['field_filter']));
         }
 
-        // remove fields which do not present in fetched row
-        $fields = array_intersect_key($fields, $fetched_row);
+        // remove fields which are not present in the previous state
+        if (!empty($prevState)) {
+            $fields = array_intersect_key($fields, $prevState);
+        }
 
-        // remove fields which do not exist as bean property
+        // remove fields which do not present in the current state
         $fields = array_intersect_key($fields, (array) $bean);
 
         if (is_array($fields) and count($fields) > 0) {
             foreach ($fields as $field => $vardefs) {
-                if (array_key_exists($field, $fetched_row)) {
-                    $before_value = $fetched_row[$field];
-                    $after_value=$bean->$field;
-                    $field_type = $this->getFieldType($vardefs);
-                }
+                $before_value = $prevState[$field] ?? null;
+                $after_value = $bean->$field;
+                $field_type = $this->getFieldType($vardefs);
 
                 //Because of bug #25078(sqlserver haven't 'date' type, trim extra "00:00:00" when insert into *_cstm table).
                 // so when we read the audit datetime field from sqlserver, we have to replace the extra "00:00:00" again.
-                if(!empty($field_type) && $field_type == 'date'){
-                    $before_value = $this->fromConvert($before_value , $field_type);
+                if (!empty($before_value) && !empty($field_type) && $field_type == 'date') {
+                    $before_value = $this->fromConvert($before_value, $field_type);
                 }
 
                 //email field contains an array so loop through and grab the addresses marked as primary for comparison
                 if (!empty($field_type) && $field_type == 'email') {
-                    if (empty($before_value)) {
-                        //further processing expects a string, so change empty array into blank string
-                        $before_value = '';
-                    } else {
-                        foreach ($before_value as $emailArr ) {
-                            if ($emailArr['primary_address']) {
-                                $before_value = $emailArr['email_address'];
-                                break;
-                            }
-                        }
+                    if (!empty($bean->emailAddress) && !empty($bean->emailAddress->hasFetched)) {
+                        $after_value = $bean->emailAddress->addresses;
                     }
-                    if (empty($after_value)) {
-                        //further processing expects a string, so change empty array into blank string
-                        $after_value = '';
-                    } else {
-                        foreach ($after_value as $emailArr ) {
-                            if ($emailArr['primary_address']) {
-                                $after_value = $emailArr['email_address'];
-                                break;
-                            }
-                        }
+                    if ($this->didEmailAddressesChange($before_value, $after_value)) {
+                        $changed_values[$field] = array(
+                            'field_name' => $field,
+                            'data_type' => $field_type,
+                            'before' => $before_value,
+                            'after' => $after_value,
+                        );
                     }
+
+                    continue;
                 }
 
                 // if we have a type of currency, we need to convert the value into the base for the system.
@@ -3432,9 +3416,9 @@ protected function checkQuery($sql, $object_name = false)
                             if (is_string($after_value)) {
                                 $after_value = trim($after_value);
                             }
-                            // make sure $before_value and $after_value are numeric as empty strings
-                            $before_value = empty($before_value)? 0 : $before_value;
-                            $after_value = empty($after_value)? 0 : $after_value;
+
+							$before_value = empty($before_value)? 0 : $before_value;
+							$after_value = empty($after_value)? 0 : $after_value;
 
                             $numerator = abs(2*($before_value - $after_value));
                             $denominator = abs($before_value + $after_value);
@@ -3465,6 +3449,20 @@ protected function checkQuery($sql, $object_name = false)
         return $changed_values;
     }
 
+    private function didEmailAddressesChange($before_value, $after_value)
+    {
+        if (!is_array($before_value) || !(is_array($after_value))) {
+            return $before_value !== $after_value;
+        }
+
+        $before_addresses = array_column($before_value, 'email_address_id');
+        sort($before_addresses);
+        $after_addresses = array_column($after_value, 'email_address_id');
+        sort($after_addresses);
+
+        return ($before_addresses != $after_addresses);
+    }
+
     /**
      * Uses the audit enabled fields array to find fields whose value has changed.
      * The before and after values are stored in the bean.
@@ -3472,6 +3470,7 @@ protected function checkQuery($sql, $object_name = false)
      *
      * @param SugarBean $bean Sugarbean instance that was changed
      * @return array
+     * @deprecated Use SugarBean::getAuditDataChanges()
      */
     public function getAuditDataChanges(SugarBean $bean)
     {
@@ -4531,6 +4530,10 @@ protected function checkQuery($sql, $object_name = false)
             $this->conn->close();
             $this->conn = null;
         }
+
+        // dependency injection container holds a reference to the underlying DBAL connection,
+        // so it should be re-instantiated after re-connection
+        Container::resetInstance();
     }
 
 	/**

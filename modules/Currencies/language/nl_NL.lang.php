@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Nieuwe Taak',
   'NTC_DELETE_CONFIRMATION' => 'Weet u zeker dat u dit record wilt verwijderen? Het is wellicht beter om de status op inactief te zetten omdat anders alle records die deze valuta gebruiken worden omgezet naar Dollars wanneer ze worden geraadpleegd.',
   'LBL_BELOW_MIN' => 'Koers moet boven de 0 zijn.',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Actief',
-    'Inactive' => 'Inactief',
-  ),
   'LBL_CREATED_BY' => 'Aangemaakt door',
   'LBL_EDIT_LAYOUT' => 'Wijzig Lay-out' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Alleen voor Administrators',
+  'LBL_CURRENCY_DEFAULT' => 'Amerikaanse Dollars (standaard)',
+
 );
 ?>

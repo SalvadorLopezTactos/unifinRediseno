@@ -10,29 +10,23 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*********************************************************************************
- * Portions created by SugarCRM are Copyright (C) SugarCRM, Inc.
- * All Rights Reserved.
- * Contributor(s): ______________________________________..
- ********************************************************************************/
 
-$viewdefs["Emails"]["base"]["view"]["compose-addressbook-recipientscontainer"] = array(
+$viewdefs['Emails']['base']['view']['compose-addressbook-recipientscontainer'] = array(
     'template' => 'record',
-    "panels" => array(
+    'panels' => array(
         array(
-            "name"         => "selected_recipients",
-            "columns"      => 1,
-            "labels"       => true,
-            "labelsOnTop"  => true,
-            "placeholders" => true,
-            "fields"       => array(
+            'name' => 'selected_recipients',
+            'columns' => 1,
+            'labels' => true,
+            'labelsOnTop' => true,
+            'placeholders' => true,
+            'fields' => array(
                 array(
-                    "name"                => "compose_addressbook_selected_recipients",
-                    "type"                => "recipients",
-                    "label"               => "LBL_SELECTED_RECIPIENTS",
-                    "css_class_container" => "controls-one btn-fit",
-                    'readonly'            => true,
-                    "span"                => 12,
+                    'name' => 'to_collection',
+                    'type' => 'email-recipients',
+                    'label' => 'LBL_SELECTED_RECIPIENTS',
+                    'readonly' => true,
+                    'span' => 12,
                 ),
             ),
         ),

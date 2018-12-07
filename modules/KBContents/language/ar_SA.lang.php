@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'لوحة معلومات قائمة قاعدة المعارف',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'لوحة معلومات سجل قاعدة المعارف',
+
     'LBL_MODULE_NAME' => 'قاعدة المعارف',
     'LBL_MODULE_NAME_SINGULAR' => 'مقالة قاعدة المعارف',
     'LBL_MODULE_TITLE' => 'مقالة قاعدة المعارف',

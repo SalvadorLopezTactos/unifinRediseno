@@ -8,19 +8,20 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 /**
  * @class CheckboxItem
  * Handle checkboxes into the context menu
- * @extend Item
+ * @extends PMSE.Item
  *
  *
  * @constructor
  * Creates a new instance of this class
  * @param {Object} options
- * @param {Menu} [parent]
+ * @param {PMSE.Menu} [parent]
  */
 var CheckboxItem = function (options, parent) {
-    Item.call(this, options, parent);
+    PMSE.Item.call(this, options, parent);
     /**
      * Defines the checkbox's status
      * @type {Boolean}
@@ -29,7 +30,7 @@ var CheckboxItem = function (options, parent) {
     this.itemAnchor = null;
     CheckboxItem.prototype.initObject.call(this, options);
 };
-CheckboxItem.prototype = new Item();
+CheckboxItem.prototype = new PMSE.Item();
 
 /**
  * Defines the object's type
@@ -64,7 +65,7 @@ CheckboxItem.prototype.setChecked = function (value) {
 
 CheckboxItem.prototype.createHTML = function () {
     var labelSpan, iconSpan;
-    Item.prototype.createHTML.call(this);
+    PMSE.Item.prototype.createHTML.call(this);
 
     this.itemAnchor = this.createHTMLElement('a');
     this.itemAnchor.href = "#";

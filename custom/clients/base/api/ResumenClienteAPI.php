@@ -73,7 +73,7 @@ class ResumenClienteAPI extends SugarApi
         );
         /*Victor Martinez Lopez
         *20-Septiembre-2018
-        *Nuevos Campos de de noticias 
+        *Nuevos Campos de de noticias
         */
         //Noticias General
         $arr_principal['noticia_general']=array(
@@ -324,9 +324,13 @@ class ResumenClienteAPI extends SugarApi
             if ($relatedMeetings) {
                 //$GLOBALS['log']->fatal("ResumenPersona: Genera  petición -- Recupero reuniones ");
                 //Establece última fecha de reunión
-                $dateUR = $relatedMeetings[0]->date_start;
+                //$dateUR = $relatedMeetings[0]->date_start;
+                //$timedateUL = new TimeDate();
+                //$ultima_reunion = $timedateUL->fromUser($dateUR, $current_user);
+                $dateUR = "2000-01-01 10:00:01";
                 $timedateUL = new TimeDate();
-                $ultima_reunion = $timedateUL->fromUser($dateUR, $current_user);
+                $ultima_reunion = $timedateUL->fromDb($dateUR);
+
                 $fecha_completa_reunion = $dateUR;
                 //Obtiene total de reuniones
                 $total_reuniones = 0;// count($relatedMeetings);
@@ -358,9 +362,15 @@ class ResumenClienteAPI extends SugarApi
                         $total_reuniones++;
 
                         //Obtiene fecha de inicio de reunión
+                        // $dateFR = $meeting->date_start;
+                        // $timedateFR = new TimeDate();
+                        // $fecha_reunion = $timedateFR->fromUser($dateFR, $current_user);
                         $dateFR = $meeting->date_start;
                         $timedateFR = new TimeDate();
-                        $fecha_reunion = $timedateFR->fromUser($dateFR, $current_user);
+                        $fecha_reunion = $timedateFR->fromDb($dateFR);
+                        // $GLOBALS['log']->fatal("Fechas...reuniones");
+                        // $GLOBALS['log']->fatal($dateFR);
+                        // $GLOBALS['log']->fatal($fecha_reunion);
 
                         //Compara fechas y establece última fecha de reunión
                         if ( $fecha_reunion > $ultima_reunion){
@@ -369,9 +379,18 @@ class ResumenClienteAPI extends SugarApi
                             $fecha_completa_reunion = $dateFR;
                         }
                       }
+
                       //Agrega valores al arreglo de respuesta
-                      $arr_principal['historial_contactos']['ultima_cita']= date_format($ultima_reunion, "d/m/Y");
-                      $arr_principal['historial_contactos']['fecha_completa_cita']= $fecha_completa_reunion;
+                      // $GLOBALS['log']->fatal("Ultima fecha");
+                      // $GLOBALS['log']->fatal(date_format($ultima_reunion, "d/m/Y"));
+                      if (date_format($ultima_reunion, "d/m/Y") == "01/11/2000") {
+                        $arr_principal['historial_contactos']['ultima_cita']= '';
+                        $arr_principal['historial_contactos']['fecha_completa_cita']= '';
+                      }else{
+                        $arr_principal['historial_contactos']['ultima_cita']= date_format($ultima_reunion, "d/m/Y");
+                        $arr_principal['historial_contactos']['fecha_completa_cita']= $fecha_completa_reunion;
+                      }
+
                     }
                   }
                 }
@@ -391,11 +410,15 @@ class ResumenClienteAPI extends SugarApi
             //Procesa si recupera registros
             if ($relatedCalls) {
                 //Establece última fecha de llamada
-                $dateUL = $relatedCalls[0]->date_start;
+                //$dateUL = $relatedCalls[0]->date_start;
+                //$timedateUL = new TimeDate();
+                //$ultima_llamada = $timedateUL->fromUser($dateUL, $current_user);
+                $dateUL = "2000-01-01 10:00:01";
                 $timedateUL = new TimeDate();
-                $ultima_llamada = $timedateUL->fromUser($dateUL, $current_user);
+                $ultima_llamada = $timedateUL->fromDb($dateUL);
+
                 $fecha_completa_llamada = $dateUL;
-                $GLOBALS['log']->fatal($ultima_llamada);
+                //$GLOBALS['log']->fatal($ultima_llamada);
                 //Obtiene total de llamadas
                 $total_llamadas = 0;// count($relatedCalls);
 
@@ -419,17 +442,23 @@ class ResumenClienteAPI extends SugarApi
                 //Recorre llamadas
                 if (count($users)>0) {
                   foreach ($relatedCalls as $call) {
-                    $GLOBALS['log']->fatal("ResumenPersona: Estado de llamada: " . $call->status);
+                    //$GLOBALS['log']->fatal("ResumenPersona: Estado de llamada: " . $call->status);
                       if ($call->status == 'Held') {
-                        $GLOBALS['log']->fatal("ResumenPersona: Procesa llamada");
+                        //$GLOBALS['log']->fatal("ResumenPersona: Procesa llamada");
                         if (in_array($call->assigned_user_id, $users)) {
 
                           $total_llamadas++;
 
                           //Obtiene fecha de inicio de reunión
+                          // $dateFL = $call->date_start;
+                          // $timedateFL = new TimeDate();
+                          // $fecha_llamada = $timedateFL->fromUser($dateFL, $current_user);
                           $dateFL = $call->date_start;
                           $timedateFL = new TimeDate();
-                          $fecha_llamada = $timedateFL->fromUser($dateFL, $current_user);
+                          $fecha_llamada = $timedateFL->fromDb($dateFL);
+                          // $GLOBALS['log']->fatal("Fechas...reuniones");
+                          // $GLOBALS['log']->fatal($dateFL);
+                          // $GLOBALS['log']->fatal($fecha_llamada);
 
                           //Compara fechas y establece última fecha de llamada
                           if ( $fecha_llamada > $ultima_llamada){
@@ -440,16 +469,22 @@ class ResumenClienteAPI extends SugarApi
                           }
                         }
                         //Agrega valores al arreglo de
-                        $arr_principal['historial_contactos']['ultima_llamada']= date_format($ultima_llamada, "d/m/Y");
-                        $arr_principal['historial_contactos']['fecha_completa_llamada']= $fecha_completa_llamada;
-
+                        // $GLOBALS['log']->fatal("Ultima fecha");
+                        // $GLOBALS['log']->fatal(date_format($ultima_llamada, "d/m/Y"));
+                        if (date_format($ultima_llamada, "d/m/Y") == "01/11/2000") {
+                          $arr_principal['historial_contactos']['ultima_llamada']= '';
+                          $arr_principal['historial_contactos']['fecha_completa_llamada']= '';
+                        }else{
+                          $arr_principal['historial_contactos']['ultima_llamada']= date_format($ultima_llamada, "d/m/Y");
+                          $arr_principal['historial_contactos']['fecha_completa_llamada']= $fecha_completa_llamada;
+                        }
                       }
                   }
                 }
 
 
                 $arr_principal['historial_contactos']['llamadas']= $total_llamadas;
-                $GLOBALS['log']->fatal("ResumenPersona: 2");
+                //$GLOBALS['log']->fatal("ResumenPersona: 2");
             }
         }
 
@@ -685,14 +720,24 @@ class ResumenClienteAPI extends SugarApi
             // $today = $timedate->getNow(true);
 
             //Última reunión
+            //$dateFR = $arr_principal['historial_contactos']['fecha_completa_cita'];
+            //$timedateFR = new TimeDate();
+            //$fecha_cita = $timedateFR->fromUser($dateFR, $current_user);
+
             $dateFR = $arr_principal['historial_contactos']['fecha_completa_cita'];
             $timedateFR = new TimeDate();
-            $fecha_cita = $timedateFR->fromUser($dateFR, $current_user);
-
+            $fecha_cita = $timedateFR->fromDb($dateFR);
+            // $GLOBALS['log']->fatal('fecha de cita:');
+            // $GLOBALS['log']->fatal($fecha_cita);
             //Última llamada
+            // $dateFL = $arr_principal['historial_contactos']['fecha_completa_llamada'];
+            // $timedateFL = new TimeDate();
+            // $fecha_llamada = $timedateFL->fromUser($dateFL, $current_user);
             $dateFL = $arr_principal['historial_contactos']['fecha_completa_llamada'];
             $timedateFL = new TimeDate();
-            $fecha_llamada = $timedateFL->fromUser($dateFL, $current_user);
+            $fecha_llamada = $timedateFL->fromDb($dateFL);
+            // $GLOBALS['log']->fatal('fecha de llamada:');
+            // $GLOBALS['log']->fatal($fecha_llamada);
 
             //Recupera última fecha de contacto
             $fecha_contacto = "";
@@ -702,8 +747,8 @@ class ResumenClienteAPI extends SugarApi
               $fecha_contacto = $fecha_cita;
             }
 
-            $GLOBALS['log']->fatal('fecha de contacto:');
-            $GLOBALS['log']->fatal($fecha_contacto);
+            // $GLOBALS['log']->fatal('fecha de contacto:');
+            // $GLOBALS['log']->fatal($fecha_contacto);
             //Calcula diferencia
             $current_date = new DateTime($today->format("Y-m-d"));
             $fecha_contacto = new DateTime($fecha_contacto->format("Y-m-d"));
@@ -711,8 +756,8 @@ class ResumenClienteAPI extends SugarApi
             $diferencia = $current_date->diff($fecha_contacto);
             $meses = ( $diferencia->y * 12 ) + $diferencia->m;
 
-            $GLOBALS['log']->fatal('diferencia:');
-            $GLOBALS['log']->fatal($meses);
+            // $GLOBALS['log']->fatal('diferencia:');
+            // $GLOBALS['log']->fatal($meses);
 
             //Asigna color
             if($current_date > $fecha_contacto){

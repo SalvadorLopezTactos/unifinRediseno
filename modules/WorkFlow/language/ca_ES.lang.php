@@ -93,6 +93,6 @@ $mod_strings = array (
   'LBL_EMAILTEMPLATES_TYPE' => 'Tipus',
 
   // Workflow sunsetting message, updated for 7.9
-  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> La funció Sugar Workflow i Workflow Management desapareixarà a la propera versió de Sugar. Els clients de l&#39;edició Sugar Enterprise haurien de començar a utilitzar la funció de Sugar Advanced Workflow. Feu clic a <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> per veure més informació.',
+  'LBL_WORKFLOW_SUNSET_NOTICE' => '<strong>Note:</strong> The Sugar Workflow and Workflow Management functionality will be removed in a future release of Sugar. Sugar Enterprise edition customers should begin to use the functionality provided by Sugar Advanced Workflow. Click <a href="http://www.sugarcrm.com/wf-eol" target="_blank">here</a> for more information.',
 );
 

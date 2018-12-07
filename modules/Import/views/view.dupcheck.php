@@ -72,7 +72,8 @@ class ImportViewDupcheck extends ImportView
         $importModule = $this->request->getValidInputRequest('import_module', 'Assert\Mvc\ModuleName', '');
         $uploadFileName = "upload://".basename($_REQUEST['tmp_file']);
         $splitter = new ImportFileSplitter($uploadFileName, $sugar_config['import_max_records_per_file']);
-        $splitter->splitSourceFile( $_REQUEST['custom_delimiter'], html_entity_decode($_REQUEST['custom_enclosure'],ENT_QUOTES), $has_header);
+        $delimiter = $this->getDelimiterValue();
+        $splitter->splitSourceFile($delimiter, html_entity_decode($_REQUEST['custom_enclosure'], ENT_QUOTES), $has_header);
         $count = $splitter->getFileCount()-1;
         $recCount = $splitter->getRecordCount();
 

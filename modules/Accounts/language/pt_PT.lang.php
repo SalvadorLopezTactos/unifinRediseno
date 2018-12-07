@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Cotações (Enviar Para)',
 	'LNK_ACCOUNT_REPORTS' => 'Ver Relatórios de Contas',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documentos',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Dashboard de lista de contas',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Dashboard de registo de contas',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Gráficos',
 	'LBL_DEFAULT' => 'Vistas',
@@ -79,7 +83,7 @@ $mod_strings = array (
 	'LBL_INVALID_EMAIL'=>'E-mail Inválido:',
 	'LBL_INVITEE' => 'Contactos',
 	'LBL_LEADS_SUBPANEL_TITLE' => 'Clientes Potenciais',
-	'LBL_LIST_ACCOUNT_NAME' => 'Nome da Entidade',
+	'LBL_LIST_ACCOUNT_NAME' => 'Nome',
 	'LBL_LIST_CITY' => 'Cidade',
 	'LBL_LIST_CONTACT_NAME' => 'Nome do Contacto',
 	'LBL_LIST_EMAIL_ADDRESS' => 'Endereço de E-mail',

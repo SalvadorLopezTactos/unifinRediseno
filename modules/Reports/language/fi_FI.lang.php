@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Neljänneksittäin',
     'LBL_BY_FISCAL_YEAR' => 'Tilivuosittain',
     'LBL_BY_FISCAL_QUARTER' => 'Tilineljänneksittäin',
+    'LBL_AMOUNT' => 'Määrä',
     'LBL_COUNT' => 'Lukumäärä',
+    'LBL_PERCENT' => 'Prosenttia',
     'LBL_SUM' => 'SUMMA',
     'LBL_AVG' => 'KESKIARVO',
     'LBL_MAX' => 'MAKSIMI',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Kuukausi',
     'LBL_YEAR' => 'Vuosi:',
     'LBL_QUARTER' => 'Neljännes',
+    'LBL_FISCAL' => 'Vero',
     'LBL_FISCAL_YEAR' => 'Tilivuosi',
     'LBL_FISCAL_QUARTER' => 'Tilineljännes',
 	'LBL_YESTERDAY'=>'Eilen',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Enemmän tai yhtä kuin',
 
     'LBL_FILTER_BY_MODULE' => 'Moduuleittain',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Kaavioilla',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Virhe haettaessa Drillthrough-raporttitietojen tälle toiminnolle. Ota yhteyttä raportin omistajaan.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Läpikatselmus ei ole käytettävissä',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'Luettelonäkymä näyttää kaikki raportit, jotka vastaavat hakukriteerejä ja joihin käyttäjillä on pääsyoikeudet. Luettelonäkymässä ja esikatselussa näet raporttien perustiedot. Raporteille voi määrittää tunnisteita ja luoda suodattimia. Jos haluat katsella raporttia, napsauta raportin nimeä. Jos haluat muokata raporttia, valitse toimintovalikossa &#39;Muokkaa raporttia&#39;.',
+  );

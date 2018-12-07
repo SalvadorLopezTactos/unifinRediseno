@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Дефиниции на процеси',
   'LBL_MODULE_TITLE' => 'Дефиниции на процеси',
   'LBL_MODULE_NAME_SINGULAR' => 'Дефиниция на процес',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'не е равно на',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'не е',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'не е равно на',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Реално време',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Добави',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Затвори',

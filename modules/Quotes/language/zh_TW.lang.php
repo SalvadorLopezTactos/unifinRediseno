@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => '報價清單儀表板',
+    'LBL_QUOTES_RECORD_DASHBOARD' => '報價記錄儀表板',
+
     'LBL_CONTRACTS'=>'合約',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'合約',
     'ERR_DELETE_RECORD' => '必須指定記錄編號才能刪除報價。',
@@ -83,7 +87,7 @@ $mod_strings = array (
     'LBL_LIST_ASSIGNED_TO_NAME' => '指派的使用者',
     'LBL_LIST_COST_PRICE' => '成本',
     'LBL_LIST_DATE_QUOTE_CLOSED' => '發貨日期',
-    'LBL_LIST_DATE_QUOTE_EXPECTED_CLOSED' => '滿足以下條件方有效',
+    'LBL_LIST_DATE_QUOTE_EXPECTED_CLOSED' => '有效起日',
     'LBL_LIST_DISCOUNT_PRICE' => '單價',
     'LBL_LIST_DEAL_TOT'=> '總折扣',
     'LBL_LIST_FORM_TITLE' => '報價清單',
@@ -94,7 +98,7 @@ $mod_strings = array (
     'LBL_LIST_PRICING_FORMULA' => '定價公式',
     'LBL_LIST_PRODUCT_NAME' => '報價項目',
     'LBL_LIST_QUANTITY' => '數量',
-    'LBL_LIST_QUOTE_NAME' => '主題',
+    'LBL_LIST_QUOTE_NAME' => '主旨',
     'LBL_LIST_QUOTE_NUM' => '編號',
     'LBL_LIST_QUOTE_STAGE' => '階段',
     'LBL_LIST_TAXCLASS' => '稅種',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'小計（美元）',
     'LBL_SUBTOTAL' => '小計：',
     'LBL_TAXABLE_SUBTOTAL' => '應納稅小計',
-    'LBL_SYSTEM_ID' => '系統 ID',
     'LBL_TAX_USDOLLAR'=>'稅收（美元）',
     'LBL_TAX' => '稅收：',
     'LBL_TAX_TOTAL' => '總稅款',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => '刪除選擇的內容',
     'LBL_DELETE_SELECTED_TOOLTIP' => '刪除選擇的項目',
     'LBL_SAVE_LINE_ITEMS' => '保存報價之前，請按一下項目旁邊的藍色核取記號，保存所有啟用的項目。',
+    'LBL_COPY_LINE_ITEMS' => '複製此報價前，請點擊單項旁邊的藍色複選框，保存所有啟用的單項。',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => '搜尋產品目錄',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => '無數據可用',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => '將帶引號的行項複製到新報價單。',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => '將帶引號的行項複製到新報價單。此過程可能需要一些時間。',
 );

@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Es wurden mehrere Spalten mit dem gleichen Feldnamen definiert.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Erforderliche Felder fehlen:',
     'ERR_MISSING_MAP_NAME' => 'Fehlender Name für individuelle Zuordnung',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Der Benutzer-Import ist für den IDM-Modus deaktiviert.',
     'ERR_SELECT_FULL_NAME' => 'Wenn Vorname und Nachname ausgewählt sind, kann "Vollständiger Name" nicht ausgewählt werden.',
     'ERR_SELECT_FILE' => 'Datei zum Hochladen auswählen.',
     'LBL_SELECT_FILE' => 'Datei auswählen:',

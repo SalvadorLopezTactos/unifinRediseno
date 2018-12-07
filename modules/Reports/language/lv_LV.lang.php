@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Pēc ceturkšņa',
     'LBL_BY_FISCAL_YEAR' => 'Pēc fiskālā gada',
     'LBL_BY_FISCAL_QUARTER' => 'Pēc fiskālā ceturkšņa',
+    'LBL_AMOUNT' => 'Summa',
     'LBL_COUNT' => 'Skaits',
+    'LBL_PERCENT' => 'Procenti',
     'LBL_SUM' => 'SUMMA',
     'LBL_AVG' => 'VID.',
     'LBL_MAX' => 'MAKS.',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Mēnesis',
     'LBL_YEAR' => 'Gads',
     'LBL_QUARTER' => 'Ceturksnis',
+    'LBL_FISCAL' => 'Fiskālais',
     'LBL_FISCAL_YEAR' => 'Fiskālais gads',
     'LBL_FISCAL_QUARTER' => 'Fiskālais ceturksnis',
 	'LBL_YESTERDAY'=>'Vakar',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Nākošais kvartāls',
     'LBL_ADD_RELATE' => "Pievienot sasaisti",
     'LBL_DEL_THIS' => "Noņemt",
-    'LBL_ALERT_CANT_ADD' => 'Nevar pievienot saistītu moduli, kamēr nav izvēlēta tabula, no kuras veikt sasaisti.\nIzvēlieties moduli pa kreisi no iepriekš spiestās pogas &#39;Pievienot sasaisti&#39;.',
+    'LBL_ALERT_CANT_ADD' => 'Nevar pievienot saistītu moduli, kamēr nav izvēlēta tabula, no kuras veikt sasaisti.\\nIzvēlieties moduli pa kreisi no iepriekš spiestās pogas &#39;Pievienot sasaisti&#39;.',
     'LBL_BY_DAY' => 'Pēc dienām',
     'LBL_DAY' => 'Diena',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Papildus sasaistītie moduļi',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Lielāks vai vienāds ar',
 
     'LBL_FILTER_BY_MODULE' => 'Pēc moduļa',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Ar diargammām',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Kļūda, izgūstot detalizētas atskaites datus par šo darbību. Lai saņemtu palīdzību, sazinieties ar atskaites īpašnieku.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Detalizācija nav pieejama',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'Moduļa saraksta skatījuma režīmā tiek parādītas visas atskaites, kas atbilst pašreizējās meklēšanas kritērijiem un kurām lietotāji var piekļūt. Ir iespējams apskatīt pamatinformāciju par katru atskaiti saraksta skatījuma režīma lauku kolonnās un priekšskatījumā. Varat iestatīt birkas atskaitēm un izveidot filtrus. Uzklikšķiniet uz atskaites nosaukuma, lai apskatītu atskaiti, un darbību izvēlnē atlasiet "Rediģēt atskaiti", lai pārveidotu atskaiti.',
+  );

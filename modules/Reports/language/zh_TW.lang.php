@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => '按季度',
     'LBL_BY_FISCAL_YEAR' => '按會計年度',
     'LBL_BY_FISCAL_QUARTER' => '按會計季度',
+    'LBL_AMOUNT' => '金額',
     'LBL_COUNT' => '計數',
+    'LBL_PERCENT' => '百分比',
     'LBL_SUM' => '總和',
     'LBL_AVG' => '平均',
     'LBL_MAX' => '最大',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => '月',
     'LBL_YEAR' => '年',
     'LBL_QUARTER' => '季度',
+    'LBL_FISCAL' => '財政',
     'LBL_FISCAL_YEAR' => '會計年度',
     'LBL_FISCAL_QUARTER' => '會計季度',
 	'LBL_YESTERDAY'=>'昨天',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'下個季度',
     'LBL_ADD_RELATE' => "新增相關",
     'LBL_DEL_THIS' => "移除",
-    'LBL_ALERT_CANT_ADD' => '只有在選擇相關表格后，方可新增相關模組。\n在您已按下的「新增相關」按鈕左側的下拉式清單中，選擇模組。',
+    'LBL_ALERT_CANT_ADD' => '只有在選擇相關表格后，方可新增相關模組。\\n在您已按下的「新增相關」按鈕左側的下拉式清單中，選擇模組。',
     'LBL_BY_DAY' => '按天',
     'LBL_DAY' => '天',
     'LBL_OUTER_JOIN_CHECKBOX' => '選用相關模組',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => '不小於',
 
     'LBL_FILTER_BY_MODULE' => '按模組',
-);
+    'LBL_FILTER_WITH_CHARTS' => '與圖表',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => '此操作發生 Drillthrough 報表數據檢索錯誤。請聯繫報告所有者以獲得協助。',
+    'LBL_CHART_NO_DRILLTHRU' => '鑽取不可用',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => '列表試圖顯示所有滿足當前搜尋條件且用戶對其擁有訪問權限的報告。您可以在列表試圖的字段欄和預覽中查看每個報告的基本詳情。您可以為報告設置標籤並創建篩選條件。點擊報告的名稱可察看報告或在操作選單中選擇“編輯報告”可修改報告。',
+  );

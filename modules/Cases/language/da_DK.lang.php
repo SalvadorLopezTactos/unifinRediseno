@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Case-liste dashboard',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Caseoptegnelses-dashboard',
+
 	'ERR_DELETE_RECORD'					=> 'Du skal angive et postnummer for at slette virksomheden.',
 	'LBL_ACCOUNT_ID'					=> 'Virksomheds-id',
 	'LBL_ACCOUNT_NAME'					=> 'Virksomhedsnavn:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Status:',
     'LBL_SOURCE' => 'Kilde:',
 	'LBL_SUBJECT'						=> 'Emne:',
-	'LBL_SYSTEM_ID'						=> 'System-id',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Kontonavn',
 	'LBL_LIST_ASSIGNED'					=> 'Tildelt til',
 	'LBL_LIST_CLOSE'					=> 'Luk',

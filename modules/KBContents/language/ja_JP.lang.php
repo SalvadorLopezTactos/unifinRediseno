@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'ナレッジベース一覧のダッシュボード',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'ナレッジベースレコードのダッシュボード',
+
     'LBL_MODULE_NAME' => 'ナレッジベース',
     'LBL_MODULE_NAME_SINGULAR' => 'ナレッジベース記事',
     'LBL_MODULE_TITLE' => 'ナレッジベース記事',

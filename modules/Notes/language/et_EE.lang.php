@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Märkmete loendi töölaud',
+
     'ERR_DELETE_RECORD' => 'Konto kustutamiseks täpsustage kirje numbrit.',
     'LBL_ACCOUNT_ID' => 'Konto ID:',
     'LBL_CASE_ID' => 'Juhtumi ID:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Kirjeldus',
     'LBL_EMAIL_ADDRESS' => 'E-posti aadress:',
     'LBL_EMAIL_ATTACHMENT' => 'E-kirja manus',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'E-kirja manus saajale',
     'LBL_FILE_MIME_TYPE' => 'MIME tüüp',
+    'LBL_FILE_EXTENSION' => 'Faililaiend',
+    'LBL_FILE_SOURCE' => 'Faili allikas',
+    'LBL_FILE_SIZE' => 'Faili maht',
     'LBL_FILE_URL' => 'Faili URL',
     'LBL_FILENAME' => 'Manus:',
     'LBL_LEAD_ID' => 'Müügivihje ID:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Müügivõimaluse ID:',
     'LBL_PARENT_ID' => 'Ema ID:',
     'LBL_PARENT_TYPE' => 'Ema tüüp',
+    'LBL_EMAIL_TYPE' => 'E-kirja tüüp',
+    'LBL_EMAIL_ID' => 'E-kirja ID',
     'LBL_PHONE' => 'Telefoninumber:',
     'LBL_PORTAL_FLAG' => 'Kas kuvada portaalis?',
     'LBL_EMBED_FLAG' => 'Kas manustada e-kirja?',

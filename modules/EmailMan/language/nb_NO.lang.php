@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'klikk her',
 	'TXT_REMOVE_ME'								=> 'For å fjerne deg selv fra denne e-postlisten',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Vil du sende melding fra tildelt brukers e-postadresse?',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Meld av nye e-postadresser som standard',
 
 	'LBL_SECURITY_TITLE'						=> 'Sikkerhetsinnstillinger for e-post',
 	'LBL_SECURITY_DESC'							=> 'Sjekk det følgende som IKKE skal tillates via inngående e-post eller vises i e-postmodulen.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Tillat brukere å benytte denne kontoen for utgående e-post:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Når dette alternativet velges kan alle brukere sende e-post fra samme utgående e-post konto som brukes til å sende system-meldinger og -varsler. Hvis alternativet ikke velges, kan brukerne fortsatt benytte den utgående e-postserveren etter å ha lagt inn sin egen kontoinformasjon.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Når dette er aktivert vil den angitte brukerens navn og e-postadresse stå i Fra-feltet i e-posten. Denne funksjonen vil muligens ikke fungere med SMTP-servere som ikke tillater å sende fra en annen e-postkonto enn serverkontoen.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Når en ny e-postadresse legges til, vil den automatisk avmeldes. Kampanje-e-poster kan ikke leveres av avmeldte adresser. Å endre denne innstillingen vil ikke påvirke eksisterende e-postadresser.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

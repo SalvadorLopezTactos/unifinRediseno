@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Dasboard de lista de Itens de Linha cotados',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Item de Linha Cotado da Campanha',
     'LBL_MODULE_NAME' => 'Itens de Linha Cotados',
     'LBL_MODULE_NAME_SINGULAR' => 'Item de Linha Cotado',
@@ -44,7 +47,7 @@ $mod_strings = array(
     'LBL_DATE_SUPPORT_EXPIRES' => 'O Suporte expira em:',
     'LBL_DATE_SUPPORT_STARTS' => 'O Suporte expira em:',
     'LBL_COST_PRICE' => 'Custo:',
-    'LBL_DISCOUNT_PRICE' => 'Preço unitário',
+    'LBL_DISCOUNT_PRICE' => 'Preço Unitário:',
     'LBL_DEAL_TOT' => 'Desconto:',
     'LBL_DISCOUNT_RATE' => 'Taxa de Desconto',
     'LBL_DISCOUNT_RATE_USDOLLAR' => 'Taxa de Desconto (US Dollar)',
@@ -69,7 +72,7 @@ $mod_strings = array(
     'LBL_SUPPORT_NAME' => 'Título do Suporte',
     'LBL_SUPPORT_CONTACT' => 'Contacto do Suporte',
     'LBL_PRICING_FORMULA' => 'Fórmula do Preço',
-    'LBL_ACCOUNT_NAME' => 'Nome da Entidade',
+    'LBL_ACCOUNT_NAME' => 'Nome da Conta:',
     'LNK_PRODUCT_LIST' => 'Ver Itens de Linha Cotados',
     'LNK_NEW_PRODUCT' => 'Criar Item de Linha Cotado',
     'NTC_DELETE_CONFIRMATION' => 'Tem a certeza que pretende eliminar este registo?',
@@ -172,4 +175,5 @@ Para criar um {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Lista de Dados de Cotação dos Itens da Linha Cotados',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Novo Item da Linha Cotado)',
     'LBL_DISCOUNT_PERCENT' => '% Percentagem',
+    'LBL_DISCOUNT_TYPE' => 'Tipo de Desconto',
 );

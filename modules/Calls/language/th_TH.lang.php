@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'แดชบอร์ดรายการโทร',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกการโทร',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'การโทร',
     'LBL_MODULE_NAME_SINGULAR'	=> 'การโทร',
@@ -65,7 +69,7 @@ $mod_strings = array (
     'LBL_REMINDER_EMAIL' => 'อีเมล',
     'LBL_REMINDER_EMAIL_ALL_INVITEES' => 'ส่งอีเมลถึงผู้รับเชิญทั้งหมด',
     'LBL_EMAIL_REMINDER' => 'การเตือนทางอีเมล',
-    'LBL_EMAIL_REMINDER_TIME' => 'เวลาของการเตือนทางอีเมล',
+    'LBL_EMAIL_REMINDER_TIME' => 'การเตือนทางอีเมล',
     'LBL_POPUP_REMINDER_TIME' => 'เวลาของการเตือนแบบป๊อปอัป',
     'LBL_SEND_BUTTON_TITLE'=>'บันทึกและส่งคำเชิญ [Alt+I]',
     'LBL_SEND_BUTTON_KEY'=>'I',

@@ -94,7 +94,7 @@ class ViewSugarFieldTeamsetCollection extends ViewSugarFieldCollection {
         	$this->vardef['name'] = $this->name;
         	if(!empty($GLOBALS['beanList'][$this->module_dir])){
 	        	$class = $GLOBALS['beanList'][$this->module_dir];
-	            if(SugarAutoLoader::fileExists($GLOBALS['beanFiles'][$class])){
+            if (file_exists($GLOBALS['beanFiles'][$class])) {
 		        	$this->bean = BeanFactory::newBean($this->module_dir);
 					$secondaries = array();
 					$primary = false;

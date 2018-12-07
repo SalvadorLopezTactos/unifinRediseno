@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Efter kvartal',
     'LBL_BY_FISCAL_YEAR' => 'Genom räkenskapsår',
     'LBL_BY_FISCAL_QUARTER' => 'Genom kvartalsår',
+    'LBL_AMOUNT' => 'Mängd',
     'LBL_COUNT' => 'Antal',
+    'LBL_PERCENT' => 'Procent',
     'LBL_SUM' => 'SUMMA',
     'LBL_AVG' => 'MEDEL',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Månad',
     'LBL_YEAR' => 'År',
     'LBL_QUARTER' => 'Kvartal',
+    'LBL_FISCAL' => 'Skatt',
     'LBL_FISCAL_YEAR' => 'Räkenskapsår',
     'LBL_FISCAL_QUARTER' => 'Räkenskapskvartal',
 	'LBL_YESTERDAY'=>'Igår',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Nästa kvartal',
     'LBL_ADD_RELATE' => "Lägg till relaterad",
     'LBL_DEL_THIS' => "Ta bort",
-    'LBL_ALERT_CANT_ADD' => 'Du kan inte lägga till en relatderad modul, innan du valt en tabell att relatera från.\nVälj en modul i drop-listan till vänster om \\"Lägg till Relaterad\\"-knappen',
+    'LBL_ALERT_CANT_ADD' => 'Du kan inte lägga till en relatderad modul, innan du valt en tabell att relatera från.\\nVälj en modul i drop-listan till vänster om \\"Lägg till Relaterad\\"-knappen',
     'LBL_BY_DAY' => 'Efter dag',
     'LBL_DAY' => 'Dag',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Valfri',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Större än Lika med',
 
     'LBL_FILTER_BY_MODULE' => 'Genom Modul',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Med diagram',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Fel vid hämtning av Drillthrough-rapportens data för den här åtgärden. Kontakta rapportägaren för assistans.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Borra igenom är inte tillgängligt',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'Listvyn visar alla rapporter som uppfyller de aktuella sökkriterierna och som användare har tillgång till. Du kan visa grundläggande information om varje rapport inom fältkolumnerna i listvyn och i förhandsgranskningen. Du kan ställa in taggar för rapporter och skapa filter. Klicka på rapportens namn för att visa rapporten eller välj "Redigera rapport" i åtgärdsmenyn för att ändra rapporten.',
+  );

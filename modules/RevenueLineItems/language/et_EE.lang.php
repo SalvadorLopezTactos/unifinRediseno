@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Tuluüksuste loendi töölaud',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Tuluüksuste kirjete töölaud',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampaania toode',
     'LBL_MODULE_NAME' => 'Tuluartiklid',
     'LBL_MODULE_NAME_SINGULAR' => 'Tuluartikkel',

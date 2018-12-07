@@ -17,15 +17,8 @@
  ********************************************************************************/
 
 
-class ImportViewStep4 extends SugarView
+class ImportViewStep4 extends ImportView
 {
-    private $currentStep;
-
-    public function __construct($bean = null, $view_object_map = array())
-    {
-        parent::__construct($bean, $view_object_map);
-        $this->currentStep = isset($_REQUEST['current_step']) ? ($_REQUEST['current_step'] + 1) : 1;
-    }
 
     /**
      * @see SugarView::display()
@@ -43,10 +36,11 @@ class ImportViewStep4 extends SugarView
         $uploadFiles = explode("-", $uploadFile);
         $currentPart = end($uploadFiles);
 
+        $delimiter = $this->getDelimiterValue();
         // Open the import file
         $importSource = new ImportFile(
             $uploadFile,
-            $_REQUEST['custom_delimiter'],
+            $delimiter,
             html_entity_decode($_REQUEST['custom_enclosure'], ENT_QUOTES),
             true,
             true,

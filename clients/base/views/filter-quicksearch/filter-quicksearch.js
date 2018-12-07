@@ -139,10 +139,6 @@
         }
         var input = this.$el.attr('placeholder', label);
         this.$el.attr('aria-label', label);
-        //Call placeholder() because IE9 does not support placeholders.
-        if (_.isFunction(input.placeholder)) {
-            input.placeholder();
-        }
     },
 
     /**
@@ -158,10 +154,6 @@
     clearInput: function() {
         this.toggleInput();
         var input = this.$el.val('');
-        //Call placeholder() because IE9 does not support placeholders.
-        if (_.isFunction(input.placeholder)) {
-            input.placeholder();
-        }
         this.applyQuickSearch(true);
     },
 

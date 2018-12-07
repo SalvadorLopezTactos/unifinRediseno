@@ -12,6 +12,7 @@
 
 $dictionary['Contract'] = array(
     'table' => 'contracts',
+    'favorites' => false,
     'audited' => true,
     'activity_enabled' => true,
     'unified_search' => true,
@@ -131,35 +132,6 @@ $dictionary['Contract'] = array(
             'comment' => 'The date in which the contract is no longer effective',
             'enable_range_search' => true,
             'options' => 'date_range_search_dom',
-        ),
-        'currency_id' => array(
-            'name' => 'currency_id',
-            'type' => 'currency_id',
-            'dbType' => 'id',
-            'vname' => 'LBL_CURRENCY_ID',
-            'group' => 'currency_id',
-            'function' => 'getCurrencies',
-            'function_bean' => 'Currencies',
-            'required' => false,
-            'reportable' => false,
-            'default' => '-99',
-            'comment' => 'The currency in use for the contract'
-        ),
-        'base_rate' => array(
-            'name' => 'base_rate',
-            'vname' => 'LBL_CURRENCY_RATE',
-            'type' => 'decimal',
-            'len' => '26,6',
-            'studio' => false
-        ),
-        'currency_name' => array(
-            'name' => 'currency_name',
-            'type' => 'enum',
-            'vname' => 'LBL_CURRENCY',
-            'function' => 'getCurrencyDropDown',
-            'source' => 'non-db',
-            'studio' => 'false',
-            'comment' => 'Currency name used for Meta-data framework',
         ),
         'total_contract_value' => array(
             'name' => 'total_contract_value',
@@ -298,6 +270,7 @@ $dictionary['Contract'] = array(
             'name' => 'parent_name',
             'vname' => 'LBL_MEMBER_OF',
             'id_name' => 'parent_id',
+            'module' => 'Contracts',
             'rname' => 'name',
             'type' => 'relate',
             'required' => false,
@@ -395,16 +368,16 @@ $dictionary['Contract'] = array(
         array('name' => 'idx_contract_start_date', 'type' => 'index', 'fields' => array('start_date')),
         array('name' => 'idx_contract_end_date', 'type' => 'index', 'fields' => array('end_date')),
     ),
-);
-VardefManager::createVardef(
-    'Contracts',
-    'Contract',
-    array(
+    'uses' => array(
         'default',
         'assignable',
-        'team_security'
-    )
+        'team_security',
+        'currency',
+        'taggable',
+    ),
 );
+
+VardefManager::createVardef('Contracts', 'Contract');
 
 //boost value for full text search
 $dictionary['Contract']['fields']['description']['full_text_search']['boost'] = 0.63;

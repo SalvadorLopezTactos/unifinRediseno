@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => 'E fshirë',
   'LBL_EMAIL_ADDRESS'=>'Adresa e Emailit',
   'LBL_CONTACTS_SYNC' => 'Kontaktet',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        'Punonjësi mund të krijohet vetëm në <a href="{0}" target="_blank">Cloud console</a> për modalitetin IDM.',
 );
 
 

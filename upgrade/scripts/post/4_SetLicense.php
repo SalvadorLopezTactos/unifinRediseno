@@ -23,7 +23,7 @@ class SugarUpgradeSetLicense extends UpgradeScript
         $admin = new Administration();
 		$category = 'license';
 		$admin->saveSetting($category, 'users', 0);
-		foreach(array('num_lic_oc','key','expire_date') as $k){
+        foreach (array('key', 'expire_date') as $k) {
 			$admin->saveSetting($category, $k, '');
 		}
     }

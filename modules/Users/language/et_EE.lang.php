@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Kasutaja andmeid ei leitud',
     'ERR_USER_NAME_EXISTS'              => 'Kasutajanimi {0} on juba olemas. Topelt kasutajanimed pole lubatud. Muutke kasutajanimi kordumatuks.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'See kasutaja on Sugari rakendusest välja lukustatud ega saa oma olemasoleva parooliga sisse logida.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Vaid välise autentimisega kasutajat ei lubata Sugari mandaatidega sisse logida',
 
 	'LBL_PASSWORD_SENT'                => 'Parool uuendatud',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Parooli ei saa saata',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Saaja e-posti aadress',
 	'ERR_SERVER_STATUS'					=> 'Teie serveri olek',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Süsteem ei saa kasutajale e-kirja saata. Kontrollige väljaminevate e-kirjade konfiguratsiooni suvandis <a href="index.php?module=EmailMan&action=config">E-posti sätted</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Kasutajat saab IDM-režiimi puhul luua vaid <a href="{0}" target="_blank">konsoolis Cloud</a>.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Esmast meiliaadressi saab IDM-režiimi puhul värskendada vaid <a href="{0}" target="_blank">konsoolis Cloud</a>.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-posti aadress',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Kinnita parool',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Olete muutnud kasutaja tüüpi süsteemiadministraatorist kasutajalt regulaarsele kasutajale. Pärast selle muudatuse salvestamist pole kasutajal enam süsteemiadministraatori õigusi.\n\nJätkamiseks klõpsake nuppu OK.\nKirje juurde naasmiseks klõpsake nuppu Tühista.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Olete muutnud kasutaja tüüpi süsteemiadministraatorist kasutajalt regulaarsele kasutajale. Pärast selle muudatuse salvestamist pole kasutajal enam süsteemiadministraatori õigusi.\\n\\nJätkamiseks klõpsake nuppu OK.\\nKirje juurde naasmiseks klõpsake nuppu Tühista.',
 	'LBL_COUNTRY'						=> 'Riik',
 	'LBL_CURRENCY_TEXT'					=> 'See on loendis ja kirje vaadetes kuvatav valuuta, kui suvand Kuva eelistatud valuuta on lubatud. See on ka teie vaikevaluuta uute kirjete puhul.',
 	'LBL_CURRENCY'						=> 'Eelistatud valuuta',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 's',
     'LBL_LOGIN_ADMIN_CALL'              => 'Võtke ühendust süsteemiadministraatoriga.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'IDM-režiimis protokolliga OpenID Connect (OIDC) autentimiseks installige GMP PHP laiendus.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Olete välja logitud. Sisse logimiseks klõpsake ',
     'LBL_LOGGED_OUT_2' => 'siin',
@@ -626,6 +631,12 @@ Klõpsake Tühista lehelt väljumiseks ilma ühtegi kirjet ümber määramata.',
     'LBL_FILTER_USERS_REPORTS' => 'Kasutaja aruanded',
     'LBL_CONTACTS_SYNC' => 'Kontaktid',
     'LBL_DETAIL' => 'Kasutaja profiil',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Kui mõnda välja ei saa muuta, siis logige nende haldamiseks sisse oma Cloud-konsooli',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Kui soovite muuta mõnda välja, mida ei saa muuta, ' .
+        'siis teavitage administraatorit muudatustest',
 ); // END STRINGS DEFS
 
 ?>

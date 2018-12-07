@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Useita sarakkeita on määritelty samalla kentän nimellä.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Syötä tieto vaadittuihin kenttiin:',
     'ERR_MISSING_MAP_NAME' => 'Puuttuu kuvauksen nimi',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Käyttäjien tuonti estetään IDM-tilassa.',
     'ERR_SELECT_FULL_NAME' => 'Et voi valita Koko nimi -kenttää kun kentät Etunimi ja Sukunimi ovat valittuina.',
     'ERR_SELECT_FILE' => 'Valitse ladattava tiedosto.',
     'LBL_SELECT_FILE' => 'Valitse tiedosto:',

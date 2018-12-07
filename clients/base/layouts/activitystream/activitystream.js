@@ -18,6 +18,8 @@
 
     initialize: function(opts) {
         this.renderedActivities = {};
+        this.isActivtyStreamsEnabled = app.config.activityStreamsEnabled;
+
         this._super('initialize', [opts]);
 
         this.setCollectionOptions();

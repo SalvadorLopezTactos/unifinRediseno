@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'Numatytas adresas',
 	'COLUMN_TITLE_AUDIT' =>'Auditas',
+    'COLUMN_TITLE_PII' => 'Asmeninė informacija',
     'COLUMN_TITLE_FTS' =>'Pilna teksto paieška',
     'COLUMN_TITLE_FTS_BOOST' => 'Boost value',
 	'COLUMN_TITLE_REPORTABLE' => 'Matomas ataskaitose',

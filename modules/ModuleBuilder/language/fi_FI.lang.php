@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Oletko varma, että haluat poistaa tämän suhteen?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Tämä tekee suhteesta pysyvän. Oletko varma, että haluat ottaa tämän suhteen käyttöön?',
 'LBL_CONFIRM_DONT_SAVE' => 'Muutoksia on tehty sitten viime tallentamisen, haluatko tallentaa?',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Määritä kenttä haettavaksi kokotekstinä.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Tehostus on prosessi, jolla parannetaan tietueen kenttien osuvuutta.<br />Kentät, joiden tehostusarvo on suurempi, saavat enemmän painoarvoa haussa. Kun haku tehdään, suuremman tehostusarvon saaneet kentät näytetään hakutuloksissa ylempänä.<br />Oletusarvo on 1.0, joka on neutraali. Positiivinen tehostus voi olla mikä tahansa lukua 1 suurempi float-lukuarvo. Negatiivinen tehostus on lukua 1 pienempi arvo. Esimerkiksi arvo 1.35 antaa kentälle tehostusarvon 135 %. Arvo 0.60 antaa negatiivisen tehostuksen.<br />Huomaa, että aiemmissa versioissa vaadittiin kokotekstihaun uudellenindeksointi, jota ei enää vaadita.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Kyllä</b>: Kenttä sisällytetään tuontioperaatioon.<br><b>Ei</b>: Kenttää ei sisällytetä tuontiin.<br><b>Vaadittu</b>: Kentälle täytyy antaa arvo missä tahansa tuonnissa.',
+'LBL_POPHELP_PII'=>'Tämä kenttä merkitään automaattisesti tarkastukseen ja se on käytettävissä Henkilötiedot-näkymässä.<br>Henkilötiedot-kenttiä voi myös pysyvästi poistaa, kun tietue liittyy tietosuojan poistopyyntöön.<br>Poisto tehdään tietosuojamoduulissa ja sen voi suorittaa järjestelmänvalvoja tai käyttäjä jolla on tietosuojavalvojan rooli.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Syötä luku leveydelle, mitattuna pikseleissä.<br/>Ladattu kuva skaalataan tähän leveyteen.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Syötä luku korkeudelle, mitattuna pikseleissä.<br/>Ladattu kuva skaalataan tähän korkeuteen.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

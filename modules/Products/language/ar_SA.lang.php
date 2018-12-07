@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'لوحة معلومات قائمة البنود المسعرة',
+
     'LBL_CAMPAIGN_PRODUCT' => 'حملة البند المسعر',
     'LBL_MODULE_NAME' => 'البنود المسعرة',
     'LBL_MODULE_NAME_SINGULAR' => 'البند المسعر',
@@ -172,4 +175,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'قائمة بيانات عرض أسعار بنود مسعرة',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (بنود مسعرة جديدة)',
     'LBL_DISCOUNT_PERCENT' => '% بالمائة',
+    'LBL_DISCOUNT_TYPE' => 'نوع الخصم',
 );

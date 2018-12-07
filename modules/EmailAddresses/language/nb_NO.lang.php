@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'Dato opprettet',
     'LBL_DATE_MODIFIED' => 'Endringsdato',
     'LBL_DELETED' => 'Slett',
+    'LBL_MODULE_NAME' => 'E-postadresser',
+    'LBL_MODULE_NAME_SINGULAR' => 'E-postadresse',
 );

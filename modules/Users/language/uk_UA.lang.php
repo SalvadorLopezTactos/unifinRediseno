@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Відомості про користувача не знайдено',
     'ERR_USER_NAME_EXISTS'              => 'Ім&#39;я користувача {0} вже існує. Використовувати однакові імена користувача не дозволено. Укажіть унікальне ім&#39;я користувача.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Даний користувач заблокований і не може увійти в систему, використовуючи існуючий пароль.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Користувачу, який використовує лише зовнішню автентифікацію, заборонено виконувати вхід за допомогою даних Sugar',
 
 	'LBL_PASSWORD_SENT'                => 'Пароль оновлено',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Не вдається надіслати пароль',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'E-mail-адреса одержувача',
 	'ERR_SERVER_STATUS'					=> 'Статус сервера',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Система не в змозі відправити лист користувачеві. Перевірте параметри сервера вихідної пошти в <a href="index.php?module=EmailMan&action=config"> Налаштуваннях E-mail </a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Користувача можна створити лише в <a href="{0}" target="_blank">хмарній консолі</a> для режиму IDM.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Основну адресу електронної пошти можна оновити лише у <a href="{0}" target="_blank">хмарній консолі</a> для режиму IDM.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Адреса Email',
 
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'хв.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'сек.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Будь ласка, зверніться до системного адміністратора.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Для автентифікації з використанням OpenID Connect (OIDC) в режимі IDM потрібно встановити розширення GMP/PHP.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Ви вийшли з системи. Щоб зайти в систему, натисніть',
     'LBL_LOGGED_OUT_2' => 'тут',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Звіти користувача',
     'LBL_CONTACTS_SYNC' => 'Контакти',
     'LBL_DETAIL' => 'Профіль користувача',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Якщо деякі поля неможливо редагувати, виконайте вхід до хмарної консолі для керування ними',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Якщо вам необхідно змінити деякі незмінювані поля, ' .
+        'зверніться до адміністратора та повідомте про ці зміни',
 ); // END STRINGS DEFS
 
 ?>

@@ -8,15 +8,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 var SugarProxy = function (options) {
-    Proxy.call(this, options);
+    PMSE.Proxy.call(this, options);
     this.uid = null;
     this.getMethod = null;
     this.sendMethod = null;
     SugarProxy.prototype.initObject.call(this, options);
 };
 
-SugarProxy.prototype = new Proxy();
+SugarProxy.prototype = new PMSE.Proxy();
 
 SugarProxy.prototype.type = 'SugarProxy';
 

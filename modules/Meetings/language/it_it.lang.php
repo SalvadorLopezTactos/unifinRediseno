@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Dashboard elenco riunioni',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Dashboard record riunioni',
+
 	'ERR_DELETE_RECORD' => 'Per eliminare la riunione deve essere specificato il numero del record.',
 	'LBL_ACCEPT_THIS'=>'Accetti?',
 	'LBL_ADD_BUTTON'=> 'Aggiungi',

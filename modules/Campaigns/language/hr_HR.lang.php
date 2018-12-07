@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Odaberite iz dostupnih polja',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Opis obrasca:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Slanjem ovog obrasca stvorit će se potencijalni klijent i poveznica s kampanjom',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Označavanjem ovog okvira prihvaćate primanje daljnjih marketinških poruka e-poštom',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Preuzmite svoj obrazac Web To Lead',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Obrazac Web To Lead',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Unesite sva obavezna polja',

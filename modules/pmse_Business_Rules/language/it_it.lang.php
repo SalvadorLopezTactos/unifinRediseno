@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Regole Flussi',
   'LBL_MODULE_TITLE' => 'Regole Flussi',
   'LBL_MODULE_NAME_SINGULAR' => 'Regole Flusso',
@@ -47,7 +46,7 @@ $mod_strings = array (
 
     'LBL_PMSE_BUSINESS_RULES_SINGLE_HIT' => 'Single Hit Regole Flussi',
 
-    'LBL_PMSE_BUSINESS_RULES_IMPORT_TEXT' => 'Crea automaticamente una nuovo Regola Flusso record importando un file *.pbr file dal tuo file system.',
+    'LBL_PMSE_BUSINESS_RULES_IMPORT_TEXT' => 'Crea automaticamente un nuovo record Regola Flusso.',
     'LBL_PMSE_BUSINESS_RULES_IMPORT_SUCCESS' => 'Il Modello Email Flusso è stato importato con successo nel sistema.',
     'LBL_PMSE_BUSINESS_RULES_EMPTY_WARNING' => 'Si prega di selezionare un file *.pbr valido.',
 
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Condizioni',
     'LBL_PMSE_LABEL_RETURN' => 'Ritorna',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Conclusioni',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Campo Cambia',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Restituisci valore',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Aggiungi condizione',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Aggiungi conclusione',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Aggiungi riga',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Rimuovi colonna',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Rimuovi condizione',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Rimozioni conclusione',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Rimuovi dati colonna',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Sì',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'No',

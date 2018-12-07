@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Gaukite vartotojo kodą iš „LogMeIn“ užregistruodami naują „GoToMeeting“ programą.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Veiksmai, kuriuos reikia atlikti norint užregistruoti jūsų atvejį:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Prisijunkite prie savo „LogMeIn“ kūrėjo centro paskyros: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Paspauskite „Mano programos“</li>
+    <li>Paspauskite „Pridėti naują programą“</li>
+    <li>Užpildykite visus formos „Pridėti programą“ laukus:</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>Programos pavadinimas</li>
+            <li>Aprašymas</li>
+            <li>Produkto API: pasirinkite „GoToMeeting“</li>
+            <li>Programos URL: įveskite savo atvejo URL</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Paspauskite mygtuką „Sukurti programą“</li>
+    <li>Iš programų sąrašo pasirinkite savo programą</li>
+    <li>Paspauskite skyrelį „Kodai“</li>
+    <li>Nukopijuokite vartotojo kodo reikšmę ir įveskite ją žemiau</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Vartotojo kodas',
 );

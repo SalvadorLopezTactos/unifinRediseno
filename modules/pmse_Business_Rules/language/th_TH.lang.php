@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'กฎทางธุรกิจของกระบวนการ',
   'LBL_MODULE_TITLE' => 'กฎทางธุรกิจของกระบวนการ',
   'LBL_MODULE_NAME_SINGULAR' => 'กฎทางธุรกิจของกระบวนการ',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'เงื่อนไข',
     'LBL_PMSE_LABEL_RETURN' => 'ส่งคืน',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'การสรุป',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'เปลี่ยนสาขา',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'ค่าที่ได้คืน',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'เพิ่มเงื่อนไข',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'เพิ่มการสรุป',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'เพิ่มแถว',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'นำคอลัมน์ออก',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'เอาเงื่อนไขออก',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'เอาข้อสรุปออก',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'เอาข้อมูลคอลัมน์ออก',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'ใช่',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'ไม่',

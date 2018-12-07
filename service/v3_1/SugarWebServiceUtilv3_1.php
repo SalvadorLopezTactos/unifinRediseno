@@ -331,10 +331,19 @@ class SugarWebServiceUtilv3_1 extends SugarWebServiceUtilv3
     /**
      * Equivalent of get_list function within SugarBean but allows the possibility to pass in an indicator
      * if the list should filter for favorites.  Should eventually update the SugarBean function as well.
-     *
      */
-    function get_data_list($seed, $order_by = "", $where = "", $row_offset = 0, $limit=-1, $max=-1, $show_deleted = 0, $favorites = false, $singleSelect=false)
-	{
+    public function get_data_list(
+        $seed,
+        $order_by = '',
+        $where = '',
+        $row_offset = 0,
+        $limit = -1,
+        $max = -1,
+        $show_deleted = 0,
+        $favorites = false,
+        $singleSelect = false,
+        $fields = []
+    ) {
 		$GLOBALS['log']->debug("get_list:  order_by = '$order_by' and where = '$where' and limit = '$limit'");
 		if(isset($_SESSION['show_deleted']))
 		{
@@ -347,7 +356,18 @@ class SugarWebServiceUtilv3_1 extends SugarWebServiceUtilv3
 		if($favorites)
 		  $params['favorites'] = true;
 
-		$query = $seed->create_new_list_query($order_by, $where,array(),$params, $show_deleted,'',false,null,$singleSelect);
+        $query = $seed->create_new_list_query(
+            $order_by,
+            $where,
+            $fields,
+            $params,
+            $show_deleted,
+            '',
+            false,
+            null,
+            $singleSelect
+        );
+
 		return $seed->process_list_query($query, $row_offset, $limit, $max, $where);
 	}
 

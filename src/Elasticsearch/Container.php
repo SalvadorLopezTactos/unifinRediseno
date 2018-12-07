@@ -20,6 +20,10 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\MappingManager;
 use Sugarcrm\Sugarcrm\Elasticsearch\Indexer\Indexer;
 use Sugarcrm\Sugarcrm\Elasticsearch\Queue\QueueManager;
 use Sugarcrm\Sugarcrm\Elasticsearch\Exception\ContainerException;
+use SugarAutoLoader;
+use SugarConfig;
+use SugarArray;
+use DBManagerFactory;
 
 /**
  *
@@ -45,44 +49,44 @@ class Container
     protected static $instance;
 
     /**
-     * @var \Sugarcrm\Sugarcrm\Elasticsearch\Logger
+     * @var Logger
      */
-    private $logger;
+    protected $logger;
 
     /**
-     * @var \Sugarcrm\Sugarcrm\SearchEngine\MetaDataHelper
+     * @var MetaDataHelper
      */
-    private $metaDataHelper;
+    protected $metaDataHelper;
 
     /**
-     * @var \Sugarcrm\Sugarcrm\Elasticsearch\Queue\QueueManager
+     * @var QueueManager
      */
-    private $queueManager;
+    protected $queueManager;
 
     /**
-     * @var \Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Client
+     * @var Client
      */
-    private $client;
+    protected $client;
 
     /**
-     * @var \Sugarcrm\Sugarcrm\Elasticsearch\Index\IndexPool
+     * @var IndexPool
      */
-    private $indexPool;
+    protected $indexPool;
 
     /**
-     * @var \Sugarcrm\Sugarcrm\Elasticsearch\Index\IndexManager
+     * @var IndexManager
      */
-    private $indexManager;
+    protected $indexManager;
 
     /**
-     * @var \Sugarcrm\Sugarcrm\Elasticsearch\Mapping\MappingManager
+     * @var MappingManager
      */
-    private $mappingManager;
+    protected $mappingManager;
 
     /**
-     * @var \Sugarcrm\Sugarcrm\Elasticsearch\Indexer\Indexer
+     * @var Indexer
      */
-    private $indexer;
+    protected $indexer;
 
     /**
      * Registered providers
@@ -126,7 +130,7 @@ class Container
      * Create new container object. Use self::getInstance unless you know
      * what you are doing.
      *
-     * @return \Sugarcrm\Sugarcrm\Elasticsearch\Container
+     * @return Container
      */
     public static function create()
     {
@@ -135,7 +139,7 @@ class Container
          * rely on the ability of using the /custom framework to customize
          * this service container. See `self::getInstance`.
          */
-        $class = \SugarAutoLoader::customClass('Sugarcrm\\Sugarcrm\\Elasticsearch\\Container');
+        $class = SugarAutoLoader::customClass('Sugarcrm\\Sugarcrm\\Elasticsearch\\Container');
         return new $class();
     }
 
@@ -152,7 +156,7 @@ class Container
      * initialization methods is also possible but care should be taken to
      * understand the implication when doing so as those methods can change.
      *
-     * @return \Sugarcrm\Sugarcrm\Elasticsearch\Container
+     * @return Container
      */
     public static function getInstance()
     {
@@ -213,15 +217,19 @@ class Container
     }
 
     /**
-     * Initialize \Sugarcrm\Sugarcrm\Elasticsearch\Logger
+     * Initialize Logger
      */
     protected function initLogger()
     {
         $this->logger = new Logger(\LoggerManager::getLogger());
+        $xhprof = SugarConfig::getInstance()->get('xhprof_config');
+        if (!empty($xhprof)) {
+            $this->logger->setXhProf(\SugarXHprof::getInstance());
+        }
     }
 
     /**
-     * Initialize \Sugarcrm\Sugarcrm\SearchEngine\MetaDataHelper
+     * Initialize MetaDataHelper
      */
     protected function initMetaDataHelper()
     {
@@ -230,7 +238,7 @@ class Container
     }
 
     /**
-     * Initialize \Sugarcrm\Sugarcrm\SearchEngine\Queue\QueueManager
+     * Initialize QueueManager
      */
     protected function initQueueManager()
     {
@@ -238,7 +246,7 @@ class Container
     }
 
     /**
-     * Initialize \Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Client
+     * Initialize Client
      */
     protected function initClient()
     {
@@ -247,26 +255,38 @@ class Container
     }
 
     /**
-     * Initialize \Sugarcrm\Sugarcrm\Elasticsearch\Index\IndexPool
+     * Initialize IndexPool
      */
     protected function initIndexPool()
     {
-        $prefix = \SugarConfig::getInstance()->get('unique_key', 'sugarcrm');
-        $config = \SugarArray::staticGet($this->getConfig('engine'), 'index_strategy', array());
+        $prefix = SugarConfig::getInstance()->get('unique_key', 'sugarcrm');
+        $config = SugarArray::staticGet($this->getConfig('engine'), 'index_strategy', array());
         $this->indexPool = new IndexPool($prefix, $config, $this);
     }
 
     /**
-     * Initialize \Sugarcrm\Sugarcrm\Elasticsearch\Index\IndexManager
+     * Initialize IndexManager
      */
     protected function initIndexManager()
     {
-        $config = \SugarArray::staticGet($this->getConfig('engine'), 'index_settings', array());
+        $config = SugarArray::staticGet($this->getConfig('engine'), 'index_settings', array());
         $this->indexManager = new IndexManager($config, $this);
+
+        // reindex refresh interval from config
+        $interval = SugarArray::staticGet($this->getConfig('engine'), 'reindex_refresh_interval');
+        if (null !== $interval) {
+            $this->indexManager->setReindexRefreshInterval($interval);
+        }
+
+        // reindex zero replica usage from config
+        $zeroReplica = SugarArray::staticGet($this->getConfig('engine'), 'reindex_zero_replica');
+        if ($zeroReplica) {
+            $this->indexManager->setReindexZeroReplica($zeroReplica);
+        }
     }
 
     /**
-     * Initialize \Sugarcrm\Sugarcrm\Elasticsearch\Mapping\MappingManager
+     * Initialize MappingManager
      */
     protected function initMappingManager()
     {
@@ -274,11 +294,11 @@ class Container
     }
 
     /**
-     * Initialize \Sugarcrm\Sugarcrm\Elasticsearch\Indexer\Indexer
+     * Initialize Indexer
      */
     protected function initIndexer()
     {
-        $this->indexer = new Indexer($this->getConfig('global'), $this, \DBManagerFactory::getInstance());
+        $this->indexer = new Indexer($this->getConfig('global'), $this, DBManagerFactory::getInstance());
     }
 
     /**

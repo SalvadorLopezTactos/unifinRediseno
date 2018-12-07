@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Informacioni i përdoruesit nuk është gjetur',
     'ERR_USER_NAME_EXISTS'              => 'Emri i përdoruesit {0} tashmë ekziston. Emrat e dubluar të përdoruesve nuk lejohen. Ndrysho emrin e përdoruesit që të jetë i veçantë.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Ky përdorues është mbyllur në aplikimin e Sigar dhe nuk mund të kyçet duke përdor fjalëkalimin e tij/saj ekzistues.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Vetëm autorizim i jashtëm, përdoruesi nuk mund të identifikohet duke përdorur kredencialet e "Sugar"',
 
 	'LBL_PASSWORD_SENT'                => 'Rinovim i fjalëkalimit',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Nuk mund të dërgoj fjalëkalimin',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Email adresa e pranuesit',
 	'ERR_SERVER_STATUS'					=> 'Statusin e serverit tuaj',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'Sistemi nuk është në gjendje të dërgoj email përdoruesit. Ju luemi kontrolloni Konfigurimin e Maileve dalëse në Parametrat e Emailit.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Përdoruesi mund të përdoret vetëm në <a href="{0}" target="_blank">Cloud console</a> për modalitetin IDM.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Adresa kryesore e emailit mund të përditësohet vetëm në <a href="{0}" target="_blank">Cloud console</a> për modalitetin IDM.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Email adresa',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Konfirmo fjalëkalimin',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'Ju keni ndryshuar llojin e përdoruesit nga Sistemi i Administratorit të Përdoruesit për përdoruesin e rregullt. Pas ruajtjes së këtij ndryshimi, përdoruesit nuk do të ketë privilegje nga sistemi i administratorit.\n\n Klikoni OK për të vazhduar.\nKlikoni Anulo për t$#39;u kthyer në regjistrimin.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'Ju keni ndryshuar llojin e përdoruesit nga Sistemi i Administratorit të Përdoruesit për përdoruesin e rregullt. Pas ruajtjes së këtij ndryshimi, përdoruesit nuk do të ketë privilegje nga sistemi i administratorit.\\n\\n Klikoni OK për të vazhduar.\\nKlikoni Anulo për t$#39;u kthyer në regjistrimin.',
 	'LBL_COUNTRY'						=> 'Shteti',
 	'LBL_CURRENCY_TEXT'					=> 'Selektoni valutën që do të shfaqet nga parazgjedhja kur ju do të krijoni regjistrimet e reja. Kjo është gjithashtu valuta që do të shfaqet në shumën e shtyllave për mundësinë e pamjes së listës.',
 	'LBL_CURRENCY'						=> 'monedha',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'sek.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Ju lutemi kontaktoni administratorin e sistemit.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Për vërtetim me OpenID Connect (OIDC) në modalitetin IDM, instalo shtesën GMP PHP.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Ju keni qenë të c$#39;loguar. Për t$#39;u loguar përsëri ju lutemi klikoni',
     'LBL_LOGGED_OUT_2' => 'këtu',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'LBL_FILTRIM_PERDORUES_RAPORTE',
     'LBL_CONTACTS_SYNC' => 'Kontaktet',
     'LBL_DETAIL' => 'Profili i përdoruesit',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Nëse disa fusha nuk modifikohen, identifikohu në Cloud Console për t&#39;i menaxhuar ato',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Nëse dëshiron të ndryshosh disa fusha që nuk modifikohen, ' .
+        'kontakto administratorin për ta njoftuar për këto ndryshime',
 ); // END STRINGS DEFS
 
 ?>

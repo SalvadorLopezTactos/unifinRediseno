@@ -16,6 +16,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Provider\ProviderCollection;
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Property\MultiFieldProperty;
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Property\RawProperty;
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Property\ObjectProperty;
+use SugarBean;
 
 /**
  *
@@ -37,6 +38,50 @@ interface MappingInterface
     public function compile();
 
     /**
+     * Create a module only field. This field will be added on top
+     * of a MultiFieldBase. If the base does not exist it will be created.
+     * The module field is prefixed with the "{Module}__" prefix.
+     * @param string $baseField The non-prefixed base field name
+     * @param string $field The (multi) field name to create the mapping for
+     * @param MultiFieldProperty $property The mapping properties of the field
+     */
+    public function addModuleField($baseField, $field, MultiFieldProperty $property);
+
+    /**
+     * Create a common field. This field will be added on top
+     * of a MultiFieldBase. If the base does not exist it will be created.
+     * The common field is prefixed with the "Common__" prefix.
+     * @param string $baseField The non-prefixed base field name
+     * @param string $field The (multi) field name to create the mapping for
+     * @param MultiFieldProperty $property The mapping properties of the field
+     */
+    public function addCommonField($baseField, $field, MultiFieldProperty $property);
+
+    /**
+     * Add object (or nested) property mapping. Note that this cannot be used
+     * as a multi field base. The field name will be prefixed with the
+     * "{Module}__" prefix automatically in the mapping to avoid mapping
+     * conflicts between modules within the same index having the same
+     * field name.
+     *
+     * @param string $field
+     * @param ObjectProperty $property
+     */
+    public function addModuleObjectProperty($field, ObjectProperty $property);
+
+    /**
+     * Add object (or nested) property mapping. Note that this cannot be used
+     * as a multi field base. The field name will be prefixed with the
+     * "Common__" prefix automatically in the mapping to avoid mapping
+     * conflicts between modules within the same index having the same
+     * field name.
+     *
+     * @param string $field
+     * @param ObjectProperty $property
+     */
+    public function addCommonObjectProperty($field, ObjectProperty $property);
+
+    /**
      * Add multi field mapping. This should be the primary method to be used
      * to build the mapping as most fields are string based. Multi fields
      * have the ability to define different analyzers for every sub field.
@@ -51,6 +96,7 @@ interface MappingInterface
      * @param string $baseField Base field name
      * @param string $field Name of the multi field
      * @param MultiFieldProperty $property
+     * @deprecated Use MappingInterface::addModuleField or MappingInterface::addCommonField
      */
     public function addMultiField($baseField, $field, MultiFieldProperty $property);
 
@@ -61,6 +107,7 @@ interface MappingInterface
      *
      * @param string $field Field name
      * @param array $copyTo Optional copy_to definition
+     * @deprecated Use MappingInterface::addModuleField or MappingInterface::addCommonField
      */
     public function addNotAnalyzedField($field, array $copyTo = array());
 
@@ -72,12 +119,16 @@ interface MappingInterface
      *
      * @param string $field Field name
      * @param array $copyTo Optional copy_to definition
+     * @deprecated Use MappingInterface::addModuleField or MappingInterface::addCommonField
      */
     public function addNotIndexedField($field, array $copyTo = array());
 
     /**
      * Add object (or nested) property mapping. Note that this cannot be used
-     * as a multi field base.
+     * as a multi field base. Also fields which are created like this can have
+     * mapping collisions. If this is the case, one needs to create separate
+     * indices to isolate the conflicting modules if any. It is encouraged to
+     * use Mapping::addModuleObjectProperty instead.
      *
      * @param string $field
      * @param ObjectProperty $property
@@ -121,7 +172,7 @@ interface MappingInterface
 
     /**
      * Get seed bean
-     * @return \SugarBean
+     * @return SugarBean
     */
     public function getBean();
 

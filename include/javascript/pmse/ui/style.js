@@ -8,14 +8,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 /**
- * @class Style
+ * @class PMSE.Style
  * Class that represent the style of a an object, {@link JCoreObject} creates an instance of this class so every
  * class that inherits from {@link JCoreObject} has an instance of this class.
  *
  *      // i.e
  *      // Let's assume that 'shape' is a CustomShape
- *      var style = new Style({
+ *      var style = new PMSE.Style({
  *          cssClasses: [
  *              'sprite-class', 'marker-class', ...
  *          ],
@@ -27,13 +29,14 @@
  *          belongsTo: shape
  *      })
  *
- * @constructor Creates a new instance of this class
+ * @constructor
+ * Creates a new instance of this class
  * @param {Object} options
  * @cfg {Array} [cssClasses=[]] the classes that `this.belongsTo` has
  * @cfg {Object} [cssProperties={}] the css properties that `this.belongsTo` has
  * @cfg {Object} [belongsTo=null] a pointer to the owner of this instance
  */
-var Style = function (options) {
+PMSE.Style = function(options) {
 
     /**
      * JSON Object used to map each of the css properties of the object,
@@ -65,7 +68,7 @@ var Style = function (options) {
     this.belongsTo = null;
 
 
-    Style.prototype.initObject.call(this, options);
+    PMSE.Style.prototype.initObject.call(this, options);
 };
 
 
@@ -73,13 +76,13 @@ var Style = function (options) {
  * The type of this class
  * @property {String}
  */
-Style.prototype.type = "Style";
+PMSE.Style.prototype.type = 'PMSE.Style';
 
 /**
  * Constant for the max z-index
  * @property {number} [MAX_ZINDEX=100]
  */
-Style.MAX_ZINDEX = 100;
+PMSE.Style.MAX_ZINDEX = 100;
 
 /**
  * Instance initializer which uses options to extend the config options to
@@ -87,7 +90,7 @@ Style.MAX_ZINDEX = 100;
  * @private
  * @param {Object} options
  */
-Style.prototype.initObject = function (options) {
+PMSE.Style.prototype.initObject = function(options) {
     var defaults = {
         cssClasses: [],
         cssProperties: {},
@@ -103,7 +106,7 @@ Style.prototype.initObject = function (options) {
  * Applies cssProperties and cssClasses to `this.belongsTo`
  * @chainable
  */
-Style.prototype.applyStyle = function () {
+PMSE.Style.prototype.applyStyle = function() {
 
     if (!this.belongsTo.html) {
         throw new Error("applyStyle(): can't apply style to an" +
@@ -131,7 +134,7 @@ Style.prototype.applyStyle = function () {
  * @param {Object} properties
  * @chainable
  */
-Style.prototype.addProperties = function (properties) {
+PMSE.Style.prototype.addProperties = function(properties) {
     $.extend(true, this.cssProperties, properties);
     $(this.belongsTo.html).css(properties);
     return this;
@@ -142,7 +145,7 @@ Style.prototype.addProperties = function (properties) {
  * @param {String} property
  * @return {String}
  */
-Style.prototype.getProperty = function (property) {
+PMSE.Style.prototype.getProperty = function(property) {
     return this.cssProperties[property] ||
         $(this.belongsTo.html).css(property) ||
             window.getComputedStyle(this.belongsTo.html, null)
@@ -155,7 +158,7 @@ Style.prototype.getProperty = function (property) {
  * @param {Object} properties
  * @chainable
  */
-Style.prototype.removeProperties = function (properties) {
+PMSE.Style.prototype.removeProperties = function(properties) {
     var property,
         i;
     for (i = 0; i < properties.length; i += 1) {
@@ -173,7 +176,7 @@ Style.prototype.removeProperties = function (properties) {
  * @param {Array} cssClasses
  * @chainable
  */
-Style.prototype.addClasses = function (cssClasses) {
+PMSE.Style.prototype.addClasses = function(cssClasses) {
     var i,
         cssClass;
     if (cssClasses && cssClasses instanceof Array) {
@@ -200,7 +203,7 @@ Style.prototype.addClasses = function (cssClasses) {
  * @param {Array} cssClasses
  * @chainable
  */
-Style.prototype.removeClasses = function (cssClasses) {
+PMSE.Style.prototype.removeClasses = function(cssClasses) {
 
     var i,
         index,
@@ -230,7 +233,7 @@ Style.prototype.removeClasses = function (cssClasses) {
  * @param {Array} cssClasses
  * @chainable
  */
-Style.prototype.removeAllClasses = function () {
+PMSE.Style.prototype.removeAllClasses = function() {
     this.cssClasses = [];
     $(this.belongsTo.html).removeClass();
     return this;
@@ -241,7 +244,7 @@ Style.prototype.removeAllClasses = function () {
  * @param cssClass
  * @return {boolean}
  */
-Style.prototype.containsClass = function (cssClass) {
+PMSE.Style.prototype.containsClass = function(cssClass) {
     return this.cssClasses.indexOf(cssClass) !== -1;
 };
 
@@ -249,7 +252,7 @@ Style.prototype.containsClass = function (cssClass) {
  * Returns an array with all the classes of ´this.belongsTo´
  * @return {Array}
  */
-Style.prototype.getClasses = function () {
+PMSE.Style.prototype.getClasses = function() {
     return this.cssClasses;
 };
 
@@ -258,7 +261,7 @@ Style.prototype.getClasses = function () {
  * @return {Object}
  * @return {Array} return.cssClasses
  */
-Style.prototype.stringify = function () {
+PMSE.Style.prototype.stringify = function() {
     return {
         cssClasses: this.cssClasses
 //        cssProperties: this.cssProperties

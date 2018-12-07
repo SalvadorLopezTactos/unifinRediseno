@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Tableau de bord de la liste de bugs',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrements de bugs',
+
   'LBL_MODULE_NAME' => 'Suivi Bugs',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Bug',
   'LBL_MODULE_TITLE' => 'Bugs : accueil',
@@ -22,7 +26,7 @@ $mod_strings = array (
   'LBL_SUBJECT' => 'Sujet :',
   'LBL_BUG' => 'Bug :',
   'LBL_BUG_NUMBER' => 'Numéro de bug :',
-  'LBL_NUMBER' => 'Numéro:',
+  'LBL_NUMBER' => 'Numéro :',
   'LBL_STATUS' => 'Statut :',
   'LBL_PRIORITY' => 'Priorité :',
   'LBL_DESCRIPTION' => 'Description :',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Tickets',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projets',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documents',
-  'LBL_SYSTEM_ID' => 'ID Système',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Assigné à',
 	'LBL_ASSIGNED_TO_NAME' => 'Assigné à',
 

@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Update KBContent articles.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publish approved articles & Expire KB Articles.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Naplánovaná úloha nástroja Advanced Workflow',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Prerobiť denormalizované tímové bezpečnostné údaje',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Interval:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Plánovač frontu Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Odstrániť súbory diagnostického nástroja',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Odstrániť dočasné súbory',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Prerobiť denormalizované tímové bezpečnostné údaje',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Spustiť nočne hromadné emailové kampane',
 'LBL_ASYNCMASSUPDATE' => 'Vykonajte asynchrónnu masívne aktualizáciu',

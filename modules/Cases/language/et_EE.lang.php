@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Juhtumite loendi töölaud',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Juhtumikirjete töölaud',
+
 	'ERR_DELETE_RECORD'					=> 'Konto kustutamiseks täpsustage kirje numbrit.',
 	'LBL_ACCOUNT_ID'					=> 'Konto ID',
 	'LBL_ACCOUNT_NAME'					=> 'Konto nimi:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Olek:',
     'LBL_SOURCE' => 'Allikas:',
 	'LBL_SUBJECT'						=> 'Teema:',
-	'LBL_SYSTEM_ID'						=> 'Süsteemi ID',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Konto nimi',
 	'LBL_LIST_ASSIGNED'					=> 'Määratud kasutajale',
 	'LBL_LIST_CLOSE'					=> 'Sulge',

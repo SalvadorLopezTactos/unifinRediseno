@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Proces forretningsregler',
   'LBL_MODULE_TITLE' => 'Proces forretningsregler',
   'LBL_MODULE_NAME_SINGULAR' => 'Proces forretningsregel',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Betingelser',
     'LBL_PMSE_LABEL_RETURN' => 'Retur',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Konklusioner',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Ændr felt',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Returværdi',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Tilføj betingelse',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Tilføj konklusion',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Tilføj række',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Fjern kolonne',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Fjern tilstand',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Fjern konklusion',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Fjern kolonnedata',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Ja',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Nej',

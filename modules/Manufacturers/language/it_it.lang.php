@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Per eliminare il Produttore deve essese specificato il numero del record.',
   'NTC_STATUS' => 'Configura lo stato su Inattivo per rimuovere questo produttore dall´elenco dei produttori',
   'NTC_LIST_ORDER' => 'Configura l´ordine con cui appariranno i produttori nell´elenco dei produttori',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Attivo',
-    'Inactive' => 'Inattivo',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Importa produttori',
 	'LBL_EDITLAYOUT' => 'Modifica Layout' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Elementi dell&#39;opportunità',

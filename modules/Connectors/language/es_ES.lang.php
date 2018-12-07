@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Error: No se ha asignado ningún campo de módulo para ser mostrado como parte de los resultados.  Póngase en contacto con el administrador del sistema.',
     'LBL_INFO_INLINE' => 'Información' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Cerrar:' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'No se ha encontrado ningún conector para el ID específico de fuente.',
 );
 

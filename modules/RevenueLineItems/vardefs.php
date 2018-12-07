@@ -61,6 +61,8 @@ $dictionary['RevenueLineItem'] = array(
                 'weight' => 'weight',
                 'manufacturer_id' => 'manufacturer_id',
                 'manufacturer_name' => 'manufacturer_name',
+                'type_id' => 'type_id',
+                'type_name' => 'type_name',
             ),
         ),
         'account_id' => array(
@@ -776,8 +778,8 @@ $dictionary['RevenueLineItem'] = array(
         'archived_emails' => array(
             'name' => 'archived_emails',
             'type' => 'link',
-            'link_file' => 'modules/Emails/ArchivedEmailsBeanLink.php',
-            'link_class' => 'ArchivedEmailsBeanLink',
+            'link_file' => 'modules/Emails/ArchivedEmailsLink.php',
+            'link_class' => 'ArchivedEmailsLink',
             'source' => 'non-db',
             'vname' => 'LBL_EMAILS',
             'module' => 'Emails',

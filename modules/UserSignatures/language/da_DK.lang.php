@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'Bruger signaturer',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'Bruger signatur',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Denne signatur kræver et navn.',
-    'LBL_SIGNATURE_NAME'         => 'Navn',
-    'LBL_SIGNATURE'              => 'Signatur',
-    'LBL_SIGNATURE_HTML'         => 'HTML-signatur',
-    'LBL_SIGNATURE_DEFAULT'      => 'Brug signatur?',
-    'LBL_SIGNATURE_PREPEND'      => 'Signatur oven over svar?',
-    'LBL_SIGNATURES'             => 'Signaturer',
+    'LBL_DEFAULT_SIGNATURE' => 'Standard',
+    'LBL_MODULE_NAME' => 'E-mail-signaturer',
+    'LBL_MODULE_NAME_SINGULAR' => 'E-mail-signatur',
+    'LBL_SIGNATURE_NAME' => 'Navn',
+    'LBL_SIGNATURE' => 'Signatur',
+    'LBL_SIGNATURE_HTML' => 'HTML-signatur',
+    'LBL_SIGNATURE_DEFAULT' => 'Brug signatur?',
+    'LBL_SIGNATURE_PREPEND' => 'Signatur oven over svar?',
+    'LBL_SIGNATURES' => 'Signaturer',
 );

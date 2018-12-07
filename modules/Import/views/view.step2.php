@@ -39,14 +39,14 @@ class ImportViewStep2 extends ImportView
         $importType = $this->request->getValidInputRequest('type', null, '');
 
         $singleCharConstraints = array('Assert\Type' => array('type' => 'string'), 'Assert\Length' => array('min' => 1));
-
-        $customDelimiter = $this->request->getValidInputRequest('custom_delimiter', $singleCharConstraints, '');
         $customEnclosure = $this->request->getValidInputRequest('custom_enclosure', $singleCharConstraints, '');
         $customEnclosureOther = $this->request->getValidInputRequest('custom_enclosure_other', null, '');
 
         $this->ss->assign("TYPE",( !empty($importType) ? $importType : "import" ));
 
-        $this->ss->assign("CUSTOM_DELIMITER", ( !empty($customDelimiter) ? $customDelimiter : "," ));
+        $delimiters = $this->getDelimitersFromRequest();
+        $this->ss->assign("CUSTOM_DELIMITER", $delimiters['custom']);
+        $this->ss->assign("CUSTOM_DELIMITER_OTHER", $delimiters['other']);
         $this->ss->assign("CUSTOM_ENCLOSURE",htmlentities(( !empty($customEnclosure) && $customEnclosure != 'other' ? $customEnclosure : $customEnclosureOther )));
 
         $importModule = $this->request->getValidInputRequest('import_module', 'Assert\Mvc\ModuleName', false);

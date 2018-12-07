@@ -129,17 +129,12 @@ $viewdefs['Styleguide']['base']['layout']['styleguide'] = array(
                         )
                     ),
                     "charts" => array (
-                        "title" => "Charting",
-                        "description" => "Standard and custom SVG charts for Sugar7 using the D3 library and the NVD3 framework.",
+                        "title" => "Sucrose Charts",
+                        "description" => "Standard and custom charts in Sugar7 are developed using D3 and the Sucrose Charts library. For configuration details see the <a href='http://sucrose.io'>sucrose.io</a> website.",
                         "index" => true,
                         "pages" => array (
-                            "circular" => array("title"=>"Circular", "description"=>"Used for comparing parts to a whole."),
-                            "line" => array("title"=>"Line", "description"=>"Used for comparing data series over time dimension."),
-                            "horizontal" => array("title"=>"Horizontal Bar", "description"=>"Used for comparing many values in a single series."),
-                            "vertical" => array("title"=>"Vertical Bar", "description"=>"Used for comparing multiple series with a few values."),
-                            "custom" => array("title"=>"Custom", "description"=>"Used for comparing values in a process."),
-                            "implementation" => array("title"=>"Implementation", "description"=>"Patterns for inserting and configuring charts."),
-                            "colors" => array("title"=>"Colors", "description"=>"Flexible methods for assigning color maps and fill methods to D3 charts."),
+                            "types" => array("title"=>"Chart Types", "description"=>"Currently supported Sucrose chart types."),
+                            "colors" => array("title"=>"Chart Colors", "description"=>"Flexible methods for assigning color maps and fill methods to Sucrose charts."),
                         )
                     ),
                 ),

@@ -1010,7 +1010,6 @@ $server->register(
  *
  * @param String $session -- Session ID returned by a previous call to login.
  * @return String -- the Team ID of the current user's default team
- *                  1 for Community Edition
  *                  -1 on error.
  */
 function get_user_team_id($session){
@@ -1018,9 +1017,6 @@ function get_user_team_id($session){
 	{
 		global $current_user;
 		return $current_user->default_team;
-		/*
-		 return 1;
-		 */
 	}else{
 		return '-1';
 	}
@@ -1065,8 +1061,7 @@ $server->register(
 /**
  * Retrieve the specific flavor of sugar.
  *
- * @return String   'CE' -- For Community Edition
- *                  'PRO' -- For Professional
+ * @return String   'PRO' -- For Professional
  *                  'ENT' -- For Enterprise
  */
 function get_sugar_flavor(){

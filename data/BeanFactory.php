@@ -54,6 +54,10 @@ class BeanFactory {
     		$params = array('encode' => $params);
     	}
 
+        if (!isset($params['deleted'])) {
+            $params['deleted'] = $deleted;
+        }
+
         // Pull values from $params array
         if (defined('ENTRY_POINT_TYPE') && constant('ENTRY_POINT_TYPE') == 'api') {
             // In API mode, we can cache all beans unless specifically told not
@@ -87,6 +91,10 @@ class BeanFactory {
                 $bean->disable_row_level_security = true;
             }
 
+            if (!empty($params['erased_fields'])) {
+                $bean->retrieve_erased_fields = true;
+            }
+
             if (!$bean->retrieve($id, $encode, $deleted)) {
                 if (empty($params['strict_retrieve'])) {
                     return $bean;
@@ -102,39 +110,42 @@ class BeanFactory {
 
         $bean = self::$loadedBeans[$module][$id];
 
-        // check if cached bean is deleted
-        if ($deleted && !empty($bean->deleted)) {
-            if (empty($params['strict_retrieve'])) {
-                return self::newBean($module);
-            } else {
-                return null;
+        if (self::loadedBeanHasCompatibleParams($bean, $params)) {
+            return $bean;
+        }
+
+        unset(self::$loadedBeans[$module][$id]);
+        self::$total--;
+
+        return self::getBean($module, $id, $params, $deleted);
+    }
+
+    /**
+     * Checks whether the already loaded bean was loaded with the parameters compatible with the given ones
+     *
+     * @param SugarBean $bean Loaded bean
+     * @param array $params Current parameters
+     * @return bool
+     */
+    private static function loadedBeanHasCompatibleParams(SugarBean $bean, array $params) : bool
+    {
+        if ($params['deleted'] && $bean->deleted) {
+            return false;
+        }
+
+        if (empty($params['disable_row_level_security']) && $bean->disable_row_level_security) {
+            $definition = self::newBean($bean->module_name);
+
+            if (!$definition->disable_row_level_security) {
+                return false;
             }
         }
 
-        // cached bean was retrieved with team security disabled
-        if (empty($params['disable_row_level_security']) && !empty($bean->disable_row_level_security)) {
-            $newBean = self::newBean($module);
-            if (isset($params['disable_row_level_security'])) { // false
-                $newBean->disable_row_level_security = false;
-            }
-
-            if (empty($newBean->disable_row_level_security)) {
-                // retireve with team security enabled
-                if (!$newBean->retrieve($id, $encode, $deleted)) {
-                    if (empty($params['strict_retrieve'])) {
-                        return $bean;
-                    }
-
-                    return null;
-                }
-
-                // save new bean in cache
-                self::$loadedBeans[$module][$id] = $newBean;
-                return $newBean;
-            }
+        if (!empty($params['erased_fields']) && !$bean->retrieve_erased_fields) {
+            return false;
         }
 
-        return $bean;
+        return true;
     }
 
     /**

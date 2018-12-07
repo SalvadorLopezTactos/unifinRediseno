@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Noteeringute loendi töölaud',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Noteeringute kirjete töölaud',
+
     'LBL_CONTRACTS'=>'Lepingud',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Lepingud',
     'ERR_DELETE_RECORD' => 'Pakkumuse kustutamiseks täpsustage kirje numbrit.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Vahesumma (USA dollar)',
     'LBL_SUBTOTAL' => 'Vahesumma:',
     'LBL_TAXABLE_SUBTOTAL' => 'Maksustatav vahesumma',
-    'LBL_SYSTEM_ID' => 'Süsteemi ID',
     'LBL_TAX_USDOLLAR'=>'Maks (USA dollar)',
     'LBL_TAX' => 'Maks:',
     'LBL_TAX_TOTAL' => 'Maksud kokku',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Kustuta valitud',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Kustuta valitud üksused',
     'LBL_SAVE_LINE_ITEMS' => 'Enne pakkumuse salvestamist salvestage aktiivsed reaüksused, klõpsates iga üksuse kõrval olevat sinist märkeruutu.',
+    'LBL_COPY_LINE_ITEMS' => 'Enne pakkumuse kopeerimist salvestage aktiivsed reaüksused, klõpsates iga üksuse kõrval olevat sinist märkeruutu.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Otsi tootekataloogist',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Andmed puuduvad',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Pakkumuse artiklite kopeerimine uude pakkumisse.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Pakkumuse artiklite kopeerimine uude pakkumisse. See toiming võib aega võtta.',
 );

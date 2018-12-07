@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Es muss die Datensatznummer angegeben werden, um den Hersteller zu löschen.',
   'NTC_STATUS' => 'Zum Entfernen dieses Herstellers aus der Hersteller-Auswahlliste setzen Sie den Status auf "inaktiv"',
   'NTC_LIST_ORDER' => 'Konfigurieren Sie die Reihenfolge, in der dieser Hersteller in der Auswahlliste erscheinen soll',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Inaktiv',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Hersteller importieren',
 	'LBL_EDITLAYOUT' => 'Layout bearbeiten' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Umsatzposten',

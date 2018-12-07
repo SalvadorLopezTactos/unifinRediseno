@@ -13,6 +13,11 @@
 <div class="dropdown">
 <a class="dropdown-toggle btn btn-invisible btn-link" data-toggle="dropdown" href="javascript:void(0);">{{value}}<i class="fa fa-caret-down"></i></a>
 <ul class="dropdown-menu">
+    {{!
+        FIXME TY-1464: Don't hardcode the "Dashboards" module.
+    }}
+    <li><a href="javascript:void(0);" data-action="manager"><i class="fa fa-bars"></i> {{str "LBL_MANAGE_DASHBOARDS" "Dashboards"}}</a></li>
+    <li class="divider"></li>
     {{#if dashboards}}
         {{#each this.dashboards.models}}
             <li><a href="javascript:void(0);" data-id="{{fieldValue this "id"}}">{{fieldValue this "name"}}</a></li>

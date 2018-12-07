@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'OAuth -kuluttajan avaimet',
     'OAuthTokens' => 'OAuth -turvatunnisteet',
     'Filters' => 'Suodattimet',
-    'UserSignatures' => 'Käyttäjien allekirjoitukset',
+    'UserSignatures' => 'Sähköpostin allekirjoitukset',
     'Shippers' => 'Toimituksen tarjoajat',
     'Styleguide' => 'Tyyliopas',
     'Feedbacks' => 'Palaute',
     'Tags' => 'Tagit',
     'Categories' => 'Kategoriat',
     'Dashboards' => 'Työpöydät',
+    'OutboundEmail' => 'Sähköpostiasetukset',
+    'EmailParticipants' => 'Sähköpostin jakelulista',
+    'DataPrivacy' => 'Tietosuoja',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'Q',
         'Tasks' => 'Tv',
-        'Dashboards' => 'Tietokanta',
+        'Dashboards' => 'Kl',
+        'DataPrivacy' => 'TS',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => 'Tuotetyyppi',
     'Shippers' => 'Toimittaja',
     'Subscriptions' => 'Tilaus',
-    'UserSignatures' => 'Käyttäjän allekirjoitus',
+    'UserSignatures' => 'Sähköpostin allekirjoitus',
     'Feedbacks' => 'Palaute',
     'Tags' => 'Tagi',
     'Categories' => 'Kategoria',
+    'OutboundEmail' => 'Sähköpostiasetus',
+    'EmailParticipants' => 'Sähköpostin jakelu',
+    'DataPrivacy' => 'Tietosuoja',
   ),
 
 /*
@@ -311,7 +318,7 @@ $app_list_strings = array (
     'Existing Customer' => 'Olemassa oleva asiakas',
     'Self Generated' => 'Itse luotu',
     'Employee' => 'Työntekijä',
-    'Partner' => 'Partner',
+    'Partner' => 'Kumppani',
     'Public Relations' => 'Suhdetoiminta',
     'Direct Mail' => 'Suoraposti',
     'Conference' => 'Konferenssi',
@@ -329,6 +336,11 @@ $app_list_strings = array (
     'Existing Business' => 'Toiminnassa oleva liiketoiminta',
     'New Business' => 'Uusi liiketoiminta',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => 'Aktiivinen',
+            'Inactive' => 'Ei aktiivinen',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => 'Liikevaihto',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => 'Vaikuttaja',
     'Other' => 'Muu',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => 'Aktiivinen',
+            'Inactive' => 'Ei aktiivinen',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => 'Aktiivinen',
+            'Inactive' => 'Ei aktiivinen',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => 'Ensisijainen yhteyshenkilö',
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => 'Tehtävä',
       'KBContents' => 'Tietämyskanta',
+      'Notes' => 'Huomautus',
   ),
 
   'record_type_display_notes' =>
@@ -659,6 +683,14 @@ $app_list_strings = array (
     'Calls' => 'Puhelu',
       'KBContents' => 'Tietämyskanta',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => 'Asiakas',
+        'Contacts' => 'Kontakti',
+        'Employees' => 'Työntekijä',
+        'Leads' => 'Liidi',
+        'Prospects' => 'Tavoite',
+        'Users' => 'Käyttäjä',
+    ),
 
   'parent_type_display' =>
   array (
@@ -678,7 +710,7 @@ $app_list_strings = array (
 
     'Prospects' => 'Tavoite',
       'KBContents' => 'Tietämyskanta',
-
+      'Notes' => 'Huomautus',
   ),
 
   'product_status_default_key' => 'Toimitus',
@@ -832,7 +864,6 @@ $app_list_strings = array (
     'Product' => 'Tuote',
     'User' => 'Käyttäjä',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => 'Mikä tahansa sähköposti',
     'Twitter' => 'Twitter'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => 'Pyydä tietosuojalauseketta',
+        'Send Personal Information being processed' => 'Lähetä käsiteltävät henkilötiedot',
+        'Rectify Information' => 'Korjaa tietoja',
+        'Request to Erase Information' => 'Pyydä tietojen poistamista',
+        'Export Information' => 'Viennin tiedot',
+        'Restrict Processing' => 'Rajoita käsittelyä',
+        'Object to Processing' => 'Käsiteltävä objekti',
+        'Consent to Process' => 'Suostumus käsitellä',
+        'Withdraw Consent' => 'Peruuta suostumus',
+        'Other' => 'Muu',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => 'Yritysviestintä',
+        'Marketing Communications by company' => 'Yrityksen markkinointiviestintä',
+        'Marketing Communications by partners' => 'Kumppaneiden markkinointiviestintä',
+    ),
+    'dataprivacy_status_default_key' => 'Avaa',
+    'dataprivacy_status_dom' => array(
+        'Open' => 'Avaa',
+        'Closed' => 'Valmis',
+        'Rejected' => 'Hylätty',
+    ),
+    'dataprivacy_priority_default_key' => 'Matala',
+    'dataprivacy_priority_dom' => array(
+        'Low' => 'Matala',
+        'Medium' => 'Keskisuuri',
+        'High' => 'Korkea',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => 'Studio',
     'Upgrade' => 'Päivitys',
     'Users' => 'Käyttäjät',
+    'OutboundEmail' => 'Sähköpostiasetukset',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => 'Epäonnistui',
                                         'completed'     => 'Valmis',
                                         'no curl'       => 'Ei suoritettu: cURL -kirjasto ei käytettävissä',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => 'Luonnos',
+        'Archived' => 'Arkistoitu',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => 'Poistettujen lista id:n mukaan',
     'test' => 'Testi',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => 'Aktiivinen',
+             'Inactive' => 'Ei aktiivinen',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3 viikkoa',
         '31' => '1 kuukausi',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => 'Aktiivinen',
-    'Inactive' => 'Epäaktiivinen',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => 'Korkea',
         'medium'    => 'Keskisuuri',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => 'Ei mitään',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'Google',
+        'exchange' => 'Exchange',
+        'outlook' => 'Outlook',
+        'other' => 'Muu',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2032,6 +2099,11 @@ $app_list_strings = array (
         'ACTIVE' => 'Käytössä',
         'INACTIVE' => 'Poistettu käytöstä',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => 'Tietue',
+        'records' => 'Lista',
+        'activities' => 'Aktiviteettivirta',
+    ),
 );
 
 $app_strings = array (
@@ -2043,11 +2115,11 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Seuraa linkkiä',
   'LBL_TOGGLE_VISIBILITY' => 'Vaihda näkyvyyttä', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktiviteettivirta',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. Kaikki oikeudet pidätetään.',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. Kaikki oikeudet pidätetään.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar ja 3-D Cube ovat SugarCRM Inc.:n rekisteröityjä tavaramerkkejä.'.
         'Kaikki muut tässä tuotteessa käytetyt tai näkyvät yritys- ja tuotenimet voivat olla '.
         'SugarCRM&reg;, Sugar Enterprise&trade; ja Sugar&trade; ovat SugarCRM Inc.in tuotemerkkejä.',
-    'LBL_TRADEMARK2' => 'SugarCRM&reg;, Sugar Enterprise&trade; ja Sugar&trade; ovat SugarCRM Inc.in tuotemerkkejä.',
+    'LBL_TRADEMARK2' => 'SugarCRM®, Sugar Enterprise™ ja Sugar™ ovat SugarCRM:n tavaramerkkejä.',
     'LBL_SEND_INVITE' => 'Lähetä kutsu',
   'LBL_INVITEES' => 'Kutsutut',
     'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Vieraat eivät saa kutsuasi',
@@ -2116,6 +2188,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => 'Käytä SMTP:tä SSL- tai TLS- yhteydellä',
     'LBL_NO_ACTION'                         => 'Nimellä ei ole toimintoja',
     'LBL_NO_DATA'                           => 'Tietoja ei ole',
+    'LBL_NOT_APPLICABLE'                    => 'Ei sovellettavissa',
     'LBL_ROUTING_ADD_RULE'                  => 'Lisää sääntö',
     'LBL_ROUTING_ALL'                       => 'Kaikki',
     'LBL_ROUTING_ANY'                       => 'Mikä tahansa',
@@ -2547,6 +2620,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'Tuonti onnistui',
     'LBL_EMAIL_IMPORT_FAIL'                 => 'Tuonti epäonnistui. Joko viesti on jo tuotu tai se on poistettu palvelimelta',
 
+    'LBL_EMAILS_FROM' => 'Lähetetyt sähköpostit',
+    'LBL_EMAILS_RECEIVED' => 'Vastaanotetut sähköpostit',
+    'LBL_EMAIL_ADDRESSES_USED' => 'Sähköposteissa käytetyt sähköpostiosoitteet',
+    'LBL_EMAIL_ADDRESS' => 'Sähköpostiosoitteet',
+    'LBL_FROM' => 'Lähettäjä',
+    'LBL_TO' => 'Vastaanottaja',
+    'LBL_CC' => 'Kopio',
+    'LBL_BCC' => 'Piilokopio',
+
     'LBL_LINK_NONE'=> 'Ei mitään',
     'LBL_LINK_ALL'=> 'Kaikki',
     'LBL_LINK_RECORDS'=> 'Tietueet',
@@ -2572,7 +2654,7 @@ $app_strings = array (
     'LBL_REMOVE_PRIMARY_TEAM_ERROR' => 'Virhe yrittäessä poistaa primääritiimin IDtä [{0}] moduulille [{1}] ID:llä [{2}]',
     'LBL_TEAM_ADD' => 'Lisää tiimi',
     'LBL_TEAM_REMOVE' => 'Poista tiimi',
-    'LBL_TEAM_PRIMARY' => 'Aseta primääritiimiksi',
+    'LBL_TEAM_PRIMARY' => 'Aseta ensisijaiseksi tiimiksi',
 
     'LBL_CLOSE_BUTTON_LABEL' => 'Sulje',
     'TPL_STATUS_CHANGE_SUCCESS' => '{{moduleSingular}}-tietueen status on nyt {{status}}.',
@@ -2605,6 +2687,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'Istunnon (session) tulee olla aktiivinen jotta tietoja voidaan viedä.',
     'ERR_NO_HEADER_ID' => 'Toiminto ei ole käytettävissä tämän teeman kanssa.',
     'ERR_NOT_ADMIN' => "Ylläpitoliittymään pääsy estetty.",
+    'ERR_DISABLED_FOR_IDM_MODE' => "Tämä asetus ei ole käytössä SugarCRM:n IDM-tilassa. Se on käytettävissä Cloud-konsolissa.",
+    'ERR_GOTO_CLOUD_CONSOLE' => "Siirry <a href=\"%s\" target=\"_blank\">Cloud-konsoliin</a>.",
     'ERR_MISSING_REQUIRED_FIELDS' => 'Syötä tieto vaadittuihin kenttiin:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Virheellinen vaadittu kenttä:',
     'ERR_INVALID_VALUE' => 'Virheellinen arvo:',
@@ -2910,7 +2994,7 @@ $app_strings = array (
     'LBL_LIST_NAME' => 'Nimi',
     'LBL_LIST_OF' => '/',
     'LBL_LIST_PHONE' => 'Puhelin',
-    'LBL_LIST_RELATED_TO' => 'Liittyy',
+    'LBL_LIST_RELATED_TO' => 'Koskee asiaa',
     'LBL_LIST_USER_NAME' => 'Käyttäjätunnus',
     'LBL_LISTVIEW_MASS_UPDATE_CONFIRM' => 'Haluatko päivittää koko listan?',
     'LBL_LISTVIEW_NO_SELECTED' => 'Valitse ainakin yksi tietue.',
@@ -2934,7 +3018,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Massapäivitys epäonnistui. Yritetään uudelleen ({{num}}/{{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Massapäivitys puutteellinen. {{num}} tietuetta jätettiin muuttamatta.',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => 'Massapäivitys puutteellinen. {{num}} tietuetta jätettiin muuttamatta.',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} tietuetta ohitettiin oikeuksien takia.',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} tietuetta hylättiin käyttöoikeuksien tai virheiden vuoksi.',
     'TPL_MASSUPDATE_SUCCESS' => 'Päivitettiin {{num}} tietuetta.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} massapäivitys',
     'TPL_MASSDELETE_PROGRESS_STATUS' => 'Poistetaan {{num}}/{{total}}.',
@@ -3006,6 +3090,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'käyttäjän oletus',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => 'käyttäjän tili',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'ryhmätili',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => 'Nimi',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => 'Luo',
@@ -3218,7 +3303,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Kaikki oikeudet pidätetään.<br/> SugarCRM, Sugar ja 3-D Cube ovat SugarCRM Inc.:n rekisteröityjä tavaramerkkejä. '.
         'Kaikki muut tässä tuotteessa käytetyt tai näkyvät yritys- ja tuotenimet voivat olla '.
         'vastaavien yritysten tavaramerkkejä.',
@@ -3256,7 +3341,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => 'Salasana',
     'LBL_LOGGED_OUT' => 'Sinut on kirjauduttu ulos.',
     'LBL_LOGIN_FORM_LABEL' => 'Näytä sisäänkirjautumislomake',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => 'Palaa kirjautumiseen',
+    'LBL_LOGIN_INACTIVE_USER' => 'Ei aktiivinen käyttäjä',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => 'Portaalin tai ryhmän käyttäjä ei voi kirjautua sisään.',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => 'Työpöytä',
@@ -3323,8 +3410,9 @@ $app_strings = array (
     'LNK_BACKTOTOP' => 'Takaisin ylös',
     'LNK_REMOVE' => 'poista',
     'LNK_RESUME' => 'Jatka',
-    'LNK_VIEW_CHANGE_LOG' => 'Näytä muutosloki',
-
+    'LNK_VIEW_CHANGE_LOG' => 'Näytä tarkistusloki',
+    'TPL_AUDIT_LOG_TITLE' => 'Tarkistusloki kohteelle {{{name}}}',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => 'Napsauta selaimen Takaisin-painiketta ja korjaa ongelma.',
     'NTC_DATE_FORMAT' => '(vvvv-kk-pp)',
@@ -3333,7 +3421,7 @@ $app_strings = array (
     'NTC_TEMPLATE_IS_USED' => 'Pohjaa käytetään ainakin yhdessä sähköpostimarkkinointitietueista. Haluatko varmasti poistaa sen?',
     'NTC_TEMPLATES_IS_USED' => "Seuraavia mallipohjia käytetään sähköpostimarkkinointitietueissa. Oletko varma, että haluat poistaa ne?",
     'NTC_DELETE_CONFIRMATION' => 'Haluatko poistaa tämän tietueen?',
-    'NTC_DELETE_CONFIRMATION_FORMATTED' => 'Haluatko varmasti positaa {0}?',
+    'NTC_DELETE_CONFIRMATION_FORMATTED' => 'Haluatko varmasti poistaa {0}?',
     'NTC_DELETE_CONFIRMATION_NUM' => 'Haluatko varmasti poistaa valitut tietueet?',
     'NTC_UPDATE_CONFIRMATION_NUM' => 'Haluatko varmasti päivittää valitut tietueet?',
     'NTC_DELETE_SELECTED_RECORDS' =>'kpl',
@@ -3358,7 +3446,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "Yrityksesi SugarCRM-lisenssi umpeutuu pian.",
     'ERROR_LICENSE_VALIDATION'=> "SugarCRM lisenssi tulee validoida. Vain ylläpitäjät voivat kirjautua.",
     'WARN_LICENSE_VALIDATION'=> "Yrityksesi SugarCRM-lisenssi pitää validoida pian.",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"Päällä olevien offline clientien määrä ylittää lisenssissä sallitun määrän.",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Huomautus:</b> Selaimesi on IE:n yhteensopivuustilassa. Yhteensopivuustilaa ei tueta.",
     'WARN_LICENSE_SEATS'=>  "Varoitus: Aktiivisten käyttäjien määrä ylittää lisenssien salliman määrän.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Varoitus: aktiivisten käyttäjien määrä ylittää sallitun lisenssien enimmäismäärän.",
@@ -3428,9 +3515,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'Suoritetaan...',
     'LBL_REQUEST_PROCESSED'=>'Valmis',
     'LBL_AJAX_FAILURE' => 'Ajax-virhe',
-    'LBL_OC_STATUS' => 'Offline clientin status',
-    'LBL_OC_STATUS_TEXT' => 'Indikoi, voiko käyttäjä käyttää offline clientia.',
-    'LBL_OC_DEFAULT_STATUS' => 'Epäaktiivinen',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => 'Haku...',
     'LBL_SAVED_SEARCH_SHORTCUT' => 'Tallennetut haut',
     'LBL_SEARCH_POPULATE_ONLY'=> 'Hae tietoja alla olevan lomakkeen avulla',
@@ -3531,6 +3615,7 @@ $app_strings = array (
     'LBL_COLLAPSE_ALL' => 'Piilota kaikki',
     'LBL_EXPAND_ALL' => 'Näytä kaikki',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => 'Muokkaa',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => 'Näytä raportti',
     'LBL_DASHLET_REFRESH_LABEL' => 'Päivitä',
     'LBL_DASHLET_REMOVE_LABEL' => 'Poista',
     'LBL_DASHLET_DROP_HERE' => 'Pudota tähän',
@@ -4199,7 +4284,9 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Vahvista',
     'LBL_NO_ACCESS' => '(Ei pääsyä)',
     'LBL_NO_ACCESS_LOWER' => 'Käyttäjällä ei ole pääsyä tietueeseen',
-    'LBL_NO_FIELD_ACCESS' => 'Ei pääsyä',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => 'Arvo poistettu',
+    'LBL_VALUE_ERASED_TOOLTIP' => 'Nämä tiedot on poistettu tietosuojapyynnön kautta',
     'LBL_CREATE_RELATED_RECORD' => 'Luo liittyvä tietue',
     'LBL_ASSOC_RELATED_RECORD' => 'Linkitä olemassa oleva tietue',
     'LBL_CHOOSE_LINK' => 'Valitse linkin tyyppi',
@@ -4268,8 +4355,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => 'Suurempi',
     'LBL_FONTSIZE_HUGE' => 'Suurin, melkein',
     'LBL_FONTSIZE_EXTRA_HUGE' => 'Jättiläsmäinen',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => 'Lataus epäonnistui
-<br />{{{this}}}',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "Download failed\r\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => 'Enemmän',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => 'Vähemmän',
     'LBL_OFFLINE_MODE' => 'Offline mode',
@@ -4338,6 +4424,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => 'Transaktiotiedot',
     'LBL_RECORD_DELETED' => '(Tietue poistettu)',
     'LBL_NOT_AVAILABLE' => 'ei saatavilla',
+    'LBL_FILE_SIZE' => 'Tiedostokoko',
     'LBL_FILE_SIZE_UNITS_B' => 'tavua',
     'LBL_FILE_SIZE_UNITS_KB' => 'kt',
     'LBL_FILE_SIZE_UNITS_MB' => 'Mt',
@@ -4461,6 +4548,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => 'Kaikki tiedot -näkymä avautuu näytön oikealta laidalta.',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => 'Käytä alla olevia nuolia navigoidaksesi tämän valikon pikaesittelyn läpi.',
 
+    'LBL_COMMENT_ADD' => 'Lisää kommentti',
+    'LBL_REQUIRED' => 'Pakollinen',
+    'LBL_MORE_BUTTON' => 'Enemmän',
+    'LBL_TRY_AGAIN' => 'Yritä uudelleen',
+    'LBL_NEW_RECORDS' => 'Äskettäin luotu',
+    'LBL_ASSIGNED_TO_ME' => 'Oma {{{module}}}',
+    'LBL_LISTVIEW_FILTER_ALL' => 'Kaikki {{{module}}}',
+    'LBL_UNFAVORITE' => 'Ei suosikki',
+    'LBL_ACTIVITY_CREATE' => 'Luotiin {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UPDATE' => 'Päivitetty {{{changes}}} kohteeseen {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_LINK' => 'Linkitettiin {{{relatedRecord}}} tietueeseen {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UNLINK' => 'Poistettiin linkitys tietueesta {{{relatedRecord}}} tietueeseen {{{record}}} {{{module}}}',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{relationship}} moduulille {{parentModule}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => 'Lataa tähän liittyvät tietueet...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => 'Työpöydän määrittelyä on muutettu. Haluatko ladata uudelleen?',
+    'LBL_RECORDS' => 'Tietueet',
+    'LBL_DASHBOARDS' => 'Työpöydät',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => 'Hae {{searchCriteria}}...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => 'Päävalikko',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => 'Uuden tietueen pikaluonti',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => 'Pyyhkäise lisää vaihtoehtoja',
+    'LBL_DETAILS' => 'Tiedot',
+    'LBL_DETAIL_RELATED' => 'Tähän liittyvät',
+    'LBL_CREATE_RELATED_MODULE_WARN' => 'Moduuli {{module}} edellyttää moduulia {{relatedModule}}. <a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>Luo {{relatedModule}} -tietue</a>.',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => 'Muokkaa tietuetta',
+    'LBL_OFFLINE_MENU_SETTINGS' => 'Offline-asetukset',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => 'Debug-asetukset',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED" : "Tietojen salaus on käytössä.',
+    'LBL_OFFLINE_TOTAL_RECORDS' => 'Tietueita yhteensä',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => 'Edellinen lataus',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => 'Tiedostoa ei voi ladata.',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => 'Työpöytien lataus palvelimelta epäonnistui',
+    'ERR_FILTERS_FETCHING' => 'Suodattimia ei voitu hakea',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => 'Virhe salattaessa paikallista tietovarastoa',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => 'Salataan offline-tietoja. Tämä saattaa kestää useita minuutteja.',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => 'Offline-tietojen salaus valmis.',
+    'ERR_ACCESS_SPECIFIC_MODULE' => 'Sinulla ei ole pääsyoikeutta moduuliin {{{module}}}.',
+    'LBL_SKIP' => 'Ohita',
+    'LBL_CONTINUE' => 'Jatka',
+    'LBL_ENABLE' => 'Ota käyttöön',
+    'LBL_MOBILE_TRIAL_UNTIL' => 'Kokeiluversio päivämäärään',
+    'LBL_MOBILE_SDK_VERSION' => 'SDK-versio',
+    'LBL_LOG_LEVEL' => 'Lokin taso',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => 'Kirjautumisasetukset on määritetty uudelleen.',
+    'LBL_TRIAL_PERIOD_EXPIRED' => 'Kokeilujakso on päättynyt.',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => 'Palvelin ei tue suojattua yhteyttä. Poista suojattu yhteys käytöstä.',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => 'Palvelin tukee suojattua yhteyttä. Ota suojattu yhteys käyttöön.',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => 'Yhteys ei ole turvallinen. Ota yhteyttä järjestelmänvalvojaan.',
+    'LBL_LOGIN_SETTINGS_HEADER' => 'Kirjautumisasetukset',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => 'Määritä instanssi {{{brandName}}}',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => 'Jotta sovellus toimisi, sinun tulee kirjoittaa instanssin {{{brandName}}} URL-osoite. Jos sinulla ei ole instanssin URL-osoitetta, ota yhteyttä järjestelmänvalvojaan.',
+    'LBL_FACEID' => 'Face ID',
+    'LBL_TOUCHID' => 'Touch ID',
+    'LBL_ENABLE_TOUCHID' => 'Enable {{{biometryType}}}',
+    'LBL_SETUP_TOUCHID' => 'Setup {{{biometryType}}}',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => 'Kirjaudu koskettamalla sormella',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "{{{biometryType}}} is not set up on your device. \n\nGo to your device settings to set up {{{biometryType}}}. Once set up, enable {{{biometryType}}} for {{{brandName}}} in Main Menu > Settings.",
+    'LBL_TOUCH_ID_DISCLAIMER' => 'Using {{{biometryType}}} with {{{brandName}}} will allow you to use your biometric identifier instead of entering your password to access {{{brandName}}}.',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => 'Would you like to proceed with {{{biometryType}}}?    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => 'Enter {{{brandName}}} Password to Enable {{{biometryType}}}',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => 'Asetukset',
+    'LBL_MDM_CONFIRM_CHANGE' => 'Sovelluksen määritystä on muutettu Mobile Device Managerista. Ota muutokset käyttöön kirjautumalla uudelleen.',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => 'Anna instanssille {{{brandName}}} pääsy sijaintiisi laitteen asetuksista.',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => 'Nykyinen sijainti ei ole käytettävissä',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "Current location retrieval timed out. \nPlease try again.",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => 'Sijainnin paikkamerkitsimiä ei ole saatavilla',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => 'Sijainnin koordinaatit ovat virheelliset',
+    'ERR_MOBILE_INVALID_PASSWORD' => 'Salasana ei kelpaa.',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => 'Sovelluksesi on vanhentunut eikä se ole enää yhteensopiva instanssin {{{brandName}}} kanssa. Haluatko päivittää sen?',
+    'LBL_MOBILE_BY' => 'Tähän mennessä:',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => 'Tämä suodatin ei ole käytettävissä ilman verkkoyhteyttä',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => 'Offline-tietueet',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => 'Lataa asetukset',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => 'Lataa vastuullasi olevat, suosikki- ja seuraamasi tietueet käytettäväksi ilman verkkoyhteyttä. Voit päivittää asetuksia offline-asetuksissa.',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "Your records have finished downloading. You can now access them in offline mode.",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "Not all your records were downloaded.\n Do you want to try again?",
+    'LBL_BULK_LOAD_USE_CELLULAR' => 'Käytä solun tietoja',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => 'Ei nyt',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => 'Lataus on keskeytetty ja sitä jatketaan, kun avaat sovelluksen uudelleen.',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => 'Ladataan moduulia {{{module}}}: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => 'Päivitä uusimmat tietueet',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => 'Odottaa yhteyttä',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => 'Keskeytetty',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => 'Pysäytetään',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => 'Lataa',
+    'LBL_BULK_LOAD_BTN_PAUSE' => 'Keskeytä',
+    'LBL_BULK_LOAD_BTN_RESUME' => 'Jatka',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => 'Oletuksena käytetään ainoastaan WiFi-yhteyttä',
+    'LBL_NPS_RATING_MSG' => "How would you rate your \n{{{productName}}} experience?",
+    'LBL_NPS_THANKS_MSG' => 'Kiitos palautteesta!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => 'Voisitko arvioida sen App Storessa?',
+    'LBL_NPS_NO_THANKS' => 'Ei kiitos',
+    'LBL_NPS_NOT_NOW' => 'Ei nyt',
+    'LBL_NPS_RATE_NOW' => 'Arvioi nyt',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => 'Verkko ei ole käytettävissä. Voit silti käyttää sovellusta ilman verkkoyhteyttä',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => 'Tekemäsi muutokset synkronoidaan, kun olet verkossa. <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>Katso tiedot</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => 'Synkronoimattomia tietoja löytyy. Tarkista <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>transaktioloki</a>',
+    'LBL_CONVERT' => 'Muunna',
+    'LBL_CONVERT_LEAD' => 'Muunna liidi',
+    'LBL_SEARCH_EXISTING_RECORD' => 'Hae olemassa oleva {{{this}}}',
+    'LBL_DUPLICATES_CHECK_FAILED' => 'Kaksoiskappaleiden tarkistus epäonnistui',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => 'Siirretäänkö tähän liittyvät toiminnot yhteystiedon tietueelle?',
+    'LBL_LEAD_CONVERSION_SUCCESS' => 'Liidi {{{name}}} muunnettiin',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => 'Kaksoiskappaleita ei löytynyt.',
+    'ERR_LEAD_CONVERSION_FAIL' => 'Liidin muuntaminen epäonnistui',
+    'LBL_SELECT_DUPLICATE_RECORD' => 'Valitse kaksoiskappaleesta {{{modulePlural}}}',
+    'LBL_SELECTED_EXISTING_RECORD' => 'Valittu {{{moduleSingular}}}',
+    'LBL_CREATED_NEW_RECORD' => 'Luotu uusi {{{moduleSingular}}}',
+    'LBL_VO_BACK_BTN' => 'Takaisin-painike',
+    'LBL_VO_HOME_BTN' => 'Aloituspainike',
+    'LBL_VO_DASHBOARD_BTN' => 'Työpöytä-painike',
+    'LBL_VO_SEARCH_BTN' => 'Hakupainike',
+    'LBL_VO_RIGHT_MENU_BTN' => 'Oikeanpuoleisen valikon painike',
+    'LBL_VO_ADD_BTN' => 'Lisää painike',
+
     //begin portal
 
     //portal record tutorial
@@ -4572,6 +4775,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => 'Valitse raportti',
     'LBL_REPORT_AUTO_REFRESH' => 'Automaattinen päivitys',
     'LBL_REPORT_EDIT' => 'Muokkaa valittua raporttia',
+    'LBL_REFRESH_LIST_AND_CHART' => 'Päivitä luettelo ja kaavio',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => 'Tuntematon',
@@ -4633,6 +4837,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'Error occurred during AssignTo action.',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => 'Sinulla ei ole pääsyoikeuksia "{{name}}"-moduuliin. Ota yhteyttä järjestelmänvalvojaan.',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => 'Vuosi {0}',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} Q{0}',
@@ -4645,9 +4852,14 @@ $app_strings = array (
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => 'Ohita duplikaatit ja tallenna',
     'LBL_RESTORE' => 'Palauta alkuperäiseen',
 
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => 'Poistettavaksi merkityt tietueet',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => 'Näyttää tietueet, jotka liittyvät tietosuojapyyntöön kohteeseen '
+        . 'Poista tiedot.',
+
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'RSS Syöte',
-    'LBL_RSS_FEED_DASHLET_DESCRIPTION' => 'Pysy jännitteenä lisäämällä ulkoinen RSS- tai blogisyöte.',
+    'LBL_RSS_FEED_DASHLET_DESCRIPTION' => 'Pysy ajan tasalla lisäämällä ulkoinen RSS- tai blogisyöte.',
     'LBL_RSS_FEED_URL' => 'Syötteen URL',
     'LBL_RSS_FEED_AUTHOR' => 'Kirjoittaja:',
     'LBL_RSS_FEED_ENTRIES_COUNT' => 'Näytettävien alkupalojen määrä.',
@@ -4667,6 +4879,7 @@ $app_strings = array (
     'LBL_UNASSIGNED' => 'Määrittämätön',
     'LBL_ARCHIVE_EMAIL' => 'Arkistoi sähköposti',
     'LBL_EMAIL_ARCHIVED' => 'Sähköposti arkistoitu',
+    'LBL_CREATE_ARCHIVED_EMAIL' => 'Luo arkistoitu sähköposti',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => 'Suunniteltut aktiviteetit',
@@ -4698,6 +4911,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Tehtäväni',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Tiimin tehtävät',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Tarkempi työnkulku',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC-käyttöliittymä',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP tai Old REST API',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'Cron Job',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => 'Logic Hook',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'Sugarin työnkulku',
+    'LBL_AUDIT_SUBJECT_USER' => 'Käyttäjä',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Webistä liidiksi',
+
     //common chart strings
     'LBL_CHART' => 'Kaavio',
     'LBL_CHART_NO_DATA' => 'Dataa ei löytynyt.',
@@ -4706,6 +4932,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => 'Piilota nappulat',
     'LBL_CHART_CONTROLS_OPEN' => 'Näytä nappulat',
     'LBL_CHART_UNDEFINED' => 'määrittelemätön',
+    'LBL_CHART_NO_LABEL' => 'Määrittelemätön',
+    'LBL_CHART_AMOUNT' => 'Määrä',
+    'LBL_CHART_COUNT' => 'Lukumäärä',
+    'LBL_CHART_PERCENT' => 'Prosenttia',
+    'LBL_CHART_GROUP' => 'Ryhmä',
+    'LBL_CHART_DATE' => 'Päivämäärä',
+    'LBL_CHART_KEY' => 'Avain',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => 'Kaaviotyyppi',
@@ -4777,6 +5010,10 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'Oletuspäivämääräsuodatin',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => 'Oletus-dataset',
 
+    'LBL_PRODUCT_CATALOG_NAME' => 'Tuoteluettelo',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => 'Tuoteluettelo',
+    'LBL_PRODUCT_CATALOG_DESC' => 'Tarkastele ja lisää nimikkeitä tuoteluettelosta.',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => 'Tarkastele ja lisää nimikkeitä tuoteluettelosta.',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}} - {{date}} klo {{time}}',
@@ -4788,7 +5025,8 @@ $app_strings = array (
     'LBL_ACTIVTY_STREAM_SHOW_MORE' => 'Enemmän viestejä...',
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => 'on',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'Minun aktiviteettivirta',
-    'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'Näe lista toiminnoista, jota tehdään tietueille, sekä luo ja lue kommentteja.',
+    'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'Näytä lista toiminnoista, jota tehdään tietueille, sekä luo ja lue kommentteja.',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => 'Activity Streams is disabled',
 
     'LBL_DATA_VIEW' => 'Tietonäkymä',
     'LBL_COMMENT' => 'Kommentti',
@@ -4796,6 +5034,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Virhe yhdistättäessä palvelimeen. Yritä uudelleen.',
     'ERR_RESOLVE_ERRORS' => 'Korjaa virheet ennen jatkamista.',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => 'Hyväksymistä varten kaikki pakolliset kentät on täytettävä; voit silti hylätä tai reitittää tämän tietueen.',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => 'Hylkäämistä/reititystä varten kaikki pakolliset kentät on täytettävä.',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Päivitä luettelo',
@@ -4823,6 +5065,7 @@ $app_strings = array (
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => 'Tallennettujen raporttien kaavion dashlet',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'Näyttää minkä tahansa kaavion tallennetusta raportista.',
+
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => 'Julkaistut liittyvät artikkelit',
@@ -4830,7 +5073,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Historiallinen yhteenveto',
-    'TPL_HISTORICAL_SUMMARY' => 'Historian yhteenveto objektille ‘{{name}}’',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => 'Enemmän historiaa...',
     'LBL_RELATED_CONTACT' => 'Liittyvä kontakti',
     'LBL_MODULE_TYPE' => 'Tyyppi',
@@ -5090,6 +5333,29 @@ Luodaksesi kokonaan uuden tietueen, valitse "Unohda tuplatietue ja tallenna", ik
 
     'LBL_FIELD_TRIMMED' => 'Kenttää rajattiin merkkien enimmäismäärän ylittymisen vuoksi.',
     'LBL_FIELDSIZE_OVERFLOW' => 'Kenttä ylittää merkkien enimmäismäärän.',
+    'LBL_TINYMCE_TARGET_SAME' => 'Sama ikkuna',
+    'LBL_TINYMCE_TARGET_NEW' => 'Uusi ikkuna',
+
+    'LBL_OUTBOUND_EMAILS' => 'Sähköpostiasetukset',
+    'LBL_OUTBOUND_EMAIL' => 'Sähköpostiasetus',
+
+    'LBL_EMAIL_PARTICIPANTS' => 'Sähköpostin jakelulista',
+    'LBL_EMAIL_PARTICIPANT' => 'Sähköpostin jakelu',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => 'Tietosuoja',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'Tietosuoja',
+    'LBL_DATAPRIVACY_VIEW_PII' => 'Näytä henkilötiedot',
+    'LBL_DATAPRIVACY_MARKFORERASE' => 'Merkitse poistettavaksi',
+    'LBL_DATAPRIVACY_FIELDNAME' => 'Kenttä',
+    'LBL_DATAPRIVACY_VALUE' => 'Arvo',
+    'LBL_DATAPRIVACY_CHANGED_BY' => 'Muuttanut',
+    'LBL_DATAPRIVACY_SOURCE' => 'Lähde',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => 'Viimeksi päivitetty',
+    'LBL_DATAPRIVACY_PII' => 'Henkilötiedot',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Merkitse poistettavaksi',
+    'TPL_DATAPRIVACY_PII_TITLE' => 'Henkilön {{{name}}} tiedot',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5954,6 +6220,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => 'Kampanja' ,
     'email' => 'Mikä tahansa sähköposti',
     'workflow' => 'Work flow',
+    'system' => 'Järjestelmä',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5972,11 +6239,10 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
-    'show_binary' => 'Kaksi valikoimaa',
+    'show_binary' => 'Kaksi aluetta',
     'show_buckets' => 'Kolme valikoimaa',
     'show_custom_buckets' => 'Mukautetut valikoimat',
 );
@@ -6035,6 +6301,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = 'Tietämyskannan malli';
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'Tietämyskannan malli';
 $app_list_strings['moduleList']['EmbeddedFiles'] = 'Upotetut tiedostot';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Upotettu tiedosto';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'Lek',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'МaН',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'P',
+    'BGN' => 'лВ',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лВ',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лВ',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ДeН',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => 'Rs',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lei',
+    'RUB' => 'py6',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'ДИН.',
+    'SCR' => 'Rs',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => 'Rs',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лВ',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'Leke',
+    'USD' => 'Dollaria',
+    'AFN' => 'Afghanisia',
+    'ARS' => 'Pesoa',
+    'AWG' => 'Guldenia',
+    'AUD' => 'Dollaria',
+    'AZN' => 'Uusia Manatseja',
+    'BSD' => 'Dollaria',
+    'BBD' => 'Dollaria',
+    'BYR' => 'Ruplaa',
+    'EUR' => 'Euroa',
+    'BZD' => 'Dollaria',
+    'BMD' => 'Dollaria',
+    'BOB' => 'Bolivianosia',
+    'BAM' => 'Vaihdettava Marka',
+    'BWP' => 'Pulaa',
+    'BGN' => 'Leva',
+    'BRL' => 'Real',
+    'GBP' => 'Puntaa',
+    'BND' => 'Dollaria',
+    'KHR' => 'Rieliä',
+    'CAD' => 'Dollaria',
+    'KYD' => 'Dollaria',
+    'CLP' => 'Pesoa',
+    'CNY' => 'Juaniin Renminbiä',
+    'COP' => 'Pesoa',
+    'CRC' => 'ColÃ³n',
+    'HRK' => 'Kunaa',
+    'CUP' => 'Pesoa',
+    'CZK' => 'Korunya',
+    'DKK' => 'Kruunua',
+    'DOP' => 'Pesoa',
+    'XCD' => 'Dollaria',
+    'EGP' => 'Puntaa',
+    'SVC' => 'Colonesia',
+    'EEK' => 'Kroonia',
+    'FKP' => 'Puntaa',
+    'FJD' => 'Dollaria',
+    'GHC' => 'Cedis',
+    'GIP' => 'Puntaa',
+    'GTQ' => 'Quetzales',
+    'GGP' => 'Puntaa',
+    'GYD' => 'Dollaria',
+    'HNL' => 'Lempiras',
+    'HKD' => 'Dollaria',
+    'HUF' => 'Forinttia',
+    'ISK' => 'Kruunua',
+    'INR' => 'Rupiaa',
+    'IDR' => 'Rupiahs',
+    'IRR' => 'Rialia',
+    'IMP' => 'Puntaa',
+    'ILS' => 'Uusi sekeliä',
+    'JMD' => 'Dollaria',
+    'JPY' => 'Jeniä',
+    'JEP' => 'Puntaa',
+    'KZT' => 'Tengea',
+    'KPW' => 'Wonia',
+    'KRW' => 'Wonia',
+    'KGS' => 'Somsia',
+    'LAK' => 'Kipsia',
+    'LVL' => 'Latia',
+    'LBP' => 'Puntaa',
+    'LRD' => 'Dollaria',
+    'CHF' => 'Sveitsin frangia',
+    'LTL' => 'Litia',
+    'MKD' => 'Dinaaria',
+    'MYR' => 'Ringit',
+    'MUR' => 'Rupiaa',
+    'MXN' => 'Pesoa',
+    'MNT' => 'Tugriks&#39;a',
+    'MZN' => 'Meticais&#39;a',
+    'NAD' => 'Dollaria',
+    'NPR' => 'Rupiaa',
+    'ANG' => 'Guldenia',
+    'NZD' => 'Dollaria',
+    'NIO' => 'Cordobas&#39;a',
+    'NGN' => 'Nairas&#39;a',
+    'NOK' => 'Kruunua',
+    'OMR' => 'Rialia',
+    'PKR' => 'Rupiaa',
+    'PAB' => 'Balboaa',
+    'PYG' => 'Guarania',
+    'PEN' => 'Uutta Solia',
+    'PHP' => 'Pesoa',
+    'PLN' => 'Zlotya',
+    'QAR' => 'Rialia',
+    'RON' => 'Uutta leuta',
+    'RUB' => 'Ruplaa',
+    'SHP' => 'Puntaa',
+    'SAR' => 'Rialia',
+    'RSD' => 'Dinaaria',
+    'SCR' => 'Rupiaa',
+    'SGD' => 'Dollaria',
+    'SBD' => 'Dollaria',
+    'SOS' => 'Shillinkiä',
+    'ZAR' => 'Randia',
+    'LKR' => 'Rupiaa',
+    'SEK' => 'Kruunua',
+    'SRD' => 'Dollaria',
+    'SYP' => 'Puntaa',
+    'TWD' => 'Uutta dollaria',
+    'THB' => 'Bahtia',
+    'TTD' => 'Dollaria',
+    'TRY' => 'Liiraa',
+    'TRL' => 'Liiraa',
+    'TVD' => 'Dollaria',
+    'UAH' => 'Hryvnia',
+    'UYU' => 'Pesoa',
+    'UZS' => 'Sumsia',
+    'VEF' => 'Bolivares Fuertes',
+    'VND' => 'Dongia',
+    'YER' => 'Rialia',
+    'ZWD' => 'Zimbabwen dollaria',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => 'Yksi osuma',

@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Nazdorna ploča za popis baze znanja',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapis o bazi znanja',
+
     'LBL_MODULE_NAME' => 'Baza znanja',
     'LBL_MODULE_NAME_SINGULAR' => 'Članak baze znanja',
     'LBL_MODULE_TITLE' => 'Članak baze znanja',
@@ -32,7 +36,7 @@ $mod_strings = array (
     'LBL_DOCUMENT_REVISION_ID' => 'ID revizije',
     'LBL_DOCUMENT_REVISION' => 'Revizija',
     'LBL_NUMBER' => 'Broj',
-    'LBL_TEXT_BODY' => 'Tijelo',
+    'LBL_TEXT_BODY' => 'Tekst',
     'LBL_LANG' => 'Jezik',
     'LBL_PUBLISH_DATE' => 'Datum izdavanja',
     'LBL_EXP_DATE' => 'Datum isteka',

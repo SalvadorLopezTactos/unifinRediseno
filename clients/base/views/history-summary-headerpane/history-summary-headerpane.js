@@ -34,11 +34,14 @@
      */
     _formatTitle: function(title) {
         var parent = this._getParentModel();
-        var recordName = this._getParentModelName();
-        if (parent && recordName) {
-            return new Handlebars.SafeString(app.lang.get(title, parent.module, {name: recordName}));
+        var recordName = app.utils.getRecordName(parent);
+        if (recordName) {
+            return app.lang.get('TPL_HISTORICAL_SUMMARY', parent.module, {name: recordName});
+        } else if (title) {
+            return app.lang.get(title, this.module);
+        } else {
+            return '';
         }
-        return title;
     },
 
     /**
@@ -56,8 +59,14 @@
      *
      * @return {string} The parent model name.
      * @protected
+     * @deprecated Deprecated since 8.0. Please use App.utils.getRecordName(parent)
      */
     _getParentModelName: function() {
+        app.logger.warn('The function ' +
+            '`View.Views.Base.HistorySummaryHeaderpaneView._getParentModelName`' +
+            ' is deprecated since 8.0 and will be removed in the near future.' +
+            'Please use `App.utils.getRecordName` instead.');
+
         var parent = this._getParentModel();
         return app.utils.formatNameModel(parent.module, parent.attributes) || parent.get('name');
     },

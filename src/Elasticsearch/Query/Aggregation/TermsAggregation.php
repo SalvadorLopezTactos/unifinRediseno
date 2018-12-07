@@ -42,7 +42,7 @@ class TermsAggregation extends AbstractAggregation
     public function build($id, array $filters)
     {
         $terms = new \Elastica\Aggregation\Terms($id);
-        $this->applyOptions($terms, $this->options);
+        $this->applyOptions($terms);
 
         if (empty($filters)) {
             return $terms;
@@ -60,7 +60,7 @@ class TermsAggregation extends AbstractAggregation
             return false;
         }
 
-        $filter = new \Elastica\Filter\Terms();
+        $filter = new \Elastica\Query\Terms();
         $filter->setTerms($this->options['field'], $filterDefs);
         return $filter;
     }

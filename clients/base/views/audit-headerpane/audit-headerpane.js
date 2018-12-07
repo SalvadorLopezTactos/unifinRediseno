@@ -25,6 +25,7 @@
      */
     initialize: function(options) {
         this._super('initialize', [options]);
+
         //shortcut keys
         app.shortcuts.register({
             id: 'AuditHeaderPanel:Close',
@@ -46,5 +47,23 @@
      */
     close: function() {
         app.drawer.close();
+    },
+
+    /**
+     * @override
+     *
+     * Overriding to show record name on title header if it is available;
+     * if not, use the standard title.
+     */
+    _formatTitle: function(title) {
+        var model = this.context.get('model');
+        var recordName = app.utils.getRecordName(model);
+        if (recordName) {
+            return app.lang.get('TPL_AUDIT_LOG_TITLE', model.module, {name: recordName});
+        } else if (title) {
+            return app.lang.get(title, this.module);
+        } else {
+            return '';
+        }
     }
 })

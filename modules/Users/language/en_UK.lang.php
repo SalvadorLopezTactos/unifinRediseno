@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'User Information not found',
     'ERR_USER_NAME_EXISTS'              => 'The username {0} already exists. Duplicate usernames are not allowed. Change the username to be unique.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'This user is locked out of the Sugar application and cannot log in using his/her existing password.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'External auth only user is not allowed to login using Sugar credentials',
 
 	'LBL_PASSWORD_SENT'                => 'Password Updated',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Cannot send password',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Recipient Email Address',
 	'ERR_SERVER_STATUS'					=> 'Your server status',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'The system is unable to send an email to the user. Please check the Outgoing Mail Configuration in <a href="index.php?module=EmailMan&action=config">Email Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'The user can be created only in <a href="{0}" target="_blank">Cloud console</a> for IDM mode.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'The primary email address can be updated only in <a href="{0}" target="_blank">Cloud console</a> for IDM mode.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Email Address',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Confirm Password',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'You have changed the user type from System Administrator User to Regular User.  After saving this change, the user will no longer have system administrator privileges.\n\nClick OK to proceed.\nClick Cancel to return to the record.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'You have changed the user type from System Administrator User to Regular User.  After saving this change, the user will no longer have system administrator privileges.\\n\\nClick OK to proceed.\\nClick Cancel to return to the record.',
 	'LBL_COUNTRY'						=> 'Country',
 	'LBL_CURRENCY_TEXT'					=> 'Select the currency that will be displayed by default when you create new records. This is also the currency that will be displayed in the Amount columns in the Opportunities ListView.',
 	'LBL_CURRENCY'						=> 'Currency',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'sec.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Please contact the system administrator.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'For authentication with OpenID Connect (OIDC) in IDM mode please install the GMP PHP extension.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'You have been logged out. To login again please click',
     'LBL_LOGGED_OUT_2' => 'here',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Users&#39; reports',
     'LBL_CONTACTS_SYNC' => 'Contacts',
     'LBL_DETAIL' => 'User Profile',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'If certain fields are not editable, please login to your Cloud Console to manage these fields',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'If you wish to change certain fields that are not editable, ' .
+        'please contact the Administrator to notify these changes',
 ); // END STRINGS DEFS
 
 ?>

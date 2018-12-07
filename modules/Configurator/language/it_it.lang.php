@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Server Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Voci per pagina per sottopannello (Wireless)',
 	'LOG_MEMORY_USAGE'=>'Registra utilizzo memoria',
-	'LOG_SLOW_QUERIES'=>'Registra interrogazioni database lente',
+    'LOG_SLOW_QUERIES' => 'Registra interrogazioni database lente',
     'LOCK_HOMEPAGE_HELP'=>'Questa impostazione è per impedire<BR> 1) l´aggiunta di nuove pagine nella Home <BR>2) personalizzazione nel collocamento delle dashlet nella home page con la funzione drag & drop.',
     'CURRENT_LOGO'=>'Attuale logo in uso',
     'CURRENT_LOGO_HELP'=>'Questo logo appare nell´angolo in alto a sinistra dell´applicazione Sugar.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Questo è il nome che appare nella barra titolo del tuo browser.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Abilita/Disabilita la visibilità delle Email archiviate dei contatti relazionati nel Sottopannello Email.',
 
-    'LBL_OC_STATUS'                     => 'Stato di default del client offline',
-    'DEFAULT_OC_STATUS'                 => 'Abilita client offline per default',
-    'LBL_OC_STATUS_DESC' => 'Cerca qui se vuoi che qualsiasi utente abbia accesso al Client Offline. Oppure puoi configurare l´accesso al livello utente.',
     'SESSION_TIMEOUT' => 'Portale sessione timeout',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Il Timeout della Sessionde del Portale è disponibile per versioni del Portale di SugarCRM dalla 6.5 in poi.',
     'UPLOAD_MAXSIZE_UNITS' => 'byte',
@@ -435,8 +432,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML Login URL non può essere vuoto',
     'ERR_EMPTY_SAML_CERT' => 'Certificato SAML non può essere vuoto',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'L&#39;ID dell&#39;entità SAML non può essere vuota',
     'ERR_SAML_LOGIN_URL' => 'SAML Login URL non è valido',
     'ERR_SAML_SLO_URL' => 'SAML SLO URL non è valido',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'Il file PEM deve contenere la chiave privata',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'Il file PEM deve contenere il certificato x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Il certificato x.509 fornito non corrisponde alla chiave privata',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Abilita Activity Streams',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Attiva Activity Streams per l&#39;applicazione',
 );
 
 

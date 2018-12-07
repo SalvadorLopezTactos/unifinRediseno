@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Värskenda KBContent artikleid.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Avaldage heakskiidetud artiklid ja aeguvad teadmusbaasiartiklid.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Taasta meeskonna denormaliseeritud turbeandmed',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervall:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearchi ootejärjekorra plaanija',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Eemalda diagnostikatööriista failid',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Eemalda ajutised failid',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Taasta meeskonna denormaliseeritud turbeandmed',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Käivita igaõhtused hulgimeili kampaaniad',
 'LBL_ASYNCMASSUPDATE' => 'Tee asünkroonne hulgivärskendus',

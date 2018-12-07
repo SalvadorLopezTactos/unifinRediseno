@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'Noklusētais URL',
 	'COLUMN_TITLE_AUDIT' =>'Audits',
+    'COLUMN_TITLE_PII' => 'Personiskā informācija',
     'COLUMN_TITLE_FTS' =>'Pilna teksta meklēšana',
     'COLUMN_TITLE_FTS_BOOST' => 'Palielinājuma vērtība',
 	'COLUMN_TITLE_REPORTABLE' => 'Pieejams atskaitēs',

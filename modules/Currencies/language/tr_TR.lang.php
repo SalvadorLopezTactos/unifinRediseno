@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Görev Oluştur',
   'NTC_DELETE_CONFIRMATION' => 'Bu kaydı silmek istediğinize emin misiniz? Bu para birimini kullanan kayıtlara ulaşıldığında, sistem varsayılan para birimini kullanacaktır. Durumu İnaktif olarak işaretlemek daha doğru olabilir.',
   'LBL_BELOW_MIN' => 'Dönüşüm oranı 0 dan fazla olmalı',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktif',
-    'Inactive' => 'İnaktif',
-  ),
   'LBL_CREATED_BY' => 'Oluşturan',
   'LBL_EDIT_LAYOUT' => 'Yerleşimi Değiştir' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Yalnızca Yöneticiler',
+  'LBL_CURRENCY_DEFAULT' => 'Amerikan Doları (Varsayılan)',
+
 );
 ?>

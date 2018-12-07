@@ -78,13 +78,14 @@ class CrossModuleAggHandler extends AbstractHandler implements
             // set user context
             $agg->setUser($builder->getUser());
 
-            // cross aggs use the field name as identifier
-            $agg->setOption('field', $id);
-
-            // set additional options
+            // set options from defs
             if (!empty($defs['options']) && is_array($defs['options'])) {
                 $agg->setOptions($defs['options']);
             }
+
+            // cross aggs use the field name as identifier
+            $field = empty($defs['options']['field']) ? $id : $defs['options']['field'];
+            $agg->setOption('field', Mapping::PREFIX_COMMON . $field . '.agg');
 
             // append aggregation on query builder
             $builder->addAggregation($id, $agg);

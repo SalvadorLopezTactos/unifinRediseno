@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Meetinglisten-Dashboard',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Meetingbericht-Dashboard',
+
 	'ERR_DELETE_RECORD' => 'Die Datensatznummer muß angegeben werden, um diesen Eintrag löschen.',
 	'LBL_ACCEPT_THIS'=>'Bestätigen?',
 	'LBL_ADD_BUTTON'=> 'Hinzufügen',

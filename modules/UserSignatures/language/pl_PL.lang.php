@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'Podpisy użytkowników',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'Podpis użytkownika',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Ten podpis wymaga podania nazwy.',
-    'LBL_SIGNATURE_NAME'         => 'Nazwa',
-    'LBL_SIGNATURE'              => 'Podpis',
-    'LBL_SIGNATURE_HTML'         => 'Podpis w HTML',
-    'LBL_SIGNATURE_DEFAULT'      => 'Użyć podpisu?',
-    'LBL_SIGNATURE_PREPEND'      => 'Podpis nad oryginalną wiadomością?',
-    'LBL_SIGNATURES'             => 'Podpisy',
+    'LBL_DEFAULT_SIGNATURE' => 'Domyślne',
+    'LBL_MODULE_NAME' => 'Sygnatury wiadomości e-mail',
+    'LBL_MODULE_NAME_SINGULAR' => 'Sygnatura wiadomości e-mail',
+    'LBL_SIGNATURE_NAME' => 'Nazwa',
+    'LBL_SIGNATURE' => 'Podpis',
+    'LBL_SIGNATURE_HTML' => 'Podpis w HTML',
+    'LBL_SIGNATURE_DEFAULT' => 'Użyć podpisu?',
+    'LBL_SIGNATURE_PREPEND' => 'Podpis nad oryginalną wiadomością?',
+    'LBL_SIGNATURES' => 'Podpisy',
 );

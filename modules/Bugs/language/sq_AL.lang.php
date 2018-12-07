@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Paneli i listës së problemeve',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të problemeve',
+
   'LBL_MODULE_NAME' => 'Gabimet',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Gabim',
   'LBL_MODULE_TITLE' => 'Gjyrmues i Bugs: Ballina',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Rastet',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projektet',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentacionet',
-  'LBL_SYSTEM_ID' => 'ID e sistemit',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Përdorues i caktuar',
 	'LBL_ASSIGNED_TO_NAME' => 'Drejtuar:',
 

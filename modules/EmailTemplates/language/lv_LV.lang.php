@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Izvēlēties' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Notīrīt' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Tips:',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Epastu Veidnes',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'E-pasta veidnes',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Mainīgie',
 );

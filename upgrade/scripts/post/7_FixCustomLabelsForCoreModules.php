@@ -139,10 +139,7 @@ class SugarUpgradeFixCustomLabelsForCoreModules extends UpgradeScript
                 $out = "<?php\n// created: ' . date('Y-m-d H:i:s')\n";
                 $out .= override_value_to_string_recursive($keyNames, 'viewdefs', $viewdefsWrite);
 
-                if (sugar_file_put_contents_atomic($scanFile, $out) !== false) {
-                    // record custom writes to file map
-                    SugarAutoLoader::addToMap($scanFile);
-                }
+                sugar_file_put_contents_atomic($scanFile, $out);
                 unset($out);
                 unset($viewdefsWrite);
             }

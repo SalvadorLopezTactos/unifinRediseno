@@ -13,7 +13,7 @@
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\SearchEngine\Capability\GlobalSearch\GlobalSearchCapable;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\ResultSet;
-
+use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
 
 /**
  *
@@ -84,8 +84,9 @@ class SugarSearchEngineElastic extends SugarSearchEngineAbstractBase
                 return null;
             }
 
-            $filters[] = new \Elastica\Filter\Term(array(
-                'owner_id' => $current_user->id,
+            $ownerField = Mapping::PREFIX_COMMON . 'owner_id.owner';
+            $filters[] = new \Elastica\Query\Term(array(
+                $ownerField => $current_user->id,
             ));
         }
 
@@ -98,8 +99,9 @@ class SugarSearchEngineElastic extends SugarSearchEngineAbstractBase
                 return null;
             }
 
-            $filters[] = new \Elastica\Filter\Term(array(
-                'user_favorites' => $current_user->id,
+            $favField = Mapping::PREFIX_COMMON . 'user_favorites.agg';
+            $filters[] = new \Elastica\Query\Term(array(
+                $favField => $current_user->id,
             ));
         }
 
@@ -121,9 +123,9 @@ class SugarSearchEngineElastic extends SugarSearchEngineAbstractBase
     protected function createResultSet(ResultSet $resultSet)
     {
         $res = new SugarSeachEngineElasticResultSet($resultSet->getResultSet());
-        $highlighter = $resultSet->getHighlighter();
-        if (isset($highlighter)) {
-            $res->setHighlighter($highlighter);
+        $resParser = $resultSet->getResultParser();
+        if (isset($resParser)) {
+            $res->setResultParser($resParser);
         }
         return $res;
     }

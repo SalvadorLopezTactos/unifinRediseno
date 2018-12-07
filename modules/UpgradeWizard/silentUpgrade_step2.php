@@ -24,12 +24,8 @@
 //// - Run pre-db upgrades, config upgrades, etc.
 /////////////////////////////////////////////////////////////////////////////////////////
 ini_set('memory_limit',-1);
-if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
-    //E_DEPRECATED is available for 5.3.0 and above
-    ini_set('error_reporting', E_ALL & ~E_STRICT & ~E_DEPRECATED);
-} else {
-    ini_set('error_reporting', E_ALL & ~E_STRICT);
-}
+ini_set('error_reporting', E_ALL & ~E_STRICT & ~E_DEPRECATED);
+
 //Clean_string cleans out any file  passed in as a parameter
 $_SERVER['PHP_SELF'] = 'silentUpgrade.php';
 
@@ -486,7 +482,7 @@ if(isset($_SESSION['current_db_version']) && isset($_SESSION['target_db_version'
 			$category = 'license';
 			$value = 0;
 			$admin->saveSetting($category, 'users', $value);
-			$key = array('num_lic_oc','key','expire_date');
+            $key = array('key', 'expire_date');
 			$value = '';
 			foreach($key as $k){
 				$admin->saveSetting($category, $k, $value);

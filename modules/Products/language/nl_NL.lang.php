@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Dashboard lijst met geciteerde regelitems',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Campagne Product',
     'LBL_MODULE_NAME' => 'Geoffreerde producten',
     'LBL_MODULE_NAME_SINGULAR' => 'Geoffreerd product',
@@ -172,4 +175,5 @@ Om een {{module_name}} aan te maken:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Geoffreerde regelitems offerte gegevenslijst',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => '(Nieuw geoffreerd regelitem)',
     'LBL_DISCOUNT_PERCENT' => '% Procent',
+    'LBL_DISCOUNT_TYPE' => 'Type korting',
 );

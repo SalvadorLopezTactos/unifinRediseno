@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Created by PhpStorm.
@@ -24,3 +23,4 @@ $dependencies['Accounts']['esproveedor_check']= array
         ),
     ),
 );
+?>

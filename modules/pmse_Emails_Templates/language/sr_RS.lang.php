@@ -16,7 +16,7 @@ $mod_strings = array (
     'LBL_BASE_MODULE' => 'Ciljani modul',
 
     'LBL_MODULE_TITLE' => 'Šablon procesnog Email-a',
-    'LBL_MODULE_NAME' => 'Šablon procesnog Email-a',
+    'LBL_MODULE_NAME' => 'Šabloni procesnog Email-a',
     'LBL_MODULE_NAME_SINGULAR' => 'Šablon procesnog Email-a',
 
     'LNK_LIST' => 'Prikazati šablone procesnih Email-ova',

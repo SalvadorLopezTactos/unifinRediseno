@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'İlişkiyi silmek istediğinizden emin misiniz?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Bu işlem ilişkiyi sürekli kılacaktır. İlgili ilişkiyi uygulamak istediğinizden emin misiniz?',
 'LBL_CONFIRM_DONT_SAVE' => 'En son kayıt işleminizden sonraki değişiklikler yapıldı, ilgili değişiklikleri kaydetmek ister misiniz?',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Tam metinle aranacak alanı yapılandırın.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Hızlandırma, bir kayda ait alanların uygunluğunu artırma işlemidir.<br />Yüksek hızlandırma değerine sahip alanlara, arama işlemi gerçekleştirildiğinde daha fazla ağırlık verilecektir. Bir arama işlemi gerçekleştirildiğinde daha büyük bir ağırlığa sahip alanları içeren eşleşen kayıtlar arama sonuçları içinde üstte görünecektir.<br />varsayılan değer, nötr bir hızlanmayı ifade eden 1.0&#39;dır. 1&#39;den yüksek bir reel değere pozitif bir hız uygulamak kabul edilir. Negatif bir hızlanma için 1&#39;den küçük bir değer kullanın. Örneğin 1,35&#39;lik bir değer bir alanı pozitif şekilde %135 hızlandırır. 0,60 değerini kullanmak negatif bir hızlanma uygular.<br />Önceki sürümlerde bir tam metin arama yeniden endekslemesinin gerekliydi. Artık gerekli değildir.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Evet</b>: İlgili alan bir veri yükleme işlemine dahil olacaktır.<br><b>Hayır</b>: İlgili alan bir veri yükleme işlemine dahil olmayacaktır.<br><b>Gereken</b>: Her veri yükleme, ilgili alan için bir değer barındırmalıdır.',
+'LBL_POPHELP_PII'=>'Bu alan, değişiklik tarihçesi için otomatik olarak işaretlenecek ve Kişisel Bilgiler görünümünde kullanılabilecektir.<br>Kişisel Bilgiler alanları, kayıt Veri Gizliliği silme isteği ile bağlantılı olduğunda kalıcı olarak da silinebilir.<br>Silme işlemi, Veri Gizliliği modülü vasıtasıyla yapılır ve yöneticiler ya da Veri Gizliliği Yöneticisi rolündeki kullanıcılar tarafından yürütülebilir.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Genişlik için bir rakam girişi yapınız; piksel bazında ölçülmelidir.<br>Yüklenen imaj bu genişlik ile hesaplanacaktır.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Yükseklik için bir rakam girişi yapınız; piksel bazında ölçülmelidir.<br>Yüklenen imaj bu yükseklik ile hesaplanacaktır.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

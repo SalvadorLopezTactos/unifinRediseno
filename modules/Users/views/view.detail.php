@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config as IdmConfig;
+
 class UsersViewDetail extends ViewDetail {
     function preDisplay() {
         global $current_user, $app_strings, $sugar_config;
@@ -18,6 +20,8 @@ class UsersViewDetail extends ViewDetail {
             // No reason to set everything up just to have it fail in the display() call
             return;
         }
+
+        $idpConfig = new IdmConfig(\SugarConfig::getInstance());
 
         if (!$current_user->isAdminForModule('Users') && !$current_user->isDeveloperForModule('Users') &&
         $this->bean->id != $current_user->id) {
@@ -65,7 +69,7 @@ class UsersViewDetail extends ViewDetail {
             $buttons[] = "<input title='".$app_strings['LBL_EDIT_BUTTON_TITLE']."' accessKey='".$app_strings['LBL_EDIT_BUTTON_KEY']."' name='Edit' id='edit_button' value='".$app_strings['LBL_EDIT_BUTTON_LABEL']."' onclick=\"this.form.return_module.value='Users'; this.form.return_action.value='DetailView'; this.form.return_id.value='".$this->bean->id."'; this.form.action.value='EditView'\" type='submit' value='" . $app_strings['LBL_EDIT_BUTTON_LABEL'] .  "'>";
             if ((is_admin($current_user)|| $GLOBALS['current_user']->isAdminForModule('Users')
                     )) {
-                if (!$current_user->is_group){
+                if (!$current_user->is_group && !$idpConfig->isIDMModeEnabled()) {
                     $buttons[] = "<input id='duplicate_button' title='".$app_strings['LBL_DUPLICATE_BUTTON_TITLE']."' accessKey='".$app_strings['LBL_DUPLICATE_BUTTON_KEY']."' class='button' onclick=\"this.form.return_module.value='Users'; this.form.return_action.value='DetailView'; this.form.isDuplicate.value=true; this.form.action.value='EditView'\" type='submit' name='Duplicate' value='".$app_strings['LBL_DUPLICATE_BUTTON_LABEL']."'>";
 
                     if($this->bean->id != $current_user->id) {

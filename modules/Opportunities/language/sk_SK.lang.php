@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Informačný panel so zoznamom príležitostí',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Informačný panel so záznamom príležitostí',
+
     'LBL_MODULE_NAME' => 'Obchodné príležitosti',
     'LBL_MODULE_NAME_SINGULAR' => 'Obchodná príležitosť',
     'LBL_MODULE_TITLE' => 'Obchodné príležitosti: Domov',
@@ -182,25 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Po vykonaní tejto zmeny budú v pozadí vytvorené záznamy položiek krivky výnosu pre každý existujúci {{module_name}}. Keď sú položky krivky výnosu kompletné a dostupné, odošle sa upozornenie na e-mail vo vašom profile. Na to, aby vaša inštancia odosielala e-maily, musí byť správne nastavená v časti Administrátor > Nastavenia e-mailu.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a obsahuje príslušné údaje predaja, ako aj údaje súvisiace s inými dôležitými záznamami, ako napr. {{quotes_module}}, {{contacts_module}} atď. Každý {{module_name}} štandardne prejde niekoľkými fázami predaja a na záver sa označí buď stavom „Uzatvorené/získané“, alebo „Uzatvorené/nezískané„. Moduly {{plural_module_name}} možno využiť ešte viac použitím modulu {{forecasts_singular_module}} aplikácie Sugar, vďaka čomu možno porozumieť trendom predaja a predpovedať ich, ako aj zamerať sa na prácu s cieľom dosiahnuť kvóty predaja.',
+    'LBL_HELP_RECORDS' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje od začiatku do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad {{quotes_module}}, {{contacts_module}} a pod. {{module_name}} štandardne prejde niekoľkými fázami predaja a na záver sa označí buď stavom „Uzatvorené získané“, alebo „Uzatvorené nezískané“. Modul {{plural_module_name}} možno využiť ešte viac použitím modulu {{forecasts_singular_module}} aplikácie Sugar, vďaka čomu možno porozumieť trendom predaja a predpovedať ich, ako aj zamerať sa na prácu s cieľom dosiahnuť kvóty predaja.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} vám umožňuje sledovať jednotlivé predaje a položky prislúchajúce k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a obsahuje príslušné údaje predaja, ako aj údaje súvisiace s inými dôležitými záznamami, ako napr. {{quotes_module}}, {{contacts_module}} atď. 
+    'LBL_HELP_RECORD' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje a položky prislúchajúce k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad záznamy {{quotes_module}}, {{contacts_module}} a pod.
 
 – Polia tohto záznamu upravíte kliknutím na jednotlivé polia alebo stlačením tlačidla Upraviť.
-– Prepojenia na ďalšie záznamy v pomocných paneloch možno zobraziť alebo upraviť prepnutím ľavého spodného panela na „Zobrazenie údajov“.
-– Poznámky používateľa a históriu zmien záznamov môžete upraviť a zobraziť v {{activitystream_singular_module}} prepnutím ľavého spodného panela na „Aktivity“.
-– Záznam môžete sledovať alebo označiť ako obľúbený pomocou ikon nachádzajúcich sa na pravej strane od názvu záznamu.
-– Ďalšie akcie sú k dispozícii v rozbaľovacej ponuke Akcie nachádzajúcej sa na pravej strane od tlačidla Upraviť.',
+– Prepojenia na ďalšie záznamy v podpaneloch možno zobraziť alebo upraviť prepnutím ľavého spodného panelu na „Zobrazenie údajov“.
+– Poznámky používateľa a históriu zmien záznamov môžete upraviť a zobraziť v module {{activitystream_singular_module}} prepnutím ľavého spodného panelu na „Aktivity“.
+– Záznam môžete sledovať alebo označiť ako obľúbený pomocou ikon napravo od názvu záznamu.
+– Ďalšie akcie sú k dispozícii v rozbaľovacej ponuke Akcie napravo od tlačidla Upraviť.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} vám umožňuje sledovať jednotlivé predaje a položky prislúchajúce k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a obsahuje príslušné údaje predaja, ako aj údaje súvisiace s inými dôležitými záznamami, napr. {{quotes_module}}, {{contacts_module}} atď. 
+    'LBL_HELP_CREATE' => 'Modul {{plural_module_name}} umožňuje sledovať jednotlivé predaje a položky patriace k týmto predajom od začiatku až do konca. Každý záznam {{module_name}} predstavuje potenciálny predaj a zahŕňa relevantné údaje o predaji, ako aj údaje súvisiace s inými dôležitými záznamami, ako sú napríklad záznamy {{quotes_module}}, {{contacts_module}} a pod. 
 
 Ak chcete vytvoriť modul {{module_name}}:
 1. Zadajte požadované hodnoty do polí.
- – Polia označené ako "Povinné" je pred uložením treba vyplniť.
- – Ak chcete rozbaliť dodatočné polia, kliknite na možnosť "Zobraziť viac".
-2. Kliknite na možnosť "Uložiť" na dokončenie nového záznamu a návrat na predchádzajúcu stránku.',
+ – Polia označené ako „Povinné“ treba pred uložením vyplniť.
+ – Ak chcete rozbaliť dodatočné polia, kliknite na možnosť „Zobraziť viac“.
+2. Kliknite na možnosť „Uložiť“ na dokončenie nového záznamu a návrat na predchádzajúcu stránku.',
 
 // END ENT/ULT
 

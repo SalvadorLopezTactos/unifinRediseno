@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Velg' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Fjern' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Type',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Maler for E-post',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'E-postmaler',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Variabler',
 );

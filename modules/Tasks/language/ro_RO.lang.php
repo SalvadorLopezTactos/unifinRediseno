@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Tabloul de bord Listă activități',
+
   'LBL_MODULE_NAME' => 'Sarcini',
   'LBL_MODULE_NAME_SINGULAR' => 'Sarcina',
   'LBL_TASK' => 'Sarcini',

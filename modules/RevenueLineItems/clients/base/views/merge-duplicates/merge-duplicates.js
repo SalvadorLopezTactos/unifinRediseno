@@ -14,18 +14,17 @@
     /**
      * @inheritdoc
      */
-
-    _initSettings: function() {
-        this._super('_initSettings');
-
+    _initializeMergeFields: function(module) {
         var config = app.metadata.getModule('Forecasts', 'config');
-        if(!config || !config.is_setup) {
+        if (!config || !config.is_setup) {
             if(!_.contains(this.fieldNameBlacklist, 'commit_stage')) {
                 this.fieldNameBlacklist.push('commit_stage');
             }
-        } else if(_.contains(this.fieldNameBlacklist, 'commit_stage')) {
+        } else if (_.contains(this.fieldNameBlacklist, 'commit_stage')) {
             this.fieldNameBlacklist.splice(_.indexOf(this.fieldNameBlacklist, 'commit_stage'), 1);
         }
+
+        this._super('_initializeMergeFields', [module]);
     },
 
     /**

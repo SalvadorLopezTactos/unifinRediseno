@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'klikkaa tästä',
 	'TXT_REMOVE_ME'								=> 'poistaaksesi itsesi tältä postituslistalta',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Lähetä muistutus vastuukäyttäjän sähköpostiosoitteesta.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Jätä oletuksena uudet sähköpostiosoitteet kampanjaviestien ulkopuolelle',
 
 	'LBL_SECURITY_TITLE'						=> 'Sähköpostin suojausasetukset',
 	'LBL_SECURITY_DESC'							=> 'Merkitse tagit, joita <strong>ei</strong> pitäisi päästää sisään InboundEmailin kautta tai näyttää Sähköpostit-moduulissa.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Salli käyttäjien käyttää tätä tiliä lähtevälle sähköpostille:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => '<p>Kun tämä valinta on valittu, kaikki käyttäjät voivat lähettää sähköposteja käyttäen samaa lähtevää viestipalvelinta, jota käytetään järjestelmätiedotteiden ja -huomautusten lähetykseen.</p><p>Jos valintaa ei ole valittu, käyttäjät voivat käyttää lähtevää viestipalvelinta omien tilitietojensa syöttämisen jälkeen.</p>',
     'LBL_FROM_ADDRESS_HELP'                     => 'Kun tämä on valittu, vastuukäyttäjän (assigning user) nimi ja sähköpostiosoite sisällytetään sähköpostin Lähettäjä-kenttään. Tämä ominaisuus ei välttämättä toimi SMTP-palvelimien kanssa, jotka eivät salli viestien lähtevän muusta kuin palvelimen tilille asettamasta osoitteesta.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Kun uusi sähköpostiosoite lisätään, se jätetään automaattisesti pois. Kampanjaviestejä ei voi lähettää näihin osoitteisiin. Tämän asetuksen muuttaminen ei vaikuta olemassa oleviin sähköpostisoitteisiin.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

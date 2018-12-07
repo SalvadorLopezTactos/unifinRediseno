@@ -13,7 +13,7 @@
 
 $mod_strings = array (
     'LBL_BODY_HTML' => 'Text',
-    'LBL_BASE_MODULE' => 'Ziel Modul:',
+    'LBL_BASE_MODULE' => 'Zielmodul:',
 
     'LBL_MODULE_TITLE' => 'Prozess-E-Mail-Vorlagen',
     'LBL_MODULE_NAME' => 'Prozess-E-Mail-Vorlagen',

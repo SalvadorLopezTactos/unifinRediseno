@@ -17,7 +17,10 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
+use Psr\Log\LoggerInterface;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\Context;
 
 function make_sugar_config(&$sugar_config)
 {
@@ -81,7 +84,7 @@ function make_sugar_config(&$sugar_config)
     'cache_dir' => empty($cache_dir) ? 'cache/' : $cache_dir,
     'calculate_response_time' => empty($calculate_response_time) ? true : $calculate_response_time,
     'create_default_user' => empty($create_default_user) ? false : $create_default_user,
-    'chartEngine' => 'nvd3',
+    'chartEngine' => 'sucrose',
     'date_formats' => empty($dateFormats) ? array(
     'Y-m-d'=>'2010-12-23',
     'd-m-Y' => '23-12-2010',
@@ -248,7 +251,7 @@ function get_sugar_config_defaults()
     'cache_dir' => 'cache/',
     'calculate_response_time' => true,
     'create_default_user' => false,
-     'chartEngine' => 'nvd3',
+    'chartEngine' => 'sucrose',
     'date_formats' => array (
     'Y-m-d' => '2010-12-23', 'm-d-Y' => '12-23-2010', 'd-m-Y' => '23-12-2010',
     'Y/m/d' => '2010/12/23', 'm/d/Y' => '12/23/2010', 'd/m/Y' => '23/12/2010',
@@ -299,7 +302,6 @@ function get_sugar_config_defaults()
     'email_address_separator' => ',', // use RFC2368 spec unless we have a noncompliant email client
     'email_default_editor' => 'html',
     'email_default_client' => 'sugar',
-    'email_default_delete_attachments' => true,
     'email_mailer_timeout' => 10,
     'smtp_mailer_debug' => 0,
     'history_max_viewed' => 50,
@@ -448,6 +450,18 @@ function get_sugar_config_defaults()
         ),
         'sugar_min_int' => -2147483648,
         'sugar_max_int' => 2147483647,
+        'max_aggregate_email_attachments_bytes' => 10000000,
+        'new_email_addresses_opted_out' => false,
+        'activity_streams_enabled' => true,
+        'activity_streams' => [
+            // No more than the following number of Data Privacy records will be processed by a single cron job
+            // execution.
+            'erasure_job_limit' => 5,
+            // Force a delay if a new job is being created behind one that is either running or queued. This is intended
+            // to minimize the likelihood of multiple jobs running concurrently while providing a reasonable time (in
+            // minutes) for multiple Data Privacy records to be grouped in a single job before going into execution.
+            'erasure_job_delay' => 0,
+        ],
     );
 
     if (empty($locale)) {
@@ -1138,9 +1152,7 @@ function return_module_language($language, $module, $refresh=false)
         $message = "Variable module is not in return_module_language ";
         //If any object in the stack contains a circular reference,
         //debug_backtrace will cause a fatal recursive dependency error without DEBUG_BACKTRACE_IGNORE_ARGS
-        if (version_compare(PHP_VERSION, '5.3.6') >= 0) {
-            $message .= var_export(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), true);
-        }
+        $message .= var_export(debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS), true);
         $GLOBALS['log']->warn($message);
 
         return array();
@@ -1553,6 +1565,7 @@ function get_admin_modules_for_user($user)
         'pmse_Project', // Process Definitions
         'pmse_Emails_Templates', // Process Emails Templates
         'pmse_Inbox', // Processes
+        'DataPrivacy',
     );
 
     $workflow_mod_list = array();
@@ -3020,63 +3033,16 @@ function decodeJavascriptUTF8($str)
 function check_php_version($sys_php_version = '')
 {
     $sys_php_version = empty($sys_php_version) ? constant('PHP_VERSION') : $sys_php_version;
-    // versions below $min_considered_php_version considered invalid by default,
-    // versions equal to or above this ver will be considered depending
-    // on the rules that follow
-    $min_considered_php_version = '5.6.0';
-    //always use .unsupported to make sure that the dev/beta/rc releases are excluded as well
 
-    $version_threshold  = '7.2.unsupported';
-
-    // only the supported versions,
-    // should be mutually exclusive with $invalid_php_versions
-    $supported_php_versions = array (
-        //'5.6.0'
-    );
-
-    // invalid versions above the $min_considered_php_version,
-    // should be mutually exclusive with $supported_php_versions
-
-    // SugarCRM prohibits install on PHP 5.2.7 on all platforms
-    $invalid_php_versions = array(
-        //'5.2.7'
-    );
-
-    // default unsupported
-    $retval = 1;
-
-    // versions below $min_considered_php_version are invalid
-    if (1 == version_compare($sys_php_version, $min_considered_php_version, '<')) {
-        $retval = -1;
+    if (version_compare($sys_php_version, '7.1.0', '<')) {
+        return -1;
     }
 
-    if (1 == version_compare($sys_php_version, $version_threshold, '>')) {
-        $retval = -1;
+    if (version_compare($sys_php_version, '7.2.0-dev', '>=')) {
+        return -1;
     }
 
-    // supported version check overrides default unsupported
-    foreach ($supported_php_versions as $ver) {
-        if (1 == version_compare($sys_php_version, $ver, 'eq') || strpos($sys_php_version,$ver) !== false) {
-            $retval = 1;
-            break;
-        }
-    }
-
-    // invalid version check overrides default unsupported
-    foreach ($invalid_php_versions as $ver) {
-        if (1 == version_compare($sys_php_version, $ver, 'eq') && strpos($sys_php_version,$ver) !== false) {
-            $retval = -1;
-            break;
-        }
-    }
-
-    //allow a redhat distro to install, regardless of version.  We are assuming the redhat naming convention is followed
-    //and the php version contains 'rh' characters
-    if (strpos($sys_php_version, 'rh') !== false) {
-        $retval = 1;
-    }
-
-    return $retval;
+    return 1;
 }
 
 /**
@@ -3165,6 +3131,14 @@ function sugar_cleanup($exit = false)
         set_include_path($root_path . PATH_SEPARATOR . get_include_path());
     }
     chdir($root_path);
+
+    $container = Container::getInstance();
+    $context = $container->get(Context::class);
+
+    if ($context->hasActiveSubject()) {
+        $logger = $container->get(LoggerInterface::class . '-security');
+        $logger->warning('Security context has active subject during shutdown: ' . json_encode($context));
+    }
 
     global $sugar_config;
     LogicHook::initialize();
@@ -3822,33 +3796,28 @@ function string_format($format, $args)
 }
 
 /**
- * Generate a string for displaying a unique identifier that is composed
- * of a system_id and number.  This is use to allow us to generate quote
- * numbers using a DB auto-increment key from offline clients and still
- * have the number be unique (since it is modified by the system_id.
+ * Generate a string for displaying a unique bean identifier
  *
- * @param	$num of bean
- * @param	$system_id from system
- * @return	$result a formatted string
+ * @param string Bean number
+ * @return A formatted string
+ * @deprecated
  */
-function format_number_display($num, $system_id)
+function format_number_display($num)
 {
     global $sugar_config;
-    if (isset($num) && !empty($num)) {
-        $num=unformat_number($num);
-        if (isset($system_id) && $system_id == 1) {
-            return sprintf("%d", $num);
-        } else {
-            return sprintf("%d-%d", $num, $system_id);
-        }
+
+    if (!$num) {
+        return $num;
     }
+
+    return sprintf('%d', $num);
 }
+
 function checkLoginUserStatus()
 {
 }
 
 /**
- * This function will take a number and system_id and format
  * @param	$url URL containing host to append port
  * @param	$port the port number - if '' is passed, no change to url
  * @return	$resulturl the new URL with the port appended to the host
@@ -4422,28 +4391,6 @@ function code2utf($num)
     return '';
 }
 
-function str_split_php4($string, $length = 1)
-{
-    $string_length = strlen($string);
-    $return = array();
-    $cursor = 0;
-    if ($length > $string_length) {
-        // use the string_length as the string is shorter than the length
-        $length = $string_length;
-    }
-    for ($cursor = 0; $cursor < $string_length; $cursor = $cursor + $length) {
-        $return[] = substr($string, $cursor, $length);
-    }
-
-    return $return;
-}
-
-if (version_compare(phpversion(), '5.0.0', '<')) {
-    function str_split($string, $length = 1)
-    {
-        return str_split_php4($string, $length);
-    }
-}
 
 /**
  * Chart dashlet helper function that returns the correct CSS file, dependent on the current theme.
@@ -4756,7 +4703,7 @@ function encodeMultienumValue($arr)
  */
 function create_export_query_relate_link_patch($module, $searchFields, $where)
 {
-    if (SugarAutoLoader::fileExists('modules/'.$module.'/SearchForm.html')) {
+    if (file_exists('modules/'.$module.'/SearchForm.html')) {
         $ret_array['where'] = $where;
 
         return $ret_array;

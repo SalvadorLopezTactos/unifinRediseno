@@ -81,7 +81,7 @@ abstract class AbstractMetaDataParser
         return $this->implementation->useWorkingFile();
     }
 
-    /*
+    /**
      * Is this field something we wish to show in Studio/ModuleBuilder layout editors?
      *
      * @param array $def     Field definition in the standard SugarBean field definition format - name, vname, type and so on
@@ -110,6 +110,12 @@ abstract class AbstractMetaDataParser
             } else {
                 return $def['studio'] !== false && $def['studio'] !== 'false' && $def['studio'] !== 'hidden';
 			}
+        }
+
+        // JSON fields are by design internal and are not supposed to be displayed as is on the client side
+        // or modified in Studio
+        if (isset($def['type']) && $def['type'] === 'json') {
+            return false;
         }
 
         // bug 19656: this test changed after 5.0.0b - we now remove all ID type fields - whether set as type, or dbtype, from the fielddefs

@@ -10,10 +10,13 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Command\StateAwareRebuild;
 use Sugarcrm\Sugarcrm\SearchEngine\SearchEngine;
 use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+use Sugarcrm\Sugarcrm\Security\Context;
+use Sugarcrm\Sugarcrm\Security\Subject\Installer;
 use Sugarcrm\Sugarcrm\ProcessManager\Registry;
-
 
 // This file will load the configuration settings from session data,
 // write to the config file, and execute any necessary database steps.
@@ -44,6 +47,11 @@ ob_implicit_flush();
 while (@ob_end_flush());
 
 require_once('install/install_utils.php');
+
+// set installer subject
+$context = Container::getInstance()->get(Context::class);
+$subject = new Installer();
+$context->activateSubject($subject);
 
 // since we need to make sure we have even the custom tabledictionary items in there
 $mi = new ModuleInstaller();
@@ -92,15 +100,6 @@ $setup_site_log_file = 'sugarcrm.log';  // may be an option later
 $setup_site_session_path = isset($_SESSION['setup_site_custom_session_path']) ? $_SESSION['setup_site_session_path'] : '';
 $setup_site_log_level = 'fatal';
 
-sugar_cache_clear('TeamSetsCache');
-if (file_exists($cache_dir . 'modules/Teams/TeamSetCache.php')) {
-    unlink($cache_dir . 'modules/Teams/TeamSetCache.php');
-}
-
-sugar_cache_clear('TeamSetsMD5Cache');
-if (file_exists($cache_dir . 'modules/Teams/TeamSetMD5Cache.php')) {
-    unlink($cache_dir . 'modules/Teams/TeamSetMD5Cache.php');
-}
 $langHeader = get_language_header();
 $out = <<<EOQ
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -200,10 +199,8 @@ $nonStandardModules = array(//'Tracker',
 // TODO: Remove the following. (See MAR-1314)
 // Disable the activity stream from creating messages while installing.
 Activity::disable();
-
 // Disable processes for the time being
 Registry\Registry::getInstance()->set('setup:disable_processes', true);
-
 //If this is MIcrosoft install and FTS is enabled, then fire index wake up method to prime the indexing service.
 if ($db->supports('fulltext') && $db->full_text_indexing_installed()) {
     installLog("Enabling fulltext indexing");
@@ -313,6 +310,10 @@ foreach ($rel_dictionary as $rel_name => $rel_data) {
 // Setup the relationship cache and build out the initial vardef cache
 SugarRelationshipFactory::rebuildCache();
 
+// rebuild denormalized team security data at the earliest possible stage, if needed
+$command = Container::getInstance()->get(StateAwareRebuild::class);
+$command();
+
 ///////////////////////////////////////////////////////////////////////////////
 ////    START CREATE DEFAULTS
 echo "<br>";
@@ -326,6 +327,9 @@ if ($new_config) {
 }
 installerHook('post_createDefaultSettings');
 
+$oe = new OutboundEmail();
+$oe->getSystemMailerSettings();
+
 $KBContent = new KBContent();
 $KBContent->setupPrimaryLanguage();
 $KBContent->setupCategoryRoot();
@@ -336,8 +340,7 @@ installLog($mod_strings['LBL_PERFORM_LICENSE_SETTINGS']);
 update_license_settings(
     $_SESSION['setup_license_key_users'],
     $_SESSION['setup_license_key_expire_date'],
-    $_SESSION['setup_license_key'],
-    $_SESSION['setup_num_lic_oc']
+    $_SESSION['setup_license_key']
 );
 echo $mod_strings['LBL_PERFORM_DONE'];
 
@@ -452,7 +455,8 @@ $disabledTabs = array(
     "bugs",
     "products",
     "contracts",
-    "revenuelineitems"
+    "revenuelineitems",
+    "dataprivacy",
 );
 
 installerHook('pre_setHiddenSubpanels');
@@ -527,6 +531,14 @@ installLog("converting Forecasts to use RevenueLineItems");
 $rm = new ReflectionMethod($converter, 'resetForecastData');
 $rm->setAccessible(true);
 $rm->invokeArgs($converter, array('RevenueLineItems'));
+
+// Create default dashboards
+installLog('creating default dashboards');
+require_once 'modules/Dashboards/DefaultDashboardInstaller.php';
+$defaultDashboardInstaller = new DefaultDashboardInstaller();
+global $moduleList;
+$defaultDashboardInstaller->buildDashboardsFromFiles($moduleList);
+
 ///////////////////////////////////////////////////////////////////////////////
 ////    START DEMO DATA
 
@@ -574,21 +586,6 @@ if ((!empty($_SESSION['fts_type']) || !empty($_SESSION['setup_fts_type'])) &&
 $endTime = microtime(true);
 $deltaTime = $endTime - $startTime;
 
-//////////////////////////////////////////
-/// PERFORM OFFLINE CLIENT INSTALL
-/////////////////////////////////////////
-if (isset($_SESSION['oc_install']) && $_SESSION['oc_install'] == true) {
-    installLog("Performing Offline Client");
-    set_time_limit(3600);
-    ini_set('default_socket_timeout', 360);
-    echo '<b>Installing Offline Client</b>';
-    require_once("include/utils/disc_client_utils.php");
-    $oc_result = convert_disc_client();
-    installLog($oc_result);
-    echo $oc_result;
-}
-
-
 ///////////////////////////////////////////////////////////////////////////
 ////    FINALIZE LANG PACK INSTALL
 if (isset($_SESSION['INSTALLED_LANG_PACKS']) && ArrayFunctions::is_array_access($_SESSION['INSTALLED_LANG_PACKS'])
@@ -617,17 +614,12 @@ if (function_exists('memory_get_usage')) {
     $memoryUsed = $mod_strings['LBL_PERFORM_OUTRO_5'] . memory_get_usage() . $mod_strings['LBL_PERFORM_OUTRO_6'];
 }
 
-if (isset($_SESSION['oc_install']) && $_SESSION['oc_install'] == true) {
-    removeConfig_SIFile();
-}
-
-
 $errTcpip = '';
 $fp = @fsockopen("www.sugarcrm.com", 80, $errno, $errstr, 3);
 if (!$fp) {
     $errTcpip = "<p>{$mod_strings['ERR_PERFORM_NO_TCPIP']}</p>";
 }
-if ($fp && (!isset($_SESSION['oc_install']) || $_SESSION['oc_install'] == false)) {
+if ($fp) {
     @fclose($fp);
     if ($next_step == 9999) {
         $next_step = 8;
@@ -708,10 +700,8 @@ MetaDataManager::setupMetadata(array('base'), array('en_us'));
 // TODO: Remove the following. (See MAR-1314)
 // Restore the activity stream behaviour.
 Activity::enable();
-
 // Allow processes to resume at this point
 Registry\Registry::getInstance()->drop('setup:disable_processes');
-
 installerHook('post_performSetup');
 $out = <<<EOQ
 <br><p><b>{$mod_strings['LBL_PERFORM_OUTRO_1']} {$setup_sugar_version} {$mod_strings['LBL_PERFORM_OUTRO_2']}</b></p>
@@ -742,4 +732,8 @@ $out = <<<EOQ
 EOQ;
 
 echo $out;
+
+if (isset($context, $subject)) {
+    $context->deactivateSubject($subject);
+}
 installLog("Installation has completed *********");

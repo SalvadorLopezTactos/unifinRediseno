@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Targets List Dashboard',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Targets Record Dashboard',
+
   'LBL_MODULE_NAME' => 'Targets',
   'LBL_MODULE_NAME_SINGULAR' => 'Target',
   'LBL_MODULE_ID'   => 'Targets',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Salutation',
   'LBL_SAVE_PROSPECT' => 'Save Target',
   'LBL_CREATED_OPPORTUNITY' =>'Created a new opportunity',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Creating an opportunity requires an account.\n Please either create a new account or select an existing one.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Creating an opportunity requires an account.\\n Please either create a new account or select an existing one.',
   'LNK_SELECT_ACCOUNT' => "Select Account",
   'LNK_NEW_PROSPECT' => 'Create Target',
   'LNK_PROSPECT_LIST' => 'View Targets',
@@ -195,4 +199,6 @@ To create a {{module_name}}:
 2. Click "Save" to finalise the new record and return to the previous page.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Targets&#39; reports',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Business Purposes Consented for',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consent Last Updated',
 );

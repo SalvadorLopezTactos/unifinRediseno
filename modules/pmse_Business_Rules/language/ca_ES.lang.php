@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Normes empresarials de processos',
   'LBL_MODULE_TITLE' => 'Normes empresarials de processos',
   'LBL_MODULE_NAME_SINGULAR' => 'Norma empresarial del procés',
@@ -29,8 +28,8 @@ $mod_strings = array (
   'LBL_RST_UPDATE_DATE' => 'Data d&#39;actualització de norma empresarial',
 
     'LNK_LIST' => 'Veure normes empresarials de processos',
-    'LNK_NEW_PMSE_BUSINESS_RULES' => 'Crear regla de procés d&#39;empresa',
-    'LNK_IMPORT_PMSE_BUSINESS_RULES' => 'Importar normes empresarials de processos',
+    'LNK_NEW_PMSE_BUSINESS_RULES' => 'Crea norma empresarial de processos',
+    'LNK_IMPORT_PMSE_BUSINESS_RULES' => 'Importa normes empresarials de processos',
 
     'LBL_PMSE_TITLE_BUSINESS_RULES_BUILDER' => 'Constructor de normes empresarials',
 
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Condicions',
     'LBL_PMSE_LABEL_RETURN' => 'Vol veure',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Conclusions',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Camp de canvi',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Valor de retorn',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Afegeix condició',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Afegeix conclusió',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Afegeix fila',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Eliminar columna',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Eliminar condició',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Eliminar conclusió',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Eliminar dades de columna',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Si',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'No',

@@ -64,7 +64,7 @@
             </p>
         {else}
             <p class="msg">
-                {capture assign="quotedQuery"}"{$query}"{/capture}
+                {capture assign="quotedQuery"}"{$query|escape:'html':'UTF-8'}"{/capture}
                 {$APP.MSG_LIST_VIEW_NO_RESULTS|replace:"<item1>":$quotedQuery}
             </p>
             {if $displaySubMessage}

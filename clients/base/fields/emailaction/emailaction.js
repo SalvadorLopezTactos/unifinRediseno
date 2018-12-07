@@ -9,9 +9,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 /**
- * Emailaction is a button that when selected will launch the appropriate email
- * client. Email options for prepopulating fields on email compose or mailto
- * link are set based on field def settings.
+ * EmailactionField is a button that when selected will launch the appropriate
+ * email client.
  *
  * @class View.Fields.Base.EmailactionField
  * @alias SUGAR.App.view.fields.BaseEmailactionField
@@ -23,14 +22,12 @@
     /**
      * @inheritdoc
      *
-     * Set up email options to prepopulate fields on email compose (or set up
-     * mailto link if not using Sugar Email Client)
+     * Adds the EmailClientLaunch plugin to enable the field to be used for
+     * sending email.
      */
     initialize: function(options) {
         this.plugins = _.union(this.plugins || [], ['EmailClientLaunch']);
-
         this._super('initialize', [options]);
-        this._initEmailOptions();
     },
 
     /**
@@ -38,18 +35,11 @@
      * email options on change.
      *
      * @private
+     * @deprecated The EmailClientLaunch plugin handles email options.
      */
     _initEmailOptions: function() {
-        var context = this.context.parent || this.context,
-            parentModel = context.get('model');
-
-        if (parentModel instanceof Backbone.Model) {
-            this._updateEmailOptions(parentModel);
-            parentModel.on('change', function(model) {
-                this._updateEmailOptions(model);
-                this.render();
-            }, this);
-        }
+        app.logger.warn('View.Fields.Base.EmailactionField#_initEmailOptions is deprecated. ' +
+            'The EmailClientLaunch plugin handles email options.');
     },
 
     /**
@@ -57,14 +47,10 @@
      *
      * @param {Object} parentModel
      * @private
+     * @deprecated The EmailClientLaunch plugin handles email options.
      */
     _updateEmailOptions: function(parentModel) {
-        if (this.def.set_recipient_to_parent) {
-            this.addEmailOptions({to_addresses: [{bean: parentModel}]});
-        }
-
-        if (this.def.set_related_to_parent) {
-            this.addEmailOptions({related: parentModel});
-        }
+        app.logger.warn('View.Fields.Base.EmailactionField#_updateEmailOptions is deprecated. ' +
+            'The EmailClientLaunch plugin handles email options.');
     }
 })

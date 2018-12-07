@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Painel de lista de contatos',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Painel de registo de contatos',
+
     'LNK_CONTACT_REPORTS' => 'Visualizar relatórios de contato',
     'ERR_DELETE_RECORD' => 'Um número de registro deve ser especificado para eliminar o Contato.',
     'LBL_ACCOUNT_ID' => 'ID da Conta',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Copia endereço alternativo para o endereço principal',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Copiar o endereço principal para o endereço alternativo',
     'NTC_DELETE_CONFIRMATION' => 'Tem certeza de que deseja excluir este registro?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Criar uma Oportunidade requer uma Conta.\n Crie uma ou selecione uma pré-existente.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Criar uma Oportunidade requer uma Conta.\\n Crie uma ou selecione uma pré-existente.',
     'NTC_REMOVE_CONFIRMATION' => 'Tem certeza de que deseja remover este Contato desta Ocorrência?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Tem certeza de que deseja remover este registro como um relatório direto?',
 
@@ -273,4 +277,6 @@ Para criar um {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Pontuação do Potencial',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Relatórios dos Contatos',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objetivos Comerciais autorizados para',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Autorização atualizada pela última vez',
 );

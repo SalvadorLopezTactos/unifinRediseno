@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => '사례 목록 대시보드',
+    'LBL_CASES_RECORD_DASHBOARD' => '사례 기록 대시보드',
+
 	'ERR_DELETE_RECORD'					=> '거래처를 삭제하시려면 정확한 고유번호를 입력하셔야합니다.',
 	'LBL_ACCOUNT_ID'					=> '거래처 ID',
 	'LBL_ACCOUNT_NAME'					=> '거래처명',
@@ -31,7 +35,7 @@ $mod_strings = array (
 	'LBL_HISTORY_SUBPANEL_TITLE'		=> '완료된 활동',
 	'LBL_INVITEE'						=> '연락처',
 	'LBL_MEMBER_OF'						=> '거래처',
-    'LBL_MODULE_NAME'					=> '사례 목록',
+    'LBL_MODULE_NAME'					=> '사례',
     'LBL_MODULE_NAME_SINGULAR'			=> '사례',
 	'LBL_MODULE_TITLE'					=> '사례:홈',
 	'LBL_NEW_FORM_TITLE'				=> '신규 사례',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> '상태',
     'LBL_SOURCE' => '출처 :',
 	'LBL_SUBJECT'						=> '제목',
-	'LBL_SYSTEM_ID'						=> '시스템 ID',
 	'LBL_LIST_ACCOUNT_NAME'				=> '거래처명',
 	'LBL_LIST_ASSIGNED'					=> '담당자',
 	'LBL_LIST_CLOSE'					=> '마감',

@@ -229,7 +229,7 @@ class KBContent extends SugarBean {
      */
     public function save($check_notify = false)
     {
-        $dataChanges = $this->db->getDataChanges($this);
+        $dataChanges = empty($this->fetched_row) ? array() : $this->db->getDataChanges($this);
         if(empty($this->id) || !empty($this->new_with_id)) {
             if (empty($this->language)) {
                 $lang = $this->getNextAvailableLanguage();
@@ -448,7 +448,7 @@ class KBContent extends SugarBean {
         if(empty($this->id) || !empty($this->new_with_id)) {
             return in_array($this->status, $published);
         } else {
-            $dataChanges = $this->db->getDataChanges($this);
+            $dataChanges = empty($this->fetched_row) ? array() : $this->db->getDataChanges($this);
             if (!isset($dataChanges['status'])) {
                 return false;
             }

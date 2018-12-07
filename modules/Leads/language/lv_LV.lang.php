@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Interesentu saraksta instrumentu panelis',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Interesentu ierakstu instrumentu panelis',
+
     'ERR_DELETE_RECORD' => 'Ir jānorāda ieraksta numurs, lai dzēstu interesentu.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Uzņēmuma apraksts',
     'LBL_ACCOUNT_ID'=>'Uzņēmuma ID:',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Iespējas summa:',
     'LBL_OPPORTUNITY_ID'=>'Iespējas ID:',
     'LBL_OPPORTUNITY_NAME' => 'Iespējas nosaukums:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Cits e-pasts:',
     'LBL_OTHER_PHONE' => 'Cits tālrunis:',
     'LBL_PHONE' => 'Tālrunis',
@@ -165,7 +171,7 @@ $mod_strings = array (
     'LBL_REPORTS_TO_ID'=>'Vadītāja ID:',
     'LBL_REPORTS_TO' => 'Vadītājs',
     'LBL_REPORTS_FROM' => 'Atskaites no:',
-    'LBL_SALUTATION' => 'Sveiciens',
+    'LBL_SALUTATION' => 'Uzruna',
     'LBL_MODIFIED'=>'Modificēja',
 	'LBL_MODIFIED_ID'=>'Modificētāja ID',
 	'LBL_CREATED'=>'Izveidoja',
@@ -314,4 +320,6 @@ Pēc katras prasītās moduļa apstiprināšanas spiediet "Saglabāt un Konvert�
     'LBL_MKTO_LEAD_SCORE' => 'Interesenta vērtējums',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Interesentu atskaites',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Ir piekrišana biznesa mērķiem',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Piekrišana pēdējoreiz atjaunināta',
 );

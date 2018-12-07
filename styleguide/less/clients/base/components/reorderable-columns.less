@@ -1,5 +1,4 @@
 table.reorderable-columns {
-
   th[data-fieldname] {
     padding: 0;
 
@@ -11,20 +10,20 @@ table.reorderable-columns {
     > div {
       position: relative;
       display: block;
-      width: auto;
       overflow-x: visible;
       white-space: normal;
       word-break: normal;
       vertical-align: middle;
       text-overflow: initial;
       padding: 0;
-      .box-sizing(border-box);
-      .calcWidth(~"100% - 16px");
+      box-sizing: border-box;
+      width: calc(~"100% - 16px");
       margin-left: 8px;
 
       > div {
         &[data-draggable="true"] {
-          padding: 8px 8px 8px 0px;
+          padding: 8px 8px 8px 0;
+
           /* Column being dragged */
           &.ui-draggable-dragging {
             background-color: @white;
@@ -32,7 +31,8 @@ table.reorderable-columns {
             cursor: ew-resize;
           }
         }
-        .box-sizing(border-box);
+
+        box-sizing: border-box;
 
         /* Brings back styling of table.dataTable th > *   */
         > span {
@@ -60,7 +60,8 @@ table.reorderable-columns {
       background-color: rgba(0, 0, 0, 0.3);
       z-index: 2;
 
-      &::before, &::after {
+      &::before,
+      &::after {
         font-family: FontAwesome;
         -webkit-font-smoothing: antialiased;
         font-size: 14px;
@@ -86,7 +87,6 @@ table.reorderable-columns {
       left: auto;
     }
   }
-
 }
 
 /* Fixed columns need special treatment for padding and position of placeholder */

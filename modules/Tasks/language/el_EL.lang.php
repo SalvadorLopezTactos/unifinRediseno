@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Εργασιών',
+
   'LBL_MODULE_NAME' => 'Εργασίες',
   'LBL_MODULE_NAME_SINGULAR' => 'Εργασία',
   'LBL_TASK' => 'Εργασίες:',

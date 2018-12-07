@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Vartotojo vardas arba slaptažodis neteisingas',
-	'ERR_BODY_TOO_LONG'		=> '\rTurinio tekstas per didelis, kad nuskaityti laišką. Sutrumpinama.',
+	'ERR_BODY_TOO_LONG'		=> '\\rTurinio tekstas per didelis, kad nuskaityti laišką. Sutrumpinama.',
 	'ERR_INI_ZLIB'			=> 'Nepavyko trumpam išjungti Zlib kompresijos.  "Bandyti nustatymai" gali nepavykti.',
 	'ERR_MAILBOX_FAIL'		=> 'Nepavyko ištraukti jokių pašto dėžučių.',
 	'ERR_NO_IMAP'			=> 'Nerastos IMAP bibliotekos. Prašome išspręsti tai, prieš pradedant dirbti su įeinančiu paštu',

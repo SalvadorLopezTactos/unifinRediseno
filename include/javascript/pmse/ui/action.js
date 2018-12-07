@@ -8,18 +8,20 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 /**
- * @class Action
+ * @class PMSE.Action
  * Handle Actions
- * @extend Base
+ * @extends PMSE.Base
  *
  *
  * @constructor
  * Create a new instance of the class
  * @param {Object} options
  */
-var Action = function (options) {
-    Base.call(this, options);
+PMSE.Action = function(options) {
+    PMSE.Base.call(this, options);
     /**
      * Defines the text of the action
      * @type {String}
@@ -60,32 +62,32 @@ var Action = function (options) {
      * @type {Object}
      */
     this.related = null;
-    Action.prototype.initObject.call(this, options);
+    PMSE.Action.prototype.initObject.call(this, options);
 };
-Action.prototype = new Base();
+PMSE.Action.prototype = new PMSE.Base();
 /**
  * Defines the object's type
  * @type {String}
  */
-Action.prototype.type = "Action";
+PMSE.Action.prototype.type = 'PMSE.Action';
 /**
  * Defines the object's family
  * @type {String}
  */
-Action.prototype.family = "Action";
+PMSE.Action.prototype.family = 'PMSE.Action';
 
 /**
  * Initialize the object with default values
  * @param {Object} options
  */
-Action.prototype.initObject = function (options) {
+PMSE.Action.prototype.initObject = function(options) {
     var defaults = {
         text: null,
         cssStyle: null,
         disabled: false,
         hidden: false,
         selected: false,
-        handler: function () {
+        handler: function() {
 
         },
         related: null
@@ -106,7 +108,7 @@ Action.prototype.initObject = function (options) {
  * @param text
  * @return {*}
  */
-Action.prototype.setText = function (text) {
+PMSE.Action.prototype.setText = function(text) {
     this.text = text;
     return this;
 };
@@ -116,7 +118,7 @@ Action.prototype.setText = function (text) {
  * @param {Function} fn
  * @return {*}
  */
-Action.prototype.setHandler = function (fn) {
+PMSE.Action.prototype.setHandler = function(fn) {
     if (_.isFunction(fn)) {
         this.handler = fn;
     }
@@ -128,7 +130,7 @@ Action.prototype.setHandler = function (fn) {
  * @param {String} css
  * @return {*}
  */
-Action.prototype.setCssClass = function (css) {
+PMSE.Action.prototype.setCssClass = function(css) {
     this.cssStyle = css;
     return this;
 };
@@ -136,9 +138,9 @@ Action.prototype.setCssClass = function (css) {
 /**
  * Sets the tooltip
  * @param tooltip
- * @returns {Action}
+ * @return {PMSE.Action}
  */
-Action.prototype.setToolTip = function (tooltip) {
+PMSE.Action.prototype.setToolTip = function(tooltip) {
     this.toolTip = tooltip;
     return this;
 }
@@ -146,9 +148,9 @@ Action.prototype.setToolTip = function (tooltip) {
 /**
  * Set the selected property
  * @param selected
- * @returns {Action}
+ * @return {PMSE.Action}
  */
-Action.prototype.setSelected = function (selected) {
+PMSE.Action.prototype.setSelected = function(selected) {
     this.selected = selected;
     return this;
 }
@@ -158,7 +160,7 @@ Action.prototype.setSelected = function (selected) {
  * @param {Boolean} value
  * @return {*}
  */
-Action.prototype.setDisabled = function (value) {
+PMSE.Action.prototype.setDisabled = function(value) {
     if (_.isBoolean(value)) {
         this.disabled = value;
         if (this.related) {
@@ -176,7 +178,7 @@ Action.prototype.setDisabled = function (value) {
  * @param {Boolean} value
  * @return {*}
  */
-Action.prototype.setHidden = function (value) {
+PMSE.Action.prototype.setHidden = function(value) {
     if (_.isBoolean(value)) {
         this.hidden = value;
         if (this.related) {
@@ -193,7 +195,7 @@ Action.prototype.setHidden = function (value) {
  * @param {Object} relation
  * @return {*}
  */
-Action.prototype.setRelated = function (relation) {
+PMSE.Action.prototype.setRelated = function(relation) {
     this.related = relation;
     return this;
 };
@@ -201,28 +203,28 @@ Action.prototype.setRelated = function (relation) {
 /**
  * Turns on the action
  */
-Action.prototype.enable = function () {
+PMSE.Action.prototype.enable = function() {
     this.setDisabled(false);
 };
 
 /**
  * Turns off the action
  */
-Action.prototype.disable = function () {
+PMSE.Action.prototype.disable = function() {
     this.setDisabled(true);
 };
 
 /**
  * Shows the action
  */
-Action.prototype.hide = function () {
+PMSE.Action.prototype.hide = function() {
     this.setHidden(true);
 };
 
 /**
  * Hides the action
  */
-Action.prototype.show = function () {
+PMSE.Action.prototype.show = function() {
     this.setHidden(false);
 };
 
@@ -230,7 +232,7 @@ Action.prototype.show = function () {
  * Returns the enabled property
  * @return {Boolean}
  */
-Action.prototype.isEnabled = function () {
+PMSE.Action.prototype.isEnabled = function() {
     return !this.disabled;
 };
 
@@ -238,7 +240,7 @@ Action.prototype.isEnabled = function () {
  * Returns the hidden property
  * @return {Boolean}
  */
-Action.prototype.isHidden = function () {
+PMSE.Action.prototype.isHidden = function() {
     return this.hidden;
 };
 
@@ -246,5 +248,5 @@ Action.prototype.isHidden = function () {
  * Defines the action validation
  * @type {Boolean}
  */
-Action.prototype.isAction = true;
+PMSE.Action.prototype.isAction = true;
 

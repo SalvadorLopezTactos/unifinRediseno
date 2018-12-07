@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => '생성 날짜',
     'LBL_DATE_MODIFIED' => '수정일',
     'LBL_DELETED' => '삭제하기',
+    'LBL_MODULE_NAME' => '이메일 주소',
+    'LBL_MODULE_NAME_SINGULAR' => '이메일 주소:',
 );

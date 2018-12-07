@@ -25,8 +25,8 @@ class SugarUpgradeConnectors extends UpgradeScript
         }
 
         //Delete the custom connectors.php file if it exists so that it may be properly rebuilt
-        if (SugarAutoLoader::fileExists('custom/modules/Connectors/metadata/connectors.php')) {
-            SugarAutoLoader::unlink('custom/modules/Connectors/metadata/connectors.php');
+        if (file_exists('custom/modules/Connectors/metadata/connectors.php')) {
+            unlink('custom/modules/Connectors/metadata/connectors.php');
         }
     }
 }

@@ -70,6 +70,21 @@
     saveQueue: undefined,
 
     /**
+     * If this is initializing from a Quote's "Copy" functionality
+     */
+    isCopy: undefined,
+
+    /**
+     * Keeps track of the number of items to be copied during a Quote's "Copy" functionality
+     */
+    copyItemCount: undefined,
+
+    /**
+     * Keeps track of the number of bundles to be copied during a Quote's "Copy" functionality
+     */
+    copyBundleCount: undefined,
+
+    /**
      * @inheritdoc
      */
     initialize: function(options) {
@@ -81,6 +96,9 @@
         this.quoteDataGroupMeta = app.metadata.getLayout('ProductBundles', 'quote-data-group');
         this.bundlesBeingSavedCt = 0;
         this.isCreateView = this.context.get('create') || false;
+        this.isCopy = this.context.get('copy') || false;
+        this.copyItemCount = 0;
+        this.copyBundleCount = 0;
 
         //Setup the neccesary child context before data is populated so that child views/layouts are correctly linked
         var pbContext = this.context.getChildContext({link: 'product_bundles'});
@@ -95,6 +113,8 @@
      * @inheritdoc
      */
     bindDataChange: function() {
+        var userACLs = app.user.getAcls();
+
         this.model.on('change:show_line_nums', this._onShowLineNumsChanged, this);
         this.model.on('change:bundles', this._onProductBundleChange, this);
         this.context.on('quotes:group:create', this._onCreateQuoteGroup, this);
@@ -103,9 +123,33 @@
         this.context.on('quotes:defaultGroup:create', this._onCreateDefaultQuoteGroup, this);
         this.context.on('quotes:defaultGroup:save', this._onSaveDefaultQuoteGroup, this);
 
+        if (!(_.has(userACLs.Quotes, 'edit') ||
+                _.has(userACLs.Products, 'access') ||
+                _.has(userACLs.Products, 'edit'))) {
+            // only listen for PCDashlet if this is Quotes and user has access
+            // to both Quotes and Products
+            // need to trigger on app.controller.context because of contexts changing between
+            // the PCDashlet, and Opps create being in a Drawer, or as its own standalone page
+            // app.controller.context is the only consistent context to use
+            app.controller.context.on('productCatalogDashlet:add', this._onProductCatalogDashletAddItem, this);
+        }
+
         // check if this is create mode, in which case add an empty array to bundles
         if (this.isCreateView) {
             this._onProductBundleChange(this.model.get('bundles'));
+
+            if (this.isCopy) {
+                this.copyItemCount = this.context.get('copyItemCount');
+
+                if (this.copyItemCount) {
+                    this.toggleCopyAlert(true);
+                }
+
+                // set this function to happen async after the alert has been displayed
+                _.delay(_.bind(function() {
+                    this._setCopyQuoteData();
+                }, this), 250);
+            }
         } else {
             this.model.once('sync', function(model) {
                 var bundles = this.model.get('bundles');
@@ -116,6 +160,157 @@
                 }
             }, this);
         }
+    },
+
+    /**
+     * Toggles showing and hiding the "Copying QLI" alert when using the Copy functionality
+     *
+     * @param {boolean} showAlert True if we need to show alert, false if we need to dismiss it
+     */
+    toggleCopyAlert: function(showAlert) {
+        var alertId = 'quotes_copy_alert';
+        var titleLabel;
+
+        if (showAlert) {
+            titleLabel = this.copyItemCount > 8 ?
+                'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' :
+                'LBL_QUOTE_COPY_ALERT_MESSAGE';
+
+            app.alert.show(alertId, {
+                level: 'process',
+                closeable: false,
+                autoClose: false,
+                title: app.lang.get(titleLabel, 'Quotes')
+            });
+        } else {
+            app.alert.dismiss(alertId);
+        }
+    },
+
+    /**
+     * Handles decrementing the total copy item count and
+     * checks if we need to dismiss the copy alert, or
+     * decrements the copy bundle count and checks if we need to render
+     *
+     * @param {boolean} bundleComplete True if we're completing a bundle
+     */
+    completedCopyItem: function(bundleComplete) {
+        this.copyItemCount--;
+        if (this.copyItemCount === 0) {
+            this.toggleCopyAlert(false);
+        }
+
+        if (bundleComplete) {
+            this.copyBundleCount--;
+            if (this.copyBundleCount === 0) {
+                this.render();
+            }
+        }
+    },
+
+    /**
+     * Handles grabbing the relatedRecords passed in from the context, creating the ProductBundle groups,
+     * and adding items into those groups
+     *
+     * @private
+     */
+    _setCopyQuoteData: function() {
+        var relatedRecords = this.context.get('relatedRecords');
+        var defaultGroup = this._getComponentByGroupId(this.defaultGroupId);
+
+        this.copyBundleCount = relatedRecords.length;
+
+        // loop over the bundles
+        _.each(relatedRecords, function(record) {
+            // check if this record is the "default group"
+            if (record.default_group) {
+                _.each(record.product_bundle_items, function(pbItem) {
+                    // set the item to use the edit template for quote-data-editablelistbutton
+                    pbItem.modelView = 'edit';
+
+                    // add this model to the toggledModels for edit view
+                    defaultGroup.quoteDataGroupList.toggledModels[pbItem.cid] = pbItem;
+
+                    // update the copy item number
+                    this.completedCopyItem();
+                }, this);
+
+                // add the whole collection of PBItems to the list collection at once
+                defaultGroup.quoteDataGroupList.collection.add(record.product_bundle_items);
+
+                // update the existing default group
+                this._updateDefaultGroupWithNewData(defaultGroup, record);
+
+                // update the copy bundle number
+                this.completedCopyItem(true);
+            } else {
+                // listen for a new group being created during the _onCreateQuoteGroup function
+                this.context.once(
+                    'quotes:group:create:success',
+                    _.bind(this._onCopyQuoteDataNewGroupedCreateSuccess, this, record),
+                    this
+                );
+
+                // create a new quote group
+                this._onCreateQuoteGroup();
+            }
+        }, this);
+    },
+
+    /**
+     * Called during a Quote record "Copy" to set a group's record data on the model
+     * and adds any items to the group's collection
+     *
+     * @param {Object} record The ProductBundle JSON data to set on the model
+     * @param {Data.Bean} pbModel The ProductBundle Model
+     * @private
+     */
+    _onCopyQuoteDataNewGroupedCreateSuccess: function(record, pbModel) {
+        var group = this._getComponentByGroupId(pbModel.cid);
+
+        // set the group's name on the model
+        group.model.set({
+            name: record.name
+        });
+
+        // loop over each product bundle item and add it to the group rows
+        _.each(record.product_bundle_items, function(pbItem) {
+            // set the item to use the edit template for quote-data-editablelistbutton
+            pbItem.modelView = 'edit';
+
+            // add this model to the toggledModels for edit view
+            group.quoteDataGroupList.toggledModels[pbItem.cid] = pbItem;
+
+            // update the copy item number
+            this.completedCopyItem();
+        }, this);
+
+        // add the whole collection of PBItems to the list collection at once
+        group.quoteDataGroupList.collection.add(record.product_bundle_items);
+
+        // update the copy bundle number
+        this.completedCopyItem(true);
+
+        // update the group line number counts
+        group.trigger('quotes:line_nums:reset');
+    },
+
+    /**
+     * Listens for the Product Catalog Dashlet to sent ProductTemplate data
+     *
+     * @param {Object} productData The ProductTemplate data to convert to a QLI
+     * @private
+     */
+    _onProductCatalogDashletAddItem: function(productData) {
+        var defaultGroup = this._getComponentByGroupId(this.defaultGroupId);
+
+        if (defaultGroup) {
+            // trigger event on default group to add the product data
+            defaultGroup.trigger('quotes:group:create:qli', 'products', productData);
+        }
+
+        // trigger event on the context to let dashlet know this is done adding the product
+        app.controller.context.trigger('productCatalogDashlet:add:complete');
     },
 
     /**
@@ -1093,7 +1288,9 @@
             }
         }, this);
 
-        this.render();
+        if (!this.isCopy) {
+            this.render();
+        }
     },
 
     /**
@@ -1146,6 +1343,8 @@
             newBundle.ignoreUserPrefCurrency = true;
             // add the new bundle which will add it to the layout and groupIds
             bundles.add(newBundle);
+            // trigger that the group create was successful and pass the new group data
+            this.context.trigger('quotes:group:create:success', newBundle);
         } else {
             app.alert.show('adding_bundle_alert', {
                 level: 'info',
@@ -1214,7 +1413,6 @@
         var groupsToUpdate = [];
         var rowId;
         var groupId;
-        var groupList;
         var groupLayout;
         var url;
 
@@ -1229,11 +1427,8 @@
                 // get the QuoteDataGroupLayout component
                 groupLayout = this._getComponentByGroupId(groupId);
 
-                // get the QuoteDataGroupListView component
-                groupList = groupLayout.getGroupListComponent();
-
                 // remove this row from the list's toggledModels if it exists
-                delete groupList.toggledModels[rowId];
+                delete groupLayout.quoteDataGroupList.toggledModels[rowId];
 
                 url = app.api.buildURL(model.module + '/' + rowId);
                 bulkRequests.push({
@@ -1370,8 +1565,7 @@
                 // an array with the last model
                 model = model || list[0];
                 if (model.isNew()) {
-                    var groupList = groupToDelete.getGroupListComponent();
-                    delete groupList.toggledModels[model.cid];
+                    delete groupToDelete.quoteDataGroupList.toggledModels[model.cid];
                     bundleItems.remove(model);
                 }
             }, this, bundleItems, groupToDelete), this);
@@ -1444,6 +1638,9 @@
      */
     _dispose: function() {
         this.beforeRender();
+        if (app.controller && app.controller.context) {
+            app.controller.context.off('productCatalogDashlet:add', null, this);
+        }
         this._super('_dispose');
     }
 })

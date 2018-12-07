@@ -12,14 +12,13 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => '프로세스 정의',
   'LBL_MODULE_TITLE' => '프로세스 정의',
   'LBL_MODULE_NAME_SINGULAR' => '프로세스 정의',
 
-  'LNK_LIST' => '보기 프로세스 정의',
+  'LNK_LIST' => '프로세스 정의 보기',
   'LNK_NEW_PMSE_PROJECT' => '프로세스 정의 만들기',
-  'LNK_IMPORT_PMSE_PROJECT' => '가져 오기 프로세스 정의',
+  'LNK_IMPORT_PMSE_PROJECT' => '프로세스 정의 가져 오기',
 
   'LBL_PRJ_STATUS' => '상태',
   'LBL_PRJ_MODULE' => '대상 모듈',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => '동일하지 않습니다',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => '가 아닙니다',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => '와(과) 같지 않음',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => '실행 시간',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => '추가',
     'LBL_PMSE_FORMPANEL_CLOSE' => '닫기',

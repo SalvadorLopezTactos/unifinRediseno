@@ -31,7 +31,6 @@
 
     /**
      * Is the dashlet collapsed or not
-     * @param boolean
      */
     collapsed: false,
 
@@ -61,7 +60,12 @@
             this.view.layout.context.on('dashlet:draggable:stop', this.handleDashletCollapse, this);
         }
 
+        // Localization parameters for the system
+        this.locale = SUGAR.charts.getSystemLocale();
         this.throttledSetServerData = _.throttle(this._setServerData, 1000);
+        this.barTooltipTemplate = app.template.getField(this.type, 'bartooltiptemplate', this.module);
+        this.lineTooltipTemplate = app.template.getField(this.type, 'linetooltiptemplate', this.module);
+        this.quotaTooltipTemplate = app.template.getField(this.type, 'quotatooltiptemplate', this.module);
     },
 
     /**
@@ -225,51 +229,58 @@
         this._serverData = undefined;
 
         this.chartId = this.cid + '_chart';
-        this.paretoChart = nv.models.paretoChart()
+        this.paretoChart = sucrose.charts.paretoChart()
             .margin({top: 0, right: 10, bottom: 0, left: 10})
             .showTitle(false)
             .tooltips(true)
             .direction(app.lang.direction)
-            .tooltipQuota(function(key, x, y, e, graph) {
+            .tooltipQuota(_.bind(function(key, x, y, e, graph) {
                 // Format the value using currency class and user settings
-                var val = app.currency.formatAmountLocale(e.val, app.currency.getBaseCurrencyId());
-                return '<p><b>' + e.key + ': <b>' + val + '</b></p>';
-            })
-            .tooltipLine(function(key, x, y, e, graph) {
+                var point = {};
+                point.key = e.key;
+                point.y = app.currency.formatAmountLocale(y, app.currency.getBaseCurrencyId());
+                return this.quotaTooltipTemplate(point).replace(/(\r\n|\n|\r)/gm, '');
+            }, this))
+            .tooltipLine(_.bind(function(key, x, y, e, graph) {
                 // Format the value using currency class and user settings
-                var val = app.currency.formatAmountLocale(e.point.y, app.currency.getBaseCurrencyId());
-                return '<p><b>' + app.lang.get('LBL_CUMULATIVE_TOTAL', 'Forecasts') + '</b></p><p>' + key + ': <b>' + val + '</b></p>';
-            })
+                var point = {};
+                point.key = key;
+                point.y = app.currency.formatAmountLocale(y, app.currency.getBaseCurrencyId());
+                return this.lineTooltipTemplate(point).replace(/(\r\n|\n|\r)/gm, '');
+            }, this))
             .tooltipBar(_.bind(function(key, x, y, e, graph) {
                 // Format the value using currency class and user settings
-                var val = app.currency.formatAmountLocale(e.value),
-                    lbl = app.lang.get('LBL_SALES_STAGE', 'Forecasts');
-                if (this.model.get('group_by') == 'probability') {
-                    lbl = app.lang.get('LBL_OW_PROBABILITY', 'Forecasts') + ' (%)';
-                }
-
-                return '<p>' + lbl + ': <b>' + key + '</b></p>' +
-                    '<p>' + app.lang.get('LBL_AMOUNT', 'Forecasts') + ': <b>' + val + '</b></p>' +
-                    '<p>' + app.lang.get('LBL_PERCENT', 'Forecasts') + ': <b>' + x + '%</b></p>';
+                var point = {};
+                point.lbl = this.model.get('group_by') === 'probability' ?
+                    (app.lang.get('LBL_OW_PROBABILITY', 'Forecasts') + ' (%)') :
+                    app.lang.get('LBL_SALES_STAGE', 'Forecasts');
+                point.key = key;
+                point.y = app.currency.formatAmountLocale(y, app.currency.getBaseCurrencyId());
+                //TODO: check all percent precision
+                //TODO: should % be in template?
+                point.x = sucrose.utility.numberFormat(x, 1, false, this.locality) + '%';
+                return this.barTooltipTemplate(point).replace(/(\r\n|\n|\r)/gm, '');
             }, this))
             .colorData('default')
             .colorFill('default')
-            .yAxisTickFormat(function(d) {
-                var si = d3.formatPrefix(d, 2);
-                return app.currency.getCurrencySymbol(app.currency.getBaseCurrencyId()) + d3.round(si.scale(d), 2) + si.symbol;
+            .yValueFormat(function(d) {
+                //TODO: is this correct?
+                var f = d3sugar.formatPrefix(',.0', 1000);
+                return app.currency.getCurrencySymbol(app.currency.getBaseCurrencyId()) + f(d);
             })
-            .quotaTickFormat(function(d) {
-                var si = d3.formatPrefix(d, 2);
-                return app.currency.getCurrencySymbol(app.currency.getBaseCurrencyId()) + d3.round(si.scale(d), 2) + si.symbol;
+            .quotaValueFormat(function(d) {
+                //TODO: is this correct?
+                var f = d3sugar.formatPrefix(',.2', 1000);
+                return app.currency.getCurrencySymbol(app.currency.getBaseCurrencyId()) + f(d);
             })
             //TODO: only do barClick if dashlet in Forecasts intelligence pane
-            .barClick(function(data, eo, chart, container) {
+            .seriesClick(function(data, eo, chart, container) {
                 var d = eo.series,
                     selectedSeries = eo.seriesIndex;
 
                 d.disabled = !d.disabled;
 
-                chart.dispatch.tooltipHide();
+                chart.dispatch.call('tooltipHide', this);
 
                 if (!chart.stacked()) {
                     data.filter(function(d) {
@@ -286,7 +297,7 @@
                 }).length) {
                     data.map(function(d) {
                         d.disabled = false;
-                        container.selectAll('.nv-series').classed('disabled', false);
+                        container.selectAll('.sc-series').classed('disabled', false);
                         return d;
                     });
                 }
@@ -295,12 +306,20 @@
             })
             .id(this.chartId)
             .strings({
-                legend: {
-                    close: app.lang.get('LBL_CHART_LEGEND_CLOSE'),
-                    open: app.lang.get('LBL_CHART_LEGEND_OPEN')
+                barLegend: {
+                    close: app.lang.get('LBL_CHART_BAR_LEGEND_CLOSE', 'Forecasts'),
+                    open: app.lang.get('LBL_CHART_BAR_LEGEND_OPEN', 'Forecasts')
                 },
-                noData: app.lang.get('LBL_CHART_NO_DATA')
-            });
+                lineLegend: {
+                    close: app.lang.get('LBL_CHART_LINE_LEGEND_CLOSE', 'Forecasts'),
+                    open: app.lang.get('LBL_CHART_LINE_LEGEND_OPEN', 'Forecasts')
+                },
+                noData: app.lang.get('LBL_CHART_NO_DATA'),
+                noLabel: app.lang.get('LBL_CHART_NO_LABEL')
+            })
+            .locality(this.locale);
+
+        this.locality = this.paretoChart.locality();
 
         this.paretoChart.displayNoData = _.bind(function(state) {
             this.$('[data-content="chart"]').toggleClass('hide', state);
@@ -361,19 +380,19 @@
         // clear out the current chart before a re-render
         if (!_.isEmpty(this.paretoChart)) {
             $(window).off('resize.' + this.sfId);
-            d3.select('#' + this.chartId + ' svg').remove();
+            d3sugar.select('#' + this.chartId + ' svg').remove();
         }
 
         this.paretoChart.stacked(!params.display_manager);
 
         if (this.d3Data.data.length > 0) {
             // if the chart element is hidden by a previous render, but has data now, show it
-            this.$('.nv-chart').toggleClass('hide', false);
+            this.$('.sc-chart').toggleClass('hide', false);
             this.$('.block-footer').toggleClass('hide', true);
 
             // After the .call(paretoChart) line, we are selecting the text elements for the Y-Axis
             // only so we can custom format the Y-Axis values
-            d3.select('#' + this.chartId)
+            d3sugar.select('#' + this.chartId)
                 .append('svg')
                 .datum(this.d3Data)
                 .call(this.paretoChart);
@@ -381,11 +400,11 @@
             $(window).on('resize.' + this.sfId, _.debounce(_.bind(this.resize, this), 100));
             this.handlePrinting('on');
 
-            this.$('.nv-chart').on('click', _.bind(function(e){
-              this.paretoChart.dispatch.chartClick();
+            this.$('.sc-chart').on('click', _.bind(function(e) {
+                this.paretoChart.dispatch.call('chartClick', this);
             }, this));
         } else {
-            this.$('.nv-chart').toggleClass('hide', true);
+            this.$('.sc-chart').toggleClass('hide', true);
             this.$('.block-footer').toggleClass('hide', false);
         }
 
@@ -417,6 +436,8 @@
                 'properties': {
                     'name': this._serverData.title,
                     'quota': parseFloat(this._serverData.quota),
+                    'yDataType': 'currency',
+                    'xDataType': 'string',
                     'quotaLabel': app.lang.get((this.model.get('show_target_quota')) ? 'LBL_QUOTA_ADJUSTED' : 'LBL_QUOTA', 'Forecasts'),
                     'groupData': records.map(function(record, i) {
                         return {
@@ -522,6 +543,8 @@
                 'properties': {
                     'name': this._serverData.title,
                     'quota': parseFloat(this._serverData.quota),
+                    'yDataType': 'currency',
+                    'xDataType': 'datetime',
                     'quotaLabel': app.lang.get('LBL_QUOTA', 'Forecasts'),
                     'groupData': this._serverData['x-axis'].map(function(item, i) {
                         return {
@@ -604,8 +627,8 @@
      * @return {Array}
      */
     getDisabledChartKeys: function() {
-        var currentChartData = d3.select('#' + this.chartId + ' svg').data(),
-            disabledBars = (!_.isUndefined(currentChartData[0])) ?
+        var currentChartData = d3sugar.select('#' + this.chartId + ' svg').data();
+        var disabledBars = (!_.isUndefined(currentChartData[0])) ?
                 _.filter(currentChartData[0].data, function(d) {
                     return (!_.isUndefined(d.disabled) && d.disabled === true);
                 }) : [];
@@ -684,7 +707,7 @@
     _dispose: function() {
         this.handlePrinting('off');
         $(window).off('resize.' + this.sfId);
-        this.$('.nv-chart').off('click');
+        this.$('.sc-chart').off('click');
         this._super('_dispose');
     }
 

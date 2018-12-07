@@ -17,12 +17,6 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 class AuthenticatedVoterTest extends \PHPUnit_Framework_TestCase
 {
-    public function testSupportsClass()
-    {
-        $voter = new AuthenticatedVoter($this->getResolver());
-        $this->assertTrue($voter->supportsClass('stdClass'));
-    }
-
     /**
      * @dataProvider getVoteTests
      */
@@ -68,11 +62,11 @@ class AuthenticatedVoterTest extends \PHPUnit_Framework_TestCase
     protected function getToken($authenticated)
     {
         if ('fully' === $authenticated) {
-            return $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
+            return $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\TokenInterface')->getMock();
         } elseif ('remembered' === $authenticated) {
-            return $this->getMock('Symfony\Component\Security\Core\Authentication\Token\RememberMeToken', array('setPersistent'), array(), '', false);
+            return $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\RememberMeToken')->setMethods(array('setPersistent'))->disableOriginalConstructor()->getMock();
         } else {
-            return $this->getMock('Symfony\Component\Security\Core\Authentication\Token\AnonymousToken', null, array('', ''));
+            return $this->getMockBuilder('Symfony\Component\Security\Core\Authentication\Token\AnonymousToken')->setConstructorArgs(array('', ''))->getMock();
         }
     }
 }

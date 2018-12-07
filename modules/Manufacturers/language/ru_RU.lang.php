@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Вы должны указать номер записи перед удалением производителя.',
   'NTC_STATUS' => 'Поменять статус на Неактивен, чтобы удалить этого производителя из выпадающих списков',
   'NTC_LIST_ORDER' => 'Укажите порядок, в котором этот производитель будет выведен в выпадающем списке',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Активна',
-    'Inactive' => 'Неактивна',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Импорт производителей',
 	'LBL_EDITLAYOUT' => 'Правка расположения' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Доход по продуктам',

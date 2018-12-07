@@ -16,7 +16,7 @@ $mod_strings = array (
     'LBL_BASE_MODULE' => 'Módulo de destino',
 
     'LBL_MODULE_TITLE' => 'Modelos de E-mail do Processo',
-    'LBL_MODULE_NAME' => 'Modelos de E-mail do Processo',
+    'LBL_MODULE_NAME' => 'Modelos de e-mail do processo',
     'LBL_MODULE_NAME_SINGULAR' => 'Modelo de e-mail de processo',
 
     'LNK_LIST' => 'Visualizar modelos de e-mail de processo',

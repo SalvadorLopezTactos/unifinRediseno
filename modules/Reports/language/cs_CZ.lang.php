@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Podle čtvrtletí',
     'LBL_BY_FISCAL_YEAR' => 'Dle fiskálního roku',
     'LBL_BY_FISCAL_QUARTER' => 'Dle fiskálního kvartálu',
+    'LBL_AMOUNT' => 'Částka',
     'LBL_COUNT' => 'Součet',
+    'LBL_PERCENT' => 'Procento',
     'LBL_SUM' => 'SOUČET',
     'LBL_AVG' => 'PRŮMĚR',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Měsíc',
     'LBL_YEAR' => 'Rok',
     'LBL_QUARTER' => 'Čtvrtletí',
+    'LBL_FISCAL' => 'Fiskální',
     'LBL_FISCAL_YEAR' => 'Fiskální rok',
     'LBL_FISCAL_QUARTER' => 'Fiskální kvartál',
 	'LBL_YESTERDAY'=>'Včera',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Příští čtvrtletí',
     'LBL_ADD_RELATE' => "Přidat související",
     'LBL_DEL_THIS' => "Odstranit",
-    'LBL_ALERT_CANT_ADD' => 'Nemůžete přidat související  modul dokud neoznačíte tabulky tykající se .\nSelect modulu v levém dropdown listě v nabídce &#39;Přidat související&#39;',
+    'LBL_ALERT_CANT_ADD' => 'Nemůžete přidat související  modul dokud neoznačíte tabulky tykající se .\\nSelect modulu v levém dropdown listě v nabídce &#39;Přidat související&#39;',
     'LBL_BY_DAY' => 'Podle dne',
     'LBL_DAY' => 'Den',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Související volitelné moduly',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Rovný nebo větší než',
 
     'LBL_FILTER_BY_MODULE' => 'Dle modulu',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'S grafy',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Došlo k chybě při načítání podrobné sestavy údajů pro tuto akci. Obraťte se o pomoc na vlastníka sestavy.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Podrobná sestava není k dispozici',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'V zobrazení seznamu se zobrazí všechny zprávy ze schůzek, které splňují aktuální vyhledávací kritéria a ke kterým mají uživatelé přístup. Základní údaje o každé zprávě si můžete prohlédnout v polích sloupců zobrazení seznamu a v náhledu. Můžete nastavit značky pro zprávy a vytvářet filtry. Chcete-li zprávu zobrazit, klikněte na její název, chcete-li zprávu upravit, vyberte možnost „Upravit zprávu“ v nabídce akcí.',
+  );

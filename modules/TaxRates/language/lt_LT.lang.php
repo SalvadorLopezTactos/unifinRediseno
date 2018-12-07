@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Jūs turite nurodyti įrašo numerį, kad galėtumėte ištrinti mokesčių tarifą.',
   'NTC_STATUS' => 'Padarykite statusą neaktyvų, jei norite išimti šį mokesčio tarifą iš iššokančio sąrašo',
   'NTC_LIST_ORDER' => 'Nustatykite kokia tvarka norite matyti iššokančiame sąraše mokesčio tarifo reikšmes.',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktyvus',
-    'Inactive' => 'Neaktyvus',
-  ),
   'LBL_EDITLAYOUT' => 'Redaguoti išdėstymą' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Kūrėjo Id',
   'LBL_MODIFIED_ID'=>'Redaguotojo Id',

@@ -40,7 +40,7 @@ $viewdefs['Quotes']['base']['layout']['create'] = array(
                             'name' => 'preview-pane',
                             'components' => array(
                                 array(
-                                    'layout' => 'preview',
+                                    'layout' => 'create-preview',
                                 ),
                             ),
                         ),

@@ -52,6 +52,6 @@ class SugarUpgradeFTSHook extends UpgradeScript
      */
     protected function fileExists($defPath)
     {
-        return SugarAutoLoader::fileExists($defPath);
+        return file_exists($defPath);
     }
 }

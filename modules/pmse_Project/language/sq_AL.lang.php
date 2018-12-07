@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Definime procesi',
   'LBL_MODULE_TITLE' => 'Definime procesi',
   'LBL_MODULE_NAME_SINGULAR' => 'Definimi procesit',
@@ -47,7 +46,7 @@ $mod_strings = array (
     'LBL_PMSE_PROCESS_DEFINITIONS_EDIT' => 'Ka procese aktive të hapura përkundrejt përcaktimit të këtij procesit. Përditësimi i tij mund t&#39;i prekë këto procese. Të ndryshohet përcaktimi i këtij procesi?',
     'LBL_PMSE_DISABLE_CONFIRMATION_PD' => 'Ka procese aktive të hapura përkundrejt përcaktimit të këtij procesit. Përditësimi i tij mund t&#39;i prekë këto procese. Të çaktivizohet përcaktimi i këtij procesi?',
 
-    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Automatikisht krijo regjistrim të definimeve të reja të procesit duke importuar *.bpm fajli nga sistemi juaj i fajllave.',
+    'LBL_PMSE_PROCESS_DEFINITION_IMPORT_TEXT' => 'Krijo automatikisht regjistrim të definimeve të reja të proceseve duke importuar skedar *.bpm nga sistemi i skedarëve tuaj.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_SUCCESS' => 'Definimet e procesit u importuan me sukses në sistem.',
     'LBL_PMSE_PROCESS_DEFINITION_EMPTY_WARNING' => 'Ju lutemi selektoni fajll *.bpm valid.',
     'LBL_PMSE_PROCESS_DEFINITION_IMPORT_BR' => 'Përcaktimi i procesit është importuar por përmban një ose më shumë veprime të rregullit të biznesit për të cilin nuk janë zgjedhur rregullat e biznesit.',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'nuk është e barabartë me',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'nuk është',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'jo baras me',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Koha e ekzekutimit',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Shto',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Mbyll',

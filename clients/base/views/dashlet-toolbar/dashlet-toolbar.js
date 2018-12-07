@@ -19,6 +19,7 @@
     cssIconRefresh: 'fa-refresh fa-spin',
     defaultActions: {
         'dashlet:edit:clicked' : 'editClicked',
+        'dashlet:viewReport:clicked': 'viewReportClicked',
         'dashlet:refresh:clicked' : 'refreshClicked',
         'dashlet:delete:clicked' : 'removeClicked',
         'dashlet:toggle:clicked' : 'toggleMinify'
@@ -31,6 +32,15 @@
     initialize: function(options) {
         _.extend(options.meta, app.metadata.getView(null, 'dashlet-toolbar'), options.meta.toolbar);
         app.view.View.prototype.initialize.call(this, options);
+        var model = this.closestComponent('dashboard') ?
+            this.closestComponent('dashboard').model : this.model;
+
+        /**
+         * A flag to indicate if the dashlet is editable.
+         *
+         * @type {boolean}
+         */
+        this.canEdit = app.acl.hasAccessToModel('edit', model) || false;
     },
 
     /**
@@ -65,6 +75,15 @@
                 this.layout.removeDashlet();
             }, this)
         });
+    },
+
+    /**
+     * View report.
+     *
+     * @param {Event} evt Mouse event.
+     */
+    viewReportClicked: function(evt) {
+        this.layout.viewReport();
     },
 
     editClicked: function(evt) {

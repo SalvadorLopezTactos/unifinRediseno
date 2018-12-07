@@ -12,24 +12,14 @@
 $module_name = 'ContractTypes';
 $viewdefs[$module_name]['base']['menu']['header'] = array(
     array(
-        'route'=>'#bwc/index.php?' . http_build_query(
-            array(
-                'module' => $module_name,
-                'action' => 'EditView',
-            )
-        ),
+        'route'=>'#' . $module_name . '/create',
         'label' =>'LNK_NEW_CONTRACTTYPE',
         'acl_action'=>'create',
         'acl_module'=>$module_name,
         'icon' => 'fa-plus',
     ),
     array(
-        'route'=>'#bwc/index.php?' . http_build_query(
-            array(
-                'module' => $module_name,
-                'action' => 'ListView',
-            )
-        ),
+        'route'=>'#' . $module_name,
         'label' =>'LNK_CONTRACTTYPE_LIST',
         'acl_action'=>'list',
         'acl_module'=>$module_name,

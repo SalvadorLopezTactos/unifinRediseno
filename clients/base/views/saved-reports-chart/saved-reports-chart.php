@@ -23,6 +23,41 @@ $viewdefs['base']['view']['saved-reports-chart'] = array(
             ),
         )
     ),
+    'custom_toolbar' => array(
+        'buttons' => array(
+            array(
+                "type" => "dashletaction",
+                "css_class" => "btn btn-invisible dashlet-toggle minify",
+                "icon" => "fa-chevron-up",
+                "action" => "toggleMinify",
+                "tooltip" => "LBL_DASHLET_TOGGLE",
+            ),
+            array(
+                'dropdown_buttons' => array(
+                    array(
+                        'type' => 'dashletaction',
+                        'action' => 'editClicked',
+                        'label' => 'LBL_DASHLET_CONFIG_EDIT_LABEL',
+                    ),
+                    array(
+                        'type' => 'dashletaction',
+                        'action' => 'viewReportClicked',
+                        'label' => 'LBL_DASHLET_CONFIG_VIEW_REPORT',
+                    ),
+                    array(
+                        'type' => 'dashletaction',
+                        'action' => 'refreshClicked',
+                        'label' => 'LBL_DASHLET_REFRESH_LABEL',
+                    ),
+                    array(
+                        'type' => 'dashletaction',
+                        'action' => 'removeClicked',
+                        'label' => 'LBL_DASHLET_REMOVE_LABEL',
+                    ),
+                ),
+            ),
+        ),
+    ),
     'dashlet_config_panels' => array(
         array(
             'name' => 'panel_body',
@@ -31,10 +66,17 @@ $viewdefs['base']['view']['saved-reports-chart'] = array(
             'placeholders' => true,
             'fields' => array(
                 array(
-                    'name' => 'saved_report_id',
+                    'name' => 'saved_report',
                     'label' => 'LBL_REPORT_SELECT',
-                    'type' => 'enum',
-                    'options' => array('' => ''),
+                    'type' => 'relate',
+                    'id_name' => 'saved_report_id',
+                    'module' => 'Reports',
+                    'rname' => 'name',
+                    'initial_filter' => 'with_charts',
+                    'initial_filter_label' => 'LBL_FILTER_WITH_CHARTS',
+                    'filter_populate' => array(
+                        'chart_type' => 'none',
+                    ),
                 ),
                 array(
                     'name' => 'auto_refresh',
@@ -46,6 +88,7 @@ $viewdefs['base']['view']['saved-reports-chart'] = array(
                     'name' => 'chart_type',
                     'label' => 'LBL_CHART_CONFIG_CHART_TYPE',
                     'type' => 'enum',
+                    'default' => 'group by chart',
                     'sort_alpha' => true,
                     'ordered' => true,
                     'searchBarThreshold' => -1,
@@ -53,11 +96,6 @@ $viewdefs['base']['view']['saved-reports-chart'] = array(
                 ),
 
                 array(
-                    'name' => 'editReport',
-                    'label' => 'LBL_REPORT_EDIT',
-                    'type' => 'button',
-                    'css_class' => 'btn-invisible btn-link btn-inline',
-                    'dismiss_label' => true,
                 ),
 
                 array(

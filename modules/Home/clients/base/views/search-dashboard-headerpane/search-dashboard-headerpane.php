@@ -41,9 +41,9 @@ $viewdefs['Home']['base']['view']['search-dashboard-headerpane'] = array(
             'name' => 'header',
             'fields' => array(
                 array(
-                    'type' => 'dashboardtitle',
+                    'type' => 'label',
                     'name' => 'name',
-                    'placeholder' => 'LBL_DASHBOARD_TITLE',
+                    'default_value' => 'LBL_FACETS_DASHBOARD_TITLE',
                 ),
             ),
         ),

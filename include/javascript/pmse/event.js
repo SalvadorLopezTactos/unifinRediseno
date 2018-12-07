@@ -8,11 +8,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*global AdamShape, $, Action, translate, AdamShapeLayerCommand, RestProxy,
+/*global AdamShape, $, PMSE.Action, translate, AdamShapeLayerCommand, RestProxy,
  SUGAR_URL, CriteriaField, PMSE_DECIMAL_SEPARATOR, ComboboxField, HiddenField,
- TextField, PROJECT_MODULE, CheckboxField, DateField, RadiobuttonField, Form,
- PMSE_DESIGNER_FORM_TRANSLATIONS, Window, MessagePanel
+ TextField, PROJECT_MODULE, CheckboxField, DateField, RadiobuttonField, PMSE.Form,
+ PMSE_DESIGNER_FORM_TRANSLATIONS, PMSE.Window, MessagePanel
 */
+var PMSE = PMSE || {};
 /**
  * @class AdamEvent
  * Handle BPMN Events
@@ -674,7 +675,7 @@ AdamEvent.prototype._createAction = function (type) {
     actionCFG.selected = this._isSelectedAction(actionDefinition);
     actionCFG.handler = this._getActionHandler(actionDefinition);
 
-    return new Action(actionCFG);
+    return new PMSE.Action(actionCFG);
 };
 
 AdamEvent.prototype.getContextMenu = function () {
@@ -687,7 +688,7 @@ AdamEvent.prototype.getContextMenu = function () {
 
     configureAction = this.createConfigureAction();
 
-    startAction = new Action({
+    startAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_START_EVENT'),
         handler: function () {
             self.updateEventType('START');
@@ -695,7 +696,7 @@ AdamEvent.prototype.getContextMenu = function () {
         selected: (this.evn_type === 'START')
     });
 
-    intermediateAction = new Action({
+    intermediateAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_INTERMEDIATE_EVENT'),
         handler: function () {
             self.updateEventType('INTERMEDIATE');
@@ -703,7 +704,7 @@ AdamEvent.prototype.getContextMenu = function () {
         selected: (this.evn_type === 'INTERMEDIATE')
     });
 
-    endAction = new Action({
+    endAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_END_EVENT'),
         handler: function () {
             self.updateEventType('END');
@@ -719,7 +720,7 @@ AdamEvent.prototype.getContextMenu = function () {
         ]
     };
 
-    deleteAction = new Action({
+    deleteAction = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_DELETE'),
         cssStyle: 'adam-menu-icon-delete',
         handler: function () {
@@ -957,7 +958,7 @@ AdamEvent.prototype.createConfigureAction = function () {
         durationTextField, unitComboBox, fixedDate, incrementCkeck, durationTextField2, unitComboBox2, operationCombo, criteria,
         root = this, hiddenParams, hiddenFn, callback = {}, ddlModules, ddlEmailTemplate, aTemplate, criteriaField, emailTemplates, datecriteria;
 
-    //Event Form Proxy
+    //Event PMSE.Form PMSE.Proxy
     proxy = new SugarProxy({
         url:'pmse_Project/EventDefinition/' + this.id,
         uid: this.id,
@@ -1792,7 +1793,7 @@ AdamEvent.prototype.createConfigureAction = function () {
         break;
     }
 
-    f = new Form({
+    f = new PMSE.Form({
         proxy: proxy,
         closeContainerOnSubmit: true,
         items: items,
@@ -1843,7 +1844,7 @@ AdamEvent.prototype.createConfigureAction = function () {
         language: PMSE_DESIGNER_FORM_TRANSLATIONS
     });
 
-    w = new Window({
+    w = new PMSE.Window({
         width: wWidth,
         height: wHeight,
         modal: true,
@@ -1859,7 +1860,7 @@ AdamEvent.prototype.createConfigureAction = function () {
         disabled = true;
     }
 
-    action = new Action({
+    action = new PMSE.Action({
         text: translate('LBL_PMSE_CONTEXT_MENU_SETTINGS'),
         cssStyle : 'adam-menu-icon-configure',
         handler: function () {

@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'لوحة معلومات قائمة الأهداف',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'لوحة معلومات سجل الأهداف',
+
   'LBL_MODULE_NAME' => 'الأهداف',
   'LBL_MODULE_NAME_SINGULAR' => 'الهدف',
   'LBL_MODULE_ID'   => 'الأهداف',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'التحية',
   'LBL_SAVE_PROSPECT' => 'حفظ الهدف',
   'LBL_CREATED_OPPORTUNITY' =>'تم إنشاء فرصة جديدة',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'يحتاج إنشاء فرصة إلى توفر حساب.\n يرجى إنشاء حساب جديد أو تحديد حساب حالي.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'يحتاج إنشاء فرصة إلى توفر حساب.\\n يرجى إنشاء حساب جديد أو تحديد حساب حالي.',
   'LNK_SELECT_ACCOUNT' => "تحديد حساب",
   'LNK_NEW_PROSPECT' => 'إنشاء هدف',
   'LNK_PROSPECT_LIST' => 'عرض الأهداف',
@@ -195,4 +199,6 @@ $mod_strings = array (
 2. انقر فوق "حفظ" لإنهاء السجل الجديد والعودة إلى الصفحة السابقة.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'تقارير الأهداف',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'الأغراض التجارية التي تمت الموافقة عليها',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'آخر تحديث للموافقة',
 );

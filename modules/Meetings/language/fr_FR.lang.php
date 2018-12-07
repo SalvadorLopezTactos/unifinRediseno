@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Tableau de bord de la liste de réunions',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Tableau de bord d&#39;enregistrements de réunions',
+
 	'ERR_DELETE_RECORD' => 'Un ID doit être spécifié pour toute suppression.',
 	'LBL_ACCEPT_THIS'=>'Accepter ?',
 	'LBL_ADD_BUTTON'=> 'Ajouter',

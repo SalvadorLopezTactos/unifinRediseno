@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Nome Utente o Password Non Corretti',
-	'ERR_BODY_TOO_LONG'		=> '\rCorpo del testo troppo lungo per bloccare tutta la email. Assettato.',
+	'ERR_BODY_TOO_LONG'		=> '\\rCorpo del testo troppo lungo per bloccare tutta la email. Assettato.',
 	'ERR_INI_ZLIB'			=> 'Non è possibile bloccare temporaneamente la compressione Zlib. Le "Impostazioni Test" potrebbero essere incomplete.',
 	'ERR_MAILBOX_FAIL'		=> 'Impossibile trovare le caselle di posta elettronica.',
 	'ERR_NO_IMAP'			=> 'Nessuna libreria IMAP trovata. Si prega di risolvere questo problema prima di continuare con le email in ingresso',

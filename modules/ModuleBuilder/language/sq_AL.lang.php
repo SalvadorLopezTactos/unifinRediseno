@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'A jeni të sigurtë që dëshironi të fshini këtë lidhje?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Kjo do të bëjë këtë lidhje të përhershme. A jeni të sigurtë që dëshironi të vendosni këtë lidhje?',
 'LBL_CONFIRM_DONT_SAVE' => 'Ndryshimet janë bërë që nga ruajtja e juaj e fundit, Dëshironi të ruani?',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Konfiguroni fushën që të kërkohet plotësisht për tekst.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Përforcimi është procesi i përforcimit të ngjashmërisë së fushave të një regjistrimi.<br />Fushave me nivel më të lartë përforcimi do t&#39;u jepet peshë më e madhe kur të kryhet kërkimi. Kur kërkimi të kryhet, të dhënat që përputhen që përmbajnë fushat me peshë më të lartë do të shfaqen më lart në rezultatet e kërkimit.<br />Vlera e paracaktuar është 1.0, e cila përkthehet në përforcim neutral. Për të aplikuar një përforcim pozitiv, pranohet çdo vlerë pezull, më e lartë se 1. Për një përforcim negativ, përdorni vlera më të ulëta se 1. Për shembull, vlera prej 1,35 do të përforcojë pozitivisht një fushë me 135%. Përdorimi i një vlere 0.60 do të aplikojë një përforcim negativ.<br />Mbani parasysh se në versionet e mëparshme kërkohej që të kryhej një riindeksim i plotë i kërkimit të tekstit. Kjo nuk kërkohet më.',
 'LBL_POPHELP_IMPORTABLE'=>'Po: Fusha do të përfshihet në një operacion të importit. <br />Nr: Fusha nuk do të përfshihet në një import. <br />Kërkohet: Vlera për fushën e cila duhet të sigurohet në çdo import.',
+'LBL_POPHELP_PII'=>'Kjo fushë do të shënohet automatikisht për auditim dhe do të ofrohet në pamjen e të dhënave personale.<br>Fushat e të dhënave personale mund të fshihen përgjithmonë edhe kur të dhënat i referohen kërkesës për fshirje të privatësisë së të dhënave.<br>Fshirja kryhet përmes modulit të privatësisë së të dhënave dhe mund të ekzekutohet nga administratorët apo përdoruesit në rolin e menaxherit të privatësisë së të dhënave.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Shkruani numrin për gjerësinë, të matur si në pixels.<br />Imazhi i ngarkuar do të jetë i shkallëzuar në këtë gjerësi.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Shkruani numrin për lartësinë, të matur si në pixels.<br />Imazhi i ngarkuar do të jetë i shkallëzuar në këtë lartësi.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

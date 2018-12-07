@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Sélectionner' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Vider' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Type',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Modèles pour emails',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Modèles d&#39;e-mail',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Variables',
 );

@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => 'לאחרונה שונה על ידי:',
   'LBL_ASSIGNED_USER' => 'הוקצה למשתמש:',
   'LBL_ASSIGNED_USER_NAME' => 'הוקצה עבור',
-  'LBL_SYSTEM_ID' =>'מערכת Id:',
   'LBL_TEAM_NAME' =>'שם צוות:',
   'LBL_TYPE'=>'סוג:',
   'LBL_SUBJECT' => 'נושא:',

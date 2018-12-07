@@ -100,11 +100,11 @@ if ($guid)
                         $usr = new User();
 						$usr_id=$usr->retrieve_user_id($_POST['user_name']);
 	    				$usr->retrieve($usr_id);
-	    				$usr->setNewPassword($_POST['new_password']);
+                        $usr->setNewPassword(html_entity_decode($_POST['new_password']));
 					    $query2 = "UPDATE users_password_link SET deleted='1' where id=".$GLOBALS['db']->quoted($guid);
 				   		$GLOBALS['db']->query($query2, true, "Error setting link for $usr->user_name: ");
 				   		$_POST['user_name'] = $_REQUEST['user_name'];
-						$_POST['user_password'] = $_REQUEST['new_password'];
+                        $_POST['user_password'] = html_entity_decode($_REQUEST['new_password']);
 						$_POST['module'] = 'Users';
 						$_POST['action'] = 'Authenticate';
 						$_POST['login_module'] = 'Home';

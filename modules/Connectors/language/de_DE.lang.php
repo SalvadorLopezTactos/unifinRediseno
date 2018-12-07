@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Fehler: Es wurden keine Modulfelder für die Anzeige des Resultats zugeordnet. Bitte kontaktieren Sie den Systemadministrator.',
     'LBL_INFO_INLINE' => 'Info' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Beenden' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'Für die angegebene Quelle-ID wurde kein Konnektor gefunden.',
 );
 

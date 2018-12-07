@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Kontaktpersonu saraksta instrumentu panelis',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kontaktpersonu ierakstu instrumentu panelis',
+
     'LNK_CONTACT_REPORTS' => 'Kontaktpersonu atskaites',
     'ERR_DELETE_RECORD' => 'Lai dzēstu kontaktpersonu, jānorāda ieraksta numurs.',
     'LBL_ACCOUNT_ID' => 'Uzņēmuma ID:',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopēt citu adresi uz pamatadresi',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopēt pamatadresi uz citu adresi',
     'NTC_DELETE_CONFIRMATION' => 'Vai tiešām vēlaties dzēst šo ierakstu?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Lai izveidotu iespēju, nepieciešams uzņēmums.\n Lūdzu izveidojiet uzņēmumu vai atlasiet esošu uzņēmumu.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Lai izveidotu iespēju, nepieciešams uzņēmums.\\n Lūdzu izveidojiet uzņēmumu vai atlasiet esošu uzņēmumu.',
     'NTC_REMOVE_CONFIRMATION' => 'Vai tiešām vēlaties izņemt kontaktpersonu no šī pieteikuma?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Vai tiešām vēlaties izņemt šo ierakstu kā padoto?',
 
@@ -273,4 +277,6 @@ Lai izveidotu {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Interesenta vērtējums',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kontaktu atskaites',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Ir piekrišana biznesa mērķiem',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Piekrišana pēdējoreiz atjaunināta',
 );

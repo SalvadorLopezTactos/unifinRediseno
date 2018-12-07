@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Tapaamisluettelon työpöytä',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Tapaamistietueiden työpöytä',
+
 	'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa tilin.',
 	'LBL_ACCEPT_THIS'=>'Hyväksy?',
 	'LBL_ADD_BUTTON'=> 'Lisää',

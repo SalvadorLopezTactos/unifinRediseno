@@ -48,6 +48,15 @@ $viewdefs['Accounts']['mobile']['layout']['subpanels'] = array(
         ),
         array(
             'layout' => 'subpanel',
+            'label' => 'LBL_EMAILS_SUBPANEL_TITLE',
+            'linkable' => false,
+            'unlinkable' => false,
+            'context' => array(
+                'link' => 'archived_emails',
+            ),
+        ),
+        array(
+            'layout' => 'subpanel',
             'label' => 'LBL_CONTACTS_SUBPANEL_TITLE',
             'context' => array(
                 'link' => 'contacts',

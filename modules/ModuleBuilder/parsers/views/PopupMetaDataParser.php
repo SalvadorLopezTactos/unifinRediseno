@@ -162,7 +162,6 @@
     	}
     	$out .= ");\n";
     	file_put_contents($writeFile, $out);
-    	SugarAutoLoader::addToMap($writeFile);
     	//return back mod strings
     	$GLOBALS['mod_strings'] = $oldModStrings;
     }

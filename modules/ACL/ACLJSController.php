@@ -51,7 +51,7 @@ EOQ;
 EOQ;
 }
 		}
-		if(SugarAutoLoader::fileExists('modules/'. $this->module . '/metadata/acldefs.php')){
+        if (file_exists('modules/'. $this->module . '/metadata/acldefs.php')) {
 			include('modules/'. $this->module . '/metadata/acldefs.php');
 
 			foreach($acldefs[$this->module]['forms'] as $form_name=>$form){

@@ -74,7 +74,6 @@ class SugarSystemInfo
             $this->getUsersInfo(),
             $this->getSystemNameInfo(),
             $this->getLatestTrackerIdInfo(),
-            $this->getClientInfo(),
             $this->getLicensePortalInfo(),
             $this->getDistroInfo()
         );
@@ -213,7 +212,6 @@ class SugarSystemInfo
             $info['license_users'] = $this->settings['license_users'];
             $info['license_expire_date'] = $this->settings['license_expire_date'];
             $info['license_key'] = $this->settings['license_key'];
-            $info['license_num_lic_oc'] = $this->settings['license_num_lic_oc'];
             if (!empty($this->settings['license_num_portal_users'])) {
                 $info['license_num_portal_users'] = $this->settings['license_num_portal_users'];
             } else {
@@ -222,31 +220,6 @@ class SugarSystemInfo
         }
         $info['license_portal_ex'] = 0;
         $info['license_portal_max'] = 0;
-        return $info;
-    }
-
-    /**
-     * Returns client info dictionary
-     *
-     * @return array
-     */
-    public function getClientInfo()
-    {
-        $info = array();
-        $system = BeanFactory::newBean('System');
-        if ($system) {
-            $info['oc_active_30_days'] = $system->getClientsActiveInLast30Days();
-            $info['oc_active'] = $system->getEnabledOfflineClients(
-                $system->create_new_list_query("", 'system_id != 1')
-            );
-            $info['oc_all'] = $system->getOfflineClientCount();
-            $info['oc_br_all'] = $system->getTotalInstallMethods('bitrock');
-            $info['oc_br_active_30_days'] = $system->getClientsActiveInLast30Days("install_method = 'bitrock'");
-            $info['oc_br_active'] = $system->getEnabledOfflineClients(
-                $system->create_new_list_query("", 'system_id != 1 AND install_method = \'bitrock\'')
-            );
-        }
-
         return $info;
     }
 

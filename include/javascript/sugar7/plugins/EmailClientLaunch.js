@@ -10,6 +10,47 @@
  */
 
 (function (app) {
+    /**
+     * Extract and return the email address from the recipient.
+     *
+     * @param {Object} recipient
+     * @param {Data.Bean} [recipient.email] An EmailAddresses bean.
+     * @param {Data.Bean} [recipient.bean] A bean with an email address (e.g.,
+     * Contacts, Leads, Users, etc.).
+     * @return {Data.Bean} An EmailAddresses bean.
+     */
+    function getEmailAddress(recipient) {
+        var email = app.data.createBean('EmailAddresses');
+
+        if (recipient.email) {
+            if (_.isString(recipient.email) && !_.isEmpty(recipient.email)) {
+                app.logger.warn(
+                    'EmailClientLaunch Plugin: An email address string was provided. An EmailAddresses bean was ' +
+                    'expected.'
+                );
+                email.set('email_address', recipient.email);
+            } else if (recipient.email instanceof app.Bean && recipient.email.module === 'EmailAddresses') {
+                // If there is no `id` or `email_address`, then fall back to
+                // using `recipient.bean`, if available.
+                if (!recipient.email.isNew() || recipient.email.get('email_address')) {
+                    // The email address was specified, so use it.
+                    return recipient.email;
+                }
+            } else {
+                app.logger.warn(
+                    'EmailClientLaunch Plugin: An unknown email address type was provided. An EmailAddresses bean ' +
+                    'was expected.'
+                );
+            }
+        }
+
+        if (recipient.bean && recipient.bean instanceof app.Bean && !email.get('email_address')) {
+            email.set('email_address', app.utils.getPrimaryEmailAddress(recipient.bean));
+        }
+
+        return email;
+    }
+
     app.events.on("app:init", function () {
         app.plugins.register('EmailClientLaunch', ['view', 'field'], {
 
@@ -33,56 +74,121 @@
             /**
              * Open the email compose drawer, prepopulated with given options
              *
+             * @fires emailclient:close on the component after the drawer is
+             * closed to allow a custom action to be performed.
              * @param {Object} [options]
              */
             launchSugarEmailClient: function(options) {
                 //clean the recipient fields before handing off to email compose
-                _.each(['to_addresses', 'cc_addresses', 'bcc_addresses'], function(recipientType) {
+                _.each(['to', 'cc', 'bcc'], function(recipientType) {
+                    var recipients;
+
                     if (options[recipientType]) {
-                        options[recipientType] = this._retrieveValidRecipients(options[recipientType]);
+                        recipients = this._retrieveValidRecipients(options[recipientType]);
+                        options[recipientType] = _.map(recipients, function(recipient) {
+                            recipient.set('_link', recipientType);
+
+                            return recipient;
+                        });
                     }
                 }, this);
 
-                app.drawer.open({
-                    layout : 'compose',
-                    context: {
-                        create: 'true',
-                        module: 'Emails',
-                        prepopulate: options
-                    }
-                }, _.bind(function(model) {
-                    if (model) {
-                        //allow for component to perform action after close
-                        this.trigger('emailclient:close');
-                    }
-                }, this));
+                app.utils.openEmailCreateDrawer(
+                    'compose-email',
+                    options,
+                    _.bind(function(context, model) {
+                        if (model) {
+                            var controllerContext = app.controller.context;
+                            var controllerContextModule = controllerContext.get('module');
+                            var links;
+
+                            this.trigger('emailclient:close');
+
+                            if (controllerContextModule === 'Emails' && controllerContext.get('layout') === 'records') {
+                                // Refresh the current list view if it is the
+                                // Emails list view.
+                                controllerContext.reloadData();
+                            } else {
+                                // Refresh Emails subpanels if there are any.
+                                links = app.utils.getLinksBetweenModules(controllerContextModule, 'Emails');
+
+                                _.each(links, function(link) {
+                                    controllerContext.trigger('panel-top:refresh', link.name);
+                                });
+                            }
+                        }
+                    }, this)
+                );
             },
 
             /**
              * Return recipient list for email compose drawer
-             * Strips out any recipients that don't have an email address
-             * Picks out primary or first valid address if only bean is specified
              *
-             * @param recipients
-             * @returns {Array}
+             * @param {Array|Object} recipients
+             * @return {Array}
              * @private
              */
             _retrieveValidRecipients: function(recipients) {
-                var validRecipients = [],
-                    email;
+                var validRecipients = [];
 
-                recipients = _.isArray(recipients) ? recipients : [recipients];
+                recipients = recipients || [];
+
+                if (!_.isArray(recipients)) {
+                    recipients = [recipients];
+                }
+
                 _.each(recipients, function(recipient) {
-                    if (recipient.bean && _.isUndefined(recipient.email)) {
-                        //attempt to pull primary (if valid) or first valid email on bean
-                        email = this._retrieveEmailAddressFromModel(recipient.bean);
+                    var validRecipient = app.data.createBean('EmailParticipants');
+                    var email = getEmailAddress(recipient);
+                    var primary;
+                    var isNameErased = false;
+                    var isEmailErased = false;
 
-                        //only push the recipient if the bean has a valid email to send to
-                        if (email) {
-                            validRecipients.push(_.extend({email: email}, recipient));
+                    // We can only use the email address if it has an `id`.
+                    if (!email.isNew()) {
+                        isEmailErased = _.contains(email.get('_erased_fields') || [], 'email_address');
+                        validRecipient.set({
+                            email_addresses: app.utils.deepCopy(email),
+                            email_address_id: email.get('id'),
+                            email_address: email.get('email_address'),
+                            invalid_email: email.get('invalid_email'),
+                            opt_out: email.get('opt_out')
+                        });
+                    }
+
+                    if (recipient.bean) {
+                        primary = app.utils.getPrimaryEmailAddress(recipient.bean);
+                        isNameErased = app.utils.isNameErased(recipient.bean);
+
+                        // Set the parent data if the email address is already
+                        // defined. Otherwise, only set the parent data if the
+                        // bean's primary email address is valid. We can't send
+                        // an email to a bean without a valid email address.
+                        if (validRecipient.get('email_address_id') || app.utils.isValidEmailAddress(primary)) {
+                            validRecipient.set({
+                                parent: _.extend({type: recipient.bean.module}, app.utils.deepCopy(recipient.bean)),
+                                parent_type: recipient.bean.module,
+                                parent_id: recipient.bean.get('id'),
+                                parent_name: app.utils.getRecordName(recipient.bean)
+                            });
                         }
-                    } else {
-                        validRecipients.push(recipient);
+                    }
+
+                    // Remove the email address if it has been erased, but only
+                    // if there is a person that the email can be sent to. If
+                    // there isn't a person, then we want the email address to
+                    // be seen as invalid when composing the email.
+                    if (validRecipient.get('parent') && !isNameErased && isEmailErased) {
+                        validRecipient.unset('email_addresses');
+                        validRecipient.unset('email_address_id');
+                        validRecipient.unset('email_address');
+                        validRecipient.unset('invalid_email');
+                        validRecipient.unset('opt_out');
+                    }
+
+                    // We must have a person or an email address to send to.
+                    if (validRecipient.get('email_address_id') || validRecipient.get('parent')) {
+                        validRecipients.push(validRecipient);
                     }
                 }, this);
 
@@ -101,36 +207,65 @@
             },
 
             /**
-             * Extends existing email options, adding the specified ones
-             * Also clones the related model passed so we don't modify the original
+             * Adds email options to `this.emailOptions`. If any of the keys
+             * already exist in `this.emailOptions`, then the value is
+             * replaced.
              *
-             * @param options
+             * Any keys with undefined values are removed before they are
+             * added.
+             *
+             * @param {Object} [options] Attributes to set on the email.
+             * @param {Array} [options.outbound_email_id] The email account to
+             * use to send the email.
+             * @param {Array} [options.to] The recipients in the To field.
+             * @param {Array} [options.cc] The recipients in the CC field.
+             * @param {Array} [options.bcc] The recipients in the BCC field.
+             * @param {string} [options.name] The email's subject.
+             * @param {string} [options.description] The email's plain-text
+             * body.
+             * @param {string} [options.description_html] The email's HTML
+             * body.
+             * @param {Array} [options.attachments] The email's attachments.
+             * @param {Data.Bean} [options.related] The record to which the
+             * email is related. The model is cloned so the original model
+             * is not modified.
+             * @param {Array} [options.team_name] The teams assigned to the
+             * email.
+             * @param {string} [options.assigned_user_id] The ID of the
+             * assigned user.
+             * @param {string} [options.assigned_user_name] The name of the
+             * assigned user.
+             * @param {boolean} [options.skip_prepopulate_with_case] Prevent
+             * prepopulating case data in the email.
              */
             addEmailOptions: function(options) {
                 this.emailOptions = this.emailOptions || {};
                 options = options || {};
 
-                if (options.related) {
-                    options.related = this._cloneRelatedModel(options.related);
+                // Ignore the related bean if it doesn't have a module.
+                if (options.related && !options.related.module) {
+                    options.related = undefined;
                 }
 
                 this.emailOptions = _.extend({}, this.emailOptions, options);
+
+                // Removes undefined key/value pairs.
+                this.emailOptions = _.reduce(this.emailOptions, function(memo, value, key) {
+                    if (!_.isUndefined(value)) {
+                        memo[key] = value;
+                    }
+
+                    return memo;
+                }, {});
             },
 
             /**
              * Returns a copy of the related model for adding to email options
              *
-             * @param model
+             * @param {Data.Bean} model
              */
             _cloneRelatedModel: function(model) {
-                var relatedModel;
-
-                if (model && model.module) {
-                    relatedModel = app.data.createBean(model.module);
-                    relatedModel.set(app.utils.deepCopy(model.attributes));
-                }
-
-                return relatedModel;
+                return app.data.createBean(model.module, app.utils.deepCopy(model));
             },
 
             /**
@@ -152,21 +287,25 @@
              * Build a mailto: url using the given options
              *
              * @param {Object} [options] Optional email field values to pass to the email client
-             *   Accepted attributes: to_addresses (array), cc_addresses (array), bcc_addresses (array), subject, html_body
+             * @param {Array} [options.to]
+             * @param {Array} [options.cc]
+             * @param {Array} [options.bcc]
+             * @param {string} [options.name] Subject
+             * @param {string} [options.description] Text Body
              */
             _buildMailToURL: function(options) {
                 var mailToUrl = 'mailto:',
                     formattedOptions = {},
                     queryParams = [];
 
-                if (options.to_addresses) {
-                    mailToUrl += this._formatRecipientsToString(options.to_addresses);
+                if (options.to) {
+                    mailToUrl += this._formatRecipientsToString(options.to);
                 }
 
-                formattedOptions.cc = this._formatRecipientsToString(options.cc_addresses);
-                formattedOptions.bcc = this._formatRecipientsToString(options.bcc_addresses);
-                formattedOptions.subject = options.subject;
-                formattedOptions.body = options.text_body;
+                formattedOptions.cc = this._formatRecipientsToString(options.cc);
+                formattedOptions.bcc = this._formatRecipientsToString(options.bcc);
+                formattedOptions.subject = options.name;
+                formattedOptions.body = options.description;
 
                 _.each(['cc', 'bcc', 'subject', 'body'], function(option) {
                     var param;
@@ -193,64 +332,23 @@
              * @private
              */
             _formatRecipientsToString: function(recipients) {
-                var emailDelim = ',',
-                    emails = [],
-                    email;
+                var emails = [];
 
-                if (_.isArray(recipients)) {
-                    _.each(recipients, function(recipient) {
-                        //recipient could just be a string
-                        if (_.isString(recipient)) {
-                            emails.push(recipient);
+                recipients = recipients || [];
 
-                        //recipient could be an object with email attribute
-                        } else if (recipient.email) {
-                            emails.push(recipient.email);
-
-                        //recipient could be an object with bean that may contain an email address
-                        } else if (recipient.bean) {
-                            //attempt to pull primary (if valid) or first valid email on bean
-                            email = this._retrieveEmailAddressFromModel(recipient.bean);
-                            if (email) {
-                                emails.push(email);
-                            }
-                        }
-                    }, this);
-                } else {
-                    emails.push(recipients);
+                if (!_.isArray(recipients)) {
+                    recipients = [recipients];
                 }
 
-                return emails.join(emailDelim);
-            },
+                _.each(recipients, function(recipient) {
+                    var email = getEmailAddress(recipient);
 
-            /**
-             * Pick an email address off the model
-             * Will attempt to grab the primary first
-             * Will grab first valid email address in the list if primary is opt-out or invalid
-             *
-             * @param model
-             * @returns {string}
-             * @private
-             */
-            _retrieveEmailAddressFromModel: function(model) {
-                var emails = model.get('email');
-                if (_.isUndefined(emails)) {
-                    // need to include fallback, since in a 6.7 where a module is modified using Studio, we have 'email1' in custom files
-                    return model.get('email1');
-                }
-                var email,
-                    isValidEmail = function(email) {
-                        return (!_.isUndefined(email) &&
-                            !_.isEmpty(email.email_address) &&
-                            email.opt_out !== true &&
-                            email.invalid_email !== true);
-                    },
-                    isValidPrimaryEmail = function(email) {
-                        return isValidEmail(email) && email.primary_address;
-                    };
+                    if (email.get('email_address')) {
+                        emails.push(email.get('email_address'));
+                    }
+                }, this);
 
-                email = _.find(emails, isValidPrimaryEmail) || _.find(emails, isValidEmail) || {};
-                return email.email_address;
+                return emails.join(',');
             },
 
             /**
@@ -262,8 +360,9 @@
              * @private
              */
             _retrieveEmailOptions: function($link) {
-                var optionsFromLink = $link.data() || {},
-                    optionsFromController = this.emailOptions || {};
+                var optionsFromLink = $link.data() || {};
+                var optionsFromController = this.emailOptions || {};
+                var options = {};
 
                 // allow the component implementing this plugin to override optionsFromLink
                 // allows us to pass more complex data like models, which are not easily
@@ -272,24 +371,155 @@
                     optionsFromLink = this._retrieveEmailOptionsFromLink($link);
                 }
 
-                return _.extend({}, optionsFromController, optionsFromLink);
+                options = _.extend(options, optionsFromController, optionsFromLink);
+
+                if (options.related) {
+                    options.related = this._cloneRelatedModel(options.related);
+                }
+
+                return options;
+            },
+
+            /**
+             * Updates all the links in the view with the proper href from the current model
+             */
+            updateEmailLinks: function() {
+                var self = this;
+                var $emailLinks = this.$('a[data-action="email"]');
+
+                $emailLinks.each(function() {
+                    var options = self._retrieveEmailOptions($(this));
+                    var href = self._getEmailHref(options);
+                    $(this).attr('href', href);
+                });
             },
 
             /**
              * @inheritdoc
-             * On render, modify the href appropriately for the correct email client
+             *
+             * On render, set each email link's href attribute to a mailto for
+             * users that use an external email client and javascript:void(0)
+             * for users that use Sugar's email compose.
+             *
+             * On init, set up a listener for changes to the component's model
+             * that updates the email options on those changes. Some components
+             * are in child context's, like subpanels, and use the parent
+             * context's model.
+             *
+             * A component can implement any of the following methods to
+             * customize what data is provided to the plugin. Each method takes
+             * a model as a parameter. That model is the same model that the
+             * plugin is using to gather data. Components should make sure they
+             * use this model when producing the value they give to the plugin.
+             * Return `undefined` to prevent an email option from being set.
+             *
+             * @example
+             * emailOptionTo
+             * Returns an array of recipients to be added to the email's To
+             * field.
+             *
+             * @example
+             * emailOptionCc
+             * Returns an array of recipients to be added to the email's CC
+             * field.
+             *
+             * @example
+             * emailOptionBcc
+             * Returns an array of recipients to be added to the email's BCC
+             * field.
+             *
+             * @example
+             * emailOptionSubject
+             * Returns a string to be used as the email's subject.
+             *
+             * @example
+             * emailOptionDescription
+             * Returns a string to be used as the email's plain-text body.
+             *
+             * @example
+             * emailOptionDescriptionHtml
+             * Returns a string to be used as the email's HTML body.
+             *
+             * @example
+             * emailOptionAttachments
+             * Returns an array of attachments to be attached to the email.
+             *
+             * @example
+             * emailOptionRelated
+             * Returns a bean to be used as the email's related record.
+             *
+             * @example
+             * emailOptionTeams
+             * Returns an array of teams to be used as the email's teams.
              */
-            onAttach: function () {
-                this.on('render', function() {
-                    var self = this,
-                        $emailLinks = this.$('a[data-action="email"]');
+            onAttach: function() {
+                var updateEmailOptions = _.bind(function(model) {
+                    var options = {};
 
-                    $emailLinks.each(function() {
-                        var options = self._retrieveEmailOptions($(this)),
-                            href = self._getEmailHref(options);
-                        $(this).attr('href', href);
-                    });
+                    if (_.isFunction(this.emailOptionTo)) {
+                        options.to = this.emailOptionTo(model);
+                    }
+
+                    if (_.isFunction(this.emailOptionCc)) {
+                        options.cc = this.emailOptionCc(model);
+                    }
+
+                    if (_.isFunction(this.emailOptionBcc)) {
+                        options.bcc = this.emailOptionBcc(model);
+                    }
+
+                    if (_.isFunction(this.emailOptionSubject)) {
+                        options.name = this.emailOptionSubject(model);
+                    }
+
+                    if (_.isFunction(this.emailOptionDescription)) {
+                        options.description = this.emailOptionDescription(model);
+                    }
+
+                    if (_.isFunction(this.emailOptionDescriptionHtml)) {
+                        options.description_html = this.emailOptionDescriptionHtml(model);
+                    }
+
+                    if (_.isFunction(this.emailOptionAttachments)) {
+                        options.attachments = this.emailOptionAttachments(model);
+                    }
+
+                    if (_.isFunction(this.emailOptionRelated)) {
+                        options.related = this.emailOptionRelated(model);
+                    }
+
+                    if (_.isFunction(this.emailOptionTeams)) {
+                        options.team_name = this.emailOptionTeams(model);
+                    }
+
+                    this.addEmailOptions(options);
                 }, this);
+
+                this.on('init', function() {
+                    var self = this;
+                    var context = this.context.parent || this.context;
+                    var model = context.get('model');
+                    var events = [
+                        'change',
+                        'change:from_collection',
+                        'change:to_collection',
+                        'change:cc_collection',
+                        'change:bcc_collection',
+                        'change:attachments_collection'
+                    ];
+                    var onChange = _.debounce(function(model) {
+                        updateEmailOptions(model);
+                        self.render();
+                    }, 200);
+
+                    if (model instanceof app.Bean) {
+                        this.listenTo(model, events.join(' '), onChange);
+                    }
+
+                    updateEmailOptions(model);
+                }, this);
+
+                this.on('render', this.updateEmailLinks, this);
             }
         });
     });

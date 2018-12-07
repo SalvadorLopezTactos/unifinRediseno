@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Musíte zadat číslo záznamu pro smazání výrobce.',
   'NTC_STATUS' => 'Nastavte status na NEAKTIVNÍ, abyste mohli odstranit tohoto výrobce z "dropdown" seznamu výrobců',
   'NTC_LIST_ORDER' => 'Nastavte pořadí ve kterém se tento výrobce zobrazí v "dropdown" seznamu výrobců',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Aktivní',
-    'Inactive' => 'Neaktivní',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Importovat výrobce',
 	'LBL_EDITLAYOUT' => 'Úprava rozvržení' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Řádky obchodu',

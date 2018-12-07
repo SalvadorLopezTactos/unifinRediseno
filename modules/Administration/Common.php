@@ -101,41 +101,37 @@ function create_field_label_all_lang($module, $key, $value, $overwrite = false)
  */
 function create_field_label($module, $language, $key, $value, $overwrite=false)
 {
-   $return_value = false;
-   $mod_strings = return_module_language($language, $module);
+    $mod_strings = return_module_language($language, $module);
 
-   if(isset($mod_strings[$key]) && !$overwrite)
-   {
-      $GLOBALS['log']->info("Tried to create a key that already exists: $key");
-   }
-   else
-   {
-      $mod_strings = array_merge($mod_strings, array($key => $value));
-      $dirname = "custom/modules/" . basename($module) . "/language";
+    if (isset($mod_strings[$key]) && !$overwrite) {
+        $GLOBALS['log']->info("Tried to create a key that already exists: $key");
+        return false;
+    }
 
-      if(SugarAutoLoader::ensureDir($dirname))
-      {
-         $filename = "$dirname/$language.lang.php";
-         if(is_file($filename) && filesize($filename) > 0){
-		    $old_contents = file_get_contents($filename);
-         }else{
-             $old_contents = '';
-         }
-         $contents =create_field_lang_pak_contents($old_contents, $key,
-         		$value, $language, $module);
-         if(!SugarAutoLoader::put($filename, $contents, true)) {
-             $GLOBALS['log']->fatal("Unable to write edited language pak to file: $filename");
-             return false;
-         }
-         return true;
-      }
-      else
-      {
-          $GLOBALS['log']->info("Unable to create dir: $dirname");
-      }
-   }
+    $dirname = 'custom/modules/' . basename($module) . '/language';
 
-   return false;
+    if (SugarAutoLoader::ensureDir($dirname)) {
+        $filename = "$dirname/$language.lang.php";
+
+        if (is_file($filename) && filesize($filename) > 0) {
+            $old_contents = file_get_contents($filename);
+        } else {
+            $old_contents = '';
+        }
+
+        $contents = create_field_lang_pak_contents($old_contents, $key, $value, $language, $module);
+
+        if (file_put_contents($filename, $contents) === false) {
+            $GLOBALS['log']->fatal("Unable to write edited language pak to file: $filename");
+            return false;
+        }
+
+        return true;
+    } else {
+        $GLOBALS['log']->info("Unable to create dir: $dirname");
+    }
+
+    return false;
 }
 
 /**
@@ -187,7 +183,7 @@ function save_custom_app_list_strings_contents($contents, $language, $cache_inde
     $dirname = 'custom/include/language';
     if(SugarAutoLoader::ensureDir($dirname)) {
         $filename = "$dirname/$language.lang.php";
-        if(!SugarAutoLoader::put($filename, $contents, true)) {
+        if (file_put_contents($filename, $contents) === false) {
             $GLOBALS['log']->fatal("Unable to write edited language pak to file: $filename");
         } else {
             $cache_key = $cache_index . '.' . $language;
@@ -295,8 +291,7 @@ function return_custom_app_list_strings_file_contents($language, $custom_filenam
 	if(!empty($custom_filename))
 		$filename = $custom_filename;
 
-	if (SugarAutoLoader::fileExists($filename))
-	{
+    if (file_exists($filename)) {
 		$contents = file_get_contents($filename);
 	}
 

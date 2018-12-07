@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => '更新 KBContent 文章。',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => '发布已核准的文章和过期的知识库文章。',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => '重建非规范化团队安全性数据',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => '间隔：',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch 队列工作计划',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => '移除诊断工具文件',
 'LBL_SUGARJOBREMOVETMPFILES' => '移除临时文件',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => '重建非规范化团队安全性数据',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => '运行每晚批量运行邮件市场活动',
 'LBL_ASYNCMASSUPDATE' => '执行异步大规模更新',

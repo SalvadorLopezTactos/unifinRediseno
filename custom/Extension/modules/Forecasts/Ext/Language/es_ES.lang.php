@@ -69,3 +69,5 @@ $mod_strings['LBL_FORECASTS_WORKSHEET_COMMIT_SUCCESS_TO'] = 'Ha comprometido su 
 $mod_strings['LBL_UNAUTH_FORECASTS'] = 'Acceso no autorizado a la configuración de Forecast.';
 $mod_strings['LBL_DASHLET_MY_FORECAST'] = 'Mi Forecast';
 $mod_strings['LBL_DASHLET_MY_TEAMS_FORECAST'] = 'Forecast de Mi Equipo';
+$mod_strings['LBL_IN_FORECAST'] = '';
+$mod_strings['LBL_QUOTA'] = '';

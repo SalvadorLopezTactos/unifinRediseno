@@ -10,9 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Sugarcrm\Sugarcrm\ProcessManager;
-
-
 /**
  * This class is here to provide functions to easily call in to the individual module api helpers
  */
@@ -114,6 +111,10 @@ class SugarBeanApiHelper
         if ($hasAccess || !empty($options['display_acl'])) {
             // if not an admin and the hashes differ, send back bean specific acl's
             $data['_acl'] = $this->getBeanAcl($bean, $fieldList);
+        }
+
+        if (!empty($options['args']['erased_fields'])) {
+            $data['_erased_fields'] = $bean->erased_fields ? $bean->erased_fields : [];
         }
 
         return $data;

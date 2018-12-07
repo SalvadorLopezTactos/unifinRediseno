@@ -12,7 +12,7 @@
 
 
 $mod_strings = array (
-    'LBL_MODULE_NAME' => 'العملية',
+    'LBL_MODULE_NAME' => 'العمليات',
     'LBL_MODULE_TITLE' => 'العملية',
     'LBL_MODULE_NAME_SINGULAR' => 'العملية',
     'LNK_LIST' => 'عرض العمليات',
@@ -39,6 +39,23 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_NOT_REGISTERED_ACTION'  => "إجراء غير مسجل",
     'LBL_PMSE_HISTORY_LOG_NO_YET_STARTED' => '(لم يبدأ حتى الآن)',
     'LBL_PMSE_HISTORY_LOG_FLOW' => 'تم تخصيصه لمتابعة المهمة',
+
+    'LBL_PMSE_HISTORY_LOG_START_EVENT' => "سجل %s a(n) %s الذي تسبب في إطلاق سير العمل المتقدم لعملية رقم %s",
+    'LBL_PMSE_HISTORY_LOG_GATEWAY'  => "تم تقييم %s %s %s وتوجيهه إلى المهمة (المهام) التالية",
+    'LBL_PMSE_HISTORY_LOG_EVENT'  => "%s الحدث %s كان %s",
+    'LBL_PMSE_HISTORY_LOG_END_EVENT'  => "النهاية",
+    'LBL_PMSE_HISTORY_LOG_CREATED'  => "تم الإنشاء",
+    'LBL_PMSE_HISTORY_LOG_MODIFIED'  => "تم التعديل",
+    'LBL_PMSE_HISTORY_LOG_STARTED'  => "تم البدء",
+    'LBL_PMSE_HISTORY_LOG_PROCESSED'  => "تمت المعالجة",
+    'LBL_PMSE_HISTORY_LOG_ACTIVITY_SELF_SERVICE'  => "النشاط %s على السجل %s كان متاحًا للخدمة الذاتية",
+    'LBL_PMSE_HISTORY_LOG_ACTIVITY'  => "%s النشاط %s على السجل %s",
+    'LBL_PMSE_HISTORY_LOG_ASSIGNED'  => "تم تعيينه",
+    'LBL_PMSE_HISTORY_LOG_ROUTED'  => "تم توجيهه",
+    'LBL_PMSE_HISTORY_LOG_ACTION'  => "تمت معالجة %s الإجراء s %s على السجل %s",
+    'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "تم تعيين رقم العملية %s%s له السجل %s بواسطة %s الإجراء %s",
+    'LBL_PMSE_HISTORY_LOG_ON'  => "على",
+    'LBL_PMSE_HISTORY_LOG_AND'  => "و",
 
     'LBL_PMSE_LABEL_APPROVE' => 'موافقة',
     'LBL_PMSE_LABEL_REJECT' => 'رفض',
@@ -95,7 +112,7 @@ $mod_strings = array (
     'LBL_STATUS_ERROR' => 'خطأ في العمليات',
 
     'LBL_PMSE_TITLE_PROCESSESS_LIST'  => 'إدارة العمليات',
-    'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'العمليات بدون متابع',
+    'LBL_PMSE_TITLE_UNATTENDED_CASES' => 'عمليات غير مراقبة',
     'LBL_PMSE_TITLE_REASSIGN' => 'تغيير مالك السجل',
     'LBL_PMSE_TITLE_AD_HOC' => 'إعادة تعيين النشاط',
     'LBL_PMSE_TITLE_ACTIVITY_TO_REASSIGN' => "إعادة تعيين النشاط",

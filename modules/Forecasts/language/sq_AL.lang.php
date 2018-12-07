@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Paneli i parashikimeve',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Parashikimet',
     'LBL_MODULE_NAME_SINGULAR' => 'Parashikim',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'ID e produktit',
     'LBL_QUOTA_ID' => 'ID e ofertës',
     'LBL_VERSION' => 'Versioni',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Fshih shiritin e legjendës',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Shfaq shiritin e legjendës',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Fshih rreshtin e legjendës',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Shfaq rreshtin e legjendës',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Gabim: Përdoruesi {0} nuk ka qasje menaxheri për të kërkuar parashikime për {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Data e fillimit të vitit fiskal',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfiguro periudhën kohore që do të përdoret në modulin e parashikimeve. <br /><br />Ju lutem vini re se parametrat e periudhës kohore nuk mund të ndryshohen pas instalimit fillestar. <br /><br />Filloni duke zgjedhur data e fillimit e vitit tuaj fiskal. Pastaj zgjidhni llojin e afatit të parashikimit. Gama e datave për afatet do të llogaritet automatikisht bazuar në zgjedhjen tuaj. Periudha nën kohaa është baza për fletën e punës së parashikimit. <br /><br />E ardhmja mund të shikohet dhe periudhat e kaluara kohore do të përcaktojë numrin e nën-periudhave të dukshme në modulin e parashikimeve. Përdoruesit janë në gjendje për të parë dhe të redaktuar numrat e parashikimit të nën-periudhave të dukshme.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfiguro mënyrën e preferuar të kategorizimit të {{forecastByModule}}. <br><br>Ki parasysh se cilësimet e gamës nuk mund të ndryshohen pas kryerjes së angazhimit të parë. Për instancat e aktualizuara, cilësimi i gamës është bllokuar me të dhënat ekzistuese të parashikimit.<br><br>Mund të zgjedhësh dy ose më shumë kategori të bazuara në gamat e probabiliteteve ose mund të krijosh kategori të pabazuara në probabilitet. <br><br>Majtas kategorive të tua të personalizuara ka kuti zgjedhjeje; përdori ato për të përcaktuar gamat që do të përfshihen në vlerën që është parashikuar dhe i është raportuar menaxherëve. <br><br>Përdoruesi mund ta ndryshojë manualisht statusin "përfshi/përjashto" dhe kategorinë e {{forecastByModule}} nga fleta e punës.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Konfiguro mënyrën e klasifikimit të {{forecastByModule}}. <br><br>Ki parasysh se cilësimet e intervalit nuk mund të ndryshohen pas veprimit të parë. Për shembuj të përmirësuar, cilësimi i intervalit është i bllokuar me të dhënat ekzistuese të parashikimit.<br><br>Mund të zgjidhen dy ose më shumë kategori në varësi të intervaleve të mundësive ose mund të krijohen kategori që nuk varen nga mundësitë. <br><br>Në të majtë të kategorive të personalizuara, ka kuti kontrolli; përdori për të vendosur se cilat intervale do të përfshihen në sasinë e parashikimeve të konfirmuar dhe të raportuar te menaxherët. <br><br>Përdoruesi mund të ndryshojë/përjashtojë manualisht statusin dhe kategorinë e {{forecastByModule}} nga fleta e punës.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Zgjidhni kolonat ju do të donit që përdoruesit të plotësojnë për parashikimet e tyre të çdo {{forecastByModuleSingular}}. Ju lutem vini re shuma me gjasa është e lidhur me shumën e treguar në {{forecastByModule}}; për këtë arsye kolona të ngjarë nuk mund të fshihet.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Zgjidh cilat kolona që ju do të donit për të parë në modulin parashikimi. Lista e fushave do të kombinohet me fletën e punës dhe do të lejojë përdoruesit për të zgjedhur se si të konfiguroni pamjen e saj.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Unë jam një placeholder për parashikim se si të tekstoj!',

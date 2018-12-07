@@ -13,9 +13,9 @@ $mod_strings = array(
     'LBL_MODULE_NAME' => 'Balises',
     'LBL_GENERIC_LINK' => 'Objets liés',
     'LBL_NAME_LOWER' => 'Nom de balise en minuscules',
-    'LNK_NEW_TAG' => 'Créer Tag',
-    'LNK_TAG_LIST' => 'Afficher Tags',
-    'LNK_IMPORT_TAGS' => 'Importer les tags',
+    'LNK_NEW_TAG' => 'Créer une balise',
+    'LNK_TAG_LIST' => 'Afficher les balises',
+    'LNK_IMPORT_TAGS' => 'Importer les balises',
     'LBL_DUPLICATES_FOUND' => 'Dupliquer la balise trouvée. Veuillez cliquer sur Annuler pour essayer à nouveau ou sélectionnez une balise existante ci-dessous.',
     'LBL_EDIT_DUPLICATE_FOUND' => 'La balise trouvée est un doublon. Veuillez renommer la balise, puis réessayez.',
     // Dynamic subpanels, OOTB

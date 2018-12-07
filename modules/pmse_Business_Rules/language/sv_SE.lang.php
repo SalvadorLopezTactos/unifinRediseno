@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Affärsprocessregler',
   'LBL_MODULE_TITLE' => 'Affärsprocessregler',
   'LBL_MODULE_NAME_SINGULAR' => 'Affärsprocessregel',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Villkor',
     'LBL_PMSE_LABEL_RETURN' => 'Återgå',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Slutsatser',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Ändra Fält',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Returnera värdet',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Lägg till villkor',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Lägg till slutsats',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Lägg till rad',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Ta bort kolumn',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Ta bort villkor',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Ta bort slutsats',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Ta bort kolumndata',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Ja',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Nej',

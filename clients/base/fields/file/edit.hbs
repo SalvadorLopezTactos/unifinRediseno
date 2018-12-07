@@ -12,14 +12,16 @@
 --}}
 {{#if value.length}}
     {{#each value}}
-        <div class="row-fluid file-field">
+        <div class="file-field">
+            <div class="square-pill">
             {{#eq mimeType 'image'}}
-                <a class="span10 ellipsis_inline" data-placement="bottom" title="{{name}}" href="{{url}}" target="_blank">{{name}}</a>
+                <a data-placement="bottom" title="{{name}}" href="{{url}}" target="_blank">{{name}}</a>
             {{/eq}}
             {{#notEq mimeType 'image'}}
-                <a class="span10 ellipsis_inline" data-placement="bottom" title="{{name}}" href="javascript:void(0);" data-url="{{url}}" data-action="download">{{name}}</a>
+                <a data-placement="bottom" title="{{name}}" href="javascript:void(0);" data-url="{{url}}" data-action="download">{{name}}</a>
             {{/notEq}}
-            <button class="btn fa fa-times-circle" data-action="delete"></button>
+                <span class="fa fa-times" data-action="delete"></span>
+            </div>
         </div>
     {{/each}}
 {{else}}

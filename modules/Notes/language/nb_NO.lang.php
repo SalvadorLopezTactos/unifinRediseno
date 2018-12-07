@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Dashbord for notatliste',
+
     'ERR_DELETE_RECORD' => 'Du må oppgi et registernummer for å slette denne bedriften.',
     'LBL_ACCOUNT_ID' => 'Bedrift-ID:',
     'LBL_CASE_ID' => 'Sak-ID:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Beskrivelse',
     'LBL_EMAIL_ADDRESS' => 'E-postadresse:',
     'LBL_EMAIL_ATTACHMENT' => 'E-postvedlegg',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'E-postvedlegg for',
     'LBL_FILE_MIME_TYPE' => 'Mimetype',
+    'LBL_FILE_EXTENSION' => 'Filtype',
+    'LBL_FILE_SOURCE' => 'Filkilde',
+    'LBL_FILE_SIZE' => 'Filstørrelse',
     'LBL_FILE_URL' => 'Fil-URL',
     'LBL_FILENAME' => 'Vedlegg:',
     'LBL_LEAD_ID' => 'Emne-ID:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Mulighets-ID:',
     'LBL_PARENT_ID' => 'Opphavs-ID:',
     'LBL_PARENT_TYPE' => 'Opphavstype:',
+    'LBL_EMAIL_TYPE' => 'E-posttype',
+    'LBL_EMAIL_ID' => 'E-post-ID',
     'LBL_PHONE' => 'Telfonnummer:',
     'LBL_PORTAL_FLAG' => 'Vis i portal?',
     'LBL_EMBED_FLAG' => 'Kapsle inn i e-post?',

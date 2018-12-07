@@ -62,6 +62,8 @@ class PMSERoundRobin extends PMSEScriptTask
                     $historyData->savePreData('assigned_user_id', $bean->assigned_user_id);
                     $bean->assigned_user_id = $nextUser;
                     $historyData->savePostData('assigned_user_id', $nextUser);
+
+                    /** @var TeamSet $teamSetBean */
                     $teamSetBean = BeanFactory::newBean('TeamSets');
                     $teams = $teamSetBean->getTeams($bean->team_set_id);
                     if (!array_key_exists($act_assign_team, $teams)) {

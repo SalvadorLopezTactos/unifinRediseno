@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Pulpit list spotkań',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Pulpit rekordów spotkań',
+
 	'ERR_DELETE_RECORD' => 'Aby usunąć spotkanie, należy określić numer rekordu.',
 	'LBL_ACCEPT_THIS'=>'Zaakceptować?',
 	'LBL_ADD_BUTTON'=> 'Dodaj',

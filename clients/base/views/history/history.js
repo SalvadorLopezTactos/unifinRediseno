@@ -58,7 +58,7 @@
      * @protected
      */
     _getFilters: function(index) {
-        var filterStr = app.date().subtract(this.settings.get('filter'), 'days').format('YYYY-MM-DD');
+        var filterStr = app.date().subtract(this.settings.get('filter'), 'days').formatServer(true);
 
         var tab = this.tabs[index],
             filter = {},
@@ -102,23 +102,34 @@
      * @param params
      */
     archiveEmail: function(event, params) {
-        var self = this;
-        app.drawer.open({
-            layout: 'archive-email',
-            context: {
-                create: true,
-                module: 'Emails',
-                prepopulate: {
-                    related: this.model,
-                    to_addresses: [{bean: this.model}]
+        var parentName = app.utils.getRecordName(this.model);
+
+        app.utils.openEmailCreateDrawer(
+            'create',
+            {
+                related: this.model,
+                // Don't set email_address_id. It will be set when the email is
+                // archived.
+                to: app.data.createBean('EmailParticipants', {
+                    _link: 'to',
+                    parent: _.extend({type: this.model.module}, app.utils.deepCopy(this.model)),
+                    parent_type: this.model.module,
+                    parent_id: this.model.get('id'),
+                    parent_name: parentName
+                })
+            },
+            _.bind(function(model) {
+                var links;
+
+                if (model) {
+                    this.layout.reloadDashlet();
+                    links = app.utils.getLinksBetweenModules(this.context.parent.get('module'), 'Emails');
+
+                    _.each(links, function(link) {
+                        this.context.parent.trigger('panel-top:refresh', link.name);
+                    }, this);
                 }
-            }
-        }, function(model) {
-            if (model) {
-                self.layout.reloadDashlet();
-                self.context.parent.trigger('panel-top:refresh', 'emails');
-                self.context.parent.trigger('panel-top:refresh', 'archived_emails');
-            }
-        });
+            }, this)
+        );
     }
 })

@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'لوحة معلومات قائمة الاجتماعات',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'لوحة معلومات سجل الاجتماعات',
+
 	'ERR_DELETE_RECORD' => 'يجب أن يتم تحديد رقم السجل لحذف الاجتماع.',
 	'LBL_ACCEPT_THIS'=>'قبول؟',
 	'LBL_ADD_BUTTON'=> 'إضافة',

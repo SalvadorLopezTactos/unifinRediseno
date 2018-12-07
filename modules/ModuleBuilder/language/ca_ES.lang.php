@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Està segur que desitja eliminar aquesta relació?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Això farà la relació permanent. Està segur que desitja desplegar aquesta relació?',
 'LBL_CONFIRM_DONT_SAVE' => 'Hi ha canvis pendents de ser guardats, desitja guardar-los ara?',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Configurar el camp per a que siguin cerques de text complet.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Impuls és el procés de millorar la rellevància dels camps d&#39;un registre.<br/>Els camps amb un nivell més alt d&#39;impuls rebran un nivell d&#39;impuls més elevat quan es faci la cerca. Quan es realitza una cerca, els registres coincidents que contenen camps amb més pes apareixeran a la part més alta dels resultats de la cerca.<br />El valor per defecte és 1.0 que correspon a un impuls neutre. Per aplicar un impuls positiu, s&#39;accepta qualsevol valor Float superior a 1. Per a un impuls negatiu, feu servir valors inferiors a 1. Per exemple, un valor d&#39;1,35 impulsarà positivament un camp en un 135%. Si es fa servir un valor de 0,60, s&#39;aplicarà un impuls negatiu.<br />Tingueu en compte que en las versions anteriors s&#39;havia de tornar a indexar completament la cerca de text complet. Això ja no és necessari.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Sí</b>: El camp serà inclòs en una operació d&#39;importació.<br><b>No</b>: El camp no serà inclò en una importació.<br><b>Requerit</b>: Ha de suministrar-se un valor per el camp en tota importació.',
+'LBL_POPHELP_PII'=>'Aquest camp es marcarà automàticament per fer-ne una auditoria i estarà disponible a la vista d&#39;informació personal.<br>El camps d&#39;informació personal també es poden eliminar permanentment quan el registre està relacionat amb una sol·licitud d&#39;eliminació per la privacitat de dades.<br>L&#39;eliminació es fa a través del módul de privacitat de dades i la poden fer els administradors o usuaris amb una funció de responsable de privacitat de dades.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Introdueixi un número per l&#39;Amplada, com a mida en píxels.<br>La imatge pujada serà esclada a aquesta Amplada.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Introdueixi un número per l&#39;Alçada, com a mida en píxels.<br>La imatge pujada serà escalada a aquesta Alçada.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

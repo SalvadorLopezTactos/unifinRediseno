@@ -55,7 +55,7 @@ $mod_strings = array(
     'ERROR_MANIFEST_TYPE'                       => 'У Manifest-файлі повинен бути вказаний тип пакета.',
     'ERROR_PACKAGE_TYPE'                        => 'У Manifest-файлі вказано невідомий тип пакета',
     'ERROR_VERSION_INCOMPATIBLE'                => 'Завантажений файл не сумісний з встановленою версією Sugar Suite:',
-    'ERROR_FLAVOR_INCOMPATIBLE'                 => 'Завантажений файл не сумісний з встановленою версією Sugar Suite:',
+    'ERROR_FLAVOR_INCOMPATIBLE'                 => 'Завантажений файл не сумісний зі встановленою версією Sugar (Professional, Enterprise або Ultimate): %s',
 
     'ERROR_UW_CONFIG_DB'                        => 'Помилка збереження конфігураційної змінної% s в БД (ключ% s, значення% s)',
     'ERR_NOT_ADMIN'                             => "У Вас немає доступу до адміністрування.",
@@ -98,7 +98,7 @@ $mod_strings = array(
 	'LBL_UW_COMPLIANCE_MYSQL'					=> 'Мінімальна версія MySQL',
     'LBL_UW_COMPLIANCE_DB'                      => 'Мінімальна версія бази даних',
 	'LBL_UW_COMPLIANCE_PHP_INI'					=> 'Розташування php.ini',
-	'LBL_UW_COMPLIANCE_PHP_VERSION'				=> 'Мінімальна версія PHP',
+    'LBL_UW_COMPLIANCE_PHP_VERSION'             => 'Версія PHP',
 	'LBL_UW_COMPLIANCE_SAFEMODE'				=> 'Налаштування PHP: безпечний режим',
 	'LBL_UW_COMPLIANCE_TITLE'					=> 'Перевірка налаштувань сервера',
 	'LBL_UW_COMPLIANCE_TITLE2'					=> 'виявлені налаштування',
@@ -243,7 +243,6 @@ $mod_strings = array(
 	'LBL_UW_DROP_SCHEMA_METHOD'					=> 'Метод очищення старих схем',
 	'LBL_UW_SHOW_OLD_SCHEMA_TO_DROP'			=> 'Показати старі схеми які можуть бути видалені',
 	'LBL_UW_SKIPPED_QUERIES_ALREADY_EXIST'      => 'Пропущені запити',
-	'LBL_INCOMPATIBLE_PHP_VERSION'              => 'Необхіднв PHP версії 5 або вище.',
 	'ERR_CHECKSYS_PHP_INVALID_VER'      => 'Ваша версія PHP не підтримується в Sugar. Вам необхідно буде встановити версію, яка підтримується програмою Sugar. Будь ласка, зверніться до Матриці Сумісності в нотатках до Версії, щоб дізнатися, які версії PHP підтримуються. Ваша поточна версія:',
 	'LBL_BACKWARD_COMPATIBILITY_ON' 			=> 'Включений режим зворотної сумісності PHP. Для продовження відключіть параметр zend.ze1_compatibility_mode',
 	//including some strings from moduleinstall that are used in Upgrade
@@ -260,8 +259,6 @@ $mod_strings = array(
 	'LBL_ML_INSTALL'=>'Встановити',
 	//adding the string used in tracker. copying from homepage
 	'LBL_HOME_PAGE_4_NAME' => 'Трекер',
-	'LBL_CURRENT_PHP_VERSION' => '(Ваша поточна php версія',
-	'LBL_RECOMMENDED_PHP_VERSION' => 'Рекомендована версія PHP - 5.2.x)',
 	'LBL_MODULE_NAME' => 'Майстер оновлення',
 	'LBL_MODULE_NAME_SINGULAR' => 'Майстер оновлення',
 	'LBL_UPLOAD_SUCCESS' => 'Завантажений файл не сумісний з встановленою версією Sugar:',

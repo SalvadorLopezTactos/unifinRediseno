@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => '预测仪表板',
+
     //module strings.
     'LBL_MODULE_NAME' => '预测',
     'LBL_MODULE_NAME_SINGULAR' => '销售预测',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => '产品编号：',
     'LBL_QUOTA_ID' => '定额编号',
     'LBL_VERSION' => '版本',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => '隐藏条形图图例',
+    'LBL_CHART_BAR_LEGEND_OPEN' => '显示条形图图例',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => '隐藏线形图图例',
+    'LBL_CHART_LINE_LEGEND_OPEN' => '显示线形图图例',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Error: user {0} does not have manager access to request forecasts for {1}错误：用户{0}没有管理员权限请求 {1} 的销售预测',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => '财政年度开始日期：',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => '配置将在预测模块在使用的时间段。<br><br>请注意，初始设置后无法更改时间段设置。<br><br>首先，通过选择会计年度的开始日期。然后选择要预测时间段的类型。日期范围会根据您的选择自动计算时间期间。子时间周期是预测工作表的基础。<br><br>在可见的未来和过去的时间段将决定可见分时段预测模块的数量。用户能够查看和编辑在可见子期间的预测数字。',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '配置您要对 {{forecastByModule}} 进行分类的方式。<br><br>请注意，第一次提交后无法更改范围设置。对于升级的实例，范围设置与现有预测数据是一同锁定的。<br><br>您可以选择基于概率范围的两个或两个以上类别，或创建不以概率为基础的类别。<br><br> 您的自定义类别左侧有三个复选框；利用这些复选框确定哪些范围将包含在预测承诺金额内，并汇报给经理。<br><br>用户可以从其工作单中手动更改包含/排除状态和 {{forecastByModule}} 类别。',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => '配置您希望对 {{forecastByModule}} 进行分类的方式。<br><br>请注意，在第一次提交之后, “范围”设置将不能再更改。对于升级后的实例，“范围”设置与现有“预测”数据一起锁定。<br><br>您可以根据概率范围选择两个或多个类别，或者创建不基于概率的类别。<br><br>在自定义类别的左边，有一些复选框；使用这些复选框来确定将在提交和报告给经理的“预测”金额中包括哪些范围。<br><br>用户可以从工作表中手动更改包含/排除状态和 {{forecastByModule}} 类别。',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => '选择您想让用户填写的每个 {{forecastByModuleSingular}} 预测列。请注意可能的金额会绑定{{forecastByModule}}中显示的金额，原因是不能隐藏这个可能列。',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => '选择您想在预测模块中查看哪些列。将结合工作表字段列表，并允许用户选择如何配置其视图。',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => '我是预测帮助文本的一个占位符',

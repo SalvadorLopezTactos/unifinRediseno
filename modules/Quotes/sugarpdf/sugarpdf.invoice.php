@@ -21,7 +21,7 @@ class QuotesSugarpdfInvoice extends QuotesSugarpdfStandard{
         $quote[1]['TITLE'] = $mod_strings['LBL_PDF_QUOTE_DATE'];
         $quote[2]['TITLE'] = $mod_strings['LBL_PURCHASE_ORDER_NUM'];
         $quote[3]['TITLE'] = $mod_strings['LBL_PAYMENT_TERMS'];
-        $quote[0]['VALUE']['value'] = format_number_display($this->bean->quote_num,$this->bean->system_id);
+        $quote[0]['VALUE']['value'] = format_number_display($this->bean->quote_num);
         $quote[1]['VALUE']['value'] = $timedate->nowDate();
  	$quote[2]['VALUE']['value'] = $this->bean->purchase_order_num;
         $quote[3]['VALUE']['value'] = $this->bean->payment_terms;

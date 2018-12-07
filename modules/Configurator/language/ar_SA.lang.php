@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'خادم Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'لائحة العناصر الفرعية في كل صفحة',
 	'LOG_MEMORY_USAGE'=>'استخدام ذاكرة السجل',
-	'LOG_SLOW_QUERIES'=>'سجل الاستعلامات البطيئة',
+    'LOG_SLOW_QUERIES' => 'سجل الاستعلامات البطيئة',
     'LOCK_HOMEPAGE_HELP'=>'تهدف هذه الإعدادات إلى منع<BR> 1) إضافة لوحه معلومات في الصفحات الرئيسية الجديدة ولوحه معلومات في الصفحة الرئيسية للوحدة، <BR>2) تخصيص مكان للوحه معلومات في الصفحات الرئيسية من خلال السحب والإفلات.',
     'CURRENT_LOGO'=>'الشعار الحالي:',
     'CURRENT_LOGO_HELP'=>'يظهر هذا الشعار في الجانب الأيسر من تذييل تطبيق Sugar.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'هذا هو الاسم الذي يظهر في شريط العناوين في المستعرض الخاص بك.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'تمكين/تعطيل رسائل البريد الإلكتروني من جهات الاتصال ذات الصلة (أو المرتبطة) لتظهر في لوحة البريد الإلكتروني الفرعية.',
 
-    'LBL_OC_STATUS'                     => 'حالة العملاء غير المتصلين الافتراضية',
-    'DEFAULT_OC_STATUS'                 => 'تمكين العملاء غير المتصلين بشكل افتراضي',
-    'LBL_OC_STATUS_DESC' => 'افحص هنا إذا كنت ترغب في وصول أي مستخدم للعملاء غير المتصلين.  وإلا فإنه يمكنك تكوين الوصول في مستوى المستخدم.',
     'SESSION_TIMEOUT' => 'مهلة جلسة عمل المدخل',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'مهلة جلسة عمل المدخل للإصدارات القديمة من مدخل Sugar متاحة في 6.5 والأقدم.',
     'UPLOAD_MAXSIZE_UNITS' => 'بايت',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'عنوان URL الخاص بتسجيل الدخول لـ SAML لا يمكن أن يكون قيمة فارغة',
     'ERR_EMPTY_SAML_CERT' => 'شهادة SAML لا يمكن أن تكون قيمة فارغة',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'لا يمكن أن يكون معرف SAML فارغًا',
     'ERR_SAML_LOGIN_URL' => 'عنوان URL الخاص بتسجيل الدخول لـ SAML غير صالح',
     'ERR_SAML_SLO_URL' => 'عنوان URL الخاص بـ SLO لـ SAML غير صالح',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'ينبغي أن يحتوي ملف PEM على مفتاح خاص',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'ينبغي أن يحتوي ملف PEM على شهادة x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'لا تطابق شهادة x.509 المقدمة المفتاح الخاص',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'سير النشاط',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'تمكين سير النشاط',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'تشغيل سير النشاط للتطبيق',
 );
 
 

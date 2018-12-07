@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Morate navesti broj zapisa da bi obrisali proizvođača.',
   'NTC_STATUS' => 'Podesi status na Neaktivno da bi se ovaj proizvođač uklonio iz padajuće liste proizvođača',
   'NTC_LIST_ORDER' => 'Podesite redosled po kome će se ovaj proizvođač pojaviti u listi proizvođača',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Aktivan',
-    'Inactive' => 'Neaktivan',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Uvezi proizvođače',
 	'LBL_EDITLAYOUT' => 'Izmeni raspored' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Stavke prihoda',

@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => 'تم الحذف',
   'LBL_EMAIL_ADDRESS'=>'عنوان البريد الإلكتروني',
   'LBL_CONTACTS_SYNC' => 'جهات الاتصال',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        'يمكن إنشاء الموظفين فقط في <a href="{0}" target="_blank">وحدة تحكم السحابة</a> لوضع IDM.',
 );
 
 

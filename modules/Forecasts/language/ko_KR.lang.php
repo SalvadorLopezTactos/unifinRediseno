@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => '예상 대시보드',
+
     //module strings.
     'LBL_MODULE_NAME' => '예측',
     'LBL_MODULE_NAME_SINGULAR' => '예측',
@@ -148,7 +151,7 @@ $mod_strings = array (
     'LBL_CURRENCY_RATE' => '환율',
     'LBL_BASE_RATE' => '기본율',
 
-    'LBL_QUOTA' => '쿼터',
+    'LBL_QUOTA' => '견적',
     'LBL_QUOTA_ADJUSTED' => '쿼터(조정)',
 
     'LBL_FORECAST_FOR'=>'다음 대상을 위한 예측 워크시트',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => '제품 ID',
     'LBL_QUOTA_ID' => '쿼터 ID',
     'LBL_VERSION' => '버전',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => '바 범례 숨기기',
+    'LBL_CHART_BAR_LEGEND_OPEN' => '바 범례 표시',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => '라인 범례 숨기기',
+    'LBL_CHART_LINE_LEGEND_OPEN' => '라인 범례 표시',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => '오류:사용자{0}는 {1} 예측 요청에 대한 매니저 액세스가 없습니다.',
@@ -218,9 +225,9 @@ $mod_strings = array (
 
     //Labels for worksheet items
     'LBL_EXPECTED_OPPORTUNITIES' => '예상 영업기회',
-    'LBL_DISPLAYED_TOTAL' => '표시 전체',
+    'LBL_DISPLAYED_TOTAL' => '표시되는 합계',
     'LBL_TOTAL' => '합계',
-    'LBL_OVERALL_TOTAL' => '전체 전체',
+    'LBL_OVERALL_TOTAL' => '전체 합계',
     'LBL_EDITABLE_INVALID' => '{0}에 유효하지 않은 값',
     'LBL_EDITABLE_INVALID_RANGE' => '값이 {0}과 {1} 사이여야 합니다.',
     'LBL_WORKSHEET_SAVE_CONFIRM_UNLOAD' => '작업계획안의 변경사항을 저장하지 않았습니다.',
@@ -260,7 +267,7 @@ $mod_strings = array (
     'LBL_PIPELINE_REVENUE' => '매출 파이프라인',
     'LBL_PIPELINE_OPPORTUNITIES' => '영업기회 파이프라인',
     'LBL_LOADING' => '로딩중입니다.',
-    'LBL_IN_FORECAST' => '예측에 포함',
+    'LBL_IN_FORECAST' => '예측 내용',
 
     // Actions Dropdown
     'LBL_ACTIONS' => '액션',

@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Security\Subject\Cli;
+
 require_once('include/workflow/workflow_utils.php');
 
 /**
@@ -18,9 +20,8 @@ require_once('include/workflow/workflow_utils.php');
  */
 class WorkFlowHandler {
 
-    public function __construct(&$focus, $event)
+    public function __construct(SugarBean $focus, $event)
     {
-
     	//Confirm we are not running populating seed data
     	if(isset($_SESSION['disable_workflow'])) return;
 

@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Offerter (skickas till)',
 	'LNK_ACCOUNT_REPORTS' => 'Organisationsrapporter',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokument',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Listpanel för konton',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Postpanel för konton',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagram',
 	'LBL_DEFAULT' => 'Vyer',

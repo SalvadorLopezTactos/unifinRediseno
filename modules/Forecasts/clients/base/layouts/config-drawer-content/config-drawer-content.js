@@ -29,7 +29,6 @@
 
     /**
      * @inheritdoc
-     * @override
      */
     _initHowTo: function() {
         var appLang = app.lang,
@@ -53,7 +52,6 @@
 
     /**
      * @inheritdoc
-     * @override
      */
     _switchHowToData: function(helpId) {
         switch(helpId) {

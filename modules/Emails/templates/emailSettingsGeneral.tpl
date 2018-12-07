@@ -19,18 +19,17 @@
 		</th>
 	</tr>
 	<tr>
-		<td  scope="row" width="20%">
+		<td scope="row" width="20%">
 			{$app_strings.LBL_EMAIL_SETTINGS_CHECK_INTERVAL}:
 		</td>
-		<td >
+		<td width="25%">
 			{html_options options=$emailCheckInterval.options selected=$emailCheckInterval.selected name='emailCheckInterval' id='emailCheckInterval'}
 		</td>
 		<td scope="row" width="20%">
-			{$app_strings.LBL_EMAIL_SIGNATURES}:
+			<a href="javascript:parent.SUGAR.App.router.navigate('#UserSignatures', {$smarty.ldelim}trigger: true{$smarty.rdelim})">{$mod_strings.LNK_EMAIL_SIGNATURE_LIST}</a>
 		</td>
-		<td >
-			{$signaturesSettings} {$signatureButtons} 
-        	<input type="hidden" name="signatureDefault" id="signatureDefault" value="{$signatureDefaultId}">
+		<td>
+			&nbsp;
 		</td>
 	</tr>
 	<tr>
@@ -40,12 +39,8 @@
 		<td >
 			<input class="checkbox" type="checkbox" id="sendPlainText" name="sendPlainText" value="1" {$sendPlainTextChecked} />
 		</td>
-		<td NOWRAP scope="row">
-		  {$mod_strings.LBL_SIGNATURE_PREPEND}:
-		</td>
-		<td NOWRAP>
-		<input type="checkbox" name="signature_prepend" {$signaturePrepend}>
-		</td>
+		<td NOWRAP scope="row"></td>
+		<td NOWRAP></td>
 	</tr>
 	<tr>
 		<td NOWRAP scope="row">
@@ -55,7 +50,7 @@
         	{html_options options=$charset.options selected=$charset.selected name='default_charset' id='default_charset'}
         </td>
 		<td NOWRAP scope="row">
-        	&nbsp;
+            &nbsp;
         </td>
 		<td NOWRAP>
         	&nbsp;

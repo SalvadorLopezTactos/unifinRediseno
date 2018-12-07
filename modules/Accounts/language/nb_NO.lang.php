@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Tilbud (Send Til)',
 	'LNK_ACCOUNT_REPORTS' => 'Vis bedriftsrapporter',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenter',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Dashbord for kontoliste',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Dashbord for kontooppføring',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagrammer',
 	'LBL_DEFAULT' => 'Oppsett',

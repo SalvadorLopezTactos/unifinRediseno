@@ -10,9 +10,15 @@
  */
 
 // $Id: customMySugarCharts.js 2010-12-01 23:11:36Z lhuynh $
+
+/**
+ * This chart engine is now deprecated. Use the sucrose chart engine instead.
+ * @deprecated This file will removed in a future release.
+ */
 initmySugarCharts = function(){
 
 SUGAR.mySugar.sugarCharts = function() {
+    (app || SUGAR.App).logger.warn('The Jit chart engine is deprecated.');
 
 var activeTab = activePage,
     charts = new Object();
@@ -25,7 +31,7 @@ var activeTab = activePage,
 				if(id != 'undefined'){
 					chartFound = true;
 					loadSugarChart(
-											 charts[activeTab][id]['chartId'], 
+											 charts[activeTab][id]['chartId'],
 											 charts[activeTab][id]['jsonFilename'],
 											 charts[activeTab][id]['css'],
 											 charts[activeTab][id]['chartConfig']
@@ -41,7 +47,7 @@ var activeTab = activePage,
 			for (id in json) {
 					if(json[id]['supported'] == "true") {
 						SUGAR.mySugar.sugarCharts.addToChartsArray(
-												 json[id]['chartId'], 
+												 json[id]['chartId'],
  												 json[id]['filename'],
 												 json[id]['css'],
 												 json[id]['chartConfig'],
@@ -50,16 +56,16 @@ var activeTab = activePage,
 				}
 		},
 		addToChartsArray: function(chartId,jsonFilename,css,chartConfig,activeTab) {
-			
+
 			if (charts[activeTab] == null){
 				charts[activeTab] = new Object();
 			}
 			charts[activeTab][chartId] = new Object();
 			charts[activeTab][chartId]['chartId'] = chartId;
-			charts[activeTab][chartId]['jsonFilename'] = jsonFilename;	
-			charts[activeTab][chartId]['css'] = css;	
-			charts[activeTab][chartId]['chartConfig'] = chartConfig;		
-	
+			charts[activeTab][chartId]['jsonFilename'] = jsonFilename;
+			charts[activeTab][chartId]['css'] = css;
+			charts[activeTab][chartId]['chartConfig'] = chartConfig;
+
 		}
 	}
 }();

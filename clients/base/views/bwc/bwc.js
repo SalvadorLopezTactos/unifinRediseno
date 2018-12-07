@@ -301,28 +301,109 @@
     },
 
     /**
+     * Opens the Compose Email drawer, passing in the parent model to which the
+     * email should be related, as well other prefills, like the subject and
+     * body.
+     *
+     * @param {Object} [options] Data for the email from the compose package.
+     * @param {Object} [options.subject] Populate the email with this subject.
+     * @param {Object} [options.body] Populate the email with this body.
+     * @param {Object} [options.to] Populate the email with these recipients.
+     * @param {Object} [options.cc] Populate the email with these recipients.
+     * @param {Object} [options.attachments] Populate the email with these
+     * attachments.
+     */
+    openComposeEmailDrawer: function(options) {
+        var prepopulate = {
+            related: this.context.get('model')
+        };
+
+        options = app.utils.deepCopy(options) || {};
+
+        if (!_.isEmpty(options.subject)) {
+            prepopulate.name = options.subject;
+        }
+
+        if (!_.isEmpty(options.body)) {
+            prepopulate.description_html = options.body;
+        }
+
+        _.each(['to', 'cc'], function(field) {
+            if (!_.isArray(options[field])) {
+                return;
+            }
+
+            prepopulate[field] = [];
+
+            _.each(options[field], function(data) {
+                var bean = app.data.createBean('EmailParticipants', {
+                    _link: field,
+                    email_address_id: data.email_address_id,
+                    email_address: data.email_address
+                });
+
+                if (data.parent_type && data.parent_id) {
+                    bean.set({
+                        parent: {
+                            _acl: {},
+                            type: data.parent_type,
+                            id: data.parent_id,
+                            name: data.parent_name || ''
+                        },
+                        parent_type: data.parent_type,
+                        parent_id: data.parent_id,
+                        parent_name: data.parent_name || ''
+                    });
+                }
+
+                prepopulate[field].push(bean);
+            });
+        });
+
+        if (!_.isEmpty(options.attachments)) {
+            prepopulate.attachments = [];
+
+            _.each(options.attachments, function(attachment) {
+                var bean = app.data.createBean('Notes', {
+                    _link: 'attachments',
+                    upload_id: attachment.id,
+                    name: attachment.filename,
+                    filename: attachment.filename
+                });
+
+                prepopulate.attachments.push(bean);
+            });
+        }
+
+        app.utils.openEmailCreateDrawer(
+            'compose-email',
+            prepopulate,
+            _.bind(function(context, model) {
+                // Reload the BWC window to update subpanels.
+                if (model) {
+                    this.$('iframe').get(0).contentWindow.location.reload(true);
+                }
+            }, this)
+        );
+    },
+
+    /**
      * Opens the Archive Email drawer, passing in the parent model to relate to
      * Reloads the BWC page if email created so it appears in the subpanel
      */
     openArchiveEmailDrawer: function() {
-        var self = this,
-            parentModel = this.context.get('model');
-
-        app.drawer.open({
-            layout: 'archive-email',
-            context: {
-                create: true,
-                module: 'Emails',
-                prepopulate: {
-                    related: parentModel
+        app.utils.openEmailCreateDrawer(
+            'create',
+            {
+                related: this.context.get('model')
+            },
+            _.bind(function(model) {
+                if (model) {
+                    // Reload the BWC window to update subpanels.
+                    this.$('iframe').get(0).contentWindow.location.reload(true);
                 }
-            }
-        }, function(model) {
-            if (model) {
-                // Reload the BWC to update subpanels.
-                self.$('iframe').get(0).contentWindow.location.reload(true);
-            }
-        });
+            }, this)
+        );
     },
 
     /**

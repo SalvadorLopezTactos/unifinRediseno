@@ -10,421 +10,111 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\StrategyInterface;
-use Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\Visibility;
-use Sugarcrm\Sugarcrm\Elasticsearch\Analysis\AnalysisBuilder;
-use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
-use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Document;
+use Sugarcrm\Sugarcrm\Bean\Visibility\Strategy;
+use Sugarcrm\Sugarcrm\Bean\Visibility\Strategy\AllowAll;
+use Sugarcrm\Sugarcrm\Bean\Visibility\Strategy\DenyAll;
+use Sugarcrm\Sugarcrm\Bean\Visibility\Strategy\TeamSecurity\Denormalized;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\State;
 
 /**
  * Team security visibility
  */
-class TeamSecurity extends SugarVisibility implements StrategyInterface
+class TeamSecurity extends NormalizedTeamSecurity
 {
     /**
-     * $sugar_config base key for performance profile
-     * @var string
+     * @var bool
      */
-    const CONFIG_PERF_KEY = "perfProfile.TeamSecurity.%s";
+    private $preferDenormalized;
 
     /**
-     * Default teamSet prefetch count
-     * @var integer
+     * @var User
      */
-    const TEAMSET_PREFETCH_MAX = 500;
+    private $user;
 
     /**
-     * Get team security `join` as a `IN()` condition.
-     * @param string $current_user_id
-     * @return string
+     * @var bool
      */
-    protected function getCondition($current_user_id)
-    {
-        $team_table_alias = 'team_memberships';
-        $table_alias = $this->getOption('table_alias');
-        if (!empty($table_alias)) {
-            $team_table_alias = $this->bean->db->getValidDBName($team_table_alias.$table_alias, true, 'table');
-        } else {
-            $table_alias = $this->bean->table_name;
-        }
-
-        $inClause = $this->getInCondition($current_user_id, $team_table_alias);
-        return " {$table_alias}.team_set_id IN ({$inClause}) ";
-    }
+    private $table;
 
     /**
-     * Get IN condition clause
-     * @param string $currentUserId Current user id
-     * @param string $teamTableAlias Team table alias
-     * @return string IN clause
+     * @var Strategy
      */
-    protected function getInCondition($currentUserId, $teamTableAlias)
-    {
-        $usePrefetch = false;
-        if ($this->getOption('teamset_prefetch')) {
-            $teamSets = TeamSet::getTeamSetIdsForUser($currentUserId);
-            $count = count($teamSets);
-            if ($count <= $this->getOption('teamset_prefetch_max', self::TEAMSET_PREFETCH_MAX)) {
-                $usePrefetch = true;
-            } else {
-                $this->log->warn("TeamSetPrefetch max reached for user {$currentUserId} --> {$count}");
-            }
-        }
-
-        if ($usePrefetch) {
-            if ($count) {
-                return implode(',', array_map(array($this->bean->db, 'quoted'), $teamSets));
-            } else {
-                return 'NULL';
-            }
-        } else {
-            return "select tst.team_set_id from team_sets_teams tst
-                    INNER JOIN team_memberships {$teamTableAlias} ON tst.team_id = {$teamTableAlias}.team_id
-                    AND {$teamTableAlias}.user_id = '$currentUserId'
-                    AND {$teamTableAlias}.deleted = 0";
-        }
-    }
+    private $strategy;
 
     /**
-     * Get team security as a JOIN clause
-     * @param string $current_user_id
-     * @return string
-     *
-     * @see static::join(), should be kept synced
+     * @var DBManager
      */
-    protected function getJoin($current_user_id)
-    {
-        $team_table_alias = 'team_memberships';
-        $table_alias = $this->getOption('table_alias');
-        if (!empty($table_alias)) {
-            $team_table_alias = $this->bean->db->getValidDBName($team_table_alias.$table_alias, true, 'table');
-        } else {
-            $table_alias = $this->bean->table_name;
-        }
-        $tf_alias = $this->bean->db->getValidDBName($table_alias . '_tf', true, 'alias');
-        $query = " INNER JOIN (select tst.team_set_id from team_sets_teams tst";
-        $query .= " INNER JOIN team_memberships {$team_table_alias} ON tst.team_id = {$team_table_alias}.team_id
-                    AND {$team_table_alias}.user_id = '$current_user_id'
-                    AND {$team_table_alias}.deleted=0 group by tst.team_set_id) {$tf_alias} on {$tf_alias}.team_set_id  = {$table_alias}.team_set_id ";
-        if ($this->getOption('join_teams')) {
-            $query .= " INNER JOIN teams ON teams.id = {$team_table_alias}.team_id AND teams.deleted=0 ";
-        }
-        return $query;
-    }
+    private $db;
 
-    /**
-     * Joins visibility condition to the query
-     *
-     * @param SugarQuery $query
-     * @param string $user_id
-     *
-     * @see static::getJoin(), should be kept synced
-     * @throws SugarQueryException
-     * @throws Exception
-     */
-    protected function join(SugarQuery $query, $user_id)
-    {
-        $team_table_alias = 'team_memberships';
-        $table_alias = $this->getOption('table_alias');
-        if (!empty($table_alias)) {
-            $team_table_alias = $this->bean->db->getValidDBName($team_table_alias.$table_alias, true, 'table');
-        } else {
-            $table_alias = $this->bean->table_name;
-        }
-
-        $tf_alias = $this->bean->db->getValidDBName($table_alias . '_tf', true, 'alias');
-        $conn = $this->bean->db->getConnection();
-        $subQuery = $conn->createQueryBuilder();
-        $subQuery
-            ->select('tst.team_set_id')
-            ->from('team_sets_teams', 'tst')
-            ->join(
-                'tst',
-                'team_memberships',
-                $team_table_alias,
-                $subQuery->expr()->andX(
-                    $team_table_alias . '.team_id = tst.team_id',
-                    $team_table_alias . '.user_id = ' . $subQuery->createPositionalParameter($user_id),
-                    $team_table_alias . '.deleted = 0'
-                )
-            )
-            ->groupBy('tst.team_set_id');
-
-        $query->joinTable(
-            $subQuery,
-            array(
-                'alias' => $tf_alias,
-            )
-        )->on()->equalsField($tf_alias . '.team_set_id', $table_alias . '.team_set_id');
-
-        if ($this->getOption('join_teams')) {
-            $query->joinTable('teams')
-                ->on()
-                ->equalsField('teams.id', $team_table_alias . '.team_id')
-                ->equals('teams.deleted', 0);
-        }
-    }
-
-    /**
-     * Check if we need WHERE condition
-     * @return boolean
-     */
-    protected function useCondition()
-    {
-        return $this->getOption('as_condition') || $this->getOption('where_condition');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addVisibilityFrom(&$query)
-    {
-        // We'll get it on where clause
-        if ($this->getOption('where_condition')) {
-            return $query;
-        }
-        $this->addVisibility($query);
-        return $query;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addVisibilityWhere(&$query)
-    {
-        if (!$this->getOption('where_condition')) {
-            return $query;
-        }
-        $this->addVisibility($query);
-        return $query;
-    }
-
-    /**
-     * Add visibility query
-     * @param string $query
-     *
-     * @see static::addVisibilityQuery(), should be kept synced
-     */
-    protected function addVisibility(&$query)
-    {
-        // Support portal will never respect Teams, even if they do earn more than them even while raising the teamsets
-        if (isset($_SESSION['type']) && $_SESSION['type'] === 'support_portal') {
-            return;
-        }
-
-        if (!$this->isTeamSecurityApplicable()) {
-            return;
-        }
-
-        $current_user_id = empty($GLOBALS['current_user']) ? '' : $GLOBALS['current_user']->id;
-
-        if ($this->useCondition()) {
-            $cond = $this->getCondition($current_user_id);
-            if ($query) {
-                $query .= " AND ".ltrim($cond);
-            } else {
-                $query = $cond;
-            }
-        } else {
-            $query .= $this->getJoin($current_user_id);
-        }
-   }
-
-    /**
-     * Add visibility query
-     *
-     * @param SugarQuery $query
-     *
-     * @see static::addVisibility(), should be kept synced
-     */
-    public function addVisibilityQuery(SugarQuery $query)
-    {
-        // Support portal will never respect Teams, even if they do earn more than them even while raising the teamsets
-        if (isset($_SESSION['type']) && $_SESSION['type'] === 'support_portal') {
-            return;
-        }
-
-        if (!$this->isTeamSecurityApplicable()) {
-            return;
-        }
-
-        $current_user_id = empty($GLOBALS['current_user']) ? '' : $GLOBALS['current_user']->id;
-
-        if ($this->useCondition()) {
-            $cond = $this->getCondition($current_user_id);
-            $query->where()->addRaw($cond);
-        } else {
-            $this->join($query, $current_user_id);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addVisibilityFromQuery(SugarQuery $sugarQuery, array $options = array())
-    {
-        // We'll get it on where clause
-        if ($this->getOption('where_condition')) {
-            return $sugarQuery;
-        }
-
-        if ($this->useCondition()) {
-            $table_alias = $this->getOption('table_alias');
-            if (empty($sugarQuery->join[$table_alias])) {
-                return $sugarQuery;
-            }
-            $join = $sugarQuery->join[$table_alias];
-            $join->query = $sugarQuery;
-            $add_join = '';
-            $this->addVisibility($add_join);
-            if (!empty($add_join)) {
-                $join->on()->queryAnd()->addRaw($add_join);
-            }
-        } else {
-            $this->addVisibilityQuery($sugarQuery);
-        }
-
-        return $sugarQuery;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addVisibilityWhereQuery(SugarQuery $sugarQuery, array $options = array())
-    {
-        if (!$this->getOption('where_condition')) {
-            return $sugarQuery;
-        }
-        $cond = '';
-        $this->addVisibility($cond);
-        if (!empty($cond)) {
-            $sugarQuery->whereRaw($cond);
-        }
-        return $sugarQuery;
-    }
-
-    /**
-     * Verifies if team security needs to be applied. Note that if the
-     * $current_user is not set we still apply team security. This does
-     * not make any sense by itself as the result will always be negative
-     * (no access).
-     * @return bool True if team security needs to be applied
-     */
-    protected function isTeamSecurityApplicable()
+    public function __construct(SugarBean $bean, $params = null)
     {
         global $current_user;
 
-        if ($this->bean->module_dir == 'WorkFlow'  // copied from old team security clause
-            || $this->bean->disable_row_level_security
-            || (!empty($current_user) && $current_user->isAdminForModule($this->bean->module_dir))
-        ) {
-            return false;
-        }
+        parent::__construct($bean, $params);
 
-        return true;
+        $this->user = $current_user;
+        $this->db = DBManagerFactory::getInstance();
     }
 
-    /**
-     * Override for performance tuning per module using `$sugar_config`.
-     * {@inheritdoc}
-     */
     public function setOptions($options)
     {
         parent::setOptions($options);
 
-        // Ability to skip perf profile - use with caution
-        if (!$this->getOption('skip_perf_profile')) {
-            $options = empty($this->options) ? array() : $this->options;
-            $this->options = $this->getTuningOptions($options);
-        }
+        $this->preferDenormalized = !empty($this->options['use_denorm']);
+        $this->table = isset($this->options['table_alias'])
+            ? $this->options['table_alias'] : $this->bean->getTableName();
+        $this->strategy = null;
 
         return $this;
     }
 
-    /**
-     * BETA functionality - use at your own risk
-     *
-     * Get performance tuning options from $sugar_config. If non
-     * available fallback to default tuning options using DBAL.
-     * @param array $options
-     * @return array
-     */
-    protected function getTuningOptions(array $options)
+    public function addVisibilityFrom(&$query)
     {
-        // module specific config
-        $configKey = sprintf(self::CONFIG_PERF_KEY, $this->bean->module_dir);
-        $tune = SugarConfig::getInstance()->get($configKey, array());
+        $query = $this->getStrategy()->applyToFrom($this->db, $query, $this->table);
 
-        // if no module specific config, try default config
-        $configKey = sprintf(self::CONFIG_PERF_KEY, 'default');
-        if (empty($tune)) {
-            $tune = SugarConfig::getInstance()->get($configKey, array());
+        return $query;
+    }
+
+    public function addVisibilityWhere(&$query)
+    {
+        $query = $this->getStrategy()->applyToWhere($this->db, $query, $this->table);
+
+        return $query;
+    }
+
+    public function addVisibilityQuery(SugarQuery $query)
+    {
+        $this->getStrategy()->applyToQuery($query, $this->table);
+    }
+
+    private function getStrategy()
+    {
+        if ($this->strategy) {
+            return $this->strategy;
         }
 
-        // if still empty use stock DBAL profile
-        if (empty($tune)) {
-            $tune = $this->bean->db->getDefaultPerfProfile('TeamSecurity');
+        return $this->strategy = $this->detectStrategy();
+    }
+
+    private function detectStrategy()
+    {
+        if (!$this->user) {
+            return new DenyAll();
         }
 
-        // passed in $options will win from tuning config
-        return array_merge($tune, $options);
-    }
-
-    /**
-     * Override getOption to make sure we use any performance tuning defined in $sugar_config.
-     * {@inheritdoc}
-     */
-    public function getOption($name, $default = null)
-    {
-        //if parameter is not defined, make sure the tuning options have been loaded prior to calling parent
-        if (!isset($this->options[$name])) {
-            //send in the defined options or a blank array.
-            $options = !empty($this->options) ? $this->options : array();
-            $this->options = $this->getTuningOptions($options);
+        if (!$this->isTeamSecurityApplicable()) {
+            return new AllowAll();
         }
-        return parent::getOption($name,$default);
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function elasticBuildAnalysis(AnalysisBuilder $analysisBuilder, Visibility $provider)
-    {
-        // no special analyzers needed
-    }
+        if (!empty($this->options['use_denorm'])) {
+            $state = Container::getInstance()->get(State::class);
 
-    /**
-     * {@inheritdoc}
-     */
-    public function elasticBuildMapping(Mapping $mapping, Visibility $provider)
-    {
-        $mapping->addNotAnalyzedField('team_set_id');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function elasticProcessDocumentPreIndex(Document $document, SugarBean $bean, Visibility $provider)
-    {
-        // team_set_id is retrieved as a bean field directly, nothing to do here
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function elasticGetBeanIndexFields($module, Visibility $provider)
-    {
-        // nominate team_set_id field to be retrievable directly
-        return array('team_set_id' => 'id');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function elasticAddFilters(\User $user, \Elastica\Filter\BoolFilter $filter, Visibility $provider)
-    {
-        if ($this->isTeamSecurityApplicable()) {
-            $filter->addMust($provider->createFilter('TeamSet', array('user' => $user)));
+            if ($state->isAvailable()) {
+                return new Denormalized($state->getActiveTable(), $this->user);
+            }
         }
+
+        return (new NormalizedTeamSecurity($this->bean))->setOptions($this->options);
     }
 }

@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Ett objektnummer måste specificeras för att radera tillverkaren.',
   'NTC_STATUS' => 'Sätt statusen till inaktiv för att ta bort tillverkaren från dropdownmenyn över tillverkare',
   'NTC_LIST_ORDER' => 'Sätt ordningen för hur tillverkarna ska visas i dropdown menyn över tillverkare',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Inaktiv',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Importera tillverkare',
 	'LBL_EDITLAYOUT' => 'Redigera layout' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Intäktsposter',

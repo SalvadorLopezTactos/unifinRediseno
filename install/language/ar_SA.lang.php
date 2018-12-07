@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> 'سيتكدس هذا الاستعلام أسفل الاستعلام الأول في التقرير',
     'ERR_DB_VERSION_FAILURE'			=> 'تعذر فحص إصدار قاعدة البيانات.',
 
-
-	'ERR_OC_PASSWORD'					=> 'مطلوب كلمة المرور.',
-	'ERR_OC_SERVER_URL'					=> 'عنوان خادم Sugar مطلوب.',
-	'ERR_OC_USERNAME'					=> 'مطلوب اسم مستخدم الخادم.',
-	'LBL_INSTALL_OC'					=> 'تثبيت عميل دون اتصال',
-    'LBL_OC_ADMIN'                      => 'يُرجى الاتصال بالمسؤول لحل المشكلة.',
-    'LBL_OC_SUCCESS'                    => 'تم الانتهاء من تثبيت العميل دون اتصال. يُرجى النقر على الزر أدناه ليأخذك إلى مرحلة التثبيت الخاصة بك.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'اسم مستخدم المسؤول',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'يُرجى إدخال التفاصيل أدناه ليتم تثبيت وتزامن عميلك دون اتصال بالشكل المناسب.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'عنوان خادم Sugar ',
-	'LBL_OC_INSTALL_PASS'				=> 'كلمة المرور لمستخدم الخادم',
-	'LBL_OC_INSTALL_TITLE'				=> 'تثبيت عميل دون اتصال',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'اسم المستخدم هذا سيتصل بخادم Sugar الخاص بك مع.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'اسم المستخدم',
-	'LBL_PERFORM_OC_INSTALL'			=> 'بدء تثبيت عميل دون اتصال',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'يُرجى إدخال التفاصيل أدناه ليتم تثبيت وتزامن عميلك دون اتصال بالشكل المناسب.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'أدخل اسم المستخدم بالنسبة لمستخدم مسؤول Sugar . ',
 	'ERR_ADMIN_PASS_BLANK'				=> 'أدخل كلمة المرور بالنسبة لمستخدم مسؤول Sugar . ',
@@ -76,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => 'تم اكتشاف أخطاء أثناء فحص التوافقية.  لكى يعمل تثبيت SugarCRM بكفاءة، يُرجى اتخاذ الخطوات المناسبة لمواجهة المسائل المذكورة أدناه إما بالضغط على زر إعادة الفحص، وإما بإعادة محاولة التثبيت مرة أخرى.',
     'ERR_CHECKSYS_CALL_TIME'            => 'السماح بتشغيل وضع "مرجعية مرور وقت الاتصال (ويجب ضبطها على وضع إيقاف التشغيل في php.ini)',
 
-	'ERR_CHECKSYS_CURL'					=> 'غير موجود: يعمل Sugar Scheduler بقدرات وظيفية محدودة. لن تعمل خدمة أرشفة البريد الإلكتروني.',
+	'ERR_CHECKSYS_CURL'					=> 'غير موجود: سيتم تشغيل أداة جدولة Sugar بوظائف محدودة. لن يتم تشغيل خدمة أرشفة البريد الإلكتروني.',
     'ERR_CHECKSYS_IMAP'					=> 'لم يتم العثور عليه: تتطلب InboundEmail وCampaigns (Email) مكتبات IMAP. ولن يعمل أي منها.',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> 'لا يمكن تشغيل Magic Quotes GPC على وضع "تشغيل" عند استخدام خادم MS SQL.',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> 'تحذير: ',
@@ -92,7 +75,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => 'للحصول على أفضل تجربة باستخدام IIS/FastCGI sapi، اضبط دخول fastcgi.logging على 0 في ملف php.ini الخاص بك.',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> 'إصدار PHP مثبت غير مدعوم: (إصدار',
     'LBL_DB_UNAVAILABLE'                => 'قاعدة البيانات غير متاحة',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'لم تتوفر خدمة دعم قاعدة البيانات. برجاء التأكد من توفر برامج التشغيل اللازمة المناسبة لأحد أنواع قواعد البيانات المدعمة التالية: MySQL، أو MS SQLServer، أو Oracle، أو DB2. قد تحتاج إلى إلغاء التعليق على الامتداد الموجود في ملف php.ini، أو إعادة التحويل البرمجي باستخدام الملف الثنائي المناسب، وذلك حسب إصدار PHP الموجود لديك. برجاء الرجوع إلى دليل PHP الموجود لديك لمزيد من المعلومات حول كيفية تمكين دعم قاعدة البيانات.',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => 'لم يتم العثور على دعم قاعدة البيانات. الرجاء التأكد من أنك تملك ملفات التعريف الضرورية لأحد انواع قواعد البيانات المدعومة التالية: MySQL أو MS SQLServer أو Oracle أو DB2. قد تحتاج إلى إلغاء تعليق الامتداد في ملف php.ini أو إعادة تكوينه بالملف الثنائي الصحيح، بحسب إصدار PHP الخاص بك. الرجاء الرجوع إلى دليل PHP لمزيد من المعلومات حول كيفية تمكين دعم قاعدة البيانات.',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => 'لم يتم العثور على الوظائف المرتبطة بمكتبات XML Parser Libraries الضرورية لتطبيق Sugar.  قد تحتاج إلى عدم التعليق على الامتداد في ملف php.ini، أو إعادة تجميع مع ملف ثنائي صحيح، وفقًا لإصدار PHP الخاص بك.  يُرجى مراجعة دليل PHP للحصول على مزيد من المعلومات.',
     'LBL_CHECKSYS_CSPRNG' => 'منشئ الأرقام العشوائية',
     'ERR_CHECKSYS_MBSTRING'             => 'لم يتم العثور على الوظائف المرتبطة بامتداد Multibyte Strings PHP (mbstring) الضرورية لتطبيق Sugar. <br/><br/>وبشكل عام، لم يتم تفعيل وحدة mbstring افتراضيًا في PHP ويجب تفعيلها باستخدام تفعيل mbstring عند إنشاء ثنائي PHP. يُرجى الرجوع لدليل PHP للحصول على مزيد من المعلومات عن كيفية تفعيل دعم mbstring.',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'حجم ملف التحميل',
 	'ERR_URL_BLANK'						=> 'أدخل عنوان القاعدة بالنسبة لمثال Sugar.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'تعذر تحديد موقع سجل التثبيت لـ',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'الملف الذي تم تحميله غير متوافق مع هذه الإصدارات (Community Edition، أو Professional، أو Enterprise) من Sugar:',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'الملف الذي تم تحميله غير متوافق مع هذه الإصدارات (Professional أو Enterprise أو Ultimate edition) من Sugar: ',
 	'ERROR_LICENSE_EXPIRED'				=> "خطأ: انتهت صلاحية الترخيص الخاصة بك",
 	'ERROR_LICENSE_EXPIRED2'			=> " منذ يوم (أيام).   يُرجى الذهاب إلى <a href='index.php?action=LicenseSettings&module=Administration'>'\"إدارة التراخيص\"</a> في شاشة المسؤول لإدخال مفتاح الترخيص الجديد الخاص بك.  إذا لم تقم بإدخال مفتاح الترخيص الجديد الخاص بك في غضون 30 يومًا من تاريخ صلاحية مفتاح الترخيص الخاص بك، فلن تكون قادرًا بأي حال من الأحوال على تسجيل الدخول لهذا التطبيق.",
 	'ERROR_MANIFEST_TYPE'				=> 'يجب أن يحدد ملف البيان Manifest نوع الحزمة.',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'تاريخ انتهاء الصلاحية',
 	'LBL_LICENSE_I_ACCEPT'				=> 'قبول',
 	'LBL_LICENSE_NUM_USERS'				=> 'عدد المستخدمين',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'يُرجى إدخال عدد العملاء المتعاملين دون اتصال.',
-	'LBL_LICENSE_OC_NUM'				=> 'عدد تراخيص العملاء دون اتصال',
-	'LBL_LICENSE_OC'					=> 'تراخيص العملاء دون اتصال',
 	'LBL_LICENSE_PRINTABLE'				=> ' عرض مطبوع ',
     'LBL_PRINT_SUMM'                    => 'طباعة الموجز',
 	'LBL_LICENSE_TITLE_2'				=> 'ترخيص SugarCRM',
@@ -576,10 +556,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'إعدادات الفرز',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'أدخل اسم نظام بالنسبة لمثال Sugar.',
 	'LBL_PATCH_UPLOAD' => 'اختر ملف مجموعة من جهازك',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'إصدار PHP 5 أو أحدث مطلوب.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(إصدار PHP الحالي ',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'تم تشغيل وضع توافق الإصدارات السابقة لـ PHP. ضبط zend.ze1_compatibility_mode على وضع إيقاف التشغيل للمتابعة',
 
     'advanced_password_new_account_email' => array(
@@ -611,5 +587,3 @@ $contact_user_link_guid',
         'name' => 'نسيان كلمة المرور لبريدك الإلكتروني',
         ),
 );
-
-?>

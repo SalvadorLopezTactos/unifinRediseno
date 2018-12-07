@@ -11,6 +11,7 @@
  */
 
 use Sugarcrm\Sugarcrm\Util\Uuid;
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication\Config;
 
 /**
  * Sugar OAuth2.0 server, is a wrapper around the php-oauth2 library
@@ -23,29 +24,39 @@ class SugarOAuth2Server extends OAuth2
     const CONFIG_MAX_SESSION = 'max_session_lifetime';
 
     /**
+     * @var SugarOAuth2Server
+     */
+    protected static $currentOAuth2Server = null;
+
+    /**
      * This function will return the OAuth2Server class, it will check
      * the custom/ directory so users can customize the authorization
      * types and storage
+     *
+     * @param string $platform
+     *
+     * @return SugarOAuth2Server
      */
-    public static function getOAuth2Server()
+    public static function getOAuth2Server($platform = null)
     {
-        static $currentOAuth2Server = null;
-
-        if (!isset($currentOAuth2Server)) {
-            SugarAutoLoader::requireWithCustom('include/SugarOAuth2/SugarOAuth2Storage.php');
-            $oauthStorageName = SugarAutoLoader::customClass('SugarOAuth2Storage');
+        if (!isset(static::$currentOAuth2Server)) {
+            $idpConfig = new Config(\SugarConfig::getInstance());
+            $isIDMModeEnabled = $idpConfig->isIDMModeEnabled() && $platform != SugarOAuth2ServerOIDC::PORTAL_PLATFORM;
+            $oidcPostfix = $isIDMModeEnabled ? 'OIDC' : '';
+            SugarAutoLoader::requireWithCustom('include/SugarOAuth2/SugarOAuth2Storage'.$oidcPostfix.'.php');
+            $oauthStorageName = SugarAutoLoader::customClass('SugarOAuth2Storage'.$oidcPostfix);
             $oauthStorage = new $oauthStorageName();
 
-            SugarAutoLoader::requireWithCustom('include/SugarOAuth2/SugarOAuth2Server.php');
-            $oauthServerName = SugarAutoLoader::customClass('SugarOAuth2Server');
-            $config = array();
-            if (!empty($GLOBALS['sugar_config']['oauth2'])) {
-                $config = $GLOBALS['sugar_config']['oauth2'];
+            SugarAutoLoader::requireWithCustom('include/SugarOAuth2/SugarOAuth2Server'.$oidcPostfix.'.php');
+            $oauthServerName = SugarAutoLoader::customClass('SugarOAuth2Server'.$oidcPostfix);
+            $config = $idpConfig->get('oauth2', []);
+            static::$currentOAuth2Server = new $oauthServerName($oauthStorage, $config);
+            if ($isIDMModeEnabled) {
+                static::$currentOAuth2Server->setPlatform($platform);
             }
-            $currentOAuth2Server = new $oauthServerName($oauthStorage, $config);
         }
 
-        return $currentOAuth2Server;
+        return static::$currentOAuth2Server;
     }
 
     protected function createAccessToken($client_id, $user_id, $scope = null)
@@ -162,9 +173,13 @@ class SugarOAuth2Server extends OAuth2
 
         $this->setPlatform($platform);
 
-        $user = $this->storage->loadUserFromName($userName);
+        $user = null;
+        try {
+            $user = $this->storage->loadUserFromName($userName);
+        } catch (\SugarApiExceptionNeedLogin $e) {
+        }
 
-        if ( $user == null ) {
+        if ($user == null) {
             throw new SugarApiExceptionNotFound();
         }
 

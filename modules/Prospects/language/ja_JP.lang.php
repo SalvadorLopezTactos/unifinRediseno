@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'ターゲットリストのダッシュ ボード',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'ターゲットレコードのダッシュ ボード',
+
   'LBL_MODULE_NAME' => 'ターゲット',
   'LBL_MODULE_NAME_SINGULAR' => 'ターゲット',
   'LBL_MODULE_ID'   => 'ターゲット',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => '敬称',
   'LBL_SAVE_PROSPECT' => 'ターゲット保存',
   'LBL_CREATED_OPPORTUNITY' =>'新しい商談が作成されました',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '商談の作成には取引先が必要です。\n 取引先を新しく作るか、既存の取引先を選択してください。',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '商談の作成には取引先が必要です。\\n 取引先を新しく作るか、既存の取引先を選択してください。',
   'LNK_SELECT_ACCOUNT' => "取引先選択",
   'LNK_NEW_PROSPECT' => 'ターゲット作成',
   'LNK_PROSPECT_LIST' => 'ターゲット一覧',
@@ -195,4 +199,6 @@ $mod_strings = array (
 2. 新しいレコードを確定し、前のページに戻るには「保存」をクリックします。',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'ターゲットのレポート',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '以下のことに同意したビジネス目的:',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '最後に更新された同意',
 );

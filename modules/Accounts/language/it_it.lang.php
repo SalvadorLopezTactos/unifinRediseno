@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Offerte (spedire a)',
 	'LNK_ACCOUNT_REPORTS' => 'Visualizza Report Aziende',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documenti',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Dashboard elenco account',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Dashboard record account',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafici',
 	'LBL_DEFAULT' => 'Viste',

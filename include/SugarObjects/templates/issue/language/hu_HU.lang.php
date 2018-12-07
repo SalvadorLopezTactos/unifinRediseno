@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => 'Utolsóként módosította:',
   'LBL_ASSIGNED_USER' => 'Felelős felhasználó:',
   'LBL_ASSIGNED_USER_NAME' => 'Hozzárendelt felhasználó',
-  'LBL_SYSTEM_ID' =>'Rendszer azonosító:',
   'LBL_TEAM_NAME' =>'Csoport neve:',
   'LBL_TYPE'=>'Típus:',
   'LBL_SUBJECT' => 'Tárgy:',

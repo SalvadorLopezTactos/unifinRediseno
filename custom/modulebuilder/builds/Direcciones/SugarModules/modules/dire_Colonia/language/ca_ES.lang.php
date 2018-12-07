@@ -1,5 +1,5 @@
 <?php
-// created: 2018-02-16 20:37:54
+// created: 2018-12-06 16:40:00
 $mod_strings = array (
   'LBL_TEAM' => 'Equip',
   'LBL_TEAMS' => 'Equips',

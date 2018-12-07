@@ -12,14 +12,13 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Definições de processos',
   'LBL_MODULE_TITLE' => 'Definições de processos',
   'LBL_MODULE_NAME_SINGULAR' => 'Definição do processo',
 
-  'LNK_LIST' => 'Visualizar definições de processo',
-  'LNK_NEW_PMSE_PROJECT' => 'Criar Definição de Processos',
-  'LNK_IMPORT_PMSE_PROJECT' => 'Importar Definições de Processos',
+  'LNK_LIST' => 'Visualizar definições de processos',
+  'LNK_NEW_PMSE_PROJECT' => 'Criar definição de processo',
+  'LNK_IMPORT_PMSE_PROJECT' => 'Importar definições de processos',
 
   'LBL_PRJ_STATUS' => 'Status',
   'LBL_PRJ_MODULE' => 'Módulo de destino',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'não é igual a',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'não é',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'não é igual a',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Tempo de execução',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Adicionar',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Fechar',

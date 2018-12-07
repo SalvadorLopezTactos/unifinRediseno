@@ -71,7 +71,8 @@ class PMSEEngineFilterApi extends FilterApi
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                 ),
-//                'shortHelp' => 'Returns a list of Processes by user',
+                'shortHelp' => 'Returns a list of Processes by user',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_filter_list_help.html',
             ),
             'filterModuleAll' => array(
                 'reqType' => 'GET',
@@ -85,7 +86,8 @@ class PMSEEngineFilterApi extends FilterApi
                     'SugarApiExceptionInvalidParameter',
                     'SugarApiExceptionNotAuthorized',
                 ),
-//                'shortHelp' => 'Returns a list of Processes by user using filters',
+                'shortHelp' => 'Returns a list of Processes by user using filters',
+                'longHelp' => 'modules/pmse_Inbox/clients/base/api/help/process_filter_list_all_pa_help.html',
             ),
             'filterModuleAllCount' => array(
                 'reqType' => 'GET',
@@ -100,20 +102,32 @@ class PMSEEngineFilterApi extends FilterApi
                 ),
 //                'shortHelp' => 'List of all records in this module',
             ),
-            'filterModuleById' => array(
-                'reqType' => 'GET',
-                'path' => array('pmse_Inbox', 'filter', '?'),
-                'pathVars' => array('module', '', 'record'),
-                'method' => 'filterById',
-                'exceptions' => array(
-                    'SugarApiExceptionNotFound',
-                    'SugarApiExceptionInvalidParameter',
-                    'SugarApiExceptionNotAuthorized',
-                    'SugarApiExceptionError',
-                ),
-//                'shortHelp' => 'Filter records for a module by a predefined filter id.',
-            ),
         );
+    }
+
+    /**
+     * Returns the records for the module and filter provided.
+     *
+     * @param ServiceBase $api The REST API object.
+     * @param array $args REST API arguments.
+     * @param string $acl Which type of ACL to check.
+     * @return array The REST response as a PHP array.
+     * @throws SugarApiExceptionError If retrieving a predefined filter failed.
+     * @throws SugarApiExceptionInvalidParameter If any arguments are invalid.
+     * @throws SugarApiExceptionNotAuthorized If we lack ACL access.
+     */
+    public function filterList(ServiceBase $api, array $args, $acl = 'list')
+    {
+        $result = parent::filterList($api, $args, $acl);
+        foreach ($result['records'] as $key => $value) {
+            $params = array(
+                'erased_fields' => true,
+                'use_cache' => false,           // TODO: remove this flag once the BeanFactory cache issue is fixed
+            );
+            $assignedBean = BeanFactory::getBean($value['cas_sugar_module'], $value['cas_sugar_object_id'], $params);
+            $result['records'][$key] = PMSEEngineUtils::appendNameFields($assignedBean, $value);
+        }
+        return $result;
     }
 
     /**
@@ -133,7 +147,7 @@ class PMSEEngineFilterApi extends FilterApi
         if (empty($args['filter']['visibility'])) {
             $args['filter'][] = array('visibility' => 'regular_user');
         }
-        return parent::filterList($api, $args, $acl);
+        return $this->filterList($api, $args, $acl);
     }
 
     /**

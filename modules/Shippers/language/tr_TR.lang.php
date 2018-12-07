@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Bu nakliyeciyi silmek için kayıt numarası belirmelisiniz.',
   'NTC_STATUS' => 'Bu nakliyat firmasının durumunu, İnaktif olarak belirleyerek Nakliyat Firması açılır-listesinden kaldırın',
   'NTC_LIST_ORDER' => 'Bu nakliyat firmasının, Nakliyat Firması açılır-listesinde görünmesini istediğiniz sırayı belirleyin',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Aktif',
-    'Inactive' => 'İnaktif',
-),
-	'LBL_EDITLAYOUT' => 'Yerleşimi Değiştir' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Yerleşimi Değiştir' /*for 508 compliance fix*/,
 );
-
 
 ?>

@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Lai dzēstu piegādātāju, jānorāda ieraksta numurs.',
   'NTC_STATUS' => 'Nomainiet statusu uz Neaktīvs, lai izņemtu piegādātāju  no piegādātāju  izvēlnes',
   'NTC_LIST_ORDER' => 'Norādiet secību, kādā piegādātājs parādīsies piegādātāju izvēlnē',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Aktīvs',
-    'Inactive' => 'Neaktīvs',
-),
-	'LBL_EDITLAYOUT' => 'Rediģēt izkārtojumu' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Rediģēt izkārtojumu' /*for 508 compliance fix*/,
 );
-
 
 ?>

@@ -442,6 +442,8 @@ class ListViewData {
 				}
 				$temp->updateDependentFieldForListView('', $filter_fields);
 				$data[$dataIndex] = $temp->get_list_view_data($filter_fields);
+                $data[$dataIndex] = $this->formatRowDates($temp, $data[$dataIndex]);
+
                 if($temp->isFavoritesEnabled()){
 					$data[$dataIndex]['star'] = SugarFavorites::generateStar(!empty($row['my_favorite']), $temp->module_dir, $temp->id);
 				}
@@ -517,13 +519,13 @@ class ListViewData {
             $pageData['error'] = 'ACL restricted access';
         }
 
-        $queryString = '';
+        $searchString = '';
 
         if( isset($_REQUEST["searchFormTab"]) && $_REQUEST["searchFormTab"] == "advanced_search" ||
         	isset($_REQUEST["type_basic"]) && (count($_REQUEST["type_basic"] > 1) || $_REQUEST["type_basic"][0] != "") ||
         	isset($_REQUEST["module"]) && $_REQUEST["module"] == "MergeRecords")
         {
-            $queryString = "-advanced_search";
+            $searchString = "-advanced_search";
         }
         else if (isset($_REQUEST["searchFormTab"]) && $_REQUEST["searchFormTab"] == "basic_search")
         {
@@ -544,14 +546,14 @@ class ListViewData {
                 $field_name .= "_basic";
                 if( isset($_REQUEST[$field_name])  && ( !is_array($basicSearchField) || !isset($basicSearchField['type']) || $basicSearchField['type'] == 'text' || $basicSearchField['type'] == 'name') )
                 {
-                    $queryString = $_REQUEST[$field_name];
+                    $searchString = $this->request->getValidInputRequest($field_name);
                     break;
                 }
             }
         }
 
 
-		return array('data'=>$data , 'pageData'=>$pageData, 'query' => $queryString);
+        return array('data'=>$data , 'pageData'=>$pageData, 'query' => $searchString);
 	}
 
 
@@ -686,4 +688,18 @@ class ListViewData {
         return array('fieldToAddTo' => $results['fieldToAddTo'], 'string' => $extra);
     }
 
+    private function formatRowDates(SugarBean $bean, array $row) : array
+    {
+        foreach ($bean->field_defs as $name => $field_def) {
+            $nameUpper = strtoupper($name);
+
+            if (!isset($row[$nameUpper])) {
+                continue;
+            }
+
+            $row[$nameUpper] = ViewDateFormatter::format($field_def['type'], $row[$nameUpper]);
+        }
+
+        return $row;
+    }
 }

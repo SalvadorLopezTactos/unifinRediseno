@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => '流程商务规则',
   'LBL_MODULE_TITLE' => '流程商务规则',
   'LBL_MODULE_NAME_SINGULAR' => '流程商务规则',
@@ -47,7 +46,7 @@ $mod_strings = array (
 
     'LBL_PMSE_BUSINESS_RULES_SINGLE_HIT' => '流程商务规则单击',
 
-    'LBL_PMSE_BUSINESS_RULES_IMPORT_TEXT' => '通过从您的文件系统导入一个*.pbr 文件来自动创建一个新流程商务规则记录。',
+    'LBL_PMSE_BUSINESS_RULES_IMPORT_TEXT' => '通过从您的文件系统导入一个*.pbr 文件来自动创建一条新的流程商务规则记录。',
     'LBL_PMSE_BUSINESS_RULES_IMPORT_SUCCESS' => '流程商务规则已成功导入系统。',
     'LBL_PMSE_BUSINESS_RULES_EMPTY_WARNING' => '请选择有效的 *.pbr 文件。',
 
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => '条件',
     'LBL_PMSE_LABEL_RETURN' => '返回',
     'LBL_PMSE_LABEL_CONCLUSIONS' => '总结',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => '更改字段',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => '回报值',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => '新增条件',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => '新增总结',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => '添加行',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => '移除列',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => '移除条件',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => '移除结论',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => '移除列数据',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => '是',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => '否',

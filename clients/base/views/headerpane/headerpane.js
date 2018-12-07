@@ -159,7 +159,7 @@
             return;
         }
 
-        $recordCells = this.$('.headerpane h1').children('.record-cell, .btn-toolbar');
+        $recordCells = this.$('.headerpane h1').children('.record-cell, .btn-toolbar').get().reverse();
 
         if (($recordCells.length > 0) && (this.getContainerWidth() > 0)) {
             $ellipsisCell = $(this._getCellToEllipsify($recordCells));
@@ -307,7 +307,8 @@
      * @private
      */
     _getCellToEllipsify: function($cells) {
-        var fieldTypesToEllipsify = ['fullname', 'name', 'text', 'base', 'enum', 'url', 'dashboardtitle', 'label'];
+        var fieldTypesToEllipsify = ['fullname', 'name', 'text', 'base', 'enum', 'url',
+            'dashboardtitle', 'label', 'drillthrough-labels'];
 
         return _.find($cells, function(cell) {
             return (_.indexOf(fieldTypesToEllipsify, $(cell).data('type')) !== -1);

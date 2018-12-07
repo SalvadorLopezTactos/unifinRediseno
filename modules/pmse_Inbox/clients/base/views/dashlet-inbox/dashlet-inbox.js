@@ -216,6 +216,9 @@
                     model.useAbsoluteTime = true;
                 }
             }
+            if (model.attributes.is_a_person) {
+                model.set('name', app.utils.formatNameModel(model.attributes.cas_sugar_module, model.attributes));
+            }
         }, this);
         this._super('_renderHtml');
     },

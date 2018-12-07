@@ -16,6 +16,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Provider\Visibility\Visibility;
 use Sugarcrm\Sugarcrm\Elasticsearch\Analysis\AnalysisBuilder;
 use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
 use Sugarcrm\Sugarcrm\Elasticsearch\Adapter\Document;
+use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Property\MultiFieldProperty;
 
 /**
  * Class TeamBasedACLVisibility
@@ -95,7 +96,7 @@ class TeamBasedACLVisibility extends SugarVisibility implements StrategyInterfac
             FROM team_sets_teams tst
             INNER JOIN team_memberships {$teamTableAlias} ON {$teamTableAlias}.team_id = tst.team_id
                 AND {$teamTableAlias}.user_id = '{$current_user->id}' AND {$teamTableAlias}.deleted = 0
-            WHERE tst.team_set_id = {$tableAlias}.acl_team_set_id AND tst.deleted = 0";
+            WHERE tst.team_set_id = {$tableAlias}.acl_team_set_id";
 
         $ow = new OwnerVisibility($this->bean, $this->params);
         if (!empty($this->getOption('table_alias'))) {
@@ -149,7 +150,9 @@ class TeamBasedACLVisibility extends SugarVisibility implements StrategyInterfac
      */
     public function elasticBuildMapping(Mapping $mapping, Visibility $provider)
     {
-        $mapping->addNotAnalyzedField('acl_team_set_id');
+        $property = new MultiFieldProperty();
+        $property->setType('keyword');
+        $mapping->addCommonField('acl_team_set_id', 'set', $property);
     }
 
     /**
@@ -170,16 +173,18 @@ class TeamBasedACLVisibility extends SugarVisibility implements StrategyInterfac
     /**
      * {@inheritdoc}
      */
-    public function elasticAddFilters(\User $user, \Elastica\Filter\BoolFilter $filter, Visibility $provider)
+    public function elasticAddFilters(User $user, \Elastica\Query\BoolQuery $filter, Visibility $provider)
     {
         if ($this->isApplicable()) {
-            $combo = new \Elastica\Filter\BoolOr();
-            $combo->addFilter(
-                $provider->createFilter('TeamSet', array('user' => $user, 'field' => 'acl_team_set_id'))
-            );
-            $combo->addFilter(
-                $provider->createFilter('Owner', array('bean' => $this->bean, 'user' => $user))
-            );
+            $combo = new \Elastica\Query\BoolQuery();
+            $combo->addFilter($provider->createFilter('TeamSet', [
+                'user' => $user,
+                'module' => $this->bean->module_name,
+                'field' => 'acl_team_set_id.set',
+            ]));
+            $combo->addFilter($provider->createFilter('Owner', [
+                'user_id' => $user->id,
+            ]));
             $filter->addMust($combo);
         }
     }

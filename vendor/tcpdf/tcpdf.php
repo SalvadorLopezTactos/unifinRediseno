@@ -179,6 +179,8 @@ r46451 - 2009-04-23 16:57:40 -0700 (Thu, 23 Apr 2009) - jenny - tcpdf initial ch
  * @version 4.6.013
  */
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 /**
  * main configuration file
  */
@@ -3038,7 +3040,7 @@ if (!class_exists('TCPDF', false)) {
 			}
 			// include font file
 			if (file_exists($fontfile)) {
-				include($fontfile);
+				include FileLoader::validateFilePath($fontfile);
 			} else {
 				$this->Error('Could not include font definition file: '.$family.'');
 			}

@@ -189,6 +189,7 @@ class SugarOAuth2StorageBase extends SugarOAuth2StoragePlatform {
      * @param string $username The name of the user you want to load
      *
      * @return SugarBean The user from the name
+     * @throws SugarApiExceptionNeedLogin
      */
     public function loadUserFromName($username)
     {

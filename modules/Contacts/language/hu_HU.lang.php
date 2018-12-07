@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'Email',
     'db_email2' => 'Egyéb email',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Kapcsolatok listája műszerfal',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Kapcsolat bejegyzések műszerfal',
+
     'LNK_CONTACT_REPORTS' => 'Kapcsolat-jelentések megtekintése',
     'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót az kliens törléséhez!',
     'LBL_ACCOUNT_ID' => 'Kliens azonosító:',
@@ -267,4 +271,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Kapcsolatok jelentései',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Hozzájárulás üzleti célokhoz a következőhöz',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Hozzájárulás utolsó frissítése',
 );

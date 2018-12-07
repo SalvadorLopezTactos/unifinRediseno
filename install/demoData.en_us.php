@@ -2395,7 +2395,10 @@ $sugar_demodata['email_seed_data_subjects'] = array(
 	'Demo', 
 	'Introduce all players', 
 );
-$sugar_demodata['email_seed_data_descriptions'] = 'Meeting to discuss project plan and hash out the details of implementation';
+$sugar_demodata['email_seed_data_descriptions'] = 'Important Meeting to discuss ' .
+    'project plan and hash out the details of implementation';
+$sugar_demodata['email_seed_data_description_html'] = '<p><strong>Important</strong> ' .
+    'Meeting to discuss project plan and hash out the details of implementation.</p>';
 $sugar_demodata['email_seed_data_types'] = array(
     'inbound',
     'draft',
@@ -2703,3 +2706,497 @@ $sugar_demodata['opportunities_seed_data']['opportunities'][1] = array(
 );
 //END Opportunities demo data
 
+//BEGIN Data Privacy demo data
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Send copy of privacy policy',
+    'status' => 'Open',
+    'type' => 'Request for Data Privacy Policy',
+    'priority' => 'Low',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Contact would like to review our privacy policy and wants a copy',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Send copy of revised privacy policy',
+    'status' => 'Closed',
+    'type' => 'Request for Data Privacy Policy',
+    'priority' => 'Low',
+    'source' => 'Web Form',
+    'requested_by' => 'By the person themselves',
+    'description' => 'We have sent an older version of the privacy policy and they would like to see the updated policy',
+    'resolution' => 'An updated policy was sent via email.',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Send personal information being captured in CRM',
+    'status' => 'Open',
+    'type' => 'Send Personal Information being processed',
+    'priority' => 'Low',
+    'source' => 'Phone',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Wants to know the details of all information captured in our CRM system',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Inquiry about personal information captured',
+    'status' => 'Closed',
+    'type' => 'Send Personal Information being processed',
+    'priority' => 'Low',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Wants details of the personal information captured by us',
+    'resolution' => 'Copied information personal information viewer and emailed to the person',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Request to check and send personal information',
+    'status' => 'Rejected',
+    'type' => 'Send Personal Information being processed',
+    'priority' => 'Low',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Wanted to check if any personal information was being recorded',
+    'resolution' => 'Subject is not eligible to receive a copy of the personal data as per legal. They can request again once legal challenges are resolved.',
+    'work_log' => 'Checking with legal on applicability',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Change the phone number in record',
+    'status' => 'Open',
+    'type' => 'Rectify Information',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'New work phone in 555-787-9087',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Change title and company name',
+    'status' => 'Closed',
+    'type' => 'Rectify Information',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Person has changed company. We need to correct this information. New company is Acme Software. New Title is Director Business Development. No email provided.',
+    'resolution' => 'Information rectified and confirmed in audit log',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Would like to erase and forget',
+    'status' => 'Open',
+    'type' => 'Request to Erase Information',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Subject wants to completely forget about them',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Request to remove social data',
+    'status' => 'Closed',
+    'type' => 'Request to Erase Information',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'This person wants us to remove their social links',
+    'resolution' => 'Information erased and informed subject via email',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Request to erase record completely',
+    'status' => 'Rejected',
+    'type' => 'Request to Erase Information',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Person has requested to be erased completely',
+    'resolution' => 'Request was reject as there is a outstanding balance. Email was sent to the person.',
+    'work_log' => "There is an outstanding balance with this company. Record cannot be erased until all arrears are paid.\n\nChecking if there is any outstanding work items",
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Request for an electronic copy of data',
+    'status' => 'Open',
+    'type' => 'Export Information',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Person wants access to all personal data stored in our systems',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Request for an electronic copy of personal data',
+    'status' => 'Closed',
+    'type' => 'Export Information',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Would like to receive an electronic copy of personal data',
+    'resolution' => 'Exported data from List view and emailed a subset to person',
+    'work_log' => 'Confirmed that subject is under purview of GDPR and has data subject rights',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Request copy of all data',
+    'status' => 'Rejected',
+    'type' => 'Export Information',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Would like to receive an electronic copy of personal data',
+    'resolution' => 'Request rejected. Emal has been sent with the decision.',
+    'work_log' => 'Subject is not EU resident and is not under purview. Recommend to reject request',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Would like to request the processing be stopped',
+    'status' => 'Open',
+    'type' => 'Restrict Processing',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Wants to restrict the processing of personal data',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Wants to stop processing of data',
+    'status' => 'Closed',
+    'type' => 'Restrict Processing',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Wants to restrict the processing of personal data',
+    'resolution' => 'Record has been marked for restriction',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Requesting to stop processing of personal data',
+    'status' => 'Rejected',
+    'type' => 'Restrict Processing',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Wants to restrict the processing of personal data',
+    'resolution' => 'Request rejected. Emal has been sent with the decision.',
+    'work_log' => 'Subject is not EU resident and is not under purview. Recommend to reject request',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Objects to processing of personal data',
+    'status' => 'Open',
+    'type' => 'Object to Processing',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Wants to restrict the processing of personal data',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Request related to objection of processing',
+    'status' => 'Closed',
+    'type' => 'Object to Processing',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Wants to restrict the processing of personal data',
+    'resolution' => 'Record has been marked for restriction',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Requesting to stop processing of personal data',
+    'status' => 'Rejected',
+    'type' => 'Object to Processing',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Wants to restrict the processing of personal data',
+    'resolution' => 'Request rejected. Emal has been sent with the decision.',
+    'work_log' => 'Subject is not EU resident and is not under purview. Recommend to reject request',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Received consent to process',
+    'status' => 'Closed',
+    'type' => 'Consent to Process',
+    'priority' => 'Medium',
+    'source' => 'web form',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Consent was received',
+    'resolution' => 'Consent recorded in record',
+    'business_purpose' => '^Business Communications^,^Marketing Communications by company^',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Withdraws consent for marketing',
+    'status' => 'Open',
+    'type' => 'Withdraw Consent',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Would like to withdraw consent',
+    'business_purpose' => '^Marketing Communications by company^,^Marketing Communications by partners^',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Withdraws consent for partner marketing',
+    'status' => 'Closed',
+    'type' => 'Withdraw Consent',
+    'priority' => 'Medium',
+    'source' => 'phone',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Would like to withdraw consent',
+    'resolution' => 'Accepted. Email sent. Contact record updated.',
+    'business_purpose' => '^Marketing Communications by partners^',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Withdraws consent for partner marketing',
+    'status' => 'Rejected',
+    'type' => 'Withdraw Consent',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Would like to withdraw consent',
+    'resolution' => 'Request rejected. Emal has been sent with the decision.',
+    'work_log' => 'Consent cannot be removed for business communications as per policy',
+    'business_purpose' => '^Business Communications^ ',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Wanted to find out if our company is compliant with regulations',
+    'status' => 'Closed',
+    'type' => 'Other',
+    'priority' => 'Low',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'email sent with link to the web site on privacy policy',
+    'resolution' => 'EMail sent',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Request for personal information captured in CRM',
+    'status' => 'Open',
+    'type' => 'Send Personal Information being processed',
+    'priority' => 'Low',
+    'source' => 'Phone',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Wants to know the details of all information captured in our CRM system',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Send personal information ',
+    'status' => 'Open',
+    'type' => 'Send Personal Information being processed',
+    'priority' => 'Low',
+    'source' => 'Phone',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Wants to know the details of all information captured in our CRM system',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Send personal information being captured in CRM',
+    'status' => 'Open',
+    'type' => 'Send Personal Information being processed',
+    'priority' => 'Low',
+    'source' => 'Phone',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Wants to know the details of all information captured in our CRM system',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Request for a copy of data',
+    'status' => 'Open',
+    'type' => 'Export Information',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Subject is requesting a copy of all personal information captured on them',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Request for an electronic copy of personal data',
+    'status' => 'Open',
+    'type' => 'Export Information',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Requesting an electronic copy of personal data stored',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Request for a copy of personal information ',
+    'status' => 'Open',
+    'type' => 'Export Information',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Request for a copy of personal information',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Request for an electronic copy of data',
+    'status' => 'Open',
+    'type' => 'Export Information',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Request for an electronic copy of data',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Want us to erase personal data',
+    'status' => 'Open',
+    'type' => 'Request to Erase Information',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Want us to erase personal data because they are getting a lot of junk mail',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'No business, Erase data',
+    'status' => 'Open',
+    'type' => 'Request to Erase Information',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Request to erase data as they have not done any business with our company in the past 4 years',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Erase personal data per lack of consent',
+    'status' => 'Open',
+    'type' => 'Request to Erase Information',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Subject is upset that consent was not provided, and hence data should be erased and no further communication should be allowed',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Forget about my record',
+    'status' => 'Open',
+    'type' => 'Request to Erase Information',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Would like us to forget about their record completely from all systems',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Received consent to process',
+    'status' => 'Closed',
+    'type' => 'Consent to Process',
+    'priority' => 'Medium',
+    'source' => 'web form',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Consent was received',
+    'resolution' => 'Consent recorded in record',
+    'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Received consent to process',
+    'status' => 'Closed',
+    'type' => 'Consent to Process',
+    'priority' => 'Medium',
+    'source' => 'web form',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Consent was received',
+    'resolution' => 'Consent recorded in record',
+    'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Received consent to process',
+    'status' => 'Closed',
+    'type' => 'Consent to Process',
+    'priority' => 'Medium',
+    'source' => 'web form',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Consent was received',
+    'resolution' => 'Consent recorded in record',
+    'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Received consent to process',
+    'status' => 'Closed',
+    'type' => 'Consent to Process',
+    'priority' => 'Medium',
+    'source' => 'web form',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Consent was received',
+    'resolution' => 'Consent recorded in record',
+    'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Received consent to process',
+    'status' => 'Closed',
+    'type' => 'Consent to Process',
+    'priority' => 'Medium',
+    'source' => 'web form',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Consent was received',
+    'resolution' => 'Consent recorded in record',
+    'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Received consent to process',
+    'status' => 'Closed',
+    'type' => 'Consent to Process',
+    'priority' => 'Medium',
+    'source' => 'web form',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Consent was received',
+    'resolution' => 'Consent recorded in record',
+    'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Received consent to process',
+    'status' => 'Closed',
+    'type' => 'Consent to Process',
+    'priority' => 'Medium',
+    'source' => 'web form',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Consent was received',
+    'resolution' => 'Consent recorded in record',
+    'business_purpose' => '^Business Communications^,^Marketing Communications by company^,^Marketing Communications by partners^',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Want us to erase personal data',
+    'status' => 'Open',
+    'type' => 'Request to Erase Information',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Want us to erase personal data because they are getting a lot of spam',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'No business, Erase data',
+    'status' => 'Open',
+    'type' => 'Request to Erase Information',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Requet to erase data as they have not done any business with our company in the past 2 years',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Erase personal data per lack of consent',
+    'status' => 'Open',
+    'type' => 'Request to Erase Information',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Subject is upset that consent was not provided, and hence data should be erased and no further communication should be allowed',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'ERase data about minors',
+    'status' => 'Open',
+    'type' => 'Request to Erase Information',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the parent of person',
+    'description' => 'The parent of this person called and would like to completely erase their minors data',
+    'resolution' => 'Confirmed that subject is a minor and is subject to erasure. Informed Data Privacy Manager',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Requests to correct information',
+    'status' => 'Open',
+    'type' => 'Rectify Information',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'New work phone in 510-737-9876',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Change email address',
+    'status' => 'Open',
+    'type' => 'Rectify Information',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'New email address is jwc@acme.com',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Change company and title',
+    'status' => 'Open',
+    'type' => 'Rectify Information',
+    'priority' => 'Medium',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Company name is Whitehouse marketing, Title is VP Marketing',
+);
+$sugar_demodata['dataprivacy_seed_data'][] = array(
+    'name' => 'Would like to request the processing be stopped',
+    'status' => 'Open',
+    'type' => 'Restrict Processing',
+    'priority' => 'High',
+    'source' => 'Email',
+    'requested_by' => 'By the person themselves',
+    'description' => 'Wants to restrict the processing of personal data',
+);
+//END Data Privacy demo data

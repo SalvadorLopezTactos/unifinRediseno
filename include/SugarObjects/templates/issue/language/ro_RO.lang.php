@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => 'Ultima modificare efectuată de:',
   'LBL_ASSIGNED_USER' => 'Atribuit utilizatorului',
   'LBL_ASSIGNED_USER_NAME' => 'Atribuit lui',
-  'LBL_SYSTEM_ID' =>'sistem id',
   'LBL_TEAM_NAME' =>'Nume Echipa',
   'LBL_TYPE'=>'Tip',
   'LBL_SUBJECT' => 'subiect',

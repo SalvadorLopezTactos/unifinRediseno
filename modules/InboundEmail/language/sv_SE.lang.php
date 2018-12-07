@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Felaktigt användarnamn eller lösenord',
-	'ERR_BODY_TOO_LONG'		=> '\rMeddelandetexten för lång för att kunna spara hela meddelandet.  Har trimmats',
+	'ERR_BODY_TOO_LONG'		=> '\\rMeddelandetexten för lång för att kunna spara hela meddelandet.  Har trimmats',
 	'ERR_INI_ZLIB'			=> 'Kunde inte stänga av Zlib kompressionen temporärt. "Testa inställningar" kan misslyckas.',
 	'ERR_MAILBOX_FAIL'		=> 'Kunde inte hämta några emailkonton.',
 	'ERR_NO_IMAP'			=> 'Inga IMAP-bibliotek hittades. Var god lös detta innan du fortsätter med inkommande email',

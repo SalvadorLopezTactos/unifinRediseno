@@ -8,28 +8,30 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*globals Container, $, Modal, TabPanelElement, Panel, Base, document, Button,
+// jscs:disable
+/*globals PMSE.Container, $, PMSE.Modal, TabPanelElement, PMSE.Panel, PMSE.Base, document, PMSE.Button,
  setTimeout
  */
+var PMSE = PMSE || {};
 /**
  * @class MessagePanel
  * Handle window objects
- * @extend Container
+ * @extends PMSE.Container
  *
  * @constructor
  * Creates a new instance of the window's class
  * @param {Object} options
  */
 var MessagePanel = function (options) {
-    Container.call(this, options);
+    PMSE.Container.call(this, options);
     /**
      * Defines the window's modal property
      * @type {Boolean}
      */
     this.modal = null;
     /**
-     * Defines the Modal Object to handle modal windows
-     * @type {Modal}
+     * Defines the PMSE.Modal Object to handle modal windows
+     * @type {PMSE.Modal}
      */
     this.modalObject = null;
     /**
@@ -39,12 +41,12 @@ var MessagePanel = function (options) {
      */
     this.modalContainer = null;
     /**
-     * Defines the Close Button HTML Element
+     * Defines the Close PMSE.Button HTML Element
      * @type {HTMLElement}
      */
     this.closeButtonObject = null;
     /**
-     * Defines the window header HTML Element where are placed the title label HTML Element and the Close Button HTML Element
+     * Defines the window header HTML Element where are placed the title label HTML Element and the Close PMSE.Button HTML Element
      * @type {HTMLElement}
      */
     this.windowHeader = null;
@@ -69,7 +71,7 @@ var MessagePanel = function (options) {
     MessagePanel.prototype.initObject.call(this, options);
 };
 
-MessagePanel.prototype = new Container();
+MessagePanel.prototype = new PMSE.Container();
 
 /**
  * Defines the object's type
@@ -135,7 +137,7 @@ MessagePanel.prototype.setTitle = function (text) {
 MessagePanel.prototype.createHTML = function () {
 
     var marginProps, closeBtn, titleLabel, windowHeader, tabsContainer, i, footerDiv, pictureDiv, textDiv;
-    Container.prototype.createHTML.call(this);
+    PMSE.Container.prototype.createHTML.call(this);
     marginProps = '-' + parseInt(this.height / 2, 10) + 'px 0 0 -' + parseInt(this.width / 2, 10) + 'px';
     //this.style.addClasses(['adam-message-panel']);
     this.style.addClasses(['adam-message-panel']);
@@ -261,7 +263,7 @@ MessagePanel.prototype.show = function (params) {
  */
 MessagePanel.prototype.setModal = function (value) {
     if (value) {
-        this.modalObject = new Modal({
+        this.modalObject = new PMSE.Modal({
             clickHandler: this.modalHandler
         });
     } else {
@@ -337,7 +339,7 @@ MessagePanel.prototype.attachListeners = function () {
     }, 0);
 
     focushandler = function (e) {
-        if (!$(e.target).parents().andSelf().is('#' + that.id)) {
+        if (!$(e.target).parents().addBack().is('#' + that.id)) {
             $(that.html).focus();
         }
     };
@@ -421,11 +423,11 @@ MessagePanel.prototype.setButtons = function (buttons) {
 
 MessagePanel.prototype.addButton = function (button) {
     var newButton;
-    if (button && button.family && button.family === 'Button') {
+    if (button && button.family && button.family === 'PMSE.Button') {
         newButton = button;
         newButton.setParent(this);
     } else {
-        newButton = new Button(button, this);
+        newButton = new PMSE.Button(button, this);
     }
     if (newButton) {
         this.buttons.push(newButton);
@@ -433,7 +435,7 @@ MessagePanel.prototype.addButton = function (button) {
 };
 MessagePanel.prototype.setHeight = function (height) {
     var bodyHeight;
-    //Container.prototype.setHeight.call(this, height);
+    //PMSE.Container.prototype.setHeight.call(this, height);
     bodyHeight = this.height - this.footerHeight - this.headerHeight;
     //console.log(bodyHeight);
     this.setBodyHeight(bodyHeight);

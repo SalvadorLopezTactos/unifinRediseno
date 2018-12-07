@@ -8,19 +8,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
-/*globals Panel, $, Proxy, TextField, ComboboxField, HiddenField, EmailPickerField, ItemMatrixField, MultipleItemField,
-    CriteriaField, ItemUpdaterField, ExpressionField, TextareaField, CheckboxField, Button, RadiobuttonField */
+// jscs:disable
+/*globals PMSE.Panel, $, PMSE.Proxy, TextField, ComboboxField, HiddenField, EmailPickerField, ItemMatrixField, MultipleItemField,
+    CriteriaField, ItemUpdaterField, ExpressionField, TextareaField, CheckboxField, AdamnButton, RadiobuttonField */
+var PMSE = PMSE || {};
 /**
- * @class Form
+ * @class PMSE.Form
  * Handles form panels
- * @extend Panel
+ * @extends PMSE.Panel
  *
  * @constructor
  * Creates a new instance of the object
  * @param {Object} options
  */
-var Form = function (options) {
-    Panel.call(this, options);
+PMSE.Form = function(options) {
+    PMSE.Panel.call(this, options);
 
     /**
      * Defines if the form has a proxy
@@ -36,7 +38,7 @@ var Form = function (options) {
 
     /**
      * Defines the form's proxy object
-     * @type {Proxy}
+     * @type {AdamProxy}
      */
     this.proxy = null;
     /**
@@ -78,21 +80,21 @@ var Form = function (options) {
 
     this._errorMessage = null;
 
-    Form.prototype.initObject.call(this, options);
+    PMSE.Form.prototype.initObject.call(this, options);
 };
 
-Form.prototype = new Panel();
+PMSE.Form.prototype = new PMSE.Panel();
 
 /**
  * Defines the object's type
  * @type {String}
  */
-Form.prototype.type = 'Form';
+PMSE.Form.prototype.type = 'PMSE.Form';
 
 /**
  * Initializes the object with the default values
  */
-Form.prototype.initObject = function (options) {
+PMSE.Form.prototype.initObject = function(options) {
     var defaults = {
         url: null,
         data: null,
@@ -136,7 +138,7 @@ Form.prototype.initObject = function (options) {
             TITLE_MODULE_FIELD_EVALUATION: 'Module Field Evaluation',
             TITLE_FORM_RESPONSE_EVALUATION: 'Form Response Evaluation',
             TITLE_USER_EVALUATION: 'User Evaluation',
-            LBL_FORM: 'Form',
+            LBL_FORM: 'PMSE.Form',
             LBL_STATUS: 'Status',
             LBL_APPROVED: 'Approved',
             LBL_REJECTED: 'Rejected',
@@ -166,7 +168,7 @@ Form.prototype.initObject = function (options) {
  * Sets error message to be shown when validation error happens.
  * @private
  */
-Form.prototype._setErrorMessage = function () {
+PMSE.Form.prototype._setErrorMessage = function() {
     var iconSpan = this.createHTMLElement('span');
     iconSpan.className = 'fa fa-warning';
     var messageLabel = this.createHTMLElement('span');
@@ -183,7 +185,7 @@ Form.prototype._setErrorMessage = function () {
  * @param {HTMLElement|String} context
  * @private
  */
-Form.prototype._setCloseOnClickContext = function (context) {
+PMSE.Form.prototype._setCloseOnClickContext = function(context) {
     if (typeof context === 'string') {
         context = $(context).get(0);
     }
@@ -199,7 +201,7 @@ Form.prototype._setCloseOnClickContext = function (context) {
  * @param {String} url
  * @return {*}
  */
-Form.prototype.setUrl = function (url) {
+PMSE.Form.prototype.setUrl = function(url) {
     this.url = url;
     return this;
 };
@@ -209,18 +211,18 @@ Form.prototype.setUrl = function (url) {
  * @param {Boolean} value
  * @return {*}
  */
-Form.prototype.setProxyEnabled = function (value) {
+PMSE.Form.prototype.setProxyEnabled = function(value) {
     this.proxyEnabled = value;
     return this;
 };
 
 /**
  * Defines the proxy object
- * @param {Proxy} proxy
+ * @param {AdamProxy} proxy
  * @return {*}
  */
-Form.prototype.setProxy = function (proxy) {
-    if (proxy && proxy.family && proxy.family === 'Proxy') {
+PMSE.Form.prototype.setProxy = function(proxy) {
+    if (proxy && proxy.family && proxy.family === 'PMSE.Proxy') {
         this.proxy = proxy;
         this.url = proxy.url;
         this.proxyEnabled = true;
@@ -230,10 +232,10 @@ Form.prototype.setProxy = function (proxy) {
                 if (!proxy.url) {
                     proxy.url = this.url;
                 }
-                this.proxy = new Proxy(proxy);
+                this.proxy = new PMSE.Proxy(proxy);
             } else {
                 if (this.url) {
-                    this.proxy = new Proxy({url: this.url});
+                    this.proxy = new PMSE.Proxy({url: this.url});
                 }
             }
         }
@@ -246,7 +248,7 @@ Form.prototype.setProxy = function (proxy) {
  * @param {Object} data
  * @return {*}
  */
-Form.prototype.setData = function (data) {
+PMSE.Form.prototype.setData = function(data) {
     this.data = data;
     if (this.loaded) {
         this.applyData();
@@ -259,53 +261,53 @@ Form.prototype.setData = function (data) {
  * @param {Object} cb
  * @return {*}
  */
-Form.prototype.setCallback = function (cb) {
+PMSE.Form.prototype.setCallback = function(cb) {
     this.callback = cb;
     return this;
 };
 
-Form.prototype.setFooterAlign = function (position) {
+PMSE.Form.prototype.setFooterAlign = function(position) {
     this.footerAlign = position;
     return this;
 };
 
-Form.prototype.setLabelWidth = function (width) {
+PMSE.Form.prototype.setLabelWidth = function(width) {
     this.labelWidth = width;
     return this;
 };
 
-Form.prototype.setFooterHeight = function (width) {
+PMSE.Form.prototype.setFooterHeight = function(width) {
     this.footerHeight = width;
     return this;
 };
 
-Form.prototype.setHeaderHeight = function (width) {
+PMSE.Form.prototype.setHeaderHeight = function(width) {
     this.headerHeight = width;
     return this;
 };
 
-Form.prototype.setHeight = function (height) {
+PMSE.Form.prototype.setHeight = function(height) {
     var bodyHeight;
-    Panel.prototype.setHeight.call(this, height);
+    PMSE.Panel.prototype.setHeight.call(this, height);
     bodyHeight = this.height - this.footerHeight - this.headerHeight;
     this.setBodyHeight(bodyHeight);
     return this;
 };
 
-Form.prototype.setCloseContainerOnSubmit = function (value) {
+PMSE.Form.prototype.setCloseContainerOnSubmit = function(value) {
     this.closeContainerOnSubmit = value;
     return this;
 };
 /**
  * Loads the form
  */
-Form.prototype.load = function () {
+PMSE.Form.prototype.load = function() {
     var self = this, params = null;
     if (!this.loaded) {
         if (this.proxy) {
             params = this.getRelatedFields();
             this.proxy.getData(params, {
-                success: function (response) {
+                success: function(response) {
                     self.data = response;
                     self.applyData.call(self);
                     self.loaded = true;
@@ -326,7 +328,7 @@ Form.prototype.load = function () {
 /**
  * Returns the URL params if the form has related records
  */
-Form.prototype.getRelatedFields = function () {
+PMSE.Form.prototype.getRelatedFields = function() {
     var related = [];
     if (this.items) {
         for (i = 0; i < this.items.length; i += 1) {
@@ -346,7 +348,7 @@ Form.prototype.getRelatedFields = function () {
  * Reloads the form
  */
 
-Form.prototype.reload = function () {
+PMSE.Form.prototype.reload = function() {
     this.loaded = false;
     this.load();
 };
@@ -355,7 +357,7 @@ Form.prototype.reload = function () {
  * Applies the data to the form
  * @param dontLoad boolean Set the flag to trigger loaded event. Default value is FALSE
  */
-Form.prototype.applyData = function (dontLoad) {
+PMSE.Form.prototype.applyData = function(dontLoad) {
     var propertyName, i, related;
     if (this.data) {
         //Applying related data
@@ -391,11 +393,11 @@ Form.prototype.applyData = function (dontLoad) {
 
 /**
  * Add Fields Items
- * @param {Object/Field}item
+ * @param {(Object|PMSE.Field)}item
  */
-Form.prototype.addItem = function (item) {
+PMSE.Form.prototype.addItem = function(item) {
     var newItem;
-    if (item && item.family && item.family === 'Field') {
+    if (item && item.family && item.family === 'PMSE.Field') {
         newItem = item;
         newItem.setParent(this);
     } else {
@@ -451,7 +453,7 @@ Form.prototype.addItem = function (item) {
  * @param {Array} items
  * @return {*}
  */
-Form.prototype.setItems = function (items) {
+PMSE.Form.prototype.setItems = function(items) {
     var i;
     for (i = 0; i < items.length; i += 1) {
         this.addItem(items[i]);
@@ -464,8 +466,8 @@ Form.prototype.setItems = function (items) {
  * @param name
  * @returns {Object|null}
  */
-Form.prototype.getField = function (name) {
-    var field = _.find(this.items, function (item) {
+PMSE.Form.prototype.getField = function(name) {
+    var field = _.find(this.items, function(item) {
         return item.name == name;
     });
     return field || null;
@@ -476,7 +478,7 @@ Form.prototype.getField = function (name) {
  * @param {Array} buttons
  * @return {*}
  */
-Form.prototype.setButtons = function (buttons) {
+PMSE.Form.prototype.setButtons = function(buttons) {
     var i;
     for (i = 0; i < buttons.length; i += 1) {
         this.addButton(buttons[i]);
@@ -487,7 +489,7 @@ Form.prototype.setButtons = function (buttons) {
 /**
  * Resets the form
  */
-Form.prototype.reset = function () {
+PMSE.Form.prototype.reset = function() {
     var i;
     for (i = 0; i < this.items.length; i += 1) {
         this.items[i].reset();
@@ -501,7 +503,7 @@ Form.prototype.reset = function () {
 /**
  * Submits the form
  */
-Form.prototype.submit = function () {
+PMSE.Form.prototype.submit = function() {
     var data;
     if (this.validate()) {
         data = this.getData();
@@ -528,7 +530,7 @@ Form.prototype.submit = function () {
  * Returns the data
  * @return {Object}
  */
-Form.prototype.getData = function () {
+PMSE.Form.prototype.getData = function() {
     var i, result = {};
     for (i = 0; i < this.items.length; i += 1) {
         $.extend(result, this.items[i].getObjectValue());
@@ -541,7 +543,7 @@ Form.prototype.getData = function () {
  * @param {Boolean} value
  * @return {*}
  */
-Form.prototype.setDirty = function (value) {
+PMSE.Form.prototype.setDirty = function(value) {
     this.dirty = value;
     return this;
 };
@@ -550,7 +552,7 @@ Form.prototype.setDirty = function (value) {
  * Returns the dirty form property
  * @return {*}
  */
-Form.prototype.isDirty = function () {
+PMSE.Form.prototype.isDirty = function() {
     return this.dirty;
 };
 
@@ -558,7 +560,7 @@ Form.prototype.isDirty = function () {
  * Evaluate the fields' validations
  * @return {Boolean}
  */
-Form.prototype.validate = function () {
+PMSE.Form.prototype.validate = function() {
     var i, valid = true, current;
     if (this.testRequired()) {
         for (i = 0; i < this.items.length; i += 1) {
@@ -577,7 +579,7 @@ Form.prototype.validate = function () {
     return valid;
 };
 
-Form.prototype.testRequired = function () {
+PMSE.Form.prototype.testRequired = function() {
     var i, response = true;
     for (i = 0; i < this.items.length; i += 1) {
         response = response && this.items[i].evalRequired();
@@ -585,20 +587,20 @@ Form.prototype.testRequired = function () {
     return response;
 };
 
-Form.prototype.addButton = function (button) {
+PMSE.Form.prototype.addButton = function(button) {
     var newButton;
-    if (button && button.family && button.family === 'Button') {
+    if (button && button.family && button.family === 'PMSE.Button') {
         newButton = button;
         newButton.setParent(this);
     } else {
-        newButton = new Button(button, this);
+        newButton = new PMSE.Button(button, this);
     }
     if (newButton) {
         this.buttons.push(newButton);
     }
 };
 
-Form.prototype.attachListeners = function () {
+PMSE.Form.prototype.attachListeners = function() {
     var i;
     for (i = 0; i < this.items.length; i += 1) {
         this.items[i].attachListeners();
@@ -607,14 +609,14 @@ Form.prototype.attachListeners = function () {
         this.buttons[i].attachListeners();
     }
     //$(this.footer).draggable( "option", "disabled", true);
-    $(this.body).mousedown(function (e) {
+    $(this.body).mousedown(function(e) {
         e.stopPropagation();
     });
 };
 
-Form.prototype.onEnterFieldHandler = function (fieldObject) {
+PMSE.Form.prototype.onEnterFieldHandler = function(fieldObject) {
     var that = this;
-    return function () {
+    return function() {
         var i;
 
         for (i = 0; i < that.items.length; i += 1) {
@@ -625,9 +627,9 @@ Form.prototype.onEnterFieldHandler = function (fieldObject) {
     };
 };
 
-Form.prototype.createHTML = function () {
+PMSE.Form.prototype.createHTML = function() {
     var i, html;
-    Panel.prototype.createHTML.call(this);
+    PMSE.Panel.prototype.createHTML.call(this);
     this.footer.style.textAlign = this.footerAlign;
     for (i = 0; i < this.items.length; i += 1) {
         html = this.items[i].getHTML();
@@ -644,7 +646,7 @@ Form.prototype.createHTML = function () {
     return this.html;
 };
 
-Form.prototype.setParent = function (parent) {
+PMSE.Form.prototype.setParent = function(parent) {
     this.parent = parent;
     return this;
 };

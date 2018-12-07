@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'A felhasználó adatai nem találhatók',
     'ERR_USER_NAME_EXISTS'              => 'A(z) {0} felhasználónév már létezik. Azonos felhasználói nevek nem engedélyezettek. Változtassa egyedivé a felhasználónevet.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Ez a felhasználó ki van zárva a Sugar alkalmazásból, így nem tud bejelentkezni jelenlegi jelszavával.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'A kizárólag külső hitelesítést alkalmazó felhasználók nem jelentkezhetnek be Sugar azonosítókkal',
 
 	'LBL_PASSWORD_SENT'                => 'Jelszó frissítve',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Jelszó küldése sikertelen',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Címzett email címe',
 	'ERR_SERVER_STATUS'					=> 'A kiszolgáló állapota',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'A rendszer nem tud emailt elküldeni a felhasználónak. Kérjük, ellenőrizze a kimenő levelek konfigurációját az Email beállítások menüpontban!',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'A felhasználó IDM módban kizárólag a <a href="{0}" target="_blank">Felhőkonzol</a> felületen hozható létre.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Az elsődleges e-mail cím kizárólag a <a href="{0}" target="_blank">Felhőkonzol</a> felületen frissíthető.',
 
     'LBL_EMAIL_ADDRESS'                 => 'Email cím',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Jelszó megerősítése',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'A felhasználó típusát megváltoztatta Rendszergazda felhasználóról Normál felhasználóra. A mentés után a Felhasználónak megszűnnek a rendszer adminisztrátori jogosultságai.\n\nNyomja meg az OK gombot a folytatáshoz!\nNyomja meg a Mégsem gombot, ha vissza akar térni a rekordhoz.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'A felhasználó típusát megváltoztatta Rendszergazda felhasználóról Normál felhasználóra. A mentés után a Felhasználónak megszűnnek a rendszer adminisztrátori jogosultságai.\\n\\nNyomja meg az OK gombot a folytatáshoz!\\nNyomja meg a Mégsem gombot, ha vissza akar térni a rekordhoz.',
 	'LBL_COUNTRY'						=> 'Ország',
 	'LBL_CURRENCY_TEXT'					=> 'Válassza ki az alapértelmezett fizetőeszközt új rekord létrehozásánál. Ez a fizetőeszköz fog megjelenni a Lehetőségek listázásában az Összeg oszlopban is.',
 	'LBL_CURRENCY'						=> 'Pénznem',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'perc',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'mp.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Kérjük, lépjen kapcsolatba a rendszergazdával!',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'IDM módban történő OpenID Connect (OIDC) hitelesítéshez telepítse a GMP PHP bővítményt.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Ki van jelentkezve. A bejelentkezéshez kattintson',
     'LBL_LOGGED_OUT_2' => 'ide',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Felhasználók jelentései',
     'LBL_CONTACTS_SYNC' => 'Kapcsolatok',
     'LBL_DETAIL' => 'Felhasználói profil',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Ha egyes mezők nem szerkeszthetők, a mezők kezeléséhez jelentkezzen be a Felhőkonzol felületen',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Amennyiben módosítani kíván egyes nem szerkeszthető mezőket, ' .
+        'vegye fel a kapcsolatot a Rendszergazdával, és tájékoztassa ezekről a módosításokról',
 ); // END STRINGS DEFS
 
 ?>

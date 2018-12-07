@@ -10,8 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-class DashboardApi extends SugarApi
+class DashboardApi extends ModuleApi
 {
     /**
      * Rest Api Registration Method
@@ -23,6 +22,8 @@ class DashboardApi extends SugarApi
         $dashboardApi = array(
             'createDashboardForModule' => array(
                 'reqType' => 'POST',
+                'minVersion' => '10',
+                'maxVersion' => '10',
                 'path' => array('Dashboards', '<module>'),
                 'pathVars' => array('', 'module'),
                 'method' => 'createDashboard',
@@ -31,11 +32,13 @@ class DashboardApi extends SugarApi
             ),
             'createDashboardForHome' => array(
                 'reqType' => 'POST',
+                'minVersion' => '10',
+                'maxVersion' => '10',
                 'path' => array('Dashboards'),
                 'pathVars' => array(''),
                 'method' => 'createDashboard',
                 'shortHelp' => 'Create a new dashboard for home',
-                'longHelp' => 'include/api/help/create_dashboard.html',
+                'longHelp' => 'include/api/help/create_home_dashboard.html',
             ),
         );
         return $dashboardApi;

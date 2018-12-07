@@ -94,12 +94,6 @@
                             </td>
                         </tr>
                     {/if}
-                    {foreach from=$warningsLocalhost item = warning}
-                        <tr>
-                            <td></td>
-                            <td colspan="2" align="center"><span class='stop'><b>{$warning}</b></span></td>
-                        </tr>
-                    {/foreach}
                     {if $smarty.session.install_type && $smarty.session.install_type eq 'custom'}
                         <tr>
                             <td colspan="3" align="left"></td>

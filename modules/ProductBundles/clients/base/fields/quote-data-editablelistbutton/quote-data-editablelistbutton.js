@@ -20,6 +20,15 @@
      * @inheritdoc
      */
     _render: function() {
+        var syncedName;
+
+        if (this.name === 'inline-save') {
+            syncedName = this.model.getSynced('name');
+            if (this.model.get('name') !== syncedName) {
+                this.changed = true;
+            }
+        }
+
         this._super('_render');
 
         if (this.tplName === 'edit') {
@@ -34,7 +43,6 @@
      * specifically need it based off the modelView set by the parent layout for this row model
      *
      * @inheritdoc
-     * @override
      */
     _loadTemplate: function() {
         this.tplName = this.model.modelView || 'list';
@@ -51,7 +59,6 @@
      * the quote data group header
      *
      * @inheritdoc
-     * @override
      */
     cancelEdit: function() {
         var modelModule = this.model.module;
@@ -94,7 +101,6 @@
      * create view or the group was just saved
      *
      * @inheritdoc
-     * @override
      */
     cancelClicked: function() {
         var syncedAttribs = this.model.getSynced();

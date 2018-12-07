@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Ponude (dostaviti korisniku)',
 	'LNK_ACCOUNT_REPORTS' => 'Prikaz izvješća o računu',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenti',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Nadzorna ploča za popis računa',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapis o računu',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafikoni',
 	'LBL_DEFAULT' => 'Prikazi',
@@ -79,7 +83,7 @@ $mod_strings = array (
 	'LBL_INVALID_EMAIL'=>'Neispravna e-pošta:',
 	'LBL_INVITEE' => 'Kontakti',
 	'LBL_LEADS_SUBPANEL_TITLE' => 'Pot. klij.',
-	'LBL_LIST_ACCOUNT_NAME' => 'Ime',
+	'LBL_LIST_ACCOUNT_NAME' => 'Naziv',
 	'LBL_LIST_CITY' => 'Grad',
 	'LBL_LIST_CONTACT_NAME' => 'Ime kontakta',
 	'LBL_LIST_EMAIL_ADDRESS' => 'Adresa e-pošte',
@@ -91,7 +95,7 @@ $mod_strings = array (
 	'LBL_MEMBER_OF' => 'Član:',
 	'LBL_MEMBER_ORG_FORM_TITLE' => 'Organizacije članice',
 	'LBL_MEMBER_ORG_SUBPANEL_TITLE'=>'Organizacije članice',
-	'LBL_MODULE_NAME' => 'Računi',
+	'LBL_MODULE_NAME' => 'računi',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Račun',
     'LBL_MODULE_TITLE' => 'Računi: Početna stranica',
 	'LBL_MODULE_ID'=> 'Računi',

@@ -140,13 +140,28 @@
             },
 
             /**
+             * Returns true if the field is marked as erased.
+             *
+             * @return {boolean} true if the record has the field marked as erased; false otherwise.
+             */
+            _isErasedField: function() {
+                if (!this.model) {
+                    return false;
+                }
+
+                return !this.model.get(this.name) && _.contains(this.model.get('_erased_fields'), this.name);
+            },
+
+            /**
              * @inheritdoc
              * Checks fallback actions first and then follows ACLs checking
              * after that.
              *
-             * First, check whether the action belongs to the fallback actions
+             * First, check whether the action indicates an erased field. Return
+             * true only if the field does have access to at least `detail` action.
+             * Second, check whether the action belongs to the fallback actions
              * and no more chaining fallback map.
-             * Second, the field should fallback to 'nodata' if current field
+             * Third, the field should fallback to 'nodata' if current field
              * requires to display nodata.
              * Finally, checks ACLs to see if the current user has access to
              * action.
@@ -155,13 +170,16 @@
              * @return {Boolean} true if accessable otherwise false.
              */
             _checkAccessToAction: function(action) {
-
                 if (_.contains(this.fallbackActions, action) && _.isUndefined(this.viewFallbackMap[action])) {
                     return true;
                 }
 
                 if (_.result(this, 'showNoData') === true) {
                     return action === 'nodata';
+                }
+
+                if (action === 'erased') {
+                    return app.acl.hasAccessToModel('detail', this.model, this.name);
                 }
 
                 return app.acl.hasAccessToModel(action, this.model, this.name);
@@ -175,6 +193,7 @@
                 'list': 'detail',
                 'edit': 'detail',
                 'detail': 'noaccess',
+                'erased': 'noaccess',
                 'noaccess' : 'nodata'
             },
             /**
@@ -182,7 +201,7 @@
              * instead of 'detail'.
              */
             fallbackActions: [
-                'noaccess', 'nodata'
+                'noaccess', 'nodata', 'erased'
             ],
 
             /**
@@ -195,6 +214,19 @@
                 return (this.isDisabled() && viewName === 'disabled') ? 'edit' :
                     (this.view.fallbackFieldTemplate || 'detail');
             },
+
+            /**
+             * Set the action and viewName to `erased`, if the field is marked as erased.
+             * Note that both action and viewName need to be set in order to
+             * be able to select the necessary template.
+             */
+            _setErasedFieldAction: function() {
+                if (this._isErasedField() && this.action !== 'edit') {
+                    this.action = 'erased';
+                    this.options.viewName = 'erased';
+                }
+            },
+
             /**
              * Override _render to redecorate fields if field is on error state
              * and to add view action CSS class.
@@ -202,6 +234,7 @@
             _render: function () {
                 this.clearErrorDecoration();
                 this._processHelp();
+                this._setErasedFieldAction();
 
                 _fieldProto._render.call(this);
 
@@ -226,17 +259,6 @@
                     if (this.action === 'edit' || -1 !== _.indexOf(['edit', 'list-edit'], this.tplName)) {
                         this.decorateHelper();
                     }
-                }
-
-                /**
-                 * Fix placeholder on global search on IE and old browsers
-                 */
-                if ($.fn.placeholder) {
-                    var $input = this.$('input');
-                    _.each($input, function(element) {
-                        var $element = $(element);
-                        $element.attr('placeholder') && $element.placeholder();
-                    });
                 }
             },
 
@@ -275,9 +297,11 @@
              * Default implementation for field helper
              */
             decorateHelper: function() {
+                var title = app.lang.get(this.def.help, this.module);
+
                 this.$el.closest('.record-cell').attr({
                     'rel': 'tooltip',
-                    'data-title': this.def['help'],
+                    'data-title': title,
                     'data-placement': 'bottom'
                 });
             },
@@ -382,10 +406,10 @@
             /**
              * @inheritdoc
              *
-             * Override setMode to remove the stale disabled CSS class.
+             * Override setDisabled to remove the stale disabled CSS class.
              * @override
              */
-            setDisabled: function (disable) {
+            setDisabled: function(disable, options) {
 
                 if (!this._checkAccessToAction('disabled')) {
                     return;
@@ -397,7 +421,7 @@
                 if (disable === false && this.isDisabled()) {
                     this._removeViewClass(this.action);
                 }
-                _fieldProto.setDisabled.call(this, disable);
+                _fieldProto.setDisabled.call(this, disable, options);
             },
             /**
              * Decorate error gets called when this Field has a validation error.  This function applies custom error

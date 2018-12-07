@@ -64,7 +64,6 @@ class Quote extends SugarBean
     public $show_line_nums;
     public $team_id;
     public $team_name;
-    public $system_id;
 
     public $billing_address_street;
     public $billing_address_city;
@@ -404,7 +403,7 @@ class Quote extends SugarBean
         }
 
         $temp_array["ENCODED_NAME"] = $this->name;
-        $temp_array["QUOTE_NUM"] = format_number_display($this->quote_num, $this->system_id);
+        $temp_array["QUOTE_NUM"] = format_number_display($this->quote_num);
         return $temp_array;
     }
 
@@ -456,13 +455,6 @@ class Quote extends SugarBean
 
     public function save($check_notify = false)
     {
-        if (!isset($this->system_id) || empty($this->system_id)) {
-
-            $admin = Administration::getSettings();
-            $this->system_id = (isset($admin->settings['system_system_id']) && !empty($admin->settings['system_system_id']))
-                ? $admin->settings['system_system_id'] : 1;
-        }
-
         // CL Fix for 14365.  Have a default quote_type value
         if (!isset($this->quote_type) || empty($this->quote_type)) {
             $this->quote_type = 'Quotes';
@@ -682,7 +674,7 @@ class Quote extends SugarBean
     }
 
     /**
-     * This defines the supporting modules which have metatdata needed by Quotes to be fully
+     * This defines the supporting modules which have metadata needed by Quotes to be fully
      * functional on the Mobile application
      *
      * @return array

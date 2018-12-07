@@ -525,8 +525,6 @@ class SugarView
             if ( typeof(SUGAR.themes) == 'undefined' ) SUGAR.themes = {};
         </script>
 EOQ;
-        if(isset( $sugar_config['disc_client']) && $sugar_config['disc_client'])
-            echo getVersionedScript('modules/Sync/headersync.js');
     }
 
     /**
@@ -538,6 +536,7 @@ EOQ;
         $cal_date_format = $timedate->get_cal_date_format();
         $timereg = $timedate->get_regular_expression($timedate->get_time_format());
         $datereg = $timedate->get_regular_expression($timedate->get_date_format());
+        $dateregrpt = $timedate->get_regular_expression($timedate->get_date_format(), true);
         $date_pos = '';
         foreach ($datereg['positions'] as $type => $pos) {
             if (empty($date_pos)) {
@@ -563,7 +562,8 @@ EOQ;
              "\tvar time_separator = '$time_separator';\n" .
              "\tvar cal_date_format = '$cal_date_format';\n" .
              "\tvar time_offset = $hour_offset;\n" . "\tvar num_grp_sep = '$num_grp_sep';\n" .
-             "\tvar dec_sep = '$dec_sep';\n" . "</script>";
+             "\tvar dec_sep = '$dec_sep';\n" . "\tvar date_reg_format_rpt = '" .
+             addslashes($dateregrpt['format']) . "';\n" . "</script>";
 
         return $the_script;
     }
@@ -633,8 +633,6 @@ EOHTML;
 
 			echo $this->_getModLanguageJS();
             echo getVersionedScript('include/javascript/productTour.js');
-            if(isset( $sugar_config['disc_client']) && $sugar_config['disc_client'])
-                echo getVersionedScript('modules/Sync/headersync.js');
 
             if (!is_file(sugar_cached("Expressions/functions_cache.js"))) {
                 $GLOBALS['updateSilent'] = true;
@@ -735,12 +733,7 @@ EOHTML;
 
 
 
-
-
-
-
         $copyright = '&copy; 2004-2013 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> All Rights Reserved.<br>';
-
 
 
         // You are required to leave in all copyright statements in both the
@@ -795,7 +788,7 @@ EOHTML;
 
         //rrs bug: 20923 - if this image does not exist as per the license, then the proper image will be displayed regardless, so no need
         //to display an empty image here.
-        if(SugarAutoLoader::fileExists('include/images/poweredby_sugarcrm_65.png')){
+        if(file_exists('include/images/poweredby_sugarcrm_65.png')){
             $copyright .= $attribLinkImg;
         }
         // End Required Image
@@ -910,7 +903,7 @@ EOHTML;
      */
     protected function _checkModule()
     {
-        if(!empty($this->module) && !SugarAutoLoader::fileExists('modules/'.$this->module)){
+        if (!empty($this->module) && !file_exists('modules/'.$this->module)) {
             $error = str_replace("[module]", "$this->module", $GLOBALS['app_strings']['ERR_CANNOT_FIND_MODULE']);
             $GLOBALS['log']->fatal($error);
             echo $error;

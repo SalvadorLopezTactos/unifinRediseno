@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => '複数行が同じフィールド名で定義されています。',
     'ERR_MISSING_REQUIRED_FIELDS' => '必要なフィールドが存在しません:',
     'ERR_MISSING_MAP_NAME' => 'カスタムマッピング名が存在しません',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'ユーザインポートはIDMモードの場合は無効になります。',
     'ERR_SELECT_FULL_NAME' => '姓と名が選択されている場合はフルネームを選択できません。',
     'ERR_SELECT_FILE' => 'アップロードするファイルの選択',
     'LBL_SELECT_FILE' => 'ファイル選択:',

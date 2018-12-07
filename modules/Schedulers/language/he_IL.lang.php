@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'עדכן מאמרים של KBContent.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'פרסם מאמרים מאושרים והעבר לפג תוקף מאמרי KB.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'בנה מחדש נתוני אבטחת צוות לא מנורמל',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'מרווחים:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'מתזמן תורי Elasticsearch',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'הסר קבצים של כלי האבחון',
 'LBL_SUGARJOBREMOVETMPFILES' => 'הסר קבצים זמניים',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'בנה מחדש נתוני אבטחת צוות לא מנורמל',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'הרץ קמפיין דואר אלקטרוני לילי',
 'LBL_ASYNCMASSUPDATE' => 'בצע עדכון אסינכרוני מסיבי',

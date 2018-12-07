@@ -12,16 +12,67 @@
 
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch;
 
-use Sugarcrm\Sugarcrm\Elasticsearch\Query\Highlighter\AbstractHighlighter;
-use Sugarcrm\Sugarcrm\Elasticsearch\Query\QueryBuilder;
+use Sugarcrm\Sugarcrm\Elasticsearch\Query\Highlighter\HighlighterInterface;
 
 /**
  *
  * GlobalSearch Highlighter
  *
  */
-class Highlighter extends AbstractHighlighter
+class Highlighter implements HighlighterInterface
 {
+    /**
+     * Global highlighter properties not explicitly
+     * available on this object.
+     * @var array
+     */
+    protected $globalProps = [];
+
+    /**
+     * @var array List of fields and its highlighter settings
+     */
+    protected $fields = [];
+
+    /**
+     * @var array Field arguments applied to every field
+     */
+    protected $defaultFieldArgs = [];
+
+    /**
+     * @var array List of pre tags
+     */
+    protected $preTags = ['<strong>'];
+
+    /**
+     * @var array List of post tags
+     */
+    protected $postTags = ['</strong>'];
+
+    /**
+     * @var integer Number of fragments
+     */
+    protected $numberOfFrags = 5;
+
+    /**
+     * @var integer Fragment size
+     */
+    protected $fragSize = 100;
+
+    /**
+     * @var boolean Require field match
+     */
+    protected $requireFieldMatch = true;
+
+    /**
+     * @var string Field encoder, accepts html or default
+     */
+    protected $encoder = 'html';
+
+    /**
+     * @var string Order highlights, defaults to score
+     */
+    protected $order = 'score';
+
     /**
      * Ctor
      */
@@ -35,65 +86,131 @@ class Highlighter extends AbstractHighlighter
         $this->setFragSize(255);
 
         // use _source and plain highlighter
-        $this->setDefaultFieldArgs(array(
+        $this->setDefaultFieldArgs([
             'type' => 'plain',
             'force_source' => false,
-        ));
+        ]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function normalizeFieldName($field)
+    public function build()
     {
-        // Strip of the module name and keep the main field only. If no match
-        // is found we continue with the field value as is.
-        if (preg_match('/^.*' . QueryBuilder::PREFIX_SEP . '([^.]*).*$/', $field, $matches)) {
-            $field = $matches[1];
+        // generate global properties
+        $properties = [
+            'pre_tags' => $this->preTags,
+            'post_tags' => $this->postTags,
+            'require_field_match' => $this->requireFieldMatch,
+            'number_of_fragments' => $this->numberOfFrags,
+            'fragment_size' => $this->fragSize,
+            'encoder' => $this->encoder,
+            'order' => $this->order,
+        ];
+        $properties = array_merge($this->globalProps, $properties);
+
+        // generate fields
+        $fields = [];
+        foreach ($this->fields as $field => $args) {
+            $fields[$field] = array_merge($this->defaultFieldArgs, $args);
         }
-        return parent::normalizeFieldName($field);
+
+        $properties['fields'] = $fields;
+        return $properties;
     }
 
     /**
-     * {@inheritdoc}
+     * Set fields
+     * @param array $fields
+     * @return Highlighter
      */
-    protected function wrapValueWithTags($value)
+    public function setFields(array $fields)
     {
-        // Sometimes the Elastic search response does not include highlight tags in value.
-        // To amend this issue, this function adds the tags to the front and the back of the value,
-        // so that the whole field will be highlighted, instead of only the matching part.
-
-        if (isset($this->preTags[0]) && isset($this->postTags[0])) {
-            $newValue = array();
-            // 1. remove the tags in the value if Elastic search's response contains them
-            // 2. add the tags in the front and the back to highlight the whole value
-            foreach ($value as $v) {
-                $newValue[] = $this->preTags[0] . strip_tags($v) . $this->postTags[0];
-            }
-            $value = $newValue;
-        }
-
-        return $value;
+        $this->fields = array_merge($this->fields, $fields);
+        return $this;
     }
 
     /**
-     * {@inheritdoc}
+     * Set field arguments which are applied on every field
+     * @param array $args
+     * @return Highlighter
      */
-    public function getSubFieldName($field)
+    public function setDefaultFieldArgs(array $args)
     {
-        // Example field name with sub-field:
-        // input: Accounts__email_search.secondary.gs_email_wildcard
-        // output: secondary
+        $this->defaultFieldArgs = $args;
+        return $this;
+    }
 
-        // Example field name without sub-field:
-        // input: Contacts__first_name.gs_string_wildcard
-        // output: empty string
+    /**
+     * Set list of pre tags
+     * @param array $tags
+     * @return Highlighter
+     */
+    public function setPreTags(array $tags)
+    {
+        $this->preTags = $tags;
+        return $this;
+    }
 
-        $subField = '';
-        $sep = '\\' . QueryBuilder::FIELD_SEP;
-        if (preg_match('/^.*' . $sep . '(.*)' . $sep . '.*$/', $field, $matches)) {
-            $subField = $matches[1];
-        }
-        return $subField;
+    /**
+     * Get pre tags
+     * @return array
+     */
+    public function getPreTags()
+    {
+        return $this->preTags;
+    }
+
+    /**
+     * Set list of post tags
+     * @param array $tags
+     * @return \Sugarcrm\Sugarcrm\Elasticsearch\Component\Highlighter
+     */
+    public function setPostTags(array $tags)
+    {
+        $this->postTags = $tags;
+        return $this;
+    }
+
+    /**
+     * Get post tags
+     * @return array
+     */
+    public function getPostTags()
+    {
+        return $this->postTags;
+    }
+
+    /**
+     * Enable/disable required field match
+     * @param boolean $toggle
+     * @return Highlighter
+     */
+    public function setRequiredFieldMatch($toggle)
+    {
+        $this->requireFieldMatch = (bool) $toggle;
+        return $this;
+    }
+
+    /**
+     * Set global number of fragments
+     * @param integer $value
+     * @return Highlighter
+     */
+    public function setNumberOfFrags($value)
+    {
+        $this->numberOfFrags = (int) $value;
+        return $this;
+    }
+
+    /**
+     * Set global fragment size
+     * @param integer $value
+     * @return Highlighter
+     */
+    public function setFragSize($value)
+    {
+        $this->fragSize = (int) $value;
+        return $this;
     }
 }

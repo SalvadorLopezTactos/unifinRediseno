@@ -31,9 +31,6 @@ if (isset($_SESSION['licenseKey_submitted']) && ($_SESSION['licenseKey_submitted
         if (isset($GLOBALS['license']->settings['license_expire_date'])) {
             $_SESSION['setup_license_key_expire_date'] = $GLOBALS['license']->settings['license_expire_date'];
         }
-        if (isset($GLOBALS['license']->settings['license_num_lic_oc'])) {
-            $_SESSION['setup_num_lic_oc'] = $GLOBALS['license']->settings['license_num_lic_oc'];
-        }
     }
 }
 $dbCreate = "({$mod_strings['LBL_CONFIRM_WILL']} ";
@@ -435,6 +432,5 @@ $sugar_smarty->assign('spriteSupportStatus', $spriteSupportStatus);
 $sugar_smarty->assign('suhosinStatus', $suhosinStatus);
 $sugar_smarty->assign('uploadStream', $uploadStream);
 $sugar_smarty->assign('phpIniLocation', $phpIniLocation);
-$sugar_smarty->assign('warningsLocalhost', $warningsLocalhost);
 
 $sugar_smarty->display("install/templates/confirmSettings.tpl");

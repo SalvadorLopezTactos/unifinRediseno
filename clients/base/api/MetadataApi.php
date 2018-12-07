@@ -172,7 +172,7 @@ class MetadataApi extends SugarApi
      */
     protected function massageMetaData(ServiceBase $api, array $args, array $data)
     {
-        if (empty($args['module_dependencies']) && $api->getRequest()->getVersion() < 11) {
+        if (empty($args['module_dependencies']) && $api->getVersion() < 11) {
             foreach ($data['modules'] as $module => &$modMeta) {
                 // move module level dependencies $modMeta['dependencies'] to each view
                 if (!empty($modMeta['dependencies']) && !empty($modMeta['views'])) {

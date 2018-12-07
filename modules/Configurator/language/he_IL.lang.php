@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'שרת Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'פריטי פאנל-משנה לדף',
 	'LOG_MEMORY_USAGE'=>'תעד ניצולת זיכרון',
-	'LOG_SLOW_QUERIES'=>'תעד שאילתות איטיות',
+    'LOG_SLOW_QUERIES' => 'תעד שאילתות איטיות',
     'LOCK_HOMEPAGE_HELP'=>'הגדרה זו נועדה למנוע את<BR> 1) ההוספה של דפי בית וחלונות חדשים במודול הבית, <BR>2) התאמה אישית של השמת חלונית בדפי הבית על ידי גרירה ושחרור.',
     'CURRENT_LOGO'=>'לוגו נוכחי:',
     'CURRENT_LOGO_HELP'=>'This logo is displayed at the top left-hand corner of the Sugar application.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'זה השם שמופיע בסרגל הכותרת של הדפדפן שלך.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'אפשר/אל תאפשר מיילים מרשימת אנשי קשר קשורים (או מקושרים) לצפיה בלוח מחוונים משני של מיילים.',
 
-    'LBL_OC_STATUS'                     => 'מצב חשבון לקוח לא מקוון ברירת מחדל',
-    'DEFAULT_OC_STATUS'                 => 'הפעל חשבון לקוח לא מקוון לפי ברירת מחדל',
-    'LBL_OC_STATUS_DESC' => 'לחץ כאן במידה ותרצה שכל משתמש יקבל גישה לחשבון לקוח לא מקוון. אחרת, תוכל להגדיר גישה ברמת המשתמש.',
     'SESSION_TIMEOUT' => 'חריגה מהזמן הקצוב למופע שער',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'חריגה מהזמן הקצוב למופע שער נועדה לגרסאות ישנות של Sugar Portal הזמינות ב6.5 ומטה.',
     'UPLOAD_MAXSIZE_UNITS' => 'בתים',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'כתובת URL להתחברות SAML לא יכולה להיות ריקה',
     'ERR_EMPTY_SAML_CERT' => 'תעודת SAML לא יכולה להיות ריקה',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'אסור על מזהה הישות של SAML להיות ריק',
     'ERR_SAML_LOGIN_URL' => 'כתובת URL להתחברות SAML לא חוקית',
     'ERR_SAML_SLO_URL' => 'כתובת URL ל-SAML SLO לא חוקית',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'על קובץ PEM להכיל מפתח פרטי',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'על קובץ PEM להכיל תעודת x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'תעודת x.509 שסופקה אינה מתאימה עם המפתח הפרטי',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'זרמי פעילות',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'הפעל &#39;זרמי פעילות&#39;',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'הפעל &#39;זרמי פעילות&#39; עבור היישום',
 );
 
 

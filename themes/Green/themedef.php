@@ -16,6 +16,6 @@ $themedef = array(
     'description' => "Eco",
 	'parentTheme' => 'RacerX',
     'version' => array(
-        'regex_matches' => array('[6|7]\.*.*'),
+        'regex_matches' => array('[6|7|8]\.*.*'),
         ),
     );

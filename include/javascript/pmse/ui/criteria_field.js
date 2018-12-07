@@ -8,8 +8,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 var CriteriaField = function (settings, parent) {
-    Field.call(this, settings, parent);
+    PMSE.Field.call(this, settings, parent);
     this._panel = null;
     this._panelFlag = true;
     this._listenersAttached = false;
@@ -18,12 +19,13 @@ var CriteriaField = function (settings, parent) {
     CriteriaField.prototype.init.call(this, settings);
 };
 
-CriteriaField.prototype = new Field();
+CriteriaField.prototype = new PMSE.Field();
 CriteriaField.prototype.constructor = CriteriaField;
 CriteriaField.prototype.type = "CriteriaField";
 
 CriteriaField.prototype.init = function(settings) {
     var that = this, defaults = {
+        name: null,
         operators: {},
         evaluation: false,
         variable: false,
@@ -60,6 +62,7 @@ CriteriaField.prototype.init = function(settings) {
     });
 
     this._panel = new ExpressionControl({
+        name: defaults.name,
         parent: this,
         itemContainer: this.controlObject,
         owner: this.controlObject,
@@ -182,7 +185,7 @@ CriteriaField.prototype._onChange = function () {
 
 CriteriaField.prototype.setValue = function (value) {
     if (this.controlObject) {
-        Field.prototype.setValue.call(this, value);
+        PMSE.Field.prototype.setValue.call(this, value);
     }
     return this;
 };
@@ -251,7 +254,7 @@ CriteriaField.prototype.evalRequired = function () {
 CriteriaField.prototype.isValid = function () {
     var valid = this._panel.isValid();
     if (valid) {
-        valid = Field.prototype.isValid.call(this);
+        valid = PMSE.Field.prototype.isValid.call(this);
     }
     return valid;
 };
@@ -276,7 +279,7 @@ CriteriaField.prototype._attachListeners = function() {
 CriteriaField.prototype.createHTML = function() {
     var fieldLabel, required = '', readAtt, that = this, divControlObjectContainer;
     if (!this.html) {
-        Field.prototype.createHTML.call(this);
+        PMSE.Field.prototype.createHTML.call(this);
 
         if (this.required) {
             required = '<i>*</i> ';

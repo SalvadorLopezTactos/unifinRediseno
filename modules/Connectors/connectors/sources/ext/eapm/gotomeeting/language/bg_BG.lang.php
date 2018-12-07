@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Снабдете се с Потребителски ключ от LogMeIn като регистрирате ново приложение GoToMeeting.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Стъпки за регистриране на вашата инсталация:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Влезте във вашия профил LogMeIn на Центъра на разработчиците: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Щракнете върху Моите приложения</li>
+    <li>Щракнете върху Добави ново приложение</li>
+    <li>Попълнете всички полета във формуляра Добави приложение:</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>Име на приложението</li>
+            <li>Описание</li>
+            <li>API на продукта: Маркирайте GoToMeeting</li>
+            <li>URL на приложението: Въведете вашата инсталация URL</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Щракнете върху бутона Създай приложение</li>
+    <li>От списъка с приложения, щракнете върху името на вашето приложение</li>
+    <li>Щракнете върху табулатора на ключовете</li>
+    <li>Копирайте стойността на Потребителския ключ и я въведете по-долу</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Потребителски ключ',
 );

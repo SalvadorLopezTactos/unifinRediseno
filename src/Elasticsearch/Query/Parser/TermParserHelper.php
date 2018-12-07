@@ -51,16 +51,16 @@ class TermParserHelper
 
     /**
      * check if it is an operator
-     * @param string $term
+     * @param string $operator
      * @return bool
      */
-    public static function isOperator($term)
+    public static function isOperator($operator)
     {
-        if (!is_string($term)) {
+        if (!is_string($operator)) {
             return false;
         }
 
-        if (in_array($term, self::$operators)) {
+        if (in_array($operator, self::$operators)) {
             return true;
         }
         return false;
@@ -68,50 +68,50 @@ class TermParserHelper
 
     /**
      * check if it is 'AND' operator
-     * @param string $term
+     * @param string $operator
      * @return bool
      */
-    public static function isAndOperator($term)
+    public static function isAndOperator($operator)
     {
-        return is_string($term) && in_array($term, array(self::OPERATOR_AND, '&'));
+        return is_string($operator) && in_array($operator, array(self::OPERATOR_AND, '&'));
     }
 
     /**
      * check if it is 'OR' operator
-     * @param string $term
+     * @param string $operator
      * @return bool
      */
-    public static function isOrOperator($term)
+    public static function isOrOperator($operator)
     {
-        return is_string($term) && in_array($term, array(self::OPERATOR_OR, '|'));
+        return is_string($operator) && in_array($operator, array(self::OPERATOR_OR, '|'));
     }
 
     /**
      * check if it is 'OR' operator
-     * @param string $term
+     * @param string $operator
      * @return bool
      */
-    public static function isNotOperator($term)
+    public static function isNotOperator($operator)
     {
-        return is_string($term) && in_array($term, array(self::OPERATOR_NOT, '-'));
+        return is_string($operator) && in_array($operator, array(self::OPERATOR_NOT, '-'));
     }
 
     /**
      * to stadandize operator
-     * @param string $term
+     * @param string $operator
      * @return bool|string
      */
-    public static function getOperator($term)
+    public static function getOperator($operator)
     {
-        if (self::isAndOperator($term)) {
+        if (self::isAndOperator($operator)) {
             return self::OPERATOR_AND;
         }
 
-        if (self::isOrOperator($term)) {
+        if (self::isOrOperator($operator)) {
             return self::OPERATOR_OR;
         }
 
-        if (self::isNotOperator($term)) {
+        if (self::isNotOperator($operator)) {
             return self::OPERATOR_NOT;
         }
 

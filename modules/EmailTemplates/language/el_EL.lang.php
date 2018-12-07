@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Επιλογή' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Εκκαθάριση' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Τύπος',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Πρότυπα Για Email',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Πρότυπα Email',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Μεταβλητές',
 );

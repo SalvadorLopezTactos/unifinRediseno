@@ -102,7 +102,7 @@ function formSubmitCheck(){ldelim}if(check_form(\'EditView\') && CAL.checkRecurr
 	      'type',
 	      'password'
       ),
-      
+
       array (
           array (
             'name' => 'date_start',

@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Komerciniai pasiūlymai (adresas siuntoms)',
 	'LNK_ACCOUNT_REPORTS' => 'Klientų ataskaitos',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentai',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Paskyrų sąrašo ataskaitų sritis',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Paskyrų duomenų ataskaitų sritis',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafikai',
 	'LBL_DEFAULT' => 'Rodymas',

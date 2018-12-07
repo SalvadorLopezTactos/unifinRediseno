@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Dashboard da Lista da Base de Conhecimento',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Dashboard do Registo da Base de Conhecimento',
+
     'LBL_MODULE_NAME' => 'Base de Conhecimento',
     'LBL_MODULE_NAME_SINGULAR' => 'Artigo da Base de Conhecimento',
     'LBL_MODULE_TITLE' => 'Artigo da Base de Conhecimento',
@@ -83,7 +87,7 @@ $mod_strings = array (
     'EXCEPTION_VOTE_USEFULNESS_NOT_AUTHORIZED' => 'Não tem autorização para classificar {moduleName} como útil/não útil. Contacte o seu administrador caso precise de acesso.',
     'LNK_NEW_KBCONTENT_TEMPLATE' => 'Criar modelo',
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Ver modelos',
-    'LNK_LIST_KBCATEGORIES' => 'Ver categorias',
+    'LNK_LIST_KBCATEGORIES' => 'Ver Categorias',
     'LBL_TEMPLATES' => 'Modelos',
     'LBL_TEMPATE_LOAD_MESSAGE' => 'O modelo vai substituir todos os conteúdos.' .
         ' Tem a certeza de que pretende utilizar este modelo?',

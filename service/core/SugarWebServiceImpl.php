@@ -417,8 +417,15 @@ function set_entry($session,$module_name, $name_value_list){
 		}else if($name === 'id' ){
 
 			$seed->retrieve($value);
+                break;
 		}
 	}
+
+        if (self::$helperObject->isIDMMode() && self::$helperObject->isIDMModeModule($module_name) && !$seed->isUpdate()) {
+            $error->set_error('idm_mode_cannot_create_user');
+            self::$helperObject->setFaultObject($error);
+            return;
+        }
 
 	foreach($name_value_list as $name=>$value){
 		if($module_name == 'Users' && !empty($seed->id) && ($seed->id != $current_user->id) && $name == 'user_hash'){
@@ -427,6 +434,13 @@ function set_entry($session,$module_name, $name_value_list){
         if (!empty($seed->field_defs[$name]['sensitive'])) {
 			continue;
 		}
+
+            if (self::$helperObject->isIDMMode()
+                && self::$helperObject->isIDMModeModule($module_name)
+                && self::$helperObject->isIDMModeField(is_array($value) ? $value['name'] : $name)) {
+                    continue;
+            }
+
 		if(!is_array($value)){
 			$seed->$name = $value;
 		}else{
@@ -501,22 +515,28 @@ function set_entries($session,$module_name, $name_value_lists){
  * 				 - name_value_list - Array - The name value pair of user_id, user_name, user_language, user_currency_id, user_currency_name
  * @exception 'SoapFault' -- The SOAP error, if any
  */
-public function login($user_auth, $application, $name_value_list){
+    public function login($user_auth, $application, $name_value_list)
+    {
 	$GLOBALS['log']->info('Begin: SugarWebServiceImpl->login');
 	global $sugar_config;
 	$error = new SoapError();
 	$user = BeanFactory::newBean('Users');
 	$success = false;
-	if(!empty($user_auth['encryption']) && $user_auth['encryption'] === 'PLAIN'){
+        $authController = AuthenticationController::getInstance();
+        if (!empty($user_auth['encryption']) && $user_auth['encryption'] === 'PLAIN' &&
+            !$authController->authController instanceof OAuth2Authenticate) {
 		$user_auth['password'] = md5($user_auth['password']);
 	}
-    $authController = AuthenticationController::getInstance();
-	$isLoginSuccess = $authController->login($user_auth['user_name'], $user_auth['password'], array('passwordEncrypted' => true));
+        $isLoginSuccess = (bool) $authController->login(
+            $user_auth['user_name'],
+            $user_auth['password'],
+            ['passwordEncrypted' => true]
+        );
 	$usr_id=$user->retrieve_user_id($user_auth['user_name']);
 	if($usr_id) {
 		$user->retrieve($usr_id);
 	}
-	if ($isLoginSuccess) {
+        if ($isLoginSuccess) {
 		if ($_SESSION['hasExpiredPassword'] =='1') {
 			$error->set_error('password_expired');
 			$GLOBALS['log']->fatal('password expired for user ' . $user_auth['user_name']);
@@ -530,14 +550,14 @@ public function login($user_auth, $application, $name_value_list){
 			global $current_user;
 			$current_user = $user;
 		} // if
-	} else if($usr_id && isset($user->user_name) && ($user->getPreference('lockout') == '1')) {
+        } elseif ($usr_id && isset($user->user_name) && ($user->getPreference('lockout') == '1')) {
 			$error->set_error('lockout_reached');
 			$GLOBALS['log']->fatal('Lockout reached for user ' . $user_auth['user_name']);
 			LogicHook::initialize();
 			$GLOBALS['logic_hook']->call_custom_logic('Users', 'login_failed');
 			self::$helperObject->setFaultObject($error);
 			return;
-    } elseif (extension_loaded('mcrypt')) {
+        } elseif (extension_loaded('mcrypt') && !$authController->authController instanceof OAuth2Authenticate) {
 		$password = self::$helperObject->decrypt_string($user_auth['password']);
         $authController->loggedIn = false; // reset login attempt to try again with decrypted password
 		if($authController->login($user_auth['user_name'], $password) && isset($_SESSION['authenticated_user_id'])){

@@ -9,9 +9,14 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+/**
+ * This chart engine is now deprecated. Use the sucrose chart engine instead.
+ * @deprecated This file will removed in a future release.
+ */
 initmySugarCharts = function() {
 
     SUGAR.mySugar.sugarCharts = function() {
+        (app || SUGAR.App).logger.warn('The nvd3 chart engine is deprecated.');
 
         var activeTab = activePage,
             charts = {};

@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Paneli i listës së artikujve të linjës së kuotuar',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Rreshti i kuotuar i kampanjës',
     'LBL_MODULE_NAME' => 'Artikujt e rreshtave të kuotuar',
     'LBL_MODULE_NAME_SINGULAR' => 'Artikujt e rreshtave të kuotuar',
@@ -70,7 +73,7 @@ $mod_strings = array(
     'LBL_SUPPORT_CONTACT' => 'kontakti mbështetës',
     'LBL_PRICING_FORMULA' => 'formula e çmimit',
     'LBL_ACCOUNT_NAME' => 'Emri i llogarisë:',
-    'LNK_PRODUCT_LIST' => 'shiko produktet',
+    'LNK_PRODUCT_LIST' => 'Shiko artikujt e rreshtave të kuotuar',
     'LNK_NEW_PRODUCT' => 'Krijo produkt',
     'NTC_DELETE_CONFIRMATION' => 'A jeni të sigurtë që dëshironi të fshini këtë regjistrim?',
     'NTC_REMOVE_CONFIRMATION' => 'a jeni të sigurt që dëshironi të hiqni këtë lidhje të produktit?',
@@ -127,7 +130,7 @@ $mod_strings = array(
     'LBL_EXT_PRICE' => 'Çmimi i pritur',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Emri i simbloit të monedhës',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Artikujt e rreshtave të kuotuar',
-    'LNK_IMPORT_PRODUCTS' => 'Produkte të rëndësishme',
+    'LNK_IMPORT_PRODUCTS' => 'Importo artikujt e rreshtave të kuotuar',
     'LBL_EDITLAYOUT' => 'Ndrysho formatin' /*for 508 compliance fix*/,
     //For export labels
     'LBL_EXPORT_CURRENCY_ID' => 'ID e Monedhës',
@@ -166,4 +169,5 @@ Për të krijuar një {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Lista e të dhënave të citimit të artikujve në rreshtin e kuotuar',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Artikull i ri në rreshtin e kuotuar)',
     'LBL_DISCOUNT_PERCENT' => '% për qind',
+    'LBL_DISCOUNT_TYPE' => 'Lloji i zbritjes',
 );

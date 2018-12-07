@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Sukurti užduotį',
   'NTC_DELETE_CONFIRMATION' => 'Ar tikrai norite ištrinti šį įrašą? Būtų geriau pakeisti statusą į neaktyvų, nes įrašai naudojantys šią valiutą bus priskirti sistemos numatytai valiutai.',
   'LBL_BELOW_MIN' => 'Valiutos kursas turi būti didesnis už 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktyvus',
-    'Inactive' => 'Neaktyvus',
-  ),
   'LBL_CREATED_BY' => 'Sukūrė',
   'LBL_EDIT_LAYOUT' => 'Redaguoti išdėstymą' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Administrators Only',
+  'LBL_CURRENCY_DEFAULT' => 'JAV doleriai (numatytasis)',
+
 );
 ?>

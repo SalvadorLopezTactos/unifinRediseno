@@ -34,7 +34,8 @@ class PMSECasesListApi extends FilterApi
                 'method' => 'selectCasesList',
                 'jsonParams' => array('filter'),
                 'acl' => 'adminOrDev',
-//                'shortHelp' => 'Returns a list with the processes for Process Management',
+                'shortHelp' => 'Returns a list with the processes for Process Management',
+                'longHelp' =>  'modules/pmse_Inbox/clients/base/api/help/process_select_cases_list_help.html',
             ),
             'getLoadLogs' => array(
                 'reqType' => 'GET',
@@ -43,7 +44,8 @@ class PMSECasesListApi extends FilterApi
                 'method' => 'selectLogLoad',
                 'jsonParams' => array(),
                 'acl' => 'adminOrDev',
-//                'shortHelp' => 'Return the text of the PMSE.log file',
+                'shortHelp' => 'Return the text of the PMSE.log file',
+                'longHelp' =>  'modules/pmse_Inbox/clients/base/api/help/process_select_log_load_help.html',
             ),
             'clearLogs' => array(
                 'reqType' => 'PUT',
@@ -52,7 +54,8 @@ class PMSECasesListApi extends FilterApi
                 'method' => 'clearLog',
                 'jsonParams' => array(),
                 'acl' => 'adminOrDev',
-//                'shortHelp' => 'Clear the PMSE.log file log',
+                'shortHelp' => 'Clear the PMSE.log file log',
+                'longHelp' =>  'modules/pmse_Inbox/clients/base/api/help/process_clear_log_help.html',
             ),
             'getConfigLogs' => array(
                 'reqType' => 'GET',
@@ -180,7 +183,6 @@ class PMSECasesListApi extends FilterApi
             $qLike = $q->getDBManager()->quoted('%' . $args['q'] . '%');
             $q->where()->queryAnd()
                 ->addRaw("
-                    a.cas_title LIKE $qLike OR
                     a.pro_title LIKE $qLike OR
                     a.cas_status LIKE $qLike OR
                     prj.assigned_user_id LIKE $qLike OR
@@ -228,7 +230,10 @@ class PMSECasesListApi extends FilterApi
                 // Get the assigned bean early. This allows us to check for a bean
                 // id to determine if the bean has been deleted or not. This bean
                 // will also be used later to the assigned user of the record.
-                $assignedBean = BeanFactory::getBean($list[$key]['cas_sugar_module'], $list[$key]['cas_sugar_object_id']);
+                $params = array('erased_fields' => true);
+                $assignedBean = BeanFactory::getBean($list[$key]['cas_sugar_module'], $list[$key]['cas_sugar_object_id'], $params);
+
+                $list[$key] = PMSEEngineUtils::appendNameFields($assignedBean, $value);
 
                 $list[$key]['cas_create_date'] = PMSEEngineUtils::getDateToFE($value['cas_create_date'], 'datetime');
                 $list[$key]['date_entered'] = PMSEEngineUtils::getDateToFE($value['date_entered'], 'datetime');
@@ -327,6 +332,7 @@ class PMSECasesListApi extends FilterApi
 
     public function configLogLoad(ServiceBase $api, array $args)
     {
+        PMSEEngineUtils::logDeprecated(__METHOD__);
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $q = new SugarQuery();
         $configLogBean = BeanFactory::newBean('pmse_BpmConfig');
@@ -358,6 +364,7 @@ class PMSECasesListApi extends FilterApi
      */
     public function configLogPut(ServiceBase $api, array $args)
     {
+        PMSEEngineUtils::logDeprecated(__METHOD__);
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $data = $args['cfg_value'];
         $bean = BeanFactory::newBean('pmse_BpmConfig')
@@ -370,6 +377,7 @@ class PMSECasesListApi extends FilterApi
 
     public function returnProcessUsersChart(ServiceBase $api, array $args)
     {
+        PMSEEngineUtils::logDeprecated(__METHOD__);
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $filter = $args['filter'];
         return $this->createProcessUsersChartData($filter);
@@ -377,6 +385,7 @@ class PMSECasesListApi extends FilterApi
 
     public function returnProcessStatusChart(ServiceBase $api, array $args)
     {
+        PMSEEngineUtils::logDeprecated(__METHOD__);
         ProcessManager\AccessManager::getInstance()->verifyUserAccess($api, $args);
         $filter = $args['filter'];
         return $this->createProcessStatusChartData($filter);
@@ -491,8 +500,7 @@ class PMSECasesListApi extends FilterApi
             $processes[$index]['total'] += $row['total'];
         }
 
-        $labels = array();
-        $values = array();
+        $groups = array();
         $in_progress = array();
         $completed = array();
         $cancelled = array();
@@ -500,50 +508,41 @@ class PMSECasesListApi extends FilterApi
         $error = array();
 
         for ($i = 0; $i < sizeof($processes); $i++) {
-            $labels[] = array(
+            $groups[] = array(
                 "group" => ($i + 1),
-                "l" => $processes[$i]['name'],
-            );
-            $values[] = array(
-                "group" => ($i + 1),
-                "t" => $processes[$i]['total'],
+                "label" => $processes[$i]['name'],
+                "total" => $processes[$i]['total'],
             );
             $in_progress[] = array(
                 "series" => 0,
                 "x" => ($i + 1),
                 "y" => $processes[$i]['status']['IN PROGRESS'],
-                //"y0" => $processes[$i]['status']['IN PROGRESS'],
             );
             $completed[] = array(
                 "series" => 1,
                 "x" => ($i + 1),
                 "y" => $processes[$i]['status']['COMPLETED'],
-                //"y0" => $processes[$i]['status']['COMPLETED'],
             );
             $cancelled[] = array(
                 "series" => 2,
                 "x" => ($i + 1),
                 "y" => $processes[$i]['status']['CANCELLED'],
-                //"y0" => $processes[$i]['status']['CANCELLED'],
             );
             $terminated[] = array(
                 "series" => 3,
                 "x" => ($i + 1),
                 "y" => $processes[$i]['status']['TERMINATED'],
-                //"y0" => $processes[$i]['status']['TERMINATED'],
             );
             $error[] = array(
                 "series" => 4,
                 "x" => ($i + 1),
                 "y" => $processes[$i]['status']['ERROR'],
-                //"y0" => $processes[$i]['status']['ERROR'],
             );
         }
 
         return array(
             "properties" => array(
-                "labels" => $labels,
-                "values" => $values,
+                "groups" => $groups,
             ),
             "data" => array(
                 array(

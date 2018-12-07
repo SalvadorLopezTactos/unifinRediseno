@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Liidiluettelon työpöytä',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Liiditietueiden työpöytä',
+
     'ERR_DELETE_RECORD' => 'Tietuenumero tulee määritellä, jotta voit poistaa liidin.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Asiakkaan kuvaus',
     'LBL_ACCOUNT_ID'=>'Asiakkaan ID',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Myyntimahdollisuuden määrä:',
     'LBL_OPPORTUNITY_ID'=>'Myyntimahdollisuuden ID',
     'LBL_OPPORTUNITY_NAME' => 'Myyntimahdollisuuden nimi:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Muu sähköposti:',
     'LBL_OTHER_PHONE' => 'Muu puhelin:',
     'LBL_PHONE' => 'Puhelin:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopioi vaihtoehtoinen osoite ensisijaiseen osoitteeseen',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Kopioi ensisijainen osoite vaihtoehtoiseen osoitteeseen',
     'NTC_DELETE_CONFIRMATION' => 'Haluatko poistaa tämän tietueen?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Myyntimahdollisuuden luominen vaatii tilin.\n Luo tili tai valitse olemassa oleva tili.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Myyntimahdollisuuden luominen vaatii tilin.\\n Luo tili tai valitse olemassa oleva tili.',
     'NTC_REMOVE_CONFIRMATION' => 'Haluatko poistaa tämän liidin tästä tapauksesta?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Oletko varma, että haluat poistaa tämän tietueen suorana raporttina?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Kampanjaloki',
@@ -320,4 +326,6 @@ Tietueiden vahvistamisen jälkeen paina ylhäällä olevaa ‘Tallenna ja muunna
     'LBL_MKTO_LEAD_SCORE' => 'Liidin pisteet',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Liidien raportit',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Suostumus liiketoimintatarkoituksiin kohteelle',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Suostumus päivitetty viimeksi',
 );

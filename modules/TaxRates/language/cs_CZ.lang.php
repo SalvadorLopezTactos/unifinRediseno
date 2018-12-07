@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Musíte vybrat číslo záznamu pro smazání daňové taxy',
   'NTC_STATUS' => 'Nastavte status na NEAKTIVNÍ pro odstranení daňové sazby',
   'NTC_LIST_ORDER' => 'Nastavte, která taxa se bude objevovat ve výběrovém poli.',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktivní',
-    'Inactive' => 'Neaktivní',
-  ),
   'LBL_EDITLAYOUT' => 'Úprava rozvržení' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Vytvořeno podle ID',
   'LBL_MODIFIED_ID'=>'Upraveno podle ID',

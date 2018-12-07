@@ -58,8 +58,10 @@ class SearchStatusCommand extends Command implements InstanceModeInterface
         $table = new Table($output);
         $table->setHeaders(array('Enabled modules'));
 
-        foreach ($result['enabled_modules'] as $module) {
-            $table->addRow(array($module));
+        if (isset($result['enabled_modules'])) {
+            foreach ($result['enabled_modules'] as $module) {
+                $table->addRow(array($module));
+            }
         }
 
         $table->render();

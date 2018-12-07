@@ -223,7 +223,7 @@ $mod_strings = array (
   'LBL_NOTHING_WAS_SELECTED' => 'asgjë nuk është selktuar',
   'LBL_TOTAL' => 'totali',
   'LBL_MODULE_NAME_SAVED' => 'Emri i modulës',
-  'LBL_REPORT_TYPE' => 'lloji i raportit',
+  'LBL_REPORT_TYPE' => 'Lloji i raportit',
   'LBL_REPORT_LAST_RUN_DATE' => 'Qasja në',
   'LBL_REPORT__ATT_TYPE' => 'Lloji',
   'LBL_REPORT_RUN_WITH_FILTER' => 'Apliko',
@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'semesrale',
     'LBL_BY_FISCAL_YEAR' => 'Nga viti fiskal',
     'LBL_BY_FISCAL_QUARTER' => 'Nga kuartali fiskal',
+    'LBL_AMOUNT' => 'Shuma',
     'LBL_COUNT' => 'Numro',
+    'LBL_PERCENT' => 'Përqindja',
     'LBL_SUM' => 'shuma',
     'LBL_AVG' => 'mestarja',
     'LBL_MAX' => 'maksimumi',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Muaji',
     'LBL_YEAR' => 'Viti',
     'LBL_QUARTER' => 'Semestri',
+    'LBL_FISCAL' => 'Fiskal',
     'LBL_FISCAL_YEAR' => 'Viti fiskal',
     'LBL_FISCAL_QUARTER' => 'Kuartali fiskal',
 	'LBL_YESTERDAY'=>'Dje',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Tremujorin e ardhshëm',
     'LBL_ADD_RELATE' => "shto në lidhje me",
     'LBL_DEL_THIS' => "Hiqe",
-    'LBL_ALERT_CANT_ADD' => 'Ju nuk mund të shtoni lidhjen e modulit derisa të selektoni tabelën nga lidhja.\nSelektoni modulin në  lëshimin e majtë nga butoni i &#39;Lidhjes së shtuar&#39; që ju klikuat.',
+    'LBL_ALERT_CANT_ADD' => 'Ju nuk mund të shtoni lidhjen e modulit derisa të selektoni tabelën nga lidhja.\\nSelektoni modulin në  lëshimin e majtë nga butoni i &#39;Lidhjes së shtuar&#39; që ju klikuat.',
     'LBL_BY_DAY' => 'Ditore',
     'LBL_DAY' => 'dita',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Modulet opsinale të lidhjes',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'më shumë se sa e barabartë me',
 
     'LBL_FILTER_BY_MODULE' => 'Nga moduli',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Me grafikë',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Gabim gjatë përftimit të të dhënave të raportit të detajuar për këtë veprim. Kontakto me zotëruesin e raportit për asistencë.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Nuk është i mundur detajimi',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'Pamja në formë liste shfaq të gjitha raportet që plotësojnë kriteret e kërkimit aktual dhe në të cilat përdoruesit kanë akses. Mund të shikosh të dhënat bazë të çdo raporti brenda kolonave në fushën e pamjes në formë liste dhe te pamja paraprake. Mund të caktosh etiketa për raportet dhe të krijosh filtra. Kliko emrin e raportit për të parë raportin ose zgjidh "Modifiko raportin" në menynë e veprimeve për ta modifikuar raportin.',
+  );

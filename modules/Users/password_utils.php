@@ -96,7 +96,10 @@ function hasPasswordExpired($user, $updateNumberLogins = false)
                         //Suppress date_modified so a new _hash isn't generated
                         $user->update_date_modified = false;
                         $user->save();
-
+                    }
+                    // Date-time field may be in DB format if save occurred on previous calls.
+                    $dbFormat = $timedate->get_db_date_time_format();
+                    if ($timedate->check_matching_format($user->pwd_last_changed, $dbFormat)) {
                         $pass_changed_timestamp = $timedate->fromDb($user->pwd_last_changed);
                     } else {
                         $pass_changed_timestamp = $timedate->fromUser($user->pwd_last_changed, $user);

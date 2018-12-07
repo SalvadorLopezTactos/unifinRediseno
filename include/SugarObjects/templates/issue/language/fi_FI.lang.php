@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => 'Muokkaaja',
   'LBL_ASSIGNED_USER' => 'Vastuukäyttäjä',
   'LBL_ASSIGNED_USER_NAME' => 'Vastuuhenkilö',
-  'LBL_SYSTEM_ID' =>'System ID:',
   'LBL_TEAM_NAME' =>'Tiimin nimi',
   'LBL_TYPE'=>'Tyyppi',
   'LBL_SUBJECT' => 'Aihe',

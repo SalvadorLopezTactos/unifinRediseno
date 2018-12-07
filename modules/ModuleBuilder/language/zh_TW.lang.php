@@ -744,8 +744,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'您確定要刪除這個關係嗎？<br>注意：此作業可能無法在數分鐘內完成。',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'這將使這個關係永久化。您確定要部署此關係嗎？',
 'LBL_CONFIRM_DONT_SAVE' => '自上次儲存以來已進行變更，您想要儲存嗎？',
@@ -757,6 +757,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => '設定欄位為可全文字搜尋。',
 'LBL_POPHELP_FTS_FIELD_BOOST' => '增強是強化記錄欄位相關性的過程。<br />在執行搜尋時，擁有更高增強等級的欄位將擁有更大的權數。執行搜尋時，包含擁有權數更高的欄位的匹配記錄，將顯示在搜尋結果中較前的位置。<br />預設值為 1.0，表示中性增強。如需應用正增強，可接受任何高於 1 的浮點值。負增強使用低於 1 的值。例如，數值 1.35 會將欄位增強 135%。使用數值 0.60 將應用負增強。<br />注意︰之前版本要求您必須執行全文字搜尋重新索引。這不再必要。',
 'LBL_POPHELP_IMPORTABLE'=>'<b>是</b>：欄位將包含在匯入作業中。<br><b>否</b>：欄位將不會包含在匯入中。<br><b>必要</b>：必須為任何匯入提供欄位值。',
+'LBL_POPHELP_PII'=>'此欄位將自動標記審核，可在個人資訊視圖中查看。<br>如果紀錄與資訊隱私擦除請求相關時，還可以永久删除個人訊欄位。<br>擦除操作將通過資訊隱私模組進行，可由管理員或使用者在資訊隱私管理器角色中執行。',
 'LBL_POPHELP_IMAGE_WIDTH'=>'輸入一個寬度值，以像素為單位。<br>上載圖像將自動調整為此寬度。',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'輸入一個高度值，以像素為單位。<br>上載圖像將自動調整為此高度。',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Biztosan törölni akarja ezt a kapcsolatot?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'A kapcsolat ezzel állandóvá válik. Biztos benne, hogy állandósítja a kapcsolatot?',
 'LBL_CONFIRM_DONT_SAVE' => 'Változások történtek, mióta utoljára mentett. Szeretne menteni?',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Konfigurálja a mezőt, hogy a szöveg teljes mértékben kereshető legyen.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Erősítés az a folyamat, amelynek során javítják egy rekord mezőinek relevanciáját.<br />Kereséskor az erősebb mezők nagyobb súlyt kapnak. Kereéskor az erősebb mezőket tartalmazó, megfelelő rekordok előbb jelennek meg a keresési listán.<br />Az alapértelmezett érték 1.0, ez a semleges erősítést jelöli. Pozitív erősítéshez bármilyen, 1-nél nagyobb lebegési érték elfogadható. Negatív erősítéshez használjon 1-nél gyengébb értékeket. Ha az érték például 1,35, ez 135%-kal erősíti pozitívan a mezőt. Ha az érték 0,60, ez gyengíti a mezőt. <br />Ne feledje, hogy a korábbi verziókban a teljes szövegkeresés újraindexelésére volt szükség. Ez többé már nem szükséges.',
 'LBL_POPHELP_IMPORTABLE'=>'Igen: A mező adatbeviteli mező.<br />Nem: A mező nem adatbeviteli mező.<br />Szükséges: A mező értékének megadása kötelező.',
+'LBL_POPHELP_PII'=>'A mezőt automatikusan bejelöli a rendszer auditra, és elérhetővé válik a Személyes adatok nézetben.<br>A személyes adatok mezők véglegesen törölhetők is, ha a rekord adatvédelmi törlési kéréshez kapcsolódik.<br>A törlés az Adatvédelem modulban történik, a művelet végrehajtása pedig rendszergazdák vagy adatvédelmi menedzser szerepkörrel rendelkező felhasználók számára lehetséges.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Írja be a szélességet, képpontban mérve.<br />A feltöltött kép ehhez a szélességhez lesz igazítva.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Írja be a magasságot, képpontban mérve.<br />A feltöltött kép ehhez a magassághoz lesz igazítva.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

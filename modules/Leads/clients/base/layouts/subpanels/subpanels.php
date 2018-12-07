@@ -49,8 +49,16 @@ $viewdefs['Leads']['base']['layout']['subpanels'] = array(
         array(
             'layout' => 'subpanel',
             'label' => 'LBL_EMAILS_SUBPANEL_TITLE',
+            'override_subpanel_list_view' => 'subpanel-for-leads-archived-emails',
             'context' => array(
                 'link' => 'archived_emails',
+            ),
+        ),
+        array(
+            'layout' => 'subpanel',
+            'label' => 'LBL_DATAPRIVACY_SUBPANEL_TITLE',
+            'context' => array(
+                'link' => 'dataprivacy',
             ),
         ),
     ),

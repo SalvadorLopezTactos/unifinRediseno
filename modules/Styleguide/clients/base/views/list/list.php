@@ -15,7 +15,7 @@ $viewdefs['Styleguide']['base']['view']['list'] = array(
             'label' => 'LBL_PANEL_1',
             'fields' => array(
                 array(
-                    'name' => 'full_name',
+                    'name' => 'name',
                     'fields' => array(
                         'salutation',
                         'first_name',

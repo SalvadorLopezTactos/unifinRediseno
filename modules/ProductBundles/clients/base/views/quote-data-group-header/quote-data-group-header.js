@@ -242,13 +242,12 @@
         this.toggleFields(this.rowFields[rowModelId], isEdit);
 
         if (isEdit) {
-            this.context.trigger('list:editgroup:fire');
-        } else if (row.hasClass('not-sortable')) {
-            // if this is not edit mode and row still has not-sortable (from being a brand new row)
-            // then remove the not-sortable and add the sortable classes
+            // make sure row is not sortable on edit
             row
-                .removeClass('not-sortable')
-                .addClass('sortable ui-sortable');
+                .addClass('not-sortable')
+                .removeClass('sortable ui-sortable');
+
+            this.context.trigger('list:editgroup:fire');
         }
     },
 

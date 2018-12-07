@@ -81,4 +81,14 @@ class Scope
 
         return empty($diff);
     }
+
+    /**
+     * Add/Update the params of this scope
+     *
+     * @param array $params
+     */
+    public function mergeParams(array $params)
+    {
+        $this->params = array_merge($this->params, $params);
+    }
 }

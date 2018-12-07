@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Galimų klientų sąrašo ataskaitų sritis',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Galimų klientų duomenų ataskaitų sritis',
+
     'ERR_DELETE_RECORD' => 'Įrašo numeris turi būti nurodytas, jeigu norite ištrinti potencialų kontaktą.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Kliento aprašymas',
     'LBL_ACCOUNT_ID'=>'Įmonės ID',
@@ -106,7 +111,7 @@ $mod_strings = array (
     'LBL_IMPORT_VCARD' => 'Importuoti vizitinę kortelę',
     'LBL_IMPORT_VCARD_SUCCESS' => 'Lead from vCard created succesfully',
     'LBL_VCARD' => 'Vizitinė kortelė',
-    'LBL_IMPORT_VCARDTEXT' => 'Automatiškai sukūrė naują potencialų kontaktą iš importuotos vizitinės kortelės.',
+    'LBL_IMPORT_VCARDTEXT' => 'Automatiškai sukurkite naują potencialų kontaktą importuodami vizitinę kortelę iš failų sistemos.',
     'LBL_INVALID_EMAIL'=>'Neteisingas el. paštas:',
     'LBL_INVITEE' => 'Pavaldiniai',
     'LBL_LAST_NAME' => 'Pavardė:',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Pardavimo suma:',
     'LBL_OPPORTUNITY_ID'=>'Pardavimo ID',
     'LBL_OPPORTUNITY_NAME' => 'Pardavimo pavadinimas:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Kitas el. paštas:',
     'LBL_OTHER_PHONE' => 'Kitas telefonas:',
     'LBL_PHONE' => 'Telefonas:',
@@ -152,14 +158,14 @@ $mod_strings = array (
     'LBL_PORTAL_PASSWORD_ISSET' => 'Portalo slaptažodis nustatytas:',
     'LBL_POSTAL_CODE' => 'Pašto kodas:',
     'LBL_STREET' => 'Gatvė',
-    'LBL_PRIMARY_ADDRESS_CITY' => 'Miestas',
+    'LBL_PRIMARY_ADDRESS_CITY' => 'Pagrindinio adreso miestas',
     'LBL_PRIMARY_ADDRESS_COUNTRY' => 'Pagrindinio adreso šalis',
     'LBL_PRIMARY_ADDRESS_POSTALCODE' => 'Pagrindinio adreso pašto kodas',
     'LBL_PRIMARY_ADDRESS_STATE' => 'Pagrindinio adreso rajonas',
     'LBL_PRIMARY_ADDRESS_STREET_2'=>'Pagrindinio adreso gatvė 2',
     'LBL_PRIMARY_ADDRESS_STREET_3'=>'Pagrindinio adreso gatvė 3',
     'LBL_PRIMARY_ADDRESS_STREET' => 'Pagrindinio adreso gatvė',
-    'LBL_PRIMARY_ADDRESS' => 'Pagrindinio adresas:',
+    'LBL_PRIMARY_ADDRESS' => 'Pagrindinis adresas',
     'LBL_RECORD_SAVED_SUCCESS' => 'You successfully created the {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.',
     'LBL_REFERED_BY' => 'Rekomendavo:',
     'LBL_REPORTS_TO_ID'=>'Pavaldus kam ID',
@@ -193,9 +199,9 @@ $mod_strings = array (
 	'LNK_SELECT_ACCOUNTS' => '<b>ARBA</b> Pasirinkite klientą',
     'LNK_SELECT_CONTACTS' => 'ARBA pasirinkti kontaktą',
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Kopijuoti kitą adresą į pagrindinį adresą',
-    'NTC_COPY_PRIMARY_ADDRESS' => 'Kopijuoti pagrindinį adresą į kitą adresą',
+    'NTC_COPY_PRIMARY_ADDRESS' => 'Kopijuoti pagrindinį adresą į kito adreso laukelį',
     'NTC_DELETE_CONFIRMATION' => 'Ar tikrai norite ištrinti šį įrašą?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Kuriant pardavimą reikalingas klientas.\n Prašome sukurti naują klientą arba pasirinkti iš esamų.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Kuriant pardavimą reikalingas klientas.\\n Prašome sukurti naują klientą arba pasirinkti iš esamų.',
     'NTC_REMOVE_CONFIRMATION' => 'Ar tikrai norite išimti šį potencialų kontaktą iš aptarnavimo?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Ar tikrai norite išimti šį įrašą kaip pavaldinį?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Kampanijos',
@@ -314,4 +320,6 @@ After confirming each required and desired module, click the Save and Convert bu
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Leads&#39; reports',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Verslo tikslais sutikote su',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Sutikimas paskutinį kartą atnaujintas',
 );

@@ -11,6 +11,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 /**
  * SugarRouting class
  *
@@ -223,8 +225,9 @@ class SugarRouting {
 
 		$routingRules = array();
 
-		if(file_exists($file))
-			include($file); // force include locally
+        if (file_exists($file)) {
+            include FileLoader::validateFilePath($file); // force include locally
+        }
 
 		$this->rules = $routingRules;
 	}

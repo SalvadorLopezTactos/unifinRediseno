@@ -182,7 +182,7 @@ class ReportCache {
 	 */
 	public function retrieve($reportId, $assigned_user_id='') {
 
-		global $timedate, $current_user, $global_json;
+        global $timedate, $current_user;
 		if (empty($assigned_user_id)) {
 			$assigned_user_id = $current_user->id;
 		} // if
@@ -198,8 +198,8 @@ class ReportCache {
 			}
 			$this->date_entered	= $timedate->to_display_date_time($this->date_entered);
 			$this->date_modified = $timedate->to_display_date_time($this->date_modified);
-			$this->contents_array = $global_json->decode(from_html($this->contents));
-			$this->report_options_array = $global_json->decode(from_html($this->report_options));
+            $this->contents_array = json_decode(from_html($this->contents), true);
+            $this->report_options_array = json_decode(from_html($this->report_options), true);
 			return true;
 		}
 

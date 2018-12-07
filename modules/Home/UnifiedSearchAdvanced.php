@@ -35,8 +35,8 @@ class UnifiedSearchAdvanced {
     {
         $file = sugar_cached('modules/unified_search_modules.php');
 
-        if (SugarAutoLoader::fileExists($file)) {
-            SugarAutoLoader::unlink($file);
+        if (file_exists($file)) {
+            unlink($file);
         }
     }
 

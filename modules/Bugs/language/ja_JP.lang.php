@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'バグリストのダッシュ ボード',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'バグレコードのダッシュ ボード',
+
   'LBL_MODULE_NAME' => 'バグトラッカー',
   'LBL_MODULE_NAME_SINGULAR'	=> 'バグトラッカー',
   'LBL_MODULE_TITLE' => 'バグトラッカー: ホーム',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'ケース',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'プロジェクト',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'ドキュメント',
-  'LBL_SYSTEM_ID' => 'システムID',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'アサイン先',
 	'LBL_ASSIGNED_TO_NAME' => 'アサイン先',
 

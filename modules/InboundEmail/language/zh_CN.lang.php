@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> '答复：',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> '登录名或者密码错误',
-	'ERR_BODY_TOO_LONG'		=> '\r电子邮件正文太长无法捕获完整的电子邮件。请调整。',
+	'ERR_BODY_TOO_LONG'		=> '\\r电子邮件正文太长无法捕获完整的电子邮件。请调整。',
 	'ERR_INI_ZLIB'			=> '暂时无法关闭 Zlib 压缩。“测试设置”可能失败。',
 	'ERR_MAILBOX_FAIL'		=> '不能检索任何电子邮件帐户。',
 	'ERR_NO_IMAP'			=> '未发现 IMAP 类。请在继续使用收件箱前解决这个问题。',

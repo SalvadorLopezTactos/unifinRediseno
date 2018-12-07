@@ -37,29 +37,31 @@
      * Builds the list of allowed modules to provide the data to the select2 field.
      */
     buildModuleFilterList: function() {
-        var allowedModules = this.collection.allowed_modules;
-        var self = this;
-
         this._moduleFilterList = [
             {id: this._allModulesId, text: app.lang.get('Target Module')}
         ];
 
-        url = app.api.buildURL('pmse_Emails_Templates', this.collection.baseModule +  '/find_modules',null,{module_list: this.collection.baseModule});
-        //url = api.buildURL('pmse_Project', 'CrmData/fields/' + this.collection.baseModule, null, {base_module: 'Leads'});
-        app.api.call('read', url, null, {
-            success:function (result){
-                if (result.success && self.collection) {
-                    _.each(result.result, function(module) {
-                        if(module.value!=self.collection.baseModule){
-                            self._moduleFilterList.push({id: module.value, text: module.text});
-                        }
-                    }, self);
-                }
+        url = app.api.buildURL('pmse_Emails_Templates',
+            this.collection.baseModule +  '/find_modules',
+            null,
+            {module_list: this.collection.baseModule});
+        app.api.call('read', url, null,
+            {
+                success: _.bind(this._onGetModuleFilterListSuccess, this)
             }
-        });
-//                .each(allowedModules, function(module) {
-//                    this._moduleFilterList.push({id: module, text: app.lang.get('LBL_MODULE_NAME', module)});
-//                }, this);
+        );
+    },
+    /**
+     * API success callback for buildModuleFilterList. Created to make unit testing possible.
+     */
+    _onGetModuleFilterListSuccess: function(result) {
+        if (result.success && this.collection) {
+            _.each(result.result, function(module) {
+                if (module.value != this.collection.baseModule) {
+                    this._moduleFilterList.push({id: module.value, text: module.text});
+                }
+            }, this);
+        }
     },
     /**
      * Converts the input field to a select2 field and initializes the selected module.
@@ -111,7 +113,7 @@
             $filter.off();
             $filter.select2('destroy');
         }
-        this._super("unbind");
+        this._super('unbind');
     },
     /**
      * Performs a search once the user has entered a term.
@@ -154,7 +156,7 @@
      * @param {Object} option
      * @return {String}
      */
-    formatModuleChoice: function (option) {
+    formatModuleChoice: function(option) {
         return '<div><span class="select2-match"></span>' + option.text + '</div>';
     },
     /**

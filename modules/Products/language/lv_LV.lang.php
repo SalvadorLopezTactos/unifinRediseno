@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Piedāvājuma rindas saraksta instrumentu panelis',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampaņas produkts',
     'LBL_MODULE_NAME' => 'Piedāvājuma rindas',
     'LBL_MODULE_NAME_SINGULAR' => 'Piedāvājuma rinda',
@@ -172,4 +175,5 @@ Lai izveidotu {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Piedāvāto rindas produktu piedāvājuma datu saraksts',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (jauns piedāvātais rindas produkts)',
     'LBL_DISCOUNT_PERCENT' => '% procenti',
+    'LBL_DISCOUNT_TYPE' => 'Atlaides veids',
 );

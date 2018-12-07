@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Kļūda: Nav norādīts neviens moduļa lauks, ko rādīt rezultātos. Sazinieties ar sistēmas administratoru.',
     'LBL_INFO_INLINE' => 'Informācija' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Aizvērt' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'Norādītajam avota ID netika atrasts neviens konektors.',
 );
 

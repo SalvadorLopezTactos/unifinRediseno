@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Tableau de bord de la liste de lignes de devis',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Campagne de la ligne de devis',
     'LBL_MODULE_NAME' => 'Lignes de devis',
     'LBL_MODULE_NAME_SINGULAR' => 'Ligne de devis',
@@ -37,14 +40,14 @@ $mod_strings = array(
     'LBL_LIST_SUPPORT_EXPIRES' => 'Expire le',
     'LBL_NAME' => 'Nom',
     'LBL_URL' => 'URL Produit:',
-    'LBL_QUOTE_NAME' => 'Nom Devis:',
-    'LBL_ASSOCIATED_QUOTE' => 'Titre du Devis :',
-    'LBL_CONTACT_NAME' => 'Nom du Contact:',
+    'LBL_QUOTE_NAME' => 'Nom du devis :',
+    'LBL_ASSOCIATED_QUOTE' => 'Titre du devis :',
+    'LBL_CONTACT_NAME' => 'Nom du contact :',
     'LBL_DATE_PURCHASED' => 'Acheté:',
     'LBL_DATE_SUPPORT_EXPIRES' => 'Expiration du Support:',
     'LBL_DATE_SUPPORT_STARTS' => 'Démarrage Support:',
     'LBL_COST_PRICE' => 'Prix de revient :',
-    'LBL_DISCOUNT_PRICE' => 'Prix Unitaire :',
+    'LBL_DISCOUNT_PRICE' => 'Prix unitaire :',
     'LBL_DEAL_TOT' => 'Remise :',
     'LBL_DISCOUNT_RATE' => 'Taux de remise',
     'LBL_DISCOUNT_RATE_USDOLLAR' => 'Taux de remise (devise par défaut)',
@@ -59,7 +62,7 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Description :',
     'LBL_TYPE' => 'Type :',
     'LBL_CATEGORY' => 'Catégorie :',
-    'LBL_QUANTITY' => 'Quantité:',
+    'LBL_QUANTITY' => 'Quantité :',
     'LBL_STATUS' => 'Statut :',
     'LBL_TAX_CLASS' => 'Classe de Taxe:',
     'LBL_MANUFACTURER' => 'Fabricant:',
@@ -69,7 +72,7 @@ $mod_strings = array(
     'LBL_SUPPORT_NAME' => 'Titre du Support:',
     'LBL_SUPPORT_CONTACT' => 'Interlocuteur Support:',
     'LBL_PRICING_FORMULA' => 'Formule de pricing :',
-    'LBL_ACCOUNT_NAME' => 'Nom du Compte:',
+    'LBL_ACCOUNT_NAME' => 'Nom du compte:',
     'LNK_PRODUCT_LIST' => 'Lignes de devis',
     'LNK_NEW_PRODUCT' => 'Créer Ligne de devis',
     'NTC_DELETE_CONFIRMATION' => 'Êtes-vous sûr de vouloir supprimer cet enregistrement ?',
@@ -123,7 +126,7 @@ $mod_strings = array(
     'LBL_SUBTOTAL' => 'Sous-total',
     'LBL_CONTACT' => 'Contact',
     'LBL_DISCOUNT_TOTAL' => 'Total Remise',
-    'LBL_DISCOUNT_AMOUNT' => 'Montant Remise',
+    'LBL_DISCOUNT_AMOUNT' => 'Montant de la remise',
     'LBL_EXT_PRICE' => 'Prix Total',
     'LBL_CURRENCY_SYMBOL_NAME' => 'Symbole de la devise',
     'LBL_PRODUCTS_SUBPANEL_TITLE' => 'Ligne de devis',
@@ -172,4 +175,5 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Liste de données de devis pour lignes de devis',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nouvelle ligne de devis)',
     'LBL_DISCOUNT_PERCENT' => 'Pourcentage',
+    'LBL_DISCOUNT_TYPE' => 'Type de remise',
 );

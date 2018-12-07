@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => '潛在客户清單儀表板',
+    'LBL_LEADS_RECORD_DASHBOARD' => '潛在客戶紀錄儀表板',
+
     'ERR_DELETE_RECORD' => '必須指定記錄編號才能刪除潛在客戶。',
     'LBL_ACCOUNT_DESCRIPTION'=> '帳戶描述',
     'LBL_ACCOUNT_ID'=>'帳戶 ID',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => '商機金額：',
     'LBL_OPPORTUNITY_ID'=>'商機 ID',
     'LBL_OPPORTUNITY_NAME' => '商機名稱：',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => '其他電子郵件：',
     'LBL_OTHER_PHONE' => '其他電話：',
     'LBL_PHONE' => '電話：',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => '將備用地址複製到主要地址',
     'NTC_COPY_PRIMARY_ADDRESS' => '將主要地址複製到備用地址',
     'NTC_DELETE_CONFIRMATION' => '確定要刪除此記錄嗎？',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '建立商機需要帳戶。\n請建立新帳戶或選取現有帳戶。',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '建立商機需要帳戶。\\n請建立新帳戶或選取現有帳戶。',
     'NTC_REMOVE_CONFIRMATION' => '您確定要從實例中移除此潛在客戶嗎？',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '確定要移除此直屬員工記錄嗎？',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'推廣活動記錄',
@@ -314,4 +320,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => '潛在客戶得分',
 
     'LBL_FILTER_LEADS_REPORTS' => '潛在客戶報表',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '業務目的同意',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '同意上次更新',
 );

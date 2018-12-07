@@ -12,9 +12,9 @@
  */
 
 use Doctrine\DBAL\DriverManager as DoctrineDriverManager;
-use Sugarcrm\Sugarcrm\Dbal\Connection;
-use Sugarcrm\Sugarcrm\Dbal\Logging\SugarLogger;
 use Doctrine\DBAL\Logging\SQLLogger;
+use Sugarcrm\Sugarcrm\Dbal\Connection;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
 
 /**
  * Database driver factory
@@ -199,7 +199,7 @@ class DBManagerFactory
     public static function getDbalLogger()
     {
         if (!self::$dbalLogger) {
-            self::$dbalLogger = new SugarLogger($GLOBALS['log']);
+            self::$dbalLogger = Container::getInstance()->get(SQLLogger::class);
         }
 
         return self::$dbalLogger;

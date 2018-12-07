@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Login or Password Incorrect',
-	'ERR_BODY_TOO_LONG'		=> '\rBody text too long to capture FULL email.  Trimmed.',
+	'ERR_BODY_TOO_LONG'		=> '\\rBody text too long to capture FULL email.  Trimmed.',
 	'ERR_INI_ZLIB'			=> 'Could not turn off Zlib compression temporarily.  "Test Settings" may fail.',
 	'ERR_MAILBOX_FAIL'		=> 'Could not retrieve any mail accounts.',
 	'ERR_NO_IMAP'			=> 'No IMAP libraries found.  Please resolve this before continuing with Inbound Email',

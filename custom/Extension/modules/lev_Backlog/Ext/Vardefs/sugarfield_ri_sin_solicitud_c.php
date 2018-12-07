@@ -1,5 +1,5 @@
 <?php
- // created: 2018-02-16 16:59:03
+ // created: 2018-12-05 18:17:34
 $dictionary['lev_Backlog']['fields']['ri_sin_solicitud_c']['labelValue'] = 'RI Sin Solicitud';
 $dictionary['lev_Backlog']['fields']['ri_sin_solicitud_c']['enforced'] = '';
 $dictionary['lev_Backlog']['fields']['ri_sin_solicitud_c']['dependency'] = '';

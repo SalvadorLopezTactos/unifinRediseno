@@ -30,7 +30,7 @@
                 {{#each ../../filteredCollection}}
                 <tr name="{{module}}_{{attributes.id}}" class="single">
                     {{#each fields}}
-                        <td{{#if align}} class="{{align}}"{{/if}}>{{field ../../../../this model=../this template=../../../../this.action}}</td>
+                        <td{{#if align}} class="{{align}}"{{/if}}>{{field ../../../../this model=../this template="audit"}}</td>
                     {{/each}}
                 </tr>
                 {{/each}}

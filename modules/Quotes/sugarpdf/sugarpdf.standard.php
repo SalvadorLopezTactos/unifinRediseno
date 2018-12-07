@@ -105,7 +105,7 @@ class QuotesSugarpdfStandard extends QuotesSugarpdfQuotes{
         $quote[2]['TITLE'] = $mod_strings['LBL_PDF_SALES_PERSON'];
         $quote[3]['TITLE'] = $mod_strings['LBL_PDF_QUOTE_CLOSE'];
 
-        $quote[0]['VALUE']['value'] = format_number_display($this->bean->quote_num,$this->bean->system_id);
+        $quote[0]['VALUE']['value'] = format_number_display($this->bean->quote_num);
         $quote[1]['VALUE']['value'] = $timedate->nowDate();
 	    $quote[2]['VALUE']['value'] = $rep->first_name.' '.$rep->last_name;
         $quote[3]['VALUE']['value'] = $this->bean->date_quote_expected_closed;

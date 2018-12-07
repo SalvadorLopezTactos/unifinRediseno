@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Panel för bugglistor',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Panel för buggposter',
+
   'LBL_MODULE_NAME' => 'Buggar',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Bugg',
   'LBL_MODULE_TITLE' => 'Bugg tracker: Hem',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Ärenden',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projekt',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokument',
-  'LBL_SYSTEM_ID' => 'System-ID',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Tilldelad användare',
 	'LBL_ASSIGNED_TO_NAME' => 'Tilldelad till',
 

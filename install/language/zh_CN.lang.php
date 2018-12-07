@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> '此查询将会排列在报表的第一个查询之下',
     'ERR_DB_VERSION_FAILURE'			=> '无法检查数据库版本。',
 
-
-	'ERR_OC_PASSWORD'					=> '密码不能为空。',
-	'ERR_OC_SERVER_URL'					=> 'Sugar服务器网址不能为空。',
-	'ERR_OC_USERNAME'					=> '服务器用户的用户名不能为空。',
-	'LBL_INSTALL_OC'					=> '安装离线客户端',
-    'LBL_OC_ADMIN'                      => '请联系您的管理员解决此问题。',
-    'LBL_OC_SUCCESS'                    => '离线客户端已安装完成。请单击下方按钮转到您的安装。',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> '管理员用户名',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> '请输入以下细节以便正确安装和同步您的离线客户端。',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'Sugar服务器的网址',
-	'LBL_OC_INSTALL_PASS'				=> '服务器用户的密码',
-	'LBL_OC_INSTALL_TITLE'				=> '离线客户端安装',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> '这是您将连接到您的服务器的用户名。',
-	'LBL_OC_INSTALL_USERNAME'			=> '用户名',
-	'LBL_PERFORM_OC_INSTALL'			=> '初始化离线客户端安装',
-    'LBL_OC_INSTALL_DIRECTIONS'         => '请输入以下细节以便正确安装和同步您的离线客户端。',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => '请提供 Sugar 管理员用户的用户名。',
 	'ERR_ADMIN_PASS_BLANK'				=> '请提供Sugar管理员用户的密码。',
@@ -76,7 +59,7 @@ $mod_strings = array(
     'ERR_CHECKSYS'                      => '在兼容性检查过程中发现错误。为了确保您的SugarCRM可以正常工作，请采取正确步骤解决下列问题或者单击再次检查按钮或再次执行安装。',
     'ERR_CHECKSYS_CALL_TIME'            => 'Allow Call Time Pass Reference是开启的(php.ini中的这个选项应设置为关闭的)',
 
-	'ERR_CHECKSYS_CURL'					=> '未找到：Sugar 计划任务将在有限功能情况下运行。电子邮件归档服务不运行。',
+	'ERR_CHECKSYS_CURL'					=> '未找到：Sugar 工作计划可以使用的功能有限。电子邮件归档服务将无法使用。',
     'ERR_CHECKSYS_IMAP'					=> '未找到：接收邮件以及市场活动（邮件）需要IMAP库。否则不能正常工作。',
 	'ERR_CHECKSYS_MSSQL_MQGPC'			=> '若使用MS SQL服务器，Magic Quotes GPC不可设置为"On"。',
 	'ERR_CHECKSYS_MEM_LIMIT_0'			=> '警告：',
@@ -92,7 +75,7 @@ $mod_strings = array(
 	'ERR_CHECKSYS_FASTCGI_LOGGING'      => '为了获得IIS/FastCGI sapi的最佳效果，请在您的php.ini文件中设置fastcgi.logging为0。',
     'ERR_CHECKSYS_PHP_UNSUPPORTED'		=> '不支持当前PHP版本：（版本',
     'LBL_DB_UNAVAILABLE'                => '数据库不可用',
-    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '未找到数据库支持。请确保您已安装支持以下任一数据库类型所需的驱动程序：MySQL、MS SQLServer、Oracle 或 DB2。您可能需要移除 php.ini 文件中有关扩展的注释，或使用正确的二进制文件重新进行编译，具体视您的 PHP 版本而定。更多关于如何启用数据库支持的信息，请参考您的 PHP 手册。',
+    'LBL_CHECKSYS_DB_SUPPORT_NOT_AVAILABLE' => '未找到数据库支持。请确保您已为所支持的以下任一数据库类型安装所需的驱动程序：MySQL、MS SQLServer、Oracle，或 DB2。您可能需要移除 php.ini 文件中有关扩展的注释，或使用正确的二进制文件重新编译，具体视您的 PHP 版本而定。更多关于如何启用数据库支持的信息，请参考您的 PHP 手册。',
     'LBL_CHECKSYS_XML_NOT_AVAILABLE'        => '找不到Sugar应用程序需要的XML解析库功能。您可能要移除php.ini文件中有关扩展的注释，或重新编译正确的二进制文件，具体视您的PHP版本而定。欲知详情，请参考您的PHP手册。',
     'LBL_CHECKSYS_CSPRNG' => '随机数字生成器',
     'ERR_CHECKSYS_MBSTRING'             => '找不到Sugar应用程序需要的多字节字符串扩展(mbstring)功能。<br/><br/>一般来说，PHP默认不启用mbstring模块并且必须使用PHP自建的库--enable-mbstring来启动。欲知详情，请参考您的PHP手册。',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => '上传文件大小',
 	'ERR_URL_BLANK'						=> '提供Sugar实例的基准网址链接。',
 	'ERR_UW_NO_UPDATE_RECORD'			=> '不能定位安装记录',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> '上传的文件与Sugar版本不兼容(社区版，专业版或企业版)：',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => '所上传的文件不兼容此 Sugar 版本（专业版、企业版或旗舰版）：',
 	'ERROR_LICENSE_EXPIRED'				=> "错误：您的许可已过期",
 	'ERROR_LICENSE_EXPIRED2'			=> " 一（几）天前。请前往位于系统管理界面的<a href='index.php?action=LicenseSettings&module=Administration'>'\"许可证管理\"</a> 来输入您的新许可证。如果您在许可证过期 30 天内不输入新的许可证密匙，您将无法登录您的系统。",
 	'ERROR_MANIFEST_TYPE'				=> '清单文件必须指定程序包类型。',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> '失效日期',
 	'LBL_LICENSE_I_ACCEPT'				=> '我接受',
 	'LBL_LICENSE_NUM_USERS'				=> '用户数目',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> '请输入已购买的离线客户端数量。',
-	'LBL_LICENSE_OC_NUM'				=> '离线客户端许可证数目',
-	'LBL_LICENSE_OC'					=> '离线客户端授权',
 	'LBL_LICENSE_PRINTABLE'				=> '可打印视图',
     'LBL_PRINT_SUMM'                    => '打印摘要',
 	'LBL_LICENSE_TITLE_2'				=> 'SugarCRM授权',
@@ -511,10 +491,6 @@ SugarCRM兼容版本：<br>
     'LBL_COLLATION' => '排序设置',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'请提供一个 Sugar 实例的系统名称。',
 	'LBL_PATCH_UPLOAD' => '从本地计算机上选择一个补丁文件',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => '需要 PHP 5 或以上版本。',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(您当前的 PHP 版本是',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => '已打开 PHP 向下兼容模式。设置 zend.ze1_compatibility_mode 至 OFF 来继续',
 
     'advanced_password_new_account_email' => array(
@@ -540,5 +516,3 @@ $config_site_url
         'name' => '忘记密码邮件',
         ),
 );
-
-?>

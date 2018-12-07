@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Ett objektnummer måste specificeras för att radera momssatsen.',
   'NTC_STATUS' => 'Sätt statusen till inaktiv för att ta bort momssatsen från dropdownmenyn över momssatser',
   'NTC_LIST_ORDER' => 'Sätt ordningen för hur momssatsen ska visas i dropdown menyn över momssatser',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Inaktiv',
-  ),
   'LBL_EDITLAYOUT' => 'Redigera layout' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Skapat av ID',
   'LBL_MODIFIED_ID'=>'Redigerad av ID',

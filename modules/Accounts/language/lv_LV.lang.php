@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Piedāvājumi (piegādes adrese)',
 	'LNK_ACCOUNT_REPORTS' => 'Skatīt uzņēmumu atskaites',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenti',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Klientu saraksta instrumentu panelis',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Klientu ierakstu instrumentu panelis',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Diagrammas',
 	'LBL_DEFAULT' => 'Skatījumi',

@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => '聯繫人清單儀表板',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => '聯繫人紀錄儀表板',
+
     'LNK_CONTACT_REPORTS' => '檢視連絡人報表',
     'ERR_DELETE_RECORD' => '必須指定記錄編號才能刪除聯絡人。',
     'LBL_ACCOUNT_ID' => '帳戶 ID：',
@@ -145,7 +149,7 @@ $mod_strings = array (
     'LBL_SYNC_CONTACT' => '同步至郵件用戶端：',
     'LBL_PROSPECT_LIST' => '潛在客戶清單',
     'LBL_TEAM_ID' => '小組 ID：',
-    'LBL_TITLE' => '標題：',
+    'LBL_TITLE' => '職稱：',
     'LNK_CREATE' => '建立個人',
     'LNK_CONTACT_LIST' => '檢視連絡人',
     'LNK_IMPORT_VCARD' => '從 vCard 建立連絡人',
@@ -165,7 +169,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => '將備用地址複製到主要地址',
     'NTC_COPY_PRIMARY_ADDRESS' => '將主要地址複製到備用地址',
     'NTC_DELETE_CONFIRMATION' => '確定要刪除此記錄嗎？',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '建立商機要求使用帳戶。\n請建立新帳戶或選取現有帳戶。',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '建立商機要求使用帳戶。\\n請建立新帳戶或選取現有帳戶。',
     'NTC_REMOVE_CONFIRMATION' => '確定要從實例中移除此連絡人嗎？',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '確定要移除此直屬員工記錄嗎？',
 
@@ -273,4 +277,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => '潛在客戶得分',
 
     'LBL_FILTER_CONTACTS_REPORTS' => '連絡人報表',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '業務目的同意',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '同意上次更新',
 );

@@ -49,6 +49,7 @@ $viewdefs['Accounts']['base']['layout']['subpanels'] = array (
         array(
             'layout' => 'subpanel',
             'label' => 'LBL_EMAILS_SUBPANEL_TITLE',
+            'override_subpanel_list_view' => 'subpanel-for-accounts-archived-emails',
             'context' => array(
                 'link' => 'archived_emails',
             ),
@@ -120,7 +121,7 @@ $viewdefs['Accounts']['base']['layout']['subpanels'] = array (
             'override_subpanel_list_view' => 'subpanel-for-accounts',
             'context' => array(
                 'link' => 'quotes',
-                'ignore_role' => 0
+                'ignore_role' => 0,
             ),
         ),
         array(
@@ -130,7 +131,7 @@ $viewdefs['Accounts']['base']['layout']['subpanels'] = array (
             'override_subpanel_list_view' => 'subpanel-for-accounts',
             'context' => array(
                 'link' => 'quotes_shipto',
-                'ignore_role' => 0
+                'ignore_role' => 0,
             ),
         ),
         array(
@@ -153,6 +154,13 @@ $viewdefs['Accounts']['base']['layout']['subpanels'] = array (
             'label' => 'LBL_PROJECTS_SUBPANEL_TITLE',
             'context' => array(
                 'link' => 'project',
+            ),
+        ),
+        array(
+            'layout' => 'subpanel',
+            'label' => 'LBL_DATAPRIVACY_SUBPANEL_TITLE',
+            'context' => array(
+                'link' => 'dataprivacy',
             ),
         ),
     ),

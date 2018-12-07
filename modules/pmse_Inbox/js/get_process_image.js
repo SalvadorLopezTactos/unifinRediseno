@@ -8,6 +8,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// Get the global PMSE classes variable.
+var PMSE = PMSE || {};
+
 function showImage(code) {
     var _App, pmseInboxUrl;
     if (App) {
@@ -42,7 +45,7 @@ function viewImage(url, code, _App){
             scroll: ((ih + 45) > 400) ? true : false
         });
 
-        w = new Window({
+        w = new PMSE.Window({
             width: iw + 40,
             height: ((ih + 45) < 400) ?  ih + 45 : 400,
             modal: true,

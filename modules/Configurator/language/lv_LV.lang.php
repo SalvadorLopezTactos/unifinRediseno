@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Sugar Mobile Plus serveris',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Apakšpaneļa rindu skaits lapā',
 	'LOG_MEMORY_USAGE'=>'Atmiņas patēriņa reģistrācija',
-	'LOG_SLOW_QUERIES'=>'Lēnu vaicājumu reģistrēšana',
+    'LOG_SLOW_QUERIES' => 'Lēnu vaicājumu reģistrēšana',
     'LOCK_HOMEPAGE_HELP'=>'Šis uzstādījums neļauj<BR> 1) jaunu lapu un dašletu pievienošanu sākumlapā, <BR>2) dašletu novietojuma maiņu tos pārvelkot sākumlapā.',
     'CURRENT_LOGO'=>'Esošais logo:',
     'CURRENT_LOGO_HELP'=>'Šis logotips ir attēlots Sugar programmas kreisajā apakšējā stūrī.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'Šis nosaukums parādās pārlūkprogrammas nosaukuma joslā.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Iespējot/Atspējot e-pastus no pakārtotiem (vai saistītajiem) kontaktiem ko rādīt e-pastu apakšpanelī',
 
-    'LBL_OC_STATUS'                     => 'Noklusētais bezsaistes klienta statuss',
-    'DEFAULT_OC_STATUS'                 => 'Pēc noklusējuma atļaut bezsaistes klientu',
-    'LBL_OC_STATUS_DESC' => 'Atzīmējiet lai atļautu visiem lietotājiem pieeju bezsaistes klientam. Citādi pieeja jākonfigurē katram lietotājam atsevišķi.',
     'SESSION_TIMEOUT' => 'Portāla sesijas taimauts',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Portāla sesija noildze ir iepriekšējām Sugar portālu versijām, kas pieejamas 6,5 un vecākās versijās.',
     'UPLOAD_MAXSIZE_UNITS' => 'baiti',
@@ -434,8 +431,17 @@ BSOFR
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'SAML Ierakstīšanās saite nevar būt tukša',
     'ERR_EMPTY_SAML_CERT' => 'SAML sertifikāts nevar būt tukšs',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'SAML uzņēmuma ID nevar būt tukšs',
     'ERR_SAML_LOGIN_URL' => 'SAML Ierakstīšanās saite nav derīga',
     'ERR_SAML_SLO_URL' => 'SAML SLO saite nav derīga',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'PEM failam ir jāsatur privātā atslēga',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'PEM failam ir jāsatur x.509 sertifikāts',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Iesniegtais x.509 sertifikāts nesakrīt ar privāto atslēgu',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Darbību plūsmas',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Iespējot darbību plūsmas',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Ieslēdz darbību plūsmas lietojumprogrammai',
 );
 
 

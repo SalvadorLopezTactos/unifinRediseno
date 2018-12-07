@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'Sei sicuro di voler eliminare la relazione?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'Questo renderà la relazione permanente. Sei sicuro di voler distribuire la relazione?',
 'LBL_CONFIRM_DONT_SAVE' => 'Sono stati fatti dei cambiamenti dopo ultimo salvataggio, vuoi salvare?',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => 'Configurare il campo in modo che sia possibile eseguire ricerche complete di testo.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => 'Il Potenziamento è il processo di miglioramento della rilevanza dei campi di un record.<br />Ai campi con un livello di potenziamento superiore verrà dato un peso maggiore quando viene eseguita la ricerca. Quando viene eseguita una ricerca, i record corrispondenti contenenti campi con un peso superiore compariranno più alti nei risultati della ricerca.<br />Il valore predefinito è 1.0 che indica potenziamento neutro. Per applicare un potenziamento positivo viene accettato qualsiasi valore di galleggiamento superiore a 1. Per un potenziamento negativo, usare valori inferiori a 1. Ad esempio un valore di 1.35 potenzierà positivamente un campo del 135%. Usando un valore di 0.60 verrà applicato un potenziamento negativo.<br />Si prega di notare che nelle versioni precedenti è stata richiesta l&#39;esecuzione di un re-indirizzamento completo di un testo di ricerca. Ciò non è più richiesto.',
 'LBL_POPHELP_IMPORTABLE'=>'<b>Si</b>: Il campo sarà incluso dell´attività di importazione<br><b>No</b>: Il campo non sarà incluso nell´importazione.<br><b>Importante</b>: ll campo deve essere valorizzato in ogni importazione.',
+'LBL_POPHELP_PII'=>'Questo campo verrà automaticamente contrassegnato per il controllo e sarà disponibile nella vista Informazioni personali.<br>I campi delle informazioni personali possono anche essere cancellati in maniera permanente quando il record si riferisce a una richiesta di cancellazione della privacy dei dati.<br>La cancellazione viene eseguita attraverso il modulo Privacy dei dati e può essere eseguita dagli amministratori o dagli utenti che dispongono del ruolo di responsabile della privacy dei dati.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'Inserire una misura per la larghezza (in pixel).<br>L´immagine caricata verrà scalata a questa larghezza.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'Inserire una misura per l´altezza (in pixel). <br>L´immagine caricata verrà scalata a questa altezza.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

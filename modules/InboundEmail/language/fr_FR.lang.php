@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE :',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Utilisateur ou mot de passe incorrect',
-	'ERR_BODY_TOO_LONG'		=> '\rLe Corps du message est trop long pour le récupérer dans sa totalité. Message tronqué.',
+	'ERR_BODY_TOO_LONG'		=> '\\rLe Corps du message est trop long pour le récupérer dans sa totalité. Message tronqué.',
 	'ERR_INI_ZLIB'			=> 'Impossible de désactiver temporairement la compression Zlib. "Tester Paramétrage" peut échouer.',
 	'ERR_MAILBOX_FAIL'		=> 'Ne peut accéder à aucune boîte email.',
 	'ERR_NO_IMAP'			=> 'Librairie IMAP non trouvée. Merci de résoudre le problème avant de poursuivre le paramétrage des emails entrants',

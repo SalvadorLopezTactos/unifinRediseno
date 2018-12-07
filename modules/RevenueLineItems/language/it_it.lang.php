@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Dashboard elenco elementi dell&#39;opportunità',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Dashboard record elementi dell&#39;opportunità',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Prodotto della Campagna',
     'LBL_MODULE_NAME' => 'Elementi dell´Opportunità',
     'LBL_MODULE_NAME_SINGULAR' => 'Elemento dell´Opportunità',

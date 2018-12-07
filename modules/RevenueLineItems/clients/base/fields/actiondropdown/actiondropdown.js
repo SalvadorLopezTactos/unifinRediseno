@@ -21,8 +21,9 @@
 
     /**
      * Enable or disable caret depending on if there are any enabled actions in the dropdown list
+     *
+     * @inheritdoc
      * @private
-     * @override
      */
     _updateCaret: function() {
         // Left empty on purpose, the menu should always show

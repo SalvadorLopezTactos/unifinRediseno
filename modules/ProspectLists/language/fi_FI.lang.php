@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Tavoiteluettelojen luettelon työpöytä',
+
   'LBL_MODULE_NAME' => 'Tavoitelistat',
   'LBL_MODULE_NAME_SINGULAR' => 'Tavoitelista',
   'LBL_MODULE_ID'   => 'Tavoitelistat',

@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Vale kasutajanimi või parool',
-	'ERR_BODY_TOO_LONG'		=> '\rKehatekst on liiga pikk, et mahutada KOGU e-kirja. Lõigatud.',
+	'ERR_BODY_TOO_LONG'		=> '\\rKehatekst on liiga pikk, et mahutada KOGU e-kirja. Lõigatud.',
 	'ERR_INI_ZLIB'			=> 'Zlib-tihendamist ei saanud ajutiselt välja lülitada. Testi sätted võivad nurjuda.',
 	'ERR_MAILBOX_FAIL'		=> 'E-posti kontosid ei leitud.',
 	'ERR_NO_IMAP'			=> 'IMAP-teeke ei leitud. Lahendage see enne sissetulevate e-kirjadega jätkamist',

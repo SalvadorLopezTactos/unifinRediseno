@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGETS_LIST_DASHBOARD' => 'Kontaktlisten-Dashboard',
+  'LBL_TARGETS_RECORD_DASHBOARD' => 'Kontaktbericht-Dashboard',
+
   'LBL_MODULE_NAME' => 'Zielkontakte',
   'LBL_MODULE_NAME_SINGULAR' => 'Zielkontakt',
   'LBL_MODULE_ID'   => 'Zielkontakte',
@@ -120,7 +124,7 @@ $mod_strings = array (
   'LBL_SALUTATION' => 'Anrede',
   'LBL_SAVE_PROSPECT' => 'Zielkontakt speichern',
   'LBL_CREATED_OPPORTUNITY' =>'Neue Verkaufschance erstellt',
-  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Zum Erstellen einer Verkaufschance benötigen Sie eine Firma.\n Bitte erstellen Sie eine neue Firma oder wählen Sie eine bestehende Firma aus.',
+  'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Zum Erstellen einer Verkaufschance benötigen Sie eine Firma.\\n Bitte erstellen Sie eine neue Firma oder wählen Sie eine bestehende Firma aus.',
   'LNK_SELECT_ACCOUNT' => "Firma auswählen",
   'LNK_NEW_PROSPECT' => 'Neuer Zielkontakt',
   'LNK_PROSPECT_LIST' => 'Zielkontakte anzeigen',
@@ -195,4 +199,6 @@ So erstellen Sie ein {{module_name}}:
 2. Klicken Sie auf "Speichern", um den Datensatz fertigzustellen und auf die letzte Seite zurück zu kommen.',
 
     'LBL_FILTER_PROSPECTS_REPORTS' => 'Zielkontakte-Berichte',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Geschäftszwecke, zugestimmt für',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Zustimmung zuletzt aktualisiert',
 );

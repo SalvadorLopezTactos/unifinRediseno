@@ -430,6 +430,10 @@ class PMSEBeanHandler
             $now->add($this->expressionEvaluator->processDateInterval($response->value));
             $response->value = $timedate->asIso($now);
         }
+
+        if (strtolower($response->value) === 'now') {
+            $response->value = $timedate->asIso(new DateTime());
+        }
         return $response->value;
     }
 

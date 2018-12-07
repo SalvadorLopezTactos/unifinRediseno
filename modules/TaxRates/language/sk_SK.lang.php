@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'K odstráneniu verzie musíte zadať číslo záznamu.',
   'NTC_STATUS' => 'K odstráneniu tejto verzie zo zoznamu výberových polí verzie nastavte stav na neaktívny.',
   'NTC_LIST_ORDER' => 'Nastavte poradie, v ktorom sa táto verzia objaví vo výberových poliach.',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktívny',
-    'Inactive' => 'Neaktívny',
-  ),
   'LBL_EDITLAYOUT' => 'Upraviť rozloženie' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Vytvoril ID',
   'LBL_MODIFIED_ID'=>'Zmenil ID',

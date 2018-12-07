@@ -42,18 +42,21 @@ if(!empty($_REQUEST['identifier'])) {
 
     }elseif(!empty($keys)){
 		$id = $keys['target_id'];
-		$db = DBManagerFactory::getInstance();
+        $module = empty($keys['target_type']) ? '' : $keys['target_type'];
+        $db = DBManagerFactory::getInstance();
 
 		//no opt out for users.
-        if (!isset($module) || $module != 'Users') {
-            //record this activity in the campaing log table..
+        if (!empty($module) && $module != 'Users') {
+            //record this activity in the campaign log table..
             $status = true;
             $email = BeanFactory::newBean('EmailAddresses');
-            $sql = 'SELECT ea.id FROM email_addresses ea'
-                . ' INNER JOIN email_addr_bean_rel eabr ON eabr.email_address_id = ea.id'
-                . ' WHERE eabr.bean_id = %s AND eabr.deleted = 0 AND ea.opt_out = 0';
-            $stmt = $db->query(sprintf($sql, $db->quoted($id)));
-            while ($row = $db->fetchByAssoc($stmt)) {
+            $sql = 'SELECT ea.id FROM email_addresses ea' .
+                ' INNER JOIN email_addr_bean_rel eabr ON eabr.email_address_id = ea.id' .
+                ' WHERE  eabr.bean_module = ? AND eabr.bean_id = ? AND eabr.deleted = 0 AND ea.opt_out = 0';
+            $conn = $db->getConnection();
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([$module, $id]);
+            while ($row = $stmt->fetch()) {
                 $status = $status && (bool) $db->updateParams(
                     $email->getTableName(),
                     $email->field_defs,

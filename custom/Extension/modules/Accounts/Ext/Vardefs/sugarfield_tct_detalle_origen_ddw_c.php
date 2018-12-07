@@ -1,66 +1,16 @@
 <?php
- // created: 2018-08-23 13:47:54
-$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['labelValue']='Detalle Origen';
-$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['dependency']='';
-$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']=array (
-  'trigger' => 'origendelprospecto_c',
-  'values' => 
-  array (
-    '' => 
-    array (
-    ),
-    'Prospeccion propia' => 
-    array (
-    ),
-    'Director' => 
-    array (
-    ),
-    'Referido Cliente' => 
-    array (
-    ),
-    'Referido Proveedor' => 
-    array (
-    ),
-    'Referenciador' => 
-    array (
-    ),
-    'Agencia Distribuidor' => 
-    array (
-    ),
-    'Estrategia y planeacion' => 
-    array (
-    ),
-    'Agente Telefonico' => 
-    array (
-    ),
-    'Mercadotecnia' => 
-    array (
-    ),
-    'Eventos Mercadotecnia' => 
-    array (
-    ),
-    'Otro' => 
-    array (
-    ),
-    'Inteligencia de Negocio' => 
-    array (
-      0 => '',
-      1 => 'Bases de datos',
-      2 => 'Afiliaciones',
-      3 => 'Cartera Promotores',
-    ),
-    'Marketing' => 
-    array (
-      0 => '',
-      1 => 'Digital',
-      2 => 'Offline',
-      3 => 'Acciones Estrategicas',
-      4 => 'Recomendacion',
-    ),
-    'Referido Director' => 
-    array (
-    ),
-  ),
-);
+ // created: 2018-12-05 18:17:34
+$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['labelValue'] = 'Detalle Origen';
+$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['dependency'] = '';
+$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']['trigger'] = 'origendelprospecto_c';
+$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']['values']['Inteligencia de Negocio'][0] = '';
+$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']['values']['Inteligencia de Negocio'][1] = 'Bases de datos';
+$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']['values']['Inteligencia de Negocio'][2] = 'Afiliaciones';
+$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']['values']['Inteligencia de Negocio'][3] = 'Cartera Promotores';
+$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']['values']['Marketing'][0] = '';
+$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']['values']['Marketing'][1] = 'Digital';
+$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']['values']['Marketing'][2] = 'Offline';
+$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']['values']['Marketing'][3] = 'Acciones Estrategicas';
+$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['visibility_grid']['values']['Marketing'][4] = 'Recomendacion';
+$dictionary['Account']['fields']['tct_detalle_origen_ddw_c']['full_text_search']['boost'] = 1;
 
- ?>

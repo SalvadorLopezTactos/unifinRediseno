@@ -232,30 +232,7 @@ class ConnectorsController extends SugarController {
 
 	function action_CallRest() {
 		$this->view = 'ajax';
-
-        $previousSoftFail = $this->request->getSoftFail();
-        $this->request->setSoftFail(false);
-
-        $remoteUrl = $this->request->getValidInputRequest('url', array(
-            'Assert\Url' => array(
-                'protocols' => array('http', 'https'),
-            ),
-        ));
-
-        $this->request->setSoftFail($previousSoftFail);
-
-		if(false === ($result=@file_get_contents($remoteUrl))) {
-           echo '';
-		} else if(!empty($_REQUEST['xml'])){
-		   $values = array();
-		   $p = xml_parser_create();
-		   xml_parse_into_struct($p, $result, $values);
-		   xml_parser_free($p);
-		   $json = getJSONobj();
-		   echo $json->encode($values);
-		} else {
-		   echo $result;
-		}
+        echo '';
 	}
 
 	function action_CallSoap() {

@@ -74,6 +74,8 @@ class ActivitiesApi extends FilterApi
 
     public function getRecordActivities(ServiceBase $api, array $args)
     {
+        $this->requireActivityStreams($args['module']);
+
         $params = $this->parseArguments($api, $args);
         $record = BeanFactory::retrieveBean($args['module'], $args['record']);
 
@@ -90,6 +92,8 @@ class ActivitiesApi extends FilterApi
 
     public function getModuleActivities(ServiceBase $api, array $args)
     {
+        $this->requireActivityStreams($args['module']);
+
         $params = $this->parseArguments($api, $args);
         $record = BeanFactory::newBean($args['module']);
         if (!$record->ACLAccess('view')) {
@@ -102,6 +106,8 @@ class ActivitiesApi extends FilterApi
 
     public function getHomeActivities(ServiceBase $api, array $args)
     {
+        $this->requireActivityStreams('Home');
+
         $params = $this->parseArguments($api, $args);
         $query = self::getQueryObject(new EmptyBean(), $params, $api, true);
         return $this->formatResult($api, $args, $query);
@@ -289,5 +295,19 @@ class ActivitiesApi extends FilterApi
         $query->select($columns);
 
         return $query;
+    }
+
+    /**
+     * Checks to see if Activity Streams is disabled
+     *
+     * @param string $moduleName
+     * @throws SugarApiExceptionNotAuthorized
+     *
+     */
+    private function requireActivityStreams($moduleName)
+    {
+        if (!Activity::isEnabled()) {
+            throw new SugarApiExceptionNotAuthorized(translate('EXCEPTION_ACTIVITY_STREAM_DISABLED', $moduleName));
+        }
     }
 }

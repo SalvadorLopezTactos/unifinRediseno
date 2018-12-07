@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'OAuth Müşteri Anahtarları',
     'OAuthTokens' => 'OAuth Anahtarları',
     'Filters' => 'Filtreler',
-    'UserSignatures' => 'Kullanıcı İmzaları',
+    'UserSignatures' => 'E-posta imzaları',
     'Shippers' => 'Nakliyat Sağlayıcıları',
     'Styleguide' => 'Stilrehberi',
     'Feedbacks' => 'Geri Bildirim',
     'Tags' => 'Etiketler',
     'Categories' => 'Kategoriler',
     'Dashboards' => 'Gösterge Panoları',
+    'OutboundEmail' => 'E-Posta Ayarları',
+    'EmailParticipants' => 'E-posta Katılımcıları',
+    'DataPrivacy' => 'Veri Gizliliği',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'Kota',
         'Tasks' => 'Görev',
-        'Dashboards' => 'Gp',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => 'DP',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => 'Ürün Tipi',
     'Shippers' => 'Nakliyatçı',
     'Subscriptions' => 'Abonelik',
-    'UserSignatures' => 'Kullanıcı İmzası',
+    'UserSignatures' => 'E-posta İmzası',
     'Feedbacks' => 'Geri Bildirim',
     'Tags' => 'Etiket',
     'Categories' => 'Kategori',
+    'OutboundEmail' => 'E-posta Ayarı',
+    'EmailParticipants' => 'E-posta Katılımcısı',
+    'DataPrivacy' => 'Veri Gizliliği',
   ),
 
 /*
@@ -329,6 +336,11 @@ $app_list_strings = array (
     'Existing Business' => 'Mevcut Firma',
     'New Business' => 'Yeni Firma',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => 'Aktif',
+            'Inactive' => 'İnaktif',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => 'Ciro',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => 'Kararı Etkileyici',
     'Other' => 'Diğer',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => 'Aktif',
+            'Inactive' => 'İnaktif',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => 'Aktif',
+            'Inactive' => 'İnaktif',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => 'Birincil Kontak',
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => 'Görev',
       'KBContents' => 'Bilgi Tabanı',
+      'Notes' => 'Not',
   ),
 
   'record_type_display_notes' =>
@@ -659,6 +683,14 @@ $app_list_strings = array (
     'Calls' => 'Tel.Araması',
       'KBContents' => 'Bilgi Tabanı',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => 'Hesap',
+        'Contacts' => 'Kontak',
+        'Employees' => 'Çalışan',
+        'Leads' => 'Potansiyel',
+        'Prospects' => 'Hedef',
+        'Users' => 'Kullanıcı',
+    ),
 
   'parent_type_display' =>
   array (
@@ -678,7 +710,7 @@ $app_list_strings = array (
 
     'Prospects' => 'Hedef',
       'KBContents' => 'Bilgi Tabanı',
-
+      'Notes' => 'Not',
   ),
 
   'product_status_default_key' => 'Gönderildi',
@@ -832,7 +864,6 @@ $app_list_strings = array (
     'Product' => 'Ürün',
     'User' => 'Kullanıcı',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => 'E-Posta',
     'Twitter' => 'Twitter'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => 'Gizlilik Politikası İsteği',
+        'Send Personal Information being processed' => 'İşlenecek Kişisel Bilgileri Gönderin',
+        'Rectify Information' => 'Bilgileri Düzeltin',
+        'Request to Erase Information' => 'Bilgi Silme İsteği',
+        'Export Information' => 'Bilgileri Dışa Aktar',
+        'Restrict Processing' => 'İşlemeyi Kısıtla',
+        'Object to Processing' => 'İşleme İçin Nesneyi Biçimle',
+        'Consent to Process' => 'İşleme İçin İzin Ver',
+        'Withdraw Consent' => 'İzni Geri Çek',
+        'Other' => 'Diğer',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => 'İşletme İletişimi',
+        'Marketing Communications by company' => 'Şirketle Pazarlama İletişimi',
+        'Marketing Communications by partners' => 'Ortaklarla Pazarlama İletişimi',
+    ),
+    'dataprivacy_status_default_key' => 'Aç',
+    'dataprivacy_status_dom' => array(
+        'Open' => 'Aç',
+        'Closed' => 'Tamamlandı',
+        'Rejected' => 'Reddedildi',
+    ),
+    'dataprivacy_priority_default_key' => 'Düşük',
+    'dataprivacy_priority_dom' => array(
+        'Low' => 'Düşük',
+        'Medium' => 'Orta',
+        'High' => 'Yüksek',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => 'Stüdyo',
     'Upgrade' => 'Versiyon Yükseltme',
     'Users' => 'Kullanıcılar',
+    'OutboundEmail' => 'E-Posta Ayarları',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => 'Başarısız',
                                         'completed'     => 'Tamamlandı',
                                         'no curl'       => 'Çalışmıyor: cURL mevcut değil',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => 'Taslak',
+        'Archived' => 'Arşivlendi',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => 'Id ye Göre Engelleme Listesi',
     'test' => 'Test',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => 'Aktif',
+             'Inactive' => 'İnaktif',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3 Hafta',
         '31' => '1 Ay',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => 'Aktif',
-    'Inactive' => 'İnaktif',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => 'Yüksek',
         'medium'    => 'Orta',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => 'Boş',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'Google',
+        'exchange' => 'Değiştir',
+        'outlook' => 'Outlook',
+        'other' => 'Diğer',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2032,6 +2099,11 @@ $app_list_strings = array (
         'ACTIVE' => 'Etkin',
         'INACTIVE' => 'Etkisiz',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => 'Kayıt',
+        'records' => 'Liste',
+        'activities' => 'Aktivite Akışı',
+    ),
 );
 
 $app_strings = array (
@@ -2043,11 +2115,11 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'Bağlantıyı İzleyin',
   'LBL_TOGGLE_VISIBILITY' => 'Görünürlüğü Değiştir', // Record view header panel element
   'LBL_ACTIVITIES' => 'Aktivite Akışı',
-  'LBL_COPYRIGHT' => 'Telif Hakkı © 2004-2017 SugarCRM Inc. Her Hakkı Saklıdır.',
+  'LBL_COPYRIGHT' => 'Telif Hakkı © 2004-2018 SugarCRM Inc. Her Hakkı Saklıdır.',
     'LBL_TRADEMARK' => 'SugarCRM, Sugar ve 3-D Küp, SugarCRM Inc.&#39;in tescilli ticari markalarıdır. '.
         'Bu üründe kullanılan veya görünen diğer tüm şirket ve ürün adları, ilişkili olan '.
         'SugarCRM ®, Sugar Enterprise ™ ve Sugar ™ SugarCRM A.Ş. ticari markalarıdır',
-    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise ™ ve Sugar ™ SugarCRM A.Ş. ticari markalarıdır',
+    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ ve Sugar™, SugarCRM Inc.&#39;in ticari markasıdır',
     'LBL_SEND_INVITE' => 'Davet Gönder',
   'LBL_INVITEES' => 'Davetli',
     'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'Misafir, davetinizi almayacak',
@@ -2116,6 +2188,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => 'SSL veya TLS üzerinden SMTP Aktifle',
     'LBL_NO_ACTION'                         => 'Bu isimle bir aksiyon yok.',
     'LBL_NO_DATA'                           => 'Veri Yok',
+    'LBL_NOT_APPLICABLE'                    => 'Uygulanamaz',
     'LBL_ROUTING_ADD_RULE'                  => 'Kural Ekle',
     'LBL_ROUTING_ALL'                       => 'En Az',
     'LBL_ROUTING_ANY'                       => 'Herhangi Biri',
@@ -2320,7 +2393,7 @@ $app_strings = array (
     'LBL_EMAIL_FOLDERS_ADD_NEW_FOLDER'      => 'Kaydet',
     'LBL_EMAIL_FOLDERS_ADD_THIS_TO'         => 'Bu dizini ekle:',
     'LBL_EMAIL_FOLDERS_CHANGE_HOME'         => 'Bu dizin değiştirilemez',
-    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Bu dizini silmek istediğinizden emin misiniz?\nBu işlem geri döndürülemez.\nDizin silme bütün alt dizilere de uygulanacak.',
+    'LBL_EMAIL_FOLDERS_DELETE_CONFIRM'      => 'Bu dizini silmek istediğinizden emin misiniz?\\nBu işlem geri döndürülemez.\\nDizin silme bütün alt dizilere de uygulanacak.',
     'LBL_EMAIL_FOLDERS_NEW_FOLDER'          => 'Yeni Dizin İsmi',
     'LBL_EMAIL_FOLDERS_NO_VALID_NODE'       => 'Lütfen bu aksiyonu yerine getirmeden önce dizin seçiniz.',
     'LBL_EMAIL_FOLDERS_TITLE'               => 'Sugar Dizin Yönetimi',
@@ -2479,7 +2552,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_FULL_SYNC'          => 'Bütün Posta Hesaplarını Senkronize Et',
     'LBL_EMAIL_TEST_NOTIFICATION_SENT'      => 'Temin edilen giden posta ayarlarını kullanarak bir e-posta belirlenen e-posta adresine gönderildi.',
     'LBL_EMAIL_SETTINGS_FULL_SYNC_DESC'     => 'Bu aksiyon posta hesaplarını ve içeriklerini senkronize edecek.',
-    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Tam Senkronizasyon İstiyor musunuz?\nBüyük posta hesapları birkaç dakika alabilir.',
+    'LBL_EMAIL_SETTINGS_FULL_SYNC_WARN'     => 'Tam Senkronizasyon İstiyor musunuz?\\nBüyük posta hesapları birkaç dakika alabilir.',
     'LBL_EMAIL_SUBSCRIPTION_FOLDER_HELP'    => 'Birden fazla dizin seçmek için Shift tuşuna veya Ctrl tuşuna basınız.',
     'LBL_EMAIL_SETTINGS_GENERAL'            => 'Genel',
     'LBL_EMAIL_SETTINGS_GROUP_FOLDERS'      => 'Mevcut Grup Dizinleri',
@@ -2547,6 +2620,15 @@ $app_strings = array (
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'Veri Yükleme Başarılı',
     'LBL_EMAIL_IMPORT_FAIL'                 => 'Veri Yükleme Başarısız, mesaj zaten yüklenmiş veya sunucudan silinmiş olabilir',
 
+    'LBL_EMAILS_FROM' => 'E-postalar Gönderildi',
+    'LBL_EMAILS_RECEIVED' => 'E-postalar Alındı',
+    'LBL_EMAIL_ADDRESSES_USED' => 'E-postalarda kullanılan E-posta Adresleri',
+    'LBL_EMAIL_ADDRESS' => 'E-Posta Adresi',
+    'LBL_FROM' => 'Gönderen',
+    'LBL_TO' => 'Alıcı',
+    'LBL_CC' => 'Bilgi',
+    'LBL_BCC' => 'Gizli Bilgi',
+
     'LBL_LINK_NONE'=> 'Yok',
     'LBL_LINK_ALL'=> 'Hepsi',
     'LBL_LINK_RECORDS'=> 'Kayıtlar',
@@ -2588,7 +2670,9 @@ $app_strings = array (
     'ERR_AJAX_LOAD_FOOTER' => 'Bu hata devam ederse, yöneticinizden bu modül için Ajax devre dışı bırakmasını isteyin',
     'ERR_CREATING_FIELDS' => 'Ek detay alanlarını doldururken hata:',
     'ERR_CREATING_TABLE' => 'Tablo oluştururken hata:',
-    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "Ondalık ayıracı karakteri Binlik ayıracı ile aynı olamaz.\n\n  Lütfen değerleri değiştiriniz.",
+    'ERR_DECIMAL_SEP_EQ_THOUSANDS_SEP'  => "Ondalık ayıracı karakteri Binlik ayıracı ile aynı olamaz.
+
+  Lütfen değerleri değiştiriniz.",
     'ERR_DELETE_RECORD' => 'Kontağı silmek için bir kayıt no&#39;su belirtilmesi zorunludur.',
     'ERR_EXPORT_DISABLED' => 'Dışarı Aktarmayı Etkisizleştirildi.',
     'ERR_EXPORT_TYPE' => 'Dışarı Aktarmada Hata',
@@ -2605,6 +2689,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'İçeriğin dışarı aktarılabilmesi için aktif bir oturum gerekmektedir.',
     'ERR_NO_HEADER_ID' => 'Bu özellik bu temada mevcut değil.',
     'ERR_NOT_ADMIN' => "Sistem Yönetimi Fonksiyonlarına izin verilmemiş erişim.",
+    'ERR_DISABLED_FOR_IDM_MODE' => "Bu seçenek, IDM modu için SugarCRM'de devre dışı ve Cloud Console'da kullanılabilir.",
+    'ERR_GOTO_CLOUD_CONSOLE' => "Lütfen <a href=\"%s\" target=\"_blank\">Cloud Console</a>'a gidin.",
     'ERR_MISSING_REQUIRED_FIELDS' => 'Doldurulması zorunlu alanlar eksik:',
     'ERR_INVALID_REQUIRED_FIELDS' => 'Zorunlu alanda geçersiz değer:',
     'ERR_INVALID_VALUE' => 'Geçersiz Değer:',
@@ -2886,7 +2972,7 @@ $app_strings = array (
     'LBL_SHOW_MORE_RECENTS' => 'Daha günceller…',
     'LBL_SHOW_LESS_RECENTS' => 'Daha az günceller…',
     'LBL_SHOW_MORE_RESULTS' => 'Daha fazla arama sonuçları...',
-    'TPL_SHOW_MORE_MODULE' => 'Daha fazla {{module}}…',
+    'TPL_SHOW_MORE_MODULE' => 'Daha fazlası: {{module}}…',
     'LBL_SHOW_MORE_GENERIC' => 'Daha fazla {{name}}...',
     'LBL_TODAYS_ACTIVITIES' => 'Bugünün Aktiviteleri',
     'LBL_LEADS'=>'Potansiyeller',
@@ -2934,7 +3020,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => 'Toplu Güncelleme başarısız oldu. Yeniden deneniyor ({{num}} / {{total}}).',
     'TPL_MASSUPDATE_WARNING_CLOSE' => 'Toplu güncelleme tamamlanmadı.  {{num}} kayıt değişmedi.',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => 'Toplu güncelleme tamamlanmadı.  {{num}} kayıt değişmedi.',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => 'Yetki nedeniyle {{remain}} kayıt göz ardı edildi.',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => 'Yetki veya hatalar nedeniyle {{remain}} kaydı/kayıtları göz ardı edildi.',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} adet kayıt başarıyla güncellendi.',
     'TPL_MASSUPDATE_TITLE' => '{{module}} Toplu Güncelle',
     'TPL_MASSDELETE_PROGRESS_STATUS' => '{{num}} / {{total}} siliniyor.',
@@ -3006,6 +3092,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'varsayılan kullanıcı',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => 'kullanıcı hesabı',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'grup hesabı',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => 'İsim',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => 'Oluştur',
@@ -3218,7 +3305,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         'Tüm Hakları Saklıdır.<br />SugarCRM, Sugar ve 3-D Küp, SugarCRM Inc.&#39;in tescilli ticari markalarıdır. '.
         'Bu üründe kullanılan veya görünen diğer tüm şirket ve ürün adları, ilişkili olan '.
         'ilgili şirketlerin ticari markalarıdır.',
@@ -3256,7 +3343,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => 'Şifre',
     'LBL_LOGGED_OUT' => 'Çıkış yaptınız.',
     'LBL_LOGIN_FORM_LABEL' => 'Log gösterim şekli:',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => 'Oturum açmaya dön',
+    'LBL_LOGIN_INACTIVE_USER' => 'Etkin olmayan kullanıcı',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => 'Portal veya grup kullanıcısı oturum açamaz.',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => 'Gösterge Panosu',
@@ -3323,8 +3412,9 @@ $app_strings = array (
     'LNK_BACKTOTOP' => 'Başa Geri Dön',
     'LNK_REMOVE' => 'sil',
     'LNK_RESUME' => 'Yeniden Başla',
-    'LNK_VIEW_CHANGE_LOG' => 'Değişiklik Tarihçesini Göster',
-
+    'LNK_VIEW_CHANGE_LOG' => 'Değişiklik Tarihçesi Günlüğünü Görüntüle',
+    'TPL_AUDIT_LOG_TITLE' => '{{{name}}} için Değişiklik Tarihçesi Günlüğü',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => 'Lütfen web tarayıcısının geri butonuna basın ve hatayı düzeltin.',
     'NTC_DATE_FORMAT' => '(yıl-ay-gün)',
@@ -3358,7 +3448,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "Şirketinizin SugarCRM lisansı yakında sona erecek.",
     'ERROR_LICENSE_VALIDATION'=> "Şirketinize ait SugarCRM lisansınızın doğrulanması gereklidir. Sadece Yöneticilerini giriş yapmasına izin verilmektedir",
     'WARN_LICENSE_VALIDATION'=> "Şirketinizin SugarCRM lisansı yakında doğrulanması gerekiyor.",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"Etkin Çevrimdışı Müşteri sayısı lisansta belirtilen sayıyı aşıyor.",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "<b>Uyarı:</b> Tarayıcınızın desteklenmeyen IE uyumluluk modunda çalışıyor.",
     'WARN_LICENSE_SEATS'=>  "Uyarı: Aktif kullanıcı sayısı izin verilen maksimum lisans sayısını aşıyor.",
     'WARN_LICENSE_SEATS_MAXED'=>  "Uyarı: Aktif kullanıcı sayısı izin verilen maksimum lisans sayısını aşıyor.",
@@ -3428,9 +3517,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'İşleniyor...',
     'LBL_REQUEST_PROCESSED'=>'Tamam',
     'LBL_AJAX_FAILURE' => 'Ajax hatası',
-    'LBL_OC_STATUS' => 'Çevrimdışı İstemci Durumu',
-    'LBL_OC_STATUS_TEXT' => 'Kullanıcının Çevrimdışı İstemciyi kullanıp kullanamayacağını gösterir.',
-    'LBL_OC_DEFAULT_STATUS' => 'İnaktif',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => 'Ara …',
     'LBL_SAVED_SEARCH_SHORTCUT' => 'Kaydedilmiş Aramalar',
     'LBL_SEARCH_POPULATE_ONLY'=> 'Yukarıdaki arama formunu kullanarak arama yap',
@@ -3441,7 +3527,7 @@ $app_strings = array (
     'LBL_SEARCH_AND_SELECT_ELLIPSIS' => 'Ara ve Seç...',
     'LBL_SEARCH_SELECT_MODULE' => 'Seç {{module}}...',
     'LBL_DETAILVIEW'=>'Detay Görünümü',
-    'LBL_LISTVIEW'=>'Liste Görüntüsü',
+    'LBL_LISTVIEW'=>'Liste Görünümü',
     'LBL_EDITVIEW'=>'Değişiklik Görünümü',
     'LBL_SEARCHFORM'=>'Arama Formu',
     'LBL_SAVED_SEARCH_ERROR' => 'Bu Görünüm için bir isim verin.',
@@ -3527,10 +3613,11 @@ $app_strings = array (
     /* Sugar7 Dashboard */
     'LBL_DASHBOARD' => 'Gösterge Panosu',
     'LBL_DASHBOARD_BWC' => 'Eski Bilgi Pencerelerim',
-    'LBL_DEFAULT_DASHBOARD_TITLE' => 'Benim Pencerelerim',
+    'LBL_DEFAULT_DASHBOARD_TITLE' => 'Panom',
     'LBL_COLLAPSE_ALL' => 'Tümünü Daralt',
     'LBL_EXPAND_ALL' => 'Tümünü Genişlet',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => 'Değiştir',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => 'Raporu Görüntüle',
     'LBL_DASHLET_REFRESH_LABEL' => 'Yenile',
     'LBL_DASHLET_REMOVE_LABEL' => 'Kaldır',
     'LBL_DASHLET_DROP_HERE' => 'Buraya bırak',
@@ -3568,7 +3655,7 @@ $app_strings = array (
     'LBL_DASHLET_ITERACTIONS_NAME' => 'Etkileşimler',
     'LBL_DASHLET_ATTACHMENTS_NAME' => 'Notlar & Eklentiler',
     'LBL_DASHLET_ATTACHMENTS_DESCRIPTION' => 'Kayda ait Notlar ve Eklentiler',
-    'LBL_DASHLET_PIPLINE_NAME' => 'Payplayn',
+    'LBL_DASHLET_PIPLINE_NAME' => 'İletişim hattı',
 
     'LBL_DASHLET_RECENT_TWEETS_SUGARCRM_NAME' => 'Yeni Twitler - @{{twitter}}',
 
@@ -3995,7 +4082,7 @@ $app_strings = array (
     'LBL_REFINE_LIST' => 'Listeyi daraltın',
     'LBL_SEARCH_BY' => 'Arama şekli:',
     'LBL_PREVIEW' => 'Ön izleme',
-    'LBL_COLUMNS' => 'Kolonlar',
+    'LBL_COLUMNS' => 'Sütunlar',
     'LBL_PREVIEW_DISABLED_NO_RECORD' => 'Önizleme devre dışı: Veri yok',
     'LBL_PREVIEW_DISABLED_NO_ACCESS' => 'Önizleme devre dışı: Kayıda erişim izni yok',
     'LBL_PREVIEW_DISABLED_ATTACHMENT' => 'Önizleme devre dışı: Veri yok',
@@ -4199,7 +4286,9 @@ $app_strings = array (
     'LBL_CONFIRM' => 'Onayla',
     'LBL_NO_ACCESS' => '(Erişim yok)',
     'LBL_NO_ACCESS_LOWER' => 'Kullanıcının kayda erişim hakkı bulunmamaktadır',
-    'LBL_NO_FIELD_ACCESS' => 'Erişim yok',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => 'Değer Silindi',
+    'LBL_VALUE_ERASED_TOOLTIP' => 'Bu bilgiler, veri gizliliği isteği vasıtasıyla silindi',
     'LBL_CREATE_RELATED_RECORD' => 'İlişkili Kayıt Oluştur',
     'LBL_ASSOC_RELATED_RECORD' => 'Mevcut Kayıt ile Bağla',
     'LBL_CHOOSE_LINK' => 'Bağlantı Tipini seçiniz',
@@ -4268,7 +4357,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => 'Daha büyük',
     'LBL_FONTSIZE_HUGE' => 'Daha büyük',
     'LBL_FONTSIZE_EXTRA_HUGE' => 'Ekstra Büyük',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => '{{{this}}}\r\nİndirilmesi Başarısız Oldu',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "İndirme başarısız oldu\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => 'Daha fazla...',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => '… Daha az',
     'LBL_OFFLINE_MODE' => 'Çevrimdışı Modu',
@@ -4337,6 +4426,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => 'İşlem Detayı',
     'LBL_RECORD_DELETED' => '(Kayıt Silindi)',
     'LBL_NOT_AVAILABLE' => 'Yok',
+    'LBL_FILE_SIZE' => 'Dosya Boyutu',
     'LBL_FILE_SIZE_UNITS_B' => 'Bayt',
     'LBL_FILE_SIZE_UNITS_KB' => 'kB',
     'LBL_FILE_SIZE_UNITS_MB' => 'MB',
@@ -4460,6 +4550,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => 'Detaylı görünüm, ekranınızın sağ tarafında açılır.',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => 'Bu menüye ait kilit bileşenlere ait hızlı bir tur için aşağıdaki okları kullanın.',
 
+    'LBL_COMMENT_ADD' => 'Bir Yorum Ekleyin',
+    'LBL_REQUIRED' => 'Zorunlu',
+    'LBL_MORE_BUTTON' => 'Daha fazla',
+    'LBL_TRY_AGAIN' => 'Tekrar dene',
+    'LBL_NEW_RECORDS' => 'Son Oluşturulanlar',
+    'LBL_ASSIGNED_TO_ME' => 'Benim {{{module}}}',
+    'LBL_LISTVIEW_FILTER_ALL' => 'Tüm {{{module}}}',
+    'LBL_UNFAVORITE' => 'Favori olmaktan çıkar',
+    'LBL_ACTIVITY_CREATE' => 'Oluşturulan {{{record}}} {{{module}}}',
+    'LBL_ACTIVITY_UPDATE' => '{{{record}}} {{{module}}} üzerinde güncellenen {{{changes}}}',
+    'LBL_ACTIVITY_LINK' => '{{{record}}} {{{module}}} modülüne bağlanan {{{relatedRecord}}}',
+    'LBL_ACTIVITY_UNLINK' => '{{{record}}} {{{module}}} modülünden bağlantısı kesilmiş {{{relatedRecord}}} from ',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{parentModule}} için {{relationship}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => 'İndirmeyle ilişkili kayıtlar...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => 'Pano yapılandırmanız değişti. Yeniden yüklemek istiyor musunuz?',
+    'LBL_RECORDS' => 'Kayıtlar',
+    'LBL_DASHBOARDS' => 'Gösterge Panoları',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => 'Ara {{searchCriteria}}...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => 'Ana menü',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => 'Hızlı yeni kayıt oluştur',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => 'Daha fazla seçenek için kaydır',
+    'LBL_DETAILS' => 'Detaylar',
+    'LBL_DETAIL_RELATED' => 'İlişkili',
+    'LBL_CREATE_RELATED_MODULE_WARN' => 'Bu {{module}}, bir {{relatedModule}} gerektirir. <a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>Bir {{relatedModule}} kaydı oluşturun</a>.',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => 'Kaydı değiştir',
+    'LBL_OFFLINE_MENU_SETTINGS' => 'Çevrimdışı Ayarları',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => 'Hata Ayıklama Ayarları',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED" : "Veri şifreleme etkin.',
+    'LBL_OFFLINE_TOTAL_RECORDS' => 'Toplam Kayıt',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => 'Son indirme',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => 'Dosya indirilemiyor.',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => 'Gösterge panoları sunucudan yüklenemedi',
+    'ERR_FILTERS_FETCHING' => 'Filtreleriniz getirilemiyor',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => 'Lokal depolama şifrelenemedi',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => 'Çevrimdışı veriler şifreleniyor. Bu işlem birkaç dakika sürebilir.',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => 'Çevrimdışı veri şifreleme işlemi tamamlandı.',
+    'ERR_ACCESS_SPECIFIC_MODULE' => '{{{module}}} modülüne erişiminiz yok.',
+    'LBL_SKIP' => 'Atla',
+    'LBL_CONTINUE' => 'Devam Et',
+    'LBL_ENABLE' => 'Etkinleştir',
+    'LBL_MOBILE_TRIAL_UNTIL' => 'Şu Tarihe Kadar Deneme:',
+    'LBL_MOBILE_SDK_VERSION' => 'SDK Versiyonu',
+    'LBL_LOG_LEVEL' => 'Günlük Seviyesi',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => 'Oturum açma ayarları yapılandırıldı.',
+    'LBL_TRIAL_PERIOD_EXPIRED' => 'Deneme süreniz sona erdi.',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => 'Sunucu güvenli bağlantıyı desteklemiyor. Lütfen güvenli bağlantınızı kapatın.',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => 'Sunucu güvenli bağlantıyı destekliyor. Lütfen güvenli bağlantıyı açın.',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => 'Bağlantınız güvenli değil. Yöneticinizle iletişime geçin.',
+    'LBL_LOGIN_SETTINGS_HEADER' => 'Oturum Açma Ayarları',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => '{{{brandName}}} kurulumunuzu ayarlayın',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => 'Uygulamanın çalışması için {{{brandName}}} kurulumunun URL&#39;sini yazmanız gerekecek. Kurulum URL&#39;niz yoksa lütfen yöneticinizle iletişime geçin.',
+    'LBL_FACEID' => 'Yüz Kimliği',
+    'LBL_TOUCHID' => 'Touch ID',
+    'LBL_ENABLE_TOUCHID' => '{{{biometryType}}} etkinleştir',
+    'LBL_SETUP_TOUCHID' => '{{{biometryType}}} kur',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => 'Parmağınızı kullanarak oturum açın',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "{{{biometryType}}} cihazınızda kurulu değil. \n\n{{{biometryType}}} kurmak için cihazınızın ayarlarına gidin. Kurulum tamamlandığında Ana Menü > Ayarlarda {{{brandName}}} için {{{biometryType}}} etkinleştirin.",
+    'LBL_TOUCH_ID_DISCLAIMER' => '{{{brandName}}} ile {{{biometryType}}} kullanmanız, {{{brandName}}} erişimi için şifrenizi girmek yerine biyometrik kimlik belirleyiciyi kullanmanıza imkan verir.',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => '{{{biometryType}}} ile devam etmek istiyor musunuz?    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => '{{{biometryType}}} etkinleştirmek için {{{brandName}}} şifrenizi girin',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => 'Kurulum',
+    'LBL_MDM_CONFIRM_CHANGE' => 'Uygulama yapılandırması, Mobil Cihaz Yöneticisi olarak değiştirildi. Değişiklikleri uygulamak için lütfen yeniden oturum açın.',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => 'Lütfen cihazınızın ayarlarından konumunuza {{{brandName}}} erişimi verin.',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => 'Mevcut konum kullanılamıyor',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "Mevcut konum alma zaman aşımına uğradı. \nLütfen tekrar deneyin.",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => 'Konum işaretleri mevcut değil',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => 'Konum koordinatları geçersiz',
+    'ERR_MOBILE_INVALID_PASSWORD' => 'Geçersiz şifre.',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => 'Uygulamanız güncel değil ve artık bağlanmakta olduğunuz {{{brandName}}} kurulumuyla uyumlu değil. Güncellemek istiyor musunuz?',
+    'LBL_MOBILE_BY' => 'İle',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => 'Bu filtre çevrimdışı kullanılamaz',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => 'Çevrimdışı Kayıtlar',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => 'İndirme Ayarları',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => 'Çevrimdışı erişim için atanan, sık kullandığınız ve izlenen kayıtları indirin. Tercihlerinizi çevrimdışı ayarlarda güncelleyebilirsiniz.',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "Kayıtlarınızın indirme işlemi  tamamlandı. Şimdi bunlara çevrimdışı modda erişebilirsiniz.",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "Kayıtlarınızın tamamı indirilmedi.\n Tekrar denemek istiyor musunuz?",
+    'LBL_BULK_LOAD_USE_CELLULAR' => 'Cep telefonu verilerini kullanın',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => 'Şimdi değil',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => 'İndirme işlemi duraklatıldı ve uygulamayı tekrar açtığınızda devam edecek.',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => 'İndiriliyor {{{module}}}: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => 'En Son Kayıtları Güncelle',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => 'Bağlantı bekleniyor',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => 'Duraklatıldı',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => 'Durduruluyor',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => 'İndir',
+    'LBL_BULK_LOAD_BTN_PAUSE' => 'Duraklat',
+    'LBL_BULK_LOAD_BTN_RESUME' => 'Devam ettir',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => 'Varsayılan olarak sadece WiFi bağlantısı kullanılıyor',
+    'LBL_NPS_RATING_MSG' => "\n{{{productName}}} deneyiminizi nasıl değerlendirirsiniz?",
+    'LBL_NPS_THANKS_MSG' => 'Geri bildiriminiz teşekkür ederiz!',
+    'LBL_NPS_APPSTORE_RATE_MSG' => 'App Store&#39;da değerlendirmenizin sakıncası var mı?',
+    'LBL_NPS_NO_THANKS' => 'Hayır, Teşekkürler',
+    'LBL_NPS_NOT_NOW' => 'Şimdi Değil',
+    'LBL_NPS_RATE_NOW' => 'Şimdi Değerlendir',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => 'Ağ kullanılamıyor. Yine de çevrimdışıyken uygulamayı kullanabilirsiniz',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => 'Çevrimiçi olduğunuzda yaptığınız değişiklikler eşleştirilecek. <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>Ayrıntılara bakın</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => 'Eşleştirilmemiş veriler var. Lütfen <a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>işlem günlüğünü kontrol edin</a>',
+    'LBL_CONVERT' => 'Dönüştür',
+    'LBL_CONVERT_LEAD' => 'Potansiyeli Dönüştür',
+    'LBL_SEARCH_EXISTING_RECORD' => 'Mevcut {{{this}}} Ara',
+    'LBL_DUPLICATES_CHECK_FAILED' => 'Yinelenenler kontrolü yapılalamdı',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => 'Bağlantılı aktiviteleri kişi kaydına kaydırmayı istiyor musunuz?',
+    'LBL_LEAD_CONVERSION_SUCCESS' => 'Potansiyel {{{name}}} başarılı şekilde dönüştürüldü',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => 'Yinelenenler Bulunamadı.',
+    'ERR_LEAD_CONVERSION_FAIL' => 'Potansiyel Dönüştürme Başarısız Oldu',
+    'LBL_SELECT_DUPLICATE_RECORD' => 'Yinelenen {{{modulePlural}}} İçerisinden Seçin',
+    'LBL_SELECTED_EXISTING_RECORD' => 'Seçili {{{moduleSingular}}}',
+    'LBL_CREATED_NEW_RECORD' => 'Oluşturulan Yeni {{{moduleSingular}}}',
+    'LBL_VO_BACK_BTN' => 'Geri düğmesi',
+    'LBL_VO_HOME_BTN' => 'Giriş sayfası düğmesi',
+    'LBL_VO_DASHBOARD_BTN' => 'Gösterge paneli düğmesi',
+    'LBL_VO_SEARCH_BTN' => 'Arama düğmesi',
+    'LBL_VO_RIGHT_MENU_BTN' => 'Sağ menü düğmesi',
+    'LBL_VO_ADD_BTN' => 'Ekleme düğmesi',
+
     //begin portal
 
     //portal record tutorial
@@ -4571,6 +4777,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => 'Bir Rapor Seçin',
     'LBL_REPORT_AUTO_REFRESH' => 'Otomatik Yenileme',
     'LBL_REPORT_EDIT' => 'Seçilen Kaydı Değiştirin',
+    'LBL_REFRESH_LIST_AND_CHART' => 'Listeyi ve Grafiği Yenile',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => 'Bilinmeyen',
@@ -4632,6 +4839,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'AssignTo eylemi sırasında hata oluştu.',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => '"{{name}}" erişiminiz yok. Lütfen Yöneticinizle iletişime geçin.',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => '{0} Yıl',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} Q{0}',
@@ -4643,6 +4853,11 @@ $app_strings = array (
     'LBL_MESSAGE_BOX_TITLE' => 'Alarm',
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => 'Çift kaydı dikkate alma ve Kaydet',
     'LBL_RESTORE' => 'Orijinal Haline Geri Al',
+
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => 'Silme İşlemi İçin İşaretlenmiş Kayıtlar',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => 'Bir Veri Gizliliği İsteği ile ilişkili kayıtları gösterir'
+        . 'Bilgileri Sil.',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'RSS Beslemesi',
@@ -4666,6 +4881,7 @@ $app_strings = array (
     'LBL_UNASSIGNED' => 'Atanmamış',
     'LBL_ARCHIVE_EMAIL' => 'E-Posta Arşivle',
     'LBL_EMAIL_ARCHIVED' => 'E-posta arşivlendi',
+    'LBL_CREATE_ARCHIVED_EMAIL' => 'Arşivlenmiş E-Posta Oluştur',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => 'Planlanmış Aktiviteler',
@@ -4697,6 +4913,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => 'Görevlerim',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'Takım Görevleri',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Advanced Workflow',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAP veya Eski REST API',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'Cron Job',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => 'Mantık Çengeli',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'Sugar Workflow',
+    'LBL_AUDIT_SUBJECT_USER' => 'Kullanıcı',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Web&#39;ten Potasiyele',
+
     //common chart strings
     'LBL_CHART' => 'Grafik',
     'LBL_CHART_NO_DATA' => 'Mevcut veri yok.',
@@ -4705,6 +4934,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => 'Kontrolleri gizle',
     'LBL_CHART_CONTROLS_OPEN' => 'Kontrolleri göster',
     'LBL_CHART_UNDEFINED' => 'Tanımlanmamış',
+    'LBL_CHART_NO_LABEL' => 'Tanımlanmamış',
+    'LBL_CHART_AMOUNT' => 'Tutar',
+    'LBL_CHART_COUNT' => 'Sayı',
+    'LBL_CHART_PERCENT' => 'Yüzde',
+    'LBL_CHART_GROUP' => 'Grup',
+    'LBL_CHART_DATE' => 'Tarih',
+    'LBL_CHART_KEY' => 'Anahtar',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => 'Grafik tipi',
@@ -4776,6 +5012,10 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'Varsayılan tarih filtresi',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => 'Varsayılan veri kümesi',
 
+    'LBL_PRODUCT_CATALOG_NAME' => 'Ürün Kataloğu',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => 'Ürün Kataloğu',
+    'LBL_PRODUCT_CATALOG_DESC' => 'Ürün Kataloğunuzdan kalemleri görüntüleyin ve ekleyin.',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => 'Ürün Kataloğunuzdan kalemleri görüntüleyin ve ekleyin.',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{date}} tarihinde, {{time}} saatinde {{relativetime}}',
@@ -4788,6 +5028,7 @@ $app_strings = array (
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => ':',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => 'Sugar Bilgi Beslemesi',
     'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'Kayıtlar üzerinde yapılmış olan aktivitelerin listesini inceleyip, not oluşturup yayınla.',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => 'Aktivite Akışları devre dışı',
 
     'LBL_DATA_VIEW' => 'Veri Görünümü',
     'LBL_COMMENT' => 'Açıklama',
@@ -4795,6 +5036,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'Sunucuya bağlanırken bir hata oluştu. Lütfen tekrar deneyiniz.',
     'ERR_RESOLVE_ERRORS' => 'Lütfen devam etmeden önce hataları giderin.',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => 'Onaylamak için gerekli tüm alanlar doldurulmalıdır; ancak yine de bu kaydı Reddedebilir veya Yönlendeirebilirsiniz.',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => 'Reddetmek/Yönlendirmek için tüm gerekli alanlar doldurulmalıdır.',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'Listeyi yenile',
@@ -4822,6 +5067,7 @@ $app_strings = array (
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => 'Kayıtlı Raporlar Grafik Dashleti',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => 'Kaydedilmiş rapordan herhangi bir grafik görüntüler.',
+
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => 'Yayınlanan İlgili Makaleler',
@@ -4829,7 +5075,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => 'Tarihsel Özet',
-    'TPL_HISTORICAL_SUMMARY' => '{{name}} için Tarihsel Özet',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => 'Daha fazla tarihçe...',
     'LBL_RELATED_CONTACT' => 'İlişkili Kontak',
     'LBL_MODULE_TYPE' => 'Tip',
@@ -5076,6 +5322,29 @@ $app_strings = array (
 
     'LBL_FIELD_TRIMMED' => 'Alan, maksimum karakter limitini aştığından dolayı kesildi.',
     'LBL_FIELDSIZE_OVERFLOW' => 'Alan maksimum karakter sınırını aşıyor.',
+    'LBL_TINYMCE_TARGET_SAME' => 'Aynı pencere',
+    'LBL_TINYMCE_TARGET_NEW' => 'Yeni pencere',
+
+    'LBL_OUTBOUND_EMAILS' => 'E-Posta Ayarları',
+    'LBL_OUTBOUND_EMAIL' => 'E-posta Ayarı',
+
+    'LBL_EMAIL_PARTICIPANTS' => 'E-posta Katılımcıları',
+    'LBL_EMAIL_PARTICIPANT' => 'E-posta Katılımcısı',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => 'Veri Gizliliği',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'Veri Gizliliği',
+    'LBL_DATAPRIVACY_VIEW_PII' => 'Kişisel Bilgileri Göster',
+    'LBL_DATAPRIVACY_MARKFORERASE' => 'Silmek İçin İşaretle',
+    'LBL_DATAPRIVACY_FIELDNAME' => 'Alan',
+    'LBL_DATAPRIVACY_VALUE' => 'Değer',
+    'LBL_DATAPRIVACY_CHANGED_BY' => 'Değiştiren',
+    'LBL_DATAPRIVACY_SOURCE' => 'Kaynak',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => 'Son Gücellenen',
+    'LBL_DATAPRIVACY_PII' => 'Kişisel Bilgiler',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => 'Silmek İçin İşaretle',
+    'TPL_DATAPRIVACY_PII_TITLE' => '{{{name}}} için Kişisel Bilgiler',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5940,6 +6209,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => 'Kampanya' ,
     'email' => 'E-Posta',
     'workflow' => 'İş Akışı',
+    'system' => 'Sistem',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5958,7 +6228,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -6021,6 +6290,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = 'Bilgi Bankası Şablonu
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'Bilgi Bankası Şablonu';
 $app_list_strings['moduleList']['EmbeddedFiles'] = 'Karıştırılmış Dosyalar';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = 'Karıştırılmış Dosya';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'Lek',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'P',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lei',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'Leke',
+    'USD' => 'Dolar',
+    'AFN' => 'Afganisi',
+    'ARS' => 'Peso',
+    'AWG' => 'Gulden',
+    'AUD' => 'Dolar',
+    'AZN' => 'Yeni Manat',
+    'BSD' => 'Dolar',
+    'BBD' => 'Dolar',
+    'BYR' => 'Ruble',
+    'EUR' => 'Euro',
+    'BZD' => 'Dolar',
+    'BMD' => 'Dolar',
+    'BOB' => 'Bolivyano',
+    'BAM' => 'Bosna-Hersek Markı',
+    'BWP' => 'Pulas',
+    'BGN' => 'Leva',
+    'BRL' => 'Brezilya Reali',
+    'GBP' => 'Paund',
+    'BND' => 'Dolar',
+    'KHR' => 'Riels',
+    'CAD' => 'Dolar',
+    'KYD' => 'Dolar',
+    'CLP' => 'Peso',
+    'CNY' => 'Yuan Renminbi',
+    'COP' => 'Peso',
+    'CRC' => 'ColÃ³n',
+    'HRK' => 'Kuna',
+    'CUP' => 'Peso',
+    'CZK' => 'Koruny',
+    'DKK' => 'Kron',
+    'DOP' => 'Peso',
+    'XCD' => 'Dolar',
+    'EGP' => 'Paund',
+    'SVC' => 'Colones',
+    'EEK' => 'Krooni',
+    'FKP' => 'Paund',
+    'FJD' => 'Dolar',
+    'GHC' => 'Cedis',
+    'GIP' => 'Paund',
+    'GTQ' => 'Quetzales',
+    'GGP' => 'Paund',
+    'GYD' => 'Dolar',
+    'HNL' => 'Lempira',
+    'HKD' => 'Dolar',
+    'HUF' => 'Forint',
+    'ISK' => 'Kronur',
+    'INR' => 'Rupi',
+    'IDR' => 'Rupiah',
+    'IRR' => 'Riyal',
+    'IMP' => 'Paund',
+    'ILS' => 'Yeni Şikel',
+    'JMD' => 'Dolar',
+    'JPY' => 'Yen',
+    'JEP' => 'Paund',
+    'KZT' => 'Tenge',
+    'KPW' => 'Won',
+    'KRW' => 'Won',
+    'KGS' => 'Som',
+    'LAK' => 'Kip',
+    'LVL' => 'Lati',
+    'LBP' => 'Paund',
+    'LRD' => 'Dolar',
+    'CHF' => 'İsviçre Frankı',
+    'LTL' => 'Litai',
+    'MKD' => 'Dinar',
+    'MYR' => 'Ringgit',
+    'MUR' => 'Rupi',
+    'MXN' => 'Peso',
+    'MNT' => 'Tugrik',
+    'MZN' => 'Metical',
+    'NAD' => 'Dolar',
+    'NPR' => 'Rupi',
+    'ANG' => 'Gulden',
+    'NZD' => 'Dolar',
+    'NIO' => 'Kordaba',
+    'NGN' => 'Naira',
+    'NOK' => 'Kron',
+    'OMR' => 'Riyal',
+    'PKR' => 'Rupi',
+    'PAB' => 'Balboa',
+    'PYG' => 'Guarani',
+    'PEN' => 'Nuevos Soles',
+    'PHP' => 'Peso',
+    'PLN' => 'Zloti',
+    'QAR' => 'Riyal',
+    'RON' => 'Yeni Ley',
+    'RUB' => 'Ruble',
+    'SHP' => 'Paund',
+    'SAR' => 'Riyal',
+    'RSD' => 'Dinar',
+    'SCR' => 'Rupi',
+    'SGD' => 'Dolar',
+    'SBD' => 'Dolar',
+    'SOS' => 'Şilin',
+    'ZAR' => 'Rand',
+    'LKR' => 'Rupi',
+    'SEK' => 'İsveç Kronu',
+    'SRD' => 'Dolar',
+    'SYP' => 'Paund',
+    'TWD' => 'Yeni Dolar',
+    'THB' => 'Baht',
+    'TTD' => 'Dolar',
+    'TRY' => 'Lira',
+    'TRL' => 'Lira',
+    'TVD' => 'Dolar',
+    'UAH' => 'Hryvnia',
+    'UYU' => 'Peso',
+    'UZS' => 'Sum',
+    'VEF' => 'Bolivares Fuertes',
+    'VND' => 'Dong',
+    'YER' => 'Riyal',
+    'ZWD' => 'Zimbabwe Doları',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => 'Tek-Vuruş',

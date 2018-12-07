@@ -74,6 +74,9 @@
         if (!(app.config && app.config.forgotpasswordON === true)) {
             return;
         }
+        if (app.config.idmModeEnabled === true) {
+            window.location.href = app.config.cloudConsoleForgotPasswordUrl;
+        }
         this.logoUrl = app.metadata.getLogoUrl();
         app.view.View.prototype._render.call(this);
 

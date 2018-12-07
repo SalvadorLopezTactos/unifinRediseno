@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Instrumentpanel med möteslista',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Instrumentpanel med mötesposter',
+
 	'ERR_DELETE_RECORD' => 'Ett postnummer måste specificeras för att kunna radera mötet.',
 	'LBL_ACCEPT_THIS'=>'Acceptera?',
 	'LBL_ADD_BUTTON'=> 'Lägg till',

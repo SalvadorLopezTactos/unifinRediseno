@@ -118,6 +118,7 @@ foreach ($admin_group_header as $key=>$values) {
                 if(!empty($admin_option[5])) {
                 	$onclick[$j][$i] = $admin_option[5];
                 }
+                $target[$j][$i] = !empty($admin_option[6]) ? $admin_option[6] : '_self';
                 $label = translate($admin_option[1],'Administration');
                 if(!empty($admin_option['additional_label']))$label.= ' '. $admin_option['additional_label'];
                 if(!empty($admin_option[4])){
@@ -155,6 +156,7 @@ $sugar_smarty->assign("ITEM_URL", $url);
 $sugar_smarty->assign("ITEM_ONCLICK", $onclick);
 $sugar_smarty->assign("ITEM_HEADER_LABEL",$label_tab);
 $sugar_smarty->assign("ITEM_DESCRIPTION", $description);
+$sugar_smarty->assign("ITEM_TARGET", $target);
 $sugar_smarty->assign("COLNUM", $tab);
 $sugar_smarty->assign('ID_TAB', $id_tab);
 

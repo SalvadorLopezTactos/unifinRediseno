@@ -1,5 +1,5 @@
 <?php
- // created: 2018-02-16 16:59:03
+ // created: 2018-12-05 18:17:34
 $dictionary['Opportunity']['fields']['ri_usuario_bo_c']['labelValue'] = 'Equipo BO Incremento/Ratificación';
 $dictionary['Opportunity']['fields']['ri_usuario_bo_c']['dependency'] = '';
 $dictionary['Opportunity']['fields']['ri_usuario_bo_c']['visibility_grid']['trigger'] = 'tipo_producto_c';

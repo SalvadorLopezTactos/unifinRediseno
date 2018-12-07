@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'למחיקת משלח עליך לספק מספר רשומה.',
   'NTC_STATUS' => 'כדי למחוק ספק שילוח מהרשימה הנגללת הפוך אותו ללא פעיל',
   'NTC_LIST_ORDER' => 'קבע את הסדר שבו יופיע ספק השילוח ברשימה הנגללת של ספקי השילוח',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'פעיל',
-    'Inactive' => 'לא פעיל',
-),
-	'LBL_EDITLAYOUT' => 'ערוך תצורה' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'ערוך תצורה' /*for 508 compliance fix*/,
 );
-
 
 ?>

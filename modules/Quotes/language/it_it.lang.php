@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Dashboard elenco offerte',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Dashboard record offerte',
+
     'LBL_CONTRACTS'=>'Contratti',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Contratti',
     'ERR_DELETE_RECORD' => 'Per eliminare l´offerta deve essere specificato il numero del record.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Subtotale (US Dollar)',
     'LBL_SUBTOTAL' => 'Subtotale:',
     'LBL_TAXABLE_SUBTOTAL' => 'Subtotale tassabile',
-    'LBL_SYSTEM_ID' => 'ID Sistema',
     'LBL_TAX_USDOLLAR'=>'Imposte (US Dollar)',
     'LBL_TAX' => 'Imposte:',
     'LBL_TAX_TOTAL' => 'Imposte totali',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Elimina la selezione',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Elimina gli articoli selezionati',
     'LBL_SAVE_LINE_ITEMS' => 'Salvare le voci attive facendo clic sul segno di spunta blu accanto a ciascuna di esse, prima di salvare questa Offerta.',
+    'LBL_COPY_LINE_ITEMS' => 'Salvare le voci attive facendo clic sul segno di spunta blu accanto a ciascuna di esse, prima di copiare questa offerta.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Ricerca nel catalogo prodotti',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Nessun dato disponibile',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Copia dei prodotti quotati in una nuova Offerta.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Copia dei prodotti quotati in una nuova offerta. Questo processo potrebbe richiedere del tempo.',
 );

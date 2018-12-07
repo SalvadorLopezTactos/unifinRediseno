@@ -242,6 +242,7 @@
                     context: {
                         create: true,
                         model: prefill,
+                        module: this.module,
                         copiedFromModelId: parentModel.get('id'),
                         parent: this.context,
                         createAction: this.context.createAction

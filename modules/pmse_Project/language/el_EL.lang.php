@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Ορισμοί Διεργασιών',
   'LBL_MODULE_TITLE' => 'Ορισμοί Διεργασιών',
   'LBL_MODULE_NAME_SINGULAR' => 'Ορισμοί Διεργασιών',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'δεν είναι ίσο με',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'δεν είναι',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'δεν ισοδυναμεί με',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Χρόνος εκτέλεσης',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Προσθήκη',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Ελαχιστοποίηση',

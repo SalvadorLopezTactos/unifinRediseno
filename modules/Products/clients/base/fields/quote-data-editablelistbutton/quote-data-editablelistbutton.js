@@ -49,7 +49,6 @@
      * specifically need it based off the modelView set by the parent layout for this row model
      *
      * @inheritdoc
-     * @override
      */
     _loadTemplate: function() {
         this.tplName = this.model.modelView || 'list';
@@ -125,6 +124,38 @@
             self.model.modelView = 'list';
             if (self.view.layout) {
                 self.view.layout.trigger('editablelist:' + self.view.name + ':save', self.model, oldModelId);
+                // trigger event for QuotesLineNumHelper plugin to re-number the lines
+                self.view.layout.trigger('quotes:line_nums:reset');
+            }
+
+            if (model.collection._resavePositions) {
+                delete model.collection._resavePositions;
+                var bulkSaveRequests = [];
+                var bulkUrl;
+                var bulkRequest;
+                var linkName;
+                var itemModelId;
+                var collectionId = model.link.bean.id;
+
+                _.each(model.collection.models, function(mdl) {
+                    itemModelId = mdl.id;
+                    linkName = mdl.module === 'Products' ? 'products' : 'product_bundle_notes';
+                    bulkUrl = app.api.buildURL('ProductBundles/' + collectionId + '/link/' +
+                        linkName + '/' + itemModelId);
+                    bulkRequest = {
+                        url: bulkUrl.substr(4),
+                        method: 'PUT',
+                        data: {
+                            position: mdl.get('position')
+                        }
+                    };
+
+                    bulkSaveRequests.push(bulkRequest);
+                }, this);
+
+                app.api.call('create', app.api.buildURL(null, 'bulk'), {
+                    requests: bulkSaveRequests
+                });
             }
         };
         var options = {
@@ -165,5 +196,22 @@
 
         options = _.extend({}, options, this.getCustomSaveOptions(options));
         this.model.save({}, options);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _validationComplete: function(isValid) {
+        if (!isValid) {
+            this.setDisabled(false);
+            return;
+        }
+        // also need to make sure the model.changed is empty as well
+        if (!this.changed && !this.model.changed) {
+            this.cancelEdit();
+            return;
+        }
+
+        this._save();
     }
 });

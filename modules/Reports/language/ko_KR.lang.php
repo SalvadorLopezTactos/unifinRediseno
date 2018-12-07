@@ -224,7 +224,7 @@ $mod_strings = array (
   'LBL_TOTAL' => '합계',
   'LBL_MODULE_NAME_SAVED' => '모듈명',
   'LBL_REPORT_TYPE' => '보고서 유형',
-  'LBL_REPORT_LAST_RUN_DATE' => '접속됨',
+  'LBL_REPORT_LAST_RUN_DATE' => '접속',
   'LBL_REPORT__ATT_TYPE' => '유형',
   'LBL_REPORT_RUN_WITH_FILTER' => '적용하기',
   'LBL_REPORT_RESET_FILTER' => '재설정',
@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => '분기별',
     'LBL_BY_FISCAL_YEAR' => '재정연도에 따라',
     'LBL_BY_FISCAL_QUARTER' => '재정 분기에 따라',
+    'LBL_AMOUNT' => '수량',
     'LBL_COUNT' => '횟수',
+    'LBL_PERCENT' => '퍼센트',
     'LBL_SUM' => '합계',
     'LBL_AVG' => '평균',
     'LBL_MAX' => '최대',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => '월',
     'LBL_YEAR' => '년',
     'LBL_QUARTER' => '분기',
+    'LBL_FISCAL' => '회계',
     'LBL_FISCAL_YEAR' => '회계 연도',
     'LBL_FISCAL_QUARTER' => '회계 분기',
 	'LBL_YESTERDAY'=>'어제',
@@ -534,11 +537,19 @@ $mod_strings = array (
 	'LBL_UP' => '위로' /*for 508 compliance fix*/,
     'LBL_ALT_INFORMATION' => '정보',
     'LBL_REPORT_GRAND_TOTAL' => "최종 합계",
-    'LBL_EDIT_REPORT_BUTTON' => '보고서 수정하기',
+    'LBL_EDIT_REPORT_BUTTON' => '보고서 수정',
 
     'LBL_REPORTS_TO' => '다음 담당자에 보고:',
     'LBL_LESS_THAN_EQUAL' => '보다 적음, 와 동일',
     'LBL_GREATER_THAN_EQUAL' => '보다 큼, 와 동일',
 
     'LBL_FILTER_BY_MODULE' => '모듈에 의해서',
-);
+    'LBL_FILTER_WITH_CHARTS' => '차트 포함',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => '이 작업에 대한 드릴스루 보고서 데이터를 검색하는 동안 오류가 발생했습니다. 보고서 소유자에게 도움을 요청하십시오.',
+    'LBL_CHART_NO_DRILLTHRU' => '드릴스루를 사용할 수 없음',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => '목록보기는 현재 검색 조건을 충족하며 사용자가 액세스할 수 있는 모든 보고서를 표시합니다. 목록보기의 필드 열과 미리보기에서 각 보고서의 기본 세부 정보를 볼 수 있습니다. 보고서 태그를 설정하고 필터를 만들 수 있습니다. 보고서를 보려면 보고서의 이름을 클릭하거나 동작 메뉴에서 &#39;보고서 편집&#39;을 선택하여 보고서를 수정하십시오.',
+  );

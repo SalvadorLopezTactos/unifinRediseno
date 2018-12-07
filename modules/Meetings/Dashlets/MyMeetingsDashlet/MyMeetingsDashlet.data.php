@@ -10,7 +10,7 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
+ // $Id: MyMeetingsDashlet.data.php 57148 2010-06-25 16:23:33Z kjing $
 
 global $current_user;
 
@@ -30,13 +30,13 @@ $dashletData['MyMeetingsDashlet']['columns'] = array('set_complete' => array('wi
                                                                              'default'  => true,
                                                                              'sortable' => false,
                                                                              'related_fields' => array('status','recurring_source')),
-													'join_meeting' => array('width'    => '1', 
+                                                   'join_meeting' => array('width'    => '1',
                                                                              'label'    => 'LBL_LIST_JOIN_MEETING',
                                                                              'default'  => true,
                                                                              'sortable' => false,
                                                                              'noHeader' => true,
                                                                              'related_fields' => array('host_url')),
-                                                   'name' => array('width'   => '40', 
+                                                   'name' => array('width'   => '40',
                                                                    'label'   => 'LBL_SUBJECT',
                                                                    'link'    => true,
                                                                    'default' => true),
@@ -64,9 +64,9 @@ $dashletData['MyMeetingsDashlet']['columns'] = array('set_complete' => array('wi
 																		   'related_fields' => array('status')),
                                                    'status' => array('width'   => '8', 
                                                                      'label'   => 'LBL_STATUS'),
-                                                   'type' => array('width'   => '8', 
+                                                   'type' => array('width'   => '8',
                                                                      'label'   => 'LBL_TYPE'),
-                                                   'date_entered' => array('width'   => '15', 
+                                                   'date_entered' => array('width'   => '15',
                                                                            'label'   => 'LBL_DATE_ENTERED'),
                                                    'date_modified' => array('width'   => '15', 
                                                                            'label'   => 'LBL_DATE_MODIFIED'),    

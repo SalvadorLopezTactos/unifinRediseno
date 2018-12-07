@@ -8,17 +8,18 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 /**
- * @class Modal
+ * @class PMSE.Modal
  * Handle modal divs
- * @extend Base
+ * @extends PMSE.Base
  *
  * @constructor
  * Creates a new instance of the object
  * @param {Object} options
  */
-var Modal = function (options) {
-    Base.call(this, options);
+PMSE.Modal = function(options) {
+    PMSE.Base.call(this, options);
     /**
      * Defines the state of the modal object
      * @type {Boolean}
@@ -40,25 +41,25 @@ var Modal = function (options) {
      */
     this.clickHander = null;
 
-    Modal.prototype.initObject.call(this, options);
+    PMSE.Modal.prototype.initObject.call(this, options);
 };
 
-Modal.prototype = new Base();
+PMSE.Modal.prototype = new PMSE.Base();
 
 /**
  * Defines the object's type
  * @type {String}
  */
-Modal.prototype.type = "Modal";
+PMSE.Modal.prototype.type = 'PMSE.Modal';
 
 /**
  * Initializes the object with default values
  * @param {Object} options
  */
-Modal.prototype.initObject = function (options) {
+PMSE.Modal.prototype.initObject = function(options) {
     var defaults = {
         visible: false,
-        clickHander: function () {}
+        clickHander: function() {}
     };
     $.extend(true, defaults, options);
     this.setVisible(defaults.visible)
@@ -70,7 +71,7 @@ Modal.prototype.initObject = function (options) {
  * @param {Boolean} value
  * @return {*}
  */
-Modal.prototype.setVisible = function (value) {
+PMSE.Modal.prototype.setVisible = function(value) {
     this.visible = value;
     return this;
 };
@@ -80,7 +81,7 @@ Modal.prototype.setVisible = function (value) {
  * @param {Function} fn
  * @return {*}
  */
-Modal.prototype.setClickHandler = function (fn) {
+PMSE.Modal.prototype.setClickHandler = function(fn) {
     this.clickHander = fn;
     return this;
 };
@@ -88,7 +89,7 @@ Modal.prototype.setClickHandler = function (fn) {
 /**
  * Shows the modal object
  */
-Modal.prototype.show = function (child) {
+PMSE.Modal.prototype.show = function(child) {
     var modalDiv;
     if (!this.html) {
         modalDiv = document.createElement('div');
@@ -96,7 +97,7 @@ Modal.prototype.show = function (child) {
         modalDiv.id = this.id;
         this.html = modalDiv;
     }
-    if (child instanceof Element) {
+    if (child instanceof PMSE.Element) {
         this.html.appendChild(child.getHTML());
     }
     document.body.appendChild(this.html);
@@ -109,7 +110,7 @@ Modal.prototype.show = function (child) {
 /**
  * Hide the modal object
  */
-Modal.prototype.hide = function () {
+PMSE.Modal.prototype.hide = function() {
     var parentElement;
     if (this.visible) {
         parentElement = this.html.parentElement;

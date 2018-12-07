@@ -13,45 +13,44 @@
 
 $viewdefs['Forecasts']['base']['layout']['list-dashboard'] = array(
     'metadata' =>
-    array(
-        'components' =>
         array(
-            array(
-                'rows' =>
+            'components' =>
                 array(
                     array(
-                        array(
-                            'view' =>
+                        'rows' =>
                             array(
-                                'type' => 'forecastdetails',
-                                'label' => 'LBL_DASHLET_FORECAST_NAME',
+                                array(
+                                    array(
+                                        'view' =>
+                                            array(
+                                                'type' => 'forecastdetails',
+                                                'label' => 'LBL_DASHLET_FORECAST_NAME',
+                                            ),
+                                        'context' =>
+                                            array(
+                                                'module' => 'Forecasts',
+                                            ),
+                                        'width' => 12,
+                                    ),
+                                ),
+                                array(
+                                    array(
+                                        'view' =>
+                                            array(
+                                                'type' => 'forecasts-chart',
+                                                'label' => 'LBL_DASHLET_FORECASTS_CHART_NAME',
+                                            ),
+                                        'context' =>
+                                            array(
+                                                'module' => 'Forecasts',
+                                            ),
+                                        'width' => 12,
+                                    ),
+                                ),
                             ),
-                            'context' =>
-                            array(
-                                'module' => 'Forecasts',
-                            ),
-                            'width' => 12,
-                        ),
-                    ),
-                    array(
-                        array(
-                            'view' =>
-                            array(
-                                'type' => 'forecasts-chart',
-                                'label' => 'LBL_DASHLET_FORECASTS_CHART_NAME',
-                            ),
-                            'context' =>
-                            array(
-                                'module' => 'Forecasts',
-                            ),
-                            'width' => 12,
-                        ),
+                        'width' => 12,
                     ),
                 ),
-                'width' => 12,
-            ),
         ),
-    ),
-    'name' => 'LBL_DEFAULT_DASHBOARD_TITLE',
+    'name' => 'LBL_FORECASTS_DASHBOARD',
 );
-

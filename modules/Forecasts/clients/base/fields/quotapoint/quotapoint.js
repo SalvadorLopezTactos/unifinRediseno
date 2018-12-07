@@ -136,7 +136,7 @@
     /**
      * Overrides loadData to load from a custom URL
      *
-     * @override
+     * @inheritdoc
      */
     loadData: function(options) {
         var url = this.getQuotasURL(),

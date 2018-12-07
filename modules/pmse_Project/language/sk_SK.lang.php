@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Definície procesov',
   'LBL_MODULE_TITLE' => 'Definície procesov',
   'LBL_MODULE_NAME_SINGULAR' => 'Definícia procesu',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'nerovná sa',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'nie je',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'nerovná sa',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'Čas spustenia',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'Pridať',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'Zavrieť',

@@ -61,92 +61,49 @@ class CountConditionalRelatedExpression extends NumericExpression
         if (App === undefined) {
             return SUGAR.expressions.Expression.FALSE;
         }
-
+        
         var params = this.params,
             view = this.context.view,
             target = this.context.target,
             relationship = params[0].evaluate(),
             condition_field = params[1].evaluate(),
             condition_values = params[2].evaluate();
-            
+
         //_.contains expects this to be an array, so convert it if it isn't already.
         if (!_.isArray(condition_values)) {
             condition_values = [condition_values];
         }
 
-        var model = this.context.relatedModel || App.data.createRelatedBean(this.context.model, null, relationship),
-            model_id = model.id || model.cid,
-            // has the model been removed from it's collection
-            hasModelBeenRemoved = this.context.isRemoveEvent || false,
-            // is this being fired for the condition field or the rel_field?
-            currentFieldIsConditionField = (this.context.changingField === condition_field),
-            // did the condition field change at some point?
-            conditionChanged = _.has(model.changed, condition_field),
-            // is the condition field valid?
-            conditionValid = _.contains(condition_values, model.get(condition_field));
+        var model = this.context.relatedModel || App.data.createRelatedBean(this.context.model, null, relationship);
+        // has the model been removed from it's collection
+        var hasModelBeenRemoved = this.context.isRemoveEvent || false;
 
-        if (conditionValid || conditionChanged) {
-            var current_value = this.context.getRelatedField(relationship, 'countConditional', target) || '0',
-                context_previous_values = this.context.previous_values || {},
-                previous_value = context_previous_values[target + '--' + model_id] || '',
-                new_value = model.get(condition_field);
-                rollup_value = undefined;
+        if (!_.isUndefined(this.context.relatedModel)) {
+            this.context.updateRelatedCollectionValues(
+                this.context.model,
+                relationship,
+                'countConditional',
+                target,
+                model,
+                (hasModelBeenRemoved) ? 'remove' : 'add'
+            );
+        }
 
-            if (!_.isUndefined(this.context.relatedModel)) {
-                this.context.updateRelatedCollectionValues(
-                    this.context.model,
-                    relationship,
-                    'countConditional',
-                    target,
-                    model,
-                    (hasModelBeenRemoved ? 'remove' : 'add')
-                );
-            }
+        // get the updated values array/object and get the size of it, which will be the correct count
+        var rollup_value = _.size(this.context.getRelatedCollectionValues(this.context.model, relationship, 'countConditional', target));
 
-            // when the model is not new, and the previous_value is empty, lets try and fetch it from the
-            // relatedModel just to make sure, as it might have a previous value
-            if (!this.context.model.isNew() && _.isEmpty(previous_value)) {
-                previous_value = model.previous(condition_field);
-            }
-
-            // store the new_value on the context for the rel_field
-            // this allows multiple different formulas to change the rel_field while
-            // maintaining the correct previous_value since it's not updated on the models previous_attributes
-            // every time the model.set() is called before the initial set() completes
-            this.context.previous_values = this.context.previous_values || {};
-            // while this is icky, i believe it's needed for now
-            if (this.context.previous_values[target + '--' + model.cid] && model_id != model.cid) {
-                delete this.context.previous_values[target + '--' + model.cid]
-            }
-            this.context.previous_values[target + '--' + model_id] = new_value;
-
-            if (new_value == previous_value && !hasModelBeenRemoved) {
-                return;
-            }
-
-            if (conditionValid && !hasModelBeenRemoved) {
-                // if the condition is valid and the condition field changed, check if the previous value
-                // was an invalid condition, if it was, the `new_value` just needs to be added back
-                if (!_.contains(condition_values, previous_value)) {
-                    rollup_value = App.math.add(current_value, 1, 0, true);
-                }
-            } else if ((!conditionValid && !hasModelBeenRemoved) || (hasModelBeenRemoved && conditionValid)) {
-                rollup_value = App.math.sub(current_value, 1, 0, true);
-            }
-
-            // rollup_value won't exist if we didn't do any math, so just ignore this
-            if (!_.isUndefined(rollup_value) && _.isFinite(rollup_value)) {
-                // update the model
-                this.context.model.set(target, rollup_value);
-                // update the relationship defs on the model
-                this.context.updateRelatedFieldValue(
-                    relationship,
-                    'countConditional',
-                    target,
-                    rollup_value,
-                    this.context.model.isNew()
-                );
-            }
+        // rollup_value won't exist if we didn't do any math, so just ignore this
+        if (!_.isUndefined(rollup_value) && _.isFinite(rollup_value)) {
+            // update the model
+            this.context.model.set(target, rollup_value);
+            // update the relationship defs on the model
+            this.context.updateRelatedFieldValue(
+                relationship,
+                'countConditional',
+                target,
+                rollup_value,
+                this.context.model.isNew()
+            );
         }
 JS;
     }

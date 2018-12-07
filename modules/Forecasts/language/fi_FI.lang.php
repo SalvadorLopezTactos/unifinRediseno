@@ -12,6 +12,9 @@
 
 $mod_strings = array (
 
+    // Dashboard Names
+    'LBL_FORECASTS_DASHBOARD' => 'Ennusteiden työpöytä',
+
     //module strings.
     'LBL_MODULE_NAME' => 'Ennusteet',
     'LBL_MODULE_NAME_SINGULAR' => 'Ennuste',
@@ -186,6 +189,10 @@ $mod_strings = array (
     'LBL_PRODUCT_ID' => 'Tuotteen ID',
     'LBL_QUOTA_ID' => 'Tavoitteen ID',
     'LBL_VERSION' => 'Versio',
+    'LBL_CHART_BAR_LEGEND_CLOSE' => 'Piilota palkin selite',
+    'LBL_CHART_BAR_LEGEND_OPEN' => 'Näytä palkin selite',
+    'LBL_CHART_LINE_LEGEND_CLOSE' => 'Piilota rivin selite',
+    'LBL_CHART_LINE_LEGEND_OPEN' => 'Näytä rivin selite',
 
     //Labels for forecasting history log and endpoint
     'LBL_ERROR_NOT_MANAGER' => 'Virhe: käyttäjällä {0} ei ole managerioikeutta pyytää ennusteita {1}',
@@ -306,7 +313,7 @@ $mod_strings = array (
     'LBL_FORECASTS_CONFIG_TITLE_MESSAGE_TIMEPERIODS' => 'Tilivuoden alkupäivä:',
 
     'LBL_FORECASTS_CONFIG_HELP_TIMEPERIODS' => 'Konfiguroi Ennusteet-moduulissa käytettävä ajanjakso.<br /><br />Aloita valitsemalla tilivuoden alkupäivä. Valitse sitten ennustettavan ajanjakson tyyppi. Ajanjakson päivämäärät lasketaan automaattisesti valintojesi perusteella. Ali-ajanjakso on ennustetyökirjan pohja.<br /><br />Näytettävät tulevat ja menneet ajanjaksot määrittävät näkyvien alijaksojen määrän Ennusteet-moduulissa. Käyttäjät voivat nähdä ja muokata ennustelukuja näkyvissä alijaksoissa.',
-    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Määritä, miten haluat luokitella moduulin {{forecastByModule}}. <br><br>Ota huomioon, että Alue-asetuksia ei voida muuttaa ensimmäisen lähetyksen jälkeen. Päivitetyissä instansseissa Alue-asetus on lukittu olemassa olevilla ennustetiedoilla.<br><br>Voit valita kaksi tai useampia luokkia todennäköisyysalueiden pohjalta tai luoda luokkia, jotka eivät perustu todennäköisyyteen. <br><br>Mukautettujen luokkiesi vasemmalla puolella on valintaruutuja; määritä niiden avulla, mitkä alueet sisällytetään lähetettävään ja päälliköille raportoitavaan ennustemäärään. <br><br>Käyttäjä voi muuttaa moduulin {{forecastByModule}} sisällytä/älä sisällytä -tilan manuaalisesti työkirjan kautta.',
+    'LBL_FORECASTS_CONFIG_HELP_RANGES' => 'Määritä, kuinka haluat luokitella kohteen {{forecastByModule}}. <br><br>Ota huomioon, että alueen asetuksia ei voi muuttaa ensimmäisen lähetyksen jälkeen. Jos kyseessä on päivitetty instanssi, alueasetus lukitaan olemassa olevilla ennusteen tiedoilla.<br><br>Voit valita kaksi tai useampaa luokkaa todennäköisyyden mukaan tai luoda luokkia, jotka eivät perustu todennäköisyyteen. <br><br>Omien luokkiesi vasemmalla puolella on valintaruutuja. Valitse niillä, mitkä alueet sisällytetään lähetettyyn ennusteen määrään ja raportoidaan päälliköille. <br><br>Käyttäjä voi muuttaa sisällytä-/älä sisällytä -tilan ja kohteen {{forecastByModule}} luokan manuaalisesti työkirjassaan.',
     'LBL_FORECASTS_CONFIG_HELP_SCENARIOS' => 'Valitse ne sarakkeet, jotka haluaisit käyttäjien täydentävän heidän ennusteissaan jokaiselle {{forecastByModuleSingular}}lle. Huomioi, että todennäköinen arvo on sidottuna {{forecastByModuleSingular}}issä näkyviin määrään. Tästä syystä ‘Todennäköinen’-saraketta ei voida piilottaa.',
     'LBL_FORECASTS_CONFIG_HELP_WORKSHEET_COLUMNS' => 'Valitse ne sarakkeet, jotka haluaisit näyttää Ennusteet-moduulissa. Kenttälista yhdistää työkirjan, ja antaa käyttäjän valita, miten näkymä konfiguroidaan.',
     'LBL_FORECASTS_CONFIG_HELP_FORECAST_BY' => 'Olen ‘Ennusta seuraavan mukaan’ -aputekstin paikanvaraaja! :D',

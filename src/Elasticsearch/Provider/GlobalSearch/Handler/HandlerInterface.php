@@ -26,4 +26,10 @@ interface HandlerInterface
      * @param GlobalSearch $provider
      */
     public function setProvider(GlobalSearch $provider);
+
+    /**
+     * Return the handler name
+     * @return string
+     */
+    public function getName();
 }

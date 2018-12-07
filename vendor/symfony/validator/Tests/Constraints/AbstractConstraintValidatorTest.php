@@ -17,15 +17,10 @@ use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Context\ExecutionContext;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Validator\Context\LegacyExecutionContext;
-use Symfony\Component\Validator\ExecutionContextInterface as LegacyExecutionContextInterface;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Mapping\PropertyMetadata;
-use Symfony\Component\Validator\Validation;
 
 /**
- * @since 2.5.3
- *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
 abstract class AbstractConstraintValidatorTest extends \PHPUnit_Framework_TestCase
@@ -51,10 +46,6 @@ abstract class AbstractConstraintValidatorTest extends \PHPUnit_Framework_TestCa
 
     protected function setUp()
     {
-        if (Validation::API_VERSION_2_5 !== $this->getApiVersion()) {
-            $this->iniSet('error_reporting', -1 & ~E_USER_DEPRECATED);
-        }
-
         $this->group = 'MyGroup';
         $this->metadata = null;
         $this->object = null;
@@ -100,31 +91,11 @@ abstract class AbstractConstraintValidatorTest extends \PHPUnit_Framework_TestCa
 
     protected function createContext()
     {
-        $translator = $this->getMock('Symfony\Component\Translation\TranslatorInterface');
-        $validator = $this->getMock('Symfony\Component\Validator\Validator\ValidatorInterface');
-        $contextualValidator = $this->getMock('Symfony\Component\Validator\Validator\ContextualValidatorInterface');
+        $translator = $this->getMockBuilder('Symfony\Component\Translation\TranslatorInterface')->getMock();
+        $validator = $this->getMockBuilder('Symfony\Component\Validator\Validator\ValidatorInterface')->getMock();
+        $contextualValidator = $this->getMockBuilder('Symfony\Component\Validator\Validator\ContextualValidatorInterface')->getMock();
 
-        switch ($this->getApiVersion()) {
-            case Validation::API_VERSION_2_5:
-                $context = new ExecutionContext(
-                    $validator,
-                    $this->root,
-                    $translator
-                );
-                break;
-            case Validation::API_VERSION_2_4:
-            case Validation::API_VERSION_2_5_BC:
-                $context = new LegacyExecutionContext(
-                    $validator,
-                    $this->root,
-                    $this->getMock('Symfony\Component\Validator\MetadataFactoryInterface'),
-                    $translator
-                );
-                break;
-            default:
-                throw new \RuntimeException('Invalid API version');
-        }
-
+        $context = new ExecutionContext($validator, $this->root, $translator);
         $context->setGroup($this->group);
         $context->setNode($this->value, $this->object, $this->metadata, $this->propertyPath);
         $context->setConstraint($this->constraint);
@@ -135,33 +106,6 @@ abstract class AbstractConstraintValidatorTest extends \PHPUnit_Framework_TestCa
             ->will($this->returnValue($contextualValidator));
 
         return $context;
-    }
-
-    /**
-     * @param mixed  $message
-     * @param array  $parameters
-     * @param string $propertyPath
-     * @param string $invalidValue
-     * @param null   $plural
-     * @param null   $code
-     *
-     * @return ConstraintViolation
-     *
-     * @deprecated to be removed in Symfony 3.0. Use {@link buildViolation()} instead.
-     */
-    protected function createViolation($message, array $parameters = array(), $propertyPath = 'property.path', $invalidValue = 'InvalidValue', $plural = null, $code = null)
-    {
-        return new ConstraintViolation(
-            null,
-            $message,
-            $parameters,
-            $this->root,
-            $propertyPath,
-            $invalidValue,
-            $plural,
-            $code,
-            $this->constraint
-        );
     }
 
     protected function setGroup($group)
@@ -227,7 +171,7 @@ abstract class AbstractConstraintValidatorTest extends \PHPUnit_Framework_TestCa
             ->will($this->returnValue($validator));
         $validator->expects($this->at(2 * $i + 1))
             ->method('validate')
-            ->with($value, $this->logicalOr(null, array()), $group);
+            ->with($value, $this->logicalOr(null, array(), $this->isInstanceOf('\Symfony\Component\Validator\Constraints\Valid')), $group);
     }
 
     protected function expectValidateValueAt($i, $propertyPath, $value, $constraints, $group = null)
@@ -248,51 +192,6 @@ abstract class AbstractConstraintValidatorTest extends \PHPUnit_Framework_TestCa
     }
 
     /**
-     * @param mixed  $message
-     * @param array  $parameters
-     * @param string $propertyPath
-     * @param string $invalidValue
-     * @param null   $plural
-     * @param null   $code
-     *
-     * @deprecated To be removed in Symfony 3.0. Use
-     *             {@link buildViolation()} instead.
-     */
-    protected function assertViolation($message, array $parameters = array(), $propertyPath = 'property.path', $invalidValue = 'InvalidValue', $plural = null, $code = null)
-    {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.3 and will be removed in 3.0. Use the buildViolation() method instead.', E_USER_DEPRECATED);
-
-        $this->buildViolation($message)
-            ->setParameters($parameters)
-            ->atPath($propertyPath)
-            ->setInvalidValue($invalidValue)
-            ->setCode($code)
-            ->setPlural($plural)
-            ->assertRaised();
-    }
-
-    /**
-     * @param array $expected
-     *
-     * @deprecated To be removed in Symfony 3.0. Use
-     *             {@link buildViolation()} instead.
-     */
-    protected function assertViolations(array $expected)
-    {
-        @trigger_error('The '.__METHOD__.' method is deprecated since version 2.3 and will be removed in 3.0. Use the buildViolation() method instead.', E_USER_DEPRECATED);
-
-        $violations = $this->context->getViolations();
-
-        $this->assertCount(count($expected), $violations);
-
-        $i = 0;
-
-        foreach ($expected as $violation) {
-            $this->assertEquals($violation, $violations[$i++]);
-        }
-    }
-
-    /**
      * @param $message
      *
      * @return ConstraintViolationAssertion
@@ -300,11 +199,6 @@ abstract class AbstractConstraintValidatorTest extends \PHPUnit_Framework_TestCa
     protected function buildViolation($message)
     {
         return new ConstraintViolationAssertion($this->context, $message, $this->constraint);
-    }
-
-    protected function getApiVersion()
-    {
-        return Validation::API_VERSION_2_5;
     }
 
     abstract protected function createValidator();
@@ -316,7 +210,7 @@ abstract class AbstractConstraintValidatorTest extends \PHPUnit_Framework_TestCa
 class ConstraintViolationAssertion
 {
     /**
-     * @var LegacyExecutionContextInterface
+     * @var ExecutionContextInterface
      */
     private $context;
 
@@ -335,7 +229,7 @@ class ConstraintViolationAssertion
     private $constraint;
     private $cause;
 
-    public function __construct(LegacyExecutionContextInterface $context, $message, Constraint $constraint = null, array $assertions = array())
+    public function __construct(ExecutionContextInterface $context, $message, Constraint $constraint = null, array $assertions = array())
     {
         $this->context = $context;
         $this->message = $message;

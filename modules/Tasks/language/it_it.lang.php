@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TASKS_LIST_DASHBOARD' => 'Dashboard elenco compiti',
+
   'LBL_MODULE_NAME' => 'Compiti',
   'LBL_MODULE_NAME_SINGULAR' => 'Compito',
   'LBL_TASK' => 'Compiti:',

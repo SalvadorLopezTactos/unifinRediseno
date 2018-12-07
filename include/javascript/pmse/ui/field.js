@@ -8,21 +8,23 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 /**
- * @class Field
+ * @class PMSE.Field
  * Handle form fields
- * @extend Element
+ * @extends PMSE.Element
  *
  * @constructor
  * Creates a new instace of the object
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
-var Field = function (options, parent) {
-    Element.call(this, options);
+PMSE.Field = function(options, parent) {
+    PMSE.Element.call(this, options);
     /**
-     * Defines the parent Form
-     * @type {Form}
+     * Defines the parent PMSE.Form
+     * @type {PMSE.Form}
      */
     this.parent = null;
     /**
@@ -37,7 +39,7 @@ var Field = function (options, parent) {
     this.value = null;
     /**
      * Defines the validator object
-     * @type {Validator}
+     * @type {PMSE.Validator}
      */
     this.validators = [];
     /**
@@ -89,28 +91,28 @@ var Field = function (options, parent) {
 
     this._invalidFieldClass = 'pmse-field-error';
 
-    Field.prototype.initObject.call(this, options, parent);
+    PMSE.Field.prototype.initObject.call(this, options, parent);
 };
-Field.prototype = new Element();
+PMSE.Field.prototype = new PMSE.Element();
 
 /**
  * Defines the object's type
  * @type {String}
  */
-Field.prototype.type = 'Field';
+PMSE.Field.prototype.type = 'PMSE.Field';
 
 /**
  * Defines the object's family
  * @type {String}
  */
-Field.prototype.family = 'Field';
+PMSE.Field.prototype.family = 'PMSE.Field';
 
 /**
  * Initializes the object with the default values
  * @param {Object} options
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  */
-Field.prototype.initObject = function (options, parent) {
+PMSE.Field.prototype.initObject = function(options, parent) {
     var defaults = {
         required: false,
         label: '',
@@ -120,7 +122,7 @@ Field.prototype.initObject = function (options, parent) {
         initialValue: null,
         fieldWidth: null,
         helpTooltip: null,
-        change: function () {},
+        change: function() {},
         readOnly: false,
         submit: true,
         proxy: null,
@@ -154,7 +156,7 @@ Field.prototype.initObject = function (options, parent) {
  * @param {Boolean} value
  * @return {*}
  */
-Field.prototype.setRequired = function (value) {
+PMSE.Field.prototype.setRequired = function(value) {
     var requiredMark;
     this.required = !!value;
     if (this.labelObject) {
@@ -178,7 +180,7 @@ Field.prototype.setRequired = function (value) {
  * @param {String} value
  * @private
  */
-Field.prototype._setValueToControl = function (value) {
+PMSE.Field.prototype._setValueToControl = function(value) {
     if (this.html && this.controlObject) {
         this.controlObject.value = this.value;
     }
@@ -190,7 +192,7 @@ Field.prototype._setValueToControl = function (value) {
  * @param {Boolean} [change]
  * @return {*}
  */
-Field.prototype.setValue = function (value, change) {
+PMSE.Field.prototype.setValue = function(value, change) {
     if (change) {
         this.value = value;
     } else {
@@ -208,7 +210,7 @@ Field.prototype.setValue = function (value, change) {
  * @param {String} name
  * @return {*}
  */
-Field.prototype.setName = function (name) {
+PMSE.Field.prototype.setName = function(name) {
     this.name = name;
     return this;
 };
@@ -218,21 +220,21 @@ Field.prototype.setName = function (name) {
  * @param {String} label
  * @return {*}
  */
-Field.prototype.setLabel = function (label) {
+PMSE.Field.prototype.setLabel = function(label) {
     this.label = label;
     return this;
 };
 
 /**
  * Sets the validator property
- * @param {Object/Validator} val
+ * @param {(Object|PMSE.Validator)} val
  * @return {*}
  */
-Field.prototype.setValidators = function (val) {
+PMSE.Field.prototype.setValidators = function(val) {
     var i;
 
     for (i = 0; i < val.length; i += 1) {
-        if (val[i] && val[i].family && val[i].family === 'Validator') {
+        if (val[i] && val[i].family && val[i].family === 'PMSE.Validator') {
             this.validators.push(val[i]);
         } else {
             this.validators.push(this.validatorFactory(val[i]));
@@ -246,17 +248,17 @@ Field.prototype.setValidators = function (val) {
  * @param {String} msg
  * @return {*}
  */
-Field.prototype.setMessageError = function (msg) {
+PMSE.Field.prototype.setMessageError = function(msg) {
     this.messageError = msg;
     return this;
 };
 
 /**
  * Sets the parent object
- * @param {Form} parent
+ * @param {PMSE.Form} parent
  * @return {*}
  */
-Field.prototype.setParent = function (parent) {
+PMSE.Field.prototype.setParent = function(parent) {
     this.parent = parent;
     return this;
 };
@@ -267,34 +269,34 @@ Field.prototype.setParent = function (parent) {
  * @return {*}
  */
 
-Field.prototype.setInitialValue = function (value) {
+PMSE.Field.prototype.setInitialValue = function(value) {
     this.initialValue = value;
     return this;
 };
 
-Field.prototype.setFieldWidth = function (width) {
+PMSE.Field.prototype.setFieldWidth = function(width) {
     this.fieldWidth = width;
     return this;
 };
 
-Field.prototype.setHelpTooltip = function (tooltip) {
+PMSE.Field.prototype.setHelpTooltip = function(tooltip) {
     if (tooltip) {
         if (!tooltip.css) {
             tooltip.css = 'adam-tooltip-help';
         }
-        this.helpTooltip = new Tooltip(tooltip, this);
+        this.helpTooltip = new PMSE.Tooltip(tooltip, this);
     } else {
         this.helpTooltip = null;
     }
     return this;
 };
 
-Field.prototype.setChangeHandler = function (fn) {
+PMSE.Field.prototype.setChangeHandler = function(fn) {
     this.change = fn;
     return this;
 };
 
-Field.prototype.setReadOnly = function (value) {
+PMSE.Field.prototype.setReadOnly = function(value) {
     this.readOnly = value;
     if (this.html) {
         this.controlObject.disabled = value;
@@ -302,12 +304,12 @@ Field.prototype.setReadOnly = function (value) {
     return this;
 };
 
-Field.prototype.setSubmit = function (value) {
+PMSE.Field.prototype.setSubmit = function(value) {
     this.submit = value;
     return this;
 };
 
-Field.prototype.setProxy = function (newProxy) {
+PMSE.Field.prototype.setProxy = function(newProxy) {
     this.proxy = newProxy;
     return this;
 };
@@ -315,9 +317,9 @@ Field.prototype.setProxy = function (newProxy) {
 /**
  * Returns a validator object
  * @param {Object} validator
- * @return {Validator}
+ * @return {PMSE.Validator}
  */
-Field.prototype.validatorFactory = function (validator) {
+PMSE.Field.prototype.validatorFactory = function(validator) {
     var out = null,
         regexp = {
             email: {
@@ -339,7 +341,7 @@ Field.prototype.validatorFactory = function (validator) {
             if (validator.criteria && !validator.criteria.trim) {
                 /*validator.jtype = 'required_without_spaces';*/
                 /*} else {*/
-                out = new TextLengthValidator({
+                out = new PMSE.TextLengthValidator({
                     criteria: {
                         trim: false,
                         minLength: 1
@@ -351,47 +353,47 @@ Field.prototype.validatorFactory = function (validator) {
         case 'email':
         case 'integer':
             validator.criteria = regexp[validator.jtype].pattern;
-            out = new RegExpValidator($.extend({
+            out = new PMSE.RegExpValidator($.extend({
                 errorMessage: regexp[validator.jtype].message
             }, validator), this);
             break;
         case 'comparison':
-            out = new ComparisonValidator($.extend({
+            out = new PMSE.ComparisonValidator($.extend({
                 errorMessage: this.parent.language.ERROR_COMPARISON
             }, validator), this);
             break;
         case 'regexp':
-            out = new RegExpValidator($.extend({
+            out = new PMSE.RegExpValidator($.extend({
                 errorMessage: this.parent.language.ERROR_REGEXP
             }, validator), this);
             break;
         case 'textLength':
-            out = new TextLengthValidator($.extend({
+            out = new PMSE.TextLengthValidator($.extend({
                 errorMessage: this.parent.language.ERROR_TEXT_LENGTH
             }, validator), this);
             break;
         case 'custom':
-            out = new CustomValidator($.extend({
+            out = new PMSE.CustomValidator($.extend({
                 errorMessage: ""
             }, validator), this);
             break;
         case 'number':
-            out = new NumberValidator($.extend({
+            out = new PMSE.NumberValidator($.extend({
                 errorMessage: ""
             }, validator), this);
             break;
         case 'range':
-            out = new RangeValidator($.extend({
+            out = new PMSE.RangeValidator($.extend({
                 errorMessage: ""
             }, validator), this);
             break;
         default:
-            out = new Validator($.extend({
+            out = new PMSE.Validator($.extend({
                 errorMessage: ""
             }, validator), this);
         }
     } else {
-        out = new Validator(null, this);
+        out = new PMSE.Validator(null, this);
     }
     return out;
 };
@@ -400,7 +402,7 @@ Field.prototype.validatorFactory = function (validator) {
  * Returns the object representation of the field
  * @return {Object}
  */
-Field.prototype.getObjectValue = function () {
+PMSE.Field.prototype.getObjectValue = function() {
     var result = {};
     if (this.submit) {
         result[this.name] = this.value;
@@ -412,41 +414,48 @@ Field.prototype.getObjectValue = function () {
  * Returns the evaluation if the fields is required
  * @return {Boolean}
  */
-Field.prototype.evalRequired = function () {
+PMSE.Field.prototype.evalRequired = function() {
     var response = true, value;
     if (this.required) {
         response = (this.value !== null && this.value !== '' && this.value.trim());
-        if (!response) {
-            $(this.controlObject).addClass('required');
-        } else {
-            $(this.controlObject).removeClass('required');
-        }
+        this.markFieldError(!response);
     }
     return response;
 };
 
 /**
- * Resets the field
+ * Decorate the field's controlObject with an error state
  */
-Field.prototype.reset = function () {
-    this.setValue(this.initialValue || null, true);
-    if (this.required && this.controlObject) {
+PMSE.Field.prototype.markFieldError = function(error) {
+    if (error) {
+        $(this.controlObject).addClass('required');
+    } else {
         $(this.controlObject).removeClass('required');
     }
 };
 
-Field.prototype.attachListeners = function () {
+/**
+ * Resets the field
+ */
+PMSE.Field.prototype.reset = function() {
+    this.setValue(this.initialValue || null, true);
+    if (this.required && this.controlObject) {
+        this.markFieldError(false);
+    }
+};
+
+PMSE.Field.prototype.attachListeners = function() {
 
 };
 
-Field.prototype.createHTML = function () {
-    Element.prototype.createHTML.call(this);
+PMSE.Field.prototype.createHTML = function() {
+    PMSE.Element.prototype.createHTML.call(this);
     this.style.removeProperties(['position', 'width', 'height', 'top', 'left', 'z-index']);
     this.style.addClasses(['adam-field']);
     return this.html;
 };
 
-Field.prototype.isValid = function () {
+PMSE.Field.prototype.isValid = function() {
     var i, res = true;
 
     for (i = 0; i < this.validators.length; i += 1) {
@@ -456,10 +465,12 @@ Field.prototype.isValid = function () {
         }
     }
 
+    this.markFieldError(!res);
+
     return res;
 };
 
-Field.prototype.onChange = function (newValue, oldValue) {
+PMSE.Field.prototype.onChange = function(newValue, oldValue) {
     if (this.required) {
         this.evalRequired();
     }
@@ -474,7 +485,7 @@ Field.prototype.onChange = function (newValue, oldValue) {
 };
 
 
-Field.prototype.doLoad = function () {
+PMSE.Field.prototype.doLoad = function() {
     if (this.proxy) {
         this.load();
     }
@@ -484,11 +495,11 @@ Field.prototype.doLoad = function () {
  * @abstract
  * Loads the field through the proxy defined
  */
-Field.prototype.load = function () {
+PMSE.Field.prototype.load = function() {
 
 };
 
-Field.prototype.enable = function () {
+PMSE.Field.prototype.enable = function() {
     if (this.controlObject) {
         this.labelObject.className = 'adam-form-label';
         this.controlObject.disabled = false;
@@ -500,7 +511,7 @@ Field.prototype.enable = function () {
     return this;
 };
 
-Field.prototype.disable = function () {
+PMSE.Field.prototype.disable = function() {
     if (!this.oldRequiredValue) {
         this.oldRequiredValue = this.required;
     }
@@ -508,7 +519,7 @@ Field.prototype.disable = function () {
     if (this.controlObject) {
         this.labelObject.className = 'adam-form-label-disabled';
         this.controlObject.disabled = true;
-        $(this.controlObject).removeClass('required');
+        this.markFieldError(false);
     }
     this.disabled = true;
     return this;

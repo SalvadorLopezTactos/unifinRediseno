@@ -109,7 +109,8 @@ class TimePeriod extends SugarBean
     }
 
     /**
-     * custom override of retrieve function to disable the date formatting and reset it again after the bean has been retrieved.
+     * custom override of retrieve function to disable the date formatting and reset it again after the bean has been
+     * retrieved.
      *
      * @param string $id
      * @param bool $encode
@@ -301,7 +302,8 @@ class TimePeriod extends SugarBean
     /**
      * Return the current TimePeriod instance for the given TimePeriod type
      *
-     * @param $type The TimePeriod string type constant (TimePeriod::Annual, TimePeriod::Quarter, TimePeriod::Month); defaults to using leaf interval from settings if none supplied
+     * @param $type The TimePeriod string type constant (TimePeriod::Annual, TimePeriod::Quarter, TimePeriod::Month);
+     *     defaults to using leaf interval from settings if none supplied
      */
     public static function getCurrentTimePeriod($type = '')
     {
@@ -313,7 +315,8 @@ class TimePeriod extends SugarBean
     /**
      * Returns the current TimePeriod name if a TimePeriod entry is found
      *
-     * @param $type String CONSTANT for the TimePeriod type; if none supplied it will use the leaf type as defined in config settings
+     * @param $type String CONSTANT for the TimePeriod type; if none supplied it will use the leaf type as defined in
+     *     config settings
      * @return String name of the current TimePeriod for given type; null if none found
      */
     public static function getCurrentName($type = '')
@@ -335,7 +338,8 @@ class TimePeriod extends SugarBean
      *
      * Returns the current TimePeriod instance's id if a leaf entry is found for the current date
      *
-     * @param $type String CONSTANT for the TimePeriod type; if none supplied it will use the leaf type as defined in config settings
+     * @param $type String CONSTANT for the TimePeriod type; if none supplied it will use the leaf type as defined in
+     *     config settings
      * @return $currentId String id of the current TimePeriod's id; null if none found
      */
     public static function getCurrentId($type = '')
@@ -442,7 +446,8 @@ class TimePeriod extends SugarBean
     }
 
     /**
-     * Takes the current TimePeriod and finds the next one that is in the db of the same type.  If none exists it returns null
+     * Takes the current TimePeriod and finds the next one that is in the db of the same type.  If none exists it
+     * returns null
      *
      * @return mixed
      */
@@ -489,9 +494,10 @@ AND type = ?
 AND deleted = 0';
         $id = $this->db->getConnection()
             ->executeQuery($query, array(
-                $queryDate->asDbDate(),
-                $this->type,
-            ))->fetchColumn();
+                    $queryDate->asDbDate(),
+                    $this->type,
+                )
+            )->fetchColumn();
 
         if (!$id) {
             return null;
@@ -577,9 +583,13 @@ AND deleted = 0';
             $settingsDate->format("d")
         );
 
+        // $quadrantCt is the count to check how many quadrants are between the current date and target date.
+        $quadrantCt = 0;
+
         //if the target start date is in the future then keep going back one TimePeriod interval
         while ($currentDate < $targetStartDate) {
             $targetStartDate->modify($this->previous_date_modifier);
+            $quadrantCt++;
         }
 
         $this->setStartDate($targetStartDate->asDbDate(false));
@@ -613,12 +623,11 @@ AND deleted = 0';
                 $targetStartDate->modify($this->next_date_modifier);
                 $targetEndDate = $this->determineEndDate($targetStartDate->asDbDate());
             }
-
             $this->setStartDate($targetStartDate->asDbDate());
             $shownForwardDifference++;
         }
 
-        return $this->buildLeaves($shownBackwardDifference, $shownForwardDifference);
+        return $this->buildLeaves($shownBackwardDifference, $shownForwardDifference, $quadrantCt);
     }
 
     /**
@@ -810,10 +819,11 @@ AND deleted = 0';
      *
      * @param $shownBackwardDifference int value of the shown backward difference
      * @param $shownForwardDifference int value of the shown forward
+     * @param $quadrantCt int value of quadrants difference between current and target dates
      *
      * @return Array of TimePeriod instances created
      */
-    public function buildLeaves($shownBackwardDifference, $shownForwardDifference)
+    public function buildLeaves($shownBackwardDifference, $shownForwardDifference, $quadrantCt)
     {
         $created = array();
         $timedate = TimeDate::getInstance();
@@ -828,7 +838,8 @@ AND deleted = 0';
             $earliestTimePeriod->start_date = $timedate->fromDbDate($earliestTimePeriod->start_date)->modify(
                 $earliestTimePeriod->previous_date_modifier
             )->asDbDate(false);
-            $created = $earliestTimePeriod->buildTimePeriods($shownBackwardDifference, 'backward');
+
+            $created = $earliestTimePeriod->buildTimePeriods($shownBackwardDifference, 'backward', $quadrantCt);
         }
 
         if ($shownForwardDifference > 0) {
@@ -841,7 +852,10 @@ AND deleted = 0';
             $latestTimePeriod->start_date = $timedate->fromDbDate($latestTimePeriod->start_date)->modify(
                 $latestTimePeriod->next_date_modifier
             )->asDbDate(false);
-            $created = array_merge($created, $latestTimePeriod->buildTimePeriods($shownForwardDifference, 'forward'));
+            $created = array_merge(
+                $created,
+                $latestTimePeriod->buildTimePeriods($shownForwardDifference, 'forward', $quadrantCt)
+            );
         }
 
         return $created;
@@ -852,9 +866,10 @@ AND deleted = 0';
      *
      * @param $timePeriods int value of the number of parent level TimePeriods to create
      * @param $direction String value of the direction we are building leaves ('forward' or 'backward')
+     * @param int $quadrantCt quadrants difference between current and target dates
      * @return Array of TimePeriod instances created
      */
-    public function buildTimePeriods($timePeriods, $direction)
+    public function buildTimePeriods($timePeriods, $direction, $quadrantCt = 0)
     {
         $created = array();
         $timedate = TimeDate::getInstance();
@@ -866,13 +881,37 @@ AND deleted = 0';
             $timePeriod->currentSettings = $this->currentSettings;
             $timePeriod->setStartDate($startDate->asDbDate(false));
             $startDateDay = $timedate->fromDbDate($timePeriod->start_date)->format('j');
+            $quadrantKeys = [1, 4, 3, 2];
+            $forwardQuadrantsKeys = [1, 2, 3, 4];
 
-            $remainder = $i % $this->periods_in_year;
+            // when the target date is in future of current date
+            if ($quadrantCt > 0) {
+                if ($direction === 'forward') {
+                    if ($quadrantCt >= $i) {
+                        $remainder = $quadrantCt - $i;
+                        $timePeriod->name = $timePeriod->getTimePeriodName(
+                            $quadrantKeys[$remainder % $this->periods_in_year]
+                        );
+                    } else {
+                        $remainder = $i - $quadrantCt;
+                        $timePeriod->name = $timePeriod->getTimePeriodName(
+                            $forwardQuadrantsKeys[$remainder % $this->periods_in_year]
+                        );
+                    }
+                } else {
+                    $remainder = $quadrantCt + 1 + $i;
+                    $timePeriod->name = $timePeriod->getTimePeriodName(
+                        $quadrantKeys[$remainder % $this->periods_in_year]
+                    );
+                }
+            } elseif ($quadrantCt === 0) {
+                $remainder = $i % $this->periods_in_year;
 
-            if ($direction == 'forward') {
-                $timePeriod->name = $timePeriod->getTimePeriodName($remainder == 0 ? 1 : $remainder + 1);
-            } else {
-                $timePeriod->name = $timePeriod->getTimePeriodName($this->periods_in_year - $remainder);
+                if ($direction === 'forward') {
+                    $timePeriod->name = $timePeriod->getTimePeriodName($remainder == 0 ? 1 : $remainder + 1);
+                } else {
+                    $timePeriod->name = $timePeriod->getTimePeriodName($this->periods_in_year - $remainder);
+                }
             }
             $timePeriod->save();
             $created[] = $timePeriod;
@@ -1198,7 +1237,7 @@ AND deleted = 0';
     public function getGenericStartEndByDuration($duration, $start_date = null)
     {
         $mapping = array('current' => 0, 'next' => 3, 'year' => 12);
-        if(array_key_exists($duration, $mapping)) {
+        if (array_key_exists($duration, $mapping)) {
             $duration = $mapping[$duration];
         } elseif (!is_numeric($duration)) {
             $duration = 0;
@@ -1245,7 +1284,7 @@ AND deleted = 0';
             'start_date' => $start->asDbDate(false),
             'start_date_timestamp' => $start->setTimezone($tz)->setTime(0, 0, 0)->format('U'),
             'end_date' => $end->asDbDate(false),
-            'end_date_timestamp' => $end->setTimezone($tz)->setTime(0, 0, 0)->format('U')
+            'end_date_timestamp' => $end->setTimezone($tz)->setTime(0, 0, 0)->format('U'),
         );
     }
 }

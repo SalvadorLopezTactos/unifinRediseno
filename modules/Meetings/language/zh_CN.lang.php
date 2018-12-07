@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => '会议列表仪表板',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => '会议记录仪表板',
+
 	'ERR_DELETE_RECORD' => '必须指定记录编号才能删除会议。',
 	'LBL_ACCEPT_THIS'=>'接受？',
 	'LBL_ADD_BUTTON'=> '添加',

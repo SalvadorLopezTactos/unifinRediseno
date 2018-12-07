@@ -11,6 +11,10 @@
  */
 
 use Sugarcrm\Sugarcrm\Logger\Factory as LoggerFactory;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+use Sugarcrm\Sugarcrm\Security\Context;
+use Sugarcrm\Sugarcrm\Security\Subject\User;
+use Sugarcrm\Sugarcrm\Security\Subject\ApiClient\Rest as RestApiClient;
 
 /** @noinspection PhpInconsistentReturnPointsInspection */
 class RestService extends ServiceBase
@@ -40,15 +44,15 @@ class RestService extends ServiceBase
 
     /**
      * The minimum version accepted
-     * @var integer
+     * @var string
      */
-    protected $min_version = 10;
+    protected $min_version = '10';
 
     /**
      * The maximum version accepted
-     * @var integer
+     * @var string
      */
-    protected $max_version = 10;
+    protected $max_version = '11.1';
 
     /**
      * An array of api settings
@@ -105,7 +109,7 @@ class RestService extends ServiceBase
     {
         $apiSettings = array();
         require 'include/api/metadata.php';
-        if (SugarAutoLoader::fileExists('custom/include/api/metadata.php')) {
+        if (file_exists('custom/include/api/metadata.php')) {
             // Don't use requireWithCustom because we need the data out of it
             require 'custom/include/api/metadata.php';
         }
@@ -125,10 +129,14 @@ class RestService extends ServiceBase
         $this->response = $this->getResponse();
         try {
             $this->request = $this->getRequest();
-            $this->request_headers = $this->request->request_headers;
+            $this->request_headers = $this->request->getRequestHeaders();
 
-            if ($this->min_version > $this->request->version || $this->max_version < $this->request->version) {
-                throw new SugarApiExceptionIncorrectVersion("Please change your url to reflect version between {$this->min_version} and {$this->max_version}");
+            // invalid if the request version is out of supported version range
+            if (!$this->checkVersionSupport($this->getVersion(), $this->min_version, $this->max_version)) {
+                throw new SugarApiExceptionIncorrectVersion(
+                    "Please change your requested API version to value " .
+                    "between {$this->min_version} and {$this->max_version}."
+                );
             }
 
             $authenticateUser = $this->authenticateUser();
@@ -136,11 +144,16 @@ class RestService extends ServiceBase
             $isLoggedIn = $authenticateUser['isLoggedIn'];
             $loginException = $authenticateUser['exception'];
 
+            $context = Container::getInstance()->get(Context::class);
+            $subject = new RestApiClient();
+
             // Figure out the platform
             if ($isLoggedIn) {
                 if ( isset($_SESSION['platform']) ) {
                     $this->platform = $_SESSION['platform'];
                 }
+
+                $subject = new User($GLOBALS['current_user'], $subject);
             } else {
                 // Since we don't have a session we have to allow the user to specify their platform
                 // However, since the results from the same URL will be different with
@@ -149,6 +162,9 @@ class RestService extends ServiceBase
                     $this->platform = basename($_GET['platform']);
                 }
             }
+
+            $context->activateSubject($subject);
+            $context->setAttribute('platform', $this->platform);
 
             $this->validatePlatform($this->platform);
             $this->request->setPlatform($this->platform);
@@ -255,9 +271,38 @@ class RestService extends ServiceBase
         } catch ( Exception $e ) {
             $this->handleException($e);
         }
+
+        if (isset($context, $subject)) {
+            $context->deactivateSubject($subject);
+        }
+
         // last chance for hooks to mess with the response
         $GLOBALS['logic_hook']->call_custom_logic('', "before_respond", $this->response);
         $this->response->send();
+    }
+
+    /**
+     * checks if version is within min,max versions
+     * @param string $version version to check
+     * @param string $minVersion
+     * @param string $maxVersion
+     *
+     * @return boolean TRUE if $minVersion <= $version <= $maxVersion
+     */
+    protected function checkVersionSupport($version, $minVersion, $maxVersion)
+    {
+        return (version_compare($minVersion, $version, '<=')
+        && version_compare($version, $maxVersion, '<='));
+    }
+
+    /**
+     * to get site url string
+     *
+     * @return url string
+     */
+    protected function getSiteUrl()
+    {
+        return SugarConfig::getInstance()->get('site_url');
     }
 
     /**
@@ -273,7 +318,7 @@ class RestService extends ServiceBase
 
         // Empty resources are simply the URI for the current request
         if (empty($resource)) {
-            $siteUrl = SugarConfig::getInstance()->get('site_url');
+            $siteUrl = $this->getSiteUrl();
             return $siteUrl . (empty($this->request)?$_SERVER['REQUEST_URI']:$this->request->getRequestURI());
         }
 
@@ -293,13 +338,31 @@ class RestService extends ServiceBase
             if ($route != false) {
                 $url = $this->resourceURIBase;
                 if (isset($options['relative']) && $options['relative'] == false) {
-                    $url = $req->getResourceURIBase();
+                    $url = $req->getResourceURIBase($this->getUrlVersion());
                 }
                 return $url . implode('/', $resource);
             }
         }
 
         return '';
+    }
+
+    /**
+     * get version from RestRequest, get the request version from Request obj
+     * @return string|null
+     */
+    public function getVersion()
+    {
+        return $this->getRequest()->getVersion();
+    }
+
+    /**
+     * get Url version from RestRequest, get the request version from Request obj
+     * @return string|null
+     */
+    public function getUrlVersion()
+    {
+        return $this->getRequest()->getUrlVersion();
     }
 
     /**
@@ -336,7 +399,7 @@ class RestService extends ServiceBase
         // Load service dictionary
         $this->dict = $this->loadServiceDictionary('ServiceDictionaryRest');
 
-        return $this->dict->lookupRoute($req->path, $req->version, $req->method, $req->platform);
+        return $this->dict->lookupRoute($req->path, $this->getVersion(), $req->method, $req->platform);
     }
 
     /**
@@ -411,11 +474,11 @@ class RestService extends ServiceBase
 
         $token = $this->grabToken();
 
+        $platform = !empty($_REQUEST['platform']) ? $_REQUEST['platform'] : 'base';
         if ( !empty($token) ) {
             try {
-                $oauthServer = SugarOAuth2Server::getOAuth2Server();
+                $oauthServer = \SugarOAuth2Server::getOAuth2Server($platform);
                 $oauthServer->verifyAccessToken($token);
-
                 if (isset($_SESSION['authenticated_user_id'])) {
                     $authController = AuthenticationController::getInstance();
                     // This will return false if anything is wrong with the session
@@ -423,7 +486,7 @@ class RestService extends ServiceBase
                     $valid = $authController->apiSessionAuthenticate();
 
                     if ($valid) {
-                        $valid = $this->userAfterAuthenticate($_SESSION['authenticated_user_id'],$oauthServer);
+                        $valid = $this->userAfterAuthenticate($_SESSION['authenticated_user_id'], $oauthServer);
                     }
                     if (!$valid) {
                         // Need to populate the exception here so later code
@@ -482,6 +545,11 @@ class RestService extends ServiceBase
             // So we have to go for a hunt
             $headers = apache_request_headers();
             foreach ($headers as $key => $value) {
+                // Check for oAuth 2.0 header
+                if ($token = $this->getOAuth2AccessToken($key, $value)) {
+                    $sessionId = $token;
+                    break;
+                }
                 $check = strtolower($key);
                 if ( $check == 'oauth_token' || $check == 'oauth-token') {
                     $sessionId = $value;
@@ -491,6 +559,25 @@ class RestService extends ServiceBase
         }
 
         return $sessionId;
+    }
+
+    /**
+     * Check oAuth 2.0 header
+     * @param $header
+     * @param $value
+     * @return string
+     */
+    protected function getOAuth2AccessToken($header, $value)
+    {
+        $token = false;
+        $platform = !empty($_REQUEST['platform']) ? $_REQUEST['platform'] : 'base';
+        $config = SugarConfig::getInstance()->get('idm_mode', false);
+        $preCheck = is_array($config) && $platform == 'opi' && $header == 'Authorization';
+
+        if ($preCheck && preg_match('~^Bearer (.*)$~i', $value, $matches)) {
+            $token = $matches[1];
+        }
+        return $token;
     }
 
     /**
@@ -607,7 +694,7 @@ class RestService extends ServiceBase
     public function setHeader($header, $info)
     {
         if (empty($this->response)) {
-           return false;
+            return false;
         }
 
         return $this->response->setHeader($header, $info);
@@ -634,7 +721,7 @@ class RestService extends ServiceBase
     public function sendHeaders()
     {
         if (empty($this->response)) {
-           return false;
+            return false;
         }
 
         return $this->response->sendHeaders();
@@ -658,20 +745,17 @@ class RestService extends ServiceBase
                 $apiBase = 'rest/';
             }
 
-            // Get our version
-            preg_match('#v(?>\d+)/#', $_SERVER['REQUEST_URI'], $m);
-            if (isset($m[0])) {
-                $apiBase .= $m[0];
-            }
+            // using version to get right url base
+            $apiBase .= $this->getUrlVersion();
 
             // This is for our URI return value
             $siteUrl = '';
             if (isset($options['relative']) && $options['relative'] == false) {
-                $siteUrl = SugarConfig::getInstance()->get('site_url');
+                $siteUrl = $this->getSiteUrl();
             }
 
-            // Get the file uri bas
-            $this->resourceURIBase = $siteUrl . $apiBase;
+            // Get the file uri base
+            $this->resourceURIBase = $siteUrl . $apiBase . '/';
         }
     }
 
@@ -715,7 +799,7 @@ class RestService extends ServiceBase
     public function generateETagHeader($etag, $cache_age = null)
     {
         if (empty($this->response)) {
-           return false;
+            return false;
         }
 
         return $this->response->generateETagHeader($etag, $cache_age);
@@ -727,7 +811,7 @@ class RestService extends ServiceBase
     public function fileResponse($filename)
     {
         if (empty($this->response)) {
-           return false;
+            return false;
         }
         $this->response->setType(RestResponse::FILE)->setFilename($filename);
         $this->response->setHeader("Pragma", "public");
@@ -769,16 +853,15 @@ class RestService extends ServiceBase
         $pathVars = $this->request->getPathVars($route);
 
         $getVars = $this->request->getQueryVars();
-        if ( !empty($getVars)) {
+        if (!empty($getVars)) {
             // This has some get arguments, let's parse those in
-            if ( !empty($route['jsonParams']) ) {
-                foreach ( $route['jsonParams'] as $fieldName ) {
-                    if ( isset($getVars[$fieldName])
-                         && !empty($getVars[$fieldName])
-                         && is_string($getVars[$fieldName])
-                         &&  isset($getVars[$fieldName]{0})
-                         && ( $getVars[$fieldName]{0} == '{'
-                               || $getVars[$fieldName]{0} == '[' )) {
+            if (!empty($route['jsonParams'])) {
+                foreach ($route['jsonParams'] as $fieldName) {
+                    if (!empty($getVars[$fieldName])
+                        && is_string($getVars[$fieldName])
+                        && isset($getVars[$fieldName]{0})
+                        && ($getVars[$fieldName]{0} == '{'
+                            || $getVars[$fieldName]{0} == '[')) {
                         // This may be JSON data
                         $jsonData = @json_decode($getVars[$fieldName],true,32);
                         if (json_last_error() !== 0) {
@@ -873,4 +956,3 @@ class RestService extends ServiceBase
         return MetaDataManager::getManager(array($this->platform));
     }
 }
-

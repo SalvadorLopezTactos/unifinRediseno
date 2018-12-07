@@ -15,6 +15,8 @@
  */
 require_once 'ModuleInstall/ModuleInstaller.php';
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 class SugarUpgradeScanModules extends UpgradeScript
 {
     public $order = 6000;
@@ -71,7 +73,7 @@ class SugarUpgradeScanModules extends UpgradeScript
         if(!is_readable($hookfile)) {
             return;
         }
-        include $hookfile;
+        include FileLoader::validateFilePath($hookfile);
         if(empty($hook_array)) {
             return;
         }
@@ -228,7 +230,7 @@ class SugarUpgradeScanModules extends UpgradeScript
         $status = true;
         $dictionary = array();
         if (is_file('modules/' . $module . '/vardefs.php')) {
-            include('modules/' . $module . '/vardefs.php');
+            include FileLoader::validateFilePath('modules/' . $module . '/vardefs.php');
         }
 
         foreach($GLOBALS['dictionary'][$object]['fields'] as $key => $value) {

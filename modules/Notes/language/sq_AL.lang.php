@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Paneli i listës së shënimeve',
+
     'ERR_DELETE_RECORD' => 'Duhet përcaktuar numrin e regjistrimit për të fshirë llogarinë',
     'LBL_ACCOUNT_ID' => 'ID e Llogarisë',
     'LBL_CASE_ID' => 'ID e Rastit',
@@ -23,9 +26,13 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Shënim',
     'LBL_EMAIL_ADDRESS' => 'Adresa e Emailit',
     'LBL_EMAIL_ATTACHMENT' => 'bashkëngjitje të mailit',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Bashkëngjitja me email për',
     'LBL_FILE_MIME_TYPE' => 'Lloji pantomime',
+    'LBL_FILE_EXTENSION' => 'Mbaresa e skedarit',
+    'LBL_FILE_SOURCE' => 'Burimi i skedarit',
+    'LBL_FILE_SIZE' => 'Madhësia e skedarit',
     'LBL_FILE_URL' => 'Paraqit URL',
-    'LBL_FILENAME' => 'Bashëngjitje',
+    'LBL_FILENAME' => 'Bashkëngjitje:',
     'LBL_LEAD_ID' => 'ID e Klientit Potensial',
     'LBL_LIST_CONTACT_NAME' => 'Kontakt',
     'LBL_LIST_DATE_MODIFIED' => 'Ndryshimi i fundit',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'ID e mudëshme',
     'LBL_PARENT_ID' => 'ID mëmë',
     'LBL_PARENT_TYPE' => 'Lloji mëmë',
+    'LBL_EMAIL_TYPE' => 'Lloji i emailit',
+    'LBL_EMAIL_ID' => 'Identifikuesi i emailit',
     'LBL_PHONE' => 'Telefoni',
     'LBL_PORTAL_FLAG' => 'shfaq në portal',
     'LBL_EMBED_FLAG' => 'ngulitur në mail?',
@@ -58,7 +67,7 @@ $mod_strings = array(
     'LBL_SUBJECT' => 'Subjekti',
     'LNK_IMPORT_NOTES' => 'Shënime të rëndësishme',
     'LNK_NEW_NOTE' => 'Krijo shënim ose bashkëngjitje',
-    'LNK_NOTE_LIST' => 'Shiko Shënimet',
+    'LNK_NOTE_LIST' => 'Shiko shënimet',
     'LBL_MEMBER_OF' => 'Anëtar i:',
     'LBL_LIST_ASSIGNED_TO_NAME' => 'Përdorues i caktuar',
     'LBL_OC_FILE_NOTICE' => 'Ju lutemi kyquni në Server për të shikuar dosjen',
@@ -78,8 +87,8 @@ $mod_strings = array(
     'LBL_LAST_NAME' => 'Mbiemri',
     'LBL_EXPORT_PARENT_TYPE' => 'Në lidhje me modulin',
     'LBL_EXPORT_PARENT_ID' => 'Në lidhje me ID',
-    'LBL_DATE_ENTERED' => 'Të dhënat e krijuara',
-    'LBL_DATE_MODIFIED' => 'Të dhënat e modifikuara',
+    'LBL_DATE_ENTERED' => 'Data e krijimit',
+    'LBL_DATE_MODIFIED' => 'Data e modifikimit',
     'LBL_DELETED' => 'E fshirë',
     'LBL_REVENUELINEITEMS' => 'Rreshti i llojeve të të ardhurave',
 

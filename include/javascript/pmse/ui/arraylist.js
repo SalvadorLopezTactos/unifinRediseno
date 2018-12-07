@@ -8,14 +8,16 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 /**
- * @class ArrayList
- * Construct a List similar to Java's ArrayList that encapsulates methods for
+ * @class PMSE.ArrayList
+ * Construct a List similar to Java's PMSE.ArrayList that encapsulates methods for
  * making a list that supports operations like get, insert and others.
  *
  *      some examples:
  *      var item,
- *          arrayList = new ArrayList();
+ *          arrayList = new PMSE.ArrayList();
  *      arrayList.getSize()                 // 0
  *      arrayList.insert({                  // insert an object
  *          id: 100,
@@ -29,9 +31,9 @@
  *      arrayList.getSize();                // 0
  *      arrayList.isEmpty();                // true because the arrayList has no elements
  *
- * @constructor Returns an instance of the class ArrayList
+ * @constructor Returns an instance of the class PMSE.ArrayList
  */
-var ArrayList = function () {
+PMSE.ArrayList = function() {
     /**
      * The elements of the arrayList
      * @property {Array}
@@ -49,7 +51,7 @@ var ArrayList = function () {
     return {
 
         /**
-         * The ID of this ArrayList is generated using the function Math.random
+         * The ID of this PMSE.ArrayList is generated using the function Math.random
          * @property {number} id
          */
         id: Math.random(),
@@ -59,7 +61,7 @@ var ArrayList = function () {
          * @param {number} index
          * @returns {Object / undefined}
          */
-        get : function (index) {
+        get : function(index) {
             return elements[index];
         },
         /**
@@ -67,7 +69,7 @@ var ArrayList = function () {
          * @param {Object}
          * @chainable
          */
-        insert : function (item) {
+        insert : function(item) {
             elements[size] = item;
             size += 1;
             return this;
@@ -87,7 +89,7 @@ var ArrayList = function () {
          * @param {Object} item
          * @return {boolean}
          */
-        remove : function (item) {
+        remove : function(item) {
             index = this.indexOf(item);
             if (index === -1) {
                 return false;
@@ -101,14 +103,14 @@ var ArrayList = function () {
          * Gets the length of the list
          * @return {number}
          */
-        getSize : function () {
+        getSize : function() {
             return size;
         },
         /**
          * Returns true if the list is empty
          * @returns {boolean}
          */
-        isEmpty : function () {
+        isEmpty : function() {
             return size === 0;
         },
         /**
@@ -117,7 +119,7 @@ var ArrayList = function () {
          * @param {Object} item
          * @return {number}
          */
-        indexOf : function (item) {
+        indexOf : function(item) {
             for (i = 0; i < size; i += 1) {
                 if (item.id === elements[i].id) {
                     return i;
@@ -133,7 +135,7 @@ var ArrayList = function () {
          * @param {string} value
          * @return {Object / undefined}
          */
-        find : function (attribute, value) {
+        find : function(attribute, value) {
             var i,
                 current;
             for (i = 0; i < elements.length; i += 1) {
@@ -150,7 +152,7 @@ var ArrayList = function () {
          * @param {Object} item
          * @return {boolean}
          */
-        contains : function (item) {
+        contains : function(item) {
             if (this.indexOf(item) !== -1) {
                 return true;
             }
@@ -162,7 +164,7 @@ var ArrayList = function () {
          * @param {Function} compFunction
          * @return {boolean}
          */
-        sort : function (compFunction) {
+        sort : function(compFunction) {
             var returnValue = false;
             if (compFunction) {
                 elements.sort(compFunction);
@@ -174,21 +176,21 @@ var ArrayList = function () {
          * Returns the list as an array
          * @return {Array}
          */
-        asArray : function () {
+        asArray : function() {
             return elements;
         },
         /**
          * Returns the first element of the list
          * @return {Object}
          */
-        getFirst : function () {
+        getFirst : function() {
             return elements[0];
         },
         /**
          * Returns the last element of the list
          * @return {Object}
          */
-        getLast : function () {
+        getLast : function() {
             return elements[size - 1];
         },
 
@@ -196,7 +198,7 @@ var ArrayList = function () {
          * Returns the last element of the list and deletes it from the list
          * @return {Object}
          */
-        popLast : function () {
+        popLast : function() {
             var lastElement;
             size -= 1;
             lastElement = elements[size];
@@ -209,7 +211,7 @@ var ArrayList = function () {
          * The array values are in this order TOP, RIGHT, BOTTOM AND LEFT
          * @return {Array}
          */
-        getDimensionLimit : function () {
+        getDimensionLimit : function() {
             var result = [100000, -1, -1, 100000],
                 objects = [undefined, undefined, undefined, undefined];
             //number of pixels we want the inner shapes to be
@@ -240,7 +242,7 @@ var ArrayList = function () {
          * Clears the content of the arrayList
          * @chainable
          */
-        clear : function () {
+        clear : function() {
             if (size !== 0) {
                 elements = [];
                 size = 0;
@@ -251,7 +253,7 @@ var ArrayList = function () {
          * Returns the canvas of an element if possible
          * @return {Canvas / undefined}
          */
-        getCanvas : function () {
+        getCanvas : function() {
             return (this.getSize() > 0) ? this.get(0).getCanvas() : undefined;
         }
     };
@@ -259,6 +261,6 @@ var ArrayList = function () {
 
 // Declarations created to instantiate in NodeJS environment
 if (typeof exports !== 'undefined') {
-    module.exports = ArrayList;
+    module.exports = PMSE.ArrayList;
 //    var _ = require('../../lib/underscore/underscore.js');
 }

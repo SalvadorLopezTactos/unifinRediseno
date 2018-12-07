@@ -19,7 +19,8 @@
         'click  .btn-edit':        'toggleExistingAddressProperty',
         'click  .removeEmail':     'removeExistingAddress',
         'click  .addEmail':        'addNewAddress',
-        'change .newEmail':        'addNewAddress'
+        'change .newEmail': 'addNewAddress',
+        'click [data-action=audit-email-address]': 'auditEmailAddress',
     },
 
     _flag2Deco: {
@@ -140,7 +141,7 @@
             emailFieldHtml = this._buildEmailFieldHtml({
                 email_address: email,
                 primary_address: currentValue && (currentValue.length === 1),
-                opt_out: false,
+                opt_out: app.config.newEmailAddressesOptedOut || false,
                 invalid_email: false
             });
 
@@ -288,7 +289,8 @@
         if (_.isUndefined(dupeAddress)) {
             existingAddresses.push({
                 email_address: email,
-                primary_address: (existingAddresses.length === 0)
+                primary_address: (existingAddresses.length === 0),
+                opt_out: app.config.newEmailAddressesOptedOut || false
             });
             this.model.set(this.name, existingAddresses);
             success = true;
@@ -457,7 +459,7 @@
 
     /**
      * To display representation
-     * @param {String|Array} value single email address or set of email addresses
+     * @param {string|Array|Object} value single email address or set of email addresses.
      */
     format: function(value) {
         value = app.utils.deepCopy(value);
@@ -466,8 +468,15 @@
             _.each(value, function(email) {
                 // On render, determine which e-mail addresses need anchor tag included
                 // Needed for handlebars template, can't accomplish this boolean expression with handlebars
-                email.hasAnchor = this.def.emailLink && !email.opt_out && !email.invalid_email;
+                email.hasAnchor = this.def.emailLink && !email.invalid_email;
             }, this);
+        } else if (_.isObject(value) && !_.isEmpty(value)) {
+            // Expecting an object containing attributes for an email address
+            value = [{
+                email_address: value.email_address,
+                email_address_id: value.id,
+                primary_address: value.primary_address,
+            }];
         } else if ((_.isString(value) && value !== "") || this.view.action === 'list') {
             // expected an array with a single address but got a string or an empty array
             value = [{
@@ -475,6 +484,10 @@
                 primary_address:true,
                 hasAnchor:true
             }];
+        }
+
+        if (value && value.length === 1) {
+            value[0].soleEmail = true;
         }
 
         value = this.addFlagLabels(value);
@@ -540,6 +553,33 @@
     },
 
     /**
+     * Opens a drawer to audit the email address.
+     */
+    auditEmailAddress: function() {
+        var email = _.first(this.value);
+        var emailModel = app.data.createBean('EmailAddresses', {
+            name: email.email_address,
+            id: email.email_address_id
+        });
+
+        var parentContext = this.context.getChildContext({
+            forceNew: true,
+            model: emailModel,
+            module: 'EmailAddresses',
+            modelId: email.email_address_id
+        });
+
+        app.drawer.open({
+            layout: 'audit',
+            context: {
+                module: 'Audit',
+                model: emailModel,
+                parent: parentContext,
+            }
+        });
+    },
+
+    /**
      * Apply focus on the new email input field.
      */
     focus: function () {
@@ -552,17 +592,36 @@
      * Retrieve link specific email options for launching the email client
      * Builds upon emailOptions on this
      *
-     * @param $link
+     * @param {jQuery} $link
      * @private
      */
     _retrieveEmailOptionsFromLink: function($link) {
         return {
-            to_addresses: [
+            to: [
                 {
-                    email: $link.data('email-to'),
-                    bean: this.emailOptions.related
+                    email: app.data.createBean('EmailAddresses', {
+                        id: $link.data('email-address-id'),
+                        email_address: $link.data('email-to'),
+                        opt_out: $link.data('email-opt-out')
+                    }),
+                    bean: this.model
                 }
             ]
         };
+    },
+
+    /**
+     * @override
+     *
+     * Check if the value is a string representing the UUID.
+     */
+    _isErasedField: function() {
+        if (!this.model) {
+            return false;
+        }
+
+        var value = this.model.get(this.name);
+        var erasedFields = this.model.get('_erased_fields');
+        return _.isString(value) && _.contains(erasedFields, this.name);
     }
 })

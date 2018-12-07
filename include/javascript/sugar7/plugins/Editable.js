@@ -164,8 +164,9 @@
                     return;
                 }
 
-                var viewName = !!isEdit ? 'edit' : this.action,
-                    numOfToggledFields = fields.length;
+                var viewName = !!isEdit ? 'edit' : this.action;
+                var numOfToggledFields = fields.length;
+                var view = this;
 
                 _.each(fields, function(field) {
                     if (field.disposed) {
@@ -193,8 +194,13 @@
                                 .toggleClass('edit', (viewName === 'edit'));
 
                             numOfToggledFields--;
-                            if ((numOfToggledFields === 0) && _.isFunction(callback)) {
-                                callback();
+
+                            if (numOfToggledFields === 0) {
+                                if (_.isFunction(callback)) {
+                                    callback();
+                                }
+
+                                view.trigger('editable:toggle_fields', fields, viewName);
                             }
                         }
                     }, field);
@@ -241,7 +247,11 @@
                 var viewName;
 
                 if (_.isUndefined(isEdit)) {
-                    viewName = (field.tplName === this.action) ? 'edit' : this.action;
+                    if (field.tplName === this.action || field.tplName === 'erased') {
+                        viewName = 'edit';
+                    } else {
+                        viewName = this.action;
+                    }
                 } else {
                     viewName = !!isEdit ? 'edit' : this.action;
                 }
@@ -401,8 +411,7 @@
 
                 if (field.def.readonly ||
                     (field.def.type !== 'fieldset' && isLocked) ||
-                    _.indexOf(noEditFields, field.name) >= 0 ||
-                    field.parent) {
+                    _.indexOf(noEditFields, field.name) >= 0) {
                     return true;
                 }
 

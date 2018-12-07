@@ -127,4 +127,14 @@ class Task
     {
         return count($this->items) == 0;
     }
+
+    /**
+    * Add/Update the params of this task
+    *
+    * @param array $params
+    */
+    public function mergeParams(array $params)
+    {
+        $this->scope->mergeParams($params);
+    }
 }

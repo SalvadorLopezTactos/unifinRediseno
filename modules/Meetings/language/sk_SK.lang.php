@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Informačný panel so zoznamom stretnutí',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Informačný panel so záznamom stretnutí',
+
 	'ERR_DELETE_RECORD' => 'Ak chcete odstrániť schôdzku, musíte zadať číslo záznamu.',
 	'LBL_ACCEPT_THIS'=>'Súhlasíte?',
 	'LBL_ADD_BUTTON'=> 'Pridať',

@@ -14,11 +14,11 @@
     app.events.on('router:init', function() {
         var routes = [
             {
-                name: 'dashboard',
+                name: 'portal-index',
                 route: '',
                 callback: function() {
                     app.controller.loadView({
-                        layout: 'dashboard'
+                        layout: 'home'
                     });
                 }
             },
@@ -96,11 +96,11 @@
                 }
             },
             {
-                name: 'listHome',
+                name: 'home',
                 route: 'Home',
                 callback: function() {
                     app.controller.loadView({
-                        layout: 'dashboard'
+                        layout: 'home'
                     });
                 }
             },

@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'Odp.:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Nieprawidłowe hasło lub login',
-	'ERR_BODY_TOO_LONG'		=> '\rTekst jest za długi, aby pobrać CAŁĄ wiadomość. Przycięto.',
+	'ERR_BODY_TOO_LONG'		=> '\\rTekst jest za długi, aby pobrać CAŁĄ wiadomość. Przycięto.',
 	'ERR_INI_ZLIB'			=> 'Nie można czasowo wyłączyć kompresji Zlib. Testowanie ustawień może się nie powieść.',
 	'ERR_MAILBOX_FAIL'		=> 'Nie można sprawdzić żadnych skrzynek pocztowych.',
 	'ERR_NO_IMAP'			=> 'Nie znaleziono bibliotek IMAP.  Rozwiąż ten problem przed kontynuowaniem konfiguracji poczty przychodzącej',

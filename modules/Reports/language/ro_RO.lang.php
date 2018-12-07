@@ -41,7 +41,7 @@ $mod_strings = array (
   'LBL_REPORTS' => 'Rapoarte',
   'LBL_TITLE' => 'Titlu',
   'LBL_UNTITLED' => 'fara titlu',
-  'LBL_MODULE' => 'modul',
+  'LBL_MODULE' => 'Modul',
   'LBL_ACCOUNTS' => 'Conturi',
   'LBL_OPPORTUNITIES' => 'Oportunitati',
   'LBL_CONTACTS' => 'Contacte',
@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Dupa Trimestru',
     'LBL_BY_FISCAL_YEAR' => 'Pe an fiscal',
     'LBL_BY_FISCAL_QUARTER' => 'Pe trimestru fiscal',
+    'LBL_AMOUNT' => 'Valoare',
     'LBL_COUNT' => 'Numara',
+    'LBL_PERCENT' => 'Procentaj',
     'LBL_SUM' => 'SUMA',
     'LBL_AVG' => 'MEDIE',
     'LBL_MAX' => 'MAXIM',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Luna',
     'LBL_YEAR' => 'An',
     'LBL_QUARTER' => 'Trimestru',
+    'LBL_FISCAL' => 'Fiscal',
     'LBL_FISCAL_YEAR' => 'An fiscal',
     'LBL_FISCAL_QUARTER' => 'Trimestru fiscal',
 	'LBL_YESTERDAY'=>'Ieri',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Trimestrul Urmator',
     'LBL_ADD_RELATE' => "Adauga Relationat",
     'LBL_DEL_THIS' => "Eliminare",
-    'LBL_ALERT_CANT_ADD' => 'Nu puteti adauga un modul relationat pana nu selectati un tabel cu care sa-l relationati.\nSelectati un modul in lista derulanta stanga a butonului &#39;Adauga Relationat&#39; pe care ati dat click.',
+    'LBL_ALERT_CANT_ADD' => 'Nu puteti adauga un modul relationat pana nu selectati un tabel cu care sa-l relationati.\\nSelectati un modul in lista derulanta stanga a butonului &#39;Adauga Relationat&#39; pe care ati dat click.',
     'LBL_BY_DAY' => 'Dupa Zi',
     'LBL_DAY' => 'Zi',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Module Relationate Optionale',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'mai mult sau egal cu',
 
     'LBL_FILTER_BY_MODULE' => 'Pe modul',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Cu grafice',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Eroare la recuperarea datelor din raportul detaliat pentru această acțiune. Contactați proprietarul raportului pentru asistență.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Raport detaliat nedisponibil',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'O vizualizare de tip listă a unui modul afişează toate rapoartele care îndeplinesc criteriile de căutare curente şi la care utilizatorii au acces. Puteţi vizualiza detaliile de bază ale fiecărui raport în coloanele câmpului din vizualizarea listă și în previzualizare. Puteți seta etichete pentru rapoarte și puteți crea filtre. Faceți clic pe numele raportului pentru a vizualiza raportul sau selectați „Editare raport” în meniul de acțiuni pentru a modifica raportul.',
+  );

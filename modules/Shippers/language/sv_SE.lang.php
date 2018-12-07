@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Ett objektnummer måste specificeras för att radera leverantören.',
   'NTC_STATUS' => 'Sätt statusen till inaktiv för att ta bort leverantören från dropdownmenyn över leverantörer',
   'NTC_LIST_ORDER' => 'Sätt ordningen för hur leverantören ska visas i dropdown menyn över leverantörer',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Inaktiv',
-),
-	'LBL_EDITLAYOUT' => 'Redigera layout' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Redigera layout' /*for 508 compliance fix*/,
 );
-
 
 ?>

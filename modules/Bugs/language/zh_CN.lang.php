@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => '错误列表仪表板',
+  'LBL_BUGS_RECORD_DASHBOARD' => '错误记录仪表板',
+
   'LBL_MODULE_NAME' => '缺陷追踪',
   'LBL_MODULE_NAME_SINGULAR'	=> '错误',
   'LBL_MODULE_TITLE' => '缺陷跟踪：首页',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => '客户反馈',
   'LBL_PROJECTS_SUBPANEL_TITLE' => '项目',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => '文件',
-  'LBL_SYSTEM_ID' => '系统编号',
   'LBL_LIST_ASSIGNED_TO_NAME' => '指定使用者',
 	'LBL_ASSIGNED_TO_NAME' => '指派',
 

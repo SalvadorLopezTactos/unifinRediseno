@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => '上次修改人：',
   'LBL_ASSIGNED_USER' => '指派的使用者：',
   'LBL_ASSIGNED_USER_NAME' => '已指派至',
-  'LBL_SYSTEM_ID' =>'系統 ID：',
   'LBL_TEAM_NAME' =>'小組名稱：',
   'LBL_TYPE'=>'類型：',
   'LBL_SUBJECT' => '主題：',

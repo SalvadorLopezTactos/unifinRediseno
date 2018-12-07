@@ -5508,6 +5508,9 @@ input, select, textarea, button
 .reportChartContainer .chartContainer .scrollBars {
   max-height: 480px;
 }
+.reportChartContainer svg {
+    max-height: none;
+}
 
 /* for all views */
 .view tr, .view td, .view h4, .view div

@@ -189,7 +189,7 @@ class SugarACLTeamBased extends SugarACLStrategy
         // Db format with seconds.
         $dateModified = !empty($bean->fetched_row['date_modified']) ? $bean->fetched_row['date_modified'] : '';
         $cacheAccessKey = $user->id . $bean->id . $dateModified;
-        if (array_key_exists($cacheAccessKey, self::$cacheAccess)) {
+        if (!empty($dateModified) && array_key_exists($cacheAccessKey, self::$cacheAccess)) {
             return self::$cacheAccess[$cacheAccessKey];
         }
 
@@ -205,7 +205,6 @@ class SugarACLTeamBased extends SugarACLStrategy
             'alias' => 'tst',
         ));
         $join->on()->equalsField('tst.team_set_id', 'bean.acl_team_set_id');
-        $join->on()->equals('tst.deleted', 0);
 
         $join = $sq->joinTable('team_memberships', array(
             'alias' => 'tm',

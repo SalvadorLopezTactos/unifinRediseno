@@ -106,6 +106,8 @@ function email_layout ($layout) {
 	//Handle PDF Attachment
 	$file_name = get_quote_pdf($layout);
 	$note = BeanFactory::newBean('Notes');
+    $note->id = \Sugarcrm\Sugarcrm\Util\Uuid::uuid1();
+    $note->new_with_id = true;
 	$note->filename = $file_name;
 	$note->team_id = "";
 	$note->file_mime_type = "application/pdf";
@@ -113,18 +115,19 @@ function email_layout ($layout) {
 	$note->name = $lbl_email_attachment.$file_name;
 
 	//save the pdf attachment note
-	$note->parent_id = $email_object->id;
-	$note->parent_type = "Emails";
-	$note->save();
-	$note_id = $note->id;
+	$note->email_id = $email_object->id;
+	$note->email_type = "Emails";
 
+    // Move the file before saving so that the file size is captured during save.
 	$source = "upload://$file_name";
-	$destination = "upload://$note_id";
+    $destination = "upload://{$note->id}";
 
 	if (!rename($source, $destination)){
 		$msg = str_replace('$destination', $destination, $mod_strings['LBL_RENAME_ERROR']);
 		die($msg);
     }
+
+    $note->save();
 
 	//return the email id
 	return $email_id;

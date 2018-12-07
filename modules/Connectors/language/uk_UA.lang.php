@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Помилка: Немає полів модуля, які були розташовані для відображення в результатах. Будь ласка, зверніться до системного адміністратора.',
     'LBL_INFO_INLINE' => 'Інформація' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Закрити' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'Не вдалося знайти з&#39;єднувач для даного ідентифікатора джерела.',
 );
 

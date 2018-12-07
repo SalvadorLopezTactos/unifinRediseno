@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Offertes (verzenden aan)',
 	'LNK_ACCOUNT_REPORTS' => 'Bekijk Organisatierapporten',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Documenten',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Dashboard accountlijst',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Dashboard accountrecord',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafieken',
 	'LBL_DEFAULT' => 'Overzichten',

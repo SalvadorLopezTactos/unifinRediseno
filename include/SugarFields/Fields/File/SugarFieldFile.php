@@ -120,6 +120,7 @@ class SugarFieldFile extends SugarFieldBase
             $bean->$field = $upload_file->get_stored_file_name();
             $bean->file_mime_type = $upload_file->mime_type;
             $bean->file_ext = $upload_file->file_ext;
+            $bean->file_size = $upload_file->file_size;
             $move=true;
         } else {
             $this->error = $upload_file->getErrorMessage();
@@ -222,7 +223,9 @@ class SugarFieldFile extends SugarFieldBase
             }
             // don't copy the actual file.
             // for now, we only handle email notes
-            if (!empty($params['parent_type']) &&  $params['parent_type'] == 'Emails') {
+            if (!empty($params['email_type']) &&
+                in_array($params['email_type'], array('Emails', 'EmailTemplates'))
+            ) {
                 $bean->upload_id = $duplicateModuleId;
             }
             else {
@@ -301,7 +304,9 @@ class SugarFieldFile extends SugarFieldBase
                 $duplicateBean = BeanFactory::getBean('Notes', $duplicateModuleId);
                 $uploadId = $duplicateBean->getUploadId();
                 // don't copy the actual file for email notes
-                if (!empty($params['parent_type']) &&  $params['parent_type'] == 'Emails') {
+                if (!empty($params['email_type']) &&
+                    in_array($params['email_type'], array('Emails', 'EmailTemplates'))
+                ) {
                     $bean->upload_id = $uploadId;
                 }
                 else {

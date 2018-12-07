@@ -77,10 +77,12 @@ class ImportViewStep3 extends ImportView
             }
         }
 
-        $delimiter = $this->getRequestDelimiter();
+        $delimiter = $this->getDelimiterValue();
         $customEnclosure = $this->request->getValidInputRequest('custom_enclosure', null, '');
 
-        $this->ss->assign("CUSTOM_DELIMITER", $delimiter);
+        $delimiters = $this->getDelimitersFromRequest();
+        $this->ss->assign("CUSTOM_DELIMITER", $delimiters['custom']);
+        $this->ss->assign("CUSTOM_DELIMITER_OTHER", $delimiters['other']);
         $this->ss->assign("CUSTOM_ENCLOSURE", htmlentities($customEnclosure));
 
        //populate import locale  values from import mapping if available, these values will be used througout the rest of the code path
@@ -432,24 +434,6 @@ class ImportViewStep3 extends ImportView
        return 'ImportMapOther';
     }
 
-
-    protected function getRequestDelimiter()
-    {
-        $singleCharConstraints = array('Assert\Type' => array('type' => 'string'), 'Assert\Length' => array('min' => 1, 'max' => 2));
-        $customDelimiter = $this->request->getValidInputRequest('custom_delimiter', $singleCharConstraints, '');
-        $delimiter = !empty($customDelimiter) ? $customDelimiter : ",";
-
-        switch ($delimiter)
-        {
-            case "other":
-                $delimiter = $this->request->getValidInputRequest('custom_delimiter_other', $singleCharConstraints, '');
-                break;
-            case '\t':
-                $delimiter = "\t";
-                break;
-        }
-        return $delimiter;
-    }
 
     protected function getImportColumns()
     {

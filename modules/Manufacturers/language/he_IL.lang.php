@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'כדי למחוק יצרן זה אנא ספק מספר רשומה.',
   'NTC_STATUS' => 'כדי להעלים יצרן זה מהרשימה הנגללת הפוך אותו ללא זמין',
   'NTC_LIST_ORDER' => 'קבע את הסדר שבו יופיע יצרן זה ברשימה הנגללת',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'פעיל',
-    'Inactive' => 'לא פעיל',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'ייבוא יצרנים',
 	'LBL_EDITLAYOUT' => 'ערוך תצורה' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'שורות פרטי רווח',

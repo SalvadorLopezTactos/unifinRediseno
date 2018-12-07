@@ -39,6 +39,7 @@ class SubscriptionsApi extends SugarApi
     public function subscribeToRecord(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record'));
+        $this->requireActivityStreams($args['module']);
         $bean = BeanFactory::retrieveBean($args['module'], $args['record']);
 
         if (empty($bean)) {
@@ -64,6 +65,7 @@ class SubscriptionsApi extends SugarApi
     public function unsubscribeFromRecord(ServiceBase $api, array $args)
     {
         $this->requireArgs($args, array('module', 'record'));
+        $this->requireActivityStreams($args['module']);
         $bean = BeanFactory::retrieveBean($args['module'], $args['record']);
 
         if (empty($bean)) {
@@ -84,5 +86,18 @@ class SubscriptionsApi extends SugarApi
         }
 
         return Subscription::unsubscribeUserFromRecord($api->user, $bean);
+    }
+
+    /**
+     * Checks to see if Activity Streams is disabled
+     *
+     * @param string $moduleName
+     * @throws SugarApiExceptionNotAuthorized
+     */
+    private function requireActivityStreams($moduleName)
+    {
+        if (!Activity::isEnabled()) {
+            throw new SugarApiExceptionNotAuthorized(translate('EXCEPTION_ACTIVITY_STREAM_DISABLED', $moduleName));
+        }
     }
 }

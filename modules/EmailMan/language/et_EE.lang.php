@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'klõpsake siin',
 	'TXT_REMOVE_ME'								=> 'Enda eemaldamiseks sellest e-posti listist',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'Saada teavitus määratud kasutaja e-posti aadressilt',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Jäta uued meiliaadressid adressaatide seast automaatselt välja',
 
 	'LBL_SECURITY_TITLE'						=> 'E-posti turvasätted',
 	'LBL_SECURITY_DESC'							=> 'Kontrollige järgmist, mis EI tohiks olla lubatud sissetulevas e-kirjas või kuvatud e-kirjade moodulis.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Luba kasutajatel seda kontot kasutada väljaminevate e-kirjade jaoks:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Kui valitud on see suvand, saavad kõik kasutajad saata e-kirju, kasutades sama väljaminevate<br> e-kirjade kontot, mida kasutati süsteemiteadete ja -hoiatuste saatmiseks. Kui seda suvandit pole valitud,<br> saavad kasutajad väljamineva e-kirja serverit siiski kasutada pärast oma kontoteabe esitamist.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Lubatuna on määrava kasutaja nimi ja e-posti aadress e-kirja väljale Saatja kaasatud. See funktsioon ei pruugi töötada SMTP serveritega, mis ei võimalda saatmist serveri kontost erinevalt e-posti kontolt.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Uued lisatud meiliaadressid jäetakse adressaatide hulgast automaatselt välja. Välja jäetud meiliaadressidele ei saa saata kampaania meile. Selle sätte muutmine ei mõjuta olemasolevaid meiliaadresse.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

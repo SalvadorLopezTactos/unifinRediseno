@@ -32,10 +32,13 @@ class Quarter445TimePeriod extends TimePeriod implements TimePeriodInterface {
 
     /**
      * build leaves for the timeperiod by creating the specified types of timeperiods
-     *
-     * @return mixed
+     * @param int $shownBackwardDifference
+     * @param int $shownForwardDifference
+     * @param $quadrantCt int value of quadrants difference between current and target dates
+     * @return array|void
+     * @throws Exception
      */
-    public function buildLeaves($shownBackwardDifference, $shownForwardDifference)
+    public function buildLeaves($shownBackwardDifference, $shownForwardDifference, $quadrantCt)
     {
         if($this->hasLeaves()) {
             throw new Exception("This TimePeriod already has leaves");

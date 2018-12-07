@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Per kwartaal',
     'LBL_BY_FISCAL_YEAR' => 'Per fiscaal jaar',
     'LBL_BY_FISCAL_QUARTER' => 'Per fiscaal kwartaal',
+    'LBL_AMOUNT' => 'Bedrag',
     'LBL_COUNT' => 'Aantal',
+    'LBL_PERCENT' => 'Percentage',
     'LBL_SUM' => 'SOM',
     'LBL_AVG' => 'GEM',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Maand',
     'LBL_YEAR' => 'Jaar',
     'LBL_QUARTER' => 'Kwartaal',
+    'LBL_FISCAL' => 'Fiscaal',
     'LBL_FISCAL_YEAR' => 'Fiscaal jaar',
     'LBL_FISCAL_QUARTER' => 'Fiscaal kwartaal',
 	'LBL_YESTERDAY'=>'Gisteren',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Volgend kwartaal',
     'LBL_ADD_RELATE' => "Voeg gerelateerde module toe",
     'LBL_DEL_THIS' => "Verwijder",
-    'LBL_ALERT_CANT_ADD' => 'U kunt geen gerelateerde module toevoegen alvorens een tabel te kiezen waar een relatie mee bestaat.\nKies een module uit de keuzelijst links van de knop &#39;Voeg gerelateerde module toe&#39;.',
+    'LBL_ALERT_CANT_ADD' => 'U kunt geen gerelateerde module toevoegen alvorens een tabel te kiezen waar een relatie mee bestaat.\\nKies een module uit de keuzelijst links van de knop &#39;Voeg gerelateerde module toe&#39;.',
     'LBL_BY_DAY' => 'Per dag',
     'LBL_DAY' => 'Dag',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Optioneel gerelateerde modules',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Groter of gelijk aan',
 
     'LBL_FILTER_BY_MODULE' => 'Per module',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Met grafieken',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Fout tijdens ophalen drillthrough rapportgegevens voor deze handeling. Neem contact op met de eigenaar van het rapport voor hulp.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Drillthrough niet beschikbaar',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'De lijstweergave toont alle rapporten die voldoen aan de huidige zoekcriteria en waar gebruikers toegang toe hebben. U kunt de basisgegevens van elk record zien in de kolommen van de lijstweergave en in de voorvertoning. U kunt tags instellen voor rapporten en filters aanmaken. Klik op de naam van het rapport om het rapport te bekijken of klik op &#39;Rapport bewerken&#39; in het actiemenu om het rapport te wijzigen.',
+  );

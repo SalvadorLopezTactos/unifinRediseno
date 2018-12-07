@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Ottieni una chiave utente da LogMeIn registrando una nuova applicazione GoToMeeting.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Azioni per la registrazione della propria istanza:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Effettuare il login al proprio account LogMeIn Developer Center: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Fare clic su My Apps (Le mie app)</li>
+    <li>Fare clic su Add a new App (Aggiungi una nuova app)</li>
+    <li>Completare tutti i campi del modulo Add App (Aggiungi app):</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>App Name (Nome app)</li>
+            <li>Description (Descrizione)</li>
+            <li>Product API (API prodotto): selezionare GoToMeeting</li>
+            <li>Application URL (URL applicazione): immettere l\'URL istanza</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Fare clic sul pulsante Create App (Crea app)</li>
+    <li>Dall\'elenco delle app, fare clic sul nome della propria app</li>
+    <li>Fare clic sulla scheda Keys (Chiavi)</li>
+    <li>Copiare il valore della chiave utente e inserirlo sotto</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Chiave utente',
 );

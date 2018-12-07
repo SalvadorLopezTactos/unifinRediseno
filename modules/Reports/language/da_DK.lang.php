@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Efter kvartal',
     'LBL_BY_FISCAL_YEAR' => 'Efter regnskabsåret',
     'LBL_BY_FISCAL_QUARTER' => 'Efter regnskabskvartal',
+    'LBL_AMOUNT' => 'Beløb',
     'LBL_COUNT' => 'Antal',
+    'LBL_PERCENT' => 'Procent',
     'LBL_SUM' => 'SUM',
     'LBL_AVG' => 'GNSN',
     'LBL_MAX' => 'MAKS',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Måned',
     'LBL_YEAR' => 'År',
     'LBL_QUARTER' => 'Kvartal',
+    'LBL_FISCAL' => 'Skattemæssige',
     'LBL_FISCAL_YEAR' => 'Regnskabsår',
     'LBL_FISCAL_QUARTER' => 'Regnskabskvartal',
 	'LBL_YESTERDAY'=>'I går',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Næste kvartal',
     'LBL_ADD_RELATE' => "Tilføj relateret",
     'LBL_DEL_THIS' => "Fjern",
-    'LBL_ALERT_CANT_ADD' => 'Du kan ikke tilføje et relateret modul, før du har valgt en tabel at relatere fra.\nVælg et modul på rullelisten til venstre for knappen \\"Tilføj relateret\\", du klikkede på.',
+    'LBL_ALERT_CANT_ADD' => 'Du kan ikke tilføje et relateret modul, før du har valgt en tabel at relatere fra.\\nVælg et modul på rullelisten til venstre for knappen \\"Tilføj relateret\\", du klikkede på.',
     'LBL_BY_DAY' => 'Efter dag',
     'LBL_DAY' => 'Dag',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Valgfri relaterede moduler',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Mere end eller lig med',
 
     'LBL_FILTER_BY_MODULE' => 'Efter modul',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Med diagrammer',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Fejl under hentning af Drillthrough rapportdata for denne handling. Kontakt ejeren for hjælp.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Drillthrough ikke tilgængelig',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'Listen viser alle rapporter, der opfylder de aktuelle søgekriterier og som brugere har adgang til. Du kan se de grundlæggende oplysninger om hver enkelt rapport i feltet kolonner i listevisningen og i forhåndsvisningen. Du kan angive tags for rapporter og oprette filtre. Klik på rapportens navn for at se rapporten eller vælge &#39;Rediger rapport&#39; i handlingsmenuen at ændre rapporten.',
+  );

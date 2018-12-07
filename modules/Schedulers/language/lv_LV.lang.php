@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Atjaunināt Zināšanu bāzes satura rakstus.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Publicēt apstiprinātos rakstus un Expire KB Articles.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Scheduled Job',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Atjaunot denormalizētos komandas drošības datus',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Intervāls:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elastīgās meklēšanas rindas plānotājs',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Noņemt diagnostikas rīka failus',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Noņemt pagaidu failus',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Atjaunot denormalizētos komandas drošības datus',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Masveida e-pasta kampaņas izpildīt pa nakti',
 'LBL_ASYNCMASSUPDATE' => 'Notiek asinhronas masveida izmaiņas (Mass Update)',

@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Odaberi' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Ukloni' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Vrsta',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Predlošci za e-poštu',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Predlošci e-pošte',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Varijable',
 );

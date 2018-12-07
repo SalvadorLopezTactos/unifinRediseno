@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'KBContent makalelerini güncelleyin.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Onaylanan makaleleri yayınla ve KB Makalelerinin süresini sonlandır.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflow Programlanmış İşi',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Normalleştirilmemiş Takım Güvenliği Verisini Yeniden Oluştur',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Sıklık Derecesi:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch Queue Zamanlayıcısı',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Hata bulma aracı dosyalarını sil',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Geçici dosyaları sil',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Normalleştirilmemiş Takım Güvenliği Verisini Yeniden Oluştur',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Gecelik Çalışan Kitlesel E-Posta Kampanyaları',
 'LBL_ASYNCMASSUPDATE' => 'Asenkron Toplu Güncelleme Uygulayın',

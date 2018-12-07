@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => '削除済み',
   'LBL_EMAIL_ADDRESS'=>'Eメールアドレス',
   'LBL_CONTACTS_SYNC' => '取引先担当者',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        'この従業員は<a href="{0}" target="_blank">クラウドコンソール</a>内でIDMモードの場合にのみ作成できます。',
 );
 
 

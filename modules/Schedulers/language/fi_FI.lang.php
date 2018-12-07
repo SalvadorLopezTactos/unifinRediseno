@@ -39,6 +39,7 @@ $mod_strings = array (
 'LBL_OOTB_KBCONTENT_UPDATE' => 'Päivitä KBContent-artikkelit.',
 'LBL_OOTB_KBSCONTENT_EXPIRE' => 'Julkaise hyväksytyt artikkelit ja sulje KB-artikkelit.',
 'LBL_OOTB_PROCESS_AUTHOR_JOB' => 'Advanced Workflown ajoitettu työ',
+'LBL_OOTB_TEAM_SECURITY_DENORM_REBUILD' => 'Muodosta uudelleen denormalisoidut tiimin suojaustiedot',
 
 // List Labels
 'LBL_LIST_JOB_INTERVAL' => 'Aikaväli:',
@@ -142,6 +143,7 @@ $mod_strings = array (
 'LBL__SUGARCRM_SUGARCRM_ELASTICSEARCH_QUEUE_SCHEDULER' => 'Elasticsearch jonon ajoittaja',
 'LBL_SUGARJOBREMOVEDIAGNOSTICFILES' => 'Poista diagnostiikkatyökalujen tiedostot',
 'LBL_SUGARJOBREMOVETMPFILES' => 'Poista väliaikaiset tiedostot',
+'LBL_SUGARCRM_SUGARCRM_DENORMALIZATION_TEAMSECURITY_JOB_REBUILDJOB' => 'Muodosta uudelleen denormalisoidut tiimin suojaustiedot',
 
 'LBL_RUNMASSEMAILCAMPAIGN' => 'Suorita yölliset massaviestikampanjat',
 'LBL_ASYNCMASSUPDATE' => 'Suorita asynkroniset massapäivitykset',

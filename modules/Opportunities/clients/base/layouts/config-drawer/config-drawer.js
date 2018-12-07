@@ -17,12 +17,10 @@
     extendsFrom: 'ConfigDrawerLayout',
 
     /**
-     * @inheritdoc
-     *
      * Checks Opportunities ACLs to see if the User is a system admin
      * or if the user has a developer role for the Opportunities module
      *
-     * @override
+     * @inheritdoc
      */
     _checkModuleAccess: function() {
         var acls = app.user.getAcls().Opportunities,

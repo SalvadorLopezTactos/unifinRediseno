@@ -94,7 +94,7 @@ switch ($view) {
 			//value there as the dev_status value
 			$dev_status = getVersionStatus($GLOBALS['sugar_version']);
 			$send_version = getMajorMinorVersion($GLOBALS['sugar_version']);
-			$editionMap = array('ENT' => 'Enterprise', 'PRO' => 'Professional', 'CE' => 'Community_Edition');
+            $editionMap = array('ENT' => 'Enterprise', 'PRO' => 'Professional');
 			if(!empty($editionMap[$send_edition])){
 				$send_edition = $editionMap[$send_edition];
 			}
@@ -106,7 +106,6 @@ switch ($view) {
                     array('name' => 'Administration', 'action' => 'updater', 'anchor' => '1910574'),
                     array('name' => 'Administration', 'action' => 'licensesettings', 'anchor' => '1910574'),
                     array('name' => 'Administration', 'action' => 'diagnostic', 'anchor' => '1111949'),
-                    array('name' => 'Administration', 'action' => 'listviewofflineclient', 'anchor' => '1111949'),
                     array('name' => 'Administration', 'action' => 'enablewirelessmodules', 'anchor' => '1111949'),
                     array('name' => 'Administration', 'action' => 'backups', 'anchor' => '1111949'),
                     array('name' => 'Administration', 'action' => 'upgrade', 'anchor' => '1111949'),

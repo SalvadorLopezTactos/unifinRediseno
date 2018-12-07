@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Pulpit listy list docelowych',
+
   'LBL_MODULE_NAME' => 'Grupy odbiorców',
   'LBL_MODULE_NAME_SINGULAR' => 'Grupa odbiorców',
   'LBL_MODULE_ID'   => 'Grupy odbiorców',

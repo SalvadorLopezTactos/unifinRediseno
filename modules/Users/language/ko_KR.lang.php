@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> '사용자 정보가 발견되지 않았습니다.',
     'ERR_USER_NAME_EXISTS'              => '사용자 이름 {0} 이미 존재합니다. 중복 사용자 이름이 허용되지 않습니다. 사용자 이름을 고유한 것으로 변경하십시오.',
 	'ERR_USER_IS_LOCKED_OUT'			=> '이 사용자는 Sugar어플리케이션에 들어오지 못하며 기존의 비밀번호를 이용해 접속할수 없습니다.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => '외부 인증 전용 사용자는 Sugar 자격증명을 사용하여 로그인할 수 없습니다.',
 
 	'LBL_PASSWORD_SENT'                => '비밀번호 업데이트',
 	'LBL_CANNOT_SEND_PASSWORD'         => '비밀번호를 보낼수 없습니다.',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> '수신인 이메일 주소',
 	'ERR_SERVER_STATUS'					=> '귀하의 서버 상태',
 	'ERR_SERVER_SMTP_EMPTY'				=> '시스템이 사용자에 이메일을 보낼수 없습니다. 이메일 설정에서 발신 메일 구성을 확인하십시오',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => '사용자는 IDM 모드의 <a href="{0}" target="_blank">클라우드 콘솔</a>에서만 생성할 수 있습니다.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => '기본 이메일 주소는 IDM 모드의 <a href="{0}" target="_blank">클라우드 콘솔</a>에서만 업데이트할 수 있습니다.',
 
     'LBL_EMAIL_ADDRESS'                 => '이메일 주소:',
 
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => '분',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => '초',
     'LBL_LOGIN_ADMIN_CALL'              => '시스템 관리자에 문의하십시오',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'IDM 모드에서 OpenID Connect(OIDC) 인증을 받으려면 GMP PHP 확장을 설치하십시오.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => '로그아웃했습니다. 다시 로그인하려면 클릭하십시오',
     'LBL_LOGGED_OUT_2' => '여기',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => '사용자 보고서',
     'LBL_CONTACTS_SYNC' => '연락처',
     'LBL_DETAIL' => '사용자 프로필',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        '특정 필드를 수정할 수 없는 경우 Cloud Console에 로그인하여 필드를 관리하십시오.',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        '편집 할수 없는 특정 필드를 변경하려면,' .
+        '관리자에게 연락하여 변경사항을 알리십시오.',
 ); // END STRINGS DEFS
 
 ?>

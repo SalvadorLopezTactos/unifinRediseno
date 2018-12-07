@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> '回覆：',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> '登入名或密碼不正確',
-	'ERR_BODY_TOO_LONG'		=> '\r正文文字過長，無法擷取完整電子郵件。已修剪。',
+	'ERR_BODY_TOO_LONG'		=> '\\r正文文字過長，無法擷取完整電子郵件。已修剪。',
 	'ERR_INI_ZLIB'			=> '暫時無法關閉 Zlib 壓縮。「測試設定」可能失敗。',
 	'ERR_MAILBOX_FAIL'		=> '無法抓取任何郵件帳戶。',
 	'ERR_NO_IMAP'			=> '未發現 IMAP 庫。請在繼續使用輸入電子郵件之前解決此問題。',

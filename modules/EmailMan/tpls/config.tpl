@@ -171,7 +171,7 @@ function change_state(radiobutton) {
 		    <td width="15%">&nbsp;</td>
             <td width="40%">&nbsp;</td>
 		    <td width="40%">&nbsp;</td>
-		</tr>		
+		</tr>
 </table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="edit view">
 	<tr>
@@ -194,17 +194,26 @@ function change_state(radiobutton) {
         </td>
     </tr>
      <tr>
-    	<td width="20%" scope="row" valign='top'>
-    	   {$MOD.LBL_EMAIL_DEFAULT_DELETE_ATTACHMENTS}:&nbsp;
-    	</td>
-    	<td width="30%"  valign='top'>
-    		<input type='checkbox' name='email_default_delete_attachments' value="1" {$DEFAULT_EMAIL_DELETE_ATTACHMENTS}>
-    	</td>
-    	<td scope="row" width="20%">
-    	   {$MOD.LBL_NOTIFY_SEND_FROM_ASSIGNING_USER}:
-           <img border="0" class="inlineHelpTip" onclick="return SUGAR.util.showHelpTips(this,'{$MOD.LBL_FROM_ADDRESS_HELP|escape}','','','dialogHelpPopup')" src="index.php?entryPoint=getImage&themeName={$THEME}&imageName=helpInline.gif">
-    	</td>
-    	<td width="30%"  valign='top'><input type='hidden' name='notify_send_from_assigning_user' value='0'><input name='notify_send_from_assigning_user' value="2" tabindex='1' class="checkbox" type="checkbox" {$notify_send_from_assigning_user}></td>
+         <td scope="row" width="20%">
+             {$MOD.LBL_NOTIFY_SEND_FROM_ASSIGNING_USER}:
+             <img border="0" class="inlineHelpTip"
+                  onclick="return SUGAR.util.showHelpTips(this,'{$MOD.LBL_FROM_ADDRESS_HELP|escape}','','','dialogHelpPopup')"
+                  src="index.php?entryPoint=getImage&themeName={$THEME}&imageName=helpInline.gif">
+         </td>
+         <td width="30%" valign='top'><input type='hidden' name='notify_send_from_assigning_user' value='0'><input
+                     name='notify_send_from_assigning_user' value="2" tabindex='1' class="checkbox"
+                     type="checkbox" {$notify_send_from_assigning_user}></td>
+         <td width="20%" scope="row" valign='top'>
+             {$MOD.LBL_EMAIL_OPT_OUT_DEFAULT}:
+             <img border="0" class="inlineHelpTip"
+                  onclick="return SUGAR.util.showHelpTips(this,'{$MOD.LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP|escape}','','','dialogHelpPopup')"
+                  src="index.php?entryPoint=getImage&themeName={$THEME}&imageName=helpInline.gif">
+         </td>
+         <td width="30%" valign='top'>
+             <input type='hidden' name='new_email_addresses_opted_out' value='0'>
+             <input name='new_email_addresses_opted_out' value="1" tabindex='1' class="checkbox"
+                    type="checkbox" {$new_email_addresses_opted_out}>
+         </td>
     </tr>
 </table>
 <table width="100%" border="0" cellspacing="0" cellpadding="0" class="edit view">
@@ -567,21 +576,15 @@ function notify_setrequired(f) {
 	return true;
 }
 
-function setDefaultSMTPPort() 
+function setDefaultSMTPPort()
 {
-    if (!first_load)
-    {
-        useSSLPort = !document.getElementById("mail_smtpssl").options[0].selected;
-
-        if ( useSSLPort && document.getElementById("mail_smtpport").value == '25' ) {
-            document.getElementById("mail_smtpport").value = '465';
-        }
-        if ( !useSSLPort && document.getElementById("mail_smtpport").value == '465' ) {
-            document.getElementById("mail_smtpport").value = '25';
-        }
-    }
-    else
-    {
+    var smtpPortField;
+    var smtpProtocol;
+    if (!first_load) {
+        smtpPortField = document.getElementById('mail_smtpport');
+        smtpProtocol  = document.getElementById('mail_smtpssl').value;
+        smtpPortField.value = smtpProtocol === '1' ? '465' : smtpProtocol === '2' ? '587' : '25';
+    } else {
         first_load = false;
     }
 }

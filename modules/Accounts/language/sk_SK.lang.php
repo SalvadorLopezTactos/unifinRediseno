@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'Ponuky (poslať komu)',
 	'LNK_ACCOUNT_REPORTS' => 'Zobraziť hlásenia spoločností',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenty',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'Informačný panel so zoznamom účtov',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'Informačný panel so záznamom účtov',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'Grafy',
 	'LBL_DEFAULT' => 'Zobrazenia',

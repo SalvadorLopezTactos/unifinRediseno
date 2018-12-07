@@ -29,7 +29,7 @@ class SugarUpgradeCategoryTypeRecordViewFix extends UpgradeScript
             return;
         }
 
-        if (!SugarAutoLoader::fileExists($this->file)) {
+        if (!file_exists($this->file)) {
             # if we don't have a custom file, then bail
             return;
         }

@@ -26,4 +26,6 @@ $mod_strings = array (
     'LBL_DATE_CREATE' => 'נוצר בתאריך',
     'LBL_DATE_MODIFIED' => 'שונה בתאריך',
     'LBL_DELETED' => 'מחק',
+    'LBL_MODULE_NAME' => 'כתובות דוא"ל',
+    'LBL_MODULE_NAME_SINGULAR' => 'כתובת דוא"ל',
 );

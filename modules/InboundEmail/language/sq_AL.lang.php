@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'Përgjigje:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Hyrja ose fjalëkalimi janë të gabuara',
-	'ERR_BODY_TOO_LONG'		=> '\rTrupi tekstual është shumë i gjatë për ta kapur Emaili i plotë. Është shkrurtuar.',
+	'ERR_BODY_TOO_LONG'		=> '\\rTrupi tekstual është shumë i gjatë për ta kapur Emaili i plotë. Është shkrurtuar.',
 	'ERR_INI_ZLIB'			=> 'Nuk mund të c&#39;kyc ngjeshjen e përkohshme Zlib. "Testi i Parametrave" mund të dështojë.',
 	'ERR_MAILBOX_FAIL'		=> 'Nuk mund të rigjej asnjë mail llogari.',
 	'ERR_NO_IMAP'			=> 'Nuk janë gjetur IMAP biblioteka. Ju lutemi të zgjidhni këtë para se të azhdoni me Emailin e drejtuar përbrenda.',

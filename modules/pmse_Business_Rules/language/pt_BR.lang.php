@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Regras de negócios de processos',
   'LBL_MODULE_TITLE' => 'Regras de negócios de processos',
   'LBL_MODULE_NAME_SINGULAR' => 'Regra de negócios de processo',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Condições',
     'LBL_PMSE_LABEL_RETURN' => 'Retornar',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Conclusões',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Alterar campo',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Devolver valor',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Adicionar condição',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Adicionar conclusão',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Adicionar linha',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Remover coluna',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Remover condição',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Remover conclusão',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Remover dados da coluna',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Sim',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Não',

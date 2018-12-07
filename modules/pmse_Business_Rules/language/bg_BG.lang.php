@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Бизнес правила в процеси',
   'LBL_MODULE_TITLE' => 'Бизнес правила в процеси',
   'LBL_MODULE_NAME_SINGULAR' => 'Бизне правило в процес',
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Условия',
     'LBL_PMSE_LABEL_RETURN' => 'Върни',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Изводи',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Промени поле',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Върната стойност',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Добави условие',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Добави извод',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Добави ред',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Премахнете колоната',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Премахни условието',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Премахни заключението',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Премахни данните в колоната',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Да',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Не',

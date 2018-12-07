@@ -21,6 +21,10 @@
  * So records that have these combinbations of teams will have the same team_set_id.
  *
  */
+
+use Sugarcrm\Sugarcrm\Denormalization\TeamSecurity\Listener;
+use Sugarcrm\Sugarcrm\DependencyInjection\Container;
+
 require_once('vendor/ytree/Tree.php');
 require_once('vendor/ytree/Node.php');
 require_once('modules/Teams/TeamSetManager.php');
@@ -73,16 +77,17 @@ class TeamSet extends SugarBean{
     }
 
     /**
-    * Returns an array of Team objects for the given team_set_id
-    *
-    * @param id $team_set_id
-    * @return array of Team objects
-    */
+     * Returns an array of Team objects for the given team_set_id ordered by name
+     *
+     * @param string $team_set_id
+     * @return Team[]
+     */
     public function getTeams($team_set_id){
         ///TODO CONCAT
         $sql = 'SELECT teams.id, teams.name, teams.name_2 FROM teams
             INNER JOIN team_sets_teams ON team_sets_teams.team_id = teams.id
-            WHERE team_sets_teams.team_set_id = ?';
+            WHERE team_sets_teams.team_set_id = ?
+            ORDER BY teams.name';
         $stmt = $this->db->getConnection()->executeQuery($sql, array($team_set_id));
         $teams = array();
 
@@ -127,14 +132,6 @@ class TeamSet extends SugarBean{
         $this->primary_team_id = $stats['primary_team_id'];
         $team_ids = $stats['team_ids'];
 
-        //we may already have this team set id in cache, so let's not bother to run a select
-        //just return
-        $teamSetIdFromMD5 = TeamSetManager::getTeamSetIdFromMD5($team_md5);
-
-        if(!is_null($teamSetIdFromMD5)){
-            return $teamSetIdFromMD5;
-        }
-
         $sql = "SELECT id FROM $this->table_name WHERE team_md5 = ?";
         $stmt = $this->db->getConnection()->executeQuery($sql, [$team_md5]);
         $row = $stmt->fetch();
@@ -143,7 +140,7 @@ class TeamSet extends SugarBean{
             //so we should create the set and associate the teams with the set and return the set id.
             if(count($team_ids) == 1) {
                 $this->new_with_id = true;
-                $this->id = $team_ids[0];
+                $this->id = $this->db->fromConvert($team_ids[0], 'id');
                 if ($this->db->getConnection()->fetchColumn(
                     "SELECT id FROM $this->table_name WHERE id = ?",
                     [$this->id]
@@ -165,11 +162,13 @@ class TeamSet extends SugarBean{
             foreach($team_ids as $team_id){
                 $this->_addTeamToSet($team_id);
             }
-            TeamSetManager::addTeamSetMD5($this->id, $this->team_md5);
+
+            Container::getInstance()->get(Listener::class)->teamSetCreated($this->id, $team_ids);
+
             return $this->id;
         }else{
-            TeamSetManager::addTeamSetMD5($row['id'], $team_md5);
-            return $row['id'];
+            $id = $this->db->fromConvert($row['id'], 'id');
+            return $id;
         }
     }
 
@@ -265,6 +264,7 @@ class TeamSet extends SugarBean{
      */
     public static function getTeamSetIdsForUser($user_id)
     {
+        global $db;
         $cacheKey = "teamSetIdByUser{$user_id}";
         $cachedResults = sugar_cache_retrieve($cacheKey);
         if($cachedResults)
@@ -275,8 +275,13 @@ class TeamSet extends SugarBean{
             AND team_memberships.user_id = ? AND team_memberships.deleted=0 group by tst.team_set_id';
         $stmt = $GLOBALS['db']->getConnection()->executeQuery($sql, [$user_id]);
         $results = $stmt->fetchAll(\PDO::FETCH_COLUMN);
-        sugar_cache_put($cacheKey, $results);
-        return $results;
+
+        $newResults = array();
+        foreach ($results as $result) {
+            $newResults[] = $db->fromConvert($result, 'id');
+        }
+        sugar_cache_put($cacheKey, $newResults);
+        return $newResults;
     }
     /**
     * Determine whether a user has access to any of the teams on a team set.

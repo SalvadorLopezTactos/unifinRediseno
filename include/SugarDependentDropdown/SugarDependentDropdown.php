@@ -83,7 +83,7 @@ class SugarDependentDropdown {
 			if($this->debugMode) {
 				$this->debugOutput("Got metadata file [ {$metadata} ]");
 			}
-			if(SugarAutoLoader::fileExists($metadata)) {
+            if (file_exists($metadata)) {
 				$sugarDependentDropdown = array();
 				/*
 				 * The metadata file should be prepped in an associative array.

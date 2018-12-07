@@ -50,6 +50,7 @@ $mod_strings = array (
 	'COLUMN_TITLE_HTML_CONTENT' =>'HTML',
 	'COLUMN_TITLE_URL'=>'默认URL',
 	'COLUMN_TITLE_AUDIT' =>'审核',
+    'COLUMN_TITLE_PII' => '个人信息',
     'COLUMN_TITLE_FTS' =>'全文本可搜索',
     'COLUMN_TITLE_FTS_BOOST' => '提升价值',
 	'COLUMN_TITLE_REPORTABLE' => '可报告的',

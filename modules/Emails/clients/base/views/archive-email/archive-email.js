@@ -12,15 +12,21 @@
  * @class View.Views.Base.Emails.ArchiveEmailView
  * @alias SUGAR.App.view.views.BaseEmailsArchiveEmailView
  * @extends View.Views.Base.Emails.ComposeView
+ * @deprecated Use {@link View.Views.Base.Emails.CreateView} instead.
  */
 ({
     extendsFrom: 'EmailsComposeView',
 
     /**
+     * @inheritdoc
+     *
      * Add click event handler to archive an email.
-     * @param options
      */
     initialize: function(options) {
+        app.logger.warn(
+            'View.Views.Base.Emails.ArchiveEmailView is deprecated. Use View.Views.Base.Emails.CreateView instead.'
+        );
+
         this.events = _.extend({}, this.events, {
             'click [name=archive_button]': 'archive'
         });
@@ -36,8 +42,16 @@
      * Set headerpane title.
      * @private
      */
-    _render: function () {
+    _render: function() {
+        var $controls;
+
         this._super('_render');
+
+        $controls = this.$('.control-group:not(.hide) .control-label');
+        if ($controls.length) {
+            $controls.last().addClass('end-fieldgroup');
+        }
+
         this.setTitle(app.lang.get('LBL_ARCHIVE_EMAIL', this.module));
     },
 
@@ -57,7 +71,7 @@
 
     /**
      * Get fields that needs to be validated.
-     * @returns {object}
+     * @return {Object}
      */
     getFieldsToValidate: function() {
         var fields = {};
@@ -71,9 +85,9 @@
      * Call archive api.
      */
     archiveEmail: function() {
-        var archiveUrl = app.api.buildURL('Mail/archive'),
-            alertKey = 'mail_archive',
-            archiveEmailModel = this.initializeSendEmailModel();
+        var archiveUrl = app.api.buildURL('Mail/archive');
+        var alertKey = 'mail_archive';
+        var archiveEmailModel = this.initializeSendEmailModel();
 
         app.alert.show(alertKey, {level: 'process', title: app.lang.get('LBL_EMAIL_ARCHIVING', this.module)});
 
@@ -95,7 +109,7 @@
                 app.alert.dismiss(alertKey);
                 app.alert.show(alertKey, msg);
             },
-            complete:_.bind(function() {
+            complete: _.bind(function() {
                 if (!this.disposed) {
                     this.setMainButtonsDisabled(false);
                 }
@@ -104,22 +118,22 @@
     },
 
     /**
-     * Get model that will be used to archive the email.
-     * @returns {Backbone.Model}
+     * @inheritdoc
      */
     initializeSendEmailModel: function() {
         var model = this._super('initializeSendEmailModel');
         model.set({
             'date_sent': this.model.get('date_sent'),
             'from_address': this.model.get('from_address'),
-            'status': 'archive'
+            'status': 'archive',
+            'state': 'Archived'
         });
         return model;
     },
 
     /**
      * Disable/enable archive button.
-     * @param disabled
+     * @param {boolean} disabled
      */
     setMainButtonsDisabled: function(disabled) {
         this.getField('archive_button').setDisabled(disabled);

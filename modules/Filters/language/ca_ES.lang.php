@@ -11,7 +11,7 @@
  */
 
 $mod_strings = array(
-    'LBL_LISTVIEW_FILTER_ALL' => 'Tot {0}',
+    'LBL_LISTVIEW_FILTER_ALL' => 'Tots els {0}',
     'LBL_TEAM' => 'Equip',
     'LBL_TEAMS' => 'Equips',
     'LBL_TEAM_ID' => 'ID de l&#39;equip',

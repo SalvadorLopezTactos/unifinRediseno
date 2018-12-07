@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Dashboard de Lista de Oportunidades',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Dashboard de Registo de Oportunidades',
+
     'LBL_MODULE_NAME' => 'Oportunidades',
     'LBL_MODULE_NAME_SINGULAR' => 'Oportunidade',
     'LBL_MODULE_TITLE' => 'Oportunidades: Ecrã Principal',
@@ -64,9 +68,9 @@ $mod_strings = array(
     'UPDATE_NULL_VALUE' => 'Valor é NULO definindo como 0 -',
     'UPDATE_MERGE' => 'Fundir Moedas',
     'UPDATE_MERGE_TXT' => 'Fundir múltiplas Moedas numa única Moeda. Se existirem múltiplos registos para a mesma Moeda, irá fundi-los num só. Isto irá fundir igualmente as Moedas para todos os outros módulos.',
-    'LBL_ACCOUNT_NAME' => 'Nome da Entidade',
+    'LBL_ACCOUNT_NAME' => 'Nome da Conta:',
     'LBL_CURRENCY' => 'Moeda',
-    'LBL_DATE_CLOSED' => 'Data Prevista',
+    'LBL_DATE_CLOSED' => 'Data Prevista:',
     'LBL_DATE_CLOSED_TIMESTAMP' => 'Carimbo da Data de Fecho Expectável',
     'LBL_TYPE' => 'Tipo',
     'LBL_CAMPAIGN' => 'Campanha:',
@@ -182,25 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Ao iniciar esta alteração, as notas das linhas de lucro serão criadas para cada {{module_name}} existente em segundo plano. Quando as notas estiverem completadas e disponíveis, será enviada uma notificação para o endereço de e-mail do perfil de utilizador. Tome em atenção de que a sua instancia deverá ser configurada para poder enviar email em Admin -> Definições de E-mail.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => 'O módulo {{plural_module_name}} permite-lhe controlar as vendas individuais do início ao fim. Cada registo de {{module_name}} representa uma possível venda e inclui dados de venda relevantes, bem como dados relativos a outros registos importantes, como {{quotes_module}}, {{contacts_module}}, etc. Um {{module_name}} normalmente avança por várias Fases de Venda até ser marcado com "Ganho" ou "Perdido". {{plural_module_name}} pode ser aproveitado ainda mais usando o módulo Sugar de {{forecasts_singular_module}} para entender e prever as tendências de vendas, bem como focar o trabalho para atingir as quotas de vendas.',
+    'LBL_HELP_RECORDS' => 'O módulo {{plural_module_name}} permite-lhe acompanhar vendas individuais, do início ao fim. Cada registo {{module_name}} representa uma venda potencial e inclui dados de vendas relevantes, além de estar relacionado com outros registos importantes, como {{quotes_module}}, {{contacts_module}}, etc. Um {{module_name}} vai normalmente progredir através de vários Estágios de Vendas até ficar marcado como "Ganho" ou "Perdido". O módulo {{plural_module_name}} pode ser ainda mais aproveitado usando o módulo {{forecasts_singular_module}} do Sugar, para entender e prever as tendências de vendas, bem como focar o trabalho para alcançar as quotas de vendas.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => 'O módulo {{plural_module_name}} permite-lhe controlar as vendas individuais e os itens de linha pertencentes a essas vendas do início ao fim. Cada registo {{module_name}} representa um possível venda e inclui dados de vendas relevantes, bem como dados referentes a outros registos importantes, como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_RECORD' => 'O módulo {{plural_module_name}} permite-lhe acompanhar vendas individuais e os itens de linha que pertencem a essas vendas, do início ao fim. Cada registo do módulo {{module_name}} representa uma venda potencial e inclui dados de vendas relevantes, além de estar relacionado com outros registos importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
-- Edite os campos desse registo clicando num campo individual ou no botão Editar.
-- Visualize ou modifique links para outros registos nos subpainéis, colocando o painel inferior esquerdo como "Visualização de dados".
-- Visualize e comente como utilizador e registe o histórico de alterações em {{activitystream_singular_module}} colocando o painel esquerdo inferior como "Fluxo de atividades".
-- Siga ou marque como favorito esse registo usando os ícones à direita do nome do registo.
-- Ações adicionais estão disponíveis no menu pendente Ações, à direita do botão Editar.',
+- Edite os campos deste registo clicando num campo individual ou no botão Editar.
+- Visualize ou modifique ligações para outros registos nos subpainéis, alternando o painel inferior esquerdo para "Visualização de Dados".
+- Crie e visualize comentários de utilizador e o histórico de alterações de registos em {{activitystream_singular_module}}, alternando o painel esquerdo inferior para "Fluxo de Atividades".
+- Siga ou torne favorito este registo utilizando os ícones à direita do nome do registo.
+- Ações adicionais estão disponíveis no menu pendente Ações à direita do botão Editar.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => 'O módulo {{plural_module_name}} permite-lhe controlar as vendas individuais e os itens de linha pertencentes a essas vendas do início ao fim. Cada registo {{module_name}} representa uma possível venda e inclui dados de vendas relevantes, bem como referente a outros registos importantes, tais como {{quotes_module}}, {{contacts_module}}, etc.
+    'LBL_HELP_CREATE' => 'O módulo {{plural_module_name}} permite-lhe acompanhar vendas individuais e os itens de linha que pertencem a essas vendas, do início ao fim. Cada registo do módulo {{module_name}} representa uma venda potencial e inclui dados de vendas relevantes, além de estar relacionado com outros registos importantes, como {{quotes_module}}, {{contacts_module}}, etc.
 
 Para criar um {{module_name}}:
-1. Forneça valores para os campos conforme desejado.
-  - Os campos marcados "Obrigatório" devem ser preenchidos antes de guardar.
-  - Clique em "Mostrar mais" para expor campos adicionais, se necessário.
-2. Clique em "Guardar" para finalizar o novo registo e voltar à página anterior.',
+1. Forneça valores para os campos conforme pretendido.
+ - Os campos marcados como "Obrigatório" deverão ser preenchidos antes de gravar.
+ - Clique em "Mostrar Mais" para mostrar campos adicionais se necessário.
+2. Clique em "Gravar" para finalizar o novo registo e regressar à página anterior.',
 
 // END ENT/ULT
 

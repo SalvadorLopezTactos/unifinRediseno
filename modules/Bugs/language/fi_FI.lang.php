@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Bugiluettelon työpöytä',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Bugitietueiden työpöytä',
+
   'LBL_MODULE_NAME' => 'Bug Tracker',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Bugi',
   'LBL_MODULE_TITLE' => 'Bug Tracker: Etusivu',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Palvelupyynnöt',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projektit',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumentit',
-  'LBL_SYSTEM_ID' => 'Järjestelmän ID',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Vastuukäyttäjä',
 	'LBL_ASSIGNED_TO_NAME' => 'Vastuuhenkilö',
 

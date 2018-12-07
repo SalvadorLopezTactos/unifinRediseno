@@ -11,13 +11,14 @@
  */
 
 $mod_strings = array(
-    'LBL_MODULE_NAME'			=> 'Käyttäjien allekirjoitukset',
-    'LBL_MODULE_NAME_SINGULAR'		=> 'Käyttäjän allekirjoitus',
     'LBL_EMAIL_SIGNATURE_ERROR1' => 'Tämä allekirjoitus vaatii nimen.',
-    'LBL_SIGNATURE_NAME'         => 'Nimi:',
-    'LBL_SIGNATURE'              => 'Allekirjoitus',
-    'LBL_SIGNATURE_HTML'         => 'HTML-allekirjoitus',
-    'LBL_SIGNATURE_DEFAULT'      => 'Käytä allekirjoitusta?',
-    'LBL_SIGNATURE_PREPEND'      => 'Allekirjoitus ennen vastausta?',
-    'LBL_SIGNATURES'             => 'Allekirjoitukset',
+    'LBL_DEFAULT_SIGNATURE' => 'Oletus',
+    'LBL_MODULE_NAME' => 'Sähköpostin allekirjoitukset',
+    'LBL_MODULE_NAME_SINGULAR' => 'Sähköpostin allekirjoitus',
+    'LBL_SIGNATURE_NAME' => 'Nimi:',
+    'LBL_SIGNATURE' => 'Allekirjoitus',
+    'LBL_SIGNATURE_HTML' => 'HTML-allekirjoitus',
+    'LBL_SIGNATURE_DEFAULT' => 'Käytä allekirjoitusta?',
+    'LBL_SIGNATURE_PREPEND' => 'Allekirjoitus ennen vastausta?',
+    'LBL_SIGNATURES' => 'Allekirjoitukset',
 );

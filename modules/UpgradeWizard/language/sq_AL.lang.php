@@ -55,7 +55,7 @@ $mod_strings = array(
     'ERROR_MANIFEST_TYPE'                       => 'Dosja e manifestuar duhet të përcaktoj llojin e paketit.',
     'ERROR_PACKAGE_TYPE'                        => 'Dosja e manifestuar përcakton lloji paketi që nuk njihet.',
     'ERROR_VERSION_INCOMPATIBLE'                => 'Dosja e ngarkuar nuk është e përshtatshme me versionin e Sugar:',
-    'ERROR_FLAVOR_INCOMPATIBLE'                 => 'Dosja e ngarkuar nuk është e përshtashme me shijen (Edicioni bashkues, profesional ose i ndërmarrjes) e Sugar.',
+    'ERROR_FLAVOR_INCOMPATIBLE'                 => 'Skedari i ngarkuar nuk përputhet me shijen (edicioni profesional, i ndërmarrjes ose final) e Sugar: %s',
 
     'ERROR_UW_CONFIG_DB'                        => 'Gabim gjatë ruajtjes % konf',
     'ERR_NOT_ADMIN'                             => "Qasje të paautorizuar në administratë.",
@@ -98,7 +98,7 @@ $mod_strings = array(
 	'LBL_UW_COMPLIANCE_MYSQL'					=> 'Minimum MySQL Versionin',
     'LBL_UW_COMPLIANCE_DB'                      => 'Versioni minimal i Bazës së të dhënave',
 	'LBL_UW_COMPLIANCE_PHP_INI'					=> 'Lokacioni i php.ini',
-	'LBL_UW_COMPLIANCE_PHP_VERSION'				=> 'Minimum PHP Versioni',
+    'LBL_UW_COMPLIANCE_PHP_VERSION'             => 'Versioni PHP',
 	'LBL_UW_COMPLIANCE_SAFEMODE'				=> 'PHP parametrat: Mënyrë e sigurt',
 	'LBL_UW_COMPLIANCE_TITLE'					=> 'Kontroll i parametrave të serverit',
 	'LBL_UW_COMPLIANCE_TITLE2'					=> 'Parametrat e detektuara',
@@ -243,7 +243,6 @@ $mod_strings = array(
 	'LBL_UW_DROP_SCHEMA_METHOD'					=> 'Metoda e largimit të skemës së vjetër',
 	'LBL_UW_SHOW_OLD_SCHEMA_TO_DROP'			=> 'Trego skemën e vjetër që mund të largohet',
 	'LBL_UW_SKIPPED_QUERIES_ALREADY_EXIST'      => 'Detyrat e anashkaluara',
-	'LBL_INCOMPATIBLE_PHP_VERSION'              => 'Php versioni 5 ose më lartë është i nevojshëm.',
 	'ERR_CHECKSYS_PHP_INVALID_VER'      => 'Versioni juaj i PHP nuk është i mbështetur nga Sugar. Do të duhet të instaloni një të përshtashëm me aplikimin e Sugar. Ju lutemi konsultoheni me Matriks përshtashmërinë në shënimet e publikuara për versionet PHP të mbështetura. Versioni juaj është',
 	'LBL_BACKWARD_COMPATIBILITY_ON' 			=> 'Php prapa mënyrës së përputhueshmërise është kthyer në aktive. Vendosni ze1_përputheshmëria_mënyra në Joaktive për vazhdimin më tej.',
 	//including some strings from moduleinstall that are used in Upgrade
@@ -260,8 +259,6 @@ $mod_strings = array(
 	'LBL_ML_INSTALL'=>'Instalo',
 	//adding the string used in tracker. copying from homepage
 	'LBL_HOME_PAGE_4_NAME' => 'Gjurmuesit',
-	'LBL_CURRENT_PHP_VERSION' => '(Versioni php i juaji aktual është',
-	'LBL_RECOMMENDED_PHP_VERSION' => '.Versioni php i juaji aktual është 5.2.1  ose më lartë)',
 	'LBL_MODULE_NAME' => 'Rindërto Wizardin',
 	'LBL_MODULE_NAME_SINGULAR' => 'Rindërto Wizardin',
 	'LBL_UPLOAD_SUCCESS' => 'Paketa e rindërtuar është ngarkuar suksesshëm. Shtyp Vijim për të performuar kontrollin përfundimtar',

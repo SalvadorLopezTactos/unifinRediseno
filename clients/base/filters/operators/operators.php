@@ -152,8 +152,8 @@ $viewdefs['base']['filter']['operators'] = array(
         '$not_in' => 'LBL_OPERATOR_NOT_CONTAINS',
     ),
     'teamset' => array(
-        '$equals' => 'LBL_OPERATOR_IS',
-        '$not_equals' => 'LBL_OPERATOR_IS_NOT',
+        '$in' => 'LBL_OPERATOR_CONTAINS',
+        '$not_in' => 'LBL_OPERATOR_NOT_CONTAINS',
     ),
     'phone' => array(
         '$starts' => 'LBL_OPERATOR_STARTS_WITH',

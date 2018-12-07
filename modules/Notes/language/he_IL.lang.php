@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'לוח מחוונים של רשימת הערות',
+
     'ERR_DELETE_RECORD' => 'You must specify a record number to delete the account.',
     'LBL_ACCOUNT_ID' => 'זהות חשבון:',
     'LBL_CASE_ID' => 'זהות אירוע:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'תיאור',
     'LBL_EMAIL_ADDRESS' => 'כתובת דואר אלקטרוני:',
     'LBL_EMAIL_ATTACHMENT' => 'צרופה לדואר אלקטרוני',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'צרופה להודעת דוא"ל ל-',
     'LBL_FILE_MIME_TYPE' => 'סוג Mime',
+    'LBL_FILE_EXTENSION' => 'סיומת קובץ',
+    'LBL_FILE_SOURCE' => 'מקור הקובץ',
+    'LBL_FILE_SIZE' => 'גודל הקובץ',
     'LBL_FILE_URL' => 'לינק לקובץ',
     'LBL_FILENAME' => 'צרופה:',
     'LBL_LEAD_ID' => 'זהות ליד:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'זהות ההזדמנות:',
     'LBL_PARENT_ID' => 'מזהה אב:',
     'LBL_PARENT_TYPE' => 'סוג הורה',
+    'LBL_EMAIL_TYPE' => 'סוג דוא"ל',
+    'LBL_EMAIL_ID' => 'מזהה דוא"ל',
     'LBL_PHONE' => 'טלפון:',
     'LBL_PORTAL_FLAG' => 'להתיג בפורטל?',
     'LBL_EMBED_FLAG' => 'לשבץ בהודעת דואר?',

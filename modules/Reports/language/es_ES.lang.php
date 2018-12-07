@@ -224,7 +224,7 @@ $mod_strings = array (
   'LBL_TOTAL' => 'Total',
   'LBL_MODULE_NAME_SAVED' => 'Nombre de Módulo',
   'LBL_REPORT_TYPE' => 'Tipo de Informe',
-  'LBL_REPORT_LAST_RUN_DATE' => 'Accedido En',
+  'LBL_REPORT_LAST_RUN_DATE' => 'Consultado el',
   'LBL_REPORT__ATT_TYPE' => 'Tipo',
   'LBL_REPORT_RUN_WITH_FILTER' => 'Aplicar',
   'LBL_REPORT_RESET_FILTER' => 'Restablecer',
@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Por Trimestre',
     'LBL_BY_FISCAL_YEAR' => 'Por Año Fiscal',
     'LBL_BY_FISCAL_QUARTER' => 'Por Trimestre Fiscal',
+    'LBL_AMOUNT' => 'Cantidad',
     'LBL_COUNT' => 'Cuenta',
+    'LBL_PERCENT' => 'Porcentaje',
     'LBL_SUM' => 'SUM',
     'LBL_AVG' => 'AVG',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Mes',
     'LBL_YEAR' => 'Año',
     'LBL_QUARTER' => 'Trimestre',
+    'LBL_FISCAL' => 'Fiscal',
     'LBL_FISCAL_YEAR' => 'Año Fiscal',
     'LBL_FISCAL_QUARTER' => 'Trimestre Fiscal',
 	'LBL_YESTERDAY'=>'Ayer',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Siguiente Trimestre',
     'LBL_ADD_RELATE' => "Añadir Relacionado",
     'LBL_DEL_THIS' => "Quitar",
-    'LBL_ALERT_CANT_ADD' => 'No puede añadir un módulo relacionado hasta que no seleccione una tabla sobre la cual relacionarlo.\n Seleccione un módulo de la lista desplegable situada a la izquierda del botón &#39;Añadir Relacionado&#39; que acaba de pulsar.',
+    'LBL_ALERT_CANT_ADD' => 'No puede añadir un módulo relacionado hasta que no seleccione una tabla sobre la cual relacionarlo.\\n Seleccione un módulo de la lista desplegable situada a la izquierda del botón &#39;Añadir Relacionado&#39; que acaba de pulsar.',
     'LBL_BY_DAY' => 'Por Día',
     'LBL_DAY' => 'Día',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Módulos Relacionados Opcionales',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Mayor que Igual a',
 
     'LBL_FILTER_BY_MODULE' => 'Por Módulo',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Con gráficos',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Error al recuperar datos de informe de obtención de detalles para esta acción. Póngase en contacto con el propietario del informe para obtener asistencia.',
+    'LBL_CHART_NO_DRILLTHRU' => 'La obtención de detalles no está disponible',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'La vista de lista muestra todos los informes que cumplen con el criterio de búsqueda actual y a los cuales tienen acceso los usuarios. Puede ver los detalles básicos de cada informe en las columnas de la lista y en la vista previa. Puede establecer etiquetas para los informes y crear filtros. Haga clic en el nombre del informe para verlo, o seleccione &#39;Editar informe&#39; en el menú de acciones para modificarlo.',
+  );

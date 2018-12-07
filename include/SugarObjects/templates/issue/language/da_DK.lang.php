@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => 'Sidst ændret af:',
   'LBL_ASSIGNED_USER' => 'Tildelt bruger:',
   'LBL_ASSIGNED_USER_NAME' => 'Tildelt til',
-  'LBL_SYSTEM_ID' =>'System-id:',
   'LBL_TEAM_NAME' =>'Teamnavn:',
   'LBL_TYPE'=>'Type:',
   'LBL_SUBJECT' => 'Emne:',

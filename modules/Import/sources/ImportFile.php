@@ -16,6 +16,7 @@
  * All Rights Reserved.
  ********************************************************************************/
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 class ImportFile extends ImportDataSource
 {
@@ -77,7 +78,7 @@ class ImportFile extends ImportDataSource
      * @param string $delimiter
      * @param string $enclosure
      * @param bool   $deleteFile
-     * @param bool   $checkUploadPath
+     * @param bool   $checkUploadPath  This argument is not used and left for a backwards compatibility
      * @param int    $rowsCount
      */
     public function __construct(
@@ -92,11 +93,7 @@ class ImportFile extends ImportDataSource
             return false;
         }
 
-        if ( $checkUploadPath && UploadStream::path($filename) == null )
-        {
-            $GLOBALS['log']->fatal("ImportFile detected attempt to access to the following file not within the sugar upload dir: $filename");
-            return null;
-        }
+        FileLoader::validateFilePath(UploadStream::path($filename));
 
         // turn on auto-detection of line endings to fix bug #10770
         ini_set('auto_detect_line_endings', '1');

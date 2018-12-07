@@ -12,6 +12,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_OPPORTUNITIES_LIST_DASHBOARD' => 'Fırsatlar Listesi Panosu',
+    'LBL_OPPORTUNITIES_RECORD_DASHBOARD' => 'Fırsatlar Kaydı Panosu',
+
     'LBL_MODULE_NAME' => 'Fırsatlar',
     'LBL_MODULE_NAME_SINGULAR' => 'Fırsat',
     'LBL_MODULE_TITLE' => 'Fırsatlar: Ana Sayfa',
@@ -182,24 +186,25 @@ $mod_strings = array(
     // Opps Config - View By Opportunities And RLIs
     'LBL_HELP_CONFIG_RLIS' => 'Bu değişikliği başlattıktan sonra, Gelir Kalemleri kayıtları mevcut bütün {{module_name}} için arka planda oluşturulacak. Gelir Kalemleri tamamlandığında ve kullanıma hazır olduğunda, kullanıcı profilinizdeki e-posta adresine bir mesaj gönderilecek. Lütfen, kurulumunuzun Sistem Yönetimi > E-Posta Ayarları altında, e-posta gönderecek şekilde ayarlandığından emin olun.',
     // List View Help Text
-    'LBL_HELP_RECORDS' => '{{plural_module_name}} modülü, size ayrı satışları başlangıcından bitişine kadar izlemenize olanak sağlar. Her {{module_name}} kaydı, ileriye yönelik bir satışı belirtir ve ilgili satış verileri aynı zamanda {{quotes_module}}, {{contacts_module}} vb. gibi diğer önemli bilgileri içerir. Bir {{module_name}}, genellikle "Başarıyla Kapandı" veya "Başarısızlıkla Kapandı" olarak işaretlenene kadar birçok Satış Aşaması boyunca ilerler. {{plural_module_name}}, satış trendlerini anlamak ve tahmin etmek aynı zamanda satış kotalarına ulaşmak için çalışmaya odaklanmak için Sugar&#39;ın {{forecasts_singular_module}} modülü kullanılarak daha da fazla geliştirilebilir.',
+    'LBL_HELP_RECORDS' => '{{plural_module_name}} modülü, başından sonuna kadar kişisel satışları izlemenizi sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve ilgili satış verilerini ve aynı zamanda {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlara ilişkin verileri içerir. Bir {{module_name}}, "Kazanılarak Kapatıldı" veya "Kaybedilerek Kapatıldı" olarak işaretlenene kadar genellikle birçok Satış Aşaması boyunca ilerler. {{plural_module_name}}, satış trendlerinin anlaşılması ve tahmin edilmesi ve aynı zamanda satış kotalarına ulaşılması için işe odaklanılması için Sugar&#39;ın {{forecasts_singular_module}} modülü kullanılarak daha çok geliştirilebilir.',
 
     // Record View Help Text
-    'LBL_HELP_RECORD' => '{{plural_module_name}} modülü, satışları ve bu satışlara ait kalemlerin satış sürecinin takip edilmesini sağlar. Her {{module_name}} kaydı, muhtemel satışı temsil eder ve {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlar ile ilişkisini sağlar. 
-- Bu kayıtın alanlarını her bir alana tıklayarak veya Değiştir seçeneği ile değiştirebilirsiniz. 
-- Alt sol paneli "Veri Görüntüleme" moduna getirerek diğer modüller ile ilişkisini görüntüleyebilir veya değiştirebilirsiniz. 
-- Sol alt paneli "Aktivite Akışı" moduna getirerek, {{activitystream_singular_module}} içinde bulunan kullanıcı yorumlarını ve değişiklik tarihçesini görebilir veya ekleyebilirsiniz. 
-- Kayıtın sağındaki ikonlara tıklayarak izlemeye alabilir veya favori olarak işaretleyebilirsiniz. 
-- Değiştir tuşunun sağındaki Aksiyonlar menüsü ile ek aksiyonlar mümkün olmaktadır.',
+    'LBL_HELP_RECORD' => '{{plural_module_name}} modülü, satışları ve başından sonuna kadar bu satışlara ait kalemlerin satış sürecinin takip edilmesini sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve hem ilgili satış verilerini hem de {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlara ilişkin verileri içerir.
+
+- Kaydın alanlarını, herhangi bir alana veya Değiştir düğmesine tıklayarak değiştirin.
+- Sol altta yer alan paneli "Kayıt Görünümü" olarak değiştirerek, diğer kayıtlar ile olan bağlantıları görün veya değiştirin.
+- Sol altta yer alan paneli "Aktivite Akışı" olarak değiştirerek, {{activitystream_singular_module}} içinde kullanıcı yorumları yapın, bu yorumları ve kayıt değiştirme geçmişini görün.
+- Kayıt adının sağ tarafında bulunan simgeleri kullanarak bu kaydı takip edin veya favoriler arasına alın.
+- Daha fazla aksiyon, Değiştir düğmesinin sağındaki Aksiyonlar açılır menüsünde yer almaktadır.',
 
     // Create View Help Text
-    'LBL_HELP_CREATE' => '{{plural_module_name}} modülü, satışları ve bu satışlara ait kalemlerin satış sürecinin takip edilmesini sağlar. Her {{module_name}} kaydı, muhtemel bir satışı temsil eder ve diğer {{quotes_module}}, {{contacts_module}} gibi önemli kayıtlar ile ilişkisini sağlar.
+    'LBL_HELP_CREATE' => '{{plural_module_name}} modülü, satışları ve başından sonuna kadar bu satışlara ait kalemlerin satış sürecinin takip edilmesini sağlar. Her {{module_name}} kaydı, potansiyel bir satışı temsil eder ve hem ilgili satış verilerini hem de {{quotes_module}}, {{contacts_module}} gibi diğer önemli kayıtlara ilişkin verileri içerir.
 
-{{module_name}} kaydı oluşturmak için: 
-1. İstendiği şekilde alanlar için değerler girin. 
-- "Zorunlu" olarak işaretlenmiş alanların kayıt öncesinde girilmesi gerekmektedir. 
-- "Daha fazlasını göster" seçeneği ile, gerektiğinde ek alanları görünür kılın.
-2. "Kaydet" tuşuna basarak kayıt işlemini tamamlayın ve önceki sayfaya dönün.',
+Bir {{module_name}} oluşturmak için:
+1. İstendiği şekilde alanlar için değerler girin.
+ - "Zorunlu" olarak belirtilmiş alanların kaydetme öncesinde girilmesi gereklidir.
+ - Gerek duyulursa ek alanları açmak için "Daha Fazlası"na tıklayın.
+2. "Kaydet" tuşuna basarak yeni kayıt oluşturma işlemini tamamlayın ve önceki sayfaya dönün.',
 
 // END ENT/ULT
 

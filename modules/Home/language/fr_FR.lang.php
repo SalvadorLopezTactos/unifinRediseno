@@ -38,7 +38,6 @@ $mod_strings = array (
   'LNK_NEW_OPPORTUNITY' => 'Créer Affaire',
   'LNK_NEW_QUOTE' => 'Créer Devis',
     'LBL_SOURCE_JQUERY' => 'jQuery - jQuery est une bibliothèque JavaScript rapide et concise qui simplifie la manipulation des documents HTML, la gestion des évènements, l&#39;animation et les interactions Ajax pour le développement rapide d&#39;applications web.',
-    'LBL_SOURCE_PLACEHOLDER' => 'jQuery-Placeholder - Un plugin qui permet le support des nouveaux éléments HTML5  pour les navigateurs existants.',
     'LBL_SOURCE_JQUERYUI' => 'jQuery UI - La bibliothèque jQuery officielle pour l&#39;interface utilisateur.',
     'LBL_SOURCE_LESSPHP' => 'lessphp - Un compilateur pour LESS écrit en PHP.',
     'LBL_SOURCE_BACKBONE' => 'Backbone.js - Un framework MVC pour les applications Javascript.',
@@ -50,7 +49,7 @@ $mod_strings = array (
     'LBL_SOURCE_STASH' => 'Stash - Une bibliothèque de JavaScript qui rend l&#39;utilisation facile de stockage hors ligne.',
     'LBL_SOURCE_BOOTSTRAP' => 'witterbootstrap - Bibliothèque HTML, CSS, JS par Twitter.',
     'LBL_SOURCE_ASYNC' => 'Async - services asynchrones pour node et les navigateurs',
-    'LBL_SOURCE_PHPEXCEL' => 'PHPExcel - Une bibliothèque PHP pour la lecture et l&#39;écriture de fichiers Excel.', 
+    'LBL_SOURCE_PHPEXCEL' => 'PHPExcel - Une bibliothèque PHP pour la lecture et l&#39;écriture de fichiers Excel.',
   'LNK_NEW_LEAD' => 'Créer Lead',
   'LNK_NEW_CASE' => 'Créer Ticket',
   'LNK_NEW_NOTE' => 'Créer Note',
@@ -137,6 +136,7 @@ $mod_strings = array (
   'LBL_DASHLET_DELETE' => 'Supprimer le Dashlet',
   'LBL_DASHLET_REFRESH' => 'Rafraîchir le Dashlet',
   'LBL_DASHLET_EDIT' => 'Éditer le Dashlet',
+  'LBL_HOME_DASHBOARD' => 'Tableau de bord d&#39;accueil',
   'LBL_DASHBOARD_TITLE' => 'Tableau de bord',
   'LBL_CREATE_DASHBOARD_MENU' => 'Créer un tableau de bord',
   'LBL_DASHBOARD_EDIT' => 'Éditer un Tableau de bord',
@@ -193,7 +193,6 @@ $mod_strings = array (
     'LBL_SUGAR_SOURCECODE_DESC' => 'Application de gestion de la force de vente.',
     'LBL_THIRD_PARTY_SOFTWARE_TITLE' => 'Application tierce',
     'LBL_THIRD_PARTY_SOURCECODE' => 'Les informations sur le code tiers utilisé dans ce produit, y compris les termes de la licence connexes, sont disponibles à',
-  'LBL_SUGAR_COMMUNITY_EDITION' => 'Sugar Community Édition',
   'LBL_SUGAR_PROFESSIONAL' => "Sugar Professional",
   'LBL_SUGAR_ENTERPRISE' => "Sugar Enterprise",
   'LBL_AND' => "et",
@@ -284,7 +283,7 @@ $mod_strings = array (
 
     // Record View Help Text
     'LBL_HELP_RECORD_TITLE' => 'Aide',
-    'LBL_HELP_RECORD' => 'L&#39;aide affiche des informations spécifiques sur le module que vus visualisez, fournit des étapes détaillées pour la réalisation de certaines actions dans le module et vous indique où aller pour des informations plus complètes et du support.',
+    'LBL_HELP_RECORD' => 'L&#39;aide affiche des informations spécifiques sur le module que vous visualisez, fournit des étapes détaillées pour la réalisation de certaines actions dans le module et vous indique où aller pour des informations plus complètes et du support.',
 
     'LBL_FACETS_DASHBOARD_TITLE' => 'Filtrer',
 );

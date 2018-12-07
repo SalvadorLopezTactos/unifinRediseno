@@ -28,7 +28,6 @@
      * Skipping ActionmenuField's override, just returning this.def.buttons
      *
      * @inheritdoc
-     * @override
      */
     _getChildFieldsMeta: function() {
         return app.utils.deepCopy(this.def.buttons);
@@ -38,7 +37,6 @@
      * Overriding for quote-data-group-header in create view to display a specific template
      *
      * @inheritdoc
-     * @override
      */
     _loadTemplate: function() {
         this._super('_loadTemplate');

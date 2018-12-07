@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Notlar Listesi Panosu',
+
     'ERR_DELETE_RECORD' => 'Müşteriyi silmek için bir kayıt numarası girmelisiniz.',
     'LBL_ACCOUNT_ID' => 'Müşteri ID:',
     'LBL_CASE_ID' => 'Talep ID:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Not',
     'LBL_EMAIL_ADDRESS' => 'E-Posta Adresi:',
     'LBL_EMAIL_ATTACHMENT' => 'E-Posta Eki',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Şunun için E-posta Eki',
     'LBL_FILE_MIME_TYPE' => 'Mime Tipi',
+    'LBL_FILE_EXTENSION' => 'Dosya Uzantısı',
+    'LBL_FILE_SOURCE' => 'Dosya Kaynağı',
+    'LBL_FILE_SIZE' => 'Dosya Boyutu',
     'LBL_FILE_URL' => 'Dosya URL',
     'LBL_FILENAME' => 'Ek:',
     'LBL_LEAD_ID' => 'Talep ID :',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Fırsat ID:',
     'LBL_PARENT_ID' => 'Üst Kayıt ID:',
     'LBL_PARENT_TYPE' => 'Üst Kayıt Tipi',
+    'LBL_EMAIL_TYPE' => 'E-posta Türü',
+    'LBL_EMAIL_ID' => 'E-posta Kimliği',
     'LBL_PHONE' => 'Telefon:',
     'LBL_PORTAL_FLAG' => 'Portal&#39;da Görünsün mü?',
     'LBL_EMBED_FLAG' => 'E-Posta içinde gömülü mü?',

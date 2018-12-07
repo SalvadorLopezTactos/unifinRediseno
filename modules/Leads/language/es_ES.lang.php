@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Cuadro de mando de la lista de clientes potenciales',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Cuadro de mando del registro de clientes potenciales',
+
     'ERR_DELETE_RECORD' => 'Debe especificar un número de registro para eliminar el cliente potencial.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Descripción de la Cuenta',
     'LBL_ACCOUNT_ID'=>'ID Cuenta',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Cantidad de la Oportunidad:',
     'LBL_OPPORTUNITY_ID'=>'ID Oportunidad',
     'LBL_OPPORTUNITY_NAME' => 'Nombre de la Oportunidad:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Email Alternativo:',
     'LBL_OTHER_PHONE' => 'Tel. Alternativo:',
     'LBL_PHONE' => 'Teléfono:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Copiar dirección alternativa a dirección principal',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Copiar dirección principal a dirección alternativa',
     'NTC_DELETE_CONFIRMATION' => '¿Está seguro de que desea eliminar este registro?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'La creación de una oportunidad requiere una cuenta.\n Cree una cuenta nueva o seleccione una existente.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'La creación de una oportunidad requiere una cuenta.\\n Cree una cuenta nueva o seleccione una existente.',
     'NTC_REMOVE_CONFIRMATION' => '¿Está seguro de que desea quitar este cliente potencial del caso?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '¿Está seguro que quiere quitar este registro como informador?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Campañas',
@@ -314,4 +320,6 @@ Tras confirmar cada módulo necesario y deseado, haga clic en el botón Guardar 
     'LBL_MKTO_LEAD_SCORE' => 'Clasificación del cliente potencial',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Informes de Clientes Potenciales',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Consentimiento para fines comerciales',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Consentimiento actualizado por última vez',
 );

@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Netačno korisničko ime i lozinka',
-	'ERR_BODY_TOO_LONG'		=> '\r Tekst je predugačak za dohvatanje kompletnog email-a. Skraćeno.',
+	'ERR_BODY_TOO_LONG'		=> '\\r Tekst je predugačak za dohvatanje kompletnog email-a. Skraćeno.',
 	'ERR_INI_ZLIB'			=> 'Ne mogu da trajno isključim Zlib kompresiju. "Test podešavanje" možda beće uspeti.',
 	'ERR_MAILBOX_FAIL'		=> 'Nijedan email nalog ne može da se povrati.',
 	'ERR_NO_IMAP'			=> 'Nisu nađene IMAP biblioteke. Molim, rešite ovaj problem pre nego što nastavite sa dolaznom e-poštom',

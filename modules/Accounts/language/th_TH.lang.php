@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'การเสนอราคา (จัดส่ง)',
 	'LNK_ACCOUNT_REPORTS' => 'ดูรายงานบัญชี',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'เอกสาร',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'แดชลอร์ดรายการบัญชี',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'แดชบอร์ดบันทึกบัญชี',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'แผนภูมิ',
 	'LBL_DEFAULT' => 'มุมมอง',

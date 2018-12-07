@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Jūs turite nurodyti įrašo numerį, kad galėtumėte ištrinti gamintoją.',
   'NTC_STATUS' => 'Padarykite statusą neaktyvų, jei norite išimti šį gamintoją iš iššokančio sąrašo',
   'NTC_LIST_ORDER' => 'Nustatykite kurioje pozicijoje norite šį įrašą matyti iššokančiame gamintojų sąraše.',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Aktyvus',
-    'Inactive' => 'Neaktyvus',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Importuoti gamintojus',
 	'LBL_EDITLAYOUT' => 'Redaguoti išdėstymą' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Revenue Line Items',

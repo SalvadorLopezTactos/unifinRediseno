@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'U dient een recordnummer op te geven om deze vervoerder te verwijderen.',
   'NTC_STATUS' => 'Zet de status op Inactief om deze vervoerder van de vervoerdersdropdownlijst te verwijderen',
   'NTC_LIST_ORDER' => 'Bepaal de volgorde hoe deze Vervoerder zal worden getoond in de vervoerdersdropdownlijst',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Actief',
-    'Inactive' => 'Inactief',
-),
-	'LBL_EDITLAYOUT' => 'Wijzig layout' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Wijzig layout' /*for 508 compliance fix*/,
 );
-
 
 ?>

@@ -8,20 +8,21 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+var PMSE = PMSE || {};
 /**
  * @class SeparatorItem
  * Handles the menu item separator
- * @extend Item
+ * @extends PMSE.Item
  *
  * @constructor
  * Creates a new instance of a class
  * @param {Object} options
- * @param {Menu} [parent]
+ * @param {PMSE.Menu} [parent]
  */
 var SeparatorItem = function (options, parent) {
-    Item.call(this, options, parent);
+    PMSE.Item.call(this, options, parent);
 };
-SeparatorItem.prototype = new Item();
+SeparatorItem.prototype = new PMSE.Item();
 
 /**
  * Defines the object's type

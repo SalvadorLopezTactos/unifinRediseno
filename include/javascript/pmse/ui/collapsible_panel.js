@@ -8,10 +8,12 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
 //This is an abstract class
+var PMSE = PMSE || {};
 var CollapsiblePanel = function (settings) {
 	FieldPanelItem.call(this, settings);
-	this._items = new ArrayList();
+	this._items = new PMSE.ArrayList();
 	this._title = "";
 	this._massiveAction = false;
 	this._htmlHeader = null;
@@ -176,7 +178,7 @@ CollapsiblePanel.prototype.setOnCollapseHandler = function(handler) {
 
 CollapsiblePanel.prototype.setWidth = function(w) {
 	if(typeof w === 'number') {
-		Element.prototype.setWidth(w);
+	    PMSE.Element.prototype.setWidth(w);
 	} else {
 		if(/^\d+(.\d+)?(px|%)?$/.test(w)) {
 			this.width = w;

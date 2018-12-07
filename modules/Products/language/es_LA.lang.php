@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Tablero de Lista de Artículos Cotizados',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Campaña de Partida Individual Cotizada',
     'LBL_MODULE_NAME' => 'Partidas Individuales Cotizadas',
     'LBL_MODULE_NAME_SINGULAR' => 'Partida Individual Cotizada',
@@ -173,4 +176,5 @@ Para crear un {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Lista de Datos Cotizados de los Artículos Cotizados',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Nuevo Artículo Cotizado)',
     'LBL_DISCOUNT_PERCENT' => '% Porcentaje',
+    'LBL_DISCOUNT_TYPE' => 'Tipo de descuento',
 );

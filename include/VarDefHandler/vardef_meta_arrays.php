@@ -17,7 +17,11 @@ $vardef_meta_array = array(
     // Things that should be handled for ALL cases
     'all' => array(
         'inclusion' => array(),
-        'exclusion' => array(),
+        'exclusion' => array(
+            'module' => [
+                'DataPrivacy',
+            ],
+        ),
         'inc_override' => array(),
         'ex_override' => array(
             'name' => array(
@@ -51,7 +55,11 @@ $vardef_meta_array = array(
                 'pmse_bpmconfig_link',
                 'pmse_bpmgroup_link',
                 'pmse_bpmgroupuser_link',
+                'dataprivacy',
             ),
+            'module' => [
+                'DataPrivacy',
+            ],
         ),
     ),
     'standard_display' => array(
@@ -267,7 +275,7 @@ $vardef_meta_array = array(
             'module' => array(
                 'Users',
                 'Teams',
-                'CampaignLog'
+                'CampaignLog',
             ),
             //end ex_override
         )
@@ -308,7 +316,7 @@ $vardef_meta_array = array(
                 'Users',
                 'Teams',
                 'CampaignLog',
-                'Releases'
+                'Releases',
             ),
             //end ex_override
         )

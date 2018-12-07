@@ -39,23 +39,6 @@
         this._decisionTable = null;
         this._brName = null;
         this._brModule = null;
-        this._updateDimensionsFunc = _.bind(this._updateDimensions, this);
-    },
-
-    /**
-     * Updates the Business Rules decision table dimensions.
-     * @private
-     */
-    _updateDimensions: function () {
-        //Calculating -12px because we have this div with padding = 5px and border = 1px
-        var w = this.$el.width() - 12;
-
-        w = w || this.$('#decision-tables').width();
-        this._decisionTable.setWidth("auto");
-
-        if ($(this._decisionTable.getHTML()).outerWidth() > w) {
-            this._decisionTable.setWidth(w);
-        }
     },
 
     /**
@@ -66,7 +49,8 @@
      */
     _updateBRHeader: function (name, module) {
         this.$('.brTitle').text(name);
-        this.$(".brModule").text(module);
+        var brModule = app.lang.get('LBL_RST_MODULE', this.module) + ': ' + module;
+        this.$('.brModule').text(brModule);
     },
 
     /**
@@ -116,7 +100,8 @@
             that.$(".brTitle").text(updateName);
         };
 
-        this._decisionTable.onAddColumn = this._decisionTable.onAddRow = this._decisionTable.onRemoveColumn = this._decisionTable.onRemoveRow = this._updateDimensionsFunc;
+        this._decisionTable.onAddColumn =
+            this._decisionTable.onAddRow = this._decisionTable.onRemoveColumn = this._decisionTable.onRemoveRow;
 
         this.$('#businessruledesigner').prepend(this._decisionTable.getHTML());
     },
@@ -133,8 +118,6 @@
         this._brModule = App.lang.getModuleName(params.data.rst_module, {plural: true});
 
         //errorLog = $('#error-log');
-
-        $(window).on("resize", this._updateDimensionsFunc);
 
         if (params.data && params.data.rst_source_definition) {
             data = JSON.parse(params.data.rst_source_definition);
@@ -160,7 +143,6 @@
         }
         this._updateBRHeader(this._brName, this._brModule);
         this._addDecisionTable(data);
-        this._updateDimensions();
         this._decisionTable.setIsDirty(false);
     },
 
@@ -170,9 +152,6 @@
     render: function () {
         var that = this;
         app.view.View.prototype.render.call(this);
-
-        //Defining callback when sidebar is closed or opened
-        this.myDefaultLayout.on('sidebar:state:changed', this._updateDimensionsFunc, this);
 
         var params = {
             br_uid: this.br_uid
@@ -281,7 +260,6 @@
      * @inheritdoc
      */
     _dispose: function () {
-        $(window).off('resize', this._updateDimensionsFunc);
         this._super('_dispose', arguments);
     }
 })

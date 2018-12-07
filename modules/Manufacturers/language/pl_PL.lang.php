@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Aby usunąć producenta, musisz podać numer rekordu.',
   'NTC_STATUS' => 'Ustaw status na nieaktywny, aby usunąć tego producenta z listy rozwijanej',
   'NTC_LIST_ORDER' => 'Ustaw kolejność wyświetlania tego producenta na liście rozwijanej producentów',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Aktywny',
-    'Inactive' => 'Nieaktywny',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Importuj producentów',
 	'LBL_EDITLAYOUT' => 'Edytuj układ' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Pozycje szansy',

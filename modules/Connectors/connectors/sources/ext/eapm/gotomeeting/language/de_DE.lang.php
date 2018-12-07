@@ -14,26 +14,25 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Rufen Sie einen Kunden-Schlüssel von LogMeIn ab, indem Sie eine neue GoToMeeting-Anwendung registrieren.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Vorgehensweise zur Registrierung Ihrer Instanz:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
-        <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
-        </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
-</ol>
-</td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+<li>Melden Sie sich mit Ihrem LogMeIn Developer Center-Konto an:  <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Klicken Sie auf "Meine Apps"</li>
+    <li>Klicken Sie auf "Neue App hinzufügen"</li>
+    <li>Füllen Sie alle Felder des Formulars "App hinzufügen" aus:</li>
+         <ul>
+             <li>App-Name</li>
+             <li>Beschreibung</li>
+             <li>Produkt-API: wählen Sie GoToMeeting</li>
+             <li>App-URL: Geben Sie die URL Ihrer Instanz ein</li>
+         </ul>
+     <li>Klicken Sie auf "App erstellen"</li>
+     <li>Klicken Sie in der Appliste auf den Namen Ihrer App</li>
+     <li>Klicken Sie auf den Tab "Schlüssel"</li>
+     <li>Kopieren Sie den Kunden-Schlüsselwert und geben Sie ihn unten ein</li>
+ </ol> </td></tr></table>',
+    'oauth_consumer_key' => 'Kunden-Schlüssel',
 );

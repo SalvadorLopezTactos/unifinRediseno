@@ -72,4 +72,3 @@ class DeleteBeanById extends SugarApi
 }
 
 ?>
-

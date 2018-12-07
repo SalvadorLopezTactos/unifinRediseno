@@ -10,6 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
+
 /**
  * Language files management
  * @api
@@ -94,7 +96,7 @@ class LanguageManager
 
 		$file = create_cache_directory('modules/' . $module . '/language/'.$lang.'.lang.php');
 		write_array_to_file('mod_strings',$loaded_mod_strings, $file);
-		include($file);
+        include FileLoader::validateFilePath($file);
 
 		// put the item in the sugar cache.
 		$key = self::getLanguageCacheKey($module,$lang);

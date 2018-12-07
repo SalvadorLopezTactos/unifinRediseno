@@ -230,15 +230,27 @@ class TeamSetLink extends Link2 {
         }
 	}
 
-	/**
-	 * Replace whatever teams are on the bean with the teams given in the $rel_keys
-	 *
-	 * @param object $rel_keys
-	 * @param unknown_type $additional_values
-	 * @param unknown_type $save
-	 */
-	public function replace($rel_keys, $additional_values=array(), $save = true){
-            $this->_teamList = $rel_keys;
+    /**
+     * Replace whatever teams are on the bean with the teams given in the $rel_keys
+     *
+     * @param array $rel_keys
+     * @param array $additional_values
+     * @param bool $save
+     */
+    public function replace($rel_keys, $additional_values = [], $save = true)
+    {
+        $teamIds = [];
+
+        foreach ($rel_keys as $key) {
+            if ($key instanceof SugarBean) {
+                $teamIds[] = $key->id;
+            } else {
+                $teamIds[] = $key;
+            }
+        }
+
+        $this->_teamList = $teamIds;
+
             if (!empty($additional_values['selected_teams'])) {
                 $this->_selectedTeamList = $additional_values['selected_teams'];
             }

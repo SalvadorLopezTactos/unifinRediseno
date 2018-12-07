@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'تعريف العملية',
   'LBL_MODULE_TITLE' => 'تعريف العملية',
   'LBL_MODULE_NAME_SINGULAR' => 'تعريف العملية',
@@ -334,6 +333,8 @@ $mod_strings = array (
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL' => 'لا يساوي',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_TEXT' => 'ليس هو',
     'LBL_PMSE_EXPCONTROL_OPERATOR_NOT_EQUAL_DATE' => 'لا يساوي',
+
+    'LBL_PMSE_RUNTIME_BUTTON' => 'وقت التشغيل',
 
     'LBL_PMSE_FORMPANEL_SUBMIT' => 'إضافة',
     'LBL_PMSE_FORMPANEL_CLOSE' => 'إغلاق',

@@ -9,6 +9,10 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+use Sugarcrm\Sugarcrm\IdentityProvider\Authentication;
+
+$idpConfig = new Authentication\Config(\SugarConfig::getInstance());
+
 $moduleName = 'Administration';
 $adminRoute = '#bwc/index.php?module=Administration&action=';
 $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
@@ -54,6 +58,8 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'module' => $moduleName,
         'icon' => 'fa-cogs',
         'route' => $adminRoute . 'PasswordManager',
+        'idm_mode_link' =>
+            $idpConfig->isIDMModeEnabled() ? $idpConfig->buildCloudConsoleUrl('passwordManagement') : null,
     ),
 
     // Sugar Connect
@@ -107,7 +113,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'acl_action' => 'studio',
         'module' => $moduleName,
         'icon' => 'fa-cogs',
-        'route' => '#bwc/index.php?module=Currencies&action=index',
+        'route' => '#Currencies',
     ),
     // Backups
     array(
@@ -369,7 +375,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'acl_action' => 'studio',
         'module' => $moduleName,
         'icon' => 'fa-cogs',
-        'route' => '#bwc/index.php?module=Manufacturers&action=index',
+        'route' => '#Manufacturers',
     ),
 
     // Product Categories
@@ -386,7 +392,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'acl_action' => 'studio',
         'module' => $moduleName,
         'icon' => 'fa-cogs',
-        'route' => '#bwc/index.php?module=Shippers&action=index',
+        'route' => '#Shippers',
     ),
 
     // Product Types
@@ -403,7 +409,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'acl_action' => 'studio',
         'module' => $moduleName,
         'icon' => 'fa-cogs',
-        'route' => '#bwc/index.php?module=TaxRates&action=index',
+        'route' => '#TaxRates',
     ),
 
     // Releases
@@ -421,7 +427,7 @@ $viewdefs[$moduleName]['base']['menu']['sweetspot'] = array(
         'acl_action' => 'studio',
         'module' => $moduleName,
         'icon' => 'fa-cogs',
-        'route' => '#bwc/index.php?module=ContractTypes&action=index',
+        'route' => '#ContractTypes',
     ),
 
     // Process Management

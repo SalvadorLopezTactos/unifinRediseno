@@ -19,6 +19,7 @@
  *
  */
 
+use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
 
 class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument {
 
@@ -364,7 +365,7 @@ class ExtAPILotusLive extends OAuthPluginBase implements WebMeeting,WebDocument 
         $cacheFileBase = 'cache/include/externalAPI/docCache_'.$current_user->id.'_LotusLiveDirect';
         if ( !$forceReload && file_exists($cacheFileBase.'.php') ) {
             // File exists
-            include_once($cacheFileBase.'.php');
+            include_once FileLoader::validateFilePath($cacheFileBase.'.php');
             if ( abs(time()-$docCache['loadTime']) < 3600 ) {
                 // And was last updated an hour or less ago
                 return $docCache['results'];

@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Quartalsweise',
     'LBL_BY_FISCAL_YEAR' => 'Nach Geschäftsjahr',
     'LBL_BY_FISCAL_QUARTER' => 'Nach Geschäftsquartal',
+    'LBL_AMOUNT' => 'Betrag',
     'LBL_COUNT' => 'Zähler',
+    'LBL_PERCENT' => 'Prozent',
     'LBL_SUM' => 'SUMME',
     'LBL_AVG' => 'AVG',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Monat',
     'LBL_YEAR' => 'Jahr',
     'LBL_QUARTER' => 'Quartal',
+    'LBL_FISCAL' => 'Geschäftsjahr',
     'LBL_FISCAL_YEAR' => 'Geschäftsjahr',
     'LBL_FISCAL_QUARTER' => 'Geschäftsquartal',
 	'LBL_YESTERDAY'=>'Gestern',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Nächstes Quartal',
     'LBL_ADD_RELATE' => "Verknüpfte hinzufügen",
     'LBL_DEL_THIS' => "Entfernen",
-    'LBL_ALERT_CANT_ADD' => 'Sie können kein verknüpftes Modul hinzufügen, wenn Sie keine Tabelle zum Verknüpfen auswählen.\nWählen Sie ein Modul aus der Dropdown-Liste links von der Schaltfläche &#39;Verknüpfte hinzufügen&#39;, die Sie angeklickt haben.',
+    'LBL_ALERT_CANT_ADD' => 'Sie können kein verknüpftes Modul hinzufügen, wenn Sie keine Tabelle zum Verknüpfen auswählen.\\nWählen Sie ein Modul aus der Dropdown-Liste links von der Schaltfläche &#39;Verknüpfte hinzufügen&#39;, die Sie angeklickt haben.',
     'LBL_BY_DAY' => 'Täglich',
     'LBL_DAY' => 'Tag',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Optional',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'ist größer oder gleich',
 
     'LBL_FILTER_BY_MODULE' => 'Nach Modul',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Mit Diagrammen',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Fehler beim Abrufen der Daten des Drillthrough-Berichts für diese Aktion. Kontaktieren Sie den Eigentümer des Berichts zwecks Unterstützung.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Drillthrough nicht gefunden',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'Die Listenansicht zeigt alle Datensätze an, die den aktuellen Suchkriterien entsprechen und auf die der Benutzer Zugriff hat. Die Basisinformationen können innerhalb der Listespalten und in der Vorschau angezeigt werden. Es können Tags für Berichte festgelegt und Filter erstellt werden. Der Bericht kann durch Anklicken eingesehen werden oder er kann durch Klicken auf "Bericht bearbeiten" im Aktionsmenü bearbeitet werden.',
+  );

@@ -26,6 +26,12 @@
     showPage: true,
 
     /**
+     * is IDM mode enabled?
+     * @var boolean
+     */
+    isIDMModeEnabled: false,
+
+    /**
      * @override
      * @param options
      */
@@ -35,6 +41,7 @@
         this._super('initialize', [options]);
         this.fieldsToValidate = this._fieldsToValidate(options.meta);
         this.action = 'edit';
+        this.isIDMModeEnabled = App.metadata.getConfig().idmModeEnabled || false;
     },
     /**
      * @override
@@ -60,6 +67,16 @@
             return this;
         }
         this._super('_render');
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _renderField: function(field, $fieldEl) {
+        this._super('_renderField', [field, $fieldEl]);
+        if (this.isIDMModeEnabled && field.def.idm_mode_disabled) {
+            field.setDisabled(true);
+        }
     },
 
     /**

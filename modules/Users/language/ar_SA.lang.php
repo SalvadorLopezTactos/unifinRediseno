@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'معلومات المستخدم ليست موجودة',
     'ERR_USER_NAME_EXISTS'              => 'اسم المستخدم {0} موجود بالفعل. غير مسموح بأسماء المستخدم المتكررة. قم بتغيير اسم المستخدم لكي يصبح فريدًا من نوعه.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'تم حظر هذا المستخدم من استخدام تطبيق Sugar ويتعذر تسجيل الدخول باستخدام كلمة مروره/ مرورها الحالية.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'المستخدم بتصديق خارجي هو فقط غير المسموح له بتسجيل الدخول باستخدام بيانات اعتماد Sugar',
 
 	'LBL_PASSWORD_SENT'                => 'تم تحديث كلمة المرور',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'لا يمكن إرسال كلمة المرور',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'عنوان البريد الإلكتروني للمستلم',
 	'ERR_SERVER_STATUS'					=> 'حالة خادمك',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'النظام غير قادر على إرسال بريد إلكتروني للمستخدم. يُرجى التحقق من تكوين البريد الصادر في <a href="index.php?module=EmailMan&action=config">إعدادات البريد الإلكتروني</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'يمكن إنشاء المستخدم فقط في <a href="{0}" target="_blank">وحدة تحكم السحابة</a> لوضع IDM.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'يمكن تحديث عنوان البريد الإلكتروني فقط في <a href="{0}" target="_blank">وحدة تحكم السحابة</a> لوضع IDM.',
 
     'LBL_EMAIL_ADDRESS'                 => 'عنوان البريد الإلكتروني',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'تأكيد كلمة المرور',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'لقد قمت بتغيير نوع المستخدم من مستخدم مسؤول النظام إلى مستخدم معتاد.  بعد حفظ هذا التغيير، لن يظل المستخدم يتمتع بامتيازات مسؤول النظام. \n\nانقر فوق \\"موافق\\" للمتابعة.\n انقر فوق \\"إلغاء\\" للرجوع إلى السجل.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'لقد قمت بتغيير نوع المستخدم من مستخدم مسؤول النظام إلى مستخدم معتاد.  بعد حفظ هذا التغيير، لن يظل المستخدم يتمتع بامتيازات مسؤول النظام. \\n\\nانقر فوق \\"موافق\\" للمتابعة.\\n انقر فوق \\"إلغاء\\" للرجوع إلى السجل.',
 	'LBL_COUNTRY'						=> 'البلد',
 	'LBL_CURRENCY_TEXT'					=> 'هذه هي العملة المستخدمة في القائمة وطرق عرض السجل، إذا تم تمكين \\"عرض العملة المفضلة\\". هذه أيضًا هي العملة الافتراضية للسجلات الجديدة.',
 	'LBL_CURRENCY'						=> 'العملة المفضلة',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'دق',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'ث',
     'LBL_LOGIN_ADMIN_CALL'              => 'يُرجى الاتصال بمسؤول النظام.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'للتصديق باستخدام OpenID Connect (OIDC) في وضع IDM، الرجاء تثبيت امتداد GMP PHP.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'لقد تم تسجيل خروجك. لتسجيل الدخول ثانية انقر',
     'LBL_LOGGED_OUT_2' => 'هنا',
@@ -626,6 +631,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'تقارير المستخدمين',
     'LBL_CONTACTS_SYNC' => 'جهات الاتصال',
     'LBL_DETAIL' => 'ملف تعريف المستخدم',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'في حال عدم إمكانية تحرير حقول معينة، الرجاء تسجيل الدخول إلى وحدة تحكم السحابة لإدارة هذه الحقول',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'إذا كنت ترغب في تغيير حقول معية غير قابلة للتحرير، ' .
+        'الرجاء الاتصال بالمسؤول لإبلاغه بهذه التغييرات',
 ); // END STRINGS DEFS
 
 ?>

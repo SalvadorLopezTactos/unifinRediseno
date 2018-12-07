@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Dashbord for saksliste',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Dashbord for saksoppføring',
+
 	'ERR_DELETE_RECORD'					=> 'Du må oppgi et registreringsnummer for å slette denne bedrift.',
 	'LBL_ACCOUNT_ID'					=> 'Bedrift-ID',
 	'LBL_ACCOUNT_NAME'					=> 'Bedriftnavn:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Status:',
     'LBL_SOURCE' => 'Kilde:',
 	'LBL_SUBJECT'						=> 'Emne:',
-	'LBL_SYSTEM_ID'						=> 'System-ID',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Bedriftnavn',
 	'LBL_LIST_ASSIGNED'					=> 'Tildelt til',
 	'LBL_LIST_CLOSE'					=> 'Lukk',

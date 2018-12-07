@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => 'Da Trimestre',
     'LBL_BY_FISCAL_YEAR' => 'Per Anno Fiscale',
     'LBL_BY_FISCAL_QUARTER' => 'Per Trimestre Fiscale',
+    'LBL_AMOUNT' => 'Importo',
     'LBL_COUNT' => 'Conteggio',
+    'LBL_PERCENT' => 'Percentuale',
     'LBL_SUM' => 'SUM',
     'LBL_AVG' => 'AVG',
     'LBL_MAX' => 'MAX',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => 'Mese',
     'LBL_YEAR' => 'Anno',
     'LBL_QUARTER' => 'Trimestre',
+    'LBL_FISCAL' => 'Fiscale',
     'LBL_FISCAL_YEAR' => 'Anno Fiscale',
     'LBL_FISCAL_QUARTER' => 'Trimestre Fiscale',
 	'LBL_YESTERDAY'=>'Ieri',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'Prossimo Trimestre',
     'LBL_ADD_RELATE' => "Aggiungi Relativo",
     'LBL_DEL_THIS' => "Rimuovi",
-    'LBL_ALERT_CANT_ADD' => 'Non puoi aggiungere un modulo relativo finchè non hai selezionato una tabella che si riferisca da.\nSeleziona un modulo nel  dropdown sinistro di ´Aggiungi relativo´ pulsante che hai cliccato.',
+    'LBL_ALERT_CANT_ADD' => 'Non puoi aggiungere un modulo relativo finchè non hai selezionato una tabella che si riferisca da.\\nSeleziona un modulo nel  dropdown sinistro di ´Aggiungi relativo´ pulsante che hai cliccato.',
     'LBL_BY_DAY' => 'Da giorno',
     'LBL_DAY' => 'Giorno',
     'LBL_OUTER_JOIN_CHECKBOX' => 'Moduli Correlati Opzionali',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => 'Maggiore o Uguale a',
 
     'LBL_FILTER_BY_MODULE' => 'Per modulo',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'Con grafici',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'Errore durante il recupero dei dati del report drill-through per questa azione. Per assistenza, contattare il proprietario del report.',
+    'LBL_CHART_NO_DRILLTHRU' => 'Drill-through non disponibile',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'La vista elenco di un modulo visualizza tutti i report che rispondono ai criteri di ricerca correnti e ai quali gli utenti hanno accesso. È possibile visualizzare i dettagli di base di ogni report nelle colonne campo della vista elenco e nell&#39;anteprima. È possibile impostare dei tag per i report e creare dei filtri. Fare clic sul nome del report per visualizzare il report oppure selezionare "Modifica report" nel menu azioni per modificare il report.',
+  );

@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> '未找到用户信息',
     'ERR_USER_NAME_EXISTS'              => '用户名 {0} 已存在。不允许使用重复的用户名。请将其更改为唯一的用户名。',
 	'ERR_USER_IS_LOCKED_OUT'			=> '当前用户已被锁在 Sugar 应用程序外，无法使用现有密码登录。',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => '仅通过外部验证的用户不能使用 Sugar 凭据登录',
 
 	'LBL_PASSWORD_SENT'                => '密码已经更新',
 	'LBL_CANNOT_SEND_PASSWORD'         => '不能发送密码',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> '收件人电子邮件地址',
 	'ERR_SERVER_STATUS'					=> '您的服务器状态',
 	'ERR_SERVER_SMTP_EMPTY'				=> '系统无法发送邮件给用户。请到 <a href="index.php?module=EmailMan&action=config">电子邮件设置</a>检查系统发信配置。',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => '只能在 <a href="{0}" target="_blank">云控制台</a>中为 IDM 模式创建用户。',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => '只能在 <a href="{0}" target="_blank">云控制台</a>中为 IDM 模式更新主要电子邮件地址。',
 
     'LBL_EMAIL_ADDRESS'                 => '电子邮件地址',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> '确认密码',
-	'LBL_CONFIRM_REGULAR_USER'			=> '您已将该用户类型从系统管理员转换为普通用户。保存更改之后，该用户将没有系统管理权限。\n\n单击 “确定”继续操作 。\n单击 “取消”以返回至该记录。',
+	'LBL_CONFIRM_REGULAR_USER'			=> '您已将该用户类型从系统管理员转换为普通用户。保存更改之后，该用户将没有系统管理权限。\\n\\n单击 “确定”继续操作 。\\n单击 “取消”以返回至该记录。',
 	'LBL_COUNTRY'						=> '国家',
 	'LBL_CURRENCY_TEXT'					=> '如果已启用显示首选货币，则在列表和记录视图中使用货币。这也是新记录的默认货币。',
 	'LBL_CURRENCY'						=> '首选货币',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => '分钟。',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => '秒。',
     'LBL_LOGIN_ADMIN_CALL'              => '请联系系统管理员。',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        '要在 IDM 模式下使用 OpenID Connect (OIDC) 验证，请安装 GMP PHP 扩展。',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => '您已被注销。再次登录请点击',
     'LBL_LOGGED_OUT_2' => '这里',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => '用户报告',
     'LBL_CONTACTS_SYNC' => '联系人',
     'LBL_DETAIL' => '用户配置文件',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        '如果某些字段不可编辑，请登录到云控制台以管理这些字段',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        '如果要更改某些不可编辑的字段，' .
+        '请联系管理员以告知这些更改',
 ); // END STRINGS DEFS
 
 ?>

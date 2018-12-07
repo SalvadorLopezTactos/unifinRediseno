@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'لوحة معلومات قائمة الملاحظات',
+
     'ERR_DELETE_RECORD' => 'يجب تحديد رقم السجل لحذف الحساب.',
     'LBL_ACCOUNT_ID' => 'معرّف الحساب:',
     'LBL_CASE_ID' => 'معرّف الحالة:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'الوصف',
     'LBL_EMAIL_ADDRESS' => 'عنوان البريد الإلكتروني:',
     'LBL_EMAIL_ATTACHMENT' => 'مرفق البريد الإلكتروني',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'مرفق البريد الإلكتروني لـ',
     'LBL_FILE_MIME_TYPE' => 'نوع Mime',
+    'LBL_FILE_EXTENSION' => 'امتداد الملف',
+    'LBL_FILE_SOURCE' => 'مصدر الملف',
+    'LBL_FILE_SIZE' => 'حجم الملف',
     'LBL_FILE_URL' => 'عنوان URL للملف',
     'LBL_FILENAME' => 'المرفق:',
     'LBL_LEAD_ID' => 'معرّف العميل المتوقع:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'معرّف الفرصة:',
     'LBL_PARENT_ID' => 'معرّف الأصل:',
     'LBL_PARENT_TYPE' => 'نوع الأصل',
+    'LBL_EMAIL_TYPE' => 'نوع البريد الإلكتروني',
+    'LBL_EMAIL_ID' => 'معرف البريد الإلكتروني',
     'LBL_PHONE' => 'الهاتف:',
     'LBL_PORTAL_FLAG' => 'العرض في الموقع المدخلي؟',
     'LBL_EMBED_FLAG' => 'تضمين في البريد الإلكتروني؟',

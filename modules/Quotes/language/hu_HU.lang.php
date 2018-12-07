@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Árajánlatok listája műszerfal',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Árajánlat bejegyzések műszerfal',
+
     'LBL_CONTRACTS'=>'Szerződések',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Szerződések',
     'ERR_DELETE_RECORD' => 'Adjon meg egy azonosítót az árajánlat törléséhez!',
@@ -85,7 +89,7 @@ $mod_strings = array (
     'LBL_LIST_DATE_QUOTE_CLOSED' => 'Szállítás dátuma',
     'LBL_LIST_DATE_QUOTE_EXPECTED_CLOSED' => 'Érvényesség tartama:',
     'LBL_LIST_DISCOUNT_PRICE' => 'Egységár',
-    'LBL_LIST_DEAL_TOT'=> 'Teljes Engedmény',
+    'LBL_LIST_DEAL_TOT'=> 'Teljes engedmény',
     'LBL_LIST_FORM_TITLE' => 'Árajánlat lista',
     'LBL_LIST_GRAND_TOTAL' => 'Végösszeg',
     'LBL_LIST_LIST_PRICE' => 'Lista',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Részösszeg (USD)',
     'LBL_SUBTOTAL' => 'Részösszeg:',
     'LBL_TAXABLE_SUBTOTAL' => 'Adózható részösszeg',
-    'LBL_SYSTEM_ID' => 'Rendszer azonosító',
     'LBL_TAX_USDOLLAR'=>'Adó (USD)',
     'LBL_TAX' => 'Adó:',
     'LBL_TAX_TOTAL' => 'Adó összesen',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Kiválasztottak törlése',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Kiválasztott elemek törlése',
     'LBL_SAVE_LINE_ITEMS' => 'Mielőtt az ajánlatot elmentené, kérjük, hogy mentse el az aktív sorelemeket a mellettük lévő kék pipára kattintva.',
+    'LBL_COPY_LINE_ITEMS' => 'Az ajánlat lemásolása előtt mentse az aktív sor tételeket a mellettük található kék pipára kattintva.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Keresés a termékkatalógusban',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Nincs elérhető adat',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Megajánlott tételek bemásolása az új ajánlatba.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Megajánlott tételek bemásolása az új ajánlatba. Az eljárás eltarthat egy ideig.',
 );

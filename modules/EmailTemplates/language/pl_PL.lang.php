@@ -85,5 +85,6 @@ $mod_strings = array(
     'LBL_SELECT'                        => 'Wybierz' /*for 508 compliance fix*/,
     'LBL_ID_FF_CLEAR'                   => 'Wyczyść' /*for 508 compliance fix*/,
     'LBL_TYPE'                          => 'Typ',
-    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Szablony dla e-maili',
+    'LBL_FILTER_EMAIL_TYPE_TEMPLATES'   => 'Szablony wiadomości e-mail',
+    'LBL_TEMPLATE_HAS_VARIABLES' => 'Zmienne',
 );

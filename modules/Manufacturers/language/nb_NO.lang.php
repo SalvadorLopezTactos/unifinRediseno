@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Du må oppgi et registernummer for å slette denne produsenten.',
   'NTC_STATUS' => 'Sett status til Passiv for å fjerne denne produsenten fra Produsent-rullelisten',
   'NTC_LIST_ORDER' => 'Bestem rekkefølgen for hvordan denne produsenten vil vises i Produsent-rullelisten',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Passiv',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'Importér produsenter',
 	'LBL_EDITLAYOUT' => 'Redigér Oppsett' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'Omsetning linjeelementer',

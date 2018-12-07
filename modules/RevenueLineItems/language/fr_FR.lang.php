@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Tableau de bord de la liste de lignes de revenu',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Tableau de bord de l&#39;enregistrement de lignes de revenu',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Campagne',
     'LBL_MODULE_NAME' => 'Lignes de revenu',
     'LBL_MODULE_NAME_SINGULAR' => 'Ligne de revenu',
@@ -76,7 +80,7 @@ $mod_strings = array(
     'LBL_SUPPORT_NAME' => 'Titre du support :',
     'LBL_SUPPORT_CONTACT' => 'Interlocuteur support :',
     'LBL_PRICING_FORMULA' => 'Formule de pricing :',
-    'LBL_ACCOUNT_NAME' => 'Nom du Compte :',
+    'LBL_ACCOUNT_NAME' => 'Nom du compte:',
     'LNK_REVENUELINEITEM_LIST' => 'Afficher les lignes de revenu',
     'LNK_NEW_REVENUELINEITEM' => 'Créer Ligne de revenu',
     'NTC_DELETE_CONFIRMATION' => 'Êtes-vous sûr de vouloir supprimer cet enregistrement ?',
@@ -196,7 +200,7 @@ Pour créer un enregistrement {{module_name}}, les étapes suivantes sont néces
  - Cliquer sur "Voir plus" pour afficher plus de champs, si nécessaire.
 2. Cliquer sur "Sauvegarder" pour finaliser l&#39;enregistrement et retourner sur la page précédente.',
 
-    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => 'Top 10 des Lignes de revenu',
+    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => 'Top 10 des lignes de revenu',
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Afficher le top 10 des Lignes de revenu dans un graphique à bulles.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Mes Lignes de revenu',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Les Lignes de revenu de mon équipe",

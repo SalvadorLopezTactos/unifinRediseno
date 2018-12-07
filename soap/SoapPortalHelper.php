@@ -10,11 +10,49 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-use  Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+use Sugarcrm\Sugarcrm\Util\Arrays\ArrayFunctions\ArrayFunctions;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Sql\OrderBy;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\Sql\OrderDirection;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 
 $portal_modules = array('Contacts', 'Accounts', 'Notes');
 $portal_modules[] = 'Cases';
 $portal_modules[] = 'Bugs';
+
+/**
+ * Validates ORDER BY statement
+ *
+ * @param $orderBy string
+ * @throws InvalidArgumentException
+ */
+function validateOrderBy($orderBy)
+{
+    $constraintOrderBy = new OrderBy();
+    $constraintOrderDirection = new OrderDirection();
+
+    $parts = preg_split('/\s*,\s*/', trim($orderBy));
+    foreach ($parts as $part) {
+        $order = preg_split('/\s+/', $part, 2);
+
+        $violations = Validator::getService()->validate($order[0], $constraintOrderBy);
+        if (count($violations) > 0) {
+            $msg = array_reduce(iterator_to_array($violations), function ($msg, $violation) {
+                return empty($msg) ? $violation->getMessage() : $msg . ' - ' . $violation->getMessage();
+            });
+            throw new \InvalidArgumentException($msg);
+        }
+
+        if (count($order) > 1) {
+            $violations = Validator::getService()->validate($order[1], $constraintOrderDirection);
+            if (count($violations) > 0) {
+                $msg = array_reduce(iterator_to_array($violations), function ($msg, $violation) {
+                    return empty($msg) ? $violation->getMessage() : $msg . ' - ' . $violation->getMessage();
+                });
+                throw new \InvalidArgumentException($msg);
+            }
+        }
+    }
+}
 
 /*
 BUGS
@@ -22,6 +60,8 @@ BUGS
 
 function get_bugs_in_contacts($in, $orderBy = '')
     {
+    validateOrderBy($orderBy);
+
         //bail if the in is empty
         if(empty($in)  || $in =='()' || $in =="('')")return;
         // First, get the list of IDs.
@@ -38,6 +78,7 @@ function get_bugs_in_contacts($in, $orderBy = '')
 
 function get_bugs_in_accounts($in, $orderBy = '')
     {
+    validateOrderBy($orderBy);
         //bail if the in is empty
         if(empty($in)  || $in =='()' || $in =="('')")return;
         // First, get the list of IDs.
@@ -59,6 +100,7 @@ Cases
 
 function get_cases_in_contacts($in, $orderBy = '')
     {
+    validateOrderBy($orderBy);
         //bail if the in is empty
         if(empty($in)  || $in =='()' || $in =="('')")return;
         // First, get the list of IDs.
@@ -75,6 +117,7 @@ function get_cases_in_contacts($in, $orderBy = '')
 
 function get_cases_in_accounts($in, $orderBy = '')
     {
+    validateOrderBy($orderBy);
         if(empty($_SESSION['viewable']['Accounts'])){
             return;
         }
@@ -100,6 +143,7 @@ NOTES
 
 function get_notes_in_contacts($in, $orderBy = '')
     {
+    validateOrderBy($orderBy);
         //bail if the in is empty
         if(empty($in)  || $in =='()' || $in =="('')")return;
         // First, get the list of IDs.
@@ -117,6 +161,7 @@ function get_notes_in_contacts($in, $orderBy = '')
 
 function get_notes_in_module($in, $module, $orderBy = '')
     {
+    validateOrderBy($orderBy);
         //bail if the in is empty
         if(empty($in)  || $in =='()' || $in =="('')")return;
         // First, get the list of IDs.
@@ -138,6 +183,8 @@ function get_notes_in_module($in, $module, $orderBy = '')
 
     function get_related_in_module($in, $module, $rel_module, $orderBy = '', $row_offset = 0, $limit= -1)
     {
+    validateOrderBy($orderBy);
+
         $rel = BeanFactory::newBean($rel_module);
         if(empty($rel)) {
         	return array();
@@ -188,6 +235,7 @@ function get_notes_in_module($in, $module, $orderBy = '')
 
 function get_accounts_from_contact($contact_id, $orderBy = '')
     {
+    validateOrderBy($orderBy);
                 // First, get the list of IDs.
         $query = "SELECT account_id as id from accounts_contacts where contact_id='".$GLOBALS['db']->quote($contact_id)."' AND deleted=0";
         if(!empty($orderBy)){
@@ -200,6 +248,7 @@ function get_accounts_from_contact($contact_id, $orderBy = '')
 
 function get_contacts_from_account($account_id, $orderBy = '')
     {
+    validateOrderBy($orderBy);
         // First, get the list of IDs.
         $query = "SELECT contact_id as id from accounts_contacts where account_id='".$GLOBALS['db']->quote($account_id)."' AND deleted=0";
         if(!empty($orderBy)){
@@ -211,6 +260,8 @@ function get_contacts_from_account($account_id, $orderBy = '')
     }
 
 function get_related_list($in, $template, $where, $order_by, $row_offset = 0, $limit = ""){
+
+    validateOrderBy($order_by);
         $template->disable_row_level_security = true;
 
         $q = '';

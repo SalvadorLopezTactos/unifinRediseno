@@ -111,7 +111,7 @@ $mod_strings = array (
     'LBL_WIRELESS_SERVER_URL' => 'Serwer usługi Sugar Mobile Plus',
 	'LBL_WIRELESS_SUBPANEL_LIST_ENTRIES' => 'Maksymalna liczba rekordów w panelu podrzędnym na stronie',
 	'LOG_MEMORY_USAGE'=>'Zapisuj zużycie pamięci w logu',
-	'LOG_SLOW_QUERIES'=>'Zapisuj wolne zapytania w logu',
+    'LOG_SLOW_QUERIES' => 'Zapisuj wolne zapytania w logu',
     'LOCK_HOMEPAGE_HELP'=>'To ustawienie zapobiega:<BR> 1) dodawaniu dashletów do strony głównej, <BR>2) zmiany położenia dashletów na stronie głównej poprzez przeciąganie i upuszczanie.',
     'CURRENT_LOGO'=>'Aktualne logo:',
     'CURRENT_LOGO_HELP'=>'To logo jest wyświetlane w lewym rogu stopki aplikacji Sugar.',
@@ -134,9 +134,6 @@ $mod_strings = array (
 	'SYSTEM_NAME_HELP'=>'To jest nazwa wyświetlana na pasku tytułowym Twojej przeglądarki.',
     'LBL_ENABLE_HISTORY_CONTACTS_EMAILS' => 'Włącz/wyłącz wyświetlanie e-maili od powiązanych kontaktów w panelu podrzędnym e-mail.',
 
-    'LBL_OC_STATUS'                     => 'Domyślny status klienta offline',
-    'DEFAULT_OC_STATUS'                 => 'Włączaj domyślnie klienta offline',
-    'LBL_OC_STATUS_DESC' => 'Zaznacz to pole, jeśli użytkownicy mają mieć dostęp do klienta offline. Możesz skonfigurować dostęp indywidualnie dla każdego z użytkowników.',
     'SESSION_TIMEOUT' => 'Wygaśnięcie sesji portalu',
     'LBL_SESSION_TIMEOUT_TOOLTIP' => 'Wygaśnięcie sesji Portalu występuje w starszych wersjach Portalu Sugar dostępnych w wersjach 6.5 i wcześniejszych.',
     'UPLOAD_MAXSIZE_UNITS' => 'bajtów',
@@ -435,8 +432,17 @@ Aby skonfigurować opcje systemu, kliknij <a href="index.php?module=Administrati
 // Password settings
     'ERR_EMPTY_SAML_LOGIN' => 'URL logowania SAML nie może być pusty',
     'ERR_EMPTY_SAML_CERT' => 'Certyfikat SAML nie może być pusty',
+    'ERR_EMPTY_SAML_IDP_ENTITY_ID' => 'Identyfikator podmiotu SAML nie może być pusty',
     'ERR_SAML_LOGIN_URL' => 'URL logowania SAML jest nieprawidłowy',
     'ERR_SAML_SLO_URL' => 'URL SLO SAML jest nieprawidłowy',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_PRIVATE_KEY' => 'Plik PEM powinien zawierać klucz prywatny',
+    'ERR_SAML_REQUEST_SIGNING_CERT_NO_X509_CERTIFICATE' => 'Plik PEM powinien zawierać certyfikat x.509',
+    'ERR_SAML_REQUEST_SIGNING_CERT_X509_DOESNT_MATCH' => 'Podany certyfikat x.509 nie pasuje do klucza prywatnego',
+
+    //Activity Stream Settings
+    'LBL_ACTIVITY_STREAMS_SETTINGS_TITLE' => 'Panele aktywności',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT' => 'Włącz Panele aktywności',
+    'LBL_ACTIVITY_STREAMS_SETTINGS_EDIT_HELP' => 'Włącza Panele aktywności dla aplikacji',
 );
 
 

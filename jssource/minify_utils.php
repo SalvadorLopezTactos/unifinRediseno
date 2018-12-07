@@ -29,6 +29,8 @@ class SugarMinifyUtils
             $prefix.sugar_cached('')                => true,
             $prefix.'include/javascript/nvd3/lib/d3.min.js' => true,
             $prefix.'include/javascript/nvd3/nv.d3.min.js' => true,
+            $prefix.'include/javascript/d3-sugar/d3-sugar.min.js' => true,
+            $prefix.'include/javascript/sucrose/sucrose.min.js' => true,
             $prefix.'include/javascript/tiny_mce'   => true,
             $prefix.'include/javascript/yui'        => true,
             $prefix.'modules/Emails'                => true,

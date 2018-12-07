@@ -423,4 +423,3 @@ AND de.{$fiel_related_dire}='{$id_direccion}' and e.deleted=0 and de.deleted=0";
 }
 
 ?>
-

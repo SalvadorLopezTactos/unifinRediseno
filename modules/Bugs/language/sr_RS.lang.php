@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Kontrolna tabla liste grešaka',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Kontrolna tabla zapisa grešaka',
+
   'LBL_MODULE_NAME' => 'Defekti',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Defekt:',
   'LBL_MODULE_TITLE' => 'Praćenje defekata: Početna strana',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Slučajevi',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projekti',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenta',
-  'LBL_SYSTEM_ID' => 'ID broj sistema',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Dodeljeni korisnik',
 	'LBL_ASSIGNED_TO_NAME' => 'Dodeljeno',
 

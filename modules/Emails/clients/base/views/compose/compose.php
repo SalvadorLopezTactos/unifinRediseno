@@ -64,7 +64,6 @@ $viewdefs['Emails']['base']['view']['compose'] = array(
                     'type'            => 'sender',
                     'span'            => 12,
                     'css_class'       => 'inherit-width',
-                    'label_css_class' => 'begin-fieldgroup',
                     'endpoint'        => array(
                         'module' => 'OutboundEmailConfiguration',
                         'action' => 'list',
@@ -75,7 +74,6 @@ $viewdefs['Emails']['base']['view']['compose'] = array(
                     'type'           => 'recipients',
                     'label'          => 'LBL_TO_ADDRS',
                     'span'           => 12,
-                    'cell_css_class' => 'controls-one btn-fit',
                     'required'       => true,
                 ),
                 array(
@@ -83,78 +81,33 @@ $viewdefs['Emails']['base']['view']['compose'] = array(
                     'type'           => 'recipients',
                     'label'          => 'LBL_CC',
                     'span'           => 12,
-                    'cell_css_class' => 'controls-one btn-fit',
                 ),
                 array(
                     'name'           => 'bcc_addresses',
                     'type'           => 'recipients',
                     'label'          => 'LBL_BCC',
                     'span'           => 12,
-                    'cell_css_class' => 'controls-one btn-fit',
                 ),
                 array(
-                    'name'            => 'subject',
+                    'name'            => 'name',
                     'label'           => 'LBL_SUBJECT',
                     'span'            => 12,
-                    'label_css_class' => 'end-fieldgroup',
                 ),
                 array(
-                    'name'        => 'attachments',
-                    'label'       => 'LBL_ATTACHMENTS',
-                    'type'        => 'attachments',
-                ),
-                array(
-                    'name'           => 'actionbar',
-                    'type'           => 'compose-actionbar',
-                    'span'           => 12,
-                    'inline' => true,
-                    'dismiss_label'  => true,
-                    'fields' => array(
-                        array(
-                            'name'      => 'attachments_dropdown',
-                            'css_class' => 'btn-group',
-                            'type'      => 'actiondropdown',
-                            'buttons'   => array(
-                                array(
-                                    'name'  => 'upload_new_button',
-                                    'type'  => 'attachment-button',
-                                    'icon'  => 'fa-paperclip',
-                                    'label' => 'LBL_ATTACHMENT',
-                                ),
-                                array(
-                                    'name'  => 'attach_sugardoc_button',
-                                    'type'  => 'rowaction',
-                                    'label' => 'LBL_ATTACH_SUGAR_DOC',
-                                ),
-                            ),
-                        ),
-                        array(
-                            'name'      => 'other_actions',
-                            'type' => 'fieldset',
-                            'inline' => true,
-                            'css_class' => 'actions pull-right',
-                            'fields'   => array(
-                                array(
-                                    'name'  => 'signature_button',
-                                    'type'  => 'button',
-                                    'icon'  => 'fa-edit',
-                                    'label' => 'LBL_EMAIL_SIGNATURES',
-                                ),
-                                array(
-                                    'name'  => 'template_button',
-                                    'type'  => 'button',
-                                    'icon'  => 'fa-file-o',
-                                    'label' => 'LBL_EMAIL_TEMPLATES',
-                                ),
-                            ),
-                        ),
-                    ),
-                ),
-                array(
-                    'name'          => 'html_body',
+                    'name'          => 'description_html',
                     'type'          => 'htmleditable_tinymce',
                     'dismiss_label' => true,
                     'span'          => 12,
+                    'tinyConfig' => array(
+                        'toolbar' => 'code | bold italic underline strikethrough | bullist numlist | ' .
+                            'alignleft aligncenter alignright alignjustify | forecolor backcolor | ' .
+                            'fontsizeselect | formatselect | fontselect | sugarattachment sugarsignature sugartemplate',
+                    ),
+                ),
+                array(
+                    'name' => 'attachments',
+                    'type' => 'attachments',
+                    'dismiss_label' => true,
                 ),
             ),
         ),

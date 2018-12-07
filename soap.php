@@ -40,9 +40,6 @@ require_once('soap/SoapData.php');
 require_once('soap/SoapDeprecated.php');
 
 
-require_once('soap/SoapSync.php');
-require_once('soap/SoapUpgradeUtils.php');
-
 /* Begin the HTTP listener service and exit. */
 ob_clean();
 

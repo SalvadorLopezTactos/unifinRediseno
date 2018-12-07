@@ -90,7 +90,15 @@
      *
      * @property {Array}
      */
-    moduleBlacklist: ['Home', 'Forecasts', 'ProductCategories', 'ProductTemplates', 'ProductTypes'],
+    moduleBlacklist: [
+        'Home',
+        'Forecasts',
+        'ProductCategories',
+        'ProductTemplates',
+        'ProductTypes',
+        'UserSignatures',
+        'OutboundEmail'
+    ],
 
     /**
      * Module Additions
@@ -555,7 +563,7 @@
             this._availableModules = {};
             var visibleModules = app.metadata.getModuleNames({filter: 'visible', access: 'read'}),
                 allowedModules = _.difference(visibleModules, this.moduleBlacklist);
-            
+
             _.each(this.additionalModules, function(extraModules, module) {
                 if (_.contains(allowedModules, module)) {
                     allowedModules = _.sortBy(_.union(allowedModules, extraModules), function(name) {return name});

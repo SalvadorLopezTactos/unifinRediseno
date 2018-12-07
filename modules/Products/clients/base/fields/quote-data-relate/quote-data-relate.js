@@ -42,7 +42,6 @@
      * Overriding because getSearchModule needs to return Products for this metadata
      *
      * @inheritdoc
-     * @override
      */
     _getPopulateMetadata: function() {
         return app.metadata.getModule('Products');
@@ -153,7 +152,6 @@
      * Overriding if there's no product_template_id or name, use the Products module and record ID
      *
      * @inheritdoc
-     * @override
      */
     _buildRoute: function() {
         this.buildRoute(this.model.module, this.model.get('id'));
@@ -163,7 +161,6 @@
      * Overriding as should default to the model's ID then if empty go to the link id
      *
      * @inheritdoc
-     * @override
      */
     _getRelateId: function() {
         return this.model.get(this.def.id_name) || this.model.get('id') ;

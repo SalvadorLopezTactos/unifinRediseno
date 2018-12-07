@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => 'Obrisan',
   'LBL_EMAIL_ADDRESS'=>'Email adresa',
   'LBL_CONTACTS_SYNC' => 'Kontakti',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        'Zaposleni može da se kreira samo u <a href="{0}" target="_blank">Cloud konzoli</a> za IDM režim.',
 );
 
 

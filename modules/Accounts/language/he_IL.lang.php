@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => 'הצעות מחיר (שלח אל)',
 	'LNK_ACCOUNT_REPORTS' => 'צפה בדוחות על חשבונות',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'מסמכים',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => 'לוח מחוונים של רשימת חשבונות',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => 'לוח מחוונים של רשומת חשבונות',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => 'טבלאות',
 	'LBL_DEFAULT' => 'צפייה',
@@ -56,7 +60,7 @@ $mod_strings = array (
 	'LBL_BUG_FORM_TITLE' => 'חשבונות',
 	'LBL_BUGS_SUBPANEL_TITLE' => 'באגים',
 	'LBL_CALLS_SUBPANEL_TITLE' => 'שיחות',
-	'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE' => 'יומן קמפין',
+	'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE' => 'יומן קמפיין',
 	'LBL_CASES_SUBPANEL_TITLE' => 'אירועים',
 	'LBL_CITY' => 'עיר:',
 	'LBL_CONTACTS_SUBPANEL_TITLE' => 'אנשי קשר',

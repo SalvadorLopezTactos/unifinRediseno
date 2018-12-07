@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'S´han definit múltiples columnes amb el mateix nom de camp.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Falten camps requerits:',
     'ERR_MISSING_MAP_NAME' => 'Falta el nom del mapeix personalitzat',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'La importació dels usuaris està inhabilitada per al mode IDM.',
     'ERR_SELECT_FULL_NAME' => 'No es pot seleccionar Nom Complert quan Nom i Cognoms están seleccionats.',
     'ERR_SELECT_FILE' => 'Seleccioni l´arxiu a pujar.',
     'LBL_SELECT_FILE' => 'Seleccioneu el fitxer:',

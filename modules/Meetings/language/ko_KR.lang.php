@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => '회의 목록 대시보드',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => '회의 기록 대시보드',
+
 	'ERR_DELETE_RECORD' => '이 회의를 삭제하시려면 정확한 자료 고유번호를 입력하셔야합니다.',
 	'LBL_ACCEPT_THIS'=>'수락하시겠습니까?',
 	'LBL_ADD_BUTTON'=> '추가하기',
@@ -48,8 +52,8 @@ $mod_strings = array (
 	'LBL_LIST_DUE_DATE'=>'마감일',
 	'LBL_LIST_FORM_TITLE' => '회의 목록',
 	'LBL_LIST_MY_MEETINGS' => '내 회의',
-    'LBL_MY_SCHEDULED_MEETINGS' => '내 예약 된 미팅',
-	'LBL_LIST_RELATED_TO' => '관련된 자료',
+    'LBL_MY_SCHEDULED_MEETINGS' => '나의 예약 미팅',
+	'LBL_LIST_RELATED_TO' => '관련 자료',
 	'LBL_LIST_STATUS'=>'상태',
 	'LBL_LIST_SUBJECT' => '제목',
 	'LBL_LIST_TIME' => '시작 시간',

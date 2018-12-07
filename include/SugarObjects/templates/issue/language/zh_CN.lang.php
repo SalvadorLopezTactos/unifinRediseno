@@ -36,7 +36,6 @@ $mod_strings = array (
   'LBL_MODIFIED_BY' => '最新修改人：',
   'LBL_ASSIGNED_USER' => '负责人：',
   'LBL_ASSIGNED_USER_NAME' => '指派给',
-  'LBL_SYSTEM_ID' =>'系统 ID：',
   'LBL_TEAM_NAME' =>'团队名称：',
   'LBL_TYPE'=>'类型：',
   'LBL_SUBJECT' => '主题：',

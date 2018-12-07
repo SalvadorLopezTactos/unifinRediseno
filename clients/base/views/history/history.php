@@ -56,7 +56,7 @@ $viewdefs['base']['view']['history'] = array(
                             'link' => 'emails',
                             'module' => 'Emails',
                         ),
-                        'label' => 'LBL_ARCHIVE_EMAIL',
+                        'label' => 'LBL_CREATE_ARCHIVED_EMAIL',
                         'acl_action' => 'create',
                         'acl_module' => 'Emails',
                     ),
@@ -158,7 +158,9 @@ $viewdefs['base']['view']['history'] = array(
         array(
             'filter_applied_to' => 'date_entered',
             'filters' => array(
-                'type' => array('$in' => array('out', 'inbound', 'archived')),
+                'state' => array(
+                    '$in' => array('Archived'),
+                ),
             ),
             'labels' => array(
                 'singular' => 'LBL_HISTORY_DASHLET_EMAIL_SINGULAR',

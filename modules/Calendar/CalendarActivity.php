@@ -10,8 +10,6 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-
 require_once('include/utils/activity_utils.php');
 
 class CalendarActivity {
@@ -43,17 +41,17 @@ class CalendarActivity {
         if ($sugar_bean->object_name == 'Task'){
             if (!empty($this->sugar_bean->date_start))
             {
-                $this->start_time = $timedate->fromUser($this->sugar_bean->date_start);
+                $this->start_time = $timedate->fromDb($this->sugar_bean->date_start);
             }
             else {
-                $this->start_time = $timedate->fromUser($this->sugar_bean->date_due);
+                $this->start_time = $timedate->fromDb($this->sugar_bean->date_due);
             }
             if ( empty($this->start_time)){
                 return;
             }
-            $this->end_time = $timedate->fromUser($this->sugar_bean->date_due);
+            $this->end_time = $timedate->fromDb($this->sugar_bean->date_due);
         }else{
-            $this->start_time = $timedate->fromUser($this->sugar_bean->date_start);
+            $this->start_time = $timedate->fromDb($this->sugar_bean->date_start);
             if ( empty($this->start_time)){
                 return;
             }
@@ -243,10 +241,29 @@ class CalendarActivity {
         ksort($act_list);
         $act_list = array_values($act_list);
 
-        //return sorted list
-        return $act_list;
+        // prepare the activity list so fields are properly escaped and return the sorted list
+        return static::prepareActivities($act_list);
+    }
 
-	}
+    /**
+     * Process the list of activities and ready any fields for display
+     * @param array $activities List of activities to process
+     * @return array The processed activities that are ready for display
+     */
+    protected static function prepareActivities($activities)
+    {
+        $actList = [];
+
+        foreach ($activities as $index => $activity) {
+            if (!empty($activity->sugar_bean->name) &&
+                htmlspecialchars_decode($activity->sugar_bean->name, ENT_QUOTES) === $activity->sugar_bean->name
+            ) {
+                $activity->sugar_bean->name = htmlspecialchars($activity->sugar_bean->name, ENT_QUOTES);
+            }
+
+            $actList[] = $activity;
+        }
+
+        return $actList;
+    }
 }
-
-?>

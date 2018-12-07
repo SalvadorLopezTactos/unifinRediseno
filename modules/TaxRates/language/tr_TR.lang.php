@@ -41,11 +41,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Vergi oranını silmek için bir kayıt no&#39;su girmelisiniz.',
   'NTC_STATUS' => 'Bu vergi oranının durumunu, İnaktif olarak belirleyerek Vergi Oranı açılır-listesinden kaldırın',
   'NTC_LIST_ORDER' => 'Bu vergi oranının, Vergi Oranı açılır-listesinde görünmesini istediğiniz sırayı belirleyin',
-  'taxrate_status_dom' => 
-  array (
-    'Active' => 'Aktif',
-    'Inactive' => 'İnaktif',
-  ),
   'LBL_EDITLAYOUT' => 'Yerleşimi Değiştir' /*for 508 compliance fix*/,
   'LBL_CREATED_ID'=>'Oluşturan ID',
   'LBL_MODIFIED_ID'=>'Değiştiren ID',

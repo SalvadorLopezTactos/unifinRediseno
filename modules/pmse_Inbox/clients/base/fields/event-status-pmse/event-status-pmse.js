@@ -51,19 +51,19 @@
         $label.removeClass('ellipsis_inline');
         switch (this.value) {
             case 'IN PROGRESS':
-                $label.addClass('label label-Leads');
+                $label.addClass('label label-process-in-progress');
                 break;
             case 'COMPLETED':
-                $label.addClass('label label-success');
+                $label.addClass('label label-process-completed');
                 break;
             case 'TERMINATED':
-                $label.addClass('label label-success');
+                $label.addClass('label label-process-terminate');
                 break;
             case 'CANCELLED':
-                $label.addClass('label label-warning');
+                $label.addClass('label label-process-cancelled');
                 break;
             default:
-                $label.addClass('label label-important');
+                $label.addClass('label label-process-error');
                 break;
         }
 

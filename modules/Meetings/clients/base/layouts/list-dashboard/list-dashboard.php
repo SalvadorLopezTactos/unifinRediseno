@@ -39,6 +39,5 @@ $viewdefs['Meetings']['base']['layout']['list-dashboard'] = array(
             ),
         ),
     ),
-    'name' => 'LBL_DEFAULT_DASHBOARD_TITLE',
+    'name' => 'LBL_MEETINGS_LIST_DASHBOARD',
 );
-

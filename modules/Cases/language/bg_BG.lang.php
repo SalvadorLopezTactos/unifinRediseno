@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Електронно табло със списък на казусите',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Електронно табло със запис на казусите',
+
 	'ERR_DELETE_RECORD'					=> 'Трябва да определите номер, за да изтриете този запис.',
 	'LBL_ACCOUNT_ID'					=> 'Идентификатор на организацията',
 	'LBL_ACCOUNT_NAME'					=> 'Организация:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Статус:',
     'LBL_SOURCE' => 'Източник:',
 	'LBL_SUBJECT'						=> 'Относно:',
-	'LBL_SYSTEM_ID'						=> 'ID на системата',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Oрганизация',
 	'LBL_LIST_ASSIGNED'					=> 'Отговорник:',
 	'LBL_LIST_CLOSE'					=> 'Затвори',

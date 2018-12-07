@@ -59,7 +59,7 @@ class MeetingsApi extends CalendarEventsApi
 
         $returnedMeetings = array('today'=>array(),'tomorrow'=>array(),'upcoming'=>array());
         foreach ( $meetingList['list'] as $meetingBean ) {
-            $meetingStamp = $timeDate->fromUser($meetingBean->date_start)->getTimestamp();
+            $meetingStamp = $timeDate->fromDb($meetingBean->date_start)->getTimestamp();
             $meetingData = $this->formatBean($api,$args,$meetingBean);
 
             if ( $meetingStamp < $today_stamp ) {

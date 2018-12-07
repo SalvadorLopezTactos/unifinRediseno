@@ -1,5 +1,5 @@
 <?php
- // created: 2018-02-16 16:59:03
+ // created: 2018-12-05 18:17:34
 $dictionary['Opportunity']['fields']['tipo_de_operacion_c']['labelValue'] = 'Tipo de Solicitud';
 $dictionary['Opportunity']['fields']['tipo_de_operacion_c']['readonly'] = true;
 $dictionary['Opportunity']['fields']['tipo_de_operacion_c']['visibility_grid']['trigger'] = 'tipo_operacion_c';

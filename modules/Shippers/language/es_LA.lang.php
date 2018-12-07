@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Debe especificar un número de registro para eliminar el proveedor de transporte.',
   'NTC_STATUS' => 'Establezca el estado a Inactivo para quitar este proveedor de transporte de las listas desplegables de Proveedor de Transporte',
   'NTC_LIST_ORDER' => 'Establezca el orden en el que este proveedor de transporte aparecerá en las listas desplegables de Proveedor de Transpoete',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Activo',
-    'Inactive' => 'Inactivo',
-),
-	'LBL_EDITLAYOUT' => 'Editar Diseño' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Editar Diseño' /*for 508 compliance fix*/,
 );
-
 
 ?>

@@ -28,7 +28,14 @@ class TemplateField{
     public $label = '';
 	var $id = '';
 	var $size = '20';
-	var $len = '255';
+
+    /**
+     * The DB length of the field
+     *
+     * @var int|null
+     */
+    public $len;
+
 	var $required = false;
 	var $default = null;
 	var $default_value = null;
@@ -42,6 +49,7 @@ class TemplateField{
 	var $audited= 0;
 	var $massupdate = 0;
 	var $importable = 'true' ;
+    public $pii = false;
 
     /**
      * "duplicate_merge" attribute is considered enabled, if not specified
@@ -103,6 +111,7 @@ class TemplateField{
         'enforced' => 'enforced',
         'dependency' => 'dependency',
         'related_fields' => 'related_fields',
+        'pii' => 'pii',
 	);
 
     /**
@@ -347,10 +356,11 @@ class TemplateField{
             'importable' => $this->importable,
             'duplicate_merge' => $this->duplicate_merge,
             'duplicate_merge_dom_value' => $this->getDupMergeDomValue(),
-            'audited' => $this->convertBooleanValue($this->audited),
+            'audited' => $this->convertBooleanValue($this->audited) || $this->convertBooleanValue($this->pii),
             'reportable' => $this->convertBooleanValue($this->reportable),
             'unified_search' => $this->convertBooleanValue($this->unified_search),
             'merge_filter' => empty($this->merge_filter) ? "disabled" : $this->merge_filter,
+            'pii' => $this->convertBooleanValue($this->pii),
         );
 
         if (isset($this->default)) {
@@ -626,16 +636,14 @@ class TemplateField{
     }
 
     /**
-     * save
-     *
-     * This function says the field template by calling the DynamicField addFieldObject function.  It then
+     * This function saves the field template by calling the DynamicField addFieldObject function. It then
      * checks to see if updates are needed for the SearchFields.php file.  In the event that the unified_search
      * member variable is set to true, a search field definition is updated/created to the SearchFields.php file.
      *
      * @param DynamicField $df
      */
-	function save($df){
-		//	    $GLOBALS['log']->debug('saving field: '.print_r($this,true));
+    public function save($df)
+    {
 		$df->addFieldObject($this);
 
         $searchFieldParser = new ParserSearchFields( $df->getModuleName() , $df->getPackageName() ) ;
@@ -666,5 +674,4 @@ class TemplateField{
             'id_name' => 'ext3',
         );
     }
-
 }

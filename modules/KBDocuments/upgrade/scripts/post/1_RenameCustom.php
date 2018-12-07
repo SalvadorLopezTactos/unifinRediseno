@@ -99,9 +99,6 @@ class SugarUpgradeRenameCustom extends UpgradeScript
             foreach (glob('custom/modules/KBDocuments/language/*.php') as $file) {
                 $dest = str_replace('/KBDocuments/', '/KBContents/', $file);
                 copy($file, $dest);
-                SugarAutoLoader::addToMap($dest);
-
-                SugarAutoLoader::delFromMap($file);
                 $this->upgrader->fileToDelete(array($file), $this);
             }
 
@@ -109,9 +106,6 @@ class SugarUpgradeRenameCustom extends UpgradeScript
             foreach (glob('custom/Extension/modules/KBDocuments/Ext/Language/*.php') as $file) {
                 $dest = str_replace('/KBDocuments/', '/KBContents/', $file);
                 copy($file, $dest);
-                SugarAutoLoader::addToMap($dest);
-
-                SugarAutoLoader::delFromMap($file);
                 $this->upgrader->fileToDelete(array($file), $this);
             }
 

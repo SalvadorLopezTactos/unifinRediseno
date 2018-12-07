@@ -210,8 +210,7 @@ class SugarXHprof
         // enable SugarXhprofLogger class for Doctrine
         if (static::$enable && empty($GLOBALS['installing'])) {
             $logger = DBManagerFactory::getDbalLogger();
-            $decorator = new XhprofLogger(static::$instance, $logger);
-            DBManagerFactory::setDbalLogger($decorator);
+            $logger->addLogger(new XhprofLogger(static::$instance));
         }
     }
 

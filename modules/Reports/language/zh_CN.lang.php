@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => '按季度',
     'LBL_BY_FISCAL_YEAR' => '按财政年度',
     'LBL_BY_FISCAL_QUARTER' => '按财政季度',
+    'LBL_AMOUNT' => '金额',
     'LBL_COUNT' => '计数',
+    'LBL_PERCENT' => '百分比',
     'LBL_SUM' => '总数',
     'LBL_AVG' => '平均',
     'LBL_MAX' => '最大值',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => '月',
     'LBL_YEAR' => '年',
     'LBL_QUARTER' => '季度',
+    'LBL_FISCAL' => '财政',
     'LBL_FISCAL_YEAR' => '财政年度',
     'LBL_FISCAL_QUARTER' => '财政季度',
 	'LBL_YESTERDAY'=>'昨天',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'下个季度',
     'LBL_ADD_RELATE' => "添加相关项",
     'LBL_DEL_THIS' => "移除",
-    'LBL_ALERT_CANT_ADD' => '您不能增加一个相关模块，除非您选择相关的表。\n在“添加相关项”按钮的左侧，从下拉框中选择一个模块。',
+    'LBL_ALERT_CANT_ADD' => '您不能增加一个相关模块，除非您选择相关的表。\\n在“添加相关项”按钮的左侧，从下拉框中选择一个模块。',
     'LBL_BY_DAY' => '按天',
     'LBL_DAY' => '天',
     'LBL_OUTER_JOIN_CHECKBOX' => '可选的相关模块',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => '大于等于',
 
     'LBL_FILTER_BY_MODULE' => '根据模块',
-);
+    'LBL_FILTER_WITH_CHARTS' => '带图表',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => '此操作发生 Drillthrough 报表数据检索错误。请联系报告所有者以获取帮助。',
+    'LBL_CHART_NO_DRILLTHRU' => '钻取不可用',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => '列表视图显示所有满足当前搜索条件且用户对其拥有访问权限的报告。 您可以在列表视图的字段栏和预览中查看每个报告的基本详情。您可以为报告设置标签并创建筛选条件。点击报告的名称可查看报告或在操作菜单中选择“编辑报告”可修改报告。',
+  );

@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Tabloul de bord Listă întâlniri',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Tabloul de bord Înregistrare întâlniri',
+
 	'ERR_DELETE_RECORD' => 'Trebuie să specifici un număr de înregistrare pentru a șterge întâlnirea.',
 	'LBL_ACCEPT_THIS'=>'Acceptati?',
 	'LBL_ADD_BUTTON'=> 'Adauga',

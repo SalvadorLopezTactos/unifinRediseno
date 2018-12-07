@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Řídicí panel seznamu hovorů',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Řídicí panel záznamů hovorů',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Hovory',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Hovor',
@@ -20,7 +24,7 @@ $mod_strings = array (
     'LBL_LIST_CLOSE' => 'Zavřít',
     'LBL_LIST_SUBJECT' => 'Předmět',
     'LBL_LIST_CONTACT' => 'Kontakt',
-    'LBL_LIST_RELATED_TO' => 'Týka se',
+    'LBL_LIST_RELATED_TO' => 'Týká se:',
     'LBL_LIST_RELATED_TO_ID' => 'Přiřazeno k ID',
     'LBL_LIST_DATE' => 'Začátek',
     'LBL_LIST_TIME' => 'Počáteční čas',

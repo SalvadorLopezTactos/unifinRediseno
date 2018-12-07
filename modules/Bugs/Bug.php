@@ -44,7 +44,6 @@ class Bug extends SugarBean {
 	var $assigned_user_name;
 	var $type;
 	var $team_name;
-	var $system_id;
 
 	//BEGIN Additional fields being added to Bug Tracker
 
@@ -242,7 +241,7 @@ class Bug extends SugarBean {
 	   $the_array['RELEASE']= $this->release_name;
 	   $the_array['BUG_NUMBER'] = $this->bug_number;
 	   $the_array['ENCODED_NAME']=$this->name;
-    	$the_array['BUG_NUMBER'] = format_number_display($this->bug_number,$this->system_id);
+        $the_array['BUG_NUMBER'] = format_number_display($this->bug_number);
 
     	return  $the_array;
 	}
@@ -290,20 +289,6 @@ class Bug extends SugarBean {
 			case 'ACL':return true;
 		}
 		return false;
-	}
-
-	function save($check_notify = FALSE){
-		if(!isset($this->system_id) || empty($this->system_id))
-		{
-
-			$admin = Administration::getSettings();
-			$system_id = $admin->settings['system_system_id'];
-			if(!isset($system_id)){
-				$system_id = 1;
-			}
-			$this->system_id = $system_id;
-		}
-		return parent::save($check_notify);
 	}
 }
 

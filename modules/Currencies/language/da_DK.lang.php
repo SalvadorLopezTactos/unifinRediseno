@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Opret opgave',
   'NTC_DELETE_CONFIRMATION' => 'Er du sikker på, at du vil slette denne post? Alle poster, der bruger denne valuta, konverteres til systemets standardvaluta, når de åbnes. Det kan være en god ide at angive status til inaktiv.',
   'LBL_BELOW_MIN' => 'Omregningskursen skal være over 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktiv',
-    'Inactive' => 'Inaktiv',
-  ),
   'LBL_CREATED_BY' => 'Oprettet af',
   'LBL_EDIT_LAYOUT' => 'Rediger layout' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Kun administratorer',
+  'LBL_CURRENCY_DEFAULT' => 'US Dollars (standard)',
+
 );
 ?>

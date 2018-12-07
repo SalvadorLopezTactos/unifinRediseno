@@ -104,13 +104,16 @@ $app_list_strings = array (
     'OAuthKeys' => 'OAuthコンシューマキー',
     'OAuthTokens' => 'OAuthトークン',
     'Filters' => 'フィルタ',
-    'UserSignatures' => 'ユーザ署名',
+    'UserSignatures' => 'メール署名',
     'Shippers' => '運送会社',
     'Styleguide' => 'スタイルガイド',
     'Feedbacks' => 'フィードバック',
     'Tags' => 'タグ',
     'Categories' => 'カテゴリ',
     'Dashboards' => 'ダッシュボード',
+    'OutboundEmail' => 'メール設定',
+    'EmailParticipants' => 'メール参加者',
+    'DataPrivacy' => 'データプライバシー',
   ),
 
     'moduleIconList' =>
@@ -124,7 +127,8 @@ $app_list_strings = array (
         'ProductCategories' => 'PG',
         'Quotas' => 'Fo',
         'Tasks' => 'タスク',
-        'Dashboards' => 'Db',
+        'Dashboards' => 'Ds',
+        'DataPrivacy' => 'DP',
     ),
 
   'moduleListSingular' =>
@@ -221,10 +225,13 @@ $app_list_strings = array (
     'ProductTypes' => '商品タイプ',
     'Shippers' => '発送元',
     'Subscriptions' => '購読',
-    'UserSignatures' => 'ユーザシグニチャ',
+    'UserSignatures' => 'メール署名',
     'Feedbacks' => 'フィードバック',
     'Tags' => 'タグ',
     'Categories' => 'カテゴリ',
+    'OutboundEmail' => 'メール設定',
+    'EmailParticipants' => 'メール参加者',
+    'DataPrivacy' => 'データプライバシー',
   ),
 
 /*
@@ -329,6 +336,11 @@ $app_list_strings = array (
     'Existing Business' => '既存ビジネス',
     'New Business' => '新規ビジネス',
   ),
+    'taxrate_status_dom' =>
+        array (
+            'Active' => 'アクティブ',
+            'Inactive' => 'アクティブでない',
+        ),
   'roi_type_dom' =>
     array (
     'Revenue' => '収益',
@@ -352,6 +364,17 @@ $app_list_strings = array (
     'Influencer' => '影響を与える人',
     'Other' => 'その他',
   ),
+
+        'manufacturer_status_dom' => array (
+            'Active' => 'アクティブ',
+            'Inactive' => 'アクティブでない',
+        ),
+
+        'shipper_status_dom' => array (
+            'Active' => 'アクティブ',
+            'Inactive' => '非アクティブ',
+        ),
+
   //Note:  do not translate case_relationship_type_default_key
 //       it is the key for the default case_relationship_type_dom value
   'case_relationship_type_default_key' => '主な連絡窓口',
@@ -634,6 +657,7 @@ $app_list_strings = array (
 
     'Tasks' => 'タスク',
       'KBContents' => 'ナレッジベース',
+      'Notes' => 'メモ',
   ),
 
   'record_type_display_notes' =>
@@ -659,6 +683,14 @@ $app_list_strings = array (
     'Calls' => '電話',
       'KBContents' => 'ナレッジベース',
   ),
+    'record_type_display_emailparticipants' => array(
+        'Accounts' => '取引先',
+        'Contacts' => '取引先担当者',
+        'Employees' => '従業員',
+        'Leads' => 'リード',
+        'Prospects' => 'ターゲット',
+        'Users' => 'ユーザ',
+    ),
 
   'parent_type_display' =>
   array (
@@ -678,7 +710,7 @@ $app_list_strings = array (
 
     'Prospects' => 'ターゲット',
       'KBContents' => 'ナレッジベース',
-
+      'Notes' => 'メモ',
   ),
 
   'product_status_default_key' => '発送済',
@@ -832,7 +864,6 @@ $app_list_strings = array (
     'Product' => '商品',
     'User' => 'アサイン先',
   ),
-
   'source_default_key' => '',
   'source_dom' =>
   array (
@@ -843,7 +874,37 @@ $app_list_strings = array (
     'InboundEmail' => 'Eメール',
     'Twitter' => 'Twitter'
   ),
-
+    'dataprivacy_type_default_key' => '',
+    'dataprivacy_type_dom' => array(
+        '' => '',
+        'Request for Data Privacy Policy' => 'データプライバシーポリシーの要求',
+        'Send Personal Information being processed' => '処理中の個人情報を送信',
+        'Rectify Information' => '情報を修正',
+        'Request to Erase Information' => '情報を消去する要求',
+        'Export Information' => '情報をエクスポート',
+        'Restrict Processing' => '処理を制限',
+        'Object to Processing' => '処理に反対',
+        'Consent to Process' => '処理に同意',
+        'Withdraw Consent' => '同意を取り消す',
+        'Other' => 'その他',
+    ),
+    'dataprivacy_business_purpose_dom' => array(
+        'Business Communications' => 'ビジネス通信',
+        'Marketing Communications by company' => '会社によるマーケティング通信',
+        'Marketing Communications by partners' => 'パートナーによるマーケティング通信',
+    ),
+    'dataprivacy_status_default_key' => '開く',
+    'dataprivacy_status_dom' => array(
+        'Open' => '開く',
+        'Closed' => '完了',
+        'Rejected' => '拒否',
+    ),
+    'dataprivacy_priority_default_key' => '低',
+    'dataprivacy_priority_dom' => array(
+        'Low' => '低',
+        'Medium' => '中',
+        'High' => '高',
+    ),
   'product_category_default_key' => '',
   'product_category_dom' =>
   array (
@@ -879,6 +940,7 @@ $app_list_strings = array (
     'Studio' => 'スタジオ',
     'Upgrade' => 'アップグレード',
     'Users' => 'ユーザ',
+    'OutboundEmail' => 'メール設定',
   ),
   /*Added entries 'Queued' and 'Sending' for 4.0 release..*/
   'campaign_status_dom' =>
@@ -1067,6 +1129,11 @@ $app_list_strings = array (
                                         'failed'        => '失敗',
                                         'completed'     => '完了',
                                         'no curl'       => '未実施: cURLライブラリなし',
+    ),
+
+    'dom_email_states' => array(
+        'Draft' => 'ドラフト',
+        'Archived' => '保存',
     ),
 
     'scheduler_status_dom' =>
@@ -1704,7 +1771,11 @@ $app_list_strings = array (
     'exempt' => '禁止リスト - 禁止ID',
     'test' => 'テスト',
   ),
-
+         'currency_status_dom' =>
+         array (
+             'Active' => 'アクティブ',
+             'Inactive' => '非アクティブ',
+         ),
   'email_settings_num_dom' =>
   array(
         '10'    => '10',
@@ -1794,16 +1865,6 @@ $app_list_strings = array (
         '21' => '3週間',
         '31' => '1カ月',
     ),
-
-     'oc_status_dom' =>
-     array (
-     '' => '',
-     'Active' => 'アクティブ',
-    'Inactive' => '非アクティブ',
-    ),
-
-
-
     'projects_priority_options' => array (
         'high'      => '高',
         'medium'    => '中',
@@ -1861,9 +1922,15 @@ $app_list_strings = array (
     ),
     'email_settings_for_ssl' =>
     array (
-        '0' => '',
+        '0' => 'なし',
         '1' => 'SSL',
         '2' => 'TLS',
+    ),
+    'mail_smtptype_options' => array(
+        'google' => 'Google',
+        'exchange' => 'Exchange',
+        'outlook' => 'Outlook',
+        'other' => 'その他',
     ),
     'import_enclosure_options' =>
     array (
@@ -1876,7 +1943,7 @@ $app_list_strings = array (
     array (
         ',' => ',',
         ';' => ';',
-        '\t' => '\t',
+        '\t' => '\\t',
         '.' => '.',
         ':' => ':',
         '|' => '|',
@@ -2032,6 +2099,11 @@ $app_list_strings = array (
         'ACTIVE' => '有効',
         'INACTIVE' => '無効',
     ),
+    'dashboard_view_name_list' => array(
+        'record' => 'レコード',
+        'records' => 'リスト',
+        'activities' => 'アクティビティ ストリーム',
+    ),
 );
 
 $app_strings = array (
@@ -2043,11 +2115,11 @@ $app_strings = array (
   'LBL_FOLLOW_LINK' => 'リンクをフォローする',
   'LBL_TOGGLE_VISIBILITY' => '表示/非表示', // Record view header panel element
   'LBL_ACTIVITIES' => 'アクティビティストリーム',
-  'LBL_COPYRIGHT' => 'Copyright © 2004-2017 SugarCRM Inc. 無断複写・転載を禁じます。',
+  'LBL_COPYRIGHT' => 'Copyright © 2004-2018 SugarCRM Inc. 無断複写・転載を禁じます。',
     'LBL_TRADEMARK' => 'SugarCRM、Sugarおよび3-DキューブはSugarCRM Inc. の登録商標です。 '.
         'この製品に使用される、または出現するその他すべての会社名および製品名は '.
         'SugarCRM ®, Sugar Enterprise™ そしてSugar™は、SugarCRM Inc.の登録商標です。',
-    'LBL_TRADEMARK2' => 'SugarCRM ®, Sugar Enterprise™ そしてSugar™は、SugarCRM Inc.の登録商標です。',
+    'LBL_TRADEMARK2' => 'SugarCRM®、Sugar Enterprise™ および Sugar™ は、SugarCRM 社の商標です。',
     'LBL_SEND_INVITE' => '招待を送る',
   'LBL_INVITEES' => '参加者',
     'LBL_GUEST_WILL_NOT_RECEIVE_INVITE' => 'ゲストには招待状は送信されません',
@@ -2116,6 +2188,7 @@ $app_strings = array (
     'LBL_EMAIL_SMTP_SSL_OR_TLS'         => 'SMTP over SSL/TLS の設定',
     'LBL_NO_ACTION'                         => 'アクションがありません。',
     'LBL_NO_DATA'                           => 'データなし',
+    'LBL_NOT_APPLICABLE'                    => '該当なし',
     'LBL_ROUTING_ADD_RULE'                  => 'ルールを追加',
     'LBL_ROUTING_ALL'                       => 'すべて含む',
     'LBL_ROUTING_ANY'                       => 'いずれかを含む',
@@ -2493,7 +2566,7 @@ $app_strings = array (
     'LBL_EMAIL_SETTINGS_REQUIRE_REFRESH'    => 'これらの設定を有効にするには画面のリフレッシュが必要',
     'LBL_EMAIL_SETTINGS_RETRIEVING_ACCOUNT' => 'アカウントを取得中',
     'LBL_EMAIL_SETTINGS_RULES'              => 'ルール',
-    'LBL_EMAIL_SETTINGS_SAVED'              => '設定が保存されました。\n\n新たな設定を有効にするにはページをリロードする必要があります。',
+    'LBL_EMAIL_SETTINGS_SAVED'              => '設定が保存されました。\\n\\n新たな設定を有効にするにはページをリロードする必要があります。',
     'LBL_EMAIL_SETTINGS_MUST_RELOAD'        => '新しい設定を有効にするにはページをリロードする必要があります。',
     'LBL_EMAIL_SETTINGS_SEND_EMAIL_AS'      => 'テキストで送信',
     'LBL_EMAIL_SETTINGS_SHOW_IN_FOLDERS'    => '有効なアカウント',
@@ -2546,6 +2619,15 @@ $app_strings = array (
     'LBL_EMAIL_MESSAGE_NO'                  => 'メッセージNo',
     'LBL_EMAIL_IMPORT_SUCCESS'              => 'インポートに成功しました',
     'LBL_EMAIL_IMPORT_FAIL'                 => 'インポートに失敗しました。対象メッセージはすでにインポート済みかサーバから削除されています。',
+
+    'LBL_EMAILS_FROM' => 'Eメールは送られました',
+    'LBL_EMAILS_RECEIVED' => 'Eメール受領',
+    'LBL_EMAIL_ADDRESSES_USED' => 'Eメールで使用されるEメール アドレス',
+    'LBL_EMAIL_ADDRESS' => 'Eメールアドレス',
+    'LBL_FROM' => '差出人',
+    'LBL_TO' => '宛先',
+    'LBL_CC' => 'CC',
+    'LBL_BCC' => 'BCC',
 
     'LBL_LINK_NONE'=> 'なし',
     'LBL_LINK_ALL'=> 'すべての',
@@ -2605,6 +2687,8 @@ $app_strings = array (
     'ERR_NEED_ACTIVE_SESSION' => 'コンテンツのエクスポートにはアクティブなセッションが必要です。',
     'ERR_NO_HEADER_ID' => 'この機能はこのテーマでは利用できません。',
     'ERR_NOT_ADMIN' => "管理エリアへのアクセスが認められていません。",
+    'ERR_DISABLED_FOR_IDM_MODE' => "このオプションは、SugarCRMでIDMモードの場合は無効で、クラウドコンソールでは利用できます。",
+    'ERR_GOTO_CLOUD_CONSOLE' => "<a href=\"%s\" target=\"_blank\">クラウドコンソール</a>に移動してください。",
     'ERR_MISSING_REQUIRED_FIELDS' => '必須フィールドが見つかりません:',
     'ERR_INVALID_REQUIRED_FIELDS' => '必須フィールドが不正です:',
     'ERR_INVALID_VALUE' => '不正な値:',
@@ -2934,7 +3018,7 @@ $app_strings = array (
     'TPL_MASSUPDATE_FAIL_TO_ATTEMPT' => '一括更新失敗。再度実行({{total}中{{num}}回目}',
     'TPL_MASSUPDATE_WARNING_CLOSE' => '一括更新は未完了。{{num}} レコードが変更されていません。',
     'TPL_MASSUPDATE_WARNING_INCOMPLETE' => '一括更新は未完了。{{num}} レコードが変更されていません。',
-    'TPL_MASSUPDATE_WARNING_PERMISSION' => '{{remain}} レコードは権限の関連で無視されました。',
+    'TPL_MASSUPDATE_WARNING_PERMISSION' => '許可またはエラーのため、{{remain}} レコードは無視されました',
     'TPL_MASSUPDATE_SUCCESS' => '{{num}} レコードのアップデートに成功しました。',
     'TPL_MASSUPDATE_TITLE' => '{{module}} 一括更新',
     'TPL_MASSDELETE_PROGRESS_STATUS' => '{{total}}中{{num}}の削除中',
@@ -3006,6 +3090,7 @@ $app_strings = array (
     'LBL_USER_DEFAULT_OUTBOUND_EMAIL_CONFIGURATION' => 'ユーザーデフォルト',
     'LBL_USER_OUTBOUND_EMAIL_ACCOUNT_CONFIGURATION' => 'ユーザーアカウント',
     'LBL_GROUP_EMAIL_ACCOUNT_CONFIGURATION' => 'グループアカウント',
+    'LBL_OUTBOUND_EMAIL_CONFIGURATION_DISPLAY_NAME' => '{0} ({1}) - [{2}]',
     'LBL_NAME' => '名前',
     'LBL_NEW_BUTTON_KEY' => 'N',
     'LBL_NEW_BUTTON_LABEL' => '作成',
@@ -3218,7 +3303,7 @@ $app_strings = array (
     // The following version of LBL_SUGAR_COPYRIGHT is for Professional and Enterprise editions.
 
     'LBL_SUGAR_COPYRIGHT_SUB' =>
-        '&copy; 2004-2017 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
+        '&copy; 2004-2018 <a href="http://www.sugarcrm.com" target="_blank" class="copyRightLink">SugarCRM Inc.</a> '.
         '無断複写・転載を禁じます。<br />SugarCRM、Sugarおよび3-DキューブはSugarCRM Inc. の登録商標です。 '.
         'この製品に使用される、または出現するその他すべての会社名および製品名は '.
         'それらが関連する各会社の登録商標である可能性があります。',
@@ -3258,7 +3343,9 @@ $app_strings = array (
     'LBL_LOGIN_PASSWORD' => 'パスワード',
     'LBL_LOGGED_OUT' => 'ログアウトしました',
     'LBL_LOGIN_FORM_LABEL' => 'ログイン画面を表示',
-    'LBL_RETURN_TO_LOGIN_PAGE' => 'Return to login',
+    'LBL_RETURN_TO_LOGIN_PAGE' => 'ログインに戻る',
+    'LBL_LOGIN_INACTIVE_USER' => '非アクティブなユーザー',
+    'LBL_LOGIN_PORTAL_GROUP_CANT_LOGIN' => 'ポータルまたはグループ ユーザーはログインできません。',
     // END LOGIN PAGE STRINGS
 
     'LBL_TABGROUP_HOME' => 'ダッシュボード',
@@ -3325,8 +3412,9 @@ $app_strings = array (
     'LNK_BACKTOTOP' => 'トップへ戻る',
     'LNK_REMOVE' => 'はずす',
     'LNK_RESUME' => '再開',
-    'LNK_VIEW_CHANGE_LOG' => '更新履歴を見る',
-
+    'LNK_VIEW_CHANGE_LOG' => '監査ログを表示',
+    'TPL_AUDIT_LOG_TITLE' => '{{{name}}} の監査ログ',
+    'LBL_AUDIT_EMAIL_TOOLTIP' => 'Click to view email address audit log',
 
     'NTC_CLICK_BACK' => 'ブラウザの戻るボタンを押してエラーを直してください。',
     'NTC_DATE_FORMAT' => '(yyyy-mm-dd)',
@@ -3360,7 +3448,6 @@ $app_strings = array (
     'WARN_LICENSE_EXPIRED'=> "会社のSugarCRMライセンスはもうすぐ期限切れとなります。",
     'ERROR_LICENSE_VALIDATION'=> "会社のSugarCRMライセンスは認証が必要です。管理者のみログイン可能です。",
     'WARN_LICENSE_VALIDATION'=> "会社のSugarCRMライセンスはもうすぐ認証が必要になります。",
-    'ERROR_EXCEEDING_OC_LICENSES' =>"有効化されているオフラインクライアントの数が現在ライセンスで指定されている数を超えています。",
     'WARN_BROWSER_IE_COMPATIBILITY_MODE_WARNING' => "警告：ブラウザのIEコンパチビリティビューはサポートされていません。",
     'WARN_LICENSE_SEATS'=>  "警告：アクティブユーザーが既にライセンスの上限に達しています。",
     'WARN_LICENSE_SEATS_MAXED'=>  "警告：アクティブユーザーがライセンスの許可される数を超えています。",
@@ -3430,9 +3517,6 @@ $app_strings = array (
     'LBL_PROCESSING_REQUEST'=>'処理中。',
     'LBL_REQUEST_PROCESSED'=>'完了',
     'LBL_AJAX_FAILURE' => 'Ajax不良',
-    'LBL_OC_STATUS' => 'オフラインクライアントステータス',
-    'LBL_OC_STATUS_TEXT' => 'オフラインクライアントを使用できるかどうかを示す',
-    'LBL_OC_DEFAULT_STATUS' => '非アクティブ',
     'LBL_SEARCH_PARENT_RELATED_ITEM' => '検索',
     'LBL_SAVED_SEARCH_SHORTCUT' => '保存された検索',
     'LBL_SEARCH_POPULATE_ONLY'=> '上記の検索フォームを使用した検索を実行する',
@@ -3533,6 +3617,7 @@ $app_strings = array (
     'LBL_COLLAPSE_ALL' => 'すべて閉じる',
     'LBL_EXPAND_ALL' => 'すべて表示',
     'LBL_DASHLET_CONFIG_EDIT_LABEL' => '編集',
+    'LBL_DASHLET_CONFIG_VIEW_REPORT' => 'レポートを表示',
     'LBL_DASHLET_REFRESH_LABEL' => '更新',
     'LBL_DASHLET_REMOVE_LABEL' => '削除',
     'LBL_DASHLET_DROP_HERE' => 'ここにドロップ',
@@ -4217,7 +4302,9 @@ $app_strings = array (
     'LBL_CONFIRM' => 'はい',
     'LBL_NO_ACCESS' => '（アクセスなし）',
     'LBL_NO_ACCESS_LOWER' => 'アクセスなし',
-    'LBL_NO_FIELD_ACCESS' => 'アクセスなし',
+    'LBL_NO_FIELD_ACCESS' => 'No Access',
+    'LBL_VALUE_ERASED' => '値が消去されました',
+    'LBL_VALUE_ERASED_TOOLTIP' => 'この情報はデータプライバシー要求を介して消去されました',
     'LBL_CREATE_RELATED_RECORD' => '関連するレコードを作成',
     'LBL_ASSOC_RELATED_RECORD' => '既存のレコードにリンク',
     'LBL_CHOOSE_LINK' => 'リンクタイプを選択',
@@ -4286,7 +4373,7 @@ $app_strings = array (
     'LBL_FONTSIZE_LARGER' => '更に大きい',
     'LBL_FONTSIZE_HUGE' => 'とても大きい',
     'LBL_FONTSIZE_EXTRA_HUGE' => '巨大',
-    'LBL_MOBILE_DOWNLOAD_FAILED' => 'ダウンロード失敗\r\n{{{this}}}',
+    'LBL_MOBILE_DOWNLOAD_FAILED' => "ダウンロード失敗\n{{{this}}}",
     'LBL_MOBILE_DETAIL_SHOW_MORE' => 'さらに...',
     'LBL_MOBILE_DETAIL_SHOW_LESS' => '少なく',
     'LBL_OFFLINE_MODE' => 'オフラインモード',
@@ -4355,6 +4442,7 @@ $app_strings = array (
     'LBL_TX_LOG_DETAIL' => 'トランザクション詳細',
     'LBL_RECORD_DELETED' => '(レコードは削除されました)',
     'LBL_NOT_AVAILABLE' => '利用できません',
+    'LBL_FILE_SIZE' => 'ファイルのサイズ',
     'LBL_FILE_SIZE_UNITS_B' => 'バイト',
     'LBL_FILE_SIZE_UNITS_KB' => 'kB',
     'LBL_FILE_SIZE_UNITS_MB' => 'MB',
@@ -4478,6 +4566,122 @@ $app_strings = array (
     'LBL_MOBILE_TUTORIAL_DETAIL_INTRO_TEXT' => '詳細画面は画面右側に開きます。',
     'LBL_MOBILE_TUTORIAL_CONTROL_PANEL' => '下の矢印を使ってこのメニューのキーコンポーネンツのクイックツアーを見る',
 
+    'LBL_COMMENT_ADD' => 'コメントを追加',
+    'LBL_REQUIRED' => '必須',
+    'LBL_MORE_BUTTON' => '追加',
+    'LBL_TRY_AGAIN' => '再度試す',
+    'LBL_NEW_RECORDS' => '最新の作成履歴',
+    'LBL_ASSIGNED_TO_ME' => '私の {{{module}}}',
+    'LBL_LISTVIEW_FILTER_ALL' => 'すべての {{{module}}}',
+    'LBL_UNFAVORITE' => 'お気に入り解除',
+    'LBL_ACTIVITY_CREATE' => '{{{record}}} {{{module}}} を作成しました',
+    'LBL_ACTIVITY_UPDATE' => '{{{record}}} {{{module}}} 上の {{{changes}}} を更新しました',
+    'LBL_ACTIVITY_LINK' => '{{{relatedRecord}}} を {{{record}}} {{{module}}} にリンクしました',
+    'LBL_ACTIVITY_UNLINK' => '{{{relatedRecord}}} を {{{record}}} {{{module}}} からリンク解除しました',
+    'LBL_OFFLINE_PREFETCHING_RELATIONSHIP' => '{{parentModule}} 用の {{relationship}}',
+    'LBL_OFFLINE_PREFETCH_RELATED_ACTION' => '関連レコードをダウンロード...',
+    'LBL_DASHBOARDS_CHANGED_PROMPT' => 'ダッシュボード構成が変更されました。リロードしますか？',
+    'LBL_RECORDS' => 'レコード',
+    'LBL_DASHBOARDS' => 'ダッシュボード',
+    'LBL_MOBILE_SEARCH_PLACEHOLDER' => '{{searchCriteria}} を検索...',
+
+    'LBL_MOBILE_TUTORIAL_HOME_MENU' => 'メインメニュー',
+    'LBL_MOBILE_TUTORIAL_HOME_PLUS' => '新規レコードをクイック作成',
+    'LBL_MOBILE_TUTORIAL_HOME_SWIPE' => 'スワイプしてその他のオプションを表示',
+    'LBL_DETAILS' => '詳細',
+    'LBL_DETAIL_RELATED' => '関連',
+    'LBL_CREATE_RELATED_MODULE_WARN' => 'この {{module}} には {{relatedModule}} が必要です。<a class=&#39;alert-link&#39; href=&#39;{{{createLink}}}&#39;>{{relatedModule}} レコードを作成してください</a>。',
+    'LBL_MOBILE_TUTORIAL_DETAIL_EDIT_ACTION' => 'レコードを編集',
+    'LBL_OFFLINE_MENU_SETTINGS' => 'オフライン設定',
+    'LBL_OFFLINE_DEBUG_SETTINGS' => 'デバッグ設定',
+    'LBL_OFFLINE_DATA_ENCRYPTION_ENABLED" : "データ暗号化が有効になっています。',
+    'LBL_OFFLINE_TOTAL_RECORDS' => '合計レコード',
+    'LBL_OFFLINE_LAST_DOWNLOAD' => '最終ダウンロード',
+    'ERR_MOBILE_FILE_DOWNLOAD_FAILED' => 'ファイルをダウンロードできません。',
+    'ERR_MOBILE_DASHBOARDS_FETCHING' => 'サーバからダッシュボードを読み込むことに失敗しました',
+    'ERR_FILTERS_FETCHING' => 'フィルタを取得できません',
+    'ERR_OFFLINE_ENCRYPTION_FAILED' => 'ローカルストレージを暗号化するのに失敗しました',
+    'LBL_OFFLINE_ENCRYPTION_IN_PROGRESS' => 'オフラインデータを暗号化中です。これには数分かかることがあります。',
+    'LBL_OFFLINE_ENCRYPTION_SUCCESS' => 'オフラインデータ暗号化が完了しました。',
+    'ERR_ACCESS_SPECIFIC_MODULE' => '{{{module}}} モジュールへのアクセス権がありません。',
+    'LBL_SKIP' => 'スキップ',
+    'LBL_CONTINUE' => '続ける',
+    'LBL_ENABLE' => '有効にする',
+    'LBL_MOBILE_TRIAL_UNTIL' => 'トライアル期限',
+    'LBL_MOBILE_SDK_VERSION' => 'SDKバージョン',
+    'LBL_LOG_LEVEL' => 'ログレベル',
+    'LBL_RECONFIGURE_LOGIN_SETTINGS_CONFIRM' => 'ログイン設定が再構成されました。',
+    'LBL_TRIAL_PERIOD_EXPIRED' => 'トライアル期間が期限切れになりました。',
+    'ERR_MOBILE_HTTPS_CONNECTION_FAILED_LOGIN' => 'サーバがセキュア接続をサポートしていません。セキュア接続をオフにしてください。',
+    'ERR_MOBILE_HTTP_CONNECTION_FAILED_LOGIN' => 'サーバがセキュア接続をサポートしています。セキュア接続をオンにしてください。',
+    'ERR_MOBILE_HTTP_CONNECTION_USE_MSG' => '接続がセキュアではありません。管理者に連絡してください。',
+    'LBL_LOGIN_SETTINGS_HEADER' => 'ログイン設定',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_TITLE' => '{{{brandName}}} インスタンスを設定',
+    'LBL_LOGIN_SETTINGS_INSTANCE_SETUP_DESC' => 'アプリが機能するには、{{{brandName}}} インスタンスのURLを入力する必要があります。インスタンスURLがわからない場合は、管理者に連絡してください。',
+    'LBL_FACEID' => 'Face ID',
+    'LBL_TOUCHID' => 'Touch ID',
+    'LBL_ENABLE_TOUCHID' => '{{{biometryType}}} を有効にする',
+    'LBL_SETUP_TOUCHID' => '{{{biometryType}}} を設定',
+    'LBL_TOUCH_ID_AUTHENTICATE_SUBTITLE' => '指を使ってサインイン',
+    'LBL_TOUCH_ID_NOT_ENROLLED_MSG' => "{{{biometryType}}} がお使いのデバイスで設定されていません。\n\nデバイス設定に移動して {{{biometryType}}} を設定してください。設定が完了したら、メインメニュー > 「設定」で {{{brandName}}} の {{{biometryType}}} を有効にしてください。",
+    'LBL_TOUCH_ID_DISCLAIMER' => '{{{brandName}}} で {{{biometryType}}} を使用することで、{{{brandName}}} にアクセスする際にパスワードを入力する代わりに生体識別子を使用できます。',
+    'LBL_TOUCH_ID_ENABLE_CONFIRM_MSG' => '{{{biometryType}}} の設定を進めますか？    ',
+    'LBL_TOUCH_ID_ENTER_PASSWORD_TITLE' => '{{{brandName}}} パスワードを入力して {{{biometryType}}} を有効にしてください',
+    'LBL_SETUPBUDDY_HEADER_TITLE' => '設定',
+    'LBL_MDM_CONFIRM_CHANGE' => 'アプリケーション構成がモバイルデバイスマネージャーから変更されました。変更を適用するために再度ログインしてください。',
+    'ERR_GEOLOCATION_PERMISSION_DENIED' => 'デバイスの設定であなたの場所へのアクセス権を {{{brandName}}} に付与してください。',
+    'ERR_GEOLOCATION_POSITION_UNAVAILABLE_MSG' => '現在の場所を利用できません。',
+    'ERR_GEOLOCATION_POSITION_TIMEOUT_MSG' => "現在の場所の取得がタイムアウトしました。\nもう一度やり直してください。",
+    'ERR_GEOLOCATION_PLACEMARKS_UNAVAILABLE_MSG' => '場所プレイスマークが利用できません',
+    'ERR_GEOLOCATION_INVALID_COORDINATES_MSG' => '場所調整が無効です',
+    'ERR_MOBILE_INVALID_PASSWORD' => 'パスワードが無効です。',
+    'ERR_MOBILE_INCOMPATIBLE_CLIENT_VERSION_UPDATE' => 'アプリが古いため、接続している{{{brandName}}}インスタンスと互換性がなくなっています。更新しますか？ ',
+    'LBL_MOBILE_BY' => '以下の日まで:',
+    'LBL_MOBILE_FILTER_IS_NOT_AVAILABLE' => 'このフィルターはオフラインで利用できません',
+    'LBL_BULK_LOAD_OFFLINE_RECORDS' => 'オフラインレコード',
+    'LBL_BULK_LOAD_DOWNLOAD_SETTINGS' => '設定をダウンロード',
+    'LBL_BULK_LOAD_PREFETCH_MESSAGE' => 'オフラインアクセス用にあなたに割り当てられたレコード、お気に入りのレコードおよびフォローされたレコードをダウンロードしてください。あなたのユーザ設定をオフライン設定で更新できます。',
+    'LBL_BULK_LOAD_COMPLETED_MESSAGE' => "あなたのレコードのダウンロードが終了しました。それらにオフラインモードでアクセスできるようになりました。",
+    'LBL_BULK_LOAD_ERROR_CONFIRM' => "一部のレコードがダウンロードされませんでした。\nもう一度試しますか？",
+    'LBL_BULK_LOAD_USE_CELLULAR' => 'セルラーデータを使用',
+    'LBL_BULK_LOAD_NOT_RIGHT_NOW' => '後で',
+    'LBL_BULK_LOAD_PAUSED_MESSAGE' => 'ダウンロードが一時停止しました。もう一度アプリを開いたときに再開されます。',
+    'LBL_BULK_LOAD_STATUS_DOWNLOADING' => '{{{module}}} をダウンロード中: {{count}}',
+    'LBL_BULK_LOAD_STATUS_IDLE' => '最新のレコードを更新',
+    'LBL_BULK_LOAD_STATUS_WAITING_FOR_CONNECTION' => '接続を待機中',
+    'LBL_BULK_LOAD_STATUS_PAUSED' => '一時停止',
+    'LBL_BULK_LOAD_STATUS_STOPPING' => '停止中',
+    'LBL_BULK_LOAD_BTN_DOWNLOAD' => 'ダウンロード',
+    'LBL_BULK_LOAD_BTN_PAUSE' => '一時停止',
+    'LBL_BULK_LOAD_BTN_RESUME' => '再開',
+    'LBL_BULK_LOAD_CONNECTION_USE_MESSAGE' => 'デフォルトではWiFi接続のみが使用されます。',
+    'LBL_NPS_RATING_MSG' => "{{{productName}}} エクスペリエンス\nをどのように評価しますか？",
+    'LBL_NPS_THANKS_MSG' => 'フィードバックをありがとうございます！',
+    'LBL_NPS_APPSTORE_RATE_MSG' => 'App Storeで評価していただけますか？',
+    'LBL_NPS_NO_THANKS' => 'いいえ、遠慮します',
+    'LBL_NPS_NOT_NOW' => '後で',
+    'LBL_NPS_RATE_NOW' => '今すぐ評価',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE' => 'ネットワークを利用できません。アプリはオフライン中も使用できます',
+    'WARN_MOBILE_INTERNET_UNAVAILABLE_AND_UNSYNCED_TRANSACTIONS' => '変更はオンラインのときに同期されます。<a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>詳細を参照してください</a>',
+    'ERR_MOBILE_INTERNET_UNAVAILABLE_AND_TRANSACTION_ERRORS' => '同期されていないデータがあります。<a class=&#39;alert-link&#39; href=&#39;{{{link}}}&#39;>トランザクションログ</a>を確認してください',
+    'LBL_CONVERT' => 'コンバート',
+    'LBL_CONVERT_LEAD' => 'リードのコンバート',
+    'LBL_SEARCH_EXISTING_RECORD' => '既存の {{{this}}} を検索',
+    'LBL_DUPLICATES_CHECK_FAILED' => '重複チェックに失敗しました',
+    'LBL_MOVE_RELATED_ACTIVITIES_PROMPT' => '関連アクティビティを取引先担当者レコードに移動しますか？',
+    'LBL_LEAD_CONVERSION_SUCCESS' => 'リード {{{name}}} のコンバートに成功しました',
+    'LBL_MOBILE_NO_DUPLICATES_FOUND' => '重複が見つかりませんでした。',
+    'ERR_LEAD_CONVERSION_FAIL' => 'リードコンバージョンに失敗しました',
+    'LBL_SELECT_DUPLICATE_RECORD' => '重複 {{{modulePlural}}} から選択',
+    'LBL_SELECTED_EXISTING_RECORD' => '{{{moduleSingular}}} を選択しました',
+    'LBL_CREATED_NEW_RECORD' => '新しい {{{moduleSingular}}} を作成しました',
+    'LBL_VO_BACK_BTN' => '戻るボタン',
+    'LBL_VO_HOME_BTN' => 'ホームボタン',
+    'LBL_VO_DASHBOARD_BTN' => 'ダッシュボードボタン',
+    'LBL_VO_SEARCH_BTN' => '検索ボタン',
+    'LBL_VO_RIGHT_MENU_BTN' => '右メニューボタン',
+    'LBL_VO_ADD_BTN' => '追加ボタン',
+
     //begin portal
 
     //portal record tutorial
@@ -4589,6 +4793,7 @@ $app_strings = array (
     'LBL_REPORT_SELECT' => 'レポートを選択',
     'LBL_REPORT_AUTO_REFRESH' => '自動更新',
     'LBL_REPORT_EDIT' => '選択したレポートを編集',
+    'LBL_REFRESH_LIST_AND_CHART' => 'リストと図を更新',
 
     //sidecar errors
     'ERR_HTTP_DEFAULT_TYPE' => '不明',
@@ -4650,6 +4855,9 @@ $app_strings = array (
     //Sidecar expression context
     'ERR_ASSIGNTO_ACTION' => 'AssignTo 操作中にエラーが発生しました。',
 
+    //Generic error for displaying that the user does not have access to something
+    'ERR_NO_ACCESS' => '"{{name}}"にアクセスする権限がありません。管理者に連絡してください。',
+
     //These are for the timeperiod name formats
     'LBL_ANNUAL_TIMEPERIOD_FORMAT' => '{0}年',
     'LBL_QUARTER_TIMEPERIOD_FORMAT' => '{1} Q{0}',
@@ -4661,6 +4869,11 @@ $app_strings = array (
     'LBL_MESSAGE_BOX_TITLE' => 'アラート',
     'LBL_IGNORE_DUPLICATE_AND_SAVE' => '重複を無視して保存',
     'LBL_RESTORE' => 'リセットして元に戻す',
+
+    //Data Privacy Erasure Dashlet
+    'LBL_MARKED_FOR_ERASURE_TITLE' => '消去用にマークされたレコード',
+    'LBL_MARKED_FOR_ERASURE_DASHLET_DESCRIPTION' => '情報を消去するデータプライバシー要求に関連するレコードを '
+        . '表示します。',
 
     // RSS Feed dashlet
     'LBL_RSS_FEED_DASHLET' => 'RSSフィード',
@@ -4684,6 +4897,7 @@ $app_strings = array (
     'LBL_UNASSIGNED' => 'アサインされていない',
     'LBL_ARCHIVE_EMAIL' => 'Eメールアーカイブ',
     'LBL_EMAIL_ARCHIVED' => 'アーカイブされたEメール',
+    'LBL_CREATE_ARCHIVED_EMAIL' => 'アーカイブされたEメールを作成します。',
 
     // planned activities dashlet
     'LBL_PLANNED_ACTIVITIES_DASHLET' => 'アクティビティ予定',
@@ -4715,6 +4929,19 @@ $app_strings = array (
     'LBL_INACTIVE_TASKS_DASHLET_USER_BUTTON_LABEL' => '私のタスク',
     'LBL_INACTIVE_TASKS_DASHLET_GROUP_BUTTON_LABEL' => 'チームのタスク',
 
+    //Audit subjects
+    'LBL_AUDIT_SUBJECT_ADVANCED-WORKFLOW' => 'Advanced Workflow',
+    'LBL_AUDIT_SUBJECT_API-BWC' => 'BWC UI',
+    'LBL_AUDIT_SUBJECT_API-REST' => 'REST API',
+    'LBL_AUDIT_SUBJECT_API-RPC' => 'SOAPまたは古いREST API',
+    'LBL_AUDIT_SUBJECT_CLI' => 'CLI',
+    'LBL_AUDIT_SUBJECT_CRON-JOB' => 'Cronジョブ',
+    'LBL_AUDIT_SUBJECT_LOGIC-HOOK' => '論理フック',
+    'LBL_AUDIT_SUBJECT_MARKETO' => 'Marketo',
+    'LBL_AUDIT_SUBJECT_SUGAR-WORKFLOW' => 'Sugarワークフロー',
+    'LBL_AUDIT_SUBJECT_USER' => 'ユーザ',
+    'LBL_AUDIT_SUBJECT_WEB-TO-LEAD' => 'Web to Lead',
+
     //common chart strings
     'LBL_CHART' => 'チャート',
     'LBL_CHART_NO_DATA' => 'データがありません',
@@ -4723,6 +4950,13 @@ $app_strings = array (
     'LBL_CHART_CONTROLS_CLOSE' => 'コントロールを隠す',
     'LBL_CHART_CONTROLS_OPEN' => 'コントロールを表示',
     'LBL_CHART_UNDEFINED' => '未定義',
+    'LBL_CHART_NO_LABEL' => '未定義',
+    'LBL_CHART_AMOUNT' => '金額',
+    'LBL_CHART_COUNT' => 'カウント',
+    'LBL_CHART_PERCENT' => 'パーセント',
+    'LBL_CHART_GROUP' => 'グループ',
+    'LBL_CHART_DATE' => '日付',
+    'LBL_CHART_KEY' => 'キー',
 
     //common chart config field labels
     'LBL_CHART_CONFIG_CHART_TYPE' => 'チャートタイプ',
@@ -4794,6 +5028,10 @@ $app_strings = array (
     'LBL_TOP10_OPPORTUNITIES_FILTER_DURATIONS' => 'デフォルト日付フィルタ',
     'LBL_TOP10_OPPORTUNITIES_DEFAULT_DATASET' => 'デフォルトデータセット',
 
+    'LBL_PRODUCT_CATALOG_NAME' => '商品カタログ',
+    'LBL_PRODUCT_CATALOG_DASHLET_NAME' => '商品カタログ',
+    'LBL_PRODUCT_CATALOG_DESC' => '商品カタログからアイテムを表示および追加する。',
+    'LBL_PRODUCT_CATALOG_DASHLET_DESC' => '商品カタログから項目を表示および追加する。',
 
     // Activity stream
     'LBL_TIME_RELATIVE_ACTIVITIES' => '{{relativetime}}　日付 {{date}} 時間 {{time}}',
@@ -4806,6 +5044,7 @@ $app_strings = array (
     'LBL_ACTIVITYSTREAM_RELATIVETIME_ON' => '以下の時間に',
     'LBL_ACTIVITY_STREAM_DASHLET_NAME' => '私のアクティブストリーム',
     'LBL_ACTIVITY_STREAM_DASHLET_DESCRIPTION' => 'レコードに対して実行された操作や投稿されたコメントの一覧を表示する',
+    'EXCEPTION_ACTIVITY_STREAM_DISABLED' => 'アクティブストリームが無効になっています',
 
     'LBL_DATA_VIEW' => 'データービュー',
     'LBL_COMMENT' => 'コメント',
@@ -4813,6 +5052,10 @@ $app_strings = array (
     //application error messages
     'ERR_GENERIC_SERVER_ERROR' => 'サーバーに接続中にエラーが生じました。もう一度行ってください。',
     'ERR_RESOLVE_ERRORS' => '進める前にエラーを解決してください。',
+
+    // AWF activity error message
+    'ERR_AWF_APPROVE_VALIDATION_ERROR' => '承認するには、すべての必須フィールドが入力される必要があります。ただし、このレコードを拒否またはルーティングすることもできます。',
+    'ERR_AWF_REJECT_VALIDATION_ERROR' => '拒否/ルーティングするには、すべての必須フィールドが入力される必要があります。',
 
     // Refresh button on list views
     'LBL_LIST_REFRESH' => 'リストの更新',
@@ -4840,6 +5083,7 @@ $app_strings = array (
 
     'LBL_DASHLET_SAVED_REPORTS_CHART' => '保存されたレポートチャートダッシュレット',
     'LBL_DASHLET_SAVED_REPORTS_CHART_DESC' => '保存されたレポートから表を表示',
+
     'LBL_QUESTION_MARK' => '?',
 
     'LBL_DASHLET_RELATED_DOCUMENTS' => '公開された関連記事',
@@ -4847,7 +5091,7 @@ $app_strings = array (
 
     // Historical Summary
     'LBL_HISTORICAL_SUMMARY' => '履歴概要',
-    'TPL_HISTORICAL_SUMMARY' => '{{name}}のヒストリカルサマリー',
+    'TPL_HISTORICAL_SUMMARY' => 'Historical Summary for {{{name}}}',
     'LBL_MORE_HISTORY' => '更に履歴',
     'LBL_RELATED_CONTACT' => '関連する担当者',
     'LBL_MODULE_TYPE' => 'タイプ',
@@ -4991,7 +5235,7 @@ $app_strings = array (
     // duration field
     'LBL_START_AND_END_DATE' => '{{start}} - {{end}} ({{duration}})',
     'LBL_START_AND_END_DATE_SAME_DAY' => '{{date}} {{start}} - {{end}} ({{duration}})',
-    'LBL_START_AND_END_DATE_TO' => 'to',
+    'LBL_START_AND_END_DATE_TO' => 'から',
     'LBL_START_AND_END_DATE_DETAIL_VIEW' => '開始と終了日',
 
     'LBL_CALENDAR_START_DATE' => "開始日",
@@ -5001,7 +5245,7 @@ $app_strings = array (
     'LBL_CALENDAR_REMINDERS' => "リマインダ",
 
     'LBL_CALENDAR_CUSTOM_DATE' => "カスタム日",
-    'LBL_CALENDAR_REPEAT_TYPE' => "繰り返しタイプ",
+    'LBL_CALENDAR_REPEAT_TYPE' => "繰り返す頻度",
     'LBL_CALENDAR_REPEAT_INTERVAL' => "繰り返しの間隔",
     'LBL_CALENDAR_REPEAT_DOW' => "曜日毎に繰り返し",
     'LBL_CALENDAR_REPEAT' => "繰り返し",
@@ -5097,6 +5341,29 @@ $app_strings = array (
 
     'LBL_FIELD_TRIMMED' => '最大文字数を超えたため、フィールドはカットされました。',
     'LBL_FIELDSIZE_OVERFLOW' => 'フィールドの最大文字数制限を超えています。',
+    'LBL_TINYMCE_TARGET_SAME' => '同じウインドウ',
+    'LBL_TINYMCE_TARGET_NEW' => '新規ウインドウ',
+
+    'LBL_OUTBOUND_EMAILS' => 'メール設定',
+    'LBL_OUTBOUND_EMAIL' => 'メール設定',
+
+    'LBL_EMAIL_PARTICIPANTS' => 'メール参加者',
+    'LBL_EMAIL_PARTICIPANT' => 'メール参加者',
+
+    'LBL_EMAIL_ADDRESS_OPTED_OUT' => 'Opted out of email campaigns',
+
+    'LBL_DATAPRIVACY' => 'データプライバシー',
+    'LBL_DATAPRIVACY_SUBPANEL_TITLE' => 'データプライバシー',
+    'LBL_DATAPRIVACY_VIEW_PII' => '個人情報を表示',
+    'LBL_DATAPRIVACY_MARKFORERASE' => '消去するようにマーク',
+    'LBL_DATAPRIVACY_FIELDNAME' => 'フィールド',
+    'LBL_DATAPRIVACY_VALUE' => '値',
+    'LBL_DATAPRIVACY_CHANGED_BY' => '更新者',
+    'LBL_DATAPRIVACY_SOURCE' => 'ソース',
+    'LBL_DATAPRIVACY_CHANGE_DATE' => '最終更新日',
+    'LBL_DATAPRIVACY_PII' => '個人情報',
+    'LBL_DATAPRIVACY_MARK_FOR_ERASURE' => '消去するようにマーク',
+    'TPL_DATAPRIVACY_PII_TITLE' => '{{{name}}} 用の個人情報',
 );
 
 $app_list_strings['activity_user_options'] = array (
@@ -5961,6 +6228,7 @@ $app_list_strings ['emailTemplates_type_list'] = array (
     'campaign' => 'キャンペーン' ,
     'email' => 'Eメール',
     'workflow' => 'ワークフロー',
+    'system' => 'システム',
   );
 
 $app_list_strings ['emailTemplates_type_list_campaigns'] = array (
@@ -5979,7 +6247,6 @@ $app_list_strings ['documentation'] = array (
     'ENT' => '02_Sugar_Enterprise',
     'CORP' => '03_Sugar_Corporate',
     'PRO' => '04_Sugar_Professional',
-    'COM' => '05_Sugar_Community_Edition'
 );
 
 $app_list_strings['forecasts_config_ranges_options_dom'] = array(
@@ -6042,6 +6309,238 @@ $app_list_strings['moduleList']['KBContentTemplates'] = 'ナレッジ ベース 
 $app_list_strings['moduleListSingular']['KBContentTemplates'] = 'ナレッジ ベース テンプレート';
 $app_list_strings['moduleList']['EmbeddedFiles'] = '埋め込みファイル';
 $app_list_strings['moduleListSingular']['EmbeddedFiles'] = '埋め込みファイル';
+
+    $app_list_strings['iso_currency_symbol'] = array(
+    'ALL' => 'レク',
+    'USD' => '$',
+    'AFN' => '؋',
+    'ARS' => '$',
+    'AWG' => 'ƒ',
+    'AUD' => '$',
+    'AZN' => 'ман',
+    'BSD' => '$',
+    'BBD' => '$',
+    'BYR' => 'p.',
+    'EUR' => '€',
+    'BZD' => 'BZ$',
+    'BMD' => '$',
+    'BOB' => '$b',
+    'BAM' => 'KM',
+    'BWP' => 'P',
+    'BGN' => 'лв',
+    'BRL' => 'R$',
+    'GBP' => '£',
+    'BND' => '$',
+    'KHR' => '៛',
+    'CAD' => '$',
+    'KYD' => '$',
+    'CLP' => '$',
+    'CNY' => '¥',
+    'COP' => '$',
+    'CRC' => '₡',
+    'HRK' => 'kn',
+    'CUP' => '₱',
+    'CZK' => 'Kč',
+    'DKK' => 'kr',
+    'DOP' => 'RD$',
+    'XCD' => '$',
+    'EGP' => '£',
+    'SVC' => '$',
+    'EEK' => 'kr',
+    'FKP' => '£',
+    'FJD' => '$',
+    'GHC' => '¢',
+    'GIP' => '£',
+    'GTQ' => 'Q',
+    'GGP' => '£',
+    'GYD' => '$',
+    'HNL' => 'L',
+    'HKD' => '$',
+    'HUF' => 'Ft',
+    'ISK' => 'kr',
+    'INR' => '₨',
+    'IDR' => 'Rp',
+    'IRR' => '﷼',
+    'IMP' => '£',
+    'ILS' => '₪',
+    'JMD' => 'J$',
+    'JPY' => '¥',
+    'JEP' => '£',
+    'KZT' => 'лв',
+    'KPW' => '₩',
+    'KRW' => '₩',
+    'KGS' => 'лв',
+    'LAK' => '₭',
+    'LVL' => 'Ls',
+    'LBP' => '£',
+    'LRD' => '$',
+    'CHF' => 'CHF',
+    'LTL' => 'Lt',
+    'MKD' => 'ден',
+    'MYR' => 'RM',
+    'MUR' => '₨',
+    'MXN' => '$',
+    'MNT' => '₮',
+    'MZN' => 'MT',
+    'NAD' => '$',
+    'NPR' => '₨',
+    'ANG' => 'ƒ',
+    'NZD' => '$',
+    'NIO' => 'C$',
+    'NGN' => '₦',
+    'NOK' => 'kr',
+    'OMR' => '﷼',
+    'PKR' => '₨',
+    'PAB' => 'B/.',
+    'PYG' => 'Gs',
+    'PEN' => 'S/.',
+    'PHP' => '₱',
+    'PLN' => 'zł',
+    'QAR' => '﷼',
+    'RON' => 'lei',
+    'RUB' => 'руб',
+    'SHP' => '£',
+    'SAR' => '﷼',
+    'RSD' => 'Дин.',
+    'SCR' => '₨',
+    'SGD' => '$',
+    'SBD' => '$',
+    'SOS' => 'S',
+    'ZAR' => 'R',
+    'LKR' => '₨',
+    'SEK' => 'kr',
+    'SRD' => '$',
+    'SYP' => '£',
+    'TWD' => 'NT$',
+    'THB' => '฿',
+    'TTD' => 'TT$',
+    'TRY' => 'TL',
+    'TRL' => '₤',
+    'TVD' => '$',
+    'UAH' => '₴',
+    'UYU' => '$U',
+    'UZS' => 'лв',
+    'VEF' => 'Bs',
+    'VND' => '₫',
+    'YER' => '﷼',
+    'ZWD' => 'Z$',
+    );
+
+    $app_list_strings['iso_currency_name'] = array(
+    'ALL' => 'レク',
+    'USD' => 'ドル',
+    'AFN' => 'アフガニ',
+    'ARS' => 'ペソ',
+    'AWG' => 'ギルダー',
+    'AUD' => 'ドル',
+    'AZN' => 'ニューマナト',
+    'BSD' => 'ドル',
+    'BBD' => 'ドル',
+    'BYR' => 'ルーブル',
+    'EUR' => 'ユーロ',
+    'BZD' => 'ドル',
+    'BMD' => 'ドル',
+    'BOB' => 'ボリビアノ',
+    'BAM' => '兌換マルカ',
+    'BWP' => 'プラ',
+    'BGN' => 'レフ',
+    'BRL' => 'レアイス',
+    'GBP' => 'ポンド',
+    'BND' => 'ドル',
+    'KHR' => 'リエル',
+    'CAD' => 'ドル',
+    'KYD' => 'ドル',
+    'CLP' => 'ペソ',
+    'CNY' => '人民元',
+    'COP' => 'ペソ',
+    'CRC' => 'ColÃ³n',
+    'HRK' => 'クナ',
+    'CUP' => 'ペソ',
+    'CZK' => 'コルナ',
+    'DKK' => 'クローネ',
+    'DOP' => 'ペソ',
+    'XCD' => 'ドル',
+    'EGP' => 'ポンド',
+    'SVC' => 'コロン',
+    'EEK' => 'クローン',
+    'FKP' => 'ポンド',
+    'FJD' => 'ドル',
+    'GHC' => 'セディ',
+    'GIP' => 'ポンド',
+    'GTQ' => 'ケツァル',
+    'GGP' => 'ポンド',
+    'GYD' => 'ドル',
+    'HNL' => 'レンピラ',
+    'HKD' => 'ドル',
+    'HUF' => 'フォリント',
+    'ISK' => 'クローナ',
+    'INR' => 'ルピー',
+    'IDR' => 'ルピア',
+    'IRR' => 'リアル',
+    'IMP' => 'ポンド',
+    'ILS' => '新シェケル',
+    'JMD' => 'ドル',
+    'JPY' => '円',
+    'JEP' => 'ポンド',
+    'KZT' => 'テンゲ',
+    'KPW' => 'ウォン',
+    'KRW' => 'ウォン',
+    'KGS' => 'ソム',
+    'LAK' => 'キップ',
+    'LVL' => 'ラット',
+    'LBP' => 'ポンド',
+    'LRD' => 'ドル',
+    'CHF' => 'スイス フラン',
+    'LTL' => 'リータス',
+    'MKD' => 'デナル',
+    'MYR' => 'リンギット',
+    'MUR' => 'ルピー',
+    'MXN' => 'ペソ',
+    'MNT' => 'トゥグリク',
+    'MZN' => 'メティカル',
+    'NAD' => 'ドル',
+    'NPR' => 'ルピー',
+    'ANG' => 'ギルダー',
+    'NZD' => 'ドル',
+    'NIO' => 'コルドバ',
+    'NGN' => 'ナイラ',
+    'NOK' => 'クローネ',
+    'OMR' => 'リアル',
+    'PKR' => 'ルピー',
+    'PAB' => 'バルボア',
+    'PYG' => 'グアラニー',
+    'PEN' => 'ヌエボ・ソル',
+    'PHP' => 'ペソ',
+    'PLN' => 'ズウォティ',
+    'QAR' => 'リアル',
+    'RON' => 'ニューレイ',
+    'RUB' => 'ルーブル',
+    'SHP' => 'ポンド',
+    'SAR' => 'リヤル',
+    'RSD' => 'ディナール',
+    'SCR' => 'ルピー',
+    'SGD' => 'ドル',
+    'SBD' => 'ドル',
+    'SOS' => 'シリング',
+    'ZAR' => 'ランド',
+    'LKR' => 'ルピー',
+    'SEK' => 'クローナ',
+    'SRD' => 'ドル',
+    'SYP' => 'ポンド',
+    'TWD' => 'ニュードル',
+    'THB' => 'バーツ',
+    'TTD' => 'ドル',
+    'TRY' => 'リラ',
+    'TRL' => 'リラ',
+    'TVD' => 'ドル',
+    'UAH' => 'フリヴニャ',
+    'UYU' => 'ペソ',
+    'UZS' => 'スム',
+    'VEF' => 'ボリーバルフエルテ',
+    'VND' => 'ドン',
+    'YER' => 'リアル',
+    'ZWD' => 'ジンバブエ ドル',
+    );
 
 $app_list_strings['business_rule_type_list'] = array(
     'single' => 'シングルヒット',

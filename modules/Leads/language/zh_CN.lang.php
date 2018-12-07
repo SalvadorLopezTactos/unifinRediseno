@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => '潜在客户列表仪表板',
+    'LBL_LEADS_RECORD_DASHBOARD' => '潜在客户记录仪表板',
+
     'ERR_DELETE_RECORD' => '要删除潜在客户必须指定记录编号。',
     'LBL_ACCOUNT_DESCRIPTION'=> '帐户说明',
     'LBL_ACCOUNT_ID'=>'帐户 ID',
@@ -99,7 +104,7 @@ $mod_strings = array (
     'LBL_EXISTING_CONTACT' => '使用现有联系人',
     'LBL_EXISTING_OPPORTUNITY' => '使用一个已经存在的商业机会',
     'LBL_FAX_PHONE' => '传真：',
-    'LBL_FIRST_NAME' => '名：',
+    'LBL_FIRST_NAME' => '姓：',
     'LBL_FULL_NAME' => '全名：',
     'LBL_HISTORY_SUBPANEL_TITLE'=>'历史记录',
     'LBL_HOME_PHONE' => '家庭电话：',
@@ -109,7 +114,7 @@ $mod_strings = array (
     'LBL_IMPORT_VCARDTEXT' => '通过从文件系统导入电子名片来自动创建新的潜在客户。',
     'LBL_INVALID_EMAIL'=>'无效的电子邮件：',
     'LBL_INVITEE' => '直接报告人',
-    'LBL_LAST_NAME' => '姓：',
+    'LBL_LAST_NAME' => '名：',
     'LBL_LEAD_SOURCE_DESCRIPTION' => '潜在客户来源说明：',
     'LBL_LEAD_SOURCE' => '潜在客户来源：',
     'LBL_LIST_ACCEPT_STATUS' => '收件人状态',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => '商业机会金额：',
     'LBL_OPPORTUNITY_ID'=>'商业机会 ID',
     'LBL_OPPORTUNITY_NAME' => '商业机会名称:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => '其他电子邮件：',
     'LBL_OTHER_PHONE' => '其他电话：',
     'LBL_PHONE' => '电话：',
@@ -176,7 +182,7 @@ $mod_strings = array (
     'LBL_STATE' => '省份：',
     'LBL_STATUS_DESCRIPTION' => '状态说明：',
     'LBL_STATUS' => '状态：',
-    'LBL_TITLE' => '职称：',
+    'LBL_TITLE' => '职位：',
     'LBL_UNCONVERTED'=> '未转换',
     'LNK_IMPORT_VCARD' => '从电子名片创建潜在客户',
     'LNK_LEAD_LIST' => '查看潜在客户',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => '复制备用地址到主要地址',
     'NTC_COPY_PRIMARY_ADDRESS' => '复制主要地址到备用地址',
     'NTC_DELETE_CONFIRMATION' => '您确定要删除这条记录吗？',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '新建商业机会需要账户。\n 您可以新建账户或选择现有账户。',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => '新建商业机会需要账户。\\n 您可以新建账户或选择现有账户。',
     'NTC_REMOVE_CONFIRMATION' => '您确定要从这个案例移除这个潜在客户？',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => '您确定要将作为直接报告的此记录移除吗?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'市场活动日志',
@@ -314,4 +320,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => '潜在客户评分',
 
     'LBL_FILTER_LEADS_REPORTS' => '潜在客户的报表',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => '许可的商业目的',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => '上次更新的许可',
 );

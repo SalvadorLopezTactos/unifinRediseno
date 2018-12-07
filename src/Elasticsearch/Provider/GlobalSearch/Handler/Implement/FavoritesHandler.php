@@ -17,6 +17,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Mapping;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\AbstractHandler;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\MappingHandlerInterface;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\ProcessDocumentHandlerInterface;
+use Sugarcrm\Sugarcrm\Elasticsearch\Mapping\Property\MultiFieldProperty;
 
 /**
  *
@@ -41,8 +42,10 @@ class FavoritesHandler extends AbstractHandler implements
             return;
         }
 
-        // field for denormalized ids
-        $mapping->addNotAnalyzedField(self::FAVORITE_FIELD);
+        // common field for denormalized ids
+        $property = new MultiFieldProperty();
+        $property->setType('keyword');
+        $mapping->addCommonField(self::FAVORITE_FIELD, 'agg', $property);
     }
 
     /**

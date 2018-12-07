@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'إنشاء مهمة',
   'NTC_DELETE_CONFIRMATION' => 'هل تريد بالتأكيد حذف هذا السجل؟ سيتم تحويل أي سجل باستخدام هذه العملة إلى نظام العملة الافتراضي عند الوصول إليها. قد يكون من الأفضل تعيين الحالة إلى غير نشط.',
   'LBL_BELOW_MIN' => 'يجب أن يكون سعر التحويل أعلى من 0.',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'نشط',
-    'Inactive' => 'غير نشط',
-  ),
   'LBL_CREATED_BY' => 'تم الإنشاء بواسطة',
   'LBL_EDIT_LAYOUT' => 'تعديل المخطط' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'المسؤولون فقط',
+  'LBL_CURRENCY_DEFAULT' => 'دولار أمريكي (افتراضي)',
+
 );
 ?>

@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Tudásbázis-lista műszerfal',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Tudásbázis-bejegyzés műszerfal',
+
     'LBL_MODULE_NAME' => 'Tudásbázis',
     'LBL_MODULE_NAME_SINGULAR' => 'Tudásbázis cikk',
     'LBL_MODULE_TITLE' => 'Tudásbázis cikk',

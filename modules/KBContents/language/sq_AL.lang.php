@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Paneli i listës së këndit të njohurive',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Paneli i regjistrimeve të këndit të njohurive',
+
     'LBL_MODULE_NAME' => 'Baza e njohurisë',
     'LBL_MODULE_NAME_SINGULAR' => 'Artikuj të bazës së nojurive',
     'LBL_MODULE_TITLE' => 'Artikuj të bazës së nojurive',

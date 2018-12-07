@@ -49,7 +49,6 @@
      * specifically need it based off the modelView set by the parent layout for this row model
      *
      * @inheritdoc
-     * @override
      */
     _loadTemplate: function() {
         this.tplName = this.model.modelView || 'list';
@@ -152,5 +151,22 @@
 
         options = _.extend({}, options, this.getCustomSaveOptions(options));
         this.model.save({}, options);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    _validationComplete: function(isValid) {
+        if (!isValid) {
+            this.setDisabled(false);
+            return;
+        }
+        // also need to make sure the model.changed is empty as well
+        if (!this.changed && !this.model.changed) {
+            this.cancelEdit();
+            return;
+        }
+
+        this._save();
     }
 });

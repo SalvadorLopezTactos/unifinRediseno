@@ -133,7 +133,7 @@ class TabController
             unset($unsetTabs[$tab]);
         }
 
-        $should_hide_iframes = !SugarAutoLoader::fileExists('modules/iFrames/iFrame.php');
+        $should_hide_iframes = !file_exists('modules/iFrames/iFrame.php');
         if ($should_hide_iframes) {
             if (isset($unsetTabs['iFrames'])) {
                 unset($unsetTabs['iFrames']);

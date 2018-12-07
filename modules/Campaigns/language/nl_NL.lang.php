@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Kies uit beschikbare velden',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Beschrijving formulier',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Door dit formulier in te sturen zal er een lead aangemaakt worden en gekoppeld worden aan campagne',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Door dit vakje te selecteren, gaat u akkoord met het ontvangen van toekomstige marketinge-mails',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Download uw web-to-lead formulier',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Web-to-lead formulier',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Vul a.u.b. alle verplichte velden in',

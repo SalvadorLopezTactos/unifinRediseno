@@ -46,13 +46,10 @@ $mod_strings = array (
   'LNK_NEW_TASK' => 'Vytvoriť úlohu',
   'NTC_DELETE_CONFIRMATION' => 'Skutočne, chcete vymazať tento záznam? Pri prístupe bude každý záznam používajúci túto menu zmenený na systémovo prednastavenú menu. Može byť výhodnejšie nastaviť status na neaktívny.',
   'LBL_BELOW_MIN' => 'Konverzný kurz musí byť nad 0',
-  'currency_status_dom' => 
-  array (
-    'Active' => 'Aktívny',
-    'Inactive' => 'Neaktívny',
-  ),
   'LBL_CREATED_BY' => 'Vytvoril',
   'LBL_EDIT_LAYOUT' => 'Upraviť rozloženie' /*for 508 compliance fix*/,
   'LBL_ADMIN_ONLY' => 'Len pre správcov',
+  'LBL_CURRENCY_DEFAULT' => 'Americký dolár (predvolené)',
+
 );
 ?>

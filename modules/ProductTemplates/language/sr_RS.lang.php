@@ -90,7 +90,7 @@ $mod_strings = array (
   'LNK_NEW_SHIPPER' => 'Dostavljači',
   'LNK_PRODUCT_LIST' => 'Prikaži katalog proizvoda',
   'NTC_DELETE_CONFIRMATION' => 'Da li ste sigurni da želite da obrišete ovaj zapis?',
-
+    'LBL_ADD_TO_QUOTE_BUTTON' => 'Dodaj',
 
     //For export labels
   'LBL_EXPORT_ASSIGNED_USER_NAME' => 'Ime dodeljenog korisnika',

@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_MEETINGS_LIST_DASHBOARD' => 'Toplantılar Listesi Panosu',
+    'LBL_MEETINGS_RECORD_DASHBOARD' => 'Toplantılar Kaydı Panosu',
+
 	'ERR_DELETE_RECORD' => 'Toplantının silinebilmesi için bir kayıt numarası belirtilmelidir.',
 	'LBL_ACCEPT_THIS'=>'Kabul?',
 	'LBL_ADD_BUTTON'=> 'Ekle',

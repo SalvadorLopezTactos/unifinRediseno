@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Nadzorna ploča za popis poziva',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o pozivima',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Pozivi',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Poziv',

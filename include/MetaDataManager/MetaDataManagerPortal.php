@@ -23,7 +23,7 @@ class MetaDataManagerPortal extends MetaDataManager
         foreach (SugarAutoLoader::getDirFiles("modules", true) as $mdir) {
             // strip modules/ from name
             $mname = substr($mdir, 8);
-            if (SugarAutoLoader::fileExists("$mdir/clients/portal/")) {
+            if (file_exists("$mdir/clients/portal/")) {
                 $modules[] = $mname;
             }
         }

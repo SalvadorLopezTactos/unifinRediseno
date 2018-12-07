@@ -10,12 +10,16 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Zināšanu bāzes saraksta instrumentu panelis',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Zināšanu bāzes ierakstu instrumentu panelis',
+
     'LBL_MODULE_NAME' => 'Zināšanu bāze',
     'LBL_MODULE_NAME_SINGULAR' => 'Zināšanu bāzes raksts',
     'LBL_MODULE_TITLE' => 'Zināšanu bāzes raksts',
     'LNK_NEW_ARTICLE' => 'Izveidot rakstu',
     'LNK_LIST_ARTICLES' => 'Aplūkot rakstus',
-    'LNK_KNOWLEDGE_BASE_ADMIN_MENU' => 'Uzstādījumi',
+    'LNK_KNOWLEDGE_BASE_ADMIN_MENU' => 'Iestatījumi',
     'LBL_EDIT_LANGUAGES' => 'Rediģēt valodas',
     'LBL_ADMIN_LABEL_LANGUAGES' => 'Pieejamās valodas',
     'LBL_CONFIG_LANGUAGES_TITLE' => 'Pieejamās valodas',
@@ -32,7 +36,7 @@ $mod_strings = array (
     'LBL_DOCUMENT_REVISION_ID' => 'Versijas ID',
     'LBL_DOCUMENT_REVISION' => 'Revīzija',
     'LBL_NUMBER' => 'Numurs',
-    'LBL_TEXT_BODY' => 'Paziņojuma teksts',
+    'LBL_TEXT_BODY' => 'Teksts',
     'LBL_LANG' => 'Valoda',
     'LBL_PUBLISH_DATE' => 'Publicēšanas datums',
     'LBL_EXP_DATE' => 'Derīgs līdz',

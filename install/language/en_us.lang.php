@@ -52,23 +52,6 @@ $mod_strings = array(
 	'LBL_OPP2_DESC'						=> 'This query will be stacked below the first query in the report',
     'ERR_DB_VERSION_FAILURE'			=> 'Unable to check database version.',
 
-
-	'ERR_OC_PASSWORD'					=> 'Password is required.',
-	'ERR_OC_SERVER_URL'					=> 'Sugar Server URL is required.',
-	'ERR_OC_USERNAME'					=> 'Username of server user is required.',
-	'LBL_INSTALL_OC'					=> 'Install Offline Client',
-    'LBL_OC_ADMIN'                      => 'Please contact your Administrator in order to resolve this problem.',
-    'LBL_OC_SUCCESS'                    => 'Offline Client Installation has completed. Please click the button below in order to be taken to your installation.',
-	'LBL_OC_INSTALL_ADMIN_NAME'			=> 'Admin Username',
-	'LBL_OC_INSTAL_DIRECTIONS'			=> 'Please enter the details below in order to properly install and sync your offline client.',
-	'LBL_OC_INSTALL_SERVER_URL'			=> 'URL of Sugar Server',
-	'LBL_OC_INSTALL_PASS'				=> 'Password for server user',
-	'LBL_OC_INSTALL_TITLE'				=> 'Offline Client Installation',
-	'LBL_OC_INSTALL_USERNAME_DETAILS'	=> 'This is the username you will connect to your Sugar server with.',
-	'LBL_OC_INSTALL_USERNAME'			=> 'Username',
-	'LBL_PERFORM_OC_INSTALL'			=> 'Initializing Offline Client Installation',
-    'LBL_OC_INSTALL_DIRECTIONS'         => 'Please enter the details below in order to properly install and sync your offline client.',
-
 	'DEFAULT_CHARSET'					=> 'UTF-8',
     'ERR_ADMIN_USER_NAME_BLANK'         => 'Provide the user name for the Sugar admin user. ',
 	'ERR_ADMIN_PASS_BLANK'				=> 'Provide the password for the Sugar admin user. ',
@@ -165,7 +148,7 @@ $mod_strings = array(
     'LBL_UPLOAD_MAX_FILESIZE_TITLE'     => 'Upload File Size',
 	'ERR_URL_BLANK'						=> 'Provide the base URL for the Sugar instance.',
 	'ERR_UW_NO_UPDATE_RECORD'			=> 'Could not locate installation record of',
-	'ERROR_FLAVOR_INCOMPATIBLE'			=> 'The uploaded file is not compatible with this flavor (Community Edition, Professional, or Enterprise) of Sugar: ',
+    'ERROR_FLAVOR_INCOMPATIBLE'         => 'The uploaded file is not compatible with this flavor (Professional, Enterprise or Ultimate edition) of Sugar: ',
 	'ERROR_LICENSE_EXPIRED'				=> "Error: Your license expired ",
 	'ERROR_LICENSE_EXPIRED2'			=> " day(s) ago.   Please go to the <a href='index.php?action=LicenseSettings&module=Administration'>'\"License Management\"</a>  in the Admin screen to enter your new license key.  If you do not enter a new license key within 30 days of your license key expiration, you will no longer be able to log in to this application.",
 	'ERROR_MANIFEST_TYPE'				=> 'Manifest file must specify the package type.',
@@ -310,9 +293,6 @@ $mod_strings = array(
 	'LBL_LICENSE_EXPIRY'				=> 'Expiration Date',
 	'LBL_LICENSE_I_ACCEPT'				=> 'I Accept',
 	'LBL_LICENSE_NUM_USERS'				=> 'Number of Users',
-	'LBL_LICENSE_OC_DIRECTIONS'			=> 'Please enter the number of purchased offline clients.',
-	'LBL_LICENSE_OC_NUM'				=> 'Number of Offline Client Licenses',
-	'LBL_LICENSE_OC'					=> 'Offline Client Licenses',
 	'LBL_LICENSE_PRINTABLE'				=> ' Printable View ',
     'LBL_PRINT_SUMM'                    => 'Print Summary',
 	'LBL_LICENSE_TITLE_2'				=> 'SugarCRM License',
@@ -576,10 +556,6 @@ $mod_strings = array(
     'LBL_COLLATION' => 'Collation Settings',
 	'LBL_REQUIRED_SYSTEM_NAME'=>'Provide a System Name for the Sugar instance.',
 	'LBL_PATCH_UPLOAD' => 'Select a patch file from your local computer',
-	'LBL_INCOMPATIBLE_PHP_VERSION' => 'PHP version 5 or above is required.',
-    'LBL_MINIMUM_PHP_VERSION' => 'Minimum PHP version required is 5.6.0.',
-	'LBL_YOUR_PHP_VERSION' => '(Your current php version is ',
-    'LBL_RECOMMENDED_PHP_VERSION' =>' Recommended php version is 7.1.x)',
 	'LBL_BACKWARD_COMPATIBILITY_ON' => 'PHP Backward Compatibility mode is turned on. Set zend.ze1_compatibility_mode to Off for proceeding further',
 
     'advanced_password_new_account_email' => array(
@@ -611,5 +587,3 @@ $contact_user_link_guid',
         'name' => 'Forgot Password email',
         ),
 );
-
-?>

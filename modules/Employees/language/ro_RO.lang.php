@@ -144,6 +144,8 @@ $mod_strings = array (
   'LBL_DELETED' => 'Şters',
   'LBL_EMAIL_ADDRESS'=>'Adresă Email',
   'LBL_CONTACTS_SYNC' => 'Contacte',
+    'ERR_CREATE_EMPLOYEE_FOR_IDM_MODE' =>
+        'Angajatul poate fi creat doar în <a href="{0}" target="_blank">Consola cloud</a> pentru modul IDM.',
 );
 
 

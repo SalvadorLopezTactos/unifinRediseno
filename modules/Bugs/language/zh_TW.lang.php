@@ -11,7 +11,11 @@
  */
 
 $mod_strings = array (
-  'LBL_MODULE_NAME' => '錯誤',
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => '錯誤清單儀表板',
+  'LBL_BUGS_RECORD_DASHBOARD' => '錯誤記錄儀表板',
+
+  'LBL_MODULE_NAME' => '問題',
   'LBL_MODULE_NAME_SINGULAR'	=> '錯誤',
   'LBL_MODULE_TITLE' => '錯誤追蹤器：首頁',
   'LBL_MODULE_ID' => '錯誤',
@@ -19,7 +23,7 @@ $mod_strings = array (
   'LBL_LIST_FORM_TITLE' => '錯誤清單',
   'LBL_NEW_FORM_TITLE' => '新錯誤',
   'LBL_CONTACT_BUG_TITLE' => '連絡人錯誤：',
-  'LBL_SUBJECT' => '主題：',
+  'LBL_SUBJECT' => '主旨：',
   'LBL_BUG' => '錯誤：',
   'LBL_BUG_NUMBER' => '錯誤編號：',
   'LBL_NUMBER' => '編號：',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => '實例',
   'LBL_PROJECTS_SUBPANEL_TITLE' => '專案',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => '文件',
-  'LBL_SYSTEM_ID' => '系統 ID',
   'LBL_LIST_ASSIGNED_TO_NAME' => '指派的使用者',
 	'LBL_ASSIGNED_TO_NAME' => '已指派至',
 

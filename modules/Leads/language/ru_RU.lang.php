@@ -20,6 +20,11 @@ $mod_strings = array (
     'db_email2' => 'LBL_LIST_EMAIL_ADDRESS',
 
     //END DON'T CONVERT
+
+    // Dashboard Names
+    'LBL_LEADS_LIST_DASHBOARD' => 'Информационная панель списка предварительных контактов',
+    'LBL_LEADS_RECORD_DASHBOARD' => 'Информационная панель записей предварительных контактов',
+
     'ERR_DELETE_RECORD' => 'Вы должны указать номер записи перед удалением предварительного контакта.',
     'LBL_ACCOUNT_DESCRIPTION'=> 'Описание контрагента',
     'LBL_ACCOUNT_ID'=>'Контрагент',
@@ -130,7 +135,7 @@ $mod_strings = array (
     'LBL_LIST_REFERED_BY' => 'Рекомендован:',
     'LBL_LIST_STATUS' => 'Статус',
     'LBL_LIST_TITLE' => 'Должность',
-    'LBL_MOBILE_PHONE' => 'Моб. тел.:',
+    'LBL_MOBILE_PHONE' => 'Мобильный телефон:',
     'LBL_MODULE_NAME' => 'Предварительные контакты',
     'LBL_MODULE_NAME_SINGULAR' => 'Предварительный контакт',
     'LBL_MODULE_TITLE' => 'Предварительные контакты: Главная',
@@ -142,6 +147,7 @@ $mod_strings = array (
     'LBL_OPPORTUNITY_AMOUNT' => 'Сумма по сделке:',
     'LBL_OPPORTUNITY_ID'=>'ID Сделки',
     'LBL_OPPORTUNITY_NAME' => 'Название сделки:',
+    'LBL_CONVERTED_OPPORTUNITY_NAME' => 'Converted Opportunity Name',
     'LBL_OTHER_EMAIL_ADDRESS' => 'Дополнительный E-mail:',
     'LBL_OTHER_PHONE' => 'Дополнительный тел.:',
     'LBL_PHONE' => 'Телефон:',
@@ -195,7 +201,7 @@ $mod_strings = array (
     'NTC_COPY_ALTERNATE_ADDRESS' => 'Копировать альтернативный адрес в основной',
     'NTC_COPY_PRIMARY_ADDRESS' => 'Копировать основной адрес в альтернативный',
     'NTC_DELETE_CONFIRMATION' => 'Вы действительно хотите удалить эту запись?',
-    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Для создания сделки необходим контрагент.\n Пожалуйста, или создайте новый контрагент или выберите один из уже существующих.',
+    'NTC_OPPORTUNITY_REQUIRES_ACCOUNT' => 'Для создания сделки необходим контрагент.\\n Пожалуйста, или создайте новый контрагент или выберите один из уже существующих.',
     'NTC_REMOVE_CONFIRMATION' => 'Вы действительно хотите удалить этот предварительный контакт из данной сделки?',
     'NTC_REMOVE_DIRECT_REPORT_CONFIRMATION' => 'Вы уверены, что хотите удалить эту запись из прямых отчетов?',
     'LBL_CAMPAIGN_LIST_SUBPANEL_TITLE'=>'Маркетинговые кампании',
@@ -314,4 +320,6 @@ $mod_strings = array (
     'LBL_MKTO_LEAD_SCORE' => 'Lead Score',
 
     'LBL_FILTER_LEADS_REPORTS' => 'Отчёты по предварительным контактам',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Согласованные бизнес-цели',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Последнее обновление согласия',
 );

@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Πίνακας Εργαλείων Λίστας Σημειώσεων',
+
     'ERR_DELETE_RECORD' => 'Πρέπει να προσδιορίσετε αριθμό εγγραφής για να διαγράψετε τον λογαριασμό.',
     'LBL_ACCOUNT_ID' => 'Ταυτότητα Λογαριασμού:',
     'LBL_CASE_ID' => 'Ταυτότητα Υπόθεσης:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Σημείωση',
     'LBL_EMAIL_ADDRESS' => 'Διεύθυνση Email:',
     'LBL_EMAIL_ATTACHMENT' => 'Επισύναψη Email',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Συνημμένο email για',
     'LBL_FILE_MIME_TYPE' => 'Τύπος Mime',
+    'LBL_FILE_EXTENSION' => 'Επέκταση Αρχείου',
+    'LBL_FILE_SOURCE' => 'Προέλευση Αρχείου',
+    'LBL_FILE_SIZE' => 'Μέγεθος Αρχείου',
     'LBL_FILE_URL' => 'Αρχείο URL',
     'LBL_FILENAME' => 'Επισύναψη:',
     'LBL_LEAD_ID' => 'Ταυτότητα Δυνητικού Πελάτη:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Ταυτότητα Ευκαιρίας:',
     'LBL_PARENT_ID' => 'Γονική Ταυτότητα:',
     'LBL_PARENT_TYPE' => 'Γονική Ταυτότητα',
+    'LBL_EMAIL_TYPE' => 'Τύπος Email',
+    'LBL_EMAIL_ID' => 'Ταυτότητα Email',
     'LBL_PHONE' => 'Τηλέφωνο:',
     'LBL_PORTAL_FLAG' => 'Εμφάνιση στο Portal;',
     'LBL_EMBED_FLAG' => 'Ενσωμάτωση στο email;',

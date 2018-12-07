@@ -24,6 +24,11 @@
     calculatedFields: [],
 
     /**
+     * registers additional editable fields from supporting quotes views
+     */
+    additionalEditableFields: [],
+
+    /**
      * Track the number of items in edit mode.
      * @type {number}
      */
@@ -47,6 +52,7 @@
             .where({calculated: true})
             .pluck('name')
             .value();
+        this.additionalEditableFields = [];
     },
 
     /**
@@ -58,11 +64,133 @@
         this.context.on('editable:handleEdit', this._handleEditShippingField, this);
 
         this.context.on('quotes:editableFields:add', function(field) {
+            this.additionalEditableFields.push(field);
             this.editableFields.push(field);
         }, this);
 
         this.context.on('quotes:item:toggle', this._handleItemToggled, this);
-        this.context.on('quotes:item:toggle:reset', this._handleToggleReset, this);
+    },
+
+    /**
+     * @inheritdoc
+     */
+    setEditableFields: function() {
+        this._super('setEditableFields');
+
+        if (this.editableFields) {
+            _.each(this.additionalEditableFields, function(field) {
+                this.editableFields.push(field);
+            }, this);
+        }
+    },
+
+    /**
+     * @inheritdoc
+     *
+     * Overrides the existing record duplicateClicked to handle the unique
+     * Quotes->ProductBundles->Products|ProductBundleNotes data structure
+     */
+    duplicateClicked: function() {
+        var bundles;
+        var loadViewObj;
+        var bundleModels = [];
+        // create an empty Quote Bean
+        var quoteModelCopy;
+        var quoteContextCollection;
+        var mainDropdownBtn;
+        var copyItemCount = 0;
+
+        if (this.editCount) {
+            app.alert.show('quotes_qli_editmode', {
+                level: 'error',
+                title: '',
+                messages: [app.lang.get('LBL_COPY_LINE_ITEMS', 'Quotes')]
+            });
+
+            return;
+        }
+
+        // get the Edit dropdown button
+        mainDropdownBtn = this.getField('main_dropdown');
+        // close the dropdown menu
+        mainDropdownBtn.$el.removeClass('open');
+
+        bundles = this.model.get('bundles');
+        quoteModelCopy = app.data.createBean(this.model.module);
+        quoteContextCollection = this.context.get('collection');
+
+        quoteModelCopy.copy(this.model);
+
+        _.each(bundles.models, function(bundle) {
+            var items = [];
+            var bundleData = bundle.toJSON();
+            var pbItems = bundle.get('product_bundle_items');
+
+            // re-set pbItems (if it exists and if pbItems.models exists) to be pbItems.models
+            pbItems = pbItems && pbItems.models;
+
+            // loop over the product bundle items
+            _.each(pbItems, function(pbItem) {
+                var tmpItem = pbItem.toJSON();
+                var newBean;
+
+                // get rid of an item's id and quote_id
+                delete tmpItem.id;
+                delete tmpItem.quote_id;
+
+                if (_.isEmpty(tmpItem.product_template_name)) {
+                    // if product_template_name is empty, use the QLI's name
+                    tmpItem.product_template_name = tmpItem.name;
+                } else {
+                    // if product_template_name is not empty, set that to the QLI's name
+                    tmpItem.name = tmpItem.product_template_name;
+                }
+
+                newBean = app.data.createBean(tmpItem._module, tmpItem);
+
+                // set isCopied on the bean for currency fields to be set properly
+                newBean.isCopied = true;
+
+                copyItemCount++;
+
+                // creates a Bean and pushes the individual Products|ProductBundleNotes to the array
+                items.push(newBean);
+            }, this);
+
+            // remove any id or sugarlogic entries from the bundle data
+            delete bundleData.id;
+            delete bundleData['_products-rel_exp_values'];
+            // remove any leftover create/delete arrays
+            delete bundleData.products;
+
+            // set items array onto the bundleData
+            bundleData.product_bundle_items = items;
+
+            bundleModels.push(bundleData);
+        }, this);
+
+        // get rid of the existing bundles data on the model
+        quoteModelCopy.unset('bundles');
+
+        // set the model onto the context->collection
+        quoteContextCollection.reset(quoteModelCopy);
+
+        loadViewObj = {
+            action: 'edit',
+            collection: quoteContextCollection,
+            copy: true,
+            create: true,
+            layout: 'create',
+            model: quoteModelCopy,
+            module: 'Quotes',
+            relatedRecords: bundleModels,
+            copyItemCount: copyItemCount
+        };
+
+        // lead the Quotes create layout
+        app.controller.loadView(loadViewObj);
+        // update the browser URL with the proper
+        app.router.navigate('#Quotes/create', {trigger: false});
     },
 
     /**
@@ -84,8 +212,9 @@
     },
 
     /**
-     * override the save clicked function to check if things are in edit mode before saving.
-     * @override
+     * Override the save clicked function to check if things are in edit mode before saving.
+     *
+     * @inheritdoc
      */
     saveClicked: function() {
         //if we don't have any qlis in edit mode, save.  If we do, show a warning.
@@ -102,8 +231,9 @@
     },
 
     /**
-     * override the cancel clicked function to retrigger sugarlogic.
-     * @override
+     * Override the cancel clicked function to retrigger sugarlogic.
+     *
+     * @inheritdoc
      */
     cancelClicked: function() {
         this._super('cancelClicked');

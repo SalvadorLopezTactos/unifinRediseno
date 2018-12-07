@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Tabloul de bord Listă Listă ținte',
+
   'LBL_MODULE_NAME' => 'Liste obiective',
   'LBL_MODULE_NAME_SINGULAR' => 'Lista tinte',
   'LBL_MODULE_ID'   => 'Liste tinte',

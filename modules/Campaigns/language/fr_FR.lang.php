@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Merci de sélectionner à partir des champs disponibles',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Texte apparaissant au dessus du formulaire :',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Soumettre le formulaire créera un lead et le liera à la campagne',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'En cochant cette case, vous acceptez de recevoir de futurs e-mails de marketing',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'</b>Cliquez sur le lien ci-dessous avec le bouton <u>droit</u> de votre souris et choisissez "Enregistrer la cible sous" afin de télécharger votre formulaire de capture de Leads.<br>Vous pourrez alors placer ce formulaire sur votre site Web.<br>',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Formulaire Web de Lead',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Merci de renseigner tous les champs requis',

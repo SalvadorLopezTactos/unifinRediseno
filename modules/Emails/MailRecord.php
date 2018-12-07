@@ -11,6 +11,11 @@
  */
 
 
+/**
+ * Class MailRecord
+ * @deprecated This was a bridge for {@link MailApi} to work with {@link Email}. It is no longer used. Use
+ * {@link EmailsApi} instead.
+ */
 class MailRecord
 {
     static private $statuses = array(
@@ -47,44 +52,75 @@ class MailRecord
     public $assigned_user_id;
 
     /**
+     * Logs a deprecation warning.
+     *
+     * @deprecated This class is no longer used and is not recommended.
+     */
+    public function __construct()
+    {
+        LoggerManager::getLogger()->deprecated(
+            'MailRecord was a bridge for MailApi to work with Email. It is no longer used and has been deprecated. ' .
+            'Use EmailsApi instead.'
+        );
+    }
+
+    /**
      * Saves the email as a draft.
      *
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailApi::handleMail()
      * @return array
      */
     public function saveAsDraft()
     {
+        LoggerManager::getLogger()->deprecated('MailRecord::saveAsDraft() has been deprecated.');
+
         return $this->toEmailBean("draft");
     }
 
     /**
      * Saves and sends the email.
      *
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailApi::handleMail()
      * @return array
      */
     public function send()
     {
+        LoggerManager::getLogger()->deprecated('MailRecord::send() has been deprecated.');
+
         return $this->toEmailBean("ready");
     }
 
     /**
      * Saves the email as a draft.
      *
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailApi::archiveMail()
      * @return array
      */
     public function archive()
     {
+        LoggerManager::getLogger()->deprecated('MailRecord::archive() has been deprecated.');
+
         return $this->toEmailBean("archived");
     }
 
     /**
      * Prepares and executes the email request according to the expectations of the status.
      *
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailRecord::saveAsDraft()
+     * @see MailRecord::send()
+     * @see MailRecord::archive()
      * @param $status
      * @return array - Mail API Response Record
      * @throws MailerException
      */
     protected function toEmailBean($status)
     {
+        LoggerManager::getLogger()->deprecated('MailRecord::toEmailBean() has been deprecated.');
+
         if (!empty($this->mockEmailBean)) {
             $email = $this->mockEmailBean; // Testing purposes only
         } else {
@@ -141,6 +177,8 @@ class MailRecord
     /**
      * Constructs the email request that will passed on.
      *
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailRecord::toEmailBean()
      * @param string $status
      * @param null   $from
      * @param string $to
@@ -157,6 +195,8 @@ class MailRecord
         $bcc = "",
         $attachments = array()
     ) {
+        LoggerManager::getLogger()->deprecated('MailRecord::setupSendRequest() has been deprecated.');
+
         $request = array(
             "fromAccount" => $from,
             "archive_from_address" => $this->fromAddress, // "archived" status only
@@ -221,9 +261,14 @@ class MailRecord
 
     /**
      * Starts the output buffer. Wraps the function call so that it is possible to mock/stub this behavior.
+     *
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailRecord::toEmailBean()
      */
     protected function startCapturingOutput()
     {
+        LoggerManager::getLogger()->deprecated('MailRecord::startCapturingOutput() has been deprecated.');
+
         ob_start();
     }
 
@@ -231,6 +276,8 @@ class MailRecord
      * Collects the contents from the output buffer and cleans the buffer. Wraps the function calls so that it is
      * possible to mock/stub this behavior.
      *
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailRecord::toEmailBean()
      * @return string
      */
     protected function endCapturingOutput()
@@ -238,17 +285,23 @@ class MailRecord
         $contents = ob_get_contents();
         ob_end_clean();
 
+        LoggerManager::getLogger()->deprecated('MailRecord::endCapturingOutput() has been deprecated.');
+
         return $contents;
     }
 
     /**
      * Format recipient addresses as comma-separated strings.
      *
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailRecord::toEmailBean()
      * @param array $recipients
      * @return string
      */
     protected function addRecipients($recipients = array())
     {
+        LoggerManager::getLogger()->deprecated('MailRecord::addRecipients() has been deprecated.');
+
         $addedRecipients = array();
 
         if (is_array($recipients)) {
@@ -278,11 +331,15 @@ class MailRecord
     /**
      * Split attachment list into separate lists by type
      *
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailRecord::toEmailBean()
      * @param array $attachments
      * @return array
      */
     protected function splitAttachments($attachments = array())
     {
+        LoggerManager::getLogger()->deprecated('MailRecord::splitAttachments() has been deprecated.');
+
         $addedAttachments = array();
 
         if (is_array($attachments)) {
@@ -305,11 +362,15 @@ class MailRecord
     /**
      * Returns an EmailIdentity object from the set of recipients data that is passed in.
      *
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailRecord::addRecipients()
      * @param $data
      * @return EmailIdentity
      */
     protected function generateEmailIdentity($data)
     {
+        LoggerManager::getLogger()->deprecated('MailRecord::generateEmailIdentity() has been deprecated.');
+
         $recipient = null;
 
         if (is_array($data) && !empty($data['email'])) {
@@ -329,12 +390,16 @@ class MailRecord
     /**
      * Returns the Api Response Record
      *
-     * @param $status    - Status that came in on the request
-     * @param $bean      - Email Bean
-     * @return $response - array
+     * @deprecated This method is no longer used and is not recommended.
+     * @see MailRecord::toEmailBean()
+     * @param string $status Status that came in on the request
+     * @param Email $email
+     * @return array
      */
     protected function toApiResponse($status, $email)
     {
+        LoggerManager::getLogger()->deprecated('MailRecord::toApiResponse() has been deprecated.');
+
         $response = array(
             "id" => $email->id,
             "date_entered" => $email->date_entered,
@@ -353,6 +418,7 @@ class MailRecord
             "html_body" => $this->html_body,
             "text_body" => $this->text_body,
             "status" => ($status == 'ready') ? 'sent' : $status,
+            'state' => $email->state,
         );
 
         if (!empty($this->date_sent)) {

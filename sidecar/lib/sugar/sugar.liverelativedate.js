@@ -8,6 +8,9 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+
+const DateUtils = require('utils/date');
+
 /**
  * LiveRelativeDate plugin is a jQuery/Zepto plugin for sidecar that converts a
  * date into a relative time with a timer to keep it relative to current time.
@@ -45,7 +48,7 @@
  *
  */
 (function(plugin) {
-    plugin(window.jQuery || window.Zepto, SUGAR.App.date);
+    plugin(window.jQuery || window.Zepto, DateUtils);
 }(function($, date) {
 
     var updateInterval = 6e4, // every minute

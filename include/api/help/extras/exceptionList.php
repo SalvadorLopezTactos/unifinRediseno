@@ -17,7 +17,7 @@
 
 $theme = new SidecarTheme();
 
-$bootstrap_css = $theme->getCSSURL();
+$css_files = $theme->getCSSURL();
 
 // Fixes pathing for help requests ending in '/'
 $base_path = '../../../';
@@ -34,7 +34,7 @@ if (substr($_SERVER['REQUEST_URI'], -1) == '/') {
     <head>
         <title>SugarCRM Auto Generated API Exceptions Documentation</title>
         <?php
-        foreach($bootstrap_css as $css) {
+        foreach ($css_files as $css) {
             echo '<link rel="stylesheet" href="' . $base_path . $css . '">';
         }
         ?>

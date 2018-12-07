@@ -21,6 +21,7 @@
      * Formats the title with the current server info.
      */
     _formatTitle: function(title) {
-        return app.lang.get(title, this.module, app.metadata.getServerInfo());
+        var marketingVersion = '(Spring \'18)';
+        return app.lang.get(title, this.module, app.metadata.getServerInfo()) + ' ' + marketingVersion;
     }
 })

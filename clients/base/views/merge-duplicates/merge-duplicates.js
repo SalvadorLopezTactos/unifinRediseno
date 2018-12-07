@@ -221,16 +221,22 @@
     generatedValues: null,
 
     /**
+     * Variable to store a copy of primary record's model for showing it
+     * on preview panel
+     * @property {Backbone.Model} previewModel Contains copy of primary record.
+     */
+    previewModel: {},
+
+    /**
      * @inheritdoc
      *
      * Initialize merge collection as collection of selected records and
      * initialise fields that can be used in merge.
      */
     initialize: function(options) {
-
+        this._initializeMergeFields(options.module);
         this._super('initialize', [options]);
         this._initSettings();
-        this._initializeMergeFields();
         this._initializeMergeCollection(this._prepareRecords());
 
         this.action = 'list';
@@ -316,11 +322,13 @@
      * Initialize fields for merge.
      *
      * Creates filtered set of model's fields that can be merged.
-     * @private
+     *
+     * @param {string} module Module to retrieve metadata from.
+     * @protected
      */
-    _initializeMergeFields: function() {
-        var meta = app.metadata.getView(this.module, 'record'),
-            fieldDefs = app.metadata.getModule(this.module).fields;
+    _initializeMergeFields: function(module) {
+        var meta = app.metadata.getView(module, 'record');
+        var fieldDefs = app.metadata.getModule(module).fields;
 
         this.mergeFields = _.chain(meta.panels)
             .map(function(panel) {
@@ -796,8 +804,26 @@
      */
     updatePreviewRecord: function(model) {
         var module = model.module || model.get('module');
-        var previewCollection = app.data.createBeanCollection(module, [model]);
-        app.events.trigger('preview:render', model, previewCollection, false);
+        var previewCollection;
+
+        // FIXME PX-15: Hack-fix for re-enabling sync on preview panel launch
+        // We had to get the delta for primary record from current state until
+        // now and reapply all of them after preview is synced
+        if (_.isEmpty(this.previewModel) || this.previewModel.get('id') !== model.get('id')) {
+            this.previewModel = app.data.createBean(module, model.toJSON());
+            previewCollection = app.data.createBeanCollection(module, [this.previewModel]);
+
+            this.previewModel.setOption({
+                success: function(changedModel) {
+                    var changedAttributes = model.changedAttributes(model.getSynced());
+                    changedModel.set(_.mapObject(changedAttributes, function(value, fieldName) {
+                        return model.get(fieldName);
+                    }, this));
+                }
+            });
+        }
+
+        app.events.trigger('preview:render', this.previewModel, previewCollection, false);
         app.events.trigger('preview:open', true);
     },
 
@@ -1047,6 +1073,15 @@
         this.primaryRecord = model;
 
         this.primaryRecord.on('change', function(model) {
+            // Reapply every change on preview model
+            if (!_.isEmpty(this.previewModel)) {
+                var changedAttributes = this.primaryRecord.changedAttributes();
+
+                this.previewModel.set(_.mapObject(changedAttributes, function(value, fieldName) {
+                    return this.primaryRecord.get(fieldName);
+                }, this));
+            }
+
             this.updatePrimaryTitle(app.utils.getRecordName(this.primaryRecord));
         }, this);
 

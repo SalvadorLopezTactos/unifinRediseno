@@ -521,6 +521,10 @@ class SugarSNIP
 
         $e->id = create_guid();
         $e->new_with_id = true;
+
+        // Don't assign the email to the current user by default.
+        $e->assigned_user_id = null;
+
         //Can't use sugar_bean field definition to determine which fields to import.
         $copyFields = array('from_name','description','description_html','to_addrs','cc_addrs','bcc_addrs','date_sent', 'message_id', 'subject');
         foreach ($copyFields as $field)
@@ -540,9 +544,11 @@ class SugarSNIP
         $e->date_sent = gmdate($GLOBALS['timedate']->get_db_date_time_format(), strtotime($e->date_sent));
         $e->type = 'inbound';
         $e->status = 'unread';
+        $e->state = Email::STATE_ARCHIVED;
         $e->to_addrs_names = $e->to_addrs;
         $e->cc_addrs_names = $e->cc_addrs;
         $e->bcc_addrs_names = $e->bcc_addrs;
+        $e->state = Email::STATE_ARCHIVED;
 
         $addrs = explode(',',$e->to_addrs.",".$e->cc_addrs.",".$e->bcc_addrs);
         $e->all_addrs = array();
@@ -672,10 +678,11 @@ class SugarSNIP
 				$obj->save();
 				// associate email to new object
 				if(empty($obj->id)) continue; // save failed
-	            $mod = strtolower($module);
-	            $rel = array_key_exists($mod, $email->field_defs) ? $mod : $mod . "_activities_emails"; //Custom modules rel name
-	            if($email->load_relationship($rel) ) {
-	            	$email->$rel->add($obj->id);
+
+                $linkName = $email->findEmailsLink($obj);
+
+                if ($obj->load_relationship($linkName)) {
+                    $obj->$linkName->add($email);
 	            }
 			}
     	}
@@ -752,12 +759,13 @@ class SugarSNIP
         $note->team_id = $email->team_id;
         $note->team_set_id = $email->team_set_id;
         $note->assigned_user_id = $email->assigned_user_id;
-        $note->parent_type = 'Emails';
-        $note->parent_id = $email->id;
+        $note->email_type = 'Emails';
+        $note->email_id = $email->id;
         $note->name = $note->filename;
 
-        $note->save();
+        // Move the file before saving so that the file size is captured during save.
         $upload_file->final_move($note->id);
+        $note->save();
     }
 
     /**

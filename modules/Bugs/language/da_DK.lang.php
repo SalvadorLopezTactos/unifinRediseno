@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Fejlliste-dashboard',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Fejloptegnelser-dashboard',
+
   'LBL_MODULE_NAME' => 'Fejl',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Fejl',
   'LBL_MODULE_TITLE' => 'Fejlsporing: Startside',
@@ -77,7 +81,6 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Sager',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projekter',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenter',
-  'LBL_SYSTEM_ID' => 'System-id',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Tildelt bruger',
 	'LBL_ASSIGNED_TO_NAME' => 'Tildelt til',
 

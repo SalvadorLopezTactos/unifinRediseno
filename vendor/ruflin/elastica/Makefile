@@ -1,14 +1,16 @@
 #/bin/bash
 
 SOURCE = "./lib"
+TARGET?=70
 
 # By default docker environment is used to run commands. To run without the predefined environment, set RUN_ENV=" " either as parameter or as environment variable
 ifndef RUN_ENV
-	RUN_ENV = docker run -v $(shell pwd):/elastica ruflin/elastica
+	RUN_ENV = docker run --workdir="/elastica" -v $(shell pwd):/elastica ruflin/elastica-dev-base
 endif
 
 .PHONY: clean
 clean:
+	docker-compose down -v
 	rm -r -f ./build
 	rm -r -f ./vendor
 	rm -r -f ./composer.lock
@@ -43,29 +45,36 @@ dependencies:
 		--jdepend-chart=./build/pdepend/dependencies.svg \
 		--overview-pyramid=./build/pdepend/overview-pyramid.svg \
 		${SOURCE}
+
 .PHONY: phpunit
 phpunit:
-	phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit
-	phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional
-	phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown
+	EXIT_STATUS=0 ; \
+	phpunit -c test/ --coverage-clover build/coverage/unit-coverage.xml --group unit || EXIT_STATUS=$$? ; \
+	phpunit -c test/ --coverage-clover build/coverage/functional-coverage.xml --group functional || EXIT_STATUS=$$? ; \
+	phpunit -c test/ --coverage-clover build/coverage/shutdown-coverage.xml --group shutdown || EXIT_STATUS=$$? ; \
+	exit $$EXIT_STATUS
 
 .PHONY: tests
 tests:
 	# Rebuild image to copy changes files to the image
 	make elastica-image
-	make setup
-	docker-compose run elastica make phpunit
+	make start
+	mkdir -p build
+
+	docker run -e "ES_HOST=elasticsearch" --network=elastica_esnet elastica_elastica  make phpunit
+	docker cp elastica:/elastica/build/coverage/ $(shell pwd)/build/coverage
 
 # Makes it easy to run a single test file. Example to run IndexTest.php: make test TEST="IndexTest.php"
 .PHONY: test
 test:
 	make elastica-image
-	make setup
-	docker-compose run elastica phpunit -c test/ ${TEST}
+	make start
+	mkdir -p build
+	docker-compose run -e "ES_HOST=elasticsearch" elastica phpunit -c test/ ${TEST}
 
 .PHONY: doc
 doc:
-	${RUN_ENV} phpdoc run -d lib/ -t build/docs
+	${RUN_ENV} phpdoc run -d lib/ -t build/docs --template=/root/composer/vendor/phpdocumentor/phpdocumentor/data/templates/clean
 
 # Uses the preconfigured standards in .php_cs
 .PHONY: lint
@@ -86,15 +95,9 @@ phploc:
 build:
 	docker-compose build
 
-.PHONY: setup
-setup: build
-	docker-compose scale elasticsearch=3
-	# TODO: Makes the snapshot directory writable for all instances. Nicer solution needed.
-	docker-compose run elasticsearch chmod -R 777 /tmp/backups/
-
 .PHONY: start
 start:
-	docker-compose up
+	docker-compose up -d --build
 
 .PHONY: stop
 stop:
@@ -139,15 +142,15 @@ gource:
 
 .PHONY: elastica-image
 elastica-image:
+	docker build -t ruflin/elastica-dev-base -f env/elastica/Docker${TARGET} env/elastica/
 	docker build -t ruflin/elastica .
 
 # Builds all image locally. This can be used to use local images if changes are made locally to the Dockerfiles
 .PHONY: build-images
 build-images:
-	docker build -t ruflin/elastica-dev-base env/elastica/
+	docker build -t ruflin/elastica-dev-base -f env/elastica/Docker${TARGET} env/elastica/
 	docker build -t ruflin/elasticsearch-elastica env/elasticsearch/
 	docker build -t ruflin/nginx-elastica env/nginx/
-	docker build -t ruflin/elastica-data env/data/
 	make elastica-image
 
 # Removes all local images
@@ -157,7 +160,6 @@ clean-images:
 	-docker rmi ruflin/elasticsearch-elastica
 	-docker rmi ruflin/nginx-elastica
 	-docker rmi ruflin/elastica
-	-docker rmi ruflin/elastica-data
 
 # Pushs images as latest to the docker registry. This is normally not needed as they are directly fetched and built from Github
 .PHONY: push-images

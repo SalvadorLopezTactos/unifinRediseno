@@ -350,6 +350,7 @@ $mod_strings = array (
     'LBL_SELECT_LEAD_FIELDS' => 'Παρακαλώ επιλέξτε από τα διαθέσιμα πεδία',
     'LBL_DESCRIPTION_LEAD_FORM' => 'Περιγραφή Μορφής:',
     'LBL_DESCRIPTION_TEXT_LEAD_FORM' => 'Η υποβολή αυτής της φόρμας θα δημιουργήσει έναν δυνητικό πελάτη και έναν σύνδεσμο με την εκστρατεία',
+    'LBL_EMAIL_OPTIN_TEXT_LEAD_FORM' => 'Κάνοντας κλικ σε αυτό το πλαίσιο, συμφωνείτε να λαμβάνετε μελλοντικά email σχετικά με μάρκετινγκ',
     'LBL_DOWNLOAD_TEXT_WEB_TO_LEAD_FORM' =>'Παρακαλώ κατεβάστε το κείμενο Διδικτύου σας σε μορφή Δυνητικού Πελάτη',
     'LBL_DOWNLOAD_WEB_TO_LEAD_FORM' =>'Διαδίκτυο στη Μορφή Δυνητικού Πελάτη',
     'LBL_PROVIDE_WEB_TO_LEAD_FORM_FIELDS' =>'Παρακαλώ δώστε όλα τα απαραίτητα πεδία',

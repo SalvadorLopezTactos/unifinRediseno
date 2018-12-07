@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Tablero de Lista de Listas de Objetivo',
+
   'LBL_MODULE_NAME' => 'Listas de Público Objetivo',
   'LBL_MODULE_NAME_SINGULAR' => 'Lista de Público Objetivo',
   'LBL_MODULE_ID'   => 'Listas de Público Objetivo',

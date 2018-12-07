@@ -18,7 +18,7 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var os = require('os');
 var todo = require('gulp-todo');
-const tslint = require('gulp-tslint');
+var insert = require('gulp-insert');
 const path = require('path');
 const execa = require('execa');
 
@@ -56,13 +56,14 @@ gulp.task('karma', function(done) {
 
     // get command-line arguments for karma tests
     commander
-        .option('-d, --dev', 'Set Karma options for debugging')
+        .option('-d, --dev, --debug', 'Set Karma options for debugging')
         .option('--coverage', 'Enable code coverage')
         .option('--ci', 'Enable CI specific options')
         .option('--verbose', 'Show the running tests specifications')
         .option('--path <path>', 'Set base output path')
         .option('--manual', 'Start Karma and wait for browser to connect (manual tests)')
         .option('--team <name>', 'Filter by specified team', splitByCommas)
+        .option('--file <path>', 'File or list of files to execute', splitByCommas)
         .option('--browsers <list>',
             'Comma-separated list of browsers to run tests with',
             splitByCommas
@@ -108,6 +109,8 @@ gulp.task('karma', function(done) {
         tests = _.filter(tests, function(pattern) {
             return !_.isEmpty(glob.sync(pattern));
         });
+    } else if (commander.file) {
+        tests = commander.file;
     } else {
         tests = readJSONFile('gulp/assets/default-tests.json');
     }
@@ -124,7 +127,7 @@ gulp.task('karma', function(done) {
     var karmaOptions = {
         files: karmaAssets,
         configFile: __dirname + '/gulp/karma.conf.js',
-        browsers: ['PhantomJS'],
+        browsers: ['ChromeHeadless'],
         autoWatch: false,
         singleRun: true,
         reporters: ['dots'],
@@ -255,10 +258,10 @@ gulp.task('test:unit:php', function(done) {
         process.stdout.write('Coverage reports will be generated to: ' + path.join(workspace, 'coverage') + '\n');
     }
 
-    var phpunitPath = path.join('..', 'vendor', 'bin', 'phpunit');
+    var phpunitPath = path.join('..', '..', 'vendor', 'bin', 'phpunit');
     var phpProcess = execa(phpunitPath, args, {
         maxBuffer: 1e6, // 1 MB
-        cwd: 'testsunit',
+        cwd: 'tests/unit-php',
         reject: false,
     });
     phpProcess.stdout.pipe(process.stdout);
@@ -562,6 +565,17 @@ gulp.task('jshint', function() {
 
 gulp.task('lint', ['jshint', 'jscs']);
 
+gulp.task('lint:css', function() {
+    var stylelint = require('gulp-stylelint');
+    return gulp
+        .src(['styleguide/less/**/*.less', '!styleguide/less/lib/**/*.less'])
+        .pipe(stylelint({
+            reporters: [
+              {formatter: 'string', console: true},
+            ],
+        }));
+});
+
 gulp.task('find-todos', function() {
     var teams = require('./gulp/plugins/team/team.js');
     commander
@@ -581,15 +595,31 @@ gulp.task('find-todos', function() {
     }
 });
 
-gulp.task('cukes-ts', function() {
-
-    var tsProcess = execa('./node_modules/.bin/gulp',
-        ['ts', '--color', '--cukes-path', `${path.resolve(__dirname, './tests/end-to-end/**/*.ts')}`],
-        {
-            stdio: 'inherit',
-            cwd: path.resolve(__dirname, './node_modules/@sugarcrm/seedbed'),
-        });
-
-    return tsProcess;
-
+gulp.task('copy-sucrose', function() {
+    gulp.src([
+            'node_modules/@sugarcrm/d3-sugar/build/d3-sugar.min.js'
+        ])
+        .pipe(insert.prepend(';'))
+        .pipe(gulp.dest('include/javascript/d3-sugar/'));
+    gulp.src([
+            'node_modules/@sugarcrm/d3-sugar/LICENSE'
+        ])
+        .pipe(gulp.dest('include/javascript/d3-sugar/'));
+    gulp.src([
+            'node_modules/@sugarcrm/sucrose-sugar/build/sucrose.min.js',
+            'node_modules/@sugarcrm/sucrose-sugar/LICENSE',
+        ])
+        .pipe(gulp.dest('include/javascript/sucrose/'));
+    gulp.src([
+            'node_modules/@sugarcrm/sucrose-sugar/src/less/**/*',
+            '!node_modules/@sugarcrm/sucrose-sugar/src/less/**/sucrose*.less',
+            '!node_modules/@sugarcrm/sucrose-sugar/src/less/**/tooltip.less',
+            '!node_modules/@sugarcrm/sucrose-sugar/src/less/**/variables.less',
+        ])
+        .pipe(gulp.dest('styleguide/less/lib/sucrose/'));
+    gulp.src([
+            'node_modules/d3fc-rebind/build/d3fc-rebind.min.js',
+            'node_modules/d3fc-rebind/LICENSE',
+        ])
+        .pipe(gulp.dest('include/javascript/d3fc-rebind/'));
 });

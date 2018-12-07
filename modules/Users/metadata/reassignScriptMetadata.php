@@ -81,7 +81,21 @@ $moduleFilters = array(
 			),
 		),
 	),
-	
+    'Dashboards' => array(
+        'display_default' => false,
+        'fields' => array(
+            'default_dashboard' => array(
+                'display_name' => 'Default Dashboard',
+                'name' => 'default_dashboard',
+                'vname' => 'LBL_DEFAULT_DASHBOARD',
+                'dbname' => 'default_dashboard',
+                'custom_table' => false,
+                'type' => 'multiselect',
+                'size' => '2',
+                'dropdown' => $app_list_strings['filter_checkbox_dom'],
+            ),
+        ),
+    ),
 	'Opportunities' => array(
 		'display_default' => false,
 		'fields' => array(

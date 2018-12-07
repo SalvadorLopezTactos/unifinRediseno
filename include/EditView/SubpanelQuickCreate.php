@@ -79,7 +79,9 @@ class SubpanelQuickCreate{
 	            	$this->defaultProcess = false;
 
 	            	// Check if we should use the module's QuickCreate.tpl file.
-	            	if($view->useModuleQuickCreateTemplate && SugarAutoLoader::fileExists('modules/'.$module.'/tpls/QuickCreate.tpl')) {
+                    if ($view->useModuleQuickCreateTemplate
+                        && file_exists('modules/'.$module.'/tpls/QuickCreate.tpl')
+                    ) {
 	            	   $this->ev->defs['templateMeta']['form']['headerTpl'] = 'modules/'.$module.'/tpls/QuickCreate.tpl';
 	            	}
 

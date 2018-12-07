@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CALLS_LIST_DASHBOARD' => 'Aramalar Listesi Panosu',
+    'LBL_CALLS_RECORD_DASHBOARD' => 'Aramalar Kaydı Panosu',
+
 	'LBL_BLANK'	=> ' ',
     'LBL_MODULE_NAME' => 'Aramalar',
     'LBL_MODULE_NAME_SINGULAR'	=> 'Tel.Araması',

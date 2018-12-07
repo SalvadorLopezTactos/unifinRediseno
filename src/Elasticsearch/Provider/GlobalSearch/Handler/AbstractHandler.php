@@ -13,6 +13,7 @@
 namespace Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler;
 
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\GlobalSearch;
+use ReflectionClass;
 
 /**
  *
@@ -32,5 +33,17 @@ abstract class AbstractHandler implements HandlerInterface
     public function setProvider(GlobalSearch $provider)
     {
         $this->provider = $provider;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * Use the class basename as name/identifier. If needed this can be
+     * overruled in the implementing handler class.
+     */
+    public function getName()
+    {
+        $ref = new ReflectionClass($this);
+        return $ref->getShortName();
     }
 }

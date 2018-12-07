@@ -18,9 +18,9 @@ $mod_strings = array (
 	
 
     // quick menu link labels
-    'LNK_NEW_CONTRACT' => 'Vytvořit kontrakt',
-    'LNK_CONTRACT_LIST' => 'Přehled kontraktů',
-    'LNK_IMPORT_CONTRACTS' => 'Importovat kontrakty',
+    'LNK_NEW_CONTRACT' => 'Vytvořit smlouvu',
+    'LNK_CONTRACT_LIST' => 'Přehled smluv',
+    'LNK_IMPORT_CONTRACTS' => 'Importovat smlouvy',
 
     // quick create label
     'LBL_NEW_FORM_TITLE' => 'Nový kontrakt',

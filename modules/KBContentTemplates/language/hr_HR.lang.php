@@ -17,6 +17,6 @@ $mod_strings = array(
     'LBL_TEMPLATE_LOAD_ERROR' => 'Predložak se ne može učitati.',
     'LNK_NEW_KBCONTENT_TEMPLATE' => 'Stvori predložak',
     'LNK_LIST_KBCONTENT_TEMPLATES' => 'Prikaži predloške',
-    'LBL_TEXT_BODY' => 'Tijelo',
+    'LBL_TEXT_BODY' => 'Tekst',
     'LBL_LIST_TEMPLATE_NAME' => 'Naziv predloška',
 );

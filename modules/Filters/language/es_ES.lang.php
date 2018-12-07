@@ -11,7 +11,7 @@
  */
 
 $mod_strings = array(
-    'LBL_LISTVIEW_FILTER_ALL' => 'Todos {0}',
+    'LBL_LISTVIEW_FILTER_ALL' => 'Todas las {0}',
     'LBL_TEAM' => 'Equipos',
     'LBL_TEAMS' => 'Equipos',
     'LBL_TEAM_ID' => 'Id de Equipo',
@@ -48,7 +48,7 @@ $mod_strings = array(
     'LBL_NEW_FORM_TITLE' => 'Nuevos Filtros',
     'LBL_FILTER_DEFINITION' => 'Definición del Filtro',
     'LBL_FILTER_TEMPLATE' => 'Definición de filtro específico',
-    'LBL_ASSIGNED_TO_ME' => 'Mi {0}',
+    'LBL_ASSIGNED_TO_ME' => 'Mis {0}',
     'LBL_RECENTLY_VIEWED' => 'Visto recientemente',
     'LBL_NEW_RECORDS' => 'Creado recientemente',
     'LBL_FAVORITES' => 'Mis Favoritos',

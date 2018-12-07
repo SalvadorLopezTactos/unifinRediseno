@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => '오류:결과에 전시할 배치할 모듈 필드가 없습니다. 시스템 관리자에 문의하십시오.',
     'LBL_INFO_INLINE' => '정보' /*for 508 compliance fix*/,
     'LBL_CLOSE' => '닫기' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => '제공된 소스 ID에 대한 커넥터가 없습니다.',
 );
 

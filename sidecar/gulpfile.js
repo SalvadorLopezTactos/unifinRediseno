@@ -9,86 +9,83 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-var _ = require('lodash');
-var babel = require('gulp-babel');
-var commander = require('commander');
-var concat = require('gulp-concat');
-var os = require('os');
-var gulp = require('gulp');
-var jscs = require('gulp-jscs');
-var jshint = require('gulp-jshint');
-var process = require('process');
-var sourceMaps = require('gulp-sourcemaps');
-var uglify = require('gulp-uglify');
-var watch = require('gulp-watch');
-var utils = require('./gulp/util.js');
-var webpack = require('webpack');
+const commander = require('commander');
+const os = require('os');
+const gulp = require('gulp');
 
-gulp.task('jscs', function () {
-    var filesToLint = utils.getFilesToLint();
+const filesToDoc = ['src/**/*.js', 'lib/(sugar*)/**/*.js'];
 
-    return gulp.src(filesToLint)
-        .pipe(jscs())
-        .pipe(jscs.reporter());
+gulp.task('lint', function() {
+    const defaultFiles = ['*.js', 'gulp/**/*.js', 'src/**/*.js', 'tests/**/*.js', 'lib/(sugar*)/**/*.js'];
+    commander
+        .option('--files <list>', 'Files to lint')
+        .parse(process.argv);
 
-    // FIXME SC-5268: add a fail reporter
+    let files = defaultFiles;
+    const eslint = require('gulp-eslint');
+
+    if (commander.files) {
+        files = commander.files.split(',');
+    }
+
+    return gulp.src(files)
+        .pipe(eslint())
+        .pipe(eslint.format('unix'));
+        // FIXME SC-5268: add a fail reporter
+        // .pipe(eslint.failAfterError());
 });
 
-gulp.task('jshint', function () {
-    var filesToLint = utils.getFilesToLint();
+gulp.task('jsdoc', function(cb) {
+    const eslint = require('gulp-eslint');
+    const gutil = require('gulp-util');
+    const jsdoc = require('@sugarcrm/gulp-jsdoc3');
+    const jsdocConfig = require('./jsdoc.json');
+    const rimraf = require('rimraf').sync;
 
-    return gulp.src(filesToLint)
-        .pipe(jshint({
-            esversion: 6,
-        }))
-        .pipe(jshint.reporter('default'))
-        .pipe(jshint.reporter('fail'));
-});
+    rimraf('docs');
 
-gulp.task('doc', function (cb) {
-    var jsdoc = require('gulp-jsdoc3');
-    var jsdocConfig = require('./jsdoc.json');
-    var firstPartyFiles = utils.getFirstPartyFiles();
+    commander
+        .option('--verbose', 'Output JSDoc warnings')
+        .parse(process.argv);
 
-    gulp.src(['README.md'].concat(firstPartyFiles), { read: false })
+    gulp.src(filesToDoc)
+        .pipe(commander.verbose ? eslint({
+            rules: {
+                'valid-jsdoc': [
+                    'error',
+                    {
+                        requireReturn: false,
+                        prefer: {
+                            return: 'return',
+                        },
+                    },
+                ],
+            },
+            useEslintrc: false,
+            parser: 'babel-eslint',
+        }) : gutil.noop())
+        .pipe(commander.verbose ? eslint.format('unix') : gutil.noop())
         .pipe(jsdoc(jsdocConfig, cb));
 });
 
-gulp.task('watch', function () {
-    var sidecarFiles = utils.getSidecarFiles();
+gulp.task('build', function(done) {
+    commander
+        .option('--dev', 'Do not mangle the output.')
+        .parse(process.argv);
 
-    watch(sidecarFiles, function () {
-        gulp.start('build');
-    });
-});
+    if (commander.dev) {
+        process.env.DEV = 1;
+    }
 
-gulp.task('build:min', function() {
-    var sidecarFiles = utils.getSidecarFiles();
-
-    return gulp.src(sidecarFiles, {base: 'sidecar'})
-        .pipe(sourceMaps.init())
-        .pipe(babel({
-            only: utils.getFirstPartyFiles(),
-            presets: ['es2015'],
-        }))
-        .pipe(concat('sidecar.min.js'))
-        .pipe(uglify({
-            compress: false, // FIXME SC-4953 - compressor disabled for now for performance reasons
-            mangle: false // Do not disable - without this, source maps break
-        }))
-        .pipe(sourceMaps.write('.'))
-        .pipe(gulp.dest('minified'));
-});
-
-gulp.task('build', function (done) {
-    return webpack(require('./webpack.config.js'), function (err) {
+    const webpack = require('webpack');
+    return webpack(require('./webpack.config.js'), function(err) {
         return done(err ? err : undefined);
     });
 });
 
 gulp.task('karma', function(done) {
-
-    var Server = require('karma').Server;
+    const {Server} = require('karma');
+    const path = require('path');
 
     // get command-line arguments (only relevant for karma tests)
     commander
@@ -97,51 +94,39 @@ gulp.task('karma', function(done) {
         .option('--coverage', 'Enable code coverage')
         .option('--ci', 'Enable CI specific options')
         .option('--path <path>', 'Set base output path')
+        .option('--port <port>', 'Set Karma server port')
         .option('--manual', 'Start Karma and wait for browser to connect (manual tests)')
         .option('--browsers <list>',
             'Comma-separated list of browsers to run tests with',
-            function (val) {
+            function(val) {
                 return val.split(',');
             }
         )
         .option('--sauce', 'Run IE 11 tests on SauceLabs. Not compatible with --dev option')
         .parse(process.argv);
 
+    if (commander.zepto) {
+        process.env.ZEPTO = 1;
+    }
+
     // set up default Karma options
-    var defaultTests = utils.readJSONFile('gulp/assets/default-tests.json');
-    var firstPartyFiles = utils.getFirstPartyFiles();
-
-    var karmaAssets = _.flatten([
-        utils.readJSONFile('gulp/assets/' + (commander.zepto ? 'zepto' : 'jquery') + '.json'),
-        utils.readJSONFile('gulp/assets/base-files.json'),
-        defaultTests,
-    ], true);
-
-    var karmaOptions = {
-        files: karmaAssets,
-        configFile: __dirname + '/gulp/karma.conf.js',
-        browsers: ['PhantomJS'],
+    const karmaOptions = {
+        configFile: path.join(__dirname, '/gulp/karma.conf.js'),
+        browsers: ['ChromeHeadless'],
         autoWatch: false,
         singleRun: true,
         reporters: ['dots'],
+        port: commander.port,
     };
 
-    var path = commander.path || os.tmpdir();
-    path += '/karma/sidecar';
+    let karmaPath = commander.path || os.tmpdir();
+    karmaPath += '/karma/sidecar';
 
     if (commander.browsers) {
         karmaOptions.browsers = commander.browsers;
     }
 
-    karmaOptions.preprocessors = {};
-    _.each(_.union(firstPartyFiles, defaultTests), function (value) {
-        karmaOptions.preprocessors[value] = ['babel'];
-    });
-
     if (commander.coverage) {
-        _.each(firstPartyFiles, function (value) {
-            karmaOptions.preprocessors[value].push('coverage');
-        });
 
         karmaOptions.reporters.push('coverage');
 
@@ -149,27 +134,27 @@ gulp.task('karma', function(done) {
             reporters: [
                 {
                     type: 'cobertura',
-                    dir: path + '/coverage-xml',
+                    dir: karmaPath + '/coverage-xml',
                     file: 'cobertura-coverage.xml',
-                    subdir: function () {
+                    subdir: function() {
                         return '';
                     },
                 },
                 {
                     type: 'html',
-                    dir: path + '/coverage-html',
+                    dir: karmaPath + '/coverage-html',
                 },
             ],
         };
 
-        process.stdout.write('Coverage reports will be generated to: ' + path + '\n');
+        process.stdout.write('Coverage reports will be generated to: ' + karmaPath + '\n');
     }
 
     if (commander.ci) {
         karmaOptions.reporters.push('junit');
 
         karmaOptions.junitReporter = {
-            outputDir: path,
+            outputDir: karmaPath,
             outputFile: 'test-results.xml',
             useBrowserName: false,
         };
@@ -197,7 +182,7 @@ gulp.task('karma', function(done) {
         karmaOptions.browserNoActivityTimeout = 60000;
     }
 
-    new Server(karmaOptions, function (exitStatus) {
+    new Server(karmaOptions, function(exitStatus) {
         // Karma's return status is not compatible with gulp's streams
         // See: http://stackoverflow.com/questions/26614738/issue-running-karma-task-from-gulp
         // or: https://github.com/gulpjs/gulp/issues/587 for more information
@@ -205,5 +190,8 @@ gulp.task('karma', function(done) {
     }).start();
 });
 
-gulp.task('lint', ['jscs', 'jshint']);
-gulp.task('default', ['jshint', 'build']);
+gulp.task('default', ['build']);
+
+gulp.task('watch-docs', function() {
+    gulp.watch(filesToDoc, ['jsdoc']);
+});

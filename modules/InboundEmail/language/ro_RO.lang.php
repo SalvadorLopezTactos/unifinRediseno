@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Conectare sau Parola Incorecta',
-	'ERR_BODY_TOO_LONG'		=> '\rCorpul textului prea mare pentru a captura INTREGUL email. Echilibrat.',
+	'ERR_BODY_TOO_LONG'		=> '\\rCorpul textului prea mare pentru a captura INTREGUL email. Echilibrat.',
 	'ERR_INI_ZLIB'			=> 'Nu se poate deconecta temporar compresia Zlib. "Testual Setarilor" poate esua.',
 	'ERR_MAILBOX_FAIL'		=> 'Nu s-a putut recupera niciun cont de email.',
 	'ERR_NO_IMAP'			=> 'Nu s-au gasit biblioteci IMAP. Va rugam sa rezolvati aceasta inainte de a continua cu Emailurile de Intrare.',

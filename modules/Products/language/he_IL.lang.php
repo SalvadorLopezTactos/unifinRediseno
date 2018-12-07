@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'לוח מחוונים של הצעות מחיר לשורת פריט',
+
     'LBL_CAMPAIGN_PRODUCT' => 'שורת פריט הצעת מחיר לקמפיין',
     'LBL_MODULE_NAME' => 'הצעות מחיר לשורות פריטים',
     'LBL_MODULE_NAME_SINGULAR' => 'הצעת מחיר לשורת פריט',
@@ -172,4 +175,5 @@ $mod_strings = array(
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'רשימת נתונים של הצעות מחיר ושורות פריט עם הצעות מחיר',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (שורת פריט עם הצעת מחיר חדשה)',
     'LBL_DISCOUNT_PERCENT' => '% אחוז',
+    'LBL_DISCOUNT_TYPE' => 'סוג הנחה',
 );

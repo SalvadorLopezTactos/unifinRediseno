@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_QUOTED_LINE_ITEMS_LIST_DASHBOARD' => 'Instrumentpanel med lista över citerade radartiklar',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Kampanj offert produkt',
     'LBL_MODULE_NAME' => 'Produkter',
     'LBL_MODULE_NAME_SINGULAR' => 'Produkt',
@@ -167,4 +170,5 @@ För att skapa en {{module_name}}:
     'LBL_PRODUCTS_QUOTE_DATA_LIST' => 'Offererade radartiklar Offert Datalista',
     'LBL_CREATE_NEW_QLI_IN_DROPDOWN' => ' (Ny offererad radartikel)',
     'LBL_DISCOUNT_PERCENT' => '% Procent',
+    'LBL_DISCOUNT_TYPE' => 'Typ av rabatt',
 );

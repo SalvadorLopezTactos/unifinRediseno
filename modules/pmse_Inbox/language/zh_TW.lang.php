@@ -12,14 +12,14 @@
 
 
 $mod_strings = array (
-    'LBL_MODULE_NAME' => '流程',
+    'LBL_MODULE_NAME' => '處理程序',
     'LBL_MODULE_TITLE' => '流程',
     'LBL_MODULE_NAME_SINGULAR' => '流程',
-    'LNK_LIST' => '檢視流程',
-    'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => '流程管理',
-    'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => '自動流程',
+    'LNK_LIST' => '檢視處理程序',
+    'LNK_PMSE_INBOX_PROCESS_MANAGEMENT' => '處理程序管理',
+    'LNK_PMSE_INBOX_UNATTENDED_PROCESSES' => '自動處理程序',
 
-    'LBL_CAS_ID' => '流程編號',
+    'LBL_CAS_ID' => '處理程序編號',
     'LBL_PMSE_HISTORY_LOG_NOTFOUND_USER' => "未知（依據 UserId：'%s'）",
     'LBL_PMSE_HISTORY_LOG_TASK_HAS_BEEN' => "工作已",
     'LBL_PMSE_HISTORY_LOG_TASK_WAS' => "工作",
@@ -39,6 +39,23 @@ $mod_strings = array (
     'LBL_PMSE_HISTORY_LOG_NOT_REGISTERED_ACTION'  => "未註冊動作",
     'LBL_PMSE_HISTORY_LOG_NO_YET_STARTED' => '（尚未開始）',
     'LBL_PMSE_HISTORY_LOG_FLOW' => '已指派以繼續工作',
+
+    'LBL_PMSE_HISTORY_LOG_START_EVENT' => "%s 一個%s 記錄，導致Advanced Workflow觸發進程 #%s",
+    'LBL_PMSE_HISTORY_LOG_GATEWAY'  => "評估 %s %s %s 並將其路由到下一個任務",
+    'LBL_PMSE_HISTORY_LOG_EVENT'  => "%s事件 %s是 %s",
+    'LBL_PMSE_HISTORY_LOG_END_EVENT'  => "結束",
+    'LBL_PMSE_HISTORY_LOG_CREATED'  => "已建立",
+    'LBL_PMSE_HISTORY_LOG_MODIFIED'  => "已修改",
+    'LBL_PMSE_HISTORY_LOG_STARTED'  => "已開始",
+    'LBL_PMSE_HISTORY_LOG_PROCESSED'  => "已處理",
+    'LBL_PMSE_HISTORY_LOG_ACTIVITY_SELF_SERVICE'  => "%s 紀錄上的活動 %s 可用於自動服務",
+    'LBL_PMSE_HISTORY_LOG_ACTIVITY'  => "%s %s 紀錄上的活動 %s",
+    'LBL_PMSE_HISTORY_LOG_ASSIGNED'  => "被分配",
+    'LBL_PMSE_HISTORY_LOG_ROUTED'  => "已路由",
+    'LBL_PMSE_HISTORY_LOG_ACTION'  => "%s行動%s已在%s記錄中處理",
+    'LBL_PMSE_HISTORY_LOG_ASSIGN_USER_ACTION'  => "已通過 %s 操作 %s 為 %s %s 號流程分配了 %s 紀錄",
+    'LBL_PMSE_HISTORY_LOG_ON'  => "在",
+    'LBL_PMSE_HISTORY_LOG_AND'  => "和",
 
     'LBL_PMSE_LABEL_APPROVE' => '核准',
     'LBL_PMSE_LABEL_REJECT' => '拒絕',
@@ -83,11 +100,11 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_UNASSIGNED' => '未指派',
 
     'LBL_RECORD_NAME'  => "記錄名稱",
-    'LBL_PROCESS_NAME'  => "流程名稱",
-    'LBL_PROCESS_DEFINITION_NAME'  => "流程定義名稱",
+    'LBL_PROCESS_NAME'  => "處理程序名稱",
+    'LBL_PROCESS_DEFINITION_NAME'  => "處理程序定義名稱",
     'LBL_OWNER' => '指派至',
-    'LBL_ACTIVITY_OWNER'=>'流程使用者',
-    'LBL_PROCESS_OWNER'=>'流程擁有者',
+    'LBL_ACTIVITY_OWNER'=>'處理程序使用者',
+    'LBL_PROCESS_OWNER'=>'處理程序擁有者',
     'LBL_STATUS_COMPLETED' => '流程已完成',
     'LBL_STATUS_TERMINATED' => '流程已終止',
     'LBL_STATUS_IN_PROGRESS' => '流程處理中',
@@ -105,7 +122,7 @@ $mod_strings = array (
     'LBL_PMSE_TITLE_LOG_VIEWER' => 'Advanced Workflow Log Viewer',
     'LBL_PMSE_TITLE_PROCESS_NOTES' => '流程附註',
 
-    'LBL_PMSE_MY_PROCESSES' => '我的流程',
+    'LBL_PMSE_MY_PROCESSES' => '我的處理程序',
     'LBL_PMSE_SELF_SERVICE_PROCESSES' => '自助流程',
 
     'LBL_PMSE_ACTIVITY_STREAM_APPROVE'=>"<strong>%s</strong> 上的 &0 已核准",

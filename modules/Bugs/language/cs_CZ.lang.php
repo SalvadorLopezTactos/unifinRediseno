@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_BUGS_LIST_DASHBOARD' => 'Řídicí panel seznamu chyb',
+  'LBL_BUGS_RECORD_DASHBOARD' => 'Řídicí panel záznamů chyb',
+
   'LBL_MODULE_NAME' => 'Chyby',
   'LBL_MODULE_NAME_SINGULAR'	=> 'Chyba:',
   'LBL_MODULE_TITLE' => 'Sledování chyb',
@@ -41,7 +45,7 @@ $mod_strings = array (
   'LBL_LIST_TYPE' => 'Typ',
   'LBL_RESOLUTION' => 'Výsledek:',
   'LBL_RELEASE' => 'Nová verze:',
-  'LNK_NEW_BUG' => 'Report chyb',
+  'LNK_NEW_BUG' => 'Nahlásit chybu',
   'LNK_CREATE'  => 'Report chyb',
   'LNK_CREATE_WHEN_EMPTY'    => 'Reportovat chyby',
   'LNK_BUG_LIST' => 'Chyby',
@@ -77,11 +81,10 @@ $mod_strings = array (
   'LBL_CASES_SUBPANEL_TITLE' => 'Případy',
   'LBL_PROJECTS_SUBPANEL_TITLE' => 'Projekty',
   'LBL_DOCUMENTS_SUBPANEL_TITLE' => 'Dokumenty',
-  'LBL_SYSTEM_ID' => 'ID Systému',
   'LBL_LIST_ASSIGNED_TO_NAME' => 'Zodpovědný uživatel',
 	'LBL_ASSIGNED_TO_NAME' => 'Přiřazeno komu',
 
-	'LNK_BUG_REPORTS' => 'Zobrazit report chyb',
+	'LNK_BUG_REPORTS' => 'Zobrazit chybová hlášení',
 	'LBL_SHOW_IN_PORTAL' => 'Zobrazit na portálu',
 	'LBL_BUG_INFORMATION' => 'Přehled úkolu',
 

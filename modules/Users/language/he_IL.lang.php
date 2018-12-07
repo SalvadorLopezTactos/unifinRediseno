@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'פרטי המשתמש לא נמצאו',
     'ERR_USER_NAME_EXISTS'              => 'שם המשתמש {0} כבר קיים. אין אפשרות לשמות משתמש כפולים. שנה שם המשתמש לערך ייחודי.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'משתמש זה ננעל מחוץ ליישום Sugar ולא יכול להתחבר בעזרת הסיסמה הקיימת שלו.',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'משתמש עם הרשאת אימות חיצוני אינה מורשה להיכנס באמצעות הרשאות Sugar',
 
 	'LBL_PASSWORD_SENT'                => 'הסיסמה עודכנה',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'לא ניתן לשלוח סיסמה',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'כתובת דוא"ל נמען',
 	'ERR_SERVER_STATUS'					=> 'מצב השרת שלך',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'המערכת לא יכולה לשלוח הודעת דוא"ל למשתמש. אנא בדוק את תצורת הדואר היוצא בתוך <a href="index.php?module=EmailMan&action=config">הגדרות דוא"ל</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'ניתן ליצור משתמש רק באמצעות <a href="{0}" target="_blank">Cloud Console</a> עבור מצב IDM.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'ניתן לעדכן כתובת דוא"ל ראשית רק באמצעות <a href="{0}" target="_blank">Cloud Console</a> עבור מצב IDM.',
 
     'LBL_EMAIL_ADDRESS'                 => 'כתובת דואר אלקטרוני:',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'אשר סיסמה',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'You have changed the user type from System Administrator User to Regular User.  After saving this change, the user will no longer have system administrator privileges.\n\nClick “OK�? to proceed.\nClick “Cancel�? to return to the record.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'You have changed the user type from System Administrator User to Regular User.  After saving this change, the user will no longer have system administrator privileges.\\n\\nClick “OK�? to proceed.\\nClick “Cancel�? to return to the record.',
 	'LBL_COUNTRY'						=> 'מדינה',
 	'LBL_CURRENCY_TEXT'					=> 'Select the currency that will be displayed by default when you create new records. This is also the currency that will be displayed in the Amount columns in the Opportunities ListView.',
 	'LBL_CURRENCY'						=> 'Currency',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'דקות.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 'שניות.',
     'LBL_LOGIN_ADMIN_CALL'              => 'אנא פנה למנהל המערכת.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'כדי לבצע אימות עם OpenID Connect (OIDC) במצב IDM, עליך להתקין את הרחבת GMP PHP.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'You have been logged out. To login again please click',
     'LBL_LOGGED_OUT_2' => 'כאן',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'דוחות משתמש',
     'LBL_CONTACTS_SYNC' => 'אנשי קשר',
     'LBL_DETAIL' => 'פרופיל משתמש',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'אם שדות מסוימים אינם ניתנים לעריכה, אנא התחבר ל- Cloud Console כדי לנהל את שדות אלה',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'אם ברצונך לשנות שדות מסוימים שאינם ניתנים לעריכה, ' .
+        'אנא פנה למנהל המערכת כדי להודיע על שינויים אלה',
 ); // END STRINGS DEFS
 
 ?>

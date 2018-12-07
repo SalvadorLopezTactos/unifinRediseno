@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Merr një kod konsumatori nga "LogMeIn" duke regjistruar një aplikacion të ri "GoToMeeting".<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Hapat për regjistrimin e instancës tënde:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Identifikohu në llogarinë tënde "LogMeIn Developer Center": <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Kliko "Aplikacionet e mia"</li>
+    <li>Kliko "Shto një aplikacion të ri"</li>
+    <li>Plotëso të gjitha fushat në formularin "Shtim aplikacioni":</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>Emri i aplikacionit</li>
+            <li>Përshkrimi</li>
+            <li>API i produktit: Zgjidh "GoToMeeting"</li>
+            <li>Adresa e aplikacionit: Jep adresën URL të instancës tënde</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Kliko butonin "Krijo aplikacionin"</li>
+    <li>Nga lista e aplikacioneve, kliko emrin e aplikacionit tënd</li>
+    <li>Kliko skedën "Kodet"</li>
+    <li>Kopjo vlerën "Kodi i konsumatorit" dhe vendose poshtë</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Kodi i konsumatorit',
 );

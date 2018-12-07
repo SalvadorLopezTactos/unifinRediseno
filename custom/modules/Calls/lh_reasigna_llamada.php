@@ -1,4 +1,5 @@
-﻿<?php
+<?php
+
 class reasigna_class
 {
     function reasigna_method($bean, $event, $arguments)

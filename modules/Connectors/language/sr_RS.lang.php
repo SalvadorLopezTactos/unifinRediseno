@@ -91,6 +91,6 @@ $mod_strings = array(
     'ERROR_NO_DISPLAYABLE_MAPPED_FIELDS' => 'Greška: Ne postoje polja modula koja su mapirana za prikazivanje rezultata. Molim kontaktirajte sistem administratora.',
     'LBL_INFO_INLINE' => 'Informacije' /*for 508 compliance fix*/,
     'LBL_CLOSE' => 'Zatvori' /*for 508 compliance fix*/,
-    'ERROR_NO_CONNECTOR' => 'No connector was found for the given source ID.',
+    'ERROR_NO_CONNECTOR' => 'Nije pronađen konektor za dati ID izvora.',
 );
 

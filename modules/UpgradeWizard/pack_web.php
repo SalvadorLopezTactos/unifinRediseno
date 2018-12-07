@@ -34,7 +34,6 @@ function packUpgradeWizardWeb($zip, $manifest, $installdefs, $params) {
         "modules/UpgradeWizard/upgrade_screen.php",
         "modules/UpgradeWizard/version.json",
         'modules/UpgradeWizard/language/en_us.lang.php',
-        "sidecar/lib/jquery/jquery.iframe.transport.js",
         'styleguide/assets/css/upgrade.css',
         'styleguide/assets/fonts/fontawesome-webfont.eot',
         'styleguide/assets/fonts/fontawesome-webfont.svg',

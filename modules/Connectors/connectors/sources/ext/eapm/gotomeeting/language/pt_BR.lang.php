@@ -14,26 +14,26 @@
 $connector_strings = array(
     'LBL_LICENSING_INFO' =>
 '<table border="0" cellspacing="1"><tr><td valign="top" width="35%" class="dataLabel">
-Obtain a Consumer Key from LogMeIn by registering a new GoToMeeting application.<br>
+Registre um novo aplicativo GoToMeeting para receber uma chave de cliente do LogMeIn.<br>
 &nbsp;<br>
-Steps to register your instance:<br>
+Etapas para registrar suas instância:<br>
 &nbsp;<br>
 <ol>
-    <li>Log in to your LogMeIn Developer Center account: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
-    <li>Click on My Apps</li>
-    <li>Click on Add a new App</li>
-    <li>Complete all fields on the Add App form:</li>
+    <li>Faça login na sua conta da Central do Desenvolvedor do LogMeIn: <a href=\'https://goto-developer.logmein.com/\' target=\'_blank\'>https://goto-developer.logmein.com/</a></li>
+    <li>Clique em Meus aplicativos</li>
+    <li>Clique em Adicionar um novo aplicativo</li>
+    <li>Preencha todos os campos no formulário Adicionar aplicativo:</li>
         <ul>
-            <li>App Name</li>
-            <li>Description</li>
-            <li>Product API: Select GoToMeeting</li>
-            <li>Application URL: Enter your instance URL</li>
+            <li>Nome do aplicativo</li>
+            <li>Descrição</li>
+            <li>API do produto: selecione GoToMeeting</li>
+            <li>URL do aplicativo: insira o URL da sua instância</li>
         </ul>
-    <li>Click the Create App Button</li>
-    <li>From the list of apps, click on the name of your app</li>
-    <li>Click on the Keys tab</li>
-    <li>Copy the Consumer Key value and enter it below</li>
+    <li>Clique no botão Criar aplicativo</li>
+    <li>Na lista de aplicativos, clique no nome do seu aplicativo</li>
+    <li>Clique na guia Chaves</li>
+    <li>Copie o valor de Chave do consumidor e insira-o abaixo</li>
 </ol>
 </td></tr></table>',
-    'oauth_consumer_key' => 'Consumer Key',
+    'oauth_consumer_key' => 'Chave do consumidor',
 );

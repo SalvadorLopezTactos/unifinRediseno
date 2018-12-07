@@ -800,24 +800,28 @@ class SugarWidgetFieldDateTime extends SugarWidgetReportField
      */
     public function queryGroupByFiscalQuarter($layout_def)
     {
-        $date = $this->getNormalizedDate($layout_def);
-
-        $query = $this->reporter->db->convert(
-            $this->reporter->db->convert(
-                $date,
-                "date_format",
-                array('%Y')
-            ),
-            'CONCAT',
-            array("'-'",
+        if (!empty($layout_def['timeperiods_count'])) {
+            $tp = "tp" . $layout_def['timeperiods_count'] . ".name";
+            $query = $this->reporter->db->convert(
                 $this->reporter->db->convert(
-                    $date,
-                    "quarter"
+                    $tp,
+                    "substr",
+                    array(1, 4)
+                ),
+                'CONCAT',
+                array("'-'",
+                    $this->reporter->db->convert(
+                        $tp,
+                        "substr",
+                        array(7, 1)
+                    ),
                 )
-            )
-        );
+            );
 
-        return $query;
+            return $query;
+        }
+
+        return "";
     }
 
     /**

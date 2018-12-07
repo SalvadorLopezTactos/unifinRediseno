@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Informačný panel so zoznamom poznámok',
+
     'ERR_DELETE_RECORD' => 'K odstráneniu verzie musíte zadať číslo záznamu.',
     'LBL_ACCOUNT_ID' => 'Číslo účtu:',
     'LBL_CASE_ID' => 'Číslo udalosti:',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Poznámka',
     'LBL_EMAIL_ADDRESS' => 'Email adresa:',
     'LBL_EMAIL_ATTACHMENT' => 'Email príloha',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Príloha e-mailu pre',
     'LBL_FILE_MIME_TYPE' => 'Typ MIME',
+    'LBL_FILE_EXTENSION' => 'Prípona súboru',
+    'LBL_FILE_SOURCE' => 'Zdroj súboru',
+    'LBL_FILE_SIZE' => 'Veľkosť súboru',
     'LBL_FILE_URL' => 'Súbor URL',
     'LBL_FILENAME' => 'Príloha:',
     'LBL_LEAD_ID' => 'Číslo vedeného:',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'Číslo príležitosti:',
     'LBL_PARENT_ID' => 'Číslo rodiča:',
     'LBL_PARENT_TYPE' => 'Typ rodiča',
+    'LBL_EMAIL_TYPE' => 'Typ e-mailu',
+    'LBL_EMAIL_ID' => 'ID e-mailu',
     'LBL_PHONE' => 'Telefón:',
     'LBL_PORTAL_FLAG' => 'Zobraziť na portáli?',
     'LBL_EMBED_FLAG' => 'Vložiť do emailu?',

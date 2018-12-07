@@ -38,13 +38,7 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'Um número de registro deve ser especificado para excluir o transportador.',
   'NTC_STATUS' => 'Defina o status como Inativo para remover este transportador das listas suspensas de transportador',
   'NTC_LIST_ORDER' => 'Defina a ordem pela qual este transportador aparece nas listas suspensas de transportador',
-  'shipper_status_dom' => 
-  array (
-    'Active' => 'Ativo',
-    'Inactive' => 'Inativo',
-),
-	'LBL_EDITLAYOUT' => 'Editar Layout' /*for 508 compliance fix*/,
+  'LBL_EDITLAYOUT' => 'Editar Layout' /*for 508 compliance fix*/,
 );
-
 
 ?>

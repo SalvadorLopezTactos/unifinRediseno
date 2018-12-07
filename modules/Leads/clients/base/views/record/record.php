@@ -148,7 +148,7 @@ $viewdefs['Leads']['base']['view']['record'] = array(
                     'dismiss_label' => true,
                 ),
                 array(
-                    'name' => 'full_name',
+                    'name' => 'name',
                     'type' => 'fullname',
                     'label' => 'LBL_NAME',
                     'dismiss_label' => true,
@@ -181,7 +181,8 @@ $viewdefs['Leads']['base']['view']['record'] = array(
                         'contact_id',
                         'contact_name',
                         'opportunity_id',
-                        'opportunity_name'
+                        'opportunity_name',
+                        'converted_opp_name',
                     ),
                 ),
             ),

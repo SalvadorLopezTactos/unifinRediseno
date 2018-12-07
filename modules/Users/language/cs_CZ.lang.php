@@ -66,6 +66,7 @@ $mod_strings = array (
 	'ERR_USER_INFO_NOT_FOUND'			=> 'Info o uživateli nenalezeno',
     'ERR_USER_NAME_EXISTS'              => 'Jméno uživatele {0} již existuje. Duplicitní jména uživatelů nejsou povolena. Změňte jméno uživatele tak, aby bylo jedinečné.',
 	'ERR_USER_IS_LOCKED_OUT'			=> 'Tento uživatel je zamknut a tímto heslem se nepřihlásí .',
+    'LBL_EXTERNAL_USER_CANT_LOGIN'      => 'Uživateli majícímu pouze externí ověření není povoleno se přihlásit pomocí přihlašovacích údajů systému Sugar',
 
 	'LBL_PASSWORD_SENT'                => 'Heslo aktualizováno',
 	'LBL_CANNOT_SEND_PASSWORD'         => 'Nelze poslat heslo',
@@ -75,6 +76,8 @@ $mod_strings = array (
 	'ERR_RECIPIENT_EMAIL'				=> 'Email Adresu příjemce',
 	'ERR_SERVER_STATUS'					=> 'Status Vašeho serveru',
 	'ERR_SERVER_SMTP_EMPTY'				=> 'System není schopen odeslat email. Prosím ověřte nastavení odesílání pošty na <a href="index.php?module=EmailMan&action=config">Email Settings</a>.',
+    'ERR_CREATE_USER_FOR_IDM_MODE'      => 'Uživatel může být vytvořen pouze v <a href="{0}" target="_blank">Cloudové konzoli</a> pro režim IDM.',
+    'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE' => 'Primární e-mailová adresa může být vytvořena pouze v <a href="{0}" target="_blank">Cloudové konzoli</a> pro režim IDM.',
 
     'LBL_EMAIL_ADDRESS'                 => 'E-mailová adresa',
 
@@ -111,7 +114,7 @@ $mod_strings = array (
 
 
 	'LBL_CONFIRM_PASSWORD'				=> 'Potvrdit heslo',
-	'LBL_CONFIRM_REGULAR_USER'			=> 'You have changed the user type from System Administrator User to Regular User.  After saving this change, the user will no longer have system administrator privileges.\n\nClick “OK�? to proceed.\nClick “Cancel�? to return to the record.',
+	'LBL_CONFIRM_REGULAR_USER'			=> 'You have changed the user type from System Administrator User to Regular User.  After saving this change, the user will no longer have system administrator privileges.\\n\\nClick “OK�? to proceed.\\nClick “Cancel�? to return to the record.',
 	'LBL_COUNTRY'						=> 'Země',
 	'LBL_CURRENCY_TEXT'					=> 'Zvolte výchozí měnu',
 	'LBL_CURRENCY'						=> 'Měna',
@@ -223,6 +226,8 @@ $mod_strings = array (
     'LBL_LOGIN_LOGIN_TIME_MINUTES'      => 'min.',
    	'LBL_LOGIN_LOGIN_TIME_SECONDS'      => 's.',
     'LBL_LOGIN_ADMIN_CALL'              => 'Prosím kontaktujte system administrator.',
+    'ERR_FOR_IDM_MODE_GMP_REQUIRED'     =>
+        'Pro ověřování pomocí OpenID Connect (OIDC) v režimu IDM si prosím nainstalujte rozšíření GMP PHP.',
 	// END LOGIN PAGE STRINGS
     'LBL_LOGGED_OUT_1' => 'Byl jste odhlášen. Pokud se chcete přihlásit, prosím klikněte',
     'LBL_LOGGED_OUT_2' => 'zde',
@@ -615,6 +620,12 @@ $mod_strings = array (
     'LBL_FILTER_USERS_REPORTS' => 'Reporty uživatelů',
     'LBL_CONTACTS_SYNC' => 'Kontakty',
     'LBL_DETAIL' => 'Profil uživatele',
+
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_ADMIN_USER' =>
+        'Pokud některá pole nejsou upravitelná, přihlaste se prosím ke Cloudové konzoli, abyste mohli tato pole spravovat',
+    'LBL_IDM_MODE_NON_EDITABLE_FIELDS_FOR_REGULAR_USER' =>
+        'Chcete-li změnit některá pole, která nejsou upravitelná, ' .
+        'obraťte se prosím na správce a oznamte mu tyto změny',
 ); // END STRINGS DEFS
 
 ?>

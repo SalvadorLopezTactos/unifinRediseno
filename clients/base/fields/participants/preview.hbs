@@ -21,7 +21,11 @@
                         <span class="label label-module label-{{module}} pull-left">{{moduleIconLabel module}}</span>
                     </div>
                     <div class="cell name">
-                        <span class="ellipsis_inline" title="{{name}}">{{name}}</span>
+                        {{#if isNameErased}}
+                            {{partial 'erased' ../../this this fallbackTemplate='erased'}}
+                        {{else}}
+                            <span class="ellipsis_inline" title="{{name}}">{{name}}</span>
+                        {{/if}}
                     </div>
                     <div class="cell status">
                         <div class="label{{#if accept_status.css_class}} label-{{accept_status.css_class}}{{/if}}">

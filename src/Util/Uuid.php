@@ -38,4 +38,14 @@ class Uuid
     {
         return UuidBackend::uuid4()->toString();
     }
+
+    /**
+     * validate uuid
+     * @param string $uuid
+     * @return bool
+     */
+    public static function isValid(string $uuid)
+    {
+        return UuidBackend::isValid($uuid);
+    }
 }

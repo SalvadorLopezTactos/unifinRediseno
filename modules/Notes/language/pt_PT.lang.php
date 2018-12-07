@@ -12,6 +12,9 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_NOTES_LIST_DASHBOARD' => 'Dashboard da Lista de Notas',
+
     'ERR_DELETE_RECORD' => 'Um número de registo deverá ser especificado para eliminar a Conta.',
     'LBL_ACCOUNT_ID' => 'ID da Conta:',
     'LBL_CASE_ID' => 'ID da Ocorrência',
@@ -23,7 +26,11 @@ $mod_strings = array(
     'LBL_DESCRIPTION' => 'Descrição',
     'LBL_EMAIL_ADDRESS' => 'E-mail',
     'LBL_EMAIL_ATTACHMENT' => 'Anexo do E-mail',
+    'LBL_EMAIL_ATTACHMENT_FOR' => 'Anexo de E-mail para',
     'LBL_FILE_MIME_TYPE' => 'Tipo Mime',
+    'LBL_FILE_EXTENSION' => 'Extensão de Ficheiro',
+    'LBL_FILE_SOURCE' => 'Origem do Ficheiro',
+    'LBL_FILE_SIZE' => 'Tamanho do ficheiro',
     'LBL_FILE_URL' => 'URL do Ficheiro',
     'LBL_FILENAME' => 'Anexo:',
     'LBL_LEAD_ID' => 'ID do Cliente Potencial:',
@@ -35,7 +42,7 @@ $mod_strings = array(
     'LBL_LIST_SUBJECT' => 'Assunto',
     'LBL_LIST_STATUS' => 'Estado',
     'LBL_LIST_CONTACT' => 'Contacto',
-    'LBL_MODULE_NAME' => 'Notas ou Anexos',
+    'LBL_MODULE_NAME' => 'Notas',
     'LBL_MODULE_NAME_SINGULAR' => 'Nota',
     'LBL_MODULE_TITLE' => 'Notas: Ecrã Principal',
     'LBL_NEW_FORM_TITLE' => 'Criar Nota ou Adicionar Anexo',
@@ -47,6 +54,8 @@ $mod_strings = array(
     'LBL_OPPORTUNITY_ID' => 'ID da Oportunidade:',
     'LBL_PARENT_ID' => 'ID Pai:',
     'LBL_PARENT_TYPE' => 'Tipo de Referência',
+    'LBL_EMAIL_TYPE' => 'Tipo de e-mail',
+    'LBL_EMAIL_ID' => 'ID de e-mail',
     'LBL_PHONE' => 'Telefone',
     'LBL_PORTAL_FLAG' => 'Exibir no Portal?',
     'LBL_EMBED_FLAG' => 'Embutido no E-mail?',

@@ -270,7 +270,9 @@ $mod_strings = array (
     'LBL_BY_QUARTER' => '四半期で',
     'LBL_BY_FISCAL_YEAR' => '会計年度毎',
     'LBL_BY_FISCAL_QUARTER' => '会計四半期毎',
+    'LBL_AMOUNT' => '金額',
     'LBL_COUNT' => '計算',
+    'LBL_PERCENT' => 'パーセント',
     'LBL_SUM' => '合計',
     'LBL_AVG' => '平均',
     'LBL_MAX' => '最大',
@@ -280,6 +282,7 @@ $mod_strings = array (
     'LBL_MONTH' => '月',
     'LBL_YEAR' => '年',
     'LBL_QUARTER' => '四半期',
+    'LBL_FISCAL' => '会計',
     'LBL_FISCAL_YEAR' => '会計年度',
     'LBL_FISCAL_QUARTER' => '会計四半期',
 	'LBL_YESTERDAY'=>'昨日',
@@ -362,7 +365,7 @@ $mod_strings = array (
     'LBL_NEXT_QUARTER'=>'翌四半期',
     'LBL_ADD_RELATE' => "関連の追加",
     'LBL_DEL_THIS' => "削除",
-    'LBL_ALERT_CANT_ADD' => '関連先を選択しないと関連を追加することはできません。\n「関連を追加」ボタンの左のドロップダウンから関連先を選択してください。',
+    'LBL_ALERT_CANT_ADD' => '関連先を選択しないと関連を追加することはできません。\\n「関連を追加」ボタンの左のドロップダウンから関連先を選択してください。',
     'LBL_BY_DAY' => '日次',
     'LBL_DAY' => '日',
     'LBL_OUTER_JOIN_CHECKBOX' => '追加の関連モジュール',
@@ -541,4 +544,12 @@ $mod_strings = array (
     'LBL_GREATER_THAN_EQUAL' => '以上',
 
     'LBL_FILTER_BY_MODULE' => 'モジュールごと',
-);
+    'LBL_FILTER_WITH_CHARTS' => 'チャートで',
+
+    'ERROR_RETRIEVING_DRILLTHRU_DATA' => 'このアクションのDrillthroughレポートデータの取得エラー。レポートの所有者に連絡してください。',
+    'LBL_CHART_NO_DRILLTHRU' => 'ドリルスルーが利用できません。',
+
+    // Help Text
+    // List View Help Text
+    'LBL_HELP_RECORDS' => 'リスト表示では、現在の検索基準を満たしているすべてのレポートおよびアクセス権のあるユーザーを表示します。リスト表示のフィールド列内およびプレビューで各レポートの基本的な詳細を表示できます。レポートにタグを設定して、フィルターを作成できます。レポートの名前をクリックして、レポートを表示したり、アクションメニューの「レポートを編集」を選択して、レポートを変更することができます。',
+  );

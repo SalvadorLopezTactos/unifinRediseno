@@ -11,6 +11,9 @@
  */
 
 $mod_strings = array (
+  // Dashboard Names
+  'LBL_TARGET_LISTS_LIST_DASHBOARD' => 'Dashboard lijst met doellijsten',
+
   'LBL_MODULE_NAME' => 'Targetlijsten',
   'LBL_MODULE_NAME_SINGULAR' => 'Targetlijst',
   'LBL_MODULE_ID'   => 'Targetlijsten',

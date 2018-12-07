@@ -15,6 +15,10 @@
 	var Dom = YAHOO.util.Dom;
 	
 	SUGAR.EmailAddressWidget = function(module) {
+        this.idmMode = {
+            disabledForModule: false,
+            cloudConsoleUrl: ''
+        };
 		if (!SUGAR.EmailAddressWidget.count[module]) SUGAR.EmailAddressWidget.count[module] = 0;
 		this.count = SUGAR.EmailAddressWidget.count[module];
 		SUGAR.EmailAddressWidget.count[module]++;
@@ -48,6 +52,16 @@
 		tabIndex: -1,
 		
 		prefillEmailAddresses: function(tableId, o){
+            var primaryAddressRow = null;
+            for (var i = 0; i < o.length; i++) {
+                if (o[i].primary_address == 1) {
+                    primaryAddressRow = o[i];
+                    break;
+                }
+            }
+            if (!primaryAddressRow) {
+                o[0].primary_address = 1;
+            }
 			for (i = 0; i < o.length; i++) {
 				o[i].email_address = o[i].email_address.replace('&#039;', "'");
 				this.addEmailAddress(tableId, o[i].email_address, o[i].primary_address, o[i].reply_to_address, o[i].opt_out, o[i].invalid_email, o[i].email_address_id);
@@ -225,7 +239,11 @@
 		    newContent.setAttribute("tabindex", tabIndexCount);
 		    newContent.setAttribute("size", "30");
             newContent.setAttribute("title", SUGAR.language.get('app_strings', 'LBL_EMAIL_TITLE'));
-		
+            if (this.idmMode.disabledForModule && primaryFlag == 1) {
+                newContent.setAttribute('readonly', 'readonly');
+                newContent.onclick = this.showErrDismissUpdatePrimaryEmail.bind(this);
+            }
+
 		    if(address != '') {
 		        newContent.setAttribute("value", address);
 		    }
@@ -351,7 +369,21 @@
 		    td2.appendChild(spanNode);
 		    if (this.numberEmailAddresses != 0 || typeof (this.emailIsRequired) == "undefined" || !this.emailIsRequired)
 		       td2.appendChild(removeButton);
-		    td3.appendChild(newContentPrimaryFlag);
+
+            if (this.idmMode.disabledForModule) {
+                newContentPrimaryFlag.setAttribute('disabled', 'disabled');
+                if (primaryFlag == 1) {
+                    var primaryRadioHidden = document.createElement('input');
+                    primaryRadioHidden.setAttribute('name', newContentPrimaryFlag.name);
+                    primaryRadioHidden.setAttribute('type', 'hidden');
+                    primaryRadioHidden.value = newContentPrimaryFlag.value;
+                    td3.appendChild(primaryRadioHidden);
+                    td3.appendChild(newContentPrimaryFlag);
+                }
+            } else {
+                td3.appendChild(newContentPrimaryFlag);
+            }
+
 		    td4.appendChild(newContentReplyToFlag);
 		    td5.appendChild(newContentOptOutFlag);
 		    td6.appendChild(newContentInvalidFlag);
@@ -433,6 +465,9 @@
         },
 
 		removeEmailAddress : function(index) {
+            if (this.idmMode.disabledForModule && Dom.get(this.id + 'emailAddressPrimaryFlag' + index)) {
+                return this.showErrDismissUpdatePrimaryEmail();
+            }
 			removeFromValidate(this.emailView, this.id + 'emailAddress' + index);
             var oNodeToRemove = Dom.get(this.id +  'emailAddressRow' + index);
             var form = Dom.getAncestorByTagName(oNodeToRemove, "form");
@@ -492,6 +527,15 @@
             //if the form has already been registered, re-register it with the new element
             if (SUGAR.forms.AssignmentHandler.VARIABLE_MAP[form.name])
                 SUGAR.forms.AssignmentHandler.registerForm(form.name, form);
+        },
+
+        showErrDismissUpdatePrimaryEmail: function() {
+            parent.SUGAR.App.alert.show('dismiss_delete_primary_email', {
+                level: 'error',
+                messages: SUGAR.language
+                    .get('Users', 'ERR_UPDATE_PRIMARY_EMAIL_FOR_IDM_MODE')
+                    .replace('{0}', this.idmMode.cloudConsoleUrl)
+            });
         },
 		
 		toggleCheckbox : function (el)

@@ -29,8 +29,9 @@ class MultiFieldProperty extends RawProperty implements PropertyInterface
      * Allowed elastic type supported by multi field
      * @var array
      */
-    protected $allowedTypes = array(
-        'string',
+    protected $allowedTypes = [
+        'text',
+        'keyword',
         'float',
         'double',
         'byte',
@@ -40,12 +41,12 @@ class MultiFieldProperty extends RawProperty implements PropertyInterface
         'token_count',
         'date',
         'boolean',
-    );
+    ];
 
     /**
      * @var string Core type
      */
-    protected $type = 'string';
+    protected $type = 'text';
 
     /**
      * {@inheritdoc}

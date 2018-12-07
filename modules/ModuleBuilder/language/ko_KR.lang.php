@@ -734,8 +734,8 @@ $mod_strings = array(
 //CONFIRM
 'LBL_CONFIRM_FIELD_DELETE'=>'Deleting this custom field will delete both the custom field and all the data related to the custom field in the database. The field will be no longer appear in any module layouts.'
         . ' If the field is involved in a formula to calculate values for any fields, the formula will no longer work.'
-        . '\n\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
-        . '\n\nDo you wish to continue?',
+        . '\\n\\nThe field will no longer be available to use in Reports; this change will be in effect after logging out and logging back in to the application. Any reports containing the field will need to be updated in order to be able to be run.'
+        . '\\n\\nDo you wish to continue?',
 'LBL_CONFIRM_RELATIONSHIP_DELETE'=>'이 관계를 삭제하시겠습니까?',
 'LBL_CONFIRM_RELATIONSHIP_DEPLOY'=>'이는 이 관계를 영구보관합니다. 이 관계를 배치하시겠습니까?',
 'LBL_CONFIRM_DONT_SAVE' => '마지막 저장후 다른 변경사항이 발생했습니다. 저장하시겠습니까?',
@@ -747,6 +747,7 @@ $mod_strings = array(
 'LBL_POPHELP_FTS_FIELD_CONFIG' => '필드를 검색 가능한 전문이 되도록 환경구성합니다.',
 'LBL_POPHELP_FTS_FIELD_BOOST' => '부스팅은 record\\\'s 필드의 관련성을 향상하는 프로세스입니다.<br />검색이 수행되면 더 높은 부스트 수준이 포함된 필드들에 더 많은 가중치가 주어집니다. 검색이 수행되면, 더 많은 가중치의 필드가 포함된 레코드 일치가 검색 결과에서 더 높게 나타납니다.<br />기본값은 중립적 부스트를 나타내는 1.0을 나타냅니다. 양성 부스트를 적용하기 위해, 1보다 높은 모든 부동값이 수락됩니다. 음의 부스트에 대해서는 1보다 낮은 값을 사용합니다. 예를 들어, 1.35 값은 필드를 135%만큼 양의 부스트합니다. 0.60 값을 이용하면 음의 부스트를 적용하게 됩니다.<br />이전 버전에서는 전문 검색 재색인을 수해해야 했습니다. 이제 이러한 작업은 더 이상 필요 없습니다.',
 'LBL_POPHELP_IMPORTABLE'=>'예:필드가 작업 가져오기에 포함됩니다.<br />아니오:필드가 가져오기에 포함되지 않습니다.<br />필수:가져오기에 반드시 필드가치가 입력되어야합니다.',
+'LBL_POPHELP_PII'=>'이 필드는 감사를 위해 자동으로 표시되며 개인정보 보기에서 사용할 수 있습니다.<br>레코드가 데이터 프라이버시 삭제 요청과 관련이 있을 때 개인정보 필드를 영구적으로 지울 수도 있습니다.<br>지우기는 데이터 프라이버시 모듈을 통해 수행되며 관리자 또는 데이터 프라이버시 매니저 역할의 사용자가 실행할 수 있습니다.',
 'LBL_POPHELP_IMAGE_WIDTH'=>'pixels로 측정된 너비를 위한 숫자를 입력하십시오.<br />전송된 이미지는 이 너비에 따라 축소됩니다.',
 'LBL_POPHELP_IMAGE_HEIGHT'=>'pixels.로 측정된 높이를 위한 숫자를 입력하십시오.<br />전송된 이미지는 이 높이에 맞춰 축소됩니다.',
 'LBL_POPHELP_DUPLICATE_MERGE'=>'<b>Enabled</b>: The field will appear in the Merge Duplicates feature, but will not be available to use for the filter conditions in the Find Duplicates feature.<br><b>Disabled</b>: The field will not appear in the Merge Duplicates feature, and will not be available to use for the filter conditions in the Find Duplicates feature.'

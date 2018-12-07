@@ -88,20 +88,12 @@ class DataSet_Attribute extends SugarBean {
     // This is the list of fields that are required
     var $required_fields =  array();
 
-
-
-    public function __construct() {
-        global $dictionary;
-        if(isset($this->module_dir) && isset($this->object_name) && !isset($dictionary[$this->object_name])){
-            require('metadata/dataset_attributesMetaData.php');
-        }
+    public function __construct()
+    {
         parent::__construct();
 
-        $this->disable_row_level_security =true;
-
+        $this->disable_row_level_security = true;
     }
-
-
 
     function get_summary_text()
     {

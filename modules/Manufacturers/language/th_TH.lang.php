@@ -47,11 +47,6 @@ $mod_strings = array (
   'ERR_DELETE_RECORD' => 'คุณต้องระบุเลขที่ระเบียนเพื่อลบผู้ผลิต',
   'NTC_STATUS' => 'ตั้งค่าสถานะเป็นไม่ใช้งาน เพื่อลบผู้ผลิตนี้ออกจากรายการแบบดรอปดาวน์ของผู้ผลิต',
   'NTC_LIST_ORDER' => 'กำหนดลำดับที่ผู้ผลิตนี้จะปรากฏในรายการแบบดรอปดาวน์ของผู้ผลิต',
-  'manufacturer_status_dom' => 
-  array (
-    'Active' => 'ใช้งาน',
-    'Inactive' => 'ไม่ใช้งาน',
-),
   'LNK_IMPORT_MANUFACTURERS'=>'นำเข้าผู้ผลิต',
 	'LBL_EDITLAYOUT' => 'แก้ไขเลย์เอาต์' /*for 508 compliance fix*/,
   'LBL_REVENUELINEITEMS' => 'รายการบรรทัดรายได้',

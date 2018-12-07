@@ -25,7 +25,7 @@ class AggregationStack implements \IteratorAggregate
     protected $stack = array();
 
     /**
-     * @var \Elastica\Filter\AbstractFilter[]
+     * @var array
      */
     protected $filters = array();
 
@@ -59,7 +59,7 @@ class AggregationStack implements \IteratorAggregate
 
     /**
      * Get filters
-     * @return \Elastica\Filter\AbstractFilter[]
+     * @return array
      */
     public function getFilters()
     {

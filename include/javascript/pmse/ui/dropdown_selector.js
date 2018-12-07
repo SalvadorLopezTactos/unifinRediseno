@@ -18,6 +18,7 @@ var DropdownSelector = function (options) {
     this._open = null;
     this._appendTo = null;
     this._matchOwnerWidth = null;
+    this._adjustWidth = null;
     DropdownSelector.prototype.init.call(this, options);
 };
 
@@ -35,10 +36,12 @@ DropdownSelector.prototype.init = function (options) {
         value: null,
         open: false,
         appendTo: document.body,
-        matchOwnerWidth : true
+        matchOwnerWidth: true,
+        adjustWidth: true
     };
     $.extend(true, defaults, options);
     this.setMatchOwnerWidth(defaults.matchOwnerWidth)
+        .setAdjustWidth(defaults.adjustWidth)
         .setWidth(defaults.width)
         .setHeight(defaults.height)
         .setOwner(defaults.owner)
@@ -47,6 +50,11 @@ DropdownSelector.prototype.init = function (options) {
         .setValue(defaults.value)
         .setIsOpen(defaults.open)
         .setAppendTo(defaults.appendTo);
+};
+
+DropdownSelector.prototype.setAdjustWidth = function(value) {
+    this._adjustWidth = value;
+    return this;
 };
 
 DropdownSelector.prototype.setOwner = function (value) {
@@ -237,7 +245,10 @@ DropdownSelector.prototype._appendPanel = function () {
         appendPanelTo.appendChild(this.html);
     }
     if (owner) {
-        this.setWidth(this._matchOwnerWidth ? owner.offsetWidth : this.width);
+        if (this._adjustWidth) {
+            // Only match owner width if there is one to match
+            this.setWidth(this._matchOwnerWidth ? owner.offsetWidth : this.width);
+        }
         position = getRelativePosition(owner, appendPanelTo);
     } else {
         this.setWidth(this.width);

@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => '知識庫清單儀表板',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => '知識庫記錄儀表板',
+
     'LBL_MODULE_NAME' => '知識庫',
     'LBL_MODULE_NAME_SINGULAR' => '知識庫文章',
     'LBL_MODULE_TITLE' => '知識庫文章',

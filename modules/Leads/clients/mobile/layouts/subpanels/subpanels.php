@@ -41,5 +41,14 @@ $viewdefs['Leads']['mobile']['layout']['subpanels'] = array(
                 'link' => 'notes',
             ),
         ),
+        array(
+            'layout' => 'subpanel',
+            'label' => 'LBL_EMAILS_SUBPANEL_TITLE',
+            'linkable' => false,
+            'unlinkable' => false,
+            'context' => array(
+                'link' => 'archived_emails',
+            ),
+        ),
     ),
 );

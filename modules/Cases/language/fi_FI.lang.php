@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_CASES_LIST_DASHBOARD' => 'Tapauslistojen työpöytä',
+    'LBL_CASES_RECORD_DASHBOARD' => 'Tapaustietueiden työpöytä',
+
 	'ERR_DELETE_RECORD'					=> 'Tietuenumero tulee määritellä jotta voit poistaa asiakkaan.',
 	'LBL_ACCOUNT_ID'					=> 'Asiakkaan ID',
 	'LBL_ACCOUNT_NAME'					=> 'Asiakkaan nimi:',
@@ -44,7 +48,6 @@ $mod_strings = array (
 	'LBL_STATUS'						=> 'Tila:',
     'LBL_SOURCE' => 'Lähde:',
 	'LBL_SUBJECT'						=> 'Aihe',
-	'LBL_SYSTEM_ID'						=> 'Järjestelmän ID',
 	'LBL_LIST_ACCOUNT_NAME'				=> 'Asiakkaan nimi',
 	'LBL_LIST_ASSIGNED'					=> 'Osoitettu',
 	'LBL_LIST_CLOSE'					=> 'Sulje',

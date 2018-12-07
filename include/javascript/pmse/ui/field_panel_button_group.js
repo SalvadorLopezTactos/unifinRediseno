@@ -8,9 +8,11 @@
  *
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
+// jscs:disable
+var PMSE = PMSE || {};
 var FieldPanelButtonGroup = function(settings) {
 	FieldPanelItem.call(this, settings)
-	this._items = new ArrayList();
+	this._items = new PMSE.ArrayList();
 	this._label = null;
 	this._htmlLabel = null;
 	this._htmlItemsContainer = null;

@@ -24,6 +24,10 @@ $mod_strings = array (
     'LBL_QUOTES_SHIPTO' => '報價（送貨至）',
 	'LNK_ACCOUNT_REPORTS' => '檢視帳戶報表',
     'LBL_DOCUMENTS_SUBPANEL_TITLE' => '文件',
+    // Dashboard Names
+    'LBL_ACCOUNTS_LIST_DASHBOARD' => '帳號列表儀表板',
+    'LBL_ACCOUNTS_RECORD_DASHBOARD' => '帳號記錄儀表板',
+
 	// Dashlet Categories
 	'LBL_CHARTS'    => '圖表',
 	'LBL_DEFAULT' => '檢視表',

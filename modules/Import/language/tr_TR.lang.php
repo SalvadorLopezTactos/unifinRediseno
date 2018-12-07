@@ -103,6 +103,7 @@ $mod_strings = array (
     'ERR_MULTIPLE' => 'Aynı alan ismiyle birden fazla kolon tanımlanmış durumda.',
     'ERR_MISSING_REQUIRED_FIELDS' => 'Doldurulması zorunlu alanlar eksik:',
     'ERR_MISSING_MAP_NAME' => 'Eksik standart dışı eşleştirme ismi',
+    'ERR_USERS_IMPORT_DISABLED_TO_IDM_MODE' => 'Kullanıcı içe aktarma, IDM modu için devre dışıdır.',
     'ERR_SELECT_FULL_NAME' => 'İsim ve Soyisim seçili iken, Tam İsim seçilemez.',
     'ERR_SELECT_FILE' => 'Yüklemek için bir dosya seçiniz.',
     'LBL_SELECT_FILE' => 'Dosya Seçin:',

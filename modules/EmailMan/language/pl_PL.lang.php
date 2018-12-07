@@ -103,6 +103,7 @@ $mod_strings = array (
 	'TXT_REMOVE_ME_CLICK'						=> 'kliknij tutaj',
 	'TXT_REMOVE_ME'								=> 'Aby usunąć siebie z tej listy mailingowej',
 	'LBL_NOTIFY_SEND_FROM_ASSIGNING_USER'		=> 'W powiadomieniach e-mail jako nadawcę umieść użytkownika przydzielającego rekord',
+    'LBL_EMAIL_OPT_OUT_DEFAULT' => 'Domyślnie rezygnuj z nowych adresów e-mail',
 
 	'LBL_SECURITY_TITLE'						=> 'Ustawienia zabezpieczeń wiadomości',
 	'LBL_SECURITY_DESC'							=> 'Ustawienia zabezpieczeń dla wiadomości kampanii.',
@@ -130,6 +131,7 @@ $mod_strings = array (
     'LBL_ALLOW_DEFAULT_SELECTION'               => 'Zezwalaj użytkownikom na używanie tego konta do poczty wychodzącej:',
     'LBL_ALLOW_DEFAULT_SELECTION_HELP'          => 'Jeżeli ta opcja została zaznaczona, wszyscy użytkownicy będą mogli wysyłać wiadomości e-mail, używając tego samego konta<br> poczty wychodzącej, które jest wykorzystywane do wysyłania alertów i powiadomień. Jeżeli opcja ta nie została zaznaczona,<br> użytkownicy będą mogli używać swoich prywatnych kont do wysyłania poczty.',
     'LBL_FROM_ADDRESS_HELP'                     => 'Gdy ta opcja jest włączona, nazwa przypisanego użytkownika i adres e-mail będą dodawane do pola nadawcy wiadomości e-mail. Ta opcja może nie działać z serwerami SMTP, które nie pozwalają wysyłać wiadomości e-mail z innych kont pocztowych niż konto serwera.',
+    'LBL_EMAIL_OPT_OUT_DEFAULT_TOOLTIP' => 'Po dodaniu nowego adresu e-mail zostanie on automatycznie wycofany. Wiadomości e-mail kampanii nie mogą być dostarczane na wycofane adresy. Zmiana tego ustawienia nie wpłynie na istniejące adresy e-mail.',
 	'LBL_GMAIL_LOGO' => 'Gmail' /*for 508 compliance fix*/,
 	'LBL_YAHOO_MAIL_LOGO' => 'Yahoo Mail' /*for 508 compliance fix*/,
 	'LBL_EXCHANGE_LOGO' => 'Exchange' /*for 508 compliance fix*/,

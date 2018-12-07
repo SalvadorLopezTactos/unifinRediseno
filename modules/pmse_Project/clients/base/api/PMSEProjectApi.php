@@ -62,6 +62,7 @@ class PMSEProjectApi extends ModuleApi
 
     public function __construct()
     {
+        parent::__construct();
         $this->projectWrapper = ProcessManager\Factory::getPMSEObject('PMSEProjectWrapper');
         $this->crmDataWrapper = ProcessManager\Factory::getPMSEObject('PMSECrmDataWrapper');
         $this->activityDefinitionWrapper = ProcessManager\Factory::getPMSEObject('PMSEActivityDefinitionWrapper');
@@ -82,7 +83,8 @@ class PMSEProjectApi extends ModuleApi
                 'pathVars' => array('module', 'customAction', 'record'),
                 'method' => 'retrieveCustomProject',
                 'acl' => 'view',
-//                'shortHelp' => 'Returns the Process Definition schema to be used by PA designer',
+                'shortHelp' => 'Retrieves the schema data to be used by the Process Definition designer',
+                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_project_get_help.html',
             ),
             'updateCustomProject' => array(
                 'reqType' => 'PUT',
@@ -90,7 +92,8 @@ class PMSEProjectApi extends ModuleApi
                 'pathVars' => array('module', 'customAction', 'record'),
                 'method' => 'updateCustomProject',
                 'acl' => 'create',
-//                'shortHelp' => 'Update the process definition schema edited in PA designer',
+                'shortHelp' => 'Updates the schema data from the Process Definition designer',
+                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_project_put_help.html',
             ),
             'readBRFields' => array(
                 'reqType' => 'GET',
@@ -106,7 +109,8 @@ class PMSEProjectApi extends ModuleApi
                 'pathVars' => array('module', '', 'data', 'filter'),
                 'method' => 'getCrmData',
                 'acl' => 'view',
-//                'shortHelp' => 'Returns information about Fields, Modules, Users, Roles, etc.',
+                'shortHelp' => 'Retrieves information about Fields, Modules, Users, Roles, etc.',
+                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_crm_data_get_help.html',
             ),
             'updateCrmData' => array(
                 'reqType' => 'PUT',
@@ -114,7 +118,8 @@ class PMSEProjectApi extends ModuleApi
                 'pathVars' => array('module', '', 'record', 'filter'),
                 'method' => 'putCrmData',
                 'acl' => 'create',
-//                'shortHelp' => 'Update information about Fields, Modules, Users, Roles, etc.',
+                'shortHelp' => 'Updates information about Fields, Modules, Users, Roles, etc.',
+                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_crm_data_put_help.html',
             ),
             'readCrmDataWithoutFilters' => array(
                 'reqType' => 'GET',
@@ -130,7 +135,8 @@ class PMSEProjectApi extends ModuleApi
                 'pathVars' => array('module', '', 'record'),
                 'method' => 'getActivityDefinition',
                 'acl' => 'view',
-//                'shortHelp' => 'Returns definition data for activities',
+                'shortHelp' => 'Retrieves the definition data for an activity',
+                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_activity_get_help.html',
             ),
             'updateActivityDefinition' => array(
                 'reqType' => 'PUT',
@@ -138,7 +144,8 @@ class PMSEProjectApi extends ModuleApi
                 'pathVars' => array('module', '', 'record'),
                 'method' => 'putActivityDefinition',
                 'acl' => 'create',
-//                'shortHelp' => 'Update definition data for activities',
+                'shortHelp' => 'Updates the definition data for an activity',
+                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_activity_put_help.html',
             ),
             'readEventDefinition' => array(
                 'reqType' => 'GET',
@@ -146,7 +153,8 @@ class PMSEProjectApi extends ModuleApi
                 'pathVars' => array('module', '', 'record'),
                 'method' => 'getEventDefinition',
                 'acl' => 'view',
-//                'shortHelp' => 'Returns definition data for events',
+                'shortHelp' => 'Retrieves the definition data for an event',
+                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_event_get_help.html',
             ),
             'updateEventDefinition' => array(
                 'reqType' => 'PUT',
@@ -154,7 +162,8 @@ class PMSEProjectApi extends ModuleApi
                 'pathVars' => array('module', '', 'record'),
                 'method' => 'putEventDefinition',
                 'acl' => 'create',
-//                'shortHelp' => 'Update definition data for events',
+                'shortHelp' => 'Updates the definition data for an event',
+                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_event_put_help.html',
             ),
             'readGatewayDefinition' => array(
                 'reqType' => 'GET',
@@ -162,7 +171,8 @@ class PMSEProjectApi extends ModuleApi
                 'pathVars' => array('module', '', 'record'),
                 'method' => 'getGatewayDefinition',
                 'acl' => 'view',
-//                'shortHelp' => 'Returns definition data for gateways',
+                'shortHelp' => 'Retrieves the definition data for a gateway',
+                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_gateway_get_help.html',
             ),
             'updateGatewayDefinition' => array(
                 'reqType' => 'PUT',
@@ -170,7 +180,8 @@ class PMSEProjectApi extends ModuleApi
                 'pathVars' => array('module', '', 'record'),
                 'method' => 'putGatewayDefinition',
                 'acl' => 'create',
-//                'shortHelp' => 'Update definition data for gateways',
+                'shortHelp' => 'Updates the definition data for a gateway',
+                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_gateway_put_help.html',
             ),
             'verifyRunningProcess' => array(
                 'reqType' => 'GET',
@@ -178,7 +189,8 @@ class PMSEProjectApi extends ModuleApi
                 'pathVars' => array('module', 'record', 'verify'),
                 'method' => 'verifyRunningProcess',
                 'acl' => 'view',
-//                'shortHelp' => 'Informs if the Process Definition has pending processes',
+                'shortHelp' => 'Verifies whether the Process Definition has any pending processes',
+                'longHelp'  => 'modules/pmse_Project/clients/base/api/help/project_record_verify_help.html',
             )
         );
     }

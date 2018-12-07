@@ -31,7 +31,7 @@ use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\Cros
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\TagsHandler;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\FavoritesHandler;
 use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\HtmlHandler;
-use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\OwnerIdHandler;
+use Sugarcrm\Sugarcrm\Elasticsearch\Provider\GlobalSearch\Handler\Implement\ErasedFieldsHandler;
 use Sugarcrm\Sugarcrm\Elasticsearch\Query\MultiMatchQuery;
 use Sugarcrm\Sugarcrm\Elasticsearch\Query\MatchAllQuery;
 
@@ -53,6 +53,11 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      * @var Highlighter
      */
     protected $highlighter;
+
+    /**
+     * @var ResultParser
+     */
+    protected $resultParser;
 
     /**
      * @var Booster
@@ -102,6 +107,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
     public function __construct()
     {
         $this->highlighter = new Highlighter();
+        $this->resultParser = new ResultParser($this->highlighter);
         $this->booster = new Booster();
         $this->handlers = new HandlerCollection($this);
         $this->registerHandlers();
@@ -136,7 +142,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
         $this->addHandler(new TagsHandler());
         $this->addHandler(new FavoritesHandler());
         $this->addHandler(new HtmlHandler());
-        $this->addHandler(new OwnerIdHandler());
+        $this->addHandler(new ErasedFieldsHandler());
     }
 
     /**
@@ -146,6 +152,35 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
     public function addHandler(HandlerInterface $handler)
     {
         $this->handlers->addHandler($handler);
+    }
+
+    /**
+     * Remove existing handler
+     * @param string $name
+     */
+    public function removeHandler($name)
+    {
+        $this->handlers->removeHandler($name);
+    }
+
+    /**
+     * Check if given handler is registered
+     * @param string $name
+     * @return boolean
+     */
+    public function hasHandler($name)
+    {
+        return $this->handlers->hasHandler($name);
+    }
+
+    /**
+     * Get existing handler by name
+     * @param string $name
+     * @return HandlerInterface
+     */
+    public function getHandler($name)
+    {
+        return $this->handlers->getHandler($name);
     }
 
     /**
@@ -218,11 +253,20 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
 
     /**
      * Add highlighter field remaps
-     * @param array $remap
+     * @param string[] $remap
      */
     public function addFieldRemap(array $remap)
     {
-        $this->highlighter->setFieldRemap($remap);
+        $this->resultParser->addHighlightRemap($remap);
+    }
+
+    /**
+     * Add _source field remap
+     * @param string[] $remap
+     */
+    public function addSourceRemap(array $remap)
+    {
+        $this->resultParser->addSourceRemap($remap);
     }
 
     /**
@@ -319,11 +363,11 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
     }
 
     /**
-     * Get search fields per module
+     * Add search fields per module
      * @param $sf object the search field object
      * @param $module string the name of the module
      */
-    protected function getSearchFieldsPerModule($sf, $module)
+    protected function buildSearchFieldsPerModule($sf, $module)
     {
         foreach ($this->getFtsFields($module) as $field => $defs) {
             // skip fields which are not searchable
@@ -341,16 +385,15 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
     /**
      * Get search field wrapper
      * @param array $modules List of modules
-     * @return array
+     * @return SearchFields
      */
-    public function getSearchFields(array $modules)
+    public function buildSearchFields(array $modules)
     {
-        $sf = new SearchFields($this->fieldBoost ? $this->booster : null);
-
+        $sfs = new SearchFields($this->fieldBoost ? $this->booster : null);
         foreach ($modules as $module) {
-            $this->getSearchFieldsPerModule($sf, $module);
+            $this->buildSearchFieldsPerModule($sfs, $module);
         }
-        return $sf->getSearchFields();
+        return $sfs;
     }
 
     /**
@@ -422,7 +465,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
     protected $getTags = array();
 
     /**
-     * @var array the name of the "Tags" Module
+     * @var string the name of the "Tags" Module
      */
     protected $tagModule = 'Tags';
 
@@ -571,14 +614,11 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
             return $this;
         }
 
-        // TODO - we need field mapping logic here based on type etc
-        // We probably want a separate sorting class with the required logic
         $sortFields = array();
         foreach ($fields as $field => $order) {
             $sortFields[$field] = array(
                 'order' => $order,
                 'missing' => '_last',
-                'ignore_unmapped' => true,
             );
         }
         $this->sort = $sortFields;
@@ -599,7 +639,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
         return $this;
     }
 
-    protected function handleSearchAggregations($builder)
+    protected function handleSearchAggregations(QueryBuilder $builder)
     {
         if ($this->queryCrossModuleAggs || $this->queryModuleAggs) {
             $builder->setAggFilterDefs($this->aggFilters);
@@ -622,9 +662,9 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
             $query = $this->createMultiMatchQuery();
         } else {
             // If no query term is passed in we use a MatchAll and try to
-            // order by date_modified
+            // order by the common date_modified field
             $query = new MatchAllQuery();
-            $this->sort = array('date_modified' => 'desc');
+            $this->sort([Mapping::PREFIX_COMMON . 'date_modified.gs_datetime' => 'desc']);
             $this->useHighlighter = false;
         }
 
@@ -636,6 +676,7 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
             ->setOffset($this->offset)
             ->setQuery($query)
             ->setExplain($this->explain)
+            ->setResultParser($this->resultParser)
         ;
 
         // Set highlighter
@@ -663,15 +704,20 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
      */
     public function searchTags()
     {
+        if (!in_array($this->tagModule, $this->getUserModules())) {
+            // Tags index doesn't, just return null
+            return null;
+        }
+
         //create a module list including the tag module only
-        $modules = array($this->tagModule);
+        $this->modules = array($this->tagModule);
 
         $multiMatch = $this->createMultiMatchQuery();
 
         $builder = new QueryBuilder($this->container);
         $builder
             ->setUser($this->user)
-            ->setModules($modules)
+            ->setModules($this->modules)
             ->setLimit($this->tagLimit)
             ->setQuery($multiMatch)
         ;
@@ -683,11 +729,16 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
         return $builder->executeSearch();
     }
 
+    /**
+     * Create Multi Match query object
+     * @return MultiMatchQuery
+     */
     protected function createMultiMatchQuery()
     {
         $multiMatch = new MultiMatchQuery();
         $multiMatch->setTerms($this->term);
         $multiMatch->setOperator($this->getDefaultOperator());
+        $multiMatch->setVisibilityProvider($this->container->getProvider('Visibility'));
 
         $modules = $this->modules;
         //when searching on a specific module, include tags if necessary
@@ -695,9 +746,8 @@ class GlobalSearch extends AbstractProvider implements ContainerAwareInterface
             $modules[] = $this->tagModule;
         }
 
-        $multiMatch->setSearchFields($this->getSearchFields($modules));
+        $multiMatch->setSearchFields($this->buildSearchFields($modules));
         $multiMatch->setUser($this->user);
-        $multiMatch->setHighlighter($this->highlighter);
         return $multiMatch;
     }
 

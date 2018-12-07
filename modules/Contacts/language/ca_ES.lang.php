@@ -18,6 +18,10 @@ $mod_strings = array (
     'db_email1' => 'LBL_LIST_EMAIL_ADDRESS',
     'db_email2' => 'LBL_LIST_OTHER_EMAIL_ADDRESS',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_CONTACTS_LIST_DASHBOARD' => 'Quadre de comandament del llistat de contactes',
+    'LBL_CONTACTS_RECORD_DASHBOARD' => 'Quadre de comandament del registre de contactes',
+
     'LNK_CONTACT_REPORTS' => 'Informes de contactes',
     'ERR_DELETE_RECORD' => 'Per suprimir el contacte, heu d&#39;especificar un número de registre.',
     'LBL_ACCOUNT_ID' => 'ID del compte:',
@@ -273,4 +277,6 @@ Per crear un {{module_name}}:
     'LBL_MKTO_LEAD_SCORE' => 'Puntuació del potencial',
 
     'LBL_FILTER_CONTACTS_REPORTS' => 'Informes de contactes',
+    'LBL_DATAPRIVACY_BUSINESS_PURPOSE' => 'Objectius empresarials consentits',
+    'LBL_DATAPRIVACY_CONSENT_LAST_UPDATED' => 'Darrera actualització del consetiment',
 );

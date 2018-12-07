@@ -85,7 +85,7 @@ class SugarJobUpdateOpportunities extends JobNotification implements RunnableSch
         $ftsSearch->setForceAsyncIndex(
             SugarConfig::getInstance()->get('search_engine.force_async_index', false)
         );
-        Activity::enable();
+        Activity::restoreToPreviousState();
 
         $this->job->succeedJob();
         $this->notifyAssignedUser();

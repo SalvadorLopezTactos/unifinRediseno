@@ -38,4 +38,9 @@ $error_defs = array(
 'ldap_error' => array('number'=>1012, 'name'=> 'LDAP Authentication Failed', 'description'=>'LDAP Authentication failed but supplied password was already encrypted.'),
 'user_loop' => array('number'=>1015, 'name'=>'Cannot have a user report to himself', 'description'=>'The system detected a reporting loop. A user cannot report to themselves, nor can any of their managers report to them.'),
 'error_user_create_update' => array('number' =>1016, 'name'=>'Unable to create/update user.', 'description'=>'There was an error while creating/updating user.'),
+    'idm_mode_cannot_create_user' => [
+        'number' => 1017,
+        'name' => 'Can\'t create user in IDM mode',
+        'description' => 'The user can be created only in Cloud console for IDM mode.',
+    ],
 );

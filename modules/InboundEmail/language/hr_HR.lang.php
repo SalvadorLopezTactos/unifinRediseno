@@ -24,7 +24,7 @@ $mod_strings = array(
 	'LBL_RE'					=> 'RE:',
 
 	'ERR_BAD_LOGIN_PASSWORD'=> 'Neispravna prijava ili lozinka',
-	'ERR_BODY_TOO_LONG'		=> '\rTekst u tijelu predug za obuhvaćanje CIJELE poruke e-pošte. Skraćen.',
+	'ERR_BODY_TOO_LONG'		=> '\\rTekst u tijelu predug za obuhvaćanje CIJELE poruke e-pošte. Skraćen.',
 	'ERR_INI_ZLIB'			=> 'Nije moguće privremeno isključiti sažimanje Zlib. „Postavke testiranja” možda neće biti uspješne.',
 	'ERR_MAILBOX_FAIL'		=> 'Nije moguće dohvatiti nijedan poštanski račun.',
 	'ERR_NO_IMAP'			=> 'Nema pronađenih biblioteka IMAP. Riješite to prije nego što nastavite s dolaznom e-poštom',

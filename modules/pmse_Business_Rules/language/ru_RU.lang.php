@@ -12,7 +12,6 @@
 
 
 $mod_strings = array (
-
   'LBL_MODULE_NAME' => 'Процесс обработки бизнес-правил',
   'LBL_MODULE_TITLE' => 'Процесс обработки бизнес-правил',
   'LBL_MODULE_NAME_SINGULAR' => 'Процесс обработки бизнес-правила',
@@ -47,7 +46,7 @@ $mod_strings = array (
 
     'LBL_PMSE_BUSINESS_RULES_SINGLE_HIT' => 'Процесс одиночной обработки бизнес-правил',
 
-    'LBL_PMSE_BUSINESS_RULES_IMPORT_TEXT' => 'Автоматически создать новый Процесс обработки бизнес-правила посредством импорта файла  *.pbr из файловой системы.',
+    'LBL_PMSE_BUSINESS_RULES_IMPORT_TEXT' => 'Автоматически создайте новый процесс обработки бизнес-правила посредством импорта файла *.pbr из вашей системы файлов.',
     'LBL_PMSE_BUSINESS_RULES_IMPORT_SUCCESS' => 'Процесс обработки шаблона Email был успешно импортирован в систему.',
     'LBL_PMSE_BUSINESS_RULES_EMPTY_WARNING' => 'Пожалуйста, выберите допустимый *.pbr файл.',
 
@@ -65,11 +64,16 @@ $mod_strings = array (
     'LBL_PMSE_LABEL_CONDITIONS' => 'Условия',
     'LBL_PMSE_LABEL_RETURN' => 'Возврат',
     'LBL_PMSE_LABEL_CONCLUSIONS' => 'Результаты',
+    'LBL_PMSE_LABEL_CHANGE_FIELD' => 'Изменить поле',
+    'LBL_PMSE_LABEL_RETURN_VALUE' => 'Возвращаемое значение',
 
     'LBL_PMSE_TOOLTIP_ADD_CONDITION' => 'Добавить условие',
     'LBL_PMSE_TOOLTIP_ADD_CONCLUSION' => 'Добавить результат',
     'LBL_PMSE_TOOLTIP_ADD_ROW' => 'Добавить строку',
     'LBL_PMSE_TOOLTIP_REMOVE_COLUMN' => 'Удалить столбец',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONDITION' => 'Удалить условие',
+    'LBL_PMSE_TOOLTIP_REMOVE_CONCLUSION' => 'Удалить заключение',
+    'LBL_PMSE_TOOLTIP_REMOVE_COL_DATA' => 'Удалить данные в столбце',
 
     'LBL_PMSE_DROP_DOWN_CHECKED' => 'Да',
     'LBL_PMSE_DROP_DOWN_UNCHECKED' => 'Нет',

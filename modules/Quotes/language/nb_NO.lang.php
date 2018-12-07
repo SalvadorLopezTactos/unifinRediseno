@@ -24,6 +24,10 @@ $mod_strings = array (
     'db_amount' => 'LBL_LIST_AMOUNT',
     'db_date_closed' => 'LBL_LIST_DATE_CLOSED',
     //END DON'T CONVERT
+    // Dashboard Names
+    'LBL_QUOTES_LIST_DASHBOARD' => 'Dashbord for anbudsliste',
+    'LBL_QUOTES_RECORD_DASHBOARD' => 'Dashbord for anbudsoppføring',
+
     'LBL_CONTRACTS'=>'Kontrakter',
     'LBL_CONTRACTS_SUBPANEL_TITLE'=>'Kontrakter',
     'ERR_DELETE_RECORD' => 'Et registernummer må oppgis for å slette dette tilbudet.',
@@ -185,7 +189,6 @@ $mod_strings = array (
     'LBL_SUBTOTAL_USDOLLAR'=>'Subtotal (US dollar)',
     'LBL_SUBTOTAL' => 'Subtotal:',
     'LBL_TAXABLE_SUBTOTAL' => 'Skattepliktig delsum',
-    'LBL_SYSTEM_ID' => 'System-ID',
     'LBL_TAX_USDOLLAR'=>'SKatt (US Dollar)',
     'LBL_TAX' => 'Skatt:',
     'LBL_TAX_TOTAL' => 'Totalavgift',
@@ -249,4 +252,9 @@ $mod_strings = array (
     'LBL_DELETE_SELECTED_LABEL' => 'Slett valgte',
     'LBL_DELETE_SELECTED_TOOLTIP' => 'Slett valgte elementer',
     'LBL_SAVE_LINE_ITEMS' => 'Lagre alle aktive linjeelementer ved å klikke på det blå kontrollmerket ved hvert av dem før du lagrer dette tilbudet.',
+    'LBL_COPY_LINE_ITEMS' => 'Lagre alle aktive linjeelementer ved å klikke på det blå kontrollmerket ved hvert av dem før du kopierer dette tilbudet.',
+    'LBL_SEARCH_CATALOG_PLACEHOLDER' => 'Søk i produktkatalogen',
+    'LBL_NO_PRODUCT_CATALOG_RESULTS' => 'Ingen data tilgjengelig',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE' => 'Kopierer siterte linjeelementer til ny forespørsel.',
+    'LBL_QUOTE_COPY_ALERT_MESSAGE_LONG_TIME' => 'Kopierer siterte linjeelementer til ny forespørsel. Denne prosessen kan ta litt tid.',
 );

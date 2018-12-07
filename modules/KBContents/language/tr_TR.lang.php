@@ -10,6 +10,10 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 $mod_strings = array (
+    // Dashboard Names
+    'LBL_KBCONTENTS_LIST_DASHBOARD' => 'Bilgi Bankası Listesi Panosu',
+    'LBL_KBCONTENTS_RECORD_DASHBOARD' => 'Bilgi Bankası Kaydı Panosu',
+
     'LBL_MODULE_NAME' => 'Bilgi Tabanı',
     'LBL_MODULE_NAME_SINGULAR' => 'Bilgi Tabanı Makalesi',
     'LBL_MODULE_TITLE' => 'Bilgi Tabanı Makalesi',

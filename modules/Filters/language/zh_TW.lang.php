@@ -73,7 +73,7 @@ $mod_strings = array(
     'LBL_ACTIVITY_LINK' => '連結的訊息',
     'LBL_ACTIVITY_UNLINK' => '取消連結的信息',
     'LBL_ACTIVITY_POST' => '發布的訊息',
-    'LBL_FILTER_NEW_NAME' => '輸入新篩選器名稱',
+    'LBL_FILTER_NEW_NAME' => '輸入新篩選條件名稱',
 
     'LBL_OPERATOR_CONTAINS' => '其中的',
     'LBL_OPERATOR_NOT_CONTAINS' => '不是其中的',

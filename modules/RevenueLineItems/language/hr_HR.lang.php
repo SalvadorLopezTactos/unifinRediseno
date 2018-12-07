@@ -11,6 +11,10 @@
  */
 
 $mod_strings = array(
+    // Dashboard Names
+    'LBL_REVENUE_LINE_ITEMS_LIST_DASHBOARD' => 'Nadzorna ploča za popis stavki prihoda',
+    'LBL_REVENUE_LINE_ITEMS_RECORD_DASHBOARD' => 'Nadzorna ploča za zapise o stavkama prihoda',
+
     'LBL_CAMPAIGN_PRODUCT' => 'Proizvod kampanje',
     'LBL_MODULE_NAME' => 'Stavke prihoda',
     'LBL_MODULE_NAME_SINGULAR' => 'Stavka prihoda',
@@ -196,7 +200,7 @@ Da biste stvorili modul {{module_name}}:
 - Kliknite na „Prikaži više” da biste otkrili dodatna polja ako je potrebno.
 2. Kliknite na „Spremi” da biste završili novi zapis i vratili se na prethodnu stranicu.',
 
-    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => 'Najboljih 10 stavki prihoda od prodaje',
+    'LBL_DASHLET_TOP10_SALES_OPPORTUNITIES_NAME' => '10 najboljih stavki prihoda od prodaje',
     'LBL_TOP10_OPPORTUNITIES_CHART_DESC' => 'Prikazuje deset najboljih stavki prihoda od prodaje u mjehuričastom grafikonu.',
     'LBL_TOP10_OPPORTUNITIES_MY_OPP' => 'Moje stavke prihoda',
     'LBL_TOP10_OPPORTUNITIES_MY_TEAMS_OPP' => "Stavke prihoda mog tima",
