@@ -483,7 +483,7 @@ class UnifinAPI
 
         /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/11/2015 Description: Method to get all of the Direcciones module Information that is related to the Persona in question
          * this method is used to form the array for insertarClienteCompleto method*/
-        public function getDirecciones($relatedId, $currentDireccion = null, $elimina)
+        public function getDirecciones($relatedId, $currentDireccion = null, $elimina = 0)
         {
             global $db, $current_user;
             $query = "
