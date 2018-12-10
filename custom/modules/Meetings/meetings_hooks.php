@@ -510,6 +510,7 @@ SQL;
     					WHERE id = '{$bean->id}'
 SQL;
     				$levadmin1 = $db->query($levadmin);
+					
           }   
         }
       }
