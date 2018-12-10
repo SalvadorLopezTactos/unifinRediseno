@@ -57,8 +57,8 @@ SQL;
       			}
       		}
       		$acompanianteMeet1->parent_meeting_c = $bean->id;
-			    $acompanianteMeet1->created_by = $bean->created_by;
-			    $acompanianteMeet1->modified_user_id = $bean->modified_user_id;
+			$acompanianteMeet1->created_by = $bean->created_by;
+			$acompanianteMeet1->modified_user_id = $bean->modified_user_id;
       		$acompanianteMeet1->assigned_user_id = $args['related_id'];
       		$acompanianteMeet1->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
       		$acompanianteMeet1->save();
@@ -151,7 +151,7 @@ SQL;
                 WHERE meeting_id = '{$bean->id}'
                 AND deleted = 0
 SQL;
-			      $conn = $db->getConnection();
+			$conn = $db->getConnection();
             $queryResult = $conn->executeQuery($query);
             foreach($queryResult->fetchAll() as $row)
 	    	    {
@@ -175,8 +175,8 @@ SQL;
       					}
       				}
       				$acompanianteMeet->parent_meeting_c = $bean->id;
-					    $acompanianteMeet->created_by = $bean->created_by;
-				    	$acompanianteMeet->modified_user_id = $bean->modified_user_id;
+					$acompanianteMeet->created_by = $bean->created_by;
+				    $acompanianteMeet->modified_user_id = $bean->modified_user_id;
       				$acompanianteMeet->assigned_user_id = $row['user_id'];
       				$acompanianteMeet->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
       				$acompanianteMeet->save();
@@ -196,36 +196,38 @@ SQL;
  		  	  $ultimo1 = $db->query($ultimo);
         }
 
-		    // Editar Reuni�n
+		// Editar Reuni�n
         if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->date_entered != $bean->date_modified && $bean->nuevo_c == 0 && $bean->actualizado_c == 1)
 	      {
   		  	  $query = <<<SQL
                 SELECT a.id, b.parent_meeting_c
                 FROM meetings a, meetings_cstm b
                 WHERE b.parent_meeting_c = '{$bean->id}'
-				        AND a.id = b.id_c
+				AND a.id = b.id_c
                 AND a.deleted = 0
 SQL;
             $conn = $db->getConnection();
             $queryResult = $conn->executeQuery($query);
             foreach($queryResult->fetchAll() as $row)
-      			{
-			      	$exclude = array
-      			  (
+      		{
+			   	$exclude = array
+				(
       				'id',
+					'created_by',
+					'modified_user_id',
       				'date_entered',
       				'date_modified',
       				'assigned_user_id',
       				'parent_meeting_c',
       				'description',
-				    	'status',
-					    'objetivo_c',
-					    'resultado_c',
-    					'referenciada_c',
-    					'check_in_address_c',
-    					'check_in_latitude_c',
-    					'check_in_longitude_c',
-    					'check_in_time_c'
+				   	'status',
+				    'objetivo_c',
+				    'resultado_c',
+    				'referenciada_c',
+    				'check_in_address_c',
+    				'check_in_latitude_c',
+    				'check_in_longitude_c',
+    				'check_in_time_c'
       			);
       			$acompanianteMeet = BeanFactory::getBean('Meetings',$row['id']);
       			foreach($bean->field_defs as $def)
@@ -485,7 +487,31 @@ SQL;
     {
       if($bean->modified_user_id == '1')
       {
-        $bean->modified_user_id = $bean->fetched_row['modified_user_id'];
+        if($bean->fetched_row['modified_user_id'])
+        {
+          $bean->modified_user_id = $bean->fetched_row['modified_user_id'];
+        }
+        else
+        {
+		    	$query = <<<SQL
+  				SELECT created_by, modified_user_id
+  				FROM meetings
+  				WHERE id = '{$bean->parent_meeting_c}'
+  				AND deleted = 0
+SQL;
+    			$conn = $db->getConnection();
+    			$queryResult = $conn->executeQuery($query);
+    			foreach($queryResult->fetchAll() as $row)
+    			{
+    				$creado = $row['created_by'];
+    				$modificado = $row['modified_user_id'];
+    				$levadmin = <<<SQL
+    					UPDATE meetings SET created_by = '{$creado}', modified_user_id = '{$modificado}'
+    					WHERE id = '{$bean->id}'
+SQL;
+    				$levadmin1 = $db->query($levadmin);
+          }   
+        }
       }
     }
 }
