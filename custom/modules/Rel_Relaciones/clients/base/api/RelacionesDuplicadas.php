@@ -29,7 +29,7 @@ class RelacionesDuplicadas extends SugarApi
             $cliente  = $args['guid_cliente'];
             $relacionado = $args['guid_relacion'];
             $relacion = $args['relacion'];
-            $idRel = $args['idRel'];
+            $idRel = isset($args['idRel']) ? $args['idRel'] : "";
             $relaciones_previas = $args['previas'];
             $query = <<<SQL
 SELECT rl.relaciones_activas
