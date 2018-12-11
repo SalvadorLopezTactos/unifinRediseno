@@ -485,7 +485,37 @@ SQL;
     {
       if($bean->modified_user_id == '1')
       {
-        $bean->modified_user_id = $bean->fetched_row['modified_user_id'];
+        if($bean->fetched_row['modified_user_id'])
+        {
+          $bean->modified_user_id = $bean->fetched_row['modified_user_id'];
+        }
       }
     }
+    
+    function cambiAdmin2 ($bean = null, $event = null, $args = null)
+    {
+      if($bean->modified_user_id == '1')
+      {
+          global $db;
+		    	$query = <<<SQL
+  				SELECT created_by, modified_user_id
+  				FROM meetings
+  				WHERE id = '{$bean->parent_meeting_c}'
+  				AND deleted = 0
+SQL;
+    			$conn = $db->getConnection();
+    			$queryResult = $conn->executeQuery($query);
+    			foreach($queryResult->fetchAll() as $row)
+    			{
+    				$creado = $row['created_by'];
+    				$modificado = $row['modified_user_id'];
+    				$levadmin = <<<SQL
+   					UPDATE meetings SET created_by = '{$creado}', modified_user_id = '{$modificado}'
+    				WHERE id = '{$bean->id}'
+SQL;
+            $conn1 = $db->getConnection();
+            $queryResult1 = $conn1->executeQuery($levadmin);
+          }
+      }
+    }    
 }
