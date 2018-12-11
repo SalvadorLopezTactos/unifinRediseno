@@ -4981,7 +4981,7 @@ $app_strings = array (
 
     //record save
     'LBL_RECORD_SAVED' => 'Registro guardado.', // use when there is no information about the record
-    'LBL_RECORD_SAVED_SUCCESS' => 'Ha creado con éxit {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.', // use when a model is available
+    'LBL_RECORD_SAVED_SUCCESS' => 'Ha creado con éxito {{moduleSingularLower}} <a href="#{{buildRoute model=this}}">{{full_name}}</a>.', // use when a model is available
     'LBL_RECORD_SAVED_ACCESS_DENIED' => 'Usted ha creado con éxito este registro, pero usted no tiene permiso para acceder a este registro.', // use when user has no access to the model
     'LBL_VALIDATING' => 'Validando...',
 

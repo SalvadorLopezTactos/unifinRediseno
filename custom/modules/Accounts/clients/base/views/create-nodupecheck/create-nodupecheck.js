@@ -768,10 +768,9 @@
 
             if (fecnac_date > today_date) {
 
-                console.log('La fecha de nacimiento no puede ser mayor al d�a de hoy');
                 app.alert.show("fechaDeNacimientoValidate", {
                     level: "error",
-                    title: "La fecha de nacimiento no puede ser mayor al d�a de hoy",
+                    title: "La fecha de nacimiento no puede ser mayor al d\u00EDa de hoy",
                     autoClose: false
                 });
                 errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
@@ -791,10 +790,9 @@
 
             if (feccons_date > today_date) {
 
-                console.log('La fecha de nacimiento no puede ser mayor al d�a de hoy');
                 app.alert.show("fechaDeConsValidate", {
                     level: "error",
-                    title: "La fecha constitutiva no puede ser mayor al d�a de hoy",
+                    title: "La fecha constitutiva no puede ser mayor al d\u00EDa de hoy",
                     autoClose: false
                 });
 
