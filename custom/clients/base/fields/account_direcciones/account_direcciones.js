@@ -1033,6 +1033,7 @@
     populateColoniasByMunicipioExisting:function(evt){
 
         $(evt.currentTarget).parent().next('td').next('td').find('select.existingColoniaTemp').empty();
+
         var id_municipio=$(evt.currentTarget).val();
         var cp=$(evt.currentTarget).parent().parent().parent().find('#existingPostalInput').val();
 
@@ -1058,17 +1059,9 @@
                                 }
                             }
                         }
-
-                        //opciones[0].selected
-                        //opciones[0].remove();
                         
                         for (var i = 0; i < data.records.length; i++) {
-                            //paises_options +='<option value="' + list_paises[i].idPais + '" >' + list_paises[i].namePais + '</option>';
-                            if($(evt.currentTarget).parent().next('td').next('td').find('.existingColoniaIdTemp').val() != data.records[i].id){
-    
                                 $(evt.currentTarget).parent().next('td').next('td').find('select.existingColoniaTemp').append($("<option>").val(data.records[i].id).html(data.records[i].name));
-
-                            }
                         }
 
                     $(evt.currentTarget).parent().parent().parent().find(".loadingIconColoniaTemp").hide();
