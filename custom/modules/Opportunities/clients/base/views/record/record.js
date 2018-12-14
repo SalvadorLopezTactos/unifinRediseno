@@ -929,12 +929,12 @@ console.log(name);
         callback(null, fields, errors);
 	},
 
-	oportunidadperdidacheck: function(fields, errors, callback){
-	    if (Object.keys(errors).length==0){
+    oportunidadperdidacheck: function (fields, errors, callback) {
+        if (Object.keys(errors).length == 0) {
             console.log(fields);
             console.log(errors);
-            if(this.model.get('tct_oportunidad_perdida_chk_c')==true){
-                if(this.model.get('estatus_c')=='K'){
+            if (this.model.get('tct_oportunidad_perdida_chk_c') == true) {
+                if (this.model.get('estatus_c') == 'K') {
                     app.alert.show("Cancela Operacion", {
                         level: "error",
                         title: "No puedes cancelar una operaci\u00F3n cancelada",
@@ -942,92 +942,35 @@ console.log(name);
                     });
 
                 }
-                else
-                    {
-                    app.alert.show("EstatusCancelcacion",{
-                        level: "process",
-                        title: "Se est\u00E1 cancelando la solicitud, por favor espera....",
-                        autoClose: false
-                    });
+                else {
+                    if (this.model.get('tct_razon_op_perdida_ddw_c') != "") {
 
-                    // @author Carlos Zaragoza
-                    // @task Cancelar la operacion solamente en Sugar si no tiene ID process.
-                    console.log(typeof this.model.get("id_process_c"));
-                    console.log(this.model.get("id_process_c"));
-                    if(this.model.get("id_process_c")==""){
-                        var parametros = {
-                            'id_linea_padre' : this.model.get('id_linea_credito_c'),
-                            'id' : this.model.get('id'),
-                            'conProceso' : 0,
-                            'tipo_de_operacion_c' :  this.model.get('tipo_de_operacion_c'),
-                            'tipo_operacion_c' :  this.model.get('tipo_operacion_c'),
-                        };
-                        var cancelarOperacionPadre = app.api.buildURL("CancelaRatificacion", '', {}, {});
-                        app.api.call("create", cancelarOperacionPadre, {data: parametros}, {
-                            success: _.bind(function (data) {
-                                if (data != null) {
-                                    console.log("Se cancelo padre1");
-                                    this.model.set('estatus_c','K');
-                                    this.model.save();
-                                    self.render();
-                                    app.alert.dismiss('EstatusCancelcacion');
-                                } else {
-                                    console.log("No se cancela Padre");
-                                }
-                                }, self)
+                        app.alert.show("EstatusCancelcacion", {
+                            level: "process",
+                            title: "Se est\u00E1 cancelando la solicitud, por favor espera....",
+                            autoClose: false
                         });
-                        callback(null, fields, errors); //Pendiente
-                    }else{
-                        if (this.model.get('estatus_c') != 'K') {
-                            var Operacion = this;
-                            var OppParams = {
-                                'idSolicitud': this.model.get("idsolicitud_c"),
-                                'usuarioAutenticado': app.user.get('user_name'),
-                            };
-                            var cancelaOperacionUrl = app.api.buildURL("cancelaOperacionBPM", '', {}, {});
-                            app.api.call("create", cancelaOperacionUrl, {data: OppParams}, {
-                                success: _.bind(function (data) {
-                                    if (data != null) {
-                                        if (data['estatus'] == 'error') {
-                                            app.alert.show("Cancela Operacion", {
-                                                level: "error",
-                                                title: "Error: " + data['descripcion'],
-                                                autoClose: false
-                                            });
-                                            callback(null, fields, errors);
-                                        } else {
-                                            app.alert.show("ExitoCancel", {
-                                                level: 'success',
-                                                title: 'Se ha cancelado la operaci\u00F3n',
-                                                autoClose: true
-                                            });
-                                            callback(null, fields, errors);
-                                        }
-                                    }
-                                }, self)
-                            });
-                            // mandamos llamar el servicio para cancelar localmente:
+
+
+                        // @author Carlos Zaragoza
+                        // @task Cancelar la operacion solamente en Sugar si no tiene ID process.
+                        console.log(typeof this.model.get("id_process_c"));
+                        console.log(this.model.get("id_process_c"));
+                        if (this.model.get("id_process_c") == "") {
                             var parametros = {
-                                'id_linea_padre' : this.model.get('id_linea_credito_c'),
-                                'id' : this.model.get('id'),
-                                'conProceso' : 1,
-                                'tipo_de_operacion_c' :  this.model.get('tipo_de_operacion_c'),
-                                'tipo_operacion_c' :  this.model.get('tipo_operacion_c'),
+                                'id_linea_padre': this.model.get('id_linea_credito_c'),
+                                'id': this.model.get('id'),
+                                'conProceso': 0,
+                                'tipo_de_operacion_c': this.model.get('tipo_de_operacion_c'),
+                                'tipo_operacion_c': this.model.get('tipo_operacion_c'),
                             };
-                            console.log(parametros);
                             var cancelarOperacionPadre = app.api.buildURL("CancelaRatificacion", '', {}, {});
                             app.api.call("create", cancelarOperacionPadre, {data: parametros}, {
                                 success: _.bind(function (data) {
                                     if (data != null) {
-                                        console.log("Se cancelo padre2");
-                                        this.model.set('estatus_c','K');
+                                        console.log("Se cancelo padre1");
+                                        this.model.set('estatus_c', 'K');
                                         this.model.save();
-                                        //window.location.reload()
-                                        /*@Jesus Carrillo*/
-                                        /*window.setTimeout(function () {
-                                            window.history.back();
-                                            app.alert.dismiss('EstatusCancelcacion');
-                                        }, 25000);*/
                                         self.render();
                                         app.alert.dismiss('EstatusCancelcacion');
                                     } else {
@@ -1035,20 +978,85 @@ console.log(name);
                                     }
                                 }, self)
                             });
+                            callback(null, fields, errors); //Pendiente
                         } else {
-                            app.alert.show("Operacion Cancelada", {
-                                level: "error",
-                                title: "Esta Operaci\u00F3n ya habia sido cancelada anteriormente",
-                                autoClose: false
-                            });
-                            callback(null, fields, errors);
+                            if (this.model.get('estatus_c') != 'K') {
+                                var Operacion = this;
+                                var OppParams = {
+                                    'idSolicitud': this.model.get("idsolicitud_c"),
+                                    'usuarioAutenticado': app.user.get('user_name'),
+                                };
+                                var cancelaOperacionUrl = app.api.buildURL("cancelaOperacionBPM", '', {}, {});
+                                app.api.call("create", cancelaOperacionUrl, {data: OppParams}, {
+                                    success: _.bind(function (data) {
+                                        if (data != null) {
+                                            if (data['estatus'] == 'error') {
+                                                app.alert.show("Cancela Operacion", {
+                                                    level: "error",
+                                                    title: "Error: " + data['descripcion'],
+                                                    autoClose: false
+                                                });
+                                                callback(null, fields, errors);
+                                            } else {
+                                                app.alert.show("ExitoCancel", {
+                                                    level: 'success',
+                                                    title: 'Se ha cancelado la operaci\u00F3n',
+                                                    autoClose: true
+                                                });
+                                                callback(null, fields, errors);
+                                            }
+                                        }
+                                    }, self)
+                                });
+                                // mandamos llamar el servicio para cancelar localmente:
+                                var parametros = {
+                                    'id_linea_padre': this.model.get('id_linea_credito_c'),
+                                    'id': this.model.get('id'),
+                                    'conProceso': 1,
+                                    'tipo_de_operacion_c': this.model.get('tipo_de_operacion_c'),
+                                    'tipo_operacion_c': this.model.get('tipo_operacion_c'),
+                                };
+                                console.log(parametros);
+                                var cancelarOperacionPadre = app.api.buildURL("CancelaRatificacion", '', {}, {});
+                                app.api.call("create", cancelarOperacionPadre, {data: parametros}, {
+                                    success: _.bind(function (data) {
+                                        if (data != null) {
+                                            console.log("Se cancelo padre2");
+                                            this.model.set('estatus_c', 'K');
+                                            this.model.save();
+                                            //window.location.reload()
+                                            /*@Jesus Carrillo*/
+                                            /*window.setTimeout(function () {
+                                                window.history.back();
+                                                app.alert.dismiss('EstatusCancelcacion');
+                                            }, 25000);*/
+                                            self.render();
+                                            app.alert.dismiss('EstatusCancelcacion');
+                                        } else {
+                                            console.log("No se cancela Padre");
+                                        }
+                                    }, self)
+                                });
+                            } else {
+                                app.alert.show("Operacion Cancelada", {
+                                    level: "error",
+                                    title: "Esta Operaci\u00F3n ya habia sido cancelada anteriormente",
+                                    autoClose: false
+                                });
+                                callback(null, fields, errors);
+                            }
                         }
+
+                    }// fin if
+                    else {
+                        errors['tct_razon_op_perdida_ddw_c']='Campo requerido para cancelar';
+                        errors['tct_razon_op_perdida_ddw_c'].required = true;
                     }
                 }
             }
         }
         callback(null, fields, errors);
-        },
+    },
 
 	calcularRI: function(){
 		if(!_.isEmpty(this.model.get("amount")) && !_.isEmpty(this.model.get("porciento_ri_c")) && this.model.get("porciento_ri_c") != 0 && this.model.get("tipo_operacion_c") == 1){
@@ -1414,27 +1422,29 @@ console.log(name);
      Funcion que valida que la cuenta de la presolicitud tenga una direccion con indicador "correspondencia" y"fiscal"
      */
     valida_direc_indicador: function(fields, errors, callback){
-        self=this;
-        var fiscal=0;
-        var correspondecia=0;
-        app.api.call('GET', app.api.buildURL('Accounts/' +this.model.get('account_id')+'/link/accounts_dire_direccion_1'), null, {
-            success: _.bind(function (data) {
-                console.log('Info de Accounts:');
-                console.log(data);
-                for(var i=0;i<data.records.length;i++){
-                    if(data.records[i].indicador!=""){
-                        var array_indicador=this._getIndicador(data.records[i].indicador);
-                        for(var j=0;j<array_indicador.length;j++){
-                            if(array_indicador[j]=='1'){
-                                correspondecia++;
-                            }
-                            if(array_indicador[j]=='2'){
-                                fiscal++;
+        if(this.model.get('tct_oportunidad_perdida_chk_c')==false) {
+
+            self = this;
+            var fiscal = 0;
+            var correspondecia = 0;
+            app.api.call('GET', app.api.buildURL('Accounts/' + this.model.get('account_id') + '/link/accounts_dire_direccion_1'), null, {
+                success: _.bind(function (data) {
+                    console.log('Info de Accounts:');
+                    console.log(data);
+                    for (var i = 0; i < data.records.length; i++) {
+                        if (data.records[i].indicador != "") {
+                            var array_indicador = this._getIndicador(data.records[i].indicador);
+                            for (var j = 0; j < array_indicador.length; j++) {
+                                if (array_indicador[j] == '1') {
+                                    correspondecia++;
+                                }
+                                if (array_indicador[j] == '2') {
+                                    fiscal++;
+                                }
                             }
                         }
                     }
-                }
-                if(correspondecia==0){
+                    if (correspondecia == 0) {
                         app.alert.show('indicador_fail', {
                             level: 'error',
                             messages: 'La cuenta necesita tener al menos un tipo de direcci\u00F3n <b>Correspondencia</b> en direcciones',
@@ -1442,8 +1452,8 @@ console.log(name);
                         errors['indicador_1'] = errors['indicador_1'] || {};
                         errors['indicador_1'].required = true;
 
-                }
-                if(fiscal==0){
+                    }
+                    if (fiscal == 0) {
                         app.alert.show('indicador_fail2', {
                             level: 'error',
                             messages: 'La cuenta necesita tener al menos un tipo de direcci\u00F3n <b>Fiscal</b> en direcciones',
@@ -1451,11 +1461,15 @@ console.log(name);
                         errors['indicador_2'] = errors['indicador_2'] || {};
                         errors['indicador_2'].required = true;
 
-                }
-                callback(null, fields, errors);
-            }, self),
-        });
+                    }
+                    callback(null, fields, errors);
+                }, self),
+            });
 
+        }
+        else {
+            callback(null, fields, errors);
+        }
     },
 
     _getIndicador: function(idSelected, valuesSelected) {
