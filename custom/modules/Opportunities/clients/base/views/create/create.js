@@ -278,18 +278,14 @@
         /* END CUSTOMIZATION */
 
         this.model.on("change:monto_c", _.bind(function() {
-            if (this.model.get('amount') == null || this.model.get('amount') == ''){
-                this.model.set('amount',this.model.get('monto_c'));
-            }else{
-                if(parseFloat(this.model.get('amount')) > parseFloat(this.model.get('monto_c'))){
-                    app.alert.show("Monto a operar invalido", {
+            if(parseFloat(this.model.get('amount')) > parseFloat(this.model.get('monto_c'))){
+                app.alert.show("Monto a operar invalido", {
                         level: "error",
                         title: "El monto a operar no puede ser mayor al monto de la linea.",
                         autoClose: false
-                    });
-                    this.model.set('amount',this.model.get('monto_c'));
-                }
+                });
             }
+            this.model.set('amount',this.model.get('monto_c'));
             var str = this.model.get('monto_c');
             var n = str.length;
             if(n>22)
