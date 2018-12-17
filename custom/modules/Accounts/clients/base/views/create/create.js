@@ -489,8 +489,8 @@
                     this.model.set('promotorfactoraje_c', modelo.get('name'));
                     this.model.set('user_id1_c', modelo.get('id'));
                 } else {
-                    this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
-                    this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
+                    this.model.set('promotorfactoraje_c', '9 - Sin Gestor');
+                    this.model.set('user_id1_c', '569246c7-da62-4664-ef2a-5628f649537e');
                 }
                 if (contains.call(modelo.get('productos_c'), "3")) {
                     this.model.set('promotorcredit_c', modelo.get('name'));
@@ -502,8 +502,8 @@
                 if (contains.call(modelo.get('productos_c'), "1") == false && contains.call(modelo.get('productos_c'), "3") == false && contains.call(modelo.get('productos_c'), "4") == false) {
                     this.model.set('promotorleasing_c', '9 - Sin Gestor');
                     this.model.set('user_id_c', '569246c7-da62-4664-ef2a-5628f649537e');
-                    this.model.set('promotorfactoraje_c', 'Maria de Lourdes Campos Toca');
-                    this.model.set('user_id1_c', 'a04540fc-e608-56a7-ad47-562a6078519d');
+                    this.model.set('promotorfactoraje_c', '9 - Sin Gestor');
+                    this.model.set('user_id1_c', '569246c7-da62-4664-ef2a-5628f649537e');
                     this.model.set('promotorcredit_c', '9 - Sin Gestor');
                     this.model.set('user_id2_c', '569246c7-da62-4664-ef2a-5628f649537e');
                 }
