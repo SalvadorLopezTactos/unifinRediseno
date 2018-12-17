@@ -1234,7 +1234,7 @@
                 errors[$(".account_direcciones")].required = true;
                 app.alert.show("Direccion requerida", {
                     level: "error",
-                    title: "Favor de selccionar C.P. en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
+                    title: "Favor de seleccionar C.P. en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
                     autoClose: false
                 });
             }
@@ -1250,7 +1250,7 @@
                 errors[$(".account_direcciones")].required = true;
                 app.alert.show("Direccion requerida", {
                     level: "error",
-                    title: "Favor de selccionar Ciudad en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
+                    title: "Favor de seleccionar Ciudad en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
                     autoClose: false
                 });
             }
@@ -1265,7 +1265,7 @@
                 errors[$(".account_direcciones")].required = true;
                 app.alert.show("Direccion requerida", {
                     level: "error",
-                    title: "Favor de selccionar Colonia en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
+                    title: "Favor de seleccionar Colonia en direcci\u00F3n: " + direcciones[i].calle + " " + direcciones[i].numext,
                     autoClose: false
                 });
             }
