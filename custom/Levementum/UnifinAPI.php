@@ -823,7 +823,7 @@ $query .= " ORDER BY email_addr_bean_rel.date_created";
                 $host = "http://" . $GLOBALS['unifin_url'] . "/Uni2WsClnt/WsRest/Uni2ClntService.svc/Uni2/CreaRelacion";
                 $host1 = "http://" . $GLOBALS['unifin_url'] . "/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/consultaFolio?sTabla=ctRelacionesCliente";
 
-                $listTipoRelacion = split(",", $object->relaciones_activas);
+                $listTipoRelacion = explode(",", $object->relaciones_activas);
                 $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " : Lista de relaciones " . $listTipoRelacion);
                 $IntValue = new DropdownValuesHelper();
 
