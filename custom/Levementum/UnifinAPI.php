@@ -2029,10 +2029,10 @@ SQL;
                 foreach($account->rel_relaciones_accounts_1->getBeans() as $relacion) {
                     if($relacion->sincronizado_unics_c!= 1) {
                         $GLOBALS['log']->fatal('Valida relaciones - Envía relación: '.$relacion->id);
-                        $rel = BeanFactory::getBean('Rel_Relaciones', $relacion->id);                    
+                        $rel = BeanFactory::getBean('Rel_Relaciones', $relacion->id);
                         $rel->save();
                     }
-                }   
+                }
             } catch (Exception $e) {
                 $GLOBALS['log']->fatal('Valida relaciones - Error:');
                 $GLOBALS['log']->fatal($e);
