@@ -4,7 +4,7 @@
  * @date   6/9/2015 4:07 PM
  * @brief  js for custom accounts direcciones field
  */
-({
+ ({
     // CustomAccount_direcciones Field (base)
 
     events: {
@@ -56,9 +56,13 @@
         'change .existingCiudadTemp': 'updateExistingDireccionDropdown',
         'change .existingColoniaTemp': 'updateExistingDireccionDropdown',
 
-
+        //Dependencia entre Municipio y Colonia
         'change .newMunicipioTemp': 'populateColoniasByMunicipio',
         'change select.existingMunicipioTemp': 'populateColoniasByMunicipioExisting',
+
+        //Dependencia entre Estado y Colonia
+        'change .newEstadoTemp': 'populateCiudadesByEstado',
+        'change select.existingEstadoTemp': 'populateCiudadesByEstadoExisting',
 
     },
     _flag2Deco: {
@@ -73,7 +77,7 @@
      * @inheritdoc
      * @param options
      */
-    initialize: function (options) {
+     initialize: function (options) {
         self = this;
         options = options || {};
         options.def = options.def || {};
@@ -141,9 +145,9 @@
          }
          */
 
-        var dir_indicador_list = app.lang.getAppListStrings('dir_Indicador_list');
-        var indicador_options = '<option value=""></option>'
-        for (indicador_id in dir_indicador_list) {
+         var dir_indicador_list = app.lang.getAppListStrings('dir_Indicador_list');
+         var indicador_options = '<option value=""></option>'
+         for (indicador_id in dir_indicador_list) {
             indicador_options += '<option value="' + indicador_id + '" >' + dir_indicador_list[indicador_id] + '</option>';
         }
         this.def.indicador_html = indicador_options;
@@ -158,8 +162,8 @@
 
         //*
         var fields = ['id', 'name', 'calle', 'inactivo', 'numext', 'numint', 'indicador', 'principal', 'secuencia', 'tipodedireccion'
-            , 'dire_direccion_dire_ciudaddire_ciudad_ida', 'dire_direccion_dire_codigopostaldire_codigopostal_ida', 'dire_direccion_dire_coloniadire_colonia_ida',
-            'dire_direccion_dire_estadodire_estado_ida', 'dire_direccion_dire_municipiodire_municipio_ida', 'dire_direccion_dire_paisdire_pais_ida'];
+        , 'dire_direccion_dire_ciudaddire_ciudad_ida', 'dire_direccion_dire_codigopostaldire_codigopostal_ida', 'dire_direccion_dire_coloniadire_colonia_ida',
+        'dire_direccion_dire_estadodire_estado_ida', 'dire_direccion_dire_municipiodire_municipio_ida', 'dire_direccion_dire_paisdire_pais_ida'];
         //api request apamaters
         var api_params = {
             'fields': fields.join(','),
@@ -257,24 +261,25 @@
             }
         });
 
-        this.fiscalCounter = 0;
+this.fiscalCounter = 0;
 
-        this.counterEmptyFields=0;
+this.counterEmptyFields=0;
 
-        this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionFiscal, this));
-        this.model.addValidationTask('check_multiple_fiscalCorrespondencia', _.bind(this._doValidateDireccionFiscalCorrespondencia, this));
+this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionFiscal, this));
+this.model.addValidationTask('check_multiple_fiscalCorrespondencia', _.bind(this._doValidateDireccionFiscalCorrespondencia, this));
         //Ajuste Dirección Nacional
         this.model.addValidationTask('check_direccion_nacional', _.bind(this._doValidateDireccionNacional, this));
 
         this.indice_ids=0;
         this.index_for_colonias=0;
+
     },
 
     /**
      * Establece campo original de Indicador depende el valor del campo multiselect
      * @param  {object} evt, Objeto que contiene información del evento
      */
-    updateValueIndicadorMultiselect:function (evt) {
+     updateValueIndicadorMultiselect:function (evt) {
         var valores=evt.val;
         var id= this._getIndicador(null,valores)
         //Estableciendo valores para solo 1 valor seleccionado
@@ -287,7 +292,7 @@
      * Establece campo original de Indicador en direcciones ya agregadas dependiendo el valor del campo multiselect
      * @param  {object} evt, Objeto que contiene información del evento
      */
-    updateValueIndicadorExisting:function (evt) {
+     updateValueIndicadorExisting:function (evt) {
         var valorEx=evt.val;
         var id = this._getIndicador(null,valorEx)
         evt.target.parentElement.children[1].value=id;
@@ -303,11 +308,11 @@
 
         var $input = this.$(evt.currentTarget);
         var class_name = $input[0].className,
-            field_name = $($input).attr('data-field');
+        field_name = $($input).attr('data-field');
         var $inputs = this.$('.' + class_name),
-            index = $inputs.index($input),
-            dropdown_value = $input.val(),
-            primaryRemoved;
+        index = $inputs.index($input),
+        dropdown_value = $input.val(),
+        primaryRemoved;
 
         //contar las direcciones fiscales existentes
         var fiscalCounter = 0;
@@ -369,11 +374,11 @@
 
         var $input = this.$(evt.currentTarget);
         var class_name = $input[0].className,
-            field_name = $($input).attr('data-field');
+        field_name = $($input).attr('data-field');
         var $inputs = this.$('.' + class_name),
-            index = $inputs.index($input),
-            dropdown_value = $input.val(),
-            primaryRemoved;
+        index = $inputs.index($input),
+        dropdown_value = $input.val(),
+        primaryRemoved;
 
         //contar las direcciones Administrativas existentes
         var adminCounter = 0;
@@ -503,9 +508,9 @@
                      if(direccion.indicador == "7"){
                      fiscal = true;
                      correspondencia = true;
-                     }*/
+                 }*/
 
-                });
+             });
 
                 if(fiscal == false || correspondencia == false){
                     var alertOptions = {title: "Se requiere de al menos una direccion fiscal y una de correspondencia.", level: "error"};
@@ -528,7 +533,7 @@
      * @param  n/a
      * @return updates dropdown html
      */
-    updateExistingDireccionDropdown: function (evt) {
+     updateExistingDireccionDropdown: function (evt) {
         if (!evt) return;
 
         console.log("LANZANDO DESDE "+this.$(evt.currentTarget).attr('data-field'));
@@ -536,11 +541,11 @@
         var $input = this.$(evt.currentTarget);
         //get field type
         var class_name = $input[0].className,
-            field_name = $($input).attr('data-field');
+        field_name = $($input).attr('data-field');
         var $inputs = this.$('.' + class_name),
-            index = $inputs.index($input),
-            dropdown_value = $input.val(),
-            primaryRemoved;
+        index = $inputs.index($input),
+        dropdown_value = $input.val(),
+        primaryRemoved;
         var codigo_postal_list=app.metadata.getPostalCodes();
         var paises_list=app.metadata.getCountries();
         var municipios_list=app.metadata.getMunicipalities();
@@ -674,19 +679,19 @@
                 fields: "name",
                 //max_num: 10,
                 "filter": [
-                    {
+                {
                         /*
                          "id": {
                          "$starts" : id_filtro_colonia
                          }
                          */
-                        "codigo_postal":{
+                         "codigo_postal":{
                             "$equals": zipcode_to_triggerTemp
                         }
 
                     }
-                ]
-            });
+                    ]
+                });
             console.log(url);
 
             $iconLoading.show();
@@ -711,14 +716,14 @@
         //update model with new value
         //only update model on existing records
         if ($.inArray(class_name, ['existingPais', 'existingEstado', 'existingMunicipio', 'existingPostal', 'existingIndicador',
-                'existingCiudad', 'existingColonia','existingPaisTemp','existingPostalIdHidden','existingEstadoTemp','existingMunicipioTemp','existingCiudadTemp','existingColoniaTemp']) != -1) {
+            'existingCiudad', 'existingColonia','existingPaisTemp','existingPostalIdHidden','existingEstadoTemp','existingMunicipioTemp','existingCiudadTemp','existingColoniaTemp']) != -1) {
 
             this._updateExistingDireccionInModel(index, dropdown_value, field_name);
-        }
+    }
 
-    },
+},
 
-    getInfoAboutCP: function(evt){
+getInfoAboutCP: function(evt){
         //var $inputCP = this.$(evt.currentTarget);
         //this.$(evt.currentTarget).val()
 
@@ -803,13 +808,15 @@
                         $(".loadingIconMunicipio").hide();
                         $(".loadingIconColonia").hide();
 
-                        var ciudades_list = app.metadata.getCities();
-                        $('select.newEstadoTemp').val();
+                        //var ciudades_list = app.metadata.getCities();
+                        //$('select.newEstadoTemp').val();
                         //var ciudad_html = '<option value="xkcd"> Seleccionar Ciudad</option>';
                         /**
                             *AF- 2018-11-30:
                             *Ajuste para recuperar ciudades por todos los estados mostrados
-                        */
+                            */
+
+                        /*************************
                         //Recupera lista de Estados
                         var estadoOpciones = $('select.newEstadoTemp')[0];
                         //Itera por cada estado obtenido
@@ -821,23 +828,26 @@
                                 }
                             }
                         }
+                        **************************/
+                        $('.newEstadoTemp').trigger('change');
+
                         
                         $(".loadingIconCiudad").hide();
                     }
                 },this)
-            });
+});
 
-        }else{
-            app.alert.show('invalid_cp', {
-                level: 'error',
-                autoClose: true,
-                messages: 'C\u00F3digo Postal inv\u00E1lido'
-            });
-        }
+}else{
+    app.alert.show('invalid_cp', {
+        level: 'error',
+        autoClose: true,
+        messages: 'C\u00F3digo Postal inv\u00E1lido'
+    });
+}
 
-    },
+},
 
-    getInfoAboutCPExisting: function(evt){
+getInfoAboutCPExisting: function(evt){
         //var $inputCP = this.$(evt.currentTarget);
         //this.$(evt.currentTarget).val()
         this.cpEvt=evt;
@@ -881,14 +891,14 @@
              $(".loadingIconCiudadTemp").show();
              $(".loadingIconColoniaTemp").show();
              */
-            this.$(evt.target).parent().parent().find('.loadingIconPaisTemp').show();
-            this.$(evt.target).parent().parent().find('.loadingIconEdoTemp').show();
-            this.$(evt.target).parent().parent().next('tr').children().eq(0).find('.loadingIconMunicipioTemp').show();
-            this.$(evt.target).parent().parent().next('tr').children().eq(1).find('.loadingIconCiudadTemp').show();
-            this.$(evt.target).parent().parent().next('tr').children().eq(2).find('.loadingIconColoniaTemp').show();
+             this.$(evt.target).parent().parent().find('.loadingIconPaisTemp').show();
+             this.$(evt.target).parent().parent().find('.loadingIconEdoTemp').show();
+             this.$(evt.target).parent().parent().next('tr').children().eq(0).find('.loadingIconMunicipioTemp').show();
+             this.$(evt.target).parent().parent().next('tr').children().eq(1).find('.loadingIconCiudadTemp').show();
+             this.$(evt.target).parent().parent().next('tr').children().eq(2).find('.loadingIconColoniaTemp').show();
 
 
-            app.api.call('GET', app.api.buildURL(strUrl), evt, {
+             app.api.call('GET', app.api.buildURL(strUrl), evt, {
                 success: _.bind(function (data) {
                     //self.cpEvt
 
@@ -923,8 +933,8 @@
                          $(evt.target).parent().parent().find('.existingIndicador').trigger('change');
                          * */
 
-                        var paises_options = '';
-                        for (var i = 0; i < list_paises.length; i++) {
+                         var paises_options = '';
+                         for (var i = 0; i < list_paises.length; i++) {
                             //paises_options +='<option value="' + list_paises[i].idPais + '" >' + list_paises[i].namePais + '</option>';
                             //$('select.existingPaisTemp').append($("<option>").val(list_paises[i].idPais).html(list_paises[i].namePais));
                             $(self.cpEvt.target).parent().parent().find('select.existingPaisTemp').append($("<option>").val(list_paises[i].idPais).html(list_paises[i].namePais));
@@ -957,6 +967,7 @@
                         $(self.cpEvt.target).parent().parent().next('tr').children().eq(1).find('.loadingIconCiudadTemp').hide();
                         $(self.cpEvt.target).parent().parent().next('tr').children().eq(2).find('.loadingIconColoniaTemp').hide();
 
+                        /************
                         var ciudades_list = app.metadata.getCities();
                         $('select.newEstadoTemp').val();
                         //var ciudad_html = '<option value="xkcd"> Seleccionar Ciudad</option>';
@@ -969,41 +980,42 @@
                             }
 
                         }
+                        ************/
 
                         //Lanzando eventos change de todos los campos actualizados
 
                         $(self.cpEvt.target).parent().parent().find('#existingPostalHidden').trigger("change");
                         $(self.cpEvt.target).parent().parent().find('.existingPaisTemp').trigger("change");
-                        $(self.cpEvt.target).parent().parent().find('.existingEstadoTemp').trigger("change")
+                        $(self.cpEvt.target).parent().parent().parent().find('.existingEstadoTemp').trigger("change");
                         $(self.cpEvt.target).parent().parent().next('tr').children().eq(0).find('.existingMunicipioTemp').trigger("change");
                         $(self.cpEvt.target).parent().parent().next('tr').children().eq(2).find('.existingColoniaTemp').trigger("change");
                         $(self.cpEvt.target).parent().parent().next('tr').children().eq(1).find('.existingCiudadTemp').trigger("change");
 
                     }
                 },this)
-            });
+});
 
-        }else{
+}else{
 
-            app.alert.show('invalid_cp', {
-                level: 'error',
-                autoClose: true,
-                messages: 'C\u00F3digo Postal inv\u00E1lido'
-            });
+    app.alert.show('invalid_cp', {
+        level: 'error',
+        autoClose: true,
+        messages: 'C\u00F3digo Postal inv\u00E1lido'
+    });
 
-            this.$(evt.target).css('border-color', 'red');
-        }
+    this.$(evt.target).css('border-color', 'red');
+}
 
-    },
+},
 
-    populateColoniasByMunicipio:function(evt){
+populateColoniasByMunicipio:function(evt){
 
-        $('select.newColoniaTemp').empty();
+    $('select.newColoniaTemp').empty();
 
-        var id_municipio=$(evt.currentTarget).val();
-        var cp=$('#postalInputTemp').val();
+    var id_municipio=$(evt.currentTarget).val();
+    var cp=$('#postalInputTemp').val();
 
-        if(id_municipio != null && id_municipio != "" ){
+    if(id_municipio != null && id_municipio != "" ){
 
             //LLamada a api custom
             var strUrl='dire_Colonia?filter[0][codigo_postal]='+cp+'&filter[0][id][$starts]='+id_municipio;
@@ -1019,7 +1031,7 @@
                             $('select.newColoniaTemp').append($("<option>").val(data.records[i].id).html(data.records[i].name));
                         }
 
-                    $(".loadingIconColonia").hide();
+                        $(".loadingIconColonia").hide();
 
                     }
                 },this)
@@ -1061,10 +1073,10 @@
                         }
                         
                         for (var i = 0; i < data.records.length; i++) {
-                                $(evt.currentTarget).parent().next('td').next('td').find('select.existingColoniaTemp').append($("<option>").val(data.records[i].id).html(data.records[i].name));
+                            $(evt.currentTarget).parent().next('td').next('td').find('select.existingColoniaTemp').append($("<option>").val(data.records[i].id).html(data.records[i].name));
                         }
 
-                    $(evt.currentTarget).parent().parent().parent().find(".loadingIconColoniaTemp").hide();
+                        $(evt.currentTarget).parent().parent().parent().find(".loadingIconColoniaTemp").hide();
                         
                     }
                 },this)
@@ -1074,11 +1086,85 @@
         }
     },
 
+    populateCiudadesByEstado:function(evt){
+
+        $('select.newCiudadTemp').empty();
+
+        var id_estado=$(evt.currentTarget).val();
+
+        if(id_estado != null && id_estado != "" ){
+
+            //Llamando a api para filtrar ciudades
+            var strUrl='dire_Ciudad?filter[0][id][$starts]='+id_estado+'&max_num=-1';
+
+            $(".loadingIconCiudad").show();
+            app.api.call('GET', app.api.buildURL(strUrl), null, {
+                success: _.bind(function (data) {
+                    if(data.records.length>0){
+
+                        $('select.newCiudadTemp').append($("<option>").val("1").html("Seleccionar Ciudad"));
+                        for (var i = 0; i < data.records.length; i++) {
+                            $('select.newCiudadTemp').append($("<option>").val(data.records[i].id).html(data.records[i].name));
+                        }
+
+                        $(".loadingIconCiudad").hide();
+
+                    }
+                },this)
+            });
+
+        }
+    },
+
+    populateCiudadesByEstadoExisting:function(evt,data){
+
+        //Borrar contenido del select en caso de que el evento change se haya disparado manualmente y no desde la función _buildOptionsForExistingDirecciones
+        if(data==undefined){
+            $(evt.currentTarget).parent().parent().parent().find('select.existingCiudadTemp').empty();
+        }
+
+        var id_estado=$(evt.currentTarget).val();
+        if(id_estado != null && id_estado != "" ){
+            //LLamada a api para filtrar ciudades
+            var strUrl='dire_Ciudad?filter[0][id][$starts]='+id_estado+'&max_num=-1';
+
+            $(evt.currentTarget).parent().parent().parent().find(".loadingIconCiudadTemp").show();
+            app.api.call('GET', app.api.buildURL(strUrl), null, {
+                success: _.bind(function (data) {
+                    if(data.records.length>0){
+
+                        //Antes de llenar colonias, se elimarán todas las opciones previamente llenadas, 
+                        // excepto la :selected
+                        var opciones=$(evt.currentTarget).parent().parent().parent().find('select.existingCiudadTemp').find('option');
+
+                        if(opciones.length>0){
+                            for(var index=0;index<opciones.length;index++){
+                                if(!opciones[index].selected){
+
+                                    opciones[index].remove();
+                                }
+                            }
+                        }
+                        
+                        for (var i = 0; i < data.records.length; i++) {
+                            $(evt.currentTarget).parent().parent().parent().find('select.existingCiudadTemp').append($("<option>").val(data.records[i].id).html(data.records[i].name));
+                        }
+
+                        $(evt.currentTarget).parent().parent().parent().find(".loadingIconCiudadTemp").hide();
+                        
+                    }
+                },this)
+            });
+            
+        }
+        
+    },
+
     /**
      * When data changes, re-render the field only if it is not on edit (see MAR-1617).
      * @inheritdoc
      */
-    bindDataChange: function () {
+     bindDataChange: function () {
         this.model.on('change:' + this.name, function () {
             if (this.action !== 'edit') {
                 this.render();
@@ -1091,7 +1177,7 @@
      * @inheritdoc
      * @private
      */
-    _render: function () {
+     _render: function () {
         var direccionsHtml = '';
         //var $select = $('#multi1');
         this._super("_render");
@@ -1104,11 +1190,11 @@
         });
 
         var data = [
-            { id: 0, text: 'enhancement' },
-            { id: 1, text: 'bug' },
-            { id: 2, text: 'duplicate' },
-            { id: 3, text: 'invalid' },
-            { id: 4, text: 'wontfix' }
+        { id: 0, text: 'enhancement' },
+        { id: 1, text: 'bug' },
+        { id: 2, text: 'duplicate' },
+        { id: 3, text: 'invalid' },
+        { id: 4, text: 'wontfix' }
         ];
 
         ///////
@@ -1176,7 +1262,7 @@
      * @param  {object} valueSelected, valores en campo multiselect
      * @return  {array}, valor(es) a establecer en campo indicador
      */
-    _getIndicador: function(idSelected, valuesSelected) {
+     _getIndicador: function(idSelected, valuesSelected) {
 
         //variable con resultado
         var result = null;
@@ -1240,10 +1326,10 @@
      * @returns {Object}
      * @private
      */
-    _buildDireccionFieldHtml: function (direccion) {
+     _buildDireccionFieldHtml: function (direccion) {
         var editDireccionFieldTemplate = app.template.getField('account_direcciones', 'edit-account-direcciones'),
-            direcciones = this.model.get('account_direcciones'),
-            index = _.indexOf(direcciones, direccion);
+        direcciones = this.model.get('account_direcciones'),
+        index = _.indexOf(direcciones, direccion);
 
         //get mapping arrays and keys
         var dir_tipo_list = app.lang.getAppListStrings('tipodedirecion_list');
@@ -1258,8 +1344,8 @@
         var postal_list = app.metadata.getPostalCodes();
         var colonia_list = app.metadata.getColonias();
         var dir_tipo_list_html = '',
-            tel_estatus_list_html = '',
-            pais_list_html = '<option value=""></option>';
+        tel_estatus_list_html = '',
+        pais_list_html = '<option value=""></option>';
         //dynamicly populate dropdown options based on language values
 
         var postal_htmlTemp=direccion.postal_code_label;
@@ -1496,9 +1582,9 @@
         this.element_direccion.find('.loadingIconMunicipioTemp').show();
         this.element_direccion.find('.loadingIconCiudadTemp').show();
         this.element_direccion.find('.loadingIconColoniaTemp').show();
-    
-            app.api.call('GET', app.api.buildURL(strUrl), null, {
-                success: _.bind(function (data) {
+
+        app.api.call('GET', app.api.buildURL(strUrl), null, {
+            success: _.bind(function (data) {
                     //self.cpEvt
 
                     if (data.paises.length == 0) {
@@ -1507,7 +1593,7 @@
 
                         //Añadiendo id de cp
                         //$('#existingPostalHidden').val(data.idCP);
-                       $('.control-group.direccion').eq(this.indice_ids).find('#existingPostalHidden').val(data.idCP);
+                        $('.control-group.direccion').eq(this.indice_ids).find('#existingPostalHidden').val(data.idCP);
 
 
 
@@ -1521,9 +1607,9 @@
                          $(evt.target).parent().parent().find('.existingIndicador').trigger('change');
                          * */
 
-                        var paises_options = '';
-                        for (var i = 0; i < list_paises.length; i++) {
-                            
+                         var paises_options = '';
+                         for (var i = 0; i < list_paises.length; i++) {
+
                             //Solo agregar valores cuando el elemento no exista ya en el elemento select
                             if(list_paises[i].idPais != $('.control-group.direccion').eq(this.indice_ids).find('select.existingPaisTemp').val()){
 
@@ -1533,9 +1619,9 @@
                         }
 
                         for (var i = 0; i < list_estados.length; i++) {
-                            
+
                             if(list_estados[i].idEstado != $('.control-group.direccion').eq(this.indice_ids).find('select.existingEstadoTemp').val()){
-    
+
                                 $('.control-group.direccion').eq(this.indice_ids).find('select.existingEstadoTemp').append($("<option>").val(list_estados[i].idEstado).html(list_estados[i].nameEstado));
                             }
                         }
@@ -1560,17 +1646,17 @@
 
                                // $('.control-group.direccion').eq(this.indice_ids).find('select.existingColoniaTemp').append($("<option>").val(list_colonias[i].idColonia).html(list_colonias[i].nameColonia));
 
-                            }
-                        }
+                           }
+                       }
 
-                        $('.control-group.direccion').eq(this.indice_ids).find('.loadingIconPaisTemp').hide();
-                        $('.control-group.direccion').eq(this.indice_ids).find('.loadingIconEdoTemp').hide();
-                        $('.control-group.direccion').eq(this.indice_ids).find('.loadingIconMunicipioTemp').hide();
-                        $('.control-group.direccion').eq(this.indice_ids).find('.loadingIconCiudadTemp').hide();
-                        $('.control-group.direccion').eq(this.indice_ids).find('.loadingIconColoniaTemp').hide();
+                       $('.control-group.direccion').eq(this.indice_ids).find('.loadingIconPaisTemp').hide();
+                       $('.control-group.direccion').eq(this.indice_ids).find('.loadingIconEdoTemp').hide();
+                       $('.control-group.direccion').eq(this.indice_ids).find('.loadingIconMunicipioTemp').hide();
+                       $('.control-group.direccion').eq(this.indice_ids).find('.loadingIconCiudadTemp').hide();
+                       $('.control-group.direccion').eq(this.indice_ids).find('.loadingIconColoniaTemp').hide();
 
-                        var ciudades_list = app.metadata.getCities();
-
+                       /*********
+                       var ciudades_list = app.metadata.getCities();
                         //Recupera lista de Estados
                         
                         var estadoOpciones = $('.control-group.direccion').eq(this.indice_ids).find('select.existingEstadoTemp option');
@@ -1583,8 +1669,9 @@
                                 }
                             }
                         }
+                        **********/
+                        $('.control-group.direccion').eq(this.indice_ids).find('select.existingEstadoTemp').trigger("change",[{bandera_select:'1'}]);
                         
-
                         //Lanzando eventos change de todos los campos actualizados
 
                         //$(self.cpEvt.target).parent().parent().find('#existingPostalHidden').trigger("change");
@@ -1596,21 +1683,21 @@
                     }
                     this.indice_ids+=1;
                 },this)
-            });
+});
 
-    },
+},
 
     /**
      * Event handler to add a new direccion field.
      * @param {Event} evt
      */
-    addNewDireccion: function (evt) {
+     addNewDireccion: function (evt) {
         if (!evt) return;
 
         var calle = this.$(evt.currentTarget).val() || this.$('.newCalle').val(),
-            currentValue,
-            direccionFieldHtml,
-            $newDireccionField;
+        currentValue,
+        direccionFieldHtml,
+        $newDireccionField;
 
         //Validaciones dentro del control de direcciones
         //TODO: Convertir los mensajes de error a etiquetas dentro del modulo para poder habilitar cambios via studio.
@@ -1652,7 +1739,7 @@
         }
 
         //Valida extensión de código postal y valida únicamente números
-         var pattern = /^\d+$/;
+        var pattern = /^\d+$/;
 
         if ($('#postalInputTemp').val().length !=5 || !pattern.test($('#postalInputTemp').val())) {
 
@@ -1662,6 +1749,16 @@
 
         } else {
             $('#postalInputTemp').css('border-color', '');
+
+        }
+
+        //Valida Ciudad
+        if ($('select.newCiudadTemp').val() == '1') {
+            errorMsg = 'Favor de seleccionar una ciudad';
+            dirError = true; dirErrorCounter++;
+            $('select.newCiudadTemp').css('border-color', 'red');
+        } else {
+            $('select.newCiudadTemp').css('border-color', '');
 
         }
 
@@ -1761,11 +1858,11 @@
 
         if (dirError) {
             if(dirErrorCounter > 1) errorMsg = 'Hay campos vac\u00EDos en la direcci\u00F3n.'
-            app.alert.show('list_delete_direccion_info', {
-                level: 'error',
-                autoClose: true,
-                messages: errorMsg
-            });
+                app.alert.show('list_delete_direccion_info', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: errorMsg
+                });
             return;
         }
 
@@ -1858,8 +1955,8 @@
 
             // append the new field before the new direccion input
             $newDireccionField = this._getNewDireccionField()
-                .closest('.direccion')
-                .before(direccionFieldHtml);
+            .closest('.direccion')
+            .before(direccionFieldHtml);
 
             $('select.existingIndicador').hide();
             $('.rowPem').hide();
@@ -1890,8 +1987,8 @@
             if (this.def.required && this._shouldRenderRequiredPlaceholder()) {
                 // we need to remove the required place holder now
                 var label = app.lang.get('LBL_REQUIRED_FIELD', this.module),
-                    el = this.$(this.fieldTag).last(),
-                    placeholder = el.prop('placeholder').replace('(' + label + ') ', '');
+                el = this.$(this.fieldTag).last(),
+                placeholder = el.prop('placeholder').replace('(' + label + ') ', '');
 
                 el.prop('placeholder', placeholder.trim()).removeClass('required');
             }
@@ -1950,17 +2047,17 @@
      * Event handler to update a direccion.
      * @param {Event} evt
      */
-    updateExistingDireccion: function (evt) {
+     updateExistingDireccion: function (evt) {
         if (!evt) return;
         //get field that changed
         var $input = this.$(evt.currentTarget);
         //get field type
         var class_name = $input[0].className,
-            field_name = $($input).attr('data-field');
+        field_name = $($input).attr('data-field');
         var $inputs = this.$('.' + class_name),
-            index = $inputs.index($input),
-            newDireccion = $input.val(),
-            primaryRemoved;
+        index = $inputs.index($input),
+        newDireccion = $input.val(),
+        primaryRemoved;
 
         if (newDireccion === '') {
             // remove direccion if direccion is empty
@@ -1994,9 +2091,9 @@
              .addClass('active');
              }
              */
-            this.counterEmptyFields++;
-        }
-        else {
+             this.counterEmptyFields++;
+         }
+         else {
             this._updateExistingDireccionInModel(index, newDireccion, field_name);
         }
     },
@@ -2005,14 +2102,14 @@
      * Event handler to remove an direccion direccion.
      * @param {Event} evt
      */
-    removeExistingDireccion: function (evt) {
+     removeExistingDireccion: function (evt) {
         if (!evt) return;
 
         var $deleteButtons = this.$('.removeDireccion'),
-            $deleteButton = this.$(evt.currentTarget),
-            index = $deleteButtons.index($deleteButton),
-            primaryRemoved,
-            $removeThisField;
+        $deleteButton = this.$(evt.currentTarget),
+        index = $deleteButtons.index($deleteButton),
+        primaryRemoved,
+        $removeThisField;
 
         primaryRemoved = this._removeExistingDireccionInModel(index);
 
@@ -2023,8 +2120,8 @@
         if (primaryRemoved) {
             // If primary has been removed, the first direccion direccion is the primary direccion.
             this.$('[data-direccionproperty=principal]')
-                .first()
-                .addClass('active');
+            .first()
+            .addClass('active');
         }
 
         // if this field is required, and there is nothing in the model, then we should decorate it as required
@@ -2037,13 +2134,13 @@
      * Event handler to toggle direccion direccion properties.
      * @param {Event} evt
      */
-    toggleExistingDireccionProperty: function (evt) {
+     toggleExistingDireccionProperty: function (evt) {
         if (!evt) return;
 
         var $property = this.$(evt.currentTarget),
-            property = $property.data('direccionproperty'),
-            $properties = this.$('[data-direccionproperty=' + property + ']'),
-            index = $properties.index($property);
+        property = $property.data('direccionproperty'),
+        $properties = this.$('[data-direccionproperty=' + property + ']'),
+        index = $properties.index($property);
 
         if (property === 'principal') {
             $properties.removeClass('active');
@@ -2061,7 +2158,7 @@
      */
 
 
-    _addNewDireccionToModel: function (calle) {
+     _addNewDireccionToModel: function (calle) {
         //var existingDirecciones = this.model.get('account_direcciones');
         var existingDirecciones = app.utils.deepCopy(this.model.get('account_direcciones'));
         var country_model = app.metadata.getCountry($('.newPaisDir').val());
@@ -2095,9 +2192,9 @@
        // var success=false;
        // if(!this.direccionExistente(existingDirecciones,calle))
        // {
-            existingDirecciones.push({
-                tipodedireccion: $('.newTipodedireccion').val(),
-                tipo_label: dir_tipo_list[$('.newTipodedireccion').val()],
+        existingDirecciones.push({
+            tipodedireccion: $('.newTipodedireccion').val(),
+            tipo_label: dir_tipo_list[$('.newTipodedireccion').val()],
                 //pais: $('.newPaisDir').val(),
 
                 pais: country_idTemp,
@@ -2152,10 +2249,10 @@
                 inactivo: false
             });
 
-            console.log("existingDirecciones");
-            console.log(existingDirecciones);
-            this.model.set(this.name, existingDirecciones);
-            success = true;
+        console.log("existingDirecciones");
+        console.log(existingDirecciones);
+        this.model.set(this.name, existingDirecciones);
+        success = true;
 
         //}
 
@@ -2172,7 +2269,7 @@
         var postal_modelTemp1 = app.metadata.getPostalCode($('#postalHidden').val());
 
         var strDireccion = Calle1 + $('.newNumInt').val() + $('.newNumExt').val() + $('.newColoniaTemp option:selected').text() + $('.newMunicipioTemp option:selected').text()
-            + $('.newEstadoTemp option:selected').text() + $('.newCiudadTemp option:selected').text() + postal_modelTemp1.name;
+        + $('.newEstadoTemp option:selected').text() + $('.newCiudadTemp option:selected').text() + postal_modelTemp1.name;
 
 
   /*      if (objDireccion != "" && objDireccion != undefined) {
@@ -2194,13 +2291,13 @@
         var strDireccionTemp = "";
         for (var i = 0; i < objDirecciones.length-1; i++) {
             strDireccionTemp = objDirecciones.eq(i).find('.existingCalle').val() +
-                objDirecciones.eq(i).find('.existingNumExt').val() +
-                objDirecciones.eq(i).find('.existingNumInt').val() +
-                objDirecciones.eq(i).find('select.existingColoniaTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingMunicipioTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingEstadoTemp option:selected').text() +
-                objDirecciones.eq(i).find('select.existingCiudadTemp option:selected').text() +
-                objDirecciones.eq(i).find('#existingPostalInput').val();
+            objDirecciones.eq(i).find('.existingNumExt').val() +
+            objDirecciones.eq(i).find('.existingNumInt').val() +
+            objDirecciones.eq(i).find('select.existingColoniaTemp option:selected').text() +
+            objDirecciones.eq(i).find('select.existingMunicipioTemp option:selected').text() +
+            objDirecciones.eq(i).find('select.existingEstadoTemp option:selected').text() +
+            objDirecciones.eq(i).find('select.existingCiudadTemp option:selected').text() +
+            objDirecciones.eq(i).find('#existingPostalInput').val();
 
             concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
 
@@ -2208,9 +2305,9 @@
 
         for (var j = 0; j < concatDirecciones.length; j++) {
 
-                if (concatDirecciones[j] ==strDireccion.replace(/\s/g, "").toUpperCase() ) {
-                    direccValida = true;
-                }
+            if (concatDirecciones[j] ==strDireccion.replace(/\s/g, "").toUpperCase() ) {
+                direccValida = true;
+            }
 
 
         }
@@ -2224,7 +2321,7 @@
      * @param {String} newdireccion
      * @private
      */
-    _updateExistingDireccionInModel: function (index, newDireccion, field_name) {
+     _updateExistingDireccionInModel: function (index, newDireccion, field_name) {
         var existingDirecciones = app.utils.deepCopy(this.model.get('account_direcciones'));
 
         if(field_name=='postal_temp'){
@@ -2307,7 +2404,7 @@
      * @param {String} property
      * @private
      */
-    _toggleExistingDireccionPropertyInModel: function (index, property) {
+     _toggleExistingDireccionPropertyInModel: function (index, property) {
         var existingDirecciones = app.utils.deepCopy(this.model.get(this.name));
 
         //If property is principal, we want to make sure one and only one primary direccion is set
@@ -2338,9 +2435,9 @@
      * @returns {Boolean} Returns true if the removed direccion was the primary direccion.
      * @private
      */
-    _removeExistingDireccionInModel: function (index) {
+     _removeExistingDireccionInModel: function (index) {
         var existingDirecciones = app.utils.deepCopy(this.model.get(this.name)),
-            primaryDireccionRemoved = !!existingDirecciones[index]['principal'];
+        primaryDireccionRemoved = !!existingDirecciones[index]['principal'];
 
         //Reject this index from existing direcciones
         existingDirecciones = _.reject(existingDirecciones, function (direccionInfo, i) {
@@ -2364,9 +2461,9 @@
      * Clear out the new direccion direccion field.
      * @private
      */
-    _clearNewDireccionField: function () {
+     _clearNewDireccionField: function () {
         this._getNewDireccionField()
-            .val('');
+        .val('');
         $('.newTipodedireccion').val([]);
         $('.newPaisDir').val('');
         $('.newEstado').val('');
@@ -2401,7 +2498,7 @@
      * @returns {jQuery}
      * @private
      */
-    _getNewDireccionField: function () {
+     _getNewDireccionField: function () {
         return this.$('.newCalle');
     },
 
@@ -2410,7 +2507,7 @@
      * @param {Object} errors
      * @override BaseField
      */
-    decorateError: function (errors) {
+     decorateError: function (errors) {
         var direccions;
 
         this.$el.closest('.record-cell').addClass("error");
@@ -2425,7 +2522,7 @@
                 // For each of our `sub-direccion` fields
                 _.each(direccions, function (e) {
                     var $direccion = this.$(e),
-                        direccion = $direccion.val();
+                    direccion = $direccion.val();
 
                     var isError = _.find(errorContext, function (direccionError) {
                         return direccionError === direccion;
@@ -2458,7 +2555,7 @@
      * @param {Backbone.Model} model model this field is bound to.
      * @param {String} fieldName field name.
      */
-    bindDomChange: function () {
+     bindDomChange: function () {
         if (this.tplName === 'list-edit') {
             this._super("bindDomChange");
         }
@@ -2468,7 +2565,7 @@
      * To display representation
      * @param {String|Array} value single direccion direccion or set of direccion direcciones
      */
-    format: function (value) {
+     format: function (value) {
         value = app.utils.deepCopy(value);
         if (_.isArray(value) && value.length > 0) {
             // got an array of direccion direcciones
@@ -2496,7 +2593,7 @@
      * @param {Object} value
      * @returns {Object}
      */
-    addFlagLabels: function (value) {
+     addFlagLabels: function (value) {
         var flagStr = "", flagArray;
         _.each(value, function (direccionObj) {
             flagStr = "";
@@ -2518,7 +2615,7 @@
      * To API representation
      * @param {String|Array} value single telefono direccion or set of telefono direcciones
      */
-    unformat: function (value) {
+     unformat: function (value) {
         if (this.view.action === 'list') {
             var direcciones = app.utils.deepCopy(this.model.get(this.name));
 
@@ -2552,7 +2649,7 @@
     /**
      * Apply focus on the new direccion input field.
      */
-    focus: function () {
+     focus: function () {
         if (this.action !== 'disabled') {
             this._getNewDireccionField().focus();
         }
@@ -2565,13 +2662,13 @@
      * @param $link
      * @private
      */
-    _retrieveDireccionOptionsFromLink: function ($link) {
+     _retrieveDireccionOptionsFromLink: function ($link) {
         return {
             to_direcciones: [
-                {
-                    direccion: $link.data('direccion-to'),
-                    bean: this.direccionOptions.related
-                }
+            {
+                direccion: $link.data('direccion-to'),
+                bean: this.direccionOptions.related
+            }
             ]
         };
     }
