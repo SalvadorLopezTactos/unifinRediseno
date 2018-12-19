@@ -9,7 +9,7 @@ $id = $app_list_strings['tct_persona_generica_list']['accid'];
 //Dependencia Edición
 $dependencies['Accounts']['readOnly'] = array
 (
-            'hooks' => array("all"),
+            'hooks' => array("edit"),
             'trigger' => 'true',
             'triggerFields' => array('id'),
             'onload' => true,
@@ -32,9 +32,9 @@ $dependencies['Accounts']['readOnly'] = array
 //Dependencia CAC - Nivel de satisfacción Leasing
 $dependencies['Accounts']['nivel_satisfaccion_c'] = array
 (
-            'hooks' => array("all"),
+            'hooks' => array("edit"),
             'trigger' => 'true',
-            'triggerFields' => array('cac'),
+            'triggerFields' => array('cac','id'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -51,9 +51,9 @@ $dependencies['Accounts']['nivel_satisfaccion_c'] = array
 
 $dependencies['Accounts']['fecha_leasing_c'] = array
 (
-            'hooks' => array("all"),
+            'hooks' => array("edit"),
             'trigger' => 'true',
-            'triggerFields' => array('cac'),
+            'triggerFields' => array('cac','id'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -70,9 +70,9 @@ $dependencies['Accounts']['fecha_leasing_c'] = array
 
 $dependencies['Accounts']['comenta_leasing_c'] = array
 (
-            'hooks' => array("all"),
+            'hooks' => array("edit"),
             'trigger' => 'true',
-            'triggerFields' => array('cac'),
+            'triggerFields' => array('cac','id'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -90,9 +90,9 @@ $dependencies['Accounts']['comenta_leasing_c'] = array
 //Dependencia CAC - Nivel de satisfacción Factoraje
 $dependencies['Accounts']['nivel_satisfaccion_factoring_c'] = array
 (
-            'hooks' => array("all"),
+            'hooks' => array("edit"),
             'trigger' => 'true',
-            'triggerFields' => array('cac'),
+            'triggerFields' => array('cac','id'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -109,9 +109,9 @@ $dependencies['Accounts']['nivel_satisfaccion_factoring_c'] = array
 
 $dependencies['Accounts']['fecha_factoraje_c'] = array
 (
-            'hooks' => array("all"),
+            'hooks' => array("edit"),
             'trigger' => 'true',
-            'triggerFields' => array('cac'),
+            'triggerFields' => array('cac','id'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -128,9 +128,9 @@ $dependencies['Accounts']['fecha_factoraje_c'] = array
 
 $dependencies['Accounts']['comenta_factoraje_c'] = array
 (
-            'hooks' => array("all"),
+            'hooks' => array("edit"),
             'trigger' => 'true',
-            'triggerFields' => array('cac'),
+            'triggerFields' => array('cac','id'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -148,9 +148,9 @@ $dependencies['Accounts']['comenta_factoraje_c'] = array
 //Dependencia CAC - Nivel de satisfacción CA
 $dependencies['Accounts']['nivel_satisfaccion_ca_c'] = array
 (
-            'hooks' => array("all"),
+            'hooks' => array("edit"),
             'trigger' => 'true',
-            'triggerFields' => array('cac'),
+            'triggerFields' => array('cac','id'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -167,9 +167,9 @@ $dependencies['Accounts']['nivel_satisfaccion_ca_c'] = array
 
 $dependencies['Accounts']['fecha_ca_c'] = array
 (
-            'hooks' => array("all"),
+            'hooks' => array("edit"),
             'trigger' => 'true',
-            'triggerFields' => array('cac'),
+            'triggerFields' => array('cac','id'),
             'onload' => true,
             'actions' => array(
                 array(
@@ -186,9 +186,9 @@ $dependencies['Accounts']['fecha_ca_c'] = array
 
 $dependencies['Accounts']['comenta_ca_c'] = array
 (
-            'hooks' => array("all"),
+            'hooks' => array("edit"),
             'trigger' => 'true',
-            'triggerFields' => array('cac'),
+            'triggerFields' => array('cac','id'),
             'onload' => true,
             'actions' => array(
                 array(
