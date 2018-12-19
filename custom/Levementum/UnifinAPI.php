@@ -936,7 +936,7 @@ SQL;
                         "UsuarioDominio" => $current_user->user_name,
                         "GuidRelacion" => $object->id,
                         "ValoresAccionista" => $ContieneAccionista ? array(
-                            "_rcacParticipacion" => $object->porcentaje_participacion_c,
+                            "_rcacParticipacion" => ($object->porcentaje_participacion_c != "") ? $object->porcentaje_participacion_c : "0",
                             "_rcacMiembro" => $object->miembrodecomite ? "S" : "N",
                             "_rcacMontoAccionista" => $object->montodeparticipacion
                         ) : null
