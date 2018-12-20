@@ -908,9 +908,9 @@
 
 
         if(this.multiSearchOr($input.closest("tr").find("td").eq(0).html(),["CELULAR"])=='1'){
-             issabel='/custom/Levementum/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
+             issabel='custom/Levementum/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
         }else {
-            issabel = '/custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
+            issabel = 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
         }
         _.extend(this, issabel);
 
