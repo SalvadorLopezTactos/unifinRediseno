@@ -908,9 +908,9 @@
 
 
         if(this.multiSearchOr($input.closest("tr").find("td").eq(0).html(),["CELULAR"])=='1'){
-             issabel=App.config.issabel+'/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
-        }else{
-             issabel=App.config.issabel+'/call_unifin.php?numero='+tel_client+'&userexten='+tel_usr;
+             issabel=App.config.site_url+'custom/Levementum/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
+        }else {
+            issabel = App.config.site_url + 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
         }
         _.extend(this, issabel);
 
@@ -922,7 +922,7 @@
                     messages: '¿Realmente quieres realizar la llamada?',
                     autoClose: false,
                     onConfirm: function(){
-                        //context.createcall(context.resultCallback);
+                        context.createcall(context.resultCallback);
                     },
                 });
             }else{
@@ -969,28 +969,6 @@
             cache:false,
             type: "get",
             url: issabel,
-            beforeSend:function(){
-              app.alert.show('message-to', {
-                  level: 'info',
-                  messages: 'Llamada en curso.....',
-                  autoClose: true
-              });
-            },
-            success:function() {
-                app.alert.show('message-call-start', {
-                    level: 'info',
-                    messages: 'Llamada iniciada.....',
-                    autoClose: true
-                });
-            },
-            complete:function(response) {
-              app.alert.show('message-call-start', {
-                  level: 'info',
-                  messages: 'Llamada contestada.....',
-                  autoClose: true
-              });
-              console.log(response);
-            },
         });
 
     },
