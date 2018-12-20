@@ -45,7 +45,7 @@
                     $date_end = $dateend->asDb();
 
                     $query3 = "update calls_cstm set tct_call_issabel_c=0 where id_c='{$id}'";
-                    $query4 = "update calls set description='El resultado de la llamada fue: {$row['disposition']}',date_start='{$date_start}', date_end='{$date_end}' where id='{$id}'";
+                    $query4 = "update calls set status='Held', description='El resultado de la llamada fue: {$row['disposition']}',date_start='{$date_start}', date_end='{$date_end}' where id='{$id}'";
                     $GLOBALS['db']->query($query3);
                     $GLOBALS['db']->query($query4);
 
