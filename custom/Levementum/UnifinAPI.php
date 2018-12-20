@@ -823,7 +823,7 @@ $query .= " ORDER BY email_addr_bean_rel.date_created";
                 $host = "http://" . $GLOBALS['unifin_url'] . "/Uni2WsClnt/WsRest/Uni2ClntService.svc/Uni2/CreaRelacion";
                 $host1 = "http://" . $GLOBALS['unifin_url'] . "/Uni2WsUtilerias/WsRest/Uni2UtlServices.svc/Uni2/consultaFolio?sTabla=ctRelacionesCliente";
 
-                $listTipoRelacion = split(",", $object->relaciones_activas);
+                $listTipoRelacion = explode(",", $object->relaciones_activas);
                 $GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " : Lista de relaciones " . $listTipoRelacion);
                 $IntValue = new DropdownValuesHelper();
 
@@ -936,7 +936,7 @@ SQL;
                         "UsuarioDominio" => $current_user->user_name,
                         "GuidRelacion" => $object->id,
                         "ValoresAccionista" => $ContieneAccionista ? array(
-                            "_rcacParticipacion" => $object->porcentaje_participacion_c,
+                            "_rcacParticipacion" => ($object->porcentaje_participacion_c != "") ? $object->porcentaje_participacion_c : "0",
                             "_rcacMiembro" => $object->miembrodecomite ? "S" : "N",
                             "_rcacMontoAccionista" => $object->montodeparticipacion
                         ) : null
@@ -2029,10 +2029,10 @@ SQL;
                 foreach($account->rel_relaciones_accounts_1->getBeans() as $relacion) {
                     if($relacion->sincronizado_unics_c!= 1) {
                         $GLOBALS['log']->fatal('Valida relaciones - Envía relación: '.$relacion->id);
-                        $rel = BeanFactory::getBean('Rel_Relaciones', $relacion->id);                    
+                        $rel = BeanFactory::getBean('Rel_Relaciones', $relacion->id);
                         $rel->save();
                     }
-                }   
+                }
             } catch (Exception $e) {
                 $GLOBALS['log']->fatal('Valida relaciones - Error:');
                 $GLOBALS['log']->fatal($e);
