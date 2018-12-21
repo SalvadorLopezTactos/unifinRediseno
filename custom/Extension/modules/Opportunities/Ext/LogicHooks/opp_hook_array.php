@@ -40,7 +40,7 @@
 );
 
 $hook_array['before_save'][] = Array(
-    5,
+    6,
     'Envia los datos de ratifiacion e incremento',
     'custom/modules/Opportunities/opp_logic_hooks.php',
     'OpportunityLogic', // name of the class
