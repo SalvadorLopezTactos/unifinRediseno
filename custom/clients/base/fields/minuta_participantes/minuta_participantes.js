@@ -312,9 +312,9 @@
         var telefonoTam = $('.newCampo5P').val().length;
         var ValTel = $('.newCampo5P').val();
         var banderTelefono = false;
-        var expreg = /^[0-9]{8,10}$/;
+        var expreg = /^[0-9]{8,13}$/;
 
-        if (telefonoTam >= 8 && telefonoTam <= 10) {
+        if (telefonoTam >= 8 && telefonoTam <= 13) {
 
             if (expreg.test(this.$('.newCampo5P').val())) {
 
