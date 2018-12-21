@@ -55,6 +55,9 @@ class LlamadasAPI extends SugarApi
 
         $bean_call->tct_call_issabel_c=1;
 
+        global $current_user;
+        $bean_call->assigned_user_id = $current_user->id;
+
         $bean_call->save();
 
         $GLOBALS['log']->fatal('Bean de llamadas guardado');//----------------------
