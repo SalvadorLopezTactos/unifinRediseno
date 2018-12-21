@@ -1,5 +1,5 @@
 <?php
-
+/*
 $hook_array['before_save'][] = Array(
     4,
     'User Private Team',
@@ -7,6 +7,8 @@ $hook_array['before_save'][] = Array(
     'DefaultTeam',
     'new_user_created'
 );
+
+*/
 /*
 $hook_array['after_save'][] = Array(
     1,
