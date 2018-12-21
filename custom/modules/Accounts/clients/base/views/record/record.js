@@ -2461,7 +2461,7 @@
     },
 
     validatelefonos: function (fields, errors, callback) {
-        var expreg =/^[0-9]{8,10}$/;
+        var expreg =/^[0-9]{8,13}$/;
         var cont=0;
         var phones=this.model.get('account_telefonos');
 
