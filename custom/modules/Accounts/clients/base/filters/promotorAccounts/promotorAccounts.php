@@ -52,7 +52,7 @@ if (in_array($puestoUsuario, $filtroPromotor)) {
     $value = str_replace("^","",$current_user->equipos_c);
     $GLOBALS['log']->fatal(print_r($value,true));
 
-    $value=split(',',$value);
+    $value = explode(',',$value);
 
 } elseif (in_array($puestoUsuario, $filtroSin)) {
     $field = "user_id_c";
