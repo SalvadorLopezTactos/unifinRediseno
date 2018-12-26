@@ -258,7 +258,7 @@
         if (!evt) return;
         /*@Jesus Carrillo */
 
-        var expreg =/^[0-9]{8,10}$/;
+        var expreg =/^[0-9]{8,13}$/;
         var phones=this.model.get('account_telefonos');
 
         if(this.$('.newTipotelefono').val()!='' && this.$('.newPais').val()!='' && expreg.test(this.$('.newTelefono').val()) &&
@@ -462,7 +462,7 @@
         var $input = this.$(evt.currentTarget);
         var class_name = $input[0].className,
             field_name = $($input).attr('data-field');
-        var expreg =/^[0-9]{8,10}$/;
+        var expreg =/^[0-9]{8,13}$/;
         var phones=this.model.get('account_telefonos');
         //if ($.isNumeric($($input).val()) === false && $($input).val() != '') {
         if((expreg.test($($input).val()))==false && $($input).val().trim().length!=0){
@@ -907,11 +907,13 @@
         //var urlSugar="http://{$_SERVER['SERVER_NAME']}/unifin"; //////Activar esta variable
 
 
-        if(this.multiSearchOr($input.closest("tr").find("td").eq(0).html(),["CELULAR"])=='1'){
-             issabel=App.config.issabel+'/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
-        }else{
-             issabel=App.config.issabel+'/call_unifin.php?numero='+tel_client+'&userexten='+tel_usr;
-        }
+        /*if(this.multiSearchOr($input.closest("tr").find("td").eq(0).html(),["CELULAR"])=='1'){
+             issabel='custom/Levementum/call_unifin.php?numero=044'+tel_client+'&userexten='+tel_usr;
+        }else {
+            issabel = 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
+        }*/
+        issabel = 'custom/Levementum/call_unifin.php?numero=' + tel_client + '&userexten=' + tel_usr;
+
         _.extend(this, issabel);
 
         if(tel_usr!='' || tel_usr!=null){
@@ -922,7 +924,7 @@
                     messages: '¿Realmente quieres realizar la llamada?',
                     autoClose: false,
                     onConfirm: function(){
-                        //context.createcall(context.resultCallback);
+                        context.createcall(context.resultCallback);
                     },
                 });
             }else{
@@ -969,28 +971,6 @@
             cache:false,
             type: "get",
             url: issabel,
-            beforeSend:function(){
-              app.alert.show('message-to', {
-                  level: 'info',
-                  messages: 'Llamada en curso.....',
-                  autoClose: true
-              });
-            },
-            success:function() {
-                app.alert.show('message-call-start', {
-                    level: 'info',
-                    messages: 'Llamada iniciada.....',
-                    autoClose: true
-                });
-            },
-            complete:function(response) {
-              app.alert.show('message-call-start', {
-                  level: 'info',
-                  messages: 'Llamada contestada.....',
-                  autoClose: true
-              });
-              console.log(response);
-            },
         });
 
     },
