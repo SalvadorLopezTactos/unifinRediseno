@@ -26,24 +26,27 @@
     loadData: function () {
         selfcomp=this;
 
-        app.api.call('GET', app.api.buildURL('minut_Minutas/'+this.model.get('id')+'/link/minut_minutas_minut_compromisos'), null, {
-            success: function (data) {
-                for(var i=0;i<data.records.length;i++){
-                    if(data.records[i].tct_fecha_compromiso_c!='') {
-                        var temp = data.records[i].tct_fecha_compromiso_c;
-                        var temp2 = temp.split("T");
-                        data.records[i].tct_fecha_compromiso_c = temp2[0];
+        if(this.model.get('id') != undefined || this.model.get('id') !="") {
+
+            app.api.call('GET', app.api.buildURL('minut_Minutas/' + this.model.get('id') + '/link/minut_minutas_minut_compromisos'), null, {
+                success: function (data) {
+                    for (var i = 0; i < data.records.length; i++) {
+                        if (data.records[i].tct_fecha_compromiso_c != '') {
+                            var temp = data.records[i].tct_fecha_compromiso_c;
+                            var temp2 = temp.split("T");
+                            data.records[i].tct_fecha_compromiso_c = temp2[0];
+                        }
                     }
+                    selfcomp.myData2 = $.parseJSON('{"myData2":{"records":' + JSON.stringify(data.records) + '}}');
+                    _.extend(selfcomp, selfcomp.myData2);
+                    selfcomp.render();
+                    console.log("myData2 seteado");
+                },
+                error: function (e) {
+                    console.log(e);
                 }
-                selfcomp.myData2 = $.parseJSON( '{"myData2":{"records":'+JSON.stringify(data.records)+'}}');
-                _.extend(selfcomp, selfcomp.myData2);
-                selfcomp.render();
-                console.log("myData2 seteado");
-            },
-            error: function (e) {
-                console.log(e);
-            }
-        });
+            });
+        }
 
         var today = new Date();
         var dd = today.getDate();
