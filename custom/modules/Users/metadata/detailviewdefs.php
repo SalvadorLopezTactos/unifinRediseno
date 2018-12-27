@@ -32,6 +32,11 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_DETAILVIEW_PANEL1' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
       ),
     ),
     'panels' => 
@@ -110,22 +115,14 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_SUCURSAL',
           ),
-        ),
-        8 => 
-        array (
-          0 => 
+          1 => 
           array (
             'name' => 'tipodeproducto_c',
             'studio' => 'visible',
             'label' => 'LBL_TIPODEPRODUCTO',
           ),
-          1 => 
-          array (
-            'name' => 'optout_c',
-            'label' => 'LBL_OPTOUT',
-          ),
         ),
-        9 => 
+        8 => 
         array (
           0 => 
           array (
@@ -139,7 +136,18 @@ array (
             'customCode' => '{$USER_TYPE_READONLY}',
           ),
         ),
-        10 => 
+        9 => 
+        array (
+          0 => 'reports_to_name',
+          1 => 
+          array (
+            'name' => 'uni_citas_users_1_name',
+          ),
+        ),
+      ),
+      'lbl_detailview_panel1' => 
+      array (
+        0 => 
         array (
           0 => 
           array (
@@ -152,22 +160,27 @@ array (
             'label' => 'LBL_TCT_ALTA_CLIENTES_CHK',
           ),
         ),
-        11 => 
+        1 => 
         array (
           0 => 
           array (
             'name' => 'tct_alta_cd_chk_c',
             'label' => 'LBL_TCT_ALTA_CD_CHK_C',
           ),
-          1 => '',
-        ),
-        12 => 
-        array (
-          0 => 'reports_to_name',
           1 => 
           array (
-            'name' => 'uni_citas_users_1_name',
+            'name' => 'cac_c',
+            'label' => 'LBL_CAC',
           ),
+        ),
+        2 => 
+        array (
+          0 => 
+          array (
+            'name' => 'optout_c',
+            'label' => 'LBL_OPTOUT',
+          ),
+          1 => '',
         ),
       ),
     ),
