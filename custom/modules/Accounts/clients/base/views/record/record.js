@@ -2539,7 +2539,13 @@
             if(!expreg.test($(this).val())){
                 cont++;
                 $(this).css('border-color', 'red');
-
+                app.alert.show('error_telefono', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'Tel\u00E9fono Inv\u00E1lido. Debe contener 8 o m\u00E1s d\u00EDgitos.'
+                });
+                errors['soshort'] = errors['Tel\u00E9fono Inv\u00E1lido. Debe contener 8 o m\u00E1s d\u00EDgitos.'] || {};
+                errors['soshort'].required = true;
             }else{
                 //funcion
                 var conta=0;
@@ -2557,11 +2563,12 @@
                     errors['rep'] = errors['Tel\u00E9fono Invalido,un mismo n\u00FA ha sido repetido varias veces'] || {};
                     errors['rep'].required = true;
                     $(this).css('border-color', 'red');
-                } else {
+                }/* else {
                     $(this).css('border-color', '');
-                }
+                } */
             }
         });
+        var cont=0;
         $('div[data-name=account_telefonos]').find('.existingPais').each(function () {
             if($(this).val()==''){
                 cont++;

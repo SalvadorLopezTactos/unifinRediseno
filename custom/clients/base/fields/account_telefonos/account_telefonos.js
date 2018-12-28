@@ -355,11 +355,11 @@
                 $('.newTelefono').css('border-color', 'red');
             }
         }else {
-            app.alert.show('error_modultel', {
+            /*app.alert.show('error_modultel', {
                 level: 'error',
                 autoClose: true,
                 messages: 'Favor de llenar o corregir los campos se\u00F1alados.'
-            });
+            });*/
             
 
             if(this.$('.newTipotelefono').val()=='' || this.$('.newTipotelefono').val()==null ){
@@ -495,24 +495,26 @@
                 }
             }
                 var cont=0;
+                if($input.val().trim().length>0) {
                     for (var i =0; i < $input.val().length; i++) {
                         if($input.val().charAt(0)==$input.val().charAt(i)){
                             cont++;
                         }
                     }
-                if(cont==$input.val().length){
-                    //if($input[0].className=='existingTelephono'){
+                    if (cont == $input.val().length) {
+                        //if($input[0].className=='existingTelephono'){
                         app.alert.show('numero repetido', {
-                        level: 'error',
-                        autoClose: true,
-                        messages: 'Tel\u00E9fono Inv\u00E1lido caracter repetido'
+                            level: 'error',
+                            autoClose: true,
+                            messages: 'Tel\u00E9fono Inv\u00E1lido caracter repetido'
                         });
-                    //$($input).focus();
-                    $($input).css('border-color', 'red');
-                    //}   
-                }else {
+                        //$($input).focus();
+                        $($input).css('border-color', 'red');
+                        //}
+                    }else {
                         $($input).css('border-color', '');
-                    }   
+                    }
+                }
             }
         },
 

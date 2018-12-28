@@ -43,7 +43,7 @@ SQL;
         // strip non-numeric characters
         $phone_sanitized = preg_replace('/[^0-9+]/', '', $bean->telefono);
         // truncate to 10 digits
-        $phone_sanitized = substr($phone_sanitized, 0, 10);
+        $phone_sanitized = substr($phone_sanitized, 0, 13);
 
         $bean->telefono = $phone_sanitized;
     }
