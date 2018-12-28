@@ -45,13 +45,18 @@ class Minuta_Hooks
 		                $bean_compromiso->assigned_user_id=$bean->assigned_user_id;
                         $bean_compromiso->description=" Esta tarea ha sido asignada al contacto: ".$compromiso['responsable']."\n Con el compromiso: ".$compromiso['compromiso'];
 		                $bean_tarea->assigned_user_id=$bean->assigned_user_id;
-                        $bean_tarea->description=" Esta tarea ha sido asignada al contacto: ".$compromiso['responsable']."\n Con el compromiso: ".$compromiso['compromiso'];
+                        $bean_tarea->description=" Esta tarea ha sido asignada al contacto: ".$compromiso['responsable']."\n \n Con el compromiso: ".$compromiso['compromiso'];
 		                $bean_tarea->priority='High';
 
 		            }else{//si el id del responsable es un usuario
 
                         //$GLOBALS['log']->fatal('El compromiso es de un usuario, su id es: '.$compromiso['id_resp']);//------------------------------------
-		                $bean_compromiso->assigned_user_id=$compromiso['id_resp'];
+		                $tamcompro=strlen($compromiso['compromiso']);
+                        $GLOBALS['log']->fatal('La longitud del compromiso es: '.$tamcompro);
+                        if($tamcompro>37){
+                            $bean_tarea->description=$compromiso['compromiso'];
+                        }
+                        $bean_compromiso->assigned_user_id=$compromiso['id_resp'];
 		                $bean_tarea->assigned_user_id=$compromiso['id_resp'];
                         $bean_tarea->priority='Low';
 
