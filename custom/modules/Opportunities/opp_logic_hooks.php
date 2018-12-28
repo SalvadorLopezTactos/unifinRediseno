@@ -8,7 +8,7 @@
      */
         require_once("custom/Levementum/UnifinAPI.php");
 		require_once('include/SugarQuery/SugarQuery.php');
-		
+
 	class OpportunityLogic
     {
         /**
@@ -31,7 +31,7 @@
 			{
 				global $db;
 				$cliente = $bean->account_id;
-				$tipo = $bean->tipo_producto_c;					  
+				$tipo = $bean->tipo_producto_c;
 				$query = "select count(*) as total from opportunities a, opportunities_cstm b, accounts_opportunities c where a.id = b.id_c and a.id = c.opportunity_id and a.deleted = 0 and c.account_id = '$cliente' and b.tct_etapa_ddw_c = 'SI' and isnull(b.estatus_c) and b.tipo_producto_c = '$tipo'";
 				$result = $db->query($query);
 				$row = $db->fetchByAssoc($result);
@@ -99,7 +99,7 @@
                     }else{
                         $bean->name = "SOL. " . $numeroDeFolio . " - " . $bean->name;
                     }
-                    
+
                 }
             }elseif ($bean->tct_etapa_ddw_c!='SI'){
                 $bean->name = str_replace("PRE - ","",$bean->name) ;
@@ -667,7 +667,7 @@ SQL;
             $current_id_list = array();
 
             if($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI' ) {
-                if ($_SESSION['platform'] != 'api'){
+                if ($_SESSION['platform'] != 'api1'){
                     //add update current records
                     $activo_previo = array();
                     foreach ($bean->condiciones_financieras as $c_financiera) {
@@ -708,6 +708,8 @@ SQL;
                         $condicion->team_set_id = $bean->team_set_id;
                         $condicion->incremento_ratificacion = 0;
 
+                        $GLOBALS['log']->fatal('Imprime idactivo petición: '. $c_financiera['idactivo']);
+                        $GLOBALS['log']->fatal('Imprime idactivo bean: '.$condicion->idactivo);
                         //add current records ids to list
                         $current_id_list[] = $condicion->save();
                     }
@@ -737,7 +739,9 @@ SQL;
                 $bean->es_multiactivo_c = 1;
                 $bean->ca_tasa_c = $bean->condiciones_financieras['0']['tasa_minima'];
                 $bean->deposito_garantia_c = $bean->condiciones_financieras['0']['deposito_en_garantia'] ? $bean->condiciones_financieras['0']['deposito_en_garantia'] : 0;
-                $bean->porcentaje_ca_c = $bean->condiciones_financieras['0']['comision_minima'];
+                $GLOBALS['log']->fatal("Establece %CA");
+                $bean->porcentaje_ca_c = empty($bean->condiciones_financieras['0']['comision_minima'])? 0 : $bean->condiciones_financieras['0']['comision_minima'];
+                $GLOBALS['log']->fatal($bean->porcentaje_ca_c);
                 $bean->porcentaje_renta_inicial_c = $bean->condiciones_financieras['0']['renta_inicial_minima'];
                 $bean->vrc_c = $bean->condiciones_financieras['0']['vrc_minimo'];
                 $bean->vri_c = $bean->condiciones_financieras['0']['vri_minimo'];
