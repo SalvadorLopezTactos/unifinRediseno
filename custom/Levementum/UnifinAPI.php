@@ -1483,8 +1483,13 @@ SQL;
                 $opportunidad['id_activo_c'] = $idActivoPrincipal;
                 $opportunidad['index_activo_c'] = $indexActivoPrincipal;
 
+                if (empty($opportunidad->multiactivo_c)) {
+                  $indexActivoPrincipal = null;
+                }
+
                     array_shift($lista);
                     //$GLOBALS['log']->fatal(__CLASS__ . "->" . __FUNCTION__ . " <".$current_user->user_name."> : lista sin 1 " . print_r($lista, true));
+
                     $multiactivos = array(
                         "idActivoPrincipal" => $idActivoPrincipal,
                         "indexActivoPrincipal" => $indexActivoPrincipal,
