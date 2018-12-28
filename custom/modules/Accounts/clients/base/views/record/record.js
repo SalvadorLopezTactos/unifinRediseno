@@ -2289,32 +2289,40 @@
                     title: "El campo fecha de nacimiento es requerido",
                     autoClose: false
                 });*/
-                errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
-                errors['fechadenacimiento_c'].required = true;
+                if(this.model.get('fechadenacimiento_c')==''|| this.model.get('fechadenacimiento_c')==null){
+                  errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
+                  errors['fechadenacimiento_c'].required = true;
+                }
 
                 /*app.alert.show("Pais de nacimiento requerido", {
                     level: "error",
                     title: "El campo pa\u00EDs de nacimiento es requerido",
                     autoClose: false
                 });*/
-                errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
-                errors['pais_nacimiento_c'].required = true;
+                if(this.model.get('pais_nacimiento_c')==''|| this.model.get('pais_nacimiento_c')==null){
+                  errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
+                  errors['pais_nacimiento_c'].required = true;
+                }
 
                 /*app.alert.show("Estado civil requerido", {
                     level: "error",
                     //title: "El campo estado civil es requerido",
                     autoClose: false
                 });*/
-                errors['estadocivil_c'] = errors['estadocivil_c'] || {};
-                errors['estadocivil_c'].required = true;
+                if(this.model.get('estadocivil_c')==''|| this.model.get('estadocivil_c')==null){
+                  errors['estadocivil_c'] = errors['estadocivil_c'] || {};
+                  errors['estadocivil_c'].required = true;
+                }
 
                 /*app.alert.show("Profesion requerido", {
                     level: "error",
                     title: "El campo profesi\u00F3n es requerido",
                     autoClose: false
                 });*/
-                errors['profesion_c'] = errors['profesion_c'] || {};
-                errors['profesion_c'].required = true;
+                if(this.model.get('profesion_c')==''|| this.model.get('profesion_c')==null){
+                  errors['profesion_c'] = errors['profesion_c'] || {};
+                  errors['profesion_c'].required = true;
+                }
             }
             else{
                 /*app.alert.show("Pais de constitucion", {
@@ -2322,8 +2330,10 @@
                     title: "El campo pa\u00EDs de constituci\u00F3n es requerido",
                     autoClose: false
                 });*/
-                errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
-                errors['pais_nacimiento_c'].required = true;
+                if(this.model.get('pais_nacimiento_c')==''|| this.model.get('pais_nacimiento_c')==null){
+                  errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
+                  errors['pais_nacimiento_c'].required = true;
+                }
             }
         }
         callback(null, fields, errors);

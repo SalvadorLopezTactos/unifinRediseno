@@ -143,6 +143,12 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_SUCURSAL',
           ),
+          1 => 
+          array (
+            'name' => 'tipodeproducto_c',
+            'studio' => 'visible',
+            'label' => 'LBL_TIPODEPRODUCTO',
+          ),
         ),
         8 => 
         array (
@@ -152,20 +158,14 @@ array (
             'studio' => 'visible',
             'label' => 'LBL_PRODUCTOS',
           ),
-          1 => 
-          array (
-            'name' => 'UserType',
-            'customCode' => '{if $IS_ADMIN}{$USER_TYPE_DROPDOWN}{else}{$USER_TYPE_READONLY}{/if}',
-          ),
+          1 => 'reports_to_name',
         ),
         9 => 
         array (
-          0 => 'reports_to_name',
-          1 => 
+          0 => 
           array (
-            'name' => 'tipodeproducto_c',
-            'studio' => 'visible',
-            'label' => 'LBL_TIPODEPRODUCTO',
+            'name' => 'UserType',
+            'customCode' => '{if $IS_ADMIN}{$USER_TYPE_DROPDOWN}{else}{$USER_TYPE_READONLY}{/if}',
           ),
         ),
       ),
