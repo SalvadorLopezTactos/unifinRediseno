@@ -28,14 +28,42 @@
         myobjmin = "";
         var selfvalue = this;
 
-        //Condición para cargar objetivos relacionados a la REUNIÓN
-        if (this.action == 'detail') {
-            var idReunion=this.model.get('id');
+        try {
+
+            //Condición para cargar objetivos relacionados a la REUNIÓN
+            if (this.action == 'detail') {
+                var idReunion = this.model.get('id');
 
                 if (this.model.get("minut_minutas_meetingsmeetings_idb") != "") {
                     app.api.call('GET', app.api.buildURL('minut_Minutas/' + idReunion + '/link/minut_minutas_minut_objetivos'), null, {
                         success: function (data) {
+                            selfvalue.myobjmin = data;
+                            _.extend(this, selfvalue.myobjmin);
+                            selfvalue.render();
+                        },
+                        error: function (e) {
+                            throw e;
+                        }
+                    });
+                }
+
+            }
+            //Condición para cargar objetivos de la Reunión, desde la vista de Minuta
+            else if (this.context.parent) {
+
+                var idReunion = this.context.parent.get('modelId');
+
+                app.api.call('GET', app.api.buildURL('Meetings/' + idReunion + '/link/meetings_minut_objetivos_1?order_by=date_entered:asc'), null, {
+                    success: function (data) {
                         selfvalue.myobjmin = data;
+                        //Obteniendo el objetivo general de la Reunión (parent)
+                        var modeloReunion = selfvalue.context.parent.get('model');
+                        var objetivoGral = App.lang.getAppListStrings('objetivo_list')[modeloReunion.get('objetivo_c')];
+                        var item = {
+                            "name": objetivoGral, "cumplimiento": "", "description": ""
+                        };
+                        //Se añade el objetivo general al principio del arreglo
+                        selfvalue.myobjmin.records.unshift(item);
                         _.extend(this, selfvalue.myobjmin);
                         selfvalue.render();
                     },
@@ -44,31 +72,9 @@
                     }
                 });
             }
-
         }
-        //Condición para cargar objetivos de la Reunión, desde la vista de Minuta
-        else if(this.context.parent){
-            var idReunion=this.context.parent.get('modelId');
-
-            app.api.call('GET', app.api.buildURL('Meetings/' + idReunion + '/link/meetings_minut_objetivos_1?order_by=date_entered:asc'), null, {
-                success: function (data) {
-                    selfvalue.myobjmin = data;
-                    //Obteniendo el objetivo general de la Reunión (parent)
-                    var modeloReunion=selfvalue.context.parent.get('model');
-                    var objetivoGral=App.lang.getAppListStrings('objetivo_list')[modeloReunion.get('objetivo_c')];
-                    var item = {
-                        "name":objetivoGral,"cumplimiento":"","description":""
-                    };
-                    //Se añade el objetivo general al principio del arreglo
-                    selfvalue.myobjmin.records.unshift(item);
-                    _.extend(this, selfvalue.myobjmin);
-                    selfvalue.render();
-                },
-                error: function (e) {
-                    throw e;
-                }
-            });
-
+        catch(e) {
+            console.log(e);
         }
 
     },
