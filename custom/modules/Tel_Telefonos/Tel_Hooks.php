@@ -49,7 +49,7 @@ SQL;
     }
 
     public function insertaComunicaciónUNICS($bean = null, $event = null, $args = null){
-
+    	 //$GLOBALS['log']->fatal('>>>>Entramos a insertaComunicaciónUNICS<<<<<<<');
          global $db;
          $cliente = false;
 
@@ -71,20 +71,24 @@ SQL;
             if ($_SESSION['estado'] == 'insertando') {
                 $tel = $callApi->insertaComunicación($bean, 'insertando');
                 $_SESSION['estado'] = '';
+                //$GLOBALS['log']->fatal('>>>>Manda Insertado');
             } elseif ($_SESSION['estado'] == 'actualizando') {
                 $tel = $callApi->insertaComunicación($bean, 'actualizando');
                 $_SESSION['estado'] = '';
+                //$GLOBALS['log']->fatal('>>>>Manda Actualizado');
             }
         }
     }
 
     public function detectaEstado ($bean = null, $event = null, $args = null){
         global $current_user;
-        if (empty($bean->fetched_row['id'])) {
+        //$GLOBALS['log']->fatal('>>>>$args: '.$args['isUpdate']);
+        if ($args['isUpdate']!=1) {
             $_SESSION['estado'] = 'insertando';
         }else{
             $_SESSION['estado'] = 'actualizando';
          }
+        //$GLOBALS['log']->fatal('>>>Fetched row: '.$bean->fetched_row['id']);
         $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : ESTADO: $_SESSION[estado] ");
     }
 }
