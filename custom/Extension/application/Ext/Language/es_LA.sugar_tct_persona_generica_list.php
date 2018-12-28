@@ -1,7 +1,7 @@
 <?php
- // created: 2018-02-23 14:18:17
+ // created: 2018-12-19 13:55:39
 
 $app_list_strings['tct_persona_generica_list']=array (
-  'relid' => '97bfbb14-18d6-11e8-9485-00155d963615',
-  'accid' => '97bfbb14-18d6-11e8-9485-00155d963615',
+  'relid' => 'ccc5a744-1b4a-11e8-8221-00155d967307',
+  'accid' => 'ccc5a744-1b4a-11e8-8221-00155d967307',
 );

@@ -110,7 +110,7 @@ class DropdownValuesHelper{
 				}
 				break;
             default:
-                $tipoCliente = 0;
+                $tipoCliente = $cedente + $deudor + $EsProveedor;
 		}
 	if(isset($tipoCliente)) {
         return $tipoCliente;

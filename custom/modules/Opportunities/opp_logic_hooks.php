@@ -728,10 +728,12 @@ SQL;
 		public function AsignaCondicionesFinancieras($bean = null, $event = null, $args = null){
             //Asigna el rpimer registro del control de condiciones financieras para envíar a solicitud de UNI2
 			if (count($bean->condiciones_financieras) > 0 and $bean->tipo_producto_c != '4'){
+                $plazo_historico = $bean->plazo_c;
                 //$bean->id_activo_c = $bean->condiciones_financieras[0][''];
                 $bean->index_activo_c = $bean->condiciones_financieras['0']['idactivo'];
                 $plazos = explode("_", $bean->condiciones_financieras['0']['plazo']);
-                $bean->plazo_c = $plazos[1];
+                $GLOBALS['log']->fatal("Actualiza plazo");
+                $bean->plazo_c = empty($plazos[1])? $plazo_historico : $plazos[1];
                 $bean->es_multiactivo_c = 1;
                 $bean->ca_tasa_c = $bean->condiciones_financieras['0']['tasa_minima'];
                 $bean->deposito_garantia_c = $bean->condiciones_financieras['0']['deposito_en_garantia'] ? $bean->condiciones_financieras['0']['deposito_en_garantia'] : 0;

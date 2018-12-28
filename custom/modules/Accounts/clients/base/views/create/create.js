@@ -1513,6 +1513,76 @@
                 errors['tipo_proveedor_c'] = errors['tipo_proveedor_c'] || {};
                 errors['tipo_proveedor_c'].required = true;
             }
+            if(this.model.get('tct_macro_sector_ddw_c')==''|| this.model.get('tct_macro_sector_ddw_c')==null){
+                /*app.alert.show("Macro sector requerido", {
+                    level: "error",
+                    title: "El campo macro sector es requerido",
+                    autoClose: false
+                });*/
+                errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
+                errors['tct_macro_sector_ddw_c'].required = true;
+            }
+            if(this.model.get('rfc_c')==''|| this.model.get('rfc_c')==null){
+                /*app.alert.show("RFC requerido", {
+                    level: "error",
+                    title: "El campo RFC es requerido",
+                    autoClose: false
+                });*/
+                errors['rfc_c'] = errors['rfc_c'] || {};
+                errors['rfc_c'].required = true;
+            }
+            if(this.model.get('tipodepersona_c')!='Persona Moral'){
+                /*app.alert.show("Fecha de nacimiento requerida", {
+                    level: "error",
+                    title: "El campo fecha de nacimiento es requerido",
+                    autoClose: false
+                });*/
+                if(this.model.get('fechadenacimiento_c')==''|| this.model.get('fechadenacimiento_c')==null){
+                  errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
+                  errors['fechadenacimiento_c'].required = true;
+                }
+
+                /*app.alert.show("Pais de nacimiento requerido", {
+                    level: "error",
+                    title: "El campo pa\u00EDs de nacimiento es requerido",
+                    autoClose: false
+                });*/
+                if(this.model.get('pais_nacimiento_c')==''|| this.model.get('pais_nacimiento_c')==null){
+                  errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
+                  errors['pais_nacimiento_c'].required = true;
+                }
+
+                /*app.alert.show("Estado civil requerido", {
+                    level: "error",
+                    //title: "El campo estado civil es requerido",
+                    autoClose: false
+                });*/
+                if(this.model.get('estadocivil_c')==''|| this.model.get('estadocivil_c')==null){
+                  errors['estadocivil_c'] = errors['estadocivil_c'] || {};
+                  errors['estadocivil_c'].required = true;
+                }
+
+                /*app.alert.show("Profesion requerido", {
+                    level: "error",
+                    title: "El campo profesi\u00F3n es requerido",
+                    autoClose: false
+                });*/
+                if(this.model.get('profesion_c')==''|| this.model.get('profesion_c')==null){
+                  errors['profesion_c'] = errors['profesion_c'] || {};
+                  errors['profesion_c'].required = true;
+                }
+            }
+            else{
+                /*app.alert.show("Pais de constitucion", {
+                    level: "error",
+                    title: "El campo pa\u00EDs de constituci\u00F3n es requerido",
+                    autoClose: false
+                });*/
+                if(this.model.get('pais_nacimiento_c')==''|| this.model.get('pais_nacimiento_c')==null){
+                  errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
+                  errors['pais_nacimiento_c'].required = true;
+                }
+            }
         }
         callback(null, fields, errors);
     },
@@ -1546,7 +1616,7 @@
                             }else{
                                 this.model.set('phone_office', "" + telefono[i].telefono);
                     }
-                    
+
                 }
             }
         }
@@ -1657,7 +1727,7 @@
         callback(null, fields, errors);
     },
 
-    validacedente: function (fields, errors, callback){
+    validacedente: function (fields, errors, callback) {
 
         if ( this.model.get('cedente_factor_c') == true || this.model.get('deudor_factor_c') == true  ) {
 
@@ -1771,8 +1841,6 @@
         }
 
         callback(null, fields, errors);
-
-
     },
 
     _getIndicador: function(idSelected, valuesSelected) {
