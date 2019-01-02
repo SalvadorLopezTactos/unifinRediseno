@@ -1413,7 +1413,7 @@ cancelarBacklog: function(e){
 
                 var id_account=arr_p[1];
 
-                var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&fields=id,mes,estatus_de_la_operacion',
+                var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&filter[3][estatus_de_la_operacion][$not_equals]=Cancelada&fields=id,mes,estatus_de_la_operacion',
                     null, null, null);
 
 
