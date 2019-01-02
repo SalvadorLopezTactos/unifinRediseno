@@ -667,9 +667,12 @@ SQL;
             $current_id_list = array();
 
             if($_REQUEST['module'] != 'Import' && $_SESSION['platform'] != 'unifinAPI' ) {
-                if ($_SESSION['platform'] != 'api1'){
+                if (!empty($bean->condiciones_financieras)){
                     //add update current records
                     $activo_previo = array();
+                    // $GLOBALS['log']->fatal('--->TCT -  Condiciones financieras');
+                    // $GLOBALS['log']->fatal($bean->condiciones_financieras);
+
                     foreach ($bean->condiciones_financieras as $c_financiera) {
 
                         $condicion = BeanFactory::getBean('lev_CondicionesFinancieras', $c_financiera['id']);
@@ -712,6 +715,9 @@ SQL;
                         $GLOBALS['log']->fatal('Imprime idactivo bean: '.$condicion->idactivo);
                         //add current records ids to list
                         $current_id_list[] = $condicion->save();
+                        $GLOBALS['log']->fatal('--->TCT -  Current_id_lst');
+                        $GLOBALS['log']->fatal(print_r($current_id_list,true));
+
                     }
                     $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ .  " <Arreglo que se asignará a la Opp> " . print_r($current_id_list,1));
                     //$GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ .  " <Arreglo que se compara> " . print_r($bean->lev_condicionesfinancieras_opportunities->getBeans(),1));
@@ -720,6 +726,8 @@ SQL;
                     $bean->load_relationship('lev_condicionesfinancieras_opportunities');
                     foreach ($bean->lev_condicionesfinancieras_opportunities->getBeans() as $c_financiera) {
                         if (!in_array($c_financiera->id, $current_id_list)) {
+                            // $GLOBALS['log']->fatal('--->TCT -  Elimina relación');
+                            // $GLOBALS['log']->fatal($c_financiera->id);
                             $c_financiera->mark_deleted($c_financiera->id);
                         }
                     }
@@ -734,14 +742,11 @@ SQL;
                 //$bean->id_activo_c = $bean->condiciones_financieras[0][''];
                 $bean->index_activo_c = $bean->condiciones_financieras['0']['idactivo'];
                 $plazos = explode("_", $bean->condiciones_financieras['0']['plazo']);
-                $GLOBALS['log']->fatal("Actualiza plazo");
                 $bean->plazo_c = empty($plazos[1])? $plazo_historico : $plazos[1];
                 $bean->es_multiactivo_c = 1;
                 $bean->ca_tasa_c = $bean->condiciones_financieras['0']['tasa_minima'];
                 $bean->deposito_garantia_c = $bean->condiciones_financieras['0']['deposito_en_garantia'] ? $bean->condiciones_financieras['0']['deposito_en_garantia'] : 0;
-                $GLOBALS['log']->fatal("Establece %CA");
                 $bean->porcentaje_ca_c = empty($bean->condiciones_financieras['0']['comision_minima'])? 0 : $bean->condiciones_financieras['0']['comision_minima'];
-                $GLOBALS['log']->fatal($bean->porcentaje_ca_c);
                 $bean->porcentaje_renta_inicial_c = $bean->condiciones_financieras['0']['renta_inicial_minima'];
                 $bean->vrc_c = $bean->condiciones_financieras['0']['vrc_minimo'];
                 $bean->vri_c = $bean->condiciones_financieras['0']['vri_minimo'];
@@ -853,13 +858,15 @@ SQL;
                     }
 
                     //retrieve all related records
-                    $bean->load_relationship('lev_condicionesfinancieras_opportunities');
-                    foreach ($bean->lev_condicionesfinancieras_opportunities->getBeans() as $c_financiera) {
-                        if($c_financiera->incremento_ratificacion == 1) {
-                            if (!in_array($c_financiera->id, $current_id_list)) {
-                                $c_financiera->mark_deleted($c_financiera->id);
-                            }
-                        }
+                    if (!empty($bean->condiciones_financieras)){
+                      $bean->load_relationship('lev_condicionesfinancieras_opportunities');
+                      foreach ($bean->lev_condicionesfinancieras_opportunities->getBeans() as $c_financiera) {
+                          if($c_financiera->incremento_ratificacion == 1) {
+                              if (!in_array($c_financiera->id, $current_id_list)) {
+                                  $c_financiera->mark_deleted($c_financiera->id);
+                              }
+                          }
+                      }
                     }
                 }
             }
