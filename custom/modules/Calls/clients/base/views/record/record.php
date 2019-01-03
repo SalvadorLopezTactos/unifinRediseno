@@ -9,7 +9,7 @@ array (
       array (
         'buttons' => 
         array (
-          0 => 
+          0 =>
           array (
             'type' => 'button',
             'name' => 'cancel_button',
@@ -92,7 +92,7 @@ array (
               array (
                 'type' => 'divider',
               ),
-              6 => 
+              /*6 =>
               array (
                 'type' => 'rowaction',
                 'event' => 'button:duplicate_button:click',
@@ -104,7 +104,7 @@ array (
               7 => 
               array (
                 'type' => 'divider',
-              ),
+              ),*/
               8 => 
               array (
                 'type' => 'rowaction',
@@ -120,7 +120,7 @@ array (
                 'label' => 'LBL_REMOVE_ALL_RECURRENCES',
                 'acl_action' => 'delete',
               ),
-              10 => 
+              /*10 =>
               array (
                 'type' => 'closebutton',
                 'name' => 'record-close-new',
@@ -135,7 +135,7 @@ array (
                 'label' => 'LBL_CLOSE_BUTTON_LABEL',
                 'closed_status' => 'Held',
                 'acl_action' => 'edit',
-              ),
+              ),*/
             ),
           ),
           3 => 

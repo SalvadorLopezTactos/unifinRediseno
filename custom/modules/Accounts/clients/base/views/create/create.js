@@ -1836,14 +1836,12 @@
                         errors['genero_c'].required = true;
                     }
 
-                }
-                if (this.model.get('tipodepersona_c') == 'Persona Fisica con Actividad Empresarial') {
                     if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null) {
                         errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
                         errors['tct_macro_sector_ddw_c'].required = true;
                     }
-                }
 
+                }
             }
         }
 

@@ -31,6 +31,7 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
           'default' => true,
           'name' => 'status',
           'type' => 'event-status',
+          'readonly' => true,
           'css_class' => 'full-width',
         ),
         3 => 
@@ -98,7 +99,7 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
         'icon' => 'fa-eye',
         'acl_action' => 'view',
       ),
-      1 => 
+      /*1 =>
       array (
         'type' => 'rowaction',
         'name' => 'edit_button',
@@ -106,14 +107,14 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
         'label' => 'LBL_EDIT_BUTTON',
         'event' => 'list:editrow:fire',
         'acl_action' => 'edit',
-      ),
+      ),*/
       2 => 
       array (
         'type' => 'unlink-action',
         'icon' => 'fa-chain-broken',
         'label' => 'LBL_UNLINK_BUTTON',
       ),
-      3 => 
+      /*3 =>
       array (
         'type' => 'closebutton',
         'icon' => 'fa-times-circle',
@@ -121,7 +122,7 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
         'label' => 'LBL_CLOSE_BUTTON_TITLE',
         'closed_status' => 'Held',
         'acl_action' => 'edit',
-      ),
+      ),*/
     ),
   ),
   'type' => 'subpanel-list',
