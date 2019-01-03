@@ -138,13 +138,18 @@
             model.set('minut_minutas_meetings_name',this.model.get('name'));
             model.set('name',"Minuta"+" "+startDateText+" "+objetivo[this.model.get('objetivo_c')]);
             app.drawer.open({
-                layout:'create',
-                context:{
-                create: true,
-                module:'minut_Minutas',
-                model:model
-                }
-            });
+                layout: 'create',
+                context: {
+                    create: true,
+                    module: 'minut_Minutas',
+                    model: model
+                },
+            },
+                function(){
+                //alert('Drawer Cerrado');
+                    location.reload();
+
+                });
         }
     },
 

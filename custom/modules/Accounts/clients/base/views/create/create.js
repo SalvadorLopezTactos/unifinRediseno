@@ -1571,6 +1571,8 @@
                   errors['profesion_c'] = errors['profesion_c'] || {};
                   errors['profesion_c'].required = true;
                 }
+
+
             }
             else{
                 /*app.alert.show("Pais de constitucion", {
@@ -1581,6 +1583,11 @@
                 if(this.model.get('pais_nacimiento_c')==''|| this.model.get('pais_nacimiento_c')==null){
                   errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
                   errors['pais_nacimiento_c'].required = true;
+                }
+
+                if(this.model.get('fechaconstitutiva_c')==''|| this.model.get('fechaconstitutiva_c')==null){
+                    errors['fechaconstitutiva_c'] = errors['fechaconstitutiva_c'] || {};
+                    errors['fechaconstitutiva_c'].required = true;
                 }
             }
         }
@@ -1829,14 +1836,12 @@
                         errors['genero_c'].required = true;
                     }
 
-                }
-                if (this.model.get('tipodepersona_c') == 'Persona Fisica con Actividad Empresarial') {
                     if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null) {
                         errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
                         errors['tct_macro_sector_ddw_c'].required = true;
                     }
-                }
 
+                }
             }
         }
 
