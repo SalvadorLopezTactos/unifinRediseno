@@ -152,3 +152,11 @@ $hook_array['before_save'][] = Array(
     'Account_Hooks',
     'crearFolioRelacion'
 );
+
+$hook_array['after_save'][] = Array(
+    10,
+    'Genera Resumen vacío en la creacion de Cuenta',
+    'custom/modules/Accounts/Account_Hooks.php',
+    'Account_Hooks',
+    'creaResumen'
+);
