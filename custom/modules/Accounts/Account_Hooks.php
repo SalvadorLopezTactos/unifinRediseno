@@ -944,4 +944,22 @@ where rfc_c = '{$bean->rfc_c}' and
 			}
 		}
     }
+
+    public function creaResumen($bean = null, $event = null, $args = null)
+    {
+        global $db;
+        $idCuenta = $bean->id;
+        $GLOBALS['log']->fatal('Entra a Crear Resumen de Account ');
+        $bean_Resumen = BeanFactory::retrieveBean('tct02_Resumen',$idCuenta);
+
+        if ($bean_Resumen= null || empty($bean_Resumen)){
+            $GLOBALS['log']->fatal('Entra a condición para crear Resumen');
+            $bean_Resumen = BeanFactory::newBean('tct02_Resumen');
+            $bean_Resumen->new_with_id = true;
+            $bean_Resumen->name = $bean->name;
+            $bean_Resumen->id = $idCuenta;
+            $bean_Resumen->save();
+        }
+        $GLOBALS['log']->fatal('Finaliza y crea Resumen para vista 360');
+    }
 }
