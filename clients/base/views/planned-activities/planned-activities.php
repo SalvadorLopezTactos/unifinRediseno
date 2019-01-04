@@ -137,10 +137,10 @@ $viewdefs['base']['view']['planned-activities'] = array(
             ),
             'link' => 'meetings',
             'module' => 'Meetings',
-            'order_by' => 'date_start:asc',
+            'order_by' => 'date_start:desc',
             'record_date' => 'date_start',
             'row_actions' => array(
-                array(
+/*                array(
                     'type' => 'rowaction',
                     'icon' => 'fa-times-circle',
                     'css_class' => 'btn btn-mini',
@@ -148,7 +148,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_PLANNED_ACTIVITIES_DASHLET_HELD_ACTIVITY',
                     'acl_action' => 'edit',
-                ),
+                ),*/
                 array(
                     'type' => 'unlink-action',
                     'icon' => 'fa-chain-broken',
@@ -160,10 +160,10 @@ $viewdefs['base']['view']['planned-activities'] = array(
                 ),
             ),
             'include_child_items' => true,
-            'invitation_actions' => array(
+            /*'invitation_actions' => array(
                 'name' => 'accept_status_users',
                 'type' => 'invitation-actions',
-            ),
+            ),*/
             'overdue_badge' => array(
                 'name' => 'date_start',
                 'type' => 'overdue-badge',
@@ -183,10 +183,10 @@ $viewdefs['base']['view']['planned-activities'] = array(
             ),
             'link' => 'calls',
             'module' => 'Calls',
-            'order_by' => 'date_start:asc',
+            'order_by' => 'date_start:desc',
             'record_date' => 'date_start',
             'row_actions' => array(
-                array(
+/*                array(
                     'type' => 'rowaction',
                     'icon' => 'fa-times-circle',
                     'css_class' => 'btn btn-mini',
@@ -194,7 +194,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
                     'target' => 'view',
                     'tooltip' => 'LBL_PLANNED_ACTIVITIES_DASHLET_HELD_ACTIVITY',
                     'acl_action' => 'edit',
-                ),
+                ),*/
                 array(
                     'type' => 'unlink-action',
                     'icon' => 'fa-chain-broken',
@@ -206,10 +206,10 @@ $viewdefs['base']['view']['planned-activities'] = array(
                 ),
             ),
             'include_child_items' => true,
-            'invitation_actions' => array(
+            /*'invitation_actions' => array(
                 'name' => 'accept_status_users',
                 'type' => 'invitation-actions',
-            ),
+            ),*/
             'overdue_badge' => array(
                 'name' => 'date_start',
                 'type' => 'overdue-badge',

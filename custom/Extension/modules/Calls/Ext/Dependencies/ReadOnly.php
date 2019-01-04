@@ -1,4 +1,7 @@
 <?php
+//Variables globales para obtener el puesto del usuario
+global $current_user;
+$puestouser = $current_user->puestousuario_c;
 
 /*
  AF - 2018/09/14
@@ -200,7 +203,7 @@ $dependencies['Calls']['FechaCita'] = array(
             'name' => 'SetVisibility',
             'params' => array(
                 'target' => 'tct_fecha_cita_dat_c',
-                'value' => 'equal($tct_resultado_llamada_ddw_c,"Cita")',
+                'value' => 'and(equal($tct_resultado_llamada_ddw_c,"Cita"),or(equal('.$puestouser.',"27"),equal('.$puestouser.',"31")))',
             ),
         ),
         /*array(
@@ -246,7 +249,7 @@ $dependencies['Calls']['UsuarioCita'] = array(
             'name' => 'SetVisibility',
             'params' => array(
                 'target' => 'tct_usuario_cita_rel_c',
-                'value' => 'equal($tct_resultado_llamada_ddw_c,"Cita")',
+                'value' => 'and(equal($tct_resultado_llamada_ddw_c,"Cita"),or(equal('.$puestouser.',27),equal('.$puestouser.',31)))',
             ),
         ),
         /*array(

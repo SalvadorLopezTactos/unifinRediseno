@@ -1,5 +1,5 @@
 <?php
- // created: 2018-01-10 14:11:38
+ // created: 2019-01-03 09:25:18
 
 $app_list_strings['estado_nacimiento_list']=array (
   1 => 'SIN ESTADO',
@@ -155,4 +155,5 @@ $app_list_strings['estado_nacimiento_list']=array (
   154 => 'ST PETER PORT',
   129 => 'HILL DICKINSON',
   164 => 'BENGALA OCCIDENTAL',
+  '' => '',
 );
