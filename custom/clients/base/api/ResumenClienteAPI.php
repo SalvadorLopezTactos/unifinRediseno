@@ -198,7 +198,8 @@ class ResumenClienteAPI extends SugarApi
             //Fecha de vencimiento
             $vencimiento_leasing = date("Y-m-d");
             $vencimiento_factoring = date("Y-m-d");
-            $vencimiento_cauto = date("Y-m-d");
+            //$vencimiento_cauto = date("Y-m-d");
+            $vencimiento_cauto = "";
 
             //Recorre operaciones
             foreach ($relatedBeans as $opps) {
@@ -219,9 +220,9 @@ class ResumenClienteAPI extends SugarApi
                     /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
                     /*********************************/
 
-                    if(!empty($opps->fecha_estimada_cierre_c)){
+                    if(!empty($opps->vigencialinea_c)){
                         //Establece fecha de vencimiento
-                        $dateVL = $opps->fecha_estimada_cierre_c;
+                        $dateVL = $opps->vigencialinea_c;
                         $timedateVL = Date($dateVL);
 
                         //Compara fechas
@@ -252,9 +253,9 @@ class ResumenClienteAPI extends SugarApi
                     /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
                     /*********************************/
 
-                    if(!empty($opps->fecha_estimada_cierre_c)){
+                    if(!empty($opps->vigencialinea_c)){
                         //Establece fecha de vencimiento
-                        $dateVF = $opps->fecha_estimada_cierre_c;
+                        $dateVF = $opps->vigencialinea_c;
                         //$timedateVL = Date($dateVL);
 
                         //Compara fechas
@@ -278,16 +279,20 @@ class ResumenClienteAPI extends SugarApi
                 }
 
                 //Control para crédito auto
-                if ($opps->tipo_producto_c == 3) {
+                    $fecha_val=date("Y-m-d");
+                if ($opps->tipo_producto_c == 3 && $opps->vigencialinea_c>= $fecha_val ) {
                     $linea_aut_credito_aut += $opps->monto_c;
                     $linea_disp_credito_aut += $opps->amount;
                     /* Cambiar por otro cmpo de fecha con valores fecha_estimada_cierre_c*/
                     /*********************************/
 
-                    if(!empty($opps->fecha_estimada_cierre_c)){
+                    if(!empty($opps->vigencialinea_c)){
                         //Establece fecha de vencimiento
-                        $dateVC = $opps->fecha_estimada_cierre_c;
+                        $dateVC = $opps->vigencialinea_c;
                         //$timedateVL = Date($dateVL);
+                        if($vencimiento_cauto==""){
+                            $vencimiento_cauto= $opps->vigencialinea_c;
+                        }
 
                         //Compara fechas
                         if ($dateVC < $vencimiento_cauto || empty($vencimiento_cauto) ) {
