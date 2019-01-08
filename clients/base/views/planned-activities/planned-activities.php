@@ -103,7 +103,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
     'panels' => array(
         array(
             'name' => 'panel_body',
-            'columns' => 2,
+            'columns' => 3,
             'labelsOnTop' => true,
             'placeholders' => true,
             'fields' => array(
@@ -174,6 +174,7 @@ $viewdefs['base']['view']['planned-activities'] = array(
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_start',
+                'status',
             ),
         ),
         array(
@@ -213,12 +214,14 @@ $viewdefs['base']['view']['planned-activities'] = array(
             'overdue_badge' => array(
                 'name' => 'date_start',
                 'type' => 'overdue-badge',
+                'css_class' => 'pull-right',
             ),
             'fields' => array(
                 'name',
                 'assigned_user_name',
                 'assigned_user_id',
                 'date_start',
+                'status',
             ),
         ),
     ),
