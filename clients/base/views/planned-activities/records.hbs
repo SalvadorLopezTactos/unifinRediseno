@@ -16,22 +16,8 @@
             {{#each collection.models}}
                 <li>
                     <div class="pull-right">
-                        {{#if ../../row_actions}}
-                            {{#each ../../row_actions}}
-                                {{field ../../../this model=../this}}
-                            {{/each}}
-                        {{/if}}
-                        {{#if attributes.invitation}}
-                            {{#with ../../invitationActions}}
-                                {{field ../../../this model=../attributes.invitation template='edit'}}
-                            {{/with}}
-                        {{/if}}
-                    </div>
-                    {{#if ../overdueBadge}}
-                        {{#with ../../overdueBadge}}
-                            {{field ../../../this model=../../this template='detail'}}
-                        {{/with}}
-                    {{/if}}
+						{{getUnifinListValue 'call_status_dom' attributes.status}}
+                    </div>				
                     <p>
                         <a href="#{{buildRoute model=this action="detail"}}">{{fieldValue this "name"}}</a>
                     </p>
@@ -41,8 +27,7 @@
                         {{else}}
                             {{str "LBL_UNASSIGNED" this.module}}&#44;
                         {{/if}}
-                        {{relativeTime attributes.record_date class='date'}}&#44;
-						{{getUnifinListValue 'call_status_dom' attributes.status}}
+                        {{relativeTime attributes.record_date class='date'}}
                     </div>
                 </li>
             {{/each}}

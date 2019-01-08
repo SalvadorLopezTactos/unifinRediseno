@@ -13,3 +13,11 @@ $hook_array['after_save'][] = Array(
     'AssignFilterAccountsUsr',
     'AssignFilterAccounts_ByUsr'
 );
+
+$hook_array['before_save'][] = Array(
+    11,
+    'Actualiza a los usuario a quien les reporta',
+    'custom/modules/Users/AssignFilterAccountsUsr.php',
+    'AssignFilterAccountsUsr',
+    'UpdateReportToUsr'
+);
