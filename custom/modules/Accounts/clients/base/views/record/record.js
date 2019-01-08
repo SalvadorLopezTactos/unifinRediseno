@@ -59,21 +59,31 @@
         */
         this.model.on("change:rfc_c", _.bind(function () {
             var rfc = this.getField('rfc_c');
-            if (!_.isEmpty(this.model.get('idcliente_c')) && rfc.action === "edit") {
+            if (rfc.action === "edit") {
+              if (App.user.id!=self.model.get('user_id_c') && App.user.id!= self.model.get('user_id1_c') && App.user.id!= self.model.get('user_id2_c') ) {
+                  App.alert.show("validar_rfc", {
+                      level: "error",
+                      title: "\u00DAnicamente los promotores asociados a la cuenta pueden cambiar el RFC.",
+                      autoClose: false
+                  });
+              }
+            }
+            /*if (!_.isEmpty(this.model.get('idcliente_c')) && rfc.action === "edit") {
                 app.api.call("read", app.api.buildURL("Accounts/AccountsCustomAPI/" + this.model.get('idcliente_c'), null, null, {}), null, {
                     success: _.bind(function (data) {
                         if (data.UNI2_CTE_029_VerificaClienteTieneContratoResult._tieneContratos == true) {
-                            app.alert.show("Validar Contratos", {
-                                level: "error",
-                                title: "No puede cambiar RFC a Cliente con contratos existentes.",
-                                autoClose: false
-                            });
-                            this.cancelClicked();
-                            this.$("input[name='rfc_c']").prop("readonly", true);
+                                app.alert.show("Validar Contratos", {
+                                    level: "error",
+                                    title: "No puede cambiar RFC a Cliente con contratos existentes.",
+                                    autoClose: false
+                                });
+                                this.cancelClicked();
+                                this.$("input[name='rfc_c']").prop("readonly", true);
+                            }
                         }
                     }, this)
                 });
-            }
+            }*/
             this.RFC_DuplicateCheck();
         }, this));
 
@@ -586,6 +596,12 @@
     _renderHtml: function ()
     //Establecer todos los campos como solo lectura cuando el registro actual es el contacto genérico
     {
+
+        //Bloqueo RFC
+        if (App.user.id!=this.model.get('user_id_c') && App.user.id!= this.model.get('user_id1_c') && App.user.id!= this.model.get('user_id2_c') ) {
+            this.noEditFields.push('rfc_c');
+            this.noEditFields.push('generar_rfc_c');
+        }
         var id = app.lang.getAppListStrings('tct_persona_generica_list');
         if (this.model.get('id') === id['accid'] && app.user.get('type') !== 'admin') {
             var self = this;
@@ -1122,67 +1138,68 @@
     },
 
     _doGenera_RFC_CURP: function () {
-        if (this.model.get('pais_nacimiento_c') != 2 && this.model.get('pais_nacimiento_c') != '' && this.model.get('pais_nacimiento_c') != null
-            && (this.model.get('tipo_registro_c') != 'Prospecto' || this.model.get('estatus_c') != 'Interesado')) {
-            if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                this.model.set('rfc_c', 'XXXX010101XXX');
-            } else {
-                this.model.set('rfc_c', 'XXX010101XXX');
-            }
-        } else {
-            if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                if (this.model.get('fechadenacimiento_c') != null && this.model.get('fechadenacimiento_c') != '' && this.model.get('primernombre_c') != null
-                    && this.model.get('apellidopaterno_c') != null && this.model.get('apellidomaterno_c') != null) {
-                    this._doValidateWSRFC();
-                } else {
-                    var faltantes = "";
-                    console.log('Valida campos para RFC');
-                    if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
-                        faltantes = faltantes + '<b>Fecha de Nacimiento<br></b>';
-                    }
-                    if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
-                        faltantes = faltantes + '<b>Primer Nombre<br></b>';
-                    }
-                    if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
-                        faltantes = faltantes + '<b>Apellido Paterno<br></b>';
-                    }
-                    if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
-                        faltantes = faltantes + '<b>Apellido Materno<br></b>';
-                    }
+        if (App.user.id==this.model.get('user_id_c') || App.user.id== this.model.get('user_id1_c') || App.user.id== this.model.get('user_id2_c') ) {
+          if (this.model.get('pais_nacimiento_c') != 2 && this.model.get('pais_nacimiento_c') != '' && this.model.get('pais_nacimiento_c') != null
+              && (this.model.get('tipo_registro_c') != 'Prospecto' || this.model.get('estatus_c') != 'Interesado')) {
+              if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+                  this.model.set('rfc_c', 'XXXX010101XXX');
+              } else {
+                  this.model.set('rfc_c', 'XXX010101XXX');
+              }
+          } else {
+              if (this.model.get('tipodepersona_c') != 'Persona Moral') {
+                  if (this.model.get('fechadenacimiento_c') != null && this.model.get('fechadenacimiento_c') != '' && this.model.get('primernombre_c') != null
+                      && this.model.get('apellidopaterno_c') != null && this.model.get('apellidomaterno_c') != null) {
+                      this._doValidateWSRFC();
+                  } else {
+                      var faltantes = "";
+                      console.log('Valida campos para RFC');
+                      if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c') == null) {
+                          faltantes = faltantes + '<b>Fecha de Nacimiento<br></b>';
+                      }
+                      if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c') == null) {
+                          faltantes = faltantes + '<b>Primer Nombre<br></b>';
+                      }
+                      if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == null) {
+                          faltantes = faltantes + '<b>Apellido Paterno<br></b>';
+                      }
+                      if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == null) {
+                          faltantes = faltantes + '<b>Apellido Materno<br></b>';
+                      }
 
-                    else (faltantes != "")
-                    app.alert.show("Generar RFC", {
-                        level: "error",
-                        title: "Faltan los siguientes datos para poder generar el RFC: <br>" + faltantes,
-                        autoClose: true
-                    });
-                }
-            }
-            else
-            {
-                if ((this.model.get('razonsocial_c') != null && this.model.get('razonsocial_c')!="") && (this.model.get('fechaconstitutiva_c') != null && this.model.get('fechaconstitutiva_c') !="" )) {
-                    this._doValidateWSRFC();
-                } else {
-                    var falta = "";
-                    console.log('Entra P Moral RFC');
-                    if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
-                        falta = falta + '<b>Fecha Constitutiva<br></b>';
-                    }
-                    /*if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
-                        falta = falta + '<b>Nombre Comercial<br></b>';
-                    }*/
-                    if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
-                        falta = falta + '<b>Raz\u00F3n Social<br></b>';
-                    }
-                    app.alert.show("Generar RFC", {
-                        level: "error",
-                        title: "Faltan los siguientes datos para poder generar el RFC: <br>" + falta,
-                        autoClose: true
-                    });
-                }
-            }
+                      else (faltantes != "")
+                      app.alert.show("Generar RFC", {
+                          level: "error",
+                          title: "Faltan los siguientes datos para poder generar el RFC: <br>" + faltantes,
+                          autoClose: true
+                      });
+                  }
+              }
+              else
+              {
+                  if ((this.model.get('razonsocial_c') != null && this.model.get('razonsocial_c')!="") && (this.model.get('fechaconstitutiva_c') != null && this.model.get('fechaconstitutiva_c') !="" )) {
+                      this._doValidateWSRFC();
+                  } else {
+                      var falta = "";
+                      console.log('Entra P Moral RFC');
+                      if (this.model.get('fechaconstitutiva_c') == "" || this.model.get('fechaconstitutiva_c') == null) {
+                          falta = falta + '<b>Fecha Constitutiva<br></b>';
+                      }
+                      /*if (this.model.get('nombre_comercial_c') == "" || this.model.get('nombre_comercial_c') == null) {
+                          falta = falta + '<b>Nombre Comercial<br></b>';
+                      }*/
+                      if (this.model.get('razonsocial_c') == "" || this.model.get('razonsocial_c') == null) {
+                          falta = falta + '<b>Raz\u00F3n Social<br></b>';
+                      }
+                      app.alert.show("Generar RFC", {
+                          level: "error",
+                          title: "Faltan los siguientes datos para poder generar el RFC: <br>" + falta,
+                          autoClose: true
+                      });
+                  }
+              }
+          }
         }
-
     },
 
     ValidaFormatoCURP: function (fields, errors, callback) {
