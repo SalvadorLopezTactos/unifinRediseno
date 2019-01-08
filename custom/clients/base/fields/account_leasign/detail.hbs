@@ -21,10 +21,10 @@ AF - 18-01-18
       position: fixed; /* Stay in place */
       padding-top: 100px; /* Location of the box */
       padding-bottom: 100px;
-      left: 10;
       top: 0;
-      /* width: 100%; /* Full width */ */
-      height: 100%; /* Full height */
+      left:0;
+      /* width: 100%; /* Full width */
+      /*height: 100%; /* Full height */
       overflow: auto; /* Enable scroll if needed */
       background-color: rgb(0,0,0); /* Fallback color */
       background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -557,7 +557,7 @@ AF - 18-01-18
         <div id="collapseTen" class="accordion-body in collapse" style="background-color: #ffffff">
           <!-- Línea 1 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
-            <div class="span6"><strong>Línea autorizada</strong> </div>
+            <div class="span6"><strong>Línea Autorizada Vigente</strong> </div>
             <div class="span6">$ {{customFormatNumber credito_auto.linea_autorizada}}</div>
           </div>
           <!-- Línea 2 -->
@@ -567,7 +567,7 @@ AF - 18-01-18
           </div>
           <!-- Línea 3 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
-            <div class="span6"><strong>Línea disponible</strong> </div>
+            <div class="span6"><strong>Línea Disponible Vigente</strong> </div>
             <div class="span6">
               <font {{#if credito_auto.color}}color="{{credito_auto.color}}"{{/if}}>
                 $ {{customFormatNumber credito_auto.linea_disponible}}
@@ -635,7 +635,7 @@ AF - 18-01-18
   </div>
 </div>
 <div id="myModal" class="row-fluid" style="display:none">
-  <div class="modal span12">
+  <div class="modal span12" style="width:100%">
     <!-- Modal content -->
     <div class="modal-content">
       <!-- Modal header -->
@@ -710,7 +710,8 @@ AF - 18-01-18
                 <th class="span2">Mensualidad</th>
                 <th class="span2">Próxima Domiciliación</th>
                 <th class="span2">Vigencia del seguro</th>
-                <th class="span2">Monto</th>
+                <th class="span2">Colocación </th>
+                  <th class="span2">Saldo Insoluto <br><b>$ {{customFormatNumber anexosdata.suma_saldo_insoluto}}</b></th>
               </tr>
             </thead>
           </table>
@@ -888,7 +889,9 @@ AF - 18-01-18
                       <th class="span2">Mensualidad</th>
                       <th class="span2">Próxima Domiciliación</th>
                       <th class="span2">Vigencia del seguro</th>
-                      <th class="span2">Monto</th>
+                      <th class="span2">Colocación</th>
+                      <th class="span2">Saldo Insoluto</th>
+
                     </tr>
                   </thead>
                   <tbody>
@@ -902,6 +905,7 @@ AF - 18-01-18
                        <td class="span2">{{columna6}}</td>
                        <td class="span2">{{columna7}}</td>
                        <td class="span2">$ {{customFormatNumber columna8}}</td>
+                       <td class="span2">$ {{customFormatNumber columna9}}</td>
                      </tr>
                    {{/each}}
                   </tbody>

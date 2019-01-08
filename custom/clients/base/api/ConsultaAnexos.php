@@ -54,6 +54,8 @@ class ConsultaAnexos extends SugarApi
         $arr_principal['habilita_anexos_activos'] = false;
         $arr_principal['habilita_cesiones_activas'] = false;
         $arr_principal['habilita_contratos_activos'] = false;
+        $arr_principal['suma_saldo_insoluto'] = 0;
+
 
         ############################
         ## Establece valores de resultado
@@ -131,7 +133,10 @@ class ConsultaAnexos extends SugarApi
                             "columna6" => $value['ProximaRenta'],
                             "columna7" => $value['VigenciaSeguro'],
                             "columna8" => $value['Monto'],
+                            "columna9" => $value['SaldoInsoluto'],
                         );
+                        $arr_principal['suma_saldo_insoluto'] += $value['SaldoInsoluto'];
+
                     }
                     break;
                 case 4:
