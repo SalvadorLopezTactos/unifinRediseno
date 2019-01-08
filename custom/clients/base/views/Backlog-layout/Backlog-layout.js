@@ -85,9 +85,17 @@
         var anio_list_html = '<option value=""></option>';
         for (anio_keys in anio_list) {
             anio_list_html += '<option value="' + anio_keys + '">' + anio_list[anio_keys] + '</option>'
-
         }
         this.anio_list_html = anio_list_html;
+
+        var currentYear = new Date().getFullYear();
+        var anio_list_html_filter = '<option value=""></option>';
+        for (anio_keys in anio_list) {
+            if (anio_keys >= currentYear-2 ) {
+                anio_list_html_filter += '<option value="' + anio_keys + '">' + anio_list[anio_keys] + '</option>'
+            }
+        }
+        this.anio_list_html_filter = anio_list_html_filter;
 
         //genera las listas de mes y anio que seran utilizadas en el popup de cancelar
         this.getCurrentYearMonthPopUp();
