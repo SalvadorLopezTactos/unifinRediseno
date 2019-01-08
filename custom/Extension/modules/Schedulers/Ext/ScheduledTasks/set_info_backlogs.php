@@ -34,6 +34,17 @@ function set_info_backlogs()
 
     $resultBL = $sugarQuery->execute();
     $countBL = count($resultBL);
+
+    $GLOBALS['log']->fatal('#'.$countBL. " Backlogs serán procesados");
+
+    $strUpdateBL="UPDATE lev_backlog_cstm blc JOIN lev_backlog bl ON (bl.id = blc.id_c)
+SET blc.tct_bloqueo_txf_c='0' WHERE bl.mes='{$currentMonthStr}' and bl.anio='{$currentYear}'";
+
+    $result = $GLOBALS['db']->query($strUpdateBL);
+
+
+
+    /*
     for($current=0; $current < $countBL; $current++)
     {
         //Obtiene valores de los registros sobre integraciones
@@ -42,7 +53,7 @@ function set_info_backlogs()
         $beanBL->tct_bloqueo_txf_c = '0';
         $beanBL->save();
     }
-
+    */
     //Concluye ejecución
     $GLOBALS['log']->fatal('set_info_backlogs: Termina');
     return true;
