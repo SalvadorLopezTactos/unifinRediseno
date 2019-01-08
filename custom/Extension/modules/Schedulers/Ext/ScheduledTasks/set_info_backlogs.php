@@ -38,7 +38,7 @@ function set_info_backlogs()
     $GLOBALS['log']->fatal('#'.$countBL. " Backlogs serán procesados");
 
     $strUpdateBL="UPDATE lev_backlog_cstm blc JOIN lev_backlog bl ON (bl.id = blc.id_c)
-SET blc.tct_bloqueo_txf_c='0' WHERE bl.mes='{$currentMonthStr}' and bl.anio='{$currentYear}'";
+SET blc.tct_bloqueo_txf_c='0' WHERE bl.mes='{$currentMonthStr}' and bl.anio='{$currentYear}' and blc.tct_bloqueo_txf_c='1'";
 
     $result = $GLOBALS['db']->query($strUpdateBL);
 
