@@ -126,4 +126,19 @@ SQL;
         $GLOBALS['log']->fatal(__FILE__ . " - " . __CLASS__ . "->" . __FUNCTION__ . " Lista completa de Integrantes para el team del usuario: " . print_r($user_list_Team,1));
         */
     }
+
+    public function gpoGlobal($bean = null, $event = null, $args = null)
+    {
+        global $db;
+        $idUser = $bean->id;
+        $GLOBALS['log']->fatal('Genera Usuario e impide salir del grupo Global');
+
+        if ($idUser!= null || $idUser!= ''){
+            $GLOBALS['log']->fatal('Entra a condición para salir de gpo global');
+            $query="UPDATE team_memberships SET implicit_assign=1 
+            WHERE user_id='{$idUser}' and team_id='1'";
+            $results = $GLOBALS['db']->query($query);
+        }
+        $GLOBALS['log']->fatal('Finaliza salir del gpo global');
+    }
 }
