@@ -59,7 +59,7 @@
         */
         this.model.on("change:rfc_c", _.bind(function () {
             var rfc = this.getField('rfc_c');
-            if (rfc.action === "edit") {
+            /*if (rfc.action === "edit") {
               if (App.user.id!=self.model.get('user_id_c') && App.user.id!= self.model.get('user_id1_c') && App.user.id!= self.model.get('user_id2_c') ) {
                   App.alert.show("validar_rfc", {
                       level: "error",
@@ -67,14 +67,15 @@
                       autoClose: false
                   });
               }
-            }
-            /*if (!_.isEmpty(this.model.get('idcliente_c')) && rfc.action === "edit") {
+            }*/
+            if (!_.isEmpty(this.model.get('idcliente_c')) && rfc.action === "edit") {
                 app.api.call("read", app.api.buildURL("Accounts/AccountsCustomAPI/" + this.model.get('idcliente_c'), null, null, {}), null, {
                     success: _.bind(function (data) {
                         if (data.UNI2_CTE_029_VerificaClienteTieneContratoResult._tieneContratos == true) {
+                            if (App.user.id!=self.model.get('user_id_c') && App.user.id!= self.model.get('user_id1_c') && App.user.id!= self.model.get('user_id2_c') ) {
                                 app.alert.show("Validar Contratos", {
                                     level: "error",
-                                    title: "No puede cambiar RFC a Cliente con contratos existentes.",
+                                    title: "\u00DAnicamente los promotores asociados a la cuenta pueden cambiar el RFC a Cliente con contratos existentes.",
                                     autoClose: false
                                 });
                                 this.cancelClicked();
@@ -83,7 +84,9 @@
                         }
                     }, this)
                 });
-            }*/
+            }
+
+
             this.RFC_DuplicateCheck();
         }, this));
 
@@ -597,11 +600,6 @@
     //Establecer todos los campos como solo lectura cuando el registro actual es el contacto genérico
     {
 
-        //Bloqueo RFC
-        if (App.user.id!=this.model.get('user_id_c') && App.user.id!= this.model.get('user_id1_c') && App.user.id!= this.model.get('user_id2_c') ) {
-            this.noEditFields.push('rfc_c');
-            this.noEditFields.push('generar_rfc_c');
-        }
         var id = app.lang.getAppListStrings('tct_persona_generica_list');
         if (this.model.get('id') === id['accid'] && app.user.get('type') !== 'admin') {
             var self = this;
@@ -1138,7 +1136,6 @@
     },
 
     _doGenera_RFC_CURP: function () {
-        if (App.user.id==this.model.get('user_id_c') || App.user.id== this.model.get('user_id1_c') || App.user.id== this.model.get('user_id2_c') ) {
           if (this.model.get('pais_nacimiento_c') != 2 && this.model.get('pais_nacimiento_c') != '' && this.model.get('pais_nacimiento_c') != null
               && (this.model.get('tipo_registro_c') != 'Prospecto' || this.model.get('estatus_c') != 'Interesado')) {
               if (this.model.get('tipodepersona_c') != 'Persona Moral') {
@@ -1199,7 +1196,6 @@
                   }
               }
           }
-        }
     },
 
     ValidaFormatoCURP: function (fields, errors, callback) {
