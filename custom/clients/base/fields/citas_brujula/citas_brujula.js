@@ -19,6 +19,8 @@
 
         'change  .duration_minutes': 'editarRow',
         'change  .traslado_edit': 'editarRow',
+        'keypress  .duration_minutes': 'isNumberKey',
+        'keypress  .traslado_edit': 'isNumberKey',
     },
 
     initialize: function (options) {
@@ -397,6 +399,18 @@
         if(campo == "estatus_cita" || campo == "duration_minutes" || campo == "traslado_edit"){
             this.calculaTiempo();
         }
+    },
+
+    /*
+    * Función para aceptar únicamente caracteres numéricos en los campos de Duración y Traslado
+    * */
+    isNumberKey: function (e) {
+        var charCode = (e.which) ? e.which : e.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+
     },
 
     resultadosList: function(e){

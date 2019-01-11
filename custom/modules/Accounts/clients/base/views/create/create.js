@@ -395,11 +395,13 @@
         //this.model.on('change:estado_nacimiento_c', this._doGeneraCURP, this);
 
         this.model.addValidationTask('valida_potencial',_.bind(this.validapotencial, this));
+
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));        
+        
         /*Funcion para validar los campos ventas anuales y activo fijo al editar una cuenta de tipo
         * Integración de Expediente
         * Adrian Arauz 4/10/2018
         * */
-
 
         this.model.on('change:profesion_c', this._doValidateProfesionRisk, this);
         this.model.on('change:pais_nacimiento_c', this._doValidateProfesionRisk, this);
@@ -1505,11 +1507,11 @@
             this.model.set("esproveedor_c", true);
             var tipoProveedor = new String(this.model.get('tipo_proveedor_c'));
             if (tipoProveedor.length == 0) {
-                app.alert.show("Proveedor Requerido", {
+                /*app.alert.show("Proveedor Requerido", {
                     level: "error",
                     title: "Debe seleccionar un tipo de proveedor al menos",
                     autoClose: false
-                });
+                });*/
                 errors['tipo_proveedor_c'] = errors['tipo_proveedor_c'] || {};
                 errors['tipo_proveedor_c'].required = true;
             }
@@ -1693,11 +1695,11 @@
         if (this.model.get('origendelprospecto_c') == 'Prospeccion propia') {
             var metodoProspeccion = new String(this.model.get('metodo_prospeccion_c'));
             if (metodoProspeccion.length == 0 || this.model.get('metodo_prospeccion_c') == null) {
-                app.alert.show("Metodo de Prospeccion Requerido", {
+                /*app.alert.show("Metodo de Prospeccion Requerido", {
                     level: "error",
                     title: "Debe indicar el metodo de prospecci\u00F3n",
                     autoClose: false
-                });
+                });*/
                 errors['metodo_prospeccion_c'] = errors['metodo_prospeccion_c'] || {};
                 errors['metodo_prospeccion_c'].required = true;
             }
@@ -1920,6 +1922,24 @@
         callback(null, fields, errors);
     },
 
-
-
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '<br></b>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                title: "Los siguientes campos son requeridos: <br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
+    },
 })
