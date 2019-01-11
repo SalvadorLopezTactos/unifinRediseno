@@ -83,14 +83,14 @@
     <div class="row-fluid" style="margin-top: 20px; ">
         <div class="span2">
             <select class="select2 inherit-width equipoList " id="states3" data-name="listEquipos"
-                    data-placeholder="Equipo...">
+                    data-placeholder="Equipo" data-toggle="tooltip" title="Selecciona un Equipo">
                 {{{list_equipos_all}}}
             </select>
         </div>
 
         <div class="span8">
             <select class="select2 inherit-width usrList" id="states2" data-name="listUsuarios"
-                    data-placeholder="Elige un usuario ...">
+                    data-placeholder="Elige un usuario " data-toggle="tooltip" title="Selecciona un Usuario">
                 {{#each list_filter_usr }}
                     <option value={{this.id}}>{{this.full_name}}</option>
                 {{/each}}
