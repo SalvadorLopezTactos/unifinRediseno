@@ -99,13 +99,13 @@
     //No muestra en alert en algunos casos
     hasUnsavedChanges: function(){
       this._super('hasUnsavedChanges');
-      
+
       if (this.action==='detail'){
       return false;
       }
-      else{   
+      else{
             if(_.isEmpty(this.collection.models[0].changed)){
-              return false; 
+              return false;
             }else{
               return true;
             }
@@ -134,6 +134,19 @@
         $('[data-subpanel-link="lev_backlog_opportunities"]').addClass('hide');
         $('[data-subpanel-link="opportunities_opportunities_1"]').addClass('hide');
         $('[data-subpanel-link="tct2_notificaciones_opportunities"]').addClass('hide');
+
+        //Establece año
+        var currentYear = (new Date).getFullYear();
+        var opciones_year = app.lang.getAppListStrings('anio_list');
+        Object.keys(opciones_year).forEach(function(key){
+            //Quita años previos
+            if(key < currentYear){
+                delete opciones_year[key];
+            }
+
+        });
+        //Establece valores para año
+        this.model.fields['ri_anio_c'].options = opciones_year;
     },
 
     _render: function() {
