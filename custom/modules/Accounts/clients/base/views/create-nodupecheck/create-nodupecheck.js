@@ -679,8 +679,8 @@
             }
         } else {
             if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                if (this.model.get('fechadenacimiento_c') != null && this.model.get('fechadenacimiento_c') != '' && this.model.get('primernombre_c') != null
-                    && this.model.get('apellidopaterno_c') != null && this.model.get('apellidomaterno_c') != null) {
+                if (this.model.get('fechadenacimiento_c') != null && this.model.get('fechadenacimiento_c') != '' && this.model.get('primernombre_c') != null && this.model.get('primernombre_c') != ''
+                    && this.model.get('apellidopaterno_c') != null  && this.model.get('apellidopaterno_c') != '' && this.model.get('apellidomaterno_c') != null && this.model.get('apellidomaterno_c') != '') {
                     this._doValidateWSRFC();
                 } else {
                     app.alert.show("Generar RFC", {
