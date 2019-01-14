@@ -8,10 +8,10 @@
         this.on('render', this.disableparentsfields, this);
         // this.on('render',this.disabledates,this);
         this.on('render', this.noestatusedit, this);
-
         // this.model.on("change:date_start_date", _.bind(this.validaFecha, this));
         this.model.on("change:tct_conferencia_chk_c", _.bind(this.ocultaConferencia, this));
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicialCall, this));
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
     },
 
     /* @F. Javier G. Solar
@@ -108,5 +108,26 @@
     //Adrian Arauz 6/09/2018
     noestatusedit:function () {
           $('span[data-name=status]').css("pointer-events", "none");
+    },
+
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Calls") + '</b><br>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información en la <b>Llamada:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 })

@@ -1928,7 +1928,7 @@
             _.each(this.model.fields, function(field) {
                 if(_.isEqual(field.name,key)) {
                     if(field.vname) {
-                        campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '<br></b>';
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '</b><br>';
                     }
           		  }
        	    }, this);
@@ -1936,7 +1936,7 @@
         if(campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
-                title: "Los siguientes campos son requeridos: <br>" + campos,
+                messages: "Hace falta completar la siguiente información en la <b>Cuenta:</b><br>" + campos,
                 autoClose: false
             });
         }
