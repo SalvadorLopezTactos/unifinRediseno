@@ -1576,7 +1576,7 @@ console.log(name);
             _.each(this.model.fields, function(field) {
                 if(_.isEqual(field.name,key)) {
                     if(field.vname) {
-                        campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '<br></b>';
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '</b><br>';
                     }
           		  }
        	    }, this);
@@ -1584,7 +1584,7 @@ console.log(name);
         if(campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
-                title: "<b>ERROR</b> Hace falta completar la siguiente información en la <b>Solicitud:</b><br>" + campos,
+                messages: "Hace falta completar la siguiente información en la <b>Solicitud:</b><br>" + campos,
                 autoClose: false
             });
         }

@@ -539,7 +539,7 @@
             _.each(this.model.fields, function(field) {
                 if(_.isEqual(field.name,key)) {
                     if(field.vname) {
-                        campos = campos + '<b>' + app.lang.get(field.vname, "lev_Backlog") + '<br></b>';
+                        campos = campos + '<b>' + app.lang.get(field.vname, "lev_Backlog") + '</b><br>';
                     }
           		  }
        	    }, this);
@@ -547,7 +547,7 @@
         if(campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
-                title: "<b>ERROR</b> Hace falta completar la siguiente información en el <b>Backlog:</b><br>" + campos,
+                messages: "Hace falta completar la siguiente información en el <b>Backlog:</b><br>" + campos,
                 autoClose: false
             });
         }
