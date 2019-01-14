@@ -13,13 +13,13 @@
             this.on('render',this.disableparentsfields,this);
             this.on('render', this.noEditStatus,this);
             //this.model.on('sync', this.bloqueaTodo, this);
-
             //Habilita el campo parent_name cuando esta vacio y lo deshabilta cuando ya tiene una cuenta
             this.model.on('sync',this.enableparentname,this);
             this.model.on('sync', this.cambioFecha, this);
             this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
             this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
             this.model.addValidationTask('VaildaFecha', _.bind(this.VaildaFecha, this));
+            this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
             /*@Jesus Carrillo
                 Funcion que pinta de color los paneles relacionados
             */
@@ -32,13 +32,12 @@
             this.model.on('sync', this.disableFieldsTime,this);
             this.model.addValidationTask('resultCallReq',_.bind(this.resultCallRequerido, this));
             this.events['click a[name=edit_button]'] = 'fechascallsymeet';
-
     },
+    
     _render: function (options) {
         this._super("_render");
         this.enableparentname();
     },
-
 
     bloqueaTodo:function()
     {
@@ -169,25 +168,25 @@
     VaildaFecha: function(fields, errors, callback)
     {
         var startDate = new Date(this.model.get('date_start'));
-	var startMonth = startDate.getMonth() + 1;
-	var startDay = startDate.getDate();
-	var startYear = startDate.getFullYear();
-	var startDateText = startDay + "/" + startMonth + "/" + startYear;
-	var conferDate = new Date(this.model.get('tct_conferencia_fecha_dat_c'));
-	var conferMonth = conferDate.getMonth() + 1;
-	var conferDay = conferDate.getDate();
-	var conferYear = conferDate.getFullYear();
-	var conferDateText = conferDay + "/" + conferMonth + "/" + conferYear;
+      	var startMonth = startDate.getMonth() + 1;
+      	var startDay = startDate.getDate();
+      	var startYear = startDate.getFullYear();
+      	var startDateText = startDay + "/" + startMonth + "/" + startYear;
+      	var conferDate = new Date(this.model.get('tct_conferencia_fecha_dat_c'));
+      	var conferMonth = conferDate.getMonth() + 1;
+      	var conferDay = conferDate.getDate();
+      	var conferYear = conferDate.getFullYear();
+      	var conferDateText = conferDay + "/" + conferMonth + "/" + conferYear;
         var startToDate = Date.parse(startDateText);
         var inputToDate = Date.parse(conferDateText);
-	if(inputToDate < startToDate)
-    	{
+	      if(inputToDate < startToDate)
+      	{
           app.alert.show("Fecha Incorrecta", {
             level: "error",
             title: "La fecha a contactar debe ser mayor a la fecha actual",
             autoClose: false
           });
-    	  errors['tct_conferencia_fecha_dat_c'] = "La fecha a contactar debe ser mayor a la fecha actual";
+    	    errors['tct_conferencia_fecha_dat_c'] = "La fecha a contactar debe ser mayor a la fecha actual";
           errors['tct_conferencia_fecha_dat_c'].required = true;
         }
     	callback(null, fields, errors);
@@ -197,11 +196,11 @@
     {
       if(this.model.get('tct_conferencia_chk_c') && this.model.get('tct_calificacion_conferencia_c') === "")
     	{
-          app.alert.show("Calificacion Requerida", {
+          /*app.alert.show("Calificacion Requerida", {
             level: "error",
             title: "El campo Calificaci&oacuten de la Conferencia es requerido",
             autoClose: false
-          });
+          });*/
     	    errors['tct_calificacion_conferencia_c'] = "El campo Calificaci&oacuten de la Conferencia es requerido";
           errors['tct_calificacion_conferencia_c'].required = true;
       }
@@ -378,5 +377,25 @@
 
         }
     },
-
+    
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Calls") + '<br></b>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                title: "<b>ERROR</b> Hace falta completar la siguiente información en la <b>Llamada:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
+    },
 })

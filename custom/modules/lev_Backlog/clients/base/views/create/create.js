@@ -33,6 +33,8 @@
          */
         this.model.addValidationTask('check_solicitud', _.bind(this._ValidateSolicitud, this));
         this.model.addValidationTask('check_existingBL', _.bind(this._ValidateExistingBL, this));
+        
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
 
         /*
         var usuario = app.data.createBean('Users',{id:app.user.get('id')});
@@ -673,4 +675,25 @@
         this.model.set("ri_final_comprometida_c", Monto);
     },
     */
+
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "lev_Backlog") + '<br></b>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                title: "<b>ERROR</b> Hace falta completar la siguiente información en el <b>Backlog:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
+    },
 })

@@ -1936,7 +1936,7 @@
         if(campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
-                title: "Los siguientes campos son requeridos: <br>" + campos,
+                title: "<b>ERROR</b> Hace falta completar la siguiente información en la <b>Cuenta:</b><br>" + campos,
                 autoClose: false
             });
         }
