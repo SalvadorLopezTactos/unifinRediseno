@@ -430,9 +430,9 @@
 
 
                         app.error.errorName2Keys['custom_message1'] = 'Falta información en campos requeridos de la cuenta';
-                        errors['account_name'] = errors['account_name'] || {};
-                        errors['account_name'].custom_message1 = true;
-                        errors['account_name'].required = true;
+                        errors['account_name_1'] = errors['account_name_1'] || {};
+                        errors['account_name_1'].custom_message1 = true;
+                        errors['account_name_1'].required = true;
                         self.mensajes(titulo, mensaje, nivel);
 
                     }
@@ -576,7 +576,7 @@
 	buscaDuplicados: function(fields, errors, callback)
 	{
 		var cliente = this.model.get('account_id');
-		var tipo = this.model.get('tipo_producto_c');		
+		var tipo = this.model.get('tipo_producto_c');
 		var fields = ["account_id", "tct_etapa_ddw_c", "estatus_c", "tipo_producto_c"];
         app.api.call("read", app.api.buildURL("Opportunities/", null, null,
 		{
@@ -614,16 +614,16 @@
 						level: "error",
 						title: "No es posible crear una Pre-solicitud cuando ya se encuentra una Pre-solicitud o Solicitud en proceso.",
 						autoClose: false
-					});	
+					});
 					app.error.errorName2Keys['custom_message'] = 'No es posible crear una Pre-solicitud cuando ya se encuentra una Pre-solicitud o Solicitud en proceso.';
-					errors['account_name'] = errors['account_name'] || {};
-					errors['account_name'].custom_message = true;
+					errors['account_name_2'] = errors['account_name_2'] || {};
+					errors['account_name_2'].custom_message = true;
 				}
 				callback(null, fields, errors);
             }, this)
         });
     },
-   
+
     validaClientesActivos: function(fields, errors, callback){
       if (this.model.get('account_id')) {
         var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
@@ -631,8 +631,8 @@
             success: _.bind(function (model) {
                 if (model.get('estatus_persona_c') == 'I') {
                     app.error.errorName2Keys['custom_message'] = 'No se puede iniciar operacion en una cuenta inactiva';
-                    errors['account_name'] = errors['account_name'] || {};
-                    errors['account_name'].custom_message = true;
+                    errors['account_name_3'] = errors['account_name_3'] || {};
+                    errors['account_name_3'].custom_message = true;
                 }
                 callback(null, fields, errors);
             }, this)
@@ -641,7 +641,7 @@
         callback(null, fields, errors);
       }
     },
-	
+
     verificaOperacionProspecto: function(){
         var account = app.data.createBean('Accounts', {id:this.model.get('account_id')});
         account.fetch({
@@ -724,8 +724,8 @@
                               autoClose: false
                           });
                           app.error.errorName2Keys['custom_message'] = 'Solo puede tener una operacion como prospecto ';
-                          errors['account_name'] = errors['account_name'] || {};
-                          errors['account_name'].custom_message = true;
+                          errors['account_name_4'] = errors['account_name_4'] || {};
+                          errors['account_name_4'].custom_message = true;
 
                           //this.cancelClicked();
                           callback(null, fields, errors);
@@ -1152,8 +1152,8 @@
                                });
 
                                app.error.errorName2Keys['custom_message1'] = 'La cuenta asociada debe ser tipo Cliente o Prospecto';
-                               errors['account_name'] = errors['account_name'] || {};
-                               errors['account_name'].custom_message1 = true;
+                               errors['account_name_5'] = errors['account_name_5'] || {};
+                               errors['account_name_5'].custom_message1 = true;
                                //this.cancelClicked();
 
                        }
@@ -1167,9 +1167,9 @@
        }else{
 
            app.error.errorName2Keys['custom_message1'] = 'La persona asociada debe ser tipo Cliente o Prospecto';
-           errors['account_name'] = errors['account_name'] || {};
-           errors['account_name'].custom_message1 = true;
-           errors['account_name'].required = true;
+           errors['account_name_6'] = errors['account_name_6'] || {};
+           errors['account_name_6'].custom_message1 = true;
+           errors['account_name_6'].required = true;
 
            callback(null, fields, errors);
        }
@@ -1385,7 +1385,8 @@
     valida_direc_indicador: function(fields, errors, callback){
         self=this;
         var admin=0;
-        app.api.call('GET', app.api.buildURL('Accounts/' +this.model.get('account_id')+'/link/accounts_dire_direccion_1'), null, {
+        if (typeof this.model.get('account_id') != "undefined" && this.model.get('account_id')!= "" ) {
+          app.api.call('GET', app.api.buildURL('Accounts/' +this.model.get('account_id')+'/link/accounts_dire_direccion_1'), null, {
             success: _.bind(function (data) {
                 console.log('Info de Accounts:');
                 console.log(data);
@@ -1408,9 +1409,16 @@
                         errors['indicador_16'].required = true;
 
                 }
+                callback(null, fields, errors);
             }, self),
         });
-        callback(null, fields, errors);
+
+        }else {
+            errors['account_name'] = errors['account_name'] || {};
+            errors['account_name'].required = true;
+            callback(null, fields, errors);
+        }
+
     },
 
     _getIndicador: function(idSelected, valuesSelected) {
