@@ -12,7 +12,7 @@
             _.each(this.model.fields, function(field) {
                 if(_.isEqual(field.name,key)) {
                     if(field.vname) {
-                        campos = campos + '<b>' + app.lang.get(field.vname, "uni_Brujula") + '<br></b>';
+                        campos = campos + '<b>' + app.lang.get(field.vname, "uni_Brujula") + '</b><br>';
                     }
           		  }
        	    }, this);
@@ -20,7 +20,7 @@
         if(campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
-                title: "<b>ERROR</b> Hace falta completar la siguiente información en la <b>Brujula:</b><br>" + campos,
+                messages: "Hace falta completar la siguiente información en la <b>Brujula:</b><br>" + campos,
                 autoClose: false
             });
         }
