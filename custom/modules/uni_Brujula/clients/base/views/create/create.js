@@ -1,29 +1,11 @@
 ({
-    extendsFrom: 'RecordView',
+    extendsFrom: 'CreateView',
 
     initialize: function (options) {
-        self = this;
         this._super("initialize", [options]);
-
-        /*@Jesus Carrillo
-            Funcion que pinta de color los paneles relacionados
-        */
-        this.model.on('sync', this.fulminantcolor, this);
-
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
     },
-
-    /*@Jesus Carrillo
-        Funcion que pinta de color los paneles relacionados
-    */
-    fulminantcolor: function () {
-        $( '#space' ).remove();
-        $('.control-group').before('<div id="space" style="background-color:#000042"><br></div>');
-        $('.control-group').css("background-color", "#e5e5e5");
-        $('.a11y-wrapper').css("background-color", "#e5e5e5");
-        //$('.a11y-wrapper').css("background-color", "#c6d9ff");
-    },
-
+    
     valida_requeridos: function(fields, errors, callback) {
         var campos = "";
         _.each(errors, function(value, key) {

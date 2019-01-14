@@ -28,7 +28,7 @@
           funcion: Validar acceso para creación de solicitudes. No debe permitir crear solicitudes si usuario tiene rol: "Gestión Comercial"
         */
         this.on('render', this._rolnocreacion, this);
-		this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
+		    this.model.addValidationTask('buscaDuplicados', _.bind(this.buscaDuplicados, this));
         this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
         this.model.addValidationTask('check_activos_seleccionados', _.bind(this.validaClientesActivos, this));
         this.model.addValidationTask('check_activos_index', _.bind(this.validaActivoIndex, this));
@@ -75,7 +75,7 @@
         * **/
         this.model.addValidationTask('Valida al Guardar',_.bind(this.validacion_proceso_guardar,this));
 
-
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
 
         /*
         * @author Carlos Zaragoza Ortiz
@@ -1469,5 +1469,26 @@
         }
 
         return result;
+    },
+
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '<br></b>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                title: "<b>ERROR</b> Hace falta completar la siguiente información en la <b>Solicitud:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 })

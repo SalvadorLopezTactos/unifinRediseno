@@ -44,6 +44,7 @@
           * Victor Martinez Lopez 24-08-2018
         */
         this.model.addValidationTask('resultadoCitaRequerido',_.bind(this.resultadoCitaRequerido, this));
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         this.model.on('sync',this.enableparentname,this);
     },
 
@@ -603,5 +604,26 @@
         });
       }
       callback(null, fields, errors);
+    },
+
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Meetings") + '<br></b>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                title: "<b>ERROR</b> Hace falta completar la siguiente información en la <b>Reunión:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 })
