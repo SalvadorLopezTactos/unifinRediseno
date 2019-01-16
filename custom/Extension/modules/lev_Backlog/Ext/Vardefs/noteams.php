@@ -1,3 +1,3 @@
 <?php
-$dictionary['lev_Backlog']['visibility'] = array('TeamSecurity' => false);
+/*$dictionary['lev_Backlog']['visibility'] = array('TeamSecurity' => false);*/
 ?>
