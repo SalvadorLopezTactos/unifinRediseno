@@ -923,7 +923,7 @@
                 context=this;
                 app.alert.show('do-call', {
                     level: 'confirmation',
-                    messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La llamada se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
+                    messages: '¿Realmente quieres realizar la llamada? <br><br><b>NOTA: La marcaci\u00F3n se realizar\u00E1 tal cual el n\u00FAmero est\u00E1 registrado</b>',
                     autoClose: false,
                     onConfirm: function(){
                         context.createcall(context.resultCallback);
