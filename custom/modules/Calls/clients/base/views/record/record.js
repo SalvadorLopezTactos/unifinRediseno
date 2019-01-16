@@ -57,7 +57,11 @@
     resultCallRequerido:function (fields, errors, callback) {
         if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
             if (this.model.get('tct_resultado_llamada_ddw_c')=='') {
-
+                app.alert.show("Resultado de la llamada", {
+                    level: "error",
+                    messages: "El resultado de la Llamada es requerido",
+                    autoClose: false
+                });
                 app.error.errorName2Keys['requResultCall'] = 'El resultado de la Llamada es requerido';
                 errors['tct_resultado_llamada_ddw_c'] = errors['tct_resultado_llamada_ddw_c'] || {};
                 errors['tct_resultado_llamada_ddw_c'].requResultCall = true;
@@ -365,7 +369,6 @@
             $('.record-edit-link-wrapper[data-name=tct_fecha_seguimiento_dat_c]').remove();
             $('.record-edit-link-wrapper[data-name=tct_motivo_desinteres_ddw_c]').remove();
         }
-
     },
 
     fechascallsymeet: function(){
@@ -374,7 +377,6 @@
             self.noEditFields.push('date_start');
             self.noEditFields.push('date_end');
             self.render();
-
         }
     },
     
