@@ -1,5 +1,5 @@
 <?php
-// created: 2018-08-27 09:48:25
+// created: 2019-01-16 11:23:50
 $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
   'panels' => 
   array (
@@ -59,13 +59,6 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
         ),
         5 => 
         array (
-          'name' => 'parent_type',
-          'label' => 'LBL_PARENT_TYPE',
-          'enabled' => true,
-          'default' => true,
-        ),
-        6 => 
-        array (
           'name' => 'parent_name',
           'label' => 'LBL_LIST_RELATED_TO',
           'enabled' => true,
@@ -74,7 +67,7 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
           'sortable' => false,
           'default' => true,
         ),
-        7 => 
+        6 => 
         array (
           'name' => 'assigned_user_name',
           'target_record_key' => 'assigned_user_id',
@@ -99,30 +92,12 @@ $viewdefs['Calls']['base']['view']['subpanel-for-accounts-calls'] = array (
         'icon' => 'fa-eye',
         'acl_action' => 'view',
       ),
-      /*1 =>
-      array (
-        'type' => 'rowaction',
-        'name' => 'edit_button',
-        'icon' => 'fa-pencil',
-        'label' => 'LBL_EDIT_BUTTON',
-        'event' => 'list:editrow:fire',
-        'acl_action' => 'edit',
-      ),*/
       2 => 
       array (
         'type' => 'unlink-action',
         'icon' => 'fa-chain-broken',
         'label' => 'LBL_UNLINK_BUTTON',
       ),
-      /*3 =>
-      array (
-        'type' => 'closebutton',
-        'icon' => 'fa-times-circle',
-        'name' => 'record-close',
-        'label' => 'LBL_CLOSE_BUTTON_TITLE',
-        'closed_status' => 'Held',
-        'acl_action' => 'edit',
-      ),*/
     ),
   ),
   'type' => 'subpanel-list',
