@@ -19,12 +19,12 @@
             this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
             this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
             this.model.addValidationTask('VaildaFecha', _.bind(this.VaildaFecha, this));
-            this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+
             /*@Jesus Carrillo
                 Funcion que pinta de color los paneles relacionados
             */
             this.model.on('sync', this.fulminantcolor, this);
-            
+
             $('[data-name="status"]').find('.fa-pencil').remove();
             $('.record-edit-link-wrapper[data-name=status]').remove();
 
@@ -32,8 +32,9 @@
             this.model.on('sync', this.disableFieldsTime,this);
             this.model.addValidationTask('resultCallReq',_.bind(this.resultCallRequerido, this));
             this.events['click a[name=edit_button]'] = 'fechascallsymeet';
+            this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
     },
-    
+
     _render: function (options) {
         this._super("_render");
         this.enableparentname();
@@ -57,15 +58,14 @@
     resultCallRequerido:function (fields, errors, callback) {
         if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
             if (this.model.get('tct_resultado_llamada_ddw_c')=='') {
-                app.alert.show("Resultado de la llamada", {
+                /*app.alert.show("Resultado de la llamada", {
                     level: "error",
                     messages: "El resultado de la Llamada es requerido",
                     autoClose: false
-                });
-                app.error.errorName2Keys['requResultCall'] = 'El resultado de la Llamada es requerido';
+                });*/
                 errors['tct_resultado_llamada_ddw_c'] = errors['tct_resultado_llamada_ddw_c'] || {};
-                errors['tct_resultado_llamada_ddw_c'].requResultCall = true;
                 errors['tct_resultado_llamada_ddw_c'].required = true;
+
             }
         }
         callback(null, fields, errors);
@@ -85,7 +85,7 @@
     },
 
     /**
-     * @author Salvador Lopez	
+     * @author Salvador Lopez
      * Se habilita handleEdit, editClicked y cancelClicked para dejar habilitado el campo parent_name y solo se bloquea al
      * dar click en el campo e intentar editar
     * */
@@ -136,7 +136,7 @@
         }
 
     },
-    
+
     cancelClicked: function() {
 
         this._super("cancelClicked");
@@ -238,7 +238,7 @@
 
         //Elimina �cono de l�piz para editar parent_name
         $('[data-name="parent_name"]').find('.fa-pencil').remove();
-        
+
         },
 
         /*Victor Martinez Lopez
@@ -379,7 +379,7 @@
             self.render();
         }
     },
-    
+
     valida_requeridos: function(fields, errors, callback) {
         var campos = "";
         _.each(errors, function(value, key) {

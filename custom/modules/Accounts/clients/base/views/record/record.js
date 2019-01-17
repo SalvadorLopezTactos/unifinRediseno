@@ -48,9 +48,9 @@
         * Adrian Arauz 4/10/2018
         * */
         this.model.addValidationTask('valida_potencial',_.bind(this.validapotencial, this));
-        
+
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
-        
+
         /* F. Javier G. Solar
            OBS299 Validar que las Direcciones no se repitan 21/11/2018
         */
@@ -1302,7 +1302,7 @@
                 $('.direcciondashlet').css('border-color', 'red');
                 app.alert.show("Direccion requerida", {
                     level: "error",
-                    title: "Al menos una dirección de tipo Administración es requerida.",
+                    title: "Al menos una direcci\u00F3n es requerida.",
                     autoClose: false
                 });
             } else {
@@ -2356,7 +2356,7 @@
                 if(this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
                     errors['estado_nacimiento_c'] = errors['estado_nacimiento_c'] || {};
                     errors['estado_nacimiento_c'].required = true;
-                }                
+                }
                 if(this.model.get('fechaconstitutiva_c')==''|| this.model.get('fechaconstitutiva_c')==null){
                     errors['fechaconstitutiva_c'] = errors['fechaconstitutiva_c'] || {};
                     errors['fechaconstitutiva_c'].required = true;
