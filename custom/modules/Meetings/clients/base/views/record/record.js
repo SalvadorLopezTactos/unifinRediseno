@@ -119,7 +119,7 @@
         if($('.objetivoSelect').length<=0){
             app.alert.show("Objetivo vacio",{
                     level: "error",
-                    title: "Es necesario tener por lo menos un objetivo espec\u00EDfico para generar la minuta",
+                    title: "Es necesario tener por lo menos un <b>Objetivo espec\u00EDfico</b> para generar la minuta",
                     autoClose: false
                 });
         }else{
@@ -582,7 +582,7 @@
             this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(1).attr("style","display:block");
             app.alert.show("Objetivo vacio",{
                 level: "error",
-                title: "Es necesario tener por lo menos un objetivo espec\u00EDfico",
+                title: "Es necesario tener por lo menos un <b>Objetivo espec\u00EDfico</b>",
                 autoClose: false
             });
         }
