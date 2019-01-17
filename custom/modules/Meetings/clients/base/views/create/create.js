@@ -63,7 +63,7 @@
             necesario=necesario + '<b>Objetivos Espec\u00EDficos</b><br>';
             app.alert.show("Guardar Reunion", {
                 level: "error",
-                title: '<p style="font-weight: normal;">Por lo menos debe especificar un Objetivo Específico en la Reuni\u00F3n</p>',
+                title: '<p style="font-weight: normal;">Por lo menos debe agregar un <b>Objetivo Específico</b> para la <b>Reuni\u00F3n</b></p>',
                 autoClose: false
             });
         }

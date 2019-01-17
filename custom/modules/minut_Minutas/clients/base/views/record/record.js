@@ -5,8 +5,8 @@
         this._super("initialize", [options]);
         //Se añade evento para establecer registro como Solo Lectura
         this.model.on('sync', this.setNoEditAllFields, this);
-
         this.model.on('data:sync:complete', this.hidedeletedocuments, this);
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
    },
 
     render: function(){
@@ -42,6 +42,26 @@
         //console.log('Entro a hidedeletedocuments()');
         $('div[data-subpanel-link="minut_minutas_documents_1"]').find('a[class="btn dropdown-toggle"]').hide()
         //$('div[data-subpanel-link="minut_minutas_documents_1"]').find('.flex-list-view.left-actions.right-actions.scroll-width').find('a[class="btn dropdown-toggle"]').hide();
-    }
+    },
 
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "minut_Minutas") + '</b><br>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información en la <b>Minuta:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
+    },
 })
