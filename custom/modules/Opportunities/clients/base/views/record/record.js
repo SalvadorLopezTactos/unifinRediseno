@@ -436,9 +436,9 @@
                     }
 
                     app.error.errorName2Keys['custom_message1'] = 'Falta tipo y subtipo de cuenta';
-                    errors['account_name'] = errors['account_name'] || {};
-                    errors['account_name'].custom_message1 = true;
-                    errors['account_name'].required = true;
+                    errors['account_name_1'] = errors['account_name_1'] || {};
+                    errors['account_name_1'].custom_message1 = true;
+                    errors['account_name_1'].required = true;
                     self.mensajes(titulo, mensaje, nivel);
 
                 }
