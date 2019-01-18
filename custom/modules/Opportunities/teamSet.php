@@ -16,6 +16,7 @@ class teamSetClass
     if ($equipoPrincipal != null && $equipoPrincipal!="") {
       //Recupera teams asociados
       $bean->load_relationship('teams');
+      $equipoPrincipal = ($equipoPrincipal == '1') ? 'UNO' : $equipoPrincipal;
       //Agrega teams de BO
       $bean->teams->add(
           array(
