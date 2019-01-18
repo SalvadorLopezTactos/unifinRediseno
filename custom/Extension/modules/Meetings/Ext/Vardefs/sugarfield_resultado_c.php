@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-27 11:48:19
+ // created: 2019-01-18 11:48:02
 $dictionary['Meeting']['fields']['resultado_c']['labelValue']='Resultado de Cita';
 $dictionary['Meeting']['fields']['resultado_c']['dependency']='';
 $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']=array (
@@ -16,6 +16,7 @@ $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']=array (
       5 => '5',
       6 => '6',
       7 => '7',
+      8 => '18',
     ),
     2 => 
     array (

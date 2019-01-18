@@ -1,5 +1,5 @@
 <?php
- // created: 2018-07-26 11:01:21
+ // created: 2019-01-18 11:11:23
 
 $app_list_strings['origendelprospecto_list']=array (
   '' => '',
@@ -8,6 +8,7 @@ $app_list_strings['origendelprospecto_list']=array (
   'Referido Proveedor' => 'Referenciado Proveedor',
   'Referenciador' => 'Referenciado Socio Comercial',
   'Referido Director' => 'Referenciado Director',
+  'Referenciado Vendor' => 'Referenciado Vendor',
   'Marketing' => 'Marketing',
   'Inteligencia de Negocio' => 'Inteligencia de Negocio',
 );
