@@ -124,6 +124,12 @@ class GetUsersTeams extends SugarApi
                 $flag=true;
             }
         }
+
+        //Valida usuario Admin
+        if ($current_user->is_admin == true) {
+          $flag = true;
+        }
+        
         return $flag;
 
     }
