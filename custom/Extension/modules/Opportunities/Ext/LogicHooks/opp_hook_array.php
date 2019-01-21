@@ -13,14 +13,14 @@
     'OpportunityLogic',
     'buscaDuplicados'
 );
-
+/*
  $hook_array['before_save'][] = Array(
     2,
     'evey time a new team is added to the account record, All related opportunities get the new team',
     'custom/modules/Opportunities/opp_logic_hooks.php',
     'OpportunityLogic', // name of the class
     'setTeams'
-);
+);*/
 
  $hook_array['before_save'][] = Array(
     3,
