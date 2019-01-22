@@ -1,49 +1,71 @@
 <div class="control-group">
 
     <div>
-        <h3 style=""><u>Arrendamiento Puro</u></h3>
+        <h4 style=""><b>Arrendamiento Puro</b></h4>
     </div>
     <!-- Panel Arrendamiento Puro -->
-    <div class=" row-fluid panel-ap" style="border: solid lightblue; width: 100%; padding: 5px;">
+    <div class=" row-fluid panel-ap" style="border: solid lightblue; width: 100%; padding: 6px;">
         <!-- Fila 1 -->
         <div class=" row-fluid">
             <div class="span6 campo1ap">
                 <label class="record-label">No Serie FIEL</label>
-                <input type="text" class="noFIEL" value="{{tct_pld_campo1_txt}}" data-field="campo1"/>
+                <input type="text" class="campo1txt" value="{{tct_pld_campo1_txt}}" data-field="campo1"/>
             </div>
         </div>
         <!-- Fila 2 -->
         <div class=" row-fluid">
             <div class="span6 campo2ap">
-                <label class="record-label">¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un
+                <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un
                     tercero?</label>
-                <input type="text" class="noFIEL" value="{{tct_pld_campo2_ddw}}" data-field="campo2"/>
+                <select class="row-fluid campo2ddw select2" data-field="campo2"/>
+                {{{def.tct_pld_campo2_ddw_list}}}
+
             </div>
             <div class="span6 campo4ap">
                 <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
-                <input type="text" class="noFIEL" value="{{tct_pld_campo4_ddw}}" data-field="campo4"/>
+                <br>
+                <select class="campo4ddw select2 row-fluid" data-field="campo4" placeholder="Select">
+                    <!--<option>Proveedor de Recursos</option> -->
+                    {{#each tct_pld_campo4_ddw_list}}
+                        <option value="{{@key}}">{{@key}}</option>
+                    {{/each}}
+                </select>
+
             </div>
         </div>
         <!-- Fila 3 -->
         <div class=" row-fluid">
             <div class="span6 campo3ap">
                 <label class="record-label">Propietario Real</label>
-                <input type="text" class="noFIEL" value="{{tct_pld_campo3_rel}}" data-field="campo3" />
+                <input type="text" class="campo3rel" value="{{tct_pld_campo3_rel}}" data-field="campo3"/>
             </div>
             <div class="span6 campo5ap">
-                <label class="record-label">Proveedor de Recursos</label>
-                <input type="text" class="noFIEL" value="{{tct_pld_campo5_rel}}" data-field="campo5" />
+                <label class="record-label span6">Proveedor de Recursos</label>
+                <input type="text" class="campo5rel" value="{{tct_pld_campo5_rel}}" data-field="campo5"/>
             </div>
         </div>
         <!-- Fila 4 -->
         <div class=" row-fluid">
             <div class="span6 campo6ap">
-                <label class="record-label">¿Espera realizar pagos anticipados a su crédito?</label>
-                <input type="text" class="noFIEL" value="{{tct_pld_campo6_ddw}}" data-field="campo6"/>
+                <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
+                <br>
+                <select class="campo6ddw select2 row-fluid" data-field="campo6" placeholder="Select">
+                    <!--<option>Proveedor de Recursos</option> -->
+                    {{#each tct_pld_campo6_ddw_list}}
+                        <option value="{{@key}}">{{@key}}</option>
+                    {{/each}}
+                </select>
             </div>
             <div class="span6 campo16ap">
-                <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es posible elegir más de una opción)</label>
-                <input type="text" class="noFIEL" value="{{tct_pld_campo16_ddw}}" data-field="campo16"/>
+                <label class="record-label row-fluid">¿Instrumento monetario con el que espera realizar los pagos? (*Es posible
+                    elegir más de una opción)</label>
+                <select class="campo16ddw select2  row-fluid" data-field="campo16" placeholder="Select">
+                    <!--<option>Proveedor de Recursos</option> -->
+                    {{#each tct_pld_campo16_ddw_list}}
+                        <option value="{{@key}}">{{@key}}</option>
+                    {{/each}}
+                </select>
+
             </div>
         </div>
         <!-- Fila 5 -->
@@ -51,18 +73,18 @@
             <div class="span6 campo14ap">
                 <label class="record-label">¿Realizará pagos utilizando otro instrumento monetario?</label>
                 <br>
-                <input type="checkbox" class="noFIEL" value="{{tct_pld_campo14_chk}}" data-field="campo14" />
+                <input type="checkbox" class="campo14chk" value="{{tct_pld_campo14_chk}}" data-field="campo14"/>
             </div>
             <div class="span6 campo17ap">
                 <label class="record-label">Especifique:</label>
-                <input type="text" class="noFIEL" value="{{tct_pld_campo17_txt}}" data-field="campo17"/>
+                <input type="text" class="campo17txt" value="{{tct_pld_campo17_txt}}" data-field="campo17"/>
             </div>
         </div>
         <!-- Fila 6 -->
         <div class=" row-fluid">
             <div class="span6 campo15ap">
                 <label class="record-label">Especifique:</label>
-                <input type="text" class="noFIEL" value="{{tct_pld_campo15_txt}}" data-field="campo15"/>
+                <input type="text" class="campo15txt" value="{{tct_pld_campo15_txt}}" data-field="campo15"/>
             </div>
 
         </div>
