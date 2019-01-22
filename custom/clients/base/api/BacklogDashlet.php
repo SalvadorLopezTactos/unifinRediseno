@@ -1132,7 +1132,6 @@ SQL;
         $split_number = explode('.', $number);
         $last = sizeof($split_number);
         $last -= 1;
-
         if($last > 0) {
             for ($i = 0; $i <= $last; $i++) {
 
@@ -1146,7 +1145,7 @@ SQL;
             }
             $number = $clean_number;
         }
-
+        if($number == '') $number = 0;
         return $number;
     }
 
