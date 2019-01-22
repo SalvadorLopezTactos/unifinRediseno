@@ -118,6 +118,13 @@ class BacklogDashlet extends SugarApi
                 'method' => 'getColumnas',
                 'shortHelp' => 'trae el set de columnas que el usurio quiere ver en su sesion',
             ),
+            'POST_UpdateFechaBl' => array(
+                'reqType' => 'POST',
+                'path' => array('UpdateFechaBl'),
+                'pathVars' => array(''),
+                'method' => 'UpdateFechaBl',
+                'shortHelp' => 'envia la nueva informacion a Uni2 de los BL que se estan moviendo',
+            ),
         );
     }
 
@@ -1377,5 +1384,25 @@ SQL;
         }
 
         return $preferences;
+    }
+
+    public function UpdateFechaBl($api, $args)
+    {
+        //$GLOBALS['log']->fatal(">>>>>>>>>MoverMes: " . print_r($args,1));
+
+        $url='http://192.168.150.160:8081/uni2/rest/unics/actualizaFechasBacklog';
+        $fields = array(
+            "backlogRequest" => array(
+                "backlog" => $args['data']['bl'],
+                "mesActual" => $args['data']['mesActual'],
+                "anioActual" => $args['data']['anioActual'],
+                "mesNuevo" => $args['data']['mesNuevo'],
+                "anioNuevo" => $args['data']['anioNuevo']
+            )
+        );
+
+        $callApi = new UnifinAPI();
+        $callApi->unifinPostCall($url,$fields);
+
     }
 }
