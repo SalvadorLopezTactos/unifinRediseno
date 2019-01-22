@@ -1,6 +1,6 @@
 <?php
 
-class teamSetClass
+class teamSetClassB
 {
   function teamSetMethod($bean, $event, $arguments)
   {

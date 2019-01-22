@@ -1389,8 +1389,10 @@ SQL;
     public function UpdateFechaBl($api, $args)
     {
         //$GLOBALS['log']->fatal(">>>>>>>>>MoverMes: " . print_r($args,1));
+        global $sugar_config;
+        $GLOBALS['esb_url'] = $sugar_config['esb_url'];
 
-        $url='http://192.168.150.160:8081/uni2/rest/unics/actualizaFechasBacklog';
+        $url='http://'.$GLOBALS['esb_url'].'/uni2/rest/unics/actualizaFechasBacklog';
         $fields = array(
             "backlogRequest" => array(
                 "backlog" => $args['data']['bl'],
