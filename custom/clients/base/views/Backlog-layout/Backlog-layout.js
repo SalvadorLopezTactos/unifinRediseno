@@ -1417,6 +1417,8 @@ cancelarBacklog: function(e){
                 var bl=$('.MoverOperacion[data-id="'+idBacklog+'"]');
                 var str=bl.closest('tr').children('.hide_cliente').children('a').attr('href');
 
+                num_bl=bl.closest('tr').children('.hide_operacion').children('a').text();
+
                 var arr_p=str.split('#Accounts/');
 
                 var id_account=arr_p[1];
@@ -1439,8 +1441,20 @@ cancelarBacklog: function(e){
                             return;
 
                         }else{
-                            this.moverOpAfterValidateIndividual(mes_popup,anio_popup,tempMes,tempAnio,tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso);
-
+                            var Url = app.api.buildURL("UpdateFechaBl", '', {}, {});
+                            var Params = {
+                                "bl":num_bl,
+                                "mesActual":tempMes,
+                                "anioActual":tempAnio,
+                                "mesNuevo":mes_popup,
+                                "anioNuevo":anio_popup
+                            };
+                            app.api.call("create", Url, {data: Params}, {
+                                success: _.bind(function (data) {
+                                    console.log('Peticion enviada');
+                                },this)
+                            });
+                            //this.moverOpAfterValidateIndividual(mes_popup,anio_popup,tempMes,tempAnio,tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso);
                         }
 
                     },this)
@@ -1592,6 +1606,7 @@ cancelarBacklog: function(e){
                         var idBacklog=current_element.getAttribute('data-id');
                         var bl_check=$('.MoverOperacion[data-id="'+idBacklog+'"]');
                         var str=bl_check.closest('tr').children('.hide_cliente').children('a').attr('href');
+                        num_bl=bl_check.closest('tr').children('.hide_operacion').children('a').text();
                         var arr_p=str.split('#Accounts/');
                         var id_account=arr_p[1];
                         var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&fields=id,mes,estatus_de_la_operacion,name',
@@ -1619,6 +1634,19 @@ cancelarBacklog: function(e){
 
                                 }else{
                                     this.controlCount++;
+                                    var Url = app.api.buildURL("UpdateFechaBl", '', {}, {});
+                                    var Params = {
+                                        "bl":num_bl,
+                                        "mesActual":tempMes,
+                                        "anioActual":tempAnio,
+                                        "mesNuevo":mes_popup,
+                                        "anioNuevo":anio_popup
+                                    };
+                                    app.api.call("create", Url, {data: Params}, {
+                                        success: _.bind(function (data) {
+                                            console.log('Peticion enviada');
+                                        },this)
+                                    });
                                     if(this.controlCount==this.checks_actualizar.length){
                                         this.moverOperacionAfterValidate(mes_popup,anio_popup,tempMes,tempAnio,tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso);
                                     }
