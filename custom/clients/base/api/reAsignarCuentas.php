@@ -135,8 +135,7 @@ SQL;
                   SET
                   	opportunities.team_id = users.team_set_id,
                       opportunities.team_set_id = concat(left(users.team_set_id, 33),'af0')
-                  WHERE accounts_opportunities.account_id = '46f40ba8-0ecc-11e9-ba1f-00155da06f04' -- AND cs.tipo_producto_c = '1'
-                  ;";
+                  WHERE accounts_opportunities.account_id ='".$value."';";
                 $resultUpdateTeams = $db->query($queryUpdateTeams);
 
                 // Se comenta la actualizacion directa a BD para utilizar el BEAN y registrar bitacora
