@@ -652,6 +652,19 @@ array (
                 'name' => 'potencial_cuenta_c',
                 'label' => 'LBL_POTENCIAL_CUENTA',
               ),
+              8 => 
+              array (
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
+                'name' => 'tct_prom_cheques_cur_c',
+                'label' => 'LBL_TCT_PROM_CHEQUES_CUR_C',
+              ),
+              9 => 
+              array (
+              ),
             ),
           ),
           6 => 
