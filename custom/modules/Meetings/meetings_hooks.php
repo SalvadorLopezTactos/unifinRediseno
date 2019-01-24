@@ -14,7 +14,7 @@ class Meetings_Hooks
     {
 		global $db;
 		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $args['related_id'] != $bean->assigned_user_id && $bean->date_entered != $bean->date_modified && stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False)
-		{
+		{   
 /*			$query = <<<SQL
                 SELECT a.id, b.parent_meeting_c
                 FROM meetings a, meetings_cstm b
@@ -151,9 +151,10 @@ SQL;
                 WHERE meeting_id = '{$bean->id}'
                 AND deleted = 0
 SQL;
+                $GLOBALS['log']->fatal("Meetings: ".$query);
 			      $conn = $db->getConnection();
             $queryResult = $conn->executeQuery($query);
-            foreach($queryResult->fetchAll() as $row)
+            foreach($quemryResult->fetchAll() as $row)
 	    	    {
       			if($row['user_id'] != $bean->assigned_user_id)
 			      {
@@ -517,5 +518,62 @@ SQL;
             $queryResult1 = $conn1->executeQuery($levadmin);
           }
       }
-    }    
-}
+    }
+
+    //Se elimina de la lista de invitados a los usuarios con puesto Agente telefonico y Centro de Prospección
+    function modificaReunion ($bean= null, $event=null, $args=null)
+    {
+      global $current_user;
+      global $app_list_strings;
+      global $db;
+      $puesto = $current_user->puestousuario_c;
+      $lista = $app_list_strings['prospeccion_c_list'];
+      $flag=false;
+      //Se hace la comparacion entre la lista y el puesto del usuario loggeado
+      foreach ($lista as $key => $newList){
+        if ($key == $puesto){
+          $flag=true;
+        }
+      }
+      //Si coincide el usuario loggeado con alguno de la lista
+      if($flag==true){
+        $usrmod=array();
+        //Consulta del id de la reunion y el del usuario loggeado
+        $meetingscount="
+          SELECT user_id FROM meetings_users
+          WHERE meeting_id = '{$bean->id}'";
+        $totalcount=$db->query($meetingscount);
+        //$GLOBALS['log']->fatal("El id de la reunión es: ".$bean->id);
+        $conteo=0;
+        //$GLOBALS['log']->fatal("El usuario loggeado es: ".$current_user->id);
+        while($row=$db->fetchByAssoc($totalcount)){
+          $conteo++;
+          $totalme=$row['user_id'];
+          //Comparacion del id de los invitados para excluir al usuario loggeado el puesto de la lista
+          if($row['user_id']!=$current_user->id){
+            array_push($usrmod, $row['user_id']);
+          }
+          //$GLOBALS['log']->fatal("El id de los usuarios: ".$totalme);
+        }
+        //$GLOBALS['log']->fatal("Los usuarios invitados son: ". print_r($usrmod,true));
+        //Comparacion para modificar a la persona asignada, solo cuando haya invitados
+        if(count($usrmod)>1 && $bean->assigned_user_id==$current_user->id){
+          //Se hace una consulta a base de datos para modificar el usuario asignado a cada reunión
+          $assigned="
+            UPDATE meetings
+            SET assigned_user_id ='{$usrmod[0]}'
+            WHERE id='{$bean->id}'";
+          $assig=$db->query($assigned);
+          //$GLOBALS['log']->fatal("El update del usuarios: ".$assigned);
+          //Modificación del deleted=1 para que elimine a un usuario si corresponde a algún puesto de la lista
+          $bean->assigned_user_id=$usrmod[0];
+          $deleusr="
+            UPDATE meetings_users
+            SET deleted = 1
+            WHERE user_id= '{$current_user->id}' 
+            AND meeting_id='{$bean->id}'";
+          $deletusr=$db->query($deleusr);
+        }
+      }
+    }
+  }
