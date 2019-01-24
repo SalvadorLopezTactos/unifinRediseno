@@ -13,7 +13,6 @@ class Meetings_Hooks
     function RelationAdd($bean = null, $event = null, $args = null)
     {
 		global $db;
-    //$GLOBALS['log']->fatal("Se dispara RelationAdd: ");
 		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $args['related_id'] != $bean->assigned_user_id && $bean->date_entered != $bean->date_modified && stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False)
 		{   
 /*			$query = <<<SQL
@@ -93,14 +92,12 @@ SQL;
 			AND user_id = '1'
 SQL;
 		$levadmin1 = $db->query($levadmin);
-    $GLOBALS['log']->fatal("Se dispara RelationAdd: ".$levadmin );
 	}
 
     //Eliminar Invitados
     function RelationDel($bean = null, $event = null, $args = null)
     {
 		global $db;
-    //$GLOBALS['log']->fatal("Se dispara RelationDel: ");
 		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $bean->date_entered != $bean->date_modified && stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False)
 		{
 			$relid = $args['related_id'];
@@ -112,7 +109,6 @@ SQL;
 						AND user_id = '{$relid}'
 						AND deleted = 0
 SQL;
-            $GLOBALS['log']->fatal("Se dispara RelationDel: " .$elimina);
 			$elimina1 = $db->query($elimina);
 			while($del1 = $db->fetchByAssoc($elimina1))
 			{
