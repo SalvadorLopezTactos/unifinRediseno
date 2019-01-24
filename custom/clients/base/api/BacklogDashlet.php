@@ -118,6 +118,13 @@ class BacklogDashlet extends SugarApi
                 'method' => 'getColumnas',
                 'shortHelp' => 'trae el set de columnas que el usurio quiere ver en su sesion',
             ),
+            'POST_UpdateFechaBl' => array(
+                'reqType' => 'POST',
+                'path' => array('UpdateFechaBl'),
+                'pathVars' => array(''),
+                'method' => 'UpdateFechaBl',
+                'shortHelp' => 'envia la nueva informacion a Uni2 de los BL que se estan moviendo',
+            ),
         );
     }
 
@@ -1132,7 +1139,6 @@ SQL;
         $split_number = explode('.', $number);
         $last = sizeof($split_number);
         $last -= 1;
-
         if($last > 0) {
             for ($i = 0; $i <= $last; $i++) {
 
@@ -1146,7 +1152,7 @@ SQL;
             }
             $number = $clean_number;
         }
-
+        if($number == '') $number = 0;
         return $number;
     }
 
@@ -1377,5 +1383,27 @@ SQL;
         }
 
         return $preferences;
+    }
+
+    public function UpdateFechaBl($api, $args)
+    {
+        //$GLOBALS['log']->fatal(">>>>>>>>>MoverMes: " . print_r($args,1));
+        global $sugar_config;
+        $GLOBALS['esb_url'] = $sugar_config['esb_url'];
+
+        $url='http://'.$GLOBALS['esb_url'].'/uni2/rest/unics/actualizaFechasBacklog';
+        $fields = array(
+            "backlogRequest" => array(
+                "backlog" => $args['data']['bl'],
+                "mesActual" => $args['data']['mesActual'],
+                "anioActual" => $args['data']['anioActual'],
+                "mesNuevo" => $args['data']['mesNuevo'],
+                "anioNuevo" => $args['data']['anioNuevo']
+            )
+        );
+
+        $callApi = new UnifinAPI();
+        $callApi->unifinPostCall($url,$fields);
+
     }
 }

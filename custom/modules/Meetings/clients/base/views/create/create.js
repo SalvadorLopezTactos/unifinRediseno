@@ -11,6 +11,7 @@
         this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial, this));
         this.model.addValidationTask('ValidaObjetivos',_.bind(this.ValidaObjetivos,this));
         this.model.addValidationTask('Campos_necesarios', _.bind(this.Campos_necesarios, this));
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         this.on('render', this.disablestatus, this);
     },
 
@@ -50,20 +51,29 @@
         var necesario="";
         if(this.model.get('name')=="" || this.model.get('name')==null){
             necesario= necesario + '<b>Asunto</b><br>';
+            errors['name'] = errors['name'] || {};
+            errors['name'].custom_message1 = true;            
         }
         if(this.model.get('objetivo_c')=="" || this.model.get('objetivo_c')==null){
             necesario=necesario + '<b>Objetivo General</b><br>';
+            errors['objetivo_c'] = errors['objetivo_c'] || {};
+            errors['objetivo_c'].custom_message1 = true;
         }
         if(this.$('.objetivoSelect').length<=0){
             necesario=necesario + '<b>Objetivos Espec\u00EDficos</b><br>';
+            app.alert.show("Guardar Reunion", {
+                level: "error",
+                title: '<p style="font-weight: normal;">Por lo menos debe agregar un <b>Objetivo Específico</b> para la <b>Reuni\u00F3n</b></p>',
+                autoClose: false
+            });
         }
         if (necesario != ""){
-            console.log("Confirma necesarios");
+            /*console.log("Confirma necesarios");
             app.alert.show("Guardar Reunion", {
                 level: "error",
                 title: '<p style="font-weight: normal;">Faltan los siguientes datos para poder guardar la Reuni\u00F3n:</p>' + necesario,
                 autoClose: false
-            });
+            });*/
         }
         callback(null, fields, errors);
     },
@@ -128,5 +138,26 @@
         }else{
             $('span[data-name=status]').css("pointer-events", "auto");
         }
+    },
+
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Meetings") + '</b><br>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información en la <b>Reunión:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 })

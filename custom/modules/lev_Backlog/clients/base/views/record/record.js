@@ -20,6 +20,8 @@
         this.model.on("change:monto_final_comprometido_c", _.bind(this.setRI, this));
         //this.model.on("change:ri_final_comprometida_c", _.bind(this.setEtapa, this));
         this.model.addValidationTask('igualaMontosFinales', _.bind(this.igualaMontoFinalOpp, this));
+        
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
 
         // validación de los campos con formato númerico
         this.events['keydown [name=dif_residuales_c]'] = 'checkInVentas';
@@ -29,11 +31,8 @@
         this.events['keydown [name=porciento_ri]'] = 'checkInVentas';
         this.events['keydown [name=renta_inicial_comprometida]'] = 'checkInVentas';
 
-
         //Se añade evento para establecer registro como Solo Lectura
         this.model.on('sync', this.setNoEditAllFields, this);
-
-
     },
 
     _render: function() {
@@ -532,5 +531,26 @@
         if(this.model.get("monto_final_comprometido_c") == 1){
             this.model.set("ri_final_comprometida_c", 0);
         }
+    },
+
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "lev_Backlog") + '</b><br>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información en el <b>Backlog:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 })

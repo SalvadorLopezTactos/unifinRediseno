@@ -48,9 +48,9 @@
         * Adrian Arauz 4/10/2018
         * */
         this.model.addValidationTask('valida_potencial',_.bind(this.validapotencial, this));
-        
+
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
-        
+
         /* F. Javier G. Solar
            OBS299 Validar que las Direcciones no se repitan 21/11/2018
         */
@@ -1290,6 +1290,7 @@
         //Return
         callback(null, fields, errors);
     },
+
     _doValidateDireccion: function (fields, errors, callback) {
         if(this.model.get('tipo_registro_c') == "Cliente" || this.model.get('tipo_registro_c') == "Proveedor"
             || this.model.get('tipo_registro_c') == "Prospecto" || this.model.get('esproveedor_c')==true) {
@@ -1301,7 +1302,7 @@
                 $('.direcciondashlet').css('border-color', 'red');
                 app.alert.show("Direccion requerida", {
                     level: "error",
-                    title: "Al menos una direccion es requerida.",
+                    title: "Al menos una direcci\u00F3n es requerida.",
                     autoClose: false
                 });
             } else {
@@ -2309,7 +2310,6 @@
                   errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
                   errors['fechadenacimiento_c'].required = true;
                 }
-
                 /*app.alert.show("Pais de nacimiento requerido", {
                     level: "error",
                     title: "El campo pa\u00EDs de nacimiento es requerido",
@@ -2319,7 +2319,10 @@
                   errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
                   errors['pais_nacimiento_c'].required = true;
                 }
-
+                if(this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
+                    errors['estado_nacimiento_c'] = errors['estado_nacimiento_c'] || {};
+                    errors['estado_nacimiento_c'].required = true;
+                }
                 /*app.alert.show("Estado civil requerido", {
                     level: "error",
                     //title: "El campo estado civil es requerido",
@@ -2339,9 +2342,6 @@
                   errors['profesion_c'] = errors['profesion_c'] || {};
                   errors['profesion_c'].required = true;
                 }
-
-
-
             }
             else{
                 /*app.alert.show("Pais de constitucion", {
@@ -2352,6 +2352,10 @@
                 if(this.model.get('pais_nacimiento_c')==''|| this.model.get('pais_nacimiento_c')==null){
                   errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
                   errors['pais_nacimiento_c'].required = true;
+                }
+                if(this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == null) {
+                    errors['estado_nacimiento_c'] = errors['estado_nacimiento_c'] || {};
+                    errors['estado_nacimiento_c'].required = true;
                 }
                 if(this.model.get('fechaconstitutiva_c')==''|| this.model.get('fechaconstitutiva_c')==null){
                     errors['fechaconstitutiva_c'] = errors['fechaconstitutiva_c'] || {};
@@ -2827,7 +2831,6 @@
                     errors['estado_nacimiento_c'] = errors['estado_nacimiento_c'] || {};
                     errors['estado_nacimiento_c'].required = true;
                 }
-
                 if (this.model.get('tipodepersona_c') == 'Persona Moral') {
                     if (this.model.get('tct_macro_sector_ddw_c') == "" || this.model.get('tct_macro_sector_ddw_c') == null) {
                         errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
@@ -2958,7 +2961,7 @@
             _.each(this.model.fields, function(field) {
                 if(_.isEqual(field.name,key)) {
                     if(field.vname) {
-                        campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '<br></b>';
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '</b><br>';
                     }
           		  }
        	    }, this);
@@ -2966,7 +2969,7 @@
         if(campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
-                title: "Los siguientes campos son requeridos: <br>" + campos,
+                messages: "Hace falta completar la siguiente información en la <b>Cuenta:</b><br>" + campos,
                 autoClose: false
             });
         }

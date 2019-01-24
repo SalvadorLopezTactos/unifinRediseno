@@ -13,18 +13,18 @@
             this.on('render',this.disableparentsfields,this);
             this.on('render', this.noEditStatus,this);
             //this.model.on('sync', this.bloqueaTodo, this);
-
             //Habilita el campo parent_name cuando esta vacio y lo deshabilta cuando ya tiene una cuenta
             this.model.on('sync',this.enableparentname,this);
             this.model.on('sync', this.cambioFecha, this);
             this.model.addValidationTask('VaildaFechaPermitida', _.bind(this.validaFechaInicial2Call, this));
             this.model.addValidationTask('VaildaConferencia', _.bind(this.validaConferencia, this));
             this.model.addValidationTask('VaildaFecha', _.bind(this.VaildaFecha, this));
+
             /*@Jesus Carrillo
                 Funcion que pinta de color los paneles relacionados
             */
             this.model.on('sync', this.fulminantcolor, this);
-            
+
             $('[data-name="status"]').find('.fa-pencil').remove();
             $('.record-edit-link-wrapper[data-name=status]').remove();
 
@@ -32,13 +32,13 @@
             this.model.on('sync', this.disableFieldsTime,this);
             this.model.addValidationTask('resultCallReq',_.bind(this.resultCallRequerido, this));
             this.events['click a[name=edit_button]'] = 'fechascallsymeet';
-
+            this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
     },
+
     _render: function (options) {
         this._super("_render");
         this.enableparentname();
     },
-
 
     bloqueaTodo:function()
     {
@@ -58,11 +58,14 @@
     resultCallRequerido:function (fields, errors, callback) {
         if(this.model.get('status')=='Held' || this.model.get('status')=='Not Held'){
             if (this.model.get('tct_resultado_llamada_ddw_c')=='') {
-
-                app.error.errorName2Keys['requResultCall'] = 'El resultado de la Llamada es requerido';
+                /*app.alert.show("Resultado de la llamada", {
+                    level: "error",
+                    messages: "El resultado de la Llamada es requerido",
+                    autoClose: false
+                });*/
                 errors['tct_resultado_llamada_ddw_c'] = errors['tct_resultado_llamada_ddw_c'] || {};
-                errors['tct_resultado_llamada_ddw_c'].requResultCall = true;
                 errors['tct_resultado_llamada_ddw_c'].required = true;
+
             }
         }
         callback(null, fields, errors);
@@ -82,7 +85,7 @@
     },
 
     /**
-     * @author Salvador Lopez	
+     * @author Salvador Lopez
      * Se habilita handleEdit, editClicked y cancelClicked para dejar habilitado el campo parent_name y solo se bloquea al
      * dar click en el campo e intentar editar
     * */
@@ -133,7 +136,7 @@
         }
 
     },
-    
+
     cancelClicked: function() {
 
         this._super("cancelClicked");
@@ -169,25 +172,25 @@
     VaildaFecha: function(fields, errors, callback)
     {
         var startDate = new Date(this.model.get('date_start'));
-	var startMonth = startDate.getMonth() + 1;
-	var startDay = startDate.getDate();
-	var startYear = startDate.getFullYear();
-	var startDateText = startDay + "/" + startMonth + "/" + startYear;
-	var conferDate = new Date(this.model.get('tct_conferencia_fecha_dat_c'));
-	var conferMonth = conferDate.getMonth() + 1;
-	var conferDay = conferDate.getDate();
-	var conferYear = conferDate.getFullYear();
-	var conferDateText = conferDay + "/" + conferMonth + "/" + conferYear;
+      	var startMonth = startDate.getMonth() + 1;
+      	var startDay = startDate.getDate();
+      	var startYear = startDate.getFullYear();
+      	var startDateText = startDay + "/" + startMonth + "/" + startYear;
+      	var conferDate = new Date(this.model.get('tct_conferencia_fecha_dat_c'));
+      	var conferMonth = conferDate.getMonth() + 1;
+      	var conferDay = conferDate.getDate();
+      	var conferYear = conferDate.getFullYear();
+      	var conferDateText = conferDay + "/" + conferMonth + "/" + conferYear;
         var startToDate = Date.parse(startDateText);
         var inputToDate = Date.parse(conferDateText);
-	if(inputToDate < startToDate)
-    	{
+	      if(inputToDate < startToDate)
+      	{
           app.alert.show("Fecha Incorrecta", {
             level: "error",
             title: "La fecha a contactar debe ser mayor a la fecha actual",
             autoClose: false
           });
-    	  errors['tct_conferencia_fecha_dat_c'] = "La fecha a contactar debe ser mayor a la fecha actual";
+    	    errors['tct_conferencia_fecha_dat_c'] = "La fecha a contactar debe ser mayor a la fecha actual";
           errors['tct_conferencia_fecha_dat_c'].required = true;
         }
     	callback(null, fields, errors);
@@ -197,11 +200,11 @@
     {
       if(this.model.get('tct_conferencia_chk_c') && this.model.get('tct_calificacion_conferencia_c') === "")
     	{
-          app.alert.show("Calificacion Requerida", {
+          /*app.alert.show("Calificacion Requerida", {
             level: "error",
             title: "El campo Calificaci&oacuten de la Conferencia es requerido",
             autoClose: false
-          });
+          });*/
     	    errors['tct_calificacion_conferencia_c'] = "El campo Calificaci&oacuten de la Conferencia es requerido";
           errors['tct_calificacion_conferencia_c'].required = true;
       }
@@ -235,7 +238,7 @@
 
         //Elimina �cono de l�piz para editar parent_name
         $('[data-name="parent_name"]').find('.fa-pencil').remove();
-        
+
         },
 
         /*Victor Martinez Lopez
@@ -366,7 +369,6 @@
             $('.record-edit-link-wrapper[data-name=tct_fecha_seguimiento_dat_c]').remove();
             $('.record-edit-link-wrapper[data-name=tct_motivo_desinteres_ddw_c]').remove();
         }
-
     },
 
     fechascallsymeet: function(){
@@ -375,8 +377,27 @@
             self.noEditFields.push('date_start');
             self.noEditFields.push('date_end');
             self.render();
-
         }
     },
 
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Calls") + '</b><br>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información en la <b>Llamada:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
+    },
 })

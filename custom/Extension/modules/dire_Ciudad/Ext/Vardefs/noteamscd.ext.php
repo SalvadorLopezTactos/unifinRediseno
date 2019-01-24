@@ -1,3 +1,3 @@
 <?php
-$dictionary['Dire_ciudad']['visibility'] = array('TeamSecurity' => false);
+$dictionary['dire_Ciudad']['visibility'] = array('TeamSecurity' => false);
 ?>

@@ -74,6 +74,8 @@
         this.model.addValidationTask('tipo_proveedor_requerido', _.bind(this.validaProveedorRequerido, this));
         /* END */
 
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+
         this.enableDuplicateCheck = true;
 
         //UNFIN TASK:
@@ -856,11 +858,11 @@
         if (this.model.get('tipo_registro_c') == 'Proveedor') {
             var tipoProveedor = new String(this.model.get('tipo_proveedor_c'));
             if (tipoProveedor.length == 0) {
-                app.alert.show("Proveedor Requerido", {
+                /*app.alert.show("Proveedor Requerido", {
                     level: "error",
                     title: "Debe seleccionar un un tipo de proveedor al menos",
                     autoClose: false
-                });
+                });*/
                 errors['tipo_proveedor_c'] = errors['tipo_proveedor_c'] || {};
                 errors['tipo_proveedor_c'].required = true;
             }
@@ -909,6 +911,27 @@
                 errors['estadocivil_c'] = errors['estadocivil_c'] || {};
                 errors['estadocivil_c'].required = true;
             }
+        }
+        callback(null, fields, errors);
+    },
+
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '</b><br>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información en la <b>Cuenta:</b><br>" + campos,
+                autoClose: false
+            });
         }
         callback(null, fields, errors);
     },

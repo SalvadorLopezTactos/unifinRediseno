@@ -2,16 +2,16 @@
   extendsFrom: 'RecordView',
 
   events: {
-    'click [name=cancel_button]': 'cancelClicked',
-    'keydown [name=vendedor_c]': 'checkvendedor',
-    'click [name=monto_c]': 'formatcoin',
-    'click [name=amount]': 'formatcoin',
-    'click [name=ca_pago_mensual_c]': 'formatcoin',
-    'click [name=ca_importe_enganche_c ]': 'formatcoin',
-    'keydown [name=monto_c]': 'checkmoney',
-    'keydown [name=amount]': 'checkmoney',
-    'keydown [name=ca_pago_mensual_c]': 'checkmoney',
-    'keydown [name=ca_importe_enganche_c ]': 'checkmoney',
+      'click [name=cancel_button]': 'cancelClicked',
+      'keydown [name=vendedor_c]': 'checkvendedor',
+      'click [name=monto_c]': 'formatcoin',
+      'click [name=amount]': 'formatcoin',
+      'click [name=ca_pago_mensual_c]': 'formatcoin',
+      'click [name=ca_importe_enganche_c ]': 'formatcoin',
+      'keydown [name=monto_c]': 'checkmoney',
+      'keydown [name=amount]': 'checkmoney',
+      'keydown [name=ca_pago_mensual_c]': 'checkmoney',
+      'keydown [name=ca_importe_enganche_c ]': 'checkmoney',
       //Se añaden eventos para los campos delimitados por limitanumero. Adrian Arauz 23/08/2018
       'keydown [name=tipo_tasa_ordinario_c]': 'limitanumero',
       'keydown [name=puntos_sobre_tasa_c]': 'limitanumero',
@@ -46,17 +46,17 @@
 		this.model.fields['forecast_c'].options = opciones_forecast;
 		*/
         this.model.addValidationTask('valida_direc_indicador', _.bind(this.valida_direc_indicador, this));
-    	this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
+      	this.model.addValidationTask('check_monto_c', _.bind(this._ValidateAmount, this));
         //this.model.addValidationTask('ratificacion_incremento_c', _.bind(this.validaTipoRatificacion, this));
         this.model.addValidationTask('check_condiciones_financieras', _.bind(this.validaCondicionesFinancerasRI, this));
-		this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
-		this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
-		this.model.addValidationTask('check_oportunidadperdida', _.bind(this.oportunidadperdidacheck, this));
+	    	this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
+		    this.model.addValidationTask('check_condicionesFinancierasIncremento', _.bind(this.condicionesFinancierasIncrementoCheck, this));
+		    this.model.addValidationTask('check_oportunidadperdida', _.bind(this.oportunidadperdidacheck, this));
         this.model.addValidationTask('check_condicionesFinancieras', _.bind(this.condicionesFinancierasCheck, this));
-		this.model.addValidationTask('Valida_montos', _.bind(this.validamontossave, this));//Validación para comprobar montos no mayores a rentas y pagos mensuales. Adrian Arauz 16/08/2018
+	    	this.model.addValidationTask('Valida_montos', _.bind(this.validamontossave, this));//Validación para comprobar montos no mayores a rentas y pagos mensuales. Adrian Arauz 16/08/2018
         this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this)); //Se añade funcionalidad para limitar a 99.00 en valores de factoraje. Adrian Arauz 23/08/2018
-		this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));/* @author victor.martinez 23-07-2018  Valida campos requeridos de prospecto e Integracion de expediente */
-
+		    this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));/* @author victor.martinez 23-07-2018  Valida campos requeridos de prospecto e Integracion de expediente */
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         /*
             AF. 12-02-2018
             Ajuste para actualizar valores en vista
@@ -436,9 +436,9 @@
                     }
 
                     app.error.errorName2Keys['custom_message1'] = 'Falta tipo y subtipo de cuenta';
-                    errors['account_name'] = errors['account_name'] || {};
-                    errors['account_name'].custom_message1 = true;
-                    errors['account_name'].required = true;
+                    errors['account_name_1'] = errors['account_name_1'] || {};
+                    errors['account_name_1'].custom_message1 = true;
+                    errors['account_name_1'].required = true;
                     self.mensajes(titulo, mensaje, nivel);
 
                 }
@@ -1348,8 +1348,6 @@ console.log(name);
                 }
             }
         }
-
-
     },
 
     validaRequeridosFactoraje: function(fields, errors, callback){
@@ -1583,5 +1581,26 @@ console.log(name);
                 self.render();
             }
         }
+    },
+
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '</b><br>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información en la <b>Solicitud:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 })

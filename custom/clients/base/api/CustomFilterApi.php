@@ -213,9 +213,9 @@ class CustomFilterApi extends FilterApi
         foreach($filter[0][unifin_team] as $key => $values){
             foreach($values as $index => $value){
                 if($index == 0){
-                    $opciones = "equipos_c LIKE " . "'%".$value."%'";
+                    $opciones = "equipos_c LIKE " . "'%^".$value."^%'";
                 }else{
-                    $opciones .= " OR equipos_c LIKE " . "'%".$value."%'";
+                    $opciones .= " OR equipos_c LIKE " . "'%^".$value."^%'";
                 }
             }
         }

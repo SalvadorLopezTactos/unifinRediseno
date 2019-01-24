@@ -13,6 +13,7 @@
         this.model.addValidationTask('save_Asistencia_Parti', _.bind(this.saveAsistencia, this));
         //this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         this.context.on('button:view_document:click', this.view_document, this);
 
     },
@@ -272,5 +273,26 @@
           });*/
 		  self.model.set('tct_proceso_unifin_address_c',lat+lng);
 		});
+    },
+
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "minut_Minutas") + '</b><br>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información en la <b>Minuta:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 })

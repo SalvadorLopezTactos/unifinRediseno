@@ -44,6 +44,7 @@
           * Victor Martinez Lopez 24-08-2018
         */
         this.model.addValidationTask('resultadoCitaRequerido',_.bind(this.resultadoCitaRequerido, this));
+        this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         this.model.on('sync',this.enableparentname,this);
     },
 
@@ -118,7 +119,7 @@
         if($('.objetivoSelect').length<=0){
             app.alert.show("Objetivo vacio",{
                     level: "error",
-                    title: "Es necesario tener por lo menos un objetivo espec\u00EDfico para generar la minuta",
+                    title: "Es necesario tener por lo menos un <b>Objetivo espec\u00EDfico</b> para generar la minuta",
                     autoClose: false
                 });
         }else{
@@ -581,7 +582,7 @@
             this.$('.record-panel[data-panelname="LBL_RECORDVIEW_PANEL1"]').children().eq(1).attr("style","display:block");
             app.alert.show("Objetivo vacio",{
                 level: "error",
-                title: "Es necesario tener por lo menos un objetivo espec\u00EDfico",
+                title: "Es necesario tener por lo menos un <b>Objetivo espec\u00EDfico</b>",
                 autoClose: false
             });
         }
@@ -603,5 +604,26 @@
         });
       }
       callback(null, fields, errors);
+    },
+
+    valida_requeridos: function(fields, errors, callback) {
+        var campos = "";
+        _.each(errors, function(value, key) {
+            _.each(this.model.fields, function(field) {
+                if(_.isEqual(field.name,key)) {
+                    if(field.vname) {
+                        campos = campos + '<b>' + app.lang.get(field.vname, "Meetings") + '</b><br>';
+                    }
+          		  }
+       	    }, this);
+        }, this);
+        if(campos) {
+            app.alert.show("Campos Requeridos", {
+                level: "error",
+                messages: "Hace falta completar la siguiente información en la <b>Reunión:</b><br>" + campos,
+                autoClose: false
+            });
+        }
+        callback(null, fields, errors);
     },
 })
