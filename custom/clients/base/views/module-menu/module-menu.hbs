@@ -18,14 +18,19 @@
 
         <!--{{#if meta.alias}} {{module}} {{else}} {{str 'LBL_MODULE_NAME' module}} {{/if}}-->
         {{#notEq module "Expediente"}}
+            {{#notEq module "BuscaDisposicion"}}
             {{#notEq module "Cotizador"}}
                 {{#notEq module "CotizadorProspectos"}}
                     {{#if meta.alias}} {{module}} {{else}} {{str 'LBL_MODULE_NAME' module}} {{/if}}
-                {{/notEq}}{{/notEq}}{{/notEq}}
+                {{/notEq}}
+            {{/notEq}}
+            {{/notEq}}
+        {{/notEq}}
 
+    {{#eq module "BuscaDisposicion"}} {{str 'Busca Disposición'}} {{/eq}}
     {{#eq module "Cotizador"}} {{str 'Cotizador UNI2'}} {{/eq}}
     {{#eq module "CotizadorProspectos"}} {{str 'Cotizador IPAD'}} {{/eq}}
-        {{#eq module "Expediente"}} {{str 'Expediente'}} {{/eq}}
+    {{#eq module "Expediente"}} {{str 'Expediente'}} {{/eq}}
 
     </a>
 {{else}}
