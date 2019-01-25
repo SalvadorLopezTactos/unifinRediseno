@@ -32,8 +32,8 @@
             $bean_call->save();
             $contadorm++;
         }
-        $GLOBALS['log']->fatal($contadorc' llamadas modificadas');//------------------------------------
-        $GLOBALS['log']->fatal($contadorm' reuniones modificadas');//------------------------------------
+        $GLOBALS['log']->fatal($contadorc.' llamadas modificadas');//------------------------------------
+        $GLOBALS['log']->fatal($contadorm.' reuniones modificadas');//------------------------------------
         $GLOBALS['log']->fatal('>>>>>>TERMINA JOB CLOSE_CALLS&MEETINGS:');//------------------------------------
 		return true;
     }
