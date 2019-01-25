@@ -67,9 +67,6 @@
         var direccionsHtml = '';
         this._super("_render");
 
-        //Validacion para mostrar los campos de Arrendamiento Puro dependiendo el regimen fiscal (Persona Moral)
-        pld.validaregimen();
-
         //Validaciones para activar campos ocultos/dependientes de respuestas a listas desplegables
         //Desplegables para Arrendamiento Puro
 
@@ -160,8 +157,16 @@
 
 
 
+        //Campos nacen ocultos Arrendamiento Puro
 
-        //campos Ocultos
+        $('.campo1ap').hide();
+        $('.campo2ap').hide();
+        $('.campo4ap').hide();
+        $('.campo6ap').hide();
+        $('.campo16pm').hide();
+        $('.campo14pm').hide();
+
+        //Campos Ocultos Arrendamiento Puro (Desplegables)
 
         $('.campo3ap').hide();
         $('.campo5ap').hide();
@@ -169,7 +174,9 @@
         $('.campo15ap').hide();
         $('.campo18pm').hide();
 
-        //Campos Persona Moral
+
+
+        //Campos Persona Moral Arrendamiento Puro
         $('.campo7ap-pm').hide(); //Pregunta1
         $('.campo9ap-pm').hide(); //Pregunta2
         $('.campo8ap-pm').hide();
@@ -213,6 +220,8 @@
             containerCssClass: 'select2-choices-pills-close'
         });
 
+        //Validacion para mostrar los campos de Arrendamiento Puro dependiendo el regimen fiscal (Persona Moral)
+        pld.validaregimen();
 
     },
 
@@ -513,16 +522,16 @@
     checkpagosmonetarioAP: function () {
         console.log("Esta check");
         if( $('.campo14chk').is(':checked') ) {
-            $('.campo15ap').show();
+            $('.campo17ap').show();
         } else {
-            $('.campo15ap').hide();
+            $('.campo17ap').hide();
         }
     },
 
     InsMonetarioAP: function () {
         console.log("Cambio de Instrumento monetario AP");
         if ($('#multi11').val("Otro")) {
-            $('.campo14chk').val('TRUE')
+            $('.campo14chk').attr("checked", true);
             $('.campo17ap').show();
         } else {
             $('.campo17ap').hide();
@@ -534,6 +543,7 @@
     Muestracampo1FF: function () {
         console.log("Propietario Real FF");
         if ($('.campo2ddwff').val() == "2") {
+            $('.campo14chk').attr("checked", true);
             $('.campo3ff').show();
         } else {
             $('.campo3ff').hide();
@@ -552,15 +562,16 @@
 
     checkpagosmonetarioFF: function (){
         if( $('.campo14chkff').is(':checked') ) {
-            $('.campo18ff').show();
+            $('.campo17ff').show();
         } else {
-            $('.campo18ff').hide();
+            $('.campo17ff').hide();
         }
     },
 
     InsMonetarioFF: function () {
         console.log("Cambio de Instrumento monetario FF");
         if ($('#multi12').val("Otro")) {
+            $('.campo14chkff').attr("checked", true);
             $('.campo17ff').show();
         } else {
             $('.campo17ff').hide();
@@ -611,7 +622,7 @@
     InsMonetarioCS: function () {
         console.log("Cambio de Instrumento monetario CS");
         if ($('#multi13').val("Otro")) {
-            //$('.campo14chkcs').val('TRUE')
+            $('.campo14chkcs').attr("checked", true);
             $('.campo19cs').show();
         } else {
             $('.campo19cs').hide();
@@ -620,21 +631,20 @@
 
     checkpagosmonetarioCS: function (){
         if( $('.campo14chkcs').is(':checked') ) {
-            $('.campo15cs').show();
+            $('.campo19cs').show();
         } else {
-            $('.campo15cs').hide();
+            $('.campo19cs').hide();
         }
     },
 
     validaregimen: function (){
         if(this.model.get('tipodepersona_c') == 'Persona Moral'){
             //Muestra campos de vista de Persona Moral en panel de Arrendamiento puro
-            $('.campo7ap-pm').show();
-            $('.campo9ap-pm').show();
             $('.campo1ap').show();
             $('.campo4ap').show();
-            $('.campo5ap').show();
             $('.campo6ap').show();
+            $('.campo7ap-pm').show();
+            $('.campo9ap-pm').show();
             $('.campo16ap').show();
             $('.campo14ap').show();
             $('.campo18pm').show();
@@ -643,11 +653,13 @@
             $('.campo2ap').hide();
             $('.campo3ap').hide();
 
-
-
-
-
-
+        }else{
+            $('.campo1ap').show();
+            $('.campo2ap').show();
+            $('.campo4ap').show();
+            $('.campo6ap').show();
+            $('.campo16ap').show();
+            $('.campo14ap').show();
         }
 
     },
