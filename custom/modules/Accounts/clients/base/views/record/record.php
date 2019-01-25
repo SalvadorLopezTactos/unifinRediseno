@@ -664,6 +664,17 @@ array (
               ),
               9 => 
               array (
+                'name' => 'dates_account_statements',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_DATES_ACCOUNT_STATEMENTS_C',
+                'type' => 'dates_account_statements',
+              ),
+              10 => 
+              array (
+                'name' => 'tct_dates_acc_statements_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_DATES_ACC_STATEMENTS_C',
+                'span' => 12,
               ),
             ),
           ),

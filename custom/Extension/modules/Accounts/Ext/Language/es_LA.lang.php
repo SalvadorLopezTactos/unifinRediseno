@@ -290,3 +290,5 @@ $mod_strings['LBL_TCT_MACRO_SECTOR_DDW'] = 'Macro Sector';
 $mod_strings['LBL_TCT_TIPO_SUBTIPO_TXF'] = 'Tipo y Subtipo de la Cuenta';
 $mod_strings['LBL_RECORDVIEW_PANEL17'] = 'Nuevo Panel 17';
 $mod_strings['LBL_TCT_PROM_CHEQUES_CUR_C'] = 'Saldo de cheques promedio';
+$mod_strings['LBL_TCT_DATES_ACC_STATEMENTS_C'] = 'Fechas de estados de cuenta-Storage';
+$mod_strings['LBL_TCT_DATES_ACCOUNT_STATEMENTS_C'] = 'Fechas de estados de cuenta';
