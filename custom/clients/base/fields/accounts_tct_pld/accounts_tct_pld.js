@@ -67,9 +67,6 @@
         var direccionsHtml = '';
         this._super("_render");
 
-        //Validacion para mostrar los campos de Arrendamiento Puro dependiendo el regimen fiscal (Persona Moral)
-        pld.validaregimen();
-
         //Validaciones para activar campos ocultos/dependientes de respuestas a listas desplegables
         //Desplegables para Arrendamiento Puro
 
@@ -160,8 +157,16 @@
 
 
 
+        //Campos nacen ocultos Arrendamiento Puro
 
-        //campos Ocultos
+        $('.campo1ap').hide();
+        $('.campo2ap').hide();
+        $('.campo4ap').hide();
+        $('.campo6ap').hide();
+        $('.campo16pm').hide();
+        $('.campo14pm').hide();
+
+        //Campos Ocultos Arrendamiento Puro (Desplegables)
 
         $('.campo3ap').hide();
         $('.campo5ap').hide();
@@ -169,7 +174,9 @@
         $('.campo15ap').hide();
         $('.campo18pm').hide();
 
-        //Campos Persona Moral
+
+
+        //Campos Persona Moral Arrendamiento Puro
         $('.campo7ap-pm').hide(); //Pregunta1
         $('.campo9ap-pm').hide(); //Pregunta2
         $('.campo8ap-pm').hide();
@@ -213,6 +220,8 @@
             containerCssClass: 'select2-choices-pills-close'
         });
 
+        //Validacion para mostrar los campos de Arrendamiento Puro dependiendo el regimen fiscal (Persona Moral)
+        pld.validaregimen();
 
     },
 
@@ -629,12 +638,11 @@
     validaregimen: function (){
         if(this.model.get('tipodepersona_c') == 'Persona Moral'){
             //Muestra campos de vista de Persona Moral en panel de Arrendamiento puro
-            $('.campo7ap-pm').show();
-            $('.campo9ap-pm').show();
             $('.campo1ap').show();
             $('.campo4ap').show();
-            $('.campo5ap').show();
             $('.campo6ap').show();
+            $('.campo7ap-pm').show();
+            $('.campo9ap-pm').show();
             $('.campo16ap').show();
             $('.campo14ap').show();
             $('.campo18pm').show();
@@ -643,11 +651,13 @@
             $('.campo2ap').hide();
             $('.campo3ap').hide();
 
-
-
-
-
-
+        }else{
+            $('.campo1ap').show();
+            $('.campo2ap').show();
+            $('.campo4ap').show();
+            $('.campo6ap').show();
+            $('.campo16ap').show();
+            $('.campo14ap').show();
         }
 
     },
