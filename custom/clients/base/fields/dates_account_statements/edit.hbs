@@ -1,0 +1,38 @@
+<!--
+/*
+ *  AF - 2018-10-23
+ *  CustomField - Grid
+ */
+-->
+<div>
+<!--Fechas que se van cargando -->
+  <div>
+      {{#each obj_dates}}
+        <div class="control-group compromisos row-fluid" >
+          <div class="span8">
+              <input type="date" class="loadeddate span12" id="{{@key}}" value="{{this}}" data-field="date_compromiso" >
+          </div>
+
+          <div class="btn-toolbar prevent-mousedown span2">
+              <div class="btn-group prevent-mousedown">
+                  <a href="javascript:void(0)" class="btn removecompromiso" rel="tooltip" title="{{str "LBL_REMOVE"}}"><i class="fa fa-minus"></i></a>
+              </div>
+          </div>
+        </div>
+      {{/each}}
+  </div>
+  <br>
+<!--Nueva Fecha -->
+  <div class="control-group compromiso2 row-fluid">
+      <div class="span8">
+        <input type="date" class="newdate span12" placeholder="Fecha Compromiso" data-field="date_compromiso">
+      </div>
+
+      <div class="btn-toolbar prevent-mousedown span2">
+         <div class="btn-group">
+            <a href="javascript:void(0)" class="btn addcompromiso"><i class="fa fa-check"></i></a>
+         </div>
+      </div>
+  </div>
+</div>
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
