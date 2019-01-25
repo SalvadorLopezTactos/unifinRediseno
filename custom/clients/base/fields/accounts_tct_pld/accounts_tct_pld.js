@@ -522,16 +522,16 @@
     checkpagosmonetarioAP: function () {
         console.log("Esta check");
         if( $('.campo14chk').is(':checked') ) {
-            $('.campo15ap').show();
+            $('.campo17ap').show();
         } else {
-            $('.campo15ap').hide();
+            $('.campo17ap').hide();
         }
     },
 
     InsMonetarioAP: function () {
         console.log("Cambio de Instrumento monetario AP");
         if ($('#multi11').val("Otro")) {
-            $('.campo14chk').val('TRUE')
+            $('.campo14chk').attr("checked", true);
             $('.campo17ap').show();
         } else {
             $('.campo17ap').hide();
@@ -543,6 +543,7 @@
     Muestracampo1FF: function () {
         console.log("Propietario Real FF");
         if ($('.campo2ddwff').val() == "2") {
+            $('.campo14chk').attr("checked", true);
             $('.campo3ff').show();
         } else {
             $('.campo3ff').hide();
@@ -561,15 +562,16 @@
 
     checkpagosmonetarioFF: function (){
         if( $('.campo14chkff').is(':checked') ) {
-            $('.campo18ff').show();
+            $('.campo17ff').show();
         } else {
-            $('.campo18ff').hide();
+            $('.campo17ff').hide();
         }
     },
 
     InsMonetarioFF: function () {
         console.log("Cambio de Instrumento monetario FF");
         if ($('#multi12').val("Otro")) {
+            $('.campo14chkff').attr("checked", true);
             $('.campo17ff').show();
         } else {
             $('.campo17ff').hide();
@@ -620,7 +622,7 @@
     InsMonetarioCS: function () {
         console.log("Cambio de Instrumento monetario CS");
         if ($('#multi13').val("Otro")) {
-            //$('.campo14chkcs').val('TRUE')
+            $('.campo14chkcs').attr("checked", true);
             $('.campo19cs').show();
         } else {
             $('.campo19cs').hide();
@@ -629,9 +631,9 @@
 
     checkpagosmonetarioCS: function (){
         if( $('.campo14chkcs').is(':checked') ) {
-            $('.campo15cs').show();
+            $('.campo19cs').show();
         } else {
-            $('.campo15cs').hide();
+            $('.campo19cs').hide();
         }
     },
 
