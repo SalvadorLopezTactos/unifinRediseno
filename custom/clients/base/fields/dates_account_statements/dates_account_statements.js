@@ -27,18 +27,15 @@
     loadData: function () {
         selfcomp=this;
 
-        if(this.model.get('id') != undefined || this.model.get('id') !="") {
-
-            if(this.model.get('tct_dates_acc_statements_c')!=undefined) {
-                if(this.model.get('tct_dates_acc_statements_c')==""){
-                    this.model.set('tct_dates_acc_statements_c',"{}")
-                }
-                this.obj_dates = JSON.parse(this.model.get('tct_dates_acc_statements_c'));
-                _.extend(this, this.obj_dates);
-                this.render();
-                console.log("obj_dates seteado");
-            }
+        if(this.model.get('tct_dates_acc_statements_c')==undefined || this.model.get('tct_dates_acc_statements_c')==""){
+            this.model.set('tct_dates_acc_statements_c',"{}")
         }
+        this.obj_dates = JSON.parse(this.model.get('tct_dates_acc_statements_c'));
+        _.extend(this, this.obj_dates);
+        this.render();
+        console.log("obj_dates seteado");
+
+
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth()+1; //January is 0!
