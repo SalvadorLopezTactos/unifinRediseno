@@ -30,13 +30,13 @@
             <div class=" row-fluid">
                 <div class="span6 campo2ap">
                     <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?</label>
-                    <select class="campo2ddw row-fluid " id="state2" data-field="campo2"/>
+                    <select class="campo2ddw row-fluid " data-field="campo2">
                     {{{tct_pld_campo2_ddw_ap_list}}}
-
+                    </select>
                 </div>
                 <div class="span6 campo4ap">
                     <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
-                    <select class="campo4ddw  row-fluid" data-field="campo4" id="state2" placeholder="Select">
+                    <select class="campo4ddw  row-fluid" data-field="campo4" placeholder="Select">
                         {{{tct_pld_campo4_ddw_ap_list}}}
                     </select>
 
@@ -58,13 +58,13 @@
             <div class="control-group cont-AP-PM">
                 <!-- Fila 1 Moral -->
                 <div class=" row-fluid">
-                    <div class="span6 campo7ap-pf">
+                    <div class="span6 campo7ap-pm">
                         <label class="record-label">La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?</label>
                         <select class="campo7ddw  row-fluid" data-field="campo7" id="state2" placeholder="Select">
                             {{{tct_pld_campo7_ddw_aplist}}}
                         </select>
                     </div>
-                    <div class="span6 campo9ap-pf">
+                    <div class="span6 campo9ap-pm">
                         <label class="record-label">¿Cotiza en Bolsa?</label>
                         <select class="campo9ddw  row-fluid" data-field="campo9" id="state2" placeholder="Select">
                             {{{ tct_pld_campo9_ddw_ap_list}}}
@@ -74,12 +74,12 @@
                 </div>
                 <!-- Fila 2 Moral -->
                 <div class=" row-fluid">
-                    <div class="span6 campo8ap-pf">
+                    <div class="span6 campo8ap-pm">
                         <label class="record-label">Número de Registro ante la CNBV o Condusef</label>
                         <input type="text" class="campo8txt" value="{{tct_pld_campo8_txt}}" data-field="campo8"/>
                     </div>
 
-                    <div class="span6 campo10ap-pf">
+                    <div class="span6 campo10ap-pm">
                         <label class="record-label">Clave de Pizarra</label>
                         <input type="text" class="campo10txt" value="{{tct_pld_campo10_txt}}" data-field="campo10"/>
 
@@ -124,7 +124,14 @@
                 </div>
 
             </div>
-
+            <!-- Fila 7-->
+            <div class=" row-fluid">
+                <div class="span6 campo18pm">
+                    <label class="record-label">¿Es Fideicomiso??</label>
+                    <br>
+                    <input type="checkbox" class="campo18chkpm" value="{{tct_pld_campo14_chk}}" data-field="campo14"/>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -132,7 +139,7 @@
     <!-- Contenedor principal FF -->
     <div class="control-group cont-FF">
 
-        <!-- Panel de Factoraje Fijo--->
+        <!-- Panel de Factoraje Financiero--->
         <div class="control-group cont-FF">
             <div>
                 <h4 style=""><b>Factoraje Financiero</b></h4>
@@ -150,13 +157,13 @@
                 <div class=" row-fluid">
                     <div class="span6 campo2ff">
                         <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?</label>
-                        <select class="row-fluid campo2ddw " data-field="campo2"/>
+                        <select class="campo2ddwff row-fluid  " data-field="campo2" placeholder="Requerido">
                         {{{tct_pld_campo2_ddw_ff_list}}}
-
+                        </select>
                     </div>
                     <div class="span6 campo4ff">
                         <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
-                        <select class="campo4ddw  row-fluid" data-field="campo4" placeholder="Select">
+                        <select class="campo4ddwff  row-fluid" data-field="campo4" placeholder="Select">
                             {{{tct_pld_campo4_ddw_ff_list}}}
                         </select>
 
@@ -205,17 +212,26 @@
                     <div class="span6 campo16ff">
                         <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es
                             posible elegir más de una opción)</label>
-                        <select class="select2 row-fluid" id="multi11" multiple="multiple" size="6"
+                        <select class="select2 row-fluid" id="multi12" multiple="multiple" size="6"
                                 style="display:block;" data-field="campo16" id="multi-campo16" placeholder="Select">
                             {{{tct_pld_campo16_ddw_ff_list}}}
                         </select>
                     </div>
-                </div>
-                <!-- Fila 7 -->
-                <div class=" row-fluid">
                     <div class="span6 campo17ff">
                         <label class="record-label row-fluid">Especifique:</label>
                         <input type="text" class="campo17txt" value="{{tct_pld_campo17_txt}}" data-field="campo17"/>
+                    </div>
+                </div>
+                <!-- Fila 7 -->
+                <div class=" row-fluid">
+                    <div class="span6 campo14ff">
+                        <label class="record-label">¿Realizará pagos utilizando otro instrumento monetario?</label>
+                        <br>
+                        <input type="checkbox" class="campo14chkff" value="{{tct_pld_campo14_chkff}}" data-field="campo14"/>
+                    </div>
+                    <div class="span6 campo18ff">
+                        <label class="record-label row-fluid">Especifique:</label>
+                        <input type="text" class="campo18txt" value="{{tct_pld_campo18_txt}}" data-field="campo18"/>
                     </div>
                 </div>
                 <!-- Fila 8 -->
@@ -230,7 +246,7 @@
                 </div>
                 <!-- Fila 9 -->
                 <div class=" row-fluid">
-                    <div class="span6 campo6ap">
+                   <div class="span6 campo6ap">
                         <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
                         <select class="campo6ddw  row-fluid"  data-field="campo6">
                             {{{tct_pld_campo6_ddw_ap_list}}}
@@ -262,13 +278,14 @@
                 <div class="span6 campo2ca">
                     <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por
                         cuenta de un tercero?</label>
-                    <select class="row-fluid campo2ddw " data-field="campo2"/>
+                    <select class="campo2ddwca row-fluid" data-field="campo2">
                     {{{tct_pld_campo2_ddw_ca_list}}}
+                    </select>
 
                 </div>
                 <div class="span6 campo4ca">
                     <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
-                    <select class="campo4ddw  row-fluid" data-field="campo4" placeholder="Select">
+                    <select class="campo4ddwca  row-fluid" data-field="campo4" placeholder="Select">
                         {{{tct_pld_campo4_ddw_ca_list}}}
                     </select>
 
@@ -319,13 +336,14 @@
             <div class=" row-fluid">
                 <div class="span6 campo2cs">
                     <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?</label>
-                    <select class="row-fluid campo2ddw " data-field="campo2"/>
-                    {{{tct_pld_campo2_ddw_ca_list}}}
+                    <select class="campo2ddwcs row-fluid" data-field="campo2">
+                    {{{tct_pld_campo2_ddw_cs_list}}}
+                    </select>
                 </div>
                 <div class="span6 campo4cs">
                     <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
-                    <select class="campo4ddw  row-fluid" data-field="campo4" placeholder="Select">
-                        {{{tct_pld_campo4_ddw_ca_list}}}
+                    <select class="campo4ddwcs  row-fluid" data-field="campo4" placeholder="Select">
+                        {{{tct_pld_campo4_ddw_cs_list}}}
                     </select>
 
                 </div>
@@ -346,15 +364,15 @@
                 <div class="span6 campo18cs">
                     <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es
                         posible elegir más de una opción)</label>
-                    <select class="select2 row-fluid" id="multi11" multiple="multiple" size="6" style="display:block;"
+                    <select class="multi-campo18 select2 row-fluid" id="multi13" multiple="multiple" size="6" style="display:block;"
                             data-field="campo18" id="multi-campo18" placeholder="Select">
-                        {{{tct_pld_campo18_ddw_ff_list}}}
+                        {{{tct_pld_campo18_ddw_cs_list}}}
                     </select>
                 </div>
                 <div class="span6 campo14cs">
                     <label class="record-label">¿Realizará pagos utilizando otro instrumento monetario?</label>
                     <br>
-                    <input type="checkbox" class="campo14chk" value="{{tct_pld_campo14_chk}}" data-field="campo14"/>
+                    <input type="checkbox" class="campo14chkcs" value="{{tct_pld_campo14_chk}}" data-field="campo14"/>
                 </div>
             </div>
 

@@ -51,6 +51,15 @@
 
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
 
+        /*Validacion de campos requeridos en el cuestionario PLD y sus productos
+        * Adrian Arauz 23/01/2019
+       * */
+        this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
+
+        /*Validacion para mostrar campos ocultos dependiendo de la opcion elegida*/
+        //this.model.on('change:.campo2ddw', this.MuestraCampo1, this);
+
+
         /* F. Javier G. Solar
            OBS299 Validar que las Direcciones no se repitan 21/11/2018
         */
@@ -2975,4 +2984,45 @@
         }
         callback(null, fields, errors);
     },
+
+    validaRequeridosPLD: function (fields, errors, callback){
+        var faltantes = "";
+        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw').val() == ''){
+            $('.campo2ddw').css('border-color','red');
+            faltantes = faltantes + '<b>Pregunta 1<br></b>';
+
+        }else{
+
+            $('.campo2ddw').css('border-color','');
+        }
+
+        if(this.model.get('tipodepersona_c') != 'undefined' || this.model.get('tipodepersona_c') != '' && $('.campo4ddw').val() == ''){
+            $('.campo4ddw').css('border-color','red');
+            faltantes = faltantes + '<b>Pregunta 2<br></b>';
+        }else{
+
+            $('.campo4ddw').css('border-color','');
+
+        }
+        if(faltantes != ""){
+            errors['PreguntasAP'] = "";
+            errors['PreguntasAP'].required = true;
+            app.alert.show("Faltan Preguntas Por Contestar", {
+                level: "error",
+                title: "Faltan las siguientes preguntas por contestar: <br>" + faltantes,
+                autoClose: true
+            });
+
+        }
+        callback(null, fields, errors);
+    },
+
+    /*Muestracampo1: function (){
+        if($('.campo2ddw').val()=="2"){
+            $('.campo3ap').show();
+        }else{
+            $('.campo3ap').hide();
+        }
+    },*/
+
 })
