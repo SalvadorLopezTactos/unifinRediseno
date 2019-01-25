@@ -1,11 +1,11 @@
 <?php
     //add the job key to the list of job strings
-    array_push($job_strings, 'close_calls&meetings');
+    array_push($job_strings, 'close_calls_meetings');
 
-    function close_calls()
+    function close_calls_meetings()
     {
     	// Busca las llamadas vencidas en status "planificada" y les cambia el estado a "no realizada"
-        $GLOBALS['log']->fatal('>>>>>>COMIENZA JOB CLOSE_CALLS&MEETINGS:');//------------------------------------
+        $GLOBALS['log']->fatal('>>>>>>COMIENZA JOB CLOSE_CALLS_MEETINGS:');//------------------------------------
 
         $queryc="select * from calls where status='Planned' and (date_end < CURDATE() and date_end > SUBDATE(CURDATE(), 1));";
         $querym="select * from meetings where status='Planned' and (date_end < CURDATE() and date_end > SUBDATE(CURDATE(), 1));";
@@ -32,8 +32,8 @@
             $bean_call->save();
             $contadorm++;
         }
-        $GLOBALS['log']->fatal($contadorc' llamadas modificadas');//------------------------------------
-        $GLOBALS['log']->fatal($contadorm' reuniones modificadas');//------------------------------------
-        $GLOBALS['log']->fatal('>>>>>>TERMINA JOB CLOSE_CALLS&MEETINGS:');//------------------------------------
+        $GLOBALS['log']->fatal($contadorc.' llamadas modificadas');//------------------------------------
+        $GLOBALS['log']->fatal($contadorm.' reuniones modificadas');//------------------------------------
+        $GLOBALS['log']->fatal('>>>>>>TERMINA JOB CLOSE_CALLS_MEETINGS:');//------------------------------------
 		return true;
     }
