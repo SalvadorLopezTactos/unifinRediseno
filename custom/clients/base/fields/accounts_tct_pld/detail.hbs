@@ -1,267 +1,530 @@
+<style>
+    PR-link {
+        color: #47b8c8;
+        font-family: helvetica;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
 
-    <div class="span12">
+    .PR-link:hover {
+        text-decoration: underline;
+    }
 
-        <div class="description">
-            <label class="record-label">No Serie FIEL</label>
-            <br>
-            <input type="text" class="noFIEL" value="{{tct_pld_campo1_txt}}" data-field="campo1" style="width: 50%;margin: 0px;"/>
-            </td>
+    .PR-link:active {
+        color: #0679c8;
+    }
+
+    .PR-link:visited {
+        color: #001441;
+    }
+
+    .borde-Contenedor {
+        border: 2px solid #58749a;
+        border-radius: 12px;
+        width: 100%;
+        padding: 5px;
+    }
+
+    .header-producto {
+        background-color: #001441;
+        color: #fff;
+        border-radius: 12px;
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 8px;
+    }
+</style>
+<div class="control-group">
+    <!-- Contenedor Principal AP -->
+    <div class="control-group cont-AP">
+        <div class="row-fluid header-producto">
+            <h4 style=""><b>Arrendamiento Puro</b></h4>
         </div>
-    </div>
-    <br>
-    <br>
-    <div class="row-fluid">
-        <div class="span6">
-
-            <div class="description">
-                <label class="record-label">¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?</label>
-                <br>
-                <input type="text" class="noFIEL" value="{{tct_pld_campo2_ddw}}" data-field="campo2" style="width: 50%;margin: 0px;"/>
-                </td>
-            </div>
-        </div>
-
-            <div class="span6">
-            <div class="description">
-                <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
-                <br>
-                <input type="text" class="noFIEL" value="{{tct_pld_campo4_ddw}}" data-field="campo4" style="width: 50%;margin: 0px;"/>
-            </div>
-            </div>
-    <br>
-    <br>
-        <div class="row-fluid">
-
-    <div class="span6">
-        <div class="description">
-            <label class="record-label">Propietario Real</label>
-            <br>
-            <input type="text" class="noFIEL" value="{{tct_pld_campo3_rel}}" data-field="campo3" style="width: 50%;margin: 0px;"/>
-        </div>
-    </div>
-
-    <div class="span6">
-        <div class="description">
-            <label class="record-label">Proveedor de Recursos</label>
-            <br>
-            <input type="text" class="noFIEL" value="{{tct_pld_campo5_rel}}" data-field="campo5" style="width: 50%;margin: 0px;"/>
-        </div>
-    </div>
-
-            <div class="row-fluid">
-                <div class="span6">
-                    <div class="description">
-                        <label class="record-label">¿Espera realizar pagos anticipados a su crédito?</label>
-                        <br>
-                        <input type="text" class="noFIEL" value="{{tct_pld_campo6_ddw}}" data-field="campo6" style="width: 50%;margin: 0px;"/>
-                    </div>
-                </div>
-
-                    <div class="span6">
-                        <div class="select2">
-                            <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es posible elegir más de una opción)</label>
-                            <br>
-                            <input type="text" class="noFIEL" value="{{tct_pld_campo16_ddw}}" data-field="campo16" style="width: 50%;margin: 0px;"/>
-                        </div>
-                    </div>
-            </div>
-
-                <div class="row-fluid">
-                    <div class="span6">
-                        <div class="description">
-                            <label class="record-label">Especifique:</label>
-                            <br>
-                            <input type="text" class="noFIEL" value="{{tct_pld_campo17_txt}}" data-field="campo17" style="width: 50%;margin: 0px;"/>
-                        </div>
-                    </div>
-                </div>
-
-            <div class="row-fluid">
-                <div class="span6">
-                    <div class="select2">
-                        <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es posible elegir más de una opción)</label>
-                        <br>
-                        <input type="text" class="noFIEL" value="{{tct_pld_campo18_ddw}}" data-field="campo18" style="width: 50%;margin: 0px;"/>
-                    </div>
-                </div>
-
-                <div class="span6">
-                    <div class="description">
-                        <label class="record-label">Especifique:</label>
-                        <br>
-                        <input type="text" class="noFIEL" value="{{tct_pld_campo19_txt}}" data-field="campo19" style="width: 50%;margin: 0px;"/>
-                    </div>
+        <!-- Panel Arrendamiento Puro -->
+        <div class=" row-fluid panel-ap borde-Contenedor">
+            <!-- Fila 1 -->
+            <div class=" row-fluid">
+                <div class="span6 campo1ap">
+                    <label class="record-label">No Serie FIEL</label>
+                    <label type="text" class="campo1txt row-fluid" data-field="campo1"
+                           style="padding: 5px 7px;">
+                        {{{tct_pld_campo1_txt}}}
+                    </label>
                 </div>
             </div>
+            <!-- Fila 2 -->
+            <div class=" row-fluid">
+                <div class="span6 campo2ap">
+                    <label class="record-label">¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un
+                        tercero?</label>
+                    <label type="text" class="campo2ddw row-fluid" data-field="campo2" style="padding: 5px 7px;">
+                        {{{tct_pld_campo2_ddw_ap_list}}}
+                    </label>
+                </div>
+                <div class="span6 campo4ap">
+                    <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
+                    <label type="text" class="campo4ddw row-fluid" data-field="campo4" style="padding: 5px 7px;">
+                        {{{tct_pld_campo4_ddw_ap_list}}}
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 3 -->
+            <div class=" row-fluid">
+                <div class="span6 campo3ap">
+                    <label class="record-label">Propietario Real</label>
+                    <span class="row-fluid">
+                        <a href="/devPLD1/#Accounts/f4bc54b8-1825-11e9-b307-00155da06f04"
+                           class="campo3rel PR-link " value="{{tct_pld_campo3_rel}}"
+                           data-field="campo3" style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
+                            Propietario Real </a>
+                    </span>
 
-
-                <!-- Campos de Persona Moral -->
-
-
-                <div class="row-fluid">
-                    <div class="span6">
-                        <div class="description">
-                            <label class="record-label">La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?</label>
-                            <br>
-                            <input type="text" class="noFIEL" value="{{tct_pld_campo7_ddw}}" data-field="campo7" style="width: 50%;margin: 0px;"/>
-                        </div>
+                </div>
+                <div class="span6 campo5ap">
+                    <label class="record-label ">Proveedor de Recursos</label>
+                    <span class="row-fluid">
+                        <a href="/devPLD1/#Accounts/f4bc54b8-1825-11e9-b307-00155da06f04"
+                           class="campo5rel PR-link " value="{{tct_pld_campo5_rel}}"
+                           data-field="campo5" style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
+                       Campo proveedor de Recursos </a>
+                    </span>
+                </div>
+            </div>
+            <!--Fila 4 Solo si es PM -->
+            <div class="control-group cont-AP-PM">
+                <!-- Fila 1 Moral -->
+                <div class=" row-fluid">
+                    <div class="span6 campo7ap-pm">
+                        <label class="record-label">La persona moral es: Sofom, Transmisor de Dinero, Centro
+                            Cambiario?</label>
+                        <label class="campo7ddw  row-fluid" value="{{tct_pld_campo7_ddw_aplist}}" data-field="campo7"
+                               id="state2" style="padding: 5px 7px; font-size: 14px;">
+                            Transmisor
+                        </label>
                     </div>
-
-                    <div class="span6">
-                        <div class="description">
-                            <label class="record-label">¿Cotiza en Bolsa?</label>
-                            <br>
-                            <input type="text" class="noFIEL" value="{{tct_pld_campo9_ddw}}" data-field="campo9" style="width: 50%;margin: 0px;"/>
-                        </div>
+                    <div class="span6 campo9ap-pm">
+                        <label class="record-label">¿Cotiza en Bolsa?</label>
+                        <label class="campo9ddw  row-fluid" value="{{tct_pld_campo9_ddw_ap_list}}"
+                               data-field="campo9" id="state2" style="padding: 5px 7px; font-size: 14px;">
+                            Si
+                        </label>
                     </div>
                 </div>
-
-                    <div class="row-fluid">
-                        <div class="span6">
-                            <div class="description">
-                                <label class="record-label">Número de Registro ante la CNBV o Condusef</label>
-                                <br>
-                                <input type="text" class="noFIEL" value="{{tct_pld_campo8_txt}}" data-field="campo8" style="width: 50%;margin: 0px;"/>
-                            </div>
-                        </div>
+                <!-- Fila 2 Moral -->
+                <div class=" row-fluid">
+                    <div class="span6 campo8ap-pm">
+                        <label class="record-label">Número de Registro ante la CNBV o Condusef</label>
+                        <label type="text" class="campo8txt row-fluid" value="{{tct_pld_campo8_txt}}"
+                               data-field="campo8"
+                               style="padding: 5px 7px; font-size: 14px;">34534FGHG34543</label>
                     </div>
+                    <div class="span6 campo10ap-pm">
+                        <label class="record-label">Clave de Pizarra</label>
+                        <label type="text" class="campo10txt row-fluid" value="{{tct_pld_campo10_txt}}"
+                               data-field="campo10"
+                               style="padding: 5px 7px; font-size: 14px;">45786FFFT90
+                        </label>
 
-                        <div class="row-fluid">
-                            <div class="span6">
-                                <div class="description">
-                                    <label class="record-label">Clave de Pizarra</label>
-                                    <br>
-                                    <input type="text" class="noFIEL" value="{{tct_pld_campo10_txt}}" data-field="campo10" style="width: 50%;margin: 0px;"/>
-                                </div>
-                            </div>
-
-                            <div class="span6">
-                                <div class="description">
-                                    <label class="record-label">Los recursos con los que va a celebrar su operación tiene su origen en su actividad mercantil, actividad u objeto social?</label>
-                                    <br>
-                                    <input type="text" class="noFIEL" value="{{tct_pld_campo11_ddw}}" data-field="campo11" style="width: 50%;margin: 0px;"/>
-                                </div>
-                            </div>
-                        </div>
-
-                          <div class="row-fluid">
-                            <div class="span6">
-                                <div class="description">
-                                    <label class="record-label">Otra:</label>
-                            <br>
-                            <input type="text" class="noFIEL" value="{{tct_pld_campo12_txt}}" data-field="campo12" style="width: 50%;margin: 0px;"/>
-                        </div>
-                    </div>
-
-                    <div class="span6">
-                        <div class="switch switch-mini round-switch">
-                            <label class="record-label">¿Es Fideicomiso?</label>
-                            <br>
-                            <input type="checkbox" class="noFIEL" value="{{tct_pld_campo13_chk}}" data-field="campo13" style="width: 50%;margin: 0px;"/>
-                        </div>
                     </div>
                 </div>
-                <!-- Fin Campos de Persona Moral -->
+            </div>
+            <!-- Fila 4 -->
+            <div class=" row-fluid">
+                <div class="span6 campo6ap">
+                    <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
+                    <label class="campo6ddw  row-fluid" value="{{tct_pld_campo6_ddw_ap_list}}" data-field="campo6"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">Si
+                    </label>
 
-
-                <div class="row-fluid">
-                    <div class="switch switch-mini round-switch">
-                        <label class="record-label">¿Realizará pagos utilizando otro instrumento monetario?</label>
-                            <br>
-                            <input type="checkbox" class="noFIEL" value="{{tct_pld_campo14_chk}}" data-field="campo14"  style="width: 50%;margin: 0px;"/>
-                    </div>
-
-                    <div class="span6">
-                        <div class="description">
-                            <label class="record-label">Especifique:</label>
-                            <br>
-                            <input type="text" class="noFIEL" value="{{tct_pld_campo15_txt}}" data-field="campo15" style="width: 50%;margin: 0px;"/>
-                        </div>
-                    </div>
                 </div>
+                <div class="span6 campo16ap">
+                    <label class="record-label ">¿Instrumento monetario con el que espera realizar los pagos?
+                        (*Es posible elegir más de una opción)</label>
+                    <label class="campo16ddw row-fluid" data-field="campo16" value="{{tct_pld_campo16_ddw_ap_list}}"
+                           style="padding: 5px 7px; font-size: 14px;">
+                        Dos, Tres, Cuatro
+                    </label>
 
-
-            <div class="row-fluid">
-                <div class="span6">
-                 <div class="description">
-                     <label class="record-label">¿Cuál es el destino de los recursos que va a obtener de la celebración de la operación?</label>
+                </div>
+            </div>
+            <!-- Fila 5 -->
+            <div class=" row-fluid">
+                <div class="span6 campo14ap">
+                    <label class="record-label">¿Realizará pagos utilizando otro instrumento monetario?</label>
                     <br>
-                    <input type="text" class="noFIEL" value="{{tct_pld_campo20_ddw}}" data-field="campo20" checked style="width: 50%;margin: 0px;"/>
+                    <input type="checkbox" class="campo14chk row-fluid" {{#if tct_pld_campo14_chk}}checked{{/if}}
+                           data-field="campo14" disabled="disabled"
+                           style="margin: 2px 6px; padding: 5px 7px; font-size: 14px;"/>
                 </div>
+                <div class="span6 campo17ap">
+                    <label class="record-label">Especifique:</label>
+                    <label type="text" class="campo17txt row-fluid" value="{{tct_pld_campo17_txt}}"
+                           data-field="campo17" style="padding: 5px 7px; font-size: 14px;">
+                        Otros
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 7-->
+            <div class=" row-fluid">
+                <div class="span6 campo18pm">
+                    <label class="record-label">¿Es Fideicomiso??</label>
+                    <br>
+                    <input type="checkbox" class="campo18chkpm" value="{{tct_pld_campo14_chk}}" data-field="campo14"
+                           disabled="disabled" style="margin: 2px 6px; padding: 5px 7px; font-size: 14px;"/>
+                </div>
+            </div>
+            <!-- Fila 8 -->
+            <div class=" row-fluid">
+                <div class="span6 campo25ap">
+                    <label class="record-label">Los recursos con los que va a celebrar su operación están destinados
+                        a</label>
+                    <label type="text" class="campo25txt row-fluid" value="{{tct_pld_campo25_ddw}}"
+                           data-field="campo25" style="padding: 5px 7px; font-size: 14px;">
+                        Otros recursos
+                    </label>
                 </div>
 
-                <div class="span6">
-                    <div class="description">
-                        <label class="record-label">¿Con qué frecuencia o periodo realizará pagos a Unifin?</label>
-                        <br>
-                        <input type="text" class="noFIEL" value="{{tct_pld_campo21_ddw}}" data-field="campo21" style="width: 50%;margin: 0px;"/>
-                    </div>
+                <div class="span6 campo26ap">
+                    <label class="record-label">Especifique:</label>
+                               <label type="text" class="campo26txt row-fluid" value="{{tct_pld_campo26_txt}}"
+                           data-field="campo26" style="padding: 5px 7px; font-size: 14px;">
+                        Otros nuevo
+                    </label>
                 </div>
             </div>
 
-            <div class="row-fluid">
-                <div class="span6">
-                    <div class="description">
-                        <label class="record-label">¿Número de pagos que espera realizar en cada periodo?</label>
-                        <br>
-                        <input type="text" class="noFIEL" value="{{tct_pld_campo22_int}}" data-field="campo22" style="width: 50%;margin: 0px;"/>
-                    </div>
-                </div>
-
-                <div class="span6">
-                    <div class="description">
-                        <label class="record-label">¿Monto total aproximado que espera realizar en el periodo?</label>
-                        <br>
-                        <input type="text" class="noFIEL" value="{{tct_pld_campo23_dec}}" data-field="campo23" style="width: 50%;margin: 0px;"/>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row-fluid">
-                <div class="span6">
-                    <div class="description">
-                        <label class="record-label">¿Cuál es el destino de los recursos que obtendrá de la celebración de esta operación?</label>
-                        <br>
-                        <input type="text" class="noFIEL" value="{{tct_pld_campo24_ddw}}" data-field="campo24"  style="width: 50%;margin: 0px;"/>
-                    </div>
-                </div>
-
-                <div class="span6">
-                    <div class="description">
-                        <label class="record-label">Los recursos con los que va a celebrar su operación están destinados a</label>
-                        <br>
-                        <input type="text" class="noFIEL" value="{{tct_pld_campo25_ddw}}" data-field="campo25" style="width: 50%;margin: 0px;"/>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row-fluid">
-                <div class="span6">
-                    <div class="description">
-                        <label class="record-label">Especifique:</label>
-                        <br>
-                        <input type="text" class="noFIEL" value="{{tct_pld_campo26_txt}}" data-field="campo26"  style="width: 50%;margin: 0px;"/>
-                    </div>
-                </div>
-
-                <div class="span6">
-                    <div class="description">
-                        <label class="record-label">Tipo producto</label>
-                        <br>
-                        <input type="text" class="noFIEL" value="{{tct_pld_campo27_txt}}" data-field="campo27" style="width: 50%;margin: 0px;"/>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-
-
-                </div>
-
-
+        </div>
 
     </div>
+
+    <!-- Panel de Factoraje Financiero--->
+    <div class="control-group cont-FF">
+        <div class="row-fluid header-producto">
+            <h4 style=""><b>Factoraje Financiero</b></h4>
+        </div>
+        <!-- Panel Factoraje Financiero -->
+        <div class=" row-fluid panel-ff borde-Contenedor">
+            <!-- Fila 1 -->
+            <div class=" row-fluid">
+                <div class="span6 campo1ff">
+                    <label class="record-label">No Serie FIEL</label>
+                    <label type="text" class="campo1txt row-fluid" value="{{tct_pld_campo1_txt}}" data-field="campo1"
+                           style="padding: 5px 7px;">
+                        23465FGDCV546GF
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 2 -->
+            <div class=" row-fluid" |>
+                <div class="span6 campo2ff">
+                    <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por
+                        cuenta de un tercero?</label>
+                    <label class="campo2ddw  row-fluid" value="{{tct_pld_campo2_ddw_ff_list}}" data-field="campo2"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Transmisor de FF
+                    </label>
+                </div>
+                <div class="span6 campo4ff">
+                    <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
+
+                    <label class="campo4ddw  row-fluid" value="{{tct_pld_campo4_ddw_ff_list}}" data-field="campo4"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Campo 4 FF
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 3 -->
+            <div class=" row-fluid">
+                <div class="span6 campo3ff">
+                    <label class="record-label">Propietario Real</label>
+                    <span class="row-fluid">
+                        <a href="/devPLD1/#Accounts/f4bc54b8-1825-11e9-b307-00155da06f04"
+                           class="campo3rel PR-link " value="{{tct_pld_campo3_rel}}"
+                           data-field="campo3" style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
+                       Propietario Real FF</a>
+                    </span>
+                </div>
+                <div class="span6 campo5ff">
+                    <label class="record-label">Proveedor de Recursos</label>
+                    <span class="row-fluid">
+                        <a href="/devPLD1/#Accounts/f4bc54b8-1825-11e9-b307-00155da06f04"
+                           class="campo5rel PR-link " value="{{tct_pld_campo5_rel}}"
+                           data-field="campo5" style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
+                       Campo proveedor de Recursos </a>
+                    </span>
+                </div>
+            </div>
+            <!-- Fila 4 -->
+            <div class=" row-fluid">
+                <div class="span6 campo21ff">
+                    <label class="record-label">¿Con qué frecuencia o periodo realizará pagos a Unifin?</label>
+                    <label class="campo21ddw  row-fluid" value="{{tct_pld_campo21_ddw_ff_list}}" data-field="campo21"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Transmisor FF
+                    </label>
+                </div>
+                <div class="span6">
+                </div>
+            </div>
+            <!-- Fila 5 -->
+            <div class=" row-fluid">
+                <div class="span6 campo22ff">
+                    <label class="record-label row-fluid">¿Número de pagos que espera realizar en cada
+                        periodo?</label>
+                    <label type="text" class="campo22txt row-fluid" value="{{tct_pld_campo22_int}}" data-field="campo22"
+                           style="padding: 5px 7px;">No. Pagos FF
+                    </label>
+                </div>
+
+                <div class="span6 campo23ff">
+                    <label class="record-label row-fluid">¿Monto total aproximado que espera realizar en el
+                        periodo?</label>
+                    <label type="text" class="campo23dec row-fluid" value="Prueba de valor" data-field="campo23"
+                           style="padding: 5px 7px;">Monto Campo 23 FF
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 6 -->
+            <div class=" row-fluid">
+                <div class="span6 campo16ff">
+                    <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es
+                        posible elegir más de una opción)</label>
+                    <label class="campo16ddw  row-fluid" value="{{tct_pld_campo16_ddw_ff_list}}" data-field="campo16"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Instrumento de multi select
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 7 -->
+            <div class=" row-fluid">
+                <div class="span6 campo17ff">
+                    <label class="record-label row-fluid">Especifique:</label>
+                    <label type="text" class="campo17txt row-fluid" value="{{tct_pld_campo17_txt}}" data-field="campo17"
+                           style="padding: 5px 7px;">Especifique respuesta
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 7.1 -->
+            <div class=" row-fluid">
+                <div class="span6 campo14ff">
+                    <label class="record-label">¿Realizará pagos utilizando otro instrumento monetario?</label>
+                    <br>
+                    <input type="checkbox" class="campo14chkff row-fluid" value="{{tct_pld_campo14_chkff}}"
+                           data-field="campo14" disabled="disabled"
+                           style="margin: 2px 6px; padding: 5px 7px; font-size: 14px;"/>
+                </div>
+            </div>
+            <!-- Fila 8 -->
+            <div class=" row-fluid">
+                <div class="span6 campo24ff">
+                    <label class="record-label row-fluid">¿Cuál es el destino de los recursos que obtendrá de la
+                        celebración de esta operación?</label>
+
+                    <label class="campo24ddw  row-fluid" value="{{tct_pld_campo24_ddw_ff_list}}" data-field="campo24"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Cualdestino select
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 9 -->
+            <div class=" row-fluid">
+                <div class="span6 campo6ap">
+                    <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
+
+                    <label class="campo6ddw  row-fluid" value="{{tct_pld_campo6_ddw_ap_list}}" data-field="campo6"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Espera pagos select
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--Contenedor Principla Credito Automotriz -->
+    <div class="control-group cont-CA ">
+        <div class="row-fluid header-producto">
+            <h4 style=""><b>Crédito Automotriz</b></h4>
+        </div>
+        <div class=" row-fluid panel-ca borde-Contenedor">
+
+            <!-- Fila 1 -->
+            <div class=" row-fluid">
+                <div class="span6 campo1ca">
+                    <label class="record-label">No Serie FIEL</label>
+                    <label type="text" class="campo1txt row-fluid" value="{{tct_pld_campo1_txt}}" data-field="campo1"
+                           style="padding: 5px 7px;">No. serie Fiel CA
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 2 -->
+            <div class=" row-fluid">
+                <div class="span6 campo2ca">
+                    <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por
+                        cuenta de un tercero?</label>
+                    <label class="campo2ddw  row-fluid" value="{{tct_pld_campo2_ddw_ca_list}}" data-field="campo2"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Transmisor CA1
+                    </label>
+                </div>
+                <div class="span6 campo4ca">
+                    <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
+                    <label class="campo4ddw  row-fluid" value="{{tct_pld_campo4_ddw_ca_list}}" data-field="campo4"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Transmisor CA
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 3 -->
+            <div class=" row-fluid">
+                <div class="span6 campo3ca">
+                    <label class="record-label">Propietario Real</label>
+                    <span class="row-fluid">
+                        <a href="/devPLD1/#Accounts/f4bc54b8-1825-11e9-b307-00155da06f04"
+                           class="campo3rel PR-link " value="{{tct_pld_campo3_rel}}"
+                           data-field="campo3" style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
+                       Campo Pripietario Real CA </a>
+                    </span>
+                </div>
+                <div class="span6 campo5ca">
+                    <label class="record-label ">Proveedor de Recursos</label>
+
+                    <span class="row-fluid">
+                        <a href="/devPLD1/#Accounts/f4bc54b8-1825-11e9-b307-00155da06f04"
+                           class="campo5rel PR-link " value="{{tct_pld_campo5_rel}}"
+                           data-field="campo5" style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
+                       Campo proeveedor de Recursos CA </a>
+                    </span>
+                </div>
+            </div>
+            <!-- Fila 4 -->
+            <div class=" row-fluid">
+                <div class="span6 campo6ca">
+                    <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
+
+                    <label class="campo6ddw  row-fluid" value="{{tct_pld_campo6_ddw_ca_list}}" data-field="campo6"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Transmisor
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Contenedor Principla Credito Simple -->
+    <div class="control-group cont-CS">
+
+        <div class="row-fluid header-producto">
+            <h4 style=""><b>Crédito Simple</b></h4>
+        </div>
+        <div class=" row-fluid panel-cs borde-Contenedor">
+
+            <!-- Fila 1 -->
+            <div class=" row-fluid">
+                <div class="span6 campo1cs">
+                    <label class="record-label">No Serie FIEL</label>
+                    <label type="text" class="campo1txt row-fluid" value="{{tct_pld_campo1_txt}}" data-field="campo1"
+                           style="padding: 5px 7px;">5464756748476000
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 2 -->
+            <div class=" row-fluid">
+                <div class="span6 campo2cs">
+                    <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por
+                        cuenta de un tercero?</label>
+
+                    <label class="campo2ddw  row-fluid" value="{{tct_pld_campo2_ddw_cs_list}}" data-field="campo2"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Transmisor
+                    </label>
+                </div>
+                <div class="span6 campo4cs">
+                    <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
+
+                    <label class="campo4ddw  row-fluid" value="{{tct_pld_campo4_ddw_cs_list}}" data-field="campo4"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Transmisor
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 3 -->
+            <div class=" row-fluid">
+                <div class="span6 campo3cs">
+                    <label class="record-label">Propietario Real</label>
+
+                    <span class="row-fluid">
+                        <a href="/devPLD1/#Accounts/f4bc54b8-1825-11e9-b307-00155da06f04"
+                           class="campo3rel PR-link " value="{{tct_pld_campo3_rel}}"
+                           data-field="campo3" style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
+                       Campo propietario real </a>
+                    </span>
+                </div>
+                <div class="span6 campo5cs">
+                    <label class="record-label ">Proveedor de Recursos</label>
+                    <span class="row-fluid">
+                        <a href="/devPLD1/#Accounts/f4bc54b8-1825-11e9-b307-00155da06f04"
+                           class="campo5rel PR-link " value="{{tct_pld_campo5_rel}}"
+                           data-field="campo5" style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
+                       Campo proveedor de Recursos </a>
+                    </span>
+                </div>
+            </div>
+            <!-- Fila 4 -->
+            <div class=" row-fluid">
+                <div class="span6 campo18cs">
+                    <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es
+                        posible elegir más de una opción)</label>
+
+                    <label class="campo18ddw  row-fluid" value="{{tct_pld_campo18_ddw_cs_list}}" data-field="campo18"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Transmisor, Otros
+                    </label>
+                </div>
+                <div class="span6 campo14cs">
+                    <label class="record-label">¿Realizará pagos utilizando otro instrumento monetario?</label>
+                    <br>
+                    <input type="checkbox" class="campo14chk"
+                           {{#if tct_pld_campo14_chk}}checked{{/if}} data-field="campo14"
+                           disabled="disabled" style="margin: 2px 6px; padding: 5px 7px; font-size: 14px;"/>
+                </div>
+            </div>
+            <!-- Fila 5 -->
+            <div class=" row-fluid">
+                <div class="span6 campo19cs">
+                    <label class="record-label">Especifique:</label>
+                    <label type="text" class="campo19txt row-fluid" value="{{tct_pld_campo19_txt}}" data-field="campo19"
+                           style="padding: 5px 7px;">Especifique todo
+                    </label>
+                </div>
+                <div class="span6 campo15cs">
+            </div>
+            <!-- Fila 6 -->
+            <div class=" row-fluid">
+                <div class="span6 campo20cs">
+                    <label class="record-label">¿Cuál es el destino de los recursos que va a obtener de la celebración
+                        de la operación?</label>
+                    <label class="campo20ddw  row-fluid" value="{{tct_pld_campo20_ddw_cs_list}}" data-field="campo20"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Personal
+                    </label>
+                </div>
+            </div>
+            <!-- Fila 7 -->
+            <div class=" row-fluid">
+                <div class="span6 campo6cs">
+                    <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
+
+                    <label class="campo6ddw  row-fluid" value="{{tct_pld_campo6_ddw_cs_list}}" data-field="campo6"
+                           id="state2" style="padding: 5px 7px; font-size: 14px;">
+                        Si
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
 </div>

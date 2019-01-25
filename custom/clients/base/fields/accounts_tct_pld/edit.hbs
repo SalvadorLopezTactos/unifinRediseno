@@ -11,14 +11,31 @@
     $select.select2();
 
 </script>
-<div class="control-group">
+<style>
+    .borde-Contenedor {
+        border: 2px solid #58749a;
+        border-radius: 12px;
+        width: 100%;
+        padding: 5px;
+    }
+
+    .header-producto {
+        background-color: #001441;
+        color: #fff;
+        border-radius: 12px;
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 8px;
+    }
+</style>
+<div class=" container-fluid control-group">
     <!-- Contenedor Principal AP -->
     <div class="control-group cont-AP">
-        <div>
-            <h4 style=""><b>Arrendamiento Puro</b></h4>
+        <div class="row-fluid header-producto">
+            <h4><b>Arrendamiento Puro</b></h4>
         </div>
         <!-- Panel Arrendamiento Puro -->
-        <div class=" row-fluid panel-ap" style="border: solid lightblue; width: 100%; padding: 6px;">
+        <div class=" row-fluid panel-ap borde-Contenedor" >
             <!-- Fila 1 -->
             <div class=" row-fluid">
                 <div class="span6 campo1ap">
@@ -27,16 +44,17 @@
                 </div>
             </div>
             <!-- Fila 2 -->
-            <div class=" row-fluid">
+            <div class="span12 row-fluid">
                 <div class="span6 campo2ap">
-                    <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?</label>
-                    <select class="campo2ddw row-fluid " data-field="campo2">
-                    {{{tct_pld_campo2_ddw_ap_list}}}
+                    <label class="record-label ">¿Usted actúa a nombre y por cuenta propia o a nombre y por
+                        cuenta de un tercero?</label>
+                    <select class="campo2ddw " data-field="campo2">
+                        {{{tct_pld_campo2_ddw_ap_list}}}
                     </select>
                 </div>
                 <div class="span6 campo4ap">
                     <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
-                    <select class="campo4ddw  row-fluid" data-field="campo4" placeholder="Select">
+                    <select class="campo4ddw " data-field="campo4" placeholder="Select">
                         {{{tct_pld_campo4_ddw_ap_list}}}
                     </select>
 
@@ -59,7 +77,8 @@
                 <!-- Fila 1 Moral -->
                 <div class=" row-fluid">
                     <div class="span6 campo7ap-pm">
-                        <label class="record-label">La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?</label>
+                        <label class="record-label">La persona moral es: Sofom, Transmisor de Dinero, Centro
+                            Cambiario?</label>
                         <select class="campo7ddw  row-fluid" data-field="campo7" id="state2" placeholder="Select">
                             {{{tct_pld_campo7_ddw_aplist}}}
                         </select>
@@ -116,14 +135,6 @@
                     <input type="text" class="campo17txt" value="{{tct_pld_campo17_txt}}" data-field="campo17"/>
                 </div>
             </div>
-            <!-- Fila 6 -->
-            <div class=" row-fluid">
-                <div class="span6 campo15ap">
-                    <label class="record-label">Especifique:</label>
-                    <input type="text" class="campo15txt" value="{{tct_pld_campo15_txt}}" data-field="campo15"/>
-                </div>
-
-            </div>
             <!-- Fila 7-->
             <div class=" row-fluid">
                 <div class="span6 campo18pm">
@@ -132,139 +143,147 @@
                     <input type="checkbox" class="campo18chkpm" value="{{tct_pld_campo14_chk}}" data-field="campo14"/>
                 </div>
             </div>
+
+            <!-- Fila 8 -->
+            <div class=" row-fluid">
+                <div class="span6 campo25ap">
+                    <label class="record-label">Los recursos con los que va a celebrar su operación están destinados
+                        a</label>
+                    <select class="campo25ddw  row-fluid" data-field="campo25" placeholder="Select">
+                        {{{tct_pld_campo25_ddw}}}
+                    </select>
+                </div>
+                <div class="span6 campo26ap">
+                    <label class="record-label">Especifique:</label>
+                    <input type="text" class="campo26txt" value="{{tct_pld_campo26_txt}}" data-field="campo26"/>
+                </div>
+            </div>
         </div>
 
     </div>
 
-    <!-- Contenedor principal FF -->
+    <!-- Contenedor Factoraje Financiero--->
     <div class="control-group cont-FF">
-
-        <!-- Panel de Factoraje Financiero--->
-        <div class="control-group cont-FF">
-            <div>
-                <h4 style=""><b>Factoraje Financiero</b></h4>
-            </div>
-            <!-- Panel Factoraje Financiero -->
-            <div class=" row-fluid panel-ff" style="border: solid lightblue; width: 100%; padding: 6px;">
-                <!-- Fila 1 -->
-                <div class=" row-fluid">
-                    <div class="span6 campo1ff">
-                        <label class="record-label">No Serie FIEL</label>
-                        <input type="text" class="campo1txt" value="{{tct_pld_campo1_txt}}" data-field="campo1"/>
-                    </div>
+        <div class="row-fluid header-producto">
+            <h4><b>Factoraje Financiero</b></h4>
+        </div>
+        <!-- Panel Factoraje Financiero -->
+        <div class=" row-fluid panel-ff borde-Contenedor" >
+            <!-- Fila 1 -->
+            <div class=" row-fluid">
+                <div class="span6 campo1ff">
+                    <label class="record-label">No Serie FIEL</label>
+                    <input type="text" class="campo1txt" value="{{tct_pld_campo1_txt}}" data-field="campo1"/>
                 </div>
-                <!-- Fila 2 -->
-                <div class=" row-fluid">
-                    <div class="span6 campo2ff">
-                        <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?</label>
-                        <select class="campo2ddwff row-fluid  " data-field="campo2" placeholder="Requerido">
+            </div>
+            <!-- Fila 2 -->
+            <div class=" row-fluid">
+                <div class="span6 campo2ff">
+                    <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por
+                        cuenta de un tercero?</label>
+                    <select class="campo2ddwff row-fluid  " data-field="campo2" placeholder="Requerido">
                         {{{tct_pld_campo2_ddw_ff_list}}}
-                        </select>
-                    </div>
-                    <div class="span6 campo4ff">
-                        <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
-                        <select class="campo4ddwff  row-fluid" data-field="campo4" placeholder="Select">
-                            {{{tct_pld_campo4_ddw_ff_list}}}
-                        </select>
+                    </select>
+                </div>
+                <div class="span6 campo4ff">
+                    <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
+                    <select class="campo4ddwff  row-fluid" data-field="campo4" placeholder="Select">
+                        {{{tct_pld_campo4_ddw_ff_list}}}
+                    </select>
 
-                    </div>
                 </div>
-                <!-- Fila 3 -->
-                <div class=" row-fluid">
-                    <div class="span6 campo3ff">
-                        <label class="record-label">Propietario Real</label>
-                        <input type="text" class="campo3rel" value="{{tct_pld_campo3_rel}}" data-field="campo3"/>
-                    </div>
-                    <div class="span6 campo5ff">
-                        <label class="record-label span6">Proveedor de Recursos</label>
-                        <input type="text" class="campo5rel" value="{{tct_pld_campo5_rel}}" data-field="campo5"/>
-                    </div>
-                </div>
-                <!-- Fila 4 -->
-                <div class=" row-fluid">
-                    <div class="span6 campo21ff">
-                        <label class="record-label">¿Con qué frecuencia o periodo realizará pagos a Unifin?</label>
-                        <select class="campo21ddw  row-fluid" data-field="campo21" placeholder="Select">
-                        {{{tct_pld_campo21_ddw_ff_list}}}
-                        </select>
-                    </div>
-                    <div class="span6">
-                    </div>
-                </div>
-                <!-- Fila 5 -->
-                <div class=" row-fluid">
-                    <div class="span6 campo22ff">
-                        <label class="record-label row-fluid">¿Número de pagos que espera realizar en cada
-                            periodo?</label>
-                        <input type="text" class="campo22txt" value="{{tct_pld_campo22_int}}" data-field="campo22"/>
-                    </div>
-                    <div class="span6 campo23ff">
-                        <label class="record-label row-fluid">¿Monto total aproximado que espera realizar en el
-                            periodo?</label>
-                        <input type="text" data-type="currency" class="currency campo23dec"
-                               value="{{tct_pld_campo23_dec}}"
-                               data-field="campo23"/>
-
-                    </div>
-                </div>
-                <!-- Fila 6 -->
-                <div class=" row-fluid">
-                    <div class="span6 campo16ff">
-                        <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es
-                            posible elegir más de una opción)</label>
-                        <select class="select2 row-fluid" id="multi12" multiple="multiple" size="6"
-                                style="display:block;" data-field="campo16" id="multi-campo16" placeholder="Select">
-                            {{{tct_pld_campo16_ddw_ff_list}}}
-                        </select>
-                    </div>
-                    <div class="span6 campo17ff">
-                        <label class="record-label row-fluid">Especifique:</label>
-                        <input type="text" class="campo17txt" value="{{tct_pld_campo17_txt}}" data-field="campo17"/>
-                    </div>
-                </div>
-                <!-- Fila 7 -->
-                <div class=" row-fluid">
-                    <div class="span6 campo14ff">
-                        <label class="record-label">¿Realizará pagos utilizando otro instrumento monetario?</label>
-                        <br>
-                        <input type="checkbox" class="campo14chkff" value="{{tct_pld_campo14_chkff}}" data-field="campo14"/>
-                    </div>
-                    <div class="span6 campo18ff">
-                        <label class="record-label row-fluid">Especifique:</label>
-                        <input type="text" class="campo18txt" value="{{tct_pld_campo18_txt}}" data-field="campo18"/>
-                    </div>
-                </div>
-                <!-- Fila 8 -->
-                <div class=" row-fluid">
-                    <div class="span6 campo24ff">
-                        <label class="record-label row-fluid">¿Cuál es el destino de los recursos que obtendrá de la
-                            celebración de esta operación?</label>
-                        <select class="campo24ddw row-fluid " data-field="campo24">
-                            {{{tct_pld_campo24_ddw_ff_list}}}
-                        </select>
-                    </div>
-                </div>
-                <!-- Fila 9 -->
-                <div class=" row-fluid">
-                   <div class="span6 campo6ap">
-                        <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
-                        <select class="campo6ddw  row-fluid"  data-field="campo6">
-                            {{{tct_pld_campo6_ddw_ap_list}}}
-                        </select>
-                    </div>
-                </div>
-
             </div>
+            <!-- Fila 3 -->
+            <div class=" row-fluid">
+                <div class="span6 campo3ff">
+                    <label class="record-label">Propietario Real</label>
+                    <input type="text" class="campo3rel" value="{{tct_pld_campo3_rel}}" data-field="campo3"/>
+                </div>
+                <div class="span6 campo5ff">
+                    <label class="record-label span6">Proveedor de Recursos</label>
+                    <input type="text" class="campo5rel" value="{{tct_pld_campo5_rel}}" data-field="campo5"/>
+                </div>
+            </div>
+            <!-- Fila 4 -->
+            <div class=" row-fluid">
+                <div class="span6 campo21ff">
+                    <label class="record-label">¿Con qué frecuencia o periodo realizará pagos a Unifin?</label>
+                    <select class="campo21ddw  row-fluid" data-field="campo21" placeholder="Select">
+                        {{{tct_pld_campo21_ddw_ff_list}}}
+                    </select>
+                </div>
+                <div class="span6">
+                </div>
+            </div>
+            <!-- Fila 5 -->
+            <div class=" row-fluid">
+                <div class="span6 campo22ff">
+                    <label class="record-label row-fluid">¿Número de pagos que espera realizar en cada
+                        periodo?</label>
+                    <input type="text" class="campo22txt" value="{{tct_pld_campo22_int}}" data-field="campo22"/>
+                </div>
+                <div class="span6 campo23ff">
+                    <label class="record-label row-fluid">¿Monto total aproximado que espera realizar en el
+                        periodo?</label>
+                    <input type="text" data-type="currency" class="currency campo23dec"
+                           value="{{tct_pld_campo23_dec}}"
+                           data-field="campo23"/>
+
+                </div>
+            </div>
+            <!-- Fila 6 -->
+            <div class=" row-fluid">
+                <div class="span6 campo16ff">
+                    <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es
+                        posible elegir más de una opción)</label>
+                    <select class="select2 row-fluid" id="multi12" multiple="multiple" size="6"
+                            style="display:block;" data-field="campo16" id="multi-campo16" placeholder="Select">
+                        {{{tct_pld_campo16_ddw_ff_list}}}
+                    </select>
+                </div>
+                <div class="span6 campo17ff">
+                    <label class="record-label row-fluid">Especifique:</label>
+                    <input type="text" class="campo17txt" value="{{tct_pld_campo17_txt}}" data-field="campo17"/>
+                </div>
+            </div>
+            <!-- Fila 7 -->
+            <div class=" row-fluid">
+                <div class="span6 campo14ff">
+                    <label class="record-label">¿Realizará pagos utilizando otro instrumento monetario?</label>
+                    <br>
+                    <input type="checkbox" class="campo14chkff" value="{{tct_pld_campo14_chkff}}" data-field="campo14"/>
+                </div>
+            </div>
+            <!-- Fila 8 -->
+            <div class=" row-fluid">
+                <div class="span6 campo24ff">
+                    <label class="record-label row-fluid">¿Cuál es el destino de los recursos que obtendrá de la
+                        celebración de esta operación?</label>
+                    <select class="campo24ddw row-fluid " data-field="campo24">
+                        {{{tct_pld_campo24_ddw_ff_list}}}
+                    </select>
+                </div>
+            </div>
+            <!-- Fila 9 -->
+            <div class=" row-fluid">
+                <div class="span6 campo6ap">
+                    <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
+                    <select class="campo6ddw  row-fluid" data-field="campo6">
+                        {{{tct_pld_campo6_ddw_ap_list}}}
+                    </select>
+                </div>
+            </div>
+
         </div>
     </div>
 
     <!--Contenedor Principla Credito Automotriz -->
     <div class="control-group cont-CA">
 
-        <div>
-            <h4 style=""><b>Crédito Automotriz</b></h4>
+        <div class="row-fluid header-producto">
+            <h4><b>Crédito Automotriz</b></h4>
         </div>
-        <div class=" row-fluid panel-ca" style="border: solid lightblue; width: 100%; padding: 6px;">
+        <div class=" row-fluid panel-ca borde-Contenedor" >
 
             <!-- Fila 1 -->
             <div class=" row-fluid">
@@ -279,7 +298,7 @@
                     <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por
                         cuenta de un tercero?</label>
                     <select class="campo2ddwca row-fluid" data-field="campo2">
-                    {{{tct_pld_campo2_ddw_ca_list}}}
+                        {{{tct_pld_campo2_ddw_ca_list}}}
                     </select>
 
                 </div>
@@ -320,10 +339,10 @@
     <!--Contenedor Principla Credito Simple -->
     <div class="control-group cont-CS">
 
-        <div>
-            <h4 style=""><b>Crédito Simple</b></h4>
+        <div class="row-fluid header-producto">
+            <h4><b>Crédito Simple</b></h4>
         </div>
-        <div class=" row-fluid panel-cs" style="border: solid lightblue; width: 100%; padding: 6px;">
+        <div class=" row-fluid panel-cs borde-Contenedor" >
 
             <!-- Fila 1 -->
             <div class=" row-fluid">
@@ -335,9 +354,10 @@
             <!-- Fila 2 -->
             <div class=" row-fluid">
                 <div class="span6 campo2cs">
-                    <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?</label>
+                    <label class="record-label row-fluid">¿Usted actúa a nombre y por cuenta propia o a nombre y por
+                        cuenta de un tercero?</label>
                     <select class="campo2ddwcs row-fluid" data-field="campo2">
-                    {{{tct_pld_campo2_ddw_cs_list}}}
+                        {{{tct_pld_campo2_ddw_cs_list}}}
                     </select>
                 </div>
                 <div class="span6 campo4cs">
@@ -364,7 +384,8 @@
                 <div class="span6 campo18cs">
                     <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es
                         posible elegir más de una opción)</label>
-                    <select class="multi-campo18 select2 row-fluid" id="multi13" multiple="multiple" size="6" style="display:block;"
+                    <select class="multi-campo18 select2 row-fluid" id="multi13" multiple="multiple" size="6"
+                            style="display:block;"
                             data-field="campo18" id="multi-campo18" placeholder="Select">
                         {{{tct_pld_campo18_ddw_cs_list}}}
                     </select>
@@ -382,16 +403,12 @@
                     <label class="record-label">Especifique:</label>
                     <input type="text" class="campo19txt" value="{{tct_pld_campo19_txt}}" data-field="campo19"/>
                 </div>
-                <div class="span6 campo15cs">
-                    <label class="record-label">Especifique:</label>
-                    <input type="text" class="campo15txt" value="{{tct_pld_campo15_txt}}" data-field="campo15"/>
-                </div>
-
             </div>
             <!-- Fila 6 -->
             <div class=" row-fluid">
                 <div class="span6 campo20cs">
-                    <label class="record-label">¿Cuál es el destino de los recursos que va a obtener de la celebración de la operación?</label>
+                    <label class="record-label">¿Cuál es el destino de los recursos que va a obtener de la celebración
+                        de la operación?</label>
                     <select class="campo20ddw  row-fluid " data-field="campo20">
                         {{{tct_pld_campo20_ddw_cs_list}}}
                     </select>
