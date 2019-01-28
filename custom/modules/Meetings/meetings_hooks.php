@@ -154,7 +154,7 @@ SQL;
                 $GLOBALS['log']->fatal("Meetings: ".$query);
 			      $conn = $db->getConnection();
             $queryResult = $conn->executeQuery($query);
-            foreach($quemryResult->fetchAll() as $row)
+            foreach($queryResult->fetchAll() as $row)
 	    	    {
       			if($row['user_id'] != $bean->assigned_user_id)
 			      {
@@ -529,8 +529,11 @@ SQL;
       $puesto = $current_user->puestousuario_c;
       $lista = $app_list_strings['prospeccion_c_list'];
       $flag=false;
+      $listatext=array();
+
       //Se hace la comparacion entre la lista y el puesto del usuario loggeado
       foreach ($lista as $key => $newList){
+        $listatext[]=$key;
         if ($key == $puesto){
           $flag=true;
         }
@@ -540,9 +543,16 @@ SQL;
         $usrmod=array();
         //Consulta del id de la reunion y el del usuario loggeado
         $meetingscount="
-          SELECT user_id FROM meetings_users
-          WHERE meeting_id = '{$bean->id}'";
+          select m.user_id
+          from meetings_users m 
+          inner join users u on u.id = m.user_id
+          inner join users_cstm uc on uc.id_c = u.id
+          where 
+          m.meeting_id = '{$bean->id}'
+          and uc.puestousuario_c not in ('".implode("','",$listatext)."')
+          and m.deleted = 0";
         $totalcount=$db->query($meetingscount);
+        //$GLOBALS['log']->fatal("El puesto de los usuarios es: ".$totalcount);
         //$GLOBALS['log']->fatal("El id de la reunión es: ".$bean->id);
         $conteo=0;
         //$GLOBALS['log']->fatal("El usuario loggeado es: ".$current_user->id);
@@ -555,16 +565,16 @@ SQL;
           }
           //$GLOBALS['log']->fatal("El id de los usuarios: ".$totalme);
         }
-        //$GLOBALS['log']->fatal("Los usuarios invitados son: ". print_r($usrmod,true));
+        $GLOBALS['log']->fatal("Los usuarios invitados son: ". print_r($usrmod,true));
         //Comparacion para modificar a la persona asignada, solo cuando haya invitados
-        if(count($usrmod)>1 && $bean->assigned_user_id==$current_user->id){
+        if(count($usrmod)>=1 && $bean->assigned_user_id==$current_user->id){
           //Se hace una consulta a base de datos para modificar el usuario asignado a cada reunión
           $assigned="
             UPDATE meetings
             SET assigned_user_id ='{$usrmod[0]}'
             WHERE id='{$bean->id}'";
           $assig=$db->query($assigned);
-          //$GLOBALS['log']->fatal("El update del usuarios: ".$assigned);
+          $GLOBALS['log']->fatal("El update del usuarios: ".$usrmod[0]);
           //Modificación del deleted=1 para que elimine a un usuario si corresponde a algún puesto de la lista
           $bean->assigned_user_id=$usrmod[0];
           $deleusr="
@@ -575,5 +585,16 @@ SQL;
           $deletusr=$db->query($deleusr);
         }
       }
+      $puestoinv="
+        update meetings_users m 
+        inner join users u on u.id = m.user_id
+        inner join users_cstm uc on uc.id_c = u.id
+        set m.deleted = 1
+        where 
+        m.meeting_id = '{$bean->id}'
+        and uc.puestousuario_c  in ('".implode("','",$listatext)."')
+        and m.deleted = 0";
+      $showpuesto=$db->query($puestoinv);
+      //$GLOBALS['log']->fatal("El puesto de los usuarios es: ".$puestoinv);
     }
   }
