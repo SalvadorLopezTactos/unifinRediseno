@@ -154,7 +154,7 @@ SQL;
                 $GLOBALS['log']->fatal("Meetings: ".$query);
 			      $conn = $db->getConnection();
             $queryResult = $conn->executeQuery($query);
-            foreach($quemryResult->fetchAll() as $row)
+            foreach($queryResult->fetchAll() as $row)
 	    	    {
       			if($row['user_id'] != $bean->assigned_user_id)
 			      {
