@@ -1426,9 +1426,11 @@ cancelarBacklog: function(e){
                 var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&filter[3][estatus_de_la_operacion][$not_equals]=Cancelada&fields=id,mes,estatus_de_la_operacion',
                     null, null, null);
 
+                $(".savingIcon").show();
 
                 app.api.call('GET', bl_url, {}, {
                     success: _.bind(function (data) {
+                        $(".savingIcon").hide();
                         var meses =['0','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
                         if(data.records.length>0){
 
@@ -1442,6 +1444,7 @@ cancelarBacklog: function(e){
 
                         }else{
                             var Url = app.api.buildURL("UpdateFechaBl", '', {}, {});
+                            $(".savingIcon").show();
                             var Params = {
                                 "bl":num_bl,
                                 "mesActual":tempMes,
@@ -1451,7 +1454,9 @@ cancelarBacklog: function(e){
                             };
                             app.api.call("create", Url, {data: Params}, {
                                 success: _.bind(function (data) {
-                                    console.log('Peticion enviada');
+                                    //console.log('Peticion enviada');
+                                    this.moverOpAfterValidateIndividual(mes_popup,anio_popup,tempMes,tempAnio,tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso);
+
                                 },this)
                             });
                             //this.moverOpAfterValidateIndividual(mes_popup,anio_popup,tempMes,tempAnio,tempRegion, tempTipoOperacion, tempEtapa, tempEstatus, tempEquipo, tempPromotor, tempProgreso);
