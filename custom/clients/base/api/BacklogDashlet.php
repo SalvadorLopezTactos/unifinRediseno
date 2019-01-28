@@ -1394,7 +1394,7 @@ SQL;
         $url='http://'.$GLOBALS['esb_url'].'/uni2/rest/unics/actualizaFechasBacklog';
         $fields = array(
             "backlogRequest" => array(
-                "backlog" => $args['data']['bl'],
+                "bl" => $args['data']['bl'],
                 "mesActual" => $args['data']['mesActual'],
                 "anioActual" => $args['data']['anioActual'],
                 "mesNuevo" => $args['data']['mesNuevo'],
