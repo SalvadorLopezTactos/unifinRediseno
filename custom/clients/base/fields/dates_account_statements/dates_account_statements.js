@@ -92,6 +92,10 @@
 
         $('div[data-name=tct_dates_acc_statements_c]').hide();
 
+        if($('.loadeddate').length>0){
+            $('.divnewdate').removeAttr( 'style' );
+        }
+
         $('.removecompromiso').click(function(evt) {
             var key=$(this).closest(".control-group").find('.loadeddate')[0].id;
             delete selfcomp.obj_dates[key];
