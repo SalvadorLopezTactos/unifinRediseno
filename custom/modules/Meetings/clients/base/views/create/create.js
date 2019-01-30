@@ -1,6 +1,6 @@
 
 ({
-    
+
     extendsFrom: 'CreateView',
 
     initialize: function (options) {
@@ -12,6 +12,7 @@
         this.model.addValidationTask('ValidaObjetivos',_.bind(this.ValidaObjetivos,this));
         this.model.addValidationTask('Campos_necesarios', _.bind(this.Campos_necesarios, this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('valida_usuarios',_.bind(this.valida_usuarios, this));
         this.on('render', this.disablestatus, this);
     },
 
@@ -52,7 +53,7 @@
         if(this.model.get('name')=="" || this.model.get('name')==null){
             necesario= necesario + '<b>Asunto</b><br>';
             errors['name'] = errors['name'] || {};
-            errors['name'].custom_message1 = true;            
+            errors['name'].custom_message1 = true;
         }
         if(this.model.get('objetivo_c')=="" || this.model.get('objetivo_c')==null){
             necesario=necesario + '<b>Objetivo General</b><br>';
@@ -159,5 +160,31 @@
             });
         }
         callback(null, fields, errors);
+    },
+
+    valida_usuarios: function(fields, errors, callback) {
+        //Recuperar variables
+        var invitadosObject = this.model.get('invitees')._byId;
+        var invitados = [];
+        var count = 0;
+        Object.keys(invitadosObject).forEach(function(key) {
+           invitados[count] = invitadosObject[key].id;
+           count++;
+        });
+        //Generar petición para valdiación
+        app.api.call('GET', app.api.buildURL('validaUsuarios/' + invitados), null, {
+            success: _.bind(function(data) {
+               if(data==true){
+                  app.alert.show("Usuarios", {
+                    level: "error",
+                    messages: "No se puede guardar la Reunión ya que los invitados tienen algún puesto de:<br>" + campos,
+                    autoClose: false
+                  });
+                  errors['usuariocp'] = errors['usuariocp'] || {};
+                  errors['usuariocp'].required = true;
+               }
+               callback(null, fields, errors);
+            }, this)
+        });
     },
 })
