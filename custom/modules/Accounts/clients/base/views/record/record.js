@@ -56,10 +56,6 @@
        * */
         this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
 
-        /*Validacion para mostrar campos ocultos dependiendo de la opcion elegida*/
-        //this.model.on('change:.campo2ddw', this.MuestraCampo1, this);
-
-
         /* F. Javier G. Solar
            OBS299 Validar que las Direcciones no se repitan 21/11/2018
         */
@@ -3017,12 +3013,5 @@
         callback(null, fields, errors);
     },
 
-    /*Muestracampo1: function (){
-        if($('.campo2ddw').val()=="2"){
-            $('.campo3ap').show();
-        }else{
-            $('.campo3ap').hide();
-        }
-    },*/
 
 })
