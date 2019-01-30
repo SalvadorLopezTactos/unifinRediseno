@@ -171,6 +171,12 @@
            invitados[count] = invitadosObject[key].id;
            count++;
         });
+        var campos = "";
+        var jobs = app.lang.getAppListStrings('prospeccion_c_list');
+        for (var puesto in jobs) {
+            campos = campos + '<b>' + jobs[puesto] + '</b><br>';
+        }
+
         //Generar petición para valdiación
         app.api.call('GET', app.api.buildURL('validaUsuarios/' + invitados), null, {
             success: _.bind(function(data) {
