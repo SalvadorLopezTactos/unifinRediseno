@@ -1,7 +1,7 @@
 <?php
 
 
-$viewdefs['base']['fields']['proveedor-Recursos-cstm'] = array(
+$viewdefs['base']['fields']['accounts_tct_pld'] = array(
     'panels' => array(
         array(
             'fields' => array(
