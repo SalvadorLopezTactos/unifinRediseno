@@ -15,6 +15,21 @@
     lista_campo18: null,
     lista_campo20: null,
 
+    // J.A Solar
+    ProductosPLD: null,
+    // Listas para vista Deatil
+    campo2_list: null,
+    campo4_list: null,
+    campo6_list: null,
+    campo16_list: null,
+    campo7_list: null,
+    campo9_list: null,
+    campo11_list: null,
+    campo25_list: null,
+    campo21_list: null,
+    campo24_list: null,
+    campo18_list: null,
+    campo20_list: null,
 
 
 
@@ -24,7 +39,7 @@
         options = options || {};
         options.def = options.def || {};
         this._super('initialize', [options]);
-
+        this.ListasDetail();
         console.log(this.model.get('id'));
 
         //Validación para activar las listas desplegables
@@ -32,8 +47,84 @@
 
         //Funcion oculta los panels de productos
         pld.ocultapanels;
+        this.model.on('sync', this.loadData, this);
 
     },
+
+    loadData: function (options) {
+
+        //Recupera data existente
+        var idCuenta = '';
+        console.log("accion: " + pld.action);
+        console.log("accion this: " + this.action);
+
+        if (pld.action == 'detail') {
+            //Recupera datos para vista de detalle
+            var idCuenta = pld.model.get('id');
+            app.api.call('GET', app.api.buildURL('GetProductosPLD/' + idCuenta), null, {
+                success: function (data) {
+
+                    pld.ProductosPLD = pld.formatDetailPLD(data);
+                    _.extend(this, pld.ProductosPLD);
+                    pld.render();
+                },
+                error: function (e) {
+                    throw e;
+                }
+            });
+        }
+        console.log(pld.ProductosPLD);
+        this.render();
+    },
+    formatDetailPLD: function (dataPLD) {
+        // Listas AP
+        dataPLD['arrendamientoPuro']['campo2_label'] = this.campo2_list[dataPLD['arrendamientoPuro']['campo2']];
+        dataPLD['arrendamientoPuro']['campo4_label'] = this.campo4_list[dataPLD['arrendamientoPuro']['campo4']];
+        dataPLD['arrendamientoPuro']['campo7_label'] = this.campo7_list[dataPLD['arrendamientoPuro']['campo7']];
+        dataPLD['arrendamientoPuro']['campo9_label'] = this.campo9_list[dataPLD['arrendamientoPuro']['campo9']];
+        dataPLD['arrendamientoPuro']['campo6_label'] = this.campo6_list[dataPLD['arrendamientoPuro']['campo6']];
+        dataPLD['arrendamientoPuro']['campo16_label'] = this.campo16_list[dataPLD['arrendamientoPuro']['campo16']];
+        dataPLD['arrendamientoPuro']['campo25_label'] = this.campo25_list[dataPLD['arrendamientoPuro']['campo25']];
+
+
+        dataPLD['factorajeFinanciero']['campo2_label'] = this.campo2_list[dataPLD['factorajeFinanciero']['campo2']];
+        dataPLD['factorajeFinanciero']['campo4_label'] = this.campo4_list[dataPLD['factorajeFinanciero']['campo4']];
+        dataPLD['factorajeFinanciero']['campo21_label'] = this.campo21_list[dataPLD['factorajeFinanciero']['campo21']];
+        dataPLD['factorajeFinanciero']['campo16_label'] = this.campo16_list[dataPLD['factorajeFinanciero']['campo16']];
+        dataPLD['factorajeFinanciero']['campo24_label'] = this.campo24_list[dataPLD['factorajeFinanciero']['campo24']];
+        dataPLD['factorajeFinanciero']['campo6_label'] = this.campo6_list[dataPLD['factorajeFinanciero']['campo6']];
+
+        dataPLD['creditoAutomotriz']['campo2_label'] = this.campo2_list[dataPLD['creditoAutomotriz']['campo2']];
+        dataPLD['creditoAutomotriz']['campo4_label'] = this.campo4_list[dataPLD['creditoAutomotriz']['campo4']];
+        dataPLD['creditoAutomotriz']['campo6_label'] = this.campo6_list[dataPLD['creditoAutomotriz']['campo6']];
+
+        dataPLD['creditoSimple']['campo2_label'] = this.campo2_list[dataPLD['creditoSimple']['campo2']];
+        dataPLD['creditoSimple']['campo4_label'] = this.campo4_list[dataPLD['creditoSimple']['campo4']];
+        dataPLD['creditoSimple']['campo18_label'] = this.campo18_list[dataPLD['creditoSimple']['campo18']];
+        dataPLD['creditoSimple']['campo20_label'] = this.campo20_list[dataPLD['creditoSimple']['campo20']];
+        dataPLD['creditoSimple']['campo6_label'] = this.campo6_list[dataPLD['creditoSimple']['campo6']];
+
+
+        return dataPLD;
+    },
+
+    ListasDetail: function () {
+        this.campo2_list = app.lang.getAppListStrings('ctpldidproveedorrecursosclie_list');
+        this.campo4_list = app.lang.getAppListStrings('ctpldidproveedorrecursosson_list');
+        this.campo6_list = app.lang.getAppListStrings('tct_pagoanticipado_list');
+        this.campo16_list = app.lang.getAppListStrings('tct_inst_monetario_ddw_list');
+        this.campo7_list = app.lang.getAppListStrings('tct_cpld_pregunta_u1_ddw_list');
+        this.campo9_list = app.lang.getAppListStrings('tct_cpld_pregunta_u3_ddw_list');
+        this.campo11_list = app.lang.getAppListStrings('tct_cpld_pregunta9_desp_c');
+        this.campo25_list = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
+        this.campo21_list = app.lang.getAppListStrings('tct_pldcampo1_ff_ddw_list');
+        this.campo24_list = app.lang.getAppListStrings('tct_plddestinorecursos_ff_ddw_list');
+        this.campo18_list = app.lang.getAppListStrings('tct_instmonetario_csddw_list');
+        this.campo20_list = app.lang.getAppListStrings('tct_destinorecursos_csddw_list');
+
+    },
+
+
     /**
      * When data changes, re-render the field only if it is not on edit (see MAR-1617).
      * @inheritdoc
