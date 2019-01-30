@@ -591,6 +591,7 @@
 
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
         this.events['keydown [name=activo_fijo_c]'] = 'checkInVentas';
+        this.events['keydown [name=tct_prom_cheques_cur_c]'] = 'checkInVentas';
 
     },
 

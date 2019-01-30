@@ -10,7 +10,7 @@
       {{#each obj_dates}}
         <div class="control-group compromisos row-fluid" >
           <div class="span8">
-              <input type="date" class="loadeddate span12" id="{{@key}}" value="{{this}}" data-field="date_compromiso" >
+              <input type="date" class="loadeddate span12" id="{{@key}}" value="{{this}}" max="2999-12-31" data-field="date_compromiso" >
           </div>
 
           <div class="btn-toolbar prevent-mousedown span2">
@@ -23,9 +23,9 @@
   </div>
   <br>
 <!--Nueva Fecha -->
-  <div class="control-group compromiso2 row-fluid">
+  <div class="control-group compromiso2 row-fluid divnewdate" style="margin-top:-18px">
       <div class="span8">
-        <input type="date" class="newdate span12" placeholder="Fecha Compromiso" data-field="date_compromiso">
+        <input type="date" class="newdate span12" placeholder="Fecha Compromiso" max="2999-12-31" data-field="date_compromiso">
       </div>
 
       <div class="btn-toolbar prevent-mousedown span2">

@@ -7,8 +7,12 @@
     	// Busca las llamadas vencidas en status "planificada" y les cambia el estado a "no realizada"
         $GLOBALS['log']->fatal('>>>>>>COMIENZA JOB CLOSE_CALLS_MEETINGS:');//------------------------------------
 
-        $queryc="select * from calls where status='Planned' and (date_end < CURDATE() and date_end > SUBDATE(CURDATE(), 1));";
-        $querym="select * from meetings where status='Planned' and (date_end < CURDATE() and date_end > SUBDATE(CURDATE(), 1));";
+        $queryc="select calls.id from calls,calls_cstm
+                where calls.id=calls_cstm.id_c and calls.status='Planned'
+                and (calls.date_end < UTC_TIMESTAMP() and calls.date_end > SUBDATE(UTC_TIMESTAMP(), 1))
+                and calls_cstm.tct_call_issabel_c=0 
+                and deleted=0;";
+        $querym="select id from meetings where status='Planned' and (date_end < UTC_TIMESTAMP() and date_end > SUBDATE(UTC_TIMESTAMP(), 1));";
 
         $resultc = $GLOBALS['db']->query($queryc);
         $resultm = $GLOBALS['db']->query($querym);
@@ -18,18 +22,20 @@
 
         while($row = $GLOBALS['db']->fetchByAssoc($resultc) )
         {
-            $id = $row['id'];
-            $bean_call = BeanFactory::retrieveBean('Calls', $id);
-            $bean_call->status='Not Held';
-            $bean_call->save();
+            $idc = $row['id'];
+            $queryUpdatec="update calls
+              set status = 'Not Held'
+              where id='{$idc}';";
+            $resultUpdatec = $GLOBALS['db']->query($queryUpdatec);
             $contadorc++;
         }
         while($row = $GLOBALS['db']->fetchByAssoc($resultm) )
         {
-            $id = $row['id'];
-            $bean_call = BeanFactory::retrieveBean('Meetings', $id);
-            $bean_call->status='Not Held';
-            $bean_call->save();
+            $idm = $row['id'];
+            $queryUpdatem="update meetings
+              set status = 'Not Held'
+              where id='{$idm}';";
+            $resultUpdatem = $GLOBALS['db']->query($queryUpdatem);
             $contadorm++;
         }
         $GLOBALS['log']->fatal($contadorc.' llamadas modificadas');//------------------------------------
