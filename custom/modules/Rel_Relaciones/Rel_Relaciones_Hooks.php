@@ -9,6 +9,8 @@ require_once("custom/Levementum/UnifinAPI.php");
 class Rel_Relaciones_Hooks{
 
     public function SetName($bean=null,$event=null,$args=null){
+        //Inserta los datos a la otra tabla, copia del campo Relacion a Persona
+        $bean->rel_relaciones_accountsaccounts_ida = $bean->rel_relaciones_accounts_1accounts_ida;
         global $db;
         $query = <<<SQL
 select id from rel_relaciones_accounts_1_c where deleted = 0 and rel_relaciones_accounts_1rel_relaciones_idb <> '{$bean->id}' 
