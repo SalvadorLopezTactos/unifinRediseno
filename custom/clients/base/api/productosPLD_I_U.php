@@ -77,6 +77,8 @@ class productosPLD_I_U extends SugarApi
                     'campo25' => '',
                     'campo25_label' => '',
                     'campo26' => '',
+                    'campo11' => '',
+                    'campo11_label' => ''
                 ),
             'factorajeFinanciero' =>
                 array(
@@ -102,7 +104,7 @@ class productosPLD_I_U extends SugarApi
                     'campo24' => '',
                     'campo24_label' => '',
                     'campo6' => '',
-                    'campo6_label' => '',
+                    'campo6_label' => ''
                 ),
             'creditoAutomotriz' =>
                 array(
@@ -118,7 +120,7 @@ class productosPLD_I_U extends SugarApi
                     'campo5' => '',
                     'campo5_id' => '',
                     'campo6' => '',
-                    'campo6_label' => '',
+                    'campo6_label' => ''
                 ),
             'creditoSimple' =>
                 array(
@@ -140,7 +142,7 @@ class productosPLD_I_U extends SugarApi
                     'campo20' => '',
                     'campo20_label' => '',
                     'campo6' => '',
-                    'campo6_label' => '',
+                    'campo6_label' => ''
                 ),
 
         );
@@ -174,6 +176,8 @@ class productosPLD_I_U extends SugarApi
                         $productosPLD['arrendamientoPuro']['campo18'] = $value->tct_pld_campo18_ddw;
                         $productosPLD['arrendamientoPuro']['campo25'] = $value->tct_pld_campo25_ddw;
                         $productosPLD['arrendamientoPuro']['campo26'] = $value->tct_pld_campo26_txt;
+                        $productosPLD['arrendamientoPuro']['campo11'] = $value->tct_pld_campo11_ddw;
+                        $productosPLD['arrendamientoPuro']['campo13'] = $value->tct_pld_campo13_chk;
 
                         break;
                     case "FF":

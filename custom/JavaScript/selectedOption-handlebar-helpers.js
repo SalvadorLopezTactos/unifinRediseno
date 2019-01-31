@@ -16,5 +16,18 @@
             return $el.html();
         });
 
+        /**
+         * Diferent like (Value)
+         */
+        Handlebars.registerHelper('ifSelected', function(valuea, valueb) {
+            if (valuea === valueb) {
+                //options.fn(this);
+                return 'Selected';
+            } else {
+                //options.inverse(this);
+                return '';
+            }
+        });
+
     });
 })(SUGAR.App);
