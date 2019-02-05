@@ -204,7 +204,7 @@
         pld.ProductosPLD.arrendamientoPuro.campo11 = $('.campo11ddw-ap').select2('val');
         pld.ProductosPLD.arrendamientoPuro.campo13 = $('.campo13chk-ap')[0].checked;
         pld.ProductosPLD.arrendamientoPuro.campo14 = $('.campo14chk-ap')[0].checked;
-        pld.ProductosPLD.arrendamientoPuro.campo16 = $('.campo16ddw-ap').select2('val');
+        pld.ProductosPLD.arrendamientoPuro.campo16 = $('.campo16ddw-ap').select2('val').toString();
         pld.ProductosPLD.arrendamientoPuro.campo17 = $('.campo17txt-ap').val();
         pld.ProductosPLD.arrendamientoPuro.campo25 = $('.campo25ddw-ap').select2('val');
         pld.ProductosPLD.arrendamientoPuro.campo26 = $('.campo26txt-ap').val();
@@ -218,7 +218,7 @@
         pld.ProductosPLD.factorajeFinanciero.campo21 = $('.campo21ddw-ff').select2('val');
         pld.ProductosPLD.factorajeFinanciero.campo22 = $('.campo22int-ff').val();
         pld.ProductosPLD.factorajeFinanciero.campo23 = $('.campo23dec-ff').val();
-        pld.ProductosPLD.factorajeFinanciero.campo16 = $('.campo16ddw-ff').select2('val');
+        pld.ProductosPLD.factorajeFinanciero.campo16 = $('.campo16ddw-ff').select2('val').toString();
         pld.ProductosPLD.factorajeFinanciero.campo17 = $('.campo17txt-ff').val();
         pld.ProductosPLD.factorajeFinanciero.campo14 = $('.campo14chk-ff')[0].checked;
         pld.ProductosPLD.factorajeFinanciero.campo24 = $('.campo24ddw-ff').select2('val');
@@ -238,7 +238,7 @@
         pld.ProductosPLD.creditoSimple.campo4 = $('.campo4ddw-cs').select2('val');
         pld.ProductosPLD.creditoSimple.campo5 = $('.campo5rel-cs').val();
         pld.ProductosPLD.creditoSimple.campo5_id = $('.campo5rel-cs').select2('val');
-        pld.ProductosPLD.creditoSimple.campo18 = $('.campo18ddw-cs').select2('val');
+        pld.ProductosPLD.creditoSimple.campo18 = $('.campo18ddw-cs').select2('val').toString();
         pld.ProductosPLD.creditoSimple.campo19 = $('.campo19txt-cs').val();
         pld.ProductosPLD.creditoSimple.campo14 = $('.campo14chk-cs')[0].checked;
         pld.ProductosPLD.creditoSimple.campo20 = $('.campo20ddw-cs').select2('val');

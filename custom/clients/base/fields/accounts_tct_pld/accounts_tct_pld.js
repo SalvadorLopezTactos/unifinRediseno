@@ -211,12 +211,12 @@
             pld.Muestracampo2();
         });
         //Muestra el campo Número de Registro ante la CNBV o Condusef PERSONA MORAL 1
-        $('.campo7ddw-pm').change(function(evt) {
+        $('.campo7ddw-ap').change(function(evt) {
             pld.Muestracampo3();
         });
 
         //Muestra el campo Clave de Pizarra PERSONA MORAL 2
-        $('.campo9ddw-pm').change(function(evt) {
+        $('.campo9ddw-ap').change(function(evt) {
             pld.Muestracampo4();
         });
 
@@ -225,10 +225,10 @@
             pld.checkpagosmonetarioAP();
         });
 
-        $('#multi11').change(function(evt)  {
+        /*$('#multi11').change(function(evt)  {
             pld.InsMonetarioAP();
 
-        });
+        });*/
 
         //Desplegables para Factoraje Financiero
         //Muestra campo Propietario Real al seleccionar la opcion Tercero, pregunta 1
@@ -241,10 +241,10 @@
         });
 
         //Muestra
-        $('#multi12').change(function(evt)  {
+        /*$('#multi12').change(function(evt)  {
             pld.InsMonetarioFF();
 
-        });
+        });*/
 
         $('.campo14chk-ff').change(function(evt)  {
             pld.checkpagosmonetarioFF();
@@ -275,10 +275,10 @@
 
         });
 
-        $('#multi13').change(function(evt)  {
+        /*$('#multi13').change(function(evt)  {
             pld.InsMonetarioCS();
 
-        });
+        });*/
 
         $('.campo14chk-cs').change(function(evt)  {
             pld.checkpagosmonetarioCS();
@@ -330,25 +330,7 @@
         $('.campo19-cs').hide();
         */
 
-        //Se establece formato de multiselect a campo select con id "multi1 pregunta 1"
-        $('#multi11').select2({
-            width: '100%',
-            closeOnSelect: false,
-            containerCssClass: 'select2-choices-pills-close'
-        });
-        //Se establece formato de multiselect a campo select con id "multil2 pregunta 2"
-        $('#multi12').select2({
-            width: '100%',
-            closeOnSelect: false,
-            containerCssClass: 'select2-choices-pills-close'
-        });
 
-        //Se establece formato de multiselect a campo select con id "multil2 pregunta 3"
-        $('#multi13').select2({
-            width: '100%',
-            closeOnSelect: false,
-            containerCssClass: 'select2-choices-pills-close'
-        });
 
         //Validacion para mostrar los campos de Arrendamiento Puro dependiendo el regimen fiscal (Persona Moral)
         pld.validaregimen();
@@ -372,6 +354,26 @@
 
         //Set class to select2
         $('select.select2').select2();
+        //Se establece formato de multiselect a campo select con id "multi1 pregunta 1"
+        $('#multi11').select2({
+            width: '100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+        //Se establece formato de multiselect a campo select con id "multil2 pregunta 2"
+        $('#multi12').select2({
+            width: '100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
+        //Se establece formato de multiselect a campo select con id "multil2 pregunta 3"
+        $('#multi13').select2({
+            width: '100%',
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
 
     },
 
@@ -559,20 +561,20 @@
     //pregunta La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?
     Muestracampo3: function () {
         console.log("La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?");
-        if ($('.campo7ddw-pm').select2('val') == "Si") {
-            $('.campo8-PM').show();
+        if ($('.campo7ddw-ap').select2('val') == "Si") {
+            $('.campo8-ap').show();
         } else {
-            $('.campo8-PM').hide();
+            $('.campo8-ap').hide();
         }
     },
 
     //pregunta La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?
     Muestracampo4: function () {
         console.log("¿Cotiza en Bolsa?");
-        if ($('.campo9ddw-pm').select2('val') == "Si") {
-            $('.campo10-PM').show();
+        if ($('.campo9ddw-ap').select2('val') == "Si") {
+            $('.campo10-ap').show();
         } else {
-            $('.campo10-PM').hide();
+            $('.campo10-ap').hide();
         }
     },
 
@@ -732,6 +734,16 @@
             $('.campo5-ap').show();
         }else{
             $('.campo5-ap').hide();
+        }
+        if ($('.campo7ddw-ap').select2('val') == "Si") {
+            $('.campo8-ap').show();
+        } else {
+            $('.campo8-ap').hide();
+        }
+        if ($('.campo9ddw-ap').select2('val') == "Si") {
+            $('.campo10-ap').show();
+        } else {
+            $('.campo10-ap').hide();
         }
 
         /*
