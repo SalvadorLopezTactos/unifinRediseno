@@ -16,5 +16,34 @@
             return $el.html();
         });
 
+        /**
+         * Igual a
+         */
+        Handlebars.registerHelper('ifSelected', function(valuea, valueb) {
+            if (valuea === valueb) {
+                return 'Selected';
+            } else {
+                return '';
+            }
+        });
+
+        /**
+         * Contiene
+         */
+        Handlebars.registerHelper('ifMSelected', function(valuea, valueb) {
+            var select = '';
+            if (valueb !="" && valueb!="Array" && valueb != null) {
+                var elementos= valueb.split(",");
+                valuea = '^'+valuea+'^';
+
+                elementos.forEach(function(element) {
+                  if (element == valuea) {
+                    select='Selected';
+                  }
+                });
+            }
+            return select;
+        });
+
     });
 })(SUGAR.App);

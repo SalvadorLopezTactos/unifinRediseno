@@ -847,91 +847,98 @@ array (
             array (
               0 => 
               array (
+                'name' => 'accounts_tct_pld',
+                'studio' => 'visible',
+                'label' => 'accounts_tct_pld',
+                'span' => 12,
+              ),
+              1 => 
+              array (
                 'name' => 'ctpldpoliticamenteexpuesto_c',
                 'label' => 'LBL_CTPLDPOLITICAMENTEEXPUESTO',
               ),
-              1 => 
+              2 => 
               array (
                 'name' => 'ctpldrelacionadoarticulo_c',
                 'label' => 'LBL_CTPLDRELACIONADOARTICULO',
               ),
-              2 => 
+              3 => 
               array (
                 'name' => 'ctpldnoseriefiel_c',
                 'label' => 'LBL_CTPLDNOSERIEFIEL',
               ),
-              3 => 
+              4 => 
               array (
               ),
-              4 => 
+              5 => 
               array (
                 'name' => 'ctpldidproveedorrecursosclie_c',
                 'studio' => 'visible',
                 'label' => 'LBL_CTPLDIDPROVEEDORRECURSOSCLIE',
               ),
-              5 => 
+              6 => 
               array (
                 'name' => 'ctpldidproveedorrecursosson_c',
                 'studio' => 'visible',
                 'label' => 'LBL_CTPLDIDPROVEEDORRECURSOSSON',
               ),
-              6 => 
+              7 => 
               array (
                 'name' => 'tct_propietario_real_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_PROPIETARIO_REAL',
               ),
-              7 => 
+              8 => 
               array (
                 'name' => 'tct_proveedor_recursos_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_PROVEEDOR_RECURSOS',
               ),
-              8 => 
+              9 => 
               array (
                 'name' => 'tct_cpld_pregunta_u1_ddw_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA_U1_DDW',
               ),
-              9 => 
+              10 => 
               array (
                 'name' => 'tct_cpld_pregunta_u3_ddw_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA_U3_DDW',
               ),
-              10 => 
+              11 => 
               array (
                 'name' => 'tct_cpld_pregunta_u2_txf_c',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA_U2_TXF',
               ),
-              11 => 
+              12 => 
               array (
                 'name' => 'tct_cpld_pregunta_u4_txf_c',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA_U4_TXF',
               ),
-              12 => 
+              13 => 
               array (
                 'name' => 'tct_pagoanticipado_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_PAGOANTICIPADO',
               ),
-              13 => 
+              14 => 
               array (
                 'name' => 'tct_inst_monetario_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_INST_MONETARIO',
               ),
-              14 => 
+              15 => 
               array (
                 'name' => 'imotro_c',
                 'label' => 'LBL_IMOTRO',
               ),
-              15 => 
+              16 => 
               array (
                 'name' => 'imotrodesc_c',
                 'label' => 'LBL_IMOTRODESC',
               ),
-              16 => 
+              17 => 
               array (
                 'related_fields' => 
                 array (
@@ -941,67 +948,67 @@ array (
                 'name' => 'tct_cpld_pregunta6_mon_c',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA6_MON',
               ),
-              17 => 
+              18 => 
               array (
               ),
-              18 => 
+              19 => 
               array (
                 'name' => 'tct_cpld_pregunta6_desp_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA6_DESP',
               ),
-              19 => 
+              20 => 
               array (
                 'name' => 'tct_cpld_pregunta6_otra_txt_c',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA6_OTRA_TXT',
               ),
-              20 => 
+              21 => 
               array (
                 'name' => 'tct_cpld_pregunta7_num_c',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA7_NUM',
               ),
-              21 => 
+              22 => 
               array (
               ),
-              22 => 
+              23 => 
               array (
                 'name' => 'tct_cpld_pregunta8_desp_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA8_DESP',
               ),
-              23 => 
+              24 => 
               array (
                 'name' => 'tct_cpld_pregunta8_esp_txt_c',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA8_ESP_TXT',
               ),
-              24 => 
+              25 => 
               array (
                 'name' => 'tct_cpld_pregunta9_desp_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA9_DESP',
               ),
-              25 => 
+              26 => 
               array (
                 'name' => 'tct_cpld_pregunta9_esp_txt_c',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA9_ESP_TXT',
               ),
-              26 => 
+              27 => 
               array (
                 'name' => 'tct_cpld_pregunta10_desp_c',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA10_DESP',
               ),
-              27 => 
+              28 => 
               array (
                 'name' => 'tct_cpld_pregunta10_otro_txt_c',
                 'label' => 'LBL_TCT_CPLD_PREGUNTA10_OTRO_TXT',
               ),
-              28 => 
+              29 => 
               array (
                 'name' => 'tct_fedeicomiso_chk_c',
                 'label' => 'LBL_TCT_FEDEICOMISO_CHK',
               ),
-              29 => 
+              30 => 
               array (
               ),
             ),

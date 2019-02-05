@@ -52,6 +52,10 @@
 
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
 
+        /*Validacion de campos requeridos en el cuestionario PLD y sus productos
+        * Adrian Arauz 23/01/2019
+        * */
+        this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
 
 
         /* F. Javier G. Solar
@@ -161,7 +165,7 @@
          AF. 12-02-2018
          Ajuste para mostrar direcciones y teléfonos
          */
-        this.model.on('sync', this._render, this);
+        //this.model.on('sync', this._render, this);
         this.model.on('sync', this.hideconfiinfo, this);
         this.model.on('sync', this.disable_panels_rol, this); //@Jesus Carrilllo; metodo que deshabilita panels de acuerdo a rol;
         this.model.on('sync', this.disable_panels_team, this);
@@ -180,6 +184,97 @@
         this.events['keydown [name=activo_fijo_c]'] = 'checkInVentas';
         this.events['keydown [name=tct_prom_cheques_cur_c]'] = 'checkInVentas';
 
+        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+
+    },
+
+    saveProdPLD:function (fields, errors, callback) {
+
+	    // Actualizar modelo de pld.ProductosPLD
+
+        pld.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
+        pld.ProductosPLD.arrendamientoPuro.campo2 = $('.campo2ddw-ap').select2('val');
+        pld.ProductosPLD.arrendamientoPuro.campo3 = $('.campo3rel-ap')[0]['innerText'];
+        pld.ProductosPLD.arrendamientoPuro.campo3_id = $('.campo3rel-ap').select2('val');
+        pld.ProductosPLD.arrendamientoPuro.campo4 = $('.campo4ddw-ap').select2('val');
+        pld.ProductosPLD.arrendamientoPuro.campo5 = $('.campo5rel-ap')[0]['innerText'];
+        pld.ProductosPLD.arrendamientoPuro.campo5_id = $('.campo5rel-ap').select2('val');
+        pld.ProductosPLD.arrendamientoPuro.campo6 = $('.campo6ddw-ap').select2('val');
+        pld.ProductosPLD.arrendamientoPuro.campo7 = $('.campo7ddw-ap').select2('val');
+        pld.ProductosPLD.arrendamientoPuro.campo8 = $('.campo8txt-ap').val();
+        pld.ProductosPLD.arrendamientoPuro.campo9 = $('.campo9ddw-ap').select2('val');
+        pld.ProductosPLD.arrendamientoPuro.campo10 = $('.campo10txt-ap').val();
+        pld.ProductosPLD.arrendamientoPuro.campo11 = $('.campo11ddw-ap').select2('val');
+        pld.ProductosPLD.arrendamientoPuro.campo13 = $('.campo13chk-ap')[0].checked;
+        pld.ProductosPLD.arrendamientoPuro.campo14 = $('.campo14chk-ap')[0].checked;
+        pld.ProductosPLD.arrendamientoPuro.campo16 = $('.campo16ddw-ap').select2('val');
+        pld.ProductosPLD.arrendamientoPuro.campo17 = $('.campo17txt-ap').val();
+        pld.ProductosPLD.arrendamientoPuro.campo25 = $('.campo25ddw-ap').select2('val');
+        pld.ProductosPLD.arrendamientoPuro.campo26 = $('.campo26txt-ap').val();
+        pld.ProductosPLD.factorajeFinanciero.campo1 = $('.campo1txt-ff').val();
+        pld.ProductosPLD.factorajeFinanciero.campo2 = $('.campo2ddw-ff').select2('val');
+        pld.ProductosPLD.factorajeFinanciero.campo3 = $('.campo3rel-ff').val();
+        pld.ProductosPLD.factorajeFinanciero.campo3_id = $('.campo3rel-ff').select2('val');
+        pld.ProductosPLD.factorajeFinanciero.campo4 = $('.campo4ddw-ff').select2('val');
+        pld.ProductosPLD.factorajeFinanciero.campo5 = $('.campo5rel-ff').val();
+        pld.ProductosPLD.factorajeFinanciero.campo5_id = $('.campo5rel-ff').select2('val');
+        pld.ProductosPLD.factorajeFinanciero.campo21 = $('.campo21ddw-ff').select2('val');
+        pld.ProductosPLD.factorajeFinanciero.campo22 = $('.campo22int-ff').val();
+        pld.ProductosPLD.factorajeFinanciero.campo23 = $('.campo23dec-ff').val();
+        pld.ProductosPLD.factorajeFinanciero.campo16 = $('.campo16ddw-ff').select2('val');
+        pld.ProductosPLD.factorajeFinanciero.campo17 = $('.campo17txt-ff').val();
+        pld.ProductosPLD.factorajeFinanciero.campo14 = $('.campo14chk-ff')[0].checked;
+        pld.ProductosPLD.factorajeFinanciero.campo24 = $('.campo24ddw-ff').select2('val');
+        pld.ProductosPLD.factorajeFinanciero.campo6 = $('.campo6ddw-ff').select2('val');
+        pld.ProductosPLD.creditoAutomotriz.campo1 = $('.campo1txt-ca').val();
+        pld.ProductosPLD.creditoAutomotriz.campo2 = $('.campo2ddw-ca').select2('val');
+        pld.ProductosPLD.creditoAutomotriz.campo3 = $('.campo3rel-ca').val();
+        pld.ProductosPLD.creditoAutomotriz.campo3_id = $('.campo3rel-ca').select2('val');
+        pld.ProductosPLD.creditoAutomotriz.campo4 = $('.campo4ddw-ca').select2('val');
+        pld.ProductosPLD.creditoAutomotriz.campo5 = $('.campo5rel-ca').val();
+        pld.ProductosPLD.creditoAutomotriz.campo5_id = $('.campo5rel-ca').select2('val');
+        pld.ProductosPLD.creditoAutomotriz.campo6 = $('.campo6ddw-ca').select2('val');
+        pld.ProductosPLD.creditoSimple.campo1 = $('.campo1txt-cs').val();
+        pld.ProductosPLD.creditoSimple.campo2 = $('.campo2ddw-cs').select2('val');
+        pld.ProductosPLD.creditoSimple.campo3 = $('.campo3rel-cs').val();
+        pld.ProductosPLD.creditoSimple.campo3_id = $('.campo3rel-cs').select2('val');
+        pld.ProductosPLD.creditoSimple.campo4 = $('.campo4ddw-cs').select2('val');
+        pld.ProductosPLD.creditoSimple.campo5 = $('.campo5rel-cs').val();
+        pld.ProductosPLD.creditoSimple.campo5_id = $('.campo5rel-cs').select2('val');
+        pld.ProductosPLD.creditoSimple.campo18 = $('.campo18ddw-cs').select2('val');
+        pld.ProductosPLD.creditoSimple.campo19 = $('.campo19txt-cs').val();
+        pld.ProductosPLD.creditoSimple.campo14 = $('.campo14chk-cs')[0].checked;
+        pld.ProductosPLD.creditoSimple.campo20 = $('.campo20ddw-cs').select2('val');
+        pld.ProductosPLD.creditoSimple.campo6 = $('.campo6ddw-cs').select2('val');
+
+
+
+
+        if ($.isEmptyObject(errors))
+      {
+          var obj_pld_old=JSON.stringify(this.model.get('accounts_tct_pld_1'));
+          var obj_pld_new=JSON.stringify(pld.ProductosPLD);
+
+        //  if(obj_pld_old!=obj_pld_new)
+         // {
+              app.api.call('create', app.api.buildURL('SavePLD'), pld.ProductosPLD, {
+                  success: function (data) {
+
+                      if(data!="")
+                      {
+                          console.log("cuentas data " +data);
+                      }
+
+                      callback(null,fields,errors);
+                      },
+                  error: function (e) {
+                      //throw e;
+                      callback(null,fields,errors);
+                  }
+              });
+      }else {
+          callback(null,fields,errors);
+      }
     },
 
     /* F. Javier G. Solar
@@ -502,7 +597,7 @@
         this.model.set('account_direcciones', account_direcciones);
         this.model._previousAttributes.account_telefonos = account_telefonos;
         this.model._previousAttributes.account_direcciones = account_direcciones;
-        this.render();
+        //this.render();
     },
 
     bindDataChange: function () {
@@ -2980,6 +3075,207 @@
         callback(null, fields, errors);
     },
 
+    validaRequeridosPLD: function (fields, errors, callback){
+        var faltantesAP = "";
+        var faltantesFF = "";
+        var faltantesCA = "";
+
+        //Valida campos para AP
+        if (App.user.attributes.tipodeproducto_c == '1') {
+            //Pregunta: campo2ddw-ap
+            if($('.campo2ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
+                $('.campo2ddw-ap').find('.select2-choice').css('border-color','red');
+                faltantesAP = faltantesAP + '<b>- '+$('select.campo2ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo2ddw-ap').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo3rel-ap
+            if($('.campo3rel-ap')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val')=='2'){
+                $('.campo3rel-ap').find('.select2-choice').css('border-color','red');
+                faltantesAP = faltantesAP + '<b>- '+$('.campo3rel-ap')[1].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo3rel-ap').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo4ddw-ap
+            if($('.campo4ddw-ap').select2('val') == ''){
+                $('.campo4ddw-ap').find('.select2-choice').css('border-color','red');
+                faltantesAP = faltantesAP + '<b>- '+$('select.campo4ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo4ddw-ap').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo5rel-ap
+            if($('.campo5rel-ap')[0]['innerText'] == '' && $('.campo4ddw-ap').select2('val')=='2'){
+                $('.campo5rel-ap').find('.select2-choice').css('border-color','red');
+                faltantesAP = faltantesAP + '<b>- '+$('.campo5rel-ap')[1].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo5rel-ap').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo7ddw-ap
+            if($('.campo7ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
+                $('.campo7ddw-ap').find('.select2-choice').css('border-color','red');
+                faltantesAP = faltantesAP + '<b>- '+$('select.campo7ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo7ddw-ap').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo9ddw-ap
+            if($('.campo9ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
+                $('.campo9ddw-ap').find('.select2-choice').css('border-color','red');
+                faltantesAP = faltantesAP + '<b>- '+$('select.campo9ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo9ddw-ap').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo6ddw-ap
+            if($('.campo6ddw-ap').select2('val') == ''){
+                $('.campo6ddw-ap').find('.select2-choice').css('border-color','red');
+                faltantesAP = faltantesAP + '<b>- '+$('select.campo6ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo6ddw-ap').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo17txt-ap
+            if($('.campo17txt-ap').val() == '' && $('.campo14chk-ap')[0].checked){
+                $('.campo17txt-ap').css('border-color','red');
+                faltantesAP = faltantesAP + '<b>- '+$('.campo17txt-ap')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo17txt-ap').css('border-color','');
+            }
+            //Pregunta: campo26txt-ap
+            if($('.campo26txt-ap').val() == '' && $('.campo11ddw-ap').select2('val')=='No' ){
+                $('.campo26txt-ap').css('border-color','red');
+                faltantesAP = faltantesAP + '<b>- '+$('.campo26txt-ap')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo26txt-ap').css('border-color','');
+            }
+        }
+        //Valida campos para FF
+        if (App.user.attributes.tipodeproducto_c == '4') {
+            //Pregunta: campo2ddw-ff
+            if($('.campo2ddw-ff').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
+                $('.campo2ddw-ff').find('.select2-choice').css('border-color','red');
+                faltantesFF = faltantesFF + '<b>- '+$('select.campo2ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo2ddw-ff').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo3rel-ff
+            if($('.campo3rel-ff')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ff').select2('val')=='2'){
+                $('.campo3rel-ff').find('.select2-choice').css('border-color','red');
+                faltantesFF = faltantesFF + '<b>- '+$('.campo3rel-ff')[1].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo3rel-ff').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo4ddw-ff
+            if($('.campo4ddw-ff').select2('val') == ''){
+                $('.campo4ddw-ff').find('.select2-choice').css('border-color','red');
+                faltantesFF = faltantesFF + '<b>- '+$('select.campo4ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo4ddw-ff').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo5rel-ff
+            if($('.campo5rel-ff')[0]['innerText'] == '' && $('.campo4ddw-ff').select2('val')=='2'){
+                $('.campo5rel-ff').find('.select2-choice').css('border-color','red');
+                faltantesFF = faltantesFF + '<b>- '+$('.campo5rel-ff')[1].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo5rel-ff').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo21ddw-ff
+            if($('.campo21ddw-ff').select2('val') == ''){
+                $('.campo21ddw-ff').find('.select2-choice').css('border-color','red');
+                faltantesFF = faltantesFF + '<b>- '+$('select.campo21ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo21ddw-ff').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo24ddw-ff
+            if($('.campo24ddw-ff').select2('val') == ''){
+                $('.campo24ddw-ff').find('.select2-choice').css('border-color','red');
+                faltantesFF = faltantesFF + '<b>- '+$('select.campo24ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo24ddw-ff').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo6ddw-ff
+            if($('.campo6ddw-ff').select2('val') == ''){
+                $('.campo6ddw-ff').find('.select2-choice').css('border-color','red');
+                faltantesFF = faltantesFF + '<b>- '+$('select.campo6ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo6ddw-ff').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo17txt-ff
+            if($('.campo17txt-ff').val() == '' && $('.campo14chk-ff')[0].checked){
+                $('.campo17txt-ff').css('border-color','red');
+                faltantesFF = faltantesFF + '<b>- '+$('.campo17txt-ff')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo17txt-ff').css('border-color','');
+            }
+        }
+        //Valida campos para CA
+        if (App.user.attributes.tipodeproducto_c == '3') {
+            //Pregunta: campo2ddw-ca
+            if($('.campo2ddw-ca').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
+                $('.campo2ddw-ca').find('.select2-choice').css('border-color','red');
+                faltantesCA = faltantesCA + '<b>- '+$('select.campo2ddw-ca')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo2ddw-ca').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo3rel-ca
+            if($('.campo3rel-ca')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val')=='2'){
+                $('.campo3rel-ca').find('.select2-choice').css('border-color','red');
+                faltantesCA = faltantesCA + '<b>- '+$('.campo3rel-ca')[1].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo3rel-ca').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo4ddw-ca
+            if($('.campo4ddw-ca').select2('val') == ''){
+                $('.campo4ddw-ca').find('.select2-choice').css('border-color','red');
+                faltantesCA = faltantesCA + '<b>- '+$('select.campo4ddw-ca')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo4ddw-ca').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo5rel-ca
+            if($('.campo5rel-ca')[0]['innerText'] == '' && $('.campo4ddw-ca').select2('val')=='2'){
+                $('.campo5rel-ca').find('.select2-choice').css('border-color','red');
+                faltantesCA = faltantesCA + '<b>- '+$('.campo5rel-ca')[1].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo5rel-ca').find('.select2-choice').css('border-color','');
+            }
+            //Pregunta: campo6ddw-ca
+            if($('.campo6ddw-ca').select2('val') == ''){
+                $('.campo6ddw-ca').find('.select2-choice').css('border-color','red');
+                faltantesCA = faltantesCA + '<b>- '+$('select.campo6ddw-ca')[0].getAttribute('data-name')+'<br></b>';
+            }else{
+                $('.campo6ddw-ca').find('.select2-choice').css('border-color','');
+            }
+        }
+
+        //Genera alertas
+        if(faltantesAP != ""){
+            errors['PreguntasAP'] = "";
+            errors['PreguntasAP'].required = true;
+            app.alert.show("faltantesAP", {
+                level: "error",
+                title: "PLD Arrendamiento puro - Faltan las siguientes preguntas por contestar: <br>" + faltantesAP
+            });
+        }
+
+        if(faltantesFF != ""){
+            errors['PreguntasFF'] = "";
+            errors['PreguntasFF'].required = true;
+            app.alert.show("faltantesFF", {
+                level: "error",
+                title: "PLD Factoraje financiero - Faltan las siguientes preguntas por contestar: <br>" + faltantesFF
+            });
+        }
+
+        if(faltantesCA != ""){
+            errors['PreguntasCA'] = "";
+            errors['PreguntasCA'].required = true;
+            app.alert.show("faltantesCA", {
+                level: "error",
+                title: "PLD Crédito automotriz - Faltan las siguientes preguntas por contestar: <br>" + faltantesCA
+            });
+        }
+        callback(null, fields, errors);
+    },
+
+
+=======
     checkaccdatestatements:function(fields, errors, callback){
         var today = new Date();
         var dd = today.getDate();
