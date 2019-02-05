@@ -1,3 +1,3 @@
 <?php
-$mod_strings['LBL_CLOSE_CALLS'] = 'Job para actualizar el estado de las llamadas vencidas';
+$mod_strings['LBL_CLOSE_CALLS'] = 'Job para eliminar las llamadas vacias de issabel ';
 ?>

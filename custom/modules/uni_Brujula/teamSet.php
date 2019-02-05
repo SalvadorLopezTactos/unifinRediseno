@@ -1,6 +1,6 @@
 <?php
 
-class teamSetClass
+class teamSetClassB
 {
   function teamSetMethod($bean, $event, $arguments)
   {
@@ -17,6 +17,8 @@ class teamSetClass
       //Recupera teams asociados
       $bean->load_relationship('teams');
       $equipoPrincipal = ($equipoPrincipal == '1') ? 'UNO' : $equipoPrincipal;
+      $equipoPrincipal = ($equipoPrincipal == '0') ? 'CERO' : $equipoPrincipal;
+      $equipoPrincipal = str_replace(" ","",$equipoPrincipal);
       //Agrega teams de BO
       $bean->teams->add(
           array(
