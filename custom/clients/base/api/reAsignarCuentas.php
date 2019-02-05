@@ -99,7 +99,7 @@ SQL;
           			if($User->optout_c != 1)
           			{
           				$jefeActual = $User->email1;
-          			}					
+          			}
 					$notifica=BeanFactory::newBean('TCT2_Notificaciones');
                     $notifica->name = $para.' '.date("Y-m-d H:i:s");
                     $notifica->created_by = $promoActual;
@@ -128,6 +128,15 @@ SET opportunities.assigned_user_id = '{$reAsignado}'
 WHERE accounts.id = '{$value}' AND cs.tipo_producto_c = '{$producto}'
 SQL;
                 $queryResult = $db->query($query);
+
+                $queryUpdateTeams = "UPDATE opportunities
+                  INNER JOIN accounts_opportunities ON accounts_opportunities.opportunity_id = opportunities.id AND accounts_opportunities.deleted = 0
+                  INNER JOIN users ON opportunities.assigned_user_id = users.id
+                  SET
+                  	opportunities.team_id = users.team_set_id,
+                      opportunities.team_set_id = concat(left(users.team_set_id, 33),'af0')
+                  WHERE accounts_opportunities.account_id ='".$value."';";
+                $resultUpdateTeams = $db->query($queryUpdateTeams);
 
                 // Se comenta la actualizacion directa a BD para utilizar el BEAN y registrar bitacora
                /* $query = <<<SQL

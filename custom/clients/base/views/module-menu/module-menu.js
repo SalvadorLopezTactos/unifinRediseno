@@ -29,6 +29,11 @@
                 route = '#bwc/index.php?entryPoint=CotizadorProspectos';
                 //app.user.lastState.set('Leads:filter:last-Leads-records', this.meta.filter);
                 break;
+
+            case '#BuscaDisposicion':
+                route = '#bwc/index.php?entryPoint=BuscaDisposicion';
+                //app.user.lastState.set('Leads:filter:last-Leads-records', this.meta.filter);
+                break;
         }
 
         event.preventDefault();

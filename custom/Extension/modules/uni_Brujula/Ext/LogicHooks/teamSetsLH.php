@@ -13,6 +13,6 @@ $hook_array['before_save'][] = Array(
    20,
    'evey time a new team is added to the record, All related records get the new team',
    'custom/modules/uni_Brujula/teamSet.php',
-   'teamSetClass', // name of the class
+   'teamSetClassB', // name of the class
    'teamSetMethod'
 );

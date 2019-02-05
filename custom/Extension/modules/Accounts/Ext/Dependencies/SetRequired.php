@@ -451,7 +451,7 @@
                     'params' => array(
                         'target' => 'referido_cliente_prov_c',
                         'label' => 'referido_cliente_prov_c_label',
-                        'value' => 'or(equal($origendelprospecto_c,"Referido Cliente"), equal($origendelprospecto_c,"Referido Proveedor"))',
+                        'value' => 'or(equal($origendelprospecto_c,"Referido Cliente"), equal($origendelprospecto_c,"Referido Proveedor"),equal($origendelprospecto_c,"Referenciado Vendor"))',
                     ),
                 ),
             ),
