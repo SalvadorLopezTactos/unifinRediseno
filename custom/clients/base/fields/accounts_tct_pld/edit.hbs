@@ -17,7 +17,7 @@
     }
 
 </style>
-<!-- <script>
+<script>
     $('#states3').select2({
         minimumResultsForSearch: 5,
         allowClear: true
@@ -29,7 +29,7 @@
     var $select = $('select.select2');
     $select.select2();
 
-</script> -->
+</script>
 <div class="control-group">
     <div class="content_ap" style="display:{{ProductosPLD.arrendamientoPuro.visible}}">
         <!-- Seccion Arrendamiento Puro -->
@@ -132,14 +132,19 @@
                 <div class="span6 campo16-ap">
                     <label class="record-label row-fluid">¿Instrumento monetario con el que espera realizar los pagos?
                         (*Es posible elegir más de una opción)</label>
-                    <select class="campo16ddw-ap row-fluid" data-name="¿Instrumento monetario con el que espera realizar los pagos-ap" id="multi11" multiple="multiple" size="6"
+                    <select class="campo16ddw-ap select2 row-fluid" id="multi11" multiple="multiple" size="6" style="display:block;" data-field="campo16AP" placeholder="Select" data-name="¿Instrumento monetario con el que espera realizar los pagos-ap">
+                        {{#each campo16_list}}
+                          <option value="{{@key}}" {{ifMSelected @key ../ProductosPLD.arrendamientoPuro.campo16}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                    <!-- <select class="campo16ddw-ap row-fluid" data-name="¿Instrumento monetario con el que espera realizar los pagos-ap" id="multi11" multiple="multiple" size="6"
                             style="display:block;"
                             data-field="campo16AP" id="multi-campo16" placeholder="Select">
                         {{#each campo16_list}}
                             <option value="{{@key}}" {{ifMSelected @key
                                                                   ../ProductosPLD.arrendamientoPuro.campo16}}>{{this}}</option>
                         {{/each}}
-                    </select>
+                    </select> -->
                 </div>
             </div>
             <!-- Fila 5 AP -->
@@ -293,13 +298,18 @@
                 <div class="span6 campo16-ff">
                     <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es
                         posible elegir más de una opción)</label>
-                    <select class="row-fluid campo16ddw-ff" id="multi12" multiple="multiple" size="6"
+                    <select class="campo16ddw-ap select2 row-fluid" id="multi12" multiple="multiple" size="6" style="display:block;" data-field="campo16AP" placeholder="Select" data-name="¿Instrumento monetario con el que espera realizar los pagos-ff">
+                        {{#each campo16_list}}
+                          <option value="{{@key}}" {{ifMSelected @key ../ProductosPLD.factorajeFinanciero.campo16}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                    <!-- <select class="row-fluid campo16ddw-ff" id="multi12" multiple="multiple" size="6"
                             style="display:block;" data-field="campo16FF" data-name="¿Instrumento monetario con el que espera realizar los pagos?-ff" id="multi-campo16" placeholder="Select">
                         {{#each campo16_list}}
                             <option value="{{@key}}" {{ifMSelected @key
                                                                   ../ProductosPLD.factorajeFinanciero.campo16}}>{{this}}</option>
                         {{/each}}
-                    </select>
+                    </select> -->
                 </div>
                 <div class="span6 campo17-ff">
                     <label class="record-label ">Especifique:</label>
@@ -460,14 +470,19 @@
                 <div class="span6 camp18-cs">
                     <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es
                         posible elegir más de una opción)</label>
-                    <select class="campo18ddw-cs multi-campo18 row-fluid" id="multi13" multiple="multiple"
+                    <select class="campo18ddw-cs select2 row-fluid" id="multi13" multiple="multiple" size="6" style="display:block;" data-field="campo18CS" placeholder="Select" data-name="¿Instrumento monetario con el que espera realizar los pagos?-cs">
+                        {{#each campo18_list}}
+                          <option value="{{@key}}" {{ifMSelected @key ../ProductosPLD.creditoSimple.campo18}}>{{this}}</option>
+                        {{/each}}
+                    </select>
+                    <!-- <select class="campo18ddw-cs multi-campo18 row-fluid" id="multi13" multiple="multiple"
                             size="6" style="display:block;" data-field="campo18CS" data-name="¿Instrumento monetario con el que espera realizar los pagos?-cs" id="multi-campo18"
                             placeholder="Select">
                         {{#each campo18_list}}
                             <option value="{{@key}}" {{ifMSelected @key
                                                                   ../ProductosPLD.creditoSimple.campo18}}>{{this}}</option>
                         {{/each}}
-                    </select>
+                    </select> -->
                 </div>
                 <div class="span6 campo19-cs">
                     <label class="record-label">Especifique:</label>
