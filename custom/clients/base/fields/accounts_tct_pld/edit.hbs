@@ -1,5 +1,5 @@
 <style>
-    .borde-Contenedor {
+   .borde-Contenedor {
         border: 2px solid #58749a;
         border-radius: 12px;
         width: 100%;
@@ -15,8 +15,9 @@
         padding: 5px;
         margin-bottom: 8px;
     }
+
 </style>
-<script>
+<!-- <script>
     $('#states3').select2({
         minimumResultsForSearch: 5,
         allowClear: true
@@ -28,9 +29,9 @@
     var $select = $('select.select2');
     $select.select2();
 
-</script>
+</script> -->
 <div class="control-group">
-    <div class="content_ap">
+    <div class="content_ap" style="display:{{ProductosPLD.arrendamientoPuro.visible}}">
         <!-- Seccion Arrendamiento Puro -->
         <div class="content-AP">
             <div class="tituloProducto">
@@ -42,7 +43,7 @@
             <div class="row-fluid Fila1-AP">
                 <div class="span6 campo1-ap">
                     <label class="record-label">No Serie FIEL</label>
-                    <input type="text" class="campo1txt-ap" value="{{ProductosPLD.arrendamientoPuro.campo1}}"
+                    <input type="text" class="campo1txt-ap" data-name="No Serie FIEL-ap" value="{{ProductosPLD.arrendamientoPuro.campo1}}"
                            data-field="campo1AP"/>
                 </div>
             </div>
@@ -51,23 +52,24 @@
                 <div class="span6 campo2-ap">
                     <label class="record-label ">¿Usted actúa a nombre y por cuenta propia o a nombre y por
                         cuenta de un tercero?</label>
-                    <select class="row-fluid campo2ddw-ap " data-field="campo2AP">
+                    <select class="row-fluid select2  campo2ddw-ap " data-field="campo2AP" data-name="¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?">
                         {{#each campo2_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.arrendamientoPuro.campo2}}>{{this}}</option>
                         {{/each}}
-                    </select>>
+                    </select>
                 </div>
                 <div class="span6 campo3-ap">
                     <label class="record-label">Propietario Real</label>
-                    <input type="text" class="campo3rel-ap" data-type="relate" data-field="campo3AP"/>
+                    <input type="hidden" class="bigdrop campo3rel-ap row-fluid" id="propietario_real_ap" data-name="Propietario Real-ap" data-field="campo3AP"/>
+
                 </div>
             </div>
             <!-- Fila 3 AP -->
             <div class="row-fluid Fila3-AP">
                 <div class="span6 campo4-ap">
                     <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
-                    <select class=" row-fluid campo4ddw-ap " data-field="campo4AP" placeholder="Select">
+                    <select class="row-fluid select2  campo4ddw-ap " data-field="campo4AP" placeholder="Select" data-name="¿Los recursos son propios o los recursos son de un tercero?">
                         {{#each campo4_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.arrendamientoPuro.campo4}}>{{this}}</option>
@@ -76,44 +78,42 @@
                 </div>
                 <div class="span6 campo5-ap">
                     <label class="record-label ">Proveedor de Recursos</label>
-                    <input type="text" class="campo5rel-ap" value="{{tct_pld_campo5_rel}}" data-field="campo5AP"/>
+                    <input type="hidden" class="bigdrop campo5rel-ap row-fluid" id="proveedor_recursos_ap" data-name="Proveedor de Recursos-ap" data-field="campo5AP"/>
                 </div>
             </div>
             <!-- Fila 4.1 AP-PM -->
             <div class="row-fluid control-group fila4-PM">
                 <!-- Fila 1 AP-PM -->
                 <div class="row-fluid Fila1-PM">
-                    <div class="span6 campo7-pm">
+                    <div class="span6 campo7-ap">
                         <label class="record-label">La persona moral es: Sofom, Transmisor de Dinero, Centro
                             Cambiario?</label>
-                        <select class="campo7ddw-pm  row-fluid" data-field="campo7PM" id="state2" placeholder="Select">
+                        <select class="campo7ddw-ap select2 row-fluid" data-field="campo7PM" data-name="La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?" placeholder="Select">
                             {{#each campo7_list}}
-                                <option value="{{@key}}" {{ifSelected @key
-                                                                      ../ProductosPLD.arrendamientoPuro.campo7}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key ../ProductosPLD.arrendamientoPuro.campo7}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
-                    <div class="span6 campo8-PM">
+                    <div class="span6 campo8-ap">
                         <label class="record-label">Número de Registro ante la CNBV o Condusef</label>
-                        <input type="text" class="campo8txt-pm" value="{{ProductosPLD.arrendamientoPuro.campo8}}"
+                        <input type="text" class="campo8txt-ap" data-name="Número de Registro ante la CNBV o Condusef" value="{{ProductosPLD.arrendamientoPuro.campo8}}"
                                data-field="campo8PM"/>
                     </div>
                 </div>
                 <!-- Fila 2 AP-PM -->
                 <div class="row-fluid Fila2-PM">
-                    <div class="span6 campo9-pm">
+                    <div class="span6 campo9-ap">
                         <label class="record-label">¿Cotiza en Bolsa?</label>
-                        <select class="campo9ddw-pm  row-fluid" data-field="campo9PM" id="state2" placeholder="Select">
+                        <select class="campo9ddw-ap select2 row-fluid" data-field="campo9PM" data-name="¿Cotiza en Bolsa?"  placeholder="Select">
                             {{#each campo9_list}}
-                                <option value="{{@key}}" {{ifSelected @key
-                                                                      ../ProductosPLD.arrendamientoPuro.campo9}}>{{this}}</option>
+                                <option value="{{@key}}" {{ifSelected @key ../ProductosPLD.arrendamientoPuro.campo9}}>{{this}}</option>
                             {{/each}}
                         </select>
                     </div>
-                    <div class="span6 campo10-PM">
+                    <div class="span6 campo10-ap">
                         <label class="record-label">Clave de Pizarra</label>
-                        <input type="text" class="campo10txt-pm" value="{{ProductosPLD.arrendamientoPuro.campo10}}"
-                               data-field="campo10PM"/>
+                        <input type="text" class="campo10txt-ap" data-name="Clave de Pizarra" value="{{ProductosPLD.arrendamientoPuro.campo10}}"
+                               data-field="campo10AP"/>
                     </div>
                 </div>
 
@@ -122,7 +122,7 @@
             <div class="row-fluid Fila4-AP">
                 <div class="span6 campo6-ap">
                     <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
-                    <select class="campo6ddw-ap  row-fluid" data-field="campo6AP" id="state2" placeholder="Select">
+                    <select class="campo6ddw-ap select2 row-fluid" data-field="campo6AP" data-name="¿Espera realizar pagos anticipados a su crédito?-ap" id="state2" placeholder="Select">
                         {{#each campo6_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.arrendamientoPuro.campo6}}>{{this}}</option>
@@ -132,11 +132,11 @@
                 <div class="span6 campo16-ap">
                     <label class="record-label row-fluid">¿Instrumento monetario con el que espera realizar los pagos?
                         (*Es posible elegir más de una opción)</label>
-                    <select class="campo16ddw-ap select2 row-fluid" id="multi11" multiple="multiple" size="6"
+                    <select class="campo16ddw-ap row-fluid" data-name="¿Instrumento monetario con el que espera realizar los pagos-ap" id="multi11" multiple="multiple" size="6"
                             style="display:block;"
                             data-field="campo16AP" id="multi-campo16" placeholder="Select">
                         {{#each campo16_list}}
-                            <option value="{{@key}}" {{ifSelected @key
+                            <option value="{{@key}}" {{ifMSelected @key
                                                                   ../ProductosPLD.arrendamientoPuro.campo16}}>{{this}}</option>
                         {{/each}}
                     </select>
@@ -154,52 +154,51 @@
                 <div class="span6 campo17-ap">
                     <label class="record-label">Especifique:</label>
                     <input type="text" class="campo17txt-ap" value="{{ProductosPLD.arrendamientoPuro.campo17}}"
-                           data-field="campo17AP"/>
+                           data-field="campo17AP" data-name="Especifique-monetario-ap"/>
                 </div>
             </div>
             <!-- Fila 6 AP -->
             <div class="row-fluid Fila6-AP">
-                <div class="span6 campo13-ap">
-                    <label class="record-label">¿Es Fideicomiso??</label>
-                    <br>
-                    <input type="checkbox" class="campo13chk-pm"
-                           {{#if ProductosPLD.arrendamientoPuro.campo13}}checked{{/if}}
-                           data-field="campo13PM"/>
-                </div>
                 <div class="span6 campo11-ap">
                     <label class="record-label">Los recursos con los que va a celebrar su operación tiene su origen
                         en su actividad mercantil, actividad u objeto social?</label>
-                    <select class="campo11ddw-ap  row-fluid" data-field="campo11AP">
+                    <select class="campo11ddw-ap select2 row-fluid" data-field="campo11AP" data-name="Los recursos con los que va a celebrar su operación tiene su origen en su actividad mercantil, actividad u objeto social?">
                         {{#each campo11_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.arrendamientoPuro.campo11}}>{{this}}</option>
                         {{/each}}
                     </select>
                 </div>
+                <div class="span6 campo26-ap">
+                    <label class="record-label">Especifique:</label>
+                    <input type="text" class="campo26txt-ap" value="{{ProductosPLD.arrendamientoPuro.campo26}}"
+                           data-field="campo26AP" data-name="Especifique-recursos"/>
+                </div>
             </div>
             <!-- Fila 7 AP -->
             <div class="row-fluid Fila7-AP">
-                <div class="span6 campo25-ap">
+              <div class="span6 campo13-ap">
+                  <label class="record-label">¿Es Fideicomiso?</label>
+                  <br>
+                  <input type="checkbox" class="campo13chk-ap"
+                         {{#if ProductosPLD.arrendamientoPuro.campo13}}checked{{/if}}
+                         data-field="campo13AP"/>
+              </div>
+              <div class="span6 campo25-ap">
                     <label class="record-label">Los recursos con los que va a celebrar su operación están destinados
                         a</label>
-                    <select class="campo25ddw-ap  row-fluid" data-field="campo25AP" placeholder="Select">
+                    <select class="campo25ddw-ap select2 row-fluid" data-field="campo25AP" data-name="Los recursos con los que va a celebrar su operación están destinados a" placeholder="Select">
                         {{#each campo25_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.arrendamientoPuro.campo25}}>{{this}}</option>
                         {{/each}}
                     </select>
                 </div>
-                <div class="span6 campo26-ap">
-                    <label class="record-label">Especifique:</label>
-                    <input type="text" class="campo26txt-ap" value="{{ProductosPLD.arrendamientoPuro.campo26}}"
-                           data-field="campo26AP"/>
-                </div>
-
             </div>
         </div>
     </div>
 
-    <div class="content_ff">
+    <div class="content_ff" style="display:{{ProductosPLD.factorajeFinanciero.visible}}">
         <!-- Seccion Factoraje Financiero -->
         <div class="content-FF">
             <div class="tituloProducto">
@@ -211,7 +210,7 @@
             <div class="row-fluid Fila1-FF">
                 <div class="span6 campo1-ff">
                     <label class="record-label">No Serie FIEL</label>
-                    <input type="text" class="campo1txt-ff" value="{{ProductosPLD.factorajeFinanciero.campo1}}"
+                    <input type="text" class="campo1txt-ff" data-name="No Serie FIEL-ff" value="{{ProductosPLD.factorajeFinanciero.campo1}}"
                            data-field="campo1FF"/>
                 </div>
             </div>
@@ -220,7 +219,7 @@
                 <div class="span6 campo2-ff">
                     <label class="record-label ">¿Usted actúa a nombre y por cuenta propia o a nombre y por
                         cuenta de un tercero?</label>
-                    <select class="row-fluid campo2ddw-ff " data-field="campo2FF">
+                    <select class="row-fluid select2  campo2ddw-ff " data-field="campo2FF" data-name="¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?">
                         {{#each campo2_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.factorajeFinanciero.campo2}}>{{this}}</option>
@@ -229,14 +228,14 @@
                 </div>
                 <div class="span6 campo3-ff">
                     <label class="record-label">Propietario Real</label>
-                    <input type="text" class="campo3rel-ff" data-type="relate" data-field="campo3FF"/>
+                    <input type="hidden" class="bigdrop campo3rel-ff row-fluid" id="propietario_real_ff" data-name="Propietario Real-ff" data-field="campo3FF"/>
                 </div>
             </div>
             <!-- Fila 3 FF -->
             <div class="row-fluid Fila3-FF">
                 <div class="span6 campo4-ff">
                     <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
-                    <select class=" row-fluid campo4ddw-ff" data-field="campo4FF" placeholder="Select">
+                    <select class="row-fluid select2  campo4ddw-ff" data-field="campo4FF" placeholder="Select" data-name="¿Los recursos son propios o los recursos son de un tercero?">
                         {{#each campo4_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.factorajeFinanciero.campo4}}>{{this}}</option>
@@ -245,14 +244,14 @@
                 </div>
                 <div class="span6 campo5-ff">
                     <label class="record-label ">Proveedor de Recursos</label>
-                    <input type="text" class="campo5rel-ff" value="{{tct_pld_campo5_rel}}" data-field="campo5FF"/>
+                    <input type="hidden" class="bigdrop campo5rel-ff row-fluid" id="proveedor_recursos_ff" data-name="Proveedor Recursos-ff" data-field="campo5FF"/>
                 </div>
             </div>
             <!-- Fila 4 FF -->
             <div class="row-fluid Fila3-FF">
                 <div class="span6 campo21-ff">
                     <label class="record-label">¿Con qué frecuencia o periodo realizará pagos a Unifin?</label>
-                    <select class="campo21ddw-ff  row-fluid" data-field="campo21FF" placeholder="Select">
+                    <select class="campo21ddw-ff select2 row-fluid" data-field="campo21FF" data-name="¿Con qué frecuencia o periodo realizará pagos a Unifin?" placeholder="Select">
                         {{#each campo21_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.factorajeFinanciero.campo21}}>{{this}}</option>
@@ -265,7 +264,8 @@
                 <div class="span6 campo22-ff">
                     <label class="record-label">¿Número de pagos que espera realizar en cada
                         periodo?</label>
-                    <input type="text" class="campo22txt-ff" value="{{ProductosPLD.factorajeFinanciero.campo22}}"
+                    <input type="text" class="campo22int-ff" data-name="¿Número de pagos que espera realizar en cada
+                        periodo?" value="{{ProductosPLD.factorajeFinanciero.campo22}}"
                            data-field="campo22FF"/>
                 </div>
                 <div class="span6 campo23-ff">
@@ -281,7 +281,8 @@
                              </a>
                            </div>
                          </span>
-                        <input type="text" data-type="currency" class="currency edit campo23dec-ff"
+                        <input type="text" data-type="currency" data-name="¿Monto total aproximado que espera realizar en el
+                        periodo?" class="currency edit campo23dec-ff"
                                value="{{customFormatNumber ProductosPLD.factorajeFinanciero.campo23}}"
                                data-field="campo23FF"/>
                     </div>
@@ -292,10 +293,10 @@
                 <div class="span6 campo16-ff">
                     <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es
                         posible elegir más de una opción)</label>
-                    <select class="select2 row-fluid campo16ddw-ff" id="multi12" multiple="multiple" size="6"
-                            style="display:block;" data-field="campo16FF" id="multi-campo16" placeholder="Select">
+                    <select class="row-fluid campo16ddw-ff" id="multi12" multiple="multiple" size="6"
+                            style="display:block;" data-field="campo16FF" data-name="¿Instrumento monetario con el que espera realizar los pagos?-ff" id="multi-campo16" placeholder="Select">
                         {{#each campo16_list}}
-                            <option value="{{@key}}" {{ifSelected @key
+                            <option value="{{@key}}" {{ifMSelected @key
                                                                   ../ProductosPLD.factorajeFinanciero.campo16}}>{{this}}</option>
                         {{/each}}
                     </select>
@@ -303,7 +304,7 @@
                 <div class="span6 campo17-ff">
                     <label class="record-label ">Especifique:</label>
                     <input type="text" class="campo17txt-ff" value="{{ProductosPLD.factorajeFinanciero.campo17}}"
-                           data-field="campo17FF"/>
+                           data-field="campo17FF" data-name="Especifique-monetario-ff"/>
                 </div>
             </div>
             <!-- Fila 7 FF -->
@@ -321,7 +322,7 @@
                 <div class="span6 campo24-ff">
                     <label class="record-label row-fluid">¿Cuál es el destino de los recursos que obtendrá de la
                         celebración de esta operación?</label>
-                    <select class="campo24ddw-ff row-fluid " data-field="campo24FF">
+                    <select class="campo24ddw-ff select2 row-fluid " data-field="campo24FF" data-name="¿Cuál es el destino de los recursos que obtendrá de la celebración de esta operación?">
                         {{#each campo24_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.factorajeFinanciero.campo24}}>{{this}}</option>
@@ -330,7 +331,7 @@
                 </div>
                 <div class="span6 campo6-ff">
                     <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
-                    <select class="campo6ddw-ff  row-fluid" data-field="campo6FF">
+                    <select class="campo6ddw-ff select2 row-fluid" data-field="campo6FF" data-name="¿Espera realizar pagos anticipados a su crédito?-ff" >
                         {{#each campo6_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.factorajeFinanciero.campo6}}>{{this}}</option>
@@ -341,7 +342,7 @@
         </div>
     </div>
 
-    <div class="content_ca">
+    <div class="content_ca" style="display:{{ProductosPLD.creditoAutomotriz.visible}}">
         <!-- Seccion Crédito Automotriz   -->
         <div class="content-CA">
             <div class="tituloProducto">
@@ -353,7 +354,7 @@
             <div class="row-fluid Fila1-CA">
                 <div class="span6 campo1-ca">
                     <label class="record-label">No Serie FIEL</label>
-                    <input type="text" class="campo1txt-ca" value="{{ProductosPLD.creditoAutomotriz.campo1}}"
+                    <input type="text" class="campo1txt-ca" data-name="No Serie FIEL-ca" value="{{ProductosPLD.creditoAutomotriz.campo1}}"
                            data-field="campo1CA"/>
                 </div>
             </div>
@@ -362,7 +363,7 @@
                 <div class="span6 campo2-ca">
                     <label class="record-label ">¿Usted actúa a nombre y por cuenta propia o a nombre y por
                         cuenta de un tercero?</label>
-                    <select class="row-fluid campo2ddw-ca " data-field="campo2CA">
+                    <select class="row-fluid select2 campo2ddw-ca " data-field="campo2CA" data-name="¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?">
                         {{#each campo2_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.creditoAutomotriz.campo2}}>{{this}}</option>
@@ -371,14 +372,14 @@
                 </div>
                 <div class="span6 campo3-ca">
                     <label class="record-label">Propietario Real</label>
-                    <input type="text" class="campo3rel-ca" data-type="relate" data-field="campo3CA"/>
+                    <input type="hidden" class="bigdrop campo3rel-ca row-fluid" id="propietario_real_ca" data-name="Propietario Real-ca" data-field="campo3CA"/>
                 </div>
             </div>
             <!-- Fila 3 CA -->
             <div class="row-fluid Fila3-CA">
                 <div class="span6 campo4-ca">
                     <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
-                    <select class=" row-fluid campo4ddw-ca" data-field="campo4CA" placeholder="Select">
+                    <select class="row-fluid select2  campo4ddw-ca" data-field="campo4CA" placeholder="Select" data-name="¿Los recursos son propios o los recursos son de un tercero?">
                         {{#each campo4_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.creditoAutomotriz.campo4}}>{{this}}</option>
@@ -387,14 +388,14 @@
                 </div>
                 <div class="span6 campo5-ca">
                     <label class="record-label ">Proveedor de Recursos</label>
-                    <input type="text" class="campo5rel-ca" value="{{tct_pld_campo5_rel}}" data-field="campo5CA"/>
+                    <input type="hidden" class="bigdrop campo5rel-ca row-fluid" id="proveedor_recursos_ca" data-name="Proveedor Recursos-ca" data-field="campo5CA"/>
                 </div>
             </div>
             <!-- Fila 4 CA -->
             <div class="row-fluid Fila8-CA">
                 <div class="span6 campo6-ca">
                     <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
-                    <select class="campo6ddw-ca  row-fluid" data-field="campo6CA">
+                    <select class="campo6ddw-ca select2 row-fluid" data-field="campo6CA" data-name="¿Espera realizar pagos anticipados a su crédito?-ca">
                         {{#each campo6_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.creditoAutomotriz.campo6}}>{{this}}</option>
@@ -417,7 +418,7 @@
             <div class="row-fluid Fila1-CS">
                 <div class="span6 campo1-cs">
                     <label class="record-label">No Serie FIEL</label>
-                    <input type="text" class="campo1txt-cs" value="{{ProductosPLD.creditoSimple.campo1}}"
+                    <input type="text" class="campo1txt-cs" data-name="No Serie FIEL-cs" value="{{ProductosPLD.creditoSimple.campo1}}"
                            data-field="campo1CS"/>
                 </div>
             </div>
@@ -426,7 +427,7 @@
                 <div class="span6 campo2-cs">
                     <label class="record-label ">¿Usted actúa a nombre y por cuenta propia o a nombre y por
                         cuenta de un tercero?</label>
-                    <select class="row-fluid campo2ddw-cs" data-field="campo2CS">
+                    <select class="row-fluid select2  campo2ddw-cs" data-field="campo2CS" data-name="¿Usted actúa a nombre y por cuenta propia o a nombre y por cuenta de un tercero?-cs">
                         {{#each campo2_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.creditoSimple.campo2}}>{{this}}</option>
@@ -435,14 +436,14 @@
                 </div>
                 <div class="span6 campo3-cs">
                     <label class="record-label">Propietario Real</label>
-                    <input type="text" class="campo3rel-cs" data-type="relate" data-field="campo3CS"/>
+                    <input type="hidden" class="bigdrop campo3rel-cs row-fluid" id="propietario_real_cs" data-name="Propietario Real-cs" data-field="campo3CS"/>
                 </div>
             </div>
             <!-- Fila 3 CS -->
             <div class="row-fluid Fila3-CS">
                 <div class="span6 campo4-cs">
                     <label class="record-label">¿Los recursos son propios o los recursos son de un tercero?</label>
-                    <select class=" row-fluid campo4ddw-cs" data-field="campo4CS" placeholder="Select">
+                    <select class="row-fluid select2  campo4ddw-cs" data-field="campo4CS" data-name="¿Los recursos son propios o los recursos son de un tercero?-cs" placeholder="Select">
                         {{#each campo4_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.creditoSimple.campo4}}>{{this}}</option>
@@ -451,7 +452,7 @@
                 </div>
                 <div class="span6 campo5-cs">
                     <label class="record-label ">Proveedor de Recursos</label>
-                    <input type="text" class="campo5rel-cs" value="{{tct_pld_campo5_rel}}" data-field="campo5CS"/>
+                    <input type="hidden" class="bigdrop campo5rel-cs row-fluid" id="proveedor_recursos_cs" data-name="Proveedor Recursos-cs" data-field="campo5CS"/>
                 </div>
             </div>
             <!-- Fila 4 CS -->
@@ -459,11 +460,11 @@
                 <div class="span6 camp18-cs">
                     <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es
                         posible elegir más de una opción)</label>
-                    <select class="campo18ddw-cs multi-campo18 select2 row-fluid" id="multi13" multiple="multiple"
-                            size="6" style="display:block;" data-field="campo18CS" id="multi-campo18"
+                    <select class="campo18ddw-cs multi-campo18 row-fluid" id="multi13" multiple="multiple"
+                            size="6" style="display:block;" data-field="campo18CS" data-name="¿Instrumento monetario con el que espera realizar los pagos?-cs" id="multi-campo18"
                             placeholder="Select">
                         {{#each campo18_list}}
-                            <option value="{{@key}}" {{ifSelected @key
+                            <option value="{{@key}}" {{ifMSelected @key
                                                                   ../ProductosPLD.creditoSimple.campo18}}>{{this}}</option>
                         {{/each}}
                     </select>
@@ -471,7 +472,7 @@
                 <div class="span6 campo19-cs">
                     <label class="record-label">Especifique:</label>
                     <input type="text" class="campo19txt-cs" value="{{ProductosPLD.creditoSimple.campo19}}"
-                           data-field="campo19CS"/>
+                           data-field="campo19CS" data-name="Especifique-monetario-cs"/>
                 </div>
             </div>
             <!-- Fila 5 CS -->
@@ -490,7 +491,7 @@
                 <div class="span6 campo20-cs">
                     <label class="record-label">¿Cuál es el destino de los recursos que va a obtener de la celebración
                         de la operación?</label>
-                    <select class="campo20ddw-cs  row-fluid " data-field="campo20CS">
+                    <select class="campo20ddw-cs select2 row-fluid " data-field="campo20CS" data-name="¿Cuál es el destino de los recursos que va a obtener de la celebración de la operación?-cs">
                         {{#each campo20_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.creditoSimple.campo20}}>{{this}}</option>
@@ -499,7 +500,7 @@
                 </div>
                 <div class="span6 campo6-cs">
                     <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
-                    <select class="campo6ddw-cs  row-fluid" data-field="campo6CS">
+                    <select class="campo6ddw-cs select2 row-fluid" data-field="campo6CS" data-name="¿Espera realizar pagos anticipados a su crédito?-cs">
                         {{#each campo6_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.creditoSimple.campo6}}>{{this}}</option>

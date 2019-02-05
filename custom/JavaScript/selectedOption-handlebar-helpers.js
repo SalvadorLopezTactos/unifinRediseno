@@ -17,16 +17,32 @@
         });
 
         /**
-         * Diferent like (Value)
+         * Igual a
          */
         Handlebars.registerHelper('ifSelected', function(valuea, valueb) {
             if (valuea === valueb) {
-                //options.fn(this);
                 return 'Selected';
             } else {
-                //options.inverse(this);
                 return '';
             }
+        });
+
+        /**
+         * Contiene
+         */
+        Handlebars.registerHelper('ifMSelected', function(valuea, valueb) {
+            var select = '';
+            if (valueb !="" && valueb!="Array" && valueb != null) {
+                var elementos= valueb.split(",");
+                valuea = '^'+valuea+'^';
+
+                elementos.forEach(function(element) {
+                  if (element == valuea) {
+                    select='Selected';
+                  }
+                });
+            }
+            return select;
         });
 
     });
