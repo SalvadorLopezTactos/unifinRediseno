@@ -57,6 +57,7 @@
         this.model.addValidationTask('check_factoraje', _.bind(this.validaRequeridosFactoraje, this)); //Se añade funcionalidad para limitar a 99.00 en valores de factoraje. Adrian Arauz 23/08/2018
 		    this.model.addValidationTask('check_validaccionCuentaSubcuenta', _.bind(this.validacionCuentaSubcuentaCheck, this));/* @author victor.martinez 23-07-2018  Valida campos requeridos de prospecto e Integracion de expediente */
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+        this.model.addValidationTask('valida_cuentas_pld',_.bind(this.valida_pld, this));
         /*
             AF. 12-02-2018
             Ajuste para actualizar valores en vista
@@ -451,6 +452,46 @@
                 callback(null, fields, errors);
             }
       },
+
+    valida_pld:function (fields, errors, callback) {
+          //Valida que cuenta tenga registrado PLD por tipo de producto con base en usuario logeado
+          //Recupera producto de usuario
+          var tipoProdArr = [];
+          tipoProdArr['1']='AP';
+          tipoProdArr['4']='FF';
+          tipoProdArr['3']='CA';
+          var usuarioProducto = tipoProdArr[App.user.attributes.tipodeproducto_c];
+
+          //Recupera cuenta asociada
+          var cuentaId=this.model.get('account_id');
+          if((cuentaId!=""|| cuentaId!=null) && this.model.get('tct_oportunidad_perdida_chk_c') != true){
+              app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId +'/link/accounts_tct_pld_1?filter[0][description][$equals]='+usuarioProducto), null, {
+              success: _.bind(function (data) {
+                  if (data != "") {
+                      if (data.records.length > 0) {
+                          if (data.records[0].tct_pld_campo4_ddw == "") {
+                            //Falta completar PLD
+                            errors['accounts_pld'] = errors['accounts_pld'] || {};
+                            errors['accounts_pld'].required = true;
+                            self.mensajes("valida_pld", "Hace falta completar información en la pestaña <b>PLD</b> de la <b>Cuenta</b>", "error");
+                          }
+                      }else{
+                          //No tiene PLD
+                          errors['accounts_pld'] = errors['accounts_pld'] || {};
+                          errors['accounts_pld'].required = true;
+                          self.mensajes("valida_pld", "Hace falta completar información en la pestaña <b>PLD</b> de la <b>Cuenta</b>", "error");
+
+                      }
+                  }
+                  callback(null, fields, errors);
+
+              }, self),
+            });
+          }
+          else{
+              callback(null, fields, errors);
+          }
+    },
 
     //@Jesus Carrillo, metodo que busca las palabras dadas
     multiSearchOr: function(text, searchWords){

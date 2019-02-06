@@ -2259,7 +2259,7 @@
 
         if ($.isEmptyObject(errors))
         {
-          this.model.set('accounts_tct_pld_1', pld.ProductosPLD);
+          this.model.set('tct_nuevo_pld_c', JSON.stringify(pld.ProductosPLD));
         }
         callback(null,fields,errors);
     },
