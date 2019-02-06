@@ -20,7 +20,7 @@
          * Igual a
          */
         Handlebars.registerHelper('ifSelected', function(valuea, valueb) {
-            if (valuea === valueb) {
+            if (valuea === valueb || (valuea=="" && valueb == null ) ) {
                 return 'Selected';
             } else {
                 return '';
