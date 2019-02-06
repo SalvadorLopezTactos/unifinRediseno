@@ -16,10 +16,10 @@
     campo18_list: null,
     campo20_list: null,
 
+
     events :{
         'keydown .campo23dec-ff': 'keyDownNewExtension',
     },
-
 
     initialize: function (options) {
         //Inicializa campo custom
@@ -36,6 +36,9 @@
         //Funcion oculta los panels de productos
         pld.ocultapanels;
         this.model.on('sync', this.loadData, this);
+        this.model.on("change:tipodepersona_c", _.bind(function () {
+            pld.validaregimen();
+        }, this));
 
     },
 
@@ -44,6 +47,9 @@
        // if (pld.action == 'detail') {
             //Recupera datos para vista de detalle
             var idCuenta = pld.model.get('id');
+            if (idCuenta=="" || idCuenta == undefined) {
+                idCuenta = '1';
+            }
             app.api.call('GET', app.api.buildURL('GetProductosPLD/' + idCuenta), null, {
                 success: function (data) {
                     //Recupera resultado
@@ -228,10 +234,9 @@
             pld.checkpagosmonetarioAP();
         });
 
-        /*$('#multi11').change(function(evt)  {
+        $('#multi11').change(function(evt)  {
             pld.InsMonetarioAP();
-
-        });*/
+        });
 
         //Desplegables para Factoraje Financiero
         //Muestra campo Propietario Real al seleccionar la opcion Tercero, pregunta 1
@@ -244,10 +249,10 @@
         });
 
         //Muestra
-        /*$('#multi12').change(function(evt)  {
+        $('#multi12').change(function(evt)  {
             pld.InsMonetarioFF();
 
-        });*/
+        });
 
         $('.campo14chk-ff').change(function(evt)  {
             pld.checkpagosmonetarioFF();
@@ -278,10 +283,10 @@
 
         });
 
-        /*$('#multi13').change(function(evt)  {
+        $('#multi13').change(function(evt)  {
             pld.InsMonetarioCS();
 
-        });*/
+        });
 
         $('.campo14chk-cs').change(function(evt)  {
             pld.checkpagosmonetarioCS();
@@ -293,47 +298,6 @@
             pld.cuentaclient();
 
         });
-
-
-        /*
-        //Campos nacen ocultos Arrendamiento Puro
-        $('.campo1-ap').hide();
-        $('.campo2-ap').hide();
-        $('.campo4-ap').hide();
-        $('.campo6-ap').hide();
-        $('.campo16-ap').hide();
-        $('.campo14-ap').hide();
-        $('.campo11-ap').hide();
-        //Campos Ocultos Arrendamiento Puro (Desplegables)
-        //$('.campo3-ap').hide();
-        $('.campo5-ap').hide();
-        $('.campo17-ap').hide();
-        $('.campo15-ap').hide();
-        $('.campo18-ap').hide();
-        //Campos Persona Moral Arrendamiento Puro
-        $('.campo7-pm').hide(); //Pregunta1
-        $('.campo9-pm').hide(); //Pregunta2
-        $('.campo8-PM').hide();
-        $('.campo10-PM').hide();
-
-        $('.campo25-ap').hide(); //Cuenta Cliente
-        $('.campo26-ap').hide(); //Especifique cuenta Cliente
-        //Campos Factoraje Financiero
-        $('.campo3-ff').hide();
-        $('.campo5-ff').hide();
-        $('.campo17-ff').hide();
-
-        //Campos Credito Automotriz
-        $('.campo3-ca').hide();
-        $('.campo5-ca').hide();
-        //Campos Credito Simple
-        $('.campo3-cs').hide();
-        $('.campo5-cs').hide();
-        $('.campo15-cs').hide();
-        $('.campo19-cs').hide();
-        */
-
-
 
         //Validacion para mostrar los campos de Arrendamiento Puro dependiendo el regimen fiscal (Persona Moral)
         pld.validaregimen();
@@ -592,11 +556,12 @@
 
     InsMonetarioAP: function () {
         console.log("Cambio de Instrumento monetario AP");
-        if ($('#multi11').val("Otro")) {
+        if ($('.campo16ddw-ap').select2('val').toString().includes("Otro")) {
             $('.campo14chk-ap').attr("checked", true);
             $('.campo17-ap').show();
         } else {
             $('.campo17-ap').hide();
+            $('.campo14chk-ap').attr("checked", false);
         }
     },
 
@@ -640,11 +605,12 @@
 
     InsMonetarioFF: function () {
         console.log("Cambio de Instrumento monetario FF");
-        if ($('#multi12').val("Otro")) {   //campo16ddw-ap
+        if ($('#multi12').select2('val').toString().includes("Otro")) {
             $('.campo14chk-ff').attr("checked", true);
             $('.campo17-ff').show();
         } else {
             $('.campo17-ff').hide();
+            $('.campo14chk-ff').attr("checked", false);
         }
     },
 
@@ -691,11 +657,12 @@
 
     InsMonetarioCS: function () {
         console.log("Cambio de Instrumento monetario CS");
-        if ($('#multi13').val("Otro")) {
+        if ($('#multi13').select2('val').toString().includes("otro")) {
             $('.campo14chk-cs').attr("checked", true);
             $('.campo19-cs').show();
         } else {
             $('.campo19-cs').hide();
+            $('.campo14chk-cs').attr("checked", false);
         }
     },
 
@@ -709,6 +676,60 @@
 
     validaregimen: function (){
         //Muestra campos por regimen fiscal
+        //Campos nacen ocultos Arrendamiento Puro
+        $('.campo1-ap').show();
+        $('.campo2-ap').show();
+        $('.campo4-ap').show();
+        $('.campo6-ap').show();
+        $('.campo16-ap').show();
+        $('.campo14-ap').show();
+        $('.campo11-ap').show();
+        //Campos Ocultos Arrendamiento Puro (Desplegables)
+        //$('.campo3-ap').show();
+        $('.campo5-ap').show();
+        $('.campo17-ap').show();
+        $('.campo15-ap').show();
+        $('.campo18-ap').show();
+        //Campos Persona Moral Arrendamiento Puro
+        $('.campo7-ap').show(); //Pregunta1
+        $('.campo9-ap').show(); //Pregunta2
+        $('.campo8-ap').show();
+        $('.campo10-ap').show();
+
+        $('.campo25-ap').show(); //Cuenta Cliente
+        $('.campo26-ap').show(); //Especifique cuenta Cliente
+        //Campos Factoraje Financiero
+        $('.campo3-ff').show();
+        $('.campo5-ff').show();
+        $('.campo17-ff').show();
+
+        //Campos Credito Automotriz
+        $('.campo3-ca').show();
+        $('.campo5-ca').show();
+        //Campos Credito Simple
+        $('.campo3-cs').show();
+        $('.campo5-cs').show();
+        $('.campo15-cs').show();
+        $('.campo19-cs').show();
+        //Oculta panels
+        $('.content_ap').hide();
+        $('.content_ff').hide();
+        $('.content_ca').hide();
+
+        //Establece visibilidad por tipo de productos
+        //AP
+        if (App.user.attributes.tipodeproducto_c == '1') {
+          $('.content_ap').show();
+        }
+        //FF
+        if (App.user.attributes.tipodeproducto_c == '4') {
+            $('.content_ff').show();
+        }
+        //CA
+        if (App.user.attributes.tipodeproducto_c == '3') {
+            $('.content_ca').show();
+        }
+
         /*
         **  AP
         */
@@ -748,6 +769,16 @@
         } else {
             $('.campo10-ap').hide();
         }
+        if ($('.campo16ddw-ap').select2('val').toString().includes("Otro") || $('.campo14chk-ap')[0].checked ) {
+            $('.campo17-ap').show();
+        } else {
+            $('.campo17-ap').hide();
+        }
+        if ($('.campo11ddw-ap').select2('val') == "No") {
+            $('.campo26-ap').show();
+        } else {
+            $('.campo26-ap').hide();
+        }
 
         /*
         **  FF
@@ -770,11 +801,17 @@
         }else{
             $('.campo5-ff').hide();
         }
+        if ($('#multi12').select2('val').toString().includes("Otro") || $('.campo14chk-ff')[0].checked ) {
+            $('.campo17-ff').show();
+        } else {
+            $('.campo17-ff').hide();
+        }
+
 
         /*
-        **  FF
+        **  CA
         */
-        // //Oculta campos de vista de persona fisica en panel de Factoraje Financiero
+        // //Oculta campos de vista de persona fisica en panel de Crédito automotriz
         if(this.model.get('tipodepersona_c') == 'Persona Moral'){
             $('.campo2-ca').hide();
             $('.campo3-ca').hide();
@@ -791,6 +828,28 @@
             $('.campo5-ca').show();
         }else{
             $('.campo5-ca').hide();
+        }
+
+        /*
+        **  CS
+        */
+        // //Oculta campos de vista de persona fisica en panel de Crédito simple
+        //Muestra/oculta Propietario real
+        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-cs').select2('val')=='2'){
+            $('.campo3-cs').show();
+        }else{
+            $('.campo3-cs').hide();
+        }
+        //Muestra/oculta Proveedor recursos
+        if($('.campo4ddw-cs').select2('val')=='2'){
+            $('.campo5-cs').show();
+        }else{
+            $('.campo5-cs').hide();
+        }
+        if ($('#multi13').select2('val').toString().includes("otro") || $('.campo14chk-cs')[0].checked ) {
+            $('.campo19-cs').show();
+        } else {
+            $('.campo19-cs').hide();
         }
     },
 
@@ -822,7 +881,6 @@
 
         }else{
             return true;
-           // $('.campo23dec-ff').css('border-color','');
         }
     },
 

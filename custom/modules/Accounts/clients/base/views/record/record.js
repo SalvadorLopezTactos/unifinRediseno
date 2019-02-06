@@ -23,7 +23,6 @@
         this.flagheld=0;
 
         //add validation tasks
-        this.model.addValidationTask('checkaccdatestatements', _.bind(this.checkaccdatestatements, this));
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonos, this));
@@ -56,7 +55,6 @@
         * Adrian Arauz 23/01/2019
         * */
         this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
-
 
         /* F. Javier G. Solar
            OBS299 Validar que las Direcciones no se repitan 21/11/2018
@@ -182,7 +180,6 @@
         // validación de los campos con formato númerico
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
         this.events['keydown [name=activo_fijo_c]'] = 'checkInVentas';
-        this.events['keydown [name=tct_prom_cheques_cur_c]'] = 'checkInVentas';
 
         this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
 
@@ -755,6 +752,8 @@
         $('[data-subpanel-link="rel_relaciones_accounts_1"]').find(".dropdown-toggle").hide();
 
         this._super("_render");
+
+        $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
 
         /*
          @author Salvador Lopez
@@ -3080,232 +3079,204 @@
         var faltantesFF = "";
         var faltantesCA = "";
 
-        //Valida campos para AP
-        if (App.user.attributes.tipodeproducto_c == '1') {
-            //Pregunta: campo2ddw-ap
-            if($('.campo2ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                $('.campo2ddw-ap').find('.select2-choice').css('border-color','red');
-                faltantesAP = faltantesAP + '<b>- '+$('select.campo2ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo2ddw-ap').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo3rel-ap
-            if($('.campo3rel-ap')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val')=='2'){
-                $('.campo3rel-ap').find('.select2-choice').css('border-color','red');
-                faltantesAP = faltantesAP + '<b>- '+$('.campo3rel-ap')[1].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo3rel-ap').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo4ddw-ap
-            if($('.campo4ddw-ap').select2('val') == ''){
-                $('.campo4ddw-ap').find('.select2-choice').css('border-color','red');
-                faltantesAP = faltantesAP + '<b>- '+$('select.campo4ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo4ddw-ap').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo5rel-ap
-            if($('.campo5rel-ap')[0]['innerText'] == '' && $('.campo4ddw-ap').select2('val')=='2'){
-                $('.campo5rel-ap').find('.select2-choice').css('border-color','red');
-                faltantesAP = faltantesAP + '<b>- '+$('.campo5rel-ap')[1].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo5rel-ap').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo7ddw-ap
-            if($('.campo7ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                $('.campo7ddw-ap').find('.select2-choice').css('border-color','red');
-                faltantesAP = faltantesAP + '<b>- '+$('select.campo7ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo7ddw-ap').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo9ddw-ap
-            if($('.campo9ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
-                $('.campo9ddw-ap').find('.select2-choice').css('border-color','red');
-                faltantesAP = faltantesAP + '<b>- '+$('select.campo9ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo9ddw-ap').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo6ddw-ap
-            if($('.campo6ddw-ap').select2('val') == ''){
-                $('.campo6ddw-ap').find('.select2-choice').css('border-color','red');
-                faltantesAP = faltantesAP + '<b>- '+$('select.campo6ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo6ddw-ap').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo17txt-ap
-            if($('.campo17txt-ap').val() == '' && $('.campo14chk-ap')[0].checked){
-                $('.campo17txt-ap').css('border-color','red');
-                faltantesAP = faltantesAP + '<b>- '+$('.campo17txt-ap')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo17txt-ap').css('border-color','');
-            }
-            //Pregunta: campo26txt-ap
-            if($('.campo26txt-ap').val() == '' && $('.campo11ddw-ap').select2('val')=='No' ){
-                $('.campo26txt-ap').css('border-color','red');
-                faltantesAP = faltantesAP + '<b>- '+$('.campo26txt-ap')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo26txt-ap').css('border-color','');
-            }
-        }
-        //Valida campos para FF
-        if (App.user.attributes.tipodeproducto_c == '4') {
-            //Pregunta: campo2ddw-ff
-            if($('.campo2ddw-ff').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                $('.campo2ddw-ff').find('.select2-choice').css('border-color','red');
-                faltantesFF = faltantesFF + '<b>- '+$('select.campo2ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo2ddw-ff').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo3rel-ff
-            if($('.campo3rel-ff')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ff').select2('val')=='2'){
-                $('.campo3rel-ff').find('.select2-choice').css('border-color','red');
-                faltantesFF = faltantesFF + '<b>- '+$('.campo3rel-ff')[1].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo3rel-ff').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo4ddw-ff
-            if($('.campo4ddw-ff').select2('val') == ''){
-                $('.campo4ddw-ff').find('.select2-choice').css('border-color','red');
-                faltantesFF = faltantesFF + '<b>- '+$('select.campo4ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo4ddw-ff').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo5rel-ff
-            if($('.campo5rel-ff')[0]['innerText'] == '' && $('.campo4ddw-ff').select2('val')=='2'){
-                $('.campo5rel-ff').find('.select2-choice').css('border-color','red');
-                faltantesFF = faltantesFF + '<b>- '+$('.campo5rel-ff')[1].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo5rel-ff').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo21ddw-ff
-            if($('.campo21ddw-ff').select2('val') == ''){
-                $('.campo21ddw-ff').find('.select2-choice').css('border-color','red');
-                faltantesFF = faltantesFF + '<b>- '+$('select.campo21ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo21ddw-ff').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo24ddw-ff
-            if($('.campo24ddw-ff').select2('val') == ''){
-                $('.campo24ddw-ff').find('.select2-choice').css('border-color','red');
-                faltantesFF = faltantesFF + '<b>- '+$('select.campo24ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo24ddw-ff').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo6ddw-ff
-            if($('.campo6ddw-ff').select2('val') == ''){
-                $('.campo6ddw-ff').find('.select2-choice').css('border-color','red');
-                faltantesFF = faltantesFF + '<b>- '+$('select.campo6ddw-ff')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo6ddw-ff').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo17txt-ff
-            if($('.campo17txt-ff').val() == '' && $('.campo14chk-ff')[0].checked){
-                $('.campo17txt-ff').css('border-color','red');
-                faltantesFF = faltantesFF + '<b>- '+$('.campo17txt-ff')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo17txt-ff').css('border-color','');
-            }
-        }
-        //Valida campos para CA
-        if (App.user.attributes.tipodeproducto_c == '3') {
-            //Pregunta: campo2ddw-ca
-            if($('.campo2ddw-ca').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
-                $('.campo2ddw-ca').find('.select2-choice').css('border-color','red');
-                faltantesCA = faltantesCA + '<b>- '+$('select.campo2ddw-ca')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo2ddw-ca').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo3rel-ca
-            if($('.campo3rel-ca')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val')=='2'){
-                $('.campo3rel-ca').find('.select2-choice').css('border-color','red');
-                faltantesCA = faltantesCA + '<b>- '+$('.campo3rel-ca')[1].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo3rel-ca').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo4ddw-ca
-            if($('.campo4ddw-ca').select2('val') == ''){
-                $('.campo4ddw-ca').find('.select2-choice').css('border-color','red');
-                faltantesCA = faltantesCA + '<b>- '+$('select.campo4ddw-ca')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo4ddw-ca').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo5rel-ca
-            if($('.campo5rel-ca')[0]['innerText'] == '' && $('.campo4ddw-ca').select2('val')=='2'){
-                $('.campo5rel-ca').find('.select2-choice').css('border-color','red');
-                faltantesCA = faltantesCA + '<b>- '+$('.campo5rel-ca')[1].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo5rel-ca').find('.select2-choice').css('border-color','');
-            }
-            //Pregunta: campo6ddw-ca
-            if($('.campo6ddw-ca').select2('val') == ''){
-                $('.campo6ddw-ca').find('.select2-choice').css('border-color','red');
-                faltantesCA = faltantesCA + '<b>- '+$('select.campo6ddw-ca')[0].getAttribute('data-name')+'<br></b>';
-            }else{
-                $('.campo6ddw-ca').find('.select2-choice').css('border-color','');
-            }
-        }
+        //Valida requeridos a partir de Prospecto Interesado
+        var tipoCuenta = this.model.get('tipo_registro_c');
+        var subtipoCuenta = this.model.get('subtipo_cuenta_c');
+        if (tipoCuenta == 'Cliente' || (tipoCuenta == 'Prospecto' && subtipoCuenta != 'Contactado')) {
+          //Valida campos para AP
+          if (App.user.attributes.tipodeproducto_c == '1') {
+              //Pregunta: campo2ddw-ap
+              if($('.campo2ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
+                  $('.campo2ddw-ap').find('.select2-choice').css('border-color','red');
+                  faltantesAP = faltantesAP + '<b>- '+$('select.campo2ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo2ddw-ap').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo3rel-ap
+              if($('.campo3rel-ap')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val')=='2'){
+                  $('.campo3rel-ap').find('.select2-choice').css('border-color','red');
+                  faltantesAP = faltantesAP + '<b>- '+$('.campo3rel-ap')[1].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo3rel-ap').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo4ddw-ap
+              if($('.campo4ddw-ap').select2('val') == ''){
+                  $('.campo4ddw-ap').find('.select2-choice').css('border-color','red');
+                  faltantesAP = faltantesAP + '<b>- '+$('select.campo4ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo4ddw-ap').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo5rel-ap
+              if($('.campo5rel-ap')[0]['innerText'] == '' && $('.campo4ddw-ap').select2('val')=='2'){
+                  $('.campo5rel-ap').find('.select2-choice').css('border-color','red');
+                  faltantesAP = faltantesAP + '<b>- '+$('.campo5rel-ap')[1].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo5rel-ap').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo7ddw-ap
+              if($('.campo7ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
+                  $('.campo7ddw-ap').find('.select2-choice').css('border-color','red');
+                  faltantesAP = faltantesAP + '<b>- '+$('select.campo7ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo7ddw-ap').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo9ddw-ap
+              if($('.campo9ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
+                  $('.campo9ddw-ap').find('.select2-choice').css('border-color','red');
+                  faltantesAP = faltantesAP + '<b>- '+$('select.campo9ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo9ddw-ap').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo6ddw-ap
+              if($('.campo6ddw-ap').select2('val') == ''){
+                  $('.campo6ddw-ap').find('.select2-choice').css('border-color','red');
+                  faltantesAP = faltantesAP + '<b>- '+$('select.campo6ddw-ap')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo6ddw-ap').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo17txt-ap
+              if($('.campo17txt-ap').val() == '' && $('.campo14chk-ap')[0].checked){
+                  $('.campo17txt-ap').css('border-color','red');
+                  faltantesAP = faltantesAP + '<b>- '+$('.campo17txt-ap')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo17txt-ap').css('border-color','');
+              }
+              //Pregunta: campo26txt-ap
+              if($('.campo26txt-ap').val() == '' && $('.campo11ddw-ap').select2('val')=='No' ){
+                  $('.campo26txt-ap').css('border-color','red');
+                  faltantesAP = faltantesAP + '<b>- '+$('.campo26txt-ap')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo26txt-ap').css('border-color','');
+              }
+          }
+          //Valida campos para FF
+          if (App.user.attributes.tipodeproducto_c == '4') {
+              //Pregunta: campo2ddw-ff
+              if($('.campo2ddw-ff').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
+                  $('.campo2ddw-ff').find('.select2-choice').css('border-color','red');
+                  faltantesFF = faltantesFF + '<b>- '+$('select.campo2ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo2ddw-ff').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo3rel-ff
+              if($('.campo3rel-ff')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ff').select2('val')=='2'){
+                  $('.campo3rel-ff').find('.select2-choice').css('border-color','red');
+                  faltantesFF = faltantesFF + '<b>- '+$('.campo3rel-ff')[1].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo3rel-ff').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo4ddw-ff
+              if($('.campo4ddw-ff').select2('val') == ''){
+                  $('.campo4ddw-ff').find('.select2-choice').css('border-color','red');
+                  faltantesFF = faltantesFF + '<b>- '+$('select.campo4ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo4ddw-ff').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo5rel-ff
+              if($('.campo5rel-ff')[0]['innerText'] == '' && $('.campo4ddw-ff').select2('val')=='2'){
+                  $('.campo5rel-ff').find('.select2-choice').css('border-color','red');
+                  faltantesFF = faltantesFF + '<b>- '+$('.campo5rel-ff')[1].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo5rel-ff').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo21ddw-ff
+              if($('.campo21ddw-ff').select2('val') == ''){
+                  $('.campo21ddw-ff').find('.select2-choice').css('border-color','red');
+                  faltantesFF = faltantesFF + '<b>- '+$('select.campo21ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo21ddw-ff').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo24ddw-ff
+              if($('.campo24ddw-ff').select2('val') == ''){
+                  $('.campo24ddw-ff').find('.select2-choice').css('border-color','red');
+                  faltantesFF = faltantesFF + '<b>- '+$('select.campo24ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo24ddw-ff').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo6ddw-ff
+              if($('.campo6ddw-ff').select2('val') == ''){
+                  $('.campo6ddw-ff').find('.select2-choice').css('border-color','red');
+                  faltantesFF = faltantesFF + '<b>- '+$('select.campo6ddw-ff')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo6ddw-ff').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo17txt-ff
+              if($('.campo17txt-ff').val() == '' && $('.campo14chk-ff')[0].checked){
+                  $('.campo17txt-ff').css('border-color','red');
+                  faltantesFF = faltantesFF + '<b>- '+$('.campo17txt-ff')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo17txt-ff').css('border-color','');
+              }
+          }
+          //Valida campos para CA
+          if (App.user.attributes.tipodeproducto_c == '3') {
+              //Pregunta: campo2ddw-ca
+              if($('.campo2ddw-ca').select2('val') == '' && this.model.get('tipodepersona_c') != 'Persona Moral'){
+                  $('.campo2ddw-ca').find('.select2-choice').css('border-color','red');
+                  faltantesCA = faltantesCA + '<b>- '+$('select.campo2ddw-ca')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo2ddw-ca').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo3rel-ca
+              if($('.campo3rel-ca')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val')=='2'){
+                  $('.campo3rel-ca').find('.select2-choice').css('border-color','red');
+                  faltantesCA = faltantesCA + '<b>- '+$('.campo3rel-ca')[1].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo3rel-ca').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo4ddw-ca
+              if($('.campo4ddw-ca').select2('val') == ''){
+                  $('.campo4ddw-ca').find('.select2-choice').css('border-color','red');
+                  faltantesCA = faltantesCA + '<b>- '+$('select.campo4ddw-ca')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo4ddw-ca').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo5rel-ca
+              if($('.campo5rel-ca')[0]['innerText'] == '' && $('.campo4ddw-ca').select2('val')=='2'){
+                  $('.campo5rel-ca').find('.select2-choice').css('border-color','red');
+                  faltantesCA = faltantesCA + '<b>- '+$('.campo5rel-ca')[1].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo5rel-ca').find('.select2-choice').css('border-color','');
+              }
+              //Pregunta: campo6ddw-ca
+              if($('.campo6ddw-ca').select2('val') == ''){
+                  $('.campo6ddw-ca').find('.select2-choice').css('border-color','red');
+                  faltantesCA = faltantesCA + '<b>- '+$('select.campo6ddw-ca')[0].getAttribute('data-name')+'<br></b>';
+              }else{
+                  $('.campo6ddw-ca').find('.select2-choice').css('border-color','');
+              }
+          }
 
-        //Genera alertas
-        if(faltantesAP != ""){
-            errors['PreguntasAP'] = "";
-            errors['PreguntasAP'].required = true;
-            app.alert.show("faltantesAP", {
-                level: "error",
-                title: "PLD Arrendamiento puro - Faltan las siguientes preguntas por contestar: <br>" + faltantesAP
-            });
-        }
+          //Genera alertas
+          if(faltantesAP != ""){
+              errors['PreguntasAP'] = "";
+              errors['PreguntasAP'].required = true;
+              app.alert.show("faltantesAP", {
+                  level: "error",
+                  title: "PLD Arrendamiento puro - Faltan las siguientes preguntas por contestar: <br>" + faltantesAP
+              });
+          }
 
-        if(faltantesFF != ""){
-            errors['PreguntasFF'] = "";
-            errors['PreguntasFF'].required = true;
-            app.alert.show("faltantesFF", {
-                level: "error",
-                title: "PLD Factoraje financiero - Faltan las siguientes preguntas por contestar: <br>" + faltantesFF
-            });
-        }
+          if(faltantesFF != ""){
+              errors['PreguntasFF'] = "";
+              errors['PreguntasFF'].required = true;
+              app.alert.show("faltantesFF", {
+                  level: "error",
+                  title: "PLD Factoraje financiero - Faltan las siguientes preguntas por contestar: <br>" + faltantesFF
+              });
+          }
 
-        if(faltantesCA != ""){
-            errors['PreguntasCA'] = "";
-            errors['PreguntasCA'].required = true;
-            app.alert.show("faltantesCA", {
-                level: "error",
-                title: "PLD Crédito automotriz - Faltan las siguientes preguntas por contestar: <br>" + faltantesCA
-            });
+          if(faltantesCA != ""){
+              errors['PreguntasCA'] = "";
+              errors['PreguntasCA'].required = true;
+              app.alert.show("faltantesCA", {
+                  level: "error",
+                  title: "PLD Crédito automotriz - Faltan las siguientes preguntas por contestar: <br>" + faltantesCA
+              });
+          }
         }
         callback(null, fields, errors);
     },
 
 
-    checkaccdatestatements:function(fields, errors, callback){
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1; //January is 0!
-        var yyyy = today.getFullYear();
-        if(dd<10) {
-            dd = '0'+dd
-        }
-        if(mm<10) {
-            mm = '0'+mm
-        }
-        today = yyyy+'-'+mm+'-'+dd;
-
-        this.obj_dates = JSON.parse(this.model.get('tct_dates_acc_statements_c'));
-        var c=0;
-        for (let elem in this.obj_dates) {
-            if(this.obj_dates[elem].trim()==""){
-                $('#'+elem).css('border-color', 'red');
-                c++;
-            }
-        }
-        if(c>0){
-            app.alert.show("empty_date", {
-                level: "error",
-                title: "Existen fechas de los estados de cuenta <b>vac\u00EDas</b>, favor de verificar",
-                autoClose: false
-            });
-
-            errors['empty_date'] = errors['empty_date'] || {};
-            errors['empty_date'].required = true;
-        }
-        callback(null,fields,errors);
-    },
 })
