@@ -23,6 +23,7 @@
         this.flagheld=0;
 
         //add validation tasks
+        this.model.addValidationTask('checkaccdatestatements', _.bind(this.checkaccdatestatements, this));
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonos, this));
@@ -180,6 +181,7 @@
         // validación de los campos con formato númerico
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
         this.events['keydown [name=activo_fijo_c]'] = 'checkInVentas';
+        this.events['keydown [name=tct_prom_cheques_cur_c]'] = 'checkInVentas';
 
         this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
 
@@ -3276,6 +3278,40 @@
           }
         }
         callback(null, fields, errors);
+    },
+
+    checkaccdatestatements:function(fields, errors, callback){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10) {
+            dd = '0'+dd
+        }
+        if(mm<10) {
+            mm = '0'+mm
+        }
+        today = yyyy+'-'+mm+'-'+dd;
+
+        this.obj_dates = JSON.parse(this.model.get('tct_dates_acc_statements_c'));
+        var c=0;
+        for (let elem in this.obj_dates) {
+            if(this.obj_dates[elem].trim()==""){
+                $('#'+elem).css('border-color', 'red');
+                c++;
+            }
+        }
+        if(c>0){
+            app.alert.show("empty_date", {
+                level: "error",
+                title: "Existen fechas de los estados de cuenta <b>vac\u00EDas</b>, favor de verificar",
+                autoClose: false
+            });
+
+            errors['empty_date'] = errors['empty_date'] || {};
+            errors['empty_date'].required = true;
+        }
+        callback(null,fields,errors);
     },
 
 
