@@ -852,6 +852,13 @@ array (
                 'label' => 'accounts_tct_pld',
                 'span' => 12,
               ),
+              1 => 
+              array (
+                'name' => 'tct_nuevo_pld_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_NUEVO_PLD_C',
+                'span' => 12,
+              ),
             ),
           ),
           11 => 
