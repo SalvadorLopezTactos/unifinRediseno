@@ -170,6 +170,7 @@
         this._super("_render");
 
         $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
+        $('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
 
         /*
          * @author Salvador Lopez

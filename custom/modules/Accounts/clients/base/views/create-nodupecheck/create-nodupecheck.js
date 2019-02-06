@@ -281,6 +281,7 @@
          * Ocultar campo de estatus Activo/Inactivo en creaci�n de personas
          * */
         this.$('div[data-name=estatus_persona_c]').hide();
+        $('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
 
         /*
            AF - 2018/07/06
