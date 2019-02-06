@@ -659,17 +659,30 @@ array (
                   0 => 'currency_id',
                   1 => 'base_rate',
                 ),
+                'name' => 'tct_depositos_promedio_c',
+                'label' => 'LBL_TCT_DEPOSITOS_PROMEDIO_C',
+              ),
+              9 => 
+              array (
+              ),
+              10 => 
+              array (
+                'related_fields' => 
+                array (
+                  0 => 'currency_id',
+                  1 => 'base_rate',
+                ),
                 'name' => 'tct_prom_cheques_cur_c',
                 'label' => 'LBL_TCT_PROM_CHEQUES_CUR_C',
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'dates_account_statements',
                 'studio' => 'visible',
                 'label' => 'LBL_TCT_DATES_ACCOUNT_STATEMENTS_C',
                 'type' => 'dates_account_statements',
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'tct_dates_acc_statements_c',
                 'studio' => 'visible',
