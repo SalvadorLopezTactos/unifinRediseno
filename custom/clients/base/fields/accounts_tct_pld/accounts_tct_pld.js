@@ -16,6 +16,9 @@
     campo18_list: null,
     campo20_list: null,
 
+    events :{
+        'keydown .campo23dec-ff': 'keyDownNewExtension',
+    },
 
 
     initialize: function (options) {
@@ -637,7 +640,7 @@
 
     InsMonetarioFF: function () {
         console.log("Cambio de Instrumento monetario FF");
-        if ($('#multi12').val("Otro")) {
+        if ($('#multi12').val("Otro")) {   //campo16ddw-ap
             $('.campo14chk-ff').attr("checked", true);
             $('.campo17-ff').show();
         } else {
@@ -796,6 +799,30 @@
             $('.campo25-ap').show();
         }else{
             $('.campo25-ap').hide();
+        }
+    },
+
+    keyDownNewExtension: function (evt) {
+        if (!evt) return;
+        if(!this.validamonto(evt)){
+            return false;
+        }
+
+    },
+
+
+    validamonto:function(evt){
+        if($.inArray(evt.keyCode,[110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,16,49,50,51,52,53,54,55,56,57,48,96,97,98,99,100,101,102,103,104,105]) < 0) {
+            app.alert.show("Caracter Invalido", {
+                level: "error",
+                title: "Solo n\u00FAmeros son permitidos en este campo.",
+                autoClose: true
+            });
+            return false;
+
+        }else{
+            return true;
+           // $('.campo23dec-ff').css('border-color','');
         }
     },
 
