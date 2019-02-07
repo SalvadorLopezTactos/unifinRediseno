@@ -143,19 +143,18 @@ SQL;
     {
         global $db;
         // Crear Reuni�n
-        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->nuevo_c == 1 && $bean->repeat_parent_id == "")
+        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->date_entered == $bean->date_modified && $bean->repeat_parent_id == "")
         {
-            $query = <<<SQL
-                SELECT id, user_id
-                FROM meetings_users
-                WHERE meeting_id = '{$bean->id}'
-                AND deleted = 0
+          $query = <<<SQL
+             SELECT id, user_id
+             FROM meetings_users
+             WHERE meeting_id = '{$bean->id}'
+             AND deleted = 0
 SQL;
-                $GLOBALS['log']->fatal("Meetings: ".$query);
-			      $conn = $db->getConnection();
-            $queryResult = $conn->executeQuery($query);
-            foreach($queryResult->fetchAll() as $row)
-	    	    {
+			    $conn = $db->getConnection();
+          $queryResult = $conn->executeQuery($query);
+          foreach($queryResult->fetchAll() as $row)
+	    	  {
       			if($row['user_id'] != $bean->assigned_user_id)
 			      {
       				$exclude = array
@@ -189,16 +188,16 @@ SQL;
       				}*/
       			}
       		}
-      		$ultimo = <<<SQL
+/*      		$ultimo = <<<SQL
                     UPDATE meetings_cstm
                     SET nuevo_c = 0
                     WHERE id_c = '{$bean->id}'
 SQL;
- 		  	  $ultimo1 = $db->query($ultimo);
+ 		  	  $ultimo1 = $db->query($ultimo);*/
         }
 
 		    // Editar Reuni�n
-        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->date_entered != $bean->date_modified && $bean->nuevo_c == 0 && $bean->actualizado_c == 1)
+        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->date_entered != $bean->date_modified)
 	      {
   		  	  $query = <<<SQL
                 SELECT a.id, b.parent_meeting_c
@@ -239,15 +238,15 @@ SQL;
       			}
       			$acompanianteMeet->save();
       		}
-      		$ultimo = <<<SQL
+/*      		$ultimo = <<<SQL
                     UPDATE meetings_cstm
                     SET actualizado_c = 0
                     WHERE id_c = '{$bean->id}'
 SQL;
-            $ultimo1 = $db->query($ultimo);
+            $ultimo1 = $db->query($ultimo);*/
         }
 
-		//Elimina Invitados
+		    //Elimina Invitados
         if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == True)
         {
   			  $levadmin = <<<SQL
@@ -275,14 +274,14 @@ SQL;
 SQL;
     				$levadmin1 = $db->query($levadmin);
 		    	}*/
-  		}
-		//Elimina Admin
-		$levadmin = <<<SQL
+  		  }
+		    //Elimina Admin
+		    $levadmin = <<<SQL
             UPDATE meetings_users SET deleted = 1
             WHERE meeting_id = '{$bean->id}'
 		    AND user_id = '1'
 SQL;
-		$levadmin1 = $db->query($levadmin);
+		    $levadmin1 = $db->query($levadmin);
     }
 
     //@Jesus Carrillo
