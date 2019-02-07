@@ -180,6 +180,9 @@
         // validación de los campos con formato númerico
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
         this.events['keydown [name=activo_fijo_c]'] = 'checkInVentas';
+        this.events['keydown [name=tct_prom_cheques_cur_c]'] = 'checkInVentas';
+        this.events['keydown [name=tct_depositos_promedio_c]'] = 'checkInVentas';
+
 
         this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
 
@@ -745,6 +748,7 @@
         this._super("_render");
 
         $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
+        $('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
 
         /*
          @author Salvador Lopez
@@ -3269,5 +3273,38 @@
         callback(null, fields, errors);
     },
 
+    checkaccdatestatements:function(fields, errors, callback){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10) {
+            dd = '0'+dd
+        }
+        if(mm<10) {
+            mm = '0'+mm
+        }
+        today = yyyy+'-'+mm+'-'+dd;
+
+        this.obj_dates = JSON.parse(this.model.get('tct_dates_acc_statements_c'));
+        var c=0;
+        for (let elem in this.obj_dates) {
+            if(this.obj_dates[elem].trim()==""){
+                $('#'+elem).css('border-color', 'red');
+                c++;
+            }
+        }
+        if(c>0){
+            app.alert.show("empty_date", {
+                level: "error",
+                title: "Existen fechas de los estados de cuenta <b>vac\u00EDas</b>, favor de verificar",
+                autoClose: false
+            });
+
+            errors['empty_date'] = errors['empty_date'] || {};
+            errors['empty_date'].required = true;
+        }
+        callback(null,fields,errors);
+    },
 
 })
