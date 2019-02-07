@@ -340,6 +340,13 @@
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
+        //Se añade este formato del multiselect del campo de direcciones
+        $('#multi1').select2({
+            width:'100%',
+            //minimumResultsForSearch:7,
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
 
 
     },
