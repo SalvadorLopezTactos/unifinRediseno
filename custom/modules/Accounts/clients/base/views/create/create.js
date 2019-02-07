@@ -407,7 +407,7 @@
         /*Validacion de campos requeridos en el cuestionario PLD y sus productos
         * Adrian Arauz 23/01/2019
         * */
-        this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
+        //this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
         this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
         /*Funcion para validar los campos ventas anuales y activo fijo al editar una cuenta de tipo
         * Integración de Expediente
