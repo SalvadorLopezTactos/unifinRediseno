@@ -184,14 +184,13 @@
         this.events['keydown [name=tct_prom_cheques_cur_c]'] = 'checkInVentas';
         this.events['keydown [name=tct_depositos_promedio_c]'] = 'checkInVentas';
 
+
         this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
 
     },
 
     saveProdPLD:function (fields, errors, callback) {
-
-	    // Actualizar modelo de pld.ProductosPLD
-
+	     // Actualizar modelo de pld.ProductosPLD
         pld.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
         pld.ProductosPLD.arrendamientoPuro.campo2 = $('.campo2ddw-ap').select2('val');
         pld.ProductosPLD.arrendamientoPuro.campo3 = $('.campo3rel-ap')[0]['innerText'];
@@ -247,34 +246,27 @@
         pld.ProductosPLD.creditoSimple.campo20 = $('.campo20ddw-cs').select2('val');
         pld.ProductosPLD.creditoSimple.campo6 = $('.campo6ddw-cs').select2('val');
 
-
-
-
-        if ($.isEmptyObject(errors))
-      {
+        //Valida cambios
+        if ($.isEmptyObject(errors) && (this.inlineEditMode == false || (this.inlineEditMode && typeof($('.campo4ddw-cs').select2('val')) == "string") ))
+        {
           var obj_pld_old=JSON.stringify(this.model.get('accounts_tct_pld_1'));
           var obj_pld_new=JSON.stringify(pld.ProductosPLD);
-
-        //  if(obj_pld_old!=obj_pld_new)
-         // {
-              app.api.call('create', app.api.buildURL('SavePLD'), pld.ProductosPLD, {
-                  success: function (data) {
-
-                      if(data!="")
-                      {
-                          console.log("cuentas data " +data);
-                      }
-
-                      callback(null,fields,errors);
-                      },
-                  error: function (e) {
-                      //throw e;
-                      callback(null,fields,errors);
+          app.api.call('create', app.api.buildURL('SavePLD'), pld.ProductosPLD, {
+              success: function (data) {
+                  if(data!="")
+                  {
+                      console.log("Actualiza pld");
                   }
-              });
-      }else {
-          callback(null,fields,errors);
-      }
+                  callback(null,fields,errors);
+              },
+              error: function (e) {
+                  //throw e;
+                  callback(null,fields,errors);
+              }
+          });
+        }else {
+            callback(null,fields,errors);
+        }
     },
 
     /* F. Javier G. Solar
@@ -3315,6 +3307,5 @@
         }
         callback(null,fields,errors);
     },
-
 
 })
