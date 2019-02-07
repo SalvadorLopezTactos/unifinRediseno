@@ -23,6 +23,7 @@
         this.flagheld=0;
 
         //add validation tasks
+        this.model.addValidationTask('checkaccdatestatements', _.bind(this.checkaccdatestatements, this));
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonos, this));
