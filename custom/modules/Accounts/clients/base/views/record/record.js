@@ -23,7 +23,6 @@
         this.flagheld=0;
 
         //add validation tasks
-        this.model.addValidationTask('checkaccdatestatements', _.bind(this.checkaccdatestatements, this));
         this.model.addValidationTask('duplicate_check', _.bind(this.DuplicateCheck, this));
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonos, this));
@@ -181,17 +180,13 @@
         // validación de los campos con formato númerico
         this.events['keydown [name=ventas_anuales_c]'] = 'checkInVentas';
         this.events['keydown [name=activo_fijo_c]'] = 'checkInVentas';
-        this.events['keydown [name=tct_prom_cheques_cur_c]'] = 'checkInVentas';
-        this.events['keydown [name=tct_depositos_promedio_c]'] = 'checkInVentas';
 
         this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
 
     },
 
     saveProdPLD:function (fields, errors, callback) {
-
-	    // Actualizar modelo de pld.ProductosPLD
-
+	     // Actualizar modelo de pld.ProductosPLD
         pld.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
         pld.ProductosPLD.arrendamientoPuro.campo2 = $('.campo2ddw-ap').select2('val');
         pld.ProductosPLD.arrendamientoPuro.campo3 = $('.campo3rel-ap')[0]['innerText'];
@@ -247,34 +242,27 @@
         pld.ProductosPLD.creditoSimple.campo20 = $('.campo20ddw-cs').select2('val');
         pld.ProductosPLD.creditoSimple.campo6 = $('.campo6ddw-cs').select2('val');
 
-
-
-
-        if ($.isEmptyObject(errors))
-      {
+        //Valida cambios
+        if ($.isEmptyObject(errors) && (this.inlineEditMode == false || (this.inlineEditMode && typeof($('.campo4ddw-cs').select2('val')) == "string") ))
+        {
           var obj_pld_old=JSON.stringify(this.model.get('accounts_tct_pld_1'));
           var obj_pld_new=JSON.stringify(pld.ProductosPLD);
-
-        //  if(obj_pld_old!=obj_pld_new)
-         // {
-              app.api.call('create', app.api.buildURL('SavePLD'), pld.ProductosPLD, {
-                  success: function (data) {
-
-                      if(data!="")
-                      {
-                          console.log("cuentas data " +data);
-                      }
-
-                      callback(null,fields,errors);
-                      },
-                  error: function (e) {
-                      //throw e;
-                      callback(null,fields,errors);
+          app.api.call('create', app.api.buildURL('SavePLD'), pld.ProductosPLD, {
+              success: function (data) {
+                  if(data!="")
+                  {
+                      console.log("Actualiza pld");
                   }
-              });
-      }else {
-          callback(null,fields,errors);
-      }
+                  callback(null,fields,errors);
+              },
+              error: function (e) {
+                  //throw e;
+                  callback(null,fields,errors);
+              }
+          });
+        }else {
+            callback(null,fields,errors);
+        }
     },
 
     /* F. Javier G. Solar
@@ -757,7 +745,6 @@
         this._super("_render");
 
         $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
-        $('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
 
         /*
          @author Salvador Lopez
@@ -3280,40 +3267,6 @@
           }
         }
         callback(null, fields, errors);
-    },
-
-    checkaccdatestatements:function(fields, errors, callback){
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1; //January is 0!
-        var yyyy = today.getFullYear();
-        if(dd<10) {
-            dd = '0'+dd
-        }
-        if(mm<10) {
-            mm = '0'+mm
-        }
-        today = yyyy+'-'+mm+'-'+dd;
-
-        this.obj_dates = JSON.parse(this.model.get('tct_dates_acc_statements_c'));
-        var c=0;
-        for (let elem in this.obj_dates) {
-            if(this.obj_dates[elem].trim()==""){
-                $('#'+elem).css('border-color', 'red');
-                c++;
-            }
-        }
-        if(c>0){
-            app.alert.show("empty_date", {
-                level: "error",
-                title: "Existen fechas de los estados de cuenta <b>vac\u00EDas</b>, favor de verificar",
-                autoClose: false
-            });
-
-            errors['empty_date'] = errors['empty_date'] || {};
-            errors['empty_date'].required = true;
-        }
-        callback(null,fields,errors);
     },
 
 
