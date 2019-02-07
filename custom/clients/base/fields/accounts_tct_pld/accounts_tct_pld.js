@@ -347,8 +347,14 @@
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
-
-
+        //Formato para cuenta existente
+        $('#existingMulti1').select2({
+            width:'100%',
+            //minimumResultsForSearch:7,
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+        
     },
 
     _onSelect2Open:function(e){
