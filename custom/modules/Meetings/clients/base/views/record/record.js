@@ -218,7 +218,7 @@
         }
 
         //Valida fechas
-        if (this.model.get('parent_meeting_c') || this.model.get('status')=='Held'|| this.model.get('status')=='Not Held' ) {
+        if (this.model.get('status')=='Held' || this.model.get('status')=='Not Held') {
           self.noEditFields.push('date_start');
           self.noEditFields.push('date_end');
           self.noEditFields.push('duration');
