@@ -61,7 +61,7 @@
                 </div>
                 <div class="span6 campo3-ap">
                     <label class="record-label">Propietario Real</label>
-                    <input type="hidden" class="bigdrop campo3rel-ap row-fluid" id="propietario_real_ap" data-name="Propietario Real-ap" data-field="campo3AP"/>
+                    <input type="hidden" class="bigdrop campo3rel-ap row-fluid" id="propietario_real_ap" data-name="Propietario Real" data-field="campo3AP"/>
 
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="span6 campo5-ap">
                     <label class="record-label ">Proveedor de Recursos</label>
-                    <input type="hidden" class="bigdrop campo5rel-ap row-fluid" id="proveedor_recursos_ap" data-name="Proveedor de Recursos-ap" data-field="campo5AP"/>
+                    <input type="hidden" class="bigdrop campo5rel-ap row-fluid" id="proveedor_recursos_ap" data-name="Proveedor de Recursos" data-field="campo5AP"/>
                 </div>
             </div>
             <!-- Fila 4.1 AP-PM -->
@@ -122,7 +122,7 @@
             <div class="row-fluid Fila4-AP">
                 <div class="span6 campo6-ap">
                     <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
-                    <select class="campo6ddw-ap select2 row-fluid" data-field="campo6AP" data-name="¿Espera realizar pagos anticipados a su crédito?-ap" id="state2" >
+                    <select class="campo6ddw-ap select2 row-fluid" data-field="campo6AP" data-name="¿Espera realizar pagos anticipados a su crédito?" id="state2" >
                         {{#each campo6_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.arrendamientoPuro.campo6}}>{{this}}</option>
@@ -132,7 +132,7 @@
                 <div class="span6 campo16-ap">
                     <label class="record-label row-fluid">¿Instrumento monetario con el que espera realizar los pagos?
                         (*Es posible elegir más de una opción)</label>
-                    <select class="campo16ddw-ap select2 row-fluid" id="multi11" multiple="multiple" size="6" style="display:block;" data-field="campo16AP"  data-name="¿Instrumento monetario con el que espera realizar los pagos-ap">
+                    <select class="campo16ddw-ap select2 row-fluid" id="multi11" multiple="multiple" size="6" style="display:block;" data-field="campo16AP"  data-name="¿Instrumento monetario con el que espera realizar los pagos">
                         {{#each campo16_list}}
                           <option value="{{@key}}" {{ifMSelected @key ../ProductosPLD.arrendamientoPuro.campo16}}>{{this}}</option>
                         {{/each}}
@@ -159,7 +159,7 @@
                 <div class="span6 campo17-ap">
                     <label class="record-label">Especifique:</label>
                     <input type="text" class="campo17txt-ap" value="{{ProductosPLD.arrendamientoPuro.campo17}}"
-                           data-field="campo17AP" data-name="Especifique-monetario-ap"/>
+                           data-field="campo17AP" data-name="Especifique"/>
                 </div>
             </div>
             <!-- Fila 6 AP -->
@@ -177,7 +177,7 @@
                 <div class="span6 campo26-ap">
                     <label class="record-label">Especifique:</label>
                     <input type="text" class="campo26txt-ap" value="{{ProductosPLD.arrendamientoPuro.campo26}}"
-                           data-field="campo26AP" data-name="Especifique-recursos"/>
+                           data-field="campo26AP" data-name="Especifique"/>
                 </div>
             </div>
             <!-- Fila 7 AP -->
@@ -236,7 +236,7 @@
                 </div>
                 <div class="span6 campo3-ff">
                     <label class="record-label">Propietario Real</label>
-                    <input type="hidden" class="bigdrop campo3rel-ff row-fluid" id="propietario_real_ff" data-name="Propietario Real-ff" data-field="campo3FF"/>
+                    <input type="hidden" class="bigdrop campo3rel-ff row-fluid" id="propietario_real_ff" data-name="Propietario Real" data-field="campo3FF"/>
                 </div>
             </div>
             <!-- Fila 3 FF -->
@@ -252,7 +252,7 @@
                 </div>
                 <div class="span6 campo5-ff">
                     <label class="record-label ">Proveedor de Recursos</label>
-                    <input type="hidden" class="bigdrop campo5rel-ff row-fluid" id="proveedor_recursos_ff" data-name="Proveedor Recursos-ff" data-field="campo5FF"/>
+                    <input type="hidden" class="bigdrop campo5rel-ff row-fluid" id="proveedor_recursos_ff" data-name="Proveedor Recursos" data-field="campo5FF"/>
                 </div>
             </div>
             <!-- Fila 4 FF -->
@@ -301,7 +301,7 @@
                 <div class="span6 campo16-ff">
                     <label class="record-label">¿Instrumento monetario con el que espera realizar los pagos? (*Es
                         posible elegir más de una opción)</label>
-                    <select class="campo16ddw-ff select2 row-fluid" id="multi12" multiple="multiple" size="6" style="display:block;" data-field="campo16FF"  data-name="¿Instrumento monetario con el que espera realizar los pagos-ff">
+                    <select class="campo16ddw-ff select2 row-fluid" id="multi12" multiple="multiple" size="6" style="display:block;" data-field="campo16FF"  data-name="¿Instrumento monetario con el que espera realizar los pagos">
                         {{#each campo16_list}}
                           <option value="{{@key}}" {{ifMSelected @key ../ProductosPLD.factorajeFinanciero.campo16}}>{{this}}</option>
                         {{/each}}
@@ -317,7 +317,7 @@
                 <div class="span6 campo17-ff">
                     <label class="record-label ">Especifique:</label>
                     <input type="text" class="campo17txt-ff" value="{{ProductosPLD.factorajeFinanciero.campo17}}"
-                           data-field="campo17FF" data-name="Especifique-monetario-ff"/>
+                           data-field="campo17FF" data-name="Especifique"/>
                 </div>
             </div>
             <!-- Fila 7 FF -->
@@ -385,7 +385,7 @@
                 </div>
                 <div class="span6 campo3-ca">
                     <label class="record-label">Propietario Real</label>
-                    <input type="hidden" class="bigdrop campo3rel-ca row-fluid" id="propietario_real_ca" data-name="Propietario Real-ca" data-field="campo3CA"/>
+                    <input type="hidden" class="bigdrop campo3rel-ca row-fluid" id="propietario_real_ca" data-name="Propietario Real" data-field="campo3CA"/>
                 </div>
             </div>
             <!-- Fila 3 CA -->
@@ -401,14 +401,14 @@
                 </div>
                 <div class="span6 campo5-ca">
                     <label class="record-label ">Proveedor de Recursos</label>
-                    <input type="hidden" class="bigdrop campo5rel-ca row-fluid" id="proveedor_recursos_ca" data-name="Proveedor Recursos-ca" data-field="campo5CA"/>
+                    <input type="hidden" class="bigdrop campo5rel-ca row-fluid" id="proveedor_recursos_ca" data-name="Proveedor Recursos" data-field="campo5CA"/>
                 </div>
             </div>
             <!-- Fila 4 CA -->
             <div class="row-fluid Fila8-CA">
                 <div class="span6 campo6-ca">
                     <label class="record-label ">¿Espera realizar pagos anticipados a su crédito?</label>
-                    <select class="campo6ddw-ca select2 row-fluid" data-field="campo6CA" data-name="¿Espera realizar pagos anticipados a su crédito?-ca">
+                    <select class="campo6ddw-ca select2 row-fluid" data-field="campo6CA" data-name="¿Espera realizar pagos anticipados a su crédito?">
                         {{#each campo6_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../ProductosPLD.creditoAutomotriz.campo6}}>{{this}}</option>
