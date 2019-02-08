@@ -55,7 +55,7 @@
         /*Validacion de campos requeridos en el cuestionario PLD y sus productos
         * Adrian Arauz 23/01/2019
         * */
-        this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
+        //this.model.addValidationTask('RequeridosPLD', _.bind(this.validaRequeridosPLD, this));
 
         /* F. Javier G. Solar
            OBS299 Validar que las Direcciones no se repitan 21/11/2018
