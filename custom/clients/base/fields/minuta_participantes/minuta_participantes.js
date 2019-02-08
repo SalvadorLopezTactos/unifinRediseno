@@ -62,9 +62,9 @@
           var moduleid = app.data.createBean('Meetings',{id:idReunion});
           moduleid.fetch({
               success:_.bind(function(modelo){
-                  if(modelo.get('parent_meeting_c')!="" && modelo.get('parent_meeting_c')!="undefine"){
+                  /*if(modelo.get('parent_meeting_c')!="" && modelo.get('parent_meeting_c')!="undefine"){
                       idReunion = modelo.get('parent_meeting_c');
-                  }
+                  }*/
 
                   app.api.call('GET', app.api.buildURL('GetParticipantes/'+idReunion), null, {
                       success: function (data) {
