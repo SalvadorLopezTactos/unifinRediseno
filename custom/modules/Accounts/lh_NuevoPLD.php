@@ -37,7 +37,7 @@ class NuevoPLD_Class
               $pldAP->tct_pld_campo11_ddw = $productosPLD->arrendamientoPuro->campo11;
               $pldAP->tct_pld_campo13_chk = $productosPLD->arrendamientoPuro->campo13;
               $pldAP->tct_pld_campo14_chk = $productosPLD->arrendamientoPuro->campo14;
-              $pldAP->tct_pld_campo16_ddw = "^" . str_replace(",","^,^",$productosPLD->arrendamientoPuro->campo16) . "^";
+              $pldAP->tct_pld_campo16_ddw = (!empty($productosPLD->arrendamientoPuro->campo16))? "^" . str_replace(",","^,^",$productosPLD->arrendamientoPuro->campo16) . "^" : "";
               $pldAP->tct_pld_campo17_txt = $productosPLD->arrendamientoPuro->campo17;
               $pldAP->tct_pld_campo18_ddw = $productosPLD->arrendamientoPuro->campo18;
               $pldAP->tct_pld_campo25_ddw = $productosPLD->arrendamientoPuro->campo25;
@@ -65,7 +65,7 @@ class NuevoPLD_Class
               $pldFF->tct_pld_campo21_ddw = $productosPLD->factorajeFinanciero->campo21;
               $pldFF->tct_pld_campo22_int = $productosPLD->factorajeFinanciero->campo22;
               $pldFF->tct_pld_campo23_dec = $productosPLD->factorajeFinanciero->campo23;
-              $pldFF->tct_pld_campo16_ddw = "^" . str_replace(",","^,^",$productosPLD->factorajeFinanciero->campo16) . "^";
+              $pldFF->tct_pld_campo16_ddw = (!empty($productosPLD->factorajeFinanciero->campo16))? "^" . str_replace(",","^,^",$productosPLD->factorajeFinanciero->campo16) . "^" : "";
               $pldFF->tct_pld_campo17_txt = $productosPLD->factorajeFinanciero->campo17;
               $pldFF->tct_pld_campo15_txt = $productosPLD->factorajeFinanciero->campo15;
               $pldFF->tct_pld_campo14_chk = $productosPLD->factorajeFinanciero->campo14;
@@ -112,7 +112,7 @@ class NuevoPLD_Class
               $pldCS->tct_pld_campo5_rel = $productosPLD->creditoSimple->campo5;
               $pldCS->account_id1_c = $productosPLD->creditoSimple->campo5_id;
               $pldCS->tct_pld_campo6_ddw = $productosPLD->creditoSimple->campo6;
-              $pldCS->tct_pld_campo18_ddw = "^" . str_replace(",","^,^",$productosPLD->creditoSimple->campo18) . "^";
+              $pldCS->tct_pld_campo18_ddw = (!empty($productosPLD->creditoSimple->campo18))? "^" . str_replace(",","^,^",$productosPLD->creditoSimple->campo18) . "^" : "";
               $pldCS->tct_pld_campo19_txt = $productosPLD->creditoSimple->campo19;
               $pldCS->tct_pld_campo14_chk = $productosPLD->creditoSimple->campo14;
               $pldCS->tct_pld_campo20_ddw = $productosPLD->creditoSimple->campo20;
