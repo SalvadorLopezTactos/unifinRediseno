@@ -23,6 +23,9 @@
         'keydown .campo1txt-ff':'keyDownNewExtension',
         'keydown .campo1txt-ca':'keyDownNewExtension',
         'keydown .campo1txt-cs':'keyDownNewExtension',
+        'keydown .campo22int-ff':'keyDownNewExtension',
+
+
     },
 
     initialize: function (options) {
