@@ -3109,11 +3109,11 @@
               }else{
                   $('.campo5rel-ap').find('.select2-choice').css('border-color','');
               }
-              //Pregunta: campo7ddw-ap
+              /*//Pregunta: campo7ddw-ap
               if($('.campo7ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
                   $('.campo7ddw-ap').find('.select2-choice').css('border-color','red');
                   faltantesAP = faltantesAP + '<b>- '+$('select.campo7ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-              }
+              }*/
               if ($('.campo8txt-ap').val() == '' && $('.campo7ddw-ap').select2('val')=='Si' && this.model.get('tipodepersona_c') == 'Persona Moral'){
                   $('.campo8txt-ap').css('border-color','red');
                   faltantesAP = faltantesAP + '<b>- '+$('.campo8txt-ap')[0].getAttribute('data-name')+'<br></b>';
@@ -3207,7 +3207,7 @@
                   $('.campo6ddw-ff').find('.select2-choice').css('border-color','');
               }*/
               //Pregunta: campo17txt-ff
-              if($('.campo17txt-ff').val() == '' && $('.campo14chk-ff')[0].checked){
+              if($('.campo17txt-ff').val() == '' && $('.campo14chk-ff')[0].checked && $('.campo2ddw-ff').select2('val')=='2' ){
                   $('.campo17txt-ff').css('border-color','red');
                   faltantesFF = faltantesFF + '<b>- '+$('.campo17txt-ff')[0].getAttribute('data-name')+'<br></b>';
               }else{
@@ -3224,7 +3224,7 @@
                   $('.campo2ddw-ca').find('.select2-choice').css('border-color','');
               }*/
               //Pregunta: campo3rel-ca
-              if($('.campo3rel-ca')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val')=='2'){
+              if($('.campo3rel-ca')[0]['innerText'] == '' && this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val')=='2' ){
                   $('.campo3rel-ca').find('.select2-choice').css('border-color','red');
                   faltantesCA = faltantesCA + '<b>- '+$('.campo3rel-ca')[1].getAttribute('data-name')+'<br></b>';
               }else{

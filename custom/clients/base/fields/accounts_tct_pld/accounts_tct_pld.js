@@ -19,6 +19,10 @@
 
     events :{
         'keydown .campo23dec-ff': 'keyDownNewExtension',
+        'keydown .campo1txt-ap':'keyDownNewExtension',
+        'keydown .campo1txt-ff':'keyDownNewExtension',
+        'keydown .campo1txt-ca':'keyDownNewExtension',
+        'keydown .campo1txt-cs':'keyDownNewExtension',
     },
 
     initialize: function (options) {

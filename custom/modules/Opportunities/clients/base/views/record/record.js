@@ -501,11 +501,11 @@
                                       if (tipopersona != 'Persona Moral') {
                                           //PF - PFAE
                                           $faltaPld = (data.records[0].tct_pld_campo2_ddw == ""  || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo1_txt == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo20_ddw == "" || data.records[0].tct_pld_campo24_ddw == "" || data.records[0].tct_pld_campo21_ddw == "") ? true : false;
+                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo24_ddw == "" || data.records[0].tct_pld_campo21_ddw == "") ? true : false;
                                       } else {
                                           //PM
                                           $faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo1_txt == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo20_ddw == "" || data.records[0].tct_pld_campo24_ddw == "" || data.records[0].tct_pld_campo21_ddw == "") ? true : false;
+                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo24_ddw == "" || data.records[0].tct_pld_campo21_ddw == "") ? true : false;
                                       }
                                   }
                                   if (usuarioProducto == "CA") {
