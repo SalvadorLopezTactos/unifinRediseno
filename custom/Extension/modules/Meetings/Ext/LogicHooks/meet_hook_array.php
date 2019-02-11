@@ -72,7 +72,14 @@ $hook_array['after_save'][]=Array(
     'Meetings_Hooks', //name of the class
     'modificaReunion' //name of the fuction
 );
-
+//LH para insertar valores a tabla custom de meetings_audit, la cual se creó pegándole directo a la base de datos
+$hook_array['before_save'][] = Array(
+    2,
+    'Insertar registros a tabla de auditoría meetings_audit',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks', // name of the class
+    'insertAuditFields' // name of the function
+);
 $hook_array['after_save'][]=Array(
     5,
     'Elimina a los invitados de la primera reunion',
