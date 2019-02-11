@@ -1502,12 +1502,12 @@ console.log(name);
                   errors['instrumento_moratorio_c'] = errors['instrumento_moratorio_c'] || {};
                   errors['instrumento_moratorio_c'].required = true;
               }
-              if (this.model.get('puntos_tasa_moratorio_c') == "" || (Number(this.model.get('puntos_tasa_moratorio_c')) < 0 || Number(this.model.get('puntos_tasa_moratorio_c')) > 99.999999)) {
+              if (this.model.get('puntos_tasa_moratorio_c') == "" || this.model.get('factor_moratorio_c') == null || (Number(this.model.get('puntos_tasa_moratorio_c')) < 0 || Number(this.model.get('puntos_tasa_moratorio_c')) > 99.999999)) {
                   //error
                   errors['puntos_tasa_moratorio_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
                   errors['puntos_tasa_moratorio_c'].required = true;
               }
-              if (this.model.get('factor_moratorio_c') == "" || (Number(this.model.get('factor_moratorio_c')) < 0 || Number(this.model.get('factor_moratorio_c')) > 99.999999)) {
+              if (this.model.get('factor_moratorio_c') == "" || this.model.get('factor_moratorio_c') == null || (Number(this.model.get('factor_moratorio_c')) < 0 || Number(this.model.get('factor_moratorio_c')) > 99.999999)) {
                   //error
                   errors['factor_moratorio_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
                   errors['factor_moratorio_c'].required = true;
