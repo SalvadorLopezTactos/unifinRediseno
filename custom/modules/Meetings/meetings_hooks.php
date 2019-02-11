@@ -14,7 +14,7 @@ class Meetings_Hooks
     {
 		global $db;
 		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $args['related_id'] != $bean->assigned_user_id && $bean->date_entered != $bean->date_modified && stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False)
-		{   
+		{
 /*			$query = <<<SQL
                 SELECT a.id, b.parent_meeting_c
                 FROM meetings a, meetings_cstm b
@@ -491,7 +491,7 @@ SQL;
         }
       }
     }
-    
+
     function cambiAdmin2 ($bean = null, $event = null, $args = null)
     {
       if($bean->modified_user_id == '1')
@@ -538,15 +538,16 @@ SQL;
         }
       }
       //Si coincide el usuario loggeado con alguno de la lista
+      /*
       if($flag==true){
         $usrmod=array();
         //Consulta del id de la reunion y el del usuario loggeado
         $meetingscount="
           select m.user_id
-          from meetings_users m 
+          from meetings_users m
           inner join users u on u.id = m.user_id
           inner join users_cstm uc on uc.id_c = u.id
-          where 
+          where
           m.meeting_id = '{$bean->id}'
           and uc.puestousuario_c not in ('".implode("','",$listatext)."')
           and m.deleted = 0";
@@ -579,17 +580,17 @@ SQL;
           $deleusr="
             UPDATE meetings_users
             SET deleted = 1
-            WHERE user_id= '{$current_user->id}' 
+            WHERE user_id= '{$current_user->id}'
             AND meeting_id='{$bean->id}'";
           $deletusr=$db->query($deleusr);
         }
-      }
+      }*/
       $puestoinv="
-        update meetings_users m 
+        update meetings_users m
         inner join users u on u.id = m.user_id
         inner join users_cstm uc on uc.id_c = u.id
         set m.deleted = 1
-        where 
+        where
         m.meeting_id = '{$bean->id}'
         and uc.puestousuario_c  in ('".implode("','",$listatext)."')
         and m.deleted = 0";
