@@ -80,3 +80,10 @@ $hook_array['before_save'][] = Array(
     'Meetings_Hooks', // name of the class
     'insertAuditFields' // name of the function
 );
+$hook_array['after_save'][]=Array(
+    5,
+    'Elimina a los invitados de la primera reunion',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks',
+    'EliminaInvitados'
+);

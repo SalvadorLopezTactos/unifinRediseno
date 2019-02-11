@@ -761,13 +761,13 @@
             $('.campo26-ap').hide();
         }
         //Muestra/oculta Propietario real
-        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val')=='2'){
+        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val')=='2' || $('.campo2ddw-ap').attr('data-id')=='2'){
             $('.campo3-ap').show();
         }else{
             $('.campo3-ap').hide();
         }
         //Muestra/oculta Proveedor recursos
-        if($('.campo4ddw-ap').select2('val')=='2'){
+        if($('.campo4ddw-ap').select2('val')=='2' || $('.campo4ddw-ap').attr('data-id')=='2' ){
             $('.campo5-ap').show();
         }else{
             $('.campo5-ap').hide();
@@ -803,13 +803,13 @@
         }else{
         }
         //Muestra/oculta Propietario real
-        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ff').select2('val')=='2'){
+        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ff').select2('val')=='2' || $('.campo2ddw-ff').attr('data-id')=='2'){
             $('.campo3-ff').show();
         }else{
             $('.campo3-ff').hide();
         }
         //Muestra/oculta Proveedor recursos
-        if($('.campo4ddw-ff').select2('val')=='2'){
+        if($('.campo4ddw-ff').select2('val')=='2' || $('.campo4ddw-ff').attr('data-id')=='2' ){
             $('.campo5-ff').show();
         }else{
             $('.campo5-ff').hide();
@@ -831,13 +831,13 @@
         }else{
         }
         //Muestra/oculta Propietario real
-        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val')=='2'){
+        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val')=='2' || $('.campo2ddw-ca').attr('data-id')=='2'){
             $('.campo3-ca').show();
         }else{
             $('.campo3-ca').hide();
         }
         //Muestra/oculta Proveedor recursos
-        if($('.campo4ddw-ca').select2('val')=='2'){
+        if($('.campo4ddw-ca').select2('val')=='2' || $('.campo4ddw-ca').attr('data-id')=='2'){
             $('.campo5-ca').show();
         }else{
             $('.campo5-ca').hide();
@@ -848,13 +848,13 @@
         */
         // //Oculta campos de vista de persona fisica en panel de Crédito simple
         //Muestra/oculta Propietario real
-        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-cs').select2('val')=='2'){
+        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-cs').select2('val')=='2' || $('.campo2ddw-cs').attr('data-id')=='2'){
             $('.campo3-cs').show();
         }else{
             $('.campo3-cs').hide();
         }
         //Muestra/oculta Proveedor recursos
-        if($('.campo4ddw-cs').select2('val')=='2'){
+        if($('.campo4ddw-cs').select2('val')=='2' || $('.campo4ddw-cs').attr('data-id')=='2'){
             $('.campo5-cs').show();
         }else{
             $('.campo5-cs').hide();

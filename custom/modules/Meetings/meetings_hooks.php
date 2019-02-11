@@ -564,7 +564,7 @@ SQL;
           }
           //$GLOBALS['log']->fatal("El id de los usuarios: ".$totalme);
         }
-        $GLOBALS['log']->fatal("Los usuarios invitados son: ". print_r($usrmod,true));
+        //$GLOBALS['log']->fatal("Los usuarios invitados son: ". print_r($usrmod,true));
         //Comparacion para modificar a la persona asignada, solo cuando haya invitados
         if(count($usrmod)>=1 && $bean->assigned_user_id==$current_user->id){
           //Se hace una consulta a base de datos para modificar el usuario asignado a cada reunión
@@ -618,5 +618,23 @@ SQL;
 
         }
 
+    }
+
+    function EliminaInvitados($bean=null, $event=null, $args=null){
+      $asignado=$bean->assigned_user_id;
+      global $db;
+      $invitados=array();
+      $meetingscount="
+        update meetings_users m
+        set m.deleted=1
+        where m.meeting_id='{$bean->id}'
+        and m.user_id !='{$asignado}'";
+      $totalcount=$db->query($meetingscount);
+      $conteo=0;
+      while($row=$db->fetchByAssoc($totalcount)){
+        $conteo++;
+        array_push($invitados, $row['user_id']);
+      }
+      //$GLOBALS['log']->fatal("Los inivtados finales son: ".$meetingscount);
     }
 }
