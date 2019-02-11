@@ -1,5 +1,5 @@
 <?php
- // created: 2019-01-18 11:47:34
+ // created: 2019-02-11 12:48:33
 
 $app_list_strings['resultado_list']=array (
   '' => '',
@@ -8,6 +8,7 @@ $app_list_strings['resultado_list']=array (
   3 => 'Está interesado, pero no en este momento',
   4 => 'Está Interesado. Se procede a generar expediente',
   5 => 'Está Interesado. Se agendó otra visita',
+  19 => 'Está interesado. Se agendó otra llamada',
   6 => 'Está Interesado. Se recogió información',
   7 => 'Se cerró una venta',
   9 => 'Se logró la visita ocular parcialmente, se necesita una segunda cita',
