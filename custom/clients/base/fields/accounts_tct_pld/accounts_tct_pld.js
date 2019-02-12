@@ -736,17 +736,27 @@
         $('.content_ff').hide();
         $('.content_ca').hide();
 
-        //Establece visibilidad por tipo de productos
-        //AP
-        if (App.user.attributes.tipodeproducto_c == '1') {
-          $('.content_ap').show();
-        }
-        //FF
-        if (App.user.attributes.tipodeproducto_c == '4') {
+        var puestousuario= App.user.attributes.puestousuario_c;
+        var puestosvisibles =["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","20","33","36","44"];
+
+        if(puestosvisibles.indexOf(puestousuario)>=0){
+
+            //Establece visibilidad por tipo de productos
+            //AP
+            if (App.user.attributes.tipodeproducto_c == '1') {
+              $('.content_ap').show();
+            }
+            //FF
+            if (App.user.attributes.tipodeproducto_c == '4') {
+                $('.content_ff').show();
+            }
+            //CA
+            if (App.user.attributes.tipodeproducto_c == '3') {
+                $('.content_ca').show();
+            }
+        }else{
+            $('.content_ap').show();
             $('.content_ff').show();
-        }
-        //CA
-        if (App.user.attributes.tipodeproducto_c == '3') {
             $('.content_ca').show();
         }
 
