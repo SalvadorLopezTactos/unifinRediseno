@@ -436,6 +436,10 @@
 
         this.events['click a[name=generar_rfc_c]'] = '_doGenera_RFC_CURP';
         this.events['click a[name=generar_curp_c]'] = '_doGeneraCURP';
+        this.events['keydown [name=ctpldnoseriefiel_c]'] = 'keyDownNewExtension';
+        this.events['keydown [name=tct_cpld_pregunta_u2_txf_c]'] = 'keyDownNewExtension';
+        this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'keyDownNewExtension';
+
 
 
         /* hay que traer el campo del usaurio
@@ -2268,6 +2272,26 @@
           this.model.set('tct_nuevo_pld_c', JSON.stringify(ProductosPLD));
         }
         callback(null,fields,errors);
+    },
+
+    keyDownNewExtension: function (evt) {
+        if (!evt) return;
+        if(!this.validanumeros(evt)){
+            return false;
+        }
+    },
+    validanumeros:function(evt){
+        if($.inArray(evt.keyCode,[110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,16,49,50,51,52,53,54,55,56,57,48,96,97,98,99,100,101,102,103,104,105]) < 0) {
+            app.alert.show("Caracter Invalido", {
+                level: "error",
+                title: "Solo n\u00FAmeros son permitidos en este campo.",
+                autoClose: true
+            });
+            return false;
+
+        }else{
+            return true;
+        }
     },
 
 
