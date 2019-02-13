@@ -40,13 +40,6 @@
         </div>
         <div class="container-AP borde-Contenedor">
             <!-- Fila 1 AP -->
-            <div class="row-fluid Fila1-AP">
-                <div class="span6 campo1-ap">
-                    <label class="record-label">No Serie FIEL <font COLOR="red">*</font></label>
-                    <input type="text" class="campo1txt-ap" data-name="No Serie FIEL-ap" value="{{ProductosPLD.arrendamientoPuro.campo1}}"
-                           data-field="campo1AP"/>
-                </div>
-            </div>
             <!-- Fila 2 AP -->
             <div class="row-fluid Fila2-AP">
                 <div class="span6 campo2-ap">
@@ -82,42 +75,6 @@
                 </div>
             </div>
             <!-- Fila 4.1 AP-PM -->
-            <div class="row-fluid control-group fila4-PM">
-                <!-- Fila 1 AP-PM -->
-                <div class="row-fluid Fila1-PM">
-                    <div class="span6 campo7-ap">
-                        <label class="record-label">La persona moral es: Sofom, Transmisor de Dinero, Centro
-                            Cambiario? <font COLOR="red">*</font></label>
-                        <select class="campo7ddw-ap select2 row-fluid" data-field="campo7PM" data-name="La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?" >
-                            {{#each campo7_list}}
-                                <option value="{{@key}}" {{ifSelected @key ../ProductosPLD.arrendamientoPuro.campo7}}>{{this}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                    <div class="span6 campo8-ap">
-                        <label class="record-label">Número de Registro ante la CNBV o Condusef</label>
-                        <input type="text" class="campo8txt-ap" data-name="Número de Registro ante la CNBV o Condusef" value="{{ProductosPLD.arrendamientoPuro.campo8}}"
-                               data-field="campo8PM"/>
-                    </div>
-                </div>
-                <!-- Fila 2 AP-PM -->
-                <div class="row-fluid Fila2-PM">
-                    <div class="span6 campo9-ap">
-                        <label class="record-label">¿Cotiza en Bolsa? <font COLOR="red">*</font></label>
-                        <select class="campo9ddw-ap select2 row-fluid" data-field="campo9PM" data-name="¿Cotiza en Bolsa?"  >
-                            {{#each campo9_list}}
-                                <option value="{{@key}}" {{ifSelected @key ../ProductosPLD.arrendamientoPuro.campo9}}>{{this}}</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                    <div class="span6 campo10-ap">
-                        <label class="record-label">Clave de Pizarra </label>
-                        <input type="text" class="campo10txt-ap" data-name="Clave de Pizarra" value="{{ProductosPLD.arrendamientoPuro.campo10}}"
-                               data-field="campo10AP"/>
-                    </div>
-                </div>
-
-            </div>
             <!-- Fila 4 AP si es diff PM-->
             <div class="row-fluid Fila4-AP">
                 <div class="span6 campo6-ap">
@@ -181,15 +138,7 @@
                 </div>
             </div>
             <!-- Fila 7 AP -->
-            <div class="row-fluid Fila7-AP">
-              <div class="span6 campo13-ap">
-                  <label class="record-label">¿Es Fideicomiso? *</label>
-                  <br>
-                  <input type="checkbox" class="campo13chk-ap"
-                         {{#if ProductosPLD.arrendamientoPuro.campo13}}checked{{/if}}
-                         data-field="campo13AP"/>
-              </div>
-            </div>
+
             <!-- Fila 8 AP -->
             <div class="row-fluid Fila8-AP">
               <div class="span6 campo25-ap">
@@ -205,6 +154,7 @@
             </div>
         </div>
     </div>
+</div>
 
     <div class="content_ff" style="display:{{ProductosPLD.factorajeFinanciero.visible}}">
         <!-- Seccion Factoraje Financiero -->
@@ -215,13 +165,7 @@
         </div>
         <div class="container-FF borde-Contenedor">
             <!-- Fila 1 FF -->
-            <div class="row-fluid Fila1-FF">
-                <div class="span6 campo1-ff">
-                    <label class="record-label">No Serie FIEL <font COLOR="red">*</font></label>
-                    <input type="text" class="campo1txt-ff" data-name="No Serie FIEL-ff" value="{{ProductosPLD.factorajeFinanciero.campo1}}"
-                           data-field="campo1FF"/>
-                </div>
-            </div>
+
             <!-- Fila 2 FF -->
             <div class="row-fluid Fila2-FF">
                 <div class="span6 campo2-ff">
@@ -364,13 +308,6 @@
         </div>
         <div class="container-CA borde-Contenedor">
             <!-- Fila 1 CA -->
-            <div class="row-fluid Fila1-CA">
-                <div class="span6 campo1-ca">
-                    <label class="record-label">No Serie FIEL <font COLOR="red">*</font></label>
-                    <input type="text" class="campo1txt-ca" data-name="No Serie FIEL-ca" value="{{ProductosPLD.creditoAutomotriz.campo1}}"
-                           data-field="campo1CA"/>
-                </div>
-            </div>
             <!-- Fila 2 CA -->
             <div class="row-fluid Fila2-CA">
                 <div class="span6 campo2-ca">
@@ -428,13 +365,7 @@
         </div>
         <div class="container-CS borde-Contenedor">
             <!-- Fila 1 CS -->
-            <div class="row-fluid Fila1-CS">
-                <div class="span6 campo1-cs">
-                    <label class="record-label">No Serie FIEL</label>
-                    <input type="text" class="campo1txt-cs" data-name="No Serie FIEL-cs" value="{{ProductosPLD.creditoSimple.campo1}}"
-                           data-field="campo1CS"/>
-                </div>
-            </div>
+
             <!-- Fila 2 CS -->
             <div class="row-fluid Fila2-CS">
                 <div class="span6 campo2-cs">

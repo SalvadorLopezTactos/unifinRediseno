@@ -7,8 +7,8 @@
     campo4_list: null,
     campo6_list: null,
     campo16_list: null,
-    campo7_list: null,
-    campo9_list: null,
+   // campo7_list: null,
+   // campo9_list: null,
     campo11_list: null,
     campo25_list: null,
     campo21_list: null,
@@ -19,10 +19,6 @@
 
     events :{
         'keydown .campo23dec-ff': 'keyDownNewExtension',
-        'keydown .campo1txt-ap':'keyDownNewExtension',
-        'keydown .campo1txt-ff':'keyDownNewExtension',
-        'keydown .campo1txt-ca':'keyDownNewExtension',
-        'keydown .campo1txt-cs':'keyDownNewExtension',
         'keydown .campo22int-ff':'keyDownNewExtension',
 
 
@@ -92,8 +88,8 @@
         // Listas AP
         dataPLD['arrendamientoPuro']['campo2_label'] = pld.campo2_list[dataPLD['arrendamientoPuro']['campo2']];
         dataPLD['arrendamientoPuro']['campo4_label'] = pld.campo4_list[dataPLD['arrendamientoPuro']['campo4']];
-        dataPLD['arrendamientoPuro']['campo7_label'] = pld.campo7_list[dataPLD['arrendamientoPuro']['campo7']];
-        dataPLD['arrendamientoPuro']['campo9_label'] = pld.campo9_list[dataPLD['arrendamientoPuro']['campo9']];
+       // dataPLD['arrendamientoPuro']['campo7_label'] = pld.campo7_list[dataPLD['arrendamientoPuro']['campo7']];
+       // dataPLD['arrendamientoPuro']['campo9_label'] = pld.campo9_list[dataPLD['arrendamientoPuro']['campo9']];
         dataPLD['arrendamientoPuro']['campo6_label'] = pld.campo6_list[dataPLD['arrendamientoPuro']['campo6']];
         var auxCampo16=dataPLD['arrendamientoPuro']['campo16'].replace(/\^/g,"");
             var arrayCampo16=auxCampo16.split(",");
@@ -153,8 +149,8 @@
         pld.campo4_list = app.lang.getAppListStrings('ctpldidproveedorrecursosson_list');
         pld.campo6_list = app.lang.getAppListStrings('tct_pagoanticipado_list');
         pld.campo16_list = app.lang.getAppListStrings('tct_inst_monetario_ddw_list');
-        pld.campo7_list = app.lang.getAppListStrings('tct_cpld_pregunta_u1_ddw_list');
-        pld.campo9_list = app.lang.getAppListStrings('tct_cpld_pregunta_u3_ddw_list');
+       // pld.campo7_list = app.lang.getAppListStrings('tct_cpld_pregunta_u1_ddw_list'); campo SOFOM
+       // pld.campo9_list = app.lang.getAppListStrings('tct_cpld_pregunta_u3_ddw_list'); cotiza en bolsa
         pld.campo11_list = app.lang.getAppListStrings('tct_cpld_pregunta9_desp_list');
         pld.campo25_list = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
         pld.campo21_list = app.lang.getAppListStrings('tct_pldcampo1_ff_ddw_list');
@@ -226,7 +222,7 @@
         $('.campo4ddw-ap').change(function(evt) {
             pld.Muestracampo2();
         });
-        //Muestra el campo Número de Registro ante la CNBV o Condusef PERSONA MORAL 1
+        /*//Muestra el campo Número de Registro ante la CNBV o Condusef PERSONA MORAL 1
         $('.campo7ddw-ap').change(function(evt) {
             pld.Muestracampo3();
         });
@@ -234,7 +230,7 @@
         //Muestra el campo Clave de Pizarra PERSONA MORAL 2
         $('.campo9ddw-ap').change(function(evt) {
             pld.Muestracampo4();
-        });
+        });*/
 
         //Muestra el campo Especifique cuando el Check esta marcado (Continua campos Persona Fisica)
         $('.campo14chk-ap').change(function(evt) {
@@ -311,7 +307,7 @@
         pld.cuentacliente();
 
         //Set Related fields
-        if (pld.ProductosPLD != null) {
+       if (pld.ProductosPLD != null) {
           //AF
           $('.campo3rel-ap').select2('data', {id: selfPLD.ProductosPLD.arrendamientoPuro.campo3_id, text:  selfPLD.ProductosPLD.arrendamientoPuro.campo3});
           $('.campo5rel-ap').select2('data', {id: selfPLD.ProductosPLD.arrendamientoPuro.campo5_id, text:  selfPLD.ProductosPLD.arrendamientoPuro.campo5});
@@ -437,7 +433,7 @@
 
         //Carga de lista 5 Persona Moral La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?
 
-        var lista5ID = app.lang.getAppListStrings('tct_cpld_pregunta_u1_ddw_list');
+      /*  var lista5ID = app.lang.getAppListStrings('tct_cpld_pregunta_u1_ddw_list');
         var lista_campo7 = '';
         Object.keys(lista5ID).forEach(function (id) {
             //console.log(id, lista5ID[id]);
@@ -453,7 +449,7 @@
             //console.log(id, lista6ID[id]);
             lista_campo9 += '<option value="' + id + '">' + lista6ID[id] + '</option>'
         });
-        this.lista_campo9 = lista_campo9;
+        this.lista_campo9 = lista_campo9; */
 
         //Carga de lista 7 Persona Moral 3 Los recursos con los que va a celebrar su operación tiene su origen en su actividad mercantil, actividad u objeto social?
 
@@ -546,7 +542,7 @@
 
     //Validaciones para campos vistos en Persona Moral
     //pregunta La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?
-    Muestracampo3: function () {
+   /* Muestracampo3: function () {
         console.log("La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?");
         if ($('.campo7ddw-ap').select2('val') == "Si") {
             $('.campo8-ap').show();
@@ -563,7 +559,7 @@
         } else {
             $('.campo10-ap').hide();
         }
-    },
+    },*/
 
     checkpagosmonetarioAP: function () {
         console.log("Esta check");
@@ -697,7 +693,7 @@
     validaregimen: function (){
         //Muestra campos por regimen fiscal
         //Campos nacen ocultos Arrendamiento Puro
-        $('.campo1-ap').show();
+
         $('.campo2-ap').show();
         $('.campo4-ap').show();
         $('.campo6-ap').show();
@@ -896,10 +892,7 @@
         if(!this.validamonto(evt)){
             return false;
         }
-
     },
-
-
     validamonto:function(evt){
         if($.inArray(evt.keyCode,[110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,16,49,50,51,52,53,54,55,56,57,48,96,97,98,99,100,101,102,103,104,105]) < 0) {
             app.alert.show("Caracter Invalido", {

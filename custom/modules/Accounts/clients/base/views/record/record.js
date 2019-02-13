@@ -183,6 +183,10 @@
         this.events['keydown [name=activo_fijo_c]'] = 'checkInVentas';
         this.events['keydown [name=tct_prom_cheques_cur_c]'] = 'checkInVentas';
         this.events['keydown [name=tct_depositos_promedio_c]'] = 'checkInVentas';
+        this.events['keydown [name=ctpldnoseriefiel_c]'] = 'keyDownNewExtension';
+        this.events['keydown [name=tct_cpld_pregunta_u2_txf_c]'] = 'keyDownNewExtension';
+        this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'keyDownNewExtension';
+
 
 
         this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
@@ -191,7 +195,7 @@
 
     saveProdPLD:function (fields, errors, callback) {
 	     // Actualizar modelo de pld.ProductosPLD
-        pld.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
+       // pld.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
         pld.ProductosPLD.arrendamientoPuro.campo2 = $('.campo2ddw-ap').select2('val');
         pld.ProductosPLD.arrendamientoPuro.campo3 = $('.campo3rel-ap')[0]['innerText'];
         pld.ProductosPLD.arrendamientoPuro.campo3_id = $('.campo3rel-ap').select2('val');
@@ -199,18 +203,18 @@
         pld.ProductosPLD.arrendamientoPuro.campo5 = $('.campo5rel-ap')[0]['innerText'];
         pld.ProductosPLD.arrendamientoPuro.campo5_id = $('.campo5rel-ap').select2('val');
         pld.ProductosPLD.arrendamientoPuro.campo6 = $('.campo6ddw-ap').select2('val');
-        pld.ProductosPLD.arrendamientoPuro.campo7 = $('.campo7ddw-ap').select2('val');
-        pld.ProductosPLD.arrendamientoPuro.campo8 = $('.campo8txt-ap').val();
-        pld.ProductosPLD.arrendamientoPuro.campo9 = $('.campo9ddw-ap').select2('val');
-        pld.ProductosPLD.arrendamientoPuro.campo10 = $('.campo10txt-ap').val();
+      // pld.ProductosPLD.arrendamientoPuro.campo7 = $('.campo7ddw-ap').select2('val');
+      // pld.ProductosPLD.arrendamientoPuro.campo8 = $('.campo8txt-ap').val();
+      // pld.ProductosPLD.arrendamientoPuro.campo9 = $('.campo9ddw-ap').select2('val');
+      // pld.ProductosPLD.arrendamientoPuro.campo10 = $('.campo10txt-ap').val();
         pld.ProductosPLD.arrendamientoPuro.campo11 = $('.campo11ddw-ap').select2('val');
-        pld.ProductosPLD.arrendamientoPuro.campo13 = $('.campo13chk-ap')[0].checked;
+       // pld.ProductosPLD.arrendamientoPuro.campo13 = $('.campo13chk-ap')[0].checked;
         pld.ProductosPLD.arrendamientoPuro.campo14 = $('.campo14chk-ap')[0].checked;
         pld.ProductosPLD.arrendamientoPuro.campo16 = $('.campo16ddw-ap').select2('val').toString();
         pld.ProductosPLD.arrendamientoPuro.campo17 = $('.campo17txt-ap').val();
         pld.ProductosPLD.arrendamientoPuro.campo25 = $('.campo25ddw-ap').select2('val');
         pld.ProductosPLD.arrendamientoPuro.campo26 = $('.campo26txt-ap').val();
-        pld.ProductosPLD.factorajeFinanciero.campo1 = $('.campo1txt-ff').val();
+      //  pld.ProductosPLD.factorajeFinanciero.campo1 = $('.campo1txt-ff').val();
         pld.ProductosPLD.factorajeFinanciero.campo2 = $('.campo2ddw-ff').select2('val');
         pld.ProductosPLD.factorajeFinanciero.campo3 = $('.campo3rel-ff').val();
         pld.ProductosPLD.factorajeFinanciero.campo3_id = $('.campo3rel-ff').select2('val');
@@ -225,7 +229,7 @@
         pld.ProductosPLD.factorajeFinanciero.campo14 = $('.campo14chk-ff')[0].checked;
         pld.ProductosPLD.factorajeFinanciero.campo24 = $('.campo24ddw-ff').select2('val');
         pld.ProductosPLD.factorajeFinanciero.campo6 = $('.campo6ddw-ff').select2('val');
-        pld.ProductosPLD.creditoAutomotriz.campo1 = $('.campo1txt-ca').val();
+       // pld.ProductosPLD.creditoAutomotriz.campo1 = $('.campo1txt-ca').val();
         pld.ProductosPLD.creditoAutomotriz.campo2 = $('.campo2ddw-ca').select2('val');
         pld.ProductosPLD.creditoAutomotriz.campo3 = $('.campo3rel-ca').val();
         pld.ProductosPLD.creditoAutomotriz.campo3_id = $('.campo3rel-ca').select2('val');
@@ -233,7 +237,7 @@
         pld.ProductosPLD.creditoAutomotriz.campo5 = $('.campo5rel-ca').val();
         pld.ProductosPLD.creditoAutomotriz.campo5_id = $('.campo5rel-ca').select2('val');
         pld.ProductosPLD.creditoAutomotriz.campo6 = $('.campo6ddw-ca').select2('val');
-        pld.ProductosPLD.creditoSimple.campo1 = $('.campo1txt-cs').val();
+       // pld.ProductosPLD.creditoSimple.campo1 = $('.campo1txt-cs').val();
         pld.ProductosPLD.creditoSimple.campo2 = $('.campo2ddw-cs').select2('val');
         pld.ProductosPLD.creditoSimple.campo3 = $('.campo3rel-cs').val();
         pld.ProductosPLD.creditoSimple.campo3_id = $('.campo3rel-cs').select2('val');
@@ -3113,7 +3117,7 @@
               if($('.campo7ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
                   $('.campo7ddw-ap').find('.select2-choice').css('border-color','red');
                   faltantesAP = faltantesAP + '<b>- '+$('select.campo7ddw-ap')[0].getAttribute('data-name')+'<br></b>';
-              }*/
+              }
               if ($('.campo8txt-ap').val() == '' && $('.campo7ddw-ap').select2('val')=='Si' && this.model.get('tipodepersona_c') == 'Persona Moral'){
                   $('.campo8txt-ap').css('border-color','red');
                   faltantesAP = faltantesAP + '<b>- '+$('.campo8txt-ap')[0].getAttribute('data-name')+'<br></b>';
@@ -3125,7 +3129,7 @@
                   faltantesAP = faltantesAP + '<b>- '+$('.campo10txt-ap')[0].getAttribute('data-name')+'<br></b>';
               }else{
                   $('.campo10txt-ap').find('.select2-choice').css('border-color','');
-              }
+              }*/
               /* //Pregunta: campo9ddw-ap
                if($('.campo9ddw-ap').select2('val') == '' && this.model.get('tipodepersona_c') == 'Persona Moral'){
                    $('.campo9ddw-ap').find('.select2-choice').css('border-color','red');
@@ -3316,6 +3320,26 @@
             errors['empty_date'].required = true;
         }
         callback(null,fields,errors);
+    },
+
+    keyDownNewExtension: function (evt) {
+        if (!evt) return;
+        if(!this.validanumeros(evt)){
+            return false;
+        }
+    },
+    validanumeros:function(evt){
+        if($.inArray(evt.keyCode,[110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,16,49,50,51,52,53,54,55,56,57,48,96,97,98,99,100,101,102,103,104,105]) < 0) {
+            app.alert.show("Caracter Invalido", {
+                level: "error",
+                title: "Solo n\u00FAmeros son permitidos en este campo.",
+                autoClose: true
+            });
+            return false;
+
+        }else{
+            return true;
+        }
     },
 
 })

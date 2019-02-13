@@ -860,12 +860,48 @@ array (
             array (
               0 => 
               array (
+                'name' => 'ctpldnoseriefiel_c',
+                'label' => 'LBL_CTPLDNOSERIEFIEL',
+              ),
+              1 => 
+              array (
+              ),
+              2 => 
+              array (
+                'name' => 'tct_cpld_pregunta_u1_ddw_c',
+                'label' => 'LBL_TCT_CPLD_PREGUNTA_U1_DDW',
+              ),
+              3 => 
+              array (
+                'name' => 'tct_cpld_pregunta_u2_txf_c',
+                'label' => 'LBL_TCT_CPLD_PREGUNTA_U2_TXF',
+              ),
+              4 => 
+              array (
+                'name' => 'tct_cpld_pregunta_u3_ddw_c',
+                'label' => 'LBL_TCT_CPLD_PREGUNTA_U3_DDW',
+              ),
+              5 => 
+              array (
+                'name' => 'tct_cpld_pregunta_u4_txf_c',
+                'label' => 'LBL_TCT_CPLD_PREGUNTA_U4_TXF',
+              ),
+              6 => 
+              array (
+                'name' => 'tct_fedeicomiso_chk_c',
+                'label' => 'LBL_TCT_FEDEICOMISO_CHK',
+              ),
+              7 => 
+              array (
+              ),
+              8 => 
+              array (
                 'name' => 'accounts_tct_pld',
                 'studio' => 'visible',
                 'label' => 'accounts_tct_pld',
                 'span' => 12,
               ),
-              1 => 
+              9 => 
               array (
                 'name' => 'tct_nuevo_pld_c',
                 'studio' => 'visible',
