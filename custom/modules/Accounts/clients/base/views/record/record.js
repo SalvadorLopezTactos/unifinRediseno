@@ -3349,20 +3349,20 @@
             $('.campo23dec-ff').css('border-color', 'red');
             app.alert.show("Valor Invalido", {
                 level: "error",
-                title: "El campo Número de pagos no debe tener un valor mayor a 0.",
+                title: "El campo Número de pagos no debe tener un valor menor a 0.",
                 autoClose: true
             });
-            errors['campo23dec-ff'] = "El campo Número de pagos no debe tener un valor mayor a 0.";
+            errors['campo23dec-ff'] = "El campo Número de pagos no debe tener un valor menor a 0.";
             errors['campo23dec-ff'].required = true;
         }
         if ($('.campo22int-ff').val() != "" && $('.campo22int-ff').val() != undefined &&  $('.campo22int-ff').val() <= 0 ) {
             $('.campo22int-ff').css('border-color', 'red');
             app.alert.show("Valor Invalido2", {
                 level: "error",
-                title: "El campo Monto total aproximado no debe tener un valor mayor a 0.",
+                title: "El campo Monto total aproximado no debe tener un valor menor a 0.",
                 autoClose: true
             });
-            errors['campo22int-ff'] = "El campo Monto total aproximado no debe tener un valor mayor a 0.";
+            errors['campo22int-ff'] = "El campo Monto total aproximado no debe tener un valor menor a 0.";
             errors['campo22int-ff'].required = true;
         }
 
