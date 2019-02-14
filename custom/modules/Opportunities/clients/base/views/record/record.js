@@ -474,16 +474,30 @@
              }
           //Recupera cuenta asociada
           var cuentaId=this.model.get('account_id');
-
+          var faltantes= "";
           if((cuentaId!=""|| cuentaId!=null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c')== 'SI'){
-              app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId +'/link/accounts_tct_pld_1?filter[0][description][$equals]='+usuarioProducto), null, {
-              success: _.bind(function (data) {
-                  if (data != "") {
-                      if (data.records.length > 0) {
-                          app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId), null, {
-                              success: _.bind(function (cuenta) {
-                                  var tipopersona=cuenta.tipodepersona_c;
+
+          app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId), null, {
+              success: _.bind(function (cuenta) {
+                              var tipopersona=cuenta.tipodepersona_c;
                                   $faltaPld = false;
+
+                                  if (cuenta.ctpldnoseriefiel_c == "" ){
+                                      faltantes= faltantes + '<b>-No serie FIEL<br>';
+                                  }
+                                  if (cuenta.tct_cpld_pregunta_u1_ddw_c == "" && tipopersona == 'Persona Moral'){
+                                      faltantes= faltantes + '<b>-¿La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?<br>';
+                                  }
+                                  if (cuenta.tct_cpld_pregunta_u3_ddw_c == "" && tipopersona == 'Persona Moral' ){
+                                      faltantes= faltantes + '<b>-¿Cotiza en Bolsa?<br>';
+                                  }
+                                  if(faltantes!= ""){
+                                      faltantes = ' y los siguientes datos generales:<br>'+ faltantes;
+                                  }
+                      app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId +'/link/accounts_tct_pld_1?filter[0][description][$equals]='+usuarioProducto), null, {
+                          success: _.bind(function (data) {
+                              if (data != "") {
+                                  if (data.records.length > 0) {
                                   //Realizar validación de cammpos requeridos
                                   if (usuarioProducto == "AP") {
                                       if (tipopersona != 'Persona Moral') {
@@ -492,11 +506,11 @@
                                               || data.records[0].tct_pld_campo16_ddw == "" ) ? true : false;
                                       } else {
                                           //PM
-                                          $faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == "" || cuenta.ctpldnoseriefiel_c == "" || cuenta.tct_cpld_pregunta_u1_ddw_c == ""
-                                             || cuenta.tct_cpld_pregunta_u3_ddw_c == "" ||  data.records[0].tct_pld_campo16_ddw == "" ) ? true : false;
+                                          $faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
+                                             ||  data.records[0].tct_pld_campo16_ddw == "" ) ? true : false;
                                       }
                                   }
-                                  //Realizar validación de cammpos requeridos
+                                  //Realizar validación de campos requeridos
                                   if (usuarioProducto == "FF") {
                                       if (tipopersona != 'Persona Moral') {
                                           //PF - PFAE
@@ -519,26 +533,27 @@
                                               || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo16_ddw == "" ) ? true : false;
                                       }
                                   }
-                                  if ($faltaPld) {
-                                      errors['accounts_pld'] = errors['accounts_pld'] || {};
-                                      errors['accounts_pld'].required = true;
-                                      self.mensajes("valida_pld", "Hace falta completar información en la pestaña <b>PLD</b> del producto <b>" + producto + "</b> de la <b>Cuenta</b>", "error");
-                                  }
+                          }else{
+                              errors['accounts_pld'] = errors['accounts_pld'] || {};
+                              errors['accounts_pld'].required = true;
+                              self.mensajes("valida_pld", "Hace falta completar información en la pestaña <b>PLD</b> para el producto <b>" + producto + "</b> de la <b>Cuenta</b>" + faltantes, "error");
+                              callback(null, fields, errors);
+                          }
+                      } else {
+                          errors['accounts_pld'] = errors['accounts_pld'] || {};
+                          errors['accounts_pld'].required = true;
+                          self.mensajes("valida_pld", "Hace falta completar información en la pestaña <b>PLD</b> para el producto <b>" + producto + "</b> de la <b>Cuenta</b>" + faltantes, "error");
+                          callback(null, fields, errors);
+                      }
+                  if ($faltaPld) {
+                      errors['accounts_pld'] = errors['accounts_pld'] || {};
+                      errors['accounts_pld'].required = true;
+                      self.mensajes("valida_pld", "Hace falta completar información en la pestaña <b>PLD</b> para el producto <b>" + producto + "</b> de la <b>Cuenta</b>" + faltantes, "error");
+                  }
                                   callback(null, fields, errors);
                               }, self),
                           });
-                      }else{
-                          errors['accounts_pld'] = errors['accounts_pld'] || {};
-                          errors['accounts_pld'].required = true;
-                          self.mensajes("valida_pld", "Hace falta completar información en la pestaña <b>PLD</b> del producto <b>" + producto + "</b> de la <b>Cuenta</b>", "error");
-                          callback(null, fields, errors);
-                      }
-                  } else {
-                      errors['accounts_pld'] = errors['accounts_pld'] || {};
-                      errors['accounts_pld'].required = true;
-                      self.mensajes("valida_pld", "Hace falta completar información en la pestaña <b>PLD</b> del producto <b>" + producto + "</b> de la <b>Cuenta</b>", "error");
-                      callback(null, fields, errors);
-                  }
+
 
               }, self),
             });
