@@ -297,14 +297,21 @@
         });
 
 
-        $('.campo25ddw-ap').change(function(evt)  {
+        /*$('.campo25ddw-ap').change(function(evt)  {
             pld.cuentaclient();
+
+        }); */
+
+        $('.campo11ddw-ap').change(function(evt)  {
+            pld.preguntamoral();
 
         });
 
+
+
         //Validacion para mostrar los campos de Arrendamiento Puro dependiendo el regimen fiscal (Persona Moral)
         pld.validaregimen();
-        pld.cuentacliente();
+       // pld.cuentacliente();
 
         //Set Related fields
        if (pld.ProductosPLD != null) {
@@ -581,10 +588,18 @@
         }
     },
 
-    cuentaclient: function (){
+    /*cuentaclient: function (){
         if ($('.campo25ddw-ap').val()=="Otro" ){
             $('.campo26-ap').show();
         }else{
+            $('.campo26-ap').hide();
+        }
+    }, */
+
+    preguntamoral: function (){
+        if ($('.campo11ddw-ap').select2('val') == "No") {
+            $('.campo26-ap').show();
+        } else {
             $('.campo26-ap').hide();
         }
     },
@@ -712,7 +727,7 @@
         $('.campo8-ap').show();
         $('.campo10-ap').show();
 
-        $('.campo25-ap').show(); //Cuenta Cliente
+        //$('.campo25-ap').show(); //Cuenta Cliente
         $('.campo26-ap').show(); //Especifique cuenta Cliente
         //Campos Factoraje Financiero
         $('.campo3-ff').show();
@@ -771,7 +786,7 @@
             $('.campo11-ap').hide();
             $('.campo13-ap').hide();
             $('.campo25-ap').hide();
-            $('.campo26-ap').hide();
+            //$('.campo26-ap').hide();
         }
         //Muestra/oculta Propietario real
         if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val')=='2' || $('.campo2ddw-ap').attr('data-id')=='2'){
@@ -800,11 +815,11 @@
         } else {
             $('.campo17-ap').hide();
         }
-        if ($('.campo11ddw-ap').select2('val') == "No") {
+        /*if ($('.campo11ddw-ap').select2('val') == "No") {
             $('.campo26-ap').show();
         } else {
             $('.campo26-ap').hide();
-        }
+        }*/
 
         /*
         **  FF
