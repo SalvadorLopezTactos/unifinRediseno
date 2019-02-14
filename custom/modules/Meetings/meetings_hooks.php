@@ -197,7 +197,7 @@ SQL;
         }
 
 		    // Editar Reuni�n
-        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->date_entered != $bean->date_modified)
+        /*if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->date_entered != $bean->date_modified)
 	      {
   		  	  $query = <<<SQL
                 SELECT a.id, b.parent_meeting_c
@@ -238,13 +238,13 @@ SQL;
       			}
       			$acompanianteMeet->save();
       		}
-/*      		$ultimo = <<<SQL
-                    UPDATE meetings_cstm
-                    SET actualizado_c = 0
-                    WHERE id_c = '{$bean->id}'
-SQL;
-            $ultimo1 = $db->query($ultimo);*/
-        }
+//      		$ultimo = <<<SQL
+//                     UPDATE meetings_cstm
+//                     SET actualizado_c = 0
+//                     WHERE id_c = '{$bean->id}'
+// SQL;
+//             $ultimo1 = $db->query($ultimo);
+}*/
 
 		    //Elimina Invitados
         if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == True)
