@@ -904,3 +904,37 @@ $dependencies['Accounts']['MacroSector'] = array(
         ),
     ),
 );
+
+$dependencies['Accounts']['NoregistroCNBV_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipodepersona_c','tct_cpld_pregunta_u2_txf_c','tct_cpld_pregunta_u1_ddw_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'tct_cpld_pregunta_u2_txf_c',
+                'label' => 'tct_cpld_pregunta_u2_txf_c_label',
+                'value' => 'and(equal($tipodepersona_c,"Persona Moral"),equal($tct_cpld_pregunta_u1_ddw_c,"Si"))',
+            ),
+        ),
+    ),
+);
+
+$dependencies['Accounts']['ClavePizarra_required'] = array(
+    'hooks' => array("all"),
+    'trigger' => 'true',
+    'triggerFields' => array('tipodepersona_c','tct_cpld_pregunta_u4_txf_c','tct_cpld_pregunta_u3_ddw_c'),
+    'onload' => true,
+    'actions' => array(
+        array(
+            'name' => 'SetRequired',
+            'params' => array(
+                'target' => 'tct_cpld_pregunta_u4_txf_c',
+                'label' => 'tct_cpld_pregunta_u4_txf_c_label',
+                'value' => 'and(equal($tipodepersona_c,"Persona Moral"),equal($tct_cpld_pregunta_u3_ddw_c,"Si"))',
+            ),
+        ),
+    ),
+);
