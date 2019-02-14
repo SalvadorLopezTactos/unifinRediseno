@@ -381,54 +381,62 @@
         var class_name = $input[0].className,
             field_name = $($input).attr('data-field');
 
-        //split the class name in case the field has more than 1 class
-        var class_name_split = [];
-        class_name_split.push($.trim(class_name).split(" "));
+        //Actualizar los valores en el modelo solo cuando dicha ratificación ya ha sido añadida, es decir,
+        //Se hace un aplica un model.set, solo en caso de que la ratificación ya pertenezca al template de edit-condiciones_financieras_incremento_ratificacion
+        if(!class_name.includes('new')){
 
-        var $inputs = this.$('.' + class_name_split[0]),
-            index = $inputs.index($input),
-            newCFinanciera = $input.val(),
-            primaryRemoved;
+            //split the class name in case the field has more than 1 class
+            var class_name_split = [];
+            class_name_split.push($.trim(class_name).split(" "));
 
-        if(class_name_split[0][1] == "checkbox_incremento_Update"){
-            newCFinanciera = $input.prop("checked");
-        }
+            var $inputs = this.$('.' + class_name_split[0]),
+                index = $inputs.index($input),
+                newCFinanciera = $input.val(),
+                primaryRemoved;
 
-        newCFinanciera = $.trim(newCFinanciera);
-        if (newCFinanciera === '') {
-            // remove email if email is empty
-            primaryRemoved = this._removeCondicionFinancieraInModel(index);
-
-            $input
-                .closest('.condiciones_financieras_incremento_ratificacion')
-                .remove();
-
-            if (primaryRemoved) {
-                // on list views we need to set the current value on the input
-                if (this.view && this.view.action === 'list') {
-                    var addresses = this.model.get(this.name) || [];
-                    var primaryAddress = _.filter(addresses, function (address) {
-                        if (address.principal) {
-                            return true;
-                        }
-                    });
-                    if (primaryAddress[0] && primaryAddress[0].email_address) {
-                        app.alert.show('list_delete_email_info', {
-                            level: 'info',
-                            autoClose: true,
-                            messages: app.lang.get('LBL_LIST_REMOVE_EMAIL_INFO')
-                        });
-                        $input.val(primaryAddress[0].email_address);
-                    }
-                }
-                this.$('[data-emailproperty=principal]')
-                    .first()
-                    .addClass('active');
+            if(class_name_split[0][1] == "checkbox_incremento_Update"){
+                newCFinanciera = $input.prop("checked");
             }
+
+            newCFinanciera = $.trim(newCFinanciera);
+            if (newCFinanciera === '') {
+                // remove email if email is empty
+                primaryRemoved = this._removeCondicionFinancieraInModel(index);
+
+                $input
+                    .closest('.condiciones_financieras_incremento_ratificacion')
+                    .remove();
+
+                if (primaryRemoved) {
+                    // on list views we need to set the current value on the input
+                    if (this.view && this.view.action === 'list') {
+                        var addresses = this.model.get(this.name) || [];
+                        var primaryAddress = _.filter(addresses, function (address) {
+                            if (address.principal) {
+                                return true;
+                            }
+                        });
+                        if (primaryAddress[0] && primaryAddress[0].email_address) {
+                            app.alert.show('list_delete_email_info', {
+                                level: 'info',
+                                autoClose: true,
+                                messages: app.lang.get('LBL_LIST_REMOVE_EMAIL_INFO')
+                            });
+                            $input.val(primaryAddress[0].email_address);
+                        }
+                    }
+                    this.$('[data-emailproperty=principal]')
+                        .first()
+                        .addClass('active');
+                }
+            }
+            else {
+                this._updateExistingCondicionFinancieraInModel(index, newCFinanciera, field_name);
+            }
+
         }
-        else {
-            this._updateExistingCondicionFinancieraInModel(index, newCFinanciera, field_name);
-        }
+
+
     },
 
     _updateExistingCondicionFinancieraInModel: function (index, newCFinanciera, field_name) {
