@@ -363,6 +363,7 @@
         this.model.addValidationTask('check_info', _.bind(this.doValidateInfoReq, this));
         //this.model.addValidationTask('tipo_proveedor', _.bind(this.tipoProveedor_check,this));
         //this.model.addValidationTask('check_formato_curp_c', _.bind(this.ValidaFormatoCURP, this));
+        this.model.addValidationTask('camposnumericosPLDFF',_.bind(this.validacantidades, this));
 
         /* F. Javier G. Solar
                 OBS299 Validar que las Direcciones no se repitan 21/11/2018
@@ -2292,6 +2293,29 @@
         }else{
             return true;
         }
+    },
+
+    validacantidades: function (fields, errors, callback){
+        if ($('.campo23dec-ff').val() != "" && $('.campo23dec-ff').val() != undefined &&  $('.campo23dec-ff').val() <= 0 ) {
+                    app.alert.show("Valor Invalido", {
+                        level: "error",
+                        title: "Solo n\u00FAmeros son permitidos en este campo.",
+                        autoClose: true
+                    });
+                errors['campo23dec-ff'] = "El campo Número de pagos no debe tener un valor mayor a 0.";
+                errors['campo23dec-ff'].required = true;
+            }
+        if ($('.campo22int-ff').val() != "" && $('.campo22int-ff').val() != undefined &&  $('.campo22int-ff').val() <= 0 ) {
+            app.alert.show("Valor Invalido", {
+                level: "error",
+                title: "Solo n\u00FAmeros son permitidos en este campo.",
+                autoClose: true
+            });
+            errors['campo22int-ff'] = "El campo Monto total aproximado no debe tener un valor mayor a 0.";
+            errors['campo22int-ff'].required = true;
+        }
+
+            callback(null,fields,errors);
     },
 
 
