@@ -156,32 +156,6 @@
         Función para agregar nuevos elementos al objeto
     */
     addParticipanteFunction: function (options) {
-      var nombre = $('.newCampo1P')[0].value;
-      var apellp = $('.newCampo2P')[0].value;
-      var apellm = $('.newCampo3P')[0].value;
-      var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "tipo_registro_c"];
-      app.api.call("read", app.api.buildURL("Accounts/", null, null, {
-        fields: fields.join(','),
-        max_num: 5,
-        "filter": [
-          {
-            "primernombre_c": nombre,
-            "apellidopaterno_c": apellp,
-            "apellidomaterno_c": apellm,
-            "tipo_registro_c": "Persona",
-          }
-        ]
-        }), null, {
-        success: _.bind(function (data) {
-          if(data.records.length > 0) {
-            app.alert.show("DuplicateCheck", {
-              level: "error",
-              title: "La persona ingresada ya existe.",
-              autoClose: false
-            });
-          }
-          else
-          {
             //Estableciendo el color de borde original en cada campo
             $('.newCampo1P').css('border-color', '');
             $('.newCampo2P').css('border-color', '');
@@ -325,14 +299,41 @@
                     });
                 }
             }
-    
-            if (faltantes == 0) {
-                this.mParticipantes.participantes.push(item);
-                this.render();
-            }          
-          }
-        }, this)
-      });
+            
+            // Valida si existen duplicados
+            var nombre = $('.newCampo1P')[0].value;
+            var apellp = $('.newCampo2P')[0].value;
+            var apellm = $('.newCampo3P')[0].value;
+            var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "tipo_registro_c"];
+            app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+              fields: fields.join(','),
+              max_num: 5,
+              "filter": [
+                {
+                  "primernombre_c": nombre,
+                  "apellidopaterno_c": apellp,
+                  "apellidomaterno_c": apellm,
+                  "tipo_registro_c": "Persona",
+                }
+              ]
+              }), null, {
+              success: _.bind(function (data) {
+                if(data.records.length > 0) {
+                  app.alert.show("DuplicateCheck", {
+                    level: "error",
+                    title: "La persona ingresada ya existe.",
+                    autoClose: false
+                  });
+                }
+                else
+                {
+                  if (faltantes == 0) {
+                      this.mParticipantes.participantes.push(item);
+                      this.render();
+                  }          
+                }
+              }, this)
+            });
     },
 
     // /**
