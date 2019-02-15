@@ -787,7 +787,7 @@
             $('.campo11-ap').hide();
             $('.campo13-ap').hide();
             $('.campo25-ap').hide();
-            //$('.campo26-ap').hide();
+            $('.campo26-ap').hide();
         }
         //Muestra/oculta Propietario real
         if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val')=='2' || $('.campo2ddw-ap').attr('data-id')=='2'){
