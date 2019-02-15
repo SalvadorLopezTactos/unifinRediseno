@@ -480,19 +480,13 @@
           app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId), null, {
               success: _.bind(function (cuenta) {
                               var tipopersona=cuenta.tipodepersona_c;
-                                  $faltaPld = false;
+                                  faltaPld = "";
 
-                                  if (cuenta.ctpldnoseriefiel_c == "" ){
-                                      faltantes= faltantes + '<b>-No serie FIEL<br>';
-                                  }
                                   if (cuenta.tct_cpld_pregunta_u1_ddw_c == "" && tipopersona == 'Persona Moral'){
                                       faltantes= faltantes + '<b>-¿La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?<br>';
                                   }
                                   if (cuenta.tct_cpld_pregunta_u3_ddw_c == "" && tipopersona == 'Persona Moral' ){
                                       faltantes= faltantes + '<b>-¿Cotiza en Bolsa?<br>';
-                                  }
-                                  if(faltantes!= ""){
-                                      faltantes = ' y los siguientes datos generales:<br>'+ faltantes;
                                   }
                       app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId +'/link/accounts_tct_pld_1?filter[0][description][$equals]='+usuarioProducto), null, {
                           success: _.bind(function (data) {
@@ -502,53 +496,53 @@
                                   if (usuarioProducto == "AP") {
                                       if (tipopersona != 'Persona Moral') {
                                           //PF - PFAE
-                                          $faltaPld = (data.records[0].tct_pld_campo2_ddw == "" || data.records[0].tct_pld_campo4_ddw == "" ||  data.records[0].tct_pld_campo6_ddw == ""
-                                              || data.records[0].tct_pld_campo16_ddw == "" ) ? true : false;
+                                          faltaPld = (data.records[0].tct_pld_campo2_ddw == "" || data.records[0].tct_pld_campo4_ddw == "" ||  data.records[0].tct_pld_campo6_ddw == ""
+                                              || data.records[0].tct_pld_campo16_ddw == "" ) ? " <b>- Producto "+ producto + "</b><br>"  : "";
                                       } else {
                                           //PM
-                                          $faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                             ||  data.records[0].tct_pld_campo16_ddw == "" ) ? true : false;
+                                          faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
+                                             ||  data.records[0].tct_pld_campo16_ddw == "" ) ? " <b>- Producto "+ producto + "</b><br>"  : "";
                                       }
                                   }
                                   //Realizar validación de campos requeridos
                                   if (usuarioProducto == "FF") {
                                       if (tipopersona != 'Persona Moral') {
                                           //PF - PFAE
-                                          $faltaPld = (data.records[0].tct_pld_campo2_ddw == ""  || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo24_ddw == "" || data.records[0].tct_pld_campo21_ddw == "") ? true : false;
+                                          faltaPld = (data.records[0].tct_pld_campo2_ddw == ""  || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
+                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo24_ddw == "" || data.records[0].tct_pld_campo21_ddw == "") ? " <b>- Producto "+ producto + "</b><br>"  : "";
                                       } else {
                                           //PM
-                                          $faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo24_ddw == "" || data.records[0].tct_pld_campo21_ddw == "") ? true : false;
+                                          faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
+                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo24_ddw == "" || data.records[0].tct_pld_campo21_ddw == "") ? " <b>- Producto "+ producto + "</b><br>"  : "";
                                       }
                                   }
                                   if (usuarioProducto == "CA") {
                                       if (tipopersona != 'Persona Moral') {
                                           //PF - PFAE
-                                          $faltaPld = (data.records[0].tct_pld_campo2_ddw == "" || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo16_ddw == "" ) ? true : false;
+                                          faltaPld = (data.records[0].tct_pld_campo2_ddw == "" || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
+                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo16_ddw == "" ) ? " <b>- Producto "+ producto + "</b><br>"  : "";
                                       } else {
                                           //PM
-                                          $faltaPld = (data.records[0].tct_pld_campo4_ddw == ""  || data.records[0].tct_pld_campo6_ddw == ""
-                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo16_ddw == "" ) ? true : false;
+                                          faltaPld = (data.records[0].tct_pld_campo4_ddw == ""  || data.records[0].tct_pld_campo6_ddw == ""
+                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo16_ddw == "" ) ? " <b>- Producto "+ producto + "</b><br>"  : "";
                                       }
                                   }
                           }else{
                               errors['accounts_pld'] = errors['accounts_pld'] || {};
                               errors['accounts_pld'].required = true;
-                              self.mensajes("valida_pld", "Hace falta completar información en la pestaña <b>PLD</b> para el producto <b>" + producto + "</b> de la <b>Cuenta</b>" + faltantes, "error");
+                              self.mensajes("valida_pld", "Hace falta completar la siguiente información en la pestaña <b>PLD</b> de la <b>Cuenta:</b><br>" +faltaPld + faltantes, "error");
                               callback(null, fields, errors);
                           }
                       } else {
                           errors['accounts_pld'] = errors['accounts_pld'] || {};
                           errors['accounts_pld'].required = true;
-                          self.mensajes("valida_pld", "Hace falta completar información en la pestaña <b>PLD</b> para el producto <b>" + producto + "</b> de la <b>Cuenta</b>" + faltantes, "error");
+                          self.mensajes("valida_pld", "Hace falta completar la siguiente información en la pestaña <b>PLD</b> de la <b>Cuenta:</b><br>" +faltaPld + faltantes, "error");
                           callback(null, fields, errors);
                       }
-                  if ($faltaPld) {
+                  if (faltaPld || faltantes!="") {
                       errors['accounts_pld'] = errors['accounts_pld'] || {};
                       errors['accounts_pld'].required = true;
-                      self.mensajes("valida_pld", "Hace falta completar información en la pestaña <b>PLD</b> para el producto <b>" + producto + "</b> de la <b>Cuenta</b>" + faltantes, "error");
+                      self.mensajes("valida_pld", "Hace falta completar la siguiente información en la pestaña <b>PLD</b> de la <b>Cuenta:</b><br>" +faltaPld + faltantes, "error");
                   }
                                   callback(null, fields, errors);
                               }, self),
