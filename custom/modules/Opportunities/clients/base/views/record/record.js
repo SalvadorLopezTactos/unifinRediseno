@@ -482,9 +482,6 @@
                               var tipopersona=cuenta.tipodepersona_c;
                                   faltaPld = "";
 
-                                  if (cuenta.ctpldnoseriefiel_c == "" ){
-                                      faltantes= faltantes + '<b>-No serie FIEL<br>';
-                                  }
                                   if (cuenta.tct_cpld_pregunta_u1_ddw_c == "" && tipopersona == 'Persona Moral'){
                                       faltantes= faltantes + '<b>-¿La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?<br>';
                                   }
