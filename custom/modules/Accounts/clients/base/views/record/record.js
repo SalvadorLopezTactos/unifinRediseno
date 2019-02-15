@@ -189,6 +189,8 @@
         this.events['keydown [name=tct_cpld_pregunta_u2_txf_c]'] = 'keyDownNewExtension';
         this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'keyDownNewExtension';
         this.events['keydown [name=ctpldnoseriefiel_c]'] = 'checkInVentas';
+        this.events['keydown [name=tct_cpld_pregunta_u2_txf_c]'] = 'checkInVentas';
+        this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'checkInVentas';
 
 
 
