@@ -138,7 +138,7 @@ SQL;
 		}
 	}
 
-    //Generar una copia del meeting para los acompa�antes de la cita en Brujula
+    //Generar una copia del meeting para los acompañantes de la cita en Brujula
     function MeetingAcompaniante($bean = null, $event = null, $args = null)
     {
         global $db;
@@ -175,10 +175,11 @@ SQL;
       					}
       				}
       				$acompanianteMeet->parent_meeting_c = $bean->id;
-					    $acompanianteMeet->created_by = $bean->created_by;
-				    	$acompanianteMeet->modified_user_id = $bean->modified_user_id;
+      				$acompanianteMeet->created_by = $bean->created_by;
+				    $acompanianteMeet->modified_user_id = $bean->modified_user_id;
       				$acompanianteMeet->assigned_user_id = $row['user_id'];
       				$acompanianteMeet->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
+      				$acompanianteMeet->reunion_objetivos = $bean->reunion_objetivos;
       				$acompanianteMeet->save();
 /*      				//Agregar relaciones de invitados
       				$query1 = $db->query($query);
