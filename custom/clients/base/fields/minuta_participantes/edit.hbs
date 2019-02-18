@@ -31,10 +31,18 @@
                   {{nombres}} {{apaterno}} {{amaterno}}
                 </td>
                 <td class="campo2SelectP">
-                  {{correo}}
+                    {{#if unifin}}
+                      {{correo}}                      
+                    {{else}}
+					  <input class="campo2P span3" type="text" value="{{correo}}" placeholder="Correo" data-field="tct_correo_c">
+                    {{/if}}
                 </td>
                 <td class="campo3SelectP">
-                  {{telefono}}
+                    {{#if unifin}}
+                      {{telefono}}                      
+                    {{else}}
+					  <input class="campo3P span3" type="text" value="{{telefono}}" placeholder="Teléfono" maxlength="13" size="13">
+                    {{/if}}
                 </td>
                 <td class="CheckActionP" style="text-align:center" >
                     <button type="button" {{#if activo}}class="updateAsistencia" {{/if}} style="border-width:0;background-color: rgba(255,255,255,0.15);">
