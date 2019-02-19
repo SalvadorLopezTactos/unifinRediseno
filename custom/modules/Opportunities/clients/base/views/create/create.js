@@ -10,7 +10,6 @@
         'keydown [name=amount]': 'checkmoney',
         'keydown [name=ca_pago_mensual_c]': 'checkmoney',
         'keydown [name=ca_importe_enganche_c ]': 'checkmoney',
-
     },
 
     tipoDePersona: null,
@@ -1482,13 +1481,20 @@
     valida_requeridos: function(fields, errors, callback) {
         var campos = "";
         _.each(errors, function(value, key) {
-            _.each(this.model.fields, function(field) {
-                if(_.isEqual(field.name,key)) {
-                    if(field.vname) {
-                        campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '</b><br>';
-                    }
-          		  }
-       	    }, this);
+            if(key == 'amount' && this.model.get('amount') < 0)
+            {
+              delete key;
+            }
+            else
+            {
+              _.each(this.model.fields, function(field) {
+                  if(_.isEqual(field.name,key)) {
+                      if(field.vname) {
+                          campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '</b><br>';
+                      }
+            		  }
+         	    }, this);
+            }
         }, this);
         if(campos) {
             app.alert.show("Campos Requeridos", {
