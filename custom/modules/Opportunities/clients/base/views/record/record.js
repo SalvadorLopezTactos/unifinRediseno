@@ -760,7 +760,6 @@
             }
 
             if (parseFloat(this.model.get('amount')) <= 0 && this.model.get('tipo_operacion_c') == '1') {
-                alert("Entro");
                 errors['amount'] = errors['amount'] || {};
                 errors['amount'].required = true;
             }
