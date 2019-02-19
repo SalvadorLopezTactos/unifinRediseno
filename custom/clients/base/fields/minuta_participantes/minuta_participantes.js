@@ -93,14 +93,13 @@
                 placeholder: "Buscar participante...",
                 minimumInputLength: 1,
                 allowClear: true,
-                ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                ajax: {
                     url: window.location.origin + window.location.pathname+"rest/v11_1/searchaccount",
                     dataType: 'json',
                     data: function (term, page) {
                         return {q:term};
                     },
-                    results: function (data, page) { // parse the results into the format expected by Select2.
-                        // since we are using custom formatting functions we do not need to alter remote JSON data
+                    results: function (data, page) {
                         return {results: data.records};
                     }
                 },
