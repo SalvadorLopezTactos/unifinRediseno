@@ -760,6 +760,7 @@
             }
 
             if (parseFloat(this.model.get('amount')) <= 0 && this.model.get('tipo_operacion_c') == '1') {
+                alert("Entro");
                 errors['amount'] = errors['amount'] || {};
                 errors['amount'].required = true;
             }
@@ -1690,15 +1691,27 @@ console.log(name);
 
     valida_requeridos: function(fields, errors, callback) {
         var campos = "";
+        var monto = 0;
         _.each(errors, function(value, key) {
-            _.each(this.model.fields, function(field) {
-                if(_.isEqual(field.name,key)) {
-                    if(field.vname) {
-                        campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '</b><br>';
-                    }
-          		  }
-       	    }, this);
+            if(key == 'amount' && this.model.get('amount') < 0)
+            {
+              monto = 1;
+            }
+            else
+            {
+              _.each(this.model.fields, function(field) {
+                  if(_.isEqual(field.name,key)) {
+                      if(field.vname) {
+                          campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '</b><br>';
+                      }
+            		  }
+         	    }, this);
+            }
         }, this);
+        if(monto)
+        {
+          delete errors.amount;
+        }
         if(campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
