@@ -85,6 +85,30 @@
     _render: function () {
         this._super("_render");
         //self.mParticipantes = self.model.set('minuta_participantes',mParticipantes);
+
+        var self = this;
+        //Función related
+        $('.bigdrop').each(function( index, value ) {
+            $('#'+this.id).select2({
+                placeholder: "Buscar participante...",
+                minimumInputLength: 1,
+                allowClear: true,
+                ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                    url: window.location.origin + window.location.pathname+"rest/v11_1/searchaccount",
+                    dataType: 'json',
+                    data: function (term, page) {
+                        return {q:term};
+                    },
+                    results: function (data, page) { // parse the results into the format expected by Select2.
+                        // since we are using custom formatting functions we do not need to alter remote JSON data
+                        return {results: data.records};
+                    }
+                },
+                formatResult: function(m) { return m.text; },
+                formatSelection: function(m) { return m.text; }
+            })
+        });
+
         $('.updateAsistencia').click(function(evt) {
           var row = $(this).closest("tr");    // Find the row
           if (selfData.mParticipantes.participantes[row.index()].asistencia == 1) {
