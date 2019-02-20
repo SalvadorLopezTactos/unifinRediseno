@@ -10,7 +10,7 @@
    // campo7_list: null,
    // campo9_list: null,
     campo11_list: null,
-    campo25_list: null,
+   // campo25_list: null,
     campo21_list: null,
     campo24_list: null,
     campo18_list: null,
@@ -101,7 +101,7 @@
             }
         dataPLD['arrendamientoPuro']['campo16_label'] =arrTemp.join();
 
-        dataPLD['arrendamientoPuro']['campo25_label'] = pld.campo25_list[dataPLD['arrendamientoPuro']['campo25']];
+        //dataPLD['arrendamientoPuro']['campo25_label'] = pld.campo25_list[dataPLD['arrendamientoPuro']['campo25']];
         dataPLD['arrendamientoPuro']['campo11_label'] = pld.campo11_list[dataPLD['arrendamientoPuro']['campo11']];
 
         dataPLD['factorajeFinanciero']['campo2_label'] = pld.campo2_list[dataPLD['factorajeFinanciero']['campo2']];
@@ -153,7 +153,7 @@
        // pld.campo7_list = app.lang.getAppListStrings('tct_cpld_pregunta_u1_ddw_list'); campo SOFOM
        // pld.campo9_list = app.lang.getAppListStrings('tct_cpld_pregunta_u3_ddw_list'); cotiza en bolsa
         pld.campo11_list = app.lang.getAppListStrings('tct_cpld_pregunta9_desp_list');
-        pld.campo25_list = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
+        //pld.campo25_list = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
         pld.campo21_list = app.lang.getAppListStrings('tct_pldcampo1_ff_ddw_list');
         pld.campo24_list = app.lang.getAppListStrings('tct_plddestinorecursos_ff_ddw_list');
         pld.campo18_list = app.lang.getAppListStrings('tct_instmonetario_csddw_list');
@@ -469,14 +469,14 @@
         });
         this.lista_campo11 = lista_campo11;
 
-        //Carga lista 11, cuando la cuenta es cliente: Los recursos con los que va a celebrar su operación están destinados a
+       /* //Carga lista 11, cuando la cuenta es cliente: Los recursos con los que va a celebrar su operación están destinados a
         var lista11ID = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
         var lista_campo25 = '';
         Object.keys(lista11ID).forEach(function (id) {
             //console.log(id, lista11ID[id]);
             lista_campo25 += '<option value="' + id + '">' + lista11ID[id] + '</option>'
         });
-        this.lista_campo25 = lista_campo25;
+        this.lista_campo25 = lista_campo25;*/
 
         //listas FF
         //Carga de lista 5 ¿Con qué frecuencia o periodo realizará pagos a Unifin?
@@ -597,13 +597,13 @@
         }
     }, */
 
-    preguntamoral: function (){
+    /*preguntamoral: function (){
         if ($('.campo11ddw-ap').select2('val') == "No") {
             $('.campo26-ap').show();
         } else {
             $('.campo26-ap').hide();
         }
-    },
+    },*/
 
     //Validaciones para mostrar campos en Factoraje Financiero
     //Eventos Change (mostrar campos)
@@ -715,7 +715,7 @@
         $('.campo6-ap').show();
         $('.campo16-ap').show();
         $('.campo14-ap').show();
-        $('.campo11-ap').show();
+        //$('.campo11-ap').show();
         //Campos Ocultos Arrendamiento Puro (Desplegables)
         //$('.campo3-ap').show();
         $('.campo5-ap').show();
@@ -729,7 +729,7 @@
         $('.campo10-ap').show();
 
         //$('.campo25-ap').show(); //Cuenta Cliente
-        $('.campo26-ap').show(); //Especifique cuenta Cliente
+        //$('.campo26-ap').show(); //Especifique cuenta Cliente
         //Campos Factoraje Financiero
         $('.campo3-ff').show();
         $('.campo5-ff').show();
@@ -784,10 +784,10 @@
             $('.campo8-ap').hide();
             $('.campo9-ap').hide();
             $('.campo10-ap').hide();
-            $('.campo11-ap').hide();
+            //$('.campo11-ap').hide();
             $('.campo13-ap').hide();
-            $('.campo25-ap').hide();
-            $('.campo26-ap').hide();
+            //$('.campo25-ap').hide();
+            //$('.campo26-ap').hide();
         }
         //Muestra/oculta Propietario real
         if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val')=='2' || $('.campo2ddw-ap').attr('data-id')=='2'){
@@ -895,13 +895,13 @@
         }
     },
 
-    cuentacliente: function (){
+    /*cuentacliente: function (){
         if(this.model.get('tipo_registro_c')=='Cliente'){
             $('.campo25-ap').show();
         }else{
             $('.campo25-ap').hide();
         }
-    },
+    },*/
 
     keyDownNewExtension: function (evt) {
         if (!evt) return;
