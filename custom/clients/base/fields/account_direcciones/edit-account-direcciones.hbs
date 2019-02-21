@@ -47,8 +47,11 @@
                 <div class="record-label" >
                     Tipo
                 </div>
-                <select class="existingTipodedireccion" data-field="tipodedireccion" placeholder="tipo" style="font-size: 15px;font-weight: 500;">
+                <select class="existingTipodedireccion hide" data-field="tipodedireccion" placeholder="tipo" style="font-size: 15px;font-weight: 500;">
                     {{{tipodedireccion}}}
+                </select>
+                <select id="existing_multi_tipo" class="existing_multi_tipo_class select2" multiple="multiple" size="3">
+                    {{{tipodedireccion_multi}}}
                 </select>
             </td>
             <td valign="top" style="display:block;">

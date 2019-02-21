@@ -25,6 +25,9 @@
         'change .existingEstado': 'updateExistingDireccionDropdown',
         //'change .existingIndicador': 'updateIndicador',
         //'change .newIndicador': 'updateIndicador',
+
+        'change .existingTipodedireccion': 'updateTipoDireccionChange',
+
         'change .existingIndicador': 'updateIndicadores',
         'change .newIndicador': 'updateIndicadores',
         'change .existingMunicipio': 'updateExistingDireccionDropdown',
@@ -41,6 +44,10 @@
         'change .newColonia': 'updateExistingDireccionDropdown',
         'change .existingColonia': 'updateExistingDireccionDropdown',
         'change #multi1': 'updateValueIndicadorMultiselect',
+        //Nuevo evento para actualizar valores de select "Tipo de Direccion" dependiendo el valor del multiselect
+        'change #multi_tipo': 'updateValueTipoMultiselect',
+        'change select.existing_multi_tipo_class': 'updateValueTipoDirExisting',
+
         'change select.existingMultiClass': 'updateValueIndicadorExisting',
         //Declarando eventos para redisño de direcciones
         //Author: Salvador Lopez <salvador.lopez@tactos.com.mx>
@@ -48,7 +55,6 @@
         'change #existingPostalInput': 'getInfoAboutCPExisting',
 
         //Eventos change para actualizar valores de direcciones existentes
-
         'change #existingPostalHidden': 'updateExistingDireccionDropdown',
         'change .existingPaisTemp': 'updateExistingDireccionDropdown',
         'change .existingEstadoTemp': 'updateExistingDireccionDropdown',
@@ -103,6 +109,15 @@
 
         }
         this.def.dir_tipo_list_html = dir_tipo_list_html;
+
+        //Tipo multiselect
+        var dir_tipo_unique_list = app.lang.getAppListStrings('dir_tipo_unique_list');
+        var tipo_multi_options = '<option value=""></option>'
+        for (dir_id in dir_tipo_unique_list) {
+            tipo_multi_options += '<option value="' + dir_id + '" >' + dir_tipo_unique_list[dir_id] + '</option>';
+        }
+        this.def.tipo_direccion_multi_html = tipo_multi_options;
+        //////
 
         //build the country list
         var country_list = app.metadata.getCountries();
@@ -263,8 +278,11 @@
 
 this.fiscalCounter = 0;
 
+this.counterTipoVacio=0;
+
 this.counterEmptyFields=0;
 
+this.model.addValidationTask('check_empty_tipo', _.bind(this._doValidateEmptyTipo, this));
 this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionFiscal, this));
 this.model.addValidationTask('check_multiple_fiscalCorrespondencia', _.bind(this._doValidateDireccionFiscalCorrespondencia, this));
         //Ajuste Dirección Nacional
@@ -288,6 +306,19 @@ this.model.addValidationTask('check_multiple_fiscalCorrespondencia', _.bind(this
 
     },
 
+     /**
+      * Establece campo original de Tipo de Dirección depende el valor del campo multiselect
+      * @param  {object} evt, Objeto que contiene información del evento
+      */
+     updateValueTipoMultiselect:function(evt){
+         var valores=evt.val;
+         var id= this._getTipoDireccion(null,valores)
+         //Estableciendo valores para solo 1 valor seleccionado
+         $('.newTipodedireccion').val(id);
+         $('.newTipodedireccion').trigger("change");
+
+     },
+
     /**
      * Establece campo original de Indicador en direcciones ya agregadas dependiendo el valor del campo multiselect
      * @param  {object} evt, Objeto que contiene información del evento
@@ -299,6 +330,53 @@ this.model.addValidationTask('check_multiple_fiscalCorrespondencia', _.bind(this
         $(evt.target).parent().parent().find('.existingIndicador').trigger('change');
 
     },
+
+     /**
+      * Establece campo original de Tipo de dirección ya agregadas dependiendo el valor del campo multiselect
+      * @param  {object} evt, Objeto que contiene información del evento
+      */
+     updateValueTipoDirExisting:function (evt) {
+         var valorEx=evt.val;
+         var id = this._getTipoDireccion(null,valorEx)
+         evt.target.parentElement.children[1].value=id;
+         $(evt.target).parent().parent().find('.existingTipodedireccion').trigger('change');
+
+     },
+
+     /*
+     * Función lanzada automáticamente en evento change de campo "Tipo de dirección" oculto para actualizar el modelo
+     * */
+     updateTipoDireccionChange:function (evt) {
+         var $input = this.$(evt.currentTarget);
+         var class_name = $input[0].className,
+             field_name = $($input).attr('data-field');
+         //Obteniendo solo la primera clase (excluyendo clase hide)
+         var clase=class_name.split(" ")[0];
+
+         var $inputs=this.$('.'+clase),
+             index = $inputs.index($input),
+             dropdown_value = $input.val(),
+             primaryRemoved;
+
+         if(dropdown_value=="" || dropdown_value == null){
+             this.counterTipoVacio++;
+             var alertOptions = {title: "Tipo de direcci\u00F3n requerido", level: "error"};
+             app.alert.show('validation', alertOptions);
+             $input.next().find('ul').css('border-color', 'red');
+
+         }else{
+
+             if(clase == 'existingTipodedireccion'){
+                 this.counterTipoVacio=0;
+                 $input.next().find('ul').css('border-color', '');
+                 this._updateExistingDireccionInModel(index, dropdown_value, 'tipo');
+             }
+
+         }
+
+
+     },
+
     updateIndicadores:function (evt) {
         this.updateIndicador(evt);
         this.updateIndicador2(evt);
@@ -435,6 +513,66 @@ this.model.addValidationTask('check_multiple_fiscalCorrespondencia', _.bind(this
         }
         /* END CUSTOMIZATION */
     },
+
+     _validateTipoDireccion: function (fields, errors, callback){
+
+         if(this.counterEmptyFields==0){
+
+             if(this.model.get("tipo_registro_c") == "Cliente" || this.model.get("subtipo_cuenta_c") == "Integracion de Expediente" || this.model.get("subtipo_cuenta_c") == "Credito")
+             {
+                 var correspondencia = false;
+                 var fiscal = false;
+                 var valuesI = [];
+                 var self = this;
+                 _.each(this.model.get("account_direcciones"), function(direccion, key) {
+
+                     //Recupera valores por indicador
+                     valuesI = self._getIndicador(direccion.indicador,null);
+                     //Valida Fiscal
+                     if(valuesI.includes("2")){
+                         fiscal = true;
+                     }
+                     //Valida Correspondencia
+                     if(valuesI.includes("1")){
+                         correspondencia = true;
+                     }
+
+                     /*if(direccion.indicador == "1"){
+                      correspondencia = true;
+                      }
+                      if(direccion.indicador == "5"){
+                      correspondencia = true;
+                      }
+                      if(direccion.indicador == "2"){
+                      fiscal = true;
+                      }
+                      if(direccion.indicador == "6"){
+                      fiscal = true;
+                      }
+                      if(direccion.indicador == "3"){
+                      fiscal = true;
+                      correspondencia = true;
+                      }
+                      if(direccion.indicador == "7"){
+                      fiscal = true;
+                      correspondencia = true;
+                      }*/
+
+                 });
+
+                 if(fiscal == false || correspondencia == false){
+                     var alertOptions = {title: "Se requiere de al menos una direccion fiscal y una de correspondencia.", level: "error"};
+                     app.alert.show('validation', alertOptions);
+                     errors['account_direcciones'] = errors['account_direcciones'] || {};
+                     errors['account_direcciones'].required = true;
+                 }
+             }
+
+         }
+
+         callback(null, fields, errors);
+     },
+
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/9/2015 Description: Validacion, No debe de haber mas de una direccion fiscal */
 
     _doValidateDireccionNacional: function (fields, errors, callback) {
@@ -452,6 +590,28 @@ this.model.addValidationTask('check_multiple_fiscalCorrespondencia', _.bind(this
 
         callback(null, fields, errors);
     },
+
+     _doValidateEmptyTipo: function (fields, errors, callback) {
+         if (this.counterTipoVacio > 0) {
+
+             var alertOptions = {title: "Tipo de direcci\u00F3n requerido", level: "error"};
+             app.alert.show('validation_tipo', alertOptions);
+             $('select.existingTipodedireccion').each(function(){
+                 if($(this).val()==null || $(this).val()==""){
+                     $(this).next().find('ul').css('border-color', 'red');
+                 }else{
+                     $(this).next().find('ul').css('border-color', '');
+                 }
+             });
+
+            //Se establece un atributo (no existente) en array de errors, para detener la ejecución de guardado y no pintar ningún campo del modelo
+            // ya que estos se pintan con jquery
+             errors['account_direcciones_'] = errors['account_direcciones_'] || {};
+             errors['account_direcciones_'].required = true;
+         }
+
+         callback(null, fields, errors);
+     },
 
     _doValidateDireccionFiscal: function (fields, errors, callback) {
         if (this.fiscalCounter > 1) {
@@ -1189,6 +1349,14 @@ populateColoniasByMunicipio:function(evt){
             containerCssClass: 'select2-choices-pills-close'
         });
 
+        //Formato multiselect para campo tipo
+        $('#multi_tipo').select2({
+            width:'100%',
+            //minimumResultsForSearch:7,
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
         var data = [
         { id: 0, text: 'enhancement' },
         { id: 1, text: 'bug' },
@@ -1211,6 +1379,24 @@ populateColoniasByMunicipio:function(evt){
             $('select.existingIndicador').hide();
             $('.rowPem').hide();
             $('.rowCPcc').hide();
+
+            //Se establece formato multiselect a cada campo select con la clase "existingMultiClass"
+            $('select.existing_multi_tipo_class').each(function(){
+                $(this).select2({
+                    width:'100%',
+                    closeOnSelect: false,
+                    containerCssClass: 'select2-choices-pills-close'
+                });
+            });
+
+            //Obteniendo valores de Tipo de direccion multiselect
+            self=this;
+            //Se establece valor de multiselect dependiendo el valor de select que se encuentra en la misma fila
+            $("select.existingTipodedireccion").each(function(i, obj) {
+                var valuesI=self._getTipoDireccion($(this).val(),null)
+                $('select.existing_multi_tipo_class').eq(i).select2('val',valuesI);
+
+            });
 
 
             //Se establece formato multiselect a cada campo select con la clase "existingMultiClass"
@@ -1319,6 +1505,63 @@ populateColoniasByMunicipio:function(evt){
         return result;
     },
 
+     _getTipoDireccion: function(idSelected, valuesSelected) {
+
+         //variable con resultado
+         var result = null;
+
+         //Arma objeto de mapeo
+         var tipo_dir_map_list = app.lang.getAppListStrings('tipo_dir_map_list');
+
+         var element = {};
+         var object = [];
+         var values = [];
+
+         for(var key in tipo_dir_map_list) {
+             var element = {};
+             element.id = key;
+             values = tipo_dir_map_list[key].split(",");
+             element.values = values;
+             object.push(element);
+         }
+
+         //Recupera arreglo de valores por id
+         if(idSelected){
+             for(var i=0; i<object.length; i++) {
+                 if ((object[i].id) == idSelected) {
+                     result = object[i].values;
+                 }
+             }
+             console.log(result);
+         }
+
+         //Recupera id por valores
+         if(valuesSelected){
+             result = [];
+             for(var i=0; i<object.length; i++) {
+                 if (object[i].values.length == valuesSelected.length) {
+                     //Ordena arreglos y compara
+                     valuesSelected.sort();
+                     object[i].values.sort();
+                     var tempVal = true;
+                     for(var j=0; j<valuesSelected.length; j++) {
+                         if(valuesSelected[j] != object[i].values[j]){
+                             tempVal = false;
+                         }
+                     }
+                     if( tempVal == true){
+                         result[0] = object[i].id;
+                     }
+
+                 }
+             }
+
+             console.log(result);
+         }
+
+         return result;
+     },
+
 
     /**
      * Get HTML for direccion input field.
@@ -1334,6 +1577,8 @@ populateColoniasByMunicipio:function(evt){
         //get mapping arrays and keys
         var dir_tipo_list = app.lang.getAppListStrings('tipodedirecion_list');
         var dir_tipo_keys = app.lang.getAppListKeys('tipodedirecion_list');
+        var dir_tipo_unique_list = app.lang.getAppListStrings('dir_tipo_unique_list');
+
         var dir_indicador_list = app.lang.getAppListStrings('dir_Indicador_list');
         var dir_indicador_unique_list = app.lang.getAppListStrings('dir_indicador_unique_list');
 
@@ -1343,10 +1588,19 @@ populateColoniasByMunicipio:function(evt){
         var city_list = app.metadata.getCities();
         var postal_list = app.metadata.getPostalCodes();
         var colonia_list = app.metadata.getColonias();
-        var dir_tipo_list_html = '',
-        tel_estatus_list_html = '',
+        var dir_tipo_list_html = '';
+        tel_estatus_list_html = '';
+        var tipo_direccion_list = '';
         pais_list_html = '<option value=""></option>';
         //dynamicly populate dropdown options based on language values
+
+        //Obteniendo valores recibidos del template principal
+        var valores_get=direccion.indicador_multi;
+        //indicador multiseelct
+        var tipodedireccion_multi = '<option value=""></option>';
+        for (dir_id in dir_tipo_unique_list) {
+            tipodedireccion_multi += '<option value="' + dir_id + '" >' + dir_tipo_unique_list[dir_id] + '</option>';
+        }
 
         var postal_htmlTemp=direccion.postal_code_label;
         for (dir_tipo_key in dir_tipo_list) {
@@ -1530,6 +1784,7 @@ populateColoniasByMunicipio:function(evt){
             index: index === -1 ? direcciones.length - 1 : index,
             id_direccion: direccion.id,
             tipodedireccion: dir_tipo_list_html,
+            tipodedireccion_multi: tipodedireccion_multi,
             pais: pais_list_html,
             paises_list: paises_list_html,
             estado_html: estado_html,
@@ -1715,6 +1970,15 @@ populateColoniasByMunicipio:function(evt){
             $('.newTipodedireccion').css('border-color', '');
         }
 
+        //Valida tipo de direccion Multiselect
+        if ($('#multi_tipo').val() == null) {
+            errorMsg = 'Tipo de direccion requerido';
+            dirError = true; dirErrorCounter++;
+            $('#s2id_multi_tipo ul').css('border-color', 'red');
+        } else {
+            $('#s2id_multi_tipo ul').css('border-color', '');
+        }
+
         //Valida indicador
         if ($('#multi1').val() == null) {
             errorMsg = 'Indicador de direcci\u00F3n requerido';
@@ -1895,6 +2159,7 @@ populateColoniasByMunicipio:function(evt){
             // console.log($('.newPostal').val());
             direccionFieldHtml = this._buildDireccionFieldHtml({
                 tipodedireccion: $('.newTipodedireccion').val(),
+                tipodedireccion_multi:$("#multi_tipo").val(),
                 tipo_label: dir_tipo_list[$('.newTipodedireccion').val()],
 
                 //pais: $('.newPaisDir').val(),
@@ -1961,6 +2226,25 @@ populateColoniasByMunicipio:function(evt){
             $('select.existingIndicador').hide();
             $('.rowPem').hide();
             $('.rowCPcc').hide();
+
+            //Establece formato multiselect a campo de Tipo de Dirección
+            $('select.existing_multi_tipo_class').each(function(){
+                $(this).select2({
+                    width:'100%',
+                    closeOnSelect: false,
+                    containerCssClass: 'select2-choices-pills-close'
+                });
+            });
+
+            //Obteniendo valores de Tipo de Dirección
+            //Establece valores a campo multiselect dependiendo el valor del campo select original
+            self=this;
+            $("select.existingTipodedireccion").each(function(i, obj) {
+                var valuesI=self._getTipoDireccion($(this).val(),null);
+                $('select.existing_multi_tipo_class').eq(i).select2('val',valuesI);
+
+            });
+
 
             //Establece formato multiselect a campo select que contenga clase "existingMultiClass"
             $('select.existingMultiClass').each(function(){
@@ -2324,6 +2608,10 @@ populateColoniasByMunicipio:function(evt){
      _updateExistingDireccionInModel: function (index, newDireccion, field_name) {
         var existingDirecciones = app.utils.deepCopy(this.model.get('account_direcciones'));
 
+        if(field_name=='tipo'){
+            field_name='tipodedireccion';
+        }
+
         if(field_name=='postal_temp'){
             field_name='codigopostal';
         }
@@ -2358,6 +2646,11 @@ populateColoniasByMunicipio:function(evt){
         console.log(existingDirecciones[index][field_name]);
 
         existingDirecciones[index][field_name] = newDireccion;
+
+        if(field_name == 'tipodedireccion'){
+            existingDirecciones[index][field_name] = newDireccion;
+        }
+
         if(field_name == 'colonia'){
             existingDirecciones[index]['dire_direccion_dire_coloniadire_colonia_ida'] = newDireccion;
             //  existingDirecciones[index]['colonia'] = '';
@@ -2489,6 +2782,9 @@ populateColoniasByMunicipio:function(evt){
         //limpiando campo multiSelect
         $("#multi1").select2('val',[]);
         $("#multi1").trigger('change');
+        //Limpiando campo multiselect de tipo de dirección
+        $("#multi_tipo").select2('val',[]);
+        $("#multi_tipo").trigger('change');
         $('[data-type="account_direcciones"]').removeClass('error');
         $('.direcciondashlet').css('border-color', '');
     },
