@@ -303,10 +303,10 @@
 
         }); */
 
-        /*$('.campo11ddw-ap').change(function(evt)  {
+        $('.campo11ddw-ap').change(function(evt)  {
             pld.preguntamoral();
 
-        });*/
+        });
 
 
 
@@ -365,7 +365,7 @@
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
-
+        
     },
 
     _onSelect2Open:function(e){
@@ -469,7 +469,7 @@
         });
         this.lista_campo11 = lista_campo11;
 
-       //Carga lista 11, cuando la cuenta es cliente: Los recursos con los que va a celebrar su operación están destinados a
+        //Carga lista 11, cuando la cuenta es cliente: Los recursos con los que va a celebrar su operación están destinados a
         var lista11ID = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
         var lista_campo25 = '';
         Object.keys(lista11ID).forEach(function (id) {
@@ -597,13 +597,13 @@
         }
     }, */
 
-    /*preguntamoral: function (){
+    preguntamoral: function (){
         if ($('.campo11ddw-ap').select2('val') == "No") {
             $('.campo26-ap').show();
         } else {
             $('.campo26-ap').hide();
         }
-    },*/
+    },
 
     //Validaciones para mostrar campos en Factoraje Financiero
     //Eventos Change (mostrar campos)
@@ -715,7 +715,7 @@
         $('.campo6-ap').show();
         $('.campo16-ap').show();
         $('.campo14-ap').show();
-        //$('.campo11-ap').show();
+        $('.campo11-ap').show();
         //Campos Ocultos Arrendamiento Puro (Desplegables)
         //$('.campo3-ap').show();
         $('.campo5-ap').show();
@@ -729,7 +729,7 @@
         $('.campo10-ap').show();
 
         //$('.campo25-ap').show(); //Cuenta Cliente
-        //$('.campo26-ap').show(); //Especifique cuenta Cliente
+        $('.campo26-ap').show(); //Especifique cuenta Cliente
         //Campos Factoraje Financiero
         $('.campo3-ff').show();
         $('.campo5-ff').show();
@@ -784,10 +784,10 @@
             $('.campo8-ap').hide();
             $('.campo9-ap').hide();
             $('.campo10-ap').hide();
-            //$('.campo11-ap').hide();
+            $('.campo11-ap').hide();
             $('.campo13-ap').hide();
-            //$('.campo25-ap').hide();
-            //$('.campo26-ap').hide();
+            $('.campo25-ap').hide();
+            $('.campo26-ap').hide();
         }
         //Muestra/oculta Propietario real
         if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val')=='2' || $('.campo2ddw-ap').attr('data-id')=='2'){
@@ -895,13 +895,13 @@
         }
     },
 
-    /*cuentacliente: function (){
+    cuentacliente: function (){
         if(this.model.get('tipo_registro_c')=='Cliente'){
             $('.campo25-ap').show();
         }else{
             $('.campo25-ap').hide();
         }
-    },*/
+    },
 
     keyDownNewExtension: function (evt) {
         if (!evt) return;
