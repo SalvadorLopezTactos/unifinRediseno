@@ -10,7 +10,7 @@
    // campo7_list: null,
    // campo9_list: null,
     campo11_list: null,
-   // campo25_list: null,
+    campo25_list: null,
     campo21_list: null,
     campo24_list: null,
     campo18_list: null,
@@ -101,7 +101,7 @@
             }
         dataPLD['arrendamientoPuro']['campo16_label'] =arrTemp.join();
 
-        //dataPLD['arrendamientoPuro']['campo25_label'] = pld.campo25_list[dataPLD['arrendamientoPuro']['campo25']];
+        dataPLD['arrendamientoPuro']['campo25_label'] = pld.campo25_list[dataPLD['arrendamientoPuro']['campo25']];
         dataPLD['arrendamientoPuro']['campo11_label'] = pld.campo11_list[dataPLD['arrendamientoPuro']['campo11']];
 
         dataPLD['factorajeFinanciero']['campo2_label'] = pld.campo2_list[dataPLD['factorajeFinanciero']['campo2']];
@@ -153,7 +153,7 @@
        // pld.campo7_list = app.lang.getAppListStrings('tct_cpld_pregunta_u1_ddw_list'); campo SOFOM
        // pld.campo9_list = app.lang.getAppListStrings('tct_cpld_pregunta_u3_ddw_list'); cotiza en bolsa
         pld.campo11_list = app.lang.getAppListStrings('tct_cpld_pregunta9_desp_list');
-        //pld.campo25_list = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
+        pld.campo25_list = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
         pld.campo21_list = app.lang.getAppListStrings('tct_pldcampo1_ff_ddw_list');
         pld.campo24_list = app.lang.getAppListStrings('tct_plddestinorecursos_ff_ddw_list');
         pld.campo18_list = app.lang.getAppListStrings('tct_instmonetario_csddw_list');
@@ -303,10 +303,10 @@
 
         }); */
 
-        $('.campo11ddw-ap').change(function(evt)  {
+        /*$('.campo11ddw-ap').change(function(evt)  {
             pld.preguntamoral();
 
-        });
+        });*/
 
 
 
@@ -365,7 +365,7 @@
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
-        
+
     },
 
     _onSelect2Open:function(e){
@@ -469,14 +469,14 @@
         });
         this.lista_campo11 = lista_campo11;
 
-       /* //Carga lista 11, cuando la cuenta es cliente: Los recursos con los que va a celebrar su operación están destinados a
+       //Carga lista 11, cuando la cuenta es cliente: Los recursos con los que va a celebrar su operación están destinados a
         var lista11ID = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
         var lista_campo25 = '';
         Object.keys(lista11ID).forEach(function (id) {
             //console.log(id, lista11ID[id]);
             lista_campo25 += '<option value="' + id + '">' + lista11ID[id] + '</option>'
         });
-        this.lista_campo25 = lista_campo25;*/
+        this.lista_campo25 = lista_campo25;
 
         //listas FF
         //Carga de lista 5 ¿Con qué frecuencia o periodo realizará pagos a Unifin?
