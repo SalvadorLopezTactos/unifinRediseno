@@ -1048,6 +1048,17 @@ console.log(name);
 	},
 
     oportunidadperdidacheck: function (fields, errors, callback) {
+        var monto = 0;
+        _.each(errors, function(value, key) {
+            if(key == 'amount' && this.model.get('amount') < 0)
+            {
+              monto = 1;
+            }
+        }, this);
+        if(monto)
+        {
+          delete errors.amount;
+        }
         if (Object.keys(errors).length == 0) {
             console.log(fields);
             console.log(errors);
