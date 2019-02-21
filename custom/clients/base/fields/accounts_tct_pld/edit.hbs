@@ -121,7 +121,7 @@
             </div>
             <!-- Fila 6 AP -->
             <div class="row-fluid Fila6-AP">
-                <div class="span6 campo11-ap">
+                 <div class="span6 campo11-ap" style="display:none">
                     <label class="record-label">Los recursos con los que va a celebrar su operación tiene su origen
                         en su actividad mercantil, actividad u objeto social? <font COLOR="red">*</font></label>
                     <select class="campo11ddw-ap select2 row-fluid" data-field="campo11AP" data-name="Los recursos con los que va a celebrar su operación tiene su origen en su actividad mercantil, actividad u objeto social?">
@@ -131,7 +131,7 @@
                         {{/each}}
                     </select>
                 </div>
-                <div class="span6 campo26-ap">
+                <div class="span6 campo26-ap" style="display:none">
                     <label class="record-label">Especifique:</label>
                     <input type="text" class="campo26txt-ap" value="{{ProductosPLD.arrendamientoPuro.campo26}}"
                            data-field="campo26AP" data-name="Especifique"/>
@@ -141,8 +141,8 @@
 
             <!-- Fila 8 AP -->
             <div class="row-fluid Fila8-AP">
-              <div class="span6 campo25-ap">
-                    <label class="record-label">Los recursos con los que va a celebrar su operación están destinados
+               <div class="span6 campo25-ap" style="display:none">
+                    <label class="record-label">Los recursos con los que va a celebrar su operación están destinados	
                         a <font COLOR="red">*</font></label>
                     <select class="campo25ddw-ap select2 row-fluid" data-field="campo25AP" data-name="Los recursos con los que va a celebrar su operación están destinados a" >
                         {{#each campo25_list}}
