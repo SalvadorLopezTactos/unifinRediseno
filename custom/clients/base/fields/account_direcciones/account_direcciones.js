@@ -513,66 +513,7 @@ this.model.addValidationTask('check_multiple_fiscalCorrespondencia', _.bind(this
         }
         /* END CUSTOMIZATION */
     },
-
-     _validateTipoDireccion: function (fields, errors, callback){
-
-         if(this.counterEmptyFields==0){
-
-             if(this.model.get("tipo_registro_c") == "Cliente" || this.model.get("subtipo_cuenta_c") == "Integracion de Expediente" || this.model.get("subtipo_cuenta_c") == "Credito")
-             {
-                 var correspondencia = false;
-                 var fiscal = false;
-                 var valuesI = [];
-                 var self = this;
-                 _.each(this.model.get("account_direcciones"), function(direccion, key) {
-
-                     //Recupera valores por indicador
-                     valuesI = self._getIndicador(direccion.indicador,null);
-                     //Valida Fiscal
-                     if(valuesI.includes("2")){
-                         fiscal = true;
-                     }
-                     //Valida Correspondencia
-                     if(valuesI.includes("1")){
-                         correspondencia = true;
-                     }
-
-                     /*if(direccion.indicador == "1"){
-                      correspondencia = true;
-                      }
-                      if(direccion.indicador == "5"){
-                      correspondencia = true;
-                      }
-                      if(direccion.indicador == "2"){
-                      fiscal = true;
-                      }
-                      if(direccion.indicador == "6"){
-                      fiscal = true;
-                      }
-                      if(direccion.indicador == "3"){
-                      fiscal = true;
-                      correspondencia = true;
-                      }
-                      if(direccion.indicador == "7"){
-                      fiscal = true;
-                      correspondencia = true;
-                      }*/
-
-                 });
-
-                 if(fiscal == false || correspondencia == false){
-                     var alertOptions = {title: "Se requiere de al menos una direccion fiscal y una de correspondencia.", level: "error"};
-                     app.alert.show('validation', alertOptions);
-                     errors['account_direcciones'] = errors['account_direcciones'] || {};
-                     errors['account_direcciones'].required = true;
-                 }
-             }
-
-         }
-
-         callback(null, fields, errors);
-     },
-
+     
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/9/2015 Description: Validacion, No debe de haber mas de una direccion fiscal */
 
     _doValidateDireccionNacional: function (fields, errors, callback) {
