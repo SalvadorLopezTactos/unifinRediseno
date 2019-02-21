@@ -893,6 +893,10 @@
         } else {
             $('.campo19-cs').hide();
         }
+
+        $('.campo11-ap').hide();
+        $('.campo25-ap').hide();
+        $('.campo26-ap').hide();
     },
 
     cuentacliente: function (){
