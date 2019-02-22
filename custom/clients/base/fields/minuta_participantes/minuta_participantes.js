@@ -5,6 +5,7 @@
 ({
     events: {
         'click  .addParticipante': 'addParticipanteFunction',
+        'click  .addParticipantes': 'addParticipantesFunction',
         'keydown .newCampo1P': 'checkText',
         'keydown .newCampo2P': 'checkText',
         'keydown .newCampo3P': 'checkText',
@@ -31,7 +32,6 @@
         this.model.on('sync', this.loadData, this);
 
     },
-
 
     loadData: function (options) {
       //Recupera data existente
@@ -62,9 +62,9 @@
           var moduleid = app.data.createBean('Meetings',{id:idReunion});
           moduleid.fetch({
               success:_.bind(function(modelo){
-                  if(modelo.get('parent_meeting_c')!="" && modelo.get('parent_meeting_c')!="undefine"){
+                  /*if(modelo.get('parent_meeting_c')!="" && modelo.get('parent_meeting_c')!="undefine"){
                       idReunion = modelo.get('parent_meeting_c');
-                  }
+                  }*/
 
                   app.api.call('GET', app.api.buildURL('GetParticipantes/'+idReunion), null, {
                       success: function (data) {
@@ -79,16 +79,36 @@
 
               }, this)
           });
-
       }
-
       this.render();
     },
 
     _render: function () {
-        //self = this;
         this._super("_render");
         //self.mParticipantes = self.model.set('minuta_participantes',mParticipantes);
+
+        var self = this;
+        //Función related
+        $('.bigdrop').each(function( index, value ) {
+            $('#'+this.id).select2({
+                placeholder: "Buscar participante...",
+                minimumInputLength: 1,
+                allowClear: true,
+                ajax: {
+                    url: window.location.origin + window.location.pathname+"rest/v11_1/searchaccount",
+                    dataType: 'json',
+                    data: function (term, page) {
+                        return {q:term};
+                    },
+                    results: function (data, page) {
+                        return {results: data.records};
+                    }
+                },
+                formatResult: function(m) { return m.text; },
+                formatSelection: function(m) { return m.text; }
+            })
+        });
+
         $('.updateAsistencia').click(function(evt) {
           var row = $(this).closest("tr");    // Find the row
           if (selfData.mParticipantes.participantes[row.index()].asistencia == 1) {
@@ -97,6 +117,48 @@
               selfData.mParticipantes.participantes[row.index()].asistencia = 1;
           }
           selfData.render();
+        });
+        $('.campo2P').change(function(evt) {
+          var row = $(this).closest("tr");
+          var correo = row.context.value; //$('.campo2P').eq(row.index()).val();
+          if(correo == "") {
+              $('.campo2SelectP').eq(row.index()).find('input').css('border-color', 'red');
+                app.alert.show('email_telefono_error', {
+                level: 'error',
+                autoClose: true,
+                messages: 'Favor de agregar un <b>Correo</b>'
+              });
+          }else{
+              $('.campo2SelectP').eq(row.index()).find('input').css('border-color', '');
+              if (!selfData.validaMail(correo)) {
+                $('.campo2SelectP').eq(row.index()).find('input').css('border-color', 'red');
+                app.alert.show('mail_participante_error', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'Formato de correo incorrecto'
+                });
+              }
+              else {
+                selfData.mParticipantes.participantes[row.index()].correo = correo;
+              }
+          }
+          selfData.mParticipantes.participantes[row.index()].correo = correo;
+        });
+        $('.campo3P').change(function(evt) {
+          var row = $(this).closest("tr");
+          var telefono = row.context.value; //$('.campo3P').eq(row.index()).val();
+          if (!selfData.validaTamano(telefono) && telefono) {
+            $('.campo3SelectP').eq(row.index()).find('input').css('border-color', 'red');
+            app.alert.show('phone_participante_error', {
+                level: 'error',
+                autoClose: true,
+                messages: 'Formato de tel\u00E9fono incorrecto'
+            });
+          }
+          else {
+            $('.campo3SelectP').eq(row.index()).find('input').css('border-color', '');
+            selfData.mParticipantes.participantes[row.index()].telefono = telefono;
+          }
         });
     },
 
@@ -119,157 +181,284 @@
         Función para agregar nuevos elementos al objeto
     */
     addParticipanteFunction: function (options) {
-        //Estableciendo el color de borde original en cada campo
-        $('.newCampo1P').css('border-color', '');
-        $('.newCampo2P').css('border-color', '');
-        $('.newCampo3P').css('border-color', '');
-        $('.newCampo4P').css('border-color', '');
-        $('.newCampo5P').css('border-color', '');
-        $('.newCampo6P').css('border-color', '');
+            //Estableciendo el color de borde original en cada campo
+            $('.newCampo1P').css('border-color', '');
+            $('.newCampo2P').css('border-color', '');
+            $('.newCampo3P').css('border-color', '');
+            $('.newCampo4P').css('border-color', '');
+            $('.newCampo5P').css('border-color', '');
+            $('.newCampo6P').css('border-color', '');
 
-        //Obteniendo valores de los campos
-        var valor1 = $('.newCampo1P')[0].value;
-        var valor2 = $('.newCampo2P')[0].value;
-        var valor3 = $('.newCampo3P')[0].value;
-        var valor4 = $('.newCampo4P')[0].value;
-        var valor5 = $('.newCampo5P')[0].value;
-        var valor6 = $('.newCampo6P')[0].value;
+            //Obteniendo valores de los campos
+            var valor1 = $('.newCampo1P')[0].value;
+            var valor2 = $('.newCampo2P')[0].value;
+            var valor3 = $('.newCampo3P')[0].value;
+            var valor4 = $('.newCampo4P')[0].value;
+            var valor5 = $('.newCampo5P')[0].value;
+            var valor6 = $('.newCampo6P')[0].value;
 
-        var item = {
-            "id": "",
-            "nombres": valor1,
-            "apaterno": valor2,
-            "amaterno": valor3,
-            "telefono": valor5,
-            "correo": valor4,
-            "origen": "N",
-            "unifin": 0,
-            "tipo_contacto": valor6,
-            "asistencia": 1,
-            "activo" : "1"
-        };
+            var item = {
+                "id": "",
+                "nombres": valor1,
+                "apaterno": valor2,
+                "amaterno": valor3,
+                "telefono": valor5,
+                "correo": valor4,
+                "origen": "N",
+                "unifin": 0,
+                "tipo_contacto": valor6,
+                "asistencia": 1,
+                "activo" : "1"
+            };
 
-        //Valida campos requeridos
-        var faltantes = 0;
-        //Nombres
-        if (valor1 == '' || valor1.trim()=='') {
+            //Valida campos requeridos
+            var faltantes = 0;
+            //Nombres
+            if (valor1 == '' || valor1.trim()=='') {
 
-                $('.newCampo1P').css('border-color', 'red');
-                faltantes++;
-        }
-
-        if ((valor1 != '' || valor1.trim()!='') ) {
-
-            if(!this.ValidaCaracter(valor1))
-            {
-                $('.newCampo1P').css('border-color', 'red');
-
-                app.alert.show('Tname_participante_error', {
-                    level: 'error',
-                    autoClose: true,
-                    messages: 'Formato de nombre incorrecto'
-
-                });
-                faltantes++;
+                    $('.newCampo1P').css('border-color', 'red');
+                    faltantes++;
             }
-        }
 
+            if ((valor1 != '' || valor1.trim()!='') ) {
 
-        //Apellido Paterno
-        if (valor2 == '' || valor2.trim()=='') {
-            $('.newCampo2P').css('border-color', 'red');
-            faltantes++
-        }
+                if(!this.ValidaCaracter(valor1))
+                {
+                    $('.newCampo1P').css('border-color', 'red');
 
-        if ((valor2 != '' || valor2.trim()!='') ) {
+                    app.alert.show('Tname_participante_error', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Formato de nombre incorrecto'
 
-            if(!this.ValidaCaracter(valor2))
-            {
+                    });
+                    faltantes++;
+                }
+            }
+
+            //Apellido Paterno
+            if (valor2 == '' || valor2.trim()=='') {
                 $('.newCampo2P').css('border-color', 'red');
-
-                app.alert.show('Tname_participante_error', {
-                    level: 'error',
-                    autoClose: true,
-                    messages: 'Formato de nombre incorrecto'
-
-                });
-                faltantes++;
+                faltantes++
             }
-        }
 
-        // Apellido Materno
-        if ((valor3 != '' || valor3.trim()!='') ) {
+            if ((valor2 != '' || valor2.trim()!='') ) {
 
-            if(!this.ValidaCaracter(valor3))
-            {
-                $('.newCampo3P').css('border-color', 'red');
+                if(!this.ValidaCaracter(valor2))
+                {
+                    $('.newCampo2P').css('border-color', 'red');
 
-                app.alert.show('Tname_participante_error', {
-                    level: 'error',
-                    autoClose: true,
-                    messages: 'Formato de nombre incorrecto'
+                    app.alert.show('Tname_participante_error', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Formato de nombre incorrecto'
 
-                });
-                faltantes++;
+                    });
+                    faltantes++;
+                }
             }
-        }
 
-        //Correo o Teléfono
-        if (valor4 == '' && valor5 == '') {
-            $('.newCampo4P').css('border-color', 'red');
-            $('.newCampo5P').css('border-color', 'red');
-            app.alert.show('email_telefono_error', {
-                level: 'error',
-                autoClose: true,
-                messages: 'Favor de agregar un <b>Tel\u00E9fono</b> o un <b>Correo</b>'
+            // Apellido Materno
+            if ((valor3 != '' || valor3.trim()!='') ) {
 
-            });
-            faltantes++
-        }
-        //Tipo de contacto
-        if (valor6 == '' || valor6 == 'Tipo de Contacto') {
-            $('.newCampo6P').css('border-color', 'red');
-            app.alert.show('tipo_contacto_error', {
-                level: 'error',
-                autoClose: true,
-                messages: 'Favor de seleccionar un <b>Tipo de Contacto</b>'
+                if(!this.ValidaCaracter(valor3))
+                {
+                    $('.newCampo3P').css('border-color', 'red');
 
-            });
-            faltantes++
-        }
+                    app.alert.show('Tname_participante_error', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Formato de nombre incorrecto'
 
-        if (valor5 != "") {
-            if (!this.validaTamano()) {
-                $('.newCampo5P').css('border-color', 'red');
-                faltantes++;
-                app.alert.show('phone_participante_error', {
-                    level: 'error',
-                    autoClose: true,
-                    messages: 'Formato de tel\u00E9fono incorrecto'
-
-                });
+                    });
+                    faltantes++;
+                }
             }
-        }
-        // valida la máscara del correo
-        if (valor4 != "") {
-            if (!this.validaMail()) {
+
+            //Correo
+            if (valor4 == '') {
                 $('.newCampo4P').css('border-color', 'red');
-                faltantes++;
-                app.alert.show('mail_participante_error', {
+                app.alert.show('email_telefono_error', {
                     level: 'error',
                     autoClose: true,
-                    messages: 'Formato de correo incorrecto'
+                    messages: 'Favor de agregar un <b>Correo</b>'
 
                 });
+                faltantes++
             }
-        }
 
-        if (faltantes == 0) {
-            this.mParticipantes.participantes.push(item);
-            this.render();
-        }
+            //Tipo de contacto
+            if (valor6 == '' || valor6 == 'Tipo de Contacto') {
+                $('.newCampo6P').css('border-color', 'red');
+                app.alert.show('tipo_contacto_error', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'Favor de seleccionar un <b>Tipo de Contacto</b>'
 
+                });
+                faltantes++
+            }
+
+            // valida telefono
+            if (valor5 != "") {
+                if (!this.validaTamano(valor5)) {
+                    $('.newCampo5P').css('border-color', 'red');
+                    faltantes++;
+                    app.alert.show('phone_participante_error', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Formato de tel\u00E9fono incorrecto'
+                    });
+                }
+            }
+
+            // valida la máscara del correo
+            if (valor4 != "") {
+                if (!this.validaMail(valor4)) {
+                    $('.newCampo4P').css('border-color', 'red');
+                    faltantes++;
+                    app.alert.show('mail_participante_error', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Formato de correo incorrecto'
+                    });
+                }
+            }
+
+            if (faltantes == 0) {
+              App.alert.show('loadingParticipante', {
+                  level: 'process',
+                  title: 'Cargando, por favor espere.',
+              });
+
+              $('.addParticipante').bind('click', false);
+              // Valida si existen duplicados
+              var nombre = $('.newCampo1P')[0].value;
+              var apellp = $('.newCampo2P')[0].value;
+              var apellm = $('.newCampo3P')[0].value;
+              var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "tipo_registro_c"];
+              app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                fields: fields.join(','),
+                max_num: 5,
+                "filter": [
+                  {
+                    "primernombre_c": nombre,
+                    "apellidopaterno_c": apellp,
+                    "apellidomaterno_c": apellm,
+                    "tipo_registro_c": "Persona",
+                  }
+                ]
+                }), null, {
+                success: _.bind(function (data) {
+                  if(data.records.length > 0) {
+                    app.alert.show("DuplicateCheck", {
+                      level: "error",
+                      title: "La persona ingresada ya existe.",
+                      autoClose: false
+                    });
+                  }
+                  else {
+                    this.mParticipantes.participantes.push(item);
+                    this.render();
+                  }
+
+                  $('.addParticipante').unbind('click', false);
+                  App.alert.dismiss('loadingParticipante');
+                }, this)
+              });
+            }
     },
+
+    addParticipantesFunction: function (options) {
+            //Estableciendo el color de borde original en cada campo
+            $('.newCampo7P').css('border-color', '');
+            $('.busca-participante').find('.select2-choice').css('border-color','');
+
+            //Obteniendo valores de los campos
+            var valor7 = $('.newCampo7P')[0].value;
+            var idParti = $('input.busca-participante').val();
+
+            //Valida campos requeridos
+            var faltantes = 0;
+            //Nombre
+            if(idParti == '') {
+              $('.busca-participante').find('.select2-choice').css('border-color','red');
+              app.alert.show('participante_error', {
+                  level: 'error',
+                  autoClose: true,
+                  messages: 'Favor de seleccionar un <b>Participante</b>'
+              });
+              faltantes++;
+            }
+
+            //Tipo de contacto
+            if(valor7 == '' || valor7 == 'Tipo de Contacto') {
+              $('.newCampo7P').css('border-color', 'red');
+              app.alert.show('tipo_contacto_error', {
+                  level: 'error',
+                  autoClose: true,
+                  messages: 'Favor de seleccionar un <b>Tipo de Contacto</b>'
+              });
+              faltantes++
+            }
+
+            if(faltantes == 0) {
+              App.alert.show('loadingParticipantes', {
+                  level: 'process',
+                  title: 'Cargando, por favor espere.',
+              });
+
+              $('.addParticipantes').bind('click', false);
+              // Obtiene datos del participante seleccionado
+              var fields = ["id", "primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "email1", "phone_office", "tipo_registro_c"];
+              app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                fields: fields.join(','),
+                max_num: 5,
+                "filter": [
+                  {
+                    "id": idParti,
+                    "tipo_registro_c": "Persona",
+                  }
+                ]
+                }), null, {
+                success: _.bind(function (data) {
+                  if(data.records.length > 0) {
+                    var valor1 = data.records[0].primernombre_c;
+                    var valor2 = data.records[0].apellidopaterno_c;
+                    var valor3 = data.records[0].apellidomaterno_c;
+                    var valor4 = data.records[0].email1;
+                    var valor5 = data.records[0].phone_office;
+                    var item = {
+                        "id": idParti,
+                        "nombres": valor1,
+                        "apaterno": valor2,
+                        "amaterno": valor3,
+                        "telefono": valor5,
+                        "correo": valor4,
+                        "origen": "E",
+                        "unifin": 0,
+                        "tipo_contacto": valor7,
+                        "asistencia": 1,
+                        "activo" : "1"
+                    };
+                    this.mParticipantes.participantes.push(item);
+                    this.render();
+                  }
+                  else
+                  {
+                    app.alert.show("PersonaCheck", {
+                      level: "error",
+                      title: "Solo Participantes del tipo Persona pueden ser agregados.",
+                      autoClose: false
+                    });
+                  }
+                  $('.addParticipantes').unbind('click', false);
+                  App.alert.dismiss('loadingParticipantes');
+                }, this)
+              });
+            }
+    },
+
     // /**
     //  * Binds DOM changes to set field value on model.
     //  * @param {Backbone.Model} model model this field is bound to.
@@ -280,9 +469,6 @@
     //         this._super("bindDomChange");
     //     }
     // },
-
-
-
 
     /**
      * When data changes, re-render the field only if it is not on edit (see MAR-1617).
@@ -307,20 +493,14 @@
     Valida que se ingrese solo numero
     VAlida que su tamaño sea entre 8 y 10
     */
-    validaTamano: function () {
-
-        var telefonoTam = $('.newCampo5P').val().length;
-        var ValTel = $('.newCampo5P').val();
+    validaTamano: function (ValTel) {
+        var telefonoTam = ValTel.length;
         var banderTelefono = false;
         var expreg = /^[0-9]{8,13}$/;
-
         if (telefonoTam >= 8 && telefonoTam <= 13) {
-
-            if (expreg.test(this.$('.newCampo5P').val())) {
-
+            if (expreg.test(ValTel)) {
                 var cont = 0;
                 for (var j = 0; j < telefonoTam; j++) {
-
                     if (ValTel.charAt(0) == ValTel.charAt(j)) {
                         cont++;
                     }
@@ -336,11 +516,9 @@
                title: "Formato invalido",
                autoClose: true
                });*/
-
         }
         return banderTelefono;
     },
-
 
     ValidaCaracter: function(texto)
     {
@@ -369,17 +547,13 @@
         return valido;
     },
 
-    validaMail:function() {
-        var correo1=$('.newCampo4P').val();
+    validaMail:function(correo1) {
         //var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         var emailPattern = /^\S+@\S+\.\S+[$%&|<>#]?$/;
         var banderCorreo=false;
-
         if ( emailPattern.test(correo1) ) {
             banderCorreo=true;
         }
         return banderCorreo;
     },
-
-
 })

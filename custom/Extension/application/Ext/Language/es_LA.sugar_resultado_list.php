@@ -1,6 +1,7 @@
 <?php
  // created: 2019-02-12 14:00:03
 
+
 $app_list_strings['resultado_list']=array (
   '' => '',
   1 => 'El cliente no estuvo presente, cita cancelada',
@@ -8,6 +9,7 @@ $app_list_strings['resultado_list']=array (
   3 => 'Está interesado, pero no en este momento',
   4 => 'Está Interesado. Se procede a generar expediente',
   5 => 'Está Interesado. Se agendó otra visita',
+  19 => 'Está interesado. Se agendó otra llamada',
   6 => 'Está Interesado. Se recogió información',
   7 => 'Se cerró una venta',
   9 => 'Se logró la visita ocular parcialmente, se necesita una segunda cita',

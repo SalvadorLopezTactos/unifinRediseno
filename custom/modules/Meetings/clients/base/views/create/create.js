@@ -12,7 +12,7 @@
         this.model.addValidationTask('ValidaObjetivos',_.bind(this.ValidaObjetivos,this));
         this.model.addValidationTask('Campos_necesarios', _.bind(this.Campos_necesarios, this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
-        this.model.addValidationTask('valida_usuarios',_.bind(this.valida_usuarios, this));
+        //this.model.addValidationTask('valida_usuarios',_.bind(this.valida_usuarios, this));
         this.on('render', this.disablestatus, this);
     },
 

@@ -31,15 +31,23 @@
                   {{nombres}} {{apaterno}} {{amaterno}}
                 </td>
                 <td class="campo2SelectP">
-                  {{correo}}
+                    {{#if unifin}}
+                      {{correo}}                      
+                    {{else}}
+					  <input class="campo2P span3" type="text" value="{{correo}}" placeholder="Correo" data-field="tct_correo_c">
+                    {{/if}}
                 </td>
                 <td class="campo3SelectP">
-                  {{telefono}}
+                    {{#if unifin}}
+                      {{telefono}}                      
+                    {{else}}
+					  <input class="campo3P span3" type="text" value="{{telefono}}" placeholder="Teléfono" maxlength="13" size="13">
+                    {{/if}}
                 </td>
                 <td class="CheckActionP" style="text-align:center" >
                     <button type="button" {{#if activo}}class="updateAsistencia" {{/if}} style="border-width:0;background-color: rgba(255,255,255,0.15);">
                     {{#if asistencia}}
-                      <i class="fa fa-check" style="color: #33800d; font-size:20px"></i>
+                      <i class="fa fa-check" style="color: #04ff00; font-size:20px"></i>
                     {{else}}
                       <i class="fa fa-check" style="font-size:20px"></i>
                     {{/if}}
@@ -92,6 +100,27 @@
         </a>
       </div>
     </div>
+    <!-- Línea 3 -->
+    <b>Buscar participantes</b>
+	  <div class="row-fluid">
+          <div class="span8">
+              <input type="hidden" class="bigdrop busca-participante row-fluid" id="buscar_participante" data-name="Buscar Participantes" data-field="participante"/>
+          </div>
+		  <div class="span3">
+			<select class="newCampo7P select2" placeholder="Select">
+			  <option>Tipo de Contacto</option>
+			  {{#each tipoContacto}}
+				<option value="{{@key}}">{{@key}}</option>
+			  {{/each}}
+			</select>
+		  </div>
+		  <!-- Guardar btn -->
+		  <div class="span1">
+			<a class="btn addParticipantes">
+			  <i class="fa fa-plus"></i>
+			</a>
+		  </div>
+      </div>
   </div>
 </div>
 {{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}

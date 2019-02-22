@@ -474,60 +474,81 @@
              }
           //Recupera cuenta asociada
           var cuentaId=this.model.get('account_id');
+          var faltantes= "";
           if((cuentaId!=""|| cuentaId!=null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c')== 'SI'){
-              app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId +'/link/accounts_tct_pld_1?filter[0][description][$equals]='+usuarioProducto), null, {
-              success: _.bind(function (data) {
-                  if (data != "") {
-                      if (data.records.length > 0) {
 
-                          $faltaPld = false;
-                          //Realizar validación de cammpos requeridos
-                          if (usuarioProducto == "AP") {
-                              if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                                  //PF - PFAE
-                                  $faltaPld = (data.records[0].tct_pld_campo2_ddw == "" || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo1_txt == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                  || data.records[0].tct_pld_campo16_ddw == "" ) ? true : false;
-                              } else {
-                                  //PM
-                                  $faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo1_txt == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                      || data.records[0].tct_pld_campo16_ddw == "" ) ? true : false;
-                              }
-                          }
-                          //Realizar validación de cammpos requeridos
-                          if (usuarioProducto == "FF") {
-                              if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                                  //PF - PFAE
-                                  $faltaPld = (data.records[0].tct_pld_campo2_ddw == ""  || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo1_txt == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                      || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo20_ddw == "" || data.records[0].tct_pld_campo24_ddw == "" || data.records[0].tct_pld_campo21_ddw == "") ? true : false;
-                              } else {
-                                  //PM
-                                  $faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo1_txt == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                      || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo20_ddw == "" || data.records[0].tct_pld_campo24_ddw == "" || data.records[0].tct_pld_campo21_ddw == "") ? true : false;
-                              }
-                          }
-                          if (usuarioProducto == "CA") {
-                              if (this.model.get('tipodepersona_c') != 'Persona Moral') {
-                                  //PF - PFAE
-                                  $faltaPld = (data.records[0].tct_pld_campo2_ddw == "" || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo1_txt == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                      || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo16_ddw == "" ) ? true : false;
-                              } else {
-                                  //PM
-                                  $faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo1_txt == "" || data.records[0].tct_pld_campo6_ddw == ""
-                                      || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo16_ddw == "" ) ? true : false;
-                              }
-                          }
-                          if ($faltaPld) {
+          app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId), null, {
+              success: _.bind(function (cuenta) {
+                              var tipopersona=cuenta.tipodepersona_c;
+                                  faltaPld = "";
+
+                                  if (cuenta.tct_cpld_pregunta_u1_ddw_c == "" && tipopersona == 'Persona Moral'){
+                                      faltantes= faltantes + '<b>-¿La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?<br>';
+                                  }
+                                  if (cuenta.tct_cpld_pregunta_u3_ddw_c == "" && tipopersona == 'Persona Moral' ){
+                                      faltantes= faltantes + '<b>-¿Cotiza en Bolsa?<br>';
+                                  }
+                      app.api.call('GET', app.api.buildURL('Accounts/' + cuentaId +'/link/accounts_tct_pld_1?filter[0][description][$equals]='+usuarioProducto), null, {
+                          success: _.bind(function (data) {
+                              if (data != "") {
+                                  if (data.records.length > 0) {
+                                  //Realizar validación de cammpos requeridos
+                                  if (usuarioProducto == "AP") {
+                                      if (tipopersona != 'Persona Moral') {
+                                          //PF - PFAE
+                                          faltaPld = (data.records[0].tct_pld_campo2_ddw == "" || data.records[0].tct_pld_campo4_ddw == "" ||  data.records[0].tct_pld_campo6_ddw == ""
+                                              || data.records[0].tct_pld_campo16_ddw == "" ) ? " <b>- Producto "+ producto + "</b><br>"  : "";
+                                      } else {
+                                          //PM
+                                          faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
+                                             ||  data.records[0].tct_pld_campo16_ddw == "" ) ? " <b>- Producto "+ producto + "</b><br>"  : "";
+                                      }
+                                  }
+                                  //Realizar validación de campos requeridos
+                                  if (usuarioProducto == "FF") {
+                                      if (tipopersona != 'Persona Moral') {
+                                          //PF - PFAE
+                                          faltaPld = (data.records[0].tct_pld_campo2_ddw == ""  || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
+                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo24_ddw == "" || data.records[0].tct_pld_campo21_ddw == "") ? " <b>- Producto "+ producto + "</b><br>"  : "";
+                                      } else {
+                                          //PM
+                                          faltaPld = (data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
+                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo24_ddw == "" || data.records[0].tct_pld_campo21_ddw == "") ? " <b>- Producto "+ producto + "</b><br>"  : "";
+                                      }
+                                  }
+                                  if (usuarioProducto == "CA") {
+                                      if (tipopersona != 'Persona Moral') {
+                                          //PF - PFAE
+                                          faltaPld = (data.records[0].tct_pld_campo2_ddw == "" || data.records[0].tct_pld_campo4_ddw == "" || data.records[0].tct_pld_campo6_ddw == ""
+                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo16_ddw == "" ) ? " <b>- Producto "+ producto + "</b><br>"  : "";
+                                      } else {
+                                          //PM
+                                          faltaPld = (data.records[0].tct_pld_campo4_ddw == ""  || data.records[0].tct_pld_campo6_ddw == ""
+                                              || data.records[0].tct_pld_campo16_ddw == "" || data.records[0].tct_pld_campo16_ddw == "" ) ? " <b>- Producto "+ producto + "</b><br>"  : "";
+                                      }
+                                  }
+                          }else{
                               errors['accounts_pld'] = errors['accounts_pld'] || {};
                               errors['accounts_pld'].required = true;
-                              self.mensajes("valida_pld", "Hace falta completar información en la pestaña <b>PLD</b> del producto <b>" + producto + "</b> de la <b>Cuenta</b>", "error");
+                              self.mensajes("valida_pld", "Hace falta completar la siguiente información en la pestaña <b>PLD</b> de la <b>Cuenta:</b><br>" +faltaPld + faltantes, "error");
+                              callback(null, fields, errors);
                           }
-                      }else {
+                      } else {
                           errors['accounts_pld'] = errors['accounts_pld'] || {};
                           errors['accounts_pld'].required = true;
-                          self.mensajes("valida_pld", "Hace falta completar información en la pestaña <b>PLD</b> del producto <b>" + producto + "</b> de la <b>Cuenta</b>", "error");
+                          self.mensajes("valida_pld", "Hace falta completar la siguiente información en la pestaña <b>PLD</b> de la <b>Cuenta:</b><br>" +faltaPld + faltantes, "error");
+                          callback(null, fields, errors);
                       }
+                  if (faltaPld || faltantes!="") {
+                      errors['accounts_pld'] = errors['accounts_pld'] || {};
+                      errors['accounts_pld'].required = true;
+                      self.mensajes("valida_pld", "Hace falta completar la siguiente información en la pestaña <b>PLD</b> de la <b>Cuenta:</b><br>" +faltaPld + faltantes, "error");
                   }
-                  callback(null, fields, errors);
+                                  callback(null, fields, errors);
+                              }, self),
+                          });
+
+
               }, self),
             });
           }
@@ -1027,6 +1048,18 @@ console.log(name);
 	},
 
     oportunidadperdidacheck: function (fields, errors, callback) {
+        var omitir = [];
+        _.each(errors, function(value, key) {
+            if((key == 'amount' && this.model.get('amount') < 0) || (key == 'monto_c' && this.model.get('monto_c') < 0))
+            {
+              omitir.push(key);
+            }
+        }, this);
+
+        omitir.forEach(function(element) {
+          delete errors[element];
+        });
+
         if (Object.keys(errors).length == 0) {
             console.log(fields);
             console.log(errors);
@@ -1490,12 +1523,12 @@ console.log(name);
                   errors['instrumento_moratorio_c'] = errors['instrumento_moratorio_c'] || {};
                   errors['instrumento_moratorio_c'].required = true;
               }
-              if (this.model.get('puntos_tasa_moratorio_c') == "" || (Number(this.model.get('puntos_tasa_moratorio_c')) < 0 || Number(this.model.get('puntos_tasa_moratorio_c')) > 99.999999)) {
+              if (this.model.get('puntos_tasa_moratorio_c') == "" || this.model.get('puntos_tasa_moratorio_c') == null || (Number(this.model.get('puntos_tasa_moratorio_c')) < 0 || Number(this.model.get('puntos_tasa_moratorio_c')) > 99.999999)) {
                   //error
                   errors['puntos_tasa_moratorio_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
                   errors['puntos_tasa_moratorio_c'].required = true;
               }
-              if (this.model.get('factor_moratorio_c') == "" || (Number(this.model.get('factor_moratorio_c')) < 0 || Number(this.model.get('factor_moratorio_c')) > 99.999999)) {
+              if (this.model.get('factor_moratorio_c') == "" || this.model.get('factor_moratorio_c') == null || (Number(this.model.get('factor_moratorio_c')) < 0 || Number(this.model.get('factor_moratorio_c')) > 99.999999)) {
                   //error
                   errors['factor_moratorio_c'] = "Este campo solo permite valor m\u00E1ximo de 99.00.";
                   errors['factor_moratorio_c'].required = true;
@@ -1669,15 +1702,28 @@ console.log(name);
 
     valida_requeridos: function(fields, errors, callback) {
         var campos = "";
+        var omitir = [];
         _.each(errors, function(value, key) {
-            _.each(this.model.fields, function(field) {
-                if(_.isEqual(field.name,key)) {
-                    if(field.vname) {
-                        campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '</b><br>';
-                    }
-          		  }
-       	    }, this);
+            if((key == 'amount' && this.model.get('amount') < 0) || (key == 'monto_c' && this.model.get('monto_c') < 0))
+            {
+              omitir.push(key);
+            }
+            else
+            {
+              _.each(this.model.fields, function(field) {
+                  if(_.isEqual(field.name,key)) {
+                      if(field.vname) {
+                          campos = campos + '<b>' + app.lang.get(field.vname, "Opportunities") + '</b><br>';
+                      }
+            		  }
+         	    }, this);
+            }
         }, this);
+
+        omitir.forEach(function(element) {
+          delete errors[element];
+        });
+
         if(campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",

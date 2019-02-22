@@ -76,8 +76,8 @@ array (
               ),
               1 => 
               array (
-              'name'=>'name',
-              'readonly' => true,
+                'name' => 'name',
+                'readonly' => true,
               ),
               2 => 
               array (
@@ -198,40 +198,37 @@ array (
             array (
               0 => 
               array (
+                'name' => 'tct_comments_rel_txa_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_COMMENTS_REL_TXA',
+                'span' => 12,
+              ),
+              1 => 
+              array (
                 'name' => 'tct_cliente_no_interesado_chk',
                 'label' => 'LBL_TCT_CLIENTE_NO_INTERESADO_CHK',
               ),
-              1 => 
+              2 => 
               array (
                 'name' => 'tct_motivo_c',
                 'label' => 'LBL_TCT_MOTIVO_C',
               ),
-              /*2 => 
-              array (
-                'name' => 'tct_programa_nueva_reunion_chk',
-                'label' => 'LBL_TCT_PROGRAMA_NUEVA_REUNION_CHK',
-              ),
-              /*3 => 
-              array (
-                'name' => 'fecha_y_hora_c',
-                'label' => 'LBL_FECHA_Y_HORA_C',
-              ),*/
-              4 => 
+              3 => 
               array (
                 'name' => 'assigned_user_name',
                 'label' => 'LBL_ASSIGNED_TO',
                 'readonly' => true,
               ),
-              5 => 
+              4 => 
               array (
               ),
-              6 => 
+              5 => 
               array (
                 'name' => 'objetivo_c',
                 'label' => 'LBL_OBJETIVO_C',
                 'readonly' => true,
               ),
-              7 => 
+              6 => 
               array (
                 'name' => 'resultado_c',
                 'label' => 'LBL_RESULTADO_C',

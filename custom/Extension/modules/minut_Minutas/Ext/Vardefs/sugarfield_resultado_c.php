@@ -1,5 +1,6 @@
 <?php
  // created: 2019-02-20 09:38:27
+
 $dictionary['minut_Minutas']['fields']['resultado_c']['labelValue']='Resultado de Cita';
 $dictionary['minut_Minutas']['fields']['resultado_c']['dependency']='';
 $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (

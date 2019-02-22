@@ -32,6 +32,16 @@ array (
           'newTab' => false,
           'panelDefault' => 'expanded',
         ),
+        'LBL_DETAILVIEW_PANEL2' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
+        'LBL_DETAILVIEW_PANEL3' => 
+        array (
+          'newTab' => false,
+          'panelDefault' => 'expanded',
+        ),
         'LBL_DETAILVIEW_PANEL1' => 
         array (
           'newTab' => false,
@@ -46,6 +56,7 @@ array (
         0 => 
         array (
           0 => 'full_name',
+          1 => 'picture',
         ),
         1 => 
         array (
@@ -54,32 +65,52 @@ array (
         ),
         2 => 
         array (
+          0 => 'description',
+          1 => 
+          array (
+            'name' => 'UserType',
+            'customCode' => '{$USER_TYPE_READONLY}',
+          ),
+        ),
+      ),
+      'lbl_detailview_panel2' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            'name' => 'ext_c',
+            'label' => 'LBL_EXT',
+          ),
+          1 => 'phone_mobile',
+        ),
+      ),
+      'lbl_detailview_panel3' => 
+      array (
+        0 => 
+        array (
           0 => 
           array (
             'name' => 'puestousuario_c',
             'studio' => 'visible',
             'label' => 'LBL_PUESTOUSUARIO',
           ),
+          1 => 'reports_to_name',
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            'name' => 'region_c',
+            'label' => 'LBL_REGION',
+          ),
           1 => 
           array (
-            'name' => 'aut_caratulariesgo_c',
-            'label' => 'LBL_AUT_CARATULARIESGO',
+            'name' => 'tct_team_address_txf_c',
+            'label' => 'LBL_TCT_TEAM_ADDRESS_TXF_C',
           ),
         ),
-        3 => 
-        array (
-          0 => 'phone_work',
-          1 => 
-          array (
-            'name' => 'ext_c',
-            'label' => 'LBL_EXT',
-          ),
-        ),
-        4 => 
-        array (
-          0 => 'phone_mobile',
-        ),
-        5 => 
+        2 => 
         array (
           0 => 
           array (
@@ -94,54 +125,19 @@ array (
             'label' => 'LBL_EQUIPOS_C',
           ),
         ),
-        6 => 
+        3 => 
         array (
           0 => 
-          array (
-            'name' => 'tct_team_address_txf_c',
-            'label' => 'LBL_TCT_TEAM_ADDRESS_TXF_C',
-          ),
-          1 => 
-          array (
-            'name' => 'region_c',
-            'label' => 'LBL_REGION',
-          ),
-        ),
-        7 => 
-        array (
-          0 => 
-          array (
-            'name' => 'sucursal_c',
-            'studio' => 'visible',
-            'label' => 'LBL_SUCURSAL',
-          ),
-          1 => 
           array (
             'name' => 'tipodeproducto_c',
             'studio' => 'visible',
             'label' => 'LBL_TIPODEPRODUCTO',
           ),
-        ),
-        8 => 
-        array (
-          0 => 
+          1 => 
           array (
             'name' => 'productos_c',
             'studio' => 'visible',
             'label' => 'LBL_PRODUCTOS',
-          ),
-          1 => 
-          array (
-            'name' => 'UserType',
-            'customCode' => '{$USER_TYPE_READONLY}',
-          ),
-        ),
-        9 => 
-        array (
-          0 => 'reports_to_name',
-          1 => 
-          array (
-            'name' => 'uni_citas_users_1_name',
           ),
         ),
       ),
@@ -180,7 +176,11 @@ array (
             'name' => 'optout_c',
             'label' => 'LBL_OPTOUT',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'aut_caratulariesgo_c',
+            'label' => 'LBL_AUT_CARATULARIESGO',
+          ),
         ),
       ),
     ),
