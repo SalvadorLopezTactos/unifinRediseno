@@ -334,6 +334,25 @@
 
         //Set class to select2
         $('select.select2').select2();
+
+
+        //Formato multiselect para campo Tipo de Dirección en campo account_direcciones
+        $('#multi_tipo').select2({
+            width:'100%',
+            //minimumResultsForSearch:7,
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
+        //Se establece formato multiselect a cada campo select con la clase "existingMultiClass"
+        $('select.existing_multi_tipo_class').each(function(){
+            $(this).select2({
+                width:'100%',
+                closeOnSelect: false,
+                containerCssClass: 'select2-choices-pills-close'
+            });
+        });
+
         //Se establece formato de multiselect a campo select con id "multi1 pregunta 1"
         $('#multi11').select2({
             width: '100%',
@@ -361,13 +380,15 @@
             containerCssClass: 'select2-choices-pills-close'
         });
         //Formato para cuenta existente
-        $('#existingMulti1').select2({
-            width:'100%',
-            //minimumResultsForSearch:7,
-            closeOnSelect: false,
-            containerCssClass: 'select2-choices-pills-close'
+        //Se establece formato multiselect a cada campo select con la clase "existingMultiClass"
+        $('select.existingMultiClass').each(function(){
+            $(this).select2({
+                width:'100%',
+                closeOnSelect: false,
+                containerCssClass: 'select2-choices-pills-close'
+            });
         });
-        
+
     },
 
     _onSelect2Open:function(e){
