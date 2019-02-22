@@ -294,3 +294,4 @@ $mod_strings['LBL_TCT_DATES_ACC_STATEMENTS_C'] = 'Fechas de estados de cuenta-St
 $mod_strings['LBL_TCT_DATES_ACCOUNT_STATEMENTS_C'] = 'Fechas de estados de cuenta';
 $mod_strings['LBL_TCT_NUEVO_PLD_C'] = 'Nuevo Pld';
 $mod_strings['LBL_TCT_DEPOSITOS_PROMEDIO_C'] = 'Depósitos Promedio';
+$mod_strings['ACCOUNTS_TCT_PLD'] = 'Cuestionario PLD';

@@ -1048,17 +1048,18 @@ console.log(name);
 	},
 
     oportunidadperdidacheck: function (fields, errors, callback) {
-        var monto = 0;
+        var omitir = [];
         _.each(errors, function(value, key) {
-            if(key == 'amount' && this.model.get('amount') < 0)
+            if((key == 'amount' && this.model.get('amount') < 0) || (key == 'monto_c' && this.model.get('monto_c') < 0))
             {
-              monto = 1;
+              omitir.push(key);
             }
         }, this);
-        if(monto)
-        {
-          delete errors.amount;
-        }
+
+        omitir.forEach(function(element) {
+          delete errors[element];
+        });
+
         if (Object.keys(errors).length == 0) {
             console.log(fields);
             console.log(errors);
@@ -1701,11 +1702,11 @@ console.log(name);
 
     valida_requeridos: function(fields, errors, callback) {
         var campos = "";
-        var monto = 0;
+        var omitir = [];
         _.each(errors, function(value, key) {
-            if(key == 'amount' && this.model.get('amount') < 0)
+            if((key == 'amount' && this.model.get('amount') < 0) || (key == 'monto_c' && this.model.get('monto_c') < 0))
             {
-              monto = 1;
+              omitir.push(key);
             }
             else
             {
@@ -1718,10 +1719,11 @@ console.log(name);
          	    }, this);
             }
         }, this);
-        if(monto)
-        {
-          delete errors.amount;
-        }
+
+        omitir.forEach(function(element) {
+          delete errors[element];
+        });
+
         if(campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
