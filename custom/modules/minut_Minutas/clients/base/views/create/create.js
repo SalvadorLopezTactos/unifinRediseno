@@ -11,6 +11,7 @@
         this.model.addValidationTask('checkcompromisos', _.bind(this.checkcompromisos, this));
         this.model.addValidationTask('validaFecha', _.bind(this.validaFechaReunion, this));
         this.model.addValidationTask('save_Asistencia_Parti', _.bind(this.saveAsistencia, this));
+        this.model.addValidationTask('save_Referencias', _.bind(this.saveReferencias, this));
         //this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
@@ -295,4 +296,29 @@
         }
         callback(null, fields, errors);
     },
+
+    saveReferencias: function (fields, errors, callback) {
+        var objReferencias = selfRef.mReferencias["referencias"];
+        banderaRef = 0;
+
+        for (var i = 0; i < objReferencias.length; i++) {
+            if (objReferencias[i].nombres == "" || objReferencias[i].apaterno == "" || (objReferencias[i].telefono == "" && objReferencias[i].correo == "")) {
+                banderaRef++;
+            }
+        }
+
+        if (banderaRef >= 1) {
+            app.alert.show("ReferenciaVacia", {
+                level: "error",
+                title: "Alguna referencia est\u00E1 incompleta. <br> Favor de completar los campos.",
+                autoClose: true,
+                return: false,
+            });
+            errors['xd'] = errors['xd'] || {};
+            errors['xd'].required = true;
+        }
+
+        callback(null, fields, errors);
+    },
+
 })

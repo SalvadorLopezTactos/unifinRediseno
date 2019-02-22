@@ -1,0 +1,39 @@
+<!--
+/*
+ *  AA - 2019-02-14
+ *  CustomField - Grid
+ */
+-->
+<div style="border: 2px solid #58749a;border-radius: 12px;padding:10px;">
+    <!-- Table list-->
+    <td class="list-view">
+        <table id="tableReferencias" class="table table-striped">
+            <thead>
+            <tr bgcolor="#0679c8" style="color:#fff">
+                <th >Referencia</th>
+                <th >Correo</th>
+                <th >Teléfono</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {{#each detalle}}
+                <tr>
+
+                    <td class="campo1SelectR">
+                        {{nombres}} {{apaterno}} {{amaterno}}
+                    </td>
+                    <td class="campo2SelectR">
+                        {{correo}}
+                    </td>
+                    <td class="campo3SelectR">
+                        {{telefono}}
+                    </td>
+                </tr>
+
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

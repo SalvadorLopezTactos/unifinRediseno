@@ -3162,8 +3162,8 @@
                   faltantesAP = faltantesAP + '<b>- '+$('.campo26txt-ap')[0].getAttribute('data-name')+'<br></b>';
               }else{
                   $('.campo26txt-ap').css('border-color','');
-              }
-          }*/
+              }*/
+          }
           //Valida campos para FF
           if (App.user.attributes.tipodeproducto_c == '4') {
               //Pregunta: campo2ddw-ff
