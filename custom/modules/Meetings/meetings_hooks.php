@@ -9,11 +9,25 @@
 
 class Meetings_Hooks
 {
-    //Agregar Invitados
-    function RelationAdd($bean = null, $event = null, $args = null)
-    {
-		global $db;
-		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $args['related_id'] != $bean->assigned_user_id && $bean->date_entered != $bean->date_modified && stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False)
+  //Agregar Invitados
+  function RelationAdd($bean = null, $event = null, $args = null)
+  {
+    global $db;
+    global $app_list_strings;
+    //Busca puesto del usuario
+    $idUser = $args['related_id'];
+  	$beanUser=BeanFactory::getBean('Users', $idUser);
+    $puesto = $beanUser->puestousuario_c;
+    $lista = $app_list_strings['prospeccion_c_list'];
+    $flag=false;
+    $listatext=array();
+    foreach ($lista as $key => $newList){
+      $listatext[]=$key;
+      if($key == $puesto){
+        $flag=true;
+      }
+    }
+		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $args['related_id'] != $bean->assigned_user_id && $bean->date_entered != $bean->date_modified && stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $flag == false)
 		{
 /*			$query = <<<SQL
                 SELECT a.id, b.parent_meeting_c
@@ -176,7 +190,7 @@ SQL;
       				}
       				$acompanianteMeet->parent_meeting_c = $bean->id;
       				$acompanianteMeet->created_by = $bean->created_by;
-				    $acompanianteMeet->modified_user_id = $bean->modified_user_id;
+		          $acompanianteMeet->modified_user_id = $bean->modified_user_id;
       				$acompanianteMeet->assigned_user_id = $row['user_id'];
       				$acompanianteMeet->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
       				$acompanianteMeet->reunion_objetivos = $bean->reunion_objetivos;
