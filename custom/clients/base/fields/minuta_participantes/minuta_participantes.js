@@ -120,18 +120,18 @@
         });
         $('.campo2P').change(function(evt) {
           var row = $(this).closest("tr");
-          var correo = $('.campo2P').eq(row.index()).val();
+          var correo = row.context.value; //$('.campo2P').eq(row.index()).val();
           if(correo == "") {
-              $('.campo2P').eq(row.index()).css('border-color', 'red');
+              $('.campo2SelectP').eq(row.index()).find('input').css('border-color', 'red');
                 app.alert.show('email_telefono_error', {
                 level: 'error',
                 autoClose: true,
                 messages: 'Favor de agregar un <b>Correo</b>'
               });
           }else{
-              $('.campo2P').eq(row.index()).css('border-color', '');
+              $('.campo2SelectP').eq(row.index()).find('input').css('border-color', '');
               if (!selfData.validaMail(correo)) {
-                $('.campo2P').eq(row.index()).css('border-color', 'red');
+                $('.campo2SelectP').eq(row.index()).find('input').css('border-color', 'red');
                 app.alert.show('mail_participante_error', {
                     level: 'error',
                     autoClose: true,
@@ -139,15 +139,16 @@
                 });
               }
               else {
-                selfData.mParticipantes.participantes[row.index()].correo = $('.campo2P').eq(row.index()).val();
+                selfData.mParticipantes.participantes[row.index()].correo = correo;
               }
           }
+          selfData.mParticipantes.participantes[row.index()].correo = correo;
         });
         $('.campo3P').change(function(evt) {
           var row = $(this).closest("tr");
-          var telefono = $('.campo3P').eq(row.index()).val();
+          var telefono = row.context.value; //$('.campo3P').eq(row.index()).val();
           if (!selfData.validaTamano(telefono) && telefono) {
-            $('.campo3P').eq(row.index()).css('border-color', 'red');
+            $('.campo3SelectP').eq(row.index()).find('input').css('border-color', 'red');
             app.alert.show('phone_participante_error', {
                 level: 'error',
                 autoClose: true,
@@ -155,7 +156,7 @@
             });
           }
           else {
-            $('.campo3P').eq(row.index()).css('border-color', '');
+            $('.campo3SelectP').eq(row.index()).find('input').css('border-color', '');
             selfData.mParticipantes.participantes[row.index()].telefono = telefono;
           }
         });
@@ -187,7 +188,7 @@
             $('.newCampo4P').css('border-color', '');
             $('.newCampo5P').css('border-color', '');
             $('.newCampo6P').css('border-color', '');
-    
+
             //Obteniendo valores de los campos
             var valor1 = $('.newCampo1P')[0].value;
             var valor2 = $('.newCampo2P')[0].value;
@@ -195,7 +196,7 @@
             var valor4 = $('.newCampo4P')[0].value;
             var valor5 = $('.newCampo5P')[0].value;
             var valor6 = $('.newCampo6P')[0].value;
-    
+
             var item = {
                 "id": "",
                 "nombres": valor1,
@@ -209,71 +210,71 @@
                 "asistencia": 1,
                 "activo" : "1"
             };
-    
+
             //Valida campos requeridos
             var faltantes = 0;
             //Nombres
             if (valor1 == '' || valor1.trim()=='') {
-    
+
                     $('.newCampo1P').css('border-color', 'red');
                     faltantes++;
             }
-    
+
             if ((valor1 != '' || valor1.trim()!='') ) {
-    
+
                 if(!this.ValidaCaracter(valor1))
                 {
                     $('.newCampo1P').css('border-color', 'red');
-    
+
                     app.alert.show('Tname_participante_error', {
                         level: 'error',
                         autoClose: true,
                         messages: 'Formato de nombre incorrecto'
-    
+
                     });
                     faltantes++;
                 }
             }
-    
+
             //Apellido Paterno
             if (valor2 == '' || valor2.trim()=='') {
                 $('.newCampo2P').css('border-color', 'red');
                 faltantes++
             }
-    
+
             if ((valor2 != '' || valor2.trim()!='') ) {
-    
+
                 if(!this.ValidaCaracter(valor2))
                 {
                     $('.newCampo2P').css('border-color', 'red');
-    
+
                     app.alert.show('Tname_participante_error', {
                         level: 'error',
                         autoClose: true,
                         messages: 'Formato de nombre incorrecto'
-    
+
                     });
                     faltantes++;
                 }
             }
-    
+
             // Apellido Materno
             if ((valor3 != '' || valor3.trim()!='') ) {
-    
+
                 if(!this.ValidaCaracter(valor3))
                 {
                     $('.newCampo3P').css('border-color', 'red');
-    
+
                     app.alert.show('Tname_participante_error', {
                         level: 'error',
                         autoClose: true,
                         messages: 'Formato de nombre incorrecto'
-    
+
                     });
                     faltantes++;
                 }
             }
-    
+
             //Correo
             if (valor4 == '') {
                 $('.newCampo4P').css('border-color', 'red');
@@ -281,11 +282,11 @@
                     level: 'error',
                     autoClose: true,
                     messages: 'Favor de agregar un <b>Correo</b>'
-    
+
                 });
                 faltantes++
             }
-    
+
             //Tipo de contacto
             if (valor6 == '' || valor6 == 'Tipo de Contacto') {
                 $('.newCampo6P').css('border-color', 'red');
@@ -293,11 +294,11 @@
                     level: 'error',
                     autoClose: true,
                     messages: 'Favor de seleccionar un <b>Tipo de Contacto</b>'
-    
+
                 });
                 faltantes++
             }
-    
+
             // valida telefono
             if (valor5 != "") {
                 if (!this.validaTamano(valor5)) {
@@ -310,7 +311,7 @@
                     });
                 }
             }
-    
+
             // valida la máscara del correo
             if (valor4 != "") {
                 if (!this.validaMail(valor4)) {
@@ -323,8 +324,14 @@
                     });
                 }
             }
-            
-            if (faltantes == 0) {           
+
+            if (faltantes == 0) {
+              App.alert.show('loadingParticipante', {
+                  level: 'process',
+                  title: 'Cargando, por favor espere.',
+              });
+
+              $('.addParticipante').bind('click', false);
               // Valida si existen duplicados
               var nombre = $('.newCampo1P')[0].value;
               var apellp = $('.newCampo2P')[0].value;
@@ -352,8 +359,11 @@
                   }
                   else {
                     this.mParticipantes.participantes.push(item);
-                    this.render();          
+                    this.render();
                   }
+
+                  $('.addParticipante').unbind('click', false);
+                  App.alert.dismiss('loadingParticipante');
                 }, this)
               });
             }
@@ -367,7 +377,7 @@
             //Obteniendo valores de los campos
             var valor7 = $('.newCampo7P')[0].value;
             var idParti = $('input.busca-participante').val();
-    
+
             //Valida campos requeridos
             var faltantes = 0;
             //Nombre
@@ -380,7 +390,7 @@
               });
               faltantes++;
             }
-        
+
             //Tipo de contacto
             if(valor7 == '' || valor7 == 'Tipo de Contacto') {
               $('.newCampo7P').css('border-color', 'red');
@@ -391,8 +401,14 @@
               });
               faltantes++
             }
-                
-            if(faltantes == 0) {           
+
+            if(faltantes == 0) {
+              App.alert.show('loadingParticipantes', {
+                  level: 'process',
+                  title: 'Cargando, por favor espere.',
+              });
+
+              $('.addParticipantes').bind('click', false);
               // Obtiene datos del participante seleccionado
               var fields = ["id", "primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "email1", "phone_office", "tipo_registro_c"];
               app.api.call("read", app.api.buildURL("Accounts/", null, null, {
@@ -426,7 +442,7 @@
                         "activo" : "1"
                     };
                     this.mParticipantes.participantes.push(item);
-                    this.render();          
+                    this.render();
                   }
                   else
                   {
@@ -436,6 +452,8 @@
                       autoClose: false
                     });
                   }
+                  $('.addParticipantes').unbind('click', false);
+                  App.alert.dismiss('loadingParticipantes');
                 }, this)
               });
             }
