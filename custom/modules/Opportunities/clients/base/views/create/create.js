@@ -1480,10 +1480,11 @@
 
     valida_requeridos: function(fields, errors, callback) {
         var campos = "";
+        var omitir = [];
         _.each(errors, function(value, key) {
-            if(key == 'amount' && this.model.get('amount') < 0)
+            if((key == 'amount' && this.model.get('amount') < 0) || (key == 'monto_c' && this.model.get('monto_c') < 0))
             {
-              delete key;
+              omitir.push(key);
             }
             else
             {
@@ -1496,6 +1497,11 @@
          	    }, this);
             }
         }, this);
+
+        omitir.forEach(function(element) {
+          delete errors[element];
+        });
+
         if(campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
