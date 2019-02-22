@@ -305,10 +305,10 @@
 
         }); */
 
-        /*$('.campo11ddw-ap').change(function(evt)  {
+        $('.campo11ddw-ap').change(function(evt)  {
             pld.preguntamoral();
 
-        });*/
+        });
 
 
 
@@ -334,6 +334,25 @@
 
         //Set class to select2
         $('select.select2').select2();
+
+
+        //Formato multiselect para campo Tipo de Dirección en campo account_direcciones
+        $('#multi_tipo').select2({
+            width:'100%',
+            //minimumResultsForSearch:7,
+            closeOnSelect: false,
+            containerCssClass: 'select2-choices-pills-close'
+        });
+
+        //Se establece formato multiselect a cada campo select con la clase "existingMultiClass"
+        $('select.existing_multi_tipo_class').each(function(){
+            $(this).select2({
+                width:'100%',
+                closeOnSelect: false,
+                containerCssClass: 'select2-choices-pills-close'
+            });
+        });
+
         //Se establece formato de multiselect a campo select con id "multi1 pregunta 1"
         $('#multi11').select2({
             width: '100%',
@@ -361,11 +380,13 @@
             containerCssClass: 'select2-choices-pills-close'
         });
         //Formato para cuenta existente
-        $('#existingMulti1').select2({
-            width:'100%',
-            //minimumResultsForSearch:7,
-            closeOnSelect: false,
-            containerCssClass: 'select2-choices-pills-close'
+        //Se establece formato multiselect a cada campo select con la clase "existingMultiClass"
+        $('select.existingMultiClass').each(function(){
+            $(this).select2({
+                width:'100%',
+                closeOnSelect: false,
+                containerCssClass: 'select2-choices-pills-close'
+            });
         });
 
     },
@@ -471,7 +492,7 @@
         });
         this.lista_campo11 = lista_campo11;
 
-       //Carga lista 11, cuando la cuenta es cliente: Los recursos con los que va a celebrar su operación están destinados a
+        //Carga lista 11, cuando la cuenta es cliente: Los recursos con los que va a celebrar su operación están destinados a
         var lista11ID = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
         var lista_campo25 = '';
         Object.keys(lista11ID).forEach(function (id) {
@@ -599,13 +620,13 @@
         }
     }, */
 
-    /*preguntamoral: function (){
+    preguntamoral: function (){
         if ($('.campo11ddw-ap').select2('val') == "No") {
             $('.campo26-ap').show();
         } else {
             $('.campo26-ap').hide();
         }
-    },*/
+    },
 
     //Validaciones para mostrar campos en Factoraje Financiero
     //Eventos Change (mostrar campos)
@@ -909,13 +930,13 @@
         $('.campo26-ap').hide();
     },
 
-    /*cuentacliente: function (){
+    cuentacliente: function (){
         if(this.model.get('tipo_registro_c')=='Cliente'){
             $('.campo25-ap').show();
         }else{
             $('.campo25-ap').hide();
         }
-    },*/
+    },
 
     keyDownNewExtension: function (evt) {
         if (!evt) return;

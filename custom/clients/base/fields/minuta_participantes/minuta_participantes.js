@@ -5,6 +5,7 @@
 ({
     events: {
         'click  .addParticipante': 'addParticipanteFunction',
+        'click  .addParticipantes': 'addParticipantesFunction',
         'keydown .newCampo1P': 'checkText',
         'keydown .newCampo2P': 'checkText',
         'keydown .newCampo3P': 'checkText',
@@ -352,6 +353,88 @@
                   else {
                     this.mParticipantes.participantes.push(item);
                     this.render();          
+                  }
+                }, this)
+              });
+            }
+    },
+
+    addParticipantesFunction: function (options) {
+            //Estableciendo el color de borde original en cada campo
+            $('.newCampo7P').css('border-color', '');
+            $('.busca-participante').find('.select2-choice').css('border-color','');
+
+            //Obteniendo valores de los campos
+            var valor7 = $('.newCampo7P')[0].value;
+            var idParti = $('input.busca-participante').val();
+    
+            //Valida campos requeridos
+            var faltantes = 0;
+            //Nombre
+            if(idParti == '') {
+              $('.busca-participante').find('.select2-choice').css('border-color','red');
+              app.alert.show('participante_error', {
+                  level: 'error',
+                  autoClose: true,
+                  messages: 'Favor de seleccionar un <b>Participante</b>'
+              });
+              faltantes++;
+            }
+        
+            //Tipo de contacto
+            if(valor7 == '' || valor7 == 'Tipo de Contacto') {
+              $('.newCampo7P').css('border-color', 'red');
+              app.alert.show('tipo_contacto_error', {
+                  level: 'error',
+                  autoClose: true,
+                  messages: 'Favor de seleccionar un <b>Tipo de Contacto</b>'
+              });
+              faltantes++
+            }
+                
+            if(faltantes == 0) {           
+              // Obtiene datos del participante seleccionado
+              var fields = ["id", "primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "email1", "phone_office", "tipo_registro_c"];
+              app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                fields: fields.join(','),
+                max_num: 5,
+                "filter": [
+                  {
+                    "id": idParti,
+                    "tipo_registro_c": "Persona",
+                  }
+                ]
+                }), null, {
+                success: _.bind(function (data) {
+                  if(data.records.length > 0) {
+                    var valor1 = data.records[0].primernombre_c;
+                    var valor2 = data.records[0].apellidopaterno_c;
+                    var valor3 = data.records[0].apellidomaterno_c;
+                    var valor4 = data.records[0].email1;
+                    var valor5 = data.records[0].phone_office;
+                    var item = {
+                        "id": idParti,
+                        "nombres": valor1,
+                        "apaterno": valor2,
+                        "amaterno": valor3,
+                        "telefono": valor5,
+                        "correo": valor4,
+                        "origen": "E",
+                        "unifin": 0,
+                        "tipo_contacto": valor7,
+                        "asistencia": 1,
+                        "activo" : "1"
+                    };
+                    this.mParticipantes.participantes.push(item);
+                    this.render();          
+                  }
+                  else
+                  {
+                    app.alert.show("PersonaCheck", {
+                      level: "error",
+                      title: "Solo Participantes del tipo Persona pueden ser agregados.",
+                      autoClose: false
+                    });
                   }
                 }, this)
               });

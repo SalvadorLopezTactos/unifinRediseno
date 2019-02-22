@@ -100,12 +100,26 @@
         </a>
       </div>
     </div>
-      <!-- Línea 3 -->
-      <div class="row-fluid">
-          <div class="span11">
-              <label class="record-label ">Buscar participantes</label>
+    <!-- Línea 3 -->
+    <b>Buscar participantes</b>
+	  <div class="row-fluid">
+          <div class="span8">
               <input type="hidden" class="bigdrop busca-participante row-fluid" id="buscar_participante" data-name="Buscar Participantes" data-field="participante"/>
           </div>
+		  <div class="span3">
+			<select class="newCampo7P select2" placeholder="Select">
+			  <option>Tipo de Contacto</option>
+			  {{#each tipoContacto}}
+				<option value="{{@key}}">{{@key}}</option>
+			  {{/each}}
+			</select>
+		  </div>
+		  <!-- Guardar btn -->
+		  <div class="span1">
+			<a class="btn addParticipantes">
+			  <i class="fa fa-plus"></i>
+			</a>
+		  </div>
       </div>
   </div>
 </div>
