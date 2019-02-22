@@ -138,6 +138,29 @@
 
     _render: function () {
         var CondicionFinancieraHtml = '';
+
+        if($('.new_incremento_Activo').val() !='' && $('.new_incremento_Activo').val() != undefined){
+            //Obteniendo los valores del apartado de condiciones_financieras_incremento_ratificacion "nuevos"
+            var idactivo=$('.new_incremento_Activo').val();
+            var plazo= $('.new_incremento_Plazo').val();
+            var tasa_minima= $('.new_incremento_TasaMinima').val();
+            var tasa_maxima= $('.new_incremento_TasaMaxima').val();
+            var vrc_minimo= $('.new_incremento_VRCMinimo').val();
+            var vrc_maximo= $('.new_incremento_VRCMaximo').val();
+            var vri_minimo= $('.new_incremento_VRIMinimo').val();
+            var vri_maximo= $('.new_incremento_VRIMaximo').val();
+            var comision_minima= $('.new_incremento_ComisionMinima').val();
+            var comision_maxima= $('.new_incremento_ComisionMaxima').val();
+            var renta_inicial_minima= $('.new_incremento_RentaInicialMinima').val();
+            var renta_inicial_maxima= $('.new_incremento_RentaInicialMaxima').val();
+            var deposito_en_garantia= $('.new_incremento_Deposito').prop("checked");
+            var uso_particular= $('.new_incremento_UsoParticular').prop("checked");
+            var uso_empresarial= $('.new_incremento_UsoEmpresarial').prop("checked");
+            var activo_nuevo= $('.new_incremento_ActivoNuevo').prop("checked");
+
+
+        }
+
         this._super("_render");
         if (this.tplName === 'edit') {
             //get realted records
@@ -146,6 +169,23 @@
             }, this);
             this.$el.prepend(CondicionFinancieraHtml);
 
+            //Añadiendo los valores previamente llenados y poder persistirlos al generar render
+            $('.new_incremento_Activo').val(idactivo);
+            $('.new_incremento_Plazo').val(plazo);
+            $('.new_incremento_TasaMinima').val(tasa_minima);
+            $('.new_incremento_TasaMaxima').val(tasa_maxima);
+            $('.new_incremento_VRCMinimo').val(vrc_minimo);
+            $('.new_incremento_VRCMaximo').val(vrc_maximo);
+            $('.new_incremento_VRIMinimo').val(vri_minimo);
+            $('.new_incremento_VRIMaximo').val(vri_maximo);
+            $('.new_incremento_ComisionMinima').val(comision_minima);
+            $('.new_incremento_ComisionMaxima').val(comision_maxima);
+            $('.new_incremento_RentaInicialMinima').val(renta_inicial_minima);
+            $('.new_incremento_RentaInicialMaxima').val(renta_inicial_maxima);
+            $('.new_incremento_Deposito').prop("checked",deposito_en_garantia);
+            $('.new_incremento_UsoParticular').prop("checked",uso_particular);
+            $('.new_incremento_UsoEmpresarial').prop("checked",uso_empresarial);
+            $('.new_incremento_ActivoNuevo').prop("checked",activo_nuevo);
         } //if edit
 
 
@@ -381,54 +421,59 @@
         var class_name = $input[0].className,
             field_name = $($input).attr('data-field');
 
-        //split the class name in case the field has more than 1 class
-        var class_name_split = [];
-        class_name_split.push($.trim(class_name).split(" "));
+        if(!$input[0].classList.contains('porcentaje_new')){
 
-        var $inputs = this.$('.' + class_name_split[0]),
-            index = $inputs.index($input),
-            newCFinanciera = $input.val(),
-            primaryRemoved;
+            //split the class name in case the field has more than 1 class
+            var class_name_split = [];
+            class_name_split.push($.trim(class_name).split(" "));
 
-        if(class_name_split[0][1] == "checkbox_incremento_Update"){
-            newCFinanciera = $input.prop("checked");
-        }
+            var $inputs = this.$('.' + class_name_split[0]),
+                index = $inputs.index($input),
+                newCFinanciera = $input.val(),
+                primaryRemoved;
 
-        newCFinanciera = $.trim(newCFinanciera);
-        if (newCFinanciera === '') {
-            // remove email if email is empty
-            primaryRemoved = this._removeCondicionFinancieraInModel(index);
-
-            $input
-                .closest('.condiciones_financieras_incremento_ratificacion')
-                .remove();
-
-            if (primaryRemoved) {
-                // on list views we need to set the current value on the input
-                if (this.view && this.view.action === 'list') {
-                    var addresses = this.model.get(this.name) || [];
-                    var primaryAddress = _.filter(addresses, function (address) {
-                        if (address.principal) {
-                            return true;
-                        }
-                    });
-                    if (primaryAddress[0] && primaryAddress[0].email_address) {
-                        app.alert.show('list_delete_email_info', {
-                            level: 'info',
-                            autoClose: true,
-                            messages: app.lang.get('LBL_LIST_REMOVE_EMAIL_INFO')
-                        });
-                        $input.val(primaryAddress[0].email_address);
-                    }
-                }
-                this.$('[data-emailproperty=principal]')
-                    .first()
-                    .addClass('active');
+            if(class_name_split[0][1] == "checkbox_incremento_Update"){
+                newCFinanciera = $input.prop("checked");
             }
+
+            newCFinanciera = $.trim(newCFinanciera);
+            if (newCFinanciera === '') {
+                // remove email if email is empty
+                primaryRemoved = this._removeCondicionFinancieraInModel(index);
+
+                $input
+                    .closest('.condiciones_financieras_incremento_ratificacion')
+                    .remove();
+
+                if (primaryRemoved) {
+                    // on list views we need to set the current value on the input
+                    if (this.view && this.view.action === 'list') {
+                        var addresses = this.model.get(this.name) || [];
+                        var primaryAddress = _.filter(addresses, function (address) {
+                            if (address.principal) {
+                                return true;
+                            }
+                        });
+                        if (primaryAddress[0] && primaryAddress[0].email_address) {
+                            app.alert.show('list_delete_email_info', {
+                                level: 'info',
+                                autoClose: true,
+                                messages: app.lang.get('LBL_LIST_REMOVE_EMAIL_INFO')
+                            });
+                            $input.val(primaryAddress[0].email_address);
+                        }
+                    }
+                    this.$('[data-emailproperty=principal]')
+                        .first()
+                        .addClass('active');
+                }
+            }
+            else {
+                this._updateExistingCondicionFinancieraInModel(index, newCFinanciera, field_name);
+            }
+
         }
-        else {
-            this._updateExistingCondicionFinancieraInModel(index, newCFinanciera, field_name);
-        }
+
     },
 
     _updateExistingCondicionFinancieraInModel: function (index, newCFinanciera, field_name) {

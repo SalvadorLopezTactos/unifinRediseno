@@ -6,7 +6,7 @@
      */
 
 $hook_array['after_save'][] = Array(
-    1,
+    2,
     'Create a new Meeting for companion',
     'custom/modules/Meetings/meetings_hooks.php',
     'Meetings_Hooks', // name of the class
@@ -42,7 +42,7 @@ $hook_array['after_relationship_delete'][] = Array(
 
 //Adrian Arauz
 $hook_array['after_save'][] = Array(
-    2,
+    3,
     'Apply Meeting/Objectives into Minuta',
     'custom/modules/Meetings/meetings_hooks.php',
     'Meetings_Hooks', // name of the class
@@ -58,7 +58,7 @@ $hook_array['before_save'][] = Array(
 );
 
 $hook_array['after_save'][] = Array(
-    3,
+    4,
     'Cambia LevAdmin',
     'custom/modules/Meetings/meetings_hooks.php',
     'Meetings_Hooks', // name of the class
@@ -66,9 +66,24 @@ $hook_array['after_save'][] = Array(
 );
 
 $hook_array['after_save'][]=Array(
-    4,
+    1,
     'No se agrega a centro de prospección',
     'custom/modules/Meetings/meetings_hooks.php',
     'Meetings_Hooks', //name of the class
     'modificaReunion' //name of the fuction
+);
+//LH para insertar valores a tabla custom de meetings_audit, la cual se creó pegándole directo a la base de datos
+$hook_array['before_save'][] = Array(
+    2,
+    'Insertar registros a tabla de auditoría meetings_audit',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks', // name of the class
+    'insertAuditFields' // name of the function
+);
+$hook_array['after_save'][]=Array(
+    5,
+    'Elimina a los invitados de la primera reunion',
+    'custom/modules/Meetings/meetings_hooks.php',
+    'Meetings_Hooks',
+    'EliminaInvitados'
 );

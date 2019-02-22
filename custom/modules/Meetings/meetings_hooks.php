@@ -14,7 +14,7 @@ class Meetings_Hooks
     {
 		global $db;
 		if($args['related_module'] == 'Users' && $args['relationship'] == 'meetings_users' && $args['related_id'] != $bean->assigned_user_id && $bean->date_entered != $bean->date_modified && stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False)
-		{   
+		{
 /*			$query = <<<SQL
                 SELECT a.id, b.parent_meeting_c
                 FROM meetings a, meetings_cstm b
@@ -138,24 +138,23 @@ SQL;
 		}
 	}
 
-    //Generar una copia del meeting para los acompa�antes de la cita en Brujula
+    //Generar una copia del meeting para los acompañantes de la cita en Brujula
     function MeetingAcompaniante($bean = null, $event = null, $args = null)
     {
         global $db;
         // Crear Reuni�n
-        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->nuevo_c == 1 && $bean->repeat_parent_id == "")
+        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->date_entered == $bean->date_modified && $bean->repeat_parent_id == "")
         {
-            $query = <<<SQL
-                SELECT id, user_id
-                FROM meetings_users
-                WHERE meeting_id = '{$bean->id}'
-                AND deleted = 0
+          $query = <<<SQL
+             SELECT id, user_id
+             FROM meetings_users
+             WHERE meeting_id = '{$bean->id}'
+             AND deleted = 0
 SQL;
-                $GLOBALS['log']->fatal("Meetings: ".$query);
-			      $conn = $db->getConnection();
-            $queryResult = $conn->executeQuery($query);
-            foreach($queryResult->fetchAll() as $row)
-	    	    {
+			    $conn = $db->getConnection();
+          $queryResult = $conn->executeQuery($query);
+          foreach($queryResult->fetchAll() as $row)
+	    	  {
       			if($row['user_id'] != $bean->assigned_user_id)
 			      {
       				$exclude = array
@@ -176,10 +175,11 @@ SQL;
       					}
       				}
       				$acompanianteMeet->parent_meeting_c = $bean->id;
-					    $acompanianteMeet->created_by = $bean->created_by;
-				    	$acompanianteMeet->modified_user_id = $bean->modified_user_id;
+      				$acompanianteMeet->created_by = $bean->created_by;
+				    $acompanianteMeet->modified_user_id = $bean->modified_user_id;
       				$acompanianteMeet->assigned_user_id = $row['user_id'];
       				$acompanianteMeet->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
+      				$acompanianteMeet->reunion_objetivos = $bean->reunion_objetivos;
       				$acompanianteMeet->save();
 /*      				//Agregar relaciones de invitados
       				$query1 = $db->query($query);
@@ -189,16 +189,16 @@ SQL;
       				}*/
       			}
       		}
-      		$ultimo = <<<SQL
+/*      		$ultimo = <<<SQL
                     UPDATE meetings_cstm
                     SET nuevo_c = 0
                     WHERE id_c = '{$bean->id}'
 SQL;
- 		  	  $ultimo1 = $db->query($ultimo);
+ 		  	  $ultimo1 = $db->query($ultimo);*/
         }
 
 		    // Editar Reuni�n
-        if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->date_entered != $bean->date_modified && $bean->nuevo_c == 0 && $bean->actualizado_c == 1)
+        /*if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == False && $bean->date_entered != $bean->date_modified)
 	      {
   		  	  $query = <<<SQL
                 SELECT a.id, b.parent_meeting_c
@@ -239,15 +239,15 @@ SQL;
       			}
       			$acompanianteMeet->save();
       		}
-      		$ultimo = <<<SQL
-                    UPDATE meetings_cstm
-                    SET actualizado_c = 0
-                    WHERE id_c = '{$bean->id}'
-SQL;
-            $ultimo1 = $db->query($ultimo);
-        }
+//      		$ultimo = <<<SQL
+//                     UPDATE meetings_cstm
+//                     SET actualizado_c = 0
+//                     WHERE id_c = '{$bean->id}'
+// SQL;
+//             $ultimo1 = $db->query($ultimo);
+}*/
 
-		//Elimina Invitados
+		    //Elimina Invitados
         if(stristr($bean->description,"Cita registrada automaticamente por CRM ya que ha sido asignado como") == True)
         {
   			  $levadmin = <<<SQL
@@ -275,14 +275,14 @@ SQL;
 SQL;
     				$levadmin1 = $db->query($levadmin);
 		    	}*/
-  		}
-		//Elimina Admin
-		$levadmin = <<<SQL
+  		  }
+		    //Elimina Admin
+		    $levadmin = <<<SQL
             UPDATE meetings_users SET deleted = 1
             WHERE meeting_id = '{$bean->id}'
 		    AND user_id = '1'
 SQL;
-		$levadmin1 = $db->query($levadmin);
+		    $levadmin1 = $db->query($levadmin);
     }
 
     //@Jesus Carrillo
@@ -492,7 +492,7 @@ SQL;
         }
       }
     }
-    
+
     function cambiAdmin2 ($bean = null, $event = null, $args = null)
     {
       if($bean->modified_user_id == '1')
@@ -539,15 +539,16 @@ SQL;
         }
       }
       //Si coincide el usuario loggeado con alguno de la lista
+      /*
       if($flag==true){
         $usrmod=array();
         //Consulta del id de la reunion y el del usuario loggeado
         $meetingscount="
           select m.user_id
-          from meetings_users m 
+          from meetings_users m
           inner join users u on u.id = m.user_id
           inner join users_cstm uc on uc.id_c = u.id
-          where 
+          where
           m.meeting_id = '{$bean->id}'
           and uc.puestousuario_c not in ('".implode("','",$listatext)."')
           and m.deleted = 0";
@@ -565,7 +566,7 @@ SQL;
           }
           //$GLOBALS['log']->fatal("El id de los usuarios: ".$totalme);
         }
-        $GLOBALS['log']->fatal("Los usuarios invitados son: ". print_r($usrmod,true));
+        //$GLOBALS['log']->fatal("Los usuarios invitados son: ". print_r($usrmod,true));
         //Comparacion para modificar a la persona asignada, solo cuando haya invitados
         if(count($usrmod)>=1 && $bean->assigned_user_id==$current_user->id){
           //Se hace una consulta a base de datos para modificar el usuario asignado a cada reunión
@@ -580,21 +581,62 @@ SQL;
           $deleusr="
             UPDATE meetings_users
             SET deleted = 1
-            WHERE user_id= '{$current_user->id}' 
+            WHERE user_id= '{$current_user->id}'
             AND meeting_id='{$bean->id}'";
           $deletusr=$db->query($deleusr);
         }
-      }
+      }*/
       $puestoinv="
-        update meetings_users m 
+        update meetings_users m
         inner join users u on u.id = m.user_id
         inner join users_cstm uc on uc.id_c = u.id
         set m.deleted = 1
-        where 
+        where
         m.meeting_id = '{$bean->id}'
         and uc.puestousuario_c  in ('".implode("','",$listatext)."')
         and m.deleted = 0";
       $showpuesto=$db->query($puestoinv);
       //$GLOBALS['log']->fatal("El puesto de los usuarios es: ".$puestoinv);
     }
-  }
+
+    /*
+     * Función para tabla de auditoría de Meetings
+     * Función que inserta valores a tabla de meetings_audit (creada directa desde la BD) para poder trackear los cambios realizados al campo de status
+     * */
+    function insertAuditFields ($bean = null, $event = null, $args = null){
+        global $current_user;
+        $date= TimeDate::getInstance()->nowDb();
+        if($args['isUpdate']){
+            $id_m_audit=create_guid();
+
+            if($bean->fetched_row['status'] != $bean->status‌){
+                $sqlInsert="INSERT INTO meetings_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
+                            VALUES ('{$id_m_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'status', 'enum', '{$bean->fetched_row['status']}', '{$bean->status}', '', '', '1', '{$date}')";
+
+                $GLOBALS['db']->query($sqlInsert);
+
+            }
+
+
+        }
+
+    }
+
+    function EliminaInvitados($bean=null, $event=null, $args=null){
+      $asignado=$bean->assigned_user_id;
+      global $db;
+      $invitados=array();
+      $meetingscount="
+        update meetings_users m
+        set m.deleted=1
+        where m.meeting_id='{$bean->id}'
+        and m.user_id !='{$asignado}'";
+      $totalcount=$db->query($meetingscount);
+      $conteo=0;
+      while($row=$db->fetchByAssoc($totalcount)){
+        $conteo++;
+        array_push($invitados, $row['user_id']);
+      }
+      //$GLOBALS['log']->fatal("Los inivtados finales son: ".$meetingscount);
+    }
+}

@@ -218,7 +218,7 @@
         }
 
         //Valida fechas
-        if (this.model.get('parent_meeting_c') || this.model.get('status')=='Held'|| this.model.get('status')=='Not Held' ) {
+        if (this.model.get('status')=='Held' || this.model.get('status')=='Not Held') {
           self.noEditFields.push('date_start');
           self.noEditFields.push('date_end');
           self.noEditFields.push('duration');
@@ -571,7 +571,7 @@
 
     /*Valida que por lo menos exita un objetivo específico a su vez expande el panel*/
     ValidaObjetivos:function(fields, errors, callback){
-        if (this.$('.objetivoSelect').length<=0){
+        if (this.$('.objetivoSelect').length<=0 && this.model.get('parent_type') == "Accounts" && this.model.get('parent_id')!="" && this.model.get('status')!="Not Held" ){
             errors[$(".objetivoSelect")] = errors['objetivos_especificos'] || {};
             errors[$("objetivos_especificos")].required = true;
             //Agrega borde
