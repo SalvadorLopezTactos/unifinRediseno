@@ -1,0 +1,108 @@
+<!--
+Victor Martinez 11-02-2018
+Custom-field
+-->
+<div style="border: 2px solid #58749a;border-radius: 12px;padding:10px;" id="minuta_reunione_llamadas">
+	<b>Asunto</b>
+	<div id="input">
+		<!-- Línea 1 -->
+		<div class="row-fluid">
+		  <div class="span12">
+		    <input type="text" class="newCampo1A span12 newItem" placeholder="Asunto" style="width: 95%;margin: 4px;display: inline-block;" value='{{nuevoRegistro.nombre}}'>
+		  </div>
+		  <br>
+		</div>
+		<br>
+		<!-- Línea 2 Fechas -->
+		<div class="row-fluid" style="display: flex;flex-direction: row;align-items: flex-start">
+			<div class="span3">
+				<div class="record-label">Fecha de inicio</div>
+				<input type="date" class="newDate span2 newItem" placeholder="mm-dd-yyyy" style="width: 95%;margin: 4px;display: inline-block;" value='{{nuevoRegistro.date_start}}' min="{{min_date}}">
+			</div>
+			<div class="span3">
+				<div class="record-label">&nbsp;</div>
+				<input type="text" class="newTime1 span2 newItem" placeholder="hh:mm" id="tp11" rel="timepicker" value='{{nuevoRegistro.time_start}}' style="width: 95%;margin: 4px;display: inline-block;">
+			</div>
+			<div class="span3" class="record-label">
+				<div class="record-label">Fecha de fin</div>
+				<input type="date" class="newDate2 span2 newItem" placeholder="mm-dd-yyyy"style="width: 95%;margin: 4px;display: inline-block;" value='{{nuevoRegistro.date_end}}' min="{{min_date}}">
+			</div>
+			<div class="span3">
+				<div class="record-label">&nbsp;</div>
+				<input type="text" class="newTime2 span2 newItem2" placeholder="hh:mm" id="tp12" rel="timepicker"  style="width: 95%;margin: 4px;display: inline-block;" value='{{nuevoRegistro.time_end}}'>
+			</div>
+		</div>
+		<br>
+		<!-- Línea 3 Relacionado-Asiganada a -->
+		<div class="row-fluid" style="display: flex;flex-direction: row;align-items: flex-start;">			
+			<div class="span6">
+				<div class="record-label">Cuenta</div>
+				<span class=" row-fluid nombreCuenta newItem">
+                     <a href="/unifinRediseno/#Accounts/{{{nuevoRegistro.account_id_c}}}"
+                        class="campo3rel-ap PR-link"
+                        data-type="relate" data-field="campo3AP"
+                        style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
+                         {{nuevoRegistro.tct_relacionado_con_c}}
+                     </a>
+                </span>
+			</div>
+			<div class="span6">
+				<div class="record-label">Asignada a</div>
+				<span class=" row-fluid asignadoA newItem">
+                     <a href="/unifinRediseno/#Employees/{{{nuevoRegistro.assigned_user_id}}}"
+                        class="campo3rel-ap PR-link"
+                        data-type="relate" data-field="campo3AP"
+                        style="cursor:pointer; padding: 5px 7px; font-size: 14px;">
+                         {{nuevoRegistro.assigned_user_name}}
+                     </a>
+                </span>
+			</div>
+		</div>
+		<br>
+		<!-- Línea 4 Objetivos -->
+		<div class="row-fluid" style="display: flex; flex-direction: row;align-items: flex-start;" id="Objetivos">
+			<div class="span6">
+				<div class="record-label">Objetivo General</div>
+				<select class="row-fluid objetivoG newItem">
+                       {{#each objetivoG_list}}
+                           <option value="{{@key}}" {{ifSelected @key ../nuevoRegistro.objetivoG}}>{{this}}</option>
+                       {{/each}}
+               </select>
+			</div>
+			<div class="span6">
+				<div class="record-label">Objetivos Especificos</div>
+				<div>
+					<table>
+						<tbody>
+			          {{#each myobject.records}}
+			            <tr>
+			                <td class="objetivoEselect" width="80%">
+			                  <input type="text" class="objetivoEselect span10 newItem" value="{{name}}">
+			                </td>
+			                <td class="objetivoEselect" width="20%">
+			                  <button type="button" class="deleteObjetivoE newItem">
+			                    <i class="fa fa-minus"></i>
+			                  </button>
+			                </td>
+			            </tr>
+			          {{/each}}
+			        </tbody>
+			    </table>
+			  </div>
+			  <div id="input">
+			    <!-- Contenid Línea n -->
+			    <div class="row-fluid">
+			      <div class="span10">
+			        <input type="text" class="newObjetivoE1 span10 newItem" placeholder="Nuevo Objetivo">
+			      </div>
+			      <div class="span2">
+			        <a class="btn addObjetivoE">
+			          <i class="fa fa-plus"></i>
+			        </a>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>

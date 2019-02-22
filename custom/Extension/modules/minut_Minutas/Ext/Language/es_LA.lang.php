@@ -13,4 +13,5 @@ $mod_strings['LBL_TCT_TODAY'] = 'Hoy';
 $mod_strings['LBL_RECORDVIEW_PANEL4'] = 'Check in';
 $mod_strings['LBL_TCT_PROCESO_UNIFIN_PLATFOM_C'] = 'Plataforma proceso UNIFIN';
 $mod_strings['LBL_DOCUMENTOS'] = 'Documentos';
+$mod_strings['LBL_RECORDVIEW_PANEL5'] = 'Nueva Reunión/Llamada';
 $mod_strings['LBL_TCT_COMMENTS_REL_TXA'] = 'Comentarios relevantes de la reunión';

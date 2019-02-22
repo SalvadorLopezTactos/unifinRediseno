@@ -1,5 +1,6 @@
 <?php
- // created: 2019-02-11 12:48:54
+ // created: 2019-02-20 09:38:27
+
 $dictionary['minut_Minutas']['fields']['resultado_c']['labelValue']='Resultado de Cita';
 $dictionary['minut_Minutas']['fields']['resultado_c']['dependency']='';
 $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
@@ -14,9 +15,10 @@ $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
       3 => '17',
       4 => '3',
       5 => '5',
-      6 => '6',
-      7 => '7',
-      8 => '18',
+      6 => '19',
+      7 => '6',
+      8 => '7',
+      9 => '18',
     ),
     2 => 
     array (
@@ -26,8 +28,9 @@ $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
-      6 => '6',
-      7 => '7',
+      6 => '19',
+      7 => '6',
+      8 => '7',
     ),
     4 => 
     array (
@@ -44,8 +47,9 @@ $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
-      6 => '6',
-      7 => '7',
+      6 => '19',
+      7 => '6',
+      8 => '7',
     ),
     6 => 
     array (
@@ -55,8 +59,9 @@ $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
-      6 => '6',
-      7 => '7',
+      6 => '19',
+      7 => '6',
+      8 => '7',
     ),
     7 => 
     array (
@@ -80,8 +85,9 @@ $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
-      6 => '6',
-      7 => '7',
+      6 => '19',
+      7 => '6',
+      8 => '7',
     ),
     10 => 
     array (
@@ -98,7 +104,8 @@ $dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
       3 => '3',
       4 => '6',
       5 => '5',
-      6 => '7',
+      6 => '19',
+      7 => '7',
     ),
     12 => 
     array (
