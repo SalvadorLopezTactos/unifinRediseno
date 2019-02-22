@@ -7,10 +7,10 @@
     campo4_list: null,
     campo6_list: null,
     campo16_list: null,
-   // campo7_list: null,
-   // campo9_list: null,
+    // campo7_list: null,
+    // campo9_list: null,
     campo11_list: null,
-   // campo25_list: null,
+    campo25_list: null,
     campo21_list: null,
     campo24_list: null,
     campo18_list: null,
@@ -35,7 +35,7 @@
         console.log(this.model.get('id'));
 
         //Validación para activar las listas desplegables
-      //  pld.GeneraListas();
+        //  pld.GeneraListas();
 
         //Funcion oculta los panels de productos
         pld.ocultapanels;
@@ -48,39 +48,39 @@
 
     loadData: function (options) {
         //Recupera data existente
-       // if (pld.action == 'detail') {
-            //Recupera datos para vista de detalle
-            var idCuenta = pld.model.get('id');
-            if (idCuenta=="" || idCuenta == undefined) {
-                idCuenta = '1';
-            }
-            app.api.call('GET', app.api.buildURL('GetProductosPLD/' + idCuenta), null, {
-                success: function (data) {
-                    //Recupera resultado
-                    pld.ProductosPLD = pld.formatDetailPLD(data);
-                    //Establece visibilidad por tipo de productos
-                    //AP
-                    if (App.user.attributes.tipodeproducto_c == '1') {
-                        pld.ProductosPLD.arrendamientoPuro.visible = 'block';
-                    }
-                    //FF
-                    if (App.user.attributes.tipodeproducto_c == '4') {
-                        pld.ProductosPLD.factorajeFinanciero.visible = 'block';
-                    }
-                    //CA
-                    if (App.user.attributes.tipodeproducto_c == '3') {
-                        pld.ProductosPLD.creditoAutomotriz.visible = 'block';
-                    }
-                    //Agrega data a vardef
-                    self.model.set('accounts_tct_pld_1',pld.ProductosPLD);
-                    _.extend(this, pld.ProductosPLD);
-                    pld.render();
-                },
-                error: function (e) {
-                    throw e;
+        // if (pld.action == 'detail') {
+        //Recupera datos para vista de detalle
+        var idCuenta = pld.model.get('id');
+        if (idCuenta=="" || idCuenta == undefined) {
+            idCuenta = '1';
+        }
+        app.api.call('GET', app.api.buildURL('GetProductosPLD/' + idCuenta), null, {
+            success: function (data) {
+                //Recupera resultado
+                pld.ProductosPLD = pld.formatDetailPLD(data);
+                //Establece visibilidad por tipo de productos
+                //AP
+                if (App.user.attributes.tipodeproducto_c == '1') {
+                    pld.ProductosPLD.arrendamientoPuro.visible = 'block';
                 }
-            });
-       // }
+                //FF
+                if (App.user.attributes.tipodeproducto_c == '4') {
+                    pld.ProductosPLD.factorajeFinanciero.visible = 'block';
+                }
+                //CA
+                if (App.user.attributes.tipodeproducto_c == '3') {
+                    pld.ProductosPLD.creditoAutomotriz.visible = 'block';
+                }
+                //Agrega data a vardef
+                self.model.set('accounts_tct_pld_1',pld.ProductosPLD);
+                _.extend(this, pld.ProductosPLD);
+                pld.render();
+            },
+            error: function (e) {
+                throw e;
+            }
+        });
+        // }
 
         this.render();
     },
@@ -89,19 +89,19 @@
         // Listas AP
         dataPLD['arrendamientoPuro']['campo2_label'] = pld.campo2_list[dataPLD['arrendamientoPuro']['campo2']];
         dataPLD['arrendamientoPuro']['campo4_label'] = pld.campo4_list[dataPLD['arrendamientoPuro']['campo4']];
-       // dataPLD['arrendamientoPuro']['campo7_label'] = pld.campo7_list[dataPLD['arrendamientoPuro']['campo7']];
-       // dataPLD['arrendamientoPuro']['campo9_label'] = pld.campo9_list[dataPLD['arrendamientoPuro']['campo9']];
+        // dataPLD['arrendamientoPuro']['campo7_label'] = pld.campo7_list[dataPLD['arrendamientoPuro']['campo7']];
+        // dataPLD['arrendamientoPuro']['campo9_label'] = pld.campo9_list[dataPLD['arrendamientoPuro']['campo9']];
         dataPLD['arrendamientoPuro']['campo6_label'] = pld.campo6_list[dataPLD['arrendamientoPuro']['campo6']];
         var auxCampo16=dataPLD['arrendamientoPuro']['campo16'].replace(/\^/g,"");
-            var arrayCampo16=auxCampo16.split(",");
-            var arrTemp=[];
-            for(var i=0;i<arrayCampo16.length;i++)
-            {
-                arrTemp.push(pld.campo16_list[arrayCampo16[i]]);
-            }
+        var arrayCampo16=auxCampo16.split(",");
+        var arrTemp=[];
+        for(var i=0;i<arrayCampo16.length;i++)
+        {
+            arrTemp.push(pld.campo16_list[arrayCampo16[i]]);
+        }
         dataPLD['arrendamientoPuro']['campo16_label'] =arrTemp.join();
 
-        //dataPLD['arrendamientoPuro']['campo25_label'] = pld.campo25_list[dataPLD['arrendamientoPuro']['campo25']];
+        dataPLD['arrendamientoPuro']['campo25_label'] = pld.campo25_list[dataPLD['arrendamientoPuro']['campo25']];
         dataPLD['arrendamientoPuro']['campo11_label'] = pld.campo11_list[dataPLD['arrendamientoPuro']['campo11']];
 
         dataPLD['factorajeFinanciero']['campo2_label'] = pld.campo2_list[dataPLD['factorajeFinanciero']['campo2']];
@@ -137,7 +137,7 @@
         }
         dataPLD['creditoSimple']['campo18_label'] =arrTemp.join();
 
-       // dataPLD['creditoSimple']['campo18_label'] = pld.campo18_list[dataPLD['creditoSimple']['campo18']];
+        // dataPLD['creditoSimple']['campo18_label'] = pld.campo18_list[dataPLD['creditoSimple']['campo18']];
         dataPLD['creditoSimple']['campo20_label'] = pld.campo20_list[dataPLD['creditoSimple']['campo20']];
         dataPLD['creditoSimple']['campo6_label'] = pld.campo6_list[dataPLD['creditoSimple']['campo6']];
 
@@ -150,10 +150,10 @@
         pld.campo4_list = app.lang.getAppListStrings('ctpldidproveedorrecursosson_list');
         pld.campo6_list = app.lang.getAppListStrings('tct_pagoanticipado_list');
         pld.campo16_list = app.lang.getAppListStrings('tct_inst_monetario_ddw_list');
-       // pld.campo7_list = app.lang.getAppListStrings('tct_cpld_pregunta_u1_ddw_list'); campo SOFOM
-       // pld.campo9_list = app.lang.getAppListStrings('tct_cpld_pregunta_u3_ddw_list'); cotiza en bolsa
+        // pld.campo7_list = app.lang.getAppListStrings('tct_cpld_pregunta_u1_ddw_list'); campo SOFOM
+        // pld.campo9_list = app.lang.getAppListStrings('tct_cpld_pregunta_u3_ddw_list'); cotiza en bolsa
         pld.campo11_list = app.lang.getAppListStrings('tct_cpld_pregunta9_desp_list');
-        //pld.campo25_list = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
+        pld.campo25_list = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
         pld.campo21_list = app.lang.getAppListStrings('tct_pldcampo1_ff_ddw_list');
         pld.campo24_list = app.lang.getAppListStrings('tct_plddestinorecursos_ff_ddw_list');
         pld.campo18_list = app.lang.getAppListStrings('tct_instmonetario_csddw_list');
@@ -169,7 +169,7 @@
     bindDataChange: function () {
         this.model.on('change:' + this.name, function () {
             if (this.action !== 'edit') {
-               // this.render();
+                // this.render();
             }
         }, this);
     },
@@ -179,10 +179,12 @@
         var direccionsHtml = '';
         this._super("_render");
         var selfPLD = this;
+        $("div.record-label[data-name='accounts_tct_pld']").attr('style', 'display:none;');
+        $('div[data-name=tct_nuevo_pld_c]').parent().attr('style', 'display:none;'); //Oculta campo tct_nuevo_pld_c
 
         $('select.campo16ddw-ap').change(function(evt) {
-          var valorEx=evt.val;
-          console.log('change16dd');
+            var valorEx=evt.val;
+            console.log('change16dd');
         });
 
         //Función related
@@ -198,17 +200,17 @@
                         return {q:term};
                     },
                     results: function (data, page) { // parse the results into the format expected by Select2.
-                      // since we are using custom formatting functions we do not need to alter remote JSON data
+                        // since we are using custom formatting functions we do not need to alter remote JSON data
                         return {results: data.records};
                     }
                 },
                 formatResult: function(m) { return m.text; },
                 formatSelection: function(m) { return m.text; }
             }).on('select2-open', _.bind(selfPLD._onSelect2Open, selfPLD))
-            .on('searchmore', function() {
-            $(this).select2('close');//<------------
-                selfPLD.openSelectDrawer('#'+this.id);
-            })
+                .on('searchmore', function() {
+                    $(this).select2('close');//<------------
+                    selfPLD.openSelectDrawer('#'+this.id);
+                })
             //.on('change', _.bind(self._onSelect2Change, self));
         });
 
@@ -303,31 +305,31 @@
 
         }); */
 
-        $('.campo11ddw-ap').change(function(evt)  {
+        /*$('.campo11ddw-ap').change(function(evt)  {
             pld.preguntamoral();
 
-        });
+        });*/
 
 
 
         //Validacion para mostrar los campos de Arrendamiento Puro dependiendo el regimen fiscal (Persona Moral)
         pld.validaregimen();
-       // pld.cuentacliente();
+        // pld.cuentacliente();
 
         //Set Related fields
-       if (pld.ProductosPLD != null) {
-          //AF
-          $('.campo3rel-ap').select2('data', {id: selfPLD.ProductosPLD.arrendamientoPuro.campo3_id, text:  selfPLD.ProductosPLD.arrendamientoPuro.campo3});
-          $('.campo5rel-ap').select2('data', {id: selfPLD.ProductosPLD.arrendamientoPuro.campo5_id, text:  selfPLD.ProductosPLD.arrendamientoPuro.campo5});
-          //FF
-          $('.campo3rel-ff').select2('data', {id: selfPLD.ProductosPLD.factorajeFinanciero.campo3_id, text:  selfPLD.ProductosPLD.factorajeFinanciero.campo3});
-          $('.campo5rel-ff').select2('data', {id: selfPLD.ProductosPLD.factorajeFinanciero.campo5_id, text:  selfPLD.ProductosPLD.factorajeFinanciero.campo5});
-          //CA
-          $('.campo3rel-ca').select2('data', {id: selfPLD.ProductosPLD.creditoAutomotriz.campo3_id, text:  selfPLD.ProductosPLD.creditoAutomotriz.campo3});
-          $('.campo5rel-ca').select2('data', {id: selfPLD.ProductosPLD.creditoAutomotriz.campo5_id, text:  selfPLD.ProductosPLD.creditoAutomotriz.campo5});
-          //CS
-          $('.campo3rel-cs').select2('data', {id: selfPLD.ProductosPLD.creditoSimple.campo3_id, text:  selfPLD.ProductosPLD.creditoSimple.campo3});
-          $('.campo5rel-cs').select2('data', {id: selfPLD.ProductosPLD.creditoSimple.campo5_id, text:  selfPLD.ProductosPLD.creditoSimple.campo5});
+        if (pld.ProductosPLD != null) {
+            //AF
+            $('.campo3rel-ap').select2('data', {id: selfPLD.ProductosPLD.arrendamientoPuro.campo3_id, text:  selfPLD.ProductosPLD.arrendamientoPuro.campo3});
+            $('.campo5rel-ap').select2('data', {id: selfPLD.ProductosPLD.arrendamientoPuro.campo5_id, text:  selfPLD.ProductosPLD.arrendamientoPuro.campo5});
+            //FF
+            $('.campo3rel-ff').select2('data', {id: selfPLD.ProductosPLD.factorajeFinanciero.campo3_id, text:  selfPLD.ProductosPLD.factorajeFinanciero.campo3});
+            $('.campo5rel-ff').select2('data', {id: selfPLD.ProductosPLD.factorajeFinanciero.campo5_id, text:  selfPLD.ProductosPLD.factorajeFinanciero.campo5});
+            //CA
+            $('.campo3rel-ca').select2('data', {id: selfPLD.ProductosPLD.creditoAutomotriz.campo3_id, text:  selfPLD.ProductosPLD.creditoAutomotriz.campo3});
+            $('.campo5rel-ca').select2('data', {id: selfPLD.ProductosPLD.creditoAutomotriz.campo5_id, text:  selfPLD.ProductosPLD.creditoAutomotriz.campo5});
+            //CS
+            $('.campo3rel-cs').select2('data', {id: selfPLD.ProductosPLD.creditoSimple.campo3_id, text:  selfPLD.ProductosPLD.creditoSimple.campo3});
+            $('.campo5rel-cs').select2('data', {id: selfPLD.ProductosPLD.creditoSimple.campo5_id, text:  selfPLD.ProductosPLD.creditoSimple.campo5});
         }
 
         //Set class to select2
@@ -365,7 +367,7 @@
             closeOnSelect: false,
             containerCssClass: 'select2-choices-pills-close'
         });
-        
+
     },
 
     _onSelect2Open:function(e){
@@ -392,7 +394,7 @@
                 fields: ["id", "name"],
                 filterOptions: undefined
             }
-            },function(context, model) {
+        },function(context, model) {
             $(id).select2("data",{id: context.id,text: context.value}).trigger("change");
         })
     },
@@ -441,23 +443,23 @@
 
         //Carga de lista 5 Persona Moral La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?
 
-      /*  var lista5ID = app.lang.getAppListStrings('tct_cpld_pregunta_u1_ddw_list');
-        var lista_campo7 = '';
-        Object.keys(lista5ID).forEach(function (id) {
-            //console.log(id, lista5ID[id]);
-            lista_campo7 += '<option value="' + id + '">' + lista5ID[id] + '</option>'
-        });
-        this.lista_campo7 = lista_campo7;
+        /*  var lista5ID = app.lang.getAppListStrings('tct_cpld_pregunta_u1_ddw_list');
+          var lista_campo7 = '';
+          Object.keys(lista5ID).forEach(function (id) {
+              //console.log(id, lista5ID[id]);
+              lista_campo7 += '<option value="' + id + '">' + lista5ID[id] + '</option>'
+          });
+          this.lista_campo7 = lista_campo7;
 
-        //Carga de lista 6 Persona Moral ¿Cotiza en Bolsa?
+          //Carga de lista 6 Persona Moral ¿Cotiza en Bolsa?
 
-        var lista6ID = app.lang.getAppListStrings('tct_cpld_pregunta_u3_ddw_list');
-        var lista_campo9 = '';
-        Object.keys(lista6ID).forEach(function (id) {
-            //console.log(id, lista6ID[id]);
-            lista_campo9 += '<option value="' + id + '">' + lista6ID[id] + '</option>'
-        });
-        this.lista_campo9 = lista_campo9; */
+          var lista6ID = app.lang.getAppListStrings('tct_cpld_pregunta_u3_ddw_list');
+          var lista_campo9 = '';
+          Object.keys(lista6ID).forEach(function (id) {
+              //console.log(id, lista6ID[id]);
+              lista_campo9 += '<option value="' + id + '">' + lista6ID[id] + '</option>'
+          });
+          this.lista_campo9 = lista_campo9; */
 
         //Carga de lista 7 Persona Moral 3 Los recursos con los que va a celebrar su operación tiene su origen en su actividad mercantil, actividad u objeto social?
 
@@ -469,14 +471,14 @@
         });
         this.lista_campo11 = lista_campo11;
 
-       /* //Carga lista 11, cuando la cuenta es cliente: Los recursos con los que va a celebrar su operación están destinados a
+        //Carga lista 11, cuando la cuenta es cliente: Los recursos con los que va a celebrar su operación están destinados a
         var lista11ID = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
         var lista_campo25 = '';
         Object.keys(lista11ID).forEach(function (id) {
             //console.log(id, lista11ID[id]);
             lista_campo25 += '<option value="' + id + '">' + lista11ID[id] + '</option>'
         });
-        this.lista_campo25 = lista_campo25;*/
+        this.lista_campo25 = lista_campo25;
 
         //listas FF
         //Carga de lista 5 ¿Con qué frecuencia o periodo realizará pagos a Unifin?
@@ -550,24 +552,24 @@
 
     //Validaciones para campos vistos en Persona Moral
     //pregunta La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?
-   /* Muestracampo3: function () {
-        console.log("La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?");
-        if ($('.campo7ddw-ap').select2('val') == "Si") {
-            $('.campo8-ap').show();
-        } else {
-            $('.campo8-ap').hide();
-        }
-    },
+    /* Muestracampo3: function () {
+         console.log("La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?");
+         if ($('.campo7ddw-ap').select2('val') == "Si") {
+             $('.campo8-ap').show();
+         } else {
+             $('.campo8-ap').hide();
+         }
+     },
 
-    //pregunta La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?
-    Muestracampo4: function () {
-        console.log("¿Cotiza en Bolsa?");
-        if ($('.campo9ddw-ap').select2('val') == "Si") {
-            $('.campo10-ap').show();
-        } else {
-            $('.campo10-ap').hide();
-        }
-    },*/
+     //pregunta La persona moral es: Sofom, Transmisor de Dinero, Centro Cambiario?
+     Muestracampo4: function () {
+         console.log("¿Cotiza en Bolsa?");
+         if ($('.campo9ddw-ap').select2('val') == "Si") {
+             $('.campo10-ap').show();
+         } else {
+             $('.campo10-ap').hide();
+         }
+     },*/
 
     checkpagosmonetarioAP: function () {
         console.log("Esta check");
@@ -709,189 +711,197 @@
     validaregimen: function (){
         //Muestra campos por regimen fiscal
         //Campos nacen ocultos Arrendamiento Puro
+        try {
 
-        $('.campo2-ap').show();
-        $('.campo4-ap').show();
-        $('.campo6-ap').show();
-        $('.campo16-ap').show();
-        $('.campo14-ap').show();
-        //$('.campo11-ap').show();
-        //Campos Ocultos Arrendamiento Puro (Desplegables)
-        //$('.campo3-ap').show();
-        $('.campo5-ap').show();
-        $('.campo17-ap').show();
-        $('.campo15-ap').show();
-        $('.campo18-ap').show();
-        //Campos Persona Moral Arrendamiento Puro
-        $('.campo7-ap').show(); //Pregunta1
-        $('.campo9-ap').show(); //Pregunta2
-        $('.campo8-ap').show();
-        $('.campo10-ap').show();
+            $('.campo2-ap').show();
+            $('.campo4-ap').show();
+            $('.campo6-ap').show();
+            $('.campo16-ap').show();
+            $('.campo14-ap').show();
+            //$('.campo11-ap').show();
+            //Campos Ocultos Arrendamiento Puro (Desplegables)
+            //$('.campo3-ap').show();
+            $('.campo5-ap').show();
+            $('.campo17-ap').show();
+            $('.campo15-ap').show();
+            $('.campo18-ap').show();
+            //Campos Persona Moral Arrendamiento Puro
+            $('.campo7-ap').show(); //Pregunta1
+            $('.campo9-ap').show(); //Pregunta2
+            $('.campo8-ap').show();
+            $('.campo10-ap').show();
 
-        //$('.campo25-ap').show(); //Cuenta Cliente
-        //$('.campo26-ap').show(); //Especifique cuenta Cliente
-        //Campos Factoraje Financiero
-        $('.campo3-ff').show();
-        $('.campo5-ff').show();
-        $('.campo17-ff').show();
+            //$('.campo25-ap').show(); //Cuenta Cliente
+            //$('.campo26-ap').show(); //Especifique cuenta Cliente
+            //Campos Factoraje Financiero
+            $('.campo3-ff').show();
+            $('.campo5-ff').show();
+            $('.campo17-ff').show();
 
-        //Campos Credito Automotriz
-        $('.campo3-ca').show();
-        $('.campo5-ca').show();
-        //Campos Credito Simple
-        $('.campo3-cs').show();
-        $('.campo5-cs').show();
-        $('.campo15-cs').show();
-        $('.campo19-cs').show();
-        //Oculta panels
-        $('.content_ap').hide();
-        $('.content_ff').hide();
-        $('.content_ca').hide();
+            //Campos Credito Automotriz
+            $('.campo3-ca').show();
+            $('.campo5-ca').show();
+            //Campos Credito Simple
+            $('.campo3-cs').show();
+            $('.campo5-cs').show();
+            $('.campo15-cs').show();
+            $('.campo19-cs').show();
+            //Oculta panels
+            $('.content_ap').hide();
+            $('.content_ff').hide();
+            $('.content_ca').hide();
 
-        var puestousuario= App.user.attributes.puestousuario_c;
-        var puestosvisibles =["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","20","33","36","44"];
+            var puestousuario = App.user.attributes.puestousuario_c;
+            var puestosvisibles = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "20", "33", "36", "44"];
 
-        if(puestosvisibles.indexOf(puestousuario)>=0){
+            if (puestosvisibles.indexOf(puestousuario) >= 0) {
 
-            //Establece visibilidad por tipo de productos
-            //AP
-            if (App.user.attributes.tipodeproducto_c == '1') {
-              $('.content_ap').show();
-            }
-            //FF
-            if (App.user.attributes.tipodeproducto_c == '4') {
+                //Establece visibilidad por tipo de productos
+                //AP
+                if (App.user.attributes.tipodeproducto_c == '1') {
+                    $('.content_ap').show();
+                }
+                //FF
+                if (App.user.attributes.tipodeproducto_c == '4') {
+                    $('.content_ff').show();
+                }
+                //CA
+                if (App.user.attributes.tipodeproducto_c == '3') {
+                    $('.content_ca').show();
+                }
+            } else {
+                $('.content_ap').show();
                 $('.content_ff').show();
-            }
-            //CA
-            if (App.user.attributes.tipodeproducto_c == '3') {
                 $('.content_ca').show();
             }
-        }else{
-            $('.content_ap').show();
-            $('.content_ff').show();
-            $('.content_ca').show();
-        }
 
-        /*
-        **  AP
-        */
-        // //Oculta campos de vista de persona fisica en panel de Arrendamiento Puro
-        if(this.model.get('tipodepersona_c') == 'Persona Moral'){
-            $('.campo2-ap').hide();
-            $('.campo3-ap').hide();
-        }else{
-            $('.campo7-ap').hide();
-            $('.campo8-ap').hide();
-            $('.campo9-ap').hide();
-            $('.campo10-ap').hide();
-            //$('.campo11-ap').hide();
-            $('.campo13-ap').hide();
-            //$('.campo25-ap').hide();
-            //$('.campo26-ap').hide();
-        }
-        //Muestra/oculta Propietario real
-        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val')=='2' || $('.campo2ddw-ap').attr('data-id')=='2'){
-            $('.campo3-ap').show();
-        }else{
-            $('.campo3-ap').hide();
-        }
-        //Muestra/oculta Proveedor recursos
-        if($('.campo4ddw-ap').select2('val')=='2' || $('.campo4ddw-ap').attr('data-id')=='2' ){
-            $('.campo5-ap').show();
-        }else{
-            $('.campo5-ap').hide();
-        }
-        if ($('.campo7ddw-ap').select2('val') == "Si") {
-            $('.campo8-ap').show();
-        } else {
-            $('.campo8-ap').hide();
-        }
-        if ($('.campo9ddw-ap').select2('val') == "Si") {
-            $('.campo10-ap').show();
-        } else {
-            $('.campo10-ap').hide();
-        }
-        if ($('.campo16ddw-ap').select2('val').toString().includes("Otro") || $('.campo14chk-ap')[0].checked ) {
-            $('.campo17-ap').show();
-        } else {
-            $('.campo17-ap').hide();
-        }
-        /*if ($('.campo11ddw-ap').select2('val') == "No") {
-            $('.campo26-ap').show();
-        } else {
+            /*
+            **  AP
+            */
+            // //Oculta campos de vista de persona fisica en panel de Arrendamiento Puro
+            if (this.model.get('tipodepersona_c') == 'Persona Moral') {
+                $('.campo2-ap').hide();
+                $('.campo3-ap').hide();
+            } else {
+                $('.campo7-ap').hide();
+                $('.campo8-ap').hide();
+                $('.campo9-ap').hide();
+                $('.campo10-ap').hide();
+                //$('.campo11-ap').hide();
+                $('.campo13-ap').hide();
+                //$('.campo25-ap').hide();
+                //$('.campo26-ap').hide();
+            }
+            //Muestra/oculta Propietario real
+            if (this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ap').select2('val') == '2' || $('.campo2ddw-ap').attr('data-id') == '2') {
+                $('.campo3-ap').show();
+            } else {
+                $('.campo3-ap').hide();
+            }
+            //Muestra/oculta Proveedor recursos
+            if ($('.campo4ddw-ap').select2('val') == '2' || $('.campo4ddw-ap').attr('data-id') == '2') {
+                $('.campo5-ap').show();
+            } else {
+                $('.campo5-ap').hide();
+            }
+            if ($('.campo7ddw-ap').select2('val') == "Si") {
+                $('.campo8-ap').show();
+            } else {
+                $('.campo8-ap').hide();
+            }
+            if ($('.campo9ddw-ap').select2('val') == "Si") {
+                $('.campo10-ap').show();
+            } else {
+                $('.campo10-ap').hide();
+            }
+            if ($('.campo16ddw-ap').select2('val').toString().includes("Otro") || $('.campo14chk-ap')[0].checked) {
+                $('.campo17-ap').show();
+            } else {
+                $('.campo17-ap').hide();
+            }
+            /*if ($('.campo11ddw-ap').select2('val') == "No") {
+                $('.campo26-ap').show();
+            } else {
+                $('.campo26-ap').hide();
+            }*/
+
+            /*
+            **  FF
+            */
+            // //Oculta campos de vista de persona fisica en panel de Factoraje Financiero
+            if (this.model.get('tipodepersona_c') == 'Persona Moral') {
+                $('.campo2-ff').hide();
+                $('.campo3-ff').hide();
+            } else {
+            }
+            //Muestra/oculta Propietario real
+            if (this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ff').select2('val') == '2' || $('.campo2ddw-ff').attr('data-id') == '2') {
+                $('.campo3-ff').show();
+            } else {
+                $('.campo3-ff').hide();
+            }
+            //Muestra/oculta Proveedor recursos
+            if ($('.campo4ddw-ff').select2('val') == '2' || $('.campo4ddw-ff').attr('data-id') == '2') {
+                $('.campo5-ff').show();
+            } else {
+                $('.campo5-ff').hide();
+            }
+            if ($('#multi12').select2('val').toString().includes("Otro") || $('.campo14chk-ff')[0].checked) {
+                $('.campo17-ff').show();
+            } else {
+                $('.campo17-ff').hide();
+            }
+
+
+            /*
+            **  CA
+            */
+            // //Oculta campos de vista de persona fisica en panel de Crédito automotriz
+            if (this.model.get('tipodepersona_c') == 'Persona Moral') {
+                $('.campo2-ca').hide();
+                $('.campo3-ca').hide();
+            } else {
+            }
+            //Muestra/oculta Propietario real
+            if (this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val') == '2' || $('.campo2ddw-ca').attr('data-id') == '2') {
+                $('.campo3-ca').show();
+            } else {
+                $('.campo3-ca').hide();
+            }
+            //Muestra/oculta Proveedor recursos
+            if ($('.campo4ddw-ca').select2('val') == '2' || $('.campo4ddw-ca').attr('data-id') == '2') {
+                $('.campo5-ca').show();
+            } else {
+                $('.campo5-ca').hide();
+            }
+
+            /*
+            **  CS
+            */
+            // //Oculta campos de vista de persona fisica en panel de Crédito simple
+            //Muestra/oculta Propietario real
+            if (this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-cs').select2('val') == '2' || $('.campo2ddw-cs').attr('data-id') == '2') {
+                $('.campo3-cs').show();
+            } else {
+                $('.campo3-cs').hide();
+            }
+            //Muestra/oculta Proveedor recursos
+            if ($('.campo4ddw-cs').select2('val') == '2' || $('.campo4ddw-cs').attr('data-id') == '2') {
+                $('.campo5-cs').show();
+            } else {
+                $('.campo5-cs').hide();
+            }
+            if ($('#multi13').select2('val').toString().includes("otro") || $('.campo14chk-cs')[0].checked) {
+                $('.campo19-cs').show();
+            } else {
+                $('.campo19-cs').hide();
+            }
+
+            $('.campo11-ap').hide();
+            $('.campo25-ap').hide();
             $('.campo26-ap').hide();
-        }*/
-
-        /*
-        **  FF
-        */
-        // //Oculta campos de vista de persona fisica en panel de Factoraje Financiero
-        if(this.model.get('tipodepersona_c') == 'Persona Moral'){
-            $('.campo2-ff').hide();
-            $('.campo3-ff').hide();
-        }else{
-        }
-        //Muestra/oculta Propietario real
-        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ff').select2('val')=='2' || $('.campo2ddw-ff').attr('data-id')=='2'){
-            $('.campo3-ff').show();
-        }else{
-            $('.campo3-ff').hide();
-        }
-        //Muestra/oculta Proveedor recursos
-        if($('.campo4ddw-ff').select2('val')=='2' || $('.campo4ddw-ff').attr('data-id')=='2' ){
-            $('.campo5-ff').show();
-        }else{
-            $('.campo5-ff').hide();
-        }
-        if ($('#multi12').select2('val').toString().includes("Otro") || $('.campo14chk-ff')[0].checked ) {
-            $('.campo17-ff').show();
-        } else {
-            $('.campo17-ff').hide();
-        }
-
-
-        /*
-        **  CA
-        */
-        // //Oculta campos de vista de persona fisica en panel de Crédito automotriz
-        if(this.model.get('tipodepersona_c') == 'Persona Moral'){
-            $('.campo2-ca').hide();
-            $('.campo3-ca').hide();
-        }else{
-        }
-        //Muestra/oculta Propietario real
-        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-ca').select2('val')=='2' || $('.campo2ddw-ca').attr('data-id')=='2'){
-            $('.campo3-ca').show();
-        }else{
-            $('.campo3-ca').hide();
-        }
-        //Muestra/oculta Proveedor recursos
-        if($('.campo4ddw-ca').select2('val')=='2' || $('.campo4ddw-ca').attr('data-id')=='2'){
-            $('.campo5-ca').show();
-        }else{
-            $('.campo5-ca').hide();
-        }
-
-        /*
-        **  CS
-        */
-        // //Oculta campos de vista de persona fisica en panel de Crédito simple
-        //Muestra/oculta Propietario real
-        if(this.model.get('tipodepersona_c') != 'Persona Moral' && $('.campo2ddw-cs').select2('val')=='2' || $('.campo2ddw-cs').attr('data-id')=='2'){
-            $('.campo3-cs').show();
-        }else{
-            $('.campo3-cs').hide();
-        }
-        //Muestra/oculta Proveedor recursos
-        if($('.campo4ddw-cs').select2('val')=='2' || $('.campo4ddw-cs').attr('data-id')=='2'){
-            $('.campo5-cs').show();
-        }else{
-            $('.campo5-cs').hide();
-        }
-        if ($('#multi13').select2('val').toString().includes("otro") || $('.campo14chk-cs')[0].checked ) {
-            $('.campo19-cs').show();
-        } else {
-            $('.campo19-cs').hide();
+        }catch (err){
+            console.log(err.message);
         }
     },
 
