@@ -1,0 +1,85 @@
+<!--
+/*
+ *  AA - 2019-02-13
+ *  CustomField - Grid
+ */
+-->
+<div style="border: 2px solid #58749a;border-radius: 12px;padding:10px;">
+    <!-- Tabla de asistentes-->
+    <div class="list-view">
+        <table id="tableReferencias" class="table table-striped">
+            <thead>
+            <tr bgcolor="#0679c8" style="color:#fff">
+
+                <th style='text-align:center'>Referencias</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {{#each mReferencias.referencias}}
+                <tr>
+                    <td>
+                        <div class="row-fluid">
+                            <div class="span4">
+                                <input type="text" class="campo1SelectR span3 updateRecords" placeholder="Nombre" value="{{nombres}}" data-field="nombres">
+                            </div>
+                            <div class="span4">
+                                <input type="text" class="campo2SelectR span3 updateRecords" placeholder="Apellido Paterno" value="{{apaterno}}" data-field="apaterno">
+                            </div>
+                            <div class="span4">
+                                <input type="text" class="campo3SelectR span3 updateRecords" placeholder="Apellido Materno" value="{{amaterno}}" data-field="amaterno">
+                            </div>
+                            <div>
+                                <div class="span4">
+                                    <input type="text" class="campo4SelectR span3 updateRecords" placeholder="Correo" value="{{correo}}" data-field="correo">
+                                </div>
+                                <div class="span4">
+                                    <input type="text" class="campo5SelectR span3 updateRecords" placeholder="Teléfono" value="{{telefono}}" data-field="telefono">
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+    <!-- Formulario para nuevo registro-->
+    <b>Nueva Referencia</b>
+    <!-- Agrupador -->
+    <div id="input">
+        <!-- Línea 1 -->
+        <div class="row-fluid">
+            <div class="span4">
+                <input type="text" class="newCampo1R span3" placeholder="Nombre">
+            </div>
+            <div class="span4">
+                <input type="text" class="newCampo2R span3" placeholder="Apellido Paterno">
+            </div>
+            <div class="span4">
+                <input type="text" class="newCampo3R span3" placeholder="Apellido Materno">
+            </div>
+        </div>
+        <br>
+        <!-- Línea 2 -->
+        <div class="row-fluid">
+            <div class="span4">
+                <input type="text" class="newCampo4R span3" placeholder="Correo">
+            </div>
+            <div class="span4">
+                <input type="text" class="newCampo5R span3" placeholder="Teléfono" maxlength="13" size="13">
+            </div>
+
+            <!-- Guardar btn -->
+            <div class="span1">
+                <a class="btn addReferencia">
+                    <i class="fa fa-plus"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{{#unless hideHelp}}{{#if def.help}}<p class="help-block">{{str def.help module}}</p>{{/if}}{{/unless}}
