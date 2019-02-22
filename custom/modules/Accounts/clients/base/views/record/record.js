@@ -757,8 +757,8 @@
 
         this._super("_render");
 
-        $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
-        $('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
+       // $('div[data-name=accounts_tct_pld]').find('div.record-label').addClass('hide');
+        //$('[data-name=tct_nuevo_pld_c]').hide(); //Oculta campo tct_nuevo_pld_c
 
         /*
          @author Salvador Lopez
@@ -3157,13 +3157,13 @@
                   $('.campo17txt-ap').css('border-color','');
               }
               //Pregunta: campo26txt-ap
-              if($('.campo26txt-ap').val() == '' && $('.campo11ddw-ap').select2('val')=='No' ){
+           /*   if($('.campo26txt-ap').val() == '' && $('.campo11ddw-ap').select2('val')=='No' ){
                   $('.campo26txt-ap').css('border-color','red');
                   faltantesAP = faltantesAP + '<b>- '+$('.campo26txt-ap')[0].getAttribute('data-name')+'<br></b>';
               }else{
                   $('.campo26txt-ap').css('border-color','');
               }
-          }
+          }*/
           //Valida campos para FF
           if (App.user.attributes.tipodeproducto_c == '4') {
               //Pregunta: campo2ddw-ff
