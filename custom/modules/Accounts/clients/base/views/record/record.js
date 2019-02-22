@@ -3157,12 +3157,12 @@
                   $('.campo17txt-ap').css('border-color','');
               }
               //Pregunta: campo26txt-ap
-              if($('.campo26txt-ap').val() == '' && $('.campo11ddw-ap').select2('val')=='No' ){
+              /*if($('.campo26txt-ap').val() == '' && $('.campo11ddw-ap').select2('val')=='No' ){
                   $('.campo26txt-ap').css('border-color','red');
                   faltantesAP = faltantesAP + '<b>- '+$('.campo26txt-ap')[0].getAttribute('data-name')+'<br></b>';
               }else{
                   $('.campo26txt-ap').css('border-color','');
-              }
+              }*/
           }
           //Valida campos para FF
           if (App.user.attributes.tipodeproducto_c == '4') {
