@@ -114,6 +114,7 @@ class GetUsersBoss extends SugarApi
             }
         }
 
+        //Valida Rol full access
         if ($app_list_strings['full_access_accounts_list'] != "" && $flag == false) {
             $list = $app_list_strings['full_access_accounts_list'];
             $result = $GLOBALS['db']->query($queryR);
@@ -131,8 +132,50 @@ class GetUsersBoss extends SugarApi
             }
         }
 
+        //Valida Admin
         if ($current_user->is_admin == true) {
           $flag = true;
+        }
+
+        //Valida BO
+        if ($flag == false && ($current_user->puestousuario_c == '6' || $current_user->puestousuario_c == '12' || $current_user->puestousuario_c == '17'))  {
+            //Define variables
+            $equiposPromotores = '';
+            $equiposBO = '';
+            $concidencias = array();
+            //Recupera equipos de promotores
+            $queryP = "select group_concat(replace(concat( equipos_c, ',', equipo_c),'^',''),'') as equipos
+                      from users_cstm
+                      where id_c in ('{$usrLeasing}','{$usrFactoraje}','{$usrCredito}')";
+            $resultP = $GLOBALS['db']->query($queryP);
+            while ($row = $GLOBALS['db']->fetchByAssoc($resultP)){
+                if($row['equipos'] !='' && $row['equipos']!= null) {
+                    $equiposPromotores = explode(",",$row['equipos']);
+                }
+            }
+            //Recupera equipos de BO
+            $queryBO = "select group_concat(replace(concat( equipos_c, ',', equipo_c),'^',''),'') as equipos
+                      from users_cstm
+                      where id_c in ('{$usuarioLog}');";
+            $resultBO = $GLOBALS['db']->query($queryBO);
+            while ($row = $GLOBALS['db']->fetchByAssoc($resultBO)){
+                if($row['equipos'] !='' && $row['equipos']!= null) {
+                    $equiposBO = explode(",",$row['equipos']);
+                }
+            }
+            //Compara equipos
+            $GLOBALS['log']->fatal("Compara equipos:" );
+            if ($equiposPromotores!='' && $equiposBO!='') {
+              $equiposPromotores = array_unique($equiposPromotores);
+              $equiposBO = array_unique($equiposBO);
+              $concidencias = array_intersect($equiposPromotores, $equiposBO);
+              // $GLOBALS['log']->fatal(print_r($equiposPromotores,true));
+              // $GLOBALS['log']->fatal(print_r($equiposBO,true));
+              // $GLOBALS['log']->fatal(print_r($concidencias,true));
+              if (count($concidencias)>0) {
+                $flag= true;
+              }
+            }
         }
 
 		    return $flag;

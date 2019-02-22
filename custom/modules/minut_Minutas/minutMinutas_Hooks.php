@@ -74,6 +74,7 @@ class minutMinutas_Hooks
                   $beanRelacion->relaciones_activas = "Contacto";
                   $beanRelacion->rel_relaciones_accounts_1accounts_ida = $objIdCuentaPadre;
                   $beanRelacion->account_id1_c = $beanCuentas->id;
+                  $beanRelacion->rel_relaciones_accountsaccounts_ida = $beanRelacion->rel_relaciones_accounts_1accounts_ida;
                   try {
                       $beanRelacion->save();
                   } catch (Exception $e) {

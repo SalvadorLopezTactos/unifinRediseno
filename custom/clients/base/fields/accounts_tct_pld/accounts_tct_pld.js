@@ -471,7 +471,7 @@
         });
         this.lista_campo11 = lista_campo11;
 
-        //Carga lista 11, cuando la cuenta es cliente: Los recursos con los que va a celebrar su operación están destinados a
+       //Carga lista 11, cuando la cuenta es cliente: Los recursos con los que va a celebrar su operación están destinados a
         var lista11ID = app.lang.getAppListStrings('tct_cpld_pregunta10_desp_list');
         var lista_campo25 = '';
         Object.keys(lista11ID).forEach(function (id) {
@@ -903,6 +903,10 @@
         }catch (err){
             console.log(err.message);
         }
+
+        $('.campo11-ap').hide();
+        $('.campo25-ap').hide();
+        $('.campo26-ap').hide();
     },
 
     /*cuentacliente: function (){
