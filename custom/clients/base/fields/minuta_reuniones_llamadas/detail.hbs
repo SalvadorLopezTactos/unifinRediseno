@@ -1,0 +1,30 @@
+<!--
+Hacer una tabla
+Asunto, Fecha inicio, fecha fin
+-->
+<!--
+Victor Martinez 11-02-2018
+Custom-field
+-->
+<div style="border: 2px solid #58749a;border-radius: 12px;padding:10px;">
+	<div>
+		<table id="Reunion-Llamada" class="table table-striped">
+			<thead>
+				<tr bgcolor="#001441" style="color:#fff">
+					<th>Asunto</th>
+					<th>Fecha de inicio</th>
+					<th>Fecha de fin</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each reunLlam.records}}
+				<tr>
+					<td class="CampoAsunto">{{name}}</td>
+					<td class="CamFechaIni">{{date_start}}</td>
+					<td class="CamFechaFin">{{date_end}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</div>

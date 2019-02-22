@@ -1,5 +1,5 @@
 <?php
- // created: 2019-01-18 11:47:34
+ // created: 2019-02-12 14:00:03
 
 $app_list_strings['resultado_list']=array (
   '' => '',
@@ -20,4 +20,5 @@ $app_list_strings['resultado_list']=array (
   16 => 'No se aclararon los pagos',
   17 => 'Cita con persona no clave (Tomador de decisiones)',
   18 => 'No viable',
+  19 => 'Está interesado. Se agendó otra llamada',
 );

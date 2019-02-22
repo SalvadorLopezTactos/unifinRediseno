@@ -1,5 +1,5 @@
 <?php
-
+/*
 class teamSetClass
 {
   function teamSetMethod($bean, $event, $arguments)
@@ -9,6 +9,7 @@ class teamSetClass
         Ajuste para agregar equipo principal de usuario asignado al registro guardado
     */
     //Recupera información de usuario asignado
+    /*
     $usuarioAsignado = BeanFactory::getBean('Users', $bean->assigned_user_id);
     $equipoPrincipal = $usuarioAsignado->equipo_c;
 
