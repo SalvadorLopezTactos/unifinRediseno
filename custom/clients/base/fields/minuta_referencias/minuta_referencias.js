@@ -28,7 +28,7 @@
     },
 
     loadData: function (options){
-        if (this.model.get('tct_ref_json_c')!="" || this.model.get('tct_ref_json_c')!=null || this.model.get('tct_ref_json_c')!=undefined) {
+        if (this.model.get('tct_ref_json_c')!="" && this.model.get('tct_ref_json_c')!=null && this.model.get('tct_ref_json_c')!=undefined) {
             this.detalle = JSON.parse(this.model.get('tct_ref_json_c'));
         }
         this.render();
