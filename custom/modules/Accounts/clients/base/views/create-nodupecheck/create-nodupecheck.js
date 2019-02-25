@@ -40,7 +40,7 @@
         //this.model.on('change:primernombre_c', this._doGenera_RFC_CURP, this);
         //this.model.on('change:apellidopaterno_c', this._doGenera_RFC_CURP, this);
         //this.model.on('change:apellidomaterno_c', this._doGenera_RFC_CURP, this);
-        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        //this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
 
         //this.model.on('change:genero_c', this._doGeneraCURP, this);
         //this.model.on('change:pais_nacimiento_c', this._doGeneraCURP, this);
