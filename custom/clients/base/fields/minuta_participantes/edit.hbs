@@ -4,12 +4,12 @@
  *  CustomField - Grid
  */
 -->
-<div style="border: 2px solid #58749a;border-radius: 12px;padding:10px;">
+<div style="border: 2px solid #055993;border-radius: 12px;padding:10px;">
   <!-- Tabla de asistentes-->
   <div class="list-view">
     <table id="tableParticipantes" class="table table-striped">
         <thead>
-            <tr bgcolor="#001441" style="color:#fff">
+            <tr bgcolor="#0679c8" style="color:#fff">
                 <th width="10%">&nbsp;</th>
                 <th width="30%">Participante</th>
                 <th width="30%">Correo</th>
@@ -24,7 +24,7 @@
                   {{#if unifin}}
                     <button class="btn btn-primary">UNIFIN</button>
                   {{else}}
-                    <button class="btn btn-inverse">Cuenta</button>
+                    <button class="btn btn-success">Cuenta</button>
                   {{/if}}
                 </td>
                 <td class="campo1SelectP">
@@ -32,14 +32,14 @@
                 </td>
                 <td class="campo2SelectP">
                     {{#if unifin}}
-                      {{correo}}                      
+                      {{correo}}
                     {{else}}
 					  <input class="campo2P span3" type="text" value="{{correo}}" placeholder="Correo" data-field="tct_correo_c">
                     {{/if}}
                 </td>
                 <td class="campo3SelectP">
                     {{#if unifin}}
-                      {{telefono}}                      
+                      {{telefono}}
                     {{else}}
 					  <input class="campo3P span3" type="text" value="{{telefono}}" placeholder="Teléfono" maxlength="13" size="13">
                     {{/if}}

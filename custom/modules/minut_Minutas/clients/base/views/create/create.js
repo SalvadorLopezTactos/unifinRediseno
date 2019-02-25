@@ -14,6 +14,7 @@
         this.model.addValidationTask('save_Referencias', _.bind(this.saveReferencias, this));
         //this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
         this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
+        this.model.addValidationTask('save_Reuunion_Llamada',_.bind(this.saveReuionLlamada, this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
         this.context.on('button:view_document:click', this.view_document, this);
 
@@ -319,6 +320,62 @@
         }
 
         callback(null, fields, errors);
+    },
+
+    saveReuionLlamada: function (fields, errors, callback) {
+      //Limpia campos
+      var necesarios="";
+      $('.newCampo1A').css('border-color', '');
+      $('.newDate').css('border-color', '');
+      $('.newTime1').css('border-color', '');
+      $('.newDate2').css('border-color', '');
+      $('.newTime2').css('border-color', '');
+      $('.objetivoG').find('.select2-choice').css('border-color','');
+      $('.newObjetivoE1').css('border-color', '');
+
+      //Campos necesarios para Reunion
+      if(this.model.get('resultado_c')==5 || this.model.get('resultado_c')==19){
+        var necesarios="";
+        if($('.newCampo1A').val()=='' || $('.newCampo1A').val()==null){
+          necesarios=necesarios  + '<br><b>Asunto</b>'
+          $('.newCampo1A').css('border-color', 'red');
+        }
+
+        if($('.newDate').val()=='' || $('.newDate').val()==null || $('.newDate').val()==undefined || $('.newTime1').val()=='' || $().val('.newTime1')==null || $().val('.newTime1')==undefined){
+          necesarios=necesarios + '<br><b>Fecha inicial</b>'
+          $('.newDate').css('border-color', 'red');
+          $('.newTime1').css('border-color', 'red');
+        }
+
+        if($('.newDate2').val()=='' || $('.newDate2').val()==null || $('.newDate2').val()==undefined || $('.newTime2').val()=='' || $('.newTime2').val()==null){
+          necesarios=necesarios + '<br><b>Fecha Final</b>'
+          $('.newDate2').css('border-color', 'red');
+          $('.newTime2').css('border-color', 'red');
+        }
+      }
+      //Campos Requeridos para llamada
+      if(this.model.get('resultado_c')==5){
+        if($('.objetivoG').select2('val')=='' || $('.objetivoG').select2('val')==null || $('.objetivoG').select2('val')==undefined){
+          necesarios=necesarios  + '<br><b>Objetivo General</b>'
+          $('.objetivoG').find('.select2-choice').css('border-color','red');
+        }
+
+        if($('.objetivoEselect').eq(0).find('input').val()=='' || $('.objetivoEselect').eq(0).find('input').val()==null || $('.objetivoEselect').eq(0).find('input').val()==undefined){
+          necesarios=necesarios  + '<br><b>Objetivos Especificos</b>'
+          $('.newObjetivoE1').css('border-color', 'red');
+        }
+
+      }
+      if (necesarios != "") {
+        app.alert.show("requeridos_reunion_llamada", {
+            level: "error",
+            messages: "Hace falta completar la siguiente información para la <b>Reunión/Llamada:</b>" + necesarios,
+            autoClose: false
+        });
+        errors['reunion_llamada'] = errors['reunion_llamada'] || {};
+        errors['reunion_llamada'].required = true;
+      }
+      callback(null,fields,errors);
     },
 
 })

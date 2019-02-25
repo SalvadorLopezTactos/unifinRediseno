@@ -22,7 +22,7 @@ Controlador de reuniones-llamadas
     this.model.addValidationTask('Guardarobjetivos', _.bind(this.almacenaobjetivosE, this));
     this.model.addValidationTask('validaobjetivosave', _.bind(this.validaobjetivosE, this));
     this.model.addValidationTask('GuardaReunionLlamada', _.bind(this.SaveMeetCall, this));
-    this.model.addValidationTask('RequeMeetCall',_.bind(this.RequeMeetCall,this));
+    //this.model.addValidationTask('RequeMeetCall',_.bind(this.RequeMeetCall,this));
     //this.model.addValidationTask('Fechas',_.bind(this.InicioNoMenorActual,this));
     this.model.on('sync', this.loadData, this);
     this.model.on('change', this.reunion_llamada, this);
@@ -40,23 +40,25 @@ Controlador de reuniones-llamadas
   },
   //Muestra o oculta el campo dependiendo del resultado
   reunion_llamada:function(){
-    if(this.model.get('resultado_c') == 5){
-      console.log("se crea reunion");
-      $("[data-panelname='LBL_RECORDVIEW_PANEL5']").show();
-      $("#Objetivos").show();
-      selfRella.nuevoRegistro.tipo_registro="reunion";
-    }
-
-    if(this.model.get('resultado_c') == 19){
-      console.log("se crea llamada");
-      $("[data-panelname='LBL_RECORDVIEW_PANEL5']").show();
-      $("#Objetivos").hide();
-      selfRella.nuevoRegistro.tipo_registro="llamada";
-    }
-
-    if(this.model.get('resultado_c') !=5 && this.model.get('resultado_c')!=19){
-      $("[data-panelname='LBL_RECORDVIEW_PANEL5']").hide();
-      selfRella.nuevoRegistro.tipo_registro="";
+    try {
+      if(this.model.get('resultado_c') == 5){
+        console.log("se crea reunion");
+        $("[data-panelname='LBL_RECORDVIEW_PANEL5']").show();
+        $("#Objetivos").show();
+        selfRella.nuevoRegistro.tipo_registro="reunion";
+      }
+      if(this.model.get('resultado_c') == 19){
+        console.log("se crea llamada");
+        $("[data-panelname='LBL_RECORDVIEW_PANEL5']").show();
+        $("#Objetivos").hide();
+        selfRella.nuevoRegistro.tipo_registro="llamada";
+      }
+      if(this.model.get('resultado_c') !=5 && this.model.get('resultado_c')!=19){
+        $("[data-panelname='LBL_RECORDVIEW_PANEL5']").hide();
+        selfRella.nuevoRegistro.tipo_registro="";
+      }
+    } catch (e) {
+      //console.log(e);
     }
   },
 
@@ -79,7 +81,7 @@ Controlador de reuniones-llamadas
   },
 
   loadData: function(options){
-    
+
     selfRella=this;
     var link='';
     /*
@@ -91,11 +93,11 @@ Controlador de reuniones-llamadas
     }*/
 
     //Para la vista de detalle
-    if(this.model.get('id') !=undefined && this.model.get('id') !=""){
+    if(this.model.get('id') !=undefined && this.model.get('id') !="" && (this.model.get('resultado_c') ==5 || this.model.get('resultado_c')==19)){
       var idMinuta=this.model.get('id');
       app.api.call('GET', app.api.buildURL('Meetings?filter[0][minut_minutas_meetings_2minut_minutas_ida][$equals]=' + idMinuta), null, {
         success: function(data){
-          selfRella.reunLlam=data;          
+          selfRella.reunLlam=data;
           var d = new Date(selfRella.reunLlam.records[0].date_start);
           selfRella.reunLlam.records[0].date_start=d.toLocaleString();
           var d1=new Date(selfRella.reunLlam.records[0].date_end);
@@ -104,8 +106,8 @@ Controlador de reuniones-llamadas
           selfRella.render();
         },
         error: function (e) {
-          console.log(e);
-        }      
+          //console.log(e);
+        }
       });
     }
 
@@ -150,9 +152,9 @@ Controlador de reuniones-llamadas
   addNewReuLam:function(evt){
     selfRella.nuevoRegistro.nombre=$('.newCampo1A').val();
     selfRella.nuevoRegistro.date_start=$('.newDate').val();
-    selfRella.nuevoRegistro.time_start=this.validaTiempo($('.newTime1').val()); 
+    selfRella.nuevoRegistro.time_start=this.validaTiempo($('.newTime1').val());
     selfRella.nuevoRegistro.date_end=$('.newDate2').val();
-    selfRella.nuevoRegistro.time_end=this.validaTiempo($('.newTime2').val());   
+    selfRella.nuevoRegistro.time_end=this.validaTiempo($('.newTime2').val());
     //selfRella.nuevoRegistro.objetivoE='';
     selfRella.nuevoRegistro.objetivoG=$('.objetivoG').select2('val');
     diferencia = Math.abs(new Date(selfRella.nuevoRegistro.date_start +' '+selfRella.nuevoRegistro.time_start) - new Date(selfRella.nuevoRegistro.date_end+' '+selfRella.nuevoRegistro.time_end));
@@ -190,119 +192,6 @@ Controlador de reuniones-llamadas
        callback(null, fields, errors);
    },
 
-   RequeMeetCall:function(fields,errors,callback){
-    //Campos necesarios para Reunion
-    if(this.model.get('resultado_c')==5){
-      var necesarios="";
-      if($('.newCampo1A').val()=='' || $('.newCampo1A').val()==null){
-        necesarios=necesarios  + '<br><b>Asunto</b><br>'
-        $('.newCampo1A').css('border-color', 'red');
-        errors[$(".newCampo1A")] = errors['Asunto'] || {};
-        errors[$(".newCampo1A")].custom_message1 = true;
-      }
-    
-      if($('.objetivoG').val()=='' || $('.objetivoG').val()==null || $('.objetivoG').val()==undefined){
-        necesarios=necesarios  + '<b>Objetivo General</b><br>'
-        $('.objetivoG').find('.select2-choice').css('border-color','red');
-        errors[$(".objetivoG")] = errors['Objetivo'] || {};
-        errors[$(".objetivoG")].custom_message1 = true;
-        }
-
-      if($('.newDate').val()=='' || $('.newDate').val()==null || $('.newDate').val()==undefined ){
-        necesarios=necesarios + '<b>Fecha inicial</b><br>'
-        $('.newDate').css('border-color', 'red');
-        errors[$(".newDate")] = errors['Fecha_inicial'] || {};
-        errors[$(".newDate")].custom_message2 = true;
-      }
-
-      if($('.newTime1').val()=='' || $().val('.newTime1')==null || $().val('.newTime1')==undefined){
-        //necesariosC=necesariosC + '<b>Tiempo inicial</b><b>'
-        $('.newTime1').css('border-color', 'red');
-        errors[$(".newTime1")] = errors['Tiempo_inicial'] || {};
-        errors[$(".newTime1")].custom_message2 = true;
-      }
-
-      if($('.newDate2').val()=='' || $('.newDate2').val()==null || $('.newDate2').val()==undefined){
-        necesarios=necesarios + '<b>Fecha Final</b><br>'
-        $('.newDate2').css('border-color', 'red');
-        errors[$(".newDate2")] = errors['Fecha_fin'] || {};
-        errors[$(".newDate2")].custom_message2 = true;
-      }
-
-      if($('.newTime2').val()=='' || $('newTime2').val()==null || $$('newTime2').val()==null){
-        //necesariosC=necesariosC + '<b>Tiempo Final</b><b>'
-        $('.newTime2').css('border-color', 'red');
-        errors[$(".newDate2")] = errors['Fecha_fin'] || {};
-        errors[$(".newDate2")].custom_message2 = true;
-      }
-      
-      if($('.newObjetivoE1').val()=='' || $('.newObjetivoE1').val()==null || $('.newObjetivoE1').val()==undefined){
-        necesarios=necesarios  + '<b>Objetivos Especificos</b><br>'
-        $('.newObjetivoE1').css('border-color', 'red');
-          //errors[$(".newObjetivoE1")] = errors['Objetivo'] || {};
-          app.alert.show("Objetivo especificos",{
-            level: "error",
-            title: "Favor de completar la siguiente informacion para Reunion:"+ necesarios,
-            autoClose: false
-        });        
-      }
-
-      if(necesarios!=""){
-        $('.newCampo1A').css('border-color', '');
-        $('.newDate').css('border-color', '');
-        $('.newTime1').css('border-color', '');
-        $('.newDate2').css('border-color', '');
-        $('.newTime2').css('border-color', '');
-        $('.newObjetivoE1').css('border-color', '');
-        $('.objetivoG').css('border-color', '');
-      }
-    }
-    //Campos Requeridos para llamada
-    if(this.model.get('resultado_c')==19){
-      var necesariosC="";
-      if($('.newCampo1A').val()=='' || $('.newCampo1A').val()==null ||$('.newCampo1A').val()==undefined){
-        necesariosC=necesariosC + '<br><b>Asunto</b><br>'
-        $('.newCampo1A').css('border-color', 'red');
-        errors[$(".newCampo1A")] = errors['Asunto'] || {};
-        errors[$(".newCampo1A")].custom_message2 = true;
-      }
-      if($('.newDate').val()=='' || $('.newDate').val()==null || $('.newDate').val()==undefined ){
-        necesariosC=necesariosC + '<b>Fecha inicial</b><br>'
-        $('.newDate').css('border-color', 'red');
-        errors[$(".newDate")] = errors['Fecha_inicial'] || {};
-        errors[$(".newDate")].custom_message2 = true;
-      }
-      if($('.newTime1').val()=='' || $().val('.newTime1')==null || $().val('.newTime1')==undefined){
-        //necesariosC=necesariosC + '<b>Tiempo inicial</b><b>'
-        $('.newTime1').css('border-color', 'red');
-        errors[$(".newTime1")] = errors['Tiempo_inicial'] || {};
-        errors[$(".newTime1")].custom_message2 = true;
-      }
-      if($('.newDate2').val()=='' || $('.newDate2').val()==null || $('.newDate2').val()==undefined){
-        necesariosC=necesariosC + '<b>Fecha Final</b><br>'
-        $('.newDate2').css('border-color', 'red');
-        errors[$(".newDate2")] = errors['Fecha_fin'] || {};
-        errors[$(".newDate2")].custom_message2 = true;
-      }
-      if($('.newTime2').val()=='' || $('newTime2').val()==null){
-        //necesariosC=necesariosC + '<b>Tiempo Final</b><b>'
-        $('.newTime2').css('border-color', 'red');
-        app.alert.show("Requeridos llamada",{
-            level: "error",
-            title: "Favor de completar la siguiente informacion para Llamada:"+ necesariosC,
-            autoClose: false
-        }); 
-      }
-      if(necesariosC!=""){
-        $('.newCampo1A').css('border-color', '');
-        $('.newDate').css('border-color', '');
-        $('.newTime1').css('border-color', '');
-        $('.newDate2').css('border-color', '');
-        $('.newTime2').css('border-color', '');
-      }
-    }
-  callback(null,fields,errors);
-  },
 
    //Adrian Arauz
    //Validacion para que los objetivos añadidos no estén vacíos a la hora de crear la reunion.
@@ -386,7 +275,7 @@ Controlador de reuniones-llamadas
 
      selfRella.myobject.records.push(item);
      selfRella.render();
-       }       
+       }
    },
 
   /**

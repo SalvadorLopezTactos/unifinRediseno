@@ -186,6 +186,35 @@ array (
           ),
           5 => 
           array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL6',
+            'label' => 'LBL_RECORDVIEW_PANEL6',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'minuta_referencias',
+                'studio' => 'visible',
+                'label' => 'minuta_referencias',
+                'span' => 12,
+              ),
+              1 => 
+              array (
+                'name' => 'tct_ref_json_c',
+                'studio' => 'visible',
+                'label' => 'LBL_TCT_REF_JSON_C',
+              ),
+              2 => 
+              array (
+              ),
+            ),
+          ),
+          6 => 
+          array (
             'name' => 'panel_hidden',
             'label' => 'LBL_SHOW_MORE',
             'hide' => true,
@@ -235,7 +264,27 @@ array (
               ),
             ),
           ),
-          6 => 
+          7 => 
+          array (
+            'newTab' => false,
+            'panelDefault' => 'expanded',
+            'name' => 'LBL_RECORDVIEW_PANEL5',
+            'label' => 'LBL_RECORDVIEW_PANEL5',
+            'columns' => 2,
+            'labelsOnTop' => 1,
+            'placeholders' => 1,
+            'fields' => 
+            array (
+              0 => 
+              array (
+                'name' => 'minuta_reuniones_llamadas',
+                'studio' => 'visible',
+                'label' => 'minuta_reuniones_llamadas',
+                'span' => 12,
+              ),
+            ),
+          ),
+          8 => 
           array (
             'newTab' => false,
             'panelDefault' => 'expanded',
