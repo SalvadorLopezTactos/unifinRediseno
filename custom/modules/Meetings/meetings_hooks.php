@@ -617,20 +617,19 @@ SQL;
      * Función para tabla de auditoría de Meetings
      * Función que inserta valores a tabla de meetings_audit (creada directa desde la BD) para poder trackear los cambios realizados al campo de status
      * */
-    function insertAuditFields ($bean = null, $event = null, $args = null){
+    function insertAuditFields ($bean, $event, $args){
         global $current_user;
         $date= TimeDate::getInstance()->nowDb();
         if($args['isUpdate']){
             $id_m_audit=create_guid();
 
-            if($bean->fetched_row['status'] != $bean->status‌){
-                $sqlInsert="INSERT INTO meetings_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
+                //if($bean->status‌ != $bean->fetched_row['status']){
+                if($bean->fetched_row['status'] != $bean->status){
+                    $sqlInsert="INSERT INTO meetings_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
                             VALUES ('{$id_m_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'status', 'enum', '{$bean->fetched_row['status']}', '{$bean->status}', '', '', '1', '{$date}')";
 
-                $GLOBALS['db']->query($sqlInsert);
-
-            }
-
+                    $GLOBALS['db']->query($sqlInsert);
+                }
 
         }
 
