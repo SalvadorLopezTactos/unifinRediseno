@@ -7,6 +7,7 @@ class Minuta_reun_llam{
 		if($objRellam['tipo_registro']=="reunion"){
 			//$GLOBALS['log']->fatal(print_r($objRellam,true));
 			$bean_reunion=BeanFactory::newBean('Meetings');
+			$bean_reunion->minut_minutas_meetings_2minut_minutas_ida =$bean->id;
 			$bean_reunion->name=$objRellam['nombre'];
 			$start=date("d/m/Y h:i a", strtotime($objRellam['date_start']."T".$objRellam['time_start']));
 			$bean_reunion->date_start=$start;
@@ -25,6 +26,7 @@ class Minuta_reun_llam{
 			//$GLOBALS['log']->fatal(print_r($objRellam,true));
 			$bean_llamada=BeanFactory::newBean('Calls');
 			$bean_llamada->name=$objRellam['nombre'];
+			$bean_llamada->minut_minutas_calls_1minut_minutas_ida=$bean->id;
 			$start=date("d/m/Y h:i a", strtotime($objRellam['date_start']."T".$objRellam['time_start']));
 			$bean_llamada->date_start=$start;
 			$end=date("d/m/Y h:i a", strtotime($objRellam['date_end']."T".$objRellam['time_end']));
