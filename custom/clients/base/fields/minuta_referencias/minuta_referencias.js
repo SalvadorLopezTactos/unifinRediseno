@@ -7,8 +7,15 @@
         'keydown .newCampo1R': 'OnlyText',
         'keydown .newCampo2R': 'OnlyText',
         'keydown .newCampo3R': 'OnlyText',
-        //'change  .newCampo5R': 'validaTelRef',
-        'change .updateRecords': 'actualizacampos',
+
+        'keydown .newCampo5R':'keyDownNewExtension',
+        'keydown .campo5SelectR':'keyDownNewExtension',
+
+        'keydown .newCampo5R':'checkInVentas',
+        'keydown .campo5SelectR':'checkInVentas',
+        //'keydown .newCampo4R':'checkInVentas',
+        //'keydown .campo4SelectR':'checkInVentas',
+
         'change .campo5SelectR':'validaTelRef',
         'change .campo4SelectR':'validaMailRef'
     },
@@ -39,6 +46,66 @@
 
         $("div.record-label[data-name='minuta_referencias']").attr('style', 'display:none;');
         $("[data-name='tct_ref_json_c']").attr('style', 'display:none;');
+
+        $('.updateRecords').change(function(evt) {
+            //var Indice se posiciona para tener la posicion del tr cercano para encontrar el campo actualizado
+            //var valorch obtiene el nombre del campo modificado (clase)
+            //Actualiza el objeto mReferencias con el campo ubicao y el valor actualizado
+            var campo=$(this).closest("tr");
+            var valorch=$(evt.currentTarget).attr('data-field');
+            var nombreCampo = campo.context.getAttribute('data-field');
+            selfRef.mReferencias.referencias[campo.index()][valorch]=$(evt.currentTarget).val();
+            //Validacion para campos requeridos solamente
+            if(campo.context.value=="" || campo.context.value==null ){
+                if( nombreCampo == 'apaterno' || nombreCampo == 'nombres'){
+                    selfRef.$(evt.currentTarget).css('border-color', 'red');
+                    app.alert.show("ReferenciaVacia", {
+                        level: "error",
+                        title: "La referencia ingresada contiene valor vacío. <br> Se requieren un Nombre y Apellido Paterno.",
+                        autoClose: true
+                    });
+                }
+                if((nombreCampo == 'correo' || nombreCampo == 'telefono') && (selfRef.mReferencias.referencias[campo.index()].correo == "" && selfRef.mReferencias.referencias[campo.index()].telefono=="" )){
+                    selfRef.$(evt.currentTarget).css('border-color', 'red');
+                    // selfRef.mReferencias.referencias[campo.index()][valorch]=$(evt.currentTarget).val("");
+                    app.alert.show("ReferenciaVacia", {
+                        level: "error",
+                        title: "La referencia ingresada contiene valor vacío. <br> Se requieren un correo o un tel\u00E9fono.",
+                        autoClose: true
+                    });
+                }
+
+            }else{
+                selfRef.$(evt.currentTarget).css('border-color', '');
+                if (nombreCampo == 'telefono'){
+                    if(!selfRef.validaTelRef(selfRef.mReferencias.referencias[campo.index()].telefono.length, selfRef.mReferencias.referencias[campo.index()].telefono)){
+                        selfRef.$(evt.currentTarget).css('border-color', 'red');
+                        selfRef.$(evt.currentTarget).val('');
+                        app.alert.show("ReferenciaTelDif", {
+                            level: "error",
+                            title: "El Formato de tel\u00E9fono es incorrecto.",
+                            autoClose: true
+                        });
+                        selfRef.mReferencias.referencias[campo.index()][valorch]="";
+                    }
+                }
+                if (nombreCampo == 'correo'){
+                    selfRef.$(evt.currentTarget).css('border-color', '');
+                    if(!selfRef.validaMailRef(selfRef.mReferencias.referencias[campo.index()].correo.length ,selfRef.mReferencias.referencias[campo.index()].correo)){
+                        selfRef.$(evt.currentTarget).css('border-color', 'red');
+                        selfRef.$(evt.currentTarget).val('');
+                        app.alert.show("ReferenciaTelDif", {
+                            level: "error",
+                            title: "Formato de correo incorrecto.",
+                            autoClose: true
+                        });
+                        selfRef.mReferencias.referencias[campo.index()][valorch]="";
+                    }
+                }
+            }
+            selfRef.mReferencias.referencias[campo.index()][valorch]=$(evt.currentTarget).val();
+        });
+
     },
 
     bindDataChange: function () {
@@ -205,6 +272,31 @@
 
         if (faltantes == 0) {
 
+            if (selfRef.mReferencias.referencias.length >=0) {
+
+            var duplicados= false;
+
+            Object.keys(selfRef.mReferencias.referencias).forEach(function(key) {
+
+                if (selfRef.mReferencias.referencias[key].nombres == $('.newCampo1R').val() && selfRef.mReferencias.referencias[key].apaterno == $('.newCampo2R').val()
+                    && selfRef.mReferencias.referencias[key].amaterno == $('.newCampo3R').val()) {
+                    duplicados = true;
+                }
+            });
+            if(duplicados== true){
+                $(".newCampo1R").val("");
+                $(".newCampo2R").val("");
+                $(".newCampo3R").val("");
+                $(".newCampo4R").val("");
+                $(".newCampo5R").val("");
+                app.alert.show('Referencia_duplicada_+', {
+                    level: 'error',
+                    autoClose: true,
+                    title: "No se puede agregar la referencia. <br> Esta persona ya ha sido registrada."
+                });
+            }
+            else{
+
             App.alert.show('loadingRender', {
                 level: 'process',
                 title: 'Cargando, por favor espere.',
@@ -247,7 +339,7 @@
                         $(".newCampo5R").val("");
                         app.alert.show("ReferenciaDuplicada", {
                             level: "error",
-                            title: "La referencia ingresada ya existe. No es posible registrarla como un nuevo Lead.",
+                            title: "No se puede agregar la referencia. <br> Esta persona ya ha sido registrada.",
                             autoClose: true
                         });
                     }
@@ -259,7 +351,9 @@
                     App.alert.dismiss('loadingRender');
                 }, this)
             });
+            }
         }
+      }
     },
 
     validaMailRef:function(correoTam, ValMail) {
@@ -299,65 +393,6 @@
         return valido;
     },
 
-    actualizacampos: function (evt){
-        //var Indice se posiciona para tener la posicion del tr cercano para encontrar el campo actualizado
-        //var valorch obtiene el nombre del campo modificado (clase)
-        //Actualiza el objeto mReferencias con el campo ubicao y el valor actualizado
-        var campo=$(evt.currentTarget).parent().parent().parent().parent();
-        var valorch=$(evt.currentTarget).attr('data-field');
-        var nombreCampo = campo.context.getAttribute('data-field');
-        selfRef.mReferencias.referencias[campo.index()][valorch]=$(evt.currentTarget).val();
-        //Validacion para campos requeridos solamente
-        if(campo.context.value=="" || campo.context.value==null ){
-            if( nombreCampo == 'apaterno' || nombreCampo == 'nombres'){
-                selfRef.$(evt.currentTarget).css('border-color', 'red');
-                app.alert.show("ReferenciaVacia", {
-                    level: "error",
-                    title: "La referencia ingresada contiene valor vacío. <br> Se requieren un Nombre y Apellido Paterno.",
-                    autoClose: true
-                });
-            }
-            if((nombreCampo == 'correo' || nombreCampo == 'telefono') && (selfRef.mReferencias.referencias[campo.index()].correo == "" && selfRef.mReferencias.referencias[campo.index()].telefono=="" )){
-                selfRef.$(evt.currentTarget).css('border-color', 'red');
-               // selfRef.mReferencias.referencias[campo.index()][valorch]=$(evt.currentTarget).val("");
-                app.alert.show("ReferenciaVacia", {
-                    level: "error",
-                    title: "La referencia ingresada contiene valor vacío. <br> Se requieren un correo o un tel\u00E9fono.",
-                    autoClose: true
-                });
-            }
-
-        }else{
-            selfRef.$(evt.currentTarget).css('border-color', '');
-             if (nombreCampo == 'telefono'){
-                if(!this.validaTelRef(selfRef.mReferencias.referencias[campo.index()].telefono.length, selfRef.mReferencias.referencias[campo.index()].telefono)){
-                    selfRef.$(evt.currentTarget).css('border-color', 'red');
-                    selfRef.$(evt.currentTarget).val('');
-                    app.alert.show("ReferenciaTelDif", {
-                        level: "error",
-                        title: "El Formato de tel\u00E9fono es incorrecto.",
-                        autoClose: true
-                    });
-                    selfRef.mReferencias.referencias[campo.index()][valorch]="";
-                }
-            }
-        }
-            if (nombreCampo == 'correo'){
-                selfRef.$(evt.currentTarget).css('border-color', '');
-                if(!this.validaMailRef(selfRef.mReferencias.referencias[campo.index()].correo.length ,selfRef.mReferencias.referencias[campo.index()].correo)){
-                    selfRef.$(evt.currentTarget).css('border-color', 'red');
-                    selfRef.$(evt.currentTarget).val('');
-                    app.alert.show("ReferenciaTelDif", {
-                        level: "error",
-                        title: "Formato de correo incorrecto.",
-                        autoClose: true
-                    });
-                    selfRef.mReferencias.referencias[campo.index()][valorch]="";
-                }
-            }
-        selfRef.mReferencias.referencias[campo.index()][valorch]=$(evt.currentTarget).val();
-    },
-
     validaTelRef: function (telefonoTam,ValTel) {
 
         var banderTelefono = false;
@@ -389,4 +424,139 @@
         }
         return banderTelefono;
     },
+
+    keyDownNewExtension: function (evt) {
+        if (!evt) return;
+        if(!this.validatelefono(evt)){
+            return false;
+        }
+    },
+    validatelefono:function(evt){
+        if($.inArray(evt.keyCode,[110,188,190,45,33,36,46,35,34,8,9,20,16,17,37,40,39,38,16,49,50,51,52,53,54,55,56,57,48,96,97,98,99,100,101,102,103,104,105]) < 0) {
+            app.alert.show("Caracter Invalido", {
+                level: "error",
+                title: "Solo n\u00FAmeros son permitidos en este campo.",
+                autoClose: true
+            });
+            return false;
+
+        }else{
+            return true;
+        }
+    },
+
+    checkInVentas:function (evt) {
+        var enteros=this.checkmoneyint(evt);
+        var decimales=this.checkmoneydec(evt);
+        $.fn.selectRange = function(start, end) {
+            if(!end) end = start;
+            return this.each(function() {
+                if (this.setSelectionRange) {
+                    this.focus();
+                    this.setSelectionRange(start, end);
+                } else if (this.createTextRange) {
+                    var range = this.createTextRange();
+                    range.collapse(true);
+                    range.moveEnd('character', end);
+                    range.moveStart('character', start);
+                    range.select();
+                }
+            });
+        };
+        (function ($, undefined) {
+            $.fn.getCursorPosition = function() {
+                var el = $(this).get(0);
+                var pos = [];
+                if('selectionStart' in el) {
+                    pos = [el.selectionStart,el.selectionEnd];
+                } else if('selection' in document) {
+                    el.focus();
+                    var Sel = document.selection.createRange();
+                    var SelLength = document.selection.createRange().text.length;
+                    Sel.moveStart('character', -el.value.length);
+                    pos = Sel.text.length - SelLength;
+                }
+                return pos;
+            }
+        })(jQuery); //funcion para obtener cursor
+        var cursor=$(evt.handleObj.selector).getCursorPosition();//setear cursor
+
+
+        if (enteros == "false" && decimales == "false") {
+            if(cursor[0]==cursor[1]) {
+                return false;
+            }
+        }else if (typeof enteros == "number" && decimales == "false") {
+            if (cursor[0] < enteros) {
+                $(evt.handleObj.selector).selectRange(cursor[0], cursor[1]);
+            } else {
+                $(evt.handleObj.selector).selectRange(enteros);
+            }
+        }
+
+    },
+
+    checkmoneyint: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var digitos = $input.val().split('.');
+        if($input.val().includes('.')) {
+            var justnum = /[\d]+/;
+        }else{
+            var justnum = /[\d.]+/;
+        }
+        var justint = /^[\d]{0,14}$/;
+
+        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return "false";
+        }
+
+        if(typeof digitos[0]!="undefined") {
+            if (justint.test(digitos[0]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
+                //console.log('no se cumplen enteros')
+                if(!$input.val().includes('.')) {
+                    $input.val($input.val()+'.')
+                }
+                return "false";
+
+            } else {
+                return digitos[0].length;
+            }
+        }
+    },
+
+    checkmoneydec: function (evt) {
+        if (!evt) return;
+        var $input = this.$(evt.currentTarget);
+        var digitos = $input.val().split('.');
+        if($input.val().includes('.')) {
+            var justnum = /[\d]+/;
+        }else{
+            var justnum = /[\d.]+/;
+        }
+        var justdec = /^[\d]{0,1}$/;
+
+        if((justnum.test(evt.key))==false && evt.key!="Backspace" && evt.key!="Tab" && evt.key!="ArrowLeft" && evt.key!="ArrowRight"){
+            app.alert.show('error_dinero', {
+                level: 'error',
+                autoClose: true,
+                messages: 'El campo no acepta caracteres especiales.'
+            });
+            return "false";
+        }
+        if(typeof digitos[1]!="undefined") {
+            if (justdec.test(digitos[1]) == false && evt.key != "Backspace" && evt.key != "Tab" && evt.key != "ArrowLeft" && evt.key != "ArrowRight") {
+                //console.log('no se cumplen dec')
+                return "false";
+            } else {
+                return "true";
+            }
+        }
+    },
+
 })
