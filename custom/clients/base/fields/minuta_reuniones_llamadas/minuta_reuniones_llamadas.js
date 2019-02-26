@@ -84,18 +84,21 @@ Controlador de reuniones-llamadas
 
     selfRella=this;
     var link='';
-    /*
+    modulo='';
+    
     if(this.model.get('resultado_c') == 5){
-      link='minut_minutas_meetings_2';
+      link='minut_minutas_meetings_2minut_minutas_ida';
+      modulo='Meetings';
     }
     if(this.model.get('resultado_c') == 19){
-      link='minut_minutas_calls_1';
-    }*/
+      link='minut_minutas_calls_1minut_minutas_ida';
+      modulo='Calls';
+    }
 
     //Para la vista de detalle
     if(this.model.get('id') !=undefined && this.model.get('id') !="" && (this.model.get('resultado_c') ==5 || this.model.get('resultado_c')==19)){
       var idMinuta=this.model.get('id');
-      app.api.call('GET', app.api.buildURL('Meetings?filter[0][minut_minutas_meetings_2minut_minutas_ida][$equals]=' + idMinuta), null, {
+      app.api.call('GET', app.api.buildURL(modulo+'?filter[0]['+link+'][$equals]=' + idMinuta), null, {
         success: function(data){
           selfRella.reunLlam=data;
           var d = new Date(selfRella.reunLlam.records[0].date_start);

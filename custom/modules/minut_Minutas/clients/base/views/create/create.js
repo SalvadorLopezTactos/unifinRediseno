@@ -324,6 +324,18 @@
 
     saveReuionLlamada: function (fields, errors, callback) {
       //Limpia campos
+      var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10) {
+            dd = '0'+dd
+        }
+        if(mm<10) {
+            mm = '0'+mm
+        }
+        today = yyyy+'-'+mm+'-'+dd;
+
       var necesarios="";
       $('.newCampo1A').css('border-color', '');
       $('.newDate').css('border-color', '');
@@ -346,7 +358,23 @@
           $('.newDate').css('border-color', 'red');
           $('.newTime1').css('border-color', 'red');
         }
-
+        var registro="";
+        if(this.model.get('resultado_c')==5){
+            registro="Reunion";
+        }
+        if(this.model.get('resultado_c')==19){
+            registro="Llamada";
+        }
+        if($('.newDate').val()<today){
+            $('.newDate').css('border-color', 'red');
+            app.alert.show("requeridos_reunion_llamada", {
+            level: "error",
+            messages: "No se pueden agendar la "+registro+" con fecha menor a la actual",
+            autoClose: false
+        });
+        errors['.newDate'] = errors['.newDate'] || {};
+        errors['.newDate'].required = true;
+        }
         if($('.newDate2').val()=='' || $('.newDate2').val()==null || $('.newDate2').val()==undefined || $('.newTime2').val()=='' || $('.newTime2').val()==null){
           necesarios=necesarios + '<br><b>Fecha Final</b>'
           $('.newDate2').css('border-color', 'red');
