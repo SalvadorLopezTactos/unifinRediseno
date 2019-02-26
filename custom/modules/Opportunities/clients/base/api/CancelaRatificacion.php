@@ -26,40 +26,37 @@ class CancelaRatificacion extends SugarApi
         global $db, $current_user;
         $isParentId = false;
         $id = $args['data']['id'];
-		$conProceso = $args['data']['conProceso'];
+		    $conProceso = $args['data']['conProceso'];
         $tipo_de_operacion_c = $args['data']['tipo_de_operacion_c'];
         $tipo_operacion_c = $args['data']['tipo_operacion_c'];
 
-
-
-		if($conProceso==0){
-			$GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : id hijo " . $id);
-			$query2 = <<<SQL
+    		if($conProceso==0){
+	    		$GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : id hijo " . $id);
+		    	$query2 = <<<SQL
 UPDATE opportunities_cstm
 SET estatus_c = 'K'
 where id_c='{$id}'
 SQL;
-			$GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : query: " . $query2);
-			$queryResult2 = $db->query($query2);
-			$GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> :Resultado query: " . print_r($queryResult2,true));
-			if($queryResult2 != null){
+	    		$GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : query: " . $query2);
+			    $queryResult2 = $db->query($query2);
+		    	$GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> :Resultado query: " . print_r($queryResult2,true));
+			    if($queryResult2 != null){
                 $isParentId = true;
-            }
-
+          }
             //$this->cancelaBacklogs($id);
         }
 
-	if($tipo_de_operacion_c=='RATIFICACION_INCREMENTO' && $tipo_operacion_c=='1'){
-        //obtiene el idpadre:
-        $padre = "Select id_linea_credito_c from opportunities_cstm where id_c='{$id}';";
-        $padreQuery = $db->query($padre);
-        while ($row = $db->fetchByAssoc($padreQuery)) {
-            $id_linea_padre = $row['id_linea_credito_c'];
-        }
-        $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : consulta2  " . $padre);
-        $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : fila  " . $id_linea_padre);
-        if($id_linea_padre!="" && strlen($id_linea_padre)>0 && $id_linea_padre!=0 && $id_linea_padre != 'NULL'){
-            $query = <<<SQL
+	      if($tipo_de_operacion_c=='RATIFICACION_INCREMENTO' && $tipo_operacion_c=='1'){
+          //obtiene el idpadre:
+          $padre = "Select id_linea_credito_c from opportunities_cstm where id_c='{$id}';";
+          $padreQuery = $db->query($padre);
+          while ($row = $db->fetchByAssoc($padreQuery)) {
+              $id_linea_padre = $row['id_linea_credito_c'];
+          }
+          $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : consulta2  " . $padre);
+          $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : fila  " . $id_linea_padre);
+          if($id_linea_padre!="" && strlen($id_linea_padre)>0 && $id_linea_padre!=0 && $id_linea_padre != 'NULL'){
+              $query = <<<SQL
 UPDATE opportunities_cstm
 SET /*tipo_de_operacion_c = 'LINEA_NUEVA', */ plazo_ratificado_incremento_c ="",
 ratificacion_incremento_c=0, monto_ratificacion_increment_c=0.00,
@@ -74,11 +71,24 @@ where id_linea_credito_c = $id_linea_padre /* and tipo_de_operacion_c = 'RATIFIC
 SQL;
             $GLOBALS['log']->fatal(__FILE__." - ".__CLASS__."->".__FUNCTION__." <".$current_user->user_name."> : query: " . $query);
             $queryResult = $db->query($query);
-        }
-		if($queryResult2 != null){
-			$isParentId = true;
-		}
-	}
+          }
+		      if($queryResult != null){
+			      $isParentId = true;
+		      }
+          // Busca RI a borrar
+          $solicitud = "SELECT idsolicitud_c FROM opportunities_cstm WHERE tipo_operacion_c = '2' AND estatus_c = 'N' AND id_linea_credito_c='{$id_linea_padre}';";
+          $solicitudQuery = $db->query($solicitud);
+          while ($row = $db->fetchByAssoc($solicitudQuery)) {
+              $id_solicitud = $row['idsolicitud_c'];
+          }         
+          $cfri = "SELECT id FROM lev_condicionesfinancieras WHERE incremento_ratificacion = 1 AND deleted = 0 AND idsolicitud = '{$id_solicitud}';";
+          $cfriQuery = $db->query($cfri);
+          while ($row = $db->fetchByAssoc($cfriQuery)) {
+            $id_borrar = $row['id'];
+            $borraRI = "UPDATE lev_condicionesfinancieras_opportunities_c SET deleted = 1 WHERE lev_condic7ff1ncieras_idb = '{$id_borrar}';";
+            $borraRIQuery = $db->query($borraRI);
+          }
+	      }
         return $isParentId;
     }
 
