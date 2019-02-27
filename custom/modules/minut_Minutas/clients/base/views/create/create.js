@@ -13,9 +13,10 @@
         this.model.addValidationTask('save_Asistencia_Parti', _.bind(this.saveAsistencia, this));
         this.model.addValidationTask('save_Referencias', _.bind(this.saveReferencias, this));
         //this.model.addValidationTask('validaObjetivosmarcados', _.bind(this.validaObjetivosmarcados,this));
-        this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.model.addValidationTask('save_Reuunion_Llamada',_.bind(this.saveReuionLlamada, this));
         this.model.addValidationTask('valida_requeridos',_.bind(this.valida_requeridos, this));
+        //Mantener como último VT a savestatusandlocation
+        this.model.addValidationTask('save_meetings_status_and_location', _.bind(this.savestatusandlocation, this));
         this.context.on('button:view_document:click', this.view_document, this);
 
     },
@@ -358,23 +359,39 @@
           $('.newDate').css('border-color', 'red');
           $('.newTime1').css('border-color', 'red');
         }
+
         var registro="";
         if(this.model.get('resultado_c')==5){
-            registro="Reunion";
+            registro="Reunión";
         }
         if(this.model.get('resultado_c')==19){
             registro="Llamada";
         }
+        
         if($('.newDate').val()<today){
             $('.newDate').css('border-color', 'red');
             app.alert.show("requeridos_reunion_llamada", {
             level: "error",
-            messages: "No se pueden agendar la "+registro+" con fecha menor a la actual",
+            messages: "No se pueden agendar la "+registro+" con fecha de inicio menor a la actual",
             autoClose: false
         });
         errors['.newDate'] = errors['.newDate'] || {};
         errors['.newDate'].required = true;
         }
+        
+        var fechain=$('.newDate').val();
+        var fechafin=$('.newDate2').val();
+        if(fechafin<fechain){            
+            $('.newDate2').css('border-color', 'red');
+            app.alert.show("Fecha", {
+            level: "error",
+            messages: "La fecha de fin en la "+registro+" no puede ser menor a la fecha de inicio",
+            autoClose: false
+        });
+        errors['.newDate2'] = errors['.newDate2'] || {};
+        errors['.newDate2'].required = true;
+        }
+
         if($('.newDate2').val()=='' || $('.newDate2').val()==null || $('.newDate2').val()==undefined || $('.newTime2').val()=='' || $('.newTime2').val()==null){
           necesarios=necesarios + '<br><b>Fecha Final</b>'
           $('.newDate2').css('border-color', 'red');
