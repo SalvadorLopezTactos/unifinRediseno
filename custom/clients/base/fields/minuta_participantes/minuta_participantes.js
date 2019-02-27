@@ -247,7 +247,7 @@
                     app.alert.show('Tname_participante_error', {
                         level: 'error',
                         autoClose: true,
-                        messages: 'Formato de nombre incorrecto'
+                        messages: 'Formato de apellido paterno incorrecto'
                     });
                     faltantes++;
                 }
@@ -261,7 +261,7 @@
                     app.alert.show('Tname_participante_error', {
                         level: 'error',
                         autoClose: true,
-                        messages: 'Formato de nombre incorrecto'
+                        messages: 'Formato de apellido materno incorrecto'
                     });
                     faltantes++;
                 }
