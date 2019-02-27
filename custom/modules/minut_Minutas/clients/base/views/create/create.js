@@ -51,7 +51,6 @@
         banderaAsistencia = 0;
         banderaCorreo = 0;
         for (var i = 0; i < objParticipantes.length; i++) {
-            console.log(objParticipantes[i]);
             if (objParticipantes[i].asistencia == 1 && objParticipantes[i].unifin != 1) {
                 banderaAsistencia++;
             }
@@ -61,8 +60,6 @@
         }
         // Valida Asistencias
         if (banderaAsistencia < 1) {
-            console.log("Faltan marcar Asistencia");
-
             app.alert.show("Asistencia", {
                 level: "error",
                 title: "Debes marcar asistencia por lo menos a un Participante tipo Cuenta",
@@ -80,8 +77,8 @@
                 autoClose: true,
                 return: false,
             });
-            errors['xd'] = errors['xd'] || {};
-            errors['xd'].required = true;
+            errors['correo'] = errors['correo'] || {};
+            errors['correo'].required = true;
         }
         callback(null, fields, errors);
     },
