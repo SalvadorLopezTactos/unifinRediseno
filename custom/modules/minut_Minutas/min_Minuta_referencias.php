@@ -8,6 +8,7 @@ class Minuta_Referencias
     {
         $GLOBALS['log']->fatal('Logic Hook para crear cuenta LEAD');
         $GLOBALS['log']->fatal(print_r($bean->minuta_referencias,true));
+        global $current_user;
 
         if($bean->minuta_referencias !=null && !empty($bean->minuta_referencias)) {
 
@@ -27,6 +28,25 @@ class Minuta_Referencias
                 $beanCuentas->subtipo_cuenta_c="En Calificacion";
                 $beanCuentas->origendelprospecto_c="Referido Cliente";
                 $beanCuentas->account_id1_c=$mReferencias[$r]['id_cuenta'];
+                $beanCuentas->user_id_c='569246c7-da62-4664-ef2a-5628f649537e';
+                $beanCuentas->promotorleasing_c='9 - Sin Gestor';
+                $beanCuentas->user_id1_c='569246c7-da62-4664-ef2a-5628f649537e';
+                $beanCuentas->promotorfactoraje_c='9 - Sin Gestor';
+                $beanCuentas->user_id2_c='569246c7-da62-4664-ef2a-5628f649537e';
+                $beanCuentas->promotorcredit_c='9 - Sin Gestor';
+
+                if (strpos($current_user->productos_c, '1') !=false){
+                    $beanCuentas->user_id_c=$current_user->id;
+                    $beanCuentas->promotorleasing_c='name';
+                }
+                if (strpos($current_user->productos_c,'4') !=false){
+                    $beanCuentas->user_id1_c=$current_user->id;
+                    $beanCuentas->promotorfactoraje_c='name';
+                }
+                if (strpos($current_user->productos_c, '3') !=false){
+                    $beanCuentas->user_id2_c=$current_user->id;
+                    $beanCuentas->promotorcredit_c='name';
+                }
 
                 try {
                     $GLOBALS['log']->fatal('Guarda nueva Cuenta de tipo LEAD ok');
