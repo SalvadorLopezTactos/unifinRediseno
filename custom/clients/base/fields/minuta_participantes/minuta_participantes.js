@@ -164,8 +164,7 @@
 
     //No aceptar numeros, solo letras (a-z), puntos(.) y comas(,)
     checkText: function (evt) {
-        //console.log(evt.keyCode);
-        if ($.inArray(evt.keyCode, [9, 16, 17, 110,190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192]) < 0) {
+        if ($.inArray(evt.keyCode, [9, 16, 17, 110, 190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192]) < 0) {
             if (evt.keyCode != 186) {
                 app.alert.show("Caracter Invalido", {
                     level: "error",
@@ -213,24 +212,22 @@
 
             //Valida campos requeridos
             var faltantes = 0;
+            var campos = "";
             //Nombres
             if (valor1 == '' || valor1.trim()=='') {
-
                     $('.newCampo1P').css('border-color', 'red');
+                    campos = campos + '<b>' + $('.newCampo1P')[0].placeholder + '</b><br>';
                     faltantes++;
             }
 
             if ((valor1 != '' || valor1.trim()!='') ) {
-
                 if(!this.ValidaCaracter(valor1))
                 {
                     $('.newCampo1P').css('border-color', 'red');
-
                     app.alert.show('Tname_participante_error', {
                         level: 'error',
                         autoClose: true,
                         messages: 'Formato de nombre incorrecto'
-
                     });
                     faltantes++;
                 }
@@ -239,20 +236,18 @@
             //Apellido Paterno
             if (valor2 == '' || valor2.trim()=='') {
                 $('.newCampo2P').css('border-color', 'red');
+                campos = campos + '<b>' + $('.newCampo2P')[0].placeholder + '</b><br>';
                 faltantes++
             }
 
             if ((valor2 != '' || valor2.trim()!='') ) {
-
                 if(!this.ValidaCaracter(valor2))
                 {
                     $('.newCampo2P').css('border-color', 'red');
-
                     app.alert.show('Tname_participante_error', {
                         level: 'error',
                         autoClose: true,
                         messages: 'Formato de nombre incorrecto'
-
                     });
                     faltantes++;
                 }
@@ -260,16 +255,13 @@
 
             // Apellido Materno
             if ((valor3 != '' || valor3.trim()!='') ) {
-
                 if(!this.ValidaCaracter(valor3))
                 {
                     $('.newCampo3P').css('border-color', 'red');
-
                     app.alert.show('Tname_participante_error', {
                         level: 'error',
                         autoClose: true,
                         messages: 'Formato de nombre incorrecto'
-
                     });
                     faltantes++;
                 }
@@ -278,24 +270,14 @@
             //Correo
             if (valor4 == '') {
                 $('.newCampo4P').css('border-color', 'red');
-                app.alert.show('email_telefono_error', {
-                    level: 'error',
-                    autoClose: true,
-                    messages: 'Favor de agregar un <b>Correo</b>'
-
-                });
+                campos = campos + '<b>' + $('.newCampo4P')[0].placeholder + '</b><br>';
                 faltantes++
             }
 
             //Tipo de contacto
             if (valor6 == '' || valor6 == 'Tipo de Contacto') {
                 $('.newCampo6P').css('border-color', 'red');
-                app.alert.show('tipo_contacto_error', {
-                    level: 'error',
-                    autoClose: true,
-                    messages: 'Favor de seleccionar un <b>Tipo de Contacto</b>'
-
-                });
+                campos = campos + '<b>Tipo de Contacto</b><br>';
                 faltantes++
             }
 
@@ -325,47 +307,77 @@
                 }
             }
 
+            // Valida si existen duplicados
             if (faltantes == 0) {
-              App.alert.show('loadingParticipante', {
-                  level: 'process',
-                  title: 'Cargando, por favor espere.',
-              });
-
-              $('.addParticipante').bind('click', false);
-              // Valida si existen duplicados
-              var nombre = $('.newCampo1P')[0].value;
-              var apellp = $('.newCampo2P')[0].value;
-              var apellm = $('.newCampo3P')[0].value;
-              var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "tipo_registro_c"];
-              app.api.call("read", app.api.buildURL("Accounts/", null, null, {
-                fields: fields.join(','),
-                max_num: 5,
-                "filter": [
-                  {
-                    "primernombre_c": nombre,
-                    "apellidopaterno_c": apellp,
-                    "apellidomaterno_c": apellm,
-                    "tipo_registro_c": "Persona",
+              if (this.mParticipantes.participantes.length >= 0) {
+                var duplicados = false;
+                Object.keys(this.mParticipantes.participantes).forEach(function(key) {
+                  if(this.mParticipantes.participantes[key].nombres == $('.newCampo1P').val() && this.mParticipantes.participantes[key].apaterno == $('.newCampo2P').val() && this.mParticipantes.participantes[key].amaterno == $('.newCampo3P').val()) {
+                    duplicados = true;
                   }
-                ]
-                }), null, {
-                success: _.bind(function (data) {
-                  if(data.records.length > 0) {
-                    app.alert.show("DuplicateCheck", {
-                      level: "error",
-                      title: "La persona ingresada ya existe.",
-                      autoClose: false
-                    });
-                  }
-                  else {
-                    this.mParticipantes.participantes.push(item);
-                    this.render();
-                  }
-
-                  $('.addParticipante').unbind('click', false);
-                  App.alert.dismiss('loadingParticipante');
-                }, this)
-              });
+                }, this);
+                if(duplicados){
+                  $(".newCampo1P").val("");
+                  $(".newCampo2P").val("");
+                  $(".newCampo3P").val("");
+                  app.alert.show('participante_duplicado', {
+                    level: 'error',
+                    autoClose: true,
+                    title: "No se puede agregar al participante. <br> Esta persona ya ha sido registrada."
+                  });
+                }
+              }              
+              if(!duplicados)
+              {
+                $('.addParticipante').bind('click', false);
+                App.alert.show('loadingParticipante', {
+                    level: 'process',
+                    title: 'Cargando, por favor espere.',
+                });
+                var nombre = $('.newCampo1P')[0].value;
+                var apellp = $('.newCampo2P')[0].value;
+                var apellm = $('.newCampo3P')[0].value;
+                var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "tipo_registro_c"];
+                app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                  fields: fields.join(','),
+                  max_num: 5,
+                  "filter": [
+                    {
+                      "primernombre_c": nombre,
+                      "apellidopaterno_c": apellp,
+                      "apellidomaterno_c": apellm,
+                      "tipo_registro_c": "Persona",
+                    }
+                  ]
+                  }), null, {
+                  success: _.bind(function (data) {
+                    if(data.records.length > 0) {
+                      app.alert.show("DuplicateCheck", {
+                        level: "error",
+                        title: "La persona ingresada ya existe.",
+                        autoClose: false
+                      });
+                    }
+                    else {
+                      this.mParticipantes.participantes.push(item);
+                      this.render();
+                    }
+                    $('.addParticipante').unbind('click', false);
+                    App.alert.dismiss('loadingParticipante');
+                  }, this)
+                });
+              }
+            }
+            else
+            {
+              if(campos)
+              {
+                app.alert.show('campos_requeridos', {
+                  level: 'error',
+                  autoClose: false,
+                  messages: "Hace falta completar la siguiente información en los <b>Participantes:</b><br>" + campos
+                });
+              }
             }
     },
 
@@ -379,84 +391,110 @@
             var idParti = $('input.busca-participante').val();
 
             //Valida campos requeridos
+            var campos = "";
             var faltantes = 0;
             //Nombre
             if(idParti == '') {
               $('.busca-participante').find('.select2-choice').css('border-color','red');
-              app.alert.show('participante_error', {
-                  level: 'error',
-                  autoClose: true,
-                  messages: 'Favor de seleccionar un <b>Participante</b>'
-              });
+              campos = campos + '<b>Participante</b><br>';
               faltantes++;
             }
 
             //Tipo de contacto
             if(valor7 == '' || valor7 == 'Tipo de Contacto') {
               $('.newCampo7P').css('border-color', 'red');
-              app.alert.show('tipo_contacto_error', {
-                  level: 'error',
-                  autoClose: true,
-                  messages: 'Favor de seleccionar un <b>Tipo de Contacto</b>'
-              });
+              campos = campos + '<b>Tipo de Contacto</b><br>';
               faltantes++
             }
 
+            // Valida si existen duplicados
             if(faltantes == 0) {
-              App.alert.show('loadingParticipantes', {
-                  level: 'process',
-                  title: 'Cargando, por favor espere.',
-              });
-
-              $('.addParticipantes').bind('click', false);
-              // Obtiene datos del participante seleccionado
-              var fields = ["id", "primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "email1", "phone_office", "tipo_registro_c"];
-              app.api.call("read", app.api.buildURL("Accounts/", null, null, {
-                fields: fields.join(','),
-                max_num: 5,
-                "filter": [
-                  {
-                    "id": idParti,
-                    "tipo_registro_c": "Persona",
+              if (this.mParticipantes.participantes.length >= 0) {
+                var duplicados = false;
+                Object.keys(this.mParticipantes.participantes).forEach(function(key) {
+                  var concatena = this.mParticipantes.participantes[key].nombres + " " + this.mParticipantes.participantes[key].apaterno + " " + this.mParticipantes.participantes[key].amaterno;
+                  if(concatena == $('.busca-participante')[0].innerText) {
+                    duplicados = true;
                   }
-                ]
-                }), null, {
-                success: _.bind(function (data) {
-                  if(data.records.length > 0) {
-                    var valor1 = data.records[0].primernombre_c;
-                    var valor2 = data.records[0].apellidopaterno_c;
-                    var valor3 = data.records[0].apellidomaterno_c;
-                    var valor4 = data.records[0].email1;
-                    var valor5 = data.records[0].phone_office;
-                    var item = {
-                        "id": idParti,
-                        "nombres": valor1,
-                        "apaterno": valor2,
-                        "amaterno": valor3,
-                        "telefono": valor5,
-                        "correo": valor4,
-                        "origen": "E",
-                        "unifin": 0,
-                        "tipo_contacto": valor7,
-                        "asistencia": 1,
-                        "activo" : "1"
-                    };
-                    this.mParticipantes.participantes.push(item);
-                    this.render();
-                  }
-                  else
-                  {
-                    app.alert.show("PersonaCheck", {
-                      level: "error",
-                      title: "Solo Participantes del tipo Persona pueden ser agregados.",
-                      autoClose: false
-                    });
-                  }
-                  $('.addParticipantes').unbind('click', false);
-                  App.alert.dismiss('loadingParticipantes');
-                }, this)
-              });
+                }, this);
+                if(duplicados){
+                  $('.busca-participante').select2("data", "");
+                  app.alert.show('participante_duplicado', {
+                    level: 'error',
+                    autoClose: true,
+                    title: "No se puede agregar al participante. <br> Esta persona ya ha sido registrada."
+                  });
+                }
+              }
+              if(!duplicados)
+              {              
+                App.alert.show('loadingParticipantes', {
+                    level: 'process',
+                    title: 'Cargando, por favor espere.',
+                });
+                $('.addParticipantes').bind('click', false);
+                // Obtiene datos del participante seleccionado
+                var fields = ["id", "primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "email1", "phone_office", "tipo_registro_c"];
+                app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                  fields: fields.join(','),
+                  max_num: 5,
+                  "filter": [
+                    {
+                      "id": idParti,
+                      "tipodepersona_c": {
+                        "$not_equals" : "Persona Moral",
+                      }
+                    }
+                  ]
+                  }), null, {
+                  success: _.bind(function (data) {
+                    if(data.records.length > 0) {
+                      var valor1 = data.records[0].primernombre_c;
+                      var valor2 = data.records[0].apellidopaterno_c;
+                      var valor3 = data.records[0].apellidomaterno_c;
+                      var valor4 = data.records[0].email1;
+                      var valor5 = data.records[0].phone_office;
+                      var item = {
+                          "id": idParti,
+                          "nombres": valor1,
+                          "apaterno": valor2,
+                          "amaterno": valor3,
+                          "telefono": valor5,
+                          "correo": valor4,
+                          "origen": "E",
+                          "unifin": 0,
+                          "tipo_contacto": valor7,
+                          "asistencia": 1,
+                          "activo" : "1"
+                      };
+                      this.mParticipantes.participantes.push(item);
+                      this.render();
+                    }
+                    else
+                    {
+                      app.alert.show("PersonaCheck", {
+                        level: "error",
+                        title: "Participantes del Régimen Fiscal Persona Moral NO pueden ser agregados.",
+                        autoClose: false
+                      });
+                    }
+                    $('.addParticipantes').unbind('click', false);
+                    App.alert.dismiss('loadingParticipantes');
+                  }, this)
+                });
+              }
             }
+            else
+            {
+              if(campos)
+              {            
+                app.alert.show('campos_requeridos', {
+                  level: 'error',
+                  autoClose: false,
+                  messages: "Hace falta completar la siguiente información en los <b>Participantes:</b><br>" + campos
+                });
+              }
+            }            
     },
 
     // /**
@@ -523,33 +561,17 @@
     ValidaCaracter: function(texto)
     {
         var valido=false;
-        var cont = 0;
-        var contDosPuntos = 0;
-        var ValText = texto;
-        var TextTam = texto.length;
-        for (var j = 0; j < TextTam; j++) {
-
-            if (ValText.charAt(j)==".") {
-                cont++;
-            }
-            if (ValText.charAt(j)==":") {
-                contDosPuntos++;
-            }
+        var letter = /^[a-zA-Z@]+$/;
+        if(texto.match(letter)) 
+        {
+          valido = true;
         }
-
-        if (cont < 2 && contDosPuntos==0 ) {
-            valido = true;
-        }
-        if (cont == 1 && TextTam==1) {
-            valido = false;
-        }
-
         return valido;
     },
 
     validaMail:function(correo1) {
-        //var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        var emailPattern = /^\S+@\S+\.\S+[$%&|<>#]?$/;
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        //var emailPattern = /^\S+@\S+\.\S+[$%&|<>#]?$/;
         var banderCorreo=false;
         if ( emailPattern.test(correo1) ) {
             banderCorreo=true;
