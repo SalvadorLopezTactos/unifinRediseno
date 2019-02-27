@@ -164,7 +164,7 @@
 
     //No aceptar numeros, solo letras (a-z), puntos(.) y comas(,)
     checkText: function (evt) {
-        if ($.inArray(evt.keyCode, [9, 16, 17, 110, 190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192]) < 0) {
+         if ($.inArray(evt.keyCode, [9, 16, 17, 110, 190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192]) < 0) {
             if (evt.keyCode != 186) {
                 app.alert.show("Caracter Invalido", {
                     level: "error",
@@ -189,9 +189,9 @@
             $('.newCampo6P').css('border-color', '');
 
             //Obteniendo valores de los campos
-            var valor1 = $('.newCampo1P')[0].value;
-            var valor2 = $('.newCampo2P')[0].value;
-            var valor3 = $('.newCampo3P')[0].value;
+            var valor1 = $('.newCampo1P')[0].value.trim();
+            var valor2 = $('.newCampo2P')[0].value.trim();
+            var valor3 = $('.newCampo3P')[0].value.trim();
             var valor4 = $('.newCampo4P')[0].value;
             var valor5 = $('.newCampo5P')[0].value;
             var valor6 = $('.newCampo6P')[0].value;
@@ -312,7 +312,7 @@
               if (this.mParticipantes.participantes.length >= 0) {
                 var duplicados = false;
                 Object.keys(this.mParticipantes.participantes).forEach(function(key) {
-                  if(this.mParticipantes.participantes[key].nombres == $('.newCampo1P').val() && this.mParticipantes.participantes[key].apaterno == $('.newCampo2P').val() && this.mParticipantes.participantes[key].amaterno == $('.newCampo3P').val()) {
+                  if(this.mParticipantes.participantes[key].nombres.toUpperCase() == valor1.toUpperCase() && this.mParticipantes.participantes[key].apaterno.toUpperCase() == valor2.toUpperCase() && this.mParticipantes.participantes[key].amaterno.toUpperCase() == valor3.toUpperCase()) {
                     duplicados = true;
                   }
                 }, this);
@@ -334,18 +334,15 @@
                     level: 'process',
                     title: 'Cargando, por favor espere.',
                 });
-                var nombre = $('.newCampo1P')[0].value;
-                var apellp = $('.newCampo2P')[0].value;
-                var apellm = $('.newCampo3P')[0].value;
                 var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", "tipo_registro_c"];
                 app.api.call("read", app.api.buildURL("Accounts/", null, null, {
                   fields: fields.join(','),
                   max_num: 5,
                   "filter": [
                     {
-                      "primernombre_c": nombre,
-                      "apellidopaterno_c": apellp,
-                      "apellidomaterno_c": apellm,
+                      "primernombre_c": valor1,
+                      "apellidopaterno_c": valor2,
+                      "apellidomaterno_c": valor3,
                       "tipo_registro_c": "Persona",
                     }
                   ]
@@ -357,6 +354,9 @@
                         title: "La persona ingresada ya existe.",
                         autoClose: false
                       });
+                      $(".newCampo1P").val("");
+                      $(".newCampo2P").val("");
+                      $(".newCampo3P").val("");
                     }
                     else {
                       this.mParticipantes.participantes.push(item);
@@ -413,7 +413,7 @@
                 var duplicados = false;
                 Object.keys(this.mParticipantes.participantes).forEach(function(key) {
                   var concatena = this.mParticipantes.participantes[key].nombres + " " + this.mParticipantes.participantes[key].apaterno + " " + this.mParticipantes.participantes[key].amaterno;
-                  if(concatena == $('.busca-participante')[0].innerText) {
+                  if(concatena.toUpperCase() == $('.busca-participante')[0].innerText.toUpperCase()) {
                     duplicados = true;
                   }
                 }, this);
@@ -477,6 +477,7 @@
                         title: "Participantes del Régimen Fiscal Persona Moral NO pueden ser agregados.",
                         autoClose: false
                       });
+                      $('.busca-participante').select2("data", "");
                     }
                     $('.addParticipantes').unbind('click', false);
                     App.alert.dismiss('loadingParticipantes');
@@ -561,7 +562,7 @@
     ValidaCaracter: function(texto)
     {
         var valido=false;
-        var letter = /^[a-zA-Z@]+$/;
+        var letter = /^[a-zA-Z\s]+$/;
         if(texto.match(letter)) 
         {
           valido = true;

@@ -49,13 +49,17 @@
     saveAsistencia: function (fields, errors, callback) {
         var objParticipantes = selfData.mParticipantes["participantes"];
         banderaAsistencia = 0;
-
+        banderaCorreo = 0;
         for (var i = 0; i < objParticipantes.length; i++) {
+            console.log(objParticipantes[i]);
             if (objParticipantes[i].asistencia == 1 && objParticipantes[i].unifin != 1) {
                 banderaAsistencia++;
             }
+            if (!objParticipantes[i].correo) {
+                banderaCorreo++;
+            }
         }
-
+        // Valida Asistencias
         if (banderaAsistencia < 1) {
             console.log("Faltan marcar Asistencia");
 
@@ -68,7 +72,17 @@
             errors['xd'] = errors['xd'] || {};
             errors['xd'].required = true;
         }
-
+        // Valida Correos
+        if (banderaCorreo > 0) {
+            app.alert.show("Correo", {
+                level: "error",
+                title: "Todos los Participante tipo Cuenta deben contar con correo",
+                autoClose: true,
+                return: false,
+            });
+            errors['xd'] = errors['xd'] || {};
+            errors['xd'].required = true;
+        }
         callback(null, fields, errors);
     },
 
