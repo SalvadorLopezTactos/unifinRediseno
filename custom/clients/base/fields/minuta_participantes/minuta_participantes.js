@@ -137,6 +137,7 @@
                     autoClose: true,
                     messages: 'Formato de correo incorrecto'
                 });
+                $('.campo2SelectP').eq(row.index()).find('input').val('');
               }
               else {
                 selfData.mParticipantes.participantes[row.index()].correo = correo;
@@ -154,6 +155,7 @@
                 autoClose: true,
                 messages: 'Formato de tel\u00E9fono incorrecto'
             });
+            $('.campo3SelectP').eq(row.index()).find('input').val('');
           }
           else {
             $('.campo3SelectP').eq(row.index()).find('input').css('border-color', '');
