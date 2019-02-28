@@ -356,7 +356,57 @@
             errors['referncias_vacias'] = errors['referncias_vacias'] || {};
             errors['referncias_vacias'].required = true;
         }
-        callback(null, fields, errors);
+
+        if (objReferencias.length > 0) {
+            //Valida si la referencia añadida existe en la db de accounts
+            var contadorR = 0;
+            for (var i = 0; i < objReferencias.length; i++) {
+                //Valida si la referencia añadida existe en la db de accounts
+                var nombre = objReferencias[i].nombres.trim();
+                var apellidop = objReferencias[i].apaterno.trim();
+                var apellidom = objReferencias[i].amaterno.trim();
+                var condicion = {
+                    "$equals": apellidom
+                };
+
+                if (apellidom == "" || apellidom == null) {
+                    condicion = {
+                        "$is_null": apellidom
+                    };
+                }
+                var campos = ["primernombre_c", "apellidopaterno_c", "apellidomaterno_c"];
+                app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                    campos: campos.join(','),
+                    max_num: 4,
+                    "filter": [
+                        {
+                            "primernombre_c": nombre,
+                            "apellidopaterno_c": apellidop,
+                            "apellidomaterno_c": condicion
+                        }
+                    ]
+                }), null, {
+                    success: _.bind(function (cuenta) {
+                        if (cuenta.records.length > 0) {
+                            $('td.filareferencia').eq(contadorR).attr('style', 'border: 2px solid red;');
+                            app.alert.show("ReferenciaDuplicada", {
+                                level: "error",
+                                title: "Ya existe una cuenta registrada. <br> Favor de verificar.",
+                                autoClose: false
+                            });
+                            errors['Referenciabuscada'] = errors['Referenciabuscada'] || {};
+                            errors['Referenciabuscada'].required = true;
+                        }
+                        contadorR ++;
+                        if (contadorR==objReferencias.length){
+                            callback(null, fields, errors);
+                        }
+                    }, this)
+                });
+            }
+        }else{
+            callback(null, fields, errors);
+        }
     },
 
     saveReuionLlamada: function (fields, errors, callback) {
