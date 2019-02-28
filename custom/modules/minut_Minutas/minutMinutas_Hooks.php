@@ -118,6 +118,14 @@ class minutMinutas_Hooks
                     $GLOBALS['log']->fatal("Error: ".$e);
                 }
               }
+              // Actualiza telefono y correo de cuentas existentes
+              if($objArrParticipnates[$j]['id'])
+              {
+                $beanCuenta = BeanFactory::getBean('Accounts', $objArrParticipnates[$j]['id']);
+                $beanCuenta->phone_office = $objArrParticipnates[$j]['telefono'];
+                $beanCuenta->email1 = $objArrParticipnates[$j]['correo'];
+                $beanCuenta->save();
+              }
           }
         }
     }
