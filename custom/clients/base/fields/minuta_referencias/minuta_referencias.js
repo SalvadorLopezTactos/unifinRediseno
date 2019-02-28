@@ -7,12 +7,15 @@
         'keydown .newCampo1R': 'OnlyText',
         'keydown .newCampo2R': 'OnlyText',
         'keydown .newCampo3R': 'OnlyText',
+        'keydown .campo1SelectR': 'OnlyText',
+        'keydown .campo2SelectR': 'OnlyText',
+        'keydown .campo3SelectR': 'OnlyText',
 
         'keydown .newCampo5R':'keyDownNewExtension',
         'keydown .campo5SelectR':'keyDownNewExtension',
 
         'keydown .newCampo5R':'checkInVentas',
-        'keydown .campo5SelectR':'checkInVentas',
+        //'keydown .campo5SelectR':'checkInVentas',
         //'keydown .newCampo4R':'checkInVentas',
         //'keydown .campo4SelectR':'checkInVentas',
 
@@ -153,9 +156,9 @@
         $('.newCampo5R').css('border-color', '');
 
         //Obteniendo valores de los campos
-        var valor1 = $('.newCampo1R')[0].value;
-        var valor2 = $('.newCampo2R')[0].value;
-        var valor3 = $('.newCampo3R')[0].value;
+        var valor1 = $('.newCampo1R')[0].value.trim();
+        var valor2 = $('.newCampo2R')[0].value.trim();
+        var valor3 = $('.newCampo3R')[0].value.trim();
         var valor4 = $('.newCampo4R')[0].value;
         var valor5 = $('.newCampo5R')[0].value;
 
