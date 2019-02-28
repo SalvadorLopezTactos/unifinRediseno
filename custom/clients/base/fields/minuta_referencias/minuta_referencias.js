@@ -10,15 +10,9 @@
         'keydown .campo1SelectR': 'OnlyText',
         'keydown .campo2SelectR': 'OnlyText',
         'keydown .campo3SelectR': 'OnlyText',
-
         'keydown .newCampo5R':'keyDownNewExtension',
         'keydown .campo5SelectR':'keyDownNewExtension',
-
         'keydown .newCampo5R':'checkInVentas',
-        //'keydown .campo5SelectR':'checkInVentas',
-        //'keydown .newCampo4R':'checkInVentas',
-        //'keydown .campo4SelectR':'checkInVentas',
-
         'change .campo5SelectR':'validaTelRef',
         'change .campo4SelectR':'validaMailRef'
     },
@@ -281,8 +275,8 @@
 
             Object.keys(selfRef.mReferencias.referencias).forEach(function(key) {
 
-                if (selfRef.mReferencias.referencias[key].nombres == $('.newCampo1R').val() && selfRef.mReferencias.referencias[key].apaterno == $('.newCampo2R').val()
-                    && selfRef.mReferencias.referencias[key].amaterno == $('.newCampo3R').val()) {
+                if (selfRef.mReferencias.referencias[key].nombres == $('.newCampo1R').val().trim() && selfRef.mReferencias.referencias[key].apaterno == $('.newCampo2R').val().trim()
+                    && selfRef.mReferencias.referencias[key].amaterno == $('.newCampo3R').val().trim()) {
                     duplicados = true;
                 }
             });
