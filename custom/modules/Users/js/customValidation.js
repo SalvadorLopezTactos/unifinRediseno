@@ -124,3 +124,22 @@ SUGAR.util.doWhen("typeof(check_form) != 'undefined' && typeof check_form == 'fu
         // }
     });
 });
+
+$(window).load(function(){
+   if (this.app.user.attributes.type != 'admin') {
+     //Deshabilita campos
+    $('#equipos_c').attr('disabled','disabled');
+    $('#equipo_c').attr('disabled','disabled');
+    $('#tipodeproducto_c').attr('disabled','disabled');
+    $('#puestousuario_c').attr('disabled','disabled');
+    $('#tct_team_address_txf_c').attr('disabled','disabled');
+    $('#productos_c').attr('disabled','disabled');
+    
+    $('#tct_altaproveedor_chk_c').attr('disabled','disabled');
+    $('#tct_alta_cd_chk_c').attr('disabled','disabled');
+    $('#optout_c').attr('disabled','disabled');
+    $('#tct_alta_clientes_chk_c').attr('disabled','disabled');
+    $('#cac_c').attr('disabled','disabled');
+    $('#aut_caratulariesgo_c').attr('disabled','disabled');
+   }
+});
