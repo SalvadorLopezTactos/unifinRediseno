@@ -311,7 +311,6 @@
                 banderaRef++;
             }
             escritos.push(objReferencias[i].nombres + objReferencias[i].apaterno + objReferencias[i].amaterno);
-                //Valida si la referencia añadida existe en la db de accounts
         }
         $('td.filareferencia').attr('style','');
         var escritosunicos=escritos.unique();
@@ -347,6 +346,7 @@
         }
 
         if (objReferencias.length > 0) {
+            //Valida si la referencia añadida existe en la db de accounts
             var contadorR = 0;
             for (var i = 0; i < objReferencias.length; i++) {
                 //Valida si la referencia añadida existe en la db de accounts
@@ -362,7 +362,6 @@
                         "$is_null": apellidom
                     };
                 }
-
                 var campos = ["primernombre_c", "apellidopaterno_c", "apellidomaterno_c"];
                 app.api.call("read", app.api.buildURL("Accounts/", null, null, {
                     campos: campos.join(','),
