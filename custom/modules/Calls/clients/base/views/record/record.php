@@ -9,7 +9,7 @@ array (
       array (
         'buttons' => 
         array (
-          0 =>
+          0 => 
           array (
             'type' => 'button',
             'name' => 'cancel_button',
@@ -92,19 +92,6 @@ array (
               array (
                 'type' => 'divider',
               ),
-              /*6 =>
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:duplicate_button:click',
-                'name' => 'duplicate_button',
-                'label' => 'LBL_DUPLICATE_BUTTON_LABEL',
-                'acl_module' => 'Calls',
-                'acl_action' => 'create',
-              ),
-              7 => 
-              array (
-                'type' => 'divider',
-              ),*/
               8 => 
               array (
                 'type' => 'rowaction',
@@ -120,22 +107,6 @@ array (
                 'label' => 'LBL_REMOVE_ALL_RECURRENCES',
                 'acl_action' => 'delete',
               ),
-              /*10 =>
-              array (
-                'type' => 'closebutton',
-                'name' => 'record-close-new',
-                'label' => 'LBL_CLOSE_AND_CREATE_BUTTON_LABEL',
-                'closed_status' => 'Held',
-                'acl_action' => 'edit',
-              ),
-              11 => 
-              array (
-                'type' => 'closebutton',
-                'name' => 'record-close',
-                'label' => 'LBL_CLOSE_BUTTON_LABEL',
-                'closed_status' => 'Held',
-                'acl_action' => 'edit',
-              ),*/
             ),
           ),
           3 => 
@@ -389,7 +360,9 @@ array (
                 'name' => 'assigned_user_name',
                 'readonly' => true,
               ),
-              12 => 'team_name',
+              12 => 
+              array (
+              ),
               13 => 
               array (
                 'name' => 'tct_resultado_llamada_ddw_c',
