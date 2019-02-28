@@ -379,10 +379,11 @@
         errors['.newDate'].required = true;
         }
         
-        var fechain=$('.newDate').val();
-        var fechafin=$('.newDate2').val();
+        var fechain=$('.newDate').val()+" "+$('.newTime1').val();
+        var fechafin=$('.newDate2').val()+" "+$('.newTime2').val();
         if(fechafin<fechain){            
             $('.newDate2').css('border-color', 'red');
+            $('.newTime2').css('border-color', 'red');
             app.alert.show("Fecha", {
             level: "error",
             messages: "La fecha de fin en la "+registro+" no puede ser menor a la fecha de inicio",
