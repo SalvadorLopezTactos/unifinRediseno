@@ -313,13 +313,39 @@
     saveReferencias: function (fields, errors, callback) {
         var objReferencias = selfRef.mReferencias["referencias"];
         banderaRef = 0;
+        var escritos =[];
+        Array.prototype.unique=function(a){
+            return function(){return this.filter(a)}}(function(a,b,c){return c.indexOf(a,b+1)<0
+        });
 
         for (var i = 0; i < objReferencias.length; i++) {
-            if (objReferencias[i].nombres == "" || objReferencias[i].apaterno == "" || (objReferencias[i].telefono == "" && objReferencias[i].correo == "")) {
+            if ((objReferencias[i].nombres == "" && objReferencias[i].nombres.trim()== "")|| (objReferencias[i].apaterno == "" && objReferencias[i].apaterno.trim()== "") || (objReferencias[i].telefono == "" && objReferencias[i].correo == "")) {
                 banderaRef++;
             }
+            escritos.push(objReferencias[i].nombres + objReferencias[i].apaterno + objReferencias[i].amaterno);
         }
+        $('td.filareferencia').attr('style','');
+        var escritosunicos=escritos.unique();
+        if (escritosunicos.length != escritos.length) {
+           var escritos_copia=escritos;
 
+            escritos_copia.forEach(function(element, key){
+                escritos.forEach(function (elementA,keyA) {
+                    if (element==elementA && key!=keyA){
+                        $('td.filareferencia').eq(key).attr('style','border: 2px solid red;');
+                    }
+                });
+
+            });
+            app.alert.show("Referenciaduplicada", {
+                level: "error",
+                title: "Alguna referencia est\u00E1 duplicada. <br> Favor de validar.",
+                autoClose: true,
+                return: false,
+            });
+            errors['referncias_duplicadas'] = errors['referncias_duplciadas'] || {};
+            errors['referncias_duplicadas'].required = true;
+        }
         if (banderaRef >= 1) {
             app.alert.show("ReferenciaVacia", {
                 level: "error",
@@ -327,10 +353,9 @@
                 autoClose: true,
                 return: false,
             });
-            errors['xd'] = errors['xd'] || {};
-            errors['xd'].required = true;
+            errors['referncias_vacias'] = errors['referncias_vacias'] || {};
+            errors['referncias_vacias'].required = true;
         }
-
         callback(null, fields, errors);
     },
 

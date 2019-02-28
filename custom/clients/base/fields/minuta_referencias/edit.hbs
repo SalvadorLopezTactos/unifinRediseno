@@ -19,7 +19,7 @@
             <tbody>
             {{#each mReferencias.referencias}}
                 <tr>
-                    <td>
+                    <td class="filareferencia">
                         <div class="row-fluid">
                             <div class="span4">
                                 <input type="text" class="campo1SelectR span3 updateRecords" placeholder="Nombre" value="{{nombres}}" data-field="nombres">
@@ -35,7 +35,7 @@
                                     <input type="text" class="campo4SelectR span3 updateRecords" placeholder="Correo" value="{{correo}}" data-field="correo">
                                 </div>
                                 <div class="span4">
-                                    <input type="text" class="campo5SelectR span3 updateRecords" placeholder="Teléfono" value="{{telefono}}" data-field="telefono">
+                                    <input type="text" class="campo5SelectR span3 updateRecords" placeholder="Teléfono" value="{{telefono}}" data-field="telefono" maxlength="13" size="13">
                                 </div>
                             </div>
                         </div>
