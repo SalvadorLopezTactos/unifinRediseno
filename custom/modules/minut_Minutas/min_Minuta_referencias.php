@@ -22,12 +22,14 @@ class Minuta_Referencias
                 $beanCuentas->primernombre_c = $mReferencias[$r]['nombres'];
                 $beanCuentas->apellidopaterno_c = $mReferencias[$r]['apaterno'];
                 $beanCuentas->apellidomaterno_c = $mReferencias[$r]['amaterno'];
+                $beanCuentas->clean_name= str_replace(' ','', $mReferencias[$r]['nombres'].$mReferencias[$r]['apaterno'].$mReferencias[$r]['amaterno']);
                 $beanCuentas->phone_office = $mReferencias[$r]['telefono'];
                 $beanCuentas->email1 = $mReferencias[$r]['correo'];
                 $beanCuentas->tipo_registro_c="Lead";
                 $beanCuentas->subtipo_cuenta_c="En Calificacion";
                 $beanCuentas->origendelprospecto_c="Referido Cliente";
                 $beanCuentas->account_id1_c=$mReferencias[$r]['id_cuenta'];
+
                 $beanCuentas->user_id_c='569246c7-da62-4664-ef2a-5628f649537e';
                 $beanCuentas->promotorleasing_c='9 - Sin Gestor';
                 $beanCuentas->user_id1_c='569246c7-da62-4664-ef2a-5628f649537e';
