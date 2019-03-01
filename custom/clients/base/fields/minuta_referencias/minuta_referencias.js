@@ -10,13 +10,9 @@
         'keydown .campo1SelectR': 'OnlyText',
         'keydown .campo2SelectR': 'OnlyText',
         'keydown .campo3SelectR': 'OnlyText',
-        'change .campo1SelectR': 'ValidaCaracter',
-        'change .campo2SelectR': 'ValidaCaracter',
-        'change .campo3SelectR': 'ValidaCaracter',
         'keydown .newCampo5R':'keyDownNewExtension',
         'keydown .campo5SelectR':'keyDownNewExtension',
         'keydown .newCampo5R':'checkInVentas',
-        //'change .campo5SelectR':'validaTelRef',
         'change .campo4SelectR':'validaMailRef'
     },
 
@@ -288,9 +284,13 @@
             var duplicados= false;
 
             Object.keys(selfRef.mReferencias.referencias).forEach(function(key) {
-
-                if (selfRef.mReferencias.referencias[key].nombres == $('.newCampo1R').val().trim() && selfRef.mReferencias.referencias[key].apaterno == $('.newCampo2R').val().trim()
-                    && selfRef.mReferencias.referencias[key].amaterno == $('.newCampo3R').val().trim()) {
+                var iteracion = selfRef.mReferencias.referencias[key].nombres + selfRef.mReferencias.referencias[key].apaterno + selfRef.mReferencias.referencias[key].amaterno;
+                iteracion = iteracion.replace(/\s+/gi,'');
+                iteracion = iteracion.toUpperCase();
+                var valores = $('.newCampo1R').val().trim() + $('.newCampo2R').val().trim() + $('.newCampo3R').val().trim();
+                valores = valores.replace(/\s+/gi,'');
+                valores = valores.toUpperCase();
+                if (iteracion == valores) {
                     duplicados = true;
                 }
             });
@@ -316,18 +316,8 @@
             $('.addReferencia').bind('click', false);
 
             // Valida si existen duplicados
-            var nombre = $(".newCampo1R").val();
-            var apellidop = $(".newCampo2R").val();
-            var apellidom = $(".newCampo3R").val();
-            var condicion = {
-                "$equals": apellidom
-                        };
-
-            if (apellidom== "" || apellidom==null){
-                condicion = {
-                    "$is_null": apellidom
-                };
-            }
+            var nombrecompleto = $(".newCampo1R").val() + $(".newCampo2R").val() + $(".newCampo3R").val();
+            var nombrecompleto = nombrecompleto.replace(/\s+/gi,'');
 
             var campos = ["primernombre_c", "apellidopaterno_c","apellidomaterno_c"];
             app.api.call("read", app.api.buildURL("Accounts/", null, null, {
@@ -335,9 +325,7 @@
                 max_num: 4,
                 "filter": [
                     {
-                        "primernombre_c": nombre,
-                        "apellidopaterno_c": apellidop,
-                        "apellidomaterno_c":  condicion
+                        "clean_name": nombrecompleto,
                     }
                 ]
             }), null, {
