@@ -284,9 +284,13 @@
             var duplicados= false;
 
             Object.keys(selfRef.mReferencias.referencias).forEach(function(key) {
-
-                if (selfRef.mReferencias.referencias[key].nombres == $('.newCampo1R').val().trim() && selfRef.mReferencias.referencias[key].apaterno == $('.newCampo2R').val().trim()
-                    && selfRef.mReferencias.referencias[key].amaterno == $('.newCampo3R').val().trim()) {
+                var iteracion = selfRef.mReferencias.referencias[key].nombres + selfRef.mReferencias.referencias[key].apaterno + selfRef.mReferencias.referencias[key].amaterno;
+                iteracion = iteracion.replace(/\s+/gi,'');
+                iteracion = iteracion.toUpperCase();
+                var valores = $('.newCampo1R').val().trim() + $('.newCampo2R').val().trim() + $('.newCampo3R').val().trim();
+                valores = valores.replace(/\s+/gi,'');
+                valores = valores.toUpperCase();
+                if (iteracion == valores) {
                     duplicados = true;
                 }
             });

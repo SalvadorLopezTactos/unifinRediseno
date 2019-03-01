@@ -319,10 +319,13 @@
         });
 
         for (var i = 0; i < objReferencias.length; i++) {
-            if ((objReferencias[i].nombres == "" && objReferencias[i].nombres.trim()== "")|| (objReferencias[i].apaterno == "" && objReferencias[i].apaterno.trim()== "") || (objReferencias[i].telefono == "" && objReferencias[i].correo == "")) {
+            var iteradas= objReferencias[i].nombres.trim() + objReferencias[i].apaterno.trim() + objReferencias[i].amaterno.trim();
+            iteradas = iteradas.replace(/\s+/gi,'');
+            iteradas = iteradas.toUpperCase();
+            if (iteradas=="" || (objReferencias[i].telefono == "" && objReferencias[i].correo == "")) {
                 banderaRef++;
             }
-            escritos.push(objReferencias[i].nombres + objReferencias[i].apaterno + objReferencias[i].amaterno);
+            escritos.push(iteradas);
         }
         $('td.filareferencia').attr('style','');
         var escritosunicos=escritos.unique();
