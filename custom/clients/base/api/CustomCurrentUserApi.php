@@ -1,13 +1,13 @@
 <?php
-        
-/* 
-    AF - 23/04/2018 
+
+/*
+    AF - 23/04/2018
     Extensión de output(campos custom) para CurrentUserApi
 
 */
 require_once 'clients/base/api/CurrentUserApi.php';
 
-class CustomCurrentUserApi extends CurrentUserApi
+class CustomCurrentUserApiClass extends CurrentUserApi
 {
 
     /**
