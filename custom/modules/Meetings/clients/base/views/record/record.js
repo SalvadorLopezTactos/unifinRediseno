@@ -407,6 +407,10 @@
         }else {
             alert("No se pudo encontrar tu ubicacion");
         }
+        
+        if(this.model.get('minut_minutas_meetings_name')==null || this.model.get('minut_minutas_meetings_name')==""){
+            this.model.set('status', 'Planned');
+        }
         //self.model.save();
     },
 
