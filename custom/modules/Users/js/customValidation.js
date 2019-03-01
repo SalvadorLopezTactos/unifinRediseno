@@ -135,6 +135,9 @@ $(window).load(function(){
     $('#puestousuario_c').attr('disabled','disabled');
     $('#tct_team_address_txf_c').attr('disabled','disabled');
     $('#productos_c').attr('disabled','disabled');
+    $('#btn_clr_reports_to_name').attr('disabled','disabled');
+    $('#btn_reports_to_name').attr('disabled','disabled');
+    $('#reports_to_name').attr('disabled','disabled');
 
     $('#tct_altaproveedor_chk_c').attr('disabled','disabled');
     $('#tct_alta_cd_chk_c').attr('disabled','disabled');
@@ -144,7 +147,7 @@ $(window).load(function(){
     $('#aut_caratulariesgo_c').attr('disabled','disabled');
     }
    }catch(error){
-      console.error(error);
+      console.log(error.message);
    }
 
    try{
@@ -156,6 +159,9 @@ $(window).load(function(){
       $('#puestousuario_c').attr('disabled','disabled');
       $('#tct_team_address_txf_c').attr('disabled','disabled');
       $('#productos_c').attr('disabled','disabled');
+      $('#btn_clr_reports_to_name').attr('disabled','disabled');
+      $('#btn_reports_to_name').attr('disabled','disabled');
+      $('#reports_to_name').attr('disabled','disabled');
 
       $('#tct_altaproveedor_chk_c').attr('disabled','disabled');
       $('#tct_alta_cd_chk_c').attr('disabled','disabled');
@@ -166,6 +172,6 @@ $(window).load(function(){
     }
    }
    catch(error){
-      console.error(error);
+      console.log(error.message);
    }
 });
