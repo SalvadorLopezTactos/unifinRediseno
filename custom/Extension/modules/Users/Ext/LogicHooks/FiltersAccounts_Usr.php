@@ -21,3 +21,6 @@ $hook_array['before_save'][] = Array(
     'AssignFilterAccountsUsr',
     'UpdateReportToUsr'
 );
+
+
+?>
