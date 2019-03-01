@@ -43,7 +43,7 @@ class minutMinutas_Hooks
                   $beanCuentas->primernombre_c = $objArrParticipnates[$j]['nombres'];
                   $beanCuentas->apellidopaterno_c = $objArrParticipnates[$j]['apaterno'];
                   $beanCuentas->apellidomaterno_c = $objArrParticipnates[$j]['amaterno'];
-                  $beanCuentas->clean_name= str_replace(' ','', $objArrParticipnates[$i]['nombres'].$objArrParticipnates[$i]['apaterno'].$objArrParticipnates[$i]['amaterno']);
+                  $beanCuentas->clean_name= str_replace(' ','', $objArrParticipnates[$j]['nombres'].$objArrParticipnates[$j]['apaterno'].$objArrParticipnates[$j]['amaterno']);
                   $beanCuentas->phone_office = $objArrParticipnates[$j]['telefono'];
                   $beanCuentas->email1 = $objArrParticipnates[$j]['correo'];
                   $beanCuentas->tipo_registro_c = "Persona";
