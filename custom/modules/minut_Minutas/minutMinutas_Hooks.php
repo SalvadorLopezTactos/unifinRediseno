@@ -119,7 +119,7 @@ class minutMinutas_Hooks
                 }
               }
               // Actualiza telefono y correo de cuentas existentes
-              if($objArrParticipnates[$j]['id'])
+              if($objArrParticipnates[$j]['id'] && $objArrParticipnates[$j]['origen']=="C")
               {
                 $beanCuenta = BeanFactory::getBean('Accounts', $objArrParticipnates[$j]['id']);
                 $beanCuenta->phone_office = $objArrParticipnates[$j]['telefono'];
