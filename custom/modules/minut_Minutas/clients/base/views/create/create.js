@@ -360,30 +360,20 @@
             var contadorR = 0;
             for (var i = 0; i < objReferencias.length; i++) {
                 //Valida si la referencia añadida existe en la db de accounts
-                var nombre = objReferencias[i].nombres.trim();
-                var apellidop = objReferencias[i].apaterno.trim();
-                var apellidom = objReferencias[i].amaterno.trim();
+                var nombrecompleto = objReferencias[i].nombres.trim() + objReferencias[i].apaterno.trim() + objReferencias[i].amaterno.trim();
+                var nombrecompleto = nombrecompleto.replace(/\s+/gi,'');
 
-                if (nombre != "" && apellidop != "") {
 
-                    var condicion = {
-                        "$equals": apellidom
-                    };
+                if (nombrecompleto != "") {
 
-                    if (apellidom == "" || apellidom == null) {
-                        condicion = {
-                            "$is_null": apellidom
-                        };
-                    }
+
                     var campos = ["primernombre_c", "apellidopaterno_c", "apellidomaterno_c"];
                     app.api.call("read", app.api.buildURL("Accounts/", null, null, {
                         campos: campos.join(','),
                         max_num: 4,
                         "filter": [
                             {
-                                "primernombre_c": nombre,
-                                "apellidopaterno_c": apellidop,
-                                "apellidomaterno_c": condicion
+                                "clean_name": nombrecompleto,
                             }
                         ]
                     }), null, {
