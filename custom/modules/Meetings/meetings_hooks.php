@@ -75,7 +75,27 @@ SQL;
 			    $acompanianteMeet1->modified_user_id = $bean->modified_user_id;
       		$acompanianteMeet1->assigned_user_id = $args['related_id'];
       		$acompanianteMeet1->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
+          $acompanianteMeet1->reunion_objetivos = $bean->reunion_objetivos;
       		$acompanianteMeet1->save();
+          //Agrega objetivos
+          if($bean->load_relationship('meetings_minut_objetivos_1')) {
+            $relatedBeans = $bean->meetings_minut_objetivos_1->getBeans();
+            foreach($relatedBeans as $rel){
+              $beanObjetivo = BeanFactory::newBean('minut_Objetivos');
+              $beanObjetivo->name = $rel->name;
+              $beanObjetivo->meetings_minut_objetivos_1meetings_ida = $acompanianteMeet1->id;
+              $beanObjetivo->description = $rel->description;
+              $beanObjetivo->save();
+            }
+          }           
+          //Elimina invitados
+          $asignado=$bean->assigned_user_id;
+          $meetingscount="
+            update meetings_users m
+            set m.deleted=1
+            where m.meeting_id='{$bean->id}'
+            and m.user_id !='{$asignado}'";
+          $totalcount=$db->query($meetingscount);
 /*      		//Agregar relaciones de invitados
       		$queryrel = <<<SQL
 				SELECT id, user_id
