@@ -10,10 +10,13 @@
         'keydown .campo1SelectR': 'OnlyText',
         'keydown .campo2SelectR': 'OnlyText',
         'keydown .campo3SelectR': 'OnlyText',
+        'change .campo1SelectR': 'ValidaCaracter',
+        'change .campo2SelectR': 'ValidaCaracter',
+        'change .campo3SelectR': 'ValidaCaracter',
         'keydown .newCampo5R':'keyDownNewExtension',
         'keydown .campo5SelectR':'keyDownNewExtension',
         'keydown .newCampo5R':'checkInVentas',
-        'change .campo5SelectR':'validaTelRef',
+        //'change .campo5SelectR':'validaTelRef',
         'change .campo4SelectR':'validaMailRef'
     },
 
@@ -68,12 +71,23 @@
                     app.alert.show("ReferenciaVacia", {
                         level: "error",
                         title: "La referencia ingresada contiene valor vacío. <br> Se requieren un correo o un tel\u00E9fono.",
-                        autoClose: true
+                        autoClose: false
                     });
                 }
 
             }else{
                 selfRef.$(evt.currentTarget).css('border-color', '');
+                if (nombreCampo == 'nombres' || nombreCampo == 'apaterno' || nombreCampo == 'amaterno'){
+                    if(!selfRef.ValidaCaracter(campo.context.value)){
+                        selfRef.$(evt.currentTarget).css('border-color', 'red');
+                        selfRef.$(evt.currentTarget).val('');
+                        app.alert.show("ReferenciaTelDif", {
+                            level: "error",
+                            title: "El campo no permite ingresar caracteres especiales.",
+                            autoClose: true
+                        });
+                    }
+                }
                 if (nombreCampo == 'telefono'){
                     if(!selfRef.validaTelRef(selfRef.mReferencias.referencias[campo.index()].telefono.length, selfRef.mReferencias.referencias[campo.index()].telefono)){
                         selfRef.$(evt.currentTarget).css('border-color', 'red');
@@ -367,25 +381,10 @@
     ValidaCaracter: function(texto)
     {
         var valido=false;
-        var cont = 0;
-        var contDosPuntos = 0;
-        var ValText = texto;
-        var TextTam = texto.length;
-        for (var j = 0; j < TextTam; j++) {
-
-            if (ValText.charAt(j)==".") {
-                cont++;
-            }
-            if (ValText.charAt(j)==":") {
-                contDosPuntos++;
-            }
-        }
-
-        if (cont < 2 && contDosPuntos==0 ) {
+        var letter = /^[a-zA-Z\s]+$/;
+        if(texto.match(letter))
+        {
             valido = true;
-        }
-        if (cont == 1 && TextTam==1) {
-            valido = false;
         }
         return valido;
     },
@@ -555,5 +554,4 @@
             }
         }
     },
-
 })

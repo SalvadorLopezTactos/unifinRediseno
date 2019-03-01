@@ -340,8 +340,7 @@
             app.alert.show("Referenciaduplicada", {
                 level: "error",
                 title: "Alguna referencia est\u00E1 duplicada. <br> Favor de validar.",
-                autoClose: true,
-                return: false,
+                autoClose: false,
             });
             errors['referncias_duplicadas'] = errors['referncias_duplciadas'] || {};
             errors['referncias_duplicadas'].required = true;
@@ -350,8 +349,7 @@
             app.alert.show("ReferenciaVacia", {
                 level: "error",
                 title: "Alguna referencia est\u00E1 incompleta. <br> Favor de completar los campos.",
-                autoClose: true,
-                return: false,
+                autoClose: false,
             });
             errors['referncias_vacias'] = errors['referncias_vacias'] || {};
             errors['referncias_vacias'].required = true;
@@ -365,44 +363,53 @@
                 var nombre = objReferencias[i].nombres.trim();
                 var apellidop = objReferencias[i].apaterno.trim();
                 var apellidom = objReferencias[i].amaterno.trim();
-                var condicion = {
-                    "$equals": apellidom
-                };
 
-                if (apellidom == "" || apellidom == null) {
-                    condicion = {
-                        "$is_null": apellidom
+                if (nombre != "" && apellidop != "") {
+
+                    var condicion = {
+                        "$equals": apellidom
                     };
+
+                    if (apellidom == "" || apellidom == null) {
+                        condicion = {
+                            "$is_null": apellidom
+                        };
+                    }
+                    var campos = ["primernombre_c", "apellidopaterno_c", "apellidomaterno_c"];
+                    app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                        campos: campos.join(','),
+                        max_num: 4,
+                        "filter": [
+                            {
+                                "primernombre_c": nombre,
+                                "apellidopaterno_c": apellidop,
+                                "apellidomaterno_c": condicion
+                            }
+                        ]
+                    }), null, {
+                        success: _.bind(function (cuenta) {
+                            if (cuenta.records.length > 0) {
+                                $('td.filareferencia').eq(contadorR).attr('style', 'border: 2px solid red;');
+                                app.alert.show("ReferenciaDuplicada", {
+                                    level: "error",
+                                    title: "Ya existe una cuenta registrada. <br> Favor de verificar.",
+                                    autoClose: false
+                                });
+                                errors['Referenciabuscada'] = errors['Referenciabuscada'] || {};
+                                errors['Referenciabuscada'].required = true;
+                            }
+                            contadorR++;
+                            if (contadorR == objReferencias.length) {
+                                callback(null, fields, errors);
+                            }
+                        }, this)
+                    });
+                }else{
+                    errors['Referenciaañadidavacia'] = errors['Referenciaañadidavacia'] || {};
+                    errors['Referenciaañadidavacia'].required = true;
+
+                    callback(null, fields, errors);
                 }
-                var campos = ["primernombre_c", "apellidopaterno_c", "apellidomaterno_c"];
-                app.api.call("read", app.api.buildURL("Accounts/", null, null, {
-                    campos: campos.join(','),
-                    max_num: 4,
-                    "filter": [
-                        {
-                            "primernombre_c": nombre,
-                            "apellidopaterno_c": apellidop,
-                            "apellidomaterno_c": condicion
-                        }
-                    ]
-                }), null, {
-                    success: _.bind(function (cuenta) {
-                        if (cuenta.records.length > 0) {
-                            $('td.filareferencia').eq(contadorR).attr('style', 'border: 2px solid red;');
-                            app.alert.show("ReferenciaDuplicada", {
-                                level: "error",
-                                title: "Ya existe una cuenta registrada. <br> Favor de verificar.",
-                                autoClose: false
-                            });
-                            errors['Referenciabuscada'] = errors['Referenciabuscada'] || {};
-                            errors['Referenciabuscada'].required = true;
-                        }
-                        contadorR ++;
-                        if (contadorR==objReferencias.length){
-                            callback(null, fields, errors);
-                        }
-                    }, this)
-                });
             }
         }else{
             callback(null, fields, errors);
