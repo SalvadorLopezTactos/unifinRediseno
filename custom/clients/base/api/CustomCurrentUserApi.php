@@ -7,7 +7,7 @@
 */
 require_once 'clients/base/api/CurrentUserApi.php';
 
-class CustomCurrentUserApiClass extends CurrentUserApi
+class CustomCurrentUserApi extends CurrentUserApi
 {
 
     /**
