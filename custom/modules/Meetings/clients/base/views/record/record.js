@@ -27,6 +27,9 @@
         this.model.on('sync', this.disableFieldsTime,this);
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
         this.model.on("change:status",_.bind(this.muestracampoResultado, this));
+        this.model.on("change:status",_.bind(this.hidecheck, this));
+        this.model.on("change:parent_name",_.bind(this.showCheckin, this));
+        //this.model.on('render',this.hidecheck,this);
         //this.model.on("change:ca_importe_enganche_c", _.bind(this.calcularPorcientoRI, this));
         //this.model.addValidationTask('ValidaCuentaNoVacia',_.bind(this.ValidaCuentaNoVacia, this));
         //Al dar click mandara a la vista de creacion correspondiente a la minuta
@@ -201,7 +204,6 @@
             this.$('div[data-name=resultado_c]').hide();
         }
     },
-
     /*Victor Martinez Lopez
     *25-09-2018
     *El campo parent_name se habilita cuando esta vacio
@@ -458,6 +460,35 @@
     El boton de Check-in solo será visible una ocasion para guardar datos
     y cuando el usuario asignado sea igual la ususario loggeado Pendiente de terminar
     */
+    hidecheck:function(){
+        var dateActual = new Date();
+        var d1 = dateActual.getDate();
+        var m1 = dateActual.getMonth() + 1;
+        var y1 = dateActual.getFullYear();
+        var dateActualFormat = [m1, d1, y1].join('/');
+        var fechaActual = Date.parse(dateActualFormat);
+
+        var dateend = new Date(this.model.get("date_start"));
+        var d = dateend.getDate();
+        var m = dateend.getMonth() + 1;
+        var y = dateend.getFullYear();
+        var fechaCompleta = [m, d, y].join('/');
+        var fechaendnew = Date.parse(fechaCompleta);
+
+        if (this.model.get('assigned_user_id')==app.user.attributes.id && (this.model.get('check_in_time_c')=='' || this.model.get('check_in_time_c')==null)
+            && fechaActual==fechaendnew && (this.model.get('parent_name')!='' && this.model.get('parent_name')!=null) && this.model.get('status')=='Planned'){
+                $('[name="check_in1"]').show();
+            }   else   {
+                $('[name="check_in1"]').hide();
+            }
+            if(this.model.get('parent_name')!='' && app.user.attributes.id==this.model.get('assigned_user_id')
+            && fechaActual==fechaendnew && this.model.get('status')=='Planned'){
+                $('[name="new_minuta"]').show();
+        }   else{
+                $('[name="new_minuta"]').hide();
+        }
+    },
+
     showCheckin:function(){
         var myField=this.getField("check_in1");
         var dateActual = new Date();
@@ -475,11 +506,12 @@
         var fechaendnew = Date.parse(fechaCompleta);
 
         if (this.model.get('assigned_user_id')==app.user.attributes.id && (this.model.get('check_in_time_c')=='' || this.model.get('check_in_time_c')==null)
-            && fechaActual==fechaendnew){
+            && fechaActual==fechaendnew && (this.model.get('parent_name')!='' && this.model.get('parent_name')!=null) && this.model.get('status')=='Planned'){
                 myField.listenTo(myField, "render", function () {
                         myField.show();
                         console.log("field being rendered as: " + myField.tplName);
                     });
+                    
             }   else   {
                 myField.listenTo(myField, "render", function () {
                         myField.hide();
