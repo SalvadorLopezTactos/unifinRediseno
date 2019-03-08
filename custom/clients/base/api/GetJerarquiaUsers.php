@@ -21,7 +21,7 @@ class GetJerarquiaUsers extends SugarApi
             'retrieve' => array(
                 //request type
                 'reqType' => 'GET',
-                'noLoginRequired' => true,
+                'noLoginRequired' => false,
                 //endpoint path
                 'path' => array('GetEstructuraUsuarios', '?'),
                 //endpoint variables
