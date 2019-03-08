@@ -66,60 +66,64 @@ class GetJerarquiaUsers extends SugarApi
 
         $result=$GLOBALS['db']->query($query);
 
-        while($row = $GLOBALS['db']->fetchByAssoc($result))
-        {
-            $full_name=$row['first_name']." ".$row['last_name'];
-            $nombre=$row['first_name'];
-            $apellidos=$row['last_name'];
-            $puesto=$row['puestousuario_c'];
-            $informa=$row['reports_to_id'];
+        if($result->num_rows > 0){
 
-            //Obteniendo etiqueta de lista de puesto del usuario
-            $label_puesto=$app_list_strings['puestousuario_c_list'][$puesto];
+            while($row = $GLOBALS['db']->fetchByAssoc($result))
+            {
+                $full_name=$row['first_name']." ".$row['last_name'];
+                $nombre=$row['first_name'];
+                $apellidos=$row['last_name'];
+                $puesto=$row['puestousuario_c'];
+                $informa=$row['reports_to_id'];
 
-            $array_user=array(
-                'id'=>$id_user,
-                'full_name'=>$full_name,
-                'nombre'=>$nombre,
-                'apellidos'=>$apellidos,
-                "puesto_id"=>$puesto,
-                "puesto_label"=>$label_puesto,
-                "email"=>$primary_email,
-                "id_informa"=>$informa
-            );
+                //Obteniendo etiqueta de lista de puesto del usuario
+                $label_puesto=$app_list_strings['puestousuario_c_list'][$puesto];
 
-            array_push($arr_user,$array_user);
+                $array_user=array(
+                    'id'=>$id_user,
+                    'full_name'=>$full_name,
+                    'nombre'=>$nombre,
+                    'apellidos'=>$apellidos,
+                    "puesto_id"=>$puesto,
+                    "puesto_label"=>$label_puesto,
+                    "email"=>$primary_email,
+                    "id_informa"=>$informa
+                );
 
-            if($informa != ""){
-                $bandera=true;
+                array_push($arr_user,$array_user);
 
-                while($bandera){
-                    //Limpiando array
-                    $array_jefe=array();
+                if($informa != ""){
+                    $bandera=true;
 
-                    $cont++;
+                    while($bandera){
+                        //Limpiando array
+                        $array_jefe=array();
+
+                        $cont++;
                         //Validación únicamente para el primer jefe
-                    if($cont==1){
-                        $array_jefe=$this->getBossStructure($informa);
-                        $informa=$array_jefe['id_informa'];
-                    }else{
-                        //Obtener id de usuario correspondiente "Reporta a"
-                        //$id_reporta=$this->getIdReporta($informa);
-                        //if($id_reporta!="NULL" && $id_reporta!=null){
-                        $array_jefe=$this->getBossStructure($informa);
-                        $informa=$array_jefe['id_informa'];
-                        //}
-                    }
+                        if($cont==1){
+                            $array_jefe=$this->getBossStructure($informa);
+                            $informa=$array_jefe['id_informa'];
+                        }else{
+                            //Obtener id de usuario correspondiente "Reporta a"
+                            //$id_reporta=$this->getIdReporta($informa);
+                            //if($id_reporta!="NULL" && $id_reporta!=null){
+                            $array_jefe=$this->getBossStructure($informa);
+                            $informa=$array_jefe['id_informa'];
+                            //}
+                        }
 
-                    if($informa != null ){
-                        $bandera=true;
-                    }else{
-                        $bandera=false;
-                    }
+                        if($informa != null ){
+                            $bandera=true;
+                        }else{
+                            $bandera=false;
+                        }
 
-                    //Agregar al arreglo solo cuando el array no es nulo
-                    if($array_jefe!=null){
-                        array_push($arr_user,$array_jefe);
+                        //Agregar al arreglo solo cuando el array no es nulo
+                        if($array_jefe!=null){
+                            array_push($arr_user,$array_jefe);
+
+                        }
 
                     }
 
@@ -127,7 +131,10 @@ class GetJerarquiaUsers extends SugarApi
 
             }
 
+        }else{
+            $arr_user['ERROR']="El usuario con el id {$id_user} NO existe, favor de verificar";
         }
+
 
         return $arr_user;
 
