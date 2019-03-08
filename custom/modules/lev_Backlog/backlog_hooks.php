@@ -35,34 +35,128 @@ class backlog_hooks {
         }
     }
 
-    public function setMontosMultiEtapa($bean = null, $event = null, $args = null){
+    public function setMontosMultiEtapa($bean = null, $event = null, $args = null)
+    {
         global $current_user;
+        $GLOBALS['log']->fatal('Guarda Montos Nuevo Update');
         //Solo se ejecuta al insertar
         if (empty($bean->fetched_row['id'])) {
+            $GLOBALS['log']->fatal('Es nuevo backlog');
+            $GLOBALS['log']->fatal('Actualiza Valores');
             $bean->monto_con_solicitud_c = 0;
             $bean->ri_con_solicitud_c = 0;
             $bean->monto_credito_c = 0;
             $bean->ri_credito_c = 0;
             $bean->monto_rechazado_c = 0;
             $bean->ri_rechazada_c = 0;
-
-            if($bean->monto_original >= ($bean->monto_comprometido - $bean->renta_inicial_comprometida)){
-                $bean->monto_prospecto_c = 0;
-                $bean->ri_prospecto_c = 0;
-                $bean->monto_sin_solicitud_c = $bean->monto_comprometido ;
-                $bean->ri_sin_solicitud_c = $bean->renta_inicial_comprometida ;
-            }else{
-                $bean->monto_sin_solicitud_c = $bean->monto_original;
-                $bean->ri_sin_solicitud_c = $bean->porciento_ri > 0 ? $bean->monto_original * ($bean->porciento_ri/100) : 0 ;
-                $bean->monto_prospecto_c = $bean->monto_comprometido - $bean->monto_sin_solicitud_c;
-                $bean->ri_prospecto_c = $bean->renta_inicial_comprometida - $bean->ri_sin_solicitud_c;
-            }
-        }
-        if($bean->progreso == 2 && $bean->etapa == 'Prospecto' && $bean->monto_original > 0){
-            if($bean->monto_original >= ($bean->monto_comprometido - $bean->renta_inicial_comprometida)){
+            $bean->monto_final_comprometido_c = $bean->monto_comprometido;  //Backlog
+            $bean->ri_final_comprometida = $bean->renta_inicial_comprometida;
+            $bean->monto_prospecto_c = 0;
+            $bean->ri_prospecto_c = 0;
+            $GLOBALS['log']->fatal('Valida Si Linea Disponible >= Backlog - Renta Inicial'.$bean->monto_original.'-'.$bean->monto_final_comprometido.'-'.$bean->ri_final_comprometida_c);
+            //Si Linea Disponible >= Backlog - Renta Inicial
+            if ($bean->monto_original >= ($bean->monto_final_comprometido_c - $bean->ri_final_comprometida_c)) {
+                $GLOBALS['log']->fatal('cumple condicion backlog >=- Renta Inicial');
+                $GLOBALS['log']->fatal('Actualiza Valores');
+                $bean->monto_sin_solicitud_c = $bean->monto_final_comprometido_c;
+                $bean->ri_sin_solicitud_c = $bean->ri_final_comprometida_c;
                 $bean->etapa = 'Autorizada';
-                $bean->etapa_preliminar = 'Autorizada';
+                $bean->etapa_preliminar='Autorizada';
+
+            } else {
+                $GLOBALS['log']->fatal('No cumple condicion');
+                $bean = backlog_hooks::ActualizaValores($bean);
+            }
+
+        } else {
+            $GLOBALS['log']->fatal('Si no existe registro, calcula valores-'.$bean->monto_final_comprometido_c.'-'.$bean->monto_con_solicitud_c);
+            //Si no existe registro, calcula valores
+            $montoTMP = $bean->monto_final_comprometido_c - $bean->monto_con_solicitud_c;
+            if ($montoTMP < 0) {
+                $montoTMP = 0;
+            }
+            $RITMP = $montoTMP * ($bean->porciento_ri/100);
+            $GLOBALS['log']->fatal('Si Linea Disponible >= montoTMP - RITMP'.'-'.$montoTMP.'-'.$RITMP.'-'.$bean->monto_original);
+            //Si Linea Disponible >= montoTMP - RITMP
+            if ($bean->monto_original >= ($montoTMP - $RITMP)) {
+                $GLOBALS['log']->fatal('Si Linea Disponible >= montoTMP - RITMP asigna valores');
+                //Actualiza
+                $bean->monto_con_solicitud_c = $montoTMP;
+                $bean->ri_con_solicitud_c = $RITMP;
+                $bean->etapa = 'Autorizada';
+            } else {
+                $bean = backlog_hooks::ActualizaValores($bean);
             }
         }
+
+
     }
+    public function ActualizaValores($bean = null, $event = null, $args = null){
+        //$GLOBALS['log']->fatal('Entra a Actualiza Valores- SugarQuery');
+        $bean->monto_sin_solicitud_c = $bean->monto_original / (1-$bean->porciento_ri);
+        $bean->ri_sin_solicitud_c = $bean->porciento_ri > 0 ? $bean->monto_original * ($bean->ri_sin_solicitud/100) : 0 ;
+        $monto_faltante_c = $bean->monto_final_comprometido_c - $bean->monto_sin_solicitud_c - $bean->monto_con_solicitud_c;
+
+        //SugarQuery
+        //$GLOBALS['log']->fatal('Entra SugarQuery');
+        $fechaActual = date("Y-m-d");
+        $fechatreinta = strtotime('-3 month',strtotime($fechaActual));
+        $fechatreinta = date('Y-m-d',$fechatreinta);
+        $consultaSolicitudes = new SugarQuery();
+        $consultaSolicitudes->select(array('name','date_entered','tipo_producto_c','estatus_c','tct_etapa_ddw_c'));
+        $consultaSolicitudes->from(BeanFactory::newBean('Opportunities'));
+        //Condiciones
+        $consultaSolicitudes->where()
+           ->equals('tipo_producto_c','1')
+           ->dateBetween('date_entered',array($fechatreinta,$fechaActual))
+           ->equals('account_id',$bean->account_id_c);
+        //Ejecuta consulta
+        //$GLOBALS['log']->fatal('Recupera solicitudes de Leasing 3 months ago');
+        $result = $consultaSolicitudes->execute();
+
+        //Iterar resultado
+        $totalC = count($result);
+        //Recorre arreglo
+        //$GLOBALS['log']->fatal('Evalua solicitudes existentes');
+        if($totalC > 0){
+            //$GLOBALS['log']->fatal('Itera solicitudes existentes de la consulta'.$totalC);
+            $credito=false;
+            $rechazada=false;
+            $prospecto=false;
+            for ($i = 0; $i < $totalC ; $i++){
+                //$GLOBALS['log']->fatal('Itera Registros'.$i.'estatus: '.$result[$i]['estatus_c'].' etapa: '.$result[$i]['tct_etapa_ddw_c'].' '.$result[$i]['name']);
+               if($result[$i]['estatus_c']=="E" ||$result[$i]['estatus_c']=="D"){
+                   //$GLOBALS['log']->fatal('Itera Solcitudes de Credito');
+                   $credito=true;
+               }
+               if($result[$i]['estatus_c']=="R" ||$result[$i]['estatus_c']=="CM"){
+                   //$GLOBALS['log']->fatal('IteraSolcitudes de Rechazada');
+                   $rechazada=true;
+               }
+               if($result[$i]['tct_etapa_ddw_c']=="SI" ||$result[$i]['tct_etapa_ddw_c']=="P"){
+                   //$GLOBALS['log']->fatal('Itera Etapa');
+                   $prospecto=true;
+               }
+            }
+            if($credito==true){
+                //$GLOBALS['log']->fatal('Solcitudes de Credito');
+                $bean->monto_credito_c= $monto_faltante_c;
+                $bean->etapa= 'Credito';
+            }elseif ($rechazada==true){
+                //$GLOBALS['log']->fatal('Solcitudes Rechazada');
+                $bean->monto_rechazado_c= $monto_faltante_c;
+                $bean->etapa= 'Rechazada';
+            }elseif ($prospecto==true){
+                //$GLOBALS['log']->fatal('Solcitudes de Prospecto');
+                $bean->monto_prospecto_c= $monto_faltante_c;
+                $bean->etapa= 'Prospecto';
+            }
+        }else{
+            //$GLOBALS['log']->fatal('No existen solicitudes de la consulta');
+             $bean->monto_prospecto_c= $monto_faltante_c;
+             $bean->etapa= 'Prospecto';
+        }
+        return $bean;
+    }
+
 }
