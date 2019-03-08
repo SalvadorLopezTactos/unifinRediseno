@@ -1,9 +1,8 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: salvadorlopez
- * Date: 07/08/18
- * Time: 10:07
+ * User: salvador.lopez@tactos.com.mx
+ * Date: 07/03/19
  */
 
 if (!defined('sugarEntry') || !sugarEntry) die('Not A Valid Entry Point');
