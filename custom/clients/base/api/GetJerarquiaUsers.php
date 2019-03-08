@@ -47,7 +47,7 @@ class GetJerarquiaUsers extends SugarApi
      *
      * @param array $api
      * @param array $args Array con los parámetros enviados para su procesamiento
-     * @return array $list_estructura Array con lista de los usuarios ordenados jerarquicamente del usuario pasado como parámetro
+     * @return array $arr_user Array con lista de los usuarios ordenados jerarquicamente del usuario pasado como parámetro
      * @throws SugarApiExceptionInvalidParameter
      */
     public function getEstructuraUsuarios($api, $args)
