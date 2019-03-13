@@ -124,6 +124,7 @@
             <tr>
                 <td>Mes:</td>
                 <td>Año:</td>
+                <!--<td >Region:</td>-->
                 <td>Equipo:</td>
                 <td>Promotor:</td>
             </tr>
@@ -138,6 +139,11 @@
                         {{{anio_list_html_filter}}}
                     </select>
                 </td>
+                <!--<td >-->
+                <!--<select id="region_filtro" class="filtros">-->
+                <!--{{{region_list_html}}}-->
+                <!--</select>-->
+                <!--</td>-->
                 <td>
                     <select id="equipo_filtro" class="filtros" >
                         {{{equipo_list_html}}}
@@ -180,12 +186,6 @@
                     <input type="button" value="Buscar" id="btn_Buscar" class="btn btn-primary filtros"/>
                     <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
                 </td>
-
-                <td colspan="6">
-                    <span class="btn btn-success exportar filtros" tabindex="-1">Exportar a Excel</span>
-                </td>
-
-
             </tr>
         </table>
     </div>
@@ -220,6 +220,7 @@
                 	</div>
                 </td>
                 <td>
+                    <span class="btn btn-success exportar">Exportar a Excel</span>
                 </td>
                 <!--<td>
                     <span class="btn btn-success Comprometer_mass">Comprometer Masivo</span>
