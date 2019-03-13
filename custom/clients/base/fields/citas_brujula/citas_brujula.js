@@ -90,7 +90,7 @@
         });
         /*
             AF. - 2018-10-02
-            Ejecuta recuperaci�n de citas 
+            Ejecuta recuperaci�n de citas
         */
         this.getCitas();
     },
@@ -237,7 +237,7 @@
             	return;
 		}
 	}
-		
+
 	if(parseInt($("#nuevo_traslado").val()) < 0){
 		app.alert.show('Valor de traslado incorrecto', {
                 level: 'error',
@@ -255,7 +255,7 @@
             });
             return;
         }
-        
+
         if(_.isEmpty($("#nuevo_objetivo").val())){
             app.alert.show('Objetivo requerido', {
                 level: 'error',
@@ -264,7 +264,7 @@
             });
             return;
         }
-        
+
         if(_.isEmpty($("#nuevo_estatus").val())){
             app.alert.show('Estatus requerido', {
                 level: 'error',
@@ -273,7 +273,7 @@
             });
             return;
         }
-        
+
         if(_.isEmpty($("#nuevo_resultado").val())){
             app.alert.show('Resultado requerido', {
                 level: 'error',
@@ -429,61 +429,7 @@
 
         $("#resultado" + rowId+ " option[value="+rowId_resultado+"]").prop("selected", "selected");
 
-        //Presentaci�n, Expediente, Incremento o Renovaci�n
-        if(parseInt($(e.target).val()) == 1 || parseInt($(e.target).val()) == 2 || parseInt($(e.target).val()) == 5 || parseInt($(e.target).val()) == 6 || parseInt($(e.target).val()) == 9){
-            $("#resultado" + rowId + " option").each(function(){
-                if (parseInt($(this).val()) > 7 && !_.isEmpty($(this).val())) {
-                    console.log('Elimina valor de resultado list.' + $(this).val());
-                    $(this).remove();
-                }
-            });
-        }
-
-        //Visita ocular
-        else if (parseInt($(e.target).val())==7){
-            $("#resultado" + rowId + " option").each(function(){
-                if (parseInt($(this).val()) != 1 && parseInt($(this).val()) != 9 && parseInt($(this).val()) != 10 && !_.isEmpty($(this).val())) {
-                    $(this).remove();
-                }
-            });
-        }
-
-        //Cotejo
-        else if (parseInt($(e.target).val())==8){
-            $("#resultado" + rowId + " option").each(function(){
-                if (parseInt($(this).val()) != 1 && parseInt($(this).val()) != 11 && parseInt($(this).val()) != 12 && !_.isEmpty($(this).val())) {
-                    $(this).remove();
-                }
-            });
-        }
-
-        //Contrato
-        else if (parseInt($(e.target).val())==10){
-            $("#resultado" + rowId + " option").each(function(){
-                if (parseInt($(this).val()) != 1 && parseInt($(this).val()) != 15 && parseInt($(this).val()) != 13 && !_.isEmpty($(this).val())) {
-                    $(this).remove();
-                }
-            });
-        }
-
-        //Cobranza
-        else if (parseInt($(e.target).val())==4){
-            $("#resultado" + rowId + " option").each(function(){
-                if (parseInt($(this).val()) != 1 && parseInt($(this).val()) != 14 && parseInt($(this).val()) != 16 && !_.isEmpty($(this).val())) {
-                    $(this).remove();
-                }
-            });
-        }
-
-        //Otro
-        else if (parseInt($(e.target).val())==9){
-            $("#resultado" + rowId + " option").each(function(){
-                if (parseInt($(this).val()) >= 1 && !_.isEmpty($(this).val())) {
-                    console.log('Elimina valor de resultado list pop-up.');
-                    $(this).remove();
-                }
-            });
-        }
+        
     },
 
     resultadosListPopUp: function(){
