@@ -25,6 +25,7 @@
         this.model.on('sync', this.cambioFecha, this);
         this.model.on('sync', this.disablestatus, this);
         this.model.on('sync', this.disableFieldsTime,this);
+        this.model.on('sync', this.validaprospeccion,this);
         this.model.addValidationTask('VaildaFechaMayoraInicial', _.bind(this.validaFechaInicial2, this));
         this.model.on("change:status",_.bind(this.muestracampoResultado, this));
         this.model.on("change:status",_.bind(this.hidecheck, this));
@@ -240,8 +241,6 @@
           this.action = 'detail';
           this.toggleEdit(false);
         }
-
-
     },
 
     /* @F. Javier G. Solar
@@ -661,5 +660,16 @@
             });
         }
         callback(null, fields, errors);
+    },
+
+    //Valida centro prospeccion, si esta vacio deja editar,de lo contrario, no.
+    validaprospeccion:function (){
+        var self = this;
+     if (this.model.get('centro_prospecccion_c') !== "" && this.model.get('centro_prospecccion_c')!==undefined) {
+        self.noEditFields.push('centro_prospecccion_c');
+         $('div[data-name=centro_prospecccion_c]').css("pointer-events", "none");
+     }else {
+        this.$('div[data-name=centro_prospecccion_c]').css("pointer-events", "");
+      }
     },
 })
