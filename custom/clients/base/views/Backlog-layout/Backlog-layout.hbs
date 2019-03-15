@@ -12,8 +12,6 @@
         width: 10%;
     }
 
-
-
     .table th {
         text-align: left;
         background: #000042 !important;
@@ -130,22 +128,46 @@
             <tr>
                 <td>
                     <select id="mes_filtro" class="filtros">
-                        {{{meses_list_html}}}
+					  <option>Todos</option>
+					  {{#each meses_list_html}}
+						{{#if @key}}
+							<option value="{{@key}}">{{this}}</option>
+						{{/if}}
+					  {{/each}}
                     </select>
                 </td>
                 <td>
                     <select id="anio_filtro" class="filtros">
-                        {{{anio_list_html_filter}}}
+					  {{#each anio_list_html_filter}}
+						{{#if @key}}
+							<option value="{{@key}}">{{this}}</option>
+						{{/if}}
+					  {{/each}}
                     </select>
                 </td>
+                <!--<td >-->
+                <!--<select id="region_filtro" class="filtros">-->
+                <!--{{{region_list_html}}}-->
+                <!--</select>-->
+                <!--</td>-->
                 <td>
                     <select id="equipo_filtro" class="filtros" >
-                        {{{equipo_list_html}}}
+					  <option>Todos</option>
+					  {{#each equipo_list_html}}
+						{{#if @key}}
+							<option value="{{@key}}">{{this}}</option>
+						{{/if}}
+					  {{/each}}
                     </select>
                 </td>
                 <td>
                     <select id="promotor_filtro" class="filtros">
-                        {{{promotores_list_html}}}
+					  <option>Todos</option>
+					  {{#each promotores_list_html}}
+						{{#if @key}}
+							<option value="{{@key}}">{{this}}</option>
+						{{/if}}
+					  {{/each}}
                     </select>
                 </td>
             </tr>
@@ -158,34 +180,42 @@
             <tr>
                 <td>
                     <select id="progreso_filtro" class="filtros">
-                        {{{progreso_list_html}}}
+					  <option></option>
+					  {{#each progreso_list_html}}
+						<option value="{{@key}}">{{this}}</option>
+					  {{/each}}
                     </select>
                 </td>
                 <td>
                     <select id="tipo_operacion_filtro" class="filtros">
-                        {{{tipo_operacion_list_html}}}
+					  <option></option>
+					  {{#each tipo_operacion_list_html}}
+						<option value="{{@key}}">{{this}}</option>
+					  {{/each}}
                     </select>
                 </td>
                 <td>
                     <select id="etapa_filtro" class="filtros">
-                        {{{etapa_list_html}}}
+					  <option></option>
+					  {{#each etapa_list_html}}
+						<option value="{{@key}}">{{this}}</option>
+					  {{/each}}
                     </select>
                 </td>
                 <td>
                     <select id="estatus_filtro" class="select2 filtros" multiple>
-                        {{{estatus_list_html}}}
+					  {{#each estatus_list_html}}
+						<option value="{{@key}}">{{this}}</option>
+					  {{/each}}
                     </select>
                 </td>
                 <td colspan="6">
                     <input type="button" value="Buscar" id="btn_Buscar" class="btn btn-primary filtros"/>
                     <i class="fa fa-spinner fa-spin loadingIcon" style="display: none"></i>
                 </td>
-
                 <td colspan="6">
                     <span class="btn btn-success exportar filtros" tabindex="-1">Exportar a Excel</span>
                 </td>
-
-
             </tr>
         </table>
     </div>
