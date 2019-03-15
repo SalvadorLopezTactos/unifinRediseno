@@ -3,8 +3,7 @@
  * User: salvador.lopez@tactos.com.mx
  * Reestructura de layout backlog
  */
-
- ({
+({
     plugins: ['Dashlet'],
 
     events: {
