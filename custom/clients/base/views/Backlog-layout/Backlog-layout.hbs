@@ -114,6 +114,94 @@
         white-space: nowrap;
         width: auto;
     }
+
+    .btn-Guardar {
+        line-height: 18px;
+        text-align: center;
+        display: inline-block;
+        margin-top: 2px;
+        font-size: 12px;
+    }
+  
+    .sinborde { /*Table without border*/
+        border: 0;
+    }
+
+    .modal {
+        position: fixed; /* Stay in place */
+        padding-top: 100px; /* Location of the box */
+        padding-bottom: 100px;
+        top: 0;
+        left:0;
+        /* width: 100%; /* Full width */
+        /*height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 1;
+        border: 1px solid #888;
+        width: 98%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @-webkit-keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+
+    @keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+
+    /* The Close Button */
+    .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .modal-header {
+        padding: .5px 0px;
+        background-color: #21618C;
+        color: white;
+    }
+
+    .modal-body {
+        padding: .5px 0px;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .modal-footer {
+        padding: 2px 16px;
+        background-color: #21618C;
+        color: #ffffff;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    .pointer {cursor: pointer;}
 </style>
 <div class="backlog-dashlet-wrapper">
     <input type="hidden" id="access" value="{{access}}"/>
@@ -494,8 +582,8 @@
                                         <!--<span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-porciento="{{porciento_ri}}" data-progreso="{{progreso}}"></span>-->
                                         <span class="btn MoverOperacion fa fa-hand-o-up" title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}"></span>
                                         <span class="btn Cancelar fa fa-times-circle" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_de_la_operacion}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
-                                        <span class="btn Comentario fa {{comentado}}" title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}" data-progreso="{{progreso}}"></span>
-                                        <span class="btn Revivir fa fa-repeat" title="Revivir" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}"></span>
+                                        <span class="btn Comentario fa {{comentado}} updateComentario" title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}" data-progreso="{{progreso}}"></span>
+                                        <span class="btn Revivir fa fa-repeat updateRevivir" title="Revivir" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}"></span>
                                     </div>
                                 </div>
                             </td>
@@ -603,8 +691,8 @@
                                                         <!--<span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-porciento="{{porciento_ri}}" data-progreso="{{progreso}}"></span>-->
                                                         <span class="btn MoverOperacion fa fa-hand-o-up" title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}"></span>
                                                         <span class="btn Cancelar fa fa-times-circle" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_de_la_operacion}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
-                                                        <span class="btn Comentario fa {{comentado}}" title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}" data-progreso="{{progreso}}"></span>
-                                                        <span class="btn Revivir fa fa-repeat" title="Revivir" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-progreso="{{progreso}}"></span>
+                                                        <span class="btn Comentario fa {{comentado}} " title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}" data-progreso="{{progreso}}"></span>
+                                                        <span class="btn Revivir fa fa-repeat " title="Revivir" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-progreso="{{progreso}}"></span>
                                                     </div>
                                                 </div>
                                             </td>
@@ -654,6 +742,115 @@
             </table>
         </div>
     </div>
+</div>
+
+<!-- Modal Comentarios -->
+<div id="myModal" style="display:none" class="row-fluid">
+  <!-- Modal content -->
+  <div class="modal span12 " style="width:100%">
+    <div class="modal-content" style="margin:auto; width:50%">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h2>COMENTARIOS DE OPERACIÓN</h2>
+        </div>
+        <div class="modal-body">
+          <table>
+            <tbody style="font-size:15px;" align="left">
+              <tr>
+                <td><b>Operación</b></td>
+                <td>{{newComentario.nameBacklog}}</td>
+              </tr>          
+              <tr>
+                <td><b>Monto Original</b></td>
+                <td>${{customFormatNumber newComentario.montoOriginalBacklog}}</td>
+              </tr>
+              <tr>
+                <td><b>Monto Real</b></td>
+                <td>${{customFormatNumber newComentario.montoRealBacklog}}</td>
+              </tr>
+            </tbody>
+          </table><br>    
+          <div align="left">
+            <label style="font-size:15px;"><b>Comentarios</b></label>
+            <textarea disabled cols="12" name="texto" id="texto" class="form-control" style="margin: 1px; width:97%; height: 61px; resize:none;">{{newComentario.comentariosExistentes}}</textarea>
+          </div>
+          <div align="left">
+            <label style="font-size:15px;"><b>Agregar Comentario</b></label>
+            <textarea cols="12" name="texto2" id="AddDescrip" class="form-control" style="margin: 1px; width: 97%; height: 61px; resize:none;"></textarea>
+          </div>
+        <br><br><br><br>
+      </div>
+      <div class="modal-footer">
+        <div align="right">
+          <button class="btn btn-danger  btn-Model" id="btn-Cancelar" type="submit">Cancelar</button>
+          <button class="btn btn-success  btn-Model" id="btn-Guardar" type="submit">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Revivir -->
+<div id="myModalRe" style="display:none" class="row-fluid">
+  <!-- Modal content -->
+  <div class="modal span12 " style="width:100%">
+    <div class="modal-content" style="margin:auto; width:50%">
+        <div class="modal-header">
+          <button type="button" class="close closeRe" data-dismiss="modal">&times;</button>
+          <h2>REVIVIR OPERACIÓN</h2>
+        </div>
+        <div class="modal-body">
+          <table>
+            <tbody style="font-size:15px;" align="left">
+                <tr>
+                    <td><b>Operación</b></td>
+                    <td></td>
+                </tr>          
+                <tr>
+                    <td><b>Monto Original</b></td>
+                    <td>${{customFormatNumber backlog.monto_comprometido}}</td>
+                </tr>
+                <tr>
+                    <td><b>Renta Inicial Original</b></td>
+                    <td>${{customFormatNumber backlog.renta_inicial}}</td>
+                </tr>
+                <tr>
+                    <td><b>Mes:</b></td>
+                    <td><b>Año: </b></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="mes_revivir">    
+                            {{#each mesRevivir}}
+                           <option value="{{@key}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </td>
+                    <td>
+                        <select id="anio_revivir">
+                            {{#each anioRevivir}}
+                           <option value="{{@key}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+          </table><br>
+
+          <div align="left">
+            <label style="font-size:15px;"><b>Comentarios:</b></label>
+            <textarea cols="12" name="texto2" id="AddDescrip" class="form-control" style="margin: 1px; width: 97%; height: 61px; resize:none;"></textarea>
+          </div>
+        <br><br><br><br>
+      </div>
+      <div class="modal-footer">
+        <div align="right">
+          <button class="btn btn-danger  btn-Model" id="btn-CancelarRe" type="submit">Cancelar</button>
+          <button class="btn btn-success  btn-Model" id="btn-GuardarRe" type="submit">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
