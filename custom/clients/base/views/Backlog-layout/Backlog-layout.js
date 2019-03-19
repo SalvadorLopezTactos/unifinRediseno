@@ -23,6 +23,18 @@
         'change #equipo_filtro': 'recalcularPromotores',
 
         'click .exportar': 'exportarXL',
+
+        //Nuevos eventos de comentarios en Modal
+        'click .updateComentario': 'comentarioNew',
+        'click .btn-danger': 'ocultaModal',
+        'click .close': 'ocultaModal',
+        'click  #btn-Guardar': 'GuardaComentario',
+        //Nuevos eventos de Revivir en Modal
+        'click .updateRevivir':'revivirNew',
+        'click #btn-CancelarRe':'ocultaRevivir',
+        'click #btn-GuardarRe':'guardaRevivir',
+        'click .closeRe': 'ocultaRevivir',
+        'change #anio_revivir':'fecha',
     },
 
     meses_list_html : null,
@@ -56,6 +68,11 @@
         this.NumeroBacklogSortDirection = 'DESC';
         this.MontoOperacionSortDirection = 'DESC';
         this.MontoFinalSortDirection = 'DESC';
+        //Objetos de comentario y revivir
+        this.newComentario='';
+        this.newRevivir='';
+        this.anioRevivir='';
+        this.mesRevivir='';
     },
 
     loadData: function (options) {
@@ -501,4 +518,153 @@
          $("#etapa_filtro").val(valores.tempEtapa);
          $("#estatus_filtro").select2('val' ,valores.tempEstatus);
     },
+
+    //Nuevas Funciones Comentario
+    comentarioNew:function(e){
+    var idBacklog=e.currentTarget.getAttribute('data-id');
+    var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
+    this.newComentario={
+        "idBacklog":idBacklog,
+        "nameBacklog":backlog.name,
+        "montoOriginalBacklog":backlog.monto_comprometido,
+        "montoRealBacklog":backlog.monto_real,
+        "comentariosExistentes":backlog.comentarios,
+        "comentarioNuevo":"",
+    };
+    self.render();
+        var modal = $('#myModal');
+        modal.show();
+    },
+    
+    ocultaModal:function(){
+        var modal = $('#myModal');
+        modal.hide();   
+    },
+
+    //Para guardar con nuevo metodo
+    GuardaComentario:function(){
+        //Recuperar variables de Comentario
+        var description = $('#AddDescrip').val();
+        var Params = {
+            'backlogId': this.newComentario.idBacklog,
+            'backlogName': this.newComentario.nameBacklog,
+            'description': description,
+        };
+        //Validar existencia de comentario
+        if( description == null || description == "" || description.trim().length ==0 ) {
+            app.alert.show('alertcom', {
+                level: 'error',
+                messages: 'Favor de agregar un comentario.',
+                autoClose: true
+            });
+            return;
+       }
+       //Notificacion de inicio de proceso
+       app.alert.show('ComentAlert', {
+            level: 'process',
+            title: 'Cargando, por favor espere.',
+        });
+       $('#btn-Cancelar').prop('disabled',true);
+       $('#btn-Guardar').prop('disabled',true);
+       //Generar Peticion para guardar comentario
+        var Url = app.api.buildURL("BacklogComentarios", '', {}, {});
+        app.api.call("create", Url, {data: Params}, {
+            success: _.bind(function (data) {
+                $('#btn-Cancelar').prop('disabled',false);
+                $('#btn-Guardar').prop('disabled',false);
+                app.alert.dismiss('ComentAlert');
+                self.ocultaModal();
+            },this),
+            error:function(error){
+                $('#btn-Cancelar').prop('disabled',false);
+                $('#btn-Guardar').prop('disabled',false);
+                app.alert.dismiss('ComentAlert');
+                app.alert.show('errorAlert', {
+                    level: 'error',
+                    messages: error,
+                    autoClose: true
+                });
+            }
+        }); 
+    },
+    
+    fecha:function(){
+        //Muestra de año
+        var self=this;
+        var currentYear = (new Date).getFullYear();
+        var currentMonth = (new Date).getMonth();
+        var currentMonthTemp = (new Date).getMonth();
+        var currentDay = (new Date).getDate();
+        var limitMonth = currentMonth + 3;
+        var nextMonth = 0;
+        var nextYear = currentYear;
+        var anio_popup=$('#anio_revivir').val();
+
+        if (limitMonth > 12) {
+            nextMonth = limitMonth - 12;
+            nextYear = currentYear + 1;
+        }
+
+        currentMonth = currentMonthTemp +1;
+        this.anioRevivir = app.lang.getAppListStrings('anio_list');
+        Object.keys(this.anioRevivir).forEach(function(key){
+            //Quita años previos
+            if(key < currentYear){
+                delete self.anioRevivir[key];
+            }
+            //Habilita años futuros
+            if(key > nextYear){
+                delete self.anioRevivir[key];
+            }
+        });
+
+        //Muestra de meses 
+        this.mesRevivir = app.lang.getAppListStrings('mes_list');
+        //Quita meses para año futuro
+        if(anio_popup > currentYear){
+            Object.keys(this.mesRevivir).forEach(function(key){
+                if(key != ''){
+                    if(key > nextMonth){
+                        delete self.mesRevivir[key];
+                    }
+                }
+            });
+        }
+        //Quita meses para año actual
+        if(anio_popup == currentYear || anio_popup ==""){
+            Object.keys(this.mesRevivir).forEach(function(key){
+                if(key != ''){
+                    //Quita meses fuera de rango(3 meses)
+                    if(key < currentMonth || key >limitMonth ){
+                        delete self.mesRevivir[key];
+                    }
+                }
+            });
+        }
+    },
+    //Nuevas funciones Revivir
+    revivirNew:function(e){
+        this.fecha();        
+        var idBacklog=e.currentTarget.getAttribute('data-id');
+        var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
+        this.newRevivir={
+            "idBacklog":idBacklog,
+            "nameBacklog":backlog.name,
+            "montoOriginalBacklog":backlog.monto_comprometido,
+            "rentaInicialOriginal":backlog.renta_inicial,
+            "comentarioNuevo":"",
+        };
+        self.render();
+        var modal = $('#myModalRe');
+        modal.show();
+    },
+
+    ocultaRevivir:function(){
+        var modal = $('#myModalRe');
+        modal.hide();        
+    },
+    /*
+    guardaRevivir:function(){
+
+    },*/
 })
