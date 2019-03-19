@@ -7,18 +7,34 @@
  ({
     plugins: ['Dashlet'],
 
-    //array_checks:null,
-    //checks_actualizar:null,
-    //checks_no_actualizar:null,
-
     events: {
         'click #btn_Buscar': 'cargarBacklogsButton',
-        'change #mass_update_btn': 'seleccionarTodo',
+        'click .crearBacklog': 'crearBacklog', 
         'click .mass_update': 'seleccionarBacklog',
         'click .marcarTodos': 'marcarCasillas',
-        'change .checkboxChange': 'SetMenuOptions'
+        'click #EquipoSort': 'ordenarPorEquipo',
+        'click #PromotorSort': 'ordenarPorPromotor',
+        'click #ClienteSort': 'ordenarPorCliente',
+        'click #NumeroBacklogSort': 'ordenarPorNumeroBacklog',
+        'click #MontoOperacionSort': 'ordenarPorMontoOperacion',
+        'click #MontoFinalSort': 'ordenarPorMontoFinal',
+        'change .checkboxChange': 'SetMenuOptions',
+        'change #mass_update_btn': 'seleccionarTodo',
+        'change #equipo_filtro': 'recalcularPromotores',
+
+        'click .exportar': 'exportarXL',
     },
 
+    meses_list_html : null,
+    anio_list_html_filter : null,
+    equipo_list_html : null,
+    promotores_list_html : null,
+    progreso_list_html : null,
+    tipo_operacion_list_html : null,
+    etapa_list_html : null,
+    estatus_list_html : null,
+    backlogs : null,
+    
     initialize: function (options) {
         self = this;
         //Actualizar esta variable para cerrar los periodos de Backlog a Petición del usuario
@@ -29,16 +45,17 @@
 
         this._super("initialize", [options]);
 
-        var estatus_list = app.lang.getAppListStrings('estatus_de_la_operacion_list');
-
-        var estatus_list_html = '<option value=""></option>';
-        for (estatus_keys in estatus_list) {
-            estatus_list_html += '<option value="' + estatus_keys + '">' + estatus_list[estatus_keys] + '</option>'
-
-        }
-        this.estatus_list_html = estatus_list_html;
-
-
+        this.progreso_list_html = app.lang.getAppListStrings('progreso_list');
+        this.tipo_operacion_list_html = app.lang.getAppListStrings('tipo_de_operacion_0');
+        this.etapa_list_html = app.lang.getAppListStrings('etapa_backlog');
+        this.estatus_list_html = app.lang.getAppListStrings('estatus_de_la_operacion_list');
+        
+        this.EquipoSortDirection = 'DESC';
+        this.PromotorSortDirection = 'DESC';
+        this.ClienteSortDirection = 'DESC';
+        this.NumeroBacklogSortDirection = 'DESC';
+        this.MontoOperacionSortDirection = 'DESC';
+        this.MontoFinalSortDirection = 'DESC';
     },
 
     loadData: function (options) {
@@ -46,19 +63,29 @@
             return;
         }
         var self = this;
-
+        this.meses_list_html = app.lang.getAppListStrings('mes_list');
+        var anio_list = app.lang.getAppListStrings('anio_list');
+        var currentYear = new Date().getFullYear();
+        Object.keys(anio_list).forEach(function(key){
+          if(key < currentYear-2) {
+            delete anio_list[key];
+          }
+        });
+        this.anio_list_html_filter = anio_list;
+        var anio_actual = (new Date).getFullYear();
+        var mes_actual = self.getActualBacklog();
         self.obtenerBacklogColumnas();
-        this.cargarBacklogs('','');
+        this.cargarBacklogs('','',anio_actual,mes_actual);
     },
-
+    
     cargarBacklogsButton: function(){
-        this.cargarBacklogs('','');
+        var anio_actual = $("#anio_filtro").val();
+        var mes_actual = $("#mes_filtro").val();   
+        this.cargarBacklogs('','',anio_actual,mes_actual);
     },
 
-    cargarBacklogs: function(ordenarPor, direccion){
-
+    cargarBacklogs: function(ordenarPor, direccion, anio_actual, mes_actual){
         $(".loadingIcon").show();
-
         if (typeof ordenarPor === "undefined") {
             ordenarPor = '';
         }
@@ -74,46 +101,15 @@
 
                 if (!_.isEmpty(data.children)) {
                     _.extend(self, {Subordinados: data.children});
-                    //_.each(data.children, self.getSubordinadoOperaciones);
                 }
 
                 if(_.isEmpty(self.Subordinados)){
                     self.has_subordinados = false;
                 }
 
-                console.log("Anio asignado: " + $("#anio_filtro").val());
-                if(_.isEmpty($("#anio_filtro").val())){
-                    console.log("Anio vacio, se asignara: " + (new Date).getFullYear());
-                    $("#anio_filtro").val((new Date).getFullYear());
-                }
-
-                if(_.isEmpty($("#mes_filtro").val())){
-                    $("#mes_filtro").val(self.getActualBacklog());
-                }
-
-                if(_.isEmpty($("#equipo_filtro").val())){
-                    $("#equipo_filtro").val(self.defaultEquipo);
-                }
-
-                var tempMes = $("#mes_filtro").val();
-                var tempAnio = $("#anio_filtro").val();
-                var tempRegion = $("#region_filtro").val();
-                var tempTipoOperacion = $("#tipo_operacion_filtro").val();
-                var tempEtapa = $("#etapa_filtro").val();
-                var tempProgreso = $("#progreso_filtro").val();
-
-                /*
-                 if(_.isEmpty($("#estatus_filtro").val())){
-                 $("#estatus_filtro").val('Comprometida');
-                 console.log("jsr aquí");
-             }*/
-             var tempEstatus = $("#estatus_filtro").val();
-
-             var tempEquipo = $("#equipo_filtro").val();
-             var tempPromotor = $("#promotor_filtro").val();
-
-             var backlog_mes = $('#mes_record').val();
-             var backlog_anio = $('#anio_record').val();
+                var valores = self.getValores();
+                $("#anio_filtro").val(anio_actual);
+                $("#mes_filtro").val(mes_actual);
 
                 //Persiste las columnas escondidas
                 self.columnas_escondidas = [];
@@ -127,17 +123,17 @@
                     user_id: app.user.get('id'),
                     data_source: 'operaciones',
                     subordinados: self.Subordinados,
-                    mes: "3",
-                    anio: "2019",
-                    region: undefined,
-                    tipo_operacion: "",
-                    etapa: "",
-                    estatus: null,
-                    equipo: null,
-                    promotor: null,
-                    progreso: "",
-                    sortBy: "",
-                    sortByDireccion: "",
+                    mes: $("#mes_filtro").val(),
+                    anio: $("#anio_filtro").val(),
+                    region: $("#region_filtro").val(),
+                    tipo_operacion: $("#tipo_operacion_filtro").val(),
+                    etapa: $("#etapa_filtro").val(),
+                    estatus: $("#estatus_filtro").val(),
+                    equipo: $("#equipo_filtro").val(),
+                    promotor: $("#promotor_filtro").val(),
+                    progreso: $("#progreso_filtro").val(),
+                    sortBy: ordenarPor,
+                    sortByDireccion: direccion,
                 }
 
                 var backlogUrl = app.api.buildURL("BacklogDashlet", '', {}, {});
@@ -147,7 +143,8 @@
                             return;
                         }
 
-                        _.extend(self, {backlogs: data});
+                        self.backlogs = data;
+                        _.extend(this, self.backlogs);
 
                         if(data.backlogs.RoleView == 'Full_Access'){
                             self.access = 'Full_Access';
@@ -160,9 +157,9 @@
                         self.rolAutorizacion = data.backlogs.RolAutorizacion;
                         //GetPromotores
                         var Params = {
-                            Access: "Full_Access",
-                            equipo: null,
-                            mes: "3",
+                            Access: Access,
+                            equipo: $("#equipo_filtro").val(),
+                            mes: $("#mes_filtro").val(),
                         };
                         var Url = app.api.buildURL("BacklogPromotores", '', {}, {});
                         app.api.call("create", Url, {data: Params}, {
@@ -170,50 +167,25 @@
                                 if (self.disposed) {
                                     return;
                                 }
-
-                                var promotores_list_html = '';
-
-                                //WARP:  Ajustes Backlog Todos
-                                promotores_list_html += '<option value="Todos">Todos</option>';
-                                console.log('promotores_list_html.cargarBacklogs');
-
-                                /*
-                                 if(self.access == 'Full_Access' || self.has_subordinados == true){
-                                 promotores_list_html += '<option value="Todos">Todos</option>';
-                                 }
-                                 */
-
-                                 _.each(data, function(key, value) {
-                                    promotores_list_html += '<option value="' + value + '">' + key + '</option>';
-                                });
-
-                                 self.promotores_list_html = promotores_list_html;
-
-                                 self.render();
-                                //var temp=_.isEmpty(self.array_checks) ? self.array_checks_cancelar:self.array_checks;
-
-                                //autopopula los campos de mes y anio en el popup de Comprometer;
-                                $('#mes_a_comprometer_popup').val(backlog_mes).change();
-                                $('#anio_a_comprometer_popup').val(backlog_anio).change();
-
-                                $('#mes_a_comprometer_mass_popup').val(tempMes).change();
-                                $('#anio_a_comprometer_mass_popup').val(tempAnio).change();
-
+                                self.promotores_list_html = data;
+                                self.render();
                                 $(".loadingIcon").hide();
-
                                 if(app.alert.get('loadingRender') !=undefined){
                                     app.alert.dismiss('loadingRender');
                                 }
+                                setTimeout(function(){
+                                  self.setValores(valores);
+                                  $("#anio_filtro").val(anio_actual);
+                                  $("#mes_filtro").val(mes_actual);
+                                }, 100);
                             })
                         });
                         //END GetPromotores
-
                     })
                 });
             })
-
-});
-},
+        });
+    },
 
     getActualBacklog: function(){
         var currentMonth = (new Date).getMonth();
@@ -233,6 +205,56 @@
         return currentMonth;
     },
 
+    exportarXL: function () {
+         this.cargarBacklogs();
+         var backlog_options = {
+             'backlogs': this.backlogs,
+         }
+
+         var backlogUrl = app.api.buildURL("CrearArchivoCSV", '', {}, {});
+         app.api.call("create", backlogUrl, {data: backlog_options}, {
+             success: _.bind(function (data) {
+                 //window.open("#bwc/index.php?entryPoint=exportarBacklog&backlog_doc=" + data);
+                 /*
+                  var element = document.createElement('a');
+                  element.setAttribute('href', 'upload/'+data);
+                  element.setAttribute('download', data);
+                  element.style.display = 'none';
+                  document.body.appendChild(element);
+
+                  element.click();
+
+                  document.body.removeChild(element);
+                  */
+                 var blDownCSV = app.api.buildURL("ExportBL/"+data, '', {}, {});
+
+                 app.api.call('GET', blDownCSV,{}, {
+                     success: _.bind(function (response) {
+                         var element = document.createElement('a');
+                         var href = 'data:text/csv;charset=utf-8,' + encodeURI(response);
+                         element.setAttribute('href', href);
+                         element.setAttribute('target','_blank');
+                         element.setAttribute('download', "NUEVOBL_");
+                         element.style.display = 'none';
+                         document.body.appendChild(element);
+
+                         element.click();
+
+                         document.body.removeChild(element);
+                     }, self),
+                 });
+
+                 if (self.disposed) {
+                     return;
+                 }
+
+                 // console.log(data);
+                 _.extend(self, {backlogs: data});
+
+             })
+         });
+    },
+
     seleccionarBacklog: function(e){
         if($(e.target).attr("checked")){
             this.seleccionados.push($(e.target).val());
@@ -248,12 +270,9 @@
             });
             this.seleccionados = seleccionadosCleaned;
         }
-
-        // console.log(this.seleccionados);
     },
 
     seleccionarTodo: function(){
-
         if ($('#mass_update_btn').is(':checked')) {
             var seleccionarTodo = [];
             $('.mass_update').each(function (index, value) {
@@ -274,21 +293,9 @@
             });
         }
         this.seleccionados = seleccionarTodo;
-        // console.log(this.seleccionados);
     },
 
     getEquipos:function() {
-
-        var tempMes = $("#mes_filtro").val();
-        var tempAnio = $("#anio_filtro").val();
-        var tempRegion = $("#region_filtro").val();
-        var tempTipoOperacion = $("#tipo_operacion_filtro").val();
-        var tempEtapa = $("#etapa_filtro").val();
-        var tempEstatus = $("#estatus_filtro").val();
-        var tempEquipo = $("#equipo_filtro").val();
-        var tempProgreso = $("#progreso_filtro").val();
-
-        //GetEquipos
         var Params = {
             Access: self.access,
         };
@@ -298,33 +305,13 @@
                 if (self.disposed) {
                     return;
                 }
-
-                var equipo_list_html = '';
-
-                var count = 0;
-                _.each(data, function (key, value) {
-                    count++;
-                });
-
-                if (count >= 2) {
-                    equipo_list_html += '<option value="Todos">Todos</option>';
-                }
-                _.each(data, function (key, value) {
-                    //equipo_list_html += '<option value="' + value + '">' + key + '</option>';
-                    equipo_list_html += '<option value="' + key + '">' + key + '</option>';
-                });
-
-                self.equipo_list_html = equipo_list_html;
-
+                self.equipo_list_html = data;
                 self.render();
             })
         });
-        //END GetEquipos2
     },
 
-
     obtenerBacklogColumnas: function(){
-
         var options = $('#sel_columnas option');
         var values = $.map(options ,function(option) {
             return option.value;
@@ -338,7 +325,6 @@
             success: _.bind(function (data) {
                 if (self.disposed) {
                     return;
-
                 }
                 self.seleccionarColumnas = data;
             })
@@ -353,27 +339,169 @@
         }else{
             $('input[type="checkbox"]').attr('checked', false);
         }
-        //$('input[type="checkbox"]').attr('checked', false);
     },
 
     SetMenuOptions: function () {
-        //console.log("SetMenuOptions");
-        //Recupera checks
         var checks = $('input[type="checkbox"]');
-
-        //Proecsa para validar
         var active = false;
         for (var i = 0; i < checks.length; i++) {
             if(checks[i].checked == true){
                 active = true;
             }
         }
-
         if (active == true) {
             $("#menuOptions").removeClass('disabled');
         }else {
             $("#menuOptions").addClass("disabled");
         }
+    },
 
+    recalcularPromotores:function(){
+        var valores = this.getValores();
+        var Params = {
+            Access: self.access,
+            equipo: $("#equipo_filtro").val(),
+            mes: $("#mes_filtro").val(),
+        };
+        var Url = app.api.buildURL("BacklogPromotores", '', {}, {});
+        app.api.call("create", Url, {data: Params}, {
+            success: _.bind(function (data) {
+                if (self.disposed) {
+                    return;
+                }
+                 self.promotores_list_html = data;
+                 self.render();
+                 self.setValores(valores);
+            })
+        });
+    },
+
+    crearBacklog: function(){
+      var model=app.data.createBean('lev_Backlog');
+      app.drawer.open({
+        layout: 'create',
+        context: {
+          create: true,
+          module: 'lev_Backlog',
+          model: model
+        },
+      }, function(){
+         location.reload();
+      });
+    },
+
+    ordenarPorEquipo: function(){
+        var valores = this.getValores();
+        var sortedObjs = [];
+        if(this.EquipoSortDirection == 'DESC'){
+            this.EquipoSortDirection = 'ASC';
+            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'equipo');
+        }else{
+            this.EquipoSortDirection = 'DESC';
+            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'equipo').reverse();
+        }
+        this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
+        this.render();
+        this.setValores(valores);
+    },
+    
+    ordenarPorPromotor: function(){
+        var valores = this.getValores();
+        var sortedObjs = [];
+        if(this.PromotorSortDirection == 'DESC'){
+            this.PromotorSortDirection = 'ASC';
+            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'promotor');
+        }else{
+            this.PromotorSortDirection = 'DESC';
+            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'promotor').reverse();
+        }
+        this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
+        this.render();
+        this.setValores(valores);
+    },
+
+    ordenarPorCliente: function(){
+        var valores = this.getValores();
+        var sortedObjs = [];
+        if(this.ClienteSortDirection == 'DESC'){
+            this.ClienteSortDirection = 'ASC';
+            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'cliente');
+        }else{
+            this.ClienteSortDirection = 'DESC';
+            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'cliente').reverse();
+        }
+        this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
+        this.render();
+        this.setValores(valores);
+    },
+
+    ordenarPorNumeroBacklog: function(){
+        var valores = this.getValores();
+        var sortedObjs = [];
+        if(this.NumeroBacklogSortDirection == 'DESC'){
+            this.NumeroBacklogSortDirection = 'ASC';
+            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'numero_de_backlog');
+        }else{
+            this.NumeroBacklogSortDirection = 'DESC';
+            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'numero_de_backlog').reverse();
+        }
+        this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
+        this.render();
+        this.setValores(valores); 
+    },
+
+    ordenarPorMontoOperacion: function(){
+        var valores = this.getValores();
+        var sortedObjs = [];
+        if(this.MontoOperacionSortDirection == 'DESC'){
+            this.MontoOperacionSortDirection = 'ASC';
+            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'monto_original');
+        }else{
+            this.MontoOperacionSortDirection = 'DESC';
+            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'monto_original').reverse();
+        }
+        this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
+        this.render();
+        this.setValores(valores);
+    },
+
+    ordenarPorMontoFinal: function(){
+        var valores = this.getValores();
+        var sortedObjs = [];
+        if(this.MontoFinalSortDirection == 'DESC'){
+            this.MontoFinalSortDirection = 'ASC';
+            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'monto_final_comprometido');
+        }else{
+            this.MontoFinalSortDirection = 'DESC';
+            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'monto_final_comprometido').reverse();
+        }
+        this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
+        this.render();
+        this.setValores(valores);
+    },
+    
+    getValores: function(){
+      var valores = {
+         tempMes: $("#mes_filtro").val(),
+         tempAnio: $("#anio_filtro").val(),
+         tempEquipo: $("#equipo_filtro").val(),
+         tempPromotor: $("#promotor_filtro").val(),
+         tempSolicitud: $("#progreso_filtro").val(),
+         tempTipoOperacion: $("#tipo_operacion_filtro").val(),
+         tempEtapa: $("#etapa_filtro").val(),
+         tempEstatus: $("#estatus_filtro").val()
+      }
+      return valores;
+    },
+
+    setValores: function(valores){
+         $("#mes_filtro").val(valores.tempMes);
+         $("#anio_filtro").val(valores.tempAnio);
+         $("#equipo_filtro").val(valores.tempEquipo);
+         $("#promotor_filtro").val(valores.tempPromotor);
+         $("#progreso_filtro").val(valores.tempSolicitud);
+         $("#tipo_operacion_filtro").val(valores.tempTipoOperacion);
+         $("#etapa_filtro").val(valores.tempEtapa);
+         $("#estatus_filtro").select2('val' ,valores.tempEstatus);
     },
 })
