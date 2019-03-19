@@ -173,11 +173,17 @@
                                 if(app.alert.get('loadingRender') !=undefined){
                                     app.alert.dismiss('loadingRender');
                                 }
+                                //Persistiendo anio y mes
+                                $("#anio_filtro").val(anio_actual);
+                                $("#mes_filtro").val(mes_actual);
+
+                                /*
                                 setTimeout(function(){
                                   self.setValores(valores);
                                   $("#anio_filtro").val(anio_actual);
                                   $("#mes_filtro").val(mes_actual);
                                 }, 100);
+                                */
                             })
                         });
                         //END GetPromotores
@@ -206,7 +212,9 @@
     },
 
     exportarXL: function () {
-         this.cargarBacklogs();
+        var anio_actual = $("#anio_filtro").val();
+        var mes_actual = $("#mes_filtro").val();
+        this.cargarBacklogs('','',anio_actual,mes_actual);
          var backlog_options = {
              'backlogs': this.backlogs,
          }
@@ -215,26 +223,15 @@
          app.api.call("create", backlogUrl, {data: backlog_options}, {
              success: _.bind(function (data) {
                  //window.open("#bwc/index.php?entryPoint=exportarBacklog&backlog_doc=" + data);
-                 /*
-                  var element = document.createElement('a');
-                  element.setAttribute('href', 'upload/'+data);
-                  element.setAttribute('download', data);
-                  element.style.display = 'none';
-                  document.body.appendChild(element);
-
-                  element.click();
-
-                  document.body.removeChild(element);
-                  */
                  var blDownCSV = app.api.buildURL("ExportBL/"+data, '', {}, {});
 
                  app.api.call('GET', blDownCSV,{}, {
                      success: _.bind(function (response) {
                          var element = document.createElement('a');
-                         var href = 'data:text/csv;charset=utf-8,' + encodeURI(response);
+                         var href = 'data:text/csv;charset=utf-8,' + encodeURI(response[1]);
                          element.setAttribute('href', href);
                          element.setAttribute('target','_blank');
-                         element.setAttribute('download', "NUEVOBL_");
+                         element.setAttribute('download', response[0]);
                          element.style.display = 'none';
                          document.body.appendChild(element);
 

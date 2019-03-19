@@ -40,7 +40,8 @@ class ExportBL extends SugarApi
     }
 
     /**
-     *
+     * Función que lee el archivo csv generado a través del API CrearArchivoCSV, guardado en el directorio upload
+     * return $array, nombre del archivo csv generado y contenido a descargar
      */
     public function downloadFileBL(ServiceBase $api, $args)
     {
@@ -51,23 +52,7 @@ class ExportBL extends SugarApi
 
         $content=file_get_contents($csvfile);
 
-        $api->setHeader("Pragma", "cache");
-        $api->setHeader("Content-Type", "application/octet-stream; charset=" . $GLOBALS['locale']->getExportCharset());
-        $api->setHeader("Content-Disposition", "attachment; filename="+$name_file);
-        $api->setHeader("Content-transfer-encoding", "binary");
-        $api->setHeader("Expires", "Mon, 26 Jul 1997 05:00:00 GMT");
-        $api->setHeader("Last-Modified", TimeDate::httpTime());
-        $api->setHeader("Cache-Control", "post-check=0, pre-check=0");
-        /*
-        return $GLOBALS['locale']->translateCharset(
-            $content,
-            'UTF-8',
-            $GLOBALS['locale']->getExportCharset(),
-            false,
-            true
-        );
-        */
-        return $content;
+        return array($name_file,$content);
 
     }
 
