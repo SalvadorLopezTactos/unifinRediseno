@@ -862,15 +862,15 @@
             <tbody style="font-size:15px;" align="left">
                 <tr>
                     <td><b>Operación</b></td>
-                    <td></td>
+                    <td>{{newRevivir.nameBacklog}}</td>
                 </tr>          
                 <tr>
                     <td><b>Monto Original</b></td>
-                    <td>${{customFormatNumber backlog.monto_comprometido}}</td>
+                    <td>${{customFormatNumber newRevivir.montoOriginalBacklog}}</td>
                 </tr>
                 <tr>
                     <td><b>Renta Inicial Original</b></td>
-                    <td>${{customFormatNumber backlog.renta_inicial}}</td>
+                    <td>${{customFormatNumber newRevivir.rentaInicialOriginal}}</td>
                 </tr>
                 <tr>
                     <td><b>Mes:</b></td>
@@ -897,7 +897,7 @@
 
           <div align="left">
             <label style="font-size:15px;"><b>Comentarios:</b></label>
-            <textarea cols="12" name="texto2" id="AddDescrip" class="form-control" style="margin: 1px; width: 97%; height: 61px; resize:none;"></textarea>
+            <textarea cols="12" name="texto2" id="ComentarioRev" class="form-control" style="margin: 1px; width: 97%; height: 61px; resize:none;"></textarea>
           </div>
         <br><br><br><br>
       </div>

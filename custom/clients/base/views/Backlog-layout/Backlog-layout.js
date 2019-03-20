@@ -587,6 +587,7 @@
         var Url = app.api.buildURL("BacklogComentarios", '', {}, {});
         app.api.call("create", Url, {data: Params}, {
             success: _.bind(function (data) {
+                self.backlogs.backlogs.MyBacklogs.linea[self.newComentario.idBacklog].comentarios=data;
                 $('#btn-Cancelar').prop('disabled',false);
                 $('#btn-Guardar').prop('disabled',false);
                 app.alert.dismiss('ComentAlert');
@@ -663,14 +664,29 @@
     revivirNew:function(e){
         this.fecha();        
         var idBacklog=e.currentTarget.getAttribute('data-id');
+        //var mes=e.currentTarget.getAttribute('data-mes');
+        //var anio=e.currentTarget.getAttribute('data-anio');
         var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
+
         this.newRevivir={
             "idBacklog":idBacklog,
             "nameBacklog":backlog.name,
             "montoOriginalBacklog":backlog.monto_comprometido,
-            "rentaInicialOriginal":backlog.renta_inicial,
-            "comentarioNuevo":"",
+            "rentaInicialOriginal":backlog.ri_comprometida,
+            "status":backlog.estatus_de_la_operacion,
+            "mesBacklog":backlog.mes_int,
+            "anioBacklog":"20"+backlog.anio
         };
+        if (backlog.estatus_de_la_operacion != 'Cancelada'){
+           app.alert.show('Operacion Activa', {
+               level: 'error',
+               messages: 'Unicamente pueden revivirse operaciones canceladas.',
+               autoClose: false
+            });
+           return;
+        }
+
+
         self.render();
         var modal = $('#myModalRe');
         modal.show();
@@ -680,8 +696,54 @@
         var modal = $('#myModalRe');
         modal.hide();        
     },
-    /*
+    
     guardaRevivir:function(){
+        var mes = $('#mes_revivir').val();
+        var anio = $('#anio_revivir').val();
+        var comentarios=$('#ComentarioRev').val();
+        var Params = {
+           'backlogId':this.newRevivir.idBacklog,
+           'backlogName': this.newRevivir.backlogName,
+           'Monto': this.newRevivir.montoOriginalBacklog,
+           'RentaInicial': this.newRevivir.rentaInicialOriginal,
+           'Comentarios': comentarios,
+           'Mes':mes,
+           'Anio': anio,
+           'MesAnterior': this.newRevivir.mesBacklog,
+           'AnioAnterior': this.newRevivir.anioBacklog,
+        };
+        //Notificacion de inicio de proceso
+       app.alert.show('RevivirAlert', {
+            level: 'process',
+            title: 'Cargando, por favor espere.',
+        });
+       $('#btn-CancelarRe').prop('disabled',true);
+       $('#btn-GuardarRe').prop('disabled',true);
 
-    },*/
+        var Url = app.api.buildURL("RevivirBacklog", '', {}, {});
+        app.api.call("create", Url, {data: Params}, {
+           success: _.bind(function (data) {
+                if(self.newRevivir.mesBacklog==$('#mes_revivir').val() && self.newRevivir.anioBacklog==$('#anio_revivir').val()){
+                    self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].color="#E5FFCC";
+                    self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].estatus_de_la_operacion="Comprometida";
+                }
+                
+                $('#btn-CancelarRe').prop('disabled',false);
+                $('#btn-GuardarRe').prop('disabled',false);
+                app.alert.dismiss('RevivirAlert');
+                self.ocultaRevivir();
+                self.render();
+            },this),
+            error:function(error){
+                $('#btn-CancelarRe').prop('disabled',false);
+                $('#btn-GuardarRe').prop('disabled',false);
+                app.alert.dismiss('RevivirAlert');
+                app.alert.show('errorAlertRe', {
+                    level: 'error',
+                    messages: error,
+                    autoClose: true
+                });
+            }
+        }); 
+    },
 })
