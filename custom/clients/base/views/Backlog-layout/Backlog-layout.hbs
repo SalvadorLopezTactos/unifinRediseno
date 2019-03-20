@@ -744,6 +744,64 @@
     </div>
 </div>
 
+<!-- Modal Ocultar Columnas -->
+<div id="myModalHideCols" style="display:none" class="row-fluid">
+    <!-- Modal content -->
+    <div class="modal span12 " style="width:100%">
+        <div class="modal-content" style="margin:auto; width:50%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class="modal-title" style="margin: 0 auto;">Columnas</h2>
+            </div>
+            <div class="modal-body" style="overflow: hidden;">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="row">
+                                <div class="span8" style="margin-left: 30px;margin-top: 10px;">
+                                    <select id="sel_columnas" multiple size=22>
+                                        <option value="none">Ninguno</option>
+                                        <option value="hide_acciones">Acciones</option>
+                                        <option value="hide_estatus">Estatus</option>
+                                        <option value="hide_mes">Mes</option>
+                                        <option value="hide_equipo">Equipo</option>
+                                        <option value="hide_zona">Zona</option>
+                                        <option value="hide_promotor">Promotor</option>
+                                        <option value="hide_cliente">Cliente</option>
+                                        <option value="hide_operacion">No. Backlog</option>
+                                        <option value="hide_tipo_bien">Tipo de Bien</option>
+                                        <option value="hide_monto_original">Linea Disponible</option>
+                                        <option value="hide_monto_comprometido">Monto Original</option>
+                                        <option value="hide_ri_comprometida">RI Original</option>
+                                        <option value="hide_monto_diferencia">Diferencia</option>
+                                        <option value="hide_monto_final_comprometido">Backlog</option>
+                                        <option value="hide_ri_final_comprometida">Renta Inicial</option>
+                                        <!--<option value="hide_bl_actual">Backlog Actual</option>-->
+                                        <option value="hide_pipeline_posterior">Colocacion Pipeline</option>
+                                        <option value="hide_monto_real">Colocación Real</option>
+                                        <option value="hide_ri_real">RI Real</option>
+                                        <option value="hide_monto_cancelado">Monto Cancelado</option>
+                                        <option value="hide_ri_cancelada">RI Cancelada</option>
+                                        <option value="hide_tipo_operacion">Tipo de Operacion</option>
+                                        <option value="hide_etapa_preliminar">Etapa Inicio Mes</option>
+                                        <option value="hide_etapa">Etapa</option>
+                                        <option value="hide_progreso">Solicitud</option>
+                                    </select>
+                                </div>
+                                <div class="span1" style="margin-top: 10px;">
+                                    <input type="button" value="Ejecutar" id="btn_ejecuta_ocultar_columnas" class="btn btn-success"/>
+                                    <input type="button" value="Cancelar" id="btn_cancela_ocultar_columnas" class="btn btn-danger" style="margin-top: 25px;"/>
+                                </div>
+                            </div>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Modal Comentarios -->
 <div id="myModal" style="display:none" class="row-fluid">
   <!-- Modal content -->

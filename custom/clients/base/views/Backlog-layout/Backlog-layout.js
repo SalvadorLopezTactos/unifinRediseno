@@ -22,6 +22,7 @@
         'change #mass_update_btn': 'seleccionarTodo',
         'change #equipo_filtro': 'recalcularPromotores',
 
+        'click .ocultar_columnas': 'ocultarColumnas',
         'click .exportar': 'exportarXL',
 
         //Nuevos eventos de comentarios en Modal
@@ -227,6 +228,22 @@
 
         return currentMonth;
     },
+
+     ocultarColumnas:function(){
+         console.log(self.rolAutorizacion);
+         if(self.rolAutorizacion != "DGA"){
+             app.alert.show('periodo_de_aprobacion', {
+                 level: 'error',
+                 messages: 'No cuenta con privilegios para modificar la estructura del tablero.',
+                 autoClose: false
+             });
+             return;
+         }
+         //Mostrar modal
+         var modalCols = $('#myModalHideCols');
+         modalCols.show();
+
+     },
 
     exportarXL: function () {
         var anio_actual = $("#anio_filtro").val();
