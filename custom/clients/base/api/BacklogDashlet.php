@@ -554,6 +554,7 @@ SQL;
             $backlog = BeanFactory::retrieveBean('lev_Backlog', $backlogId);
             $backlog->description .= "\r\n" . $current_user->first_name . " " . $current_user->last_name . " - " . $todayDate . ": " . $backlogDescription;
             $backlog->save();
+            return $backlog->description;
         }
     }
 
