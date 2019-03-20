@@ -574,10 +574,12 @@
         app.api.call("create", Url, {data: Params}, {
             success: _.bind(function (data) {
                 self.backlogs.backlogs.MyBacklogs.linea[self.newComentario.idBacklog].comentarios=data;
+                self.backlogs.backlogs.MyBacklogs.linea[self.newComentario.idBacklog].comentado="fa-comment";
                 $('#btn-Cancelar').prop('disabled',false);
                 $('#btn-Guardar').prop('disabled',false);
                 app.alert.dismiss('ComentAlert');
                 self.ocultaModal();
+                self.render();
             },this),
             error:function(error){
                 $('#btn-Cancelar').prop('disabled',false);
