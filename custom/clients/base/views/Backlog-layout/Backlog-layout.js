@@ -266,7 +266,7 @@
                  app.api.call('GET', blDownCSV,{}, {
                      success: _.bind(function (response) {
                          var element = document.createElement('a');
-                         var href = 'data:text/csv;charset=utf8,' + encodeURI(response[0]);
+                         var href = 'data:text/csv;charset=UTF-8,' + encodeURI(response[0]);
                          element.setAttribute('href', href);
                          element.setAttribute('target','_blank');
                          element.setAttribute('download', response[1]);
