@@ -216,7 +216,7 @@
             <tr>
                 <td>
                     <select id="mes_filtro" class="filtros">
-                      <option>Todos</option>
+                      <option value="{{mes_filtro}}">{{getUnifinListValue "mes_list" mes_filtro}}</option>
                       {{#each meses_list_html}}
                         {{#if @key}}
                             <option value="{{@key}}">{{this}}</option>
@@ -226,6 +226,7 @@
                 </td>
                 <td>
                     <select id="anio_filtro" class="filtros">
+                      <option value="{{anio_filtro}}">{{getUnifinListValue "anio_list" anio_filtro}}</option>  
                       {{#each anio_list_html_filter}}
                         {{#if @key}}
                             <option value="{{@key}}">{{this}}</option>
@@ -240,21 +241,15 @@
                 <!--</td>-->
                 <td>
                     <select id="equipo_filtro" class="filtros" >
-                      <option>Todos</option>
-                      {{#each equipo_list_html}}
-                        {{#if @key}}
-                            <option value="{{@key}}">{{this}}</option>
-                        {{/if}}
+                      {{#each equipo_list_html}}                        
+                            <option value="{{@key}}" {{ifSelected @key ../equipo_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
                 </td>
                 <td>
                     <select id="promotor_filtro" class="filtros">
-                      <option>Todos</option>
                       {{#each promotores_list_html}}
-                        {{#if @key}}
-                            <option value="{{@key}}">{{this}}</option>
-                        {{/if}}
+                        <option value="{{@key}}" {{ifSelected @key ../promotor_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
                 </td>

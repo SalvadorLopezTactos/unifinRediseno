@@ -36,6 +36,10 @@
         'click #btn-GuardarRe':'guardaRevivir',
         'click .closeRe': 'ocultaRevivir',
         'change #anio_revivir':'fecha',
+
+        //Eventos para filtros
+        'change .filtros': 'updateFilters',
+        
     },
 
     meses_list_html : null,
@@ -74,6 +78,13 @@
         this.newRevivir='';
         this.anioRevivir='';
         this.mesRevivir='';
+        //Variables para filtros
+        this.mes_filtro = ((new Date).getMonth()+1).toString();
+        this.anio_filtro = ((new Date).getFullYear()).toString();
+        this.equipo_filtro = "";
+        this.promotor_filtro = "";
+
+
     },
 
     loadData: function (options) {
@@ -126,8 +137,8 @@
                 }
 
                 var valores = self.getValores();
-                $("#anio_filtro").val(anio_actual);
-                $("#mes_filtro").val(mes_actual);
+                //$("#anio_filtro").val(anio_actual);
+                //$("#mes_filtro").val(mes_actual);
 
                 //Persiste las columnas escondidas
                 self.columnas_escondidas = [];
@@ -186,14 +197,15 @@
                                     return;
                                 }
                                 self.promotores_list_html = data;
+                                self.promotores_list_html[""]="Todos"
                                 self.render();
                                 $(".loadingIcon").hide();
                                 if(app.alert.get('loadingRender') !=undefined){
                                     app.alert.dismiss('loadingRender');
                                 }
                                 //Persistiendo anio y mes
-                                $("#anio_filtro").val(anio_actual);
-                                $("#mes_filtro").val(mes_actual);
+                                //$("#anio_filtro").val(anio_actual);
+                                //$("#mes_filtro").val(mes_actual);
 
                                 /*
                                 setTimeout(function(){
@@ -337,6 +349,7 @@
                     return;
                 }
                 self.equipo_list_html = data;
+                self.equipo_list_html[""]="Todos"
                 self.render();
             })
         });
@@ -401,8 +414,9 @@
                     return;
                 }
                  self.promotores_list_html = data;
+                 self.promotores_list_html[""]="Todos"
                  self.render();
-                 self.setValores(valores);
+                 //self.setValores(valores);
             })
         });
     },
@@ -433,7 +447,7 @@
         }
         this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
         this.render();
-        this.setValores(valores);
+        //this.setValores(valores);
     },
     
     ordenarPorPromotor: function(){
@@ -448,7 +462,7 @@
         }
         this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
         this.render();
-        this.setValores(valores);
+        //this.setValores(valores);
     },
 
     ordenarPorCliente: function(){
@@ -463,7 +477,7 @@
         }
         this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
         this.render();
-        this.setValores(valores);
+        //this.setValores(valores);
     },
 
     ordenarPorNumeroBacklog: function(){
@@ -478,7 +492,7 @@
         }
         this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
         this.render();
-        this.setValores(valores); 
+        //this.setValores(valores); 
     },
 
     ordenarPorMontoOperacion: function(){
@@ -493,7 +507,7 @@
         }
         this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
         this.render();
-        this.setValores(valores);
+        //this.setValores(valores);
     },
 
     ordenarPorMontoFinal: function(){
@@ -508,7 +522,7 @@
         }
         this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
         this.render();
-        this.setValores(valores);
+        //this.setValores(valores);
     },
     
     getValores: function(){
@@ -526,8 +540,8 @@
     },
 
     setValores: function(valores){
-         $("#mes_filtro").val(valores.tempMes);
-         $("#anio_filtro").val(valores.tempAnio);
+         //$("#mes_filtro").val(valores.tempMes);
+         //$("#anio_filtro").val(valores.tempAnio);
          $("#equipo_filtro").val(valores.tempEquipo);
          $("#promotor_filtro").val(valores.tempPromotor);
          $("#progreso_filtro").val(valores.tempSolicitud);
@@ -745,5 +759,19 @@
                 });
             }
         }); 
+    },
+
+    updateFilters: function(){
+        this.mes_filtro = $("#mes_filtro").val();
+        this.anio_filtro = $("#anio_filtro").val();
+        if (this.equipo_filtro != $("#equipo_filtro").val()){
+            this.equipo_filtro = $("#equipo_filtro").val();
+            this.promotor_filtro = "";
+        }else{
+            this.promotor_filtro = $("#promotor_filtro").val();    
+        }
+        
+        this.render();
+
     },
 })
