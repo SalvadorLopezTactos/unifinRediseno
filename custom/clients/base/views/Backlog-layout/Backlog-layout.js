@@ -21,9 +21,13 @@
         'change .checkboxChange': 'SetMenuOptions',
         'change #mass_update_btn': 'seleccionarTodo',
         'change #equipo_filtro': 'recalcularPromotores',
-
-        'click .ocultar_columnas': 'ocultarColumnas',
         'click .exportar': 'exportarXL',
+
+        //Nuevos eventos para ocultar columnas
+        'click .ocultar_columnas': 'ocultarColumnas',
+        'click #btn_ejecuta_ocultar_columnas': 'ejecutaOcultarColumnas',
+        'click #btn_cancela_ocultar_columnas': 'ocultaModal',
+
 
         //Nuevos eventos de comentarios en Modal
         'click .updateComentario': 'comentarioNew',
@@ -274,10 +278,10 @@
                  app.api.call('GET', blDownCSV,{}, {
                      success: _.bind(function (response) {
                          var element = document.createElement('a');
-                         var href = 'data:text/csv;charset=utf-8,' + encodeURI(response[1]);
+                         var href = 'data:text/csv;charset=UTF-8,' + encodeURI(response[0]);
                          element.setAttribute('href', href);
                          element.setAttribute('target','_blank');
-                         element.setAttribute('download', response[0]);
+                         element.setAttribute('download', response[1]);
                          element.style.display = 'none';
                          document.body.appendChild(element);
 
@@ -550,6 +554,76 @@
          $("#estatus_filtro").select2('val' ,valores.tempEstatus);
     },
 
+     ejecutaOcultarColumnas:function(){
+
+         var options = $('#sel_columnas option');
+         var values = $.map(options ,function(option) {
+             return option.value;
+         });
+
+         _.each(values, function(key, value) {
+
+             $('#' + key).show();
+             $('.' + key).show();
+         });
+
+         $('.hide_show_col').each(function(){
+             $(this).prop('checked', false);
+             $('.' + $(this).prop("id")).show();
+             $('#' + $(this).prop("id")).show();
+         });
+
+         $('#myModalHideCols').hide();
+         var coldata = $('#sel_columnas').val();
+         _.each(coldata, function(key, value) {
+
+             $('#' + key).hide();
+             $('.' + key).hide();
+         });
+         //self.floatHeader();
+
+         //BacklogColumns
+         var Params = {
+             columnas: coldata,
+             values: values,
+         };
+         var Url = app.api.buildURL("BacklogColumns", '', {}, {});
+         app.api.call("create", Url, {data: Params}, {
+             success: _.bind(function (data) {
+                 if (self.disposed) {
+                     return;
+                 }
+
+                 self.obtenerBacklogColumnas();
+                 //self.floatHeader();
+             })
+         });
+         //END BacklogColumns
+     },
+
+     obtenerBacklogColumnas: function(){
+
+         var options = $('#sel_columnas option');
+         var values = $.map(options ,function(option) {
+             return option.value;
+         });
+         //ObtenerBacklogColumnas
+         var Params = {
+             values: values,
+         };
+         var Url = app.api.buildURL("ObtenerBacklogColumnas", '', {}, {});
+         app.api.call("create", Url, {data:Params}, {
+             success: _.bind(function (data) {
+                 if (self.disposed) {
+                     return;
+
+                 }
+                 self.seleccionarColumnas = data;
+             })
+         });
+         //END ObtenerBacklogColumnas
+     },
+
     //Nuevas Funciones Comentario
     comentarioNew:function(e){
     var idBacklog=e.currentTarget.getAttribute('data-id');
@@ -569,7 +643,10 @@
     
     ocultaModal:function(){
         var modal = $('#myModal');
-        modal.hide();   
+        modal.hide();
+
+        var modalCol=$('#myModalHideCols');
+        modalCol.hide();
     },
 
     //Para guardar con nuevo metodo
@@ -602,10 +679,12 @@
         app.api.call("create", Url, {data: Params}, {
             success: _.bind(function (data) {
                 self.backlogs.backlogs.MyBacklogs.linea[self.newComentario.idBacklog].comentarios=data;
+                self.backlogs.backlogs.MyBacklogs.linea[self.newComentario.idBacklog].comentado="fa-comment";
                 $('#btn-Cancelar').prop('disabled',false);
                 $('#btn-Guardar').prop('disabled',false);
                 app.alert.dismiss('ComentAlert');
                 self.ocultaModal();
+                self.render();
             },this),
             error:function(error){
                 $('#btn-Cancelar').prop('disabled',false);
