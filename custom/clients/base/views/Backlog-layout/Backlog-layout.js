@@ -87,6 +87,17 @@
         this.anio_filtro = ((new Date).getFullYear()).toString();
         this.equipo_filtro = "";
         this.promotor_filtro = "";
+        this.progreso_filtro = "";
+        this.tipo_operacion_filtro = "";
+        this.etapa_filtro = "";
+        this.estatus_filtro = "";
+        this.progreso_list_html[''] = "";
+        this.tipo_operacion_list_html[''] = "";
+        this.etapa_list_html[''] = "";
+        this.estatus_list_html[''] = "";
+        //Variable para total de registros
+        this.totalRegistros = 0;
+        
 
 
     },
@@ -177,6 +188,7 @@
                         }
 
                         self.backlogs = data;
+                        self.totalRegistros = (data.backlogs.MyBacklogs == null)? 0 : Object.keys(self.backlogs.backlogs.MyBacklogs.linea).length;
                         _.extend(this, self.backlogs);
 
                         if(data.backlogs.RoleView == 'Full_Access'){
@@ -841,6 +853,7 @@
     },
 
     updateFilters: function(){
+        //Función para generar persistencia de variables en filtros
         this.mes_filtro = $("#mes_filtro").val();
         this.anio_filtro = $("#anio_filtro").val();
         if (this.equipo_filtro != $("#equipo_filtro").val()){
@@ -849,6 +862,13 @@
         }else{
             this.promotor_filtro = $("#promotor_filtro").val();    
         }
+        this.progreso_filtro = $("#progreso_filtro").val();
+        this.tipo_operacion_filtro = $("#tipo_operacion_filtro").val();
+        this.etapa_filtro = $("#etapa_filtro").val();
+        this.estatus_filtro = $('#estatus_filtro').select2('val').toString()
+        var rep = /,/gi;
+        this.estatus_filtro = (this.estatus_filtro == "")? "": "^"+this.estatus_filtro.replace(rep, "^,^")+"^";
+
         
         this.render();
 

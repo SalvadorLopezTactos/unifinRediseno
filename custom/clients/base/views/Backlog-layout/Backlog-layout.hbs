@@ -234,11 +234,6 @@
                       {{/each}}
                     </select>
                 </td>
-                <!--<td >-->
-                <!--<select id="region_filtro" class="filtros">-->
-                <!--{{{region_list_html}}}-->
-                <!--</select>-->
-                <!--</td>-->
                 <td>
                     <select id="equipo_filtro" class="filtros" >
                       {{#each equipo_list_html}}                        
@@ -263,32 +258,29 @@
             <tr>
                 <td>
                     <select id="progreso_filtro" class="filtros">
-                      <option></option>
                       {{#each progreso_list_html}}
-                        <option value="{{@key}}">{{this}}</option>
+                        <option value="{{@key}}" {{ifSelected @key ../progreso_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
                 </td>
                 <td>
                     <select id="tipo_operacion_filtro" class="filtros">
-                      <option></option>
                       {{#each tipo_operacion_list_html}}
-                        <option value="{{@key}}">{{this}}</option>
+                        <option value="{{@key}}" {{ifSelected @key ../tipo_operacion_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
                 </td>
                 <td>
                     <select id="etapa_filtro" class="filtros">
-                      <option></option>
                       {{#each etapa_list_html}}
-                        <option value="{{@key}}">{{this}}</option>
+                        <option value="{{@key}}" {{ifSelected @key ../etapa_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
                 </td>
                 <td>
                     <select id="estatus_filtro" class="select2 filtros" multiple>
                       {{#each estatus_list_html}}
-                        <option value="{{@key}}">{{this}}</option>
+                        <option value="{{@key}}" {{ifMSelected @key ../estatus_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
                 </td>
@@ -304,6 +296,7 @@
     </div>
 
     <div class="barra_de_acciones">
+        <h1> Backlogs ({{totalRegistros}})</h1>
         <table>
             <tr>
                 <!--<td>
