@@ -687,7 +687,6 @@
                  messages: 'Favor de completar la informacion.',
                  autoClose: false
              });
-             this.saving = 0;
              return;
          }
 
@@ -706,25 +705,27 @@
          var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&filter[3][estatus_de_la_operacion][$not_equals]=Cancelada&fields=id,mes,estatus_de_la_operacion',
              null, null, null);
 
-         $(".savingIcon").show();
+         //Notificacion de inicio de proceso
+         app.alert.show('moverAlert', {
+             level: 'process',
+             title: 'Cargando, por favor espere.',
+         });
 
          app.api.call('GET', bl_url, {}, {
              success: _.bind(function (data) {
-                 $(".savingIcon").hide();
+
                  var meses =['0','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
                  if(data.records.length>0){
-
+                     app.alert.dismiss('moverAlert');
                      app.alert.show('error_bl_mes', {
                          level: 'error',
                          messages: 'Esta Cuenta ya posee un backlog en el mes: '+meses[data.records[0].mes],
                          autoClose: false
                      });
-                     this.saving = 0;
                      return;
 
                  }else{
                      var Url = app.api.buildURL("UpdateFechaBl", '', {}, {});
-                     $(".savingIcon").show();
                      var Params = {
                          "bl":num_bl,
                          "mesActual":tempMes,
@@ -734,7 +735,6 @@
                      };
                      app.api.call("create", Url, {data: Params}, {
                          success: _.bind(function (data) {
-                             console.log('Peticion enviada');
                              this.moverOpAfterValidateIndividual(mes_popup,anio_popup,tempMes,tempAnio);
 
                          },this)
@@ -797,13 +797,12 @@
              'MesAnterior': tempMes,
              'AnioAnterior': tempAnio,
          };
-         $(".savingIcon").show();
          var Url = app.api.buildURL("MoverOperacion", '', {}, {});
          app.api.call("create", Url, {data: Params}, {
              success: _.bind(function (data) {
                  if (self.disposed) {
-                     this.saving = 0;
-                     $(".savingIcon").hide();
+
+                     app.alert.dismiss('moverAlert');
                      return;
                  }
 
@@ -812,7 +811,7 @@
                  }
                  $('#btn-Cancelar').prop('disabled',false);
                  $('#btn-GuardarMover').prop('disabled',false);
-                 $('.savingIcon').hide();
+                 app.alert.dismiss('moverAlert');
                  self.ocultaModal();
                  self.cargarBacklogsButton();
                  self.render();
@@ -928,17 +927,14 @@
             });
             return;
        }
-       //Notificacion de inicio de proceso
-        /*
-       app.alert.show('ComentAlert', {
+
+       $('#btn-Cancelar').prop('disabled',true);
+       $('#btn-Guardar').prop('disabled',true);
+        //Notificacion de inicio de proceso
+        app.alert.show('ComentAlert', {
             level: 'process',
             title: 'Cargando, por favor espere.',
         });
-        */
-        $();
-       $('#btn-Cancelar').prop('disabled',true);
-       $('#btn-Guardar').prop('disabled',true);
-       $('.savingIcon').show();
        //Generar Peticion para guardar comentario
         var Url = app.api.buildURL("BacklogComentarios", '', {}, {});
         app.api.call("create", Url, {data: Params}, {
@@ -947,8 +943,7 @@
                 self.backlogs.backlogs.MyBacklogs.linea[self.newComentario.idBacklog].comentado="fa-comment";
                 $('#btn-Cancelar').prop('disabled',false);
                 $('#btn-Guardar').prop('disabled',false);
-                //app.alert.dismiss('ComentAlert');
-                $('.savingIcon').hide();
+                app.alert.dismiss('ComentAlert');
                 self.ocultaModal();
                 self.render();
             },this),
