@@ -569,7 +569,7 @@
                                         <span class="btn Seleccionar switch-mini round-switch checkboxChange"> <input type="checkbox" title="Seleccionar" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}" data-numBacklog="{{numero_de_backlog}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-oppId="{{oppId}}" data-oppTipo="{{tipo_operacion}}"/></span>
                                         <!--<span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-porciento="{{porciento_ri}}" data-progreso="{{progreso}}"></span>-->
                                         <span class="btn MoverOperacion fa fa-hand-o-up " title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}"></span>
-                                        <span class="btn Cancelar fa fa-times-circle" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_de_la_operacion}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
+                                        <span class="btn Cancelar fa fa-times-circle updateCancelar" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_de_la_operacion}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
                                         <span class="btn Comentario fa {{comentado}} updateComentario" title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}" data-progreso="{{progreso}}"></span>
                                         <span class="btn Revivir fa fa-repeat updateRevivir" title="Revivir" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}"></span>
                                     </div>
@@ -945,7 +945,7 @@
   <div class="modal span12 " style="width:100%;height:100%">
     <div class="modal-content" style="margin:auto; width:50%">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
           <h2>COMENTARIOS DE OPERACIÓN</h2>
         </div>
         <div class="modal-body">
@@ -994,7 +994,7 @@
   <div class="modal span12 " style="width:100%;height:100%">
     <div class="modal-content" style="margin:auto; width:50%">
         <div class="modal-header">
-          <button type="button" class="close closeRe" data-dismiss="modal">&times;</button>
+          <!--<button type="button" class="close closeRe" data-dismiss="modal">&times;</button>-->
           <h2>REVIVIR OPERACIÓN</h2>
         </div>
         <div class="modal-body">
@@ -1045,6 +1045,95 @@
         <div align="right">
           <button class="btn btn-danger  btn-Model" id="btn-CancelarRe" type="submit">Cancelar</button>
           <button class="btn btn-success  btn-Model" id="btn-GuardarRe" type="submit">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Cancelar -->
+<div id="myModalCan" style="display:none" class="row-fluid">
+  <!-- Modal content -->
+  <div class="modal span12 " style="width:100%">
+    <div class="modal-content" style="margin:auto; width:50%">
+        <div class="modal-header">
+          <!--<button type="button" class="close closeCancelar" data-dismiss="modal">&times;</button>-->
+          <h2>CANCELAR OPERACIÓN</h2>
+        </div>
+        <div class="modal-body">
+          <table>
+            <tbody style="font-size:15px;" align="left">
+                <tr>
+                    <td><b>Operación</b></td>
+                    <td>{{newCancelar.nameBacklog}}</td>
+                </tr>          
+                <tr>
+                    <td><b>Monto Original</b></td>
+                    <td>${{customFormatNumber newCancelar.montoOriginalBacklog}}</td>
+                </tr>
+                <tr>
+                    <td><b>Renta Inicial Original</b></td>
+                    <td>${{customFormatNumber newCancelar.rentaInicialOriginal}}</td>
+                </tr>
+                <tr>
+                    <td><b>Motivo de Cancelación</b></td>
+                    <td>
+                        <select id="motivoCancelarC" class="motivoCancelarC">
+                            {{#each motivoCancelar}}
+                            <option value="{{@key}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </td>
+                </tr>
+                <tr class="Quien"><!---->
+                    <td>
+                        <b>¿Quién?</b>
+                        <br>
+                        <input type="text" name="Quien" class="QuienInput">
+                    </td>
+                </tr>
+                <tr class="Producto"><!---->
+                    <td>
+                        <b>¿Qué producto?</b>
+                        <br>
+                        <input type="text" name="producto" class="ProductoInput">
+                    </td>
+                </tr>
+                <div class="FechaCancelar" id="FechaCancelar" style="display: none;">
+                    <tr class="FechaCancelar">
+                        <td><b>Año:</b></td>
+                        <td><b>Mes: </b></td>
+                    </tr>
+                    <tr class="FechaCancelar">
+                        <td>
+                            <select id="anio_cancelar">    
+                                {{#each anioCancelar}}
+                               <option value="{{@key}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </td>
+                        <td>
+                            <select id="mes_cancelar" class="mes_cancelar">
+                                {{#each mesCancelar}}
+                               <option value="{{@key}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </td>
+                    </tr>
+                </div>
+            </tbody>
+          </table><br>
+
+          <div align="left">
+            <label style="font-size:15px;"><b>Comentarios:</b></label>
+            <textarea cols="12" name="texto3" id="ComentarioCan" class="form-control" style="margin: 1px; width: 97%; height: 61px; resize:none;"></textarea>
+          </div>
+        <br><br><br><br>
+      </div>
+      <div class="modal-footer">
+        <div align="right">
+          <button class="btn btn-danger  btn-Model" id="btn-CanCancelar" type="submit">Cancelar</button>
+          <button class="btn btn-success  btn-Model" id="btn-GuardarCan" type="submit">Guardar</button>
         </div>
       </div>
     </div>
