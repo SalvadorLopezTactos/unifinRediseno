@@ -216,7 +216,7 @@
             <tr>
                 <td>
                     <select id="mes_filtro" class="filtros">
-                      <option>Todos</option>
+                      <option value="{{mes_filtro}}">{{getUnifinListValue "mes_list" mes_filtro}}</option>
                       {{#each meses_list_html}}
                         {{#if @key}}
                             <option value="{{@key}}">{{this}}</option>
@@ -226,6 +226,7 @@
                 </td>
                 <td>
                     <select id="anio_filtro" class="filtros">
+                      <option value="{{anio_filtro}}">{{getUnifinListValue "anio_list" anio_filtro}}</option>  
                       {{#each anio_list_html_filter}}
                         {{#if @key}}
                             <option value="{{@key}}">{{this}}</option>
@@ -233,28 +234,17 @@
                       {{/each}}
                     </select>
                 </td>
-                <!--<td >-->
-                <!--<select id="region_filtro" class="filtros">-->
-                <!--{{{region_list_html}}}-->
-                <!--</select>-->
-                <!--</td>-->
                 <td>
                     <select id="equipo_filtro" class="filtros" >
-                      <option>Todos</option>
-                      {{#each equipo_list_html}}
-                        {{#if @key}}
-                            <option value="{{@key}}">{{this}}</option>
-                        {{/if}}
+                      {{#each equipo_list_html}}                        
+                            <option value="{{@key}}" {{ifSelected @key ../equipo_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
                 </td>
                 <td>
                     <select id="promotor_filtro" class="filtros">
-                      <option>Todos</option>
                       {{#each promotores_list_html}}
-                        {{#if @key}}
-                            <option value="{{@key}}">{{this}}</option>
-                        {{/if}}
+                        <option value="{{@key}}" {{ifSelected @key ../promotor_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
                 </td>
@@ -268,32 +258,29 @@
             <tr>
                 <td>
                     <select id="progreso_filtro" class="filtros">
-                      <option></option>
                       {{#each progreso_list_html}}
-                        <option value="{{@key}}">{{this}}</option>
+                        <option value="{{@key}}" {{ifSelected @key ../progreso_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
                 </td>
                 <td>
                     <select id="tipo_operacion_filtro" class="filtros">
-                      <option></option>
                       {{#each tipo_operacion_list_html}}
-                        <option value="{{@key}}">{{this}}</option>
+                        <option value="{{@key}}" {{ifSelected @key ../tipo_operacion_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
                 </td>
                 <td>
                     <select id="etapa_filtro" class="filtros">
-                      <option></option>
                       {{#each etapa_list_html}}
-                        <option value="{{@key}}">{{this}}</option>
+                        <option value="{{@key}}" {{ifSelected @key ../etapa_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
                 </td>
                 <td>
                     <select id="estatus_filtro" class="select2 filtros" multiple>
                       {{#each estatus_list_html}}
-                        <option value="{{@key}}">{{this}}</option>
+                        <option value="{{@key}}" {{ifMSelected @key ../estatus_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
                 </td>
@@ -309,6 +296,7 @@
     </div>
 
     <div class="barra_de_acciones">
+        <h1> Backlogs ({{totalRegistros}})</h1>
         <table>
             <tr>
                 <!--<td>
@@ -580,7 +568,7 @@
                                     <div class="btn-group">
                                         <span class="btn Seleccionar switch-mini round-switch checkboxChange"> <input type="checkbox" title="Seleccionar" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}" data-numBacklog="{{numero_de_backlog}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-oppId="{{oppId}}" data-oppTipo="{{tipo_operacion}}"/></span>
                                         <!--<span class="btn Comprometer icon-ok" title="Comprometer" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-monto-original="{{customFormatNumber monto_original}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-porciento="{{porciento_ri}}" data-progreso="{{progreso}}"></span>-->
-                                        <span class="btn MoverOperacion fa fa-hand-o-up" title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}"></span>
+                                        <span class="btn MoverOperacion fa fa-hand-o-up " title="Mover a otro mes" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}"></span>
                                         <span class="btn Cancelar fa fa-times-circle updateCancelar" title="Cancelar" data-oppId="{{oppId}}" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-renta_inicial="${{customFormatNumber ri_comprometida}}" data-estatus="{{estatus_de_la_operacion}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-oppTipo="{{tipo_operacion}}" data-progreso="{{progreso}}"></span>
                                         <span class="btn Comentario fa {{comentado}} updateComentario" title="Comentario" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-comentarios="{{comentarios}}" data-progreso="{{progreso}}"></span>
                                         <span class="btn Revivir fa fa-repeat updateRevivir" title="Revivir" data-id="{{@key}}" data-name="{{name}}" data-monto="${{customFormatNumber monto_comprometido}}" data-mreal="${{customFormatNumber monto_real}}" data-mes="{{mes_int}}" data-anio="{{anio}}" data-estatus="{{estatus_de_la_operacion}}" data-progreso="{{progreso}}"></span>
@@ -747,8 +735,8 @@
 <!-- Modal Ocultar Columnas -->
 <div id="myModalHideCols" style="display:none" class="row-fluid">
     <!-- Modal content -->
-    <div class="modal span12 " style="width:100%">
-        <div class="modal-content" style="margin:auto; width:50%">
+    <div class="modal span12 " style="width:100%;height:100%">
+        <div class="modal-content" style="margin:auto; width:25%">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h2 class="modal-title" style="margin: 0 auto;">Columnas</h2>
@@ -758,7 +746,7 @@
                     <tr>
                         <td>
                             <div class="row">
-                                <div class="span8" style="margin-left: 30px;margin-top: 10px;">
+                                <div class="span8" style="margin-left: 30px;margin-top: 20px;">
                                     <select id="sel_columnas" multiple size=22>
                                         <option value="none">Ninguno</option>
                                         <option value="hide_acciones">Acciones</option>
@@ -788,7 +776,7 @@
                                         <option value="hide_progreso">Solicitud</option>
                                     </select>
                                 </div>
-                                <div class="span1" style="margin-top: 10px;">
+                                <div class="span1" style="margin-top: 20px;">
                                     <input type="button" value="Ejecutar" id="btn_ejecuta_ocultar_columnas" class="btn btn-success"/>
                                     <input type="button" value="Cancelar" id="btn_cancela_ocultar_columnas" class="btn btn-danger" style="margin-top: 25px;"/>
                                 </div>
@@ -802,10 +790,86 @@
     </div>
 </div>
 
+
+<!-- Modal Mover Mes -->
+<div id="myModalMover" style="display:none" class="row-fluid">
+    <!-- Modal content -->
+    <div class="modal span12 " style="width:100%;height:100%">
+        <div class="modal-content" style="margin:auto; width:35%;height:50%;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2>MOVER OPERACIÓN</h2>
+            </div>
+            <div class="modal-body">
+                <div style="margin-left:15px;margin-bottom:20px">
+                <table>
+                    <tbody style="font-size:15px;" align="left">
+                    <tr>
+                        <td><b>Operación</b></td>
+                        <td>{{newMoverMes.nameBacklog}}</td>
+                    </tr>
+                    <tr>
+                        <td><b>Monto Original</b></td>
+                        <td>
+                            <span id="monto_mes">${{customFormatNumber newMoverMes.montoOriginalBacklog}}</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+                <table class="popuptables" style="display: {{mes_switch}};">
+                    <tr>
+                        <td>
+                            Año:
+                        </td>
+                        <td></td>
+                        <td>
+                            <select class="anio_switch_popup">
+                                <option value="{{anio_filtro_popup_mover}}">{{getUnifinListValue "anio_list" anio_filtro_popup_mover}}</option>
+                                {{#each anio_list_html_mover}}
+                                    {{#if @key}}
+                                        <option value="{{@key}}">{{this}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mes:
+                        </td>
+                        <td></td>
+                        <td>
+                            <select class="mes_switch_popup">
+                                <option value="{{mes_filtro_mover_op}}">{{getUnifinListValue "mes_list" mes_filtro_mover_op}}</option>
+                                {{#each meses_list_html}}
+                                    {{#if @key}}
+                                        <option value="{{@key}}">{{this}}</option>
+                                    {{/if}}
+                                {{/each}}
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div align="right">
+                    <button class="btn btn-danger  btn-Model" id="btn-Cancelar" type="submit">Cancelar</button>
+                    <!-- <button class="btn btn-success  btn-Model" id="btn-GuardarMover" type="submit">Guardar</button> -->
+                    <span class="btn btn-success btn-Model" title="Guardar" id="btn-GuardarMover">
+                        Guardar
+                        <i class="fa fa-spinner fa-spin savingIcon" style="display: none"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Modal Comentarios -->
 <div id="myModal" style="display:none" class="row-fluid">
   <!-- Modal content -->
-  <div class="modal span12 " style="width:100%">
+  <div class="modal span12 " style="width:100%;height:100%">
     <div class="modal-content" style="margin:auto; width:50%">
         <div class="modal-header">
           <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
@@ -841,7 +905,10 @@
       <div class="modal-footer">
         <div align="right">
           <button class="btn btn-danger  btn-Model" id="btn-Cancelar" type="submit">Cancelar</button>
-          <button class="btn btn-success  btn-Model" id="btn-Guardar" type="submit">Guardar</button>
+            <span class="btn btn-success btn-Model" title="Guardar" id="btn-Guardar">
+                Guardar
+                <i class="fa fa-spinner fa-spin savingIcon" style="display: none"></i>
+            </span>
         </div>
       </div>
     </div>
@@ -851,7 +918,7 @@
 <!-- Modal Revivir -->
 <div id="myModalRe" style="display:none" class="row-fluid">
   <!-- Modal content -->
-  <div class="modal span12 " style="width:100%">
+  <div class="modal span12 " style="width:100%;height:100%">
     <div class="modal-content" style="margin:auto; width:50%">
         <div class="modal-header">
           <!--<button type="button" class="close closeRe" data-dismiss="modal">&times;</button>-->
