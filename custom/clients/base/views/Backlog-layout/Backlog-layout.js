@@ -36,6 +36,15 @@
         'click #btn-GuardarRe':'guardaRevivir',
         'click .closeRe': 'ocultaRevivir',
         'change #anio_revivir':'fecha',
+        //Nuevos eventos de cancelar
+        'click .updateCancelar':'cancelarNew',
+        'click #btn-CanCancelar':'ocultaCancelar',
+        'click #btn-GuardarCan':'guardaCancelar',
+        'click .closeCancelar':'ocultaCancelar',
+        'change #anio_cancelar':'fechaCancelar',
+        'change #motivoCancelar':'motivoCancelarC',
+        'change .motivoCancelarC':'motivoCancelarC'
+
     },
 
     meses_list_html : null,
@@ -69,11 +78,15 @@
         this.NumeroBacklogSortDirection = 'DESC';
         this.MontoOperacionSortDirection = 'DESC';
         this.MontoFinalSortDirection = 'DESC';
-        //Objetos de comentario y revivir
+        //Objetos de comentario, revivir, cancerlar
         this.newComentario='';
         this.newRevivir='';
+        this.newCancelar='';
         this.anioRevivir='';
         this.mesRevivir='';
+        this.anioCancelar='';
+        this.mesCancelar='';
+        this.motivoCancelar='';
     },
 
     loadData: function (options) {
@@ -747,5 +760,232 @@
                 });
             }
         }); 
+    },
+
+    //Funciones de cancelar
+    fechaCancelar:function(){
+        //Muestra de año
+        var self=this;
+        var currentYear = (new Date).getFullYear();
+        var currentMonth = (new Date).getMonth();
+        var currentMonthTemp = (new Date).getMonth();
+        var currentDay = (new Date).getDate();
+        var limitMonth = currentMonth + 3;
+        var nextMonth = 0;
+        var nextYear = currentYear;
+        var anio_popup=$('#anio_cancelar').val();
+
+        if (limitMonth > 12) {
+            nextMonth = limitMonth - 12;
+            nextYear = currentYear + 1;
+        }
+
+        currentMonth = currentMonthTemp +1;
+        this.anioCancelar = app.lang.getAppListStrings('anio_list');
+        Object.keys(this.anioCancelar).forEach(function(key){
+            //Quita años previos
+            if(key < currentYear){
+                delete self.anioCancelar[key];
+            }
+            //Habilita años futuros
+            if(key > nextYear){
+                delete self.anioCancelar[key];
+            }
+        });
+
+        //Muestra de meses 
+        this.mesCancelar = app.lang.getAppListStrings('mes_list');
+        //Quita meses para año futuro
+        if(anio_popup > currentYear){
+            Object.keys(this.mesCancelar).forEach(function(key){
+                if(key != ''){
+                    if(key > nextMonth){
+                        delete self.mesCancelar[key];
+                    }
+                }
+            });
+        }
+        //Quita meses para año actual
+        if(anio_popup == currentYear || anio_popup ==""){
+            Object.keys(this.mesCancelar).forEach(function(key){
+                if(key != ''){
+                    //Quita meses fuera de rango(3 meses)
+                    if(key < currentMonth || key >limitMonth ){
+                        delete self.mesCancelar[key];
+                    }
+                }
+            });
+        }
+    },    
+
+
+    cancelarNew:function(e){
+        this.fechaCancelar();
+        this.motivoCancelar=app.lang.getAppListStrings('motivo_de_cancelacion_list');
+        var idBacklog=e.currentTarget.getAttribute('data-id');
+        var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
+        this.newCancelar={
+            "idBacklog":idBacklog,
+            "nameBacklog":backlog.name,
+            "montoOriginalBacklog":backlog.monto_comprometido,
+            "rentaInicialOriginal":backlog.ri_comprometida,
+            "motivoCancelacion":'',
+            "status":backlog.estatus_de_la_operacion,
+            "mesBacklog":backlog.mes_int,
+            "anioBacklog":"20"+backlog.anio
+        };
+        self.render();
+        var modal = $('#myModalCan');
+        modal.show();
+        $('.Quien').hide();
+        $('.Producto').hide();
+        $('.FechaCancelar').hide();
+        //$("#formulariomayores").css("display", "block")
+        },
+
+    motivoCancelarC:function(){
+        this.motivoCancelar=app.lang.getAppListStrings('motivo_de_cancelacion_list');;
+        if($('#motivoCancelarC').val()=='Competencia'){
+            $('.Quien').show();
+        }else{
+            $('.Quien').hide();
+        }
+        if($('#motivoCancelarC').val()=='No tenemos el producto que requiere'){
+            $('.Producto').show();
+        }else{
+            $('.Producto').hide();
+        }
+        if($('#motivoCancelarC').val()=='Mes posterior'){
+            $('.FechaCancelar').show();
+        }else{
+            $('.FechaCancelar').hide();
+        }
+    },
+
+    guardaCancelar:function(){
+        var mes=$('#mes_cancelar').val();
+        var anio=$('#anio_cancelar').val();
+        var comentarios=$('#ComentarioCan').val();
+        var motivo=$('#motivoCancelarC').val();
+        var competencia=$('.QuienInput');
+        var producto=$('.ProductoInput');
+        
+        
+        if( $('#motivoCancelarC').val()==null || $('#motivoCancelarC').val()==""){
+            app.alert.show('motivo_requerido', {
+                level: 'error',
+                messages: 'El motivo de cancelacion es requerido',
+                autoClose: true
+            });
+            $('#motivoCancelarC').css('border-color', 'red');
+        }
+
+        if($('#motivoCancelarC').val()=="Competencia" && ($('.QuienInput').val()==null || $('.QuienInput').val()=="" competencia.trim()==0 )){
+            app.alert.show('Competencia_requerida', {
+                level: 'error',
+                messages: 'El campo Quién es requerido',
+                autoClose: true
+            });
+            $('.QuienInput').css('border-color', 'red');
+            return;
+        }
+        if($('#motivoCancelarC').val()=="No tenemos el producto que requiere" && ($('.ProductoInput').val()==null || $('.ProductoInput').val()=="" || producto.trim()==0)){
+            app.alert.show('Producto_requerido', {
+                level: 'error',
+                messages: 'El campo Producto es requerido',
+                autoClose: true
+            });
+            $('.ProductoInput').css('border-color', 'red');
+            return;            
+        }
+        if($('#motivoCancelarC').val()=='Mes posterior' &&($('.mes_cancelar').val()==0 || $('.mes_cancelar').val()==null || $('.mes_cancelar').val()=="")){
+            app.alert.show('mes_requerido', {
+                level: 'error',
+                messages: 'Debe indicar el mes para el nuevo Backlog',
+                autoClose: true
+            });
+            $('.mes_cancelar').css('border-color', 'red'); 
+            return;           
+        }
+
+        if(self.progresoBL == 'SI'){
+           if (self.rolAutorizacion == 'DGA'){
+               if(!confirm('El Bl cuenta con operaciones en Pipe.  ¿Desea cancelar?')){
+                   return;
+                }
+            }else {
+               app.alert.show('Operaciones en Pipe', {
+                   level: 'error',
+                   messages: 'El BL no puede ser cancelado debido a que tiene operaciones en pipeline',
+                   autoClose: true
+               });
+                return;
+            }
+        }
+        
+        var currentYear = (new Date).getFullYear();
+        var currentMonth = ((new Date).getMonth()) + 1;
+        var currentDay = (new Date).getDate();
+        var fechaCancelacion = currentMonth + '/' + currentDay + '/' + currentYear;
+        comentarios += '\r\n' + "UNI2CRM - " + fechaCancelacion + ": MOTIVO DE CANCELACION -> " + motivo;
+
+        var Params={
+            'backlogId':this.newCancelar.idBacklog,
+            'backlogName':this.newCancelar.backlogName,
+            'MontoReal':this.newCancelar.montoOriginalBacklog,
+            'motivoCancelacion':motivo,
+            'RentaReal':this.newCancelar.rentaInicialOriginal,
+            'Comentarios':comentarios,
+            'Mes':mes,
+            'Anio':anio,
+            'MesAnterior':this.newCancelar.mesBacklog,
+            'AnioAnterior':this.newCancelar.anioBacklog,
+            'Competencia':'',
+            'Producto':''
+        };
+
+        //Notificacion de inicio de proceso
+       app.alert.show('CancelAlert', {
+            level: 'process',
+            title: 'Cargando, por favor espere.',
+        });
+       $('#btn-CanCancelar').prop('disabled',true);
+       $('#btn-GuardarCan').prop('disabled',true);
+
+        var Url = app.api.buildURL("BacklogCancelar", '', {}, {});
+        app.api.call("create", Url, {data: Params}, {
+            success: _.bind(function (data) {
+                if (data ==1){
+                    //Elimina el registro del objeto Backlogs
+                    delete self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog];
+                }
+                else{
+                    //Marcar como cancelado, pintar en rojo y status en cancelada
+                    self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].color="#FF6666";
+                    self.backlogs.backlogs.MyBacklogs.linea[self.newCancelar.idBacklog].estatus_de_la_operacion="Cancelada";
+                }
+                $('#btn-CanCancelar').prop('disabled',false);
+                $('#btn-GuardarCan').prop('disabled',false);
+                app.alert.dismiss('CancelAlert');
+                self.ocultaCancelar();
+                //self.cargarBacklogsButton();
+                self.render();
+            },this),
+            error:function(error){
+                $('#btn-CanCancelar').prop('disabled',false);
+                $('#btn-GuardarCan').prop('disabled',false);
+                app.alert.dismiss('CancelAlert');
+                app.alert.show('errorAlertCancelar',{
+                    level:'error',
+                    messages:error,
+                    autoClose:true
+                })
+            }        
+        });
+    },
+
+    ocultaCancelar:function(){
+        var modal = $('#myModalCan');
+        modal.hide();
     },
 })
