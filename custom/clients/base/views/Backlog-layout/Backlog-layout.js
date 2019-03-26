@@ -39,9 +39,9 @@
 
         //Nuevos eventos de comentarios en Modal
         'click .updateComentario': 'comentarioNew',
-        'click .btn-danger': 'ocultaModal',
+        'click #btn-CancelarComen': 'ocultaModal',
         'click .close': 'ocultaModal',
-        'click  #btn-Guardar': 'GuardaComentario',
+        'click  #btn-GuardarComen': 'GuardaComentario',
         //Nuevos eventos de Revivir en Modal
         'click .updateRevivir':'revivirNew',
         'click #btn-CancelarRe':'ocultaRevivir',
@@ -1377,8 +1377,8 @@
             return;
        }
 
-       $('#btn-Cancelar').prop('disabled',true);
-       $('#btn-Guardar').prop('disabled',true);
+       $('#btn-CancelarComen').prop('disabled',true);
+       $('#btn-GuardarComen').prop('disabled',true);
         //Notificacion de inicio de proceso
         app.alert.show('ComentAlert', {
             level: 'process',
@@ -1390,15 +1390,15 @@
             success: _.bind(function (data) {
                 self.backlogs.backlogs.MyBacklogs.linea[self.newComentario.idBacklog].comentarios=data;
                 self.backlogs.backlogs.MyBacklogs.linea[self.newComentario.idBacklog].comentado="fa-comment";
-                $('#btn-Cancelar').prop('disabled',false);
-                $('#btn-Guardar').prop('disabled',false);
+                $('#btn-CancelarComen').prop('disabled',false);
+                $('#btn-GuardarComen').prop('disabled',false);
                 app.alert.dismiss('ComentAlert');
                 self.ocultaModal();
                 self.render();
             },this),
             error:function(error){
-                $('#btn-Cancelar').prop('disabled',false);
-                $('#btn-Guardar').prop('disabled',false);
+                $('#btn-CancelarComen').prop('disabled',false);
+                $('#btn-GuardarComen').prop('disabled',false);
                 app.alert.dismiss('ComentAlert');
                 app.alert.show('errorAlert', {
                     level: 'error',
@@ -1419,8 +1419,7 @@
         var limitMonth = currentMonth + 3;
         var nextMonth = 0;
         var nextYear = currentYear;
-        var anio_popup=$('#anio_revivir').val();
-
+        var anio_popup=($('#anio_revivir').val()==null) ? currentYear: $('#anio_revivir').val();
         if (limitMonth > 12) {
             nextMonth = limitMonth - 12;
             nextYear = currentYear + 1;
@@ -1488,8 +1487,6 @@
             });
            return;
         }
-
-
         self.render();
         var modal = $('#myModalRe');
         modal.show();
@@ -1560,7 +1557,7 @@
         var limitMonth = currentMonth + 3;
         var nextMonth = 0;
         var nextYear = currentYear;
-        var anio_popup=$('#anio_cancelar').val();
+        var anio_popup = ($('#anio_cancelar').val() == null) ? currentYear : $('#anio_cancelar').val();
 
         if (limitMonth > 12) {
             nextMonth = limitMonth - 12;
@@ -1642,7 +1639,7 @@
     },
 
     motivoCancelarC:function(){
-        this.motivoCancelar=app.lang.getAppListStrings('motivo_de_cancelacion_list');;
+        this.motivoCancelar=app.lang.getAppListStrings('motivo_de_cancelacion_list');
         if($('#motivoCancelarC').val()=='Competencia'){
             $('.Quien').show();
         }else{
