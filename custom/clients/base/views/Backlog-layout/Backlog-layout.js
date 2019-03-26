@@ -991,6 +991,10 @@
              this.checks_no_actualizar=arr_checks_no_actualizar;
 
              self.render();
+             //Recorriendo registros seleccionados para persistencia después de aplicar render
+             for(var i=0;i< this.checks_actualizar.length;i++){
+                    $('input[type="checkbox"][data-id="'+this.checks_actualizar[i].getAttribute('data-id')+'"]').attr("checked",true)
+            }
 
              var modalMoverMasiva = $('#myModalMoverMasiva');
              modalMoverMasiva.show();
