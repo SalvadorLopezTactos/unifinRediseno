@@ -32,6 +32,10 @@
         'click .MoverOperacion': 'moverOperacion',
         'click #btn-GuardarMover':'moverMes',
 
+        //Nuevos eventos para mover masivo
+        'click .MoverOperacionMasiva': 'moverOperacionMasiva',
+        'click #btn-GuardarMoverMasiva':'moverMesMasivo',
+
 
         //Nuevos eventos de comentarios en Modal
         'click .updateComentario': 'comentarioNew',
@@ -115,7 +119,9 @@
         this.estatus_list_html[''] = "";
         //Variable para total de registros
         this.totalRegistros = 0;
-        
+
+        this.anio_filtro_popup_mover='';
+        this.mes_filtro_mover_op='';
 
 
 
@@ -676,13 +682,16 @@
          var lista_mes_anio=this.getMonthYear();
          this.anio_list_html_mover=lista_mes_anio['anio'];
 
-         this.meses_list_html=lista_mes_anio['mes'];
+         this.meses_list_html_mover=lista_mes_anio['mes'];
 
 
          self.render();
 
          var modalMover = $('#myModalMover');
          modalMover.show();
+
+
+         var arr_values=[];
 
      },
 
@@ -699,7 +708,7 @@
          if(_.isEmpty(anio_popup)){
              app.alert.show('anio requerido', {
                  level: 'error',
-                 messages: 'Favor de completar la informacion.',
+                 messages: 'Favor de completar la informaci\u00F3n.',
                  autoClose: false
              });
              return;
@@ -720,6 +729,8 @@
          var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&filter[3][estatus_de_la_operacion][$not_equals]=Cancelada&fields=id,mes,estatus_de_la_operacion',
              null, null, null);
 
+        $('#btn-Cancelar').prop('disabled',true);
+        $('#btn-GuardarMover').prop('disabled',true);
          //Notificacion de inicio de proceso
          app.alert.show('moverAlert', {
              level: 'process',
@@ -731,6 +742,8 @@
 
                  var meses =['0','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
                  if(data.records.length>0){
+                    $('#btn-Cancelar').prop('disabled',false);
+                    $('#btn-GuardarMover').prop('disabled',false);
                      app.alert.dismiss('moverAlert');
                      app.alert.show('error_bl_mes', {
                          level: 'error',
@@ -834,6 +847,388 @@
          });
      },
 
+     moverOperacionMasiva:function () {
+
+         var arr_checks=[];
+         var arr_checks_actualizar=[];
+         var arr_checks_no_actualizar=[];
+
+         //Obteniendo valores del apartado de filtros
+         var tempMes = $("#mes_filtro").val();
+         var tempAnio = $("#anio_filtro").val();
+         var tempRegion = $("#region_filtro").val();
+         var tempTipoOperacion = $("#tipo_operacion_filtro").val();
+         var tempEtapa = $("#etapa_filtro").val();
+         var tempEstatus = $("#estatus_filtro").val();
+         var tempEquipo = $("#equipo_filtro").val();
+
+         //Obteniendo campos check
+         var checks=$('input[type="checkbox"]');
+
+         //AGREGANDO CHECKS SELECCIONADOS
+         $.each( checks, function( key, value ) {
+             if(value['checked']==true && value['id'] !== "selectAll"){
+                 //array_checks contendrá los campos checks con valor true
+                 //this.array_checks.push(checks[key]);
+                 arr_checks.push(checks[key]);
+             }
+         });
+
+         this.array_checks=arr_checks;
+         this.countChecks=this.array_checks.length;
+
+         var tempPromotor = $("#promotor_filtro").val();
+         var tempProgreso = $("#progreso_filtro").val();
+
+         var rolAutorizacion = self.rolAutorizacion;
+
+         var currentYear = (new Date).getFullYear();
+         var currentAnioSub= currentYear.toString().substr(-2);
+         var currentBacklogMonth = this.backlogMonth();
+
+         var countChecks= this.array_checks.length;
+
+         if(countChecks>0){
+             //Recorriendo arreglo de checks
+             for(var i=0;i<countChecks;i++){
+                 var backlogId = this.array_checks[i].getAttribute('data-id');
+                 var backlogName = this.array_checks[i].getAttribute('data-name');
+                 var monto = this.array_checks[i].getAttribute('data-monto');
+                 var backlogMes = this.array_checks[i].getAttribute('data-mes');
+                 var backlogAnio = this.array_checks[i].getAttribute('data-anio');
+                 var backlogEstatus = this.array_checks[i].getAttribute('data-estatus');
+                 var backlogNum = this.array_checks[i].getAttribute('data-numbacklog');
+
+                 if(backlogAnio <= currentAnioSub) {
+                     // Si el BL ya esta cancelado no puede moverse
+                     //if(backlogEstatus != 'Activa') {
+                     if(backlogEstatus == 'Cancelada') {
+
+                         app.alert.show('backlog_pasado', {
+                             level: 'error',
+                             //messages: 'Esta operacion no puede moverse debido a que se encuentra ' + backlogEstatus,
+                             messages: 'Alguna de las operaciones no puede moverse debido a que se encuentra ' + backlogEstatus +
+                             '<br>No. Backlog: '+ backlogNum,
+                             autoClose: false
+                         });
+
+                         $('input[type="checkbox"][data-id='+backlogId+']').attr('checked',false);
+                         return;
+
+                     }else {
+                         // No se pueden mover los Backlogs del mes actual BL una vez que ha iniciado
+                         var currentDay = (new Date).getDate();
+                         var BacklogCorriente = this.getElaborationBacklog();
+
+                         if(backlogAnio <= currentAnioSub){
+                             if(backlogMes <= BacklogCorriente && backlogEstatus != 'Cancelada') {
+                                 if (backlogMes == BacklogCorriente /*&& currentDay > 15*/ && currentDay <= 20){
+                                     if (currentDay == 21 && rolAutorizacion != "DGA") {
+
+                                         arr_checks_no_actualizar.push(this.array_checks[i]);
+
+                                     }else{
+                                         arr_checks_actualizar.push(this.array_checks[i]);
+                                     }
+                                 }else{
+                                     if (rolAutorizacion == "Promotor"){
+                                         //Si es un Backlog anterior o igual al mes corriente natural nadie puede
+
+                                         app.alert.show('backlog corriente', {
+                                             level: 'error',
+                                             //messages: 'Esta operacion no puede moverse debido a que el Backlog ya esta corriendo.',
+                                             messages: 'Alguna de las operaciones seleccionadas no puede moverse debido a que el Backlog ya est\u00E1 corriendo <br>'+
+                                             'No. Backlog: '+backlogNum,
+                                             autoClose: false
+                                         });
+
+                                         $('input[type="checkbox"][data-id='+backlogId+']').attr('checked',false);
+
+                                         return;
+
+                                         //arr_checks_no_actualizar.push(this.array_checks[i]);
+                                     }else{
+                                         arr_checks_actualizar.push(this.array_checks[i]);
+                                     }
+                                 }
+                             }else{
+                                 arr_checks_actualizar.push(this.array_checks[i]);
+                             }
+
+                         }
+
+                     }
+                 }else{
+                     //this.checks_actualizar.push(this.array_checks[i]);
+                     arr_checks_actualizar.push(this.array_checks[i]);
+                 }
+
+             }
+
+             //this.checks_actualizar=arr_checks_actualizar;
+             //this.checks_no_actualizar=arr_checks_no_actualizar;
+
+         }
+
+         //CONDICIÓN PARA SABER SI SE DEBE MOSTRAR POPUP PARA ACTUALIZACIÓN MASIVA
+         if(arr_checks_actualizar.length > 0){
+
+             this.countChecks=arr_checks_actualizar.length;
+
+             //Valores default año y mes
+             this.anio_filtro_popup_mover = ((new Date).getFullYear()).toString();
+             this.mes_filtro_mover_op=((new Date).getMonth()+1).toString();
+
+
+             //Listas generadas para año y mes
+             var lista_mes_anio=this.getMonthYear();
+             this.anio_list_html_mover=lista_mes_anio['anio'];
+
+             this.meses_list_html_mover=lista_mes_anio['mes'];
+
+             this.checks_actualizar=arr_checks_actualizar;
+             this.checks_no_actualizar=arr_checks_no_actualizar;
+
+             self.render();
+
+             var modalMoverMasiva = $('#myModalMoverMasiva');
+             modalMoverMasiva.show();
+
+         }else{
+
+             app.alert.show('cheks_no_actualizar', {
+                 level: 'error',
+                 messages: 'Alguno de los registros relacionados no se puede mover.',
+                 autoClose: false
+             });
+
+         }
+
+     },
+
+     moverMesMasivo:function(){
+
+         var tempMes = $("#mes_filtro").val();
+         var tempAnio = $("#anio_filtro").val();
+         var mes_popup = $('.mes_switch_masivo_popup').val();
+         var anio_popup = $('.anio_masivo_switch_popup').val();
+         var current_backlog = $('#mes_filtro').val();
+
+         if(_.isEmpty(anio_popup)){
+             app.alert.show('anio requerido', {
+                 level: 'error',
+                 messages: 'Favor de completar la informaci\u00F3n.',
+                 autoClose: false
+             });
+             return;
+         }
+
+         var countChecks=this.checks_actualizar.length;
+
+         //Añadir validación para evitar crear Backlogs a Cuentas que ya tienen registros de Backlog en el mismo mes al que se quiere mover
+         if(countChecks>0){
+
+             this.controlCount=0;
+             this.count=0;
+
+             for(var i=0; i<countChecks;i++){
+
+                 var current_element=this.checks_actualizar[i];
+                 var idBacklog=current_element.getAttribute('data-id');
+                 var bl_check=$('.MoverOperacion[data-id="'+idBacklog+'"]');
+                 var str=bl_check.closest('tr').children('.hide_cliente').children('a').attr('href');
+                 var num_bl=bl_check.closest('tr').children('.hide_operacion').children('a').text();
+                 var arr_p=str.split('#Accounts/');
+                 var id_account=arr_p[1];
+                 var bl_url = app.api.buildURL('lev_Backlog?filter[0][account_id_c][$equals]='+id_account+'&filter[1][mes][$equals]='+mes_popup+'&filter[2][anio][$equals]='+anio_popup+'&fields=id,mes,estatus_de_la_operacion,name',
+                     null, null, null);
+
+                $('#btn-Cancelar').prop('disabled',true);
+                $('#btn-GuardarMoverMasiva').prop('disabled',true);
+                 //Notificacion de inicio de proceso
+                 app.alert.show('moverMasivoAlert', {
+                     level: 'process',
+                     title: 'Cargando, por favor espere.',
+                 });
+
+                 app.api.call('GET', bl_url, {}, {
+                     success: _.bind(function (data) {
+                         app.alert.dismiss('moverMasivoAlert');
+
+                         var meses =['0','Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+                         if(data.records.length>0){
+                             var name_bl=data.records[0].name;
+                             var arr_for_cuenta=name_bl.split('-');
+
+                            $('#btn-Cancelar').prop('disabled',false);
+                            $('#btn-GuardarMoverMasiva').prop('disabled',false);
+
+                             app.alert.show('error_bl_mes', {
+                                 level: 'error',
+                                 messages: 'La cuenta: '+arr_for_cuenta[2]+' ya posee un backlog en el mes: '+meses[data.records[0].mes],
+                                 autoClose: false
+                             });
+                             return;
+
+
+                         }else{
+                             this.controlCount++;
+                             var Url = app.api.buildURL("UpdateFechaBl", '', {}, {});
+                             var Params = {
+                                 "bl":num_bl,
+                                 "mesActual":tempMes,
+                                 "anioActual":tempAnio,
+                                 "mesNuevo":mes_popup,
+                                 "anioNuevo":anio_popup
+                             };
+                             app.api.call("create", Url, {data: Params}, {
+                                 success: _.bind(function (data) {
+                                 },this)
+                             });
+                             if(this.controlCount==this.checks_actualizar.length){
+                                 this.moverOperacionAfterValidate(mes_popup,anio_popup,tempMes,tempAnio);
+                             }
+
+                         }
+                         this.count++;
+
+
+                     },this)
+
+                 });
+
+             }
+
+
+         }
+
+     },
+
+     moverOperacionAfterValidate:function(mes_popup,anio_popup,tempMes,tempAnio){
+         var currentYear = (new Date).getFullYear();
+         var currentMonth = (new Date).getMonth();
+         var currentDay = (new Date).getDate();
+         var tipo_opp = '';
+         var periodo_revision = false;
+         var access = $('#access').val();
+         //currentMonth += 1;
+
+         if(currentDay <= 20){
+             currentMonth += 1;
+         }
+         if(currentDay > 20){
+             currentMonth += 2;
+         }
+
+         if (currentMonth > 12){  //Si resulta mayor a diciembre
+             currentMonth = currentMonth - 12;
+         }
+
+         if(anio_popup <= currentYear){
+             if(mes_popup > currentMonth){
+                 tipo_opp = "Original";
+             }
+             else if(mes_popup == currentMonth){
+                 tipo_opp = "Adicional";
+             }else{
+                 tipo_opp = "Adicional";
+             }
+         }else{
+             tipo_opp = "Original";
+         }
+         // CVV regresar a 20
+         if(currentDay >= 15 && currentDay <= 19){
+             periodo_revision = true;
+         }
+
+         var countChecks=this.checks_actualizar.length;
+         if(countChecks>0){
+
+             var successCount=0;
+             var countChecksError=this.checks_no_actualizar.length;
+             var actualizadosResumen="";
+             var noActualizadosResumen="";
+             //Ciclo para llenar cadena para mostrar mensaje de resumen sobre registros no actualizados debido a algún error
+             if(countChecksError>0){
+                 for(var j=0;j<this.checks_no_actualizar.length;j++){
+                     noActualizadosResumen+="No. Backlog: "+this.checks_no_actualizar[j].getAttribute('data-numBacklog')+"<br>"
+                 }
+
+             }
+             for(var i=0;i<countChecks;i++){
+
+                 var Params = {
+                     'backlogId': this.checks_actualizar[i].getAttribute('data-id'),
+                     'backlogName': this.checks_actualizar[i].getAttribute('data-name'),
+                     'mes_popup': mes_popup,
+                     'anio_popup': anio_popup,
+                     'tipo_operacion': tipo_opp,
+                     'periodo_revision': periodo_revision,
+                     'access': access,
+                     //'monto_comprometido': $('#monto_mes').html(),
+                     'rolAutorizacion': self.rolAutorizacion,
+                     'MesAnterior': tempMes,
+                     'AnioAnterior': tempAnio,
+
+                 };
+                 actualizadosResumen+="No. Backlog: "+this.checks_actualizar[i].getAttribute('data-numBacklog')+"<br>";
+                 //Notificacion de inicio de proceso
+                 app.alert.show('moverMasivoAlert', {
+                     level: 'process',
+                     title: 'Cargando, por favor espere.',
+                 });
+                 var Url = app.api.buildURL("MoverOperacion", '', {}, {});
+                 app.api.call("create", Url, {data: Params}, {
+                     success: _.bind(function (data) {
+                         successCount++;
+                         if (self.disposed) {
+                             this.saving = 0;
+                             app.alert.dismiss('moverMasivoAlert');
+                             return;
+                         }
+
+                         if(!_.isEmpty(data)){
+                             alert(data);
+                         }
+
+                         //Validación para saber si se ejecutó el último índice
+                         if(successCount==countChecks){
+
+                             $('#btn-Cancelar').prop('disabled',false);
+                             $('#btn-GuardarMoverMasiva').prop('disabled',false);
+                             app.alert.dismiss('moverMasivoAlert');
+                             self.ocultaModal();
+                             self.cargarBacklogsButton();
+                             self.render();
+
+                             app.alert.show('success_actualizar', {
+                                 level: 'success',
+                                 messages: countChecks +" Registros actualizados:<br>"+ actualizadosResumen,
+                                 autoClose: false
+                             });
+
+
+
+                             if(countChecksError>0){
+                                 app.alert.show('info_no_actualizar', {
+                                     level: 'info',
+                                     messages: countChecksError +" Registros no actualizados:<br>"+ noActualizadosResumen,
+                                     autoClose: false
+                                 });
+
+                             }
+                             this.array_checks=[];
+
+                         }
+                     },this),
+
+                 });
+
+             }
+
+         }
+     },
+
      getMonthYear:function () {
 
          var currentMonth = (new Date).getMonth()+1;
@@ -891,6 +1286,41 @@
 
      },
 
+     backlogMonth: function(){
+         var currentMonth = (new Date).getMonth();
+         var currentDay = (new Date).getDate();
+
+         if(currentDay <= 20){
+             currentMonth += 1;
+         }
+         if(currentDay > 20){
+             currentMonth += 2;
+         }
+         if (currentMonth > 12){  //Si resulta mayor a diciembre
+             currentMonth = currentMonth - 12;
+         }
+
+         return currentMonth;
+     },
+
+     getElaborationBacklog: function(){
+         //Obtiene el Backlog en elaboración
+         var currentDay = (new Date).getDate();
+         var BacklogCorriente = (new Date).getMonth();
+
+         if(currentDay > 15){ // Si ya cerro el periodo de elaboración de promotor, el Backlog del siguiente mes (natural) se encuentra corriendo
+             BacklogCorriente += 2;
+         }else{
+             BacklogCorriente += 1;
+         }
+
+         if (BacklogCorriente > 12){  //Si resulta mayor a diciembre
+             BacklogCorriente = BacklogCorriente - 12;
+         }
+
+         return BacklogCorriente;
+     },
+
     //Nuevas Funciones Comentario
     comentarioNew:function(e){
         var idBacklog=e.currentTarget.getAttribute('data-id');
@@ -916,6 +1346,10 @@
         //Modal Mover Operación
         var modalMover=$('#myModalMover');
         modalMover.hide();
+
+        //Modal Mover Operación Masiva
+        var modalMoverMasiva=$('#myModalMoverMasiva');
+        modalMoverMasiva.hide();
 
         //Modal comentarios
         var modal = $('#myModal');

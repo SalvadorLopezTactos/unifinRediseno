@@ -825,12 +825,12 @@
                         <td></td>
                         <td>
                             <select class="anio_switch_popup">
-                                <option value="{{anio_filtro_popup_mover}}">{{getUnifinListValue "anio_list" anio_filtro_popup_mover}}</option>
                                 {{#each anio_list_html_mover}}
                                     {{#if @key}}
                                         <option value="{{@key}}">{{this}}</option>
                                     {{/if}}
                                 {{/each}}
+                                
                             </select>
                         </td>
                     </tr>
@@ -841,12 +841,12 @@
                         <td></td>
                         <td>
                             <select class="mes_switch_popup">
-                                <option value="{{mes_filtro_mover_op}}">{{getUnifinListValue "mes_list" mes_filtro_mover_op}}</option>
-                                {{#each meses_list_html}}
+                                {{#each meses_list_html_mover}}
                                     {{#if @key}}
                                         <option value="{{@key}}">{{this}}</option>
                                     {{/if}}
                                 {{/each}}
+                                
                             </select>
                         </td>
                     </tr>
@@ -855,11 +855,84 @@
             <div class="modal-footer">
                 <div align="right">
                     <button class="btn btn-danger  btn-Model" id="btn-Cancelar" type="submit">Cancelar</button>
-                    <!-- <button class="btn btn-success  btn-Model" id="btn-GuardarMover" type="submit">Guardar</button> -->
+                    <button class="btn btn-success  btn-Model" id="btn-GuardarMover" type="submit">Guardar</button>
+                    <!--
                     <span class="btn btn-success btn-Model" title="Guardar" id="btn-GuardarMover">
                         Guardar
                         <i class="fa fa-spinner fa-spin savingIcon" style="display: none"></i>
                     </span>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Mover Masivo -->
+<div id="myModalMoverMasiva" style="display:none" class="row-fluid">
+    <!-- Modal content -->
+    <div class="modal span12 " style="width:100%;height:100%">
+        <div class="modal-content" style="margin:auto; width:35%;height:50%;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2>MOVER OPERACIÓN</h2>
+            </div>
+            <div class="modal-body">
+                <div style="margin-left:15px;margin-bottom:20px">
+                    <table>
+                        <tbody style="font-size:15px;" align="left">
+                        <tr>
+                            <td><b>Número de líneas seleccionadas</b></td>
+                            <td>{{countChecks}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <table class="popuptables">
+                    <tr>
+                        <td>
+                            Año:
+                        </td>
+                        <td></td>
+                        <td>
+                            <select class="anio_masivo_switch_popup">
+                                {{#each anio_list_html_mover}}
+                                    {{#if @key}}
+                                        <option value="{{@key}}">{{this}}</option>
+                                    {{/if}}
+                                {{/each}}
+                                
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Mes:
+                        </td>
+                        <td></td>
+                        <td>
+                            <select class="mes_switch_masivo_popup">
+                                {{#each meses_list_html_mover}}
+                                    {{#if @key}}
+                                        <option value="{{@key}}">{{this}}</option>
+                                    {{/if}}
+                                {{/each}}
+                                
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div align="right">
+                    <button class="btn btn-danger  btn-Model" id="btn-Cancelar" type="submit">Cancelar</button>
+                    <button class="btn btn-success  btn-Model" id="btn-GuardarMoverMasiva" type="submit">Guardar</button>
+                    <!-- 
+                    <span class="btn btn-success btn-Model" title="Guardar" id="btn-GuardarMoverMasiva">
+                        Guardar
+                        <i class="fa fa-spinner fa-spin savingIcon" style="display: none"></i>
+                    </span>
+                    -->
                 </div>
             </div>
         </div>
