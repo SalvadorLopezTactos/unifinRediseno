@@ -1096,7 +1096,6 @@
                     self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].color="#E5FFCC";
                     self.backlogs.backlogs.MyBacklogs.linea[self.newRevivir.idBacklog].estatus_de_la_operacion="Comprometida";
                 }
-                
                 $('#btn-CancelarRe').prop('disabled',false);
                 $('#btn-GuardarRe').prop('disabled',false);
                 app.alert.dismiss('RevivirAlert');
@@ -1178,6 +1177,7 @@
         this.motivoCancelar=app.lang.getAppListStrings('motivo_de_cancelacion_list');
         var idBacklog=e.currentTarget.getAttribute('data-id');
         var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
+        var status=e.currentTarget.getAttribute('data-estatus');
         this.newCancelar={
             "idBacklog":idBacklog,
             "nameBacklog":backlog.name,
@@ -1189,13 +1189,23 @@
             "anioBacklog":"20"+backlog.anio
         };
         self.render();
-        var modal = $('#myModalCan');
-        modal.show();
-        $('.Quien').hide();
-        $('.Producto').hide();
-        $('.FechaCancelar').hide();
+        if(status!="Cancelada"){
+            var modal = $('#myModalCan');
+            modal.show();
+            $('.Quien').hide();
+            $('.Producto').hide();
+            $('.FechaCancelar').hide();
+        }
+        if(status=="Cancelada"){
+            app.alert.show('opp_cancelada', {
+             level: 'error',
+             messages: 'Solo se puede cancelar una operacion original si esta comprometida',
+             autoClose: false
+            });
+         return;
+        }
         //$("#formulariomayores").css("display", "block")
-        },
+    },
 
     motivoCancelarC:function(){
         this.motivoCancelar=app.lang.getAppListStrings('motivo_de_cancelacion_list');;
@@ -1234,6 +1244,7 @@
                 autoClose: true
             });
             $('#motivoCancelarC').css('border-color', 'red');
+            return;
         }
 
         if($('#motivoCancelarC').val()=="Competencia" && ($('.QuienInput').val()==null || $('.QuienInput').val()=="" || competenciava.trim().length==0 )){

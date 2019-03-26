@@ -940,23 +940,23 @@
                     <td>${{customFormatNumber newRevivir.rentaInicialOriginal}}</td>
                 </tr>
                 <tr>
-                    <td><b>Mes:</b></td>
-                    <td><b>Año: </b></td>
+                    <td><b>Año:</b></td>
+                    <td><b>Mes: </b></td>
                 </tr>
                 <tr>
-                    <td>
-                        <select id="mes_revivir">    
-                            {{#each mesRevivir}}
-                           <option value="{{@key}}">{{this}}</option>
-                            {{/each}}
-                        </select>
-                    </td>
                     <td>
                         <select id="anio_revivir">
                             {{#each anioRevivir}}
                            <option value="{{@key}}">{{this}}</option>
                             {{/each}}
                         </select>
+                    </td>
+                    <td>
+                        <select id="mes_revivir">    
+                            {{#each mesRevivir}}
+                           <option value="{{@key}}">{{this}}</option>
+                            {{/each}}
+                        </select>        
                     </td>
                 </tr>
             </tbody>
