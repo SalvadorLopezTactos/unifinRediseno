@@ -834,7 +834,7 @@ SQL;
         $callApi = new UnifinAPI();
         $callApi->unifinPutCall($host,$fields);
 
-        return $response;
+        return array($response,$backlog->id);
     }
 
     public function operacionLogradaBacklog($api, $args){
