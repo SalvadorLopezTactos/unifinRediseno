@@ -841,7 +841,8 @@
                  $('#btn-GuardarMover').prop('disabled',false);
                  app.alert.dismiss('moverAlert');
                  self.ocultaModal();
-                 self.cargarBacklogsButton();
+                 delete self.backlogs.backlogs.MyBacklogs.linea[self.newMoverMes.idBacklog];
+                 //self.cargarBacklogsButton();
                  self.render();
              },this)
          });
@@ -1187,9 +1188,12 @@
                              return;
                          }
 
-                         if(!_.isEmpty(data)){
-                             alert(data);
+                         if(!_.isEmpty(data[0])){
+                             alert(data[0]);
                          }
+
+                         //Actualizando objeto backlogs para no hacer una nueva búsqueda
+                         delete self.backlogs.backlogs.MyBacklogs.linea[data[1]];
 
                          //Validación para saber si se ejecutó el último índice
                          if(successCount==countChecks){
@@ -1198,7 +1202,7 @@
                              $('#btn-GuardarMoverMasiva').prop('disabled',false);
                              app.alert.dismiss('moverMasivoAlert');
                              self.ocultaModal();
-                             self.cargarBacklogsButton();
+                             //self.cargarBacklogsButton();
                              self.render();
 
                              app.alert.show('success_actualizar', {
