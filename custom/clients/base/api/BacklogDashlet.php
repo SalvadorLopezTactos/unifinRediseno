@@ -650,7 +650,7 @@ SQL;
         $backlog->tct_competencia_quien_txf_c = $cam_competencia;
         $backlog->tct_que_producto_txf_c = $cam_producto;
         $backlog->save();
-        return $backlog->deleted;
+        return array($backlog->deleted,$backlog->id);
     }
 
     public function RevivirBacklog($api, $args){
