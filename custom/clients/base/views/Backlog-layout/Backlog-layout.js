@@ -471,9 +471,11 @@
           module: 'lev_Backlog',
           model: model
         },
-      }, function(){
-         location.reload();
+      }, 
+      function(){
+         //location.reload();
       });
+
     },
 
     ordenarPorEquipo: function(){
@@ -1492,7 +1494,7 @@
         }); 
     },
     
-    fecha:function(){
+    fecha:function(backlogMes){
         //Muestra de año
         var self=this;
         var currentYear = (new Date).getFullYear();
@@ -1544,15 +1546,24 @@
                 }
             });
         }
+        if(self.rolAutorizacion != "Promotor"){
+            var opciones_mes = app.lang.getAppListStrings('mes_list');
+            for (meses_keys in opciones_mes) {
+                if(backlogMes == meses_keys){
+                    self.mesRevivir[backlogMes]=opciones_mes[backlogMes];
+                }
+            }
+        }
     },
     //Nuevas funciones Revivir
-    revivirNew:function(e){
-        this.fecha();        
+    revivirNew:function(e){        
         var idBacklog=e.currentTarget.getAttribute('data-id');
         //var mes=e.currentTarget.getAttribute('data-mes');
         //var anio=e.currentTarget.getAttribute('data-anio');
         var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
+        var backlogMes = backlog.mes_int;
 
+        this.fecha(backlogMes);
         this.newRevivir={
             "idBacklog":idBacklog,
             "nameBacklog":backlog.name,
@@ -1685,13 +1696,15 @@
         }
     },    
 
-
     cancelarNew:function(e){
         this.fechaCancelar();
         this.motivoCancelar=app.lang.getAppListStrings('motivo_de_cancelacion_list');
         var idBacklog=e.currentTarget.getAttribute('data-id');
         var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
         var status=e.currentTarget.getAttribute('data-estatus');
+        var backlogAnio = e.currentTarget.getAttribute('data-anio');
+        var rolAutorizacion = self.rolAutorizacion;
+        var backlogMes = e.currentTarget.getAttribute('data-mes');
         this.newCancelar={
             "idBacklog":idBacklog,
             "nameBacklog":backlog.name,
@@ -1702,6 +1715,48 @@
             "mesBacklog":backlog.mes_int,
             "anioBacklog":"20"+backlog.anio
         };
+
+        var currentDay = (new Date).getDate();
+        var currentYear = (new Date).getFullYear();
+        var BacklogCorriente = this.getElaborationBacklog();
+
+        if(backlogAnio <= currentYear) {
+        if (backlogMes <= BacklogCorriente){
+            //Operaciones de meses anteriores al actual solo pueden ser canceladas por directores
+            if (backlogMes < BacklogCorriente && rolAutorizacion == "Promotor") {
+                app.alert.show('backlog_pasado', {
+                    level: 'error',
+                    messages: 'La operaci\u00F3n solo puede ser cancelada por directores.',
+                    autoClose: false
+                });
+                return;
+            }else{
+                //Si esta en proceso de revisión solo dir y/o DGA pueden cancelar validando roles
+                if ((backlogMes == BacklogCorriente && currentDay > 15 && currentDay < 19 && rolAutorizacion == "Promotor") ||
+                    (backlogMes == BacklogCorriente && currentDay > 19 && currentDay <= 19 && rolAutorizacion != "DGA")){ //CVV se comenta para cerra periodo de Julio  CVV regresar a 20
+                    //if (backlogMes == BacklogCorriente && rolAutorizacion != "DGA"){
+                        app.alert.show('backlog_pasado', {
+                            level: 'error',
+                            messages: 'No cuenta con los privilegios para cancelar operaciones en este periodo.',
+                            autoClose: false
+                        });
+                        return;
+                    }else{
+                    //Si es el mes actual fuera de periodo de revisión, solo Directores y DGA's
+                    if ((currentDay < 16 || currentDay < 21) && rolAutorizacion == "Promotor"){  //CVV se comenta para cerra periodo de Julio
+                        //if (rolAutorizacion != "DGA"){
+                            app.alert.show('backlog_pasado', {
+                                level: 'error',
+                                messages: 'No cuenta con los privilegios para cancelar.',
+                                autoClose: false
+                            });
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
         self.render();
         if(status!="Cancelada"){
             var modal = $('#myModalCan');
