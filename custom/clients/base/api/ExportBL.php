@@ -52,12 +52,12 @@ class ExportBL extends SugarApi
 
         $content=file_get_contents($csvfile);
 
-        return array($name_file,$content);
+        //Convirtiendo contenido del archivo a codificación UTF8 para evitar conflictos con caracteres especiales como acentos
+        $content_clean=mb_convert_encoding($content, 'UTF-8',
+            mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true));
 
+        return array($content_clean,$name_file);
     }
-
-
-
 
 }
 
