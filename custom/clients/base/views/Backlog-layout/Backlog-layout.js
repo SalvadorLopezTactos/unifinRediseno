@@ -39,9 +39,9 @@
 
         //Nuevos eventos de comentarios en Modal
         'click .updateComentario': 'comentarioNew',
-        'click .btn-danger': 'ocultaModal',
+        'click #btn-CancelarComen': 'ocultaModal',
         'click .close': 'ocultaModal',
-        'click  #btn-Guardar': 'GuardaComentario',
+        'click  #btn-GuardarComen': 'GuardaComentario',
         //Nuevos eventos de Revivir en Modal
         'click .updateRevivir':'revivirNew',
         'click #btn-CancelarRe':'ocultaRevivir',
@@ -476,9 +476,11 @@
           module: 'lev_Backlog',
           model: model
         },
-      }, function(){
-         location.reload();
+      }, 
+      function(){
+         //location.reload();
       });
+
     },
 
     ordenarPorEquipo: function(){
@@ -1468,8 +1470,8 @@
             return;
        }
 
-       $('#btn-Cancelar').prop('disabled',true);
-       $('#btn-Guardar').prop('disabled',true);
+       $('#btn-CancelarComen').prop('disabled',true);
+       $('#btn-GuardarComen').prop('disabled',true);
         //Notificacion de inicio de proceso
         app.alert.show('ComentAlert', {
             level: 'process',
@@ -1481,15 +1483,15 @@
             success: _.bind(function (data) {
                 self.backlogs.backlogs.MyBacklogs.linea[self.newComentario.idBacklog].comentarios=data;
                 self.backlogs.backlogs.MyBacklogs.linea[self.newComentario.idBacklog].comentado="fa-comment";
-                $('#btn-Cancelar').prop('disabled',false);
-                $('#btn-Guardar').prop('disabled',false);
+                $('#btn-CancelarComen').prop('disabled',false);
+                $('#btn-GuardarComen').prop('disabled',false);
                 app.alert.dismiss('ComentAlert');
                 self.ocultaModal();
                 self.render();
             },this),
             error:function(error){
-                $('#btn-Cancelar').prop('disabled',false);
-                $('#btn-Guardar').prop('disabled',false);
+                $('#btn-CancelarComen').prop('disabled',false);
+                $('#btn-GuardarComen').prop('disabled',false);
                 app.alert.dismiss('ComentAlert');
                 app.alert.show('errorAlert', {
                     level: 'error',
@@ -1500,7 +1502,7 @@
         }); 
     },
     
-    fecha:function(){
+    fecha:function(backlogMes){
         //Muestra de año
         var self=this;
         var currentYear = (new Date).getFullYear();
@@ -1510,8 +1512,7 @@
         var limitMonth = currentMonth + 3;
         var nextMonth = 0;
         var nextYear = currentYear;
-        var anio_popup=$('#anio_revivir').val();
-
+        var anio_popup=($('#anio_revivir').val()==null) ? currentYear: $('#anio_revivir').val();
         if (limitMonth > 12) {
             nextMonth = limitMonth - 12;
             nextYear = currentYear + 1;
@@ -1553,15 +1554,24 @@
                 }
             });
         }
+        if(self.rolAutorizacion != "Promotor"){
+            var opciones_mes = app.lang.getAppListStrings('mes_list');
+            for (meses_keys in opciones_mes) {
+                if(backlogMes == meses_keys){
+                    self.mesRevivir[backlogMes]=opciones_mes[backlogMes];
+                }
+            }
+        }
     },
     //Nuevas funciones Revivir
-    revivirNew:function(e){
-        this.fecha();        
+    revivirNew:function(e){        
         var idBacklog=e.currentTarget.getAttribute('data-id');
         //var mes=e.currentTarget.getAttribute('data-mes');
         //var anio=e.currentTarget.getAttribute('data-anio');
         var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
+        var backlogMes = backlog.mes_int;
 
+        this.fecha(backlogMes);
         this.newRevivir={
             "idBacklog":idBacklog,
             "nameBacklog":backlog.name,
@@ -1579,8 +1589,6 @@
             });
            return;
         }
-
-
         self.render();
         var modal = $('#myModalRe');
         modal.show();
@@ -1651,7 +1659,7 @@
         var limitMonth = currentMonth + 3;
         var nextMonth = 0;
         var nextYear = currentYear;
-        var anio_popup=$('#anio_cancelar').val();
+        var anio_popup = ($('#anio_cancelar').val() == null) ? currentYear : $('#anio_cancelar').val();
 
         if (limitMonth > 12) {
             nextMonth = limitMonth - 12;
@@ -1696,13 +1704,15 @@
         }
     },    
 
-
     cancelarNew:function(e){
         this.fechaCancelar();
         this.motivoCancelar=app.lang.getAppListStrings('motivo_de_cancelacion_list');
         var idBacklog=e.currentTarget.getAttribute('data-id');
         var backlog=self.backlogs.backlogs.MyBacklogs.linea[idBacklog];
         var status=e.currentTarget.getAttribute('data-estatus');
+        var backlogAnio = e.currentTarget.getAttribute('data-anio');
+        var rolAutorizacion = self.rolAutorizacion;
+        var backlogMes = e.currentTarget.getAttribute('data-mes');
         this.newCancelar={
             "idBacklog":idBacklog,
             "nameBacklog":backlog.name,
@@ -1713,6 +1723,48 @@
             "mesBacklog":backlog.mes_int,
             "anioBacklog":"20"+backlog.anio
         };
+
+        var currentDay = (new Date).getDate();
+        var currentYear = (new Date).getFullYear();
+        var BacklogCorriente = this.getElaborationBacklog();
+
+        if(backlogAnio <= currentYear) {
+        if (backlogMes <= BacklogCorriente){
+            //Operaciones de meses anteriores al actual solo pueden ser canceladas por directores
+            if (backlogMes < BacklogCorriente && rolAutorizacion == "Promotor") {
+                app.alert.show('backlog_pasado', {
+                    level: 'error',
+                    messages: 'La operaci\u00F3n solo puede ser cancelada por directores.',
+                    autoClose: false
+                });
+                return;
+            }else{
+                //Si esta en proceso de revisión solo dir y/o DGA pueden cancelar validando roles
+                if ((backlogMes == BacklogCorriente && currentDay > 15 && currentDay < 19 && rolAutorizacion == "Promotor") ||
+                    (backlogMes == BacklogCorriente && currentDay > 19 && currentDay <= 19 && rolAutorizacion != "DGA")){ //CVV se comenta para cerra periodo de Julio  CVV regresar a 20
+                    //if (backlogMes == BacklogCorriente && rolAutorizacion != "DGA"){
+                        app.alert.show('backlog_pasado', {
+                            level: 'error',
+                            messages: 'No cuenta con los privilegios para cancelar operaciones en este periodo.',
+                            autoClose: false
+                        });
+                        return;
+                    }else{
+                    //Si es el mes actual fuera de periodo de revisión, solo Directores y DGA's
+                    if ((currentDay < 16 || currentDay < 21) && rolAutorizacion == "Promotor"){  //CVV se comenta para cerra periodo de Julio
+                        //if (rolAutorizacion != "DGA"){
+                            app.alert.show('backlog_pasado', {
+                                level: 'error',
+                                messages: 'No cuenta con los privilegios para cancelar.',
+                                autoClose: false
+                            });
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
         self.render();
         if(status!="Cancelada"){
             var modal = $('#myModalCan');
@@ -1733,7 +1785,7 @@
     },
 
     motivoCancelarC:function(){
-        this.motivoCancelar=app.lang.getAppListStrings('motivo_de_cancelacion_list');;
+        this.motivoCancelar=app.lang.getAppListStrings('motivo_de_cancelacion_list');
         if($('#motivoCancelarC').val()=='Competencia'){
             $('.Quien').show();
         }else{
