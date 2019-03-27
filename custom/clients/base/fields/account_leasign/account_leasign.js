@@ -42,22 +42,24 @@
     this.sortAnexoContratacion = "ASC";
     this.sortAnexoTerminacion = "ASC";
 
-    //Forma url de petición
-    var url = app.api.buildURL('ResumenCliente/'+id, null, null, );
-    //Ejecuta petición ResumenCliente
-    var self = this;
-    app.api.call('GET', url, {},{
-      success: function (data){
-        //Logs
-        // console.log('data:');
-        // console.log(data);
+    if (id!= '' && id != undefined && id!= null) {
+      //Forma url de petición
+      var url = app.api.buildURL('ResumenCliente/'+id, null, null, );
+      //Ejecuta petición ResumenCliente
+      var self = this;
+      app.api.call('GET', url, {},{
+        success: function (data){
+          //Logs
+          // console.log('data:');
+          // console.log(data);
 
-        //var records2 = data;
-        _.extend(self, data);
-        self.render();
+          //var records2 = data;
+          _.extend(self, data);
+          self.render();
 
-      }
-    });
+        }
+      });
+    }
   },
 
   /**
@@ -398,7 +400,7 @@
   Save_comentario: function(){
     var self =this;
         var comentario = this.$('#txtComment').val();
-        //alert("comentarios  " +comentario);        
+        //alert("comentarios  " +comentario);
         if(comentario!="")
         {
           app.api.call("update", app.api.buildURL("tct02_Resumen/"+this.model.get('id')),{"tct_datos_clave_txa_c":comentario
@@ -409,7 +411,7 @@
                            level: "info",
                            title: "Datos creados",
                            autoClose: false
-                       });                       
+                       });
                    }
                }, this)
            });
