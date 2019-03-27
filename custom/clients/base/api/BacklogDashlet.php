@@ -554,6 +554,7 @@ SQL;
             $backlog = BeanFactory::retrieveBean('lev_Backlog', $backlogId);
             $backlog->description .= "\r\n" . $current_user->first_name . " " . $current_user->last_name . " - " . $todayDate . ": " . $backlogDescription;
             $backlog->save();
+            return $backlog->description;
         }
     }
 
@@ -649,6 +650,7 @@ SQL;
         $backlog->tct_competencia_quien_txf_c = $cam_competencia;
         $backlog->tct_que_producto_txf_c = $cam_producto;
         $backlog->save();
+        return array($backlog->deleted,$backlog->id);
     }
 
     public function RevivirBacklog($api, $args){
@@ -832,7 +834,7 @@ SQL;
         $callApi = new UnifinAPI();
         $callApi->unifinPutCall($host,$fields);
 
-        return $response;
+        return array($response,$backlog->id);
     }
 
     public function operacionLogradaBacklog($api, $args){
@@ -981,9 +983,9 @@ SQL;
         $fp = fopen($csvfile, 'w');
 
         // output the column headings
-        fputcsv($fp, array('ESTATUS', 'MES','EQUIPO', 'ZONA', 'PROMOTOR', 'ID CLIENTE','CLIENTE', 'N� BACKLOG', 'BIEN',  'LINEA DISPONIBLE',
-            'MONTO ORIGINAL', 'RI ORIGINAL', 'DIFERENCIA', 'BACKLOG', 'RENTA INICIAL', 'BACKLOG ACTUAL', 'COLOCACI�N REAL', 'RI REAL', 'MONTO CANCELADO',
-            'RI CANCELADA',  'TIPO DE OPERACI�N','ETAPA INICIO MES', 'ETAPA', 'SOLICITUD',
+        fputcsv($fp, array('ESTATUS', 'MES','EQUIPO', 'ZONA', 'PROMOTOR', 'ID CLIENTE','CLIENTE', 'NO. BACKLOG', 'BIEN',  'LINEA DISPONIBLE',
+            'MONTO ORIGINAL', 'RI ORIGINAL', 'DIFERENCIA', 'BACKLOG', 'RENTA INICIAL', 'BACKLOG ACTUAL', 'COLOCACIÓN REAL', 'RI REAL', 'MONTO CANCELADO',
+            'RI CANCELADA',  'TIPO DE OPERACIÓN','ETAPA INICIO MES', 'ETAPA', 'SOLICITUD',
             'PROSPECTO','CREDITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','RI PROSPECTO','RI CREDITO','RI RECHAZADA','RI SIN SOLICITUD','RI CON SOLICITUD', 'TASA', 'COMISION', 'DIF RESIDUALES', 'COLOCACION PIPELINE'));
 
         foreach ($args['data']['backlogs'] as $key => $values) {
