@@ -31,6 +31,7 @@
         //Nuevos eventos para mover mes
         'click .MoverOperacion': 'moverOperacion',
         'click #btn-GuardarMover':'moverMes',
+        'click #btn-Cancelar':'ocultaModal',
 
         //Nuevos eventos para mover masivo
         'click .MoverOperacionMasiva': 'moverOperacionMasiva',
@@ -2050,8 +2051,12 @@
 
              this.mesCancelarMasivo=lista_mes_anio['mes'];
 
-
              self.render();
+
+             //Recorriendo registros seleccionados para persistencia después de aplicar render
+             for(var i=0;i< this.checks_cancelar.length;i++){
+                    $('input[type="checkbox"][data-id="'+this.checks_cancelar[i].getAttribute('data-id')+'"]').attr("checked",true)
+            }
 
             var modalCancelarMasiva = $('#myModalCanMasiva');
             modalCancelarMasiva.show();
