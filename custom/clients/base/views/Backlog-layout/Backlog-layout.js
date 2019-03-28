@@ -469,7 +469,7 @@
     },
 
     crearBacklog: function(){
-      var model=app.data.createBean('lev_Backlog');
+      var model = app.data.createBean('lev_Backlog');
       app.drawer.open({
         layout: 'create',
         context: {
@@ -477,101 +477,130 @@
           module: 'lev_Backlog',
           model: model
         },
-      }, 
-      function(){
-         //location.reload();
+      },
+      function() {
+        this.render();
       });
-
     },
 
     ordenarPorEquipo: function(){
-        var valores = this.getValores();
-        var sortedObjs = [];
+        var arreglo = {};
+        var sortedObjs = {};
+        Object.keys(this.backlogs.backlogs.MyBacklogs.linea).forEach(function(key) {
+            self.backlogs.backlogs.MyBacklogs.linea[key].id=key;
+        });
         if(this.EquipoSortDirection == 'DESC'){
             this.EquipoSortDirection = 'ASC';
-            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'equipo');
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'equipo');
         }else{
             this.EquipoSortDirection = 'DESC';
-            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'equipo').reverse();
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'equipo').reverse();
         }
-        this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
+        for(var i=0, n=sortedObjs.length; i<n; i++){
+            arreglo[sortedObjs[i].id] = sortedObjs[i];
+        }
+        this.backlogs.backlogs.MyBacklogs.linea = arreglo;
         this.render();
-        //this.setValores(valores);
     },
     
     ordenarPorPromotor: function(){
-        var valores = this.getValores();
-        var sortedObjs = [];
+        var arreglo = {};
+        var sortedObjs = {};
+        Object.keys(this.backlogs.backlogs.MyBacklogs.linea).forEach(function(key) {
+            self.backlogs.backlogs.MyBacklogs.linea[key].id=key;
+        });
         if(this.PromotorSortDirection == 'DESC'){
             this.PromotorSortDirection = 'ASC';
-            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'promotor');
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'promotor');
         }else{
             this.PromotorSortDirection = 'DESC';
-            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'promotor').reverse();
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'promotor').reverse();
         }
-        this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
+        for(var i=0, n=sortedObjs.length; i<n; i++){
+            arreglo[sortedObjs[i].id] = sortedObjs[i];
+        }        
+        this.backlogs.backlogs.MyBacklogs.linea = arreglo;
         this.render();
-        //this.setValores(valores);
     },
 
     ordenarPorCliente: function(){
-        var valores = this.getValores();
-        var sortedObjs = [];
+        var arreglo = {};
+        var sortedObjs = {};
+        Object.keys(this.backlogs.backlogs.MyBacklogs.linea).forEach(function(key) {
+            self.backlogs.backlogs.MyBacklogs.linea[key].id=key;
+        });
         if(this.ClienteSortDirection == 'DESC'){
             this.ClienteSortDirection = 'ASC';
-            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'cliente');
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'cliente');
         }else{
             this.ClienteSortDirection = 'DESC';
-            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'cliente').reverse();
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'cliente').reverse();
         }
-        this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
+        for(var i=0, n=sortedObjs.length; i<n; i++){
+            arreglo[sortedObjs[i].id] = sortedObjs[i];
+        }        
+        this.backlogs.backlogs.MyBacklogs.linea = arreglo;
         this.render();
-        //this.setValores(valores);
     },
 
     ordenarPorNumeroBacklog: function(){
-        var valores = this.getValores();
-        var sortedObjs = [];
+        var arreglo = {};
+        var sortedObjs = {};
+        Object.keys(this.backlogs.backlogs.MyBacklogs.linea).forEach(function(key) {
+            self.backlogs.backlogs.MyBacklogs.linea[key].id=key;
+        });
         if(this.NumeroBacklogSortDirection == 'DESC'){
             this.NumeroBacklogSortDirection = 'ASC';
-            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'numero_de_backlog');
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'numero_de_backlog');
         }else{
             this.NumeroBacklogSortDirection = 'DESC';
-            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'numero_de_backlog').reverse();
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'numero_de_backlog').reverse();
         }
-        this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
+        for(var i=0, n=sortedObjs.length; i<n; i++){
+            arreglo[sortedObjs[i].id] = sortedObjs[i];
+        }        
+        this.backlogs.backlogs.MyBacklogs.linea = arreglo;
         this.render();
-        //this.setValores(valores); 
     },
 
     ordenarPorMontoOperacion: function(){
-        var valores = this.getValores();
-        var sortedObjs = [];
+        var arreglo = {};
+        var sortedObjs = {};
+        Object.keys(this.backlogs.backlogs.MyBacklogs.linea).forEach(function(key) {
+            self.backlogs.backlogs.MyBacklogs.linea[key].id=key;
+        });
         if(this.MontoOperacionSortDirection == 'DESC'){
             this.MontoOperacionSortDirection = 'ASC';
-            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'monto_original');
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_original');
         }else{
             this.MontoOperacionSortDirection = 'DESC';
-            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'monto_original').reverse();
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_original').reverse();
         }
-        this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
+        for(var i=0, n=sortedObjs.length; i<n; i++){
+            arreglo[sortedObjs[i].id] = sortedObjs[i];
+        }        
+        this.backlogs.backlogs.MyBacklogs.linea = arreglo;
         this.render();
-        //this.setValores(valores);
     },
 
     ordenarPorMontoFinal: function(){
-        var valores = this.getValores();
-        var sortedObjs = [];
+        var arreglo = {};
+        var sortedObjs = {};
+        Object.keys(this.backlogs.backlogs.MyBacklogs.linea).forEach(function(key) {
+            self.backlogs.backlogs.MyBacklogs.linea[key].id=key;
+        });
         if(this.MontoFinalSortDirection == 'DESC'){
             this.MontoFinalSortDirection = 'ASC';
-            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'monto_final_comprometido');
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_final_comprometido');
         }else{
             this.MontoFinalSortDirection = 'DESC';
-            sortedObjs = _.sortBy(this.backlogs.backlogs.MyBacklogs.linea, 'monto_final_comprometido').reverse();
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_final_comprometido').reverse();
         }
-        this.backlogs.backlogs.MyBacklogs.linea = sortedObjs;
+        for(var i=0, n=sortedObjs.length; i<n; i++){
+            arreglo[sortedObjs[i].id] = sortedObjs[i];
+        }        
+        this.backlogs.backlogs.MyBacklogs.linea = arreglo;
         this.render();
-        //this.setValores(valores);
     },
     
     getValores: function(){
