@@ -475,11 +475,13 @@
         context: {
           create: true,
           module: 'lev_Backlog',
-          model: model
+          model: model,
+          mythis: this
         },
-      },
-      function() {
-        this.render();
+      }, 
+      //Función de callback para que persista el contexto 'this' al cerrar drawer de creación de Backlog
+      function(context,model){
+         self=context.get('mythis');
       });
     },
 
