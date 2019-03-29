@@ -2073,6 +2073,29 @@ populateColoniasByMunicipio:function(evt){
 
         calle = $.trim(calle);
 
+        var nuevaDir = $('.newCalle').val() + $('.newNumExt').val() + $('.newNumInt').val()+ $('.newColoniaTemp').val()+ $('.newMunicipioTemp').val()+$('.newEstadoTemp').val() + $('.newCiudadTemp').val();
+        nuevaDir=nuevaDir.replace(/ /g, "");
+        nuevaDir=nuevaDir.toUpperCase();
+        var existingDir = this.model.get("account_direcciones");
+        var existente = false;
+
+        Object.keys(existingDir).forEach(key => {
+            var actualDir =  existingDir[key].calle+existingDir[key].numext+existingDir[key].numint+existingDir[key].colonia+existingDir[key].municipio+existingDir[key].estado+existingDir[key].ciudad; 
+            actualDir=actualDir.replace(/ /g, "");
+            actualDir=actualDir.toUpperCase();
+            if (actualDir == nuevaDir){
+            existente = true;
+            }
+        });
+        
+        if (existente){
+            app.alert.show("direcciones_duplicadas", {
+                level: "error",
+                title: "Existe una o mas direcciones repetidas",
+                autoClose: true
+            });
+            return;
+        }
 
         if ((calle !== '') && (this._addNewDireccionToModel(calle))) {
             // build the new direccion field

@@ -4,7 +4,6 @@
  */
 ({
     extendsFrom: 'CreateView',
-
     /**
      * @author bdekoning@levementum.com
      * @date 6/9/15
@@ -369,6 +368,7 @@
         /* F. Javier G. Solar
                 OBS299 Validar que las Direcciones no se repitan 21/11/2018
              */
+
         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
 
         /**
@@ -444,8 +444,7 @@
         this.events['keydown [name=ctpldnoseriefiel_c]'] = 'checkInVentas';
         this.events['keydown [name=tct_cpld_pregunta_u2_txf_c]'] = 'checkInVentas';
         this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'checkInVentas';
-
-
+        //Funcion para validar que no hayan direcciones repetidas al momento de darle en el check
 
         /* hay que traer el campo del usaurio
          * PREOMOTORES POR DEFAULT
