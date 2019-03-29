@@ -8,7 +8,7 @@
                 this._super('initialize', [options]);
                 lnv = this;
 
-                if (this.model.get('id')!= "" || this.model.get('id')!= null){
+                if (this.model.get('id')!= "" && this.model.get('id')!= null){
                     lnv.loadData();
                     lnv.bindDataChange();
                 }
@@ -45,8 +45,8 @@
                 //Recupera data existente
                 //Recupera datos para vista de detalle
                 var idCuenta = lnv.model.get('id');
-                if (idCuenta=="" || idCuenta == undefined) {
-                    idCuenta = '1';
+                if (idCuenta=="" && idCuenta == undefined) {
+                    return;
                 }
             app.api.call('GET', app.api.buildURL('Accounts/'+idCuenta+'/link/accounts_tct3_noviable_1'), null, {
                 success: function (data) {
@@ -103,7 +103,6 @@
             this._super("_render");
             $("div.record-label[data-name='tct_noviable']").attr('style', 'display:none;');
            this.cargalistas();
-           //this.ocultacampos();
 
             $('.campo1chk').change(function(evt) {
                 lnv.Muestracampo4();
@@ -150,30 +149,6 @@
 
         },
 
-       /* ocultacampos: function (){
-            try {
-                //Campos nacen ocultos Leasing
-                $('.campo4').hide();
-                $('.campo7').hide();
-                $('.campo10').hide();
-                $('.campo13').hide();
-                $('.campo16').hide();
-                //Campos nacen ocultos factoraje
-                $('.campo5').hide();
-                $('.campo8').hide();
-                $('.campo11').hide();
-                $('.campo14').hide();
-                $('.campo17').hide();
-                //Campos nacen ocultos Credito Automotriz
-                $('.campo6').hide();
-                $('.campo9').hide();
-                $('.campo12').hide();
-                $('.campo15').hide();
-                $('.campo18').hide();
-            }catch (err){
-                    console.log(err.message);
-                }
-        },*/
 
             Muestracampo4: function () {
                     $('.campo4').hide();
