@@ -574,9 +574,15 @@
         if(this.MontoOperacionSortDirection == 'DESC'){
             this.MontoOperacionSortDirection = 'ASC';
             sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_comprometido');
+            sortedObjs.sort(function(a, b) {
+              return parseFloat(a.monto_comprometido) - parseFloat(b.monto_comprometido);
+            });
         }else{
             this.MontoOperacionSortDirection = 'DESC';
             sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_comprometido').reverse();
+            sortedObjs.sort(function(a, b) {
+              return parseFloat(b.monto_comprometido) - parseFloat(a.monto_comprometido);
+            });
         }
         for(var i=0, n=sortedObjs.length; i<n; i++){
             arreglo[sortedObjs[i].id] = sortedObjs[i];
@@ -594,9 +600,15 @@
         if(this.MontoFinalSortDirection == 'DESC'){
             this.MontoFinalSortDirection = 'ASC';
             sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_final_comprometido');
+            sortedObjs.sort(function(a, b) {
+              return parseFloat(a.monto_final_comprometido) - parseFloat(b.monto_final_comprometido);
+            });            
         }else{
             this.MontoFinalSortDirection = 'DESC';
             sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_final_comprometido').reverse();
+            sortedObjs.sort(function(a, b) {
+              return parseFloat(b.monto_final_comprometido) - parseFloat(a.monto_final_comprometido);
+            });
         }
         for(var i=0, n=sortedObjs.length; i<n; i++){
             arreglo[sortedObjs[i].id] = sortedObjs[i];
