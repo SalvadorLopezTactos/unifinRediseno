@@ -573,10 +573,10 @@
         });
         if(this.MontoOperacionSortDirection == 'DESC'){
             this.MontoOperacionSortDirection = 'ASC';
-            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_original');
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_comprometido');
         }else{
             this.MontoOperacionSortDirection = 'DESC';
-            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_original').reverse();
+            sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_comprometido').reverse();
         }
         for(var i=0, n=sortedObjs.length; i<n; i++){
             arreglo[sortedObjs[i].id] = sortedObjs[i];
