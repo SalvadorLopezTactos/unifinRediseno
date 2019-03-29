@@ -62,7 +62,7 @@
         /* F. Javier G. Solar
            OBS299 Validar que las Direcciones no se repitan 21/11/2018
         */
-        // this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
+         this.model.addValidationTask('validate_Direccion_Duplicada', _.bind(this._direccionDuplicada, this));
 
         /*
          Eduardo Carrasco
