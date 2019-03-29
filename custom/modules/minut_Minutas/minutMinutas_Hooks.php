@@ -19,24 +19,10 @@ class minutMinutas_Hooks
         // Creamos la Relación entre Minuta y Participantes
         if ($objArrParticipnates != "" && isset($objArrParticipnates))
         {
-          for ($i = 0; $i < count($objArrParticipnates); $i++) {
-              $beanParticipante = BeanFactory::newBean("minut_Participantes");
-              $beanParticipante->name = $objArrParticipnates[$i]['nombres'];
-              $beanParticipante->tct_apellido_paterno_c = $objArrParticipnates[$i]['apaterno'];
-              $beanParticipante->tct_apellido_materno_c = $objArrParticipnates[$i]['amaterno'];
-              $beanParticipante->tct_nombre_completo_c = $objArrParticipnates[$i]['nombres'] . " " . $objArrParticipnates[$i]['apaterno'] . " " . $objArrParticipnates[$i]['amaterno'];
-              $beanParticipante->tct_correo_c = $objArrParticipnates[$i]['correo'];
-              $beanParticipante->tct_telefono_c = $objArrParticipnates[$i]['telefono'];
-              $beanParticipante->tct_asistencia_c = $objArrParticipnates[$i]['asistencia'];
-              $beanParticipante->tct_tipo_registro_c = $objArrParticipnates[$i]['tipo_contacto'];
-              //$beanParticipante->tct_id_registro_c=$objArrParticipnates[$i]['nombres'];
-              $beanParticipante->minut_minutas_minut_participantesminut_minutas_ida = $idMinuta;
-              $beanParticipante->description = $objArrParticipnates[$i]['unifin'];
-              $beanParticipante->save();
-          }
           // Creamos la Relación entre cuentas y nuevos participantes
           $nueva = 0;
           for ($j = 0; $j < count($objArrParticipnates); $j++) {
+              // creo cuentas nuevas
               if ($objArrParticipnates[$j]['origen'] == "N") {
                   // creo cuenta
                   $beanCuentas = BeanFactory::newBean("Accounts");
@@ -50,11 +36,27 @@ class minutMinutas_Hooks
                   try {
                       $beanCuentas->save();
                       $cuenta = $beanCuentas->id;
+                      $objArrParticipnates[$j]['id']=$beanCuentas->id;
                       $nueva = 1;
                   } catch (Exception $e) {
                       $GLOBALS['log']->fatal("Error: ".$e);
                   }
               }
+              // Guarda registro de participante
+              $beanParticipante = BeanFactory::newBean("minut_Participantes");
+              $beanParticipante->name = $objArrParticipnates[$j]['nombres'];
+              $beanParticipante->tct_apellido_paterno_c = $objArrParticipnates[$j]['apaterno'];
+              $beanParticipante->tct_apellido_materno_c = $objArrParticipnates[$j]['amaterno'];
+              $beanParticipante->tct_nombre_completo_c = $objArrParticipnates[$j]['nombres'] . " " . $objArrParticipnates[$j]['apaterno'] . " " . $objArrParticipnates[$j]['amaterno'];
+              $beanParticipante->tct_correo_c = $objArrParticipnates[$j]['correo'];
+              $beanParticipante->tct_telefono_c = $objArrParticipnates[$j]['telefono'];
+              $beanParticipante->tct_asistencia_c = $objArrParticipnates[$j]['asistencia'];
+              $beanParticipante->tct_tipo_registro_c = $objArrParticipnates[$j]['tipo_contacto'];
+              $beanParticipante->tct_id_registro_c=$objArrParticipnates[$j]['id'];
+              $beanParticipante->minut_minutas_minut_participantesminut_minutas_ida = $idMinuta;
+              $beanParticipante->description = $objArrParticipnates[$j]['unifin'];
+              $beanParticipante->save();
+
               // Busca relacion
               if($objArrParticipnates[$j]['origen'] == "E")
               {
