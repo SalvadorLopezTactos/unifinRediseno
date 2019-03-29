@@ -196,6 +196,9 @@
 
 
         this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        this.model.addValidationTask('LeasingNV',_.bind(this.requeridosleasingnv, this));
+        this.model.addValidationTask('FactorajeNV',_.bind(this.requeridosfacnv, this));
+        this.model.addValidationTask('CreditAutoNV',_.bind(this.requeridoscanv, this));
 
     },
 
@@ -773,6 +776,8 @@
         this.deleteOptionPersona();
 
         this._ActualizaEtiquetas();
+
+        this.muestracheks();
 
         //@Jesus Carrillo
         //Ocultar Div y boton "Prospecto Contactado"
@@ -1449,9 +1454,8 @@
         this.context.on('button:prospecto_contactado:click', this.prospectocontactadoClicked, this);
         this.context.on('button:cancel_button:click', this.handleCancel, this);
         this.context.on('button:save_button:click', this.borraTel, this);
-        this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
+        //this.context.on('button:prospecto_contactado:click',this.validaContactado, this);  //se añade validación para validar campos al convertir prospecto contactado.
         this.context.on('button:convierte_lead:click', this.validalead, this);
-        this.context.on('button:lead_no_viable:click', this.leadNoViable, this);
     },
 
     /*
@@ -1662,6 +1666,20 @@
        * 22-08-2018 Victor Martínez
         */
     prospectocontactadoClicked:function(){
+        if ((this.model.get('tipo_registro_c') == "Lead" && $('.campo1chk')[0].checked && $('.campo2chk')[0].checked && $('.campo3chk')[0].checked)){
+            app.alert.show("Cumple 3 checks", {
+            level: "error",
+                title: 'Esta cuenta no se puede convertir a prospecto ya que es un lead no viable.',
+                autoClose: false
+            });
+            return;
+        }
+        var validacion =  this.validaContactado();
+        if(validacion == 1){
+            return;
+
+        }
+
         self=this;
         self.flagheld=0;
         if(this.model.get('id')!="") { //en lugar de self es this
@@ -1808,10 +1826,8 @@
         }
 
         if ( (this.model.get('nombre_comercial_c') =="" || this.model.get('nombre_comercial_c')==null) && this.model.get('tipodepersona_c')== 'Persona Moral'){
-
             campos= campos + '<b>Nombre Comercial. </b> ';
         }
-
 
         if(campos!=""){
             console.log ('Validacion Campos OK');
@@ -1961,47 +1977,6 @@
 
     },
 
-    leadNoViable: function(){
-
-        //var self=this;
-        var urlDelete=app.api.buildURL('DeleteBeanById/Accounts/'+this.model.get('id'))
-
-        app.alert.show('confirm_lead_no_viable', {
-            level: 'confirmation',
-            messages: '\u00BFEst\u00E1 seguro de establecer a <b>'+this.model.get('name')+'</b> como Lead No Viable\u003F',
-            autoClose: false,
-            onConfirm: function(){
-
-                app.alert.show('delete_lead_no_viable', {
-                    level: 'process',
-                });
-
-                // self.model.set('subtipo_cuenta_c',"No Viable");
-                //self.model.save();
-
-
-                app.api.call('GET',urlDelete , null, {
-                    success: _.bind(function (data) {
-                        if(data){
-                            app.alert.dismiss('delete_lead_no_viable');
-                            app.router.navigate('#Accounts', {trigger: true});
-                        }
-
-
-                    },self),
-                    error: _.bind(function(error) {
-                        console.log("Este fue el error:", error)
-                    }, self),
-                });
-
-
-            },
-            onCancel: function(){
-                //alert("OPERACION CANCELADA!");
-            }
-        });
-
-    },
 
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 6/12/2015 Description: Persona Fisica and Persona Fisica con Actividad Empresarial must have an email or a Telefono*/
     _doValidateEmailTelefono: function (fields, errors, callback) {
@@ -3374,5 +3349,115 @@
 
         callback(null,fields,errors);
     },
+
+            requeridosleasingnv: function (fields, errors, callback){
+                var faltantesleasnv= 0;
+                if ($('.campo1chk')[0].checked && $('.campo4nvl').select2('val') == ""){
+                    $('.campo4nvl').find('.select2-choice').css('border-color', 'red');
+                    faltantesleasnv +=1;
+                }
+                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "Fuera de Perfil" && $('.campo7nvl').select2('val') == ""){
+                    $('.campo7nvl').find('.select2-choice').css('border-color', 'red');
+                    faltantesleasnv +=1;
+                }
+                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val() == "" && $('.campo13nvl').val() == ""){
+                    $('.campo10nvl').css('border-color', 'red');
+                    $('.campo13nvl').css('border-color', 'red');
+                    faltantesleasnv +=1;
+                }
+                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "No tenemos el producto que requiere" && $('.campo16nvl').select2('val')==""){
+                    $('.campo16nvl').find('.select2-choice').css('border-color', 'red');
+                    faltantesleasnv +=1;
+                }
+                if (faltantesleasnv>0){
+                    app.alert.show("Faltantes no viable Leasing", {
+                        level: "error",
+                        title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Leasing.',
+                        autoClose: false
+                    });
+                    errors['error_leasing'] = errors['error_leasing'] || {};
+                    errors['error_leasing'].required = true;
+                }if (faltantesleasnv==0 && $('.campo1chk')[0].checked ==true){
+                    this.model.set('promotorleasing_c', '9 - No Viable');
+                    this.model.set('user_id_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+                }
+                callback(null, fields, errors);
+
+            },
+            requeridosfacnv: function (fields, errors, callback){
+                var faltantesfactnv= 0;
+                if (($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "")){
+                    $('.campo5nvf').find('.select2-choice').css('border-color', 'red');
+                    faltantesfactnv +=1;
+                }
+                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "Fuera de Perfil" && $('.campo8nvf').select2('val') == ""){
+                    $('.campo8nvf').find('.select2-choice').css('border-color', 'red');
+                    faltantesfactnv +=1;
+                }
+                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val() == "" && $('.campo14nvf').val() == ""){
+                    $('.campo11nvf').css('border-color', 'red');
+                    $('.campo14nvf').css('border-color', 'red');
+                    faltantesfactnv +=1;
+                }
+                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "No tenemos el producto que requiere" && $('.campo17nvf').select2('val')==""){
+                    $('.campo17nvf').find('.select2-choice').css('border-color', 'red');
+                    faltantesfactnv +=1;
+                }
+                if (faltantesfactnv>0){
+                    app.alert.show("Faltantes no viable Factoraje", {
+                        level: "error",
+                        title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Factoraje.',
+                        autoClose: false
+                    });
+                    errors['error_factoraje'] = errors['error_factoraje'] || {};
+                    errors['error_factoraje'].required = true;
+                }else if (faltantesfactnv==0 && $('.campo2chk')[0].checked == true){
+                    this.model.set('promotorfactoraje_c', '9 - No Viable');
+                    this.model.set('user_id1_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+                }
+                callback(null, fields, errors);
+            },
+
+            requeridoscanv: function (fields, errors, callback){
+                var faltantescanv= 0;
+                if (($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "")){
+                    $('.campo6nvca').find('.select2-choice').css('border-color', 'red');
+                    faltantescanv +=1;
+                }
+                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "Fuera de Perfil" && $('.campo9nvca').select2('val') == ""){
+                    $('.campo9nvca').find('.select2-choice').css('border-color', 'red');
+                    faltantescanv +=1;
+                }
+                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val() == "" && $('.campo15nvca').val() == ""){
+                    $('.campo12nvca').css('border-color', 'red');
+                    $('.campo15nvca').css('border-color', 'red');
+                    faltantescanv +=1;
+                }
+                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "No tenemos el producto que requiere" && $('.campo18nvca').select2('val')==""){
+                    $('.campo18nvca').find('.select2-choice').css('border-color', 'red');
+                    faltantescanv +=1;
+                }
+                if (faltantescanv>0){
+                    app.alert.show("Faltantes no viable Crédito Automotriz", {
+                        level: "error",
+                        title: 'Hace falta seleccionar alguna de las razones del cat\u00E1logo <b>Raz\u00F3n lead no viable en Credito Automotriz.',
+                        autoClose: false
+                    });
+                    errors['error_ca'] = errors['error_ca'] || {};
+                    errors['error_ca'].required = true;
+                }else if (faltantescanv==0 && $('.campo3chk')[0].checked ==true){
+                    this.model.set('promotorcredit_c', '9 - No Viable');
+                    this.model.set('user_id2_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+                }
+                callback(null, fields, errors);
+
+            },
+            //Pregunta si la cuenta es LEAD para poder mostrar los checks de leads no viables:
+            muestracheks: function (){
+              if (this.model.get('tipo_registro_c') != "Lead"){
+                  $('[data-name=tct_noviable]').hide();
+            }
+            },
+
 
 })

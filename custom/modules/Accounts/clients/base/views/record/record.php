@@ -234,6 +234,13 @@ array (
                 'name' => 'deudor_factor_c',
                 'label' => 'LBL_DEUDOR_FACTOR',
               ),
+              6 => 
+              array (
+                'name' => 'tct_noviable',
+                'studio' => 'visible',
+                'label' => 'tct_noviable',
+                'span' => 12,
+              ),
             ),
           ),
           3 => 
