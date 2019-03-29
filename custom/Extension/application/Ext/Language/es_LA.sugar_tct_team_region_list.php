@@ -1,17 +1,17 @@
 <?php
- // created: 2018-08-22 09:47:37
+ // created: 2019-03-29 18:15:51
 
 $app_list_strings['tct_team_region_list']=array (
   '' => '',
   0 => '',
-  1 => 'METROPOLITANA',
-  2 => 'METROPOLITANA',
-  3 => 'METROPOLITANA',
-  4 => 'METROPOLITANA',
-  5 => 'METROPOLITANA',
-  6 => 'METROPOLITANA',
-  7 => 'METROPOLITANA',
-  8 => 'METROPOLITANA',
+  1 => 'METRO 1',
+  2 => 'METRO 2',
+  3 => 'METRO 1',
+  4 => 'METRO 1',
+  5 => 'METRO 1',
+  6 => 'METRO 2',
+  7 => 'METRO 2',
+  8 => 'METRO 8',
   'CA1' => 'METROPOLITANA',
   'CA2' => 'METROPOLITANA',
   'CA3' => 'METROPOLITANA',
@@ -32,11 +32,11 @@ $app_list_strings['tct_team_region_list']=array (
   'LEO' => 'BAJIO',
   'MTY' => 'NORTE',
   'MER' => 'SUR',
-  'PUE' => 'SUR',
+  'PUE' => 'METRO 2',
   'QRO' => 'BAJIO',
   'QRO2' => 'BAJIO',
   'SLP' => 'BAJIO',
-  'TIJ' => 'SUR',
+  'TIJ' => 'NOROESTE',
   'TOL' => 'SUR',
   'VER' => 'SUR',
 );
