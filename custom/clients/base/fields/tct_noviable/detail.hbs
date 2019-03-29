@@ -1,0 +1,122 @@
+<div class="row-fluid">
+    <table id="tableLeadnoViable" width="100%">
+        <tr>
+            <td width="33%">
+                <div class="campo1">
+                    <label class="record-label" style="margin-left:0px">No Viable Leasing</label>
+                    <input type="checkbox" class="campo1chk"
+                           {{#if leadNoViable.campo1chk}}checked{{/if}} data-field="campo1chk"/>
+                </div>
+            </td>
+            <td width="33%">
+                <div class="campo2" style="margin-left:12px">
+                    <label class="record-label" style="margin-left:0px">No Viable Factoraje</label>
+                    <input type="checkbox" class="campo2chk"
+                           {{#if leadNoViable.campo2chk}}checked{{/if}} data-field="campo2chk"/>
+                </div>
+            </td>
+            <td width="33%">
+                <div class="campo3" style="margin-left:27px">
+                    <label class="record-label" style="margin-left:0px">No Viable Crédito Automotriz</label>
+                    <input type="checkbox" class="campo3chk"
+                           {{#if leadNoViable.campo3chk}}checked{{/if}} data-field="campo3chk"/>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td valign="top">
+                <div class="campo4" style="margin-left:0px" >
+                    <label class="record-label" style="margin-left:0px">Razón de Lead no viable</label>
+                    <label class="normal row-fluid select2 campo4nvl" style="margin-left:0px" data-field="campo2AP">
+                           {{leadNoViable.razonleasing}}
+                    </label>
+                </div>
+                <div class="campo7" style="margin: 1px;">
+                    <label class="record-label" style="margin-left:0px">Fuera de Perfil (Razón)</label>
+                    <label class="normal row-fluid select2  campo7nvl" style="margin-left:0px" data-field="campo2AP">
+                        {{leadNoViable.fueraperfilL}}
+                    </label>
+                </div>
+                <div class="campo10" style="margin: 1px;">
+                    <label class="record-label" style="margin-left:0px">¿Quién?</label>
+                    <label class="normal campo10nvl" type="text" style="margin-left:0px" data-name="quien"/>
+                    {{leadNoViable.quienl}}
+                </div>
+                <div class="campo13" style="margin: 1px;">
+                    <label class="record-label" style="margin-left:0px">¿Por qué?</label>
+                    <label class="normal campo13nvl" type="text" style="margin-left:0px" data-name="quien">
+                        {{leadNoViable.porquel}}
+                    </label>
+                </div>
+                <div class="campo16" style="margin: 1px;">
+                    <label class="record-label" style="margin-left:0px">No tenemos el producto que requiere</label>
+                    <label class="normal row-fluid select2 campo16nvl" style="margin-left:0px">
+                        {{leadNoViable.noproducl}}
+                    </label>
+                </div>
+            </td>
+            <td valign="top">
+                <div class="campo5"style="margin: 1px;">
+                    <label class="record-label" style="margin-left:12px">Razón de Lead no viable</label>
+                    <label class="normal row-fluid select2 campo5nvf" style="margin-left:12px">
+                        {{leadNoViable.razonfactoraje}}
+                    </label>
+                </div>
+                <div class="campo8" style="margin: 1px;">
+                    <label class="record-label" style="margin-left:12px">Fuera de Perfil (Razón)</label>
+                    <label class="normal row-fluid select2 campo8nvf" style="margin-left:12px">
+                        {{leadNoViable.fueraperfilF}}
+                    </label>
+                </div>
+                <div class="campo11" style="margin-left:12px;">
+                    <label class="record-label" style="margin-left:2px">¿Quién?</label>
+                    <label class="normal campo11nvf" type="text" style="margin-left:12px" data-name="quien"/>
+                    {{leadNoViable.quienf}}
+                </div>
+                <div class="campo14" style="margin-left:12px;">
+                    <label class="record-label" style="margin-left:2px">¿Por qué?</label>
+                    <label class="normal campo14nvf" type="text" style="margin-left:12px" data-name="quien"/>
+                    {{leadNoViable.porquef}}
+                </div>
+                <div class="campo17" style="margin: 1px;">
+                    <label class="record-label" style="margin-left:12px">No tenemos el producto que requiere</label>
+                    <label class="normal row-fluid select2  campo17nvf" style="margin-left:12px" data-field="campo2AP">
+                        {{leadNoViable.noproducf}}
+                    </label>
+                </div>
+
+            </td>
+            <td valign="top">
+                <div class="campo6" style="margin: 1px;">
+                    <label class="record-label" style="margin-left:27px">Razón de Lead no viable</label>
+                    <label class="normal row-fluid select2 campo6nvca" style="margin-left:27px">
+                        {{leadNoViable.razonca}}
+                    </label>
+                </div>
+                <div class="campo9" style="margin: 1px;">
+                    <label class="record-label" style="margin-left:27px">Fuera de Perfil (Razón)</label>
+                    <label class="normal row-fluid select2 campo9nvca" style="margin-left:27px">
+                        {{leadNoViable.fueraperfilCA}}
+                    </label>
+                </div>
+                <div class="campo12" style="margin-left:27px;">
+                    <label class="record-label" style="margin-left:2px">¿Quién?</label>
+                    <label class="normal campo12nvca" type="text" style="margin-left:27px" data-name="quien"/>
+                    {{leadNoViable.quienca}}
+                </div>
+                <div class="campo15" style="margin-left:27px;">
+                    <label class="record-label" style="margin-left:2px">¿Por qué?</label>
+                    <label class="normal campo15nvca" type="text" style="margin-left:27px" data-name="quien"/>
+                    {{leadNoViable.porqueca}}
+                </div>
+                <div class="campo18" style="margin: 1px;">
+                    <label class="record-label" style="margin-left:27px">No tenemos el producto que requiere</label>
+                    <label class="normal row-fluid select2 campo18nvca" style="margin-left:27px">
+                        {{leadNoViable.noproducca}}
+                    </label>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
