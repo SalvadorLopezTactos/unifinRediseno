@@ -445,9 +445,6 @@
         this.events['keydown [name=tct_cpld_pregunta_u4_txf_c]'] = 'checkInVentas';
         //Funcion para validar que no hayan direcciones repetidas al momento de darle en el check
 
-        this.context.on('button:btn addDireccion:click', this.GetLocation, this);
-
-
         /* hay que traer el campo del usaurio
          * PREOMOTORES POR DEFAULT
          LEASING:
