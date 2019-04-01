@@ -959,10 +959,11 @@
                      app.alert.dismiss('moverAlert');
                      return;
                  }
-
+                 /*
                  if(!_.isEmpty(data)){
                      alert(data);
                  }
+                 */
                  $('#btn-Cancelar').prop('disabled',false);
                  $('#btn-GuardarMover').prop('disabled',false);
                  app.alert.dismiss('moverAlert');
