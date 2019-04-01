@@ -1314,14 +1314,14 @@
                      success: _.bind(function (data) {
                          successCount++;
                          if (self.disposed) {
-                             this.saving = 0;
                              app.alert.dismiss('moverMasivoAlert');
                              return;
                          }
-
+                        /*
                          if(!_.isEmpty(data[0])){
                              alert(data[0]);
                          }
+                         */
 
                          //Actualizando objeto backlogs para no hacer una nueva búsqueda
                          delete self.backlogs.backlogs.MyBacklogs.linea[data[1]];
