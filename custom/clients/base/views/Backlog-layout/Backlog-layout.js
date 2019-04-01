@@ -1659,6 +1659,24 @@
            'MesAnterior': this.newRevivir.mesBacklog,
            'AnioAnterior': this.newRevivir.anioBacklog,
         };
+        if( $('#anio_revivir').val()==null || $('#anio_revivir').val()==""){
+            app.alert.show('anio_revivir_requerido', {
+                level: 'error',
+                messages: 'El año es requerido',
+                autoClose: true
+            });
+            $('#anio_revivir').css('border-color', 'red');
+            return;
+        }
+        if( $('#mes_revivir').val()==null || $('#mes_revivir').val()==""){
+            app.alert.show('mes_revivir_requerido', {
+                level: 'error',
+                messages: 'El mes es requerido',
+                autoClose: true
+            });
+            $('#mes_revivir').css('border-color', 'red');
+            return;
+        }
         //Notificacion de inicio de proceso
        app.alert.show('RevivirAlert', {
             level: 'process',
@@ -1872,7 +1890,7 @@
         if($('#motivoCancelarC').val()=="Competencia" && ($('.QuienInput').val()==null || $('.QuienInput').val()=="" || competenciava.trim().length==0 )){
             app.alert.show('Competencia_requerida', {
                 level: 'error',
-                messages: 'El campo Qui\u00E9n es requerido',
+                messages: 'El campo ¿Qui\u00E9n? es requerido',
                 autoClose: true
             });
             $('.QuienInput').css('border-color', 'red');
@@ -1881,7 +1899,7 @@
         if($('#motivoCancelarC').val()=="No tenemos el producto que requiere" && ($('.ProductoInput').val()==null || $('.ProductoInput').val()=="" || productova.trim().length==0)){
             app.alert.show('Producto_requerido', {
                 level: 'error',
-                messages: 'El campo Producto es requerido',
+                messages: 'El campo ¿Qué producto? es requerido',
                 autoClose: true
             });
             $('.ProductoInput').css('border-color', 'red');
