@@ -28,7 +28,7 @@
             <td valign="top">
                 <div class="campo4" style="margin-left:0px;" >
                     <label class="record-label">Razón de Lead no viable</label>
-                    <select class="row-fluid select2 campo4nvl" data-field="campo2AP">
+                    <select class="row-fluid select2 campo4nvl" data-field="campo4L">
                         {{#each razones_ddw_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../leadNoViable.razonleasing}}>{{this}}</option>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="campo7" style="margin: 5px 5px 5px 5px;">
                     <label class="record-label">Fuera de Perfil (Razón)</label>
-                    <select class="row-fluid select2  campo7nvl" data-field="campo2AP">
+                    <select class="row-fluid select2  campo7nvl" data-field="campo7L">
                         {{#each fuera_de_perfil_ddw_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../leadNoViable.fueraperfilL}}>{{this}}</option>
@@ -52,11 +52,11 @@
                 <div class="campo13" style="margin: 5px 5px 5px 5px;">
                     <label class="record-label">¿Por qué?</label>
                     <input type="text" class="campo13nvl" value="{{leadNoViable.porquel}}"
-                           data-field="campo17AP" data-name="quien"/>
+                           data-field="campo17AP" data-name="Porque"/>
                 </div>
                 <div class="campo16" style="margin: 5px 5px 5px 5px;">
                     <label class="record-label">No tenemos el producto que requiere</label>
-                    <select class="row-fluid select2  campo16nvl" data-field="campo2AP">
+                    <select class="row-fluid select2  campo16nvl" data-field="campo16L">
                         {{#each no_producto_requiere_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../leadNoViable.noproducl}}>{{this}}</option>
@@ -67,7 +67,7 @@
             <td valign="top">
                 <div class="campo5" style="margin-left:0px;">
                     <label class="record-label">Razón de Lead no viable</label>
-                    <select class="row-fluid select2 campo5nvf" data-field="campo2AP">
+                    <select class="row-fluid select2 campo5nvf" data-field="campo5F">
                         {{#each razones_ddw_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../leadNoViable.razonfactoraje}}>{{this}}</option>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="campo8" style="margin: 5px 5px 5px 5px;">
                     <label class="record-label">Fuera de Perfil (Razón)</label>
-                    <select class="row-fluid select2  campo8nvf" data-field="campo2AP">
+                    <select class="row-fluid select2  campo8nvf" data-field="campo8F">
                         {{#each fuera_de_perfil_ddw_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../leadNoViable.fueraperfilF}}>{{this}}</option>
@@ -91,11 +91,11 @@
                 <div class="campo14" style="margin: 5px 5px 5px 5px;">
                     <label class="record-label">¿Por qué?</label>
                     <input type="text" class="campo14nvf" value="{{leadNoViable.porquef}}"
-                           data-field="campo17AP" data-name="quien"/>
+                           data-field="campo17AP" data-name="porque"/>
                 </div>
                 <div class="campo17" style="margin: 5px 5px 5px 5px;">
                     <label class="record-label">No tenemos el producto que requiere</label>
-                    <select class="row-fluid select2  campo17nvf" data-field="campo2AP">
+                    <select class="row-fluid select2  campo17nvf" data-field="campo17F">
                         {{#each no_producto_requiere_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../leadNoViable.noproducf}}>{{this}}</option>
@@ -106,7 +106,7 @@
             <td valign="top">
                 <div class="campo6" style="margin-left:0px;">
                     <label class="record-label">Razón de Lead no viable</label>
-                    <select class="row-fluid select2 campo6nvca" data-field="campo2AP">
+                    <select class="row-fluid select2 campo6nvca" data-field="campo6CA">
                         {{#each razones_ddw_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../leadNoViable.razonca}}>{{this}}</option>
@@ -115,7 +115,7 @@
                 </div>
                 <div class="campo9" style="margin: 5px 5px 5px 5px;">
                     <label class="record-label">Fuera de Perfil (Razón)</label>
-                    <select class="row-fluid select2  campo9nvca" data-field="campo2AP">
+                    <select class="row-fluid select2  campo9nvca" data-field="campo9CA">
                         {{#each fuera_de_perfil_ddw_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../leadNoViable.fueraperfilCA}}>{{this}}</option>
@@ -130,11 +130,11 @@
                 <div class="campo15" style="margin: 5px 5px 5px 5px;">
                     <label class="record-label">¿Por qué?</label>
                     <input type="text" class="campo15nvca" value="{{leadNoViable.porqueca}}"
-                           data-field="campo17AP" data-name="quien"/>
+                           data-field="campo17AP" data-name="porque"/>
                 </div>
                 <div class="campo18" style="margin: 5px 5px 5px 5px;">
                     <label class="record-label">No tenemos el producto que requiere</label>
-                    <select class="row-fluid select2  campo18nvca" data-field="campo2AP">
+                    <select class="row-fluid select2  campo18nvca" data-field="campo18CA">
                         {{#each no_producto_requiere_list}}
                             <option value="{{@key}}" {{ifSelected @key
                                                                   ../leadNoViable.noproducca}}>{{this}}</option>
