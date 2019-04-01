@@ -1,4 +1,5 @@
 ({
+    //Carga de Listas de valores
     razones_ddw_list: null,
     fuera_de_perfil_ddw_list:null,
     no_producto_requiere_list: null,
@@ -12,7 +13,7 @@
                     lnv.loadData();
                     lnv.bindDataChange();
                 }
-
+                //Creacion de objeto para guardar datos hacia el modulo tct3_noviable
                 lnv.leadNoViable = {
                     "campo1chk":"",
                     "campo2chk":"",
@@ -38,6 +39,7 @@
                     "id":""
                 };
                 this.model.on('sync', this.loadData, this);
+                //Validación para guardar el objeto LeadNoViable
                 this.model.addValidationTask('GuardaNoViable', _.bind(this.SaveLeadsnoViable, this));
             },
 
@@ -48,6 +50,7 @@
                 if (idCuenta=="" && idCuenta == undefined) {
                     return;
                 }
+                //Api Call para recuperar valores de los campos del módulo tct3_noviable.
             app.api.call('GET', app.api.buildURL('Accounts/'+idCuenta+'/link/accounts_tct3_noviable_1'), null, {
                 success: function (data) {
 
@@ -103,7 +106,7 @@
             this._super("_render");
             $("div.record-label[data-name='tct_noviable']").attr('style', 'display:none;');
            this.cargalistas();
-
+            //Funciones de visibilidad para campos conforme al check en cada producto.
             $('.campo1chk').change(function(evt) {
                 lnv.Muestracampo4();
             });
@@ -142,13 +145,13 @@
             lnv.noeditables();
 
         },
+        //Carga las listas desplegables para los campos.
         cargalistas: function () {
             lnv.razones_ddw_list = app.lang.getAppListStrings('razones_ddw_list');
             lnv.fuera_de_perfil_ddw_list = app.lang.getAppListStrings('fuera_de_perfil_ddw_list');
             lnv.no_producto_requiere_list = app.lang.getAppListStrings('no_producto_requiere_list');
 
         },
-
 
             Muestracampo4: function () {
                     $('.campo4').hide();
@@ -240,7 +243,7 @@
                     $('.campo18').hide();
                 }
             },
-
+            //Funcion para habilitar la funcionalidad de los checks de cada producto dependiendo del producto que tenga el usuario logueado.
             nvproductos: function (){
                 var productos = App.user.attributes.productos_c;
                 if (productos.includes("1")) {
@@ -290,7 +293,7 @@
                 }
                 callback(null, fields, errors);
             },
-
+            //Validación para dejar sin editar los campos de producto después de haberlos editado por primera y única vez.
            noeditables: function (){
               if ($('.campo1chk')[0].checked){
                   //Campos sin editar Leasing
