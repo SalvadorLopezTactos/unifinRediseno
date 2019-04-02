@@ -95,6 +95,15 @@ array (
         ),
         3 => 
         array (
+          0 => 
+          array (
+            'name' => 'iniciales_c',
+            'label' => 'LBL_INICIALES',
+          ),
+          1 => '',
+        ),
+        4 => 
+        array (
           0 => 'description',
           1 => 
           array (
