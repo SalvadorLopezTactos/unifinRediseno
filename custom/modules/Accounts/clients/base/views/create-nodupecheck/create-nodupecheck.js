@@ -269,7 +269,8 @@
             console.log('No es relación  error: ' + e);
         }
         /* END CUSTOMIZATION */
-
+        //Ocultarel panel de Lead no viable (checks).
+        $('[data-name=tct_noviable]').hide();
 
         //cuando creamos una relacion de account a account, el tipo de registro siempre debe de ser persona
         this.model.set('tipo_registro_c', 'Persona');
@@ -1011,4 +1012,5 @@
         }
         callback(null,fields,errors);
     },
+
 })
