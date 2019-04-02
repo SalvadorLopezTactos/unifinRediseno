@@ -4,6 +4,15 @@
     fuera_de_perfil_ddw_list:null,
     no_producto_requiere_list: null,
 
+            events: {
+                'keydown .campo10nvl': 'PuroTexto',
+                'keydown .campo13nvl': 'PuroTexto',
+                'keydown .campo11nvf': 'PuroTexto',
+                'keydown .campo14nvf': 'PuroTexto',
+                'keydown .campo12nvca': 'PuroTexto',
+                'keydown .campo15nvca': 'PuroTexto',
+            },
+
 
             initialize: function (options) {
                 this._super('initialize', [options]);
@@ -302,31 +311,33 @@
               if ($('.campo1chk')[0].checked){
                   //Campos sin editar Leasing
                   $('.campo1chk').css({pointerEvents:"none"});
-                  $('.campo4').css({pointerEvents:"none"});
-                  $('.campo7').css({pointerEvents:"none"});
-                  $('.campo10').css({pointerEvents:"none"});
-                  $('.campo13').css({pointerEvents:"none"});
-                  $('.campo16').css({pointerEvents:"none"});
+                  $('.leasingp').css({pointerEvents:"none"});
               }
                if($('.campo2chk')[0].checked){
                    //Campos sin editar Factoraje
                    $('.campo2chk').css({pointerEvents:"none"});
-                   $('.campo5').css({pointerEvents:"none"});
-                   $('.campo8').css({pointerEvents:"none"});
-                   $('.campo11').css({pointerEvents:"none"});
-                   $('.campo14').css({pointerEvents:"none"});
-                   $('.campo17').css({pointerEvents:"none"});
+                   $('.factorajep').css({pointerEvents:"none"});
                }
                if ($('.campo3chk')[0].checked){
                    //Campos sin editar Credito Automotriz
                    $('.campo3chk').css({pointerEvents:"none"});
-                   $('.campo6').css({pointerEvents:"none"});
-                   $('.campo9').css({pointerEvents:"none"});
-                   $('.campo12').css({pointerEvents:"none"});
-                   $('.campo15').css({pointerEvents:"none"});
-                   $('.campo18').css({pointerEvents:"none"});
+                   $('.creditoautop').css({pointerEvents:"none"});
               }
 
+            },
 
+            //Funcion que acepta solo letras (a-z), puntos(.) y comas(,)
+            PuroTexto: function (evt) {
+                //console.log(evt.keyCode);
+                if ($.inArray(evt.keyCode, [9, 16, 17, 110,190, 45, 33, 36, 46, 35, 34, 8, 9, 20, 16, 17, 37, 40, 39, 38, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 16, 32, 192]) < 0) {
+                    if (evt.keyCode != 186) {
+                        app.alert.show("Caracter Invalido", {
+                            level: "error",
+                            title: "Solo texto es permitido en este campo.",
+                            autoClose: true
+                        });
+                        return false;
+                    }
+                }
             },
 })
