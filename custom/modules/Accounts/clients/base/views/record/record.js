@@ -3341,16 +3341,16 @@
                     $('.campo7nvl').find('.select2-choice').css('border-color', 'red');
                     faltantesleasnv +=1;
                 }
-                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val() == "" && $('.campo13nvl').val() == ""){
+                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() == ""){
                     $('.campo10nvl').css('border-color', 'red');
                     $('.campo13nvl').css('border-color', 'red');
                     faltantesleasnv +=1;
                 }
-                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val() == "" && $('.campo13nvl').val() != ""){
+                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val().trim() == "" && $('.campo13nvl').val().trim() != ""){
                     $('.campo10nvl').css('border-color', 'red');
                     faltantesleasnv +=1;
                 }
-                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val() != "" && $('.campo13nvl').val() == ""){
+                if ($('.campo1chk')[0].checked ==true && $('.campo4nvl').select2('val') == "Competencia" && $('.campo10nvl').val().trim() != "" && $('.campo13nvl').val().trim() == ""){
                     $('.campo13nvl').css('border-color', 'red');
                     faltantesleasnv +=1;
                 }
@@ -3383,16 +3383,16 @@
                     $('.campo8nvf').find('.select2-choice').css('border-color', 'red');
                     faltantesfactnv +=1;
                 }
-                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val() == "" && $('.campo14nvf').val() == ""){
+                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() == ""){
                     $('.campo11nvf').css('border-color', 'red');
                     $('.campo14nvf').css('border-color', 'red');
                     faltantesfactnv +=1;
                 }
-                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val() == "" && $('.campo14nvf').val() != ""){
+                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val().trim() == "" && $('.campo14nvf').val().trim() != ""){
                     $('.campo11nvf').css('border-color', 'red');
                     faltantesfactnv +=1;
                 }
-                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val() != "" && $('.campo14nvf').val() == ""){
+                if ($('.campo2chk')[0].checked ==true && $('.campo5nvf').select2('val') == "Competencia" && $('.campo11nvf').val().trim() != "" && $('.campo14nvf').val().trim() == ""){
                     $('.campo14nvf').css('border-color', 'red');
                     faltantesfactnv +=1;
                 }
@@ -3425,16 +3425,16 @@
                     $('.campo9nvca').find('.select2-choice').css('border-color', 'red');
                     faltantescanv +=1;
                 }
-                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val() == "" && $('.campo15nvca').val() == ""){
+                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() == ""){
                     $('.campo12nvca').css('border-color', 'red');
                     $('.campo15nvca').css('border-color', 'red');
                     faltantescanv +=1;
                 }
-                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val() == "" && $('.campo15nvca').val() != ""){
+                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val().trim() == "" && $('.campo15nvca').val().trim() != ""){
                     $('.campo12nvca').css('border-color', 'red');
                     faltantescanv +=1;
                 }
-                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val() != "" && $('.campo15nvca').val() == ""){
+                if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "Competencia" && $('.campo12nvca').val().trim() != "" && $('.campo15nvca').val().trim() == ""){
                     $('.campo15nvca').css('border-color', 'red');
                     faltantescanv +=1;
                 }
