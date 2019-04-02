@@ -269,8 +269,8 @@
             console.log('No es relación  error: ' + e);
         }
         /* END CUSTOMIZATION */
-        //Funcion para mostrar el panel de Lead no viable (checks).
-        this.muestracheks();
+        //Ocultarel panel de Lead no viable (checks).
+        $('[data-name=tct_noviable]').hide();
 
         //cuando creamos una relacion de account a account, el tipo de registro siempre debe de ser persona
         this.model.set('tipo_registro_c', 'Persona');
@@ -1013,10 +1013,4 @@
         callback(null,fields,errors);
     },
 
-    //Pregunta si la cuenta es LEAD para poder mostrar los checks de leads no viables:
-    muestracheks: function (){
-        if (this.model.get('tipo_registro_c') != "Lead"){
-            $('[data-name=tct_noviable]').hide();
-        }
-    },
 })
