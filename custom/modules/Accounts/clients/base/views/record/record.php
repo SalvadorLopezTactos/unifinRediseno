@@ -134,15 +134,6 @@ array (
                 'acl_action' => 'view',
                 'class' => 'jcmx1',
               ),
-              13 => 
-              array (
-                'type' => 'rowaction',
-                'event' => 'button:lead_no_viable:click',
-                'name' => 'leadNoViable',
-                'label' => 'Lead No Viable',
-                'acl_action' => 'view',
-                'class' => 'no_viable',
-              ),
             ),
           ),
           3 => 
