@@ -124,7 +124,7 @@
         margin-top: 2px;
         font-size: 12px;
     }
-  
+
     .sinborde { /*Table without border*/
         border: 0;
     }
@@ -218,17 +218,22 @@
             <tr>
                 <td>
                     <select id="mes_filtro" class="filtros">
+                      {{#each meses_list_html}}
+                            <option value="{{@key}}" {{ifSelected @key ../mes_filtro}}>{{this}}</option>
+                      {{/each}}
+                      <!--
                       <option value="{{mes_filtro}}">{{getUnifinListValue "mes_list" mes_filtro}}</option>
                       {{#each meses_list_html}}
                         {{#if @key}}
                             <option value="{{@key}}">{{this}}</option>
                         {{/if}}
                       {{/each}}
+                      -->
                     </select>
                 </td>
                 <td>
                     <select id="anio_filtro" class="filtros">
-                      <option value="{{anio_filtro}}">{{getUnifinListValue "anio_list" anio_filtro}}</option>  
+                      <option value="{{anio_filtro}}">{{getUnifinListValue "anio_list" anio_filtro}}</option>
                       {{#each anio_list_html_filter}}
                         {{#if @key}}
                             <option value="{{@key}}">{{this}}</option>
@@ -238,7 +243,7 @@
                 </td>
                 <td>
                     <select id="equipo_filtro" class="filtros" >
-                      {{#each equipo_list_html}}                        
+                      {{#each equipo_list_html}}
                             <option value="{{@key}}" {{ifSelected @key ../equipo_filtro}}>{{this}}</option>
                       {{/each}}
                     </select>
@@ -831,7 +836,7 @@
                                         <option value="{{@key}}">{{this}}</option>
                                     {{/if}}
                                 {{/each}}
-                                
+
                             </select>
                         </td>
                     </tr>
@@ -847,7 +852,7 @@
                                         <option value="{{@key}}">{{this}}</option>
                                     {{/if}}
                                 {{/each}}
-                                
+
                             </select>
                         </td>
                     </tr>
@@ -895,7 +900,7 @@
                                         <option value="{{@key}}">{{this}}</option>
                                     {{/if}}
                                 {{/each}}
-                                
+
                             </select>
                         </td>
                     </tr>
@@ -911,7 +916,7 @@
                                         <option value="{{@key}}">{{this}}</option>
                                     {{/if}}
                                 {{/each}}
-                                
+
                             </select>
                         </td>
                     </tr>
@@ -921,7 +926,7 @@
                 <div align="right">
                     <button class="btn btn-danger btn-Model" id="btn-Cancelar" type="submit">Cancelar</button>
                     <button class="btn btn-success btn-Model" id="btn-GuardarMoverMasiva" type="submit">Guardar</button>
-                    <!-- 
+                    <!--
                     <span class="btn btn-success btn-Model" title="Guardar" id="btn-GuardarMoverMasiva">
                         Guardar
                         <i class="fa fa-spinner fa-spin savingIcon" style="display: none"></i>
@@ -948,7 +953,7 @@
                 <tr>
                     <td><b>Operación</b></td>
                     <td>{{newCancelar.nameBacklog}}</td>
-                </tr>          
+                </tr>
                 <tr>
                     <td><b>Monto Original</b></td>
                     <td>${{customFormatNumber newCancelar.montoOriginalBacklog}}</td>
@@ -988,7 +993,7 @@
                     </tr>
                     <tr class="FechaCancelar">
                         <td>
-                            <select id="anio_cancelar">    
+                            <select id="anio_cancelar">
                                 {{#each anioCancelar}}
                                <option value="{{@key}}">{{this}}</option>
                                 {{/each}}
@@ -1039,7 +1044,7 @@
                     <td><b>Número de líneas seleccionadas</b></td>
                     <td>{{countChecksCancelar}}</td>
                 </tr>
-                
+
                 <tr>
                     <td><b>Motivo de Cancelación</b></td>
                     <td>
@@ -1072,7 +1077,7 @@
                     </tr>
                     <tr class="FechaCancelar">
                         <td>
-                            <select id="anio_cancelar">    
+                            <select id="anio_cancelar">
                                 {{#each anioCancelarMasivo}}
                                <option value="{{@key}}">{{this}}</option>
                                 {{/each}}
@@ -1121,7 +1126,7 @@
               <tr>
                 <td><b>Operación</b></td>
                 <td>{{newComentario.nameBacklog}}</td>
-              </tr>          
+              </tr>
               <tr>
                 <td><b>Monto Original</b></td>
                 <td>${{customFormatNumber newComentario.montoOriginalBacklog}}</td>
@@ -1131,7 +1136,7 @@
                 <td>${{customFormatNumber newComentario.montoRealBacklog}}</td>
               </tr>
             </tbody>
-          </table><br>    
+          </table><br>
           <div align="left">
             <label style="font-size:15px;"><b>Comentarios</b></label>
             <textarea disabled cols="12" name="texto" id="texto" class="form-control" style="margin: 1px; width:97%; height: 61px; resize:none;">{{newComentario.comentariosExistentes}}</textarea>
@@ -1145,7 +1150,7 @@
       <div class="modal-footer">
         <div align="right">
           <button class="btn btn-danger  btn-Model" id="btn-CancelarComen" type="submit">Cancelar</button>
-          <button class="btn btn-success  btn-Model" id="btn-GuardarComen" type="submit">Guardar</button> 
+          <button class="btn btn-success  btn-Model" id="btn-GuardarComen" type="submit">Guardar</button>
         </div>
       </div>
     </div>
@@ -1167,7 +1172,7 @@
                 <tr>
                     <td><b>Operación</b></td>
                     <td>{{newRevivir.nameBacklog}}</td>
-                </tr>          
+                </tr>
                 <tr>
                     <td><b>Monto Original</b></td>
                     <td>${{customFormatNumber newRevivir.montoOriginalBacklog}}</td>
@@ -1189,11 +1194,11 @@
                         </select>
                     </td>
                     <td>
-                        <select id="mes_revivir">    
+                        <select id="mes_revivir">
                             {{#each mesRevivir}}
                            <option value="{{@key}}">{{this}}</option>
                             {{/each}}
-                        </select>        
+                        </select>
                     </td>
                 </tr>
             </tbody>

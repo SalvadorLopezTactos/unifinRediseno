@@ -9,7 +9,7 @@
 
     events: {
         'click #btn_Buscar': 'cargarBacklogsButton',
-        'click .crearBacklog': 'crearBacklog', 
+        'click .crearBacklog': 'crearBacklog',
         'click .mass_update': 'seleccionarBacklog',
         'click .marcarTodos': 'marcarCasillas',
         'click #EquipoSort': 'ordenarPorEquipo',
@@ -66,7 +66,7 @@
 
         //Eventos para filtros
         'change .filtros': 'updateFilters'
-        
+
     },
 
     meses_list_html : null,
@@ -78,7 +78,7 @@
     etapa_list_html : null,
     estatus_list_html : null,
     backlogs : null,
-    
+
     initialize: function (options) {
         self = this;
         //Actualizar esta variable para cerrar los periodos de Backlog a Petición del usuario
@@ -93,7 +93,7 @@
         this.tipo_operacion_list_html = app.lang.getAppListStrings('tipo_de_operacion_0');
         this.etapa_list_html = app.lang.getAppListStrings('etapa_backlog');
         this.estatus_list_html = app.lang.getAppListStrings('estatus_de_la_operacion_list');
-        
+
         this.EquipoSortDirection = 'DESC';
         this.PromotorSortDirection = 'DESC';
         this.ClienteSortDirection = 'DESC';
@@ -139,6 +139,7 @@
         }
         var self = this;
         this.meses_list_html = app.lang.getAppListStrings('mes_list');
+        this.meses_list_html[""]="Todos";
         var anio_list = app.lang.getAppListStrings('anio_list');
         var currentYear = new Date().getFullYear();
         Object.keys(anio_list).forEach(function(key){
@@ -152,10 +153,10 @@
         self.obtenerBacklogColumnas();
         this.cargarBacklogs('','',anio_actual,mes_actual);
     },
-    
+
     cargarBacklogsButton: function(){
         var anio_actual = $("#anio_filtro").val();
-        var mes_actual = $("#mes_filtro").val();   
+        var mes_actual = $("#mes_filtro").val();
         this.cargarBacklogs('','',anio_actual,mes_actual);
     },
 
@@ -478,7 +479,7 @@
           model: model,
           mythis: this
         },
-      }, 
+      },
       //Función de callback para que persista el contexto 'this' al cerrar drawer de creación de Backlog
       function(context,model){
          self=context.get('mythis');
@@ -504,7 +505,7 @@
         this.backlogs.backlogs.MyBacklogs.linea = arreglo;
         this.render();
     },
-    
+
     ordenarPorPromotor: function(){
         var arreglo = {};
         var sortedObjs = {};
@@ -520,7 +521,7 @@
         }
         for(var i=0, n=sortedObjs.length; i<n; i++){
             arreglo[sortedObjs[i].id] = sortedObjs[i];
-        }        
+        }
         this.backlogs.backlogs.MyBacklogs.linea = arreglo;
         this.render();
     },
@@ -540,7 +541,7 @@
         }
         for(var i=0, n=sortedObjs.length; i<n; i++){
             arreglo[sortedObjs[i].id] = sortedObjs[i];
-        }        
+        }
         this.backlogs.backlogs.MyBacklogs.linea = arreglo;
         this.render();
     },
@@ -560,7 +561,7 @@
         }
         for(var i=0, n=sortedObjs.length; i<n; i++){
             arreglo[sortedObjs[i].id] = sortedObjs[i];
-        }        
+        }
         this.backlogs.backlogs.MyBacklogs.linea = arreglo;
         this.render();
     },
@@ -586,7 +587,7 @@
         }
         for(var i=0, n=sortedObjs.length; i<n; i++){
             arreglo[sortedObjs[i].id] = sortedObjs[i];
-        }        
+        }
         this.backlogs.backlogs.MyBacklogs.linea = arreglo;
         this.render();
     },
@@ -602,7 +603,7 @@
             sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_final_comprometido');
             sortedObjs.sort(function(a, b) {
               return parseFloat(a.monto_final_comprometido) - parseFloat(b.monto_final_comprometido);
-            });            
+            });
         }else{
             this.MontoFinalSortDirection = 'DESC';
             sortedObjs = _.sortBy(self.backlogs.backlogs.MyBacklogs.linea, 'monto_final_comprometido').reverse();
@@ -612,11 +613,11 @@
         }
         for(var i=0, n=sortedObjs.length; i<n; i++){
             arreglo[sortedObjs[i].id] = sortedObjs[i];
-        }        
+        }
         this.backlogs.backlogs.MyBacklogs.linea = arreglo;
         this.render();
     },
-    
+
     getValores: function(){
       var valores = {
          tempMes: $("#mes_filtro").val(),
@@ -1472,7 +1473,7 @@
             var modal = $('#myModal');
             modal.show();
     },
-    
+
     ocultaModal:function(){
         //Modal Ocultar columnas
         var modalCol=$('#myModalHideCols');
@@ -1544,9 +1545,9 @@
                     autoClose: true
                 });
             }
-        }); 
+        });
     },
-    
+
     fecha:function(backlogMes){
         //Muestra de año
         var self=this;
@@ -1576,7 +1577,7 @@
             }
         });
 
-        //Muestra de meses 
+        //Muestra de meses
         this.mesRevivir = app.lang.getAppListStrings('mes_list');
         //Quita meses para año futuro
         if(anio_popup > currentYear){
@@ -1609,7 +1610,7 @@
         }
     },
     //Nuevas funciones Revivir
-    revivirNew:function(e){        
+    revivirNew:function(e){
         var idBacklog=e.currentTarget.getAttribute('data-id');
         //var mes=e.currentTarget.getAttribute('data-mes');
         //var anio=e.currentTarget.getAttribute('data-anio');
@@ -1641,9 +1642,9 @@
 
     ocultaRevivir:function(){
         var modal = $('#myModalRe');
-        modal.hide();        
+        modal.hide();
     },
-    
+
     guardaRevivir:function(){
         var mes = $('#mes_revivir').val();
         var anio = $('#anio_revivir').val();
@@ -1690,7 +1691,7 @@
                     autoClose: true
                 });
             }
-        }); 
+        });
     },
 
     //Funciones de cancelar
@@ -1724,7 +1725,7 @@
             }
         });
 
-        //Muestra de meses 
+        //Muestra de meses
         this.mesCancelar = app.lang.getAppListStrings('mes_list');
         //Quita meses para año futuro
         if(anio_popup > currentYear){
@@ -1747,7 +1748,7 @@
                 }
             });
         }
-    },    
+    },
 
     cancelarNew:function(e){
         this.fechaCancelar();
@@ -1857,8 +1858,8 @@
         var competenciava=$('.QuienInput').val();
         var competencia=$('.QuienInput');
         var producto=$('.ProductoInput');
-        
-        
+
+
         if( $('#motivoCancelarC').val()==null || $('#motivoCancelarC').val()==""){
             app.alert.show('motivo_requerido', {
                 level: 'error',
@@ -1885,7 +1886,7 @@
                 autoClose: true
             });
             $('.ProductoInput').css('border-color', 'red');
-            return;            
+            return;
         }
         if($('#motivoCancelarC').val()=='Mes posterior' &&($('.mes_cancelar').val()==0 || $('.mes_cancelar').val()==null || $('.mes_cancelar').val()=="")){
             app.alert.show('mes_requerido', {
@@ -1893,8 +1894,8 @@
                 messages: 'Debe indicar el mes para el nuevo Backlog',
                 autoClose: true
             });
-            $('.mes_cancelar').css('border-color', 'red'); 
-            return;           
+            $('.mes_cancelar').css('border-color', 'red');
+            return;
         }
 
         if(self.progresoBL == 'SI'){
@@ -1911,7 +1912,7 @@
                 return;
             }
         }
-        
+
         var currentYear = (new Date).getFullYear();
         var currentMonth = ((new Date).getMonth()) + 1;
         var currentDay = (new Date).getDate();
@@ -1969,7 +1970,7 @@
                     messages:error,
                     autoClose:true
                 })
-            }        
+            }
         });
     },
 
@@ -2104,7 +2105,7 @@
 
             var modalCancelarMasiva = $('#myModalCanMasiva');
             modalCancelarMasiva.show();
-            
+
         }else{
             app.alert.show('cheks_no_cancelar', {
                 level: 'error',
@@ -2118,13 +2119,13 @@
         var valor=$(e.currentTarget).val();
 
         if(valor=="Mes posterior"){
-            
+
             $('.FechaCancelar').show();
             $('.Quien').hide();
             $('.Producto').hide();
 
         }else if(valor == "Competencia"){
-            
+
             $('.Quien').show();
             $('.FechaCancelar').hide();
             $('.Producto').hide();
@@ -2253,7 +2254,7 @@
                     return;
         }
 
-    
+
 
         //CVV - Se agrega el motivo de cancelación a los comentarios
         var currentYear = (new Date).getFullYear();
@@ -2305,7 +2306,7 @@
                     };
 
                     canceladosResumen+="No. Backlog: "+this.checks_cancelar[i].getAttribute('data-numBacklog')+"<br>";
-                    
+
                     $('#btn-Cancelar').prop('disabled',true);
                     $('#btn-GuardarCanMasivo').prop('disabled',true);
                     app.alert.show('cancelarMasivoAlert', {
@@ -2363,7 +2364,7 @@
                     });
                 }
         }
-        
+
 
     },
 
@@ -2375,7 +2376,7 @@
             this.equipo_filtro = $("#equipo_filtro").val();
             this.promotor_filtro = "";
         }else{
-            this.promotor_filtro = $("#promotor_filtro").val();    
+            this.promotor_filtro = $("#promotor_filtro").val();
         }
         this.progreso_filtro = $("#progreso_filtro").val();
         this.tipo_operacion_filtro = $("#tipo_operacion_filtro").val();
@@ -2384,7 +2385,7 @@
         var rep = /,/gi;
         this.estatus_filtro = (this.estatus_filtro == "")? "": "^"+this.estatus_filtro.replace(rep, "^,^")+"^";
 
-        
+
         this.render();
 
 
