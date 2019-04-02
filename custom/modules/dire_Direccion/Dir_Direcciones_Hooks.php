@@ -113,4 +113,36 @@ SQL;
         }
 
     }
+
+    public function setConcatName($bean = null, $event = null, $args = null){
+
+
+        $calle=$bean->calle;
+        $numext=$bean->numext;
+        $numint=$bean->numint;
+        $colonia=$bean->dire_direccion_dire_colonia_name;
+        if($colonia==null){
+            $id_colonia=$bean->dire_direccion_dire_coloniadire_colonia_ida;
+
+            $nombre_colonia_query = "Select name from dire_colonia where id ='". $id_colonia."'";
+            $querycolonia = $GLOBALS['db']->query($nombre_colonia_query);
+            $coloniaName = $GLOBALS['db']->fetchByAssoc($querycolonia);
+            $colonia=$coloniaName['name'];
+
+        }
+        $municipio=$bean->dire_direccion_dire_municipio_name;
+        if($municipio==null){
+            $id_municipio=$bean->dire_direccion_dire_municipiodire_municipio_ida;
+
+            $nombre_municipio_query = "Select name from dire_municipio where id ='". $id_municipio."'";
+            $querymunicipio = $GLOBALS['db']->query($nombre_municipio_query);
+            $municipioName = $GLOBALS['db']->fetchByAssoc($querymunicipio);
+            $municipio=$municipioName['name'];
+        }
+
+        $direccion_completa =$calle." ".$numext." ".($numint != "" ? "Int: ".$numint:""). ", Colonia ".$colonia.", Municipio ".$municipio;
+
+        $bean->name=$direccion_completa;
+
+    }
 }

@@ -38,6 +38,14 @@ $hook_array['before_save'][] = Array(
     'setSequencia'
 );
 
+$hook_array['before_save'][] = Array(
+    4,
+    'Establece campo name con la concatenación de Calle, Exterior, Interior, Colonia y Municipio',
+    'custom/modules/dire_Direccion/Dir_Direcciones_Hooks.php',
+    'Dir_Direcciones_Hooks',
+    'setConcatName'
+);
+
 $hook_array['before_delete'][] = Array(
     1,
     'WS Elimina Direccion en UNICS',
