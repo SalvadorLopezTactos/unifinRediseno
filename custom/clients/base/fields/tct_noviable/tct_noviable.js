@@ -144,6 +144,10 @@
             lnv.Campo9();
             lnv.noeditables();
 
+            //Funcion para dar estilo select2 a las listas deplegables.
+            var $select = $('select.select2');
+            $select.select2();
+
         },
         //Carga las listas desplegables para los campos.
         cargalistas: function () {
