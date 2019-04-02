@@ -842,9 +842,7 @@
         this._hideNPS();
 
         this.hideButton_Conversion();
-
-        this.hideButtonLeadNoViable();
-
+        
         //this.getreuniones();
         //this.getllamadas();
 
@@ -861,23 +859,6 @@
 			$('div[data-name=email]').show();
 			$('div[data-name=account_direcciones]').show();
 		}
-    },
-
-    /*
-    * author: Salvador Lopez 29/08/2018
-    * Función para mostrar u ocultar el botón de Lead No viable
-    * */
-    hideButtonLeadNoViable:function(){
-
-        var leadNoViableField = this.getField("leadNoViable");
-
-        //Para mostrar/ocultar el boton de convertir a Lead y Convertir a Prospecto Contactado. 22/08/2018
-        if (this.model.get('tipo_registro_c') != "Lead") {
-            leadNoViableField.listenTo(leadNoViableField, "render", function () {
-                leadNoViableField.hide();
-            });
-        }
-
     },
 
     hideconfiinfo:function () {
