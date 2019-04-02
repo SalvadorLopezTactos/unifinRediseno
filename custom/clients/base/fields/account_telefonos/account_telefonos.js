@@ -90,7 +90,7 @@
         }
         var country_list = app.metadata.getCountries();
         for (var key in country_list) {
-            pais_list_html += '<option value="' + country_list[key].lada + '" >' + country_list[key].name + '</option>'
+            pais_list_html += '<option value="' + country_list[key].id + '" >' + country_list[key].name + '</option>'
         }
         this.def.tel_tipo_list_html = tel_tipo_list_html;
         this.def.tel_estatus_list_html = tel_estatus_list_html;
@@ -223,12 +223,12 @@
         }
 
         for (var key in country_list) {
-            if (country_list[key].lada == telefono.pais) {
-                pais_list_html += '<option value="' + country_list[key].lada + '" selected="true">' + country_list[key].name + '</option>'
+            if (country_list[key].id == telefono.pais) {
+                pais_list_html += '<option value="' + country_list[key].id + '" selected="true">' + country_list[key].name + '</option>'
 
             }
             else {
-                pais_list_html += '<option value="' + country_list[key].lada + '" >' + country_list[key].name + '</option>'
+                pais_list_html += '<option value="' + country_list[key].id + '" >' + country_list[key].name + '</option>'
 
             }
         }
