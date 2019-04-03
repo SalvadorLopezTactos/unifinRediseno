@@ -282,14 +282,14 @@
                     lnv.leadNoViable.fueraperfilL = $('.campo7nvl').select2('val');
                     lnv.leadNoViable.fueraperfilF = $('.campo8nvf').select2('val');
                     lnv.leadNoViable.fueraperfilCA = $('.campo9nvca').select2('val');
-                    lnv.leadNoViable.quienl = $('.campo10nvl').val();
-                    lnv.leadNoViable.porquel = $('.campo13nvl').val();
+                    lnv.leadNoViable.quienl = $('.campo10nvl').val().trim();
+                    lnv.leadNoViable.porquel = $('.campo13nvl').val().trim();
                     lnv.leadNoViable.noproducl = $('.campo16nvl').select2('val');
-                    lnv.leadNoViable.quienf = $('.campo11nvf').val();
-                    lnv.leadNoViable.porquef = $('.campo14nvf').val();
+                    lnv.leadNoViable.quienf = $('.campo11nvf').val().trim();
+                    lnv.leadNoViable.porquef = $('.campo14nvf').val().trim();
                     lnv.leadNoViable.noproducf = $('.campo17nvf').select2('val');
-                    lnv.leadNoViable.quienca = $('.campo12nvca').val();
-                    lnv.leadNoViable.porqueca = $('.campo15nvca').val();
+                    lnv.leadNoViable.quienca = $('.campo12nvca').val().trim();
+                    lnv.leadNoViable.porqueca = $('.campo15nvca').val().trim();
                     lnv.leadNoViable.noproducca = $('.campo18nvca').select2('val');
 
                     if ($('.campo1chk')[0].checked== true && lnv.leadNoViable.PromotorLeasing==""){
