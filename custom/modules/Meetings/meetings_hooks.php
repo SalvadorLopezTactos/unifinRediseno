@@ -641,17 +641,45 @@ SQL;
         global $current_user;
         $date= TimeDate::getInstance()->nowDb();
         if($args['isUpdate']){
-            $id_m_audit=create_guid();
 
-                //if($bean->status‌ != $bean->fetched_row['status']){
-                if($bean->fetched_row['status'] != $bean->status){
+            $arr_fetched=array();
+            //Llenando arreglo auxiliar de campos que pueden actualizarse
+            foreach ($bean as $key => $value){
+                foreach ($bean->fetched_row as $clave => $valor){
+                    if($key == $clave){
+                        array_push($arr_fetched,$clave);
+                    }
+                }
+            }
+
+            foreach ($arr_fetched as $val){
+
+                if($bean->fetched_row[$val] != $bean->{$val} && $val != "date_modified"){
+                    $id_m_audit=create_guid();
+                    $tipo=$this->getFieldType($bean,$val);
+                    $plataforma=$GLOBALS['service']->platform;
                     $sqlInsert="INSERT INTO meetings_audit (id, parent_id, date_created, created_by, field_name, data_type, before_value_string, after_value_string, before_value_text, after_value_text, event_id, date_updated)
-                            VALUES ('{$id_m_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', 'status', 'enum', '{$bean->fetched_row['status']}', '{$bean->status}', '', '', '1', '{$date}')";
+                            VALUES ('{$id_m_audit}', '{$bean->id}', '{$date}', '{$current_user->id}', '{$val}', '{$tipo}', '{$bean->fetched_row[$val]}', '{$bean->{$val}}', '', '{$plataforma}', '1', '{$date}')";
 
                     $GLOBALS['db']->query($sqlInsert);
                 }
 
+
+            }
+
         }
+
+    }
+
+    /*
+     * Regresa el tipo de dato de un campo
+     * @param $bean Object, objeto con la definición completa de la entidad de Meetings
+     * @param $field string, cadena con el nombre del campo del que se quiere obtener el tipo de dato
+     * return string, tipo de dato de un campo
+     * */
+    function getFieldType($bean,$field){
+
+        return $bean->field_defs[$field]['type'];
 
     }
 
