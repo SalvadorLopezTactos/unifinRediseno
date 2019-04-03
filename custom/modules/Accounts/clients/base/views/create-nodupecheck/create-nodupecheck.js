@@ -12,7 +12,6 @@
     extendsFrom: 'CreateView',
     //extendsFrom: 'BaseCreateNodupecheckView',
 
-
     initialize: function (options) {
         self = this;
         this._super("initialize", [options]);
@@ -21,6 +20,7 @@
         this.model.addValidationTask('check_email_telefono', _.bind(this._doValidateEmailTelefono, this));
         this.model.addValidationTask('check_rfc', _.bind(this._doValidateRFC, this));
         this.model.addValidationTask('check_fecha_de_nacimiento', _.bind(this._doValidateMayoriadeEdad, this));
+        this.model.addValidationTask('check_telefonos', _.bind(this.validatelefonosexisting, this));
         this.model.addValidationTask('check_account_direcciones', _.bind(this._doValidateDireccion, this));
         this.model.addValidationTask('check_Tiene_Contactos', _.bind(this._doValidateTieneContactos, this));
         this.model.addValidationTask('check_1900_year', _.bind(this.fechaMenor1900, this));
@@ -1013,4 +1013,73 @@
         callback(null,fields,errors);
     },
 
+//@Jesus Carrillo
+    validatelefonosexisting: function (fields, errors, callback) {
+        var expreg =/^[0-9]{8,13}$/;
+        var cont=0;
+
+            $('.existingTelephono').each(function () {
+                if(!expreg.test($(this).val())){
+                    cont++;
+                    $(this).css('border-color', 'red');
+                }else{
+                //funcion
+                var cont=0;
+                for (var i =0; i < $(this).val().length; i++) {
+                    if($(this).val().charAt(0)==$(this).val().charAt(i)){
+                        cont++;
+                    }
+                }
+                if(cont==$(this).val().length){
+                        app.alert.show('numero_repetido1234', {
+                        level: 'error',
+                        autoClose: true,
+                        messages: 'Tel\u00E9fono Inv\u00E1lido caracter repetido'
+                        });
+                    errors['repetido'] = errors['Tel\u00E9fono Inv\u00E1lido,un mismo n\u00FA ha sido repetido varias veces'] || {};
+                    errors['repetido'].required = true;
+                    $(this).css('border-color', 'red');
+                    callback(null, fields, errors);
+
+                } else {
+                    $(this).css('border-color', '');
+                }
+            }
+            });
+            $('.existingPais').each(function () {
+                if($(this).val()==''){
+                    cont++;
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+            $('.existingTipotelefono').each(function () {
+                if($(this).val()==''){
+                    cont++;
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+            $('.existingEstatus').each(function () {
+                if($(this).val()==''){
+                    cont++;
+                    $(this).css('border-color', 'red');
+                }else{
+                    $(this).css('border-color', '');
+                }
+            });
+
+        if(cont>0){
+                errors['existingtelefono'] = errors['existingtelefono'] || {};
+                errors['existingtelefono'].required = true;
+                app.alert.show('error_modultel', {
+                    level: 'error',
+                    autoClose: true,
+                    messages: 'Favor de llenar los campos se\u00F1alados.'
+                });
+        }
+        callback(null, fields, errors);
+    },
 })
