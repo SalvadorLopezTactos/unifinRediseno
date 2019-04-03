@@ -40,7 +40,7 @@ class LeadNV_hook
             $beanNV->tct_competencia_porque_f_txf_c = $leadNoViale['porquef'];
             $beanNV->no_producto_requiere_f_ddw_c = $leadNoViale['noproducf'];
             $beanNV->tct_competencia_quien_ca_txf_c = $leadNoViale['quienca'];
-            $beanNV->tct_competencia_porque_ca_txf_c = $leadNoViale['porqueca'];
+            $beanNV->tct_competencia_porque_ca_txf_ = $leadNoViale['porqueca'];
             $beanNV->no_producto_requiere_ca_ddw_c = $leadNoViale['noproducca'];
             $beanNV->user_id_c= $leadNoViale['PromotorLeasing'];
             $beanNV->user_id1_c= $leadNoViale['PromotorFactoraje'];
