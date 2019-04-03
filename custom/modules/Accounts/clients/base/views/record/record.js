@@ -1647,7 +1647,8 @@
        * 22-08-2018 Victor Martínez
         */
     prospectocontactadoClicked:function(){
-        if ((this.model.get('tipo_registro_c') == "Lead" && $('.campo1chk')[0].checked && $('.campo2chk')[0].checked && $('.campo3chk')[0].checked)){
+        if ((this.model.get('tipo_registro_c') == "Lead" && $('.campo1chk')[0].checked && $('.campo2chk')[0].checked && $('.campo3chk')[0].checked) &&
+            (this.model.get('user_id_c')== "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id1_c')== "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id2_c')== "cc736f7a-4f5f-11e9-856a-a0481cdf89eb")){
             app.alert.show("Cumple 3 checks", {
             level: "error",
                 title: 'Esta cuenta no se puede convertir a prospecto ya que es un lead no viable.',
