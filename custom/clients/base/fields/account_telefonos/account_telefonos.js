@@ -36,7 +36,7 @@
         'click  .mcall': 'makecall',
         //'change .newTelefono':'checkNorepeat',  Valida que un número no se repita ocho veces
     },
-    
+
     _flag2Deco: {
         principal: {lbl: "LBL_EMAIL_PRIMARY", cl: "primary"},
         opt_out: {lbl: "LBL_EMAIL_OPT_OUT", cl: "opted-out"},
@@ -310,11 +310,11 @@
                             });
                         //$($input).focus();
                         $('.newtelefono').css('border-color', 'red');
-                        //}   
+                        //}
                     }else{
                         this._addNewTelefonoToModel(telefono);
                         $('.newtelefono').css('border-color', '');
-                    
+
                         // build the new email field
                         currentValue = this.model.get(this.name);
                         telefonoFieldHtml = this._buildTelefonoFieldHtml({
@@ -360,7 +360,7 @@
                 autoClose: true,
                 messages: 'Favor de llenar o corregir los campos se\u00F1alados.'
             });*/
-            
+
 
             if(this.$('.newTipotelefono').val()=='' || this.$('.newTipotelefono').val()==null ){
                 this.$('.newTipotelefono').css('border-color', 'red');
@@ -696,7 +696,7 @@
     _clearNewAddressField: function () {
         this._getNewEmailField()
             .val('');
-        $('.newPais').val('52');
+        $('.newPais').val('2');
         $('.newPais').css('border-color', '');
         $('.newExtension').val('');
         $('.newExtension').css('border-color', '');
