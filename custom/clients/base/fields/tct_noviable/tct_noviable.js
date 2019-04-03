@@ -271,27 +271,35 @@
             },
 
             SaveLeadsnoViable: function (fields, errors, callback) {
-                if (this.model.get('tipo_registro_c')=="Lead" && this.model.get('id')!= "" && this.model.get('id')!= undefined && ($('.campo1chk')[0].checked== true || $('.campo2chk')[0].checked== true || $('.campo3chk')[0].checked== true)){
-                    //Mapea los campos del modulo No viable en el objeto lnv.leadNoViable
-                    lnv.leadNoViable.campo1chk = $('.campo1chk')[0].checked;
-                    lnv.leadNoViable.campo2chk = $('.campo2chk')[0].checked;
-                    lnv.leadNoViable.campo3chk = $('.campo3chk')[0].checked;
-                    lnv.leadNoViable.razonleasing = $('.campo4nvl').select2('val');
-                    lnv.leadNoViable.razonfactoraje = $('.campo5nvf').select2('val');
-                    lnv.leadNoViable.razonca = $('.campo6nvca').select2('val');
-                    lnv.leadNoViable.fueraperfilL = $('.campo7nvl').select2('val');
-                    lnv.leadNoViable.fueraperfilF = $('.campo8nvf').select2('val');
-                    lnv.leadNoViable.fueraperfilCA = $('.campo9nvca').select2('val');
-                    lnv.leadNoViable.quienl = $('.campo10nvl').val().trim();
-                    lnv.leadNoViable.porquel = $('.campo13nvl').val().trim();
-                    lnv.leadNoViable.noproducl = $('.campo16nvl').select2('val');
-                    lnv.leadNoViable.quienf = $('.campo11nvf').val().trim();
-                    lnv.leadNoViable.porquef = $('.campo14nvf').val().trim();
-                    lnv.leadNoViable.noproducf = $('.campo17nvf').select2('val');
-                    lnv.leadNoViable.quienca = $('.campo12nvca').val().trim();
-                    lnv.leadNoViable.porqueca = $('.campo15nvca').val().trim();
-                    lnv.leadNoViable.noproducca = $('.campo18nvca').select2('val');
-
+                if (this.model.get('tipo_registro_c')=="Lead" && this.model.get('id')!= "" && this.model.get('id')!= undefined){
+                    //Mapea los campos del modulo No viable con producto LEASING en el objeto lnv.leadNoViable
+                    if($('.campo1chk')[0].checked== true){
+                        lnv.leadNoViable.campo1chk = $('.campo1chk')[0].checked;
+                        lnv.leadNoViable.razonleasing = $('.campo4nvl').select2('val');
+                        lnv.leadNoViable.fueraperfilL = $('.campo7nvl').select2('val');
+                        lnv.leadNoViable.quienl = $('.campo10nvl').val().trim();
+                        lnv.leadNoViable.porquel = $('.campo13nvl').val().trim();
+                        lnv.leadNoViable.noproducl = $('.campo16nvl').select2('val');
+                    }
+                    //Mapea los campos del modulo No viable con producto FACTORAJE en el objeto lnv.leadNoViable
+                    if ( $('.campo2chk')[0].checked== true){
+                        lnv.leadNoViable.campo2chk = $('.campo2chk')[0].checked;
+                        lnv.leadNoViable.razonfactoraje = $('.campo5nvf').select2('val');
+                        lnv.leadNoViable.fueraperfilF = $('.campo8nvf').select2('val');
+                        lnv.leadNoViable.quienf = $('.campo11nvf').val().trim();
+                        lnv.leadNoViable.porquef = $('.campo14nvf').val().trim();
+                        lnv.leadNoViable.noproducf = $('.campo17nvf').select2('val');
+                    }
+                    //Mapea los campos del modulo No viable con producto CREDITO AUTOMOTRIZ en el objeto lnv.leadNoViable
+                    if($('.campo3chk')[0].checked== true){
+                        lnv.leadNoViable.campo3chk = $('.campo3chk')[0].checked;
+                        lnv.leadNoViable.razonca = $('.campo6nvca').select2('val');
+                        lnv.leadNoViable.fueraperfilCA = $('.campo9nvca').select2('val');
+                        lnv.leadNoViable.quienca = $('.campo12nvca').val().trim();
+                        lnv.leadNoViable.porqueca = $('.campo15nvca').val().trim();
+                        lnv.leadNoViable.noproducca = $('.campo18nvca').select2('val');
+                    }
+                    //Pregunta por los cheks de cada producto y si el promotor es vacío para asignar el del usuario logueado.
                     if ($('.campo1chk')[0].checked== true && lnv.leadNoViable.PromotorLeasing==""){
                         lnv.leadNoViable.PromotorLeasing = App.user.attributes.id;
                     }
@@ -310,18 +318,30 @@
            noeditables: function (){
               if ($('.campo1chk')[0].checked){
                   //Campos sin editar Leasing
-                  $('.campo1chk').css({pointerEvents:"none"});
-                  $('.leasingp').css({pointerEvents:"none"});
+                  $('.campo1chk').prop("disabled", true);
+                  $('.campo4nvl').prop("disabled", true);
+                  $('.campo7nvl').prop("disabled", true);
+                  $('.campo10nvl').prop("disabled", true);
+                  $('.campo13nvl').prop("disabled", true);
+                  $('.campo16nvl').prop("disabled", true);
               }
                if($('.campo2chk')[0].checked){
                    //Campos sin editar Factoraje
-                   $('.campo2chk').css({pointerEvents:"none"});
-                   $('.factorajep').css({pointerEvents:"none"});
+                   $('.campo2chk').prop("disabled", true);
+                   $('.campo5nvf').prop("disabled", true);
+                   $('.campo8nvf').prop("disabled", true);
+                   $('.campo11nvf').prop("disabled", true);
+                   $('.campo14nvf').prop("disabled", true);
+                   $('.campo17nvf').prop("disabled", true);
                }
                if ($('.campo3chk')[0].checked){
                    //Campos sin editar Credito Automotriz
-                   $('.campo3chk').css({pointerEvents:"none"});
-                   $('.creditoautop').css({pointerEvents:"none"});
+                   $('.campo3chk').prop("disabled", true);
+                   $('.campo6nvca').prop("disabled", true);
+                   $('.campo9nvca').prop("disabled", true);
+                   $('.campo12nvca').prop("disabled", true);
+                   $('.campo15nvca').prop("disabled", true);
+                   $('.campo18nvca').prop("disabled", true);
               }
 
             },
