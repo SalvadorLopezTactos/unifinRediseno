@@ -273,7 +273,7 @@
             SaveLeadsnoViable: function (fields, errors, callback) {
                 if (this.model.get('tipo_registro_c')=="Lead" && this.model.get('id')!= "" && this.model.get('id')!= undefined){
                     //Mapea los campos del modulo No viable con producto LEASING en el objeto lnv.leadNoViable
-                    if($('.campo1chk')[0].checked== true){
+                    if($('.campo1chk')[0].checked== true && typeof $('.campo4nvl').select2('val')=="string"){
                         lnv.leadNoViable.campo1chk = $('.campo1chk')[0].checked;
                         lnv.leadNoViable.razonleasing = $('.campo4nvl').select2('val');
                         lnv.leadNoViable.fueraperfilL = $('.campo7nvl').select2('val');
@@ -282,7 +282,7 @@
                         lnv.leadNoViable.noproducl = $('.campo16nvl').select2('val');
                     }
                     //Mapea los campos del modulo No viable con producto FACTORAJE en el objeto lnv.leadNoViable
-                    if ( $('.campo2chk')[0].checked== true){
+                    if ( $('.campo2chk')[0].checked== true && typeof $('.campo5nvf').select2('val')=="string"){
                         lnv.leadNoViable.campo2chk = $('.campo2chk')[0].checked;
                         lnv.leadNoViable.razonfactoraje = $('.campo5nvf').select2('val');
                         lnv.leadNoViable.fueraperfilF = $('.campo8nvf').select2('val');
@@ -291,7 +291,7 @@
                         lnv.leadNoViable.noproducf = $('.campo17nvf').select2('val');
                     }
                     //Mapea los campos del modulo No viable con producto CREDITO AUTOMOTRIZ en el objeto lnv.leadNoViable
-                    if($('.campo3chk')[0].checked== true){
+                    if($('.campo3chk')[0].checked== true && typeof $('.campo6nvca').select2('val')=="string"){
                         lnv.leadNoViable.campo3chk = $('.campo3chk')[0].checked;
                         lnv.leadNoViable.razonca = $('.campo6nvca').select2('val');
                         lnv.leadNoViable.fueraperfilCA = $('.campo9nvca').select2('val');
