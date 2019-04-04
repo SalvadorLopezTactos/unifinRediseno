@@ -71,7 +71,7 @@ class tct3_noviable_sugar extends Basic {
     public $tct_competencia_porque_f_txf_c;
     public $no_producto_requiere_f_ddw_c;
     public $tct_competencia_quien_ca_txf_c;
-    public $tct_competencia_porque_ca_txf_;
+    public $tct_competencia_porque_ca_txf_c;
     public $no_producto_requiere_ca_ddw_c;
     public $user_id_c;
     public $tct_promotornvleasing_c;

@@ -428,11 +428,11 @@ $dictionary['tct3_noviable'] = array(
     'len' => '100',
     'size' => '20',
   ),
-  'tct_competencia_porque_ca_txf_' => 
+  'tct_competencia_porque_ca_txf_c' =>
   array (
     'required' => false,
-    'name' => 'tct_competencia_porque_ca_txf_',
-    'vname' => 'LBL_TCT_COMPETENCIA_PORQUE_CA_TXF_',
+    'name' => 'tct_competencia_porque_ca_txf_c',
+    'vname' => 'LBL_TCT_COMPETENCIA_PORQUE_CA_TXF_c',
     'type' => 'varchar',
     'massupdate' => false,
     'no_default' => false,
