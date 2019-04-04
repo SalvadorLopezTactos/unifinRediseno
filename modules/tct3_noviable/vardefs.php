@@ -432,7 +432,7 @@ $dictionary['tct3_noviable'] = array(
   array (
     'required' => false,
     'name' => 'tct_competencia_porque_ca_txf_c',
-    'vname' => 'LBL_TCT_COMPETENCIA_PORQUE_CA_TXF_c',
+    'vname' => 'LBL_TCT_COMPETENCIA_PORQUE_CA_TXF_C',
     'type' => 'varchar',
     'massupdate' => false,
     'no_default' => false,
