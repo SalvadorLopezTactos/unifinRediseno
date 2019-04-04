@@ -81,7 +81,7 @@
                     lnv.leadNoViable.porquef = data.records[0].tct_competencia_porque_f_txf_c;
                     lnv.leadNoViable.noproducf = data.records[0].no_producto_requiere_f_ddw_c;
                     lnv.leadNoViable.quienca = data.records[0].tct_competencia_quien_ca_txf_c;
-                    lnv.leadNoViable.porqueca = data.records[0].tct_competencia_porque_ca_txf_;
+                    lnv.leadNoViable.porqueca = data.records[0].tct_competencia_porque_ca_txf_c;
                     lnv.leadNoViable.noproducca = data.records[0].no_producto_requiere_ca_ddw_c;
                     lnv.leadNoViable.PromotorLeasing= data.records[0].user_id_c;
                     lnv.leadNoViable.PromotorFactoraje= data.records[0].user_id1_c;
