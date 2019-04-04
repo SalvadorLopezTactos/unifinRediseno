@@ -1651,7 +1651,7 @@
             (this.model.get('user_id_c')== "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id1_c')== "cc736f7a-4f5f-11e9-856a-a0481cdf89eb" && this.model.get('user_id2_c')== "cc736f7a-4f5f-11e9-856a-a0481cdf89eb")){
             app.alert.show("Cumple 3 checks", {
             level: "error",
-                title: 'Esta cuenta no se puede convertir a prospecto ya que es un lead no viable.',
+                title: 'Esta cuenta no se puede convertir a prospecto ya que es un lead no viable en los tres productos.',
                 autoClose: false
             });
             return;
