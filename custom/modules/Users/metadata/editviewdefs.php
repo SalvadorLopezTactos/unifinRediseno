@@ -100,7 +100,11 @@ array (
             'name' => 'iniciales_c',
             'label' => 'LBL_INICIALES',
           ),
-          1 => '',
+          1 => 
+          array (
+            'name' => 'nombre_completo_c',
+            'label' => 'LBL_NOMBRE_COMPLETO_C',
+          ),
         ),
         4 => 
         array (
