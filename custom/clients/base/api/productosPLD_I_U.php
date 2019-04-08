@@ -156,7 +156,7 @@ class productosPLD_I_U extends SugarApi
 
         $beanModule = BeanFactory::getBean("Accounts", $idCuenta);
 
-        if ($beanModule->load_relationship('accounts_tct_pld_1')) {
+        if ($beanModule->load_relationship('accounts_tct_pld_1',array('disable_row_level_security' => true))) {
             $relatedBeans = $beanModule->accounts_tct_pld_1->getBeans();
             foreach ($relatedBeans as $value) {
                 $prod = $value->description;
