@@ -740,7 +740,7 @@ SQL;
                 }
                 //CVV - valida que la persona ya se encuentre sincornizada con UNICS, de lo contrario manda a insertar completo
                 if($bean->sincronizado_unics_c == 1){
-                    if (($bean->tipo_registro_c == 'Lead' && $relacionado==1) || $bean->tipo_registro_c != 'Lead') {
+                    if (($bean->tipo_registro_c == 'Lead' && ($relacionado==1 || $bean->esproveedor_c)) || $bean->tipo_registro_c != 'Lead') {
                       $Actualizacliente = $callApi->actualizaPersonaUNICS($bean);
                       $this->emailChangetoUnics($bean);
                     }
