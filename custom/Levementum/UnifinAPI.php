@@ -340,7 +340,7 @@ class UnifinAPI
                     /***CVV INICIO***/
                     if ($cliente['UNI2_CTE_030_InsertaClienteCompletoResult']['bResultado'] == true){
                         //Actualizamos el registro a tipo Cliente
-                        $tipo_registro = (($objecto->tipo_registro_c == 'Persona' || $objecto->tipo_registro_c == 'Proveedor') ? $objecto->tipo_registro_c : 'Cliente');
+                        $tipo_registro = (($objecto->tipo_registro_c == 'Lead' || $objecto->tipo_registro_c == 'Persona' || $objecto->tipo_registro_c == 'Proveedor') ? $objecto->tipo_registro_c : 'Cliente');
                         $objecto->tipo_registro_c = $tipo_registro;
                         $objecto->sincronizado_unics_c = '1';
                         global $db;
