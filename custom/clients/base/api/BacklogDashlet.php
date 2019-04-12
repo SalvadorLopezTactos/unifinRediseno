@@ -583,7 +583,7 @@ SQL;
         $backlog->description .= "\r\n" . $current_user->first_name . " " . $current_user->last_name . " - " . $todayDate . ": " . $comentarios_de_cancelacion;
 
         /* AF- 2018-10-24
-         *  Se modifica condición 
+         *  Se modifica condición
         //if($motivo_de_cancelacion != "Cliente no interesado" && $motivo_de_cancelacion != "No viable"){
         */
         if($motivo_de_cancelacion == 'Mes posterior'){
@@ -1226,7 +1226,7 @@ SQL;
         global $db;
         $query = <<<SQL
 SELECT id, CONCAT(first_name, " ", last_name) AS full_name FROM users u
-INNER JOIN users_cstm uc ON uc.id_c = u.id 
+INNER JOIN users_cstm uc ON uc.id_c = u.id
 WHERE u.deleted = 0
 AND reports_to_id = '{$id}'
 SQL;
@@ -1261,7 +1261,7 @@ case equipo_c when '1' then 1 when '2' then 2 when '3' then 3 when '4' then 4 wh
 when 'MTY' then 10 when 'HER' then 11 when 'CHI' then 12 when 'GDL' then 13 when 'QRO' then 14 when 'QRO2' then 15  when 'LEO' then 16
 when 'PUE' then 17 when 'VER' then 18 when 'CUN' then 19 when 'CAN' then 19 when 'MER' then 20 when 'TOL' then 21 when 'CASA' then 22 when '0' then 50 else equipo_c end AS ordenEquipo
 FROM users_cstm uc
-INNER JOIN users u ON u.id = uc.id_c 
+INNER JOIN users u ON u.id = uc.id_c
 WHERE u.deleted = 0
 and equipo_c not in ('CA','CA1','CA2','CA3','CAS','F1','F2','F3','F4','F5')
 SQL;
@@ -1292,8 +1292,8 @@ SQL;
         //$response[$current_user->equipo_c] = $current_user->equipo_c;
         while($row = $db->fetchByAssoc($queryResult))
         {
-            //$response[$row['equipo_c']] = $row['equipo_c'];
-            $response[$row['ordenEquipo']] = $row['equipo_c'];
+            $response[$row['equipo_c']] = $row['equipo_c'];
+            //$response[$row['ordenEquipo']] = $row['equipo_c'];
 
             if($access != "Full_Access") {
                 $children = $this->getEquiposChildren($row['id']);
@@ -1321,7 +1321,7 @@ case equipo_c when '1' then 1 when '2' then 2 when '3' then 3 when '4' then 4 wh
 when 'MTY' then 10 when 'HER' then 11 when 'CHI' then 12 when 'GDL' then 13 when 'QRO' then 14 when 'QRO2' then 15 when 'LEO' then 16
 when 'PUE' then 17 when 'VER' then 18 when 'CUN' then 19 when 'CAN' then 19 when 'MER' then 20 when 'TOL' then 21 when 'CASA' then 22 when '0' then 50 else equipo_c end AS ordenEquipo
 FROM users_cstm uc
-INNER JOIN users u ON u.id = uc.id_c 
+INNER JOIN users u ON u.id = uc.id_c
 WHERE u.deleted = 0 AND u.reports_to_id = '{$id}'
 and equipo_c not in ('CA','CA1','CA2','CA3','CAS','F1','F2','F3','F4','F5')
 ORDER BY  ordenEquipo
