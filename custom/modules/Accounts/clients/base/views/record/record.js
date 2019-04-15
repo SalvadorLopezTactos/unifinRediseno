@@ -305,7 +305,7 @@
 
             concatDirecciones.push(strDireccionTemp.replace(/\s/g, "").toUpperCase());
 
-        }checkInVentas
+        }
 
         // validamos  el arreglo generado
         var existe = false;
