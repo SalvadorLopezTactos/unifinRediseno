@@ -12,9 +12,10 @@ $dictionary['Account']['fields']['tct_tipo_subtipo_txf_c']['formula'] = 'ifElse(
 	ifElse(
 		equal($tipo_registro_c,"Proveedor"),
 		"PROVEEDOR",
-		concat(getDropdownValue("tipo_registro_list",$tipo_registro_c)," ",getDropdownValue("subtipo_cuenta_list",$subtipo_cuenta_c))
+		strToUpper(concat(getDropdownValue("tipo_registro_list",$tipo_registro_c)," ",getDropdownValue("subtipo_cuenta_list",$subtipo_cuenta_c)))
 	)
 )';
-$dictionary['Account']['fields']['tct_tipo_subtipo_txf_c']['enforced'] = '1';
-$dictionary['Account']['fields']['tct_tipo_subtipo_txf_c']['dependency'] = '';
+$dictionary['Account']['fields']['tct_tipo_subtipo_txf_c']['enforced']='1';
+$dictionary['Account']['fields']['tct_tipo_subtipo_txf_c']['dependency']='';
 
+ ?>
