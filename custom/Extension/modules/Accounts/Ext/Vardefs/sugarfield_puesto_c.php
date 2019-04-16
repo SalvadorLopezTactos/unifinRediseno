@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Account']['fields']['puesto_c']['labelValue'] = 'Puesto';
 $dictionary['Account']['fields']['puesto_c']['dependency'] = 'or(
 equal($tipodepersona_c,"Persona Fisica"),

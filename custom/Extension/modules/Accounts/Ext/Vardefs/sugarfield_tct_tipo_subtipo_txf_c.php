@@ -1,9 +1,9 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Account']['fields']['tct_tipo_subtipo_txf_c']['duplicate_merge_dom_value'] = 0;
 $dictionary['Account']['fields']['tct_tipo_subtipo_txf_c']['labelValue'] = 'Tipo y Subtipo de la Cuenta';
 $dictionary['Account']['fields']['tct_tipo_subtipo_txf_c']['full_text_search']['enabled'] = true;
-$dictionary['Account']['fields']['tct_tipo_subtipo_txf_c']['full_text_search']['searchable'] = false;
+$dictionary['Account']['fields']['tct_tipo_subtipo_txf_c']['full_text_search']['searchable'] = true;
 $dictionary['Account']['fields']['tct_tipo_subtipo_txf_c']['full_text_search']['boost'] = 1;
 $dictionary['Account']['fields']['tct_tipo_subtipo_txf_c']['calculated'] = '1';
 $dictionary['Account']['fields']['tct_tipo_subtipo_txf_c']['formula'] = 'ifElse(

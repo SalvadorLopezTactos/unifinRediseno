@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Opportunity']['fields']['plazo_ratificado_incremento_c']['labelValue'] = 'Plazo para ratificación';
 $dictionary['Opportunity']['fields']['plazo_ratificado_incremento_c']['dependency'] = 'equal($tipo_operacion_c,"2")';
 $dictionary['Opportunity']['fields']['plazo_ratificado_incremento_c']['visibility_grid']['trigger'] = 'tipo_producto_c';

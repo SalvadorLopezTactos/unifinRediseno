@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Account']['fields']['tct_fedeicomiso_c9_cur_c']['labelValue'] = ' Aportaciones de los fideicomitentes';
 $dictionary['Account']['fields']['tct_fedeicomiso_c9_cur_c']['enforced'] = '';
 $dictionary['Account']['fields']['tct_fedeicomiso_c9_cur_c']['dependency'] = '';

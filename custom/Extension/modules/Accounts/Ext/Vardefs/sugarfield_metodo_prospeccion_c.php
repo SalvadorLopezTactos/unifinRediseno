@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Account']['fields']['metodo_prospeccion_c']['labelValue'] = 'Prospección Propia';
 $dictionary['Account']['fields']['metodo_prospeccion_c']['dependency'] = 'equal($origendelprospecto_c,"Prospeccion propia")';
 $dictionary['Account']['fields']['metodo_prospeccion_c']['visibility_grid'] = '';

@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Account']['fields']['tct_fedeicomiso_c14_2_txf_c']['labelValue'] = 'Especifique Tipo de Operación';
 $dictionary['Account']['fields']['tct_fedeicomiso_c14_2_txf_c']['full_text_search']['enabled'] = true;
 $dictionary['Account']['fields']['tct_fedeicomiso_c14_2_txf_c']['full_text_search']['searchable'] = true;

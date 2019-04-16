@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Account']['fields']['sectoreconomico_c']['labelValue'] = 'Sector Económico';
 $dictionary['Account']['fields']['sectoreconomico_c']['dependency'] = '';
 $dictionary['Account']['fields']['sectoreconomico_c']['visibility_grid']['trigger'] = 'tct_macro_sector_ddw_c';

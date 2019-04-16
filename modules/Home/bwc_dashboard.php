@@ -483,13 +483,8 @@ foreach($pages[$activePage]['columns'] as $colNum => $column) {
 			$myDashlet = new MySugar($module);
 
 			if($myDashlet->checkDashletDisplay()) {
-        		require_once($dashlets[$id]['fileLocation']);
-        		if ($dashlets[$id]['className'] == 'ChartsDashlet'){
-        			$dashlet = new $dashlets[$id]['className']($id, $dashlets[$id]['reportId'], (isset($dashlets[$id]['options']) ? $dashlets[$id]['options'] : array()));
-        		}
-            	else{
-	            	$dashlet = new $dashlets[$id]['className']($id, (isset($dashlets[$id]['options']) ? $dashlets[$id]['options'] : array()));
-            	}
+                $dashlet = Dashlet::instantiate($id, $dashlets[$id]);
+
                 // Need to add support to dynamically display/hide dashlets
                 // If it has a method 'shouldDisplay' we will call it to see if we should display it or not
                 if (method_exists($dashlet,'shouldDisplay')) {

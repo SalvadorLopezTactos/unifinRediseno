@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['dire_Direccion']['fields']['numext']['type'] = 'varchar';
 $dictionary['dire_Direccion']['fields']['numext']['len'] = '100';
 $dictionary['dire_Direccion']['fields']['numext']['full_text_search']['boost'] = 1;

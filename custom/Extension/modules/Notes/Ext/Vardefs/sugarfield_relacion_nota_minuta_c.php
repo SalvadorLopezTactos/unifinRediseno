@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Note']['fields']['relacion_nota_minuta_c']['labelValue'] = 'Minuta';
 $dictionary['Note']['fields']['relacion_nota_minuta_c']['dependency'] = '';
 

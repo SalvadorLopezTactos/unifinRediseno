@@ -130,7 +130,18 @@ class ListApi extends SugarListApi {
 
         if ( !empty($queryParts['secondary_select']) ) {
             // There are some secondary selects we need to run to get the whole dataset
-            $idList = "('".implode("','",array_keys($records))."')";
+            $idList = sprintf(
+                '(%s)',
+                implode(
+                    ', ',
+                    array_map(
+                        function ($record) {
+                            return $GLOBALS['db']->quoted($record);
+                        },
+                        array_keys($records)
+                    )
+                )
+            );
             
             $secondaryQuery = $queryParts['secondary_select'] . $queryParts['secondary_from'] . ' WHERE '.$seed->table_name.'.id IN ' .$idList;
             

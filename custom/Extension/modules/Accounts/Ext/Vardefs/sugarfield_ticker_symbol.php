@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Account']['fields']['ticker_symbol']['audited'] = false;
 $dictionary['Account']['fields']['ticker_symbol']['massupdate'] = false;
 $dictionary['Account']['fields']['ticker_symbol']['comments'] = 'The stock trading (ticker) symbol for the company';
