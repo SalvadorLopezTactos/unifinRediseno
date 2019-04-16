@@ -187,6 +187,21 @@ SQL;
             }
         }
 
+        //Agrega SubBacklogs y Children a MyBacklogs
+        foreach ($response['backlogs']['SubBacklogs'] as $SubBacklog) {
+          foreach ($SubBacklog['linea'] as $index => $linea) {
+            $response['backlogs']['MyBacklogs']['linea'][$index] = $linea;
+          }
+        }
+
+        foreach ($response['backlogs']['Children'] as $Children) {
+          foreach ($Children['linea'] as $index => $linea) {
+            $response['backlogs']['MyBacklogs']['linea'][$index] = $linea;
+          }
+        }
+        $response['backlogs']['SubBacklogs']=[];
+        $response['backlogs']['Children']=[];
+
         $query = <<<SQL
 SELECT r.name FROM acl_roles r
 INNER JOIN acl_roles_users ru ON ru.role_id = r.id AND ru.deleted = 0
