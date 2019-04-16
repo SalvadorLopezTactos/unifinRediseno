@@ -2655,8 +2655,7 @@
         "dist": {
             "type": "path",
             "url": "dist/identity-provider",
-            "reference": "196815c2f4e14b6318fadb74c73a278f813d5797",
-            "shasum": null
+            "reference": "196815c2f4e14b6318fadb74c73a278f813d5797"
         },
         "require": {
             "doctrine/dbal": "~2.2",

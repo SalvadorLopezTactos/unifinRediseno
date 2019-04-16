@@ -23,22 +23,28 @@ else {
     $bean->$field = unformat_number($field_value);
 }
 
-$bean->save(false);
-
 $ret_array = array();
-$ret_array['id'] = $record;
-$ret_array['field'] = $field;
-if ($type != 'currency')
-    $ret_array['value'] = $bean->$field;
-else {
-    global $locale;
-    $params = array();
-    $params['currency_id'] = $_REQUEST['currency_id'];
-    $params['convert'] = false;
-    $params['currency_symbol'] = $_REQUEST['currency_symbol'];
+if (!$bean->ACLAccess('Save')
+    || !$bean->ACLFieldAccess($field, 'Save')
+    || ($bean->deleted === 1 && !$bean->ACLAccess('Delete'))) {
+    $ret_array['id'] = '-1';
+    $ret_array['error'] = 'not authorized';
+} else {
+    $bean->save(false);
+    $ret_array['id'] = $record;
+    $ret_array['field'] = $field;
+    if ($type != 'currency') {
+        $ret_array['value'] = $bean->$field;
+    } else {
+        global $locale;
+        $params = array();
+        $params['currency_id'] = $_REQUEST['currency_id'];
+        $params['convert'] = false;
+        $params['currency_symbol'] = $_REQUEST['currency_symbol'];
 
-    $ret_array['currency_formatted_value']  = currency_format_number($bean->$field, $params);
-    $ret_array['formatted_value'] = format_number($bean->$field);
+        $ret_array['currency_formatted_value'] = currency_format_number($bean->$field, $params);
+        $ret_array['formatted_value'] = format_number($bean->$field);
+    }
 }
 
 header("Content-Type: application/json");

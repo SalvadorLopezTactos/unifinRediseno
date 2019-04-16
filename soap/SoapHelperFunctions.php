@@ -644,7 +644,7 @@ function new_handle_set_entries($module_name, $name_value_lists, $select_fields 
 			$GLOBALS['log']->debug('Creating Contact Account');
 			add_create_account($seed);
 			$duplicate_id = check_for_duplicate_contacts($seed);
-			if($duplicate_id == null){
+            if ($duplicate_id === null) {
 				if($seed->ACLAccess('Save') && ($seed->deleted != 1 || $seed->ACLAccess('Delete'))){
 					$seed->save();
 					if($seed->deleted == 1){
@@ -1023,13 +1023,15 @@ function check_for_duplicate_contacts($seed){
         //This query is looking for the id of Contact records that do not have a primary email address based on the matching
         //first and last name and the record being not deleted.  If any such records are found we will take the first one and assume
         //that it is the duplicate record
-	    $query = "SELECT c.id as id FROM contacts c
+        $query = <<<SQL
+SELECT c.id as id FROM contacts c
 LEFT OUTER JOIN email_addr_bean_rel eabr ON eabr.bean_id = c.id
-WHERE c.first_name = '{$trimmed_first}' AND c.last_name = '{$trimmed_last}' AND c.deleted = 0 AND eabr.id IS NULL";
+WHERE c.first_name = ? AND c.last_name = ? AND c.deleted = 0 AND eabr.id IS NULL
+SQL;
 
-        //Apply the limit query filter to this since we only need the first record
-        $result = $GLOBALS['db']->getOne($query);
-        return !empty($result) ? $result : null;
+        $id = $seed->db->getConnection()->executeQuery($query, [$trimmed_first, $trimmed_last])->fetchColumn();
+        // fetchColumn returns FALSE for empty result but NULL is expected
+        return $id ?: null;
     }
 }
 

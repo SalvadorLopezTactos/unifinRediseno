@@ -345,7 +345,7 @@ class OutboundEmail extends SugarBean
             $options = $stmt->fetchColumn();
 
             if ($options) {
-                $options = unserialize(base64_decode($options));
+                $options = unserialize(base64_decode($options), ['allowed_classes' => false]);
                 if (!empty($options['outbound_email'])) {
                     $criteria['id'] = $options['outbound_email'];
 				}
@@ -372,7 +372,7 @@ class OutboundEmail extends SugarBean
 
         $results = array();
         while ($row = $stmt->fetch()) {
-            $opts = unserialize(base64_decode($row['stored_options']));
+            $opts = unserialize(base64_decode($row['stored_options']), ['allowed_classes' => false]);
             if( isset($opts['outbound_email']) && $opts['outbound_email'] == $this->id)
             {
                 $results[] = $row['id'];
@@ -403,7 +403,7 @@ class OutboundEmail extends SugarBean
             // its possible that its an system account
             $emailId = $ieId;
             if (!empty($options)) {
-                $options = unserialize(base64_decode($options));
+                $options = unserialize(base64_decode($options), ['allowed_classes' => false]);
                 if (!empty($options['outbound_email'])) {
                     $emailId = array('id' => $options['outbound_email']);
 				}

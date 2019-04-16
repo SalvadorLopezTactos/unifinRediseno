@@ -22,7 +22,7 @@
 
 
 
-
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 global $app_strings;
 global $app_list_strings;
@@ -32,6 +32,7 @@ global $currentModule;
 
 global $theme;
 global $focus_list; // focus_list is the means of passing data to a ListView.
+$request = InputValidation::getService();
 
 $focus = BeanFactory::newBean('Emails');
 $header_text		= '';
@@ -91,10 +92,9 @@ if(isset($_REQUEST['query'])) {
 if (!isset($_REQUEST['search_form']) || $_REQUEST['search_form'] != 'false') {
 	// ASSIGNMENTS pre-processing
 	$email_type_sel = '';
-	$assigned_to_sel = '';
 	$status_sel = '';
 	if(isset($_REQUEST['email_type']))		$email_type_sel = $_REQUEST['email_type'];
-	if(isset($_REQUEST['assigned_to']))		$assigned_to_sel = $_REQUEST['assigned_to'];
+    $assigned_to_sel = $request->getValidInputRequest('assigned_to', 'Assert\Guid', '');
 	if(isset($_REQUEST['status']))			$status_sel = $_REQUEST['status'];
 	if(isset($_REQUEST['search']))			$search_adv = $_REQUEST['search'];
 
@@ -204,7 +204,7 @@ if(!empty($_REQUEST['error'])) {
 }
 //_pp($where);
 if(!empty($assigned_to_sel)) {
-	$whereClauses['emails.assigned_user_id'] = 'emails.assigned_user_id = \''.$assigned_to_sel.'\'';
+    $whereClauses['emails.assigned_user_id'] = 'emails.assigned_user_id = ' . $focus->db->quoted($assigned_to_sel);
 }
 
 //_pp($whereClauses);

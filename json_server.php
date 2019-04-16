@@ -144,7 +144,7 @@ if(strtolower($_SERVER['REQUEST_METHOD'])== 'get') {
 	if(empty($current_user)) {
 		$response['error'] = array("error_msg"=>"not logged in");
 		print $json->encode($response, true);
-		print "not logged in";
+        exit();
 	}
 
 	// extract request
@@ -153,12 +153,14 @@ if(strtolower($_SERVER['REQUEST_METHOD'])== 'get') {
 	if(!is_array($request)) {
 		$response['error'] = array("error_msg"=>"malformed request");
 		print $json->encode($response, true);
+        exit();
 	}
 
 	// make sure required RPC fields are set
 	if(empty($request['method']) || empty($request['id'])) {
 		$response['error'] = array("error_msg"=>"missing parameters");
 		print $json->encode($response, true);
+        exit();
 	}
 
 	$response['id'] = $request['id'];
@@ -168,9 +170,8 @@ if(strtolower($_SERVER['REQUEST_METHOD'])== 'get') {
 	} else {
 		$response['error'] = array("error_msg"=>"method:".$request["method"]." not supported");
 		print $json->encode($response, true);
+        exit();
 	}
 }
 
-ob_end_flush();
-sugar_cleanup();
 exit();

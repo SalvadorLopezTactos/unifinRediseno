@@ -17,6 +17,7 @@
  * Contributor(s): ______________________________________..
  ********************************************************************************/
 
+use Doctrine\DBAL\DBALException;
 use Sugarcrm\Sugarcrm\Util\Serialized;
 
 /*
@@ -570,185 +571,198 @@ function process_subscriptions($subscription_string_to_parse) {
 }
 
 
-    /*This function is used by the Manage Subscriptions page in order to add the user
-     * to the default prospect lists of the passed in campaign
-     * Takes in campaign and prospect list id's we are subscribing to.
-     * It also takes in a bean of the user (lead,target,prospect) we are subscribing
-     * */
-    function subscribe($campaign, $prospect_list, $focus, $default_list = false) {
-            $relationship = strtolower($focus->getObjectName()).'s';
+/***
+ * This function is used by the Manage Subscriptions page in order to add the user
+ * to the default prospect lists of the passed in campaign
+ * Takes in campaign and prospect list id's we are subscribing to.
+ * It also takes in a bean of the user (lead,target,prospect) we are subscribing
+ *
+ * @param string $campaign
+ * @param string $prospect_list
+ * @param SugarBean $focus
+ * @param bool $default_list
+ * @throws DBALException
 
-            //--grab all the lists for the passed in campaign id
-            $pl_qry ="select id, list_type from prospect_lists where id in (select prospect_list_id from prospect_list_campaigns ";
-            $pl_qry .= "where campaign_id = '$campaign') and deleted = 0 ";
-            $GLOBALS['log']->debug("In Campaigns Util: subscribe function, about to run query: ".$pl_qry );
-            $pl_qry_result = $focus->db->query($pl_qry);
+ */
+function subscribe($campaign, $prospect_list, SugarBean $focus, $default_list = false)
+{
+    $relationship = strtolower($focus->getObjectName()) . 's';
 
-            //build the array of all prospect_lists
-            $pl_arr = array();
-            while ($row = $focus->db->fetchByAssoc($pl_qry_result)){$pl_arr[] = $row;}
+    $prospectListsQuery = <<<SQL
+SELECT id, list_type
+FROM prospect_lists
+WHERE id IN (
+  SELECT prospect_list_id 
+  FROM prospect_list_campaigns
+  WHERE campaign_id = ?
+) AND deleted = 0 
+SQL;
 
-            //--grab all the prospect_lists this user belongs to
-            $curr_pl_qry ="select prospect_list_id, related_id  from prospect_lists_prospects ";
-            $curr_pl_qry .="where related_id = '$focus->id'  and deleted = 0 ";
-            $GLOBALS['log']->debug("In Campaigns Util: subscribe function, about to run query: ".$curr_pl_qry );
-            $curr_pl_qry_result = $focus->db->query($curr_pl_qry);
+    $prospectsList = $focus->db->getConnection()
+        ->executeQuery($prospectListsQuery, [$campaign])
+        ->fetchAll();
 
-            //build the array of all prospect lists that this current user belongs to
-            $curr_pl_arr = array();
-            while ($row = $focus->db->fetchByAssoc($curr_pl_qry_result)){$curr_pl_arr[] = $row;}
+    //retrieve lists that this user belongs to
+    $userProspectsListQuery = <<<SQL
+SELECT prospect_list_id, related_id  
+FROM prospect_lists_prospects 
+WHERE related_id = ?  AND deleted = 0 
+SQL;
 
-            //search through prospect lists for this campaign and identifiy the "unsubscription list"
-            $exempt_id = '';
-           foreach($pl_arr as $subscription_list){
-                if(strpos($subscription_list['list_type'],  'exempt')!== false){
-                    $exempt_id = $subscription_list['id'];
+    $userProspectsList = $focus->db->getConnection()
+        ->executeQuery($userProspectsListQuery, [$focus->id])
+        ->fetchAll();
+
+    //search through prospect lists for this campaign and identifiy the "unsubscription list"
+    $exempt_id = '';
+    foreach ($prospectsList as $subscription_list) {
+        if (strpos($subscription_list['list_type'], 'exempt') !== false) {
+            $exempt_id = $subscription_list['id'];
+        }
+
+        if ($subscription_list['list_type'] == 'default' && $default_list) {
+            $prospect_list = $subscription_list['id'];
+        }
+    }
+
+    //now that we have exempt (unsubscription) list id, compare against user list id's
+    if (!empty($exempt_id)) {
+        $exempt_array['exempt_id'] = $exempt_id;
+
+        foreach ($userProspectsList as $curr_subscription_list) {
+            if ($curr_subscription_list['prospect_list_id'] == $exempt_id) {
+                //--if we are in here then user is subscribing to a list in which they are exempt.
+                // we need to remove the user from this unsubscription list.
+                //Begin by retrieving unsubscription prospect list
+                $exempt_subscription_list = BeanFactory::newBean('ProspectLists');
+                if ($GLOBALS['current_user']->portal_only) {
+                    $exempt_subscription_list->disable_row_level_security = true;
                 }
-
-                if($subscription_list['list_type'] == 'default' && $default_list) {
-                    $prospect_list = $subscription_list['id'];
-                }
-           }
-
-           //now that we have exempt (unsubscription) list id, compare against user list id's
-           if(!empty($exempt_id)){
-            $exempt_array['exempt_id'] = $exempt_id;
-
-               foreach($curr_pl_arr as $curr_subscription_list){
-                    if($curr_subscription_list['prospect_list_id'] == $exempt_id){
-                        //--if we are in here then user is subscribing to a list in which they are exempt.
-                        // we need to remove the user from this unsubscription list.
-                        //Begin by retrieving unsubscription prospect list
-                        $exempt_subscription_list = BeanFactory::newBean('ProspectLists');
-
-		                if($GLOBALS['current_user']->portal_only) {
-		                   $exempt_subscription_list->disable_row_level_security = true;
-		                }
-
-                        $exempt_result = $exempt_subscription_list->retrieve($exempt_id);
-                        if($exempt_result == null)
-                        {//error happened while retrieving this list
-                            return;
-                        }
-                        //load realationships and delete user from unsubscription list
-                        $exempt_subscription_list->load_relationship($relationship);
-                        $exempt_subscription_list->$relationship->delete($exempt_id,$focus->id);
-
-                    }
-               }
-           }
-
-            //Now we need to check if user is already in subscription list
-            $already_here = 'false';
-            //for each list user is subscribed to, compare id's with current list id'
-            foreach($curr_pl_arr as $user_list){
-                if(in_array($prospect_list, $user_list)){
-                    //if user already exists, then set flag to true
-                    $already_here = 'true';
-                }
-            }
-            if($already_here ==='true'){
-                //do nothing, user is already subscribed
-            }else{
-                //user is not subscribed already, so add to subscription list
-                $subscription_list = BeanFactory::newBean('ProspectLists');
-                if($GLOBALS['current_user']->portal_only) {
-                   $subscription_list->disable_row_level_security = true;
-                }
-                $subs_result = $subscription_list->retrieve($prospect_list);
-                if($subs_result == null)
-                {//error happened while retrieving this list, iterate and continue
+                $exempt_result = $exempt_subscription_list->retrieve($exempt_id);
+                if ($exempt_result == null) {//error happened while retrieving this list
                     return;
                 }
-                //load subscription list and add this user
-                $GLOBALS['log']->debug("In Campaigns Util, loading relationship: ".$relationship);
-                $subscription_list->load_relationship($relationship);
-                $subscription_list->$relationship->add($focus->id);
+                //load realationships and delete user from unsubscription list
+                $exempt_subscription_list->load_relationship($relationship);
+                $exempt_subscription_list->$relationship->delete($exempt_id, $focus->id);
+
             }
+        }
+    }
+
+    //Now we need to check if user is already in subscription list
+    $already_here = false;
+    //for each list user is subscribed to, compare id's with current list id'
+    foreach ($userProspectsList as $user_list) {
+        if (in_array($prospect_list, $user_list)) {
+            //if user already exists, then set flag to true
+            $already_here = true;
+            break;
+        }
+    }
+    if (!$already_here) {
+        //user is not subscribed already, so add to subscription list
+        $subscription_list = BeanFactory::newBean('ProspectLists');
+        if ($GLOBALS['current_user']->portal_only) {
+            $subscription_list->disable_row_level_security = true;
+        }
+        $subs_result = $subscription_list->retrieve($prospect_list);
+        if ($subs_result == null) {//error happened while retrieving this list, iterate and continue
+            return;
+        }
+        //load subscription list and add this user
+        $GLOBALS['log']->debug("In Campaigns Util, loading relationship: " . $relationship);
+        $subscription_list->load_relationship($relationship);
+        $subscription_list->$relationship->add($focus->id);
+    }
 }
 
 
-    /*This function is used by the Manage Subscriptions page in order to add the user
-     * to the exempt prospect lists of the passed in campaign
-     * Takes in campaign and focus parameters.
-     * */
-    function unsubscribe($campaign, $focus) {
-        $relationship = strtolower($focus->getObjectName()).'s';
-        //--grab all the list for this campaign id
-        $pl_qry ="select id, list_type from prospect_lists where id in (select prospect_list_id from prospect_list_campaigns ";
-        $pl_qry .= "where campaign_id = '$campaign') and deleted = 0 ";
-        $pl_qry_result = $focus->db->query($pl_qry);
-        //build the array with list information
-        $pl_arr = array();
-        $GLOBALS['log']->debug("In Campaigns Util, about to run query: ".$pl_qry);
-    	while ($row = $focus->db->fetchByAssoc($pl_qry_result)){$pl_arr[] = $row;}
+/**
+ * This function is used by the Manage Subscriptions page in order to add the user
+ * to the exempt prospect lists of the passed in campaign
+ * Takes in campaign and focus parameters.
+ *
+ * @param string $campaign
+ * @param SugarBean $focus
+ * @throws DBALException
+ */
+function unsubscribe($campaign, SugarBean $focus)
+{
+    $relationship = strtolower($focus->getObjectName()) . 's';
+    //--grab all the list for this campaign id
+    $prospectListsQuery = <<<SQL
+SELECT id, list_type
+FROM prospect_lists
+WHERE id IN (
+  SELECT prospect_list_id 
+  FROM prospect_list_campaigns
+  WHERE campaign_id = ?
+) AND deleted = 0 
+SQL;
 
-        //retrieve lists that this user belongs to
-        $curr_pl_qry ="select prospect_list_id, related_id  from prospect_lists_prospects ";
-        $curr_pl_qry .="where related_id = '$focus->id'  and deleted = 0 ";
-        $GLOBALS['log']->debug("In Campaigns Util, unsubscribe function about to run query: ".$curr_pl_qry );
-        $curr_pl_qry_result = $focus->db->query($curr_pl_qry);
+    $prospectsList = $focus->db->getConnection()
+        ->executeQuery($prospectListsQuery, [$campaign])
+        ->fetchAll();
 
-        //build the array with current user list information
-        $curr_pl_arr = array();
-        while ($row = $focus->db->fetchByAssoc($curr_pl_qry_result)){$curr_pl_arr[] = $row;}
-         //check to see if user is already there in prospect list
-        $already_here = 'false';
-        $exempt_id = '';
+    //retrieve lists that this user belongs to
+    $userProspectsListQuery = <<<SQL
+SELECT prospect_list_id, related_id  
+FROM prospect_lists_prospects 
+WHERE related_id = ?  AND deleted = 0 
+SQL;
 
-        foreach($curr_pl_arr as $user_list){
-        	foreach($pl_arr as $v){
-        		//if list is exempt list
-            	if($v['list_type'] == 'exempt'){
-            		//save the exempt list id for later use
-            		$exempt_id = $v['id'];
-					//check to see if user is already in this exempt list
-            		if(in_array($v['id'], $user_list)){
-                		$already_here = 'true';
-            		}
+    $userProspectsList = $focus->db->getConnection()
+        ->executeQuery($userProspectsListQuery, [$focus->id])
+        ->fetchAll();
 
-                	break 2;
-            	}
-        	}
-        }
+    //check to see if user is already there in prospect list
+    $already_here = false;
+    $exempt_id = '';
 
-        //unsubscribe subscripted newsletter
-        foreach($pl_arr as $subscription_list){
-			//create a new instance of the prospect list
-        	$exempt_list = BeanFactory::getBean('ProspectLists', $subscription_list['id']);
-        	$exempt_list->load_relationship($relationship);
-			//if list type is default, then delete the relationship
-            //if list type is exempt, then add the relationship to unsubscription list
-            if($subscription_list['list_type'] == 'exempt') {
-		        $exempt_list->$relationship->add($focus->id);
-            }elseif($subscription_list['list_type'] == 'default' || $subscription_list['list_type'] == 'test'){
-            	//if list type is default or test, then delete the relationship
-            	//$exempt_list->$relationship->delete($subscription_list['id'],$focus->id);
+    foreach ($userProspectsList as $user_list) {
+        foreach ($prospectsList as $v) {
+            //if list is exempt list
+            if ($v['list_type'] == 'exempt') {
+                //save the exempt list id for later use
+                $exempt_id = $v['id'];
+                //check to see if user is already in this exempt list
+                if (in_array($v['id'], $user_list)) {
+                    $already_here = true;
+                }
+
+                break 2;
             }
-
         }
+    }
 
-        if($already_here =='true'){
-            //do nothing, user is already exempted
-
-        }else{
-            //user is not exempted yet , so add to unsubscription list
-
-
-            $tmp_security = $exempt_list->disable_row_level_security;
-            $exempt_list->disable_row_level_security = 1;
-            $exempt_result = $exempt_list->retrieve($exempt_id);
-            $exempt_list->disable_row_level_security = $tmp_security ;
-            if($exempt_result == null)
-            {//error happened while retrieving this list
-                return;
-            }
-            $GLOBALS['log']->debug("In Campaigns Util, loading relationship: ".$relationship);
-            $exempt_list->load_relationship($relationship);
+    //unsubscribe subscripted newsletter
+    foreach ($prospectsList as $subscription_list) {
+        //create a new instance of the prospect list
+        $exempt_list = BeanFactory::getBean('ProspectLists', $subscription_list['id']);
+        $exempt_list->load_relationship($relationship);
+        //if list type is default, then delete the relationship
+        //if list type is exempt, then add the relationship to unsubscription list
+        if ($subscription_list['list_type'] == 'exempt') {
             $exempt_list->$relationship->add($focus->id);
         }
 
     }
+
+    if (!$already_here) {
+        //user is not exempted yet , so add to unsubscription list
+        $tmp_security = $exempt_list->disable_row_level_security;
+        $exempt_list->disable_row_level_security = 1;
+        $exempt_result = $exempt_list->retrieve($exempt_id);
+        $exempt_list->disable_row_level_security = $tmp_security;
+        if ($exempt_result == null) {//error happened while retrieving this list
+            return;
+        }
+        $GLOBALS['log']->debug("In Campaigns Util, loading relationship: " . $relationship);
+        $exempt_list->load_relationship($relationship);
+        $exempt_list->$relationship->add($focus->id);
+    }
+}
 
 
     /*

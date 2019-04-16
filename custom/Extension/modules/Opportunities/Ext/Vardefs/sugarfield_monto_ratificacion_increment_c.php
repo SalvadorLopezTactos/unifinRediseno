@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Opportunity']['fields']['monto_ratificacion_increment_c']['labelValue'] = 'Monto Incremento/Ratificación';
 $dictionary['Opportunity']['fields']['monto_ratificacion_increment_c']['enforced'] = '';
 $dictionary['Opportunity']['fields']['monto_ratificacion_increment_c']['dependency'] = 'and(equal($tipo_operacion_c,"2"),equal($ratificacion_incremento_c,"1"))';

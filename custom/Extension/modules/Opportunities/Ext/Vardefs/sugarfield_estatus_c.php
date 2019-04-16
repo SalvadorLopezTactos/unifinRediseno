@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Opportunity']['fields']['estatus_c']['labelValue'] = 'SubEtapa';
 $dictionary['Opportunity']['fields']['estatus_c']['dependency'] = '';
 $dictionary['Opportunity']['fields']['estatus_c']['visibility_grid']['trigger'] = 'tct_etapa_ddw_c';

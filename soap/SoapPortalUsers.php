@@ -436,6 +436,11 @@ function portal_set_entry($session,$module_name, $name_value_list){
         }
     }
 
+    if (!$seed->ACLAccess('Save') || ($seed->deleted == 1 && !$seed->ACLAccess('Delete'))) {
+        $error->set_error('no_access');
+        return array('id' => -1, 'error' => $error->get_soap_array());
+    }
+
     if(!isset($_SESSION['viewable'][$module_name])){
         $_SESSION['viewable'][$module_name] = array();
     }

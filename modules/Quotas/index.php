@@ -16,6 +16,7 @@
 
 global $theme;
 
+use Sugarcrm\Sugarcrm\Security\Csrf\CsrfAuthenticator;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 
@@ -195,8 +196,15 @@ if (!empty($timeperiod_id)) {
 				$committed = "CHECKED";
 			}
 		}
-	
-		$edit_button ="<form name='EditView' method='POST' action='index.php'>\n";
+
+
+        $csrf = CsrfAuthenticator::getInstance();
+        $edit_button ="<form name='EditView' method='POST' action='index.php'>\n";
+        $edit_button .= '<input type="hidden" name="'
+            . htmlspecialchars($csrf::FORM_TOKEN_FIELD, ENT_QUOTES)
+            . '" value="'
+            . htmlspecialchars($csrf->getFormToken(), ENT_QUOTES)
+            . '">' . "\n";
 		$edit_button .="<input type='hidden' name='module' value='Quotas'>\n";
 		if (!$is_new) {
 			$edit_button .="<input type='hidden' name='record' value='$focus->id'>\n";

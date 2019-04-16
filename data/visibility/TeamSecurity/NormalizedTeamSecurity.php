@@ -79,9 +79,10 @@ class NormalizedTeamSecurity extends SugarVisibility implements StrategyInterfac
                 return 'NULL';
             }
         } else {
+            $escapedCurrentUserId = $this->bean->db->quote($currentUserId);
             return "select tst.team_set_id from team_sets_teams tst
                     INNER JOIN team_memberships {$teamTableAlias} ON tst.team_id = {$teamTableAlias}.team_id
-                    AND {$teamTableAlias}.user_id = '$currentUserId'
+                    AND {$teamTableAlias}.user_id = '$escapedCurrentUserId'
                     AND {$teamTableAlias}.deleted = 0";
         }
     }

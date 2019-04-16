@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['tct02_Resumen']['fields']['impago_factoring_fecha_c']['labelValue'] = 'Impago fecha vencimiento factoring';
 $dictionary['tct02_Resumen']['fields']['impago_factoring_fecha_c']['enforced'] = '';
 $dictionary['tct02_Resumen']['fields']['impago_factoring_fecha_c']['dependency'] = '';

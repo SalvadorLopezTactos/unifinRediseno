@@ -10,6 +10,9 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\FetchMode;
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 use Sugarcrm\Sugarcrm\Security\InputValidation\Request;
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
@@ -526,67 +529,74 @@ eoq;
 
 	///////////////////////////////////////////////////////////////////////////
 	////	ADDRESS BOOK
-	/**
-	 * Retrieves all relationship metadata for a user's address book
-	 * @return array
-	 */
-	function getContacts() {
-		global $current_user;
+    /**
+     * Retrieves all relationship metadata for a user's address book
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function getContacts()
+    {
+        global $current_user;
+        $stmt = $this->db->getConnection()
+            ->executeQuery(
+                'SELECT * FROM address_book WHERE assigned_user_id = ? ORDER BY bean DESC',
+                [$current_user->id]
+            );
+        $ret = [];
+        foreach ($stmt as $addressBookData) {
+            $ret[$addressBookData['bean_id']] = array(
+                'id' => $addressBookData['bean_id'],
+                'module' => $addressBookData['bean'],
+            );
+        }
 
-		$q = "SELECT * FROM address_book WHERE assigned_user_id = '{$current_user->id}' ORDER BY bean DESC";
-		$r = $this->db->query($q);
+        return $ret;
+    }
 
-		$ret = array();
+    /**
+     * Saves changes to a user's address book
+     * @param array contacts
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function setContacts($contacts)
+    {
+        global $current_user;
 
-		while($a = $this->db->fetchByAssoc($r)) {
-			$ret[$a['bean_id']] = array(
-				'id'		=> $a['bean_id'],
-				'module'	=> $a['bean'],
-			);
-		}
+        $oldContacts = $this->getContacts();
+        $connection = $this->db->getConnection();
+        foreach ($contacts as $cid => $contact) {
+            if (!in_array($contact['id'], $oldContacts)) {
+                $connection->executeUpdate(
+                    'INSERT INTO address_book (assigned_user_id, bean, bean_id) VALUES (?, ?, ?)',
+                    [$current_user->id, $contact['module'], $contact['id']]
+                );
+            }
+        }
+    }
 
-		return $ret;
-	}
+    /**
+     * Removes contacts from the user's address book
+     * @param array ids
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function removeContacts($ids)
+    {
+        global $current_user;
 
-	/**
-	 * Saves changes to a user's address book
-	 * @param array contacts
-	 */
-	function setContacts($contacts) {
-		global $current_user;
+        $connection = $this->db->getConnection();
+        $connection->executeUpdate(
+            'DELETE FROM address_book WHERE assigned_user_id = ? AND bean_id IN(?)',
+            [$current_user->id, $ids],
+            [null, Connection::PARAM_STR_ARRAY]
+        );
 
-		$oldContacts = $this->getContacts();
-
-		foreach($contacts as $cid => $contact) {
-			if(!in_array($contact['id'], $oldContacts)) {
-				$q = "INSERT INTO address_book (assigned_user_id, bean, bean_id) VALUES ('{$current_user->id}', '{$contact['module']}', '{$contact['id']}')";
-				$r = $this->db->query($q, true);
-			}
-		}
-	}
-
-	/**
-	 * Removes contacts from the user's address book
-	 * @param array ids
-	 */
-	function removeContacts($ids) {
-		global $current_user;
-
-		$concat = "";
-
-		foreach($ids as $id) {
-			if(!empty($concat))
-				$concat .= ", ";
-
-			$concat .= "'{$id}'";
-		}
-
-		$q = "DELETE FROM address_book WHERE assigned_user_id = '{$current_user->id}' AND bean_id IN ({$concat})";
-		$r = $this->db->query($q);
-		//Delete references to this contact from email lists.
-		$q = "DELETE FROM address_book_list_items WHERE address_book_list_items.bean_id IN (SELECT id FROM email_addr_bean_rel eabr WHERE eabr.deleted=0 AND eabr.bean_id IN ({$concat}))";
-		$r = $this->db->query($q);
-	}
+        $connection->executeUpdate(
+            'DELETE FROM address_book_list_items WHERE address_book_list_items.bean_id IN 
+            (SELECT id FROM email_addr_bean_rel eabr WHERE eabr.deleted=0 AND eabr.bean_id IN (?))',
+            [$ids],
+            [Connection::PARAM_STR_ARRAY]
+        );
+    }
 
 	/**
 	 * saves editted Contact info
@@ -666,65 +676,71 @@ eoq;
 	}
 
 	/* *************** MAILING LISTS ***************** */
-	/**
-	 * Adds contact items to a mailing list
-	 * @param string list_id GUID
-	 * @param array contacts
-	 * @param string newName
-	 * @param bool truncate
-	 */
-	function addContactsToList($list_id, $contacts, $newName, $truncate=false) {
-		// update list name if set
-		if(!empty($newName)) {
-			$q1 = "UPDATE address_book_lists SET list_name = '{$newName}' WHERE id = '{$list_id}'";
-			$r1 = $this->db->query($q1);
-		}
+    /**
+     * Adds contact items to a mailing list
+     * @param string $list_id GUID
+     * @param array $contacts
+     * @param string $newName
+     * @param bool $truncate
+     * @throws DBALException
+     */
+    public function addContactsToList($list_id, $contacts, $newName, $truncate = false)
+    {
+        $connection = $this->db->getConnection();
+        // update list name if set
+        if (!empty($newName)) {
+            $connection->executeUpdate(
+                'UPDATE address_book_lists SET list_name = ? WHERE id = ?',
+                [$newName, $list_id]
+            );
+        }
 
-		// clean out if flag passed
-		if($truncate) {
-			$q2 = "DELETE FROM address_book_list_items WHERE list_id = '{$list_id}'";
-			$r2 = $this->db->query($q2);
-		}
+        // clean out if flag passed
+        if ($truncate) {
+            $connection->executeUpdate(
+                'DELETE FROM address_book_list_items WHERE list_id = ?',
+                [$list_id]
+            );
+        }
 
-		$qc = "SELECT bean_id FROM address_book_list_items WHERE list_id = '{$list_id}'";
-		$rc = $this->db->query($qc);
+        $stmt = $connection->executeQuery(
+            'SELECT bean_id FROM address_book_list_items WHERE list_id = ?',
+            [$list_id]
+        );
+        $check = $stmt->fetchAll(FetchMode::COLUMN);
 
-		$check = array();
-		while($ac = $this->db->fetchByAssoc($rc)) {
-			$check[] = $ac['bean_id'];
-		}
+        if (is_array($contacts)) {
+            for ($i = 0; $i < count($contacts); $i++) {
+                if (!in_array($contacts[$i], $check)) {
+                    $connection->executeUpdate(
+                        'INSERT INTO address_book_list_items (list_id, bean_id) VALUES (?, ?)',
+                        [$list_id, $contacts[$i]]
+                    );
+                }
+            }
+        }
+    }
 
-		if(is_array($contacts)) {
-			for($i=0; $i<count($contacts); $i++) {
-				if(!in_array($contacts[$i], $check)) {
-					$q3 = "INSERT INTO address_book_list_items (list_id, bean_id) VALUES ('{$list_id}', '{$contacts[$i]}')";
-					$r3 = $this->db->query($q3);
-				}
-			}
-		}
-	}
+    /**
+     * Removes selected lists from User's preferences
+     * @param array $removeIds IDs of lists to remove
+     * @throws \Doctrine\DBAL\DBALException
+     */
+    public function removeLists(array $removeIds)
+    {
+        $connection = $this->db->getConnection();
+        $connection->executeUpdate(
+            'DELETE FROM address_book_list_items WHERE list_id IN (?)',
+            [$removeIds],
+            [Connection::PARAM_STR_ARRAY]
+        );
 
-	/**
-	 * Removes selected lists from User's preferences
-	 * @param array $removeIds IDs of lists to remove
-	 */
-	function removeLists($removeIds) {
-		global $current_user;
-
-		$concat = '';
-		foreach($removeIds as $id) {
-			if(!empty($concat))
-				$concat .= ", ";
-
-			$concat .= "'{$id}'";
-		}
-
-		$q = "DELETE FROM address_book_list_items WHERE list_id IN ({$concat})";
-		$r = $this->db->query($q);
-
-		$q2 = "DELETE FROM address_book_lists WHERE id IN ({$concat})";
-		$r2 = $this->db->query($q2);
-	}
+        $connection->executeUpdate(
+            'DELETE FROM address_book_lists WHERE id IN (?)',
+            [$removeIds],
+            [Connection::PARAM_STR_ARRAY]
+        );
+    }
 
 	/**
 	 * Returns metadata to construct a user's mailing lists

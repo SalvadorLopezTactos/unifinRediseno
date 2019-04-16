@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Opportunity']['fields']['producto_c']['labelValue'] = 'Producto';
 $dictionary['Opportunity']['fields']['producto_c']['dependency'] = '';
 $dictionary['Opportunity']['fields']['producto_c']['visibility_grid'] = '';
