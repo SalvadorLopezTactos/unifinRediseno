@@ -46,6 +46,7 @@ class ExportBL extends SugarApi
     public function downloadFileBL(ServiceBase $api, $args)
     {
         global $sugar_config;
+ 
         $name_file=$args['name_file'];
 
         $csvfile = $sugar_config['upload_dir'] . $name_file;
@@ -53,8 +54,10 @@ class ExportBL extends SugarApi
         $content=file_get_contents($csvfile);
 
         //Convirtiendo contenido del archivo a codificación UTF8 para evitar conflictos con caracteres especiales como acentos
-        $content_clean=mb_convert_encoding($content, 'UTF-8',
-            mb_detect_encoding($content, 'UTF-8, ISO-8859-1', true));
+        $utf8_string=mb_convert_encoding($content, 'UTF-8', mb_detect_encoding($content, 'ISO-8859-1'));
+
+        //Agregar BOM
+        $content_clean = chr(239) . chr(187) . chr(191) . $utf8_string;
 
         return array($content_clean,$name_file);
     }
