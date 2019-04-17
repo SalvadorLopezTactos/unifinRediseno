@@ -2,17 +2,39 @@
 extendsFrom: 'RecordView',
 	previas: null,
 	initialize: function (options) {
+        relContext = this;
 	    this._super('initialize', [options]);
 		this.events['blur input[name=relaciones_activas]'] = 'doRelationFields';
 		this.model.on('change:relaciones_activas', this.doRelationFields, this);
 		this.model.addValidationTask('check_Campos_Contacto', _.bind(this._doValidateContactFields, this));
+        this.model.addValidationTask('check_custom_validations', _.bind(this.checarValidacionesonSave, this));
+        this.model.addValidationTask('check_custom_relacion_c', _.bind(this.checarRelacion, this));
 		this.model.addValidationTask('check_Relaciones_Permitidas', _.bind(this.RelacionesPermitidas, this));
 		this.model.addValidationTask('check_Relaciones_Duplicadas', _.bind(this.relacionesDuplicadas, this));
 
 		this.model.on('sync', this._render, this);
         this.model.addValidationTask('crearrelacionaccionista', _.bind(this.Relacionaccionista, this));
 
-	},
+        this.model.on('change:relacion_c', this.checarValidaciones, this);
+        this.model.on('change:relaciones_activas', this.checarValidaciones, this);
+        this.model.on('change:relaciones_activas', this.doRelationFields, this);
+
+        var valParams = {
+            'modulo': 'Accounts',
+        };
+        var valUrl = app.api.buildURL("customValidations", '', {}, {});
+        app.api.call("create", valUrl, {data: valParams}, { //Call and Collect the Dependencies
+            success: _.bind(function (data) {
+                if (data != null) {
+                    self.validaciones = data;
+                    console.log(self.validaciones);
+                }
+            }, this)
+        });
+        this.previas = new String(this.model.get('relaciones_activas'));
+
+
+    },
 
 	_renderHtml : function()
     {
@@ -206,6 +228,191 @@ extendsFrom: 'RecordView',
 
         callback(null, fields, errors);
     },
+    checarValidaciones: function(){
 
+        if(this.model.get('relaciones_activas') != "") {
+            self.RequeridosFaltantes = [];
+            app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                "filter": [
+                    {
+                        "id": this.model.get("account_id1_c")
+                    }
+                ]
+            }), null, {
+                success: _.bind(function (data) {
+                    if(data.records.length > 0) {
+                        _.each(self.validaciones, function (val_values, val_parent_field) {
+                            _.each(val_values, function (rule, rule_name) {
+                                if (_.contains(relContext.model.get('relaciones_activas'), rule_name) || relContext.model.get('relaciones_activas') == rule_name) { //is it contained in an array?
+                                    _.each(rule, function (rule_body, rule_index) {
+                                        if (_.isNull(rule_body.estatus) || rule_body.estatus == 'Inactivo') {
+                                            return;
+                                        }
+                                        //Check for visible, on this version this is the only dependency
+                                        if (rule_body.requerido == '1') { //REQUIRED RULE
+                                            var campo = rule_body.campo_dependiente;
+                                            _.each(data.records[0], function (data_value, data_index) {
+                                                if(campo == data_index) {
+                                                    if(data_value == "" || data_value == null){
+
+
+                                                        var pr=app.metadata.getField({module:'Accounts',name:data_index});
+                                                        //pr.labelValue;
+                                                        //console.log("Valores campos Ja  " + data_index + " su etiqueta  " + pr.labelValue);
+
+                                                        self.RequeridosFaltantes.push(pr.labelValue);
+
+                                                    }
+                                                }
+                                            });
+
+                                            // console.log("Repetidos  "+ self.RequeridosFaltantes);
+                                            // console.log("sin repetir  "+ self.RequeridosFaltantes.unique());
+                                            self.RequeridosFaltantes=self.RequeridosFaltantes.unique();
+
+                                            console.log("lista "+self.RequeridosFaltantes);
+                                        }
+                                        //jescamilla Process SubValidaciones (AND)
+                                        if (rule_index == 'SubValidaciones') {
+                                            _.each(rule_body, function (subvalidacion, subvalidacion_index) {
+                                                if(data.records[0][subvalidacion.campo_padre] == subvalidacion.criterio_validacion && subvalidacion.requerido != 1){ //if its not required, do not enforce it
+                                                    var pr2=app.metadata.getField({module:'Accounts',name:subvalidacion.campo_dependiente});
+                                                    if (pr2!==undefined){
+                                                        subvalidacion.campo_dependiente=pr2.labelValue;
+                                                    }
+                                                    //self.RequeridosFaltantes = _.without(self.RequeridosFaltantes, _.findWhere(self.RequeridosFaltantes, subvalidacion.campo_dependiente));
+                                                    //Salvador Lopez <salvador.lopez@tactos.com.mx>, replace findWhere by find
+                                                    self.RequeridosFaltantes = _.without(self.RequeridosFaltantes, _.find(self.RequeridosFaltantes, function (x) { return x == subvalidacion.campo_dependiente }));
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        });
+
+                        if(self.RequeridosFaltantes != "" && self.RequeridosFaltantes != null){
+                            relContext.RequeridosFaltantes = self.RequeridosFaltantes;
+                            app.drawer.open({
+                                layout:'custom-RequiredFields',
+                                context:{
+                                    RequeridosFaltantes:self.RequeridosFaltantes,
+                                    relatedAcct:relContext.model.get("account_id1_c"),
+                                    relaciones_activas:relContext.model.get('relaciones_activas'),
+                                    relatedAcctName:relContext.model.get('relacion_c'),
+                                }
+                            });
+                        }
+                    }
+
+                }, this)
+            });
+        }
+    },
+
+    checarValidacionesonSave: function(fields, errors, callback){
+        /* Ejecuta de nuevo la función checharValidaciones para no mandar el mensaje de campos restantes
+        * Victor Martinez Lopez 2018-08-14
+        * */
+        if(this.model.get('relaciones_activas') != "") {
+            self.RequeridosFaltantes = [];
+            app.api.call("read", app.api.buildURL("Accounts/", null, null, {
+                "filter": [
+                    {
+                        "id": this.model.get("account_id1_c")
+                    }
+                ]
+            }), null, {
+                success: _.bind(function (data) {
+                    /*Código original*/
+
+
+                    /*Fin*/
+
+                    if(data.records.length > 0) {
+                        _.each(self.validaciones, function (val_values, val_parent_field) {
+                            _.each(val_values, function (rule, rule_name) {
+                                if (_.contains(relContext.model.get('relaciones_activas'), rule_name) || relContext.model.get('relaciones_activas') == rule_name) { //is it contained in an array?
+                                    _.each(rule, function (rule_body, rule_index) {
+                                        if (_.isNull(rule_body.estatus) || rule_body.estatus == 'Inactivo') {
+                                            return;
+                                        }
+                                        //Check for visible, on this version this is the only dependency
+                                        if (rule_body.requerido == '1') { //REQUIRED RULE
+                                            var campo = rule_body.campo_dependiente;
+                                            _.each(data.records[0], function (data_value, data_index) {
+                                                if(campo == data_index) {
+                                                    if(data_value == "" || data_value == null){
+                                                        var pr=app.metadata.getField({module:'Accounts',name:data_index});
+
+                                                        self.RequeridosFaltantes.push(pr.labelValue);
+                                                    }
+                                                }
+                                            });
+                                            self.RequeridosFaltantes=$.unique(self.RequeridosFaltantes);
+                                        }
+                                        //jescamilla Process SubValidaciones (AND)
+                                        if (rule_index == 'SubValidaciones') {
+                                            _.each(rule_body, function (subvalidacion, subvalidacion_index) {
+                                                if(data.records[0][subvalidacion.campo_padre] == subvalidacion.criterio_validacion && subvalidacion.requerido != 1){ //if its not required, do not enforce it
+                                                    /*cambio*/
+                                                    var pr2=app.metadata.getField({module:'Accounts',name:subvalidacion.campo_dependiente});
+                                                    if (pr2!==undefined){
+                                                        subvalidacion.campo_dependiente=pr2.labelValue;
+                                                    }
+
+                                                    //self.RequeridosFaltantes = _.without(self.RequeridosFaltantes, _.findWhere(self.RequeridosFaltantes, subvalidacion.campo_dependiente));
+                                                    //Salvador Lopez <salvador.lopez@tactos.com.mx>, replace findWhere by find
+                                                    self.RequeridosFaltantes = _.without(self.RequeridosFaltantes, _.find(self.RequeridosFaltantes, function (x) { return x == subvalidacion.campo_dependiente }));
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
+                            });
+                        });
+
+                        if(self.RequeridosFaltantes != "" && self.RequeridosFaltantes != null){
+                            relContext.RequeridosFaltantes = self.RequeridosFaltantes;
+                            app.drawer.open({
+                                layout:'custom-RequiredFields',
+                                context:{
+                                    RequeridosFaltantes:self.RequeridosFaltantes,
+                                    relatedAcct:relContext.model.get("account_id1_c"),
+                                    relaciones_activas:relContext.model.get('relaciones_activas'),
+                                    relatedAcctName:relContext.model.get('relacion_c'),
+                                }
+                            });
+                            console.log(relContext.RequeridosFaltantes);
+                            errors['relacion_c'] = errors['relacion_c'] || {};
+                            errors['relacion_c'].required = true;
+
+                            errors['relaciones_activas'] = errors['relaciones_activas'] || {};
+                            errors['relaciones_activas'].required = true;
+
+                            app.alert.show("CamposRequeridosFaltantes", {
+                                level: "error",
+                                title: "La persona relacionada no cumple con los datos requeridos para las relaciones activas seleccionadas.",
+                                autoClose: false
+                            });
+                        }
+                    }
+                    callback(null, fields, errors);
+
+                }, this)
+            });
+        }
+        else {
+            callback(null, fields, errors);
+        }
+    },
+
+    checarRelacion: function (fields, errors, callback){
+        if(this.model.get("relacion_c") === "   "){
+            errors['relacion_c'] = errors['relacion_c'] || {};
+            errors['relacion_c'].required = true;
+        }
+        callback(null, fields, errors);
+    },
 
 })
