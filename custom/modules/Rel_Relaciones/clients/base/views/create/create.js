@@ -236,7 +236,7 @@
 
                                            // console.log("Repetidos  "+ self.RequeridosFaltantes);
                                            // console.log("sin repetir  "+ self.RequeridosFaltantes.unique());
-                                            self.RequeridosFaltantes=$.unique(self.RequeridosFaltantes);
+                                            self.RequeridosFaltantes=self.RequeridosFaltantes.unique();
 
 										console.log("lista "+self.RequeridosFaltantes);
                                         }
