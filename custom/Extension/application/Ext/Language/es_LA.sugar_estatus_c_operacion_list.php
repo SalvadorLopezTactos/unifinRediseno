@@ -1,5 +1,5 @@
 <?php
- // created: 2018-07-19 10:56:25
+ // created: 2019-04-11 18:11:16
 
 $app_list_strings['estatus_c_operacion_list']=array (
   'P' => 'INTEGRACIÓN DE EXPEDIENTE',
@@ -9,14 +9,6 @@ $app_list_strings['estatus_c_operacion_list']=array (
   'R' => 'RECHAZADA CREDITO',
   'K' => 'CANCELADA',
   'CM' => 'RECHAZADA COMITE',
-  'CZ' => 'COTIZACION',
-  'SL' => 'SOLICITUD DE COMPRA',
-  'OC' => 'ORDEN DE COMPRA',
-  'CT' => 'CONTRATACION',
-  'LB' => 'LIBERACION',
-  'CA' => 'CONTRATO ACTIVO',
-  'AL' => 'CONTRATO ACTIVO LIBERADO',
-  'T' => 'CONTRATO TERMINADO',
   'OP' => 'OPERACIÓN DE PROSPECTO',
   'BC' => 'BURO DE CREDITO',
   'EF' => 'ESTADOS FINANCIERO',

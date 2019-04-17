@@ -18,3 +18,4 @@ $mod_strings['LBL_TCT_ALTA_CD_CHK'] = 'Alta Cedente / Deudor Factoraje';
 $mod_strings['LBL_TCT_ALTA_CD_CHK_C'] = 'Alta Cedente / Deudor Factoraje';
 $mod_strings['LBL_TCT_GENERO_DDW'] = 'Género';
 $mod_strings['LBL_NOMBRE_COMPLETO_C'] = 'Nombre completo';
+$mod_strings['LBL_EMPLOYEE_STATUS'] = 'Estado del Empleado';
