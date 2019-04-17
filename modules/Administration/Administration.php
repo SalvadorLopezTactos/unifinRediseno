@@ -138,6 +138,10 @@ class Administration extends SugarBean {
         foreach($_POST as $key => $val) {
             $prefix = $this->get_config_prefix($key);
             if(in_array($prefix[0], $this->config_categories)) {
+                if (($key === 'proxy_username' || $key === 'proxy_password')
+                    && (empty($_POST['proxy_on']) || empty($_POST['proxy_auth']))) {
+                    $val = '';
+                }
                 if(is_array($val)){
                     $val=implode(",",$val);
                 }

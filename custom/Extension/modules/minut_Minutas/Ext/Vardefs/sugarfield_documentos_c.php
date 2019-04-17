@@ -1,9 +1,9 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['minut_Minutas']['fields']['documentos_c']['duplicate_merge_dom_value'] = 0;
 $dictionary['minut_Minutas']['fields']['documentos_c']['labelValue'] = 'Documentos';
 $dictionary['minut_Minutas']['fields']['documentos_c']['full_text_search']['enabled'] = true;
-$dictionary['minut_Minutas']['fields']['documentos_c']['full_text_search']['searchable'] = false;
+$dictionary['minut_Minutas']['fields']['documentos_c']['full_text_search']['searchable'] = true;
 $dictionary['minut_Minutas']['fields']['documentos_c']['full_text_search']['boost'] = 1;
 $dictionary['minut_Minutas']['fields']['documentos_c']['calculated'] = '1';
 $dictionary['minut_Minutas']['fields']['documentos_c']['formula'] = 'count($minut_minutas_documents_1)';

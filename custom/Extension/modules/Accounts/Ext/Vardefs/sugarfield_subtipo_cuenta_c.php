@@ -1,5 +1,5 @@
 <?php
- // created: 2019-04-16 15:39:12
+// created: 2019-04-16 15:39:12
 $dictionary['Account']['fields']['subtipo_cuenta_c']['labelValue']='Subtipo de Cuenta';
 $dictionary['Account']['fields']['subtipo_cuenta_c']['dependency']='';
 $dictionary['Account']['fields']['subtipo_cuenta_c']['visibility_grid']=array (
@@ -31,5 +31,4 @@ $dictionary['Account']['fields']['subtipo_cuenta_c']['visibility_grid']=array (
     ),
   ),
 );
-
  ?>

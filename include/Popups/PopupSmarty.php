@@ -11,7 +11,7 @@
  */
 
 use Sugarcrm\Sugarcrm\Util\Files\FileLoader;
-
+use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
 
 require_once('include/SearchForm/SearchForm2.php');
 define("NUM_COLS", 2);
@@ -292,9 +292,14 @@ class PopupSmarty extends ListViewSmarty{
 		}
 		$params['massupdate'] = true;
 		if(!empty($_REQUEST['orderBy'])) {
-		    $params['orderBy'] = $_REQUEST['orderBy'];
+            $orderBy = InputValidation::getService()->getValidInputRequest('orderBy', 'Assert\Sql\OrderBy');
+            $params['orderBy'] = $orderBy;
 		    $params['overrideOrder'] = true;
-		    if(!empty($_REQUEST['sortOrder'])) $params['sortOrder'] = $_REQUEST['sortOrder'];
+            if (!empty($_REQUEST['sortOrder'])) {
+                $sortOrder = InputValidation::getService()
+                    ->getValidInputRequest('orderBy', 'Assert\Sql\OrderDirection');
+                $params['sortOrder'] = $sortOrder;
+            }
 		}
 
 		$lv->displayColumns = $displayColumns;

@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Lead']['fields']['regimen_fiscal_c']['labelValue'] = 'Régimen fiscal';
 $dictionary['Lead']['fields']['regimen_fiscal_c']['dependency'] = '';
 $dictionary['Lead']['fields']['regimen_fiscal_c']['visibility_grid'] = '';

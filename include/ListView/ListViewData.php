@@ -360,7 +360,7 @@ class ListViewData {
    			if($count < $limit)
             {
                 $row = $seed->convertRow($row);
-   				$id_list .= ',\''.$row[$id_field].'\'';
+                $id_list .= ',\'' . $this->db->quote($row[$id_field]) . '\'';
    				$idIndex[$row[$id_field]][] = count($rows);
                 $rows[] = $row;
    			}

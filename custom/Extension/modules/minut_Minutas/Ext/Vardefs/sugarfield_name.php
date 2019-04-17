@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['minut_Minutas']['fields']['name']['len'] = '255';
 $dictionary['minut_Minutas']['fields']['name']['audited'] = false;
 $dictionary['minut_Minutas']['fields']['name']['massupdate'] = false;

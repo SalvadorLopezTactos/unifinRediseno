@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Opportunity']['fields']['condiciones_financieras_incremento_ratificacion']['audited'] = false;
 $dictionary['Opportunity']['fields']['condiciones_financieras_incremento_ratificacion']['massupdate'] = false;
 $dictionary['Opportunity']['fields']['condiciones_financieras_incremento_ratificacion']['duplicate_merge'] = 'enabled';

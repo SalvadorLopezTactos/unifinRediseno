@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Opportunity']['fields']['name']['audited'] = false;
 $dictionary['Opportunity']['fields']['name']['massupdate'] = false;
 $dictionary['Opportunity']['fields']['name']['comments'] = 'Name of the opportunity';

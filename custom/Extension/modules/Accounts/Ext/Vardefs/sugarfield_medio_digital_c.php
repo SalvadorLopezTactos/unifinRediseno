@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Account']['fields']['medio_digital_c']['labelValue'] = 'Medio';
 $dictionary['Account']['fields']['medio_digital_c']['dependency'] = '';
 $dictionary['Account']['fields']['medio_digital_c']['visibility_grid']['trigger'] = 'tct_detalle_origen_ddw_c';

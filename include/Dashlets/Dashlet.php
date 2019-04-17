@@ -11,6 +11,8 @@
  */
 
 use Sugarcrm\Sugarcrm\Security\InputValidation\InputValidation;
+use Sugarcrm\Sugarcrm\Security\Validator\Constraints\File;
+use Sugarcrm\Sugarcrm\Security\Validator\Validator;
 
 require_once('include/utils/layout_utils.php');
 
@@ -20,9 +22,9 @@ require_once('include/utils/layout_utils.php');
  */
 class Dashlet
 {
-   /**
+    /**
      * Id of the Dashlet
-     * @var guid
+     * @var string
      */
     var $id;
     /**
@@ -352,5 +354,39 @@ class Dashlet
         return $this->isRefreshable &&
             ( isset($GLOBALS['sugar_config']['dashlet_auto_refresh_min']) ?
                 $GLOBALS['sugar_config']['dashlet_auto_refresh_min'] != -1 : true );
+    }
+
+    /**
+     * Instantiates a dashlet from the definition
+     *
+     * @param string  $id         Dashlet identifier
+     * @param mixed[] $definition Dashlet definition
+     *
+     * @return Dashlet
+     */
+    public static function instantiate(string $id, array $definition) : self
+    {
+        $constraint = new File([
+            'baseDirs' => [
+                SUGAR_BASE_DIR . '/modules',
+                SUGAR_BASE_DIR . '/custom/modules',
+            ],
+        ]);
+
+        $violations = Validator::getService()->validate($definition['fileLocation'], $constraint);
+
+        if (count($violations) > 0) {
+            throw new RuntimeException((string) $violations);
+        }
+
+        $class = $definition['className'];
+
+        if ($class === 'ChartsDashlet') {
+            return new ChartsDashlet($id, $definition['reportId']);
+        }
+
+        require_once $constraint->getFormattedReturnValue();
+
+        return new $definition['className']($id, $definition['options'] ?? []);
     }
 }

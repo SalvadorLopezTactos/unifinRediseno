@@ -10,9 +10,8 @@
  * Copyright (C) SugarCRM Inc. All rights reserved.
  */
 
-
-
-class ChartsDashlet extends Dashlet {
+class ChartsDashlet extends Dashlet
+{
     var $width = '400';
     var $height = '480';
     var $report_id;
@@ -20,12 +19,10 @@ class ChartsDashlet extends Dashlet {
     /**
      * Constructor
      *
-     * @global string current language
-     * @param guid $id id for the current dashlet (assigned from Home module)
-	 * @param report_id $report_id id of the saved report
-     * @param array $def options saved for this dashlet
+     * @param string $id        ID of the current dashlet (assigned from Home module)
+     * @param string $report_id ID of the saved report
      */
-    public function __construct($id, $report_id, $def)
+    public function __construct($id, $report_id)
     {
     	$this->report_id = $report_id;
 

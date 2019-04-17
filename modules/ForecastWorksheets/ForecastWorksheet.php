@@ -649,133 +649,26 @@ class ForecastWorksheet extends SugarBean
         return new SugarQuery();
     }
 
+    /**
+     * @param $fromUserId
+     * @param $toUserId
+     * @return int
+     */
     public static function reassignForecast($fromUserId, $toUserId)
     {
-        global $current_user;
+        $affected_rows = self::reassignOpportunities($fromUserId, $toUserId);
 
-        $db = DBManagerFactory::getInstance();
+        $affected_rows += self::reassignProductsWithRelatedOpportunities($fromUserId, $toUserId);
 
-        // reassign Opportunities
-        $_object = BeanFactory::newBean('Opportunities');
-        $_query = "update {$_object->table_name} set " .
-            "assigned_user_id = '{$toUserId}', " .
-            "date_modified = '" . TimeDate::getInstance()->nowDb() . "', " .
-            "modified_user_id = '{$current_user->id}' " .
-            "where {$_object->table_name}.deleted = 0 and {$_object->table_name}.assigned_user_id = '{$fromUserId}'";
-        $res = $db->query($_query, true);
-        $affected_rows = $db->getAffectedRowCount($res);
+        $affected_rows += self::deleteForecasts($fromUserId);
 
-        // Products
-        // reassign only products that have related opportunity - products created from opportunity::save()
-        // other products will be reassigned if module Product is selected by user
-        $_object = BeanFactory::newBean('RevenueLineItems');
-        $_query = "update {$_object->table_name} set " .
-            "assigned_user_id = '{$toUserId}', " .
-            "date_modified = '" . TimeDate::getInstance()->nowDb() . "', " .
-            "modified_user_id = '{$current_user->id}' " .
-            "where {$_object->table_name}.deleted = 0 and {$_object->table_name}.assigned_user_id = '{$fromUserId}' and {$_object->table_name}.opportunity_id IS NOT NULL ";
-        $res = $db->query($_query, true);
-        $affected_rows += $db->getAffectedRowCount($res);
+        $affected_rows += self::deleteQuotas($fromUserId);
 
-        // delete Forecasts
-        $_object = BeanFactory::newBean('Forecasts');
-        $_query = "update {$_object->table_name} set " .
-            "deleted = 1, " .
-            "date_modified = '" . TimeDate::getInstance()->nowDb() . "' " .
-            "where {$_object->table_name}.deleted = 0 and {$_object->table_name}.user_id = '{$fromUserId}'";
-        $res = $db->query($_query, true);
-        $affected_rows += $db->getAffectedRowCount($res);
+        self::clearInactiveUsersReportsTo($fromUserId, $toUserId);
 
-        // delete Quotas
-        $_object = BeanFactory::newBean('Quotas');
-        $_query = "update {$_object->table_name} set " .
-            "deleted = 1, " .
-            "date_modified = '" . TimeDate::getInstance()->nowDb() . "' " .
-            "where {$_object->table_name}.deleted = 0 and {$_object->table_name}.user_id = '{$fromUserId}'";
-        $res = $db->query($_query, true);
-        $affected_rows += $db->getAffectedRowCount($res);
+        $affected_rows += self::reassignForecastWorksheets($fromUserId, $toUserId);
 
-        // clear reports_to for inactive users
-        $objFromUser = BeanFactory::getBean('Users', $fromUserId, array('deleted' => false));
-        $fromUserReportsTo = !empty($objFromUser->reports_to_id) ? $objFromUser->reports_to_id : '';
-        $objFromUser->reports_to_id = '';
-        $objFromUser->save();
-
-        if (User::isManager($fromUserId)) {
-            // setup report_to for user
-            $objToUserId = BeanFactory::newBean('Users');
-            $objToUserId->retrieve($toUserId);
-            $objToUserId->reports_to_id = $fromUserReportsTo;
-            $objToUserId->save();
-
-            // reassign users (reportees)
-            $_object = BeanFactory::newBean('Users');
-            $_query = "update {$_object->table_name} set " .
-                "reports_to_id = '{$toUserId}', " .
-                "date_modified = '" . TimeDate::getInstance()->nowDb() . "', " .
-                "modified_user_id = '{$current_user->id}' " .
-                "where {$_object->table_name}.deleted = 0 and {$_object->table_name}.reports_to_id = '{$fromUserId}' " .
-                "and {$_object->table_name}.id != '{$toUserId}'";
-            $db->query($_query, true);
-        }
-
-        // ForecastWorksheets
-        // reassign entries in forecast_worksheets for the draft rows
-        $_object = BeanFactory::newBean('ForecastWorksheets');
-        $_query = "update {$_object->table_name} set " .
-            "assigned_user_id = '{$toUserId}', " .
-            "date_modified = '" . TimeDate::getInstance()->nowDb() . "', " .
-            "modified_user_id = '{$current_user->id}' " .
-            "where {$_object->table_name}.deleted = 0 and {$_object->table_name}.draft = 1
-            and {$_object->table_name}.assigned_user_id = '{$fromUserId}'";
-        $res = $db->query($_query, true);
-        $affected_rows += $db->getAffectedRowCount($res);
-
-        // delete all the committed rows as they are no longer needed
-        $_query = "update {$_object->table_name} set " .
-            "deleted = 1, " .
-            "date_modified = '" . TimeDate::getInstance()->nowDb() . "', " .
-            "modified_user_id = '{$current_user->id}' " .
-            "where {$_object->table_name}.deleted = 0 and {$_object->table_name}.draft = 0
-            and {$_object->table_name}.assigned_user_id = '{$fromUserId}'";
-        $res = $db->query($_query, true);
-        $affected_rows += $db->getAffectedRowCount($res);
-
-        // ForecastManagerWorksheets
-
-        // reassign entries in forecast_manager_worksheets
-        $_object = BeanFactory::newBean('ForecastManagerWorksheets');
-
-        // delete all manager worksheets for the user we are migrating away from
-        $_query = "update {$_object->table_name} set " .
-            "deleted = 1, " .
-            "date_modified = '" . TimeDate::getInstance()->nowDb() . "', " .
-            "modified_user_id = '{$current_user->id}' " .
-            "where {$_object->table_name}.deleted = 0
-            and {$_object->table_name}.user_id = '{$fromUserId}'";
-        $res = $db->query($_query, true);
-        $affected_rows += $db->getAffectedRowCount($res);
-
-        // Remove any committed rows that are assigned to the user we are migration away from, since we don't
-        // want to migration committed records
-        $_query = "update {$_object->table_name} set " .
-            "deleted = 1, " .
-            "date_modified = '" . TimeDate::getInstance()->nowDb() . "', " .
-            "modified_user_id = '{$current_user->id}' " .
-            "where {$_object->table_name}.deleted = 0 and {$_object->table_name}.draft = 0
-            and {$_object->table_name}.assigned_user_id = '{$fromUserId}'";
-        $res = $db->query($_query, true);
-        $affected_rows += $db->getAffectedRowCount($res);
-
-        // move all draft records left over that have not been deleted to the new user.
-        $_query = "update {$_object->table_name} set " .
-            "assigned_user_id = '{$toUserId}', " .
-            "user_id = '{$toUserId}', " .
-            "date_modified = '" . TimeDate::getInstance()->nowDb() . "', " .
-            "modified_user_id = '{$current_user->id}' " .
-            "where {$_object->table_name}.deleted = 0 and {$_object->table_name}.assigned_user_id = '{$fromUserId}' ";
-        $res = $db->query($_query, true);
-        $affected_rows += $db->getAffectedRowCount($res);
+        $affected_rows += self::reassignForecastManagerWorksheets($fromUserId, $toUserId);
 
         return $affected_rows;
     }
@@ -910,4 +803,269 @@ class ForecastWorksheet extends SugarBean
         return $return;
 
     }
+
+    /**
+     * @param $fromUserId
+     * @param $toUserId
+     * @param $db
+     * @param $current_user
+     * @return int
+     */
+    protected static function reassignOpportunities($fromUserId, $toUserId): int
+    {
+        global $current_user;
+        $db = DBManagerFactory::getInstance();
+        $opportunities = BeanFactory::newBean('Opportunities');
+        $query = sprintf(
+            'UPDATE %s 
+            SET assigned_user_id = %s, date_modified = %s, modified_user_id = %s
+            WHERE %s.deleted = 0 AND %s.assigned_user_id = %s',
+            $opportunities->table_name,
+            $db->quoted($toUserId),
+            $db->quoted(TimeDate::getInstance()->nowDb()),
+            $db->quoted($current_user->id),
+            $opportunities->table_name,
+            $opportunities->table_name,
+            $db->quoted($fromUserId)
+        );
+        $res = $db->query($query, true);
+        return $db->getAffectedRowCount($res);
+    }
+
+    /**
+     * @param $fromUserId
+     * @param $toUserId
+     * @param $db
+     * @param $current_user
+     */
+    protected static function clearInactiveUsersReportsTo($fromUserId, $toUserId)
+    {
+        // clear reports_to for inactive users
+        global $current_user;
+        $db = DBManagerFactory::getInstance();
+        $objFromUser = BeanFactory::getBean('Users', $fromUserId, array('deleted' => false));
+        $fromUserReportsTo = !empty($objFromUser->reports_to_id) ? $objFromUser->reports_to_id : '';
+        $objFromUser->reports_to_id = '';
+        $objFromUser->save();
+
+        if (User::isManager($fromUserId)) {
+            // setup report_to for user
+            $objToUserId = BeanFactory::newBean('Users');
+            $objToUserId->retrieve($toUserId);
+            $objToUserId->reports_to_id = $fromUserReportsTo;
+            $objToUserId->save();
+
+            // reassign users (reportees)
+            $users = BeanFactory::newBean('Users');
+            $query = sprintf(
+                'UPDATE %s
+                SET reports_to_id = %s, date_modified = %s, modified_user_id = %s
+                WHERE %s.deleted = 0 AND %s.reports_to_id = %s AND %s.id != %s',
+                $users->table_name,
+                $db->quoted($toUserId),
+                $db->quoted(TimeDate::getInstance()->nowDb()),
+                $db->quoted($current_user->id),
+                $users->table_name,
+                $users->table_name,
+                $db->quoted($fromUserId),
+                $users->table_name,
+                $db->quoted($toUserId)
+            );
+            $db->query($query, true);
+        }
+    }
+
+    /**
+     * Reassign only products that have related opportunity - products created from opportunity::save()
+     * other products will be reassigned if module Product is selected by user
+     * @param $fromUserId
+     * @param $toUserId
+     * @return int
+     */
+    protected static function reassignProductsWithRelatedOpportunities($fromUserId, $toUserId)
+    {
+        global $current_user;
+
+        $db = DBManagerFactory::getInstance();
+
+        $rli = BeanFactory::newBean('RevenueLineItems');
+        $query = sprintf(
+            'UPDATE %s 
+            SET assigned_user_id = %s, date_modified = %s, modified_user_id = %s
+            WHERE %s.deleted = 0 AND %s.assigned_user_id = %s  AND %s.opportunity_id IS NOT NULL ',
+            $rli->table_name,
+            $db->quoted($toUserId),
+            $db->quoted(TimeDate::getInstance()->nowDb()),
+            $db->quoted($current_user->id),
+            $rli->table_name,
+            $rli->table_name,
+            $db->quoted($fromUserId),
+            $rli->table_name
+        );
+        $res = $db->query($query, true);
+        return $db->getAffectedRowCount($res);
+    }
+
+    /**
+     * @param $fromUserId
+     * @return int
+     */
+    protected static function deleteForecasts($fromUserId)
+    {
+        $db = DBManagerFactory::getInstance();
+        $forecasts = BeanFactory::newBean('Forecasts');
+        // delete Forecasts
+        $query = sprintf(
+            'UPDATE %s 
+            SET deleted = 1, date_modified = %s 
+            WHERE %s.deleted = 0 AND %s.user_id = %s',
+            $forecasts->table_name,
+            $db->quoted(TimeDate::getInstance()->nowDb()),
+            $forecasts->table_name,
+            $forecasts->table_name,
+            $db->quoted($fromUserId)
+        );
+
+        $res = $db->query($query, true);
+        return $db->getAffectedRowCount($res);
+    }
+
+    /**
+     * @param $fromUserId
+     * @return int
+     */
+    protected static function deleteQuotas($fromUserId)
+    {
+        // delete Quotas
+        $db = DBManagerFactory::getInstance();
+        $quotas = BeanFactory::newBean('Quotas');
+        $query = sprintf(
+            'UPDATE %s 
+            SET deleted = 1, date_modified = %s 
+            WHERE %s.deleted = 0 AND %s.user_id = %s',
+            $quotas->table_name,
+            $db->quoted(TimeDate::getInstance()->nowDb()),
+            $quotas->table_name,
+            $quotas->table_name,
+            $db->quoted($fromUserId)
+        );
+
+        $res = $db->query($query, true);
+        return $db->getAffectedRowCount($res);
+    }
+
+    /**
+     * @param $fromUserId
+     * @param $toUserId
+     * @return int
+     */
+    protected static function reassignForecastWorksheets($fromUserId, $toUserId): int
+    {
+        // ForecastWorksheets
+        // reassign entries in forecast_worksheets for the draft rows
+        global $current_user;
+        $db = DBManagerFactory::getInstance();
+        $forecastWorksheets = BeanFactory::newBean('ForecastWorksheets');
+        $query = sprintf(
+            'UPDATE %s 
+            SET assigned_user_id = %s, date_modified = %s, modified_user_id = %s
+            WHERE %s.deleted = 0 AND %s.draft = 1 AND %s.assigned_user_id = %s',
+            $forecastWorksheets->table_name,
+            $db->quoted($toUserId),
+            $db->quoted(TimeDate::getInstance()->nowDb()),
+            $db->quoted($current_user->id),
+            $forecastWorksheets->table_name,
+            $forecastWorksheets->table_name,
+            $forecastWorksheets->table_name,
+            $db->quoted($fromUserId)
+        );
+
+        $res = $db->query($query, true);
+        $affected_rows = $db->getAffectedRowCount($res);
+        // delete all the committed rows as they are no longer needed
+        $query = sprintf(
+            'UPDATE %s
+            SET deleted = 1, date_modified = %s, modified_user_id = %s 
+            WHERE %s.deleted = 0 AND %s.draft = 0 AND %s.assigned_user_id = %s',
+            $forecastWorksheets->table_name,
+            $db->quoted(TimeDate::getInstance()->nowDb()),
+            $db->quoted($current_user->id),
+            $forecastWorksheets->table_name,
+            $forecastWorksheets->table_name,
+            $forecastWorksheets->table_name,
+            $db->quoted($fromUserId)
+        );
+
+        $res = $db->query($query, true);
+        $affected_rows += $db->getAffectedRowCount($res);
+        return $affected_rows;
+    }
+
+    /**
+     * @param $fromUserId
+     * @param $toUserId
+     * @return int
+     */
+    protected static function reassignForecastManagerWorksheets($fromUserId, $toUserId): int
+    {
+        global $current_user;
+        $db = DBManagerFactory::getInstance();
+
+        // reassign entries in forecast_manager_worksheets
+        $forecastManagerWorksheet = BeanFactory::newBean('ForecastManagerWorksheets');
+        // delete all manager worksheets for the user we are migrating away from
+        $query = sprintf(
+            'UPDATE %s
+            SET deleted = 1, date_modified = %s, modified_user_id = %s 
+            WHERE %s.deleted = 0 AND %s.user_id = %s',
+            $forecastManagerWorksheet->table_name,
+            $db->quoted(TimeDate::getInstance()->nowDb()),
+            $db->quoted($current_user->id),
+            $forecastManagerWorksheet->table_name,
+            $forecastManagerWorksheet->table_name,
+            $db->quoted($fromUserId)
+        );
+
+        $res = $db->query($query, true);
+        $affected_rows = $db->getAffectedRowCount($res);
+
+        // Remove any committed rows that are assigned to the user we are migration away from, since we don't
+        // want to migration committed records
+        $query = sprintf(
+            'UPDATE %s
+            SET deleted = 1, date_modified = %s, modified_user_id = %s
+            WHERE %s.deleted = 0 AND %s.draft = 0 AND %s.assigned_user_id = %s',
+            $forecastManagerWorksheet->table_name,
+            $db->quoted(TimeDate::getInstance()->nowDb()),
+            $db->quoted($current_user->id),
+            $forecastManagerWorksheet->table_name,
+            $forecastManagerWorksheet->table_name,
+            $forecastManagerWorksheet->table_name,
+            $db->quoted($fromUserId)
+        );
+
+        $res = $db->query($query, true);
+        $affected_rows += $db->getAffectedRowCount($res);
+
+        // move all draft records left over that have not been deleted to the new user.
+        $query = sprintf(
+            'UPDATE %s 
+            SET assigned_user_id = %s, user_id = %s, 
+                date_modified = %s, modified_user_id = %s 
+            WHERE %s.deleted = 0 AND %s.assigned_user_id = %s',
+            $forecastManagerWorksheet->table_name,
+            $db->quoted($toUserId),
+            $db->quoted($toUserId),
+            $db->quoted(TimeDate::getInstance()->nowDb()),
+            $db->quoted($current_user->id),
+            $forecastManagerWorksheet->table_name,
+            $forecastManagerWorksheet->table_name,
+            $db->quoted($fromUserId)
+        );
+
+        $res = $db->query($query, true);
+        $affected_rows += $db->getAffectedRowCount($res);
+        return $affected_rows;
+    }
+
 }

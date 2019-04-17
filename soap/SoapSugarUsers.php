@@ -2200,8 +2200,7 @@ function handle_set_entries($module_name, $name_value_lists, $select_fields = FA
 			$GLOBALS['log']->debug('Creating Contact Account');
 			add_create_account($seed);
 			$duplicate_id = check_for_duplicate_contacts($seed);
-			if($duplicate_id == null)
-            {
+            if ($duplicate_id === null) {
 				if($seed->ACLAccess('Save') && ($seed->deleted != 1 || $seed->ACLAccess('Delete')))
                 {
                     //Now apply the values, since this is not a duplicate we can just pass false for the $firstSync argument

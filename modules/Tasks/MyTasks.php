@@ -18,7 +18,9 @@ $tomorrow = $timedate->getNow()->get("+1 day")->asDb();
 
 $ListView = new ListView();
 $seedTasks = BeanFactory::newBean('Tasks');
-$where = "tasks.assigned_user_id='". $current_user->id ."' and (tasks.status is NULL or (tasks.status!='Completed' and tasks.status!='Deferred')) ";
+$where = "tasks.assigned_user_id='"
+    . $seedTasks->db->quote($current_user->id)
+    . "' and (tasks.status is NULL or (tasks.status!='Completed' and tasks.status!='Deferred')) ";
 $where .= "and (tasks.date_start is NULL or ";
 $where .= $seedTasks->db->convert($seedTasks->db->convert("tasks.date_start", "date_format", '%Y-%m-%d'),  "CONCAT",
     array("' '", $seedTasks->db->convert("tasks.time_start", "time_format"))). " <= ".$seedTasks->db->quoted($tomorrow);

@@ -136,8 +136,8 @@ class MySugar{
 		        $current_user->setPreference('dashlets', $dashlets, 0, $this->type);
 		    }
 
-		    require_once($dashlets[$id]['fileLocation']);
-		    $dashlet = new $dashlets[$id]['className']($id, (isset($dashlets[$id]['options']) ? $dashlets[$id]['options'] : array()));
+            $dashlet = Dashlet::instantiate($id, $dashlets[$id]);
+
 		    if(!empty($_REQUEST['configure']) && $_REQUEST['configure']) { // save settings
 		        $dashletDefs[$id]['options'] = $dashlet->saveOptions($_REQUEST);
 		        $current_user->setPreference('dashlets', $dashletDefs, 0, $this->type);
@@ -171,8 +171,7 @@ class MySugar{
 		    $id = $_REQUEST['id'];
 		    $dashlets = $current_user->getPreference('dashlets', $this->type);
 
-		    require_once($dashlets[$id]['fileLocation']);
-		    $dashlet = new $dashlets[$id]['className']($id, (isset($dashlets[$id]['options']) ? $dashlets[$id]['options'] : array()));
+            $dashlet = Dashlet::instantiate($id, $dashlets[$id]);
 	        $dashlet->process();
 	        echo $dashlet->displayScript();
 		}
@@ -189,8 +188,7 @@ class MySugar{
 		    $id = $_REQUEST['id'];
 		    $dashlets = $current_user->getPreference('dashlets', $this->type);
 
-		    require_once($dashlets[$id]['fileLocation']);
-		    $dashlet = new $dashlets[$id]['className']($id, $dashlets[$id]['reportId'], (isset($dashlets[$id]['options']) ? $dashlets[$id]['options'] : array()));
+            $dashlet = Dashlet::instantiate($id, $dashlets[$id]);
 		    $dashlet->process();
 		    $contents = $dashlet->display();
 		    echo $dashlet->getHeader();
@@ -210,8 +208,7 @@ class MySugar{
 		    $id = $_REQUEST['id'];
 		    $dashlets = $current_user->getPreference('dashlets', $this->type);
 
-		    require_once($dashlets[$id]['fileLocation']);
-		    $dashlet = new $dashlets[$id]['className']($id, $dashlets[$id]['reportId'], (isset($dashlets[$id]['options']) ? $dashlets[$id]['options'] : array()));
+            $dashlet = Dashlet::instantiate($id, $dashlets[$id]);
 		    $dashlet->process();
 		    echo $dashlet->displayScript();
 		}
@@ -419,11 +416,9 @@ class MySugar{
 		if(!empty($_REQUEST['id'])) {
 		    $id = $_REQUEST['id'];
 		    $dashletDefs = $current_user->getPreference('dashlets', $this->type); // load user's dashlets config
-		    $dashletLocation = $dashletDefs[$id]['fileLocation'];
 
-		    require_once($dashletDefs[$id]['fileLocation']);
+            $dashlet = Dashlet::instantiate($id, $dashletDefs[$id]);
 
-		    $dashlet = new $dashletDefs[$id]['className']($id, (isset($dashletDefs[$id]['options']) ? $dashletDefs[$id]['options'] : array()));
 		    if(!empty($_REQUEST['configure']) && $_REQUEST['configure']) { // save settings
 		        $dashletDefs[$id]['options'] = $dashlet->saveOptions($_REQUEST);
 		        $current_user->setPreference('dashlets', $dashletDefs, 0, $this->type);
@@ -666,10 +661,9 @@ class MySugar{
 					$myDashlet = new MySugar($module);
 
 					if($myDashlet->checkDashletDisplay()) {
-						require_once($dashlets[$id]['fileLocation']);
-						if ($dashlets[$id]['className'] == 'ChartsDashlet'){
-							$dashlet = new $dashlets[$id]['className']($id, $dashlets[$id]['reportId'], (isset($dashlets[$id]['options']) ? $dashlets[$id]['options'] : array()));
+                        $dashlet = Dashlet::instantiate($id, $dashlets[$id]);
 
+                        if ($dashlets[$id]['className'] === 'ChartsDashlet') {
 							$chartsArray[$id] = array();
 							$chartsArray[$id]['id'] = $id;
 							$chartsArray[$id]['xmlFile'] = sugar_cached("xml/") . $dashlets[$id]['reportId'] . '_saved_chart.xml';
@@ -680,8 +674,6 @@ class MySugar{
 							$chartsArray[$id]['langFile'] = $chartStringsXML;
 						}
 						else{
-							$dashlet = new $dashlets[$id]['className']($id, (isset($dashlets[$id]['options']) ? $dashlets[$id]['options'] : array()));
-
 							if (in_array($dashlets[$id]['className'], $predefinedChartsList)){
 								$chartsArray[$id] = array();
 								$chartsArray[$id]['id'] = $id;

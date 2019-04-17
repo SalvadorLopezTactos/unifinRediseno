@@ -100,11 +100,17 @@ $saved_reports_seed = BeanFactory::newBean('Reports');
 
 //determine the where query for the published reports
 	if (isset($_REQUEST['view']) && $_REQUEST['view']!="all"){
-		$where = "($user_where) AND is_published ='yes' AND module = '".$module_map[$_REQUEST['view']]."'";
-		$my_where = "assigned_user_id='$current_user->id' AND is_published ='no' AND module = '".$module_map[$_REQUEST['view']]."'";
+        $where = "($user_where) AND is_published ='yes' AND module = '"
+            . $saved_reports_seed->db->quote($module_map[$_REQUEST['view']]) . "'";
+        $my_where = "assigned_user_id='"
+            . $saved_reports_seed->db->quote($current_user->id)
+            . "' AND is_published ='no' AND module = '"
+            . $saved_reports_seed->db->quote($module_map[$_REQUEST['view']]) . "'";
 	}else {
 		$where = "($user_where) AND is_published ='yes'";
-		$my_where = "assigned_user_id='$current_user->id' AND is_published ='no'";
+        $my_where = "assigned_user_id='"
+            . $saved_reports_seed->db->quote($current_user->id)
+            . "' AND is_published ='no'";
 	}
 
 //determine the report title

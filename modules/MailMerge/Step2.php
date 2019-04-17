@@ -52,7 +52,8 @@ if(!empty($_SESSION['SELECTED_OBJECTS_DEF'])){
 		$idArray[$key] = $value;
         if($_SESSION['MAILMERGE_MODULE'] == 'CampaignProspects'){
             if(isset($_POST['mailmerge_module']) && $_POST['mailmerge_module'] == 'Campaigns'){
-                $where = "campaigns.id = '$key'";
+                $campaignId = $GLOBALS['db']->quoted($key);
+                $where = "campaigns.id = $campaignId";
                 $_SESSION['MAILMERGE_WHERE'] = $where;
                 $_SESSION['MAILMERGE_CAMPAIGN_ID'] = $key;
                 $idArray = array();

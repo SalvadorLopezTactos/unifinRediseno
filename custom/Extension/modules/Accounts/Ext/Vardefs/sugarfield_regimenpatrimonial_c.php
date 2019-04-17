@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Account']['fields']['regimenpatrimonial_c']['labelValue'] = 'Régimen Patrimonial';
 $dictionary['Account']['fields']['regimenpatrimonial_c']['visibility_grid']['trigger'] = 'estadocivil_c';
 $dictionary['Account']['fields']['regimenpatrimonial_c']['visibility_grid']['values']['Casado'][0] = '1';

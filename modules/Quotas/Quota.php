@@ -452,12 +452,16 @@ class Quota extends SugarBean
     {
         global $current_user;
 
-        $query = "UPDATE quotas SET quotas.amount=0, quotas.amount_base_currency=0" .
-            " WHERE quotas.timeperiod_id = '" . $timeperiod_id . "'" .
-            " AND quotas.quota_type = 'Rollup'" .
-            " AND quotas.user_id = '" . $current_user->id . "'";
+        $query = <<<SQL
+UPDATE quotas 
+SET quotas.amount=0, quotas.amount_base_currency=0
+WHERE quotas.timeperiod_id = ?
+AND quotas.quota_type = 'Rollup'
+AND quotas.user_id = ?
+SQL;
+        $this->db->getConnection()
+            ->executeUpdate($query, [$timeperiod_id, $current_user->id]);
 
-        $this->db->query($query, true, 'Error Updating Group Quota: ');
     }
 
 
@@ -473,16 +477,16 @@ class Quota extends SugarBean
     {
         global $current_user;
 
-        $qry = "SELECT id " .
-            "FROM quotas " .
-            "WHERE quotas.user_id = '" . $current_user->id . "' " .
-            "AND quotas.timeperiod_id = '" . $timeperiod_id . "' " .
-            "AND quotas.quota_type = 'Rollup'";
-
-        $result = $this->db->query($qry, true, 'Error retrieving top level manager information for quotas: ');
-        $row = $this->db->fetchByAssoc($result);
-
-        return $row['id'];
+        $query = <<<SQL
+SELECT id
+FROM quotas
+WHERE quotas.user_id = ?
+AND quotas.timeperiod_id = ?
+AND quotas.quota_type = 'Rollup'
+SQL;
+        return $this->db->getConnection()
+            ->executeQuery($query, [$current_user->id, $timeperiod_id])
+            ->fetchColumn();
     }
 
 
@@ -495,14 +499,14 @@ class Quota extends SugarBean
      */
     public function getConversionRate($currency_id)
     {
-        $qry = "SELECT conversion_rate " .
-            "FROM currencies " .
-            "WHERE id = '" . $currency_id . "'";
-
-        $result = $this->db->query($qry, true, 'Error retrieving conversion rate for quotas: ');
-        $row = $this->db->fetchByAssoc($result);
-
-        return $row['conversion_rate'];
+        $query = <<<SQL
+SELECT conversion_rate
+FROM currencies
+WHERE id = ?
+SQL;
+        return $this->db->getConnection()
+            ->executeQuery($query, [$currency_id])
+            ->fetchColumn();
     }
 
 
@@ -515,14 +519,14 @@ class Quota extends SugarBean
      */
     public function getCurrencySymbol($currency_id)
     {
-        $qry = "SELECT symbol " .
-            "FROM currencies " .
-            "WHERE id = '" . $currency_id . "'";
-
-        $result = $this->db->query($qry, true, 'Error retrieving currency rate for quotas: ');
-        $row = $this->db->fetchByAssoc($result);
-
-        return $row['symbol'];
+        $query = <<<SQL
+SELECT symbol
+FROM currencies 
+WHERE id = ?
+SQL;
+        return $this->db->getConnection()
+            ->executeQuery($query, [$currency_id])
+            ->fetchColumn();
     }
 
 

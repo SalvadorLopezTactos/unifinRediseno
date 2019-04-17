@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 18:17:34
+ // created: 2019-04-15 17:19:11
 $dictionary['Account']['fields']['show_panel_c']['duplicate_merge_dom_value'] = 0;
 $dictionary['Account']['fields']['show_panel_c']['labelValue'] = 'Muestra panel';
 $dictionary['Account']['fields']['show_panel_c']['calculated'] = 'true';
