@@ -998,10 +998,10 @@ SQL;
         $fp = fopen($csvfile, 'w');
 
         // output the column headings
-        fputcsv($fp, array('ESTATUS', 'MES','EQUIPO', 'ZONA', 'PROMOTOR', 'ID CLIENTE','CLIENTE', 'NO. BACKLOG', 'BIEN',  'LINEA DISPONIBLE',
-            'MONTO ORIGINAL', 'RI ORIGINAL', 'DIFERENCIA', 'BACKLOG', 'RENTA INICIAL', 'BACKLOG ACTUAL', 'COLOCACIÓN REAL', 'RI REAL', 'MONTO CANCELADO',
-            'RI CANCELADA',  'TIPO DE OPERACIÓN','ETAPA INICIO MES', 'ETAPA', 'SOLICITUD',
-            'PROSPECTO','CREDITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','RI PROSPECTO','RI CREDITO','RI RECHAZADA','RI SIN SOLICITUD','RI CON SOLICITUD', 'TASA', 'COMISION', 'DIF RESIDUALES', 'COLOCACION PIPELINE'));
+        fputcsv($fp, array('ESTATUS', 'MES','EQUIPO', 'ZONA', 'PROMOTOR', 'ID CLIENTE','CLIENTE', 'NO. BACKLOG', 'BIEN',  'L'.utf8_decode('Í').'NEA DISPONIBLE',
+            'MONTO ORIGINAL', 'RI ORIGINAL', 'DIFERENCIA', 'BACKLOG', 'RENTA INICIAL', 'BACKLOG ACTUAL', 'COLOCACI'.utf8_decode('Ó').'N REAL', 'RI REAL', 'MONTO CANCELADO',
+            'RI CANCELADA',  'TIPO DE OPERACI'.utf8_decode('Ó').'N','ETAPA INICIO MES', 'ETAPA', 'SOLICITUD',
+            'PROSPECTO','CR'.utf8_decode('É').'DITO','RECHAZADA','SIN SOLICITUD','CON SOLICITUD','RI PROSPECTO','RI CR'.utf8_decode('É').'DITO','RI RECHAZADA','RI SIN SOLICITUD','RI CON SOLICITUD', 'TASA', 'COMISI'.utf8_decode('Ó').'N', 'DIF RESIDUALES', 'COLOCACI'.utf8_decode('Ó').'N PIPELINE'));
 
         foreach ($args['data']['backlogs'] as $key => $values) {
             foreach ($values as $index => $linea) {
