@@ -195,8 +195,10 @@ SQL;
         }
 
         foreach ($response['backlogs']['Children'] as $Children) {
-          foreach ($Children['linea'] as $index => $linea) {
-            $response['backlogs']['MyBacklogs']['linea'][$index] = $linea;
+          foreach ($Children as $index => $linea) {
+            foreach ($linea['linea'] as $indexC => $lineaC) {
+              $response['backlogs']['MyBacklogs']['linea'][$indexC] = $lineaC;
+            }
           }
         }
         $response['backlogs']['SubBacklogs']=[];
