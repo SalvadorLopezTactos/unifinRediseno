@@ -77,7 +77,7 @@
     /*@Jesus Carrillo
         Funcion que pinta de color los paneles relacionados
     */
-    //this.model.on('sync', this.fulminantcolor, this);
+    this.model.on('sync', this.fulminantcolor, this);
 	},
 
   fulminantcolor: function () {
