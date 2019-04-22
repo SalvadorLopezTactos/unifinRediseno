@@ -717,7 +717,7 @@
 					if(data == true || this.model.get("ratificacion_incremento_c")){
 						app.alert.show("Operaciones Ratificadas", {
 							level: "error",
-							title: "Ratificacion o incremento en progreso, no se puede editar.",
+							title: "Ratificaci\u00F3n o incremento en progreso, no se puede editar.",
 							autoClose: true
 						});
 						this.cancelClicked();
