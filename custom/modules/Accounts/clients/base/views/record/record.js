@@ -205,6 +205,8 @@
     saveProdPLD:function (fields, errors, callback) {
 	     // Actualizar modelo de pld.ProductosPLD
        // pld.ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
+       if(pld.ProductosPLD != null){
+
         pld.ProductosPLD.arrendamientoPuro.campo2 = $('.campo2ddw-ap').select2('val');
         pld.ProductosPLD.arrendamientoPuro.campo3 = $('.campo3rel-ap')[0]['innerText'];
         pld.ProductosPLD.arrendamientoPuro.campo3_id = $('.campo3rel-ap').select2('val');
@@ -258,6 +260,8 @@
         pld.ProductosPLD.creditoSimple.campo14 = $('.campo14chk-cs')[0].checked;
         pld.ProductosPLD.creditoSimple.campo20 = $('.campo20ddw-cs').select2('val');
         pld.ProductosPLD.creditoSimple.campo6 = $('.campo6ddw-cs').select2('val');
+
+       }
 
         //Valida cambios
         if ($.isEmptyObject(errors) && (this.inlineEditMode == false || (this.inlineEditMode && typeof($('.campo4ddw-cs').select2('val')) == "string") ))
