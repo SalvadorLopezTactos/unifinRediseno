@@ -1,30 +1,26 @@
 ({
   extendsFrom: 'RecordView',
 
-  events: {
-      'click [name=cancel_button]': 'cancelClicked',
-      'keydown [name=vendedor_c]': 'checkvendedor',
-      'click [name=monto_c]': 'formatcoin',
-      'click [name=amount]': 'formatcoin',
-      'click [name=ca_pago_mensual_c]': 'formatcoin',
-      'click [name=ca_importe_enganche_c ]': 'formatcoin',
-      'keydown [name=monto_c]': 'checkmoney',
-      'keydown [name=amount]': 'checkmoney',
-      'keydown [name=ca_pago_mensual_c]': 'checkmoney',
-      'keydown [name=ca_importe_enganche_c ]': 'checkmoney',
-      //Se añaden eventos para los campos delimitados por limitanumero. Adrian Arauz 23/08/2018
-      'keydown [name=tipo_tasa_ordinario_c]': 'limitanumero',
-      'keydown [name=puntos_sobre_tasa_c]': 'limitanumero',
-      'keydown [name=porcentaje_ca_c]': 'limitanumero',
-      'keydown [name=f_aforo_c]': 'limitanumero',
-      'keydown [name=tasa_fija_moratorio_c]': 'limitanumero',
-      'keydown [name=puntos_tasa_moratorio_c]': 'limitanumero',
-      'keydown [name=factor_moratorio_c]': 'limitanumero',
-  },
-
 	initialize: function (options) {
 		self = this;
 		this._super("initialize", [options]);
+    this.events['keydown input[name=vendedor_c]'] = 'checkvendedor';
+    this.events['keydown input[name=monto_c]'] = 'checkmoney';
+    this.events['keydown input[name=amount]'] = 'checkmoney';
+    this.events['keydown input[name=ca_pago_mensual_c]'] = 'checkmoney';
+    this.events['keydown input[name=ca_importe_enganche_c]'] = 'limitanumero';
+    this.events['keydown input[name=tipo_tasa_ordinario_c]'] = 'limitanumero';
+    this.events['keydown input[name=puntos_sobre_tasa_c]'] = 'limitanumero';
+    this.events['keydown input[name=porcentaje_ca_c]'] = 'limitanumero';
+    this.events['keydown input[name=f_aforo_c]'] = 'limitanumero';
+    this.events['keydown input[name=tasa_fija_moratorio_c]'] = 'limitanumero';
+    this.events['keydown input[name=puntos_tasa_moratorio_c]'] = 'limitanumero';
+    this.events['keydown input[name=factor_moratorio_c]'] = 'limitanumero';
+    this.events['click a[name=cancel_button]'] = 'cancelClicked';
+    this.events['click a[name=monto_c]'] = 'formatcoin';
+    this.events['click a[name=amount]'] = 'formatcoin';
+    this.events['click a[name=ca_pago_mensual_c]'] = 'formatcoin';
+    this.events['click a[name=ca_importe_enganche_c]'] = 'formatcoin';
 		/*
 		 * @author Carlos Zaragoza Ortiz
 		 * @version 1
@@ -81,7 +77,7 @@
     /*@Jesus Carrillo
         Funcion que pinta de color los paneles relacionados
     */
-    this.model.on('sync', this.fulminantcolor, this);
+    //this.model.on('sync', this.fulminantcolor, this);
 	},
 
   fulminantcolor: function () {
@@ -115,18 +111,17 @@
 
     _renderHtml : function()
     {
+      this._super('_renderHtml');
+
       if(this.model.get('id_process_c') !== "")
       {
         var self = this;
         self.noEditFields.push('condiciones_financieras');
       }
 
-
       if(this.model.get('tct_etapa_ddw_c')!=='SI'){
       	this.noEditFields.push('usuario_bo_c');
       }
-
-      this._super('_renderHtml');
 
         /* F. Javier G. Solar  16/08/2018
               Oculta los subpaneles dejando solo notas y reuniones
@@ -152,11 +147,9 @@
 
     _render: function() {
       this._super("_render");
-
       //Victor M.L 30-08-2018
       //Agrega validación para restringir edición de Gestión Comercial
       this.noEdita();
-
 
       //Victor M.L 19-07-2018
 		//no Muestra el subpanel de Oportunidad perdida cuando se cumple la condición
@@ -165,13 +158,6 @@
         }else{
             this.$('div[data-panelname=LBL_RECORDVIEW_PANEL1]').hide();
         }
-
-
-
-
-
-
-
 
     //AF: 22/06/2018
     //Ajuste para establecer usuario_bo_c(Equipo backOffice) como sólo lectura
@@ -187,7 +173,6 @@
       		ac.Opportunities.edit = "yes";
       	}
       });
-
 
       if(this.model.get('tipo_operacion_c')=='2'){
           this.$('div[data-name=plazo_ratificado_incremento_c]').show();
