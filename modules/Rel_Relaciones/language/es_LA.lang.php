@@ -66,4 +66,5 @@ $mod_strings = array (
   'LBL_VERIFICACIONDEREFERENCIA' => 'Verificacion de Referencia',
   'LBL_RELACIONES_ACTIVAS' => 'Relaciones Activas',
   'LBL_RELACIONES_INACTIVAS' => 'Relaciones Inactivas',
+  'LBL_RECORD_SAVED_SUCCESS' => 'Ha creado con éxito relación.',
 );
