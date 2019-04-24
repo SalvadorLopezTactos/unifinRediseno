@@ -10,7 +10,7 @@
                             'params' => array(
                                     'target' => 'primernombre_c',
                                     'label' => 'primernombre_c_label',
-                                    'value' => 'and(or(equal($tipodepersona_c,"Persona Fisica"),equal($tipo_registro_c,"Lead")))', //Formula
+                                    'value'=>'not(equal($tipodepersona_c,"Persona Moral"))', //Formula
                             ),
                     ),
             ),
