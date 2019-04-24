@@ -2251,15 +2251,15 @@
 
     doValidateDateCons: function (fields, errors, callback) {
         /* if  date not empty, then check with today date and return error */
-        if (!_.isEmpty(this.model.get('fechaconstitutiva_c'))) {
+        if (!_.isEmpty(this.model.get('fechaconstitutiva_c'))&& this.model.get('tipodepersona_c')=='Persona Moral') {
 
-            var feccons_date = new Date(this.model.get('fechaconstitutiva_c'));
-            var today_date = new Date();
+            var feccons_date = this.model.get('fechaconstitutiva_c');
+            var today_date = new Date().toISOString().slice(0,10);
 
-            if (feccons_date > today_date) {
+            if (feccons_date >= today_date) {
                 app.alert.show("fechaDeConsValidate", {
                     level: "error",
-                    title: "La fecha constitutiva no puede ser mayor al d\u00EDa de hoy",
+                    title: "La fecha constitutiva no puede ser mayor al o igual d\u00EDa de hoy",
                     autoClose: false
                 });
 
@@ -2273,15 +2273,15 @@
 
     doValidateDateNac: function (fields, errors, callback) {
         /* if  date not empty, then check with today date and return error */
-        if (!_.isEmpty(this.model.get('fechadenacimiento_c'))) {
+        if (!_.isEmpty(this.model.get('fechadenacimiento_c'))&& this.model.get('tipodepersona_c')!='Persona Moral') {
 
-            var fecnac_date = new Date(this.model.get('fechadenacimiento_c'));
-            var today_date = new Date();
+            var fecnac_date = this.model.get('fechadenacimiento_c');
+            var today_dateN = new Date().toISOString().slice(0,10);
 
-            if (fecnac_date > today_date) {
+            if (fecnac_date >= today_dateN) {
                 app.alert.show("fechaDeNacimientoValidate", {
                     level: "error",
-                    title: "La fecha de nacimiento no puede ser mayor al d\u00EDa de hoy",
+                    title: "La fecha de nacimiento no puede ser mayor o igual al d\u00EDa de hoy",
                     autoClose: false
                 });
                 errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
