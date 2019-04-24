@@ -614,7 +614,7 @@ this.model.addValidationTask('check_multiple_fiscalCorrespondencia', _.bind(this
              });
 
                 if(fiscal == false || correspondencia == false){
-                    var alertOptions = {title: "Se requiere de al menos una direccion fiscal y una de correspondencia.", level: "error"};
+                    var alertOptions = {title: "Se requiere de al menos una direcci\u00F3n fiscal y una de correspondencia.", level: "error"};
                     app.alert.show('validation', alertOptions);
                     errors['account_direcciones'] = errors['account_direcciones'] || {};
                     errors['account_direcciones'].required = true;
