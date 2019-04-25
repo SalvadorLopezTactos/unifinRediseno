@@ -909,7 +909,7 @@
     },
 
     _doValidateRFC: function (fields, errors, callback) {
-        if (this.model.get('rfc_c')) {
+        if (this.model.get('rfc_c') && (this.model.get('rfc_c')!='XXXX010101XXX' && this.model.get('rfc_c')!='XXX010101XXX')) {
             var fields = ["primernombre_c", "segundonombre_c", "apellidopaterno_c", "apellidomaterno_c", 'rfc_c'];
             var RFC = this.model.get('rfc_c');
             app.api.call("read", app.api.buildURL("Accounts/", null, null, {
@@ -1224,7 +1224,7 @@
     },
 
     _doValidateMayoriadeEdad: function (fields, errors, callback) {
-        if (this.model.get('tipodepersona_c') != 'Persona Moral' && this.model.get('tipo_registro_c') != 'Persona') {
+        if (this.model.get('tipodepersona_c') != 'Persona Moral' && this.model.get('fechadenacimiento_c') != "") {
             var nacimiento = new Date(this.model.get("fechadenacimiento_c"));
             var enteredAge = this.getAge(nacimiento);
             if (enteredAge < 18) {
@@ -1481,9 +1481,9 @@
         if (!_.isEmpty(this.model.get('fechadenacimiento_c')) && this.model.get('tipodepersona_c')!='Persona Moral') {
 
             var fecnac_date = this.model.get('fechadenacimiento_c');
-            var today_dateN = new Date().toISOString().slice(0,10);
+            var today_date = new Date().toISOString().slice(0,10);
 
-            if (fecnac_date >= today_dateN) {
+            if (fecnac_date >= today_date) {
 
                 app.alert.show("fechaDeNacimientoValidate", {
                     level: "error",

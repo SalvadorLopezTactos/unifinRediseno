@@ -2127,7 +2127,7 @@
 
     //validar fecha de nacimiento. Persona debe ser mayor de 18 años
     _doValidateMayoriadeEdad: function (fields, errors, callback) {
-        if (this.model.get('tipodepersona_c') != 'Persona Moral' && this.model.get('tipo_registro_c') != 'Persona') {
+        if (this.model.get('tipodepersona_c') != 'Persona Moral' && this.model.get('fechadenacimiento_c') != "") {
             var nacimiento = new Date(this.model.get('fechadenacimiento_c'));
             var enteredAge = this.getAge(nacimiento);
             if (enteredAge < 18) {
@@ -2276,9 +2276,9 @@
         if (!_.isEmpty(this.model.get('fechadenacimiento_c'))&& this.model.get('tipodepersona_c')!='Persona Moral') {
 
             var fecnac_date = this.model.get('fechadenacimiento_c');
-            var today_dateN = new Date().toISOString().slice(0,10);
+            var today_date = new Date().toISOString().slice(0,10);
 
-            if (fecnac_date >= today_dateN) {
+            if (fecnac_date >= today_date) {
                 app.alert.show("fechaDeNacimientoValidate", {
                     level: "error",
                     title: "La fecha de nacimiento no puede ser mayor o igual al d\u00EDa de hoy",
