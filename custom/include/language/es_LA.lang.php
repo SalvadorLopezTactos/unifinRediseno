@@ -8299,3 +8299,4 @@ $app_strings['LBL_DASHLET_OPPORTUNITY_DESCRIPTION']='Solicitud y Líneaes Metric
 $app_strings['ERR_QUOTE_CONVERTED']='This Quote has already been converted to an Solicitud y Líneaes.';
 $app_strings['LBL_QUOTE_TO_OPPORTUNITY_LABEL']='Create Solicitud y Líneaes from Quote';
 $app_strings['LBL_QUOTE_TO_OPPORTUNITY_TITLE']='Create Solicitud y Líneaes from Quote';
+$app_strings['NTC_UNLINK_SUCCESS']='Desvinculó el registro de {0}.';
