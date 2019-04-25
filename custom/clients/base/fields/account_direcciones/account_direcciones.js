@@ -1119,7 +1119,7 @@ populateColoniasByMunicipio:function(evt){
     if(id_municipio != null && id_municipio != "" ){
 
             //LLamada a api custom
-            var strUrl='dire_Colonia?filter[0][codigo_postal]='+cp+'&filter[0][id][$starts]='+id_municipio;
+            var strUrl='dire_Colonia?filter[0][codigo_postal]='+cp+'&filter[0][id][$starts]='+id_municipio+'&max_num=-1';
 
             $(".loadingIconColonia").show();
             app.api.call('GET', app.api.buildURL(strUrl), null, {
@@ -1153,7 +1153,7 @@ populateColoniasByMunicipio:function(evt){
         if(id_municipio != null && id_municipio != "" ){
 
             //LLamada a api custom
-            var strUrl='dire_Colonia?filter[0][codigo_postal]='+cp+'&filter[0][id][$starts]='+id_municipio;
+            var strUrl='dire_Colonia?filter[0][codigo_postal]='+cp+'&filter[0][id][$starts]='+id_municipio+'&max_num=-1';
 
             $(evt.currentTarget).parent().parent().parent().find(".loadingIconColoniaTemp").show();
             app.api.call('GET', app.api.buildURL(strUrl), null, {
