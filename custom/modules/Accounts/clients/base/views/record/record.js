@@ -3026,7 +3026,21 @@
             _.each(this.model.fields, function(field) {
                 if(_.isEqual(field.name,key)) {
                     if(field.vname) {
-                        campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '</b><br>';
+                        if(field.vname == 'LBL_PAIS_NACIMIENTO_C' && this.model.get('tipodepersona_c') == 'Persona Moral')
+                        {
+                          campos = campos + '<b>País de constitución</b><br>';
+                        }
+                        else
+                        {
+                          if(field.vname == 'LBL_ESTADO_NACIMIENTO' && this.model.get('tipodepersona_c') == 'Persona Moral')
+                          {
+                            campos = campos + '<b>Estado de constitución</b><br>';
+                          }
+                          else
+                          {
+                            campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '</b><br>';
+                          }
+                        }
                     }
           		  }
        	    }, this);
