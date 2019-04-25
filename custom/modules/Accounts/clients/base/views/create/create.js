@@ -782,9 +782,10 @@
 
 //@Jesus Carrillo
     validatelefonosexisting: function (fields, errors, callback) {
-        var expreg =/^[0-9]{8,13}$/;
-        var cont=0;
-
+            var expreg =/^[0-9]{8,13}$/;
+            var cont=0;
+            var coincidencia=0;
+            var phones=this.model.get('account_telefonos');
             $('.existingTelephono').each(function () {
                 if(!expreg.test($(this).val())){
                     cont++;
@@ -792,6 +793,7 @@
                 }else{
                 //funcion
                 var cont=0;
+                var coincidencia=0;
                 for (var i =0; i < $(this).val().length; i++) {
                     if($(this).val().charAt(0)==$(this).val().charAt(i)){
                         cont++;
@@ -807,9 +809,28 @@
                     errors['repetido'].required = true;
                     $(this).css('border-color', 'red');
                     callback(null, fields, errors);
-
                 } else {
-                    $(this).css('border-color', '');
+                    for(var i=0;i<phones.length;i++){
+                        if($(this).val()==phones[i].telefono){
+                            coincidencia++;
+                        }
+                    }
+                    if(coincidencia>1){
+                        $(this).css('border-color', 'red');
+                        app.alert.show('error_sametelefono', {
+                            level: 'error',
+                            autoClose: true,
+                            messages: 'Este n\u00FAmero telef\u00F3nico ya existe, favor de corregir.'
+                        });
+                        errors['repetido'] = errors['Este n\u00FAmero telef\u00F3nico ya existe, favor de corregir.'] || {};
+                        errors['repetido'].required = true;
+                        $(this).css('border-color', 'red');
+                        callback(null, fields, errors);
+                    }
+                    else
+                    {
+                        $(this).css('border-color', '');
+                    }
                 }
             }
             });
@@ -837,8 +858,7 @@
                     $(this).css('border-color', '');
                 }
             });
-
-        if(cont>0){
+            if(cont>0){
                 errors['existingtelefono'] = errors['existingtelefono'] || {};
                 errors['existingtelefono'].required = true;
                 app.alert.show('error_modultel', {
@@ -846,8 +866,8 @@
                     autoClose: true,
                     messages: 'Favor de llenar los campos se\u00F1alados.'
                 });
-        }
-        callback(null, fields, errors);
+            }
+            callback(null, fields, errors);
     },
 
     validadireccexisting: function (fields, errors, callback) {
@@ -1957,7 +1977,21 @@
             _.each(this.model.fields, function(field) {
                 if(_.isEqual(field.name,key)) {
                     if(field.vname) {
-                        campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '</b><br>';
+                        if(field.vname == 'LBL_PAIS_NACIMIENTO_C' && this.model.get('tipodepersona_c') == 'Persona Moral')
+                        {
+                          campos = campos + '<b>País de constitución</b><br>';
+                        }
+                        else
+                        {
+                          if(field.vname == 'LBL_ESTADO_NACIMIENTO' && this.model.get('tipodepersona_c') == 'Persona Moral')
+                          {
+                            campos = campos + '<b>Estado de constitución</b><br>';
+                          }
+                          else
+                          {
+                            campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '</b><br>';
+                          }
+                        }
                     }
           		  }
        	    }, this);
