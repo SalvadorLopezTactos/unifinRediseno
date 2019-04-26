@@ -176,12 +176,13 @@
         this.def.indicador_multi_html = indicador_multi_options;
 
         //*
+
         var fields = ['id', 'name', 'calle', 'inactivo', 'numext', 'numint', 'indicador', 'principal', 'secuencia', 'tipodedireccion'
         , 'dire_direccion_dire_ciudaddire_ciudad_ida', 'dire_direccion_dire_codigopostaldire_codigopostal_ida', 'dire_direccion_dire_coloniadire_colonia_ida',
         'dire_direccion_dire_estadodire_estado_ida', 'dire_direccion_dire_municipiodire_municipio_ida', 'dire_direccion_dire_paisdire_pais_ida'];
         //api request apamaters
         var api_params = {
-            'fields': fields.join(','),
+            //'fields': fields.join(','),
             'max_num': 42,
             'order_by': 'date_entered:desc',
             'filter': [{'accounts_dire_direccion_1accounts_ida': this.model.id}]
@@ -242,6 +243,12 @@
                             data.records[i].ciudad_label = city_list[a_ciudad].name;
                         }
                     }
+
+                    //Se habilita esta validación, para ciudades que no se encuentran en city_list (PARIS0> CP 12345)
+                    if(data.records[i].ciudad_label==undefined){
+                        data.records[i].ciudad_label=data.records[i].dire_direccion_dire_ciudad.name;
+                    }
+
                     for(a_codigopostal in postal_list){
                         if(a_codigopostal == data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida){
                             data.records[i].postal_code_label = postal_list[a_codigopostal].name;
@@ -1609,18 +1616,24 @@ populateColoniasByMunicipio:function(evt){
             indicador_multi_html += '<option value="' + indicador_id + '" >' + dir_indicador_unique_list[indicador_id] + '</option>';
         }
 
-        //var ciudad_html = '<option value="xkcd"> Seleccionar Ciudad</option>';
-        var ciudad_html = '<option value="'+direccion.dire_direccion_dire_ciudaddire_ciudad_ida+'" selected="true">'+city_list[direccion.dire_direccion_dire_ciudaddire_ciudad_ida].name+'</option>';
-        for (city_id in city_list) {
-            if (city_list[city_id].estado_id == direccion.dire_direccion_dire_estadodire_estado_ida) {
-                var id_ciudad=city_list[city_id].id;
-                if (id_ciudad==direccion.dire_direccion_dire_ciudaddire_ciudad_ida) {
-                    //ciudad_html += '<option value="' + id_ciudad + '" selected="true">' + city_list[city_id].name + '</option>';
-                }
-                else {
-                    //ciudad_html += '<option value="' + id_ciudad + '" >' + city_list[city_id].name + '</option>';
+        if(city_list[direccion.dire_direccion_dire_ciudaddire_ciudad_ida] != undefined){
+
+            //var ciudad_html = '<option value="xkcd"> Seleccionar Ciudad</option>';
+            var ciudad_html = '<option value="'+direccion.dire_direccion_dire_ciudaddire_ciudad_ida+'" selected="true">'+city_list[direccion.dire_direccion_dire_ciudaddire_ciudad_ida].name+'</option>';
+            for (city_id in city_list) {
+                if (city_list[city_id].estado_id == direccion.dire_direccion_dire_estadodire_estado_ida) {
+                    var id_ciudad=city_list[city_id].id;
+                    if (id_ciudad==direccion.dire_direccion_dire_ciudaddire_ciudad_ida) {
+                        //ciudad_html += '<option value="' + id_ciudad + '" selected="true">' + city_list[city_id].name + '</option>';
+                    }
+                    else {
+                        //ciudad_html += '<option value="' + id_ciudad + '" >' + city_list[city_id].name + '</option>';
+                    }
                 }
             }
+
+        }else{
+            var ciudad_html = '<option value="'+direccion.dire_direccion_dire_ciudaddire_ciudad_ida+'" selected="true">'+direccion.ciudad_label+'</option>';
         }
 
         var postal_html = '<option value="xkcd"> Seleccionar Codigo Postal</option>';
@@ -2153,6 +2166,7 @@ populateColoniasByMunicipio:function(evt){
 
                 //ciudad: $('.newCiudad').val(),
                 ciudad: $('.newCiudadTemp').val(),
+                ciudad_label: $('.newCiudadTemp option:selected').text(),
 
                 //dire_direccion_dire_ciudaddire_ciudad_ida: $('.newCiudad').val(),
                 dire_direccion_dire_ciudaddire_ciudad_ida: $('.newCiudadTemp').val(),
