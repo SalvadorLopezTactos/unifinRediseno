@@ -1525,11 +1525,11 @@
             var feccons_date = this.model.get('fechaconstitutiva_c');
             var today_date = new Date().toISOString().slice(0,10);
 
-            if (feccons_date >= today_date) {
+            if (feccons_date > today_date) {
 
                 app.alert.show("fechaDeConsValidate", {
                     level: "error",
-                    title: "La fecha constitutiva no puede ser mayor o igual al d\u00EDa de hoy",
+                    title: "La fecha constitutiva no puede ser mayor al d\u00EDa de hoy",
                     autoClose: false
                 });
 
