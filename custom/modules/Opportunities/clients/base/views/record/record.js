@@ -8,7 +8,7 @@
     this.events['keydown input[name=monto_c]'] = 'checkmoney';
     this.events['keydown input[name=amount]'] = 'checkmoney';
     this.events['keydown input[name=ca_pago_mensual_c]'] = 'checkmoney';
-    this.events['keydown input[name=ca_importe_enganche_c]'] = 'limitanumero';
+    this.events['keydown input[name=ca_importe_enganche_c]'] = 'checkmoney';
     this.events['keydown input[name=tipo_tasa_ordinario_c]'] = 'limitanumero';
     this.events['keydown input[name=puntos_sobre_tasa_c]'] = 'limitanumero';
     this.events['keydown input[name=porcentaje_ca_c]'] = 'limitanumero';
