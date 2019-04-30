@@ -1318,6 +1318,7 @@ populateColoniasByMunicipio:function(evt){
 
         if (this.tplName === 'edit') {
             //get realted records
+            this.indice_ids=0;
             _.each(this.model.get('account_direcciones'), function (direccion) {
                 direccionsHtml += this._buildDireccionFieldHtml(direccion);
                 this._buildOptionsForExistingDirecciones(direccion.postal_code_label,direccion.id,direccion.dire_direccion_dire_estadodire_estado_ida);
@@ -1371,9 +1372,11 @@ populateColoniasByMunicipio:function(evt){
             //Because colonias depends on the Zip Code we can't preload the list of colonias because the API calls are asynchronous and so if we request the list of
             //colonias when the zip code is available, the code continues executing and by the time we have the colonias its too late.
             //therefore we are re-calculating the colonias after the fact.
+            /*
             $('.existingPostal').each(function () {
                 $(this).change();
             });
+            */
 
             /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/9/2015 Description: Contar direcciones fiscales al cargarse la pagina */
             var count = 0;
