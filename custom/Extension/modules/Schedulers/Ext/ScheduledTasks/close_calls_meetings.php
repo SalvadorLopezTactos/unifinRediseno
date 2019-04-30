@@ -9,10 +9,10 @@
 
         $queryc="select calls.id from calls,calls_cstm
                 where calls.id=calls_cstm.id_c and calls.status='Planned'
-                and (calls.date_end < UTC_TIMESTAMP() and calls.date_end > SUBDATE(UTC_TIMESTAMP(), 1))
+                and calls.date_end < UTC_TIMESTAMP()
                 and calls_cstm.tct_call_issabel_c=0 
                 and deleted=0;";
-        $querym="select id from meetings where status='Planned' and (date_end < UTC_TIMESTAMP() and date_end > SUBDATE(UTC_TIMESTAMP(), 1));";
+        $querym="select id from meetings where status='Planned' and date_end < UTC_TIMESTAMP();";
 
         $resultc = $GLOBALS['db']->query($queryc);
         $resultm = $GLOBALS['db']->query($querym);
