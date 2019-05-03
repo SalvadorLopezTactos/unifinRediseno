@@ -206,7 +206,7 @@
                     etapa: $("#etapa_filtro").val(),
                     estatus: $("#estatus_filtro").val(),
                     equipo: $("#equipo_filtro").val(),
-                    promotor: $("#promotor_filtro").val(),
+                    asesor: $("#promotor_filtro").val(),
                     progreso: $("#progreso_filtro").val(),
                     sortBy: ordenarPor,
                     sortByDireccion: direccion,
