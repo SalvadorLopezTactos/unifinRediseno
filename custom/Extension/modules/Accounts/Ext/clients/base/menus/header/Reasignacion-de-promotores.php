@@ -6,8 +6,8 @@
  * Time: 10:00 AM
  */
 $viewdefs['Accounts']['base']['menu']['header'][] = array(
-    'route'=>'#Accounts/layout/Reasignacion-de-asesores',
-    'label' =>'LNK_REASIGNACION_DE_ASESORES',
+    'route'=>'#Accounts/layout/Reasignacion-de-promotores',
+    'label' =>'LNK_REASIGNACION_DE_PROMOTORES',
     'acl_module'=>'Accounts',
     'icon' => 'icon-user',
 );
