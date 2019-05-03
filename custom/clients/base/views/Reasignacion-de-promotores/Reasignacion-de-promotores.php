@@ -12,7 +12,7 @@ $viewdefs['base']['view']['Reasignacion-de-promotores'] = array(
             'fields' => array(
                 array(
                     'name' => 'users_accounts_1_name',
-                    'label' => 'Promotor Actual',
+                    'label' => 'Asesor Actual',
                     'type' => 'relate',
                     'view' => 'edit',
                 ),

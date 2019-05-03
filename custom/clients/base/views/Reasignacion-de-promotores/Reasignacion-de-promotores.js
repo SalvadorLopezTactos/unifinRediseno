@@ -222,7 +222,7 @@
             });
         }else{
             var alertOptions = {
-                title: "Por favor, seleccione un Promotor",
+                title: "Por favor, seleccione un asesor",
                 level: "error"
             };
             app.alert.show('validation', alertOptions);
@@ -287,7 +287,7 @@
                         }else{
                             $('#processing').hide();
                             var alertOptions = {
-                                title: "El tipo de producto entre promotor actual y reasignado debe ser el mismo",
+                                title: "El tipo de producto entre el asesor actual y reasignado debe ser el mismo",
                                 level: "error"
                             };
                             app.alert.show('validation', alertOptions);
@@ -303,7 +303,7 @@
             }
         }else{
             var alertOptions = {
-                title: "Por favor, seleccione un Promotor Destino",
+                title: "Por favor, seleccione un asesor Destino",
                 level: "error"
             };
             app.alert.show('validation', alertOptions);

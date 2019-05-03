@@ -1,5 +1,5 @@
 <?php
- // created: 2018-12-05 15:57:14
+ // created: 2019-05-03 05:03:15
 $dictionary['User']['fields']['puestousuario_c']['labelValue']='Puesto Usuario';
 $dictionary['User']['fields']['puestousuario_c']['dependency']='';
 $dictionary['User']['fields']['puestousuario_c']['visibility_grid']='';

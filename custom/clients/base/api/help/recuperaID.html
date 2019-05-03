@@ -1,0 +1,258 @@
+<!--
+/*
+ * Your installation or use of this SugarCRM file is subject to the applicable
+ * terms available at
+ * http://support.sugarcrm.com/Resources/Master_Subscription_Agreements/.
+ * If you do not agree to all of the applicable terms or do not have the
+ * authority to bind the entity as an authorized representative, then do not
+ * install or use this SugarCRM file.
+ *
+ * Copyright (C) SugarCRM Inc. All rights reserved.
+ */
+-->
+<h2 xmlns="http://www.w3.org/1999/html">Overview</h2>
+<span class="lead">
+    Realiza una consulta en base de datos sobre la tabla unifin_folios y actualiza las columnas "valor", "usuario" y "fecha".
+</span>
+
+<h2>Summary</h2>
+<span class="lead">
+    Esta petición se encarga de actualizar el número de folio/ID dependiendo el tipo de ID requerido, ya sea Backlog, Cliente, Prospecto o Solicitud.
+    Para ello el número para identificar cada tipo de ID es:
+    <br>
+    <br>
+    1 = Folio de Backlog
+    <br>
+    2 = ID Cliente
+    <br>
+    3 = ID Prospecto
+    <br>
+    4 = ID Solicitud
+    <br>
+    <br>
+
+    Dichos números son el ID en la tabla unifin_folios, el cual actualizará y guardará el número de folio/ID de la tabla.
+    Asimismo se actualizan datos de las columnas date_modified y modified_user_id con la fecha actual de cuando se realiza el cambio y con el id del usuario logueado.
+    </uno>
+</span>
+
+<h2>Catálogo de ID</h2>
+<br>
+<span class="lead">
+Para utilizar el servicio se deben tener en cuenta los siguientes campos ubicados en la tabla unifin_folio:
+</span>
+<br>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nombre del campo</th>
+        <th>Descripción</th>
+        <th>Fecha de Creación</th>
+        <th>Fecha de Modificación</th>
+        <th>ID del Usuario</th>
+        <th>ID/Folio</th>
+    </tr>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>description</th>
+        <th>date_entered</th>
+        <th>date_modified</th>
+        <th>modified_user_id</th>
+        <th>valor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            1
+        </td>
+        <td>
+            numero_de_backlog
+        </td>
+        <td>
+           Número de Backlog
+        </td>
+        <td>
+            2019-04-29 00:45:03
+        </td>
+        <td>
+            2019-04-29 00:45:03
+        </td>
+        <td>
+            716822f6-f2f9-3053-e052-5626c99305ac
+        </td>
+        <td>
+            1000
+        </td>
+    </tr>
+    <tr>
+        <td>
+            2
+        </td>
+        <td>
+            idcliente_c
+        </td>
+        <td>
+            ID Cliente
+        </td>
+        <td>
+            2019-04-29 00:45:03
+        </td>
+        <td>
+            2019-04-29 00:45:03
+        </td>
+        <td>
+            716822f6-f2f9-3053-e052-5626c99305ac
+        </td>
+        <td>
+            2000
+        </td>
+    </tr>
+    <tr>
+        <td>
+            3
+        </td>
+        <td>
+            idprospecto_c
+        </td>
+        <td>
+            ID Prospecto
+        </td>
+        <td>
+            2019-04-29 00:45:03
+        </td>
+        <td>
+            2019-04-29 00:45:03
+        </td>
+        <td>
+            716822f6-f2f9-3053-e052-5626c99305ac
+        </td>
+        <td>
+            3000
+        </td>
+    </tr>
+    <tr>
+        <td>
+            4
+        </td>
+        <td>
+            idsolicitud_c
+        </td>
+        <td>
+            ID Solicitud
+        </td>
+        <td>
+            2019-04-29 00:45:03
+        </td>
+        <td>
+            2019-04-29 00:45:03
+        </td>
+        <td>
+            716822f6-f2f9-3053-e052-5626c99305ac
+        </td>
+        <td>
+            4000
+        </td>
+    </tr>
+
+
+    </tbody>
+</table>
+
+<h3>Request Example</h3>
+<pre class="pre-scrollable">
+
+    .../recuperaID/1
+
+</pre>
+
+
+<h2>Response</h2>
+<span class="lead">
+La respuesta mostrará un estado, una descripcion y un id para informar sobre el resultado de la petcición del servicio.
+</span>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+            Estado
+        </td>
+        <td>
+            Notificacion
+        </td>
+        <td>
+            Informa sobre la respuesta del servicio.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Descripcion
+        </td>
+        <td>
+            Texto
+        </td>
+        <td>
+            Mensaje descriptivo del servicio, informa que ha sucedido en durante el servicio.
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Id
+        </td>
+        <td>
+            Texto
+        </td>
+        <td>
+            Mensaje descriptivo donde muestra el valor ya actualizado.
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+<h3>Respuesta Exitosa</h3>
+<pre class="pre-scrollable">
+
+{
+    "Estado": "¡Exito!",
+    "Descripcion": "El ID se ha generado.",
+    "Id": "1002"
+}
+
+</pre>
+
+<h3>Respuesta Fallida</h3>
+<pre class="pre-scrollable">
+
+{
+    "Estado": "¡Error!",
+    "Descripcion": "El tipo de folio no existe, favor de intentar de nuevo."
+}
+
+</pre>
+
+<h2>Change Log</h2>
+<table class="table table-hover">
+    <tr>
+        <th>Version</th>
+        <th>Change</th>
+    </tr>
+    <tr>
+        <td>
+            v1
+        </td>
+        <td>
+            Added <code>/bulk</code> GET endpoint.
+        </td>
+    </tr>
+</table>
