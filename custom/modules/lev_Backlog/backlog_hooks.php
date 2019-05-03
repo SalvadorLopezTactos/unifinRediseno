@@ -5,18 +5,21 @@
  * Date: 3/8/2016
  * Time: 10:40 AM
  */
-require_once("custom/Levementum/UnifinAPI.php");
+//require_once("custom/Levementum/UnifinAPI.php");
+require_once("custom/clients/base/api/ConsultaID.php");
 class backlog_hooks {
 
     public function setFormatName($bean = null, $event = null, $args = null){
 
         if($bean->lev_backlog_opportunitiesopportunities_ida == null) {
             $account = BeanFactory::retrieveBean('Accounts', $bean->account_id_c);  
-
+            $api="";
+            $args=[];
+            $args['categoriaID']=1;
             if(empty($bean->numero_de_backlog)) {
-                $callApi = new UnifinAPI();
-                $numeroDeFolio = $callApi->generarBacklogFolio();
-                $bean->numero_de_backlog = $numeroDeFolio;
+                $callApi = new ConsultaID();
+                $numeroDeFolio = $callApi->RecuperaID($api, $args);
+                $bean->numero_de_backlog = $numeroDeFolio['Id'];
             }
 
             //BackLog Mes Año – FolioBacklog - Cliente
