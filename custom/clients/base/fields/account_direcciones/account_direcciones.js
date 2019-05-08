@@ -1152,7 +1152,7 @@ populateColoniasByMunicipio:function(evt){
 
     populateColoniasByMunicipioExisting:function(evt){
 
-        $(evt.currentTarget).parent().next('td').next('td').find('select.existingColoniaTemp').empty();
+        //$(evt.currentTarget).parent().next('td').next('td').find('select.existingColoniaTemp').empty();
 
         var id_municipio=$(evt.currentTarget).val();
         var cp=$(evt.currentTarget).parent().parent().parent().find('#existingPostalInput').val();
@@ -1181,7 +1181,13 @@ populateColoniasByMunicipio:function(evt){
                         }
                         
                         for (var i = 0; i < data.records.length; i++) {
-                            $(evt.currentTarget).parent().next('td').next('td').find('select.existingColoniaTemp').append($("<option>").val(data.records[i].id).html(data.records[i].name));
+                            //Se añaden únicamente las colonias "No repetidas" en el campo select
+                            if($(evt.currentTarget).parent().next('td').next('td').find('select.existingColoniaTemp').children("option:selected").html() != data.records[i].name){
+
+                                $(evt.currentTarget).parent().next('td').next('td').find('select.existingColoniaTemp').append($("<option>").val(data.records[i].id).html(data.records[i].name));
+
+                            }
+
                         }
 
                         $(evt.currentTarget).parent().parent().parent().find(".loadingIconColoniaTemp").hide();
@@ -1666,11 +1672,10 @@ populateColoniasByMunicipio:function(evt){
         var colonia_id = '';
         if (direccion.dire_direccion_dire_coloniadire_colonia_ida != '') {
             colonia_id = direccion.dire_direccion_dire_coloniadire_colonia_ida;
-            // console.log(colonia_id);
         }
 
         //If this came from a new control, the colonias seleccion is going to be included in the direcciones variable
-        var colonia_html = '';
+        var colonia_html = '<option value="' + direccion.dire_direccion_dire_coloniadire_colonia_ida + '" selected="true">' + direccion.dire_direccion_dire_colonia_name + '</option>';
         if (typeof(direccion.colonia_new_html) != 'undefined') {
             //console.log("colonia new html");
             $(direccion.colonia_new_html).each(function () {
