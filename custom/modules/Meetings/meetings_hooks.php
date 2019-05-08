@@ -28,97 +28,9 @@ class Meetings_Hooks
     if ($args['relationship'] == 'meetings_users' && $bean->assigned_user_id != $args['related_id'] && $bean->parent_type == 'Accounts' && !empty($bean->parent_id) )
     {
       $GLOBALS['log']->fatal('TCT - RelationAdd - :' .$args['related_module']);
-      global $db, $current_user;
-
-      //Valida que no exista reunión asociada al usuario
+      //Genera petición para crear reunión
       $idUsuario = $args['related_id'];
-      $query = "select count(m.id) as total
-                from meetings m, meetings_cstm mc
-                where
-                	m.id=mc.id_c
-                	 and	mc.parent_meeting_c ='{$bean->id}'
-                	 and m.assigned_user_id='{$idUsuario}'
-                	 and deleted=0
-      ";
-      $queryResult = $db->getOne($query);
-
-      //Valida que el usuario no sea del centro de prospección
-      //Agente telefónico-27, Ejecutivo estrategia comercial-19
-      $flag=false;
-      $puesto = $current_user->puestousuario_c;
-      $lista = $app_list_strings['prospeccion_c_list'];
-      $listatext=array();
-
-      foreach ($lista as $key => $newList){
-        $listatext[]=$key;
-        if($key == $puesto){
-          $flag=true;
-        }
-      }
-      //Evaluación de resultado para crear reunión
-      if ($queryResult==0 && $flag==false) {
-        $GLOBALS['log']->fatal('TCT - RelationAdd - Agrega nueva reunión para usuario: ' . $idUsuario);
-        //Genera copia de reunión
-        $reunionInvitado = BeanFactory::newBean('Meetings');
-        //Campos excluidos por copiar
-        $exclude = array
-			  (
-  				'id',
-  				'date_entered',
-  				'date_modified',
-			  	'assigned_user_id',
-				  'parent_meeting_c',
-  				'description',
-          'status',
-          'resultado_c',
-          'check_in_address_c',
-          'check_in_latitude_c',
-          'check_in_longitude_c',
-          'check_in_time_c',
-          'check_out_address_c',
-          'check_out_latitude_c',
-          'check_out_longitude_c',
-          'check_out_time_c',
-          'check_in_platform_c',
-          'check_out_platform_c'
-      	);
-        //Iteración de campos por copiar
-        foreach($bean->field_defs as $def)
-    		{
-    			if(!(isset($def['source']) && $def['source'] == 'non-db') && !empty($def['name']) && !in_array($def['name'], $exclude))
-    			{
-    				$field = $def['name'];
-    				$reunionInvitado->{$field} = $bean->{$field};
-    			}
-    		}
-        //Agrega valores y guarda reunión
-        $reunionInvitado->parent_meeting_c = $bean->id;
-		    $reunionInvitado->created_by = $current_user->id;
-		    $reunionInvitado->modified_user_id = $current_user->id;
-    		$reunionInvitado->assigned_user_id = $idUsuario;
-    		$reunionInvitado->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
-        $reunionInvitado->reunion_objetivos = $bean->reunion_objetivos;
-        $reunionInvitado->status = 'Planned';
-    		$reunionInvitado->save();
-        //Agrega objetivos
-        if($bean->load_relationship('meetings_minut_objetivos_1')) {
-          $relatedBeans = $bean->meetings_minut_objetivos_1->getBeans();
-          foreach($relatedBeans as $rel){
-            $beanObjetivo = BeanFactory::newBean('minut_Objetivos');
-            $beanObjetivo->name = $rel->name;
-            $beanObjetivo->meetings_minut_objetivos_1meetings_ida = $reunionInvitado->id;
-            $beanObjetivo->description = $rel->description;
-            $beanObjetivo->save();
-          }
-        }
-      }
-
-      //Elimina usuario de reunión original
-      $update = "update meetings_users SET deleted = 1
-                  where meeting_id = '{$bean->id}'
-                  and user_id = '{$idUsuario}'
-      ";
-      $updateResult = $db->query($update);
+      $this->reunionInvitado($bean, $idUsuario);
     }
 
     //Actualiza reunión si ya tiene minuta
@@ -135,7 +47,29 @@ class Meetings_Hooks
       ";
       $updateResult=$db->query($meetUpdate);
     }
-	}
+
+    //Genera reuniones para usuarios cuando la cuenta se agrega
+    if($args['relationship'] == 'account_meetings' && $args['module'] == 'Meetings' && $args['related_module'] == 'Accounts' && empty($bean->parent_meeting_c))
+    {
+      //consulta usuarios asociados a reunión
+      global $db;
+      $query = "select user_id
+                from meetings_users
+                where
+                	 meeting_id ='{$bean->id}'
+                	 and user_id!='{$bean->assigned_user_id}'
+                	 and deleted=0
+      ";
+      $queryResult = $db->query($query);
+
+      //Itera registros recuperados
+      while ($row = $db->fetchByAssoc($queryResult)) {
+        //Genera petición para crear reunión
+        $idUsuario = $row['user_id'];
+        $this->reunionInvitado($bean, $idUsuario);
+      }
+    }
+  }
 
   /*
    * Guargar y actualizar objetivos de reunión
@@ -308,4 +242,101 @@ class Meetings_Hooks
     return $bean->field_defs[$field]['type'];
   }
 
+  /*
+   * Genera copias y elimina relación
+   * Función con proceso para creación de reuniones y depuración de relación
+   * */
+  function reunionInvitado($bean, $idUsuario)
+  {
+    global $db, $current_user;
+    //Valida que no exista reunión asociada al usuario
+    $query = "select count(m.id) as total
+              from meetings m, meetings_cstm mc
+              where
+                m.id=mc.id_c
+                 and	mc.parent_meeting_c ='{$bean->id}'
+                 and m.assigned_user_id='{$idUsuario}'
+                 and deleted=0
+    ";
+    $queryResult = $db->getOne($query);
+
+    //Valida que el usuario no sea del centro de prospección
+    //Agente telefónico-27, Ejecutivo estrategia comercial-19
+    $flag=false;
+    $beanUser=BeanFactory::getBean('Users', $idUsuario);
+    $puesto = $beanUser->puestousuario_c;
+    $lista = $app_list_strings['prospeccion_c_list'];
+    $listatext=array();
+
+    foreach ($lista as $key => $newList){
+      $listatext[]=$key;
+      if($key == $puesto){
+        $flag=true;
+      }
+    }
+    //Evaluación de resultado para crear reunión
+    if ($queryResult==0 && $flag==false) {
+      $GLOBALS['log']->fatal('TCT - RelationAdd - Agrega nueva reunión para usuario: ' . $idUsuario);
+      //Genera copia de reunión
+      $reunionInvitado = BeanFactory::newBean('Meetings');
+      //Campos excluidos por copiar
+      $exclude = array
+      (
+        'id',
+        'date_entered',
+        'date_modified',
+        'assigned_user_id',
+        'parent_meeting_c',
+        'description',
+        'status',
+        'resultado_c',
+        'check_in_address_c',
+        'check_in_latitude_c',
+        'check_in_longitude_c',
+        'check_in_time_c',
+        'check_out_address_c',
+        'check_out_latitude_c',
+        'check_out_longitude_c',
+        'check_out_time_c',
+        'check_in_platform_c',
+        'check_out_platform_c'
+      );
+      //Iteración de campos por copiar
+      foreach($bean->field_defs as $def)
+      {
+        if(!(isset($def['source']) && $def['source'] == 'non-db') && !empty($def['name']) && !in_array($def['name'], $exclude))
+        {
+          $field = $def['name'];
+          $reunionInvitado->{$field} = $bean->{$field};
+        }
+      }
+      //Agrega valores y guarda reunión
+      $reunionInvitado->parent_meeting_c = $bean->id;
+      $reunionInvitado->created_by = $current_user->id;
+      $reunionInvitado->modified_user_id = $current_user->id;
+      $reunionInvitado->assigned_user_id = $idUsuario;
+      $reunionInvitado->description = $bean->description." - Cita registrada automaticamente por CRM ya que ha sido asignado como invitado.";
+      $reunionInvitado->reunion_objetivos = $bean->reunion_objetivos;
+      $reunionInvitado->status = 'Planned';
+      $reunionInvitado->save();
+      //Agrega objetivos
+      if($bean->load_relationship('meetings_minut_objetivos_1')) {
+        $relatedBeans = $bean->meetings_minut_objetivos_1->getBeans();
+        foreach($relatedBeans as $rel){
+          $beanObjetivo = BeanFactory::newBean('minut_Objetivos');
+          $beanObjetivo->name = $rel->name;
+          $beanObjetivo->meetings_minut_objetivos_1meetings_ida = $reunionInvitado->id;
+          $beanObjetivo->description = $rel->description;
+          $beanObjetivo->save();
+        }
+      }
+    }
+
+    //Elimina usuario de reunión original
+    $update = "update meetings_users SET deleted = 1
+                where meeting_id = '{$bean->id}'
+                and user_id = '{$idUsuario}'
+    ";
+    $updateResult = $db->query($update);
+  }
 }
