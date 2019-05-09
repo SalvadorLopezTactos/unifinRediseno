@@ -339,6 +339,8 @@ class Meetings_Hooks
           $beanObjetivo->description = $rel->description;
           $beanObjetivo->meetings_minut_objetivos_1meetings_ida = $reunionInvitado->id;
           $beanObjetivo->save();
+            $reunionInvitado->load_relationship('meetings_minut_objetivos_1');
+            $reunionInvitado->meetings_minut_objetivos_1->add($beanObjetivo->id);
         }
       }
     }
