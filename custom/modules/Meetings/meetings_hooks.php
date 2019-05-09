@@ -332,13 +332,20 @@ class Meetings_Hooks
       $reunionInvitado->save();
       //Agrega objetivos
       if($bean->load_relationship('meetings_minut_objetivos_1')) {
+          $GLOBALS['log']->fatal('Trae relacion de objetivos');
         $relatedBeans = $bean->meetings_minut_objetivos_1->getBeans();
         foreach($relatedBeans as $rel){
           $beanObjetivo = BeanFactory::newBean('minut_Objetivos');
+            $GLOBALS['log']->fatal('Imprime objetivos');
           $beanObjetivo->name = $rel->name;
           $beanObjetivo->description = $rel->description;
           $beanObjetivo->meetings_minut_objetivos_1meetings_ida = $reunionInvitado->id;
+            $GLOBALS['log']->fatal($reunionInvitado->id);
+            $GLOBALS['log']->fatal($beanObjetivo->meetings_minut_objetivos_1meetings_ida);
           $beanObjetivo->save();
+            $reunionInvitado->load_relationship('meetings_minut_objetivos_1');
+            $reunionInvitado->meetings_minut_objetivos_1->add($beanObjetivo->id);
+            $GLOBALS['log']->fatal('Se creo relacion');
         }
       }
     }
