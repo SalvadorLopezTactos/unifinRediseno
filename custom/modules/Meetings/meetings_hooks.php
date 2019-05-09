@@ -182,14 +182,26 @@ class Meetings_Hooks
   function modificaReunion ($bean= null, $event=null, $args=null)
   {
     //Agrega funcionalidad para actualizar estado = Planned
-    //$GLOBALS['log']->fatal("Parent: ".$bean->parent_type. "Parent_id: ".$bean->parent_id." Minuta: ".$bean->minut_minutas_meetingsminut_minutas_ida."Estado: ".$bean->status);
-    if ($bean->parent_type=='Accounts' && !empty($bean->parent_id) && empty($bean->minut_minutas_meetingsminut_minutas_ida) && $bean->status=='Held') {
+    if ($GLOBALS['service']->platform!= 'base' && $bean->parent_type=='Accounts' && !empty($bean->parent_id) && empty($bean->minut_minutas_meetingsminut_minutas_ida) && $bean->status=='Held')
+    {
       global $db, $current_user;
       $GLOBALS['log']->fatal("TCT - Cumple condición y actualiza: Planned ");
       //Actualiza estado a Planeado
       $bean->status='Planned';
       $meetUpdate="update meetings m
                     set m.status='Planned'
+                    where m.id='{$bean->id}'
+      ";
+      $updateResult=$db->query($meetUpdate);
+    }
+    if ($bean->parent_type=='Accounts' && !empty($bean->parent_id) && !empty($bean->minut_minutas_meetingsminut_minutas_ida) && $bean->status=='Planned')
+    {
+      global $db, $current_user;
+      $GLOBALS['log']->fatal("TCT - Cumple condición y actualiza: Held ");
+      //Actualiza estado a Realizado
+      $bean->status='Held';
+      $meetUpdate="update meetings m
+                    set m.status='Held'
                     where m.id='{$bean->id}'
       ";
       $updateResult=$db->query($meetUpdate);
@@ -324,8 +336,8 @@ class Meetings_Hooks
         foreach($relatedBeans as $rel){
           $beanObjetivo = BeanFactory::newBean('minut_Objetivos');
           $beanObjetivo->name = $rel->name;
-          $beanObjetivo->meetings_minut_objetivos_1meetings_ida = $reunionInvitado->id;
           $beanObjetivo->description = $rel->description;
+          $beanObjetivo->meetings_minut_objetivos_1meetings_ida = $reunionInvitado->id;
           $beanObjetivo->save();
         }
       }
