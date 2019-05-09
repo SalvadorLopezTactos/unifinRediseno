@@ -259,7 +259,7 @@ class Meetings_Hooks
    * */
   function reunionInvitado($bean, $idUsuario)
   {
-    global $db, $current_user;
+    global $db, $current_user, $app_list_strings;
     //Valida que no exista reunión asociada al usuario
     $query = "select count(m.id) as total
               from meetings m, meetings_cstm mc
