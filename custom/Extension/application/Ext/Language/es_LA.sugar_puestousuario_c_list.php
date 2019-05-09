@@ -1,5 +1,5 @@
 <?php
- // created: 2019-05-03 05:01:24
+ // created: 2019-05-09 19:56:56
 
 $app_list_strings['puestousuario_c_list']=array (
   1 => 'DGA COMERCIAL LEASING',
@@ -48,4 +48,5 @@ $app_list_strings['puestousuario_c_list']=array (
   44 => 'ESTRATEGIA LEASING',
   45 => 'ASISTENTE DIRECCION',
   46 => 'PRODUCTOS ESPECIALES',
+  47 => 'ANALISIS ECONOMICO FINANCIERO',
 );
