@@ -1799,44 +1799,7 @@
             }
         }
         if(checkrol>=1) {
-
-            if (backlogAnio <= currentYear) {
-                if (backlogMes <= BacklogCorriente) {
-                    //Operaciones de meses anteriores al actual solo pueden ser canceladas por directores
-                    if (backlogMes < BacklogCorriente && rolAutorizacion == "Promotor") {
-                        app.alert.show('backlog_pasado', {
-                            level: 'error',
-                            messages: 'La operaci\u00F3n solo puede ser cancelada por directores.',
-                            autoClose: false
-                        });
-                        return;
-                    } else {
-                        //Si esta en proceso de revisión solo dir y/o DGA pueden cancelar validando roles
-                        if ((backlogMes == BacklogCorriente && currentDay > 15 && currentDay < 19 && rolAutorizacion == "Promotor") ||
-                            (backlogMes == BacklogCorriente && currentDay > 19 && currentDay <= 19 && rolAutorizacion != "DGA")) { //CVV se comenta para cerra periodo de Julio  CVV regresar a 20
-                            //if (backlogMes == BacklogCorriente && rolAutorizacion != "DGA"){
-                            app.alert.show('backlog_pasado', {
-                                level: 'error',
-                                messages: 'No cuenta con los privilegios para cancelar operaciones en este periodo.',
-                                autoClose: false
-                            });
-                            return;
-                        } else {
-                            //Si es el mes actual fuera de periodo de revisión, solo Directores y DGA's
-                            if ((currentDay < 16 || currentDay < 21) && rolAutorizacion == "Promotor") {  //CVV se comenta para cerra periodo de Julio
-                                //if (rolAutorizacion != "DGA"){
-                                app.alert.show('backlog_pasado', {
-                                    level: 'error',
-                                    messages: 'No cuenta con los privilegios para cancelar.',
-                                    autoClose: false
-                                });
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
-
+            
             self.render();
             if (status != "Cancelada") {
                 var modal = $('#myModalCan');
