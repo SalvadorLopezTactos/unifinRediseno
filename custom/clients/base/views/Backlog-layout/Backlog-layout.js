@@ -1789,8 +1789,13 @@
         };
 
         var currentDay = (new Date).getDate();
+        var currentMonth = (new Date).getMonth()+1;
         var currentYear = (new Date).getFullYear();
         var BacklogCorriente = this.getElaborationBacklog();
+
+        var currentYearTwoDigits=(new Date()).getFullYear().toString().substr(-2);
+
+        var flagShowModal=true;
 
         var checkrol = 0;
         for (var i = 0; i < App.user.attributes.roles.length; i++) {
@@ -1798,8 +1803,110 @@
                 checkrol++;
             }
         }
-        if(checkrol>=1) {
-            
+
+        //No se pueden cancelar operaciones canceladas
+        if (status == "Cancelada") {
+            app.alert.show('opp_cancelada', {
+                level: 'error',
+                messages: 'Solo se puede cancelar una operaci\u00F3n original si esta comprometida',
+                autoClose: false
+            });
+            return;
+        }
+
+        //Validación para no permitir cancelar Backlogs anteriores al mes actual
+        if(backlogAnio < currentYearTwoDigits){
+
+            app.alert.show('backlog_anterior', {
+                level: 'error',
+                messages: 'Esta operaci\u00F3n no puede ser cancelada pues ya pertenece a un mes anterior al actual',
+                autoClose: false
+            });
+            return;
+
+        }
+        if(backlogMes < currentMonth && backlogAnio == currentYearTwoDigits){
+
+            app.alert.show('backlog_anterior', {
+                level: 'error',
+                messages: 'Esta operaci\u00F3n no puede ser cancelada pues ya pertenece a un mes anterior al actual',
+                autoClose: false
+            });
+            return;
+
+        }
+
+        //Validación para permitir cancelar Backlogs del mes actual a usuarios con Rol de Backlog-Cancelar
+        if(backlogMes == currentMonth && backlogAnio == currentYearTwoDigits){
+            if(checkrol>0){
+
+                flagShowModal=true;
+
+            }else{
+
+                flagShowModal=false;
+
+                app.api.call("read", app.api.buildURL ("UsuariosBLcancelar"), {}, {
+                    success: _.bind(function (data) {
+                        var mensaje= "";
+                        data.forEach(function(element){
+                            mensaje= mensaje +element+'<br>';
+                        });
+                        app.alert.show('No Permisos', {
+                            level: 'error',
+                            messages: 'No cuenta con los privilegios para realizar esta acción. Favor de comunicarse con alguno de los siguientes usuarios:<br>' + '<b>'+mensaje +'</b>',
+                            autoClose: false
+                        });
+                    }, this)
+                });
+
+            }
+
+        }else{
+
+            if (backlogAnio <= currentYear) {
+                if (backlogMes <= BacklogCorriente) {
+                    //Operaciones de meses anteriores al actual solo pueden ser canceladas por directores
+                    if (backlogMes < BacklogCorriente && rolAutorizacion == "Promotor") {
+                        app.alert.show('backlog_pasado', {
+                            level: 'error',
+                            messages: 'La operaci\u00F3n solo puede ser cancelada por directores.',
+                            autoClose: false
+                        });
+                        return;
+                    } else {
+                        //Si esta en proceso de revisión solo dir y/o DGA pueden cancelar validando roles
+                        if ((backlogMes == BacklogCorriente && currentDay > 15 && currentDay < 19 && rolAutorizacion == "Promotor") ||
+                            (backlogMes == BacklogCorriente && currentDay > 19 && currentDay <= 19 && rolAutorizacion != "DGA")) { //CVV se comenta para cerra periodo de Julio  CVV regresar a 20
+                            //if (backlogMes == BacklogCorriente && rolAutorizacion != "DGA"){
+                            app.alert.show('backlog_pasado', {
+                                level: 'error',
+                                messages: 'No cuenta con los privilegios para cancelar operaciones en este periodo.',
+                                autoClose: false
+                            });
+                            return;
+                        } else {
+                            //Si es el mes actual fuera de periodo de revisión, solo Directores y DGA's
+                            if ((currentDay < 16 || currentDay < 21) && rolAutorizacion == "Promotor") {  //CVV se comenta para cerra periodo de Julio
+                                //if (rolAutorizacion != "DGA"){
+                                app.alert.show('backlog_pasado', {
+                                    level: 'error',
+                                    messages: 'No cuenta con los privilegios para cancelar.',
+                                    autoClose: false
+                                });
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+        //Validación para saber si se debe de mostrar la ventana modal
+        if(flagShowModal){
+
             self.render();
             if (status != "Cancelada") {
                 var modal = $('#myModalCan');
@@ -1808,30 +1915,9 @@
                 $('.Producto').hide();
                 $('.FechaCancelar').hide();
             }
-            if (status == "Cancelada") {
-                app.alert.show('opp_cancelada', {
-                    level: 'error',
-                    messages: 'Solo se puede cancelar una operaci\u00F3n original si esta comprometida',
-                    autoClose: false
-                });
-                return;
-            }
-        }else{
-            app.api.call("read", app.api.buildURL ("UsuariosBLcancelar"), {}, {
-                 success: _.bind(function (data) {
-                      var mensaje= "";
-                      data.forEach(function(element){
-                          mensaje= mensaje +element+'<br>';
-                      });
-                    app.alert.show('No Permisos', {
-                        level: 'error',
-                        messages: 'No cuenta con los privilegios para realizar esta acción. Favor de comunicarse con alguno de los siguientes usuarios:<br>' + '<b>'+mensaje +'</b>',
-                        autoClose: false
-                    });
-                }, this)
-            });
 
         }
+
         //$("#formulariomayores").css("display", "block")
     },
 
