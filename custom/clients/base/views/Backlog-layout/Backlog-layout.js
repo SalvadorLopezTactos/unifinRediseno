@@ -2204,7 +2204,7 @@
 
                     app.alert.show('backlog_anterior', {
                         level: 'error',
-                        messages: 'Alguna de las operaciones seleccionadas no puede ser cancelada pues ya pertenece a un mes anterior al actual '+
+                        messages: 'Alguna de las operaciones seleccionadas no puede ser cancelada debido a que pertenece a un mes anterior al actual '+
                         '<br>No. Backlog: '+ backlogNum,
                         autoClose: false
                     });
@@ -2219,7 +2219,7 @@
 
                     app.alert.show('backlog_anterior', {
                         level: 'error',
-                        messages: 'Alguna de las operaciones seleccionadas no puede ser cancelada pues ya pertenece a un mes anterior al actual '+
+                        messages: 'Alguna de las operaciones seleccionadas no puede ser cancelada debido a que pertenece a un mes anterior al actual '+
                         '<br>No. Backlog: '+ backlogNum,
                         autoClose: false
                     });
@@ -2249,7 +2249,7 @@
                         // el modal no se muestre pues el arreglo checks_cancelar ya se estableció como vacío
                         i=this.countChecksCancelar;
 
-                        app.api.call("read", app.api.buildURL ("UsuariosBLcancelar"), {}, {
+                        app.api.call("read", app.api.buildURL ("UsuariosBLcancelar/1"), {}, {
                             success: _.bind(function (data) {
                                 var mensaje= "";
                                 data.forEach(function(element){
