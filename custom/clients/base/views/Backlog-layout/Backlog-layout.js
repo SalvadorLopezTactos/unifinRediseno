@@ -2106,7 +2106,17 @@
         this.countChecksCancelar=this.array_checks_cancelar.length;
 
         var currentDay = (new Date).getDate();
+        var currentMonth = (new Date).getMonth()+1;
         var currentYear = (new Date).getFullYear();
+
+        var currentYearTwoDigits=(new Date()).getFullYear().toString().substr(-2);
+
+        var checkrol = 0;
+        for (var i = 0; i < App.user.attributes.roles.length; i++) {
+            if (App.user.attributes.roles[i] == "Backlog-Cancelar") {
+                checkrol++;
+            }
+        }
 
         if(this.countChecksCancelar>0){
             //Recorriendo arreglo de checks
@@ -2140,42 +2150,111 @@
                     return;
                 }
 
+                //Validación para no permitir cancelar Backlogs anteriores al mes actual
+                if(backlogAnio < currentYearTwoDigits){
+
+                    app.alert.show('backlog_anterior', {
+                        level: 'error',
+                        messages: 'Alguna de las operaciones seleccionadas no puede ser cancelada pues ya pertenece a un mes anterior al actual '+
+                        '<br>No. Backlog: '+ backlogNum,
+                        autoClose: false
+                    });
+
+                    $('input[type="checkbox"][data-id='+backlogId+']').attr('checked',false);
+
+                    return;
+
+                }
+
+                if(backlogMes < currentMonth && backlogAnio == currentYearTwoDigits){
+
+                    app.alert.show('backlog_anterior', {
+                        level: 'error',
+                        messages: 'Alguna de las operaciones seleccionadas no puede ser cancelada pues ya pertenece a un mes anterior al actual '+
+                        '<br>No. Backlog: '+ backlogNum,
+                        autoClose: false
+                    });
+
+                    $('input[type="checkbox"][data-id='+backlogId+']').attr('checked',false);
+                    return;
+
+                }
+
                 var BacklogCorriente = this.getElaborationBacklog();
 
-                if(backlogAnio <= currentYear) {
-                    if (backlogMes <= BacklogCorriente){
-                        //Operaciones de meses anteriores al actual solo pueden ser canceladas por directores
-                        if (backlogMes < BacklogCorriente && rolAutorizacion == "Promotor") {
+                //Validación para permitir cancelar Backlogs del mes actual a usuarios con Rol de Backlog-Cancelar
+                if(backlogMes == currentMonth && backlogAnio == currentYearTwoDigits){
+                    if(checkrol>0){
 
-                            checks_cancelar_error.push(this.array_checks_cancelar[i]);
+                        checks_cancelar.push(this.array_checks_cancelar[i]);
 
-                        }else{
-                            //Si esta en proceso de revisión solo dir y/o DGA pueden cancelar validando roles
-                            if ((backlogMes == BacklogCorriente && currentDay > 15 && currentDay < 19 && rolAutorizacion == "Promotor") ||
-                                (backlogMes == BacklogCorriente && currentDay > 19 && currentDay <= 19 && rolAutorizacion != "DGA")){ //CVV se comenta para cerra periodo de Julio  CVV regresar a 20
+                    }else{
+
+                        checks_cancelar=[];
+
+                        checks_cancelar_error.push(this.array_checks_cancelar[i]);
+
+                        $('input[type="checkbox"][data-id='+backlogId+']').attr('checked',false);
+
+                        //Se establece el indice i como countChecksCancelar para obligar a que el ciclo fir termine y de esta manera,
+                        // el modal no se muestre pues el arreglo checks_cancelar ya se estableció como vacío
+                        i=this.countChecksCancelar;
+
+                        app.api.call("read", app.api.buildURL ("UsuariosBLcancelar"), {}, {
+                            success: _.bind(function (data) {
+                                var mensaje= "";
+                                data.forEach(function(element){
+                                    mensaje= mensaje +element+'<br>';
+                                });
+                                app.alert.show('No Permisos', {
+                                    level: 'error',
+                                    messages: 'No cuenta con los privilegios para realizar esta acción. Favor de comunicarse con alguno de los siguientes usuarios:<br>' + '<b>'+mensaje +'</b>',
+                                    autoClose: false
+                                });
+                            }, this)
+                        });
+
+                    }
+
+                }else{
+
+                    if(backlogAnio <= currentYear) {
+                        if (backlogMes <= BacklogCorriente){
+                            //Operaciones de meses anteriores al actual solo pueden ser canceladas por directores
+                            if (backlogMes < BacklogCorriente && rolAutorizacion == "Promotor") {
 
                                 checks_cancelar_error.push(this.array_checks_cancelar[i]);
+
                             }else{
-                                //Si es el mes actual fuera de periodo de revisión, solo Directores y DGA's
-                                if ((currentDay < 16 || currentDay < 21) && rolAutorizacion == "Promotor"){  //CVV se comenta para cerra periodo de Julio
+                                //Si esta en proceso de revisión solo dir y/o DGA pueden cancelar validando roles
+                                if ((backlogMes == BacklogCorriente && currentDay > 15 && currentDay < 19 && rolAutorizacion == "Promotor") ||
+                                    (backlogMes == BacklogCorriente && currentDay > 19 && currentDay <= 19 && rolAutorizacion != "DGA")){ //CVV se comenta para cerra periodo de Julio  CVV regresar a 20
 
                                     checks_cancelar_error.push(this.array_checks_cancelar[i]);
                                 }else{
-                                    checks_cancelar.push(this.array_checks_cancelar[i]);
+                                    //Si es el mes actual fuera de periodo de revisión, solo Directores y DGA's
+                                    if ((currentDay < 16 || currentDay < 21) && rolAutorizacion == "Promotor"){  //CVV se comenta para cerra periodo de Julio
+
+                                        checks_cancelar_error.push(this.array_checks_cancelar[i]);
+                                    }else{
+                                        checks_cancelar.push(this.array_checks_cancelar[i]);
+                                    }
                                 }
                             }
+                        }else{
+                            checks_cancelar.push(this.array_checks_cancelar[i]);
                         }
                     }else{
                         checks_cancelar.push(this.array_checks_cancelar[i]);
                     }
-                }else{
-                    checks_cancelar.push(this.array_checks_cancelar[i]);
+
                 }
+
             }
         }
 
         //Condición para saber si se debe mostrar el popup para cancelar masivamente
-        if(checks_cancelar.length > 0){
+        if(checks_cancelar.length > 0 ){
             this.checks_cancelar=checks_cancelar;
             this.checks_cancelar_error=checks_cancelar_error;
             this.motivoCancelarMasivoList=app.lang.getAppListStrings('motivo_de_cancelacion_list');
