@@ -1091,7 +1091,7 @@
 
                      app.alert.show('backlog_anterior', {
                          level: 'error',
-                         messages: 'Esta operaci\u00F3n no puede moverse debido a que pertenece a un mes anterior al actual',
+                         messages: 'Alguna de las operaciones seleccionadas no se puede mover debido a que pertenece a un mes anterior al actual',
                          autoClose: false
                      });
 
@@ -1103,7 +1103,7 @@
 
                      app.alert.show('backlog_anterior', {
                          level: 'error',
-                         messages: 'Esta operaci\u00F3n no puede moverse debido a que pertenece a un mes anterior al actual',
+                         messages: 'Alguna de las operaciones seleccionadas no se puede mover debido a que pertenece a un mes anterior al actual',
                          autoClose: false
                      });
 
