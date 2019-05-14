@@ -1868,7 +1868,7 @@
 
             app.alert.show('backlog_anterior', {
                 level: 'error',
-                messages: 'Esta operaci\u00F3n no puede ser cancelada pues ya pertenece a un mes anterior al actual',
+                messages: 'Esta operaci\u00F3n no puede ser cancelada debido a que el backlog pertenece a un mes anterior al actual',
                 autoClose: false
             });
             return;
@@ -1878,7 +1878,7 @@
 
             app.alert.show('backlog_anterior', {
                 level: 'error',
-                messages: 'Esta operaci\u00F3n no puede ser cancelada pues ya pertenece a un mes anterior al actual',
+                messages: 'Esta operaci\u00F3n no puede ser cancelada debido a que el backlog pertenece a un mes anterior al actual',
                 autoClose: false
             });
             return;
