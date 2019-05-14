@@ -1061,10 +1061,19 @@
          var rolAutorizacion = self.rolAutorizacion;
 
          var currentYear = (new Date).getFullYear();
+         var currentMonth = (new Date).getMonth()+1;
          var currentAnioSub= currentYear.toString().substr(-2);
          var currentBacklogMonth = this.backlogMonth();
 
          var countChecks= this.array_checks.length;
+
+
+         var rolMover = 0;
+         for (var i = 0; i < App.user.attributes.roles.length; i++) {
+             if (App.user.attributes.roles[i] == "Backlog-Mover") {
+                 rolMover++;
+             }
+         }
 
          if(countChecks>0){
              //Recorriendo arreglo de checks
@@ -1077,69 +1086,130 @@
                  var backlogEstatus = this.array_checks[i].getAttribute('data-estatus');
                  var backlogNum = this.array_checks[i].getAttribute('data-numbacklog');
 
-                 if(backlogAnio <= currentAnioSub) {
-                     // Si el BL ya esta cancelado no puede moverse
-                     //if(backlogEstatus != 'Activa') {
-                     if(backlogEstatus == 'Cancelada') {
+                 //Validación para no permitir cancelar Backlogs anteriores al mes actual
+                 if(backlogAnio < currentAnioSub){
 
-                         app.alert.show('backlog_pasado', {
-                             level: 'error',
-                             //messages: 'Esta operacion no puede moverse debido a que se encuentra ' + backlogEstatus,
-                             messages: 'Alguna de las operaciones no puede moverse debido a que se encuentra ' + backlogEstatus +
-                             '<br>No. Backlog: '+ backlogNum,
-                             autoClose: false
-                         });
+                     app.alert.show('backlog_anterior', {
+                         level: 'error',
+                         messages: 'Esta operaci\u00F3n no puede moverse debido a que pertenece a un mes anterior al actual',
+                         autoClose: false
+                     });
+
+                     $('input[type="checkbox"][data-id='+backlogId+']').attr('checked',false);
+                     return;
+
+                 }
+                 if(backlogMes < currentMonth && backlogAnio == currentAnioSub){
+
+                     app.alert.show('backlog_anterior', {
+                         level: 'error',
+                         messages: 'Esta operaci\u00F3n no puede moverse debido a que pertenece a un mes anterior al actual',
+                         autoClose: false
+                     });
+
+                     $('input[type="checkbox"][data-id='+backlogId+']').attr('checked',false);
+                     return;
+
+                 }
+
+                 if(backlogMes == currentMonth && backlogAnio == currentAnioSub){
+                     if (rolMover>=1){
+                         arr_checks_actualizar.push(this.array_checks[i]);
+
+                     }else{
+
+                         arr_checks_actualizar=[];
+                         arr_checks_no_actualizar.push(this.array_checks[i]);
 
                          $('input[type="checkbox"][data-id='+backlogId+']').attr('checked',false);
-                         return;
 
-                     }else {
-                         // No se pueden mover los Backlogs del mes actual BL una vez que ha iniciado
-                         var currentDay = (new Date).getDate();
-                         var BacklogCorriente = this.getElaborationBacklog();
+                         //Se establece el indice i como countChecksCancelar para obligar a que el ciclo fir termine y de esta manera,
+                         // el modal no se muestre pues el arreglo checks_cancelar ya se estableció como vacío
+                         i=countChecks;
 
-                         if(backlogAnio <= currentAnioSub){
-                             if(backlogMes <= BacklogCorriente && backlogEstatus != 'Cancelada') {
-                                 if (backlogMes == BacklogCorriente /*&& currentDay > 15*/ && currentDay <= 20){
-                                     if (currentDay == 21 && rolAutorizacion != "DGA") {
+                         app.api.call("read", app.api.buildURL ("UsuariosBLcancelar/2"), {}, {
+                             success: _.bind(function (data) {
+                                 var mensajeMov= "";
+                                 data.forEach(function(element){
+                                     mensajeMov= mensajeMov +element+'<br>';
+                                 });
+                                 app.alert.show('No Permisos Mover', {
+                                     level: 'error',
+                                     messages: 'No cuenta con los privilegios para realizar esta acción. Favor de comunicarse con alguno de los siguientes usuarios:<br>' + '<b>'+mensajeMov +'</b>',
+                                     autoClose: false
+                                 });
+                             }, this)
+                         });
+                     }
+                 }else{
 
-                                         arr_checks_no_actualizar.push(this.array_checks[i]);
+                     if(backlogAnio <= currentAnioSub) {
+                         // Si el BL ya esta cancelado no puede moverse
+                         //if(backlogEstatus != 'Activa') {
+                         if(backlogEstatus == 'Cancelada') {
 
+                             app.alert.show('backlog_pasado', {
+                                 level: 'error',
+                                 //messages: 'Esta operacion no puede moverse debido a que se encuentra ' + backlogEstatus,
+                                 messages: 'Alguna de las operaciones no puede moverse debido a que se encuentra ' + backlogEstatus +
+                                 '<br>No. Backlog: '+ backlogNum,
+                                 autoClose: false
+                             });
+
+                             $('input[type="checkbox"][data-id='+backlogId+']').attr('checked',false);
+                             return;
+
+                         }else {
+                             // No se pueden mover los Backlogs del mes actual BL una vez que ha iniciado
+                             var currentDay = (new Date).getDate();
+                             var BacklogCorriente = this.getElaborationBacklog();
+
+                             if(backlogAnio <= currentAnioSub){
+                                 if(backlogMes <= BacklogCorriente && backlogEstatus != 'Cancelada') {
+                                     if (backlogMes == BacklogCorriente /*&& currentDay > 15*/ && currentDay <= 20){
+                                         if (currentDay == 21 && rolAutorizacion != "DGA") {
+
+                                             arr_checks_no_actualizar.push(this.array_checks[i]);
+
+                                         }else{
+                                             arr_checks_actualizar.push(this.array_checks[i]);
+                                         }
                                      }else{
-                                         arr_checks_actualizar.push(this.array_checks[i]);
+                                         if (rolAutorizacion == "Promotor"){
+                                             //Si es un Backlog anterior o igual al mes corriente natural nadie puede
+
+                                             app.alert.show('backlog corriente', {
+                                                 level: 'error',
+                                                 //messages: 'Esta operacion no puede moverse debido a que el Backlog ya esta corriendo.',
+                                                 messages: 'Alguna de las operaciones seleccionadas no puede moverse debido a que el Backlog ya est\u00E1 corriendo <br>'+
+                                                 'No. Backlog: '+backlogNum,
+                                                 autoClose: false
+                                             });
+
+                                             $('input[type="checkbox"][data-id='+backlogId+']').attr('checked',false);
+
+                                             return;
+
+                                             //arr_checks_no_actualizar.push(this.array_checks[i]);
+                                         }else{
+                                             arr_checks_actualizar.push(this.array_checks[i]);
+                                         }
                                      }
                                  }else{
-                                     if (rolAutorizacion == "Promotor"){
-                                         //Si es un Backlog anterior o igual al mes corriente natural nadie puede
-
-                                         app.alert.show('backlog corriente', {
-                                             level: 'error',
-                                             //messages: 'Esta operacion no puede moverse debido a que el Backlog ya esta corriendo.',
-                                             messages: 'Alguna de las operaciones seleccionadas no puede moverse debido a que el Backlog ya est\u00E1 corriendo <br>'+
-                                             'No. Backlog: '+backlogNum,
-                                             autoClose: false
-                                         });
-
-                                         $('input[type="checkbox"][data-id='+backlogId+']').attr('checked',false);
-
-                                         return;
-
-                                         //arr_checks_no_actualizar.push(this.array_checks[i]);
-                                     }else{
-                                         arr_checks_actualizar.push(this.array_checks[i]);
-                                     }
+                                     arr_checks_actualizar.push(this.array_checks[i]);
                                  }
-                             }else{
-                                 arr_checks_actualizar.push(this.array_checks[i]);
+
                              }
 
                          }
-
+                     }else{
+                         //this.checks_actualizar.push(this.array_checks[i]);
+                         arr_checks_actualizar.push(this.array_checks[i]);
                      }
-                 }else{
-                     //this.checks_actualizar.push(this.array_checks[i]);
-                     arr_checks_actualizar.push(this.array_checks[i]);
+
                  }
+
+
 
              }
 
