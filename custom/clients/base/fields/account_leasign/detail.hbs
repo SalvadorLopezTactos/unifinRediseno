@@ -12,7 +12,7 @@ AF - 18-01-18
         margin-top: 2px;
         font-size: 12px;
     }
-  
+
   .sinborde { /*Table without border*/
   border: 0;
   }
@@ -102,7 +102,7 @@ AF - 18-01-18
     <div style="background-color: #f9f9f9">
       <div>
         <!-- Encabezado -->
-        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+        <div class="accordion-heading" style="background-color: {{ResumenCliente.colores.azul}}">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
             <font color=#ffffff>
               <center>
@@ -118,8 +118,8 @@ AF - 18-01-18
           <!-- Línea 1 -->
           <div class="row-fluid" style="background-color: #ffffff">
             <div class="span12" style="height: 180px; overflow: scroll;text-align:justify;">
-                {{#if noticia_general.noticia}}
-                        {{noticia_general.noticia}}
+                {{#if ResumenCliente.noticia_general.noticia}}
+                        {{ResumenCliente.noticia_general.noticia}}
                 {{else}}
                   <center>No hay noticia general</center>
                 {{/if}}
@@ -134,7 +134,7 @@ AF - 18-01-18
     <div style="background-color: #f9f9f9">
       <div>
         <!-- Encabezado -->
-        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+        <div class="accordion-heading" style="background-color: {{ResumenCliente.colores.azul}}">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo">
             <font color=#ffffff>
               <center>
@@ -150,8 +150,8 @@ AF - 18-01-18
           <!-- Línea 1 -->
           <div class="row-fluid" style="background-color: #ffffff">
             <div class="span12" style="height: 180px; overflow: scroll; text-align:justify;">
-                {{#if noticia_macro_sector.noticia}}
-                  {{noticia_macro_sector.noticia}}
+                {{#if ResumenCliente.noticia_macro_sector.noticia}}
+                  {{ResumenCliente.noticia_macro_sector.noticia}}
                 {{else}}
                   <center>No hay noticia de macro sector</center>
                 {{/if}}
@@ -166,12 +166,12 @@ AF - 18-01-18
     <div style="background-color: #f9f9f9">
       <div>
         <!-- Encabezado -->
-        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+        <div class="accordion-heading" style="background-color: {{ResumenCliente.colores.azul}}">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseThree">
             <font color=#ffffff>
               <center>
                 <strong>
-                  Noticias de Región 
+                  Noticias de Región
                 </strong>
               </center>
             </font>
@@ -182,8 +182,8 @@ AF - 18-01-18
           <!-- Línea 1 -->
           <div class="row-fluid" style="background-color: #ffffff">
             <div class="span12" style="height: 180px; overflow: scroll; text-align:justify;">
-                {{#if noticia_region.noticia}}
-                  {{noticia_region.noticia}}
+                {{#if ResumenCliente.noticia_region.noticia}}
+                  {{ResumenCliente.noticia_region.noticia}}
                 {{else}}
                   <center>No hay noticia de región</center>
                 {{/if}}
@@ -198,12 +198,12 @@ AF - 18-01-18
     <div style="background-color: #f9f9f9">
       <div>
         <!-- Encabezado -->
-        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+        <div class="accordion-heading" style="background-color: {{ResumenCliente.colores.azul}}">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseFour">
             <font color=#ffffff>
               <center>
                 <strong>
-                  Datos Clave 
+                  Datos Clave
                 </strong>
               </center>
             </font>
@@ -214,7 +214,7 @@ AF - 18-01-18
           <!-- Línea 1 -->
           <div class="" style="background-color: #ffffff">
             <div class="span12" style="height: 180px;">
-           <textarea style="height: 100%; overflow: scroll; resize: none; text-align:justify; color:#21618C" class="sinborde" data-name="textComment" id="txtComment">{{#if datos_clave.dato_clave}}{{datos_clave.dato_clave}}{{/if}}</textarea>
+           <textarea style="height: 100%; overflow: scroll; resize: none; text-align:justify; color:#21618C" class="sinborde" data-name="textComment" id="txtComment">{{#if ResumenCliente.datos_clave.dato_clave}}{{ResumenCliente.datos_clave.dato_clave}}{{/if}}</textarea>
             </div>
             <div align="right">
               <button class="btn btn-success  btn-Guardar" id="btn-Guardar" type="submit">Guardar</button>
@@ -239,7 +239,7 @@ AF - 18-01-18
     <div style="background-color: #f9f9f9">
       <div>
         <!-- Encabezado -->
-        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+        <div class="accordion-heading" style="background-color: {{ResumenCliente.colores.azul}}">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion0" href="#collapseFive">
             <font color=#ffffff>
               <center><strong>General</strong></center>
@@ -251,32 +251,32 @@ AF - 18-01-18
           <!-- Línea 1 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Tipo</strong> </div>
-            <div class="span6">{{general_cliente.tipo}}</div>
+            <div class="span6">{{ResumenCliente.general_cliente.tipo}}</div>
           </div>
           <!-- Línea 2 -->
           <div class="row-fluid"  style="background-color: #ffffff">
             <div class="span6"><strong>Segmento</strong></div>
-            <div class="span6">{{general_cliente.segmento}}</div>
+            <div class="span6">{{ResumenCliente.general_cliente.segmento}}</div>
           </div>
           <!-- Línea 3 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Cobranza</strong> </div>
-            <div class="span6">{{general_cliente.cobranza}}</div>
+            <div class="span6">{{ResumenCliente.general_cliente.cobranza}}</div>
           </div>
           <!-- Línea 4 -->
           <div class="row-fluid" style="background-color: #ffffff">
             <div class="span6"><strong>Sector económico</strong> </div>
-            <div class="span6">{{general_cliente.sector_economico}}</div>
+            <div class="span6">{{ResumenCliente.general_cliente.sector_economico}}</div>
           </div>
           <!-- Línea 5 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Grupo Empresarial</strong> </div>
-            <div class="span6">{{general_cliente.grupo_empresarial}}</div>
+            <div class="span6">{{ResumenCliente.general_cliente.grupo_empresarial}}</div>
           </div>
           <!-- Línea 6 -->
           <!-- <div class="row-fluid" style="background-color: #ffffff">
             <div class="span6"><strong>Nivel de satisfacción</strong> </div>
-            <div class="span6">{{general_cliente.nivel_satisfaccion}}</div>
+            <div class="span6">{{ResumenCliente.general_cliente.nivel_satisfaccion}}</div>
           </div> -->
         </div>
       </div>
@@ -287,12 +287,12 @@ AF - 18-01-18
     <div style="background-color: #f9f9f9">
       <div>
         <!-- Encabezado -->
-        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+        <div class="accordion-heading" style="background-color: {{ResumenCliente.colores.azul}}">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseSix">
             <font color=#ffffff>
               <center>
                 <strong>
-                  Alertas ({{alertas.total}})
+                  Alertas ({{ResumenCliente.alertas.total}})
                 </strong>
               </center>
             </font>
@@ -304,8 +304,8 @@ AF - 18-01-18
           <div class="row-fluid" style="background-color: #ffffff">
             <div class="span12" style="height: 180px; overflow: scroll;">
               <strong>
-                {{#if alertas.alerta}}
-                  {{#each alertas.alerta}}
+                {{#if ResumenCliente.alertas.alerta}}
+                  {{#each ResumenCliente.alertas.alerta}}
                     <div style="border-style: groove;">
                       <font color=#21618C> {{numero}} </font> |
                       <font color=#F1C40F> {{prioridad}} </font> |
@@ -329,7 +329,7 @@ AF - 18-01-18
     <div style="background-color: #f9f9f9">
       <div>
         <!-- Encabezado -->
-        <div class="accordion-heading" style="background-color: {{historial_contactos.color}}">
+        <div class="accordion-heading" style="background-color: {{ResumenCliente.historial_contactos.color}}">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#collapseSeven">
             <font color=#ffffff>
               <center><strong>Historial de contactos</strong></center>
@@ -341,12 +341,12 @@ AF - 18-01-18
           <!-- Línea 1 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Última cita</strong> </div>
-            <div class="span6">{{historial_contactos.ultima_cita}}</div>
+            <div class="span6">{{ResumenCliente.historial_contactos.ultima_cita}}</div>
           </div>
           <!-- Línea 2 -->
           <div class="row-fluid"  style="background-color: #ffffff">
             <div class="span6"><strong>Última llamada</strong></div>
-            <div class="span6">{{historial_contactos.ultima_llamada}}</div>
+            <div class="span6">{{ResumenCliente.historial_contactos.ultima_llamada}}</div>
           </div>
           <!-- Línea 3 -->
           <div class="row-fluid">
@@ -354,17 +354,17 @@ AF - 18-01-18
               <font color=#ffffff>
                 <!-- Línea 3.1 -->
                 <div class="span4" style="background-color: #555555">
-                  <strong>{{historial_contactos.citas}}</strong></br>
+                  <strong>{{ResumenCliente.historial_contactos.citas}}</strong></br>
                   Citas
                 </div>
                 <!-- Línea 3.2 -->
                 <div class="span4" style="background-color: #555555">
-                  <strong>{{historial_contactos.llamadas}}</strong><br/>
+                  <strong>{{ResumenCliente.historial_contactos.llamadas}}</strong><br/>
                   llamadas
                 </div>
                 <!-- Línea 3.3 -->
                 <div class="span4" style="background-color: #555555">
-                  <strong>{{historial_contactos.emails}}</strong><br/>
+                  <strong>{{ResumenCliente.historial_contactos.emails}}</strong><br/>
                   Emails
                 </div>
               </font>
@@ -382,7 +382,7 @@ AF - 18-01-18
     <div style="background-color: #f9f9f9">
       <div>
         <!-- Encabezado -->
-        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+        <div class="accordion-heading" style="background-color: {{ResumenCliente.colores.azul}}">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseEigh">
             <font color=#ffffff>
               <center><strong>Leasing</strong></center>
@@ -394,36 +394,36 @@ AF - 18-01-18
           <!-- Línea 1 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Línea autorizada</strong> </div>
-            <div class="span6">$ {{customFormatNumber leasing.linea_autorizada}}</div>
+            <div class="span6">$ {{customFormatNumber ResumenCliente.leasing.linea_autorizada}}</div>
           </div>
           <!-- Línea 2 -->
           <div class="row-fluid"  style="background-color: #ffffff">
             <div class="span6"><strong>Fecha de vencimiento</strong></div>
-            <div class="span6"> {{leasing.fecha_vencimiento}} </div>
+            <div class="span6"> {{ResumenCliente.leasing.fecha_vencimiento}} </div>
           </div>
           <!-- Línea 3 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Línea disponible</strong> </div>
             <div class="span6">
-              <font {{#if leasing.color}}color="{{leasing.color}}"{{/if}}>
-                $ {{customFormatNumber leasing.linea_disponible}}
+              <font {{#if ResumenCliente.leasing.color}}color="{{ResumenCliente.leasing.color}}"{{/if}}>
+                $ {{customFormatNumber ResumenCliente.leasing.linea_disponible}}
               </font>
             </div>
           </div>
           <!-- Línea 4 -->
           <div class="row-fluid" style="background-color: #ffffff">
             <div class="span6"><strong>Fecha de pago</strong> </div>
-            <div class="span6">{{leasing.fecha_pago}}</div>
+            <div class="span6">{{ResumenCliente.leasing.fecha_pago}}</div>
           </div>
           <!-- Línea 5 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Nivel de satisfacción</strong> </div>
-            <div class="span6">{{leasing.nivel_satisfaccion}}</div>
+            <div class="span6">{{ResumenCliente.leasing.nivel_satisfaccion}}</div>
           </div>
           <!-- Línea 6 -->
           <div class="row-fluid" style="background-color: #ffffff">
             <div class="span6"><strong>Asesor</strong> </div>
-            <div class="span6">{{leasing.promotor}}</div>
+            <div class="span6">{{ResumenCliente.leasing.promotor}}</div>
           </div>
           <!-- Línea 7 -->
           <div class="row-fluid">
@@ -433,7 +433,7 @@ AF - 18-01-18
                 <div id="openAnexos" class="span6 openModalAnexos pointer" style="background-color: #555555">
                   <div class="row-fluid" style="background-color: #555">
                     <div class="span7" style="text-align:right;" >
-                      <strong>{{leasing.anexos_activos}}</strong>
+                      <strong>{{ResumenCliente.leasing.anexos_activos}}</strong>
                     </div>
                     <div class="span5" style="text-align:right;">
                       <i class="fa fa-eye" style="color:white"></i>
@@ -446,7 +446,7 @@ AF - 18-01-18
                 <div class="span6" style="background-color: #555555">
                   <div class="row-fluid" style="background-color: #555">
                     <div class="span12" style="text-align:center;" >
-                      <strong>{{leasing.anexos_historicos}}</strong>
+                      <strong>{{ResumenCliente.leasing.anexos_historicos}}</strong>
                     </div>
                   </div>
                   Anexos
@@ -464,7 +464,7 @@ AF - 18-01-18
     <div style="background-color: #f9f9f9">
       <div>
         <!-- Encabezado -->
-        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+        <div class="accordion-heading" style="background-color: {{ResumenCliente.colores.azul}}">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseNine">
             <font color=#ffffff>
               <center><strong>Factoring</strong></center>
@@ -476,36 +476,36 @@ AF - 18-01-18
           <!-- Línea 1 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Línea autorizada</strong> </div>
-            <div class="span6">$ {{customFormatNumber factoring.linea_autorizada}}</div>
+            <div class="span6">$ {{customFormatNumber ResumenCliente.factoring.linea_autorizada}}</div>
           </div>
           <!-- Línea 2 -->
           <div class="row-fluid"  style="background-color: #ffffff">
             <div class="span6"><strong>Fecha de vencimiento</strong></div>
-            <div class="span6">{{factoring.fecha_vencimiento}}</div>
+            <div class="span6">{{ResumenCliente.factoring.fecha_vencimiento}}</div>
           </div>
           <!-- Línea 3 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Línea disponible</strong> </div>
             <div class="span6">
-              <font {{#if factoring.color}}color="{{factoring.color}}"{{/if}}>
-                $ {{customFormatNumber factoring.linea_disponible}}
+              <font {{#if ResumenCliente.factoring.color}}color="{{ResumenCliente.factoring.color}}"{{/if}}>
+                $ {{customFormatNumber ResumenCliente.factoring.linea_disponible}}
               </font>
             </div>
           </div>
           <!-- Línea 4 -->
           <div class="row-fluid" style="background-color: #ffffff">
             <div class="span6"><strong>Fecha de pago</strong> </div>
-            <div class="span6">{{factoring.fecha_pago}}</div>
+            <div class="span6">{{ResumenCliente.factoring.fecha_pago}}</div>
           </div>
           <!-- Línea 5 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Nivel de satisfacción</strong> </div>
-            <div class="span6">{{factoring.nivel_satisfaccion}}</div>
+            <div class="span6">{{ResumenCliente.factoring.nivel_satisfaccion}}</div>
           </div>
           <!-- Línea 6 -->
           <div class="row-fluid" style="background-color: #ffffff">
             <div class="span6"><strong>Asesor</strong> </div>
-            <div class="span6">{{factoring.promotor}}</div>
+            <div class="span6">{{ResumenCliente.factoring.promotor}}</div>
           </div>
           <!-- Línea 7 -->
           <div class="row-fluid">
@@ -515,7 +515,7 @@ AF - 18-01-18
                 <div id="openCesiones" class="span6 openModalCesiones pointer" style="background-color: #555555">
                   <div class="row-fluid" style="background-color: #555">
                     <div class="span7" style="text-align:right;" >
-                      <strong>{{factoring.anexos_activos}}</strong>
+                      <strong>{{ResumenCliente.factoring.anexos_activos}}</strong>
                     </div>
                     <div class="span5" style="text-align:right;">
                       <i class="fa fa-eye" style="color:white"></i>
@@ -528,7 +528,7 @@ AF - 18-01-18
                 <div class="span6" style="background-color: #555555">
                   <div class="row-fluid" style="background-color: #555">
                     <div class="span12" style="text-align:center;" >
-                      <strong>{{factoring.anexos_historicos}}</strong>
+                      <strong>{{ResumenCliente.factoring.anexos_historicos}}</strong>
                     </div>
                   </div>
                   Cesiones
@@ -546,7 +546,7 @@ AF - 18-01-18
     <div style="background-color: #f9f9f9">
       <div>
         <!-- Encabezado -->
-        <div class="accordion-heading" style="background-color: {{colores.azul}}">
+        <div class="accordion-heading" style="background-color: {{ResumenCliente.colores.azul}}">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseTen">
             <font color=#ffffff>
               <center><strong>C.Auto</strong></center>
@@ -558,36 +558,36 @@ AF - 18-01-18
           <!-- Línea 1 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Línea Autorizada Vigente</strong> </div>
-            <div class="span6">$ {{customFormatNumber credito_auto.linea_autorizada}}</div>
+            <div class="span6">$ {{customFormatNumber ResumenCliente.credito_auto.linea_autorizada}}</div>
           </div>
           <!-- Línea 2 -->
           <div class="row-fluid"  style="background-color: #ffffff">
             <div class="span6"><strong>Fecha de vencimiento</strong></div>
-            <div class="span6">{{credito_auto.fecha_vencimiento}}</div>
+            <div class="span6">{{ResumenCliente.credito_auto.fecha_vencimiento}}</div>
           </div>
           <!-- Línea 3 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Línea Disponible Vigente</strong> </div>
             <div class="span6">
-              <font {{#if credito_auto.color}}color="{{credito_auto.color}}"{{/if}}>
-                $ {{customFormatNumber credito_auto.linea_disponible}}
+              <font {{#if ResumenCliente.credito_auto.color}}color="{{ResumenCliente.credito_auto.color}}"{{/if}}>
+                $ {{customFormatNumber ResumenCliente.credito_auto.linea_disponible}}
               </font>
             </div>
           </div>
           <!-- Línea 4 -->
           <div class="row-fluid" style="background-color: #ffffff">
             <div class="span6"><strong>Fecha de pago</strong> </div>
-            <div class="span6">{{credito_auto.fecha_pago}}</div>
+            <div class="span6">{{ResumenCliente.credito_auto.fecha_pago}}</div>
           </div>
           <!-- Línea 5 -->
           <div class="row-fluid" style="background-color: #f9f9f9">
             <div class="span6"><strong>Nivel de satisfacción</strong> </div>
-            <div class="span6">{{credito_auto.nivel_satisfaccion}}</div>
+            <div class="span6">{{ResumenCliente.credito_auto.nivel_satisfaccion}}</div>
           </div>
           <!-- Línea 6 -->
           <div class="row-fluid" style="background-color: #ffffff">
             <div class="span6"><strong>Asesor</strong> </div>
-            <div class="span6">{{credito_auto.promotor}}</div>
+            <div class="span6">{{ResumenCliente.credito_auto.promotor}}</div>
           </div>
           <!-- Línea 7 -->
           <div class="row-fluid">
@@ -597,7 +597,7 @@ AF - 18-01-18
                 <div id="openContratos" class="span6 openModalContratos pointer" style="background-color: #555555">
                   <div class="row-fluid" style="background-color: #555">
                     <div class="span7" style="text-align:right;" >
-                      <strong>{{credito_auto.anexos_activos}}</strong>
+                      <strong>{{ResumenCliente.credito_auto.anexos_activos}}</strong>
                     </div>
                     <div class="span5" style="text-align:right;">
                       <i class="fa fa-eye" style="color:white"></i>
@@ -610,7 +610,7 @@ AF - 18-01-18
                 <div class="span6" style="background-color: #555555">
                   <div class="row-fluid" style="background-color: #555">
                     <div class="span12" style="text-align:center;" >
-                      <strong>{{credito_auto.anexos_historicos}}</strong>
+                      <strong>{{ResumenCliente.credito_auto.anexos_historicos}}</strong>
                     </div>
                   </div>
                   Contratos

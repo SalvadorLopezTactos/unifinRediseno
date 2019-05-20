@@ -31,31 +31,29 @@
 
   //Inicia
   initialize: function(options) {
+    v360 = this;
     this._super('initialize', [options]);
-
-    //Recupera id de cliente
-    var id = this.model.id;
-    //console.log(id);
-
     //Define variables de ordenamiento
     this.sortAnexo = "ASC";
     this.sortAnexoContratacion = "ASC";
     this.sortAnexoTerminacion = "ASC";
 
+    this.model.on('sync', this.loadData, this);
+  },
+
+  loadData: function(options){
+    //Recupera id de cliente
+    var id = v360.model.id;
+
     if (id!= '' && id != undefined && id!= null) {
       //Forma url de petición
       var url = app.api.buildURL('ResumenCliente/'+id, null, null, );
       //Ejecuta petición ResumenCliente
-      var self = this;
       app.api.call('GET', url, {},{
         success: function (data){
-          //Logs
-          // console.log('data:');
-          // console.log(data);
-
-          //var records2 = data;
-          _.extend(self, data);
-          self.render();
+          v360.ResumenCliente = data;
+          _.extend(this, v360.ResumenCliente);
+          v360.render();
 
         }
       });
