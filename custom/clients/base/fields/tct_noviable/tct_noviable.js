@@ -18,10 +18,10 @@
                 this._super('initialize', [options]);
                 lnv = this;
 
-                if (this.model.get('id')!= "" && this.model.get('id')!= null){
-                    lnv.loadData();
-                    lnv.bindDataChange();
-                }
+                // if (this.model.get('id')!= "" && this.model.get('id')!= null){
+                //     lnv.loadData();
+                //     lnv.bindDataChange();
+                // }
                 //Creacion de objeto para guardar datos hacia el modulo tct3_noviable
                 lnv.leadNoViable = {
                     "campo1chk":"",
