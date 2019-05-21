@@ -1,94 +1,148 @@
 <?php
- // created: 2019-04-15 17:19:11
-$dictionary['minut_Minutas']['fields']['resultado_c']['labelValue'] = 'Resultado de Cita';
-$dictionary['minut_Minutas']['fields']['resultado_c']['dependency'] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['trigger'] = 'objetivo_c';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][1][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][1][1] = '1';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][1][2] = '2';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][1][3] = '17';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][1][4] = '3';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][1][5] = '5';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][1][6] = '19';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][1][7] = '6';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][1][8] = '7';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][1][9] = '18';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][2][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][2][1] = '1';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][2][2] = '2';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][2][3] = '3';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][2][4] = '4';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][2][5] = '5';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][2][6] = '19';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][2][7] = '6';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][2][8] = '7';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][4][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][4][1] = '1';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][4][2] = '14';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][4][3] = '16';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][5][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][5][1] = '1';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][5][2] = '2';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][5][3] = '3';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][5][4] = '4';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][5][5] = '5';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][5][6] = '19';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][5][7] = '6';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][5][8] = '7';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][6][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][6][1] = '1';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][6][2] = '2';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][6][3] = '3';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][6][4] = '4';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][6][5] = '5';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][6][6] = '19';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][6][7] = '6';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][6][8] = '7';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][7][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][7][1] = '1';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][7][2] = '9';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][7][3] = '10';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][8][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][8][1] = '1';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][8][2] = '11';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][8][3] = '12';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][9][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][9][1] = '1';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][9][2] = '2';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][9][3] = '3';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][9][4] = '4';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][9][5] = '5';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][9][6] = '19';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][9][7] = '6';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][9][8] = '7';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][10][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][10][1] = '1';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][10][2] = '15';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][10][3] = '13';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][11][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][11][1] = '1';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][11][2] = '2';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][11][3] = '3';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][11][4] = '6';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][11][5] = '5';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][11][6] = '19';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][11][7] = '7';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][12][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][12][1] = '1';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][12][2] = '15';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][12][3] = '13';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values']['Planned'][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values']['Planned'][1] = '8';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values']['Held'][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values']['Held'][1] = '1';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values']['Held'][2] = '2';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values']['Held'][3] = '3';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values']['Held'][4] = '4';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values']['Held'][5] = '5';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values']['Held'][6] = '6';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values']['Held'][7] = '7';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values']['Not Held'][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values']['Not Held'][1] = '8';
-$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']['values'][''][0] = '';
-$dictionary['minut_Minutas']['fields']['resultado_c']['full_text_search']['boost'] = 1;
+ // created: 2019-05-21 17:30:32
+$dictionary['minut_Minutas']['fields']['resultado_c']['labelValue']='Resultado de Cita';
+$dictionary['minut_Minutas']['fields']['resultado_c']['dependency']='';
+$dictionary['minut_Minutas']['fields']['resultado_c']['visibility_grid']=array (
+  'trigger' => 'objetivo_c',
+  'values' => 
+  array (
+    1 => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '2',
+      3 => '17',
+      4 => '3',
+      5 => '5',
+      6 => '19',
+      7 => '6',
+      8 => '7',
+      9 => '18',
+      10 => '20',
+    ),
+    2 => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '2',
+      3 => '3',
+      4 => '4',
+      5 => '5',
+      6 => '19',
+      7 => '6',
+      8 => '7',
+    ),
+    3 => 
+    array (
+    ),
+    4 => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '14',
+      3 => '16',
+    ),
+    5 => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '2',
+      3 => '3',
+      4 => '4',
+      5 => '5',
+      6 => '19',
+      7 => '6',
+      8 => '7',
+    ),
+    6 => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '2',
+      3 => '3',
+      4 => '4',
+      5 => '5',
+      6 => '19',
+      7 => '6',
+      8 => '7',
+    ),
+    7 => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '9',
+      3 => '10',
+    ),
+    8 => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '11',
+      3 => '12',
+    ),
+    9 => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '2',
+      3 => '3',
+      4 => '4',
+      5 => '5',
+      6 => '19',
+      7 => '6',
+      8 => '7',
+    ),
+    10 => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '15',
+      3 => '13',
+    ),
+    11 => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '2',
+      3 => '3',
+      4 => '6',
+      5 => '5',
+      6 => '19',
+      7 => '7',
+    ),
+    12 => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '15',
+      3 => '13',
+    ),
+    'Planned' => 
+    array (
+      0 => '',
+      1 => '8',
+    ),
+    'Held' => 
+    array (
+      0 => '',
+      1 => '1',
+      2 => '2',
+      3 => '3',
+      4 => '4',
+      5 => '5',
+      6 => '6',
+      7 => '7',
+    ),
+    'Not Held' => 
+    array (
+      0 => '',
+      1 => '8',
+    ),
+    '' => 
+    array (
+      0 => '',
+    ),
+  ),
+);
 
+ ?>
