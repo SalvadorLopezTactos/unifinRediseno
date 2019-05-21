@@ -4,15 +4,17 @@
 
     function close_calls_meetings()
     {
+        $timedate = new SugarDateTime();
+        $today = $timedate->asDb();
     	// Busca las llamadas vencidas en status "planificada" y les cambia el estado a "no realizada"
         $GLOBALS['log']->fatal('>>>>>>COMIENZA JOB CLOSE_CALLS_MEETINGS:');//------------------------------------
 
         $queryc="select calls.id from calls,calls_cstm
                 where calls.id=calls_cstm.id_c and calls.status='Planned'
-                and calls.date_end < UTC_TIMESTAMP()
+                and calls.date_end < SUBDATE(UTC_TIMESTAMP(),INTERVAL '26:30' HOUR_MINUTE)
                 and calls_cstm.tct_call_issabel_c=0 
                 and deleted=0;";
-        $querym="select id from meetings where status='Planned' and date_end < UTC_TIMESTAMP();";
+        $querym="select id from meetings where status='Planned' and date_end < SUBDATE(UTC_TIMESTAMP(),INTERVAL '26:30' HOUR_MINUTE);";
 
         $resultc = $GLOBALS['db']->query($queryc);
         $resultm = $GLOBALS['db']->query($querym);
@@ -24,7 +26,7 @@
         {
             $idc = $row['id'];
             $queryUpdatec="update calls
-              set status = 'Not Held'
+              set status = 'Not Held',  date_modified ='" . $today . "' 
               where id='{$idc}';";
             $resultUpdatec = $GLOBALS['db']->query($queryUpdatec);
             $contadorc++;
@@ -33,7 +35,7 @@
         {
             $idm = $row['id'];
             $queryUpdatem="update meetings
-              set status = 'Not Held'
+              set status = 'Not Held',  date_modified ='" . $today . "'
               where id='{$idm}';";
             $resultUpdatem = $GLOBALS['db']->query($queryUpdatem);
             $contadorm++;
