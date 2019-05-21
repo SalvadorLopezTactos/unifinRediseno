@@ -3388,6 +3388,7 @@
                 }if (faltantesleasnv==0 && $('.campo1chk')[0].checked ==true && lnv.leadNoViable.PromotorLeasing==""){
                     this.model.set('promotorleasing_c', '9 - No Viable');
                     this.model.set('user_id_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+                    lnv.leadNoViable.PromotorLeasing = App.user.attributes.id;
                 }
                 callback(null, fields, errors);
 
@@ -3430,6 +3431,7 @@
                 }else if (faltantesfactnv==0 && $('.campo2chk')[0].checked == true && lnv.leadNoViable.PromotorFactoraje==""){
                     this.model.set('promotorfactoraje_c', '9 - No Viable');
                     this.model.set('user_id1_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+                    lnv.leadNoViable.PromotorFactoraje = App.user.attributes.id;
                 }
                 callback(null, fields, errors);
             },
@@ -3472,6 +3474,7 @@
                 }else if (faltantescanv==0 && $('.campo3chk')[0].checked ==true && lnv.leadNoViable.PromotorCreditA==""){
                     this.model.set('promotorcredit_c', '9 - No Viable');
                     this.model.set('user_id2_c', 'cc736f7a-4f5f-11e9-856a-a0481cdf89eb');
+                    lnv.leadNoViable.PromotorCreditA = App.user.attributes.id;
                 }
                 callback(null, fields, errors);
 
