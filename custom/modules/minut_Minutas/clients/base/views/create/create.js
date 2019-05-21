@@ -54,7 +54,7 @@
             if (objParticipantes[i].asistencia == 1 && objParticipantes[i].unifin != 1) {
                 banderaAsistencia++;
             }
-            if (!objParticipantes[i].correo) {
+            if (!objParticipantes[i].correo && objParticipantes[i].asistencia ==1) {
                 banderaCorreo++;
             }
         }
@@ -62,19 +62,19 @@
         if (banderaAsistencia < 1) {
             app.alert.show("Asistencia", {
                 level: "error",
-                title: "Debes marcar asistencia por lo menos a un Participante tipo Cuenta",
-                autoClose: true,
+                messages: "Debes marcar <b>asistencia</b> por lo menos a un <b>Participante</b> tipo Cuenta.",
+                autoClose: false,
                 return: false,
             });
             errors['xd'] = errors['xd'] || {};
             errors['xd'].required = true;
         }
         // Valida Correos
-        if (banderaCorreo > 0) {
+        if (banderaCorreo > 0 && banderaAsistencia >= 1) {
             app.alert.show("Correo", {
                 level: "error",
-                title: "Todos los Participante tipo Cuenta deben contar con correo",
-                autoClose: true,
+                messages: "Todos los <b>Participantes</b> tipo Cuenta marcados con asistencia deben contar con <b>correo</b>.",
+                autoClose: false,
                 return: false,
             });
             errors['correo'] = errors['correo'] || {};
