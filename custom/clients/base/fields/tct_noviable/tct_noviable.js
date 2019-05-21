@@ -299,16 +299,6 @@
                         lnv.leadNoViable.porqueca = $('.campo15nvca').val().trim();
                         lnv.leadNoViable.noproducca = $('.campo18nvca').select2('val');
                     }
-                    //Pregunta por los cheks de cada producto y si el promotor es vacío para asignar el del usuario logueado.
-                    if ($('.campo1chk')[0].checked== true && lnv.leadNoViable.PromotorLeasing==""){
-                        lnv.leadNoViable.PromotorLeasing = App.user.attributes.id;
-                    }
-                    if ($('.campo2chk')[0].checked== true && lnv.leadNoViable.PromotorFactoraje==""){
-                        lnv.leadNoViable.PromotorFactoraje = App.user.attributes.id;
-                    }
-                    if ($('.campo3chk')[0].checked== true && lnv.leadNoViable.PromotorCreditA==""){
-                        lnv.leadNoViable.PromotorCreditA = App.user.attributes.id;
-                    }
                     //Establece el objeto lnv.leadNoViable para guardar
                     this.model.set('tct_noviable',  lnv.leadNoViable);
                 }
