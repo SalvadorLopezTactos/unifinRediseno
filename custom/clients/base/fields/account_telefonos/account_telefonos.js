@@ -95,19 +95,26 @@
         this.def.tel_tipo_list_html = tel_tipo_list_html;
         this.def.tel_estatus_list_html = tel_estatus_list_html;
         this.def.pais_list_html = pais_list_html;
-        //*
-        var fields = ['id', 'name', 'estatus', 'extension', 'principal', 'secuencia', 'telefono', 'tipotelefono', 'pais'];
-        //api request apamaters
-        var api_params = {
-            'fields': fields.join(','),
-            'max_num': 99,
-            'order_by': 'date_entered:desc',
-            'filter': [{'accounts_tel_telefonos_1accounts_ida': this.model.id}]
-            //'filter': [{'account_id_c': this.model.id}]
-        };
-        var pull_telefono_url = app.api.buildURL('Tel_Telefonos',
-            null, null, api_params);
+        //Carga registros
+        this.model.on('sync', this.loadData, this);
 
+    },
+
+    loadData: function(options){
+      var fields = ['id', 'name', 'estatus', 'extension', 'principal', 'secuencia', 'telefono', 'tipotelefono', 'pais'];
+      //api request apamaters
+      var api_params = {
+          'fields': fields.join(','),
+          'max_num': 99,
+          'order_by': 'date_entered:desc',
+          'filter': [{'accounts_tel_telefonos_1accounts_ida': self.model.id}]
+          //'filter': [{'account_id_c': this.model.id}]
+      };
+      var pull_telefono_url = app.api.buildURL('Tel_Telefonos',
+          null, null, api_params);
+
+      //Ejecuta consulta para recuperar infomación
+      try {
         app.api.call('READ', pull_telefono_url, {}, {
             success: function (data) {
                 var country_list = app.metadata.getCountries();
@@ -133,6 +140,9 @@
                 self._render();
             }
         });
+      } catch (e) {
+        console.log(e.message);
+      }
 
     },
 
