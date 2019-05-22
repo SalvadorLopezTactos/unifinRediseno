@@ -14,7 +14,7 @@
         'keydown .existingNumExt': 'checkcallenum',
         'keydown .newCalle': 'limitto100',
         'keydown .newNumInt': 'limitto50',
-        'keydown .newNumExt': 'limitto100',        
+        'keydown .newNumExt': 'limitto100',
         'blur .existingCalle': 'checkcallenum',
         'blur .existingNumInt': 'checknumint',
         'blur .existingNumExt': 'checkcallenum',
@@ -174,22 +174,40 @@
             indicador_multi_options += '<option value="' + indicador_id + '" >' + dir_indicador_unique_list[indicador_id] + '</option>';
         }
         this.def.indicador_multi_html = indicador_multi_options;
+        //Carga registros
+        this.model.on('sync', this.loadData, this);
 
-        //*
+        this.fiscalCounter = 0;
+        this.counterTipoVacio=0;
+        this.counterEmptyFields=0;
 
-        var fields = ['id', 'name', 'calle', 'inactivo', 'numext', 'numint', 'indicador', 'principal', 'secuencia', 'tipodedireccion'
-        , 'dire_direccion_dire_ciudaddire_ciudad_ida', 'dire_direccion_dire_codigopostaldire_codigopostal_ida', 'dire_direccion_dire_coloniadire_colonia_ida',
-        'dire_direccion_dire_estadodire_estado_ida', 'dire_direccion_dire_municipiodire_municipio_ida', 'dire_direccion_dire_paisdire_pais_ida'];
-        //api request apamaters
-        var api_params = {
-            //'fields': fields.join(','),
-            'max_num': 42,
-            'order_by': 'date_entered:desc',
-            'filter': [{'accounts_dire_direccion_1accounts_ida': this.model.id}]
-        };
-        var pull_direccion_url = app.api.buildURL('dire_Direccion',
-            null, null, api_params);
+        this.model.addValidationTask('check_empty_tipo', _.bind(this._doValidateEmptyTipo, this));
+        this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionFiscal, this));
+        this.model.addValidationTask('check_multiple_fiscalCorrespondencia', _.bind(this._doValidateDireccionFiscalCorrespondencia, this));
+        //Ajuste Dirección Nacional
+        this.model.addValidationTask('check_direccion_nacional', _.bind(this._doValidateDireccionNacional, this));
 
+        this.indice_ids=0;
+        this.index_for_colonias=0;
+
+    },
+
+    loadData: function(options){
+      var fields = ['id', 'name', 'calle', 'inactivo', 'numext', 'numint', 'indicador', 'principal', 'secuencia', 'tipodedireccion'
+      , 'dire_direccion_dire_ciudaddire_ciudad_ida', 'dire_direccion_dire_codigopostaldire_codigopostal_ida', 'dire_direccion_dire_coloniadire_colonia_ida',
+      'dire_direccion_dire_estadodire_estado_ida', 'dire_direccion_dire_municipiodire_municipio_ida', 'dire_direccion_dire_paisdire_pais_ida'];
+      //api request apamaters
+      var api_params = {
+          //'fields': fields.join(','),
+          'max_num': 42,
+          'order_by': 'date_entered:desc',
+          'filter': [{'accounts_dire_direccion_1accounts_ida': self.model.id}]
+      };
+      var pull_direccion_url = app.api.buildURL('dire_Direccion',
+          null, null, api_params);
+
+      //Ejecuta consulta para recuperar infomación
+      try {
         app.api.call('READ', pull_direccion_url, {}, {
             success: function (data) {
                 //get mapping arrays and keys
@@ -282,22 +300,9 @@
 
             }
         });
-
-this.fiscalCounter = 0;
-
-this.counterTipoVacio=0;
-
-this.counterEmptyFields=0;
-
-this.model.addValidationTask('check_empty_tipo', _.bind(this._doValidateEmptyTipo, this));
-this.model.addValidationTask('check_multiple_fiscal', _.bind(this._doValidateDireccionFiscal, this));
-this.model.addValidationTask('check_multiple_fiscalCorrespondencia', _.bind(this._doValidateDireccionFiscalCorrespondencia, this));
-        //Ajuste Dirección Nacional
-        this.model.addValidationTask('check_direccion_nacional', _.bind(this._doValidateDireccionNacional, this));
-
-        this.indice_ids=0;
-        this.index_for_colonias=0;
-
+      } catch (e) {
+        console.log(e.message);
+      }
     },
 
     /**
@@ -520,7 +525,7 @@ this.model.addValidationTask('check_multiple_fiscalCorrespondencia', _.bind(this
         }
         /* END CUSTOMIZATION */
     },
-     
+
     /** BEGIN CUSTOMIZATION: jgarcia@levementum.com 7/9/2015 Description: Validacion, No debe de haber mas de una direccion fiscal */
 
     _doValidateDireccionNacional: function (fields, errors, callback) {
@@ -932,14 +937,14 @@ getInfoAboutCP: function(evt){
                             for (iEstado = 0; iEstado < estadoOpciones.options.length; iEstado++) {
                                 if (ciudades_list[city_id].estado_id == estadoOpciones.options[iEstado].value ) {
                                     $('select.newCiudadTemp').append($("<option>").val(city_id).html(ciudades_list[city_id].name));
-                                    
+
                                 }
                             }
                         }
                         **************************/
                         $('.newEstadoTemp').trigger('change');
 
-                        
+
                         $(".loadingIconCiudad").hide();
                     }
                 },this)
@@ -1167,7 +1172,7 @@ populateColoniasByMunicipio:function(evt){
                 success: _.bind(function (data) {
                     if(data.records.length>0){
 
-                        //Antes de llenar colonias, se elimarán todas las opciones previamente llenadas, 
+                        //Antes de llenar colonias, se elimarán todas las opciones previamente llenadas,
                         // excepto la :selected
                         var opciones=$(evt.currentTarget).parent().next('td').next('td').find('select.existingColoniaTemp').find('option');
 
@@ -1179,7 +1184,7 @@ populateColoniasByMunicipio:function(evt){
                                 }
                             }
                         }
-                        
+
                         for (var i = 0; i < data.records.length; i++) {
                             //Se añaden únicamente las colonias "No repetidas" en el campo select
                             if($(evt.currentTarget).parent().next('td').next('td').find('select.existingColoniaTemp').children("option:selected").html() != data.records[i].name){
@@ -1191,11 +1196,11 @@ populateColoniasByMunicipio:function(evt){
                         }
 
                         $(evt.currentTarget).parent().parent().parent().find(".loadingIconColoniaTemp").hide();
-                        
+
                     }
                 },this)
             });
-            
+
 
         }
     },
@@ -1247,7 +1252,7 @@ populateColoniasByMunicipio:function(evt){
                 success: _.bind(function (data) {
                     if(data.records.length>0){
 
-                        //Antes de llenar colonias, se elimarán todas las opciones previamente llenadas, 
+                        //Antes de llenar colonias, se elimarán todas las opciones previamente llenadas,
                         // excepto la :selected
                         var opciones=$(evt.currentTarget).parent().parent().parent().find('select.existingCiudadTemp').find('option');
 
@@ -1259,19 +1264,19 @@ populateColoniasByMunicipio:function(evt){
                                 }
                             }
                         }
-                        
+
                         for (var i = 0; i < data.records.length; i++) {
                             $(evt.currentTarget).parent().parent().parent().find('select.existingCiudadTemp').append($("<option>").val(data.records[i].id).html(data.records[i].name));
                         }
 
                         $(evt.currentTarget).parent().parent().parent().find(".loadingIconCiudadTemp").hide();
-                        
+
                     }
                 },this)
             });
-            
+
         }
-        
+
     },
 
     /**
@@ -1710,7 +1715,7 @@ populateColoniasByMunicipio:function(evt){
             }
         }
         municipios_html += '<option value="' + direccion.dire_direccion_dire_municipiodire_municipio_ida + '" selected="true">' + direccion.municipio_code_label + '</option>';
-        
+
         //Obtener el estado perteneciente a los municipios
         var estados_list_html="";
         for(var pos_mun in municipio_list){
@@ -1775,7 +1780,7 @@ populateColoniasByMunicipio:function(evt){
     * Función para completar las opciones de los campos select en direcciones existentes
     * @param {String} cp
     * @param {String} id_direccion
-    * @param {String} id_estado  
+    * @param {String} id_estado
     */
     _buildOptionsForExistingDirecciones:function(cp,id_direccion,id_estado){
 
@@ -1852,7 +1857,7 @@ populateColoniasByMunicipio:function(evt){
                             }
                         }
 
-                        //Disparando evento change 
+                        //Disparando evento change
                         $('.control-group.direccion').eq(this.indice_ids).find('select.existingMunicipioTemp').trigger("change");
 
                         self.element_direccion.find('select.existingColoniaTemp').append($("<option>").val("1").html("Seleccionar Colonia"));;
@@ -1875,20 +1880,20 @@ populateColoniasByMunicipio:function(evt){
                        /*********
                        var ciudades_list = app.metadata.getCities();
                         //Recupera lista de Estados
-                        
+
                         var estadoOpciones = $('.control-group.direccion').eq(this.indice_ids).find('select.existingEstadoTemp option');
                         //Itera por cada estado obtenido
                         for (city_id in ciudades_list) {
                             for (iEstado = 0; iEstado < estadoOpciones.length; iEstado++) {
                                 if (ciudades_list[city_id].estado_id == estadoOpciones[iEstado].value ) {
                                     $('.control-group.direccion').eq(this.indice_ids).find('select.existingCiudadTemp').append($("<option>").val(city_id).html(ciudades_list[city_id].name));
-                                    
+
                                 }
                             }
                         }
                         **********/
                         $('.control-group.direccion').eq(this.indice_ids).find('select.existingEstadoTemp').trigger("change",[{bandera_select:'1'}]);
-                        
+
                         //Lanzando eventos change de todos los campos actualizados
 
                         //$(self.cpEvt.target).parent().parent().find('#existingPostalHidden').trigger("change");
@@ -2101,14 +2106,14 @@ populateColoniasByMunicipio:function(evt){
         var existente = false;
 
         Object.keys(existingDir).forEach(key => {
-            var actualDir =  existingDir[key].calle+existingDir[key].numext+existingDir[key].numint+existingDir[key].colonia+existingDir[key].municipio+existingDir[key].estado+existingDir[key].ciudad; 
+            var actualDir =  existingDir[key].calle+existingDir[key].numext+existingDir[key].numint+existingDir[key].colonia+existingDir[key].municipio+existingDir[key].estado+existingDir[key].ciudad;
             actualDir=actualDir.replace(/ /g, "");
             actualDir=actualDir.toUpperCase();
             if (actualDir == nuevaDir){
             existente = true;
             }
         });
-        
+
         if (existente){
             app.alert.show("direcciones_duplicadas", {
                 level: "error",
