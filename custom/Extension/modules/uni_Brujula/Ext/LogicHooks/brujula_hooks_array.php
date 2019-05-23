@@ -9,6 +9,14 @@
 
 $hook_array['before_save'][] = Array(
     1,
+    'Valida que no exista ya una brujula antes de guardar',
+    'custom/modules/uni_Brujula/brujula_Hooks.php',
+    'brujula_Hooks',
+    'validafechas'
+);
+
+$hook_array['before_save'][] = Array(
+    2,
     'guardar las citas',
     'custom/modules/uni_Brujula/brujula_Hooks.php',
     'brujula_Hooks',
