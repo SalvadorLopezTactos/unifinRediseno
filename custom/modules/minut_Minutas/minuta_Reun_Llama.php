@@ -2,7 +2,7 @@
 
 class Minuta_reun_llam{
 	function SaveReunllam($bean=null, $event=null, $args=null){
-		$GLOBALS['log']->fatal('>>>>>>>Entro al Hook numero 10 de after_save');
+		//$GLOBALS['log']->fatal('>>>>>>>Entro al Hook numero 10 de after_save');
 		$objRellam=$bean->minuta_reuniones_llamadas;
 		if($objRellam['tipo_registro']=="reunion"){
 			//$GLOBALS['log']->fatal(print_r($objRellam,true));
@@ -19,6 +19,7 @@ class Minuta_reun_llam{
 			$bean_reunion->assigned_user_id=$objRellam['assigned_user_id'];
 			$bean_reunion->objetivo_c=$objRellam['objetivoG'];
 			$bean_reunion->reunion_objetivos=$objRellam['objetivoE'];
+			$bean_reunion->status='Planned';
 			$bean_reunion->save();
 		}
 
@@ -35,6 +36,7 @@ class Minuta_reun_llam{
 			$bean_llamada->parent_id=$objRellam['account_id_c'];
 			$bean_llamada->parent_type='Accounts';
 			$bean_llamada->assigned_user_id=$objRellam['assigned_user_id'];
+			$bean_llamada->status='Planned';
 			$bean_llamada->save();
 		}
 	}
