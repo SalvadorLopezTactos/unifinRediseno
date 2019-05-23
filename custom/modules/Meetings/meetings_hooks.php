@@ -34,8 +34,9 @@ class Meetings_Hooks
     }
 
     //Actualiza reunión si ya tiene minuta
-    if($args['related_module'] == 'minut_Minutas'){
+    if($args['related_module'] == 'minut_Minutas' && $args['link'] == 'minut_minutas_meetings'){
       $GLOBALS['log']->fatal("TCT - Cumple condición 2 y actualiza reunión Held");
+      //$GLOBALS['log']->fatal(print_r($args,true));
       //Actualiza estado a Planeado
       global $db;
       $bean->status='Held';
