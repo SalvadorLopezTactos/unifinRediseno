@@ -14,7 +14,6 @@ class brujula_Hooks{
         if($bean->temp_valida){
             return;
         }
-        $GLOBALS['log']->fatal($bean->temp_valida.'AfterSave');//
 
         $numero_de_folio = <<<SQL
 SELECT numero_folio FROM uni_brujula WHERE id = '{$bean->id}'
@@ -31,7 +30,7 @@ SQL;
     }
 
     public function validafechas ($bean, $event, $args){
-        $GLOBALS['log']->fatal('Entra validacion para brujulas repetidas');//
+
         global $db;
         $valida_fecha = "
             SELECT COUNT(assigned_user_id)
@@ -43,10 +42,8 @@ SQL;
             ";
 
         $queryResult = $db->getOne($valida_fecha);
-        $GLOBALS['log']->fatal('Pregunta si la consulta tiene brujulas repetidas');//
+
         if ($queryResult >=1 ){
-            //$query = "UPDATE uni_brujula SET deleted = 1 WHERE id = '{$bean->id}'";
-            //$result = $db->query($query);
             $bean->temp_valida=1;
             $bean->name= "Registro Duplicado";
         }
@@ -58,9 +55,7 @@ SQL;
         if($bean->temp_valida){
             return;
         }
-        $GLOBALS['log']->fatal('Entra GuardarCitas');//
-        $GLOBALS['log']->fatal($bean->temp_valida);
-
+       
         try
         {
             if(!empty($bean->citas_brujula)){
