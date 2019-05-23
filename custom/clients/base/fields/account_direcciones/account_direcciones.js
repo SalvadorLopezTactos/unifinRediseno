@@ -2103,6 +2103,9 @@ populateColoniasByMunicipio:function(evt){
         nuevaDir=nuevaDir.replace(/ /g, "");
         nuevaDir=nuevaDir.toUpperCase();
         var existingDir = this.model.get("account_direcciones");
+        if (existingDir == undefined) {
+          existingDir=[];
+        }
         var existente = false;
 
         Object.keys(existingDir).forEach(key => {
@@ -2436,6 +2439,9 @@ populateColoniasByMunicipio:function(evt){
      _addNewDireccionToModel: function (calle) {
         //var existingDirecciones = this.model.get('account_direcciones');
         var existingDirecciones = app.utils.deepCopy(this.model.get('account_direcciones'));
+        if (existingDirecciones == undefined) {
+          existingDirecciones=[];
+        }
         var country_model = app.metadata.getCountry($('.newPaisDir').val());
         var country_modelTemp = app.metadata.getCountry($('.newPaisTemp').val());
         var postal_model = app.metadata.getPostalCode($('.newPostal').val());

@@ -270,6 +270,9 @@
 
         var expreg =/^[0-9]{8,13}$/;
         var phones=this.model.get('account_telefonos');
+        if (phones == undefined) {
+          phones=[];
+        }
 
         if(this.$('.newTipotelefono').val()!='' && this.$('.newPais').val()!='' && expreg.test(this.$('.newTelefono').val()) &&
             this.$('.newEstatus').val()!='') {
@@ -474,6 +477,9 @@
             field_name = $($input).attr('data-field');
         var expreg =/^[0-9]{8,13}$/;
         var phones=this.model.get('account_telefonos');
+        if (phones == undefined) {
+          phones=[];
+        }
         //if ($.isNumeric($($input).val()) === false && $($input).val() != '') {
         if((expreg.test($($input).val()))==false && $($input).val().trim().length!=0){
             app.alert.show('error_telefono', {
@@ -613,7 +619,9 @@
     _addNewTelefonoToModel: function (telefono) {
         //var existingTelfonos = this.model.get('account_telefonos');
         var existingTelfonos = app.utils.deepCopy(this.model.get('account_telefonos'));
-
+        if (existingTelfonos == undefined) {
+          existingTelfonos=[];
+        }
         existingTelfonos.push({
             telefono: telefono,
             extension: $('.newExtension').val(),
