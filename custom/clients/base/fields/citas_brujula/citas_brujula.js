@@ -115,7 +115,7 @@
                 if(data == "Existente"){
                     app.alert.show('registro Existente', {
                         level: 'error',
-                        messages: 'Ya existe un registro para el promotor seleccionado con la fecha ' + fecha,
+                        messages: 'Ya existe un registro para el asesor seleccionado con la fecha ' + fecha,
                         autoClose: true
                     });
                     self.model.set("fecha_reporte", "");
