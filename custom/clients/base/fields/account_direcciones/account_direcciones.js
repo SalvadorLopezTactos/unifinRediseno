@@ -174,9 +174,6 @@
             indicador_multi_options += '<option value="' + indicador_id + '" >' + dir_indicador_unique_list[indicador_id] + '</option>';
         }
         this.def.indicador_multi_html = indicador_multi_options;
-        //Carga registros
-        this.model.on('sync', this.loadData, this);
-
         this.fiscalCounter = 0;
         this.counterTipoVacio=0;
         this.counterEmptyFields=0;
@@ -190,119 +187,121 @@
         this.indice_ids=0;
         this.index_for_colonias=0;
 
-    },
+        //Carga registros
+        var fields = ['id', 'name', 'calle', 'inactivo', 'numext', 'numint', 'indicador', 'principal', 'secuencia', 'tipodedireccion'
+        , 'dire_direccion_dire_ciudaddire_ciudad_ida', 'dire_direccion_dire_codigopostaldire_codigopostal_ida', 'dire_direccion_dire_coloniadire_colonia_ida',
+        'dire_direccion_dire_estadodire_estado_ida', 'dire_direccion_dire_municipiodire_municipio_ida', 'dire_direccion_dire_paisdire_pais_ida'];
+        //api request apamaters
+        var api_params = {
+            //'fields': fields.join(','),
+            'max_num': 42,
+            'order_by': 'date_entered:desc',
+            'filter': [{'accounts_dire_direccion_1accounts_ida': this.model.id}]
+        };
+        var pull_direccion_url = app.api.buildURL('dire_Direccion',
+            null, null, api_params);
 
-    loadData: function(options){
-      var fields = ['id', 'name', 'calle', 'inactivo', 'numext', 'numint', 'indicador', 'principal', 'secuencia', 'tipodedireccion'
-      , 'dire_direccion_dire_ciudaddire_ciudad_ida', 'dire_direccion_dire_codigopostaldire_codigopostal_ida', 'dire_direccion_dire_coloniadire_colonia_ida',
-      'dire_direccion_dire_estadodire_estado_ida', 'dire_direccion_dire_municipiodire_municipio_ida', 'dire_direccion_dire_paisdire_pais_ida'];
-      //api request apamaters
-      var api_params = {
-          //'fields': fields.join(','),
-          'max_num': 42,
-          'order_by': 'date_entered:desc',
-          'filter': [{'accounts_dire_direccion_1accounts_ida': self.model.id}]
-      };
-      var pull_direccion_url = app.api.buildURL('dire_Direccion',
-          null, null, api_params);
+        //Ejecuta consulta para recuperar infomación
+        try {
+          app.api.call('READ', pull_direccion_url, {}, {
+              success: function (data) {
+                  //get mapping arrays and keys
+                  var dir_tipo_list = app.lang.getAppListStrings('tipodedirecion_list');
+                  var dir_tipo_keys = app.lang.getAppListKeys('tipodedirecion_list');
+                  var dir_indicador_list = app.lang.getAppListStrings('dir_Indicador_list');
+                  var country_list = app.metadata.getCountries();
+                  var estado_list = app.metadata.getStates();
+                  var municipio_list = app.metadata.getMunicipalities();
+                  var city_list = app.metadata.getCities();
+                  var postal_list = app.metadata.getPostalCodes();
+                  for (var i = 0; i < data.records.length; i++) {
+                      //populate fields to match id
+                      data.records[i].pais = data.records[i].dire_direccion_dire_paisdire_pais_ida;
+                      data.records[i].estado = data.records[i].dire_direccion_dire_estadodire_estado_ida;
+                      data.records[i].municipio = data.records[i].dire_direccion_dire_municipiodire_municipio_ida;
+                      data.records[i].ciudad = data.records[i].dire_direccion_dire_ciudaddire_ciudad_ida;
+                      data.records[i].codigopostal = data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida;
+                      data.records[i].postal = data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida;
+                      data.records[i].colonia = data.records[i].dire_direccion_dire_coloniadire_colonia_ida;
+                      //self.value[i] = data.records[i].direccion;
+                      //handle dirrection list now that it changed keys
+                      data.records[i].tipo_label = '';
+                      for (dir_tipo_key in dir_tipo_list) {
+                          if ($.inArray(dir_tipo_key, data.records[i].tipodedireccion) != -1) {
+                              if (data.records[i].tipo_label != '') {
+                                  data.records[i].tipo_label += ', '
+                              }
+                              data.records[i].tipo_label += dir_tipo_list[dir_tipo_key];
 
-      //Ejecuta consulta para recuperar infomación
-      try {
-        app.api.call('READ', pull_direccion_url, {}, {
-            success: function (data) {
-                //get mapping arrays and keys
-                var dir_tipo_list = app.lang.getAppListStrings('tipodedirecion_list');
-                var dir_tipo_keys = app.lang.getAppListKeys('tipodedirecion_list');
-                var dir_indicador_list = app.lang.getAppListStrings('dir_Indicador_list');
-                var country_list = app.metadata.getCountries();
-                var estado_list = app.metadata.getStates();
-                var municipio_list = app.metadata.getMunicipalities();
-                var city_list = app.metadata.getCities();
-                var postal_list = app.metadata.getPostalCodes();
-                for (var i = 0; i < data.records.length; i++) {
-                    //populate fields to match id
-                    data.records[i].pais = data.records[i].dire_direccion_dire_paisdire_pais_ida;
-                    data.records[i].estado = data.records[i].dire_direccion_dire_estadodire_estado_ida;
-                    data.records[i].municipio = data.records[i].dire_direccion_dire_municipiodire_municipio_ida;
-                    data.records[i].ciudad = data.records[i].dire_direccion_dire_ciudaddire_ciudad_ida;
-                    data.records[i].codigopostal = data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida;
-                    data.records[i].postal = data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida;
-                    data.records[i].colonia = data.records[i].dire_direccion_dire_coloniadire_colonia_ida;
-                    //self.value[i] = data.records[i].direccion;
-                    //handle dirrection list now that it changed keys
-                    data.records[i].tipo_label = '';
-                    for (dir_tipo_key in dir_tipo_list) {
-                        if ($.inArray(dir_tipo_key, data.records[i].tipodedireccion) != -1) {
-                            if (data.records[i].tipo_label != '') {
-                                data.records[i].tipo_label += ', '
-                            }
-                            data.records[i].tipo_label += dir_tipo_list[dir_tipo_key];
+                          }
 
-                        }
+                      }
+                      for (a_country in country_list) {
+                          if (country_list[a_country].id == data.records[i].dire_direccion_dire_paisdire_pais_ida) {
+                              data.records[i].country_code_label = country_list[a_country].name;
+                          }
+                      }
+                      for (a_estado in estado_list) {
+                          if (a_estado == data.records[i].dire_direccion_dire_estadodire_estado_ida) {
+                              data.records[i].estado_code_label = estado_list[a_estado].name;
+                          }
+                      }
+                      for (a_municipio in municipio_list) {
+                          if (a_municipio == data.records[i].dire_direccion_dire_municipiodire_municipio_ida) {
+                              data.records[i].municipio_code_label = municipio_list[a_municipio].name;
+                          }
+                      }
+                      for (a_ciudad in city_list) {
+                          if (a_ciudad == data.records[i].dire_direccion_dire_ciudaddire_ciudad_ida) {
+                              data.records[i].ciudad_label = city_list[a_ciudad].name;
+                          }
+                      }
 
-                    }
-                    for (a_country in country_list) {
-                        if (country_list[a_country].id == data.records[i].dire_direccion_dire_paisdire_pais_ida) {
-                            data.records[i].country_code_label = country_list[a_country].name;
-                        }
-                    }
-                    for (a_estado in estado_list) {
-                        if (a_estado == data.records[i].dire_direccion_dire_estadodire_estado_ida) {
-                            data.records[i].estado_code_label = estado_list[a_estado].name;
-                        }
-                    }
-                    for (a_municipio in municipio_list) {
-                        if (a_municipio == data.records[i].dire_direccion_dire_municipiodire_municipio_ida) {
-                            data.records[i].municipio_code_label = municipio_list[a_municipio].name;
-                        }
-                    }
-                    for (a_ciudad in city_list) {
-                        if (a_ciudad == data.records[i].dire_direccion_dire_ciudaddire_ciudad_ida) {
-                            data.records[i].ciudad_label = city_list[a_ciudad].name;
-                        }
-                    }
+                      //Se habilita esta validación, para ciudades que no se encuentran en city_list (PARIS0> CP 12345)
+                      if(data.records[i].ciudad_label==undefined){
+                          data.records[i].ciudad_label=data.records[i].dire_direccion_dire_ciudad.name;
+                      }
 
-                    //Se habilita esta validación, para ciudades que no se encuentran en city_list (PARIS0> CP 12345)
-                    if(data.records[i].ciudad_label==undefined){
-                        data.records[i].ciudad_label=data.records[i].dire_direccion_dire_ciudad.name;
-                    }
+                      for(a_codigopostal in postal_list){
+                          if(a_codigopostal == data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida){
+                              data.records[i].postal_code_label = postal_list[a_codigopostal].name;
+                              // console.log("Cuando se inicializa el record");
+                              //console.log(data.records[i].postal_code_label);
+                          }
+                      }
 
-                    for(a_codigopostal in postal_list){
-                        if(a_codigopostal == data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida){
-                            data.records[i].postal_code_label = postal_list[a_codigopostal].name;
-                            // console.log("Cuando se inicializa el record");
-                            //console.log(data.records[i].postal_code_label);
-                        }
-                    }
+                      //if (data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida != '') {
+                      //    data.records[i].postal_code_label = postal_list[data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida].name;
+                      //}
 
-                    //if (data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida != '') {
-                    //    data.records[i].postal_code_label = postal_list[data.records[i].dire_direccion_dire_codigopostaldire_codigopostal_ida].name;
-                    //}
-
-                    //Get all colonias according to the Postal ID if populated
-                    data.records[i].colonia_html = '<option value=""></option>';
+                      //Get all colonias according to the Postal ID if populated
+                      data.records[i].colonia_html = '<option value=""></option>';
 
 
-                    for (indicador_code in dir_indicador_list) {
-                        if (indicador_code == data.records[i].indicador) {
-                            data.records[i].indicador_label = dir_indicador_list[indicador_code];
-                        }
-                    }
+                      for (indicador_code in dir_indicador_list) {
+                          if (indicador_code == data.records[i].indicador) {
+                              data.records[i].indicador_label = dir_indicador_list[indicador_code];
+                          }
+                      }
 
 
-                }
-                //set model so tpl detail tpl can read data
-                self.model.set('account_direcciones', data.records);
-                self.model._previousAttributes.account_direcciones = data.records;
-                self.model._syncedAttributes.account_direcciones = data.records;
-                self.format();
-                self._render();
+                  }
+                  //set model so tpl detail tpl can read data
+                  try {
+                    self.model.set('account_direcciones', data.records);
+                    self.model._previousAttributes.account_direcciones = data.records;
+                    self.model._syncedAttributes.account_direcciones = data.records;
+                    self.format();
+                    self._render();
+                  } catch (e) {
+                    console.log(e.message);
+                  }
 
-            }
-        });
-      } catch (e) {
-        console.log(e.message);
-      }
+              }
+          });
+        } catch (e) {
+          console.log(e.message);
+        }
     },
 
     /**

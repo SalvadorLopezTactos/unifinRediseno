@@ -96,53 +96,49 @@
         this.def.tel_estatus_list_html = tel_estatus_list_html;
         this.def.pais_list_html = pais_list_html;
         //Carga registros
-        this.model.on('sync', this.loadData, this);
 
-    },
+        var fields = ['id', 'name', 'estatus', 'extension', 'principal', 'secuencia', 'telefono', 'tipotelefono', 'pais'];
+        //api request apamaters
+        var api_params = {
+            'fields': fields.join(','),
+            'max_num': 99,
+            'order_by': 'date_entered:desc',
+            'filter': [{'accounts_tel_telefonos_1accounts_ida': this.model.id}]
+            //'filter': [{'account_id_c': this.model.id}]
+        };
+        var pull_telefono_url = app.api.buildURL('Tel_Telefonos',
+            null, null, api_params);
 
-    loadData: function(options){
-      var fields = ['id', 'name', 'estatus', 'extension', 'principal', 'secuencia', 'telefono', 'tipotelefono', 'pais'];
-      //api request apamaters
-      var api_params = {
-          'fields': fields.join(','),
-          'max_num': 99,
-          'order_by': 'date_entered:desc',
-          'filter': [{'accounts_tel_telefonos_1accounts_ida': self.model.id}]
-          //'filter': [{'account_id_c': this.model.id}]
-      };
-      var pull_telefono_url = app.api.buildURL('Tel_Telefonos',
-          null, null, api_params);
+        //Ejecuta consulta para recuperar infomación
+        try {
+          app.api.call('READ', pull_telefono_url, {}, {
+              success: function (data) {
+                  var country_list = app.metadata.getCountries();
+                  var tel_tipo_list = app.lang.getAppListStrings('tel_tipo_list');
 
-      //Ejecuta consulta para recuperar infomación
-      try {
-        app.api.call('READ', pull_telefono_url, {}, {
-            success: function (data) {
-                var country_list = app.metadata.getCountries();
-                var tel_tipo_list = app.lang.getAppListStrings('tel_tipo_list');
+                  for (var i = 0; i < data.records.length; i++) {
+                      //self.value[i] = data.records[i].telefono;
+                      //add label for tpl use
 
-                for (var i = 0; i < data.records.length; i++) {
-                    //self.value[i] = data.records[i].telefono;
-                    //add label for tpl use
+                      //ignore empty country record trobinson@levementum.com 6/9
+                      if (data.records[i].pais != "" && typeof(country_list[data.records[i].pais]) != 'undefined') {
+                          data.records[i].country_code_label = country_list[data.records[i].pais].name;
+                      }
 
-                    //ignore empty country record trobinson@levementum.com 6/9
-                    if (data.records[i].pais != "" && typeof(country_list[data.records[i].pais]) != 'undefined') {
-                        data.records[i].country_code_label = country_list[data.records[i].pais].name;
-                    }
+                      data.records[i].tipo_label = tel_tipo_list[data.records[i].tipotelefono];
+                  }
 
-                    data.records[i].tipo_label = tel_tipo_list[data.records[i].tipotelefono];
-                }
-
-                //set model so tpl detail tpl can read data
-                self.model.set('account_telefonos', data.records);
-                self.model._previousAttributes.account_telefonos = data.records;
-                self.model._syncedAttributes.account_telefonos = data.records;
-                self.format();
-                self._render();
-            }
-        });
-      } catch (e) {
-        console.log(e.message);
-      }
+                  //set model so tpl detail tpl can read data
+                  self.model.set('account_telefonos', data.records);
+                  self.model._previousAttributes.account_telefonos = data.records;
+                  self.model._syncedAttributes.account_telefonos = data.records;
+                  self.format();
+                  self._render();
+              }
+          });
+        } catch (e) {
+          console.log(e.message);
+        }
 
     },
 
