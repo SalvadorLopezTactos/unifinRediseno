@@ -2103,7 +2103,7 @@ populateColoniasByMunicipio:function(evt){
         nuevaDir=nuevaDir.replace(/ /g, "");
         nuevaDir=nuevaDir.toUpperCase();
         var existingDir = this.model.get("account_direcciones");
-        if (existingDir == undefined) {
+        if (this.context.attributes.create == true && existingDir == undefined) {
           existingDir=[];
         }
         var existente = false;
@@ -2439,7 +2439,7 @@ populateColoniasByMunicipio:function(evt){
      _addNewDireccionToModel: function (calle) {
         //var existingDirecciones = this.model.get('account_direcciones');
         var existingDirecciones = app.utils.deepCopy(this.model.get('account_direcciones'));
-        if (existingDirecciones == undefined) {
+        if (this.context.attributes.create == true && existingDirecciones == undefined) {
           existingDirecciones=[];
         }
         var country_model = app.metadata.getCountry($('.newPaisDir').val());

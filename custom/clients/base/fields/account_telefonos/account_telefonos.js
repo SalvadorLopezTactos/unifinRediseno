@@ -270,7 +270,7 @@
 
         var expreg =/^[0-9]{8,13}$/;
         var phones=this.model.get('account_telefonos');
-        if (phones == undefined) {
+        if (this.context.attributes.create == true && phones == undefined) {
           phones=[];
         }
 
@@ -477,7 +477,7 @@
             field_name = $($input).attr('data-field');
         var expreg =/^[0-9]{8,13}$/;
         var phones=this.model.get('account_telefonos');
-        if (phones == undefined) {
+        if (this.context.attributes.create == true && phones == undefined) {
           phones=[];
         }
         //if ($.isNumeric($($input).val()) === false && $($input).val() != '') {
@@ -619,7 +619,7 @@
     _addNewTelefonoToModel: function (telefono) {
         //var existingTelfonos = this.model.get('account_telefonos');
         var existingTelfonos = app.utils.deepCopy(this.model.get('account_telefonos'));
-        if (existingTelfonos == undefined) {
+        if (this.context.attributes.create == true && existingTelfonos == undefined) {
           existingTelfonos=[];
         }
         existingTelfonos.push({
