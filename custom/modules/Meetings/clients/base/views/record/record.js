@@ -465,7 +465,7 @@
         var d = dateend.getDate();
         var m = dateend.getMonth() + 1;
         var y = dateend.getFullYear();
-        var fechafin= new Date(y,m-1,d+1, 2,0); //Fecha final
+        var fechafin= new Date(y,m-1,d+2, 2,30); //Fecha final
         //Fecha inicio, anterior al dia anterior
         var fechainicio= new Date(y,m-1,d, 0,0);
 
@@ -523,7 +523,7 @@
         var d = dateend.getDate();
         var m = dateend.getMonth() + 1;
         var y = dateend.getFullYear();
-        var fechafin= new Date(y,m-1,d+1, 2,0); //Fecha final
+        var fechafin= new Date(y,m-1,d+2, 2,30); //Fecha final
         //Fecha inicio, anterior al dia anterior
         var fechainicio= new Date(y,m-1,d, 0,0);
 
