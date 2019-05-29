@@ -38,6 +38,7 @@ class CustomCurrentUserApi extends CurrentUserApi
         $userArray['current_user']['tct_alta_cd_chk_c'] = $current_user->tct_alta_cd_chk_c;
         $userArray['current_user']['ext_c'] = $current_user->ext_c;
         $userArray['current_user']['productos_c'] = $current_user->productos_c;
+        $userArray['current_user']['tct_propietario_real_chk_c'] = $current_user->tct_propietario_real_chk_c;
 
 
         return $userArray;

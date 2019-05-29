@@ -415,8 +415,8 @@
                 if (data != "") {
                     var titulo = "Campos Requeridos en Cuentas";
                     var nivel = "error";
-                    if(this.multiSearchOr(data, ["Cuenta 1"])=='1'){
-                        var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br> " + data +"</b></b><br><br>(Cuenta 1 se encuentra en el <b>Cuestionario PLD</b>:<br><b>Propietario real > Cuenta 1</b>)" ;
+                    if(this.multiSearchOr(data, ["Propietario Real"])=='1'){
+                        var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br> " + data +"</b></b><br><br>(Se debe agregar una relaci\u00F3n de tipo<b>Propietario real</b> con el check Validado por Jur\u00EDdico).";
                     }else {
                         var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br> " + data;
                     }
