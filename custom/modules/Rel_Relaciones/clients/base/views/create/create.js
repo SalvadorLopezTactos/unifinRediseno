@@ -513,61 +513,59 @@
                                     if (data.records <= 0) {
                                         RequeridosPR = RequeridosPR + '<b>Direccion<br></b>';
                                     }
-                                    if (RequeridosPR!= "") {
-                                        app.alert.show("Campos faltantes en cuenta", {
-                                            level: "error",
-                                            messages: 'Hace falta completar la siguiente informacion en la cuenta '+'<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c')+'  </a>' + 'para una relacion tipo Propietario Real:<br> ' + RequeridosPR ,
-                                            autoClose: false
-                                        });
-                                        errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
-                                        errors['errorpersonamoral'].required = true;
+                                    app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_tct_pld_1"), null, {
+                                        success: _.bind(function (data) {
+                                            if (data.records.length>0) {
+                                                for (var indice in data.records) {
+                                                    console.log(data.records[indice].description);
 
-                                    }
-                                    callback(null, fields, errors);
+                                                    if (data.records[indice].description == "AP" && productospld.includes("1")) {
+
+                                                        if (data.records[indice].tct_pld_campo2_ddw == "") {
+                                                            RequeridosPR = RequeridosPR + '<b>Pregunta 1 Arrendamiento Puro<br></b>';
+                                                        }
+                                                        if (data.records[indice].tct_pld_campo4_ddw == "") {
+                                                            RequeridosPR = RequeridosPR + '<b>Pregunta 2 Arrendamiento Puro<br></b>';
+                                                        }
+                                                    }
+                                                    if (data.records[indice].description == "CA" && productospld.includes("3")) {
+
+                                                        if (data.records[indice].tct_pld_campo2_ddw == "") {
+                                                            RequeridosPR = RequeridosPR + '<b>Pregunta 1 Crédito Automotriz<br></b>';
+                                                        }
+                                                        if (data.records[indice].tct_pld_campo4_ddw == "") {
+                                                            RequeridosPR = RequeridosPR + '<b>Pregunta 2 Crédito Automotriz<br></b>';
+                                                        }
+                                                    }
+                                                    if (data.records[indice].description == "FF" && productospld.includes("4")) {
+
+                                                        if (data.records[indice].tct_pld_campo2_ddw == "") {
+                                                            RequeridosPR = RequeridosPR + '<b>Pregunta 1 Factoraje Financiero<br></b>';
+                                                        }
+                                                        if (data.records[indice].tct_pld_campo4_ddw == "") {
+                                                            RequeridosPR = RequeridosPR + '<b>Pregunta 2 Factoraje Financiero<br></b>';
+                                                        }
+                                                    }
+                                                }
+                                            }else{
+                                                RequeridosPR = RequeridosPR + '<b>Falta informacion de PLD<br></b>';
+                                            }
+                                            if (RequeridosPR!= "") {
+                                                app.alert.show("Campos faltantes en cuenta", {
+                                                    level: "error",
+                                                    messages: 'Hace falta completar la siguiente informacion en la cuenta '+'<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c')+'  </a>' + 'para una relacion tipo Propietario Real:<br> ' + RequeridosPR ,
+                                                    autoClose: false
+                                                });
+                                                errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
+                                                errors['errorpersonamoral'].required = true;
+
+                                            }
+                                            callback(null, fields, errors);
+                                        }, this)
+                                    });
+
                                 }, this)
                             });
-
-                            app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_tct_pld_1"), null, {
-                                success: _.bind(function (data) {
-                                    if (data.records.length>0) {
-                                        for (var indice in data.records) {
-                                            console.log(data.records[indice].description);
-
-                                            if (data.records[indice].description == "AP" && productospld.includes("1")) {
-
-                                                if (data.records[indice].tct_pld_campo2_ddw == "") {
-                                                    RequeridosPR = RequeridosPR + '<b>Pregunta 1 Arrendamiento Puro<br></b>';
-                                                }
-                                                if (data.records[indice].tct_pld_campo4_ddw == "") {
-                                                    RequeridosPR = RequeridosPR + '<b>Pregunta 2 Arrendamiento Puro<br></b>';
-                                                }
-                                            }
-                                            if (data.records[indice].description == "CA" && productospld.includes("3")) {
-
-                                                if (data.records[indice].tct_pld_campo2_ddw == "") {
-                                                    RequeridosPR = RequeridosPR + '<b>Pregunta 1 Crédito Automotriz<br></b>';
-                                                }
-                                                if (data.records[indice].tct_pld_campo4_ddw == "") {
-                                                    RequeridosPR = RequeridosPR + '<b>Pregunta 2 Crédito Automotriz<br></b>';
-                                                }
-                                            }
-                                            if (data.records[indice].description == "FF" && productospld.includes("4")) {
-
-                                                if (data.records[indice].tct_pld_campo2_ddw == "") {
-                                                    RequeridosPR = RequeridosPR + '<b>Pregunta 1 Factoraje Financiero<br></b>';
-                                                }
-                                                if (data.records[indice].tct_pld_campo4_ddw == "") {
-                                                    RequeridosPR = RequeridosPR + '<b>Pregunta 2 Factoraje Financiero<br></b>';
-                                                }
-                                            }
-                                        }
-                                    }else{
-                                        RequeridosPR = RequeridosPR + '<b>Falta informacion de PLD<br></b>';
-                                    }
-
-                                }, this)
-                            });
-
                         }else{
                             app.alert.show("Es persona Moral", {
                                 level: "error",
@@ -637,60 +635,56 @@
                                 if (data.records <= 0) {
                                     Requeridoschange = Requeridoschange + '<b>Direccion<br></b>';
                                 }
-                                if (Requeridoschange!= "") {
-                                    app.alert.show("Campos faltantes en cuenta", {
-                                        level: "error",
-                                        messages: 'Hace falta completar la siguiente informacion en la cuenta '+'<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c')+'  </a>' + 'para una relacion tipo Propietario Real:<br> ' + Requeridoschange ,
-                                        autoClose: false
-                                    });
+                                app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_tct_pld_1"), null, {
+                                    success: _.bind(function (data) {
+                                        if (data.records.length>0) {
+                                            for (var indice in data.records) {
+                                                console.log(data.records[indice].description);
 
+                                                if (data.records[indice].description == "AP" && productospld.includes("1")) {
 
-                                }
+                                                    if (data.records[indice].tct_pld_campo2_ddw == "") {
+                                                        Requeridoschange = Requeridoschange + '<b>Pregunta 1 Arrendamiento Puro<br></b>';
+                                                    }
+                                                    if (data.records[indice].tct_pld_campo4_ddw == "") {
+                                                        Requeridoschange = Requeridoschange + '<b>Pregunta 2 Arrendamiento Puro<br></b>';
+                                                    }
+                                                }
+                                                if (data.records[indice].description == "CA" && productospld.includes("3")) {
+
+                                                    if (data.records[indice].tct_pld_campo2_ddw == "") {
+                                                        Requeridoschange = Requeridoschange + '<b>Pregunta 1 Crédito Automotriz<br></b>';
+                                                    }
+                                                    if (data.records[indice].tct_pld_campo4_ddw == "") {
+                                                        Requeridoschange = Requeridoschange + '<b>Pregunta 2 Crédito Automotriz<br></b>';
+                                                    }
+                                                }
+                                                if (data.records[indice].description == "FF" && productospld.includes("4")) {
+
+                                                    if (data.records[indice].tct_pld_campo2_ddw == "") {
+                                                        Requeridoschange = Requeridoschange + '<b>Pregunta 1 Factoraje Financiero<br></b>';
+                                                    }
+                                                    if (data.records[indice].tct_pld_campo4_ddw == "") {
+                                                        Requeridoschange = Requeridoschange + '<b>Pregunta 2 Factoraje Financiero<br></b>';
+                                                    }
+                                                }
+                                            }
+                                        }else{
+                                            Requeridoschange = Requeridoschange + '<b>Falta informacion de PLD<br></b>';
+                                        }
+                                        if (Requeridoschange!= "") {
+                                            app.alert.show("Campos faltantes en cuenta", {
+                                                level: "error",
+                                                messages: 'Hace falta completar la siguiente informacion en la cuenta '+'<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c')+'  </a>' + 'para una relacion tipo Propietario Real:<br> ' + Requeridoschange ,
+                                                autoClose: false
+                                            });
+                                        }
+
+                                    }, this)
+                                });
 
                             }, this)
                         });
-
-                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_tct_pld_1"), null, {
-                            success: _.bind(function (data) {
-                                if (data.records.length>0) {
-                                    for (var indice in data.records) {
-                                        console.log(data.records[indice].description);
-
-                                        if (data.records[indice].description == "AP" && productospld.includes("1")) {
-
-                                            if (data.records[indice].tct_pld_campo2_ddw == "") {
-                                                Requeridoschange = Requeridoschange + '<b>Pregunta 1 Arrendamiento Puro<br></b>';
-                                            }
-                                            if (data.records[indice].tct_pld_campo4_ddw == "") {
-                                                Requeridoschange = Requeridoschange + '<b>Pregunta 2 Arrendamiento Puro<br></b>';
-                                            }
-                                        }
-                                        if (data.records[indice].description == "CA" && productospld.includes("3")) {
-
-                                            if (data.records[indice].tct_pld_campo2_ddw == "") {
-                                                Requeridoschange = Requeridoschange + '<b>Pregunta 1 Crédito Automotriz<br></b>';
-                                            }
-                                            if (data.records[indice].tct_pld_campo4_ddw == "") {
-                                                Requeridoschange = Requeridoschange + '<b>Pregunta 2 Crédito Automotriz<br></b>';
-                                            }
-                                        }
-                                        if (data.records[indice].description == "FF" && productospld.includes("4")) {
-
-                                            if (data.records[indice].tct_pld_campo2_ddw == "") {
-                                                Requeridoschange = Requeridoschange + '<b>Pregunta 1 Factoraje Financiero<br></b>';
-                                            }
-                                            if (data.records[indice].tct_pld_campo4_ddw == "") {
-                                                Requeridoschange = Requeridoschange + '<b>Pregunta 2 Factoraje Financiero<br></b>';
-                                            }
-                                        }
-                                    }
-                                }else{
-                                    Requeridoschange = Requeridoschange + '<b>Falta informacion de PLD<br></b>';
-                                }
-
-                            }, this)
-                        });
-
                     }else{
                         app.alert.show("Es persona Moral", {
                             level: "error",
