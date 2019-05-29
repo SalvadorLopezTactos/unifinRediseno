@@ -58,7 +58,7 @@ array (
                 'name' => 'delete_button',
                 'label' => 'Eliminar todas las relaciones',
                 'acl_action' => 'delete',
-              ),			  
+              ),
             ),
           ),
           3 => 
@@ -120,6 +120,9 @@ array (
                 'name' => 'rel_relaciones_accounts_1_name',
                 'readonly' => true,
               ),
+              1 => 
+              array (
+              ),
               2 => 
               array (
                 'name' => 'relaciones_activas',
@@ -136,16 +139,24 @@ array (
               ),
               4 => 
               array (
+                'name' => 'tct_validado_juridico_chk_c',
+                'label' => 'LBL_TCT_VALIDADO_JURIDICO_CHK',
+              ),
+              5 => 
+              array (
+              ),
+              6 => 
+              array (
                 'name' => 'miembrodecomite',
                 'label' => 'LBL_MIEMBRODECOMITE',
                 'span' => 12,
               ),
-              5 => 
+              7 => 
               array (
                 'name' => 'porcentaje_participacion_c',
                 'label' => 'LBL_PORCENTAJE_PARTICIPACION',
               ),
-              6 => 
+              8 => 
               array (
                 'name' => 'montodeparticipacion',
                 'related_fields' => 
@@ -155,21 +166,21 @@ array (
                 ),
                 'label' => 'LBL_MONTODEPARTICIPACION',
               ),
-              7 => 
+              9 => 
               array (
                 'name' => 'tipodecontacto',
                 'studio' => 'visible',
                 'label' => 'LBL_TIPODECONTACTO',
                 'span' => 12,
               ),
-              8 => 
+              10 => 
               array (
                 'name' => 'parentesco',
                 'studio' => 'visible',
                 'label' => 'LBL_PARENTESCO',
                 'span' => 12,
               ),
-              9 => 
+              11 => 
               array (
                 'name' => 'limitedecredito',
                 'related_fields' => 
@@ -179,27 +190,27 @@ array (
                 ),
                 'label' => 'LBL_LIMITEDECREDITO',
               ),
-              10 => 
+              12 => 
               array (
                 'name' => 'plazoendias',
                 'label' => 'LBL_PLAZOENDIAS',
               ),
-              11 => 
+              13 => 
               array (
                 'name' => 'tiempodeconocerloano',
                 'label' => 'LBL_TIEMPODECONOCERLOANO',
               ),
-              12 => 
+              14 => 
               array (
                 'name' => 'tiempodeconocerlomeses',
                 'label' => 'LBL_TIEMPODECONOCERLOMESES',
               ),
-              13 => 
+              15 => 
               array (
                 'name' => 'probabilidadincremento',
                 'label' => 'LBL_PROBABILIDADINCREMENTO',
               ),
-              14 => 
+              16 => 
               array (
                 'name' => 'facturacionmensual',
                 'related_fields' => 
@@ -209,13 +220,13 @@ array (
                 ),
                 'label' => 'LBL_FACTURACIONMENSUAL',
               ),
-              15 => 
+              17 => 
               array (
                 'name' => 'opinion',
                 'studio' => 'visible',
                 'label' => 'LBL_OPINION',
               ),
-              16 => 
+              18 => 
               array (
                 'name' => 'consumomensual',
                 'related_fields' => 
@@ -225,7 +236,7 @@ array (
                 ),
                 'label' => 'LBL_CONSUMOMENSUAL',
               ),
-              17 => 
+              19 => 
               array (
                 'name' => 'linea',
                 'related_fields' => 
@@ -235,7 +246,7 @@ array (
                 ),
                 'label' => 'LBL_LINEA',
               ),
-              18 => 
+              20 => 
               array (
                 'name' => 'saldo',
                 'related_fields' => 
@@ -245,20 +256,20 @@ array (
                 ),
                 'label' => 'LBL_SALDO',
               ),
-              19 => 
+              21 => 
               array (
                 'name' => 'producto',
                 'label' => 'LBL_PRODUCTO',
               ),
-              20 => 
+              22 => 
               array (
               ),
-              21 => 
+              23 => 
               array (
                 'name' => 'puesto',
                 'label' => 'LBL_PUESTO',
               ),
-              22 => 
+              24 => 
               array (
                 'name' => 'puestodescription',
                 'studio' => 'visible',

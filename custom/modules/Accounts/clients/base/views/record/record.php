@@ -1118,43 +1118,6 @@ array (
           ),
           15 => 
           array (
-            'newTab' => false,
-            'panelDefault' => 'collapsed',
-            'name' => 'LBL_RECORDVIEW_PANEL9',
-            'label' => 'LBL_RECORDVIEW_PANEL9',
-            'columns' => 2,
-            'labelsOnTop' => 1,
-            'placeholders' => 1,
-            'fields' => 
-            array (
-              0 => 
-              array (
-                'name' => 'tct_persona1_c',
-                'studio' => 'visible',
-                'label' => 'LBL_TCT_PERSONA1',
-              ),
-              1 => 
-              array (
-                'name' => 'tct_persona2_c',
-                'studio' => 'visible',
-                'label' => 'LBL_TCT_PERSONA2',
-              ),
-              2 => 
-              array (
-                'name' => 'tct_persona3_c',
-                'studio' => 'visible',
-                'label' => 'LBL_TCT_PERSONA3',
-              ),
-              3 => 
-              array (
-                'name' => 'tct_persona4_c',
-                'studio' => 'visible',
-                'label' => 'LBL_TCT_PERSONA4',
-              ),
-            ),
-          ),
-          16 => 
-          array (
             'newTab' => true,
             'panelDefault' => 'expanded',
             'name' => 'LBL_RECORDVIEW_PANEL2',
