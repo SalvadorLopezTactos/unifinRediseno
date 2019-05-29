@@ -408,7 +408,7 @@
         }else {
             alert("No se pudo encontrar tu ubicacion");
         }
-        
+
         if(this.model.get('minut_minutas_meetings_name')==null || this.model.get('minut_minutas_meetings_name')==""){
             this.model.set('status', 'Planned');
         }
@@ -465,7 +465,7 @@
         var d = dateend.getDate();
         var m = dateend.getMonth() + 1;
         var y = dateend.getFullYear();
-        var fechafin= new Date(y,m-1,d+2, 2,30); //Fecha final
+        var fechafin= new Date(y,m-1,d+1, 2,0); //Fecha final
         //Fecha inicio, anterior al dia anterior
         var fechainicio= new Date(y,m-1,d, 0,0);
 
@@ -505,7 +505,7 @@
                         myField.show();
                         console.log("field being rendered as: " + myField.tplName);
                     });
-                    
+
             }   else   {
                 myField.listenTo(myField, "render", function () {
                         myField.hide();
@@ -523,7 +523,7 @@
         var d = dateend.getDate();
         var m = dateend.getMonth() + 1;
         var y = dateend.getFullYear();
-        var fechafin= new Date(y,m-1,d+2, 2,30); //Fecha final
+        var fechafin= new Date(y,m-1,d+1, 2,0); //Fecha final
         //Fecha inicio, anterior al dia anterior
         var fechainicio= new Date(y,m-1,d, 0,0);
 

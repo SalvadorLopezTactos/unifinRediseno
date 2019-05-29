@@ -465,9 +465,15 @@
         errors['.newDate'].required = true;
         }
         
-        var fechain=$('.newDate').val()+" "+$('.newTime1').val();
-        var fechafin=$('.newDate2').val()+" "+$('.newTime2').val();
-        if(fechafin<fechain){            
+        var fechain=$('.newDate').val();
+        var hora_ini=this.validaTiempo($('.newTime1').val());
+        var fechafin=$('.newDate2').val();
+        var hora_fin=this.validaTiempo($('.newTime2').val());
+
+        var fecha_ini_formateada=new Date(fechain + ' '+hora_ini);
+        var fecha_fin_formateada= new Date(fechafin + ' '+hora_fin);
+
+        if(fecha_fin_formateada<fecha_ini_formateada){
             $('.newDate2').css('border-color', 'red');
             $('.newTime2').css('border-color', 'red');
             app.alert.show("Fecha", {
@@ -508,6 +514,24 @@
         errors['reunion_llamada'].required = true;
       }
       callback(null,fields,errors);
+    },
+
+    ////Función para cambiar el formato de la hora y poder cambiar
+    validaTiempo:function(time){
+        if(time!="" && time!=null && time!=undefined){
+            time = time.replace("pm", " PM");
+            time = time.replace("am", " AM");
+            var hours = Number(time.match(/^(\d+)/)[1]);
+            var minutes = Number(time.match(/:(\d+)/)[1]);
+            var AMPM = time.match(/\s(.*)$/)[1];
+            if(AMPM == "PM" && hours<12) hours = hours+12;
+            if(AMPM == "AM" && hours==12) hours = hours-12;
+            var sHours = hours.toString();
+            var sMinutes = minutes.toString();
+            if(hours<10) sHours = "0" + sHours;
+            if(minutes<10) sMinutes = "0" + sMinutes;
+            return sHours + ":" + sMinutes;
+        }
     },
 
 })
