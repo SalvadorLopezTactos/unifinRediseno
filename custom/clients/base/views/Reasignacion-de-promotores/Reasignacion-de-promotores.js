@@ -23,6 +23,7 @@
 
         this.cuentas = '';
         this.seleccionados = [];
+        this.flagSeleccionados=0;
         this.model.on('change:users_accounts_1users_ida', this._setOffset, this);
 
         this.loadView = false;
@@ -57,6 +58,14 @@
     },
 
     seleccionarTodo: function(e){
+
+        //Control de bandera para saber si se ha oprimido el botón de "Seleccionar Todo" y de esta manera saber si el siguiente "offset" de la tabla
+        // debe mostrarse con los check como true
+        if(this.flagSeleccionados==0){
+            this.flagSeleccionados=1;
+        }else {
+            this.flagSeleccionados=0;
+        }
        
         var btnState = $(e.target).attr("btnState");
         if(btnState == "Off"){
@@ -179,6 +188,13 @@
                     this.total = data.total;
                     this.total_cuentas = data.total_cuentas;
                     this.render();
+
+                    if(this.flagSeleccionados==1){
+                        $('.selected').each(function (index, value) {
+                            $(value).attr("checked", true);
+                        });
+
+                    }
                     $("#Productos").val(producto_seleccionado);
 
                     if(to_set > this.total){
@@ -204,7 +220,17 @@
                     $("#filtroCliente").val(filtroCliente);
 
                     if(!_.isEmpty(crossSeleccionados)) {
+                        context=this;
                         this.seleccionados = JSON.parse(crossSeleccionados);
+                        //Validar que los nuevos checks seleccionados no existen en crossSeleccionados
+                        $('.selected').each(function (index, value) {
+                            if( $(value).attr("checked")=="checked" && context.flagSeleccionados==1 || $(value).attr("checked")==true && context.flagSeleccionados==1){
+                                if(!context.seleccionados.includes(value.value) && value.value!=0){
+                                    context.seleccionados.push(value.value)
+                                }
+
+                            }
+                        });
                         $("#crossSeleccionados").val(JSON.stringify(this.seleccionados));
 
                         $(this.seleccionados).each(function (index, selected) {
