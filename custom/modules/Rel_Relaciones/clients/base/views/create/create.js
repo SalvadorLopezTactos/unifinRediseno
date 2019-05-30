@@ -465,120 +465,137 @@
 	validaPropietarioReal: function (fields, errors, callback){
         var RequeridosPR = "";
         var productospld = App.user.attributes.productos_c;
+        if (this.model.get('relaciones_activas').includes('Propietario Real') && this.model.get("relacion_c").trim()!= "") {
 
-	    if (this.model.get('relaciones_activas').includes('Propietario Real') && this.model.get("relacion_c").trim()!= ""){
+            app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("rel_relaciones_accounts_1accounts_ida")), null, {
+                success: _.bind(function (data) {
+                    if (data.tipodepersona_c == "Persona Moral") {
 
-                app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c")), null, {
-                    success: _.bind(function (data) {
-                        if (data.tipodepersona_c!="Persona Moral") {
+                        app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c")), null, {
+                            success: _.bind(function (data) {
+                                if (data.tipodepersona_c != "Persona Moral") {
 
-                            if (data.primernombre_c == "") {
-                                RequeridosPR = RequeridosPR + '<b>Nombre<br></b>';
-                            }
-                            if (data.apellidopaterno_c == "") {
-                                RequeridosPR = RequeridosPR + '<b>Apellido Paterno<br></b>';
-                            }
-                            if (data.apellidomaterno_c == "") {
-                                RequeridosPR = RequeridosPR + '<b>Apellido Materno<br></b>';
-                            }
-                            if (data.genero_c == "") {
-                                RequeridosPR = RequeridosPR + '<b>Género<br></b>';
-                            }
-                            if (data.fechadenacimiento_c == "") {
-                                RequeridosPR = RequeridosPR + '<b>Fecha de Nacimiento<br></b>';
-                            }
-                            if (data.paisdenacimiento == "") {
-                                RequeridosPR = RequeridosPR + '<b>País de Nacimiento<br></b>';
-                            }
-                            if (data.estado_nacimiento_c == "") {
-                                RequeridosPR = RequeridosPR + '<b>Estado de Nacimiento<br></b>';
-                            }
-                            if (data.nacionalidad_c == "") {
-                                RequeridosPR = RequeridosPR + '<b>Nacionalidad<br></b>';
-                            }
-                            if (data.sectoreconomico_c == "") {
-                                RequeridosPR = RequeridosPR + '<b>Sector Económico<br></b>';
-                            }
-                            if (data.subsectoreconomico_c == "") {
-                                RequeridosPR = RequeridosPR + '<b>Subsector Económico<br></b>';
-                            }
-                            if (data.actividadeconomica_c == "") {
-                                RequeridosPR = RequeridosPR + '<b>Actividad Económica<br></b>';
-                            }
-                            if (data.phone_office == "") {
-                                RequeridosPR = RequeridosPR + '<b>Teléfono<br></b>';
-                            }
-                            app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null , {
-                                success: _.bind(function (data) {
-                                    if (data.records <= 0) {
-                                        RequeridosPR = RequeridosPR + '<b>Dirección<br></b>';
+                                    if (data.primernombre_c == "") {
+                                        RequeridosPR = RequeridosPR + '<b>Nombre<br></b>';
                                     }
-                                    app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_tct_pld_1"), null, {
+                                    if (data.apellidopaterno_c == "") {
+                                        RequeridosPR = RequeridosPR + '<b>Apellido Paterno<br></b>';
+                                    }
+                                    if (data.apellidomaterno_c == "") {
+                                        RequeridosPR = RequeridosPR + '<b>Apellido Materno<br></b>';
+                                    }
+                                    if (data.genero_c == "") {
+                                        RequeridosPR = RequeridosPR + '<b>Género<br></b>';
+                                    }
+                                    if (data.fechadenacimiento_c == "") {
+                                        RequeridosPR = RequeridosPR + '<b>Fecha de Nacimiento<br></b>';
+                                    }
+                                    if (data.paisdenacimiento == "") {
+                                        RequeridosPR = RequeridosPR + '<b>País de Nacimiento<br></b>';
+                                    }
+                                    if (data.estado_nacimiento_c == "") {
+                                        RequeridosPR = RequeridosPR + '<b>Estado de Nacimiento<br></b>';
+                                    }
+                                    if (data.nacionalidad_c == "") {
+                                        RequeridosPR = RequeridosPR + '<b>Nacionalidad<br></b>';
+                                    }
+                                    if (data.sectoreconomico_c == "") {
+                                        RequeridosPR = RequeridosPR + '<b>Sector Económico<br></b>';
+                                    }
+                                    if (data.subsectoreconomico_c == "") {
+                                        RequeridosPR = RequeridosPR + '<b>Subsector Económico<br></b>';
+                                    }
+                                    if (data.actividadeconomica_c == "") {
+                                        RequeridosPR = RequeridosPR + '<b>Actividad Económica<br></b>';
+                                    }
+                                    if (data.phone_office == "") {
+                                        RequeridosPR = RequeridosPR + '<b>Teléfono<br></b>';
+                                    }
+                                    app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null, {
                                         success: _.bind(function (data) {
-                                            if (data.records.length>0) {
-                                                for (var indice in data.records) {
-                                                    console.log(data.records[indice].description);
-
-                                                    if (data.records[indice].description == "AP" && productospld.includes("1")) {
-
-                                                        if (data.records[indice].tct_pld_campo2_ddw == "") {
-                                                            RequeridosPR = RequeridosPR + '<b>Pregunta 1 Arrendamiento Puro<br></b>';
-                                                        }
-                                                        if (data.records[indice].tct_pld_campo4_ddw == "") {
-                                                            RequeridosPR = RequeridosPR + '<b>Pregunta 2 Arrendamiento Puro<br></b>';
-                                                        }
-                                                    }
-                                                    if (data.records[indice].description == "CA" && productospld.includes("3")) {
-
-                                                        if (data.records[indice].tct_pld_campo2_ddw == "") {
-                                                            RequeridosPR = RequeridosPR + '<b>Pregunta 1 Crédito Automotriz<br></b>';
-                                                        }
-                                                        if (data.records[indice].tct_pld_campo4_ddw == "") {
-                                                            RequeridosPR = RequeridosPR + '<b>Pregunta 2 Crédito Automotriz<br></b>';
-                                                        }
-                                                    }
-                                                    if (data.records[indice].description == "FF" && productospld.includes("4")) {
-
-                                                        if (data.records[indice].tct_pld_campo2_ddw == "") {
-                                                            RequeridosPR = RequeridosPR + '<b>Pregunta 1 Factoraje Financiero<br></b>';
-                                                        }
-                                                        if (data.records[indice].tct_pld_campo4_ddw == "") {
-                                                            RequeridosPR = RequeridosPR + '<b>Pregunta 2 Factoraje Financiero<br></b>';
-                                                        }
-                                                    }
-                                                }
-                                            }else{
-                                                RequeridosPR = RequeridosPR + '<b>Falta informacion de PLD<br></b>';
+                                            if (data.records <= 0) {
+                                                RequeridosPR = RequeridosPR + '<b>Dirección<br></b>';
                                             }
-                                            if (RequeridosPR!= "") {
-                                                app.alert.show("Campos faltantes en cuenta", {
-                                                    level: "error",
-                                                    messages: 'Hace falta completar la siguiente informacion en la cuenta '+'<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c')+'  </a>' + 'para una relacion tipo Propietario Real:<br> ' + RequeridosPR ,
-                                                    autoClose: false
-                                                });
-                                                errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
-                                                errors['errorpersonamoral'].required = true;
+                                            app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_tct_pld_1"), null, {
+                                                success: _.bind(function (data) {
+                                                    if (data.records.length > 0) {
+                                                        for (var indice in data.records) {
+                                                            console.log(data.records[indice].description);
 
-                                            }
-                                            callback(null, fields, errors);
+                                                            if (data.records[indice].description == "AP" && productospld.includes("1")) {
+
+                                                                if (data.records[indice].tct_pld_campo2_ddw == "") {
+                                                                    RequeridosPR = RequeridosPR + '<b>Pregunta 1 Arrendamiento Puro<br></b>';
+                                                                }
+                                                                if (data.records[indice].tct_pld_campo4_ddw == "") {
+                                                                    RequeridosPR = RequeridosPR + '<b>Pregunta 2 Arrendamiento Puro<br></b>';
+                                                                }
+                                                            }
+                                                            if (data.records[indice].description == "CA" && productospld.includes("3")) {
+
+                                                                if (data.records[indice].tct_pld_campo2_ddw == "") {
+                                                                    RequeridosPR = RequeridosPR + '<b>Pregunta 1 Crédito Automotriz<br></b>';
+                                                                }
+                                                                if (data.records[indice].tct_pld_campo4_ddw == "") {
+                                                                    RequeridosPR = RequeridosPR + '<b>Pregunta 2 Crédito Automotriz<br></b>';
+                                                                }
+                                                            }
+                                                            if (data.records[indice].description == "FF" && productospld.includes("4")) {
+
+                                                                if (data.records[indice].tct_pld_campo2_ddw == "") {
+                                                                    RequeridosPR = RequeridosPR + '<b>Pregunta 1 Factoraje Financiero<br></b>';
+                                                                }
+                                                                if (data.records[indice].tct_pld_campo4_ddw == "") {
+                                                                    RequeridosPR = RequeridosPR + '<b>Pregunta 2 Factoraje Financiero<br></b>';
+                                                                }
+                                                            }
+                                                        }
+                                                    } else {
+                                                        RequeridosPR = RequeridosPR + '<b>Falta informacion de PLD<br></b>';
+                                                    }
+                                                    if (RequeridosPR != "") {
+                                                        app.alert.show("Campos faltantes en cuenta", {
+                                                            level: "error",
+                                                            messages: 'Hace falta completar la siguiente informacion en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relacion tipo Propietario Real:<br> ' + RequeridosPR,
+                                                            autoClose: false
+                                                        });
+                                                        errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
+                                                        errors['errorpersonamoral'].required = true;
+
+                                                    }
+                                                    callback(null, fields, errors);
+                                                }, this)
+                                            });
+
                                         }, this)
                                     });
+                                } else {
+                                    app.alert.show("Es persona Moral", {
+                                        level: "error",
+                                        title: "Una persona moral no puede ser Propietario Real",
+                                        autoClose: false
+                                    });
+                                    errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
+                                    errors['errorpersonamoral'].required = true;
 
-                                }, this)
-                            });
-                        }else{
-                            app.alert.show("Es persona Moral", {
-                                level: "error",
-                                title: "Una persona moral no puede ser Propietario Real",
-                                autoClose: false
-                            });
-                            errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
-                            errors['errorpersonamoral'].required = true;
+                                    callback(null, fields, errors);
+                                }
+                            }, this)
+                        });
 
-                            callback(null, fields, errors);
-                        }
-                    }, this)
-                });
+                    } else {
+                        app.alert.show("Error cuenta no es candidata a PR", {
+                            level: "error",
+                            messages: 'La cuenta principal es persona física y no puede generar una relación de tipo Propietario Real.',
+                            autoClose: false
+                        });
+                        errors['errorcuenta'] = errors['errorcuenta'] || {};
+                        errors['errorcuenta'].required = true;
+
+                        callback(null, fields, errors);
+                    }
+                }, this)
+            });
         }else {
             callback(null, fields, errors);
         }
