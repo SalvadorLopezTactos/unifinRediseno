@@ -118,14 +118,14 @@ class ValidaCamposSolicitud extends SugarApi
         if ($direccion == 0) {
             array_push($array_errores, 'Dirección');
         }
-        $GLOBALS['log']->fatal(count($array_errores));
+
         $beanPersona->load_relationship('accounts_tel_telefonos_1');
         $relatedBeansTel = $beanPersona->accounts_tel_telefonos_1->getBeans();
         $telefono = count($relatedBeansTel);
         if ($telefono == 0 && ($beanPersona->email1 == "" || $beanPersona->email1 == null)) {
             array_push($array_errores, 'Teléfono o Email');
         }
-        $GLOBALS['log']->fatal(count($array_errores));
+
         if ($option == '2' && $beanPersona->tipodepersona_c == 'Persona Moral') {
             $beanPersona->load_relationship('rel_relaciones_accounts_1');
             $relatedBeansRel = $beanPersona->rel_relaciones_accounts_1->getBeans();
@@ -133,7 +133,6 @@ class ValidaCamposSolicitud extends SugarApi
 
             foreach ($relatedBeansRel as $clave ) {
                $resultado= strpos ($clave->relaciones_activas , "Propietario Real");
-                //$GLOBALS['log']->fatal(print_r($clave, true));
                 if ($resultado>=0 && $clave->tct_validado_juridico_chk_c==1){
                     $relaciones++;
                 }
@@ -142,11 +141,6 @@ class ValidaCamposSolicitud extends SugarApi
                 array_push($array_errores, 'Propietario Real');
             }
         }
-
-            $GLOBALS['log']->fatal(print_r($array_errores, true));
-            $GLOBALS['log']->fatal(count($array_errores));
-            $GLOBALS['log']->fatal('------------------');
-
         if (count($array_errores) > 0) {
             $strResult = implode('<br>', $array_errores);
             $strResult = "<b>" . $strResult . "</b>";
