@@ -472,7 +472,7 @@ extendsFrom: 'RecordView',
                             RequeridosPR = RequeridosPR + '<b>Apellido Materno<br></b>';
                         }
                         if (data.genero_c == "") {
-                            RequeridosPR = RequeridosPR + '<b>Genero<br></b>';
+                            RequeridosPR = RequeridosPR + '<b>Género<br></b>';
                         }
                         if (data.fechadenacimiento_c == "") {
                             RequeridosPR = RequeridosPR + '<b>Fecha de Nacimiento<br></b>';
@@ -501,7 +501,7 @@ extendsFrom: 'RecordView',
                         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null , {
                             success: _.bind(function (data) {
                                 if (data.records <= 0) {
-                                    RequeridosPR = RequeridosPR + '<b>Direccion<br></b>';
+                                    RequeridosPR = RequeridosPR + '<b>Dirección<br></b>';
                                 }
                                 app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_tct_pld_1"), null, {
                                     success: _.bind(function (data) {
@@ -594,7 +594,7 @@ extendsFrom: 'RecordView',
                             Requeridoschange = Requeridoschange + '<b>Apellido Materno<br></b>';
                         }
                         if (data.genero_c == "") {
-                            Requeridoschange = Requeridoschange + '<b>Genero<br></b>';
+                            Requeridoschange = Requeridoschange + '<b>Género<br></b>';
                         }
                         if (data.fechadenacimiento_c == "") {
                             Requeridoschange = Requeridoschange + '<b>Fecha de Nacimiento<br></b>';
@@ -623,7 +623,7 @@ extendsFrom: 'RecordView',
                         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null , {
                             success: _.bind(function (data) {
                                 if (data.records <= 0) {
-                                    Requeridoschange = Requeridoschange + '<b>Direccion<br></b>';
+                                    Requeridoschange = Requeridoschange + '<b>Dirección<br></b>';
                                 }
                                 app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_tct_pld_1"), null, {
                                     success: _.bind(function (data) {
