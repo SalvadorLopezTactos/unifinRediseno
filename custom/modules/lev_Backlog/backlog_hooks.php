@@ -12,7 +12,7 @@ class backlog_hooks {
     public function setFormatName($bean = null, $event = null, $args = null){
 
         if($bean->lev_backlog_opportunitiesopportunities_ida == null) {
-            $account = BeanFactory::retrieveBean('Accounts', $bean->account_id_c);  
+            $account = BeanFactory::retrieveBean('Accounts', $bean->account_id_c);
             $api="";
             $args=[];
             $args['categoriaID']=1;
@@ -94,6 +94,9 @@ class backlog_hooks {
             }
         }
 
+        //Elimina valores negativos
+        $monto_sin_solicitud_c = ($monto_sin_solicitud_c <= 0) ? 0 : $monto_sin_solicitud_c;
+        $monto_con_solicitud_c = ($monto_con_solicitud_c <= 0) ? 0: $monto_con_solicitud_c;
 
     }
     public function ActualizaValores($bean = null, $event = null, $args = null){
