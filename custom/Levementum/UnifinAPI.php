@@ -927,6 +927,10 @@ SQL;
                 }else{
                     $GLOBALS['log']->fatal(" <".$current_user->user_name."> NO Se identificó relacion Beneficiario en:" . print_r($relacionesActivas,true));
                 }
+                //Quita propietario Real
+                $relacionesActivas = str_replace(',Propietario Real','', $relacionesActivas);
+                $relacionesActivas = str_replace('Propietario Real,','', $relacionesActivas);
+
                 $fields = array(
                     "oActualizaRelacion" => array(
                         "IdCliente" => intval($row['id_cliente']),
