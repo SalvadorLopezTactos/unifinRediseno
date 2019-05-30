@@ -489,6 +489,9 @@ extendsFrom: 'RecordView',
                                     if (data.nacionalidad_c == "") {
                                         RequeridosPR = RequeridosPR + '<b>Nacionalidad<br></b>';
                                     }
+                                    if (data.tct_macro_sector_ddw_c == "") {
+                                        RequeridosPR = RequeridosPR + '<b>Macro Sector<br></b>';
+                                    }
                                     if (data.sectoreconomico_c == "") {
                                         RequeridosPR = RequeridosPR + '<b>Sector Económico<br></b>';
                                     }
@@ -541,12 +544,12 @@ extendsFrom: 'RecordView',
                                                             }
                                                         }
                                                     } else {
-                                                        RequeridosPR = RequeridosPR + '<b>Falta informacion de PLD<br></b>';
+                                                        RequeridosPR = RequeridosPR + '<b>Hace Falta completar información de la pestaña cuestionario PLD<br></b>';
                                                     }
                                                     if (RequeridosPR != "") {
                                                         app.alert.show("Campos faltantes en cuenta", {
                                                             level: "error",
-                                                            messages: 'Hace falta completar la siguiente informacion en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relacion tipo Propietario Real:<br> ' + RequeridosPR,
+                                                            messages: 'Hace falta completar la siguiente información en la cuenta ' + '<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c') + '  </a>' + 'para una relación tipo Propietario Real:<br> ' + RequeridosPR,
                                                             autoClose: false
                                                         });
                                                         errors['errorpersonamoral'] = errors['errorpersonamoral'] || {};
@@ -625,8 +628,8 @@ extendsFrom: 'RecordView',
                         if (data.nacionalidad_c == "") {
                             Requeridoschange = Requeridoschange + '<b>Nacionalidad<br></b>';
                         }
-                        if (data.sectoreconomico_c == "") {
-                            Requeridoschange = Requeridoschange + '<b>Sector Económico<br></b>';
+                        if (data.tct_macro_sector_ddw_c == "") {
+                            Requeridoschange = Requeridoschange + '<b>Macro Sector<br></b>';
                         }
                         if (data.subsectoreconomico_c == "") {
                             Requeridoschange = Requeridoschange + '<b>Subsector Económico<br></b>';
@@ -677,12 +680,12 @@ extendsFrom: 'RecordView',
                                                 }
                                             }
                                         }else{
-                                            Requeridoschange = Requeridoschange + '<b>Falta informacion de PLD<br></b>';
+                                            Requeridoschange = Requeridoschange + '<b>Hace Falta completar información de la pestaña cuestionario PLD<br></b>';
                                         }
                                         if (Requeridoschange!= "") {
                                             app.alert.show("Campos faltantes en cuenta", {
                                                 level: "error",
-                                                messages: 'Hace falta completar la siguiente informacion en la cuenta '+'<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c')+'  </a>' + 'para una relacion tipo Propietario Real:<br> ' + Requeridoschange ,
+                                                messages: 'Hace falta completar la siguiente información en la cuenta '+'<a href="#Accounts/' + this.model.get("account_id1_c") + '" target= "_blank"> ' + this.model.get('relacion_c')+'  </a>' + 'para una relación tipo Propietario Real:<br> ' + Requeridoschange ,
                                                 autoClose: false
                                             });
                                         }
