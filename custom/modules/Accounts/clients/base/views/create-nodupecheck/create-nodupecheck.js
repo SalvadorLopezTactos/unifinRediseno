@@ -955,7 +955,7 @@
                 campos = campos  + '<b>' + 'Pregunta 2 Crédito Automotriz' + '</b><br>';
             }
             if(errors.account_direcciones){
-                campos =campos.replace("Direcciones","Direccion");
+                campos =campos.replace("Direcciones","Dirección");
             }
             if (errors.account_telefonos){
                 campos= campos.replace("Telefonos","Teléfono");

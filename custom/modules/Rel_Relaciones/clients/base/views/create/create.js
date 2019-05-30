@@ -482,7 +482,7 @@
                                 RequeridosPR = RequeridosPR + '<b>Apellido Materno<br></b>';
                             }
                             if (data.genero_c == "") {
-                                RequeridosPR = RequeridosPR + '<b>Genero<br></b>';
+                                RequeridosPR = RequeridosPR + '<b>Género<br></b>';
                             }
                             if (data.fechadenacimiento_c == "") {
                                 RequeridosPR = RequeridosPR + '<b>Fecha de Nacimiento<br></b>';
@@ -604,7 +604,7 @@
                             Requeridoschange = Requeridoschange + '<b>Apellido Materno<br></b>';
                         }
                         if (data.genero_c == "") {
-                            Requeridoschange = Requeridoschange + '<b>Genero<br></b>';
+                            Requeridoschange = Requeridoschange + '<b>Género<br></b>';
                         }
                         if (data.fechadenacimiento_c == "") {
                             Requeridoschange = Requeridoschange + '<b>Fecha de Nacimiento<br></b>';
