@@ -15,6 +15,7 @@ extendsFrom: 'RecordView',
 
 
         this.model.on('sync', this._render, this);
+        this.model.on('sync', this.validajuridico, this);
         this.model.addValidationTask('crearrelacionaccionista', _.bind(this.Relacionaccionista, this));
 
         this.model.on('change:relacion_c', this.checarValidaciones, this);
@@ -62,11 +63,14 @@ extendsFrom: 'RecordView',
 		this.previas = new String(this.model.get('relaciones_activas'));
 		console.log(this.previas);
 		this.doRelationFields();
-		if(!this.model.get('relaciones_activas').includes('Propietario Real')){
-            $('[data-name=tct_validado_juridico_chk_c]').hide();
-        }
 
 	},
+
+    validajuridico: function (){
+        if(!this.model.get('relaciones_activas').includes('Propietario Real')){
+            $('[data-name=tct_validado_juridico_chk_c]').hide();
+        }
+    },
 	
 	_doValidateContactFields: function (fields, errors, callback) {
 		var sRelaciones = new String(this.model.get('relaciones_activas'));
