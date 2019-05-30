@@ -1208,7 +1208,7 @@
                    errors['error2AP'].required = true;
                }
            }
-           if (productos.includes("3")) {
+           if (productos.includes("4")) {
                if ($('.campo2ddw-ff').select2('val') == "" || $('.campo2ddw-ff').select2('val') == null) {
                    $('.campo2ddw-ff').find('.select2-choice').css('border-color','red');
                    errors['error3FF'] = errors['Pregunta 1 Factoraje Financiero'] || {};
@@ -1220,7 +1220,7 @@
                    errors['error4FF'].required = true;
                }
            }
-           if (productos.includes("4")) {
+           if (productos.includes("3")) {
                if ($('.campo2ddw-ca').select2('val') == "" || $('.campo2ddw-ca').select2('val') == null) {
                    $('.campo2ddw-ca').find('.select2-choice').css('border-color','red');
                    errors['error5CA'] = errors['Pregunta 1 Credito Automotriz'] || {};
