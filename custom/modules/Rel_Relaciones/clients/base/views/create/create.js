@@ -511,7 +511,7 @@
                             app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null , {
                                 success: _.bind(function (data) {
                                     if (data.records <= 0) {
-                                        RequeridosPR = RequeridosPR + '<b>Direccion<br></b>';
+                                        RequeridosPR = RequeridosPR + '<b>Dirección<br></b>';
                                     }
                                     app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_tct_pld_1"), null, {
                                         success: _.bind(function (data) {
@@ -633,7 +633,7 @@
                         app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_dire_direccion_1"), null , {
                             success: _.bind(function (data) {
                                 if (data.records <= 0) {
-                                    Requeridoschange = Requeridoschange + '<b>Direccion<br></b>';
+                                    Requeridoschange = Requeridoschange + '<b>Dirección<br></b>';
                                 }
                                 app.api.call("read", app.api.buildURL("Accounts/" + this.model.get("account_id1_c") + "/link/accounts_tct_pld_1"), null, {
                                     success: _.bind(function (data) {
