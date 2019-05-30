@@ -576,7 +576,7 @@ extendsFrom: 'RecordView',
                     } else {
                         app.alert.show("Error cuenta no es candidata a PR", {
                             level: "error",
-                            messages: 'Esta cuenta es Persona Moral y no puede generar una relación de tipo Propietario Real',
+                            messages: 'La cuenta principal es persona física y no puede generar una relación de tipo Propietario Real.',
                             autoClose: false
                         });
                         errors['errorcuenta'] = errors['errorcuenta'] || {};
