@@ -55,7 +55,7 @@ class ValidaCamposSolicitud extends SugarApi
             $req_pm .= ",rfc_c,fechaconstitutiva_c," .
                 "pais_nacimiento_c,estado_nacimiento_c," .
                 "zonageografica_c,ventas_anuales_c," .
-                "potencial_cuenta_c,activo_fijo_c,";
+                "potencial_cuenta_c,activo_fijo_c";
 
             $req_pf_y_pfae .= ",rfc_c,fechadenacimiento_c," .
                 "pais_nacimiento_c,estado_nacimiento_c,zonageografica_c," .
@@ -69,7 +69,6 @@ class ValidaCamposSolicitud extends SugarApi
 
         $beanPersona = BeanFactory::getBean("Accounts", $id_cuenta);
         $field_defs['Accounts'] = $beanPersona->getFieldDefinitions();
-
 
         if ($beanPersona->tipodepersona_c == 'Persona Moral') {
             $array_campos = explode(',', $req_pm);
@@ -113,21 +112,20 @@ class ValidaCamposSolicitud extends SugarApi
 
         }
 
-
         $beanPersona->load_relationship('accounts_dire_direccion_1');
         $relatedBeansDir = $beanPersona->accounts_dire_direccion_1->getBeans();
         $direccion = count($relatedBeansDir);
         if ($direccion == 0) {
             array_push($array_errores, 'Dirección');
         }
-
+        $GLOBALS['log']->fatal(count($array_errores));
         $beanPersona->load_relationship('accounts_tel_telefonos_1');
         $relatedBeansTel = $beanPersona->accounts_tel_telefonos_1->getBeans();
         $telefono = count($relatedBeansTel);
         if ($telefono == 0 && ($beanPersona->email1 == "" || $beanPersona->email1 == null)) {
             array_push($array_errores, 'Teléfono o Email');
         }
-
+        $GLOBALS['log']->fatal(count($array_errores));
         if ($option == '2' && $beanPersona->tipodepersona_c == 'Persona Moral') {
             $beanPersona->load_relationship('rel_relaciones_accounts_1');
             $relatedBeansRel = $beanPersona->rel_relaciones_accounts_1->getBeans();
@@ -135,7 +133,7 @@ class ValidaCamposSolicitud extends SugarApi
 
             foreach ($relatedBeansRel as $clave ) {
                $resultado= strpos ($clave->relaciones_activas , "Propietario Real");
-                $GLOBALS['log']->fatal(print_r($clave, true));
+                //$GLOBALS['log']->fatal(print_r($clave, true));
                 if ($resultado>=0 && $clave->tct_validado_juridico_chk_c==1){
                     $relaciones++;
                 }
@@ -145,10 +143,14 @@ class ValidaCamposSolicitud extends SugarApi
             }
         }
 
+            $GLOBALS['log']->fatal(print_r($array_errores, true));
+            $GLOBALS['log']->fatal(count($array_errores));
+            $GLOBALS['log']->fatal('------------------');
 
         if (count($array_errores) > 0) {
             $strResult = implode('<br>', $array_errores);
             $strResult = "<b>" . $strResult . "</b>";
+
             return $strResult;
         } else {
             return "";
