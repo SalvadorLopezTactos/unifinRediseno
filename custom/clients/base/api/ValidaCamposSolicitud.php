@@ -55,7 +55,7 @@ class ValidaCamposSolicitud extends SugarApi
             $req_pm .= ",rfc_c,fechaconstitutiva_c," .
                 "pais_nacimiento_c,estado_nacimiento_c," .
                 "zonageografica_c,ventas_anuales_c," .
-                "potencial_cuenta_c,activo_fijo_c,";
+                "potencial_cuenta_c,activo_fijo_c";
 
             $req_pf_y_pfae .= ",rfc_c,fechadenacimiento_c," .
                 "pais_nacimiento_c,estado_nacimiento_c,zonageografica_c," .
@@ -69,7 +69,6 @@ class ValidaCamposSolicitud extends SugarApi
 
         $beanPersona = BeanFactory::getBean("Accounts", $id_cuenta);
         $field_defs['Accounts'] = $beanPersona->getFieldDefinitions();
-
 
         if ($beanPersona->tipodepersona_c == 'Persona Moral') {
             $array_campos = explode(',', $req_pm);
@@ -113,7 +112,6 @@ class ValidaCamposSolicitud extends SugarApi
 
         }
 
-
         $beanPersona->load_relationship('accounts_dire_direccion_1');
         $relatedBeansDir = $beanPersona->accounts_dire_direccion_1->getBeans();
         $direccion = count($relatedBeansDir);
@@ -135,7 +133,6 @@ class ValidaCamposSolicitud extends SugarApi
 
             foreach ($relatedBeansRel as $clave ) {
                $resultado= strpos ($clave->relaciones_activas , "Propietario Real");
-                $GLOBALS['log']->fatal(print_r($clave, true));
                 if ($resultado>=0 && $clave->tct_validado_juridico_chk_c==1){
                     $relaciones++;
                 }
@@ -144,11 +141,10 @@ class ValidaCamposSolicitud extends SugarApi
                 array_push($array_errores, 'Propietario Real');
             }
         }
-
-
         if (count($array_errores) > 0) {
             $strResult = implode('<br>', $array_errores);
             $strResult = "<b>" . $strResult . "</b>";
+
             return $strResult;
         } else {
             return "";
