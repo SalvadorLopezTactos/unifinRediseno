@@ -128,22 +128,23 @@ class ValidaCamposSolicitud extends SugarApi
             array_push($array_errores, 'Teléfono o Email');
         }
 
-        $beanPersona->load_relationship('rel_relaciones_accounts_1');
-        $relatedBeansRel = $beanPersona->rel_relaciones_accounts_1->getBeans();
-        $relaciones = 0;
+        if ($option == '2' && $beanPersona->tipodepersona_c == 'Persona Moral') {
+            $beanPersona->load_relationship('rel_relaciones_accounts_1');
+            $relatedBeansRel = $beanPersona->rel_relaciones_accounts_1->getBeans();
+            $relaciones = 0;
 
-        foreach ($relatedBeansRel as $clave ) {
-           $resultado= strpos ($clave->relaciones_activas , "Propietario Real");
-            $GLOBALS['log']->fatal(print_r($clave, true));
-            if ($resultado>=0 && $clave->tct_validado_juridico_chk_c==1){
-                $relaciones++;
+            foreach ($relatedBeansRel as $clave ) {
+               $resultado= strpos ($clave->relaciones_activas , "Propietario Real");
+                $GLOBALS['log']->fatal(print_r($clave, true));
+                if ($resultado>=0 && $clave->tct_validado_juridico_chk_c==1){
+                    $relaciones++;
+                }
             }
-
-
+            if ($relaciones==0){
+                array_push($array_errores, 'Propietario Real');
+            }
         }
-        if ($relaciones==0){
-            array_push($array_errores, 'Propietario Real');
-        }
+
 
         if (count($array_errores) > 0) {
             $strResult = implode('<br>', $array_errores);
