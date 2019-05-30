@@ -479,8 +479,8 @@
                         title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
                         autoClose: false
                     });
-                    errors['email'] = errors['email'] || {};
-                    errors['email'].required = true;
+                    errors['email_telefono'] = errors['email_telefono'] || {};
+                    errors['email_telefono'].required = true;
                     errors['account_telefonos'] = errors['account_telefonos'] || {};
                     errors['account_telefonos'].required = true;
                 }
@@ -914,7 +914,7 @@
       Validación en relaciones tipo persona: Referenciado Cliente/Proveedor
     */
     _doValidateEdoCivil: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor'))) {
+        if (this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor') && !this.model.get('tipo_relacion_c').includes('Propietario Real'))) {
             if ((this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
                 errors['estadocivil_c'] = errors['estadocivil_c'] || {};
                 errors['estadocivil_c'].required = true;
@@ -955,7 +955,7 @@
                 campos = campos  + '<b>' + 'Pregunta 2 Crédito Automotriz' + '</b><br>';
             }
             if(errors.account_direcciones){
-                campos =campos.replace("Direcciones","Direccion");
+                campos =campos.replace("Direcciones","Dirección");
             }
             if (errors.account_telefonos){
                 campos= campos.replace("Telefonos","Teléfono");
@@ -1175,6 +1175,10 @@
            if (this.model.get('sectoreconomico_c') == "" || this.model.get('sectoreconomico_c') == undefined) {
                errors['sectoreconomico_c'] = errors['sectoreconomico_c'] || {};
                errors['sectoreconomico_c'].required = true;
+           }
+           if (this.model.get('tct_macro_sector_ddw_c')== "" || this.model.get('tct_macro_sector_ddw_c')== undefined){
+               errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
+               errors['tct_macro_sector_ddw_c'].required = true;
            }
            if (this.model.get('subsectoreconomico_c') == "" || this.model.get('subsectoreconomico_c') == undefined) {
                errors['subsectoreconomico_c'] = errors['subsectoreconomico_c'] || {};

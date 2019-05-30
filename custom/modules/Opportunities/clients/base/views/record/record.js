@@ -408,7 +408,7 @@
         self=this;
     		var obid=this.model.get('account_id');
     		var caso="2";
-    		if((obid!=""|| obid!=null) && this.model.get('tct_oportunidad_perdida_chk_c') != true){
+    		if((obid!=""|| obid!=null) && this.model.get('tct_oportunidad_perdida_chk_c') != true && this.model.get('tct_etapa_ddw_c')== 'SI'){
             app.api.call('GET', app.api.buildURL('ObligatoriosCuentasSolicitud/' + this.model.get('account_id')+'/2'), null, {
             success: _.bind(function (data) {
 
@@ -416,7 +416,7 @@
                     var titulo = "Campos Requeridos en Cuentas";
                     var nivel = "error";
                     if(this.multiSearchOr(data, ["Propietario Real"])=='1'){
-                        var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br> " + data +"</b></b><br><br>(Se debe agregar una relaci\u00F3n de tipo<b>Propietario real</b> con el check Validado por Jur\u00EDdico).";
+                        var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br> " + data +"</b></b><br><br>(Se debe agregar una relaci\u00F3n de tipo <b>Propietario real</b> con el check Validado por Jur\u00EDdico).";
                     }else {
                         var mensaje = "Hace falta completar la siguiente informaci&oacuten en la <b>Cuenta<b>:<br> " + data;
                     }
