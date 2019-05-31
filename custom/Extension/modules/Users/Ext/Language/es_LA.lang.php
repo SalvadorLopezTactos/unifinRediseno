@@ -34,3 +34,6 @@ $mod_strings['LBL_DETAILVIEW_PANEL2'] = 'Contacto';
 $mod_strings['LBL_USER_INFORMATION'] = 'Datos Generales';
 $mod_strings['LBL_EDITVIEW_PANEL4'] = 'Perfil de Usuario';
 $mod_strings['LBL_DETAILVIEW_PANEL3'] = 'Perfil de Usuario';
+$mod_strings['LBL_TCT_VALIDADO_JURIDICO_CHK'] = 'Validado por Jurídico';
+$mod_strings['LBL_TCT_VALIDA_PROPIETARIO_REAL'] = 'Valida Propietario Real';
+$mod_strings['LBL_TCT_PROPIETARIO_REAL_CHK'] = 'Valida Propietario Real';

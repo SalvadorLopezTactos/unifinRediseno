@@ -28,6 +28,8 @@
         this.model.addValidationTask('fechaconstitutiva_c', _.bind(this.doValidateDateCons, this));
         //this.model.addValidationTask('check_formato_curp_c', _.bind(this.ValidaFormatoCURP, this));
         this.model.addValidationTask('estado_civil_persona', _.bind(this._doValidateEdoCivil, this));
+        this.model.addValidationTask('RequeridosPropietarioReal', _.bind(this.requeridosPropietarioReal, this));
+
 
         //this.model.on('change:tipo_registro_c', this._ShowDireccionesTipoRegistro, this);
         //this.model.on('change:estatus_c', this._ShowDireccionesTipoRegistro, this);
@@ -40,7 +42,7 @@
         //this.model.on('change:primernombre_c', this._doGenera_RFC_CURP, this);
         //this.model.on('change:apellidopaterno_c', this._doGenera_RFC_CURP, this);
         //this.model.on('change:apellidomaterno_c', this._doGenera_RFC_CURP, this);
-        //this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
+        this.model.addValidationTask('guardaProductosPLD', _.bind(this.saveProdPLD, this));
 
         //this.model.on('change:genero_c', this._doGeneraCURP, this);
         //this.model.on('change:pais_nacimiento_c', this._doGeneraCURP, this);
@@ -297,6 +299,9 @@
         $('#drawers li.tab.LBL_RECORDVIEW_PANEL1').hide();
         $('#drawers li.tab.LBL_RECORDVIEW_PANEL2').hide();
 
+        if (this.context.parent.attributes.module == "Accounts" && this.model.get('tipo_relacion_c').includes('Propietario Real')){
+            $('#drawers li.tab.LBL_RECORDVIEW_PANEL1').show();
+        }
         /*
         * F. Javier G. Solar 06/08/2018
         * Si se crea desde Oportunidades el arreglo se recorre una posicion
@@ -474,8 +479,8 @@
                         title: "Al menos un correo electr\u00F3nico o un tel\u00E9fono es requerido.",
                         autoClose: false
                     });
-                    errors['email'] = errors['email'] || {};
-                    errors['email'].required = true;
+                    errors['email_telefono'] = errors['email_telefono'] || {};
+                    errors['email_telefono'].required = true;
                     errors['account_telefonos'] = errors['account_telefonos'] || {};
                     errors['account_telefonos'].required = true;
                 }
@@ -909,7 +914,7 @@
       Validación en relaciones tipo persona: Referenciado Cliente/Proveedor
     */
     _doValidateEdoCivil: function (fields, errors, callback) {
-        if (this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor'))) {
+        if (this.model.get('tipo_registro_c') == 'Persona' && (!this.model.get('tipo_relacion_c').includes('Referencia Cliente') && !this.model.get('tipo_relacion_c').includes('Referencia Proveedor') && !this.model.get('tipo_relacion_c').includes('Propietario Real'))) {
             if ((this.model.get('estadocivil_c') == "" || this.model.get('estadocivil_c') == null) && this.model.get('tipodepersona_c') != 'Persona Moral') {
                 errors['estadocivil_c'] = errors['estadocivil_c'] || {};
                 errors['estadocivil_c'].required = true;
@@ -920,15 +925,43 @@
 
     valida_requeridos: function(fields, errors, callback) {
         var campos = "";
-        _.each(errors, function(value, key) {
-            _.each(this.model.fields, function(field) {
-                if(_.isEqual(field.name,key)) {
-                    if(field.vname) {
+        _.each(errors, function (value, key) {
+            _.each(this.model.fields, function (field) {
+                if (_.isEqual(field.name, key)) {
+                    if (field.vname) {
                         campos = campos + '<b>' + app.lang.get(field.vname, "Accounts") + '</b><br>';
                     }
-          		  }
-       	    }, this);
+                }
+            }, this);
         }, this);
+
+        if (this.model.get('tipo_relacion_c').includes('Propietario Real')){
+            if (errors.error1AP) {
+                campos = campos  + '<b>' + 'Pregunta 1 Arrendamiento Puro' + '</b><br>';
+            }
+            if (errors.error2AP){
+                campos = campos  + '<b>' + 'Pregunta 2 Arrendamiento Puro' + '</b><br>';
+            }
+            if (errors.error3FF){
+                campos = campos  + '<b>' + 'Pregunta 1 Factoraje Financiero' + '</b><br>';
+            }
+            if (errors.error4FF){
+                campos = campos  + '<b>' + 'Pregunta 2 Factoraje Financiero' + '</b><br>';
+            }
+            if (errors.error5CA){
+                campos = campos  + '<b>' + 'Pregunta 1 Crédito Automotriz' + '</b><br>';
+            }
+            if (errors.error6CA){
+                campos = campos  + '<b>' + 'Pregunta 2 Crédito Automotriz' + '</b><br>';
+            }
+            if(errors.account_direcciones){
+                campos =campos.replace("Direcciones","Dirección");
+            }
+            if (errors.account_telefonos){
+                campos= campos.replace("Telefonos","Teléfono");
+            }
+        }
+
         if(campos) {
             app.alert.show("Campos Requeridos", {
                 level: "error",
@@ -951,7 +984,7 @@
             'creditoSimple' : {
             }
         };
-        ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
+        // ProductosPLD.arrendamientoPuro.campo1 = $('.campo1txt-ap').val();
         ProductosPLD.arrendamientoPuro.campo2 = $('.campo2ddw-ap').select2('val');
         ProductosPLD.arrendamientoPuro.campo3 = $('.campo3rel-ap')[0]['innerText'];
         ProductosPLD.arrendamientoPuro.campo3_id = $('.campo3rel-ap').select2('val');
@@ -959,18 +992,18 @@
         ProductosPLD.arrendamientoPuro.campo5 = $('.campo5rel-ap')[0]['innerText'];
         ProductosPLD.arrendamientoPuro.campo5_id = $('.campo5rel-ap').select2('val');
         ProductosPLD.arrendamientoPuro.campo6 = $('.campo6ddw-ap').select2('val');
-        ProductosPLD.arrendamientoPuro.campo7 = $('.campo7ddw-ap').select2('val');
-        ProductosPLD.arrendamientoPuro.campo8 = $('.campo8txt-ap').val();
-        ProductosPLD.arrendamientoPuro.campo9 = $('.campo9ddw-ap').select2('val');
-        ProductosPLD.arrendamientoPuro.campo10 = $('.campo10txt-ap').val();
+        // ProductosPLD.arrendamientoPuro.campo7 = $('.campo7ddw-ap').select2('val');
+        // ProductosPLD.arrendamientoPuro.campo8 = $('.campo8txt-ap').val();
+        // ProductosPLD.arrendamientoPuro.campo9 = $('.campo9ddw-ap').select2('val');
+        // ProductosPLD.arrendamientoPuro.campo10 = $('.campo10txt-ap').val();
         ProductosPLD.arrendamientoPuro.campo11 = $('.campo11ddw-ap').select2('val');
-        ProductosPLD.arrendamientoPuro.campo13 = $('.campo13chk-ap')[0].checked;
+        //ProductosPLD.arrendamientoPuro.campo13 = $('.campo13chk-ap')[0].checked;
         ProductosPLD.arrendamientoPuro.campo14 = $('.campo14chk-ap')[0].checked;
         ProductosPLD.arrendamientoPuro.campo16 = $('.campo16ddw-ap').select2('val').toString();
         ProductosPLD.arrendamientoPuro.campo17 = $('.campo17txt-ap').val();
         ProductosPLD.arrendamientoPuro.campo25 = $('.campo25ddw-ap').select2('val');
         ProductosPLD.arrendamientoPuro.campo26 = $('.campo26txt-ap').val();
-        ProductosPLD.factorajeFinanciero.campo1 = $('.campo1txt-ff').val();
+        // ProductosPLD.factorajeFinanciero.campo1 = $('.campo1txt-ff').val();
         ProductosPLD.factorajeFinanciero.campo2 = $('.campo2ddw-ff').select2('val');
         ProductosPLD.factorajeFinanciero.campo3 = $('.campo3rel-ff').val();
         ProductosPLD.factorajeFinanciero.campo3_id = $('.campo3rel-ff').select2('val');
@@ -985,7 +1018,7 @@
         ProductosPLD.factorajeFinanciero.campo14 = $('.campo14chk-ff')[0].checked;
         ProductosPLD.factorajeFinanciero.campo24 = $('.campo24ddw-ff').select2('val');
         ProductosPLD.factorajeFinanciero.campo6 = $('.campo6ddw-ff').select2('val');
-        ProductosPLD.creditoAutomotriz.campo1 = $('.campo1txt-ca').val();
+        //  ProductosPLD.creditoAutomotriz.campo1 = $('.campo1txt-ca').val();
         ProductosPLD.creditoAutomotriz.campo2 = $('.campo2ddw-ca').select2('val');
         ProductosPLD.creditoAutomotriz.campo3 = $('.campo3rel-ca').val();
         ProductosPLD.creditoAutomotriz.campo3_id = $('.campo3rel-ca').select2('val');
@@ -993,7 +1026,7 @@
         ProductosPLD.creditoAutomotriz.campo5 = $('.campo5rel-ca').val();
         ProductosPLD.creditoAutomotriz.campo5_id = $('.campo5rel-ca').select2('val');
         ProductosPLD.creditoAutomotriz.campo6 = $('.campo6ddw-ca').select2('val');
-        ProductosPLD.creditoSimple.campo1 = $('.campo1txt-cs').val();
+        // ProductosPLD.creditoSimple.campo1 = $('.campo1txt-cs').val();
         ProductosPLD.creditoSimple.campo2 = $('.campo2ddw-cs').select2('val');
         ProductosPLD.creditoSimple.campo3 = $('.campo3rel-cs').val();
         ProductosPLD.creditoSimple.campo3_id = $('.campo3rel-cs').select2('val');
@@ -1102,4 +1135,118 @@
             }
             callback(null, fields, errors);
     },
+
+    requeridosPropietarioReal: function (fields, errors, callback) {
+        var reqpropreal = "";
+        var productos = App.user.attributes.productos_c;
+       if (this.model.get('tipodepersona_c')!="Persona Moral" && this.model.get('tipo_relacion_c').includes('Propietario Real')) {
+           if (this.model.get('primernombre_c') == "" || this.model.get('primernombre_c')== undefined) {
+               errors['primernombre_c'] = errors['primernombre_c'] || {};
+               errors['primernombre_c'].required = true;
+           }
+           if (this.model.get('apellidopaterno_c') == "" || this.model.get('apellidopaterno_c') == undefined) {
+               errors['apellidopaterno_c'] = errors['apellidopaterno_c'] || {};
+               errors['apellidopaterno_c'].required = true;
+           }
+           if (this.model.get('apellidomaterno_c') == "" || this.model.get('apellidomaterno_c') == undefined) {
+               errors['apellidomaterno_c'] = errors['apellidomaterno_c'] || {};
+               errors['apellidomaterno_c'].required = true;
+           }
+           if (this.model.get('genero_c') == "" || this.model.get('genero_c') == undefined) {
+               errors['genero_c'] = errors['genero_c'] || {};
+               errors['genero_c'].required = true;
+           }
+           if (this.model.get('fechadenacimiento_c') == "" || this.model.get('fechadenacimiento_c')== undefined) {
+               errors['fechadenacimiento_c'] = errors['fechadenacimiento_c'] || {};
+               errors['fechadenacimiento_c'].required = true;
+           }
+           if (this.model.get('pais_nacimiento_c') == "" || this.model.get('pais_nacimiento_c') == undefined) {
+               errors['pais_nacimiento_c'] = errors['pais_nacimiento_c'] || {};
+               errors['pais_nacimiento_c'].required = true;
+           }
+           if (this.model.get('estado_nacimiento_c') == "" || this.model.get('estado_nacimiento_c') == undefined) {
+               errors['estado_nacimiento_c'] = errors['estado_nacimiento_c'] || {};
+               errors['estado_nacimiento_c'].required = true;
+           }
+           if (this.model.get('nacionalidad_c') == "" || this.model.get('nacionalidad_c') == undefined || this.model.get('nacionalidad_c') == "0") {
+               errors['nacionalidad_c'] = errors['nacionalidad_c'] || {};
+               errors['nacionalidad_c'].required = true;
+           }
+           if (this.model.get('sectoreconomico_c') == "" || this.model.get('sectoreconomico_c') == undefined) {
+               errors['sectoreconomico_c'] = errors['sectoreconomico_c'] || {};
+               errors['sectoreconomico_c'].required = true;
+           }
+           if (this.model.get('tct_macro_sector_ddw_c')== "" || this.model.get('tct_macro_sector_ddw_c')== undefined){
+               errors['tct_macro_sector_ddw_c'] = errors['tct_macro_sector_ddw_c'] || {};
+               errors['tct_macro_sector_ddw_c'].required = true;
+           }
+           if (this.model.get('subsectoreconomico_c') == "" || this.model.get('subsectoreconomico_c') == undefined) {
+               errors['subsectoreconomico_c'] = errors['subsectoreconomico_c'] || {};
+               errors['subsectoreconomico_c'].required = true;
+           }
+           if (this.model.get('actividadeconomica_c') == "" || this.model.get('actividadeconomica_c') ==undefined) {
+               errors['actividadeconomica_c'] = errors['actividadeconomica_c'] || {};
+               errors['actividadeconomica_c'].required = true;
+           }
+           if ($('.existingTipotelefono').val() == "" || $('.existingTipotelefono').val() == undefined || $('.existingTipotelefono') == null) {
+               errors['account_telefonos'] = errors['account_telefonos'] || {};
+               errors['account_telefonos'].required = true;
+           }
+           if (this.model.get('account_direcciones') == "" || this.model.get('account_direcciones') == undefined) {
+               errors['account_direcciones'] = errors['account_direcciones'] || {};
+               errors['account_direcciones'].required = true;
+           }
+           if (productos.includes("1")) {
+               if ($('.campo2ddw-ap').select2('val') == "" || $('.campo2ddw-ap').select2('val') == null) {
+                   $('.campo2ddw-ap').find('.select2-choice').css('border-color','red');
+                   errors['error1AP'] = errors['Pregunta 1 Arrendamiento Puro'] || {};
+                   errors['error1AP'].required = true;
+               }
+               if ($('.campo4ddw-ap').select2('val') == "" || $('.campo4ddw-ap').select2('val') == null) {
+                   $('.campo4ddw-ap').find('.select2-choice').css('border-color','red');
+                   errors['error2AP'] = errors['Pregunta 2 Arrendamiento Puro'] || {};
+                   errors['error2AP'].required = true;
+               }
+           }
+           if (productos.includes("4")) {
+               if ($('.campo2ddw-ff').select2('val') == "" || $('.campo2ddw-ff').select2('val') == null) {
+                   $('.campo2ddw-ff').find('.select2-choice').css('border-color','red');
+                   errors['error3FF'] = errors['Pregunta 1 Factoraje Financiero'] || {};
+                   errors['error3FF'].required = true;
+               }
+               if ($('.campo4ddw-ff').select2('val') == "" || $('.campo4ddw-ff').select2('val') == null) {
+                   $('.campo4ddw-ff').find('.select2-choice').css('border-color','red');
+                   errors['error4FF'] = errors['Pregunta 2 Factoraje Financiero'] || {};
+                   errors['error4FF'].required = true;
+               }
+           }
+           if (productos.includes("3")) {
+               if ($('.campo2ddw-ca').select2('val') == "" || $('.campo2ddw-ca').select2('val') == null) {
+                   $('.campo2ddw-ca').find('.select2-choice').css('border-color','red');
+                   errors['error5CA'] = errors['Pregunta 1 Credito Automotriz'] || {};
+                   errors['error5CA'].required = true;
+               }
+               if ($('.campo4ddw-ca').select2('val') == "" || $('.campo4ddw-ca').select2('val') == null) {
+                   $('.campo4ddw-ca').find('.select2-choice').css('border-color','red');
+                   errors['error6CA'] = errors['Pregunta 2 Credito Automotriz'] || {};
+                   errors['error6CA'].required = true;
+               }
+           }
+
+       }if (this.model.get('tipodepersona_c')=="Persona Moral" && this.model.get('tipo_relacion_c').includes('Propietario Real')){
+           app.alert.show("Es persona Moral", {
+               level: "error",
+               title: "Una persona moral no puede ser Propietario Real",
+               autoClose: false
+           });
+           errors['errorcuentamoral'] = errors['errorcuentamoral'] || {};
+           errors['errorcuentamoral'].required = true;
+       }
+        callback(null, fields, errors);
+
+    },
+
+
+
+
 })

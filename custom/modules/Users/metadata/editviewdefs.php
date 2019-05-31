@@ -252,6 +252,15 @@ array (
             'label' => 'LBL_AUT_CARATULARIESGO',
           ),
         ),
+        3 => 
+        array (
+          0 => 
+          array (
+            'name' => 'tct_propietario_real_chk_c',
+            'label' => 'LBL_TCT_PROPIETARIO_REAL_CHK',
+          ),
+          1 => '',
+        ),
       ),
     ),
   ),

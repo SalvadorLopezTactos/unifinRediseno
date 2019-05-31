@@ -196,8 +196,8 @@ class ResumenClienteAPI extends SugarApi
             $linea_disp_credito_aut = 0;
 
             //Fecha de vencimiento
-            $vencimiento_leasing = date("Y-m-d");
-            $vencimiento_factoring = date("Y-m-d");
+            $vencimiento_leasing = '';//date("Y-m-d");
+            $vencimiento_factoring ='';//date("Y-m-d");
             //$vencimiento_cauto = date("Y-m-d");
             $vencimiento_cauto = "";
 
@@ -223,10 +223,12 @@ class ResumenClienteAPI extends SugarApi
                     if(!empty($opps->vigencialinea_c)){
                         //Establece fecha de vencimiento
                         $dateVL = $opps->vigencialinea_c;
+                        $GLOBALS['log']->fatal('Validación $dateVL');
+                        $GLOBALS['log']->fatal($dateVL);
                         $timedateVL = Date($dateVL);
 
                         //Compara fechas
-                        if ($dateVL < $vencimiento_leasing || empty($vencimiento_leasing) ) {
+                        if ($dateVL > $vencimiento_leasing || empty($vencimiento_leasing) ) {
                           $vencimiento_leasing = $dateVL;
                         }
 
@@ -259,7 +261,7 @@ class ResumenClienteAPI extends SugarApi
                         //$timedateVL = Date($dateVL);
 
                         //Compara fechas
-                        if ($dateVF < $vencimiento_factoring || empty($vencimiento_factoring) ) {
+                        if ($dateVF > $vencimiento_factoring || empty($vencimiento_factoring) ) {
                           $vencimiento_factoring = $dateVF;
                         }
 

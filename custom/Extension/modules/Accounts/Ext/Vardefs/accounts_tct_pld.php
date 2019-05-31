@@ -13,4 +13,5 @@ $dictionary['Account']['fields']['accounts_tct_pld'] = array (
     'source' => 'non-db',
     'dbType' => 'non-db',
     'studio' => 'visible',
+    'vname' => 'LBL_ACCOUNTS_TCT_PLD',
 );

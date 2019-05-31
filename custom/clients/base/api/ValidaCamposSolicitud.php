@@ -55,8 +55,7 @@ class ValidaCamposSolicitud extends SugarApi
             $req_pm .= ",rfc_c,fechaconstitutiva_c," .
                 "pais_nacimiento_c,estado_nacimiento_c," .
                 "zonageografica_c,ventas_anuales_c," .
-                "potencial_cuenta_c,activo_fijo_c," .
-                "tct_persona1_c";
+                "potencial_cuenta_c,activo_fijo_c";
 
             $req_pf_y_pfae .= ",rfc_c,fechadenacimiento_c," .
                 "pais_nacimiento_c,estado_nacimiento_c,zonageografica_c," .
@@ -70,7 +69,6 @@ class ValidaCamposSolicitud extends SugarApi
 
         $beanPersona = BeanFactory::getBean("Accounts", $id_cuenta);
         $field_defs['Accounts'] = $beanPersona->getFieldDefinitions();
-
 
         if ($beanPersona->tipodepersona_c == 'Persona Moral') {
             $array_campos = explode(',', $req_pm);
@@ -114,7 +112,6 @@ class ValidaCamposSolicitud extends SugarApi
 
         }
 
-
         $beanPersona->load_relationship('accounts_dire_direccion_1');
         $relatedBeansDir = $beanPersona->accounts_dire_direccion_1->getBeans();
         $direccion = count($relatedBeansDir);
@@ -129,10 +126,25 @@ class ValidaCamposSolicitud extends SugarApi
             array_push($array_errores, 'Teléfono o Email');
         }
 
+        if ($option == '2' && $beanPersona->tipodepersona_c == 'Persona Moral') {
+            $beanPersona->load_relationship('rel_relaciones_accounts_1');
+            $relatedBeansRel = $beanPersona->rel_relaciones_accounts_1->getBeans();
+            $relaciones = 0;
 
+            foreach ($relatedBeansRel as $clave ) {
+               $resultado= strpos ($clave->relaciones_activas , "Propietario Real");
+                if ($resultado>=0){
+                    $relaciones++;
+                }
+            }
+            if ($relaciones==0){
+                array_push($array_errores, 'Propietario Real');
+            }
+        }
         if (count($array_errores) > 0) {
             $strResult = implode('<br>', $array_errores);
             $strResult = "<b>" . $strResult . "</b>";
+
             return $strResult;
         } else {
             return "";
