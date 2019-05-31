@@ -56,7 +56,12 @@ SQL;
                 $total_rows .= " AND name LIKE '%{$filtroCliente}%' ";
             }
             $totalResult = $db->query($total_rows);
+
             $response['total'] = $totalResult->num_rows;
+            while($row = $db->fetchByAssoc($totalResult))
+            {
+                $response['full_cuentas'][] = $row['id'];
+            }
 
             $query = <<<SQL
 SELECT id, name, tipodepersona_c, tipo_registro_c, rfc_c, idcliente_c FROM accounts
