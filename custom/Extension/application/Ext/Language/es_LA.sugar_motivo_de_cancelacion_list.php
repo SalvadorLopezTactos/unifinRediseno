@@ -1,14 +1,18 @@
 <?php
- // created: 2018-08-02 17:41:27
+ // created: 2019-06-03 12:20:53
 
 $app_list_strings['motivo_de_cancelacion_list']=array (
   '' => '',
   'Precio Condiciones' => 'Precio / condiciones',
-  'Rechazado por Credito' => 'Rechazado por crédito',
   'Competencia' => 'Competencia',
-  'No tenemos el producto que requiere' => 'No tenemos el producto que requiere',
-  'Pago con Recursos Propios' => 'Pagó con recursos propios',
+  'Rechazado por Credito' => 'Rechazado por crédito',
+  'Decision Interna UNIFIN' => 'Decisión Interna UNIFIN',
+  'Decision del cliente' => 'Decisión del cliente',
+  'Causas atribuibles al cliente' => 'Causas atribuibles al cliente',
   'Activos no Financiables' => 'Activos no financiables',
-  'El Cliente Decide no Comprar el Activo' => 'El cliente decide no comprar el activo',
+  'Duplicado' => 'Duplicado',
+  'Otro' => 'Otro',
   'Mes posterior' => 'Mes posterior',
+  'Cliente no interesado' => 'Cliente no interesado',
+  'No viable' => 'No viable',
 );
