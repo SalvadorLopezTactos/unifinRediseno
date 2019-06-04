@@ -1,5 +1,5 @@
 <?php
- // created: 2018-01-10 14:12:57
+ // created: 2019-06-04 01:16:52
 
 $app_list_strings['objetivo_list']=array (
   '' => '',
@@ -14,4 +14,5 @@ $app_list_strings['objetivo_list']=array (
   9 => 'OTRO',
   11 => 'SEGURO',
   12 => 'CIERRE',
+  13 => 'NEGOCIACIÓN',
 );

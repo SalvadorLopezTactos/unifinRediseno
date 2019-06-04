@@ -1,5 +1,5 @@
 <?php
- // created: 2019-05-21 17:23:14
+ // created: 2019-06-04 01:10:17
 
 $app_list_strings['resultado_list']=array (
   '' => '',
@@ -22,4 +22,6 @@ $app_list_strings['resultado_list']=array (
   17 => 'Cita con persona no clave (Tomador de decisiones)',
   18 => 'No viable',
   20 => 'Se procede a generar expediente',
+  21 => 'No Interesado. Cita Forzada',
+  22 => 'No se pudo contactar al Prospecto para confirmar cita',
 );
