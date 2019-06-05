@@ -426,10 +426,12 @@
 
     marcarCasillas: function () {
         console.log("seleccionarTodo");
-        if($('input[id="selectAll"]').attr('checked')){
-            $('input[type="checkbox"]').attr('checked', true);
+        //if($('input[id="selectAll"]').attr('checked')){
+        if($('#selectAll').is(':checked')){
+            //$('input[type="checkbox"]').attr('checked', true);
+            $('input[type="checkbox').prop('checked', true);
         }else{
-            $('input[type="checkbox"]').attr('checked', false);
+            $('input[type="checkbox').prop('checked', false);
         }
     },
 
