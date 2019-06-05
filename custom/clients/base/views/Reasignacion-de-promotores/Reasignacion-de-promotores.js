@@ -66,12 +66,13 @@
         }else {
             this.flagSeleccionados=0;
         }
-       
         var btnState = $(e.target).attr("btnState");
         if(btnState == "Off"){
             $(e.target).attr("btnState", "On");
+            btnState='On';
         }else{
             $(e.target).attr("btnState", "Off");
+            btnState='Off';
         }
 
         $('.selected').each(function (index, value) {
@@ -187,9 +188,11 @@
 
                     this.total = data.total;
                     this.total_cuentas = data.total_cuentas;
+                    this.full_cuentas=data.full_cuentas;
                     this.render();
 
                     if(this.flagSeleccionados==1){
+                        $('#btn_STodo').attr('btnstate','On');
                         $('.selected').each(function (index, value) {
                             $(value).attr("checked", true);
                         });
@@ -279,12 +282,29 @@
             this.seleccionados = seleccionadosCleaned;
         }
 
+        //Validación para controlar checks seleccionados en caso de que se hayan seleccionado todos los registros
+        //(Click en Selecionar Todo)
+        if(this.full_cuentas.length >0 && this.full_cuentas != undefined){
+            var idAccount=$(e.target).val();
+            if(this.full_cuentas.includes(idAccount)){
+                //Validar que el check ha sido seleccionado o no, en caso de que no se haya "activado", se elimina del arreglo de full_cuentas
+                if($(e.target).attr("checked")!="checked"){
+                    var position=this.full_cuentas.indexOf(idAccount)
+                    this.full_cuentas.splice(position,1);
+                }
+            }
+
+        }
+
         $("#crossSeleccionados").val(JSON.stringify(this.seleccionados));
     },
 
     reAsignarCuentas: function(){
         var reAssignarA = this.model.get('asignar_a_promotor_id');
         var promoActual = this.model.get('users_accounts_1users_ida');
+        if(this.flagSeleccionados==1){
+            this.seleccionados=this.full_cuentas;
+        }
         if(!_.isEmpty(reAssignarA)) {
             var parametros = this.seleccionados;
             var producto_seleccionado = $("#Productos").val();
@@ -293,7 +313,7 @@
                     'seleccionados': parametros,
                     'reAssignado': reAssignarA,
                     'producto_seleccionado': producto_seleccionado,
-                    'promoActual': promoActual,  
+                    'promoActual': promoActual,
                 };
                 $('#processing').show();
                 var dnbProfileUrl = app.api.buildURL("reAsignarCuentas", '', {}, {});
