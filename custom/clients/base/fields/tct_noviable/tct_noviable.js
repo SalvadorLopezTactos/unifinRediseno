@@ -3,6 +3,8 @@
     razones_ddw_list: null,
     fuera_de_perfil_ddw_list:null,
     no_producto_requiere_list: null,
+    razones_cf_list: null,
+    tct_razon_ni_l_ddw_c_list: null,
 
             events: {
                 'keydown .campo10nvl': 'PuroTexto',
@@ -42,6 +44,16 @@
                     "quienca":"",
                     "porqueca":"",
                     "noproducca":"",
+                    //nuevos campos
+                    "razoncfl":"",
+                    "razonnil":"",
+                    "queprodl":"",
+                    "razoncff":"",
+                    "razonnif":"",
+                    "queprodf":"",
+                    "razoncfca":"",
+                    "razonnica":"",
+                    "queprodca":"",
                     "PromotorLeasing":"",
                     "PromotorFactoraje":"",
                     "PromotorCreditA":"",
@@ -83,6 +95,17 @@
                     lnv.leadNoViable.quienca = data.records[0].tct_competencia_quien_ca_txf_c;
                     lnv.leadNoViable.porqueca = data.records[0].tct_competencia_porque_ca_txf_c;
                     lnv.leadNoViable.noproducca = data.records[0].no_producto_requiere_ca_ddw_c;
+                    //Nuevos Campos
+                    lnv.leadNoViable.razoncfl= data.records[0].tct_razon_cf_l_ddw_c;
+                    lnv.leadNoViable.razonnil= data.records[0].tct_razon_ni_l_ddw_c;
+                    lnv.leadNoViable.queprodl= data.records[0].tct_que_producto_l_txf_c;
+                    lnv.leadNoViable.razoncff= data.records[0].tct_razon_cf_f_ddw_c;
+                    lnv.leadNoViable.razonnif= data.records[0].tct_razon_ni_f_ddw_c;
+                    lnv.leadNoViable.queprodf= data.records[0].tct_que_producto_f_txf_c;
+                    lnv.leadNoViable.razoncfca= data.records[0].tct_razon_cf_ca_ddw_c;
+                    lnv.leadNoViable.razonnica= data.records[0].tct_razon_ni_ca_ddw_c;
+                    lnv.leadNoViable.queprodca= data.records[0].tct_que_producto_ca_txf_c;
+
                     lnv.leadNoViable.PromotorLeasing= data.records[0].user_id_c;
                     lnv.leadNoViable.PromotorFactoraje= data.records[0].user_id1_c;
                     lnv.leadNoViable.PromotorCreditA= data.records[0].user_id2_c;
@@ -130,14 +153,22 @@
             $('.campo4nvl').change(function(evt) {
                 lnv.Campo7();
             });
-
+            $('.campo16nvl').change(function(evt) {
+                lnv.Campo7();
+            });
             $('.campo5nvf').change(function(evt) {
                 lnv.Campo8();
             });
-
+            $('.campo17nvf').change(function(evt) {
+                lnv.Campo8();
+            });
             $('.campo6nvca').change(function(evt) {
                 lnv.Campo9();
             });
+            $('.campo18nvca').change(function(evt) {
+                lnv.Campo9();
+            });
+
 
             //Pregunta el tipo de producto del usuario para poder editar campo de Lead no Viable
             $('[data-field="campo1chk"]').attr('style', 'pointer-events:none;');
@@ -163,6 +194,8 @@
             lnv.razones_ddw_list = app.lang.getAppListStrings('razones_ddw_list');
             lnv.fuera_de_perfil_ddw_list = app.lang.getAppListStrings('fuera_de_perfil_ddw_list');
             lnv.no_producto_requiere_list = app.lang.getAppListStrings('no_producto_requiere_list');
+            lnv.razones_cf_list = app.lang.getAppListStrings('razones_cf_list');
+            lnv.tct_razon_ni_l_ddw_c_list = app.lang.getAppListStrings('tct_razon_ni_l_ddw_c_list');
 
         },
 
@@ -172,6 +205,9 @@
                     $('.campo10').hide();
                     $('.campo13').hide();
                     $('.campo16').hide();
+                    $('.campo19').hide();
+                    $('.campo22').hide();
+                    $('.campo25').hide();
                 if ($('.campo1chk')[0].checked) {
                     $('.campo4').show();
                 }
@@ -182,6 +218,9 @@
                     $('.campo11').hide();
                     $('.campo14').hide();
                     $('.campo17').hide();
+                    $('.campo20').hide();
+                    $('.campo23').hide();
+                    $('.campo26').hide();
                 if ($('.campo2chk')[0].checked) {
                     $('.campo5').show();
                 }
@@ -192,6 +231,9 @@
                     $('.campo12').hide();
                     $('.campo15').hide();
                     $('.campo18').hide();
+                    $('.campo21').hide();
+                    $('.campo24').hide();
+                    $('.campo27').hide();
                 if ($('.campo3chk')[0].checked) {
                     $('.campo6').show();
                 }
@@ -215,6 +257,22 @@
                 } else {
                     $('.campo16').hide();
                 }
+                if (($('.campo4nvl').select2('val') == "Condiciones Financieras" || $('.campo4nvl option:selected').text()=="Condiciones Financieras" ||$('.campo4nvl')[0].innerText.trim()== "Condiciones Financieras") && $('.campo1chk')[0].checked) {
+                    $('.campo19').show();
+                } else {
+                    $('.campo19').hide();
+                }
+                if (($('.campo4nvl').select2('val') == "No tenemos el producto que requiere" || $('.campo4nvl option:selected').text()=="No tenemos el producto que requiere" ||$('.campo4nvl')[0].innerText.trim()== "No tenemos el producto que requiere") && ($('.campo16nvl').select2('val') == "Otro" || $('.campo16nvl option:selected').text()=="Otro" ||$('.campo16nvl')[0].innerText.trim()== "Otro") && $('.campo1chk')[0].checked) {
+                    $('.campo22').show();
+                } else {
+                    $('.campo22').hide();
+                    $('.campo22nvl').val("");
+                }
+                if (($('.campo4nvl').select2('val') == "No se encuentra interesado" || $('.campo4nvl option:selected').text()=="No se encuentra interesado" ||$('.campo4nvl')[0].innerText.trim()== "No se encuentra interesado") && $('.campo1chk')[0].checked) {
+                    $('.campo25').show();
+                } else {
+                    $('.campo25').hide();
+                }
             },
             Campo8: function () {
                 if (($('.campo5nvf').select2('val') == "Fuera de Perfil" || $('.campo5nvf option:selected').text()=="Fuera de Perfil" ||$('.campo5nvf')[0].innerText.trim()== "Fuera de Perfil") && $('.campo2chk')[0].checked) {
@@ -234,6 +292,22 @@
                     $('.campo17').show();
                 } else {
                     $('.campo17').hide();
+                }
+                if (($('.campo5nvf').select2('val') == "Condiciones Financieras" || $('.campo5nvf option:selected').text()=="Condiciones Financieras" ||$('.campo5nvf')[0].innerText.trim()== "Condiciones Financieras") && $('.campo2chk')[0].checked) {
+                    $('.campo20').show();
+                } else {
+                    $('.campo20').hide();
+                }
+                if (($('.campo5nvf').select2('val') == "No tenemos el producto que requiere" || $('.campo5nvf option:selected').text()=="No tenemos el producto que requiere" ||  $('.campo5nvf')[0].innerText.trim()== "No tenemos el producto que requiere") &&($('.campo17nvf').select2('val') == "Otro" || $('.campo17nvf option:selected').text()=="Otro" ||$('.campo17nvf')[0].innerText.trim()== "Otro") && $('.campo2chk')[0].checked) {
+                    $('.campo23').show();
+                } else {
+                    $('.campo23nvf').val("");
+                    $('.campo23').hide();
+                }
+                if (($('.campo5nvf').select2('val') == "No se encuentra interesado" || $('.campo5nvf option:selected').text()=="No se encuentra interesado" ||$('.campo5nvf')[0].innerText.trim()== "No se encuentra interesado") && $('.campo2chk')[0].checked) {
+                    $('.campo26').show();
+                } else {
+                    $('.campo26').hide();
                 }
             },
             Campo9: function () {
@@ -255,7 +329,25 @@
                 } else {
                     $('.campo18').hide();
                 }
+                if (($('.campo6nvca').select2('val') == "Condiciones Financieras" || $('.campo6nvca option:selected').text()=="Condiciones Financieras" ||$('.campo6nvca')[0].innerText.trim()== "Condiciones Financieras") && $('.campo3chk')[0].checked) {
+                    $('.campo21').show();
+                } else {
+                    $('.campo21').hide();
+                }
+                if (($('.campo6nvca').select2('val') == "No tenemos el producto que requiere" ||  $('.campo6nvca option:selected').text()=="No tenemos el producto que requiere" ||  $('.campo6nvca')[0].innerText.trim()== "No tenemos el producto que requiere") &&($('.campo18nvca').select2('val') == "Otro" || $('.campo18nvca option:selected').text()=="Otro" ||$('.campo18nvca')[0].innerText.trim()== "Otro") && $('.campo3chk')[0].checked) {
+                    $('.campo24').show();
+                } else {
+                    $('.campo24nvca').val("");
+                    $('.campo24').hide();
+                }
+                if (($('.campo6nvca').select2('val') == "No se encuentra interesado" || $('.campo6nvca option:selected').text()=="No se encuentra interesado" ||$('.campo6nvca')[0].innerText.trim()== "No se encuentra interesado") && $('.campo3chk')[0].checked) {
+                    $('.campo27').show();
+                } else {
+                    $('.campo27').hide();
+                }
+
             },
+
             //Funcion para habilitar la funcionalidad de los checks de cada producto dependiendo del producto que tenga el usuario logueado.
             nvproductos: function (){
                 var productos = App.user.attributes.productos_c;
@@ -280,6 +372,9 @@
                         lnv.leadNoViable.quienl = $('.campo10nvl').val().trim();
                         lnv.leadNoViable.porquel = $('.campo13nvl').val().trim();
                         lnv.leadNoViable.noproducl = $('.campo16nvl').select2('val');
+                        lnv.leadNoViable.razoncfl = $('.campo19nvl').select2('val');
+                        lnv.leadNoViable.queprodl= $('.campo22nvl').val().trim();
+                        lnv.leadNoViable.razonnil = $('.campo25nvl').select2('val');
                     }
                     //Mapea los campos del modulo No viable con producto FACTORAJE en el objeto lnv.leadNoViable
                     if ( $('.campo2chk')[0].checked== true && typeof $('.campo5nvf').select2('val')=="string"){
@@ -289,6 +384,9 @@
                         lnv.leadNoViable.quienf = $('.campo11nvf').val().trim();
                         lnv.leadNoViable.porquef = $('.campo14nvf').val().trim();
                         lnv.leadNoViable.noproducf = $('.campo17nvf').select2('val');
+                        lnv.leadNoViable.razoncff = $('.campo20nvf').select2('val');
+                        lnv.leadNoViable.queprodf = $('.campo23nvf').val().trim();
+                        lnv.leadNoViable.razonnif= $('.campo26nvf').select2('val');
                     }
                     //Mapea los campos del modulo No viable con producto CREDITO AUTOMOTRIZ en el objeto lnv.leadNoViable
                     if($('.campo3chk')[0].checked== true && typeof $('.campo6nvca').select2('val')=="string"){
@@ -298,6 +396,9 @@
                         lnv.leadNoViable.quienca = $('.campo12nvca').val().trim();
                         lnv.leadNoViable.porqueca = $('.campo15nvca').val().trim();
                         lnv.leadNoViable.noproducca = $('.campo18nvca').select2('val');
+                        lnv.leadNoViable.razoncfca = $('.campo21nvca').select2('val');
+                        lnv.leadNoViable.queprodca= $('.campo24nvca').val().trim();
+                        lnv.leadNoViable.razonnica= $('.campo27nvca').select2('val');
                     }
                     //Establece el objeto lnv.leadNoViable para guardar
                     this.model.set('tct_noviable',  lnv.leadNoViable);
@@ -314,6 +415,9 @@
                   $('.campo10nvl').prop("disabled", true);
                   $('.campo13nvl').prop("disabled", true);
                   $('.campo16nvl').prop("disabled", true);
+                  $('.campo19nvl').prop("disabled",true);
+                  $('.campo22nvl').prop("disabled",true);
+                  $('.campo25nvl').prop("disabled", true);
               }
                if($('.campo2chk')[0].checked){
                    //Campos sin editar Factoraje
@@ -323,6 +427,9 @@
                    $('.campo11nvf').prop("disabled", true);
                    $('.campo14nvf').prop("disabled", true);
                    $('.campo17nvf').prop("disabled", true);
+                   $('.campo20nvf').prop("disabled", true);
+                   $('.campo23nvf').prop("disabled", true);
+                   $('.campo26nvf').prop("disabled", true);
                }
                if ($('.campo3chk')[0].checked){
                    //Campos sin editar Credito Automotriz
@@ -332,6 +439,9 @@
                    $('.campo12nvca').prop("disabled", true);
                    $('.campo15nvca').prop("disabled", true);
                    $('.campo18nvca').prop("disabled", true);
+                   $('.campo21nvca').prop("disabled", true);
+                   $('.campo24nvca').prop("disabled", true);
+                   $('.campo27nvca').prop("disabled", true);
               }
 
             },

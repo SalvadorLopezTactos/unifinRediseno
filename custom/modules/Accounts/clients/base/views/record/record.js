@@ -3377,6 +3377,10 @@
                     $('.campo16nvl').find('.select2-choice').css('border-color', 'red');
                     faltantesleasnv +=1;
                 }
+                if (($('.campo4nvl').select2('val') == "No tenemos el producto que requiere" || $('.campo4nvl option:selected').text()=="No tenemos el producto que requiere" ||$('.campo4nvl')[0].innerText.trim()== "No tenemos el producto que requiere") && ($('.campo16nvl').select2('val') == "Otro" || $('.campo16nvl option:selected').text()=="Otro" ||$('.campo16nvl')[0].innerText.trim()== "Otro") && $('.campo1chk')[0].checked && $('.campo22nvl').val().trim() == "") {
+                  $('.campo22nvl').css('border-color', 'red');
+                    faltantesleasnv +=1;
+                }
                 if (faltantesleasnv>0){
                     app.alert.show("Faltantes no viable Leasing", {
                         level: "error",
@@ -3420,6 +3424,10 @@
                     $('.campo17nvf').find('.select2-choice').css('border-color', 'red');
                     faltantesfactnv +=1;
                 }
+                if (($('.campo5nvf').select2('val') == "No tenemos el producto que requiere" || $('.campo5nvf option:selected').text()=="No tenemos el producto que requiere" ||  $('.campo5nvf')[0].innerText.trim()== "No tenemos el producto que requiere") &&($('.campo17nvf').select2('val') == "Otro" || $('.campo17nvf option:selected').text()=="Otro" ||$('.campo17nvf')[0].innerText.trim()== "Otro") && $('.campo2chk')[0].checked && $('.campo23nvf').val().trim() == "") {
+                    $('.campo23nvf').css('border-color', 'red');
+                    faltantesfactnv += 1;
+                }
                 if (faltantesfactnv>0){
                     app.alert.show("Faltantes no viable Factoraje", {
                         level: "error",
@@ -3461,6 +3469,10 @@
                 }
                 if ($('.campo3chk')[0].checked ==true && $('.campo6nvca').select2('val') == "No tenemos el producto que requiere" && $('.campo18nvca').select2('val')==""){
                     $('.campo18nvca').find('.select2-choice').css('border-color', 'red');
+                    faltantescanv +=1;
+                }
+                if (($('.campo6nvca').select2('val') == "No tenemos el producto que requiere" ||  $('.campo6nvca option:selected').text()=="No tenemos el producto que requiere" ||  $('.campo6nvca')[0].innerText.trim()== "No tenemos el producto que requiere") &&($('.campo18nvca').select2('val') == "Otro" || $('.campo18nvca option:selected').text()=="Otro" ||$('.campo18nvca')[0].innerText.trim()== "Otro") && $('.campo3chk')[0].checked && $('.campo24nvca').val().trim() == "") {
+                    $('.campo24nvca').css('border-color', 'red');
                     faltantescanv +=1;
                 }
                 if (faltantescanv>0){
