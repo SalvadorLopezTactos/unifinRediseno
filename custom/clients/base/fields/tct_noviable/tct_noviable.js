@@ -244,6 +244,7 @@
                     $('.campo7').show();
                 } else {
                     $('.campo7').hide();
+                    $('.campo7nvl').select2('val',"");
                 }
                 if (($('.campo4nvl').select2('val') == "Competencia" || $('.campo4nvl option:selected').text()=="Competencia" || $('.campo4nvl')[0].innerText.trim()== "Competencia") && $('.campo1chk')[0].checked) {
                     $('.campo10').show();
@@ -251,16 +252,20 @@
                 } else {
                     $('.campo10').hide();
                     $('.campo13').hide();
+                    $('.campo10nvl').val("");
+                    $('.campo13nvl').val("");
                 }
                 if (($('.campo4nvl').select2('val') == "No tenemos el producto que requiere" || $('.campo4nvl option:selected').text()=="No tenemos el producto que requiere" ||$('.campo4nvl')[0].innerText.trim()== "No tenemos el producto que requiere") && $('.campo1chk')[0].checked) {
                     $('.campo16').show();
                 } else {
                     $('.campo16').hide();
+                    $('.campo16nvl').select2('val',"");
                 }
                 if (($('.campo4nvl').select2('val') == "Condiciones Financieras" || $('.campo4nvl option:selected').text()=="Condiciones Financieras" ||$('.campo4nvl')[0].innerText.trim()== "Condiciones Financieras") && $('.campo1chk')[0].checked) {
                     $('.campo19').show();
                 } else {
                     $('.campo19').hide();
+                    $('.campo19nvl').select2('val',"");
                 }
                 if (($('.campo4nvl').select2('val') == "No tenemos el producto que requiere" || $('.campo4nvl option:selected').text()=="No tenemos el producto que requiere" ||$('.campo4nvl')[0].innerText.trim()== "No tenemos el producto que requiere") && ($('.campo16nvl').select2('val') == "Otro" || $('.campo16nvl option:selected').text()=="Otro" ||$('.campo16nvl')[0].innerText.trim()== "Otro") && $('.campo1chk')[0].checked) {
                     $('.campo22').show();
@@ -272,6 +277,7 @@
                     $('.campo25').show();
                 } else {
                     $('.campo25').hide();
+                    $('.campo25nvl').select2('val',"");
                 }
             },
             Campo8: function () {
@@ -279,6 +285,7 @@
                     $('.campo8').show();
                 } else {
                     $('.campo8').hide();
+                    $('.campo8nvf').select2('val',"");
                 }
                 if (($('.campo5nvf').select2('val') == "Competencia" || $('.campo5nvf option:selected').text()=="Competencia" || $('.campo5nvf')[0].innerText.trim()== "Competencia") && $('.campo2chk')[0].checked) {
                     $('.campo11').show();
@@ -286,17 +293,21 @@
                 } else {
                     $('.campo11').hide();
                     $('.campo14').hide();
+                    $('.campo11nvf').val("");
+                    $('.campo14nvf').val("");
                 }
                 if (($('.campo5nvf').select2('val') == "No tenemos el producto que requiere" || $('.campo5nvf option:selected').text()=="No tenemos el producto que requiere" ||  $('.campo5nvf')[0].innerText.trim()== "No tenemos el producto que requiere") &&
                     $('.campo2chk')[0].checked) {
                     $('.campo17').show();
                 } else {
                     $('.campo17').hide();
+                    $('.campo17nvf').select2('val',"");
                 }
                 if (($('.campo5nvf').select2('val') == "Condiciones Financieras" || $('.campo5nvf option:selected').text()=="Condiciones Financieras" ||$('.campo5nvf')[0].innerText.trim()== "Condiciones Financieras") && $('.campo2chk')[0].checked) {
                     $('.campo20').show();
                 } else {
                     $('.campo20').hide();
+                    $('.campo20nvf').select2('val',"");
                 }
                 if (($('.campo5nvf').select2('val') == "No tenemos el producto que requiere" || $('.campo5nvf option:selected').text()=="No tenemos el producto que requiere" ||  $('.campo5nvf')[0].innerText.trim()== "No tenemos el producto que requiere") &&($('.campo17nvf').select2('val') == "Otro" || $('.campo17nvf option:selected').text()=="Otro" ||$('.campo17nvf')[0].innerText.trim()== "Otro") && $('.campo2chk')[0].checked) {
                     $('.campo23').show();
@@ -308,6 +319,7 @@
                     $('.campo26').show();
                 } else {
                     $('.campo26').hide();
+                    $('.campo26nvf').select2('val',"");
                 }
             },
             Campo9: function () {
@@ -315,6 +327,7 @@
                     $('.campo9').show();
                 } else {
                     $('.campo9').hide();
+                    $('.campo9nvca').select2('val',"");
                 }
                 if (($('.campo6nvca').select2('val') == "Competencia" ||  $('.campo6nvca option:selected').text()=="Competencia" || $('.campo6nvca')[0].innerText.trim()== "Competencia") && $('.campo3chk')[0].checked) {
                     $('.campo12').show();
@@ -322,17 +335,21 @@
                 } else {
                     $('.campo12').hide();
                     $('.campo15').hide();
+                    $('.campo12nvca').val("");
+                    $('.campo15nvca').val("");
                 }
                 if (($('.campo6nvca').select2('val') == "No tenemos el producto que requiere" ||  $('.campo6nvca option:selected').text()=="No tenemos el producto que requiere" ||  $('.campo6nvca')[0].innerText.trim()== "No tenemos el producto que requiere")  &&
                     $('.campo3chk')[0].checked) {
                     $('.campo18').show();
                 } else {
                     $('.campo18').hide();
+                    $('.campo18nvca').select2('val',"");
                 }
                 if (($('.campo6nvca').select2('val') == "Condiciones Financieras" || $('.campo6nvca option:selected').text()=="Condiciones Financieras" ||$('.campo6nvca')[0].innerText.trim()== "Condiciones Financieras") && $('.campo3chk')[0].checked) {
                     $('.campo21').show();
                 } else {
                     $('.campo21').hide();
+                    $('.campo21nvca').select2('val',"");
                 }
                 if (($('.campo6nvca').select2('val') == "No tenemos el producto que requiere" ||  $('.campo6nvca option:selected').text()=="No tenemos el producto que requiere" ||  $('.campo6nvca')[0].innerText.trim()== "No tenemos el producto que requiere") &&($('.campo18nvca').select2('val') == "Otro" || $('.campo18nvca option:selected').text()=="Otro" ||$('.campo18nvca')[0].innerText.trim()== "Otro") && $('.campo3chk')[0].checked) {
                     $('.campo24').show();
@@ -344,6 +361,7 @@
                     $('.campo27').show();
                 } else {
                     $('.campo27').hide();
+                    $('.campo27nvca').select2('val',"");
                 }
 
             },

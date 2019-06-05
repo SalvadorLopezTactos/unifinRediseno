@@ -9,3 +9,4 @@ $mod_strings['LBL_TCT_RAZON_NI_CA_DDW_C'] = 'Razón No se encuentra interesado';
 $mod_strings['LBL_TCT_QUE_PRODUCTO_L_TXF_C'] = '¿Qué producto?';
 $mod_strings['LBL_TCT_QUE_PRODUCTO_F_TXF_C'] = '¿Qué producto?';
 $mod_strings['LBL_TCT_QUE_PRODUCTO_CA_TXF_C'] = '¿Qué producto?';
+$mod_strings['LBL_TCT_COMPETENCIA_PORQUE_CA_TXF_C'] = '¿Por qué?';
