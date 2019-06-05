@@ -383,6 +383,26 @@ SQL;
             }
         }
 
+        public function setEtapaSubetapa($bean = null, $event = null, $args = null){
+
+            global $app_list_strings;
+
+            $etapa="";
+            $subetapa="";
+            if (isset($app_list_strings['tct_etapa_ddw_c_list'])){
+
+                $etapa = $app_list_strings['tct_etapa_ddw_c_list'][$bean->tct_etapa_ddw_c];
+            }
+            if (isset($app_list_strings['estatus_c_operacion_list'])){
+
+                $subetapa = $app_list_strings['estatus_c_operacion_list'][$bean->estatus_c];
+            }
+
+            //Obtener etiquetas
+            $bean->tct_estapa_subetapa_txf_c=trim($etapa) ." ".trim($subetapa);
+
+        }
+
         /**
          * @file   opp_logic_hooks.php
          * @author Carlos Zaragoza Ortiz <czaragoza@legosoft.com.mx>

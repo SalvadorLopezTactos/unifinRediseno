@@ -1,5 +1,5 @@
 <?php
- // created: 2019-05-21 17:25:51
+ // created: 2019-06-04 16:37:38
 $dictionary['Meeting']['fields']['resultado_c']['labelValue']='Resultado de Cita';
 $dictionary['Meeting']['fields']['resultado_c']['dependency']='';
 $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']=array (
@@ -14,10 +14,13 @@ $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']=array (
       3 => '17',
       4 => '3',
       5 => '5',
-      6 => '6',
-      7 => '7',
-      8 => '18',
-      9 => '20',
+      6 => '19',
+      7 => '6',
+      8 => '7',
+      9 => '18',
+      10 => '20',
+      11 => '21',
+      12 => '22',
     ),
     2 => 
     array (
@@ -27,8 +30,9 @@ $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
-      6 => '6',
-      7 => '7',
+      6 => '19',
+      7 => '6',
+      8 => '7',
     ),
     3 => 
     array (
@@ -48,8 +52,9 @@ $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
-      6 => '6',
-      7 => '7',
+      6 => '19',
+      7 => '6',
+      8 => '7',
     ),
     6 => 
     array (
@@ -59,8 +64,9 @@ $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
-      6 => '6',
-      7 => '7',
+      6 => '19',
+      7 => '6',
+      8 => '7',
     ),
     7 => 
     array (
@@ -84,8 +90,9 @@ $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']=array (
       3 => '3',
       4 => '4',
       5 => '5',
-      6 => '6',
-      7 => '7',
+      6 => '19',
+      7 => '6',
+      8 => '7',
     ),
     10 => 
     array (
@@ -102,7 +109,8 @@ $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']=array (
       3 => '3',
       4 => '6',
       5 => '5',
-      6 => '7',
+      6 => '19',
+      7 => '7',
     ),
     12 => 
     array (
@@ -110,6 +118,17 @@ $dictionary['Meeting']['fields']['resultado_c']['visibility_grid']=array (
       1 => '1',
       2 => '15',
       3 => '13',
+    ),
+    13 => 
+    array (
+      0 => '4',
+      1 => '6',
+      2 => '5',
+      3 => '19',
+      4 => '1',
+      5 => '3',
+      6 => '2',
+      7 => '17',
     ),
     'Planned' => 
     array (
